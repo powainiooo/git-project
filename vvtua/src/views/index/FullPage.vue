@@ -15,12 +15,13 @@
     .contain {
         width: 100%;
         height: 100%;
-        display: none;
+        display: table;
         position: relative;
         z-index: 0;
     }
-    .current .contain,.slide .contain {
-        display: block;
+    .contain>div{
+        display: table-cell;
+        vertical-align: middle;
     }
     .current {
         display: block;
@@ -40,26 +41,20 @@
         width: 100%; height: 100%; background: url('../../assets/images/page1bg.jpg') no-repeat; background-size: cover; background-position: right center;
     }
     .page2 {
-        background: #009922;
+        background: #fff;
     }
     .page3 {
-        background: #992211;
+        background: #fff;
     }
     .page4 {
         background: #ff00ff;
-    }
-    .page5 {
-        background: #00ff00;
-    }
-    .page6 {
-        background: #22ffff;
     }
     #navBar {
         z-index: 3;
         position: absolute;
         top: 50%;
         left: 4%;
-        margin-top: -40px;
+        margin-top: -100px;
     }
     #navBar .active {
         background: #bc9e44;
@@ -77,18 +72,78 @@
         height: 6px;
         background-color: #000;
     }
+    .page2 .page2-content{ width: 1420px; margin: 0 auto;}
+    .page2 .img-list{ width: 870px; float: left; margin-bottom: 100px;}
+    .page2 .img-list li{ width: 280px; height: 280px; float: left; margin: 5px; box-shadow: 0 20px 50px rgba(0,0,0,0.2),0 -20px 50px rgba(0,0,0,0.2);}
+    .page2 .infor{ float: left; margin: 230px 0 0 60px;}
+    .page2 .infor h3{ font-weight: lighter; font-size: 30px; margin-bottom: 50px;}
+    .page2 .infor div{ width: 480px; font-size: 16px; font-weight: bold; line-height: 1.5;}
+
+    .page3 .page3-content{ width: 1340px; margin: 0 auto;}
+    .page3 .img-list{ width: 600px; float: left; margin-bottom: 100px;}
+    .page3 .img-list li{ width: 120px; height: 120px; float: left;}
+    .page3 .infor{ float: left; margin: 50px 130px 0 0;}
+    .page3 .infor h3{ font-weight: lighter; font-size: 30px; margin-bottom: 40px;}
+    .page3 .infor div{ width: 480px; font-size: 16px; font-weight: bold; line-height: 1.5;}
 </style>
 
 <template>
     <div>
         <div id="pageContain">
-            <div class="page page1 "><div class="contain"></div></div>
+            <div class="page page1 "></div>
 
-            <div class="page page2 current"><div class="contain"></div></div>
+            <div class="page page2 ">
+                <div class="contain">
+                    <div>
+                        <div class="clearfix page2-content">
+                            <ul class="img-list">
+                                <li><img src='../../assets/images/img1.jpg'></li>
+                                <li><img src='../../assets/images/img2.jpg'></li>
+                                <li><img src='../../assets/images/img3.jpg'></li>
+                                <li><img src='../../assets/images/img4.jpg'></li>
+                                <li><img src='../../assets/images/img5.jpg'></li>
+                                <li><img src='../../assets/images/img6.jpg'></li>
+                            </ul>
+                            <div class="infor">
+                                <h3>专业</h3>
+                                <div>はガラパゴス諸島へ旅をしました。人の手が加わっていないありのままの自然を見つめることで、<br>
+                                    人の暮らしや幸せについて改めて考え、その体験を共有しようという試みです。プロジェクト全体の<br>
+                                    コミュニケーションデザインを手掛けており、Webサイトでは旅の行程や写真、映像、文章を簡潔に見せています</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-            <div class="page page3"><div class="contain"></div></div>
+            <div class="page page3 current">
+                <div class="contain">
+                    <div>
+                        <div class="clearfix page3-content">
+                            <div class="infor">
+                                <h3>合 作 品 牌</h3>
+                                <div>はガラパゴス諸島へ旅をしました。人の手が加わっていないありのままの自然を見つめることで、<br>
+                                    人の暮らしや幸せについて改めて考え、その体験を共有しようという試みです。プロジェクト全体の<br>
+                                    コミュニケーションデザインを手掛けており、Webサイトでは旅の行程や写真、映像、文章を簡潔に見せています</div>
+                            </div>
+                            <ul class="img-list">
+                                <li><img src='../../assets/images/logo1.jpg'></li>
+                                <li><img src='../../assets/images/logo2.jpg'></li>
+                                <li><img src='../../assets/images/logo3.jpg'></li>
+                                <li><img src='../../assets/images/logo4.jpg'></li>
+                                <li><img src='../../assets/images/logo5.jpg'></li>
+                                <li><img src='../../assets/images/logo6.jpg'></li>
+                                <li><img src='../../assets/images/logo7.jpg'></li>
+                                <li><img src='../../assets/images/logo8.jpg'></li>
+                                <li><img src='../../assets/images/logo9.jpg'></li>
+                                <li><img src='../../assets/images/logo10.jpg'></li>
+                                <li><img src='../../assets/images/logo11.jpg'></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-            <div class="page page4"><div class="contain"></div></div>
+            <div class="page page4"><div class="contain">4</div></div>
         </div>
         <ul id="navBar">
             <li></li>

@@ -1,0 +1,12 @@
+@font-face {
+    font-family: 'trajanPro';
+    src:url('../font/TrajanPro-Bold.ttf')  format('truetype'); /* Safari, Android, iOS */
+}
+*{ margin: 0; padding: 0; font-family: '黑体';}
+body,html{ height: 100%;}
+.page-frame{ height: 100%;}
+.clearfix:after{content: ".";display: block; height: 0; clear: both; visibility: hidden;}.clearfix{display: inline-block;}
+* html .clearfix{height: 1%;}.clearfix{display: block;}
+.pull-left{ float: left;}
+.pull-right{ float: right;}
+.hide{ display: none;}

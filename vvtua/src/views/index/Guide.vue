@@ -16,7 +16,7 @@
                     <img src="../../assets/images/logo.png">
                     <p>‘MUSIC IS AN ART FORM AND CULTURAL ACTIVITY WHOSE<br />MEDIUM IS SOUND ORGANIZED IN TIME’</p>
                     <div>“音樂，廣義而言，就是指任何聲音組成的藝術。”</div>
-                    <a href="javascript:;"><img src="../../assets/images/btn1.png"> </a>
+                    <a href="javascript:;" @click="btnInto"><img src="../../assets/images/btn1.png"> </a>
                 </div>
             </div>
         </div>
@@ -29,6 +29,11 @@
         data(){
             return{
 
+            }
+        },
+        methods:{
+            btnInto(){
+                this.$emit('doInto')
             }
         }
     }

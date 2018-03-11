@@ -5,6 +5,7 @@ import about from '@/views/about'
 import contacts from '@/views/contacts'
 import works from '@/views/works'
 import workdetail from '@/views/workdetail'
+import workauthor from '@/views/workauthor'
 
 Vue.use(Router)
 
@@ -38,6 +39,11 @@ export default new Router({
             path:'/works/detail/:id',
             name: 'workdetail',
             component: workdetail
+        },
+        {
+            path:'/works/author/:id',
+            name: 'workauthor',
+            component: workauthor
         }
     ]
 })

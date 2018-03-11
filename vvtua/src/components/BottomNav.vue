@@ -9,38 +9,50 @@
     .bottom-nav .nav li div{color: rgba(255,255,255,0.5); font-size: 16px;}
     .bottom-nav .copyright{ float: right; margin: 45px 35px 0 0;}
 
+    .selected{ width: 85px; height: 5px; background-color: #bd9d46; position: absolute; bottom: 0; left: 0;}
 </style>
 
 <template>
     <div class="bottom-nav" :class="showNav ? 'bottom-nav-show':''">
         <ul class="nav">
             <li>
-                <a href="#">
+                <router-link to="/about">
                     <p>About</p>
                     <div>关于</div>
-                </a>
+                </router-link>
             </li>
             <li>
-                <a href="#">
+                <router-link to="/contacts">
                     <p>Contacts</p>
                     <div>联系</div>
-                </a>
+                </router-link>
             </li>
             <li>
-                <a href="#">
+                <router-link to="/works">
                     <p>Works</p>
                     <div>案子</div>
-                </a>
+                </router-link>
             </li>
         </ul>
         <div class="copyright"><img src="../assets/images/copyright.png"></div>
+
+        <div class="selected" :style="{left:posLeft+'px'}" v-if="posLeft !== 0"></div>
     </div>
 </template>
 
 <script type="es6">
     export default{
         name: 'App',
-        props:['showNav'],
+        props:{
+            showNav:{
+                type:Boolean,
+                default:true
+            },
+            posLeft:{
+                type:String,
+                default:0
+            }
+        },
         data(){
             return{
 

@@ -11,8 +11,9 @@
   },
   "dependencies": {
     "animate.css": "^3.6.1",
-    "iview": "^2.9.2",
+    "iview": "^2.10.1",
     "vue": "^2.5.2",
+    "vue-aplayer": "^1.1.0",
     "vue-fullpage": "^2.0.5",
     "vue-router": "^3.0.1"
   },

@@ -47,7 +47,7 @@
         background: #fff;
     }
     .page4 {
-        background: #ff00ff;
+        background: #fff;
     }
     #navBar {
         z-index: 3;
@@ -85,12 +85,21 @@
     .page3 .infor{ float: left; margin: 50px 130px 0 0;}
     .page3 .infor h3{ font-weight: lighter; font-size: 30px; margin-bottom: 40px;}
     .page3 .infor div{ width: 480px; font-size: 16px; font-weight: bold; line-height: 1.5;}
+
+    .page4 .page4-content{ width: 1440px; margin: 0 auto; position: relative;}
+    .page4 .img-list{ overflow: hidden; margin-bottom: 100px;}
+    .page4 .img-list li{ width: 220px; height: 300px; margin: 10px; float: left; background-color: #eaeaea;}
+    .page4 .infor{ position: absolute; bottom: 140px; right: 80px;}
+    .page4 .infor h3{ font-weight: lighter; font-size: 30px; margin-bottom: 40px;}
+    .page4 .infor div{ width: 480px; font-size: 16px; font-weight: bold; line-height: 1.5;}
+
+
 </style>
 
 <template>
     <div>
         <div id="pageContain">
-            <div class="page page1 "></div>
+            <div class="page page1 current"></div>
 
             <div class="page page2 ">
                 <div class="contain">
@@ -115,7 +124,7 @@
                 </div>
             </div>
 
-            <div class="page page3 current">
+            <div class="page page3">
                 <div class="contain">
                     <div>
                         <div class="clearfix page3-content">
@@ -143,7 +152,31 @@
                 </div>
             </div>
 
-            <div class="page page4"><div class="contain">4</div></div>
+            <div class="page page4">
+                <div class="contain">
+                    <div>
+                        <div class="clearfix page4-content">
+                            <ul class="img-list">
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                            </ul>
+                            <div class="infor">
+                                <h3>成 员</h3>
+                                <div>はガラパゴス諸島へ旅をしました。人の手が加わっていないありのままの自然を見つめることで、<br>
+                                    人の暮らしや幸せについて改めて考え、その体験を共有しようという試みです。プロジェクト全体の<br>
+                                    コミュニケーションデザインを手掛けており、Webサイトでは旅の行程や写真、映像、文章を簡潔に見せています</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <ul id="navBar">
             <li></li>
@@ -151,6 +184,7 @@
             <li></li>
             <li></li>
         </ul>
+        <div class="logo-index"><img src="@/assets/images/logofix2.png"> </div>
     </div>
 </template>
 

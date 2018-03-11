@@ -4,7 +4,9 @@
 
 <template>
     <div class="page-frame">
-        <guide v-show="isGuide"></guide>
+        <transition name="fade">
+            <guide v-show="isGuide" @doInto="doInto"></guide>
+        </transition>
         <full-page></full-page>
         <bottom-nav :showNav="!isGuide"></bottom-nav>
     </div>
@@ -15,11 +17,16 @@
     import Guide from './Guide.vue'
     import FullPage from './FullPage.vue'
     export default{
-        name: 'App',
+        name: 'index',
         components: {BottomNav,Guide,FullPage},
         data(){
             return {
-                isGuide:false
+                isGuide:true
+            }
+        },
+        methods:{
+            doInto(){
+                this.isGuide = false;
             }
         }
     }

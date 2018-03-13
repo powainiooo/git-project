@@ -39,7 +39,7 @@
             </div>
         </div>
 
-        <bottom-nav posLeft="280"></bottom-nav>
+        <bottom-nav posLeft="290"></bottom-nav>
     </div>
 </template>
 

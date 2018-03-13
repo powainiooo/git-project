@@ -3,7 +3,7 @@
     .bottom-nav-show{ box-shadow: 0 -10px 20px rgba(0,0,0,0.2); -webkit-box-shadow: 0 -10px 20px rgba(0,0,0,0.2); -moz-box-shadow: 0 -10px 20px rgba(0,0,0,0.2);}
     .bottom-nav .nav{ float: left; margin: 25px 0 0 70px; display: none;}
     .bottom-nav-show .nav{ display: block;}
-    .bottom-nav .nav li{ float: left; margin-right: 45px;}
+    .bottom-nav .nav li{ float: left; margin-right: 45px; list-style: none;}
     .bottom-nav .nav li a{ display: block;}
     .bottom-nav .nav li p{ font-family: 'trajanPro'; color: rgba(255,255,255,0.5); font-size: 16px; margin-bottom: 5px;}
     .bottom-nav .nav li div{color: rgba(255,255,255,0.5); font-size: 16px;}

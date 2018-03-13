@@ -46,35 +46,46 @@
                    style="margin-bottom: 40px; display: inline-block;">
                     <img src="@/assets/images/btn2.png">
                 </a>
+                <i-switch size="large" v-model="showVideo">
+                    <span slot="open">视频</span>
+                    <span slot="close">图片</span>
+                </i-switch>
                 <div class="img-frame" v-if="isShowCode"><img src="@/assets/images/ad2.jpg"> </div>
                 <audio-view :src="musicOpt.url" :title="musicOpt.title"></audio-view>
             </div>
             <ul class="list">
                 <li>
                     <span class="name">创意</span>
-                    <span class="value">Tau</span>
+                    <a href="javascript:;" class="value" @click="toAuthor">Tau</a>
                 </li>
                 <li>
                     <span class="name">音乐</span>
-                    <span class="value">Tau</span>
+                    <a href="javascript:;" class="value" @click="toAuthor">Tau</a>
                 </li>
                 <li>
                     <span class="name">原画</span>
-                    <span class="value">Tau</span>
+                    <a href="javascript:;" class="value" @click="toAuthor">Tau</a>
                 </li>
                 <li>
                     <span class="name">技术制作</span>
-                    <span class="value">Tau</span>
+                    <a href="javascript:;" class="value" @click="toAuthor">Tau</a>
                 </li>
                 <li>
                     <span class="name">艺术指导</span>
-                    <span class="value">Tau</span>
+                    <a href="javascript:;" class="value" @click="toAuthor">Tau</a>
                 </li>
             </ul>
         </div>
-        <div class="video-frame">
-            <video-view v-if="vid != ''" :vid="vid" :postImg="vPostImg"></video-view>
-            <Carousel v-model="carouseIndex" dots="none">
+        <div class="video-frame"
+             @mouseover="scrollIn"
+             @mouseout="scrollOut">
+            <video-view v-if="showVideo" :vid="vid" :postImg="vPostImg"></video-view>
+            <Carousel
+                v-model="carouseIndex"
+                v-if="!showVideo"
+                dots="none"
+                arrow="never"
+                height="100%">
                 <CarouselItem>
                     <div class="carousel-item"><img src="@/assets/images/proimg2.jpg"> </div>
                 </CarouselItem>
@@ -88,10 +99,10 @@
                     <div class="carousel-item"><img src="@/assets/images/proimg2.jpg"> </div>
                 </CarouselItem>
             </Carousel>
-            <a href="javascript:;" class="cars-btn cars-btn-left"><span><Icon type="android-arrow-back"></Icon></span></a>
-            <a href="javascript:;" class="cars-btn cars-btn-right"><span><Icon type="android-arrow-forward"></Icon></span></a>
+            <a href="javascript:;" class="cars-btn cars-btn-left" v-if="btnLeft" @click="scrollLeft"><span><Icon type="android-arrow-back"></Icon></span></a>
+            <a href="javascript:;" class="cars-btn cars-btn-right" v-if="btnRight" @click="scrollRight"><span><Icon type="android-arrow-forward"></Icon></span></a>
         </div>
-        <bottom-nav posLeft="280"></bottom-nav>
+        <bottom-nav posLeft="290"></bottom-nav>
     </div>
 </template>
 
@@ -105,8 +116,10 @@
         data(){
             return{
                 isShowCode:false,
+                showVideo:true,
                 vid:'',//k0015trfczz
                 carouseIndex:0,
+                carouseLen:4,
                 vPostImg:'static/images/proimg2.jpg',
                 musicOpt:{
                     title: 'Preparation',
@@ -114,7 +127,36 @@
                     url: 'http://120.198.248.228/cache/fs.w.kugou.com/201803111645/4b1e35ffd5b41e32a2caa295a2444d6c/G052/M04/19/07/FJQEAFZWxMSAbdi-ADPyIZwJRM0272.mp3?ich_args2=114-11172107005413_429e3ab4014453e9ea220bea0ae3815c_10095002_9c89662cd0c5f1d0973d518939a83798_c178791a10375bcae2a4deb87ca5c544',
                     pic: 'http://devtest.qiniudn.com/Preparation.jpg',
                     lrc: '[00:00.00]lrc here\n[00:01.00]aplayer'
+                },
+                btnLeft:false,
+                btnRight:false
+            }
+        },
+        methods:{
+            scrollIn(){
+                if(this.carouseIndex != 0) this.btnLeft = true;
+                if(this.carouseIndex != this.carouseLen -1) this.btnRight = true;
+            },
+            scrollOut(){
+                this.btnLeft = false;
+                this.btnRight = false;
+            },
+            scrollLeft(){
+                console.log('left');
+                if(this.carouseIndex != 0){
+                    this.carouseIndex --;
                 }
+                if(this.carouseIndex == 0) this.btnLeft = false;
+            },
+            scrollRight(){
+                console.log('right');
+                if(this.carouseIndex != this.carouseLen -1){
+                    this.carouseIndex ++;
+                }
+                if(this.carouseIndex == this.carouseLen -1) this.btnRight = false;
+            },
+            toAuthor(){
+                this.$router.push({ name: 'workauthor', params: { id: 123 }})
             }
         }
     }

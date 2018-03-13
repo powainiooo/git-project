@@ -24,7 +24,14 @@
             return {
                 video:{},
                 player:{},
-                isPlay:false
+                isPlay:true,
+                tvpSetting:{
+                    vid: 'l0171ne1fjx',
+                    vid2: 'o0171fmfwmf',
+                    vid_limit: 'z0016v1ocio',
+                    vid_short: 'f162169s71x',
+                    lid: '123002500'
+                }
             }
         },
         props:['vid','postImg'],
@@ -33,23 +40,24 @@
         },
         methods:{
             init(){
-                var self = this;
+                let self = this;
                 self.video = new tvp.VideoInfo();
-                //向视频对象传入视频vid
-                self.video.setVid(self.vid);
-                self.player =new tvp.Player();
-                self.player.create({
-                    width: '100%',       //播放器的宽度
-                    height: '100%', //播放器的高度
-                    video: self.video,       //默认的视频对象
-                    modId: 'mod_player',       //默认的 DOM 元素 ID
+                self.video.setVid(self.tvpSetting.vid);
+                var player = new tvp.Player();
+                player.create({
+                    width  : '100%',
+                    height : '100%',
+                    video  : self.video,
+                    playerType: 'html5',
+                    modId  : "mod_player",
                     autoplay: false,
                     pic: self.postImg
                 });
+
             },
             doPlay(){
-                this.isPlay = true;
-                this.player.play();
+                //this.isPlay = true;
+                //this.player.play();
             }
         }
     }

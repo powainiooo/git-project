@@ -1,12 +1,24 @@
 <style>
     @import '../assets/css/layout.css';
+    .swipe-img{ width: 100%;}
+
 </style>
 
 <template>
     <div class="page-frame">
         <div class="video-frame">
-            <video-view v-if="vid != ''" :vid="vid" :postImg="vPostImg"></video-view>
+            <video-view v-if="showVideo" :vid="vid" :postImg="vPostImg"></video-view>
+            <swiper :options="swiperOption" ref="mySwiper" @someSwiperEvent="callback" v-if="!showVideo">
+                <swiper-slide><img src="@/assets/images/img2.jpg" class="swipe-img"> </swiper-slide>
+                <swiper-slide><img src="@/assets/images/img2.jpg" class="swipe-img"> </swiper-slide>
+                <swiper-slide><img src="@/assets/images/img2.jpg" class="swipe-img"> </swiper-slide>
+                <swiper-slide><img src="@/assets/images/img2.jpg" class="swipe-img"> </swiper-slide>
+            </swiper>
         </div>
+        <i-switch size="large" v-model="showVideo" class="switch">
+            <span slot="open">视频</span>
+            <span slot="close">图片</span>
+        </i-switch>
         <div class="detail-infor">
             <div class="intro">
                 <h3><span>HAVE SOME PATIENCE</span><br>“来玩点耐心吧”腾讯up发布会推广</h3>
@@ -60,6 +72,7 @@
             return{
                 vid:'k0015trfczz',//
                 vPostImg:'static/img2.jpg',
+                showVideo:false,
                 musicOpt:{
                     title: 'Preparation',
                     author: 'Hans Zimmer/Richard Harvey',
@@ -67,7 +80,12 @@
                     pic: 'http://devtest.qiniudn.com/Preparation.jpg',
                     lrc: '[00:00.00]lrc here\n[00:01.00]aplayer'
                 },
-                scrollIndex:0
+                swiperOption:{}
+            }
+        },
+        methods:{
+            callback(){
+                console.log(1)
             }
         }
     }

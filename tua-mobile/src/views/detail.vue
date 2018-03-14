@@ -1,19 +1,25 @@
 <style>
     @import '../assets/css/layout.css';
     .swipe-img{ width: 100%;}
-
+    .swipe-tag{ width: 100%; text-align: center; margin-top:40px;}
+    .swipe-tag li{ width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin: 0 25px; background-color: #949695; vertical-align: middle;}
+    .swipe-tag li.active{ width: 20px; height: 20px; margin-top: 0; background-color: #ad9040;}
 </style>
 
 <template>
     <div class="page-frame">
         <div class="video-frame">
             <video-view v-if="showVideo" :vid="vid" :postImg="vPostImg"></video-view>
-            <swiper :options="swiperOption" ref="mySwiper" @someSwiperEvent="callback" v-if="!showVideo">
+            <swiper :options="swiperOption" ref="mySwiper" v-if="!showVideo">
                 <swiper-slide><img src="@/assets/images/img2.jpg" class="swipe-img"> </swiper-slide>
                 <swiper-slide><img src="@/assets/images/img2.jpg" class="swipe-img"> </swiper-slide>
                 <swiper-slide><img src="@/assets/images/img2.jpg" class="swipe-img"> </swiper-slide>
                 <swiper-slide><img src="@/assets/images/img2.jpg" class="swipe-img"> </swiper-slide>
             </swiper>
+            <div class="swiper-pagination"></div>
+            <ul class="swipe-tag">
+                <li v-for="(item,index) in 4" :class="activeIndex == index ? 'active':''"></li>
+            </ul>
         </div>
         <i-switch size="large" v-model="showVideo" class="switch">
             <span slot="open">视频</span>
@@ -69,6 +75,7 @@
         name: 'detail',
         components:{FooterNav,VideoView,AudioView},
         data(){
+            let self = this;
             return{
                 vid:'k0015trfczz',//
                 vPostImg:'static/img2.jpg',
@@ -80,13 +87,19 @@
                     pic: 'http://devtest.qiniudn.com/Preparation.jpg',
                     lrc: '[00:00.00]lrc here\n[00:01.00]aplayer'
                 },
-                swiperOption:{}
+                activeIndex:0,
+                swiperOption:{
+                    on:{
+                        slideChangeTransitionEnd: function(swiper){
+                            self.activeIndex = self.$refs.mySwiper.swiper.activeIndex;
+                            console.log(index);
+                        }
+                    }
+                }
             }
         },
         methods:{
-            callback(){
-                console.log(1)
-            }
+
         }
     }
 

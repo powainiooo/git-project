@@ -24,26 +24,26 @@
                         <ul class="contacts-list">
                             <li>
                                 <p><span>The contact</span><br>联系人</p>
-                                <div>郑茗友</div>
+                                <div>{{contactData.contact}}</div>
                             </li>
                             <li>
                                 <p><span>E-mail</span><br>电子邮箱</p>
-                                <div>27318589@qq.com</div>
+                                <div>{{contactData.email}}</div>
                             </li>
                             <li>
                                 <p><span>Phone</span><br>手机</p>
-                                <div>+86 137-2553-8273<br>10:00 am - 6:00 pm</div>
+                                <div>{{contactData.mobile}}<br>{{contactData.time_slot}}</div>
                             </li>
                             <li>
                                 <p><span>Address</span><br>地址</p>
-                                <div>广东省 深圳市 南山区 深南大道</div>
+                                <div>{{contactData.address}}</div>
                             </li>
                             <li style="margin-top: 75px;">
                                 <p>
-                                    <img src="@/assets/images/icon-wechat.png"> <br>
+                                    <img src="@/assets/images/icon-wechat.png" :title="contactData.wx_number"> <br>
                                     <span class="tag">TAU</span><br>头牌文化传播
                                 </p>
-                                <div><img src="@/assets/images/ad1.png"></div>
+                                <div><img :src="contactData.domain_url+contactData.ewm_url"></div>
                             </li>
                         </ul>
                     </div>
@@ -60,9 +60,17 @@
     export default{
         name: 'contacts',
         components: {BottomNav,TopNav},
+        mounted(){
+            this.$store.dispatch('doGetContact')
+        },
         data(){
             return{
 
+            }
+        },
+        computed:{
+            contactData(){
+                return this.$store.state.contactData
             }
         }
     }

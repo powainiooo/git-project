@@ -13,10 +13,12 @@
         <router-link to="/index" class="logo"><img src="@/assets/images/logofix1.png"></router-link>
         <router-link to="/index" class="btn"><img src="@/assets/images/btn-close.png"></router-link>
         <ul class="nav" v-if="showNav">
-            <li v-for="item in navList"
-                :class="typeID == item.id ? 'active':''"
+            <li :class="cateID == 0 ? 'active':''"
+                @click="getList(item.id)"><span>ALL</span><br>全部</li>
+            <li v-for="item in cateList"
+                :class="cateID == item.id ? 'active':''"
                 @click="getList(item.id)">
-                <span>{{item.en}}</span><br>{{item.cn}}
+                <span>{{item.code}}</span><br>{{item.cname}}
             </li>
         </ul>
     </div>
@@ -28,34 +30,18 @@
         props:['showNav'],
         data(){
             return{
-                typeID:0,
-                navList:[
-                    {
-                        en:'ALL',
-                        cn:'全部',
-                        id:'0'
-                    },
-                    {
-                        en:'MUSIC',
-                        cn:'音乐',
-                        id:'1'
-                    },
-                    {
-                        en:'VIDEO',
-                        cn:'视频',
-                        id:'1'
-                    },
-                    {
-                        en:'GRAPHIC',
-                        cn:'平面',
-                        id:'1'
-                    }
-                ]
+                cateID:0
             }
         },
         methods:{
-            getList(type){
-
+            getList(id){
+                this.cateID = id;
+                this.$emit('getID',id);
+            }
+        },
+        computed:{
+            cateList(){
+                return this.$store.state.cateList
             }
         }
     }

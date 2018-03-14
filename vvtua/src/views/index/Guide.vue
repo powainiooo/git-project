@@ -3,7 +3,7 @@
     .guide-table{ width: 100%; height: 100%; display: table;}
     .guide-table>div{ display: table-cell; vertical-align: middle;}
     .guide-content{ margin-left: 20%;}
-    .guide-content p{ font-size: 16px; color: rgba(255,255,255,0.5); margin-top: 85px; font-family: 'trajanPro'}
+    .guide-content p{ width: 560px; font-size: 16px; color: rgba(255,255,255,0.5); margin-top: 85px; font-family: 'trajanPro'; line-height: 2; letter-spacing: 2px;}
     .guide-content div{ font-size: 14px; color: rgba(255,255,255,0.5); margin-top: 25px;}
     .guide-content a{ margin-top: 120px; display: inline-block;}
 </style>
@@ -14,8 +14,8 @@
             <div>
                 <div class="guide-content">
                     <img src="../../assets/images/logo.png">
-                    <p>‘MUSIC IS AN ART FORM AND CULTURAL ACTIVITY WHOSE<br />MEDIUM IS SOUND ORGANIZED IN TIME’</p>
-                    <div>“音樂，廣義而言，就是指任何聲音組成的藝術。”</div>
+                    <p>{{guide}}</p>
+                    <!--<div>{{guide}}</div>-->
                     <a href="javascript:;" @click="btnInto"><img src="../../assets/images/btn1.png"> </a>
                 </div>
             </div>
@@ -26,6 +26,7 @@
 <script type="es6">
     export default{
         name: 'App',
+        props:['guide'],
         data(){
             return{
 

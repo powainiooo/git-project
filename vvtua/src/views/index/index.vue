@@ -5,9 +5,9 @@
 <template>
     <div class="page-frame">
         <transition name="fade">
-            <guide v-show="isGuide" @doInto="doInto"></guide>
+            <guide v-show="isGuide" @doInto="doInto" :guide="guide"></guide>
         </transition>
-        <full-page></full-page>
+        <full-page :indexInfo="indexInfo" :domainUrl="domainUrl"></full-page>
         <bottom-nav :showNav="!isGuide"></bottom-nav>
     </div>
 </template>
@@ -19,9 +19,23 @@
     export default{
         name: 'index',
         components: {BottomNav,Guide,FullPage},
+        mounted(){
+            this.$store.dispatch('doGetIndex')
+        },
         data(){
             return {
                 isGuide:true
+            }
+        },
+        computed:{
+            guide(){
+                return this.$store.state.indexGuide
+            },
+            indexInfo(){
+                return this.$store.state.indexInfo
+            },
+            domainUrl(){
+                return this.$store.state.domainUrl
             }
         },
         methods:{

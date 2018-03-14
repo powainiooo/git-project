@@ -75,6 +75,7 @@
     .page2 .page2-content{ width: 1420px; margin: 0 auto;}
     .page2 .img-list{ width: 870px; float: left; margin-bottom: 100px;}
     .page2 .img-list li{ width: 280px; height: 280px; float: left; margin: 5px; box-shadow: 0 20px 50px rgba(0,0,0,0.2),0 -20px 50px rgba(0,0,0,0.2);}
+    .page2 .img-list li img{ width: 100%; height: 100%;}
     .page2 .infor{ float: left; margin: 230px 0 0 60px;}
     .page2 .infor h3{ font-weight: lighter; font-size: 30px; margin-bottom: 50px;}
     .page2 .infor div{ width: 480px; font-size: 16px; font-weight: bold; line-height: 1.5;}
@@ -82,6 +83,7 @@
     .page3 .page3-content{ width: 1340px; margin: 0 auto;}
     .page3 .img-list{ width: 600px; float: left; margin-bottom: 100px;}
     .page3 .img-list li{ width: 120px; height: 120px; float: left;}
+    .page3 .img-list li img{ width: 100%; height: 100%;}
     .page3 .infor{ float: left; margin: 50px 130px 0 0;}
     .page3 .infor h3{ font-weight: lighter; font-size: 30px; margin-bottom: 40px;}
     .page3 .infor div{ width: 480px; font-size: 16px; font-weight: bold; line-height: 1.5;}
@@ -89,6 +91,7 @@
     .page4 .page4-content{ width: 1440px; margin: 0 auto; position: relative;}
     .page4 .img-list{ overflow: hidden; margin-bottom: 100px;}
     .page4 .img-list li{ width: 220px; height: 300px; margin: 10px; float: left; background-color: #eaeaea;}
+    .page4 .img-list li img{ width: 100%; height: 100%;}
     .page4 .infor{ position: absolute; bottom: 140px; right: 80px;}
     .page4 .infor h3{ font-weight: lighter; font-size: 30px; margin-bottom: 40px;}
     .page4 .infor div{ width: 480px; font-size: 16px; font-weight: bold; line-height: 1.5;}
@@ -99,25 +102,18 @@
 <template>
     <div>
         <div id="pageContain">
-            <div class="page page1 current"></div>
+            <div class="page page1 current" :style="{'background-image':'url('+domainUrl+indexInfo.cover+')'}"></div>
 
             <div class="page page2 ">
                 <div class="contain">
                     <div>
                         <div class="clearfix page2-content">
                             <ul class="img-list">
-                                <li><img src='../../assets/images/img1.jpg'></li>
-                                <li><img src='../../assets/images/img2.jpg'></li>
-                                <li><img src='../../assets/images/img3.jpg'></li>
-                                <li><img src='../../assets/images/img4.jpg'></li>
-                                <li><img src='../../assets/images/img5.jpg'></li>
-                                <li><img src='../../assets/images/img6.jpg'></li>
+                                <li v-for="item in indexInfo.goods_img"><img :src='domainUrl+item'></li>
                             </ul>
                             <div class="infor">
-                                <h3>专业</h3>
-                                <div>はガラパゴス諸島へ旅をしました。人の手が加わっていないありのままの自然を見つめることで、<br>
-                                    人の暮らしや幸せについて改めて考え、その体験を共有しようという試みです。プロジェクト全体の<br>
-                                    コミュニケーションデザインを手掛けており、Webサイトでは旅の行程や写真、映像、文章を簡潔に見せています</div>
+                                <h3>{{indexInfo.title}}</h3>
+                                <div>{{indexInfo.home2_desc}}</div>
                             </div>
                         </div>
                     </div>
@@ -130,22 +126,10 @@
                         <div class="clearfix page3-content">
                             <div class="infor">
                                 <h3>合 作 品 牌</h3>
-                                <div>はガラパゴス諸島へ旅をしました。人の手が加わっていないありのままの自然を見つめることで、<br>
-                                    人の暮らしや幸せについて改めて考え、その体験を共有しようという試みです。プロジェクト全体の<br>
-                                    コミュニケーションデザインを手掛けており、Webサイトでは旅の行程や写真、映像、文章を簡潔に見せています</div>
+                                <div>{{indexInfo.home3_desc}}</div>
                             </div>
                             <ul class="img-list">
-                                <li><img src='../../assets/images/logo1.jpg'></li>
-                                <li><img src='../../assets/images/logo2.jpg'></li>
-                                <li><img src='../../assets/images/logo3.jpg'></li>
-                                <li><img src='../../assets/images/logo4.jpg'></li>
-                                <li><img src='../../assets/images/logo5.jpg'></li>
-                                <li><img src='../../assets/images/logo6.jpg'></li>
-                                <li><img src='../../assets/images/logo7.jpg'></li>
-                                <li><img src='../../assets/images/logo8.jpg'></li>
-                                <li><img src='../../assets/images/logo9.jpg'></li>
-                                <li><img src='../../assets/images/logo10.jpg'></li>
-                                <li><img src='../../assets/images/logo11.jpg'></li>
+                                <li v-for="item in indexInfo.goods_img3"><img :src='domainUrl+item'></li>
                             </ul>
                         </div>
                     </div>
@@ -157,21 +141,11 @@
                     <div>
                         <div class="clearfix page4-content">
                             <ul class="img-list">
-                                <li></li>
-                                <li></li>
-                                <li></li>
-                                <li></li>
-                                <li></li>
-                                <li></li>
-                                <li></li>
-                                <li></li>
-                                <li></li>
+                                <li v-for="item in indexInfo.goods_img4"><img :src='domainUrl+item'></li>
                             </ul>
                             <div class="infor">
                                 <h3>成 员</h3>
-                                <div>はガラパゴス諸島へ旅をしました。人の手が加わっていないありのままの自然を見つめることで、<br>
-                                    人の暮らしや幸せについて改めて考え、その体験を共有しようという試みです。プロジェクト全体の<br>
-                                    コミュニケーションデザインを手掛けており、Webサイトでは旅の行程や写真、映像、文章を簡潔に見せています</div>
+                                <div>{{indexInfo.home4_desc}}</div>
                             </div>
                         </div>
                     </div>
@@ -192,6 +166,7 @@
     import FullPage2 from '@/assets/js/fullPage.js'
     export default {
         name: 'app',
+        props:['indexInfo','domainUrl'],
         mounted(){
             let runPage = new FullPage2({
                 id : 'pageContain',                            // id of contain

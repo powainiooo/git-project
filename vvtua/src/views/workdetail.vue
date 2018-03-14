@@ -34,24 +34,23 @@
         </div>
         <div class="detail-infor">
             <div class="intro">
-                <h3><span>HAVE SOME PATIENCE</span><br>“来玩点耐心吧”腾讯up发布会推广</h3>
-                <div>はガラパゴス諸島へ旅をしました。人の手が加わっていないありのままの自然を見つめることで、<br>
-                    人の暮らしや幸せについて改めて考え、その体験を共有しようという試みです。プロジェクト全体の<br>
-                    コミュニケーションデザインを手掛けており、Webサイトでは旅の行程や写真、映像、文章を簡潔に見せています</div>
+                <h3><span>{{detailData.title}}</span><br>{{detailData.title_ext}}</h3>
+                <div>{{detailData.goods_desc}}</div>
             </div>
             <div class="audio-frame">
                 <a href="javascript:;"
                    @mouseover="isShowCode=true"
                    @mouseout="isShowCode=false"
-                   style="margin-bottom: 40px; display: inline-block;">
+                   style=" display: inline-block;">
                     <img src="@/assets/images/btn2.png">
                 </a>
-                <i-switch size="large" v-model="showVideo">
-                    <span slot="open">视频</span>
-                    <span slot="close">图片</span>
-                </i-switch>
-                <div class="img-frame" v-if="isShowCode"><img src="@/assets/images/ad2.jpg"> </div>
-                <audio-view :src="musicOpt.url" :title="musicOpt.title"></audio-view>
+                <div class="img-frame" v-if="isShowCode"><img :src="domain_url+ewm_img"> </div>
+                <audio-view
+                    v-if="detailData.audio_link != ''"
+                    :src="detailData.audio_link"
+                    :title="detailData.audio_name"
+                    style="margin-bottom: 40px;">
+                </audio-view>
             </div>
             <ul class="list">
                 <li>
@@ -86,17 +85,8 @@
                 dots="none"
                 arrow="never"
                 height="100%">
-                <CarouselItem>
-                    <div class="carousel-item"><img src="@/assets/images/proimg2.jpg"> </div>
-                </CarouselItem>
-                <CarouselItem>
-                    <div class="carousel-item"><img src="@/assets/images/proimg2.jpg"> </div>
-                </CarouselItem>
-                <CarouselItem>
-                    <div class="carousel-item"><img src="@/assets/images/proimg2.jpg"> </div>
-                </CarouselItem>
-                <CarouselItem>
-                    <div class="carousel-item"><img src="@/assets/images/proimg2.jpg"> </div>
+                <CarouselItem v-for="item in detailData.goods_img">
+                    <div class="carousel-item"><img :src="domain_url+item"> </div>
                 </CarouselItem>
             </Carousel>
             <a href="javascript:;" class="cars-btn cars-btn-left" v-if="btnLeft" @click="scrollLeft"><span><Icon type="android-arrow-back"></Icon></span></a>
@@ -113,6 +103,9 @@
     export default{
         name: 'App',
         components: {BottomNav,VideoView,AudioView},
+        mounted(){
+            this.getDetailData();
+        },
         data(){
             return{
                 isShowCode:false,
@@ -128,6 +121,8 @@
                     pic: 'http://devtest.qiniudn.com/Preparation.jpg',
                     lrc: '[00:00.00]lrc here\n[00:01.00]aplayer'
                 },
+                detailData:{},
+                domain_url:"",
                 btnLeft:false,
                 btnRight:false
             }
@@ -157,6 +152,24 @@
             },
             toAuthor(){
                 this.$router.push({ name: 'workauthor', params: { id: 123 }})
+            },
+            getDetailData(){
+                let self = this;
+                let id = this.$route.params.id;
+                console.log(id);
+                self.$ajax.get('api/product_info',{
+                    params: {
+                        id: id
+                    }
+                }).then((res)=>{
+                    let data = res.data;
+                    self.detailData = data.data;
+                    self.domain_url = data.domain_url;
+                    self.showVideo = data.data.video_link != '';
+                    self.vPostImg = data.domain_url+data.data.cover;
+                }).catch((error)=>{
+                    console.log(error);
+                })
             }
         }
     }

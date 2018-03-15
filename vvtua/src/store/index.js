@@ -31,11 +31,12 @@ const store = new Vuex.Store({
             domain_url:'',
             time_slot:''
         },
-        cateList:[]
+        cateList:[],
+        isGuide:true
     },
     mutations: {
-        increment (state) {
-            state.count++
+        doPassGuide (state) {
+            state.isGuide = false
         }
     },
     actions: {

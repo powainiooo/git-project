@@ -113,7 +113,7 @@
                             </ul>
                             <div class="infor">
                                 <h3>{{indexInfo.title}}</h3>
-                                <div>{{indexInfo.home2_desc}}</div>
+                                <div v-html="indexInfo.home2_desc"></div>
                             </div>
                         </div>
                     </div>
@@ -126,7 +126,7 @@
                         <div class="clearfix page3-content">
                             <div class="infor">
                                 <h3>合 作 品 牌</h3>
-                                <div>{{indexInfo.home3_desc}}</div>
+                                <div v-html="indexInfo.home3_desc"></div>
                             </div>
                             <ul class="img-list">
                                 <li v-for="item in indexInfo.goods_img3"><img :src='domainUrl+item'></li>
@@ -145,7 +145,7 @@
                             </ul>
                             <div class="infor">
                                 <h3>成 员</h3>
-                                <div>{{indexInfo.home4_desc}}</div>
+                                <div v-html="indexInfo.home4_desc"></div>
                             </div>
                         </div>
                     </div>

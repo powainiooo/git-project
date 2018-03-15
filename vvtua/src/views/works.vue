@@ -18,7 +18,7 @@
                     v-for="item in proList"
                     @click="toDetail(item.id)"
                     :key="item.id"
-                    :style="{'animation-delay':Math.random()*1.2+'s','-webkit-animation-delay':Math.random()*1.2+'s'}">
+                    :style="{'animation-delay':Math.random()*0.8+'s','-webkit-animation-delay':Math.random()*0.8+'s'}">
                     <img :src="domain_url+item.cover">
                     <div class="cover"></div>
                     <div class="name">

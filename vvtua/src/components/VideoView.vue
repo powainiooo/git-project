@@ -28,7 +28,7 @@
         },
         props:['vid','postImg'],
         mounted(){
-            this.init();
+            //this.init();
         },
         methods:{
             init(){
@@ -42,13 +42,13 @@
                     height: '100%', //播放器的高度
                     video: self.video,       //默认的视频对象
                     modId: 'mod_player',       //默认的 DOM 元素 ID
-                    autoplay: false,
+                    autoplay: true,
                     pic: self.postImg
                 });
             },
             doPlay(){
+                this.init();
                 this.isPlay = true;
-                this.player.play();
             }
         }
     }

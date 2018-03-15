@@ -14,7 +14,7 @@
             <div>
                 <div class="guide-content">
                     <img src="../../assets/images/logo.png">
-                    <p>{{guide}}</p>
+                    <p v-html="guide"></p>
                     <!--<div>{{guide}}</div>-->
                     <a href="javascript:;" @click="btnInto"><img src="../../assets/images/btn1.png"> </a>
                 </div>
@@ -34,7 +34,8 @@
         },
         methods:{
             btnInto(){
-                this.$emit('doInto')
+                let self = this;
+                self.$store.commit('doPassGuide')
             }
         }
     }

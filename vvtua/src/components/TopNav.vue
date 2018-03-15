@@ -14,7 +14,7 @@
         <router-link to="/index" class="btn"><img src="@/assets/images/btn-close.png"></router-link>
         <ul class="nav" v-if="showNav">
             <li :class="cateID == 0 ? 'active':''"
-                @click="getList(item.id)"><span>ALL</span><br>全部</li>
+                @click="getList(0)"><span>ALL</span><br>全部</li>
             <li v-for="item in cateList"
                 :class="cateID == item.id ? 'active':''"
                 @click="getList(item.id)">

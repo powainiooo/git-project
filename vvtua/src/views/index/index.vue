@@ -5,7 +5,7 @@
 <template>
     <div class="page-frame">
         <transition name="fade">
-            <guide v-show="isGuide" @doInto="doInto" :guide="guide"></guide>
+            <guide v-show="isGuide" :guide="guide"></guide>
         </transition>
         <full-page :indexInfo="indexInfo" :domainUrl="domainUrl"></full-page>
         <bottom-nav :showNav="!isGuide"></bottom-nav>
@@ -24,7 +24,7 @@
         },
         data(){
             return {
-                isGuide:true
+
             }
         },
         computed:{
@@ -36,11 +36,9 @@
             },
             domainUrl(){
                 return this.$store.state.domainUrl
-            }
-        },
-        methods:{
-            doInto(){
-                this.isGuide = false;
+            },
+            isGuide(){
+                return this.$store.state.isGuide
             }
         }
     }

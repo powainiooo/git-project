@@ -1,7 +1,7 @@
 <style>
     @import '../assets/css/layout.css';
 
-    .video-frame{ width: 62.5%; position: fixed; top:0; right: 0; bottom: 100px;}
+    .video-frame{ width: 62.5%; position: fixed; top:0; right: 0; bottom: 70px;}
 
     .detail-frame{ overflow: hidden;}
 
@@ -35,22 +35,26 @@
         <div class="detail-infor">
             <div class="intro">
                 <h3><span>{{detailData.title}}</span><br>{{detailData.title_ext}}</h3>
-                <div>{{detailData.goods_desc}}</div>
+                <div v-html="detailData.goods_desc"></div>
             </div>
-            <div class="audio-frame">
-                <a href="javascript:;"
-                   @mouseover="isShowCode=true"
-                   @mouseout="isShowCode=false"
-                   style=" display: inline-block;">
-                    <img src="@/assets/images/btn2.png">
-                </a>
-                <div class="img-frame" v-if="isShowCode"><img :src="domain_url+ewm_img"> </div>
+            <div class="audio-frame" v-if="detailData.ewm_img != '' || detailData.audio_link != ''">
+                <div v-if="detailData.ewm_img != ''">
+                    <a href="javascript:;"
+                       @mouseover="isShowCode=true"
+                       @mouseout="isShowCode=false"
+                       style=" display: inline-block;">
+                        <img src="@/assets/images/btn2.png">
+                    </a>
+                    <div class="img-frame" v-if="isShowCode"><img :src="detailData.ewm_img"> </div>
+                </div>
+
                 <audio-view
                     v-if="detailData.audio_link != ''"
                     :src="detailData.audio_link"
                     :title="detailData.audio_name"
                     style="margin-bottom: 40px;">
                 </audio-view>
+
             </div>
             <ul class="list">
                 <li>
@@ -112,8 +116,8 @@
                 showVideo:true,
                 vid:'',//k0015trfczz
                 carouseIndex:0,
-                carouseLen:4,
-                vPostImg:'static/images/proimg2.jpg',
+                carouseLen:0,
+                vPostImg:'',
                 musicOpt:{
                     title: 'Preparation',
                     author: 'Hans Zimmer/Richard Harvey',
@@ -166,7 +170,9 @@
                     self.detailData = data.data;
                     self.domain_url = data.domain_url;
                     self.showVideo = data.data.video_link != '';
-                    self.vPostImg = data.domain_url+data.data.cover;
+                    self.vPostImg = data.domain_url+data.data.video_cover;
+                    self.carouseLen = data.data.goods_img.length;
+                    self.vid = data.data.video_link;
                 }).catch((error)=>{
                     console.log(error);
                 })

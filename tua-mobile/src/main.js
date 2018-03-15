@@ -7,7 +7,9 @@ import iView from 'iview';
 import 'iview/dist/styles/iview.css';
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'
+import axios from 'axios'
 
+Vue.prototype.$ajax = axios;
 Vue.config.productionTip = false
 Vue.use(iView);
 Vue.use(VueAwesomeSwiper)

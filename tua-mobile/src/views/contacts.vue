@@ -8,17 +8,17 @@
         <ul class="contacts-list">
             <li>
                 <p>The contact<br>联系人</p>
-                <div>郑茗友</div>
+                <div>{{contactData.contact}}</div>
             </li>
             <li>
                 <p>E-mail<br>电子邮箱</p>
-                <div>27318589@qq.com</div>
+                <div>{{contactData.email}}</div>
             </li>
             <li>
                 <p>Phone<br>手机</p>
                 <div>
-                    <a href="javascript:;" class="tel">+86 137-2553-8273</a>
-                    <span class="time">10:00 am - 6:00 pm （工作日）</span>
+                    <a href="javascript:;" class="tel">{{contactData.mobile}}</a>
+                    <span class="time">{{contactData.time_slot}}</span>
                 </div>
             </li>
         </ul>
@@ -31,9 +31,21 @@
     export default{
         name: 'contacts',
         components:{FooterNav},
+        mounted(){
+            this.init();
+        },
         data(){
             return{
-
+                contactData:{}
+            }
+        },
+        methods:{
+            init(){
+                let self = this;
+                self.$ajax.get('/admin/api/ajax_contacts').then((res)=>{
+                    var data = res.data;
+                    self.contactData = data;
+                })
             }
         }
     }

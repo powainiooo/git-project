@@ -11,7 +11,7 @@
         <div id="mod_player" class="mod_player">
             <div id="mod_player_skin">&nbsp;</div>
         </div>
-        <div class="postImg" :style="{'background-image':'url('+postImg+')'}" v-if="!isPlay">
+        <div class="postImg" :style="{'background-image':'url('+postImg+')'}" v-if="isPlay">
             <a href="javascript:;" @click="doPlay"><img src="@/assets/images/btn-play.png"></a>
         </div>
     </div>
@@ -24,25 +24,21 @@
             return {
                 video:{},
                 player:{},
-                isPlay:true,
-                tvpSetting:{
-                    vid: 'l0171ne1fjx',
-                    vid2: 'o0171fmfwmf',
-                    vid_limit: 'z0016v1ocio',
-                    vid_short: 'f162169s71x',
-                    lid: '123002500'
-                }
+                isPlay:true
             }
         },
         props:['vid','postImg'],
-        mounted(){
-            this.init();
+        computed:{
+            refresh(){
+                this.init();
+                return ""
+            }
         },
         methods:{
             init(){
                 let self = this;
                 self.video = new tvp.VideoInfo();
-                self.video.setVid(self.tvpSetting.vid);
+                self.video.setVid(self.vid);
                 var player = new tvp.Player();
                 player.create({
                     width  : '100%',
@@ -50,14 +46,14 @@
                     video  : self.video,
                     playerType: 'html5',
                     modId  : "mod_player",
-                    autoplay: false,
+                    autoplay: true,
                     pic: self.postImg
                 });
 
             },
             doPlay(){
-                //this.isPlay = true;
-                //this.player.play();
+                this.init();
+                this.isPlay = false;
             }
         }
     }

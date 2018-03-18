@@ -7,6 +7,13 @@ import store from './store'
 import iView from 'iview';
 import 'iview/dist/styles/iview.css';
 import axios from 'axios'
+import infiniteScroll from 'vue-infinite-scroll'
+Vue.use(infiniteScroll)
+import VueAwesomeSwiper from 'vue-awesome-swiper'
+
+// require styles
+import 'swiper/dist/css/swiper.css'
+Vue.use(VueAwesomeSwiper)
 
 Vue.prototype.$ajax = axios;
 Vue.config.productionTip = false;

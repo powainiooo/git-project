@@ -1,7 +1,8 @@
 <style>
     @import '../assets/css/layout.css';
+    @import '../assets/css/animate.css';
 
-    .contacts-frame{ width: 1130px; height: 100%; margin-left: 380px; display: table; overflow: hidden;}
+    .contacts-frame{ width: 1130px; height: 100%; margin-left: 20%; display: table; overflow: hidden;}
     .contacts-frame>div{ display: table-cell; vertical-align: middle;}
     .page-title{ font-size: 24px; font-family: 'trajanPro'; color: #bc9e44;}
     .contacts-list{ margin-top: 60px;}
@@ -11,6 +12,8 @@
     .contacts-list li p .tag{ color: #bc9e44; font-family: 'trajanPro'; display: inline-block; font-size: 12px; letter-spacing: 0; margin-top: 35px;}
     .contacts-list li div{ float: left;}
     .contacts-list li div img{ margin-top: 10px;}
+
+    .animate05{animation-duration:.5s}
 </style>
 
 <template>
@@ -19,7 +22,8 @@
         <div class="contacts-frame">
             <div>
                 <div class="clearfix" style="margin-bottom: 100px;">
-                    <div class="pull-left">
+                    <transition enter-active-class="animated animate05 slideInUp">
+                    <div class="pull-left" v-show="isShow">
                         <h3 class="page-title">CONTACTS</h3>
                         <ul class="contacts-list">
                             <li>
@@ -47,10 +51,11 @@
                             </li>
                         </ul>
                     </div>
+                    </transition>
                 </div>
             </div>
         </div>
-        <bottom-nav posLeft="170"></bottom-nav>
+        <bottom-nav posLeft="150"></bottom-nav>
     </div>
 </template>
 
@@ -61,11 +66,15 @@
         name: 'contacts',
         components: {BottomNav,TopNav},
         mounted(){
-            this.$store.dispatch('doGetContact')
+            let self = this;
+            this.$store.dispatch('doGetContact');
+            setTimeout(()=>{
+                self.isShow = true
+            },200)
         },
         data(){
             return{
-
+                isShow:false
             }
         },
         computed:{

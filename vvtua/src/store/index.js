@@ -32,11 +32,15 @@ const store = new Vuex.Store({
             time_slot:''
         },
         cateList:[],
-        isGuide:true
+        isGuide:true,
+        audio:{}
     },
     mutations: {
         doPassGuide (state) {
             state.isGuide = false
+        },
+        setAudio(state,data){
+            state.audio = data;
         }
     },
     actions: {

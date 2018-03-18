@@ -1,5 +1,6 @@
 <style>
     @import '../assets/css/layout.css';
+    @import '../assets/css/animate.css';
 
     .video-frame{ width: 62.5%; position: fixed; top:0; right: 0; bottom: 70px;}
 
@@ -7,7 +8,7 @@
 
     .detail-frame .detail-infor .audio-frame{ margin: 0 95px 0 75px; padding: 45px 50px 45px 0; border-bottom: 1px solid #5c5e5d; position: relative;}
     .detail-frame .detail-infor .audio-frame .img-frame{ width: 276px; height: 273px; background: url("../assets/images/bubble.png") no-repeat; position: absolute; top: -235px; left: 70px;}
-    .detail-frame .detail-infor .audio-frame .img-frame img{ margin: 25px 0 0 37px;}
+    .detail-frame .detail-infor .audio-frame .img-frame img{ width: 200px; height: 200px; margin: 25px 0 0 37px;}
 
     .detail-frame .detail-infor .list{ margin: 30px 95px 110px 75px; overflow: hidden;}
     .detail-frame .detail-infor .list li{ width: 50%; float: left; margin-bottom: 15px; font-size: 14px; color: rgba(255,255,255,0.5);}
@@ -24,19 +25,38 @@
     .video-frame .cars-btn span{ display: inline-block; position: relative; top: 50%; font-size: 30px; color: #fff; margin-top: -22px;}
     .video-frame .cars-btn-left{ left: 0;}
     .video-frame .cars-btn-right{ right: 0;}
+
+    .scaleIn-enter-active {
+        transition: all .3s ease;
+    }
+    .scaleIn-leave-active {
+        transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+    }
+    .scaleIn-enter, .scaleIn-leave-to
+        /* .slide-fade-leave-active for below version 2.1.8 */ {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    .tsd{ animation-duration: 0.5s;}
 </style>
 
 <template>
     <div class="detail-frame">
         <div class="top-bar">
-            <router-link to="/index" class="logo"><img src="@/assets/images/logofix1.png"></router-link>
+            <router-link to="" class="logo"><img src="@/assets/images/logofix1.png"></router-link>
             <router-link to="/works" class="btn"><img src="@/assets/images/btn-back.png"></router-link>
         </div>
         <div class="detail-infor">
-            <div class="intro">
+            <transition enter-active-class="animated tsd slideInLeft">
+            <div class="intro" v-show="showIntro">
                 <h3><span>{{detailData.title}}</span><br>{{detailData.title_ext}}</h3>
                 <div v-html="detailData.goods_desc"></div>
             </div>
+            </transition>
+
+            <transition enter-active-class="animated tsd slideInLeft">
+            <div v-if="showDemo">
             <div class="audio-frame" v-if="detailData.ewm_img != '' || detailData.audio_link != ''">
                 <div v-if="detailData.ewm_img != ''">
                     <a href="javascript:;"
@@ -50,38 +70,30 @@
 
                 <audio-view
                     v-if="detailData.audio_link != ''"
-                    :src="detailData.audio_link"
-                    :title="detailData.audio_name"
-                    style="margin-bottom: 40px;">
+                    :src="domain_url+detailData.audio_link"
+                    :title="detailData.audio_name">
                 </audio-view>
 
             </div>
-            <ul class="list">
-                <li>
-                    <span class="name">创意</span>
-                    <a href="javascript:;" class="value" @click="toAuthor">Tau</a>
-                </li>
-                <li>
-                    <span class="name">音乐</span>
-                    <a href="javascript:;" class="value" @click="toAuthor">Tau</a>
-                </li>
-                <li>
-                    <span class="name">原画</span>
-                    <a href="javascript:;" class="value" @click="toAuthor">Tau</a>
-                </li>
-                <li>
-                    <span class="name">技术制作</span>
-                    <a href="javascript:;" class="value" @click="toAuthor">Tau</a>
-                </li>
-                <li>
-                    <span class="name">艺术指导</span>
-                    <a href="javascript:;" class="value" @click="toAuthor">Tau</a>
+            </div>
+            </transition>
+
+            <transition enter-active-class="animated tsd slideInLeft">
+            <ul class="list" v-show="authorList">
+                <li v-for="item in detailData.author">
+                    <span class="name">{{item.cname}}</span>
+                    <a href="javascript:;" class="value" @click="toAuthor(item.id)">{{item.name}}</a>
                 </li>
             </ul>
+            </transition>
         </div>
+
+        <transition name="scaleIn">
         <div class="video-frame"
              @mouseover="scrollIn"
-             @mouseout="scrollOut">
+             @mouseout="scrollOut"
+            v-if="videoFrame">
+
             <video-view v-if="showVideo" :vid="vid" :postImg="vPostImg"></video-view>
             <Carousel
                 v-model="carouseIndex"
@@ -96,7 +108,8 @@
             <a href="javascript:;" class="cars-btn cars-btn-left" v-if="btnLeft" @click="scrollLeft"><span><Icon type="android-arrow-back"></Icon></span></a>
             <a href="javascript:;" class="cars-btn cars-btn-right" v-if="btnRight" @click="scrollRight"><span><Icon type="android-arrow-forward"></Icon></span></a>
         </div>
-        <bottom-nav posLeft="290"></bottom-nav>
+        </transition>
+        <bottom-nav posLeft="260"></bottom-nav>
     </div>
 </template>
 
@@ -113,28 +126,44 @@
         data(){
             return{
                 isShowCode:false,
-                showVideo:true,
+                showVideo:false,
                 vid:'',//k0015trfczz
                 carouseIndex:0,
                 carouseLen:0,
                 vPostImg:'',
-                musicOpt:{
-                    title: 'Preparation',
-                    author: 'Hans Zimmer/Richard Harvey',
-                    url: 'http://120.198.248.228/cache/fs.w.kugou.com/201803111645/4b1e35ffd5b41e32a2caa295a2444d6c/G052/M04/19/07/FJQEAFZWxMSAbdi-ADPyIZwJRM0272.mp3?ich_args2=114-11172107005413_429e3ab4014453e9ea220bea0ae3815c_10095002_9c89662cd0c5f1d0973d518939a83798_c178791a10375bcae2a4deb87ca5c544',
-                    pic: 'http://devtest.qiniudn.com/Preparation.jpg',
-                    lrc: '[00:00.00]lrc here\n[00:01.00]aplayer'
+                detailData:{
+                    audio_link:'',
+                    ewm_img:''
                 },
-                detailData:{},
                 domain_url:"",
                 btnLeft:false,
-                btnRight:false
+                btnRight:false,
+                videoFrame:false,
+                showIntro:false,
+                showDemo:false,
+                authorList:false
             }
+        },
+        computed:{
+            media(){
+                return this.$store.state.audio;
+            }
+        },
+        beforeRouteLeave (to, from, next){
+            if(typeof this.media.pause == 'function'){
+                this.media.pause();
+            }
+            next();
         },
         methods:{
             scrollIn(){
-                if(this.carouseIndex != 0) this.btnLeft = true;
-                if(this.carouseIndex != this.carouseLen -1) this.btnRight = true;
+                if(this.showVideo){
+                    this.btnLeft = false;
+                    this.btnRight = false;
+                }else{
+                    if(this.carouseIndex != 0) this.btnLeft = true;
+                    if(this.carouseIndex != this.carouseLen -1) this.btnRight = true;
+                }
             },
             scrollOut(){
                 this.btnLeft = false;
@@ -154,8 +183,8 @@
                 }
                 if(this.carouseIndex == this.carouseLen -1) this.btnRight = false;
             },
-            toAuthor(){
-                this.$router.push({ name: 'workauthor', params: { id: 123 }})
+            toAuthor(id){
+                this.$router.push({ name: 'workauthor', params: { id: id }})
             },
             getDetailData(){
                 let self = this;
@@ -173,9 +202,24 @@
                     self.vPostImg = data.domain_url+data.data.video_cover;
                     self.carouseLen = data.data.goods_img.length;
                     self.vid = data.data.video_link;
+
+                    this.move();
                 }).catch((error)=>{
                     console.log(error);
                 })
+            },
+            move(){
+                let self = this;
+                self.videoFrame = true;
+                setTimeout(()=>{
+                    self.showIntro = true;
+                },0);
+                setTimeout(()=>{
+                    self.showDemo = true;
+                },0);
+                setTimeout(()=>{
+                    self.authorList = true;
+                },0);
             }
         }
     }

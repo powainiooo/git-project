@@ -2,9 +2,9 @@
     #pageContain {
         overflow: hidden;
         position: relative;
+        height: 100%;
     }
     .page {
-        display: none;
         width: 100%;
         height: 100%;
         overflow: hidden;
@@ -77,86 +77,90 @@
     .page2 .img-list li{ width: 280px; height: 280px; float: left; margin: 5px; box-shadow: 0 20px 50px rgba(0,0,0,0.2),0 -20px 50px rgba(0,0,0,0.2);}
     .page2 .img-list li img{ width: 100%; height: 100%;}
     .page2 .infor{ float: left; margin: 230px 0 0 60px;}
-    .page2 .infor h3{ font-weight: lighter; font-size: 30px; margin-bottom: 50px;}
-    .page2 .infor div{ width: 480px; font-size: 16px; font-weight: bold; line-height: 1.5;}
+    .page2 .infor h3{ font-weight: lighter; font-size: 30px; margin-bottom: 50px; color: #171919;}
+    .page2 .infor div{ width: 480px; font-size: 16px; line-height: 1.5; color: #171919;}
 
     .page3 .page3-content{ width: 1340px; margin: 0 auto;}
     .page3 .img-list{ width: 600px; float: left; margin-bottom: 100px;}
     .page3 .img-list li{ width: 120px; height: 120px; float: left;}
     .page3 .img-list li img{ width: 100%; height: 100%;}
     .page3 .infor{ float: left; margin: 50px 130px 0 0;}
-    .page3 .infor h3{ font-weight: lighter; font-size: 30px; margin-bottom: 40px;}
-    .page3 .infor div{ width: 480px; font-size: 16px; font-weight: bold; line-height: 1.5;}
+    .page3 .infor h3{ font-weight: lighter; font-size: 30px; margin-bottom: 40px; color: #171919;}
+    .page3 .infor div{ width: 480px; font-size: 16px;line-height: 1.5; color: #171919;}
 
     .page4 .page4-content{ width: 1440px; margin: 0 auto; position: relative;}
     .page4 .img-list{ overflow: hidden; margin-bottom: 100px;}
     .page4 .img-list li{ width: 220px; height: 300px; margin: 10px; float: left; background-color: #eaeaea;}
     .page4 .img-list li img{ width: 100%; height: 100%;}
     .page4 .infor{ position: absolute; bottom: 140px; right: 80px;}
-    .page4 .infor h3{ font-weight: lighter; font-size: 30px; margin-bottom: 40px;}
-    .page4 .infor div{ width: 480px; font-size: 16px; font-weight: bold; line-height: 1.5;}
+    .page4 .infor h3{ font-weight: lighter; font-size: 30px; margin-bottom: 40px; color: #171919;}
+    .page4 .infor div{ width: 480px; font-size: 16px; line-height: 1.5; color: #171919;}
 
-
+    .slide-frame{ width: 100%; height: 100%; position: relative;}
+    .swiper-container,.swiper-wrapper,.swiper-slide{ height: 100%;}
 </style>
 
 <template>
-    <div>
+    <div class="slide-frame">
         <div id="pageContain">
-            <div class="page page1 current" :style="{'background-image':'url('+domainUrl+indexInfo.cover+')'}"></div>
-
-            <div class="page page2 ">
-                <div class="contain">
-                    <div>
-                        <div class="clearfix page2-content">
-                            <ul class="img-list">
-                                <li v-for="item in indexInfo.goods_img"><img :src='domainUrl+item'></li>
-                            </ul>
-                            <div class="infor">
-                                <h3>{{indexInfo.title}}</h3>
-                                <div v-html="indexInfo.home2_desc"></div>
+            <swiper :options="swiperOption" ref="mySwiper">
+                <!-- slides -->
+                <swiper-slide><div class="page page1 current" :style="{'background-image':'url('+domainUrl+indexInfo.cover+')'}"></div></swiper-slide>
+                <swiper-slide>
+                    <div class="page page2 ">
+                        <div class="contain">
+                            <div>
+                                <div class="clearfix page2-content">
+                                    <ul class="img-list">
+                                        <li v-for="item in indexInfo.goods_img"><img :src='domainUrl+item'></li>
+                                    </ul>
+                                    <div class="infor">
+                                        <h3>{{indexInfo.title}}</h3>
+                                        <div v-html="indexInfo.home2_desc"></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <div class="page page3">
-                <div class="contain">
-                    <div>
-                        <div class="clearfix page3-content">
-                            <div class="infor">
-                                <h3>合 作 品 牌</h3>
-                                <div v-html="indexInfo.home3_desc"></div>
-                            </div>
-                            <ul class="img-list">
-                                <li v-for="item in indexInfo.goods_img3"><img :src='domainUrl+item'></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="page page4">
-                <div class="contain">
-                    <div>
-                        <div class="clearfix page4-content">
-                            <ul class="img-list">
-                                <li v-for="item in indexInfo.goods_img4"><img :src='domainUrl+item'></li>
-                            </ul>
-                            <div class="infor">
-                                <h3>成 员</h3>
-                                <div v-html="indexInfo.home4_desc"></div>
+                </swiper-slide>
+                <swiper-slide>
+                    <div class="page page3">
+                        <div class="contain">
+                            <div>
+                                <div class="clearfix page3-content">
+                                    <div class="infor">
+                                        <h3>合 作 品 牌</h3>
+                                        <div v-html="indexInfo.home3_desc"></div>
+                                    </div>
+                                    <ul class="img-list">
+                                        <li v-for="item in indexInfo.goods_img3"><img :src='domainUrl+item'></li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
+                </swiper-slide>
+                <swiper-slide>
+                    <div class="page page4">
+                        <div class="contain">
+                            <div>
+                                <div class="clearfix page4-content">
+                                    <ul class="img-list">
+                                        <li v-for="item in indexInfo.goods_img4"><img :src='domainUrl+item'></li>
+                                    </ul>
+                                    <div class="infor">
+                                        <h3>成 员</h3>
+                                        <div v-html="indexInfo.home4_desc"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </swiper-slide>
+            </swiper>
         </div>
         <ul id="navBar">
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
+            <li v-for="item in 4" :class="item == activeIndex ? 'active':''"></li>
         </ul>
         <div class="logo-index"><img src="@/assets/images/logofix2.png"> </div>
     </div>
@@ -168,31 +172,23 @@
         name: 'app',
         props:['indexInfo','domainUrl'],
         mounted(){
-            let runPage = new FullPage2({
-                id : 'pageContain',                            // id of contain
-                slideTime : 800,                               // time of slide
-                continuous : true,                             // create an infinite feel with no endpoints
-                effect : {                                     // slide effect
-                    transform : {
-                        translate : 'Y',				   // 'X'|'Y'|'XY'|'none'
-                        scale : [1, 1],				   // [scalefrom, scaleto]
-                        rotate : [0, 0]				   // [rotatefrom, rotateto]
-                    },
-                    opacity : [0, 1]                       // [opacityfrom, opacityto]
-                },
-                mode : 'wheel,touch,nav:navBar',               // mode of fullpage
-                easing : 'ease'                                // easing('ease','ease-in','ease-in-out' or use cubic-bezier like [.33, 1.81, 1, 1];
-                //  ,beforeChange : function(index, thisPage) {   // callback before pageChange
-                //    return 'stop';
-                //  }
-                //  ,callback : function(index, thisPage) {       // callback when pageChange
-                //    alert(index);
-                //  };
-            });
+
         },
         data(){
+            let self = this;
             return{
-
+                activeIndex:1,
+                swiperOption:{
+                    mousewheel: true,
+                    speed:500,
+                    direction:'vertical',
+                    on:{
+                        slideChangeTransitionStart: function(swiper){
+                            self.activeIndex = self.$refs.mySwiper.swiper.activeIndex + 1;
+                            console.log(self.activeIndex)
+                        }
+                    }
+                }
             }
         }
     }

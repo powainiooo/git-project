@@ -18,7 +18,7 @@
                 <div class="bar" :style="{width:progress+'%'}"></div>
             </div>
         </div>
-        <div class="time">{{duration}}</div>
+        <div class="time">{{duration}}</div>{{refresh}}
     </div>
 </template>
 
@@ -26,22 +26,28 @@
     export default{
         name: 'App',
         props:['src','title'],
-        mounted(){
-            this.init();
+        computed:{
+            refresh(){
+                console.log(this.src);
+                this.init();
+                return ""
+            },
+            media(){
+                return this.$store.state.audio;
+            }
         },
         data(){
             return{
                 duration:'--',
                 progress:0,
                 paused:true,
-                media:{},
                 t:0
             }
         },
         methods:{
             init(){
                 let self = this;
-                this.media = new Audio(this.src);
+                this.$store.commit('setAudio',new Audio(this.src));
                 this.media.addEventListener('loadeddata',function(){
                     let time = parseInt(self.media.duration);
                     self.duration = self.getTime(time);

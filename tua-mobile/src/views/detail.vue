@@ -62,9 +62,12 @@
             <transition enter-active-class="animated tsd slideInUp">
             <div v-if="line3">
                 <div class="audio-frame" v-if="detailData.ewm_img != '' || detailData.audio_link != ''">
-                    <a :href="detailData.h5_link" class="btn-demo" v-if="detailData.ewm_img != ''">
-                        <img src="@/assets/images/btn1.png">
-                    </a>
+                    <div>
+                        <a :href="detailData.h5_link" class="btn-demo" v-if="detailData.ewm_img != ''">
+                            <img src="@/assets/images/btn1.png">
+                        </a>
+                    </div>
+
                     <audio-view
                         ref="audios"
                         :src="domain_url+detailData.audio_link"

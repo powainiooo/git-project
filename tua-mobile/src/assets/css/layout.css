@@ -44,6 +44,8 @@ li{ list-style: none;}
 .detail-infor  .intro div{ width:610px; font-size: 24px; line-height: 1.8; color: rgba(255,255,255,0.5); margin:30px auto;}
 
 .detail-infor .audio-frame{ margin: 0 45px; padding: 45px 50px 45px 0; border-bottom: 1px solid #5c5e5d; position: relative;}
+.detail-infor .audio-frame>div:first-child{ margin-bottom: 40px;}
+.detail-infor .audio-frame>div:last-child{ margin-bottom: 0px;}
 
 .detail-infor .list{ margin: 30px 95px 110px 75px; overflow: hidden;}
 .detail-infor .list li{ width: 50%; float: left; margin-bottom: 15px; font-size: 24px; color: rgba(255,255,255,0.5);}

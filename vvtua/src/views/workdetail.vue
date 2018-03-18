@@ -9,6 +9,8 @@
     .detail-frame .detail-infor .audio-frame{ margin: 0 95px 0 75px; padding: 45px 50px 45px 0; border-bottom: 1px solid #5c5e5d; position: relative;}
     .detail-frame .detail-infor .audio-frame .img-frame{ width: 276px; height: 273px; background: url("../assets/images/bubble.png") no-repeat; position: absolute; top: -235px; left: 70px;}
     .detail-frame .detail-infor .audio-frame .img-frame img{ width: 200px; height: 200px; margin: 25px 0 0 37px;}
+    .detail-frame .detail-infor .audio-frame>div:first-child{ margin-bottom: 40px;}
+    .detail-frame .detail-infor .audio-frame>div:last-child{ margin-bottom: 0px;}
 
     .detail-frame .detail-infor .list{ margin: 30px 95px 110px 75px; overflow: hidden;}
     .detail-frame .detail-infor .list li{ width: 50%; float: left; margin-bottom: 15px; font-size: 14px; color: rgba(255,255,255,0.5);}

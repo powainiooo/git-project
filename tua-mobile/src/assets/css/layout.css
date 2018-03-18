@@ -2,9 +2,8 @@
     font-family: 'trajanPro';
     src:url('../font/TrajanPro-Bold.ttf')  format('truetype'); /* Safari, Android, iOS */
 }
-*{ margin: 0; padding: 0; font-family: Micro Yahei;}
+*{ margin: 0; padding: 0; font-family: Micro Yahei,"微软雅黑","黑体";}
 
-body{ background-color: #171918;}
 
 li{ list-style: none;}
 
@@ -16,26 +15,27 @@ li{ list-style: none;}
 .pro-list li img{ width: 100%; height: 100%;}
 .pro-list li.big{ width: 710px;}
 .pro-list li .name{ width: 100%; position: absolute; bottom: 12px; left: 0; text-align: center; z-index: 5;}
-.pro-list li .name p.ignore{ font-family: 'trajanPro'; color: #d3b14d; font-size: 20px;}
-.pro-list li .name div.ignore{  color: #fff; font-size: 16px;}
+.pro-list li .name p.ignore{ font-family: 'trajanPro'; color: #d3b14d; font-size: 16px;}
+.pro-list li .name div.ignore{  color: #fff; font-size: 12px;}
 .pro-list li:after{ content: ''; width: 100%; height: 150px; background:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,0)), to(rgba(0,0,0,0.9)));  position: absolute; bottom: 0; left: 0;}
 
-.title{ font-size: 48px; font-family: 'trajanPro'; color: #d3b14d; margin: 100px 0 0 40px;}
+.title{ font-size: 48px; font-family: 'trajanPro'; color: #d3b14d; margin: 60px 0 0 40px;}
 
-.contacts-list{ margin: 100px 65px;}
+.contacts-list{ margin: 60px 65px;}
 .contacts-list li{ margin-bottom: 75px;}
-.contacts-list li p{ font-size: 32px; color: #a7a9a8; line-height: 1.5; letter-spacing: 4px;}
-.contacts-list li div{ font-size: 42px; color: #a7a9a8; margin-top: 40px; letter-spacing: 4px;}
+.contacts-list li p{ font-size: 28px; color: #a7a9a8; line-height: 1.5; letter-spacing: 4px;}
+.contacts-list li div{ font-size: 36px; color: #a7a9a8; margin-top: 40px; letter-spacing: 4px;}
 .contacts-list li div .tel{ display: block; width: 470px; background-color: #fff; color: #171918; font-size: 32px; text-align: center; padding: 12px 0; border-radius: 40px; text-decoration: none;}
 .contacts-list li div .time{ display: block; width: 470px; font-size: 20px; margin-top: 10px; text-align: center;}
 
 .about-frame{ margin: 130px 90px; text-align: center;}
-.about-frame img{ width: 480px;}
+.about-frame img{ width: 90%;}
 .about-frame div{ font-size: 20px; color: #a7a9a8; line-height: 1.8; letter-spacing: 4px; text-align: left; margin-top: 90px;}
 
 .demo-carousel img{ width: 100%;}
 
-.video-frame{ height: 600px; position: relative;}
+.video-frame{ min-height: 600px; position: relative;}
+.video-frame:after{ content: ''; width: 100%; height: 110px; position: absolute; bottom: -100px; left: 0; background: url('../images/gradient.png') repeat-x; background-size: auto 100%;}
 
 .detail-infor{ margin-top: 100px;}
 .detail-infor  .intro{ margin: 0 45px; border-bottom: 1px solid #5c5e5d;}
@@ -46,9 +46,11 @@ li{ list-style: none;}
 .detail-infor .audio-frame{ margin: 0 45px; padding: 45px 50px 45px 0; border-bottom: 1px solid #5c5e5d; position: relative;}
 
 .detail-infor .list{ margin: 30px 95px 110px 75px; overflow: hidden;}
-.detail-infor .list li{ width: 50%; float: left; margin-bottom: 15px; font-size: 14px; color: rgba(255,255,255,0.5);}
+.detail-infor .list li{ width: 50%; float: left; margin-bottom: 15px; font-size: 24px; color: rgba(255,255,255,0.5);}
 .detail-infor .list li .name{ display: inline-block; width: 50%;}
-.detail-infor .list li .value{ color: #bc9e44; font-family: Micro Yahei;}
+.detail-infor .list li .value{ color: #fff; font-family: Micro Yahei;}
 
-.btn-demo{ width: 210px; display: inline-block; margin-bottom: 40px;}
+.btn-demo{ width: 210px; display: inline-block;}
 .btn-demo img{ width: 100%;}
+
+.tsd{ animation-duration: 0.5s;}

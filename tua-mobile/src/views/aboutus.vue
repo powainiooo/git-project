@@ -1,14 +1,18 @@
 <style>
     @import '../assets/css/layout.css';
+    @import '../assets/css/animate.css';
+    .tsd{ animation-duration: 0.5s;}
 </style>
 
 <template>
     <div class="page-frame">
         <div class="title">ABOUT</div>
-        <div class="about-frame">
-            <img src="@/assets/images/logo.png">
+        <transition enter-active-class="animated tsd slideInUp">
+        <div class="about-frame" v-if="intro != ''">
+            <a href="javascript:;"><img src="@/assets/images/logo.png"></a>
             <div v-html="intro"></div>
         </div>
+        </transition>
         <footer-nav></footer-nav>
     </div>
 </template>

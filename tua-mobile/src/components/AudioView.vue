@@ -2,8 +2,8 @@
     .audio{ height: 75px; overflow: hidden; position: relative;}
     .audio>a{ width: 64px; height: 64px; position: absolute; top: 8px; left: 0;}
     .audio>a img{ width: 100%; height: 100%;}
-    .audio .mid{ margin: 0 70px;}
-    .audio .mid .name{ font-size: 14px; color: rgba(255,255,255,0.5);}
+    .audio .mid{ margin: 0 0 0 80px;}
+    .audio .mid .name{ font-size: 28px; color: rgba(255,255,255,0.5);}
     .audio .mid .line{ height: 3px; background-color:  rgba(255,255,255,0.5); position: relative; margin-top: 14px;}
     .audio .mid .line .bar{ width: 50%; height: 3px; background-color: #bc9e44;}
     .audio .time{ position: absolute; top: 25px; right: 0;font-size: 14px; color: rgba(255,255,255,0.5);}
@@ -19,7 +19,8 @@
                 <div class="bar" :style="{width:progress+'%'}"></div>
             </div>
         </div>
-        <div class="time">{{duration}}</div>
+        {{refresh}}
+        <!--<div class="time">{{duration}}</div>-->
     </div>
 </template>
 
@@ -27,8 +28,12 @@
     export default{
         name: 'App',
         props:['src','title'],
-        mounted(){
-            this.init();
+        computed:{
+            refresh(){
+                console.log(this.src);
+                this.init();
+                return ""
+            }
         },
         data(){
             return{

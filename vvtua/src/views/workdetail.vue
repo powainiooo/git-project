@@ -40,7 +40,6 @@
         opacity: 0;
     }
 
-    .tsd{ animation-duration: 0.5s;}
 </style>
 
 <template>
@@ -50,14 +49,14 @@
             <router-link to="/works" class="btn"><img src="@/assets/images/btn-back.png"></router-link>
         </div>
         <div class="detail-infor">
-            <transition enter-active-class="animated tsd slideInLeft">
+            <transition enter-active-class="animated aniDu05 slideInLeft">
             <div class="intro" v-show="showIntro">
                 <h3><span>{{detailData.title}}</span><br>{{detailData.title_ext}}</h3>
                 <div v-html="detailData.goods_desc"></div>
             </div>
             </transition>
 
-            <transition enter-active-class="animated tsd slideInLeft">
+            <transition enter-active-class="animated aniDu05 slideInLeft">
             <div v-if="showDemo">
             <div class="audio-frame" v-if="detailData.ewm_img != '' || detailData.audio_link != ''">
                 <div v-if="detailData.ewm_img != ''">
@@ -80,7 +79,7 @@
             </div>
             </transition>
 
-            <transition enter-active-class="animated tsd slideInLeft">
+            <transition enter-active-class="animated aniDu05 slideInLeft">
             <ul class="list" v-show="authorList">
                 <li v-for="item in detailData.author">
                     <span class="name">{{item.cname}}</span>

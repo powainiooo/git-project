@@ -38,6 +38,7 @@
                 return this.$store.state.domainUrl
             },
             isGuide(){
+                console.log(this.$store.state.isGuide)
                 return this.$store.state.isGuide
             }
         }

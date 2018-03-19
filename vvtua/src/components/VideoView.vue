@@ -45,6 +45,7 @@
                     video: self.video,       //默认的视频对象
                     modId: 'mod_player',       //默认的 DOM 元素 ID
                     autoplay: true,
+                    //playerType: 'html5',
                     pic: self.postImg
                 });
             },

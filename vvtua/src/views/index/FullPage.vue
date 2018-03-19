@@ -78,15 +78,15 @@
     .page2 .img-list li img{ width: 100%; height: 100%;}
     .page2 .infor{ float: left; margin: 230px 0 0 60px;}
     .page2 .infor h3{ font-weight: lighter; font-size: 30px; margin-bottom: 50px; color: #171919;}
-    .page2 .infor div{ width: 480px; font-size: 16px; line-height: 1.5; color: #171919;}
+    .page2 .infor div{ width: 480px; font-size: 16px; line-height: 2; color: #171919; letter-spacing: 3px;}
 
     .page3 .page3-content{ width: 1340px; margin: 0 auto;}
-    .page3 .img-list{ width: 600px; float: left; margin-bottom: 100px;}
-    .page3 .img-list li{ width: 120px; height: 120px; float: left;}
+    .page3 .img-list{ width: 700px; float: left; margin-bottom: 100px;}
+    .page3 .img-list li{ width: 120px; height: 120px; float: left; margin: 10px;}
     .page3 .img-list li img{ width: 100%; height: 100%;}
     .page3 .infor{ float: left; margin: 50px 130px 0 0;}
     .page3 .infor h3{ font-weight: lighter; font-size: 30px; margin-bottom: 40px; color: #171919;}
-    .page3 .infor div{ width: 480px; font-size: 16px;line-height: 1.5; color: #171919;}
+    .page3 .infor div{ width: 480px; font-size: 16px;line-height: 2; color: #171919; letter-spacing: 3px;}
 
     .page4 .page4-content{ width: 1440px; margin: 0 auto; position: relative;}
     .page4 .img-list{ overflow: hidden; margin-bottom: 100px;}
@@ -94,7 +94,7 @@
     .page4 .img-list li img{ width: 100%; height: 100%;}
     .page4 .infor{ position: absolute; bottom: 140px; right: 80px;}
     .page4 .infor h3{ font-weight: lighter; font-size: 30px; margin-bottom: 40px; color: #171919;}
-    .page4 .infor div{ width: 480px; font-size: 16px; line-height: 1.5; color: #171919;}
+    .page4 .infor div{ width: 480px; font-size: 16px; line-height: 2; color: #171919; letter-spacing: 3px;}
 
     .slide-frame{ width: 100%; height: 100%; position: relative;}
     .swiper-container,.swiper-wrapper,.swiper-slide{ height: 100%;}

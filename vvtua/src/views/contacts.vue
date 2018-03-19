@@ -1,6 +1,6 @@
 <style>
-    @import '../assets/css/layout.css';
     @import '../assets/css/animate.css';
+    @import '../assets/css/layout.css';
 
     .contacts-frame{ width: 1130px; height: 100%; margin-left: 20%; display: table; overflow: hidden;}
     .contacts-frame>div{ display: table-cell; vertical-align: middle;}
@@ -12,8 +12,6 @@
     .contacts-list li p .tag{ color: #bc9e44; font-family: 'trajanPro'; display: inline-block; font-size: 12px; letter-spacing: 0; margin-top: 35px;}
     .contacts-list li div{ float: left;}
     .contacts-list li div img{ margin-top: 10px;}
-
-    .animate05{animation-duration:.5s}
 </style>
 
 <template>
@@ -22,7 +20,7 @@
         <div class="contacts-frame">
             <div>
                 <div class="clearfix" style="margin-bottom: 100px;">
-                    <transition enter-active-class="animated animate05 slideInUp">
+                    <transition enter-active-class="animated aniDu03 slideInUp">
                     <div class="pull-left" v-show="isShow">
                         <h3 class="page-title">CONTACTS</h3>
                         <ul class="contacts-list">

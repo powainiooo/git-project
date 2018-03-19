@@ -2,7 +2,7 @@
     font-family: 'trajanPro';
     src:url('../font/TrajanPro-Bold.ttf')  format('truetype'); /* Safari, Android, iOS */
 }
-*{ margin: 0; padding: 0; font-family: '微软雅黑';}
+*{ margin: 0; padding: 0; font-family:'trajanPro',"Micro Yahei", '微软雅黑';}
 li{list-style: none;}
 body,html{ height: 100%;}
 .page-frame{height: 100%;}
@@ -35,7 +35,7 @@ body{ background-color: #171919;}
 .detail-frame  .intro{ margin: 0 95px 0 75px; border-bottom: 1px solid #5c5e5d;}
 .detail-frame  .intro h3{ font-size: 14px; color: rgba(255,255,255,0.5); letter-spacing: 2px;}
 .detail-frame  .intro h3 span{ font-family: 'trajanPro'; font-size: 26px; color: #bc9e44; line-height: 2;}
-.detail-frame  .intro div{font-size: 14px; color: rgba(255,255,255,0.5); margin: 80px 50px 35px 0;}
+.detail-frame  .intro div{font-size: 14px; color: rgba(255,255,255,0.5); margin: 60px 50px 35px 0; line-height: 2; letter-spacing: 3px; }
 
 
 .pro-list{ width: 1450px; margin: 0 auto; padding: 150px 0;}

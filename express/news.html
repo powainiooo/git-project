@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="Keywords" content="">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,shrink-to-fit=no">
+    <title>资讯公告</title>
+    <!-- html5.js for IE less than 9 -->
+    <!--[if lt IE 9]>
+    <script src="js/html5.js"></script>
+    <![endif]-->
+    <link href="css/reset.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/layout.css" rel="stylesheet">
+    <link href="css/H5-layout.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vue" type="application/javascript"></script>
+    <script src="js/components.js" type="application/javascript"></script>
+</head>
+
+<body>
+<div id="app">
+    <top-nav nav-index="3"></top-nav>
+    <div class="page-frame">
+        <banner>
+            <img src="images/news/banner.jpg" slot="img">
+            <h2 slot="title">跨境物流新征程</h2>
+        </banner>
+        <div class="frame1200">
+            <div class="new-item" v-for="item in newsList">
+                <div class="img"><img :src="item.imgUrl"> </div>
+                <div class="content">
+                    <div class="time">{{item.time}}</div>
+                    <div class="title">{{item.title}}</div>
+                    <div class="detail">{{item.detail}}</div>
+                    <a :href="item.link">查看详情</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer-nav></footer-nav>
+</div>
+
+<script>
+    var app = new Vue({
+        el: '#app',
+        data:{
+            newsList:[
+                {
+                    id:0,
+                    imgUrl:'images/news/img1.jpg',
+                    time:'2016-05-01',
+                    title:'大连港亮相俄物流展',
+                    detail:'15公里时速上限，是快递三轮车普遍存在的软肋。一面是新生行业的发展要呵护，“一刀切”会带来较大影响；一面是不能不顾道路安全等发展底线，放任“野蛮生长”。监管部门和快递行业该如何公里时速上限，是快递三轮车普遍存在的软肋。一面是新生行业的发展要呵护，“保税区”会带来较大影响一......',
+                    link:'#'
+                },
+                {
+                    id:1,
+                    imgUrl:'images/news/img2.jpg',
+                    time:'2016-05-01',
+                    title:'邮寄万元沉香手串不翼而飞 快递公司称也很委屈',
+                    detail:'15公里时速上限，是快递三轮车普遍存在的软肋。一面是新生行业的发展要呵护，“一刀切”会带来较大影响；一面是不能不顾道路安全等发展底线，放任“野蛮生长”。监管部门和快递行业该如何公里时速上限，是快递三轮车普遍存在的软肋。一面是新生行业的发展要呵护，“保税区”会带来较大影响一......',
+                    link:'#'
+                },
+                {
+                    id:2,
+                    imgUrl:'images/news/img3.jpg',
+                    time:'2016-05-01',
+                    title:'大连港亮相俄物流展',
+                    detail:'15公里时速上限，是快递三轮车普遍存在的软肋。一面是新生行业的发展要呵护，“一刀切”会带来较大影响；一面是不能不顾道路安全等发展底线，放任“野蛮生长”。监管部门和快递行业该如何公里时速上限，是快递三轮车普遍存在的软肋。一面是新生行业的发展要呵护，“保税区”会带来较大影响一......',
+                    link:'#'
+                },
+                {
+                    id:3,
+                    imgUrl:'images/news/img4.jpg',
+                    time:'2016-05-01',
+                    title:'邮寄万元沉香手串不翼而飞 快递公司称也很委屈',
+                    detail:'15公里时速上限，是快递三轮车普遍存在的软肋。一面是新生行业的发展要呵护，“一刀切”会带来较大影响；一面是不能不顾道路安全等发展底线，放任“野蛮生长”。监管部门和快递行业该如何公里时速上限，是快递三轮车普遍存在的软肋。一面是新生行业的发展要呵护，“保税区”会带来较大影响一......',
+                    link:'#'
+                },
+                {
+                    id:4,
+                    imgUrl:'images/news/img5.jpg',
+                    time:'2016-05-01',
+                    title:'大连港亮相俄物流展',
+                    detail:'15公里时速上限，是快递三轮车普遍存在的软肋。一面是新生行业的发展要呵护，“一刀切”会带来较大影响；一面是不能不顾道路安全等发展底线，放任“野蛮生长”。监管部门和快递行业该如何公里时速上限，是快递三轮车普遍存在的软肋。一面是新生行业的发展要呵护，“保税区”会带来较大影响一......',
+                    link:'#'
+                },
+                {
+                    id:5,
+                    imgUrl:'images/news/img6.jpg',
+                    time:'2016-05-01',
+                    title:'邮寄万元沉香手串不翼而飞 快递公司称也很委屈',
+                    detail:'15公里时速上限，是快递三轮车普遍存在的软肋。一面是新生行业的发展要呵护，“一刀切”会带来较大影响；一面是不能不顾道路安全等发展底线，放任“野蛮生长”。监管部门和快递行业该如何公里时速上限，是快递三轮车普遍存在的软肋。一面是新生行业的发展要呵护，“保税区”会带来较大影响一......',
+                    link:'#'
+                },
+                {
+                    id:6,
+                    imgUrl:'images/news/img7.jpg',
+                    time:'2016-05-01',
+                    title:'大连港亮相俄物流展',
+                    detail:'15公里时速上限，是快递三轮车普遍存在的软肋。一面是新生行业的发展要呵护，“一刀切”会带来较大影响；一面是不能不顾道路安全等发展底线，放任“野蛮生长”。监管部门和快递行业该如何公里时速上限，是快递三轮车普遍存在的软肋。一面是新生行业的发展要呵护，“保税区”会带来较大影响一......',
+                    link:'#'
+                }
+            ]
+        }
+    })
+</script>
+</body>
+</html>

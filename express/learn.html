@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="Keywords" content="">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,shrink-to-fit=no">
+    <title>学习中心</title>
+    <!-- html5.js for IE less than 9 -->
+    <!--[if lt IE 9]>
+    <script src="js/html5.js"></script>
+    <![endif]-->
+    <link href="css/reset.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/layout.css" rel="stylesheet">
+    <link href="css/H5-layout.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vue" type="application/javascript"></script>
+    <script src="js/components.js" type="application/javascript"></script>
+</head>
+
+<body>
+<div id="app">
+    <top-nav nav-index="4"></top-nav>
+    <div class="page-frame">
+        <banner>
+            <img src="images/learn/banner.jpg" slot="img">
+            <h2 slot="title">关于物流，你还想知道</h2>
+        </banner>
+        <div class="frame1200">
+            <div class="title-img" id="title1"><img src="images/learn/title1.png"> </div>
+            <ul class="learn-list">
+                <li>
+                    <i class="icon1"></i>
+                    <div>系统与业务精确匹配<br>完美贴合客户的需求</div>
+                </li>
+                <li>
+                    <i class="icon2"></i>
+                    <div>专业的系统<br>运营维护能力</div>
+                </li>
+                <li>
+                    <i class="icon3"></i>
+                    <div>多平台ERP对接<br>订单管理无缝对接</div>
+                </li>
+                <li>
+                    <i class="icon4"></i>
+                    <div>根据客户需求灵活<br>定制业务契合度高</div>
+                </li>
+            </ul>
+            <div class="title-img" id="title2"><img src="images/learn/title2.png"> </div>
+            <div class="learn-img"><img src="images/learn/img1.jpg"> </div>
+            <div class="title-img" id="title3"><img src="images/learn/title3.png"> </div>
+            <div class="learn-img"><img src="images/learn/img2.jpg"> </div>
+            <div class="title-img" id="title4"><img src="images/learn/title4.png"> </div>
+            <ul class="ques-list">
+                <li v-for="item in quesList">
+                    <a href="javascript:;" @click="doShow(item)"><i :class="item.showDetail ? 'icon-close':'icon-open'"></i></a>
+                    <h3>{{item.title}}</h3>
+                    <transition enter-active-class="animated fadeIn"
+                                leave-active-class="animated fadeOut">
+                        <div v-if="item.showDetail">{{item.detail}}</div>
+                    </transition>
+
+                </li>
+            </ul>
+            <div class="title-img" id="title5"><img src="images/learn/title5.png"> </div>
+            <ul class="ques-list help-list">
+                <li v-for="item in helpList">
+                    <a href="javascript:;" @click="doShow(item)"><i :class="item.showDetail ? 'icon-close':'icon-open'"></i></a>
+                    <h3>{{item.title}}</h3>
+                    <transition enter-active-class="animated fadeIn"
+                                leave-active-class="animated fadeOut">
+                        <div v-if="item.showDetail">{{item.detail}}</div>
+                    </transition>
+
+                </li>
+            </ul>
+            <div class="title-img" id="title6"><img src="images/learn/title6.png"> </div>
+            <div class="learn-img"><img src="images/learn/img3.jpg"> </div>
+        </div>
+    </div>
+    <footer-nav></footer-nav>
+</div>
+
+<script>
+    var app = new Vue({
+        el: '#app',
+        data:{
+            quesList:[
+                {
+                    showDetail:false,
+                    title:'进口物流怎么征收关税？',
+                    detail:'根据海关总署2010年43号公告及2012年15号公告规定，海关对个人邮递物品依法征收进口税，但应征进口税税额 在人民币50元以下（含50元）的，海关予以免税。超过50元起征点的，全额征收税款。个人邮递物品根据种类不同， 划分为10%、20%、30%、50%四档税率。（请参考进口知识中的行邮税率表）。'
+                },
+                {
+                    showDetail:false,
+                    title:'行邮税是由商家支付还是由收件人支付呢？',
+                    detail:'根据海关总署2010年43号公告及2012年15号公告规定，海关对个人邮递物品依法征收进口税，但应征进口税税额 在人民币50元以下（含50元）的，海关予以免税。超过50元起征点的，全额征收税款。个人邮递物品根据种类不同， 划分为10%、20%、30%、50%四档税率。（请参考进口知识中的行邮税率表）。'
+                },
+                {
+                    showDetail:false,
+                    title:'我是境外电商企业（包括HK注册企业），可以用国内保税仓发货么？',
+                    detail:'根据海关总署2010年43号公告及2012年15号公告规定，海关对个人邮递物品依法征收进口税，但应征进口税税额 在人民币50元以下（含50元）的，海关予以免税。超过50元起征点的，全额征收税款。个人邮递物品根据种类不同， 划分为10%、20%、30%、50%四档税率。（请参考进口知识中的行邮税率表）。'
+                },
+                {
+                    showDetail:false,
+                    title:'我是境内电商企业，可以用保税仓发货么？',
+                    detail:'根据海关总署2010年43号公告及2012年15号公告规定，海关对个人邮递物品依法征收进口税，但应征进口税税额 在人民币50元以下（含50元）的，海关予以免税。超过50元起征点的，全额征收税款。个人邮递物品根据种类不同， 划分为10%、20%、30%、50%四档税率。（请参考进口知识中的行邮税率表）。'
+                },
+                {
+                    showDetail:false,
+                    title:'来货前，我需要做哪些准备工作？',
+                    detail:'根据海关总署2010年43号公告及2012年15号公告规定，海关对个人邮递物品依法征收进口税，但应征进口税税额 在人民币50元以下（含50元）的，海关予以免税。超过50元起征点的，全额征收税款。个人邮递物品根据种类不同， 划分为10%、20%、30%、50%四档税率。（请参考进口知识中的行邮税率表）。'
+                },
+                {
+                    showDetail:false,
+                    title:'收件人需要提供身份证信息么？',
+                    detail:'根据海关总署2010年43号公告及2012年15号公告规定，海关对个人邮递物品依法征收进口税，但应征进口税税额 在人民币50元以下（含50元）的，海关予以免税。超过50元起征点的，全额征收税款。个人邮递物品根据种类不同， 划分为10%、20%、30%、50%四档税率。（请参考进口知识中的行邮税率表）。'
+                },
+                {
+                    showDetail:false,
+                    title:'我可以提供退换货服务给买家么？',
+                    detail:'根据海关总署2010年43号公告及2012年15号公告规定，海关对个人邮递物品依法征收进口税，但应征进口税税额 在人民币50元以下（含50元）的，海关予以免税。超过50元起征点的，全额征收税款。个人邮递物品根据种类不同， 划分为10%、20%、30%、50%四档税率。（请参考进口知识中的行邮税率表）。'
+                }
+            ],
+            helpList:[
+                {
+                    showDetail:false,
+                    title:'哪些物品不可以寄送？',
+                    detail:'在寄送货件前，请务必仔细查看是否是禁限寄物品，无法确定请咨询客服。禁寄物品列表1.易爆品：烟花、爆竹、军火、弹药、雷管、黑火药、闪光粉、照明弹、警示照明弹、硝酸甘油、火箭发动机、点火剂等：2.军用产品：枪支、武器子弹、刀具、尖锐......'
+                },
+                {
+                    showDetail:false,
+                    title:'热敏标签打印机设置帮助',
+                    detail:'在寄送货件前，请务必仔细查看是否是禁限寄物品，无法确定请咨询客服。禁寄物品列表1.易爆品：烟花、爆竹、军火、弹药、雷管、黑火药、闪光粉、照明弹、警示照明弹、硝酸甘油、火箭发动机、点火剂等：2.军用产品：枪支、武器子弹、刀具、尖锐......'
+                },
+                {
+                    showDetail:false,
+                    title:'如何计算运费',
+                    detail:'在寄送货件前，请务必仔细查看是否是禁限寄物品，无法确定请咨询客服。禁寄物品列表1.易爆品：烟花、爆竹、军火、弹药、雷管、黑火药、闪光粉、照明弹、警示照明弹、硝酸甘油、火箭发动机、点火剂等：2.军用产品：枪支、武器子弹、刀具、尖锐......'
+                },
+                {
+                    showDetail:false,
+                    title:'SFC不能发任何电池的国家名单',
+                    detail:'在寄送货件前，请务必仔细查看是否是禁限寄物品，无法确定请咨询客服。禁寄物品列表1.易爆品：烟花、爆竹、军火、弹药、雷管、黑火药、闪光粉、照明弹、警示照明弹、硝酸甘油、火箭发动机、点火剂等：2.军用产品：枪支、武器子弹、刀具、尖锐......'
+                }
+            ]
+        },
+        methods:{
+            doShow:function(item){
+                item.showDetail = !item.showDetail;
+            }
+        }
+    })
+</script>
+</body>
+</html>

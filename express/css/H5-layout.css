@@ -1,0 +1,167 @@
+@media screen and (max-width: 1200px) {
+    .frame1200{ width: 100%; padding: 0 3%;}
+
+    .top-nav{ height: auto; padding: 10px 0;}
+    .top-nav .logo{ width: 30%; margin-top: 0;}
+    .top-nav .logo img{ width: 100%;}
+    .top-nav nav{ margin-top: 8px; text-align: right;}
+    .top-nav nav .slide-bar{ display: none;}
+    .top-nav nav>a{ display: inline-block;}
+    .top-nav .nav-list{ width: 170px; position: absolute; top: 135%; right: 3%; background-color: #fff; border-radius: 6px; border: 1px solid #333; overflow: hidden;}
+    .top-nav .nav-list>li{ float: none; text-align: center; border-bottom: 1px solid #333; margin-right: 0; padding: 15px 20px;}
+    .top-nav .nav-list>li:last-child{ border-bottom: none;}
+    .top-nav .nav-list>li>a{ font-size: 16px;}
+    .top-nav .nav-list>li:hover .second-list{ display: none;}
+
+    .footer>.frame1200{ height: auto; overflow: hidden}
+    .footer .line2{ margin: 10px 0;}
+
+
+    /*
+        index
+    */
+    #indexBanner .swiper-slide .content .title{ font-size: 24px; margin-bottom: 30px;}
+    #indexBanner .swiper-slide .content .sub-title{ font-size: 16px; margin-bottom: 50px;}
+    #indexBanner .swiper-slide .content a{ display: inline-block; width: 50%;}
+    #indexBanner .swiper-slide .content a img{ width: 100%;}
+    #indexBanner .slide-btn{ display: none;}
+    #indexBanner .slide-tag li{ width: 30px; height: 6px;}
+
+    /*
+        express-out
+    */
+    .page-frame{ margin: 56px 0;}
+
+    .banner .content h2{ font-size: 24px;}
+    .banner .content div{ font-size: 14px; margin-top: 15px;}
+
+    .title-img{ margin: 40px 0 20px 0;}
+    .title-img img{ width: 50%;}
+
+    .expout-list1 li{ width: 31%; height: auto;}
+    .expout-list1 li img{ width: 100%;}
+    .expout-list1 li figcaption{ font-size: 18px; margin: 10px 0;}
+    .expout-list1 li div{ font-size: 12px; margin: 0;}
+
+    .expout-service{ margin-top: 20px; flex-wrap: wrap; flex-direction: column-reverse;}
+    .expout-service img{ width: 100%;}
+    .expout-service>div{ margin-top: 10px;}
+    .expout-service div h3{ font-size: 18px;}
+    .expout-service div p{ font-size: 14px; margin: 10px 0 0 0;}
+
+    .expout-air img{ display: none;}
+    .expout-air>div{ width: 100%; position: static; padding: 0; top: 0; border: none;}
+    .expout-air div h3{ font-size: 18px; margin-bottom: 10px;}
+    .expout-air div p{ font-size: 14px; margin-bottom: 14px; word-break: break-all;}
+
+    .expout-intern{ flex-wrap: wrap; flex-direction: column-reverse;}
+    .expout-intern img{ width: 100%;}
+    .expout-intern>.content{ width: 100%;}
+    .expout-intern>.content p{ width: auto; margin: 10px; line-height: 1.5; font-size: 14px;}
+    .expout-intern>.content ul{ width: auto; margin: 10px 10px 10px 30px;}
+    .expout-intern>.content ul li{ margin-bottom: 15px;}
+    .expout-intern>.content ul li h3{ margin-bottom: 10px;}
+    .expout-intern>.content ul li:before{ width: 10px; height: 10px; top: 6px;}
+
+    .expout-direct{ font-size: 16px;}
+
+    .expout-service-img1{ margin-top: 40px;}
+
+    .expout-fbahead{ font-size: 16px;}
+    .expout-fbahead p{ margin-bottom: 15px;}
+
+    .expout-list2{ margin-top: 40px; flex-wrap: wrap; flex-direction: column-reverse;}
+    .expout-list2 img{ width: 100%;}
+    .expout-list2 ul li.head{ font-size: 18px; margin-bottom: 15px;}
+    .expout-list2 ul li{ font-size: 14px; margin-bottom: 10px;}
+
+    .expout-oversea div{ font-size: 16px; margin-bottom: 20px;}
+    .expout-oversea li{ width: 31%; height: auto;}
+    .expout-oversea li img{ width: 100%;}
+
+    /*
+        express-in
+    */
+    .expin-frame1{ flex-wrap: wrap;}
+    .expin-frame1 img{ width: 100%; display: none;}
+    .expin-frame1>div{ padding: 0; margin: 10px 0;}
+    .expin-frame1>div p{ font-size: 14px; margin-bottom: 15px;}
+    .expin-frame1>div div{ margin-bottom: 15px; font-size: 14px; line-height: 1.5;}
+    .expin-frame1>div div span{ font-size: 16px;}
+
+    .expin-list1 h3{ font-size: 18px; margin-bottom: 25px;}
+    .expin-list1 ul{ flex-wrap: wrap;}
+    .expin-list1 ul li{ width: 48%; margin-bottom: 20px; height: auto;}
+    .expin-list1 ul li i{ width: 80px; height: 80px; background-size: 100% 100%; margin-top: 20px;}
+    .expin-list1 ul li>div{ width: 100%; min-height: 100px; height: auto; margin:10px 0 0 0; padding: 0; overflow: hidden;}
+    .expin-list1 ul li>div h4{ font-size: 16px; margin-top: 10px; margin-bottom: 0;}
+    .expin-list1 ul li>div div{ font-size: 12px; padding:10px; margin: 0;}
+
+    .expin-frame2{ margin-top: 40px; flex-wrap: wrap; flex-direction: column-reverse;}
+    .expin-frame2 .imgs{ width: 100%;}
+    .expin-frame2 .imgs img{ width: 49%;}
+    .expin-frame2 .imgs img:last-child{margin-top: 2%;}
+    .expin-frame2 .content{ width: 100%; margin-top: 10px;}
+    .expin-frame2 .content h3{ font-size: 20px; margin-bottom: 10px;}
+    .expin-frame2 .content h4{ font-size: 16px; margin: 0 0 10px 0;}
+    .expin-frame2 .content div{ font-size: 14px; margin: 0;}
+
+    /*
+        news
+    */
+    .new-item{ margin-top: 40px;}
+    .new-item .img{ width: 100%; margin-right: 0;}
+    .new-item .img img{ width: 100%;}
+    .new-item .content{ width: 100%; margin: 10px 0 0 0;}
+    .new-item .content .time{ font-size: 12px;}
+    .new-item .content .title{ font-size: 18px; margin-bottom: 5px;}
+    .new-item .content .detail{ font-size: 14px; margin-bottom: 5px;}
+    .new-item .content a{ font-size: 14px;}
+
+    /*
+        learn
+    */
+    .learn-list{ margin-bottom: 100px; flex-wrap: wrap;}
+    .learn-list li{ width: 49%; height: auto; margin-bottom: 20px;}
+    .learn-list li i{ width: 80px; height: 80px; background-size: 100% 100%;}
+    .learn-list li div{ width: 100%; height: auto; padding: 75px 0 10px 0; font-size: 14px;}
+
+    .learn-img{ margin-bottom: 50px;}
+    .learn-img img{ width: 100%;}
+
+    .ques-list li{ padding: 15px 0;}
+    .ques-list li a{ top: 15px;}
+    .ques-list li a i{ width: 22px; height: 22px; background-size: 100%;}
+    .ques-list li h3{ font-size: 18px; padding-right: 25px;}
+    .ques-list li div{ margin-top: 10px; font-size: 14px; background-position: 0 0; background-size: 25px; padding-left: 30px;}
+    .help-list{ margin-bottom: 50px;}
+    .help-list h3{ background-size: 25px; background-position: 0 5px; padding-left: 30px;}
+    .help-list li a{ top: 20px;}
+
+    /*
+        about
+    */
+    .about-content1{ font-size: 16px; line-height: 1.5;}
+    .about-list1{ margin-top: 20px; flex-wrap: wrap;}
+    .about-list1 li{ width: 48%; height: auto; margin-bottom: 20px;}
+    .about-list1 li i{ width: 100px; height: 100px; background-size: 100%;}
+    .about-list1 li h3{ font-size: 18px; margin: 10px 0;}
+    .about-list1 li div{ width: 100%; font-size: 14px; }
+
+    .about-list2{ flex-wrap: wrap; justify-content: center;}
+    .about-list2 li{ width: 48%; height: auto; margin: 0 1% 2% 1%;}
+    .about-list2 li img{ width: 100%;}
+    .about-list2 li h4{ font-size: 16px; margin-top: 15px; margin-bottom: 15px;}
+    .about-list2 li div p{ font-size: 12px; margin: 0 4px;}
+
+    .about-list3 li{ width: 24%; margin-bottom: 2%;}
+    .about-list3 li img{ width: 100%;}
+
+    .about-frame .content{ margin-bottom: 30px;}
+    .about-frame .content>.img{ display: none;}
+    .about-frame .content .infor h4{ font-size: 16px; margin-bottom: 15px;}
+    .about-frame .content .infor div{ margin-bottom: 15px;}
+    .about-frame .content .infor div p{ font-size: 14px; margin-bottom: 6px;}
+    .about-frame .content .infor div p.icon-house{ background-size: 14px;}
+    .about-frame .content .infor div p.icon-tel{ background-size: 14px;}
+}

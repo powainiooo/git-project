@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,shrink-to-fit=no">
+    <meta name="Keywords" content="">
+    <meta name="description" content="">
+    <title>首页</title>
+    <!-- html5.js for IE less than 9 -->
+    <!--[if lt IE 9]>
+    <script src="js/html5.js"></script>
+    <![endif]-->
+    <link href="css/reset.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/layout.css" rel="stylesheet">
+    <link href="css/H5-layout.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vue" type="application/javascript"></script>
+    <script src="js/components.js" type="application/javascript"></script>
+</head>
+
+<body>
+    <div id="app">
+        <top-nav nav-index="0"></top-nav>
+        <div class="swiper-container" id="indexBanner" ref="indexBanner">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide" style="background-image: url('images/index/index-banner1.jpg')">
+                    <div class="content">
+                        <div class="title">毕业物流 流通全球</div>
+                        <div class="sub-title">致力于为全球中小型电商企业提供世界一流运输服务</div>
+                        <a href="#"><img src="images/index/search.png"> </a>
+                    </div>
+                </div>
+                <div class="swiper-slide" style="background-image: url('images/index/index-banner2.jpg')">
+                    <div class="content">
+                        <div class="title">更低成本 更高服务</div>
+                        <div class="sub-title">货代、代购、集客、中小跨境电商的物流伙伴</div>
+                        <a href="#"><img src="images/index/search.png"> </a>
+                    </div>
+                </div>
+            </div>
+            <a href="javascript:;" class="slide-btn slide-btn-left" @click="goleft"><img src="images/index/arrow-left.png"> </a>
+            <a href="javascript:;" class="slide-btn slide-btn-right" @click="goright"><img src="images/index/arrow-right.png"> </a>
+            <ul class="slide-tag">
+                <li v-for="item in 2" :class="activeIndex == item ? 'active' : ''"></li>
+            </ul>
+        </div>
+        <footer-nav></footer-nav>
+    </div>
+
+
+<link href="css/swiper.min.css" rel="stylesheet">
+<script src="js/swiper.min.js" type="application/javascript"></script>
+
+<script>
+//    var mySwiper = new Swiper('.swiper-container',{
+//        cssWidthAndHeight:true
+//    });
+    var app = new Vue({
+        el: '#app',
+        data:{
+            activeIndex:1,
+            mySwiper:Object
+        },
+        mounted:function(){
+            let self = this;
+            self.$refs.indexBanner.style.height = window.innerHeight +'px';
+            self.mySwiper = new Swiper('#indexBanner',{
+                onSlideChangeStart: function(swiper){
+                    self.activeIndex = swiper.activeIndex+1;
+                }
+            });
+        },
+        methods:{
+            goleft:function(){
+                console.log(this.mySwiper)
+                this.mySwiper.swipePrev();
+            },
+            goright:function(){
+                this.mySwiper.swipeNext();
+            }
+        }
+    })
+</script>
+</body>
+</html>

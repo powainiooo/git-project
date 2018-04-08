@@ -16,7 +16,7 @@ Vue.component('top-nav',{
                     <li v-for="(item,index) in navData" :class="navIndex == index ? 'active':''">
                         <a :href="item.link">{{item.name}}</a>
                         <ul class="second-list" v-if="item.list.length != 0">
-                            <li v-for="childitem in item.list"><a :href="childitem.link">{{childitem.name}}</a> </li>
+                            <li v-for="childitem in item.list"><a :href="childitem.link" @click="setScrollTop">{{childitem.name}}</a> </li>
                         </ul>
                     </li>
                 </ul>
@@ -140,12 +140,12 @@ Vue.component('top-nav',{
         }
     },
     mounted(){
-        console.log(this.navIndex);
         let self = this;
         window.onresize = function(){
             self.resize();
         };
         self.resize();
+        self.setScrollTop();
     },
     computed:{
         left(){
@@ -180,6 +180,14 @@ Vue.component('top-nav',{
             }else{
                 this.showMenu = true;
             }
+        },
+        setScrollTop(){
+            setTimeout(function(){
+                let st = document.documentElement.scrollTop;
+                console.log(st);
+                document.body.scrollTop = st - 120;
+                document.documentElement.scrollTop = st - 120;
+            },100)
         }
     }
 });
@@ -195,7 +203,7 @@ Vue.component('footer-nav',{
                 <div><img src="images/index/logo-footer.png"> </div>
                 <p>Logistic was founded to make a mark in London’s Clearing and Forwarding industry. Logistic started its operations in all the <br>major cities in Europe with the aim to offer the bestin logistics services.</p>
             </div>
-            <div class="line2">Copyright © 2012-2015 Logistics Theme by Stylemix Themes. All rights reserved.</div>
+            <div class="line2">Copyright © 2018-2021 by B Logistico . All rights reserved.</div>
         </div>
     </footer>`,
     name:'FooterNav',

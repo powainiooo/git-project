@@ -65,6 +65,7 @@
             let self = this;
             self.$refs.indexBanner.style.height = window.innerHeight +'px';
             self.mySwiper = new Swiper('#indexBanner',{
+                autoplay:5000,
                 onSlideChangeStart: function(swiper){
                     self.activeIndex = swiper.activeIndex+1;
                 }

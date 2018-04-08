@@ -183,7 +183,7 @@ Vue.component('top-nav',{
         },
         setScrollTop(){
             setTimeout(function(){
-                let st = document.documentElement.scrollTop;
+                let st = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
                 console.log(st);
                 document.body.scrollTop = st - 120;
                 document.documentElement.scrollTop = st - 120;

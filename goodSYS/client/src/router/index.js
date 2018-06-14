@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import goods from '@/views/goods'
-import goodsin from '@/views/goodsin'
+import goodsnew from '@/views/goodsnew'
 import users from '@/views/users'
 
 Vue.use(Router)
@@ -18,9 +18,9 @@ export default new Router({
       component: goods
     },
     {
-      path: '/goodsin',
-      name: 'goodsin',
-      component: goodsin
+      path: '/goodsnew',
+      name: 'goodsnew',
+      component: goodsnew
     },
     {
       path: '/users',

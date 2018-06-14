@@ -17,7 +17,7 @@
             </MenuItem>
         </Menu>
         <div class="cond-line">
-            <Button type="primary">新增</Button>
+            <router-link to="/goodsnew"><Button type="primary">新增</Button></router-link>
         </div>
         <Table border :columns="columns" :data="data6"></Table>
         <Page :total="100" show-elevator show-total class="mt15"></Page>

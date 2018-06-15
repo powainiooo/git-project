@@ -19,8 +19,25 @@
         <div class="cond-line">
             <router-link to="/goodsnew"><Button type="primary">新增</Button></router-link>
         </div>
-        <Table border :columns="columns" :data="data6"></Table>
+        <Table border :columns="columns" :data="listData"></Table>
         <Page :total="100" show-elevator show-total class="mt15"></Page>
+
+        <Modal
+            v-model="showInModal"
+            title="入库"
+            @on-ok="doPostIn">
+            <Form :model="formItem" :label-width="80">
+                <FormItem label="数量：">
+                    <InputNumber :min="1" v-model="formDataIn.nums"></InputNumber>
+                </FormItem>
+                <FormItem label="日期：">
+                    <DatePicker type="date" placeholder="选择日期" v-model="formDataIn.date"></DatePicker>
+                </FormItem>
+                <FormItem label="描述：">
+                    <Input v-model="formDataIn.descript" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="描述细节……"></Input>
+                </FormItem>
+            </Form>
+        </Modal>
     </div>
 </template>
 
@@ -96,7 +113,7 @@
                         }
                     }
                 ],
-                data6: [
+                listData: [
                     {
                         name: 'John Brown',
                         age: 18,
@@ -117,7 +134,13 @@
                         age: 26,
                         address: '100'
                     }
-                ]
+                ],
+                showInModal:true,
+                formDataIn:{
+                    nums:0,
+                    date:'',
+                    descript:''
+                }
             }
         },
         methods:{
@@ -127,6 +150,9 @@
                 }else if(name == 2){
                     this.$router.push('/users')
                 }
+            },
+            doPostIn(){
+
             }
         }
     }

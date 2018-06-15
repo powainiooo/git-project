@@ -19,7 +19,7 @@
                 <InputNumber :min="1" v-model="formItem.nums"></InputNumber>
             </FormItem>
             <FormItem label="产品描述">
-                <Input v-model="formItem.descrip" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="请输入产品描述"></Input>
+                <Input v-model="formItem.descript" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="请输入产品描述"></Input>
             </FormItem>
             <FormItem>
                 <Button type="primary">新增</Button>
@@ -38,7 +38,7 @@
                     name:'',
                     type:'',
                     nums:'',
-                    descrip:''
+                    descript:''
                 }
             }
         },

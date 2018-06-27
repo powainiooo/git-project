@@ -16,9 +16,36 @@
             </MenuItem>
         </Menu>
         <div class="cond-line">
-            <Button type="primary">新增</Button>
+            <router-link to="/users/new"><Button type="primary">新增</Button></router-link>
         </div>
-        <Table border :columns="columns" :data="data6"></Table>
+        <Table border :columns="columns" :data="listData"></Table>
+
+        <!-- 新增消费记录 -->
+        <Modal
+            v-model="consume.isShow"
+            title="新增消费记录"
+            width="600"
+            ok-text="新增"
+            @on-ok="doAddConsume">
+            <Form :model="consume.formData" :label-width="100">
+                <FormItem label="客户：">
+                    <Input v-model="consume.formData.name" readonly disabled style="width: 200px;"></Input>
+                </FormItem>
+                <FormItem label="产品：">
+                    <CheckboxGroup v-model="consume.formData.goods">
+                        <Checkbox label="香蕉"></Checkbox>
+                        <Checkbox label="苹果"></Checkbox>
+                        <Checkbox label="西瓜"></Checkbox>
+                    </CheckboxGroup>
+                </FormItem>
+                <FormItem label="时间：">
+                    <DatePicker type="datetime" placeholder="选择时间" style="width: 200px;" v-model="consume.formData.date"></DatePicker>
+                </FormItem>
+                <FormItem label="描述：">
+                    <Input v-model="consume.formData.descript" :rows="5" type="textarea" placeholder="消费记录详情描述……"></Input>
+                </FormItem>
+            </Form>
+        </Modal>
     </div>
 </template>
 
@@ -38,11 +65,35 @@
                     },
                     {
                         title: '购买产品',
-                        key: 'goods'
+                        key: 'goods',
+                        render: (h,params) => {
+                            let str = '',arr = params.row.goods;
+                            for(let [index,item] of arr.entries()){
+                                str += item ;
+                                if(index != arr.length - 1){
+                                    str += '，' ;
+                                }
+                            }
+                            if(arr.length == 0) str = '无';
+                            return h('a',{
+                                props:{
+                                    href:'javascript:;'
+                                },
+                                on:{
+                                    click: () => {
+
+                                    }
+                                }
+                            },str)
+                        }
                     },
                     {
-                        title: '充值',
+                        title: '总充值',
                         key: 'money'
+                    },
+                    {
+                        title: '余额',
+                        key: 'remainder'
                     },
                     {
                         title: '欠款',
@@ -98,15 +149,25 @@
                         }
                     }
                 ],
-                data6: [
+                listData: [
                     {
                         name: '用户1',
                         phone: '13823729522',
-                        goods: '产品1',
+                        goods: ['产品1','产品2'],
                         money:100,
+                        remainder:100,
                         arrears:100
                     }
-                ]
+                ],
+                consume:{
+                    isShow:true,
+                    formData:{
+                        name:'dd',
+                        goods:[],
+                        date:'',
+                        descript:''
+                    }
+                }
             }
         },
         methods:{
@@ -116,6 +177,9 @@
                 }else if(name == 2){
                     this.$router.push('/users')
                 }
+            },
+            doAddConsume(){
+
             }
         }
     }

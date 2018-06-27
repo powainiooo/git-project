@@ -1,5 +1,5 @@
 <style>
-
+.mt15{ margin-top: 15px;}
 </style>
 
 <template>
@@ -14,26 +14,22 @@
                 客户管理
             </MenuItem>
         </Menu>
-        <Form :model="formItem" :label-width="80" class="mt15">
-            <FormItem label="产品名称">
-                <Input v-model="formItem.name" placeholder="请输入产品名称"></Input>
+        <Form :model="formItem" :label-width="80" class="mt15" style="width: 600px;">
+            <FormItem label="用户名称">
+                <Input v-model="formItem.name" placeholder="请输入用户名称"></Input>
             </FormItem>
-            <FormItem label="产品分类">
-                <Select v-model="formItem.type">
-                    <Option value="beijing">New York</Option>
-                    <Option value="shanghai">London</Option>
-                    <Option value="shenzhen">Sydney</Option>
-                </Select>
+            <FormItem label="电话号码">
+                <Input v-model="formItem.phone" placeholder="请输入电话号码"></Input>
             </FormItem>
-            <FormItem label="入库数量">
-                <InputNumber :min="1" v-model="formItem.nums"></InputNumber>
+            <FormItem label="充值">
+                <InputNumber :min="0" v-model="formItem.recharge"></InputNumber>
             </FormItem>
-            <FormItem label="产品描述">
-                <Input v-model="formItem.descript" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="请输入产品描述"></Input>
+            <FormItem label="欠款">
+                <InputNumber :min="0" v-model="formItem.arrears"></InputNumber>
             </FormItem>
             <FormItem>
                 <Button type="primary">新增</Button>
-                <router-link to="/goods"><Button type="ghost" style="margin-left: 8px">取消</Button></router-link>
+                <router-link to="/users"><Button type="ghost" style="margin-left: 8px">取消</Button></router-link>
             </FormItem>
         </Form>
     </div>
@@ -46,9 +42,9 @@
             return{
                 formItem:{
                     name:'',
-                    type:'',
-                    nums:1,
-                    descript:''
+                    phone:'',
+                    recharge:0,
+                    arrears:0
                 }
             }
         },
@@ -59,7 +55,7 @@
                 }else if(name == 2){
                     this.$router.push('/users')
                 }
-            },
+            }
         }
     }
 

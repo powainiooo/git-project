@@ -12,9 +12,9 @@
     <![endif]-->
     <link href="css/reset.css" rel="stylesheet">
     <link href="css/layout.css" rel="stylesheet">
-    <link href="css/swiper.min.css" rel="stylesheet">
+    <link href="css/idangerous.swiper2.7.6.css" rel="stylesheet">
     <script src="js/jquery-1.9.1.min.js"></script>
-    <script src="js/swiper.min.js"></script>
+    <script src="js/idangerous.swiper2.7.6.min.js"></script>
     <script>
         var imgIndex = 0;
         function loadImg(){
@@ -199,7 +199,7 @@
     </div>
 </section>
 
-<div class="index-container" id="slide1">
+<div class="index-container swiper-container" id="slide1">
     <div class="swiper-wrapper">
         <div class="swiper-slide bg1">
             <div class="p1-content">
@@ -307,10 +307,9 @@
     });
 
     var mySwiper1 = new Swiper ('#slide1', {
-        direction: 'vertical',
-        slidesPerView: 'auto',
+        mode: 'vertical',
         simulateTouch : false,
-        mousewheel:false,
+        mousewheelControl :false,
         speed:1000
     });
     var slideIndex = 0;
@@ -343,7 +342,7 @@
                 phone.removeClass('phone-right');
                 phone.addClass('phone-bottom');
             }
-            mySwiper1.slideNext();
+            mySwiper1.swipeNext();
         }else if(direc == 'up'){
             if(slideIndex > 0) slideIndex --;
             if(slideIndex == 0){
@@ -363,7 +362,7 @@
                 phone.addClass('phone-right2');
                 phone.removeClass('phone-bottom');
             }
-            mySwiper1.slidePrev();
+            mySwiper1.swipePrev();
         }
         dotMove();
         setTimeout(function(){

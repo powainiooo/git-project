@@ -3,19 +3,6 @@
     .cond-line{ margin:15px 0; display: flex; justify-content: space-between; }
     .mt15{ margin-top: 15px;}
 
-    .share-frame{ position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 1000; background-color: rgba(0,0,0,0.5); display: flex; justify-content: center; align-items: center;}
-    .share-frame .share-content{ width: 720px; height: 330px; background-color: #fff; border-radius: 5px; text-align: center;}
-    .share-frame .share-content ul{ display: flex; justify-content: center; margin-top: 70px; list-style: none;}
-    .share-frame .share-content ul li{ margin: 0 10px; position: relative;}
-    .share-frame .share-content ul li div{ position: absolute; top: 60px; left: -25px; display: none;}
-    .share-frame .share-content ul li:hover div{ display: block;}
-    .share-frame .share-content ul li a{ width: 54px; height: 54px; display: inline-block; background: url('../assets/icon-logo.png') no-repeat;}
-    .share-frame .share-content ul li .icon-qq{ background-position: 0 0;}
-    .share-frame .share-content ul li .icon-wechat{ background-position: -54px 0;}
-    .share-frame .share-content ul li .icon-sina{ background-position: -108px 0;}
-    .share-frame .share-content ul li .icon-douban{ background-position: -162px 0;}
-    .share-frame .share-content ul li .icon-qzone{ background-position: -216px 0;}
-    .share-frame .share-content ul li .icon-renren{ background-position: -270px 0;}
 </style>
 
 <template>
@@ -94,22 +81,7 @@
             <Table border :columns="dataOut.columns" :data="dataOut.listData"></Table>
         </Modal>
 
-        <div class="share-frame" v-if="isShowShare" @click="hideShare">
-            <div class="share-content" @click.stop="isShowShare = true">
-                <div style="margin-top: 50px;"><img src="@/assets/title-share.jpg"> </div>
-                <ul>
-                    <li><a href="javascript:;" class="icon-qq" @click="doShareQQ"></a> </li>
-                    <li>
-                        <a href="javascript:;" class="icon-wechat"></a>
-                        <div><img src="@/assets/link-wechat.png" width="100"> </div>
-                    </li>
-                    <li><a href="javascript:;" class="icon-sina" @click="doShareSina"></a> </li>
-                    <li><a href="javascript:;" class="icon-douban" @click="doShareDouban"></a> </li>
-                    <li><a href="javascript:;" class="icon-qzone" @click="doShareQzone"></a> </li>
-                    <li><a href="javascript:;" class="icon-renren" @click="doShareRenren"></a> </li>
-                </ul>
-            </div>
-        </div>
+
     </div>
 </template>
 
@@ -314,26 +286,10 @@
                 pages:{
                     number:1,
                     total:10
-                },
-                isShowShare:false
+                }
             }
         },
         methods:{
-            doShareQQ(){
-                window.open('http://connect.qq.com/widget/shareqq/index.html?title="厦门盘古人品牌管理有限公司 大鲲"&url=http://www.dakunchina.com/index.php')
-            },
-            doShareSina(){
-                window.open('http://service.weibo.com/share/share.php?title="厦门盘古人品牌管理有限公司 大鲲"&url=http://www.dakunchina.com/index.php')
-            },
-            doShareDouban(){
-                window.open('http://www.douban.com/recommend/?title="厦门盘古人品牌管理有限公司 大鲲"&url=http://www.dakunchina.com/index.php')
-            },
-            doShareQzone(){
-                window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey??title="厦门盘古人品牌管理有限公司 大鲲"&url=http://www.dakunchina.com/index.php')
-            },
-            doShareRenren(){
-                window.open('http://share.renren.com/share/buttonshare.do?title="厦门盘古人品牌管理有限公司 大鲲"&link=http://www.dakunchina.com/index.php')
-            },
             hideShare(){
                 this.isShowShare = false;
             },

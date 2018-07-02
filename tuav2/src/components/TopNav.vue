@@ -1,33 +1,54 @@
 <style>
-    .top-nav{ width: 100%; position: fixed; top: 0; left: 0; z-index: 1000;}
-    .top-nav .logo{ float: left; margin: 50px 0 0 75px; cursor: default;}
-    .top-nav .btn{ float: right; margin: 50px 60px 0 0;}
-    .top-nav .nav{ float: right; margin-right: 100px; margin-top: 40px;}
-    .top-nav .nav li{ float: left; margin-right: 30px;font-size: 12px; color: rgba(255,255,255,0.5); line-height: 2; cursor: pointer;}
-    .top-nav .nav li span{font-family: 'trajanPro';}
-    .top-nav .nav li.active,.top-nav .nav li:hover{ color: #bc9e44;}
+    .top-nav{ min-width: 1440px; width: 100%; position: fixed; top: 0; left: 0; z-index: 1000; background-color: #fff;}
+    .top-nav section{ width: 1440px; margin: 0 auto; border-bottom: 2px solid #ededed;}
+    .top-nav section .logo{ margin: 20px 0 15px 0; float: left;}
+    .top-nav section nav{ float: left; margin-left: 60px;}
+    .top-nav section nav .first-level{ display: flex; margin-top: 23px;}
+    .top-nav section nav .first-level>li{ margin-right: 30px; position: relative; padding-bottom: 18px;}
+    .top-nav section nav .first-level>li>a{ font-size: 14px; color: #010101;  text-align: center; display: block; font-family: 'hkLight';}
+    .top-nav section nav .first-level>li>a span{ transform: scale(0.7,0.7) translate(0,-6px); display:block; font-family: 'hkMedium';}
+    .top-nav section nav .first-level>li .second-level{ width: 90px; background-color: #000; position: absolute; top:56px; left: 50%; margin-left: -45px; display: none;}
+    .top-nav section nav .first-level>li:hover .second-level{ display: block;}
+    .top-nav section nav .first-level>li .second-level:before{ content: ''; width: 25px; height: 8px; background: url('../assets/images/arrow1.png') no-repeat; position: absolute; top: -7px; left: 32px;}
+    .top-nav section nav .first-level>li .second-level li{ margin: 0 10px; border-bottom: 1px solid #fff;}
+    .top-nav section nav .first-level>li .second-level li:last-child{ border-bottom: none;}
+    .top-nav section nav .first-level>li .second-level li a{ padding: 10px 0; color: #fff; text-align: center; display: block;}
 </style>
 
 <template>
-    <div class="top-nav" :class="showNav ? 'bg1' : ''">
-        <router-link to="" class="logo"><img src="@/assets/images/logofix1.png"></router-link>
-        <router-link to="/index" class="btn"><img src="@/assets/images/btn-close.png"></router-link>
-        <ul class="nav" v-if="showNav">
-            <li :class="cateID == 0 ? 'active':''"
-                @click="getList(0)"><span>ALL</span><br>全部</li>
-            <li v-for="item in cateList"
-                :class="cateID == item.id ? 'active':''"
-                @click="getList(item.id)">
-                <span>{{item.code}}</span><br>{{item.cname}}
-            </li>
-        </ul>
-    </div>
+    <header class="top-nav">
+        <section class="clearfix">
+            <div class="logo"><img src="../assets/images/logo.png" width="115"> </div>
+            <nav>
+                <ul class="first-level">
+                    <li>
+                        <a href="#">音樂<span>MUSIC</span></a>
+                        <ul class="second-level">
+                            <li><a href="#">海報</a> </li>
+                            <li><a href="#">HD</a> </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">平面<span>GRAPHIC</span></a>
+                    </li>
+                    <li>
+                        <a href="#">繪畫<span>PAINTING</span></a>
+                    </li>
+                    <li>
+                        <a href="#">影視<span>VIDEO</span></a>
+                    </li>
+                    <li>
+                        <a href="#">關於<span>ABOUT</span></a>
+                    </li>
+                </ul>
+            </nav>
+        </section>
+    </header>
 </template>
 
 <script type="es6">
     export default{
         name: 'App',
-        props:['showNav'],
         data(){
             return{
                 cateID:0

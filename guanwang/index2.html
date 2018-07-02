@@ -201,12 +201,18 @@
 
 <div class="index-container swiper-container" id="slide1">
     <div class="swiper-wrapper">
-        <div class="swiper-slide bg1">
+        <div class="swiper-slide wheight bg1">
             <div class="p1-content">
                 <div><img onload="loadImg()" src="images/intro1.png"></div>
                 <div class="code-frame">
-                    <img onload="loadImg()" src="images/code-frame.png">
-                    <div class="code" id="codeImg"><img onload="loadImg()" src="images/code.png"> </div>
+                    <div class="code">
+                        <img onload="loadImg()" src="images/Android_code.png">
+                        <span>Android 下载</span>
+                    </div>
+                    <div class="code ios-img">
+                        <img onload="loadImg()" src="images/iPhone_code.png">
+                        <span>IOS 下载</span>
+                    </div>
                 </div>
             </div>
             <div class="bg-circle">
@@ -220,19 +226,19 @@
                 <img onload="loadImg()" src="images/arrow-down2.png" class="arrow">
             </div>
         </div>
-        <div class="swiper-slide p2-page">
+        <div class="swiper-slide wheight p2-page">
             <div class="title"><img onload="loadImg()" src="images/title.png"> </div>
             <div class="p2-container bg2">
                 <div class="intro2" id="intro2"><img onload="loadImg()" src="images/intro2.png"> </div>
             </div>
         </div>
-        <div class="swiper-slide bg3">
+        <div class="swiper-slide wheight bg3">
             <div class="intro3" id="intro3"><img onload="loadImg()" src="images/intro3.png"> </div>
         </div>
-        <div class="swiper-slide bg4">
+        <div class="swiper-slide wheight bg4">
             <div class="intro4" id="intro4"><img onload="loadImg()" src="images/intro4.png"> </div>
         </div>
-        <div class="swiper-slide bg5">
+        <div class="swiper-slide wheight bg5">
             <div class="intro5" id="intro5"><img onload="loadImg()" src="images/intro5.png"> </div>
         </div>
         <div class="swiper-slide footer" id="footer">
@@ -254,6 +260,8 @@
             "left":phoneFrameLeft,
             "top":phoneFrameTop
         });
+        var wh = window.innerHeight||(document.documentElement&&document.documentElement.clientHeight)||document.body.clientHeight;
+        $("#slide1 .wheight").height(wh);
     }
     resize();
 
@@ -300,9 +308,9 @@
     });
 
     $("#btnDownload").on('click',function(){
-        $("#codeImg").addClass('code-move');
+        $(".code-frame .code").addClass('code-move');
         setTimeout(function(){
-            $("#codeImg").removeClass('code-move');
+            $(".code-frame .code").removeClass('code-move');
         },900)
     });
 
@@ -310,7 +318,14 @@
         mode: 'vertical',
         simulateTouch : false,
         mousewheelControl :false,
-        speed:1000
+        slidesPerView: 'auto',
+        speed:1000,
+        onSlideChangeStart: function(swiper){
+            mySwiper1.animating = true
+        },
+        onSlideChangeEnd: function(swiper){
+            mySwiper1.animating = false
+        }
     });
     var slideIndex = 0;
     $('#slide1').mousewheel(function (event, delta) {

@@ -15,11 +15,15 @@ body{ min-width: 1200px; background: url("../images/bg.jpg") repeat;}
 .index-container .bg3{ background-image: url('../images/banner3.jpg');}
 .index-container .bg4{ background-image: url('../images/banner4.jpg');}
 .index-container .bg5{ background-image: url('../images/banner5.jpg');}
-.index-container .footer{ height: 70px; font-size: 14px; color: rgba(255,255,255,0.3); display: flex; align-items: center; justify-content: center;}
+.index-container .footer{ height: 70px; font-size: 14px; color: #7f7f80; text-align: center;}
+.index-container .footer span{ margin-top: 26px; display: inline-block;}
 
 .p1-content{ position: absolute; left: 53.6%; top:50%; bottom: 0; margin-top: -208px;}
-.p1-content .code-frame{ margin: 40px 0 0 30px; position: relative;}
-.p1-content .code{ position: absolute; top: 32px; left: 35px;}
+.p1-content .code-frame{ width: 410px; height: 190px; margin: 40px 0 0 30px; position: relative; background: url('../images/bg1.png') repeat-x;}
+.p1-content .code{ position: absolute; top: 22px; left: 50px;}
+.p1-content .ios-img{ left: auto; right: 50px;}
+.p1-content .code img{ width: 120px;}
+.p1-content .code span{ display: block; font-size: 16px; color: #fff; text-align: center; margin-top: 10px;}
 .p1-content .code-move{ animation: move 0.8s linear;}
 @keyframes move {
     0%,40%,80%,100%{ transform: scale(1);}

@@ -1,17 +1,17 @@
 <style scoped>
-    .audio{ height: 45px; overflow: hidden; position: relative;}
+    .audio{ width: 500px; height: 45px; overflow: hidden; position: relative;}
     .audio>a{ position: absolute; top: 0; left: 0;}
     .audio .mid{ margin: 0 55px;}
-    .audio .mid .name{ font-size: 14px; color: rgba(255,255,255,0.5);}
-    .audio .mid .line{ height: 3px; background-color:  rgba(255,255,255,0.5); position: relative; margin-top: 14px;}
+    .audio .mid .name{ font-size: 14px;}
+    .audio .mid .line{ height: 3px; background-color:  rgba(158,159,159,1); position: relative; margin-top: 14px;}
     .audio .mid .line .bar{ width: 50%; height: 3px; background-color: #bc9e44;}
-    .audio .time{ position: absolute; top: 25px; right: 0;font-size: 14px; color: rgba(255,255,255,0.5);}
+    .audio .time{ position: absolute; top: 25px; right: 0;font-size: 14px;}
 </style>
 
 <template>
     <div class="audio">
-        <a href="javascript:;" v-if="paused" @click="doPlay"><img src="@/assets/images/btn-play2.png"> </a>
-        <a href="javascript:;" v-if="!paused" @click="doPause"><img src="@/assets/images/btn-stop.png"> </a>
+        <a href="javascript:;" v-if="paused" @click="doPlay"><img src="../assets/images/music-play.png"> </a>
+        <a href="javascript:;" v-if="!paused" @click="doPause"><img src="../assets/images/music-pause.png"> </a>
         <div class="mid">
             <div class="name">{{title}}</div>
             <div class="line">

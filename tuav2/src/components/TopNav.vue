@@ -5,8 +5,8 @@
     .top-nav section nav{ float: left; margin-left: 60px;}
     .top-nav section nav .first-level{ display: flex; margin-top: 23px;}
     .top-nav section nav .first-level>li{ margin-right: 30px; position: relative; padding-bottom: 18px;}
-    .top-nav section nav .first-level>li>a{ font-size: 14px; color: #010101;  text-align: center; display: block; font-family: 'hkLight';}
-    .top-nav section nav .first-level>li>a span{ transform: scale(0.7,0.7) translate(0,-6px); display:block; font-family: 'hkMedium';}
+    .top-nav section nav .first-level>li>a{ font-size: 14px; color: #010101;  text-align: center; display: block;}
+    .top-nav section nav .first-level>li>a span{ transform: scale(0.7,0.7) translate(0,-6px); display:block;}
     .top-nav section nav .first-level>li .second-level{ width: 90px; background-color: #000; position: absolute; top:56px; left: 50%; margin-left: -45px; display: none;}
     .top-nav section nav .first-level>li:hover .second-level{ display: block;}
     .top-nav section nav .first-level>li .second-level:before{ content: ''; width: 25px; height: 8px; background: url('../assets/images/arrow1.png') no-repeat; position: absolute; top: -7px; left: 32px;}
@@ -20,25 +20,25 @@
         <section class="clearfix">
             <div class="logo"><img src="../assets/images/logo.png" width="115"> </div>
             <nav>
-                <ul class="first-level">
+                <ul class="first-level hkLight">
                     <li>
-                        <a href="#">音樂<span>MUSIC</span></a>
+                        <a href="#" class="hkLight">音樂<span class="hkMedium">MUSIC</span></a>
                         <ul class="second-level">
                             <li><a href="#">海報</a> </li>
                             <li><a href="#">HD</a> </li>
                         </ul>
                     </li>
                     <li>
-                        <a href="#">平面<span>GRAPHIC</span></a>
+                        <a href="#" class="hkLight">平面<span class="hkMedium">GRAPHIC</span></a>
                     </li>
                     <li>
-                        <a href="#">繪畫<span>PAINTING</span></a>
+                        <a href="#" class="hkLight">繪畫<span class="hkMedium">PAINTING</span></a>
                     </li>
                     <li>
-                        <a href="#">影視<span>VIDEO</span></a>
+                        <a href="#" class="hkLight">影視<span class="hkMedium">VIDEO</span></a>
                     </li>
                     <li>
-                        <a href="#">關於<span>ABOUT</span></a>
+                        <a href="#" class="hkLight">關於<span class="hkMedium">ABOUT</span></a>
                     </li>
                 </ul>
             </nav>

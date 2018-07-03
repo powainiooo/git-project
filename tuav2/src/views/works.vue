@@ -1,11 +1,11 @@
 <style>
-    .item-list{ margin: 0 -14px;}
+
 </style>
 
 <template>
     <div>
         <top-nav></top-nav>
-        <section class="body-frame">
+        <body-frame>
             <div class="item-list clearfix">
                 <work-item></work-item>
                 <work-item></work-item>
@@ -15,7 +15,7 @@
                 <work-item></work-item>
                 <work-item></work-item>
             </div>
-        </section>
+        </body-frame>
         <bottom-nav></bottom-nav>
     </div>
 </template>
@@ -24,9 +24,10 @@
     import TopNav from '@/components/TopNav.vue'
     import BottomNav from '@/components/BottomNav.vue'
     import WorkItem from '@/components/WorkItem.vue'
+    import BodyFrame from '@/components/BodyFrame.vue'
     export default{
         name: 'App',
-        components:{TopNav,BottomNav,WorkItem},
+        components:{TopNav,BottomNav,WorkItem,BodyFrame},
         data(){
             return{
 

@@ -6,7 +6,7 @@
     .top-nav section nav .first-level{ display: flex; margin-top: 23px;}
     .top-nav section nav .first-level>li{ margin-right: 30px; position: relative; padding-bottom: 18px;}
     .top-nav section nav .first-level>li>a{ font-size: 14px; color: #010101;  text-align: center; display: block;}
-    .top-nav section nav .first-level>li>a span{ transform: scale(0.7,0.7) translate(0,-6px); display:block;}
+    .top-nav section nav .first-level>li>a span{ transform: scale(0.7,0.7); display:block;}
     .top-nav section nav .first-level>li .second-level{ width: 90px; background-color: #000; position: absolute; top:56px; left: 50%; margin-left: -45px; display: none;}
     .top-nav section nav .first-level>li:hover .second-level{ display: block;}
     .top-nav section nav .first-level>li .second-level:before{ content: ''; width: 25px; height: 8px; background: url('../assets/images/arrow1.png') no-repeat; position: absolute; top: -7px; left: 32px;}

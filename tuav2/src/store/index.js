@@ -5,33 +5,42 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
     state: {
-        indexGuide: '',
-        indexInfo:{
-            cover:'',
-            goods_img:[],
-            title:'',
-            home2_desc:'',
-            goods_img3:[],
-            home3_desc:'',
-            goods_img4:[],
-            home4_desc:''
-        },
-        domainUrl:'',
-        aboutData:{
-            intro:'',
-            idea:''
-        },
-        contactData:{
-            contact:'',
-            email:'',
-            mobile:'',
-            address:'',
-            wx_number:'',
-            ewm_url:'',
-            domain_url:'',
-            time_slot:''
-        },
-        cateList:[],
+        cateList:[
+            {
+                id:0,
+                name:'音樂',
+                nameEn:'MUSIC',
+                list:[
+                    {
+                        id:1,
+                        name:'海報'
+                    },
+                    {
+                        id:2,
+                        name:'HD'
+                    }
+                ]
+            },
+            {
+                id:3,
+                name:'平面',
+                nameEn:'GRAPHIC',
+                list:[]
+            },
+            {
+                id:4,
+                name:'繪畫',
+                nameEn:'PAINTING',
+                list:[]
+            },
+            {
+                id:5,
+                name:'影視',
+                nameEn:'VIDEO',
+                list:[]
+            }
+        ],
+        cateID:0,
         isGuide:true,
         audio:{}
     },
@@ -41,31 +50,16 @@ const store = new Vuex.Store({
         },
         setAudio(state,data){
             state.audio = data;
+        },
+        setCateID(state,data){
+            state.cateID = data;
         }
     },
     actions: {
-        doGetIndex (context) {
-            axios.get('api/ajax_home').then((res)=>{
-                let data = res.data;
-                context.state.indexGuide = data.guide;
-                context.state.indexInfo = data.info;
-                context.state.domainUrl = data.domain_url;
-            }).catch((error)=>{
-                console.log(error);
-            })
-        },
         doGetAbout (context) {
             axios.get('api/ajax_about').then((res)=>{
                 let data = res.data;
                 context.state.aboutData = data;
-            }).catch((error)=>{
-                console.log(error);
-            })
-        },
-        doGetContact (context) {
-            axios.get('api/ajax_contacts').then((res)=>{
-                let data = res.data;
-                context.state.contactData = data;
             }).catch((error)=>{
                 console.log(error);
             })

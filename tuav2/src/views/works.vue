@@ -4,7 +4,7 @@
 
 <template>
     <div>
-        <top-nav></top-nav>
+        <top-nav @getID="getListData"></top-nav>
         <body-frame>
             <div class="item-list clearfix">
                 <work-item></work-item>
@@ -28,9 +28,22 @@
     export default{
         name: 'App',
         components:{TopNav,BottomNav,WorkItem,BodyFrame},
+        computed:{
+            cateID(){
+                return this.$store.state.cateID
+            }
+        },
+        mounted(){
+            this.getListData(this.$store.state.cateID);
+        },
         data(){
             return{
 
+            }
+        },
+        methods:{
+            getListData(id){
+                console.log(id);
             }
         }
     }

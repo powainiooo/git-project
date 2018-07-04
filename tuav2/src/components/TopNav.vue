@@ -1,10 +1,11 @@
 <style>
     .top-nav{ min-width: 1440px; width: 100%; position: fixed; top: 0; left: 0; z-index: 1000; background-color: #fff;}
     .top-nav section{ width: 1440px; margin: 0 auto; border-bottom: 2px solid #ededed;}
-    .top-nav section .logo{ margin: 20px 0 15px 0; float: left;}
+    .top-nav section .logo{ margin: 20px 0 15px 0; float: left; cursor: pointer;}
     .top-nav section nav{ float: left; margin-left: 60px;}
     .top-nav section nav .first-level{ display: flex; margin-top: 23px;}
     .top-nav section nav .first-level>li{ margin-right: 30px; position: relative; padding-bottom: 18px;}
+    .top-nav section nav .first-level>li.active:before{ content: ''; width: 100%; height: 3px; background-color: #171918; position: absolute; top: -23px; left: 0;}
     .top-nav section nav .first-level>li>a{ font-size: 14px; color: #010101;  text-align: center; display: block;}
     .top-nav section nav .first-level>li>a span{ transform: scale(0.7,0.7); display:block;}
     .top-nav section nav .first-level>li .second-level{ width: 90px; background-color: #000; position: absolute; top:56px; left: 50%; margin-left: -45px; display: none;}
@@ -18,27 +19,34 @@
 <template>
     <header class="top-nav">
         <section class="clearfix">
-            <div class="logo"><img src="../assets/images/logo.png" width="115"> </div>
+            <div class="logo" @click="gotoPage('index',-4)"><img src="../assets/images/logo.png" width="115"> </div>
             <nav>
                 <ul class="first-level hkLight">
-                    <li>
-                        <a href="#" class="hkLight">音樂<span class="hkMedium">MUSIC</span></a>
-                        <ul class="second-level">
-                            <li><a href="#">海報</a> </li>
-                            <li><a href="#">HD</a> </li>
+                    <li :class="activeIndex == -2 ? 'active' : ''">
+                        <a href="javascript:;"
+                           @click="getList(-2,0)">
+                            全部
+                            <span>ALL</span>
+                        </a>
+                    </li>
+                    <li v-for="(item,index) in cateList"
+                        :class="activeIndex == index ? 'active' : ''">
+                        <a href="javascript:;"
+                           @click="getList(index,item.id)">
+                            {{item.name}}
+                            <span>{{item.nameEn}}</span>
+                        </a>
+                        <ul class="second-level"
+                            v-if="item.list.length != 0">
+                            <li v-for="listItem in item.list"><a href="javascript:;" @click="getList(index,listItem.id)">{{listItem.name}}</a> </li>
                         </ul>
                     </li>
-                    <li>
-                        <a href="#" class="hkLight">平面<span class="hkMedium">GRAPHIC</span></a>
-                    </li>
-                    <li>
-                        <a href="#" class="hkLight">繪畫<span class="hkMedium">PAINTING</span></a>
-                    </li>
-                    <li>
-                        <a href="#" class="hkLight">影視<span class="hkMedium">VIDEO</span></a>
-                    </li>
-                    <li>
-                        <a href="#" class="hkLight">關於<span class="hkMedium">ABOUT</span></a>
+                    <li :class="activeIndex == -3 ? 'active' : ''">
+                        <a href="javascript:;"
+                           @click="gotoPage('about',-3)">
+                            關於
+                            <span>ABOUT</span>
+                        </a>
                     </li>
                 </ul>
             </nav>
@@ -51,13 +59,22 @@
         name: 'App',
         data(){
             return{
-                cateID:0
+                activeIndex:-4//首页-1，全部-2，关于页-3
             }
         },
         methods:{
-            getList(id){
-                this.cateID = id;
-                this.$emit('getID',id);
+            getList(index,id){
+                this.activeIndex = index;
+                this.$store.commit('setCateID',id);
+                if(this.$route.name != 'works'){
+                    this.$router.push('works');
+                }else{
+                    this.$emit('getID',id);
+                }
+            },
+            gotoPage(name,index){
+                this.activeIndex = index;
+                this.$router.push(name)
             }
         },
         computed:{

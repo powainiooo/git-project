@@ -8,7 +8,7 @@
     .bottom-nav .infos li p{ font-size: 14px; line-height: 1.5; color: rgba(255,255,255,0.5);}
     .bottom-nav .infos li p:first-child{ margin-right: 40px;}
     .bottom-nav .copyright{ font-size: 12px; color: #fff; transform: scale(0.7,0.7); margin-top: 40px; transform-origin:0 0; color: rgba(255,255,255,0.5); }
-    .bottom-nav .icon-wechat{ position: absolute; top: 90px; right: 0;}
+    .bottom-nav .icon-wechat{ position: absolute; top: 90px; right: 0; cursor: pointer;}
 </style>
 
 <template>
@@ -29,7 +29,7 @@
                     <p>廣東省 深圳市 南山區 <br>科慧1路沛鴻大廈A2棟402</p>
                 </li>
             </ul>
-            <div class="icon-wechat"><img src="../assets/images/icon-wechat-bottom.png"> </div>
+            <div class="icon-wechat" @click="gotoAbout"><img src="../assets/images/icon-wechat-bottom.png"> </div>
             <div class="copyright">Shenzhen TAUPAI Culture Communication Co.&copy;</div>
         </section>
     </footer>
@@ -41,6 +41,11 @@
         data(){
             return{
 
+            }
+        },
+        methods:{
+            gotoAbout(){
+                this.$router.push({ name: 'about', params: { top: 1075 }})
             }
         }
     }

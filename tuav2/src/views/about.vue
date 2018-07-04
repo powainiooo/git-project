@@ -33,7 +33,7 @@
     .pro-tag-list li a{ display: flex; align-items: flex-end;}
     .pro-tag-list li h3{ color: #fff; font-size: 200px; -webkit-text-stroke:2px #9ea09f;}
     .pro-tag-list li div{ color: #000; font-size: 32px; margin-bottom: 40px; margin-left: -20px;}
-    .pro-tag-list li a:hover h3{-webkit-text-stroke:0 #9ea09f; color: #be9833;}
+    .pro-tag-list li a:hover h3{-webkit-text-stroke:2px #be9833; color: #be9833;}
 </style>
 
 <template>
@@ -134,28 +134,10 @@
                         何方 设计事务所（HO），是一个极具活力和创造性的设计团队。我们的主要设计师和技术总监都为 Instagram，zcool，cargocollective 的邀请人员。我们的设计都是为上海，北京，深圳，广州等国内大都市品牌以及国际品牌服务，例如广州万科黄埔仓，铂涛集团，南方电网，上海风暴音乐节，深圳中诚安信等制作视觉策划，VI 规范系统。相信我们的工作经验和资源网络为我们服务的项目提供现代化的视野，区别于日渐呆板化的传统设计公司，为企业
                     </div>
                     <ul class="pro-tag-list">
-                        <li>
+                        <li v-for="(item,index) in cateList">
                             <a href="#">
-                                <h3>1</h3>
-                                <div>音乐</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <h3>2</h3>
-                                <div>音乐</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <h3>3</h3>
-                                <div>音乐</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <h3>4</h3>
-                                <div>音乐</div>
+                                <h3>{{index+1}}</h3>
+                                <div>{{item.name}}</div>
                             </a>
                         </li>
                     </ul>
@@ -175,11 +157,19 @@
         components:{TopNav,BottomNav,BodyFrame},
         mounted(){
             this.tCheck = setInterval(this.intervalCheck,60);
+            let top = this.$route.params.top || 0;
+            document.body.scrollTop = top;
+            document.documentElement.scrollTop = top;
         },
         data(){
             return{
                 activeIndex:0,
                 tCheck:0
+            }
+        },
+        computed:{
+            cateList(){
+                return this.$store.state.cateList
             }
         },
         methods:{

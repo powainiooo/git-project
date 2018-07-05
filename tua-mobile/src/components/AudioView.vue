@@ -1,5 +1,5 @@
 <style scoped>
-    .audio{ width: 500px; height: 45px; overflow: hidden; position: relative;}
+    .audio{ width: 100%; height: 45px; overflow: hidden; position: relative;}
     .audio>a{ position: absolute; top: 0; left: 0;}
     .audio .mid{ margin: 0 55px;}
     .audio .mid .name{ font-size: 14px;}

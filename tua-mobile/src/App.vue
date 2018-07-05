@@ -18,10 +18,10 @@
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
     }
+    img{ width: 100%;}
+    .body-frame{margin: 125px 3% 60px 3%;}
 
-    .body-frame{ width: 1440px; min-width: 1440px; margin: 125px auto 60px auto;}
+    .recommend-title{ font-size: 16px; padding-bottom: 8px; border-bottom: 2px solid #ededed; background: url('assets/images/arrow2.png') no-repeat; background-position: 70px 5px; margin-bottom: 20px;}
 
-    .recommend-title{ font-size: 16px; padding-bottom: 8px; border-bottom: 2px solid #ededed; background: url('assets/images/arrow2.png') no-repeat; background-position: 70px 5px; margin-bottom: 40px;}
-
-    .item-list{ margin: 0 -14px;}
+    .item-list{ display: flex; flex-wrap: wrap; justify-content: space-between;}
 </style>

@@ -40,7 +40,7 @@
     <div>
         <top-nav></top-nav>
         <body-frame>
-            <section style="font-size: 0;"><img src="../assets/images/banner5.jpg" width="1440" height="665"> </section>
+            <section style="font-size: 0;"><img src="../assets/images/banner5.jpg"> </section>
             <ul class="about-tag" ref="aboutTag">
                 <li :class="activeIndex == 1 ? 'active':''" @click="setTop(710)">公司簡介</li>
                 <li :class="activeIndex == 2 ? 'active':''" @click="setTop(1075)">聯繫方式</li>

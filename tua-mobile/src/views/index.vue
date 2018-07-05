@@ -1,23 +1,15 @@
 <style>
-    .swiper-frame{ position: relative; margin-bottom: 80px;}
-    .swiper-item a{ font-size: 36px; letter-spacing: 6px; margin-top: 10px; color: #000;}
-    .swiper-item p{ font-size: 16px; letter-spacing: 6px; line-height: 1.8; margin-bottom: 15px;}
-    .swiper-item .time{ padding-top: 15px;color: rgb(127,127,127);position: relative; font-size: 14px;}
-    .swiper-item .time:before{ content: ''; width: 12px; height: 1px; background-color: #9f9f9f; position: absolute; top: 0; left: 0;}
-    .swiper-item .time span{ margin-right: 30px;}
-    .swiper-frame .arrow{ width: 40px; height: 560px; background-color: #fff; position: absolute; top: 0; z-index: 100; display: none;}
-    .swiper-frame:hover .arrow{ display: block;}
-    .swiper-frame .arrow img{ margin-top: 256px;}
-    .swiper-frame .left{ left: 0;}
-    .swiper-frame .right{ right: 0;}
-    .swiper-frame .right img{ margin-left: -40px;}
+    .swiper-frame{ position: relative; margin-bottom: 40px;}
+    .swiper-item .infos div{ font-size: 20px; letter-spacing: 3px; margin-top: 10px; color: #000; display: block; margin-bottom: 10px;}
+    .swiper-item p{ font-size: 12px; letter-spacing: 3px; line-height: 1.8;}
+    .swiper-item .btn{ width: 30%; font-size: 12px; text-align: center; padding: 8px 0; display: block; border: 1px solid #000; color: #000; border-radius: 15px; margin-top: 10px;}
 
-    .recommend-item{ width: 1130px; margin-bottom: 25px; display: flex; justify-content: space-between;}
-    .recommend-item .imgs{ width: 450px;}
-    .recommend-item .infos{ width: 630px;}
-    .recommend-item .infos a{  font-size: 28px; letter-spacing: 6px; margin-bottom: 10px; color: #000;}
-    .recommend-item .infos p{ font-size: 16px; letter-spacing: 6px; line-height: 1.8; margin-bottom: 90px;word-break: break-all;text-overflow: ellipsis;-webkit-line-clamp: 2; overflow: hidden;display: -webkit-box;-webkit-box-orient: vertical;}
-    .recommend-item .infos .time{ padding-top: 15px; color: rgb(127,127,127); position: relative; font-size: 14px;}
+    .recommend-item{ margin-bottom: 25px; display: flex; justify-content: space-between;}
+    .recommend-item .imgs{ width: 45%;}
+    .recommend-item .infos{ width: 52%; display: flex; flex-direction: column; justify-content: space-between;}
+    .recommend-item .infos a{  font-size: 16px; letter-spacing: 3px; margin-bottom: 10px; color: #000;}
+    .recommend-item .infos p{ font-size: 10px; letter-spacing: 3px; line-height: 1.8; margin-bottom: 90px;word-break: break-all;text-overflow: ellipsis;-webkit-line-clamp: 2; overflow: hidden;display: -webkit-box;-webkit-box-orient: vertical;}
+    .recommend-item .infos .time{ padding-top: 10px; color: rgb(127,127,127); position: relative; font-size: 14px;}
     .recommend-item .infos .time:before{ content: ''; width: 12px; height: 1px; background-color: #9f9f9f; position: absolute; top: 0; left: 0;}
     .recommend-item .infos .time span{ margin-right: 30px;}
 
@@ -43,67 +35,45 @@
                     <!-- slides -->
                     <swiper-slide>
                         <section class="swiper-item">
-                            <div><router-link to="/works/detail/1"><img src="../assets/images/index-banner1.jpg" width="1120" height="560"> </router-link></div>
-                            <div v-if="activeIndex == 0">
-                                <router-link to="/works/detail/1">The Next Age 穿越未來來看你</router-link>
-                                <p class="hkLight">音樂作品表現大賽故宮和Next Idea 結合的主題，展現出傳統文化與未來現象之美。在前期的商討中，我們決定從京劇和Pap這兩種音樂表現形式入手</p>
-                                <div class="time hkLight">
-                                    <span>音樂</span>
-                                    <span>項目時間 06/2018</span>
-                                </div>
+                            <div><router-link to="/works/detail/1"><img src="../assets/images/index-banner1.jpg"> </router-link></div>
+                            <div v-if="activeIndex == 0" class="infos">
+                                <div>The Next Age 穿越未來來看你</div>
+                                <p>音樂作品表現大賽故宮和Next Idea 結合的主題，展現出傳統文化與未來現象之美。在前期的商討中，我們決定從京劇和Pap這兩種音樂表現形式入手</p>
+                                <router-link to="/works/detail/1" class="btn">More</router-link>
                             </div>
                         </section>
                     </swiper-slide>
                     <swiper-slide>
                         <section class="swiper-item">
-                            <div><router-link to="/works/detail/1"><img src="../assets/images/index-banner1.jpg" width="1120" height="560"> </router-link></div>
-                            <div v-if="activeIndex == 0">
-                                <router-link to="/works/detail/1">The Next Age 穿越未來來看你</router-link>
+                            <div><router-link to="/works/detail/1"><img src="../assets/images/index-banner1.jpg"> </router-link></div>
+                            <div v-if="activeIndex == 1">
+                                <div>The Next Age 穿越未來來看你</div>
                                 <p>音樂作品表現大賽故宮和Next Idea 結合的主題，展現出傳統文化與未來現象之美。在前期的商討中，我們決定從京劇和Pap這兩種音樂表現形式入手</p>
-                                <div class="time">
-                                    <span>音樂</span>
-                                    <span>項目時間 06/2018</span>
-                                </div>
+                                <router-link to="/works/detail/1" class="btn">More</router-link>
                             </div>
 
                         </section>
                     </swiper-slide>
                     <swiper-slide>
                         <section class="swiper-item">
-                            <div><router-link to="/works/detail/1"><img src="../assets/images/index-banner1.jpg" width="1120" height="560"> </router-link></div>
-                            <div v-if="activeIndex == 0">
-                                <router-link to="/works/detail/1">The Next Age 穿越未來來看你</router-link>
+                            <div><router-link to="/works/detail/1"><img src="../assets/images/index-banner1.jpg"> </router-link></div>
+                            <div v-if="activeIndex == 2">
+                                <div>The Next Age 穿越未來來看你</div>
                                 <p>音樂作品表現大賽故宮和Next Idea 結合的主題，展現出傳統文化與未來現象之美。在前期的商討中，我們決定從京劇和Pap這兩種音樂表現形式入手</p>
-                                <div class="time">
-                                    <span>音樂</span>
-                                    <span>項目時間 06/2018</span>
-                                </div>
+                                <router-link to="/works/detail/1" class="btn">More</router-link>
                             </div>
                         </section>
                     </swiper-slide>
                 </swiper>
-                <a href="javascript:;"
-                   class="arrow left"
-                   @click="bannerPrev"
-                   v-if="activeIndex != 0">
-                    <img src="../assets/images/arrow-left.png" width="76">
-                </a>
-                <a href="javascript:;"
-                   class="arrow right"
-                   @click="bannerNext"
-                   v-if="activeIndex != bannerList.length - 1">
-                    <img src="../assets/images/arrow-right.png" width="76">
-                </a>
             </div>
 
             <div class="recommend-title">推薦案例</div>
 
             <div>
                 <div class="recommend-item">
-                    <div class="imgs"><router-link to="/works/detail/1"><img src="../assets/images/index-recm1.jpg" width="450" height="250"></router-link> </div>
+                    <div class="imgs"><router-link to="/works/detail/1"><img src="../assets/images/index-recm1.jpg"></router-link> </div>
                     <div class="infos">
                         <router-link to="/works/detail/1">The Next Age 穿越未來來看你</router-link>
-                        <p class="hkLight">音樂作品表現大賽故宮和Next Idea 結合的主題，展現出傳統文化與未來現象之美。在前期的商討中，我們決定從京劇和Pap這兩種音樂表現形式入手</p>
                         <div class="time hkLight">
                             <span>音樂</span>
                             <span>項目時間 06/2018</span>
@@ -112,7 +82,6 @@
                 </div>
             </div>
         </body-frame>
-        <bottom-nav></bottom-nav>
 
         <transition name="slide-fade">
         <div class="welcome" v-if="isGuide"><img src="../assets/images/loading.gif"> </div>
@@ -122,11 +91,10 @@
 
 <script type="es6">
     import TopNav from '@/components/TopNav.vue'
-    import BottomNav from '@/components/BottomNav.vue'
     import BodyFrame from '@/components/BodyFrame.vue'
     export default{
         name: 'App',
-        components:{TopNav,BottomNav,BodyFrame},
+        components:{TopNav,BodyFrame},
         computed:{
             isGuide(){
                 return this.$store.state.isGuide
@@ -136,9 +104,8 @@
             let self = this;
             return{
                 swiperOption: {
-                    width: 1120,
-                    spaceBetween:25,
-                    simulateTouch : false,
+                    width: window.innerWidth*0.8,
+                    spaceBetween:15,
                     on: {
                         slideChangeTransitionStart: function(){
                             self.activeIndex = this.activeIndex;
@@ -162,12 +129,6 @@
             }
         },
         methods: {
-            bannerPrev(){
-                this.swiper.slidePrev();
-            },
-            bannerNext(){
-                this.swiper.slideNext();
-            }
         }
     }
 

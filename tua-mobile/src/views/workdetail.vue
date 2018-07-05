@@ -1,26 +1,20 @@
 <style>
-    .swiper-frame{ position: relative; margin-bottom: 80px;}
-    .swiper-frame .arrow{ width: 40px; height: 665px; background-color: #fff; position: absolute; top: 0; z-index: 100; display: none;}
-    .swiper-frame:hover .arrow{ display: block;}
-    .swiper-frame .arrow img{ margin-top: 308px;}
-    .swiper-frame .left{ left: 0;}
-    .swiper-frame .right{ right: 0;}
-    .swiper-frame .right img{ margin-left: -40px;}
-    .swiper-frame .dots{ display: flex; align-items: center; margin-top: 25px;}
-    .swiper-frame .dots li{ width: 6px; height: 6px; border-radius: 50%; background-color: #181a19; margin-right: 20px;}
-    .swiper-frame .dots li.active{ width: 12px; height: 12px; background-color: #c29836;}
+    .swiper-frame{ position: relative;  margin: 0 -3% 40px -3%;}
+    .swiper-frame .dots{ display: flex; align-items: center; margin-top: 10px; margin-left: 3%;}
+    .swiper-frame .dots li{ width: 4px; height: 4px; border-radius: 50%; background-color: #181a19; margin-right: 10px;}
+    .swiper-frame .dots li.active{ width: 8px; height: 8px; background-color: #c29836;}
 
-    .detail-infos{ width: 850px; margin-top: 25px;}
-    .detail-infos h3{ font-size: 36px; letter-spacing: 6px; margin-bottom: 25px;}
-    .detail-infos p{ font-size: 16px; letter-spacing: 6px; line-height: 1.8; margin-bottom: 25px;}
-    .detail-infos .time{ padding-top: 15px; color: rgb(127,127,127); position: relative; font-size: 14px; margin-bottom: 25px;}
+    .detail-infos{ margin-top: 25px;}
+    .detail-infos h3{ font-size: 20px; letter-spacing: 6px; margin-bottom: 15px;}
+    .detail-infos p{ font-size: 14px; letter-spacing: 6px; line-height: 1.8; margin-bottom: 15px;}
+    .detail-infos .time{ padding-top: 15px; color: rgb(127,127,127); position: relative; font-size: 10px; margin-bottom: 15px;}
     .detail-infos .time:before{ content: ''; width: 12px; height: 1px; background-color: #9f9f9f; position: absolute; top: 0; left: 0;}
     .detail-infos .time span{ margin-right: 30px;}
-    .detail-infos .author-list{ width: 500px; display: flex; flex-wrap: wrap; margin: 80px 0;}
-    .detail-infos .author-list li{ font-size: 14px; color: rgb(158,159,159); margin-bottom: 15px; display: flex;}
+    .detail-infos .author-list{ width: 100%; display: flex; flex-wrap: wrap; margin:40px 0;}
+    .detail-infos .author-list li{ width: 50%; font-size: 12px; color: rgb(158,159,159); margin-bottom: 8px; display: flex;}
     .detail-infos .author-list li span{ width: 100px;}
 
-    .audio-frame{ margin: 50px 0 60px 0;}
+    .audio-frame{ margin: 25px 0 30px 0;}
 </style>
 
 <template>
@@ -33,18 +27,6 @@
                     <swiper-slide><img src="../assets/images/banner2.jpg"> </swiper-slide>
                     <swiper-slide><img src="../assets/images/banner3.jpg"> </swiper-slide>
                 </swiper>
-                <a href="javascript:;"
-                   class="arrow left"
-                   @click="bannerPrev"
-                   v-if="activeIndex != 0">
-                    <img src="../assets/images/arrow-left.png" width="76">
-                </a>
-                <a href="javascript:;"
-                   class="arrow right"
-                   @click="bannerNext"
-                   v-if="activeIndex != bannerList.length - 1">
-                    <img src="../assets/images/arrow-right.png" width="76">
-                </a>
                 <ul class="dots">
                     <li v-for="(item,index) in bannerList" :class="activeIndex == index ? 'active' : ''"></li>
                 </ul>
@@ -103,20 +85,18 @@
                 <work-item></work-item>
             </div>
         </body-frame>
-        <bottom-nav></bottom-nav>
     </div>
 </template>
 
 <script type="es6">
     import TopNav from '@/components/TopNav.vue'
-    import BottomNav from '@/components/BottomNav.vue'
     import WorkItem from '@/components/WorkItem.vue'
     import BodyFrame from '@/components/BodyFrame.vue'
     import AudioView from '@/components/AudioView.vue'
     import VideoView from '@/components/VideoView.vue'
     export default{
         name: 'App',
-        components:{TopNav,BottomNav,WorkItem,BodyFrame,AudioView,VideoView},
+        components:{TopNav,WorkItem,BodyFrame,AudioView,VideoView},
         data(){
             let self = this;
             return{

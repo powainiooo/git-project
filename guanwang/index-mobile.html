@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <title>比亚迪云服务</title>
+    <link href="css/reset.css" rel="stylesheet">
+    <link href="css/layout-mobile.css" rel="stylesheet">
+    <link href="css/swiper.min.css" rel="stylesheet">
+    <script src="js/swiper.min.js"></script>
+</head>
+<body>
+
+<div class="swiper-container">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide" style="background-image: url('images/banner1.jpg')">
+            <div class="intro intro1">
+                <img src="images/intro1.png">
+                <div class="code-frame">
+                    <div class="code">
+                        <img onload="loadImg()" src="images/Android_code.png">
+                        <span>Android 下载</span>
+                    </div>
+                    <div class="code ios-img">
+                        <img onload="loadImg()" src="images/iPhone_code.png">
+                        <span>IOS 下载</span>
+                    </div>
+                </div>
+            </div>
+            <div class="phone"><img src="images/phone-imgs/index.png"> </div>
+        </div>
+        <div class="swiper-slide" style="background-image: url('images/banner2.jpg')">
+            <div class="intro intro2"><img src="images/intro2.png"> </div>
+            <div class="phone"><img src="images/phone-imgs/control.png"> </div>
+        </div>
+        <div class="swiper-slide" style="background-image: url('images/banner3.jpg')">
+            <div class="intro intro3"><img src="images/intro3.png"> </div>
+            <div class="phone"><img src="images/phone-imgs/status.png"> </div>
+        </div>
+        <div class="swiper-slide" style="background-image: url('images/banner4.jpg')">
+            <div class="intro intro4"><img src="images/intro4.png"> </div>
+            <div class="phone"><img src="images/phone-imgs/position.png"> </div>
+        </div>
+        <div class="swiper-slide" style="background-image: url('images/banner5.jpg')">
+            <div class="intro intro5"><img src="images/intro5.png"> </div>
+            <div class="phone"><img src="images/phone-imgs/energy.png"> </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var mySwiper = new Swiper ('.swiper-container', {
+        direction: 'vertical'
+    })
+</script>
+</body>
+</html>

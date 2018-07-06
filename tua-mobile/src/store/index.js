@@ -42,7 +42,8 @@ const store = new Vuex.Store({
         ],
         cateID:0,
         isGuide:true,
-        audio:{}
+        audio:{},
+        showMenu:false
     },
     mutations: {
         doPassGuide (state) {
@@ -53,6 +54,9 @@ const store = new Vuex.Store({
         },
         setCateID(state,data){
             state.cateID = data;
+        },
+        setShowMenu(state,data){
+            state.showMenu = data;
         }
     },
     actions: {

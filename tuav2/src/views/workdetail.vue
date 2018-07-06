@@ -29,9 +29,7 @@
         <body-frame>
             <div class="swiper-frame">
                 <swiper :options="swiperOption" ref="mySwiper">
-                    <swiper-slide><img src="../assets/images/banner1.jpg"> </swiper-slide>
-                    <swiper-slide><img src="../assets/images/banner2.jpg"> </swiper-slide>
-                    <swiper-slide><img src="../assets/images/banner3.jpg"> </swiper-slide>
+                    <swiper-slide v-for="item in bannerList"><img :src="item"> </swiper-slide>
                 </swiper>
                 <a href="javascript:;"
                    class="arrow left"
@@ -50,10 +48,12 @@
                 </ul>
             </div>
 
-            <video-view :vid="vid" :postImg="vPostImg"></video-view>
+            <video-view  v-if="showVideo"
+                         :vid="vid"
+                         :postImg="vPostImg"></video-view>
 
             <div class="detail-infos">
-                <h3>The Next Age 穿越未來來看你</h3>
+                <h3>{{detailData.title}} {{detailData.title_ext}}</h3>
                 <div class="time hkLight">
                     <span>音樂</span>
                     <span>項目時間 06/2018</span>
@@ -61,35 +61,20 @@
 
                 <div class="audio-frame">
                     <audio-view
-                        src="test"
-                        title="test">
+                        v-if="detailData.audio_link != ''"
+                        :src="domain_url+detailData.audio_link"
+                        :title="detailData.audio_name">
                     </audio-view>
                 </div>
 
                 <div>
-                    <p class="hkLight">音樂作品表現大賽故宮和Next Idea 結合的主題，展現出傳統文化與未來現象之美。在前期的商討中，我們決定從京劇和Pap這兩種音樂表現形式入手</p>
+                    <p class="hkLight" v-html="detailData.goods_desc"></p>
                 </div>
 
                 <ul class="author-list">
-                    <li class="hkLight">
-                        <span>創意</span>
-                        <span>TUA</span>
-                    </li>
-                    <li class="hkLight">
-                        <span>音樂</span>
-                        <span>TUA</span>
-                    </li>
-                    <li class="hkLight">
-                        <span>原畫</span>
-                        <span>TUA</span>
-                    </li>
-                    <li class="hkLight">
-                        <span>技術製作</span>
-                        <span>TUA</span>
-                    </li>
-                    <li class="hkLight">
-                        <span>藝術指導</span>
-                        <span>TUA</span>
+                    <li class="hkLight" v-for="item in detailData.author">
+                        <span>{{item.cname}}</span>
+                        <span>{{item.name}}</span>
                     </li>
                 </ul>
             </div>
@@ -128,11 +113,12 @@
                         }
                     }
                 },
-                bannerList:[{},{},{}],
+                bannerList:[],
                 swiper:null,
                 activeIndex:0,
                 vid:'',//k0015trfczz
-                vPostImg:''
+                vPostImg:'',
+                showVideo:false
             }
         },
         mounted(){
@@ -150,6 +136,20 @@
         computed:{
             media(){
                 return this.$store.state.audio;
+            },
+            getData(){
+                let self = this;
+                let id = this.$route.params.id;
+                self.$ajax.get('api/product_info',{
+                    params: {
+                        id: id
+                    }
+                }).then((res)=>{
+                    let data = res.data;
+                    self.detailData = data.data;
+                }).catch((error)=>{
+                    console.log(error);
+                })
             }
         },
         beforeRouteLeave (to, from, next){

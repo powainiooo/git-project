@@ -1,5 +1,5 @@
 <style>
-    .swiper-frame{ position: relative; margin-bottom: 40px;}
+    .swiper-frame{ position: relative; margin-bottom: 40px; margin-right: -3%;}
     .swiper-item .infos div{ font-size: 20px; letter-spacing: 3px; margin-top: 10px; color: #000; display: block; margin-bottom: 10px;}
     .swiper-item p{ font-size: 12px; letter-spacing: 3px; line-height: 1.8;}
     .swiper-item .btn{ width: 30%; font-size: 12px; text-align: center; padding: 8px 0; display: block; border: 1px solid #000; color: #000; border-radius: 15px; margin-top: 10px;}

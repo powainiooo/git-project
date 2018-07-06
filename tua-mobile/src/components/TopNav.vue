@@ -1,55 +1,16 @@
 <style>
-    .top-nav{ min-width: 1440px; width: 100%; position: fixed; top: 0; left: 0; z-index: 1000; background-color: #fff;}
-    .top-nav section{ width: 1440px; margin: 0 auto; border-bottom: 2px solid #ededed;}
-    .top-nav section .logo{ margin: 20px 0 15px 0; float: left; cursor: pointer;}
-    .top-nav section nav{ float: left; margin-left: 60px;}
-    .top-nav section nav .first-level{ display: flex; margin-top: 23px;}
-    .top-nav section nav .first-level>li{ margin-right: 30px; position: relative; padding-bottom: 18px;}
-    .top-nav section nav .first-level>li.active:before{ content: ''; width: 100%; height: 3px; background-color: #171918; position: absolute; top: -23px; left: 0;}
-    .top-nav section nav .first-level>li>a{ font-size: 14px; color: #010101;  text-align: center; display: block;}
-    .top-nav section nav .first-level>li>a span{ transform: scale(0.7,0.7); display:block;}
-    .top-nav section nav .first-level>li .second-level{ width: 90px; background-color: #000; position: absolute; top:56px; left: 50%; margin-left: -45px; display: none;}
-    .top-nav section nav .first-level>li:hover .second-level{ display: block;}
-    .top-nav section nav .first-level>li .second-level:before{ content: ''; width: 25px; height: 8px; background: url('../assets/images/arrow1.png') no-repeat; position: absolute; top: -7px; left: 32px;}
-    .top-nav section nav .first-level>li .second-level li{ margin: 0 10px; border-bottom: 1px solid #fff;}
-    .top-nav section nav .first-level>li .second-level li:last-child{ border-bottom: none;}
-    .top-nav section nav .first-level>li .second-level li a{ padding: 10px 0; color: #fff; text-align: center; display: block;}
+    .top-nav{ width: 100%; position: fixed; top: 0; left: 0; z-index: 1000; background-color: #fff;}
+    .top-nav section{ height: 50px; border-bottom: 2px solid #ededed; display: flex; justify-content: space-between; align-items: center; padding: 0 3%;}
+    .top-nav section .logo{ width: 80px;}
+    .top-nav section a{ width: 30px; display: block;}
+
 </style>
 
 <template>
     <header class="top-nav">
-        <section class="clearfix">
-            <div class="logo" @click="gotoPage('index',-4)"><img src="../assets/images/logo.png" width="115"> </div>
-            <nav>
-                <ul class="first-level hkLight">
-                    <li :class="activeIndex == -2 ? 'active' : ''">
-                        <a href="javascript:;"
-                           @click="getList(-2,0)">
-                            全部
-                            <span>ALL</span>
-                        </a>
-                    </li>
-                    <li v-for="(item,index) in cateList"
-                        :class="activeIndex == index ? 'active' : ''">
-                        <a href="javascript:;"
-                           @click="getList(index,item.id)">
-                            {{item.name}}
-                            <span>{{item.nameEn}}</span>
-                        </a>
-                        <ul class="second-level"
-                            v-if="item.list.length != 0">
-                            <li v-for="listItem in item.list"><a href="javascript:;" @click="getList(index,listItem.id)">{{listItem.name}}</a> </li>
-                        </ul>
-                    </li>
-                    <li :class="activeIndex == -3 ? 'active' : ''">
-                        <a href="javascript:;"
-                           @click="gotoPage('about',-3)">
-                            關於
-                            <span>ABOUT</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
+        <section>
+            <div class="logo" @click="gotoPage('index',-4)"><img src="../assets/images/logo.png"> </div>
+            <a href="javascript:;" @click="doShowMenu"><img src="../assets/images/btn-menu.png"> </a>
         </section>
     </header>
 </template>
@@ -63,23 +24,12 @@
             }
         },
         methods:{
-            getList(index,id){
-                this.activeIndex = index;
-                this.$store.commit('setCateID',id);
-                if(this.$route.name != 'works'){
-                    this.$router.push('works');
-                }else{
-                    this.$emit('getID',id);
-                }
-            },
             gotoPage(name,index){
                 this.activeIndex = index;
                 this.$router.push(name)
-            }
-        },
-        computed:{
-            cateList(){
-                return this.$store.state.cateList
+            },
+            doShowMenu(){
+                this.$store.commit('setShowMenu',true)
             }
         }
     }

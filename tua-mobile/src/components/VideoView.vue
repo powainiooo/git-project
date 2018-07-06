@@ -1,5 +1,5 @@
 <style>
-    .vframe{ width:100%; height: 44vw; position: relative;}
+    .vframe{ width:100%; height: 44vw; position: relative; }
     .mod_player,.tenvideo_player{ width: 100%; height: 100%;}
     .postImg{ position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-repeat: no-repeat; background-position: center center; background-size: cover;}
     .postImg a{ position: absolute; top: 50%; left: 50%; margin: -40px 0 0 -40px;}

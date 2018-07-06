@@ -40,7 +40,7 @@
     <div>
         <top-nav></top-nav>
         <body-frame>
-            <section style="font-size: 0;"><img src="../assets/images/banner5.jpg" width="1440" height="665"> </section>
+            <section style="font-size: 0;"><img :src="aboutData.bannerUrl" width="1440" height="665"> </section>
             <ul class="about-tag" ref="aboutTag">
                 <li :class="activeIndex == 1 ? 'active':''" @click="setTop(710)">公司簡介</li>
                 <li :class="activeIndex == 2 ? 'active':''" @click="setTop(1075)">聯繫方式</li>
@@ -53,8 +53,8 @@
                     <p>01</p>
                     <h3>公司簡介<span>profile</span></h3>
                 </div>
-                <div class="hkLight" style="width: 500px;">何方 设计事务所（HO），是一个极具活力和创造性的设计团队。我们的主要设计师和技术总监都为 Instagram，zcool，cargocollective 的邀请人员。我们的设计都是为上海，北京，深圳，广州等国内大都市品牌以及国际品牌服务，例如广州万科黄埔仓，铂涛集团，南方电网，上海风暴音乐节，深圳中诚安信等制作视觉策划，VI 规范系统。相信我们的工作经验和资源网络为我们服务的项目提供现代化的视野，区别于日渐呆板化的传统设计公司，为企业</div>
-                <div class="hkLight">策略 Strategy 设计策略是辨识设计条件和制定设计目标后指导设计工作开展的首要环节。我们对每一个问题的所有原因结果的探索出发来寻求一个最有效，最经济的到达目的的途径。策略是想象与理性的结合。它领先于所有组织及设计工作。 规划 Planning 规划是对资源潜能的见证，对有形无形的各种条件整合。是逻辑性的，空间性的和物质性的。 我们在规划中搭接各种元素的互生体系，研究持续发展的生态机制。通过设计上的控制，将生产成本降到最低，确保生产环节不出错。 视觉 Visua 我们把视觉看成一个对图形，文字，颜色的选择组合的过程，绝不形式决定，而是敏锐社会触觉的折射。我们还把视觉看成一个思想的构成，我们又把它看成一个通过实验并调整获得的知识构成。 生活风尚 Life Style 设计是生活的提炼，平面设计的就是对未来企业文化的或推测或引导的思辨过程。我们认为前卫的设计，不应该是离经叛道和脱离现实的；反之，真正意义上的前卫设计应该是熟知现实而不断超越和激发生活风尚的惊喜。</div>
+                <div class="hkLight" style="width: 500px;">{{about.intro}}</div>
+                <div class="hkLight">{{about.idea}}</div>
             </section>
 
             <section class="contact">
@@ -62,28 +62,28 @@
                     <p>02</p>
                     <h3>聯繫方式<span>contact</span></h3>
                 </div>
-                <img src="../assets/images/about-map.jpg" width="500" height="450">
+                <img :src="contact.domain_url+contact.mapImg" width="500" height="450">
                 <div style="width: 625px; position: relative;">
                     <ul class="infos hkLight">
                         <li>
                             <p>The contact<br>聯繫人</p>
-                            <p>鄭茗友</p>
+                            <p>{{contact.contact}}</p>
                         </li>
                         <li>
                             <p>E-mail<br>電子郵箱</p>
-                            <p>27318589@qq.com</p>
+                            <p>{{contact.email}}</p>
                         </li>
                         <li>
                             <p>Phone<br>手機</p>
-                            <p>+86 137-2553-8273<br>10:00am-7:00pm(工作日)</p>
+                            <p>{{contact.mobile}}<br>{{time_slot}}</p>
                         </li>
                         <li>
                             <p>Address<br>地址</p>
-                            <p>廣東省 深圳市 南山區 <br>科慧1路沛鴻大廈A2棟402</p>
+                            <p>{{contact.address}}</p>
                         </li>
                     </ul>
                     <div class="wechat">
-                        <img src="../assets/images/icon-wechat.png">
+                        <img :src="contact.domain_url+contact.ewm_url">
                         <p><span>TAU</span>头牌文化传播</p>
                     </div>
                     <div class="qrcode"><img src="../assets/images/qrcode.png" width="100" height="100"> </div>
@@ -96,29 +96,11 @@
                     <h3>團隊成員<span>team</span></h3>
                 </div>
                 <div style=" width: 1280px;">
-                    <div class="content">
-                        何方 设计事务所（HO），是一个极具活力和创造性的设计团队。我们的主要设计师和技术总监都为 Instagram，zcool，cargocollective 的邀请人员。我们的设计都是为上海，北京，深圳，广州等国内大都市品牌以及国际品牌服务，例如广州万科黄埔仓，铂涛集团，南方电网，上海风暴音乐节，深圳中诚安信等制作视觉策划，VI 规范系统。相信我们的工作经验和资源网络为我们服务的项目提供现代化的视野，区别于日渐呆板化的传统设计公司，为企业
-                    </div>
+                    <div class="content">{{team.intro}}</div>
                     <ul class="item-list clearfix">
-                        <li class="member-item">
-                            <img src="../assets/images/pro-list1.jpg" width="265" height="210">
-                            <div>TAU</div>
-                        </li>
-                        <li class="member-item">
-                            <img src="../assets/images/pro-list2.jpg" width="265" height="210">
-                            <div>TAU</div>
-                        </li>
-                        <li class="member-item">
-                            <img src="../assets/images/pro-list3.jpg" width="265" height="210">
-                            <div>TAU</div>
-                        </li>
-                        <li class="member-item">
-                            <img src="../assets/images/pro-list4.jpg" width="265" height="210">
-                            <div>TAU</div>
-                        </li>
-                        <li class="member-item">
-                            <img src="../assets/images/pro-list1.jpg" width="265" height="210">
-                            <div>TAU</div>
+                        <li class="member-item" v-for="(item,index) in team.list" :key="index">
+                            <img :src="item.imgUrl" width="265" height="210">
+                            <div>{{item.name}}</div>
                         </li>
                     </ul>
                 </div>
@@ -130,9 +112,7 @@
                     <h3>業務範圍<span>services</span></h3>
                 </div>
                 <div style=" width: 1280px;">
-                    <div class="content">
-                        何方 设计事务所（HO），是一个极具活力和创造性的设计团队。我们的主要设计师和技术总监都为 Instagram，zcool，cargocollective 的邀请人员。我们的设计都是为上海，北京，深圳，广州等国内大都市品牌以及国际品牌服务，例如广州万科黄埔仓，铂涛集团，南方电网，上海风暴音乐节，深圳中诚安信等制作视觉策划，VI 规范系统。相信我们的工作经验和资源网络为我们服务的项目提供现代化的视野，区别于日渐呆板化的传统设计公司，为企业
-                    </div>
+                    <div class="content">{{services.intro}}</div>
                     <ul class="pro-tag-list">
                         <li v-for="(item,index) in cateList">
                             <a href="#">
@@ -160,16 +140,31 @@
             let top = this.$route.params.top || 0;
             document.body.scrollTop = top;
             document.documentElement.scrollTop = top;
+
+            this.$store.dispatch('doGetCate');
+            this.$store.dispatch('doGetAbout');
         },
         data(){
             return{
                 activeIndex:0,
-                tCheck:0
+                tCheck:0,
+                about:{},
+                contact:{},
+                team:{},
+                services:{}
             }
         },
         computed:{
             cateList(){
                 return this.$store.state.cateList
+            },
+            aboutData(){
+                let aboutData = this.$store.state.aboutData;
+                this.about = aboutData.about;
+                this.contact = aboutData.contact;
+                this.team = aboutData.team;
+                this.services = aboutData.services;
+                return aboutData
             }
         },
         methods:{

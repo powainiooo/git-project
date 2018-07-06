@@ -32,7 +32,10 @@
                 </ul>
             </div>
 
-            <video-view :vid="vid" :postImg="vPostImg"></video-view>
+            <div style="margin: 0 -3%">
+                <video-view :vid="vid" :postImg="vPostImg"></video-view>
+            </div>
+
 
             <div class="detail-infos">
                 <h3>The Next Age 穿越未來來看你</h3>

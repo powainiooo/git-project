@@ -16,17 +16,17 @@
         <section>
             <div class="logo"><img src="../assets/images/logo-bottom.png" width="115"> </div>
             <ul class="infos">
-                <li class="hkLight">
+                <li>
                     <p>E-mail<br>電子郵箱</p>
-                    <p>27318589@qq.com</p>
+                    <p>{{contact.email}}</p>
                 </li>
-                <li class="hkLight">
+                <li>
                     <p>Phone<br>手機</p>
-                    <p>+86 137-2553-8273<br>10:00am-7:00pm(工作日)</p>
+                    <p>{{contact.mobile}}<br>{{time_slot}}</p>
                 </li>
-                <li class="hkLight">
+                <li>
                     <p>Address<br>地址</p>
-                    <p>廣東省 深圳市 南山區 <br>科慧1路沛鴻大廈A2棟402</p>
+                    <p>{{contact.address}}</p>
                 </li>
             </ul>
             <div class="icon-wechat" @click="gotoAbout"><img src="../assets/images/icon-wechat-bottom.png"> </div>
@@ -41,6 +41,11 @@
         data(){
             return{
 
+            }
+        },
+        computed:{
+            contact(){
+                return this.$store.state.aboutData.contact;
             }
         },
         methods:{

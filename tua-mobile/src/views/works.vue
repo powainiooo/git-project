@@ -6,7 +6,7 @@
     <div>
         <top-nav @getID="getListData"></top-nav>
         <body-frame>
-            <div class="item-list clearfix">
+            <div class="item-list clearfix" style="margin-top: 70px;">
                 <work-item></work-item>
                 <work-item></work-item>
                 <work-item></work-item>

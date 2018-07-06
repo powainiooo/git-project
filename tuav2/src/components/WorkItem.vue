@@ -7,12 +7,12 @@
 </style>
 
 <template>
-    <a href="#" class="works-item">
-        <img src="../assets/images/pro-list1.jpg" width="265" height="210">
-        <h3>The Next Age <br>穿越未來來看你</h3>
+    <a href="javascript:;" class="works-item" @click="toDetail(item.id)">
+        <img :src="data.imgUrl" width="265" height="210">
+        <h3>{{data.title}}<br>{{data.title_ext}}</h3>
         <div class="time hkLight">
-            <span>音樂</span>
-            <span>項目時間 06/2018</span>
+            <span>{{data.type}}</span>
+            <span>項目時間 {{data.time}}</span>
         </div>
     </a>
 </template>
@@ -20,9 +20,15 @@
 <script type="es6">
     export default{
         name: 'App',
+        props:['data'],
         data(){
             return{
 
+            }
+        },
+        methods:{
+            toDetail(id){
+                this.$router.push({ name: 'workdetail', params: { id: id }})
             }
         }
     }

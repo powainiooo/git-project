@@ -42,7 +42,9 @@ const store = new Vuex.Store({
         ],
         cateID:0,
         isGuide:true,
-        audio:{}
+        audio:{},
+        aboutData:{},
+        indexData:{}
     },
     mutations: {
         doPassGuide (state) {
@@ -68,6 +70,14 @@ const store = new Vuex.Store({
             axios.get('api/cate_list').then((res)=>{
                 let data = res.data;
                 context.state.cateList = data;
+            }).catch((error)=>{
+                console.log(error);
+            })
+        },
+        doGetIndex (context) {
+            axios.get('api/cate_list').then((res)=>{
+                let data = res.data;
+                context.state.indexData = data;
             }).catch((error)=>{
                 console.log(error);
             })

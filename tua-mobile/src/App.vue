@@ -19,7 +19,7 @@
         -moz-osx-font-smoothing: grayscale;
     }
     img{ width: 100%;}
-    .body-frame{margin: 125px 3% 60px 3%;}
+    .body-frame{margin: 52px 3% 60px 3%;}
 
     .recommend-title{ font-size: 16px; padding-bottom: 8px; border-bottom: 2px solid #ededed; background: url('assets/images/arrow2.png') no-repeat; background-position: 70px 5px; margin-bottom: 20px;}
 

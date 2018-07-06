@@ -42,41 +42,14 @@
                 <swiper :options="swiperOption" ref="mySwiper">
                     <!-- slides -->
                     <swiper-slide>
-                        <section class="swiper-item">
-                            <div><router-link to="/works/detail/1"><img src="../assets/images/index-banner1.jpg" width="1120" height="560"> </router-link></div>
+                        <section class="swiper-item" v-for="item in bannerList">
+                            <div><router-link :to="'/works/detail/'+item.id"><img :src="item.imgUrl" width="1120" height="560"> </router-link></div>
                             <div v-if="activeIndex == 0">
-                                <router-link to="/works/detail/1">The Next Age 穿越未來來看你</router-link>
-                                <p class="hkLight">音樂作品表現大賽故宮和Next Idea 結合的主題，展現出傳統文化與未來現象之美。在前期的商討中，我們決定從京劇和Pap這兩種音樂表現形式入手</p>
+                                <router-link :to="'/works/detail/'+item.id">{{item.title}} {{item.subtitle}}</router-link>
+                                <p class="hkLight">{{item.intro}}</p>
                                 <div class="time hkLight">
-                                    <span>音樂</span>
-                                    <span>項目時間 06/2018</span>
-                                </div>
-                            </div>
-                        </section>
-                    </swiper-slide>
-                    <swiper-slide>
-                        <section class="swiper-item">
-                            <div><router-link to="/works/detail/1"><img src="../assets/images/index-banner1.jpg" width="1120" height="560"> </router-link></div>
-                            <div v-if="activeIndex == 0">
-                                <router-link to="/works/detail/1">The Next Age 穿越未來來看你</router-link>
-                                <p>音樂作品表現大賽故宮和Next Idea 結合的主題，展現出傳統文化與未來現象之美。在前期的商討中，我們決定從京劇和Pap這兩種音樂表現形式入手</p>
-                                <div class="time">
-                                    <span>音樂</span>
-                                    <span>項目時間 06/2018</span>
-                                </div>
-                            </div>
-
-                        </section>
-                    </swiper-slide>
-                    <swiper-slide>
-                        <section class="swiper-item">
-                            <div><router-link to="/works/detail/1"><img src="../assets/images/index-banner1.jpg" width="1120" height="560"> </router-link></div>
-                            <div v-if="activeIndex == 0">
-                                <router-link to="/works/detail/1">The Next Age 穿越未來來看你</router-link>
-                                <p>音樂作品表現大賽故宮和Next Idea 結合的主題，展現出傳統文化與未來現象之美。在前期的商討中，我們決定從京劇和Pap這兩種音樂表現形式入手</p>
-                                <div class="time">
-                                    <span>音樂</span>
-                                    <span>項目時間 06/2018</span>
+                                    <span>{{item.type}}</span>
+                                    <span>項目時間 {{item.time}}</span>
                                 </div>
                             </div>
                         </section>
@@ -99,14 +72,14 @@
             <div class="recommend-title">推薦案例</div>
 
             <div>
-                <div class="recommend-item">
-                    <div class="imgs"><router-link to="/works/detail/1"><img src="../assets/images/index-recm1.jpg" width="450" height="250"></router-link> </div>
+                <div class="recommend-item" v-for="item in recommendList">
+                    <div class="imgs"><router-link to="/works/detail/1"><img :src="item.imgUrl" width="450" height="250"></router-link> </div>
                     <div class="infos">
-                        <router-link to="/works/detail/1">The Next Age 穿越未來來看你</router-link>
-                        <p class="hkLight">音樂作品表現大賽故宮和Next Idea 結合的主題，展現出傳統文化與未來現象之美。在前期的商討中，我們決定從京劇和Pap這兩種音樂表現形式入手</p>
+                        <router-link to="/works/detail/1">{{item.title}} {{item.subtitle}}</router-link>
+                        <p class="hkLight">{{item.intro}}</p>
                         <div class="time hkLight">
-                            <span>音樂</span>
-                            <span>項目時間 06/2018</span>
+                            <span>{{item.type}}</span>
+                            <span>項目時間 {{item.time}}</span>
                         </div>
                     </div>
                 </div>
@@ -127,9 +100,26 @@
     export default{
         name: 'App',
         components:{TopNav,BottomNav,BodyFrame},
+        mounted(){
+            this.swiper = this.$refs.mySwiper.swiper;
+            this.activeIndex = this.swiper.activeIndex;
+
+            if(this.isGuide){
+                setTimeout(()=>{
+                    this.$store.commit('doPassGuide');
+                },2000);
+            }
+            this.$store.dispatch('doGetIndex')
+        },
         computed:{
             isGuide(){
                 return this.$store.state.isGuide
+            },
+            bannerList(){
+                return this.$store.state.indexData.banner
+            },
+            recommendList(){
+                return this.$store.state.indexData.recommend
             }
         },
         data(){
@@ -145,20 +135,8 @@
                         }
                     }
                 },
-                bannerList:[{},{},{}],
                 swiper:null,
                 activeIndex:0
-            }
-        },
-        mounted(){
-            this.swiper = this.$refs.mySwiper.swiper;
-            this.activeIndex = this.swiper.activeIndex;
-
-            if(this.isGuide){
-                setTimeout(()=>{
-                    this.$store.commit('doPassGuide');
-                },2000);
-
             }
         },
         methods: {

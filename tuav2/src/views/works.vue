@@ -6,14 +6,8 @@
     <div>
         <top-nav @getID="getListData"></top-nav>
         <body-frame>
-            <div class="item-list clearfix">
-                <work-item></work-item>
-                <work-item></work-item>
-                <work-item></work-item>
-                <work-item></work-item>
-                <work-item></work-item>
-                <work-item></work-item>
-                <work-item></work-item>
+            <div class="item-list clearfix"  v-infinite-scroll="loadMore" infinite-scroll-disabled="isLoading" infinite-scroll-distance="10">
+                <work-item v-for="item in proList" :data="item"></work-item>
             </div>
         </body-frame>
         <bottom-nav></bottom-nav>
@@ -38,12 +32,56 @@
         },
         data(){
             return{
-
+                cateID:0,
+                pageNo:1,
+                pageSize:20,
+                domain_url:"",
+                proList:[],
+                isListEnd:false,
+                isLoading:false
             }
         },
         methods:{
             getListData(id){
-                console.log(id);
+                this.cateID = id;
+                this.pageNo = 1;
+                this.isListEnd = false;
+                this.doGetProList('refresh');
+            },
+            doGetProList(load){
+                let self = this;
+                if(self.isListEnd) return;
+                self.isLoading = true;
+                self.$ajax.get('api/product_list',{
+                    params: {
+                        page: self.pageNo,
+                        pageSize:self.pageSize,
+                        cate: self.cateID
+                    }
+                }).then((res)=>{
+                    let data = res.data;
+                    self.domain_url = data.domain_url;
+                    if(load == 'refresh'){
+                        self.proList = data.data.list;
+                    }else if(load == 'loadmore'){
+                        if(data.data.list.length >0){
+                            data.data.list.map((item)=>{
+                                self.proList.push(item)
+                            })
+                        }
+                    }
+                    if(self.proList.length == data.data.nums){
+                        self.isListEnd = true;
+                    }
+                    self.isLoading = false;
+                }).catch((error)=>{
+                    console.log(error);
+                })
+            },
+            loadMore(){
+                if(this.isListEnd) return;
+                this.pageNo ++;
+                this.doGetProList('loadmore');
             }
         }
     }

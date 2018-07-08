@@ -5,11 +5,11 @@
 
     .profile{ margin-top: 90px;}
     .profile,.contact,.team{ border-bottom: 1px solid #e5e5e5; padding-bottom: 40px; margin-bottom: 40px; padding-left: 3%; padding-right: 3%;}
-    .profile div{ font-size: 14px; line-height: 1.8; margin-bottom: 20px;}
+    .profile div{ font-size: 14px; line-height: 1.8; margin-bottom: 20px; letter-spacing: 1.5px;}
 
     .about-title{ margin-bottom: 20px;}
     .about-title p{ font-size: 20px; margin-bottom: 15px;}
-    .about-title h3{ font-size: 16px; font-weight: normal;}
+    .about-title h3{ font-size: 16px; font-weight: normal; letter-spacing: 1.5px;}
     .about-title h3 span{ font-size: 10px; display: block;}
 
     .contact{ padding-bottom: 0;}
@@ -18,7 +18,7 @@
     .contact .infos li p{ line-height: 1.8;}
     .contact .infos li p a{ padding: 6px 16px; border: 1px solid #000; border-radius: 20px; color: #000;}
 
-    .team .content{font-size: 14px; line-height: 1.8; margin-bottom: 20px;}
+    .team .content{font-size: 14px; line-height: 1.8; margin-bottom: 20px; letter-spacing: 1.5px;}
 
     .member-item{ position: relative; width: 49%; margin-bottom: 2%; font-size: 0;}
     .member-item div{ color: #000; font-size: 12px; margin-top: 3%;}
@@ -40,7 +40,7 @@
         <top-nav></top-nav>
         <body-frame>
             <section style="font-size: 0; margin: 0 -3%;" ref="banner">
-                <img src="../assets/images/banner5.jpg">
+                <img :src="aboutData.domain_url+aboutData.cover">
             </section>
             <ul class="about-tag" ref="aboutTag">
                 <li :class="activeIndex == 1 ? 'active':''" @click="setTop(710)">公司簡介</li>
@@ -54,8 +54,8 @@
                     <p>01</p>
                     <h3>公司簡介<span>profile</span></h3>
                 </div>
-                <div>何方 设计事务所（HO），是一个极具活力和创造性的设计团队。我们的主要设计师和技术总监都为 Instagram，zcool，cargocollective 的邀请人员。我们的设计都是为上海，北京，深圳，广州等国内大都市品牌以及国际品牌服务，例如广州万科黄埔仓，铂涛集团，南方电网，上海风暴音乐节，深圳中诚安信等制作视觉策划，VI 规范系统。相信我们的工作经验和资源网络为我们服务的项目提供现代化的视野，区别于日渐呆板化的传统设计公司，为企业</div>
-                <div class="hkLight">策略 Strategy 设计策略是辨识设计条件和制定设计目标后指导设计工作开展的首要环节。我们对每一个问题的所有原因结果的探索出发来寻求一个最有效，最经济的到达目的的途径。策略是想象与理性的结合。它领先于所有组织及设计工作。 规划 Planning 规划是对资源潜能的见证，对有形无形的各种条件整合。是逻辑性的，空间性的和物质性的。 我们在规划中搭接各种元素的互生体系，研究持续发展的生态机制。通过设计上的控制，将生产成本降到最低，确保生产环节不出错。 视觉 Visua 我们把视觉看成一个对图形，文字，颜色的选择组合的过程，绝不形式决定，而是敏锐社会触觉的折射。我们还把视觉看成一个思想的构成，我们又把它看成一个通过实验并调整获得的知识构成。 生活风尚 Life Style 设计是生活的提炼，平面设计的就是对未来企业文化的或推测或引导的思辨过程。我们认为前卫的设计，不应该是离经叛道和脱离现实的；反之，真正意义上的前卫设计应该是熟知现实而不断超越和激发生活风尚的惊喜。</div>
+                <div v-html="aboutData.intro"></div>
+                <div class="hkLight" v-html="aboutData.idea"></div>
             </section>
 
             <section class="contact">
@@ -67,19 +67,19 @@
                     <ul class="infos hkLight">
                         <li>
                             <p>The contact<br>聯繫人</p>
-                            <p>鄭茗友</p>
+                            <p>{{aboutData.contact}}</p>
                         </li>
                         <li>
                             <p>E-mail<br>電子郵箱</p>
-                            <p>27318589@qq.com</p>
+                            <p>{{aboutData.email}}</p>
                         </li>
                         <li>
                             <p>Phone<br>手機</p>
-                            <p><a href="#">+86 137-2553-8273</a> <br>10:00am-7:00pm(工作日)</p>
+                            <p>{{aboutData.mobile}}<br>{{aboutData.time_slot}}</p>
                         </li>
                         <li>
                             <p>Address<br>地址</p>
-                            <p>廣東省 深圳市 南山區 <br>科慧1路沛鴻大廈A2棟402</p>
+                            <p>{{aboutData.address}}</p>
                         </li>
                     </ul>
                 </div>
@@ -91,29 +91,11 @@
                     <h3>團隊成員<span>team</span></h3>
                 </div>
                 <div>
-                    <div class="content">
-                        何方 设计事务所（HO），是一个极具活力和创造性的设计团队。我们的主要设计师和技术总监都为 Instagram，zcool，cargocollective 的邀请人员。我们的设计都是为上海，北京，深圳，广州等国内大都市品牌以及国际品牌服务，例如广州万科黄埔仓，铂涛集团，南方电网，上海风暴音乐节，深圳中诚安信等制作视觉策划，VI 规范系统。相信我们的工作经验和资源网络为我们服务的项目提供现代化的视野，区别于日渐呆板化的传统设计公司，为企业
-                    </div>
+                    <div class="content">{{aboutData.team}}</div>
                     <ul class="item-list clearfix">
-                        <li class="member-item">
-                            <img src="../assets/images/pro-list1.jpg" >
-                            <div>TAU</div>
-                        </li>
-                        <li class="member-item">
-                            <img src="../assets/images/pro-list2.jpg" >
-                            <div>TAU</div>
-                        </li>
-                        <li class="member-item">
-                            <img src="../assets/images/pro-list3.jpg" >
-                            <div>TAU</div>
-                        </li>
-                        <li class="member-item">
-                            <img src="../assets/images/pro-list4.jpg" >
-                            <div>TAU</div>
-                        </li>
-                        <li class="member-item">
-                            <img src="../assets/images/pro-list1.jpg" >
-                            <div>TAU</div>
+                        <li class="member-item" v-for="(item,index) in teamList" :key="index">
+                            <img :src="aboutData.domain_url+item.cover">
+                            <div>{{item.name}}</div>
                         </li>
                     </ul>
                 </div>
@@ -125,14 +107,12 @@
                     <h3>業務範圍<span>services</span></h3>
                 </div>
                 <div>
-                    <div class="content">
-                        何方 设计事务所（HO），是一个极具活力和创造性的设计团队。我们的主要设计师和技术总监都为 Instagram，zcool，cargocollective 的邀请人员。我们的设计都是为上海，北京，深圳，广州等国内大都市品牌以及国际品牌服务，例如广州万科黄埔仓，铂涛集团，南方电网，上海风暴音乐节，深圳中诚安信等制作视觉策划，VI 规范系统。相信我们的工作经验和资源网络为我们服务的项目提供现代化的视野，区别于日渐呆板化的传统设计公司，为企业
-                    </div>
+                    <div class="content">{{aboutData.range}}</div>
                     <ul class="pro-tag-list">
                         <li v-for="(item,index) in cateList">
-                            <a href="#">
+                            <a href="javascript:;"  @click="getList(index,item.id,0)">
                                 <h3>{{index+1}}</h3>
-                                <div>{{item.name}}</div>
+                                <div>{{item.cname}}</div>
                             </a>
                         </li>
                     </ul>
@@ -153,6 +133,7 @@
             let top = this.$route.params.top || 0;
             document.body.scrollTop = top;
             document.documentElement.scrollTop = top;
+            this.$store.dispatch('doGetAbout');
         },
         data(){
             return{
@@ -163,6 +144,15 @@
         computed:{
             cateList(){
                 return this.$store.state.cateList
+            },aboutData(){
+                return this.$store.state.aboutData;
+            },
+            teamList(){
+                try{
+                    return this.$store.state.aboutData.teams.list;
+                }catch(err){
+                    return []
+                }
             }
         },
         methods:{
@@ -173,7 +163,7 @@
                 let teamH = this.$refs.team.offsetHeight;
                 if(st >= bh){
                     this.$refs.aboutTag.style.position = 'fixed';
-                    this.$refs.aboutTag.style.top = '52px';
+                    this.$refs.aboutTag.style.top = '50px';
                     if(st >= bh && st < 1080){
                         this.activeIndex = 1;
                     }else if(st >= 1080 && st < 1740){
@@ -185,12 +175,21 @@
                     }
                 }else{
                     this.$refs.aboutTag.style.position = 'absolute';
-                    this.$refs.aboutTag.style.top = 52+bh+'px';
+                    this.$refs.aboutTag.style.top = 50+bh+'px';
                 }
             },
             setTop(pos){
                 document.body.scrollTop = pos;
                 document.documentElement.scrollTop = pos;
+            },
+            getList(index,id,id2){
+                this.$store.commit('setNavActiveIndex',index);
+                this.$store.commit('setCateID',[id,id2]);
+                if(this.$route.name != 'works'){
+                    this.$router.push('/works');
+                }else{
+                    this.$emit('getID',[id,id2]);
+                }
             }
         },
         beforeRouteLeave (to, from, next){

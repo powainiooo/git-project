@@ -5,7 +5,7 @@
     .audio .mid .name{ font-size: 14px;}
     .audio .mid .line{ height: 3px; background-color:  rgba(158,159,159,1); position: relative; margin-top: 14px;}
     .audio .mid .line .bar{ width: 50%; height: 3px; background-color: #bc9e44;}
-    .audio .time{ position: absolute; top: 25px; right: 0;font-size: 14px;}
+    .audio .time-name{ position: absolute; top: 25px; right: 0;font-size: 14px;}
 </style>
 
 <template>
@@ -18,7 +18,7 @@
                 <div class="bar" :style="{width:progress+'%'}"></div>
             </div>
         </div>
-        <div class="time">{{duration}}</div>{{refresh}}
+        <div class="time-name">{{duration}}</div>{{refresh}}
     </div>
 </template>
 
@@ -71,11 +71,15 @@
                 clearInterval(this.t);
             },
             getTime(time){
-                let m = Math.floor(time/60);
-                m = m > 9 ? m : '0'+m;
-                let s = Math.floor(time%60);
-                s = s > 9 ? s : '0'+s;
-                return `${m}:${s}`;
+                if(time === NaN){
+                    return '--'
+                }else{
+                    let m = Math.floor(time/60);
+                    m = m > 9 ? m : '0'+m;
+                    let s = Math.floor(time%60);
+                    s = s > 9 ? s : '0'+s;
+                    return `${m}:${s}`;
+                }
             },
             refreshBar(){
                 let self = this;

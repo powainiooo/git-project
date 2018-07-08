@@ -8,41 +8,22 @@ const store = new Vuex.Store({
         cateList:[
             {
                 id:0,
-                name:'音樂',
-                nameEn:'MUSIC',
-                list:[
+                cname:'音樂',
+                code:'MUSIC',
+                child:[
                     {
                         id:1,
-                        name:'海報'
-                    },
-                    {
-                        id:2,
-                        name:'HD'
+                        cname:'海報'
                     }
                 ]
-            },
-            {
-                id:3,
-                name:'平面',
-                nameEn:'GRAPHIC',
-                list:[]
-            },
-            {
-                id:4,
-                name:'繪畫',
-                nameEn:'PAINTING',
-                list:[]
-            },
-            {
-                id:5,
-                name:'影視',
-                nameEn:'VIDEO',
-                list:[]
             }
         ],
-        cateID:0,
+        cateID:[0,0],
         isGuide:true,
         audio:{},
+        aboutData:{},
+        indexData:{},
+        navActiveIndex:-4,
         showMenu:false
     },
     mutations: {
@@ -54,6 +35,9 @@ const store = new Vuex.Store({
         },
         setCateID(state,data){
             state.cateID = data;
+        },
+        setNavActiveIndex(state,data){
+            state.navActiveIndex = data;
         },
         setShowMenu(state,data){
             state.showMenu = data;
@@ -69,9 +53,25 @@ const store = new Vuex.Store({
             })
         },
         doGetCate (context) {
-            axios.get('api/cate_list').then((res)=>{
+            axios.get('admin/api_v2/cate_list').then((res)=>{
                 let data = res.data;
                 context.state.cateList = data;
+            }).catch((error)=>{
+                console.log(error);
+            })
+        },
+        doGetIndex (context) {
+            axios.get('admin/api_v2/ajax_home').then((res)=>{
+                let data = res.data;
+                context.state.indexData = data;
+            }).catch((error)=>{
+                console.log(error);
+            })
+        },
+        doGetAbout (context) {
+            axios.get('admin/api_v2/ajax_about').then((res)=>{
+                let data = res.data;
+                context.state.aboutData = data;
             }).catch((error)=>{
                 console.log(error);
             })

@@ -18,15 +18,15 @@
             <ul class="infos">
                 <li>
                     <p>E-mail<br>電子郵箱</p>
-                    <p>{{contact.email}}</p>
+                    <p>{{aboutData.email}}</p>
                 </li>
                 <li>
                     <p>Phone<br>手機</p>
-                    <p>{{contact.mobile}}<br>{{time_slot}}</p>
+                    <p>{{aboutData.mobile}}<br>{{aboutData.time_slot}}</p>
                 </li>
                 <li>
                     <p>Address<br>地址</p>
-                    <p>{{contact.address}}</p>
+                    <p>{{aboutData.address}}</p>
                 </li>
             </ul>
             <div class="icon-wechat" @click="gotoAbout"><img src="../assets/images/icon-wechat-bottom.png"> </div>
@@ -44,13 +44,20 @@
             }
         },
         computed:{
-            contact(){
-                return this.$store.state.aboutData.contact;
+            aboutData(){
+                return this.$store.state.aboutData;
             }
+        },
+        mounted(){
+            this.$store.dispatch('doGetAbout');
         },
         methods:{
             gotoAbout(){
-                this.$router.push({ name: 'about', params: { top: 1075 }})
+                if(this.$route.name == 'about'){
+                    this.$emit('clickWechat')
+                }else{
+                    this.$router.push({ name: 'about', params: { top: 1075 }})
+                }
             }
         }
     }

@@ -1,9 +1,9 @@
 <style>
-    .btn-top{ position: fixed; bottom:180px; right: 100px; z-index: 500; }
+    .btn-top{ position: absolute; bottom:-100px; right: 0; z-index: 500; }
 </style>
 
 <template>
-    <section class="body-frame">
+    <section class="body-frame" :style="{'min-height':minHeight+'px'}">
         <slot></slot>
         <a href="javascript:;" class="btn-top" @click="backTop"><img src="../assets/images/btn-top.png"> </a>
     </section>
@@ -14,7 +14,7 @@
         name: 'app',
         data(){
             return{
-
+                minHeight:window.innerHeight-185-230
             }
         },
         methods:{

@@ -6,6 +6,8 @@ import router from './router'
 import store from './store'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import axios from 'axios'
+import infiniteScroll from 'vue-infinite-scroll'
+Vue.use(infiniteScroll)
 
 // require styles
 import 'swiper/dist/css/swiper.css'

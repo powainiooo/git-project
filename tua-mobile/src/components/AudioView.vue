@@ -1,11 +1,11 @@
 <style scoped>
     .audio{ width: 100%; height: 45px; overflow: hidden; position: relative;}
-    .audio>a{ position: absolute; top: 0; left: 0;}
+    .audio>a{ width: 40px; height: 40px; position: absolute; top: 0; left: 0;}
     .audio .mid{ margin: 0 55px;}
     .audio .mid .name{ font-size: 14px;}
     .audio .mid .line{ height: 3px; background-color:  rgba(158,159,159,1); position: relative; margin-top: 14px;}
     .audio .mid .line .bar{ width: 50%; height: 3px; background-color: #bc9e44;}
-    .audio .time{ position: absolute; top: 25px; right: 0;font-size: 14px;}
+    .audio .time-name{ position: absolute; top: 25px; right: 0;font-size: 14px;}
 </style>
 
 <template>
@@ -18,7 +18,7 @@
                 <div class="bar" :style="{width:progress+'%'}"></div>
             </div>
         </div>
-        <div class="time">{{duration}}</div>{{refresh}}
+        <div class="time-name">{{duration}}</div>{{refresh}}
     </div>
 </template>
 
@@ -71,11 +71,17 @@
                 clearInterval(this.t);
             },
             getTime(time){
-                let m = Math.floor(time/60);
-                m = m > 9 ? m : '0'+m;
-                let s = Math.floor(time%60);
-                s = s > 9 ? s : '0'+s;
-                return `${m}:${s}`;
+                console.log(typeof time);
+                if(typeof time != 'number'){
+                    console.log('nan');
+                    return '--'
+                }else{
+                    let m = Math.floor(time/60);
+                    m = m > 9 ? m : '0'+m;
+                    let s = Math.floor(time%60);
+                    s = s > 9 ? s : '0'+s;
+                    return `${m}:${s}`;
+                }
             },
             refreshBar(){
                 let self = this;

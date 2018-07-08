@@ -32,7 +32,7 @@ const store = new Vuex.Store({
             time_slot:''
         },
         cateList:[],
-        isGuide:true,
+        isGuide:false,
         audio:{}
     },
     mutations: {

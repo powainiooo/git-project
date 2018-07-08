@@ -10,7 +10,15 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+      proxyTable: {
+          '/admin':{
+              target:'http://tau.pc-online.cc/admin',
+              changeOrigin:true,
+              pathRewrite:{
+                  '^/admin':''
+              }
+          }
+      },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST

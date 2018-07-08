@@ -19,9 +19,9 @@
         -moz-osx-font-smoothing: grayscale;
     }
     img{ width: 100%;}
-    .body-frame{margin: 52px 3% 60px 3%;}
+    .body-frame{margin: 50px 3% 60px 3%;}
 
-    .recommend-title{ font-size: 16px; padding-bottom: 8px; border-bottom: 2px solid #ededed; background: url('assets/images/arrow2.png') no-repeat; background-position: 70px 5px; margin-bottom: 20px;}
+    .recommend-title{ font-size: 16px; padding: 8px 0; border-bottom: 2px solid #ededed; background: url('assets/images/arrow2.png') no-repeat; background-position: 70px center; margin-bottom: 20px;}
 
-    .item-list{ display: flex; flex-wrap: wrap; justify-content: space-between;}
+    .item-list{ display: flex; flex-wrap: wrap; justify-content: space-between; margin-top: 70px;}
 </style>

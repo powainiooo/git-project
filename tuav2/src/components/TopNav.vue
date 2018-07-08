@@ -19,12 +19,12 @@
 <template>
     <header class="top-nav">
         <section class="clearfix">
-            <div class="logo" @click="gotoPage('index',-4)"><img src="../assets/images/logo.png" width="115"> </div>
+            <div class="logo" @click="gotoPage('/index',-4)"><img src="../assets/images/logo.png" width="115"> </div>
             <nav>
                 <ul class="first-level hkLight">
                     <li :class="activeIndex == -2 ? 'active' : ''">
                         <a href="javascript:;"
-                           @click="getList(-2,0)">
+                           @click="getList(-2,0,0)">
                             全部
                             <span>ALL</span>
                         </a>
@@ -32,18 +32,18 @@
                     <li v-for="(item,index) in cateList"
                         :class="activeIndex == index ? 'active' : ''">
                         <a href="javascript:;"
-                           @click="getList(index,item.id)">
-                            {{item.name}}
-                            <span>{{item.nameEn}}</span>
+                           @click="getList(index,item.id,0)">
+                            {{item.cname}}
+                            <span>{{item.code}}</span>
                         </a>
                         <ul class="second-level"
-                            v-if="item.list.length != 0">
-                            <li v-for="listItem in item.list"><a href="javascript:;" @click="getList(index,listItem.id)">{{listItem.name}}</a> </li>
+                            v-if="item.child.length != 0">
+                            <li v-for="listItem in item.child"><a href="javascript:;" @click="getList(index,item.id,listItem.id)">{{listItem.cname}}</a> </li>
                         </ul>
                     </li>
                     <li :class="activeIndex == -3 ? 'active' : ''">
                         <a href="javascript:;"
-                           @click="gotoPage('about',-3)">
+                           @click="gotoPage('/about',-3)">
                             關於
                             <span>ABOUT</span>
                         </a>
@@ -59,27 +59,33 @@
         name: 'App',
         data(){
             return{
-                activeIndex:-4//首页-1，全部-2，关于页-3
+                activeIndex2:-4//首页-1，全部-2，关于页-3
             }
         },
+        mounted(){
+            this.$store.dispatch('doGetCate');
+        },
         methods:{
-            getList(index,id){
-                this.activeIndex = index;
-                this.$store.commit('setCateID',id);
+            getList(index,id,id2){
+                this.$store.commit('setNavActiveIndex',index);
+                this.$store.commit('setCateID',[id,id2]);
                 if(this.$route.name != 'works'){
-                    this.$router.push('works');
+                    this.$router.push('/works');
                 }else{
-                    this.$emit('getID',id);
+                    this.$emit('getID',[id,id2]);
                 }
             },
             gotoPage(name,index){
-                this.activeIndex = index;
+                this.$store.commit('setNavActiveIndex',index);
                 this.$router.push(name)
             }
         },
         computed:{
             cateList(){
                 return this.$store.state.cateList
+            },
+            activeIndex(){
+                return this.$store.state.navActiveIndex
             }
         }
     }

@@ -7,7 +7,10 @@
         <top-nav @getID="getListData"></top-nav>
         <body-frame>
             <div class="item-list clearfix"  v-infinite-scroll="loadMore" infinite-scroll-disabled="isLoading" infinite-scroll-distance="10">
-                <work-item v-for="item in proList" :data="item"></work-item>
+                <work-item v-for="item in proList"
+                           :data="item"
+                           :mainUrl="domain_url"
+                           :key="item.id"></work-item>
             </div>
         </body-frame>
         <bottom-nav></bottom-nav>
@@ -22,17 +25,12 @@
     export default{
         name: 'App',
         components:{TopNav,BottomNav,WorkItem,BodyFrame},
-        computed:{
-            cateID(){
-                return this.$store.state.cateID
-            }
-        },
         mounted(){
             this.getListData(this.$store.state.cateID);
         },
         data(){
             return{
-                cateID:0,
+                cateID:[0,0],
                 pageNo:1,
                 pageSize:20,
                 domain_url:"",
@@ -52,11 +50,12 @@
                 let self = this;
                 if(self.isListEnd) return;
                 self.isLoading = true;
-                self.$ajax.get('api/product_list',{
+                self.$ajax.get('admin/api_v2/product_list',{
                     params: {
                         page: self.pageNo,
-                        pageSize:self.pageSize,
-                        cate: self.cateID
+                        pageSize:10,
+                        cate: self.cateID[0],
+                        cate2: self.cateID[1]
                     }
                 }).then((res)=>{
                     let data = res.data;

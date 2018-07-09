@@ -46,15 +46,10 @@
         <div class="swiper-wrapper">
             <!-- page1 -->
             <div class="swiper-slide page1-content">
-                <transition leave-active-class="animated fadeOut">
-                    <!--<div class="cover-post" v-if="isShowPost" style="background-image: url('images/bg1.jpg')"> </div>-->
-                </transition>
                 <div class="title">
                     <p><img src="images/logo-index.png"></p>
                     <div>年轻态度，原创潮流品牌</div>
                 </div>
-
-                <div class="hint" :style="{'background-position':hintPos.left+'px '+hintPos.top+'px'}"></div>
             </div>
             <!-- page2 -->
             <div class="swiper-slide" :class="noSwipe?'stop-swiping':''">
@@ -64,18 +59,7 @@
                 <!--</transition>-->
                 <div class="page2-content">
                     <div id="news-scroll-line">
-                        <div class="scroll-bar"
-                             @mouseover="noSwipe=true"
-                             @mouseleave="noSwipe=false"
-                             :style="{top:proScrollTop+'px'}"
-                             @mousedown="proScrollBarMD($event)">
-                            <ul class="arrow-list">
-                                <li><img src="images/arrow.png"> </li>
-                                <li><img src="images/arrow.png"> </li>
-                                <li><img src="images/arrow.png"> </li>
-                                <li><img src="images/arrow.png"> </li>
-                            </ul>
-                        </div>
+
                     </div>
                     <div id="news-content-handler">
                         <div id="news-lines"></div>
@@ -101,7 +85,7 @@
                 </div>
             </div>
             <!-- page3 -->
-            <div class="swiper-slide" style="background-color: #000;" :class="noSwipe?'stop-swiping':''">
+            <div class="swiper-slide" style="background-color: #000; overflow-y: scroll" :class="noSwipe?'stop-swiping':''">
                 <div class="page3-content">
                     <div class="scroll-frame" ref="p3frame" :style="{top:p3.fTop+'px'}">
                         <a v-for="item in p3.list"
@@ -113,27 +97,13 @@
                         </a>
                     </div>
                 </div>
-                <div class="p3-scroll" v-if="p3.list.length > 4">
-                    <div class="p3-bar"
-                         :style="{top:p3.sTop+'px'}"
-                         @mouseover="noSwipe=true"
-                         @mouseleave="noSwipe=false"
-                         @mousedown="proScrollBarMD2($event)">
-                        <ul class="arrow-list">
-                            <li><img src="images/arrow.png"> </li>
-                            <li><img src="images/arrow.png"> </li>
-                            <li><img src="images/arrow.png"> </li>
-                            <li><img src="images/arrow.png"> </li>
-                        </ul>
-                    </div>
-                </div>
             </div>
             <!-- page4 -->
             <div class="swiper-slide">
                 <!--<video src="video/video1.mp4" loop autoplay></video>-->
                 <!--<transition leave-active-class="animated fadeOut">-->
                 <!--<div class="cover-post" v-if="isShowPost3" style="background-image: url('images/bg4.jpg')"> </div>-->
-                <div class="page4-content" :style="{'margin-top':p4mt+'px'}">
+                <div class="page4-content">
                     <ul>
                         <li v-for="(item,index) in p4List"
                             @click.prevent="p4liClick(index)"

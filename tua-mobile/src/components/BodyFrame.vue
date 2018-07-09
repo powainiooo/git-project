@@ -1,9 +1,9 @@
 <style>
     .body-frame .bgCover{ width: 100vw; height: 100vh; background-color: rgba(0,0,0,0.5);  position: fixed; top: 0; left: 0; z-index: 1050}
-    .nav-frame{ width: 100vw; height: 100vh; position: fixed; top: 0; left: 0; z-index: 1100}
+    .nav-frame{ width: 100vw; height: 100vh; position: fixed; top: 0; left: 0; z-index: 1100; }
     .nav-frame .btn-close{ height: 52px; display: flex; padding: 0 5%; justify-content: flex-end; align-items: center;}
     .nav-frame .btn-close img{ width: 20px;}
-    .nav-frame nav{ width: 70%; position: absolute; top: 0; right: 0; bottom: 0; background-color: #fff; padding:0 15px;}
+    .nav-frame nav{ width: 70%; position: absolute; top: 0; right: 0; bottom: 0; background-color: #fff; padding:0 15px;overflow-y: scroll;}
     .nav-frame nav .first-level>li{  border-top: 1px solid #e5e5e5;}
     .nav-frame nav .first-level>li>a{ font-size: 16px; color: #000; display: block;padding: 15px 0 15px 40px;}
     .nav-frame nav .first-level>li .second-level{ margin-left: 40px; }
@@ -31,7 +31,7 @@
         </transition>
         <transition name="slide">
         <div class="nav-frame" v-if="showMenu" @touchmove.prevent="move($event)">
-            <nav>
+            <nav @touchmove.stop="move($event)">
                 <a href="javascript:;" class="btn-close" @click="doHideMenu"><img src="../assets/images/btn-close.png"> </a>
                 <ul class="first-level hkLight">
                     <li>

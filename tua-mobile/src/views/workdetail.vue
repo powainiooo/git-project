@@ -3,6 +3,7 @@
     .swiper-frame .dots{ display: flex; align-items: center; margin-top: 10px; margin-left: 3%;}
     .swiper-frame .dots li{ width: 4px; height: 4px; border-radius: 50%; background-color: #181a19; margin-right: 10px;}
     .swiper-frame .dots li.active{ width: 8px; height: 8px; background-color: #c29836;}
+    .swiper-frame .banner-img{ width: 100%; height: 300px; background-repeat: no-repeat; background-size: cover; background-position: center center;}
 
     .detail-infos{ margin-top: 25px;}
     .detail-infos h3{ font-size: 20px; letter-spacing: 1.5px; margin-bottom: 15px;}
@@ -24,17 +25,26 @@
         <top-nav></top-nav>
         <body-frame>
             <div class="swiper-frame"  v-if="!showVideo">
-                <swiper :options="swiperOption" ref="mySwiper">
-                    <swiper-slide v-for="(item,index) in bannerList" :key="index"><img :src="domain_url+item"> </swiper-slide>
+                <div class="banner-img"
+                     v-if="bannerList.length == 1"
+                     :style="{'background-image':'url(\''+domain_url+bannerList[0]+'\')'}"></div>
+                <swiper :options="swiperOption" ref="mySwiper" v-show="bannerList.length > 1">
+                    <swiper-slide v-for="(item,index) in bannerList"
+                                    class="banner-img"
+                                    :style="{'background-image':'url(\''+domain_url+item+'\')'}"
+                                  :key="index">
+                    </swiper-slide>
                 </swiper>
                 <ul class="dots" v-if="bannerList.length > 1">
                     <li v-for="(item,index) in bannerList" :class="activeIndex == index ? 'active' : ''"></li>
                 </ul>
             </div>
 
-            <video-view  v-if="showVideo"
-                         :vid="vid"
-                         :postImg="vPostImg"></video-view>
+            <div style="margin: 0 -3%">
+                <video-view  v-if="showVideo"
+                             :vid="vid"
+                             :postImg="vPostImg"></video-view>
+            </div>
 
 
             <div class="detail-infos">
@@ -42,7 +52,7 @@
                 <div class="time hkLight">
                     <span v-if="detailData.cate2 == ''">{{detailData.catename}}</span>
                     <span v-if="detailData.cate2 != ''">{{detailData.catename}} / {{detailData.catename2}}</span>
-                    <span>項目時間 {{new Date(detailData.ctime).format('MM/dd')}}</span>
+                    <span>項目時間 {{new Date(parseInt(detailData.ctime)).format('MM/dd')}}</span>
                 </div>
 
                 <a :href="detailData.h5_link"

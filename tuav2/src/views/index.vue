@@ -62,7 +62,7 @@
                                 <div class="time hkLight">
                                     <span v-if="item.cate2 == ''"><a href="javascript:;" @click="getList(item.cate,0)"> {{item.catename}}</a></span>
                                     <span v-if="item.cate2 != ''"><a href="javascript:;" @click="getList(item.cate,0)"> {{item.catename}}</a> / <a href="javascript:;"  @click="getList(item.cate,item.cate2)"> {{item.catename2}}</a></span>
-                                    <span>項目時間 {{new Date(item.ctime).format('MM/dd')}}</span>
+                                    <span>項目時間 {{new Date(parseInt(item.ctime)).format('MM/dd')}}</span>
                                 </div>
                             </div>
                         </section>
@@ -96,7 +96,7 @@
                         <div class="time hkLight">
                             <span v-if="item.cate2 == ''"><a href="javascript:;" @click="getList(item.cate,0)"> {{item.catename}}</a></span>
                             <span v-if="item.cate2 != ''"><a href="javascript:;" @click="getList(item.cate,0)"> {{item.catename}}</a> / <a href="javascript:;"  @click="getList(item.cate,item.cate2)"> {{item.catename2}}</a></span>
-                            <span>項目時間 {{new Date(item.ctime).format('MM/dd')}}</span>
+                            <span>項目時間 {{new Date(parseInt(item.ctime)).format('MM/dd')}}</span>
                         </div>
                     </div>
                 </div>

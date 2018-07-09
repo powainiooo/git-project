@@ -12,11 +12,6 @@ var app = new Vue({
         isShowPost3:true,
         isShowPost4:true,
         isShowPost5:true,
-        hintPos:{
-            top:0,
-            left:0
-        },
-        p4mt:-92,
         p4Index:0,
         rectList:[],
         delayList:[],
@@ -68,7 +63,6 @@ var app = new Vue({
                 self.$refs.topNav.isMenu = true;
             }
         });
-        self.initHint();
         self.p3.height = (window.innerHeight-180)/2*Math.ceil(self.p3.list.length/2);
 
         window.onresize = () => {
@@ -89,7 +83,7 @@ var app = new Vue({
             this.getPage6Data();
         },
         getPage2Data(){
-            //let self = this;
+            let self = this;
             //axios.get('/index.php/main/ajax_screen2_list').then(function (res) {
             //    var data = res.data;
             //    self.proList = data.data.list;
@@ -158,39 +152,98 @@ var app = new Vue({
             //}).catch(function (error) {
             //    console.log(error);
             //});
-            self.p3.list = data.data.list;
+            self.p3.list = [
+                {
+                    id:1,
+                    img:'images/bg3-1.jpg',
+                    url:''
+                },
+                {
+                    id:1,
+                    img:'images/bg3-1.jpg',
+                    url:''
+                },
+                {
+                    id:1,
+                    img:'images/bg3-1.jpg',
+                    url:''
+                },
+                {
+                    id:1,
+                    img:'images/bg3-1.jpg',
+                    url:''
+                },
+                {
+                    id:1,
+                    img:'images/bg3-1.jpg',
+                    url:''
+                },
+                {
+                    id:1,
+                    img:'images/bg3-1.jpg',
+                    url:''
+                }
+            ];
             let itemH = parseInt((window.innerWidth*0.44)*438/840);
             self.p3.height = itemH*Math.ceil(self.p3.list.length/2);
+            self.hideLoading('page3');
         },
         getPage4Data(){
             let self = this;
-            axios.get('/index.php/main/ajax_screen4_list').then(function (res) {
-                var data = res.data;
-                self.p4List = data.data.list;
-                self.hideLoading('page4');
-            }).catch(function (error) {
-                console.log(error);
-            });
+            //axios.get('/index.php/main/ajax_screen4_list').then(function (res) {
+            //    var data = res.data;
+            //    self.p4List = data.data.list;
+            //    self.hideLoading('page4');
+            //}).catch(function (error) {
+            //    console.log(error);
+            //});
+            self.p4List = [
+                {
+                    content:'111111',
+                    id:1,
+                    rank:1,
+                    title:'会员权益'
+                },
+                {
+                    content:'222222',
+                    id:2,
+                    rank:2,
+                    title:'会员权益2'
+                }
+            ];
+            self.hideLoading('page4');
         },
         getPage5Data(){
             let self = this;
-            axios.get('/index.php/main/ajax_screen5').then(function (res) {
-                var data = res.data;
-                self.p5DetailData = data.data;
-                self.hideLoading('page5');
-            }).catch(function (error) {
-                console.log(error);
-            });
+            //axios.get('/index.php/main/ajax_screen5').then(function (res) {
+            //    var data = res.data;
+            //    self.p5DetailData = data.data;
+            //    self.hideLoading('page5');
+            //}).catch(function (error) {
+            //    console.log(error);
+            //});
+            self.p5DetailData = {
+                title:'关于大鯤',
+                ctime:'2018-07-09 10:36:09',
+                content:'关于大鯤关于大鯤关于大鯤'
+            };
+            self.hideLoading('page5');
         },
         getPage6Data(){
             let self = this;
-            axios.get('/index.php/main/ajax_screen6').then(function (res) {
-                var data = res.data;
-                self.p6DetailData = data.data;
-                self.hideLoading('page6');
-            }).catch(function (error) {
-                console.log(error);
-            });
+            //axios.get('/index.php/main/ajax_screen6').then(function (res) {
+            //    var data = res.data;
+            //    self.p6DetailData = data.data;
+            //    self.hideLoading('page6');
+            //}).catch(function (error) {
+            //    console.log(error);
+            //});
+            self.p6DetailData = {
+                title:'品牌招商',
+                ctime:'2018-07-09 10:36:09',
+                content:'品牌招商品牌招商品牌招商'
+            };
+            self.hideLoading('page6');
         },
         hideLoading(name){
             console.log(name);
@@ -221,23 +274,6 @@ var app = new Vue({
             //self.hideLoading('video');
             self.isShowPost = false;
             self.$refs.bgVideo.volume = 0;
-        },
-        initHint(){
-            let arr = [];
-            for(let i=0;i<44;i++){
-                arr[i] = [];
-                arr[i][0] = -226*(i%8);
-                arr[i][1] = -68*Math.floor(i/8);
-            }
-            let index = 0;
-            setInterval(()=>{
-                index ++;
-                if(index == 44){
-                    index = 0;
-                }
-                this.hintPos.left = arr[index][0];
-                this.hintPos.top = arr[index][1];
-            },50)
         },
         p4mdown(e){
             this.mousedownX = e.screenX;

@@ -18,7 +18,7 @@
         <div class="time hkLight">
             <span v-if="data.cate2 == ''"><a href="javascript:;" @click="getList(data.cate,0)"> {{data.catename}}</a></span>
             <span v-if="data.cate2 != ''"><a href="javascript:;" @click="getList(data.cate,0)"> {{data.catename}}</a> / <a href="javascript:;"  @click="getList(data.cate,data.cate2)"> {{data.catename2}}</a></span>
-            <span>項目時間 {{new Date(data.ctime).format('MM/dd')}}</span>
+            <span>項目時間 {{new Date(parseInt(data.ctime)).format('MM/dd')}}</span>
         </div>
     </a>
 </template>

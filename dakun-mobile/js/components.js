@@ -18,13 +18,6 @@ Vue.component('footer-nav',{
                 <li><a href="javascript:;" class="icon-renren" @click="doShareRenren"></a> </li>
             </ul>
         </div>
-
-        <div class="lines">
-            <ul>
-                <li v-for="item in 7"></li>
-            </ul>
-            <div class="bar" :style="{left:((index-1)*40+index)+'px'}"></div>
-        </div>
         <div class="customer-frame">
             <span>0592-5172062</span>
             <a href="#" class="btn-customer"></a>
@@ -60,6 +53,7 @@ Vue.component('top-nav',{
     <div class="top-nav" :class="isMenu?'top-nav-slide':''">
         <div class="clearfix">
             <a href="#" class="logo"><img src="${conf.base_url}images/logo1.png"></a>
+            <a href="javascript:;"class="btn-menu" @click="showMenu"><img src="${conf.base_url}images/menu.png"> </a>
             <nav class="nav">
                 <ul>
                     <li :class="slideindex == 1 ? 'active':''"><a href="javascript:;" @click="slideTo(0)">首页</a> </li>
@@ -71,9 +65,7 @@ Vue.component('top-nav',{
                     <li :class="slideindex == 7 ? 'active':''"><a href="javascript:;" @click="slideTo(6)">联系我们</a> </li>
                 </ul>
             </nav>
-            <a href="#" class="btn-mall">去购物</a>
         </div>
-        <div class="menu"><a href="javascript:;" @click="showMenu"><img src="${conf.base_url}images/menu.png"> </a> </div>
     </div>`,
     name:'TopNav',
     data:function(){

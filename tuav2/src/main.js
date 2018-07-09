@@ -27,7 +27,8 @@ Date.prototype.format = function(format)
             RegExp.$1.length==1 ? o[k] :
                 ("00"+ o[k]).substr((""+ o[k]).length));
     return format;
-}
+};
+console.log(new Date().format('yyyy'))
 
 // require styles
 import 'swiper/dist/css/swiper.css'

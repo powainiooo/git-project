@@ -57,7 +57,7 @@
                         <div class="time hkLight">
                             <span v-if="item.cate2 == ''">{{item.catename}}</span>
                             <span v-if="item.cate2 != ''">{{item.catename}} / {{item.catename2}}</span>
-                            <span>項目時間 {{new Date(item.ctime).format('MM/dd')}}</span>
+                            <span>項目時間 {{new Date(parseInt(item.ctime)).format('MM/dd')}}</span>
                         </div>
                     </div>
                 </div>
@@ -125,8 +125,6 @@
 
             }
             this.$store.dispatch('doGetIndex');
-        },
-        methods: {
         }
     }
 

@@ -6,7 +6,7 @@
     <div>
         <top-nav @getID="getListData"></top-nav>
         <body-frame @getID="getListData">
-            <div class="item-list clearfix"  v-infinite-scroll="loadMore" infinite-scroll-disabled="isLoading" infinite-scroll-distance="10">
+            <div class="item-list"  v-infinite-scroll="loadMore" infinite-scroll-disabled="isLoading" infinite-scroll-distance="10">
                 <work-item v-for="item in proList"
                            :data="item"
                            :mainUrl="domain_url"

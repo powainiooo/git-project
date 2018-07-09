@@ -10,8 +10,8 @@
 
 <template>
     <div class="audio">
-        <a href="javascript:;" v-if="paused" @click="doPlay"><img src="../assets/images/music-play.png"> </a>
-        <a href="javascript:;" v-if="!paused" @click="doPause"><img src="../assets/images/music-pause.png"> </a>
+        <a href="javascript:;" v-if="paused" @click="doPlay"><img src="../assets/images/music-play.png" width="42" height="42"> </a>
+        <a href="javascript:;" v-if="!paused" @click="doPause"><img src="../assets/images/music-pause.png" width="42" height="42"> </a>
         <div class="mid">
             <div class="name">{{title}}</div>
             <div class="line">

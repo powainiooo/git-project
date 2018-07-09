@@ -12,9 +12,9 @@
         <img :src="mainUrl+data.cover">
         <h3>{{data.title}}<br>{{data.title_ext}}</h3>
         <div class="time hkLight">
-            <span v-if="data.cate2 == ''">{{data.cate}}</span>
-            <span v-if="data.cate2 != ''">{{data.cate}} / {{data.cate2}}</span>
-            <span>項目時間 {{data.ctime}}</span>
+            <span v-if="data.cate2 == ''">{{data.catename}}</span>
+            <span v-if="data.cate2 != ''">{{data.catename}} / {{data.catename2}}</span>
+            <span>項目時間 {{new Date(item.ctime).format('MM/dd')}}</span>
         </div>
 
     </a>

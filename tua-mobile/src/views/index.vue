@@ -53,11 +53,11 @@
                 <div class="recommend-item" v-for="item in recommendList">
                     <div class="imgs"><router-link :to="'/works/detail/'+item.id"><img :src="mainUrl+item.news_cover"></router-link> </div>
                     <div class="infos">
-                        <router-link to="/works/detail/1">{{item.title}}<br> {{item.title_ext}}</router-link>
+                        <router-link :to="'/works/detail/'+item.id">{{item.title}}<br> {{item.title_ext}}</router-link>
                         <div class="time hkLight">
-                            <span v-if="item.cate2 == ''">{{item.cate}}</span>
-                            <span v-if="item.cate2 != ''">{{item.cate}} / {{item.cate2}}</span>
-                            <span>項目時間 {{item.ctime}}</span>
+                            <span v-if="item.cate2 == ''">{{item.catename}}</span>
+                            <span v-if="item.cate2 != ''">{{item.catename}} / {{item.catename2}}</span>
+                            <span>項目時間 {{new Date(item.ctime).format('MM/dd')}}</span>
                         </div>
                     </div>
                 </div>

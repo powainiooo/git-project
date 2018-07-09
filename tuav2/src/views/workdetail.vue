@@ -60,9 +60,9 @@
             <div class="detail-infos">
                 <h3>{{detailData.title}}<br> {{detailData.title_ext}}</h3>
                 <div class="time hkLight">
-                    <span v-if="detailData.cate2 == ''">{{detailData.cate}}</span>
-                    <span v-if="detailData.cate2 != ''">{{detailData.cate}} / {{detailData.cate2}}</span>
-                    <span>項目時間 {{detailData.ctime}}</span>
+                    <span v-if="detailData.cate2 == ''">{{detailData.catename}}</span>
+                    <span v-if="detailData.cate2 != ''">{{detailData.catename}} / {{detailData.catename2}}</span>
+                    <span>項目時間 {{new Date(detailData.ctime).format('MM/dd')}}</span>
                 </div>
 
                 <div class="audio-frame">

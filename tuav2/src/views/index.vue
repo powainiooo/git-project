@@ -22,7 +22,7 @@
     .recommend-item{ width: 1130px; margin-bottom: 25px; display: flex; justify-content: space-between;}
     .recommend-item .imgs{ width: 450px; position: relative; font-size: 0;}
     .recommend-item .imgs a{ display: block;}
-    .recommend-item .imgs:hover a:after{ content: 'More'; font-size: 20px; color: #fff; display: flex; justify-content: center; align-items: center; background-color: rgba(0,0,0,0.5); position: absolute; top: 0; left: 0; right: 0; bottom: 0;}
+    .recommend-item .imgs:hover a:after{ content: 'More'; font-size: 20px; color: #fff; display: flex; justify-content: center; align-items: center; background-color: rgba(0,0,0,0.5); width: 450px; height: 250px; position: absolute; top: 0; left: 0;}
     .recommend-item .infos{ width: 630px;}
     .recommend-item .infos a{ font-size: 28px; letter-spacing: 6px; margin-bottom: 10px; color: #000; display: block; white-space:nowrap; text-overflow: ellipsis; overflow: hidden; }
     .recommend-item .infos a:hover{ color: #7f7f7f;}
@@ -62,7 +62,7 @@
                                 <div class="time hkLight">
                                     <span v-if="item.cate2 == ''"><a href="javascript:;" @click="getList(item.cate,0)"> {{item.catename}}</a></span>
                                     <span v-if="item.cate2 != ''"><a href="javascript:;" @click="getList(item.cate,0)"> {{item.catename}}</a> / <a href="javascript:;"  @click="getList(item.cate,item.cate2)"> {{item.catename2}}</a></span>
-                                    <span>項目時間 {{item.ctime}}</span>
+                                    <span>項目時間 {{new Date(item.ctime).format('MM/dd')}}</span>
                                 </div>
                             </div>
                         </section>
@@ -96,7 +96,7 @@
                         <div class="time hkLight">
                             <span v-if="item.cate2 == ''"><a href="javascript:;" @click="getList(item.cate,0)"> {{item.catename}}</a></span>
                             <span v-if="item.cate2 != ''"><a href="javascript:;" @click="getList(item.cate,0)"> {{item.catename}}</a> / <a href="javascript:;"  @click="getList(item.cate,item.cate2)"> {{item.catename2}}</a></span>
-                            <span>項目時間 {{item.ctime}}</span>
+                            <span>項目時間 {{new Date(item.ctime).format('MM/dd')}}</span>
                         </div>
                     </div>
                 </div>

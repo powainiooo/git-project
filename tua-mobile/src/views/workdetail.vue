@@ -15,6 +15,8 @@
     .detail-infos .author-list li span{ width: 100px;}
 
     .audio-frame{ margin: 25px 0 30px 0;}
+
+    .btn-link{width: 30%; font-size: 12px; text-align: center; padding: 7px 0; display: block; border: 1px solid #000; color: #000; border-radius: 20px; margin-top: 25px;}
 </style>
 
 <template>
@@ -38,10 +40,14 @@
             <div class="detail-infos">
                 <h3>{{detailData.title}}<br> {{detailData.title_ext}}</h3>
                 <div class="time hkLight">
-                    <span v-if="detailData.cate2 == ''">{{detailData.cate}}</span>
-                    <span v-if="detailData.cate2 != ''">{{detailData.cate}} / {{detailData.cate2}}</span>
-                    <span>項目時間 {{detailData.ctime}}</span>
+                    <span v-if="detailData.cate2 == ''">{{detailData.catename}}</span>
+                    <span v-if="detailData.cate2 != ''">{{detailData.catename}} / {{detailData.catename2}}</span>
+                    <span>項目時間 {{new Date(detailData.ctime).format('MM/dd')}}</span>
                 </div>
+
+                <a :href="detailData.h5_link"
+                   v-if="detailData.h5_link != ''"
+                   class="btn-link">查看H5</a>
 
                 <div class="audio-frame">
                     <audio-view

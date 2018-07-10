@@ -5,26 +5,14 @@ var app = new Vue({
         ajaxIndex:0,
         showLoading:true,
         showMenu:true,
+        showHint:true,
         slideIndex:1,
         mySwiper: Object,
-        isShowPost:true,
-        isShowPost2:true,
-        isShowPost3:true,
-        isShowPost4:true,
-        isShowPost5:true,
         p4Index:0,
-        rectList:[],
-        delayList:[],
-        showRectList:true,
-        proList:[],
-        proFrameHeight:1080,
-        proFrameTop:0,
-        proScrollTop:0,
+        rectList:['A','B','O','U','T','关','于','大','鲲','','D','A','K','U','N'],
+        proList:[[],[],[]],
         noSwipe:false,
         p3:{
-            height:0,
-            fTop:0,
-            sTop:100,
             list:[]
         },
         p4List:[],
@@ -45,32 +33,23 @@ var app = new Vue({
     },
     mounted(){
         let self = this;
-        self.initRectList();
         self.mySwiper = new Swiper('.swiper-container',{
             noSwiping:true,
-            //initialSlide:2,
+            //initialSlide:1,
             noSwipingSelector:'#scroll-bar',
             noSwipingClass : 'stop-swiping',
             onSlideChangeStart: function(swiper){
                 self.slideIndex = swiper.activeIndex+1;
             },
             onSlideChangeEnd:function(swiper){
-                if(self.slideIndex == 4){
-                    self.showRectList = true;
-                }else if(self.slideIndex == 6){
-                    self.showRectList = true;
-                }
+
                 self.$refs.topNav.isMenu = true;
             }
         });
-        self.p3.height = (window.innerHeight-180)/2*Math.ceil(self.p3.list.length/2);
 
-        window.onresize = () => {
-            return (() => {
-                //self.resize(window.innerWidth,window.innerHeight,'bgVideo');
-            })()
-        };
-//self.resize(window.innerWidth,window.innerHeight,'bgVideo');
+        this.showHint = window.innerWidth < window.innerHeight;
+
+
 
         self.ajaxInit();
     },
@@ -88,21 +67,12 @@ var app = new Vue({
             //    var data = res.data;
             //    self.proList = data.data.list;
             //
-            //    if(data.data.list.length > 5){
-            //        for(var i=0;i<data.data.list.length;i++){
-            //            if(i < 5){
-            //                self.news.list[i] = data.data.list[i];
-            //            }
-            //        }
-            //    }else{
-            //        self.news.list = data.data.list;
-            //    }
             //    self.proInit();
             //    self.hideLoading('page2');
             //}).catch(function (error) {
             //    console.log(error);
             //});
-            self.proList = [
+            var arr = [
                 {
                     id:'10',
                     content:'pro11111',
@@ -130,24 +100,39 @@ var app = new Vue({
                     title:'大鯤强势登陆纽约时装周  “中国微潮”国际舞台传递新风尚4',
                     sub_title:'DAKUN New York Fashion Week',
                     cover:'images/pro1.png'
+                },
+                {
+                    id:'14',
+                    content:'pro555',
+                    title:'大鯤强势登陆纽约时装周  “中国微潮”国际舞台传递新风尚5',
+                    sub_title:'DAKUN New York Fashion Week',
+                    cover:'images/pro1.png'
+                },
+                {
+                    id:'15',
+                    content:'pro666',
+                    title:'大鯤强势登陆纽约时装周  “中国微潮”国际舞台传递新风尚6',
+                    sub_title:'DAKUN New York Fashion Week',
+                    cover:'images/pro1.png'
+                },
+                {
+                    id:'16',
+                    content:'pro777',
+                    title:'大鯤强势登陆纽约时装周  “中国微潮”国际舞台传递新风尚7',
+                    sub_title:'DAKUN New York Fashion Week',
+                    cover:'images/pro1.png'
                 }
             ];
-            self.proInit();
+            for(var i=0;i<arr.length;i++){
+                self.proList[i%3].push(arr[i])
+            }
             self.hideLoading('page2');
-        },
-        openLastNews(obj){
-            this.news.title = obj.title;
-            this.news.content = obj.content;
-            this.news.height = window.innerHeight - 178;
-            this.news.isShow = true;
         },
         getPage3Data(){
             let self = this;
             //axios.get('/index.php/main/ajax_screen3_list').then(function (res) {
             //    var data = res.data;
             //    self.p3.list = data.data.list;
-            //    let itemH = parseInt((window.innerWidth*0.44)*438/840);
-            //    self.p3.height = itemH*Math.ceil(self.p3.list.length/2);
             //    self.hideLoading('page3');
             //}).catch(function (error) {
             //    console.log(error);
@@ -185,7 +170,6 @@ var app = new Vue({
                 }
             ];
             let itemH = parseInt((window.innerWidth*0.44)*438/840);
-            self.p3.height = itemH*Math.ceil(self.p3.list.length/2);
             self.hideLoading('page3');
         },
         getPage4Data(){
@@ -252,28 +236,18 @@ var app = new Vue({
                 this.showLoading = false;
             }
         },
-        resize(ww,wh,name){
-            let w = this.$refs[name].videoWidth;
-            let h = this.$refs[name].videoHeight;
-            if((ww/wh) > (w/h)){
-                let vh = (ww*h)/w;
-                this.$refs[name].style.width = ww + 'px';
-                this.$refs[name].style.height = vh + 'px';
-                this.$refs[name].style.top = -(vh-wh)/2 + 'px';
-                this.$refs[name].style.left = '0px';
-            }else{
-                let vw = (wh*w)/h;
-                this.$refs[name].style.width = vw + 'px';
-                this.$refs[name].style.height = wh + 'px';
-                this.$refs[name].style.left = -(vw-ww)/2 + 'px';
-                this.$refs[name].style.top = '0px';
-            }
-        },
         loadFirstVideo(){
             var self = this;
             //self.hideLoading('video');
-            self.isShowPost = false;
             self.$refs.bgVideo.volume = 0;
+        },
+        doShowAbout(){
+            if(this.mousedownX == event.screenX){
+                this.news.title = this.p5DetailData.title;
+                this.news.content = this.p5DetailData.content;
+                this.news.height = window.innerHeight - 62;
+                this.news.isShow = true;
+            }
         },
         p4mdown(e){
             this.mousedownX = e.screenX;
@@ -282,197 +256,14 @@ var app = new Vue({
             if(this.mousedownX == event.screenX){
                 this.news.title = '';
                 this.news.content = this.p4List[index].content;
-                this.news.height = window.innerHeight - 178;
+                this.news.height = window.innerHeight - 62;
                 this.news.isShow = true;
-            }
-        },
-        initRectList(){
-            for(let i=0;i<315;i++){
-                this.delayList.push(Math.floor(i/2)*0.05);
-                let value = "";
-                switch (i){
-                    case 134:
-                        value = 'A';
-                        break;
-                    case 135:
-                        value = 'B';
-                        break;
-                    case 136:
-                        value = 'O';
-                        break;
-                    case 137:
-                        value = 'U';
-                        break;
-                    case 138:
-                        value = 'T';
-                        break;
-                    case 155:
-                        value = '关';
-                        break;
-                    case 156:
-                        value = '于';
-                        break;
-                    case 157:
-                        value = '大';
-                        break;
-                    case 158:
-                        value = '鲲';
-                        break;
-                    case 176:
-                        value = 'D';
-                        break;
-                    case 177:
-                        value = 'A';
-                        break;
-                    case 178:
-                        value = 'K';
-                        break;
-                    case 179:
-                        value = 'U';
-                        break;
-                    case 180:
-                        value = 'N';
-                        break;
-                }
-                this.rectList.push(value);
-            }
-            this.delayList.sort(function(){return Math.random()>.5 ? -1 : 1;});
-        },
-        doHideRects(){
-            if(this.mousedownX == event.screenX){
-                this.showRectList = false;
-                let self = this;
-                setTimeout(function(){
-                    self.news.title = self.p5DetailData.title;
-                    self.news.content = self.p5DetailData.content;
-                    self.news.height = window.innerHeight - 178;
-                    self.news.isShow = true;
-                },1600)
-            }
-        },
-        isShowItems(index){
-            var arr = [134,135,136,137,138,155,156,157,158,176,177,178,179,180];
-            var result = false;
-            for(var i=0;i<arr.length;i++){
-                if(index == arr[i]){
-                    result = true;
-                    break;
-                }
-            }
-            return result;
-        },
-        getProPos(index){//310 470 230
-            let col = (index+1)%3;
-            let row = Math.floor(index/3);
-            let top = 0,left = 0;
-            //2 3 列换位置
-            if(col == 1){
-                top = row*380 + 317;
-                left = 0;
-            }else if(col == 2){
-                top = row*380 + 235;
-                left = 800;
-            }else if(col == 0){
-                top = row*380 + 467;
-                left = 400;
-            }
-
-            return {
-                'top':top+'px',
-                'left':left+'px'
-            }
-        },
-        proInit(){
-            let len = this.proList.length;
-            let style = this.getProPos(len-1);
-            this.proFrameHeight = parseInt(style.top)+480;
-        },
-        proFrameScroll(e){
-            let per = 0,dis = window.innerHeight - this.proFrameHeight;
-            var md = e.deltaY || e.detail;
-            if(md > 0){
-                per = 20;
-            }else{
-                per = -20;
-            }
-            if(dis>0) return;
-            this.proFrameTop -= per;
-            if(this.proFrameTop > 0){
-                this.proFrameTop = 0;
-            }else if(this.proFrameTop < dis){
-                this.proFrameTop = dis;
-            }
-
-            this.proScrollTop = (this.proFrameTop/dis)*(window.innerHeight - 210);
-            let itemList = this.$refs.proItem;
-            for(let i=0;i<itemList.length;i++){
-                let top = parseInt(itemList[i].style.top);
-                if(top + this.proFrameTop < 80){
-                    if(itemList[i].className.indexOf('news-item-top') < 0){
-                        itemList[i].className += ' news-item-top';
-                    }
-                }else{
-                    itemList[i].className = 'news-item'
-                }
-            }
-        },
-        proFrameScroll2(e){
-            if(this.p3.list.length <= 4) return;
-            let per = 0,dis = (window.innerHeight-180) - this.p3.height;
-            var md = e.deltaY || e.detail;
-            if(md > 0){
-                per = 20;
-            }else{
-                per = -20;
-            }
-            if(dis>0) return;
-            this.p3.fTop -= per;
-            if(this.p3.fTop  > 0){
-                this.p3.fTop  = 0;
-            }else if(this.p3.fTop  < dis){
-                this.p3.fTop  = dis;
-            }
-            this.p3.sTop  = 100 + (this.p3.fTop /dis)*(window.innerHeight - 207 - 180);
-        },
-        proScrollBarMD(e){
-            let sy = e.clientY,self = this,lastY = self.proScrollTop,dis = window.innerHeight - 210;
-            document.onmousemove = function(event){
-                event.stopPropagation();
-                self.proScrollTop = lastY + event.clientY - sy;
-                if(self.proScrollTop < 0){
-                    self.proScrollTop = 0;
-                }else if(self.proScrollTop > dis){
-                    self.proScrollTop = dis;
-                }
-                self.proFrameTop = (self.proScrollTop/dis)*(window.innerHeight - self.proFrameHeight);
-            }
-            document.onmouseup = function(event){
-                document.onmousemove = null;
-                document.onmouseup = null;
-            }
-        },
-        proScrollBarMD2(e){
-            if(this.p3.list.length <= 4) return;
-            let sy = e.clientY,self = this,lastY = self.p3.sTop,dis = window.innerHeight - 207 - 80;
-            document.onmousemove = function(event){
-                event.stopPropagation();
-                self.p3.sTop = lastY + event.clientY - sy;
-                if(self.p3.sTop < 100){
-                    self.p3.sTop = 100;
-                }else if(self.p3.sTop > dis){
-                    self.p3.sTop = dis;
-                }
-                self.p3.fTop = (self.p3.sTop/dis)*(window.innerHeight - self.p3.height - 180);
-            };
-            document.onmouseup = function(event){
-                document.onmousemove = null;
-                document.onmouseup = null;
             }
         },
         p6Readmore(){
             this.news.title = '';
             this.news.content = this.p6DetailData.content;
-            this.news.height = window.innerHeight - 178;
+            this.news.height = window.innerHeight - 62;
             this.news.isShow = true;
         },
         hideNews(){
@@ -485,7 +276,7 @@ var app = new Vue({
             if(this.mousedownX == event.screenX){
                 this.news.title = obj.title;
                 this.news.content = obj.content;
-                this.news.height = window.innerHeight - 178;
+                this.news.height = window.innerHeight - 62;
                 this.news.isShow = true;
             }
         },
@@ -525,7 +316,7 @@ var app = new Vue({
         </div>`;
             this.news.title = '关于大鲲';
             this.news.content = html;
-            this.news.height = window.innerHeight - 178;
+            this.news.height = window.innerHeight - 62;
             this.news.isShow = true;
         },
         doRecruit(){
@@ -611,7 +402,7 @@ var app = new Vue({
         </div>`;
             this.news.title = '招聘信息';
             this.news.content = html;
-            this.news.height = window.innerHeight - 178;
+            this.news.height = window.innerHeight - 62;
             this.news.isShow = true;
         },
         doDesigner(){
@@ -625,31 +416,19 @@ var app = new Vue({
         </div>`;
             this.news.title = '设计师合作';
             this.news.content = html;
-            this.news.height = window.innerHeight - 178;
+            this.news.height = window.innerHeight - 62;
             this.news.isShow = true;
         }
     }
 });
-
-//document.onmousewheel = function(e){
-//    alert('wheel')
-//};
-if (typeof document.onmousewheel == "object") {
-    document.onmousewheel = function(e) {
-        if(app.slideIndex == 2){
-            app.proFrameScroll(e)
-        }else if(app.slideIndex == 3){
-            app.proFrameScroll2(e)
-        }
-    };
-}
-
-if (typeof document.onmousewheel == "undefined") {
-    document.addEventListener("DOMMouseScroll",function(e){
-        if(app.slideIndex == 2){
-            app.proFrameScroll(e)
-        }else if(app.slideIndex == 3){
-            app.proFrameScroll2(e)
-        }
-    },false);
-}
+//判断手机横竖屏状态：
+window.addEventListener("onorientationchange" in window ? "orientationchange" : "resize", function() {
+    if (window.orientation === 180 || window.orientation === 0) {
+        //alert('竖屏状态！');
+        app.showHint = true;
+    }
+    if (window.orientation === 90 || window.orientation === -90 ){
+        //alert('横屏状态！');
+        app.showHint = false;
+    }
+}, false);

@@ -53,32 +53,27 @@
             </div>
             <!-- page2 -->
             <div class="swiper-slide" :class="noSwipe?'stop-swiping':''">
-                <!--<video src="video/video1.mp4" loop autoplay></video>-->
-                <!--<transition leave-active-class="animated fadeOut">-->
-                <!--<div class="cover-post" v-if="isShowPost2" style="background-image: url('images/bg2.jpg')"> </div>-->
-                <!--</transition>-->
                 <div class="page2-content">
-                    <div id="news-scroll-line">
-
-                    </div>
                     <div id="news-content-handler">
-                        <div id="news-lines"></div>
-                        <div id="news-handler"
-                             :style="{height:proFrameHeight+'px',top:proFrameTop+'px'}">
+                        <div id="news-handler">
                             <!--@mousewheel="proFrameScroll"-->
                             <div id="news-placeholder">
-                                <div class="news-item"
-                                     ref="proItem"
-                                     v-for="(item,index) in proList"
-                                     @mousedown="p2mdown"
-                                     @mouseup="p2mup(item)"
-                                     :style="getProPos(index)">
-                                    <div class="news-visuel">
-                                        <img :src="upfileUrl+item.cover" width="398" height="608">
+                                <div class="col" v-for="(first,index) in proList" :class="'col'+(index+1)">
+                                    <div class="news-item"
+                                         ref="proItem"
+                                         v-for="item in first"
+                                         @mousedown="p2mdown"
+                                         @mouseup="p2mup(item)">
+                                        <div class="news-visuel">
+                                            <img :src="upfileUrl+item.cover">
+                                        </div>
+                                        <div class="infos">
+                                            <div class="news-title">{{item.title}}</div>
+                                            <div class="news-description">{{item.sub_title}}</div>
+                                        </div>
                                     </div>
-                                    <div class="news-title">{{item.title}}</div>
-                                    <div class="news-description">{{item.sub_title}}</div>
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -87,7 +82,7 @@
             <!-- page3 -->
             <div class="swiper-slide" style="background-color: #000; overflow-y: scroll" :class="noSwipe?'stop-swiping':''">
                 <div class="page3-content">
-                    <div class="scroll-frame" ref="p3frame" :style="{top:p3.fTop+'px'}">
+                    <div class="scroll-frame" ref="p3frame">
                         <a v-for="item in p3.list"
                            href="javascript:;"
                            class="item"
@@ -100,9 +95,6 @@
             </div>
             <!-- page4 -->
             <div class="swiper-slide">
-                <!--<video src="video/video1.mp4" loop autoplay></video>-->
-                <!--<transition leave-active-class="animated fadeOut">-->
-                <!--<div class="cover-post" v-if="isShowPost3" style="background-image: url('images/bg4.jpg')"> </div>-->
                 <div class="page4-content">
                     <ul>
                         <li v-for="(item,index) in p4List"
@@ -112,9 +104,6 @@
                             :class="p4Index == (index+1) ? 'active':''">
                             <div class="mask"></div>
                             <p>{{item.title}}</p>
-                            <!--<div class="detail" @click.stop="p4Index=0">-->
-                            <!--<div>{{item.content}}</div>-->
-                            <!--</div>-->
                         </li>
                     </ul>
                 </div>
@@ -124,67 +113,40 @@
                 <!--<video src="video/video1.mp4" loop autoplay></video>-->
                 <div class="page5-content">
                     <ul>
-                        <li
-                                v-for="(item,index) in rectList"
-                                :key="item"
-                                @mousedown="p2mdown"
-                                @mouseup="doHideRects">
-                            <transition leave-active-class="animated aniDu03 fadeOut">
-                                <div :style="{'animation-delay':delayList[index]+'s'}"
-                                     v-if="!isShowItems(index)"
-                                     v-show="showRectList">{{item}}</div>
-                                <div :style="{'animation-delay':delayList[index]+'s'}"
-                                     v-if="isShowItems(index)"
-                                     :class="showRectList? '':'nonhover'">{{item}}</div>
-                            </transition>
+                        <li v-for="(item,index) in rectList"
+                            @mousedown="p2mdown"
+                            @mouseup="doShowAbout"
+                            :key="item">
+                            {{item}}
                         </li>
                     </ul>
                 </div>
             </div>
             <!-- page6 -->
             <div class="swiper-slide">
-                <!--<video src="video/video1.mp4" loop autoplay></video>-->
-                <!--<transition leave-active-class="animated fadeOut">-->
-                <!--<div class="cover-post" v-if="isShowPost4" style="background-image: url('images/bg1.jpg')"> </div>-->
-                <!--</transition>-->
                 <div class="page6-content">
-                    <p>成为合伙人<br><span>How to become a partner</span></p>
-                    <!--<div> Phasellus luctus commodo ullamcorper a posuere rhoncus commodo elit. Aenean congue,risus utaliquam dapibus. Thanks!</div>-->
-                    <a href="javascript:;" @click="p6Readmore">read more</a>
+                    <div>
+                        <p>成为合伙人<br><span>How to become a partner</span></p>
+                        <br>
+                        <!--<div> Phasellus luctus commodo ullamcorper a posuere rhoncus commodo elit. Aenean congue,risus utaliquam dapibus. Thanks!</div>-->
+                        <a href="javascript:;" @click="p6Readmore">read more</a>
+                    </div>
                 </div>
             </div>
             <!-- page7 -->
             <div class="swiper-slide">
-                <!--<video src="video/video1.mp4" loop autoplay></video>-->
-                <!--<transition leave-active-class="animated fadeOut">-->
-                <!--<div class="cover-post" v-if="isShowPost5" style="background-image: url('images/bg1.jpg')"> </div>-->
-                <!--</transition>-->
                 <div class="page7-content">
-                    <div class="mb60"><img src="images/logo1.png"> </div>
-                    <div class="mb40"><img src="images/title-contact.png"> </div>
-                    <div class="tc mb40">
-                        <a href="javascript:;" class="btn1" @click="doRecruit">招聘信息</a>
-                        <a href="javascript:;" class="btn1" @click="doDesigner">设计师合作</a>
+                    <div>
+                        <div class="mb10"><img src="images/title-contact.png" width="600"> </div>
+                        <div class="tc mb10">
+                            <a href="javascript:;" class="btn1" @click="doRecruit">招聘信息</a>
+                            <a href="javascript:;" class="btn1" @click="doDesigner">设计师合作</a>
+                        </div>
+                        <div class="info">
+                            <div>-PHONE AT US： <span>0592-5172073</span></div>
+                            <div>-ADDREss： <span>中国福建省厦门市思明区观音山商务运营中心18栋</span></div>
+                        </div>
                     </div>
-                    <div class="info">
-                        <div>-PHONE AT US： <span>0592-5172073</span></div>
-                        <div>-ADDREss： <span>中国福建省厦门市思明区观音山商务运营中心18栋</span></div>
-                    </div>
-                    <ul class="list">
-                        <li @mouseover="showWechatImg=true"
-                            @mouseleave="showWechatImg=false">
-                            <img src="images/slogo1.png">
-                        </li>
-                        <li @mouseover="showSinaImg=true"
-                            @mouseleave="showSinaImg=false">
-                            <img src="images/slogo2.png">
-                        </li>
-                    </ul>
-                    <transition enter-active-class="animated aniDu03 fadeIn"
-                                leave-active-class="animated aniDu03 fadeOut">
-                        <div class="tc mt20" v-if="showWechatImg"><img src="images/img.jpg" width="170" height="170"> </div>
-                        <div class="tc mt20" v-if="showSinaImg"><img src="images/img2.png" width="170" height="170"> </div>
-                    </transition>
                 </div>
             </div>
         </div>
@@ -201,28 +163,20 @@
                 leave-active-class="animated slideOutDown">
         <div class="news-frame" v-if="news.isShow">
             <div class="slide-frame">
-                <a href="javascript:;" @click="hideNews"><img src="images/arrow2.png"> </a>
+                <a href="javascript:;" @click="hideNews"><img src="images/cursor-close.png"> </a>
                 <div class="content-frame" :style="{'height': news.height+'px'}">
-                    <div class="frame1400" style="width: 1300px;">
-                        <div style="width: 850px; margin-left: 30px;">
+                    <div style="width: 90%;">
+                        <div>
                             <div class="title" v-if="news.title != ''">{{news.title}}</div>
                             <div class="content" v-html="news.content"></div>
                         </div>
-                        <div class="last-frame">
-                            <h3>LAST POSTS</h3>
-                            <ul class="last-list">
-                                <li v-for="item in news.list" @click="openLastNews(item)">
-                                    <p>{{item.title}}</p>
-                                    <div>{{new Date(parseInt(item.ctime)*1000).format('yyyy-MM-dd')}}</div>
-                                </li>
-                            </ul>
-                        </div>
-
                     </div>
                 </div>
             </div>
         </div>
     </transition>
+
+    <div class="orient-hint" v-if="showHint">提示：请手机横屏预览。</div>
 </div>
 <script src="js/app.js"></script>
 </body>

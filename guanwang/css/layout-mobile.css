@@ -3,11 +3,11 @@ img{ width: 100%;}
 
 .swiper-container{ height: 100vh;}
 .swiper-slide{ background-repeat: no-repeat; background-size: cover; background-position: center center;}
-.swiper-slide .phone{ width: 50%; position: absolute; bottom: 0%; left: 25%;}
+.swiper-slide .phone{ width: 50%; position: absolute; bottom: -3%; left: 25%;}
 .swiper-slide .phone img{ width: 100%;}
-.swiper-slide .intro{ width: 50%; position: absolute; top: 10%; left: 25%;}
+.swiper-slide .intro{ width: 50%; position: absolute; top: 15%; left: 25%;}
 .swiper-slide .intro img{ width: 100%;}
-.swiper-slide .intro1{ width: 56%; left: 22%; top: 3%;}
+.swiper-slide .intro1{ width: 56%; left: 22%; top: 6%;}
 .swiper-slide .intro2{ width: 72%; left: 14%;}
 .swiper-slide .intro3{ width: 80%; left: 10%;}
 .swiper-slide .intro4{ width: 56%; left: 22%;}
@@ -20,3 +20,12 @@ img{ width: 100%;}
 .header{  position: fixed; top: 3%; left: 3%; right: 3%; z-index: 500; display: flex; justify-content: space-between;}
 .header .logo{ width: 40%;}
 .header a{ width: 7%; align-self: center;}
+
+.nav{ width: 100vw; height: 100vh; position: fixed; top: 0; left: 100%; z-index: 1000; background-color: #ffffff; overflow-y: scroll; transition: left 0.3s ease-in-out; -webkit-transition: left 0.3s ease-in-out;}
+.nav .top-line{ padding: 10px 3%; display: flex; justify-content: space-between; border-bottom: 1px solid #333333; align-items: center;}
+.nav .top-line .number{ width: 42%; font-size: 0;}
+.nav .top-line .close{ width: 6%; font-size: 0;}
+.nav h3{ font-size: 16px; color: #333333; padding: 10px;}
+.nav .car-list{ padding: 10px 3%; display: flex; flex-wrap: wrap; justify-content: space-between;}
+.nav .car-list li{ width: 31%; margin-bottom: 10px;}
+.nav .car-list li p{ font-size: 14px; text-align: center; color: #333333;}

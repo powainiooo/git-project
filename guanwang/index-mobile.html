@@ -16,7 +16,7 @@
 <body>
 <header class="header">
     <div class="logo"><img src="images/logo.png"> </div>
-    <a href="javascript:;"><img src="images/btn-menu.png"> </a>
+    <a href="javascript:;" id="btnNavOpen"><img src="images/btn-menu.png"> </a>
 </header>
 <div class="swiper-container">
     <div class="swiper-wrapper">
@@ -55,10 +55,87 @@
     </div>
 </div>
 
+<nav class="nav" id="nav">
+    <div class="top-line">
+        <a href="tel:4008303666" class="number"><img src="images/number2.png"> </a>
+        <a href="javascript:;" class="close" id="btnNavClose"><img src="images/btn-close.png"> </a>
+    </div>
+    <h3>支持车型：</h3>
+    <ul class="car-list">
+        <li>
+            <img src="images/cars/songMax.jpg">
+            <p>宋MAX</p>
+        </li>
+        <li>
+            <img src="images/cars/tang100.jpg">
+            <p>唐100</p>
+        </li>
+        <li>
+            <img src="images/cars/qin100.jpg">
+            <p>秦100</p>
+        </li>
+        <li>
+            <img src="images/cars/qinEV.jpg">
+            <p>秦EV</p>
+        </li>
+        <li>
+            <img src="images/cars/tang.jpg">
+            <p>唐</p>
+        </li>
+        <li>
+            <img src="images/cars/qin.jpg">
+            <p>秦</p>
+        </li>
+        <li>
+            <img src="images/cars/songDM.jpg">
+            <p>宋DM</p>
+        </li>
+        <li>
+            <img src="images/cars/songEV.jpg">
+            <p>宋EV</p>
+        </li>
+        <li>
+            <img src="images/cars/song.jpg">
+            <p>宋</p>
+        </li>
+        <li>
+            <img src="images/cars/yuan.jpg">
+            <p>元</p>
+        </li>
+        <li>
+            <img src="images/cars/e5.jpg">
+            <p>e5</p>
+        </li>
+        <li>
+            <img src="images/cars/e6.jpg">
+            <p>e6</p>
+        </li>
+        <li>
+            <img src="images/cars/sirui.jpg">
+            <p>思锐</p>
+        </li>
+        <li>
+            <img src="images/cars/surui.jpg">
+            <p>速锐</p>
+        </li>
+        <li>
+            <img src="images/cars/s7.jpg">
+            <p>s7</p>
+        </li>
+    </ul>
+</nav>
+
 <script>
     var mySwiper = new Swiper ('.swiper-container', {
         direction: 'vertical'
-    })
+    });
+
+    document.getElementById("btnNavClose").addEventListener('click',function(){
+        document.getElementById("nav").style.left = '100%';
+    });
+    document.getElementById("btnNavOpen").addEventListener('click',function(){
+        document.getElementById("nav").style.left = '0%';
+    });
 </script>
 </body>
 </html>

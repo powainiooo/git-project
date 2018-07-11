@@ -10,13 +10,13 @@
     .swiper-item .time span{ margin-right: 30px;}
     .swiper-item .time span a{color: rgb(127,127,127);}
     .swiper-item .time span a:hover{color: #000;}
-    .swiper-frame-index .arrow{ width: 100px; height: 560px; position: absolute; top: 0; z-index: 100; display: block;}
+    .swiper-frame-index .arrow{ width: 295px; height: 560px; position: absolute; top: 0; z-index: 100; display: block;}
     .swiper-frame-index .arrow:hover a{ display: block;}
     .swiper-frame-index .arrow a{ width: 40px; height: 100%; background-color: #fff; display: none;}
     .swiper-frame-index .arrow img{ margin-top: 256px;}
     .swiper-frame-index .left{ left: 0;}
     .swiper-frame-index .right{ right: 0;}
-    .swiper-frame-index .right a{ margin-left: 60px;}
+    .swiper-frame-index .right a{ margin-left: 255px;}
     .swiper-frame-index .right img{ margin-left: -40px;}
 
     .recommend-item{ width: 1130px; margin-bottom: 25px; display: flex; justify-content: space-between;}

@@ -1,4 +1,4 @@
-<style>
+<style scoped>
     .about-tag{ width: 94%; height: 60px; border-bottom: 1px solid #e5e5e5; position: absolute; top: 190px; left: 3%; display: flex; justify-content: space-around; align-items: center; background-color: #fff; z-index: 500;}
     .about-tag li{ width: 80px; height: 20px; display: flex; justify-content: center; align-items: center; font-size: 14px; cursor: pointer;}
     .about-tag li.active{ background-color: #000; color: #fff;}
@@ -16,7 +16,7 @@
     .contact .infos li{ font-size: 14px; margin-bottom: 30px;}
     .contact .infos li p:first-child{ margin-bottom: 15px;}
     .contact .infos li p{ line-height: 1.8;}
-    .contact .infos li p a{ padding: 6px 16px; border: 1px solid #000; border-radius: 20px; color: #000;}
+    .contact .infos li p a{ padding: 2px 16px; border: 1px solid #000; border-radius: 20px; color: #000; margin-bottom: 10px; display: inline-block;}
 
     .team .content{font-size: 14px; line-height: 1.8; margin-bottom: 20px; letter-spacing: 1.5px;}
 
@@ -75,7 +75,7 @@
                         </li>
                         <li>
                             <p>Phone<br>手機</p>
-                            <p>{{aboutData.mobile}}<br>{{aboutData.time_slot}}</p>
+                            <p><a :href="'tel:'+getPhone(aboutData.mobile)" class="btn">{{aboutData.mobile}}</a> <br>{{aboutData.time_slot}}</p>
                         </li>
                         <li>
                             <p>Address<br>地址</p>
@@ -156,6 +156,9 @@
             }
         },
         methods:{
+            getPhone(phone){
+                return phone.replace(/\s/g,'').replace(/-/g,'');
+            },
             intervalCheck(){
                 var st = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
                 console.log(st);

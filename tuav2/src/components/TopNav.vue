@@ -13,7 +13,7 @@
     .top-nav section nav .first-level>li .second-level:before{ content: ''; width: 25px; height: 8px; background: url('../assets/images/arrow1.png') no-repeat; position: absolute; top: -7px; left: 32px;}
     .top-nav section nav .first-level>li .second-level li{ margin: 0 10px; border-bottom: 1px solid #fff;}
     .top-nav section nav .first-level>li .second-level li:last-child{ border-bottom: none;}
-    .top-nav section nav .first-level>li .second-level li a{ padding: 10px 0; color: #fff; text-align: center; display: block;}
+    .top-nav section nav .first-level>li .second-level li a{ font-size: 14px; padding: 10px 0; color: #fff; text-align: center; display: block;}
 </style>
 
 <template>

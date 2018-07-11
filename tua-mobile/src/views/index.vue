@@ -36,7 +36,7 @@
                     <!-- slides -->
                     <swiper-slide v-for="(item,index) in bannerList">
                         <section class="swiper-item">
-                            <div><router-link :to="'/works/detail/'+item.id"><img :src="mainUrl+item.news_cover"> </router-link></div>
+                            <div><router-link :to="'/works/detail/'+item.id"><img :src="mainUrl+item.banner_cover"> </router-link></div>
                             <div v-if="activeIndex == index" class="infos">
                                 <div>{{item.title}} <br> {{item.title_ext}}</div>
                                 <p>音樂作品表現大賽故宮和Next Idea 結合的主題，展現出傳統文化與未來現象之美。在前期的商討中，我們決定從京劇和Pap這兩種音樂表現形式入手</p>
@@ -51,7 +51,7 @@
 
             <div>
                 <div class="recommend-item" v-for="item in recommendList">
-                    <div class="imgs"><router-link :to="'/works/detail/'+item.id"><img :src="mainUrl+item.news_cover"></router-link> </div>
+                    <div class="imgs"><router-link :to="'/works/detail/'+item.id"><img :src="mainUrl+item.recomm_cover"></router-link> </div>
                     <div class="infos">
                         <router-link :to="'/works/detail/'+item.id">{{item.title}}<br> {{item.title_ext}}</router-link>
                         <div class="time hkLight">

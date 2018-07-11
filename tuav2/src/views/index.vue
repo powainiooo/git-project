@@ -55,7 +55,7 @@
                     <!-- slides -->
                     <swiper-slide v-for="(item,index) in bannerList">
                         <section class="swiper-item">
-                            <div class="img"><router-link :to="'/works/detail/'+item.id"><img :src="mainUrl+item.news_cover" width="1120" height="560"> </router-link></div>
+                            <div class="img"><router-link :to="'/works/detail/'+item.id"><img :src="mainUrl+item.banner_cover" width="1120" height="560"> </router-link></div>
                             <div v-if="activeIndex == index">
                                 <router-link :to="'/works/detail/'+item.id" class="link">{{item.title}} {{item.title_ext}}</router-link>
                                 <p class="hkLight">{{item.goods_desc}}</p>
@@ -89,7 +89,7 @@
 
             <div>
                 <div class="recommend-item" v-for="item in recommendList">
-                    <div class="imgs"><router-link :to="'/works/detail/'+item.id"><img :src="mainUrl+item.news_cover" width="450" height="250"></router-link> </div>
+                    <div class="imgs"><router-link :to="'/works/detail/'+item.id"><img :src="mainUrl+item.recomm_cover" width="450" height="250"></router-link> </div>
                     <div class="infos">
                         <router-link to="/works/detail/1">{{item.title}} {{item.title_ext}}</router-link>
                         <p class="hkLight">{{item.goods_desc}}</p>

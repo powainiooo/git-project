@@ -4,8 +4,9 @@ img{ width: 100%;}
 .swiper-container{ height: 100vh;}
 .swiper-slide{ background-repeat: no-repeat; background-size: cover; background-position: center center;}
 .swiper-slide .phone{ width: 50%; position: absolute; bottom: -3%; left: 25%;}
+.swiper-slide .phone1{ width: 40%; position: absolute; bottom: -3%; left: 30%;}
 .swiper-slide .phone img{ width: 100%;}
-.swiper-slide .intro{ width: 50%; position: absolute; top: 15%; left: 25%;}
+.swiper-slide .intro{ width: 50%; position: absolute; top: 10%; left: 25%;}
 .swiper-slide .intro img{ width: 100%;}
 .swiper-slide .intro1{ width: 56%; left: 22%; top: 6%;}
 .swiper-slide .intro2{ width: 72%; left: 14%;}

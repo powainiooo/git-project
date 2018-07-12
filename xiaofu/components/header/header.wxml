@@ -1,2 +1,38 @@
-<!--components/header/header.wxml-->
-<text>components/header/header.wxml</text>
+<!-- 顶部导航 -->
+<view class="header">
+  <view class="opera-line">
+    <image src='../../res/images/logo1.png' mode="widthFix" class="logo"></image>
+    <view class="btns">
+      <view class="icons icon-gengduo" wx:if="{{showMenu}}" data-val="{{true}}" bindtap="toggleMenu"></view>
+      <view class="icons icon-guanbi" wx:if="{{showClose}}" data-val="{{false}}" bindtap="toggleMenu"></view>
+      <view class="icons icon-sousuo" wx:if="{{showSearch}}" data-val="{{false}}" bindtap="toggleSearch"></view>
+      <view class="icons icon-fenxiang" wx:if="{{showShare}}" ></view>
+    </view>
+  </view>
+  <view class='search-frame' animation="{{searchAniData}}">
+    <input type='text' placeholder='输入活动名称/主办方名称' class='text'></input>
+    <view class='btn'><view class="icons icon-sousuo"></view></view>
+    <view class='btn'><view class="icons icon-guanbi" data-val="{{true}}" bindtap="toggleSearch"></view></view>
+  </view>
+</view>
+
+<!-- 更多菜单 -->
+<view class='nav-frame' animation="{{navAniData}}">
+  <view class='person-info'>
+    <image src="{{userInfo.avatarUrl}}" class="avatar"></image>
+    <text class='name'>{{userInfo.nickName}}</text>
+  </view>
+  <view class='nav-list'>
+    <navigator wx:for="{{navList}}" wx:for-index="idx" wx:for-item="item" wx:key="{{idx}}" url="{{item.url}}" class='nav-item'>
+      <text class='name'>{{item.name}} | {{item.nameEn}}</text>
+    </navigator>
+  </view>
+</view>
+
+<!-- 订单中心 -->
+<view class='nav-order' animation="{{orderAniData}}">
+  <image mode='widthFix' src='../../res/images/menu-line.png' class='menu-line'></image>
+  <navigator class='link'>
+    <image mode='widthFix' src='../../res/images/menu-order.png' class='menu-title'></image>
+  </navigator>
+</view>

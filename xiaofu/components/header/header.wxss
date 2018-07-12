@@ -1,1 +1,26 @@
-/* components/header/header.wxss */
+ @import '../../res/css/icons.wxss'; 
+
+.header{ width: 100%;position: fixed; top: 0; left: 0; z-index: 500; box-shadow: 0 7rpx 10rpx rgba(0,0,0,0.4);}
+.header .opera-line{ height: 120rpx;  padding: 0 55rpx; background-color: #002aac; display: flex;  align-items: center; justify-content: space-between; position: relative; z-index: 10;}
+.header .logo{ width: 190rpx;}
+.header .btns{ width: 160rpx; display: flex; flex-direction: row-reverse; justify-content: space-between; align-items: center;}
+.header .btns .icons{ font-size: 40rpx; color: #fff;}
+
+.header .search-frame{ width: 100%; box-sizing: border-box; height: 100rpx; background-color: #fff; padding: 10rpx 55rpx; display: flex; position: absolute; top: 0; left: 0;box-shadow: 0 7rpx 10rpx rgba(0,0,0,0.4);}
+.header .search-frame .text{ width: 470rpx; font-size: 24rpx; padding: 15rpx 20rpx 15rpx 0;}
+.header .search-frame .btn{ width: 85rpx; color:#000;font-size: 40rpx; display: flex; align-items: center;}
+.header .search-frame .btn:nth-child(2){ padding-left: 30rpx;}
+.header .search-frame .btn:last-child{ justify-content: flex-end; border-left: 2rpx solid #d5d5d5;}
+
+.nav-frame{ width: 100%; height: calc(100% - 120rpx); background-color: #002aac; position: fixed; top: -100%; left: 0; z-index: 550; overflow-y: scroll;}
+.nav-frame .person-info{ margin: 0 15rpx; height: 220rpx; display: flex; align-items: center; border-bottom: 1rpx solid rgba(255,255,255,0.5);}
+.nav-frame .person-info .avatar{ width: 130rpx; height: 130rpx; border: 4rpx solid #000; border-radius: 8px; margin: 0 40rpx;}
+.nav-frame .person-info .name{ font-size: 34rpx; color: #fff;}
+.nav-frame .nav-list{ margin-bottom: 300rpx;}
+.nav-frame .nav-list .nav-item{ height: 130rpx; display: flex; align-items: center; border-bottom: 1px solid rgba(0,0,0,0.4); padding-left: 40rpx;}
+.nav-frame .nav-list .nav-item .name{ font-size: 34rpx; color: #fff;}
+
+.nav-order{ height: 160rpx; position: fixed; bottom: -300rpx; left: 10rpx; right: 10rpx; background: #fff; z-index: 550;}
+.nav-order .menu-line{ width: 100%; position: absolute; top: -82rpx; left: 0;}
+.nav-order .link{ text-align: center; margin-top: 40rpx;}
+.nav-order .menu-title{ width: 300rpx;}

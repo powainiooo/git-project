@@ -58,8 +58,8 @@ body{ background-color: #000;}
 .page1-content{ overflow: hidden; display: flex; justify-content: center; align-items: center;}
 .page1-content video{ position: relative; top: 50%; left: 50%; margin: -540px 0 0 -960px;}
 .page1-content .title{ }
-.page1-content .title p{ text-align: center; font-size: 30px; letter-spacing: 15px; margin-bottom: 20px;}
-.page1-content .title div{ text-align: center; font-size: 24px; letter-spacing: 12px; color: rgba(255,255,255,1);}
+.page1-content .title p{ text-align: center; font-size: 30px; letter-spacing: 15px; margin-bottom: 10px;}
+.page1-content .title div{ text-align: center; font-size: 18px; letter-spacing: 12px; color: rgba(255,255,255,1);}
 .page1-content .hint{ width: 226px; height: 68px; position: absolute; bottom: 20px; left: 50%; margin: 0 0 0 -113px; background: url('../images/tutorial.png') no-repeat; z-index: 100;}
 
 .page2-content{ position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 100; overflow-y: scroll;}
@@ -168,8 +168,8 @@ body{ background-color: #000;}
 .news-frame .slide-frame{ }
 .news-frame .slide-frame>a{ display: block; padding:15px 5% 15px 0; text-align: right; background-color: rgba(0,0,0,0.95);}
 .news-frame .slide-frame .content-frame{ height: 810px; background-color: #fff; overflow: hidden; overflow-y: scroll; padding: 0 5%;}
-.news-frame .slide-frame .content-frame .title{ margin: 110px 0 0 0; font-size: 28px; letter-spacing: 5px; text-align: center;}
-.news-frame .slide-frame .content-frame .content{ margin-top: 40px;}
+.news-frame .slide-frame .content-frame .title{ margin: 50px 0 0 0; font-size: 18px; letter-spacing: 2px; text-align: center;}
+.news-frame .slide-frame .content-frame .content{ margin-top: 20px;}
 .news-frame .slide-frame .content-frame .last-frame{ width: 300px; position: absolute; top:0; right: 30px;}
 .news-frame .slide-frame .content-frame .last-frame h3{ font-size: 20px; color: #797979; padding-bottom: 10px; border-bottom: 1px solid #e5e5e5; letter-spacing: 10px; margin-bottom: 50px;}
 .news-frame .slide-frame .content-frame .last-list li{ border-bottom: 1px dashed #e5e5e5; margin-bottom: 25px; padding-bottom: 25px;}
@@ -184,4 +184,4 @@ body{ background-color: #000;}
 .btn1{width: 150px; display: inline-block; border: 1px solid rgba(255,255,255,0.8); background-color: rgba(255,255,255,0.3); font-size: 14px; padding: 8px 0; color: #fff; letter-spacing: 3px;}
 .btn1:hover{ background-color: #fff; color: #000;}
 
-.orient-hint{ position: fixed; top: 0; left: 0; bottom: 0; right: 0; z-index: 1000; background-color: rgba(0,0,0,0.95); font-size: 20px; display: flex; justify-content: center; align-items: center; color: #fff;}
+.orient-hint{ position: fixed; top: 0; left: 0; bottom: 0; right: 0; z-index: 1000; background: url('../images/hint.jpg') no-repeat; background-size: cover; background-position: center bottom;}

@@ -1,0 +1,16 @@
+<!--index.wxml-->
+<view class="container">
+  <header-view  show-search="true"></header-view>
+  <view class='body'>
+    <view class='sponsor-list'>
+      <navigator wx:for="{{dataList}}" 
+      wx:for-index="index" 
+      wx:for-item="item" 
+      wx:key="{{index}}" 
+      url="{{item.url}}"
+      hover-class='none'>
+        <image src="{{item.imgUrl}}" mode='aspectFit'></image>
+      </navigator>
+    </view>
+  </view>
+</view>

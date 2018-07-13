@@ -23,4 +23,4 @@
 .nav-order{ height: 160rpx; position: fixed; bottom: -300rpx; left: 10rpx; right: 10rpx; background: #fff; z-index: 550;}
 .nav-order .menu-line{ width: 100%; position: absolute; top: -82rpx; left: 0;}
 .nav-order .link{ text-align: center; margin-top: 40rpx;}
-.nav-order .menu-title{ width: 300rpx;}
+.nav-order .menu-title{ width: 210rpx;}

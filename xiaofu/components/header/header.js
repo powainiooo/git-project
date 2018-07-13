@@ -40,7 +40,7 @@ Component({
       {
         name: '推荐主办方',
         nameEn: '1th organizers',
-        url: ''
+        url: '/pages/sponsor/list'
       },
       {
         name: '隶属于',

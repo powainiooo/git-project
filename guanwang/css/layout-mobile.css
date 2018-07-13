@@ -26,7 +26,7 @@ img{ width: 100%;}
 
 .nav{ width: 100vw; height: 100vh; position: fixed; top: 0; left: 100%; z-index: 1000; background-color: #ffffff; overflow-y: scroll; transition: left 0.3s ease-in-out; -webkit-transition: left 0.3s ease-in-out;}
 .nav .top-line{ padding: 10px 3%; display: flex; justify-content: space-between; border-bottom: 1px solid #333333; align-items: center;}
-.nav .top-line .number{ width: 42%; font-size: 0;}
+.nav .top-line .number{ width: 50%; font-size: 0;}
 .nav .top-line .close{ width: 6%; font-size: 0;}
 .nav h3{ font-size: 16px; color: #333333; padding: 10px;}
 .nav .car-list{ padding: 10px 3%; display: flex; flex-wrap: wrap; justify-content: space-between;}

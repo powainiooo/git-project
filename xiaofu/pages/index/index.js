@@ -7,7 +7,9 @@ Page({
     motto: 'Hello World',
     userInfo: {},
     hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    addressList:['北京','上海','广州','深圳','南昌','惠州','成都'],
+    addressIndex:0
   },
   //事件处理函数
   bindViewTap: function() {

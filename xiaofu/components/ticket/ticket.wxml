@@ -1,0 +1,18 @@
+<view class='ticket-frame'>
+  <view class='line1'>
+    <view class='date'>
+      <view class='year'>
+        <text>2</text>
+        <text>0</text>
+        <text>1</text>
+        <text>8</text>
+      </view>
+      <view class='day'>09/08</view>
+    </view>
+    <view class='logo'>
+      <image src='../../res/images/img/logo1.png' mode='widthFix' class='logo-img'></image>
+    </view>
+  </view>
+  <view class='title'>French kiwi jucie of one one one</view>
+  <image src='../../res/images/img/ticket-img1.jpg' mode='widthFix' class='imgs'></image>
+</view>

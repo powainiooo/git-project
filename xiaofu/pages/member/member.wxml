@@ -1,0 +1,20 @@
+<view class="container bg-gray">
+  <header-view  show-search="true"></header-view>
+  <view class='body'>
+    <view class='title-en'><text>{{titleEn}}</text></view>
+    <view class='title-cn'>{{titleCn}}</view>
+
+    <view class='member-content' wx:if="{{page != 'contact'}}">
+      {{content}}
+    </view>
+
+    <view class='member-content contact-content' wx:if="{{page == 'contact'}}">
+      <text>合作联系\nleesticketinfo@qq.com</text>
+      <view class='btn-phone' bindtap='makePhoneCall'>+86-13112341234</view>
+      <view class='line'></view>
+      <text>售后及服务\nleesticketaftersales</text>
+      <image src='../../res/images/icon-wechat.png' mode='widthFix' style='width:80rpx; margin-top:20rpx; display:block'></image>
+    </view>
+  </view>
+  
+</view>

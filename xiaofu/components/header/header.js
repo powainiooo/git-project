@@ -20,6 +20,10 @@ Component({
     showShare: {
       type: Boolean,
       value: false
+    },
+    showShadow: {
+      type: Boolean,
+      value: true
     }
   },
 
@@ -45,22 +49,22 @@ Component({
       {
         name: '隶属于',
         nameEn: 'member of Ho',
-        url: ''
+        url: '/pages/member/member?page=member'
       },
       {
         name: '保险条例',
         nameEn: 'insurance Act',
-        url: ''
+        url: '/pages/member/member?page=insurance'
       },
       {
         name: '售后声明',
         nameEn: 'after sales',
-        url: ''
+        url: '/pages/member/member?page=aftersales'
       },
       {
         name: '联系方式',
         nameEn: 'contact Information',
-        url: ''
+        url: '/pages/member/member?page=contact'
       }
     ]
   },

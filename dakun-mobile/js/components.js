@@ -4,20 +4,20 @@
 Vue.component('footer-nav',{
     template:`
     <div class="footer-nav">
-        <div class="share-frame" :class="showShare ? 'share-frame-active' : ''">
-            <a href="#" class="btn-share" @click="showShare = !showShare"><img src="${conf.base_url}images/share-bottom.png"> </a>
-            <ul>
-                <li><a href="javascript:;" class="icon-qq" @click="doShareQQ"></a> </li>
-                <li>
-                    <a href="javascript:;" class="icon-wechat"></a>
-                    <div><img src="${conf.base_url}images/link-wechat.png" width="100"> </div>
-                </li>
-                <li><a href="javascript:;" class="icon-sina" @click="doShareSina"></a> </li>
-                <li><a href="javascript:;" class="icon-douban" @click="doShareDouban"></a> </li>
-                <li><a href="javascript:;" class="icon-qzone" @click="doShareQzone"></a> </li>
-                <li><a href="javascript:;" class="icon-renren" @click="doShareRenren"></a> </li>
-            </ul>
-        </div>
+        <!--<div class="share-frame" :class="showShare ? 'share-frame-active' : ''">-->
+            <!--<a href="#" class="btn-share" @click="showShare = !showShare"><img src="${conf.base_url}images/share-bottom.png"> </a>-->
+            <!--<ul>-->
+                <!--<li><a href="javascript:;" class="icon-qq" @click="doShareQQ"></a> </li>-->
+                <!--<li>-->
+                    <!--<a href="javascript:;" class="icon-wechat"></a>-->
+                    <!--<div><img src="${conf.base_url}images/link-wechat.png" width="100"> </div>-->
+                <!--</li>-->
+                <!--<li><a href="javascript:;" class="icon-sina" @click="doShareSina"></a> </li>-->
+                <!--<li><a href="javascript:;" class="icon-douban" @click="doShareDouban"></a> </li>-->
+                <!--<li><a href="javascript:;" class="icon-qzone" @click="doShareQzone"></a> </li>-->
+                <!--<li><a href="javascript:;" class="icon-renren" @click="doShareRenren"></a> </li>-->
+            <!--</ul>-->
+        <!--</div>-->
         <div class="customer-frame">
             <a href="tel:0592-5172062" class="btn-customer"></a>
         </div>

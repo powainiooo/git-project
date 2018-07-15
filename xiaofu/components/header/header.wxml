@@ -1,5 +1,5 @@
 <!-- 顶部导航 -->
-<view class="header">
+<view class="header {{showShadow ? 'header-shadow' : ''}}">
   <view class="opera-line">
     <image src='../../res/images/logo1.png' mode="widthFix" class="logo"></image>
     <view class="btns">

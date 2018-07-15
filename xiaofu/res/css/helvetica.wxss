@@ -1,6 +1,5 @@
 @font-face {
     font-family: 'Helve';
-    src: url('HelveticaNeueBold.eot');
     font-weight: bold;
     font-style: normal;
 }

@@ -1,7 +1,7 @@
 <!-- 顶部导航 -->
 <view class="header {{showShadow ? 'header-shadow' : ''}}">
   <view class="opera-line">
-    <image src='../../res/images/logo1.png' mode="widthFix" class="logo" bindtap='gotoHome'></image>
+    <image src='../../res/images/logo.png' mode="widthFix" class="logo" bindtap='gotoHome'></image>
     <view class="btns">
       <view class="icons icon-gengduo" wx:if="{{showMenu}}" data-val="{{true}}" bindtap="toggleMenu"></view>
       <view class="icons icon-guanbi" wx:if="{{showClose}}" data-val="{{false}}" bindtap="toggleMenu"></view>

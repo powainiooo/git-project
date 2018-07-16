@@ -45,7 +45,7 @@ Component({
       {
         name: '隶属于',
         nameEn: 'member of Ho',
-        url: ''
+        url: '/pages/member/member?page=member'
       },
       {
         name: '保险条例',

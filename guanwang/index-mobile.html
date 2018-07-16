@@ -16,25 +16,19 @@
 <body>
 <header class="header">
     <div class="logo"><img src="images/logo.png"> </div>
-    <a href="javascript:;" id="btnNavOpen"><img src="images/btn-menu.png"> </a>
+    <div class="btns">
+        <a href="tel:4008303666"><img src="images/phone-imgs/ico_phone.png"> </a>
+        <a href="javascript:;" id="btnNavOpen"><img src="images/phone-imgs/ico_car.png"> </a>
+    </div>
 </header>
 <div class="swiper-container">
     <div class="swiper-wrapper">
         <div class="swiper-slide" style="background-image: url('images/banner1.jpg')">
             <div class="intro intro1">
                 <img src="images/intro1.png">
-                <div class="code-frame">
-                    <div class="code">
-                        <img  src="images/Android_code.png">
-                        <span>Android 下载</span>
-                    </div>
-                    <div class="code ios-img">
-                        <img  src="images/iPhone_code.png">
-                        <span>IOS 下载</span>
-                    </div>
-                </div>
             </div>
             <div class="phone phone1"><img src="images/phone-imgs/index.png"> </div>
+            <a href="javascript:;" class="btn-download" id="btnDownload">下载</a>
         </div>
         <div class="swiper-slide" style="background-image: url('images/banner2.jpg')">
             <div class="intro intro2"><img src="images/intro2.png"> </div>
@@ -57,10 +51,9 @@
 
 <nav class="nav" id="nav">
     <div class="top-line">
-        <a href="tel:4008303666" class="number"><img src="images/number2.png"> </a>
+        <h3>支持车型：</h3>
         <a href="javascript:;" class="close" id="btnNavClose"><img src="images/btn-close.png"> </a>
     </div>
-    <h3>支持车型：</h3>
     <ul class="car-list">
         <li>
             <img src="images/cars/songMax.jpg">
@@ -136,6 +129,21 @@
     document.getElementById("btnNavOpen").addEventListener('click',function(){
         document.getElementById("nav").style.left = '0%';
     });
+    document.getElementById("btnDownload").addEventListener('click',function(){
+        var ua = navigator.userAgent;
+
+        var ipad = ua.match(/(iPad).*OS\s([\d_]+)/),
+            isIphone =!ipad && ua.match(/(iPhone\sOS)\s([\d_]+)/),
+            isAndroid = ua.match(/(Android)\s+([\d.]+)/),
+            isMobile = isIphone || isAndroid;
+        if(isIphone){
+            window.location = 'http://itunes.apple.com/cn/app/cloud-service/id493482713?ls=1&mt=8'
+        }
+        if(isAndroid){
+            window.location = 'http://i.byd.com.cn/images/download/BYDi.apk'
+        }
+    });
+
 </script>
 </body>
 </html>

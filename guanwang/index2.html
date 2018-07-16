@@ -322,7 +322,10 @@
         slidesPerView: 'auto',
         speed:1000,
         onSlideChangeStart: function(swiper){
-            mySwiper1.animating = true
+            mySwiper1.animating = true;
+            setTimeout(function(){
+                mySwiper1.animating = false
+            },mySwiper1.params.speed)
         },
         onSlideChangeEnd: function(swiper){
             mySwiper1.animating = false

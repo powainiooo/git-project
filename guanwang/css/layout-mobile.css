@@ -2,19 +2,18 @@ body{background: url("../images/bg.jpg") repeat;}
 img{ width: 100%;}
 
 .swiper-container{ height: 100vh;}
-.swiper-slide{ background-repeat: no-repeat; background-size: cover; background-position: center center;}
-.swiper-slide .phone{ width: 50%; position: absolute; bottom: 0%; left: 25%;}
-.swiper-slide .phone1{ width: 40%;  bottom: -3%; left: 30%;}
-.swiper-slide .phone2{ bottom: 6%;}
-.swiper-slide .phone5{ bottom: 6%;}
+.swiper-slide{ display: flex; justify-content: center; align-items: center; flex-direction: column; background-repeat: no-repeat; background-size: cover; background-position: center center;}
+.swiper-slide .phone{ width: 50%;}
+.swiper-slide .phone1{ width: 40%;}
 .swiper-slide .phone img{ width: 100%;}
-.swiper-slide .intro{ width: 50%; position: absolute; top: 10%; left: 25%;}
+.swiper-slide .intro{ width: 50%;}
 .swiper-slide .intro img{ width: 100%;}
-.swiper-slide .intro1{ width: 56%; left: 22%; top: 6%;}
-.swiper-slide .intro2{ width: 72%; left: 14%;}
-.swiper-slide .intro3{ width: 80%; left: 10%;}
-.swiper-slide .intro4{ width: 66%; left: 17%;}
-.swiper-slide .intro5{ width: 78%; left: 11%;}
+.swiper-slide .intro1{ width: 56%; margin-bottom: 5%;}
+.swiper-slide .btn-download{ width: 40%; display: block; border-radius: 20px; padding: 1.5% 6%; box-sizing: border-box; background-color: #2f63d5; font-size: 18px; color: #fff; text-align: center; margin-top: 5%;}
+.swiper-slide .intro2{ width: 72%;}
+.swiper-slide .intro3{ width: 80%;}
+.swiper-slide .intro4{ width: 66%;}
+.swiper-slide .intro5{ width: 78%;}
 
 .code-frame{ background-color: rgba(0,0,0,0.5); padding: 5% 0; display: flex; justify-content: space-around; margin-top: 2%;}
 .code-frame .code{ width: 40%; font-size: 12px; color: #fff; text-align: center;}
@@ -22,10 +21,11 @@ img{ width: 100%;}
 
 .header{  position: fixed; top: 3%; left: 3%; right: 3%; z-index: 500; display: flex; justify-content: space-between;}
 .header .logo{ width: 40%;}
-.header a{ width: 7%; align-self: center;}
+.header .btns{ width: 20%; display: flex; justify-content: space-between;}
+.header a{ width: 40%; align-self: center;}
 
 .nav{ width: 100vw; height: 100vh; position: fixed; top: 0; left: 100%; z-index: 1000; background-color: #ffffff; overflow-y: scroll; transition: left 0.3s ease-in-out; -webkit-transition: left 0.3s ease-in-out;}
-.nav .top-line{ padding: 10px 3%; display: flex; justify-content: space-between; border-bottom: 1px solid #333333; align-items: center;}
+.nav .top-line{ padding: 10px 3%; display: flex; justify-content: space-between; border-bottom: 1px solid #dddddd; align-items: center;}
 .nav .top-line .number{ width: 50%; font-size: 0;}
 .nav .top-line .close{ width: 6%; font-size: 0;}
 .nav h3{ font-size: 16px; color: #333333; padding: 10px;}

@@ -1,7 +1,8 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/sponsor/list"
+    "pages/sponsor/list",
+    "pages/member/member"
   ],
   "window": {
     "backgroundTextStyle": "light",

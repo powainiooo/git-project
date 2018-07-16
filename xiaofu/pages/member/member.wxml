@@ -1,0 +1,7 @@
+<!--index.wxml-->
+<view class="container">
+  <header-view  show-search="true"></header-view>
+  <view class='body'>
+    <text></text>
+  </view>
+</view>

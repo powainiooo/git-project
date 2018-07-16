@@ -1,7 +1,7 @@
 <!-- 顶部导航 -->
-<view class="header">
+<view class="header {{showShadow ? 'header-shadow' : ''}}">
   <view class="opera-line">
-    <image src='../../res/images/logo1.png' mode="widthFix" class="logo"></image>
+    <image src='../../res/images/logo1.png' mode="widthFix" class="logo" bindtap='gotoHome'></image>
     <view class="btns">
       <view class="icons icon-gengduo" wx:if="{{showMenu}}" data-val="{{true}}" bindtap="toggleMenu"></view>
       <view class="icons icon-guanbi" wx:if="{{showClose}}" data-val="{{false}}" bindtap="toggleMenu"></view>
@@ -9,9 +9,9 @@
       <view class="icons icon-fenxiang" wx:if="{{showShare}}" ></view>
     </view>
   </view>
-  <view class='search-frame' animation="{{searchAniData}}">
-    <input type='text' placeholder='输入活动名称/主办方名称' class='text'></input>
-    <view class='btn'><view class="icons icon-sousuo"></view></view>
+  <view class='search-frame' style="top:{{showSearchFrame ? '120rpx' : '0rpx'}}" animation="{{searchAniData}}">
+    <input type='text' placeholder='输入活动名称/主办方名称' class='text' bindinput="bindKeyInput" value="{{keywords}}"></input>
+    <view class='btn' bindtap='doSearch'><view class="icons icon-sousuo"></view></view>
     <view class='btn'><view class="icons icon-guanbi" data-val="{{true}}" bindtap="toggleSearch"></view></view>
   </view>
 </view>

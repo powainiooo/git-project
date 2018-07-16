@@ -1,3 +1,5 @@
 @import 'res/css/helvetica.wxss';
 
+.container{ width: 100%; min-height: 100vh; overflow: hidden;}
+.bg-gray{ background-color: #f6f6f6;}
 .container .body{ margin-top: 120rpx;}

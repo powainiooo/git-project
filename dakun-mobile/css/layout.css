@@ -184,4 +184,15 @@ body{ background-color: #000;}
 .btn1{width: 150px; display: inline-block; border: 1px solid rgba(255,255,255,0.8); background-color: rgba(255,255,255,0.3); font-size: 14px; padding: 8px 0; color: #fff; letter-spacing: 3px;}
 .btn1:hover{ background-color: #fff; color: #000;}
 
-.orient-hint{ position: fixed; top: 0; left: 0; bottom: 0; right: 0; z-index: 1000; background: url('../images/hint.jpg') no-repeat; background-size: cover; background-position: center bottom;}
+.orient-hint{ position: fixed; top: 0; left: 0; bottom: 0; right: 0; z-index: 1000; background: url('../images/hint.jpg') no-repeat; background-size: cover; background-position: center bottom; display: flex; justify-content: center; align-items: center;}
+.orient-hint div{ text-align: center;}
+.orient-hint div img{ width: 15%; animation: mymove 1s linear infinite; -webkit-animation: mymove 1s linear infinite;}
+@keyframes mymove {
+    0%{ transform:rotate(0deg)}
+    70%,100%{ transform:rotate(90deg)}
+}
+@-webkit-keyframes mymove {
+    0%{ -webkit-transform:rotate(0deg)}
+    70%,100%{ -webkit-transform:rotate(90deg)}
+}
+.orient-hint div p{ font-size: 18px; color: #fff; margin-top: 20px;}

@@ -1,0 +1,18 @@
+<!--index.wxml-->
+<view class="container bg-gray">
+  <header-view showSearchFrame name="search" keywords="{{keywords}}"></header-view>
+  <view class='body'>
+    <!--搜索结果列表  -->
+    <view class='pro-list' wx:if="{{!showHint}}">
+      <ticket-item></ticket-item>
+      <ticket-item></ticket-item>
+      <ticket-item></ticket-item>
+    </view>
+    <!--无搜索结果  -->
+    <view class='result-frame' wx:if="{{showHint}}">
+      <view class='icons icon-cuowu'></view>
+      <view><text class='hint-en'>Irrelevant \n Content</text></view>
+      <view class='hint-cn'>无相关内容</view>
+    </view>
+  </view>
+</view>

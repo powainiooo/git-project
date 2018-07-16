@@ -1,0 +1,8 @@
+ @import '../../res/css/icons.wxss'; 
+
+.pro-list{ margin:280rpx 10rpx 0 10rpx;}
+
+.result-frame{ margin: 360rpx 50rpx 0 50rpx;}
+.result-frame .icons{ font-size: 200rpx; color: #002aac; display: block; margin-bottom: 60rpx;}
+.result-frame .hint-en{ font-size: 100rpx; font-family: 'Helve'; line-height: 0.9;}
+.result-frame .hint-cn{ font-size: 72rpx; margin-top: 60rpx;}

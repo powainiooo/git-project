@@ -20,6 +20,22 @@ Component({
     showShare: {
       type: Boolean,
       value: false
+    },
+    showShadow: {
+      type: Boolean,
+      value: true
+    },
+    showSearchFrame: {
+      type: Boolean,
+      value: false
+    },
+    name: {
+      type: String,
+      value: ''
+    },
+    keywords: {
+      type: String,
+      value: ''
     }
   },
 
@@ -50,24 +66,24 @@ Component({
       {
         name: '保险条例',
         nameEn: 'insurance Act',
-        url: ''
+        url: '/pages/member/member?page=insurance'
       },
       {
         name: '售后声明',
         nameEn: 'after sales',
-        url: ''
+        url: '/pages/member/member?page=aftersales'
       },
       {
         name: '联系方式',
         nameEn: 'contact Information',
-        url: ''
+        url: '/pages/member/member?page=contact'
       }
     ]
   },
   ready(){
     this.setData({
       userInfo: app.globalData.userInfo
-    })
+    });
   },
 
   /**
@@ -113,6 +129,23 @@ Component({
         showSearch: !isShow,
         showMenu: !isShow,
         showClose: isShow,
+      })
+    },
+    bindKeyInput: function (e) {
+      this.setData({
+        keywords: e.detail.value
+      })
+    },
+    doSearch(){
+      if (this.data.name != 'search'){
+        wx.navigateTo({
+          url: '/pages/search/search?keywords=' + this.data.keywords
+        })
+      }
+    },
+    gotoHome(){
+      wx.navigateTo({
+        url: '/pages/index/index'
       })
     }
   },

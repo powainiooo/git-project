@@ -1,4 +1,24 @@
 <!--index.wxml-->
-<view class="container">
-  <header-view  show-search="true"></header-view>
+<view class="container bg-gray">
+  <header-view  show-search showShadow="{{false}}"></header-view>
+  <view class='body '>
+    <scroll-view scroll-x class='address-select'>
+      <view class='address-frame' style='width:{{addressList.length*150}}rpx'>
+        <view 
+        wx:for="{{addressList}}" 
+        wx:for-item="item" 
+        wx:for-index="index" 
+        wx:key="item"
+        class="{{addressIndex == index ? 'active' : ''}}">{{item}}</view>
+      </view>
+    </scroll-view>
+
+    <image src="../../res/images/img/banner1.jpg" class='banner' mode='widthFix'></image>
+
+    <view class='pro-list'>
+      <ticket-item></ticket-item>
+      <ticket-item></ticket-item>
+      <ticket-item></ticket-item>
+    </view>
+  </view>
 </view>

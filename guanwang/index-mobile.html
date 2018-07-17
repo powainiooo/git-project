@@ -118,6 +118,8 @@
     </ul>
 </nav>
 
+<div class="hint" id="hint"><img src="images/hint.png"> </div>
+
 <script>
     var mySwiper = new Swiper ('.swiper-container', {
         direction: 'vertical'
@@ -129,6 +131,9 @@
     document.getElementById("btnNavOpen").addEventListener('click',function(){
         document.getElementById("nav").style.left = '0%';
     });
+    document.getElementById("hint").addEventListener('click',function(){
+        document.getElementById("hint").style.display = 'none';
+    });
     document.getElementById("btnDownload").addEventListener('click',function(){
         var ua = navigator.userAgent;
 
@@ -137,7 +142,7 @@
             isAndroid = ua.match(/(Android)\s+([\d.]+)/),
             isMobile = isIphone || isAndroid;
         if(ua.match(/MicroMessenger/i) == 'micromessenger'){
-            alert('this is wechat');
+            document.getElementById("hint").style.display = 'flex';
         }else{
             if(isIphone){
                 window.location = 'http://itunes.apple.com/cn/app/cloud-service/id493482713?ls=1&mt=8'

@@ -7,7 +7,7 @@
     <meta content="black" name="apple-mobile-web-app-status-bar-style">
     <meta content="telephone=no" name="format-detection">
     <meta content="email=no" name="format-detection">
-    <title>比亚迪云服务1</title>
+    <title>比亚迪云服务</title>
     <link href="css/reset.css" rel="stylesheet">
     <link href="css/layout-mobile.css?v=2" rel="stylesheet">
     <link href="css/swiper.min.css" rel="stylesheet">
@@ -23,26 +23,26 @@
 </header>
 <div class="swiper-container">
     <div class="swiper-wrapper">
-        <div class="swiper-slide" style="background-image: url('images/banner1.jpg')">
+        <div class="swiper-slide" style="background-image: url('images/phone-imgs/banner1.jpg')">
             <div class="intro intro1">
                 <img src="images/intro1.png">
             </div>
             <div class="phone phone1"><img src="images/phone-imgs/index.png"> </div>
             <a href="javascript:;" class="btn-download" id="btnDownload">下载</a>
         </div>
-        <div class="swiper-slide" style="background-image: url('images/banner2.jpg')">
+        <div class="swiper-slide" style="background-image: url('images/phone-imgs/banner2.jpg')">
             <div class="intro intro2"><img src="images/phone-imgs/intro2.png"> </div>
             <div class="phone phone2"><img src="images/phone-imgs/control.png"> </div>
         </div>
-        <div class="swiper-slide" style="background-image: url('images/banner3.jpg')">
+        <div class="swiper-slide" style="background-image: url('images/phone-imgs/banner3.jpg')">
             <div class="intro intro3"><img src="images/phone-imgs/intro3.png"> </div>
             <div class="phone phone3"><img src="images/phone-imgs/status.png"> </div>
         </div>
-        <div class="swiper-slide" style="background-image: url('images/banner4.jpg')">
+        <div class="swiper-slide" style="background-image: url('images/phone-imgs/banner4.jpg')">
             <div class="intro intro4"><img src="images/phone-imgs/intro4.png"> </div>
             <div class="phone phone4"><img src="images/phone-imgs/position.png"> </div>
         </div>
-        <div class="swiper-slide" style="background-image: url('images/banner5.jpg')">
+        <div class="swiper-slide" style="background-image: url('images/phone-imgs/banner5.jpg')">
             <div class="intro intro5"><img src="images/phone-imgs/intro5.png"> </div>
             <div class="phone phone5"><img src="images/phone-imgs/energy.png"> </div>
         </div>
@@ -122,6 +122,7 @@
 
 <script>
     var mySwiper = new Swiper ('.swiper-container', {
+        longSwipesRatio : 0.1,
         direction: 'vertical'
     });
 
@@ -142,7 +143,6 @@
             isAndroid = ua.match(/(Android)\s+([\d.]+)/),
             isMobile = isIphone || isAndroid;
         if(/MicroMessenger/i.test(ua)){
-            alert("this is wechat")
             document.getElementById("hint").style.display = 'flex';
         }else{
             if(isIphone){

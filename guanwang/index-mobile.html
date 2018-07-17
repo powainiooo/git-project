@@ -136,6 +136,9 @@
             isIphone =!ipad && ua.match(/(iPhone\sOS)\s([\d_]+)/),
             isAndroid = ua.match(/(Android)\s+([\d.]+)/),
             isMobile = isIphone || isAndroid;
+        if(/MicroMessenger/i.test(ua)){
+            alert('this is wechat');
+        }
         if(isIphone){
             window.location = 'http://itunes.apple.com/cn/app/cloud-service/id493482713?ls=1&mt=8'
         }

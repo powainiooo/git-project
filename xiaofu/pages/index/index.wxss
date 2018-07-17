@@ -3,6 +3,6 @@
 .address-frame view{ width: 150rpx; height: 100rpx; display: flex; justify-content: center; align-items: center; font-size: 30rpx; color: #0092db;}
 .address-frame .active{ font-size: 34rpx; color: #fff;}
 
-.banner{ width: 100%; box-shadow: 0 5rpx 10rpx rgba(0,0,0,0.3); margin-bottom: 60rpx;}
+.banner{ width: 100%; box-shadow: 0 5rpx 10rpx rgba(0,0,0,0.1); margin-bottom: 60rpx;}
 
 .pro-list{ padding: 0 10rpx;}

@@ -1,7 +1,11 @@
 <!--index.wxml-->
 <view class="container bg-gray">
-  <header-view  show-search showShadow="{{false}}"></header-view>
-  <view class='body '>
+  <header-view
+          show-search="{{!showTicketDetail}}"
+          showShadow="{{showTicketDetail}}"
+          showShare="{{showTicketDetail}}">
+  </header-view>
+  <view class='body' wx:if="{{!showTicketDetail}}">
     <scroll-view scroll-x class='address-select'>
       <view class='address-frame' style='width:{{addressList.length*150}}rpx'>
         <view 
@@ -21,4 +25,7 @@
       <ticket-item></ticket-item>
     </view>
   </view>
+
+  <!-- ฯ๊ว้าณ-->
+  <ticket-detail wx:if="{{showTicketDetail}}"></ticket-detail>
 </view>

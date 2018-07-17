@@ -1,0 +1,19 @@
+.detail-frame{ margin-top: 160rpx; margin-bottom: 250rpx;}
+.detail-frame .title{ font-size: 42rpx; padding-top: 60rpx; margin: 60rpx 40rpx 40rpx 40rpx; border-top: 1rpx solid #e0e0e0; font-weight: bold;}
+
+.actor-item{ height: 230rpx; margin: 40rpx 20rpx; box-shadow: 0 0 20rpx rgba(0,0,0,0.25); border-radius: 10rpx; overflow: hidden; display: flex;}
+.actor-item .logo{ width: 230rpx; height: 100%; background-color: #002aac; display: flex;}
+.actor-item .img{ width: calc(100% - 230rpx); height: 100%; }
+
+.notice-item{ margin:0 40rpx 60rpx 40rpx; display: flex;}
+.notice-item .number{ width: 140rpx; font-size: 100rpx; font-family: 'Helve';}
+.notice-item .descript{ width: calc(100% - 140rpx); font-size: 24rpx; color: #888888; align-self: flex-end; line-height: 1.5; margin-bottom: 15rpx;}
+
+.activity-frame{position: relative;}
+.detail-frame .swiper{ min-height: 850rpx;}
+.detail-frame .swiper-item{ overflow: visible; padding: 20rpx; box-sizing: border-box;}
+.detail-frame .swiper-item .img{ height: 330rpx; display: block; box-shadow: 0 0 20rpx rgba(0,0,0,0.4); border-radius: 10rpx;}
+.detail-frame .swiper-item .infos{ width: 100%; font-size: 24rpx; color: #888888; line-height: 1.8; margin-top: 80rpx;}
+.activity-frame .nav-dots{ width: 100%; position: absolute; top: 370rpx; left: 0; display: flex; justify-content: center;}
+.activity-frame .nav-dots .dot-item{ width: 14rpx; height: 14rpx; border-radius: 50%; margin: 0 6rpx; border: 1rpx solid #888888;}
+.activity-frame .nav-dots .active{ background-color: #002aac; border: 1rpx solid #002aac;}

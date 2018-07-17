@@ -1,7 +1,7 @@
  @import '../../res/css/icons.wxss'; 
 
 .header{ width: 100%;position: fixed; top: 0; left: 0; z-index: 500;}
-.header-shadow{ box-shadow: 0 7rpx 10rpx rgba(0,0,0,0.4);}
+.header-shadow{ box-shadow: 0 7rpx 10rpx rgba(0,0,0,0.25);}
 .header .opera-line{ height: 120rpx;  padding: 0 55rpx; background-color: #002aac; display: flex;  align-items: center; justify-content: space-between; position: relative; z-index: 10;}
 .header .logo{ width: 190rpx;}
 .header .btns{ width: 160rpx; display: flex; flex-direction: row-reverse; justify-content: space-between; align-items: center;}

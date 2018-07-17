@@ -230,17 +230,17 @@
         <div class="swiper-slide wheight p2-page">
             <div class="title"><img onload="loadImg()" src="images/title.png"> </div>
             <div class="p2-container bg2">
-                <div class="intro2" id="intro2"><img onload="loadImg()" src="images/intro2.png"> </div>
+                <div class="intro intro2" id="intro2"><img onload="loadImg()" src="images/intro2.png"> </div>
             </div>
         </div>
         <div class="swiper-slide wheight bg3">
-            <div class="intro3" id="intro3"><img onload="loadImg()" src="images/intro3.png"> </div>
+            <div class="intro intro3" id="intro3"><img onload="loadImg()" src="images/intro3.png"> </div>
         </div>
         <div class="swiper-slide wheight bg4">
-            <div class="intro4" id="intro4"><img onload="loadImg()" src="images/intro4.png"> </div>
+            <div class="intro intro4" id="intro4"><img onload="loadImg()" src="images/intro4.png"> </div>
         </div>
         <div class="swiper-slide wheight bg5">
-            <div class="intro5" id="intro5"><img onload="loadImg()" src="images/intro5.png"> </div>
+            <div class="intro intro5" id="intro5"><img onload="loadImg()" src="images/intro5.png"> </div>
         </div>
         <div class="swiper-slide footer" id="footer">
             <span>CopyRight © BYD Company Limited. All rights reserved.</span>
@@ -283,25 +283,18 @@
     function endMove(){
         var slidePage = slideIndex == 5 ? 4 : slideIndex;
         phoneImgMove(slidePage);
-        setTimeout(function(){
-            if(slideIndex == 0){
-                $("#intro2").removeClass('introReset');
-            }else if(slideIndex == 1){
-                $("#intro2").addClass('introReset');
-                $("#intro3").removeClass('introReset');
-            }else if(slideIndex == 2){
-                $("#intro2").removeClass('introReset');
-                $("#intro3").addClass('introReset');
-                $("#intro4").removeClass('introReset');
-            }else if(slideIndex == 3){
-                $("#intro3").removeClass('introReset');
-                $("#intro4").addClass('introReset');
-                $("#intro5").removeClass('introReset');
-            }else if(slideIndex == 4){
-                $("#intro5").addClass('introReset');
-                $("#intro4").removeClass('introReset');
-            }
-        },0)
+        $(".intro").removeClass('introReset');
+        if(slideIndex == 1){
+            $("#intro2").addClass('introReset');
+        }else if(slideIndex == 2){
+            $("#intro3").addClass('introReset');
+        }else if(slideIndex == 3){
+            $("#intro4").addClass('introReset');
+        }else if(slideIndex == 4){
+            $("#intro5").addClass('introReset');
+        }else if(slideIndex == 5){
+            $("#intro5").addClass('introReset');
+        }
     }
 
     $("#btnFunc").on('click',function(){
@@ -315,6 +308,7 @@
         },900)
     });
 
+    var direction;
     var mySwiper1 = new Swiper ('#slide1', {
         mode: 'vertical',
         simulateTouch : false,
@@ -322,17 +316,18 @@
         slidesPerView: 'auto',
         speed:1000,
         onSlideChangeStart: function(swiper){
-            mySwiper1.animating = true;
-            setTimeout(function(){
-                mySwiper1.animating = false
-            },mySwiper1.params.speed)
+            if(direction == 'down' && slideIndex == 5){
+                console.log('bottom slide')
+            }else{
+                mySwiper1.animating = true;
+            }
         },
         onSlideChangeEnd: function(swiper){
             mySwiper1.animating = false
         }
     });
     var slideIndex = 0;
-    $('#slide1').mousewheel(function (event, delta) {
+    $('#slide1,#phone').mousewheel(function (event, delta) {
         if(!mySwiper1.animating){
             if(delta == -1){//down
                 pageMove('down')
@@ -343,6 +338,8 @@
     });
     function pageMove(direc){
         var phone = $("#phone");
+        console.log(direc+":"+slideIndex);
+        direction = direc;
         if(direc == 'down'){
             if(slideIndex < 5) slideIndex ++;
             if(slideIndex == 1){
@@ -360,6 +357,9 @@
                 mySwiper1.params.speed = 400;
                 phone.removeClass('phone-right');
                 phone.addClass('phone-bottom');
+//                setTimeout(function(){
+//                    mySwiper1.animating = false
+//                },500)
             }
             mySwiper1.swipeNext();
         }else if(direc == 'up'){

@@ -9,6 +9,7 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#002aac",
+    "backgroundColor":"#002aac",
     "navigationBarTitleText": "",
     "navigationBarTextStyle": "white"
   }

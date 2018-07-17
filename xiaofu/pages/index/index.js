@@ -9,7 +9,8 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     addressList:['北京','上海','广州','深圳','南昌','惠州','成都'],
-    addressIndex:0
+    addressIndex:0,
+    showTicketDetail:true
   },
   //事件处理函数
   bindViewTap: function() {
@@ -36,7 +37,7 @@ Page({
       // 在没有 open-type=getUserInfo 版本的兼容处理
       wx.getUserInfo({
         success: res => {
-          app.globalData.userInfo = res.userInfo
+          app.globalData.userInfo = res.userInfo;
           this.setData({
             userInfo: res.userInfo,
             hasUserInfo: true
@@ -46,8 +47,7 @@ Page({
     }
   },
   getUserInfo: function(e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
+    app.globalData.userInfo = e.detail.userInfo;
     this.setData({
       userInfo: e.detail.userInfo,
       hasUserInfo: true

@@ -1,0 +1,44 @@
+<view class="detail-frame">
+
+    <ticket-item isSimple="{{false}}"></ticket-item>
+    <view class="title">艺人信息</view>
+    <view class="actor-item">
+        <image class="logo" src="../../res/images/img/actor-logo.png" mode="aspectFit"></image>
+        <image class="img" src="../../res/images/img/actor-img.jpg" mode="aspectFit"></image>
+    </view>
+    <view class="actor-item">
+        <image class="logo" src="../../res/images/img/actor-logo.png" mode="aspectFit"></image>
+        <image class="img" src="../../res/images/img/actor-img.jpg" mode="aspectFit"></image>
+    </view>
+
+    <view class="title">须知</view>
+    <view class="notice-item">
+        <text class="number">01</text>
+        <text class="descript">本消费券只能在深圳实用。</text>
+    </view>
+    <view class="notice-item">
+        <text class="number">02</text>
+        <text class="descript">本消费券只能在深圳实用。本消费券只能在深圳实用。本消费券只能在深圳实用。</text>
+    </view>
+
+    <view class="title">活动详情</view>
+    <view class="activity-frame">
+        <swiper class="swiper"
+                previous-margin="40rpx"
+                next-margin="40rpx"
+                bindchange="activityChange">
+            <swiper-item  class="swiper-item"
+                          wx:for="{{activityList}}"
+                          wx:for-index="index"
+                          wx:key="index">
+                <image class="img" src="../../res/images/img/ac-img.jpg" mode="aspectFill"></image>
+                <view class="infos" wx:if="{{index == activityIndex}}">活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍1</view>
+            </swiper-item>
+        </swiper>
+        <view class="nav-dots">
+            <view wx:for="{{activityList}}"
+                  wx:for-index="index"
+                  class="dot-item {{index == activityIndex ? 'active' : ''}}"></view>
+        </view>
+    </view>
+</view>

@@ -1,4 +1,4 @@
-<view class='ticket-frame' hover-class="ticket-touch" hover-stay-time="50">
+<view class="ticket-frame {{isSimple ? 'ticket-frame-simple' : ''}}" hover-class="ticket-touch" hover-stay-time="50">
   <view class='line1'>
     <view class='date'>
       <view class='year'>
@@ -14,5 +14,7 @@
     </view>
   </view>
   <view class='title'>French kiwi jucie of one one one</view>
-  <image src='../../res/images/img/ticket-img1.jpg' mode='widthFix' class='imgs'></image>
+  <view class='range'>10:00pm-3:00am</view>
+  <view class='address'>上海市 巨鹿路168号</view>
+  <image src='../../res/images/img/ticket-img1.jpg' mode='aspectFill' class='imgs'></image>
 </view>

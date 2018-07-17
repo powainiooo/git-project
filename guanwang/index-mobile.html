@@ -136,16 +136,17 @@
             isIphone =!ipad && ua.match(/(iPhone\sOS)\s([\d_]+)/),
             isAndroid = ua.match(/(Android)\s+([\d.]+)/),
             isMobile = isIphone || isAndroid;
-        if(/MicroMessenger/i.test(ua)){
+        if(ua.match(/MicroMessenger/i) == 'micromessenger'){
             alert('this is wechat');
+        }else{
+            if(isIphone){
+                window.location = 'http://itunes.apple.com/cn/app/cloud-service/id493482713?ls=1&mt=8'
+            }
+            if(isAndroid){
+                window.location = 'http://i.byd.com.cn/images/download/BYDi.apk'
+            }
         }
-        if(isIphone){
-            window.location = 'http://itunes.apple.com/cn/app/cloud-service/id493482713?ls=1&mt=8'
-        }
-        if(isAndroid){
-//            window.location = 'http://i.byd.com.cn/images/download/BYDi.apk'
-            window.location = 'http://mp.weixin.qq.com/mp/redirect?url=http://i.byd.com.cn/images/download/BYDi.apk#weixin.qq.com#wechat_redirect'
-        }
+
     });
 
 </script>

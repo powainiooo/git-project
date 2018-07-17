@@ -19,7 +19,7 @@ body{ min-width: 1200px; background: url("../images/bg.jpg") repeat;}
 .index-container .footer span{ margin-top: 26px; display: inline-block;}
 
 .p1-content{ position: absolute; left: 53.6%; top:50%; bottom: 0; margin-top: -208px;}
-.p1-content .code-frame{ width: 410px; height: 190px; margin: 40px 0 0 30px; position: relative; background: url('../images/bg1.png') repeat-x;}
+.p1-content .code-frame{ width: 410px; height: 190px; margin: 40px 0 0 10px; position: relative; background: url('../images/bg1.png') repeat-x;}
 .p1-content .code{ position: absolute; top: 22px; left: 50px;}
 .p1-content .ios-img{ left: auto; right: 50px;}
 .p1-content .code img{ width: 120px;}

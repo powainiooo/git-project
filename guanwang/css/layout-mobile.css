@@ -6,12 +6,12 @@ img{ width: 100%;}
 .swiper-slide .phone{ width: 50%;}
 .swiper-slide .phone1{ width: 40%;}
 .swiper-slide .phone img{ width: 100%;}
-.swiper-slide .intro{ width: 50%;}
+.swiper-slide .intro{ width: 50%; margin-top: 10%;}
 .swiper-slide .intro img{ width: 100%;}
 .swiper-slide .intro1{ width: 56%; margin-bottom: 5%;}
 .swiper-slide .btn-download{ width: 40%; display: block; border-radius: 20px; padding: 1.5% 6%; box-sizing: border-box; background-color: #2f63d5; font-size: 18px; color: #fff; text-align: center; margin-top: 5%;}
 .swiper-slide .intro2{ width: 72%;}
-.swiper-slide .intro3{ width: 80%;}
+.swiper-slide .intro3{ width: 74%;}
 .swiper-slide .intro4{ width: 66%;}
 .swiper-slide .intro5{ width: 78%;}
 

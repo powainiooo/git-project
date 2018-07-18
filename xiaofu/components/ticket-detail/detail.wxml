@@ -1,44 +1,69 @@
 <view class="detail-frame">
-
     <ticket-item isSimple="{{false}}"></ticket-item>
-    <view class="title">艺人信息</view>
-    <view class="actor-item">
-        <image class="logo" src="../../res/images/img/actor-logo.png" mode="aspectFit"></image>
-        <image class="img" src="../../res/images/img/actor-img.jpg" mode="aspectFit"></image>
-    </view>
-    <view class="actor-item">
-        <image class="logo" src="../../res/images/img/actor-logo.png" mode="aspectFit"></image>
-        <image class="img" src="../../res/images/img/actor-img.jpg" mode="aspectFit"></image>
-    </view>
+    <view>
+        <view class="title">艺人信息</view>
+        <view class="actor-item">
+            <image class="logo" src="../../res/images/img/actor-logo.png" mode="aspectFit"></image>
+            <image class="img" src="../../res/images/img/actor-img.jpg" mode="aspectFit"></image>
+        </view>
+        <view class="actor-item">
+            <image class="logo" src="../../res/images/img/actor-logo.png" mode="aspectFit"></image>
+            <image class="img" src="../../res/images/img/actor-img.jpg" mode="aspectFit"></image>
+        </view>
 
-    <view class="title">须知</view>
-    <view class="notice-item">
-        <text class="number">01</text>
-        <text class="descript">本消费券只能在深圳实用。</text>
-    </view>
-    <view class="notice-item">
-        <text class="number">02</text>
-        <text class="descript">本消费券只能在深圳实用。本消费券只能在深圳实用。本消费券只能在深圳实用。</text>
-    </view>
+        <view class="title">须知</view>
+        <view class="notice-item">
+            <text class="number">01</text>
+            <text class="descript">本消费券只能在深圳实用。</text>
+        </view>
+        <view class="notice-item">
+            <text class="number">02</text>
+            <text class="descript">本消费券只能在深圳实用。本消费券只能在深圳实用。本消费券只能在深圳实用。</text>
+        </view>
 
-    <view class="title">活动详情</view>
-    <view class="activity-frame">
-        <swiper class="swiper"
-                previous-margin="40rpx"
-                next-margin="40rpx"
-                bindchange="activityChange">
-            <swiper-item  class="swiper-item"
-                          wx:for="{{activityList}}"
-                          wx:for-index="index"
-                          wx:key="index">
-                <image class="img" src="../../res/images/img/ac-img.jpg" mode="aspectFill"></image>
-                <view class="infos" wx:if="{{index == activityIndex}}">活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍1</view>
+        <view class="title">活动详情</view>
+        <view class="activity-frame">
+            <swiper class="swiper"
+                    previous-margin="40rpx"
+                    next-margin="40rpx"
+                    bindchange="activityChange">
+                <swiper-item  class="swiper-item"
+                              wx:for="{{activityList}}"
+                              wx:for-index="index"
+                              wx:key="index">
+                    <image class="img" src="../../res/images/img/ac-img.jpg" mode="aspectFill"></image>
+                    <view class="infos" wx:if="{{index == activityIndex}}">活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍1</view>
+                </swiper-item>
+            </swiper>
+            <view class="nav-dots">
+                <view wx:for="{{activityList}}"
+                      wx:for-index="index"
+                      wx:key="index"
+                      class="dot-item {{index == activityIndex ? 'active' : ''}}"></view>
+            </view>
+        </view>
+
+        <view class="title">联系主办方</view>
+        <view class="contact-frame">
+            <image src="../../res/images/img/logo1.png" mode="widthFix" class="logo"></image>
+            <view class="btn-phone">+86-131-4888-6289</view>
+        </view>
+
+        <view class="title">更多推荐活动</view>
+        <swiper class="recommond-swiper"
+                previous-margin="30rpx"
+                next-margin="240rpx">
+            <swiper-item class="recommond-item"
+                         wx:for="{{recommondList}}"
+                         wx:for-index="index"
+                         wx:key="index">
+                <ticket-item extraClass="ticket-small"></ticket-item>
             </swiper-item>
         </swiper>
-        <view class="nav-dots">
-            <view wx:for="{{activityList}}"
-                  wx:for-index="index"
-                  class="dot-item {{index == activityIndex ? 'active' : ''}}"></view>
+
+        <view class="footer">
+            <view class="price">888<text class="unit">RMB</text></view>
+            <view class="btn" bindtap="gotoBuy">购买</view>
         </view>
     </view>
 </view>

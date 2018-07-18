@@ -1,0 +1,34 @@
+<!--index.wxml-->
+<view class="container bg-gray">
+  <header-view show-close>
+  </header-view>
+  <view class='body buy-frame'>
+    <view style="margin-top: 40rpx;">
+      <ticket-item isSimple="{{false}}" extraClass="ticket-buy"></ticket-item>
+    </view>
+
+    <view class="price">888<text class="unit">RMB</text></view>
+
+    <view class="form-frame">
+      <input placeholder="姓名" class="input" bindinput="checkValues" data-key="nameVal"/>
+      <input placeholder="电话" class="input" bindinput="checkValues" data-key="phoneVal"/>
+      <input placeholder="收货地址" class="input" bindinput="checkValues" data-key="addressVal"/>
+    </view>
+
+    <view class="hint-section">本票务一经购买，无主办方的通知，任何情况都不支持退票。未满十八岁请勿购票！</view>
+
+    <view class="footer">
+      <view class="ticket-type" bindtap="toggleTypeList" data-show="{{true}}">{{ticketTypeName}}</view>
+      <picker bindchange="numberChange" value="{{numberIndex}}" range="{{numbersArr}}"  class="ticket-number">
+        <view>{{numbersArr[numberIndex]}} <text>张</text></view>
+      </picker>
+      <view class="btn {{btnDisabled ? '' : 'btn-disabled'}}" bindtap="doPay">确认付款</view>
+    </view>
+
+    <view class="ticket-type-list" animation="{{animDataTypeList}}">
+      <view class="disabled">早鸟票</view>
+      <view bindtap="toggleTypeList" data-show="{{false}}" data-val="预售票">预售票</view>
+      <view bindtap="toggleTypeList" data-show="{{false}}" data-val="普通票">普通票</view>
+    </view>
+  </view>
+</view>

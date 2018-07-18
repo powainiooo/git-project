@@ -1,2 +1,47 @@
-<!--pages/result/result.wxml-->
-<text>pages/result/result.wxml</text>
+<!--index.wxml-->
+<view class="container bg-gray">
+    <header-view></header-view>
+    <view class='body'>
+        <view class='result-frame'>
+            <view class='icons icon-chenggong'></view>
+            <view><text class='hint-en'>{{titleEn}}</text></view>
+            <view class='hint-cn'>{{titleCn}}</view>
+            <!-- 票务支付成功-->
+            <view class="hint-frame" wx:if="{{pageName == 'ticketSuc'}}">
+                <view class="hint-section">
+                    <text>我们将以公众号消息通知形式发送活动票务二维码，\n <text style="font-size: 20rpx;">(取消关注的用户将无法收取二维码，请手动关注 小夫有票)</text></text>
+                </view>
+                <view class="hint-section">还可以通过点击订单中心查询兑换二维码，感谢您使用 小夫有票。</view>
+            </view>
+            <view class="footer" wx:if="{{pageName == 'ticketSuc'}}">
+                <view class="btn-close" bindtap="backIndexDetail">
+                    <view class='icons icon-guanbi'></view>
+                </view>
+                <view class="btn" bindtap="gotoInsured">免费保险</view>
+            </view>
+
+            <!-- 投保成功-->
+            <view class="hint-frame" wx:if="{{pageName == 'insuredSuc'}}">
+                <view class="hint-section">保险条例请移步 小夫有票 公众号 “更多” - “声明” - “保险条例”</view>
+            </view>
+            <view class="footer" wx:if="{{pageName == 'insuredSuc'}}">
+                <view class="btn-close" bindtap="backIndexDetail">
+                    <view class='icons icon-guanbi'></view>
+                </view>
+                <view class="btn" bindtap="backIndex">回到首页</view>
+            </view>
+
+            <!-- 特饮支付成功-->
+            <view class="hint-frame" wx:if="{{pageName == 'drinkSuc'}}">
+                <view class="hint-section">
+                    <text>我们将以公众号消息通知形式发送特饮兑换二维码，\n <text style="font-size: 20rpx;">(取消关注的用户将无法收取二维码，请手动关注 小夫有票)</text></text>
+                </view>
+                <view class="hint-section">还可以通过点击订单中心查询兑换二维码，感谢您使用 小夫有票。</view>
+            </view>
+            <view class="footer" wx:if="{{pageName == 'drinkSuc'}}">
+                <view class="btn" style="width: 100%;">完成</view>
+            </view>
+        </view>
+    </view>
+
+</view>

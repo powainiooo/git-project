@@ -10,7 +10,8 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     addressList:['北京','上海','广州','深圳','南昌','惠州','成都'],
     addressIndex:0,
-    showTicketDetail:true
+    showTicketDetail:false,
+    detailTop:0
   },
   //事件处理函数
   bindViewTap: function() {
@@ -18,7 +19,13 @@ Page({
       url: '../logs/logs'
     })
   },
-  onLoad: function () {
+  onLoad: function (options) {
+    let id = options.id || -1;
+    if(id != -1){
+      this.setData({
+        showTicketDetail:true
+      })
+    }
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -51,6 +58,12 @@ Page({
     this.setData({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
+    })
+  },
+  gotoDetail(e){
+    let top = e.target.offsetTop;
+    this.setData({
+      showTicketDetail:true
     })
   }
 })

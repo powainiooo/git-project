@@ -20,12 +20,15 @@
     <image src="../../res/images/img/banner1.jpg" class='banner' mode='widthFix'></image>
 
     <view class='pro-list'>
-      <ticket-item></ticket-item>
-      <ticket-item></ticket-item>
-      <ticket-item></ticket-item>
+      <ticket-item bindtap="gotoDetail"></ticket-item>
+      <ticket-item bindtap="gotoDetail"></ticket-item>
+      <ticket-item bindtap="gotoDetail"></ticket-item>
     </view>
   </view>
 
-  <!-- ÏêÇéÒ³-->
-  <ticket-detail wx:if="{{showTicketDetail}}"></ticket-detail>
+  <view class="index-details" wx:if="{{showTicketDetail}}">
+    <!-- è¯¦æƒ…é¡µ-->
+    <ticket-detail></ticket-detail>
+  </view>
+
 </view>

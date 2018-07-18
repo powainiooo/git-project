@@ -1,1 +1,13 @@
-/* pages/result/result.wxss */
+@import '../../res/css/icons.wxss';
+
+.result-frame{ margin: 200rpx 50rpx;}
+.result-frame .icons{ font-size: 200rpx; color: #002aac; display: block; margin-bottom: 60rpx;}
+.result-frame .hint-en{ font-size: 100rpx; font-family: 'Helve'; line-height: 0.9;}
+.result-frame .hint-cn{ font-size: 72rpx; margin-top: 50rpx; font-weight: bold;}
+
+.result-frame .hint-frame{ margin: 120rpx -50rpx 0 -50rpx;}
+
+.result-frame .footer{  width: 100%; height: 160rpx; display: flex; position: fixed; left: 0; bottom: 0; box-shadow: 0 -5rpx 10rpx rgba(0,0,0,0.1);}
+.result-frame .footer .btn-close{ padding-bottom: 10px; width: 25%; display: flex; justify-content: center; align-items: center;  background-color: #ffffff;}
+.result-frame .footer .btn-close .icons{ font-size: 40rpx; color: #000000; margin-bottom: 0;}
+.result-frame .footer .btn{ padding-bottom: 10px; width: 75%; display: flex; justify-content: center; align-items: center; font-size: 34rpx; background-color: #002aac; color: #fff;}

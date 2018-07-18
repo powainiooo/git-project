@@ -7,6 +7,10 @@ Component({
     isSimple:{
       type:Boolean,
       value:true
+    },
+    extraClass:{
+      type:String,
+      value:''
     }
   },
 

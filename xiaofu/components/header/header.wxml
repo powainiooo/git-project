@@ -10,7 +10,13 @@
     </view>
   </view>
   <view class='search-frame' style="top:{{showSearchFrame ? '120rpx' : '0rpx'}}" animation="{{searchAniData}}">
-    <input type='text' placeholder='输入活动名称/主办方名称' class='text' bindinput="bindKeyInput" value="{{keywords}}"></input>
+    <input type='text'
+           placeholder='输入活动名称/主办方名称'
+           class='text'
+           bindinput="bindKeyInput"
+           bindfocus="doShowCover"
+           bindblur="doHideCover"
+           value="{{keywords}}"></input>
     <view class='btn' bindtap='doSearch'><view class="icons icon-sousuo"></view></view>
     <view class='btn'><view class="icons icon-guanbi" data-val="{{true}}" bindtap="toggleSearch"></view></view>
   </view>
@@ -36,3 +42,6 @@
     <image mode='widthFix' src='../../res/images/menu-order.png' class='menu-title'></image>
   </navigator>
 </view>
+
+<!--黑色遮罩-->
+<view class="bg-cover" wx:if="{{showCover}}"></view>

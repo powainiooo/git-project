@@ -6,3 +6,5 @@
 .banner{ width: 100%; box-shadow: 0 5rpx 10rpx rgba(0,0,0,0.1); margin-bottom: 60rpx;}
 
 .pro-list{ padding: 0 10rpx;}
+
+.index-details{ margin-top: 160rpx;}

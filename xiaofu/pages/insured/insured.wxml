@@ -1,0 +1,26 @@
+<!--index.wxml-->
+<view class="container bg-gray">
+    <header-view></header-view>
+    <view class='body insured-frame'>
+        <view class="title">保险信息</view>
+
+        <view>
+            <view class="form-frame"
+                  wx:for="{{inforList}}"
+                  wx:for-index="index"
+                  wx:key="index">
+                <text>{{index+1}}</text>
+                <input placeholder="姓名(真实)" class="input" bindinput="checkValues" data-key="name" data-index="{{index}}"/>
+                <input placeholder="电话(真实)" class="input" bindinput="checkValues" data-key="phone" data-index="{{index}}"/>
+                <input placeholder="身份证(真实)" class="input" bindinput="checkValues" data-key="ids" data-index="{{index}}"/>
+            </view>
+        </view>
+        <view class="footer">
+            <view class="btn-close" bindtap="backIndexDetail">
+                <view class='icons icon-guanbi'></view>
+            </view>
+            <view class="btn {{btnDisabled ? '' : 'btn-disabled'}}" bindtap="doConfirm">确认信息</view>
+        </view>
+    </view>
+
+</view>

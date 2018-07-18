@@ -12,7 +12,8 @@ Component({
    */
   data: {
     activityIndex:0,
-    activityList:[{},{},{}]
+    activityList:[{},{},{}],
+    recommondList:[{},{},{}]
   },
 
   /**
@@ -23,6 +24,11 @@ Component({
       let index = event.detail.current;
       this.setData({
         activityIndex:index
+      })
+    },
+    gotoBuy(){
+      wx.navigateTo({
+        url: '/pages/ticket-buy/buy'
       })
     }
   }

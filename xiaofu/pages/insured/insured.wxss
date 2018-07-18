@@ -1,0 +1,15 @@
+@import '../../res/css/icons.wxss';
+
+.insured-frame{ overflow: hidden; margin-bottom: 200rpx;}
+.insured-frame .title{ font-size: 34rpx; font-weight: bold; margin: 60rpx 40rpx;}
+
+.insured-frame .form-frame{ padding: 30rpx 50rpx 0 160rpx; border-bottom: 1rpx solid #c9c9c9; position: relative;}
+.insured-frame .form-frame:last-child{ border-bottom: none;}
+.insured-frame .form-frame text{ font-size: 100rpx; font-family: 'Helve'; position: absolute; top: 0; left: 50rpx;}
+.insured-frame .form-frame .input{ width: 400rpx; height: 55rpx; border: 1rpx solid #000; font-size: 22rpx; border-radius: 10rpx; padding:0 20rpx; box-sizing: border-box; margin-bottom: 20rpx;}
+
+.insured-frame .footer{  width: 100%; height: 160rpx; display: flex; position: fixed; left: 0; bottom: 0; box-shadow: 0 -5rpx 10rpx rgba(0,0,0,0.1);}
+.insured-frame .footer .btn-close{ padding-bottom: 10px; width: 25%; display: flex; justify-content: center; align-items: center;  background-color: #ffffff;}
+.insured-frame .footer .btn-close .icons{ font-size: 40rpx; color: #000000; margin-bottom: 0;}
+.insured-frame .footer .btn{ padding-bottom: 10px; width: 75%; display: flex; justify-content: center; align-items: center; font-size: 34rpx; background-color: #002aac; color: #fff;}
+.insured-frame .footer .btn-disabled{ background-color: #b5b5b6;}

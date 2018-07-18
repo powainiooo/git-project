@@ -78,7 +78,8 @@ Component({
         nameEn: 'contact Information',
         url: '/pages/member/member?page=contact'
       }
-    ]
+    ],
+    showCover:false
   },
   ready(){
     this.setData({
@@ -147,7 +148,18 @@ Component({
       wx.navigateTo({
         url: '/pages/index/index'
       })
+    },
+    doShowCover(){
+      console.log('focus');
+      this.setData({
+        showCover:true
+      })
+    },
+    doHideCover(){
+      console.log('blur');
+      this.setData({
+        showCover:false
+      })
     }
-  },
-  
+  }
 })

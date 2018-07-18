@@ -26,3 +26,4 @@
 .nav-order .link{ text-align: center; margin-top: 40rpx;}
 .nav-order .menu-title{ width: 210rpx;}
 
+.bg-cover{ width: 100vw; height: 100vh; position: fixed; top: 0; left: 0; background-color: rgba(0,0,0,0.73); z-index: 400;}

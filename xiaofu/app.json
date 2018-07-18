@@ -1,15 +1,17 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/sponsor/list",
-    "pages/search/search",
+    "pages/insured/insured",
+    "pages/ticket-buy/buy",
+    "pages/result/result",
     "pages/member/member",
-    "pages/result/result"
+    "pages/sponsor/list",
+    "pages/search/search"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#002aac",
-    "backgroundColor":"#002aac",
+    "backgroundColor": "#002aac",
     "navigationBarTitleText": "",
     "navigationBarTextStyle": "white"
   }

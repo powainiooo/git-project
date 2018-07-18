@@ -1,46 +1,55 @@
-// pages/result/result.js
+// pages/insured/insured.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    titleEn:'',
-    titleCn:'',
-    pageName:''
+    btnDisabled:false,
+    inforList:[]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let page = options.page || 'ticketSuc',titleEn,titleCn;
-    if(page == 'ticketSuc' || page == 'drinkSuc'){
-      titleEn = 'Payment\nSuccess!';
-      titleCn = '支付成功！';
-    }else if(page == 'insuredSuc'){
-      titleEn = 'Insured\nSuccess!';
-      titleCn = '投保成功！';
+    let numbers = options.numbers || 2,arr=[];
+    for(let i=0;i<numbers;i++){
+      arr[i] = {
+        name:'',
+        phone:'',
+        ids:''
+      }
     }
     this.setData({
-      titleEn:titleEn,
-      titleCn:titleCn,
-      pageName:page
+      inforList:arr
     })
   },
-  gotoInsured(){
-    wx.navigateTo({
-      url: '/pages/insured/insured'
+  checkValues(event){
+    let key = event.target.dataset.key;
+    let index = parseInt(event.target.dataset.index);
+    this.data.inforList[index][key] = event.detail.value;
+    let disabled = true,arr = this.data.inforList;
+    for(let i=0;i<arr.length;i++){
+      if(arr[i].name == '' || arr[i].phone == '' || arr[i].ids == ''){
+        disabled = false;
+        break;
+      }
+    }
+    this.setData({
+      btnDisabled:disabled
     })
+  },
+  doConfirm(){
+    if(this.data.btnDisabled){
+      wx.navigateTo({
+        url: '/pages/result/result?page=insuredSuc'
+      })
+    }
   },
   backIndexDetail(){
     wx.navigateTo({
       url: '/pages/index/index?id=2'
-    })
-  },
-  backIndex(){
-    wx.navigateTo({
-      url: '/pages/index/index'
     })
   },
   /**

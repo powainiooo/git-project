@@ -70,7 +70,7 @@ header nav ul li{ float: left; margin: 0 20px;}
 header nav ul li a{ font-size: 16px; color: #fff; padding-bottom: 14px; position: relative;}
 header nav ul li a:after{ content: ''; width: 0; height: 8px; background-color: #fff; position: absolute; bottom: 0; left: 0; border-radius: 5px; -webkit-transition: all 0.3s cubic-bezier(.53,.09,.58,.98); -o-transition: all 0.3s cubic-bezier(.53,.09,.58,.98); transition: all 0.3s cubic-bezier(.53,.09,.58,.98);}
 header nav ul li:hover a:after{ width: 100%;}
-header nav ul li:hover .car-list{ height: 710px;}
+header nav ul li:hover .car-list{ height: 640px;}
 header nav ul li a i{ margin-left: 3px;}
 
 .car-list{ width: 100%; height: 0; position: fixed; top: 72px; left: 0; background-color: #fff; z-index: 200; overflow: hidden;
@@ -78,8 +78,8 @@ header nav ul li a i{ margin-left: 3px;}
     -o-transition: height 0.3s cubic-bezier(.53,.09,.58,.98);
     transition: height 0.3s cubic-bezier(.53,.09,.58,.98);
 }
-.car-list ul{ width: 1400px; display: -webkit-box; display: -ms-flexbox; display: flex; margin: 70px auto 0 auto; -ms-flex-wrap: wrap; flex-wrap: wrap;}
-.car-list ul li{ width:240px; height: 160px; margin-bottom: 50px; text-align: center;}
+.car-list ul{ width: 1200px; display: -webkit-box; display: -ms-flexbox; display: flex; margin: 70px auto 0 auto; -ms-flex-wrap: wrap; flex-wrap: wrap;}
+.car-list ul li{ width:240px; height: 140px;  margin: 0 0 50px 0; text-align: center;}
 .car-list ul li img{-webkit-transition: all 0.2s cubic-bezier(.53,.09,.58,.98);-o-transition: all 0.2s cubic-bezier(.53,.09,.58,.98);transition: all 0.2s cubic-bezier(.53,.09,.58,.98);}
 .car-list ul li img:hover{ -webkit-transform: scale(1.1); -ms-transform: scale(1.1); transform: scale(1.1);}
 .car-list ul li p{ margin-top: 10px; font-size: 14px;}

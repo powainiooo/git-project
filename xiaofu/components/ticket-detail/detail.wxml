@@ -1,6 +1,6 @@
 <view class="detail-frame">
     <ticket-item isSimple="{{isSimple}}"></ticket-item>
-    <view wx:if="{{showInfos}}" style="background-color: #f7f7f7;padding-bottom: 180rpx; overflow: hidden;">
+    <view wx:if="{{showInfos}}" style="background-color: #f6f6f6;padding-bottom: 180rpx; overflow: hidden;">
         <view class="title">艺人信息</view>
         <view class="actor-item">
             <image class="logo" src="../../res/images/img/actor-logo.png" mode="aspectFit"></image>

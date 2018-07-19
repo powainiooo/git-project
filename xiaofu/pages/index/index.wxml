@@ -1,11 +1,15 @@
 <!--index.wxml-->
-<view class="container bg-gray">
+<view class="container bg-gray" id="bodyFrame">
   <header-view
-          show-search="{{!showTicketDetail}}"
-          showShadow="{{showTicketDetail}}"
-          showShare="{{showTicketDetail}}">
+          show-search="{{toggleButton}}"
+          showShadow="{{!toggleButton}}"
+          showMenu="{{toggleButton}}"
+          showClose="{{!toggleButton}}"
+          showShare="{{!toggleButton}}"
+          binddoclose="doClose">
   </header-view>
-  <view class='body' wx:if="{{!showTicketDetail}}">
+  <!--  style="opacity: {{showTicketDetail ? '0' : '1'}}"-->
+  <view class='body' animation="{{indexAniData}}" wx:if="{{showTicketList}}">
     <scroll-view scroll-x class='address-select'>
       <view class='address-frame' style='width:{{addressList.length*150}}rpx'>
         <view 
@@ -23,12 +27,21 @@
       <ticket-item bindtap="gotoDetail"></ticket-item>
       <ticket-item bindtap="gotoDetail"></ticket-item>
       <ticket-item bindtap="gotoDetail"></ticket-item>
+      <ticket-item bindtap="gotoDetail"></ticket-item>
+      <ticket-item bindtap="gotoDetail"></ticket-item>
+      <ticket-item bindtap="gotoDetail"></ticket-item>
     </view>
   </view>
 
-  <view class="index-details" wx:if="{{showTicketDetail}}">
+  <view class="index-details {{showTicketList ? '' : 'details-show'}}"
+        wx:if="{{showTicketDetail}}"
+        style="top: {{detailTop}}px;"
+        animation="{{detailAniData}}" >
     <!-- 详情页-->
-    <ticket-detail></ticket-detail>
+    <ticket-detail isSimple="{{isSimple}}" showInfos="{{showDetailsInfos}}"></ticket-detail>
   </view>
-
+  <view class="footer" animation="{{footerAniData}}">
+    <view class="price">888<text class="unit">RMB</text></view>
+    <view class="btn" bindtap="gotoBuy">购买</view>
+  </view>
 </view>

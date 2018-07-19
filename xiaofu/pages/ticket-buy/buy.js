@@ -12,7 +12,22 @@ Page({
     nameVal:'',
     phoneVal:'',
     addressVal:'',
-    btnDisabled:false
+    btnDisabled:false,
+    typeList:[
+      {
+        name:'早鸟票',
+        nums:0
+      },
+      {
+        name:'预售票',
+        nums:10
+      },
+      {
+        name:'普通票',
+        nums:10
+      }
+    ],
+    showTypeList:false
   },
   numberChange: function(e) {
     this.setData({
@@ -27,12 +42,13 @@ Page({
     });
     // this.animation = animation;
 
-    let dis = isShow ? '0' : '100%';
-    animation.left(dis).step();
+    let dis = isShow ? '160rpx' : -this.data.typeList.length*100+'rpx';
+    animation.bottom(dis).step();
     let val = event.target.dataset.val || this.data.ticketTypeName;
     this.setData({
       animDataTypeList:animation.export(),
-      ticketTypeName:val
+      ticketTypeName:val,
+      showTypeList:isShow
     })
   },
   checkValues(event){
@@ -54,6 +70,11 @@ Page({
         url: '/pages/result/result?page=ticketSuc'
       })
     }
+  },
+  doClose(){
+    wx.navigateTo({
+      url: '/pages/index/index?id=2'
+    })
   },
   /**
    * 生命周期函数--监听页面加载

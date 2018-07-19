@@ -1,4 +1,4 @@
-<view class="ticket-frame {{isSimple ? 'ticket-frame-simple' : ''}} {{extraClass}}" hover-class="ticket-touch" hover-stay-time="20">
+<view class="ticket-frame {{isSimple ? 'ticket-frame-simple' : ''}} {{extraClass}}" hover-class="{{isSimple ? 'ticket-touch' : ''}}" hover-stay-time="10">
   <view class='line1'>
     <view class='date'>
       <view class='year'>

@@ -1,6 +1,6 @@
 <view class="detail-frame">
-    <ticket-item isSimple="{{false}}"></ticket-item>
-    <view>
+    <ticket-item isSimple="{{isSimple}}"></ticket-item>
+    <view wx:if="{{showInfos}}" style="background-color: #f7f7f7;padding-bottom: 180rpx; overflow: hidden;">
         <view class="title">艺人信息</view>
         <view class="actor-item">
             <image class="logo" src="../../res/images/img/actor-logo.png" mode="aspectFit"></image>
@@ -32,7 +32,7 @@
                               wx:for-index="index"
                               wx:key="index">
                     <image class="img" src="../../res/images/img/ac-img.jpg" mode="aspectFill"></image>
-                    <view class="infos" wx:if="{{index == activityIndex}}">活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍1</view>
+                    <view class="infos">活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍1</view>
                 </swiper-item>
             </swiper>
             <view class="nav-dots">
@@ -46,7 +46,7 @@
         <view class="title">联系主办方</view>
         <view class="contact-frame">
             <image src="../../res/images/img/logo1.png" mode="widthFix" class="logo"></image>
-            <view class="btn-phone">+86-131-4888-6289</view>
+            <view class="btn-phone" bindtap="docall" data-phone="+86-131-4888-6289">+86-131-4888-6289</view>
         </view>
 
         <view class="title">更多推荐活动</view>
@@ -60,10 +60,5 @@
                 <ticket-item extraClass="ticket-small"></ticket-item>
             </swiper-item>
         </swiper>
-
-        <view class="footer">
-            <view class="price">888<text class="unit">RMB</text></view>
-            <view class="btn" bindtap="gotoBuy">购买</view>
-        </view>
     </view>
 </view>

@@ -7,4 +7,11 @@
 
 .pro-list{ padding: 0 10rpx;}
 
-.index-details{ margin-top: 160rpx;}
+.index-details{ height: 700rpx; position: fixed; top: 0; left: 20rpx; right: 20rpx; background-color: #f6f6f6;}
+.details-show{ position: absolute; left: 0; right: 0;}
+
+
+.footer{ width: 100%; height: 160rpx; position: fixed; bottom: -170rpx; left: 0; z-index: 500; background-color: #fff; display: flex;box-shadow: 0 -5rpx 10rpx rgba(0,0,0,0.1);}
+.footer .price{ width: 64%; font-size: 100rpx;font-family: 'Helve'; padding-bottom: 20rpx; display: flex; justify-content: center; align-items: center; color: #002aac;}
+.footer .price .unit{ font-size: 33rpx; align-self: flex-end; margin-bottom: 30rpx; margin-left: 10rpx;}
+.footer .btn{ width: 36%; font-size: 34rpx; color: #ffffff; background-color: #002aac; padding-bottom: 20rpx; display: flex; justify-content: center; align-items: center;}

@@ -79,7 +79,9 @@ Component({
         url: '/pages/member/member?page=contact'
       }
     ],
-    showCover:false
+    showCover:false,
+    isShowMenu:false,
+    lastShowBtn:''
   },
   ready(){
     this.setData({
@@ -106,8 +108,38 @@ Component({
         showSearch: isShow
       })
     },
-    toggleMenu(event) {
-      let isShow = event.target.dataset.val;//true 打开菜单
+    openMenu(){
+      this.data.isShowMenu = true;
+      this.toggleMenu(this.data.isShowMenu);
+      if(this.data.showClose){
+        this.data.lastShowBtn = 'close';
+      }
+      if(this.data.showSearch){
+        this.data.lastShowBtn = 'search';
+        this.setData({
+          showSearch:false
+        });
+      }
+      this.setData({
+        showClose:true
+      });
+    },
+    doClose(){
+      if(this.data.isShowMenu){//关闭菜单
+        this.data.isShowMenu = false;
+        this.toggleMenu(this.data.isShowMenu);
+        if(this.data.lastShowBtn == 'close'){
+        }else if(this.data.lastShowBtn == 'search'){
+          this.setData({
+            showClose:false,
+            showSearch:true
+          })
+        }
+      }else{//其它关闭操作
+        this.triggerEvent('doclose')
+      }
+    },
+    toggleMenu(isShow) {
       let navAni = wx.createAnimation({
         duration:500,
         timingFunction: 'ease-in-out'
@@ -127,9 +159,7 @@ Component({
       this.setData({
         navAniData: navAni.export(),
         orderAniData: orderAni.export(),
-        showSearch: !isShow,
-        showMenu: !isShow,
-        showClose: isShow,
+        showMenu:!isShow
       })
     },
     bindKeyInput: function (e) {

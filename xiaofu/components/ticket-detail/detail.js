@@ -4,7 +4,14 @@ Component({
    * 组件的属性列表
    */
   properties: {
-
+    isSimple:{
+      type:Boolean,
+      value:true
+    },
+    showInfos:{
+      type:Boolean,
+      value:false
+    }
   },
 
   /**
@@ -15,7 +22,9 @@ Component({
     activityList:[{},{},{}],
     recommondList:[{},{},{}]
   },
+  attached(){
 
+  },
   /**
    * 组件的方法列表
    */
@@ -26,9 +35,10 @@ Component({
         activityIndex:index
       })
     },
-    gotoBuy(){
-      wx.navigateTo({
-        url: '/pages/ticket-buy/buy'
+    docall(e){
+      let phone = e.target.dataset.phone;
+      wx.makePhoneCall({
+        phoneNumber: phone//仅为示例，并非真实的电话号码
       })
     }
   }

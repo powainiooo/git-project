@@ -120,11 +120,17 @@
 
 <div class="hint" id="hint"><img src="images/hint.png"> </div>
 
+<div id="appinfo" style="position: fixed; top: 0; left: 0; z-index: 10000; font-size: 20px;">
+    <p id="version"></p>
+    <p id="user"></p>
+</div>
 <script>
     var mySwiper = new Swiper ('.swiper-container', {
         longSwipesRatio : 0.1,
         direction: 'vertical'
     });
+    document.getElementById('version').innerHTML = navigator.appVersion;
+    document.getElementById('user').innerHTML = navigator.userAgent;
 
     document.getElementById("btnNavClose").addEventListener('click',function(){
         document.getElementById("nav").style.left = '100%';

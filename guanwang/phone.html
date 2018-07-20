@@ -13,7 +13,22 @@
 <body>
 <div id="info" style="margin: 10px; font-size: 20px;"></div>
 <script>
-    document.getElementById("info").innerHTML = navigator.userAgent;
+    console.log(navigator)
+    var ios = 'Mozilla/5.0 (iPhone;CPU iPhone OS 11_4 like Mac OS X)';
+    var android = 'Mozilla/5.0 (Linux;Android 7.0;DUKAL20 Build/HUAWEIDUK-AL20;wv) MicroMessenger/6.6.7.1321';
+    function getParmas(str){
+        if(/iPhone|iPod/i.test(str)){//ios
+            var os = str.match(/OS\s\d*_\d*/)[0];
+            console.log(os);
+        }
+        if(/Android/i.test(str)){//Android
+            var os = str.match(/Android\s\d*.\d*/);
+            var model = str.match(/\d;\S*\s\S*;wv/)[0].replace(/\d;/,"").replace(/;wv/,"");
+            var appVersion = str.match(/MicroMessenger\S*/)[0];
+            console.log(appVersion);
+        }
+    }
+    getParmas(android);
 </script>
 </body>
 </html>

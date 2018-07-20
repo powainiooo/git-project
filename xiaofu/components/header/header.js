@@ -159,7 +159,8 @@ Component({
       this.setData({
         navAniData: navAni.export(),
         orderAniData: orderAni.export(),
-        showMenu:!isShow
+        showMenu:!isShow,
+        showShadow:!isShow
       })
     },
     bindKeyInput: function (e) {

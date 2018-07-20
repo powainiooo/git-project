@@ -7,7 +7,7 @@
       <ticket-item isSimple="{{false}}" extraClass="ticket-buy"></ticket-item>
     </view>
 
-    <view class="price">888<text class="unit">RMB</text></view>
+    <view class="price">{{selectTicket.price * numbersArr[numberIndex]}}<text class="unit">RMB</text></view>
 
     <view class="form-frame">
       <input placeholder="姓名" class="input" bindinput="checkValues" data-key="nameVal"/>
@@ -18,7 +18,7 @@
     <view class="hint-section">本票务一经购买，无主办方的通知，任何情况都不支持退票。未满十八岁请勿购票！</view>
 
     <view class="footer {{showTypeList ? 'footer-shaodow' : ''}}">
-      <view class="ticket-type" bindtap="toggleTypeList" data-show="{{true}}">{{ticketTypeName}}</view>
+      <view class="ticket-type" bindtap="toggleTypeList" data-show="{{true}}">{{selectTicket.name}}</view>
       <picker bindchange="numberChange" value="{{numberIndex}}" range="{{numbersArr}}"  class="ticket-number">
         <view>{{numbersArr[numberIndex]}} <text>张</text></view>
       </picker>
@@ -35,7 +35,7 @@
             class="{{item.nums == 0 ? 'disabled' : ''}}"
             bindtap="toggleTypeList"
             data-show="{{false}}"
-            data-val="{{item.name}}">{{item.name}}</view>
+            data-val="{{index}}">{{item.name}}</view>
     </view>
   </view>
 </view>

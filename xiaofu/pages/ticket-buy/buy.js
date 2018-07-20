@@ -7,7 +7,6 @@ Page({
   data: {
     numbersArr:[1,2,3,4,5,6,7,8,9,10],
     numberIndex:0,
-    ticketTypeName:'早鸟票',
     animDataTypeList:{},
     nameVal:'',
     phoneVal:'',
@@ -16,17 +15,21 @@ Page({
     typeList:[
       {
         name:'早鸟票',
-        nums:0
+        nums:0,
+        price:100
       },
       {
         name:'预售票',
-        nums:10
+        nums:10,
+        price:200
       },
       {
         name:'普通票',
-        nums:10
+        nums:10,
+        price:300
       }
     ],
+    selectTicket:{},
     showTypeList:false
   },
   numberChange: function(e) {
@@ -44,10 +47,10 @@ Page({
 
     let dis = isShow ? '160rpx' : -this.data.typeList.length*100+'rpx';
     animation.bottom(dis).step();
-    let val = event.target.dataset.val || this.data.ticketTypeName;
+    let val = event.target.dataset.val || 0;
     this.setData({
       animDataTypeList:animation.export(),
-      ticketTypeName:val,
+      selectTicket:this.data.typeList[val],
       showTypeList:isShow
     })
   },
@@ -73,14 +76,16 @@ Page({
   },
   doClose(){
     wx.navigateTo({
-      url: '/pages/index/index?id=2'
+      url: '/pages/index/index'
     })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    this.setData({
+      selectTicket:this.data.typeList[0]
+    })
   },
 
   /**

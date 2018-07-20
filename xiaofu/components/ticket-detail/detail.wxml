@@ -46,7 +46,11 @@
         <view class="title">联系主办方</view>
         <view class="contact-frame">
             <image src="../../res/images/img/logo1.png" mode="widthFix" class="logo"></image>
-            <view class="btn-phone" bindtap="docall" data-phone="+86-131-4888-6289">+86-131-4888-6289</view>
+            <view class="btn-phone"
+                  hover-class="btn-phone-touch"
+                  hover-start-time="10"
+                  bindtap="docall"
+                  data-phone="+86-131-4888-6289">+86-131-4888-6289</view>
         </view>
 
         <view class="title">更多推荐活动</view>

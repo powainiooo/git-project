@@ -4,6 +4,5 @@
     "ticket-item": "../../components/ticket/ticket",
     "ticket-detail": "../../components/ticket-detail/detail"
   },
-  "enablePullDownRefresh":true,
   "backgroundColor": "#002aac"
 }

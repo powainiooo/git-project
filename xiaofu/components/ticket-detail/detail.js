@@ -11,6 +11,14 @@ Component({
     showInfos:{
       type:Boolean,
       value:false
+    },
+    showBuyInfos:{
+      type:Boolean,
+      value:false
+    },
+    extraClass:{
+      type:String,
+      value:''
     }
   },
 

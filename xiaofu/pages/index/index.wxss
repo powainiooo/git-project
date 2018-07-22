@@ -1,9 +1,9 @@
-.address-select{ height: 100rpx; background-color: #002aac;background: repeating-linear-gradient(90deg,#09268b, #002bb3 50%, #09268b 100%);}
+.address-select{ height: 100rpx; background-color: #002aac;background: repeating-linear-gradient(90deg,#09268b, #002bb3 50%, #09268b 100%); position: fixed; top: 120rpx; left: 0; z-index: 400}
 .address-frame{ width: 100%; display: flex;}
 .address-frame view{ width: 150rpx; height: 100rpx; display: flex; justify-content: center; align-items: center; font-size: 30rpx; color: #0092db;}
 .address-frame .active{ font-size: 34rpx; color: #fff;}
 
-.banner{ width: 100%; box-shadow: 0 5rpx 10rpx rgba(0,0,0,0.1); margin-bottom: 60rpx;}
+.banner{ width: 100%; box-shadow: 0 5rpx 10rpx rgba(0,0,0,0.1); margin-bottom: 60rpx; margin-top: 100rpx}
 
 .pro-list{ padding: 0 10rpx;}
 

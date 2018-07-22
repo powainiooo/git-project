@@ -1,0 +1,43 @@
+<view class="container bg-gray" id="bodyFrame">
+    <header-view showMenu="{{false}}"></header-view>
+    <view class='body' animation="{{indexAniData}}" wx:if="{{showTicketIndex}}">
+        <view class='title-en'><text>Order\nCenter</text></view>
+        <view class='title-cn'><text>订单中心</text></view>
+
+        <view class="order-list">
+            <view class="order-item"
+                  wx:for="{{listData}}"
+                  wx:for-index="index"
+                  wx:for-item="item"
+                  wx:key="index"
+                  data-index="{{index}}"
+                  bindtap="doShowDetail"
+                  hover-class="order-item-touch"
+                  hover-start-time="10">
+                <order-item itemData="{{item}}" itemIndex="{{index}}"></order-item>
+            </view>
+        </view>
+    </view>
+</view>
+
+<!--详情列表 -->
+<view class="detail-frame bg-gray  {{showTicketIndex ? '' : 'details-show'}}"
+      style="height: {{isSimple ? '280rpx' : '1400rpx'}};top:{{detailTop}}px"
+      animation="{{detailAniData}}"
+      wx:if="{{showTicketDetail}}">
+    <swiper style="height: 1000rpx;" previous-margin="70rpx" next-margin="70rpx" current="{{currentIndex}}" bindchange="swiperChange">
+        <swiper-item class="swiper-item {{!showTicketIndex || index == currentIndex ? '' : 'hide'}}"
+                     wx:for="{{listData}}"
+                     wx:for-index="index"
+                     wx:for-item="item"
+                     wx:key="index"
+                     data-index="{{index}}">
+            <order-item itemData="{{item}}" itemIndex="{{index}}" isSimple="{{isSimple}}"></order-item>
+        </swiper-item>
+    </swiper>
+    <view class="check-infos">
+        <view>未验票<text>{{listData[currentIndex].checkNums < 10 ? '0' : ''}}{{listData[currentIndex].checkNums}}</text></view>
+        <view>已验票<text>{{listData[currentIndex].checkNums < 10 ? '0' : ''}}{{listData[currentIndex].checkNums}}</text></view>
+    </view>
+    <view class="hint-section">一个二维码对应一张门票，请提前将二维码给到同行伙伴，到活动现场后，将本二维码出示给工作人员用于验票进场</view>
+</view>

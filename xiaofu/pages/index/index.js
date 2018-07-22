@@ -20,8 +20,10 @@ Page({
     footerAniData:{},
     showTicketList:true,
     showDetailsInfos:false,
-    toggleButton:true
-  },
+    showBuyInfos:false,
+    toggleButton:true,
+    ticketExtraClass:''
+  },  
   //事件处理函数
   bindViewTap: function() {
     wx.navigateTo({
@@ -29,6 +31,7 @@ Page({
     })
   },
   onLoad: function (options) {
+    console.log(options.id);
     let id = options.id || -1;
     if(id != -1){
       this.setData({
@@ -65,6 +68,8 @@ Page({
         }
       })
     }
+    this.drawPoster();
+
   },
   getUserInfo: function(e) {
     app.globalData.userInfo = e.detail.userInfo;
@@ -83,7 +88,6 @@ Page({
       });
       self.data.lastDetailTop = top+rect.top;
       self.data.lastBodyTop = rect.top;
-      console.log('rtop:'+rect.top);
       let animation = wx.createAnimation({
         duration:500,
         timingFunction:'cubic-bezier(.22,.62,.4,1.16)'
@@ -125,7 +129,6 @@ Page({
     }).exec()
   },
   doClose(){//关闭详情页
-    console.log('close');
     let animation2 = wx.createAnimation({
       duration:0,
       timingFunction:'cubic-bezier(.22,.62,.37,1)'
@@ -134,6 +137,9 @@ Page({
     this.setData({
       showTicketList:true,
       toggleButton:true,
+      ticketExtraClass:'',
+      showDetailsInfos:false,
+      showBuyInfos:false,
       indexAniData:animation2.export()
     });
     setTimeout(()=>{
@@ -163,20 +169,99 @@ Page({
       this.setData({
         detailAniData:animation.export(),
         footerAniData:animation3.export(),
-        showDetailsInfos:false,
         isSimple:true
       });
-      setTimeout(()=>{
-        this.setData({
-          showTicketDetail:false
-        })
-      },900);
     },50);
+    setTimeout(()=>{
+      this.setData({
+        showTicketDetail:false
+      })
+    },600);
   },
   gotoBuy(){
-    wx.navigateTo({
-      url: '/pages/ticket-buy/buy'
+    let animation = wx.createAnimation({
+      duration:0,
+      timingFunction:'cubic-bezier(.22,.62,.37,1)'
+    });
+    animation.bottom('-160rpx').step();
+    this.setData({
+      ticketExtraClass:'ticket-buy',
+      footerAniData:animation.export(),
+      showDetailsInfos:false,
+      showBuyInfos:true
     })
+  },
+  drawPoster(){
+    console.log('draw poster');
+    wx.showLoading();
+    const ctx = wx.createCanvasContext('poster');
+    //背景色
+    ctx.rect(0, 0, 750, 760);
+    ctx.setFillStyle('#ffffff');
+    ctx.fill();
+    //顶部Logo图
+    ctx.drawImage('https://powainiooo.github.io/git-project/xiaofu/res/images/top.png', 0, 0, 750, 145);
+    //日期
+    ctx.setFontSize(27);
+    ctx.setFillStyle('#000000');
+    ctx.fillText('2         0         1         8',20,190);
+    ctx.font = "27px 'Helve'";
+    ctx.setFontSize(100);
+    ctx.fillText('09/08',20,300);
+    //标题
+    ctx.setFontSize(50);
+    ctx.fillText('French kiwi jucie of one one',20,390);
+    // 竖线
+    ctx.setStrokeStyle('#cecece');
+    ctx.beginPath();
+    ctx.moveTo(310,160);
+    ctx.lineTo(310,320);
+    ctx.stroke();
+    //横线 短
+    ctx.beginPath();
+    ctx.moveTo(0,210);
+    ctx.lineTo(310,210);
+    ctx.stroke();
+    //横线 长
+    ctx.beginPath();
+    ctx.moveTo(0,320);
+    ctx.lineTo(750,320);
+    ctx.stroke();
+    //logo
+    ctx.drawImage('https://powainiooo.github.io/git-project/xiaofu/res/images/img/logo1.png',540-125,240-40,250,80);
+    //详情图
+    ctx.drawImage('https://powainiooo.github.io/git-project/xiaofu/res/images/img/ticket-img1.jpg',0,420,750,650);
+    //底部logo
+    ctx.drawImage('https://powainiooo.github.io/git-project/xiaofu/res/images/bottom.png',450,460,300,300);
+
+    setTimeout(()=>{
+      wx.hideLoading();
+      ctx.draw(true,function(){
+        console.log('poster');
+        wx.canvasToTempFilePath({
+          canvasId: 'poster',
+          x:0,
+          y:0,
+          width:750,
+          height:750,
+          destWidth:750,
+          destHeight:750,
+          success:function(res){
+            //wx.saveImageToPhotosAlbum({
+            //  filePath: res.tempFilePath,
+            //  success(){
+            //    wx.showToast({
+            //      title: '保存成功',
+            //      icon: 'success',
+            //      duration: 2000
+            //    })
+            //  }
+            //})
+          }
+        })
+      })
+    },500)
+
   },
   /**
    * 生命周期函数--监听页面隐藏
@@ -194,7 +279,10 @@ Page({
     console.log('onUnload');
 
   },
-  onShareAppMessage(){
-
+  onShareAppMessage(res){
+    return {
+      title:'test',
+      path:'pages/index/index?id=1000'
+    }
   }
 });

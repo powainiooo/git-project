@@ -1,8 +1,8 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/order-ticket/order",
     "pages/insured/insured",
-    "pages/ticket-buy/buy",
     "pages/result/result",
     "pages/member/member",
     "pages/sponsor/list",
@@ -11,7 +11,7 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#002aac",
-    "backgroundColor": "#002aac",
+    "backgroundColor": "#f6f6f6",
     "navigationBarTitleText": "",
     "navigationBarTextStyle": "white"
   }

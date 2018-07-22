@@ -1,11 +1,6 @@
 <!--index.wxml-->
 <view class="container bg-gray">
-  <header-view show-close binddoclose="doClose">
-  </header-view>
   <view class='body buy-frame'>
-    <view style="margin-top: 40rpx;">
-      <ticket-item isSimple="{{false}}" extraClass="ticket-buy"></ticket-item>
-    </view>
 
     <view class="price">{{selectTicket.price * numbersArr[numberIndex]}}<text class="unit">RMB</text></view>
 

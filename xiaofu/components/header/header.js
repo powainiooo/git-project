@@ -81,7 +81,8 @@ Component({
     ],
     showCover:false,
     isShowMenu:false,
-    lastShowBtn:''
+    lastShowBtn:'',
+    shareAnimate:{}
   },
   ready(){
     this.setData({
@@ -132,6 +133,7 @@ Component({
         }else if(this.data.lastShowBtn == 'search'){
           this.setData({
             showClose:false,
+            showShadow:false,
             showSearch:true
           })
         }
@@ -191,6 +193,22 @@ Component({
       this.setData({
         showCover:false
       })
+    },
+    toggleShare(event){
+      let isShow = event.target.dataset.val;
+      let animation = wx.createAnimation({
+        duration:300,
+        timingFunction:'ease-in-out'
+      });
+      let dis = isShow ? '0rpx' : '-330rpx';
+      animation.bottom(dis).step();
+      this.setData({
+        showCover:isShow,
+        shareAnimate:animation.export()
+      })
+    },
+    drawPoster(){
+      this.triggerEvent('doposter')
     }
   }
-})
+});

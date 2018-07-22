@@ -6,7 +6,7 @@
       <view class="icons icon-gengduo" wx:if="{{showMenu}}" bindtap="openMenu"></view>
       <view class="icons icon-guanbi" wx:if="{{showClose}}" bindtap="doClose"></view>
       <view class="icons icon-sousuo" wx:if="{{showSearch}}" data-val="{{false}}" bindtap="toggleSearch"></view>
-      <view class="icons icon-fenxiang" wx:if="{{showShare}}" ></view>
+      <view class="icons icon-fenxiang" wx:if="{{showShare}}"  data-val="{{true}}" bindtap="toggleShare"></view>
     </view>
   </view>
   <view class='search-frame' style="top:{{showSearchFrame ? '120rpx' : '0rpx'}}" animation="{{searchAniData}}">
@@ -18,7 +18,7 @@
            bindblur="doHideCover"
            value="{{keywords}}"></input>
     <view class='btn' bindtap='doSearch'><view class="icons icon-sousuo"></view></view>
-    <view class='btn'><view class="icons icon-guanbi" data-val="{{true}}" bindtap="toggleSearch"></view></view>
+    <view class='btn' bindtap="toggleSearch" data-val="{{true}}"><view class="icons icon-guanbi"></view></view>
   </view>
 </view>
 
@@ -38,10 +38,26 @@
 <!-- 订单中心 -->
 <view class='nav-order' animation="{{orderAniData}}">
   <image mode='widthFix' src='../../res/images/menu-line.png' class='menu-line'></image>
-  <navigator class='link'>
+  <navigator class='link' url="/pages/order-ticket/order">
     <image mode='widthFix' src='../../res/images/menu-order.png' class='menu-title'></image>
   </navigator>
 </view>
 
 <!--黑色遮罩-->
 <view class="bg-cover" wx:if="{{showCover}}"></view>
+
+<!--分享-->
+<view class="share-frame" animation="{{shareAnimate}}">
+  <view class="line1">
+    <text>分享</text>
+    <view class="icons icon-guanbi" data-val="{{false}}" bindtap="toggleShare"></view>
+  </view>
+  <view class="line2">
+    <button class="btn-share" plain open-type="share">
+      <text>转发给好友</text>
+    </button>
+    <button class="btn-poster" plain bindtap="drawPoster">
+      <text>生成分享海报</text>
+    </button>
+  </view>
+</view>

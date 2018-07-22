@@ -6,8 +6,10 @@
           showMenu="{{toggleButton}}"
           showClose="{{!toggleButton}}"
           showShare="{{!toggleButton}}"
-          binddoclose="doClose">
+          binddoclose="doClose"
+          binddoposter="drawPoster">
   </header-view>
+
   <!--  style="opacity: {{showTicketDetail ? '0' : '1'}}"-->
   <view class='body' animation="{{indexAniData}}" wx:if="{{showTicketList}}">
     <scroll-view scroll-x class='address-select'>
@@ -38,10 +40,13 @@
         style="top: {{detailTop}}px;"
         animation="{{detailAniData}}" >
     <!-- 详情页-->
-    <ticket-detail isSimple="{{isSimple}}" showInfos="{{showDetailsInfos}}"></ticket-detail>
+    <ticket-detail isSimple="{{isSimple}}" showInfos="{{showDetailsInfos}}" showBuyInfos="{{showBuyInfos}}" extraClass="{{ticketExtraClass}}"></ticket-detail>
   </view>
+
   <view class="footer" animation="{{footerAniData}}">
     <view class="price">888<text class="unit">RMB</text></view>
     <view class="btn" bindtap="gotoBuy">购买</view>
   </view>
 </view>
+<!-- 画图 -->
+<canvas canvas-id="poster" style='width:750px; height:760px; background-color:#fff; position: fixed; top: -1000px; left: -1000px;' />

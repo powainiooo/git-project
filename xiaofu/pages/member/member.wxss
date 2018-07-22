@@ -1,6 +1,8 @@
+@import '../../res/css/icons.wxss';
 
 .title-en{ font-size: 100rpx; font-family: 'Helve'; line-height: 0.9; background-color: #ffffff; padding: 40rpx; border-bottom: 1rpx solid #e5e5e5;}
-.title-cn{ font-size: 72rpx; font-weight: bold;  background-color: #ffffff; padding: 20rpx 40rpx; border-bottom: 1rpx solid #e5e5e5;}
+.title-cn{ font-size: 72rpx; font-weight: bold;  background-color: #ffffff; padding: 20rpx 40rpx; border-bottom: 1rpx solid #e5e5e5; display: flex; justify-content: space-between; align-items: center;}
+.title-cn .btn{ width: 80rpx; height: 80rpx; font-size: 40rpx; display: flex; justify-content: center; align-items: center;}
 
 .member-content{ font-size: 25rpx; color: #888888; padding: 40rpx;}
 .contact-content text{ line-height: 2;}

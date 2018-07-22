@@ -1,5 +1,5 @@
 <view class="detail-frame">
-    <ticket-item isSimple="{{isSimple}}"></ticket-item>
+    <ticket-item isSimple="{{isSimple}}" extraClass="{{extraClass}}"></ticket-item>
     <view wx:if="{{showInfos}}" style="background-color: #f6f6f6;padding-bottom: 180rpx; overflow: hidden;">
         <view class="title">艺人信息</view>
         <view class="actor-item">
@@ -65,4 +65,5 @@
             </swiper-item>
         </swiper>
     </view>
+    <ticket-buy wx:if="{{showBuyInfos}}"></ticket-buy>
 </view>

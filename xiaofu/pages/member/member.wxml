@@ -1,9 +1,12 @@
 
 <view class="container bg-gray">
-  <header-view  show-search="true"></header-view>
+  <header-view  show-search="{{page != 'insurance'}}"></header-view>
   <view class='body'>
     <view class='title-en'><text>{{titleEn}}</text></view>
-    <view class='title-cn'>{{titleCn}}</view>
+    <view class='title-cn'>
+      <text>{{titleCn}}</text>
+      <view class="btn"><view class="icons icon-xiazai"></view></view>
+    </view>
 
     <view class='member-content' wx:if="{{page != 'contact'}}">
       {{content}}

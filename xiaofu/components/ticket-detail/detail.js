@@ -10,7 +10,18 @@ Component({
     },
     showInfos:{
       type:Boolean,
-      value:false
+      value:false,
+      observer(newVal, oldVal, changedPath){
+        let animation = wx.createAnimation({
+          duration:1000,
+          timingFunction:'cubic-bezier(.22,.62,.4,1.16)'
+        });
+        let opacity = newVal ? 1 : 0;
+        animation.opacity(opacity).step();
+        this.setData({
+          detailAniData:animation.export()
+        });
+      }
     },
     showBuyInfos:{
       type:Boolean,
@@ -28,7 +39,8 @@ Component({
   data: {
     activityIndex:0,
     activityList:[{},{},{}],
-    recommondList:[{},{},{}]
+    recommondList:[{},{},{}],
+    detailAniData:{}
   },
   attached(){
 

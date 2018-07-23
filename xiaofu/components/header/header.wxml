@@ -18,7 +18,7 @@
            bindblur="doHideCover"
            value="{{keywords}}"></input>
     <view class='btn' bindtap='doSearch'><view class="icons icon-sousuo"></view></view>
-    <view class='btn' bindtap="toggleSearch" data-val="{{true}}"><view class="icons icon-guanbi"></view></view>
+    <view class='btn' data-val="{{true}}" bindtap="toggleSearch"><view class="icons icon-guanbi"></view></view>
   </view>
 </view>
 
@@ -38,7 +38,7 @@
 <!-- 订单中心 -->
 <view class='nav-order' animation="{{orderAniData}}">
   <image mode='widthFix' src='../../res/images/menu-line.png' class='menu-line'></image>
-  <navigator class='link' url="/pages/order-ticket/order">
+  <navigator class='link' url="/pages/order-ticket/order" hover-class="none">
     <image mode='widthFix' src='../../res/images/menu-order.png' class='menu-title'></image>
   </navigator>
 </view>

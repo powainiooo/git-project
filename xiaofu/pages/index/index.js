@@ -117,18 +117,18 @@ Page({
 
       setTimeout(()=>{
         self.setData({
-          showTicketList:false
+          showTicketList:false,
+          detailTop:'160rpx'
+        });
+        wx.pageScrollTo({
+          scrollTop:0,
+          duration: 0
         });
       },600);
       setTimeout(()=>{
         self.setData({
-          showDetailsInfos:true,
-          detailTop:'160rpx'
+          showDetailsInfos:true
         });
-        wx.pageScrollTo({
-          scrollTop: 0,
-          duration: 0
-        })
       },1550)
     }).exec()
   },

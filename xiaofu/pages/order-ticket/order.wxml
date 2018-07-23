@@ -22,7 +22,7 @@
 
 <!--详情列表 -->
 <view class="detail-frame bg-gray  {{showTicketIndex ? '' : 'details-show'}}"
-      style="height: {{isSimple ? '280rpx' : '1400rpx'}};top:{{detailTop}}px"
+      style="height: {{isSimple ? '245rpx' : '1500rpx'}};top:{{detailTop}}px"
       animation="{{detailAniData}}"
       wx:if="{{showTicketDetail}}">
     <swiper style="height: 1000rpx;" previous-margin="70rpx" next-margin="70rpx" current="{{currentIndex}}" bindchange="swiperChange">

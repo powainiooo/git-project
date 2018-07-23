@@ -35,7 +35,7 @@
     </view>
   </view>
 
-  <view class="index-details {{showDetailsInfos ? 'details-show' : ''}}"
+  <view class="index-details {{showTicketList ? '' : 'details-show'}}"
         wx:if="{{showTicketDetail}}"
         style="top: {{detailTop}};"
         animation="{{detailAniData}}" >

@@ -95,7 +95,8 @@ Component({
    */
   methods: {
     toggleSearch(event){
-      let isShow = event.target.dataset.val;
+      let isShow = event.currentTarget.dataset.val;
+      console.log(isShow);
       let animation = wx.createAnimation({
         duration:300,
         timingFunction:'ease-in-out'

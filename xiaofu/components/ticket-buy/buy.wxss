@@ -21,3 +21,5 @@
 .buy-frame .ticket-type-list view.disabled{ background-color: #b5b5b6; color: #ffffff;}
 .buy-frame .ticket-type-list view::after{ content: ''; position: absolute; bottom: 0; left: 50rpx; right: 50rpx; height: 2rpx; background-color: #b5b5b6;}
 .buy-frame .ticket-type-list view:last-child::after{ height: 0;}
+
+.hint-section{ margin: 40rpx 50rpx; font-size: 24rpx; color: #888888; line-height: 1.5; }

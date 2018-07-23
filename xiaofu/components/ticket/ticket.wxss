@@ -6,7 +6,7 @@
    width: 100%;
   box-sizing: border-box;
 }
-.ticket-frame-simple{ margin-bottom: 100rpx;}
+.ticket-frame-simple{ margin-bottom: 60rpx;}
 .ticket-touch{
   transform: scale(0.94,0.94);
 }

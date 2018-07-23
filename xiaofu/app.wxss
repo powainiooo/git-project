@@ -4,4 +4,4 @@
 .bg-gray{ background-color: #f6f6f6;}
 .container .body{ margin-top: 120rpx;}
 
-.hint-section{ margin: 40rpx 50rpx; font-size: 24rpx; color: #888888; line-height: 1.5;}
+.hint-section{ margin: 40rpx 50rpx; font-size: 24rpx; color: #888888; line-height: 1.5; }

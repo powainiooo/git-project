@@ -38,7 +38,7 @@ Page({
         showTicketDetail:true,
         showTicketList:false,
         isSimple:false,
-        detailTop:80,
+        detailTop:'160rpx',
         showDetailsInfos:true
       })
     }
@@ -84,7 +84,7 @@ Page({
       self.setData({
         showTicketDetail:true,
         toggleButton:false,
-        detailTop:top+rect.top
+        detailTop:top+rect.top+'px'
       });
       self.data.lastDetailTop = top+rect.top;
       self.data.lastBodyTop = rect.top;
@@ -117,9 +117,13 @@ Page({
 
       setTimeout(()=>{
         self.setData({
-          showTicketList:false,
+          showTicketList:false
+        });
+      },600);
+      setTimeout(()=>{
+        self.setData({
           showDetailsInfos:true,
-          detailTop:80
+          detailTop:'160rpx'
         });
         wx.pageScrollTo({
           scrollTop: 0,
@@ -148,7 +152,7 @@ Page({
         duration: 0
       });
       this.setData({
-        detailTop:80
+        detailTop:'160rpx'
       });
       let animation = wx.createAnimation({
         duration:500,

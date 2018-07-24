@@ -124,7 +124,7 @@ Page({
           scrollTop:0,
           duration: 0
         });
-      },600);
+      },700);
       setTimeout(()=>{
         self.setData({
           showDetailsInfos:true

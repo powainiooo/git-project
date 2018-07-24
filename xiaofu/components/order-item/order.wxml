@@ -1,39 +1,46 @@
-<view class="ticket ticket-top {{isSimple ? 'ticket-simple' : ''}}">
-    <view class="shadow-frame">
-        <view class="top">
-            <view class="frame1">
+<view class="ticket {{itemData.isChecked ? '' : 'shadow-top'}} {{isSimple ? 'ticket-simple' : ''}}">
+    <view class="check-icon" wx:if="{{itemData.isChecked}}"></view>
+    <view class="">
+        <view class="top {{itemData.isChecked ? '' : 'shadow-frame'}}">
+            <view class="frame1" style="background-color: #f6f6f6;"  wx:if="{{itemData.isChecked}}">
+                <view class="line1">已验证</view>
+                <text class="ids">627853362931</text>
+            </view>
+            <view class="frame1"  wx:if="{{!itemData.isChecked}}">
                 <view class="line1">
                     <image src="../../res/images/img/qrcode.jpg" mode="widthFix" class="qrcode"></image>
                 </view>
                 <text class="ids">627853362931</text>
             </view>
-            <view class="line-top"></view>
-            <view class="line-bottom"></view>
+            <view class="line-top"  wx:if="{{!itemData.isChecked}}"></view>
+            <view class="line-bottom {{itemData.isChecked ? 'line-bottom-check' : ''}}"></view>
         </view>
-        <view class='line2'>
-            <view class='date'>
-                <view class='year'>
-                    <text>2</text>
-                    <text>0</text>
-                    <text>1</text>
-                    <text>8</text>
+        <view class="shadow-frame">
+            <view class='line2'>
+                <view class='date'>
+                    <view class='year'>
+                        <text>2</text>
+                        <text>0</text>
+                        <text>1</text>
+                        <text>8</text>
+                    </view>
+                    <view class='day'>09/08</view>
                 </view>
-                <view class='day'>09/08</view>
+                <view class='logo'>
+                    <image src='../../res/images/img/logo1.png' mode='widthFix' class='logo-img'></image>
+                </view>
             </view>
-            <view class='logo'>
-                <image src='../../res/images/img/logo1.png' mode='widthFix' class='logo-img'></image>
+            <view class='title'>{{itemData.name}}</view>
+            <view class='range'>10:00pm-3:00am</view>
+            <view class='address'>{{itemIndex}}上海市 巨鹿路168号</view>
+            <view class="user-info">
+                <view class="name">张三</view>
+                <view class="phone">13112341234</view>
             </view>
-        </view>
-        <view class='title'>{{itemData.name}}</view>
-        <view class='range'>10:00pm-3:00am</view>
-        <view class='address'>{{itemIndex}}上海市 巨鹿路168号</view>
-        <view class="user-info">
-            <view class="name">张三</view>
-            <view class="phone">13112341234</view>
-        </view>
-        <view class="infos">
-            <view class="type">普通票</view>
-            <view class="index">{{itemIndex+1 < 10 ? '0' : ''}}{{itemIndex+1}}</view>
+            <view class="infos">
+                <view class="type">普通票</view>
+                <view class="index">{{itemIndex+1 < 10 ? '0' : ''}}{{itemIndex+1}}</view>
+            </view>
         </view>
     </view>
 </view>

@@ -1,6 +1,6 @@
 <!--index.wxml-->
 <view class="container">
-  <header-view  show-search="true"></header-view>
+  <header-view></header-view>
   <view class='body'>
     <view class='sponsor-list'>
       <navigator wx:for="{{dataList}}" 

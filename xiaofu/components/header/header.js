@@ -130,12 +130,15 @@ Component({
       if(this.data.isShowMenu){//关闭菜单
         this.data.isShowMenu = false;
         this.toggleMenu(this.data.isShowMenu);
-        if(this.data.lastShowBtn == 'close'){
-        }else if(this.data.lastShowBtn == 'search'){
+        if(this.data.lastShowBtn == 'search'){
           this.setData({
             showClose:false,
             showShadow:false,
             showSearch:true
+          })
+        }else{
+          this.setData({
+            showClose:false
           })
         }
       }else{//其它关闭操作
@@ -179,7 +182,7 @@ Component({
       }
     },
     gotoHome(){
-      wx.navigateTo({
+      wx.reLaunch({
         url: '/pages/index/index'
       })
     },

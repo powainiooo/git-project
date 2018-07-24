@@ -10,7 +10,7 @@
 .details-show{ position: absolute;}
 .detail-frame .swiper-item{ padding: 0 20rpx; box-sizing: border-box; padding-top: 10rpx; overflow: visible;}
 .detail-frame .hide{ opacity: 0;}
-.detail-frame .check-infos{ margin: 0 90rpx 20rpx 90rpx; display: flex; justify-content: space-between;}
+.detail-frame .check-infos{ margin: -30rpx 90rpx 20rpx 90rpx; display: flex; justify-content: space-between;}
 .detail-frame .check-infos view{ font-size: 28rpx;}
 .detail-frame .check-infos view text{ font-size: 70rpx; font-family: 'Helve'; margin-left: 16rpx;}
 .detail-frame .hint-section{ margin: 50rpx 90rpx; border-top: 1rpx solid #e2e2e2; padding-top: 50rpx;}

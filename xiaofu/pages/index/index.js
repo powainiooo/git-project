@@ -34,12 +34,18 @@ Page({
     console.log(options.id);
     let id = options.id || -1;
     if(id != -1){
+      let animation3 = wx.createAnimation({
+        duration:0,
+        timingFunction:'cubic-bezier(.22,.62,.37,1)'
+      });
+      animation3.bottom(0).step();
       this.setData({
         showTicketDetail:true,
         showTicketList:false,
         isSimple:false,
         detailTop:'160rpx',
-        showDetailsInfos:true
+        showDetailsInfos:true,
+        footerAniData:animation3.export()
       })
     }
     if (app.globalData.userInfo) {
@@ -80,6 +86,7 @@ Page({
   },
   gotoDetail(e){
     let top = e.target.offsetTop,self = this;
+    wx.showLoading();
     wx.createSelectorQuery().select('#bodyFrame').boundingClientRect(function(rect){
       self.setData({
         showTicketDetail:true,
@@ -126,6 +133,7 @@ Page({
         });
       },700);
       setTimeout(()=>{
+        wx.hideLoading();
         self.setData({
           showDetailsInfos:true
         });
@@ -183,6 +191,10 @@ Page({
     },600);
   },
   gotoBuy(){
+    wx.pageScrollTo({
+      scrollTop: 0,
+      duration: 0
+    });
     let animation = wx.createAnimation({
       duration:0,
       timingFunction:'cubic-bezier(.22,.62,.37,1)'

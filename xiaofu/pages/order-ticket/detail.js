@@ -1,48 +1,44 @@
-// pages/result/result.js
+// pages/order-ticket/detail.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    titleEn:'',
-    titleCn:'',
-    pageName:''
+    listData:[
+      {
+        isChecked:false,
+        name:'1French kiwi jucie of one one one',
+        checkNums:1,
+        nonCheckNums:1
+      },
+      {
+        isChecked:true,
+        name:'2French kiwi jucie of one one one',
+        checkNums:2,
+        nonCheckNums:2
+      },
+      {
+        isChecked:false,
+        name:'3French kiwi jucie of one one one',
+        checkNums:3,
+        nonCheckNums:3
+      }
+    ],
+    currentIndex:0,
+    duration:0
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let page = options.page || 'ticketSuc',titleEn,titleCn;
-    if(page == 'ticketSuc' || page == 'drinkSuc'){
-      titleEn = 'Payment\nSuccess!';
-      titleCn = '支付成功！';
-    }else if(page == 'insuredSuc'){
-      titleEn = 'Insured\nSuccess!';
-      titleCn = '投保成功！';
-    }
+    let index = options.index || 0;
     this.setData({
-      titleEn:titleEn,
-      titleCn:titleCn,
-      pageName:page
+      currentIndex:index
     })
   },
-  gotoInsured(){
-    wx.navigateTo({
-      url: '/pages/insured/insured'
-    })
-  },
-  backIndexDetail(){
-    wx.reLaunch({
-      url: '/pages/index/index?id=2'
-    })
-  },
-  backIndex(){
-    wx.reLaunch({
-      url: '/pages/index/index'
-    })
-  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

@@ -7,7 +7,7 @@
 
 .pro-list{ padding: 0 10rpx;}
 
-.index-details{ position: fixed; top: 0; left: 20rpx; right: 20rpx; background-color: #f6f6f6;}
+.index-details{ position: fixed; top: 0; left: 20rpx; right: 20rpx; background-color: #f6f6f6; overflow-x: hidden;}
 .details-show{ position: absolute; left: 0; right: 0;}
 
 

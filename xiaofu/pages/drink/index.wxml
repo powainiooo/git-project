@@ -1,0 +1,21 @@
+<!--index.wxml-->
+<view class="container bg-gray" id="bodyFrame">
+    <header-view show-search="{{true}}" showShadow="{{false}}"></header-view>
+
+    <view class='body'>
+        <scroll-view scroll-x class='address-select'>
+            <view class='address-frame' style='width:{{addressList.length*150}}rpx'>
+                <view
+                        wx:for="{{addressList}}"
+                        wx:for-item="item"
+                        wx:for-index="index"
+                        wx:key="item"
+                        class="{{addressIndex == index ? 'active' : ''}}">{{item}}</view>
+            </view>
+        </scroll-view>
+
+
+    </view>
+</view>
+<!-- »­Í¼ -->
+<canvas canvas-id="poster" style='width:750px; height:760px; background-color:#fff; position: fixed; top: -1000px; left: -1000px;' />

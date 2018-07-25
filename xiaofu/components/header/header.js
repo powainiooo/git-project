@@ -142,6 +142,7 @@ Component({
           })
         }
       }else{//其它关闭操作
+        this.toggleShare();
         this.triggerEvent('doclose')
       }
     },
@@ -199,7 +200,12 @@ Component({
       })
     },
     toggleShare(event){
-      let isShow = event.target.dataset.val;
+      let isShow;
+      try{
+        isShow = event.target.dataset.val
+      }catch(err){
+        isShow = false;
+      }
       let animation = wx.createAnimation({
         duration:300,
         timingFunction:'ease-in-out'

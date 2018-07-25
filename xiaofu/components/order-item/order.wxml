@@ -2,8 +2,8 @@
     <view class="check-icon" wx:if="{{itemData.isChecked}}"></view>
     <view class="">
         <view class="top {{itemData.isChecked ? '' : 'shadow-frame'}}">
-            <view class="frame1" style="background-color: #f6f6f6;"  wx:if="{{itemData.isChecked}}">
-                <view class="line1">已验证</view>
+            <view class="frame1 check-frame1" style="background-color: #f6f6f6;"  wx:if="{{itemData.isChecked}}">
+                <view class="line1">已验票</view>
                 <text class="ids">627853362931</text>
             </view>
             <view class="frame1"  wx:if="{{!itemData.isChecked}}">

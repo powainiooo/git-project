@@ -1,0 +1,21 @@
+<view class="container bg-gray" id="bodyFrame">
+    <header-view showMenu="{{false}}"></header-view>
+    <!--详情列表 -->
+    <view class="detail-frame bg-gray">
+        <swiper previous-margin="70rpx" next-margin="70rpx" current="{{currentIndex}}" duration="{{duration}}" bindchange="swiperChange" style="height:1000rpx;">
+            <swiper-item class="swiper-item"
+                         wx:for="{{listData}}"
+                         wx:for-index="index"
+                         wx:for-item="item"
+                         wx:key="index"
+                         data-index="{{index}}">
+                <order-item itemData="{{item}}" itemIndex="{{index}}" isSimple="{{isSimple}}"></order-item>
+            </swiper-item>
+        </swiper>
+        <view class="check-infos">
+            <view>未验票<text>02</text></view>
+            <view>已验票<text>01</text></view>
+        </view>
+        <view class="hint-section">一个二维码对应一张门票，请提前将二维码给到同行伙伴，到活动现场后，将本二维码出示给工作人员用于验票进场</view>
+    </view>
+</view>

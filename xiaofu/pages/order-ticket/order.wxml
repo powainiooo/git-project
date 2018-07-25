@@ -11,7 +11,7 @@
                   wx:for-item="item"
                   wx:key="index"
                   data-index="{{index}}"
-                  bindtap="doShowDetail"
+                  bindtap="gotoDetail"
                   hover-class="order-item-touch"
                   hover-start-time="10">
                 <order-item itemData="{{item}}" itemIndex="{{index}}"></order-item>

@@ -49,34 +49,46 @@ Component({
     userInfo:{},
     navList:[
       {
+        name:'活动购票',
+        nameEn:'lee\'s tickets',
+        url:'/pages/index/index',
+        type:'reLaunch'
+      },
+      {
         name:'小夫特饮',
         nameEn:'lee\'s drink',
-        url:''
+        url:'',
+        type:'reLaunch'
       },
       {
         name: '推荐主办方',
         nameEn: '1th organizers',
-        url: '/pages/sponsor/list'
+        url: '/pages/sponsor/list',
+        type:'navigate'
       },
       {
         name: '隶属于',
         nameEn: 'member of Ho',
-        url: '/pages/member/member?page=member'
+        url: '/pages/member/member?page=member',
+        type:'navigate'
       },
       {
         name: '保险条例',
         nameEn: 'insurance Act',
-        url: '/pages/member/member?page=insurance'
+        url: '/pages/member/member?page=insurance',
+        type:'navigate'
       },
       {
         name: '售后声明',
         nameEn: 'after sales',
-        url: '/pages/member/member?page=aftersales'
+        url: '/pages/member/member?page=aftersales',
+        type:'navigate'
       },
       {
         name: '联系方式',
         nameEn: 'contact Information',
-        url: '/pages/member/member?page=contact'
+        url: '/pages/member/member?page=contact',
+        type:'navigate'
       }
     ],
     showCover:false,

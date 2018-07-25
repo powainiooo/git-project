@@ -1,9 +1,9 @@
 {
   "pages": [
-    "pages/drink/index",
-    "pages/order-ticket/detail",
     "pages/index/index",
     "pages/order-ticket/order",
+    "pages/order-ticket/detail",
+    "pages/drink/index",
     "pages/insured/insured",
     "pages/result/result",
     "pages/member/member",

@@ -29,7 +29,7 @@
     <text class='name'>{{userInfo.nickName}}</text>
   </view>
   <view class='nav-list'>
-    <navigator wx:for="{{navList}}" wx:for-index="idx" wx:for-item="item" wx:key="{{idx}}" url="{{item.url}}" class='nav-item' hover-class='none' bindtap="doClose">
+    <navigator wx:for="{{navList}}" wx:for-index="idx" wx:for-item="item" wx:key="{{idx}}" url="{{item.url}}" class='nav-item' hover-class='none' bindtap="doClose" open-type="{{item.type}}">
       <text class='name'>{{item.name}} | {{item.nameEn}}</text>
     </navigator>
   </view>

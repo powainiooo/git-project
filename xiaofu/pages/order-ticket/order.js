@@ -80,8 +80,13 @@ Page({
       },600)
     }).exec();
   },
+  gotoDetail(e){
+    var index = e.currentTarget.dataset.index;
+    wx.navigateTo({
+      url: '/pages/order-ticket/detail?index='+index
+    })
+  },
   swiperChange(e){
-    console.log(e);
     this.setData({
       currentIndex:e.detail.current
     });

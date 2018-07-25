@@ -42,6 +42,7 @@ Page({
       this.setData({
         showTicketDetail:true,
         showTicketList:false,
+        toggleButton:false,
         isSimple:false,
         detailTop:'160rpx',
         showDetailsInfos:true,

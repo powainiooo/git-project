@@ -68,14 +68,14 @@
                         </section>
                     </swiper-slide>
                 </swiper>
-                <div class="arrow left">
+                <div class="arrow left" v-if="bannerList.length != 0">
                     <a href="javascript:;"
                        @click="bannerPrev"
                        v-if="activeIndex != 0">
                         <img src="../assets/images/arrow-left.png" width="76">
                     </a>
                 </div>
-                <div class="arrow right">
+                <div class="arrow right" v-if="bannerList.length != 0">
                     <a href="javascript:;"
                        @click="bannerNext"
                        v-if="activeIndex != bannerList.length - 1">

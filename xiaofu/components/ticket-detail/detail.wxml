@@ -26,6 +26,7 @@
             <swiper class="swiper"
                     previous-margin="40rpx"
                     next-margin="40rpx"
+                    duration="200"
                     bindchange="activityChange">
                 <swiper-item  class="swiper-item"
                               wx:for="{{activityList}}"
@@ -55,6 +56,7 @@
 
         <view class="title">更多推荐活动</view>
         <swiper class="recommond-swiper"
+                duration="200"
                 previous-margin="30rpx"
                 next-margin="240rpx">
             <swiper-item class="recommond-item"

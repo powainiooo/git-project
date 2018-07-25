@@ -1,11 +1,13 @@
 <style>
-    .swiper-frame{ position: relative; margin-bottom: 80px;}
+    .swiper-frame{ position: relative; margin-bottom: 80px; overflow: hidden;}
     .swiper-frame .arrow{ width: 100px; height: 665px; position: absolute; top: 0; z-index: 100; display: block;}
+    .swiper-frame .arrow a{ width: 40px; height: 100%; background-color: #fff; display: block;}
     .swiper-frame:hover .arrow a{ display: block;}
-    .swiper-frame .arrow a{ width: 40px; height: 100%; background-color: #fff; display: none;}
     .swiper-frame .arrow img{ margin-top: 295px;}
-    .swiper-frame .left{ left: 0;}
-    .swiper-frame .right{ right: 0;}
+    .swiper-frame .left{ left: -40px; opacity: 0; transition: all 0.2s linear;}
+    .swiper-frame .right{ right: -40px; opacity: 0; transition: all 0.2s linear;}
+    .swiper-frame:hover .left{ left: 0; opacity: 1;}
+    .swiper-frame:hover .right{ right: 0; opacity: 1;}
     .swiper-frame .right a{ margin-left: 60px;}
     .swiper-frame .right img{ margin-left: -40px;}
     .swiper-frame .dots{ display: flex; align-items: center; margin-top: 25px;}

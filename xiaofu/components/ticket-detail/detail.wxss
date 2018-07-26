@@ -1,4 +1,4 @@
-.detail-frame{ background-color: #f6f6f6; padding-top: 10rpx;}
+.detail-frame{ background-color: #f6f6f6; padding-top: 10px;}
 .detail-frame .title{ font-size: 42rpx; padding-top: 60rpx; margin: 60rpx 40rpx 40rpx 40rpx; border-top: 1rpx solid #e0e0e0; font-weight: bold;}
 
 .actor-item{ height: 230rpx; margin: 40rpx 20rpx; box-shadow: 0 0 20rpx rgba(0,0,0,0.25); border-radius: 10rpx; overflow: hidden; display: flex;}

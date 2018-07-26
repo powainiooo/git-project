@@ -1,0 +1,30 @@
+<!--index.wxml-->
+<view class="container bg-gray" id="bodyFrame">
+    <header-view show-menu="{{false}}" show-share="{{true}}" showShadow="{{true}}"></header-view>
+
+    <view class='body buy-frame'>
+        <view class="banner">
+            <image src="../../res/images/img/drink-img1.jpg" mode="widthFix"></image>
+        </view>
+        <view class="title">波特嘉金色气泡酒x2</view>
+        <view class="address">上海市 巨鹿路188号</view>
+        <view class="infos">
+            <view class="price">888<text>RMB</text></view>
+            <image src="../../res/images/img/logo3.jpg" mode="scaleToFill" class="logo"></image>
+        </view>
+        <view class="form-frame">
+            <input placeholder="姓名" class="input" bindinput="checkValues" data-key="nameVal"/>
+            <input placeholder="电话" class="input" bindinput="checkValues" data-key="phoneVal"/>
+        </view>
+        <view class="hint-section" style="font-size: 36rpx;"><rich-text>888元，周五、周六使用。</rich-text></view>
+
+        <view class="footer">
+            <picker bindchange="numberChange" value="{{numberIndex}}" range="{{numbersArr}}"  class="ticket-number">
+                <view>{{numbersArr[numberIndex]}} <text>张</text></view>
+            </picker>
+            <view class="btn {{btnDisabled ? '' : 'btn-disabled'}}" bindtap="doPay">确认付款</view>
+        </view>
+    </view>
+</view>
+<!-- 画图 -->
+<canvas canvas-id="poster" style='width:750px; height:760px; background-color:#fff; position: fixed; top: -1000px; left: -1000px;' />

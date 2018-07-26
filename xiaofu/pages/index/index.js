@@ -92,9 +92,9 @@ Page({
       self.setData({
         showTicketDetail:true,
         toggleButton:false,
-        detailTop:top+rect.top+'px'
+        detailTop:(top+rect.top-10)+'px'
       });
-      self.data.lastDetailTop = top+rect.top;
+      self.data.lastDetailTop = top+rect.top-10;
       self.data.lastBodyTop = rect.top;
       let animation = wx.createAnimation({
         duration:500,
@@ -142,11 +142,17 @@ Page({
     }).exec()
   },
   doClose(){//关闭详情页
+    let animation2 = wx.createAnimation({
+      duration:0,
+      timingFunction:'cubic-bezier(.21,.78,.25,1)'
+    });
+    animation2.opacity(1).step();
     this.setData({
-      showTicketList:true,
       toggleButton:true,
       ticketExtraClass:'',
       showDetailsInfos:false,
+      indexAniData:animation2.export(),
+      showTicketList:true,
       showBuyInfos:false
     });
     setTimeout(()=>{
@@ -159,33 +165,28 @@ Page({
       });
       let animation = wx.createAnimation({
         duration:500,
-        timingFunction:'cubic-bezier(.22,.62,.37,1)'
+        timingFunction:'cubic-bezier(.21,.78,.25,1)'
       });
       animation
           .top(this.data.lastDetailTop)
-          .height('650rpx')
+          .height('800rpx')
           .left('10rpx')
           .right('10rpx')
           .step();
 
-      let animation2 = wx.createAnimation({
-        duration:500,
-        timingFunction:'cubic-bezier(.22,.62,.37,1)'
-      });
-      animation2.opacity(1).step();
       let animation3 = wx.createAnimation({
         duration:500,
-        timingFunction:'cubic-bezier(.22,.62,.37,1)'
+        timingFunction:'cubic-bezier(.21,.78,.25,1)'
       });
       animation3.bottom('-170rpx').step();
       this.setData({
         detailAniData:animation.export(),
-        indexAniData:animation2.export(),
         footerAniData:animation3.export(),
         isSimple:true
       });
     },50);
     setTimeout(()=>{
+
       this.setData({
         showTicketDetail:false
       })

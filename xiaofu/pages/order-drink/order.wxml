@@ -1,0 +1,42 @@
+<view class="container bg-gray" id="bodyFrame">
+    <header-view showMenu="{{false}}"></header-view>
+    <view class='body order-body'>
+        <view class='title-en'><text>Order\nCenter</text></view>
+        <view class='title-cn'><text>订单中心</text></view>
+
+        <view class="item-list">
+            <view class="item" hover-class="item-touch" hover-start-time="10" bindtap="gotoDetail">
+                <image src="../../res/images/img/drink-img1.jpg" class="img" mode="aspectFill"></image>
+                <view class="infos">
+                    <view class="name">波特嘉金色气泡酒x2</view>
+                    <view class="logo">
+                        <image src="../../res/images/img/logo3.jpg" mode="scaleToFill"></image>
+                    </view>
+                </view>
+            </view>
+            <view class="item" hover-class="item-touch" hover-start-time="10" bindtap="gotoDetail">
+                <image src="../../res/images/img/drink-img1.jpg" class="img" mode="aspectFill"></image>
+                <view class="infos">
+                    <view class="name">波特嘉金色气泡酒x2</view>
+                    <view class="logo">
+                        <image src="../../res/images/img/logo3.jpg" mode="scaleToFill"></image>
+                    </view>
+                </view>
+            </view>
+            <view class="item" hover-class="item-touch" hover-start-time="10" bindtap="gotoDetail">
+                <image src="../../res/images/img/drink-img1.jpg" class="img" mode="aspectFill"></image>
+                <view class="infos">
+                    <view class="name">波特嘉金色气泡酒x2</view>
+                    <view class="logo">
+                        <image src="../../res/images/img/logo3.jpg" mode="scaleToFill"></image>
+                    </view>
+                </view>
+            </view>
+        </view>
+
+        <view class="footer-tab">
+            <navigator url="/pages/order-ticket/order"><text>已购票务</text></navigator>
+            <navigator class="active"><text>小夫特饮</text></navigator>
+        </view>
+    </view>
+</view>

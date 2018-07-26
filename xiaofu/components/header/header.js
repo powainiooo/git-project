@@ -57,7 +57,7 @@ Component({
       {
         name:'小夫特饮',
         nameEn:'lee\'s drink',
-        url:'',
+        url:'/pages/drink/index',
         type:'reLaunch'
       },
       {

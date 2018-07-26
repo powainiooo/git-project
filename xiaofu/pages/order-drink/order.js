@@ -1,15 +1,15 @@
-// pages/drink/index.js
+// pages/order-drink/order.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    addressList:['北京','上海','广州','深圳','南昌','惠州','成都']
+  
   },
   gotoDetail(){
     wx.navigateTo({
-      url: '/pages/drink/detail'
+      url: '/pages/order-drink/detail'
     })
   },
   /**

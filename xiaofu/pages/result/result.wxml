@@ -39,7 +39,7 @@
                 <view class="hint-section">还可以通过点击订单中心查询兑换二维码，感谢您使用 小夫有票。</view>
             </view>
             <view class="footer" wx:if="{{pageName == 'drinkSuc'}}">
-                <view class="btn" style="width: 100%;">完成</view>
+                <view class="btn" style="width: 100%;" bindtap="gotoDrink">完成</view>
             </view>
         </view>
     </view>

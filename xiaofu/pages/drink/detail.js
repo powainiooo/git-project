@@ -1,16 +1,40 @@
-// pages/drink/index.js
+// pages/drink/detail.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    addressList:['北京','上海','广州','深圳','南昌','惠州','成都']
+    numbersArr:[1,2,3,4,5,6,7,8,9,10],
+    numberIndex:0,
+    nameVal:'',
+    phoneVal:'',
+    btnDisabled:false
   },
-  gotoDetail(){
-    wx.navigateTo({
-      url: '/pages/drink/detail'
+  checkValues(event){
+    let key = event.target.dataset.key;
+    this.data[key] = event.detail.value;
+    if (this.data.nameVal != '' && this.data.phoneVal != '' && this.data.addressVal != '') {
+      this.setData({
+        btnDisabled: true
+      })
+    } else {
+      this.setData({
+        btnDisabled: false
+      })
+    }
+  },
+  numberChange: function(e) {
+    this.setData({
+      numberIndex: e.detail.value
     })
+  },
+  doPay(){
+    if(this.data.btnDisabled){
+      wx.navigateTo({
+        url: '/pages/result/result?page=drinkSuc'
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面加载

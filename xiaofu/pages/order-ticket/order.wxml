@@ -20,7 +20,7 @@
 
         <view class="footer-tab">
             <navigator class="active"><text>已购票务</text></navigator>
-            <navigator><text>小夫特饮</text></navigator>
+            <navigator url="/pages/order-drink/order"><text>小夫特饮</text></navigator>
         </view>
     </view>
 </view>

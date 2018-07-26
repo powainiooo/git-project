@@ -43,6 +43,11 @@ Page({
       url: '/pages/index/index'
     })
   },
+  gotoDrink(){
+    wx.reLaunch({
+      url: '/pages/drink/index'
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

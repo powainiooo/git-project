@@ -1,0 +1,39 @@
+<view class="container bg-gray" id="bodyFrame">
+    <header-view showMenu="{{false}}"></header-view>
+    <!--详情列表 -->
+    <view class="detail-frame bg-gray">
+        <view class="ticket {{itemData.isChecked ? '' : 'shadow-top'}} {{isSimple ? 'ticket-simple' : ''}}">
+            <view class="check-icon" wx:if="{{itemData.isChecked}}"></view>
+            <view class="">
+                <view class="top {{itemData.isChecked ? '' : 'shadow-frame'}}">
+                    <view class="frame1 check-frame1" style="background-color: #f6f6f6;"  wx:if="{{itemData.isChecked}}">
+                        <view class="line1">已兑换</view>
+                        <text class="ids">627853362931</text>
+                    </view>
+                    <view class="frame1"  wx:if="{{!itemData.isChecked}}">
+                        <view class="line1">
+                            <image src="../../res/images/img/qrcode.jpg" mode="widthFix" class="qrcode"></image>
+                        </view>
+                        <text class="ids">627853362931</text>
+                    </view>
+                    <view class="line-top"  wx:if="{{!itemData.isChecked}}"></view>
+                    <view class="line-bottom {{itemData.isChecked ? 'line-bottom-check' : ''}}"></view>
+                </view>
+                <view class="shadow-frame">
+                    <view class='title'>波特嘉金色气泡酒x2</view>
+                    <view class='address'>上海市 巨鹿路168号</view>
+                    <view class="imgs"><image src="../../res/images/img/drink-img1.jpg" mode="widthFix"></image></view>
+                    <view class="user-info">
+                        <view class="name">张三</view>
+                        <view class="phone">13112341234</view>
+                    </view>
+                    <view class="infos">
+                        <view class="type">兑换券</view>
+                        <view class="index">1<text>张</text></view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="hint-section">一个二维码对应一张门票，请提前将二维码给到同行伙伴，到活动现场后，将本二维码出示给工作人员用于验票进场</view>
+    </view>
+</view>

@@ -35,7 +35,7 @@ Page({
   },
   backIndexDetail(){
     wx.reLaunch({
-      url: '/pages/order-ticket/detail'
+      url: '/pages/index/index'
     })
   },
   backIndex(){

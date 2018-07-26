@@ -51,7 +51,7 @@
 }
 
 .ticket-frame .title {
-  font-size: 50rpx;
+  font-size: 44rpx;
   font-family: 'Helve';
   padding: 20rpx;
   overflow: hidden;

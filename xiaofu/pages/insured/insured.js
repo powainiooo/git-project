@@ -49,7 +49,7 @@ Page({
   },
   backIndexDetail(){
     wx.navigateTo({
-      url: '/pages/order-ticket/detail'
+      url: '/pages/index/index'
     })
   },
   /**

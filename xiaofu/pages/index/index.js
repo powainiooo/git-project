@@ -108,7 +108,7 @@ Page({
           .step();
       let animation2 = wx.createAnimation({
         duration:500,
-        timingFunction:'cubic-bezier(.22,.62,.4,1.16)'
+        timingFunction:'linear'
       });
       animation2.opacity(0).step();
       let animation3 = wx.createAnimation({

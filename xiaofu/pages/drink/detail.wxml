@@ -16,7 +16,7 @@
             <input placeholder="姓名" class="input" bindinput="checkValues" data-key="nameVal"/>
             <input placeholder="电话" class="input" bindinput="checkValues" data-key="phoneVal"/>
         </view>
-        <view class="hint-section" style="font-size: 36rpx;"><rich-text>888元，周五、周六使用。</rich-text></view>
+        <view class="hint-section"><rich-text>888元，周五、周六使用。</rich-text></view>
 
         <view class="footer">
             <picker bindchange="numberChange" value="{{numberIndex}}" range="{{numbersArr}}"  class="ticket-number">

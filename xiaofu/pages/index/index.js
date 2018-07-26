@@ -142,18 +142,12 @@ Page({
     }).exec()
   },
   doClose(){//关闭详情页
-    let animation2 = wx.createAnimation({
-      duration:0,
-      timingFunction:'cubic-bezier(.22,.62,.37,1)'
-    });
-    animation2.opacity(1).step();
     this.setData({
       showTicketList:true,
       toggleButton:true,
       ticketExtraClass:'',
       showDetailsInfos:false,
-      showBuyInfos:false,
-      indexAniData:animation2.export()
+      showBuyInfos:false
     });
     setTimeout(()=>{
       wx.pageScrollTo({
@@ -174,6 +168,11 @@ Page({
           .right('10rpx')
           .step();
 
+      let animation2 = wx.createAnimation({
+        duration:500,
+        timingFunction:'cubic-bezier(.22,.62,.37,1)'
+      });
+      animation2.opacity(1).step();
       let animation3 = wx.createAnimation({
         duration:500,
         timingFunction:'cubic-bezier(.22,.62,.37,1)'
@@ -181,6 +180,7 @@ Page({
       animation3.bottom('-170rpx').step();
       this.setData({
         detailAniData:animation.export(),
+        indexAniData:animation2.export(),
         footerAniData:animation3.export(),
         isSimple:true
       });

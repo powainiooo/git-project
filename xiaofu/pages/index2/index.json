@@ -1,0 +1,7 @@
+{
+  "usingComponents":{
+    "header-view":"../../components/header/header",
+    "ticket-item": "../../components/ticket/ticket",
+    "ticket-detail": "../../components/ticket-detail/detail"
+  }
+}

@@ -9,21 +9,21 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     addressList:['北京','上海','广州','深圳','南昌','惠州','成都'],
-    addressIndex:0,
-    showTicketDetail:false,
-    detailTop:0,
-    lastDetailTop:0,
+    listData:[{},{},{},{}],
+    listSimpleIndex:-1,
+    listAnimatIndex:-1,
     lastBodyTop:0,
-    isSimple:true,
-    detailAniData:{},
-    indexAniData:{},
-    footerAniData:{},
-    showTicketList:true,
-    showDetailsInfos:false,
-    showBuyInfos:false,
+    lastTop:0,
     toggleButton:true,
-    ticketExtraClass:''
-  },  
+    showIndex:true,
+    showTicketDetail:false,
+    showBuyInfos:false,
+    indexAniData:{},
+    selectTicketAniData:{},
+    footerAniData:{},
+    selectTicketTop:'0px',
+    selectTicketClass:''
+  },
   //事件处理函数
   bindViewTap: function() {
     wx.navigateTo({
@@ -86,71 +86,71 @@ Page({
     })
   },
   gotoDetail(e){
-    let top = e.target.offsetTop,self = this;
+    let top = e.currentTarget.offsetTop,
+        index = e.target.dataset.index,
+        self = this;
     wx.createSelectorQuery().select('#bodyFrame').boundingClientRect(function(rect){
-      self.setData({
-        showTicketDetail:true,
-        toggleButton:false,
-        detailTop:(top+rect.top-10)+'px'
-      });
-      self.data.lastDetailTop = top+rect.top-10;
       self.data.lastBodyTop = rect.top;
+      self.data.lastTop = top+rect.top+'px';
+      console.log('rect:'+rect.top);
+      console.log(e);
+      self.setData({
+        toggleButton:false,
+        listAnimatIndex:index,
+        selectTicketTop:(top+rect.top)+'px',
+        selectTicketClass:'item-fixed'
+      });
+      //return;
       let animation = wx.createAnimation({
-        duration:600,
+        duration:500,
+        timingFunction:'linear'
+      });
+      animation.opacity(0.5).step();
+      let animation2 = wx.createAnimation({
+        duration:500,
         timingFunction:'cubic-bezier(.22,.62,.4,1.16)'
       });
-      animation
-          .top('160rpx')
-          .height('auto')
+      animation2
+          .top('120rpx')
           .left(0)
           .right(0)
           .step();
-      let animation2 = wx.createAnimation({
-        duration:600,
-        timingFunction:'linear'
-      });
-      animation2.opacity(0).step();
       let animation3 = wx.createAnimation({
-        duration:600,
+        duration:500,
         timingFunction:'cubic-bezier(.22,.62,.37,1)'
       });
       animation3.bottom(0).step();
       self.setData({
-        detailAniData:animation.export(),
-        indexAniData:animation2.export(),
-        footerAniData:animation3.export(),
-        isSimple:false
+        listSimpleIndex:index,
+        indexAniData:animation.export(),
+        selectTicketAniData:animation2.export(),
+        footerAniData:animation3.export()
       });
 
       setTimeout(()=>{
         self.setData({
-          showTicketList:false,
-          detailTop:'160rpx'
+          showIndex:false,
+          selectTicketClass:'item-absolute'
         });
         wx.pageScrollTo({
-          scrollTop:0,
+          scrollTop: 0,
           duration: 0
         });
-      },900);
+      },700);
       setTimeout(()=>{
         self.setData({
-          showDetailsInfos:true
+          showTicketDetail:true
         });
-      },1550)
+      },1500);
     }).exec()
   },
   doClose(){//关闭详情页
-    let animation2 = wx.createAnimation({
-      duration:0,
-      timingFunction:'cubic-bezier(.21,.78,.25,1)'
-    });
-    animation2.opacity(1).step();
     this.setData({
+      listSimpleIndex:-1,
+      selectTicketClass:'item-fixed',
       toggleButton:true,
-      ticketExtraClass:'',
-      showDetailsInfos:false,
-      indexAniData:animation2.export(),
-      showTicketList:true,
+      showIndex:true,
+      showTicketDetail:false,
       showBuyInfos:false
     });
     setTimeout(()=>{
@@ -158,37 +158,38 @@ Page({
         scrollTop: Math.abs(this.data.lastBodyTop),
         duration: 0
       });
-      this.setData({
-        detailTop:'160rpx'
-      });
+
       let animation = wx.createAnimation({
         duration:500,
-        timingFunction:'cubic-bezier(.21,.78,.25,1)'
+        timingFunction:'linear'
       });
-      animation
-          .top(this.data.lastDetailTop)
-          .height('800rpx')
+      animation.opacity(1).step();
+      let animation2 = wx.createAnimation({
+        duration:500,
+        timingFunction:'cubic-bezier(.22,.62,.4,1.16)'
+      });
+      animation2
+          .top(this.data.lastTop)
           .left('10rpx')
           .right('10rpx')
-          .step();
-
+          .step({duration:0});
       let animation3 = wx.createAnimation({
-        duration:500,
-        timingFunction:'cubic-bezier(.21,.78,.25,1)'
+        duration:600,
+        timingFunction:'cubic-bezier(.22,.62,.37,1)'
       });
       animation3.bottom('-170rpx').step();
       this.setData({
-        detailAniData:animation.export(),
-        footerAniData:animation3.export(),
-        isSimple:true
+        indexAniData:animation.export(),
+        selectTicketAniData:animation2.export(),
+        footerAniData:animation3.export()
       });
     },50);
     setTimeout(()=>{
-
       this.setData({
-        showTicketDetail:false
-      })
-    },600);
+        listAnimatIndex:-1,
+        selectTicketClass:''
+      });
+    },700);
   },
   gotoBuy(){
     wx.pageScrollTo({
@@ -201,7 +202,6 @@ Page({
     });
     animation.bottom('-160rpx').step();
     this.setData({
-      ticketExtraClass:'ticket-buy',
       footerAniData:animation.export(),
       showDetailsInfos:false,
       showBuyInfos:true

@@ -1,6 +1,6 @@
 {
   "pages": [
-    "pages/index/index",
+    "pages/index2/index",
     "pages/order-drink/detail",
     "pages/order-drink/order",
     "pages/drink/index",
@@ -11,7 +11,8 @@
     "pages/result/result",
     "pages/member/member",
     "pages/sponsor/list",
-    "pages/search/search"
+    "pages/search/search",
+    "pages/index/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

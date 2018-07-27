@@ -16,5 +16,7 @@
   <view class='title'>French kiwi jucie of one one one</view>
   <view class='range'>10:00pm-3:00am</view>
   <view class='address'>上海市 巨鹿路168号</view>
-  <image src='../../res/images/img/ticket-img1.jpg' mode='aspectFill' class='imgs'></image>
+  <view class="imgs-frame">
+    <image src='../../res/images/img/ticket-img1.jpg' mode='widthFix' class='imgs'></image>
+  </view>
 </view>

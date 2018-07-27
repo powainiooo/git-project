@@ -1,5 +1,5 @@
 <view class="detail-frame">
-    <ticket-item isSimple="{{isSimple}}" extraClass="{{extraClass}}"></ticket-item>
+    <!--<ticket-item isSimple="{{isSimple}}" extraClass="{{extraClass}}"></ticket-item>-->
     <view style="background-color: #f6f6f6;padding-bottom: 180rpx; overflow: hidden; opacity: 0;" animation="{{detailAniData}}" wx:if="{{!showBuyInfos}}">
         <view class="title">艺人信息</view>
         <view class="actor-item">

@@ -22,14 +22,12 @@ Page({
     selectTicketAniData:{},
     footerAniData:{},
     selectTicketTop:'0px',
-    selectTicketClass:''
+    selectTicketClass:'',
+    page:1,
+    keywords:'',
+    keywords:''
   },
   //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
-  },
   onLoad: function (options) {
     console.log(options.id);
     let id = options.id || -1;
@@ -94,42 +92,49 @@ Page({
       self.data.lastTop = top+rect.top+'px';
       console.log('rect:'+rect.top);
       console.log(e);
+      let animation2 = wx.createAnimation({
+        duration:0,
+        timingFunction:'cubic-bezier(.22,.62,.4,1.16)'
+      });
+      animation2.top(self.data.lastTop).step();
       self.setData({
-        toggleButton:false,
         listAnimatIndex:index,
-        selectTicketTop:(top+rect.top)+'px',
+        selectTicketAniData:animation2.export(),
         selectTicketClass:'item-fixed'
       });
       //return;
-      let animation = wx.createAnimation({
-        duration:500,
-        timingFunction:'linear'
-      });
-      animation.opacity(0.5).step();
-      let animation2 = wx.createAnimation({
-        duration:500,
-        timingFunction:'cubic-bezier(.22,.62,.4,1.16)'
-      });
-      animation2
-          .top('120rpx')
-          .left(0)
-          .right(0)
-          .step();
-      let animation3 = wx.createAnimation({
-        duration:500,
-        timingFunction:'cubic-bezier(.22,.62,.37,1)'
-      });
-      animation3.bottom(0).step();
-      self.setData({
-        listSimpleIndex:index,
-        indexAniData:animation.export(),
-        selectTicketAniData:animation2.export(),
-        footerAniData:animation3.export()
-      });
+      setTimeout(()=>{
+        let animation = wx.createAnimation({
+          duration:500,
+          timingFunction:'linear'
+        });
+        animation.opacity(0.5).step();
+        animation2
+            .top('120rpx')
+            .left(0)
+            .right(0)
+            .step({
+              duration:500,
+              timingFunction:'cubic-bezier(.22,.62,.4,1.16)'
+            });
+        let animation3 = wx.createAnimation({
+          duration:500,
+          timingFunction:'cubic-bezier(.22,.62,.37,1)'
+        });
+        animation3.bottom(0).step();
+        self.setData({
+          listSimpleIndex:index,
+          indexAniData:animation.export(),
+          selectTicketAniData:animation2.export(),
+          footerAniData:animation3.export()
+        });
+      },50);
+
 
       setTimeout(()=>{
         self.setData({
           showIndex:false,
+          toggleButton:false,
           selectTicketClass:'item-absolute'
         });
         wx.pageScrollTo({
@@ -153,6 +158,7 @@ Page({
       showTicketDetail:false,
       showBuyInfos:false
     });
+    let animation2;
     setTimeout(()=>{
       wx.pageScrollTo({
         scrollTop: Math.abs(this.data.lastBodyTop),
@@ -164,7 +170,7 @@ Page({
         timingFunction:'linear'
       });
       animation.opacity(1).step();
-      let animation2 = wx.createAnimation({
+      animation2 = wx.createAnimation({
         duration:500,
         timingFunction:'cubic-bezier(.22,.62,.4,1.16)'
       });
@@ -172,7 +178,7 @@ Page({
           .top(this.data.lastTop)
           .left('10rpx')
           .right('10rpx')
-          .step({duration:0});
+          .step();
       let animation3 = wx.createAnimation({
         duration:600,
         timingFunction:'cubic-bezier(.22,.62,.37,1)'
@@ -185,11 +191,20 @@ Page({
       });
     },50);
     setTimeout(()=>{
+      animation2.top(0).step({
+        duration:0,
+        timingFunction:'cubic-bezier(.22,.62,.4,1.16)'
+      });
       this.setData({
-        listAnimatIndex:-1,
+        selectTicketAniData:animation2.export(),
         selectTicketClass:''
       });
     },700);
+    setTimeout(()=>{
+      this.setData({
+        listAnimatIndex:-1
+      });
+    },800);
   },
   gotoBuy(){
     wx.pageScrollTo({
@@ -279,21 +294,30 @@ Page({
     },500)
 
   },
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-    console.log('hide');
-  },
-  onShow(){
-    console.log('show')
-  },
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-    console.log('onUnload');
+  getListData(){
+    let self = this;
+    wx.request({
+      url: '/pro_list', //仅为示例，并非真实的接口地址
+      data: {
+        keywords: self.data.keywords,
+        page: self.data.page,
+        city: self.data.city,
+        activityID: ''
+      },
+      success: function(res) {
 
+      }
+    })
+  },
+  //下拉刷新
+  onReachBottom(){
+    console.log('down refresh');
+    this.data.page ++;
+    this.getListData();
+  },
+  //搜索
+  doSearch(e){
+    this.data.keywords = e.detail;
   },
   onShareAppMessage(res){
     return {

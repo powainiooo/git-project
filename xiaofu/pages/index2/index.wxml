@@ -7,6 +7,7 @@
             showClose="{{!toggleButton}}"
             showShare="{{!toggleButton}}"
             binddoclose="doClose"
+            binddosearch="doSearch"
             binddoposter="drawPoster">
     </header-view>
 
@@ -27,7 +28,7 @@
             <image src="../../res/images/img/banner1.jpg" class='banner' mode='widthFix'></image>
         </view>
 
-
+        <!--style="top:{{listAnimatIndex == index ? selectTicketTop : 0}};"-->
         <view class='pro-list'>
             <view class="item-frame {{showIndex || listAnimatIndex == index ? '' : 'item-hide'}}"
                   wx:for="{{listData}}"
@@ -36,8 +37,8 @@
                   wx:key="{{index}}"
                   bindtap="gotoDetail">
                 <view class="item {{listAnimatIndex == index ? selectTicketClass : ''}}"
-                      style="top:{{listAnimatIndex == index ? selectTicketTop : 0}};"
-                      animation="{{listAnimatIndex == index ? selectTicketAniData : ''}}">
+
+                      animation="{{listAnimatIndex == index ? selectTicketAniData : indexAniData}}">
                     <ticket-item data-index="{{index}}"
                                  isSimple="{{listSimpleIndex != index}}"
                                  extraClass="{{showBuyInfos ? 'ticket-buy' : ''}}"></ticket-item>

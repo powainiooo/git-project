@@ -189,9 +189,7 @@ Component({
     },
     doSearch(){
       if (this.data.name != 'search'){
-        wx.navigateTo({
-          url: '/pages/search/search?keywords=' + this.data.keywords
-        })
+        this.triggerEvent('dosearch',this.data.keywords)
       }
     },
     gotoHome(){

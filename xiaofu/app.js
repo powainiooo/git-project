@@ -34,6 +34,8 @@ App({
     })
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    ajaxSrc:'http://ticket.pc-online.cc/mobile/applet',
+    imgSrc:'http://ticket.pc-online.cc/upload/'
   }
-})
+});

@@ -9,7 +9,7 @@
       <view class="icons icon-fenxiang" wx:if="{{showShare}}"  data-val="{{true}}" bindtap="toggleShare"></view>
     </view>
   </view>
-  <view class='search-frame' style="top:{{showSearchFrame ? '120rpx' : '0rpx'}}" animation="{{searchAniData}}">
+  <view class='search-frame' style="top:{{showSearchFrame ? '120rpx' : '0rpx'}}">
     <input type='text'
            placeholder='输入活动名称/主办方名称'
            class='text'

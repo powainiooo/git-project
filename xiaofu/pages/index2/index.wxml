@@ -14,8 +14,20 @@
     <!--  style="opacity: {{showTicketDetail ? '0' : '1'}}"-->
     <view class='body'>
         <view wx:if="{{showIndex}}" animation="{{indexAniData}}">
-            <scroll-view scroll-x class='address-select'>
-                <view class='address-frame' style='width:{{addressList.length*150}}rpx'>
+            <scroll-view scroll-x class='address-select' bindscroll="citiesScroll" scroll-left="{{citiesLeft}}">
+                <view class='address-frame' style='width:{{addressList.length*3*150}}rpx'>
+                    <view
+                            wx:for="{{addressList}}"
+                            wx:for-item="item"
+                            wx:for-index="index"
+                            wx:key="item"
+                            class="{{addressIndex == index ? 'active' : ''}}">{{item}}</view>
+                    <view
+                            wx:for="{{addressList}}"
+                            wx:for-item="item"
+                            wx:for-index="index"
+                            wx:key="item"
+                            class="{{addressIndex == index ? 'active' : ''}}">{{item}}</view>
                     <view
                             wx:for="{{addressList}}"
                             wx:for-item="item"

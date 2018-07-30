@@ -43,7 +43,6 @@ Component({
    * 组件的初始数据
    */
   data: {
-    searchAniData: {},
     navAniData: {},
     orderAniData: {},
     userInfo:{},
@@ -94,31 +93,35 @@ Component({
     showCover:false,
     isShowMenu:false,
     lastShowBtn:'',
-    shareAnimate:{}
+    shareAnimate:{},
+    initButton:[]
   },
   ready(){
-    this.setData({
-      userInfo: app.globalData.userInfo
-    });
+    this.init();
+  },
+  attached(){
+    this.init();
   },
 
   /**
    * 组件的方法列表
    */
   methods: {
+    init(){
+      if(this.data.showMenu){
+        this.data.initButton.push('menu');
+      }else if(this.data.showClose){
+        this.data.initButton.push('close');
+      }else if(this.data.showSearch){
+        this.data.initButton.push('search');
+      }else if(this.data.showShare){
+        this.data.initButton.push('share');
+      }
+    },
     toggleSearch(event){
       let isShow = event.currentTarget.dataset.val;
-      console.log(isShow);
-      let animation = wx.createAnimation({
-        duration:300,
-        timingFunction:'ease-in-out'
-      });
-      // this.animation = animation;
-      
-      let dis = isShow ? '0rpx' : '120rpx';
-      animation.top(dis).step();
       this.setData({
-        searchAniData:animation.export(),
+        showSearchFrame:!isShow,
         showSearch: isShow
       })
     },
@@ -135,6 +138,7 @@ Component({
         });
       }
       this.setData({
+        showSearchFrame:false,
         showClose:true
       });
     },

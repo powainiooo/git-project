@@ -8,7 +8,9 @@ Page({
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    addressList:['北京','上海','广州','深圳','南昌','惠州','成都'],
+    addressList:['深圳','珠海','佛山','北京','上海','武汉','成都','广州','中山','湛江','青岛','阳江'],
+    citiesLeft:100,
+    bodyWidth:0,
     listData:[{},{},{},{}],
     listSimpleIndex:-1,
     listAnimatIndex:-1,
@@ -24,7 +26,6 @@ Page({
     selectTicketTop:'0px',
     selectTicketClass:'',
     page:1,
-    keywords:'',
     keywords:''
   },
   //事件处理函数
@@ -74,7 +75,10 @@ Page({
       })
     }
     this.drawPoster();
-
+    let self = this;
+    wx.createSelectorQuery().select('#bodyFrame').boundingClientRect(function(rect){
+      self.data.bodyWidth = rect.width;
+    }).exec()
   },
   getUserInfo: function(e) {
     app.globalData.userInfo = e.detail.userInfo;
@@ -83,6 +87,21 @@ Page({
       hasUserInfo: true
     })
   },
+  //城市滑入事件
+  citiesScroll(e){
+    let sl = e.detail.scrollLeft,sw = e.detail.scrollWidth;
+    console.log('sl:'+sl+';sw:'+sw);
+    if(sl <= 50){
+      this.setData({
+        citiesLeft:sw/3+50
+      })
+    }else if(sl >= sw - this.data.bodyWidth - 50){
+      this.setData({
+        citiesLeft:(sw/3)*2 - 50
+      })
+    }
+  },
+  //进入详情
   gotoDetail(e){
     let top = e.currentTarget.offsetTop,
         index = e.target.dataset.index,
@@ -149,6 +168,7 @@ Page({
       },1500);
     }).exec()
   },
+  //返回详情
   doClose(){//关闭详情页
     this.setData({
       listSimpleIndex:-1,
@@ -206,6 +226,7 @@ Page({
       });
     },800);
   },
+  //进入购买页
   gotoBuy(){
     wx.pageScrollTo({
       scrollTop: 0,
@@ -222,6 +243,7 @@ Page({
       showBuyInfos:true
     })
   },
+  //生成海报
   drawPoster(){
     console.log('draw poster');
     wx.showLoading();
@@ -294,6 +316,7 @@ Page({
     },500)
 
   },
+  //获取列表数据
   getListData(){
     let self = this;
     wx.request({
@@ -319,6 +342,7 @@ Page({
   doSearch(e){
     this.data.keywords = e.detail;
   },
+  //分享
   onShareAppMessage(res){
     return {
       title:'test',

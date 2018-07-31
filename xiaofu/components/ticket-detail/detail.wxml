@@ -2,42 +2,43 @@
     <!--<ticket-item isSimple="{{isSimple}}" extraClass="{{extraClass}}"></ticket-item>-->
     <view style="background-color: #f6f6f6;padding-bottom: 180rpx; overflow: hidden; opacity: 0;" animation="{{detailAniData}}" wx:if="{{!showBuyInfos}}">
         <view class="title">艺人信息</view>
-        <view class="actor-item">
-            <image class="logo" src="../../res/images/img/actor-logo.png" mode="aspectFit"></image>
-            <image class="img" src="../../res/images/img/actor-img.jpg" mode="aspectFit"></image>
-        </view>
-        <view class="actor-item">
-            <image class="logo" src="../../res/images/img/actor-logo.png" mode="aspectFit"></image>
-            <image class="img" src="../../res/images/img/actor-img.jpg" mode="aspectFit"></image>
+        <view class="actor-item"
+              wx:for="{{itemData.person}}"
+              wx:for-item="item"
+              wx:for-index="index"
+              wx:key="{{index}}">
+            <image class="logo" src="{{imgSrc+item.img}}" mode="aspectFit"></image>
+            <image class="img" src="{{imgSrc+item.picture}}" mode="aspectFit"></image>
         </view>
 
         <view class="title">须知</view>
-        <view class="notice-item">
-            <text class="number">01</text>
-            <text class="descript">本消费券只能在深圳实用。</text>
-        </view>
-        <view class="notice-item">
-            <text class="number">02</text>
-            <text class="descript">本消费券只能在深圳实用。本消费券只能在深圳实用。本消费券只能在深圳实用。</text>
+        <view class="notice-item"
+              wx:for="{{itemData.info.notify}}"
+              wx:for-item="item"
+              wx:for-index="index"
+              wx:key="{{index}}">
+            <text class="number">{{index<9 ? 0 : ''}}{{index+1}}</text>
+            <text class="descript">{{item}}</text>
         </view>
 
         <view class="title">活动详情</view>
-        <view class="activity-frame">
+        <view class="activity-frame" wx:if="{{itemData.info.image_arr.length != 0}}">
             <swiper class="swiper"
                     previous-margin="40rpx"
                     next-margin="40rpx"
                     duration="200"
                     bindchange="activityChange">
                 <swiper-item  class="swiper-item"
-                              wx:for="{{activityList}}"
+                              wx:for="{{itemData.info.image_arr}}"
                               wx:for-index="index"
+                              wx:for-item="item"
                               wx:key="index">
-                    <image class="img" src="../../res/images/img/ac-img.jpg" mode="aspectFill"></image>
-                    <view class="infos">活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍1</view>
+                    <image class="img" src="{{imgSrc+item}}" mode="aspectFill"></image>
+                    <view class="infos">{{itemData.info.goods_desc}}</view>
                 </swiper-item>
             </swiper>
             <view class="nav-dots">
-                <view wx:for="{{activityList}}"
+                <view wx:for="{{itemData.info.image_arr}}"
                       wx:for-index="index"
                       wx:key="index"
                       class="dot-item {{index == activityIndex ? 'active' : ''}}"></view>
@@ -46,26 +47,28 @@
 
         <view class="title">联系主办方</view>
         <view class="contact-frame">
-            <image src="../../res/images/img/logo1.png" mode="widthFix" class="logo"></image>
+            <image src="{{imgSrc+itemData.info.cover}}" mode="widthFix" class="logo"></image>
             <view class="btn-phone"
                   hover-class="btn-phone-touch"
                   hover-start-time="10"
                   bindtap="docall"
-                  data-phone="+86-131-4888-6289">+86-131-4888-6289</view>
+                  data-phone="{{itemData.info.mobile}}">{{itemData.info.mobile}}</view>
         </view>
 
         <view class="title">更多推荐活动</view>
         <swiper class="recommond-swiper"
+                wx:if="{{itemData.recommend.length != 0}}"
                 duration="200"
                 previous-margin="30rpx"
                 next-margin="240rpx">
             <swiper-item class="recommond-item"
-                         wx:for="{{recommondList}}"
+                         wx:for="{{itemData.recommend}}"
                          wx:for-index="index"
+                         wx:for-item="item"
                          wx:key="index">
-                <ticket-item extraClass="ticket-small"></ticket-item>
+                <ticket-item extraClass="ticket-small" itemData="{{item}}"></ticket-item>
             </swiper-item>
         </swiper>
     </view>
-    <ticket-buy wx:if="{{showBuyInfos}}"></ticket-buy>
+    <ticket-buy wx:if="{{showBuyInfos}}" itemData="{{itemData}}"></ticket-buy>
 </view>

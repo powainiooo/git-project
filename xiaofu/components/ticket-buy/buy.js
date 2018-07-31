@@ -1,6 +1,33 @@
 // pages/ticket-buy/buy.js
 Component({
-
+  properties: {
+    itemData: {
+      type: Object,
+      value: {},
+      observer(newVal,oldVal,change){
+        let list = newVal.anew,obj=list[0];
+        for(let item of list){
+          if(obj.price > item.price){
+            obj = item;
+          }
+        }
+        let arr = [];
+        if(obj.max != ""){
+          let max = parseInt(obj.max);
+          for(let i=0;i<max;i++){
+            arr.push(i+1)
+          }
+        }else{
+          arr = [1,2,3,4,5,6,7,8,9,10];
+        }
+        this.setData({
+          typeList:newVal.anew,
+          numbersArr:arr,
+          selectTicket:obj
+        })
+      }
+    }
+  },
   /**
    * 页面的初始数据
    */
@@ -12,33 +39,9 @@ Component({
     phoneVal:'',
     addressVal:'',
     btnDisabled:false,
-    typeList:[
-      {
-        name:'早鸟票',
-        nums:0,
-        price:100
-      },
-      {
-        name:'预售票',
-        nums:10,
-        price:200
-      },
-      {
-        name:'普通票',
-        nums:10,
-        price:300
-      }
-    ],
+    typeList:[],
     selectTicket:{},
     showTypeList:false
-  },
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  attached: function (options) {
-    this.setData({
-      selectTicket:this.data.typeList[0]
-    })
   },
   methods:{
     numberChange: function(e) {

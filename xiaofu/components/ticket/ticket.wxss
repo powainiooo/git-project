@@ -33,20 +33,35 @@
 .ticket-frame .line1 .date .day {
   font-size: 100rpx;
   font-family: 'Helve';
+  height: 120rpx;
   padding: 0 20rpx;
+  display: flex;
+  align-items: center;
+}
+.ticket-frame .line1 .date .day2{
+  font-size: 80rpx;
+}
+.ticket-frame .line1 .date .day3{
+  font-size: 60rpx;
 }
 .ticket-small .line1 .date .day{ font-size: 66rpx;}
+.ticket-small .line1 .date .day2{ font-size: 52rpx;}
+.ticket-small .line1 .date .day3{ font-size: 38rpx;}
 
 .ticket-frame .line1 .logo {
   width: calc(100% - 200rpx);
+  height: 180rpx;
   display: flex;
   justify-content: center;
   align-items: center;
 }
+.ticket-frame .line1 .logo2{
+  width: calc(100% - 400rpx);
+}
 
 .ticket-frame .line1 .logo .logo-img {
   width: 200rpx;
-  max-height: 100rpx;
+  height: 140rpx;
 }
 
 .ticket-frame .title {

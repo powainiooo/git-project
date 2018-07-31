@@ -14,20 +14,8 @@
     <!--  style="opacity: {{showTicketDetail ? '0' : '1'}}"-->
     <view class='body'>
         <view wx:if="{{showIndex}}" animation="{{indexAniData}}">
-            <scroll-view scroll-x class='address-select' bindscroll="citiesScroll" scroll-left="{{citiesLeft}}">
-                <view class='address-frame' style='width:{{addressList.length*3*150}}rpx'>
-                    <view
-                            wx:for="{{addressList}}"
-                            wx:for-item="item"
-                            wx:for-index="index"
-                            wx:key="item"
-                            class="{{addressIndex == index ? 'active' : ''}}">{{item}}</view>
-                    <view
-                            wx:for="{{addressList}}"
-                            wx:for-item="item"
-                            wx:for-index="index"
-                            wx:key="item"
-                            class="{{addressIndex == index ? 'active' : ''}}">{{item}}</view>
+            <scroll-view scroll-x class='address-select' scroll-left="{{citiesLeft}}">
+                <view class='address-frame' style='width:{{addressList.length*150}}rpx'>
                     <view
                             wx:for="{{addressList}}"
                             wx:for-item="item"
@@ -49,24 +37,26 @@
                   wx:key="{{index}}"
                   bindtap="gotoDetail">
                 <view class="item {{listAnimatIndex == index ? selectTicketClass : ''}}"
-
                       animation="{{listAnimatIndex == index ? selectTicketAniData : indexAniData}}">
                     <ticket-item data-index="{{index}}"
+                                 data-id="{{item.id}}"
+                                 itemData="{{item}}"
                                  isSimple="{{listSimpleIndex != index}}"
                                  extraClass="{{showBuyInfos ? 'ticket-buy' : ''}}"></ticket-item>
                 </view>
             </view>
         </view>
-
+        <view class="load-hint" wx:if="{{isLoading}}">加载中</view>
+        <view class="load-hint" wx:if="{{isEnd}}">已经到底啦</view>
     </view>
 
     <view class="index-details {{showBuyInfos ? 'index-buys' : ''}}" wx:if="{{!showIndex}}">
         <!-- 详情页-->
-        <ticket-detail showInfos="{{showTicketDetail}}" showBuyInfos="{{showBuyInfos}}"></ticket-detail>
+        <ticket-detail showInfos="{{showTicketDetail}}" showBuyInfos="{{showBuyInfos}}" itemData="{{detailData}}"></ticket-detail>
     </view>
 
     <view class="footer" animation="{{footerAniData}}">
-        <view class="price">888<text class="unit">RMB</text></view>
+        <view class="price">{{singlePrice}}<text class="unit">RMB</text></view>
         <view class="btn" bindtap="gotoBuy">购买</view>
     </view>
 </view>

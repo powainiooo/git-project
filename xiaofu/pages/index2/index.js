@@ -1,17 +1,18 @@
 //index.js
 //获取应用实例
-const app = getApp()
+const app = getApp();
 
 Page({
   data: {
     motto: 'Hello World',
     userInfo: {},
+    detailData: {},
+    singlePrice:0,
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     addressList:['深圳','珠海','佛山','北京','上海','武汉','成都','广州','中山','湛江','青岛','阳江'],
-    citiesLeft:100,
-    bodyWidth:0,
-    listData:[{},{},{},{}],
+    citiesLeft:0,
+    listData:[],
     listSimpleIndex:-1,
     listAnimatIndex:-1,
     lastBodyTop:0,
@@ -25,6 +26,8 @@ Page({
     footerAniData:{},
     selectTicketTop:'0px',
     selectTicketClass:'',
+    isLoading:false,
+    isEnd:false,
     page:1,
     keywords:''
   },
@@ -75,10 +78,7 @@ Page({
       })
     }
     this.drawPoster();
-    let self = this;
-    wx.createSelectorQuery().select('#bodyFrame').boundingClientRect(function(rect){
-      self.data.bodyWidth = rect.width;
-    }).exec()
+    this.getListData();
   },
   getUserInfo: function(e) {
     app.globalData.userInfo = e.detail.userInfo;
@@ -87,24 +87,11 @@ Page({
       hasUserInfo: true
     })
   },
-  //城市滑入事件
-  citiesScroll(e){
-    let sl = e.detail.scrollLeft,sw = e.detail.scrollWidth;
-    console.log('sl:'+sl+';sw:'+sw);
-    if(sl <= 50){
-      this.setData({
-        citiesLeft:sw/3+50
-      })
-    }else if(sl >= sw - this.data.bodyWidth - 50){
-      this.setData({
-        citiesLeft:(sw/3)*2 - 50
-      })
-    }
-  },
   //进入详情
   gotoDetail(e){
     let top = e.currentTarget.offsetTop,
         index = e.target.dataset.index,
+        id = e.target.dataset.id,
         self = this;
     wx.createSelectorQuery().select('#bodyFrame').boundingClientRect(function(rect){
       self.data.lastBodyTop = rect.top;
@@ -149,7 +136,6 @@ Page({
         });
       },50);
 
-
       setTimeout(()=>{
         self.setData({
           showIndex:false,
@@ -160,12 +146,8 @@ Page({
           scrollTop: 0,
           duration: 0
         });
+        self.getDetailData(id);
       },700);
-      setTimeout(()=>{
-        self.setData({
-          showTicketDetail:true
-        });
-      },1500);
     }).exec()
   },
   //返回详情
@@ -319,8 +301,14 @@ Page({
   //获取列表数据
   getListData(){
     let self = this;
+    if(self.data.isLoading) return;
+    if(self.data.isEnd) return;
+    if(self.data.showTicketDetail) return;
+    self.setData({
+      isLoading:true
+    });
     wx.request({
-      url: '/pro_list', //仅为示例，并非真实的接口地址
+      url: app.globalData.ajaxSrc+'/pro_list', //仅为示例，并非真实的接口地址
       data: {
         keywords: self.data.keywords,
         page: self.data.page,
@@ -328,7 +316,44 @@ Page({
         activityID: ''
       },
       success: function(res) {
-
+        let list = res.data.data.list;
+        if(self.data.page == 1){
+          self.setData({
+            isEnd:list.length<10,
+            isLoading:false,
+            listData:list
+          });
+        }else{
+          self.setData({
+            isEnd:list.length<10,
+            isLoading:false,
+            listData:self.data.listData.concat(list)
+          });
+        }
+      }
+    })
+  },
+  //获取详情数据
+  getDetailData(id){
+    let self = this;
+    console.log(id);
+    wx.request({
+      url: app.globalData.ajaxSrc+'/product_info', //仅为示例，并非真实的接口地址
+      data: {
+        tid: id
+      },
+      success: function(res) {
+        let data = res.data,ticket = data.data.anew[0].price || 0;
+        for(let item of data.data.anew){
+          if(ticket > item.price){
+            ticket = item.price
+          }
+        }
+        self.setData({
+          singlePrice:ticket,
+          detailData:data.data,
+          showTicketDetail:true
+        });
       }
     })
   },

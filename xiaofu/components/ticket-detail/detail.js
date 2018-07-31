@@ -1,9 +1,14 @@
 // components/ticket-detail/detail.js
+const app = getApp();
 Component({
   /**
    * 组件的属性列表
    */
   properties: {
+    itemData:{
+      type:Object,
+      value:{}
+    },
     isSimple:{
       type:Boolean,
       value:true
@@ -40,7 +45,9 @@ Component({
     activityIndex:0,
     activityList:[{},{},{}],
     recommondList:[{},{},{}],
-    detailAniData:{}
+    detailAniData:{},
+    ajaxSrc:app.globalData.ajaxSrc,
+    imgSrc:app.globalData.imgSrc
   },
   attached(){
 

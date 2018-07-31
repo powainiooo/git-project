@@ -1,22 +1,30 @@
+<wxs module="util">
+  var sub = function(val,start,end) {
+    if(val){
+      return val.slice(start,end)
+    }
+  }
+  module.exports.sub = sub;
+</wxs>
 <view class="ticket-frame {{isSimple ? 'ticket-frame-simple' : ''}} {{extraClass}}" hover-class="{{isSimple ? 'ticket-touch' : ''}}" hover-stay-time="10">
   <view class='line1'>
     <view class='date'>
       <view class='year'>
         <text>2</text>
         <text>0</text>
-        <text>1</text>
-        <text>8</text>
+        <text>{{util.sub(itemData.begin,2,3)}}</text>
+        <text>{{util.sub(itemData.begin,3,4)}}</text>
       </view>
-      <view class='day'>09/08</view>
+      <view class='day day{{itemData.type}}'>{{itemData.date}}</view>
     </view>
-    <view class='logo'>
-      <image src='../../res/images/img/logo1.png' mode='widthFix' class='logo-img'></image>
+    <view class="logo {{itemData.type == 1 ? '' : 'logo2'}}">
+      <image src='{{imgSrc+itemData.cover}}' mode='aspectFit' class='logo-img'></image>
     </view>
   </view>
-  <view class='title'>French kiwi jucie of one one one</view>
-  <view class='range'>10:00pm-3:00am</view>
-  <view class='address'>上海市 巨鹿路168号</view>
+  <view class='title'>{{itemData.goods_name}}</view>
+  <view class='range'>{{itemData.hour_b}}-{{itemData.hour_e}}</view>
+  <view class='address'>{{itemData.address}}</view>
   <view class="imgs-frame">
-    <image src='../../res/images/img/ticket-img1.jpg' mode='widthFix' class='imgs'></image>
+    <image src='{{imgSrc+itemData.cover2}}' mode='widthFix' class='imgs'></image>
   </view>
 </view>

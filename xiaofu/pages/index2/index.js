@@ -77,7 +77,6 @@ Page({
         }
       })
     }
-    this.drawPoster();
     this.getListData();
   },
   getUserInfo: function(e) {
@@ -114,7 +113,7 @@ Page({
           duration:500,
           timingFunction:'linear'
         });
-        animation.opacity(0.5).step();
+        animation.opacity(0).step();
         animation2
             .top('120rpx')
             .left(0)
@@ -227,7 +226,7 @@ Page({
   },
   //生成海报
   drawPoster(){
-    console.log('draw poster');
+    let data = this.data.detailData.info,imgSrc = app.globalData.imgSrc,type = data.type;
     wx.showLoading();
     const ctx = wx.createCanvasContext('poster');
     //背景色
@@ -235,27 +234,57 @@ Page({
     ctx.setFillStyle('#ffffff');
     ctx.fill();
     //顶部Logo图
-    ctx.drawImage('https://powainiooo.github.io/git-project/xiaofu/res/images/top.png', 0, 0, 750, 145);
+    ctx.drawImage('../../res/images/top.png', 0, 0, 750, 145);
     //日期
     ctx.setFontSize(27);
     ctx.setFillStyle('#000000');
-    ctx.fillText('2         0         1         8',20,190);
+    let ten = data.begin.slice(2,3),one = data.begin.slice(3,4);
+    if(type == 1){
+      ctx.fillText(`2         0         ${ten}         ${one}`,20,190);
+    }else if(type == 2){
+      ctx.fillText(`2           0           ${ten}           ${one}`,20,190);
+    }else if(type == 3){
+      ctx.fillText(`2           0           ${ten}           ${one}`,20,190);
+    }
     ctx.font = "27px 'Helve'";
-    ctx.setFontSize(100);
-    ctx.fillText('09/08',20,300);
+    if(type == 1){
+      ctx.setFontSize(100);
+      ctx.fillText(data.date,20,300);
+    }else if(type == 2){
+      ctx.setFontSize(80);
+      ctx.fillText(data.date,20,294);
+    }else if(type == 3){
+      ctx.setFontSize(60);
+      ctx.fillText(data.date,20,290);
+    }
     //标题
-    ctx.setFontSize(50);
-    ctx.fillText('French kiwi jucie of one one',20,390);
+    ctx.setFontSize(44);
+    ctx.fillText(data.goods_name,20,390);
     // 竖线
     ctx.setStrokeStyle('#cecece');
     ctx.beginPath();
-    ctx.moveTo(310,160);
-    ctx.lineTo(310,320);
+    if(type == 1){
+      ctx.moveTo(310,160);
+      ctx.lineTo(310,320);
+    }else if(type == 2){
+      ctx.moveTo(370,160);
+      ctx.lineTo(370,320);
+    }else if(type == 3){
+      ctx.moveTo(380,160);
+      ctx.lineTo(380,320);
+    }
+
     ctx.stroke();
     //横线 短
     ctx.beginPath();
     ctx.moveTo(0,210);
-    ctx.lineTo(310,210);
+    if(type == 1){
+      ctx.lineTo(310,210);
+    }else if(type == 2){
+      ctx.lineTo(370,210);
+    }else if(type == 3){
+      ctx.lineTo(380,210);
+    }
     ctx.stroke();
     //横线 长
     ctx.beginPath();
@@ -263,11 +292,18 @@ Page({
     ctx.lineTo(750,320);
     ctx.stroke();
     //logo
-    ctx.drawImage('https://powainiooo.github.io/git-project/xiaofu/res/images/img/logo1.png',540-125,240-40,250,80);
+    if(type == 1){
+      ctx.drawImage(imgSrc+data.cover,530-100,240-70,200,140);
+    }else if(type == 2){
+      ctx.drawImage(imgSrc+data.cover,560-100,240-70,200,140);
+    }else if(type == 3){
+      ctx.drawImage(imgSrc+data.cover,560-100,240-70,200,140);
+    }
+
     //详情图
-    ctx.drawImage('https://powainiooo.github.io/git-project/xiaofu/res/images/img/ticket-img1.jpg',0,420,750,650);
+    ctx.drawImage(imgSrc+data.cover2,0,420,750,650);
     //底部logo
-    ctx.drawImage('https://powainiooo.github.io/git-project/xiaofu/res/images/bottom.png',450,460,300,300);
+    ctx.drawImage('../../res/images/bottom.png',450,460,300,300);
 
     setTimeout(()=>{
       wx.hideLoading();
@@ -282,16 +318,16 @@ Page({
           destWidth:750,
           destHeight:750,
           success:function(res){
-            //wx.saveImageToPhotosAlbum({
-            //  filePath: res.tempFilePath,
-            //  success(){
-            //    wx.showToast({
-            //      title: '保存成功',
-            //      icon: 'success',
-            //      duration: 2000
-            //    })
-            //  }
-            //})
+            wx.saveImageToPhotosAlbum({
+              filePath: res.tempFilePath,
+              success(){
+                wx.showToast({
+                  title: '保存成功',
+                  icon: 'success',
+                  duration: 2000
+                })
+              }
+            })
           }
         })
       })

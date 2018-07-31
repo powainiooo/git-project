@@ -107,6 +107,8 @@
   height: 650rpx;
   transition:height 0.3s cubic-bezier(.22,.62,.37,1);
   overflow: hidden;
+  display: flex;
+  align-items: center;
 }
 .ticket-frame .imgs-frame .imgs{ width: 100%;}
 .ticket-frame-simple .imgs-frame{

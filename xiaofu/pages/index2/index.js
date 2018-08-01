@@ -364,7 +364,7 @@ Page({
     wx.request({
       url: app.globalData.ajaxSrc+'/pro_list', //仅为示例，并非真实的接口地址
       data: {
-        keywords: self.data.keywords,
+        keyword: self.data.keywords,
         page: self.data.page,
         city: self.data.city,
         activityID: ''

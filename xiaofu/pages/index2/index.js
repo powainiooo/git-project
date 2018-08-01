@@ -1,7 +1,10 @@
 //index.js
 //获取应用实例
 const app = getApp();
-
+const QQMapWX = require('../../utils/qqmap-wx-jssdk.min.js');
+const qMap = new QQMapWX({
+  key:'AH7BZ-VV736-WNUSA-EP35M-3TCOZ-DTBXG'
+});
 Page({
   data: {
     motto: 'Hello World',
@@ -10,8 +13,11 @@ Page({
     singlePrice:0,
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    addressList:['深圳','珠海','佛山','北京','上海','武汉','成都','广州','中山','湛江','青岛','阳江'],
+    addressList:[],
+    addressIndex:0,
     citiesLeft:0,
+    bannerImg:'',
+    bannerLink:'',
     listData:[],
     listSimpleIndex:-1,
     listAnimatIndex:-1,
@@ -26,10 +32,11 @@ Page({
     footerAniData:{},
     selectTicketTop:'0px',
     selectTicketClass:'',
-    isLoading:false,
-    isEnd:false,
+    loadHint:'',
     page:1,
-    keywords:''
+    keywords:'',
+    city:'',
+    imgSrc:app.globalData.imgSrc
   },
   //事件处理函数
   onLoad: function (options) {
@@ -77,6 +84,16 @@ Page({
         }
       })
     }
+    this.getAddressData();
+    let cityID = 0;
+    try {
+      cityID = wx.getStorageSync('lastCityID');
+    } catch (e) {
+      cityID = 0;
+    }
+    this.setData({
+      city:cityID
+    });
     this.getListData();
   },
   getUserInfo: function(e) {
@@ -95,8 +112,6 @@ Page({
     wx.createSelectorQuery().select('#bodyFrame').boundingClientRect(function(rect){
       self.data.lastBodyTop = rect.top;
       self.data.lastTop = top+rect.top+'px';
-      console.log('rect:'+rect.top);
-      console.log(e);
       let animation2 = wx.createAnimation({
         duration:0,
         timingFunction:'cubic-bezier(.22,.62,.4,1.16)'
@@ -292,56 +307,59 @@ Page({
     ctx.lineTo(750,320);
     ctx.stroke();
     //logo
-    if(type == 1){
-      ctx.drawImage(imgSrc+data.cover,530-100,240-70,200,140);
-    }else if(type == 2){
-      ctx.drawImage(imgSrc+data.cover,560-100,240-70,200,140);
-    }else if(type == 3){
-      ctx.drawImage(imgSrc+data.cover,560-100,240-70,200,140);
-    }
+    let logoXArr = [530-100,560-100,560-100];
+    wx.downloadFile({
+      url: imgSrc+data.cover,
+      success: function(res) {
+        if (res.statusCode === 200) {
+          ctx.drawImage(res.tempFilePath,logoXArr[type-1],240-70,200,140);
+        }
+      }
+    });
 
     //详情图
-    ctx.drawImage(imgSrc+data.cover2,0,420,750,650);
-    //底部logo
-    ctx.drawImage('../../res/images/bottom.png',450,460,300,300);
-
-    setTimeout(()=>{
-      wx.hideLoading();
-      ctx.draw(true,function(){
-        console.log('poster');
-        wx.canvasToTempFilePath({
-          canvasId: 'poster',
-          x:0,
-          y:0,
-          width:750,
-          height:750,
-          destWidth:750,
-          destHeight:750,
-          success:function(res){
-            wx.saveImageToPhotosAlbum({
-              filePath: res.tempFilePath,
-              success(){
-                wx.showToast({
-                  title: '保存成功',
-                  icon: 'success',
-                  duration: 2000
+    wx.downloadFile({
+      url: imgSrc+data.cover2,
+      success: function(res1) {
+        if (res.statusCode === 200) {
+          ctx.drawImage(res1.tempFilePath,0,420,750,650);
+          //底部logo
+          ctx.drawImage('../../res/images/bottom.png',450,460,300,300);
+          wx.hideLoading();
+          ctx.draw(true,function(){
+            wx.canvasToTempFilePath({
+              canvasId: 'poster',
+              x:0,
+              y:0,
+              width:750,
+              height:750,
+              destWidth:750,
+              destHeight:750,
+              success:function(res){
+                wx.saveImageToPhotosAlbum({
+                  filePath: res.tempFilePath,
+                  success(){
+                    wx.showToast({
+                      title: '保存成功',
+                      icon: 'success',
+                      duration: 2000
+                    })
+                  }
                 })
               }
             })
-          }
-        })
-      })
-    },500)
+          })
+        }
+      }
+    });
 
   },
   //获取列表数据
   getListData(){
     let self = this;
-    if(self.data.isLoading) return;
-    if(self.data.isEnd) return;
-    if(self.data.showTicketDetail) return;
+    if(self.data.loadHint != '') return;
     self.setData({
-      isLoading:true
+      loadHint:'loading'
     });
     wx.request({
       url: app.globalData.ajaxSrc+'/pro_list', //仅为示例，并非真实的接口地址
@@ -352,17 +370,21 @@ Page({
         activityID: ''
       },
       success: function(res) {
-        let list = res.data.data.list;
+        let list = res.data.data.list,hint = '';
         if(self.data.page == 1){
+          if(list.length < 10 && list.length > 0){
+            hint = 'end';
+          }else if(list.length == 0){
+            hint = 'empty';
+          }
           self.setData({
-            isEnd:list.length<10,
-            isLoading:false,
+            loadHint:hint,
             listData:list
           });
         }else{
+          hint = list.length<10 ? 'end' : '';
           self.setData({
-            isEnd:list.length<10,
-            isLoading:false,
+            loadHint:hint,
             listData:self.data.listData.concat(list)
           });
         }
@@ -372,7 +394,6 @@ Page({
   //获取详情数据
   getDetailData(id){
     let self = this;
-    console.log(id);
     wx.request({
       url: app.globalData.ajaxSrc+'/product_info', //仅为示例，并非真实的接口地址
       data: {
@@ -393,15 +414,104 @@ Page({
       }
     })
   },
+  //获取地址、banner
+  getAddressData(){
+    let self = this;
+    wx.request({
+      url: app.globalData.ajaxSrc+'/city_banner',
+      success: function(res) {
+        let city = res.data.data.citys,index = 0;
+        for(let i=0;i<city.length;i++){
+          if(city[i].id == self.data.city){
+            index = i + 1;
+          }
+        }
+        self.setData({
+          addressList:city,
+          addressIndex:index,
+          bannerImg:res.data.data.cover,
+          bannerLink:res.data.data.blink
+        });
+        self.getLocation();
+      }
+    })
+  },
+  //获取定位
+  getLocation(){
+    let self = this;
+    wx.getLocation({
+      type: 'wgs84',
+      success: function(res) {
+        qMap.reverseGeocoder({
+          location: {
+            latitude: res.latitude,
+            longitude: res.longitude
+            //latitude: 22.678323,
+            //longitude: 114.36091
+          },
+          success: function(res) {
+            let city = res.result.address_component.city;
+            let cities = self.data.addressList,cityID,index;
+            //判断本地地址是否匹配城市列表
+            for(let i=0;i<cities.length;i++){
+              let reg = new RegExp(cities[i].name);
+              if(reg.test(city)){
+                cityID = cities[i].id;
+                index = i + 1;
+                break;
+              }
+            }
+            if(cityID != self.data.city){
+              wx.showModal({
+                content: '是否切换到 ' + city,
+                success: function(res) {
+                  if (res.confirm) {//点击确定
+                    self.setData({
+                      loadHint:'',
+                      addressIndex:index,
+                      city:cityID
+                    });
+                    self.getListData();
+                    wx.setStorage({
+                      key:"lastCityID",
+                      data:cityID
+                    });
+                  }
+                }
+              })
+            }
+          }
+        });
+      }
+    });
+
+  },
+  //切换城市
+  changeCity(e){
+    let id = e.currentTarget.dataset.id,index = e.currentTarget.dataset.index;
+    this.setData({
+      addressIndex:index,
+      city:id,
+      loadHint:''
+    });
+    this.getListData();
+    wx.setStorage({
+      key:"lastCityID",
+      data:id
+    });
+  },
   //下拉刷新
   onReachBottom(){
-    console.log('down refresh');
+    if(this.data.loadHint != '') return;
     this.data.page ++;
     this.getListData();
   },
   //搜索
   doSearch(e){
     this.data.keywords = e.detail;
+    this.data.page = 1;
+    this.data.loadHint = '';
+    this.getListData();
   },
   //分享
   onShareAppMessage(res){

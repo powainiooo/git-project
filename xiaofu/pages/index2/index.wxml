@@ -15,17 +15,24 @@
     <view class='body'>
         <view wx:if="{{showIndex}}" animation="{{indexAniData}}">
             <scroll-view scroll-x class='address-select' scroll-left="{{citiesLeft}}">
-                <view class='address-frame' style='width:{{addressList.length*150}}rpx'>
+                <view class='address-frame' style='width:{{(addressList.length+1)*150}}rpx'>
+                    <view data-id="0"
+                          data-index="0"
+                          bindtap="changeCity"
+                          class="{{addressIndex == 0 ? 'active' : ''}}">全部</view>
                     <view
                             wx:for="{{addressList}}"
                             wx:for-item="item"
                             wx:for-index="index"
                             wx:key="item"
-                            class="{{addressIndex == index ? 'active' : ''}}">{{item}}</view>
+                            data-index="{{index+1}}"
+                            data-id="{{item.id}}"
+                            bindtap="changeCity"
+                            class="{{addressIndex == index+1 ? 'active' : ''}}">{{item.name}}</view>
                 </view>
             </scroll-view>
 
-            <image src="../../res/images/img/banner1.jpg" class='banner' mode='widthFix'></image>
+            <image src="{{imgSrc+bannerImg}}" class='banner' mode='scaleToFill'></image>
         </view>
 
         <!--style="top:{{listAnimatIndex == index ? selectTicketTop : 0}};"-->
@@ -46,8 +53,14 @@
                 </view>
             </view>
         </view>
-        <view class="load-hint" wx:if="{{isLoading}}">加载中</view>
-        <view class="load-hint" wx:if="{{isEnd}}">已经到底啦</view>
+        <view class="load-hint" wx:if="{{loadHint == 'loading'}}">加载中</view>
+        <view class="load-hint" wx:if="{{loadHint == 'end'}}">已经到底啦</view>
+        <!--无搜索结果  -->
+        <view class='result-frame' wx:if="{{loadHint == 'empty'}}">
+            <view class='icons icon-cuowu'></view>
+            <view><text class='hint-en'>Irrelevant \n Content</text></view>
+            <view class='hint-cn'>无相关内容</view>
+        </view>
     </view>
 
     <view class="index-details {{showBuyInfos ? 'index-buys' : ''}}" wx:if="{{!showIndex}}">

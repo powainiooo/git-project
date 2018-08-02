@@ -10,9 +10,9 @@
                   wx:for-index="index"
                   wx:key="index">
                 <text>{{index+1}}</text>
-                <input placeholder="姓名(真实)" class="input" bindinput="checkValues" data-key="name" data-index="{{index}}"/>
-                <input placeholder="电话(真实)" class="input" bindinput="checkValues" data-key="phone" data-index="{{index}}"/>
-                <input placeholder="身份证(真实)" class="input" bindinput="checkValues" data-key="ids" data-index="{{index}}"/>
+                <input placeholder="姓名(真实)" class="input" bindinput="checkValues" data-key="username" data-index="{{index}}"/>
+                <input placeholder="电话(真实)" class="input" bindinput="checkValues" data-key="mobile" data-index="{{index}}"/>
+                <input placeholder="身份证(真实)" class="input" bindinput="checkValues" data-key="idnum" data-index="{{index}}"/>
             </view>
         </view>
         <view class="footer">

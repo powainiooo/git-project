@@ -1,4 +1,5 @@
 // pages/ticket-buy/buy.js
+const app = getApp();
 Component({
   properties: {
     itemData: {
@@ -38,10 +39,13 @@ Component({
     nameVal:'',
     phoneVal:'',
     addressVal:'',
+    idnum:'',
     btnDisabled:false,
     typeList:[],
     selectTicket:{},
-    showTypeList:false
+    showTypeList:false,
+    ajaxSrc:app.globalData.ajaxSrc,
+    imgSrc:app.globalData.imgSrc
   },
   methods:{
     numberChange: function(e) {
@@ -59,10 +63,11 @@ Component({
 
       let dis = isShow ? '160rpx' : -this.data.typeList.length*100+'rpx';
       animation.bottom(dis).step();
-      let val = event.target.dataset.val || 0;
+      let val = event.target.dataset.val == undefined ? -1 : event.target.dataset.val;
+      let obj = val == -1 ? this.data.selectTicket : this.data.typeList[val];
       this.setData({
         animDataTypeList:animation.export(),
-        selectTicket:this.data.typeList[val],
+        selectTicket:obj,
         showTypeList:isShow
       })
     },
@@ -80,9 +85,23 @@ Component({
       }
     },
     doPay(){
-      if(this.data.btnDisabled){
-        wx.navigateTo({
-          url: '/pages/result/result?page=ticketSuc'
+      let self = this;
+      if(self.data.btnDisabled){
+        wx.request({
+          url: self.data.ajaxSrc+'/create_order', //仅为示例，并非真实的接口地址
+          data: {
+            tid:self.data.itemData.info.id,
+            name:self.data.nameVal,
+            mobile:self.data.phoneVal,
+            address:self.data.addressVal,
+            idnum:self.data.idnum,
+            sele:self.data.selectTicket.select,
+            nums:self.data.numbersArr[self.data.numberIndex]
+          },
+          method:'POST',
+          success: function(res) {
+            console.log(res.data)
+          }
         })
       }
     },

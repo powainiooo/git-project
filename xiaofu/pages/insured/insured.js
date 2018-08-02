@@ -1,24 +1,17 @@
 // pages/insured/insured.js
+const app = getApp();
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
     btnDisabled:false,
     inforList:[]
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
     let numbers = options.numbers || 2,arr=[];
     for(let i=0;i<numbers;i++){
       arr[i] = {
-        name:'',
-        phone:'',
-        ids:''
+        username:'',
+        mobile:'',
+        idnum:''
       }
     }
     this.setData({
@@ -41,10 +34,23 @@ Page({
     })
   },
   doConfirm(){
-    if(this.data.btnDisabled){
-      wx.navigateTo({
-        url: '/pages/result/result?page=insuredSuc'
+    let self = this;
+    if(self.data.btnDisabled){
+      console.log(self.data.inforList);
+      wx.request({
+        url: self.data.ajaxSrc+'/safe_person', //仅为示例，并非真实的接口地址
+        data: {
+          order_num:'',
+          person:self.data.inforList
+        },
+        method:'POST',
+        success: function(res) {
+          console.log(res.data)
+        }
       })
+      //wx.navigateTo({
+      //  url: '/pages/result/result?page=insuredSuc'
+      //})
     }
   },
   backIndexDetail(){

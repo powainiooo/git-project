@@ -7,7 +7,8 @@
     <view class="form-frame">
       <input placeholder="姓名" class="input" bindinput="checkValues" data-key="nameVal"/>
       <input placeholder="电话" class="input" bindinput="checkValues" data-key="phoneVal"/>
-      <input placeholder="收货地址" class="input" bindinput="checkValues" data-key="addressVal"/>
+      <input placeholder="收货地址" class="input" bindinput="checkValues" data-key="addressVal" wx:if="{{itemData.info.is_post == '1'}}"/>
+      <input placeholder="身份证" class="input" bindinput="checkValues" data-key="idnum" wx:if="{{itemData.info.idnum == '1'}}"/>
     </view>
 
     <view class="hint-section">本票务一经购买，无主办方的通知，任何情况都不支持退票。未满十八岁请勿购票！</view>

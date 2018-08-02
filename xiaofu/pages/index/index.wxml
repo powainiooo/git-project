@@ -1,52 +1,79 @@
 <!--index.wxml-->
 <view class="container bg-gray" id="bodyFrame">
-  <header-view
-          show-search="{{toggleButton}}"
-          showShadow="{{!toggleButton}}"
-          showMenu="{{toggleButton}}"
-          showClose="{{!toggleButton}}"
-          showShare="{{!toggleButton}}"
-          binddoclose="doClose"
-          binddoposter="drawPoster">
-  </header-view>
+    <header-view
+            show-search="{{toggleButton}}"
+            showShadow="{{!toggleButton}}"
+            showMenu="{{toggleButton}}"
+            showClose="{{!toggleButton}}"
+            showShare="{{!toggleButton}}"
+            binddoclose="doClose"
+            binddosearch="doSearch"
+            binddoposter="drawPoster">
+    </header-view>
 
-  <!--  style="opacity: {{showTicketDetail ? '0' : '1'}}"-->
-  <view class='body' animation="{{indexAniData}}" wx:if="{{showTicketList}}">
-    <scroll-view scroll-x class='address-select'>
-      <view class='address-frame' style='width:{{addressList.length*150}}rpx'>
-        <view 
-        wx:for="{{addressList}}" 
-        wx:for-item="item" 
-        wx:for-index="index" 
-        wx:key="item"
-        class="{{addressIndex == index ? 'active' : ''}}">{{item}}</view>
-      </view>
-    </scroll-view>
+    <!--  style="opacity: {{showTicketDetail ? '0' : '1'}}"-->
+    <view class='body'>
+        <view wx:if="{{showIndex}}" animation="{{indexAniData}}">
+            <scroll-view scroll-x class='address-select' scroll-left="{{citiesLeft}}" scroll-with-animation>
+                <view class='address-frame' style='width:{{(addressList.length+1)*cityItemWidth}}px'>
+                    <view data-id="0"
+                          data-index="0"
+                          bindtap="changeCity"
+                          style="width: :{{cityItemWidth}}px"
+                          class="{{addressIndex == 0 ? 'active' : ''}}">全部</view>
+                    <view
+                            wx:for="{{addressList}}"
+                            wx:for-item="item"
+                            wx:for-index="index"
+                            wx:key="item"
+                            style="width: :{{cityItemWidth}}px"
+                            data-index="{{index+1}}"
+                            data-id="{{item.id}}"
+                            bindtap="changeCity"
+                            class="{{addressIndex == index+1 ? 'active' : ''}}">{{item.name}}</view>
+                </view>
+            </scroll-view>
 
-    <image src="../../res/images/img/banner1.jpg" class='banner' mode='widthFix'></image>
+            <image src="{{imgSrc+bannerImg}}" class='banner' mode='scaleToFill'></image>
+        </view>
 
-    <view class='pro-list'>
-      <ticket-item bindtap="gotoDetail"></ticket-item>
-      <ticket-item bindtap="gotoDetail"></ticket-item>
-      <ticket-item bindtap="gotoDetail"></ticket-item>
-      <ticket-item bindtap="gotoDetail"></ticket-item>
-      <ticket-item bindtap="gotoDetail"></ticket-item>
-      <ticket-item bindtap="gotoDetail"></ticket-item>
+        <!--style="top:{{listAnimatIndex == index ? selectTicketTop : 0}};"-->
+        <view class='pro-list'>
+            <view class="item-frame {{showIndex || listAnimatIndex == index ? '' : 'item-hide'}}"
+                  wx:for="{{listData}}"
+                  wx:for-item="item"
+                  wx:for-index="index"
+                  wx:key="{{index}}"
+                  bindtap="gotoDetail">
+                <view class="item {{listAnimatIndex == index ? selectTicketClass : ''}}"
+                      animation="{{listAnimatIndex == index ? selectTicketAniData : indexAniData}}">
+                    <ticket-item data-index="{{index}}"
+                                 data-id="{{item.id}}"
+                                 itemData="{{item}}"
+                                 isSimple="{{listSimpleIndex != index}}"
+                                 extraClass="{{showBuyInfos ? 'ticket-buy' : ''}}"></ticket-item>
+                </view>
+            </view>
+        </view>
+        <view class="load-hint" wx:if="{{loadHint == 'loading'}}">加载中</view>
+        <view class="load-hint" wx:if="{{loadHint == 'end'}}">已经到底啦</view>
+        <!--无搜索结果  -->
+        <view class='result-frame' wx:if="{{loadHint == 'empty'}}">
+            <view class='icons icon-cuowu'></view>
+            <view><text class='hint-en'>Irrelevant \n Content</text></view>
+            <view class='hint-cn'>无相关内容</view>
+        </view>
     </view>
-  </view>
 
-  <view class="index-details {{showTicketList ? '' : 'details-show'}}"
-        wx:if="{{showTicketDetail}}"
-        style="top: {{detailTop}};"
-        animation="{{detailAniData}}" >
-    <!-- 详情页-->
-    <ticket-detail isSimple="{{isSimple}}" showInfos="{{showDetailsInfos}}" showBuyInfos="{{showBuyInfos}}" extraClass="{{ticketExtraClass}}"></ticket-detail>
-  </view>
+    <view class="index-details {{showBuyInfos ? 'index-buys' : ''}}" wx:if="{{!showIndex}}">
+        <!-- 详情页-->
+        <ticket-detail showInfos="{{showTicketDetail}}" showBuyInfos="{{showBuyInfos}}" itemData="{{detailData}}"></ticket-detail>
+    </view>
 
-  <view class="footer" animation="{{footerAniData}}">
-    <view class="price">888<text class="unit">RMB</text></view>
-    <view class="btn" bindtap="gotoBuy">购买</view>
-  </view>
+    <view class="footer" animation="{{footerAniData}}">
+        <view class="price">{{singlePrice}}<text class="unit">RMB</text></view>
+        <view class="btn" bindtap="gotoBuy">购买</view>
+    </view>
 </view>
 <!-- 画图 -->
 <canvas canvas-id="poster" style='width:750px; height:760px; background-color:#fff; position: fixed; top: -1000px; left: -1000px;' />

@@ -1,6 +1,5 @@
 {
   "pages": [
-    "pages/insured/insured",
     "pages/index/index",
     "pages/member/member",
     "pages/order-drink/detail",
@@ -9,6 +8,7 @@
     "pages/drink/detail",
     "pages/order-ticket/order",
     "pages/order-ticket/detail",
+    "pages/insured/insured",
     "pages/result/result",
     "pages/sponsor/list",
     "pages/search/search"

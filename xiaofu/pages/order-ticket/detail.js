@@ -1,32 +1,16 @@
 // pages/order-ticket/detail.js
+const app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    listData:[
-      {
-        isChecked:false,
-        name:'1French kiwi jucie of one one one',
-        checkNums:1,
-        nonCheckNums:1
-      },
-      {
-        isChecked:true,
-        name:'2French kiwi jucie of one one one',
-        checkNums:2,
-        nonCheckNums:2
-      },
-      {
-        isChecked:false,
-        name:'3French kiwi jucie of one one one',
-        checkNums:3,
-        nonCheckNums:3
-      }
-    ],
+    listData:[],
     currentIndex:0,
-    duration:0
+    duration:0,
+    notCheckNum:0,
+    checkNum:0
   },
 
   /**
@@ -35,11 +19,30 @@ Page({
   onLoad: function (options) {
     console.log(options);
     let index = options.index || 0;
-    this.setData({
-      currentIndex:index
+    this.getListData(index);
+  },
+  getListData(index){
+    let self = this;
+    wx.request({
+      url: app.globalData.ajaxSrc+'/user_order',
+      success: function(res) {
+        let list = res.data.data.list,not=0,check=0;
+        for(let item of list){
+          if(item.is_check == '0'){
+            not++
+          }else if(item.is_check == '1'){
+            check++;
+          }
+        }
+        self.setData({
+          notCheckNum:not,
+          checkNum:check,
+          listData:list,
+          currentIndex:index
+        });
+      }
     })
   },
-
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

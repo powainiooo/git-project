@@ -1,59 +1,188 @@
 // pages/drink/index.js
+const app = getApp();
+const QQMapWX = require('../../utils/qqmap-wx-jssdk.min.js');
+const qMap = new QQMapWX({
+  key:'AH7BZ-VV736-WNUSA-EP35M-3TCOZ-DTBXG'
+});
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    addressList:['北京','上海','广州','深圳','南昌','惠州','成都']
+    addressList:[],
+    addressIndex:0,
+    citiesLeft:0,
+    cityItemWidth:0,
+    listData:[],
+    loadHint:'',
+    page:1,
+    keywords:'',
+    city:'',
+    imgSrc:app.globalData.imgSrc
   },
-  gotoDetail(){
+  gotoDetail(e){
+    let id = e.currentTarget.dataset.id;
     wx.navigateTo({
-      url: '/pages/drink/detail'
+      url: '/pages/drink/detail?id='+id
     })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
-  },
+    this.getAddressData();
+    let cityID = 0;
+    try {
+      cityID = wx.getStorageSync('lastCityID');
+    } catch (e) {
+      cityID = 0;
+    }
+    this.setData({
+      city:cityID
+    });
+    this.getListData();
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
+    let self = this;
+    wx.getSystemInfo({
+      success: function(res) {
+        self.setData({
+          cityItemWidth:Math.floor(res.windowWidth/5)
+        });
+      }
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
+  //获取列表数据
+  getListData(){
+    let self = this;
+    if(self.data.showTicketDetail) return;
+    if(self.data.loadHint != '') return;
+    self.setData({
+      loadHint:'loading'
+    });
+    wx.request({
+      url: app.globalData.ajaxSrc+'/drink_list', //仅为示例，并非真实的接口地址
+      data: {
+        keyword: self.data.keywords,
+        page: self.data.page,
+        city: self.data.city
+      },
+      success: function(res) {
+        let list = res.data.data.list,hint = '';
+        if(self.data.page == 1){
+          if(list.length < 10 && list.length > 0){
+            hint = 'end';
+          }else if(list.length == 0){
+            hint = 'empty';
+          }
+          self.setData({
+            loadHint:hint,
+            listData:list
+          });
+        }else{
+          hint = list.length<10 ? 'end' : '';
+          self.setData({
+            loadHint:hint,
+            listData:self.data.listData.concat(list)
+          });
+        }
+      }
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
+  //获取地址、banner
+  getAddressData(){
+    let self = this;
+    wx.request({
+      url: app.globalData.ajaxSrc+'/city_banner',
+      success: function(res) {
+        let city = res.data.data.citys,index = 0;
+        for(let i=0;i<city.length;i++){
+          if(city[i].id == self.data.city){
+            index = i + 1;
+          }
+        }
+        self.setData({
+          citiesLeft:self.data.cityItemWidth*(index-2),
+          addressList:city,
+          addressIndex:index
+        });
+        self.getLocation();
+      }
+    })
   },
+  //获取定位
+  getLocation(){
+    let self = this;
+    wx.getLocation({
+      type: 'wgs84',
+      success: function(res) {
+        qMap.reverseGeocoder({
+          location: {
+            latitude: res.latitude,
+            longitude: res.longitude
+            //latitude: 22.678323,
+            //longitude: 114.36091
+          },
+          success: function(res) {
+            let city = res.result.address_component.city;
+            let cities = self.data.addressList,cityID,index;
+            //判断本地地址是否匹配城市列表
+            for(let i=0;i<cities.length;i++){
+              let reg = new RegExp(cities[i].name);
+              if(reg.test(city)){
+                cityID = cities[i].id;
+                index = i + 1;
+                break;
+              }
+            }
+            if(cityID != self.data.city){
+              wx.showModal({
+                content: '是否切换到 ' + city,
+                success: function(res) {
+                  if (res.confirm) {//点击确定
+                    self.setData({
+                      loadHint:'',
+                      citiesLeft:self.data.cityItemWidth*(index-2),
+                      addressIndex:index,
+                      city:cityID
+                    });
+                    self.getListData();
+                    wx.setStorage({
+                      key:"lastCityID",
+                      data:cityID
+                    });
+                  }
+                }
+              })
+            }
+          }
+        });
+      }
+    });
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
   },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
+  //切换城市
+  changeCity(e){
+    let id = e.currentTarget.dataset.id,index = e.currentTarget.dataset.index;
+    this.setData({
+      citiesLeft:this.data.cityItemWidth*(index-2),
+      addressIndex:index,
+      city:id,
+      loadHint:''
+    });
+    this.getListData();
+    wx.setStorage({
+      key:"lastCityID",
+      data:id
+    });
   },
-
+  //搜索
+  doSearch(e){
+    this.data.keywords = e.detail;
+    this.data.page = 1;
+    this.data.loadHint = '';
+    this.getListData();
+  },
   /**
    * 页面上拉触底事件的处理函数
    */
@@ -67,4 +196,4 @@ Page({
   onShareAppMessage: function () {
   
   }
-})
+});

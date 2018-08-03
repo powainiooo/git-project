@@ -1,19 +1,27 @@
-<view class="ticket {{itemData.isChecked ? '' : 'shadow-top'}} {{isSimple ? 'ticket-simple' : ''}}">
-    <view class="check-icon" wx:if="{{itemData.isChecked}}"></view>
+<wxs module="util">
+    var sub = function(val,start,end) {
+    if(val){
+    return val.slice(start,end)
+    }
+    }
+    module.exports.sub = sub;
+</wxs>
+<view class="ticket {{itemData.is_check == '1' ? '' : 'shadow-top'}} {{isSimple ? 'ticket-simple' : ''}}">
+    <view class="check-icon" wx:if="{{itemData.is_check == '1'}}"></view>
     <view class="">
-        <view class="top {{itemData.isChecked ? '' : 'shadow-frame'}}">
-            <view class="frame1 check-frame1" style="background-color: #f6f6f6;"  wx:if="{{itemData.isChecked}}">
+        <view class="top {{itemData.is_check == '1' ? '' : 'shadow-frame'}}">
+            <view class="frame1 check-frame1" style="background-color: #f6f6f6;"  wx:if="{{itemData.is_check == '1'}}">
                 <view class="line1">已验票</view>
-                <text class="ids">627853362931</text>
+                <text class="ids">{{itemData.order_num}}</text>
             </view>
-            <view class="frame1"  wx:if="{{!itemData.isChecked}}">
+            <view class="frame1"  wx:if="{{itemData.is_check == '0'}}">
                 <view class="line1">
                     <image src="../../res/images/img/qrcode.jpg" mode="widthFix" class="qrcode"></image>
                 </view>
-                <text class="ids">627853362931</text>
+                <text class="ids">{{itemData.order_num}}</text>
             </view>
-            <view class="line-top"  wx:if="{{!itemData.isChecked}}"></view>
-            <view class="line-bottom {{itemData.isChecked ? 'line-bottom-check' : ''}}"></view>
+            <view class="line-top"  wx:if="{{itemData.is_check == '0'}}"></view>
+            <view class="line-bottom {{itemData.is_check == '1' ? 'line-bottom-check' : ''}}"></view>
         </view>
         <view class="shadow-frame">
             <view class='line2'>
@@ -21,24 +29,24 @@
                     <view class='year'>
                         <text>2</text>
                         <text>0</text>
-                        <text>1</text>
-                        <text>8</text>
+                        <text>{{util.sub(itemData.begin,2,3)}}</text>
+                        <text>{{util.sub(itemData.begin,3,4)}}</text>
                     </view>
-                    <view class='day'>09/08</view>
+                    <view class='day day{{itemData.type}}'>{{itemData.date}}</view>
                 </view>
-                <view class='logo'>
-                    <image src='../../res/images/img/logo1.png' mode='widthFix' class='logo-img'></image>
+                <view class="logo {{itemData.type == 1 ? '' : 'logo2'}}">
+                    <image src='{{imgSrc+itemData.cover}}' mode='widthFix' class='logo-img'></image>
                 </view>
             </view>
-            <view class='title'>{{itemData.name}}</view>
-            <view class='range'>10:00pm-3:00am</view>
-            <view class='address'>{{itemIndex}}上海市 巨鹿路168号</view>
+            <view class='title'>{{itemData.goods_name}}</view>
+            <view class='range'>{{itemData.hour_b}}-{{itemData.hour_e}}</view>
+            <view class='address'>{{itemData.address}}</view>
             <view class="user-info">
-                <view class="name">张三</view>
-                <view class="phone">13112341234</view>
+                <view class="name">{{itemData.name}}</view>
+                <view class="phone">{{itemData.mobile}}</view>
             </view>
             <view class="infos">
-                <view class="type">普通票</view>
+                <view class="type">{{itemData.sele}}</view>
                 <view class="index">{{itemIndex+1 < 10 ? '0' : ''}}{{itemIndex+1}}</view>
             </view>
         </view>

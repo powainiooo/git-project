@@ -110,12 +110,18 @@ Component({
     init(){
       if(this.data.showMenu){
         this.data.initButton.push('menu');
-      }else if(this.data.showClose){
+      }
+      if(this.data.showClose){
         this.data.initButton.push('close');
-      }else if(this.data.showSearch){
+      }
+      if(this.data.showSearch){
         this.data.initButton.push('search');
-      }else if(this.data.showShare){
+      }
+      if(this.data.showShare){
         this.data.initButton.push('share');
+      }
+      if(this.data.showShadow){
+        this.data.initButton.push('shadow');
       }
     },
     toggleSearch(event){
@@ -128,16 +134,17 @@ Component({
     openMenu(){
       this.data.isShowMenu = true;
       this.toggleMenu(this.data.isShowMenu);
-      if(this.data.showClose){
-        this.data.lastShowBtn = 'close';
-      }
-      if(this.data.showSearch){
-        this.data.lastShowBtn = 'search';
-        this.setData({
-          showSearch:false
-        });
-      }
+      //if(this.data.showClose){
+      //  this.data.lastShowBtn = 'close';
+      //}
+      //if(this.data.showSearch){
+      //  this.data.lastShowBtn = 'search';
+      //  this.setData({
+      //    showSearch:false
+      //  });
+      //}
       this.setData({
+        showSearch:false,
         showSearchFrame:false,
         showClose:true
       });
@@ -146,17 +153,29 @@ Component({
       if(this.data.isShowMenu){//关闭菜单
         this.data.isShowMenu = false;
         this.toggleMenu(this.data.isShowMenu);
-        if(this.data.lastShowBtn == 'search'){
-          this.setData({
-            showClose:false,
-            showShadow:false,
-            showSearch:true
-          })
-        }else{
-          this.setData({
-            showClose:false
-          })
+        //if(this.data.lastShowBtn == 'search'){
+        //  this.setData({
+        //    showClose:false,
+        //    showShadow:false,
+        //    showSearch:true
+        //  })
+        //}else{
+        //  this.setData({
+        //    showClose:false
+        //  })
+        //}'
+        let search = false,shadow = false;
+        if(this.data.initButton.includes('search')){
+          search = true;
         }
+        if(this.data.initButton.includes('shadow')){
+          shadow = true;
+        }
+        this.setData({
+          showClose:false,
+          showSearch:search,
+          showShadow:shadow
+        });
       }else{//其它关闭操作
         this.toggleShare();
         this.triggerEvent('doclose')

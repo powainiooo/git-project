@@ -15,3 +15,11 @@
 .item-list .item .infos .name{ margin:0 10rpx; padding: 20rpx 0; font-size: 27rpx; border-bottom: 1rpx solid #c0c0c0;}
 .item-list .item .infos .logo{ display: flex; justify-content: center; align-items: center; margin-top: 40rpx;}
 .item-list .item .infos .logo image{ width: 70rpx; height: 70rpx;}
+
+
+.load-hint{ margin-bottom: 50rpx;  font-size: 24rpx; color: #888888; text-align: center;}
+
+.result-frame{ margin:  0 50rpx 50rpx 50rpx;}
+.result-frame .icons{ font-size: 200rpx; color: #002aac; display: block; margin-bottom: 60rpx;}
+.result-frame .hint-en{ font-size: 100rpx; font-family: 'Helve'; line-height: 0.9;}
+.result-frame .hint-cn{ font-size: 72rpx; margin-top: 60rpx;}

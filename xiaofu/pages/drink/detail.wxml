@@ -1,16 +1,19 @@
 <!--index.wxml-->
 <view class="container bg-gray" id="bodyFrame">
-    <header-view show-menu="{{false}}" show-share="{{true}}" showShadow="{{true}}"></header-view>
+    <header-view show-menu="{{false}}"
+                 show-share="{{true}}"
+                 showShadow="{{true}}"
+                 binddoposter="drawPoster"></header-view>
 
     <view class='body buy-frame'>
         <view class="banner">
-            <image src="../../res/images/img/drink-img1.jpg" mode="widthFix"></image>
+            <image src="{{imgSrc+itemData.cover}}" mode="widthFix"></image>
         </view>
-        <view class="title">波特嘉金色气泡酒x2</view>
-        <view class="address">上海市 巨鹿路188号</view>
+        <view class="title">{{itemData.drink_name}}</view>
+        <view class="address">{{itemData.address}}</view>
         <view class="infos">
-            <view class="price">888<text>RMB</text></view>
-            <image src="../../res/images/img/logo3.jpg" mode="scaleToFill" class="logo"></image>
+            <view class="price">{{itemData.price}}<text>RMB</text></view>
+            <image src="{{imgSrc+itemData.logo_pic}}" mode="scaleToFill" class="logo"></image>
         </view>
         <view class="form-frame">
             <input placeholder="姓名" class="input" bindinput="checkValues" data-key="nameVal"/>
@@ -27,4 +30,4 @@
     </view>
 </view>
 <!-- 画图 -->
-<canvas canvas-id="poster" style='width:750px; height:760px; background-color:#fff; position: fixed; top: -1000px; left: -1000px;' />
+<canvas canvas-id="poster" style='width:750px; height:410px; background-color:#fff; position: fixed; top: -1000px; left: -1000px;' />

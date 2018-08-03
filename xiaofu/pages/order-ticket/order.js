@@ -1,32 +1,10 @@
 // pages/order-ticket/order.js
+const app = getApp();
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
     showTicketDetail:false,
     showTicketIndex:true,
-    listData:[
-      {
-        isChecked:false,
-        name:'1French kiwi jucie of one one one',
-        checkNums:1,
-        nonCheckNums:1
-      },
-      {
-        isChecked:true,
-        name:'2French kiwi jucie of one one one',
-        checkNums:2,
-        nonCheckNums:2
-      },
-      {
-        isChecked:false,
-        name:'3French kiwi jucie of one one one',
-        checkNums:3,
-        nonCheckNums:3
-      }
-    ],
+    listData:[],
     isSimple:true,
     detailTop:80,
     indexAniData:{},
@@ -38,7 +16,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    this.getListData();
   },
   /**
    * 显示详情
@@ -100,5 +78,18 @@ Page({
       }
     }
     return false;
+  },
+  getListData(){
+    let self = this;
+    wx.request({
+      url: app.globalData.ajaxSrc+'/user_order',
+      success: function(res) {
+        console.log(res.data);
+        let list = res.data.data.list;
+        self.setData({
+          listData:list
+        });
+      }
+    })
   }
 });

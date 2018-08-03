@@ -37,7 +37,8 @@ Page({
     page:1,
     keywords:'',
     city:'',
-    imgSrc:app.globalData.imgSrc
+    imgSrc:app.globalData.imgSrc,
+    shareImgSrc:''
   },
   //事件处理函数
   onLoad: function (options) {
@@ -115,6 +116,7 @@ Page({
   },
   //进入详情
   gotoDetail(e){
+    if(this.data.showTicketDetail) return;
     let top = e.currentTarget.offsetTop,
         index = e.target.dataset.index,
         id = e.target.dataset.id,
@@ -138,7 +140,7 @@ Page({
       //return;
       setTimeout(()=>{
         let animation = wx.createAnimation({
-          duration:500,
+          duration:200,
           timingFunction:'linear'
         });
         animation.opacity(0).step();
@@ -196,7 +198,7 @@ Page({
       });
 
       let animation = wx.createAnimation({
-        duration:500,
+        duration:200,
         timingFunction:'linear'
       });
       animation.opacity(1).step();
@@ -255,7 +257,7 @@ Page({
   },
   //生成海报
   drawPoster(){
-    let data = this.data.detailData.info,imgSrc = app.globalData.imgSrc,type = data.type;
+    let data = this.data.detailData.info,imgSrc = app.globalData.imgSrc,type = data.type,self=this;
     wx.showLoading();
     const ctx = wx.createCanvasContext('poster');
     //背景色
@@ -350,6 +352,7 @@ Page({
               destWidth:750,
               destHeight:750,
               success:function(res){
+                self.data.shareImgSrc = res.tempFilePath;
                 wx.saveImageToPhotosAlbum({
                   filePath: res.tempFilePath,
                   success(){
@@ -528,7 +531,9 @@ Page({
   //分享
   onShareAppMessage(res){
     return {
-      title:'test',
+      title:'test1',
+      //imageUrl:this.data.imgSrc+this.data.detailData.info.cover2,
+      //imageUrl:this.data.shareImgSrc,
       path:'pages/index/index?id=1000'
     }
   }

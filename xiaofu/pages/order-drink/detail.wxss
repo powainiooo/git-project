@@ -42,7 +42,7 @@
     background-color: #ffffff;
     border-bottom: 1rpx solid #f0f0f0;
 }
-.shadow-frame .imgs{ width: 100%; height: 200rpx;}
+.shadow-frame .imgs{ width: 100%; height: 200rpx; overflow: hidden;}
 .shadow-frame .imgs image{ width: 100%; height: 100%;}
 .shadow-frame .user-info{ border-bottom: 1rpx solid #f0f0f0; display: flex; background-color: #ffffff;}
 .shadow-frame .user-info .name{ width: 30%; box-sizing: border-box; border-right: 1rpx solid #f0f0f0; font-size: 36rpx; padding: 15rpx 20rpx;}

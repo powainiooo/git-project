@@ -11,7 +11,7 @@ Page({
     userInfo: {},
     detailData: {},
     singlePrice:0,
-    hasUserInfo: false,
+    hasUserInfo: app.globalData.userInfo !== null,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     addressList:[],
     addressIndex:0,
@@ -371,6 +371,110 @@ Page({
     });
 
   },
+  //生成分享图
+  drawSharePoster(){
+    let data = this.data.detailData.info,imgSrc = app.globalData.imgSrc,type = data.type,self=this;
+    const ctx = wx.createCanvasContext('posterShare');
+    //背景色
+    ctx.rect(0, 19, 750, 634);
+    ctx.setFillStyle('#ffffff');
+    ctx.fill();
+    //顶部Logo图
+    ctx.drawImage('../../res/images/ticket-top.png', 0, 0, 750, 19);
+    //日期
+    ctx.setFontSize(27);
+    ctx.setFillStyle('#000000');
+    let ten = data.begin.slice(2,3),one = data.begin.slice(3,4);
+    if(type == 1){
+      ctx.fillText(`2         0         ${ten}         ${one}`,20,64);
+    }else if(type == 2){
+      ctx.fillText(`2           0           ${ten}           ${one}`,20,64);
+    }else if(type == 3){
+      ctx.fillText(`2           0           ${ten}           ${one}`,20,64);
+    }
+    ctx.font = "27px 'Helve'";
+    if(type == 1){
+      ctx.setFontSize(100);
+      ctx.fillText(data.date,20,174);
+    }else if(type == 2){
+      ctx.setFontSize(80);
+      ctx.fillText(data.date,20,168);
+    }else if(type == 3){
+      ctx.setFontSize(60);
+      ctx.fillText(data.date,20,164);
+    }
+    //标题
+    ctx.setFontSize(44);
+    ctx.fillText(data.goods_name,20,264);
+    // 竖线
+    ctx.setStrokeStyle('#cecece');
+    ctx.beginPath();
+    if(type == 1){
+      ctx.moveTo(310,34);
+      ctx.lineTo(310,194);
+    }else if(type == 2){
+      ctx.moveTo(370,34);
+      ctx.lineTo(370,194);
+    }else if(type == 3){
+      ctx.moveTo(380,34);
+      ctx.lineTo(380,194);
+    }
+
+    ctx.stroke();
+    //横线 短
+    ctx.beginPath();
+    ctx.moveTo(0,84);
+    if(type == 1){
+      ctx.lineTo(310,84);
+    }else if(type == 2){
+      ctx.lineTo(370,84);
+    }else if(type == 3){
+      ctx.lineTo(380,84);
+    }
+    ctx.stroke();
+    //横线 长
+    ctx.beginPath();
+    ctx.moveTo(0,194);
+    ctx.lineTo(750,194);
+    ctx.stroke();
+    //logo
+    let logoXArr = [530-100,560-100,560-100];
+    wx.downloadFile({
+      url: imgSrc+data.cover,
+      success: function(res) {
+        if (res.statusCode === 200) {
+          ctx.drawImage(res.tempFilePath,logoXArr[type-1],114-70,200,140);
+        }
+      }
+    });
+
+    //详情图
+    wx.downloadFile({
+      url: imgSrc+data.cover2,
+      success: function(res1) {
+        if (res1.statusCode === 200) {
+          ctx.drawImage(res1.tempFilePath,0,294,750,650);
+          //底部logo
+          ctx.drawImage('../../res/images/bottom.png',450,334,300,300);
+          ctx.draw(true,function(){
+            wx.canvasToTempFilePath({
+              canvasId: 'posterShare',
+              x:0,
+              y:0,
+              width:750,
+              height:634,
+              destWidth:750,
+              destHeight:634,
+              success:function(res){
+                self.data.shareImgSrc = res.tempFilePath;
+              }
+            })
+          })
+        }
+      }
+    });
+
+  },
   //获取列表数据
   getListData(){
     let self = this;
@@ -423,6 +527,7 @@ Page({
           detailData:data.data,
           showTicketDetail:true
         });
+        self.drawSharePoster();
       }
     })
   },
@@ -464,7 +569,7 @@ Page({
           },
           success: function(res) {
             let city = res.result.address_component.city;
-            let cities = self.data.addressList,cityID,index;
+            let cities = self.data.addressList,cityID,index = -1;
             //判断本地地址是否匹配城市列表
             for(let i=0;i<cities.length;i++){
               let reg = new RegExp(cities[i].name);
@@ -474,7 +579,7 @@ Page({
                 break;
               }
             }
-            if(cityID != self.data.city){
+            if(index != -1 && cityID != self.data.city){
               wx.showModal({
                 content: '是否切换到 ' + city,
                 success: function(res) {
@@ -531,10 +636,9 @@ Page({
   //分享
   onShareAppMessage(res){
     return {
-      title:'test1',
-      //imageUrl:this.data.imgSrc+this.data.detailData.info.cover2,
-      //imageUrl:this.data.shareImgSrc,
-      path:'pages/index/index?id=1000'
+      title:this.data.detailData.info.goods_name,
+      imageUrl:this.data.shareImgSrc,
+      path:'pages/index/index?id='+this.data.detailData.info.id
     }
   }
 });

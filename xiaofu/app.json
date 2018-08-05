@@ -1,17 +1,18 @@
 {
   "pages": [
+    "pages/drink/index",
     "pages/index/index",
     "pages/drink/detail",
+    "pages/order-drink/order",
     "pages/order-drink/detail",
-    "pages/drink/index",
     "pages/order-ticket/order",
     "pages/member/member",
-    "pages/order-drink/order",
     "pages/order-ticket/detail",
     "pages/insured/insured",
     "pages/result/result",
     "pages/sponsor/list",
-    "pages/search/search"
+    "pages/search/search",
+    "pages/login/login"
   ],
   "window": {
     "backgroundTextStyle": "light",

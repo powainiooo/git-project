@@ -1,4 +1,4 @@
-// pages/order-ticket/detail.js
+// pages/login/login.js
 const app = getApp();
 Page({
 
@@ -6,46 +6,36 @@ Page({
    * 页面的初始数据
    */
   data: {
-    listData:[],
-    currentIndex:0,
-    duration:0,
-    notCheckNum:0,
-    checkNum:0
+  
+  },
+  onGotUserInfo(e){
+    app.globalData.userInfo = e.detail.userInfo;
+    wx.request({
+      url: self.globalData.ajaxSrc + '/wxuser_add',
+      data: {
+        openid: app.globalData.userOpenID,
+        country: e.detail.userInfo.country,
+        province: e.detail.userInfo.province,
+        city: e.detail.userInfo.city,
+        gender: e.detail.userInfo.gender,
+        nickName: e.detail.userInfo.nickName,
+        avatarUrl: e.detail.userInfo.avatarUrl
+      },
+      success: res => {
+        wx.redirectTo({
+          url: '/pages/index/index',
+        })
+      }
+    })
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options);
-    let index = options.index || 0;
-    this.getListData(index);
+  
   },
-  getListData(index){
-    let self = this;
-    wx.request({
-      url: app.globalData.ajaxSrc+'/user_order',
-      data:{
-        openid:app.globalData.userOpenID
-      },
-      success: function(res) {
-        let list = res.data.data.list,not=0,check=0;
-        for(let item of list){
-          if(item.is_check == '0'){
-            not++
-          }else if(item.is_check == '1'){
-            check++;
-          }
-        }
-        self.setData({
-          notCheckNum:not,
-          checkNum:check,
-          listData:list,
-          currentIndex:index
-        });
-      }
-    })
-  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

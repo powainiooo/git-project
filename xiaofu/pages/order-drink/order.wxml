@@ -5,30 +5,19 @@
         <view class='title-cn'><text>订单中心</text></view>
 
         <view class="item-list">
-            <view class="item" hover-class="item-touch" hover-start-time="10" bindtap="gotoDetail">
-                <image src="../../res/images/img/drink-img1.jpg" class="img" mode="aspectFill"></image>
+            <view class="item"
+                  wx:for="{{listData}}"
+                  wx:for-item="item"
+                  wx:key="{{item.id}}"
+                  hover-class="item-touch"
+                  hover-start-time="10"
+                  data-id="{{item.id}}"
+                  bindtap="gotoDetail">
+                <image src="{{imgSrc+item.order_pic}}" class="img" mode="aspectFill"></image>
                 <view class="infos">
-                    <view class="name">波特嘉金色气泡酒x2</view>
+                    <view class="name">{{item.title}}</view>
                     <view class="logo">
-                        <image src="../../res/images/img/logo3.jpg" mode="scaleToFill"></image>
-                    </view>
-                </view>
-            </view>
-            <view class="item" hover-class="item-touch" hover-start-time="10" bindtap="gotoDetail">
-                <image src="../../res/images/img/drink-img1.jpg" class="img" mode="aspectFill"></image>
-                <view class="infos">
-                    <view class="name">波特嘉金色气泡酒x2</view>
-                    <view class="logo">
-                        <image src="../../res/images/img/logo3.jpg" mode="scaleToFill"></image>
-                    </view>
-                </view>
-            </view>
-            <view class="item" hover-class="item-touch" hover-start-time="10" bindtap="gotoDetail">
-                <image src="../../res/images/img/drink-img1.jpg" class="img" mode="aspectFill"></image>
-                <view class="infos">
-                    <view class="name">波特嘉金色气泡酒x2</view>
-                    <view class="logo">
-                        <image src="../../res/images/img/logo3.jpg" mode="scaleToFill"></image>
+                        <image src="{{imgSrc+item.logo_pic}}" mode="scaleToFill"></image>
                     </view>
                 </view>
             </view>

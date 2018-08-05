@@ -72,17 +72,26 @@ Component({
       })
     },
     checkValues(event){
+      let data = this.data.itemData;
       let key = event.target.dataset.key;
       this.data[key] = event.detail.value;
-      if(this.data.nameVal != '' && this.data.phoneVal != '' && this.data.addressVal != ''){
-        this.setData({
-          btnDisabled:true
-        })
-      }else{
-        this.setData({
-          btnDisabled:false
-        })
+      let btn = false;
+      if(this.data.nameVal != '' && this.data.phoneVal != ''){
+        if(data.info.is_post == '1'){
+          if(this.data.addressVal != ''){
+            btn = true;
+          }
+        }
+        if(data.info.is_idnum == '1'){
+          if(this.data.idnum != ''){
+            btn = true;
+          }
+        }
+
       }
+      this.setData({
+        btnDisabled:btn
+      })
     },
     doPay(){
       let self = this;
@@ -90,6 +99,7 @@ Component({
         wx.request({
           url: self.data.ajaxSrc+'/create_order', //仅为示例，并非真实的接口地址
           data: {
+            openid:app.globalData.userOpenID,
             tid:self.data.itemData.info.id,
             name:self.data.nameVal,
             mobile:self.data.phoneVal,
@@ -98,9 +108,40 @@ Component({
             sele:self.data.selectTicket.select,
             nums:self.data.numbersArr[self.data.numberIndex]
           },
-          method:'POST',
           success: function(res) {
-            console.log(res.data)
+            let jsapi = res.data.jsapiparam;
+            let order_num = res.data.order_num;
+            app.globalData.ticketOrderNum = order_num;
+            app.globalData.ticketBuyNum = self.data.numbersArr[self.data.numberIndex];
+            wx.requestPayment({
+              'timeStamp': jsapi.timeStamp,
+              'nonceStr': jsapi.nonceStr,
+              'package': jsapi.package,
+              'signType': jsapi.signType,
+              'paySign': jsapi.paySign,
+              'success':function(res){
+                console.log('pay s');
+                console.log(res);
+                wx.request({
+                    url:self.data.ajaxSrc+'/pay_success',
+                    data:{
+                      tid:self.data.itemData.info.id,
+                      order_num:order_num
+                    },
+                    success:res=>{
+                      console.log('pay s o');
+                      console.log(res);
+                      wx.navigateTo({
+                        url: '/pages/result/result?page=ticketSuc'
+                      })
+                    }
+                })
+              },
+              'fail':function(res){
+                console.log('pay f');
+                console.log(res);
+              }
+            })
           }
         })
       }

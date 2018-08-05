@@ -132,18 +132,12 @@ Component({
       })
     },
     openMenu(){
+      console.log(app.globalData.userInfo);
+
       this.data.isShowMenu = true;
       this.toggleMenu(this.data.isShowMenu);
-      //if(this.data.showClose){
-      //  this.data.lastShowBtn = 'close';
-      //}
-      //if(this.data.showSearch){
-      //  this.data.lastShowBtn = 'search';
-      //  this.setData({
-      //    showSearch:false
-      //  });
-      //}
       this.setData({
+        userInfo:app.globalData.userInfo,
         showSearch:false,
         showSearchFrame:false,
         showClose:true

@@ -6,7 +6,7 @@ Page({
     inforList:[]
   },
   onLoad: function (options) {
-    let numbers = options.numbers || 2,arr=[];
+    let numbers = app.globalData.ticketBuyNum,arr=[];
     for(let i=0;i<numbers;i++){
       arr[i] = {
         username:'',
@@ -38,16 +38,19 @@ Page({
     if(self.data.btnDisabled){
       console.log(self.data.inforList);
       wx.request({
-        url: self.data.ajaxSrc+'/safe_person', //仅为示例，并非真实的接口地址
+        url: app.globalData.ajaxSrc+'/safe_person', //仅为示例，并非真实的接口地址
         data: {
-          order_num:'',
+          order_num:app.globalData.ticketOrderNum,
           person:self.data.inforList
         },
         method:'POST',
         success: function(res) {
-          console.log(res.data)
+          console.log(res.data);
+          wx.navigateTo({
+            url: '/pages/result/result?page=insuredSuc'
+          })
         }
-      })
+      });
       //wx.navigateTo({
       //  url: '/pages/result/result?page=insuredSuc'
       //})

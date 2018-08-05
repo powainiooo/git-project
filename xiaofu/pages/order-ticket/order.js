@@ -16,7 +16,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getListData();
+    if(app.globalData.userOpenID != null){
+      this.getListData();
+    }
+    app.userInfoReadyCallback = res => {
+      this.getListData();
+    }
   },
   /**
    * 显示详情
@@ -83,6 +88,9 @@ Page({
     let self = this;
     wx.request({
       url: app.globalData.ajaxSrc+'/user_order',
+      data:{
+        openid:app.globalData.userOpenID
+      },
       success: function(res) {
         console.log(res.data);
         let list = res.data.data.list;

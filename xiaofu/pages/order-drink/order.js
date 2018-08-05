@@ -1,52 +1,46 @@
 // pages/order-drink/order.js
+const app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+    listData:[],
+    imgSrc:app.globalData.imgSrc
   },
-  gotoDetail(){
+  gotoDetail(e){
     wx.navigateTo({
-      url: '/pages/order-drink/detail'
+      url: '/pages/order-drink/detail?oid='+e.currentTarget.dataset.id
     })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
-  },
+    if(app.globalData.userOpenID != null){
+      this.getListData();
+    }
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
+    app.userInfoReadyCallback = res => {
+      this.getListData();
+    }
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
+  getListData(){
+    let self = this;
+    wx.request({
+        url:app.globalData.ajaxSrc+"/order_center",
+        data:{
+          openid:app.globalData.userOpenID
+        },
+        success:res=>{
+          let list = res.data.data.list;
+          this.setData({
+            listData:list
+          });
+        }
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
@@ -67,4 +61,4 @@ Page({
   onShareAppMessage: function () {
   
   }
-})
+});

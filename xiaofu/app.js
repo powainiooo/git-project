@@ -1,6 +1,7 @@
 //app.js
 App({
   onLaunch: function () {
+    let self = this;
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
@@ -9,33 +10,76 @@ App({
     // 登录
     wx.login({
       success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
-      }
-    })
-    // 获取用户信息
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-          wx.getUserInfo({
-            success: res => {
-              // 可以将 res 发送给后台解码出 unionId
-              this.globalData.userInfo = res.userInfo
+        wx.request({
+          url: self.globalData.ajaxSrc+'/get_weixin',
+          data: {
+            code: res.code
+          },
+          header: {
+            'content-type': 'json'
+          },
+          success: function (res) {
+            self.globalData.userOpenID = res.data.openid;
+            // 查看是否授权
+            wx.getSetting({
+              success: function(res){
+                if (res.authSetting['scope.userLocation']) {
+                  // 已经授权，可以直接调用 getUserInfo 获取头像昵称
+                  wx.getUserInfo({
+                    success: function(res) {
+                      console.log(res.userInfo);
+                      self.globalData.userInfo = res.userInfo;
 
-              // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-              // 所以此处加入 callback 以防止这种情况
-              if (this.userInfoReadyCallback) {
-                this.userInfoReadyCallback(res)
+                      if (self.userInfoReadyCallback) {
+                        self.userInfoReadyCallback(res)
+                      }
+
+                      wx.request({
+                          url:self.globalData.ajaxSrc+'/wxuser_add',
+                          data:{
+                            openid:self.globalData.userOpenID,
+                            country:res.userInfo.country,
+                            province:res.userInfo.province,
+                            city:res.userInfo.city,
+                            gender:res.userInfo.gender,
+                            nickName:res.userInfo.nickName,
+                            avatarUrl:res.userInfo.avatarUrl
+                          },
+                        header: {
+                          'content-type': 'json'
+                        },
+                          success:res=>{
+                            console.log('add user success!');
+                          }
+                      })
+                    },
+                    fail(err){
+                      console.log('userinfo fail');
+                      console.log(err);
+                      wx.redirectTo({
+                        url: '/pages/login/login'
+                      })
+                    }
+                  })
+                }else{
+                  wx.redirectTo({
+                    url: '/pages/login/login'
+                  })
+                }
               }
-            }
-          })
-        }
+            })
+          }
+        })
       }
-    })
+    });
+
   },
   globalData: {
     userInfo: null,
+    userOpenID:null,
     ajaxSrc:'http://ticket.pc-online.cc/mobile/applet',
-    imgSrc:'http://ticket.pc-online.cc/upload/'
+    imgSrc:'http://ticket.pc-online.cc/upload/',
+    ticketOrderNum:null,
+    ticketBuyNum:0
   }
 });

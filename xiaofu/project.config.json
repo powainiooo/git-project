@@ -11,8 +11,8 @@
 		"newFeature": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.0.9",
-	"appid": "wx29a0ff4abab96a32",
+	"libVersion": "2.2.2",
+	"appid": "wx3b740b88a384f9ea",
 	"projectname": "xiaofu",
 	"isGameTourist": false,
 	"condition": {

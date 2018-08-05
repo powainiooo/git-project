@@ -1,20 +1,38 @@
 // pages/order-drink/detail.js
+const app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+    itemData:{},
+    imgSrc:app.globalData.imgSrc
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    let oid = options.oid;
+    console.log(oid);
+    this.getDetailData(oid);
   },
-
+  getDetailData(id){
+    let self = this;
+    wx.request({
+        url:app.globalData.ajaxSrc+"/order_info",
+        data:{
+          oid:id
+        },
+        success:res=>{
+          let data = res.data;
+          self.setData({
+            itemData:data.data
+          });
+        }
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

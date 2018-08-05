@@ -125,7 +125,7 @@ Page({
           },
           success: function(res) {
             let city = res.result.address_component.city;
-            let cities = self.data.addressList,cityID,index;
+            let cities = self.data.addressList,cityID,index = -1;
             //判断本地地址是否匹配城市列表
             for(let i=0;i<cities.length;i++){
               let reg = new RegExp(cities[i].name);
@@ -135,7 +135,7 @@ Page({
                 break;
               }
             }
-            if(cityID != self.data.city){
+            if(index != -1 && cityID != self.data.city){
               wx.showModal({
                 content: '是否切换到 ' + city,
                 success: function(res) {

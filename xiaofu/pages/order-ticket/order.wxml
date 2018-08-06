@@ -10,7 +10,7 @@
                   wx:for-index="index"
                   wx:for-item="item"
                   wx:key="index"
-                  data-index="{{index}}"
+                  data-id="{{item.id}}"
                   bindtap="gotoDetail"
                   hover-class="order-item-touch"
                   hover-start-time="10">

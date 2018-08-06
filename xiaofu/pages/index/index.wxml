@@ -44,6 +44,7 @@
                   wx:for-item="item"
                   wx:for-index="index"
                   wx:key="{{index}}"
+                  data-end="{{item.is_end}}"
                   bindtap="gotoDetail">
                 <view class="item {{listAnimatIndex == index ? selectTicketClass : ''}}"
                       animation="{{listAnimatIndex == index ? selectTicketAniData : indexAniData}}">

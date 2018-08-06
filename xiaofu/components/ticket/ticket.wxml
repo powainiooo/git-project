@@ -24,7 +24,7 @@
   <view class='title'>{{itemData.goods_name}}</view>
   <view class='range'>{{itemData.hour_b}}-{{itemData.hour_e}}</view>
   <view class='address'>{{itemData.address}}</view>
-  <view class="imgs-frame">
+  <view class="imgs-frame {{itemData.is_end == 'over'? 'sold-out' : ''}}">
     <image src='{{imgSrc+itemData.cover2}}' mode='widthFix' class='imgs'></image>
   </view>
 </view>

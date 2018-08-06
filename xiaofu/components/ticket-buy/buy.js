@@ -12,18 +12,10 @@ Component({
             obj = item;
           }
         }
-        let arr = [];
-        if(obj.max != ""){
-          let max = parseInt(obj.max);
-          for(let i=0;i<max;i++){
-            arr.push(i+1)
-          }
-        }else{
-          arr = [1,2,3,4,5,6,7,8,9,10];
-        }
+
+        this.setNums(obj);
         this.setData({
           typeList:newVal.anew,
-          numbersArr:arr,
           selectTicket:obj
         })
       }
@@ -54,6 +46,9 @@ Component({
       })
     },
     toggleTypeList(event){
+      let val = event.target.dataset.val == undefined ? -1 : event.target.dataset.val;
+      let obj = val == -1 ? this.data.selectTicket : this.data.typeList[val];
+      if(obj.nums == 0) return;
       let isShow = event.target.dataset.show;
       let animation = wx.createAnimation({
         duration:300,
@@ -63,8 +58,7 @@ Component({
 
       let dis = isShow ? '160rpx' : -this.data.typeList.length*100+'rpx';
       animation.bottom(dis).step();
-      let val = event.target.dataset.val == undefined ? -1 : event.target.dataset.val;
-      let obj = val == -1 ? this.data.selectTicket : this.data.typeList[val];
+      this.setNums(obj);
       this.setData({
         animDataTypeList:animation.export(),
         selectTicket:obj,
@@ -75,19 +69,24 @@ Component({
       let data = this.data.itemData;
       let key = event.target.dataset.key;
       this.data[key] = event.detail.value;
-      let btn = false;
-      if(this.data.nameVal != '' && this.data.phoneVal != ''){
-        if(data.info.is_post == '1'){
-          if(this.data.addressVal != ''){
-            btn = true;
-          }
+      let btn = true;
+      if(this.data.nameVal == ''){
+        btn = false;
+      }
+      let myreg=/^[1][3,4,5,7,8][0-9]{9}$/;
+      if(!myreg.test(this.data.phoneVal)){
+        btn = false
+      }
+      if(data.info.is_post == '1'){
+        if(this.data.addressVal == ''){
+          btn = false;
         }
-        if(data.info.is_idnum == '1'){
-          if(this.data.idnum != ''){
-            btn = true;
-          }
+      }
+      if(data.info.is_idnum == '1'){
+        var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+        if(!reg.test(this.data.idnum)){
+          btn = false;
         }
-
       }
       this.setData({
         btnDisabled:btn
@@ -149,6 +148,29 @@ Component({
     doClose(){
       wx.navigateTo({
         url: '/pages/index/index'
+      })
+    },
+    setNums(obj){
+      let arr = [];
+      let nums = parseInt(obj.nums);
+      if(obj.max != ""){
+        let max = parseInt(obj.max);
+        let val = max > nums ? nums : max;
+        for(let i=0;i<val;i++){
+          arr.push(i+1)
+        }
+      }else{
+        if(nums < 10){
+          for(let i=0;i<nums;i++){
+            arr.push(i+1)
+          }
+        }else{
+          arr = [1,2,3,4,5,6,7,8,9,10];
+        }
+      }
+      console.log(arr);
+      this.setData({
+        numbersArr:arr
       })
     }
   }

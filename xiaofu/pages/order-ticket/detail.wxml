@@ -2,7 +2,7 @@
     <header-view showMenu="{{false}}"></header-view>
     <!--详情列表 -->
     <view class="detail-frame bg-gray">
-        <swiper previous-margin="70rpx" next-margin="70rpx" current="{{currentIndex}}" duration="200" bindchange="swiperChange" style="height:1050rpx;">
+        <swiper previous-margin="70rpx" next-margin="70rpx" current="{{currentIndex}}" duration="200" bindchange="swiperChange" style="height:1100rpx;">
             <swiper-item class="swiper-item"
                          wx:for="{{listData}}"
                          wx:for-index="index"

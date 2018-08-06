@@ -64,9 +64,9 @@ Page({
     }).exec();
   },
   gotoDetail(e){
-    var index = e.currentTarget.dataset.index;
+    var id = e.currentTarget.dataset.id;
     wx.navigateTo({
-      url: '/pages/order-ticket/detail?index='+index
+      url: '/pages/order-ticket/detail?id='+id
     })
   },
   swiperChange(e){

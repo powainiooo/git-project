@@ -117,6 +117,7 @@ Page({
   //进入详情
   gotoDetail(e){
     if(this.data.showTicketDetail) return;
+    if(e.currentTarget.dataset.end == 'over') return;
     let top = e.currentTarget.offsetTop,
         index = e.target.dataset.index,
         id = e.target.dataset.id,
@@ -632,6 +633,10 @@ Page({
     this.data.page = 1;
     this.data.loadHint = '';
     this.getListData();
+    wx.pageScrollTo({
+      scrollTop: 0,
+      duration: 0
+    });
   },
   //分享
   onShareAppMessage(res){

@@ -17,11 +17,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options);
-    let index = options.index || 0;
-    this.getListData(index);
+    let id = options.id;
+    this.getListData(id);
   },
-  getListData(index){
+  getListData(id){
     let self = this;
     wx.request({
       url: app.globalData.ajaxSrc+'/user_order',
@@ -40,8 +39,7 @@ Page({
         self.setData({
           notCheckNum:not,
           checkNum:check,
-          listData:list,
-          currentIndex:index
+          listData:list
         });
       }
     })

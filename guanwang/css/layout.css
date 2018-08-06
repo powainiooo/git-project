@@ -65,7 +65,7 @@ header nav ul li a i{ margin-left: 3px;}
 .car-list{height:0; position: absolute; top: 72px; left: -30px; right: -30px; background-color: #fff; z-index: 200; overflow: hidden;
     transition: height 0.3s cubic-bezier(.53,.09,.58,.98);
 }
-.car-list ul{ width: 1000px; display: flex; margin: 30px auto 10px auto; flex-wrap: wrap;}
+.car-list ul{ width: 1250px; display: flex; margin: 30px auto 10px auto; flex-wrap: wrap;}
 .car-list ul li{ width:250px; height: 140px; text-align: center; margin: 0 0 20px 0;}
 .car-list ul li img{transition: all 0.2s cubic-bezier(.53,.09,.58,.98);}
 .car-list ul li img:hover{ transform: scale(1.1);}

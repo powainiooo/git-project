@@ -1,1 +1,4 @@
-<button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">获取用户信息</button>
+<view class="login-frame">
+    <view>申请获取您的公开信息（昵称、头像等）</view>
+    <button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">获取用户信息</button>
+</view>

@@ -1,0 +1,70 @@
+<style>
+    .index-swiper{ position: relative;}
+    .my-swiper{ height: 100vh;}
+    .my-swiper .swiper-slide{ height: 100%; background-repeat: no-repeat; background-size: cover; background-position: center center;background-image: url('../../assets/img/bg.jpg');}
+    .my-swiper .bg{ width: 100%; height: 100%; background-color: rgba(0,0,0,0.55); display: flex; flex-direction: column; justify-content: center;}
+    .my-swiper .bg .logo{ margin-left: 670px; margin-bottom: 140px; font-size: 40px; color: #ffffff;}
+    .my-swiper .bg .content{ font-size: 32px; color: #ffffff; margin-left: 670px;}
+    .index-swiper .tag{ height: 100vh; position: absolute; top: 0; right: 30px; display: flex; flex-direction: column; justify-content: center; z-index: 100; list-style: none;}
+    .index-swiper .tag li{ width: 10px; height: 10px; border-radius: 50%; border: 1px solid #fff; margin: 8px 0;}
+    .index-swiper .tag li.active{ border-color: #0333b3; background-color: #0333b3;}
+</style>
+
+<template>
+    <div class="index-swiper">
+        <swiper :options="options" ref="mySwiper" class="my-swiper">
+            <swiper-slide>
+                <div class="bg">
+                    <div class="logo"><i class="icon-logo"></i></div>
+                    <div class="content">更专业的票务服务1<br>Professional ticketing services</div>
+                </div>
+            </swiper-slide>
+            <swiper-slide>
+                <div class="bg">
+                    <div class="logo"><i class="icon-logo"></i></div>
+                    <div class="content">更专业的票务服务2<br>Professional ticketing services</div>
+                </div>
+            </swiper-slide>
+            <swiper-slide>
+                <div class="bg">
+                    <div class="logo"><i class="icon-logo"></i></div>
+                    <div class="content">更专业的票务服务3<br>Professional ticketing services</div>
+                </div>
+            </swiper-slide>
+        </swiper>
+        <ul class="tag">
+            <li v-for="(item,index) in 3" :class="index == slideIndex ? 'active' : ''"></li>
+        </ul>
+    </div>
+</template>
+
+<script type='es6'>
+    export default {
+        name: 'app',
+        data(){
+            let  self = this;
+            return{
+                options:{
+                    direction:'vertical',
+                    speed:500,
+                    loop:true,
+                    simulateTouch : false,
+                    autoplay:{
+                        delay:5000
+                    },
+                    on: {
+                        slideChangeTransitionStart: function(){
+                            self.slideIndex = this.realIndex
+                        }
+                    }
+                },
+                slideIndex:0
+            }
+        },
+        methods:{
+
+        }
+    }
+
+</script>
+

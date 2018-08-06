@@ -3,8 +3,20 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import VueAwesomeSwiper from 'vue-awesome-swiper'
+import 'swiper/dist/css/swiper.css'
+import '@/assets/css/reset.css';
+import '@/assets/css/components.css';
+import '@/assets/css/animate.min.css';
+import '@/assets/css/micons.css';
+import tModal from './components/common/modal'
+import iView from 'iview';
+import 'iview/dist/styles/iview.css';
 
 Vue.config.productionTip = false
+Vue.use(VueAwesomeSwiper)
+Vue.use(tModal);
+Vue.use(iView);
 
 /* eslint-disable no-new */
 new Vue({

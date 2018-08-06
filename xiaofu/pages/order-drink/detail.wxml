@@ -2,34 +2,34 @@
     <header-view showMenu="{{false}}"></header-view>
     <!--详情列表 -->
     <view class="detail-frame bg-gray">
-        <view class="ticket {{itemData.isChecked ? '' : 'shadow-top'}} {{isSimple ? 'ticket-simple' : ''}}">
-            <view class="check-icon" wx:if="{{itemData.isChecked}}"></view>
+        <view class="ticket {{itemData.is_check == '1' ? '' : 'shadow-top'}} {{isSimple ? 'ticket-simple' : ''}}">
+            <view class="check-icon" wx:if="{{itemData.is_check == '1'}}"></view>
             <view class="">
-                <view class="top {{itemData.isChecked ? '' : 'shadow-frame'}}">
-                    <view class="frame1 check-frame1" style="background-color: #f6f6f6;"  wx:if="{{itemData.isChecked}}">
+                <view class="top {{itemData.is_check == '1' ? '' : 'shadow-frame'}}">
+                    <view class="frame1 check-frame1" style="background-color: #f6f6f6;"  wx:if="{{itemData.is_check == '1'}}">
                         <view class="line1">已兑换</view>
                         <text class="ids">{{itemData.order_num}}</text>
                     </view>
-                    <view class="frame1"  wx:if="{{!itemData.isChecked}}">
+                    <view class="frame1"  wx:if="{{itemData.is_check == '0'}}">
                         <view class="line1">
                             <image src="../../res/images/img/qrcode.jpg" mode="widthFix" class="qrcode"></image>
                         </view>
                         <text class="ids">{{itemData.order_num}}</text>
                     </view>
-                    <view class="line-top"  wx:if="{{!itemData.isChecked}}"></view>
-                    <view class="line-bottom {{itemData.isChecked ? 'line-bottom-check' : ''}}"></view>
+                    <view class="line-top"  wx:if="{{itemData.is_check == '0'}}"></view>
+                    <view class="line-bottom {{itemData.is_check == '1' ? 'line-bottom-check' : ''}}"></view>
                 </view>
                 <view class="shadow-frame">
                     <view class='title'>{{itemData.title}}</view>
                     <view class='address'>{{itemData.address}}</view>
                     <view class="imgs"><image src="{{imgSrc+itemData.order_pic}}" mode="widthFix"></image></view>
                     <view class="user-info">
-                        <view class="name">张三</view>
-                        <view class="phone">13112341234</view>
+                        <view class="name">{{itemData.name}}</view>
+                        <view class="phone">{{itemData.mobile}}</view>
                     </view>
                     <view class="infos">
                         <view class="type">兑换券</view>
-                        <view class="index">1<text>张</text></view>
+                        <view class="index">{{itemData.nums}}<text>张</text></view>
                     </view>
                 </view>
             </view>

@@ -11,7 +11,7 @@ Page({
   onGotUserInfo(e){
     app.globalData.userInfo = e.detail.userInfo;
     wx.request({
-      url: self.globalData.ajaxSrc + '/wxuser_add',
+      url: app.globalData.ajaxSrc + '/wxuser_add',
       data: {
         openid: app.globalData.userOpenID,
         country: e.detail.userInfo.country,

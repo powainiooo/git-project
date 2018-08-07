@@ -29,12 +29,12 @@
                     duration="200"
                     bindchange="activityChange">
                 <swiper-item  class="swiper-item"
-                              wx:for="{{itemData.info.image_arr}}"
+                              wx:for="{{itemData.info.goods_desc}}"
                               wx:for-index="index"
                               wx:for-item="item"
                               wx:key="index">
-                    <image class="img" src="{{imgSrc+item}}" mode="aspectFill"></image>
-                    <view class="infos">{{itemData.info.goods_desc}}</view>
+                    <image class="img" src="{{imgSrc+item.img}}" mode="aspectFill"></image>
+                    <view class="infos">{{item.desc}}</view>
                 </swiper-item>
             </swiper>
             <view class="nav-dots">

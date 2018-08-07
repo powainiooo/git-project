@@ -30,7 +30,7 @@ Page({
     showBuyInfos:false,
     indexAniData:{},
     selectTicketAniData:{},
-    footerAniData:{},
+    footerPos:170,
     addrAniData:{},
     selectTicketTop:'0px',
     selectTicketClass:'',
@@ -144,6 +144,7 @@ Page({
       });
       animation2.top(self.data.lastTop).step();
       self.setData({
+        footerPos:0,
         showIndex:false,
         singlePrice:self.data.listData[index].minprice,
         loadHint:'',
@@ -199,7 +200,7 @@ Page({
       });
       animation2 = wx.createAnimation({
         duration:500,
-        timingFunction:'cubic-bezier(.22,.62,.4,1.16)'
+        timingFunction:'cubic-bezier(.22,.62,.37,1)'
       });
       animation2
           .top(this.data.lastTop)
@@ -207,6 +208,7 @@ Page({
           .right('10rpx')
           .step();
       this.setData({
+        footerPos:170,
         selectTicketAniData:animation2.export()
       });
     },100);
@@ -238,7 +240,7 @@ Page({
     });
     animation.bottom('-160rpx').step();
     this.setData({
-      footerAniData:animation.export(),
+      footerPos:170,
       showDetailsInfos:false,
       showBuyInfos:true
     })

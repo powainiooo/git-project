@@ -75,7 +75,7 @@
         <ticket-detail showInfos="{{showTicketDetail}}" showBuyInfos="{{showBuyInfos}}" itemData="{{detailData}}"></ticket-detail>
     </view>
 
-    <view class="footer" style="transform: translateY({{showIndex ? '170' : '0'}}rpx)">
+    <view class="footer" style="transform: translateY({{footerPos}}rpx)">
         <view class="price">{{singlePrice}}<text class="unit">RMB</text></view>
         <view class="btn" bindtap="gotoBuy">购买</view>
     </view>

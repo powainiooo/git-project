@@ -6,6 +6,6 @@
 
 .member-content{ font-size: 25rpx; color: #888888; padding: 40rpx;}
 .contact-content text{ line-height: 2;}
-.contact-content .btn-phone{ width:300rpx; font-size: 30rpx; color: #fff; padding: 20rpx 40rpx; border-radius: 40rpx; background: #002aac; margin-top: 60rpx; text-align: center; box-shadow: 6rpx 6rpx 20rpx rgba(0,0,0,0.3); transition: transform 0.3s ease-out;}
-.contact-content .btn-phone-touch{ transform: scale(0.95,0.95);}
+.contact-content .btn-phone{ width:300rpx; font-size: 30rpx; color: #fff; padding: 20rpx 40rpx; border-radius: 40rpx; background: #002aac; margin-top: 60rpx; text-align: center; box-shadow: 6rpx 6rpx 20rpx rgba(0,0,0,0.3); transition: transform 0.2s ease-out;}
+.contact-content .btn-phone-touch{ transform: scale(0.9,0.9);}
 .contact-content .line{ margin: 60rpx -40rpx 40rpx -40rpx; height: 1rpx; background-color: #e2e2e2;}

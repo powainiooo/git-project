@@ -171,10 +171,10 @@ Page({
   },
   //画分享图
   drawSharePoster(){
-    let data = this.data.itemData,imgSrc = this.data.imgSrc,self = this;
+    let data = this.data.itemData,imgSrc = this.data.imgSrc,self = this,offsetY = 100;
     const ctx = wx.createCanvasContext('posterShare');
     //背景色
-    ctx.rect(0, 0, 750, 410);
+    ctx.rect(0, 0, 750, 510);
     ctx.setFillStyle('#ffffff');
     ctx.fill();
     //详情图
@@ -182,41 +182,41 @@ Page({
       url: imgSrc+data.cover,
       success: function(res) {
         if (res.statusCode === 200) {
-          ctx.drawImage(res.tempFilePath,0,0,800,276);
+          ctx.drawImage(res.tempFilePath,0,offsetY,800,276);
           //右边白色遮罩
           ctx.setFillStyle('#ffffff');
-          ctx.fillRect(485, 0, 265, 410);
+          ctx.fillRect(485, offsetY, 265, 410);
           //右上角logo
-          ctx.drawImage('../../res/images/top3.png',0,0,188,188);
+          ctx.drawImage('../../res/images/top3.png',0,offsetY,188,188);
           //名称
           ctx.setFillStyle('#000');
           ctx.setFontSize(26);
           let len = data.drink_name.length,row = Math.ceil(len/9);
           for(let i=0;i<row;i++){
-            ctx.fillText(data.drink_name.slice(i*9,i*9+9), 500, 40*(i+1),230);
+            ctx.fillText(data.drink_name.slice(i*9,i*9+9), 500, 40*(i+1) + offsetY,230);
           }
           //横线
           ctx.beginPath();
-          ctx.moveTo(500,40*row+20);
-          ctx.lineTo(730,40*row+20);
+          ctx.moveTo(500,40*row+20 + offsetY);
+          ctx.lineTo(730,40*row+20 + offsetY);
           ctx.stroke();
           //底部logo
-          ctx.drawImage('../../res/images/bottom3.png',0,265,750,145);
+          ctx.drawImage('../../res/images/bottom3.png',0,265 + offsetY,750,145);
           //产品logo
           wx.downloadFile({
             url: imgSrc+data.logo_pic,
             success: function(res1) {
               if (res1.statusCode === 200) {
-                ctx.drawImage(res1.tempFilePath,582,150,70,70);
+                ctx.drawImage(res1.tempFilePath,582,150 + offsetY,70,70);
                 ctx.draw(true,function(){
                   wx.canvasToTempFilePath({
                     canvasId: 'posterShare',
                     x:0,
                     y:0,
                     width:750,
-                    height:410,
+                    height:510,
                     destWidth:750,
-                    destHeight:410,
+                    destHeight:510,
                     success:function(res2){
                       self.data.shareImgSrc = res2.tempFilePath;
                     }

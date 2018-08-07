@@ -19,7 +19,7 @@
 .buy-frame .ticket-type-list{ width: 100%; position: fixed; left: 0; bottom: 160rpx; box-shadow: 0 -5rpx 10rpx rgba(0,0,0,0.1); z-index: 100; background-color: #ffffff;}
 .buy-frame .ticket-type-list view{ height: 100rpx; box-sizing: border-box; font-size: 24rpx; display: flex; justify-content: center; align-items: center; position: relative;}
 .buy-frame .ticket-type-list view.disabled{ background-color: #b5b5b6; color: #ffffff;}
-.buy-frame .ticket-type-list view::after{ content: ''; position: absolute; bottom: 0; left: 50rpx; right: 50rpx; height: 2rpx; background-color: #b5b5b6;}
+.buy-frame .ticket-type-list view::after{ content: ''; position: absolute; bottom: 0; left: 50rpx; right: 50rpx; height: 2rpx; background-color: #f0f0f0;}
 .buy-frame .ticket-type-list view:last-child::after{ height: 0;}
 
 .hint-section{ margin: 40rpx 50rpx; font-size: 24rpx; color: #888888; line-height: 1.5; }

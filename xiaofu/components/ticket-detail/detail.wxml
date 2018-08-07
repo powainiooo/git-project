@@ -50,7 +50,7 @@
             <image src="{{imgSrc+itemData.info.cover}}" mode="widthFix" class="logo"></image>
             <view class="btn-phone"
                   hover-class="btn-phone-touch"
-                  hover-start-time="10"
+                  hover-stay-time="10"
                   bindtap="docall"
                   data-phone="{{itemData.info.mobile}}">{{itemData.info.mobile}}</view>
         </view>

@@ -13,8 +13,12 @@
 
     <!--  style="opacity: {{showTicketDetail ? '0' : '1'}}"-->
     <view class='body'>
-        <view wx:if="{{showIndex}}" animation="{{indexAniData}}">
-            <scroll-view scroll-x class='address-select' scroll-left="{{citiesLeft}}" scroll-with-animation>
+        <view>
+            <scroll-view scroll-x
+                         class='address-select'
+                         scroll-left="{{citiesLeft}}"
+                         scroll-with-animation
+                         style="transform: translateY({{showIndex ? '0' : '-120'}}rpx)">
                 <view class='address-frame' style='width:{{(addressList.length+1)*cityItemWidth}}px'>
                     <view data-id="0"
                           data-index="0"
@@ -34,7 +38,7 @@
                 </view>
             </scroll-view>
 
-            <image src="{{imgSrc+bannerImg}}" class='banner' mode='scaleToFill'></image>
+            <image src="{{imgSrc+bannerImg}}" class='banner' mode='scaleToFill' bindtap="bannerGoOut" wx:if="{{showIndex}}"></image>
         </view>
 
         <!--style="top:{{listAnimatIndex == index ? selectTicketTop : 0}};"-->
@@ -57,7 +61,7 @@
             </view>
         </view>
         <view class="load-hint" wx:if="{{loadHint == 'loading'}}">加载中</view>
-        <view class="load-hint" wx:if="{{loadHint == 'end'}}">已经到底啦</view>
+        <!--<view class="load-hint" wx:if="{{loadHint == 'end'}}">已经到底啦</view>-->
         <!--无搜索结果  -->
         <view class='result-frame' wx:if="{{loadHint == 'empty'}}">
             <view class='icons icon-cuowu'></view>
@@ -71,7 +75,7 @@
         <ticket-detail showInfos="{{showTicketDetail}}" showBuyInfos="{{showBuyInfos}}" itemData="{{detailData}}"></ticket-detail>
     </view>
 
-    <view class="footer" animation="{{footerAniData}}">
+    <view class="footer" style="transform: translateY({{showIndex ? '170' : '0'}}rpx)">
         <view class="price">{{singlePrice}}<text class="unit">RMB</text></view>
         <view class="btn" bindtap="gotoBuy">购买</view>
     </view>

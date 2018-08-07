@@ -1,10 +1,10 @@
 <template>
     <div class="n-btn"
-         :class="!isDisabled && isTouch ? 'n-btn-touch' : ''"
+         :class="[!isDisabled && isTouch ? 'n-btn-touch' : '',extraClass]"
+         @click="doclick"
          @mousedown="doTouch">
         <a href="javascript:;"
-           :disabled="isDisabled"
-           :class="extraClass">
+           :disabled="isDisabled">
             <slot></slot>
         </a>
     </div>
@@ -34,6 +34,9 @@
                 setTimeout(()=>{
                     this.isTouch = false;
                 },350)
+            },
+            doclick(){
+                this.$emit('dotap')
             }
         }
     }

@@ -17,7 +17,8 @@ Page({
     addressIndex:0,
     citiesLeft:0,
     bannerImg:'',
-    bannerLink:'',
+    bannerID:0,
+    bannerType:'3',
     listData:[],
     listSimpleIndex:-1,
     listAnimatIndex:-1,
@@ -30,6 +31,7 @@ Page({
     indexAniData:{},
     selectTicketAniData:{},
     footerAniData:{},
+    addrAniData:{},
     selectTicketTop:'0px',
     selectTicketClass:'',
     loadHint:'',
@@ -43,21 +45,50 @@ Page({
   //事件处理函数
   onLoad: function (options) {
     console.log(options.id);
-    let id = options.id || -1;
+    let id = options.id || -1,self = this;
     if(id != -1){
-      let animation3 = wx.createAnimation({
-        duration:0,
-        timingFunction:'cubic-bezier(.22,.62,.37,1)'
-      });
-      animation3.bottom(0).step();
+      this.getDetailData(id,function(){
+        let animation3 = wx.createAnimation({
+          duration:0,
+          timingFunction:'cubic-bezier(.22,.62,.37,1)'
+        });
+        animation3.bottom(0).step();
+        let animation = wx.createAnimation({
+          duration:200,
+          timingFunction:'linear'
+        });
+        animation.opacity(0).step();
+        self.setData({
+          showTicketDetail:true,
+          showTicketList:false,
+          toggleButton:false,
+          isSimple:false,
+          showIndex:false,
+          showDetailsInfos:true,
+          indexAniData:animation.export(),
+          footerAniData:animation3.export()
+        })
+      })
+    }else{
+      this.getAddressData();
+      let cityID = 0;
+      try {
+        cityID = wx.getStorageSync('lastCityID');
+      } catch (e) {
+        cityID = 0;
+      }
       this.setData({
-        showTicketDetail:true,
-        showTicketList:false,
-        toggleButton:false,
-        isSimple:false,
-        detailTop:'160rpx',
-        showDetailsInfos:true,
-        footerAniData:animation3.export()
+        city:cityID
+      });
+      this.getListData();
+
+      let self = this;
+      wx.getSystemInfo({
+        success: function(res) {
+          self.setData({
+            cityItemWidth:Math.floor(res.windowWidth/5)
+          });
+        }
       })
     }
     if (app.globalData.userInfo) {
@@ -86,26 +117,7 @@ Page({
         }
       })
     }
-    this.getAddressData();
-    let cityID = 0;
-    try {
-      cityID = wx.getStorageSync('lastCityID');
-    } catch (e) {
-      cityID = 0;
-    }
-    this.setData({
-      city:cityID
-    });
-    this.getListData();
 
-    let self = this;
-    wx.getSystemInfo({
-      success: function(res) {
-        self.setData({
-          cityItemWidth:Math.floor(res.windowWidth/5)
-        });
-      }
-    })
   },
   getUserInfo: function(e) {
     app.globalData.userInfo = e.detail.userInfo;
@@ -132,6 +144,7 @@ Page({
       });
       animation2.top(self.data.lastTop).step();
       self.setData({
+        showIndex:false,
         singlePrice:self.data.listData[index].minprice,
         loadHint:'',
         listAnimatIndex:index,
@@ -140,11 +153,6 @@ Page({
       });
       //return;
       setTimeout(()=>{
-        let animation = wx.createAnimation({
-          duration:200,
-          timingFunction:'linear'
-        });
-        animation.opacity(0).step();
         animation2
             .top('120rpx')
             .left(0)
@@ -153,22 +161,14 @@ Page({
               duration:500,
               timingFunction:'cubic-bezier(.22,.62,.4,1.16)'
             });
-        let animation3 = wx.createAnimation({
-          duration:500,
-          timingFunction:'cubic-bezier(.22,.62,.37,1)'
-        });
-        animation3.bottom(0).step();
         self.setData({
           listSimpleIndex:index,
-          indexAniData:animation.export(),
-          selectTicketAniData:animation2.export(),
-          footerAniData:animation3.export()
+          selectTicketAniData:animation2.export()
         });
       },50);
 
       setTimeout(()=>{
         self.setData({
-          showIndex:false,
           toggleButton:false,
           selectTicketClass:'item-absolute'
         });
@@ -197,12 +197,6 @@ Page({
         scrollTop: Math.abs(this.data.lastBodyTop),
         duration: 0
       });
-
-      let animation = wx.createAnimation({
-        duration:200,
-        timingFunction:'linear'
-      });
-      animation.opacity(1).step();
       animation2 = wx.createAnimation({
         duration:500,
         timingFunction:'cubic-bezier(.22,.62,.4,1.16)'
@@ -212,17 +206,10 @@ Page({
           .left('10rpx')
           .right('10rpx')
           .step();
-      let animation3 = wx.createAnimation({
-        duration:600,
-        timingFunction:'cubic-bezier(.22,.62,.37,1)'
-      });
-      animation3.bottom('-170rpx').step();
       this.setData({
-        indexAniData:animation.export(),
-        selectTicketAniData:animation2.export(),
-        footerAniData:animation3.export()
+        selectTicketAniData:animation2.export()
       });
-    },50);
+    },100);
     setTimeout(()=>{
       animation2.top(0).step({
         duration:0,
@@ -232,12 +219,12 @@ Page({
         selectTicketAniData:animation2.export(),
         selectTicketClass:''
       });
-    },700);
+    },800);
     setTimeout(()=>{
       this.setData({
         listAnimatIndex:-1
       });
-    },800);
+    },900);
   },
   //进入购买页
   gotoBuy(){
@@ -515,7 +502,7 @@ Page({
     })
   },
   //获取详情数据
-  getDetailData(id){
+  getDetailData(id,func){
     let self = this;
     wx.request({
       url: app.globalData.ajaxSrc+'/product_info', //仅为示例，并非真实的接口地址
@@ -529,6 +516,9 @@ Page({
           showTicketDetail:true
         });
         self.drawSharePoster();
+        if(typeof func == 'function'){
+          func();
+        }
       }
     })
   },
@@ -549,7 +539,8 @@ Page({
           addressList:city,
           addressIndex:index,
           bannerImg:res.data.data.cover,
-          bannerLink:res.data.data.blink
+          bannerID:res.data.data.b_id,
+          bannerType:res.data.data.type
         });
         self.getLocation();
       }
@@ -638,12 +629,24 @@ Page({
       duration: 0
     });
   },
+  //banner 跳转
+  bannerGoOut(){
+    let id = this.data.bannerID,type  = this.data.bannerType,src = '/pages/drink/index';
+    if(type == 1){
+      src = '/pages/index/detail?id='+id;
+    }else if(type == 2){
+      src = '/pages/drink/detail?id='+id;
+    }
+    wx.navigateTo({
+      url: src
+    })
+  },
   //分享
   onShareAppMessage(res){
     return {
       title:this.data.detailData.info.goods_name,
       imageUrl:this.data.shareImgSrc,
-      path:'pages/index/index?id='+this.data.detailData.info.id
+      path:'pages/index/detail?id='+this.data.detailData.info.id
     }
   }
 });

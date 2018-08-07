@@ -5,7 +5,7 @@
     .login-frame .code-line input{ width: 50%;}
     .login-frame .code-line .n-btn{ width: 40%; font-size: 12px;}
     .login-frame .code-line .n-btn a{font-size: 12px;}
-    .login-frame input{ width: 100%; box-sizing: border-box; border: 1px solid #ffffff; border-radius: 6px; font-size: 16px; padding: 9px 16px; color: #ffffff}
+    .login-frame input{ width: 100%; box-sizing: border-box; border: 1px solid #ffffff; border-radius: 6px; font-size: 16px; padding: 7px 16px; color: #ffffff}
     .login-frame input::-webkit-input-placeholder{ color: #ffffff;}
     .login-frame .line>a{ font-size: 12px; color: #ffffff;}
 </style>

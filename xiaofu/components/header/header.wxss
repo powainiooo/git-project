@@ -16,7 +16,7 @@
 
 .nav-frame{ width: 100%; height: calc(100% - 120rpx); background-color: #002aac; position: fixed; top: -100%; left: 0; z-index: 450; overflow-y: scroll;}
 .nav-frame .person-info{ margin: 0 15rpx; height: 220rpx; display: flex; align-items: center; border-bottom: 1rpx solid rgba(255,255,255,0.5);}
-.nav-frame .person-info .avatar{ width: 130rpx; height: 130rpx; border: 4rpx solid #000; border-radius: 8px; margin: 0 40rpx;}
+.nav-frame .person-info .avatar{ width: 140rpx; height: 140rpx; border-radius: 8px; margin: 0 40rpx;}
 .nav-frame .person-info .name{ font-size: 34rpx; color: #fff;}
 .nav-frame .nav-list{ margin-bottom: 300rpx;}
 .nav-frame .nav-list .nav-item{ height: 130rpx; display: flex; align-items: center; border-bottom: 1px solid rgba(0,0,0,0.4); padding-left: 40rpx;}

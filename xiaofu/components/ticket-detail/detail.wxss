@@ -20,7 +20,7 @@
 
 .detail-frame .contact-frame{ display: flex; justify-content: space-between; align-items: center; margin: 0 40rpx;}
 .detail-frame .contact-frame .logo{ width: 200rpx;}
-.detail-frame .contact-frame .btn-phone{ width: 340rpx; color: #ffffff; background-color: #002aac; text-align: center; font-size: 28rpx; padding: 20rpx 0; border-radius: 60rpx; box-shadow: 0 5rpx 20rpx rgba(0,0,0,0.4); transition: transform 0.2s ease-out;}
+.detail-frame .contact-frame .btn-phone{ width: 340rpx; color: #ffffff; background-color: #002aac; text-align: center; font-size: 28rpx; padding: 20rpx 0; border-radius: 60rpx; box-shadow: 0 5rpx 20rpx rgba(0,0,0,0.4); transition: transform 0.3s ease-out;}
 .detail-frame .contact-frame .btn-phone-touch{ transform: scale(0.95,0.95);}
 
 .recommond-swiper{ height: 600rpx;}

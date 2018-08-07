@@ -1,6 +1,6 @@
 @import '../../res/css/icons.wxss';
 
-.address-select{ height: 100rpx; background-color: #002aac;background: repeating-linear-gradient(90deg,#09268b, #002bb3 50%, #09268b 100%); position: fixed; top: 120rpx; left: 0; z-index: 400}
+.address-select{ height: 100rpx; background-color: #002aac;background: repeating-linear-gradient(90deg,#09268b, #002bb3 50%, #09268b 100%); position: fixed; top: 120rpx; left: 0; z-index: 400; transition: transform 0.5s cubic-bezier(.22,.62,.37,1);}
 .address-frame{ width: 100%; display: flex;}
 .address-frame view{ width: 150rpx; height: 100rpx; display: flex; justify-content: center; align-items: center; font-size: 30rpx; color: #0092db;}
 .address-frame .active{ font-size: 34rpx; color: #fff;}
@@ -18,7 +18,7 @@
 .index-buys{ margin-top: -440rpx; min-height: auto;}
 
 
-.footer{ width: 100%; height: 160rpx; position: fixed; bottom: -170rpx; left: 0; z-index: 500; background-color: #fff; display: flex;box-shadow: 0 -5rpx 10rpx rgba(0,0,0,0.1);}
+.footer{ width: 100%; height: 160rpx; position: fixed; bottom: 0; left: 0; z-index: 500; background-color: #fff; display: flex;box-shadow: 0 -5rpx 10rpx rgba(0,0,0,0.1);transition: transform 0.5s cubic-bezier(.22,.62,.37,1);}
 .footer .price{ width: 64%; font-size: 100rpx;font-family: 'Helve'; padding-bottom: 20rpx; display: flex; justify-content: center; align-items: center; color: #002aac;}
 .footer .price .unit{ font-size: 33rpx; align-self: flex-end; margin-bottom: 30rpx; margin-left: 10rpx;}
 .footer .btn{ width: 36%; font-size: 34rpx; color: #ffffff; background-color: #002aac; padding-bottom: 20rpx; display: flex; justify-content: center; align-items: center;}

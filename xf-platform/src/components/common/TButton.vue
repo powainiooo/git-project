@@ -36,6 +36,7 @@
                 },350)
             },
             doclick(){
+                if(this.isDisabled) return;
                 this.$emit('dotap')
             }
         }

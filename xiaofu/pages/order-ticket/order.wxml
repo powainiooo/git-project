@@ -4,45 +4,46 @@
         <view class='title-en'><text>Order\nCenter</text></view>
         <view class='title-cn'><text>订单中心</text></view>
 
-        <view class="order-list">
-            <view class="order-item"
-                  wx:for="{{listData}}"
-                  wx:for-index="index"
-                  wx:for-item="item"
-                  wx:key="index"
-                  data-id="{{item.id}}"
-                  bindtap="gotoDetail"
-                  hover-class="order-item-touch"
-                  hover-start-time="10">
-                <order-item itemData="{{item}}" itemIndex="{{index}}"></order-item>
+        <view class="order-frame {{isMove ? 'order-frame-left' : ''}}">
+            <view class="order-list">
+                <view class="order-item"
+                      wx:if="{{isList}}"
+                      wx:for="{{listData}}"
+                      wx:for-index="index"
+                      wx:for-item="item"
+                      wx:key="index"
+                      data-id="{{item.id}}"
+                      bindtap="gotoDetail"
+                      hover-class="order-item-touch"
+                      hover-start-time="10">
+                    <order-item itemData="{{item}}" itemIndex="{{index}}"></order-item>
+                </view>
+            </view>
+            <view class="item-list">
+                <view class="item"
+                      wx:if="{{isDrink}}"
+                      wx:for="{{listData2}}"
+                      wx:for-item="item"
+                      wx:key="{{item.id}}"
+                      hover-class="item-touch"
+                      hover-start-time="10"
+                      data-id="{{item.id}}"
+                      bindtap="gotoDetail">
+                    <image src="{{imgSrc+item.order_pic}}" class="img" mode="aspectFill"></image>
+                    <view class="infos">
+                        <view class="name">{{item.title}}</view>
+                        <view class="logo">
+                            <image src="{{imgSrc+item.logo_pic}}" mode="scaleToFill"></image>
+                        </view>
+                    </view>
+                </view>
             </view>
         </view>
 
+
         <view class="footer-tab">
-            <navigator class="active"><text>已购票务</text></navigator>
-            <navigator url="/pages/order-drink/order"><text>小夫特饮</text></navigator>
+            <view class="{{isMove ? '' : 'active'}}" data-val="{{false}}" bindtap="changeTab"><text>已购票务</text></view>
+            <view class="{{isMove ? 'active' : ''}}" data-val="{{true}}" bindtap="changeTab"><text>小夫特饮</text></view>
         </view>
     </view>
 </view>
-
-<!--&lt;!&ndash;详情列表 &ndash;&gt;-->
-<!--<view class="detail-frame bg-gray  {{showTicketIndex ? '' : 'details-show'}}"-->
-      <!--style="height: {{isSimple ? '245rpx' : '1500rpx'}};top:{{detailTop}}px"-->
-      <!--animation="{{detailAniData}}"-->
-      <!--wx:if="{{showTicketDetail}}">-->
-    <!--<swiper style="height: 1030rpx;" previous-margin="70rpx" next-margin="70rpx" current="{{currentIndex}}" bindchange="swiperChange">-->
-        <!--<swiper-item class="swiper-item {{!showTicketIndex || index == currentIndex ? '' : 'hide'}}"-->
-                     <!--wx:for="{{listData}}"-->
-                     <!--wx:for-index="index"-->
-                     <!--wx:for-item="item"-->
-                     <!--wx:key="index"-->
-                     <!--data-index="{{index}}">-->
-            <!--<order-item itemData="{{item}}" itemIndex="{{index}}" isSimple="{{isSimple}}"></order-item>-->
-        <!--</swiper-item>-->
-    <!--</swiper>-->
-    <!--<view class="check-infos">-->
-        <!--<view>未验票<text>02</text></view>-->
-        <!--<view>已验票<text>01</text></view>-->
-    <!--</view>-->
-    <!--<view class="hint-section">一个二维码对应一张门票，请提前将二维码给到同行伙伴，到活动现场后，将本二维码出示给工作人员用于验票进场</view>-->
-<!--</view>-->

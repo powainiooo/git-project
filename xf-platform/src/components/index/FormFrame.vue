@@ -1,12 +1,14 @@
 <style>
-    .form-frame{ width: 400px; height: 100vh; background: linear-gradient(165deg, #3052a7, #002aa6 54%,#003db9); position: absolute; top: 0; left: 0; z-index: 200; overflow: hidden;}
+    .form-frame{ width: 400px; height: 100vh; background: linear-gradient(165deg, #3052a7, #002aa6 54%,#003db9); position: absolute; top: 0; left: 0; z-index: 200; transition:width 0.8s cubic-bezier(.25,.71,.22,.99);}
     .log-frame{ width: 270px; position: absolute; left: 65px; top: 50%; margin-top: -230px;}
     .form-frame .logo{ font-size: 32px; color: #ffffff; position: absolute; top: 60px; left: 60px;}
     .reg-frame{ width: 300px; position: absolute; left: 50px; bottom: 0; z-index: 10;}
+    .org-frame{ position: absolute; left: 400px; bottom: 0; z-index: 10;}
+    .moveFunc{ animation-timing-function: cubic-bezier(.25,.71,.22,.99);}
 </style>
 
 <template>
-    <div class="form-frame">
+    <div class="form-frame" :style="{width:showOrganize ? '1350px' : '400px'}">
         <div class="logo"><i class="icon-logo"></i></div>
         <transition enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
             <section class="log-frame" v-if="showLogin || showForget">
@@ -16,12 +18,22 @@
                 </transition>
             </section>
         </transition>
-        <section class="reg-frame">
-            <register-frame
-                :showAll="showRegisterAll"
-                @doShowRegiterAll="doShowRegiterAll"
-                @doBackLogin="doHideRegiterAll"></register-frame>
-        </section>
+        <transition enter-active-class="animated slideInUp" leave-active-class="animated slideOutDown">
+            <section class="reg-frame" v-if="showRegister">
+                <register-frame
+                    :showAll="showRegisterAll"
+                    :registerType="registerType"
+                    @changeType="changeRegType"
+                    @doShowRegiterAll="doShowRegiterAll"
+                    @doNext2="doShowOrg"
+                    @doBackLogin="doHideRegiterAll"></register-frame>
+            </section>
+        </transition>
+        <transition enter-active-class="animated slideInUp moveFunc">
+            <section class="org-frame" v-if="showOrganize">
+                <org-frame :registerType="registerType"></org-frame>
+            </section>
+        </transition>
     </div>
 </template>
 
@@ -30,20 +42,31 @@
     import LoginFrame from '@/components/index/LoginFrame.vue'
     import ForgetFrame from '@/components/index/ForgetFrame.vue'
     import RegisterFrame from '@/components/index/RegisterFrame.vue'
+    import OrgFrame from '@/components/index/OrgFrame.vue'
     export default {
         name: 'app',
-        components:{TButton,LoginFrame,ForgetFrame,RegisterFrame},
+        components:{TButton,LoginFrame,ForgetFrame,RegisterFrame,OrgFrame},
         data(){
             return{
                 showLogin:true,
                 showForget:false,
-                showRegisterAll:true
+                showRegister:true,
+                showRegisterAll:false,
+                showOrganize:false,
+                registerType:'company'
             }
+        },
+        mounted(){
+            //setTimeout(()=>{
+            //    this.doShowOrg()
+            //},1000)
+
         },
         methods:{
             doShowForget(){
                 this.showLogin = false;
                 this.showForget = true;
+                this.showRegister = false;
             },
             doShowRegiterAll(){
                 this.showLogin = false;
@@ -52,6 +75,12 @@
             doHideRegiterAll(){
                 this.showLogin = true;
                 this.showRegisterAll = false;
+            },
+            doShowOrg(){
+                this.showOrganize = true;
+            },
+            changeRegType(type){
+                this.registerType = type;
             }
         }
     }

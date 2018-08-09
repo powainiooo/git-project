@@ -6,7 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    listData:[],
+    itemData:{},
     currentIndex:0,
     duration:0,
     notCheckNum:0,
@@ -23,13 +23,14 @@ Page({
   getListData(id){
     let self = this;
     wx.request({
-      url: app.globalData.ajaxSrc+'/user_order',
+      url: app.globalData.ajaxSrc+'/order_desc',
       data:{
-        openid:app.globalData.userOpenID
+        openid:app.globalData.userOpenID,
+        order_num:id
       },
       success: function(res) {
-        let list = res.data.data.list,not=0,check=0;
-        for(let item of list){
+        let data = res.data.data,not=0,check=0;
+        for(let item of data.child){
           if(item.is_check == '0'){
             not++
           }else if(item.is_check == '1'){
@@ -39,7 +40,7 @@ Page({
         self.setData({
           notCheckNum:not,
           checkNum:check,
-          listData:list
+          itemData:data
         });
       }
     })

@@ -6,22 +6,22 @@
     }
     module.exports.sub = sub;
 </wxs>
-<view class="ticket {{itemData.is_check == '1' ? '' : 'shadow-top'}} {{isSimple ? 'ticket-simple' : ''}}">
-    <view class="check-icon" wx:if="{{itemData.is_check == '1'}}"></view>
+<view class="ticket {{itemData.child[itemIndex].is_check == '1' ? '' : 'shadow-top'}} {{isSimple ? 'ticket-simple' : ''}}">
+    <view class="check-icon" wx:if="{{itemData.child[itemIndex].is_check == '1'}}"></view>
     <view class="">
-        <view class="top {{itemData.is_check == '1' ? '' : 'shadow-frame'}}">
-            <view class="frame1 check-frame1" style="background-color: #f6f6f6;"  wx:if="{{itemData.is_check == '1'}}">
+        <view class="top {{itemData.child[itemIndex].is_check == '1' ? '' : 'shadow-frame'}}">
+            <view class="frame1 check-frame1" style="background-color: #f6f6f6;"  wx:if="{{itemData.child[itemIndex].is_check == '1'}}">
                 <view class="line1">已验票</view>
                 <text class="ids">{{itemData.order_num}}</text>
             </view>
-            <view class="frame1"  wx:if="{{itemData.is_check == '0'}}">
+            <view class="frame1"  wx:if="{{itemData.child[itemIndex].is_check == '0'}}">
                 <view class="line1">
                     <image src="../../res/images/img/qrcode.jpg" mode="widthFix" class="qrcode"></image>
                 </view>
                 <text class="ids">{{itemData.order_num}}</text>
             </view>
-            <view class="line-top"  wx:if="{{itemData.is_check == '0'}}"></view>
-            <view class="line-bottom {{itemData.is_check == '1' ? 'line-bottom-check' : ''}}"></view>
+            <view class="line-top"  wx:if="{{itemData.child[itemIndex].is_check == '0'}}"></view>
+            <view class="line-bottom {{itemData.child[itemIndex].is_check == '1' ? 'line-bottom-check' : ''}}"></view>
         </view>
         <view class="shadow-frame">
             <view class='line2'>
@@ -38,7 +38,7 @@
                     <image src='{{imgSrc+itemData.cover}}' mode='widthFix' class='logo-img'></image>
                 </view>
             </view>
-            <view class='title'>{{itemData.goods_name}}</view>
+            <view class='title'>{{itemData.title}}</view>
             <view class='range'>{{itemData.hour_b}}-{{itemData.hour_e}}</view>
             <view class='address'>{{itemData.address}}</view>
             <view class="user-info">

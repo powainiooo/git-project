@@ -2,7 +2,7 @@
 <view class="container bg-gray">
   <view class='body buy-frame'>
 
-    <view class="price">{{selectTicket.price * numbersArr[numberIndex]}}<text class="unit">RMB</text></view>
+    <view class="price">{{selectTicket.price == 0 ? 0 :selectTicket.price * numbersArr[numberIndex]}}<text class="unit">RMB</text></view>
 
     <view class="form-frame">
       <input placeholder="姓名" class="input" bindinput="checkValues" data-key="nameVal"/>

@@ -11,6 +11,7 @@ Page({
     userInfo: {},
     detailData: {},
     singlePrice:0,
+    showSearchFrame:false,
     hasUserInfo: app.globalData.userInfo !== null,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     addressList:[],
@@ -123,6 +124,7 @@ Page({
       self.data.lastTop = top+rect.top+'px';
       self.setData({
         toggleButton:false,
+        showSearchFrame:false,
         footerPos:0,
         showIndex:false,
         singlePrice:self.data.listData[index].minprice,
@@ -164,6 +166,7 @@ Page({
       selectTicketClass:'item-fixed',
       toggleButton:true,
       showIndex:true,
+      detailData:{},
       showTicketDetail:false,
       showBuyInfos:false,
       selectTicketDuration:'0.5s',
@@ -335,10 +338,10 @@ Page({
     const ctx = wx.createCanvasContext('posterShare');
     //背景色
     ctx.rect(0, 19, 750, 634);
-    ctx.setFillStyle('#ffffff');
+    ctx.setFillStyle('#f6f6f6');
     ctx.fill();
     //顶部Logo图
-    ctx.drawImage('../../res/images/ticket-top.png', 0, 0, 750, 19);
+    ctx.drawImage('../../res/images/ticket-top.png', 0, 14, 750, 5);
     //日期
     ctx.setFontSize(27);
     ctx.setFillStyle('#000000');
@@ -478,7 +481,8 @@ Page({
     wx.request({
       url: app.globalData.ajaxSrc+'/product_info', //仅为示例，并非真实的接口地址
       data: {
-        tid: id
+        tid: id,
+        city: self.data.city
       },
       success: function(res) {
         let data = res.data;

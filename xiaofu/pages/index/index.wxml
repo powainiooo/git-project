@@ -6,6 +6,7 @@
             showMenu="{{toggleButton}}"
             showClose="{{!toggleButton}}"
             showShare="{{!toggleButton}}"
+            showSearchFrame="{{showSearchFrame}}"
             binddoclose="doClose"
             binddosearch="doSearch"
             binddoposter="drawPoster">
@@ -38,7 +39,7 @@
                 </view>
             </scroll-view>
 
-            <image src="{{imgSrc+bannerImg}}" class='banner' mode='scaleToFill' bindtap="bannerGoOut" wx:if="{{showIndex}}"></image>
+            <image src="{{imgSrc+bannerImg}}" class='banner' mode='scaleToFill' bindtap="bannerGoOut" wx:if="{{showIndex && bannerImg != ''}}"></image>
         </view>
 
         <view class="sponsor-logo" wx:if="{{activityID != '' && showIndex && listData.length != 0}}"><image src="{{imgSrc+sponsorSrc}}" mode="widthFix"></image></view>

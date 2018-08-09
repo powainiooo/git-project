@@ -4,12 +4,12 @@
     <view class="detail-frame bg-gray">
         <swiper previous-margin="70rpx" next-margin="70rpx" current="{{currentIndex}}" duration="200" bindchange="swiperChange" style="height:1100rpx;">
             <swiper-item class="swiper-item"
-                         wx:for="{{listData}}"
+                         wx:for="{{itemData.child}}"
                          wx:for-index="index"
                          wx:for-item="item"
                          wx:key="index"
                          data-index="{{index}}">
-                <order-item itemData="{{item}}" itemIndex="{{index}}" isSimple="{{isSimple}}"></order-item>
+                <order-item itemData="{{itemData}}" itemIndex="{{index}}" isSimple="{{isSimple}}"></order-item>
             </swiper-item>
         </swiper>
         <view class="check-infos">

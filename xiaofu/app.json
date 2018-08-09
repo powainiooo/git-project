@@ -1,8 +1,8 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/sponsor/list",
     "pages/order-ticket/order",
+    "pages/sponsor/list",
     "pages/drink/index",
     "pages/drink/detail",
     "pages/index/detail",

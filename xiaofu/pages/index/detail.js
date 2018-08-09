@@ -179,10 +179,10 @@ Page({
     const ctx = wx.createCanvasContext('posterShare');
     //背景色
     ctx.rect(0, 19, 750, 634);
-    ctx.setFillStyle('#ffffff');
+    ctx.setFillStyle('#f6f6f6');
     ctx.fill();
     //顶部Logo图
-    ctx.drawImage('../../res/images/ticket-top.png', 0, 0, 750, 19);
+    ctx.drawImage('../../res/images/ticket-top.png', 0, 14, 750, 5);
     //日期
     ctx.setFontSize(27);
     ctx.setFillStyle('#000000');

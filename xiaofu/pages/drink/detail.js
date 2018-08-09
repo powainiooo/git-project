@@ -184,7 +184,7 @@ Page({
         if (res.statusCode === 200) {
           ctx.drawImage(res.tempFilePath,0,offsetY,800,276);
           //右边白色遮罩
-          ctx.setFillStyle('#ffffff');
+          ctx.setFillStyle('#f6f6f6');
           ctx.fillRect(485, offsetY, 265, 410);
           //右上角logo
           ctx.drawImage('../../res/images/top3.png',0,offsetY,188,188);

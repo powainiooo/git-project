@@ -126,6 +126,9 @@ Component({
     },
     toggleSearch(event){
       let isShow = event.currentTarget.dataset.val;
+      if(isShow){
+        this.triggerEvent('dosearch','')
+      }
       this.setData({
         keywords:'',
         showSearchFrame:!isShow,

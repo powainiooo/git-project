@@ -229,7 +229,12 @@ Page({
       }
     });
   },
-
+  //返回特饮首页
+  doClose(){
+    wx.reLaunch({
+      url: '/pages/drink/index'
+    })
+  },
   /**
    * 用户点击右上角分享
    */

@@ -1,57 +1,32 @@
 // pages/sponsor/list.js
+const app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    dataList:[
-      {
-        imgUrl:'../../res/images/img/logo1.png',
-        url:''
-      },
-      {
-        imgUrl: '../../res/images/img/logo2.png',
-        url: ''
-      },
-      {
-        imgUrl: '../../res/images/img/logo1.png',
-        url: ''
-      },
-      {
-        imgUrl: '../../res/images/img/logo2.png',
-        url: ''
-      },
-      {
-        imgUrl: '../../res/images/img/logo1.png',
-        url: ''
-      },
-      {
-        imgUrl: '../../res/images/img/logo2.png',
-        url: ''
-      },
-      {
-        imgUrl: '../../res/images/img/logo1.png',
-        url: ''
-      },
-      {
-        imgUrl: '../../res/images/img/logo1.png',
-        url: ''
-      },
-      {
-        imgUrl: '../../res/images/img/logo1.png',
-        url: ''
-      }
-    ]
+    dataList:[],
+    imgSrc:app.globalData.imgSrc
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    this.getListData();
   },
-
+  getListData(){
+    let self = this;
+    wx.request({
+      url:app.globalData.ajaxSrc+'/re_company',
+      success(res){
+        self.setData({
+          dataList:res.data.data
+        })
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

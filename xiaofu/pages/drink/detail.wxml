@@ -3,6 +3,8 @@
     <header-view show-menu="{{false}}"
                  show-share="{{true}}"
                  showShadow="{{true}}"
+                 showClose="{{true}}"
+                 binddoclose="doClose"
                  binddoposter="drawPoster"></header-view>
 
     <view class='body buy-frame'>

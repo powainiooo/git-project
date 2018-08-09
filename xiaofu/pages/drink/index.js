@@ -19,6 +19,7 @@ Page({
     page:1,
     keywords:'',
     city:'',
+    bannerImg:'',
     imgSrc:app.globalData.imgSrc
   },
   gotoDetail(e){
@@ -103,6 +104,7 @@ Page({
         }
         self.setData({
           citiesLeft:self.data.cityItemWidth*(index-2),
+          bannerImg:res.data.data.drink,
           addressList:city,
           addressIndex:index
         });

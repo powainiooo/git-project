@@ -3,7 +3,8 @@
     <header-view></header-view>
     <view class='body'>
         <view class='result-frame'>
-            <view class='icons icon-chenggong'></view>
+            <view class="icon-auth"  wx:if="{{pageName == 'login'}}"></view>
+            <view class='icons icon-chenggong' wx:if="{{pageName != 'login'}}"></view>
             <view><text class='hint-en'>{{titleEn}}</text></view>
             <view class='hint-cn'>{{titleCn}}</view>
             <!-- 票务支付成功-->
@@ -40,6 +41,14 @@
             </view>
             <view class="footer" wx:if="{{pageName == 'drinkSuc'}}">
                 <view class="btn" style="width: 100%;" bindtap="gotoDrink">完成</view>
+            </view>
+
+            <!-- 授权申请-->
+            <view class="hint-frame" wx:if="{{pageName == 'login'}}">
+                <view class="hint-section"><text>申请获得您的公开信息（昵称、头像等），\n用于完成购票流程，拒绝无法使用本票务平台。</text></view>
+            </view>
+            <view class="footer" wx:if="{{pageName == 'login'}}">
+                <button class="btn" style="width: 100%;" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">允许使用</button>
             </view>
         </view>
     </view>

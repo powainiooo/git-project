@@ -127,13 +127,12 @@ Component({
     toggleSearch(event){
       let isShow = event.currentTarget.dataset.val;
       this.setData({
+        keywords:'',
         showSearchFrame:!isShow,
         showSearch: isShow
       })
     },
     openMenu(){
-      console.log(app.globalData.userInfo);
-
       this.data.isShowMenu = true;
       this.toggleMenu(this.data.isShowMenu);
       this.setData({
@@ -147,17 +146,6 @@ Component({
       if(this.data.isShowMenu){//关闭菜单
         this.data.isShowMenu = false;
         this.toggleMenu(this.data.isShowMenu);
-        //if(this.data.lastShowBtn == 'search'){
-        //  this.setData({
-        //    showClose:false,
-        //    showShadow:false,
-        //    showSearch:true
-        //  })
-        //}else{
-        //  this.setData({
-        //    showClose:false
-        //  })
-        //}'
         let search = false,shadow = false;
         if(this.data.initButton.includes('search')){
           search = true;

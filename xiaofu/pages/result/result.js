@@ -1,4 +1,5 @@
 // pages/result/result.js
+const app = getApp();
 Page({
 
   /**
@@ -14,13 +15,16 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let page = options.page || 'ticketSuc',titleEn,titleCn;
+    let page = options.page || 'login',titleEn,titleCn;
     if(page == 'ticketSuc' || page == 'drinkSuc'){
       titleEn = 'Payment\nSuccess!';
       titleCn = '支付成功！';
     }else if(page == 'insuredSuc'){
       titleEn = 'Insured\nSuccess!';
       titleCn = '投保成功！';
+    }else if(page == 'login'){
+      titleEn = 'Authorization';
+      titleCn = '授权申请';
     }
     this.setData({
       titleEn:titleEn,
@@ -48,11 +52,37 @@ Page({
       url: '/pages/drink/index'
     })
   },
+  onGotUserInfo(e){
+    app.globalData.userInfo = e.detail.userInfo;
+    wx.request({
+      url: app.globalData.ajaxSrc + '/wxuser_add',
+      data: {
+        openid: app.globalData.userOpenID,
+        country: e.detail.userInfo.country,
+        province: e.detail.userInfo.province,
+        city: e.detail.userInfo.city,
+        gender: e.detail.userInfo.gender,
+        nickName: e.detail.userInfo.nickName,
+        avatarUrl: e.detail.userInfo.avatarUrl
+      },
+      success: res => {
+        wx.redirectTo({
+          url: '/pages/index/index',
+        })
+      }
+    })
+  },
+  closeApp(){
+    console.log('close')
+    wx.navigateBack({
+      delta: -1
+    });
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+
   },
 
   /**

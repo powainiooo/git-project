@@ -13,7 +13,7 @@
 
     <!--  style="opacity: {{showTicketDetail ? '0' : '1'}}"-->
     <view class='body'>
-        <view>
+        <view wx:if="{{activityID == ''}}">
             <scroll-view scroll-x
                          class='address-select'
                          scroll-left="{{citiesLeft}}"
@@ -41,7 +41,10 @@
             <image src="{{imgSrc+bannerImg}}" class='banner' mode='scaleToFill' bindtap="bannerGoOut" wx:if="{{showIndex}}"></image>
         </view>
 
+        <view class="sponsor-logo" wx:if="{{activityID != '' && showIndex && listData.length != 0}}"><image src="{{imgSrc+sponsorSrc}}" mode="widthFix"></image></view>
+
         <!--style="top:{{listAnimatIndex == index ? selectTicketTop : 0}};"-->
+        <!--animation="{{listAnimatIndex == index ? selectTicketAniData : indexAniData}}"-->
         <view class='pro-list'>
             <view class="item-frame {{showIndex || listAnimatIndex == index ? '' : 'item-hide'}}"
                   wx:for="{{listData}}"
@@ -51,7 +54,7 @@
                   data-end="{{item.is_end}}"
                   bindtap="gotoDetail">
                 <view class="item {{listAnimatIndex == index ? selectTicketClass : ''}}"
-                      animation="{{listAnimatIndex == index ? selectTicketAniData : indexAniData}}">
+                      style="top:{{listAnimatIndex == index ? selectTicketTop : 0}}; transition-duration: {{selectTicketDuration}};left:{{selectTicketLeft}};right:{{selectTicketRight}}">
                     <ticket-item data-index="{{index}}"
                                  data-id="{{item.id}}"
                                  itemData="{{item}}"
@@ -70,12 +73,12 @@
         </view>
     </view>
 
-    <view class="index-details {{showBuyInfos ? 'index-buys' : ''}}" wx:if="{{!showIndex}}">
+    <view class="index-details {{showBuyInfos ? 'index-buys' : ''}} {{showTicketDetail ? '':'index-details-fixed'}}" >
         <!-- 详情页-->
-        <ticket-detail showInfos="{{showTicketDetail}}" showBuyInfos="{{showBuyInfos}}" itemData="{{detailData}}"></ticket-detail>
+        <ticket-detail showInfos="{{true}}" showBuyInfos="{{showBuyInfos}}" itemData="{{detailData}}"></ticket-detail>
     </view>
 
-    <view class="footer" style="transform: translateY({{footerPos}}rpx)">
+    <view class="footer" style="transform: translateY({{footerPos}}rpx); transition-duration: {{footerDuration}}">
         <view class="price">{{singlePrice}}<text class="unit">RMB</text></view>
         <view class="btn" bindtap="gotoBuy">购买</view>
     </view>

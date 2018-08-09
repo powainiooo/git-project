@@ -7,9 +7,9 @@
       wx:for-index="index" 
       wx:for-item="item" 
       wx:key="{{index}}" 
-      url="{{item.url}}"
+      url="/pages/index/index?id={{item.mid}}"
       hover-class='none'>
-        <image src="{{item.imgUrl}}" mode='aspectFit'></image>
+        <image src="{{item.logo_img}}" mode='aspectFit'></image>
       </navigator>
     </view>
   </view>

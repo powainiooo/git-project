@@ -10,7 +10,7 @@
 .notice-item .descript{ width: calc(100% - 140rpx); font-size: 24rpx; color: #888888; align-self: flex-end; line-height: 1.5; margin-bottom: 15rpx;}
 
 .activity-frame{position: relative;}
-.detail-frame .swiper{ min-height: 850rpx;}
+.detail-frame .swiper{ min-height: 640rpx;}
 .detail-frame .swiper-item{ overflow: visible; padding: 20rpx; box-sizing: border-box;}
 .detail-frame .swiper-item .img{ width: 100%; height: 330rpx; display: block; box-shadow: 0 0 20rpx rgba(0,0,0,0.4); border-radius: 10rpx;}
 .detail-frame .swiper-item .infos{ width: 100%; box-sizing: border-box; font-size: 24rpx; color: #888888; line-height: 1.8; margin-top: 80rpx; padding: 0 20rpx;}

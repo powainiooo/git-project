@@ -31,66 +31,49 @@ Page({
     indexAniData:{},
     selectTicketAniData:{},
     footerPos:170,
+    footerDuration:'0.5s',
     addrAniData:{},
     selectTicketTop:'0px',
+    selectTicketLeft:'10rpx',
+    selectTicketRight:'10rpx',
+    selectTicketDuration:'0s',
     selectTicketClass:'',
     loadHint:'',
     lastLoadHint:'',
     page:1,
     keywords:'',
     city:'',
+    activityID:'',
     imgSrc:app.globalData.imgSrc,
-    shareImgSrc:''
+    shareImgSrc:'',
+    sponsorSrc:''
   },
   //事件处理函数
   onLoad: function (options) {
     console.log(options.id);
-    let id = options.id || -1,self = this;
-    if(id != -1){
-      this.getDetailData(id,function(){
-        let animation3 = wx.createAnimation({
-          duration:0,
-          timingFunction:'cubic-bezier(.22,.62,.37,1)'
-        });
-        animation3.bottom(0).step();
-        let animation = wx.createAnimation({
-          duration:200,
-          timingFunction:'linear'
-        });
-        animation.opacity(0).step();
-        self.setData({
-          showTicketDetail:true,
-          showTicketList:false,
-          toggleButton:false,
-          isSimple:false,
-          showIndex:false,
-          showDetailsInfos:true,
-          indexAniData:animation.export(),
-          footerAniData:animation3.export()
-        })
-      })
-    }else{
+    let id = options.id || '',self = this,cityID = 0;
+    if(id == ''){
       this.getAddressData();
-      let cityID = 0;
       try {
         cityID = wx.getStorageSync('lastCityID');
       } catch (e) {
         cityID = 0;
       }
-      this.setData({
-        city:cityID
-      });
-      this.getListData();
-
-      let self = this;
-      wx.getSystemInfo({
-        success: function(res) {
-          self.setData({
-            cityItemWidth:Math.floor(res.windowWidth/5)
-          });
-        }
-      })
     }
+
+    this.setData({
+      activityID:id,
+      city:cityID
+    });
+    this.getListData();
+
+    wx.getSystemInfo({
+      success: function(res) {
+        self.setData({
+          cityItemWidth:Math.floor(res.windowWidth/5)
+        });
+      }
+    })
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -138,39 +121,30 @@ Page({
     wx.createSelectorQuery().select('#bodyFrame').boundingClientRect(function(rect){
       self.data.lastBodyTop = rect.top;
       self.data.lastTop = top+rect.top+'px';
-      let animation2 = wx.createAnimation({
-        duration:0,
-        timingFunction:'cubic-bezier(.22,.62,.4,1.16)'
-      });
-      animation2.top(self.data.lastTop).step();
       self.setData({
+        toggleButton:false,
         footerPos:0,
         showIndex:false,
         singlePrice:self.data.listData[index].minprice,
         loadHint:'',
         listAnimatIndex:index,
-        selectTicketAniData:animation2.export(),
-        selectTicketClass:'item-fixed'
+        selectTicketClass:'item-fixed',
+        selectTicketTop:self.data.lastTop
       });
       //return;
       setTimeout(()=>{
-        animation2
-            .top('120rpx')
-            .left(0)
-            .right(0)
-            .step({
-              duration:500,
-              timingFunction:'cubic-bezier(.22,.62,.4,1.16)'
-            });
         self.setData({
           listSimpleIndex:index,
-          selectTicketAniData:animation2.export()
+          selectTicketDuration:'0.5s',
+          selectTicketLeft:0,
+          selectTicketRight:0,
+          selectTicketTop:'120rpx'
         });
       },50);
 
       setTimeout(()=>{
         self.setData({
-          toggleButton:false,
+          selectTicketDuration:'0',
           selectTicketClass:'item-absolute'
         });
         wx.pageScrollTo({
@@ -183,6 +157,7 @@ Page({
   },
   //返回详情
   doClose(){//关闭详情页
+    if(!this.data.showTicketDetail) return;
     this.setData({
       loadHint:this.data.lastLoadHint,
       listSimpleIndex:-1,
@@ -190,7 +165,11 @@ Page({
       toggleButton:true,
       showIndex:true,
       showTicketDetail:false,
-      showBuyInfos:false
+      showBuyInfos:false,
+      selectTicketDuration:'0.5s',
+      selectTicketLeft:'10rpx',
+      selectTicketRight:'10rpx',
+      selectTicketTop:this.data.lastTop
     });
     let animation2;
     setTimeout(()=>{
@@ -198,52 +177,41 @@ Page({
         scrollTop: Math.abs(this.data.lastBodyTop),
         duration: 0
       });
-      animation2 = wx.createAnimation({
-        duration:500,
-        timingFunction:'cubic-bezier(.22,.62,.37,1)'
-      });
-      animation2
-          .top(this.data.lastTop)
-          .left('10rpx')
-          .right('10rpx')
-          .step();
       this.setData({
-        footerPos:170,
-        selectTicketAniData:animation2.export()
+        footerPos:170
       });
     },100);
     setTimeout(()=>{
-      animation2.top(0).step({
-        duration:0,
-        timingFunction:'cubic-bezier(.22,.62,.4,1.16)'
-      });
       this.setData({
-        selectTicketAniData:animation2.export(),
+        selectTicketDuration:'0',
+        selectTicketTop:'0',
         selectTicketClass:''
       });
     },800);
     setTimeout(()=>{
       this.setData({
+        footerDuration:'0.5s',
         listAnimatIndex:-1
       });
     },900);
   },
   //进入购买页
   gotoBuy(){
-    wx.pageScrollTo({
-      scrollTop: 0,
-      duration: 0
-    });
-    let animation = wx.createAnimation({
-      duration:0,
-      timingFunction:'cubic-bezier(.22,.62,.37,1)'
-    });
-    animation.bottom('-160rpx').step();
     this.setData({
-      footerPos:170,
-      showDetailsInfos:false,
-      showBuyInfos:true
-    })
+      footerDuration:'0s'
+    });
+    setTimeout(()=>{
+      wx.pageScrollTo({
+        scrollTop: 0,
+        duration: 0
+      });
+      this.setData({
+        footerPos:170,
+        showDetailsInfos:false,
+        showBuyInfos:true
+      })
+    },50);
+
   },
   //生成海报
   drawPoster(){
@@ -479,17 +447,18 @@ Page({
         keyword: self.data.keywords,
         page: self.data.page,
         city: self.data.city,
-        activityID: ''
+        activityID: self.data.activityID
       },
       success: function(res) {
-        let list = res.data.data.list,hint = '';
+        let list = res.data.data.list,hint = '',sponsorSrc = '';
         if(self.data.page == 1){
-          if(list.length < 10 && list.length > 0){
-            hint = 'end';
-          }else if(list.length == 0){
+          if(list.length == 0){
             hint = 'empty';
+          }else{
+            sponsorSrc = list[0].cover
           }
           self.setData({
+            sponsorSrc:sponsorSrc,
             loadHint:hint,
             listData:list
           });

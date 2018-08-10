@@ -10,7 +10,8 @@ Page({
     motto: 'Hello World',
     userInfo: {},
     detailData: {},
-    singlePrice:0,
+    selectData:{},
+    isSaling:false,
     showSearchFrame:false,
     hasUserInfo: app.globalData.userInfo !== null,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
@@ -122,12 +123,14 @@ Page({
     wx.createSelectorQuery().select('#bodyFrame').boundingClientRect(function(rect){
       self.data.lastBodyTop = rect.top;
       self.data.lastTop = top+rect.top+'px';
+      let sale = new Date().getTime() > parseInt(self.data.listData[index].sale_start)*1000;
       self.setData({
         toggleButton:false,
         showSearchFrame:false,
         footerPos:0,
         showIndex:false,
-        singlePrice:self.data.listData[index].minprice,
+        isSaling:sale,
+        selectData:self.data.listData[index],
         loadHint:'',
         listAnimatIndex:index,
         selectTicketClass:'item-fixed',
@@ -200,6 +203,8 @@ Page({
   },
   //进入购买页
   gotoBuy(){
+    if(!this.data.isSaling) return;
+    if(!this.data.detailData.info.is_end == 'over') return;
     this.setData({
       footerDuration:'0s'
     });
@@ -343,6 +348,7 @@ Page({
     //顶部Logo图
     ctx.drawImage('../../res/images/ticket-top.png', 0, 14, 750, 5);
     //日期
+    ctx.font = "27px 'Helve'";
     ctx.setFontSize(27);
     ctx.setFillStyle('#000000');
     let ten = data.begin.slice(2,3),one = data.begin.slice(3,4);
@@ -353,7 +359,6 @@ Page({
     }else if(type == 3){
       ctx.fillText(`2           0           ${ten}           ${one}`,20,64);
     }
-    ctx.font = "27px 'Helve'";
     if(type == 1){
       ctx.setFontSize(100);
       ctx.fillText(data.date,20,174);
@@ -576,6 +581,7 @@ Page({
   changeCity(e){
     let id = e.currentTarget.dataset.id,index = e.currentTarget.dataset.index;
     this.setData({
+      page:1,
       citiesLeft:this.data.cityItemWidth*(index-2),
       addressIndex:index,
       city:id,

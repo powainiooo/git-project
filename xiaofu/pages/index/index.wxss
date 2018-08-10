@@ -16,13 +16,17 @@
 
 .index-details{ min-height: 1000rpx; margin-top: 325rpx; background-color: #f6f6f6; transition:all 0.3s cubic-bezier(.22,.62,.37,1);}
 .index-details-fixed{ position: fixed; top: 0; left: -20000px;}
-.index-buys{ margin-top: -320rpx; min-height: auto;}
+.index-buys{ margin-top: -330rpx; min-height: auto;}
 
 
 .footer{ width: 100%; height: 160rpx; position: fixed; bottom: 0; left: 0; z-index: 500; background-color: #fff; display: flex;box-shadow: 0 -5rpx 10rpx rgba(0,0,0,0.1);transition: transform 0.5s cubic-bezier(.22,.62,.37,1);}
 .footer .price{ width: 64%; font-size: 100rpx;font-family: 'Helve'; padding-bottom: 20rpx; display: flex; justify-content: center; align-items: center; color: #002aac;}
 .footer .price .unit{ font-size: 33rpx; align-self: flex-end; margin-bottom: 30rpx; margin-left: 10rpx;}
 .footer .btn{ width: 36%; font-size: 34rpx; color: #ffffff; background-color: #002aac; padding-bottom: 20rpx; display: flex; justify-content: center; align-items: center;}
+.footer .btn-diabled{ background-color: rgb(181,181,182);}
+.footer .stop-sale{ width: 64%; display: flex; justify-content: center; color: #888888; font-size: 24rpx; flex-direction: column;}
+.footer .stop-sale view{ margin-left: 70rpx;}
+.footer .stop-sale view:first-child{ font-size: 34rpx;}
 
 .load-hint{ margin-bottom: 50rpx;  font-size: 24rpx; color: #888888; text-align: center;}
 

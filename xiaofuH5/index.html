@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8">
-    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="divport">
     <meta content="yes" name="apple-mobile-web-app-capable">
     <meta content="black" name="apple-mobile-web-app-status-bar-style">
     <meta content="telephone=no" name="format-detection">
@@ -11,14 +11,55 @@
     <title>新项目</title>
     <link href="css/reset.css" type="text/css" rel="stylesheet" />
     <link href="css/main.css" type="text/css" rel="stylesheet" />
+    <link href="css/icon.css" type="text/css" rel="stylesheet" />
 	<script src="js/jquery-2.1.1.min.js" type="application/javascript" language="javascript"></script>
     <script src="js/common.js" type="application/javascript" language="javascript"></script>
 </head>
 
 <body>
-    <style>
-        div{ width: 50%; background-color: rgba(0,0,0,0.5); padding: 10px; text-align: justify;}
-    </style>
-    <div>剑哥，P1是加了两端对齐样式的，在电脑和苹果都可以，P2是安卓手机上的，感觉两端对齐没起作用。我也上网找了其他的方法，在安卓里好像都不行。剑哥，“P1是加了两端对齐样式的，在电脑和苹果都可以，P2是安卓手机上的，感觉两端对齐没起作用。我也上网找了其他的方法，”在安卓里好像都不行。剑哥，P1是加了两端对齐样式的，在电脑和苹果都可以，P2是安卓手机上的，感觉两端对齐没起作用。我也上网找了其他的方法，在安卓里好像都不行。</div>
+    <header class="header">
+        <img src="images/logo.png" class="logo">
+        <a href="javascript:;" class="icons icon-guanbi"></a>
+    </header>
+    <div class="w76 mat mt10">
+        <div class="ticket">
+            <div class="">
+                <div class="top">
+                    <div class="frame1 check-frame1">
+                        <div class="line1">已验票</div>
+                    </div>
+                    <div class="line-top"></div>
+                    <div class="line-bottom"></div>
+                </div>
+                <div class="shadow-frame">
+                    <div class='line2'>
+                        <div class='date'>
+                            <div class='year'>
+                                <span>2</span>
+                                <span>0</span>
+                                <span>{{util.sub(itemData.begin,2,3)}}</span>
+                                <span>{{util.sub(itemData.begin,3,4)}}</span>
+                            </div>
+                            <div class='day day{{itemData.type}}'>{{itemData.date}}</div>
+                        </div>
+                        <div class="logo {{itemData.type == 1 ? '' : 'logo2'}}">
+                            <image src='{{imgSrc+itemData.cover}}' mode='widthFix' class='logo-img'></image>
+                        </div>
+                    </div>
+                    <div class='title'>{{itemData.title}}</div>
+                    <div class='range'>{{itemData.hour_b}}-{{itemData.hour_e}}</div>
+                    <div class='address'>{{itemData.address}}</div>
+                    <div class="user-info">
+                        <div class="name">{{itemData.name}}</div>
+                        <div class="phone">{{itemData.mobile}}</div>
+                    </div>
+                    <div class="infos">
+                        <div class="type">{{itemData.sele}}</div>
+                        <div class="index">{{itemIndex+1 < 10 ? '0' : ''}}{{itemIndex+1}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

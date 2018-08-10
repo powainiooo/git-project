@@ -80,8 +80,13 @@
     </view>
 
     <view class="footer" style="transform: translateY({{footerPos}}rpx); transition-duration: {{footerDuration}}">
-        <view class="price">{{singlePrice}}<text class="unit">RMB</text></view>
-        <view class="btn" bindtap="gotoBuy">购买</view>
+        <view class="price" wx:if="{{isSaling}}">{{selectData.minprice}}<text class="unit">RMB</text></view>
+        <view class="stop-sale" wx:if="{{!isSaling}}">
+            <view>未开售</view>
+            <view>开票时间：{{selectData.begin}} {{selectData.hour_b}}</view>
+        </view>
+        <view class="btn {{isSaling ? '' : 'btn-diabled'}}" bindtap="gotoBuy" wx:if="{{selectData.is_end != 'over'}}">购买</view>
+        <view class="btn btn-diabled" bindtap="gotoBuy" wx:if="{{selectData.is_end == 'over'}}">已售罄</view>
     </view>
 </view>
 <!-- 画图 -->

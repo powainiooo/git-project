@@ -5,10 +5,10 @@
         dpr = window.top === window.self? dpr : 1; //被iframe引用时，禁止缩放
     var recalc = function () {
         var width = docEl.clientWidth;
-        if (width / dpr > 640) {
-            width = 640 * dpr;
+        if (width / dpr > 750) {
+            width = 750 * dpr;
         }
-        docEl.style.fontSize = 100 * (width / 640) + 'px';
+        docEl.style.fontSize = 100 * (width / 750) + 'px';
     };
     recalc();
 })(document, window);

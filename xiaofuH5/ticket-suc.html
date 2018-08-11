@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <title>验票成功</title>
+    <link href="css/reset.css" type="text/css" rel="stylesheet" />
+    <link href="css/main.css" type="text/css" rel="stylesheet" />
+    <link href="css/helve.css" type="text/css" rel="stylesheet" />
+    <link href="css/icon.css" type="text/css" rel="stylesheet" />
+    <script src="js/jquery-2.1.1.min.js" type="application/javascript" language="javascript"></script>
+    <script src="js/common.js" type="application/javascript" language="javascript"></script>
+</head>
+<body style="background-color: #f6f6f6;">
+<header class="header">
+    <img src="images/logo.png" class="logo">
+    <a href="javascript:;" class="icons icon-guanbi" id="btnClose"></a>
+</header>
+<div class='result-frame'>
+    <div class="icon-auth"></div>
+    <div class='icons icon-chenggong'></div>
+    <div><text class='hint-en'>Ticket<br>Success</text></div>
+    <div class='hint-cn'>验票成功</div>
+    <section class="hint-section">若用户订单未及时更新状态，请尝试刷新用户订单。</section>
+    <div class="check-infos" style="margin-top:1rem;">
+        <div>未验票<span>09</span></div>
+        <div>已验票<span>01</span></div>
+    </div>
+</div>
+</body>
+</html>
+<script>
+    document.getElementById('btnClose').addEventListener('click',function(){
+        WeixinJSBridge.call('closeWindow');
+    })
+</script>

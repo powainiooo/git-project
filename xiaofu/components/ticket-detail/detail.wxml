@@ -65,7 +65,9 @@
                          wx:for="{{itemData.recommend}}"
                          wx:for-index="index"
                          wx:for-item="item"
-                         wx:key="index">
+                         wx:key="index"
+                         data-id="{{item.id}}"
+                         bindtap="gotoDetail">
                 <ticket-item extraClass="ticket-small" itemData="{{item}}"></ticket-item>
             </swiper-item>
         </swiper>

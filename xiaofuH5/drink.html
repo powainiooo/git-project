@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <title>特饮兑换</title>
+    <link href="css/reset.css" type="text/css" rel="stylesheet" />
+    <link href="css/main.css" type="text/css" rel="stylesheet" />
+    <link href="css/helve.css" type="text/css" rel="stylesheet" />
+    <link href="css/drink.css" type="text/css" rel="stylesheet" />
+    <link href="css/icon.css" type="text/css" rel="stylesheet" />
+    <script src="js/jquery-2.1.1.min.js" type="application/javascript" language="javascript"></script>
+    <script src="js/common.js" type="application/javascript" language="javascript"></script>
+</head>
+<!--WeixinJSBridge.call('closeWindow');-->
+<body style="background-color: #f6f6f6;">
+<header class="header">
+    <img src="images/logo.png" class="logo">
+</header>
+<div class="w76 mat" style="margin-top: 2rem; margin-bottom: 2rem;">
+    <div class="ticket shadow-top">
+        <div class="">
+            <div class="top shadow-frame">
+                <div class="frame1 check-frame1" style="background-color: #ffffff;">
+                    <div class="line1">未验票</div>
+                    <div class="ids">627853364921</div>
+                </div>
+            </div>
+            <div class="line" style="margin-top: -1px;"><img src="images/line.png"></div>
+            <div class="shadow-frame">
+                <div class='title'>起泡酒</div>
+                <div class='address'>深圳市</div>
+                <div class="imgs"><img src="images/drink-img1.jpg" /></div>
+                <div class="user-info">
+                    <div class="name">张三</div>
+                    <div class="phone">13812341234</div>
+                </div>
+                <div class="infos">
+                    <div class="type">兑换券</div>
+                    <div class="index">1<text>张</text></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footer">
+    <div class="btn-close">
+        <div class='icons icon-guanbi' id="btnClose"></div>
+    </div>
+    <div class="btn">确认验票</div>
+</div>
+</body>
+</html>
+<script>
+    document.getElementById('btnClose').addEventListener('click',function(){
+        WeixinJSBridge.call('closeWindow');
+    })
+</script>

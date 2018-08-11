@@ -55,15 +55,19 @@
   justify-content: center;
   align-items: center;
 }
-.ticket-small .line1 .logo{ height: 140rpx;}
+.ticket-small .line1 .logo{ height: 100rpx;}
 .ticket-frame .line1 .logo2{
   width: calc(100% - 400rpx);
 }
-.ticket-small .line1 .logo2{ height: 140rpx;}
+.ticket-small .line1 .logo2{ width: calc(100% - 260rpx); height: 140rpx;}
 
 .ticket-frame .line1 .logo .logo-img {
   width: 200rpx;
   height: 140rpx;
+}
+.ticket-small .line1 .logo .logo-img{
+  width: 100rpx;
+  height: 70rpx;
 }
 
 .ticket-frame .title {

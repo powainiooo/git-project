@@ -67,6 +67,11 @@ Component({
       wx.makePhoneCall({
         phoneNumber: phone//仅为示例，并非真实的电话号码
       })
+    },
+    gotoDetail(e){
+      wx.navigateTo({
+        url: '/pages/index/detail?id='+e.currentTarget.dataset.id
+      })
     }
   }
 })

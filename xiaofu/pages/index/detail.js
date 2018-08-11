@@ -11,7 +11,8 @@ Page({
     detailData:{},
     showBuyInfos:false,
     imageUrl:'',
-    singlePrice:0
+    singlePrice:0,
+    shareImgSrc:''
   },
   /**
    * 生命周期函数--监听页面加载
@@ -31,7 +32,9 @@ Page({
       },
       success: function(res) {
         let data = res.data;
+        let sale = new Date().getTime() > parseInt(data.data.info.sale_start)*1000;
         self.setData({
+          isSaling:sale,
           detailData:data.data,
           singlePrice:data.data.info.minprice,
           showTicketDetail:true
@@ -42,6 +45,8 @@ Page({
   },
   //进入购买页
   gotoBuy(){
+    if(!this.data.isSaling) return;
+    if(this.data.detailData.info.is_end == 'over') return;
     wx.pageScrollTo({
       scrollTop: 0,
       duration: 0
@@ -154,7 +159,6 @@ Page({
               destWidth:750,
               destHeight:750,
               success:function(res){
-                self.data.shareImgSrc = res.tempFilePath;
                 wx.saveImageToPhotosAlbum({
                   filePath: res.tempFilePath,
                   success(){
@@ -184,6 +188,7 @@ Page({
     //顶部Logo图
     ctx.drawImage('../../res/images/ticket-top.png', 0, 14, 750, 5);
     //日期
+    ctx.font = "27px 'Helve'";
     ctx.setFontSize(27);
     ctx.setFillStyle('#000000');
     let ten = data.begin.slice(2,3),one = data.begin.slice(3,4);
@@ -194,7 +199,6 @@ Page({
     }else if(type == 3){
       ctx.fillText(`2           0           ${ten}           ${one}`,20,64);
     }
-    ctx.font = "27px 'Helve'";
     if(type == 1){
       ctx.setFontSize(100);
       ctx.fillText(data.date,20,174);

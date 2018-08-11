@@ -27,6 +27,10 @@
             <picker bindchange="numberChange" value="{{numberIndex}}" range="{{numbersArr}}"  class="ticket-number">
                 <view>{{numbersArr[numberIndex]}} <text>张</text></view>
             </picker>
+            <view class="stop-sale">
+                <view>未开售</view>
+                <view>开票时间：{{detailData.info.begin}} {{detailData.info.hour_b}}</view>
+            </view>
             <view class="btn {{btnDisabled ? '' : 'btn-disabled'}}" bindtap="doPay">确认付款</view>
         </view>
     </view>

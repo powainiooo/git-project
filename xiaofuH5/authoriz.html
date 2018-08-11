@@ -1,0 +1,70 @@
+﻿<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <title>验票授权</title>
+    <link href="css/reset.css" type="text/css" rel="stylesheet" />
+    <link href="css/main.css" type="text/css" rel="stylesheet" />
+    <link href="css/helve.css" type="text/css" rel="stylesheet" />
+    <link href="css/ticket.css" type="text/css" rel="stylesheet" />
+    <link href="css/icon.css" type="text/css" rel="stylesheet" />
+	<script src="js/jquery-2.1.1.min.js" type="application/javascript" language="javascript"></script>
+    <script src="js/common.js" type="application/javascript" language="javascript"></script>
+</head>
+<!--WeixinJSBridge.call('closeWindow');-->
+<body style="background-color: #f6f6f6;">
+    <header class="header">
+        <img src="images/logo.png" class="logo">
+    </header>
+    <div class="w76 mat" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <div class="ticket">
+            <div class="">
+                <div class="top shadow-frame">
+                    <div class="frame1 check-frame1" style="background-color: #ffffff;">
+                        <div class="line1">验票授权</div>
+                    </div>
+                </div>
+                <div class="line" style="margin-top: -1px;"><img src="images/line.png"></div>
+                <div class="shadow-frame" style="margin-top: -1px;">
+                    <div class='line2'>
+                        <div class='date'>
+                            <div class='year'>
+                                <span>2</span>
+                                <span>0</span>
+                                <span>1</span>
+                                <span>8</span>
+                            </div>
+                            <div class='day day{{itemData.type}}'>08/01</div>
+                        </div>
+                        <div class="logo">
+                            <img src='images/logo1.png' />
+                        </div>
+                    </div>
+                    <div class='title'>sector</div>
+                    <div class='range'>10:00-14:00</div>
+                    <div class='address'>深圳市</div>
+                </div>
+            </div>
+        </div>
+        <section class="hint-section">获得授权后才可进行活动验票，活动授权二维码仅活动期间内有效。</section>
+    </div>
+
+    <div class="footer">
+        <div class="btn-close">
+            <div class='icons icon-guanbi' id="btnClose"></div>
+        </div>
+        <div class="btn">确认授权</div>
+    </div>
+</body>
+</html>
+<script>
+    document.getElementById('btnClose').addEventListener('click',function(){
+        WeixinJSBridge.call('closeWindow');
+    })
+</script>

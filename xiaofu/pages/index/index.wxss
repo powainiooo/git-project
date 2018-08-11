@@ -26,7 +26,7 @@
 .footer .btn-diabled{ background-color: rgb(181,181,182);}
 .footer .stop-sale{ width: 64%; display: flex; justify-content: center; color: #888888; font-size: 24rpx; flex-direction: column;}
 .footer .stop-sale view{ margin-left: 70rpx;}
-.footer .stop-sale view:first-child{ font-size: 34rpx;}
+.footer .stop-sale view:first-child{ font-size: 34rpx; margin-top: -20rpx;}
 
 .load-hint{ margin-bottom: 50rpx;  font-size: 24rpx; color: #888888; text-align: center;}
 

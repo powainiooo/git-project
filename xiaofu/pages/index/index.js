@@ -10,7 +10,6 @@ Page({
     motto: 'Hello World',
     userInfo: {},
     detailData: {},
-    selectData:{},
     isSaling:false,
     showSearchFrame:false,
     hasUserInfo: app.globalData.userInfo !== null,
@@ -30,11 +29,8 @@ Page({
     showIndex:true,
     showTicketDetail:false,
     showBuyInfos:false,
-    indexAniData:{},
-    selectTicketAniData:{},
     footerPos:170,
     footerDuration:'0.5s',
-    addrAniData:{},
     selectTicketTop:'0px',
     selectTicketLeft:'10rpx',
     selectTicketRight:'10rpx',
@@ -114,7 +110,7 @@ Page({
   //进入详情
   gotoDetail(e){
     if(this.data.showTicketDetail) return;
-    if(e.currentTarget.dataset.end == 'over') return;
+    //if(e.currentTarget.dataset.end == 'over') return;
     let top = e.currentTarget.offsetTop,
         index = e.target.dataset.index,
         id = e.target.dataset.id,
@@ -123,14 +119,10 @@ Page({
     wx.createSelectorQuery().select('#bodyFrame').boundingClientRect(function(rect){
       self.data.lastBodyTop = rect.top;
       self.data.lastTop = top+rect.top+'px';
-      let sale = new Date().getTime() > parseInt(self.data.listData[index].sale_start)*1000;
       self.setData({
         toggleButton:false,
         showSearchFrame:false,
-        footerPos:0,
         showIndex:false,
-        isSaling:sale,
-        selectData:self.data.listData[index],
         loadHint:'',
         listAnimatIndex:index,
         selectTicketClass:'item-fixed',
@@ -164,29 +156,28 @@ Page({
   doClose(){//关闭详情页
     if(!this.data.showTicketDetail) return;
     this.setData({
-      loadHint:this.data.lastLoadHint,
-      listSimpleIndex:-1,
-      selectTicketClass:'item-fixed',
-      toggleButton:true,
-      showIndex:true,
-      detailData:{},
-      showTicketDetail:false,
-      showBuyInfos:false,
-      selectTicketDuration:'0.5s',
-      selectTicketLeft:'10rpx',
-      selectTicketRight:'10rpx',
-      selectTicketTop:this.data.lastTop
+      detailData:{}
     });
-    let animation2;
     setTimeout(()=>{
+      this.setData({
+        loadHint:this.data.lastLoadHint,
+        listSimpleIndex:-1,
+        selectTicketClass:'item-fixed',
+        toggleButton:true,
+        showIndex:true,
+        showTicketDetail:false,
+        showBuyInfos:false,
+        selectTicketDuration:'0.5s',
+        selectTicketLeft:'10rpx',
+        selectTicketRight:'10rpx',
+        footerPos:170,
+        selectTicketTop:this.data.lastTop
+      });
       wx.pageScrollTo({
         scrollTop: Math.abs(this.data.lastBodyTop),
         duration: 0
       });
-      this.setData({
-        footerPos:170
-      });
-    },100);
+    },50);
     setTimeout(()=>{
       this.setData({
         selectTicketDuration:'0',
@@ -204,7 +195,7 @@ Page({
   //进入购买页
   gotoBuy(){
     if(!this.data.isSaling) return;
-    if(!this.data.detailData.info.is_end == 'over') return;
+    if(this.data.detailData.info.is_end == 'over') return;
     this.setData({
       footerDuration:'0s'
     });
@@ -318,7 +309,6 @@ Page({
               destWidth:750,
               destHeight:750,
               success:function(res){
-                self.data.shareImgSrc = res.tempFilePath;
                 wx.saveImageToPhotosAlbum({
                   filePath: res.tempFilePath,
                   success(){
@@ -491,7 +481,10 @@ Page({
       },
       success: function(res) {
         let data = res.data;
+        let sale = new Date().getTime() > parseInt(data.data.info.sale_start)*1000;
         self.setData({
+          isSaling:sale,
+          footerPos:0,
           detailData:data.data,
           showTicketDetail:true
         });
@@ -603,7 +596,11 @@ Page({
   doSearch(e){
     this.data.keywords = e.detail;
     this.data.page = 1;
+    this.data.city = '';
     this.data.loadHint = '';
+    this.setData({
+      addressIndex:0
+    });
     this.getListData();
     wx.pageScrollTo({
       scrollTop: 0,

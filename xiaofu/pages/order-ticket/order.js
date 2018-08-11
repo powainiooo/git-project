@@ -14,7 +14,8 @@ Page({
     imgSrc:app.globalData.imgSrc,
     isMove:false,
     isDrink:true,
-    isList:true
+    isList:true,
+    isEmpty:true
   },
 
   /**
@@ -42,6 +43,12 @@ Page({
       scrollTop: 0,
       duration: 0
     });
+    let empty = false;
+    if(val){
+      if(this.data.listData2.length == 0) empty = true;
+    }else{
+      if(this.data.listData.length == 0) empty = true;
+    }
     this.setData({
       isList:true,
       isDrink:true,
@@ -49,6 +56,7 @@ Page({
     });
     setTimeout(()=>{
       this.setData({
+        isEmpty:empty,
         isDrink:val,
         isList:!val
       });
@@ -63,8 +71,10 @@ Page({
       },
       success: function(res) {
         console.log(res.data);
-        let list = res.data.data.list;
+        let list = res.data.data.list,val = false;
+        if(list.length == 0 && !this.data.isMove) val = true;
         self.setData({
+          isEmpty:val,
           listData:list
         });
       }
@@ -78,8 +88,10 @@ Page({
         openid:app.globalData.userOpenID
       },
       success:res=>{
-        let list = res.data.data.list;
+        let list = res.data.data.list,val = false;
+        if(list.length == 0 && this.data.isMove) val = true;
         this.setData({
+          isEmpty:val,
           listData2:list
         });
       }

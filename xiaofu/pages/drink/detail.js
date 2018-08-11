@@ -10,6 +10,7 @@ Page({
     btnDisabled:false,
     itemData:{},
     shareImgSrc:'',
+    isSaling:false,
     imgSrc:app.globalData.imgSrc
   },
   checkValues(event){
@@ -92,7 +93,9 @@ Page({
       },
       success: function(res) {
         let info = res.data.data.info;
+        let sale = new Date().getTime() > parseInt(info.sale_start)*1000;
         self.setData({
+          isSaling:sale,
           itemData:info
         });
         self.drawSharePoster();
@@ -122,6 +125,7 @@ Page({
           //底部logo
           ctx.drawImage('../../res/images/bottom2.png',0,265,750,145);
           //名称
+          ctx.font = "27px 'Helve'";
           ctx.setFillStyle('#000');
           ctx.setFontSize(26);
           let len = data.drink_name.length,row = Math.ceil(len/9);
@@ -189,6 +193,7 @@ Page({
           //右上角logo
           ctx.drawImage('../../res/images/top3.png',0,offsetY,188,188);
           //名称
+          ctx.font = "27px 'Helve'";
           ctx.setFillStyle('#000');
           ctx.setFontSize(26);
           let len = data.drink_name.length,row = Math.ceil(len/9);

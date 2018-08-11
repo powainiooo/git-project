@@ -4,7 +4,7 @@
         <view class='title-en'><text>Order\nCenter</text></view>
         <view class='title-cn'><text>订单中心</text></view>
 
-        <view class="order-frame {{isMove ? 'order-frame-left' : ''}}">
+        <view class="order-frame {{isMove ? 'order-frame-left' : ''}}" wx:if="{{!isEmpty}}">
             <view class="order-list">
                 <view class="order-item"
                       wx:if="{{isList}}"
@@ -39,7 +39,12 @@
                 </view>
             </view>
         </view>
-
+        <!--无搜索结果  -->
+        <view class='result-frame' wx:if="{{isEmpty}}">
+            <view class='icons icon-cuowu'></view>
+            <view><text class='hint-en'>Irrelevant \n Content</text></view>
+            <view class='hint-cn'>无相关内容</view>
+        </view>
 
         <view class="footer-tab">
             <view class="{{isMove ? '' : 'active'}}" data-val="{{false}}" bindtap="changeTab"><text>已购票务</text></view>

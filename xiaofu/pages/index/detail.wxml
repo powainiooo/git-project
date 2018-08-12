@@ -19,13 +19,19 @@
     </view>
 
     <view class="footer" style="transform: translateY({{footerPos}}rpx); transition-duration: {{footerDuration}}">
-        <view class="price" wx:if="{{isSaling}}">{{detailData.info.minprice}}<text class="unit">RMB</text></view>
-        <view class="stop-sale" wx:if="{{!isSaling}}">
+        <view class="price" wx:if="{{detailData.info.is_end == '' || detailData.info.is_end == 'over'}}">{{detailData.info.minprice}}<text class="unit">RMB</text></view>
+        <view class="stop-sale" wx:if="{{detailData.info.is_end == 'nosale'}}">
             <view>未开售</view>
-            <view>开票时间：{{detailData.info.begin}} {{detailData.info.hour_b}}</view>
+            <view>开票时间：{{detailData.info.date_start}} {{detailData.info.hour_b}}</view>
         </view>
-        <view class="btn {{isSaling ? '' : 'btn-diabled'}}" bindtap="gotoBuy" wx:if="{{detailData.info.is_end != 'over'}}">购买</view>
-        <view class="btn btn-diabled" bindtap="gotoBuy" wx:if="{{detailData.info.is_end == 'over'}}">已售罄</view>
+        <view class="stop-sale" wx:if="{{detailData.info.is_end == 'salestop'}}">
+            <view>售票停止</view>
+            <view>如有疑问，详情请联系主办方</view>
+        </view>
+        <view class="btn" bindtap="gotoBuy" wx:if="{{detailData.info.is_end == ''}}">购买</view>
+        <view class="btn btn-diabled" wx:if="{{detailData.info.is_end == 'over'}}">已售罄</view>
+        <view class="btn btn-diabled" wx:if="{{detailData.info.is_end == 'nosale'}}">未开售</view>
+        <view class="btn btn-diabled" wx:if="{{detailData.info.is_end == 'salestop'}}">已停止</view>
     </view>
 </view>
 <!-- 画图 -->

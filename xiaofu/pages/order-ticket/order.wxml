@@ -27,9 +27,9 @@
                       wx:key="{{item.id}}"
                       hover-class="item-touch"
                       hover-start-time="10"
-                      data-id="{{item.id}}"
-                      bindtap="gotoDetail">
-                    <image src="{{imgSrc+item.order_pic}}" class="img" mode="aspectFill"></image>
+                      data-id="{{item.order_num}}"
+                      bindtap="gotoDetail2">
+                    <image src="{{imgSrc+item.cover}}" class="img" mode="aspectFill"></image>
                     <view class="infos">
                         <view class="name">{{item.title}}</view>
                         <view class="logo">

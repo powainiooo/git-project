@@ -12,7 +12,7 @@
                     </view>
                     <view class="frame1"  wx:if="{{itemData.is_check == '0'}}">
                         <view class="line1">
-                            <image src="../../res/images/img/qrcode.jpg" mode="widthFix" class="qrcode"></image>
+                            <image src="{{itemData.ewm_url}}" mode="widthFix" class="qrcode"></image>
                         </view>
                         <text class="ids">{{itemData.order_num}}</text>
                     </view>
@@ -22,14 +22,14 @@
                 <view class="shadow-frame">
                     <view class='title'>{{itemData.title}}</view>
                     <view class='address'>{{itemData.address}}</view>
-                    <view class="imgs"><image src="{{imgSrc+itemData.order_pic}}" mode="widthFix"></image></view>
+                    <view class="imgs"><image src="{{imgSrc+itemData.cover}}" mode="widthFix"></image></view>
                     <view class="user-info">
                         <view class="name">{{itemData.name}}</view>
                         <view class="phone">{{itemData.mobile}}</view>
                     </view>
                     <view class="infos">
                         <view class="type">兑换券</view>
-                        <view class="index">{{itemData.nums}}<text>张</text></view>
+                        <view class="index">{{itemData.nums}} <text>张</text></view>
                     </view>
                 </view>
             </view>

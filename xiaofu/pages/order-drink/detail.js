@@ -23,7 +23,8 @@ Page({
     wx.request({
         url:app.globalData.ajaxSrc+"/order_info",
         data:{
-          oid:id
+          openid:app.globalData.userOpenID,
+          order_num:id
         },
         success:res=>{
           let data = res.data;

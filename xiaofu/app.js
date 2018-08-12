@@ -70,6 +70,7 @@ App({
       }
     });
 
+    this.getAccessToken();
   },
   globalData: {
     userInfo: null,
@@ -77,6 +78,21 @@ App({
     ajaxSrc:'http://ticket.pc-online.cc/mobile/applet',
     imgSrc:'http://ticket.pc-online.cc/upload/',
     ticketOrderNum:null,
-    ticketBuyNum:0
+    ticketBuyNum:0,
+    access_token:''
+  },
+  getAccessToken(){
+    let self = this;
+    wx.request({
+        url:"https://api.weixin.qq.com/cgi-bin/token",
+        data:{
+          grant_type:'client_credential',
+          appid:'wx3b740b88a384f9ea',
+          secret:'a69d58d8e38d363c21f46a637a08fdfa'
+        },
+        success:res=>{
+          self.globalData.access_token = res.data.access_token;
+        }
+    })
   }
 });

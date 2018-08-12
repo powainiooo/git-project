@@ -10,7 +10,6 @@ Page({
     motto: 'Hello World',
     userInfo: {},
     detailData: {},
-    isSaling:false,
     showSearchFrame:false,
     hasUserInfo: app.globalData.userInfo !== null,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
@@ -194,8 +193,7 @@ Page({
   },
   //进入购买页
   gotoBuy(){
-    if(!this.data.isSaling) return;
-    if(this.data.detailData.info.is_end == 'over') return;
+    if(this.data.detailData.info.is_end != '') return;
     this.setData({
       footerDuration:'0s'
     });
@@ -481,9 +479,7 @@ Page({
       },
       success: function(res) {
         let data = res.data;
-        let sale = new Date().getTime() > parseInt(data.data.info.sale_start)*1000;
         self.setData({
-          isSaling:sale,
           footerPos:0,
           detailData:data.data,
           showTicketDetail:true

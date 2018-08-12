@@ -1,7 +1,7 @@
 <style>
     .form-frame{ width: 400px; height: 100vh; background: linear-gradient(165deg, #3052a7, #002aa6 54%,#003db9); position: absolute; top: 0; left: 0; z-index: 200; transition:width 0.8s cubic-bezier(.25,.71,.22,.99);}
     .log-frame{ width: 270px; position: absolute; left: 65px; top: 50%; margin-top: -230px;}
-    .form-frame .logo{ font-size: 32px; color: #ffffff; position: absolute; top: 60px; left: 60px;}
+    .form-frame>.logo{ font-size: 32px; color: #ffffff; position: absolute; top: 60px; left: 60px;}
     .reg-frame{ width: 300px; position: absolute; left: 50px; bottom: 0; z-index: 10;}
     .org-frame{ position: absolute; left: 400px; bottom: 0; z-index: 10;}
     .moveFunc{ animation-timing-function: cubic-bezier(.25,.71,.22,.99);}
@@ -34,6 +34,8 @@
                 <org-frame :registerType="registerType"></org-frame>
             </section>
         </transition>
+
+        <t-laws></t-laws>
     </div>
 </template>
 
@@ -43,9 +45,10 @@
     import ForgetFrame from '@/components/index/ForgetFrame.vue'
     import RegisterFrame from '@/components/index/RegisterFrame.vue'
     import OrgFrame from '@/components/index/OrgFrame.vue'
+    import TLaws from '@/components/common/TLaws.vue'
     export default {
         name: 'app',
-        components:{TButton,LoginFrame,ForgetFrame,RegisterFrame,OrgFrame},
+        components:{TButton,LoginFrame,ForgetFrame,RegisterFrame,OrgFrame,TLaws},
         data(){
             return{
                 showLogin:true,

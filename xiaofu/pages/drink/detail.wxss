@@ -18,13 +18,10 @@
 .buy-frame .footer-shaodow{ box-shadow: none; }
 .buy-frame .footer .ticket-type,.buy-frame .footer .ticket-number{padding-bottom: 10rpx; display: flex; justify-content: center; align-items: center; font-size: 24rpx;background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAUCAYAAADoZO9yAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAMBJREFUeNpi/P//PwOlgJGRUQFozgNKzGCigiMWAKkLQNqAIoNAIUIuBgKQI/5D8QcgNiDbLCo5gmLHUNMRFDmGGo4AWbyBUsdQwxEGhOSo6hBiLKLEMVRzBKWOoaojKNJDbQPJ1UsTR5AVpbRyBKlm0dQRJOU4WjuCWLPp4giiCkSoggm0dgQhx8AkD9DDEXgc04DeMPoIxA5AxRcYaAiA5icAqYUoDSyQC6GtKwEgfkBpk4/E1h3IQQ6gpAEQYABdR/dzEXcE3wAAAABJRU5ErkJggg=="); background-repeat: no-repeat; background-size: 22rpx 13rpx;}
 .buy-frame .footer .ticket-number{ width: 25%; background-color: #f5f5f5; font-size: 33rpx;  background-position: 78% 70rpx;align-items: stretch;}
-.buy-frame .footer-saleout .ticket-number{ display: none;}
 .buy-frame .footer .ticket-number view{ width: 100rpx; height: 100%; display: flex; justify-content: center; align-items: center;}
 .buy-frame .footer .ticket-number text{font-size: 24rpx;}
 .buy-frame .footer .btn{ width: 75%; background-color: #002aac; padding-bottom: 10rpx; display: flex; justify-content: center; align-items: center; font-size: 34rpx; color: #fff;}
-.buy-frame .footer-saleout .btn{ width: 36%;}
-.buy-frame .footer .btn-disabled{ background-color: #b5b5b6;}
-.buy-frame .footer .stop-sale{ width: 64%; justify-content: center; color: #888888; font-size: 24rpx; flex-direction: column; display: none; background-color: #ffffff;}
-.buy-frame .footer-saleout .stop-sale{ display: flex;}
+.buy-frame .footer .btn-disabled{ width: 36%; background-color: #b5b5b6;}
+.buy-frame .footer .stop-sale{ width: 64%; justify-content: center; color: #888888; font-size: 24rpx; flex-direction: column; display: flex; background-color: #ffffff;}
 .buy-frame .footer .stop-sale view{ margin-left: 70rpx;}
 .buy-frame .footer .stop-sale view:first-child{ font-size: 34rpx; margin-top: -20rpx;}

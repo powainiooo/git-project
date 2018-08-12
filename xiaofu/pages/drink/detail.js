@@ -11,7 +11,8 @@ Page({
     itemData:{},
     shareImgSrc:'',
     isSaling:false,
-    imgSrc:app.globalData.imgSrc
+    imgSrc:app.globalData.imgSrc,
+    wxcodeimg:''
   },
   checkValues(event){
     let key = event.target.dataset.key;
@@ -46,35 +47,52 @@ Page({
         success: function(res) {
           let jsapi = res.data.jsapiparam;
           let order_num = res.data.order_num;
-          wx.requestPayment({
-            'timeStamp': jsapi.timeStamp,
-            'nonceStr': jsapi.nonceStr,
-            'package': jsapi.package,
-            'signType': jsapi.signType,
-            'paySign': jsapi.paySign,
-            'success':function(res){
-              console.log('pay s');
-              console.log(res);
-              wx.request({
-                url:app.globalData.ajaxSrc+'/buysuccess',
-                data:{
-                  tid:self.data.orderID,
-                  order_num:order_num
-                },
-                success:res=>{
-                  console.log('pay s o');
-                  console.log(res);
-                  wx.navigateTo({
-                    url: '/pages/result/result?page=drinkSuc'
-                  })
-                }
-              })
-            },
-            'fail':function(res){
-              console.log('pay f');
-              console.log(res);
-            }
-          })
+          if(res.data.flag == 1) {//福利票
+            wx.request({
+              url:app.globalData.ajaxSrc+'/buysuccess',
+              data:{
+                tid:self.data.orderID,
+                order_num:order_num
+              },
+              success:res=>{
+                console.log('pay s o');
+                console.log(res);
+                wx.navigateTo({
+                  url: '/pages/result/result?page=drinkSuc'
+                })
+              }
+            })
+          }else{
+            wx.requestPayment({
+              'timeStamp': jsapi.timeStamp,
+              'nonceStr': jsapi.nonceStr,
+              'package': jsapi.package,
+              'signType': jsapi.signType,
+              'paySign': jsapi.paySign,
+              'success':function(res){
+                console.log('pay s');
+                console.log(res);
+                wx.request({
+                  url:app.globalData.ajaxSrc+'/buysuccess',
+                  data:{
+                    tid:self.data.orderID,
+                    order_num:order_num
+                  },
+                  success:res=>{
+                    console.log('pay s o');
+                    console.log(res);
+                    wx.navigateTo({
+                      url: '/pages/result/result?page=drinkSuc'
+                    })
+                  }
+                })
+              },
+              'fail':function(res){
+                console.log('pay f');
+                console.log(res);
+              }
+            })
+          }
         }
       })
     }
@@ -100,7 +118,10 @@ Page({
         });
         self.drawSharePoster();
       }
-    })
+    });
+    setTimeout(()=>{
+      this.getCode();
+    },1000)
   },
   //画海报
   drawPoster(){
@@ -240,6 +261,24 @@ Page({
       url: '/pages/drink/index'
     })
   },
+  getCode(at){
+    let self = this;
+    wx.request({
+      url:"https://api.weixin.qq.com/wxa/getwxacode?access_token="+app.globalData.access_token,
+      method:'POST',
+      data:{
+        path:'pages/index/index'
+      },
+      responseType:'arraybuffer',
+      success:res=>{
+        console.log(res);
+        self.setData({
+          wxcodeimg:wx.arrayBufferToBase64(res.data)
+        })
+      }
+    })
+  },
+
   /**
    * 用户点击右上角分享
    */

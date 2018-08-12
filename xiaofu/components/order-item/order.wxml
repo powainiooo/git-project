@@ -16,7 +16,7 @@
             </view>
             <view class="frame1"  wx:if="{{itemData.child[itemIndex].is_check == '0'}}">
                 <view class="line1">
-                    <image src="../../res/images/img/qrcode.jpg" mode="widthFix" class="qrcode"></image>
+                    <image src="{{itemData.child[itemIndex].ewm_url}}" mode="widthFix" class="qrcode"></image>
                 </view>
                 <text class="ids">{{itemData.order_num}}</text>
             </view>

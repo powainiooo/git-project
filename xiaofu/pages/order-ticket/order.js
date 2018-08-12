@@ -37,6 +37,12 @@ Page({
       url: '/pages/order-ticket/detail?id='+id
     })
   },
+  gotoDetail2(e){
+    var id = e.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: '/pages/order-drink/detail?oid='+id
+    })
+  },
   changeTab(e){
     let val = e.currentTarget.dataset.val;
     wx.pageScrollTo({

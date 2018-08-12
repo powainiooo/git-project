@@ -112,16 +112,32 @@ Component({
             let order_num = res.data.order_num;
             app.globalData.ticketOrderNum = order_num;
             app.globalData.ticketBuyNum = self.data.numbersArr[self.data.numberIndex];
-            wx.requestPayment({
-              'timeStamp': jsapi.timeStamp,
-              'nonceStr': jsapi.nonceStr,
-              'package': jsapi.package,
-              'signType': jsapi.signType,
-              'paySign': jsapi.paySign,
-              'success':function(res){
-                console.log('pay s');
-                console.log(res);
-                wx.request({
+            if(res.data.flag == 1){//福利票
+              wx.request({
+                url:self.data.ajaxSrc+'/pay_success',
+                data:{
+                  tid:res.data.tid,
+                  order_num:order_num
+                },
+                success:res=>{
+                  console.log('pay s o');
+                  console.log(res);
+                  wx.navigateTo({
+                    url: '/pages/result/result?page=ticketSuc'
+                  })
+                }
+              })
+            }else{
+              wx.requestPayment({
+                'timeStamp': jsapi.timeStamp,
+                'nonceStr': jsapi.nonceStr,
+                'package': jsapi.package,
+                'signType': jsapi.signType,
+                'paySign': jsapi.paySign,
+                'success':function(res){
+                  console.log('pay s');
+                  console.log(res);
+                  wx.request({
                     url:self.data.ajaxSrc+'/pay_success',
                     data:{
                       tid:self.data.itemData.info.id,
@@ -134,13 +150,14 @@ Component({
                         url: '/pages/result/result?page=ticketSuc'
                       })
                     }
-                })
-              },
-              'fail':function(res){
-                console.log('pay f');
-                console.log(res);
-              }
-            })
+                  })
+                },
+                'fail':function(res){
+                  console.log('pay f');
+                  console.log(res);
+                }
+              })
+            }
           }
         })
       }

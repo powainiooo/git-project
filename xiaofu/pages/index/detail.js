@@ -32,9 +32,7 @@ Page({
       },
       success: function(res) {
         let data = res.data;
-        let sale = new Date().getTime() > parseInt(data.data.info.sale_start)*1000;
         self.setData({
-          isSaling:sale,
           detailData:data.data,
           singlePrice:data.data.info.minprice,
           showTicketDetail:true
@@ -45,8 +43,7 @@ Page({
   },
   //进入购买页
   gotoBuy(){
-    if(!this.data.isSaling) return;
-    if(this.data.detailData.info.is_end == 'over') return;
+    if(this.data.detailData.info.is_end != '') return;
     wx.pageScrollTo({
       scrollTop: 0,
       duration: 0

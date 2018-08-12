@@ -11,6 +11,7 @@
         <view class="banner">
             <image src="{{imgSrc+itemData.cover}}" mode="widthFix"></image>
         </view>
+        <!--<image src="data:image/png;base64,{{wxcodeimg}}" mode="widthFix"></image>-->
         <view class="title">{{itemData.drink_name}}</view>
         <view class="address">{{itemData.address}}</view>
         <view class="infos">
@@ -21,17 +22,28 @@
             <input placeholder="姓名" class="input" bindinput="checkValues" data-key="nameVal"/>
             <input placeholder="电话" class="input" bindinput="checkValues" data-key="phoneVal"/>
         </view>
-        <view class="hint-section"><rich-text>888元，周五、周六使用。</rich-text></view>
+        <view class="hint-section"><rich-text>{{itemData.desc}}</rich-text></view>
 
         <view class="footer">
-            <picker bindchange="numberChange" value="{{numberIndex}}" range="{{numbersArr}}"  class="ticket-number">
+            <picker bindchange="numberChange"
+                    value="{{numberIndex}}"
+                    range="{{numbersArr}}"
+                    class="ticket-number"
+                    wx:if="{{itemData.is_end == '' || itemData.is_end == 'over'}}">
                 <view>{{numbersArr[numberIndex]}} <text>张</text></view>
             </picker>
-            <view class="stop-sale">
+            <view class="stop-sale" wx:if="{{itemData.is_end == 'nosale'}}">
                 <view>未开售</view>
-                <view>开票时间：{{detailData.info.begin}} {{detailData.info.hour_b}}</view>
+                <view>开票时间：{{itemData.date_start}}</view>
             </view>
-            <view class="btn {{btnDisabled ? '' : 'btn-disabled'}}" bindtap="doPay">确认付款</view>
+            <view class="stop-sale" wx:if="{{itemData.is_end == 'salestop'}}">
+                <view>售票停止</view>
+                <view>如有疑问，详情请联系主办方</view>
+            </view>
+            <view class="btn" bindtap="doPay" wx:if="{{itemData.is_end == ''}}">确认付款</view>
+            <view class="btn btn-disabled" wx:if="{{itemData.is_end == 'over'}}">已售罄</view>
+            <view class="btn btn-disabled" wx:if="{{itemData.is_end == 'nosale'}}">未开售</view>
+            <view class="btn btn-disabled" wx:if="{{itemData.is_end == 'salestop'}}">已停止</view>
         </view>
     </view>
 </view>

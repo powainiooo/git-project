@@ -28,7 +28,7 @@
         <div class="btn" v-if="imgUrl != ''">
             <t-button @dotap="openFile">重新上传</t-button>
         </div>
-        <input type="file" ref="file" @change="fileChange">
+        <input type="file" ref="file" @change="fileChange" accept="image/gif,image/jpeg,image/jpg,image/png,image/svg">
     </div>
 </template>
 
@@ -58,6 +58,7 @@
                 let fr = new FileReader();
                 fr.onload = function(result){
                     self.imgUrl = result.currentTarget.result;
+                    self.$emit('getImgSrc',result.currentTarget.result);
                 };
                 fr.readAsDataURL(file);
             }

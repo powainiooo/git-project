@@ -1,11 +1,13 @@
 <style>
+    .organizer-frame{ position: relative;}
+    .organizer-frame:before{ content: 'Organizer'; font-size: 157px; color: #fff; position: absolute; left: 0; top: -240px; font-family: 'Helve';}
     .organizer-frame .frame{ width: 900px; height: 710px; box-sizing: border-box; background-color: #ffffff; position: relative; padding: 20px; display: flex;}
     .organizer-frame .frame:before{ content: ''; width: 100%; height: 3px; background: url("../../assets/img/ticket-top.png") repeat-x; position: absolute; left: 0; top: -3px;}
     .organizer-frame .frame .stpe1{ width: 360px;}
     .organizer-frame .frame .stpe2{ width: 500px; position: relative;}
     .organizer-frame .frame .stpe2:before{ content: ''; width:1px; position: absolute; top: 40px; left: 0; bottom: 0; background-color: #e5e5e5;}
-    .organizer-frame .frame .title{ font-size: 18px; color: #000000; font-weight: bold; font-family: 'HappyZcool'; border-bottom: 1px solid #e5e5e5; padding-left: 50px;}
-    .organizer-frame .frame .title span{ font-size: 66px; margin-right: 10px;}
+    .organizer-frame .frame .title{ font-size: 18px; color: #000000; font-weight: bold; border-bottom: 1px solid #e5e5e5; padding-left: 50px;}
+    .organizer-frame .frame .title span{ font-size: 66px; margin-right: 10px; font-family: 'Helve';}
     .organizer-frame .frame .stpe1 input{ width: 270px; border: 1px solid #a5a5a5; border-radius: 5px; box-sizing: border-box; padding: 7px 16px; color: #a5a5a5; font-size: 16px;}
     .organizer-frame .stpe2 .hint{ font-size: 14px; color: #888888;}
     .organizer-frame .stpe2 .hint span{ font-size: 16px; font-weight: bold; margin-right: 4px;}
@@ -21,40 +23,40 @@
             <div class="stpe1">
                 <h3 class="title"><span>1</span>填写企业基本信息</h3>
                 <div class="mt20">
-                    <p class="mb20 tc"><input type="text" placeholder="活动方名称"></p>
+                    <p class="mb20 tc"><input type="text" placeholder="活动方名称" v-model="logoName"></p>
                     <div v-if="registerType == 'company'">
-                        <p class="mb20 tc"><input type="text" placeholder="公司名称"></p>
-                        <p class="mb20 tc"><input type="text" placeholder="公司地址"></p>
+                        <p class="mb20 tc"><input type="text" placeholder="公司名称" v-model="companyName"></p>
+                        <p class="mb20 tc"><input type="text" placeholder="公司地址" v-model="address"></p>
                     </div>
-                    <p class="mb20 tc"  v-if="registerType == 'personal'"><input type="text" placeholder="联系地址"></p>
-                    <p class="mb20 tc"><input type="text" placeholder="负责人姓名"></p>
-                    <p class="mb20 tc"><input type="text" placeholder="负责人联系电话"></p>
-                    <p class="mb20 tc"><input type="text" placeholder="负责人身份证号"></p>
+                    <p class="mb20 tc"  v-if="registerType == 'personal'"><input type="text" placeholder="联系地址" v-model="address"></p>
+                    <p class="mb20 tc"><input type="text" placeholder="负责人姓名" v-model="name"></p>
+                    <p class="mb20 tc"><input type="text" placeholder="负责人联系电话" v-model="mobile"></p>
+                    <p class="mb20 tc"><input type="text" placeholder="负责人身份证号" v-model="idsnum"></p>
                 </div>
             </div>
             <div class="stpe2">
                 <h3 class="title"><span>2</span>上传图片</h3>
                 <div class="pl50 pt20 pb20" style="border-bottom: 1px solid #e5e5e5;" v-if="registerType == 'company'">
-                    <t-upload>
+                    <t-upload @getImgSrc="companyImgUrl = $event">
                         <template slot="title">
                             <h3>企业营业执照</h3>
                         </template>
                     </t-upload>
                 </div>
                 <div class="pl50 pt20 pb20 ids-frame" style="border-bottom: 1px solid #e5e5e5;" v-if="registerType == 'personal'">
-                    <t-upload simple>
+                    <t-upload simple @getImgSrc="idFrontImgUrl = $event">
                         <template slot="title">
                             <h3>身份证正面</h3>
                         </template>
                     </t-upload>
-                    <t-upload simple>
+                    <t-upload simple @getImgSrc="idBackImgUrl = $event">
                         <template slot="title">
                             <h3>身份证背面</h3>
                         </template>
                     </t-upload>
                 </div>
                 <div class="pl50 pt20 pb20">
-                    <t-upload>
+                    <t-upload @getImgSrc="logoImgUrl = $event">
                         <template slot="title">
                             <h3>活动方LOGO</h3>
                         </template>
@@ -65,7 +67,7 @@
                     <p class="hint mb25"><span>DEMO</span></p>
                     <div class="demo">
                         <img src="../../assets/img/logo.png" />
-                        <t-button>提交审核</t-button>
+                        <t-button :isDisabled="btnDisabled" @dotap="$emit('dosubmit')">提交审核</t-button>
                     </div>
                 </div>
             </div>
@@ -82,7 +84,33 @@
         props:['registerType'],
         data(){
             return{
+                logoName:'',
+                companyName:'',
+                address:'',
+                name:'',
+                mobile:'',
+                idsnum:'',
+                companyImgUrl:'',
+                idFrontImgUrl:'',
+                idBackImgUrl:'',
+                logoImgUrl:''
+            }
+        },
+        computed:{
+            btnDisabled(){
+                if(this.logoName != '' && this.address != '' && this.name != '' && this.mobile != '' && this.idsnum != '' && this.logoImgUrl != ''){
+                    if(this.registerType == 'company'){
+                        if(this.companyName != '' && this.companyImgUrl != ''){
+                            return false
+                        }
+                    }else if(this.registerType == 'personal'){
+                        if(this.idFrontImgUrl != '' && this.idBackImgUrl != ''){
+                            return false
+                        }
+                    }
+                }
 
+                return true
             }
         },
         methods:{

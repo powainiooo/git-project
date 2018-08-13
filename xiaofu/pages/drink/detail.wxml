@@ -7,7 +7,7 @@
                  binddoclose="doClose"
                  binddoposter="drawPoster"></header-view>
 
-    <view class='body buy-frame'>
+    <view class='body buy-frame' wx:if="{{itemData.id != -1}}">
         <view class="banner">
             <image src="{{imgSrc+itemData.cover}}" mode="widthFix"></image>
         </view>
@@ -15,7 +15,7 @@
         <view class="title">{{itemData.drink_name}}</view>
         <view class="address">{{itemData.address}}</view>
         <view class="infos">
-            <view class="price">{{itemData.price}}<text>RMB</text></view>
+            <view class="price">{{itemData.price == 0 ? 0 : itemData.price*numbersArr[numberIndex]}}<text>RMB</text></view>
             <image src="{{imgSrc+itemData.logo_pic}}" mode="scaleToFill" class="logo"></image>
         </view>
         <view class="form-frame">
@@ -41,7 +41,7 @@
                 <view>如有疑问，详情请联系主办方</view>
             </view>
             <view class="btn" bindtap="doPay" wx:if="{{itemData.is_end == ''}}">确认付款</view>
-            <view class="btn btn-disabled" wx:if="{{itemData.is_end == 'over'}}">已售罄</view>
+            <view class="btn btn-disabled" style="width: 75%;" wx:if="{{itemData.is_end == 'over'}}">已售罄</view>
             <view class="btn btn-disabled" wx:if="{{itemData.is_end == 'nosale'}}">未开售</view>
             <view class="btn btn-disabled" wx:if="{{itemData.is_end == 'salestop'}}">已停止</view>
         </view>

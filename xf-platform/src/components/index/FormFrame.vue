@@ -31,11 +31,11 @@
         </transition>
         <transition enter-active-class="animated slideInUp moveFunc">
             <section class="org-frame" v-if="showOrganize">
-                <org-frame :registerType="registerType"></org-frame>
+                <org-frame :registerType="registerType" @dosubmit="showLaws = true"></org-frame>
             </section>
         </transition>
 
-        <t-laws></t-laws>
+        <t-laws v-if="showLaws"></t-laws>
     </div>
 </template>
 
@@ -56,6 +56,7 @@
                 showRegister:true,
                 showRegisterAll:false,
                 showOrganize:false,
+                showLaws:false,
                 registerType:'company'
             }
         },

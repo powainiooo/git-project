@@ -22,8 +22,8 @@
             <div class="content">{{content}}</div>
 
             <div class="btns btns-one">
-                <t-button @click="onOk">确认</t-button>
-                <t-button extraClass="gray" v-if="!isWarn" @click="onCancel">取消</t-button>
+                <t-button @dotap="onOk">确认</t-button>
+                <t-button extraClass="gray" v-if="!isWarn" @dotap="onCancel">取消</t-button>
             </div>
         </div>
     </section>

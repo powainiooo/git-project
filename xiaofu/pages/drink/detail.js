@@ -8,9 +8,8 @@ Page({
     nameVal:'',
     phoneVal:'',
     btnDisabled:false,
-    itemData:{},
+    itemData:{id:-1},
     shareImgSrc:'',
-    isSaling:false,
     imgSrc:app.globalData.imgSrc,
     wxcodeimg:''
   },
@@ -111,9 +110,17 @@ Page({
       },
       success: function(res) {
         let info = res.data.data.info;
-        let sale = new Date().getTime() > parseInt(info.sale_start)*1000;
+        let limit = info.limit,arr = [];
+        if(limit == ''){
+          arr = [1,2,3,4,5,6,7,8,9,10];
+        }else{
+          for(let i=0;i<limit;i++){
+            arr.push(i+1);
+          }
+        }
+
         self.setData({
-          isSaling:sale,
+          numbersArr:arr,
           itemData:info
         });
         self.drawSharePoster();

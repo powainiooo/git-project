@@ -43,10 +43,10 @@
     font-family: 'Helve';
     padding: 0 20rpx;
 }
-.ticket-frame .line1 .date .day2{
+.shadow-frame .line2 .date .day2{
     font-size: 80rpx;
 }
-.ticket-frame .line1 .date .day3{
+.shadow-frame .line2 .date .day3{
     font-size: 60rpx;
 }
 .ticket-small .line1 .date .day{ font-size: 66rpx;}
@@ -59,7 +59,7 @@
     justify-content: center;
     align-items: center;
 }
-.ticket-frame .line1 .logo2{
+.shadow-frame .line2 .logo2{
     width: calc(100% - 400rpx);
 }
 

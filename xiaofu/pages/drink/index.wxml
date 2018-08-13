@@ -35,6 +35,7 @@
                   data-id="{{item.id}}"
                   bindtap="gotoDetail">
                 <image src="{{imgSrc+item.cover}}" class="img" mode="aspectFill"></image>
+                <view class="sold-out" wx:if="{{item.is_end == 'over'}}"></view>
                 <view class="infos">
                     <view class="name">{{item.drink_name}}</view>
                     <view class="logo">

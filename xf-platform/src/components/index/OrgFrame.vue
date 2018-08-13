@@ -36,14 +36,14 @@
             </div>
             <div class="stpe2">
                 <h3 class="title"><span>2</span>上传图片</h3>
-                <div class="pl50 pt20 pb20" style="border-bottom: 1px solid #e5e5e5;" v-if="registerType == 'company'">
+                <div class="pl50 pt20 pb20" style="border-bottom: 1px solid #e5e5e5;" v-show="registerType == 'company'">
                     <t-upload @getImgSrc="companyImgUrl = $event">
                         <template slot="title">
                             <h3>企业营业执照</h3>
                         </template>
                     </t-upload>
                 </div>
-                <div class="pl50 pt20 pb20 ids-frame" style="border-bottom: 1px solid #e5e5e5;" v-if="registerType == 'personal'">
+                <div class="pl50 pt20 pb20 ids-frame" style="border-bottom: 1px solid #e5e5e5;" v-show="registerType == 'personal'">
                     <t-upload simple @getImgSrc="idFrontImgUrl = $event">
                         <template slot="title">
                             <h3>身份证正面</h3>

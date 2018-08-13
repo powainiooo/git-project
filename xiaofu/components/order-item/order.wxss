@@ -108,8 +108,8 @@
     border-bottom: 1rpx solid #f0f0f0;
 }
 .shadow-frame .user-info{ border-bottom: 1rpx solid #f0f0f0; display: flex; background-color: #ffffff;}
-.shadow-frame .user-info .name{ width: 30%; box-sizing: border-box; border-right: 1rpx solid #f0f0f0; font-size: 36rpx; padding: 15rpx 20rpx;}
-.shadow-frame .user-info .phone{ width: 70%; font-size: 36rpx; padding: 15rpx 20rpx; font-family: 'Helve';}
+.shadow-frame .user-info .name{ width: 60%; box-sizing: border-box; border-right: 1rpx solid #f0f0f0; font-size: 36rpx; padding: 15rpx 20rpx;}
+.shadow-frame .user-info .phone{ width: 40%; font-size: 36rpx; padding: 15rpx 20rpx; font-family: 'Helve';}
 
 .shadow-frame .infos{ display: flex; background-color: #ffffff;}
 .shadow-frame .infos .type{ width: 75%; box-sizing: border-box; border-right: 1rpx solid #f0f0f0; font-size: 66rpx; padding: 15rpx 20rpx;}

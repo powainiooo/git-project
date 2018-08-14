@@ -3,24 +3,24 @@
     .organizer-frame:before{ content: 'Organizer'; font-size: 157px; color: #fff; position: absolute; left: 0; top: -240px; font-family: 'Helve';}
     .organizer-frame .frame{ width: 900px; height: 710px; box-sizing: border-box; background-color: #ffffff; position: relative; padding: 20px; display: flex;}
     .organizer-frame .frame:before{ content: ''; width: 100%; height: 3px; background: url("../../assets/img/ticket-top.png") repeat-x; position: absolute; left: 0; top: -3px;}
-    .organizer-frame .frame .stpe1{ width: 360px;}
-    .organizer-frame .frame .stpe2{ width: 500px; position: relative;}
-    .organizer-frame .frame .stpe2:before{ content: ''; width:1px; position: absolute; top: 40px; left: 0; bottom: 0; background-color: #e5e5e5;}
+    .organizer-frame .frame .step1{ width: 360px;}
+    .organizer-frame .frame .step2{ width: 500px; position: relative;}
+    .organizer-frame .frame .step2:before{ content: ''; width:1px; position: absolute; top: 40px; left: 0; bottom: 0; background-color: #e5e5e5;}
     .organizer-frame .frame .title{ font-size: 18px; color: #000000; font-weight: bold; border-bottom: 1px solid #e5e5e5; padding-left: 50px;}
     .organizer-frame .frame .title span{ font-size: 66px; margin-right: 10px; font-family: 'Helve';}
-    .organizer-frame .frame .stpe1 input{ width: 270px; border: 1px solid #a5a5a5; border-radius: 5px; box-sizing: border-box; padding: 7px 16px; color: #a5a5a5; font-size: 16px;}
-    .organizer-frame .stpe2 .hint{ font-size: 14px; color: #888888;}
-    .organizer-frame .stpe2 .hint span{ font-size: 16px; font-weight: bold; margin-right: 4px;}
-    .organizer-frame .stpe2 .demo{ display: flex; justify-content: space-between; align-items: center;}
-    .organizer-frame .stpe2 .demo .n-btn{ width: 270px;}
-    .organizer-frame .stpe2 .ids-frame{ display: flex;}
-    .organizer-frame .stpe2 .ids-frame .upload-frame{ flex: 1;}
+    .organizer-frame .frame .step1 input{ width: 270px; border: 1px solid #a5a5a5; border-radius: 5px; box-sizing: border-box; padding: 7px 16px; color: #a5a5a5; font-size: 16px;}
+    .organizer-frame .step2 .hint{ font-size: 14px; color: #888888;}
+    .organizer-frame .step2 .hint span{ font-size: 16px; font-weight: bold; margin-right: 4px;}
+    .organizer-frame .step2 .demo{ display: flex; justify-content: space-between; align-items: center;}
+    .organizer-frame .step2 .demo .n-btn{ width: 270px;}
+    .organizer-frame .step2 .ids-frame{ display: flex;}
+    .organizer-frame .step2 .ids-frame .upload-frame{ flex: 1;}
 </style>
 
 <template>
     <div class="organizer-frame">
         <div class="frame">
-            <div class="stpe1">
+            <div class="step1">
                 <h3 class="title"><span>1</span>填写企业基本信息</h3>
                 <div class="mt20">
                     <p class="mb20 tc"><input type="text" placeholder="活动方名称" v-model="logoName"></p>
@@ -34,7 +34,7 @@
                     <p class="mb20 tc"><input type="text" placeholder="负责人身份证号" v-model="idsnum"></p>
                 </div>
             </div>
-            <div class="stpe2">
+            <div class="step2">
                 <h3 class="title"><span>2</span>上传图片</h3>
                 <div class="pl50 pt20 pb20" style="border-bottom: 1px solid #e5e5e5;" v-show="registerType == 'company'">
                     <t-upload @getImgSrc="companyImgUrl = $event">

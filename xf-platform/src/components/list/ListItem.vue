@@ -1,0 +1,159 @@
+<style>
+    .list-item{ width: 330px; position: relative;}
+    .list-item .shadow{ margin-left: -21px;}
+    .list-item .ticket{ width: 100%; position: absolute; top: 40px; left: 0;}
+    .list-item .ticket:after{ content: ''; width: 90px; height: 90px; background: url('../../assets/img/ticket-logo.png') no-repeat; position: absolute; right: -2px; bottom: 0;}
+    .list-item .ticket .status{ width: 100%; height: 160px; background-repeat: no-repeat; overflow: hidden;}
+    .list-item .ticket .status1{ background-image: url('../../assets/img/ticket-top1.png');}
+    .list-item .ticket .status2{ background-image: url('../../assets/img/ticket-top2.png');}
+    .list-item .ticket .status3{ background-image: url('../../assets/img/ticket-top3.png');}
+    .list-item .ticket .status4{ background-image: url('../../assets/img/ticket-top4.png');}
+    .list-item .ticket .status5{ background-image: url('../../assets/img/ticket-top5.png');}
+    .list-item .ticket .status6{ background-image: url('../../assets/img/ticket-top6.png');}
+    .list-item .ticket .status .top{ width: 100%; height: 60px; margin-top: 2px; display: flex; padding: 0 10px; box-sizing: border-box; justify-content: space-between; align-items: center; font-size: 18px;}
+    .list-item .ticket .status3 .top{ height: 160px; align-items: baseline; margin-top: 20px;}
+    .list-item .ticket .status4 .top{ height: 160px; align-items: baseline; margin-top: 20px;}
+    .list-item .ticket .status6 .top{ height: 160px; align-items: baseline; margin-top: 20px;}
+    .list-item .ticket .status .top p{ color: #ffffff;}
+    .list-item .ticket .status .top>a{ width: 28px; height: 28px; background-color: #e83727; border-radius: 50%; display: flex; justify-content: center; align-items: center; color: #ffffff; font-size: 20px;}
+    .list-item .ticket .status .top .n-btn a{ font-size: 12px; color: #000000;}
+    .list-item .ticket .status .type{ height: 40px; padding: 0 10px; display: flex; justify-content: space-between; align-items: center; background-color: #ffffff;}
+    .list-item .ticket .status .type p{ font-size: 14px; color: #000000;}
+    .list-item .ticket .status .type .ivu-select{ width: 75px;}
+    .list-item .ticket .status .type .ivu-select .ivu-select-selection{ height: 28px; border-radius: 15px; border:none; background-color: #0239b8;}
+    .list-item .ticket .status .type .ivu-select .ivu-select-placeholder{ height: 28px; color: #ffffff;}
+    .list-item .ticket .status .type .ivu-select .ivu-select-arrow{color: #ffffff;}
+    .list-item .ticket .status .nums{ padding:0 10px; height: 60px; display: flex; justify-content: space-between; align-items: center; background-color: #ffffff;}
+    .list-item .ticket .status .nums p{ color: #000000; font-size: 14px; font-family: 'Helve';}
+    .list-item .ticket .status .nums p span{ font-size: 40px; margin-right: 10px;}
+    .list-item .ticket .status .nums div{ color: #c0c0c0; font-size: 18px; align-self: flex-end; margin-bottom: 8px;}
+    .list-item .ticket .line-mid{ overflow: hidden; height: 5px; display: flex; align-items: flex-end;}
+    .list-item .ticket .info-frame{ width: 330px; height: 272px; mask-image: url('../../assets/img/cover.png'); -webkit-mask-image: url('../../assets/img/cover.png'); background-color: #ffffff;}
+    .list-item .ticket .info-frame .line1{ height: 85px; overflow: hidden; border-bottom: 2px solid #c1c1c1; box-sizing: border-box;}
+    .list-item .ticket .info-frame .line1 .date{ width: 140px; box-sizing: border-box; border-right: 2px solid #c1c1c1;  float: left;}
+    .list-item .ticket .info-frame .line1 .date2{ width: 190px;}
+    .list-item .ticket .info-frame .line1 .date3{ width: 190px;}
+    .list-item .ticket .info-frame .line1 .date .year{ height: 25px; box-sizing: border-box; font-size: 12px; display: flex; justify-content: space-between; align-items: center; color: #000000; border-bottom: 2px solid #c1c1c1; padding: 0 10px;}
+    .list-item .ticket .info-frame .line1 .date .day{ height: 58px; font-size: 44px; display: flex; justify-content: center; align-items: center; color: #000000; font-family: 'Helve';}
+    .list-item .ticket .info-frame .line1 .date3 .day{ font-size: 32px;}
+    .list-item .ticket .info-frame .line1 .logo{ height: 85px; display: flex; justify-content: center; align-items: center; overflow: hidden;}
+    .list-item .ticket .info-frame .line1 .logo img{ height: 100%;}
+    .list-item .ticket .info-frame .title{ padding:0 10px; height: 45px; font-size: 18px; font-family: 'Helve'; color: #000000; display: flex; align-items: center; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;}
+    .list-item .ticket .info-frame .img{ height: 142px; display: flex; align-items: center; overflow: hidden;}
+    .list-item .ticket .info-frame .img img{ width: 100%;}
+</style>
+
+<template>
+    <div class="list-item">
+        <div class="shadow"><img src="@/assets/img/list-shadow.png"> </div>
+        <div class="ticket">
+            <!-- 1:销售中 2：已下架 3：审核中 4：审核未通过 5：已售罄 6：已结束-->
+            <div class="status status1" v-if="itemdata.status == 1">
+                <div class="top">
+                    <p>销售中</p>
+                    <a href="javascript:;"><Icon type="ios-power" /></a>
+                </div>
+                <div class="type">
+                    <p>已销售</p>
+                    <Select>
+                        <Option>全部</Option>
+                        <Option>早鸟票</Option>
+                        <Option>福利票</Option>
+                    </Select>
+                </div>
+                <div class="nums">
+                    <p><span>123</span>张</p>
+                    <div>/600</div>
+                </div>
+            </div>
+            <div class="status status2" v-if="itemdata.status == 2">
+                <div class="top">
+                    <p>已下架</p>
+                    <a href="javascript:;"><Icon type="ios-power" /></a>
+                </div>
+                <div class="type">
+                    <p>已销售</p>
+                    <Select>
+                        <Option>全部</Option>
+                        <Option>早鸟票</Option>
+                        <Option>福利票</Option>
+                    </Select>
+                </div>
+                <div class="nums">
+                    <p><span>123</span>张</p>
+                    <div>/600</div>
+                </div>
+            </div>
+            <div class="status status3" v-if="itemdata.status == 3">
+                <div class="top">
+                    <p>审核中<br>Under review<br>审查中</p>
+                </div>
+            </div>
+            <div class="status status4" v-if="itemdata.status == 4">
+                <div class="top">
+                    <p>审核未通过<br>Unapprove</p>
+                    <div style="width: 110px; align-self: flex-end; margin-bottom: 40px;"><t-button extraClass="white">查看并修改</t-button></div>
+                </div>
+            </div>
+            <div class="status status5" v-if="itemdata.status == 5">
+                <div class="top">
+                    <p>已售罄</p>
+                    <a href="javascript:;"><Icon type="ios-power" /></a>
+                </div>
+                <div class="type">
+                    <p>已销售</p>
+                    <Select>
+                        <Option>全部</Option>
+                        <Option>早鸟票</Option>
+                        <Option>福利票</Option>
+                    </Select>
+                </div>
+                <div class="nums">
+                    <p><span>123</span>张</p>
+                    <div>/600</div>
+                </div>
+            </div>
+            <div class="status status6" v-if="itemdata.status == 6">
+                <div class="top">
+                    <p>已结束<br>Ended</p>
+                </div>
+            </div>
+            <div class="line-mid"><img src="@/assets/img/ticket-middle.png" style="display: block;"></div>
+            <div class="info-frame">
+                <div class="line1">
+                    <div class="date">
+                        <div class="year">
+                            <span>2</span>
+                            <span>0</span>
+                            <span>1</span>
+                            <span>8</span>
+                        </div>
+                        <div class="day">08/03</div>
+                    </div>
+                    <div class="logo"><img src="@/assets/img/logo2.png"> </div>
+                </div>
+                <div class="title">Disco back to 90s | Sector</div>
+                <div class="img"><img src="@/assets/img/ticket-img1.jpg"></div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script type='es6'>
+    import TButton from '@/components/common/TButton.vue'
+    export default {
+        name: 'app',
+        components:{TButton},
+        props:['itemdata'],
+        data(){
+            return{
+
+            }
+        },
+        methods:{
+
+        }
+    }
+
+</script>
+

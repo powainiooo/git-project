@@ -1,5 +1,6 @@
 <template>
     <div id="app">
+        <div class="logo"><i class="icon-logo"></i></div>
         <router-view/>
     </div>
 </template>
@@ -18,4 +19,5 @@
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
     }
+    #app>.logo{ font-size: 32px; color: #ffffff; position: absolute; top: 60px; left: 60px;}
 </style>

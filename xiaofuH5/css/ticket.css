@@ -41,15 +41,17 @@
     font-family: 'Helve';
     padding: 0 0.2rem;
 }
-.ticket-frame .line1 .date .day2{
+.shadow-frame .line2 .date .day2{
     font-size: 0.8rem;
+    margin-top: 0.15rem;
 }
-.ticket-frame .line1 .date .day3{
+.shadow-frame .line2 .date .day3{
     font-size: 0.6rem;
+    margin-top: 0.2rem;
 }
-.ticket-small .line1 .date .day{ font-size: 0.66rem;}
-.ticket-small .line1 .date .day2{ font-size: 0.52rem;}
-.ticket-small .line1 .date .day3{ font-size: 0.38rem;}
+.shadow-frame .line2 .date .day{ font-size: 0.66rem;}
+.shadow-frame .line2 .date .day2{ font-size: 0.52rem;}
+.shadow-frame .line2 .date .day3{ font-size: 0.38rem;}
 
 .shadow-frame .line2 .logo {
     width: calc(100% - 2rem);
@@ -57,12 +59,16 @@
     justify-content: center;
     align-items: center;
 }
-.ticket-frame .line1 .logo2{
-    width: calc(100% - 4rem);
+.shadow-frame .line2 .logo2{
+    width: calc(100% - 2.7rem);
 }
 
 .shadow-frame .line2 .logo img{
     width: 2rem;
+    height: 1.4rem;
+}
+.shadow-frame .line2 .drink-logo img{
+    width: 1.4rem;
     height: 1.4rem;
 }
 
@@ -106,8 +112,8 @@
     border-bottom: 1px solid #f0f0f0;
 }
 .shadow-frame .user-info{ border-bottom: 1px solid #f0f0f0; display: flex; background-color: #ffffff;}
-.shadow-frame .user-info .name{ width: 30%; box-sizing: border-box; border-right: 1px solid #f0f0f0; font-size: 0.36rem; padding: 0.15rem 0.2rem;}
-.shadow-frame .user-info .phone{ width: 70%; font-size: 0.36rem; padding: 0.15rem 0.2rem; font-family: 'Helve';}
+.shadow-frame .user-info .name{ width: 50%; box-sizing: border-box; border-right: 1px solid #f0f0f0; font-size: 0.36rem; padding: 0.15rem 0.2rem;}
+.shadow-frame .user-info .phone{ width: 50%; font-size: 0.36rem; padding: 0.15rem 0.2rem; font-family: 'Helve';}
 
 .shadow-frame .infos{ display: flex; background-color: #ffffff;}
 .shadow-frame .infos .type{ width: 75%; box-sizing: border-box; border-right: 1px solid #f0f0f0; font-size: 0.66rem; padding: 0.15rem 0.2rem;}

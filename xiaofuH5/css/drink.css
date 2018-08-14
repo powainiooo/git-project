@@ -49,6 +49,6 @@
 .shadow-frame .user-info .phone{ width: 70%; font-size: 0.36rem; padding: 0.15rem 0.2rem; font-family: 'Helve';}
 
 .shadow-frame .infos{ display: flex; background-color: #ffffff;}
-.shadow-frame .infos .type{ width: 75%; box-sizing: border-box; border-right: 1px solid #f0f0f0; font-size: 0.66rem; padding: 0.15rem 0.2rem;}
-.shadow-frame .infos .index{ width: 25%; font-size: 0.7rem; padding: 0.15rem 0.2rem; text-align: center; font-family: 'Helve';}
+.shadow-frame .infos .type{ width: 65%; box-sizing: border-box; border-right: 1px solid #f0f0f0; font-size: 0.66rem; padding: 0.15rem 0.2rem;}
+.shadow-frame .infos .index{ width: 35%; font-size: 0.7rem; padding: 0.15rem 0.2rem; text-align: center; font-family: 'Helve';}
 .shadow-frame .infos .index text{ font-size: 0.25rem;}

@@ -6,7 +6,6 @@ import router from './router'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'
 import '@/assets/css/reset.css';
-import '@/assets/css/components.css';
 import '@/assets/css/animate.min.css';
 import '@/assets/css/micons.css';
 import '@/assets/css/helve.css';

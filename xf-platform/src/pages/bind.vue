@@ -13,8 +13,7 @@
     .bind-form .frame .step1 input{ width: 270px; border: 1px solid #a5a5a5; border-radius: 5px; box-sizing: border-box; padding: 7px 16px; color: #a5a5a5; font-size: 16px;}
     .bind-form .frame .step1 .code-line{ width: 270px; margin: 0 auto 20px auto; display: flex; justify-content: space-between;}
     .bind-form .frame .step1 .code-line input{ width: 50%;}
-    .bind-form .frame .step1 .code-line .n-btn{ width: 40%; font-size: 12px;}
-    .bind-form .frame .step1 .code-line .n-btn a{font-size: 12px;}
+    .bind-form .frame .step1 .code-line .n-btn{ width: 40%;}
     .bind-form .step2 .demo{ display: flex; justify-content: space-between; align-items: center;}
     .bind-form .step2 .demo .n-btn{ width: 270px;}
     .bind-form .step2 .ids-frame{ display: flex;}
@@ -40,7 +39,7 @@
                         <p class="mb20 tc"><input type="text" placeholder="预留手机号" v-model="mobile"></p>
                         <div class="line code-line">
                             <input type="text" placeholder="验证码" v-model="code">
-                            <t-button :isDisabled="phoneDisabled">获取验证码</t-button>
+                            <t-button :isDisabled="phoneDisabled" size="min">获取验证码</t-button>
                         </div>
                         <p class="mb20 tc"><input type="text" placeholder="身份证号" v-model="idsnum"></p>
                         <p class="mb20 tc"><input type="text" placeholder="银行卡号" v-model="banknum"></p>

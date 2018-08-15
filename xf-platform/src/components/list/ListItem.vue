@@ -16,7 +16,7 @@
     .list-item .ticket .status6 .top{ height: 160px; align-items: baseline; margin-top: 20px;}
     .list-item .ticket .status .top p{ color: #ffffff;}
     .list-item .ticket .status .top>a{ width: 28px; height: 28px; background-color: #e83727; border-radius: 50%; display: flex; justify-content: center; align-items: center; color: #ffffff; font-size: 20px;}
-    .list-item .ticket .status .top .n-btn a{ font-size: 12px; color: #000000;}
+    .list-item .ticket .status .top .n-btn a{color: #000000;}
     .list-item .ticket .status .type{ height: 40px; padding: 0 10px; display: flex; justify-content: space-between; align-items: center; background-color: #ffffff;}
     .list-item .ticket .status .type p{ font-size: 14px; color: #000000;}
     .list-item .ticket .status .type .ivu-select{ width: 75px;}
@@ -92,7 +92,7 @@
             <div class="status status4" v-if="itemdata.status == 4">
                 <div class="top">
                     <p>审核未通过<br>Unapprove</p>
-                    <div style="width: 110px; align-self: flex-end; margin-bottom: 40px;"><t-button extraClass="white">查看并修改</t-button></div>
+                    <div style="width: 110px; align-self: flex-end; margin-bottom: 40px;"><t-button extraClass="white" size="min">查看并修改</t-button></div>
                 </div>
             </div>
             <div class="status status5" v-if="itemdata.status == 5">

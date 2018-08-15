@@ -3,16 +3,23 @@
     .prolist-frame::-webkit-scrollbar{ width: 3px; background-color: rgba(0,0,0,0);}
     .prolist-frame::-webkit-scrollbar-thumb{ background-color: #ffffff;}
     .prolist-frame .company-name{ font-size: 157px; color: #fff; position: absolute; left:60px; top: 60px; font-family: 'Helve';}
-    .prolist-frame .list-content{  width: 1560px; display: flex; margin: 400px auto 100px auto; flex-wrap: wrap;}
+    .prolist-frame .list-content{  width: 1560px; display: flex; margin: 320px auto 100px auto; flex-wrap: wrap;}
     .prolist-frame .list-content .list-item{ margin:0 30px 0px 30px;}
+
+    .prolist-frame .detail-frame{ width: 100%; height: 100%; display: flex; justify-content: flex-end; align-items: center; overflow: hidden;}
+    .prolist-frame .detail-frame .list-item{ margin-right: 60px;}
 </style>
 
 <template>
     <section class="prolist-frame">
         <div class="company-name">Sector</div>
         <example v-if="showExample"></example>
-        <div class="list-content">
+        <div class="list-content" v-if="!showDetail">
             <list-item v-for="item in listData" :itemdata="item"></list-item>
+        </div>
+        <div class="detail-frame" v-if="showDetail">
+            <list-item :itemdata="listData[0]"></list-item>
+            <detail-frame></detail-frame>
         </div>
     </section>
 </template>
@@ -20,12 +27,14 @@
 <script type='es6'>
     import Example from '@/components/list/Example.vue'
     import ListItem from '@/components/list/ListItem.vue'
+    import DetailFrame from '@/components/list/DetailFrame.vue'
     export default {
         name: 'app',
-        components:{Example,ListItem},
+        components:{Example,ListItem,DetailFrame},
         data(){
             return{
                 showExample:false,
+                showDetail:true,
                 listData:[
                     {status:1},
                     {status:2},

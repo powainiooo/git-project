@@ -8,8 +8,6 @@
     .upload-frame .infos p{ font-size: 12px;}
     .upload-frame .btn{ width: 90px; position: absolute; top: 33px; right: 0;}
     .upload-frame.min .btn{ right: auto; left: 120px; top: 68px;}
-    .upload-frame .btn .n-btn { height: 32px;}
-    .upload-frame .btn .n-btn a{ font-size: 12px;}
     .upload-frame input[type=file]{ display: none;}
 </style>
 
@@ -26,7 +24,7 @@
             </div>
         </div>
         <div class="btn" v-if="imgUrl != ''">
-            <t-button @dotap="openFile">重新上传</t-button>
+            <t-button @dotap="openFile" size="min">重新上传</t-button>
         </div>
         <input type="file" ref="file" @change="fileChange" accept="image/gif,image/jpeg,image/jpg,image/png,image/svg">
     </div>

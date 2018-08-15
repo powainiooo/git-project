@@ -11,8 +11,7 @@
     .register-frame .frame .line input::-webkit-input-placeholder{ color: #888888;}
     .register-frame .frame  .code-line{ display: flex; justify-content: space-between;}
     .register-frame .frame  .code-line input{ width: 50%;}
-    .register-frame .frame  .code-line .n-btn{ width: 40%; font-size: 12px;}
-    .register-frame .frame  .code-line .n-btn a{font-size: 12px;}
+    .register-frame .frame  .code-line .n-btn{ width: 40%; }
     .register-frame .frame .hint{ font-size: 12px; color: #002aa6; text-align: center;}
     .register-frame .tab{ border-top: 1px solid #e5e5e5; padding-top: 25px; margin-top: 25px;}
     .register-frame .tab h3{ font-size: 18px; color: #000; font-weight: bold; margin-left: 14px;}
@@ -37,7 +36,7 @@
                 <div class="line"><input type="text" placeholder="联系电话" v-model="phone" :readonly="confirmInfos"></div>
                 <div class="line code-line">
                     <input type="text" placeholder="验证码" v-model="code" :readonly="confirmInfos">
-                    <t-button :isDisabled="phoneDisabled">获取验证码</t-button>
+                    <t-button :isDisabled="phoneDisabled" size="min">获取验证码</t-button>
                 </div>
                 <div class="line"><input type="password" placeholder="密码" v-model="password" :readonly="confirmInfos"></div>
                 <div class="line"><input type="password" placeholder="重复密码" v-model="confirmPSW" :readonly="confirmInfos"></div>

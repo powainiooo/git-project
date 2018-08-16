@@ -4,22 +4,32 @@
     .prolist-frame::-webkit-scrollbar-thumb{ background-color: #ffffff;}
     .prolist-frame .company-name{ font-size: 157px; color: #fff; position: absolute; left:60px; top: 60px; font-family: 'Helve';}
     .prolist-frame .list-content{  width: 1560px; display: flex; margin: 320px auto 100px auto; flex-wrap: wrap;}
-    .prolist-frame .list-content .list-item{ margin:0 30px 0px 30px;}
+    .prolist-frame .list-content>div{ margin:0 30px 0px 30px;}
 
-    .prolist-frame .detail-frame{ width: 100%; height: 100%; display: flex; justify-content: flex-end; align-items: center; overflow: hidden;}
+    .prolist-frame .detail-frame{ width: 100%; height: 100%; display: flex; justify-content: flex-end; align-items: center; overflow: hidden; position: fixed; top: 0; left: 0;}
     .prolist-frame .detail-frame .list-item{ margin-right: 60px;}
+
+    .prolist-frame .anim-detail{ animation-duration: 0.5s; animation-timing-function: cubic-bezier(.25,.76,.36,.97)}
 </style>
 
 <template>
     <section class="prolist-frame">
         <div class="company-name">Sector</div>
-        <example v-if="showExample"></example>
-        <div class="list-content" v-if="!showDetail">
-            <list-item v-for="item in listData" :itemdata="item"></list-item>
+        <example v-if="showExample" @intolist="showExample=false"></example>
+        <transition enter-active-class="animated anim-detail fadeIn" leave-active-class="animated anim-detail fadeOut">
+        <div class="list-content" v-if="!showExample && !showDetail">
+            <div v-for="(item,index) in listData" @click="gotoDetail(index)">
+                <list-item :itemdata="item"></list-item>
+            </div>
         </div>
-        <div class="detail-frame" v-if="showDetail">
-            <list-item :itemdata="listData[0]"></list-item>
-            <detail-frame></detail-frame>
+        </transition>
+        <div class="detail-frame" v-show="!showExample && showDetail">
+            <transition enter-active-class="animated bounceIn" leave-active-class="animated bounceOut">
+            <list-item :itemdata="detailData" v-if="showDetail"></list-item>
+            </transition>
+            <transition enter-active-class="animated anim-detail slideInRight" leave-active-class="animated anim-detail slideOutRight">
+            <detail-frame v-if="showDetail" @close="showDetail = false"></detail-frame>
+            </transition>
         </div>
     </section>
 </template>
@@ -33,8 +43,8 @@
         components:{Example,ListItem,DetailFrame},
         data(){
             return{
-                showExample:false,
-                showDetail:true,
+                showExample:true,
+                showDetail:false,
                 listData:[
                     {status:1},
                     {status:2},
@@ -42,11 +52,15 @@
                     {status:4},
                     {status:5},
                     {status:6}
-                ]
+                ],
+                detailData:{}
             }
         },
         methods:{
-
+            gotoDetail(index){
+                this.detailData = this.listData[index];
+                this.showDetail = true;
+            }
         }
     }
 

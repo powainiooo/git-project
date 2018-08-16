@@ -56,9 +56,9 @@
                 <div class="type">
                     <p>已销售</p>
                     <Select>
-                        <Option>全部</Option>
-                        <Option>早鸟票</Option>
-                        <Option>福利票</Option>
+                        <Option value="0">全部</Option>
+                        <Option value="1">早鸟票</Option>
+                        <Option value="2">福利票</Option>
                     </Select>
                 </div>
                 <div class="nums">
@@ -74,9 +74,9 @@
                 <div class="type">
                     <p>已销售</p>
                     <Select>
-                        <Option>全部</Option>
-                        <Option>早鸟票</Option>
-                        <Option>福利票</Option>
+                        <Option value="0">全部</Option>
+                        <Option value="1">早鸟票</Option>
+                        <Option value="2">福利票</Option>
                     </Select>
                 </div>
                 <div class="nums">
@@ -103,9 +103,9 @@
                 <div class="type">
                     <p>已销售</p>
                     <Select>
-                        <Option>全部</Option>
-                        <Option>早鸟票</Option>
-                        <Option>福利票</Option>
+                        <Option value="0">全部</Option>
+                        <Option value="1">早鸟票</Option>
+                        <Option value="2">福利票</Option>
                     </Select>
                 </div>
                 <div class="nums">

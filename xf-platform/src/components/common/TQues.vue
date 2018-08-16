@@ -6,6 +6,7 @@
     .n-ques .hint-frame:before{ content: ''; width: 0; height: 0; border: 6px solid rgba(0,0,0,0); border-right-color: #1a41c0; position: absolute; top: 50%; left: -12px; margin-top: -3px;}
     .n-ques .hint-frame .list1 li{ font-size: 14px; color: #ffffff; margin-bottom: 10px;}
     .n-ques .hint-frame .list1 li:last-child{ margin-bottom: 0;}
+    .n-ques .hint-frame .list1 li span{ font-size: 16px; font-weight: bold; margin-right: 6px;}
 </style>
 
 <template>

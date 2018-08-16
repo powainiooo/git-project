@@ -1,7 +1,8 @@
 <style>
     .bind-frame{ position: relative; overflow: hidden; width: 100vw; height: 100vh;}
     .org-title{ font-size: 157px; color: #fff; position: absolute; right: -10px; top: 0; font-family: 'Helve';}
-    .company-title{ font-size: 157px; color: #fff; position: absolute; left: 0; bottom: 0; font-family: 'Helve'; transform: rotateZ(-90deg) translate(-40px,160px); transform-origin: 0 50%;}
+    .company-title{ position: absolute; left: 0; bottom: 0;}
+    .company-title span{ display: block; font-family: 'Helve'; transform: rotateZ(-90deg) translate(-40px,160px); transform-origin: 0 50%; font-size: 157px; color: #fff;}
     .bind-form{ position: absolute; bottom: 0; left: 400px; z-index: 100;}
     .bind-form .frame{ width: 900px; height: 710px; box-sizing: border-box; background-color: #ffffff; position: relative; padding: 20px; display: flex;}
     .bind-form .frame:before{ content: ''; width: 100%; height: 3px; background: url("../assets/img/ticket-top.png") repeat-x; position: absolute; left: 0; top: -3px;}
@@ -24,13 +25,20 @@
     .bind-form .step2 .hint p{ width: 330px; font-size: 16px; font-weight: bold; line-height: 1.8; color: #000000;}
     .bind-form .step2 .hint p span{ font-size: 22px;}
     .bind-form .btns{ position: absolute; bottom: 50px; right: 55px;}
+    .bind-frame .anim-item{ animation-duration: 0.5s; animation-timing-function: cubic-bezier(.25,.76,.36,.97)}
 </style>
 
 <template>
     <div class="bind-frame">
-        <div class="org-title">Organizer</div>
-        <div class="company-title">Sector</div>
-        <div class="bind-form">
+        <transition enter-active-class="animated anim-item slideInRight">
+        <div class="org-title" v-if="showItems">Organizer</div>
+        </transition>
+        <transition enter-active-class="animated anim-item slideInDown">
+        <div class="company-title" v-if="showItems"><span>Sector</span></div>
+        </transition>
+
+        <transition enter-active-class="animated anim-item slideInUp">
+        <div class="bind-form" v-if="showItems">
             <div class="frame">
                 <div class="step1">
                     <h3 class="title"><span>1</span>填写提款账户信息</h3>
@@ -60,10 +68,11 @@
                 </div>
             </div>
             <div class="btns">
-                <div style="width: 270px; margin-bottom: 15px; margin-left: 40px;"><t-button :isDisabled="btnDisabled">确认绑定</t-button></div>
+                <div style="width: 270px; margin-bottom: 15px; margin-left: 40px;"><t-button :isDisabled="btnDisabled" @dotap="dobind">确认绑定</t-button></div>
                 <p style="font-size: 12px; color: #888888; text-align: right;">*审核时间为工作日10:00am-18:00pm，<br>如有疑问请联系客服130-0000-0000，请于工作时间联系。</p>
             </div>
         </div>
+        </transition>
     </div>
 </template>
 
@@ -74,6 +83,7 @@
         components:{TButton},
         data(){
             return{
+                showItems:false,
                 name:'',
                 mobile:'',
                 code:'',
@@ -81,6 +91,11 @@
                 banknum:'',
                 bank:''
             }
+        },
+        mounted(){
+            setTimeout(()=>{
+                this.showItems = true;
+            },500)
         },
         computed:{
             phoneDisabled(){
@@ -99,7 +114,9 @@
             }
         },
         methods:{
-
+            dobind(){
+                this.$router.push('list')
+            }
         }
     }
 

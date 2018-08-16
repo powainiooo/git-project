@@ -20,10 +20,12 @@
     .pro-info .ticket-list li.tbody .td1{ font-size: 18px; color: #000000; font-weight: bold;}
     .pro-info .ticket-list li.tbody .td2{ font-size: 48px; color: #000000; font-weight: bold;}
     .pro-info .ticket-list li.tbody .td3 .ivu-input-number-input{ display: block; text-align: center;}
-    .pro-info .ticket-list li.tbody .td4 .ivu-switch-large{ width: 70px;}
+    .pro-info .ticket-list li.tbody .td4 .ivu-switch-large{ width: 70px; height: 25px;}
     .pro-info .ticket-list li.tbody .td4 .ivu-switch-large:after{ top: 3px;}
     .pro-info .ticket-list li.tbody .td4 .ivu-switch-large.ivu-switch-checked:after{ left: 50px;}
     .pro-info .ticket-list li.tbody .td4 .ivu-switch-large .ivu-switch-inner{ top: 2px;}
+    .pro-info .ticket-list-btns{ display: flex; justify-content: flex-end; margin-right: 60px;}
+    .pro-info .ticket-list-btns .n-btn{ width: 90px; margin-left: 10px;}
 
     .pro-info .qrcode{ display: flex;}
     .pro-info .qrcode .qritem{ margin:15px 35px; }
@@ -51,14 +53,15 @@
         <div class="title title2">
             <div class="name">
                 <span class="index">2</span>基本信息
-                <t-ques style="margin-left: 15px;" width="400" top="-45">
+                <t-ques style="margin-left: 15px;" width="300" top="-83">
                     <ul class="list1">
-                        <li>活动方票数修改只能增加，售罄开启前端无法售票。</li>
+                        <li><span>1</span>票的数量只可增加，<br>一旦提交无法减少张数。</li>
+                        <li><span>2</span>售罄功能开启，售票平台对应的票种将显示"已售罄"，用户则无法再购买。</li>
                     </ul>
                 </t-ques>
             </div>
             <div class="btn">
-                <t-button>订单详情</t-button>
+                <t-button size="min" @dotap="$emit('openstatistics')">订单详情</t-button>
             </div>
         </div>
         <ul class="ticket-list">
@@ -71,43 +74,48 @@
             <li class="tbody">
                 <div class="td1">早鸟票</div>
                 <div class="td2">100</div>
-                <div class="td3"><InputNumber :max="10" :min="1"></InputNumber></div>
+                <div class="td3"><InputNumber :min="100"></InputNumber></div>
                 <div class="td4">
                     <i-switch size="large">
                         <span slot="open">已售罄</span>
-                        <span slot="close">已售罄</span>
+                        <span slot="close"></span>
                     </i-switch>
                 </div>
             </li>
             <li class="tbody">
                 <div class="td1">预售票</div>
                 <div class="td2">100</div>
-                <div class="td3"><InputNumber :max="10" :min="1"></InputNumber></div>
+                <div class="td3"><InputNumber :min="100"></InputNumber></div>
                 <div class="td4">
                     <i-switch size="large">
                         <span slot="open">已售罄</span>
-                        <span slot="close">已售罄</span>
+                        <span slot="close"></span>
                     </i-switch>
                 </div>
             </li>
             <li class="tbody">
                 <div class="td1">普通票</div>
                 <div class="td2">100</div>
-                <div class="td3"><InputNumber :max="10" :min="1"></InputNumber></div>
+                <div class="td3"><InputNumber :min="100"></InputNumber></div>
                 <div class="td4">
                     <i-switch size="large">
                         <span slot="open">销售中</span>
-                        <span slot="close">销售中</span>
+                        <span slot="close"></span>
                     </i-switch>
                 </div>
             </li>
         </ul>
+        <div class="ticket-list-btns">
+            <t-button size="min">确认</t-button>
+            <t-button size="min" extraClass="gray">取消</t-button>
+        </div>
         <div class="title title2">
             <div class="name">
                 <span class="index">3</span>链接码 及 验票码
-                <t-ques style="margin-left: 15px;" width="400" top="-45">
+                <t-ques style="margin-left: 15px;" width="300" top="-83">
                     <ul class="list1">
-                        <li>活动方票数修改只能增加，售罄开启前端无法售票。</li>
+                        <li><span>1</span>链接码用户推广时，方便用户扫描跳转到购票页面。</li>
+                        <li><span>2</span>验票码扫描后可获得活动验票权限，授权成功后的手机可进行活动验票。</li>
                     </ul>
                 </t-ques>
             </div>

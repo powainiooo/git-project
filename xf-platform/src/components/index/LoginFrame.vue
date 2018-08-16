@@ -12,7 +12,7 @@
         <div class="line"><input type="text" placeholder="邮箱/手机" v-model="username"></div>
         <div class="line"><input type="password" placeholder="密码" v-model="password"></div>
         <div class="line"><a href="javascript:;" @click="gotoForget">忘记密码？</a> </div>
-        <div class="line" style="margin-top: 35px;"><t-button extraClass="white" :isDisabled="isDisabled">确认</t-button></div>
+        <div class="line" style="margin-top: 35px;"><t-button extraClass="white" :isDisabled="isDisabled" @dotap="$router.push('bind')">确认</t-button></div>
     </div>
 </template>
 

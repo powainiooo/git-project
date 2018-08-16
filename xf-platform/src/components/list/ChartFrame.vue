@@ -42,9 +42,12 @@
             }
         },
         mounted(){
-            this.drawChart1();
-            this.drawChart2();
-            this.drawChart3();
+            setTimeout(()=>{
+                this.drawChart1();
+                this.drawChart2();
+                this.drawChart3();
+            },600)
+
         },
         methods:{
             drawChart1(){
@@ -129,7 +132,11 @@
                             name:'联盟广告',
                             type:'line',
                             stack: '总量',
-                            areaStyle: {normal: {}},
+                            areaStyle: {normal: {color:'#0029a9',opacity:'0.3'}},
+                            itemStyle:{
+                                normal: {color:'#0029a9',borderColor:'#0029a9',borderWidth:4},
+                                emphasis: {color:'#0029a9',borderColor:'#0029a9',borderWidth:4}
+                            },
                             lineStyle:{opacity:0},
                             data:[220, 182, 191, 234, 290, 330, 310]
                         }
@@ -181,7 +188,11 @@
                             name:'邮件营销',
                             type:'line',
                             stack: '总量',
-                            areaStyle: {normal: {}},
+                            areaStyle: {normal: {color:'#0029a9',opacity:'0.3'}},
+                            itemStyle:{
+                                normal: {color:'#0029a9',borderColor:'#0029a9',borderWidth:4},
+                                emphasis: {color:'#0029a9',borderColor:'#0029a9',borderWidth:4}
+                            },
                             lineStyle:{opacity:0},
                             data:[120, 132, 101, 134, 90, 230, 210]
                         },

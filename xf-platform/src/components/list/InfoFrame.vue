@@ -71,43 +71,21 @@
                 <div class="td3">数量(张)</div>
                 <div class="td4">销售状态</div>
             </li>
-            <li class="tbody">
-                <div class="td1">早鸟票</div>
-                <div class="td2">100</div>
-                <div class="td3"><InputNumber :min="100"></InputNumber></div>
+            <li class="tbody" v-for="item in editorTypeList">
+                <div class="td1">{{item.name}}</div>
+                <div class="td2">{{item.sale_nums}}</div>
+                <div class="td3"><InputNumber :min="item.min_nums" v-model="item.all_nums"  size="large"></InputNumber></div>
                 <div class="td4">
-                    <i-switch size="large">
+                    <t-switch :disabled="item.sale_nums == item.all_nums" v-model="item.is_sale_out" true-value="2" false-value="1">
                         <span slot="open">已售罄</span>
-                        <span slot="close"></span>
-                    </i-switch>
-                </div>
-            </li>
-            <li class="tbody">
-                <div class="td1">预售票</div>
-                <div class="td2">100</div>
-                <div class="td3"><InputNumber :min="100"></InputNumber></div>
-                <div class="td4">
-                    <i-switch size="large">
-                        <span slot="open">已售罄</span>
-                        <span slot="close"></span>
-                    </i-switch>
-                </div>
-            </li>
-            <li class="tbody">
-                <div class="td1">普通票</div>
-                <div class="td2">100</div>
-                <div class="td3"><InputNumber :min="100"></InputNumber></div>
-                <div class="td4">
-                    <i-switch size="large">
-                        <span slot="open">销售中</span>
-                        <span slot="close"></span>
-                    </i-switch>
+                        <span slot="close">销售中</span>
+                    </t-switch>
                 </div>
             </li>
         </ul>
         <div class="ticket-list-btns">
             <t-button size="min">确认</t-button>
-            <t-button size="min" extraClass="gray">取消</t-button>
+            <t-button size="min" extraClass="gray" @dotap="resetTypeList">取消</t-button>
         </div>
         <div class="title title2">
             <div class="name">
@@ -136,19 +114,37 @@
 <script type='es6'>
     import TButton from '@/components/common/TButton.vue'
     import TQues from '@/components/common/TQues.vue'
+    import TSwitch from '@/components/common/TSwitch.vue'
     export default {
         name: 'app',
-        components:{TButton,TQues},
+        components:{TButton,TQues,TSwitch},
+        props:{
+            itemData:{
+                type:Object
+            }
+        },
         data(){
             return{
-
+                editorTypeList:[]
             }
         },
         mounted(){
-
+            this.resetTypeList()
         },
         methods:{
-
+            resetTypeList(){
+                let tl = this.itemData.ticketType;
+                this.editorTypeList = [];
+                for(let item of tl){
+                    this.editorTypeList.push({
+                        name:item.name,
+                        sale_nums:item.sale_nums,
+                        all_nums:item.all_nums,
+                        min_nums:item.all_nums,
+                        is_sale_out:item.is_sale_out
+                    })
+                }
+            }
         }
     }
 

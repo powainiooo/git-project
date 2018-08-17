@@ -37,26 +37,26 @@
             <div class="step2">
                 <h3 class="title"><span>2</span>上传图片</h3>
                 <div class="pl50 pt20 pb20" style="border-bottom: 1px solid #e5e5e5;" v-show="registerType == 'company'">
-                    <t-upload @getImgSrc="companyImgUrl = $event">
+                    <t-upload v-model="companyImgUrl">
                         <template slot="title">
                             <h3>企业营业执照</h3>
                         </template>
                     </t-upload>
                 </div>
                 <div class="pl50 pt20 pb20 ids-frame" style="border-bottom: 1px solid #e5e5e5;" v-show="registerType == 'personal'">
-                    <t-upload simple @getImgSrc="idFrontImgUrl = $event">
+                    <t-upload simple v-model="idFrontImgUrl">
                         <template slot="title">
                             <h3>身份证正面</h3>
                         </template>
                     </t-upload>
-                    <t-upload simple @getImgSrc="idBackImgUrl = $event">
+                    <t-upload simple v-model="idBackImgUrl">
                         <template slot="title">
                             <h3>身份证背面</h3>
                         </template>
                     </t-upload>
                 </div>
                 <div class="pl50 pt20 pb20">
-                    <t-upload @getImgSrc="logoImgUrl = $event">
+                    <t-upload v-model="logoImgUrl">
                         <template slot="title">
                             <h3>活动方LOGO</h3>
                         </template>

@@ -28,7 +28,7 @@
             <list-item :itemdata="detailData" v-if="showDetail"></list-item>
             </transition>
             <transition enter-active-class="animated anim-detail slideInRight" leave-active-class="animated anim-detail slideOutRight">
-            <detail-frame v-if="showDetail" @close="showDetail = false"></detail-frame>
+            <detail-frame v-if="showDetail" @close="showDetail = false" :itemData="detailData"></detail-frame>
             </transition>
         </div>
     </section>
@@ -43,8 +43,8 @@
         components:{Example,ListItem,DetailFrame},
         data(){
             return{
-                showExample:true,
-                showDetail:false,
+                showExample:false,
+                showDetail:true,
                 listData:[
                     {status:1},
                     {status:2},
@@ -53,7 +53,28 @@
                     {status:5},
                     {status:6}
                 ],
-                detailData:{}
+                detailData:{
+                    ticketType:[
+                        {
+                            name:'早鸟票',
+                            sale_nums:100,
+                            all_nums:100,
+                            is_sale_out:'2'
+                        },
+                        {
+                            name:'预售票',
+                            sale_nums:100,
+                            all_nums:200,
+                            is_sale_out:'1'
+                        },
+                        {
+                            name:'普通票',
+                            sale_nums:100,
+                            all_nums:200,
+                            is_sale_out:'1'
+                        }
+                    ]
+                }
             }
         },
         methods:{

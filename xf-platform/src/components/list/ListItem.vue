@@ -1,6 +1,8 @@
 <style>
     .list-item{ width: 330px; position: relative;}
-    .list-item .shadow{ margin-left: -21px;}
+    .list-item .shadow{ height: 565px; margin-left: -21px; position: relative; overflow: hidden;}
+    .list-item .shadow img{position: absolute; bottom: 0; left: 0;}
+    .list-item .shadow-short{ height: 370px; top: 50px;}
     .list-item .ticket{ width: 100%; position: absolute; top: 40px; left: 0;}
     .list-item .ticket:after{ content: ''; width: 90px; height: 90px; background: url('../../assets/img/ticket-logo.png') no-repeat; position: absolute; right: -2px; bottom: 0;}
     .list-item .ticket .status{ width: 100%; height: 160px; background-repeat: no-repeat; overflow: hidden;}
@@ -45,7 +47,9 @@
 
 <template>
     <div class="list-item">
-        <div class="shadow"><img src="@/assets/img/list-shadow.png"> </div>
+        <div class="shadow" :class="itemdata.status == '' ? 'shadow-short' : ''">
+            <img src="@/assets/img/list-shadow.png">
+        </div>
         <div class="ticket">
             <!-- 1:销售中 2：已下架 3：审核中 4：审核未通过 5：已售罄 6：已结束-->
             <div class="status status1" v-if="itemdata.status == 1">
@@ -118,22 +122,20 @@
                     <p>已结束<br>Ended</p>
                 </div>
             </div>
-            <div class="line-mid"><img src="@/assets/img/ticket-middle.png" style="display: block;"></div>
+            <div class="line-mid" v-if="itemdata.status != ''"><img src="@/assets/img/ticket-middle.png" style="display: block;"></div>
+            <div class="line-mid" v-if="itemdata.status == ''"><img src="@/assets/img/ticket-top.png" style="display: block;"></div>
             <div class="info-frame">
                 <div class="line1">
-                    <div class="date">
+                    <div class="date" :class="'date'+itemdata.type">
                         <div class="year">
-                            <span>2</span>
-                            <span>0</span>
-                            <span>1</span>
-                            <span>8</span>
+                            <span v-for="item in 4">{{getYears(item)}}</span>
                         </div>
-                        <div class="day">08/03</div>
+                        <div class="day">{{getDays()}}</div>
                     </div>
-                    <div class="logo"><img src="@/assets/img/logo2.png"> </div>
+                    <div class="logo"><img :src="itemdata.logoImg"> </div>
                 </div>
-                <div class="title">Disco back to 90s | Sector</div>
-                <div class="img"><img src="@/assets/img/ticket-img1.jpg"></div>
+                <div class="title">{{itemdata.title}}</div>
+                <div class="img"><img :src="itemdata.posterImg"></div>
             </div>
         </div>
     </div>
@@ -151,7 +153,26 @@
             }
         },
         methods:{
-
+            getYears(item){
+                let begin = this.itemdata.begin;
+                if(begin != ''){
+                    return begin.substr(item-1,1)
+                }
+                return ''
+            },
+            getDays(){
+                let begin = this.itemdata.begin,end = this.itemdata.end,type = this.itemdata.type;
+                if(type != ''){
+                    if(type == '1'){
+                        return begin.substr(5,5)
+                    }else if(type == '2'){
+                        return begin.substr(5,5)+'-'+end.substr(8,2)
+                    }else if(type == '3'){
+                        return begin.substr(5,5)+'-'+end.substr(5,5)
+                    }
+                }
+                return ''
+            }
         }
     }
 

@@ -52,6 +52,8 @@ input, select {
 .pa{ position:absolute;}
 .none{ display: none;}
 
+.radio{ -webkit-appearance: none; width: 22px; height: 22px; display: inline-block; background: url('../img/radio.png') no-repeat; background-size: 100% 100%;}
+.radio:checked{ background-image: url('../img/radio-check.png');}
 
 /*边距*/
 .mt5{ margin-top: 5px;}

@@ -1,0 +1,115 @@
+<style>
+    .record-list{ margin-top: -60px;}
+    .record-list .table-opera{ display: flex; justify-content: flex-end; margin: 0 20px;}
+    .record-list .table-opera>div{ display: flex; align-items: center;}
+    .record-list .table-opera>div .ivu-select-selection{ border-color: #878787;}
+    .record-list .table-opera>div .ivu-input{ border-color: #878787;}
+
+    .record-list .table-list{ width: 100%;}
+    .record-list .table-list th{ height: 50px; font-size: 16px; color: #000000;border-top: 1px solid #dcdcdc;border-bottom: 1px solid #dcdcdc; vertical-align: middle; text-align: left; padding:0 15px;}
+    .record-list .table-list td{ font-size: 14px; color: #888888;border-bottom: 1px solid #dcdcdc; padding: 15px;}
+    .record-list .table-list td .sign1{ font-size: 16px; color: #000000; font-weight: bold;}
+    .record-list .table-list td.check{ background: linear-gradient(244deg,rgb(0,42,169),rgb(0,61,188)); color: #ffffff;}
+    .record-list .table-list td.refund{ background-color: #e73828; color: #ffffff;}
+    .record-list .table-list tbody tr:nth-child(2n+1){ background-color: #eeeef0;}
+</style>
+
+<template>
+    <div class="record-list">
+        <div class="table-opera">
+            <div>
+                <Select style="width:130px; margin-right: 20px;">
+                    <Option value="0">普通票</Option>
+                    <Option value="1">早鸟票</Option>
+                </Select>
+                <Input v-model="value" placeholder="请输入活动名称" style="width: 270px; margin-right: 20px;" />
+                <t-button size="min" style="width: 90px;">查询</t-button>
+            </div>
+        </div>
+        <div style="margin: 20px;">
+            <table class="table-list">
+                <thead>
+                <tr>
+                    <th>活动名称</th>
+                    <th>活动结束时间</th>
+                    <th>总销售票数(张)</th>
+                    <th>票种</th>
+                    <th>张数</th>
+                    <th>单价(元)</th>
+                    <th>总额(元)</th>
+                    <th>可提金额</th>
+                    <th>状态</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Disco</td>
+                    <td>2017/08/08</td>
+                    <td><span class="sign1">600</span></td>
+                    <td>早鸟<br>预售<br>普通</td>
+                    <td>100<br>200<br>300</td>
+                    <td>100<br>200<br>300</td>
+                    <td><span class="sign1">125000</span></td>
+                    <td><span class="sign1">125000</span></td>
+                    <td>未可提现</td>
+                </tr>
+                <tr>
+                    <td>Disco</td>
+                    <td>2017/08/08</td>
+                    <td><span class="sign1">600</span></td>
+                    <td>早鸟<br>预售<br>普通</td>
+                    <td>100<br>200<br>300</td>
+                    <td>100<br>200<br>300</td>
+                    <td><span class="sign1">125000</span></td>
+                    <td><span class="sign1">125000</span></td>
+                    <td><t-button size="min" @dotap="$emit('toggle','crashout')">申请提现</t-button></td>
+                </tr>
+                <tr>
+                    <td>Disco</td>
+                    <td>2017/08/08</td>
+                    <td><span class="sign1">600</span></td>
+                    <td>早鸟<br>预售<br>普通</td>
+                    <td>100<br>200<br>300</td>
+                    <td>100<br>200<br>300</td>
+                    <td><span class="sign1">125000</span></td>
+                    <td><span class="sign1">125000</span></td>
+                    <td class="refund">
+                        <span>提现失败</span><br><br>
+                        <t-ques position="left" width="290"></t-ques>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Disco</td>
+                    <td>2017/08/08</td>
+                    <td><span class="sign1">600</span></td>
+                    <td>早鸟<br>预售<br>普通</td>
+                    <td>100<br>200<br>300</td>
+                    <td>100<br>200<br>300</td>
+                    <td><span class="sign1">125000</span></td>
+                    <td><span class="sign1">125000</span></td>
+                    <td class="check">以提现</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</template>
+
+<script type='es6'>
+    import TButton from '@/components/common/TButton.vue'
+    import TQues from '@/components/common/TQues.vue'
+    export default {
+        name: 'app',
+        components:{TButton,TQues},
+        data(){
+            return{
+
+            }
+        },
+        methods:{
+
+        }
+    }
+
+</script>
+

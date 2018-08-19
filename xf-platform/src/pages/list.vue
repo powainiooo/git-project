@@ -10,11 +10,13 @@
     .prolist-frame .detail-frame .list-item{ margin-right: 60px;}
 
     .prolist-frame .anim-detail{ animation-duration: 0.5s; animation-timing-function: cubic-bezier(.25,.76,.36,.97)}
+    .prolist-frame .btn-link{ width: 270px; position: fixed; top: 200px; right: 50px;}
 </style>
 
 <template>
     <section class="prolist-frame">
         <div class="company-name">Sector</div>
+        <div class="btn-link" v-if="!showDetail"><t-button extraClass="white" @dotap="$router.push('publish')">发布新活动</t-button></div>
         <example v-if="showExample" @intolist="showExample=false"></example>
         <transition enter-active-class="animated anim-detail fadeIn" leave-active-class="animated anim-detail fadeOut">
         <div class="list-content" v-if="!showExample && !showDetail">
@@ -38,42 +40,186 @@
     import Example from '@/components/list/Example.vue'
     import ListItem from '@/components/list/ListItem.vue'
     import DetailFrame from '@/components/list/DetailFrame.vue'
+    import TButton from '@/components/common/TButton.vue'
     export default {
         name: 'app',
-        components:{Example,ListItem,DetailFrame},
+        components:{Example,ListItem,DetailFrame,TButton},
         data(){
             return{
-                showExample:false,
-                showDetail:true,
+                showExample:true,
+                showDetail:false,
                 listData:[
-                    {status:1},
-                    {status:2},
-                    {status:3},
-                    {status:4},
-                    {status:5},
-                    {status:6}
+                    {
+                        status:1,
+                        title:'Disco back',
+                        begin:'2018/06/30',
+                        type:'1',
+                        logoImg:'',
+                        posterImg:'',
+                        ticketType:[
+                            {
+                                name:'早鸟票',
+                                sale_nums:100,
+                                all_nums:100,
+                                is_sale_out:'2'
+                            },
+                            {
+                                name:'预售票',
+                                sale_nums:100,
+                                all_nums:200,
+                                is_sale_out:'1'
+                            },
+                            {
+                                name:'普通票',
+                                sale_nums:100,
+                                all_nums:200,
+                                is_sale_out:'1'
+                            }
+                        ]
+                    },
+                    {
+                        status:2,
+                        title:'Disco back',
+                        begin:'2018/06/30',
+                        type:'1',
+                        logoImg:'',
+                        posterImg:'',
+                        ticketType:[
+                            {
+                                name:'早鸟票',
+                                sale_nums:100,
+                                all_nums:100,
+                                is_sale_out:'2'
+                            },
+                            {
+                                name:'预售票',
+                                sale_nums:100,
+                                all_nums:200,
+                                is_sale_out:'1'
+                            },
+                            {
+                                name:'普通票',
+                                sale_nums:100,
+                                all_nums:200,
+                                is_sale_out:'1'
+                            }
+                        ]
+                    },
+                    {
+                        status:3,
+                        title:'Disco back',
+                        begin:'2018/06/30',
+                        type:'1',
+                        logoImg:'',
+                        posterImg:'',
+                        ticketType:[
+                            {
+                                name:'早鸟票',
+                                sale_nums:100,
+                                all_nums:100,
+                                is_sale_out:'2'
+                            },
+                            {
+                                name:'预售票',
+                                sale_nums:100,
+                                all_nums:200,
+                                is_sale_out:'1'
+                            },
+                            {
+                                name:'普通票',
+                                sale_nums:100,
+                                all_nums:200,
+                                is_sale_out:'1'
+                            }
+                        ]
+                    },
+                    {
+                        status:4,
+                        title:'Disco back',
+                        begin:'2018/06/30',
+                        type:'1',
+                        logoImg:'',
+                        posterImg:'',
+                        ticketType:[
+                            {
+                                name:'早鸟票',
+                                sale_nums:100,
+                                all_nums:100,
+                                is_sale_out:'2'
+                            },
+                            {
+                                name:'预售票',
+                                sale_nums:100,
+                                all_nums:200,
+                                is_sale_out:'1'
+                            },
+                            {
+                                name:'普通票',
+                                sale_nums:100,
+                                all_nums:200,
+                                is_sale_out:'1'
+                            }
+                        ]
+                    },
+                    {
+                        status:5,
+                        title:'Disco back',
+                        begin:'2018/06/30',
+                        type:'1',
+                        logoImg:'',
+                        posterImg:'',
+                        ticketType:[
+                            {
+                                name:'早鸟票',
+                                sale_nums:100,
+                                all_nums:100,
+                                is_sale_out:'2'
+                            },
+                            {
+                                name:'预售票',
+                                sale_nums:100,
+                                all_nums:200,
+                                is_sale_out:'1'
+                            },
+                            {
+                                name:'普通票',
+                                sale_nums:100,
+                                all_nums:200,
+                                is_sale_out:'1'
+                            }
+                        ]
+                    },
+                    {
+                        status:6,
+                        title:'Disco back',
+                        begin:'2018/06/30',
+                        type:'1',
+                        logoImg:'',
+                        posterImg:'',
+                        ticketType:[
+                            {
+                                name:'早鸟票',
+                                sale_nums:100,
+                                all_nums:100,
+                                is_sale_out:'2'
+                            },
+                            {
+                                name:'预售票',
+                                sale_nums:100,
+                                all_nums:200,
+                                is_sale_out:'1'
+                            },
+                            {
+                                name:'普通票',
+                                sale_nums:100,
+                                all_nums:200,
+                                is_sale_out:'1'
+                            }
+                        ]
+                    }
                 ],
                 detailData:{
-                    ticketType:[
-                        {
-                            name:'早鸟票',
-                            sale_nums:100,
-                            all_nums:100,
-                            is_sale_out:'2'
-                        },
-                        {
-                            name:'预售票',
-                            sale_nums:100,
-                            all_nums:200,
-                            is_sale_out:'1'
-                        },
-                        {
-                            name:'普通票',
-                            sale_nums:100,
-                            all_nums:200,
-                            is_sale_out:'1'
-                        }
-                    ]
+
                 }
             }
         },

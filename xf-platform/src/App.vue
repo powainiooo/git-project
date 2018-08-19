@@ -1,13 +1,21 @@
 <template>
     <div id="app">
         <div class="logo"><i class="icon-logo"></i></div>
+        <index v-if="showMenus"></index>
         <router-view/>
     </div>
 </template>
 
-<script>
+<script type="es6">
+    import index from '@/components/menu/index.vue'
     export default {
-        name: 'App'
+        name: 'App',
+        components:{index},
+        computed:{
+            showMenus(){
+                return this.$store.state.showGlobalMenu
+            }
+        }
     }
 </script>
 

@@ -115,7 +115,8 @@
         },
         methods:{
             dobind(){
-                this.$router.push('list')
+                this.$router.push('list');
+                this.$store.commit('doShowGlobalMenu')
             }
         }
     }

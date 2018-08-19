@@ -1,0 +1,73 @@
+<style>
+    .crashout{ width: 100vw; height: 100vh; position: fixed; top: 0; left: 0; z-index: 100; background-color: #000000; display: flex; justify-content: center; align-items: center;}
+    .crashout .laws-close{font-size: 40px; color: #ffffff; position: absolute; top: 35px; right: 37px;}
+    .crashout .crashout-frame{ width: 960px; height: 600px; display: flex; justify-content: space-between;}
+    .crashout .crashout-frame-left{ width: 400px;}
+    .crashout .crashout-frame-right{ width: 360px;}
+    .crashout .line{ width: 270px; margin:0 0 20px 0;}
+    .crashout .line input{ width: 100%; box-sizing: border-box; border: 1px solid #ffffff; border-radius: 6px; font-size: 16px; padding: 7px 16px; color: #ffffff}
+    .crashout .line input::-webkit-input-placeholder{ color: #ffffff;}
+    .crashout  .code-line{ display: flex; justify-content: space-between; align-items: center;}
+    .crashout  .code-line input{ width: 50%;}
+    .crashout  .code-line .n-btn{ width: 40%; }
+</style>
+
+<template>
+    <div class="crashout">
+        <a href="javascript:;" class="laws-close" @click="$emit('toggle','nav')"><Icon type="md-close" /></a>
+        <div class="crashout-frame">
+            <div class="crashout-frame-left">
+                <div class="info-item">
+                    <p class="name">活动名称</p>
+                    <p class="info" style="width: 300px;">Disco back</p>
+                </div>
+                <div class="info-item">
+                    <p class="name">提款额</p>
+                    <p class="info">118750元</p>
+                </div>
+                <div class="mt60 mb60" style="display: flex; align-items: center;">
+                    <input type="radio" class="radio2" v-model="isNeed" value="0">
+                    <span style="font-size: 16px; color: #ffffff; margin-right: 28px; margin-left: 10px;">不需要发票</span>
+                    <input type="radio" class="radio2" v-model="isNeed" value="1">
+                    <span style="font-size: 16px; color: #ffffff; margin-left: 10px;">需要发票</span>
+                </div>
+                <div class="line"><input type="text" placeholder="联系电话"></div>
+                <div class="line code-line">
+                    <input type="text" placeholder="验证码">
+                    <t-button size="min">获取验证码</t-button>
+                </div>
+                <div class="line"><input type="password" placeholder="密码"></div>
+                <div class="line" style="margin-top: 100px;"><t-button>提交申请</t-button></div>
+            </div>
+            <div class="crashout-frame-right" v-if="isNeed == 1">
+                <h3 style="font-size: 14px; color: #ffffff; margin-bottom: 30px; margin-top: 10px;">小夫有票代售服务费发票</h3>
+                <div class="info-item">
+                    <p class="name">发票名称</p>
+                    <p class="info">票务代售服务费</p>
+                </div>
+                <div class="line"><input type="text" placeholder="公司全称"></div>
+                <div class="line"><input type="text" placeholder="纳税人识别号"></div>
+                <div class="line"><input type="text" placeholder="公司地址"></div>
+                <div class="line"><input type="text" placeholder="电话"></div>
+                <div class="line"><input type="text" placeholder="开户行"></div>
+                <div class="line"><input type="text" placeholder="银行账号"></div>
+                <div style="margin-top: 55px; font-size: 12px; color: #888888;">需收取3.6%税点及快递费，选择需要发票后提款额会自动扣除税点，快递费为到付。</div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script type="es6">
+    import TButton from '@/components/common/TButton.vue'
+    export default{
+        name: 'App',
+        components:{TButton},
+        data(){
+            return{
+                isNeed:0
+            }
+        }
+    }
+
+</script>
+

@@ -20,11 +20,13 @@
     .laws-frame .content .document .scroll p{ font-size: 12px; color: #ffffff; line-height: 30px; text-indent: 2em;}
 
     .laws-frame .btn-sub{ width: 270px; margin-left: 390px; margin-top: 20px;}
+    .laws-frame .laws-close{font-size: 40px; color: #ffffff; position: absolute; top: 35px; right: 37px;}
 </style>
 
 <template>
     <div class="laws-frame">
         <div class="logo"><i class="icon-logo"></i></div>
+        <a href="javascript:;" class="laws-close" v-if="readonly" @click="$emit('close')"><Icon type="md-close" /></a>
         <div class="content">
             <div class="laws-list">
                 <ul>
@@ -192,7 +194,7 @@
                         <p>如您对本《隐私权专项条款》内容有任何疑问、意见或建议，您可通过客服渠道联系我们，官方客服电话为：186-8143-8270，同时您也可以联系我们微信客服：leesticketaftersales</p>
                     </div>
                 </div>
-                <div class="btn-sub">
+                <div class="btn-sub" v-if="!readonly">
                     <t-button @dotap="dosubmit">我已阅读本页条款并同意</t-button>
                 </div>
             </div>
@@ -205,6 +207,12 @@
     export default{
         name: 'App',
         components:{TButton},
+        props:{
+            readonly:{
+                type:Boolean,
+                default:false
+            }
+        },
         data(){
             return{
                 documentIndex:0

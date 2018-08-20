@@ -1,0 +1,8 @@
+.blur{filter: blur(4px);}
+.banner{ width: 100%;}
+.content{ margin: 60rpx;}
+.content .title-en{ font-size: 66rpx; font-family: 'Helve'; text-shadow: 0 0 3px rgba(55,44,30,0.25);}
+.content .title-cn{ font-size: 60rpx; text-shadow: 0 0 3rpx rgba(55,44,30,0.25);}
+.content .decs{ font-size: 30rpx; margin-top: 70rpx; letter-spacing: 8rpx;}
+.content .decs .icons{ font-size: 50rpx; margin-right: 10rpx;}
+.content .tips{ font-size: 18rpx; color: rgb(175,174,173); letter-spacing: 4rpx; margin-top: 35rpx;}

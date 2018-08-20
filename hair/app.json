@@ -1,0 +1,14 @@
+{
+  "pages": [
+    "pages/date/date",
+    "pages/store/store",
+    "pages/index/index",
+    "pages/logs/logs"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#d9c39f",
+    "navigationBarTitleText": "Hair",
+    "navigationBarTextStyle": "white"
+  }
+}

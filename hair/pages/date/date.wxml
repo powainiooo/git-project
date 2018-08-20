@@ -1,0 +1,41 @@
+<header-view>选择时间段 | Selection time</header-view>
+<view class="container container-date">
+    <view class="date-list">
+        <view class="item">
+            <view class="day">15</view>
+            <view class="week">周一</view>
+        </view>
+        <view class="item active">
+            <view class="day">15</view>
+            <view class="week">周一</view>
+        </view>
+        <view class="item">
+            <view class="day">15</view>
+            <view class="week">周一</view>
+        </view>
+        <view class="item disabled">
+            <view class="day">15</view>
+            <view class="week">周一</view>
+        </view>
+        <view class="item">
+            <view class="day">15</view>
+            <view class="week">周一</view>
+        </view>
+    </view>
+    <view class="time-item">
+        <view class="icons icon-weixuan"></view>
+        <view class="icons icon-xuanzhong"></view>
+        <view>
+            <view class="time">21:35</view>
+            <view class="end">预计结束时间21:45</view>
+        </view>
+    </view>
+    <view class="time-item time-item-disabled">
+        <view class="hint">已预订</view>
+        <view>
+            <view class="time">21:35</view>
+            <view class="end">预计结束时间21:45</view>
+        </view>
+    </view>
+</view>
+<footer-view>下一步 | Next</footer-view>

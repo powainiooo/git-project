@@ -120,8 +120,6 @@ Component({
                   order_num:order_num
                 },
                 success:res=>{
-                  console.log('pay s o');
-                  console.log(res);
                   wx.navigateTo({
                     url: '/pages/result/result?page=ticketSuc'
                   })
@@ -135,8 +133,6 @@ Component({
                 'signType': jsapi.signType,
                 'paySign': jsapi.paySign,
                 'success':function(res){
-                  console.log('pay s');
-                  console.log(res);
                   wx.request({
                     url:self.data.ajaxSrc+'/pay_success',
                     data:{
@@ -144,8 +140,6 @@ Component({
                       order_num:order_num
                     },
                     success:res=>{
-                      console.log('pay s o');
-                      console.log(res);
                       wx.navigateTo({
                         url: '/pages/result/result?page=ticketSuc'
                       })
@@ -153,19 +147,12 @@ Component({
                   })
                 },
                 'fail':function(res){
-                  console.log('pay f');
-                  console.log(res);
                 }
               })
             }
           }
         })
       }
-    },
-    doClose(){
-      wx.navigateTo({
-        url: '/pages/index/index'
-      })
     },
     setNums(obj){
       let arr = [];

@@ -1,0 +1,15 @@
+<view class="{{showBlur ? 'blur' : ''}}">
+    <header-view showTitle="{{false}}" size="large"></header-view>
+    <view class="container">
+        <image src="../../res/img/pics/banner.jpg" class="banner" mode="widthFix"></image>
+        <view class="content">
+            <view class="title-en">Welcome</view>
+            <view class="title-cn">欢迎</view>
+            <view class="decs">
+                <text class="icons icon-logo"></text>是关注于您头发健康的洗发专营店，我们致力于为您提供一流的洗发服务体验，点击下方预约开始。
+            </view>
+            <view class="tips">本店店铺主题及线上线下艺术呈现由 Yu Nagaba 提供</view>
+        </view>
+    </view>
+</view>
+<footer-view showMenu bindopenMenu="doBlur" bindhideMenu="hideBlur">预约 | Order</footer-view>

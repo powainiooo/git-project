@@ -1,21 +1,16 @@
-// components/ticket/ticket.js
-const app = getApp();
+// components/header/header.js
 Component({
   /**
    * 组件的属性列表
    */
   properties: {
-    itemData:{
-      type:Object,
-      value:{}
-    },
-    isSimple:{
+    showTitle:{
       type:Boolean,
       value:true
     },
-    extraClass:{
+    size:{
       type:String,
-      value:''
+      value:'normal'
     }
   },
 
@@ -23,13 +18,13 @@ Component({
    * 组件的初始数据
    */
   data: {
-    ajaxSrc:app.globalData.ajaxSrc,
-    imgSrc:app.globalData.imgSrc
+
   },
 
   /**
    * 组件的方法列表
    */
   methods: {
+
   }
-});
+})

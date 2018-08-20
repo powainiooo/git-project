@@ -206,13 +206,11 @@ Component({
       })
     },
     doShowCover(){
-      console.log('focus');
       this.setData({
         showCover:true
       })
     },
     doHideCover(){
-      console.log('blur');
       this.setData({
         showCover:false
       })

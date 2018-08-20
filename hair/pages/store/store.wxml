@@ -1,0 +1,15 @@
+<header-view>选择店铺 | Select the store</header-view>
+<view class="container">
+    <image src="../../res/img/pics/banner2.jpg" class="banner" mode="widthFix"></image>
+    <view class="store-item">
+        <view class="title">福田COCOPARK店</view>
+        <view class="address">深圳市福田区</view>
+        <view class="btns">
+            <view class="icons icon-weixuan"></view>
+            <view class="icons icon-xuanzhong"></view>
+            <view class="btn-map">查看地图</view>
+        </view>
+    </view>
+    <view class="tips"><text class="icons icon-logo"></text>目前只有一家体验店，更多店铺正在进行，敬请期待。</view>
+</view>
+<footer-view>下一步 | Next</footer-view>

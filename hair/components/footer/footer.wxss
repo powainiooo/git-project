@@ -1,0 +1,12 @@
+@import '../../res/css/icons.wxss';
+
+.footer{ overflow: hidden; height: 200rpx; width: 100%; position: fixed; left: 0; bottom: 0; z-index: 500; background-color: #e7e3e2;}
+.footer-shadow{ box-shadow: 0 -2rpx 6rpx rgba(0,0,0,0.1);}
+.footer::after{ content: ''; width: 270rpx; height: 10rpx; background-color: #c7c7c7; border-radius: 5rpx; position: absolute; left: 50%; bottom: 16rpx; margin-left: -135rpx;}
+.footer .btn1{ width: 200rpx; height: 100%; box-sizing: border-box; padding-bottom: 40rpx; display: flex; justify-content: center; align-items: center; font-size: 12rpx; color: #ffffff; background-color: #d9c39f; float: left;}
+.footer .btn2{ height: 100%; box-sizing: border-box; padding-bottom: 40rpx; display: flex; justify-content: center; align-items: center; font-size: 40rpx; text-shadow: 0 0 3px rgba(55,44,30,0.25);}
+
+.menu-list{ width: 100%; background-color: #d9c39f; position: fixed; left: 0; bottom: -200rpx; z-index: 450; transition: bottom 0.5s cubic-bezier(.21,.68,.27,1.01);}
+.menu-list .menu-list-item{ width: 100%; height: 170rpx; border-top: 1rpx solid #d8cfbe; border-bottom: 1rpx solid #c6b192; font-size: 40rpx; color: #ffffff; padding-left: 60rpx; box-sizing: border-box; display: flex; align-items: center;}
+.menu-list .menu-list-item:last-child{ border-bottom: none;}
+.menu-list .menu-list-item .en{ font-family: 'Helve';}

@@ -6,11 +6,11 @@
     .laws-frame .content{ width: 1300px; margin: 40px auto; display: flex; justify-content: space-between;}
     .laws-frame .content .laws-list{ margin-top: 60px;}
     .laws-frame .content .laws-list li{ width: 480px; font-size: 14px; color: #ffffff; margin-bottom: 50px; line-height: 1.5; position: relative;}
-    .laws-frame .content .laws-list li span{ font-size: 50px; position: absolute; top: -25px; left: -50px;}
+    .laws-frame .content .laws-list li span{ font-size: 50px; position: absolute; top: -25px; left: -50px; font-weight: bold;}
 
     .laws-frame .content .document{ width: 660px;}
     .laws-frame .content .document .btns{ width: 270px; border-radius: 6px; background-color: #c8c9cb; overflow: hidden; display: flex; margin-left: 390px; margin-bottom: 20px;}
-    .laws-frame .content .document .btns li{ width: 50%; height: 40px; font-size: 14px; color: #ffffff; display: flex; align-items: center; justify-content: center;}
+    .laws-frame .content .document .btns li{ width: 50%; height: 40px; font-size: 14px; color: #ffffff; display: flex; align-items: center; justify-content: center; cursor: pointer;}
     .laws-frame .content .document .btns li.active{ background-color: #002aa6;}
     .laws-frame .content .document .scroll{ border: 2px solid #ffffff; height: 530px; box-sizing: border-box; padding: 10px 20px; overflow-y: scroll;}
     .laws-frame .content .document .scroll::-webkit-scrollbar{ width: 3px; background-color: rgba(0,0,0,0);}

@@ -24,6 +24,7 @@
     .step2-frame .ticke-type-list .input-limit:after{content: '张'; line-height: 40px; position: absolute; top: 0; right: 15px; font-size: 16px; color: #a5a5a5;}
     .step2-frame .ticke-type-list .input-limit input{ padding-right: 35px; padding-left: 60px;}
     .step2-frame .ticke-type-list .radio{ position: absolute; top: 17px; left: 22px;}
+    .step2-frame .ticke-type-list .btn-del{ position: absolute; top: 10px; right: 16px; font-size: 24px; color: #002aa6;}
 
     .step2-frame .ticket-info{ margin-right: 20px; height: 70px; border-bottom: 1px solid #e5e5e5; display: flex;}
     .step2-frame .ticket-info h3{ width: 110px; height: 100%; border-right: 2px solid #e5e5e5; display: flex; align-items: center; justify-content: center; font-size: 16px; color: #000000;}
@@ -34,9 +35,10 @@
     .step2-frame .inp-line h3{ font-size: 16px; color: #000000; margin-bottom: 15px; padding-left: 10px;}
     .step2-frame .inp-line input{ width: 270px; height: 40px; border: 1px solid #888888; border-radius: 5px; box-sizing: border-box; padding: 7px 16px; color: #888888; font-size: 16px;}
     .step2-frame .inp-line .ivu-input-icon{ line-height: 40px;}
-    .step2-frame .notice-list{ margin: 20px;}
+    .step2-frame .notice-list{ margin: 20px; position: relative;}
     .step2-frame .notice-list h3{ font-size: 20px; color: #000000; margin-bottom: 10px; padding-left: 10px; font-family: 'Helve';}
     .step2-frame .notice-list textarea{ width: 100%; box-sizing: border-box; border: 1px solid #888888; border-radius: 5px; padding: 7px 16px; color: #888888; font-size: 16px;}
+    .step2-frame .notice-list .btn-del{ position: absolute; top: -4px; right: 0; font-size: 24px; color: #002aa6;}
     .step2-frame .frame .ques1{ position: absolute; top: 145px; right: 145px;}
     .step2-frame .frame .ques2{ position: absolute; top: 78px; right: 25px;}
 </style>
@@ -52,7 +54,7 @@
                 <div class="step1">
                     <h3 class="title ml20"><span>3</span>票务信息</h3>
                     <div class="">
-                        <div class="ticke-type-list" v-for="item in typeListData">
+                        <div class="ticke-type-list" v-for="(item,index) in typeListData">
                             <input type="checkbox" class="radio" :checked="item.checked">
                             <h3 class="name" v-if="item.isDefault">{{item.name}}</h3>
                             <div class="input" v-if="!item.isDefault">
@@ -67,6 +69,7 @@
                             <div class="input" :class="item.sale_limit == '' ? '' : 'input-limit'">
                                 <input type="text" placeholder="限购张数" v-model="item.sale_limit">
                             </div>
+                            <a href="javascript:;" class="btn-del" v-if="!item.isDefault" @click="doDelType(index)"><Icon type="ios-trash" /></a>
                         </div>
                     </div>
                     <div class="tc mt30 mb30">
@@ -79,11 +82,11 @@
                         <h3>门票类型</h3>
                         <ul>
                            <li>
-                               <input type="radio" class="radio">
+                               <input type="radio" class="radio" v-model="ticketType" value="0">
                                <span>电子票</span>
                            </li>
                            <li>
-                               <input type="radio" class="radio">
+                               <input type="radio" class="radio" v-model="ticketType" value="1">
                                <span>实体票</span>
                            </li>
                         </ul>
@@ -92,29 +95,29 @@
                         <h3>身份证</h3>
                         <ul>
                            <li>
-                               <input type="radio" class="radio">
+                               <input type="radio" class="radio" v-model="ids" value="0">
                                <span>需要</span>
                            </li>
                            <li>
-                               <input type="radio" class="radio">
+                               <input type="radio" class="radio" v-model="ids" value="1">
                                <span>不需要</span>
                            </li>
                         </ul>
                     </div>
                     <div class="inp-line">
                         <h3>开售时间</h3>
-                        <TimePicker format="HH:mm" type="time" placeholder="活动时间" :editable="false"></TimePicker>
+                        <DatePicker format="yyyy-MM-dd HH:mm" type="datetime" placeholder="活动时间" :editable="false"></DatePicker>
                     </div>
                     <div class="inp-line">
                         <h3>结束时间</h3>
-                        <TimePicker format="HH:mm" type="time" placeholder="活动时间" :editable="false"></TimePicker>
+                        <DatePicker format="yyyy-MM-dd HH:mm" type="datetime" placeholder="活动时间" :editable="false"></DatePicker>
                     </div>
                 </div>
             </div>
         </div>
         <div class="frame frame2">
             <div class="ques2">
-                <t-ques top="-260">
+                <t-ques>
                     <ul class="list2 mb30">
                         <li><span>Demo</span></li>
                         <li><span>01</span>本门票只能在深圳xxx使用</li>
@@ -134,6 +137,7 @@
                         <div class="notice-list" v-for="(item,index) in noticeListData">
                             <h3>{{index < 9 ? 0 : ''}}{{index + 1}}</h3>
                             <textarea rows="4" maxlength="60" placeholder="填写须知(30字内)" v-model="item.value"></textarea>
+                            <a href="javascript:;" class="btn-del" @click="doDelNotice(index)"><Icon type="ios-trash" /></a>
                         </div>
                     </div>
                     <div class="tc mt30 mb30">
@@ -152,6 +156,8 @@
         components:{TQues},
         data(){
             return{
+                ticketType:'0',
+                ids:'0',
                 typeListData:[
                     {
                         checked:true,
@@ -196,6 +202,12 @@
             },
             newNoticeItem(){
                 this.noticeListData.push({value:''})
+            },
+            doDelType(index){
+                this.typeListData.splice(index,1)
+            },
+            doDelNotice(index){
+                this.noticeListData.splice(index,1)
             }
         }
     }

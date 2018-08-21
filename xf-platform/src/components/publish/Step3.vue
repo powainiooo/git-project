@@ -1,51 +1,56 @@
 <style>
     .step3-frame{ width: 1400px; position: fixed; bottom: 0; left: 60px; display: flex; justify-content: space-between; z-index: 100;}
-    .step3-frame .frame{ width: 1200px; height: 710px; box-sizing: border-box; background-color: #ffffff; position: relative; display: flex;}
+    .step3-frame .frame{ width: 1200px; height: 710px; box-sizing: border-box; background-color: #ffffff; display: flex; position: relative;}
     .step3-frame .frame:before{ content: ''; width: 100%; height: 3px; background: url("../../assets/img/ticket-top.png") repeat-x; position: absolute; left: 0; top: -3px;}
     .step3-frame .frame:after{ content: ''; width: 1px; position: absolute; left: 50%; top: 60px; bottom: 20px; z-index: 100; background-color: #e5e5e5;}
     .step3-frame .frame .scroll{ width: 100%; height: 100%; display: flex; overflow-y: scroll; padding: 20px 0;box-sizing: border-box; box-sizing: border-box;}
     .step3-frame .frame .scroll::-webkit-scrollbar{ width: 3px; background-color: #ffffff;}
     .step3-frame .frame .scroll::-webkit-scrollbar-thumb{ background-color: #002aa6;}
     .step3-frame .frame .step1{ width: 50%;}
-    .step3-frame .frame .title{ font-size: 18px; color: #000000; font-weight: bold; border-bottom: 1px solid #e5e5e5; padding-left: 50px;}
+    .step3-frame .frame .title{ font-size: 18px; color: #000000; font-weight: bold; border-bottom: 1px solid #e5e5e5; padding-left: 50px; display: flex; justify-content: space-between; align-items: center;}
     .step3-frame .frame .title span{ font-size: 66px; margin-right: 10px; font-family: 'Helve';}
+    .step3-frame .frame .title div{ margin: 10px 10px 0 0; }
     .step3-frame .frame .index{ font-size: 20px; color: #000000; font-family: 'Helve'; padding: 4px 0 4px 50px;border-bottom: 1px solid #e5e5e5;}
-    .step3-frame .frame .text{ height: 140px;border-bottom: 1px solid #e5e5e5; padding-left: 50px; display: flex; align-items: center;}
+    .step3-frame .frame .text{ height: 143px;border-bottom: 3px solid #e5e5e5; padding-left: 50px; display: flex; align-items: center;}
     .step3-frame .frame .text textarea{ width: 460px;; box-sizing: border-box; border: 1px solid #888888; border-radius: 5px; padding: 7px 16px; color: #888888; font-size: 16px;}
     .step3-frame .ques1{ position: absolute; top: 78px; left: 558px;}
     .step3-frame .ques2{ position: absolute; top: 78px; right: 20px;}
-
+    .step3-frame .btn-del{ position: absolute; top: 0; right: 18px; font-size:  24px; color: #002aa6;}
 </style>
 
 <template>
     <div class="step3-frame">
         <div class="frame">
-            <div class="ques1">
-                <t-ques top="-73">
-                    <ul class="list1">
-                        <li><span>1</span>上传图片尺寸为900px*500px</li>
-                        <li><span>1</span>一张图片对应一段文字，可增添多个图片及对应文字，最多限制6张图</li>
-                    </ul>
-                </t-ques>
-            </div>
-            <div class="ques2">
-                <t-ques top="-73">
-                    <ul class="list1">
-                        <li><span>1</span>上传图片尺寸为200px*140px</li>
-                        <li><span>1</span>一张图片对应一段文字，可增添多个图片及对应文字，最多限制6张图</li>
-                    </ul>
-                </t-ques>
-            </div>
             <div class="scroll">
+                <!--<div class="ques2">-->
+                    <!--<t-ques>-->
+                        <!--<ul class="list1">-->
+                            <!--<li><span>1</span>上传图片尺寸为230px*230px</li>-->
+                            <!--<li><span>2</span><p>一张图片对应一段文字，可增添多个图片及对应文字，最多限制6张图</p></li>-->
+                        <!--</ul>-->
+                    <!--</t-ques>-->
+                <!--</div>-->
                 <div class="step1">
-                    <h3 class="title" style="margin-left: 20px; padding-left: 30px;"><span>1</span>活动详情(选填)</h3>
-                    <div class="pr20" v-for="(item,index) in activityListData">
+                    <div class="title" style="margin-left: 20px; padding-left: 30px;">
+                        <h3><span>1</span>活动详情(选填)</h3>
+                        <div>
+                            <t-ques>
+                                <ul class="list1">
+                                    <li><span>1</span>上传图片尺寸为660px*333px</li>
+                                    <li><span>2</span>一张图片对应一段文字，可增添多个图片及对应文字，最多限制6张图</li>
+                                </ul>
+                            </t-ques>
+                        </div>
+
+                    </div>
+                    <div class="pr20 pr" v-for="(item,index) in activityListData">
+                        <a href="javascript:;" class="btn-del" @click="doDelActivity(index)"><Icon type="ios-trash" /></a>
                         <h3 class="index">{{index < 9 ? 0 : ''}}{{index + 1}}</h3>
                         <div class="pl50 pt20 pb20 pr" style="border-bottom: 1px solid #e5e5e5;">
                             <t-upload v-model="item.imgUrl">
                                 <template slot="title">
                                     <h3>活动宣传图片</h3>
-                                    <p>尺寸为900px*500px的JPG格式图片</p>
+                                    <p>尺寸为660px*333px的JPG格式图片</p>
                                 </template>
                             </t-upload>
                         </div>
@@ -58,23 +63,35 @@
                     </div>
                 </div>
                 <div class="step1">
-                    <h3 class="title" style="margin-right: 20px;"><span>2</span>上传艺人图片(选填)</h3>
-                    <div class="pr20" v-for="(item,index) in actListData">
+                    <div class="title" style="margin-left: 20px; padding-left: 30px;">
+                        <h3><span>2</span>上传艺人图片(选填)</h3>
+                        <div>
+                            <t-ques>
+                                <ul class="list1">
+                                    <li><span>1</span>上传图片尺寸为660px*333px</li>
+                                    <li><span>2</span>一张图片对应一段文字，可增添多个图片及对应文字，最多限制6张图</li>
+                                </ul>
+                            </t-ques>
+                        </div>
+
+                    </div>
+                    <div class="pr20 pr" v-for="(item,index) in actListData">
+                        <a href="javascript:;" class="btn-del" @click="doDelAct(index)" style="right: 15px;"><Icon type="ios-trash" /></a>
                         <h3 class="index">{{index < 9 ? 0 : ''}}{{index + 1}}</h3>
                         <div class="pl50 pt20 pb20 pr" style="border-bottom: 1px solid #e5e5e5;">
                             <t-upload v-model="item.logoUrl">
                                 <template slot="title">
                                     <h3>艺人LOGO</h3>
-                                    <p>尺寸为1125px*975px</p>
+                                    <p>尺寸为230px*230px</p>
                                     <p>图片为透明底白图案PNG格式，LOGO统一使用R255 G255 B255色值</p>
                                 </template>
                             </t-upload>
                         </div>
-                        <div class="pl50 pt20 pb20 pr" style="border-bottom: 1px solid #e5e5e5;">
+                        <div class="pl50 pt20 pb20 pr" style="border-bottom: 3px solid #e5e5e5;">
                             <t-upload v-model="item.imgUrl">
                                 <template slot="title">
                                     <h3>艺人照片</h3>
-                                    <p>尺寸为720px*345px的JPG格式图片</p>
+                                    <p>尺寸为480px*230px的JPG格式图片</p>
                                 </template>
                             </t-upload>
                         </div>
@@ -122,6 +139,12 @@
                     logoUrl:'',
                     imgUrl:''
                 })
+            },
+            doDelActivity(index){
+                this.activityListData.splice(index,1)
+            },
+            doDelAct(index){
+                this.actListData.splice(index,1)
             }
         }
     }

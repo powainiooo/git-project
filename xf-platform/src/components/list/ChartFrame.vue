@@ -64,11 +64,11 @@
                         {
                             name:'访问来源',
                             type:'pie',
-                            radius: '75%',
+                            radius: '65%',
+                            color:['#002aac','#1243af','#3355bd','#667fcd','#98a9dc','#acbde5'],
                             label: {
                                 normal: {
                                     show: true,
-                                    position:'inside',
                                     //formatter: '{b}\n{c}人',
                                     formatter: [
                                         '{a|{b}\n}',
@@ -76,8 +76,8 @@
                                         '{a| 人}'
                                     ].join(''),
                                     rich:{
-                                        a:{color:'#ffffff',fontSize:14},
-                                        b:{color:'#ffffff',fontSize:20}
+                                        a:{fontSize:14},
+                                        b:{fontSize:20}
                                     }
                                 }
                             },
@@ -101,12 +101,9 @@
                 myChart.setOption({
                     tooltip : {
                         trigger: 'axis',
-                        axisPointer: {
-                            type: 'cross',
-                            label: {
-                                backgroundColor: '#6a7985'
-                            }
-                        }
+                        formatter:'{c}',
+                        padding:[8,20],
+                        backgroundColor:'rgba(13,41,164,1)'
                     },
                     grid: {
                         top:'3%',
@@ -157,12 +154,9 @@
                     },
                     tooltip : {
                         trigger: 'axis',
-                        axisPointer: {
-                            type: 'cross',
-                            label: {
-                                backgroundColor: '#6a7985'
-                            }
-                        }
+                        padding:[8,20],
+                        formatter: '{a0}: {c0}<br />{a1}: {c1}',
+                        backgroundColor:'rgba(13,41,164,1)'
                     },
                     grid: {
                         top:'20%',

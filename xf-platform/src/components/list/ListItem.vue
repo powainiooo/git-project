@@ -8,10 +8,10 @@
     .list-item .ticket .status{ width: 100%; height: 160px; background-repeat: no-repeat; overflow: hidden;}
     .list-item .ticket .status1{ background-image: url('../../assets/img/ticket-top1.png');}
     .list-item .ticket .status2{ background-image: url('../../assets/img/ticket-top2.png');}
-    .list-item .ticket .status3{ background-image: url('../../assets/img/ticket-top3.png');}
-    .list-item .ticket .status4{ background-image: url('../../assets/img/ticket-top4.png');}
+    .list-item .ticket .status3{ height: 162px; background-image: url('../../assets/img/ticket-top3.png');}
+    .list-item .ticket .status4{ height: 162px; background-image: url('../../assets/img/ticket-top4.png');}
     .list-item .ticket .status5{ background-image: url('../../assets/img/ticket-top5.png');}
-    .list-item .ticket .status6{ background-image: url('../../assets/img/ticket-top6.png');}
+    .list-item .ticket .status6{ height: 162px; background-image: url('../../assets/img/ticket-top6.png');}
     .list-item .ticket .status .top{ width: 100%; height: 60px; margin-top: 2px; display: flex; padding: 0 10px; box-sizing: border-box; justify-content: space-between; align-items: center; font-size: 18px;}
     .list-item .ticket .status3 .top{ height: 160px; align-items: baseline; margin-top: 20px;}
     .list-item .ticket .status4 .top{ height: 160px; align-items: baseline; margin-top: 20px;}
@@ -29,13 +29,13 @@
     .list-item .ticket .status .nums p{ color: #000000; font-size: 14px; font-family: 'Helve';}
     .list-item .ticket .status .nums p span{ font-size: 40px; margin-right: 10px;}
     .list-item .ticket .status .nums div{ color: #c0c0c0; font-size: 18px; align-self: flex-end; margin-bottom: 8px;}
-    .list-item .ticket .line-mid{ overflow: hidden; height: 5px; display: flex; align-items: flex-end;}
+    .list-item .ticket .line-mid{ overflow: hidden; display: flex; align-items: flex-end;}
     .list-item .ticket .info-frame{ width: 330px; height: 272px; mask-image: url('../../assets/img/cover.png'); -webkit-mask-image: url('../../assets/img/cover.png'); background-color: #ffffff;}
-    .list-item .ticket .info-frame .line1{ height: 85px; overflow: hidden; border-bottom: 2px solid #c1c1c1; box-sizing: border-box;}
-    .list-item .ticket .info-frame .line1 .date{ width: 140px; box-sizing: border-box; border-right: 2px solid #c1c1c1;  float: left;}
+    .list-item .ticket .info-frame .line1{ height: 85px; overflow: hidden; border-bottom: 1px solid #c1c1c1; box-sizing: border-box;}
+    .list-item .ticket .info-frame .line1 .date{ width: 140px; box-sizing: border-box; border-right: 1px solid #c1c1c1;  float: left;}
     .list-item .ticket .info-frame .line1 .date2{ width: 190px;}
     .list-item .ticket .info-frame .line1 .date3{ width: 190px;}
-    .list-item .ticket .info-frame .line1 .date .year{ height: 25px; box-sizing: border-box; font-size: 12px; display: flex; justify-content: space-between; align-items: center; color: #000000; border-bottom: 2px solid #c1c1c1; padding: 0 10px;}
+    .list-item .ticket .info-frame .line1 .date .year{ height: 25px; box-sizing: border-box; font-size: 12px; display: flex; justify-content: space-between; align-items: center; color: #000000; border-bottom: 1px solid #c1c1c1; padding: 0 10px;}
     .list-item .ticket .info-frame .line1 .date .day{ height: 58px; font-size: 44px; display: flex; justify-content: center; align-items: center; color: #000000; font-family: 'Helve';}
     .list-item .ticket .info-frame .line1 .date3 .day{ font-size: 32px;}
     .list-item .ticket .info-frame .line1 .logo{ height: 85px; display: flex; justify-content: center; align-items: center; overflow: hidden;}
@@ -122,7 +122,10 @@
                     <p>已结束<br>Ended</p>
                 </div>
             </div>
-            <div class="line-mid" v-if="itemdata.status != ''"><img src="@/assets/img/ticket-middle.png" style="display: block;"></div>
+            <div class="line-mid" v-if="itemdata.status != ''">
+                <img src="@/assets/img/ticket-middle.png" style="display: block;" v-if="itemdata.status == '1' || itemdata.status == '2' || itemdata.status == '5'">
+                <img src="@/assets/img/ticket-middle2.png" style="display: block;" v-if="itemdata.status == '3' || itemdata.status == '4' || itemdata.status == '6'">
+            </div>
             <div class="line-mid" v-if="itemdata.status == ''"><img src="@/assets/img/ticket-top.png" style="display: block;"></div>
             <div class="info-frame">
                 <div class="line1">

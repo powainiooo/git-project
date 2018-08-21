@@ -45,7 +45,7 @@
                 <div class="img"><img src="@/assets/img/logo2.png"> </div>
                 <div class="name">活动方LOGO</div>
             </div>
-            <div style="font-size: 14px; color: #888888;">活动方基本信息无法修改，如若有紧急情况需要修改信息，<br>请电话联系18000000000</div>
+            <div style="font-size: 14px; color: #888888; margin-top: 60px;">活动方基本信息无法修改，如若有紧急情况需要修改信息，<br>请电话联系18000000000</div>
         </div>
     </div>
 </template>

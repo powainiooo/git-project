@@ -8,6 +8,7 @@
 
 <template>
     <div class="form-frame" :style="{width:showOrganize ? '1350px' : '400px'}">
+
         <transition enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
             <section class="log-frame" v-if="showLogin || showForget">
                 <login-frame v-if="showLogin" @gotoForget="doShowForget"></login-frame>

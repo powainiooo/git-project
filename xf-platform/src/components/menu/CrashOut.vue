@@ -1,5 +1,5 @@
 <style>
-    .crashout{ width: 100vw; height: 100vh; position: fixed; top: 0; left: 0; z-index: 100; background-color: #000000; display: flex; justify-content: center; align-items: center;}
+    .crashout{ width: 100vw; height: 100vh; position: fixed; top: 0; left: 0; z-index: 410; background-color: rgba(0,0,0,0.9); display: flex; justify-content: center; align-items: center;}
     .crashout .laws-close{font-size: 40px; color: #ffffff; position: absolute; top: 35px; right: 37px;}
     .crashout .crashout-frame{ width: 960px; height: 600px; display: flex; justify-content: space-between;}
     .crashout .crashout-frame-left{ width: 400px;}
@@ -14,7 +14,7 @@
 
 <template>
     <div class="crashout">
-        <a href="javascript:;" class="laws-close" @click="$emit('toggle','nav')"><Icon type="md-close" /></a>
+        <a href="javascript:;" class="laws-close" @click="$emit('toggle','recordlist')"><Icon type="md-close" /></a>
         <div class="crashout-frame">
             <div class="crashout-frame-left">
                 <div class="info-item">
@@ -31,13 +31,13 @@
                     <input type="radio" class="radio2" v-model="isNeed" value="1">
                     <span style="font-size: 16px; color: #ffffff; margin-left: 10px;">需要发票</span>
                 </div>
-                <div class="line"><input type="text" placeholder="联系电话"></div>
+                <div class="line"><input type="text" placeholder="联系电话" readonly value="13812341234"></div>
                 <div class="line code-line">
-                    <input type="text" placeholder="验证码">
-                    <t-button size="min">获取验证码</t-button>
+                    <input type="text" placeholder="验证码" v-model="code">
+                    <t-button size="min" :isDisabled="phoneDisabled" @dotap="getCode">{{codeBtnName}}</t-button>
                 </div>
-                <div class="line"><input type="password" placeholder="密码"></div>
-                <div class="line" style="margin-top: 100px;"><t-button>提交申请</t-button></div>
+                <div class="line"><input type="password" placeholder="密码" v-model="password"></div>
+                <div class="line" style="margin-top: 100px;"><t-button :isDisabled="nextDisabled">提交申请</t-button></div>
             </div>
             <div class="crashout-frame-right" v-if="isNeed == 1">
                 <h3 style="font-size: 14px; color: #ffffff; margin-bottom: 30px; margin-top: 10px;">小夫有票代售服务费发票</h3>
@@ -45,12 +45,12 @@
                     <p class="name">发票名称</p>
                     <p class="info">票务代售服务费</p>
                 </div>
-                <div class="line"><input type="text" placeholder="公司全称"></div>
-                <div class="line"><input type="text" placeholder="纳税人识别号"></div>
-                <div class="line"><input type="text" placeholder="公司地址"></div>
-                <div class="line"><input type="text" placeholder="电话"></div>
-                <div class="line"><input type="text" placeholder="开户行"></div>
-                <div class="line"><input type="text" placeholder="银行账号"></div>
+                <div class="line"><input type="text" placeholder="公司全称" v-model="company"></div>
+                <div class="line"><input type="text" placeholder="纳税人识别号" v-model="ids"></div>
+                <div class="line"><input type="text" placeholder="公司地址" v-model="address"></div>
+                <div class="line"><input type="text" placeholder="电话" v-model="mobile"></div>
+                <div class="line"><input type="text" placeholder="开户行" v-model="bankname"></div>
+                <div class="line"><input type="text" placeholder="银行账号" v-model="banknum"></div>
                 <div style="margin-top: 55px; font-size: 12px; color: #888888;">需收取3.6%税点及快递费，选择需要发票后提款额会自动扣除税点，快递费为到付。</div>
             </div>
         </div>
@@ -61,10 +61,57 @@
     import TButton from '@/components/common/TButton.vue'
     export default{
         name: 'App',
-        components:{TButton},
+        components: {TButton},
         data(){
-            return{
-                isNeed:0
+            return {
+                isNeed: '0',
+                code: '',
+                codeBtnName: '获取验证码',
+                codeIndex: 0,
+                password:'',
+                company:'',
+                ids:'',
+                address:'',
+                mobile:'',
+                bankname:'',
+                banknum:''
+            }
+        },
+        computed: {
+            phoneDisabled(){
+                if (this.codeIndex != 0) {
+                    return true
+                }
+                return false
+            },
+            nextDisabled(){
+                if(this.code == '' || this.password == ''){
+                    return true
+                }
+                if(this.isNeed == '1'){
+                    if(this.company == '' || this.ids == '' || this.address == '' || this.mobile == '' || this.bankname == '' || this.banknum == ''){
+                        return true
+                    }
+                }
+                return false
+            }
+        },
+        methods: {
+            getCode(){
+                this.codeCount();
+            },
+            codeCount(){
+                this.codeIndex = 60;
+                this.codeBtnName = `请${this.codeIndex}秒以后再尝试`;
+                let t = setInterval(()=>{
+                    if(this.codeIndex == 0){
+                        clearInterval(t);
+                        this.codeBtnName = `获取验证码`;
+                    }else{
+                        this.codeIndex -- ;
+                        this.codeBtnName = `请${this.codeIndex}秒以后再尝试`;
+                    }
+                },1000)
             }
         }
     }

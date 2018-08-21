@@ -8,7 +8,7 @@
     .organizer-frame .frame .step2:before{ content: ''; width:1px; position: absolute; top: 40px; left: 0; bottom: 0; background-color: #e5e5e5;}
     .organizer-frame .frame .title{ font-size: 18px; color: #000000; font-weight: bold; border-bottom: 1px solid #e5e5e5; padding-left: 50px;}
     .organizer-frame .frame .title span{ font-size: 66px; margin-right: 10px; font-family: 'Helve';}
-    .organizer-frame .frame .step1 input{ width: 270px; border: 1px solid #a5a5a5; border-radius: 5px; box-sizing: border-box; padding: 7px 16px; color: #a5a5a5; font-size: 16px;}
+    .organizer-frame .frame .step1 input{ width: 270px; border: 1px solid #a5a5a5; border-radius: 5px; box-sizing: border-box; padding: 7px 16px; color: #000000; font-size: 16px;}
     .organizer-frame .step2 .hint{ font-size: 14px; color: #888888;}
     .organizer-frame .step2 .hint span{ font-size: 16px; font-weight: bold; margin-right: 4px;}
     .organizer-frame .step2 .demo{ display: flex; justify-content: space-between; align-items: center;}

@@ -5,8 +5,11 @@
     .n-modal .modal-frame .top{ margin: 30px 30px 70px 70px; display: flex; justify-content: space-between; color: #0129ac;}
     .n-modal .modal-frame .top .icon-logo{ font-size: 21px;}
     .n-modal .modal-frame .top .ivu-icon-md-close{ font-size: 24px;}
-    .n-modal .modal-frame .title{ font-size: 32px; margin: 0 70px 20px 70px;}
-    .n-modal .modal-frame .content{ font-size: 14px; height: 130px; margin: 0 70px;}
+    .n-modal .modal-frame .title{ font-size: 32px; margin: 0 70px 20px 70px; color: #000000;}
+    .n-modal .modal-frame .content{ font-size: 14px; height: 130px; margin: 0 70px; color: #000000;}
+    .n-modal .modal-frame .txt{ margin: -50px 70px 10px 70px; height: 238px;}
+    .n-modal .modal-frame .txt p{ font-size: 14px; text-align: right; margin-bottom: 6px; color: #002aa6;}
+    .n-modal .modal-frame .txt textarea{ width: 100%; border: 1px solid #e5e5e5; border-radius: 6px; padding: 10px; box-sizing: border-box;}
     .n-modal .modal-frame .btns{ display: flex; justify-content: center;}
     .n-modal .modal-frame .btns .n-btn{ width: 270px; margin: 0 35px;}
 </style>
@@ -18,9 +21,12 @@
                 <i class="icon-logo"></i>
                 <Icon type="md-close" @click="onCancel" />
             </div>
-            <div class="title">{{title}}</div>
-            <div class="content">{{content}}</div>
-
+            <div class="title" v-if="type == ''">{{title}}</div>
+            <div class="content" v-html="content" v-if="type == ''"></div>
+            <div class="txt" v-if="type == 'textarea'">
+                <p>{{text.length}}/200</p>
+                <textarea rows="9" placeholder="请填写通知（200字）" v-model="text"></textarea>
+            </div>
             <div class="btns btns-one">
                 <t-button @dotap="onOk">确认</t-button>
                 <t-button extraClass="gray" v-if="!isWarn" @dotap="onCancel">取消</t-button>
@@ -40,6 +46,8 @@
                 isWarn:true,
                 title:'',
                 content:'',
+                type:'',
+                text:'',
                 opts:{}
             }
         },
@@ -56,6 +64,7 @@
                 this.isWarn = false;
                 this.content = opts.content;
                 this.title = opts.title;
+                this.type = opts.type || '';
                 this.opts = opts;
             },
             onCancel(){
@@ -64,7 +73,7 @@
             onOk(){
                 this.isShow = false;
                 if(typeof this.opts.onOk == 'function'){
-                    this.opts.onOk();
+                    this.opts.onOk(this.text);
                 }
             }
         }

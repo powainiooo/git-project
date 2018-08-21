@@ -7,17 +7,23 @@
     .prolist-frame .list-content>div{ margin:0 30px 0px 30px;}
 
     .prolist-frame .detail-frame{ width: 100%; height: 100%; display: flex; justify-content: flex-end; align-items: center; overflow: hidden; position: fixed; top: 0; left: 0;}
-    .prolist-frame .detail-frame .list-item{ margin-right: 60px;}
+    .prolist-frame .detail-frame .list-item{ margin-right: 60px; margin-top: 160px;}
 
     .prolist-frame .anim-detail{ animation-duration: 0.5s; animation-timing-function: cubic-bezier(.25,.76,.36,.97)}
     .prolist-frame .btn-link{ width: 270px; position: fixed; top: 200px; right: 50px;}
+    .prolist-frame .search{ position: fixed; top: 15px; right: 90px; z-index: 500;}
 </style>
 
 <template>
-    <section class="prolist-frame">
+    <section class="prolist-frame" @scroll="pageScroll($event)">
         <div class="company-name">Sector</div>
-        <div class="btn-link" v-if="!showDetail"><t-button extraClass="white" @dotap="$router.push('publish')">发布新活动</t-button></div>
+        <div class="btn-link" v-if="!showDetail && frameST == 0"><t-button extraClass="white" @dotap="$router.push('publish')">发布新活动</t-button></div>
         <example v-if="showExample" @intolist="showExample=false"></example>
+
+        <div class="search">
+            <t-search></t-search>
+        </div>
+
         <transition enter-active-class="animated anim-detail fadeIn" leave-active-class="animated anim-detail fadeOut">
         <div class="list-content" v-if="!showExample && !showDetail">
             <div v-for="(item,index) in listData" @click="gotoDetail(index)">
@@ -25,6 +31,7 @@
             </div>
         </div>
         </transition>
+
         <div class="detail-frame" v-show="!showExample && showDetail">
             <transition enter-active-class="animated bounceIn" leave-active-class="animated bounceOut">
             <list-item :itemdata="detailData" v-if="showDetail"></list-item>
@@ -41,9 +48,10 @@
     import ListItem from '@/components/list/ListItem.vue'
     import DetailFrame from '@/components/list/DetailFrame.vue'
     import TButton from '@/components/common/TButton.vue'
+    import TSearch from '@/components/common/TSearch.vue'
     export default {
         name: 'app',
-        components:{Example,ListItem,DetailFrame,TButton},
+        components:{Example,ListItem,DetailFrame,TButton,TSearch},
         data(){
             return{
                 showExample:true,
@@ -218,15 +226,17 @@
                         ]
                     }
                 ],
-                detailData:{
-
-                }
+                detailData:{},
+                frameST:0
             }
         },
         methods:{
             gotoDetail(index){
                 this.detailData = this.listData[index];
                 this.showDetail = true;
+            },
+            pageScroll(e){
+                this.frameST = e.target.scrollTop;
             }
         }
     }

@@ -7,7 +7,7 @@
     .register-frame .frame .title span{ font-size: 66px;}
     .register-frame .frame .more{ overflow: hidden; transition:all 0.6s cubic-bezier(.15,.61,.42,1.05);}
     .register-frame .frame .line{ margin-bottom: 20px;}
-    .register-frame .frame .line input{ width: 100%; box-sizing: border-box; border: 1px solid #888888; border-radius: 6px; font-size: 16px; padding: 7px 16px; color: #888888}
+    .register-frame .frame .line input{ width: 100%; box-sizing: border-box; border: 1px solid #888888; border-radius: 6px; font-size: 16px; padding: 7px 16px; color: #000000}
     .register-frame .frame .line input::-webkit-input-placeholder{ color: #888888;}
     .register-frame .frame  .code-line{ display: flex; justify-content: space-between;}
     .register-frame .frame  .code-line input{ width: 50%;}
@@ -16,7 +16,7 @@
     .register-frame .tab{ border-top: 1px solid #e5e5e5; padding-top: 25px; margin-top: 25px;}
     .register-frame .tab h3{ font-size: 18px; color: #000; font-weight: bold; margin-left: 14px;}
     .register-frame .tab ul{ display: flex;margin-top: 15px;}
-    .register-frame .tab ul li{flex: 1; height: 70px; display: flex; justify-content: center; align-items: center; font-size: 18px; color: #ffffff;background-color: #c8c9cb; }
+    .register-frame .tab ul li{flex: 1; height: 70px; display: flex; justify-content: center; align-items: center; font-size: 18px; color: #ffffff;background-color: #c8c9cb; cursor: pointer;}
     .register-frame .tab ul li.active{ background-color: #002aa6;  box-shadow: 0 2px 3px rgba(0,0,0,0.2);}
     .register-frame .tab ul li:first-child{ border-radius: 5px 0 0 5px;}
     .register-frame .tab ul li:nth-child(2){ border-radius: 0 5px 5px 0;}
@@ -36,7 +36,7 @@
                 <div class="line"><input type="text" placeholder="联系电话" v-model="phone" :readonly="confirmInfos"></div>
                 <div class="line code-line">
                     <input type="text" placeholder="验证码" v-model="code" :readonly="confirmInfos">
-                    <t-button :isDisabled="phoneDisabled" size="min">获取验证码</t-button>
+                    <t-button :isDisabled="phoneDisabled" size="min" @dotap="getCode">{{codeBtnName}}</t-button>
                 </div>
                 <div class="line"><input type="password" placeholder="密码" v-model="password" :readonly="confirmInfos"></div>
                 <div class="line"><input type="password" placeholder="重复密码" v-model="confirmPSW" :readonly="confirmInfos"></div>
@@ -59,6 +59,7 @@
         </div>
 
         <div class="warn" v-if="!pswPass && password != ''">密码不符合要求</div>
+        <div class="warn" v-if="pswConfirm" style="top:330px;">密码不一致</div>
     </div>
 </template>
 
@@ -73,6 +74,8 @@
                 email:'',
                 phone:'',
                 code:'',
+                codeBtnName:'获取验证码',
+                codeIndex:0,
                 password:'',
                 confirmPSW:'',
                 confirmInfos:false
@@ -85,7 +88,7 @@
             },
             phoneDisabled(){
                 let reg = /^[1][3,4,5,7,8][0-9]{9}$/;
-                if(!reg.test(this.phone)){
+                if(!reg.test(this.phone) || this.codeIndex != 0){
                     return true
                 }
                 return false
@@ -93,6 +96,12 @@
             pswPass(){
                 let reg = /^(?=.*[0-9])(?=.*[a-zA-Z])(.{8,})$/;
                 return reg.test(this.password)
+            },
+            pswConfirm(){
+                if(this.password != this.confirmPSW){
+                    return true
+                }
+                return false
             },
             nextDisabled(){
                 if(this.phoneDisabled || this.emailDisabled || this.code == '' || !this.pswPass || this.password != this.confirmPSW){
@@ -117,6 +126,22 @@
             },
             changeType(type){
                 this.$emit('changeType',type)
+            },
+            getCode(){
+                this.codeCount();
+            },
+            codeCount(){
+                this.codeIndex = 60;
+                this.codeBtnName = `请${this.codeIndex}秒以后再尝试`;
+                let t = setInterval(()=>{
+                    if(this.codeIndex == 0){
+                        clearInterval(t);
+                        this.codeBtnName = `获取验证码`;
+                    }else{
+                        this.codeIndex -- ;
+                        this.codeBtnName = `请${this.codeIndex}秒以后再尝试`;
+                    }
+                },1000)
             }
         }
     }

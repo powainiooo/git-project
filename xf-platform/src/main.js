@@ -12,14 +12,12 @@ import '@/assets/css/helve.css';
 import tModal from './components/common/modal'
 import iView from 'iview';
 import 'iview/dist/styles/iview.css';
-import iviewArea from 'iview-area';
 import store from './store'
 
 Vue.config.productionTip = false
 Vue.use(VueAwesomeSwiper)
 Vue.use(tModal);
 Vue.use(iView);
-Vue.use(iviewArea);
 
 /* eslint-disable no-new */
 new Vue({

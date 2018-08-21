@@ -1,9 +1,9 @@
 <style>
     .n-menu{ position: fixed; top: 0; right: 0; z-index: 500;}
-    .n-menu .btn{ font-size: 40px; color: #ffffff;}
+    .n-menu .btn{ font-size: 32px; color: #ffffff; margin-top: 6px; display: block;}
     .n-menu .btn2{ font-size: 40px; color: #0129ac;}
     .n-menu .btn2 .ivu-icon{ display: block;}
-    .n-menu .n-menu-frame{ width: 500px; height: 100vh; position: absolute; top: 0; right: 0; background-color: #ffffff; transition: all 0.5s cubic-bezier(.25,.76,.36,.97);}
+    .n-menu .n-menu-frame{ width: 500px; height: 100vh; position: absolute; top: 0; right: 0; background-color: #ffffff; transition: all 0.5s cubic-bezier(.25,.76,.36,.97); box-shadow: 0 2px 10px rgba(0,0,0,0.2);}
     .n-menu .n-menu-frame::-webkit-scrollbar{ width: 3px; background-color: #ffffff;}
     .n-menu .n-menu-frame::-webkit-scrollbar-thumb{ background-color: #002aa6;}
     .n-menu .n-menu-btns{ overflow: hidden; margin: 50px 40px 100px 40px;}
@@ -32,7 +32,7 @@
             <bank-info v-if="showItem == 'bankinfo'" @toggle="toggle"></bank-info>
             <editor-bank v-if="showItem == 'editorbank'"></editor-bank>
             <record-list v-if="showItem == 'recordlist'" @toggle="toggle"></record-list>
-            <crash-out v-if="showItem == 'crashout'" @toggle="toggle"></crash-out>
+            <crash-out v-if="showCrashOut" @toggle="toggle"></crash-out>
             <t-laws v-if="showLaws" readonly @close="showLaws=false"></t-laws>
             <contact v-if="showItem == 'contact'" readonly></contact>
             <div class="copyright" v-if="showItem == 'nav'">
@@ -60,13 +60,19 @@
             return{
                 showItem:'nav',
                 showNavs:false,
-                showLaws:false
+                showLaws:false,
+                showCrashOut:false
             }
         },
         methods:{
             toggle(val){
                 if(val == 'laws'){
                     this.showLaws = true;
+                }else if(val == 'crashout'){
+                    this.showCrashOut = true;
+                }else if(val == 'recordlist'){
+                    this.showItem = val;
+                    this.showCrashOut = false;
                 }else{
                     this.showItem = val;
                 }

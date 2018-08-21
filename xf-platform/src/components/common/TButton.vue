@@ -52,7 +52,9 @@
             },
             doclick(){
                 if(this.isDisabled) return;
-                this.$emit('dotap')
+                setTimeout(()=>{
+                    this.$emit('dotap')
+                },300)
             }
         }
     }

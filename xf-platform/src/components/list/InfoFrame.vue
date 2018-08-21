@@ -20,11 +20,12 @@
     .pro-info .ticket-list li.tbody .td1{ font-size: 18px; color: #000000; font-weight: bold;}
     .pro-info .ticket-list li.tbody .td2{ font-size: 48px; color: #000000; font-weight: bold;}
     .pro-info .ticket-list li.tbody .td3 .ivu-input-number-input{ display: block; text-align: center;}
+    .pro-info .ticket-list li.tbody .td-change .ivu-input-number-input{ font-weight: bold; color: #000000; font-size: 18px;}
     .pro-info .ticket-list li.tbody .td4 .ivu-switch-large{ width: 70px; height: 25px;}
     .pro-info .ticket-list li.tbody .td4 .ivu-switch-large:after{ top: 3px;}
     .pro-info .ticket-list li.tbody .td4 .ivu-switch-large.ivu-switch-checked:after{ left: 50px;}
     .pro-info .ticket-list li.tbody .td4 .ivu-switch-large .ivu-switch-inner{ top: 2px;}
-    .pro-info .ticket-list-btns{ display: flex; justify-content: flex-end; margin-right: 60px;}
+    .pro-info .ticket-list-btns{ display: flex; justify-content: flex-end; margin-right: 60px; transition: height 0.3s cubic-bezier(.25,.76,.36,.97); overflow: hidden;}
     .pro-info .ticket-list-btns .n-btn{ width: 90px; margin-left: 10px;}
 
     .pro-info .qrcode{ display: flex;}
@@ -53,7 +54,7 @@
         <div class="title title2">
             <div class="name">
                 <span class="index">2</span>基本信息
-                <t-ques style="margin-left: 15px;" width="300" top="-83">
+                <t-ques style="margin-left: 15px;" width="300">
                     <ul class="list1">
                         <li><span>1</span>票的数量只可增加，<br>一旦提交无法减少张数。</li>
                         <li><span>2</span>售罄功能开启，售票平台对应的票种将显示"已售罄"，用户则无法再购买。</li>
@@ -71,10 +72,12 @@
                 <div class="td3">数量(张)</div>
                 <div class="td4">销售状态</div>
             </li>
-            <li class="tbody" v-for="item in editorTypeList">
+            <li class="tbody" v-for="(item,index) in editorTypeList">
                 <div class="td1">{{item.name}}</div>
                 <div class="td2">{{item.sale_nums}}</div>
-                <div class="td3"><InputNumber :min="item.min_nums" v-model="item.all_nums"  size="large"></InputNumber></div>
+                <div class="td3" :class="editorTypeList[index].all_nums != lastTypeList[index].all_nums ? 'td-change' : ''">
+                    <InputNumber :min="item.min_nums" v-model="item.all_nums"  size="large"></InputNumber>
+                </div>
                 <div class="td4">
                     <t-switch :disabled="item.sale_nums == item.all_nums" v-model="item.is_sale_out" true-value="2" false-value="1">
                         <span slot="open">已售罄</span>
@@ -83,14 +86,14 @@
                 </div>
             </li>
         </ul>
-        <div class="ticket-list-btns">
+        <div class="ticket-list-btns" :style="{height:isDiff ? '36px' : '0px'}">
             <t-button size="min">确认</t-button>
             <t-button size="min" extraClass="gray" @dotap="resetTypeList">取消</t-button>
         </div>
         <div class="title title2">
             <div class="name">
                 <span class="index">3</span>链接码 及 验票码
-                <t-ques style="margin-left: 15px;" width="300" top="-83">
+                <t-ques style="margin-left: 15px;" width="300">
                     <ul class="list1">
                         <li><span>1</span>链接码用户推广时，方便用户扫描跳转到购票页面。</li>
                         <li><span>2</span>验票码扫描后可获得活动验票权限，授权成功后的手机可进行活动验票。</li>
@@ -105,7 +108,7 @@
             </div>
             <div class="qritem">
                 <img src="@/assets/img/qrcode2.png" width="100" height="100">
-                <t-button size="min">下载链接码</t-button>
+                <t-button size="min">下载验票码</t-button>
             </div>
         </div>
     </div>
@@ -123,9 +126,21 @@
                 type:Object
             }
         },
+        computed:{
+            isDiff(){
+                for(let i=0;i<this.editorTypeList.length;i++){
+                    if(this.editorTypeList[i].all_nums != this.lastTypeList[i].all_nums || this.editorTypeList[i].is_sale_out != this.lastTypeList[i].is_sale_out){
+                        return true;
+                        break;
+                    }
+                }
+                return false
+            }
+        },
         data(){
             return{
-                editorTypeList:[]
+                editorTypeList:[],
+                lastTypeList:[]
             }
         },
         mounted(){
@@ -142,7 +157,14 @@
                         all_nums:item.all_nums,
                         min_nums:item.all_nums,
                         is_sale_out:item.is_sale_out
-                    })
+                    });
+                    this.lastTypeList.push({
+                        name:item.name,
+                        sale_nums:item.sale_nums,
+                        all_nums:item.all_nums,
+                        min_nums:item.all_nums,
+                        is_sale_out:item.is_sale_out
+                    });
                 }
             }
         }

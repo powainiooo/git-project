@@ -30,6 +30,7 @@
     .list-item .ticket .status .nums p span{ font-size: 40px; margin-right: 10px;}
     .list-item .ticket .status .nums div{ color: #c0c0c0; font-size: 18px; align-self: flex-end; margin-bottom: 8px;}
     .list-item .ticket .line-mid{ overflow: hidden; display: flex; align-items: flex-end;}
+    .list-item .ticket .line-mid img{ width: 100%;}
     .list-item .ticket .info-frame{ width: 330px; height: 272px; mask-image: url('../../assets/img/cover.png'); -webkit-mask-image: url('../../assets/img/cover.png'); background-color: #ffffff;}
     .list-item .ticket .info-frame .line1{ height: 85px; overflow: hidden; border-bottom: 1px solid #c1c1c1; box-sizing: border-box;}
     .list-item .ticket .info-frame .line1 .date{ width: 140px; box-sizing: border-box; border-right: 1px solid #c1c1c1;  float: left;}

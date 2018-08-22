@@ -1,20 +1,19 @@
-// pages/date/date.js
+// pages/information/information.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    selectIndex:-1
+    sexArr:['男','女'],
+    sexVal:''
   },
-  //选择
-  doselect(e){
-    let index = e.currentTarget.dataset.index;
+  bindSexChange(e){
+    let sex = this.data.sexArr[e.detail.value];
     this.setData({
-      selectIndex:index
+      sexVal: sex
     })
   },
-
   /**
    * 生命周期函数--监听页面加载
    */

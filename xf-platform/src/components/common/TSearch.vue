@@ -5,8 +5,11 @@
     .n-search .n-search-input:after{ content: ''; width: 1px; height: 36px; position: absolute; top: 2px; left: 260px; background-color: #e5e5e5;}
     .n-search .n-search-input input{ width: 260px; height: 40px; line-height: 40px; font-size: 16px; padding: 0 15px; box-sizing: border-box; color: #888888;}
     .n-search a{ width: 40px; height: 40px; display: flex; justify-content: center; align-items: center; font-size: 24px; color: #002aa6;}
+    .n-search a:hover{ color: #002aa6;}
     .n-search .btn-search{ position: absolute; top: 0; right: 0; transition: right 0.3s cubic-bezier(.25,.76,.36,.97); color: #ffffff;}
+    .n-search .btn-search:hover{ color: #ffffff;}
     .n-search-open .btn-search{ right: 40px; color: #002aa6;}
+    .n-search-open .btn-search:hover{ color: #002aa6;}
 </style>
 
 <template>

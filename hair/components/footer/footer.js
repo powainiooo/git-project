@@ -3,12 +3,19 @@ Component({
   /**
    * 组件的属性列表
    */
+  options: {
+    multipleSlots: true // 在组件定义时的选项中启用多slot支持
+  },
   properties: {
     showMenu:{
       type:Boolean,
       value:false
     },
     showClose:{
+      type:Boolean,
+      value:false
+    },
+    showPrice:{
       type:Boolean,
       value:false
     }
@@ -55,7 +62,9 @@ Component({
       }else{
         this.triggerEvent('doclose')
       }
-
+    },
+    dobtn(){
+      this.triggerEvent('btn')
     }
   }
 });

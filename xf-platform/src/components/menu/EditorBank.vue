@@ -1,6 +1,6 @@
 <style>
     .editor-bank .line{ width: 270px; margin:0 auto 20px auto;}
-    .editor-bank .line input{ width: 100%; box-sizing: border-box; border: 1px solid #888888; border-radius: 6px; font-size: 16px; padding: 7px 16px; color: #888888}
+    .editor-bank .line input{ width: 100%; box-sizing: border-box; border: 1px solid #888888; border-radius: 6px; font-size: 16px; padding: 7px 16px; color: #000000}
     .editor-bank .line input::-webkit-input-placeholder{ color: #888888;}
     .editor-bank  .code-line{ display: flex; justify-content: space-between; align-items: center;}
     .editor-bank  .code-line input{ width: 50%;}

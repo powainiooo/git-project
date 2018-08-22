@@ -22,12 +22,20 @@
             <view class="week">周一</view>
         </view>
     </view>
-    <view class="time-item">
+    <view class="time-item {{selectIndex == '0' ? 'time-item-selected':''}}" data-index="0" bindtap="doselect">
         <view class="icons icon-weixuan"></view>
         <view class="icons icon-xuanzhong"></view>
         <view>
             <view class="time">21:35</view>
             <view class="end">预计结束时间21:45</view>
+        </view>
+    </view>
+    <view class="time-item {{selectIndex == '1' ? 'time-item-selected':''}}" data-index="1" bindtap="doselect">
+        <view class="icons icon-weixuan"></view>
+        <view class="icons icon-xuanzhong"></view>
+        <view>
+            <view class="time">21:55</view>
+            <view class="end">预计结束时间21:55</view>
         </view>
     </view>
     <view class="time-item time-item-disabled">
@@ -38,4 +46,4 @@
         </view>
     </view>
 </view>
-<footer-view>下一步 | Next</footer-view>
+<footer-view><view slot="btn">下一步 | Next</view></footer-view>

@@ -9,7 +9,7 @@
     .step3-frame .frame .step1{ width: 50%;}
     .step3-frame .frame .title{ font-size: 18px; color: #000000; font-weight: bold; border-bottom: 1px solid #e5e5e5; padding-left: 50px; display: flex; justify-content: space-between; align-items: center;}
     .step3-frame .frame .title span{ font-size: 66px; margin-right: 10px; font-family: 'Helve';}
-    .step3-frame .frame .title div{ margin: 10px 10px 0 0; }
+    .step3-frame .frame .title>div{ margin: 35px 20px 0 0; }
     .step3-frame .frame .index{ font-size: 20px; color: #000000; font-family: 'Helve'; padding: 4px 0 4px 50px;border-bottom: 1px solid #e5e5e5;}
     .step3-frame .frame .text{ height: 143px;border-bottom: 3px solid #e5e5e5; padding-left: 50px; display: flex; align-items: center;}
     .step3-frame .frame .text textarea{ width: 460px;; box-sizing: border-box; border: 1px solid #888888; border-radius: 5px; padding: 7px 16px; color: #888888; font-size: 16px;}
@@ -44,7 +44,7 @@
 
                     </div>
                     <div class="pr20 pr" v-for="(item,index) in activityListData">
-                        <a href="javascript:;" class="btn-del" @click="doDelActivity(index)"><Icon type="ios-trash" /></a>
+                        <a href="javascript:;" class="btn-del" @click="doDelActivity(index)"><Icon type="md-close" /></a>
                         <h3 class="index">{{index < 9 ? 0 : ''}}{{index + 1}}</h3>
                         <div class="pl50 pt20 pb20 pr" style="border-bottom: 1px solid #e5e5e5;">
                             <t-upload v-model="item.imgUrl">
@@ -68,15 +68,15 @@
                         <div>
                             <t-ques>
                                 <ul class="list1">
-                                    <li><span>1</span>上传图片尺寸为660px*333px</li>
-                                    <li><span>2</span>一张图片对应一段文字，可增添多个图片及对应文字，最多限制6张图</li>
+                                    <li><span>1</span>艺人logo尺寸为230px*230px</li>
+                                    <li><span>2</span>一个艺人logo对应上传一个艺人照片</li>
                                 </ul>
                             </t-ques>
                         </div>
 
                     </div>
                     <div class="pr20 pr" v-for="(item,index) in actListData">
-                        <a href="javascript:;" class="btn-del" @click="doDelAct(index)" style="right: 15px;"><Icon type="ios-trash" /></a>
+                        <a href="javascript:;" class="btn-del" @click="doDelAct(index)" style="right: 15px;"><Icon type="md-close" /></a>
                         <h3 class="index">{{index < 9 ? 0 : ''}}{{index + 1}}</h3>
                         <div class="pl50 pt20 pb20 pr" style="border-bottom: 1px solid #e5e5e5;">
                             <t-upload v-model="item.logoUrl">

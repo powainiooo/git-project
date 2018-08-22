@@ -1,5 +1,9 @@
 {
   "pages": [
+    "pages/order/confirm",
+    "pages/information/information",
+    "pages/select/select",
+    "pages/package/package",
     "pages/date/date",
     "pages/store/store",
     "pages/index/index",
@@ -8,7 +12,7 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#d9c39f",
-    "navigationBarTitleText": "Hair",
+    "navigationBarTitleText": "",
     "navigationBarTextStyle": "white"
   }
 }

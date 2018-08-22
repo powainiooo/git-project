@@ -11,7 +11,7 @@
     .bind-form .frame .step2:before{ content: ''; width:1px; position: absolute; top: 40px; left: 0; bottom: 0; background-color: #e5e5e5;}
     .bind-form .frame .title{ font-size: 18px; color: #000000; font-weight: bold; border-bottom: 1px solid #e5e5e5; padding-left: 50px;}
     .bind-form .frame .title span{ font-size: 66px; margin-right: 10px; font-family: 'Helve';}
-    .bind-form .frame .step1 input{ width: 270px; border: 1px solid #a5a5a5; border-radius: 5px; box-sizing: border-box; padding: 7px 16px; color: #a5a5a5; font-size: 16px;}
+    .bind-form .frame .step1 input{ width: 270px; border: 1px solid #a5a5a5; border-radius: 5px; box-sizing: border-box; padding: 7px 16px; color: #000000; font-size: 16px;}
     .bind-form .frame .step1 .code-line{ width: 270px; margin: 0 auto 20px auto; display: flex; justify-content: space-between;}
     .bind-form .frame .step1 .code-line input{ width: 50%;}
     .bind-form .frame .step1 .code-line .n-btn{ width: 40%;}

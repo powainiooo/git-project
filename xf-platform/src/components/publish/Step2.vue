@@ -1,5 +1,5 @@
 <style>
-    .step2-frame{ width: 1400px; position: fixed; bottom: 0; left: 60px; display: flex; justify-content: space-between; z-index: 100;}
+    .step2-frame{ width: 1400px; position: fixed; bottom: 0; left: 60px; display: flex; justify-content: space-between; z-index: 600;}
     .step2-frame .frame{ width: 900px; height: 710px; background-color: #ffffff; position: relative;}
     .step2-frame .frame2{ width: 300px;}
     .step2-frame .frame .scroll{ width: 100%; height: 100%; display: flex; overflow-y: scroll; padding: 20px 0;box-sizing: border-box; }
@@ -16,7 +16,7 @@
     .step2-frame .ticke-type-list{ height: 120px; padding: 0 55px; display: flex; flex-wrap: wrap; align-content: center; justify-content: space-between; border-bottom: 2px solid #e5e5e5; position: relative;}
     .step2-frame .ticke-type-list .name{ width: 128px; height: 40px; font-size: 16px; color: #000000; display: flex; align-items: center; margin: 10px 0;}
     .step2-frame .ticke-type-list .input{ width: 128px; height: 40px; position: relative; margin: 10px 0;}
-    .step2-frame .ticke-type-list .input input{ width: 100%; height: 100%; box-sizing: border-box; font-size: 16px; color: #a5a5a5; border: 1px solid #a5a5a5; border-radius: 6px; line-height: 40px; padding: 0 15px;}
+    .step2-frame .ticke-type-list .input input{ width: 100%; height: 100%; box-sizing: border-box; font-size: 16px; color: #000000; border: 1px solid #a5a5a5; border-radius: 6px; line-height: 40px; padding: 0 15px;}
     .step2-frame .ticke-type-list .input input::-webkit-input-placeholder{ color: #a5a5a5; }
     .step2-frame .ticke-type-list .input-nums:after{content: '张'; line-height: 40px; position: absolute; top: 0; right: 15px; font-size: 16px; color: #a5a5a5;}
     .step2-frame .ticke-type-list .input-nums input{ padding-right: 35px;}
@@ -69,7 +69,7 @@
                             <div class="input" :class="item.sale_limit == '' ? '' : 'input-limit'">
                                 <input type="text" placeholder="限购张数" v-model="item.sale_limit">
                             </div>
-                            <a href="javascript:;" class="btn-del" v-if="!item.isDefault" @click="doDelType(index)"><Icon type="ios-trash" /></a>
+                            <a href="javascript:;" class="btn-del" v-if="!item.isDefault" @click="doDelType(index)"><Icon type="md-close" /></a>
                         </div>
                     </div>
                     <div class="tc mt30 mb30">
@@ -137,7 +137,7 @@
                         <div class="notice-list" v-for="(item,index) in noticeListData">
                             <h3>{{index < 9 ? 0 : ''}}{{index + 1}}</h3>
                             <textarea rows="4" maxlength="60" placeholder="填写须知(30字内)" v-model="item.value"></textarea>
-                            <a href="javascript:;" class="btn-del" @click="doDelNotice(index)"><Icon type="ios-trash" /></a>
+                            <a href="javascript:;" class="btn-del" @click="doDelNotice(index)" v-if="index != 0"><Icon type="md-close" /></a>
                         </div>
                     </div>
                     <div class="tc mt30 mb30">

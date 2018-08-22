@@ -1,6 +1,6 @@
 <style>
     .stpe1-frame{ width: 1430px; position: fixed; bottom: 0; left: 60px; display: flex; justify-content: space-between;}
-    .stpe1-frame .frame{ width: 900px; height: 680px; box-sizing: border-box; background-color: #ffffff; position: relative; padding:0 20px 20px 20px;; display: flex;}
+    .stpe1-frame .frame{ width: 900px; height: 630px; box-sizing: border-box; background-color: #ffffff; position: relative; padding:0 20px 20px 20px;; display: flex;}
     .stpe1-frame .frame:before{ content: ''; width: 100%; height: 3px; background: url("../../assets/img/ticket-top.png") repeat-x; position: absolute; left: 0; top: -3px;}
     .stpe1-frame .frame .step1{ width: 360px;}
     .stpe1-frame .frame .step2{ width: 500px; position: relative;}
@@ -8,9 +8,11 @@
     .stpe1-frame .frame .title{ font-size: 18px; color: #000000; font-weight: bold; border-bottom: 1px solid #e5e5e5; padding-left: 50px;}
     .stpe1-frame .frame .title span{ font-size: 66px; margin-right: 10px; font-family: 'Helve';}
     .stpe1-frame .frame .step1 .inp-line{ width: 270px; margin-left: 45px; margin-bottom: 20px; position: relative;}
-    .stpe1-frame .frame .step1 input{ width: 270px; height: 40px; border: 1px solid #888888; border-radius: 5px; box-sizing: border-box; padding: 7px 16px; color: #888888; font-size: 16px;}
+    .stpe1-frame .frame .step1 input{ width: 100%; height: 40px; border: 1px solid #888888; border-radius: 5px; box-sizing: border-box; padding: 7px 16px; color: #000000; font-size: 16px;}
     .stpe1-frame .frame .step1 input::-webkit-input-placeholder{ color: #888888;}
     .stpe1-frame .frame .step1 .inp-line .n-ques{ position: absolute; top:8px; right: -30px;}
+    .stpe1-frame .frame .step1 .time-line{ width: 270px; display: flex; justify-content: space-between; margin-left: 45px;}
+    .stpe1-frame .frame .step1 .time-line .inp-line{ width: 120px; margin-left: 0;}
     .stpe1-frame .frame .step1 .ivu-select-single .ivu-select-selection{ height: 40px; border-color: #888888;}
     .stpe1-frame .frame .step1 .ivu-select-single .ivu-select-selection .ivu-select-placeholder, .ivu-select-single .ivu-select-selection .ivu-select-selected-value{ height: 40px; line-height: 40px; color: #888888; font-size: 16px; padding-left: 15px;}
     .stpe1-frame .frame .step1 .ivu-input-icon{ line-height: 40px;}
@@ -53,12 +55,19 @@
                         </Select>
                     </div>
                     <div class="inp-line" v-if="formData.type == 1">
-                        <DatePicker format="yyyy/MM/dd" type="date" placeholder="活动日期" :editable="false" :disabled="formData.type == ''" @on-change="dateChange"></DatePicker>
+                        <DatePicker format="yyyy/MM/dd" type="date" placeholder="活动日期" :editable="false" :disabled="formData.type == ''" @on-change="dateChange" style="width: 100%;"></DatePicker>
                     </div>
                     <div class="inp-line" v-if="formData.type != 1">
-                        <DatePicker format="yyyy/MM/dd" type="daterange" placeholder="活动日期" :editable="false" :disabled="formData.type == ''" @on-change="dateChange"></DatePicker>
+                        <DatePicker format="yyyy/MM/dd" type="daterange" placeholder="活动日期" :editable="false" :disabled="formData.type == ''" @on-change="dateChange" style="width: 100%;"></DatePicker>
                     </div>
-                    <div class="inp-line"><TimePicker format="HH:mm" type="timerange" placeholder="活动时间" v-model="formData.timeArr" :editable="false"></TimePicker></div>
+                    <div class="time-line">
+                        <div class="inp-line">
+                            <TimePicker format="HH:mm" type="time" placeholder="活动时间" v-model="formData.timeBegin" :editable="false"></TimePicker>
+                        </div>
+                        <div class="inp-line">
+                            <TimePicker format="HH:mm" type="time" placeholder="活动时间" v-model="formData.timeEnd" :editable="false"></TimePicker>
+                        </div>
+                    </div>
                     <div class="inp-line"><input type="text" placeholder="活动方地址" v-model="formData.address"></div>
                     <div class="inp-line"><input type="text" placeholder="活动联系电话"  v-model="formData.mobile"></div>
                 </div>
@@ -118,7 +127,8 @@
                     type:'',
                     begin:'',
                     end:'',
-                    timeArr:['',''],
+                    timeBegin:'',
+                    timeEnd:'',
                     address:'',
                     mobile:'',
                     logoImg:'',

@@ -1,20 +1,33 @@
-// pages/date/date.js
+// pages/package/package.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    selectIndex:-1
+    listData:[
+      {
+        id:1,
+        price:50,
+        isRecommond:true
+      },
+      {
+        id:2,
+        price:60,
+        isRecommond:false
+      }
+    ],
+    selectedId:-1,
+    selectedPrice:0
   },
-  //选择
-  doselect(e){
-    let index = e.currentTarget.dataset.index;
+  doselected(e){
+    let id = e.currentTarget.dataset.id;
+    let price = e.currentTarget.dataset.price;
     this.setData({
-      selectIndex:index
-    })
+      selectedId:id,
+      selectedPrice:price
+    });
   },
-
   /**
    * 生命周期函数--监听页面加载
    */

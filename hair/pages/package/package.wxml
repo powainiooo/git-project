@@ -1,0 +1,35 @@
+<header-view>选择洗护套餐 | Selection packages</header-view>
+<view class="container container-date">
+    <view wx:for="{{listData}}"
+          wx:for-item="item"
+          wx:key="{{item.id}}"
+          data-id="{{item.id}}"
+          data-price="{{item.price}}"
+          bindtap="doselected"
+          class="packages-item {{item.isRecommond ? 'packages-item-recommond' : ''}} {{selectedId == item.id ? 'packages-item-selected' : ''}}">
+        <view class="line1">
+            <view>
+                <view class="name">Hair Basic package</view>
+                <view class="name">Hair 基础套餐</view>
+            </view>
+            <view class="price">{{item.price}}<text>元</text></view>
+        </view>
+        <view class="line2">
+            <view class="pro-item"><image src="../../res/img/pics/pro1.png" mode="scaleToFill"></image></view>
+            <view class="pro-item"><image src="../../res/img/pics/pro2.png" mode="scaleToFill"></image></view>
+            <view class="pro-item"><image src="../../res/img/pics/pro3.png" mode="scaleToFill"></image></view>
+        </view>
+        <view class="line3">适用于：中性至敏感性</view>
+        <view class="icons icon-weixuan"></view>
+        <view class="icons icon-xuanzhong"></view>
+    </view>
+    <view class="pro-more">
+        <view class="icons icon-more"></view>
+        <text class="name">Customized package \n 自定义套餐</text>
+        <view class="icons icon-zixuan1"></view>
+    </view>
+</view>
+<footer-view showPrice>
+    <view slot="price">{{selectedPrice}}</view>
+    <view slot="btn">下一步 | Next</view>
+</footer-view>

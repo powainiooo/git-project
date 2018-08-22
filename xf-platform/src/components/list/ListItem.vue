@@ -55,9 +55,9 @@
             <div class="status status1" v-if="itemdata.status == 1">
                 <div class="top">
                     <p>销售中</p>
-                    <a href="javascript:;"><Icon type="ios-power" /></a>
+                    <a href="javascript:;" @click.stop="doOff"><Icon type="ios-power" /></a>
                 </div>
-                <div class="type">
+                <div class="type" @click.stop="doSelectType">
                     <p>已销售</p>
                     <Select>
                         <Option value="0">全部</Option>
@@ -73,9 +73,9 @@
             <div class="status status2" v-if="itemdata.status == 2">
                 <div class="top">
                     <p>已下架</p>
-                    <a href="javascript:;"><Icon type="ios-power" /></a>
+                    <a href="javascript:;" @click.stop="doOff"><Icon type="ios-power" /></a>
                 </div>
-                <div class="type">
+                <div class="type" @click.stop="doSelectType">
                     <p>已销售</p>
                     <Select>
                         <Option value="0">全部</Option>
@@ -102,9 +102,9 @@
             <div class="status status5" v-if="itemdata.status == 5">
                 <div class="top">
                     <p>已售罄</p>
-                    <a href="javascript:;"><Icon type="ios-power" /></a>
+                    <a href="javascript:;" @click.stop="doOff"><Icon type="ios-power" /></a>
                 </div>
-                <div class="type">
+                <div class="type" @click.stop="doSelectType">
                     <p>已销售</p>
                     <Select>
                         <Option value="0">全部</Option>
@@ -175,6 +175,15 @@
                     }
                 }
                 return ''
+            },
+            doOff(){
+                this.$tModal.confirm({
+                    title:'是否确认下架该票务？',
+                    content:'确认下架后，在小夫有票售票平台将隐藏该票务，用户无法获取该票务信息。'
+                })
+            },
+            doSelectType(){
+                console.log('select')
             }
         }
     }

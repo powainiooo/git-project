@@ -68,6 +68,9 @@
                             color:['#002aac','#1243af','#3355bd','#667fcd','#98a9dc','#acbde5'],
                             label: {
                                 normal: {
+                                    show: false
+                                },
+                                emphasis: {
                                     show: true,
                                     //formatter: '{b}\n{c}人',
                                     formatter: [

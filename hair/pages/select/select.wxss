@@ -1,0 +1,26 @@
+.container-selection{ margin-top: 455rpx;}
+.selection-step{ width: 100%; height: 155rpx; position: fixed; left: 0; top: 300rpx; z-index: 100; border-bottom: 1rpx solid #e5e4e2; box-shadow: 0 2rpx 6rpx rgba(0,0,0,0.1); overflow: hidden;}
+.selection-step .bg{ display: flex; height: 100%; transform: skewX(-15deg); margin: 0 -20rpx;}
+.selection-step .bg view{ flex: 1; height: 100%; border-right: 1rpx solid #e5e4e2; box-sizing: border-box; background-color: #efebea;}
+.selection-step .bg view:last-child{ border-right: none;}
+.selection-step .bg .bg-active{ background-color: #ffffff;}
+.selection-step .bg .bg-selected{ background-color: #dac49f;}
+.selection-step .tag{ display: flex; height: 100%; width: 100%; position: absolute; top: 0; left: 0;}
+.selection-step .tag view{ flex: 1; height: 100%; display: flex; justify-content: center; align-items: center;font-size: 30rpx; text-align: center;}
+.selection-step .tag .tag-selected{ color: #ffffff;}
+
+.list-item{ width: 100%; height: 385rpx; box-sizing: border-box; padding: 0 100rpx 0 270rpx; border-bottom: 1rpx solid #f1f1ef; display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden;}
+.list-item-selected{ background-color: #dac49f;}
+.list-item .name{font-size: 30rpx;text-shadow: 0 0 3px rgba(55,44,30,0.25);}
+.list-item .decs{font-size: 19rpx; color: #dbc19c; line-height: 1.5; margin-bottom: 30rpx;}
+.list-item-selected .decs{ color: #fffdfe;}
+.list-item .tips{font-size: 19rpx; color: #aeaeae; line-height: 1.5;}
+.list-item-selected .tips{ color: #fffdfe;}
+.list-item .img{ width: 270rpx; height: 392rpx; position: absolute; bottom: 0; left: 0;}
+.list-item .price{ width: 220rpx; height: 220rpx; box-sizing: border-box; border-radius: 50%; position: absolute; top: -110rpx; right: -110rpx; background-color: #dac49f; display: flex; align-items: flex-end; color: #ffffff; font-size: 30rpx; padding: 0 0 45rpx 20rpx;}
+.list-item .price-low{ background-color: #e7e3e2; color: inherit;}
+.list-item-selected .price{ color: #dac49f; background-color: #ffffff;}
+.list-item .icon-weixuan{ position: absolute; bottom: 40rpx; right: 70rpx; color: #e5e4e2; font-size: 60rpx;}
+.list-item-selected .icon-weixuan{ color: #fffdfe;}
+.list-item .icon-xuanzhong{ position: absolute; bottom: 55rpx; right: 70rpx; font-size: 46rpx; display: none;}
+.list-item-selected .icon-xuanzhong{ display: block;}

@@ -1,18 +1,11 @@
-// pages/date/date.js
+// pages/order/confirm.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    selectIndex:-1
-  },
-  //选择
-  doselect(e){
-    let index = e.currentTarget.dataset.index;
-    this.setData({
-      selectIndex:index
-    })
+  
   },
 
   /**

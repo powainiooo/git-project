@@ -89,8 +89,8 @@ header nav ul li a i{ margin-left: 3px;}
 .phone .frame ul li{ width: 20%; float: left;}
 .phone .frame ul li img{ width: 100%; height: 100%;}
 
-.title{ width: 100%; height: 150px; font-size: 0; text-align: center;}
-.title img{ margin-top: 35px;}
+.title{ width: 100%; height: 110px; font-size: 0; text-align: center;}
+.title img{ margin-top: 30px;}
 .intro2,.intro3,.intro4,.intro5{
     transition:all 0.5s cubic-bezier(.2,.69,.17,.94);
     transform: translate(200px,0);

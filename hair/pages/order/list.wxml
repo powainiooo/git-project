@@ -1,0 +1,51 @@
+<header-view>已预约订单 | Booked order</header-view>
+<view class="container container-order">
+    <view class="list-item">
+        <view class="order-time order-time-used">
+            <view></view>
+            <view class="year">2018</view>
+            <view class="line">
+                <view class="date">
+                    <view class="month">08/</view>
+                    <view>
+                        <view class="day">26</view>
+                        <view class="week">周三</view>
+                    </view>
+                </view>
+                <view class="time">21:45</view>
+            </view>
+        </view>
+    </view>
+    <view class="list-item">
+        <view class="order-time order-time-out">
+            <view></view>
+            <view class="year">2018</view>
+            <view class="line">
+                <view class="date">
+                    <view class="month">08/</view>
+                    <view>
+                        <view class="day">26</view>
+                        <view class="week">周三</view>
+                    </view>
+                </view>
+                <view class="time">21:45</view>
+            </view>
+        </view>
+    </view>
+    <view class="list-item">
+        <view class="order-time">
+            <view></view>
+            <view class="year">2018</view>
+            <view class="line">
+                <view class="date">
+                    <view class="month">08/</view>
+                    <view>
+                        <view class="day">26</view>
+                        <view class="week">周三</view>
+                    </view>
+                </view>
+                <view class="time">21:45</view>
+            </view>
+        </view>
+    </view>
+</view>

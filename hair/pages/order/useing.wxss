@@ -1,3 +1,4 @@
+.container-order{ margin-bottom: 20rpx;}
 .order-time{ background-color: #dac49f; padding: 0 40rpx;}
 .order-time .year{ height: 66rpx; box-sizing: border-box; display: flex; align-items: center; font-size: 30rpx; padding: 0 20rpx; letter-spacing: 50rpx; border-bottom: 1px solid #c5b291;}
 .order-time .line{ height: 147rpx; box-sizing: border-box; border-top: 1rpx solid #e4e0d7; padding: 0 20rpx; display: flex; align-items: center;}
@@ -27,18 +28,8 @@
 .packages-item .line2 .pro-item:last-child::after{ content: '';}
 .packages-item .line2 .pro-item image{ width: 130rpx; height: 130rpx; position: absolute; bottom: 0; left: 0;}
 
-.rule-frame{ width: 100%; position: fixed; left: 0; top: 0; bottom: 200rpx; z-index: 510; display: none;}
-.rule-frame .tips-frame{ box-sizing: border-box; height: calc(100% - 200rpx); background-color: rgba(255,255,255,0.95); padding: 0 60rpx; display: flex; flex-direction: column; justify-content: center;}
+.tips-frame{ padding:0 60rpx; height: 330rpx; box-sizing: border-box; background-color: #efebea; overflow: hidden; display: flex; flex-direction: column; justify-content: center;}
 .tips-frame .icon-tips{ font-size: 70rpx; color: #9e9c9d; margin-bottom: 10rpx;}
-.tips-frame text{ font-size: 30rpx; line-height: 1.8; letter-spacing: 4rpx; color: #9e9c9d;}
-.rule-frame .logo{ height: 200rpx; background-color: rgba(239,235,234,0.95); box-sizing: border-box; padding: 0 60rpx; display: flex; align-items: center; font-size: 90rpx; color: #ffffff;}
+.tips-frame text{ font-size: 30rpx; line-height: 1.8; letter-spacing: 3rpx; color: #9e9c9d;}
 
-.detail-frame{ width: 100%; position: fixed; left: 0; top: 0; bottom: 0; z-index: 700; overflow-y: scroll; display: none;}
-.detail-frame .line1{ background-color: rgba(255,255,255,0.95); padding: 60rpx;}
-.detail-frame .line1 .title1{ font-size: 60rpx; line-height: 1.6; font-family: 'Helve'; margin-bottom: 50rpx; margin-top: 140rpx;}
-.detail-frame .line1 .title2{ font-size: 30rpx; line-height: 1.6; margin-bottom: 50rpx;}
-.detail-frame .line1 .img{  width: 140rpx; height: 360rpx;}
-.detail-frame .icon-guanbi{ font-size: 30px; position: absolute; top: 60rpx; right: 60rpx;}
-.detail-frame .line2{ background-color: rgba(239,235,234,0.95); padding: 60rpx;}
-.detail-frame .line2 .decs{ font-size: 30rpx; line-height: 1.6; margin-bottom: 70rpx;}
-.detail-frame .line2 .icon-logo{ font-size: 90rpx; color: #ffffff;}
+.time-frame{ padding:120rpx 60rpx;}

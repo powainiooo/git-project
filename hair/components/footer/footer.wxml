@@ -2,7 +2,7 @@
     <view class="btn1" wx:if="{{showMenu}}" bindtap="openMenu"><view class="icons icon-gengduo"></view></view>
     <view class="btn1" wx:if="{{showClose}}" bindtap="closeMenu" style="font-size:50rpx;"><view class="icons icon-guanbi"></view></view>
     <view class="btn3" wx:if="{{showPrice}}" bindtap="closeMenu"><slot name="price"></slot><text class="unit">元</text></view>
-    <view class="btn2" bindtap="dobtn"><slot name="btn"></slot></view>
+    <view class="btn2" bindtap="dobtn" style="background-color: {{btnColor}}"><slot name="btn"></slot></view>
 </view>
 <view class="menu-list" style="bottom:{{showMenuList ? '200rpx' : '-200rpx'}}">
     <view class="menu-list-item">已预约订单 | <text class="en">Booked order</text></view>

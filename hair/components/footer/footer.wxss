@@ -1,6 +1,6 @@
 @import '../../res/css/icons.wxss';
 
-.footer{ overflow: hidden; height: 200rpx; width: 100%; position: fixed; left: 0; bottom: 0; z-index: 500; background-color: #e7e3e2;}
+.footer{ overflow: hidden; height: 200rpx; width: 100%; position: fixed; left: 0; bottom: 0; z-index: 600; background-color: #e7e3e2;}
 .footer-shadow{ box-shadow: 0 -2rpx 6rpx rgba(0,0,0,0.1);}
 .footer .btn1{ width: 200rpx; height: 100%; box-sizing: border-box; padding-bottom: 40rpx; display: flex; justify-content: center; align-items: center; font-size: 12rpx; color: #ffffff; background-color: #d9c39f; float: left;}
 .footer .btn2{ height: 100%; box-sizing: border-box; padding-bottom: 40rpx; display: flex; justify-content: center; align-items: center; font-size: 40rpx; text-shadow: 0 0 3px rgba(55,44,30,0.25);}

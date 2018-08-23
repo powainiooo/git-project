@@ -1,0 +1,10 @@
+.container-result{ margin: 0; position: absolute; top:180rpx; bottom: 200rpx;}
+.result-frame{ padding: 0 60rpx; box-sizing: border-box; height: calc(100% - 330rpx); display: flex; flex-direction: column; position: relative; justify-content: center;}
+.result-frame .icon-weixuan{ color: #e7e3e0; font-size: 70rpx; margin-bottom: 60rpx;}
+.result-frame .icon-xuanzhong{ color: #dac49f; font-size: 60rpx; position: absolute; top: -5rpx; left: 25rpx;}
+.result-frame .icon-cuowu{ color: #dac49f; font-size: 40rpx; position: absolute; top: 15rpx; left: 15rpx;}
+.result-frame .title-en{ font-size: 67rpx; font-family: 'Helve'; text-shadow: 0 0 3px rgba(55,44,30,0.25); margin-bottom: 10rpx;}
+.result-frame .title-cn{ font-size: 60rpx; text-shadow: 0 0 3px rgba(55,44,30,0.25);}
+.tips-frame{ padding:0 60rpx; height: 330rpx; box-sizing: border-box; background-color: #efebea; overflow: hidden;}
+.tips-frame .icon-tips{ font-size: 70rpx; color: #9e9c9d; margin-bottom: 10rpx; margin-top: 40rpx;}
+.tips-frame text{ font-size: 30rpx; line-height: 1.8; letter-spacing: 4rpx; color: #9e9c9d;}

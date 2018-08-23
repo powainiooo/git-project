@@ -18,6 +18,10 @@ Component({
     showPrice:{
       type:Boolean,
       value:false
+    },
+    btnColor:{
+      type:String,
+      value:'#e7e3e2'
     }
   },
   ready(){

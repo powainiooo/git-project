@@ -1,12 +1,21 @@
 {
   "pages": [
+    "pages/index/index",
+    "pages/order/overdue",
+    "pages/order/useing",
     "pages/order/confirm",
+    "pages/package/editor",
+    "pages/package/personal",
+    "pages/order/list",
+    "pages/feedback/feedback",
+    "pages/order/used",
+    "pages/order/notuse",
+    "pages/result/result",
     "pages/information/information",
     "pages/select/select",
     "pages/package/package",
     "pages/date/date",
     "pages/store/store",
-    "pages/index/index",
     "pages/logs/logs"
   ],
   "window": {

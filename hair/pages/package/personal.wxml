@@ -1,0 +1,44 @@
+<header-view>选择洗护产品 | Selection products</header-view>
+<view class="container container-selection">
+    <!--清洁列表-->
+    <view class="selection-title selection-title1">
+        <view class="list-item">
+            <image src="../../res/img/pics/pro5.png" mode="scaleToFill" class="img"></image>
+            <view class="name">shampoo</view>
+            <view class="name" style="margin-bottom: 30rpx;">洗发水</view>
+            <view class="decs">蜂蜜及天然萃取精华</view>
+            <view class="tips"><text>适用于\n中性至敏感性</text></view>
+            <view class="icons icon-xiugai"></view>
+        </view>
+    </view>
+    <!--润发列表-->
+    <view class="selection-title selection-title2">
+        <view class="list-item">
+            <image src="../../res/img/pics/pro5.png" mode="scaleToFill" class="img"></image>
+            <view class="name">shampoo</view>
+            <view class="name" style="margin-bottom: 30rpx;">洗发水</view>
+            <view class="decs">蜂蜜及天然萃取精华</view>
+            <view class="tips"><text>适用于\n中性至敏感性</text></view>
+            <view class="icons icon-xiugai"></view>
+        </view>
+    </view>
+    <!--调理列表-->
+    <view class="selection-title selection-title3">
+        <view class="list-item">
+            <image src="../../res/img/pics/pro5.png" mode="scaleToFill" class="img"></image>
+            <view class="name">shampoo</view>
+            <view class="name" style="margin-bottom: 30rpx;">洗发水</view>
+            <view class="decs">蜂蜜及天然萃取精华</view>
+            <view class="tips"><text>适用于\n中性至敏感性</text></view>
+            <view class="icons icon-xiugai"></view>
+        </view>
+    </view>
+    <view class="tips-frame">
+        <view class="icons icon-tips"></view>
+        <text>提供随心搭配，保存后的个人常用套餐将方便你的使用，多次操作仅保存最新编辑的个人常用套餐。</text>
+    </view>
+</view>
+<footer-view showPrice bindbtn="doNext">
+    <view slot="price">50</view>
+    <view slot="btn">确认 | Confirm</view>
+</footer-view>

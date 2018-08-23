@@ -22,6 +22,15 @@
 
             }
         },
+        mounted(){
+            this.$ajax.post('/client/api/index',{},{
+                headers:{
+                    mid:'11'
+                }
+            }).then(res=>{
+                console.log(res)
+            })
+        },
         methods:{
 
         }

@@ -13,11 +13,13 @@ import tModal from './components/common/modal'
 import iView from 'iview';
 import 'iview/dist/styles/iview.css';
 import store from './store'
+import axios from 'axios'
 
 Vue.config.productionTip = false
 Vue.use(VueAwesomeSwiper)
 Vue.use(tModal);
 Vue.use(iView);
+Vue.prototype.$ajax = axios;
 
 /* eslint-disable no-new */
 new Vue({

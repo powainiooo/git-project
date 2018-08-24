@@ -5,9 +5,38 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    btnColor:'#e7e3e2',//#d9c39f
+    showRule:false,
+    showDetails:false
   },
-
+  doGetDetail(){
+    this.setData({
+      showDetails:true
+    })
+  },
+  hideDetails(){
+    this.setData({
+      showDetails:false
+    })
+  },
+  doNext(){
+    if(this.data.showRule){
+      wx.navigateTo({
+        url: '/pages/result/result'
+      })
+    }else{
+      this.setData({
+        btnColor:'#d9c39f',
+        showRule:true
+      })
+    }
+  },
+  hideRules(){
+    this.setData({
+      btnColor:'#e7e3e2',
+      showRule:false
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

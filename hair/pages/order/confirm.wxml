@@ -29,18 +29,20 @@
             </view>
         </view>
         <view class="line2">
-            <view class="pro-item"><image src="../../res/img/pics/pro1.png" mode="scaleToFill"></image></view>
-            <view class="pro-item"><image src="../../res/img/pics/pro2.png" mode="scaleToFill"></image></view>
-            <view class="pro-item"><image src="../../res/img/pics/pro3.png" mode="scaleToFill"></image></view>
+            <view class="pro-item" bindtap="doGetDetail"><image src="../../res/img/pics/pro1.png" mode="scaleToFill"></image></view>
+            <view class="pro-item" bindtap="doGetDetail"><image src="../../res/img/pics/pro2.png" mode="scaleToFill"></image></view>
+            <view class="pro-item" bindtap="doGetDetail"><image src="../../res/img/pics/pro3.png" mode="scaleToFill"></image></view>
         </view>
     </view>
 </view>
-<footer-view showPrice bindbtn="doNext" btnColor="#d9c39f">
+<footer-view showPrice bindbtn="doNext" btnColor="{{btnColor}}">
     <view slot="price">50</view>
-    <view slot="btn">确认 | Confirm</view>
+    <view slot="btn" wx:if="{{!showRule}}">确认 | Confirm</view>
+    <view slot="btn" wx:if="{{showRule}}">付款 | Payment</view>
 </footer-view>
 <!--rule-->
-<view class="rule-frame">
+<view class="rule-frame" wx:if="{{showRule}}">
+    <view class="icons icon-guanbi" bindtap="hideRules"></view>
     <view class="tips-frame">
         <view class="icons icon-tips"></view>
         <text>Hair 会确保您的个人信息不被泄露，姓名与联系电话仅在到店身份验证以及紧急情况下使用。</text>
@@ -50,9 +52,9 @@
     </view>
 </view>
 <!--pro detail-->
-<view class="detail-frame">
+<view class="detail-frame" wx:if="{{showDetails}}">
     <view class="line1">
-        <view class="icons icon-guanbi"></view>
+        <view class="icons icon-guanbi" bindtap="hideDetails"></view>
         <view class="title1"><text>Aesop Rose Hair Scalp Moisturising Masque\n伊索 玫瑰滋润护发膜</text></view>
         <view class="title2">深入润发护理有助头发恢复细软，带来活力光泽，同时舒缓干燥及有屑头皮。</view>
         <image src="../../res/img/pics/pro9.png" mode="scaleToFill" class="img"></image>

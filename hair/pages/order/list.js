@@ -5,9 +5,33 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    listData:[
+      {status:'used'},
+      {status:'overdue'},
+      {status:'useing'},
+      {status:'notuse'}
+    ]
   },
-
+  gotoDetail(e){
+    let status = e.currentTarget.dataset.status;
+    if(status == 'used'){
+      wx.navigateTo({
+        url: '/pages/order/used'
+      })
+    }else if(status == 'overdue'){
+      wx.navigateTo({
+        url: '/pages/order/overdue'
+      })
+    }else if(status == 'useing'){
+      wx.navigateTo({
+        url: '/pages/order/useing'
+      })
+    }else if(status == 'notuse'){
+      wx.navigateTo({
+        url: '/pages/order/notuse'
+      })
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */

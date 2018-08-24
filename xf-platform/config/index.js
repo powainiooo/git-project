@@ -12,10 +12,10 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
         '/client':{
-            target:'http://ticket.pc-online.cc/client',
+            target:'http://ticket.pc-online.cc',
             changeOrigin:true,
             pathRewrite:{
-                '^/client':''
+                '^/client':'/client'
             }
         }
     },

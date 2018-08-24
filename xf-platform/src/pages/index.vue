@@ -23,11 +23,7 @@
             }
         },
         mounted(){
-            this.$ajax.post('/client/api/index',{},{
-                headers:{
-                    mid:'11'
-                }
-            }).then(res=>{
+            this.$ajax.get('http://ticket.pc-online.cc/client/api/index').then(res=>{
                 console.log(res)
             })
         },

@@ -25,6 +25,10 @@ Component({
    * 组件的方法列表
    */
   methods: {
-
+    gotoIndex(){
+      wx.reLaunch({
+        url: '/pages/index/index'
+      })
+    }
   }
 })

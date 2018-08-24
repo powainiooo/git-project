@@ -220,9 +220,13 @@
         },
         methods:{
             dosubmit(){
+                let self = this;
                 this.$tModal.confirm({
                     title:'是否确认已阅读本页条款并同意？',
-                    content:'确认同意后，在小夫有票售票平台您将严格履行本条款，若有触犯则将以条款所述进行处理。'
+                    content:'确认同意后，在小夫有票售票平台您将严格履行本条款，若有触犯则将以条款所述进行处理。',
+                    onOk(){
+                        self.$emit('dosubmit')
+                    }
                 })
             }
         }

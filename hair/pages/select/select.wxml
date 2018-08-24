@@ -10,7 +10,10 @@
         <view class="tag">
             <view wx:for="{{stepArr}}"
                   wx:for-item="item"
+                  wx:for-index="index"
                   wx:key="{{item}}"
+                  data-index="{{index}}"
+                  bindtap="changeStep"
                   class="{{selectedID[index] != -1 ? 'tag-selected' : ''}}">
                 <text>{{item}}</text>
             </view>

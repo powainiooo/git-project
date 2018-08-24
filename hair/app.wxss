@@ -4,5 +4,5 @@
 .container {
     color: #372c1e;
     margin-top: 300rpx;
-    margin-bottom: 230rpx;
+    padding-bottom: 230rpx;
 }

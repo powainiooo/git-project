@@ -5,6 +5,6 @@
     <view class="btn2" bindtap="dobtn" style="background-color: {{btnColor}}"><slot name="btn"></slot></view>
 </view>
 <view class="menu-list" style="bottom:{{showMenuList ? '200rpx' : '-200rpx'}}">
-    <view class="menu-list-item">已预约订单 | <text class="en">Booked order</text></view>
-    <view class="menu-list-item">个人常用套餐 | <text class="en">Personal package</text></view>
+    <view class="menu-list-item" bindtap="gotoOrderList">已预约订单 | <text class="en">Booked order</text></view>
+    <view class="menu-list-item" bindtap="gotoPersonal">个人常用套餐 | <text class="en">Personal package</text></view>
 </view>

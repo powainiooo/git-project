@@ -1,3 +1,4 @@
+.container-date{ padding-bottom: 200rpx;}
 .packages-item{ width:100%; border-bottom: 1rpx solid #e5e4e0; padding: 30rpx 60rpx; position: relative; box-sizing: border-box; }
 .packages-item-recommond{overflow: hidden;}
 .packages-item-recommond::before{content: ''; width: 220rpx; height: 220rpx; background-color: #dac49f; position: absolute; top: -110rpx; right: -110rpx; border-radius: 50%;}
@@ -24,7 +25,7 @@
 .packages-item .icon-xuanzhong{ position: absolute; bottom: 55rpx; right: 70rpx; font-size: 46rpx; display: none;}
 .packages-item-selected .icon-xuanzhong{ display: block;}
 
-.pro-more{ padding: 0 70rpx 0 60rpx; height: 170rpx; display: flex; justify-content: space-between; align-items: center;}
+.pro-more{ padding: 0 70rpx 0 60rpx; height: 170rpx; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2rpx 6rpx rgba(0,0,0,0.1) inset;}
 .pro-more .icon-more{ font-size: 60rpx;}
 .pro-more .name{ font-size: 30rpx; margin-left: -80rpx;}
-.pro-more .icon-zixuan1{ font-size: 60rpx;}
+.pro-more .icon-zixuan1{ font-size: 60rpx; color: #dac49f;}

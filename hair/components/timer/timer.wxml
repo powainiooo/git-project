@@ -19,7 +19,7 @@
             <view class="down">{{lasetTimerArr[1]}}</view>
         </view>
     </view>
-    <view class="clock-list clock-mid"><view class="clock-item">:</view></view>
+    <view class="clock-list clock-mid"></view>
     <view class="clock-list">
         <view class="clock-item {{difArr[2] ? '' : 'clock-item-new'}}">
             <view class="up">{{timerArr[2]}}</view>

@@ -12,4 +12,7 @@
         </view>
     </view>
 </view>
-<footer-view showMenu bindopenMenu="doBlur" bindhideMenu="hideBlur"><view slot="btn">预约 | Order</view></footer-view>
+<footer-view showMenu
+             bindopenMenu="doBlur"
+             bindhideMenu="hideBlur"
+             bindbtn="doOrder"><view slot="btn">预约 | Order</view></footer-view>

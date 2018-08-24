@@ -14,7 +14,12 @@ Page({
       selectIndex:index
     })
   },
-
+  //下一步
+  doNext(){
+    wx.navigateTo({
+      url: '/pages/package/package'
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

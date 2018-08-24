@@ -28,6 +28,17 @@ Page({
       selectedPrice:price
     });
   },
+  //下一步
+  doNext(){
+    wx.navigateTo({
+      url: '/pages/information/information'
+    })
+  },
+  gotoSelect(){
+    wx.navigateTo({
+      url: '/pages/select/select'
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

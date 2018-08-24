@@ -57,5 +57,11 @@ Page({
     this.setData({
       showBlur:false
     })
+  },
+  //预约
+  doOrder(){
+    wx.navigateTo({
+      url: '/pages/store/store'
+    })
   }
 });

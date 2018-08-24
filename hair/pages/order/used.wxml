@@ -15,10 +15,12 @@
     </view>
     <view class="store-item">
         <view class="btns">
-            <view class="icons icon-weixuan"></view>
-            <view class="icons icon-xuanzhong"></view>
-            <view class="text">已使用</view>
-            <view class="btn-map">填写反馈</view>
+            <view>
+                <view class="icons icon-weixuan"></view>
+                <view class="icons icon-xuanzhong"></view>
+                <view class="text">已过期</view>
+            </view>
+            <view class="btn-map" bindtap="gotoFeedback">填写反馈</view>
         </view>
     </view>
     <view class="tips-frame">

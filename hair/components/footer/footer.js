@@ -69,6 +69,16 @@ Component({
     },
     dobtn(){
       this.triggerEvent('btn')
+    },
+    gotoOrderList(){
+      wx.navigateTo({
+        url: '/pages/order/list'
+      })
+    },
+    gotoPersonal(){
+      wx.navigateTo({
+        url: '/pages/package/personal'
+      })
     }
   }
 });

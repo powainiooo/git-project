@@ -21,6 +21,14 @@
             <view class="day">15</view>
             <view class="week">周一</view>
         </view>
+        <view class="item disabled">
+            <view class="day">15</view>
+            <view class="week">周一</view>
+        </view>
+        <view class="item">
+            <view class="day">15</view>
+            <view class="week">周一</view>
+        </view>
     </view>
     <view class="time-item {{selectIndex == '0' ? 'time-item-selected':''}}" data-index="0" bindtap="doselect">
         <view class="icons icon-weixuan"></view>
@@ -46,4 +54,4 @@
         </view>
     </view>
 </view>
-<footer-view><view slot="btn">下一步 | Next</view></footer-view>
+<footer-view bindbtn="doNext"><view slot="btn">下一步 | Next</view></footer-view>

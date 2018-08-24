@@ -5,9 +5,23 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    lnglat:[114.053987,22.533577]
   },
-
+  //下一步
+  doNext(){
+    wx.navigateTo({
+      url: '/pages/date/date'
+    })
+  },
+  //打开地图
+  openMap(e){
+    let lnglat = e.currentTarget.dataset.lnglat;
+    wx.openLocation({
+      latitude: lnglat[1],
+      longitude: lnglat[0],
+      scale: 28
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

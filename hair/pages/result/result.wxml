@@ -17,7 +17,7 @@
         <text wx:if="{{result == 'fail'}}">网络链接失败或用户量拥挤等原因，支付出错，请尝试重新支付。</text>
     </view>
 </view>
-<footer-view showClose>
+<footer-view showClose bindbtn="doNext" binddoclose="gotoIndex">
     <view slot="btn" wx:if="{{result == 'suc'}}">订单详情 | Order details</view>
     <view slot="btn" wx:if="{{result == 'fail'}}">付款 | Payment</view>
 </footer-view>

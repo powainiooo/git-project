@@ -13,7 +13,7 @@
 .store-item .address{ font-size: 30rpx; letter-spacing: 5rpx; margin-bottom: 50rpx;}
 .store-item .btns{ display: flex; justify-content: space-between; align-items: center; position: relative; font-size: 60rpx;}
 .store-item .btns .icon-weixuan{ color: #e7e3e0; display: block; margin-right: 30rpx;}
-.store-item .btns .icon-cuowu{ color: #d9c39f; position: absolute; top: 50rpx; left: 15rpx; font-size: 35rpx;}
+.store-item .btns .icon-cuowu{ color: #d9c39f; position: absolute; top: 50%; left: 15rpx; font-size: 35rpx; margin-top: -16rpx;}
 .store-item .btns .btn-map{ width: 140rpx; height: 70rpx; background-color: #d9c39f; border-radius: 40rpx; font-size: 20rpx; color: #ffffff; display: flex; justify-content: center; align-items: center; box-shadow: 0 0 6rpx rgba(0,0,0,0.1);}
 .store-item .btns .text{ font-size: 100rpx; color: #e7e3e0; font-weight: 100;}
 .store-item .btns view:first-child{display: flex; align-items: center;}

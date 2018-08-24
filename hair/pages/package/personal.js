@@ -7,7 +7,11 @@ Page({
   data: {
   
   },
-
+  gotoList(){
+    wx.navigateTo({
+      url: '/pages/package/editor'
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

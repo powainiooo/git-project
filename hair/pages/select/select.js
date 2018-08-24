@@ -12,6 +12,15 @@ Page({
     conditionerList:[{id:1},{id:2}],
     treatmentList:[{id:1},{id:2}]
   },
+  //切换选择
+  changeStep(e){
+    let index = e.currentTarget.dataset.index;
+    if(this.data.selectedID[index] != -1){
+      this.setData({
+        step:index+1
+      })
+    }
+  },
   //选择清洁
   doSelectClean(e){
     let id = e.currentTarget.dataset.id;
@@ -48,7 +57,9 @@ Page({
           icon:'none'
         })
       }else{
-
+        wx.navigateTo({
+          url: '/pages/information/information'
+        })
       }
     }else{
       if(this.data.selectedID[this.data.step-1] == -1){

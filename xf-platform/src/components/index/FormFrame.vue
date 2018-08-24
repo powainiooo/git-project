@@ -22,6 +22,7 @@
                 <register-frame
                     :showAll="showRegisterAll"
                     :registerType="registerType"
+                    ref="register"
                     @changeType="changeRegType"
                     @doShowRegiterAll="doShowRegiterAll"
                     @doNext2="doShowOrg"
@@ -30,11 +31,11 @@
         </transition>
         <transition enter-active-class="animated slideInUp moveFunc">
             <section class="org-frame" v-if="showOrganize">
-                <org-frame :registerType="registerType" @dosubmit="showLaws = true"></org-frame>
+                <org-frame ref="organizer" :registerType="registerType" @dosubmit="showLaws = true"></org-frame>
             </section>
         </transition>
 
-        <t-laws v-if="showLaws"></t-laws>
+        <t-laws v-if="showLaws" @dosubmit="dosubmit"></t-laws>
     </div>
 </template>
 
@@ -59,12 +60,6 @@
                 registerType:'company'
             }
         },
-        mounted(){
-            //setTimeout(()=>{
-            //    this.doShowOrg()
-            //},1000)
-
-        },
         methods:{
             doShowForget(){
                 this.showLogin = false;
@@ -84,6 +79,39 @@
             },
             changeRegType(type){
                 this.registerType = type;
+            },
+            dosubmit(){
+                console.log('submit');
+                let self = this;
+                let register = this.$refs.register;
+                let organizer = this.$refs.organizer;
+                let obj = {};
+                obj.email = register.email;
+                obj.mobile = register.phone;
+                obj.vericode = register.code;
+                obj.password = register.password;
+                obj.repassword = register.confirmPSW;
+                obj.activity = organizer.logoName;
+                obj.company = organizer.companyName;
+                obj.address = organizer.address;
+                obj.person = organizer.name;
+                obj.phone = organizer.mobile;
+                obj.idnum = organizer.idsnum;
+                if(this.registerType == 'company'){
+                    obj.license = organizer.companyImgUrl;
+                }else if(this.registerType == 'personal'){
+                    obj.license = organizer.idFrontImgUrl;
+                    obj.license2 = organizer.idBackImgUrl;
+                }
+                obj.logo_img = organizer.logoImgUrl;
+                this.$ajax.post('/client/api/register',obj).then(res=>{
+                    let data = res.data;
+                    if(data.status == 1){
+                        self.$router.push('bind');
+                    }else if(data.status == -3){
+                        self.$router.push('index');
+                    }
+                })
             }
         }
     }

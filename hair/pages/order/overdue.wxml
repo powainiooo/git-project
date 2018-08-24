@@ -20,7 +20,7 @@
                 <view class="icons icon-cuowu"></view>
                 <view class="text">已过期</view>
             </view>
-            <view class="btn-map">填写反馈</view>
+            <view class="btn-map" bindtap="gotoFeedback">填写反馈</view>
         </view>
     </view>
     <view class="tips-frame">

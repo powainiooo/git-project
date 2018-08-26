@@ -13,7 +13,7 @@
             <section class="log-frame" v-if="showLogin || showForget">
                 <login-frame v-if="showLogin" @gotoForget="doShowForget"></login-frame>
                 <transition enter-active-class="animated fadeIn">
-                    <forget-frame v-if="showForget"></forget-frame>
+                    <forget-frame v-if="showForget" @doHideForget="doHideForget"></forget-frame>
                 </transition>
             </section>
         </transition>
@@ -46,6 +46,7 @@
     import RegisterFrame from '@/components/index/RegisterFrame.vue'
     import OrgFrame from '@/components/index/OrgFrame.vue'
     import TLaws from '@/components/common/TLaws.vue'
+    import qs from 'qs'
     export default {
         name: 'app',
         components:{TButton,LoginFrame,ForgetFrame,RegisterFrame,OrgFrame,TLaws},
@@ -66,6 +67,11 @@
                 this.showForget = true;
                 this.showRegister = false;
             },
+            doHideForget(){
+                this.showLogin = true;
+                this.showForget = false;
+                this.showRegister = true;
+            },
             doShowRegiterAll(){
                 this.showLogin = false;
                 this.showRegisterAll = true;
@@ -81,14 +87,18 @@
                 this.registerType = type;
             },
             dosubmit(){
-                console.log('submit');
                 let self = this;
                 let register = this.$refs.register;
                 let organizer = this.$refs.organizer;
                 let obj = {};
                 obj.email = register.email;
-                obj.mobile = register.phone;
-                obj.vericode = register.code;
+                obj.mobile = register.mobile;
+                obj.vericode = register.vericode;
+                if(self.registerType == 'company'){
+                    obj.type = 1;
+                }else if(self.registerType == 'personal'){
+                    obj.type = 2;
+                }
                 obj.password = register.password;
                 obj.repassword = register.confirmPSW;
                 obj.activity = organizer.logoName;
@@ -104,12 +114,37 @@
                     obj.license2 = organizer.idBackImgUrl;
                 }
                 obj.logo_img = organizer.logoImgUrl;
-                this.$ajax.post('/client/api/register',obj).then(res=>{
+                this.$ajax.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+                this.$ajax.post('/client/api/register',qs.stringify(obj)).then(res=>{
                     let data = res.data;
+                    console.log(data);
                     if(data.status == 1){
-                        self.$router.push('bind');
+                        self.$tModal.warn({
+                            title:'提交成功！',
+                            content:'后台将在3个工作日内完成帐号审核，<br>帐号审核通过与否，都将以短信形式通知到已注册的手机号上。',
+                            btn1Name:'返回首页',
+                            onOk(){
+                                self.$router.go(0)
+                            }
+                        })
                     }else if(data.status == -3){
-                        self.$router.push('index');
+                        self.$tModal.warn({
+                            title:'提交失败！',
+                            content:'该帐号信息已经存在，请重新填写',
+                            btn1Name:'返回首页',
+                            onOk(){
+                                self.$router.go(0)
+                            }
+                        })
+                    }else{
+                        self.$tModal.warn({
+                            title:'提交失败！',
+                            content:'由于网络错误，流量拥挤提交失败，<br>请尝试重新提交。',
+                            btn1Name:'重新提交',
+                            onOk(){
+
+                            }
+                        })
                     }
                 })
             }

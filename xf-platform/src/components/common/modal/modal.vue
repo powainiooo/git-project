@@ -28,8 +28,8 @@
                 <textarea rows="9" placeholder="请填写通知（200字）" v-model="text"></textarea>
             </div>
             <div class="btns btns-one">
-                <t-button @dotap="onOk">确认</t-button>
-                <t-button extraClass="gray" v-if="!isWarn" @dotap="onCancel">取消</t-button>
+                <t-button @dotap="onOk">{{btn1Name}}</t-button>
+                <t-button extraClass="gray" v-if="!isWarn" @dotap="onCancel">{{btn2Name}}</t-button>
             </div>
         </div>
     </section>
@@ -48,6 +48,8 @@
                 content:'',
                 type:'',
                 text:'',
+                btn1Name:'确认',
+                btn2Name:'取消',
                 opts:{}
             }
         },
@@ -57,6 +59,7 @@
                 this.isWarn = true;
                 this.content = opts.content;
                 this.title = opts.title;
+                this.btn1Name = opts.btn1Name || '确认';
                 this.opts = opts;
             },
             confirm(opts){
@@ -65,6 +68,8 @@
                 this.content = opts.content;
                 this.title = opts.title;
                 this.type = opts.type || '';
+                this.btn1Name = opts.btn1Name || '确认';
+                this.btn2Name = opts.btn2Name || '取消';
                 this.opts = opts;
             },
             onCancel(){

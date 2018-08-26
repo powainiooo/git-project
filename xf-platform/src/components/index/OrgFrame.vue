@@ -13,7 +13,7 @@
     .organizer-frame .step2 .hint span{ font-size: 16px; font-weight: bold; margin-right: 4px;}
     .organizer-frame .step2 .demo{ display: flex; justify-content: space-between; align-items: center;}
     .organizer-frame .step2 .demo .n-btn{ width: 270px;}
-    .organizer-frame .step2 .ids-frame{ display: flex;}
+    .organizer-frame .step2 .ids-frame{ display: flex; justify-content: space-between;}
     .organizer-frame .step2 .ids-frame .upload-frame{ flex: 1;}
 </style>
 
@@ -85,7 +85,7 @@
         data(){
             return{
                 logoName:'',
-                companyName:'',
+                companyName:'name',
                 address:'',
                 name:'',
                 mobile:'',

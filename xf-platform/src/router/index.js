@@ -4,10 +4,11 @@ import index from '@/pages/index'
 import bind from '@/pages/bind'
 import list from '@/pages/list'
 import publish from '@/pages/publish'
+import store from '@/store'
 
 Vue.use(Router)
 
-export default new Router({
+let router =  new Router({
   routes: [
     {
       path: '/',
@@ -34,4 +35,17 @@ export default new Router({
       component: publish
     }
   ]
-})
+});
+router.beforeEach((to,from,next)=>{
+    console.log(to)
+    if(to.name == 'index'){
+        next();
+    }else{
+        if(store.state.isLogin){
+            next();
+        }else{
+            next('/index')
+        }
+    }
+});
+export default router

@@ -9,7 +9,7 @@
     .register-frame .frame .line{ margin-bottom: 20px;}
     .register-frame .frame .line input{ width: 100%; box-sizing: border-box; border: 1px solid #888888; border-radius: 6px; font-size: 16px; padding: 7px 16px; color: #000000}
     .register-frame .frame .line input::-webkit-input-placeholder{ color: #888888;}
-    .register-frame .frame  .code-line{ display: flex; justify-content: space-between;}
+    .register-frame .frame  .code-line{ display: flex; justify-content: space-between; align-items: center;}
     .register-frame .frame  .code-line input{ width: 50%;}
     .register-frame .frame  .code-line .n-btn{ width: 40%; }
     .register-frame .frame .hint{ font-size: 12px; color: #002aa6; text-align: center;}
@@ -33,10 +33,10 @@
             <p class="title" :style="{height:showAll ? '0px' : '100px'}"><span>2</span>步轻松创建活动方账户</p>
             <div class="line mt20"><input type="text" placeholder="注册邮箱" v-model="email" :readonly="confirmInfos"></div>
             <div class="more" :style="{height:showAll ? '425px' : '0px','margin-bottom':showAll ? '30px' : '0px'}">
-                <div class="line"><input type="text" placeholder="联系电话" v-model="phone" :readonly="confirmInfos"></div>
+                <div class="line"><input type="text" placeholder="联系电话" v-model="mobile" :readonly="confirmInfos"></div>
                 <div class="line code-line">
-                    <input type="text" placeholder="验证码" v-model="code" :readonly="confirmInfos">
-                    <t-button :isDisabled="phoneDisabled" size="min" @dotap="getCode">{{codeBtnName}}</t-button>
+                    <input type="text" placeholder="验证码" v-model="vericode" :readonly="confirmInfos">
+                    <t-button :isDisabled="btnDisabled" size="min" @dotap="getCode">{{codeBtnName}}</t-button>
                 </div>
                 <div class="line"><input type="password" placeholder="密码" v-model="password" :readonly="confirmInfos"></div>
                 <div class="line"><input type="password" placeholder="重复密码" v-model="confirmPSW" :readonly="confirmInfos"></div>
@@ -65,17 +65,15 @@
 
 <script type='es6'>
     import TButton from '@/components/common/TButton.vue'
+    import vericode from '@/components/mixin/vericode.js'
     export default {
         name: 'app',
         components:{TButton},
         props:['showAll','registerType'],
+        mixins: [vericode],
         data(){
             return{
                 email:'',
-                phone:'',
-                code:'',
-                codeBtnName:'获取验证码',
-                codeIndex:0,
                 password:'',
                 confirmPSW:'',
                 confirmInfos:false
@@ -85,13 +83,6 @@
             emailDisabled(){
                 let reg = /^([0-9A-Za-z\-_\.]+)@([0-9a-z]+\.[a-z]{2,3}(\.[a-z]{2})?)$/g;
                 return !reg.test(this.email)
-            },
-            phoneDisabled(){
-                let reg = /^[1][3,4,5,7,8][0-9]{9}$/;
-                if(!reg.test(this.phone) || this.codeIndex != 0){
-                    return true
-                }
-                return false
             },
             pswPass(){
                 let reg = /^(?=.*[0-9])(?=.*[a-zA-Z])(.{8,})$/;
@@ -104,7 +95,7 @@
                 return false
             },
             nextDisabled(){
-                if(this.phoneDisabled || this.emailDisabled || this.code == '' || !this.pswPass || this.password != this.confirmPSW){
+                if(this.phoneDisabled || this.emailDisabled || this.vericode == '' || !this.pswPass || this.password != this.confirmPSW){
                     return true
                 }
                 return false
@@ -126,22 +117,6 @@
             },
             changeType(type){
                 this.$emit('changeType',type)
-            },
-            getCode(){
-                this.codeCount();
-            },
-            codeCount(){
-                this.codeIndex = 60;
-                this.codeBtnName = `请${this.codeIndex}秒以后再尝试`;
-                let t = setInterval(()=>{
-                    if(this.codeIndex == 0){
-                        clearInterval(t);
-                        this.codeBtnName = `获取验证码`;
-                    }else{
-                        this.codeIndex -- ;
-                        this.codeBtnName = `请${this.codeIndex}秒以后再尝试`;
-                    }
-                },1000)
             }
         }
     }

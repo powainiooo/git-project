@@ -11,13 +11,13 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-        '/client':{
-            target:'http://ticket.pc-online.cc',
-            changeOrigin:true,
-            pathRewrite:{
-                '^/client':'/client'
-            }
-        }
+        //'/client':{
+        //    target:'http://ticket.pc-online.cc',
+        //    changeOrigin:true,
+        //    pathRewrite:{
+        //        '^/client':'/client'
+        //    }
+        //}
     },
 
     // Various Dev Server settings

@@ -13,8 +13,11 @@
         components:{index},
         computed:{
             showMenus(){
-                return this.$store.state.showGlobalMenu
+                return this.$store.state.isLogin
             }
+        },
+        mounted(){
+            this.$ajax.defaults.baseURL = 'http://ticket.pc-online.cc';
         }
     }
 </script>

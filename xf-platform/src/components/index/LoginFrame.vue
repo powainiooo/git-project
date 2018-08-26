@@ -12,12 +12,13 @@
         <div class="line"><input type="text" placeholder="邮箱/手机" v-model="username"></div>
         <div class="line"><input type="password" placeholder="密码" v-model="password"></div>
         <div class="line"><a href="javascript:;" @click="gotoForget">忘记密码？</a> </div>
-        <div class="line" style="margin-top: 35px;"><t-button extraClass="white" :isDisabled="isDisabled" @dotap="$router.push('bind')">确认</t-button></div>
+        <div class="line" style="margin-top: 35px;"><t-button extraClass="white" :isDisabled="isDisabled" @dotap="doLogin">确认</t-button></div>
     </div>
 </template>
 
 <script type='es6'>
     import TButton from '@/components/common/TButton.vue'
+    import qs from 'qs'
     export default {
         name: 'app',
         components:{TButton},
@@ -38,6 +39,32 @@
         methods:{
             gotoForget(){
                 this.$emit('gotoForget')
+            },
+            doLogin(){
+                let self = this;
+                let obj = {
+                    email:this.username,
+                    password:this.password
+                };
+                this.$ajax.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+                this.$ajax.post('/client/api/login',qs.stringify(obj)).then(res=>{
+                    let data = res.data;
+                    if(data.status == 1){
+                        self.$ajax.defaults.headers.common['mid'] = data.data.mid;
+                        self.$ajax.defaults.headers.common['tokey'] = data.data.tokey;
+                        self.$store.commit('doLogin');
+                        self.$store.commit('setGlobalData',data);
+                        if(data.bank.length == 0){
+                            self.$router.push('bind');
+                        }else{
+                            self.$router.push('list');
+                        }
+                    }else{
+                        self.$Message.warning(data.msg);
+                        self.username = '';
+                        self.password = '';
+                    }
+                })
             }
         }
     }

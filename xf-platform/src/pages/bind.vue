@@ -12,7 +12,7 @@
     .bind-form .frame .title{ font-size: 18px; color: #000000; font-weight: bold; border-bottom: 1px solid #e5e5e5; padding-left: 50px;}
     .bind-form .frame .title span{ font-size: 66px; margin-right: 10px; font-family: 'Helve';}
     .bind-form .frame .step1 input{ width: 270px; border: 1px solid #a5a5a5; border-radius: 5px; box-sizing: border-box; padding: 7px 16px; color: #000000; font-size: 16px;}
-    .bind-form .frame .step1 .code-line{ width: 270px; margin: 0 auto 20px auto; display: flex; justify-content: space-between;}
+    .bind-form .frame .step1 .code-line{ width: 270px; margin: 0 auto 20px auto; display: flex; justify-content: space-between; align-items: center;}
     .bind-form .frame .step1 .code-line input{ width: 50%;}
     .bind-form .frame .step1 .code-line .n-btn{ width: 40%;}
     .bind-form .step2 .demo{ display: flex; justify-content: space-between; align-items: center;}
@@ -46,8 +46,8 @@
                         <p class="mb20 tc"><input type="text" placeholder="开户名" v-model="name"></p>
                         <p class="mb20 tc"><input type="text" placeholder="预留手机号" v-model="mobile"></p>
                         <div class="line code-line">
-                            <input type="text" placeholder="验证码" v-model="code">
-                            <t-button :isDisabled="phoneDisabled" size="min">获取验证码</t-button>
+                            <input type="text" placeholder="验证码" v-model="vericode">
+                            <t-button :isDisabled="btnDisabled" size="min" @dotap="getCode">{{codeBtnName}}</t-button>
                         </div>
                         <p class="mb20 tc"><input type="text" placeholder="身份证号" v-model="idsnum"></p>
                         <p class="mb20 tc"><input type="text" placeholder="银行卡号" v-model="banknum"></p>
@@ -78,15 +78,15 @@
 
 <script type='es6'>
     import TButton from '@/components/common/TButton.vue'
+    import vericode from '@/components/mixin/vericode.js'
     export default {
         name: 'app',
         components:{TButton},
+        mixins: [vericode],
         data(){
             return{
                 showItems:false,
                 name:'',
-                mobile:'',
-                code:'',
                 idsnum:'',
                 banknum:'',
                 bank:''
@@ -98,16 +98,12 @@
             },500)
         },
         computed:{
-            phoneDisabled(){
-                let reg = /^[1][3,4,5,7,8][0-9]{9}$/;
-                return !reg.test(this.mobile)
-            },
             idsnumCheck(){
                 let reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
                 return reg.test(this.idsnum)
             },
             btnDisabled(){
-                if(this.name != '' && !this.phoneDisabled && this.code != '' && this.idsnumCheck && this.banknum != '' && this.bank != ''){
+                if(this.name != '' && !this.phoneDisabled && this.vericode != '' && this.idsnumCheck && this.banknum != '' && this.bank != ''){
                     return false;
                 }
                 return true;
@@ -115,8 +111,8 @@
         },
         methods:{
             dobind(){
-                this.$router.push('list');
-                this.$store.commit('doShowGlobalMenu')
+                //this.$router.push('list');
+                //this.$store.commit('doShowGlobalMenu')
             }
         }
     }

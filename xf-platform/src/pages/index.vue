@@ -23,9 +23,11 @@
             }
         },
         mounted(){
-            this.$ajax.get('http://ticket.pc-online.cc/client/api/index').then(res=>{
-                console.log(res)
-            })
+
+            //this.$ajax.get('http://ticket.pc-online.cc/client/api/index').then(res=>{
+            //    console.log(res)
+            //})
+
         },
         methods:{
 

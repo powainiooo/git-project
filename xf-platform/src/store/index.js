@@ -5,11 +5,23 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
     state: {
-        showGlobalMenu:true
+        showGlobalMenu:false,
+        isLogin:false,
+        userData:{},
+        bankData:{},
+        contactData:{}
     },
     mutations: {
+        doLogin(state){
+            state.isLogin = true
+        },
         doShowGlobalMenu (state) {
             state.showGlobalMenu = true
+        },
+        setGlobalData(state,data){
+            state.userData = data.data;
+            state.bankData = data.bank[0];
+            state.contactData = data.contact;
         }
     },
     actions: {

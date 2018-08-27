@@ -47,7 +47,7 @@
                         <p class="mb20 tc"><input type="text" placeholder="预留手机号" v-model="mobile"></p>
                         <div class="line code-line">
                             <input type="text" placeholder="验证码" v-model="vericode">
-                            <t-button :isDisabled="btnDisabled" size="min" @dotap="getCode">{{codeBtnName}}</t-button>
+                            <t-button :isDisabled="veriBtnDisabled" size="min" @dotap="getCode">{{codeBtnName}}</t-button>
                         </div>
                         <p class="mb20 tc"><input type="text" placeholder="身份证号" v-model="idsnum"></p>
                         <p class="mb20 tc"><input type="text" placeholder="银行卡号" v-model="banknum"></p>
@@ -79,6 +79,7 @@
 <script type='es6'>
     import TButton from '@/components/common/TButton.vue'
     import vericode from '@/components/mixin/vericode.js'
+    import qs from 'qs'
     export default {
         name: 'app',
         components:{TButton},
@@ -113,6 +114,20 @@
             dobind(){
                 //this.$router.push('list');
                 //this.$store.commit('doShowGlobalMenu')
+                let obj = {},self = this;
+                obj.username = this.name;
+                obj.mobile = this.mobile;
+                obj.vericode = this.vericode;
+                obj.idnums = this.idsnum;
+                obj.cardnums = this.banknum;
+                obj.bankname = this.bank;
+                this.$ajax.post('/client/api/bind_card',qs.stringify(obj)).then(res=>{
+                    let data = res.data;
+                    if(data.status == 1){
+                        self.$Message.success('绑定成功！');
+                        self.$router.push('list');
+                    }
+                })
             }
         }
     }

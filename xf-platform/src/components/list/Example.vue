@@ -98,7 +98,7 @@
         },
         methods:{
             gotoNewitem(){
-                this.$emit('intolist')
+                this.$router.push('publish')
             }
         }
     }

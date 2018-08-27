@@ -13,36 +13,36 @@
         <div class="base-info-list">
             <div class="info-item">
                 <p class="name">类型</p>
-                <p class="info">公司</p>
+                <p class="info">{{userData.type == '1' ? '公司' : '个人'}}</p>
             </div>
             <div class="info-item">
                 <p class="name">名称</p>
-                <p class="info">Sector</p>
+                <p class="info">{{userData.activity}}</p>
             </div>
-            <div class="info-item">
+            <div class="info-item" v-if="userData.type == '1'">
                 <p class="name">所属公司</p>
-                <p class="info">A8音乐集团</p>
+                <p class="info">{{userData.company}}</p>
             </div>
             <div class="info-item">
                 <p class="name">联系地址</p>
-                <p class="info" style="width: 300px;">深圳市XXXXXXXXX</p>
+                <p class="info" style="width: 300px;">{{userData.address}}</p>
             </div>
             <div class="info-item">
                 <p class="name">负责人</p>
-                <p class="info">张三</p>
+                <p class="info">{{userData.person}}</p>
             </div>
             <div class="info-item">
                 <p class="name">身份证</p>
-                <p class="info" style="width: 300px;">450202199112170011</p>
+                <p class="info" style="width: 300px;">{{userData.idnum}}</p>
             </div>
             <div class="info-item">
                 <p class="name">联系电话</p>
-                <p class="info">13812341234</p>
+                <p class="info">{{userData.mobile}}</p>
             </div>
         </div>
         <div class="base-info-hint">
             <div class="logo-frame">
-                <div class="img"><img src="@/assets/img/logo2.png"> </div>
+                <div class="img"><img :src="userData.logo_img"> </div>
                 <div class="name">活动方LOGO</div>
             </div>
             <div style="font-size: 14px; color: #888888; margin-top: 60px;">活动方基本信息无法修改，如若有紧急情况需要修改信息，<br>请电话联系18000000000</div>
@@ -53,6 +53,11 @@
 <script type="es6">
     export default{
         name: 'App',
+        computed:{
+            userData(){
+                return this.$store.state.userData
+            }
+        },
         data(){
             return{
 

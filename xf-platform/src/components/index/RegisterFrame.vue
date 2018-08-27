@@ -36,7 +36,7 @@
                 <div class="line"><input type="text" placeholder="联系电话" v-model="mobile" :readonly="confirmInfos"></div>
                 <div class="line code-line">
                     <input type="text" placeholder="验证码" v-model="vericode" :readonly="confirmInfos">
-                    <t-button :isDisabled="btnDisabled" size="min" @dotap="getCode">{{codeBtnName}}</t-button>
+                    <t-button :isDisabled="veriBtnDisabled" size="min" @dotap="getCode">{{codeBtnName}}</t-button>
                 </div>
                 <div class="line"><input type="password" placeholder="密码" v-model="password" :readonly="confirmInfos"></div>
                 <div class="line"><input type="password" placeholder="重复密码" v-model="confirmPSW" :readonly="confirmInfos"></div>

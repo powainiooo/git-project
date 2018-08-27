@@ -15,7 +15,7 @@
         <div class="line"><input type="text" placeholder="联系电话" v-model="mobile"></div>
         <div class="line code-line">
             <input type="text" placeholder="验证码" v-model="vericode">
-            <t-button extraClass="white" :isDisabled="btnDisabled" size="min" @dotap="getCode">{{codeBtnName}}</t-button>
+            <t-button extraClass="white" :isDisabled="veriBtnDisabled" size="min" @dotap="getCode">{{codeBtnName}}</t-button>
         </div>
         <div class="line"><input type="password" placeholder="新密码" v-model="password"></div>
         <div class="line"><input type="password" placeholder="确认新密码" v-model="confirmPSW"></div>

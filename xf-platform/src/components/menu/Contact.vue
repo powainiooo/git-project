@@ -13,27 +13,27 @@
         <div class="base-info-list">
             <div class="info-item">
                 <p class="name">类型</p>
-                <p class="info">个人</p>
+                <p class="info">{{contactData.type == '1' ? '公司' : '个人'}}</p>
             </div>
             <div class="info-item">
                 <p class="name">名称</p>
-                <p class="info">Sector</p>
+                <p class="info">{{contactData.name}}</p>
             </div>
             <div class="info-item">
                 <p class="name">联系地址</p>
-                <p class="info" style="width: 300px;">深圳市XXXXXXXXX</p>
+                <p class="info" style="width: 300px;">{{contactData.address}}</p>
             </div>
             <div class="info-item">
                 <p class="name">负责人</p>
-                <p class="info">张三</p>
+                <p class="info">{{contactData.person}}</p>
             </div>
             <div class="info-item">
                 <p class="name">身份证</p>
-                <p class="info" style="width: 300px;">450202199112170011</p>
+                <p class="info" style="width: 300px;">{{contactData.idnum}}</p>
             </div>
             <div class="info-item">
                 <p class="name">联系电话</p>
-                <p class="info">13812341234</p>
+                <p class="info">{{contactData.phone}}</p>
             </div>
         </div>
         <div class="base-info-hint">
@@ -49,6 +49,11 @@
 <script type="es6">
     export default{
         name: 'App',
+        computed:{
+            contactData(){
+                return this.$store.state.contactData
+            }
+        },
         data(){
             return{
 

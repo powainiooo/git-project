@@ -5,6 +5,7 @@ import bind from '@/pages/bind'
 import list from '@/pages/list'
 import publish from '@/pages/publish'
 import store from '@/store'
+import Cookies from 'js-cookie'
 
 Vue.use(Router)
 
@@ -37,11 +38,13 @@ let router =  new Router({
   ]
 });
 router.beforeEach((to,from,next)=>{
-    console.log(to)
     if(to.name == 'index'){
         next();
     }else{
-        if(store.state.isLogin){
+        if(Cookies.get('xfmid')){
+            if(!store.state.isLogin){
+                store.dispatch('getUserData');
+            }
             next();
         }else{
             next('/index')

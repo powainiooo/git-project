@@ -33,9 +33,7 @@
                 <div class="mt20">
                     <div class="inp-line">
                         <Select v-model="formData.city" placeholder="选择城市">
-                            <Option value="1">全部</Option>
-                            <Option value="2">深圳</Option>
-                            <Option value="3">广州</Option>
+                            <Option v-for="item in cityList" :value="item.id" :key="item.id">{{item.name}}</Option>
                         </Select>
                     </div>
                     <div class="inp-line">
@@ -62,10 +60,10 @@
                     </div>
                     <div class="time-line">
                         <div class="inp-line">
-                            <TimePicker format="HH:mm" type="time" placeholder="活动时间" v-model="formData.timeBegin" :editable="false"></TimePicker>
+                            <TimePicker format="HH:mm" type="time" placeholder="活动时间" v-model="formData.hour_b" :editable="false"></TimePicker>
                         </div>
                         <div class="inp-line">
-                            <TimePicker format="HH:mm" type="time" placeholder="活动时间" v-model="formData.timeEnd" :editable="false"></TimePicker>
+                            <TimePicker format="HH:mm" type="time" placeholder="活动时间" v-model="formData.hour_e" :editable="false"></TimePicker>
                         </div>
                     </div>
                     <div class="inp-line"><input type="text" placeholder="活动方地址" v-model="formData.address"></div>
@@ -75,7 +73,7 @@
             <div class="step2">
                 <h3 class="title"><span>2</span>上传图片</h3>
                 <div class="pl50 pt20 pb20 pr" style="border-bottom: 1px solid #e5e5e5;">
-                    <t-upload v-model="formData.logoImg">
+                    <t-upload v-model="formData.cover">
                         <template slot="title">
                             <h3>活动方LOGO</h3>
                         </template>
@@ -88,7 +86,7 @@
                     </t-ques>
                 </div>
                 <div class="pl50 pt20 pb20 pr" style="border-bottom: 1px solid #e5e5e5;">
-                    <t-upload  v-model="formData.posterImg">
+                    <t-upload  v-model="formData.cover2">
                         <template slot="title">
                             <h3>宣传海报</h3>
                             <p>海报尺寸为750px*650px</p>
@@ -120,26 +118,37 @@
         components:{TButton,TUpload,ListItem,TQues},
         data(){
             return{
+                cityList:[],
                 formData:{
                     status:'',
-                    city:['','',''],
-                    title:'',
+                    city:'',
+                    goods_name:'',
                     type:'',
                     begin:'',
                     end:'',
-                    timeBegin:'',
-                    timeEnd:'',
+                    hour_b:'',
+                    hour_e:'',
                     address:'',
                     mobile:'',
-                    logoImg:'',
-                    posterImg:''
+                    cover:'',
+                    cover2:''
                 }
             }
         },
-        computed:{
+        mounted(){
+            setTimeout(()=>{
+                this.getCity();
+            },500)
 
         },
         methods:{
+            getCity(){
+                let self = this;
+                this.$ajax.get('/client/api/city_list').then(res=>{
+                    let data = res.data;
+                    self.cityList = data.data.citys;
+                })
+            },
             dateChange(date){
                 if(this.formData.type == 1){
                     this.formData.begin = date;

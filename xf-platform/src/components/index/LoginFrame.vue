@@ -18,6 +18,7 @@
 
 <script type='es6'>
     import TButton from '@/components/common/TButton.vue'
+    import Cookies from 'js-cookie';
     import qs from 'qs'
     export default {
         name: 'app',
@@ -50,15 +51,12 @@
                 this.$ajax.post('/client/api/login',qs.stringify(obj)).then(res=>{
                     let data = res.data;
                     if(data.status == 1){
-                        self.$ajax.defaults.headers.common['mid'] = data.data.mid;
-                        self.$ajax.defaults.headers.common['tokey'] = data.data.tokey;
-                        self.$store.commit('doLogin');
-                        self.$store.commit('setGlobalData',data);
-                        if(data.bank.length == 0){
-                            self.$router.push('bind');
-                        }else{
-                            self.$router.push('list');
-                        }
+                        self.$ajax.defaults.headers.common['mid'] = data.mid;
+                        self.$ajax.defaults.headers.common['tokey'] = data.tokey;
+                        Cookies.set('xfmid', data.mid);
+                        Cookies.set('xftokey', data.tokey);
+                        self.$store.dispatch('getUserData',true);
+                        self.$Message.success(data.msg);
                     }else{
                         self.$Message.warning(data.msg);
                         self.username = '';

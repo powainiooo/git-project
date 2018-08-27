@@ -15,7 +15,7 @@ export default {
             }
             return false
         },
-        btnDisabled(){
+        veriBtnDisabled(){
             if(this.phoneDisabled || this.codeIndex != 0){
                 return true
             }

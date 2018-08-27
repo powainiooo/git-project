@@ -82,11 +82,11 @@
                         <h3>门票类型</h3>
                         <ul>
                            <li>
-                               <input type="radio" class="radio" v-model="ticketType" value="0">
+                               <input type="radio" class="radio" v-model="ticketType" value="1">
                                <span>电子票</span>
                            </li>
                            <li>
-                               <input type="radio" class="radio" v-model="ticketType" value="1">
+                               <input type="radio" class="radio" v-model="ticketType" value="2">
                                <span>实体票</span>
                            </li>
                         </ul>
@@ -95,22 +95,26 @@
                         <h3>身份证</h3>
                         <ul>
                            <li>
-                               <input type="radio" class="radio" v-model="ids" value="0">
+                               <input type="radio" class="radio" v-model="ids" value="1">
                                <span>需要</span>
                            </li>
                            <li>
-                               <input type="radio" class="radio" v-model="ids" value="1">
+                               <input type="radio" class="radio" v-model="ids" value="0">
                                <span>不需要</span>
                            </li>
                         </ul>
                     </div>
                     <div class="inp-line">
+                        <h3>显示时间</h3>
+                        <DatePicker format="yyyy-MM-dd HH:mm" type="datetime" placeholder="选择时间" :editable="false" @on-change="showTime=$event"></DatePicker>
+                    </div>
+                    <div class="inp-line">
                         <h3>开售时间</h3>
-                        <DatePicker format="yyyy-MM-dd HH:mm" type="datetime" placeholder="活动时间" :editable="false"></DatePicker>
+                        <DatePicker format="yyyy-MM-dd HH:mm" type="datetime" placeholder="选择时间" :editable="false" @on-change="saleStart=$event"></DatePicker>
                     </div>
                     <div class="inp-line">
                         <h3>结束时间</h3>
-                        <DatePicker format="yyyy-MM-dd HH:mm" type="datetime" placeholder="活动时间" :editable="false"></DatePicker>
+                        <DatePicker format="yyyy-MM-dd HH:mm" type="datetime" placeholder="选择时间" :editable="false" @on-change="saleEnd=$event"></DatePicker>
                     </div>
                 </div>
             </div>
@@ -156,8 +160,11 @@
         components:{TQues},
         data(){
             return{
-                ticketType:'0',
-                ids:'0',
+                ticketType:'1',
+                ids:'1',
+                saleStart:'',
+                saleEnd:'',
+                showTime:'',
                 typeListData:[
                     {
                         checked:true,

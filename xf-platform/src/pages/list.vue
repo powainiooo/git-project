@@ -17,7 +17,7 @@
 <template>
     <section class="prolist-frame" @scroll="pageScroll($event)">
         <div class="company-name">Sector</div>
-        <div class="btn-link" v-if="!showDetail && frameST == 0"><t-button extraClass="white" @dotap="$router.push('publish')">发布新活动</t-button></div>
+        <div class="btn-link" v-if="showDetail && frameST == 0"><t-button extraClass="white" @dotap="$router.push('publish')">发布新活动</t-button></div>
         <example v-if="showExample" @intolist="showExample=false"></example>
 
         <div class="search">
@@ -49,188 +49,38 @@
     import DetailFrame from '@/components/list/DetailFrame.vue'
     import TButton from '@/components/common/TButton.vue'
     import TSearch from '@/components/common/TSearch.vue'
+    import Cookies from 'js-cookie';
     export default {
         name: 'app',
         components:{Example,ListItem,DetailFrame,TButton,TSearch},
         data(){
             return{
-                showExample:true,
+                showExample:false,
                 showDetail:false,
-                listData:[
-                    {
-                        status:1,
-                        title:'Disco back',
-                        begin:'2018/06/30',
-                        type:'1',
-                        logoImg:'',
-                        posterImg:'',
-                        ticketType:[
-                            {
-                                name:'早鸟票',
-                                sale_nums:100,
-                                all_nums:100,
-                                is_sale_out:'2'
-                            },
-                            {
-                                name:'预售票',
-                                sale_nums:100,
-                                all_nums:200,
-                                is_sale_out:'1'
-                            },
-                            {
-                                name:'普通票',
-                                sale_nums:100,
-                                all_nums:200,
-                                is_sale_out:'1'
-                            }
-                        ]
-                    },
-                    {
-                        status:2,
-                        title:'Disco back',
-                        begin:'2018/06/30',
-                        type:'1',
-                        logoImg:'',
-                        posterImg:'',
-                        ticketType:[
-                            {
-                                name:'早鸟票',
-                                sale_nums:100,
-                                all_nums:100,
-                                is_sale_out:'2'
-                            },
-                            {
-                                name:'预售票',
-                                sale_nums:100,
-                                all_nums:200,
-                                is_sale_out:'1'
-                            },
-                            {
-                                name:'普通票',
-                                sale_nums:100,
-                                all_nums:200,
-                                is_sale_out:'1'
-                            }
-                        ]
-                    },
-                    {
-                        status:3,
-                        title:'Disco back',
-                        begin:'2018/06/30',
-                        type:'1',
-                        logoImg:'',
-                        posterImg:'',
-                        ticketType:[
-                            {
-                                name:'早鸟票',
-                                sale_nums:100,
-                                all_nums:100,
-                                is_sale_out:'2'
-                            },
-                            {
-                                name:'预售票',
-                                sale_nums:100,
-                                all_nums:200,
-                                is_sale_out:'1'
-                            },
-                            {
-                                name:'普通票',
-                                sale_nums:100,
-                                all_nums:200,
-                                is_sale_out:'1'
-                            }
-                        ]
-                    },
-                    {
-                        status:4,
-                        title:'Disco back',
-                        begin:'2018/06/30',
-                        type:'1',
-                        logoImg:'',
-                        posterImg:'',
-                        ticketType:[
-                            {
-                                name:'早鸟票',
-                                sale_nums:100,
-                                all_nums:100,
-                                is_sale_out:'2'
-                            },
-                            {
-                                name:'预售票',
-                                sale_nums:100,
-                                all_nums:200,
-                                is_sale_out:'1'
-                            },
-                            {
-                                name:'普通票',
-                                sale_nums:100,
-                                all_nums:200,
-                                is_sale_out:'1'
-                            }
-                        ]
-                    },
-                    {
-                        status:5,
-                        title:'Disco back',
-                        begin:'2018/06/30',
-                        type:'1',
-                        logoImg:'',
-                        posterImg:'',
-                        ticketType:[
-                            {
-                                name:'早鸟票',
-                                sale_nums:100,
-                                all_nums:100,
-                                is_sale_out:'2'
-                            },
-                            {
-                                name:'预售票',
-                                sale_nums:100,
-                                all_nums:200,
-                                is_sale_out:'1'
-                            },
-                            {
-                                name:'普通票',
-                                sale_nums:100,
-                                all_nums:200,
-                                is_sale_out:'1'
-                            }
-                        ]
-                    },
-                    {
-                        status:6,
-                        title:'Disco back',
-                        begin:'2018/06/30',
-                        type:'1',
-                        logoImg:'',
-                        posterImg:'',
-                        ticketType:[
-                            {
-                                name:'早鸟票',
-                                sale_nums:100,
-                                all_nums:100,
-                                is_sale_out:'2'
-                            },
-                            {
-                                name:'预售票',
-                                sale_nums:100,
-                                all_nums:200,
-                                is_sale_out:'1'
-                            },
-                            {
-                                name:'普通票',
-                                sale_nums:100,
-                                all_nums:200,
-                                is_sale_out:'1'
-                            }
-                        ]
-                    }
-                ],
+                listData:[],
                 detailData:{},
                 frameST:0
             }
         },
+        mounted(){
+            this.$ajax.defaults.headers.common['mid'] = Cookies.get('xfmid');
+            this.$ajax.defaults.headers.common['tokey'] = Cookies.get('xftokey');
+            this.$ajax.defaults.baseURL = 'http://ticket.pc-online.cc';
+            console.log('list');
+            this.getListData();
+        },
         methods:{
+            getListData(){
+                let self = this;
+                this.$ajax.get('/client/api/activity_list').then(res=>{
+                    let data = res.data;
+                    if(data.data.length == 0){
+                        self.showExample = true;
+                    }else{
+                        self.showDetail = true;
+                    }
+                })
+            },
             gotoDetail(index){
                 this.detailData = this.listData[index];
                 this.showDetail = true;

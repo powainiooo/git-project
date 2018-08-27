@@ -25,6 +25,7 @@
     .list-item .ticket .status .type .ivu-select .ivu-select-selection{ height: 28px; border-radius: 15px; border:none; background-color: #0239b8;}
     .list-item .ticket .status .type .ivu-select .ivu-select-placeholder{ height: 28px; color: #ffffff;}
     .list-item .ticket .status .type .ivu-select .ivu-select-arrow{color: #ffffff;}
+    .list-item .ticket .status .type .ivu-select .ivu-select-selected-value{color: #ffffff;}
     .list-item .ticket .status .nums{ padding:0 10px; height: 60px; display: flex; justify-content: space-between; align-items: center; background-color: #ffffff;}
     .list-item .ticket .status .nums p{ color: #000000; font-size: 14px; font-family: 'Helve';}
     .list-item .ticket .status .nums p span{ font-size: 40px; margin-right: 10px;}
@@ -39,7 +40,7 @@
     .list-item .ticket .info-frame .line1 .date .year{ height: 25px; box-sizing: border-box; font-size: 12px; display: flex; justify-content: space-between; align-items: center; color: #000000; border-bottom: 1px solid #c1c1c1; padding: 0 10px;}
     .list-item .ticket .info-frame .line1 .date .day{ height: 58px; font-size: 44px; display: flex; justify-content: center; align-items: center; color: #000000; font-family: 'Helve';}
     .list-item .ticket .info-frame .line1 .date3 .day{ font-size: 32px;}
-    .list-item .ticket .info-frame .line1 .logo{ height: 85px; display: flex; justify-content: center; align-items: center; overflow: hidden;}
+    .list-item .ticket .info-frame .line1 .logo{ height: 85px; display: flex; justify-content: center; align-items: center; overflow: hidden; padding: 10px 0; box-sizing: border-box;}
     .list-item .ticket .info-frame .line1 .logo img{ height: 100%;}
     .list-item .ticket .info-frame .title{ padding:0 10px; height: 45px; font-size: 18px; font-family: 'Helve'; color: #000000; display: flex; align-items: center; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;}
     .list-item .ticket .info-frame .img{ height: 142px; display: flex; align-items: center; overflow: hidden;}
@@ -52,7 +53,7 @@
             <img src="@/assets/img/list-shadow.png">
         </div>
         <div class="ticket">
-            <!-- 1:销售中 2：已下架 3：审核中 4：审核未通过 5：已售罄 6：已结束-->
+            <!-- 1:销售中 2：已下架 0：审核中 3：审核未通过 4：已售罄 5：已结束-->
             <div class="status status1" v-if="itemdata.status == 1">
                 <div class="top">
                     <p>销售中</p>
@@ -60,15 +61,14 @@
                 </div>
                 <div class="type" @click.stop="doSelectType">
                     <p>已销售</p>
-                    <Select>
+                    <Select v-model="selectType">
                         <Option value="0">全部</Option>
-                        <Option value="1">早鸟票</Option>
-                        <Option value="2">福利票</Option>
+                        <Option v-for="(item,index) in itemdata.classes" :key="index" :value="index">{{item.select}}</Option>
                     </Select>
                 </div>
                 <div class="nums">
-                    <p><span>123</span>张</p>
-                    <div>/600</div>
+                    <p><span>{{getSalenums(selectType)}}</span>张</p>
+                    <div>/{{getAllnums(selectType)}}</div>
                 </div>
             </div>
             <div class="status status2" v-if="itemdata.status == 2">
@@ -78,47 +78,45 @@
                 </div>
                 <div class="type" @click.stop="doSelectType">
                     <p>已销售</p>
-                    <Select>
+                    <Select v-model="selectType">
                         <Option value="0">全部</Option>
-                        <Option value="1">早鸟票</Option>
-                        <Option value="2">福利票</Option>
+                        <Option v-for="(item,index) in itemdata.classes" :key="index" :value="index">{{item.select}}</Option>
                     </Select>
                 </div>
                 <div class="nums">
-                    <p><span>123</span>张</p>
-                    <div>/600</div>
+                    <p><span>{{getSalenums(selectType)}}</span>张</p>
+                    <div>/{{getAllnums(selectType)}}</div>
                 </div>
             </div>
-            <div class="status status3" v-if="itemdata.status == 3">
+            <div class="status status3" v-if="itemdata.status == '0'">
                 <div class="top">
                     <p>审核中<br>Under review<br>审查中</p>
                 </div>
             </div>
-            <div class="status status4" v-if="itemdata.status == 4">
+            <div class="status status4" v-if="itemdata.status == 3">
                 <div class="top">
                     <p>审核未通过<br>Unapprove</p>
                     <div style="width: 110px; align-self: flex-end; margin-bottom: 40px;"><t-button extraClass="white" size="min">查看并修改</t-button></div>
                 </div>
             </div>
-            <div class="status status5" v-if="itemdata.status == 5">
+            <div class="status status5" v-if="itemdata.status == 4">
                 <div class="top">
                     <p>已售罄</p>
                     <a href="javascript:;" @click.stop="doOff"><Icon type="ios-power" /></a>
                 </div>
                 <div class="type" @click.stop="doSelectType">
                     <p>已销售</p>
-                    <Select>
+                    <Select v-model="selectType">
                         <Option value="0">全部</Option>
-                        <Option value="1">早鸟票</Option>
-                        <Option value="2">福利票</Option>
+                        <Option v-for="(item,index) in itemdata.classes" :key="index" :value="index">{{item.select}}</Option>
                     </Select>
                 </div>
                 <div class="nums">
-                    <p><span>123</span>张</p>
-                    <div>/600</div>
+                    <p><span>{{getSalenums(selectType)}}</span>张</p>
+                    <div>/{{getAllnums(selectType)}}</div>
                 </div>
             </div>
-            <div class="status status6" v-if="itemdata.status == 6">
+            <div class="status status6" v-if="itemdata.status == 5">
                 <div class="top">
                     <p>已结束<br>Ended</p>
                 </div>
@@ -136,10 +134,10 @@
                         </div>
                         <div class="day">{{getDays()}}</div>
                     </div>
-                    <div class="logo"><img :src="itemdata.logoImg"> </div>
+                    <div class="logo"><img :src="itemdata.cover"> </div>
                 </div>
-                <div class="title">{{itemdata.title}}</div>
-                <div class="img"><img :src="itemdata.posterImg"></div>
+                <div class="title">{{itemdata.goods_name}} | {{itemdata.activity}}</div>
+                <div class="img"><img :src="itemdata.cover2"></div>
             </div>
         </div>
     </div>
@@ -153,7 +151,7 @@
         props:['itemdata'],
         data(){
             return{
-
+                selectType:'0'
             }
         },
         methods:{
@@ -185,6 +183,28 @@
             },
             doSelectType(){
                 console.log('select')
+            },
+            getSalenums(val){
+                let nums = 0,arr = this.itemdata.classes;
+                if(val == 0){
+                    for(let item of arr){
+                        nums += parseInt(item.salenums);
+                    }
+                }else{
+                    nums = arr[val].salenums;
+                }
+                return nums
+            },
+            getAllnums(val){
+                let nums = 0,arr = this.itemdata.classes;
+                if(val == 0){
+                    for(let item of arr){
+                        nums += parseInt(item.nums);
+                    }
+                }else{
+                    nums = arr[val].nums;
+                }
+                return nums
             }
         }
     }

@@ -30,7 +30,7 @@
             <menu-nav v-if="showItem == 'nav'" @toggle="toggle"></menu-nav>
             <base-info v-if="showItem == 'baseinfo'"></base-info>
             <bank-info v-if="showItem == 'bankinfo'" @toggle="toggle"></bank-info>
-            <editor-bank v-if="showItem == 'editorbank'"></editor-bank>
+            <editor-bank v-if="showItem == 'editorbank'" @toggle="toggle"></editor-bank>
             <record-list v-if="showItem == 'recordlist'" @toggle="toggle"></record-list>
             <crash-out v-if="showCrashOut" @toggle="toggle"></crash-out>
             <t-laws v-if="showLaws" readonly @close="showLaws=false"></t-laws>

@@ -16,8 +16,8 @@
 
 <template>
     <section class="prolist-frame" @scroll="pageScroll($event)">
-        <div class="company-name">Sector</div>
-        <div class="btn-link" v-if="showDetail && frameST == 0"><t-button extraClass="white" @dotap="$router.push('publish')">发布新活动</t-button></div>
+        <div class="company-name">{{userActivity}}</div>
+        <div class="btn-link" v-if="!showDetail && frameST == 0"><t-button extraClass="white" @dotap="$router.push('publish')">发布新活动</t-button></div>
         <example v-if="showExample" @intolist="showExample=false"></example>
 
         <div class="search">
@@ -62,6 +62,11 @@
                 frameST:0
             }
         },
+        computed:{
+            userActivity(){
+                return this.$store.state.userData.activity || '';
+            }
+        },
         mounted(){
             this.$ajax.defaults.headers.common['mid'] = Cookies.get('xfmid');
             this.$ajax.defaults.headers.common['tokey'] = Cookies.get('xftokey');
@@ -77,7 +82,8 @@
                     if(data.data.length == 0){
                         self.showExample = true;
                     }else{
-                        self.showDetail = true;
+                        self.showExample = false;
+                        self.listData = data.data;
                     }
                 })
             },

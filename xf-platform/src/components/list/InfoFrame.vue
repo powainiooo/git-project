@@ -40,15 +40,15 @@
         <div class="time-item">
             <p>开售时间</p>
             <div>
-                <span style="font-weight: bold;">2017-01-02</span>
-                <span>19:39</span>
+                <span style="font-weight: bold;">{{itemData.sale_start | formatDate}}</span>
+                <span>{{itemData.hour_b}}</span>
             </div>
         </div>
         <div class="time-item">
             <p>停票时间</p>
             <div>
-                <span style="font-weight: bold;">2017-01-02</span>
-                <span>19:39</span>
+                <span style="font-weight: bold;">{{itemData.sale_end | formatDate}}</span>
+                <span>{{itemData.hour_e}}</span>
             </div>
         </div>
         <div class="title title2">
@@ -76,10 +76,10 @@
                 <div class="td1">{{item.name}}</div>
                 <div class="td2">{{item.sale_nums}}</div>
                 <div class="td3" :class="editorTypeList[index].all_nums != lastTypeList[index].all_nums ? 'td-change' : ''">
-                    <InputNumber :min="item.min_nums" v-model="item.all_nums"  size="large"></InputNumber>
+                    <InputNumber :min="item.min_nums" v-model="item.all_nums"  size="large" :disabled="isVerify"></InputNumber>
                 </div>
                 <div class="td4">
-                    <t-switch :disabled="item.sale_nums == item.all_nums" v-model="item.is_sale_out" true-value="2" false-value="1">
+                    <t-switch :disabled="item.sale_nums == item.all_nums || isVerify" v-model="item.is_sale_out" true-value="2" false-value="1">
                         <span slot="open">已售罄</span>
                         <span slot="close">销售中</span>
                     </t-switch>
@@ -90,7 +90,7 @@
             <t-button size="min">确认</t-button>
             <t-button size="min" extraClass="gray" @dotap="resetTypeList">取消</t-button>
         </div>
-        <div class="title title2">
+        <div class="title title2" v-if="!isVerify">
             <div class="name">
                 <span class="index">3</span>链接码 及 验票码
                 <t-ques style="margin-left: 15px;" width="300">
@@ -101,7 +101,7 @@
                 </t-ques>
             </div>
         </div>
-        <div class="qrcode">
+        <div class="qrcode" v-if="!isVerify">
             <div class="qritem">
                 <img src="@/assets/img/qrcode1.png" width="100" height="100">
                 <t-button size="min">下载链接码</t-button>
@@ -118,12 +118,19 @@
     import TButton from '@/components/common/TButton.vue'
     import TQues from '@/components/common/TQues.vue'
     import TSwitch from '@/components/common/TSwitch.vue'
+    import {formatDate} from '@/assets/js/date.js'
     export default {
         name: 'app',
         components:{TButton,TQues,TSwitch},
         props:{
             itemData:{
                 type:Object
+            }
+        },
+        filters:{
+            formatDate(time){
+                let date = new Date(time*1000);
+                return formatDate(date,'yyyy-MM-dd');
             }
         },
         computed:{
@@ -135,6 +142,9 @@
                     }
                 }
                 return false
+            },
+            isVerify(){
+                return this.itemData.status == 0
             }
         },
         data(){
@@ -148,22 +158,28 @@
         },
         methods:{
             resetTypeList(){
-                let tl = this.itemData.ticketType;
+                let tl = this.itemData.classes;
                 this.editorTypeList = [];
                 for(let item of tl){
+                    let out;
+                    if(this.isVerify){
+                        out = '2';
+                    }else{
+                        out = item.salenums == item.nums ? '2' : '1'
+                    }
                     this.editorTypeList.push({
-                        name:item.name,
-                        sale_nums:item.sale_nums,
-                        all_nums:item.all_nums,
-                        min_nums:item.all_nums,
-                        is_sale_out:item.is_sale_out
+                        name:item.select,
+                        sale_nums:parseInt(item.salenums),
+                        all_nums:parseInt(item.nums),
+                        min_nums:parseInt(item.nums),
+                        is_sale_out:out
                     });
                     this.lastTypeList.push({
-                        name:item.name,
-                        sale_nums:item.sale_nums,
-                        all_nums:item.all_nums,
-                        min_nums:item.all_nums,
-                        is_sale_out:item.is_sale_out
+                        name:item.select,
+                        sale_nums:parseInt(item.salenums),
+                        all_nums:parseInt(item.nums),
+                        min_nums:parseInt(item.nums),
+                        is_sale_out:out
                     });
                 }
             }

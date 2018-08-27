@@ -34,7 +34,7 @@
         <div class="org-title" v-if="showItems">Organizer</div>
         </transition>
         <transition enter-active-class="animated anim-item slideInDown">
-        <div class="company-title" v-if="showItems"><span>Sector</span></div>
+        <div class="company-title" v-if="showItems"><span>{{userActivity}}</span></div>
         </transition>
 
         <transition enter-active-class="animated anim-item slideInUp">
@@ -108,6 +108,9 @@
                     return false;
                 }
                 return true;
+            },
+            userActivity(){
+                return this.$store.state.userData.activity || '';
             }
         },
         methods:{

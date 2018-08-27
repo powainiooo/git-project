@@ -37,7 +37,7 @@
                         </Select>
                     </div>
                     <div class="inp-line">
-                        <input type="text" placeholder="活动方标题" v-model="formData.title">
+                        <input type="text" placeholder="活动方标题" v-model="formData.goods_name">
                         <t-ques width="290" style="z-index: 410;">
                             <ul class="list1">
                                 <li><span>1</span>活动标题名称 | 活动方名称<br>Blue-icon | 小夫有票</li>
@@ -105,6 +105,7 @@
         <div class="example-frame">
             <list-item :itemdata="formData"></list-item>
         </div>
+        <span v-show="false">{{activity}}</span>
     </div>
 </template>
 
@@ -117,9 +118,11 @@
         name: 'app',
         components:{TButton,TUpload,ListItem,TQues},
         data(){
+            let self = this;
             return{
                 cityList:[],
                 formData:{
+                    activity:self.activity,
                     status:'',
                     city:'',
                     goods_name:'',
@@ -140,6 +143,13 @@
                 this.getCity();
             },500)
 
+        },
+        computed:{
+            activity(){
+                let activity = this.$store.state.userData.activity || '';
+                this.formData.activity = activity;
+                return activity
+            }
         },
         methods:{
             getCity(){

@@ -21,7 +21,7 @@
         <div class="line"><input type="text" placeholder="身份证号" v-model="idsnum"></div>
         <div class="line"><input type="text" placeholder="银行卡号" v-model="banknum"></div>
         <div class="line"><input type="text" placeholder="开户支行" v-model="bankname"></div>
-        <div class="line" style="margin-top: 100px;"><t-button :isDisabled="nextDisabled" @dotap="doEditor">确认修改</t-button></div>
+        <div class="line" style="margin-top: 100px;"><t-button :isDisabled="nextDisabled" @dotap="doConfirm">确认修改</t-button></div>
         <span v-show="false">{{userMobile}}</span>
     </div>
 </template>
@@ -57,11 +57,21 @@
             }
         },
         methods:{
+            doConfirm(){
+                let self = this;
+                this.$tModal.confirm({
+                    title:'是否确认修改银行卡信息？',
+                    content:'请仔细核查银行卡信息，确认修改绑定后所有活动结款都将打款到新修改的银行卡。<br>若是您填写有误所造成的损失，小夫有票一概不负责任。',
+                    onOk(){
+                        self.doEditor();
+                    }
+                })
+            },
             doEditor(){
                 let obj = {},self = this;
                 obj.username = this.name;
-                obj.mobile = this.phone;
                 obj.phone = this.mobile;
+                obj.mobile = this.phone;
                 obj.password = this.password;
                 obj.vericode = this.vericode;
                 obj.idnums = this.idsnum;
@@ -70,9 +80,25 @@
                 this.$ajax.post('/client/api/bind_card',qs.stringify(obj)).then(res=>{
                     let data = res.data;
                     if(data.status == 1){
-                        self.$Message.success('绑定成功！');
-                        self.$store.dispatch('getUserData');
-                        self.$emit('toggle','bankinfo');
+                        self.$tModal.warn({
+                            title:'修改成功！',
+                            content:'银行卡信息修改成功，绑定的银行卡已更新。<br>若是您填写有误所造成的损失，小夫有票一概不负责任。',
+                            btn1Name:'返回',
+                            onOk(){
+                                self.$router.push('list');
+                                self.$store.dispatch('getUserData');
+                                self.$emit('toggle','close');
+                            }
+                        });
+                    }else{
+                        self.$tModal.warn({
+                            title:'修改失败！',
+                            content:'由于网络错误、流量拥挤提交失败，<br>请尝试重新提交',
+                            btn1Name:'重新提交',
+                            onOk(){
+                                self.doEditor();
+                            }
+                        });
                     }
                 })
             }

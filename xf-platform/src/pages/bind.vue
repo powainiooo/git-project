@@ -115,8 +115,6 @@
         },
         methods:{
             dobind(){
-                //this.$router.push('list');
-                //this.$store.commit('doShowGlobalMenu')
                 let obj = {},self = this;
                 obj.username = this.name;
                 obj.mobile = this.mobile;
@@ -127,9 +125,9 @@
                 this.$ajax.post('/client/api/bind_card',qs.stringify(obj)).then(res=>{
                     let data = res.data;
                     if(data.status == 1){
-                        self.$Message.success('绑定成功！');
                         self.$router.push('list');
                     }
+                    self.$Message.success(data.msg);
                 })
             }
         }

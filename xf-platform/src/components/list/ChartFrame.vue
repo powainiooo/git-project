@@ -55,7 +55,7 @@
                 console.log(this.id);
                 this.$ajax.get('/client/api/sale_data',{
                     params:{
-                        mid:this.id
+                        id:this.id
                     }
                 }).then(res=>{
 

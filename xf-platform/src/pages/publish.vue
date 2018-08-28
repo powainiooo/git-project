@@ -78,18 +78,20 @@
                         obj.cover2 = step1.formData.cover2;
                         obj.classes = [];
                         for(let item of step2.typeListData){
-                            obj.classes.push({
-                                select:item.name,
-                                price:item.price,
-                                nums:item.sale_nums,
-                                max:item.sale_limit
-                            })
+                            if(item.checked){
+                                obj.classes.push({
+                                    select:item.name,
+                                    price:item.price,
+                                    nums:item.sale_nums,
+                                    max:item.sale_limit
+                                })
+                            }
                         }
                         obj.cate = step2.ticketType;
                         obj.is_idnum = step2.ids;
-                        obj.sale_start = step2.saleStart;
-                        obj.sale_end = step2.saleEnd;
-                        obj.show_time = step2.showTime;
+                        obj.sale_start = new Date(step2.saleStart).getTime();
+                        obj.sale_end = new Date(step2.saleEnd).getTime();
+                        obj.show_time = new Date(step2.showTime).getTime();
                         obj.notify = [];
                         for(let item of step2.noticeListData){
                             obj.notify.push(item.value);
@@ -108,7 +110,7 @@
                                 picture:item.imgUrl
                             })
                         }
-                        console.log(obj);
+                        //console.log(obj);
                         self.$ajax.post('/client/api/activity_add',qs.stringify(obj)).then(res=>{
                             let data = res.data;
                             if(data.status == 1){

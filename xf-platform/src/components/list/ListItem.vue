@@ -134,10 +134,10 @@
                         </div>
                         <div class="day">{{getDays()}}</div>
                     </div>
-                    <div class="logo"><img :src="itemdata.cover"> </div>
+                    <div class="logo"><img :src="fileurl+itemdata.cover"> </div>
                 </div>
                 <div class="title">{{itemdata.goods_name}} | {{itemdata.activity}}</div>
-                <div class="img"><img :src="itemdata.cover2"></div>
+                <div class="img"><img :src="fileurl+itemdata.cover2"></div>
             </div>
         </div>
     </div>
@@ -148,7 +148,7 @@
     export default {
         name: 'app',
         components:{TButton},
-        props:['itemdata'],
+        props:['itemdata','fileurl'],
         data(){
             return{
                 selectType:'0'

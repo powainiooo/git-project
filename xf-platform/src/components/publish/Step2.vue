@@ -55,7 +55,7 @@
                     <h3 class="title ml20"><span>3</span>票务信息</h3>
                     <div class="">
                         <div class="ticke-type-list" v-for="(item,index) in typeListData">
-                            <input type="checkbox" class="radio" :checked="item.checked">
+                            <input type="checkbox" class="radio" v-model="item.checked">
                             <h3 class="name" v-if="item.isDefault">{{item.name}}</h3>
                             <div class="input" v-if="!item.isDefault">
                                 <input type="text" placeholder="票种名称" v-model="item.name">
@@ -106,15 +106,15 @@
                     </div>
                     <div class="inp-line">
                         <h3>显示时间</h3>
-                        <DatePicker format="yyyy-MM-dd HH:mm" type="datetime" placeholder="选择时间" :editable="false" @on-change="showTime=$event"></DatePicker>
+                        <DatePicker format="yyyy/MM/dd HH:mm" type="datetime" placeholder="选择时间" :editable="false" v-model="showTime"></DatePicker>
                     </div>
                     <div class="inp-line">
                         <h3>开售时间</h3>
-                        <DatePicker format="yyyy-MM-dd HH:mm" type="datetime" placeholder="选择时间" :editable="false" @on-change="saleStart=$event"></DatePicker>
+                        <DatePicker format="yyyy/MM/dd HH:mm" type="datetime" placeholder="选择时间" :editable="false" v-model="saleStart"></DatePicker>
                     </div>
                     <div class="inp-line">
                         <h3>结束时间</h3>
-                        <DatePicker format="yyyy-MM-dd HH:mm" type="datetime" placeholder="选择时间" :editable="false" @on-change="saleEnd=$event"></DatePicker>
+                        <DatePicker format="yyyy/MM/dd HH:mm" type="datetime" placeholder="选择时间" :editable="false" v-model="saleEnd"></DatePicker>
                     </div>
                 </div>
             </div>
@@ -199,7 +199,7 @@
         methods:{
             newTypeItem(){
                 this.typeListData.push({
-                    checked:false,
+                    checked:true,
                     isDefault:false,
                     name:'',
                     price:'',

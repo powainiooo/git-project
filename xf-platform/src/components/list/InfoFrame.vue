@@ -61,7 +61,7 @@
                     </ul>
                 </t-ques>
             </div>
-            <div class="btn">
+            <div class="btn" v-if="itemData.status != 0">
                 <t-button size="min" @dotap="$emit('openstatistics')">订单详情</t-button>
             </div>
         </div>
@@ -145,7 +145,7 @@
                 return false
             },
             isVerify(){
-                return this.itemData.status == 0
+                return this.itemData.status == 0 || this.itemData.status == 5
             }
         },
         data(){

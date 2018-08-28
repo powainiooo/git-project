@@ -73,6 +73,9 @@
                 }else if(val == 'recordlist'){
                     this.showItem = val;
                     this.showCrashOut = false;
+                }else if(val == 'close'){
+                    this.showItem = 'nav';
+                    this.showNavs = false;
                 }else{
                     this.showItem = val;
                 }

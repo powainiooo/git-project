@@ -34,6 +34,7 @@
                     <div class="inp-line">
                         <Select v-model="formData.city" placeholder="选择城市">
                             <Option v-for="item in cityList" :value="item.id" :key="item.id">{{item.name}}</Option>
+                            <Option value="999">其他城市</Option>
                         </Select>
                     </div>
                     <div class="inp-line">
@@ -103,7 +104,7 @@
             </div>
         </div>
         <div class="example-frame">
-            <list-item :itemdata="formData"></list-item>
+            <list-item :itemdata="formData" fileurl=""></list-item>
         </div>
         <span v-show="false">{{activity}}</span>
     </div>

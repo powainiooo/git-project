@@ -27,14 +27,14 @@
         <transition enter-active-class="animated anim-detail fadeIn" leave-active-class="animated anim-detail fadeOut">
         <div class="list-content" v-if="!showExample && !showDetail">
             <div v-for="(item,index) in listData" @click="gotoDetail(index)">
-                <list-item :itemdata="item"></list-item>
+                <list-item :itemdata="item" :fileurl="fileurl"></list-item>
             </div>
         </div>
         </transition>
 
         <div class="detail-frame" v-show="!showExample && showDetail">
             <transition enter-active-class="animated bounceIn" leave-active-class="animated bounceOut">
-            <list-item :itemdata="detailData" v-if="showDetail"></list-item>
+            <list-item :itemdata="detailData" v-if="showDetail" :fileurl="fileurl"></list-item>
             </transition>
             <transition enter-active-class="animated anim-detail slideInRight" leave-active-class="animated anim-detail slideOutRight">
             <detail-frame v-if="showDetail" @close="showDetail = false" :itemData="detailData"></detail-frame>
@@ -59,7 +59,8 @@
                 showDetail:false,
                 listData:[],
                 detailData:{},
-                frameST:0
+                frameST:0,
+                fileurl:''
             }
         },
         computed:{
@@ -71,6 +72,21 @@
             this.$ajax.defaults.headers.common['mid'] = Cookies.get('xfmid');
             this.$ajax.defaults.headers.common['tokey'] = Cookies.get('xftokey');
             this.$ajax.defaults.baseURL = 'http://ticket.pc-online.cc';
+            let self = this;
+            this.$ajax.interceptors.response.use(res=>{
+                if(res.data.status == 0){
+                    self.$tModal.warn({
+                        title:'登录信息过期，请重新登录。',
+                        onOk(){
+                            self.$router.push('index')
+                        }
+                    })
+                }
+                return res;
+            }, function (error) {
+                // 对响应错误做点什么
+                return Promise.reject(error);
+            });
             this.getListData();
         },
         methods:{
@@ -84,6 +100,7 @@
                     }else{
                         self.showExample = false;
                         self.listData = data.data;
+                        self.fileurl = data.fileurl;
                     }
                 })
             },

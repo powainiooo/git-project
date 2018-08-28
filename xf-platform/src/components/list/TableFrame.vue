@@ -4,7 +4,7 @@
     .pro-table .table-opera>div .ivu-select-selection{ border-color: #878787;}
     .pro-table .table-opera>div .ivu-input{ border-color: #878787;}
 
-    .pro-table .table-list{ width: 100%;}
+    .pro-table .table-list{ width: 100%; margin-bottom: 20px;}
     .pro-table .table-list th{ height: 50px; font-size: 16px; color: #000000;border-top: 1px solid #dcdcdc;border-bottom: 1px solid #dcdcdc; vertical-align: middle; text-align: left; padding:0 15px;}
     .pro-table .table-list td{ font-size: 14px; color: #888888;border-bottom: 1px solid #dcdcdc; padding: 15px;}
     .pro-table .table-list td.check{ background: linear-gradient(244deg,rgb(0,42,169),rgb(0,61,188)); color: #ffffff;}
@@ -28,10 +28,10 @@
             <div>
                 <Select style="width:130px; margin-right: 20px;" v-model="selectType">
                     <Option value="0">全部</Option>
-                    <Option v-for="(item,index) in itemdata.classes" :key="index" :value="index+1">{{item.select}}</Option>
+                    <Option v-for="(item,index) in itemData.classes" :key="index" :value="index+1">{{item.select}}</Option>
                 </Select>
                 <Input v-model="keyword" placeholder="请输入电话、姓名、单号" style="width: 270px; margin-right: 20px;" />
-                <t-button size="min" style="width: 90px;">查询</t-button>
+                <t-button size="min" style="width: 90px;" @dotap="getListData">查询</t-button>
             </div>
         </div>
         <div style="margin: 20px;">
@@ -52,47 +52,22 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>普通票</td>
-                    <td>2017-08-08</td>
-                    <td>张三</td>
-                    <td>13812341234</td>
-                    <td>深圳市宝安区新安六路众里创业社区309</td>
-                    <td>44030199028391029</td>
-                    <td>***39108563</td>
-                    <td>130</td>
-                    <td><span class="numbers">1</span></td>
-                    <td>未验票</td>
-                    <td>退款</td>
-                </tr>
-                <tr>
-                    <td>普通票</td>
-                    <td>2017-08-08</td>
-                    <td>张三</td>
-                    <td>13812341234</td>
-                    <td>深圳市宝安区新安六路众里创业社区309</td>
-                    <td>44030199028391029</td>
-                    <td>***39108563</td>
-                    <td>130</td>
-                    <td><span class="numbers">1</span></td>
-                    <td class="check">已验票</td>
-                    <td>退款</td>
-                </tr>
-                <tr>
-                    <td>普通票</td>
-                    <td>2017-08-08</td>
-                    <td>张三</td>
-                    <td>13812341234</td>
-                    <td>深圳市宝安区新安六路众里创业社区309</td>
-                    <td>44030199028391029</td>
-                    <td>***39108563</td>
-                    <td>130</td>
-                    <td><span class="numbers">1</span></td>
-                    <td class="refund">已退款</td>
-                    <td></td>
+                <tr v-for="item in listData">
+                    <td>{{item.sele}}</td>
+                    <td>{{item.order_time}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.mobile}}</td>
+                    <td>{{item.address}}</td>
+                    <td>{{item.idnum}}</td>
+                    <td>{{item.order_num}}</td>
+                    <td>{{item.price}}</td>
+                    <td><span class="numbers">{{item.nums}}</span></td>
+                    <td>{{item.is_check == '1' ? '已验票' : '未验票'}}</td>
+                    <td><a href="javascirpt:;">退款</a> </td>
                 </tr>
                 </tbody>
             </table>
+            <Page :total="allnums" @on-change="changePage" />
         </div>
     </div>
 </template>
@@ -107,7 +82,9 @@
             return{
                 keyword:'',
                 selectType:'0',
-                listData:[]
+                listData:[],
+                allnums:0,
+                page:1
             }
         },
         props:['itemData'],
@@ -117,14 +94,21 @@
         methods:{
             getListData(){
                 let self = this;
-                this.$ajax.get('',{
+                this.$ajax.get('/client/api/act_order',{
                     params:{
+                        id:this.itemData.id,
                         keyword:this.keyword,
-                        selectType:this.selectType
+                        sele:this.selectType,
+                        page:this.page
                     }
                 }).then(res=>{
-                    self.listData = res.data.data;
+                    self.listData = res.data.data.data.list;
+                    self.allnums = parseInt(res.data.data.data.nums);
                 })
+            },
+            changePage(val){
+                this.page = val;
+                console.log(val)
             },
             doExcel(){
                 this.$ajax.get('',{

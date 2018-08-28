@@ -31,13 +31,13 @@
                     <input type="radio" class="radio2" v-model="isNeed" value="1">
                     <span style="font-size: 16px; color: #ffffff; margin-left: 10px;">需要发票</span>
                 </div>
-                <div class="line"><input type="text" placeholder="联系电话" readonly value="13812341234"></div>
+                <div class="line"><input type="text" placeholder="联系电话" readonly :value="userMobile"></div>
                 <div class="line code-line">
-                    <input type="text" placeholder="验证码" v-model="code">
-                    <t-button size="min" :isDisabled="phoneDisabled" @dotap="getCode">{{codeBtnName}}</t-button>
+                    <input type="text" placeholder="验证码" v-model="vericode">
+                    <t-button :isDisabled="veriBtnDisabled" size="min" @dotap="getCode">{{codeBtnName}}</t-button>
                 </div>
                 <div class="line"><input type="password" placeholder="密码" v-model="password"></div>
-                <div class="line" style="margin-top: 100px;"><t-button :isDisabled="nextDisabled">提交申请</t-button></div>
+                <div class="line" style="margin-top: 100px;"><t-button :isDisabled="nextDisabled" @dotap="doSubmit">提交申请</t-button></div>
             </div>
             <div class="crashout-frame-right" v-if="isNeed == 1">
                 <h3 style="font-size: 14px; color: #ffffff; margin-bottom: 30px; margin-top: 10px;">小夫有票代售服务费发票</h3>
@@ -48,7 +48,7 @@
                 <div class="line"><input type="text" placeholder="公司全称" v-model="company"></div>
                 <div class="line"><input type="text" placeholder="纳税人识别号" v-model="ids"></div>
                 <div class="line"><input type="text" placeholder="公司地址" v-model="address"></div>
-                <div class="line"><input type="text" placeholder="电话" v-model="mobile"></div>
+                <div class="line"><input type="text" placeholder="电话" v-model="phone"></div>
                 <div class="line"><input type="text" placeholder="开户行" v-model="bankname"></div>
                 <div class="line"><input type="text" placeholder="银行账号" v-model="banknum"></div>
                 <div style="margin-top: 55px; font-size: 12px; color: #888888;">需收取3.6%税点及快递费，选择需要发票后提款额会自动扣除税点，快递费为到付。</div>
@@ -59,30 +59,28 @@
 
 <script type="es6">
     import TButton from '@/components/common/TButton.vue'
+    import vericode from '@/components/mixin/vericode.js'
+    import qs from 'qs'
     export default{
         name: 'App',
         components: {TButton},
+        mixins: [vericode],
         data(){
             return {
                 isNeed: '0',
-                code: '',
-                codeBtnName: '获取验证码',
-                codeIndex: 0,
                 password:'',
                 company:'',
                 ids:'',
                 address:'',
-                mobile:'',
                 bankname:'',
-                banknum:''
+                banknum:'',
+                phone:''
             }
         },
         computed: {
-            phoneDisabled(){
-                if (this.codeIndex != 0) {
-                    return true
-                }
-                return false
+            userMobile(){
+                this.mobile = this.$store.state.userData.mobile || '';
+                return this.mobile
             },
             nextDisabled(){
                 if(this.code == '' || this.password == ''){
@@ -97,21 +95,23 @@
             }
         },
         methods: {
-            getCode(){
-                this.codeCount();
-            },
-            codeCount(){
-                this.codeIndex = 60;
-                this.codeBtnName = `请${this.codeIndex}秒以后再尝试`;
-                let t = setInterval(()=>{
-                    if(this.codeIndex == 0){
-                        clearInterval(t);
-                        this.codeBtnName = `获取验证码`;
-                    }else{
-                        this.codeIndex -- ;
-                        this.codeBtnName = `请${this.codeIndex}秒以后再尝试`;
-                    }
-                },1000)
+            doSubmit(){
+                let obj = {},self = this;
+                obj.mobile = this.mobile;
+                obj.vericode = this.vericode;
+                obj.password = this.password;
+                obj.isNeed = this.isNeed;
+                if(this.isNeed == 1){
+                    obj.company = this.company;
+                    obj.ids = this.ids;
+                    obj.address = this.address;
+                    obj.phone = this.phone;
+                    obj.bankname = this.bankname;
+                    obj.banknum = this.banknum;
+                }
+                this.$ajax.post('/client/api/register',qs.stringify(obj)).then(res=>{
+
+                })
             }
         }
     }

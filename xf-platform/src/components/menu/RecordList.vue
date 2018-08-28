@@ -18,11 +18,11 @@
     <div class="record-list">
         <div class="table-opera">
             <div>
-                <Select style="width:130px; margin-right: 20px;">
+                <Select style="width:130px; margin-right: 20px;" v-model="selectType">
                     <Option value="0">普通票</Option>
                     <Option value="1">早鸟票</Option>
                 </Select>
-                <Input v-model="value" placeholder="请输入活动名称" style="width: 270px; margin-right: 20px;" />
+                <Input v-model="keyword" placeholder="请输入活动名称" style="width: 270px; margin-right: 20px;" />
                 <t-button size="min" style="width: 90px;">查询</t-button>
             </div>
         </div>
@@ -103,11 +103,26 @@
         components:{TButton,TQues},
         data(){
             return{
-
+                keyword:'',
+                selectType:'0',
+                listData:[]
             }
         },
+        mounted(){
+            this.getListData()
+        },
         methods:{
-
+            getListData(){
+                let self = this;
+                this.$ajax.get('',{
+                    params:{
+                        keyword:this.keyword,
+                        selectType:this.selectType
+                    }
+                }).then(res=>{
+                    self.listData = res.data.data;
+                })
+            }
         }
     }
 

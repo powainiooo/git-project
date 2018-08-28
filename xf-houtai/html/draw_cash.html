@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>提现审核</title>
+    <link rel="stylesheet" href="../css/wxcloud.min.css"/>
+    <link rel="stylesheet" href="../css/activity-layout.css"/>
+    <script src="../js/jquery-1.8.3.min.js" type="application/javascript" language="javascript"></script>
+</head>
+<body>
+<div class="activity-container">
+    <div class="nav-tab">活动方管理>提现审核</div>
+    <div class="condition-line">
+        <select>
+            <option>审核状态</option>
+            <option>通过</option>
+            <option>未通过</option>
+        </select>
+        <input type="text" placeholder="关键词搜索">
+        <button type="button" class="ui-btn ui-btn-primary">搜索</button>
+    </div>
+    <table class="ui-table ui-table-striped">
+        <thead>
+        <tr>
+            <th>活动方名称</th>
+            <th>活动标题</th>
+            <th>活动结束日期</th>
+            <th>总销售票数</th>
+            <th>票种</th>
+            <th>张数</th>
+            <th>单价</th>
+            <th>总价</th>
+            <th>实际可提金额</th>
+            <th>开票信息</th>
+            <th>审核情况</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>galame</td>
+            <td>galame</td>
+            <td>2018-09-01</td>
+            <td>201</td>
+            <td>早鸟票<br>预售票</td>
+            <td>100<br>100</td>
+            <td>100<br>100</td>
+            <td>100</td>
+            <td>100</td>
+            <td><a href="javascript:;">查看</a> </td>
+            <td>已通过</td>
+            <td>-- </td>
+        </tr>
+        <tr>
+            <td>galame</td>
+            <td>galame</td>
+            <td>2018-09-01</td>
+            <td>201</td>
+            <td>早鸟票<br>预售票</td>
+            <td>100<br>100</td>
+            <td>100<br>100</td>
+            <td>100</td>
+            <td>100</td>
+            <td>-- </td>
+            <td>待审核</td>
+            <td><a href="javascript:;">审核</a> </td>
+        </tr>
+        <tr>
+            <td>galame</td>
+            <td>galame</td>
+            <td>2018-09-01</td>
+            <td>201</td>
+            <td>早鸟票<br>预售票</td>
+            <td>100<br>100</td>
+            <td>100<br>100</td>
+            <td>100</td>
+            <td>100</td>
+            <td>-- </td>
+            <td>审核不通过</td>
+            <td><a href="javascript:;">查看</a> </td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="ui-pagination">
+        <ul>
+            <li><a href="#">&#171;</a></li>
+            <li><a href="#">1</a></li>
+            <li class="active"><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li class="disabled"><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li><a href="#">&#187;</a></li>
+        </ul>
+    </div>
+
+    <!-- 审核操作-->
+    <div class="ui-modal" style=" display: none; ">
+        <button type="button" class="ui-btn ui-btn-link">&times;</button>
+        <div class="ui-modal-header">
+            <h3>审核操作</h3>
+        </div>
+        <div class="ui-modal-body">
+            <p style="margin-bottom: 20px;">
+                <input type="radio">
+                <span>审核通过</span>
+                <input type="radio">
+                <span>审核不通过</span>
+            </p>
+            <p><textarea rows="5" placeholder="必填审核不过原因（如：活动出问题，暂时扣押）" style="width: 100%;"></textarea></p>
+        </div>
+        <div class="ui-modal-footer">
+            <a href="javascript:;" class="ui-btn ui-btn-primary ui-btn-wid">确认</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

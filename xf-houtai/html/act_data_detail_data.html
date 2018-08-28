@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>活动数据</title>
+    <link rel="stylesheet" href="../css/wxcloud.min.css"/>
+    <link rel="stylesheet" href="../css/activity-layout.css"/>
+    <script src="../js/jquery-1.8.3.min.js" type="application/javascript" language="javascript"></script>
+</head>
+<body>
+<div class="activity-container">
+    <div class="nav-tab">活动方管理>活动数据>查看详细活动>查看详细数据</div>
+    <div class="activity-name">Sector</div>
+    <div class="data-line1">
+        <p>本场活动累积数据</p>
+        <p>点击量<span>600</span></p>
+        <p>销售数量（张）<span>600</span></p>
+        <p>销售票种</p>
+        <ul>
+            <li>早鸟票 100</li>
+            <li class="red">预售票 100</li>
+        </ul>
+    </div>
+    <div class="pro-chars">
+        <div class="chart-line1">
+            <div id="proChart1"></div>
+            <div class="proChart2">
+                <div class="opera">
+                    <div>
+                        <input type="radio">　
+                        <span>点击量（次）</span>　
+                        <input type="radio">　
+                        <span>销售量</span>
+                    </div>
+
+                    <input type="text" placeholder="选择时间">
+                </div>
+                <div id="proChart2" style="height: 310px;"></div>
+            </div>
+        </div>
+        <div class="pr" style="padding: 10px;">
+            <input type="text" placeholder="选择时间">
+            <div id="proChart3" style="height:460px;background-color: #eeeef0;"></div>
+        </div>
+    </div>
+</div>
+
+<script src="../js/echarts.min.js"></script>
+<script>
+    drawChart1();
+    drawChart2();
+    drawChart3();
+
+    //左上饼图
+    function drawChart1(){
+        var myChart = echarts.init(document.getElementById('proChart1'));
+        myChart.setOption({
+            title:{
+                text:'已购票用户地区',
+                textStyle:{
+                    color:'#000',
+                    fontSize:18
+                }
+            },
+            series: [
+                {
+                    name:'访问来源',
+                    type:'pie',
+                    radius: '65%',
+                    color:['#002aac','#1243af','#3355bd','#667fcd','#98a9dc','#acbde5'],
+                    label: {
+                        normal: {
+                            show: false
+                        },
+                        emphasis: {
+                            show: true,
+                            //formatter: '{b}\n{c}人',
+                            formatter: [
+                                '{a|{b}\n}',
+                                '{b|{c}}',
+                                '{a| 人}'
+                            ].join(''),
+                            rich:{
+                                a:{fontSize:14},
+                                b:{fontSize:20}
+                            }
+                        }
+                    },
+                    itemStyle:{
+                        shadowOffsetY:3,
+                        shadowBlur:8,
+                        shadowColor: 'rgba(0, 0, 0, 0.2)'
+                    },
+                    data:[
+                        {value:400, name:'深圳'},
+                        {value:130, name:'广州'},
+                        {value:50, name:'北京'},
+                        {value:20, name:'其他'}
+                    ]
+                }
+            ]
+        })
+    }
+    //右上图
+    function drawChart2(){
+        var myChart = echarts.init(document.getElementById('proChart2'));
+        myChart.setOption({
+            tooltip : {
+                trigger: 'axis',
+                formatter:'{c}',
+                padding:[8,20],
+                backgroundColor:'rgba(13,41,164,1)'
+            },
+            grid: {
+                top:'3%',
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis : [
+                {
+                    type : 'category',
+                    boundaryGap : false,
+                    data : ['周一','周二','周三','周四','周五','周六','周日']
+                }
+            ],
+            yAxis : [
+                {
+                    type : 'value'
+                }
+            ],
+            series : [
+                {
+                    name:'联盟广告',
+                    type:'line',
+                    stack: '总量',
+                    areaStyle: {normal: {color:'#0029a9',opacity:'0.3'}},
+                    itemStyle:{
+                        normal: {color:'#0029a9',borderColor:'#0029a9',borderWidth:4},
+                        emphasis: {color:'#0029a9',borderColor:'#0029a9',borderWidth:4}
+                    },
+                    lineStyle:{opacity:0},
+                    data:[220, 182, 191, 234, 290, 330, 310]
+                }
+            ]
+        });
+    }
+    //下图
+    function drawChart3(){
+        var myChart = echarts.init(document.getElementById('proChart3'));
+        myChart.setOption({
+            title:{
+                text:'24小时销售量',
+                textStyle:{
+                    color:'#000',
+                    fontSize:18
+                },
+                left:20,
+                top:20
+            },
+            tooltip : {
+                trigger: 'axis',
+                padding:[8,20],
+                formatter: '{a0}: {c0}<br />{a1}: {c1}',
+                backgroundColor:'rgba(13,41,164,1)'
+            },
+            grid: {
+                top:'20%',
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis : [
+                {
+                    type : 'category',
+                    boundaryGap : false,
+                    data : ['周一','周二','周三','周四','周五','周六','周日']
+                }
+            ],
+            yAxis : [
+                {
+                    type : 'value'
+                }
+            ],
+            series : [
+                {
+                    name:'邮件营销',
+                    type:'line',
+                    stack: '总量',
+                    areaStyle: {normal: {color:'#0029a9',opacity:'0.3'}},
+                    itemStyle:{
+                        normal: {color:'#0029a9',borderColor:'#0029a9',borderWidth:4},
+                        emphasis: {color:'#0029a9',borderColor:'#0029a9',borderWidth:4}
+                    },
+                    lineStyle:{opacity:0},
+                    data:[120, 132, 101, 134, 90, 230, 210]
+                },
+                {
+                    name:'联盟广告',
+                    type:'line',
+                    stack: '总量',
+                    areaStyle: {normal: {opacity:0}},
+                    itemStyle:{opacity:0},
+                    lineStyle:{opacity:0},
+                    data:[220, 182, 191, 234, 290, 330, 310]
+                }
+            ]
+        });
+    }
+</script>
+</body>
+</html>

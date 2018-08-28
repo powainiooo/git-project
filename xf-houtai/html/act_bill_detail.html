@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>活动方流水</title>
+    <link rel="stylesheet" href="../css/wxcloud.min.css"/>
+    <link rel="stylesheet" href="../css/activity-layout.css"/>
+    <script src="../js/jquery-1.8.3.min.js" type="application/javascript" language="javascript"></script>
+</head>
+<body>
+<div class="activity-container">
+    <div class="nav-tab">活动方管理>活动方流水>查看详细流水</div>
+    <div class="condition-line">
+        <select>
+            <option>审核状态</option>
+            <option>通过</option>
+            <option>未通过</option>
+        </select>
+        <input type="text" placeholder="关键词搜索">
+        <button type="button" class="ui-btn ui-btn-primary">搜索</button>
+    </div>
+    <table class="ui-table ui-table-striped">
+        <thead>
+        <tr>
+            <th>活动标题</th>
+            <th>活动结束日期</th>
+            <th>总销售票数</th>
+            <th>票种</th>
+            <th>张数</th>
+            <th>单价</th>
+            <th>总价</th>
+            <th>实际可提金额</th>
+            <th>开票信息</th>
+            <th>审核情况</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>galame</td>
+            <td>2018-09-01</td>
+            <td>201</td>
+            <td>早鸟票<br>预售票</td>
+            <td>100<br>100</td>
+            <td>100<br>100</td>
+            <td>100</td>
+            <td>100</td>
+            <td><a href="javascript:;">查看</a> </td>
+            <td>已提现</td>
+            <td>-- </td>
+        </tr>
+        <tr>
+            <td>galame</td>
+            <td>2018-09-01</td>
+            <td>201</td>
+            <td>早鸟票<br>预售票</td>
+            <td>100<br>100</td>
+            <td>100<br>100</td>
+            <td>100</td>
+            <td>100</td>
+            <td>-- </td>
+            <td>待提现</td>
+            <td>-- </td>
+        </tr>
+        <tr>
+            <td>galame</td>
+            <td>2018-09-01</td>
+            <td>201</td>
+            <td>早鸟票<br>预售票</td>
+            <td>100<br>100</td>
+            <td>100<br>100</td>
+            <td>100</td>
+            <td>100</td>
+            <td>-- </td>
+            <td>审核不通过</td>
+            <td><a href="javascript:;">查看</a> </td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="ui-pagination">
+        <ul>
+            <li><a href="#">&#171;</a></li>
+            <li><a href="#">1</a></li>
+            <li class="active"><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li class="disabled"><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li><a href="#">&#187;</a></li>
+        </ul>
+    </div>
+
+    <!-- 开票信息-->
+    <div class="ui-modal" style="top: 10%; display: none; ">
+        <button type="button" class="ui-btn ui-btn-link">&times;</button>
+        <div class="ui-modal-header">
+            <h3>开票信息</h3>
+        </div>
+        <div class="ui-modal-body">
+            <p>公司全称：xx</p>
+            <p>纳税人识别号：xx</p>
+            <p>公司地址：xx</p>
+            <p>电话：xx</p>
+            <p>开户支行：xx</p>
+            <p>银行账号：xx</p>
+        </div>
+        <div class="ui-modal-footer">
+            <a href="javascript:;" class="ui-btn ui-btn-primary ui-btn-wid">确认</a>
+        </div>
+    </div>
+    <!-- 原因-->
+    <div class="ui-modal" style="top: 10%; display: none; ">
+        <button type="button" class="ui-btn ui-btn-link">&times;</button>
+        <div class="ui-modal-header">
+            <h3>原因</h3>
+        </div>
+        <div class="ui-modal-body">
+            <p>原因原因原因原因</p>
+        </div>
+        <div class="ui-modal-footer">
+            <a href="javascript:;" class="ui-btn ui-btn-primary ui-btn-wid">确认</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

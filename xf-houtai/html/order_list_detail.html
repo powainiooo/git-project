@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>订单列表</title>
+    <link rel="stylesheet" href="../css/wxcloud.min.css"/>
+    <link rel="stylesheet" href="../css/activity-layout.css"/>
+    <script src="../js/jquery-1.8.3.min.js" type="application/javascript" language="javascript"></script>
+</head>
+<body>
+<div class="activity-container">
+    <div class="nav-tab">活动方管理>订单列表>查看详细订单</div>
+    <div class="condition-line">
+        <select>
+            <option>活动选择</option>
+        </select>
+        <input type="text" placeholder="关键词搜索">
+        <button type="button" class="ui-btn ui-btn-primary">搜索</button>
+    </div>
+    <div class="condition-line">
+        <select>
+            <option>票种</option>
+        </select>
+        <input type="text" placeholder="下单时间">-
+        <input type="text" placeholder="下单时间">
+        <button type="button" class="ui-btn ui-btn-primary">搜索</button>
+        <button type="button" class="ui-btn ui-btn-primary">导出数据表</button>
+        <button type="button" class="ui-btn ui-btn-primary">一次性通知</button>
+    </div>
+    <table class="ui-table ui-table-striped">
+        <thead>
+        <tr>
+            <th>活动名</th>
+            <th>下单时间</th>
+            <th>买家</th>
+            <th>电话</th>
+            <th>邮寄地址</th>
+            <th>身份证</th>
+            <th>单号</th>
+            <th>单价</th>
+            <th>票数</th>
+            <th>状态</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>galame</td>
+            <td>2018-09-01</td>
+            <td>张三</td>
+            <td>13812341234</td>
+            <td>--</td>
+            <td>--</td>
+            <td>123512351235</td>
+            <td>100</td>
+            <td>100</td>
+            <td>未验票</td>
+            <td>
+                <a href="javascript:;">退款</a>
+                <a href="javascript:;">确认验票</a>
+            </td>
+        </tr>
+        <tr>
+            <td>galame</td>
+            <td>2018-09-01</td>
+            <td>张三</td>
+            <td>13812341234</td>
+            <td>--</td>
+            <td>--</td>
+            <td>123512351235</td>
+            <td>100</td>
+            <td>100</td>
+            <td>已验票</td>
+            <td>
+                <a href="javascript:;">退款</a>
+            </td>
+        </tr>
+        <tr>
+            <td>galame</td>
+            <td>2018-09-01</td>
+            <td>张三</td>
+            <td>13812341234</td>
+            <td>--</td>
+            <td>--</td>
+            <td>123512351235</td>
+            <td>100</td>
+            <td>100</td>
+            <td>已退款</td>
+            <td>--</td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="ui-pagination">
+        <ul>
+            <li><a href="#">&#171;</a></li>
+            <li><a href="#">1</a></li>
+            <li class="active"><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li class="disabled"><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li><a href="#">&#187;</a></li>
+        </ul>
+    </div>
+
+</div>
+</body>
+</html>

@@ -3,15 +3,15 @@
     .n-switch:after{ content: ''; width: 26px; height: 26px; border-radius: 50%; background-color: #ffffff; position: absolute; top: 4px; left: 60px; transition: left 0.2s ease-in-out;}
     .n-switch-checked{ background: #e73828; justify-content: flex-end;}
     .n-switch-checked:after{ left: 4px;}
-    .n-switch-disabled{ background: #a0a0a0; justify-content: flex-end;}
+    .n-switch-disabled{ background: #a0a0a0;}
     .n-switch .n-switch-text{ font-size: 12px; color: #ffffff;}
 </style>
 
 <template>
     <div :class="wrapClasses" @click="toggle">
         <span class="n-switch-text">
-            <slot name="open" v-if="currentValue === trueValue"></slot>
-            <slot name="close" v-if="currentValue === falseValue"></slot>
+            <slot name="open" v-if="currentValue == trueValue"></slot>
+            <slot name="close" v-if="currentValue == falseValue"></slot>
         </span>
     </div>
 </template>
@@ -48,7 +48,7 @@
                 return [
                     `${prefixCls}`,
                     {
-                        [`${prefixCls}-checked`]: this.currentValue === this.trueValue,
+                        [`${prefixCls}-checked`]: this.currentValue == this.trueValue,
                         [`${prefixCls}-disabled`]: this.disabled
                     }
                 ];

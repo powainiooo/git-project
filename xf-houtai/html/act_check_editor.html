@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>账号-编辑</title>
+    <link rel="stylesheet" href="../css/wxcloud.min.css"/>
+    <link rel="stylesheet" href="../css/activity-layout.css"/>
+    <script src="../js/jquery-1.8.3.min.js" type="application/javascript" language="javascript"></script>
+</head>
+<body>
+<div class="activity-container">
+    <div class="nav-tab">活动方管理>票务审核>编辑</div>
+    <div class="form">
+        <div class="form-line">
+            <p class="name">选择城市</p>
+            <select disabled style="width: 150px;">
+                <option>深圳</option>
+            </select>
+        </div>
+        <div class="form-line">
+            <p class="name">活动类型</p>
+            <select disabled style="width: 150px;">
+                <option>单日</option>
+                <option>多日</option>
+                <option>跨月多日</option>
+            </select>
+        </div>
+        <div class="form-line">
+            <p class="name">活动日期</p>
+            <div class="ui-form-group">
+                <input type="text" readonly value="1">
+            </div>
+        </div>
+        <div class="form-line">
+            <p class="name">活动标题</p>
+            <div class="ui-form-group">
+                <input type="text" readonly value="1">
+            </div>
+            <div class="pass-group">
+                <span>合格</span>
+                <input type="radio">
+                <span>不合格</span>
+                <input type="radio">
+                <input type="text" placeholder="输入不合格原因">
+            </div>
+        </div>
+        <div class="form-line">
+            <p class="name">活动时间</p>
+            <div class="ui-form-group">
+                <input type="text" style="width: 116px" readonly value="1">
+            </div>
+            <span>　-　</span>
+            <div class="ui-form-group">
+                <input type="text" style="width: 116px" readonly value="1">
+            </div>
+        </div>
+        <div class="form-line">
+            <p class="name">活动地址</p>
+            <div class="ui-form-group">
+                <input type="text" readonly value="1">
+            </div>
+            <div class="pass-group">
+                <span>合格</span>
+                <input type="radio">
+                <span>不合格</span>
+                <input type="radio">
+                <input type="text" placeholder="输入不合格原因">
+            </div>
+        </div>
+        <div class="form-line form-line-upload">
+            <p class="name">活动方logo<br>200*200px</p>
+            <div class="form-upload">
+                <div class="img">
+                    <img src="../imgs/logo1.png">
+                </div>
+                <input type="file" class="file">
+            </div>
+            <div class="pass-group pass-group-center">
+                <span>合格</span>
+                <input type="radio">
+                <span>不合格</span>
+                <input type="radio">
+                <input type="text" placeholder="输入不合格原因">
+            </div>
+        </div>
+        <div class="form-line form-line-upload">
+            <p class="name">详情图<br>200*200px</p>
+            <div class="form-upload">
+                <div class="img">
+                    <img src="../imgs/logo1.png">
+                </div>
+                <input type="file" class="file">
+            </div>
+            <div class="pass-group pass-group-center">
+                <span>合格</span>
+                <input type="radio">
+                <span>不合格</span>
+                <input type="radio">
+                <input type="text" placeholder="输入不合格原因">
+            </div>
+        </div>
+        <div class="form-line form-line-upload">
+            <p class="name">票种</p>
+            <ul class="ticket-type" id="ticketType">
+                <li>
+                    <span class="title">早鸟</span>
+                    <span>票价</span>
+                    <input type="text" readonly value="1">
+                    <span>数量</span>
+                    <input type="text" readonly value="1">
+                    <span>限购</span>
+                    <input type="text" readonly value="1">
+                </li>
+                <li>
+                    <span class="title">预售</span>
+                    <span>票价</span>
+                    <input type="text" readonly value="1">
+                    <span>数量</span>
+                    <input type="text" readonly value="1">
+                    <span>限购</span>
+                    <input type="text" readonly value="1">
+                </li>
+                <li>
+                    <span class="title">普通</span>
+                    <span>票价</span>
+                    <input type="text" readonly value="1">
+                    <span>数量</span>
+                    <input type="text" readonly value="1">
+                    <span>限购</span>
+                    <input type="text" readonly value="1">
+                </li>
+            </ul>
+        </div>
+        <div class="form-line">
+            <p class="name">票务开售时间</p>
+            <div class="ui-form-group">
+                <input type="text" readonly value="1">
+            </div>
+        </div>
+        <div class="form-line">
+            <p class="name">贩售结束时间<br>最迟活动当天</p>
+            <div class="ui-form-group">
+                <input type="text" readonly value="1">
+            </div>
+        </div>
+        <div class="form-line form-line-center">
+            <p class="name">门票类型</p>
+            <input type="radio" disabled checked>
+            <span style="margin-right: 20px;">电子票</span>
+            <input type="radio" disabled>
+            <span>实体票（需邮寄）</span>
+        </div>
+        <div class="form-line form-line-center">
+            <p class="name">身份证</p>
+            <input type="radio" disabled checked>
+            <span style="margin-right: 20px;">不需要填</span>
+            <input type="radio" disabled>
+            <span>需要</span>
+        </div>
+        <div id="actList">
+            <div class="form-line form-line-upload">
+                <p class="name">艺人照片1<br>200*200px</p>
+                <div class="form-upload">
+                    <div class="img">
+                        <img src="../imgs/logo1.png">
+                    </div>
+                    <input type="file" class="file">
+                </div>
+                <div class="pass-group">
+                    <span>合格</span>
+                    <input type="radio">
+                    <span>不合格</span>
+                    <input type="radio">
+                    <input type="text" placeholder="输入不合格原因">
+                </div>
+            </div>
+            <div class="form-line form-line-upload">
+                <p class="name">艺人logo1<br>200*200px<br>png</p>
+                <div class="form-upload">
+                    <div class="img">
+                        <img src="../imgs/logo1.png">
+                    </div>
+                    <input type="file" class="file">
+                </div>
+                <div class="pass-group">
+                    <span>合格</span>
+                    <input type="radio">
+                    <span>不合格</span>
+                    <input type="radio">
+                    <input type="text" placeholder="输入不合格原因">
+                </div>
+            </div>
+        </div>
+        <div id="noticeList">
+            <div class="form-line">
+                <p class="name">活动须知内容1</p>
+                <div class="ui-form-group">
+                    <input type="text" readonly value="1">
+                </div>
+                <div class="pass-group">
+                    <span>合格</span>
+                    <input type="radio">
+                    <span>不合格</span>
+                    <input type="radio">
+                    <input type="text" placeholder="输入不合格原因">
+                </div>
+            </div>
+        </div>
+        <!-- 活动详情列表-->
+        <div id="detailList">
+            <div class="item">
+                <div class="form-line form-line-upload">
+                    <p class="name">活动详情图1<br>200*200px<br>最多6张</p>
+                    <div class="form-upload">
+                        <div class="img">
+                            <img src="../imgs/logo1.png">
+                        </div>
+                        <input type="file" class="file">
+                    </div>
+                    <div class="pass-group">
+                        <span>合格</span>
+                        <input type="radio">
+                        <span>不合格</span>
+                        <input type="radio">
+                        <input type="text" placeholder="输入不合格原因">
+                    </div>
+                </div>
+                <div class="form-line form-line-upload">
+                    <p class="name">活动详情简介1</p>
+                    <div class="ui-form-group">
+                        <textarea rows="5" readonly value="1"></textarea>
+                    </div>
+                    <div class="pass-group">
+                        <span>合格</span>
+                        <input type="radio">
+                        <span>不合格</span>
+                        <input type="radio">
+                        <input type="text" placeholder="输入不合格原因">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-line form-line-upload">
+            <p class="name">票务咨询电话</p>
+            <div class="ui-form-group">
+                <input type="text" readonly value="1">
+            </div>
+        </div>
+        <div class="form-line">
+            <p class="name"></p>
+            <button type="button" class="ui-btn ui-btn-primary">完成审核</button>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

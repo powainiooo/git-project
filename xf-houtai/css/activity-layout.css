@@ -1,0 +1,44 @@
+.activity-container{ margin: 10px; position: relative;}
+.nav-tab{ font-size: 15px; font-weight: 700; margin-bottom: 10px;}
+
+.form{ margin-top: 40px;}
+.form .form-line{ display: flex; align-items: baseline; margin-bottom: 20px;}
+.form .form-line .ui-form-group{ margin-bottom: 0;}
+.form .form-line-center{ align-items: center;}
+.form .form-line-upload{ align-items: flex-start; margin-top: 40px;}
+.form .form-line .name{ font-size: 14px; width: 120px; margin-right: 10px; text-align: right;}
+.form .form-line-upload .name{ margin-top: 4px;}
+.form .form-line .form-upload{ display: flex; align-items: center;}
+.form .form-line .form-upload .img{ width: 100px; height: 100px; border: 1px solid #c9c9c9; border-radius: 3px; overflow: hidden; display: flex; align-items: center; margin-right: 10px; cursor: pointer; position: relative;}
+.form .form-line .form-upload .img-empty:before{ content: '+'; font-size: 50px; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-family: 'ºÚÌå'; position: absolute; top: 0; left: 0; color: #c9c9c9;}
+.form .form-line .form-upload .img img{ width: 100%;}
+.form .form-line .form-upload .img-empty img{ display: none;}
+.form .form-line .form-upload input{ display: none;}
+.form .form-line .ticket-type li{ display: flex; align-items: center; margin-bottom: 15px;}
+.form .form-line .ticket-type li:last-child{ margin-bottom: 0;}
+.form .form-line .ticket-type li input{ margin-right: 5px;}
+.form .form-line .ticket-type li input[type=text]{ width: 76px; margin-right: 10px;}
+.form .form-line .ticket-type li span{ margin-right: 10px;}
+.form .form-line .ticket-type li .title{ width: 90px;}
+
+.form .form-line .pass-group{ display: flex; align-items: center; margin-left: 10px; align-self: center;}
+.form .form-line .pass-group-center{}
+.form .form-line .pass-group span{ margin-right: 5px;}
+.form .form-line .pass-group input{ margin-right: 10px;}
+.form .form-line .pass-group input[type=text]{ width: 300px;}
+
+.condition-line{ display: flex; align-items: center; margin: 30px 0;}
+.condition-line select{ width: 200px; margin-right: 10px;}
+.condition-line input{ width: 200px; margin-right: 10px;}
+
+.activity-name{ font-size: 80px; margin-top: -30px;}
+.red{ color: #ff0000;}
+
+.data-line1{ display: flex; padding: 20px 0; align-items: baseline; border-bottom: 1px solid #c9c9c9;}
+.data-line1 p{ margin-right: 15px;}
+.data-line1 p span{ font-size: 40px; margin-left: 5px;}
+
+.pro-chars .chart-line1{  border-bottom: 1px solid #dcdcdc; padding: 20px 0; display: flex;}
+.pro-chars .chart-line1 #proChart1{ width: 38%; height: 380px; border-right: 1px solid #dcdcdc; box-sizing: border-box;}
+.pro-chars .chart-line1 .proChart2{ width: 62%;}
+.pro-chars .chart-line1 .proChart2 .opera{ height: 70px; display: flex; justify-content: space-between; align-items: center; margin-left: 30px;}

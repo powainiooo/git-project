@@ -63,7 +63,7 @@
                     <p>已销售</p>
                     <Select v-model="selectType">
                         <Option value="0">全部</Option>
-                        <Option v-for="(item,index) in itemdata.classes" :key="index" :value="index">{{item.select}}</Option>
+                        <Option v-for="(item,index) in itemdata.classes" :key="index" :value="index+1">{{item.select}}</Option>
                     </Select>
                 </div>
                 <div class="nums">
@@ -80,7 +80,7 @@
                     <p>已销售</p>
                     <Select v-model="selectType">
                         <Option value="0">全部</Option>
-                        <Option v-for="(item,index) in itemdata.classes" :key="index" :value="index">{{item.select}}</Option>
+                        <Option v-for="(item,index) in itemdata.classes" :key="index" :value="index+1">{{item.select}}</Option>
                     </Select>
                 </div>
                 <div class="nums">
@@ -108,7 +108,7 @@
                     <p>已销售</p>
                     <Select v-model="selectType">
                         <Option value="0">全部</Option>
-                        <Option v-for="(item,index) in itemdata.classes" :key="index" :value="index">{{item.select}}</Option>
+                        <Option v-for="(item,index) in itemdata.classes" :key="index" :value="index+1">{{item.select}}</Option>
                     </Select>
                 </div>
                 <div class="nums">
@@ -182,7 +182,7 @@
                 })
             },
             doSelectType(){
-                console.log('select')
+                //console.log('select')
             },
             getSalenums(val){
                 let nums = 0,arr = this.itemdata.classes;
@@ -191,7 +191,7 @@
                         nums += parseInt(item.salenums);
                     }
                 }else{
-                    nums = arr[val].salenums;
+                    nums = arr[val-1].salenums;
                 }
                 return nums
             },
@@ -202,7 +202,7 @@
                         nums += parseInt(item.nums);
                     }
                 }else{
-                    nums = arr[val].nums;
+                    nums = arr[val-1].nums;
                 }
                 return nums
             }

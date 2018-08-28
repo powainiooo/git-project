@@ -71,13 +71,13 @@
             this.$ajax.defaults.headers.common['mid'] = Cookies.get('xfmid');
             this.$ajax.defaults.headers.common['tokey'] = Cookies.get('xftokey');
             this.$ajax.defaults.baseURL = 'http://ticket.pc-online.cc';
-            console.log('list');
             this.getListData();
         },
         methods:{
             getListData(){
                 let self = this;
                 this.$ajax.get('/client/api/activity_list').then(res=>{
+                    console.log('list');
                     let data = res.data;
                     if(data.data.length == 0){
                         self.showExample = true;

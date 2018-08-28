@@ -28,7 +28,6 @@
             <DatePicker type="date" placement="bottom-end" placeholder="Select date" style="width: 200px; position: absolute; top: 20px; right: 20px; z-index: 10;"></DatePicker>
             <div id="proChart3" style="height:460px;background-color: #eeeef0;"></div>
         </div>
-
     </div>
 </template>
 
@@ -41,7 +40,9 @@
                 chart2Type:'0'
             }
         },
+        props:['id'],
         mounted(){
+            this.getChartData();
             setTimeout(()=>{
                 this.drawChart1();
                 this.drawChart2();
@@ -50,6 +51,16 @@
 
         },
         methods:{
+            getChartData(){
+                console.log(this.id);
+                this.$ajax.get('/client/api/sale_data',{
+                    params:{
+                        mid:this.id
+                    }
+                }).then(res=>{
+
+                })
+            },
             drawChart1(){
                 let myChart = echarts.init(document.getElementById('proChart1'));
                 myChart.setOption({

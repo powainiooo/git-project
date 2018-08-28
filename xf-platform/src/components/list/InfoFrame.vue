@@ -79,7 +79,7 @@
                     <InputNumber :min="item.min_nums" v-model="item.all_nums"  size="large" :disabled="isVerify"></InputNumber>
                 </div>
                 <div class="td4">
-                    <t-switch :disabled="item.sale_nums == item.all_nums || isVerify" v-model="item.is_sale_out" true-value="2" false-value="1">
+                    <t-switch :disabled="item.sale_nums == item.all_nums || isVerify" v-model="item.is_sale_out" true-value="1" false-value="0">
                         <span slot="open">已售罄</span>
                         <span slot="close">销售中</span>
                     </t-switch>
@@ -87,7 +87,7 @@
             </li>
         </ul>
         <div class="ticket-list-btns" :style="{height:isDiff ? '36px' : '0px'}">
-            <t-button size="min">确认</t-button>
+            <t-button size="min" @dotap="doEditorTypeList">确认</t-button>
             <t-button size="min" extraClass="gray" @dotap="resetTypeList">取消</t-button>
         </div>
         <div class="title title2" v-if="!isVerify">
@@ -118,6 +118,7 @@
     import TButton from '@/components/common/TButton.vue'
     import TQues from '@/components/common/TQues.vue'
     import TSwitch from '@/components/common/TSwitch.vue'
+    import qs from 'qs'
     import {formatDate} from '@/assets/js/date.js'
     export default {
         name: 'app',
@@ -163,9 +164,9 @@
                 for(let item of tl){
                     let out;
                     if(this.isVerify){
-                        out = '2';
+                        out = 0;
                     }else{
-                        out = item.salenums == item.nums ? '2' : '1'
+                        out = item.is_over
                     }
                     this.editorTypeList.push({
                         name:item.select,
@@ -182,6 +183,40 @@
                         is_sale_out:out
                     });
                 }
+            },
+            doEditorTypeList(){
+                let obj = {},self = this;
+                obj.classes = [];
+                let arr1 = this.editorTypeList,arr2 = this.itemData.classes;
+                for(let i=0;i<arr1.length;i++){
+                    obj.classes.push({
+                        is_over:arr1[i].is_sale_out,
+                        max:arr2[i].max,
+                        nums:arr1[i].all_nums,
+                        price:arr2[i].price,
+                        salenums:arr2[i].salenums,
+                        select:arr2[i].select
+                    })
+                }
+                obj.id = this.itemData.id;
+                self.$ajax.post('/client/api/activity_edit',qs.stringify(obj)).then(res=>{
+                    let data = res.data;
+                    if(data.status == 1){
+                        self.lastTypeList = [];
+                        for(let item of arr1){
+                            self.lastTypeList.push({
+                                name:item.name,
+                                sale_nums:parseInt(item.sale_nums),
+                                all_nums:parseInt(item.all_nums),
+                                min_nums:parseInt(item.min_nums),
+                                is_sale_out:item.is_sale_out
+                            });
+                        }
+                        self.$Message.success(data.msg);
+                    }else{
+                        self.$Message.warning(data.msg);
+                    }
+                })
             }
         }
     }

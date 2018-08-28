@@ -27,8 +27,8 @@
         </div>
         <info-frame v-if="showInfo" @openstatistics="showInfo = false" :itemData="itemData"></info-frame>
         <div v-if="!showInfo">
-            <chart-frame v-show="showChart"></chart-frame>
-            <table-frame v-show="!showChart"></table-frame>
+            <chart-frame v-show="showChart" :id="itemData.id"></chart-frame>
+            <table-frame v-show="!showChart" :itemData="itemData"></table-frame>
         </div>
 
     </div>

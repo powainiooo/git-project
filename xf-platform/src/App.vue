@@ -17,7 +17,22 @@
             }
         },
         mounted(){
+            let self = this;
             this.$ajax.defaults.baseURL = 'http://ticket.pc-online.cc';
+            this.$ajax.interceptors.response.use(res=>{
+                if(res.data.status == 0){
+                    self.$tModal.warn({
+                        title:'登录信息过期，请重新登录。',
+                        onOk(){
+                            self.$router.push('index')
+                        }
+                    })
+                }
+                return res;
+            }, function (error) {
+                // 对响应错误做点什么
+                return Promise.reject(error);
+            });
         }
     }
 </script>

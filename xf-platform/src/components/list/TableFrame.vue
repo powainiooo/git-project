@@ -16,7 +16,7 @@
     <div class="pro-table">
         <div class="table-opera">
             <div>
-                <t-button size="min" style="width: 90px; margin-right: 30px;">导出表格</t-button>
+                <t-button size="min" style="width: 90px; margin-right: 30px;" @dotap="doExcel">导出表格</t-button>
                 <t-button size="min" style="width: 90px; margin-right: 30px;" @dotap="doNotify">一次性通知</t-button>
                 <t-ques width="290">
                     <ul class="list1">
@@ -26,11 +26,11 @@
                 </t-ques>
             </div>
             <div>
-                <Select style="width:130px; margin-right: 20px;">
-                    <Option value="0">普通票</Option>
-                    <Option value="1">早鸟票</Option>
+                <Select style="width:130px; margin-right: 20px;" v-model="selectType">
+                    <Option value="0">全部</Option>
+                    <Option v-for="(item,index) in itemdata.classes" :key="index" :value="index+1">{{item.select}}</Option>
                 </Select>
-                <Input v-model="value" placeholder="请输入电话、姓名、单号" style="width: 270px; margin-right: 20px;" />
+                <Input v-model="keyword" placeholder="请输入电话、姓名、单号" style="width: 270px; margin-right: 20px;" />
                 <t-button size="min" style="width: 90px;">查询</t-button>
             </div>
         </div>
@@ -105,10 +105,36 @@
         components:{TButton,TQues},
         data(){
             return{
-
+                keyword:'',
+                selectType:'0',
+                listData:[]
             }
         },
+        props:['itemData'],
+        mounted(){
+            this.getListData();
+        },
         methods:{
+            getListData(){
+                let self = this;
+                this.$ajax.get('',{
+                    params:{
+                        keyword:this.keyword,
+                        selectType:this.selectType
+                    }
+                }).then(res=>{
+                    self.listData = res.data.data;
+                })
+            },
+            doExcel(){
+                this.$ajax.get('',{
+                    params:{
+                        mid:this.id
+                    }
+                }).then(res=>{
+
+                })
+            },
             doNotify(){
                 let self = this;
                 self.$tModal.confirm({

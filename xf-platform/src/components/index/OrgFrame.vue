@@ -85,7 +85,7 @@
         data(){
             return{
                 logoName:'',
-                companyName:'name',
+                companyName:'',
                 address:'',
                 name:'',
                 mobile:'',

@@ -59,8 +59,6 @@
                         self.$Message.success(data.msg);
                     }else{
                         self.$Message.warning(data.msg);
-                        self.username = '';
-                        self.password = '';
                     }
                 })
             }

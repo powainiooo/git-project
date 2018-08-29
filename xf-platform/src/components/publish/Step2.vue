@@ -1,6 +1,6 @@
 <style>
-    .step2-frame{ width: 1400px; position: fixed; bottom: 0; left: 60px; display: flex; justify-content: space-between; z-index: 600;}
-    .step2-frame .frame{ width: 900px; height: 710px; background-color: #ffffff; position: relative;}
+    .step2-frame{ width: 1400px; position: fixed; bottom: 0; left: 60px; display: flex; justify-content: space-between; z-index: 400;}
+    .step2-frame .frame{ width: 900px; height: 630px; background-color: #ffffff; position: relative;}
     .step2-frame .frame2{ width: 300px;}
     .step2-frame .frame .scroll{ width: 100%; height: 100%; display: flex; overflow-y: scroll; padding: 20px 0;box-sizing: border-box; }
     .step2-frame .frame .scroll::-webkit-scrollbar{ width: 3px; background-color: #ffffff;}
@@ -149,6 +149,7 @@
                     </div>
                 </div>
             </div>
+            <span v-if="canNext"></span>
         </div>
     </div>
 </template>
@@ -158,6 +159,32 @@
     export default {
         name: 'app',
         components:{TQues},
+        computed:{
+            canNext(){
+                let arr1 = this.typeListData;
+                for(let item of arr1){
+                    if(item.checked){
+                        if(item.price == '' || item.sale_nums == '' || item.sale_limit == '' || item.name == ''){
+                            this.$emit('input',false);
+                            return false;
+                        }
+                    }
+                }
+                if(this.saleStart == '' || this.saleEnd == '' || this.showTime == ''){
+                    this.$emit('input',false);
+                    return false;
+                }
+                let arr2 = this.noticeListData;
+                for(let item of arr2){
+                    if(item.value == ''){
+                        this.$emit('input',false);
+                        return false;
+                    }
+                }
+                this.$emit('input',true);
+                return true
+            }
+        },
         data(){
             return{
                 ticketType:'1',

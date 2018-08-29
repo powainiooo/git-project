@@ -13,7 +13,7 @@
     .n-ques .hint-frame .list2 li:last-child{ margin-bottom: 0;}
     .n-ques .hint-frame .list2 li span{ font-size: 50px; font-weight: bold; margin-right: 6px; font-family: 'Helve';}
     .n-ques .ivu-tooltip-inner{ background-color: rgba(70,76,91,0); box-shadow: none;}
-    .n-ques .ivu-tooltip-popper[x-placement^=left] .ivu-tooltip-arrow{ right: 0px; border-width: 6px 0 6px 6px; border-left-color: #1a41c0;}
+    .n-ques .ivu-tooltip-popper[x-placement^=left] .ivu-tooltip-arrow{ right: 5px; border-width: 6px 0 6px 6px; border-left-color: #1a41c0;}
     .n-ques .ivu-tooltip-popper[x-placement^=right] .ivu-tooltip-arrow{ left: 4px; border-width: 6px 6px 6px 0; border-right-color: #1a41c0;}
 </style>
 

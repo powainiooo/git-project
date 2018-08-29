@@ -92,15 +92,19 @@
                         });
                     }else{
                         self.$tModal.warn({
-                            title:'修改失败！',
-                            content:'由于网络错误、流量拥挤提交失败，<br>请尝试重新提交',
-                            btn1Name:'重新提交',
-                            onOk(){
-                                self.doEditor();
-                            }
+                            title:data.msg
                         });
                     }
-                })
+                }).catch(function (error) {
+                    self.$tModal.warn({
+                        title:'修改失败！',
+                        content:'由于网络错误、流量拥挤提交失败，<br>请尝试重新提交',
+                        btn1Name:'重新提交',
+                        onOk(){
+                            self.doEditor();
+                        }
+                    });
+                });
             }
         }
     }

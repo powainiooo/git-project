@@ -13,7 +13,7 @@
         components:{index},
         computed:{
             showMenus(){
-                return this.$store.state.isLogin
+                return this.$store.state.showGlobalMenu
             }
         },
         mounted(){

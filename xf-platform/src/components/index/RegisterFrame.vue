@@ -21,7 +21,7 @@
     .register-frame .tab ul li:first-child{ border-radius: 5px 0 0 5px;}
     .register-frame .tab ul li:nth-child(2){ border-radius: 0 5px 5px 0;}
 
-    .register-frame .warn{ width: 120px; position: absolute; top: 270px; left: 310px; background-color: #e73828; padding: 10px 15px; border-radius: 5px; z-index: 50; font-size: 12px; color: #fff;}
+    .register-frame .warn{ width: 130px; position: absolute; top: 270px; left: 310px; background-color: #e73828; padding: 10px 15px; border-radius: 5px; z-index: 50; font-size: 12px; color: #fff;}
     .register-frame .warn:before{ content: ''; width: 10px; height: 10px; border: 5px solid rgba(0,0,0,0); border-right-color: #e73828; position: absolute; top: 50%; left: -10px; margin-top: -5px;}
     .register-frame .hide{ opacity: 0; cursor: default;}
 </style>
@@ -33,13 +33,32 @@
             <p class="title" :style="{height:showAll ? '0px' : '100px'}"><span>2</span>步轻松创建活动方账户</p>
             <div class="line mt20"><input type="text" placeholder="注册邮箱" v-model="email" :readonly="confirmInfos"></div>
             <div class="more" :style="{height:showAll ? '425px' : '0px','margin-bottom':showAll ? '30px' : '0px'}">
-                <div class="line"><input type="text" placeholder="联系电话" v-model="mobile" :readonly="confirmInfos"></div>
+                <div class="line">
+                    <input type="text"
+                           placeholder="联系电话"
+                           v-model="mobile"
+                           maxlength="11"
+                           :readonly="confirmInfos"
+                           @keyup="inputBlur('phone')">
+                </div>
                 <div class="line code-line">
                     <input type="text" placeholder="验证码" v-model="vericode" :readonly="confirmInfos">
                     <t-button :isDisabled="veriBtnDisabled" size="min" @dotap="getCode">{{codeBtnName}}</t-button>
                 </div>
-                <div class="line"><input type="password" placeholder="密码" v-model="password" :readonly="confirmInfos"></div>
-                <div class="line"><input type="password" placeholder="重复密码" v-model="confirmPSW" :readonly="confirmInfos"></div>
+                <div class="line">
+                    <input type="password"
+                           placeholder="密码"
+                           v-model="password"
+                           :readonly="confirmInfos"
+                           @keyup="inputBlur('psw')">
+                </div>
+                <div class="line">
+                    <input type="password"
+                           placeholder="重复密码"
+                           v-model="confirmPSW"
+                           :readonly="confirmInfos"
+                           @keyup="inputBlur('cpsw')">
+                </div>
                 <div class="hint" :class="confirmInfos ? 'hide':''">密码必须包含数字、字母，且不少于8个字符。</div>
                 <div class="tab">
                     <h3>选择活动方类型</h3>
@@ -58,8 +77,7 @@
             </div>
         </div>
 
-        <div class="warn" v-if="!pswPass && password != ''">密码不符合要求</div>
-        <div class="warn" v-if="pswConfirm" style="top:330px;">密码不一致</div>
+        <div class="warn" :style="{top:warnTop+'px'}" v-if="showWarn">{{warnTxt}}</div>
     </div>
 </template>
 
@@ -76,7 +94,10 @@
                 email:'',
                 password:'',
                 confirmPSW:'',
-                confirmInfos:false
+                confirmInfos:false,
+                showWarn:false,
+                warnTop:0,
+                warnTxt:''
             }
         },
         computed:{
@@ -117,6 +138,21 @@
             },
             changeType(type){
                 this.$emit('changeType',type)
+            },
+            inputBlur(name){
+                if(name == 'phone'){
+                    this.showWarn = this.phoneDisabled;
+                    this.warnTop = 150;
+                    this.warnTxt = '手机号格式不正确';
+                }else if(name == 'psw'){
+                    this.showWarn = !this.pswPass;
+                    this.warnTop = 270;
+                    this.warnTxt = '密码格式不正确';
+                }else if(name == 'cpsw'){
+                    this.showWarn = this.password != this.confirmPSW;
+                    this.warnTop = 330;
+                    this.warnTxt = '密码不一致';
+                }
             }
         }
     }

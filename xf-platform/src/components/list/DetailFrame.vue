@@ -25,7 +25,7 @@
                 <a href="javascript:;" @click="$emit('close')"><Icon type="md-close" /></a>
             </div>
         </div>
-        <info-frame v-if="showInfo" @openstatistics="showInfo = false" :itemData="itemData"></info-frame>
+        <info-frame v-if="showInfo" @openstatistics="showInfo = false" :itemData="itemData" :fileurl="fileurl"></info-frame>
         <div v-if="!showInfo">
             <chart-frame v-if="showChart" :id="itemData.id"></chart-frame>
             <table-frame v-if="!showChart" :itemData="itemData"></table-frame>
@@ -41,7 +41,7 @@
     export default {
         name: 'app',
         components:{InfoFrame,ChartFrame,TableFrame},
-        props:['itemData'],
+        props:['itemData','fileurl'],
         data(){
             return{
                 showInfo:true,

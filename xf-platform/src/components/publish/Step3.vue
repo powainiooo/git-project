@@ -1,6 +1,6 @@
 <style>
     .step3-frame{ width: 1400px; position: fixed; bottom: 0; left: 60px; display: flex; justify-content: space-between; z-index: 100;}
-    .step3-frame .frame{ width: 1200px; height: 710px; box-sizing: border-box; background-color: #ffffff; display: flex; position: relative;}
+    .step3-frame .frame{ width: 1200px; height: 630px; box-sizing: border-box; background-color: #ffffff; display: flex; position: relative;}
     .step3-frame .frame:before{ content: ''; width: 100%; height: 3px; background: url("../../assets/img/ticket-top.png") repeat-x; position: absolute; left: 0; top: -3px;}
     .step3-frame .frame:after{ content: ''; width: 1px; position: absolute; left: 50%; top: 60px; bottom: 20px; z-index: 100; background-color: #e5e5e5;}
     .step3-frame .frame .scroll{ width: 100%; height: 100%; display: flex; overflow-y: scroll; padding: 20px 0;box-sizing: border-box; box-sizing: border-box;}
@@ -100,6 +100,7 @@
                         <a href="javascript:;" @click="newActItem"><img src="@/assets/img/add.png"> </a>
                     </div>
                 </div>
+                <span v-if="canNext"></span>
             </div>
         </div>
     </div>
@@ -111,6 +112,26 @@
     export default {
         name: 'app',
         components:{TUpload,TQues},
+        computed:{
+            canNext(){
+                let arr1 = this.activityListData;
+                for(let item of arr1){
+                    if(item.imgUrl == '' || item.desc == ''){
+                        this.$emit('input',false);
+                        return false;
+                    }
+                }
+                let arr2 = this.actListData;
+                for(let item of arr2){
+                    if(item.logoUrl == '' || item.imgUrl == ''){
+                        this.$emit('input',false);
+                        return false;
+                    }
+                }
+                this.$emit('input',true);
+                return true
+            }
+        },
         data(){
             return{
                 activityListData:[

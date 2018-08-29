@@ -47,6 +47,7 @@ router.beforeEach((to,from,next)=>{
             }
             next();
         }else{
+            store.commit('doShowGlobalMenu',false);
             next('/index')
         }
     }

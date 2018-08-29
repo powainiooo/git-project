@@ -11,7 +11,7 @@
 
     .prolist-frame .anim-detail{ animation-duration: 0.5s; animation-timing-function: cubic-bezier(.25,.76,.36,.97)}
     .prolist-frame .btn-link{ width: 270px; position: fixed; top: 200px; right: 50px;}
-    .prolist-frame .search{ position: fixed; top: 15px; right: 90px; z-index: 500;}
+    .prolist-frame .search{ position: fixed; top: 15px; right: 90px; z-index: 490;}
 </style>
 
 <template>
@@ -37,7 +37,7 @@
             <list-item :itemdata="detailData" v-if="showDetail" :fileurl="fileurl"></list-item>
             </transition>
             <transition enter-active-class="animated anim-detail slideInRight" leave-active-class="animated anim-detail slideOutRight">
-            <detail-frame v-if="showDetail" @close="showDetail = false" :itemData="detailData"></detail-frame>
+            <detail-frame v-if="showDetail" @close="showDetail = false" :itemData="detailData" :fileurl="fileurl"></detail-frame>
             </transition>
         </div>
     </section>
@@ -101,6 +101,7 @@
                         self.showExample = false;
                         self.listData = data.data;
                         self.fileurl = data.fileurl;
+                        self.$store.commit('doShowGlobalMenu',true);
                     }
                 })
             },

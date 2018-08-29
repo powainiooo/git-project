@@ -17,8 +17,8 @@ const store = new Vuex.Store({
         doLogin(state){
             state.isLogin = true
         },
-        doShowGlobalMenu (state) {
-            state.showGlobalMenu = true
+        doShowGlobalMenu (state,data) {
+            state.showGlobalMenu = data
         },
         setGlobalData(state,data){
             state.userData = data.data;

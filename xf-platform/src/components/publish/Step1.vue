@@ -47,7 +47,7 @@
                         </t-ques>
                     </div>
                     <div class="inp-line">
-                        <Select v-model="formData.type" placeholder="活动类型">
+                        <Select v-model="formData.type" placeholder="活动类型" @on-change="typeChange">
                             <Option value="1">单日</Option>
                             <Option value="2">多日</Option>
                             <Option value="3">跨月多日</Option>
@@ -76,7 +76,7 @@
                 <div class="pl50 pt20 pb20 pr" style="border-bottom: 1px solid #e5e5e5;">
                     <t-upload v-model="formData.cover">
                         <template slot="title">
-                            <h3>活动方LOGO</h3>
+                            <h3>活动方logo</h3>
                         </template>
                     </t-upload>
                     <t-ques style="position: absolute; left: 170px; top: 30px;">
@@ -107,6 +107,7 @@
             <list-item :itemdata="formData" fileurl=""></list-item>
         </div>
         <span v-show="false">{{activity}}</span>
+        <span v-if="canNext"></span>
     </div>
 </template>
 
@@ -150,6 +151,14 @@
                 let activity = this.$store.state.userData.activity || '';
                 this.formData.activity = activity;
                 return activity
+            },
+            canNext(){
+                let pass = true,data = this.formData;
+                if(data.city == '' || data.goods_name == '' || data.type == '' || data.begin == '' || data.hour_b == '' || data.hour_e == '' || data.address == '' || data.mobile == '' || data.cover == '' || data.cover2 == ''){
+                    pass = false;
+                }
+                this.$emit('input',pass);
+                return pass
             }
         },
         methods:{
@@ -159,6 +168,10 @@
                     let data = res.data;
                     self.cityList = data.data.citys;
                 })
+            },
+            typeChange(){
+                this.formData.begin = '';
+                this.formData.end = '';
             },
             dateChange(date){
                 if(this.formData.type == 1){

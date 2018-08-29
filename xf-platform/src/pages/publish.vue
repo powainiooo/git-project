@@ -10,20 +10,20 @@
     <div class="publish">
         <div class="top-line">
             <div class="name">Step{{step}}</div>
-            <t-button extraClass="white" v-if="step == '1'" @dotap="step='2'">下一步</t-button>
-            <t-button v-if="step == '2'" @dotap="step='1'">上一步</t-button>
-            <t-button extraClass="white" v-if="step == '2'" @dotap="step='3'">下一步</t-button>
+            <t-button extraClass="white" v-if="step == '1'" @dotap="step='2'" :isDisabled="!step1Reg">下一步</t-button>
+            <t-button v-if="step == '2'" @dotap="step == '2'">上一步</t-button>
+            <t-button extraClass="white" v-if="step == '2'" @dotap="step='3'" :isDisabled="!step2Reg">下一步</t-button>
             <t-button v-if="step == '3'" @dotap="step='2'">上一步</t-button>
-            <t-button extraClass="white" v-if="step == '3'" @dotap="doSubmit">完成并提交审核</t-button>
+            <t-button extraClass="white" v-if="step == '3'" @dotap="doSubmit" :isDisabled="!step3Reg">完成并提交审核</t-button>
         </div>
         <transition enter-active-class="animated anim05 slideInUp">
-        <step1 v-show="step == '1'" ref="step1"></step1>
+        <step1 v-show="step == '1'" ref="step1" v-model="step1Reg"></step1>
         </transition>
         <transition enter-active-class="animated anim05 slideInUp">
-        <step2 v-show="step == '2'" ref="step2"></step2>
+        <step2 v-show="step == '2'" ref="step2" v-model="step2Reg"></step2>
         </transition>
         <transition enter-active-class="animated anim05 slideInUp">
-        <step3 v-show="step == '3'" ref="step3"></step3>
+        <step3 v-show="step == '3'" ref="step3" v-model="step3Reg"></step3>
         </transition>
     </div>
 </template>
@@ -40,7 +40,10 @@
         components:{TButton,Step1,Step2,Step3},
         data(){
             return{
-                step:'1'
+                step:'2',
+                step1Reg:false,
+                step2Reg:false,
+                step3Reg:false
             }
         },
         computed:{
@@ -124,15 +127,19 @@
                                 })
                             }else{
                                 self.$tModal.warn({
-                                    title:'提交失败！',
-                                    content:'由于网络错误、流量拥挤提交失败，<br>请尝试重新提交。',
-                                    btn1Name:'重新提交',
-                                    onOk(){
-                                        self.doSubmit();
-                                    }
+                                    title:data.msg
                                 })
                             }
-                        })
+                        }).catch(function (error) {
+                            self.$tModal.warn({
+                                title:'提交失败！',
+                                content:'由于网络错误、流量拥挤提交失败，<br>请尝试重新提交。',
+                                btn1Name:'重新提交',
+                                onOk(){
+                                    self.doSubmit();
+                                }
+                            })
+                        });
                     }
                 });
             }

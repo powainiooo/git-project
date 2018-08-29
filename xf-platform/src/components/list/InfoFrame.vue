@@ -229,7 +229,6 @@
                 })
             },
             drawPoster(){
-                console.log('poster');
                 let data = this.itemData,imgSrc = this.fileurl,type = data.type,self = this;
                 let c = document.getElementById('poster');
                 let ctx = c.getContext('2d');
@@ -238,7 +237,6 @@
                 ctx.fillRect(0, 0, 750, 760);
                 //顶部波浪图
                 let top = new Image();
-                top.setAttribute('crossOrigin', 'anonymous');
                 top.onload = function(){
                     ctx.drawImage(top, 0, 0,750,145);
                 };
@@ -305,19 +303,18 @@
                 //logo
                 let logoXArr = [530-100,560-100,560-100];
                 let logoImg = new Image();
-                logoImg.setAttribute('crossOrigin', 'anonymous');
+                logoImg.crossOrigin = "Anonymous";
                 logoImg.onload = function(){
                     ctx.drawImage(logoImg,logoXArr[type-1],240-70,200,140);
                 };
                 logoImg.src = imgSrc + data.cover;
                 //详情图
                 let cover2 = new Image();
-                cover2.setAttribute('crossOrigin', 'anonymous');
+                cover2.crossOrigin = "Anonymous";
                 cover2.onload = function(){
                     ctx.drawImage(cover2,0,420,750,650);
                     //底部logo
                     let bottom = new Image();
-                    bottom.setAttribute('crossOrigin', 'anonymous');
                     bottom.onload = function(){
                         ctx.drawImage(bottom,450,460,300,300);
                         self.downloadImg();

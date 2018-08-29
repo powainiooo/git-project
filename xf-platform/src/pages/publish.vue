@@ -40,7 +40,7 @@
         components:{TButton,Step1,Step2,Step3},
         data(){
             return{
-                step:'2',
+                step:'1',
                 step1Reg:false,
                 step2Reg:false,
                 step3Reg:false

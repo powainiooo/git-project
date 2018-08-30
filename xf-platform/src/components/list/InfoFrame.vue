@@ -116,6 +116,7 @@
             <canvas id="poster" width="750" height="760" style=' background-color:#fff;'></canvas>
             <img src="../../../static/img/top.png" id="top" crossOrigin="anonymous">
             <img src="../../../static/img/bottom.png" id="bottom" crossOrigin="anonymous">
+            <!--<img :src="" id="cover" crossOrigin="anonymous">-->
         </div>
 
     </div>
@@ -302,15 +303,15 @@
                 ctx.stroke();
                 //logo
                 let logoXArr = [530-100,560-100,560-100];
-                let logoImg = new Image();
-                logoImg.crossOrigin = "Anonymous";
-                logoImg.onload = function(){
-                    ctx.drawImage(logoImg,logoXArr[type-1],240-70,200,140);
-                };
-                logoImg.src = imgSrc + data.cover;
+                //let logoImg = new Image();
+                //logoImg.crossOrigin = "anonymous";
+                //logoImg.onload = function(){
+                //    ctx.drawImage(logoImg,logoXArr[type-1],240-70,200,140);
+                //};
+                //logoImg.src = imgSrc + data.cover;
                 //详情图
                 let cover2 = new Image();
-                cover2.crossOrigin = "Anonymous";
+                cover2.crossOrigin = "anonymous";
                 cover2.onload = function(){
                     ctx.drawImage(cover2,0,420,750,650);
                     //底部logo

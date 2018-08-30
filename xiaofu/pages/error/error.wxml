@@ -1,0 +1,5 @@
+<!--index.wxml-->
+<view class="container bg-gray">
+    <header-view></header-view>
+    <image class="img" src="../../res/images/502.jpg" mode="widthFix"></image>
+</view>

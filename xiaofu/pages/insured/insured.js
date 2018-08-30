@@ -36,7 +36,6 @@ Page({
   doConfirm(){
     let self = this;
     if(self.data.btnDisabled){
-      console.log(self.data.inforList);
       wx.request({
         url: app.globalData.ajaxSrc+'/safe_person', //仅为示例，并非真实的接口地址
         data: {
@@ -45,9 +44,13 @@ Page({
         },
         method:'POST',
         success: function(res) {
-          console.log(res.data);
           wx.navigateTo({
             url: '/pages/result/result?page=insuredSuc'
+          })
+        },
+        fail(){
+          wx.reLaunch({
+            url: '/pages/error/error'
           })
         }
       });

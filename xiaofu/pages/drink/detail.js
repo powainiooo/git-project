@@ -11,7 +11,8 @@ Page({
     itemData:{id:-1},
     shareImgSrc:'',
     imgSrc:app.globalData.imgSrc,
-    wxcodeimg:''
+    wxcodeimg:'',
+    showRefresh:false
   },
   checkValues(event){
     let key = event.target.dataset.key;
@@ -47,20 +48,7 @@ Page({
           let jsapi = res.data.jsapiparam;
           let order_num = res.data.order_num;
           if(res.data.flag == 1) {//福利票
-            wx.request({
-              url:app.globalData.ajaxSrc+'/buysuccess',
-              data:{
-                tid:self.data.orderID,
-                order_num:order_num
-              },
-              success:res=>{
-                console.log('pay s o');
-                console.log(res);
-                wx.navigateTo({
-                  url: '/pages/result/result?page=drinkSuc'
-                })
-              }
-            })
+            self.doBuySuccess(order_num);
           }else{
             wx.requestPayment({
               'timeStamp': jsapi.timeStamp,
@@ -69,29 +57,26 @@ Page({
               'signType': jsapi.signType,
               'paySign': jsapi.paySign,
               'success':function(res){
-                console.log('pay s');
-                console.log(res);
-                wx.request({
-                  url:app.globalData.ajaxSrc+'/buysuccess',
-                  data:{
-                    tid:self.data.orderID,
-                    order_num:order_num
-                  },
-                  success:res=>{
-                    console.log('pay s o');
-                    console.log(res);
-                    wx.navigateTo({
-                      url: '/pages/result/result?page=drinkSuc'
-                    })
-                  }
-                })
+                wx.showToast({
+                  title:'支付成功'
+                });
+                self.doBuySuccess(order_num);
               },
               'fail':function(res){
-                console.log('pay f');
-                console.log(res);
+                wx.showToast({
+                  title:'支付失败'
+                });
               }
             })
           }
+        },
+        fail(){
+          wx.showModal({
+            title:'购买失败，请重试',
+            success(){
+              self.doPay();
+            }
+          })
         }
       })
     }
@@ -101,34 +86,55 @@ Page({
    */
   onLoad: function (options) {
     let id = options.id || '1';
-    let self = this;
     this.data.orderID = id;
+    this.getData();
+
+  },
+  //获取数据
+  getData(){
+    let self = this;
     wx.request({
       url: app.globalData.ajaxSrc+'/drink_info',
       data:{
-        id:id
+        id:self.data.orderID
       },
       success: function(res) {
-        let info = res.data.data.info;
-        let limit = info.limit,arr = [];
-        if(limit == ''){
-          arr = [1,2,3,4,5,6,7,8,9,10];
-        }else{
-          for(let i=0;i<limit;i++){
-            arr.push(i+1);
+        let data = res.data;
+        if(data.status == 0){
+          let info = data.data.info;
+          let limit = info.limit,arr = [];
+          if(limit == ''){
+            arr = [1,2,3,4,5,6,7,8,9,10];
+          }else{
+            for(let i=0;i<limit;i++){
+              arr.push(i+1);
+            }
           }
+
+          self.setData({
+            numbersArr:arr,
+            itemData:info
+          });
+          self.drawSharePoster();
+        }else{
+          self.showToast({
+            title:data.msg
+          });
+          self.setData({
+            showRefresh:true
+          })
         }
 
-        self.setData({
-          numbersArr:arr,
-          itemData:info
+      },
+      fail(){
+        self.showToast({
+          title:'加载失败'
         });
-        self.drawSharePoster();
+        self.setData({
+          showRefresh:true
+        })
       }
     });
-    setTimeout(()=>{
-      this.getCode();
-    },1000)
   },
   //画海报
   drawPoster(){
@@ -268,6 +274,7 @@ Page({
       url: '/pages/drink/index'
     })
   },
+  //获取二维码
   getCode(at){
     let self = this;
     wx.request({
@@ -285,7 +292,27 @@ Page({
       }
     })
   },
-
+  //购买成功
+  doBuySuccess(orderNum){
+    let self = this;
+    wx.request({
+      url:app.globalData.ajaxSrc+'/buysuccess',
+      data:{
+        tid:self.data.orderID,
+        order_num:orderNum
+      },
+      success:res=>{
+        wx.navigateTo({
+          url: '/pages/result/result?page=drinkSuc'
+        })
+      },
+      fail(){
+        wx.reLaunch({
+          url: '/pages/error/error'
+        })
+      }
+    })
+  },
   /**
    * 用户点击右上角分享
    */

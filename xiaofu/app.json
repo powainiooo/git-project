@@ -1,9 +1,9 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/order-ticket/order",
-    "pages/drink/index",
     "pages/drink/detail",
+    "pages/drink/index",
+    "pages/order-ticket/order",
     "pages/order-drink/order",
     "pages/sponsor/list",
     "pages/index/detail",
@@ -13,7 +13,8 @@
     "pages/insured/insured",
     "pages/result/result",
     "pages/search/search",
-    "pages/login/login"
+    "pages/login/login",
+    "pages/error/error"
   ],
   "window": {
     "backgroundTextStyle": "light",

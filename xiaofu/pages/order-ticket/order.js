@@ -76,13 +76,17 @@ Page({
         openid:app.globalData.userOpenID
       },
       success: function(res) {
-        console.log(res.data);
         let list = res.data.data.list,val = false;
         if(list.length == 0 && !this.data.isMove) val = true;
         self.setData({
           isEmpty:val,
           listData:list
         });
+      },
+      fail(){
+        wx.reLaunch({
+          url: '/pages/error/error'
+        })
       }
     })
   },
@@ -100,6 +104,11 @@ Page({
           isEmpty:val,
           listData2:list
         });
+      },
+      fail(){
+        wx.reLaunch({
+          url: '/pages/error/error'
+        })
       }
     })
   }

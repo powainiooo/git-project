@@ -87,6 +87,11 @@ Page({
             listData:self.data.listData.concat(list)
           });
         }
+      },
+      fail(){
+        wx.reLaunch({
+          url: '/pages/error/error'
+        })
       }
     })
   },
@@ -109,6 +114,11 @@ Page({
           addressIndex:index
         });
         self.getLocation();
+      },
+      fail(){
+        wx.reLaunch({
+          url: '/pages/error/error'
+        })
       }
     })
   },

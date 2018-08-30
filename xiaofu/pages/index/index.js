@@ -43,11 +43,12 @@ Page({
     activityID:'',
     imgSrc:app.globalData.imgSrc,
     shareImgSrc:'',
-    sponsorSrc:''
+    sponsorSrc:'',
+    showRefresh:false,
+    id:-1
   },
   //事件处理函数
   onLoad: function (options) {
-    console.log(options.id);
     let id = options.id || '',self = this,cityID = 0;
     if(id == ''){
       this.getAddressData();
@@ -57,7 +58,6 @@ Page({
         cityID = 0;
       }
     }
-
     this.setData({
       activityID:id,
       city:cityID
@@ -112,8 +112,8 @@ Page({
     //if(e.currentTarget.dataset.end == 'over') return;
     let top = e.currentTarget.offsetTop,
         index = e.target.dataset.index,
-        id = e.target.dataset.id,
         self = this;
+    self.data.id = e.target.dataset.id;
     this.data.lastLoadHint = this.data.loadHint;
     wx.createSelectorQuery().select('#bodyFrame').boundingClientRect(function(rect){
       self.data.lastBodyTop = rect.top;
@@ -147,7 +147,7 @@ Page({
           scrollTop: 0,
           duration: 0
         });
-        self.getDetailData(id);
+        self.getDetailData();
       },700);
     }).exec()
   },
@@ -438,7 +438,7 @@ Page({
       loadHint:'loading'
     });
     wx.request({
-      url: app.globalData.ajaxSrc+'/pro_list', //仅为示例，并非真实的接口地址
+      url: app.globalData.ajaxSrc+'/pro_list',
       data: {
         keyword: self.data.keywords,
         page: self.data.page,
@@ -465,16 +465,21 @@ Page({
             listData:self.data.listData.concat(list)
           });
         }
+      },
+      fail(){
+        wx.reLaunch({
+          url: '/pages/error/error'
+        })
       }
     })
   },
   //获取详情数据
-  getDetailData(id,func){
+  getDetailData(id){
     let self = this;
     wx.request({
-      url: app.globalData.ajaxSrc+'/product_info', //仅为示例，并非真实的接口地址
+      url: app.globalData.ajaxSrc+'/product_info',
       data: {
-        tid: id,
+        tid: self.data.id,
         city: self.data.city
       },
       success: function(res) {
@@ -485,9 +490,14 @@ Page({
           showTicketDetail:true
         });
         self.drawSharePoster();
-        if(typeof func == 'function'){
-          func();
-        }
+      },
+      fail(){
+        self.showToast({
+          title:'加载失败'
+        });
+        self.setData({
+          showRefresh:true
+        })
       }
     })
   },
@@ -512,6 +522,11 @@ Page({
           bannerType:res.data.data.type
         });
         self.getLocation();
+      },
+      fail(){
+        wx.reLaunch({
+          url: '/pages/error/error'
+        })
       }
     })
   },

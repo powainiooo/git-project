@@ -2,8 +2,10 @@
     <header-view
             showMenu="{{false}}"
             showShadow
-            showClose
+            showClose="{{!showRefresh}}"
+            showRefresh="{{showRefresh}}"
             showShare
+            binddoRefresh="getDetailData"
             binddoclose="doClose"
             binddoposter="drawPoster">
     </header-view>

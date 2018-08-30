@@ -21,6 +21,10 @@ Component({
       type: Boolean,
       value: false
     },
+    showRefresh: {
+      type: Boolean,
+      value: false
+    },
     showShadow: {
       type: Boolean,
       value: true
@@ -199,6 +203,9 @@ Component({
       if (this.data.name != 'search'){
         this.triggerEvent('dosearch',this.data.keywords)
       }
+    },
+    doRefresh(){
+      this.triggerEvent('doRefresh')
     },
     gotoHome(){
       wx.reLaunch({

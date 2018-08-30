@@ -29,16 +29,21 @@ Page({
   getListData(){
     let self = this;
     wx.request({
-        url:app.globalData.ajaxSrc+"/order_center",
-        data:{
-          openid:app.globalData.userOpenID
-        },
-        success:res=>{
-          let list = res.data.data.list;
-          this.setData({
-            listData:list
-          });
-        }
+      url:app.globalData.ajaxSrc+"/order_center",
+      data:{
+        openid:app.globalData.userOpenID
+      },
+      success:res=>{
+        let list = res.data.data.list;
+        this.setData({
+          listData:list
+        });
+      },
+      fail(){
+        wx.reLaunch({
+          url: '/pages/error/error'
+        })
+      }
     })
   },
   /**

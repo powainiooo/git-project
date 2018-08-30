@@ -67,7 +67,12 @@ Page({
       },
       success: res => {
         wx.redirectTo({
-          url: '/pages/index/index',
+          url: '/pages/index/index'
+        })
+      },
+      fail(){
+        wx.reLaunch({
+          url: '/pages/error/error'
         })
       }
     })

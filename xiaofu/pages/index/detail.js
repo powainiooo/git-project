@@ -12,14 +12,16 @@ Page({
     showBuyInfos:false,
     imageUrl:'',
     singlePrice:0,
-    shareImgSrc:''
+    shareImgSrc:'',
+    showRefresh:false,
+    id:-1
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let id = options.id;
-    this.getDetailData(id);
+    this.data.id = options.id;
+    this.getDetailData();
   },
 
   //获取详情数据
@@ -28,7 +30,7 @@ Page({
     wx.request({
       url: app.globalData.ajaxSrc+'/product_info', //仅为示例，并非真实的接口地址
       data: {
-        tid: id
+        tid: self.data.id
       },
       success: function(res) {
         let data = res.data;
@@ -38,6 +40,14 @@ Page({
           showTicketDetail:true
         });
         self.drawSharePoster();
+      },
+      fail(){
+        self.showToast({
+          title:'加载失败'
+        });
+        self.setData({
+          showRefresh:true
+        })
       }
     })
   },

@@ -15,7 +15,6 @@ Page({
    */
   onLoad: function (options) {
     let oid = options.oid;
-    console.log(oid);
     this.getDetailData(oid);
   },
   getDetailData(id){
@@ -31,7 +30,12 @@ Page({
           self.setData({
             itemData:data.data
           });
-        }
+        },
+      fail(){
+        wx.reLaunch({
+          url: '/pages/error/error'
+        })
+      }
     })
   },
   /**

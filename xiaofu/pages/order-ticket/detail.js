@@ -42,6 +42,11 @@ Page({
           checkNum:check,
           itemData:data
         });
+      },
+      fail(){
+        wx.reLaunch({
+          url: '/pages/error/error'
+        })
       }
     })
   },

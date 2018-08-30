@@ -3,8 +3,10 @@
     <header-view show-menu="{{false}}"
                  show-share="{{true}}"
                  showShadow="{{true}}"
-                 showClose="{{true}}"
+                 showClose="{{!showRefresh}}"
+                 showRefresh="{{showRefresh}}"
                  binddoclose="doClose"
+                 binddoRefresh="getData"
                  binddoposter="drawPoster"></header-view>
 
     <view class='body buy-frame' wx:if="{{itemData.id != -1}}">

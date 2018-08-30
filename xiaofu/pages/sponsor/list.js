@@ -24,6 +24,11 @@ Page({
         self.setData({
           dataList:res.data.data
         })
+      },
+      fail(){
+        wx.reLaunch({
+          url: '/pages/error/error'
+        })
       }
     })
   },

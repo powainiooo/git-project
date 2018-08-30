@@ -4,9 +4,11 @@
             show-search="{{toggleButton}}"
             showShadow="{{!toggleButton}}"
             showMenu="{{toggleButton}}"
-            showClose="{{!toggleButton}}"
+            showClose="{{!toggleButton && !showRefresh}}"
             showShare="{{!toggleButton}}"
             showSearchFrame="{{showSearchFrame}}"
+            showRefresh="{{showRefresh}}"
+            binddoRefresh="getDetailData"
             binddoclose="doClose"
             binddosearch="doSearch"
             binddoposter="drawPoster">

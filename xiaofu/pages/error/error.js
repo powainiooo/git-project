@@ -1,5 +1,4 @@
-// pages/login/login.js
-const app = getApp();
+// pages/error/error.js
 Page({
 
   /**
@@ -7,31 +6,6 @@ Page({
    */
   data: {
   
-  },
-  onGotUserInfo(e){
-    app.globalData.userInfo = e.detail.userInfo;
-    wx.request({
-      url: app.globalData.ajaxSrc + '/wxuser_add',
-      data: {
-        openid: app.globalData.userOpenID,
-        country: e.detail.userInfo.country,
-        province: e.detail.userInfo.province,
-        city: e.detail.userInfo.city,
-        gender: e.detail.userInfo.gender,
-        nickName: e.detail.userInfo.nickName,
-        avatarUrl: e.detail.userInfo.avatarUrl
-      },
-      success: res => {
-        wx.redirectTo({
-          url: '/pages/index/index'
-        })
-      },
-      fail(){
-        wx.reLaunch({
-          url: '/pages/error/error'
-        })
-      }
-    })
   },
 
   /**

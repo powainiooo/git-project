@@ -75,8 +75,8 @@ App({
   globalData: {
     userInfo: null,
     userOpenID:null,
-    ajaxSrc:'https://wechat.leesticket.com/mobile/applet',
-    imgSrc:'https://wechat.leesticket.com/upload/',
+    ajaxSrc:'http://ticket.pc-online.cc/mobile/applet',
+    imgSrc:'http://ticket.pc-online.cc/upload/',
     ticketOrderNum:null,
     ticketBuyNum:0,
     access_token:''

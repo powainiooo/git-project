@@ -110,21 +110,11 @@ Component({
           success: function(res) {
             let jsapi = res.data.jsapiparam;
             let order_num = res.data.order_num;
+            let tid = res.data.tid;
             app.globalData.ticketOrderNum = order_num;
             app.globalData.ticketBuyNum = self.data.numbersArr[self.data.numberIndex];
             if(res.data.flag == 1){//福利票
-              wx.request({
-                url:self.data.ajaxSrc+'/pay_success',
-                data:{
-                  tid:res.data.tid,
-                  order_num:order_num
-                },
-                success:res=>{
-                  wx.navigateTo({
-                    url: '/pages/result/result?page=ticketSuc'
-                  })
-                }
-              })
+              self.doBuySuccess(tid,order_num);
             }else{
               wx.requestPayment({
                 'timeStamp': jsapi.timeStamp,
@@ -133,26 +123,49 @@ Component({
                 'signType': jsapi.signType,
                 'paySign': jsapi.paySign,
                 'success':function(res){
-                  wx.request({
-                    url:self.data.ajaxSrc+'/pay_success',
-                    data:{
-                      tid:self.data.itemData.info.id,
-                      order_num:order_num
-                    },
-                    success:res=>{
-                      wx.navigateTo({
-                        url: '/pages/result/result?page=ticketSuc'
-                      })
-                    }
-                  })
+                  wx.showToast({
+                    title:'支付成功'
+                  });
+                  self.doBuySuccess(tid,order_num);
                 },
                 'fail':function(res){
+                  wx.showToast({
+                    title:'支付失败'
+                  });
                 }
               })
             }
+          },
+          fail(){
+            wx.showModal({
+              title:'购买失败，请重试',
+              success(){
+                self.doPay();
+              }
+            })
           }
         })
       }
+    },
+    doBuySuccess(tid,orderNum){
+      let self = this;
+      wx.request({
+        url:self.data.ajaxSrc+'/pay_success',
+        data:{
+          tid:tid,
+          order_num:orderNum
+        },
+        success:res=>{
+          wx.navigateTo({
+            url: '/pages/result/result?page=ticketSuc'
+          })
+        },
+        fail(){
+          wx.reLaunch({
+            url: '/pages/error/error'
+          })
+        }
+      })
     },
     setNums(obj){
       let arr = [];

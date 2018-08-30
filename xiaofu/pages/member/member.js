@@ -68,6 +68,11 @@ Page({
             content:res.data.data[src]
           });
         }
+      },
+      fail(){
+        wx.reLaunch({
+          url: '/pages/error/error'
+        })
       }
     })
   },

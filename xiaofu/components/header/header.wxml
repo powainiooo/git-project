@@ -5,6 +5,7 @@
     <view class="btns">
       <view class="icons icon-gengduo" wx:if="{{showMenu}}" bindtap="openMenu"></view>
       <view class="icons icon-guanbi" wx:if="{{showClose}}" bindtap="doClose"></view>
+      <view class="icon-search" wx:if="{{showRefresh}}" bindtap="doRefresh"></view>
       <view class="icons icon-sousuo" wx:if="{{showSearch}}" data-val="{{false}}" bindtap="toggleSearch"></view>
       <view class="icons icon-fenxiang" wx:if="{{showShare}}"  data-val="{{true}}" bindtap="toggleShare"></view>
     </view>

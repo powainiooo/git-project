@@ -8,10 +8,12 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
     state: {
         showGlobalMenu:Cookies.get('mid'),
+        showGlobalMenuDetail:false,
         isLogin:false,
         userData:{},
         bankData:{},
-        contactData:{}
+        contactData:{},
+        fileurl:''
     },
     mutations: {
         doLogin(state){
@@ -20,10 +22,14 @@ const store = new Vuex.Store({
         doShowGlobalMenu (state,data) {
             state.showGlobalMenu = data
         },
+        doShowGlobalMenuDetail (state,data) {
+            state.showGlobalMenuDetail = data
+        },
         setGlobalData(state,data){
             state.userData = data.data;
             state.bankData = data.bank;
             state.contactData = data.contact;
+            state.fileurl = data.fileurl;
         }
     },
     actions: {

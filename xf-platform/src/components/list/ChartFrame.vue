@@ -11,21 +11,21 @@
             <div id="proChart1"></div>
             <div class="proChart2">
                 <div class="opera">
-                    <RadioGroup v-model="chart2Type">
-                        <Radio label="0">
+                    <RadioGroup v-model="chart2Type" @on-change="dateChange">
+                        <Radio label="1">
                             <span style="font-size: 16px;">点击量(次)</span>
                         </Radio>
-                        <Radio label="1">
+                        <Radio label="2">
                             <span style="font-size: 16px;">销售量</span>
                         </Radio>
                     </RadioGroup>
-                    <DatePicker type="daterange" placement="bottom-end" placeholder="Select date" style="width: 200px"></DatePicker>
+                    <DatePicker type="daterange" placement="bottom-end" placeholder="Select date" style="width: 200px" v-model="dateArr" @on-change="dateChange"></DatePicker>
                 </div>
                 <div id="proChart2" style="height: 310px;"></div>
             </div>
         </div>
         <div class="pr">
-            <DatePicker type="date" placement="bottom-end" placeholder="Select date" style="width: 200px; position: absolute; top: 20px; right: 20px; z-index: 10;"></DatePicker>
+            <DatePicker type="date" placement="bottom-end" placeholder="Select date" style="width: 200px; position: absolute; top: 20px; right: 20px; z-index: 10;" v-model="date" @on-change="dateChange"></DatePicker>
             <div id="proChart3" style="height:460px;background-color: #eeeef0;"></div>
         </div>
     </div>
@@ -37,31 +37,72 @@
         name: 'app',
         data(){
             return{
-                chart2Type:'0'
+                chart2Type:'1',
+                dateArr:[],
+                date:''
             }
         },
         props:['id'],
         mounted(){
+            this.date = new Date();
+            this.dateArr[0] = new Date(this.date.getTime() - 7*24*60*60*1000);
+            this.dateArr[1] = new Date();
             this.getChartData();
-            setTimeout(()=>{
-                this.drawChart1();
-                this.drawChart2();
-                this.drawChart3();
-            },600)
-
         },
         methods:{
             getChartData(){
-                console.log(this.id);
+                let begin = this.dateArr[0].getTime();
+                let end = this.dateArr[1].getTime();
+                let date = this.date.getTime();
                 this.$ajax.get('/client/api/sale_data',{
                     params:{
-                        id:this.id
+                        aid:this.id,
+                        type:this.chart2Type,
+                        begin:begin,
+                        end:end,
+                        date:date
                     }
                 }).then(res=>{
-
+                    let click = res.data.data.click;
+                    let clickData = {
+                        x:[],
+                        y:[]
+                    };
+                    for(let item in click){
+                        clickData.x.push(item);
+                        clickData.y.push(click[item]);
+                    }
+                    let hoursale = res.data.data.hoursale;
+                    let hoursaleData = [],index = 0;
+                    for(let item in hoursale){
+                        hoursaleData[index] = {
+                            name:item,
+                            x:[],
+                            y:[]
+                        };
+                        for(let child in hoursale[item]){
+                            hoursaleData[index].x.push(child);
+                            hoursaleData[index].y.push(hoursale[item][child]);
+                        }
+                        index++;
+                    };
+                    let user = res.data.data.user;
+                    let userData = [];
+                    for(let item in user){
+                        userData.push({
+                            value:user[item],
+                            name:item
+                        })
+                    }
+                    this.drawChart1(userData);
+                    this.drawChart2(clickData);
+                    this.drawChart3(hoursaleData);
                 })
             },
-            drawChart1(){
+            dateChange(date){
+                this.getChartData();
+            },
+            drawChart1(data){
                 let myChart = echarts.init(document.getElementById('proChart1'));
                 myChart.setOption({
                     title:{
@@ -100,17 +141,12 @@
                                 shadowBlur:8,
                                 shadowColor: 'rgba(0, 0, 0, 0.2)'
                             },
-                            data:[
-                                {value:400, name:'深圳'},
-                                {value:130, name:'广州'},
-                                {value:50, name:'北京'},
-                                {value:20, name:'其他'}
-                            ]
+                            data:data
                         }
                     ]
                 })
             },
-            drawChart2(){
+            drawChart2(data){
                 let myChart = echarts.init(document.getElementById('proChart2'));
                 myChart.setOption({
                     tooltip : {
@@ -130,7 +166,7 @@
                         {
                             type : 'category',
                             boundaryGap : false,
-                            data : ['周一','周二','周三','周四','周五','周六','周日']
+                            data : data.x
                         }
                     ],
                     yAxis : [
@@ -149,12 +185,45 @@
                                 emphasis: {color:'#0029a9',borderColor:'#0029a9',borderWidth:4}
                             },
                             lineStyle:{opacity:0},
-                            data:[220, 182, 191, 234, 290, 330, 310]
+                            data:data.y
                         }
                     ]
                 });
             },
-            drawChart3(){
+            drawChart3(data){
+                let all = [];
+                for(let i=0;i<data[0].x.length;i++){
+                    all[i] = 0;
+                    for(let item of data){
+                        all[i] += parseInt(item.y[i]);
+                    }
+                }
+                let series = [{
+                    name:'总数',
+                    type:'line',
+                    stack: '总量',
+                    areaStyle: {normal: {color:'#0029a9',opacity:'0.3'}},
+                    itemStyle:{
+                        normal: {color:'#0029a9',borderColor:'#0029a9',borderWidth:4},
+                        emphasis: {color:'#0029a9',borderColor:'#0029a9',borderWidth:4}
+                    },
+                    lineStyle:{opacity:0},
+                    data:all
+                }];
+                let index = 1,formatter = '';
+                for(let item of data){
+                    series.push({
+                        name:item.name,
+                        type:'line',
+                        stack: '总量',
+                        areaStyle: {normal: {opacity:0}},
+                        itemStyle:{opacity:0},
+                        lineStyle:{opacity:0},
+                        data:item.y
+                    });
+                    formatter += `{a${index}}: {c${index}}<br />`;
+                    index += 1;
+                }
                 let myChart = echarts.init(document.getElementById('proChart3'));
                 myChart.setOption({
                     title:{
@@ -169,7 +238,7 @@
                     tooltip : {
                         trigger: 'axis',
                         padding:[8,20],
-                        formatter: '{a0}: {c0}<br />{a1}: {c1}',
+                        formatter: formatter,
                         backgroundColor:'rgba(13,41,164,1)'
                     },
                     grid: {
@@ -183,7 +252,7 @@
                         {
                             type : 'category',
                             boundaryGap : false,
-                            data : ['周一','周二','周三','周四','周五','周六','周日']
+                            data : data[0].x
                         }
                     ],
                     yAxis : [
@@ -191,29 +260,7 @@
                             type : 'value'
                         }
                     ],
-                    series : [
-                        {
-                            name:'邮件营销',
-                            type:'line',
-                            stack: '总量',
-                            areaStyle: {normal: {color:'#0029a9',opacity:'0.3'}},
-                            itemStyle:{
-                                normal: {color:'#0029a9',borderColor:'#0029a9',borderWidth:4},
-                                emphasis: {color:'#0029a9',borderColor:'#0029a9',borderWidth:4}
-                            },
-                            lineStyle:{opacity:0},
-                            data:[120, 132, 101, 134, 90, 230, 210]
-                        },
-                        {
-                            name:'联盟广告',
-                            type:'line',
-                            stack: '总量',
-                            areaStyle: {normal: {opacity:0}},
-                            itemStyle:{opacity:0},
-                            lineStyle:{opacity:0},
-                            data:[220, 182, 191, 234, 290, 330, 310]
-                        }
-                    ]
+                    series : series
                 });
             }
         }

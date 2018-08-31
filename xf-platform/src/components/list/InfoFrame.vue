@@ -112,11 +112,11 @@
             </div>
         </div>
 
+        <!-- 画布-->
         <div style=" width: 800px; position: fixed; top: -10000px; left: -10000px;">
             <canvas id="poster" width="750" height="760" style=' background-color:#fff;'></canvas>
             <img src="../../../static/img/top.png" id="top" crossOrigin="anonymous">
             <img src="../../../static/img/bottom.png" id="bottom" crossOrigin="anonymous">
-            <!--<img :src="" id="cover" crossOrigin="anonymous">-->
         </div>
 
     </div>

@@ -38,7 +38,9 @@ let router =  new Router({
   ]
 });
 router.beforeEach((to,from,next)=>{
+    store.commit('doShowGlobalMenuDetail',false);
     if(to.name == 'index'){
+        store.commit('doShowGlobalMenu',false);
         next();
     }else{
         if(Cookies.get('xfmid')){

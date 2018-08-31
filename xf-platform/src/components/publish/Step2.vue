@@ -164,7 +164,7 @@
                 let arr1 = this.typeListData;
                 for(let item of arr1){
                     if(item.checked){
-                        if(item.price == '' || item.sale_nums == '' || item.sale_limit == '' || item.name == ''){
+                        if(item.price == '' || item.sale_nums == '' || item.name == ''){
                             this.$emit('input',false);
                             return false;
                         }

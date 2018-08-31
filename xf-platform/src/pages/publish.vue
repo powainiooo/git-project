@@ -11,7 +11,7 @@
         <div class="top-line">
             <div class="name">Step{{step}}</div>
             <t-button extraClass="white" v-if="step == '1'" @dotap="step='2'" :isDisabled="!step1Reg">下一步</t-button>
-            <t-button v-if="step == '2'" @dotap="step == '2'">上一步</t-button>
+            <t-button v-if="step == '2'" @dotap="step = '1'">上一步</t-button>
             <t-button extraClass="white" v-if="step == '2'" @dotap="step='3'" :isDisabled="!step2Reg">下一步</t-button>
             <t-button v-if="step == '3'" @dotap="step='2'">上一步</t-button>
             <t-button extraClass="white" v-if="step == '3'" @dotap="doSubmit" :isDisabled="!step3Reg">完成并提交审核</t-button>

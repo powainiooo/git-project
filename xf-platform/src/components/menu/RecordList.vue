@@ -23,7 +23,7 @@
                     <Option value="1">早鸟票</Option>
                 </Select>
                 <Input v-model="keyword" placeholder="请输入活动名称" style="width: 270px; margin-right: 20px;" />
-                <t-button size="min" style="width: 90px;">查询</t-button>
+                <t-button size="min" style="width: 90px;" @dotap="getListData">查询</t-button>
             </div>
         </div>
         <div style="margin: 20px;">
@@ -42,52 +42,29 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>Disco</td>
-                    <td>2017/08/08</td>
-                    <td><span class="sign1">600</span></td>
-                    <td>早鸟<br>预售<br>普通</td>
-                    <td>100<br>200<br>300</td>
-                    <td>100<br>200<br>300</td>
-                    <td><span class="sign1">125000</span></td>
-                    <td><span class="sign1">125000</span></td>
-                    <td>未可提现</td>
-                </tr>
-                <tr>
-                    <td>Disco</td>
-                    <td>2017/08/08</td>
-                    <td><span class="sign1">600</span></td>
-                    <td>早鸟<br>预售<br>普通</td>
-                    <td>100<br>200<br>300</td>
-                    <td>100<br>200<br>300</td>
-                    <td><span class="sign1">125000</span></td>
-                    <td><span class="sign1">125000</span></td>
-                    <td><t-button size="min" @dotap="$emit('toggle','crashout')">申请提现</t-button></td>
-                </tr>
-                <tr>
-                    <td>Disco</td>
-                    <td>2017/08/08</td>
-                    <td><span class="sign1">600</span></td>
-                    <td>早鸟<br>预售<br>普通</td>
-                    <td>100<br>200<br>300</td>
-                    <td>100<br>200<br>300</td>
-                    <td><span class="sign1">125000</span></td>
-                    <td><span class="sign1">125000</span></td>
-                    <td class="refund">
+                <tr v-for="item in listData">
+                    <td>{{item.goods_name+item.activity}}</td>
+                    <td>{{item.date}}</td>
+                    <td><span class="sign1">{{item.nums}}</span></td>
+                    <td>
+                        <span v-for="listitem in item.classes" style="display: block;">{{listitem.select}}</span>
+                    </td>
+                    <td>
+                        <span v-for="listitem in item.classes" style="display: block;">{{listitem.nums}}</span>
+                    </td>
+                    <td>
+                        <span v-for="listitem in item.classes" style="display: block;">{{listitem.price}}</span>
+                    </td>
+                    <td><span class="sign1">{{item.total}}</span></td>
+                    <td><span class="sign1">{{item.cash}}</span></td>
+                    <td v-if="item.status == 1">未可提现</td>
+                    <td v-if="item.status == 2"><t-button size="min" @dotap="$emit('toggle','crashout',item.id,item.cash)">申请提现</t-button></td>
+                    <td v-if="item.status == 3">已申请</td>
+                    <td v-if="item.status == 4">已提现</td>
+                    <td v-if="item.status == 5">
                         <span>提现失败</span><br><br>
                         <t-ques position="left" width="290"></t-ques>
                     </td>
-                </tr>
-                <tr>
-                    <td>Disco</td>
-                    <td>2017/08/08</td>
-                    <td><span class="sign1">600</span></td>
-                    <td>早鸟<br>预售<br>普通</td>
-                    <td>100<br>200<br>300</td>
-                    <td>100<br>200<br>300</td>
-                    <td><span class="sign1">125000</span></td>
-                    <td><span class="sign1">125000</span></td>
-                    <td class="check">以提现</td>
                 </tr>
                 </tbody>
             </table>
@@ -114,7 +91,7 @@
         methods:{
             getListData(){
                 let self = this;
-                this.$ajax.get('',{
+                this.$ajax.get('/client/api/bills',{
                     params:{
                         keyword:this.keyword,
                         selectType:this.selectType

@@ -17,7 +17,7 @@
 <template>
     <section class="prolist-frame" @scroll="pageScroll($event)">
         <div class="company-name">{{userActivity}}</div>
-        <div class="btn-link" v-if="!showDetail && frameST == 0"><t-button extraClass="white" @dotap="$router.push('publish')">发布新活动</t-button></div>
+        <div class="btn-link" v-if="!showDetail && !showExample && frameST == 0"><t-button extraClass="white" @dotap="$router.push('publish')">发布新活动</t-button></div>
         <example v-if="showExample" @intolist="showExample=false"></example>
 
         <div class="search">
@@ -27,7 +27,7 @@
         <transition enter-active-class="animated anim-detail fadeIn" leave-active-class="animated anim-detail fadeOut">
         <div class="list-content" v-if="!showExample && !showDetail">
             <div v-for="(item,index) in listData" @click="gotoDetail(index)">
-                <list-item :itemdata="item" :fileurl="fileurl"></list-item>
+                <list-item :itemdata="item" :fileurl="fileurl" @dooff="getListData"></list-item>
             </div>
         </div>
         </transition>
@@ -93,7 +93,6 @@
             getListData(){
                 let self = this;
                 this.$ajax.get('/client/api/activity_list').then(res=>{
-                    console.log('list');
                     let data = res.data;
                     if(data.data.length == 0){
                         self.showExample = true;

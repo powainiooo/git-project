@@ -114,20 +114,20 @@
         components:{TUpload,TQues},
         computed:{
             canNext(){
-                let arr1 = this.activityListData;
-                for(let item of arr1){
-                    if(item.imgUrl == '' || item.desc == ''){
-                        this.$emit('input',false);
-                        return false;
-                    }
-                }
-                let arr2 = this.actListData;
-                for(let item of arr2){
-                    if(item.logoUrl == '' || item.imgUrl == ''){
-                        this.$emit('input',false);
-                        return false;
-                    }
-                }
+                //let arr1 = this.activityListData;
+                //for(let item of arr1){
+                //    if(item.imgUrl == '' || item.desc == ''){
+                //        this.$emit('input',false);
+                //        return false;
+                //    }
+                //}
+                //let arr2 = this.actListData;
+                //for(let item of arr2){
+                //    if(item.logoUrl == '' || item.imgUrl == ''){
+                //        this.$emit('input',false);
+                //        return false;
+                //    }
+                //}
                 this.$emit('input',true);
                 return true
             }

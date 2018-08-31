@@ -42,7 +42,7 @@
         </div>
         <div class="base-info-hint">
             <div class="logo-frame">
-                <div class="img"><img :src="userData.logo_img"> </div>
+                <div class="img"><img :src="fileurl+userData.logo_img"> </div>
                 <div class="name">活动方LOGO</div>
             </div>
             <div style="font-size: 14px; color: #888888; margin-top: 60px;">活动方基本信息无法修改，如若有紧急情况需要修改信息，<br>请电话联系18000000000</div>
@@ -56,6 +56,9 @@
         computed:{
             userData(){
                 return this.$store.state.userData
+            },
+            fileurl(){
+                return this.$store.state.fileurl
             }
         },
         data(){

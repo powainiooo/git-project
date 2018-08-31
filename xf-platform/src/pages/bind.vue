@@ -2,7 +2,7 @@
     .bind-frame{ position: relative; overflow: hidden; width: 100vw; height: 100vh;}
     .org-title{ font-size: 157px; color: #fff; position: absolute; right: -10px; top: 0; font-family: 'Helve';}
     .company-title{ position: absolute; left: 0; bottom: 0;}
-    .company-title span{ display: block; font-family: 'Helve'; transform: rotateZ(-90deg) translate(-40px,160px); transform-origin: 0 50%; font-size: 157px; color: #fff;}
+    .company-title span{ display: block; font-family: 'Helve',"Hiragino Sans GB"; transform: rotateZ(-90deg) translate(-40px,160px); transform-origin: 0 50%; font-size: 157px; color: #fff;}
     .bind-form{ position: absolute; bottom: 0; left: 400px; z-index: 100;}
     .bind-form .frame{ width: 900px; height: 710px; box-sizing: border-box; background-color: #ffffff; position: relative; padding: 20px; display: flex;}
     .bind-form .frame:before{ content: ''; width: 100%; height: 3px; background: url("../assets/img/ticket-top.png") repeat-x; position: absolute; left: 0; top: -3px;}
@@ -172,7 +172,7 @@
                     this.warnTop = 180;
                     this.warnTxt = '手机号格式不正确';
                 }else if(name == 'idsnum'){
-                    this.showWarn = !this.pswPass;
+                    this.showWarn = !this.idsnumCheck;
                     this.warnTop = 300;
                     this.warnTxt = '身份证格式不正确';
                 }

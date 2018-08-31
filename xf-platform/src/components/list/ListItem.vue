@@ -57,7 +57,7 @@
             <div class="status status1" v-if="itemdata.status == 1">
                 <div class="top">
                     <p>销售中</p>
-                    <a href="javascript:;" @click.stop="doOff"><Icon type="ios-power" /></a>
+                    <a href="javascript:;" @click.stop="doOff('2')"><Icon type="ios-power" /></a>
                 </div>
                 <div class="type" @click.stop="doSelectType">
                     <p>已销售</p>
@@ -74,7 +74,7 @@
             <div class="status status2" v-if="itemdata.status == 2">
                 <div class="top">
                     <p>已下架</p>
-                    <a href="javascript:;" @click.stop="doOff"><Icon type="ios-power" /></a>
+                    <a href="javascript:;" @click.stop="doOff('1')"><Icon type="ios-power" /></a>
                 </div>
                 <div class="type" @click.stop="doSelectType">
                     <p>已销售</p>
@@ -102,7 +102,7 @@
             <div class="status status5" v-if="itemdata.status == 4">
                 <div class="top">
                     <p>已售罄</p>
-                    <a href="javascript:;" @click.stop="doOff"><Icon type="ios-power" /></a>
+                    <a href="javascript:;" @click.stop="doOff('2')"><Icon type="ios-power" /></a>
                 </div>
                 <div class="type" @click.stop="doSelectType">
                     <p>已销售</p>
@@ -122,8 +122,8 @@
                 </div>
             </div>
             <div class="line-mid" v-if="itemdata.status != ''">
-                <img src="@/assets/img/ticket-middle.png" style="display: block;" v-if="itemdata.status == '1' || itemdata.status == '2' || itemdata.status == '5'">
-                <img src="@/assets/img/ticket-middle2.png" style="display: block;" v-if="itemdata.status == '3' || itemdata.status == '4' || itemdata.status == '6'">
+                <img src="@/assets/img/ticket-middle.png" style="display: block;" v-if="itemdata.status == '1' || itemdata.status == '2' || itemdata.status == '4'">
+                <img src="@/assets/img/ticket-middle2.png" style="display: block;" v-if="itemdata.status == '3' || itemdata.status == '0' || itemdata.status == '5'">
             </div>
             <div class="line-mid" v-if="itemdata.status == ''"><img src="@/assets/img/ticket-top.png" style="display: block;"></div>
             <div class="info-frame">
@@ -145,6 +145,7 @@
 
 <script type='es6'>
     import TButton from '@/components/common/TButton.vue'
+    import qs from 'qs'
     export default {
         name: 'app',
         components:{TButton},
@@ -175,10 +176,31 @@
                 }
                 return ''
             },
-            doOff(){
+            doOff(type){
+                let self = this,title = '',content = '';
+                if(type == '1'){//上架
+                    title = '是否确认上架该票务？';
+                    content = '确认上架后，在小夫有票售票平台将显示该票务，用户可获取该票务信息并进行购买操作。'
+                }else if(type == '2'){//下架
+                    title = '是否确认下架该票务？';
+                    content = '确认下架后，在小夫有票售票平台将隐藏该票务，用户无法获取该票务信息。'
+                }
                 this.$tModal.confirm({
-                    title:'是否确认下架该票务？',
-                    content:'确认下架后，在小夫有票售票平台将隐藏该票务，用户无法获取该票务信息。'
+                    title:title,
+                    content:content,
+                    onOk(){
+                        self.$ajax.post('/client/api/change_act',qs.stringify({
+                            aid:self.itemdata.id,
+                            status:type
+                        })).then(res=>{
+                            if(res.data.status == 1){
+                                self.$Message.success(res.data.msg);
+                                self.$emit('dooff');
+                            }else{
+                                self.$Message.warning(res.data.msg);
+                            }
+                        })
+                    }
                 })
             },
             doSelectType(){

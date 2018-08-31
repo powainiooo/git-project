@@ -15,6 +15,7 @@
     .stpe1-frame .frame .step1 .time-line .inp-line{ width: 120px; margin-left: 0;}
     .stpe1-frame .frame .step1 .ivu-select-single .ivu-select-selection{ height: 40px; border-color: #888888;}
     .stpe1-frame .frame .step1 .ivu-select-single .ivu-select-selection .ivu-select-placeholder, .ivu-select-single .ivu-select-selection .ivu-select-selected-value{ height: 40px; line-height: 40px; color: #888888; font-size: 16px; padding-left: 15px;}
+    .stpe1-frame .frame .step1 .ivu-select-single .ivu-select-selection .ivu-select-selected-value{ color: #000000;}
     .stpe1-frame .frame .step1 .ivu-input-icon{ line-height: 40px;}
     .stpe1-frame .step2 .hint{ font-size: 14px; color: #888888;}
     .stpe1-frame .step2 .hint span{ font-size: 16px; font-weight: bold; margin-right: 4px;}
@@ -32,7 +33,7 @@
                 <h3 class="title"><span>1</span>填写企业基本信息</h3>
                 <div class="mt20">
                     <div class="inp-line">
-                        <Select v-model="formData.city" placeholder="选择城市">
+                        <Select v-model="formData.city" placeholder="选择城市" class="city-select">
                             <Option v-for="item in cityList" :value="item.id" :key="item.id">{{item.name}}</Option>
                             <Option value="999">其他城市</Option>
                         </Select>
@@ -105,9 +106,9 @@
         </div>
         <div class="example-frame">
             <list-item :itemdata="formData" fileurl=""></list-item>
+            <span v-if="canNext"></span>
         </div>
         <span v-show="false">{{activity}}</span>
-        <span v-if="canNext"></span>
     </div>
 </template>
 

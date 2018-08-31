@@ -23,10 +23,10 @@
                 </div>
                 <div class="info-item">
                     <p class="name">提款额</p>
-                    <p class="info">118750元</p>
+                    <p class="info">{{cash}}元</p>
                 </div>
                 <div class="mt60 mb60" style="display: flex; align-items: center;">
-                    <input type="radio" class="radio2" v-model="isNeed" value="0">
+                    <input type="radio" class="radio2" v-model="isNeed" value="2">
                     <span style="font-size: 16px; color: #ffffff; margin-right: 28px; margin-left: 10px;">不需要发票</span>
                     <input type="radio" class="radio2" v-model="isNeed" value="1">
                     <span style="font-size: 16px; color: #ffffff; margin-left: 10px;">需要发票</span>
@@ -65,9 +65,10 @@
         name: 'App',
         components: {TButton},
         mixins: [vericode],
+        props:['id','cash'],
         data(){
             return {
-                isNeed: '0',
+                isNeed: '2',
                 password:'',
                 company:'',
                 ids:'',
@@ -97,19 +98,21 @@
         methods: {
             doSubmit(){
                 let obj = {},self = this;
-                obj.mobile = this.mobile;
+                obj.aid = this.id;
+                obj.phone = this.mobile;
                 obj.vericode = this.vericode;
                 obj.password = this.password;
-                obj.isNeed = this.isNeed;
-                if(this.isNeed == 1){
+                obj.invoice = this.isNeed;
+                obj.cash = this.cash;
+                if(this.isNeed == '1'){
                     obj.company = this.company;
-                    obj.ids = this.ids;
+                    obj.code = this.ids;
                     obj.address = this.address;
-                    obj.phone = this.phone;
+                    obj.mobile = this.phone;
                     obj.bankname = this.bankname;
-                    obj.banknum = this.banknum;
+                    obj.banknum = this.cardnums;
                 }
-                this.$ajax.post('/client/api/register',qs.stringify(obj)).then(res=>{
+                this.$ajax.post('/client/api/apply_cash',qs.stringify(obj)).then(res=>{
 
                 })
             }

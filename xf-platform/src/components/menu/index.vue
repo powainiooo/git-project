@@ -36,7 +36,7 @@
             <crash-out v-if="showCrashOut" @toggle="toggle" :id="cashID"></crash-out>
             <t-laws v-if="showLaws" readonly @close="showLaws=false"></t-laws>
             <contact v-if="showItem == 'contact'" readonly></contact>
-            <div class="copyright" v-if="showItem == 'nav'">
+            <div class="copyright" v-if="showItem == 'nav' || showItem == 'contact'">
                 <i class="icon-logo"></i><br>
                 <span>Copyright &copyright;2018HO.AllRights reserved.粤ICP备16121686号-1</span>
                 <a href="javascript:;" class="logout" @click="doLogout"><Icon type="ios-power" /></a>

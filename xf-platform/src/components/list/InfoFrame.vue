@@ -81,7 +81,8 @@
                 <div class="td4">
                     <t-switch :disabled="item.sale_nums == item.all_nums || isVerify" v-model="item.is_sale_out" true-value="1" false-value="0">
                         <span slot="open">已售罄</span>
-                        <span slot="close">销售中</span>
+                        <span slot="close" v-if="!isVerify">销售中</span>
+                        <span slot="close" v-if="isVerify"></span>
                     </t-switch>
                 </div>
             </li>

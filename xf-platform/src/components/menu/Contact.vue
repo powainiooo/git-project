@@ -12,36 +12,17 @@
     <div class="base-info">
         <div class="base-info-list">
             <div class="info-item">
-                <p class="name">类型</p>
-                <p class="info">{{contactData.type == '1' ? '公司' : '个人'}}</p>
+                <p class="name">合作联系</p>
+                <p class="info" style="width: 300px;">18023095011</p>
             </div>
             <div class="info-item">
-                <p class="name">名称</p>
-                <p class="info">{{contactData.name}}</p>
+                <p class="name">工作邮箱</p>
+                <p class="info" style="width: 300px;">2290907780@qq.com</p>
             </div>
             <div class="info-item">
-                <p class="name">联系地址</p>
-                <p class="info" style="width: 300px;">{{contactData.address}}</p>
+                <p class="name">操作疑问</p>
+                <p class="info" style="width: 300px;">18681438270</p>
             </div>
-            <div class="info-item">
-                <p class="name">负责人</p>
-                <p class="info">{{contactData.person}}</p>
-            </div>
-            <div class="info-item">
-                <p class="name">身份证</p>
-                <p class="info" style="width: 300px;">{{contactData.idnum}}</p>
-            </div>
-            <div class="info-item">
-                <p class="name">联系电话</p>
-                <p class="info">{{contactData.phone}}</p>
-            </div>
-        </div>
-        <div class="base-info-hint">
-            <div class="logo-frame">
-                <div class="img"><img src="@/assets/img/logo2.png"> </div>
-                <div class="name">活动方LOGO</div>
-            </div>
-            <div style="font-size: 14px; color: #888888; margin-top: 60px;">活动方基本信息无法修改，如若有紧急情况需要修改信息，<br>请电话联系18000000000</div>
         </div>
     </div>
 </template>

@@ -4,14 +4,54 @@
     .prolist-frame::-webkit-scrollbar-thumb{ background-color: #ffffff;}
     .prolist-frame .company-name{ font-size: 157px; color: #fff; position: absolute; left:60px; top: 60px; font-family: 'Helve';}
     .prolist-frame .list-content{  width: 1560px; display: flex; margin: 320px auto 100px auto; flex-wrap: wrap;}
-    .prolist-frame .list-content>div{ margin:0 30px 0px 30px;}
+    .prolist-frame .list-content>div{ margin:0 30px 0px 30px; transition: transform 0.3s ease-in-out;}
+    .prolist-frame .list-content>div.touch{ transform: scale(0.96,0.96);}
 
-    .prolist-frame .detail-frame{ width: 100%; height: 100%; display: flex; justify-content: flex-end; align-items: center; overflow: hidden; position: fixed; top: 0; left: 0;}
+    .prolist-frame .detail-frame{ width: 100%; height: 100%; display: flex; justify-content: flex-end; align-items: center; overflow: hidden; position: fixed; top: 0; left: 0; z-index: 400;}
     .prolist-frame .detail-frame .list-item{ margin-right: 60px; margin-top: 270px;}
 
     .prolist-frame .anim-detail{ animation-duration: 0.5s; animation-timing-function: cubic-bezier(.25,.76,.36,.97)}
     .prolist-frame .btn-link{ width: 270px; position: fixed; top: 200px; right: 50px;}
-    .prolist-frame .search{ position: fixed; top: 15px; right: 90px; z-index: 490;}
+    .prolist-frame .search{ position: fixed; top: 15px; right: 90px; z-index: 390;}
+
+    @keyframes bounceIn2 {
+        0%, 20%, 40%, 60%, 80%, to {
+            -webkit-animation-timing-function: cubic-bezier(.215, .61, .355, 1);
+            animation-timing-function: cubic-bezier(.215, .61, .355, 1)
+        }
+        0% {
+            opacity: 0;
+            -webkit-transform: scale3d(.3, .3, .3);
+            transform: scale3d(.3, .3, .3)
+        }
+        20% {
+            -webkit-transform: scale3d(1.1, 1.1, 1.1);
+            transform: scale3d(1.1, 1.1, 1.1)
+        }
+        40% {
+            -webkit-transform: scale3d(.9, .9, .9);
+            transform: scale3d(.9, .9, .9)
+        }
+        /*60% {*/
+            /*opacity: 1;*/
+            /*-webkit-transform: scale3d(1.03, 1.03, 1.03);*/
+            /*transform: scale3d(1.03, 1.03, 1.03)*/
+        /*}*/
+        /*80% {*/
+            /*-webkit-transform: scale3d(.97, .97, .97);*/
+            /*transform: scale3d(.97, .97, .97)*/
+        /*}*/
+        to {
+            opacity: 1;
+            -webkit-transform: scaleX(1);
+            transform: scaleX(1)
+        }
+    }
+
+    .bounceIn2 {
+        -webkit-animation-name: bounceIn2;
+        animation-name: bounceIn2
+    }
 </style>
 
 <template>
@@ -21,19 +61,25 @@
         <example v-if="showExample" @intolist="showExample=false"></example>
 
         <div class="search">
-            <t-search></t-search>
+            <t-search @dosearch="dosearch"></t-search>
         </div>
 
         <transition enter-active-class="animated anim-detail fadeIn" leave-active-class="animated anim-detail fadeOut">
         <div class="list-content" v-if="!showExample && !showDetail">
-            <div v-for="(item,index) in listData" @click="gotoDetail(index)">
-                <list-item :itemdata="item" :fileurl="fileurl" @dooff="getListData"></list-item>
+            <div v-for="(item,index) in listData"
+                 :class="touchIndex == index ? 'touch' : ''"
+                 @mousedown="touchIndex = index"
+                 @mouseup="gotoDetail(index)">
+                <list-item
+                    :itemdata="item"
+                    :fileurl="fileurl"
+                    @dooff="getListData"></list-item>
             </div>
         </div>
         </transition>
 
         <div class="detail-frame" v-show="!showExample && showDetail">
-            <transition enter-active-class="animated bounceIn" leave-active-class="animated bounceOut">
+            <transition enter-active-class="animated bounceIn2" leave-active-class="animated bounceOut">
             <list-item :itemdata="detailData" v-if="showDetail" :fileurl="fileurl"></list-item>
             </transition>
             <transition enter-active-class="animated anim-detail slideInRight" leave-active-class="animated anim-detail slideOutRight">
@@ -60,7 +106,9 @@
                 listData:[],
                 detailData:{},
                 frameST:0,
-                fileurl:''
+                fileurl:'',
+                touchIndex:-1,
+                keyword:''
             }
         },
         computed:{
@@ -69,6 +117,7 @@
             }
         },
         mounted(){
+            this.$store.commit('doShowGlobalMenu',true);
             this.$ajax.defaults.headers.common['mid'] = Cookies.get('xfmid');
             this.$ajax.defaults.headers.common['tokey'] = Cookies.get('xftokey');
             this.$ajax.defaults.baseURL = 'http://ticket.pc-online.cc';
@@ -90,9 +139,17 @@
             this.getListData();
         },
         methods:{
+            dosearch(keyword){
+                this.keyword = keyword;
+                this.getListData();
+            },
             getListData(){
                 let self = this;
-                this.$ajax.get('/client/api/activity_list').then(res=>{
+                this.$ajax.get('/client/api/activity_list',{
+                    params:{
+                        keyword:this.keyword
+                    }
+                }).then(res=>{
                     let data = res.data;
                     if(data.data.length == 0){
                         self.showExample = true;
@@ -100,11 +157,11 @@
                         self.showExample = false;
                         self.listData = data.data;
                         self.fileurl = data.fileurl;
-                        self.$store.commit('doShowGlobalMenu',true);
                     }
                 })
             },
             gotoDetail(index){
+                this.touchIndex = -1;
                 this.detailData = this.listData[index];
                 this.showDetail = true;
             },

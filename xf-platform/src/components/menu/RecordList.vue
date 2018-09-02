@@ -18,9 +18,11 @@
     <div class="record-list">
         <div class="table-opera">
             <div>
-                <Select style="width:130px; margin-right: 20px;" v-model="selectType">
-                    <Option value="0">普通票</Option>
-                    <Option value="1">早鸟票</Option>
+                <Select style="width:130px; margin-right: 20px;" v-model="selectType" placeholder="状态">
+                    <Option value="1">未可提现</Option>
+                    <Option value="2">申请提现</Option>
+                    <Option value="3">提现失败</Option>
+                    <Option value="4">已提现</Option>
                 </Select>
                 <Input v-model="keyword" placeholder="请输入活动名称" style="width: 270px; margin-right: 20px;" />
                 <t-button size="min" style="width: 90px;" @dotap="getListData">查询</t-button>

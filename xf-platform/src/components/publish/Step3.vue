@@ -16,6 +16,7 @@
     .step3-frame .ques1{ position: absolute; top: 78px; left: 558px;}
     .step3-frame .ques2{ position: absolute; top: 78px; right: 20px;}
     .step3-frame .btn-del{ position: absolute; top: 0; right: 18px; font-size:  24px; color: #002aa6;}
+    .step3-frame .act-upload .imgs{ background: linear-gradient(244deg,rgb(0,42,169),rgb(0,61,188));}
 </style>
 
 <template>
@@ -73,13 +74,12 @@
                                 </ul>
                             </t-ques>
                         </div>
-
                     </div>
                     <div class="pr20 pr" v-for="(item,index) in actListData">
                         <a href="javascript:;" class="btn-del" @click="doDelAct(index)" style="right: 15px;"><Icon type="md-close" /></a>
                         <h3 class="index">{{index < 9 ? 0 : ''}}{{index + 1}}</h3>
                         <div class="pl50 pt20 pb20 pr" style="border-bottom: 1px solid #e5e5e5;">
-                            <t-upload v-model="item.logoUrl">
+                            <t-upload v-model="item.logoUrl" :class="item.logoUrl != '' ? 'act-upload' : ''">
                                 <template slot="title">
                                     <h3>艺人LOGO</h3>
                                     <p>尺寸为230px*230px</p>

@@ -14,8 +14,8 @@
 <template>
     <div class="n-upload" :class="simple ? 'min' : ''">
         <div class="imgs">
-            <img :src="imgUrl" v-if="imgUrl != ''" />
-            <a href="javascript:;" class="btn-add"  v-if="imgUrl == ''" @click="openFile"></a>
+            <img :src="value" v-if="value != ''" />
+            <a href="javascript:;" class="btn-add"  v-if="value == ''" @click="openFile"></a>
         </div>
         <div class="infos">
             <slot name="title"></slot>
@@ -23,7 +23,7 @@
                 <slot name="hint"></slot>
             </div>
         </div>
-        <div class="btn" v-if="imgUrl != ''">
+        <div class="btn" v-if="value != ''">
             <t-button @dotap="openFile" size="min">重新上传</t-button>
         </div>
         <input type="file" ref="file" @change="fileChange" accept="image/gif,image/jpeg,image/jpg,image/png,image/svg">
@@ -59,7 +59,7 @@
                 let file = event.target.files[0];
                 let fr = new FileReader();
                 fr.onload = function(result){
-                    self.imgUrl = result.currentTarget.result;
+                    //self.imgUrl = result.currentTarget.result;
                     self.$emit('input',result.currentTarget.result);
                 };
                 fr.readAsDataURL(file);

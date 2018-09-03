@@ -10,7 +10,7 @@
     <div class="publish">
         <div class="top-line">
             <div class="name">Step{{step}}</div>
-            <t-button extraClass="white" v-if="step == '1'" @dotap="step='2'" :isDisabled="!step1Reg">下一步</t-button>
+            <t-button extraClass="white" v-if="step == '1'" @dotap="nextStep" :isDisabled="!step1Reg">下一步</t-button>
             <t-button v-if="step == '2'" @dotap="step = '1'">上一步</t-button>
             <t-button extraClass="white" v-if="step == '2'" @dotap="step='3'" :isDisabled="!step2Reg">下一步</t-button>
             <t-button v-if="step == '3'" @dotap="step='2'">上一步</t-button>
@@ -58,6 +58,17 @@
             this.$ajax.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
         },
         methods:{
+            nextStep(){
+                this.step = '2';
+                let data = this.$refs.step1.formData;
+                this.$store.commit('setStartDate',data.begin+' '+data.hour_b);
+                if(data.type == 1){
+                    this.$store.commit('setEndDate',data.begin+' '+data.hour_e);
+                }else{
+                    this.$store.commit('setEndDate',data.end+' '+data.hour_e);
+                }
+
+            },
             doSubmit(){
                 let self = this;
                 let obj = {},step1 = self.$refs.step1,step2 = self.$refs.step2,step3 = self.$refs.step3;

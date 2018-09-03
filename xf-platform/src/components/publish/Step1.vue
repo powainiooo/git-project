@@ -108,7 +108,7 @@
             <list-item :itemdata="formData" fileurl=""></list-item>
             <span v-if="canNext"></span>
         </div>
-        <span v-show="false">{{activity}}</span>
+        <span v-show="false">{{activity}}{{logoImg}}</span>
     </div>
 </template>
 
@@ -144,14 +144,21 @@
         mounted(){
             setTimeout(()=>{
                 this.getCity();
-            },500)
-
+            },500);
         },
         computed:{
             activity(){
                 let activity = this.$store.state.userData.activity || '';
                 this.formData.activity = activity;
                 return activity
+            },
+            fileurl(){
+                return this.$store.state.fileurl
+            },
+            logoImg(){
+                let img = this.$store.state.userData.logo_img;
+                this.formData.cover = this.fileurl + img;
+                return img
             },
             canNext(){
                 let pass = true,data = this.formData;

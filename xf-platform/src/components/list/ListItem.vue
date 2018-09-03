@@ -57,9 +57,9 @@
             <div class="status status1" v-if="itemdata.status == 1">
                 <div class="top">
                     <p>销售中</p>
-                    <a href="javascript:;" @click.stop="doOff('2')"><Icon type="ios-power" /></a>
+                    <a href="javascript:;" @mouseup.stop="doOff('2')"><Icon type="ios-power" /></a>
                 </div>
-                <div class="type" @click.stop="doSelectType">
+                <div class="type" @mouseup.stop="doSelectType">
                     <p>已销售</p>
                     <Select v-model="selectType">
                         <Option value="0">全部</Option>
@@ -74,9 +74,9 @@
             <div class="status status2" v-if="itemdata.status == 2">
                 <div class="top">
                     <p>已下架</p>
-                    <a href="javascript:;" @click.stop="doOff('1')"><Icon type="ios-power" /></a>
+                    <a href="javascript:;" @mouseup.stop="doOff('1')"><Icon type="ios-power" /></a>
                 </div>
-                <div class="type" @click.stop="doSelectType">
+                <div class="type" @mouseup.stop="doSelectType">
                     <p>已销售</p>
                     <Select v-model="selectType">
                         <Option value="0">全部</Option>
@@ -102,9 +102,9 @@
             <div class="status status5" v-if="itemdata.status == 4">
                 <div class="top">
                     <p>已售罄</p>
-                    <a href="javascript:;" @click.stop="doOff('2')"><Icon type="ios-power" /></a>
+                    <a href="javascript:;" @mouseup.stop="doOff('2')"><Icon type="ios-power" /></a>
                 </div>
-                <div class="type" @click.stop="doSelectType">
+                <div class="type" @mouseup.stop="doSelectType">
                     <p>已销售</p>
                     <Select v-model="selectType">
                         <Option value="0">全部</Option>

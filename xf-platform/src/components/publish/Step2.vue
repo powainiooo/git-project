@@ -113,15 +113,15 @@
                     </div>
                     <div class="inp-line">
                         <h3>显示时间</h3>
-                        <DatePicker format="yyyy/MM/dd HH:mm" type="datetime" placeholder="选择时间" :editable="false" v-model="showTime"></DatePicker>
+                        <DatePicker format="yyyy/MM/dd HH:mm" type="datetime" placeholder="选择时间" :editable="false" v-model="showTime" :options="optionsS"></DatePicker>
                     </div>
                     <div class="inp-line">
                         <h3>开售时间</h3>
-                        <DatePicker format="yyyy/MM/dd HH:mm" type="datetime" placeholder="选择时间" :editable="false" v-model="saleStart"></DatePicker>
+                        <DatePicker format="yyyy/MM/dd HH:mm" type="datetime" placeholder="选择时间" :editable="false" v-model="saleStart" :options="optionsS"></DatePicker>
                     </div>
                     <div class="inp-line">
                         <h3>结束时间</h3>
-                        <DatePicker format="yyyy/MM/dd HH:mm" type="datetime" placeholder="选择时间" :editable="false" v-model="saleEnd"></DatePicker>
+                        <DatePicker format="yyyy/MM/dd HH:mm" type="datetime" placeholder="选择时间" :editable="false" v-model="saleEnd" :options="optionsE"></DatePicker>
                     </div>
                 </div>
             </div>
@@ -161,6 +161,7 @@
             </div>
             <span v-if="canNext"></span>
         </div>
+        <span style="display: none">{{disableDate}}</span>
     </div>
 </template>
 
@@ -193,6 +194,21 @@
                 }
                 this.$emit('input',true);
                 return true
+            },
+            disableDate(){
+                let startDate = this.$store.state.startDate;
+                let endDate = this.$store.state.endDate;
+                this.optionsS = {
+                    disabledDate (date) {
+                        return date && date.valueOf() < new Date(startDate) && date.valueOf() > new Date(endDate);
+                    }
+                };
+                this.optionsE = {
+                    disabledDate (date) {
+                        return date && date.valueOf() > new Date(endDate);
+                    }
+                };
+                return '1'
             }
         },
         data(){
@@ -230,7 +246,17 @@
                 ],
                 noticeListData:[
                     {value:''}
-                ]
+                ],
+                optionsS: {
+                    disabledDate (date) {
+                        return date && date.valueOf() > new Date('2018-09-03');
+                    }
+                },
+                optionsE: {
+                    disabledDate (date) {
+                        return date && date.valueOf() > new Date('2018-09-03');
+                    }
+                }
             }
         },
         methods:{

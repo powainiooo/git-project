@@ -37,7 +37,7 @@
                     <t-button :isDisabled="veriBtnDisabled" size="min" @dotap="getCode">{{codeBtnName}}</t-button>
                 </div>
                 <div class="line"><input type="password" placeholder="密码" v-model="password"></div>
-                <div class="line" style="margin-top: 100px;"><t-button :isDisabled="nextDisabled" @dotap="doSubmit">提交申请</t-button></div>
+                <div class="line" style="margin-top: 100px;"><t-button :isDisabled="nextDisabled" @dotap="doConfirm">提交申请</t-button></div>
             </div>
             <div class="crashout-frame-right" v-if="isNeed == 1">
                 <h3 style="font-size: 14px; color: #ffffff; margin-bottom: 30px; margin-top: 10px;">小夫有票代售服务费发票</h3>
@@ -96,6 +96,16 @@
             }
         },
         methods: {
+            doConfirm(){
+                let self = this;
+                self.$tModal.confirm({
+                    title:'是否确认提交申请？',
+                    content:'请仔细核查活动信息，确认提交申请之后操作不可返回。<br>若是您填写的发票信息有误，小夫有票将不再重复开票。',
+                    onOk(){
+                        self.doSubmit();
+                    }
+                })
+            },
             doSubmit(){
                 let obj = {},self = this;
                 obj.aid = this.id;
@@ -113,8 +123,32 @@
                     obj.banknum = this.cardnums;
                 }
                 this.$ajax.post('/client/api/apply_cash',qs.stringify(obj)).then(res=>{
-
-                })
+                    let data = res.data;
+                    if(data.status == 1){
+                        self.$tModal.warn({
+                            title:'提交成功！',
+                            content:'后台将在5个工作日内完成提现审核，结款将<br>若是您填写的发票信息有误，小夫有票将不再重复开票。',
+                            btn1Name:'返回首页',
+                            onOk(){
+                                self.$router.push('list');
+                                self.$emit('toggle','close');
+                            }
+                        })
+                    }else{
+                        self.$tModal.warn({
+                            title:data.msg
+                        })
+                    }
+                }).catch(function (error) {
+                    self.$tModal.warn({
+                        title:'提交失败！',
+                        content:'由于网络错误、流量拥挤提交失败，<br>请尝试重新提交。',
+                        btn1Name:'重新提交',
+                        onOk(){
+                            self.doSubmit();
+                        }
+                    })
+                });
             }
         }
     }

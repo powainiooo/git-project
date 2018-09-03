@@ -13,7 +13,9 @@ const store = new Vuex.Store({
         userData:{},
         bankData:{},
         contactData:{},
-        fileurl:''
+        fileurl:'',
+        startDate:'',
+        endDate:''
     },
     mutations: {
         doLogin(state){
@@ -24,6 +26,12 @@ const store = new Vuex.Store({
         },
         doShowGlobalMenuDetail (state,data) {
             state.showGlobalMenuDetail = data
+        },
+        setStartDate (state,data) {
+            state.startDate = data
+        },
+        setEndDate (state,data) {
+            state.endDate = data
         },
         setGlobalData(state,data){
             state.userData = data.data;

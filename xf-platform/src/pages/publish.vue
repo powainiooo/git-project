@@ -92,9 +92,9 @@
                         }
                         obj.cate = step2.ticketType;
                         obj.is_idnum = step2.ids;
-                        obj.sale_start = new Date(step2.saleStart).getTime();
-                        obj.sale_end = new Date(step2.saleEnd).getTime();
-                        obj.show_time = new Date(step2.showTime).getTime();
+                        obj.sale_start = new Date(step2.saleStart).getTime()/1000;
+                        obj.sale_end = new Date(step2.saleEnd).getTime()/1000;
+                        obj.show_time = new Date(step2.showTime).getTime()/1000;
                         obj.notify = [];
                         for(let item of step2.noticeListData){
                             obj.notify.push(item.value);

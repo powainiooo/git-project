@@ -9,8 +9,8 @@
 <template>
     <div class="login-frame">
         <h3>登录</h3>
-        <div class="line"><input type="text" placeholder="邮箱/手机" v-model="username"></div>
-        <div class="line"><input type="password" placeholder="密码" v-model="password"></div>
+        <div class="line"><input type="text" placeholder="邮箱/手机" v-model="username" @keyup.enter="doLogin"></div>
+        <div class="line"><input type="password" placeholder="密码" v-model="password" @keyup.enter="doLogin"></div>
         <div class="line"><a href="javascript:;" @click="gotoForget">忘记密码？</a> </div>
         <div class="line" style="margin-top: 35px;"><t-button extraClass="white" :isDisabled="isDisabled" @dotap="doLogin">确认</t-button></div>
     </div>
@@ -43,6 +43,7 @@
             },
             doLogin(){
                 let self = this;
+                if(this.isDisabled) return false;
                 let obj = {
                     email:this.username,
                     password:this.password

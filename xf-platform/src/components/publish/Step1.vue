@@ -24,6 +24,8 @@
     .stpe1-frame .step2 .ids-frame{ display: flex;}
     .stpe1-frame .step2 .ids-frame .upload-frame{ flex: 1;}
     .stpe1-frame .example-frame{ margin-top: -46px;}
+    .stpe1-frame .warn{ width: 130px; position: absolute; top: 482px; left: 350px; background-color: #e73828; padding: 10px 15px; border-radius: 5px; z-index: 50; font-size: 12px; color: #fff;}
+    .stpe1-frame .warn:before{ content: ''; width: 10px; height: 10px; border: 5px solid rgba(0,0,0,0); border-right-color: #e73828; position: absolute; top: 50%; left: -10px; margin-top: -5px;}
 </style>
 
 <template>
@@ -69,8 +71,9 @@
                         </div>
                     </div>
                     <div class="inp-line"><input type="text" placeholder="活动方地址" v-model="formData.address"></div>
-                    <div class="inp-line"><input type="text" placeholder="活动联系电话"  v-model="formData.mobile"></div>
+                    <div class="inp-line"><input type="text" placeholder="活动联系电话"  v-model="formData.mobile" @keyup="inputBlur"></div>
                 </div>
+                <div class="warn" v-if="showWarn">联系电话格式有误</div>
             </div>
             <div class="step2">
                 <h3 class="title"><span>2</span>上传图片</h3>
@@ -138,7 +141,8 @@
                     mobile:'',
                     cover:'',
                     cover2:''
-                }
+                },
+                showWarn:false
             }
         },
         mounted(){
@@ -160,9 +164,17 @@
                 this.formData.cover = this.fileurl + img;
                 return img
             },
+            phoneDisable(){
+                let isPhone = /0\d{2}-\d{7,8}/;
+                let isMob=/^(130|131|132|133|134|135|136|137|138|139)\d{8}$/;
+                if(isPhone.test(this.formData.mobile) || isMob.test(this.formData.mobile)){
+                    return true
+                }
+                return false
+            },
             canNext(){
                 let pass = true,data = this.formData;
-                if(data.city == '' || data.goods_name == '' || data.type == '' || data.begin == '' || data.hour_b == '' || data.hour_e == '' || data.address == '' || data.mobile == '' || data.cover == '' || data.cover2 == ''){
+                if(data.city == '' || data.goods_name == '' || data.type == '' || data.begin == '' || data.hour_b == '' || data.hour_e == '' || data.address == '' || this.phoneDisable || data.cover == '' || data.cover2 == ''){
                     pass = false;
                 }
                 this.$emit('input',pass);
@@ -193,6 +205,9 @@
                         this.formData.type = '3'
                     }
                 }
+            },
+            inputBlur(){
+                this.showWarn = !this.phoneDisable
             }
         }
     }

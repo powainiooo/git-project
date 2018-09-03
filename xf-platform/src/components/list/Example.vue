@@ -7,7 +7,7 @@
     .pro-example .line-r{ position: absolute; top: -40px; left: 348px;}
     .pro-example .line-d{ position: absolute; top: 202px; right: 5px;}
     .pro-example .btns{ width: 270px; margin-top: 80px; margin-left: 20px;}
-    .breath{ animation:breath 2s ease-in-out 2;}
+    .breath{ animation:breath 0.75s ease-in-out 2;}
     @keyframes breath {
         0%,80%,100%{ opacity: 1;}
         40%{ opacity: 0.1;}

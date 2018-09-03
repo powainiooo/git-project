@@ -31,7 +31,12 @@
         <h3>还没注册？</h3>
         <div class="frame" :style="{'padding-top':showAll ? '25px' : '0px'}">
             <p class="title" :style="{height:showAll ? '0px' : '100px'}"><span>2</span>步轻松创建活动方账户</p>
-            <div class="line mt20"><input type="text" placeholder="注册邮箱" v-model="email" :readonly="confirmInfos"></div>
+            <div class="line mt20">
+                <input type="text"
+                       placeholder="注册邮箱"
+                       v-model="email"
+                       @blur="checkAccount"
+                       :readonly="confirmInfos"></div>
             <div class="more" :style="{height:showAll ? '425px' : '0px','margin-bottom':showAll ? '30px' : '0px'}">
                 <div class="line">
                     <input type="text"
@@ -69,7 +74,7 @@
                 </div>
             </div>
             <div style="margin-top: 15px; margin-bottom: 40px;" :class="confirmInfos ? 'hide':''">
-                <t-button @dotap="doNext" v-if="!showAll" :isDisabled="emailDisabled">下一步</t-button>
+                <t-button @dotap="doNext" v-if="!showAll" :isDisabled="emailDisabled || hasAccount">下一步</t-button>
                 <t-button @dotap="doNext2" v-if="showAll" :isDisabled="nextDisabled">下一步</t-button>
             </div>
             <div style="margin-top: 50px; margin-bottom: 42px;" v-if="showAll">
@@ -97,7 +102,8 @@
                 confirmInfos:false,
                 showWarn:false,
                 warnTop:0,
-                warnTxt:''
+                warnTxt:'',
+                hasAccount:true
             }
         },
         computed:{
@@ -152,7 +158,27 @@
                     this.showWarn = this.password != this.confirmPSW;
                     this.warnTop = 330;
                     this.warnTxt = '密码不一致';
+                }else if(name == 'email'){
+                    this.showWarn = this.hasAccount;
+                    this.warnTop = 166;
+                    this.warnTxt = '该帐号已存在';
                 }
+            },
+            checkAccount(){
+                let self = this;
+                self.$ajax.get('/client/api/check_account',{
+                    params:{
+                        email:this.email
+                    }
+                }).then(res=>{
+                    let data = res.data;
+                    if(data.status == 1){
+                        self.hasAccount = false;
+                    }else{
+                        self.hasAccount = true;
+                    }
+                    self.inputBlur('email');
+                })
             }
         }
     }

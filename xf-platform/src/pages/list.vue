@@ -4,13 +4,14 @@
     .prolist-frame::-webkit-scrollbar-thumb{ background-color: #ffffff;}
     .prolist-frame .company-name{ font-size: 157px; color: #fff; position: absolute; left:60px; top: 60px; font-family: 'Helve';}
     .prolist-frame .list-content{  width: 1560px; display: flex; margin: 320px auto 100px auto; flex-wrap: wrap;}
-    .prolist-frame .list-content>div{ margin:0 30px 0px 30px; transition: transform 0.3s ease-in-out;}
+    .prolist-frame .list-content>div{ margin:0 30px; transition: transform 0.15s ease-in-out; cursor: pointer;}
     .prolist-frame .list-content>div.touch{ transform: scale(0.96,0.96);}
 
     .prolist-frame .detail-frame{ width: 100%; height: 100%; display: flex; justify-content: flex-end; align-items: center; overflow: hidden; position: fixed; top: 0; left: 0; z-index: 400;}
     .prolist-frame .detail-frame .list-item{ margin-right: 60px; margin-top: 270px;}
 
     .prolist-frame .anim-detail{ animation-duration: 0.5s; animation-timing-function: cubic-bezier(.25,.76,.36,.97)}
+    .prolist-frame .anim-detail2{ animation-duration: 0s; animation-timing-function: cubic-bezier(.25,.76,.36,.97)}
     .prolist-frame .btn-link{ width: 270px; position: fixed; top: 200px; right: 50px;}
     .prolist-frame .search{ position: fixed; top: 15px; right: 90px; z-index: 390;}
 
@@ -64,7 +65,7 @@
             <t-search @dosearch="dosearch"></t-search>
         </div>
 
-        <transition enter-active-class="animated anim-detail fadeIn" leave-active-class="animated anim-detail fadeOut">
+        <transition enter-active-class="animated anim-detail fadeIn" leave-active-class="animated anim-detail2 fadeOut">
         <div class="list-content" v-if="!showExample && !showDetail">
             <div v-for="(item,index) in listData"
                  :class="touchIndex == index ? 'touch' : ''"
@@ -79,7 +80,7 @@
         </transition>
 
         <div class="detail-frame" v-show="!showExample && showDetail">
-            <transition enter-active-class="animated bounceIn2" leave-active-class="animated bounceOut">
+            <transition enter-active-class="animated anim-detail bounceIn2" leave-active-class="animated bounceOut">
             <list-item :itemdata="detailData" v-if="showDetail" :fileurl="fileurl"></list-item>
             </transition>
             <transition enter-active-class="animated anim-detail slideInRight" leave-active-class="animated anim-detail slideOutRight">
@@ -162,8 +163,11 @@
             },
             gotoDetail(index){
                 this.touchIndex = -1;
-                this.detailData = this.listData[index];
-                this.showDetail = true;
+                setTimeout(()=>{
+                    this.detailData = this.listData[index];
+                    this.showDetail = true;
+                    this.$store.commit('doShowGlobalMenuDetail',false);
+                },200)
             },
             pageScroll(e){
                 this.frameST = e.target.scrollTop;

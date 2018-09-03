@@ -130,7 +130,7 @@
                             if(data.status == 1){
                                 self.$tModal.warn({
                                     title:'提交成功！',
-                                    content:'后台将在3个工作日内完成活动审核，<br>活动票务通过与否，都将以短信形式通知到已注册的手机号上。',
+                                    content:'后台将在3个工作日内完成活动审核，<br>活动票务通过与否，活动票务是否通过审核，请自行登录查询结果。',
                                     btn1Name:'返回首页',
                                     onOk(){
                                         self.$router.push('list');

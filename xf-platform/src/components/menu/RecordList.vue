@@ -18,7 +18,7 @@
     <div class="record-list">
         <div class="table-opera">
             <div>
-                <Select style="width:130px; margin-right: 20px;" v-model="selectType" placeholder="状态">
+                <Select style="width:130px; margin-right: 20px;" v-model="selectType" placeholder="状态" @on-change="getListData">
                     <Option value="1">未可提现</Option>
                     <Option value="2">申请提现</Option>
                     <Option value="3">提现失败</Option>
@@ -52,7 +52,7 @@
                         <span v-for="listitem in item.classes" style="display: block;">{{listitem.select}}</span>
                     </td>
                     <td>
-                        <span v-for="listitem in item.classes" style="display: block;">{{listitem.nums}}</span>
+                        <span v-for="listitem in item.classes" style="display: block;">{{listitem.salenums}}</span>
                     </td>
                     <td>
                         <span v-for="listitem in item.classes" style="display: block;">{{listitem.price}}</span>

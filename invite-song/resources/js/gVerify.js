@@ -20,9 +20,7 @@
 		this.options.numArr = "0,1,2,3,4,5,6,7,8,9".split(",");
 		this.options.letterArr = getAllLetter();
 
-		alert(2);
 		this._init();
-		alert(3);
 		this.refresh();
 	}
 
@@ -55,7 +53,6 @@
 			this.options.code = "";
 			var canvas = document.getElementById(this.options.canvasId);
 			var ctx = canvas.getContext('2d');
-			alert(4);
 			ctx.textBaseline = "middle";
 
 			ctx.fillStyle = randomColor(180, 240);
@@ -69,7 +66,6 @@
 			} else {
 				txtArr = this.options.letterArr;
 			}
-			alert(5);
 			for(var i = 1; i <= 4; i++) {
 				var txt = txtArr[randomNum(0, txtArr.length)];
 				this.options.code += txt;
@@ -90,7 +86,6 @@
 				ctx.rotate(-deg * Math.PI / 180);
 				ctx.translate(-x, -y);
 			}
-			alert(6);
 			/**绘制干扰线**/
 			for(var i = 0; i < 0; i++) {
 				ctx.strokeStyle = randomColor(40, 180);
@@ -99,7 +94,6 @@
 				ctx.lineTo(randomNum(0, this.options.width), randomNum(0, this.options.height));
 				ctx.stroke();
 			}
-			alert(7);
 			/**绘制干扰点**/
 			for(var i = 0; i < this.options.width/10; i++) {
 				ctx.fillStyle = randomColor(0, 255);

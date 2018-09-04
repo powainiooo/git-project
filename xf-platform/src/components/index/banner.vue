@@ -13,27 +13,17 @@
 <template>
     <div class="index-swiper">
         <swiper :options="options" ref="mySwiper" class="my-swiper">
-            <swiper-slide>
+            <swiper-slide v-for="(item,index) in listData"
+                          :key="index"
+                :style="{'background-image':'url('+(file_url+item.img)+')'}">
                 <div class="bg">
                     <div class="logo"><i class="icon-logo"></i></div>
-                    <div class="content">更专业的票务服务1<br>Professional ticketing services</div>
-                </div>
-            </swiper-slide>
-            <swiper-slide>
-                <div class="bg">
-                    <div class="logo"><i class="icon-logo"></i></div>
-                    <div class="content">更专业的票务服务2<br>Professional ticketing services</div>
-                </div>
-            </swiper-slide>
-            <swiper-slide>
-                <div class="bg">
-                    <div class="logo"><i class="icon-logo"></i></div>
-                    <div class="content">更专业的票务服务3<br>Professional ticketing services</div>
+                    <div class="content" v-html="item.desc"></div>
                 </div>
             </swiper-slide>
         </swiper>
         <ul class="tag">
-            <li v-for="(item,index) in 3" :class="index == slideIndex ? 'active' : ''"></li>
+            <li v-for="(item,index) in listData" :class="index == slideIndex ? 'active' : ''"></li>
         </ul>
     </div>
 </template>
@@ -58,11 +48,23 @@
                         }
                     }
                 },
-                slideIndex:0
+                slideIndex:0,
+                listData:[],
+                file_url:''
             }
         },
+        mounted(){
+            this.getData();
+        },
         methods:{
-
+            getData(){
+                let self = this;
+                self.$ajax.get('http://ticket.pc-online.cc/client/api/index_banner').then(res=>{
+                    let data = res.data;
+                    self.listData = data.data.banner;
+                    self.file_url = data.file_url;
+                })
+            }
         }
     }
 

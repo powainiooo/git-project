@@ -7,7 +7,7 @@
     <meta content="black" name="apple-mobile-web-app-status-bar-style">
     <meta content="telephone=no" name="format-detection">
     <meta content="email=no" name="format-detection">
-    <title>体验官招募2</title>
+    <title>体验官招募3</title>
     <link href="resources/css/reset.css?v=18" type="text/css" rel="stylesheet" />
     <link href="resources/css/main.css?v=18" type="text/css" rel="stylesheet" />
 	<script src="resources/js/jquery-2.1.1.min.js" type="application/javascript" language="javascript"></script>
@@ -105,23 +105,24 @@
 </body>
 </html>
 <script>
-//    var endDate = new Date('2018-09-06').getTime();
-//    var nowDate = new Date().getTime();
-//    if(nowDate>endDate){
-//        $("#frame1").hide();
-//        $("#frame4").show();
-//    }
-//    var ajaxUrl = '';
-//    var errCode = {
-//        "40001":"网络繁忙，请稍候再试",
-//        "40002":"本期仅支持云服务宋车主参加哦",
-//        "40003":"您已经是体验官了",
-//        "40004":"请输入短信验证码",
-//        "40005":"验证码错误，请重试",
-//        "40006":"操作太频繁啦，请明天再试",
-//        "40007":"活动已结束"
-//    };
+    var endDate = new Date('2018-09-06').getTime();
+    var nowDate = new Date().getTime();
+    if(nowDate>endDate){
+        $("#frame1").hide();
+        $("#frame4").show();
+    }
+    var ajaxUrl = '';
+    var errCode = {
+        "40001":"网络繁忙，请稍候再试",
+        "40002":"本期仅支持云服务宋车主参加哦",
+        "40003":"您已经是体验官了",
+        "40004":"请输入短信验证码",
+        "40005":"验证码错误，请重试",
+        "40006":"操作太频繁啦，请明天再试",
+        "40007":"活动已结束"
+    };
     //生成图形验证码
+    alert(1);
     var verifyCode = new GVerify("imgCode");
     var verifyCode1 = new GVerify("imgCode1");
     var verifyCode2 = new GVerify("imgCode2");

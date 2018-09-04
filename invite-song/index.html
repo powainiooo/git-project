@@ -7,7 +7,7 @@
     <meta content="black" name="apple-mobile-web-app-status-bar-style">
     <meta content="telephone=no" name="format-detection">
     <meta content="email=no" name="format-detection">
-    <title>体验官招募3</title>
+    <title>体验官招募4</title>
     <link href="resources/css/reset.css?v=19" type="text/css" rel="stylesheet" />
     <link href="resources/css/main.css?v=19" type="text/css" rel="stylesheet" />
 	<script src="resources/js/jquery-2.1.1.min.js" type="application/javascript" language="javascript"></script>
@@ -105,12 +105,14 @@
 </body>
 </html>
 <script>
+    alert('01');
     var endDate = new Date('2018-09-06').getTime();
     var nowDate = new Date().getTime();
     if(nowDate>endDate){
         $("#frame1").hide();
         $("#frame4").show();
     }
+    alert('02');
     var ajaxUrl = '';
     var errCode = {
         "40001":"网络繁忙，请稍候再试",

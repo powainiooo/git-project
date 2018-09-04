@@ -34,6 +34,8 @@
             <input type="text" placeholder="请输入图形验证码" id="imgCodeVal" maxlength="4" autocomplete="off">
             <div class="img"><canvas width="100" height="30" id="imgCode"></canvas></div>
         </div>
+        <div class="img"><canvas width="100" height="30" id="imgCode1"></canvas></div>
+        <div class="img"><canvas width="200" height="60" id="imgCode2"></canvas></div>
         <a href="javascript:;" class="btn mt8 mb15" id="btn1">提交</a>
         <div class="intro">
             <h3>申请条件</h3>
@@ -121,6 +123,8 @@
     };
     //生成图形验证码
     var verifyCode = new GVerify("imgCode");
+    var verifyCode1 = new GVerify("imgCode1");
+    var verifyCode2 = new GVerify("imgCode2");
     var btnDisabled = false;
     //点击提交
     $("#btn1").on('click',function(){

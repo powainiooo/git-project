@@ -7,7 +7,7 @@
     <meta content="black" name="apple-mobile-web-app-status-bar-style">
     <meta content="telephone=no" name="format-detection">
     <meta content="email=no" name="format-detection">
-    <title>体验官招募5</title>
+    <title>体验官招募6</title>
     <link href="resources/css/reset.css?v=19" type="text/css" rel="stylesheet" />
     <link href="resources/css/main.css?v=19" type="text/css" rel="stylesheet" />
 	<script src="resources/js/jquery-2.1.1.min.js" type="application/javascript" language="javascript"></script>
@@ -100,223 +100,223 @@
     </div>
 
     <!--<canvas width="378" height="378" id="mycanvas" style="position: absolute; top: 0; left: 0; z-index: 100;"></canvas>-->
-</body>
-</html>
-<script>
-    window.onload = function(){
-        alert('01');
-        var endDate = new Date('2018-09-06').getTime();
-        var nowDate = new Date().getTime();
-        if(nowDate>endDate){
-            $("#frame1").hide();
-            $("#frame4").show();
-        }
-        alert('02');
-        var ajaxUrl = '';
-        var errCode = {
-            "40001":"网络繁忙，请稍候再试",
-            "40002":"本期仅支持云服务宋车主参加哦",
-            "40003":"您已经是体验官了",
-            "40004":"请输入短信验证码",
-            "40005":"验证码错误，请重试",
-            "40006":"操作太频繁啦，请明天再试",
-            "40007":"活动已结束"
-        };
-        //生成图形验证码
-        alert(1);
-        var verifyCode = new GVerify("imgCode");
-        var btnDisabled = false;
-        //点击提交
-        $("#btn1").on('click',function(){
-            if(btnDisabled) return;
-            var phone = $("#phone").val().replace(/\s/g, "");
-            if(phone == ''){
-                warn('请输入手机号');
-                return;
+    <script>
+        window.onload = function(){
+            alert('01');
+            var endDate = new Date('2018-09-06').getTime();
+            var nowDate = new Date().getTime();
+            if(nowDate>endDate){
+                $("#frame1").hide();
+                $("#frame4").show();
             }
-            if(!(/^1[3456789]\d{9}$/.test(phone))){
-                warn('手机号格式不正确');
-                return;
-            }
-            var imgCode = $("#imgCodeVal").val().replace(/\s/g, "");
-            if(imgCode == ''){
-                warn('请输入验证码');
-                return;
-            }
-            var check = verifyCode.validate(document.getElementById("imgCodeVal").value);
-            if(check){
-                console.log('验证码正确');
-            }else{
-                warn('验证码错误，请重试');
-                return;
-            }
-            btnDisabled = true;
-            $.ajax({
-                type:'POST',
-                url:ajaxUrl+"/wechatprivilege/check",
-                contentType: 'application/json',
-                data:JSON.stringify({
-                    "reqPhone": phone
-                }),
-                success:function(res){
-                    btnDisabled = false;
-                    var data = JSON.parse(res);
-                    if(data.rebackResult == 0){
-                        var phoneChange = phone.substr(0,3)+" "+phone.substr(3,4)+" "+phone.substr(7,4);
-                        $("#phone2").html(phoneChange);
-                        $("#frame1").hide();
-                        $("#frame2").show();
-                        $("#banner1").hide();
-                        $("#banner2").show();
-                        getMsgCode();
-                        $("#codeInput").select();
-                        $("#codeInput").focus();
-                        $("#codeInput").click();
-                    }else{
-                        warn(errCode[data.rebackDesc]);
-                        verifyCode.refresh();
-                        if(data.rebackDesc == '40003'){
+            alert('02');
+            var ajaxUrl = '';
+            var errCode = {
+                "40001":"网络繁忙，请稍候再试",
+                "40002":"本期仅支持云服务宋车主参加哦",
+                "40003":"您已经是体验官了",
+                "40004":"请输入短信验证码",
+                "40005":"验证码错误，请重试",
+                "40006":"操作太频繁啦，请明天再试",
+                "40007":"活动已结束"
+            };
+            //生成图形验证码
+            alert(1);
+            var verifyCode = new GVerify("imgCode");
+            var btnDisabled = false;
+            //点击提交
+            $("#btn1").on('click',function(){
+                if(btnDisabled) return;
+                var phone = $("#phone").val().replace(/\s/g, "");
+                if(phone == ''){
+                    warn('请输入手机号');
+                    return;
+                }
+                if(!(/^1[3456789]\d{9}$/.test(phone))){
+                    warn('手机号格式不正确');
+                    return;
+                }
+                var imgCode = $("#imgCodeVal").val().replace(/\s/g, "");
+                if(imgCode == ''){
+                    warn('请输入验证码');
+                    return;
+                }
+                var check = verifyCode.validate(document.getElementById("imgCodeVal").value);
+                if(check){
+                    console.log('验证码正确');
+                }else{
+                    warn('验证码错误，请重试');
+                    return;
+                }
+                btnDisabled = true;
+                $.ajax({
+                    type:'POST',
+                    url:ajaxUrl+"/wechatprivilege/check",
+                    contentType: 'application/json',
+                    data:JSON.stringify({
+                        "reqPhone": phone
+                    }),
+                    success:function(res){
+                        btnDisabled = false;
+                        var data = JSON.parse(res);
+                        if(data.rebackResult == 0){
+                            var phoneChange = phone.substr(0,3)+" "+phone.substr(3,4)+" "+phone.substr(7,4);
+                            $("#phone2").html(phoneChange);
                             $("#frame1").hide();
-                            $("#frame3").show();
+                            $("#frame2").show();
                             $("#banner1").hide();
                             $("#banner2").show();
-                        }else if(data.rebackDesc == '40007'){
-                            $("#frame1").hide();
-                            $("#frame4").show();
+                            getMsgCode();
+                            $("#codeInput").select();
+                            $("#codeInput").focus();
+                            $("#codeInput").click();
+                        }else{
+                            warn(errCode[data.rebackDesc]);
+                            verifyCode.refresh();
+                            if(data.rebackDesc == '40003'){
+                                $("#frame1").hide();
+                                $("#frame3").show();
+                                $("#banner1").hide();
+                                $("#banner2").show();
+                            }else if(data.rebackDesc == '40007'){
+                                $("#frame1").hide();
+                                $("#frame4").show();
+                            }
                         }
+                    },
+                    error:function(){
+                        btnDisabled = false;
                     }
-                },
-                error:function(){
-                    btnDisabled = false;
+                });
+            });
+
+            $("#codeList").on('click',function(){
+                $("#codeInput").select();
+                $("#codeInput").focus();
+                $("#codeInput").click();
+            });
+            //输入短信验证码
+            $("#codeInput").on('input',function(){
+                $("#codeList li").html('');
+                var valArr = $(this).val().split("");
+                for(var i=0;i<valArr.length;i++){
+                    $("#codeList li").eq(i).html(valArr[i]);
                 }
             });
-        });
 
-        $("#codeList").on('click',function(){
-            $("#codeInput").select();
-            $("#codeInput").focus();
-            $("#codeInput").click();
-        });
-        //输入短信验证码
-        $("#codeInput").on('input',function(){
-            $("#codeList li").html('');
-            var valArr = $(this).val().split("");
-            for(var i=0;i<valArr.length;i++){
-                $("#codeList li").eq(i).html(valArr[i]);
+            //错误提示
+            function warn(txt){
+                $("#warn span").html(txt);
+                $("#warn").css({
+                    'opacity':'1'
+                });
+                setTimeout(function(){
+                    $("#warn").css('opacity','0');
+                },3000)
             }
-        });
 
-        //错误提示
-        function warn(txt){
-            $("#warn span").html(txt);
-            $("#warn").css({
-                'opacity':'1'
-            });
-            setTimeout(function(){
-                $("#warn").css('opacity','0');
-            },3000)
-        }
-
-        //获取验证码
-        let time = 0,t;
-        function getMsgCode(){
-            time = 60;
-            countTime();
-            t = setInterval(countTime,1000);
-            $.ajax({
-                type:'POST',
-                url:ajaxUrl+"/wechatprivilege/getLoginWarrant",
-                contentType: 'application/json',
-                data:JSON.stringify({
-                    reqPhone:$("#phone").val()
-                }),
-                success:function(res){
-                    var data = JSON.parse(res);
-                    if(data.rebackResult == 0){
+            //获取验证码
+            let time = 0,t;
+            function getMsgCode(){
+                time = 60;
+                countTime();
+                t = setInterval(countTime,1000);
+                $.ajax({
+                    type:'POST',
+                    url:ajaxUrl+"/wechatprivilege/getLoginWarrant",
+                    contentType: 'application/json',
+                    data:JSON.stringify({
+                        reqPhone:$("#phone").val()
+                    }),
+                    success:function(res){
+                        var data = JSON.parse(res);
+                        if(data.rebackResult == 0){
 //                    countTime();
 //                    t = setInterval(countTime,1000);
-                    }else{
-                        warn(errCode[data.rebackDesc]);
-                        if(data.rebackDesc == '40007'){
-                            $("#frame1").hide();
-                            $("#frame2").hide();
-                            $("#frame4").show();
-                        }else if(data.rebackDesc == '40006'){
-                            $("#frame2").hide();
-                            $("#frame1").show();
+                        }else{
+                            warn(errCode[data.rebackDesc]);
+                            if(data.rebackDesc == '40007'){
+                                $("#frame1").hide();
+                                $("#frame2").hide();
+                                $("#frame4").show();
+                            }else if(data.rebackDesc == '40006'){
+                                $("#frame2").hide();
+                                $("#frame1").show();
+                            }
                         }
+                    },
+                    error:function(){
+                        btnDisabled = false;
                     }
-                },
-                error:function(){
-                    btnDisabled = false;
+                });
+            }
+            //倒计时
+            function countTime(){
+                if(time == 0){
+                    clearInterval(t);
+                    $("#count span").html("再次获取验证码");
+                }else{
+                    time --;
+                    $("#count span").html(time+"s后获取");
+                }
+            }
+            //点击获取验证码
+            $("#count").on('click',function(){
+                if(time == 0){
+                    getMsgCode();
                 }
             });
-        }
-        //倒计时
-        function countTime(){
-            if(time == 0){
-                clearInterval(t);
-                $("#count span").html("再次获取验证码");
-            }else{
-                time --;
-                $("#count span").html(time+"s后获取");
-            }
-        }
-        //点击获取验证码
-        $("#count").on('click',function(){
-            if(time == 0){
-                getMsgCode();
-            }
-        });
-        //点击完成
-        $("#btn2").on('click',function(){
-            if(btnDisabled) return;
-            var code = $("#codeInput").val().replace(/\s/g, "");
-            if(code == ''){
-                warn('请输入验证码');
-                return;
-            }
-            btnDisabled = true;
-            $.ajax({
-                type:'POST',
-                url:ajaxUrl+"/wechatprivilege/addWxTyy",
-                contentType: 'application/json',
-                data:JSON.stringify({
-                    reqPhone:$("#phone").val().replace(/\s/g, ""),
-                    verifyData:md5(code).toUpperCase()
-                }),
-                success:function(res){
-                    btnDisabled = false;
-                    var data = JSON.parse(res);
-                    if(data.rebackResult == 0){
-                        warn('恭喜您抢到了体验官名额！');
-                        $("#frame2").hide();
-                        $("#frame3").show();
-                    }else{
-                        warn(errCode[data.rebackDesc]);
-                        if(data.rebackDesc == '40007'){
-                            $("#frame1").hide();
-                            $("#frame2").hide();
-                            $("#frame4").show();
-                        }else if(data.rebackDesc == '40006'){
-                            $("#frame2").hide();
-                            $("#frame1").show();
-                        }
-                    }
-                },
-                error:function(){
-                    btnDisabled = false;
+            //点击完成
+            $("#btn2").on('click',function(){
+                if(btnDisabled) return;
+                var code = $("#codeInput").val().replace(/\s/g, "");
+                if(code == ''){
+                    warn('请输入验证码');
+                    return;
                 }
+                btnDisabled = true;
+                $.ajax({
+                    type:'POST',
+                    url:ajaxUrl+"/wechatprivilege/addWxTyy",
+                    contentType: 'application/json',
+                    data:JSON.stringify({
+                        reqPhone:$("#phone").val().replace(/\s/g, ""),
+                        verifyData:md5(code).toUpperCase()
+                    }),
+                    success:function(res){
+                        btnDisabled = false;
+                        var data = JSON.parse(res);
+                        if(data.rebackResult == 0){
+                            warn('恭喜您抢到了体验官名额！');
+                            $("#frame2").hide();
+                            $("#frame3").show();
+                        }else{
+                            warn(errCode[data.rebackDesc]);
+                            if(data.rebackDesc == '40007'){
+                                $("#frame1").hide();
+                                $("#frame2").hide();
+                                $("#frame4").show();
+                            }else if(data.rebackDesc == '40006'){
+                                $("#frame2").hide();
+                                $("#frame1").show();
+                            }
+                        }
+                    },
+                    error:function(){
+                        btnDisabled = false;
+                    }
+                });
             });
-        });
-    }
-
-
-    window.addEventListener("resize", function () {
-        if (document.activeElement.tagName == "INPUT" || document.activeElement.tagName == "TEXTAREA") {
-            window.setTimeout(function () {
-                document.activeElement.scrollIntoViewIfNeeded();
-            }, 0);
         }
-    });
-</script>
+
+
+        window.addEventListener("resize", function () {
+            if (document.activeElement.tagName == "INPUT" || document.activeElement.tagName == "TEXTAREA") {
+                window.setTimeout(function () {
+                    document.activeElement.scrollIntoViewIfNeeded();
+                }, 0);
+            }
+        });
+    </script>
+</body>
+</html>

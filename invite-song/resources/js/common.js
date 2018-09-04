@@ -12,14 +12,3 @@
     };
     recalc();
 })(document, window);
-var wwidth;
-var wheight;
-function setsize(){
-    wwidth = parseInt($(window).width());
-    wheight = parseInt($(window).height());
-    $(".wheight").css("height",wheight);
-}
-window.onload=function(){
-    setsize();
-    setTimeout(setsize,500);
-}

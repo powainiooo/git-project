@@ -8,7 +8,7 @@
     <meta content="telephone=no" name="format-detection">
     <meta content="email=no" name="format-detection">
     <meta http-equiv="Cache-Control" content="no-siteapp" />
-    <title>体验官招募10</title>
+    <title>体验官招募11</title>
     <link href="resources/css/reset.css?v=19" type="text/css" rel="stylesheet" />
     <link href="resources/css/main.css?v=19" type="text/css" rel="stylesheet" />
 	<script src="resources/js/jquery-2.1.1.min.js" type="application/javascript" language="javascript"></script>
@@ -49,7 +49,6 @@
     </div>
 
     <script>
-        window.onload = function(){
             alert('01');
             var endDate = new Date('2018-09-06').getTime();
             var nowDate = new Date().getTime();
@@ -164,7 +163,7 @@
             }
 
             //获取验证码
-            let time = 0,t;
+            var time = 0,t;
             function getMsgCode(){
                 time = 60;
                 countTime();
@@ -255,16 +254,15 @@
                     }
                 });
             });
-        }
 
 
-        window.addEventListener("resize", function () {
-            if (document.activeElement.tagName == "INPUT" || document.activeElement.tagName == "TEXTAREA") {
-                window.setTimeout(function () {
-                    document.activeElement.scrollIntoViewIfNeeded();
-                }, 0);
-            }
-        });
+//        window.addEventListener("resize", function () {
+//            if (document.activeElement.tagName == "INPUT" || document.activeElement.tagName == "TEXTAREA") {
+//                window.setTimeout(function () {
+//                    document.activeElement.scrollIntoViewIfNeeded();
+//                }, 0);
+//            }
+//        });
     </script>
 </body>
 </html>

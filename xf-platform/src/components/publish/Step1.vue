@@ -165,7 +165,7 @@
                 return img
             },
             phoneDisable(){
-                let isPhone = /0\d{2}-\d{7,8}/;
+                let isPhone = /^((0\d{2,3}-\d{7,8})|(1[3584]\d{9}))$/;
                 let isMob=/^(130|131|132|133|134|135|136|137|138|139)\d{8}$/;
                 if(isPhone.test(this.formData.mobile) || isMob.test(this.formData.mobile)){
                     return true
@@ -174,7 +174,7 @@
             },
             canNext(){
                 let pass = true,data = this.formData;
-                if(data.city == '' || data.goods_name == '' || data.type == '' || data.begin == '' || data.hour_b == '' || data.hour_e == '' || data.address == '' || this.phoneDisable || data.cover == '' || data.cover2 == ''){
+                if(data.city == '' || data.goods_name == '' || data.type == '' || data.begin == '' || data.hour_b == '' || data.hour_e == '' || data.address == '' || !this.phoneDisable || data.cover == '' || data.cover2 == ''){
                     pass = false;
                 }
                 this.$emit('input',pass);

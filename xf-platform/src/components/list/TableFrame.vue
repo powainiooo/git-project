@@ -111,9 +111,9 @@
                 console.log(val)
             },
             doExcel(){
-                this.$ajax.get('',{
+                this.$ajax.get('/client/api/out_excel',{
                     params:{
-                        mid:this.id
+                        id:this.itemData.id
                     }
                 }).then(res=>{
 
@@ -128,7 +128,19 @@
                         self.$tModal.confirm({
                             type:'textarea',
                             onOk(txt){
-                                console.log(txt);
+                            self.$ajax.get('/client/api/batch_wxsms',{
+                                    params:{
+                                        id:self.itemData.id,
+                                        content:txt
+                                    }
+                                }).then(res=>{
+                                    let data = res.data;
+                                    if(data.status == '1'){
+                                        self.$Message.success(data.msg);
+                                    }else{
+                                        self.$Message.warning(data.msg);
+                                    }
+                                })
                             }
                         })
                     }

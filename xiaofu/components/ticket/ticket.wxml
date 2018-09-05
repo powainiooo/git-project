@@ -21,7 +21,7 @@
       <image src='{{imgSrc+itemData.cover}}' mode='aspectFit' class='logo-img'></image>
     </view>
   </view>
-  <view class='title'>{{itemData.goods_name}}</view>
+  <view class='title'>{{itemData.goods_name}} | {{itemData.activity}}</view>
   <view class='range'>{{itemData.hour_b}}-{{itemData.hour_e}}</view>
   <view class='address'>{{itemData.address}}</view>
   <view class="imgs-frame {{itemData.is_end == 'over' && isSimple ? 'sold-out' : ''}}">

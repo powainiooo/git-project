@@ -16,7 +16,7 @@
     <div class="n-search" :class="showSearch ? 'n-search-open' : ''">
         <div class="n-search-input">
             <input type="text" placeholder="输入活动名称" v-model="keyword">
-            <a href="javascript:;" @click="showSearch = false"><Icon type="md-close" /></a>
+            <a href="javascript:;" @click="hide"><Icon type="md-close" /></a>
         </div>
         <a href="javascript:;" class="btn-search" @click="toggle"><Icon type="ios-search" /></a>
     </div>
@@ -34,10 +34,15 @@
         methods:{
             toggle(){
                 if(this.showSearch){
-                    this.$emit('dosearch',this.keyword)
+                    this.$emit('dosearch',this.keyword);
                 }else{
                     this.showSearch = true;
                 }
+            },
+            hide(){
+                this.showSearch = false;
+                this.keyword = '';
+                this.$emit('dosearch',this.keyword);
             }
         }
     }

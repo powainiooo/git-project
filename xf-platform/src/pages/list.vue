@@ -30,7 +30,7 @@
         <div class="list-content" v-if="!showExample && !showDetail">
             <div v-for="(item,index) in listData"
                  :class="touchIndex == index ? 'touch' : ''"
-                 @mousedown="touchIndex = index"
+                 @mousedown="mDown(index)"
                  @mouseup="gotoDetail(index)">
                 <list-item
                     :itemdata="item"
@@ -104,6 +104,11 @@
             dosearch(keyword){
                 this.keyword = keyword;
                 this.getListData();
+            },
+            mDown(index){
+                if(data.status != 3){
+                    this.touchIndex = index;
+                }
             },
             getListData(){
                 let self = this;

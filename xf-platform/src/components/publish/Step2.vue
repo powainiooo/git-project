@@ -113,11 +113,11 @@
                     </div>
                     <div class="inp-line">
                         <h3>显示时间</h3>
-                        <DatePicker format="yyyy/MM/dd HH:mm" type="datetime" placeholder="选择时间" :editable="false" v-model="showTime" :options="optionsS" @on-change="dateChange" ></DatePicker>
+                        <DatePicker format="yyyy/MM/dd HH:mm" type="datetime" placeholder="选择时间" :editable="false" v-model="showTime" :options="optionsE" @on-change="dateChange" ></DatePicker>
                     </div>
                     <div class="inp-line">
                         <h3>开售时间</h3>
-                        <DatePicker format="yyyy/MM/dd HH:mm" type="datetime" placeholder="选择时间" :editable="false" v-model="saleStart" :options="optionsS"></DatePicker>
+                        <DatePicker format="yyyy/MM/dd HH:mm" type="datetime" placeholder="选择时间" :editable="false" v-model="saleStart" :options="optionsE"></DatePicker>
                     </div>
                     <div class="inp-line">
                         <h3>结束时间</h3>
@@ -203,11 +203,6 @@
             disableDate(){
                 let startDate = this.$store.state.startDate;
                 let endDate = this.$store.state.endDate;
-                this.optionsS = {
-                    disabledDate (date) {
-                        return date && date.valueOf() <= new Date(startDate)  - 86400000;
-                    }
-                };
                 this.optionsE = {
                     disabledDate (date) {
                         return date && date.valueOf() > new Date(endDate);
@@ -258,11 +253,6 @@
                 noticeListData:[
                     {value:''}
                 ],
-                optionsS: {
-                    disabledDate (date) {
-                        return date && date.valueOf() > new Date('2018-09-03');
-                    }
-                },
                 optionsE: {
                     disabledDate (date) {
                         return date && date.valueOf() > new Date('2018-09-03');

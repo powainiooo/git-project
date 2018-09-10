@@ -16,9 +16,13 @@
     <div class="pro-table">
         <div class="table-opera">
             <div>
-                <t-button size="min" style="width: 90px; margin-right: 30px;" @dotap="doExcel">导出表格</t-button>
-                <t-button size="min" style="width: 90px; margin-right: 30px;" @dotap="doNotify">一次性通知</t-button>
-                <t-ques width="290">
+                <t-button size="min" style="width: 90px; margin-right: 30px;" @dotap="doExcel" :isDisabled="isGetExcel">
+                    <span v-if="!isGetExcel">导出表格</span>
+                    <Spin v-if="isGetExcel"></Spin>
+                    <span v-if="isGetExcel">生成中</span>
+                </t-button>
+                <t-button size="min" style="width: 90px; margin-right: 30px;" @dotap="doNotify" v-if="!isInfor">一次性通知</t-button>
+                <t-ques width="290" v-if="!isInfor">
                     <ul class="list1">
                         <li><span>1</span>一次性通知，仅支持使用一次。</li>
                         <li><span>2</span>通知类型 如：活动取消、活动改期、艺人时间更换、艺人无法到场等。</li>
@@ -84,7 +88,9 @@
                 selectType:'0',
                 listData:[],
                 allnums:0,
-                page:1
+                page:1,
+                isGetExcel:false,
+                isInfor:false
             }
         },
         props:['itemData'],
@@ -111,12 +117,21 @@
                 console.log(val)
             },
             doExcel(){
+                let self = this;
+                self.isGetExcel = true;
                 this.$ajax.get('/client/api/out_excel',{
                     params:{
                         id:this.itemData.id
                     }
                 }).then(res=>{
-
+                    let data = res.data;
+                    self.isGetExcel = false;
+                    if(data.status == 1){
+                        let url = data.url;
+                        window.location = url;
+                    }else{
+                        self.$Message.warning(data.msg);
+                    }
                 })
             },
             doNotify(){
@@ -138,6 +153,7 @@
                                     let data = res.data;
                                     if(data.status == '1'){
                                         self.$Message.success(data.msg);
+                                        self.isInfor = true;
                                     }else{
                                         self.$Message.warning(data.msg);
                                     }

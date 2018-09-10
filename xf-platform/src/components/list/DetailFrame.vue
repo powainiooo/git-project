@@ -2,7 +2,7 @@
     .pro-detail{ width:650px;height: 100%; background-color: #ffffff; overflow-y:scroll; transition: all 0.5s cubic-bezier(.25,.76,.36,.97); padding-top: 140px; position: relative;}
     .pro-detail::-webkit-scrollbar{ width: 3px; background-color: #ffffff;}
     .pro-detail::-webkit-scrollbar-thumb{ background-color: #002aa6;}
-    .pro-detail .opera-line{ width: 100%; box-sizing: border-box; height: 140px; padding: 60px 60px 40px 60px; display: flex; justify-content: space-between; align-items: center; background-color: #ffffff; position: fixed; top: 0; right: 0; z-index: 100; transition: all 0.5s cubic-bezier(.25,.76,.36,.97);}
+    .pro-detail .opera-line{ width: 100%; box-sizing: border-box; height: 140px; padding: 60px 60px 40px 60px; display: flex; justify-content: space-between; align-items: center; background-color: #ffffff; position: absolute; top: 0; right: 0; z-index: 100; transition: all 0.5s cubic-bezier(.25,.76,.36,.97);}
     .pro-detail .opera-line a{ font-size: 40px; height: 40px; color: #012cac;}
     .pro-detail .opera-line a .ivu-icon{ display: block;}
     .pro-detail .opera-line div{ width: 420px; display: flex; justify-content: space-between; align-items: center;}
@@ -14,7 +14,7 @@
 
 <template>
     <div class="pro-detail" :style="{width:showInfo ? '650px' : '1300px'}">
-        <div class="opera-line" :style="{width:showInfo ? '650px' : '1300px'}">
+        <div class="opera-line">
             <span v-show="showInfo"></span>
             <a href="javascript:;" v-show="!showInfo" @click="showInfo = true"><Icon type="ios-arrow-back" /></a>
             <div :class="showInfo ? 'end' : ''">

@@ -42,12 +42,12 @@
                     </div>
                     <div class="inp-line">
                         <input type="text" placeholder="活动方标题" v-model="formData.goods_name">
-                        <t-ques width="290" :redbg="errorData.goods_id != -1" style="z-index: 410;">
-                            <ul class="list1" v-if="errorData.goods_id == -1">
+                        <t-ques width="290" :redbg="errorData.goods_name != ''" style="z-index: 410;">
+                            <ul class="list1" v-if="errorData.goods_name == ''">
                                 <li><span>1</span>活动标题名称 | 活动方名称<br>Blue-icon | 小夫有票</li>
                                 <li><span>2</span>如未按固定格式命名，<br>将无法通过审核。</li>
                             </ul>
-                            <ul class="list1" v-if="errorData.goods_id != -1">
+                            <ul class="list1" v-if="errorData.goods_name != ''">
                                 <li>{{errorData.goods_name}}</li>
                             </ul>
                         </t-ques>

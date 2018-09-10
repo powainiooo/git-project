@@ -14,7 +14,7 @@
     .stpe1-frame .frame .step1 .time-line{ width: 270px; display: flex; justify-content: space-between; margin-left: 45px;}
     .stpe1-frame .frame .step1 .time-line .inp-line{ width: 120px; margin-left: 0;}
     .stpe1-frame .frame .step1 .ivu-select-single .ivu-select-selection{ height: 40px; border-color: #888888;}
-    .stpe1-frame .frame .step1 .ivu-select-single .ivu-select-selection .ivu-select-placeholder, .ivu-select-single .ivu-select-selection .ivu-select-selected-value{ height: 40px; line-height: 40px; color: #888888; font-size: 16px; padding-left: 15px;}
+    .stpe1-frame .frame .step1 .ivu-select-single .ivu-select-selection .ivu-select-placeholder, .stpe1-frame .frame .step1 .ivu-select-single .ivu-select-selection .ivu-select-selected-value{ height: 40px; line-height: 40px; color: #888888; font-size: 16px; padding-left: 15px;}
     .stpe1-frame .frame .step1 .ivu-select-single .ivu-select-selection .ivu-select-selected-value{ color: #000000;}
     .stpe1-frame .frame .step1 .ivu-input-icon{ line-height: 40px;}
     .stpe1-frame .step2 .hint{ font-size: 14px; color: #888888;}
@@ -60,10 +60,24 @@
                         </Select>
                     </div>
                     <div class="inp-line" v-if="formData.type == 1">
-                        <DatePicker format="yyyy/MM/dd" type="date" placeholder="活动日期" :editable="false" :disabled="formData.type == ''" @on-change="dateChange" style="width: 100%;"></DatePicker>
+                        <DatePicker format="yyyy/MM/dd"
+                                    type="date"
+                                    placeholder="活动日期"
+                                    :editable="false"
+                                    :disabled="formData.type == ''"
+                                    @on-change="dateChange"
+                                    :value="dateVal"
+                                    style="width: 100%;"></DatePicker>
                     </div>
                     <div class="inp-line" v-if="formData.type != 1">
-                        <DatePicker format="yyyy/MM/dd" type="daterange" placeholder="活动日期" :editable="false" :disabled="formData.type == ''" @on-change="dateChange" style="width: 100%;"></DatePicker>
+                        <DatePicker format="yyyy/MM/dd"
+                                    type="daterange"
+                                    placeholder="活动日期"
+                                    :editable="false"
+                                    :disabled="formData.type == ''"
+                                    @on-change="dateChange"
+                                    :value="dateVal"
+                                    style="width: 100%;"></DatePicker>
                     </div>
                     <div class="time-line">
                         <div class="inp-line">
@@ -159,6 +173,7 @@
                     cover:'',
                     cover2:''
                 },
+                dateVal:'',
                 showWarn:false
             }
         },
@@ -226,6 +241,11 @@
                 this.formData.mobile = data.mobile;
                 this.formData.cover = fileurl + data.cover;
                 this.formData.cover2 = fileurl + data.cover2;
+                if(data.type == 1){
+                    this.dateVal = this.formData.begin;
+                }else{
+                    this.dataVal = this.formData.begin +' - '+this.formData.end;
+                }
             },
             typeChange(){
                 this.formData.begin = '';

@@ -125,8 +125,8 @@
             gotoDetail(index){
                 let data = this.listData[index];
                 if(data.status == 3){//审核未通过
-                    this.$store.commit('setEditorData',data);
-                    this.$router.push('publish');
+                    //this.$store.commit('setEditorData',data);
+                    //this.$router.push('publish');
                 }else{
                     this.touchIndex = -1;
                     setTimeout(()=>{

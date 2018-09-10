@@ -104,7 +104,9 @@
             <div class="status status4" v-if="itemdata.status == 3">
                 <div class="top">
                     <p>审核未通过<br>Unapprove</p>
-                    <div style="width: 110px; align-self: flex-end; margin-bottom: 40px;"><t-button extraClass="white" size="min">查看并修改</t-button></div>
+                    <div style="width: 110px; align-self: flex-end; margin-bottom: 40px;" @mousedown.stop="stopFunc" @mouseup.stop="stopFunc">
+                        <t-button extraClass="white" size="min" @dotap="doEditor">查看并修改</t-button>
+                    </div>
                 </div>
             </div>
             <div class="status status5" v-if="itemdata.status == 4">
@@ -187,6 +189,10 @@
                     }
                 }
                 return ''
+            },
+            doEditor(){
+                this.$store.commit('setEditorData',this.itemdata);
+                this.$router.push('publish');
             },
             doOff(type){
                 let self = this,title = '',content = '';

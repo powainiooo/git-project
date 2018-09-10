@@ -113,7 +113,7 @@
                     </div>
                     <div class="inp-line">
                         <h3>显示时间</h3>
-                        <DatePicker format="yyyy/MM/dd HH:mm" type="datetime" placeholder="选择时间" :editable="false" v-model="showTime" :options="optionsS"></DatePicker>
+                        <DatePicker format="yyyy/MM/dd HH:mm" type="datetime" placeholder="选择时间" :editable="false" v-model="showTime" :options="optionsS" @on-change="dateChange" ></DatePicker>
                     </div>
                     <div class="inp-line">
                         <h3>开售时间</h3>
@@ -170,6 +170,7 @@
 
 <script type='es6'>
     import TQues from '@/components/common/TQues.vue'
+    import {formatDate} from '@/assets/js/date.js'
     export default {
         name: 'app',
         components:{TQues},
@@ -270,6 +271,9 @@
             }
         },
         methods:{
+            dateChange(date){
+                console.log(this.showTime);
+            },
             dataInit(){
                 let editorData = this.$store.state.editorData;
                 let classes = editorData.classes;
@@ -300,9 +304,12 @@
                 }
                 this.ticketType = editorData.cate;
                 this.ids = editorData.is_idnum;
-                this.saleStart = editorData.sale_start;
-                this.saleEnd = editorData.sale_end;
-                this.showTime = editorData.show_time;
+                let saleStart = formatDate(new Date(parseInt(editorData.sale_start)*1000),'yyyy/MM/dd HH:mm');
+                this.saleStart = saleStart;
+                let saleEnd = formatDate(new Date(parseInt(editorData.sale_end)*1000),'yyyy/MM/dd HH:mm');
+                this.saleEnd = saleEnd;
+                let showTime = formatDate(new Date(parseInt(editorData.show_time)*1000),'yyyy/MM/dd HH:mm');
+                this.showTime = showTime;
                 let notify = editorData.notify;
                 for(let i=0;i<notify.length;i++){
                     this.noticeListData[i] = {

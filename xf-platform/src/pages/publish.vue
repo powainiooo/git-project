@@ -17,13 +17,13 @@
             <t-button extraClass="white" v-if="step == '3'" @dotap="doSubmit" :isDisabled="!step3Reg">完成并提交审核</t-button>
         </div>
         <transition enter-active-class="animated anim05 slideInUp">
-        <step1 v-show="step == '1'" ref="step1" v-model="step1Reg"></step1>
+        <step1 v-show="step == '1'" ref="step1" v-model="step1Reg" :errorData="errorData"></step1>
         </transition>
         <transition enter-active-class="animated anim05 slideInUp">
-        <step2 v-show="step == '2'" ref="step2" v-model="step2Reg"></step2>
+        <step2 v-show="step == '2'" ref="step2" v-model="step2Reg" :errorData="errorData"></step2>
         </transition>
         <transition enter-active-class="animated anim05 slideInUp">
-        <step3 v-show="step == '3'" ref="step3" v-model="step3Reg"></step3>
+        <step3 v-show="step == '3'" ref="step3" v-model="step3Reg" :errorData="errorData"></step3>
         </transition>
     </div>
 </template>
@@ -43,7 +43,17 @@
                 step:'1',
                 step1Reg:false,
                 step2Reg:false,
-                step3Reg:false
+                step3Reg:false,
+                errorData:{
+                    goods_id:-1,
+                    address:'',
+                    cover:'',
+                    cover2:'',
+                    goods_name:'',
+                    goods_desc:[],
+                    notify:[],
+                    person_desc:[]
+                }
             }
         },
         computed:{
@@ -56,6 +66,10 @@
             this.$ajax.defaults.headers.common['tokey'] = Cookies.get('xftokey');
             this.$ajax.defaults.baseURL = 'http://ticket.pc-online.cc';
             this.$ajax.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+            let editorData = this.$store.state.editorData;
+            if(editorData.id != -1){
+                this.getError(editorData.id);
+            }
         },
         methods:{
             nextStep(){
@@ -68,6 +82,21 @@
                     this.$store.commit('setEndDate',data.end+' '+data.hour_e);
                 }
 
+            },
+            getError(id){
+                let self = this;
+                this.$ajax.get('/client/api/activity_checked',{
+                    params:{
+                        id:id
+                    }
+                }).then(res=>{
+                    let data = res.data;
+                    if(data.status == 1){
+                        self.errorData = data.data;
+                    }else{
+                        self.$Message.warning(data.msg);
+                    }
+                })
             },
             doSubmit(){
                 let self = this;
@@ -124,8 +153,13 @@
                                 picture:item.imgUrl
                             })
                         }
+                        let editorData = self.$store.state.editorData,ajaxSrc = '/client/api/activity_add';
+                        if(editorData.id != -1){
+                            obj.id = editorData.id;
+                            ajaxSrc = '/client/api/act_update';
+                        }
                         //console.log(obj);
-                        self.$ajax.post('/client/api/activity_add',qs.stringify(obj)).then(res=>{
+                        self.$ajax.post(ajaxSrc,qs.stringify(obj)).then(res=>{
                             let data = res.data;
                             if(data.status == 1){
                                 self.$tModal.warn({

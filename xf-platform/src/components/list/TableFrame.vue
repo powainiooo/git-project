@@ -134,6 +134,7 @@
                                         content:txt
                                     }
                                 }).then(res=>{
+                                    console.log(res);
                                     let data = res.data;
                                     if(data.status == '1'){
                                         self.$Message.success(data.msg);

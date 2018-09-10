@@ -132,16 +132,19 @@
                     <div class="title ml20" style="padding-left: 0;">
                         <h3 style="padding-left: 10px;"><span>5</span>活动须知及联系</h3>
                         <div class="ques2">
-                            <t-ques>
-                                <ul class="list2 mb30">
+                            <t-ques :redbg="errorData.notify.length != 0">
+                                <ul class="list2 mb30" v-if="errorData.notify.length == 0">
                                     <li><span>Demo</span></li>
                                     <li><span>01</span>本门票只能在深圳xxx使用</li>
                                     <li><span>02</span>请遵守法律法规，不要吸食毒品，拒绝黄赌毒侵蚀活动现场。</li>
                                     <li><span>03</span>未满18岁请勿购买，概不退换。</li>
                                 </ul>
-                                <ul class="list1">
+                                <ul class="list1" v-if="errorData.notify.length == 0">
                                     <li><span>1</span>每条须知的字数在30字内</li>
                                     <li><span>2</span>请合理使用须知，为了方便用户阅读，不相关的须知可以通过新增须知来填写</li>
+                                </ul>
+                                <ul class="list1" v-if="errorData.notify.length != 0">
+                                    <li v-for="(item,index) in errorData.notify"><span>{{index+1}}</span>{{item}}</li>
                                 </ul>
                             </t-ques>
                         </div>
@@ -170,6 +173,7 @@
     export default {
         name: 'app',
         components:{TQues},
+        props:['errorData'],
         computed:{
             canNext(){
                 let arr1 = this.typeListData;
@@ -200,7 +204,7 @@
                 let endDate = this.$store.state.endDate;
                 this.optionsS = {
                     disabledDate (date) {
-                        return date && date.valueOf() < new Date(startDate) && date.valueOf() > new Date(endDate);
+                        return date && date.valueOf() <= new Date(startDate)  - 86400000;
                     }
                 };
                 this.optionsE = {
@@ -209,6 +213,12 @@
                     }
                 };
                 return '1'
+            }
+        },
+        mounted(){
+            let editorData = this.$store.state.editorData;
+            if(editorData.id != -1){
+                this.dataInit();
             }
         },
         data(){
@@ -260,6 +270,46 @@
             }
         },
         methods:{
+            dataInit(){
+                let editorData = this.$store.state.editorData;
+                let classes = editorData.classes;
+                let thisC = this.typeListData;
+                for(let item of classes){
+                    let reg = new RegExp(item.select),isFit = false;
+                    for(let i=0;i<thisC.length;i++){
+                        if(reg.test(thisC[i].name)){
+                            isFit = true;
+                            thisC[i].checked = true;
+                            thisC[i].isDefault = true;
+                            thisC[i].name = item.select;
+                            thisC[i].price = item.price;
+                            thisC[i].sale_nums = item.nums;
+                            thisC[i].sale_limit = item.max;
+                        }
+                    }
+                    if(!isFit){
+                        thisC.push({
+                            checked:true,
+                            isDefault:false,
+                            name:item.select,
+                            price:item.price,
+                            sale_nums:item.salenums,
+                            sale_limit:item.max
+                        })
+                    }
+                }
+                this.ticketType = editorData.cate;
+                this.ids = editorData.is_idnum;
+                this.saleStart = editorData.sale_start;
+                this.saleEnd = editorData.sale_end;
+                this.showTime = editorData.show_time;
+                let notify = editorData.notify;
+                for(let i=0;i<notify.length;i++){
+                    this.noticeListData[i] = {
+                        value:notify[i]
+                    }
+                }
+            },
             newTypeItem(){
                 this.typeListData.push({
                     checked:true,

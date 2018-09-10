@@ -42,10 +42,13 @@
                     </div>
                     <div class="inp-line">
                         <input type="text" placeholder="活动方标题" v-model="formData.goods_name">
-                        <t-ques width="290" style="z-index: 410;">
-                            <ul class="list1">
+                        <t-ques width="290" :redbg="errorData.goods_id != -1" style="z-index: 410;">
+                            <ul class="list1" v-if="errorData.goods_id == -1">
                                 <li><span>1</span>活动标题名称 | 活动方名称<br>Blue-icon | 小夫有票</li>
                                 <li><span>2</span>如未按固定格式命名，<br>将无法通过审核。</li>
+                            </ul>
+                            <ul class="list1" v-if="errorData.goods_id != -1">
+                                <li>{{errorData.goods_name}}</li>
                             </ul>
                         </t-ques>
                     </div>
@@ -70,7 +73,14 @@
                             <TimePicker format="HH:mm" type="time" placeholder="活动时间" v-model="formData.hour_e" :editable="false"></TimePicker>
                         </div>
                     </div>
-                    <div class="inp-line"><input type="text" placeholder="活动方地址" v-model="formData.address"></div>
+                    <div class="inp-line">
+                        <input type="text" placeholder="活动方地址" v-model="formData.address">
+                        <t-ques width="290" redbg v-if="errorData.address != ''" style="z-index: 410;">
+                            <ul class="list1">
+                                <li>{{errorData.address}}</li>
+                            </ul>
+                        </t-ques>
+                    </div>
                     <div class="inp-line"><input type="text" placeholder="活动联系电话"  v-model="formData.mobile" @keyup="inputBlur"></div>
                 </div>
                 <div class="warn" v-if="showWarn">联系电话格式有误</div>
@@ -83,10 +93,13 @@
                             <h3>活动方logo</h3>
                         </template>
                     </t-upload>
-                    <t-ques style="position: absolute; left: 170px; top: 30px;">
-                        <ul class="list1">
+                    <t-ques :redbg="errorData.cover != ''" style="position: absolute; left: 170px; top: 30px;">
+                        <ul class="list1" v-if="errorData.cover == ''">
                             <li><span>1</span>上传尺寸在200px*140px的正方形区域内</li>
                             <li><span>2</span>图片为透明底黑图案PNG格式，LOGO统一使用R0 G0 B0 色值</li>
+                        </ul>
+                        <ul class="list1" v-if="errorData.cover != ''">
+                            <li>{{errorData.cover}}</li>
                         </ul>
                     </t-ques>
                 </div>
@@ -97,11 +110,14 @@
                             <p>海报尺寸为750px*650px</p>
                         </template>
                     </t-upload>
-                    <t-ques style="position: absolute; left: 170px; top: 30px;">
-                        <div class="tc mb30"><img src="@/assets/img/img-hint.png"> </div>
-                        <ul class="list1">
+                    <t-ques :redbg="errorData.cover2 != ''" style="position: absolute; left: 170px; top: 30px;">
+                        <div class="tc mb30" v-if="errorData.cover2 == ''"><img src="@/assets/img/img-hint.png"> </div>
+                        <ul class="list1" v-if="errorData.cover2 == ''">
                             <li><span>1</span>海报尺寸为750px*650px</li>
                             <li><span>2</span>列表的预览图会截取中间红色部分作为展示，请按照尺寸进行合理的海报制作</li>
+                        </ul>
+                        <ul class="list1" v-if="errorData.cover2 != ''">
+                            <li>{{errorData.cover2}}</li>
                         </ul>
                     </t-ques>
                 </div>
@@ -123,6 +139,7 @@
     export default {
         name: 'app',
         components:{TButton,TUpload,ListItem,TQues},
+        props:['errorData'],
         data(){
             let self = this;
             return{
@@ -146,6 +163,10 @@
             }
         },
         mounted(){
+            let editorData = this.$store.state.editorData;
+            if(editorData.id != -1){
+                this.dataInit();
+            }
             setTimeout(()=>{
                 this.getCity();
             },500);
@@ -187,7 +208,24 @@
                 this.$ajax.get('/client/api/city_list').then(res=>{
                     let data = res.data;
                     self.cityList = data.data.citys;
+                    let editorData = this.$store.state.editorData;
+                    if(editorData.id != -1){
+                        self.formData.city = editorData.city;
+                    }
                 })
+            },
+            dataInit(){
+                let data = this.$store.state.editorData,fileurl = this.$store.state.fileurl;
+                this.formData.goods_name = data.goods_name;
+                this.formData.type = data.type;
+                this.formData.begin = data.begin;
+                this.formData.end = data.end;
+                this.formData.hour_b = data.hour_b;
+                this.formData.hour_e = data.hour_e;
+                this.formData.address = data.address;
+                this.formData.mobile = data.mobile;
+                this.formData.cover = fileurl + data.cover;
+                this.formData.cover2 = fileurl + data.cover2;
             },
             typeChange(){
                 this.formData.begin = '';

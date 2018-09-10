@@ -35,10 +35,13 @@
                     <div class="title" style="margin-left: 20px; padding-left: 30px;">
                         <h3><span>1</span>活动详情(选填)</h3>
                         <div>
-                            <t-ques>
-                                <ul class="list1">
+                            <t-ques :redbg="errorData.goods_desc.length != 0">
+                                <ul class="list1" v-if="errorData.goods_desc.length == 0">
                                     <li><span>1</span>上传图片尺寸为660px*333px</li>
                                     <li><span>2</span>一张图片对应一段文字，可增添多个图片及对应文字，最多限制6张图</li>
+                                </ul>
+                                <ul class="list1" v-if="errorData.goods_desc.length != 0">
+                                    <li v-for="(item,index) in errorData.goods_desc"><span>{{index+1}}</span>图片：{{item.img == '' ? '无' : item.img}}；文案：{{item.desc == '' ? '无' : item.desc}}</li>
                                 </ul>
                             </t-ques>
                         </div>
@@ -67,10 +70,13 @@
                     <div class="title" style="margin-left: 20px; padding-left: 30px;">
                         <h3><span>2</span>上传艺人图片(选填)</h3>
                         <div>
-                            <t-ques>
-                                <ul class="list1">
+                            <t-ques :redbg="errorData.person_desc.length != 0">
+                                <ul class="list1" v-if="errorData.person_desc.length == 0">
                                     <li><span>1</span>艺人logo尺寸为230px*230px</li>
                                     <li><span>2</span>一个艺人logo对应上传一个艺人照片</li>
+                                </ul>
+                                <ul class="list1" v-if="errorData.person_desc.length != 0">
+                                    <li v-for="(item,index) in errorData.person_desc"><span>{{index+1}}</span>logo：{{item.img == '' ? '无' : item.img}}；照片：{{item.picture == '' ? '无' : item.picture}}</li>
                                 </ul>
                             </t-ques>
                         </div>
@@ -112,6 +118,7 @@
     export default {
         name: 'app',
         components:{TUpload,TQues},
+        props:['errorData'],
         computed:{
             canNext(){
                 //let arr1 = this.activityListData;
@@ -132,23 +139,46 @@
                 return true
             }
         },
+        mounted(){
+            let editorData = this.$store.state.editorData;
+            if(editorData.id != -1){
+                this.dataInit();
+            }else{
+                this.activityListData.push({
+                    imgUrl:'',
+                    desc:''
+                });
+                this.actListData.push({
+                    logoUrl:'',
+                    imgUrl:''
+                })
+            }
+
+        },
         data(){
             return{
-                activityListData:[
-                    {
-                        imgUrl:'',
-                        desc:''
-                    }
-                ],
-                actListData:[
-                    {
-                        logoUrl:'',
-                        imgUrl:''
-                    }
-                ]
+                activityListData:[],
+                actListData:[]
             }
         },
         methods:{
+            dataInit(){
+                let editorData = this.$store.state.editorData,fileurl = this.$store.state.fileurl;
+                let list1 = editorData.goods_desc;
+                for(let i=0;i<list1.length;i++){
+                    this.activityListData.push({
+                        imgUrl:fileurl+list1[i].img,
+                        desc:list1[i].desc
+                    })
+                }
+                let list2 = editorData.person_desc;
+                for(let i=0;i<list2.length;i++){
+                    this.actListData.push({
+                        logoUrl:fileurl+list2[i].img,
+                        imgUrl:fileurl+list2[i].picture
+                    })
+                }
+            },
             newActivityItem(){
                 this.activityListData.push({
                     imgUrl:'',

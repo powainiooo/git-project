@@ -15,7 +15,8 @@ const store = new Vuex.Store({
         contactData:{},
         fileurl:'',
         startDate:'',
-        endDate:''
+        endDate:'',
+        editorData:{id:-1}
     },
     mutations: {
         doLogin(state){
@@ -29,6 +30,9 @@ const store = new Vuex.Store({
         },
         setStartDate (state,data) {
             state.startDate = data
+        },
+        setEditorData (state,data = {id:-1}) {
+            state.editorData = data;
         },
         setEndDate (state,data) {
             state.endDate = data

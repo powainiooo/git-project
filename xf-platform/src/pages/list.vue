@@ -14,51 +14,12 @@
     .prolist-frame .anim-detail2{ animation-duration: 0s; animation-timing-function: cubic-bezier(.25,.76,.36,.97)}
     .prolist-frame .btn-link{ width: 270px; position: fixed; top: 200px; right: 50px;}
     .prolist-frame .search{ position: fixed; top: 15px; right: 90px; z-index: 390;}
-
-    @keyframes bounceIn2 {
-        0%, 20%, 40%, 60%, 80%, to {
-            -webkit-animation-timing-function: cubic-bezier(.215, .61, .355, 1);
-            animation-timing-function: cubic-bezier(.215, .61, .355, 1)
-        }
-        0% {
-            opacity: 0;
-            -webkit-transform: scale3d(.3, .3, .3);
-            transform: scale3d(.3, .3, .3)
-        }
-        20% {
-            -webkit-transform: scale3d(1.1, 1.1, 1.1);
-            transform: scale3d(1.1, 1.1, 1.1)
-        }
-        40% {
-            -webkit-transform: scale3d(.9, .9, .9);
-            transform: scale3d(.9, .9, .9)
-        }
-        /*60% {*/
-            /*opacity: 1;*/
-            /*-webkit-transform: scale3d(1.03, 1.03, 1.03);*/
-            /*transform: scale3d(1.03, 1.03, 1.03)*/
-        /*}*/
-        /*80% {*/
-            /*-webkit-transform: scale3d(.97, .97, .97);*/
-            /*transform: scale3d(.97, .97, .97)*/
-        /*}*/
-        to {
-            opacity: 1;
-            -webkit-transform: scaleX(1);
-            transform: scaleX(1)
-        }
-    }
-
-    .bounceIn2 {
-        -webkit-animation-name: bounceIn2;
-        animation-name: bounceIn2
-    }
 </style>
 
 <template>
     <section class="prolist-frame" @scroll="pageScroll($event)">
         <div class="company-name">{{userActivity}}</div>
-        <div class="btn-link" v-if="!showDetail && !showExample && frameST == 0"><t-button extraClass="white" @dotap="$router.push('publish')">发布新活动</t-button></div>
+        <div class="btn-link" v-if="!showDetail && !showExample && frameST == 0"><t-button extraClass="white" @dotap="gotoPublish(-1)">发布新活动</t-button></div>
         <example v-if="showExample" @intolist="showExample=false"></example>
 
         <div class="search">
@@ -80,7 +41,7 @@
         </transition>
 
         <div class="detail-frame" v-show="!showExample && showDetail">
-            <transition enter-active-class="animated anim-detail bounceIn2" leave-active-class="animated bounceOut">
+            <transition enter-active-class="animated fadeIn" leave-active-class="animated bounceOut">
             <list-item :itemdata="detailData" v-if="showDetail" :fileurl="fileurl"></list-item>
             </transition>
             <transition enter-active-class="animated anim-detail slideInRight" leave-active-class="animated anim-detail slideOutRight">
@@ -162,15 +123,25 @@
                 })
             },
             gotoDetail(index){
-                this.touchIndex = -1;
-                setTimeout(()=>{
-                    this.detailData = this.listData[index];
-                    this.showDetail = true;
-                    this.$store.commit('doShowGlobalMenuDetail',false);
-                },200)
+                let data = this.listData[index];
+                if(data.status == 3){//审核未通过
+                    this.$store.commit('setEditorData',data);
+                    this.$router.push('publish');
+                }else{
+                    this.touchIndex = -1;
+                    setTimeout(()=>{
+                        this.detailData = data;
+                        this.showDetail = true;
+                        this.$store.commit('doShowGlobalMenuDetail',false);
+                    },200)
+                }
             },
             pageScroll(e){
                 this.frameST = e.target.scrollTop;
+            },
+            gotoPublish(id){
+                this.$store.commit('setEditorData');
+                this.$router.push('publish');
             }
         }
     }

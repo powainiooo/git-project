@@ -104,11 +104,11 @@
         </div>
         <div class="qrcode" v-if="!isVerify">
             <div class="qritem">
-                <img src="@/assets/img/qrcode1.png" width="100" height="100">
+                <img :src="itemData.wxacode" width="100" height="100">
                 <t-button size="min" @dotap="drawPoster">下载链接码</t-button>
             </div>
             <div class="qritem">
-                <img src="@/assets/img/qrcode2.png" width="100" height="100">
+                <img :src="itemData.check_code" width="100" height="100">
                 <t-button size="min" @dotap="downloadQR">下载验票码</t-button>
             </div>
         </div>
@@ -348,14 +348,13 @@
                 saveFile(imgData,filename);
             },
             downloadQR(){
-                var img = document.querySelector('#checkCode');
                 // 将图片的src属性作为URL地址
-                var url = img.src;
                 var a = document.createElement('a');
                 var event = new MouseEvent('click');
 
                 a.download = '二维码';
-                a.href = url;
+                a.target = 'blank';
+                a.href = this.itemData.check_code;
 
                 a.dispatchEvent(event)
             }

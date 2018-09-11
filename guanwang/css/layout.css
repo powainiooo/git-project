@@ -59,14 +59,14 @@ header nav ul li{ float: left; margin: 0 20px;}
 header nav ul li a{ font-size: 16px; color: #fff; padding-bottom: 14px; position: relative;}
 header nav ul li a:after{ content: ''; width: 0; height: 8px; background-color: #fff; position: absolute; bottom: 0; left: 0; border-radius: 5px; transition: all 0.3s cubic-bezier(.53,.09,.58,.98);}
 header nav ul li:hover a:after{ width: 100%;}
-header nav ul li:hover .car-list{ height: 680px;}
+header nav ul li:hover .car-list{ height: 640px;}
 header nav ul li a i{ margin-left: 3px;}
 
 .car-list{height:0; position: absolute; top: 72px; left: -30px; right: -30px; background-color: #fff; z-index: 200; overflow: hidden;
     transition: height 0.3s cubic-bezier(.53,.09,.58,.98);
 }
 .car-list ul{ width: 1250px; display: flex; margin: 30px auto 10px auto; flex-wrap: wrap;}
-.car-list ul li{ width:250px; height: 140px; text-align: center; margin: 0 0 20px 0;}
+.car-list ul li{ width:250px; height: 140px; text-align: center; margin: 0 0 10px 0;}
 .car-list ul li img{transition: all 0.2s cubic-bezier(.53,.09,.58,.98);}
 .car-list ul li img:hover{ transform: scale(1.1);}
 .car-list ul li p{ font-size: 14px;}

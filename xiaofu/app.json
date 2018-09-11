@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/error/error",
     "pages/index/detail",
     "pages/drink/detail",
     "pages/drink/index",
@@ -13,8 +14,7 @@
     "pages/insured/insured",
     "pages/result/result",
     "pages/search/search",
-    "pages/login/login",
-    "pages/error/error"
+    "pages/login/login"
   ],
   "window": {
     "backgroundTextStyle": "light",

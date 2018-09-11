@@ -21,11 +21,16 @@
     .step2-frame .ticke-type-list .input input{ width: 100%; height: 100%; box-sizing: border-box; font-size: 16px; color: #000000; border: 1px solid #a5a5a5; border-radius: 6px; line-height: 40px; padding: 0 15px;}
     .step2-frame .ticke-type-list .input input::-webkit-input-placeholder{ color: #a5a5a5; }
     .step2-frame .ticke-type-list .input-price:after{content: '元'; line-height: 40px; position: absolute; top: 0; right: 15px; font-size: 16px; color: #a5a5a5;}
+    .step2-frame .ticke-type-list-readonly .input-price:after{color: #000;}
     .step2-frame .ticke-type-list .input-nums:after{content: '张'; line-height: 40px; position: absolute; top: 0; right: 15px; font-size: 16px; color: #a5a5a5;}
+    .step2-frame .ticke-type-list-readonly .input-nums:after{color: #000;}
     .step2-frame .ticke-type-list .input-nums input{ padding-right: 35px;}
     .step2-frame .ticke-type-list .input-limit:before{content: '限购'; line-height: 40px; position: absolute; top: 0; left: 15px; font-size: 16px; color: #a5a5a5;}
+    .step2-frame .ticke-type-list-readonly .input-limit:before{color: #000;}
     .step2-frame .ticke-type-list .input-limit:after{content: '张'; line-height: 40px; position: absolute; top: 0; right: 15px; font-size: 16px; color: #a5a5a5;}
+    .step2-frame .ticke-type-list-readonly .input-limit:after{color: #000;}
     .step2-frame .ticke-type-list .input-limit input{ padding-right: 35px; padding-left: 60px;}
+    .step2-frame .ticke-type-list-readonly input[readonly]{ background-color: #eeeef0;}
     .step2-frame .ticke-type-list .radio{ position: absolute; top: 17px; left: 22px;}
     .step2-frame .ticke-type-list .btn-del{ position: absolute; top: 10px; right: 16px; font-size: 24px; color: #002aa6;}
 
@@ -51,25 +56,25 @@
                 <div class="step1">
                     <div class="title ml20" style="padding-left: 0;"><h3><span>3</span>票务信息</h3></div>
                     <div class="tframe">
-                        <div class="ticke-type-list" v-for="(item,index) in typeListData">
-                            <input type="checkbox" class="radio" v-model="item.checked">
+                        <div class="ticke-type-list" :class="isEditor ? 'ticke-type-list-readonly' : ''" v-for="(item,index) in typeListData">
+                            <input type="checkbox" class="radio" v-model="item.checked" v-if="!isEditor">
                             <h3 class="name" v-if="item.isDefault">{{item.name}}</h3>
                             <div class="input" v-if="!item.isDefault">
-                                <input type="text" placeholder="票种名称" v-model="item.name">
+                                <input type="text" placeholder="票种名称" v-model="item.name" :readonly="isEditor">
                             </div>
                             <div class="input" :class="item.price == '' ? '' : 'input-price'">
-                                <input type="text" placeholder="价格" v-model="item.price">
+                                <input type="text" placeholder="价格" v-model="item.price" :readonly="isEditor">
                             </div>
                             <div class="input" :class="item.sale_nums == '' ? '' : 'input-nums'">
-                                <input type="text" placeholder="张数" v-model="item.sale_nums">
+                                <input type="text" placeholder="张数" v-model="item.sale_nums" :readonly="isEditor">
                             </div>
                             <div class="input" :class="item.sale_limit == '' ? '' : 'input-limit'">
-                                <input type="text" placeholder="限购张数" v-model="item.sale_limit">
+                                <input type="text" placeholder="限购张数" v-model="item.sale_limit" :readonly="isEditor">
                             </div>
                             <a href="javascript:;" class="btn-del" v-if="!item.isDefault" @click="doDelType(index)"><Icon type="md-close" /></a>
                         </div>
                     </div>
-                    <div class="tc mt30 mb30">
+                    <div class="tc mt30 mb30" v-if="!isEditor">
                         <a href="javascript:;" @click="newTypeItem"><img src="@/assets/img/add.png"> </a>
                     </div>
                 </div>
@@ -78,15 +83,15 @@
                     <div class="ticket-info">
                         <h3>门票类型</h3>
                         <ul>
-                           <li>
+                           <li v-if="ticketType == 1 || !isEditor">
                                <input type="radio" class="radio" v-model="ticketType" value="1">
                                <span>电子票</span>
                            </li>
-                           <li>
+                           <li v-if="ticketType == 2 || !isEditor">
                                <input type="radio" class="radio" v-model="ticketType" value="2">
                                <span>实体票</span>
                            </li>
-                            <li>
+                            <li v-if="!isEditor">
                                 <div class="ques1">
                                     <t-ques>
                                         <ul class="list1">
@@ -101,11 +106,11 @@
                     <div class="ticket-info">
                         <h3>身份证</h3>
                         <ul>
-                           <li>
+                           <li v-if="ids == 1 || !isEditor">
                                <input type="radio" class="radio" v-model="ids" value="1">
                                <span>需要</span>
                            </li>
-                           <li>
+                           <li v-if="ids == 0 || !isEditor">
                                <input type="radio" class="radio" v-model="ids" value="0">
                                <span>不需要</span>
                            </li>
@@ -113,15 +118,37 @@
                     </div>
                     <div class="inp-line">
                         <h3>显示时间</h3>
-                        <DatePicker format="yyyy/MM/dd HH:mm" type="datetime" placeholder="选择时间" :editable="false" v-model="showTime" :options="optionsE" @on-change="dateChange" ></DatePicker>
+                        <DatePicker format="yyyy/MM/dd HH:mm"
+                                    type="datetime"
+                                    placeholder="选择时间"
+                                    :editable="false"
+                                    v-model="showTime"
+                                    :options="optionsE"
+                                    @on-change="dateChange"
+                                    :disabled="isEditor"
+                                    :readonly="isEditor"></DatePicker>
                     </div>
                     <div class="inp-line">
                         <h3>开售时间</h3>
-                        <DatePicker format="yyyy/MM/dd HH:mm" type="datetime" placeholder="选择时间" :editable="false" v-model="saleStart" :options="optionsE"></DatePicker>
+                        <DatePicker format="yyyy/MM/dd HH:mm"
+                                    type="datetime"
+                                    placeholder="选择时间"
+                                    :editable="false"
+                                    v-model="saleStart"
+                                    :options="optionsE"
+                                    :disabled="isEditor"
+                                    :readonly="isEditor"></DatePicker>
                     </div>
                     <div class="inp-line">
                         <h3>结束时间</h3>
-                        <DatePicker format="yyyy/MM/dd HH:mm" type="datetime" placeholder="选择时间" :editable="false" v-model="saleEnd" :options="optionsE"></DatePicker>
+                        <DatePicker format="yyyy/MM/dd HH:mm"
+                                    type="datetime"
+                                    placeholder="选择时间"
+                                    :editable="false"
+                                    v-model="saleEnd"
+                                    :options="optionsE"
+                                    :disabled="isEditor"
+                                    :readonly="isEditor"></DatePicker>
                     </div>
                 </div>
             </div>
@@ -157,7 +184,7 @@
                             <a href="javascript:;" class="btn-del" @click="doDelNotice(index)" v-if="index != 0"><Icon type="md-close" /></a>
                         </div>
                     </div>
-                    <div class="tc mt30 mb30">
+                    <div class="tc mt30 mb30" v-if="!isEditor">
                         <a href="javascript:;" @click="newNoticeItem"><img src="@/assets/img/add.png"> </a>
                     </div>
                 </div>
@@ -215,6 +242,7 @@
             let editorData = this.$store.state.editorData;
             if(editorData.id != -1){
                 this.dataInit();
+                this.isEditor = true;
             }
         },
         data(){
@@ -257,41 +285,42 @@
                     disabledDate (date) {
                         return date && date.valueOf() > new Date('2018-09-03');
                     }
-                }
+                },
+                isEditor:false
             }
         },
         methods:{
             dateChange(date){
-                console.log(this.showTime);
+                console.log(this.showTime)
             },
             dataInit(){
                 let editorData = this.$store.state.editorData;
                 let classes = editorData.classes;
                 let thisC = this.typeListData;
+                let arr = [];
                 for(let item of classes){
                     let reg = new RegExp(item.select),isFit = false;
                     for(let i=0;i<thisC.length;i++){
                         if(reg.test(thisC[i].name)){
                             isFit = true;
-                            thisC[i].checked = true;
-                            thisC[i].isDefault = true;
-                            thisC[i].name = item.select;
-                            thisC[i].price = item.price;
-                            thisC[i].sale_nums = item.nums;
-                            thisC[i].sale_limit = item.max;
+                            //thisC[i].checked = true;
+                            //thisC[i].isDefault = true;
+                            //thisC[i].name = item.select;
+                            //thisC[i].price = item.price;
+                            //thisC[i].sale_nums = item.nums;
+                            //thisC[i].sale_limit = item.max;
                         }
                     }
-                    if(!isFit){
-                        thisC.push({
-                            checked:true,
-                            isDefault:false,
-                            name:item.select,
-                            price:item.price,
-                            sale_nums:item.salenums,
-                            sale_limit:item.max
-                        })
-                    }
+                    arr.push({
+                        checked:true,
+                        isDefault:isFit,
+                        name:item.select,
+                        price:item.price,
+                        sale_nums:item.nums,
+                        sale_limit:item.max
+                    })
                 }
+                this.typeListData = arr;
                 this.ticketType = editorData.cate;
                 this.ids = editorData.is_idnum;
                 let saleStart = formatDate(new Date(parseInt(editorData.sale_start)*1000),'yyyy/MM/dd HH:mm');

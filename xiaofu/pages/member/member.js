@@ -76,6 +76,30 @@ Page({
       }
     })
   },
+  download(){
+    console.log('download')
+    wx.downloadFile({
+      url: 'http://ticket.pc-online.cc/static/download/file.docx', //仅为示例，并非真实的资源
+      success: function(res) {
+        console.log(res);
+        // 只要服务器有响应数据，就会把响应内容写入文件并进入 success 回调，业务需要自行判断是否下载到了想要的内容
+        if (res.statusCode === 200) {
+          wx.saveFile({
+            tempFilePath: res.tempFilePath,
+            success: function(res) {
+              var savedFilePath = res.savedFilePath;
+              wx.openDocument({
+                filePath: savedFilePath,
+                success: function (res) {
+                  console.log('打开文档成功')
+                }
+              })
+            }
+          })
+        }
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

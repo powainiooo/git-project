@@ -106,6 +106,7 @@
                 this.getListData();
             },
             mDown(index){
+                let data = this.listData[index];
                 if(data.status != 3){
                     this.touchIndex = index;
                 }

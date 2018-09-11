@@ -5,7 +5,7 @@
     <view class='title-en'><text>{{titleEn}}</text></view>
     <view class='title-cn'>
       <text>{{titleCn}}</text>
-      <view class="btn" wx:if="{{page == 'insurance'}}"><view class="icons icon-xiazai"></view></view>
+      <view class="btn" wx:if="{{page == 'insurance'}}"><view class="icons icon-xiazai" bindtap="download"></view></view>
     </view>
 
     <view class='member-content' wx:if="{{page != 'contact'}}">

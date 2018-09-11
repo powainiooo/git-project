@@ -47,7 +47,10 @@
             this.date = new Date();
             this.dateArr[0] = new Date(this.date.getTime() - 7*24*60*60*1000);
             this.dateArr[1] = new Date();
-            this.getChartData();
+            setTimeout(()=>{
+                this.getChartData();
+            },200);
+
         },
         methods:{
             getChartData(){

@@ -13,6 +13,7 @@
     .step3-frame .frame .index{ font-size: 20px; color: #000000; font-family: 'Helve'; padding: 4px 0 4px 50px;border-bottom: 1px solid #e5e5e5;}
     .step3-frame .frame .text{ height: 143px;border-bottom: 3px solid #e5e5e5; padding-left: 50px; display: flex; align-items: center;}
     .step3-frame .frame .text textarea{ width: 460px;; box-sizing: border-box; border: 1px solid #888888; border-radius: 5px; padding: 7px 16px; color: #888888; font-size: 16px;}
+    .step3-frame .frame .text textarea[readonly]{ background-color: #eeeef0;}
     .step3-frame .ques1{ position: absolute; top: 78px; left: 558px;}
     .step3-frame .ques2{ position: absolute; top: 78px; right: 20px;}
     .step3-frame .btn-del{ position: absolute; top: 0; right: 18px; font-size:  24px; color: #002aa6;}
@@ -35,7 +36,8 @@
                     <div class="title" style="margin-left: 20px; padding-left: 30px;">
                         <h3><span>1</span>活动详情(选填)</h3>
                         <div>
-                            <t-ques :redbg="errorData.goods_desc.length != 0">
+                            <t-ques :redbg="errorData.goods_desc.length != 0"
+                                    v-if="isEditor ? errorData.goods_desc.length != 0 : true">
                                 <ul class="list1" v-if="errorData.goods_desc.length == 0">
                                     <li><span>1</span>上传图片尺寸为660px*333px</li>
                                     <li><span>2</span>一张图片对应一段文字，可增添多个图片及对应文字，最多限制6张图</li>
@@ -51,7 +53,9 @@
                         <a href="javascript:;" class="btn-del" @click="doDelActivity(index)"><Icon type="md-close" /></a>
                         <h3 class="index">{{index < 9 ? 0 : ''}}{{index + 1}}</h3>
                         <div class="pl50 pt20 pb20 pr" style="border-bottom: 1px solid #e5e5e5;">
-                            <t-upload v-model="item.imgUrl">
+                            <t-upload v-model="item.imgUrl"
+                                      :redButton="isEditor ? errorData.goods_desc == 0 ? false : errorData.goods_desc[index].img != '' : false"
+                                      :hideButton="activityCheck(index,'img')">
                                 <template slot="title">
                                     <h3>活动宣传图片</h3>
                                     <p>尺寸为660px*333px的JPG格式图片</p>
@@ -59,10 +63,14 @@
                             </t-upload>
                         </div>
                         <div class="text">
-                            <textarea rows="4" maxlength="60" placeholder="填写详情(200字内)" v-model="item.desc"></textarea>
+                            <textarea rows="4"
+                                      maxlength="200"
+                                      placeholder="填写详情(200字内)"
+                                      v-model="item.desc"
+                                      :readonly="activityCheck(index,'desc')"></textarea>
                         </div>
                     </div>
-                    <div class="tc mt30 mb30">
+                    <div class="tc mt30 mb30" v-if="!isEditor">
                         <a href="javascript:;" @click="newActivityItem"><img src="@/assets/img/add.png"> </a>
                     </div>
                 </div>
@@ -70,7 +78,8 @@
                     <div class="title" style="margin-left: 20px; padding-left: 30px;">
                         <h3><span>2</span>上传艺人图片(选填)</h3>
                         <div>
-                            <t-ques :redbg="errorData.person_desc.length != 0">
+                            <t-ques :redbg="errorData.person_desc.length != 0"
+                                    v-if="isEditor ? errorData.person_desc.length != 0 : true">
                                 <ul class="list1" v-if="errorData.person_desc.length == 0">
                                     <li><span>1</span>艺人logo尺寸为230px*230px</li>
                                     <li><span>2</span>一个艺人logo对应上传一个艺人照片</li>
@@ -85,7 +94,10 @@
                         <a href="javascript:;" class="btn-del" @click="doDelAct(index)" style="right: 15px;"><Icon type="md-close" /></a>
                         <h3 class="index">{{index < 9 ? 0 : ''}}{{index + 1}}</h3>
                         <div class="pl50 pt20 pb20 pr" style="border-bottom: 1px solid #e5e5e5;">
-                            <t-upload v-model="item.logoUrl" :class="item.logoUrl != '' ? 'act-upload' : ''">
+                            <t-upload v-model="item.logoUrl"
+                                      :class="item.logoUrl != '' ? 'act-upload' : ''"
+                                      :redButton="isEditor ? errorData.person_desc == 0 ? false : errorData.person_desc[index].img != '' : false"
+                                      :hideButton="actCheck(index,'img')">
                                 <template slot="title">
                                     <h3>艺人LOGO</h3>
                                     <p>尺寸为230px*230px</p>
@@ -94,7 +106,9 @@
                             </t-upload>
                         </div>
                         <div class="pl50 pt20 pb20 pr" style="border-bottom: 3px solid #e5e5e5;">
-                            <t-upload v-model="item.imgUrl">
+                            <t-upload v-model="item.imgUrl"
+                                      :redButton="isEditor ? errorData.person_desc == 0 ? false : errorData.person_desc[index].picture != '' : false"
+                                      :hideButton="actCheck(index,'picture')">
                                 <template slot="title">
                                     <h3>艺人照片</h3>
                                     <p>尺寸为480px*230px的JPG格式图片</p>
@@ -102,7 +116,7 @@
                             </t-upload>
                         </div>
                     </div>
-                    <div class="tc mt30 mb30">
+                    <div class="tc mt30 mb30" v-if="!isEditor">
                         <a href="javascript:;" @click="newActItem"><img src="@/assets/img/add.png"> </a>
                     </div>
                 </div>
@@ -143,6 +157,7 @@
             let editorData = this.$store.state.editorData;
             if(editorData.id != -1){
                 this.dataInit();
+                this.isEditor = true;
             }else{
                 this.activityListData.push({
                     imgUrl:'',
@@ -158,7 +173,8 @@
         data(){
             return{
                 activityListData:[],
-                actListData:[]
+                actListData:[],
+                isEditor:false
             }
         },
         methods:{
@@ -196,6 +212,28 @@
             },
             doDelAct(index){
                 this.actListData.splice(index,1)
+            },
+            activityCheck(index,name){
+                if(this.isEditor){
+                    if(this.errorData.goods_desc.length == 0){
+                        return true
+                    }else{
+                        return this.errorData.goods_desc[index][name] == ''
+                    }
+                }else{
+                    return false
+                }
+            },
+            actCheck(index,name){
+                if(this.isEditor){
+                    if(this.errorData.person_desc.length == 0){
+                        return true
+                    }else{
+                        return this.errorData.person_desc[index][name] == ''
+                    }
+                }else{
+                    return false
+                }
             }
         }
     }

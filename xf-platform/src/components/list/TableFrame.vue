@@ -96,6 +96,7 @@
         props:['itemData'],
         mounted(){
             this.getListData();
+            this.isInfor = this.itemData.is_send == 1;
         },
         methods:{
             getListData(){

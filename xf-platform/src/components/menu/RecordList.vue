@@ -96,7 +96,7 @@
                 this.$ajax.get('/client/api/bills',{
                     params:{
                         keyword:this.keyword,
-                        selectType:this.selectType
+                        cate:this.selectType
                     }
                 }).then(res=>{
                     self.listData = res.data.data;

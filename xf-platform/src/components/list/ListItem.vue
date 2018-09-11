@@ -5,7 +5,7 @@
     .list-item .shadow-short{ height: 370px; top: 50px;}
     .list-item .ticket{ width: 100%; position: absolute; top: 40px; left: 0;}
     .list-item .ticket:after{ content: ''; width: 90px; height: 90px; background: url('../../assets/img/ticket-logo.png') no-repeat; position: absolute; right: -2px; bottom: 0;}
-    .list-item .ticket .status{ width: 100%; height: 160px; background-repeat: no-repeat; overflow: hidden;}
+    .list-item .ticket .status{ width: 330px; height: 160px; background-repeat: no-repeat; overflow: hidden;}
     .list-item .ticket .status1{ background-image: url('../../assets/img/ticket-top1.png');}
     .list-item .ticket .status2{ background-image: url('../../assets/img/ticket-top2.png');}
     .list-item .ticket .status3{ height: 162px; background-image: url('../../assets/img/ticket-top3.png');}
@@ -30,7 +30,7 @@
     .list-item .ticket .status .nums p{ color: #000000; font-size: 14px; font-family: 'Helve';}
     .list-item .ticket .status .nums p span{ font-size: 40px; margin-right: 10px;}
     .list-item .ticket .status .nums div{ color: #c0c0c0; font-size: 18px; align-self: flex-end; margin-bottom: 8px;}
-    .list-item .ticket .line-mid{ overflow: hidden; display: flex; align-items: flex-end;}
+    .list-item .ticket .line-mid{ width: 330px; overflow: hidden; display: flex; align-items: flex-end;}
     .list-item .ticket .line-mid img{ width: 100%;}
     .list-item .ticket .info-frame{ width: 330px; height: 272px; mask-image: url('../../assets/img/cover.png'); -webkit-mask-image: url('../../assets/img/cover.png'); background-color: #ffffff;}
     .list-item .ticket .info-frame .line1{ height: 85px; overflow: hidden; border-bottom: 1px solid #c1c1c1; box-sizing: border-box;}

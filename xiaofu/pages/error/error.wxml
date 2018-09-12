@@ -2,4 +2,5 @@
 <view class="container bg-gray">
     <header-view></header-view>
     <image class="img" src="../../res/images/502.jpg" mode="widthFix"></image>
+    <view class="btn-refresh" hover-class="btn-refresh-hover" hover-stay-time="50" bindtap="goback"></view>
 </view>

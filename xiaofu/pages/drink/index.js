@@ -89,7 +89,7 @@ Page({
         }
       },
       fail(){
-        wx.reLaunch({
+        wx.navigateTo({
           url: '/pages/error/error'
         })
       }
@@ -116,7 +116,7 @@ Page({
         self.getLocation();
       },
       fail(){
-        wx.reLaunch({
+        wx.navigateTo({
           url: '/pages/error/error'
         })
       }

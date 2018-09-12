@@ -26,7 +26,7 @@ Page({
         })
       },
       fail(){
-        wx.reLaunch({
+        wx.navigateTo({
           url: '/pages/error/error'
         })
       }

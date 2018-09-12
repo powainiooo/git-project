@@ -49,6 +49,7 @@ Page({
   },
   //事件处理函数
   onLoad: function (options) {
+    console.log('index');
     let id = options.id || '',self = this,cityID = 0;
     if(id == ''){
       this.getAddressData();
@@ -467,7 +468,7 @@ Page({
         }
       },
       fail(){
-        wx.reLaunch({
+        wx.navigateTo({
           url: '/pages/error/error'
         })
       }
@@ -524,7 +525,7 @@ Page({
         self.getLocation();
       },
       fail(){
-        wx.reLaunch({
+        wx.navigateTo({
           url: '/pages/error/error'
         })
       }

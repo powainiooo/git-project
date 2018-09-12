@@ -116,8 +116,8 @@
             doRefund(id){
                 let self = this;
                 self.$tModal.confirm({
-                    title:'是否确认退款',
-                    content:'是否确认退款',
+                    title:'是否确认退款?',
+                    content:'确认退款之后款项将原路返回到该用户账上，请谨慎操作。',
                     onOk(){
                         self.$ajax.get('/client/api/order_refund',{
                             params:{

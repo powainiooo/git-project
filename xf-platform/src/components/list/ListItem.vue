@@ -1,9 +1,9 @@
 <style>
     .list-item{ width: 330px; position: relative;}
-    .list-item .shadow{ height: 565px; margin-left: -21px; position: relative; overflow: hidden;}
+    .list-item .shadow{ width: 374px; height: 565px; margin-left: -21px; position: relative; overflow: hidden;}
     .list-item .shadow img{position: absolute; bottom: 0; left: 0;}
     .list-item .shadow-short{ height: 370px; top: 50px;}
-    .list-item .ticket{ width: 100%; position: absolute; top: 40px; left: 0;}
+    .list-item .ticket{ width: 330px; position: absolute; top: 40px; left: 0;}
     .list-item .ticket:after{ content: ''; width: 90px; height: 90px; background: url('../../assets/img/ticket-logo.png') no-repeat; position: absolute; right: -2px; bottom: 0;}
     .list-item .ticket .status{ width: 330px; height: 160px; background-repeat: no-repeat; overflow: hidden;}
     .list-item .ticket .status1{ background-image: url('../../assets/img/ticket-top1.png');}

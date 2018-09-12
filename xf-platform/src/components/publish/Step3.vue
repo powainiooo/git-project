@@ -50,7 +50,7 @@
 
                     </div>
                     <div class="pr20 pr" v-for="(item,index) in activityListData">
-                        <a href="javascript:;" class="btn-del" @click="doDelActivity(index)"><Icon type="md-close" /></a>
+                        <a href="javascript:;" class="btn-del" @click="doDelActivity(index)" v-if="!isEditor"><Icon type="md-close" /></a>
                         <h3 class="index">{{index < 9 ? 0 : ''}}{{index + 1}}</h3>
                         <div class="pl50 pt20 pb20 pr" style="border-bottom: 1px solid #e5e5e5;">
                             <t-upload v-model="item.imgUrl"
@@ -91,7 +91,7 @@
                         </div>
                     </div>
                     <div class="pr20 pr" v-for="(item,index) in actListData">
-                        <a href="javascript:;" class="btn-del" @click="doDelAct(index)" style="right: 15px;"><Icon type="md-close" /></a>
+                        <a href="javascript:;" class="btn-del" @click="doDelAct(index)" style="right: 15px;" v-if="!isEditor"><Icon type="md-close" /></a>
                         <h3 class="index">{{index < 9 ? 0 : ''}}{{index + 1}}</h3>
                         <div class="pl50 pt20 pb20 pr" style="border-bottom: 1px solid #e5e5e5;">
                             <t-upload v-model="item.logoUrl"

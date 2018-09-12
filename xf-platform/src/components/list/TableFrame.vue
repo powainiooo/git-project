@@ -67,7 +67,7 @@
                     <td>{{item.price}}</td>
                     <td><span class="numbers">{{item.nums}}</span></td>
                     <td>{{item.is_check == '1' ? '已验票' : '未验票'}}</td>
-                    <td><a href="javascirpt:;">退款</a> </td>
+                    <td><a href="javascirpt:;" @click="doRefund(item.id)" v-if="item.status == 4">退款</a> </td>
                 </tr>
                 </tbody>
             </table>
@@ -112,6 +112,28 @@
                     self.listData = res.data.data.data.list;
                     self.allnums = parseInt(res.data.data.data.nums);
                 })
+            },
+            doRefund(id){
+                let self = this;
+                self.$tModal.confirm({
+                    title:'是否确认退款',
+                    content:'是否确认退款',
+                    onOk(){
+                        self.$ajax.get('/client/api/order_refund',{
+                            params:{
+                                id:id
+                            }
+                        }).then(res=>{
+                            let data = res.data;
+                            if(data.status == 1){
+                                self.$Message.success('退款成功');
+                            }else{
+                                self.$Message.warning(data.msg);
+                            }
+                        })
+                    }
+                });
+
             },
             changePage(val){
                 this.page = val;

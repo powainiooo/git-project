@@ -9,6 +9,7 @@
     .stpe1-frame .frame .title span{ font-size: 66px; margin-right: 10px; font-family: 'Helve';}
     .stpe1-frame .frame .step1 .inp-line{ width: 270px; margin-left: 45px; margin-bottom: 20px; position: relative;}
     .stpe1-frame .frame .step1 input{ width: 100%; height: 40px; border: 1px solid #888888; border-radius: 5px; box-sizing: border-box; padding: 7px 16px; color: #000000; font-size: 16px;}
+    .stpe1-frame .frame .step1 .inp-line>input[readonly]{ background-color: #eeeef0}
     .stpe1-frame .frame .step1 input::-webkit-input-placeholder{ color: #888888;}
     .stpe1-frame .frame .step1 .inp-line .n-ques{ position: absolute; top:8px; right: -30px;}
     .stpe1-frame .frame .step1 .time-line{ width: 270px; display: flex; justify-content: space-between; margin-left: 45px;}
@@ -48,7 +49,7 @@
                         </Select>
                     </div>
                     <div class="inp-line">
-                        <input type="text" placeholder="活动方标题" v-model="formData.goods_name">
+                        <input type="text" placeholder="活动方标题" v-model="formData.goods_name" :readonly="isEditor ? errorData.goods_name == '' : false">
                         <t-ques width="290"
                                 :redbg="errorData.goods_name != ''"
                                 v-if="isEditor ? errorData.goods_name != '' : true"
@@ -78,7 +79,7 @@
                                     type="date"
                                     placeholder="活动日期"
                                     :editable="false"
-                                    :disabled="formData.type == '' || isEditor"
+                                    :disabled="isEditor ? true : formData.type == ''"
                                     :readonly="isEditor"
                                     @on-change="dateChange"
                                     :value="dateVal"
@@ -117,7 +118,7 @@
                         </div>
                     </div>
                     <div class="inp-line">
-                        <input type="text" placeholder="活动方地址" v-model="formData.address">
+                        <input type="text" placeholder="活动方地址" v-model="formData.address" :readonly="isEditor ? errorData.address == '' : false">
                         <t-ques width="290" redbg v-if="errorData.address != ''" style="z-index: 410;">
                             <ul class="list1">
                                 <li>{{errorData.address}}</li>

@@ -71,7 +71,7 @@
                             <div class="input" :class="item.sale_limit == '' ? '' : 'input-limit'">
                                 <input type="text" placeholder="限购张数" v-model="item.sale_limit" :readonly="isEditor">
                             </div>
-                            <a href="javascript:;" class="btn-del" v-if="!item.isDefault" @click="doDelType(index)"><Icon type="md-close" /></a>
+                            <a href="javascript:;" class="btn-del" v-if="!item.isDefault && !isEditor" @click="doDelType(index)"><Icon type="md-close" /></a>
                         </div>
                     </div>
                     <div class="tc mt30 mb30" v-if="!isEditor">
@@ -181,7 +181,7 @@
                         <div class="notice-list" v-for="(item,index) in noticeListData">
                             <h3>{{index < 9 ? 0 : ''}}{{index + 1}}</h3>
                             <textarea rows="4" maxlength="60" placeholder="填写须知(30字内)" v-model="item.value"></textarea>
-                            <a href="javascript:;" class="btn-del" @click="doDelNotice(index)" v-if="index != 0"><Icon type="md-close" /></a>
+                            <a href="javascript:;" class="btn-del" @click="doDelNotice(index)" v-if="index != 0 && !isEditor"><Icon type="md-close" /></a>
                         </div>
                     </div>
                     <div class="tc mt30 mb30" v-if="!isEditor">

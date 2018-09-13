@@ -5,6 +5,8 @@ const QQMapWX = require('../../utils/qqmap-wx-jssdk.min.js');
 const qMap = new QQMapWX({
   key:'AH7BZ-VV736-WNUSA-EP35M-3TCOZ-DTBXG'
 });
+const {promisify} = require('../../utils/util.js');
+const wxDownloadFile= promisify(wx.downloadFile);
 Page({
   data: {
     motto: 'Hello World',
@@ -216,219 +218,213 @@ Page({
     let data = this.data.detailData.info,imgSrc = app.globalData.imgSrc,type = data.type,self=this;
     wx.showLoading();
     const ctx = wx.createCanvasContext('poster');
-    //背景色
-    ctx.rect(0, 0, 750, 760);
-    ctx.setFillStyle('#ffffff');
-    ctx.fill();
-    //顶部Logo图
-    ctx.drawImage('../../res/images/top.png', 0, 0, 750, 145);
-    //日期
-    ctx.setFontSize(27);
-    ctx.setFillStyle('#000000');
-    let ten = data.begin.slice(2,3),one = data.begin.slice(3,4);
-    if(type == 1){
-      ctx.fillText(`2         0         ${ten}         ${one}`,20,190);
-    }else if(type == 2){
-      ctx.fillText(`2           0           ${ten}           ${one}`,20,190);
-    }else if(type == 3){
-      ctx.fillText(`2           0           ${ten}           ${one}`,20,190);
-    }
-    ctx.font = "27px 'Helve'";
-    if(type == 1){
-      ctx.setFontSize(100);
-      ctx.fillText(data.date,20,300);
-    }else if(type == 2){
-      ctx.setFontSize(80);
-      ctx.fillText(data.date,20,294);
-    }else if(type == 3){
-      ctx.setFontSize(60);
-      ctx.fillText(data.date,20,290);
-    }
-    //标题
-    ctx.setFontSize(44);
-    ctx.fillText(data.goods_name,20,390);
-    // 竖线
-    ctx.setStrokeStyle('#cecece');
-    ctx.beginPath();
-    if(type == 1){
-      ctx.moveTo(310,160);
-      ctx.lineTo(310,320);
-    }else if(type == 2){
-      ctx.moveTo(370,160);
-      ctx.lineTo(370,320);
-    }else if(type == 3){
-      ctx.moveTo(380,160);
-      ctx.lineTo(380,320);
-    }
 
-    ctx.stroke();
-    //横线 短
-    ctx.beginPath();
-    ctx.moveTo(0,210);
-    if(type == 1){
-      ctx.lineTo(310,210);
-    }else if(type == 2){
-      ctx.lineTo(370,210);
-    }else if(type == 3){
-      ctx.lineTo(380,210);
-    }
-    ctx.stroke();
-    //横线 长
-    ctx.beginPath();
-    ctx.moveTo(0,320);
-    ctx.lineTo(750,320);
-    ctx.stroke();
-    //logo
-    let logoXArr = [530-100,560-100,560-100];
-    wx.downloadFile({
-      url: imgSrc+data.cover,
-      success: function(res) {
-        if (res.statusCode === 200) {
-          ctx.drawImage(res.tempFilePath,logoXArr[type-1],240-70,200,140);
-        }
+    Promise.all([
+      wxDownloadFile({
+        url: imgSrc+data.cover
+      }),
+      wxDownloadFile({
+        url: imgSrc+data.cover2
+      }),
+      wxDownloadFile({
+        url: data.wxacode
+      })
+    ]).then(res => {
+      //背景色
+      ctx.rect(0, 0, 750, 760);
+      ctx.setFillStyle('#ffffff');
+      ctx.fill();
+      //顶部Logo图
+      ctx.drawImage('../../res/images/top.png', 0, 0, 750, 145);
+      //日期
+      ctx.setFontSize(27);
+      ctx.setFillStyle('#000000');
+      let ten = data.begin.slice(2,3),one = data.begin.slice(3,4);
+      if(type == 1){
+        ctx.fillText(`2         0         ${ten}         ${one}`,20,190);
+      }else if(type == 2){
+        ctx.fillText(`2           0           ${ten}           ${one}`,20,190);
+      }else if(type == 3){
+        ctx.fillText(`2           0           ${ten}           ${one}`,20,190);
       }
-    });
+      ctx.font = "27px 'Helve'";
+      if(type == 1){
+        ctx.setFontSize(100);
+        ctx.fillText(data.date,20,300);
+      }else if(type == 2){
+        ctx.setFontSize(80);
+        ctx.fillText(data.date,20,294);
+      }else if(type == 3){
+        ctx.setFontSize(60);
+        ctx.fillText(data.date,20,290);
+      }
+      //标题
+      ctx.setFontSize(44);
+      ctx.fillText(data.goods_name+' | '+data.activity,20,390);
+      // 竖线
+      ctx.setStrokeStyle('#cecece');
+      ctx.beginPath();
+      if(type == 1){
+        ctx.moveTo(310,160);
+        ctx.lineTo(310,320);
+      }else if(type == 2){
+        ctx.moveTo(370,160);
+        ctx.lineTo(370,320);
+      }else if(type == 3){
+        ctx.moveTo(380,160);
+        ctx.lineTo(380,320);
+      }
+      ctx.stroke();
+      //横线 短
+      ctx.beginPath();
+      ctx.moveTo(0,210);
+      if(type == 1){
+        ctx.lineTo(310,210);
+      }else if(type == 2){
+        ctx.lineTo(370,210);
+      }else if(type == 3){
+        ctx.lineTo(380,210);
+      }
+      ctx.stroke();
+      //横线 长
+      ctx.beginPath();
+      ctx.moveTo(0,320);
+      ctx.lineTo(750,320);
+      ctx.stroke();
+      //logo
+      let logoXArr = [530-100,560-100,560-100];
+      ctx.drawImage(res[0].tempFilePath,logoXArr[type-1],240-70,200,140);
+      //详情图
+      ctx.drawImage(res[1].tempFilePath,0,420,750,650);
+      //底部logo
+      ctx.drawImage('../../res/images/bottom.png',450,460,300,300);
+      //二维码
+      ctx.drawImage(res[2].tempFilePath,610,615,120,120);
 
-    //详情图
-    wx.downloadFile({
-      url: imgSrc+data.cover2,
-      success: function(res1) {
-        if (res1.statusCode === 200) {
-          ctx.drawImage(res1.tempFilePath,0,420,750,650);
-          //底部logo
-          ctx.drawImage('../../res/images/bottom.png',450,460,300,300);
-          wx.hideLoading();
-          ctx.draw(true,function(){
-            wx.canvasToTempFilePath({
-              canvasId: 'poster',
-              x:0,
-              y:0,
-              width:750,
-              height:750,
-              destWidth:750,
-              destHeight:750,
-              success:function(res){
-                wx.saveImageToPhotosAlbum({
-                  filePath: res.tempFilePath,
-                  success(){
-                    wx.showToast({
-                      title: '保存成功',
-                      icon: 'success',
-                      duration: 2000
-                    })
-                  }
+      wx.hideLoading();
+
+      ctx.draw(true,function(){
+        wx.canvasToTempFilePath({
+          canvasId: 'poster',
+          x:0,
+          y:0,
+          width:750,
+          height:750,
+          destWidth:750,
+          destHeight:750,
+          success:function(res){
+            wx.saveImageToPhotosAlbum({
+              filePath: res.tempFilePath,
+              success(){
+                wx.showToast({
+                  title: '保存成功',
+                  icon: 'success',
+                  duration: 2000
                 })
               }
             })
-          })
-        }
-      }
-    });
-
+          }
+        })
+      })
+    })
   },
   //生成分享图
   drawSharePoster(){
     let data = this.data.detailData.info,imgSrc = app.globalData.imgSrc,type = data.type,self=this;
     const ctx = wx.createCanvasContext('posterShare');
-    //背景色
-    ctx.rect(0, 19, 750, 634);
-    ctx.setFillStyle('#f6f6f6');
-    ctx.fill();
-    //顶部Logo图
-    ctx.drawImage('../../res/images/ticket-top.png', 0, 14, 750, 5);
-    //日期
-    ctx.font = "27px 'Helve'";
-    ctx.setFontSize(27);
-    ctx.setFillStyle('#000000');
-    let ten = data.begin.slice(2,3),one = data.begin.slice(3,4);
-    if(type == 1){
-      ctx.fillText(`2         0         ${ten}         ${one}`,20,64);
-    }else if(type == 2){
-      ctx.fillText(`2           0           ${ten}           ${one}`,20,64);
-    }else if(type == 3){
-      ctx.fillText(`2           0           ${ten}           ${one}`,20,64);
-    }
-    if(type == 1){
-      ctx.setFontSize(100);
-      ctx.fillText(data.date,20,174);
-    }else if(type == 2){
-      ctx.setFontSize(80);
-      ctx.fillText(data.date,20,168);
-    }else if(type == 3){
-      ctx.setFontSize(60);
-      ctx.fillText(data.date,20,164);
-    }
-    //标题
-    ctx.setFontSize(44);
-    ctx.fillText(data.goods_name,20,264);
-    // 竖线
-    ctx.setStrokeStyle('#cecece');
-    ctx.beginPath();
-    if(type == 1){
-      ctx.moveTo(310,34);
-      ctx.lineTo(310,194);
-    }else if(type == 2){
-      ctx.moveTo(370,34);
-      ctx.lineTo(370,194);
-    }else if(type == 3){
-      ctx.moveTo(380,34);
-      ctx.lineTo(380,194);
-    }
-
-    ctx.stroke();
-    //横线 短
-    ctx.beginPath();
-    ctx.moveTo(0,84);
-    if(type == 1){
-      ctx.lineTo(310,84);
-    }else if(type == 2){
-      ctx.lineTo(370,84);
-    }else if(type == 3){
-      ctx.lineTo(380,84);
-    }
-    ctx.stroke();
-    //横线 长
-    ctx.beginPath();
-    ctx.moveTo(0,194);
-    ctx.lineTo(750,194);
-    ctx.stroke();
-    //logo
-    let logoXArr = [530-100,560-100,560-100];
-    wx.downloadFile({
-      url: imgSrc+data.cover,
-      success: function(res) {
-        if (res.statusCode === 200) {
-          ctx.drawImage(res.tempFilePath,logoXArr[type-1],114-70,200,140);
-        }
+    Promise.all([
+      wxDownloadFile({
+        url: imgSrc+data.cover
+      }),
+      wxDownloadFile({
+        url: imgSrc+data.cover2
+      })
+    ]).then(res => {
+      //背景色
+      ctx.rect(0, 19, 750, 634);
+      ctx.setFillStyle('#f6f6f6');
+      ctx.fill();
+      //顶部Logo图
+      ctx.drawImage('../../res/images/ticket-top.png', 0, 14, 750, 5);
+      //日期
+      ctx.font = "27px 'Helve'";
+      ctx.setFontSize(27);
+      ctx.setFillStyle('#000000');
+      let ten = data.begin.slice(2,3),one = data.begin.slice(3,4);
+      if(type == 1){
+        ctx.fillText(`2         0         ${ten}         ${one}`,20,64);
+      }else if(type == 2){
+        ctx.fillText(`2           0           ${ten}           ${one}`,20,64);
+      }else if(type == 3){
+        ctx.fillText(`2           0           ${ten}           ${one}`,20,64);
       }
-    });
-
-    //详情图
-    wx.downloadFile({
-      url: imgSrc+data.cover2,
-      success: function(res1) {
-        if (res1.statusCode === 200) {
-          ctx.drawImage(res1.tempFilePath,0,294,750,650);
-          //底部logo
-          ctx.drawImage('../../res/images/bottom.png',450,334,300,300);
-          ctx.draw(true,function(){
-            wx.canvasToTempFilePath({
-              canvasId: 'posterShare',
-              x:0,
-              y:0,
-              width:750,
-              height:634,
-              destWidth:750,
-              destHeight:634,
-              success:function(res){
-                self.data.shareImgSrc = res.tempFilePath;
-              }
-            })
-          })
-        }
+      if(type == 1){
+        ctx.setFontSize(100);
+        ctx.fillText(data.date,20,174);
+      }else if(type == 2){
+        ctx.setFontSize(80);
+        ctx.fillText(data.date,20,168);
+      }else if(type == 3){
+        ctx.setFontSize(60);
+        ctx.fillText(data.date,20,164);
       }
-    });
+      //标题
+      ctx.setFontSize(44);
+      ctx.fillText(data.goods_name+' | '+data.activity,20,264);
+      // 竖线
+      ctx.setStrokeStyle('#cecece');
+      ctx.beginPath();
+      if(type == 1){
+        ctx.moveTo(310,34);
+        ctx.lineTo(310,194);
+      }else if(type == 2){
+        ctx.moveTo(370,34);
+        ctx.lineTo(370,194);
+      }else if(type == 3){
+        ctx.moveTo(380,34);
+        ctx.lineTo(380,194);
+      }
 
+      ctx.stroke();
+      //横线 短
+      ctx.beginPath();
+      ctx.moveTo(0,84);
+      if(type == 1){
+        ctx.lineTo(310,84);
+      }else if(type == 2){
+        ctx.lineTo(370,84);
+      }else if(type == 3){
+        ctx.lineTo(380,84);
+      }
+      ctx.stroke();
+      //横线 长
+      ctx.beginPath();
+      ctx.moveTo(0,194);
+      ctx.lineTo(750,194);
+      ctx.stroke();
+      //logo
+      let logoXArr = [530-100,560-100,560-100];
+      ctx.drawImage(res[0].tempFilePath,logoXArr[type-1],114-70,200,140);
+      //详情图
+      ctx.drawImage(res[1].tempFilePath,0,294,750,650);
+      //底部logo
+      ctx.drawImage('../../res/images/bottom.png',450,334,300,300);
+
+      ctx.draw(true,function(){
+        wx.canvasToTempFilePath({
+          canvasId: 'posterShare',
+          x:0,
+          y:0,
+          width:750,
+          height:634,
+          destWidth:750,
+          destHeight:634,
+          success:function(res){
+            self.data.shareImgSrc = res.tempFilePath;
+          }
+        })
+      })
+    })
   },
   //获取列表数据
   getListData(){
@@ -534,6 +530,13 @@ Page({
   //获取定位
   getLocation(){
     let self = this;
+    let lastGetCityTime = wx.getStorageSync('lastGetCityTime');
+    let now = new Date().getTime();
+    if(lastGetCityTime == '' || now > lastGetCityTime + 24*60*60){
+      wx.setStorageSync('lastGetCityTime',now);
+    }else{
+      return;
+    }
     wx.getLocation({
       type: 'wgs84',
       success: function(res) {
@@ -541,8 +544,6 @@ Page({
           location: {
             latitude: res.latitude,
             longitude: res.longitude
-            //latitude: 22.678323,
-            //longitude: 114.36091
           },
           success: function(res) {
             let city = res.result.address_component.city;

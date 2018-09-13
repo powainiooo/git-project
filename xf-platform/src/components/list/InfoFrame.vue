@@ -114,9 +114,8 @@
         </div>
 
         <!-- 画布-->
-        <div style=" width: 800px; position: fixed; top: -10000px; left: -10000px;">
+        <div style=" width: 800px; position: fixed; top: -10000px; left: -10010px;">
             <canvas id="poster" width="750" height="760" style=' background-color:#fff;'></canvas>
-            <img :src="fileurl+itemData.cover" id="checkCode" crossOrigin="anonymous">
             <img src="../../../static/img/top.png" id="top" crossOrigin="anonymous">
             <img src="../../../static/img/bottom.png" id="bottom" crossOrigin="anonymous">
         </div>
@@ -169,6 +168,7 @@
         },
         mounted(){
             this.resetTypeList();
+            this.drawPoster();
         },
         methods:{
             resetTypeList(){
@@ -271,7 +271,7 @@
                 }
                 //标题
                 ctx.font = "44px 'Helve'";
-                ctx.fillText(data.goods_name,20,390);
+                ctx.fillText(data.goods_name+' | '+data.activity,20,390);
                 // 竖线
                 ctx.strokeStyle = '#c1c1c1';
                 ctx.beginPath();
@@ -305,22 +305,26 @@
                 ctx.stroke();
                 //logo
                 let logoXArr = [530-100,560-100,560-100];
-                //let logoImg = new Image();
-                //logoImg.crossOrigin = "anonymous";
-                //logoImg.onload = function(){
-                //    ctx.drawImage(logoImg,logoXArr[type-1],240-70,200,140);
-                //};
-                //logoImg.src = imgSrc + data.cover;
+                let logoImg = new Image();
+                logoImg.onload = function(){
+                    ctx.drawImage(logoImg,logoXArr[type-1],240-70,200,140);
+                };
+                logoImg.src = imgSrc + data.cover;
                 //详情图
                 let cover2 = new Image();
-                cover2.crossOrigin = "anonymous";
                 cover2.onload = function(){
                     ctx.drawImage(cover2,0,420,750,650);
                     //底部logo
                     let bottom = new Image();
                     bottom.onload = function(){
                         ctx.drawImage(bottom,450,460,300,300);
-                        self.downloadImg();
+                        //二维码
+                        let qrcode = new Image();
+                        qrcode.onload = function(){
+                            ctx.drawImage(qrcode,610,615,120,120);
+                            self.downloadImg();
+                        };
+                        qrcode.src = data.wxacode;
                     };
                     bottom.src = document.getElementById("bottom").src;
                 };

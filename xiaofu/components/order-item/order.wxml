@@ -35,10 +35,10 @@
                     <view class='day day{{itemData.type}}'>{{itemData.date}}</view>
                 </view>
                 <view class="logo {{itemData.type == 1 ? '' : 'logo2'}}">
-                    <image src='{{imgSrc+itemData.cover}}' mode='widthFix' class='logo-img'></image>
+                    <image src='{{imgSrc+itemData.cover}}' mode='aspectFit' class='logo-img'></image>
                 </view>
             </view>
-            <view class='title'>{{itemData.title}}</view>
+            <view class='title'>{{itemData.title}} | {{itemData.activity}}</view>
             <view class='range'>{{itemData.hour_b}}-{{itemData.hour_e}}</view>
             <view class='address'>{{itemData.address}}</view>
             <view class="user-info">

@@ -22,7 +22,7 @@
                 </div>
             </swiper-slide>
         </swiper>
-        <ul class="tag">
+        <ul class="tag" v-if="listData.length > 1">
             <li v-for="(item,index) in listData" :class="index == slideIndex ? 'active' : ''"></li>
         </ul>
     </div>

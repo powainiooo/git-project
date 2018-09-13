@@ -125,6 +125,13 @@ Page({
   //获取定位
   getLocation(){
     let self = this;
+    let lastGetCityTime = wx.getStorageSync('lastGetCityTime');
+    let now = new Date().getTime();
+    if(lastGetCityTime == '' || now > lastGetCityTime + 24*60*60){
+      wx.setStorageSync('lastGetCityTime',now);
+    }else{
+      return;
+    }
     wx.getLocation({
       type: 'wgs84',
       success: function(res) {

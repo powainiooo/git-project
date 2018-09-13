@@ -1,9 +1,9 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/error/error",
-    "pages/index/detail",
     "pages/drink/detail",
+    "pages/index/detail",
+    "pages/error/error",
     "pages/drink/index",
     "pages/order-ticket/order",
     "pages/order-drink/order",

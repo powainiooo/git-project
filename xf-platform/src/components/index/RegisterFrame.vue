@@ -35,7 +35,6 @@
                 <input type="text"
                        placeholder="注册邮箱"
                        v-model="email"
-                       @blur="checkAccount"
                        :readonly="confirmInfos"></div>
             <div class="more" :style="{height:showAll ? '425px' : '0px','margin-bottom':showAll ? '30px' : '0px'}">
                 <div class="line">
@@ -74,7 +73,7 @@
                 </div>
             </div>
             <div style="margin-top: 15px; margin-bottom: 40px;" :class="confirmInfos ? 'hide':''">
-                <t-button @dotap="doNext" v-if="!showAll" :isDisabled="emailDisabled || hasAccount">下一步</t-button>
+                <t-button @dotap="checkAccount" v-if="!showAll" :isDisabled="emailDisabled">下一步</t-button>
                 <t-button @dotap="doNext2" v-if="showAll" :isDisabled="nextDisabled">下一步</t-button>
             </div>
             <div style="margin-top: 50px; margin-bottom: 42px;" v-if="showAll">
@@ -165,6 +164,7 @@
                 }
             },
             checkAccount(){
+                if(this.email == '') return;
                 let self = this;
                 self.$ajax.get('/client/api/check_account',{
                     params:{
@@ -174,10 +174,11 @@
                     let data = res.data;
                     if(data.status == 1){
                         self.hasAccount = false;
+                        self.doNext();
                     }else{
                         self.hasAccount = true;
+                        self.inputBlur('email');
                     }
-                    self.inputBlur('email');
                 })
             }
         }

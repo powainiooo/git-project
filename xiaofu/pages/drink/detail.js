@@ -140,7 +140,9 @@ Page({
   //画海报
   drawPoster(){
     let data = this.data.itemData,imgSrc = this.data.imgSrc;
-    wx.showLoading();
+    wx.showLoading({
+      title:'生成中'
+    });
     const ctx = wx.createCanvasContext('poster');
     Promise.all([
       wxDownloadFile({
@@ -150,7 +152,7 @@ Page({
         url: imgSrc+data.logo_pic
       }),
       wxDownloadFile({
-        url: 'http://ticket.pc-online.cc/upload/code/code_ABC_236.jpg'
+        url: data.wxacode
       })
     ]).then(res => {
       //背景色

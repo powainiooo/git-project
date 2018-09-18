@@ -9,7 +9,7 @@
     .step2-frame .frame .step1{ width: 380px;}
     .step2-frame .frame .step2{ width: 520px;}
     .step2-frame .frame2 .step1{ width: 300px;}
-    .step2-frame .tframe{ position: relative;}
+    .step2-frame .tframe{ position: relative; min-height: 360px;}
     .step2-frame .tframe:after{ content: ''; width:1px; position: absolute; top: -60px; right: 0; bottom: -100px; background-color: #e5e5e5;}
     .step2-frame .frame .title{ font-size: 18px; color: #000000; font-weight: bold; border-bottom: 1px solid #e5e5e5; padding-left: 50px; display: flex; justify-content: space-between; align-items: center;}
     .step2-frame .frame .title span{ font-size: 66px; margin-right: 10px; font-family: 'Helve';}

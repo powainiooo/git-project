@@ -97,8 +97,16 @@
             }
         },
         computed:{
+            phoneDisabled(){
+                let reg = /^[1][3,4,5,7,8][0-9]{9}$/;
+                return reg.test(this.mobile);
+            },
+            idCheck(){
+                let reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+                return reg.test(this.idsnum);
+            },
             btnDisabled(){
-                if(this.logoName != '' && this.address != '' && this.name != '' && this.mobile != '' && this.idsnum != '' && this.logoImgUrl != ''){
+                if(this.logoName != '' && this.address != '' && this.name != '' && this.phoneDisabled && this.idCheck && this.logoImgUrl != ''){
                     if(this.registerType == 'company'){
                         if(this.companyName != '' && this.companyImgUrl != ''){
                             return false

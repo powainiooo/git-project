@@ -74,7 +74,7 @@
             </div>
             <div style="margin-top: 15px; margin-bottom: 40px;" :class="confirmInfos ? 'hide':''">
                 <t-button @dotap="checkAccount" v-if="!showAll" :isDisabled="emailDisabled">下一步</t-button>
-                <t-button @dotap="doNext2" v-if="showAll" :isDisabled="nextDisabled">下一步</t-button>
+                <t-button @dotap="checkPhone" v-if="showAll" :isDisabled="nextDisabled">下一步</t-button>
             </div>
             <div style="margin-top: 50px; margin-bottom: 42px;" v-if="showAll">
                 <a href="javascript:;" class="hint" @click="doBackLogin" :class="confirmInfos ? 'hide':''">已有账号？</a>
@@ -102,7 +102,8 @@
                 showWarn:false,
                 warnTop:0,
                 warnTxt:'',
-                hasAccount:true
+                hasAccount:true,
+                hasPhone:true
             }
         },
         computed:{
@@ -149,6 +150,10 @@
                     this.showWarn = this.phoneDisabled;
                     this.warnTop = 150;
                     this.warnTxt = '手机号格式不正确';
+                }else if(name == 'phone2'){
+                    this.showWarn = this.hasPhone;
+                    this.warnTop = 150;
+                    this.warnTxt = '手机号已注册';
                 }else if(name == 'psw'){
                     this.showWarn = !this.pswPass;
                     this.warnTop = 270;
@@ -178,6 +183,23 @@
                     }else{
                         self.hasAccount = true;
                         self.inputBlur('email');
+                    }
+                })
+            },
+            checkPhone(){
+                let self = this;
+                self.$ajax.get('/client/api/check_mobile',{
+                    params:{
+                        mobile:this.mobile
+                    }
+                }).then(res=>{
+                    let data = res.data;
+                    if(data.status == 1){
+                        self.hasPhone = false;
+                        self.doNext2();
+                    }else{
+                        self.hasPhone = true;
+                        self.inputBlur('phone2');
                     }
                 })
             }

@@ -33,7 +33,7 @@
             <bank-info v-if="showItem == 'bankinfo'" @toggle="toggle"></bank-info>
             <editor-bank v-if="showItem == 'editorbank'" @toggle="toggle"></editor-bank>
             <record-list v-if="showItem == 'recordlist'" @toggle="toggle"></record-list>
-            <crash-out v-if="showCrashOut" @toggle="toggle" :id="cashID"></crash-out>
+            <crash-out v-if="showCrashOut" @toggle="toggle" :data="cashobj"></crash-out>
             <t-laws v-if="showLaws" readonly @close="showLaws=false"></t-laws>
             <contact v-if="showItem == 'contact'" readonly></contact>
             <div class="copyright" v-if="showItem == 'nav' || showItem == 'contact'">
@@ -64,8 +64,11 @@
                 showItem:'nav',
                 showLaws:false,
                 showCrashOut:false,
-                cashID:0,
-                cash:0
+                cashobj:{
+                    id:0,
+                    total:0,
+                    site:0
+                }
             }
         },
         computed:{
@@ -81,16 +84,17 @@
             doHideNavs(){
                 this.$store.commit('doShowGlobalMenuDetail',false);
             },
-            toggle(val,id,cash){
+            toggle(val,id,cash,site){
                 if(val == 'laws'){
                     this.showLaws = true;
                 }else if(val == 'crashout'){
                     this.showCrashOut = true;
+                    this.cashobj.id = id;
+                    this.cashobj.total = cash;
+                    this.cashobj.site = site;
                 }else if(val == 'recordlist'){
                     this.showItem = val;
                     this.showCrashOut = false;
-                    this.cashID = id;
-                    this.cash = cash;
                 }else if(val == 'close'){
                     this.showItem = 'nav';
                     this.$store.commit('doShowGlobalMenuDetail',false);

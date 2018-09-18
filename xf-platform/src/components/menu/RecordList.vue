@@ -60,7 +60,7 @@
                     <td><span class="sign1">{{item.total}}</span></td>
                     <td><span class="sign1">{{item.cash}}</span></td>
                     <td v-if="item.status == 1">未可提现</td>
-                    <td v-if="item.status == 2"><t-button size="min" @dotap="$emit('toggle','crashout',item.id,item.cash)">申请提现</t-button></td>
+                    <td v-if="item.status == 2"><t-button size="min" @dotap="$emit('toggle','crashout',item.id,item.total,site)">申请提现</t-button></td>
                     <td v-if="item.status == 3">已申请</td>
                     <td v-if="item.status == 4">已提现</td>
                     <td v-if="item.status == 5">
@@ -84,7 +84,8 @@
             return{
                 keyword:'',
                 selectType:'0',
-                listData:[]
+                listData:[],
+                site:0
             }
         },
         mounted(){
@@ -100,6 +101,7 @@
                     }
                 }).then(res=>{
                     self.listData = res.data.data;
+                    self.site = res.data.site;
                 })
             }
         }

@@ -19,13 +19,13 @@
                             <span style="font-size: 16px;">销售量</span>
                         </Radio>
                     </RadioGroup>
-                    <DatePicker type="daterange" placement="bottom-end" placeholder="Select date" style="width: 200px" v-model="dateArr" @on-change="dateChange"></DatePicker>
+                    <DatePicker type="daterange" format="yyyy/MM/dd" placement="bottom-end" placeholder="Select date" style="width: 200px" v-model="dateArr" @on-change="dateChange"></DatePicker>
                 </div>
                 <div id="proChart2" style="height: 310px;"></div>
             </div>
         </div>
         <div class="pr">
-            <DatePicker type="date" placement="bottom-end" placeholder="Select date" style="width: 200px; position: absolute; top: 20px; right: 20px; z-index: 10;" v-model="date" @on-change="dateChange"></DatePicker>
+            <DatePicker type="date" format="yyyy/MM/dd" placement="bottom-end" placeholder="Select date" style="width: 200px; position: absolute; top: 20px; right: 20px; z-index: 10;" v-model="date" @on-change="dateChange"></DatePicker>
             <div id="proChart3" style="height:460px;background-color: #eeeef0;"></div>
         </div>
     </div>
@@ -33,6 +33,7 @@
 
 <script type='es6'>
     import echarts from 'echarts';
+    import {formatDate} from '@/assets/js/date.js';
     export default {
         name: 'app',
         data(){
@@ -45,18 +46,17 @@
         props:['id'],
         mounted(){
             this.date = new Date();
-            this.dateArr[0] = new Date(this.date.getTime() - 7*24*60*60*1000);
+            this.dateArr[0] = new Date(new Date().getTime() - 7*24*60*60*1000);
             this.dateArr[1] = new Date();
             setTimeout(()=>{
                 this.getChartData();
             },200);
-
         },
         methods:{
             getChartData(){
-                let begin = this.dateArr[0].getTime();
-                let end = this.dateArr[1].getTime();
-                let date = this.date.getTime();
+                let begin = formatDate(this.dateArr[0],'yyyy/MM/dd');
+                let end = formatDate(this.dateArr[1],'yyyy/MM/dd');
+                let date = formatDate(this.date,'yyyy/MM/dd');
                 this.$ajax.get('/client/api/sale_data',{
                     params:{
                         aid:this.id,

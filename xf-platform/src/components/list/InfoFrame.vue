@@ -105,11 +105,11 @@
         <div class="qrcode" v-if="!isVerify">
             <div class="qritem">
                 <img :src="itemData.wxacode" width="100" height="100">
-                <t-button size="min" @dotap="drawPoster">下载链接码</t-button>
+                <t-button size="min" @dotap="downloadQR(itemData.wxacode)">下载链接码</t-button>
             </div>
             <div class="qritem">
                 <img :src="itemData.check_code" width="100" height="100">
-                <t-button size="min" @dotap="downloadQR">下载验票码</t-button>
+                <t-button size="min" @dotap="downloadQR(itemData.check_code)">下载验票码</t-button>
             </div>
         </div>
 
@@ -168,7 +168,6 @@
         },
         mounted(){
             this.resetTypeList();
-            this.drawPoster();
         },
         methods:{
             resetTypeList(){
@@ -351,14 +350,14 @@
                 var filename = '链接'+new Date().getTime()+'.jpeg';
                 saveFile(imgData,filename);
             },
-            downloadQR(){
+            downloadQR(url){
                 // 将图片的src属性作为URL地址
                 var a = document.createElement('a');
                 var event = new MouseEvent('click');
 
                 a.download = '二维码';
                 a.target = 'blank';
-                a.href = this.itemData.check_code;
+                a.href = url;
 
                 a.dispatchEvent(event)
             }

@@ -50,6 +50,7 @@
                 <div class="line"><input type="text" placeholder="公司地址" v-model="address"></div>
                 <div class="line"><input type="text" placeholder="电话" v-model="phone"></div>
                 <div class="line"><input type="text" placeholder="开户行" v-model="bankname"></div>
+                <div class="line"><input type="text" placeholder="开户姓名" v-model="bankusername"></div>
                 <div class="line"><input type="text" placeholder="银行账号" v-model="banknum"></div>
                 <div style="margin-top: 55px; font-size: 12px; color: #888888;">需收取3.6%税点及快递费，选择需要发票后提款额会自动扣除税点，快递费为到付。</div>
             </div>
@@ -65,7 +66,7 @@
         name: 'App',
         components: {TButton},
         mixins: [vericode],
-        props:['id','cash'],
+        props:['data'],
         data(){
             return {
                 isNeed: '2',
@@ -74,9 +75,13 @@
                 ids:'',
                 address:'',
                 bankname:'',
+                bankusername:'',
                 banknum:'',
                 phone:''
             }
+        },
+        mounted(){
+            console.log(this.data);
         },
         computed: {
             userMobile(){
@@ -93,6 +98,13 @@
                     }
                 }
                 return false
+            },
+            cash(){
+                if(this.isNeed == '2'){
+                    return (this.data.total - this.data.total*(this.data.site/100)).toFixed(2)
+                }else if(this.isNeed == '1'){
+                    return (this.data.total - this.data.total*(this.data.site/100)*1.036).toFixed(2)
+                }
             }
         },
         methods: {
@@ -120,6 +132,7 @@
                     obj.address = this.address;
                     obj.mobile = this.phone;
                     obj.bankname = this.bankname;
+                    obj.true_name = this.bankusername;
                     obj.banknum = this.cardnums;
                 }
                 this.$ajax.post('/client/api/apply_cash',qs.stringify(obj)).then(res=>{

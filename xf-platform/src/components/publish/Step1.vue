@@ -129,7 +129,7 @@
                         <p class="name">联系电话</p>
                         <p class="info">{{formData.mobile}}</p>
                     </div>
-                    <div class="inp-line" v-if="!isEditor"><input type="text" placeholder="活动联系电话"  v-model="formData.mobile" @keyup="inputBlur"></div>
+                    <div class="inp-line" v-if="!isEditor"><input type="text" placeholder="活动联系电话"  v-model="formData.mobile" @blur="inputBlur"></div>
                 </div>
                 <div class="warn" v-if="showWarn">联系电话格式有误</div>
             </div>

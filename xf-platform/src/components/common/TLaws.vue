@@ -26,7 +26,7 @@
 <template>
     <div class="laws-frame">
         <div class="logo"><i class="icon-logo"></i></div>
-        <a href="javascript:;" class="laws-close" v-if="readonly" @click="$emit('close')"><Icon type="md-close" /></a>
+        <a href="javascript:;" class="laws-close" @click="$emit('close')"><Icon type="md-close" /></a>
         <div class="content">
             <div class="laws-list">
                 <ul>

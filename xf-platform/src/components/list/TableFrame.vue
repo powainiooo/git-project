@@ -58,11 +58,11 @@
                 <tbody>
                 <tr v-for="item in listData">
                     <td>{{item.sele}}</td>
-                    <td>{{item.order_time}}</td>
+                    <td>{{fmt(item.order_time)}}</td>
                     <td>{{item.name}}</td>
                     <td>{{item.mobile}}</td>
-                    <td>{{item.address}}</td>
-                    <td>{{item.idnum}}</td>
+                    <td>{{item.address || '--'}}</td>
+                    <td>{{item.idnum || '--'}}</td>
                     <td>{{item.order_num}}</td>
                     <td>{{item.price}}</td>
                     <td><span class="numbers">{{item.nums}}</span></td>
@@ -79,6 +79,7 @@
 <script type='es6'>
     import TButton from '@/components/common/TButton.vue'
     import TQues from '@/components/common/TQues.vue'
+    import {formatDate} from '@/assets/js/date.js'
     export default {
         name: 'app',
         components:{TButton,TQues},
@@ -127,6 +128,7 @@
                             let data = res.data;
                             if(data.status == 1){
                                 self.$Message.success('退款成功');
+                                self.getListData();
                             }else{
                                 self.$Message.warning(data.msg);
                             }
@@ -137,6 +139,7 @@
             },
             changePage(val){
                 this.page = val;
+                this.getListData();
                 console.log(val)
             },
             doExcel(){
@@ -185,6 +188,10 @@
                         })
                     }
                 })
+            },
+            fmt(time){
+                let date = new Date(parseInt(time)*1000);
+                return formatDate(date,'yyyy-MM-dd')
             }
         }
     }

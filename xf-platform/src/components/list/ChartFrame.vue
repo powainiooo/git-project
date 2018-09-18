@@ -139,6 +139,7 @@
                                     }
                                 }
                             },
+                            labelLine:{length:30},
                             itemStyle:{
                                 shadowOffsetY:3,
                                 shadowBlur:8,
@@ -161,7 +162,7 @@
                     grid: {
                         top:'3%',
                         left: '3%',
-                        right: '4%',
+                        right: 40,
                         bottom: '3%',
                         containLabel: true
                     },

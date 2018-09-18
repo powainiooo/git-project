@@ -15,6 +15,9 @@
     .organizer-frame .step2 .demo .n-btn{ width: 270px;}
     .organizer-frame .step2 .ids-frame{ display: flex; justify-content: space-between;}
     .organizer-frame .step2 .ids-frame .upload-frame{ flex: 1;}
+
+    .organizer-frame .warn{ width: 130px; position: absolute; top: 270px; left: 345px; background-color: #e73828; padding: 10px 15px; border-radius: 5px; z-index: 50; font-size: 12px; color: #fff;}
+    .organizer-frame .warn:before{ content: ''; width: 10px; height: 10px; border: 5px solid rgba(0,0,0,0); border-right-color: #e73828; position: absolute; top: 50%; left: -10px; margin-top: -5px;}
 </style>
 
 <template>
@@ -30,9 +33,11 @@
                     </div>
                     <p class="mb20 tc"  v-if="registerType == 'personal'"><input type="text" placeholder="联系地址" v-model="address"></p>
                     <p class="mb20 tc"><input type="text" placeholder="负责人姓名" v-model="name"></p>
-                    <p class="mb20 tc"><input type="text" placeholder="负责人联系电话" v-model="mobile"></p>
-                    <p class="mb20 tc"><input type="text" placeholder="负责人身份证号" v-model="idsnum"></p>
+                    <p class="mb20 tc"><input type="text" placeholder="负责人联系电话" v-model="mobile" @blur="inputBlur('phone')"></p>
+                    <p class="mb20 tc"><input type="text" placeholder="负责人身份证号" v-model="idsnum" @blur="inputBlur('ids')"></p>
                 </div>
+
+                <div class="warn" :style="{top:warnTop+'px'}" v-if="showWarn">{{warnTxt}}</div>
             </div>
             <div class="step2">
                 <h3 class="title"><span>2</span>上传图片</h3>
@@ -93,7 +98,10 @@
                 companyImgUrl:'',
                 idFrontImgUrl:'',
                 idBackImgUrl:'',
-                logoImgUrl:''
+                logoImgUrl:'',
+                showWarn:false,
+                warnTop:120,
+                warnTxt:'sss'
             }
         },
         computed:{
@@ -122,7 +130,17 @@
             }
         },
         methods:{
-
+            inputBlur(name){
+                if(name == 'phone'){
+                    this.showWarn = !this.phoneDisabled;
+                    this.warnTop = 381;
+                    this.warnTxt = '手机号格式不正确';
+                }else if(name == 'ids'){
+                    this.showWarn = this.idCheck;
+                    this.warnTop = 441;
+                    this.warnTxt = '身份证格式不正确';
+                }
+            }
         }
     }
 

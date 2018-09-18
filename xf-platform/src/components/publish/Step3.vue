@@ -43,7 +43,8 @@
                                     <li><span>2</span>一张图片对应一段文字，可增添多个图片及对应文字，最多限制6张图</li>
                                 </ul>
                                 <ul class="list1" v-if="errorData.goods_desc.length != 0">
-                                    <li v-for="(item,index) in errorData.goods_desc"><span>{{index+1}}</span>图片：{{item.img == '' ? '无' : item.img}}；文案：{{item.desc == '' ? '无' : item.desc}}</li>
+                                    <li v-for="(item,index) in errorData.goods_desc">
+                                        <span>{{index+1}}</span>{{item.img == '' ? '' : '活动图片：'+item.img+'；'}}{{item.desc == '' ? '' : '活动文案：'+item.desc}}</li>
                                 </ul>
                             </t-ques>
                         </div>
@@ -85,7 +86,8 @@
                                     <li><span>2</span>一个艺人logo对应上传一个艺人照片</li>
                                 </ul>
                                 <ul class="list1" v-if="errorData.person_desc.length != 0">
-                                    <li v-for="(item,index) in errorData.person_desc"><span>{{index+1}}</span>logo：{{item.img == '' ? '无' : item.img}}；照片：{{item.picture == '' ? '无' : item.picture}}</li>
+                                    <li v-for="(item,index) in errorData.person_desc">
+                                        <span>{{index+1}}</span>{{item.img == '' ? '' : '艺人logo：'+item.img+'；'}}{{item.picture == '' ? '' : '照片：'+item.picture}}</li>
                                 </ul>
                             </t-ques>
                         </div>
@@ -196,6 +198,7 @@
                 }
             },
             newActivityItem(){
+                if(this.activityListData.length >= 6) return;
                 this.activityListData.push({
                     imgUrl:'',
                     desc:''

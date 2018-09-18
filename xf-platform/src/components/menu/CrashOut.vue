@@ -120,7 +120,7 @@
             },
             doSubmit(){
                 let obj = {},self = this;
-                obj.aid = this.id;
+                obj.aid = this.data.id;
                 obj.phone = this.mobile;
                 obj.vericode = this.vericode;
                 obj.password = this.password;

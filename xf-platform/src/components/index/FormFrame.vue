@@ -38,7 +38,7 @@
             </section>
         </transition>
 
-        <t-laws v-if="showLaws" @dosubmit="dosubmit"></t-laws>
+        <t-laws v-if="showLaws" @dosubmit="dosubmit" @close="showLaws = false"></t-laws>
     </div>
 </template>
 

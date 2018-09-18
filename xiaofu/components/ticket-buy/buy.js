@@ -105,7 +105,8 @@ Component({
             address:self.data.addressVal,
             idnum:self.data.idnum,
             sele:self.data.selectTicket.select,
-            nums:self.data.numbersArr[self.data.numberIndex]
+            nums:self.data.numbersArr[self.data.numberIndex],
+            city:app.globalData.city
           },
           success: function(res) {
             let jsapi = res.data.jsapiparam;

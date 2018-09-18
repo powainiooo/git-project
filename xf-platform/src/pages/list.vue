@@ -31,7 +31,8 @@
             <div v-for="(item,index) in listData"
                  :class="touchIndex == index ? 'touch' : ''"
                  @mousedown="mDown(index)"
-                 @mouseup="gotoDetail(index)">
+                 @mouseup="gotoDetail(index)"
+                 :style="{cursor:item.status == 3 ? 'default' : 'pointer'}">
                 <list-item
                     :itemdata="item"
                     :fileurl="fileurl"

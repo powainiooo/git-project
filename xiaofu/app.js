@@ -1,4 +1,8 @@
 //app.js
+const QQMapWX = require('utils/qqmap-wx-jssdk.min.js');
+const qMap = new QQMapWX({
+  key:'AH7BZ-VV736-WNUSA-EP35M-3TCOZ-DTBXG'
+});
 App({
   onLaunch: function () {
     let self = this;
@@ -79,7 +83,25 @@ App({
     imgSrc:'http://ticket.pc-online.cc/upload/',
     ticketOrderNum:null,
     ticketBuyNum:0,
-    access_token:''
+    access_token:'',
+    city:''
+  },
+  getCity(){
+    let self = this;
+    wx.getLocation({
+      type: 'wgs84',
+      success: function(res) {
+        qMap.reverseGeocoder({
+          location: {
+            latitude: res.latitude,
+            longitude: res.longitude
+          },
+          success: function(res) {
+            self.globalData.city = res.result.address_component.city;
+          }
+        });
+      }
+    });
   },
   getAccessToken(){
     let self = this;

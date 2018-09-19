@@ -75,6 +75,7 @@ App({
     });
 
     this.getAccessToken();
+    this.getCity();
   },
   globalData: {
     userInfo: null,

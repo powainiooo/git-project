@@ -28,7 +28,7 @@
             wx:for-index="index"
             wx:for-item="item"
             wx:key="index"
-            class="{{item.nums == 0 ? 'disabled' : ''}}"
+            class="{{item.is_over == 1 ? 'disabled' : ''}}"
             bindtap="toggleTypeList"
             data-show="{{false}}"
             data-val="{{index}}">{{item.select}}</view>

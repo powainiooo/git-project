@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/order/confirm",
     "pages/order/useing",
     "pages/order/used",
     "pages/order/overdue",
@@ -8,7 +9,6 @@
     "pages/index/index",
     "pages/package/package",
     "pages/order/list",
-    "pages/order/confirm",
     "pages/information/information",
     "pages/select/select",
     "pages/date/date",

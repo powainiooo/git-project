@@ -1,0 +1,144 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <title>生成海报</title>
+    <style>
+        *{margin: 0; padding: 0;}
+        .frame{ display: flex; margin: 40px;}
+    </style>
+</head>
+<body style="background-color: #eee;">
+<div class="frame">
+    <p>canvas：<canvas id="poster" width="750" height="760" style=' background-color:#fff;'></canvas></p>
+    <p>生成的图片:<img src="" id="img" /> </p>
+</div>
+</body>
+</html>
+<script>
+    function imgLoad(src){
+        return new Promise(function(resolve,reject){
+            var image = new Image();
+            image.onload = function(){
+                resolve(image);
+            };
+            image.onerror = function(){
+                reject(new Error('Could not load image at ' + src))
+            };
+            image.src = src;
+        })
+    }
+
+    var data = {
+        id:237,
+        begin:'2018/09/29',
+        end:'',
+        goods_name:'Like Mike',
+        activity:'小夫有票',
+        cover:'images/logo1.png',
+        cover2:'images/img1.jpg',
+        wxacode:'images/code.jpg',
+        type:'1'
+    };
+//    var imgSrc = 'http://ticket.pc-online.cc/upload/';
+    //测试地址才填空，正式放上去记得填前缀地址
+    var imgSrc = '';
+    function drawPoster(){
+        var c = document.getElementById('poster');
+        var ctx = c.getContext('2d');
+        //背景色
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, 750, 760);
+
+        Promise.all([
+            imgLoad('images/top.png'),
+            imgLoad('images/bottom.png'),
+            imgLoad(imgSrc+data.cover),
+            imgLoad(imgSrc+data.cover2),
+            imgLoad(data.wxacode)
+        ]).then(function(res){
+            //顶部波浪图
+            ctx.drawImage(res[0], 0, 0,750,145);
+            //日期
+            ctx.font = "27px 'Helve'";
+            ctx.fillStyle = '#000000';
+            var ten = data.begin.slice(2,3),one = data.begin.slice(3,4);
+            var type = data.type;
+            if(type == 1){
+                ctx.fillText(`2         0         ${ten}         ${one}`,20,190);
+            }else if(type == 2){
+                ctx.fillText(`2           0           ${ten}           ${one}`,20,190);
+            }else if(type == 3){
+                ctx.fillText(`2           0           ${ten}           ${one}`,20,190);
+            }
+            var date;
+            if(type == 1){
+                ctx.font = "100px 'Helve'";
+                date = data.begin.substr(5,5);
+                ctx.fillText(date,20,300);
+            }else if(type == 2){
+                ctx.font = "80px 'Helve'";
+                date = data.begin.substr(5,5)+'-'+data.end.substr(8,2);
+                ctx.fillText(data.date,20,294);
+            }else if(type == 3){
+                ctx.font = "60px 'Helve'";
+                date = data.begin.substr(5,5)+'-'+data.end.substr(5,2);
+                ctx.fillText(data.date,20,290);
+            }
+            //标题
+            ctx.font = "44px 'Helve'";
+            ctx.fillText(data.goods_name+' | '+data.activity,20,390);
+            // 竖线
+            ctx.strokeStyle = '#c1c1c1';
+            ctx.beginPath();
+            if(type == 1){
+                ctx.moveTo(310,160);
+                ctx.lineTo(310,320);
+            }else if(type == 2){
+                ctx.moveTo(370,160);
+                ctx.lineTo(370,320);
+            }else if(type == 3){
+                ctx.moveTo(380,160);
+                ctx.lineTo(380,320);
+            }
+
+            ctx.stroke();
+            //横线 短
+            ctx.beginPath();
+            ctx.moveTo(0,210);
+            if(type == 1){
+                ctx.lineTo(310,210);
+            }else if(type == 2){
+                ctx.lineTo(370,210);
+            }else if(type == 3){
+                ctx.lineTo(380,210);
+            }
+            ctx.stroke();
+            //横线 长
+            ctx.beginPath();
+            ctx.moveTo(0,320);
+            ctx.lineTo(750,320);
+            ctx.stroke();
+            //logo
+            var logoXArr = [530-100,560-100,560-100];
+            ctx.drawImage(res[2],logoXArr[type-1],240-70,200,140);
+            //详情图
+            ctx.drawImage(res[3],0,420,750,650);
+            //底部logo
+            ctx.drawImage(res[1],450,460,300,300);
+            //二维码
+            ctx.drawImage(res[4],610,615,120,120);
+
+            //生成图片的base64
+            var imgData = c.toDataURL("image/jpeg");
+            document.getElementById('img').src = imgData;
+        });
+    }
+    drawPoster();
+</script>

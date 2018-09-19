@@ -51,7 +51,6 @@ Page({
   },
   //事件处理函数
   onLoad: function (options) {
-    console.log('index');
     let id = options.id || '',self = this,cityID = 0;
     if(id == ''){
       this.getAddressData();
@@ -442,7 +441,7 @@ Page({
         keyword: self.data.keywords,
         page: self.data.page,
         city: self.data.city,
-        activityID: self.data.activityID
+        mid: self.data.activityID
       },
       success: function(res) {
         let list = res.data.data.list,hint = '',sponsorSrc = '';

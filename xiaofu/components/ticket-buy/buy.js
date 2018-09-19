@@ -6,18 +6,21 @@ Component({
       type: Object,
       value: {},
       observer(newVal,oldVal,change){
-        let list = newVal.anew,obj=list[0];
-        for(let item of list){
-          if(obj.price > item.price){
-            obj = item;
+        if(newVal.anew){
+          let list = newVal.anew,obj=list[0];
+          for(let item of list){
+            if(obj.price > item.price){
+              obj = item;
+            }
           }
+
+          this.setNums(obj);
+          this.setData({
+            typeList:newVal.anew,
+            selectTicket:obj
+          })
         }
 
-        this.setNums(obj);
-        this.setData({
-          typeList:newVal.anew,
-          selectTicket:obj
-        })
       }
     }
   },
@@ -48,7 +51,7 @@ Component({
     toggleTypeList(event){
       let val = event.target.dataset.val == undefined ? -1 : event.target.dataset.val;
       let obj = val == -1 ? this.data.selectTicket : this.data.typeList[val];
-      if(obj.nums == 0) return;
+      if(obj.is_over == 1) return;
       let isShow = event.target.dataset.show;
       let animation = wx.createAnimation({
         duration:300,

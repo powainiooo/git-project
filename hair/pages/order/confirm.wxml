@@ -52,15 +52,4 @@
     </view>
 </view>
 <!--pro detail-->
-<view class="detail-frame" wx:if="{{showDetails}}">
-    <view class="line1">
-        <view class="icons icon-guanbi" bindtap="hideDetails"></view>
-        <view class="title1"><text>Aesop Rose Hair Scalp Moisturising Masque\n伊索 玫瑰滋润护发膜</text></view>
-        <view class="title2">深入润发护理有助头发恢复细软，带来活力光泽，同时舒缓干燥及有屑头皮。</view>
-        <image src="../../res/img/pics/pro9.png" mode="scaleToFill" class="img"></image>
-    </view>
-    <view class="line2">
-        <view class="decs"><text>适用于\n头发干燥</text></view>
-        <view class="icons icon-logo"></view>
-    </view>
-</view>
+<detail-view showDetails="{{showDetails}}"></detail-view>

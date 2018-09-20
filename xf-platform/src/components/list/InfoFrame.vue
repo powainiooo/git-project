@@ -105,7 +105,7 @@
         <div class="qrcode" v-if="!isVerify">
             <div class="qritem">
                 <img :src="itemData.wxacode" width="100" height="100">
-                <t-button size="min" @dotap="downloadQR(itemData.wxacode)">下载链接码</t-button>
+                <t-button size="min" @dotap="downloadQR(fileurl+itemData.poster)">下载链接码</t-button>
             </div>
             <div class="qritem">
                 <img :src="itemData.check_code" width="100" height="100">

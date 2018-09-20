@@ -131,13 +131,19 @@
         },
         methods:{
             inputBlur(name){
+                console.log(name);
                 if(name == 'phone'){
                     this.showWarn = !this.phoneDisabled;
                     this.warnTop = 381;
                     this.warnTxt = '手机号格式不正确';
                 }else if(name == 'ids'){
-                    this.showWarn = this.idCheck;
-                    this.warnTop = 441;
+                    this.showWarn = !this.idCheck;
+                    if(this.registerType == 'company'){
+                        this.warnTop = 441;
+                    }else if(this.registerType == 'personal'){
+                        this.warnTop = 381;
+                    }
+
                     this.warnTxt = '身份证格式不正确';
                 }
             }

@@ -43,6 +43,7 @@
                                     <li><span>2</span>一张图片对应一段文字，可增添多个图片及对应文字，最多限制6张图</li>
                                 </ul>
                                 <ul class="list1" v-if="errorData.goods_desc.length != 0">
+                                    <li>error</li>
                                     <li v-for="(item,index) in errorData.goods_desc">
                                         <span>{{index+1}}</span>{{item.img == '' ? '' : '活动图片：'+item.img+'；'}}{{item.desc == '' ? '' : '活动文案：'+item.desc}}</li>
                                 </ul>
@@ -55,7 +56,7 @@
                         <h3 class="index">{{index < 9 ? 0 : ''}}{{index + 1}}</h3>
                         <div class="pl50 pt20 pb20 pr" style="border-bottom: 1px solid #e5e5e5;">
                             <t-upload v-model="item.imgUrl"
-                                      :redButton="isEditor ? errorData.goods_desc == 0 ? false : errorData.goods_desc[index].img != '' : false"
+                                      :redButton="isEditor ? errorData.goods_desc.length == 0 ? false : errorData.goods_desc[index].img != '' : false"
                                       :hideButton="activityCheck(index,'img')">
                                 <template slot="title">
                                     <h3>活动宣传图片</h3>
@@ -72,7 +73,7 @@
                         </div>
                     </div>
                     <div class="tc mt30 mb30" v-if="!isEditor">
-                        <a href="javascript:;" @click="newActivityItem"><img src="@/assets/img/add.png"> </a>
+                        <a href="javascript:;" @click="newActivityItem" v-if="activityListData.length < 6"><img src="@/assets/img/add.png"> </a>
                     </div>
                 </div>
                 <div class="step1">
@@ -98,7 +99,7 @@
                         <div class="pl50 pt20 pb20 pr" style="border-bottom: 1px solid #e5e5e5;">
                             <t-upload v-model="item.logoUrl"
                                       :class="item.logoUrl != '' ? 'act-upload' : ''"
-                                      :redButton="isEditor ? errorData.person_desc == 0 ? false : errorData.person_desc[index].img != '' : false"
+                                      :redButton="isEditor ? errorData.person_desc.length == 0 ? false : errorData.person_desc[index].img != '' : false"
                                       :hideButton="actCheck(index,'img')">
                                 <template slot="title">
                                     <h3>艺人LOGO</h3>
@@ -109,7 +110,7 @@
                         </div>
                         <div class="pl50 pt20 pb20 pr" style="border-bottom: 3px solid #e5e5e5;">
                             <t-upload v-model="item.imgUrl"
-                                      :redButton="isEditor ? errorData.person_desc == 0 ? false : errorData.person_desc[index].picture != '' : false"
+                                      :redButton="isEditor ? errorData.person_desc.length == 0 ? false : errorData.person_desc[index].picture != '' : false"
                                       :hideButton="actCheck(index,'picture')">
                                 <template slot="title">
                                     <h3>艺人照片</h3>

@@ -25,6 +25,7 @@
         <transition enter-active-class="animated anim05 slideInUp">
         <step3 v-show="step == '3'" ref="step3" v-model="step3Reg" :errorData="errorData"></step3>
         </transition>
+
     </div>
 </template>
 

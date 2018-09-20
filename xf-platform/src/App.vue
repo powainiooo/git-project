@@ -14,6 +14,9 @@
         computed:{
             showMenus(){
                 return this.$store.state.showGlobalMenu
+            },
+            iframeLink(){
+                return this.$store.state.iframeLink
             }
         },
         mounted(){

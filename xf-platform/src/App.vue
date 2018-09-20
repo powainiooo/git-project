@@ -1,6 +1,8 @@
 <template>
     <div id="app">
-        <div class="logo"><i class="icon-logo"></i></div>
+        <div class="logo" @click="gotoList" :style="{cursor: showMenus ? 'pointer' : 'default'}">
+            <i class="icon-logo"></i>
+        </div>
         <index v-if="showMenus"></index>
         <router-view/>
     </div>
@@ -36,6 +38,13 @@
                 // 对响应错误做点什么
                 return Promise.reject(error);
             });
+        },
+        methods:{
+            gotoList(){
+                if(showMenus){
+                    this.$router.push('list');
+                }
+            }
         }
     }
 </script>
@@ -47,5 +56,5 @@
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
     }
-    #app>.logo{ font-size: 32px; color: #ffffff; position: absolute; top: 60px; left: 60px; opacity: 0;}
+    #app>.logo{ font-size: 32px; color: #ffffff; position: absolute; top: 60px; left: 60px; cursor: pointer;}
 </style>

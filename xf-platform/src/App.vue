@@ -41,7 +41,7 @@
         },
         methods:{
             gotoList(){
-                if(showMenus){
+                if(this.showMenus){
                     this.$router.push('list');
                 }
             }
@@ -56,5 +56,5 @@
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
     }
-    #app>.logo{ font-size: 32px; color: #ffffff; position: absolute; top: 60px; left: 60px; cursor: pointer;}
+    #app>.logo{ font-size: 32px; color: #ffffff; position: absolute; top: 60px; left: 60px; cursor: pointer; z-index: 2000;}
 </style>

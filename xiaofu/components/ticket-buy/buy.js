@@ -9,7 +9,7 @@ Component({
         if(newVal.anew){
           let list = newVal.anew,obj=list[0];
           for(let item of list){
-            if(obj.price > item.price){
+            if(obj.price > item.price && item.is_over != '1'){
               obj = item;
             }
           }
@@ -17,6 +17,7 @@ Component({
           this.setNums(obj);
           this.setData({
             typeList:newVal.anew,
+            typeBottom:-newVal.anew.length*100+'rpx',
             selectTicket:obj
           })
         }
@@ -30,7 +31,6 @@ Component({
   data: {
     numbersArr:[1,2,3,4,5,6,7,8,9,10],
     numberIndex:0,
-    animDataTypeList:{},
     nameVal:'',
     phoneVal:'',
     addressVal:'',
@@ -40,7 +40,8 @@ Component({
     selectTicket:{},
     showTypeList:false,
     ajaxSrc:app.globalData.ajaxSrc,
-    imgSrc:app.globalData.imgSrc
+    imgSrc:app.globalData.imgSrc,
+    typeBottom:0
   },
   methods:{
     numberChange: function(e) {
@@ -51,22 +52,14 @@ Component({
     toggleTypeList(event){
       let val = event.target.dataset.val == undefined ? -1 : event.target.dataset.val;
       let obj = val == -1 ? this.data.selectTicket : this.data.typeList[val];
-      if(obj.is_over == 1) return;
       let isShow = event.target.dataset.show;
-      let animation = wx.createAnimation({
-        duration:300,
-        timingFunction:'ease-in-out'
-      });
-      // this.animation = animation;
-
-      let dis = isShow ? '160rpx' : -this.data.typeList.length*100+'rpx';
-      animation.bottom(dis).step();
       this.setNums(obj);
-      this.setData({
-        animDataTypeList:animation.export(),
-        selectTicket:obj,
-        showTypeList:isShow
-      })
+      let params = {};
+      params.typeBottom = isShow ? '160rpx' : -this.data.typeList.length*100+'rpx';
+      params.showTypeList = isShow;
+      if(!isShow && obj.is_over == 1)return;
+      params.selectTicket = obj;
+      this.setData(params)
     },
     checkValues(event){
       let data = this.data.itemData;

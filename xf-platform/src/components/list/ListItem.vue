@@ -191,8 +191,21 @@
                 return ''
             },
             doEditor(){
-                this.$store.commit('setEditorData',this.itemdata);
-                this.$router.push('publish');
+                let self = this;
+                this.$ajax.get('/client/api/activity_checked',{
+                    params:{
+                        id:this.itemdata.id
+                    }
+                }).then(res=>{
+                    let data = res.data;
+                    if(data.status == 1){
+                        this.$store.commit('setEditorData',self.itemdata);
+                        this.$store.commit('setErrorData',data.data);
+                        this.$router.push('publish');
+                    }else{
+                        self.$Message.warning(data.msg);
+                    }
+                })
             },
             doOff(type){
                 let self = this,title = '',content = '';

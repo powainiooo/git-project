@@ -7,7 +7,7 @@
     .prolist-frame .list-content>div{ margin:0 30px; transition: transform 0.15s ease-in-out; cursor: pointer;}
     .prolist-frame .list-content>div.touch{ transform: scale(0.96,0.96);}
 
-    .prolist-frame .detail-frame{ width: 100%; height: 100%; display: flex; justify-content: flex-end; align-items: center; overflow: hidden; position: fixed; top: 0; left: 0; z-index: 400;}
+    .prolist-frame .detail-frame{ width: 100%; height: 100%; display: flex; justify-content: flex-end; align-items: center; overflow: hidden; position: fixed; top: 0; left: 0; z-index: 700;}
     .prolist-frame .detail-frame .list-item{ margin-right: 60px; margin-top: 270px;}
 
     .prolist-frame .anim-detail{ animation-duration: 0.5s; animation-timing-function: cubic-bezier(.25,.76,.36,.97)}

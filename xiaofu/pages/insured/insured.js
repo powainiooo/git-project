@@ -42,11 +42,18 @@ Page({
           order_num:app.globalData.ticketOrderNum,
           person:self.data.inforList
         },
-        method:'POST',
         success: function(res) {
-          wx.navigateTo({
-            url: '/pages/result/result?page=insuredSuc'
-          })
+          if(res.data.status == 1){
+            wx.reLaunch({
+              url: '/pages/result/result?page=insuredSuc'
+            })
+          }else{
+            wx.showToast({
+              title:'提交信息出错',
+              icon:'none'
+            })
+          }
+
         },
         fail(){
           wx.navigateTo({

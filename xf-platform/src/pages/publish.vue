@@ -67,10 +67,9 @@
             this.$ajax.defaults.headers.common['tokey'] = Cookies.get('xftokey');
             this.$ajax.defaults.baseURL = 'http://ticket.pc-online.cc';
             this.$ajax.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-            let editorData = this.$store.state.editorData;
-            if(editorData.id != -1){
-                this.getError(editorData.id);
-            }
+            //if(editorData.id != -1){
+            //    this.getError(editorData.id);
+            //}
         },
         methods:{
             nextStep(){

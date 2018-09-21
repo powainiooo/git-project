@@ -32,6 +32,10 @@
     .pro-info .qrcode .qritem{ margin:15px 35px; }
     .pro-info .qrcode .qritem img{ box-shadow: 0 2px 3px rgba(0,0,0,0.2); margin-bottom: 25px;}
     .pro-info .qrcode .qritem .n-btn{ width: 90px; margin-left: 5px;}
+
+    .pro-info .download-frame{ width: 100vw; height: 100vh; background-color: rgba(0,0,0,0.9); z-index: 1000; position: fixed; top: 0; left: 0; display: flex; flex-direction: column; justify-content: center; align-items: center;}
+    .pro-info .download-frame p{ font-size: 14px; color: #ffffff; margin-top: 20px;}
+    .pro-info .download-frame .close{font-size: 40px; color: #ffffff; position: absolute; top: 35px; right: 37px;}
 </style>
 
 <template>
@@ -113,13 +117,12 @@
             </div>
         </div>
 
-        <!-- 画布-->
-        <div style=" width: 800px; position: fixed; top: -10000px; left: -10010px;">
-            <canvas id="poster" width="750" height="760" style=' background-color:#fff;'></canvas>
-            <img src="../../../static/img/top.png" id="top" crossOrigin="anonymous">
-            <img src="../../../static/img/bottom.png" id="bottom" crossOrigin="anonymous">
+        <!-- 下载图片弹窗 -->
+        <div class="download-frame" v-if="downloadSrc != ''">
+            <img :src="downloadSrc" width="450">
+            <p>右键图片另存为可下载活动链接码，活动链接码可用于活动推广使用。</p>
+            <a href="javascript:;" class="close" @click="downloadSrc = ''"><Icon type="md-close" /></a>
         </div>
-
     </div>
 </template>
 
@@ -163,7 +166,8 @@
         data(){
             return{
                 editorTypeList:[],
-                lastTypeList:[]
+                lastTypeList:[],
+                downloadSrc:''
             }
         },
         mounted(){
@@ -230,136 +234,8 @@
                     }
                 })
             },
-            drawPoster(){
-                let data = this.itemData,imgSrc = this.fileurl,type = data.type,self = this;
-                let c = document.getElementById('poster');
-                let ctx = c.getContext('2d');
-                //背景色
-                ctx.fillStyle = '#ffffff';
-                ctx.fillRect(0, 0, 750, 760);
-                //顶部波浪图
-                let top = new Image();
-                top.onload = function(){
-                    ctx.drawImage(top, 0, 0,750,145);
-                };
-                top.src = document.getElementById("top").src;
-                //日期
-                ctx.font = "27px 'Helve'";
-                ctx.fillStyle = '#000000';
-                let ten = data.begin.slice(2,3),one = data.begin.slice(3,4);
-                if(type == 1){
-                    ctx.fillText(`2         0         ${ten}         ${one}`,20,190);
-                }else if(type == 2){
-                    ctx.fillText(`2           0           ${ten}           ${one}`,20,190);
-                }else if(type == 3){
-                    ctx.fillText(`2           0           ${ten}           ${one}`,20,190);
-                }
-                let date;
-                if(type == 1){
-                    ctx.font = "100px 'Helve'";
-                    date = data.begin.substr(5,5);
-                    ctx.fillText(date,20,300);
-                }else if(type == 2){
-                    ctx.font = "80px 'Helve'";
-                    date = data.begin.substr(5,5)+'-'+data.end.substr(8,2);
-                    ctx.fillText(data.date,20,294);
-                }else if(type == 3){
-                    ctx.font = "60px 'Helve'";
-                    date = data.begin.substr(5,5)+'-'+data.end.substr(5,2);
-                    ctx.fillText(data.date,20,290);
-                }
-                //标题
-                ctx.font = "44px 'Helve'";
-                ctx.fillText(data.goods_name+' | '+data.activity,20,390);
-                // 竖线
-                ctx.strokeStyle = '#c1c1c1';
-                ctx.beginPath();
-                if(type == 1){
-                    ctx.moveTo(310,160);
-                    ctx.lineTo(310,320);
-                }else if(type == 2){
-                    ctx.moveTo(370,160);
-                    ctx.lineTo(370,320);
-                }else if(type == 3){
-                    ctx.moveTo(380,160);
-                    ctx.lineTo(380,320);
-                }
-
-                ctx.stroke();
-                //横线 短
-                ctx.beginPath();
-                ctx.moveTo(0,210);
-                if(type == 1){
-                    ctx.lineTo(310,210);
-                }else if(type == 2){
-                    ctx.lineTo(370,210);
-                }else if(type == 3){
-                    ctx.lineTo(380,210);
-                }
-                ctx.stroke();
-                //横线 长
-                ctx.beginPath();
-                ctx.moveTo(0,320);
-                ctx.lineTo(750,320);
-                ctx.stroke();
-                //logo
-                let logoXArr = [530-100,560-100,560-100];
-                let logoImg = new Image();
-                logoImg.onload = function(){
-                    ctx.drawImage(logoImg,logoXArr[type-1],240-70,200,140);
-                };
-                logoImg.src = imgSrc + data.cover;
-                //详情图
-                let cover2 = new Image();
-                cover2.onload = function(){
-                    ctx.drawImage(cover2,0,420,750,650);
-                    //底部logo
-                    let bottom = new Image();
-                    bottom.onload = function(){
-                        ctx.drawImage(bottom,450,460,300,300);
-                        //二维码
-                        let qrcode = new Image();
-                        qrcode.onload = function(){
-                            ctx.drawImage(qrcode,610,615,120,120);
-                            self.downloadImg();
-                        };
-                        qrcode.src = data.wxacode;
-                    };
-                    bottom.src = document.getElementById("bottom").src;
-                };
-                cover2.src = imgSrc + data.cover2;
-            },
-            downloadImg(){
-                let canvas = document.getElementById('poster');
-                let imgData = canvas.toDataURL("image/jpeg");
-                var _fixType = function(type) {
-                    type = type.toLowerCase().replace(/jpg/i, 'jpeg');
-                    var r = type.match(/png|jpeg|bmp|gif/)[0];
-                    return 'image/' + r;
-                };
-                imgData = imgData.replace(_fixType('image/jpeg'),'image/octet-stream');
-                var saveFile = function(data, filename){
-                    var save_link = document.createElementNS('http://www.w3.org/1999/xhtml', 'a');
-                    save_link.href = data;
-                    save_link.download = filename;
-
-                    var event = document.createEvent('MouseEvents');
-                    event.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
-                    save_link.dispatchEvent(event);
-                };
-                var filename = '链接'+new Date().getTime()+'.jpeg';
-                saveFile(imgData,filename);
-            },
             downloadQR(url){
-                // 将图片的src属性作为URL地址
-                var a = document.createElement('a');
-                var event = new MouseEvent('click');
-
-                a.download = '二维码';
-                a.target = 'blank';
-                a.href = url;
-
-                a.dispatchEvent(event)
+                this.downloadSrc = url;
             }
         }
     }

@@ -24,28 +24,20 @@
     <div class="step3-frame">
         <div class="frame">
             <div class="scroll">
-                <!--<div class="ques2">-->
-                    <!--<t-ques>-->
-                        <!--<ul class="list1">-->
-                            <!--<li><span>1</span>上传图片尺寸为230px*230px</li>-->
-                            <!--<li><span>2</span><p>一张图片对应一段文字，可增添多个图片及对应文字，最多限制6张图</p></li>-->
-                        <!--</ul>-->
-                    <!--</t-ques>-->
-                <!--</div>-->
                 <div class="step1">
                     <div class="title" style="margin-left: 20px; padding-left: 30px;">
                         <h3><span>1</span>活动详情(选填)</h3>
                         <div>
                             <t-ques :redbg="errorData.goods_desc.length != 0"
-                                    v-if="isEditor ? errorData.goods_desc.length != 0 : true">
-                                <ul class="list1" v-if="errorData.goods_desc.length == 0">
+                                    v-if="isEditor ? showActivityError : true">
+                                <ul class="list1" v-if="!showActivityError">
                                     <li><span>1</span>上传图片尺寸为660px*333px</li>
                                     <li><span>2</span>一张图片对应一段文字，可增添多个图片及对应文字，最多限制6张图</li>
                                 </ul>
-                                <ul class="list1" v-if="errorData.goods_desc.length != 0">
-                                    <li>error</li>
-                                    <li v-for="(item,index) in errorData.goods_desc">
-                                        <span>{{index+1}}</span>{{item.img == '' ? '' : '活动图片：'+item.img+'；'}}{{item.desc == '' ? '' : '活动文案：'+item.desc}}</li>
+                                <ul class="list1" v-if="showActivityError">
+                                    <li v-for="(item,index) in errorData.goods_desc" v-if="item.img != '' || item.desc != ''">
+                                        <span></span>{{item.img == '' ? '' : '活动图片 '+(index+1)+'：'+item.img+'  '}}{{item.desc == '' ? '' : '活动文案 '+(index+1)+'：'+item.desc}}
+                                    </li>
                                 </ul>
                             </t-ques>
                         </div>
@@ -81,14 +73,15 @@
                         <h3><span>2</span>上传艺人图片(选填)</h3>
                         <div>
                             <t-ques :redbg="errorData.person_desc.length != 0"
-                                    v-if="isEditor ? errorData.person_desc.length != 0 : true">
-                                <ul class="list1" v-if="errorData.person_desc.length == 0">
+                                    v-if="isEditor ? showActError : true">
+                                <ul class="list1" v-if="!showActError">
                                     <li><span>1</span>艺人logo尺寸为230px*230px</li>
                                     <li><span>2</span>一个艺人logo对应上传一个艺人照片</li>
                                 </ul>
-                                <ul class="list1" v-if="errorData.person_desc.length != 0">
-                                    <li v-for="(item,index) in errorData.person_desc">
-                                        <span>{{index+1}}</span>{{item.img == '' ? '' : '艺人logo：'+item.img+'；'}}{{item.picture == '' ? '' : '照片：'+item.picture}}</li>
+                                <ul class="list1" v-if="showActError">
+                                    <li v-for="(item,index) in errorData.person_desc" v-if="item.img != '' || item.picture != ''">
+                                        <span></span>{{item.img == '' ? '' : '艺人logo '+(index+1)+'：'+item.img+'  '}}{{item.picture == '' ? '' : '艺人照片 '+(index+1)+'：'+item.picture}}
+                                    </li>
                                 </ul>
                             </t-ques>
                         </div>
@@ -135,7 +128,7 @@
     export default {
         name: 'app',
         components:{TUpload,TQues},
-        props:['errorData'],
+        //props:['errorData'],
         computed:{
             canNext(){
                 //let arr1 = this.activityListData;
@@ -152,8 +145,12 @@
                 //        return false;
                 //    }
                 //}
+
                 this.$emit('input',true);
                 return true
+            },
+            errorData(){
+                return this.$store.state.errorData
             }
         },
         mounted(){
@@ -177,25 +174,35 @@
             return{
                 activityListData:[],
                 actListData:[],
-                isEditor:false
+                isEditor:false,
+                showActivityError:false,
+                showActError:false
             }
         },
         methods:{
             dataInit(){
                 let editorData = this.$store.state.editorData,fileurl = this.$store.state.fileurl;
-                let list1 = editorData.goods_desc;
+                let list1 = editorData.goods_desc,goods_desc = this.errorData.goods_desc;
+                this.showActivityError = false;
                 for(let i=0;i<list1.length;i++){
                     this.activityListData.push({
                         imgUrl:fileurl+list1[i].img,
                         desc:list1[i].desc
-                    })
+                    });
+                    if(goods_desc[i].img != '' || goods_desc[i].desc != ''){
+                        this.showActivityError = true;
+                    }
                 }
-                let list2 = editorData.person_desc;
+                let list2 = editorData.person_desc,person_desc = this.errorData.person_desc;
+                this.showActError = false;
                 for(let i=0;i<list2.length;i++){
                     this.actListData.push({
                         logoUrl:fileurl+list2[i].img,
                         imgUrl:fileurl+list2[i].picture
-                    })
+                    });
+                    if(person_desc[i].img != '' || person_desc[i].picture != ''){
+                        this.showActError = true;
+                    }
                 }
             },
             newActivityItem(){

@@ -46,6 +46,7 @@
     .step2-frame .notice-list{ margin: 20px; position: relative;}
     .step2-frame .notice-list h3{ font-size: 20px; color: #000000; margin-bottom: 10px; padding-left: 10px; font-family: 'Helve';}
     .step2-frame .notice-list textarea{ width: 100%; box-sizing: border-box; border: 1px solid #888888; border-radius: 5px; padding: 7px 16px; color: #000000; font-size: 16px;}
+    .step2-frame .notice-list textarea[readonly]{ background-color: #eeeef0;}
     .step2-frame .notice-list .btn-del{ position: absolute; top: -4px; right: 0; font-size: 24px; color: #002aa6;}
 </style>
 
@@ -159,19 +160,19 @@
                     <div class="title ml20" style="padding-left: 0;">
                         <h3 style="padding-left: 10px;"><span>5</span>活动须知及联系</h3>
                         <div class="ques2">
-                            <t-ques :redbg="errorData.notify.length != 0">
-                                <ul class="list2 mb30" v-if="errorData.notify.length == 0">
+                            <t-ques :redbg="showNoticeError" v-if="isEditor ? showNoticeError : true">
+                                <ul class="list2 mb30" v-if="!showNoticeError">
                                     <li><span>Demo</span></li>
                                     <li><span>01</span>本门票只能在深圳xxx使用</li>
                                     <li><span>02</span>请遵守法律法规，不要吸食毒品，拒绝黄赌毒侵蚀活动现场。</li>
                                     <li><span>03</span>未满18岁请勿购买，概不退换。</li>
                                 </ul>
-                                <ul class="list1" v-if="errorData.notify.length == 0">
+                                <ul class="list1" v-if="!showNoticeError">
                                     <li><span>1</span>每条须知的字数在30字内</li>
                                     <li><span>2</span>请合理使用须知，为了方便用户阅读，不相关的须知可以通过新增须知来填写</li>
                                 </ul>
-                                <ul class="list1" v-if="errorData.notify.length != 0">
-                                    <li v-for="(item,index) in errorData.notify"><span>{{index+1}}</span>{{item}}</li>
+                                <ul class="list1" v-if="showNoticeError">
+                                    <li v-for="(item,index) in errorData.notify" v-if="item != ''"><span>须知 {{index+1}} </span>{{item}}</li>
                                 </ul>
                             </t-ques>
                         </div>
@@ -180,7 +181,11 @@
                     <div class="mt40">
                         <div class="notice-list" v-for="(item,index) in noticeListData">
                             <h3>{{index < 9 ? 0 : ''}}{{index + 1}}</h3>
-                            <textarea rows="4" maxlength="60" placeholder="填写须知(30字内)" v-model="item.value"></textarea>
+                            <textarea rows="4"
+                                      maxlength="30"
+                                      placeholder="填写须知(30字内)"
+                                      :readonly="errorData.notify[index] == ''"
+                                      v-model="item.value"></textarea>
                             <a href="javascript:;" class="btn-del" @click="doDelNotice(index)" v-if="index != 0 && !isEditor"><Icon type="md-close" /></a>
                         </div>
                     </div>
@@ -201,7 +206,7 @@
     export default {
         name: 'app',
         components:{TQues},
-        props:['errorData'],
+        //props:['errorData'],
         computed:{
             canNext(){
                 let arr1 = this.typeListData;
@@ -235,7 +240,15 @@
                         return date && date.valueOf() > new Date(endDate);
                     }
                 };
+                //let errorData = this.errorData;
+                //let editorData = this.$store.state.editorData;
+                //if(editorData.id != -1){
+                //    this.dataInit();
+                //}
                 return '1'
+            },
+            errorData(){
+                return this.$store.state.errorData
             }
         },
         mounted(){
@@ -278,6 +291,7 @@
                         sale_limit:''
                     }
                 ],
+                showNoticeError:false,
                 noticeListData:[
                     {value:''}
                 ],
@@ -329,10 +343,14 @@
                 this.saleEnd = saleEnd;
                 let showTime = formatDate(new Date(parseInt(editorData.show_time)*1000),'yyyy/MM/dd HH:mm');
                 this.showTime = showTime;
-                let notify = editorData.notify;
+                let notify = editorData.notify,notifyError = this.errorData.notify;
+                this.showNoticeError = false;
                 for(let i=0;i<notify.length;i++){
                     this.noticeListData[i] = {
                         value:notify[i]
+                    };
+                    if(notifyError[i] != ""){
+                        this.showNoticeError = true
                     }
                 }
             },

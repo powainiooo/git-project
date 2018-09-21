@@ -16,7 +16,17 @@ const store = new Vuex.Store({
         fileurl:'',
         startDate:'',
         endDate:'',
-        editorData:{id:-1}
+        editorData:{id:-1},
+        errorData:{
+            goods_id:-1,
+            address:'',
+            cover:'',
+            cover2:'',
+            goods_name:'',
+            goods_desc:[],
+            notify:[],
+            person_desc:[]
+        }
     },
     mutations: {
         doLogin(state){
@@ -33,6 +43,9 @@ const store = new Vuex.Store({
         },
         setEditorData (state,data = {id:-1}) {
             state.editorData = data;
+        },
+        setErrorData (state,data) {
+            state.errorData = data;
         },
         setEndDate (state,data) {
             state.endDate = data

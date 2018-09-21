@@ -214,119 +214,27 @@ Page({
   },
   //生成海报
   drawPoster(){
-    let data = this.data.detailData.info,imgSrc = app.globalData.imgSrc,type = data.type,self=this;
+    let poster = this.data.detailData.info.poster,imgSrc = app.globalData.imgSrc,self=this;
     wx.showLoading({
       title:'生成中'
     });
-    const ctx = wx.createCanvasContext('poster');
 
-    Promise.all([
-      wxDownloadFile({
-        url: imgSrc+data.cover
-      }),
-      wxDownloadFile({
-        url: imgSrc+data.cover2
-      }),
-      wxDownloadFile({
-        url: data.wxacode
-      })
-    ]).then(res => {
-      //背景色
-      ctx.rect(0, 0, 750, 760);
-      ctx.setFillStyle('#ffffff');
-      ctx.fill();
-      //顶部Logo图
-      ctx.drawImage('../../res/images/top.png', 0, 0, 750, 145);
-      //日期
-      ctx.setFontSize(27);
-      ctx.setFillStyle('#000000');
-      let ten = data.begin.slice(2,3),one = data.begin.slice(3,4);
-      if(type == 1){
-        ctx.fillText(`2         0         ${ten}         ${one}`,20,190);
-      }else if(type == 2){
-        ctx.fillText(`2           0           ${ten}           ${one}`,20,190);
-      }else if(type == 3){
-        ctx.fillText(`2           0           ${ten}           ${one}`,20,190);
+    wx.downloadFile({
+      url: imgSrc+poster,
+      success (res) {
+        if (res.statusCode === 200) {
+          wx.saveImageToPhotosAlbum({
+            filePath: res.tempFilePath,
+            success(){
+              wx.showToast({
+                title: '保存成功',
+                icon: 'success',
+                duration: 2000
+              })
+            }
+          })
+        }
       }
-      ctx.font = "27px 'Helve'";
-      if(type == 1){
-        ctx.setFontSize(100);
-        ctx.fillText(data.date,20,300);
-      }else if(type == 2){
-        ctx.setFontSize(80);
-        ctx.fillText(data.date,20,294);
-      }else if(type == 3){
-        ctx.setFontSize(60);
-        ctx.fillText(data.date,20,290);
-      }
-      //标题
-      ctx.setFontSize(44);
-      ctx.fillText(data.goods_name+' | '+data.activity,20,390);
-      // 竖线
-      ctx.setStrokeStyle('#cecece');
-      ctx.beginPath();
-      if(type == 1){
-        ctx.moveTo(310,160);
-        ctx.lineTo(310,320);
-      }else if(type == 2){
-        ctx.moveTo(370,160);
-        ctx.lineTo(370,320);
-      }else if(type == 3){
-        ctx.moveTo(380,160);
-        ctx.lineTo(380,320);
-      }
-      ctx.stroke();
-      //横线 短
-      ctx.beginPath();
-      ctx.moveTo(0,210);
-      if(type == 1){
-        ctx.lineTo(310,210);
-      }else if(type == 2){
-        ctx.lineTo(370,210);
-      }else if(type == 3){
-        ctx.lineTo(380,210);
-      }
-      ctx.stroke();
-      //横线 长
-      ctx.beginPath();
-      ctx.moveTo(0,320);
-      ctx.lineTo(750,320);
-      ctx.stroke();
-      //logo
-      let logoXArr = [530-100,560-100,560-100];
-      ctx.drawImage(res[0].tempFilePath,logoXArr[type-1],240-70,200,140);
-      //详情图
-      ctx.drawImage(res[1].tempFilePath,0,420,750,650);
-      //底部logo
-      ctx.drawImage('../../res/images/bottom.png',450,460,300,300);
-      //二维码
-      ctx.drawImage(res[2].tempFilePath,610,615,120,120);
-
-      wx.hideLoading();
-
-      ctx.draw(true,function(){
-        wx.canvasToTempFilePath({
-          canvasId: 'poster',
-          x:0,
-          y:0,
-          width:750,
-          height:750,
-          destWidth:750,
-          destHeight:750,
-          success:function(res){
-            wx.saveImageToPhotosAlbum({
-              filePath: res.tempFilePath,
-              success(){
-                wx.showToast({
-                  title: '保存成功',
-                  icon: 'success',
-                  duration: 2000
-                })
-              }
-            })
-          }
-        })
-      })
     })
   },
   //生成分享图

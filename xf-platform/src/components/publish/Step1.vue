@@ -193,7 +193,7 @@
     export default {
         name: 'app',
         components:{TButton,TUpload,ListItem,TQues},
-        props:['errorData'],
+        //props:['errorData'],
         data(){
             let self = this;
             return{
@@ -259,6 +259,9 @@
                 }
                 this.$emit('input',pass);
                 return pass
+            },
+            errorData(){
+                return this.$store.state.errorData
             }
         },
         methods:{

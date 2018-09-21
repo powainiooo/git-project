@@ -22,8 +22,7 @@
     </view>
 
     <view class="ticket-type-list"
-          style="bottom:-{{typeList.length * 100}}rpx"
-          animation="{{animDataTypeList}}">
+          style="bottom:{{typeBottom}}">
       <view wx:for="{{typeList}}"
             wx:for-index="index"
             wx:for-item="item"

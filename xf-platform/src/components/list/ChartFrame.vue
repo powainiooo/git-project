@@ -108,19 +108,14 @@
             drawChart1(data){
                 let myChart = echarts.init(document.getElementById('proChart1'));
                 myChart.setOption({
-                    title:{
-                        text:'已购票用户地区',
-                        textStyle:{
-                            color:'#000',
-                            fontSize:18
-                        }
-                    },
+                    title:{text:'已购票用户地区',textStyle:{color:'#000',fontSize:18}},
                     series: [
                         {
                             name:'访问来源',
                             type:'pie',
                             radius: '65%',
                             color:['#002aac','#1243af','#3355bd','#667fcd','#98a9dc','#acbde5'],
+                            labelLine:{length:30},
                             label: {
                                 normal: {
                                     show: false
@@ -139,7 +134,6 @@
                                     }
                                 }
                             },
-                            labelLine:{length:30},
                             itemStyle:{
                                 shadowOffsetY:3,
                                 shadowBlur:8,

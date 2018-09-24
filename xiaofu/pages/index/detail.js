@@ -205,7 +205,7 @@ Page({
    */
   onShareAppMessage: function () {
     return {
-      title:this.data.detailData.info.goods_name,
+      title:this.data.detailData.info.goods_name+' | '+this.data.detailData.info.activity,
       imageUrl:this.data.shareImgSrc,
       path:'pages/index/detail?id='+this.data.detailData.info.id
     }

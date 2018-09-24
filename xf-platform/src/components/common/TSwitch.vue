@@ -68,6 +68,9 @@
         },
         watch: {
             value (val) {
+                console.log(typeof val);
+                console.log(typeof this.trueValue);
+                console.log(typeof this.falseValue);
                 if (val !== this.trueValue && val !== this.falseValue) {
                     throw 'Value should be trueValue or falseValue.';
                 }

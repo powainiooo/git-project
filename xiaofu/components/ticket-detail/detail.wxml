@@ -1,8 +1,9 @@
 <view class="detail-frame">
     <!--<ticket-item isSimple="{{isSimple}}" extraClass="{{extraClass}}"></ticket-item>-->
     <view style="background-color: #f6f6f6;padding-bottom: 180rpx; overflow: hidden; opacity: 0;" animation="{{detailAniData}}" wx:if="{{!showBuyInfos}}">
-        <view class="title">艺人信息</view>
+        <view class="title" wx:if="{{itemData.person.length != 0}}">艺人信息</view>
         <view class="actor-item"
+              wx:if="{{itemData.person.length != 0}}"
               wx:for="{{itemData.person}}"
               wx:for-item="item"
               wx:for-index="index"
@@ -11,8 +12,9 @@
             <image class="img" src="{{imgSrc+item.picture}}" mode="aspectFit"></image>
         </view>
 
-        <view class="title">须知</view>
+        <view class="title" wx:if="{{itemData.info.notify.length != 0}}">须知</view>
         <view class="notice-item"
+              wx:if="{{itemData.info.notify.length != 0}}"
               wx:for="{{itemData.info.notify}}"
               wx:for-item="item"
               wx:for-index="index"
@@ -21,8 +23,8 @@
             <text class="descript">{{item}}</text>
         </view>
 
-        <view class="title">活动详情</view>
-        <view class="activity-frame" wx:if="{{itemData.info.image_arr.length != 0}}">
+        <view class="title" wx:if="{{itemData.info.goods_desc.length != 0}}">活动详情</view>
+        <view class="activity-frame" wx:if="{{itemData.info.goods_desc.length != 0}}">
             <swiper class="swiper"
                     previous-margin="40rpx"
                     next-margin="40rpx"

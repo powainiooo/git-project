@@ -1,6 +1,6 @@
 <style>
     .publish{ position: relative;}
-    .publish .top-line{ width: 1400px; position: absolute; left:60px; top: 60px; display: flex; justify-content: space-between; align-items: center;}
+    .publish .top-line{ width: 1400px; position: absolute; left:60px; top: 90px; display: flex; justify-content: space-between; align-items: center;}
     .publish .top-line .name{ font-size: 157px; color: #fff; font-family: 'Helve';}
     .publish .top-line .n-btn{ width: 270px;}
     .publish .anim05{ animation-duration: 1s; animation-timing-function: cubic-bezier(.25,.76,.36,.97);}

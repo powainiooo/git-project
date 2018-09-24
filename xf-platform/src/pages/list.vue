@@ -2,7 +2,7 @@
     .prolist-frame{ width: 100vw; height: 100vh; overflow-y: scroll;}
     .prolist-frame::-webkit-scrollbar{ width: 3px; background-color: rgba(0,0,0,0);}
     .prolist-frame::-webkit-scrollbar-thumb{ background-color: #ffffff;}
-    .prolist-frame .company-name{ font-size: 157px; color: #fff; position: absolute; left:60px; top: 60px; font-family: 'Helve';}
+    .prolist-frame .company-name{ font-size: 157px; color: #fff; position: absolute; left:60px; top: 90px; font-family: 'Helve';}
     .prolist-frame .list-content{  width: 1560px; display: flex; margin: 320px auto 100px auto; flex-wrap: wrap;}
     .prolist-frame .list-content>div{ margin:0 30px; transition: transform 0.15s ease-in-out; cursor: pointer;}
     .prolist-frame .list-content>div.touch{ transform: scale(0.96,0.96);}

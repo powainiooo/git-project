@@ -127,6 +127,7 @@ Component({
                 },
                 'fail':function(res){
                   wx.showToast({
+                    image:'../../res/images/warn.png',
                     title:'支付失败'
                   });
                 }

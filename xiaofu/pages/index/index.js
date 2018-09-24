@@ -99,7 +99,6 @@ Page({
         }
       })
     }
-
   },
   getUserInfo: function(e) {
     app.globalData.userInfo = e.detail.userInfo;
@@ -210,7 +209,6 @@ Page({
         showBuyInfos:true
       })
     },50);
-
   },
   //生成海报
   drawPoster(){
@@ -544,7 +542,7 @@ Page({
   //分享
   onShareAppMessage(res){
     return {
-      title:this.data.detailData.info.goods_name,
+      title:this.data.detailData.info.goods_name+' | '+this.data.detailData.info.activity,
       imageUrl:this.data.shareImgSrc,
       path:'pages/index/detail?id='+this.data.detailData.info.id
     }

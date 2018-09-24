@@ -109,18 +109,19 @@
         <div class="qrcode" v-if="!isVerify">
             <div class="qritem">
                 <img :src="itemData.wxacode" width="100" height="100">
-                <t-button size="min" @dotap="downloadQR(fileurl+itemData.poster)">下载链接码</t-button>
+                <t-button size="min" @dotap="downloadQR(fileurl+itemData.poster,'poster')">下载链接码</t-button>
             </div>
             <div class="qritem">
                 <img :src="itemData.check_code" width="100" height="100">
-                <t-button size="min" @dotap="downloadQR(itemData.check_code)">下载验票码</t-button>
+                <t-button size="min" @dotap="downloadQR(itemData.check_code,'code')">下载验票码</t-button>
             </div>
         </div>
 
         <!-- 下载图片弹窗 -->
         <div class="download-frame" v-if="downloadSrc != ''">
-            <img :src="downloadSrc" width="450">
-            <p>右键图片另存为可下载活动链接码，活动链接码可用于活动推广使用。</p>
+            <img :src="downloadSrc" width="480">
+            <p v-if="downloadType == 'poster'">右键图片另存为可下载活动链接码，活动链接码可用于活动推广使用。</p>
+            <p v-if="downloadType == 'code'">右键图片另存为可下载活动验票码，可获得活动验票权限，授权成功后的手机可进行活动验票。</p>
             <a href="javascript:;" class="close" @click="downloadSrc = ''"><Icon type="md-close" /></a>
         </div>
     </div>
@@ -167,7 +168,8 @@
             return{
                 editorTypeList:[],
                 lastTypeList:[],
-                downloadSrc:''
+                downloadSrc:'',
+                downloadType:''
             }
         },
         mounted(){
@@ -177,12 +179,13 @@
             resetTypeList(){
                 let tl = this.itemData.classes;
                 this.editorTypeList = [];
+                this.lastTypeList = [];
                 for(let item of tl){
                     let out;
                     if(this.isVerify){
                         out = 0;
                     }else{
-                        out = item.is_over
+                        out = item.is_over.toString()
                     }
                     this.editorTypeList.push({
                         name:item.select,
@@ -234,8 +237,9 @@
                     }
                 })
             },
-            downloadQR(url){
+            downloadQR(url,type){
                 this.downloadSrc = url;
+                this.downloadType = type;
             }
         }
     }

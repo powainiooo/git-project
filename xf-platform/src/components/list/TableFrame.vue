@@ -66,12 +66,12 @@
                     <td>{{item.order_num}}</td>
                     <td>{{item.price}}</td>
                     <td><span class="numbers">{{item.nums}}</span></td>
-                    <td>{{item.is_check == '1' ? '已验票' : '未验票'}}</td>
                     <td>
+                        <span v-if="item.status != 3">{{item.is_check == '1' ? '已验票' : '未验票'}}</span>
                         <span v-if="item.status == 3">已退款</span>
+                    </td>
+                    <td>
                         <a href="javascirpt:;" @click="doRefund(item.id)" v-if="item.status == 4">退款</a>
-                        <span v-if="item.status == 5">待确认收货</span>
-                        <span v-if="item.status == 7">已完成</span>
                     </td>
                 </tr>
                 </tbody>

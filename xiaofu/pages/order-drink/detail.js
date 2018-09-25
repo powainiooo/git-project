@@ -19,6 +19,7 @@ Page({
   },
   getDetailData(id){
     let self = this;
+    wx.showNavigationBarLoading();
     wx.request({
         url:app.globalData.ajaxSrc+"/order_info",
         data:{
@@ -30,6 +31,7 @@ Page({
           self.setData({
             itemData:data.data
           });
+          wx.hideNavigationBarLoading();
         },
       fail(){
         wx.navigateTo({

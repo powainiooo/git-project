@@ -37,6 +37,7 @@ Page({
   doPay(){
     let self = this;
     if(this.data.btnDisabled){
+      wx.showNavigationBarLoading();
       wx.request({
         url: app.globalData.ajaxSrc+'/news_order', //仅为示例，并非真实的接口地址
         data: {
@@ -63,11 +64,13 @@ Page({
                   title:'支付成功'
                 });
                 self.doBuySuccess(order_num);
+                wx.hideNavigationBarLoading();
               },
               'fail':function(res){
                 wx.showToast({
                   title:'支付失败'
                 });
+                wx.hideNavigationBarLoading();
               }
             })
           }
@@ -95,6 +98,7 @@ Page({
   //获取数据
   getData(){
     let self = this;
+    wx.showNavigationBarLoading();
     wx.request({
       url: app.globalData.ajaxSrc+'/drink_info',
       data:{
@@ -118,13 +122,15 @@ Page({
             itemData:info
           });
           self.drawSharePoster2();
+          wx.hideNavigationBarLoading();
         }else{
           self.showToast({
             title:data.msg
           });
           self.setData({
             showRefresh:true
-          })
+          });
+          wx.hideNavigationBarLoading();
         }
       },
       fail(){
@@ -337,27 +343,10 @@ Page({
       url: '/pages/drink/index'
     })
   },
-  //获取二维码
-  getCode(at){
-    let self = this;
-    wx.request({
-      url:"https://api.weixin.qq.com/wxa/getwxacode?access_token="+app.globalData.access_token,
-      method:'POST',
-      data:{
-        path:'pages/index/index'
-      },
-      responseType:'arraybuffer',
-      success:res=>{
-        console.log(res);
-        self.setData({
-          wxcodeimg:wx.arrayBufferToBase64(res.data)
-        })
-      }
-    })
-  },
   //购买成功
   doBuySuccess(orderNum){
     let self = this;
+    wx.showNavigationBarLoading();
     wx.request({
       url:app.globalData.ajaxSrc+'/buysuccess',
       data:{

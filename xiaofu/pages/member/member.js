@@ -50,6 +50,7 @@ Page({
   },
   getData(src){
     let self = this;
+    wx.showNavigationBarLoading();
     wx.request({
       url: app.globalData.ajaxSrc+'/'+src, //仅为示例，并非真实的接口地址
       success: function(res) {
@@ -68,6 +69,7 @@ Page({
             content:res.data.data[src]
           });
         }
+        wx.hideNavigationBarLoading();
       },
       fail(){
         wx.navigateTo({

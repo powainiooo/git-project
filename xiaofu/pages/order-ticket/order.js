@@ -51,8 +51,10 @@ Page({
     });
     let empty = false;
     if(val){
+      this.getListData2();
       if(this.data.listData2.length == 0) empty = true;
     }else{
+      this.getListData();
       if(this.data.listData.length == 0) empty = true;
     }
     this.setData({
@@ -70,6 +72,7 @@ Page({
   },
   getListData(){
     let self = this;
+    wx.showNavigationBarLoading();
     wx.request({
       url: app.globalData.ajaxSrc+'/user_order',
       data:{
@@ -82,6 +85,7 @@ Page({
           isEmpty:val,
           listData:list
         });
+        wx.hideNavigationBarLoading();
       },
       fail(){
         wx.navigateTo({
@@ -92,6 +96,7 @@ Page({
   },
   getListData2(){
     let self = this;
+    wx.showNavigationBarLoading();
     wx.request({
       url:app.globalData.ajaxSrc+"/order_center",
       data:{
@@ -104,6 +109,7 @@ Page({
           isEmpty:val,
           listData2:list
         });
+        wx.hideNavigationBarLoading();
       },
       fail(){
         wx.navigateTo({

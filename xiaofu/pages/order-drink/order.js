@@ -28,6 +28,7 @@ Page({
   },
   getListData(){
     let self = this;
+    wx.showNavigationBarLoading();
     wx.request({
       url:app.globalData.ajaxSrc+"/order_center",
       data:{
@@ -38,6 +39,7 @@ Page({
         this.setData({
           listData:list
         });
+        wx.hideNavigationBarLoading();
       },
       fail(){
         wx.navigateTo({

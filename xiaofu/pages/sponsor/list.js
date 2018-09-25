@@ -18,12 +18,14 @@ Page({
   },
   getListData(){
     let self = this;
+    wx.showNavigationBarLoading();
     wx.request({
       url:app.globalData.ajaxSrc+'/re_company',
       success(res){
         self.setData({
           dataList:res.data.data
-        })
+        });
+        wx.hideNavigationBarLoading();
       },
       fail(){
         wx.navigateTo({

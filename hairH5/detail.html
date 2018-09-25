@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <title>服务订单</title>
+    <link href="css/reset.css" type="text/css" rel="stylesheet" />
+    <link href="css/icons.css" type="text/css" rel="stylesheet" />
+    <link href="css/helvetica.css" type="text/css" rel="stylesheet" />
+    <link href="css/layout.css" type="text/css" rel="stylesheet" />
+    <script src="js/jquery-2.1.1.min.js" type="application/javascript" language="javascript"></script>
+</head>
+<body style="background-color: #efebea;">
+<header class="header">
+    <div class="icons icon-logo"></div>
+    <a href="javascript:;" class="icons icon-xiugai"></a>
+</header>
+<section class="container">
+    <div class="person">
+        <div class="frame700">
+            <div class="line">何先生</div>
+            <div class="line">13812341234</div>
+        </div>
+    </div>
+
+    <div class="goods">
+        <div class="frame700">
+            <div class="name">Hair Optional package<span>Hair 自选套餐</span></div>
+            <div class="input-code">
+                <ul id="codeList">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+                <input type="text" class="input" id="codeInput" maxlength="4">
+                <a href="javascript:;" class="btn">开始服务</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="type-list">
+        <ul class="frame700">
+            <li>Clean<span>清洁</span></li>
+            <li>Conditioner<span>润发</span></li>
+            <li>Treatment<span>调理</span></li>
+        </ul>
+    </div>
+</section>
+
+<script>
+    //输入验证码
+    $("#codeInput").on('input',function(){
+        $("#codeList li").html('');
+        var valArr = $(this).val().split("");
+        for(var i=0;i<valArr.length;i++){
+            $("#codeList li").eq(i).html(valArr[i]);
+        }
+    });
+</script>
+</body>
+</html>

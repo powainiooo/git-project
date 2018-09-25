@@ -61,6 +61,7 @@ Page({
     self.setData({
       loadHint:'loading'
     });
+    wx.showNavigationBarLoading();
     wx.request({
       url: app.globalData.ajaxSrc+'/drink_list', //仅为示例，并非真实的接口地址
       data: {
@@ -87,6 +88,7 @@ Page({
             listData:self.data.listData.concat(list)
           });
         }
+        wx.hideNavigationBarLoading();
       },
       fail(){
         wx.navigateTo({

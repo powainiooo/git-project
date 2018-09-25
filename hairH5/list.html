@@ -1,0 +1,157 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <title>工作人员</title>
+    <link href="css/reset.css" type="text/css" rel="stylesheet" />
+    <link href="css/icons.css" type="text/css" rel="stylesheet" />
+    <link href="css/helvetica.css" type="text/css" rel="stylesheet" />
+    <link href="css/layout.css" type="text/css" rel="stylesheet" />
+    <script src="js/jquery-2.1.1.min.js" type="application/javascript" language="javascript"></script>
+</head>
+<body>
+<header class="header">
+    <div class="icons icon-logo"></div>
+    <!--<a href="javascript:;" class="icons icon-xiugai"></a>-->
+</header>
+<section class="container">
+    <div class="list-line">
+        <ul class="worker-list">
+            <li class="active">01</li>
+            <li>02</li>
+        </ul>
+        <div class="date-frame" id="btnDateSelect">
+            <div class="year">
+                <span>2</span>
+                <span>0</span>
+                <span>1</span>
+                <span>8</span>
+            </div>
+            <div class="date">
+                <div class="month">07/</div>
+                <div class="right">
+                    <div class="day">26</div>
+                    <div class="week">周三</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 1:有订单 2：无订单 3：订单进行中 4：订单完成 -->
+    <div class="timer-frame">
+        <ul class="timer-list">
+            <li class="status1"><span>21:00</span></li>
+            <li class="status2"><span>21:00</span></li>
+            <li class="status3"><span>21:00</span></li>
+            <li class="status4"><span>21:00</span></li>
+            <li class="status1"><span>21:00</span></li>
+            <li class="status1"><span>21:00</span></li>
+            <li class="status1"><span>21:00</span></li>
+            <li class="status1"><span>21:00</span></li>
+            <li class="status1"><span>21:00</span></li>
+            <li class="status1"><span>21:00</span></li>
+            <li class="status1"><span>21:00</span></li>
+            <li class="status1"><span>21:00</span></li>
+            <li class="status1"><span>21:00</span></li>
+        </ul>
+    </div>
+
+    <!-- 选择日期-->
+    <div class="date-list-frame" id="dateList">
+        <div class="date-list-container">
+            <ul class="list">
+                <li class="active">
+                    <div class="date-item">
+                        <div class="month">07/</div>
+                        <div class="right">
+                            <div class="day">26</div>
+                            <div class="week">周三</div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="date-item">
+                        <div class="month">07/</div>
+                        <div class="right">
+                            <div class="day">27</div>
+                            <div class="week">周三</div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="date-item">
+                        <div class="month">07/</div>
+                        <div class="right">
+                            <div class="day">28</div>
+                            <div class="week">周三</div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="date-item">
+                        <div class="month">07/</div>
+                        <div class="right">
+                            <div class="day">29</div>
+                            <div class="week">周三</div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="date-item">
+                        <div class="month">07/</div>
+                        <div class="right">
+                            <div class="day">30</div>
+                            <div class="week">周三</div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="date-item">
+                        <div class="month">07/</div>
+                        <div class="right">
+                            <div class="day">31</div>
+                            <div class="week">周三</div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="date-item">
+                        <div class="month">08/</div>
+                        <div class="right">
+                            <div class="day">01</div>
+                            <div class="week">周三</div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<script>
+    //打开日期选择
+    $("#btnDateSelect").on('click',function(){
+        $(this).css('opacity',0);
+        $("#dateList").addClass('date-list-frame-show');
+    });
+    //选择日期
+    $("#dateList li").on('click',function(){
+        let month = $(this).find('.month').html();
+        let day = $(this).find('.day').html();
+        let week = $(this).find('.week').html();
+        $("#btnDateSelect .month").html(month);
+        $("#btnDateSelect .day").html(day);
+        $("#btnDateSelect .week").html(week);
+        $("#btnDateSelect").css('opacity',1);
+        $("#dateList").removeClass('date-list-frame-show');
+        $(this).addClass('active').siblings('li').removeClass('active');
+    })
+</script>
+</body>
+</html>

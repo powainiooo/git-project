@@ -91,6 +91,7 @@ Component({
     doPay(){
       let self = this;
       if(self.data.btnDisabled){
+        wx.showNavigationBarLoading();
         wx.request({
           url: self.data.ajaxSrc+'/create_order', //仅为示例，并非真实的接口地址
           data: {
@@ -130,6 +131,7 @@ Component({
                     image:'../../res/images/warn.png',
                     title:'支付失败'
                   });
+                  wx.hideNavigationBarLoading();
                 }
               })
             }
@@ -140,7 +142,8 @@ Component({
               success(){
                 self.doPay();
               }
-            })
+            });
+            wx.hideNavigationBarLoading();
           }
         })
       }
@@ -156,7 +159,7 @@ Component({
         success:res=>{
           wx.navigateTo({
             url: '/pages/result/result?page=ticketSuc'
-          })
+          });
         },
         fail(){
           wx.reLaunch({

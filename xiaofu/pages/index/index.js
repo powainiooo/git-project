@@ -99,6 +99,7 @@ Page({
         }
       })
     }
+
   },
   getUserInfo: function(e) {
     app.globalData.userInfo = e.detail.userInfo;
@@ -341,6 +342,7 @@ Page({
     self.setData({
       loadHint:'loading'
     });
+    wx.showNavigationBarLoading();
     wx.request({
       url: app.globalData.ajaxSrc+'/pro_list',
       data: {
@@ -369,17 +371,20 @@ Page({
             listData:self.data.listData.concat(list)
           });
         }
+
+        wx.hideNavigationBarLoading();
       },
       fail(){
         wx.navigateTo({
           url: '/pages/error/error'
-        })
+        });
       }
     })
   },
   //获取详情数据
   getDetailData(id){
     let self = this;
+    wx.showNavigationBarLoading();
     wx.request({
       url: app.globalData.ajaxSrc+'/product_info',
       data: {
@@ -394,6 +399,7 @@ Page({
           showTicketDetail:true
         });
         self.drawSharePoster();
+        wx.hideNavigationBarLoading();
       },
       fail(){
         self.showToast({
@@ -401,7 +407,8 @@ Page({
         });
         self.setData({
           showRefresh:true
-        })
+        });
+        wx.hideNavigationBarLoading();
       }
     })
   },

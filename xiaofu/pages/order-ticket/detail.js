@@ -22,6 +22,7 @@ Page({
   },
   getListData(id){
     let self = this;
+    wx.showNavigationBarLoading();
     wx.request({
       url: app.globalData.ajaxSrc+'/order_desc',
       data:{
@@ -42,6 +43,7 @@ Page({
           checkNum:check,
           itemData:data
         });
+        wx.hideNavigationBarLoading();
       },
       fail(){
         wx.navigateTo({

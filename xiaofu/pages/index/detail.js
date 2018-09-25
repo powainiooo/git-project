@@ -29,6 +29,7 @@ Page({
   //获取详情数据
   getDetailData(id){
     let self = this;
+    wx.showNavigationBarLoading();
     wx.request({
       url: app.globalData.ajaxSrc+'/product_info', //仅为示例，并非真实的接口地址
       data: {
@@ -42,6 +43,7 @@ Page({
           showTicketDetail:true
         });
         self.drawSharePoster();
+        wx.hideNavigationBarLoading();
       },
       fail(){
         self.showToast({
@@ -49,7 +51,8 @@ Page({
         });
         self.setData({
           showRefresh:true
-        })
+        });
+        wx.hideNavigationBarLoading();
       }
     })
   },

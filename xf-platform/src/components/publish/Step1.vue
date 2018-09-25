@@ -15,7 +15,7 @@
     .stpe1-frame .frame .step1 .time-line{ width: 270px; display: flex; justify-content: space-between; margin-left: 45px;}
     .stpe1-frame .frame .step1 .time-line .inp-line{ width: 120px; margin-left: 0;}
     .stpe1-frame .frame .step1 .ivu-select-single .ivu-select-selection{ height: 40px; border-color: #888888;}
-    .stpe1-frame .frame .step1 .ivu-select-single .ivu-select-selection .ivu-select-placeholder, .stpe1-frame .frame .step1 .ivu-select-single .ivu-select-selection .ivu-select-selected-value{ height: 40px; line-height: 40px; color: #888888; font-size: 16px; padding-left: 15px;}
+    #step1Frame .frame .step1 .ivu-select-single .ivu-select-selection .ivu-select-placeholder,#step1Frame .frame .step1 .ivu-select-single .ivu-select-selection .ivu-select-selected-value{ height: 40px; line-height: 40px; color: #888888; font-size: 16px; padding-left: 15px;}
     .stpe1-frame .frame .step1 .ivu-select-single .ivu-select-selection .ivu-select-selected-value{ color: #000000;}
     .stpe1-frame .frame .step1 .ivu-input-icon{ line-height: 40px;}
     .stpe1-frame .step2 .hint{ font-size: 14px; color: #888888;}
@@ -33,7 +33,7 @@
 </style>
 
 <template>
-    <div class="stpe1-frame">
+    <div class="stpe1-frame" id="step1Frame">
         <div class="frame">
             <div class="step1">
                 <h3 class="title"><span>1</span>填写企业基本信息</h3>

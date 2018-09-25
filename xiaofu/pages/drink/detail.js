@@ -109,8 +109,8 @@ Page({
         if(data.status == 0){
           let info = data.data.info;
           let limit = info.limit,arr = [];
-          if(limit == ''){
-            arr = [1,2,3,4,5,6,7,8,9,10];
+          if(limit == '' || limit == 0){
+            arr = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
           }else{
             for(let i=0;i<limit;i++){
               arr.push(i+1);

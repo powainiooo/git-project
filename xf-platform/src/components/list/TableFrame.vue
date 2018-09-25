@@ -32,7 +32,7 @@
             <div>
                 <Select style="width:130px; margin-right: 20px;" v-model="selectType">
                     <Option value="0">全部</Option>
-                    <Option v-for="(item,index) in itemData.classes" :key="index" :value="index+1">{{item.select}}</Option>
+                    <Option v-for="(item,index) in itemData.classes" :key="index" :value="item.select">{{item.select}}</Option>
                 </Select>
                 <Input v-model="keyword" placeholder="请输入电话、姓名、单号" style="width: 270px; margin-right: 20px;" />
                 <t-button size="min" style="width: 90px;" @dotap="getListData">查询</t-button>

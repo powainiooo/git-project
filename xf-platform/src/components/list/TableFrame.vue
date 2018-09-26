@@ -82,6 +82,7 @@
 </template>
 
 <script type='es6'>
+    import qs from 'qs';
     import TButton from '@/components/common/TButton.vue'
     import TQues from '@/components/common/TQues.vue'
     import {formatDate} from '@/assets/js/date.js'
@@ -125,11 +126,7 @@
                     title:'是否确认退款?',
                     content:'确认退款之后款项将原路返回到该用户账上，请谨慎操作。',
                     onOk(){
-                        self.$ajax.get('/client/api/order_refund',{
-                            params:{
-                                id:id
-                            }
-                        }).then(res=>{
+                        self.$ajax.post('/client/api/order_refund',qs.stringify({id:id})).then(res=>{
                             let data = res.data;
                             if(data.status == 1){
                                 self.$Message.success('退款成功');

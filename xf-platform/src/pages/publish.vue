@@ -103,7 +103,7 @@
                 let obj = {},step1 = self.$refs.step1,step2 = self.$refs.step2,step3 = self.$refs.step3;
                 self.$tModal.confirm({
                     title:'是否确认信息无误并提交？',
-                    content:'请仔细核查所填写的信息，确认提交之后信息无法修改。<br>若是您填写有误所造成的损失，小夫有票一概不负责任。',
+                    content:'请仔细核查所填写的信息，确认提交之后信息无法修改。<br>若是您填写有误所造成的损失，小夫有票一概不负责任。<br><span style="color:#002aac;">注：当多人抢票时，平台会存在爆库存导致多卖票的情况。如本场活动热门，建议减少首发票量，后续可手动增加票量。</span>',
                     onOk(){
                         obj.city = step1.formData.city;
                         obj.activity = self.userData.activity;
@@ -141,17 +141,22 @@
                         }
                         obj.goods_desc = [];
                         for(let item of step3.activityListData){
-                            obj.goods_desc.push({
-                                img:item.imgUrl,
-                                desc:item.desc
-                            })
+                            if(item.imgUrl != '' || item.desc != ''){
+                                obj.goods_desc.push({
+                                    img:item.imgUrl,
+                                    desc:item.desc
+                                })
+                            }
+
                         }
                         obj.person_desc = [];
                         for(let item of step3.actListData){
-                            obj.person_desc.push({
-                                img:item.logoUrl,
-                                picture:item.imgUrl
-                            })
+                            if(item.logoUrl != '' || item.imgUrl != ''){
+                                obj.person_desc.push({
+                                    img:item.logoUrl,
+                                    picture:item.imgUrl
+                                })
+                            }
                         }
                         let editorData = self.$store.state.editorData,ajaxSrc = '/client/api/activity_add';
                         if(editorData.id != -1){
@@ -159,6 +164,7 @@
                             ajaxSrc = '/client/api/act_update';
                         }
                         //console.log(obj);
+                        //return;
                         self.$ajax.post(ajaxSrc,qs.stringify(obj)).then(res=>{
                             let data = res.data;
                             if(data.status == 1){

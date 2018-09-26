@@ -1,5 +1,5 @@
 <style>
-    .n-modal{ width: 100vw; height: 100vh; background-color: rgba(0,0,0,0.9); position: fixed; top: 0; left: 0; z-index: 1000; display: flex; justify-content: center; align-items: center;}
+    .n-modal{ width: 100vw; height: 100vh; background-color: rgba(0,0,0,0.9); position: fixed; top: 0; left: 0; z-index: 2000; display: flex; justify-content: center; align-items: center;}
     .n-modal .modal-frame{ width: 750px; height: 400px; background-color: #fff; border-radius: 0 0 5px 5px; position: relative;}
     .n-modal .modal-frame:before{ content: ''; width: 100%; height: 3px; background: url('../../../assets/img/ticket-top.png') repeat-x; position: absolute; top: -3px; left: 0;}
     .n-modal .modal-frame .top{ margin: 30px 30px 70px 70px; display: flex; justify-content: space-between; color: #0129ac;}

@@ -31,7 +31,7 @@
     <div class="goods">
         <div class="frame700">
             <div class="name">Hair Optional package<span>Hair 自选套餐</span></div>
-            <div class="input-code">
+            <div class="input-code" id="inputCode">
                 <ul id="codeList">
                     <li></li>
                     <li></li>
@@ -39,7 +39,7 @@
                     <li></li>
                 </ul>
                 <input type="text" class="input" id="codeInput" maxlength="4">
-                <a href="javascript:;" class="btn">开始服务</a>
+                <a href="javascript:;" class="btn" id="btnStart">开始服务</a>
             </div>
         </div>
     </div>
@@ -51,8 +51,34 @@
             <li>Treatment<span>调理</span></li>
         </ul>
     </div>
+
+    <div class="product">
+        <ul class="frame700">
+            <li>
+                <p class="img"><img src="images/pro1.png"></p>
+                <p class="name_en">Aesop<br>Calming shampoo</p>
+                <p class="name_cn">伊索 舒缓洗发露</p>
+            </li>
+            <li>
+                <p class="img"><img src="images/pro1.png"></p>
+                <p class="name_en">Aesop<br>Calming shampoo</p>
+                <p class="name_cn">伊索 舒缓洗发露</p>
+            </li>
+            <li>
+                <p class="img"><img src="images/pro1.png"></p>
+                <p class="name_en">Aesop<br>Calming shampoo</p>
+                <p class="name_cn">伊索 舒缓洗发露</p>
+            </li>
+        </ul>
+    </div>
+
+    <div class="clock-frame">
+        <div class="clock"></div>
+    </div>
 </section>
 
+<link href="css/flipclock.css" type="text/css" rel="stylesheet" />
+<script src="js/flipclock.min.js" type="application/javascript" language="javascript"></script>
 <script>
     //输入验证码
     $("#codeInput").on('input',function(){
@@ -62,6 +88,21 @@
             $("#codeList li").eq(i).html(valArr[i]);
         }
     });
+
+    //开始服务
+    $("#btnStart").on('click',function(){
+        $("#inputCode").hide();
+        countDown(30*60);
+    });
+    //倒计时
+    //参数 秒
+    function countDown(seconds){
+        var clock = $('.clock').FlipClock(seconds, {
+            clockFace: 'MinuteCounter',
+            countdown: true
+        });
+    }
+
 </script>
 </body>
 </html>

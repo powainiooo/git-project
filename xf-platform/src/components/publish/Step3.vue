@@ -35,9 +35,7 @@
                                     <li><span>2</span>一张图片对应一段文字，可增添多个图片及对应文字，最多限制6张图</li>
                                 </ul>
                                 <ul class="list1" v-if="showActivityError">
-                                    <li v-for="(item,index) in errorData.goods_desc" v-if="item.img != '' || item.desc != ''">
-                                        <span></span>{{item.img == '' ? '' : '活动图片 '+(index+1)+'：'+item.img+'  '}}{{item.desc == '' ? '' : '活动文案 '+(index+1)+'：'+item.desc}}
-                                    </li>
+                                    <li v-for="(item,index) in errorData.goods_desc" v-if="item.img != '' || item.desc != ''">{{item.img == '' ? '' : '活动图片 '+(index+1)+'：'+item.img+'  '}}{{item.desc == '' ? '' : '活动文案 '+(index+1)+'：'+item.desc}}</li>
                                 </ul>
                             </t-ques>
                         </div>

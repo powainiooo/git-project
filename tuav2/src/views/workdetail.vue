@@ -124,11 +124,11 @@
                 bannerList:[],
                 swiper:null,
                 activeIndex:0,
-                vid:'m0749ymg2y3',//k0015trfczz
+                vid:'',//k0015trfczz
                 vPostImg:'',
                 detailData:{},
                 domain_url:'',
-                showVideo:true
+                showVideo:false
             }
         },
         mounted(){

@@ -33,7 +33,7 @@
     .pro-info .qrcode .qritem img{ box-shadow: 0 2px 3px rgba(0,0,0,0.2); margin-bottom: 25px;}
     .pro-info .qrcode .qritem .n-btn{ width: 90px; margin-left: 5px;}
 
-    .pro-info .download-frame{ width: 100vw; height: 100vh; background-color: rgba(0,0,0,0.9); z-index: 1000; position: fixed; top: 0; left: 0; display: flex; flex-direction: column; justify-content: center; align-items: center;}
+    .pro-info .download-frame{ width: 100vw; height: 100vh; background-color: rgba(0,0,0,0.9); z-index: 1700; position: fixed; top: 0; left: 0; display: flex; flex-direction: column; justify-content: center; align-items: center;}
     .pro-info .download-frame p{ font-size: 14px; color: #ffffff; margin-top: 20px;}
     .pro-info .download-frame .close{font-size: 40px; color: #ffffff; position: absolute; top: 35px; right: 37px;}
 </style>

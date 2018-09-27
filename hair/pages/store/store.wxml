@@ -7,7 +7,7 @@
         <view class="btns">
             <view class="icons icon-weixuan"></view>
             <view class="icons icon-xuanzhong"></view>
-            <view class="btn-map" data-lnglat="{{lnglat}}" bindtap="openMap">查看地图</view>
+            <view class="btn-map" data-lnglat="{{lnglat}}" bindtap="openMap" hover-class="btn-map-hover" hover-stay-time="50">查看地图</view>
         </view>
     </view>
     <view class="tips"><text class="icons icon-logo"></text>目前只有一家体验店，更多店铺正在进行，敬请期待。</view>

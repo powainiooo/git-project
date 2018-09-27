@@ -18,7 +18,7 @@
 <body style="background-color: #efebea;">
 <header class="header">
     <div class="icons icon-logo"></div>
-    <a href="javascript:;" class="icons icon-xiugai"></a>
+    <a href="javascript:history.go(-1)" class="icons icon-xiugai"></a>
 </header>
 <section class="container">
     <div class="person">
@@ -90,9 +90,17 @@
     });
 
     //开始服务
-    $("#btnStart").on('click',function(){
-        $("#inputCode").hide();
-        countDown(30*60);
+    $("#btnStart").on('touchstart',function(){
+        $(this).addClass('item-touch');
+    });
+    $("#btnStart").on('touchend',function(){
+        $(this).removeClass('item-touch');
+        setTimeout(function(){
+            //ajax 代码写在这
+            $("#inputCode").hide();
+            countDown(30*60);
+        },150);
+
     });
     //倒计时
     //参数 秒

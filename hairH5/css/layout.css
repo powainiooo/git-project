@@ -1,6 +1,7 @@
 .header{ width: 100%; height: 70px; box-sizing: border-box; background-color: #dac49f; position: fixed; top: 0; left: 0; z-index: 500; display: flex; justify-content: space-between; align-items: center; padding: 0 30px;}
 .header .icon-logo{ font-size: 30px; color: #FFFFFF;}
-.header .icon-xiugai{ font-size: 30px; color: #FFFFFF; transform: rotateZ(180deg); box-shadow: 0 -1px 14px rgba(55,44,30,0.3); border-radius: 50%; background-color: #000000;}
+.header .icon-xiugai{ font-size: 30px; color: #FFFFFF; transform: rotateZ(180deg); box-shadow: 0 -1px 14px rgba(55,44,30,0.3); border-radius: 50%; position: relative;}
+.header .icon-xiugai:after{ content: ''; width: 80%; height: 80%; border-radius: 50%; background-color: #000000; position: absolute; top: 10%; left: 10%; z-index: -1;}
 
 .container{ min-height: calc(100vh - 70px); margin-top: 70px; overflow: hidden; position: relative;}
 
@@ -12,7 +13,9 @@
 .login-frame .line:after{ right: 0;}
 .login-frame .line input{ width: 100%; border: none; text-align: right; font-size: 16px; padding: 10px; color: #352c1d;}
 .login-frame .line input::-webkit-input-placeholder{ color: #352c1d;}
-.login-frame .btn{ width: 110px; height: 50px; border-radius: 30px; color: #FFFFFF; font-size: 16px; display: flex; justify-content: center; align-items: center; background-color: #dac49f;}
+.login-frame .btn{ width: 110px; height: 50px; border-radius: 30px; color: #FFFFFF; font-size: 16px; display: flex; justify-content: center; align-items: center; background-color: #dac49f; transition: transform 0.15s ease-out; -webkit-transition: transform 0.15s ease-out;}
+
+.item-touch{ transform: scale(0.9); -webkit-transform: scale(0.9);}
 
 .list-line{ width: 100%; height: 170px; border-bottom: 1px solid #f2f1ef; display: flex; justify-content: space-between; align-items: center;}
 .worker-list{ display: flex; align-items: flex-start;}
@@ -21,7 +24,7 @@
 .worker-list li:last-child:after{ width: 0; box-shadow: none;}
 .worker-list li.active{ font-size: 120px; margin-top: 0;}
 
-.date-frame{ width: 310px; height: 170px; padding: 0 50px; background-color: #dac49f; display: flex; flex-direction: column; align-items: center; position: relative; z-index: 200; transition: opacity 0.2s ease-out;}
+.date-frame{ width: 310px; height: 170px; padding: 0 50px; background-color: #dac49f; display: flex; flex-direction: column; align-items: center; position: relative; z-index: 200; transition: opacity 0.1s ease-out; -webkit-transition: opacity 0.1s ease-out;}
 .date-frame .year{ width: 100%; height: 40px; font-size: 24px; color: #352c1d; font-family: 'Helve'; display: flex; justify-content: space-around; align-items: center; border-bottom: 1px solid #c5b291;}
 .date-frame .date{ width: 100%; border-top: 1px solid #dacebe; display: flex;}
 .date-frame .date .month{ font-size: 100px; font-family: 'Helve'; color: #352c1d; text-shadow: 0 0 3px rgba(55,44,30,0.3);}
@@ -31,20 +34,21 @@
 
 .timer-frame{ width: 100%; background: url('../images/bg.png') repeat;}
 .timer-frame .timer-list{ width: 100%; max-width: 725px; margin: 0 auto; display: flex; flex-wrap: wrap;}
-.timer-list li{ width: 145px; height: 130px; display: flex; justify-content: center; align-items: center;}
-.timer-list li a{ width: 125px; height: 60px; display: flex; justify-content: center; align-items: center; font-size: 24px; font-family: 'Helve';text-shadow: 0 0 3px rgba(55,44,30,0.3);}
+.timer-list li{ width: 145px; height: 130px; display: flex; justify-content: center; align-items: center; transition: transform 0.15s ease-out; -webkit-transition: transform 0.15s ease-out;}
+.timer-list li a{ width: 125px; height: 60px; display: flex; justify-content: center; align-items: center; font-size: 24px;text-shadow: 0 0 3px rgba(55,44,30,0.3);}
+.timer-list li a span{ font-family: 'Helve';}
 .timer-list li.status1 a{ color: #352c1d;}
 .timer-list li.status2 a{ color: #e7e3e2; text-shadow: none;}
 .timer-list li.status3 a{ color: #FFFFFF; border-radius: 30px; background-color: #dac49f;}
 .timer-list li.status4 a{ color: #352c1d; border-radius: 30px; background-color: #e7e3e2;}
 
-.date-list-frame{ width: 100vw; height: 100vh; background-color: #dac49f; position: fixed; top: calc(240px - 100vh); left: calc(100vw - 310px); z-index: 100; display: flex; justify-content: center; align-items: center; overflow: hidden; transition: all 0.8s cubic-bezier(.17,.65,.23,.97) ;}
+.date-list-frame{ width: 100vw; height: 100vh; background-color: #dac49f; position: fixed; top: calc(240px - 100vh); left: calc(100vw - 310px); z-index: 100; display: flex; justify-content: center; align-items: center; overflow: hidden; transition: all 0.5s cubic-bezier(.17,.65,.23,.97);}
 .date-list-frame-show{ top:0; left: 0; opacity: 1;}
 .date-list-container{ width: 100%; max-width: 700px; position: relative;}
 .date-list-container:before{ content: ''; width: 100vw; height: 100%; padding-bottom: 2px; position: absolute; top: 0; left: 50%; margin-left: -50vw; background: url('../images/bg2.png') repeat; background-size: 140px;}
 .date-list-container:after{ content: ''; width: 100%; height: 100vh; padding-right: 2px; position: absolute; top: 50%; left: 0; margin-top: -50vh; background: url('../images/bg3.png') repeat; background-size: 140px;}
 .date-list-frame .list{ width: 100%; max-width: 700px; display: flex; flex-wrap: wrap; position: relative; z-index: 10;}
-.date-list-frame .list li{ width: 140px; height: 140px; display: flex; justify-content: center; align-items: center;}
+.date-list-frame .list li{ width: 140px; height: 140px; display: flex; justify-content: center; align-items: center; transition: transform 0.15s ease-out; -webkit-transition: transform 0.15s ease-out;}
 .date-list-frame .list li .date-item{ width: 125px; height: 65px; display: flex; justify-content: center; align-items: center;}
 .date-list-frame .list li .date-item .month{ font-size: 46px; color: #FFFFFF; text-shadow: 0 0 3px rgba(55,44,30,0.3); margin-right: 2px; font-family: Helve;}
 .date-list-frame .list li .date-item .right{ display: flex; flex-direction: column; align-items: center; justify-content: center;}
@@ -71,7 +75,7 @@
 .goods .input-code .input{ width: 245px; height: 50px; opacity: 0; color: rgba(0,0,0,0); position: absolute; top: 0; left: 0;}
 .goods .input-code ul{ display: flex; margin-right: 30px;}
 .goods .input-code ul li{ width: 50px; height: 50px; background-color: #fff; box-shadow: 0 0 3px rgba(55,44,30,0.3); font-size: 40px; font-family: Helve; color: #352c1d; display: flex; justify-content: center; align-items: center; margin-right: 15px;}
-.goods .input-code a.btn{ width: 100px; height: 50px; border-radius: 25px; background-color: #dac49f;box-shadow: 0 0 6px rgba(55,44,30,0.3); font-size: 14px; color: #FFFFFF; display: flex; justify-content: center; align-items: center;}
+.goods .input-code a.btn{ width: 100px; height: 50px; border-radius: 25px; background-color: #dac49f;box-shadow: 0 0 6px rgba(55,44,30,0.3); font-size: 14px; color: #FFFFFF; display: flex; justify-content: center; align-items: center;transition: transform 0.15s ease-out; -webkit-transition: transform 0.15s ease-out;}
 
 .type-list ul{ height: 50px; display: flex;}
 .type-list ul li{ width: 30%; height: 100%; position: relative; font-size: 16px; color: #352c1d; display: flex; align-items: center;}

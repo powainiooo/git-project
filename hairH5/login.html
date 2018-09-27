@@ -22,8 +22,20 @@
     <div class="login-frame">
         <div class="line"><input type="text" placeholder="账号"></div>
         <div class="line"><input type="text" placeholder="密码"></div>
-        <a href="list.html" class="btn">登录</a>
+        <a href="javascript:;" class="btn" id="btnLogin">登录</a>
     </div>
 </section>
+<script>
+    $("#btnLogin").on('touchstart',function(){
+        $(this).addClass('item-touch');
+    });
+    $("#btnLogin").on('touchend',function(){
+        $(this).removeClass('item-touch');
+        setTimeout(function(){
+            //登录的代码写在这  为了交互设计
+            window.location = 'list.html'
+        },150)
+    });
+</script>
 </body>
 </html>

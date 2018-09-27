@@ -45,20 +45,20 @@
 
     <!-- 1:有订单 2：无订单 3：订单进行中 4：订单完成 -->
     <div class="timer-frame">
-        <ul class="timer-list">
-            <li class="status1"><a href="detail.html"><span>21:00</span></a></li>
-            <li class="status2"><a href="#"><span>21:00</span></a></li>
-            <li class="status3"><a href="detail.html"><span>21:00</span></a></li>
-            <li class="status4"><a href="#"><span>21:00</span></a></li>
-            <li class="status1"><a href="#"><span>21:00</span></a></li>
-            <li class="status1"><a href="#"><span>21:00</span></a></li>
-            <li class="status1"><a href="#"><span>21:00</span></a></li>
-            <li class="status1"><a href="#"><span>21:00</span></a></li>
-            <li class="status1"><a href="#"><span>21:00</span></a></li>
-            <li class="status1"><a href="#"><span>21:00</span></a></li>
-            <li class="status1"><a href="#"><span>21:00</span></a></li>
-            <li class="status1"><a href="#"><span>21:00</span></a></li>
-            <li class="status1"><a href="#"><span>21:00</span></a></li>
+        <ul class="timer-list" id="timerList">
+            <li data-status="1" class="status1"><a href="javascript:;"><span>21:00</span></a></li>
+            <li data-status="2" class="status2"><a href="javascript:;"><span>21:00</span></a></li>
+            <li data-status="3" class="status3"><a href="javascript:;"><span>21:00</span></a></li>
+            <li data-status="4" class="status4"><a href="javascript:;"><span>21:00</span></a></li>
+            <li data-status="1" class="status1"><a href="javascript:;"><span>21:00</span></a></li>
+            <li data-status="1" class="status1"><a href="javascript:;"><span>21:00</span></a></li>
+            <li data-status="1" class="status1"><a href="javascript:;"><span>21:00</span></a></li>
+            <li data-status="1" class="status1"><a href="javascript:;"><span>21:00</span></a></li>
+            <li data-status="1" class="status1"><a href="javascript:;"><span>21:00</span></a></li>
+            <li data-status="1" class="status1"><a href="javascript:;"><span>21:00</span></a></li>
+            <li data-status="1" class="status1"><a href="javascript:;"><span>21:00</span></a></li>
+            <li data-status="1" class="status1"><a href="javascript:;"><span>21:00</span></a></li>
+            <li data-status="1" class="status1"><a href="javascript:;"><span>21:00</span></a></li>
         </ul>
     </div>
 
@@ -141,17 +141,40 @@
         $("#dateList").addClass('date-list-frame-show');
     });
     //选择日期
-    $("#dateList li").on('click',function(){
-        let month = $(this).find('.month').html();
-        let day = $(this).find('.day').html();
-        let week = $(this).find('.week').html();
-        $("#btnDateSelect .month").html(month);
-        $("#btnDateSelect .day").html(day);
-        $("#btnDateSelect .week").html(week);
-        $("#btnDateSelect").css('opacity',1);
-        $("#dateList").removeClass('date-list-frame-show');
+    $("#dateList li").on('touchstart',function(){
+        $(this).addClass('item-touch');
+    });
+    $("#dateList li").on('touchend',function(){
+        $(this).removeClass('item-touch');
         $(this).addClass('active').siblings('li').removeClass('active');
-    })
+        setTimeout(function(){
+            //登录的代码写在这  为了交互设计
+            let month = $(this).find('.month').html();
+            let day = $(this).find('.day').html();
+            let week = $(this).find('.week').html();
+            $("#btnDateSelect .month").html(month);
+            $("#btnDateSelect .day").html(day);
+            $("#btnDateSelect .week").html(week);
+            $("#btnDateSelect").css('opacity',1);
+            $("#dateList").removeClass('date-list-frame-show');
+        },150)
+    });
+    //选择时间
+    $("#timerList li").on('touchstart',function(){
+        var status = $(this).data('status');
+        if(status == 1 || status == 3){
+            $(this).addClass('item-touch');
+        }
+    });
+    $("#timerList li").on('touchend',function(){
+        var status = $(this).data('status');
+        if(status == 1 || status == 3){
+            $(this).removeClass('item-touch');
+            setTimeout(function(){
+                window.location = 'detail.html'
+            },150)
+        }
+    });
 </script>
 </body>
 </html>

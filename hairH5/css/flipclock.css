@@ -202,12 +202,12 @@
 .flip-clock-dot {
   display: block;
   background: #323434;
-  width: 10px;
-  height: 10px;
+  width: 6px;
+  height: 6px;
   position: absolute;
   border-radius: 50%;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-  left: 5px; }
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+  left: 6px; }
 
 .flip-clock-divider .flip-clock-label {
   position: absolute;

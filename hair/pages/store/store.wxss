@@ -5,7 +5,8 @@
 .store-item .btns{ display: flex; justify-content: space-between; align-items: center; position: relative; font-size: 60rpx;}
 .store-item .btns .icon-weixuan{ color: #e7e3e0; display: block;}
 .store-item .btns .icon-xuanzhong{ color: #d9c39f; position: absolute; top: 0; left: 20rpx; font-size: 50rpx;}
-.store-item .btns .btn-map{ width: 140rpx; height: 70rpx; background-color: #d9c39f; border-radius: 40rpx; font-size: 20rpx; color: #ffffff; display: flex; justify-content: center; align-items: center;}
+.store-item .btns .btn-map{ width: 140rpx; height: 70rpx; background-color: #d9c39f; border-radius: 40rpx; font-size: 20rpx; color: #ffffff; display: flex; justify-content: center; align-items: center;transition:transform 0.15s ease-out;}
+.store-item .btns .btn-map-hover{ transform: scale(0.9);}
 
 .tips{ font-size: 19rpx; margin: 20rpx 60rpx; color: #aeaeae; letter-spacing: 5rpx;}
 .tips .icon-logo{ font-size: 30rpx;}

@@ -1,5 +1,6 @@
 .container-date{ padding-bottom: 200rpx;}
-.packages-item{ width:100%; border-bottom: 1rpx solid #e5e4e0; padding: 30rpx 60rpx; position: relative; box-sizing: border-box; }
+.packages-item{ width:100%; border-bottom: 1rpx solid #e5e4e0; padding: 30rpx 60rpx; position: relative; box-sizing: border-box;transition:transform 0.15s ease-out; }
+.packages-item-hover{ transform: scale(0.95);}
 .packages-item-recommond{overflow: hidden;}
 .packages-item-recommond::before{content: ''; width: 220rpx; height: 220rpx; background-color: #dac49f; position: absolute; top: -110rpx; right: -110rpx; border-radius: 50%;}
 .packages-item-selected.packages-item-recommond::before{ background-color: #fffdfe;}

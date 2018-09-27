@@ -18,7 +18,8 @@ Page({
       }
     ],
     selectedId:-1,
-    selectedPrice:0
+    selectedPrice:0,
+    showDetails:false
   },
   doselected(e){
     let id = e.currentTarget.dataset.id;
@@ -37,6 +38,12 @@ Page({
   gotoSelect(){
     wx.navigateTo({
       url: '/pages/select/select'
+    })
+  },
+  //打开详情页
+  openDetail(e){
+    this.setData({
+      showDetails:true
     })
   },
   /**

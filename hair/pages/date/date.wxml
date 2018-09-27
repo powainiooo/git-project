@@ -30,7 +30,11 @@
             <view class="week">周一</view>
         </view>
     </view>
-    <view class="time-item {{selectIndex == '0' ? 'time-item-selected':''}}" data-index="0" bindtap="doselect">
+    <view class="time-item {{selectIndex == '0' ? 'time-item-selected':''}}"
+          data-index="0"
+          bindtap="doselect"
+          hover-class="time-item-hover"
+          hover-stay-time="50">
         <view class="icons icon-weixuan"></view>
         <view class="icons icon-xuanzhong"></view>
         <view>
@@ -38,7 +42,11 @@
             <view class="end">预计结束时间21:45</view>
         </view>
     </view>
-    <view class="time-item {{selectIndex == '1' ? 'time-item-selected':''}}" data-index="1" bindtap="doselect">
+    <view class="time-item {{selectIndex == '1' ? 'time-item-selected':''}}"
+          data-index="1"
+          bindtap="doselect"
+          hover-class="time-item-hover"
+          hover-stay-time="50">
         <view class="icons icon-weixuan"></view>
         <view class="icons icon-xuanzhong"></view>
         <view>

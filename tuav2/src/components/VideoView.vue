@@ -42,7 +42,7 @@
                     width  : '100%',
                     height : '100%',
                     video  : self.video,
-                    playerType: 'html5',
+                    //playerType: 'html5',
                     modId  : "mod_player",
                     autoplay: true
                 });

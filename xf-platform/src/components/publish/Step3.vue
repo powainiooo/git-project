@@ -77,9 +77,7 @@
                                     <li><span>2</span>一个艺人logo对应上传一个艺人照片</li>
                                 </ul>
                                 <ul class="list1" v-if="showActError">
-                                    <li v-for="(item,index) in errorData.person_desc" v-if="item.img != '' || item.picture != ''">
-                                        <span></span>{{item.img == '' ? '' : '艺人logo '+(index+1)+'：'+item.img+'  '}}{{item.picture == '' ? '' : '艺人照片 '+(index+1)+'：'+item.picture}}
-                                    </li>
+                                    <li v-for="(item,index) in errorData.person_desc" v-if="item.img != '' || item.picture != ''">{{item.img == '' ? '' : '艺人logo '+(index+1)+'：'+item.img+'  '}}{{item.picture == '' ? '' : '艺人照片 '+(index+1)+'：'+item.picture}}</li>
                                 </ul>
                             </t-ques>
                         </div>
@@ -183,8 +181,9 @@
                 let list1 = editorData.goods_desc,goods_desc = this.errorData.goods_desc;
                 this.showActivityError = false;
                 for(let i=0;i<list1.length;i++){
+
                     this.activityListData.push({
-                        imgUrl:fileurl+list1[i].img,
+                        imgUrl:list1[i].img == '' ? '' : fileurl+list1[i].img,
                         desc:list1[i].desc
                     });
                     if(goods_desc[i].img != '' || goods_desc[i].desc != ''){
@@ -195,8 +194,8 @@
                 this.showActError = false;
                 for(let i=0;i<list2.length;i++){
                     this.actListData.push({
-                        logoUrl:fileurl+list2[i].img,
-                        imgUrl:fileurl+list2[i].picture
+                        logoUrl:list2[i].img == '' ? '' : fileurl+list2[i].img,
+                        imgUrl:list2[i].picture == '' ? '' : fileurl+list2[i].picture
                     });
                     if(person_desc[i].img != '' || person_desc[i].picture != ''){
                         this.showActError = true;

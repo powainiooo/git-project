@@ -17,18 +17,27 @@
             <view class="price">{{item.price}}<text>元</text></view>
         </view>
         <view class="line2">
-            <view class="pro-item" catchtap="openDetail"><image src="../../res/img/pics/pro1.png" mode="scaleToFill"></image></view>
-            <view class="pro-item" catchtap="openDetail"><image src="../../res/img/pics/pro2.png" mode="scaleToFill"></image></view>
-            <view class="pro-item" catchtap="openDetail"><image src="../../res/img/pics/pro3.png" mode="scaleToFill"></image></view>
+            <view class="pro-item" catchtap="openDetail"
+                  hover-stop-propagation="true"
+                  hover-class="pro-item-hover"
+                  hover-stay-time="50"><image src="../../res/img/pics/pro1.png" mode="scaleToFill"></image></view>
+            <view class="pro-item" catchtap="openDetail"
+                  hover-stop-propagation="true"
+                  hover-class="pro-item-hover"
+                  hover-stay-time="50"><image src="../../res/img/pics/pro2.png" mode="scaleToFill"></image></view>
+            <view class="pro-item" catchtap="openDetail"
+                  hover-stop-propagation="true"
+                  hover-class="pro-item-hover"
+                  hover-stay-time="50"><image src="../../res/img/pics/pro3.png" mode="scaleToFill"></image></view>
         </view>
         <view class="line3">适用于：中性至敏感性</view>
         <view class="icons icon-weixuan"></view>
         <view class="icons icon-xuanzhong"></view>
     </view>
-    <view class="pro-more">
+    <view class="pro-more" bindtap="gotoSelect">
         <view class="icons icon-more"></view>
         <text class="name">Customized package \n 自定义套餐</text>
-        <view class="icons icon-zixuan1" bindtap="gotoSelect"></view>
+        <view class="icons icon-zixuan1"></view>
     </view>
 </view>
 <footer-view showPrice bindbtn="doNext">

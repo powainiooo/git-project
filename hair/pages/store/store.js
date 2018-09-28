@@ -15,12 +15,14 @@ Page({
   },
   //打开地图
   openMap(e){
-    let lnglat = e.currentTarget.dataset.lnglat;
-    wx.openLocation({
-      latitude: lnglat[1],
-      longitude: lnglat[0],
-      scale: 28
-    })
+    setTimeout(function(){
+      let lnglat = e.currentTarget.dataset.lnglat;
+      wx.openLocation({
+        latitude: lnglat[1],
+        longitude: lnglat[0],
+        scale: 28
+      })
+    },150);
   },
   /**
    * 生命周期函数--监听页面加载

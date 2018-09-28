@@ -1,5 +1,6 @@
-.index-frame{ width: 100%; height: 100vh; overflow: hidden; position: relative;}
-.blur{filter: blur(4px); height: 100vh; overflow: hidden;}
+.index-frame{ width: 100%; height: 100vh;}
+.index-container{ margin-top: 300rpx;}
+.blur{filter: blur(4px);}
 .banner{ width: 100%;}
 .content{ margin: 60rpx;}
 .content .title-en{ font-size: 66rpx; font-family: 'Helve'; text-shadow: 0 0 3px rgba(55,44,30,0.25);}

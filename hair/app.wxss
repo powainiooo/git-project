@@ -3,6 +3,6 @@
 /**app.wxss**/
 .container {
     color: #372c1e;
-    margin-top: 300rpx;
-    padding-bottom: 230rpx;
+    margin-top: 220rpx;
+    padding-bottom: 200rpx;
 }

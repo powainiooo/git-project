@@ -5,7 +5,9 @@
           wx:for-item="item"
           wx:key="{{item}}"
           data-status="{{item.status}}"
-          bindtap="gotoDetail">
+          bindtap="gotoDetail"
+          hover-class="list-item-hover"
+          hover-stay-time="50">
         <view class="order-time {{item.status == 'used' ? 'order-time-used' : ''}} {{item.status == 'overdue' ? 'order-time-out' : ''}}">
             <view></view>
             <view class="year">2018</view>

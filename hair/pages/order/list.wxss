@@ -1,5 +1,6 @@
 .container-order{ overflow: hidden; margin-bottom: 20rpx;}
-.list-item{ padding:60rpx 40rpx 0 40rpx; overflow: hidden; position: relative;}
+.list-item{ padding:60rpx 40rpx 0 40rpx; overflow: hidden; position: relative;transition:transform 0.15s ease-out;}
+.list-item-hover{ transform: scale(0.95);}
 .list-item::after{ content: ''; width: 100%; height: 40rpx; box-shadow: 0 0 40rpx rgba(0,0,0,0.1); position: absolute; bottom: -40rpx; left: 0;}
 .order-time{ background-color: #ffffff; box-shadow: 0 0 40rpx rgba(0,0,0,0.2); border-radius: 10rpx 10rpx 0 0; position: relative; overflow: hidden;}
 .order-time-used::before{content: '已使用'; width: 220rpx; height: 220rpx; background-color: #dac49f; position: absolute; top: -110rpx; right: -110rpx; border-radius: 50%; font-size: 20rpx; color: #fffdfe; display: flex; justify-content: flex-start; align-items: flex-end; box-sizing: border-box; padding: 0 0 50rpx 30rpx;}

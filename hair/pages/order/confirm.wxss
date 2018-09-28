@@ -21,13 +21,14 @@
 .packages-item .line1 .name{ font-size: 30rpx;text-shadow: 0 0 3px rgba(55,44,30,0.25);}
 .packages-item .line2{ padding: 50rpx 120rpx 0 25rpx; border-top: 1rpx solid #f9f7f8; display: flex; box-sizing: border-box;}
 .packages-item-selected .line2{ border-top: 1rpx solid #e3d8c6;}
-.packages-item .line2 .pro-item{ width: 130rpx; height: 106rpx; border-radius: 10rpx; background-color: #e7e3e2; position: relative; margin-right: 35rpx; margin-bottom: 35rpx;}
+.packages-item .line2 .pro-item{ width: 130rpx; height: 106rpx; border-radius: 10rpx; background-color: #e7e3e2; position: relative; margin-right: 35rpx; margin-bottom: 35rpx;transition:transform 0.15s ease-out;}
+.packages-item .line2 .pro-item-hover{ transform: scale(0.9);}
 .packages-item-selected .line2 .pro-item{ background-color: #fffdfe;}
 .packages-item .line2 .pro-item::after{ content: '+'; font-size: 30rpx; color: #e7e3e2; position: absolute; top: 35rpx; right: -28rpx;}
 .packages-item .line2 .pro-item:last-child::after{ content: '';}
 .packages-item .line2 .pro-item image{ width: 130rpx; height: 130rpx; position: absolute; bottom: 0; left: 0;}
 
-.rule-frame{ width: 100%; position: fixed; left: 0; top: 0; bottom: 200rpx; z-index: 510;}
+.rule-frame{ width: 100%; position: fixed; left: 0; top: 0; bottom: 200rpx; z-index: 510; transition:top 0.2s ease-in-out;}
 .rule-frame .icon-guanbi{ font-size: 30px; position: absolute; top: 60rpx; right: 60rpx;}
 .rule-frame .tips-frame{ box-sizing: border-box; height: calc(100% - 200rpx); background-color: rgba(255,255,255,0.95); padding: 0 60rpx; display: flex; flex-direction: column; justify-content: center;}
 .tips-frame .icon-tips{ font-size: 70rpx; color: #9e9c9d; margin-bottom: 10rpx;}

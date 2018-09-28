@@ -1,4 +1,4 @@
-.container-selection{ margin-bottom: 200rpx;}
+
 .selection-title{ width: 100%; position: relative; overflow: hidden;}
 .selection-title::before{ content: ''; width: 50%; height: 70rpx; background-color: #dac49f; position: absolute; top: 0; left: -20rpx; transform: skewX(-25deg); z-index: 10;}
 .selection-title::after{ content: ''; width: 50%; height: 70rpx; font-size: 30rpx; color: #ffffff; font-family: 'Helve'; display: flex; justify-content: center; align-items: center; position: absolute; top: 0; left: -20rpx; z-index: 11;}

@@ -14,4 +14,6 @@
     </view>
 
 </view>
-<footer-view showClose><view slot="btn">确认 | Confirm</view></footer-view>
+<footer-view showClose binddoclose="doclose">
+    <view slot="btn" bindtap="doBack">确认 | Confirm</view>
+</footer-view>

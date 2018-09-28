@@ -10,4 +10,4 @@
 .menu-list{ width: 100%; background-color: #d9c39f; position: fixed; left: 0; bottom: -200rpx; z-index: 450; transition: bottom 0.5s cubic-bezier(.21,.68,.27,1.01);}
 .menu-list .menu-list-item{ width: 100%; height: 170rpx; border-top: 1rpx solid #d8cfbe; border-bottom: 1rpx solid #c6b192; font-size: 40rpx; color: #ffffff; padding-left: 60rpx; box-sizing: border-box; display: flex; align-items: center;}
 .menu-list .menu-list-item:last-child{ border-bottom: none;}
-.menu-list .menu-list-item .en{ font-family: 'Helve';}
+.menu-list .menu-list-item .en{ font-family: 'Helve'; margin-left: 10rpx;}

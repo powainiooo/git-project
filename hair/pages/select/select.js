@@ -23,12 +23,15 @@ Page({
   },
   //选择清洁
   doSelectClean(e){
-    let id = e.currentTarget.dataset.id;
-    let arr = this.data.selectedID;
-    arr[0] = id;
-    this.setData({
-      selectedID:arr
-    })
+    setTimeout(()=>{
+      let id = e.currentTarget.dataset.id;
+      let arr = this.data.selectedID;
+      arr[0] = id;
+      this.setData({
+        selectedID:arr
+      })
+    },150)
+
   },
   //选择润发
   doSelectConditioner(e){

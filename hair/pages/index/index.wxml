@@ -1,6 +1,6 @@
-<view class="{{showBlur ? 'blur' : ''}}">
-    <header-view showTitle="{{false}}" size="large"></header-view>
-    <view class="container">
+<scroll-view scroll-y="{{!showBlur}}" class="index-frame {{showBlur ? 'blur' : ''}}" bindscroll="doScroll">
+    <header-view showTitle="{{false}}" size="{{headerSize}}"></header-view>
+    <view class="container index-container">
         <image src="../../res/img/pics/banner.jpg" class="banner" mode="widthFix"></image>
         <view class="content">
             <view class="title-en">Welcome</view>
@@ -11,7 +11,7 @@
             <view class="tips">本店店铺主题及线上线下艺术呈现由 Yu Nagaba 提供</view>
         </view>
     </view>
-</view>
+</scroll-view>
 <footer-view showMenu
              bindopenMenu="doBlur"
              bindhideMenu="hideBlur"

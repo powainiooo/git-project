@@ -8,6 +8,7 @@ Page({
     userInfo: {},
     hasUserInfo: false,
     showBlur:false,
+    headerSize:'large',
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
   onLoad: function () {
@@ -62,6 +63,13 @@ Page({
   doOrder(){
     wx.navigateTo({
       url: '/pages/store/store'
+    })
+  },
+  doScroll(e){
+    let st = e.detail.scrollTop;
+    console.log(st);
+    this.setData({
+      headerSize:st > 100 ? 'normal' : 'large'
     })
   }
 });

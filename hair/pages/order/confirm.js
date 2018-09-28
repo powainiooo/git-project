@@ -10,9 +10,11 @@ Page({
     showDetails:false
   },
   doGetDetail(){
-    this.setData({
-      showDetails:true
-    })
+    setTimeout(()=>{
+      this.setData({
+        showDetails:true
+      })
+    },150)
   },
   hideDetails(){
     this.setData({

@@ -3,7 +3,7 @@
     <view class="date-list">
         <view class="item">
             <view class="day">15</view>
-            <view class="week">周一</view>
+            <view class="week">今天</view>
         </view>
         <view class="item active">
             <view class="day">15</view>

@@ -9,10 +9,12 @@ Page({
   },
   //选择
   doselect(e){
-    let index = e.currentTarget.dataset.index;
-    this.setData({
-      selectIndex:index
-    })
+    setTimeout(()=>{
+      let index = e.currentTarget.dataset.index;
+      this.setData({
+        selectIndex:index
+      })
+    },200);
   },
   //下一步
   doNext(){

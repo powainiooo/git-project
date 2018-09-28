@@ -22,12 +22,14 @@ Page({
     showDetails:false
   },
   doselected(e){
-    let id = e.currentTarget.dataset.id;
-    let price = e.currentTarget.dataset.price;
-    this.setData({
-      selectedId:id,
-      selectedPrice:price
-    });
+    setTimeout(()=>{
+      let id = e.currentTarget.dataset.id;
+      let price = e.currentTarget.dataset.price;
+      this.setData({
+        selectedId:id,
+        selectedPrice:price
+      });
+    },200);
   },
   //下一步
   doNext(){
@@ -42,9 +44,12 @@ Page({
   },
   //打开详情页
   openDetail(e){
-    this.setData({
-      showDetails:true
-    })
+    setTimeout(()=>{
+      this.setData({
+        showDetails:true
+      })
+    },150)
+
   },
   /**
    * 生命周期函数--监听页面加载

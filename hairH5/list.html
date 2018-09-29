@@ -22,7 +22,7 @@
 </header>
 <section class="container">
     <div class="list-line">
-        <ul class="worker-list">
+        <ul class="worker-list" id="workerList">
             <li class="active">01</li>
             <li>02</li>
         </ul>
@@ -135,6 +135,10 @@
 </section>
 
 <script>
+    //切换员工
+    $("#workerList li").on('click',function(){
+        $(this).addClass('active').siblings('li').removeClass('active');
+    });
     //打开日期选择
     $("#btnDateSelect").on('click',function(){
         $(this).css('opacity',0);

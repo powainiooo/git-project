@@ -19,11 +19,10 @@
 .item-touch{ transform: scale(0.9); -webkit-transform: scale(0.9);}
 
 .list-line{ width: 100%; height: 170px; border-bottom: 1px solid #f2f1ef; display: flex; justify-content: space-between; align-items: center;}
-.worker-list{ display: flex; align-items: flex-start;}
-.worker-list li{ font-size: 36px; color: #352c1d; text-shadow: 0 0 3px rgba(55,44,30,0.3); padding: 0 20px; position: relative; margin-top: 20px; font-family: 'Helve';}
-.worker-list li:after{ content: ''; width: 2px; height: 35px; background-color: #352c1d; box-shadow: 0 0 3px rgba(55,44,30,0.3); position: absolute; top: 30px; right: 0;}
-.worker-list li:last-child:after{ width: 0; box-shadow: none;}
-.worker-list li.active{ font-size: 120px; margin-top: 0;}
+.worker-list{ position: relative; overflow: hidden;}
+.worker-list li{ font-size: 36px; color: #352c1d; text-shadow: 0 0 3px rgba(55,44,30,0.3); padding: 0 20px; position: relative; margin-top: 20px; font-family: 'Helve'; float: right;}
+.worker-list li.active:after{ content: ''; width: 2px; height: 35px; background-color: #352c1d; box-shadow: 0 0 3px rgba(55,44,30,0.3); position: absolute; top: 30px; right: 0;}
+.worker-list li.active{ font-size: 120px; margin-top: 0; float: left;}
 
 .date-frame{ width: 310px; height: 170px; padding: 0 50px; background-color: #dac49f; display: flex; flex-direction: column; align-items: center; position: relative; z-index: 200; transition: opacity 0.5s ease-out; -webkit-transition: opacity 0.5s ease-out;}
 .date-frame .year{ width: 100%; height: 40px; font-size: 24px; color: #352c1d; font-family: 'Helve'; display: flex; justify-content: space-around; align-items: center; border-bottom: 1px solid #c5b291;}

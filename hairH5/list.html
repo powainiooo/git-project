@@ -8,6 +8,8 @@
     <meta content="telephone=no" name="format-detection">
     <meta content="email=no" name="format-detection">
     <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="apple-touch-icon-precomposed" href="images/cover.png">
+    <link rel="apple-touch-icon" href="images/cover.png">
     <title>工作人员</title>
     <link href="css/reset.css" type="text/css" rel="stylesheet" />
     <link href="css/icons.css" type="text/css" rel="stylesheet" />
@@ -143,6 +145,9 @@
     $("#btnDateSelect").on('click',function(){
         $(this).css('opacity',0);
         $("#dateList").addClass('date-list-frame-show');
+        setTimeout(function(){
+            $("#dateList").addClass('date-list-frame-line')
+        },500)
     });
     //选择日期
     $("#dateList li").on('touchstart',function(){
@@ -153,6 +158,7 @@
         $(this).addClass('active').siblings('li').removeClass('active');
         setTimeout(function(){
             //登录的代码写在这  为了交互设计
+            $("#dateList").removeClass('date-list-frame-line')
             let month = $(this).find('.month').html();
             let day = $(this).find('.day').html();
             let week = $(this).find('.week').html();
@@ -161,7 +167,7 @@
             $("#btnDateSelect .week").html(week);
             $("#btnDateSelect").css('opacity',1);
             $("#dateList").removeClass('date-list-frame-show');
-        },150)
+        },150);
     });
     //选择时间
     $("#timerList li").on('touchstart',function(){

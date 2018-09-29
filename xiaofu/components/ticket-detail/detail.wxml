@@ -48,7 +48,7 @@
         </view>
 
         <view class="title">联系主办方</view>
-        <view class="contact-frame">
+        <view class="contact-frame" wx:if="{{itemData.info}}">
             <image src="{{imgSrc+itemData.info.cover}}" mode="widthFix" class="logo"></image>
             <view class="btn-phone"
                   hover-class="btn-phone-touch"

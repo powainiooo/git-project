@@ -19,60 +19,62 @@
             </view>
         </view>
     </view>
-    <!--清洁列表-->
-    <view wx:if="{{step == 1}}">
-        <view wx:for="{{cleanList}}"
-              wx:for-item="item"
-              wx:key="{{item.id}}"
-              data-id="{{item.id}}"
-              bindtap="doSelectClean"
-              hover-class="list-item-hover"
-              hover-stay-time="50"
-              class="list-item {{selectedID[0] == item.id ? 'list-item-selected' : ''}}">
-            <image src="../../res/img/pics/pro5.png" mode="scaleToFill" class="img"></image>
-            <view class="name">shampoo</view>
-            <view class="name" style="margin-bottom: 30rpx;">洗发水</view>
-            <view class="decs">蜂蜜及天然萃取精华</view>
-            <view class="tips"><text>适用于\n中性至敏感性</text></view>
-            <view class="price">+6元</view>
-            <view class="icons icon-weixuan"></view>
-            <view class="icons icon-xuanzhong"></view>
+    <view class="goods-frame" style="transform: translate({{-(step-1)*100}}vw,0)">
+        <!--清洁列表-->
+        <view class="goods-page">
+            <view wx:for="{{cleanList}}"
+                  wx:for-item="item"
+                  wx:key="{{item.id}}"
+                  data-id="{{item.id}}"
+                  bindtap="doSelectClean"
+                  hover-class="list-item-hover"
+                  hover-stay-time="50"
+                  class="list-item {{selectedID[0] == item.id ? 'list-item-selected' : ''}}">
+                <image src="../../res/img/pics/pro5.png" mode="scaleToFill" class="img"></image>
+                <view class="name">shampoo</view>
+                <view class="name" style="margin-bottom: 30rpx;">洗发水</view>
+                <view class="decs">蜂蜜及天然萃取精华</view>
+                <view class="tips"><text>适用于\n中性至敏感性</text></view>
+                <view class="price">+6元</view>
+                <view class="icons icon-weixuan"></view>
+                <view class="icons icon-xuanzhong"></view>
+            </view>
         </view>
-    </view>
-    <!--润发列表-->
-    <view wx:if="{{step == 2}}">
-        <view wx:for="{{conditionerList}}"
-              wx:for-item="item"
-              wx:key="{{item.id}}"
-              data-id="{{item.id}}"
-              bindtap="doSelectConditioner"
-              class="list-item {{selectedID[1] == item.id ? 'list-item-selected' : ''}}">
-            <image src="../../res/img/pics/pro5.png" mode="scaleToFill" class="img"></image>
-            <view class="name">shampoo</view>
-            <view class="name" style="margin-bottom: 30rpx;">洗发水</view>
-            <view class="decs">蜂蜜及天然萃取精华</view>
-            <view class="tips"><text>适用于\n中性至敏感性</text></view>
-            <view class="price price-low">-6元</view>
-            <view class="icons icon-weixuan"></view>
-            <view class="icons icon-xuanzhong"></view>
+        <!--润发列表-->
+        <view class="goods-page">
+            <view wx:for="{{conditionerList}}"
+                  wx:for-item="item"
+                  wx:key="{{item.id}}"
+                  data-id="{{item.id}}"
+                  bindtap="doSelectConditioner"
+                  class="list-item {{selectedID[1] == item.id ? 'list-item-selected' : ''}}">
+                <image src="../../res/img/pics/pro5.png" mode="scaleToFill" class="img"></image>
+                <view class="name">shampoo</view>
+                <view class="name" style="margin-bottom: 30rpx;">洗发水</view>
+                <view class="decs">蜂蜜及天然萃取精华</view>
+                <view class="tips"><text>适用于\n中性至敏感性</text></view>
+                <view class="price price-low">-6元</view>
+                <view class="icons icon-weixuan"></view>
+                <view class="icons icon-xuanzhong"></view>
+            </view>
         </view>
-    </view>
-    <!--调理列表-->
-    <view wx:if="{{step == 3}}">
-        <view wx:for="{{treatmentList}}"
-              wx:for-item="item"
-              wx:key="{{item.id}}"
-              data-id="{{item.id}}"
-              bindtap="doSelectTreatment"
-              class="list-item {{selectedID[2] == item.id ? 'list-item-selected' : ''}}">
-            <image src="../../res/img/pics/pro5.png" mode="scaleToFill" class="img"></image>
-            <view class="name">shampoo</view>
-            <view class="name" style="margin-bottom: 30rpx;">洗发水</view>
-            <view class="decs">蜂蜜及天然萃取精华</view>
-            <view class="tips"><text>适用于\n中性至敏感性</text></view>
-            <view class="price price-low">-6元</view>
-            <view class="icons icon-weixuan"></view>
-            <view class="icons icon-xuanzhong"></view>
+        <!--调理列表-->
+        <view class="goods-page">
+            <view wx:for="{{treatmentList}}"
+                  wx:for-item="item"
+                  wx:key="{{item.id}}"
+                  data-id="{{item.id}}"
+                  bindtap="doSelectTreatment"
+                  class="list-item {{selectedID[2] == item.id ? 'list-item-selected' : ''}}">
+                <image src="../../res/img/pics/pro5.png" mode="scaleToFill" class="img"></image>
+                <view class="name">shampoo</view>
+                <view class="name" style="margin-bottom: 30rpx;">洗发水</view>
+                <view class="decs">蜂蜜及天然萃取精华</view>
+                <view class="tips"><text>适用于\n中性至敏感性</text></view>
+                <view class="price price-low">-6元</view>
+                <view class="icons icon-weixuan"></view>
+                <view class="icons icon-xuanzhong"></view>
+            </view>
         </view>
     </view>
 </view>

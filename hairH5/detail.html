@@ -8,6 +8,8 @@
     <meta content="telephone=no" name="format-detection">
     <meta content="email=no" name="format-detection">
     <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="apple-touch-icon-precomposed" href="images/cover.png">
+    <link rel="apple-touch-icon" href="images/cover.png">
     <title>服务订单</title>
     <link href="css/reset.css" type="text/css" rel="stylesheet" />
     <link href="css/icons.css" type="text/css" rel="stylesheet" />
@@ -72,11 +74,12 @@
         </ul>
     </div>
 
-    <div class="clock-frame">
+    <div class="clock-frame" id="clockFrame">
         <div class="clock"></div>
+        <p>服务结束</p>
     </div>
 </section>
-
+<audio src="mp3/over.mp3" id="audio"></audio>
 <link href="css/flipclock.css" type="text/css" rel="stylesheet" />
 <script src="js/flipclock.min.js" type="application/javascript" language="javascript"></script>
 <script>
@@ -93,13 +96,13 @@
     $("#btnStart").on('touchstart',function(){
         $(this).addClass('item-touch');
     });
-    countDown(30*60);
+    countDown(3);
     $("#btnStart").on('touchend',function(){
         $(this).removeClass('item-touch');
         setTimeout(function(){
             //ajax 代码写在这
             $("#inputCode").hide();
-            countDown(30*60);
+            countDown(10);
         },150);
 
     });
@@ -108,7 +111,16 @@
     function countDown(seconds){
         var clock = $('.clock').FlipClock(seconds, {
             clockFace: 'MinuteCounter',
-            countdown: true
+            countdown: true,
+            callbacks: {
+                stop: function() {
+                    document.getElementById('audio').play();
+                    setTimeout(function(){
+                        $("#clockFrame .clock").hide();
+                        $("#clockFrame>p").show();
+                    },1000)
+                }
+            }
         });
     }
     //点击返回

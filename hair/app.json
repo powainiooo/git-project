@@ -1,10 +1,10 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/select/select",
     "pages/package/personal",
     "pages/package/package",
     "pages/date/date",
-    "pages/select/select",
     "pages/package/editor",
     "pages/order/notuse",
     "pages/order/overdue",

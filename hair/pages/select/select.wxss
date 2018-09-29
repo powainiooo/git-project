@@ -25,3 +25,6 @@
 .list-item-selected .icon-weixuan{ color: #fffdfe;}
 .list-item .icon-xuanzhong{ position: absolute; bottom: 55rpx; right: 70rpx; font-size: 46rpx; display: none;}
 .list-item-selected .icon-xuanzhong{ display: block;}
+
+.goods-frame{ width: 300vw; display: flex; transition:transform 0.3s ease-out;}
+.goods-frame .goods-page{ width: 100vw;}

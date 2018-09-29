@@ -91,6 +91,7 @@ Component({
     doPay(){
       let self = this;
       if(self.data.btnDisabled){
+        self.data.btnDisabled = false;
         wx.showNavigationBarLoading();
         wx.request({
           url: self.data.ajaxSrc+'/create_order', //仅为示例，并非真实的接口地址
@@ -132,6 +133,7 @@ Component({
                     title:'支付失败'
                   });
                   wx.hideNavigationBarLoading();
+                  self.data.btnDisabled = true;
                 }
               })
             }
@@ -140,6 +142,7 @@ Component({
             wx.showModal({
               title:'购买失败，请重试',
               success(){
+                self.data.btnDisabled = true;
                 self.doPay();
               }
             });

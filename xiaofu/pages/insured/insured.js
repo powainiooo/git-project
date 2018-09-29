@@ -36,6 +36,7 @@ Page({
   doConfirm(){
     let self = this;
     if(self.data.btnDisabled){
+      self.data.btnDisabled = false;
       wx.showNavigationBarLoading();
       wx.request({
         url: app.globalData.ajaxSrc+'/safe_person', //仅为示例，并非真实的接口地址
@@ -52,7 +53,8 @@ Page({
             wx.showToast({
               title:'提交信息出错',
               icon:'none'
-            })
+            });
+            self.data.btnDisabled = true;
           }
           wx.hideNavigationBarLoading();
         },

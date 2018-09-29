@@ -24,7 +24,7 @@
             </div>
         </div>
         <div class="btn" v-if="value != ''">
-            <t-button @dotap="openFile" size="min" v-if="!hideButton" :red="redButton">重新上传</t-button>
+            <t-button @dotap="openFile" size="min" v-if="!hideButton" :red="redButton && imgUrl != ''">重新上传</t-button>
         </div>
         <input type="file" ref="file" @change="fileChange" accept="image/gif,image/jpeg,image/jpg,image/png,image/svg">
     </div>
@@ -55,7 +55,7 @@
         },
         data(){
             return{
-                imgUrl:''
+                imgUrl:this.value
             }
         },
         methods:{

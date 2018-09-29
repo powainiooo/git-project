@@ -16,7 +16,7 @@
 .list-item .price{ width: 220rpx; height: 220rpx; box-sizing: border-box; border-radius: 50%; position: absolute; top: -110rpx; right: -110rpx; background-color: #dac49f; display: flex; align-items: flex-end; color: #ffffff; font-size: 30rpx; padding: 0 0 45rpx 20rpx;}
 .list-item .price-low{ background-color: #e7e3e2; color: inherit;}
 .list-item-selected .price{ color: #dac49f; background-color: #ffffff;}
-.list-item .icon-xiugai{ position: absolute; bottom: 40rpx; right: 70rpx; color: #dac49f; font-size: 60rpx; border-radius: 50%; box-shadow: 0 0 6rpx rgba(0,0,0,0.2);}
+.list-item .icon-xiugai{ position: absolute; bottom: 40rpx; right: 70rpx; color: #dac49f; font-size: 60rpx; border-radius: 50%; box-shadow: 0 0 6rpx rgba(0,0,0,0.2); transform: rotateZ(180deg);}
 
 .tips-frame{ padding:0 60rpx; height: 330rpx; box-sizing: border-box; background-color: #efebea; overflow: hidden; display: flex; flex-direction: column; justify-content: center;}
 .tips-frame .icon-tips{ font-size: 70rpx; color: #9e9c9d; margin-bottom: 10rpx;}

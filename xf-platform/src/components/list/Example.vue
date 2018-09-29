@@ -99,7 +99,7 @@
         methods:{
             gotoNewitem(){
                 this.$store.commit('setEditorData');
-                this.$store.commit('setErrorData',{id:-1});
+                this.$store.commit('setErrorData');
                 this.$router.push('publish')
             }
         }

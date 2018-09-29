@@ -1,6 +1,7 @@
 {
   "usingComponents": {
     "header-view":"../../components/header/header",
-    "timer-view":"../../components/timer/timer"
+    "timer-view":"../../components/timer/timer",
+    "detail-view":"../../components/detail/detail"
   }
 }

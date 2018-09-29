@@ -6,7 +6,8 @@ Page({
    */
   data: {
     timer:30*60,
-    timeT:0
+    timeT:0,
+    showDetails:false
   },
 
   /**
@@ -24,7 +25,13 @@ Page({
       }
     },1000)
   },
-
+  doGetDetail(){
+    setTimeout(()=>{
+      this.setData({
+        showDetails:true
+      })
+    },150)
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

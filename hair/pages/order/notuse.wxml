@@ -40,9 +40,21 @@
             </view>
         </view>
         <view class="line2">
-            <view class="pro-item"><image src="../../res/img/pics/pro1.png" mode="scaleToFill"></image></view>
-            <view class="pro-item"><image src="../../res/img/pics/pro2.png" mode="scaleToFill"></image></view>
-            <view class="pro-item"><image src="../../res/img/pics/pro3.png" mode="scaleToFill"></image></view>
+            <view class="pro-item"
+                  bindtap="doGetDetail"
+                  hover-class="pro-item-hover"
+                  hover-stay-time="50"><view class="frame"><image src="../../res/img/pics/pro1.png" mode="scaleToFill"></image></view></view>
+            <view class="pro-item"
+                  bindtap="doGetDetail"
+                  hover-class="pro-item-hover"
+                  hover-stay-time="50"><view class="frame"><image src="../../res/img/pics/pro2.png" mode="scaleToFill"></image></view></view>
+            <view class="pro-item"
+                  bindtap="doGetDetail"
+                  hover-class="pro-item-hover"
+                  hover-stay-time="50"><view class="frame"><image src="../../res/img/pics/pro3.png" mode="scaleToFill"></image></view></view>
         </view>
     </view>
 </view>
+
+<!--pro detail-->
+<detail-view showDetails="{{showDetails}}"></detail-view>

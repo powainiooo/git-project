@@ -160,7 +160,7 @@
                     <div class="img">
                         <img src="<?=$this->config->item('upload_file_url').$val['picture']?>">
                     </div>
-                   
+
                 </div>
                 <div class="pass-group">
                     <span>合格</span>
@@ -176,7 +176,7 @@
                     <div class="img" style="background-color:#CCCCCC">
                         <img src="<?=$this->config->item('upload_file_url').$val['img']?>">
                     </div>
-                    
+
                 </div>
                 <div class="pass-group">
                     <span>合格</span>
@@ -217,7 +217,7 @@
                         <div class="img">
                             <img src="<?=$this->config->item('upload_file_url').$val['img']?>">
                         </div>
-                        
+
                     </div>
                     <div class="pass-group">
                         <span>合格</span>
@@ -278,7 +278,8 @@
 <!--生成海报-->
 <div class="frame" style="position:fixed;top:-10000px;left:-10000px;">
     <p>canvas：<canvas id="poster" width="750" height="760" style=' background-color:#fff;'></canvas></p>
-    
+    <p>canvas：<canvas id="share" width="750" height="635" style=' background-color:#fff;'></canvas></p>
+
 </div>
 </body>
 </html>
@@ -290,13 +291,13 @@ $("#save").click(function(){
           url : "<?=url('admin/activity/ajax_do_check')?>",
           type : 'POST',
           dataType: 'json',
-          
+
           beforeSubmit : function (formData, jqForm, options) {
           },
           success : function (responseText, statusText) {
             Alert(responseText.msg);
             if (responseText.ret == '0') {
-				drawPoster();//调用生成海报
+                initDraw();//调用生成海报
                 setTimeout(function(){
 					location.href = '<?=url('admin/activity/act_check')?>';
 				},2000);
@@ -335,99 +336,185 @@ $("#save").click(function(){
 //    var imgSrc = 'http://ticket.pc-online.cc/upload/';
     //测试地址才填空，正式放上去记得填前缀地址
     var imgSrc = '';
-    function drawPoster(){
+    function initDraw(){
+        Promise.all([
+            imgLoad('<?=url()?>static/top.png'),
+            imgLoad('<?=url()?>static/bottom.png'),
+            imgLoad(imgSrc+data.cover),
+            imgLoad(imgSrc+data.cover2),
+            imgLoad(data.wxacode),
+            imgLoad('<?=url()?>static/ticket-top.png')
+        ]).then(function(res){
+            //海报的base64
+            var posterImgData = drawPoster(res);
+            //分享图的base64
+            var shareImgData = drawShare(res);
+
+			$.post('<?=url('client/api/save_poster')?>', { id:'<?=$id?>', baseimg:posterImgData }, function(rs){
+				console.log(rs);
+			}, 'json');
+
+        });
+    }
+    //画海报
+    function drawPoster(res){
         var c = document.getElementById('poster');
         var ctx = c.getContext('2d');
         //背景色
         ctx.fillStyle = '#ffffff';
         ctx.fillRect(0, 0, 750, 760);
 
-        Promise.all([
-            imgLoad('<?=url()?>static/top.png'),
-            imgLoad('<?=url()?>static/bottom.png'),
-            imgLoad(imgSrc+data.cover),
-            imgLoad(imgSrc+data.cover2),
-            imgLoad(data.wxacode)
-        ]).then(function(res){
-            //顶部波浪图
-            ctx.drawImage(res[0], 0, 0,750,145);
-            //日期
-            ctx.font = "27px 'Helve'";
-            ctx.fillStyle = '#000000';
-            var ten = data.begin.slice(2,3),one = data.begin.slice(3,4);
-            var type = data.type;
-            if(type == 1){
-                ctx.fillText(`2         0         ${ten}         ${one}`,20,190);
-            }else if(type == 2){
-                ctx.fillText(`2           0           ${ten}           ${one}`,20,190);
-            }else if(type == 3){
-                ctx.fillText(`2           0           ${ten}           ${one}`,20,190);
-            }
-            var date;
-            if(type == 1){
-                ctx.font = "100px 'Helve'";
-                date = data.begin.substr(5,5);
-                ctx.fillText(date,20,300);
-            }else if(type == 2){
-                ctx.font = "80px 'Helve'";
-                date = data.begin.substr(5,5)+'-'+data.end.substr(8,2);
-                ctx.fillText(date,20,294);
-            }else if(type == 3){
-                ctx.font = "60px 'Helve'";
-                date = data.begin.substr(5,5)+'-'+data.end.substr(5,5);
-                ctx.fillText(date,20,290);
-            }
-            //标题
-            ctx.font = "44px 'Helve'";
-            ctx.fillText(data.goods_name+' | '+data.activity,20,390);
-            // 竖线
-            ctx.strokeStyle = '#c1c1c1';
-            ctx.beginPath();
-            if(type == 1){
-                ctx.moveTo(310,160);
-                ctx.lineTo(310,320);
-            }else if(type == 2){
-                ctx.moveTo(370,160);
-                ctx.lineTo(370,320);
-            }else if(type == 3){
-                ctx.moveTo(380,160);
-                ctx.lineTo(380,320);
-            }
+        //顶部波浪图
+        ctx.drawImage(res[0], 0, 0,750,145);
+        //日期
+        ctx.font = "27px 'Helve'";
+        ctx.fillStyle = '#000000';
+        var ten = data.begin.slice(2,3),one = data.begin.slice(3,4);
+        var type = data.type;
+        if(type == 1){
+            ctx.fillText(`2         0         ${ten}         ${one}`,20,190);
+        }else if(type == 2){
+            ctx.fillText(`2           0           ${ten}           ${one}`,20,190);
+        }else if(type == 3){
+            ctx.fillText(`2           0           ${ten}           ${one}`,20,190);
+        }
+        var date;
+        if(type == 1){
+            ctx.font = "100px 'Helve'";
+            date = data.begin.substr(5,5);
+            ctx.fillText(date,20,300);
+        }else if(type == 2){
+            ctx.font = "80px 'Helve'";
+            date = data.begin.substr(5,5)+'-'+data.end.substr(8,2);
+            ctx.fillText(date,20,294);
+        }else if(type == 3){
+            ctx.font = "60px 'Helve'";
+            date = data.begin.substr(5,5)+'-'+data.end.substr(5,5);
+            ctx.fillText(date,20,290);
+        }
+        //标题
+        ctx.font = "44px 'Helve'";
+        ctx.fillText(data.goods_name+' | '+data.activity,20,390);
+        // 竖线
+        ctx.strokeStyle = '#c1c1c1';
+        ctx.beginPath();
+        if(type == 1){
+            ctx.moveTo(310,160);
+            ctx.lineTo(310,320);
+        }else if(type == 2){
+            ctx.moveTo(370,160);
+            ctx.lineTo(370,320);
+        }else if(type == 3){
+            ctx.moveTo(380,160);
+            ctx.lineTo(380,320);
+        }
 
-            ctx.stroke();
-            //横线 短
-            ctx.beginPath();
-            ctx.moveTo(0,210);
-            if(type == 1){
-                ctx.lineTo(310,210);
-            }else if(type == 2){
-                ctx.lineTo(370,210);
-            }else if(type == 3){
-                ctx.lineTo(380,210);
-            }
-            ctx.stroke();
-            //横线 长
-            ctx.beginPath();
-            ctx.moveTo(0,320);
-            ctx.lineTo(750,320);
-            ctx.stroke();
-            //logo
-            var logoXArr = [530-100,560-100,560-100];
-            ctx.drawImage(res[2],logoXArr[type-1],240-70,200,140);
-            //详情图
-            ctx.drawImage(res[3],0,420,750,650);
-            //底部logo
-            ctx.drawImage(res[1],450,460,300,300);
-            //二维码
-            ctx.drawImage(res[4],610,615,120,120);
+        ctx.stroke();
+        //横线 短
+        ctx.beginPath();
+        ctx.moveTo(0,210);
+        if(type == 1){
+            ctx.lineTo(310,210);
+        }else if(type == 2){
+            ctx.lineTo(370,210);
+        }else if(type == 3){
+            ctx.lineTo(380,210);
+        }
+        ctx.stroke();
+        //横线 长
+        ctx.beginPath();
+        ctx.moveTo(0,320);
+        ctx.lineTo(750,320);
+        ctx.stroke();
+        //logo
+        var logoXArr = [530-100,560-100,560-100];
+        ctx.drawImage(res[2],logoXArr[type-1],240-70,200,140);
+        //详情图
+        ctx.drawImage(res[3],0,420,750,650);
+        //底部logo
+        ctx.drawImage(res[1],450,460,300,300);
+        //二维码
+        ctx.drawImage(res[4],610,615,120,120);
 
-            //生成图片的base64
-            var imgData = c.toDataURL("image/jpeg");
-			$.post('<?=url('client/api/save_poster')?>', { id:'<?=$id?>', baseimg:imgData }, function(rs){
-				console.log(rs);
-			}, 'json');
-            
-        });
+        return c.toDataURL("image/jpeg");
     }
-    
+    //画分享图
+    function drawShare(res){
+        var c = document.getElementById('share');
+        var ctx = c.getContext('2d');
+        //背景色
+        ctx.fillStyle = '#f6f6f6';
+        ctx.fillRect(0, 19, 750, 634);
+        //顶部波浪图
+        ctx.drawImage(res[5],  0, 14, 750, 5);
+        //日期
+        ctx.font = "27px 'Helve'";
+        ctx.fillStyle = '#000000';
+        var ten = data.begin.slice(2,3),one = data.begin.slice(3,4);
+        var type = data.type;
+        if(type == 1){
+            ctx.fillText(`2         0         ${ten}         ${one}`,20,64);
+        }else if(type == 2){
+            ctx.fillText(`2           0           ${ten}           ${one}`,20,64);
+        }else if(type == 3){
+            ctx.fillText(`2           0           ${ten}           ${one}`,20,64);
+        }
+        var date;
+        if(type == 1){
+            ctx.font = "100px 'Helve'";
+            date = data.begin.substr(5,5);
+            ctx.fillText(date,20,174);
+        }else if(type == 2){
+            ctx.font = "80px 'Helve'";
+            date = data.begin.substr(5,5)+'-'+data.end.substr(8,2);
+            ctx.fillText(date,20,168);
+        }else if(type == 3){
+            ctx.font = "60px 'Helve'";
+            date = data.begin.substr(5,5)+'-'+data.end.substr(5,5);
+            ctx.fillText(date,20,164);
+        }
+        //标题
+        ctx.font = "44px 'Helve'";
+        ctx.fillText(data.goods_name+' | '+data.activity,20,264);
+        // 竖线
+        ctx.strokeStyle = '#c1c1c1';
+        ctx.beginPath();
+        if(type == 1){
+            ctx.moveTo(310,34);
+            ctx.lineTo(310,194);
+        }else if(type == 2){
+            ctx.moveTo(370,34);
+            ctx.lineTo(370,194);
+        }else if(type == 3){
+            ctx.moveTo(380,34);
+            ctx.lineTo(380,194);
+        }
+
+        ctx.stroke();
+        //横线 短
+        ctx.beginPath();
+        ctx.moveTo(0,84);
+        if(type == 1){
+            ctx.lineTo(310,84);
+        }else if(type == 2){
+            ctx.lineTo(370,84);
+        }else if(type == 3){
+            ctx.lineTo(380,84);
+        }
+        ctx.stroke();
+        //横线 长
+        ctx.beginPath();
+        ctx.moveTo(0,194);
+        ctx.lineTo(750,194);
+        ctx.stroke();
+        //logo
+        var logoXArr = [530-100,560-100,560-100];
+        ctx.drawImage(res[2],logoXArr[type-1],114-70,200,140);
+        //详情图
+        ctx.drawImage(res[3],0,294,750,650);
+        //底部logo
+        ctx.drawImage(res[1],450,334,300,300);
+
+        return c.toDataURL("image/jpeg");
+    }
 </script>

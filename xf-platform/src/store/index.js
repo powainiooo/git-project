@@ -45,7 +45,21 @@ const store = new Vuex.Store({
             state.editorData = data;
         },
         setErrorData (state,data) {
-            state.errorData = data;
+            if(data){
+                state.errorData = data;
+            }else{
+                state.errorData = {
+                    goods_id:-1,
+                    address:'',
+                    cover:'',
+                    cover2:'',
+                    goods_name:'',
+                    goods_desc:[],
+                    notify:[],
+                    person_desc:[]
+                };
+            }
+
         },
         setEndDate (state,data) {
             state.endDate = data

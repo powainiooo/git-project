@@ -1,6 +1,7 @@
 .header{ width: 100%; height: 70px; box-sizing: border-box; background-color: #dac49f; position: fixed; top: 0; left: 0; z-index: 500; display: flex; justify-content: space-between; align-items: center; padding: 0 30px;}
 .header .icon-logo{ font-size: 30px; color: #FFFFFF;}
-.header .icon-xiugai{ font-size: 30px; color: #FFFFFF; transform: rotateZ(180deg); box-shadow: 0 -1px 14px rgba(55,44,30,0.3); border-radius: 50%; position: relative;}
+.header .icon-xiugai{ font-size: 30px; color: #FFFFFF; transform: rotateZ(180deg); box-shadow: 0 -1px 14px rgba(55,44,30,0.3); border-radius: 50%; position: relative;transition: transform 0.15s ease-out; -webkit-transition: transform 0.15s ease-out;}
+.header .item-touch{transform: rotateZ(180deg) scale(0.9);}
 .header .icon-xiugai:after{ content: ''; width: 80%; height: 80%; border-radius: 50%; background-color: #000000; position: absolute; top: 10%; left: 10%; z-index: -1;}
 
 .container{ min-height: calc(100vh - 70px); margin-top: 70px; overflow: hidden; position: relative;}
@@ -24,7 +25,7 @@
 .worker-list li:last-child:after{ width: 0; box-shadow: none;}
 .worker-list li.active{ font-size: 120px; margin-top: 0;}
 
-.date-frame{ width: 310px; height: 170px; padding: 0 50px; background-color: #dac49f; display: flex; flex-direction: column; align-items: center; position: relative; z-index: 200; transition: opacity 0.1s ease-out; -webkit-transition: opacity 0.1s ease-out;}
+.date-frame{ width: 310px; height: 170px; padding: 0 50px; background-color: #dac49f; display: flex; flex-direction: column; align-items: center; position: relative; z-index: 200; transition: opacity 0.5s ease-out; -webkit-transition: opacity 0.5s ease-out;}
 .date-frame .year{ width: 100%; height: 40px; font-size: 24px; color: #352c1d; font-family: 'Helve'; display: flex; justify-content: space-around; align-items: center; border-bottom: 1px solid #c5b291;}
 .date-frame .date{ width: 100%; border-top: 1px solid #dacebe; display: flex;}
 .date-frame .date .month{ font-size: 100px; font-family: 'Helve'; color: #352c1d; text-shadow: 0 0 3px rgba(55,44,30,0.3);}

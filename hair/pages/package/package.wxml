@@ -20,15 +20,15 @@
             <view class="pro-item" catchtap="openDetail"
                   hover-stop-propagation="true"
                   hover-class="pro-item-hover"
-                  hover-stay-time="50"><image src="../../res/img/pics/pro1.png" mode="scaleToFill"></image></view>
+                  hover-stay-time="50"><view class="frame"><image src="../../res/img/pics/pro1.png" mode="scaleToFill"></image></view></view>
             <view class="pro-item" catchtap="openDetail"
                   hover-stop-propagation="true"
                   hover-class="pro-item-hover"
-                  hover-stay-time="50"><image src="../../res/img/pics/pro2.png" mode="scaleToFill"></image></view>
+                  hover-stay-time="50"><view class="frame"><image src="../../res/img/pics/pro2.png" mode="scaleToFill"></image></view></view>
             <view class="pro-item" catchtap="openDetail"
                   hover-stop-propagation="true"
                   hover-class="pro-item-hover"
-                  hover-stay-time="50"><image src="../../res/img/pics/pro3.png" mode="scaleToFill"></image></view>
+                  hover-stay-time="50"><view class="frame"><image src="../../res/img/pics/pro3.png" mode="scaleToFill"></image></view></view>
         </view>
         <view class="line3">适用于：中性至敏感性</view>
         <view class="icons icon-weixuan"></view>

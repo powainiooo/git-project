@@ -261,6 +261,7 @@
                 return pass
             },
             errorData(){
+                console.log(this.$store.state.errorData)
                 return this.$store.state.errorData
             }
         },

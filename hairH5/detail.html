@@ -18,7 +18,7 @@
 <body style="background-color: #efebea;">
 <header class="header">
     <div class="icons icon-logo"></div>
-    <a href="javascript:history.go(-1)" class="icons icon-xiugai"></a>
+    <a href="javascript:;" class="icons icon-xiugai" id="btnBack"></a>
 </header>
 <section class="container">
     <div class="person">
@@ -93,6 +93,7 @@
     $("#btnStart").on('touchstart',function(){
         $(this).addClass('item-touch');
     });
+    countDown(30*60);
     $("#btnStart").on('touchend',function(){
         $(this).removeClass('item-touch');
         setTimeout(function(){
@@ -110,7 +111,16 @@
             countdown: true
         });
     }
-
+    //点击返回
+    $("#btnBack").on('touchstart',function(){
+        $(this).addClass('item-touch');
+    });
+    $("#btnBack").on('touchend',function(){
+        $(this).removeClass('item-touch');
+        setTimeout(function(){
+            window.location = 'list.html'
+        },150);
+    });
 </script>
 </body>
 </html>

@@ -21,7 +21,9 @@
               wx:key="{{item.id}}"
               data-id="{{item.id}}"
               bindtap="doSelectClean"
-              class="list-item {{selectedID[0] == item.id ? 'list-item-selected' : ''}}">
+              class="list-item {{selectedID[0] == item.id ? 'list-item-selected' : ''}}"
+              hover-class="list-item-hover"
+              hover-stay-time="50">
             <image src="../../res/img/pics/pro5.png" mode="scaleToFill" class="img"></image>
             <view class="name">shampoo</view>
             <view class="name" style="margin-bottom: 30rpx;">洗发水</view>

@@ -76,7 +76,7 @@
 
     <div class="clock-frame" id="clockFrame">
         <div class="clock"></div>
-        <p>服务结束</p>
+        <p><img src="images/end.png"> </p>
     </div>
 </section>
 <audio src="mp3/over.mp3" id="audio"></audio>
@@ -117,7 +117,14 @@
                     setTimeout(function(){
                         $("#clockFrame .clock").hide();
                         $("#clockFrame>p").show();
-                    },1000)
+                    },1000);
+                    if(window.Notification && Notification.permission !== "denied") {
+                        Notification.requestPermission(function(status) {
+                            var n = new Notification('服务通知', { body: '服务已经结束了！'
+                            });
+                        });
+                    }
+
                 }
             }
         });

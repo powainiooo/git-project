@@ -1,10 +1,10 @@
 <style>
     .swiper-frame-index{ position: relative; margin-bottom: 80px;}
-    .swiper-item .link{  display: block; font-size: 36px; letter-spacing: 6px; margin-top: 10px; color: #000; white-space:nowrap; text-overflow: ellipsis; overflow: hidden;}
+    .swiper-item .link{  display: block; font-size: 36px; letter-spacing: 1.3px; margin-top: 10px; color: #000; white-space:nowrap; text-overflow: ellipsis; overflow: hidden;}
     .swiper-item .link:hover{ color: #7f7f7f;}
     .swiper-item .img a{ position: relative; font-size: 0; display: block;}
     .swiper-item .img:hover a:after{ content: 'More'; font-size: 20px; color: #fff; display: flex; justify-content: center; align-items: center; background-color: rgba(0,0,0,0.5); position: absolute; top: 0; left: 0; right: 0; bottom: 0;}
-    .swiper-item p{ font-size: 16px; letter-spacing: 3px; line-height: 1.8; margin-bottom: 15px; overflow:hidden; text-overflow:ellipsis;-webkit-line-clamp:2;display:-webkit-box;-webkit-box-orient:vertical;box-orient:vertical;}
+    .swiper-item .detail{ height: 56px; font-size: 16px; letter-spacing: 3px; line-height: 1.8; margin-bottom: 15px; overflow:hidden; text-overflow:ellipsis;-webkit-line-clamp:2;display:-webkit-box;-webkit-box-orient:vertical;box-orient:vertical;}
     .swiper-item .time{ padding-top: 15px;color: rgb(127,127,127);position: relative; font-size: 14px;}
     .swiper-item .time:before{ content: ''; width: 12px; height: 1px; background-color: #9f9f9f; position: absolute; top: 0; left: 0;}
     .swiper-item .time span{ margin-right: 30px;}
@@ -24,9 +24,9 @@
     .recommend-item .imgs a{ display: block;}
     .recommend-item .imgs:hover a:after{ content: 'More'; font-size: 20px; color: #fff; display: flex; justify-content: center; align-items: center; background-color: rgba(0,0,0,0.5); width: 450px; height: 250px; position: absolute; top: 0; left: 0;}
     .recommend-item .infos{ width: 630px;}
-    .recommend-item .infos a{ font-size: 28px; letter-spacing: 6px; margin-bottom: 10px; color: #000; display: block; white-space:nowrap; text-overflow: ellipsis; overflow: hidden; }
+    .recommend-item .infos a{ font-size: 28px; letter-spacing: 1.3px; margin-bottom: 10px; color: #000; display: block; white-space:nowrap; text-overflow: ellipsis; overflow: hidden; }
     .recommend-item .infos a:hover{ color: #7f7f7f;}
-    .recommend-item .infos p{; font-size: 16px; letter-spacing: 3px; line-height: 1.8; margin-bottom: 115px;overflow:hidden; text-overflow:ellipsis;-webkit-line-clamp:2;display:-webkit-box;-webkit-box-orient:vertical;box-orient:vertical; }
+    .recommend-item .infos .detail{ height: 50px; font-size: 16px; line-height: 1.8; margin-bottom: 115px;overflow:hidden; text-overflow:ellipsis;-webkit-line-clamp:2;display:-webkit-box;-webkit-box-orient:vertical;box-orient:vertical; }
     .recommend-item .infos .time{ padding-top: 15px; color: rgb(127,127,127); position: relative; font-size: 14px;}
     .recommend-item .infos .time:before{ content: ''; width: 12px; height: 1px; background-color: #9f9f9f; position: absolute; top: 0; left: 0;}
     .recommend-item .infos .time span{ margin-right: 30px;}
@@ -58,7 +58,7 @@
                             <div class="img"><router-link :to="'/works/detail/'+item.id"><img :src="mainUrl+item.banner_cover" width="1120" height="560"> </router-link></div>
                             <div v-if="activeIndex == index">
                                 <router-link :to="'/works/detail/'+item.id" class="link">{{item.title}} {{item.title_ext}}</router-link>
-                                <p class="hkLight">{{item.goods_desc}}</p>
+                                <div class="detail" v-html="item.goods_desc"></div>
                                 <div class="time hkLight">
                                     <span v-if="item.cate2 == ''"><a href="javascript:;" @click="getList(item.cate,0)"> {{item.catename}}</a></span>
                                     <span v-if="item.cate2 != ''"><a href="javascript:;" @click="getList(item.cate,0)"> {{item.catename}}</a> / <a href="javascript:;"  @click="getList(item.cate,item.cate2)"> {{item.catename2}}</a></span>
@@ -92,7 +92,7 @@
                     <div class="imgs"><router-link :to="'/works/detail/'+item.id"><img :src="mainUrl+item.recomm_cover" width="450" height="250"></router-link> </div>
                     <div class="infos">
                         <router-link to="/works/detail/1">{{item.title}} {{item.title_ext}}</router-link>
-                        <p class="hkLight">{{item.goods_desc}}</p>
+                        <div class="detail" v-html="item.goods_desc"></div>
                         <div class="time hkLight">
                             <span v-if="item.cate2 == ''"><a href="javascript:;" @click="getList(item.cate,0)"> {{item.catename}}</a></span>
                             <span v-if="item.cate2 != ''"><a href="javascript:;" @click="getList(item.cate,0)"> {{item.catename}}</a> / <a href="javascript:;"  @click="getList(item.cate,item.cate2)"> {{item.catename2}}</a></span>

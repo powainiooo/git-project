@@ -23,7 +23,7 @@
             }
         },
         mounted(){
-            this.$ajax.defaults.baseURL = 'http://ticket.pc-online.cc';
+            this.$ajax.defaults.baseURL = 'http://wechat.leesticket.com';
         },
         methods:{
 

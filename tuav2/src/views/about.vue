@@ -7,9 +7,9 @@
     .profile{ margin-top: 155px;}
     .profile,.contact,.team{ display: flex; justify-content: space-between; border-bottom: 2px solid #ededed; padding-bottom: 80px; margin-bottom: 80px;}
     .profile .hkLight{ width: 625px; font-size: 14px; line-height: 1.8; letter-spacing: 3px;}
-    .about-title p{ font-size: 14px; margin-bottom: 25px; font-weight: bold; letter-spacing: 4px;}
-    .about-title h3{ font-size: 14px; letter-spacing: 4px;}
-    .about-title h3 span{ font-size: 12px; display: block; transform: scale(0.7,0.7); transform-origin: 0 0; letter-spacing: 4px;}
+    .about-title p{ font-size: 14px; margin-bottom: 25px; font-weight: bold; letter-spacing: 3px;}
+    .about-title h3{ font-size: 14px; letter-spacing: 3px;}
+    .about-title h3 span{ font-size: 12px; display: block; transform: scale(0.7,0.7); transform-origin: 0 0; letter-spacing: 3px;}
 
     .contact .infos li{ font-size: 14px; margin-bottom: 25px; display: flex;}
     .contact .infos li p:first-child{ width: 225px;}

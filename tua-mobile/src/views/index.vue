@@ -1,14 +1,14 @@
 <style scoped>
     .swiper-frame{ position: relative; margin-bottom: 40px; margin-right: -3%; margin-top: 70px;}
-    .swiper-item .infos div{ font-size: 20px; letter-spacing: 1.5px; margin-top: 10px; color: #000; display: block; margin-bottom: 10px;}
-    .swiper-item p{ font-size: 12px; letter-spacing: 1.5px; line-height: 1.8;}
+    .swiper-item .infos .title{ font-size: 20px; letter-spacing: 1.5px; margin-top: 10px; color: #000; display: block; margin-bottom: 10px;}
+    .swiper-item .detail{ font-size: 12px; letter-spacing: 1.5px; line-height: 1.8; overflow: hidden; height: 40px;}
     .swiper-item .btn{ width: 30%; font-size: 12px; text-align: center; padding: 7px 0; display: block; border: 1px solid #000; color: #000; border-radius: 20px; margin-top: 10px;}
 
     .recommend-item{ margin-bottom: 25px; display: flex; justify-content: space-between;}
     .recommend-item .imgs{ width: 45%;}
     .recommend-item .infos{ width: 52%; display: flex; flex-direction: column; justify-content: space-between;}
-    .recommend-item .infos a{ display: block;  font-size: 16px; letter-spacing: 1.5px; margin-bottom: 10px; color: #000; overflow:hidden; text-overflow:ellipsis;-webkit-line-clamp:2;display:-webkit-box;-webkit-box-orient:vertical;box-orient:vertical;}
-    .recommend-item .infos p{ font-size: 10px; letter-spacing: 1.5px; line-height: 1.8; margin-bottom: 90px; overflow:hidden; text-overflow:ellipsis;-webkit-line-clamp:2;display:-webkit-box;-webkit-box-orient:vertical;box-orient:vertical;}
+    .recommend-item .infos a{ display: block;  font-size: 16px; letter-spacing: 1.5px; margin-bottom: 10px; color: #000; overflow:hidden;}
+    .recommend-item .infos .detail{ font-size: 10px; letter-spacing: 1.5px; line-height: 1.8; margin-bottom: 90px; overflow:hidden;}
     .recommend-item .infos .time{ padding-top: 10px; color: rgb(127,127,127); position: relative; font-size: 10px;}
     .recommend-item .infos .time:before{ content: ''; width: 12px; height: 1px; background-color: #9f9f9f; position: absolute; top: 0; left: 0;}
     .recommend-item .infos .time span{ margin-right: 10px;}
@@ -38,8 +38,8 @@
                         <section class="swiper-item">
                             <div><router-link :to="'/works/detail/'+item.id"><img :src="mainUrl+item.banner_cover"> </router-link></div>
                             <div v-if="activeIndex == index" class="infos">
-                                <div>{{item.title}} <br> {{item.title_ext}}</div>
-                                <p>音樂作品表現大賽故宮和Next Idea 結合的主題，展現出傳統文化與未來現象之美。在前期的商討中，我們決定從京劇和Pap這兩種音樂表現形式入手</p>
+                                <div class="title">{{item.title}} <br> {{item.title_ext}}</div>
+                                <div class="detail" v-html="item.goods_desc"></div>
                                 <router-link :to="'/works/detail/'+item.id" class="btn">More</router-link>
                             </div>
                         </section>

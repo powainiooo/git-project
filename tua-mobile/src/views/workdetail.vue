@@ -80,7 +80,7 @@
             </div>
 
             <div class="recommend-title">推薦案例</div>
-            <div class="clearfix item-list">
+            <div class="item-list">
                 <work-item v-for="item in recommendList"
                            :data="item"
                            @refresh="refresh"

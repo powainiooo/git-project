@@ -75,7 +75,7 @@ const store = new Vuex.Store({
         getUserData(context,isLogin){
             axios.defaults.headers.common['mid'] = Cookies.get('xfmid');
             axios.defaults.headers.common['tokey'] = Cookies.get('xftokey');
-            axios.defaults.baseURL = 'http://ticket.pc-online.cc';
+            axios.defaults.baseURL = 'http://wechat.leesticket.com';
             axios.get('/client/api/get_info').then(res=>{
                 let data = res.data;
                 if(data.status == 1){

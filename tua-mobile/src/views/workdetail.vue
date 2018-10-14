@@ -3,7 +3,8 @@
     .swiper-frame .dots{ display: flex; align-items: center; margin-top: 10px; margin-left: 3%;}
     .swiper-frame .dots li{ width: 4px; height: 4px; border-radius: 50%; background-color: #181a19; margin-right: 10px;}
     .swiper-frame .dots li.active{ width: 8px; height: 8px; background-color: #c29836;}
-    .swiper-frame .banner-img{ width: 100%; height: 300px; background-repeat: no-repeat; background-size: cover; background-position: center center;}
+    .swiper-frame .banner-img{ width: 100%; background-repeat: no-repeat; background-size: cover; background-position: center center;}
+    .swiper-frame .banner-img img{ width: 100%;}
 
     .detail-infos{ margin-top: 25px;}
     .detail-infos h3{ font-size: 20px; letter-spacing: 1.5px; margin-bottom: 15px;}
@@ -27,12 +28,15 @@
             <div class="swiper-frame"  v-if="!showVideo">
                 <div class="banner-img"
                      v-if="bannerList.length == 1"
-                     :style="{'background-image':'url(\''+domain_url+bannerList[0]+'\')'}"></div>
+                     :style="{'background-image':'url(\''+domain_url+bannerList[0]+'\')'}">
+                    <img :src="domain_url+bannerList[0]" />
+                </div>
                 <swiper :options="swiperOption" ref="mySwiper" v-show="bannerList.length > 1">
                     <swiper-slide v-for="(item,index) in bannerList"
                                     class="banner-img"
                                     :style="{'background-image':'url(\''+domain_url+item+'\')'}"
                                   :key="index">
+                        <img :src="domain_url+item" />
                     </swiper-slide>
                 </swiper>
                 <ul class="dots" v-if="bannerList.length > 1">

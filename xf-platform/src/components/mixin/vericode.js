@@ -24,6 +24,7 @@ export default {
     },
     methods:{
         getCode(){
+            if(this.veriBtnDisabled) return;
             this.codeCount();
             this.$ajax.get('/client/api/sms_send',{
                 params:{

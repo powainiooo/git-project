@@ -1,5 +1,5 @@
 <style>
-    .pro-detail{ width:650px;height: 100%; background-color: #ffffff; overflow-y:scroll; transition: all 0.5s cubic-bezier(.25,.76,.36,.97); padding-top: 140px; position: relative;}
+    .pro-detail{ width:650px;height: 100%; background-color: #ffffff; overflow-y:scroll; transition: all 0.5s cubic-bezier(.25,.76,.36,.97); padding-top: 140px; position: relative; box-shadow: 0 2px 10px rgba(0,0,0,0.2);}
     .pro-detail::-webkit-scrollbar{ width: 3px; background-color: #ffffff;}
     .pro-detail::-webkit-scrollbar-thumb{ background-color: #002aa6;}
     .pro-detail .opera-line{ width: 100%; box-sizing: border-box; height: 140px; padding: 60px 60px 40px 60px; display: flex; justify-content: space-between; align-items: center; background-color: #ffffff; position: absolute; top: 0; right: 0; z-index: 100; transition: all 0.5s cubic-bezier(.25,.76,.36,.97);}

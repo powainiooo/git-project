@@ -25,7 +25,7 @@
             <div class="content" v-html="content" v-if="type == ''"></div>
             <div class="txt" v-if="type == 'textarea'">
                 <p>{{text.length}}/200</p>
-                <textarea rows="9" placeholder="请填写通知（200字）" v-model="text"></textarea>
+                <textarea rows="9" placeholder="请填写通知（200字）" v-model="text" maxlength="200"></textarea>
             </div>
             <div class="btns btns-one">
                 <t-button @dotap="onOk">{{btn1Name}}</t-button>

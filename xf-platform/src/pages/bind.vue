@@ -143,9 +143,9 @@
                     let data = res.data;
                     if(data.status == 1){
                         self.$tModal.warn({
-                            title:'修改成功！',
+                            title:'绑定成功！',
                             content:'银行卡信息绑定成功，如若需要修改请在“菜单”-“银行卡管理”中修改',
-                            btn1Name:'返回',
+                            btn1Name:'确定',
                             onOk(){
                                 self.$router.push('list');
                             }

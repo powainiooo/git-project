@@ -47,7 +47,8 @@ Page({
     shareImgSrc:'',
     sponsorSrc:'',
     showRefresh:false,
-    id:-1
+    id:-1,
+    minprice:''
   },
   //事件处理函数
   onLoad: function (options) {
@@ -295,9 +296,14 @@ Page({
       },
       success: function(res) {
         let data = res.data;
+        let anew = data.data.anew,min = parseFloat(anew[0].price);
+        for(let item of anew){
+          if(item.price < min) min = item.price
+        }
         self.setData({
           footerPos:0,
           detailData:data.data,
+          minprice:min,
           showTicketDetail:true
         });
         wx.hideNavigationBarLoading();

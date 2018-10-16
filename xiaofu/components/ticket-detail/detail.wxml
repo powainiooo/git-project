@@ -57,7 +57,7 @@
                   data-phone="{{itemData.info.mobile}}">{{itemData.info.mobile}}</view>
         </view>
 
-        <view class="title">更多推荐活动</view>
+        <view class="title" wx:if="{{itemData.recommend.length != 0}}">更多推荐活动</view>
         <swiper class="recommond-swiper"
                 wx:if="{{itemData.recommend.length != 0}}"
                 duration="200"

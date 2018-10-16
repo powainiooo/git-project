@@ -24,7 +24,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let page = options.page || 'contact',titleEn,titleCn,content;
+    let page = options.page || 'insurance',titleEn,titleCn,content;
     if(page == 'member'){
       titleEn = 'Member of \n Ho';
       titleCn = '隶属于';
@@ -49,6 +49,7 @@ Page({
     this.getData(page);
   },
   getData(src){
+    if(src == 'insurance') return;
     let self = this;
     wx.showNavigationBarLoading();
     wx.request({
@@ -79,11 +80,11 @@ Page({
     })
   },
   download(){
-    console.log('download')
+    wx.showNavigationBarLoading();
     wx.downloadFile({
-      url: 'http://ticket.pc-online.cc/static/download/file.docx', //仅为示例，并非真实的资源
+      url: 'https://wechat.leesticket.com/static/download/file.docx', //仅为示例，并非真实的资源
       success: function(res) {
-        console.log(res);
+        wx.hideNavigationBarLoading();
         // 只要服务器有响应数据，就会把响应内容写入文件并进入 success 回调，业务需要自行判断是否下载到了想要的内容
         if (res.statusCode === 200) {
           wx.saveFile({

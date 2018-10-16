@@ -124,7 +124,7 @@
             doConfirm(){
                 let self = this;
                 self.$tModal.confirm({
-                    title:'是否确认修改银行卡信息？',
+                    title:'是否确认绑定银行卡信息？',
                     content:'请仔细核查银行卡信息，确认修改绑定后所有活动结款都将打款到新修改的银行卡。<br>若是您填写有误所造成的损失，小夫有票一概不负责任。',
                     onOk(){
                         self.dobind();

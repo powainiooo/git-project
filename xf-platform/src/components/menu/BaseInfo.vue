@@ -21,7 +21,7 @@
             </div>
             <div class="info-item" v-if="userData.type == '1'">
                 <p class="name">所属公司</p>
-                <p class="info">{{userData.company}}</p>
+                <p class="info" style="width: 300px;">{{userData.company}}</p>
             </div>
             <div class="info-item">
                 <p class="name">联系地址</p>
@@ -45,7 +45,7 @@
                 <div class="img"><img :src="fileurl+userData.logo_img"> </div>
                 <div class="name">活动方LOGO</div>
             </div>
-            <div style="font-size: 14px; color: #888888; margin-top: 60px;">活动方基本信息无法修改，如若有紧急情况需要修改信息，<br>请电话联系18000000000</div>
+            <div style="font-size: 14px; color: #888888; margin-top: 60px;">活动方基本信息无法修改，如若有紧急情况需要修改信息，<br>请电话联系18681438270</div>
         </div>
     </div>
 </template>

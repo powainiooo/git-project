@@ -44,15 +44,15 @@
         <div class="time-item">
             <p>开售时间</p>
             <div>
-                <span style="font-weight: bold;">{{itemData.sale_start | formatDate}}</span>
-                <span>{{itemData.hour_b}}</span>
+                <span style="font-weight: bold;">{{itemData.sale_start | formatDate('yyyy-MM-dd')}}</span>
+                <span>{{itemData.sale_start | formatDate('HH:ss')}}</span>
             </div>
         </div>
         <div class="time-item">
             <p>停票时间</p>
             <div>
-                <span style="font-weight: bold;">{{itemData.sale_end | formatDate}}</span>
-                <span>{{itemData.hour_e}}</span>
+                <span style="font-weight: bold;">{{itemData.sale_end | formatDate('yyyy-MM-dd')}}</span>
+                <span>{{itemData.sale_end | formatDate('HH:ss')}}</span>
             </div>
         </div>
         <div class="title title2">
@@ -145,9 +145,9 @@
             }
         },
         filters:{
-            formatDate(time){
+            formatDate(time,reg){
                 let date = new Date(time*1000);
-                return formatDate(date,'yyyy-MM-dd');
+                return formatDate(date,reg);
             }
         },
         computed:{

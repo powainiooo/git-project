@@ -52,6 +52,8 @@ Page({
   },
   //事件处理函数
   onLoad: function (options) {
+    console.log('index onload');
+    console.log(options);
     let id = options.id || '',self = this,cityID = 0;
     if(id == ''){
       this.getAddressData();

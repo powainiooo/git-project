@@ -1,4 +1,6 @@
 <view class="login-frame">
     <view>申请获取您的公开信息（昵称、头像等）</view>
     <button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">获取用户信息</button>
+    <button lang="zh_CN" bindtap="getImg">获取二维码</button>
+    <image src="{{wxcodeimg}}" mode="widthFix" style="width: 400rpx; height: 400rpx; background-color: #e5e5e5"></image>
 </view>

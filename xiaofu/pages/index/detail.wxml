@@ -21,7 +21,7 @@
     </view>
 
     <view class="footer" style="transform: translateY({{footerPos}}rpx); transition-duration: {{footerDuration}}">
-        <view class="price" wx:if="{{detailData.info.is_end == '' || detailData.info.is_end == 'over'}}">{{detailData.info.minprice}}<text class="unit">RMB</text></view>
+        <view class="price" wx:if="{{detailData.info.is_end == '' || detailData.info.is_end == 'over'}}">{{minprice}}<text class="unit">RMB</text></view>
         <view class="stop-sale" wx:if="{{detailData.info.is_end == 'nosale'}}">
             <view>未开售</view>
             <view>开票时间：{{detailData.info.date_start}} {{detailData.info.hour_b}}</view>

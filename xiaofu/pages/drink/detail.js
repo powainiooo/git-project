@@ -94,7 +94,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let id = options.id || '1';
+    console.log(options);
+    let id = options.id || options.scene;
     this.data.orderID = id;
     this.getData();
 

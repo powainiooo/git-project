@@ -6,7 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    wxcodeimg:''
   },
   onGotUserInfo(e){
     app.globalData.userInfo = e.detail.userInfo;
@@ -33,7 +33,23 @@ Page({
       }
     })
   },
-
+  getImg(){
+    let as = '14_iNxSdSlZbzrJ7neRMME4xFOSV16scTpiLlF82RqPo5fD1bq_wWCjwsZfBI05OSldXM1wUmmCTsbqgaDiTrM4ti4AuTrgAZ-iVPlosEvcasfNiYCOZ6tfwuQym5VJMUjbDi88De_qfhoXHhHcMPCiADACFS',self = this;
+    wx.request({
+      url:"https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token="+as,
+      method:'POST',
+      data:{
+        scene:'13',
+        page:'pages/index/detail'
+      },
+      responseType:'arraybuffer',
+      success:res=>{
+        self.setData({
+          wxcodeimg:'data:image/png;base64,'+wx.arrayBufferToBase64(res.data)
+        })
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

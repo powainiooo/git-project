@@ -16,18 +16,20 @@ Page({
     singlePrice:0,
     shareImgSrc:'',
     showRefresh:false,
-    id:-1
+    id:-1,
+    minprice:''
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.data.id = options.id;
+    console.log(options);
+    this.data.id = options.id || options.scene;
     this.getDetailData();
   },
 
   //获取详情数据
-  getDetailData(id){
+  getDetailData(){
     let self = this;
     wx.showNavigationBarLoading();
     wx.request({
@@ -37,9 +39,14 @@ Page({
       },
       success: function(res) {
         let data = res.data;
+        let anew = data.data.anew,min = parseFloat(anew[0].price);
+        for(let item of anew){
+          if(item.price < min) min = item.price
+        }
         self.setData({
           detailData:data.data,
           singlePrice:data.data.info.minprice,
+          minprice:min,
           showTicketDetail:true
         });
         wx.hideNavigationBarLoading();

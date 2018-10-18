@@ -7,12 +7,13 @@
     <style>
         *{ margin: 0; padding: 0;}
         canvas{ background-color: #eeeeee;}
+        button{ padding: 10px 20px;}
     </style>
 </head>
 <body>
     <p>计数：<span id="count">0</span></p>
     <canvas width="500" height="840" style="width: 250px; height: 420px;" id="canvas"></canvas>
-    <button id="btnGet">生成图</button>
+    <button id="btnGet">分享</button>
     <p><img src="" id="postImg" style="width: 50%"></p>
 <script>
     var obj = 0;
@@ -29,15 +30,14 @@
         var img = new Image();
         img.onload = function(){
             ctx.drawImage(img,0,0);
+
+            imgData = canvas.toDataURL();
+            document.getElementById('postImg').src = imgData;
         };
         img.src = 'images/phone2.png';
     }
     var imgData;
     document.getElementById('btnGet').addEventListener('click',function(){
-        var canvas = document.getElementById('canvas');
-        var ctx = canvas.getContext('2d');
-        imgData = canvas.toDataURL();
-        document.getElementById('postImg').src = imgData;
         window.location = 'empty.html?type=2';
     })
 </script>

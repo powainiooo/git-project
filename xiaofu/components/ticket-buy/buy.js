@@ -122,6 +122,7 @@ Component({
                 'signType': jsapi.signType,
                 'paySign': jsapi.paySign,
                 'success':function(res){
+                  console.log(res);
                   wx.showToast({
                     title:'支付成功'
                   });

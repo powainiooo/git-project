@@ -45,14 +45,14 @@
             <p>开售时间</p>
             <div>
                 <span style="font-weight: bold;">{{itemData.sale_start | formatDate('yyyy-MM-dd')}}</span>
-                <span>{{itemData.sale_start | formatDate('HH:ss')}}</span>
+                <span>{{itemData.sale_start | formatDate('HH:mm')}}</span>
             </div>
         </div>
         <div class="time-item">
             <p>停票时间</p>
             <div>
                 <span style="font-weight: bold;">{{itemData.sale_end | formatDate('yyyy-MM-dd')}}</span>
-                <span>{{itemData.sale_end | formatDate('HH:ss')}}</span>
+                <span>{{itemData.sale_end | formatDate('HH:mm')}}</span>
             </div>
         </div>
         <div class="title title2">

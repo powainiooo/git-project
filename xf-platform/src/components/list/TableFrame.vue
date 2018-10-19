@@ -131,6 +131,7 @@
                             if(data.status == 1){
                                 self.$Message.success('退款成功');
                                 self.getListData();
+                                self.$emit('change',self.itemData.id);
                             }else{
                                 self.$Message.warning(data.msg);
                             }

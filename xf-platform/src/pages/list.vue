@@ -46,7 +46,11 @@
             <list-item :itemdata="detailData" v-if="showDetail" :fileurl="fileurl"></list-item>
             </transition>
             <transition enter-active-class="animated anim-detail slideInRight" leave-active-class="animated anim-detail slideOutRight">
-            <detail-frame v-if="showDetail" @close="showDetail = false" :itemData="detailData" :fileurl="fileurl"></detail-frame>
+            <detail-frame v-if="showDetail"
+                          @close="showDetail = false"
+                          @change="itemChange"
+                          :itemData="detailData"
+                          :fileurl="fileurl" ></detail-frame>
             </transition>
         </div>
     </section>
@@ -150,6 +154,17 @@
                 this.$store.commit('setEditorData');
                 this.$store.commit('setErrorData');
                 this.$router.push('publish');
+            },
+            itemChange(id){
+                let self = this;
+                this.$ajax.get('/client/api/activity_info',{
+                    params:{
+                        aid:id
+                    }
+                }).then(res=>{
+                    let data = res.data;
+                    self.detailData = data.data;
+                })
             }
         }
     }

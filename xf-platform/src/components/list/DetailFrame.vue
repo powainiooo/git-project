@@ -28,7 +28,7 @@
         <info-frame v-if="showInfo" @openstatistics="showInfo = false" :itemData="itemData" :fileurl="fileurl"></info-frame>
         <div v-if="!showInfo">
             <chart-frame v-if="showChart" :id="itemData.id"></chart-frame>
-            <table-frame v-if="!showChart" :itemData="itemData"></table-frame>
+            <table-frame v-if="!showChart" :itemData="itemData" @change="change"></table-frame>
         </div>
 
     </div>
@@ -49,7 +49,9 @@
             }
         },
         methods:{
-
+            change(id){
+                this.$emit('change',id);
+            }
         }
     }
 

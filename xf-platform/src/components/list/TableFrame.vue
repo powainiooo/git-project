@@ -24,8 +24,9 @@
                 <t-button size="min" style="width: 90px; margin-right: 30px;" @dotap="doNotify" v-if="!isInfor">一次性通知</t-button>
                 <t-ques width="290" v-if="!isInfor">
                     <ul class="list1">
-                        <li><span>1</span>一次性通知，仅支持使用一次。</li>
+                        <li><span>1</span>一次性通知，仅支持使用一次</li>
                         <li><span>2</span>通知类型 如：活动取消、活动改期、艺人时间更换、艺人无法到场等。</li>
+                        <li><span>3</span>由于微信消息通知限制，只可在用户已购票后的7日内发送消息，超过7日的用户则无法收取该消息。</li>
                     </ul>
                 </t-ques>
             </div>
@@ -167,7 +168,7 @@
                 let self = this;
                 self.$tModal.confirm({
                     title:'是否确认使用一次性通知？',
-                    content:'一次性通知仅可使用一次，请谨慎使用！<br>可用于活动场地变更、活动改期、活动取消等紧急情况时，作为通知已购票用户功能。',
+                    content:'一次性通知仅可使用一次，由于微信消息通知限制，只可在用户已购票后的7日内发送消息。<br>超过7日的用户则无法收取该消息，请谨慎使用！<br>可用于活动场地变更、活动改期、活动取消等紧急情况时，作为通知已购票用户功能。',
                     onOk(){
                         self.$tModal.confirm({
                             type:'textarea',

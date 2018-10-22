@@ -25,7 +25,7 @@
             <div class="content" v-html="content" v-if="type == ''"></div>
             <div class="txt" v-if="type == 'textarea'">
                 <p>{{text.length}}/200</p>
-                <textarea rows="9" placeholder="请填写通知（200字）" v-model="text" maxlength="200"></textarea>
+                <textarea rows="9" placeholder="由于微信消息通知限制，只可在用户已购票后的7日内发送消息，超过7日的用户则无法收取该消息。请填写通知（200字）" v-model="text" maxlength="200"></textarea>
             </div>
             <div class="btns btns-one">
                 <t-button @dotap="onOk">{{btn1Name}}</t-button>

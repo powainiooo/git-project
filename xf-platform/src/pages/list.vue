@@ -47,7 +47,7 @@
             </transition>
             <transition enter-active-class="animated anim-detail slideInRight" leave-active-class="animated anim-detail slideOutRight">
             <detail-frame v-if="showDetail"
-                          @close="showDetail = false"
+                          @close="doCloseDetail"
                           @change="itemChange"
                           :itemData="detailData"
                           :fileurl="fileurl" ></detail-frame>
@@ -165,6 +165,10 @@
                     let data = res.data;
                     self.detailData = data.data;
                 })
+            },
+            doCloseDetail(){
+                this.showDetail = false;
+                this.getListData()
             }
         }
     }

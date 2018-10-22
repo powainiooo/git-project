@@ -298,9 +298,9 @@ Page({
       },
       success: function(res) {
         let data = res.data;
-        let anew = data.data.anew,min = parseFloat(anew[0].price);
+        let anew = data.data.anew,min = 10000;
         for(let item of anew){
-          if(item.price < min) min = item.price
+          if(item.price < min && item.is_over == 0) min = item.price
         }
         self.setData({
           footerPos:0,
@@ -451,9 +451,11 @@ Page({
     }else if(type == 2){
       src = '/pages/drink/detail?id='+id;
     }
-    wx.navigateTo({
-      url: src
-    })
+    if(type != 4){
+      wx.navigateTo({
+        url: src
+      })
+    }
   },
   //分享
   onShareAppMessage(res){

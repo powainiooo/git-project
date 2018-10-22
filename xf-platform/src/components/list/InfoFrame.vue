@@ -232,6 +232,7 @@
                             });
                         }
                         self.$Message.success(data.msg);
+                        self.$emit('change',obj.id);
                     }else{
                         self.$Message.warning(data.msg);
                     }

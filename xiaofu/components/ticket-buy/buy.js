@@ -7,9 +7,10 @@ Component({
       value: {},
       observer(newVal,oldVal,change){
         if(newVal.anew){
-          let list = newVal.anew,obj=list[0];
+          let list = newVal.anew,obj = {},min = 10000;
           for(let item of list){
-            if(obj.price > item.price && item.is_over != '1'){
+            if(item.price < min && item.is_over == 0){
+              min = item.price;
               obj = item;
             }
           }

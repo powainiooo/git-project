@@ -80,7 +80,7 @@ Page({
       },
       success: function(res) {
         let list = res.data.data.list,val = false;
-        if(list.length == 0 && !this.data.isMove) val = true;
+        if(list.length == 0 && !self.data.isMove) val = true;
         self.setData({
           isEmpty:val,
           listData:list

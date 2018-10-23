@@ -300,7 +300,7 @@ Page({
         let data = res.data;
         let anew = data.data.anew,min = 10000;
         for(let item of anew){
-          if(item.price < min && item.is_over == 0) min = item.price
+          if(item.price < min) min = item.price
         }
         self.setData({
           footerPos:0,

@@ -87,13 +87,19 @@
             <view>未开售</view>
             <view>开票时间：{{detailData.info.begin}} {{detailData.info.hour_b}}</view>
         </view>
-        <view class="stop-sale" wx:if="{{detailData.info.is_end == 'salestop'}}">
+        <view class="stop-sale" wx:if="{{detailData.info.is_end == 'salestop' || detailData.info.is_end == 'under'}}">
             <view>售票停止</view>
+            <view>如有疑问，详情请联系主办方</view>
+        </view>
+        <view class="stop-sale" wx:if="{{detailData.info.is_end == 'end'}}">
+            <view>售票结束</view>
             <view>如有疑问，详情请联系主办方</view>
         </view>
         <view class="btn" bindtap="gotoBuy" wx:if="{{detailData.info.is_end == ''}}">购买</view>
         <view class="btn btn-diabled" wx:if="{{detailData.info.is_end == 'over'}}">已售罄</view>
         <view class="btn btn-diabled" wx:if="{{detailData.info.is_end == 'nosale'}}">未开售</view>
         <view class="btn btn-diabled" wx:if="{{detailData.info.is_end == 'salestop'}}">已停止</view>
+        <view class="btn btn-diabled" wx:if="{{detailData.info.is_end == 'under'}}">已停止</view>
+        <view class="btn btn-diabled" wx:if="{{detailData.info.is_end == 'end'}}">已结束</view>
     </view>
 </view>

@@ -24,7 +24,8 @@ Page({
    */
   onLoad: function (options) {
     console.log(options);
-    this.data.id = options.id || options.scene;
+    //this.data.id = options.id || options.scene;
+    this.data.id = 758;
     this.getDetailData();
   },
 
@@ -41,7 +42,7 @@ Page({
         let data = res.data;
         let anew = data.data.anew,min = 10000;
         for(let item of anew){
-          if(item.price < min && item.is_over == 0) min = item.price
+          if(item.price < min) min = item.price
         }
         self.setData({
           detailData:data.data,

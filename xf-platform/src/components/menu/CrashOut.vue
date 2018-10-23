@@ -133,7 +133,8 @@
                     obj.mobile = this.phone;
                     obj.bankname = this.bankname;
                     obj.true_name = this.bankusername;
-                    obj.banknum = this.cardnums;
+                    obj.cardnum = this.banknum;
+                    obj.inv_name = '票务代售服务费';
                 }
                 this.$ajax.post('/client/api/apply_cash',qs.stringify(obj)).then(res=>{
                     let data = res.data;

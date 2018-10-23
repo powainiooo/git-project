@@ -45,7 +45,7 @@
                 </thead>
                 <tbody>
                 <tr v-for="item in listData">
-                    <td>{{item.goods_name+item.activity}}</td>
+                    <td>{{item.goods_name+' | '+item.activity}}</td>
                     <td>{{item.date}}</td>
                     <td><span class="sign1">{{item.nums}}</span></td>
                     <td>

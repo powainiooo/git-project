@@ -28,10 +28,14 @@
     .bind-frame .anim-item{ animation-duration: 0.5s; animation-timing-function: cubic-bezier(.25,.76,.36,.97)}
     .bind-frame .warn{ width: 130px; position: absolute; top: 270px; left: 330px; background-color: #e73828; padding: 10px 15px; border-radius: 5px; z-index: 50; font-size: 12px; color: #fff;}
     .bind-frame .warn:before{ content: ''; width: 10px; height: 10px; border: 5px solid rgba(0,0,0,0); border-right-color: #e73828; position: absolute; top: 50%; left: -10px; margin-top: -5px;}
+
+    #bindFrame .ivu-select-placeholder,#bindFrame .ivu-select-selected-value{ width: 270px; height: 40px; border-radius: 5px; box-sizing: border-box; padding: 5px 16px; font-size: 16px; text-align: left; color: rgb(117,117,117)}
+    #bindFrame .ivu-select-selected-value{ color: #000000; }
+    #bindFrame .ivu-select-single .ivu-select-selection{ height: 40px; border: 1px solid #a5a5a5;}
 </style>
 
 <template>
-    <div class="bind-frame">
+    <div class="bind-frame" id="bindFrame">
         <transition enter-active-class="animated anim-item slideInRight">
         <div class="org-title" v-if="showItems">Organizer</div>
         </transition>
@@ -53,7 +57,12 @@
                         </div>
                         <p class="mb20 tc"><input type="text" placeholder="身份证号" v-model="idsnum" @keyup="inputBlur('idsnum')"></p>
                         <p class="mb20 tc"><input type="text" placeholder="银行卡号" v-model="banknum"></p>
-                        <p class="mb20 tc"><input type="text" placeholder="开户支行" v-model="bank"></p>
+                        <p class="mb20 tc">
+                            <Select v-model="bankcode" style="width:270px; text-align: left;" placeholder="选择银行">
+                                <Option v-for="item in bankList" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                            </Select>
+                        </p>
+                        <p class="mb20 tc"><input type="text" placeholder="开户支行" v-model="bankname"></p>
                     </div>
 
                     <div class="warn" :style="{top:warnTop+'px'}" v-if="showWarn">{{warnTxt}}</div>
@@ -94,10 +103,30 @@
                 name:'',
                 idsnum:'',
                 banknum:'',
-                bank:'',
+                bankname:'',
+                bankcode:'',
                 showWarn:false,
                 warnTop:0,
-                warnTxt:''
+                warnTxt:'',
+                bankList:[
+                    {label:'招商银行',value:'1001'},
+                    {label:'工商银行',value:'1002'},
+                    {label:'建设银行',value:'1003'},
+                    {label:'浦发银行',value:'1004'},
+                    {label:'农业银行',value:'1005'},
+                    {label:'民生银行',value:'1006'},
+                    {label:'兴业银行',value:'1009'},
+                    {label:'平安银行',value:'1010'},
+                    {label:'交通银行',value:'1020'},
+                    {label:'中信银行',value:'1021'},
+                    {label:'光大银行',value:'1022'},
+                    {label:'华夏银行',value:'1025'},
+                    {label:'中国银行',value:'1026'},
+                    {label:'广发银行',value:'1027'},
+                    {label:'北京银行',value:'1032'},
+                    {label:'宁波银行',value:'1056'},
+                    {label:'邮储银行',value:'1066'}
+                ]
             }
         },
         mounted(){
@@ -111,7 +140,7 @@
                 return reg.test(this.idsnum)
             },
             btnDisabled(){
-                if(this.name != '' && !this.phoneDisabled && this.vericode != '' && this.idsnumCheck && this.banknum != '' && this.bank != ''){
+                if(this.name != '' && !this.phoneDisabled && this.vericode != '' && this.idsnumCheck && this.banknum != '' && this.bankname != '' && this.bankcode != ''){
                     return false;
                 }
                 return true;
@@ -138,7 +167,8 @@
                 obj.vericode = this.vericode;
                 obj.idnums = this.idsnum;
                 obj.cardnums = this.banknum;
-                obj.bankname = this.bank;
+                obj.bankname = this.bankname;
+                obj.bankcode = this.bankcode;
                 this.$ajax.post('/client/api/bind_card',qs.stringify(obj)).then(res=>{
                     let data = res.data;
                     if(data.status == 1){

@@ -5,7 +5,7 @@
     .crashout .crashout-frame-left{ width: 400px;}
     .crashout .crashout-frame-right{ width: 360px;}
     .crashout .line{ width: 270px; margin:0 0 20px 0;}
-    .crashout .line input{ width: 100%; box-sizing: border-box; border: 1px solid #ffffff; border-radius: 6px; font-size: 16px; padding: 7px 16px; color: #ffffff}
+    .crashout .line input{ width: 100%; box-sizing: border-box; border: 1px solid #ffffff; border-radius: 6px; font-size: 16px; padding: 7px 16px; color: #ffffff; background-color: transparent;}
     .crashout .line input::-webkit-input-placeholder{ color: #ffffff;}
     .crashout  .code-line{ display: flex; justify-content: space-between; align-items: center;}
     .crashout  .code-line input{ width: 50%;}
@@ -13,7 +13,7 @@
 </style>
 
 <template>
-    <div class="crashout">
+    <div class="crashout" id="crashout">
         <a href="javascript:;" class="laws-close" @click="$emit('toggle','recordlist')"><Icon type="md-close" /></a>
         <div class="crashout-frame">
             <div class="crashout-frame-left">
@@ -49,7 +49,7 @@
                 <div class="line"><input type="text" placeholder="纳税人识别号" v-model="ids"></div>
                 <div class="line"><input type="text" placeholder="公司地址" v-model="address"></div>
                 <div class="line"><input type="text" placeholder="电话" v-model="phone"></div>
-                <div class="line"><input type="text" placeholder="开户行" v-model="bankname"></div>
+                <div class="line"><input type="text" placeholder="银行名称" v-model="bankname"></div>
                 <div class="line"><input type="text" placeholder="开户姓名" v-model="bankusername"></div>
                 <div class="line"><input type="text" placeholder="银行账号" v-model="banknum"></div>
                 <div style="margin-top: 55px; font-size: 12px; color: #888888;">需收取3.6%税点及快递费，选择需要发票后提款额会自动扣除税点，快递费为到付。</div>

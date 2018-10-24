@@ -43,7 +43,7 @@
 
         <div class="detail-frame" v-show="!showExample && showDetail">
             <transition enter-active-class="animated fadeIn" leave-active-class="animated bounceOut">
-            <list-item :itemdata="detailData" v-if="showDetail" :fileurl="fileurl"></list-item>
+            <list-item :itemdata="detailData" v-if="showDetail" :fileurl="fileurl" @dooff="itemChange"></list-item>
             </transition>
             <transition enter-active-class="animated anim-detail slideInRight" leave-active-class="animated anim-detail slideOutRight">
             <detail-frame v-if="showDetail"

@@ -65,7 +65,11 @@
                     <td v-if="item.status == 4">已提现</td>
                     <td v-if="item.status == 5">
                         <span>提现失败</span><br><br>
-                        <t-ques position="left" width="290"></t-ques>
+                        <t-ques position="left" width="290">
+                            <ul class="list1">
+                                <li>{{item.errorMsg}}</li>
+                            </ul>
+                        </t-ques>
                     </td>
                 </tr>
                 </tbody>

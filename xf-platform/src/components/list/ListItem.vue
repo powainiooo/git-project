@@ -226,7 +226,7 @@
                         })).then(res=>{
                             if(res.data.status == 1){
                                 self.$Message.success(res.data.msg);
-                                self.$emit('dooff');
+                                self.$emit('dooff',self.itemdata.id);
                             }else{
                                 self.$Message.warning(res.data.msg);
                             }

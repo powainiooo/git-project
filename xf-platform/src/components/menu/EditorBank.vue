@@ -5,10 +5,13 @@
     .editor-bank  .code-line{ display: flex; justify-content: space-between; align-items: center;}
     .editor-bank  .code-line input{ width: 50%;}
     .editor-bank  .code-line .n-btn{ width: 40%; }
+    #editorBank .ivu-select-placeholder,#editorBank .ivu-select-selected-value{ width: 270px; height: 40px; border-radius: 5px; box-sizing: border-box; padding: 5px 16px; font-size: 16px; text-align: left; color: rgb(117,117,117)}
+    #editorBank .ivu-select-selected-value{ color: #000000; }
+    #editorBank .ivu-select-single .ivu-select-selection{ height: 40px; border: 1px solid #888888;}
 </style>
 
 <template>
-    <div class="editor-bank">
+    <div class="editor-bank" id="editorBank">
         <div class="line"><input type="text" placeholder="联系电话" readonly :value="userMobile"></div>
         <div class="line code-line">
             <input type="text" placeholder="验证码" v-model="vericode">
@@ -20,6 +23,11 @@
         <div class="line"><input type="text" placeholder="预留手机" v-model="phone"></div>
         <div class="line"><input type="text" placeholder="身份证号" v-model="idsnum"></div>
         <div class="line"><input type="text" placeholder="银行卡号" v-model="banknum"></div>
+        <div class="line">
+            <Select v-model="bankcode" placeholder="选择银行">
+                <Option v-for="item in bankList" :value="item.value" :key="item.value">{{ item.label }}</Option>
+            </Select>
+        </div>
         <div class="line"><input type="text" placeholder="开户支行" v-model="bankname"></div>
         <div class="line" style="margin-top: 100px;"><t-button :isDisabled="nextDisabled" @dotap="doConfirm">确认修改</t-button></div>
         <span v-show="false">{{userMobile}}</span>
@@ -36,7 +44,7 @@
         mixins: [vericode],
         computed:{
             nextDisabled(){
-                if(this.code == '' || this.password == '' || this.name == '' || this.mobile == '' || this.idsnum == '' || this.banknum == '' || this.bankname == ''){
+                if(this.code == '' || this.password == '' || this.name == '' || this.mobile == '' || this.idsnum == '' || this.banknum == '' || this.bankname == '' || this.bankcode == ''){
                     return true
                 }
                 return false
@@ -44,6 +52,9 @@
             userMobile(){
                 this.mobile = this.$store.state.userData.mobile || '';
                 return this.mobile
+            },
+            bankList(){
+                return this.$store.state.bankList
             }
         },
         data(){
@@ -53,7 +64,8 @@
                 phone:'',
                 idsnum:'',
                 banknum:'',
-                bankname:''
+                bankname:'',
+                bankcode:''
             }
         },
         methods:{
@@ -77,6 +89,7 @@
                 obj.idnums = this.idsnum;
                 obj.cardnums = this.banknum;
                 obj.bankname = this.bankname;
+                obj.bankcode = this.bankcode;
                 this.$ajax.post('/client/api/bind_card',qs.stringify(obj)).then(res=>{
                     let data = res.data;
                     if(data.status == 1){

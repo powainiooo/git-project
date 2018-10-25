@@ -18,15 +18,16 @@ Page({
     showRefresh:false,
     id:-1,
     minprice:'',
-    saleStart:0
+    saleStart:0,
+    footerPos:0
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     console.log(options);
-    //this.data.id = options.id || options.scene;
-    this.data.id = '771';
+    this.data.id = options.id || options.scene;
+    //this.data.id = '771';
     this.getDetailData();
   },
 
@@ -73,13 +74,11 @@ Page({
       scrollTop: 0,
       duration: 0
     });
-    let animation = wx.createAnimation({
-      duration:0,
-      timingFunction:'cubic-bezier(.22,.62,.37,1)'
-    });
-    animation.bottom('-160rpx').step();
     this.setData({
-      footerAniData:animation.export(),
+      footerDuration:'0s'
+    });
+    this.setData({
+      footerPos:170,
       showDetailsInfos:false,
       showBuyInfos:true
     })

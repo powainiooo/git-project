@@ -150,7 +150,8 @@
                     </div>
                     <div class="logo"><img :src="fileurl+itemdata.cover"> </div>
                 </div>
-                <div class="title">{{itemdata.goods_name}} | {{itemdata.activity}}</div>
+                <div class="title" v-if="itemdata.activity == ''">{{itemdata.goods_name}}</div>
+                <div class="title" v-if="itemdata.activity != ''">{{itemdata.goods_name}} | {{itemdata.activity}}</div>
                 <div class="img"><img :src="fileurl+itemdata.cover2"></div>
             </div>
         </div>

@@ -33,7 +33,6 @@
             <bank-info v-if="showItem == 'bankinfo'" @toggle="toggle"></bank-info>
             <editor-bank v-if="showItem == 'editorbank'" @toggle="toggle"></editor-bank>
             <record-list v-if="showItem == 'recordlist'" @toggle="toggle"></record-list>
-            <crash-out v-if="showCrashOut" @toggle="toggle" :data="cashobj"></crash-out>
             <t-laws v-if="showLaws" readonly @close="showLaws=false"></t-laws>
             <contact v-if="showItem == 'contact'" readonly></contact>
             <div class="copyright" v-if="showItem == 'nav' || showItem == 'contact'">
@@ -52,23 +51,16 @@
     import BankInfo from '@/components/menu/BankInfo.vue'
     import EditorBank from '@/components/menu/EditorBank.vue'
     import RecordList from '@/components/menu/RecordList.vue'
-    import CrashOut from '@/components/menu/CrashOut.vue'
     import TLaws from '@/components/common/TLaws.vue'
     import Contact from '@/components/menu/Contact.vue'
     import Cookies from 'js-cookie';
     export default{
         name: 'App',
-        components:{MenuNav,BaseInfo,BankInfo,EditorBank,RecordList,CrashOut,TLaws,Contact},
+        components:{MenuNav,BaseInfo,BankInfo,EditorBank,RecordList,TLaws,Contact},
         data(){
             return{
                 showItem:'nav',
-                showLaws:false,
-                showCrashOut:false,
-                cashobj:{
-                    id:0,
-                    total:0,
-                    site:0
-                }
+                showLaws:false
             }
         },
         computed:{
@@ -87,14 +79,8 @@
             toggle(val,id,cash,site){
                 if(val == 'laws'){
                     this.showLaws = true;
-                }else if(val == 'crashout'){
-                    this.showCrashOut = true;
-                    this.cashobj.id = id;
-                    this.cashobj.total = cash;
-                    this.cashobj.site = site;
                 }else if(val == 'recordlist'){
                     this.showItem = val;
-                    this.showCrashOut = false;
                 }else if(val == 'close'){
                     this.showItem = 'nav';
                     this.$store.commit('doShowGlobalMenuDetail',false);

@@ -108,37 +108,45 @@ Component({
             city:app.globalData.city
           },
           success: function(res) {
-            let jsapi = res.data.jsapiparam;
-            let order_num = res.data.order_num;
-            let tid = res.data.tid;
-            app.globalData.ticketOrderNum = order_num;
-            app.globalData.ticketBuyNum = self.data.numbersArr[self.data.numberIndex];
-            if(res.data.flag == 1){//福利票
-              self.doBuySuccess(tid,order_num);
+            if(res.data.status != 0){
+              wx.showToast({
+                image:'../../res/images/warn.png',
+                title:res.data.msg
+              });
             }else{
-              wx.requestPayment({
-                'timeStamp': jsapi.timeStamp,
-                'nonceStr': jsapi.nonceStr,
-                'package': jsapi.package,
-                'signType': jsapi.signType,
-                'paySign': jsapi.paySign,
-                'success':function(res){
-                  console.log(res);
-                  wx.showToast({
-                    title:'支付成功'
-                  });
-                  self.doBuySuccess(tid,order_num);
-                },
-                'fail':function(res){
-                  wx.showToast({
-                    image:'../../res/images/warn.png',
-                    title:'支付失败'
-                  });
-                  wx.hideNavigationBarLoading();
-                  self.data.btnDisabled = true;
-                }
-              })
+              let jsapi = res.data.jsapiparam;
+              let order_num = res.data.order_num;
+              let tid = res.data.tid;
+              app.globalData.ticketOrderNum = order_num;
+              app.globalData.ticketBuyNum = self.data.numbersArr[self.data.numberIndex];
+              if(res.data.flag == 1){//福利票
+                self.doBuySuccess(tid,order_num);
+              }else{
+                wx.requestPayment({
+                  'timeStamp': jsapi.timeStamp,
+                  'nonceStr': jsapi.nonceStr,
+                  'package': jsapi.package,
+                  'signType': jsapi.signType,
+                  'paySign': jsapi.paySign,
+                  'success':function(res){
+                    console.log(res);
+                    wx.showToast({
+                      title:'支付成功'
+                    });
+                    self.doBuySuccess(tid,order_num);
+                  },
+                  'fail':function(res){
+                    wx.showToast({
+                      image:'../../res/images/warn.png',
+                      title:'支付失败'
+                    });
+                    wx.hideNavigationBarLoading();
+                    self.data.btnDisabled = true;
+                  }
+                })
+              }
             }
+
           },
           fail(){
             wx.showModal({

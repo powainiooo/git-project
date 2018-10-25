@@ -81,7 +81,7 @@
             }
         },
         mounted(){
-            console.log(this.data);
+            this.isNeed = this.data.invoice == '' ? '2' : this.data.invoice;
         },
         computed: {
             userMobile(){

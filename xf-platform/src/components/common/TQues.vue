@@ -17,7 +17,7 @@
     .n-ques .ivu-tooltip-inner{ background-color: rgba(70,76,91,0); box-shadow: none;}
     .n-ques .ivu-tooltip-popper[x-placement^=left] .ivu-tooltip-arrow{ right: 6px; border-width: 6px 0 6px 6px; border-left-color: #1a41c0;}
     .n-ques .ivu-tooltip-popper[x-placement^=right] .ivu-tooltip-arrow{ left: 4px; border-width: 6px 6px 6px 0; border-right-color: #1a41c0;}
-    .n-ques-red .ivu-tooltip-popper[x-placement^=left] .ivu-tooltip-arrow{ right: 0; border-width: 6px 0 6px 6px; border-left-color: #e3007f;}
+    .n-ques-red .ivu-tooltip-popper[x-placement^=left] .ivu-tooltip-arrow{ right: 6px; border-width: 6px 0 6px 6px; border-left-color: #e3007f;}
     .n-ques-red .ivu-tooltip-popper[x-placement^=right] .ivu-tooltip-arrow{ left: 4px; margin-top: -7px; border-width: 6px 6px 6px 0; border-right-color: #e3007f;}
 </style>
 

@@ -21,8 +21,9 @@
                 <Select style="width:130px; margin-right: 20px;" v-model="selectType" placeholder="状态" @on-change="getListData">
                     <Option value="1">未可提现</Option>
                     <Option value="2">申请提现</Option>
-                    <Option value="3">提现失败</Option>
+                    <Option value="3">审核中</Option>
                     <Option value="4">已提现</Option>
+                    <Option value="5">提现失败</Option>
                 </Select>
                 <Input v-model="keyword" placeholder="请输入活动名称" style="width: 270px; margin-right: 20px;" />
                 <t-button size="min" style="width: 90px;" @dotap="getListData">查询</t-button>
@@ -45,7 +46,8 @@
                 </thead>
                 <tbody>
                 <tr v-for="item in listData">
-                    <td>{{item.goods_name+' | '+item.activity}}</td>
+                    <td v-if="item.activity == ''">{{item.goods_name}}</td>
+                    <td v-if="item.activity != ''">{{item.goods_name+' | '+item.activity}}</td>
                     <td>{{item.date}}</td>
                     <td><span class="sign1">{{item.nums}}</span></td>
                     <td>
@@ -60,12 +62,12 @@
                     <td><span class="sign1">{{item.total}}</span></td>
                     <td><span class="sign1">{{item.cash}}</span></td>
                     <td v-if="item.status == 1">未可提现</td>
-                    <td v-if="item.status == 2"><t-button size="min" @dotap="$emit('toggle','crashout',item.id,item.total,site)">申请提现</t-button></td>
-                    <td v-if="item.status == 3">已申请</td>
+                    <td v-if="item.status == 2"><t-button size="min"  @dotap="openOut(item,site)">申请提现</t-button></td>
+                    <td v-if="item.status == 3">审核中</td>
                     <td v-if="item.status == 4">已提现</td>
                     <td v-if="item.status == 5">
-                        <span>提现失败</span><br><br>
-                        <t-ques position="left" width="290">
+                        <t-button size="min" @dotap="openOut(item,site)" red>重新提现</t-button>
+                        <t-ques position="left" width="290" style="margin: 10px 0 0 10px;" redbg>
                             <ul class="list1">
                                 <li>{{item.errorMsg}}</li>
                             </ul>
@@ -75,21 +77,26 @@
                 </tbody>
             </table>
         </div>
+
+        <crash-out v-if="showCrashOut" @toggle="hideOut" :data="cashobj"></crash-out>
     </div>
 </template>
 
 <script type='es6'>
     import TButton from '@/components/common/TButton.vue'
     import TQues from '@/components/common/TQues.vue'
+    import CrashOut from '@/components/menu/CrashOut.vue'
     export default {
         name: 'app',
-        components:{TButton,TQues},
+        components:{TButton,TQues,CrashOut},
         data(){
             return{
                 keyword:'',
                 selectType:'0',
                 listData:[],
-                site:0
+                site:0,
+                showCrashOut:false,
+                cashobj:{}
             }
         },
         mounted(){
@@ -106,7 +113,16 @@
                 }).then(res=>{
                     self.listData = res.data.data;
                     self.site = res.data.site;
-                })
+                });
+            },
+            hideOut(){
+                this.showCrashOut = false;
+                this.getListData();
+            },
+            openOut(item,site){
+                this.cashobj = item;
+                this.cashobj.site = site;
+                this.showCrashOut = true;
             }
         }
     }

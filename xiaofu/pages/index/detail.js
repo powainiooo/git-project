@@ -24,8 +24,7 @@ Page({
    */
   onLoad: function (options) {
     console.log(options);
-    //this.data.id = options.id || options.scene;
-    this.data.id = 758;
+    this.data.id = options.id || options.scene;
     this.getDetailData();
   },
 

@@ -51,6 +51,8 @@ Component({
       })
     },
     toggleTypeList(event){
+      let over = event.target.dataset.over;
+      if(over == 1) return;
       let val = event.target.dataset.val == undefined ? -1 : event.target.dataset.val;
       let obj = val == -1 ? this.data.selectTicket : this.data.typeList[val];
       let isShow = event.target.dataset.show;

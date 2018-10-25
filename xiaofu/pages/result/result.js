@@ -66,8 +66,16 @@ Page({
         avatarUrl: e.detail.userInfo.avatarUrl
       },
       success: res => {
+        const routers = getCurrentPages();
+        console.log(routers);
+        let url = '';
+        if(routers[0].options.scene){
+          url = routers[0].route+'?id='+routers[0].options.scene
+        }else{
+          url = routers[0].route
+        }
         wx.redirectTo({
-          url: '/pages/index/index'
+          url: url
         })
       },
       fail(){

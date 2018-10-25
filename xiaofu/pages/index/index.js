@@ -5,7 +5,7 @@ const QQMapWX = require('../../utils/qqmap-wx-jssdk.min.js');
 const qMap = new QQMapWX({
   key:'AH7BZ-VV736-WNUSA-EP35M-3TCOZ-DTBXG'
 });
-const {promisify} = require('../../utils/util.js');
+const { promisify, formatTime} = require('../../utils/util.js');
 const wxDownloadFile= promisify(wx.downloadFile);
 Page({
   data: {
@@ -48,7 +48,8 @@ Page({
     sponsorSrc:'',
     showRefresh:false,
     id:-1,
-    minprice:''
+    minprice:'',
+    saleStart:0
   },
   //事件处理函数
   onLoad: function (options) {
@@ -302,11 +303,13 @@ Page({
         for(let item of anew){
           if(item.price < min) min = item.price
         }
+        var date = formatTime(new Date(parseInt(data.data.info.sale_start)*1000));
         self.setData({
           footerPos:0,
           detailData:data.data,
           minprice:min,
-          showTicketDetail:true
+          showTicketDetail:true,
+          saleStart:date
         });
         wx.hideNavigationBarLoading();
       },

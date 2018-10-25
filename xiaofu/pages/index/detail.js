@@ -1,6 +1,6 @@
 // pages/index/detail.js
 const app = getApp();
-const {promisify} = require('../../utils/util.js');
+const {promisify,formatTime} = require('../../utils/util.js');
 const wxDownloadFile= promisify(wx.downloadFile);
 Page({
 
@@ -17,14 +17,16 @@ Page({
     shareImgSrc:'',
     showRefresh:false,
     id:-1,
-    minprice:''
+    minprice:'',
+    saleStart:0
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     console.log(options);
-    this.data.id = options.id || options.scene;
+    //this.data.id = options.id || options.scene;
+    this.data.id = '771';
     this.getDetailData();
   },
 
@@ -43,11 +45,13 @@ Page({
         for(let item of anew){
           if(item.price < min) min = item.price
         }
+        var date = formatTime(new Date(parseInt(data.data.info.sale_start)*1000));
         self.setData({
           detailData:data.data,
           singlePrice:data.data.info.minprice,
           minprice:min,
-          showTicketDetail:true
+          showTicketDetail:true,
+          saleStart:date
         });
         wx.hideNavigationBarLoading();
       },

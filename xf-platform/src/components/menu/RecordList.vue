@@ -23,7 +23,7 @@
                     <Option value="2">申请提现</Option>
                     <Option value="3">审核中</Option>
                     <Option value="4">已提现</Option>
-                    <Option value="5">提现失败</Option>
+                    <Option value="5">重新申请</Option>
                 </Select>
                 <Input v-model="keyword" placeholder="请输入活动名称" style="width: 270px; margin-right: 20px;" />
                 <t-button size="min" style="width: 90px;" @dotap="getListData">查询</t-button>

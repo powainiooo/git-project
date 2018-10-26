@@ -70,9 +70,9 @@ Page({
         console.log(routers);
         let url = '';
         if(routers[0].options.scene){
-          url = routers[0].route+'?id='+routers[0].options.scene
+          url = '/'+routers[0].route+'?id='+routers[0].options.scene
         }else{
-          url = routers[0].route
+          url = '/pages/index/index'
         }
         wx.redirectTo({
           url: url

@@ -57,13 +57,13 @@ App({
                       })
                     },
                     fail(err){
-                      wx.redirectTo({
+                      wx.navigateTo({
                         url: '/pages/result/result?page=login'
                       })
                     }
                   })
                 }else{
-                  wx.redirectTo({
+                  wx.navigateTo({
                     url: '/pages/result/result?page=login'
                   })
                 }

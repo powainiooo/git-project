@@ -72,7 +72,7 @@
                         <span v-if="item.status == 3">已退款</span>
                     </td>
                     <td>
-                        <a href="javascirpt:;" @click="doRefund(item.id)" v-if="item.status != 3 && item.price != 0 && itemData.check == 0">退款</a>
+                        <a href="javascirpt:;" @click="doRefund(item.id)" v-if="item.status != 3 && item.price != 0 && itemData.checked == 0">退款</a>
                     </td>
                 </tr>
                 </tbody>

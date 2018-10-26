@@ -50,13 +50,14 @@
                     <h3 class="title"><span>1</span>填写提款账户信息</h3>
                     <div class="mt20">
                         <p class="mb20 tc"><input type="text" placeholder="开户名" v-model="name"></p>
-                        <p class="mb20 tc"><input type="text" placeholder="预留手机号" v-model="mobile" @keyup="inputBlur('phone')"></p>
+                        <p class="mb20 tc"><input type="text" placeholder="预留手机号" :value="userMobile" readonly></p>
                         <div class="line code-line">
                             <input type="text" placeholder="验证码" v-model="vericode">
                             <t-button :isDisabled="veriBtnDisabled" size="min" @dotap="getCode">{{codeBtnName}}</t-button>
                         </div>
                         <p class="mb20 tc"><input type="text" placeholder="身份证号" v-model="idsnum" @keyup="inputBlur('idsnum')"></p>
                         <p class="mb20 tc"><input type="text" placeholder="银行卡号" v-model="banknum"></p>
+                        <p class="mb20 tc"><input type="text" placeholder="预留手机" v-model="phone" @keyup="inputBlur('phone')"></p>
                         <p class="mb20 tc">
                             <Select v-model="bankcode" style="width:270px; text-align: left;" placeholder="选择银行">
                                 <Option v-for="item in bankList" :value="item.value" :key="item.value">{{ item.label }}</Option>
@@ -75,7 +76,7 @@
                     </div>
                     <div class="hint">
                         <div>5<span style="font-size: 24px;">days</span></div>
-                        <p>提款时间在活动结束<span>3</span>个工作日后可以发起申请，审核及大款在<span>2</span>个工作日左右。</p>
+                        <p>提款时间在活动结束<span>7</span>个工作日后可以发起申请，审核及大款在<span>2</span>个工作日左右。</p>
                     </div>
                     <p style="font-size: 14px; color: #888888; padding-left: 50px;">如需开发票在提款时选择发票选项，需另收取手续费总额的3.6%作为税点，发票为普票。</p>
                 </div>
@@ -107,7 +108,8 @@
                 bankcode:'',
                 showWarn:false,
                 warnTop:0,
-                warnTxt:''
+                warnTxt:'',
+                phone:''
             }
         },
         mounted(){
@@ -131,6 +133,17 @@
             },
             bankList(){
                 return this.$store.state.bankList
+            },
+            userMobile(){
+                this.mobile = this.$store.state.userData.mobile || '';
+                return this.mobile
+            },
+            phoneDisabled2(){
+                let reg = /^[1][3,4,5,7,8][0-9]{9}$/;
+                if(!reg.test(this.phone)){
+                    return true
+                }
+                return false
             }
         },
         methods:{
@@ -147,7 +160,8 @@
             dobind(){
                 let obj = {},self = this;
                 obj.username = this.name;
-                obj.mobile = this.mobile;
+                obj.phone = this.mobile;
+                obj.mobile = this.phone;
                 obj.vericode = this.vericode;
                 obj.idnums = this.idsnum;
                 obj.cardnums = this.banknum;
@@ -182,8 +196,8 @@
             },
             inputBlur(name){
                 if(name == 'phone'){
-                    this.showWarn = this.phoneDisabled;
-                    this.warnTop = 180;
+                    this.showWarn = this.phoneDisabled2;
+                    this.warnTop = 421;
                     this.warnTxt = '手机号格式不正确';
                 }else if(name == 'idsnum'){
                     this.showWarn = !this.idsnumCheck;

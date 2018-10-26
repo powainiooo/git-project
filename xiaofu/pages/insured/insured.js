@@ -24,7 +24,7 @@ Page({
     this.data.inforList[index][key] = event.detail.value;
     let disabled = true,arr = this.data.inforList;
     for(let i=0;i<arr.length;i++){
-      if(arr[i].name == '' || arr[i].phone == '' || arr[i].ids == ''){
+      if(arr[i].username == '' || arr[i].mobile == '' || arr[i].idnum == ''){
         disabled = false;
         break;
       }

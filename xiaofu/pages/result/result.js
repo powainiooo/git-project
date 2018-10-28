@@ -68,9 +68,9 @@ Page({
       success: res => {
         const routers = getCurrentPages();
         console.log(routers);
-        let url = '';
-        if(routers[0].options.scene){
-          url = '/'+routers[0].route+'?id='+routers[0].options.scene
+        let url = '',id = routers[0].options.scene || routers[0].options.id || -1;
+        if(id != -1){
+          url = '/'+routers[0].route+'?id='+id
         }else{
           url = '/pages/index/index'
         }

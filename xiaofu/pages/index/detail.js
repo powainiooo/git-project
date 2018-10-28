@@ -122,8 +122,14 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
+    let title;
+    if(this.data.detailData.info.activity == ''){
+      title = this.data.detailData.info.goods_name
+    }else{
+      title = this.data.detailData.info.goods_name+' | '+this.data.detailData.info.activity
+    }
     return {
-      title:this.data.detailData.info.goods_name+' | '+this.data.detailData.info.activity,
+      title:title,
       imageUrl:this.data.imgSrc+this.data.detailData.info.share_logo,
       path:'pages/index/detail?id='+this.data.detailData.info.id
     }

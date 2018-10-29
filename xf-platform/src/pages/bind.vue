@@ -75,7 +75,7 @@
                         <p>小夫有票 会收取每场活动的总费用的<span>5</span>%作为手续费，提款时自动扣取。</p>
                     </div>
                     <div class="hint">
-                        <div>5<span style="font-size: 24px;">days</span></div>
+                        <div>7<span style="font-size: 24px;">days</span></div>
                         <p>提款时间在活动结束<span>7</span>个工作日后可以发起申请，审核及大款在<span>2</span>个工作日左右。</p>
                     </div>
                     <p style="font-size: 14px; color: #888888; padding-left: 50px;">如需开发票在提款时选择发票选项，需另收取手续费总额的3.6%作为税点，发票为普票。</p>
@@ -83,7 +83,7 @@
             </div>
             <div class="btns">
                 <div style="width: 270px; margin-bottom: 15px; margin-left: 40px;"><t-button :isDisabled="btnDisabled" @dotap="dobind">确认绑定</t-button></div>
-                <p style="font-size: 12px; color: #888888; text-align: right;">*审核时间为工作日10:00am-18:00pm，<br>如有疑问请联系客服130-0000-0000，请于工作时间联系。</p>
+                <p style="font-size: 12px; color: #888888; text-align: right;">*审核时间为工作日10:00am-18:00pm，<br>如有疑问请联系客服186-8143-8270，请于工作时间联系。</p>
             </div>
         </div>
         </transition>

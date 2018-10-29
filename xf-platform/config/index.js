@@ -11,11 +11,11 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-        //'/client':{
-        //    target:'http://ticket.pc-online.cc',
+        //'/':{
+        //    target:'http://wechat.leesticket.com',
         //    changeOrigin:true,
         //    pathRewrite:{
-        //        '^/client':'/client'
+        //
         //    }
         //}
     },

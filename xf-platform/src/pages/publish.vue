@@ -65,7 +65,7 @@
         mounted(){
             this.$ajax.defaults.headers.common['mid'] = Cookies.get('xfmid');
             this.$ajax.defaults.headers.common['tokey'] = Cookies.get('xftokey');
-            this.$ajax.defaults.baseURL = 'http://wechat.leesticket.com';
+            //this.$ajax.defaults.baseURL = 'http://wechat.leesticket.com';
             this.$ajax.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
             //if(editorData.id != -1){
             //    this.getError(editorData.id);

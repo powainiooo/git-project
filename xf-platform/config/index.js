@@ -11,13 +11,13 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-        //'/':{
-        //    target:'http://wechat.leesticket.com',
-        //    changeOrigin:true,
-        //    pathRewrite:{
-        //
-        //    }
-        //}
+        '/client':{
+            target:'http://wechat.leesticket.com/client',
+            changeOrigin:true,
+            pathRewrite:{
+                '^/client':''
+            }
+        }
     },
 
     // Various Dev Server settings

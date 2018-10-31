@@ -23,7 +23,7 @@
             }
         },
         mounted(){
-            this.$ajax.defaults.baseURL = 'http://wechat.leesticket.com';
+            //this.$ajax.defaults.baseURL = 'http://wechat.leesticket.com';
         },
         methods:{
 

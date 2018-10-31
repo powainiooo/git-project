@@ -23,7 +23,7 @@
         },
         mounted(){
             let self = this;
-            this.$ajax.defaults.baseURL = 'http://wechat.leesticket.com';
+            //this.$ajax.defaults.baseURL = 'http://wechat.leesticket.com';
             this.$ajax.interceptors.response.use(res=>{
                 if(res.data.status == 0){
                     self.$tModal.warn({

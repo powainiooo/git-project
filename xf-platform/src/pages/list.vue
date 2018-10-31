@@ -87,7 +87,7 @@
             this.$store.commit('doShowGlobalMenu',true);
             this.$ajax.defaults.headers.common['mid'] = Cookies.get('xfmid');
             this.$ajax.defaults.headers.common['tokey'] = Cookies.get('xftokey');
-            this.$ajax.defaults.baseURL = 'http://wechat.leesticket.com';
+            //this.$ajax.defaults.baseURL = 'http://wechat.leesticket.com';
             let self = this;
             this.$ajax.interceptors.response.use(res=>{
                 if(res.data.status == 0){

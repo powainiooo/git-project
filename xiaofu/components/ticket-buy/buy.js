@@ -32,6 +32,8 @@ Component({
   data: {
     numbersArr:[1,2,3,4,5,6,7,8,9,10],
     numberIndex:0,
+    idTypeArr:['身份证','护照'],
+    idTypeIndex:-1,
     nameVal:'',
     phoneVal:'',
     addressVal:'',
@@ -50,6 +52,12 @@ Component({
         numberIndex: e.detail.value
       })
     },
+    idTypeChange: function(e) {
+      this.setData({
+        idTypeIndex: e.detail.value
+      });
+      this.checkValues();
+    },
     toggleTypeList(event){
       let over = event.target.dataset.over;
       if(over == 1) return;
@@ -66,8 +74,11 @@ Component({
     },
     checkValues(event){
       let data = this.data.itemData;
-      let key = event.target.dataset.key;
-      this.data[key] = event.detail.value;
+      if(event){
+        let key = event.target.dataset.key;
+        this.data[key] = event.detail.value;
+      }
+
       let btn = true;
       if(this.data.nameVal == ''){
         btn = false;
@@ -82,10 +93,20 @@ Component({
         }
       }
       if(data.info.is_idnum == '1'){
-        var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
-        if(!reg.test(this.data.idnum)){
+        if(this.data.idTypeIndex == -1){
           btn = false;
+        }else if(this.data.idTypeIndex == 0){
+          var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+          if(!reg.test(this.data.idnum)){
+            btn = false;
+          }
+        }else if(this.data.idTypeIndex == 1){
+          let reg = /^[a-zA-Z0-9]{5,17}$/;
+          if(this.data.idnum == ''){
+            btn = false;
+          }
         }
+
       }
       this.setData({
         btnDisabled:btn
@@ -105,6 +126,7 @@ Component({
             mobile:self.data.phoneVal,
             address:self.data.addressVal,
             idnum:self.data.idnum,
+            idnum_type:parseInt(this.data.idTypeIndex) + 1,
             sele:self.data.selectTicket.select,
             nums:self.data.numbersArr[self.data.numberIndex],
             city:app.globalData.city

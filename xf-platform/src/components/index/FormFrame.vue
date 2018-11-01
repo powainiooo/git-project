@@ -5,10 +5,14 @@
     .reg-frame{ width: 300px; position: absolute; left: 50px; bottom: 0; z-index: 10;}
     .org-frame{ position: absolute; left: 400px; bottom: 0; z-index: 10;}
     .moveFunc{ animation-timing-function: cubic-bezier(.25,.71,.22,.99);}
+    .form-frame>.logo{ font-size: 32px; color: #ffffff; position: absolute; top: 60px; left: 60px;}
 </style>
 
 <template>
     <div class="form-frame" :style="{width:showOrganize ? '1350px' : '400px'}">
+        <div class="logo">
+            <i class="icon-logo"></i>
+        </div>
         <a href="javascript:;" class="btn-back" v-if="showForget" @click="doHideForget"><Icon type="ios-arrow-back" /></a>
         <transition enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
             <section class="log-frame" v-if="showLogin || showForget">

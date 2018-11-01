@@ -1,5 +1,5 @@
 <style>
-    .form-frame{ width: 400px; height: 100vh; background: linear-gradient(165deg, #3052a7, #002aa6 54%,#003db9); position: absolute; top: 0; left: 0; z-index: 200; transition:width 0.8s cubic-bezier(.25,.71,.22,.99);}
+    .form-frame{ width: 400px; height: 100vh; background: linear-gradient(165deg, #3052a7, #002aa6 54%,#003db9); position: absolute; top: 0; left: 0; z-index: 1600; transition:width 0.8s cubic-bezier(.25,.71,.22,.99);}
     .form-frame .btn-back{ font-size: 30px; color: #ffffff; position: absolute; top: 110px; left: 60px;}
     .log-frame{ width: 270px; position: absolute; left: 65px; top: 50%; margin-top: -230px;}
     .reg-frame{ width: 300px; position: absolute; left: 50px; bottom: 0; z-index: 10;}

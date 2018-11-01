@@ -59,7 +59,7 @@
         methods:{
             getData(){
                 let self = this;
-                self.$ajax.get('http://wechat.leesticket.com/client/api/index_banner').then(res=>{
+                self.$ajax.get('/client/api/index_banner').then(res=>{
                     let data = res.data;
                     self.listData = data.data.banner;
                     self.file_url = data.file_url;

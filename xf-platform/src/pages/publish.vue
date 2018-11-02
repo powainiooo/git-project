@@ -54,7 +54,8 @@
                     goods_desc:[],
                     notify:[],
                     person_desc:[]
-                }
+                },
+                isSubmit:false
             }
         },
         computed:{
@@ -100,6 +101,7 @@
             },
             doSubmit(){
                 let self = this;
+                if(self.isSubmit) return;
                 let obj = {},step1 = self.$refs.step1,step2 = self.$refs.step2,step3 = self.$refs.step3;
                 self.$tModal.confirm({
                     title:'是否确认信息无误并提交？',
@@ -165,8 +167,10 @@
                         }
                         //console.log(obj);
                         //return;
+                        self.isSubmit = true;
                         self.$ajax.post(ajaxSrc,qs.stringify(obj)).then(res=>{
                             let data = res.data;
+                            self.isSubmit = false;
                             if(data.status == 1){
                                 self.$tModal.warn({
                                     title:'提交成功！',

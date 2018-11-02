@@ -12,7 +12,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
         '/client':{
-            target:'http://wechat.leesticket.com/client',
+            target:'http://client.pc-online.cc/client',
             changeOrigin:true,
             pathRewrite:{
                 '^/client':''

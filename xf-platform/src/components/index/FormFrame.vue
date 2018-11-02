@@ -65,9 +65,11 @@
                 showRegisterAll:false,
                 showOrganize:false,
                 showLaws:false,
-                registerType:'company'
+                registerType:'company',
+                isSubmit:false
             }
         },
+        inject:['reload'],
         methods:{
             doShowForget(){
                 this.showLogin = false;
@@ -95,6 +97,7 @@
             },
             dosubmit(){
                 let self = this;
+                if(self.isSubmit) return;
                 let register = this.$refs.register;
                 let organizer = this.$refs.organizer;
                 let obj = {};
@@ -122,16 +125,18 @@
                 }
                 obj.logo_img = organizer.logoImgUrl;
                 this.$ajax.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+                self.isSubmit = true;
                 this.$ajax.post('/client/api/register',qs.stringify(obj)).then(res=>{
                     let data = res.data;
                     console.log(data);
+                    self.isSubmit = false;
                     if(data.status == 1){
                         self.$tModal.warn({
                             title:'提交成功！',
                             content:'后台将在3个工作日内完成帐号审核，<br>帐号审核通过与否，都将以短信形式通知到已注册的手机号上。',
                             btn1Name:'返回首页',
                             onOk(){
-                                self.$router.go(0)
+                                self.reload()
                             }
                         })
                     }else if(data.status == -3){
@@ -140,7 +145,7 @@
                             content:'该帐号信息已经存在，请重新填写',
                             btn1Name:'返回首页',
                             onOk(){
-                                self.$router.go(0)
+                                self.reload()
                             }
                         })
                     }else{
@@ -149,7 +154,7 @@
                             content:'由于网络错误，流量拥挤提交失败，<br>请尝试重新提交。',
                             btn1Name:'重新提交',
                             onOk(){
-
+                                self.dosubmit();
                             }
                         })
                     }

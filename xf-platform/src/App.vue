@@ -4,7 +4,7 @@
             <i class="icon-logo"></i>
         </div>
         <index v-if="showMenus"></index>
-        <router-view/>
+        <router-view v-if="isRouterAlive"/>
     </div>
 </template>
 
@@ -13,6 +13,16 @@
     export default {
         name: 'App',
         components:{index},
+        data(){
+            return{
+                isRouterAlive:true
+            }
+        },
+        provide(){
+            return{
+                reload:this.reload
+            }
+        },
         computed:{
             showMenus(){
                 return this.$store.state.showGlobalMenu
@@ -44,6 +54,13 @@
                 if(this.showMenus){
                     this.$router.push('list');
                 }
+            },
+            reload(){
+                console.log('reload');
+                this.isRouterAlive = false;
+                this.$nextTick(function(){
+                    this.isRouterAlive = true;
+                })
             }
         }
     }

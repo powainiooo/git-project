@@ -1,5 +1,9 @@
 <style>
-    .publish{ position: relative;}
+    .publish{ height: 100vh; min-height: 900px;   position: relative; -webkit-overflow-scrolling: touch;}
+    body::-webkit-scrollbar-track{ -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);border-radius: 10px;background-color: #003db9;}
+    body::-webkit-scrollbar{width: 6px;background-color: #003db9;}
+    body::-webkit-scrollbar-corner{width: 6px;background-color: #003db9;}
+    body::-webkit-scrollbar-thumb{border-radius: 10px;-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);background-color: #fff;}
     .publish .top-line{ width: 1400px; position: absolute; left:60px; top: 90px; display: flex; justify-content: space-between; align-items: center; z-index: 500;}
     .publish .top-line .name{ font-size: 157px; color: #fff; font-family: 'Helve';}
     .publish .top-line .n-btn{ width: 270px;}

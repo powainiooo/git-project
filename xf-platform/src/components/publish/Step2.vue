@@ -1,5 +1,5 @@
 <style>
-    .step2-frame{ width: 1400px; position: fixed; bottom: 0; left: 60px; display: flex; justify-content: space-between; z-index: 400;}
+    .step2-frame{ width: 1400px; position: absolute; bottom: 0; left: 60px; display: flex; justify-content: space-between; z-index: 400;}
     .step2-frame .frame{ width: 900px; height: 630px; background-color: #ffffff; position: relative;}
     .step2-frame .frame2{ width: 300px;}
     .step2-frame .frame .scroll{ width: 100%; height: 100%; display: flex; overflow-y: scroll; padding: 20px 0;box-sizing: border-box; }

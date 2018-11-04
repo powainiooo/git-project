@@ -1,5 +1,5 @@
 <style>
-    .stpe1-frame{ width: 1430px; position: fixed; bottom: 0; left: 60px; display: flex; justify-content: space-between;}
+    .stpe1-frame{ width: 1430px; position: absolute; bottom: 0; left: 60px; display: flex; justify-content: space-between;}
     .stpe1-frame .frame{ width: 900px; height: 630px; box-sizing: border-box; background-color: #ffffff; position: relative; padding:0 20px 20px 20px;; display: flex;}
     .stpe1-frame .frame:before{ content: ''; width: 100%; height: 3px; background: url("../../assets/img/ticket-top.png") repeat-x; position: absolute; left: 0; top: -3px;}
     .stpe1-frame .frame .step1{ width: 360px;}

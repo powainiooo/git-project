@@ -1,5 +1,5 @@
 <style>
-    .step3-frame{ width: 1400px; position: fixed; bottom: 0; left: 60px; display: flex; justify-content: space-between; z-index: 100;}
+    .step3-frame{ width: 1400px; position: absolute; bottom: 0; left: 60px; display: flex; justify-content: space-between; z-index: 100;}
     .step3-frame .frame{ width: 1200px; height: 630px; box-sizing: border-box; background-color: #ffffff; display: flex; position: relative;}
     .step3-frame .frame:before{ content: ''; width: 100%; height: 3px; background: url("../../assets/img/ticket-top.png") repeat-x; position: absolute; left: 0; top: -3px;}
     .step3-frame .frame:after{ content: ''; width: 1px; position: absolute; left: 50%; top: 60px; bottom: 20px; z-index: 100; background-color: #e5e5e5;}

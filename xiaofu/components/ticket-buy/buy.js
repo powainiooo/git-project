@@ -9,8 +9,8 @@ Component({
         if(newVal.anew){
           let list = newVal.anew,obj = {},min = 10000;
           for(let item of list){
-            if(item.price < min && item.is_over == 0){
-              min = item.price;
+            if (parseInt(item.price) < min && item.is_over == 0){
+              min = parseInt(item.price);
               obj = item;
             }
           }

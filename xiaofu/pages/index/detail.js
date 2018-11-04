@@ -44,10 +44,10 @@ Page({
         let data = res.data;
         let anew = data.data.anew,min = 10000;
         if(data.data.info.is_end == 'over'){
-          min = anew[0].price;
+          min = parseInt(anew[0].price);
         }else{
           for(let item of anew){
-            if(item.price < min && item.is_over == 0) min = item.price
+            if (parseInt(item.price) < min && item.is_over == 0) min = parseInt(item.price)
           }
         }
         var date = formatTime(new Date(parseInt(data.data.info.sale_start)*1000));

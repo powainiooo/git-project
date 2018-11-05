@@ -9,12 +9,11 @@ Component({
         if(newVal.anew){
           let list = newVal.anew,obj = {},min = 10000;
           for(let item of list){
-            if (parseInt(item.price) < min && item.is_over == 0){
-              min = parseInt(item.price);
+            if (parseFloat(item.price) < min && item.is_over == 0){
+              min = parseFloat(item.price);
               obj = item;
             }
           }
-
           this.setNums(obj);
           this.setData({
             typeList:newVal.anew,

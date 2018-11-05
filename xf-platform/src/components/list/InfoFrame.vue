@@ -174,6 +174,8 @@
         },
         mounted(){
             this.resetTypeList();
+            console.log(new Date('1541389680'));
+            console.log(new Date('1542252900'));
         },
         methods:{
             resetTypeList(){

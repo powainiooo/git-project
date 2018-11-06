@@ -36,7 +36,7 @@
     <div class="stpe1-frame" id="step1Frame">
         <div class="frame">
             <div class="step1">
-                <h3 class="title"><span>1</span>填写企业基本信息</h3>
+                <h3 class="title"><span>1</span>填写活动基本信息</h3>
                 <div class="mt20">
                     <div class="info-item" v-if="isEditor">
                         <p class="name">选择城市</p>
@@ -49,7 +49,7 @@
                         </Select>
                     </div>
                     <div class="inp-line">
-                        <input type="text" placeholder="活动方标题" v-model="formData.goods_name" :readonly="isEditor ? errorData.goods_name == '' : false">
+                        <input type="text" placeholder="活动标题" v-model="formData.goods_name" :readonly="isEditor ? errorData.goods_name == '' : false">
                         <t-ques width="290"
                                 :redbg="errorData.goods_name != ''"
                                 v-if="isEditor ? errorData.goods_name != '' : true"
@@ -100,7 +100,7 @@
                         <div class="inp-line">
                             <TimePicker format="HH:mm"
                                         type="time"
-                                        placeholder="活动时间"
+                                        placeholder="开始时间"
                                         v-model="formData.hour_b"
                                         :editable="false"
                                         :disabled="isEditor"
@@ -110,7 +110,7 @@
                             <TimePicker
                                 format="HH:mm"
                                 type="time"
-                                placeholder="活动时间"
+                                placeholder="结束时间"
                                 v-model="formData.hour_e"
                                 :editable="false"
                                 :disabled="isEditor"

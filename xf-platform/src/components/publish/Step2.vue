@@ -158,7 +158,7 @@
             <div class="scroll">
                 <div class="step1">
                     <div class="title ml20" style="padding-left: 0;">
-                        <h3 style="padding-left: 10px;"><span>5</span>活动须知及联系</h3>
+                        <h3 style="padding-left: 10px;"><span>5</span>活动须知</h3>
                         <div class="ques2">
                             <t-ques :redbg="showNoticeError" v-if="isEditor ? showNoticeError : true">
                                 <ul class="list2 mb30" v-if="!showNoticeError">

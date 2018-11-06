@@ -68,7 +68,7 @@
                     </t-upload>
                     <p class="hint mt25 mb25">活动方LOGO我们将严格按照统一标准进行使用<br>请务必满足以下条件。</p>
                     <p class="hint mb5"><span>1</span>上传尺寸在200px*140px的矩形区域内</p>
-                    <p class="hint mb25"><span>2</span>图片为白底黑图案形式，LOGO统一使用R0 G0 B0 色值</p>
+                    <p class="hint mb25"><span>2</span>图片为透明底黑图案，LOGO统一使用R0 G0 B0 色值的png格式文件</p>
                     <p class="hint mb25"><span>DEMO</span></p>
                     <div class="demo">
                         <img src="../../assets/img/logo.png" />

@@ -42,7 +42,7 @@ Page({
       },
       success: function(res) {
         let data = res.data;
-        let anew = data.data.anew,min = 10000;
+        let anew = data.data.anew,min = 100000;
         if(data.data.info.is_end == 'over'){
           min = parseFloat(anew[0].price);
         }else{

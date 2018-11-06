@@ -7,7 +7,7 @@ Component({
       value: {},
       observer(newVal,oldVal,change){
         if(newVal.anew){
-          let list = newVal.anew,obj = {},min = 10000;
+          let list = newVal.anew,obj = {},min = 100000;
           for(let item of list){
             if (parseFloat(item.price) < min && item.is_over == 0){
               min = parseFloat(item.price);
@@ -82,7 +82,7 @@ Component({
       if(this.data.nameVal == ''){
         btn = false;
       }
-      let myreg=/^[1][3,4,5,7,8][0-9]{9}$/;
+      let myreg=/^[1][3,4,5,6,7,8][0-9]{9}$/;
       if(!myreg.test(this.data.phoneVal)){
         btn = false
       }

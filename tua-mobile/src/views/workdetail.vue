@@ -3,11 +3,11 @@
     .swiper-frame .dots{ display: flex; align-items: center; margin-top: 10px; margin-left: 3%;}
     .swiper-frame .dots li{ width: 4px; height: 4px; border-radius: 50%; background-color: #181a19; margin-right: 10px;}
     .swiper-frame .dots li.active{ width: 8px; height: 8px; background-color: #c29836;}
-    .swiper-frame .banner-img{ width: 100%; background-repeat: no-repeat; background-size: cover; background-position: center center;}
+    .swiper-frame .banner-img{ width: 100%; background-repeat: no-repeat; background-size: cover; background-position: center center; font-size: 0;}
     .swiper-frame .banner-img img{ width: 100%;}
 
     .detail-infos{ margin-top: 25px;}
-    .detail-infos h3{ font-size: 20px; letter-spacing: 1.5px; margin-bottom: 15px;}
+    .detail-infos h3{ font-size: 18px; letter-spacing: 1.5px; margin-bottom: 15px;}
     .detail-infos p{ font-size: 14px; letter-spacing: 1.5px; line-height: 1.8; margin-bottom: 15px;}
     .detail-infos .time{ padding-top: 15px; color: rgb(127,127,127); position: relative; font-size: 10px; margin-bottom: 15px;}
     .detail-infos .time:before{ content: ''; width: 12px; height: 1px; background-color: #9f9f9f; position: absolute; top: 0; left: 0;}

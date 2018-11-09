@@ -1,6 +1,6 @@
 <style scoped>
     .swiper-frame{ position: relative; margin-bottom: 40px; margin-right: -3%; margin-top: 70px;}
-    .swiper-item .infos .title{ font-size: 20px; letter-spacing: 1.5px; margin-top: 10px; color: #000; display: block; margin-bottom: 10px;}
+    .swiper-item .infos .title{ font-size: 18px; font-weight: bold; letter-spacing: 1.5px; margin-top: 10px; color: #000; display: block; margin-bottom: 10px;}
     .swiper-item .detail{ font-size: 12px; letter-spacing: 1.5px; line-height: 1.8; overflow: hidden; height: 40px;}
     .swiper-item .btn{ width: 30%; font-size: 12px; text-align: center; padding: 7px 0; display: block; border: 1px solid #000; color: #000; border-radius: 20px; margin-top: 10px;}
 

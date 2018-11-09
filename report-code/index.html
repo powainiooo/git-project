@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,shrink-to-fit=no">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <title>report-code</title>
+    <script>
+        function getQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.hash.substr(8).match(reg);
+            if (r != null) return unescape(r[2]);
+            return null;
+        }
+        let getParams = {};
+        getParams.identifier = getQueryString('identifier') || 'LC0TEST2583691470';
+        getParams.loginType = getQueryString('loginType') || 0;
+        getParams.availableData = getQueryString('availableData') || 'asdfsdaf';
+        //所有页停留时间
+        var stayTime = {};
+        //当前页
+        var outPage = 'page1';
+        //所选风格
+        var tagStyle = ''
+    </script>
+</head>
+<body>
+<div id="app"></div>
+<!-- ?identifier=LC0TEST2583691470&loginType=0&availableData=asd -->
+</body>
+</html>

@@ -1,6 +1,6 @@
 <style>
     .swiper-frame-index{ position: relative; margin-bottom: 80px;}
-    .swiper-item .link{  display: block; font-size: 30px; letter-spacing: 1.3px; margin-top: 10px; color: #000; white-space:nowrap; text-overflow: ellipsis; overflow: hidden;}
+    .swiper-item .link{  display: block; font-size: 28px; letter-spacing: 1.3px; margin-top: 10px; color: #000; white-space:nowrap; text-overflow: ellipsis; overflow: hidden;}
     .swiper-item .link:hover{ color: #7f7f7f;}
     .swiper-item .img a{ position: relative; font-size: 0; display: block;}
     .swiper-item .img:hover a:after{ content: 'More'; font-size: 20px; color: #fff; display: flex; justify-content: center; align-items: center; background-color: rgba(0,0,0,0.5); position: absolute; top: 0; left: 0; right: 0; bottom: 0;}

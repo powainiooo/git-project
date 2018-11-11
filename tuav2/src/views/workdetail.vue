@@ -15,7 +15,7 @@
     .swiper-frame .dots li.active{ width: 12px; height: 12px; background-color: #c29836;}
 
     .detail-infos{ width: 850px; margin-top: 25px;}
-    .detail-infos h3{ font-size: 30px; letter-spacing: 1.3px; margin-bottom: 25px;}
+    .detail-infos h3{ font-size: 28px; letter-spacing: 1.3px; margin-bottom: 25px;}
     .detail-infos p{ font-size: 16px;  line-height: 1.8; margin-bottom: 25px;}
     .detail-infos .time{ padding-top: 15px; color: rgb(127,127,127); position: relative; font-size: 14px; margin-bottom: 25px;}
     .detail-infos .time:before{ content: ''; width: 12px; height: 1px; background-color: #9f9f9f; position: absolute; top: 0; left: 0;}

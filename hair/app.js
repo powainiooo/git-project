@@ -37,3 +37,13 @@ App({
     userInfo: null
   }
 })
+
+/*
+* 公众号
+ hair@designbyho.com
+ hohodiaozhale1
+
+ 小程序
+ hair2@designbyho.com
+ Hahadiaozhale1
+* */

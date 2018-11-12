@@ -1,5 +1,19 @@
 <style>
+    @font-face {
+        font-family: 'quartz';
+        src: url('../assets/QuartzRegular.ttf') format('woff2'),
+        url('../assets/QuartzRegular.ttf') format('woff');
+        font-weight: 100;
+        font-style: normal;
+    }
     .swiper-container{ height: 100vh; overflow: hidden;}
+
+    .page-title{ width: 30%; position: absolute; top: 5%; left: 10%;}
+
+    .page-context{ font-size: 0.4rem; color: #151515; position: absolute; left: 10%; top: 15%; font-family: Micro Yahei;}
+    .page-context p{ margin-bottom: 6px; font-weight: bold;}
+    .page-context .tag1{ color: #2B5FD5;}
+    .page-context .tag2{ color: #2B5FD5; font-size: 0.56rem;}
 </style>
 
 <template>
@@ -17,6 +31,7 @@
             <swiper-slide v-if="p9Show" page="page9"><page9></page9></swiper-slide>
             <swiper-slide v-if="p10Show" page="page10"><page10></page10></swiper-slide>
         </swiper>
+        <loading v-if="showLoading"></loading>
     </div>
 </template>
 
@@ -31,9 +46,10 @@
     import page8 from '@/components/page8'
     import page9 from '@/components/page9'
     import page10 from '@/components/page10'
+    import Loading from '@/components/loading'
     export default {
         name: 'app',
-        components:{page1,page2,page3,page4,page5,page6,page7,page8,page9,page10},
+        components:{page1,page2,page3,page4,page5,page6,page7,page8,page9,page10,Loading},
         mounted(){
             this.startTime = new Date().getTime();
         },
@@ -62,33 +78,34 @@
                             window.outPage = pageName;
                         }
                     }
-                }
+                },
+                showLoading:false
             }
         },
         computed:{
             p1Show(){
-                return true
+                return false
             },
             p2Show(){
-                return true
+                return false
             },
             p3Show(){
-                return true
+                return false
             },
             p4Show(){
-                return true
+                return false
             },
             p5Show(){
-                return true
+                return false
             },
             p6Show(){
-                return true
+                return false
             },
             p7Show(){
-                return true
+                return false
             },
             p8Show(){
-                return true
+                return false
             },
             p9Show(){
                 return true

@@ -1,9 +1,9 @@
 <style>
     .crashout{ width: 100vw; height: 100vh; position: fixed; top: 0; left: 0; z-index: 410; background-color: rgba(0,0,0,0.9); display: flex; justify-content: center; align-items: center;}
     .crashout .laws-close{font-size: 40px; color: #ffffff; position: absolute; top: 35px; right: 37px;}
-    .crashout .crashout-frame{ width: 960px; height: 600px; display: flex; justify-content: space-between;}
+    .crashout .crashout-frame{ width: 1200px; height: 600px; display: flex; justify-content: space-between;}
     .crashout .crashout-frame-left{ width: 400px;}
-    .crashout .crashout-frame-right{ width: 360px;}
+    .crashout .crashout-frame-right{ width: 270px;}
     .crashout .line{ width: 270px; margin:0 0 20px 0;}
     .crashout .line input{ width: 100%; box-sizing: border-box; border: 1px solid #ffffff; border-radius: 6px; font-size: 16px; padding: 7px 16px; color: #ffffff; background-color: transparent;}
     .crashout .line input::-webkit-input-placeholder{ color: #ffffff;}
@@ -52,6 +52,12 @@
                 <div class="line"><input type="text" placeholder="银行名称" v-model="bankname"></div>
                 <div class="line"><input type="text" placeholder="开户姓名" v-model="bankusername"></div>
                 <div class="line"><input type="text" placeholder="银行账号" v-model="banknum"></div>
+            </div>
+            <div class="crashout-frame-right" v-if="isNeed == 1">
+                <h3 style="font-size: 14px; color: #ffffff; margin-bottom: 30px; margin-top: 10px;">发票邮件地址</h3>
+                <div class="line"><input type="text" placeholder="发票邮件地址" v-model="kd_address"></div>
+                <div class="line"><input type="text" placeholder="收件人" v-model="kd_user"></div>
+                <div class="line"><input type="text" placeholder="收件人联系电话" v-model="kd_phone"></div>
                 <div style="margin-top: 55px; font-size: 12px; color: #888888;">需收取3.6%税点及快递费，选择需要发票后提款额会自动扣除税点，快递费为到付。</div>
             </div>
         </div>
@@ -77,7 +83,10 @@
                 bankname:'',
                 bankusername:'',
                 banknum:'',
-                phone:''
+                phone:'',
+                kd_user:'',
+                kd_phone:'',
+                kd_address:''
             }
         },
         mounted(){
@@ -93,7 +102,7 @@
                     return true
                 }
                 if(this.isNeed == '1'){
-                    if(this.company == '' || this.ids == '' || this.address == '' || this.mobile == '' || this.bankname == '' || this.banknum == ''){
+                    if(this.company == '' || this.ids == '' || this.address == '' || this.mobile == '' || this.bankname == '' || this.banknum == '' || this.kd_user == '' || this.kd_phone == '' || this.kd_address == ''){
                         return true
                     }
                 }
@@ -135,6 +144,9 @@
                     obj.true_name = this.bankusername;
                     obj.cardnum = this.banknum;
                     obj.inv_name = '票务代售服务费';
+                    obj.kd_user = this.kd_user;
+                    obj.kd_phone = this.kd_phone;
+                    obj.kd_address = this.kd_address;
                 }
                 this.$ajax.post('/client/api/apply_cash',qs.stringify(obj)).then(res=>{
                     let data = res.data;

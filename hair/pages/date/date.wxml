@@ -1,65 +1,58 @@
 <header-view>选择时间段 | Selection time</header-view>
 <view class="container container-date">
     <view class="date-list">
-        <view class="item">
-            <view class="day">15</view>
-            <view class="week">今天</view>
-        </view>
-        <view class="item active">
-            <view class="day">15</view>
-            <view class="week">周一</view>
-        </view>
-        <view class="item">
-            <view class="day">15</view>
-            <view class="week">周一</view>
-        </view>
-        <view class="item disabled">
-            <view class="day">15</view>
-            <view class="week">周一</view>
-        </view>
-        <view class="item">
-            <view class="day">15</view>
-            <view class="week">周一</view>
-        </view>
-        <view class="item disabled">
-            <view class="day">15</view>
-            <view class="week">周一</view>
-        </view>
-        <view class="item">
-            <view class="day">15</view>
-            <view class="week">周一</view>
+        <view class="item"
+              data-date="{{item.date}}"
+              bindtap="changeDay"
+              wx:for="{{dateList}}"
+              wx:for-item="item"
+              wx:key="item">
+            <view class="day">{{m1.getDay(item.date)}}</view>
+            <view class="week">{{item.week}}</view>
         </view>
     </view>
-    <view class="time-item {{selectIndex == '0' ? 'time-item-selected':''}}"
-          data-index="0"
-          bindtap="doselect"
-          hover-class="time-item-hover"
-          hover-stay-time="50">
+    <view wx:for="{{timeList}}"
+          wx:for-item="item"
+          wx:key="{{item}}"
+            class="time-item {{selectTime == item ? 'time-item-selected':''}}"
+            data-index="{{item}}"
+            bindtap="doselect"
+            hover-class="time-item-hover"
+            hover-stay-time="50">
         <view class="icons icon-weixuan"></view>
         <view class="icons icon-xuanzhong"></view>
         <view>
-            <view class="time">21:35</view>
-            <view class="end">预计结束时间21:45</view>
+            <view class="time">{{item}}</view>
+            <view class="end">预计结束时间{{m1.getTime(item)}}</view>
         </view>
     </view>
-    <view class="time-item {{selectIndex == '1' ? 'time-item-selected':''}}"
-          data-index="1"
-          bindtap="doselect"
-          hover-class="time-item-hover"
-          hover-stay-time="50">
-        <view class="icons icon-weixuan"></view>
-        <view class="icons icon-xuanzhong"></view>
-        <view>
-            <view class="time">21:55</view>
-            <view class="end">预计结束时间21:55</view>
-        </view>
-    </view>
-    <view class="time-item time-item-disabled">
-        <view class="hint">已预订</view>
-        <view>
-            <view class="time">21:35</view>
-            <view class="end">预计结束时间21:45</view>
-        </view>
-    </view>
+    <!--<view class="time-item time-item-disabled">-->
+    <!--<view class="hint">已预订</view>-->
+    <!--<view>-->
+    <!--<view class="time">21:35</view>-->
+    <!--<view class="end">预计结束时间21:45</view>-->
+    <!--</view>-->
+    <!--</view>-->
 </view>
 <footer-view bindbtn="doNext"><view slot="btn">下一步 | Next</view></footer-view>
+
+
+<wxs module="m1">
+    function getDay(date){
+        return date.slice(8,10)
+    }
+    function getTime(date){
+        var num1 = parseInt(date.slice(0,2));
+        var num2 = parseInt(date.slice(3,5));
+        var per = 30;
+        num2 += 30;
+        if(num2 >= 60){
+            num2 -= 60;
+            num1 += 1;
+        }
+        num2 = num2 == 0 ? '00' : num2
+        return num1+':'+num2
+    }
+    module.exports.getDay = getDay;
+    module.exports.getTime = getTime;
+</wxs>

@@ -6,13 +6,13 @@
           data-id="{{item.id}}"
           data-price="{{item.price}}"
           bindtap="doselected"
-          class="packages-item {{item.isRecommond ? 'packages-item-recommond' : ''}} {{selectedId == item.id ? 'packages-item-selected' : ''}}"
+          class="packages-item {{item.recom == '1' ? 'packages-item-recommond' : ''}} {{selectedId == item.id ? 'packages-item-selected' : ''}}"
           hover-class="packages-item-hover"
           hover-stay-time="50">
         <view class="line1">
             <view>
-                <view class="name">Hair Basic package</view>
-                <view class="name">Hair 基础套餐</view>
+                <view class="name">{{item.englist_name}}</view>
+                <view class="name">{{item.china_name}}</view>
             </view>
             <view class="price">{{item.price}}<text>元</text></view>
         </view>
@@ -30,7 +30,7 @@
                   hover-class="pro-item-hover"
                   hover-stay-time="50"><view class="frame"><image src="../../res/img/pics/pro3.png" mode="scaleToFill"></image></view></view>
         </view>
-        <view class="line3">适用于：中性至敏感性</view>
+        <view class="line3">适用于：{{item.apply}}</view>
         <view class="icons icon-weixuan"></view>
         <view class="icons icon-xuanzhong"></view>
     </view>
@@ -46,4 +46,4 @@
 </footer-view>
 
 <!--pro detail-->
-<detail-view showDetails="{{showDetails}}"></detail-view>
+<detail-view showDetails="{{showDetails}}" prodata="{{proDetailData}}"></detail-view>

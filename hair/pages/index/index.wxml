@@ -1,18 +1,23 @@
 <scroll-view scroll-y="{{!showBlur}}" class="index-frame {{showBlur ? 'blur' : ''}}" bindscroll="doScroll">
     <header-view showTitle="{{false}}" size="{{headerSize}}"></header-view>
     <view class="container index-container">
-        <image src="../../res/img/pics/banner.jpg" class="banner" mode="widthFix"></image>
+        <image src="{{imgSrc+pageData.cover}}" class="banner" mode="widthFix"></image>
         <view class="content">
             <view class="title-en">Welcome</view>
             <view class="title-cn">欢迎</view>
             <view class="decs">
-                <text class="icons icon-logo"></text>是关注于您头发健康的洗发专营店，我们致力于为您提供一流的洗发服务体验，点击下方预约开始。
+                <text class="icons icon-logo"></text>{{pageData.indexpage}}
             </view>
-            <view class="tips">本店店铺主题及线上线下艺术呈现由 Yu Nagaba 提供</view>
+            <view class="tips">{{pageData.comment}}</view>
         </view>
     </view>
 </scroll-view>
-<footer-view showMenu
-             bindopenMenu="doBlur"
-             bindhideMenu="hideBlur"
-             bindbtn="doOrder"><view slot="btn">预约 | Order</view></footer-view>
+<footer-view
+        wx:if="{{result == 'index'}}"
+        showMenu
+        bindopenMenu="doBlur"
+        bindhideMenu="hideBlur"
+        bindbtn="doOrder"><view slot="btn">预约 | Order</view></footer-view>
+<view class="foot-btn" wx:if="{{result == 'auth'}}">
+    <button slot="auth-btn" class="auth-btn" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="getUserInfo">授权申请 | Authorization</button>
+</view>

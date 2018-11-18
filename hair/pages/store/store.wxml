@@ -1,15 +1,26 @@
 <header-view>选择店铺 | Select the store</header-view>
 <view class="container">
     <image src="../../res/img/pics/banner2.jpg" class="banner" mode="widthFix"></image>
-    <view class="store-item">
-        <view class="title">福田COCOPARK店</view>
-        <view class="address">深圳市福田区</view>
+    <view class="store-item {{selectId == item.id ? 'store-item-active' : ''}}"
+          wx:for="{{shopList}}"
+          wx:for-item="item"
+          wx:key="item.id">
+        <view class="title">{{item.title}}</view>
+        <view class="address">{{item.address}}</view>
         <view class="btns">
-            <view class="icons icon-weixuan"></view>
-            <view class="icons icon-xuanzhong"></view>
-            <view class="btn-map" data-lnglat="{{lnglat}}" bindtap="openMap" hover-class="btn-map-hover" hover-stay-time="50">查看地图</view>
+            <view class="icons icon-weixuan" data-id="{{item.id}}" bindtap="doSelect"></view>
+            <view class="icons icon-xuanzhong" data-id="{{item.id}}" bindtap="doCancel"></view>
+            <view class="btn-map" data-lnglat="{{m1.lnglat(item.longitude,item.latitude)}}" bindtap="openMap" hover-class="btn-map-hover" hover-stay-time="50">查看地图</view>
         </view>
     </view>
     <view class="tips"><text class="icons icon-logo"></text>目前只有一家体验店，更多店铺正在进行，敬请期待。</view>
 </view>
 <footer-view bindbtn="doNext"><view slot="btn">下一步 | Next</view></footer-view>
+
+<wxs module="m1">
+    function lnglat(lng,lat){
+        return [parseFloat(lng),parseFloat(lat)]
+    }
+
+    module.exports.lnglat = lnglat;
+</wxs>

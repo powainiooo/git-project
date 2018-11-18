@@ -26,15 +26,16 @@
                   wx:for-item="item"
                   wx:key="{{item.id}}"
                   data-id="{{item.id}}"
+                  data-price="{{item.price}}"
                   bindtap="doSelectClean"
                   hover-class="list-item-hover"
                   hover-stay-time="50"
                   class="list-item {{selectedID[0] == item.id ? 'list-item-selected' : ''}}">
-                <image src="../../res/img/pics/pro5.png" mode="scaleToFill" class="img"></image>
-                <view class="name">shampoo</view>
-                <view class="name" style="margin-bottom: 30rpx;">洗发水</view>
-                <view class="decs">蜂蜜及天然萃取精华</view>
-                <view class="tips"><text>适用于\n中性至敏感性</text></view>
+                <image src="{{imgSrc+item.cover}}" mode="scaleToFill" class="img"></image>
+                <view class="name">{{item.englist_name}}</view>
+                <view class="name" style="margin-bottom: 30rpx;">{{item.china_name}}</view>
+                <view class="decs">{{item.intro}}</view>
+                <view class="tips"><text>适用于\n{{item.apply}}</text></view>
                 <view class="price">+6元</view>
                 <view class="icons icon-weixuan"></view>
                 <view class="icons icon-xuanzhong"></view>
@@ -46,14 +47,15 @@
                   wx:for-item="item"
                   wx:key="{{item.id}}"
                   data-id="{{item.id}}"
+                  data-price="{{item.price}}"
                   bindtap="doSelectConditioner"
                   class="list-item {{selectedID[1] == item.id ? 'list-item-selected' : ''}}">
-                <image src="../../res/img/pics/pro5.png" mode="scaleToFill" class="img"></image>
-                <view class="name">shampoo</view>
-                <view class="name" style="margin-bottom: 30rpx;">洗发水</view>
-                <view class="decs">蜂蜜及天然萃取精华</view>
-                <view class="tips"><text>适用于\n中性至敏感性</text></view>
-                <view class="price price-low">-6元</view>
+                <image src="{{imgSrc+item.cover}}" mode="scaleToFill" class="img"></image>
+                <view class="name">{{item.englist_name}}</view>
+                <view class="name" style="margin-bottom: 30rpx;">{{item.china_name}}</view>
+                <view class="decs">{{item.intro}}</view>
+                <view class="tips"><text>适用于\n{{item.apply}}</text></view>
+                <view class="price">+6元</view>
                 <view class="icons icon-weixuan"></view>
                 <view class="icons icon-xuanzhong"></view>
             </view>
@@ -64,14 +66,15 @@
                   wx:for-item="item"
                   wx:key="{{item.id}}"
                   data-id="{{item.id}}"
+                  data-price="{{item.price}}"
                   bindtap="doSelectTreatment"
                   class="list-item {{selectedID[2] == item.id ? 'list-item-selected' : ''}}">
-                <image src="../../res/img/pics/pro5.png" mode="scaleToFill" class="img"></image>
-                <view class="name">shampoo</view>
-                <view class="name" style="margin-bottom: 30rpx;">洗发水</view>
-                <view class="decs">蜂蜜及天然萃取精华</view>
-                <view class="tips"><text>适用于\n中性至敏感性</text></view>
-                <view class="price price-low">-6元</view>
+                <image src="{{imgSrc+item.cover}}" mode="scaleToFill" class="img"></image>
+                <view class="name">{{item.englist_name}}</view>
+                <view class="name" style="margin-bottom: 30rpx;">{{item.china_name}}</view>
+                <view class="decs">{{item.intro}}</view>
+                <view class="tips"><text>适用于\n{{item.apply}}</text></view>
+                <view class="price">+6元</view>
                 <view class="icons icon-weixuan"></view>
                 <view class="icons icon-xuanzhong"></view>
             </view>
@@ -79,6 +82,6 @@
     </view>
 </view>
 <footer-view showPrice bindbtn="doNext">
-    <view slot="price">50</view>
+    <view slot="price">{{selectedPrice[0]+selectedPrice[1]+selectedPrice[2]}}</view>
     <view slot="btn">下一步 | Next</view>
 </footer-view>

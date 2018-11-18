@@ -124,7 +124,6 @@
                                     placeholder="选择时间"
                                     :editable="false"
                                     v-model="showTime"
-                                    :options="optionsE"
                                     @on-change="dateChange"
                                     :disabled="isEditor"
                                     :readonly="isEditor"></DatePicker>
@@ -136,7 +135,6 @@
                                     placeholder="选择时间"
                                     :editable="false"
                                     v-model="saleStart"
-                                    :options="optionsE"
                                     :disabled="isEditor"
                                     :readonly="isEditor"></DatePicker>
                     </div>
@@ -147,7 +145,6 @@
                                     placeholder="选择时间"
                                     :editable="false"
                                     v-model="saleEnd"
-                                    :options="optionsE"
                                     :disabled="isEditor"
                                     :readonly="isEditor"></DatePicker>
                     </div>
@@ -196,7 +193,6 @@
             </div>
             <span v-if="canNext"></span>
         </div>
-        <span style="display: none">{{disableDate}}</span>
     </div>
 </template>
 

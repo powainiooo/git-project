@@ -18,17 +18,23 @@
         </view>
         <view class="line2">
             <view class="pro-item" catchtap="openDetail"
+                  data-id="{{item.pro_one.id}}"
+                  wx:if="{{item.pro_one != '0'}}"
                   hover-stop-propagation="true"
                   hover-class="pro-item-hover"
-                  hover-stay-time="50"><view class="frame"><image src="../../res/img/pics/pro1.png" mode="scaleToFill"></image></view></view>
+                  hover-stay-time="50"><view class="frame"><image src="{{imgSrc+item.pro_one.share_logo}}" mode="scaleToFill"></image></view></view>
             <view class="pro-item" catchtap="openDetail"
+                  wx:if="{{item.pro_two != '0'}}"
+                  data-id="{{item.pro_two.id}}"
                   hover-stop-propagation="true"
                   hover-class="pro-item-hover"
-                  hover-stay-time="50"><view class="frame"><image src="../../res/img/pics/pro2.png" mode="scaleToFill"></image></view></view>
+                  hover-stay-time="50"><view class="frame"><image src="{{imgSrc+item.pro_two.share_logo}}" mode="scaleToFill"></image></view></view>
             <view class="pro-item" catchtap="openDetail"
+                  wx:if="{{item.pro_three != '0'}}"
+                  data-id="{{item.pro_three.id}}"
                   hover-stop-propagation="true"
                   hover-class="pro-item-hover"
-                  hover-stay-time="50"><view class="frame"><image src="../../res/img/pics/pro3.png" mode="scaleToFill"></image></view></view>
+                  hover-stay-time="50"><view class="frame"><image src="{{imgSrc+item.pro_three.share_logo}}" mode="scaleToFill"></image></view></view>
         </view>
         <view class="line3">适用于：{{item.apply}}</view>
         <view class="icons icon-weixuan"></view>

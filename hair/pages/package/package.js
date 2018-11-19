@@ -36,10 +36,19 @@ Page({
     },
     //打开详情页
     openDetail(e){
+        let id = e.currentTarget.dataset.id;
         setTimeout(()=>{
-            this.setData({
-                showDetails:true
-            })
+            wx.request({
+                url:app.globalData.ajaxSrc+"product_info",
+                data:{id:id},
+                success:res=>{
+                    this.setData({
+                        proDetailData:res.data.data.info,
+                        showDetails:true
+                    })
+                }
+            });
+
         },150)
 
     },

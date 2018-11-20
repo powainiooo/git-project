@@ -11,7 +11,7 @@ App({
         wx.login({
             success: res => {
                 wx.request({
-                    url: self.globalData.ajaxSrc+'/get_weixin',
+                    url: self.globalData.ajaxSrc+'get_weixin',
                     data: {
                         code: res.code
                     },
@@ -35,7 +35,7 @@ App({
                                             }
 
                                             wx.request({
-                                                url:self.globalData.ajaxSrc+'/wxuser_add',
+                                                url:self.globalData.ajaxSrc+'wxuser_add',
                                                 data:{
                                                     openid:self.globalData.userOpenID,
                                                     country:res.userInfo.country,
@@ -78,7 +78,16 @@ App({
         imgSrc:'http://hair.pc-online.cc/upload/',
         storeId:1,
         selectDate:'',
-        selectTime:''
+        selectTime:'',
+        gid:0,
+        one_id:0,
+        two_id:0,
+        three_id:0,
+        buyerInfo:{
+            name:'',
+            mobile:'',
+            sex:''
+        }
     }
 });
 

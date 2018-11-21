@@ -77,10 +77,14 @@ Page({
         if(this.data.step == 3){
             if(this.data.selectedID[2] == -1){
                 wx.showToast({
-                    title:'请选择套餐',
+                    title:'请选择产品',
                     icon:'none'
                 })
             }else{
+                app.globalData.gid = 0;
+                app.globalData.one_id = this.data.selectedID[0];
+                app.globalData.two_id = this.data.selectedID[1];
+                app.globalData.three_id = this.data.selectedID[2];
                 wx.navigateTo({
                     url: '/pages/information/information'
                 })
@@ -88,7 +92,7 @@ Page({
         }else{
             if(this.data.selectedID[this.data.step-1] == -1){
                 wx.showToast({
-                    title:'请选择套餐',
+                    title:'请选择产品',
                     icon:'none'
                 })
             }else{

@@ -8,8 +8,8 @@
         <view class="title">{{item.title}}</view>
         <view class="address">{{item.address}}</view>
         <view class="btns">
-            <view class="icons icon-weixuan" data-id="{{item.id}}" bindtap="doSelect"></view>
-            <view class="icons icon-xuanzhong" data-id="{{item.id}}" bindtap="doCancel"></view>
+            <view class="icons icon-weixuan" data-store="{{item}}" data-id="{{item.id}}" bindtap="doSelect"></view>
+            <view class="icons icon-xuanzhong"></view>
             <view class="btn-map" data-lnglat="{{m1.lnglat(item.longitude,item.latitude)}}" bindtap="openMap" hover-class="btn-map-hover" hover-stay-time="50">查看地图</view>
         </view>
     </view>

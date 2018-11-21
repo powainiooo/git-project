@@ -25,9 +25,20 @@ Page({
     },
     //下一步
     doNext(){
-        wx.navigateTo({
-            url: '/pages/information/information'
-        })
+        if(this.data.selectedId == -1){
+            wx.showToast({
+                title:'请选择套餐',
+                icon:'none'
+            })
+        }else{
+            app.globalData.gid = this.data.selectedId;
+            app.globalData.one_id = 0;
+            app.globalData.two_id = 0;
+            app.globalData.three_id = 0;
+            wx.navigateTo({
+                url: '/pages/information/information'
+            })
+        }
     },
     gotoSelect(){
         wx.navigateTo({

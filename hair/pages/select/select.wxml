@@ -24,8 +24,10 @@
         <view class="goods-page">
             <view wx:for="{{cleanList}}"
                   wx:for-item="item"
+                  wx:for-index="index"
                   wx:key="{{item.id}}"
                   data-id="{{item.id}}"
+                  data-index="{{index}}"
                   data-price="{{item.price}}"
                   bindtap="doSelectClean"
                   hover-class="list-item-hover"
@@ -45,8 +47,10 @@
         <view class="goods-page">
             <view wx:for="{{conditionerList}}"
                   wx:for-item="item"
+                  wx:for-index="index"
                   wx:key="{{item.id}}"
                   data-id="{{item.id}}"
+                  data-index="{{index}}"
                   data-price="{{item.price}}"
                   bindtap="doSelectConditioner"
                   class="list-item {{selectedID[1] == item.id ? 'list-item-selected' : ''}}">
@@ -64,8 +68,10 @@
         <view class="goods-page">
             <view wx:for="{{treatmentList}}"
                   wx:for-item="item"
+                  wx:for-index="index"
                   wx:key="{{item.id}}"
                   data-id="{{item.id}}"
+                  data-index="{{index}}"
                   data-price="{{item.price}}"
                   bindtap="doSelectTreatment"
                   class="list-item {{selectedID[2] == item.id ? 'list-item-selected' : ''}}">

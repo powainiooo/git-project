@@ -8,6 +8,7 @@ Page({
     data: {
         selectTime:'',
         selectDate:'',
+        selectWeek:'',
         dateList:[],
         timeList:[]
     },
@@ -24,6 +25,7 @@ Page({
     doNext(){
         app.globalData.selectDate = this.data.selectDate;
         app.globalData.selectTime = this.data.selectTime;
+        app.globalData.selectWeek = this.data.selectWeek;
         wx.navigateTo({
             url: '/pages/package/package'
         })
@@ -50,7 +52,7 @@ Page({
         wx.request({
             url:app.globalData.ajaxSrc+"working_time",
             data:{
-                shop_id:app.globalData.storeId,
+                shop_id:app.globalData.store.id,
                 date:'2018-11-15'
             },
             success:res=>{
@@ -62,7 +64,8 @@ Page({
     },
     changeDay(e){
         let date = e.currentTarget.dataset.date;
-        this.data.selectDate = date;
+        this.data.selectDate = date.date;
+        this.data.selectWeek = date.week;
         this.getTime(date);
     },
     /**

@@ -2,8 +2,10 @@
 <view class="container container-date">
     <view wx:for="{{listData}}"
           wx:for-item="item"
+          wx:for-index="index"
           wx:key="{{item.id}}"
           data-id="{{item.id}}"
+          data-index="{{index}}"
           data-price="{{item.price}}"
           bindtap="doselected"
           class="packages-item {{item.recom == '1' ? 'packages-item-recommond' : ''}} {{selectedId == item.id ? 'packages-item-selected' : ''}}"

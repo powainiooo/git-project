@@ -1,51 +1,63 @@
 <header-view>确认订单 | Order onfirmation</header-view>
 <view class="container">
     <view class="order-time">
-        <view class="year">2018</view>
+        <view class="year">{{m1.getStr(selectDate,0,4)}}</view>
         <view class="line">
             <view class="date">
-                <view class="month">08/</view>
+                <view class="month">{{m1.getStr(selectDate,5,7)}}/</view>
                 <view>
-                    <view class="day">26</view>
-                    <view class="week">周三</view>
+                    <view class="day">{{m1.getStr(selectDate,8,10)}}</view>
+                    <view class="week">{{selectWeek}}</view>
                 </view>
             </view>
-            <view class="time">21:45</view>
+            <view class="time">{{selectTime}}</view>
         </view>
     </view>
     <view class="store-item">
-        <view class="title">福田COCOPARK店</view>
-        <view class="address">深圳市福田区</view>
+        <view class="title">{{store.title}}</view>
+        <view class="address">{{store.address}}</view>
     </view>
     <view class="person-info">
-        <view>张三</view>
-        <view>13812341234</view>
+        <view>{{buyerInfo.name}}</view>
+        <view>{{buyerInfo.mobile}}</view>
     </view>
     <view class="packages-item">
         <view class="line1">
             <view>
-                <view class="name">Hair Basic package</view>
-                <view class="name">Hair 基础套餐</view>
+                <view class="name">{{proPackage.id == 0 ? 'Hair Optional package' : proPackage.english_name}}</view>
+                <view class="name">{{proPackage.id == 0 ? 'Hair 基础套餐' : proPackage.china_name}}</view>
             </view>
         </view>
         <view class="line2">
             <view class="pro-item" bindtap="doGetDetail"
+                  wx:if="{{proInfo[0].show}}"
+                  data-id="{{proInfo[0].id}}"
                   hover-stop-propagation="true"
                   hover-class="pro-item-hover"
-                  hover-stay-time="50"><view class="frame"><image src="../../res/img/pics/pro1.png" mode="scaleToFill"></image></view></view>
+                  hover-stay-time="50">
+                <view class="frame"><image src="{{proInfo[0].imgSrc}}" mode="scaleToFill"></image></view>
+            </view>
             <view class="pro-item" bindtap="doGetDetail"
+                  wx:if="{{proInfo[1].show}}"
+                  data-id="{{proInfo[1].id}}"
                   hover-stop-propagation="true"
                   hover-class="pro-item-hover"
-                  hover-stay-time="50"><view class="frame"><image src="../../res/img/pics/pro2.png" mode="scaleToFill"></image></view></view>
+                  hover-stay-time="50">
+                <view class="frame"><image src="{{proInfo[1].imgSrc}}" mode="scaleToFill"></image></view>
+            </view>
             <view class="pro-item" bindtap="doGetDetail"
+                  wx:if="{{proInfo[2].show}}"
+                  data-id="{{proInfo[2].id}}"
                   hover-stop-propagation="true"
                   hover-class="pro-item-hover"
-                  hover-stay-time="50"><view class="frame"><image src="../../res/img/pics/pro2.png" mode="scaleToFill"></image></view></view>
+                  hover-stay-time="50">
+                <view class="frame"><image src="{{proInfo[2].imgSrc}}" mode="scaleToFill"></image></view>
+            </view>
         </view>
     </view>
 </view>
 <footer-view showPrice bindbtn="doNext" btnColor="{{btnColor}}">
-    <view slot="price">50</view>
+    <view slot="price">{{price}}</view>
     <view slot="btn" wx:if="{{!showRule}}">确认 | Confirm</view>
     <view slot="btn" wx:if="{{showRule}}">付款 | Payment</view>
 </footer-view>
@@ -61,4 +73,11 @@
     </view>
 </view>
 <!--pro detail-->
-<detail-view showDetails="{{showDetails}}"></detail-view>
+<detail-view showDetails="{{showDetails}}" prodata="{{proDetailData}}"></detail-view>
+
+<wxs module="m1">
+    function getStr(str,start,end){
+        return str.slice(start,end)
+    }
+    module.exports.getStr = getStr;
+</wxs>

@@ -11,12 +11,14 @@ Page({
         selectedPrice:0,
         showDetails:false,
         imgSrc:app.globalData.imgSrc,
-        proDetailData:{}
+        proDetailData:{},
+        selectedIndex:0
     },
     doselected(e){
         setTimeout(()=>{
             let id = e.currentTarget.dataset.id;
             let price = e.currentTarget.dataset.price;
+            this.data.selectedIndex = e.currentTarget.dataset.index;
             this.setData({
                 selectedId:id,
                 selectedPrice:price
@@ -31,10 +33,10 @@ Page({
                 icon:'none'
             })
         }else{
-            app.globalData.gid = this.data.selectedId;
-            app.globalData.one_id = 0;
-            app.globalData.two_id = 0;
-            app.globalData.three_id = 0;
+            app.globalData.proPackage = this.data.listData[this.data.selectedIndex];
+            app.globalData.proClean.id = 0;
+            app.globalData.proConditioner.id = 0;
+            app.globalData.proTreatment.id = 0;
             wx.navigateTo({
                 url: '/pages/information/information'
             })
@@ -59,9 +61,7 @@ Page({
                     })
                 }
             });
-
         },150)
-
     },
     /**
      * 生命周期函数--监听页面加载

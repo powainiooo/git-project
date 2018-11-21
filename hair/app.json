@@ -1,12 +1,12 @@
 {
   "pages": [
-    "pages/date/date",
-    "pages/information/information",
     "pages/order/confirm",
-    "pages/package/package",
     "pages/select/select",
-    "pages/index/index",
+    "pages/package/package",
+    "pages/date/date",
     "pages/store/store",
+    "pages/information/information",
+    "pages/index/index",
     "pages/package/personal",
     "pages/package/editor",
     "pages/order/notuse",

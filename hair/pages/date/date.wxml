@@ -2,7 +2,7 @@
 <view class="container container-date">
     <view class="date-list">
         <view class="item"
-              data-date="{{item.date}}"
+              data-date="{{item}}"
               bindtap="changeDay"
               wx:for="{{dateList}}"
               wx:for-item="item"

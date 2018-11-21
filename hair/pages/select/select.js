@@ -10,6 +10,7 @@ Page({
         step:1,
         selectedID:[-1,-1,-1],
         selectedPrice:[0,0,0],
+        selectedIndex:[0,0,0],
         cleanList:[],
         conditionerList:[],
         treatmentList:[],
@@ -29,13 +30,17 @@ Page({
         setTimeout(()=>{
             let id = e.currentTarget.dataset.id;
             let price = e.currentTarget.dataset.price;
+            let index = e.currentTarget.dataset.index;
             let arr = this.data.selectedID;
             let arr2 = this.data.selectedPrice;
+            let arr3 = this.data.selectedIndex;
             arr[0] = id;
             arr2[0] = parseFloat(price);
+            arr3[0] = index;
             this.setData({
                 selectedID:arr,
-                selectedPrice:arr2
+                selectedPrice:arr2,
+                selectedIndex:arr3
             })
         },150)
 
@@ -45,13 +50,17 @@ Page({
         setTimeout(()=>{
             let id = e.currentTarget.dataset.id;
             let price = e.currentTarget.dataset.price;
+            let index = e.currentTarget.dataset.index;
             let arr = this.data.selectedID;
             let arr2 = this.data.selectedPrice;
+            let arr3 = this.data.selectedIndex;
             arr[1] = id;
             arr2[1] = parseFloat(price);
+            arr3[1] = index;
             this.setData({
                 selectedID:arr,
-                selectedPrice:arr2
+                selectedPrice:arr2,
+                selectedIndex:arr3
             })
         },150)
 
@@ -61,13 +70,17 @@ Page({
         setTimeout(()=>{
             let id = e.currentTarget.dataset.id;
             let price = e.currentTarget.dataset.price;
+            let index = e.currentTarget.dataset.index;
             let arr = this.data.selectedID;
             let arr2 = this.data.selectedPrice;
+            let arr3 = this.data.selectedIndex;
             arr[2] = id;
             arr2[2] = parseFloat(price);
+            arr3[2] = index;
             this.setData({
                 selectedID:arr,
-                selectedPrice:arr2
+                selectedPrice:arr2,
+                selectedIndex:arr3
             })
         },150)
 
@@ -81,10 +94,10 @@ Page({
                     icon:'none'
                 })
             }else{
-                app.globalData.gid = 0;
-                app.globalData.one_id = this.data.selectedID[0];
-                app.globalData.two_id = this.data.selectedID[1];
-                app.globalData.three_id = this.data.selectedID[2];
+                app.globalData.proPackage.id = {};
+                app.globalData.proClean = this.data.cleanList[this.data.selectedIndex[0]];
+                app.globalData.proConditioner = this.data.conditionerList[this.data.selectedIndex[1]];
+                app.globalData.proTreatment = this.data.treatmentList[this.data.selectedIndex[2]];
                 wx.navigateTo({
                     url: '/pages/information/information'
                 })

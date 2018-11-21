@@ -76,7 +76,7 @@ App({
         userInfo: null,
         ajaxSrc:'http://hair.pc-online.cc/mobile/applet/',
         imgSrc:'http://hair.pc-online.cc/upload/',
-        storeId:1,
+        store:{},
         selectDate:'',
         selectTime:'',
         gid:0,

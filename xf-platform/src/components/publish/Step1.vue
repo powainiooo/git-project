@@ -245,7 +245,7 @@
                 return img
             },
             phoneDisable(){
-                let isPhone = /^((0\d{2,3}-\d{7,8})|(1[3584]\d{9}))$/;
+                let isPhone = /^((0\d{2,3}-\d{7,8})|(1[345678]\d{9}))$/;
                 let isMob=/^(130|131|132|133|134|135|136|137|138|139)\d{8}$/;
                 if(isPhone.test(this.formData.mobile) || isMob.test(this.formData.mobile)){
                     return true

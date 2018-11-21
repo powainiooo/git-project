@@ -14,16 +14,16 @@
     <view wx:for="{{timeList}}"
           wx:for-item="item"
           wx:key="{{item}}"
-            class="time-item {{selectTime == item ? 'time-item-selected':''}}"
-            data-index="{{item}}"
+            class="time-item {{selectTime == item.time ? 'time-item-selected':''}} {{item.reserved == '1' ? 'time-item-disabled' : ''}}"
+            data-index="{{item.time}}"
             bindtap="doselect"
             hover-class="time-item-hover"
             hover-stay-time="50">
         <view class="icons icon-weixuan"></view>
         <view class="icons icon-xuanzhong"></view>
         <view>
-            <view class="time">{{item}}</view>
-            <view class="end">预计结束时间{{m1.getTime(item)}}</view>
+            <view class="time">{{item.time}}</view>
+            <view class="end">预计结束时间{{m1.getTime(item.time)}}</view>
         </view>
     </view>
     <!--<view class="time-item time-item-disabled">-->

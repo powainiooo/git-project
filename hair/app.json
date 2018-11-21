@@ -1,10 +1,10 @@
 {
   "pages": [
+    "pages/date/date",
     "pages/information/information",
     "pages/order/confirm",
     "pages/package/package",
     "pages/select/select",
-    "pages/date/date",
     "pages/index/index",
     "pages/store/store",
     "pages/package/personal",

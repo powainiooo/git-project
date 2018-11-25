@@ -73,7 +73,8 @@ Page({
         wx.request({
             url:app.globalData.ajaxSrc+"group_list",
             data:{
-                keyword:''
+                keyword:'',
+                shop_id:app.globalData.store.id
             },
             success:res=>{
                 this.setData({

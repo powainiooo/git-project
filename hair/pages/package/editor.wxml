@@ -16,19 +16,20 @@
     </view>
     <!--清洁列表-->
     <view>
-        <view wx:for="{{cleanList}}"
+        <view wx:for="{{listData}}"
               wx:for-item="item"
               wx:key="{{item.id}}"
               data-id="{{item.id}}"
+              data-price="{{item.price}}"
               bindtap="doSelectClean"
-              class="list-item {{selectedID[0] == item.id ? 'list-item-selected' : ''}}"
+              class="list-item {{selectedID == item.id ? 'list-item-selected' : ''}}"
               hover-class="list-item-hover"
               hover-stay-time="50">
-            <image src="../../res/img/pics/pro5.png" mode="scaleToFill" class="img"></image>
-            <view class="name">shampoo</view>
-            <view class="name" style="margin-bottom: 30rpx;">洗发水</view>
-            <view class="decs">蜂蜜及天然萃取精华</view>
-            <view class="tips"><text>适用于\n中性至敏感性</text></view>
+            <image src="{{imgSrc+item.cover}}" mode="scaleToFill" class="img"></image>
+            <view class="name">{{item.english_name}}</view>
+            <view class="name" style="margin-bottom: 30rpx;">{{item.china.name}}</view>
+            <view class="decs">{{item.intro}}</view>
+            <view class="tips"><text>适用于\n{{item.apply}}</text></view>
             <view class="price">+6元</view>
             <view class="icons icon-weixuan"></view>
             <view class="icons icon-xuanzhong"></view>
@@ -36,6 +37,6 @@
     </view>
 </view>
 <footer-view showPrice bindbtn="doNext">
-    <view slot="price">50</view>
-    <view slot="btn">下一步 | Next</view>
+    <view slot="price">{{price}}</view>
+    <view slot="btn">确认 | Confirm</view>
 </footer-view>

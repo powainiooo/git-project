@@ -1,4 +1,5 @@
 // pages/result/result.js
+const app = getApp();
 Page({
 
     /**
@@ -9,7 +10,7 @@ Page({
     },
     doNext(){
         wx.navigateTo({
-            url: '/pages/order/notuse'
+            url: '/pages/order/notuse?orderNum='+app.globalData.orderNum
         })
     },
     gotoIndex(){

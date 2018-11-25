@@ -34,4 +34,5 @@
 .tips-frame text{ font-size: 30rpx; line-height: 1.8; letter-spacing: 4rpx; color: #9e9c9d;}
 
 .code-frame{ margin:120rpx 60rpx 60rpx 60rpx; display: flex; justify-content: space-between; align-items: center; font-size: 100rpx; font-family: 'Helve';text-shadow: 0 0 3px rgba(55,44,30,0.25);}
+.code-frame text{ letter-spacing:20rpx;}
 .code-frame image{ width: 200rpx; height: 200rpx;}

@@ -63,6 +63,7 @@ Page({
     },
     doNext(){
         if(this.data.showRule){
+            wx.showNavigationBarLoading();
             let obj = {},gb = app.globalData;
             obj.openid = gb.userOpenID;
             if(gb.proPackage.id == 0){
@@ -78,22 +79,62 @@ Page({
             obj.name = gb.buyerInfo.name;
             obj.mobile = gb.buyerInfo.mobile;
             obj.sex = gb.buyerInfo.sex;
+            obj.date = gb.selectDate;
+            obj.worktime = gb.selectTime;
             wx.request({
                 url:app.globalData.ajaxSrc+"create_order",
                 data:obj,
                 success:res=>{
-                    console.log(res.data)
+                    let jsapi = res.data.jsapiparam;
+                    let order_num = res.data.order_num;
+                    app.globalData.orderNum = res.data.order_num;
+                    wx.requestPayment({
+                        'timeStamp': jsapi.timeStamp,
+                        'nonceStr': jsapi.nonceStr,
+                        'package': jsapi.package,
+                        'signType': jsapi.signType,
+                        'paySign': jsapi.paySign,
+                        'success':res=>{
+                            wx.showToast({
+                                title:'支付成功'
+                            });
+                            this.doBuySuccess(order_num);
+                        },
+                        'fail':function(res){
+                            wx.showToast({
+                                image:'../../res/img/warn.png',
+                                title:'支付失败'
+                            });
+                            wx.hideNavigationBarLoading();
+                        }
+                    })
                 }
             });
-            //wx.navigateTo({
-            //    url: '/pages/result/result'
-            //})
         }else{
             this.setData({
                 btnColor:'#d9c39f',
                 showRule:true
             })
         }
+    },
+    doBuySuccess(orderNum){
+        let self = this;
+        wx.request({
+            url:app.globalData.ajaxSrc+'/buy_success',
+            data:{
+                order_num:orderNum
+            },
+            success:res=>{
+                wx.navigateTo({
+                    url: '/pages/result/result?result=suc'
+                });
+            },
+            fail(){
+                //wx.reLaunch({
+                //    url: '/pages/error/error'
+                //})
+            }
+        })
     },
     hideRules(){
         this.setData({

@@ -1,16 +1,16 @@
 <header-view>订单详情 | Order details</header-view>
 <view class="container container-order">
     <view class="order-time">
-        <view class="year">2018</view>
+        <view class="year">{{year}}</view>
         <view class="line">
             <view class="date">
-                <view class="month">08/</view>
+                <view class="month">{{month}}/</view>
                 <view>
-                    <view class="day">26</view>
-                    <view class="week">周三</view>
+                    <view class="day">{{day}}</view>
+                    <view class="week">{{detailData.week || '--'}}</view>
                 </view>
             </view>
-            <view class="time">21:45</view>
+            <view class="time">{{detailData.worktime}}</view>
         </view>
     </view>
     <view class="store-item">
@@ -28,36 +28,39 @@
         <text>订单已结束，如有建议或不满之处，可填写客户反馈表，欢迎再次使用Hair。</text>
     </view>
     <view class="store-item">
-        <view class="title">福田COCOPARK店</view>
-        <view class="address">深圳市福田区</view>
+        <view class="title">{{detailData.shop.title}}</view>
+        <view class="address">{{detailData.shop.address}}</view>
     </view>
     <view class="person-info">
-        <view>张三</view>
-        <view>13812341234</view>
+        <view>{{detailData.name}}</view>
+        <view>{{detailData.mobile}}</view>
     </view>
     <view class="packages-item">
         <view class="line1">
             <view>
-                <view class="name">Hair Basic package</view>
-                <view class="name">Hair 基础套餐</view>
+                <view class="name">{{detailData.english_name}}</view>
+                <view class="name">{{detailData.china_name}}</view>
             </view>
         </view>
         <view class="line2">
             <view class="pro-item"
+                  data-id="{{detailData.pro_one.id}}"
                   bindtap="doGetDetail"
                   hover-class="pro-item-hover"
-                  hover-stay-time="50"><view class="frame"><image src="../../res/img/pics/pro1.png" mode="scaleToFill"></image></view></view>
+                  hover-stay-time="50"><view class="frame"><image src="{{imgSrc+detailData.pro_one.share_logo}}" mode="scaleToFill"></image></view></view>
             <view class="pro-item"
+                  data-id="{{detailData.pro_two.id}}"
                   bindtap="doGetDetail"
                   hover-class="pro-item-hover"
-                  hover-stay-time="50"><view class="frame"><image src="../../res/img/pics/pro2.png" mode="scaleToFill"></image></view></view>
+                  hover-stay-time="50"><view class="frame"><image src="{{imgSrc+detailData.pro_two.share_logo}}" mode="scaleToFill"></image></view></view>
             <view class="pro-item"
+                  data-id="{{detailData.pro_three.id}}"
                   bindtap="doGetDetail"
                   hover-class="pro-item-hover"
-                  hover-stay-time="50"><view class="frame"><image src="../../res/img/pics/pro3.png" mode="scaleToFill"></image></view></view>
+                  hover-stay-time="50"><view class="frame"><image src="{{imgSrc+detailData.pro_three.share_logo}}" mode="scaleToFill"></image></view></view>
         </view>
     </view>
 </view>
 
 <!--pro detail-->
-<detail-view showDetails="{{showDetails}}"></detail-view>
+<detail-view showDetails="{{showDetails}}" prodata="{{proDetailData}}"></detail-view>

@@ -8,7 +8,7 @@
             <view class="name" style="margin-bottom: 30rpx;">洗发水</view>
             <view class="decs">蜂蜜及天然萃取精华</view>
             <view class="tips"><text>适用于\n中性至敏感性</text></view>
-            <view class="icons icon-xiugai" bindtap="gotoList"></view>
+            <view class="icons icon-xiugai" data-type="1" bindtap="gotoList"></view>
         </view>
     </view>
     <!--润发列表-->
@@ -19,7 +19,7 @@
             <view class="name" style="margin-bottom: 30rpx;">洗发水</view>
             <view class="decs">蜂蜜及天然萃取精华</view>
             <view class="tips"><text>适用于\n中性至敏感性</text></view>
-            <view class="icons icon-xiugai" bindtap="gotoList"></view>
+            <view class="icons icon-xiugai" data-type="2" bindtap="gotoList"></view>
         </view>
     </view>
     <!--调理列表-->
@@ -30,7 +30,7 @@
             <view class="name" style="margin-bottom: 30rpx;">洗发水</view>
             <view class="decs">蜂蜜及天然萃取精华</view>
             <view class="tips"><text>适用于\n中性至敏感性</text></view>
-            <view class="icons icon-xiugai" bindtap="gotoList"></view>
+            <view class="icons icon-xiugai" data-type="3" bindtap="gotoList"></view>
         </view>
     </view>
     <view class="tips-frame">

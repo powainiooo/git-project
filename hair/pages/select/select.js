@@ -127,7 +127,10 @@ Page({
     getData(type){
         wx.request({
             url:app.globalData.ajaxSrc+"product_list",
-            data:{type:type},
+            data:{
+                type:type,
+                shop_id:app.globalData.store.id
+            },
             success:res=>{
                 const arr = ['cleanList','conditionerList','treatmentList'];
                 let obj = {};

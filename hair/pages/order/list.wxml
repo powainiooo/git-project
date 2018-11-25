@@ -5,22 +5,30 @@
           wx:for-item="item"
           wx:key="{{item}}"
           data-status="{{item.status}}"
+          data-num="{{item.order_num}}"
           bindtap="gotoDetail"
           hover-class="list-item-hover"
           hover-stay-time="50">
-        <view class="order-time {{item.status == 'used' ? 'order-time-used' : ''}} {{item.status == 'overdue' ? 'order-time-out' : ''}}">
+        <view class="order-time {{item.status == 'used' ? 'order-time-used' : ''}} {{item.status == 'over' ? 'order-time-out' : ''}}">
             <view></view>
-            <view class="year">2018</view>
+            <view class="year">{{m1.getStr(item.date,0,4)}}</view>
             <view class="line">
                 <view class="date">
-                    <view class="month">08/</view>
+                    <view class="month">{{m1.getStr(item.date,5,7)}}/</view>
                     <view>
-                        <view class="day">26</view>
-                        <view class="week">周三</view>
+                        <view class="day">{{m1.getStr(item.date,8,10)}}</view>
+                        <view class="week">{{item.week}}</view>
                     </view>
                 </view>
-                <view class="time">21:45</view>
+                <view class="time">{{item.worktime}}</view>
             </view>
         </view>
     </view>
 </view>
+
+<wxs module="m1">
+    function getStr(str,start,end){
+    return str.slice(start,end)
+    }
+    module.exports.getStr = getStr;
+</wxs>

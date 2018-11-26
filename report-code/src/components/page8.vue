@@ -3,14 +3,25 @@
     .page8-container .bg{ width: 100%; position: absolute; left: 0; bottom: 0; font-size: 0;}
     .page8-container .page-title{ width: 40.4%;}
 
-    .page8-container .phone{ width: 71%; position: absolute; bottom: 0; left: 0;}
+    .page8-container .phone{ width: 71%; position: absolute; bottom: 0; left: 0; transform-origin: 0 100%; font-size: 0; transform: rotateZ(90deg);}
+    .page8-container .show-phone{ transform: rotateZ(0deg); transition: transform 0.7s cubic-bezier(.39,.91,.77,1.04);}
 
     .page8-container .hint{ width: 100%; text-align: center; position: absolute; left: 0; bottom: 7%; font-size: 0.36rem; color: #333333; font-weight: bold;}
     .page8-container .hint span{ color: #2B5FD5;}
 
     .page8-container .c-car{ position: absolute; left: 20%; bottom: 23%;}
 
-    .page8-container .svg-frame{ width: 22%; position: absolute; top: 30%; right: 10%;}
+    .page8-container .svg-frame{ width: 22vw; height: 35vw; position: absolute; top: 30%; right: 10%;}
+    .page8-container .svg-container{ width: 100%; height: 0; position: absolute; bottom: 0; left: 0; overflow: hidden;}
+    .page8-container .svg-container svg{ width: 100%; position: absolute; bottom: 0; left: 0}
+    .page8-container .show-svg{ height: 100%; transition: height 0.4s ease-out;}
+    .page8-container .svg-frame .fly{ width: 20vw; position: absolute; top: 0%; left: 0; opacity: 0;}
+    .fly-anim{ animation: fly 1.5s ease-out;}
+    @keyframes fly {
+        0%{ transform: translate(50px,10px); opacity: 0;}
+        15%{ opacity: 1;}
+        100%{ transform: translate(-90vw,-10vw); opacity: 1;}
+    }
 </style>
 
 <template>
@@ -63,7 +74,6 @@
         </div>
         <div v-if="showName == 'share'">
             <div class="bg">
-                <!--<img src="@/assets/images/bg7.jpg">-->
                 <img src="../../static/images/bg7.jpg">
             </div>
             <div class="page-title"><img src="@/assets/images/title7.png"> </div>
@@ -74,12 +84,15 @@
             </div>
 
             <div class="svg-frame">
-                <svg width="100%" viewBox="0 0 170 270">
-                    <path class="st0" d="M0,0c0,0,170,47,162,170S0,290,0,290" stroke="#74a7bf" fill="none" stroke-width="2" stroke-dasharray="10 6"></path>
-                </svg>
+                <div class="svg-container" :class="{'show-svg':showSvg}">
+                    <svg width="100%" viewBox="0 0 170 270">
+                        <path class="st0" d="M0,0c0,0,170,47,162,170S0,290,0,290" stroke="#74a7bf" fill="none" stroke-width="2" stroke-dasharray="10 5"></path>
+                    </svg>
+                </div>
+                <div class="fly fly-anim"><img src="@/assets/images/fly.png"> </div>
             </div>
 
-            <div class="phone"><img src="../../static/images/phone1.png"> </div>
+            <div class="phone" :class="{'show-phone':showPhone}"><img src="../../static/images/phone1.png"> </div>
         </div>
 
     </section>
@@ -92,7 +105,8 @@
         components:{car},
         data(){
             return{
-
+                showSvg:false,
+                showPhone:false
             }
         },
         computed:{
@@ -101,7 +115,7 @@
             }
         },
         mounted(){
-
+            this.showPhone = true;
         },
         methods:{
 

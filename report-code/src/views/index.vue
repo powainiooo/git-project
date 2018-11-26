@@ -109,10 +109,10 @@
                 return false
             },
             p8Show(){
-                return true
+                return false
             },
             p9Show(){
-                return false
+                return true
             }
         },
         methods:{

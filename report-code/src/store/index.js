@@ -4,8 +4,8 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
     state:{
-        isLoading:false,
-        p8Name:'share'
+        isLoading:true,
+        p8Name:'control'
     },
     mutations:{
         setLoading(state,data){

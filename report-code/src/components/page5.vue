@@ -28,8 +28,8 @@
     <section class="page5-container">
         <div class="bg">
             <div class="moves">
-                <img src="../../static/images/bg5.jpg">
-                <img src="../../static/images/bg5.jpg">
+                <img src="/static/images/bg5.jpg">
+                <img src="/static/images/bg5.jpg">
             </div>
         </div>
 
@@ -69,15 +69,18 @@
                 treeTotal:0
             }
         },
-        mounted(){
-            this.setValues();
-        },
         methods:{
             setValues(){
                 TweenLite.to(this.$data,1,{co2Per:22});
                 TweenLite.to(this.$data,1,{tree:10});
                 TweenLite.to(this.$data,1,{co2Total:2012});
                 TweenLite.to(this.$data,1,{treeTotal:12.1});
+            },
+            resetValues(){
+                this.co2Per = 0;
+                this.tree = 0;
+                this.co2Total = 0;
+                this.treeTotal = 0;
             }
         },
         computed:{

@@ -9,7 +9,7 @@
 <template>
     <section class="page2-container">
         <div class="bg">
-            <img src="@/assets/images/bg2.jpg">
+            <img src="/static/images/bg2.jpg">
         </div>
         <div class="page-title"><img src="@/assets/images/title2.png"> </div>
 
@@ -30,17 +30,16 @@
         name: 'app',
         data(){
             return{
-                hours:0
+                hours:0,
+                chart:{}
             }
         },
         mounted(){
-            this.drawTable();
-            this.setValues();
+            this.chart = echarts.init(document.getElementById('chart1'));
         },
         methods:{
-            drawTable(){
-                let chart = echarts.init(document.getElementById('chart1'));
-                chart.setOption({
+            drawTable(data){
+                this.chart.setOption({
                     title:{text:'0-24小时出行分布',left:'center',bottom:'0',textStyle:{fontSize:14}},
                     grid:{top:'13%',borderColor:'#2B5FD5'},
                     xAxis: {
@@ -59,7 +58,7 @@
                         axisLine:{show:false}
                     },
                     series: [{
-                        data: [1, 2, 15, 20, 10, 6, 15],
+                        data: data,
                         type: 'line',
                         smooth: true,
                         lineStyle:{color:'#2B5FD5',shadowColor:'#ffffff',shadowBlur:0,shadowOffsetX:2},
@@ -83,7 +82,12 @@
                 })
             },
             setValues(){
+                this.drawTable([1, 2, 15, 20, 10, 6, 15]);
                 TweenLite.to(this.$data,1,{hours:2.5});
+            },
+            resetValues(){
+                this.hours = 0;
+                this.chart.clear()
             }
         },
         computed:{

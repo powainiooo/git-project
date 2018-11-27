@@ -23,15 +23,15 @@
         <transition enter-active-class="animated fadeIn">
         <swiper :options="swiperOption" ref="mySwiper" v-if="!showLoading">
             <!-- slides -->
-            <swiper-slide v-if="p1Show" page="page1"><page1></page1></swiper-slide>
-            <swiper-slide v-if="p2Show" page="page2"><page2></page2></swiper-slide>
-            <swiper-slide v-if="p3Show" page="page3"><page3></page3></swiper-slide>
-            <swiper-slide v-if="p4Show" page="page4"><page4></page4></swiper-slide>
-            <swiper-slide v-if="p5Show" page="page5"><page5></page5></swiper-slide>
-            <swiper-slide v-if="p6Show" page="page6"><page6></page6></swiper-slide>
-            <swiper-slide v-if="p7Show" page="page7"><page7></page7></swiper-slide>
-            <swiper-slide v-if="p8Show" page="page8"><page8></page8></swiper-slide>
-            <swiper-slide v-if="p9Show" page="page9"><page9></page9></swiper-slide>
+            <swiper-slide v-if="p1Show" page="page1" ref="page1"><page1></page1></swiper-slide>
+            <swiper-slide v-if="p2Show" page="page2" ref="page2"><page2></page2></swiper-slide>
+            <swiper-slide v-if="p3Show" page="page3" ref="page3"><page3></page3></swiper-slide>
+            <swiper-slide v-if="p4Show" page="page4" ref="page4"><page4></page4></swiper-slide>
+            <swiper-slide v-if="p5Show" page="page5" ref="page5"><page5></page5></swiper-slide>
+            <swiper-slide v-if="p6Show" page="page6" ref="page6"><page6></page6></swiper-slide>
+            <swiper-slide v-if="p7Show" page="page7" ref="page7"><page7></page7></swiper-slide>
+            <swiper-slide v-if="p8Show" page="page8" ref="page8"><page8></page8></swiper-slide>
+            <swiper-slide v-if="p9Show" page="page9" ref="page9"><page9></page9></swiper-slide>
         </swiper>
         </transition>
         <loading v-if="showLoading"></loading>
@@ -54,6 +54,10 @@
         components:{page1,page2,page3,page4,page5,page6,page7,page8,page9,Loading},
         mounted(){
             this.startTime = new Date().getTime();
+            setTimeout(()=>{
+                //this.currentPage = this.$refs.mySwiper.$children[0].$attrs.page;
+            },300)
+
         },
         data(){
             let self = this;
@@ -73,11 +77,13 @@
                                 window.stayTime[self.currentPage] = endTime - self.startTime;
                             }
                             self.startTime = endTime;
+                            self.$refs[self.currentPage].$children[0].resetValues();
                         },
                         slideChangeTransitionEnd(){
                             let pageName = self.$refs.mySwiper.$children[this.activeIndex].$attrs.page;
                             self.currentPage = pageName;
                             window.outPage = pageName;
+                            self.$refs[self.currentPage].$children[0].setValues();
                         }
                     }
                 }
@@ -88,28 +94,28 @@
                 return this.$store.state.isLoading
             },
             p1Show(){
-                return false
+                return true
             },
             p2Show(){
-                return false
+                return true
             },
             p3Show(){
-                return false
+                return true
             },
             p4Show(){
-                return false
+                return true
             },
             p5Show(){
-                return false
+                return true
             },
             p6Show(){
-                return false
+                return true
             },
             p7Show(){
-                return false
+                return true
             },
             p8Show(){
-                return false
+                return true
             },
             p9Show(){
                 return true

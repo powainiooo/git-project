@@ -18,7 +18,7 @@
     .keywords-list li:nth-child(11){ top:2.1rem; left: 60%; opacity: 0.2; transform: scale(0.42); animation-delay: 5s;}
     @keyframes keyword {
         0%,100%{transform: scale(0.42); opacity: 0.2;}
-        50%{transform: scale(0.9); opacity: 1;}
+        50%{transform: scale(0.7); opacity: 1;}
     }
 
     .page9-container .btn{ width: 50%; position: absolute; left: 25%; bottom: 6.7%;}
@@ -38,7 +38,7 @@
     <section class="page9-container">
         <div class="bg">
             <!--<img src="@/assets/images/bg7.jpg">-->
-            <img src="@/assets/images/bg9.jpg">
+            <img src="/static/images/bg9.jpg">
         </div>
         <div class="title"><img src="@/assets/images/title9.png"> </div>
 
@@ -58,6 +58,7 @@
 
         <div class="btn" @click="showStyle = true"><img src="@/assets/images/btn.png"></div>
 
+        <transition enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
         <div class="style-container" v-if="showStyle">
             <div class="style-frame">
                 <h3>选择风格</h3>
@@ -72,7 +73,7 @@
                 </div>
             </div>
         </div>
-
+        </transition>
         <poster ref="poster" :styleKey="styleKey"></poster>
     </section>
 </template>
@@ -85,13 +86,19 @@
         data(){
             return{
                 showStyle:false,
-                styleKey:2
+                styleKey:1
             }
         },
         mounted(){
-            this.doDraw();
+
         },
         methods:{
+            setValues(){
+
+            },
+            resetValues(){
+
+            },
             doDraw(){
                 this.$refs.poster.draw();
             }

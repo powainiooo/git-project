@@ -1,10 +1,10 @@
 <style>
     .page3-container{ height: 100vh; background-color: #EFF7FD;}
     .page3-container .bg{ width: 100%; position: absolute; left: 0; top: 45%; font-size: 0; overflow: hidden;}
-    .page3-container .bg .moves{ width: 200vw; display: flex; align-items: flex-start; animation: road 6s linear infinite;}
+    .page3-container .bg .moves{ width: 200vw; display: flex; align-items: flex-start; animation: road1 6s linear infinite;}
     .page3-container .bg .moves img{ width: 100vw;}
     .page3-container .page-title{ width: 39.7%;}
-    @keyframes road {
+    @keyframes road1 {
         0%{ transform: translate(0,0);}
         100%{ transform: translate(-100vw,0);}
     }
@@ -28,8 +28,8 @@
     <section class="page3-container">
         <div class="bg">
             <div class="moves">
-                <img src="@/assets/images/bg3.jpg">
-                <img src="@/assets/images/bg3.jpg">
+                <img src="/static/images/bg3.jpg">
+                <img src="/static/images/bg3.jpg">
             </div>
         </div>
         <div class="page-title"><img src="@/assets/images/title3.png"> </div>
@@ -59,18 +59,17 @@
             return{
                 miles:0,
                 birdIndex:0,
-                showBird:false
+                showBird:false,
+                chart:{}
             }
         },
         mounted(){
-            this.drawTable();
-            this.setValues();
+            this.chart = echarts.init(document.getElementById('chart2'));
             this.birdMove();
         },
         methods:{
             drawTable(){
-                let chart = echarts.init(document.getElementById('chart2'));
-                chart.setOption({
+                this.chart.setOption({
                     title:{text:'每月里程分布',left:'center',bottom:'0',textStyle:{fontSize:14}},
                     grid:{top:'13%',borderColor:'#2B5FD5'},
                     xAxis: {
@@ -114,9 +113,15 @@
             },
             setValues(){
                 TweenLite.to(this.$data,1,{miles:2511});
+                this.drawTable();
+                this.showBird = true;
+            },
+            resetValues(){
+                this.miles = 0;
+                this.chart.clear();
+                this.showBird = false;
             },
             birdMove(){
-                this.showBird = true;
                 setInterval(()=>{
                     this.birdIndex = this.birdIndex + 1 > 3 ? 0 : this.birdIndex + 1;
                 },130)

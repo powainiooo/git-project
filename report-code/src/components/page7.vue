@@ -75,7 +75,7 @@
 <template>
     <section class="page7-container">
         <div class="bg">
-            <img src="@/assets/images/bg7.jpg">
+            <img src="/static/images/bg7.jpg">
         </div>
         <div class="page-title"><img src="@/assets/images/title7.png"> </div>
 
@@ -109,13 +109,14 @@
                 times:0
             }
         },
-        mounted(){
-            this.showTags = true;
-            this.setValues();
-        },
         methods:{
             setValues(){
+                this.showTags = true;
                 TweenLite.to(this.$data,1,{times:100000});
+            },
+            resetValues(){
+                this.times = 0;
+                this.showTags = false;
             }
         },
         computed:{

@@ -22,7 +22,7 @@
 <template>
     <section class="page6-container">
         <div class="bg">
-            <img src="@/assets/images/bg6.jpg">
+            <img src="/static/images/bg6.jpg">
         </div>
         <div class="page-title"><img src="@/assets/images/title6.png"> </div>
 
@@ -63,9 +63,6 @@
                 timeEndMin:0
             }
         },
-        mounted(){
-            this.setValues();
-        },
         methods:{
             setValues(){
                 TweenLite.to(this.$data,1,{recharge:124});
@@ -75,6 +72,14 @@
                 TweenLite.to(this.$data,1,{timeStartMin:0});
                 TweenLite.to(this.$data,1,{timeEndHour:7});
                 TweenLite.to(this.$data,1,{timeEndMin:0});
+            },
+            resetValues(){
+                this.recharge = 0;
+                this.percent = 0;
+                this.timeStartHour = 0;
+                this.timeStartMin = 0;
+                this.timeEndHour = 0;
+                this.timeEndMin = 0;
             }
         },
         computed:{

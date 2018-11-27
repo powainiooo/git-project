@@ -16,7 +16,7 @@
 <template>
     <section class="page4-container">
         <div class="bg">
-            <img src="@/assets/images/bg4.jpg">
+            <img src="/static/images/bg4.jpg">
 
             <div class="value-frame value-frame-elec">
                 <p class="name">百公里平均电耗</p>
@@ -51,14 +51,16 @@
                 miles:0
             }
         },
-        mounted(){
-            this.setValues();
-        },
         methods:{
             setValues(){
                 TweenLite.to(this.$data,1,{elecValue:10.9});
                 TweenLite.to(this.$data,1,{gasValue:10.9});
                 TweenLite.to(this.$data,1,{miles:1.4});
+            },
+            resetValues(){
+                this.elecValue = 0;
+                this.gasValue = 0;
+                this.miles = 0;
             }
         },
         computed:{

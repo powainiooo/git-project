@@ -2,7 +2,7 @@
     .page1-container{ height: 100vh; background-color: #EFF7FD;}
     .page1-container .bg{ width: 100%; position: absolute; left: 0; bottom: 0; font-size: 0;}
     .page1-container .bg .cover{ position: absolute; left: 0; bottom: 0;}
-    .page1-container .bg .car{ width: 12%; position: absolute; left: 60%; bottom: 34%;}
+    .page1-container .bg .car{ width: 12%; position: absolute; left: 58%; bottom: 33%;}
 
     .page1-circle{ width: 80%; position: absolute; left: 10%; bottom: 6%; display: flex; justify-content: space-between;}
     .page1-circle li{ width: 22vw; height: 22vw; list-style: none;}
@@ -137,6 +137,12 @@
                 this.totalMiles = 0;
                 this.daysDrive = 0;
                 this.daysService = 0;
+                this.showCircle1 = false;
+                this.showCircle2 = false;
+                this.showCircle3 = false;
+                this.floatCircle1 = '';
+                this.floatCircle2 = '';
+                this.floatCircle3 = '';
             }
         },
         computed:{

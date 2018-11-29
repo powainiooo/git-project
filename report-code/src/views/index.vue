@@ -1,5 +1,14 @@
 <style>
     @import "../assets/animate.min.css";
+    * {
+        moz-user-select: -moz-none;
+        -moz-user-select: none;
+        -o-user-select: none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
     body{ background-color: #EFF7FD;}
     @font-face {
         font-family: 'quartz';
@@ -9,13 +18,21 @@
         font-style: normal;
     }
     .swiper-container{ height: 100vh; overflow: hidden;}
+    .swiper-container .swiper-slide{ overflow: hidden;}
 
     .page-title{ width: 30%; position: absolute; top: 5%; left: 10%;}
 
-    .page-context{ font-size: 0.4rem; color: #151515; position: absolute; left: 10%; top: 15%; font-family: Micro Yahei; z-index: 10;}
+    .page-context{ font-size: 0.4rem; color: #151515; position: absolute; left: 10%; top: 15%; font-family: "Micro Yahei", 'Avenir', Helvetica, Arial, sans-serif; z-index: 10;}
     .page-context p{ margin-bottom: 6px;}
     .page-context .tag1{ color: #2B5FD5; font-weight: bold;}
     .page-context .tag2{ color: #2B5FD5; font-size: 0.56rem; font-weight: bold;}
+
+    .next-arrow{ width: 8%; position: absolute; bottom: 0%; left: 50%; margin-left: -4%; animation: nextArrow 1.2s linear infinite; z-index: 12;}
+    @keyframes nextArrow {
+        0%{ transform: translate(0,0);}
+        40%{ transform: translate(0,-10px);}
+        80%,100%{ transform: translate(0,-10px); opacity: 0;}
+    }
 </style>
 
 <template>
@@ -53,11 +70,10 @@
         name: 'app',
         components:{page1,page2,page3,page4,page5,page6,page7,page8,page9,Loading},
         mounted(){
-            this.startTime = new Date().getTime();
+            window.intoPageStartTime = new Date().getTime();
             setTimeout(()=>{
-                //this.currentPage = this.$refs.mySwiper.$children[0].$attrs.page;
+                this.currentPage = this.$refs.mySwiper.$children[0].$attrs.page;
             },300)
-
         },
         data(){
             let self = this;
@@ -72,17 +88,17 @@
                         slideChangeTransitionStart(){
                             let endTime = new Date().getTime();
                             if(window.stayTime[self.currentPage]){
-                                window.stayTime[self.currentPage] += endTime - self.startTime;
+                                window.stayTime[self.currentPage] += endTime - window.intoPageStartTime;
                             }else{
-                                window.stayTime[self.currentPage] = endTime - self.startTime;
+                                window.stayTime[self.currentPage] = endTime - window.intoPageStartTime;
                             }
-                            self.startTime = endTime;
+                            window.intoPageStartTime = endTime;
                             self.$refs[self.currentPage].$children[0].resetValues();
                         },
                         slideChangeTransitionEnd(){
                             let pageName = self.$refs.mySwiper.$children[this.activeIndex].$attrs.page;
                             self.currentPage = pageName;
-                            window.outPage = pageName;
+                            window.outPage = pageName.replace('page','');
                             self.$refs[self.currentPage].$children[0].setValues();
                         }
                     }
@@ -94,10 +110,10 @@
                 return this.$store.state.isLoading
             },
             p1Show(){
-                return true
+                return false
             },
             p2Show(){
-                return true
+                return false
             },
             p3Show(){
                 return true

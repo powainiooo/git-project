@@ -1,7 +1,7 @@
 <style>
     .page5-container{ height: 100vh; background-color: #EFF7FD;}
     .page5-container .bg{ width: 100%; position: absolute; left: 0; bottom: 0; font-size: 0; overflow: hidden;}
-    .page5-container .bg .moves{ width: 400vw; display: flex; align-items: flex-start; animation: road 12s linear infinite;}
+    .page5-container .bg .moves{ width: 400vw; display: flex; align-items: flex-start; animation: road 14s linear infinite;}
     .page5-container .bg .moves img{ width: 200vw;}
     .page5-container .page-title{ width: 35.4%;}
     @keyframes road {
@@ -32,6 +32,7 @@
                 <img src="/static/images/bg5.jpg">
             </div>
         </div>
+        <div class="next-arrow"><img src="@/assets/images/nextpage.png"> </div>
 
         <div class="page-title"><img src="@/assets/images/title5.png"> </div>
 

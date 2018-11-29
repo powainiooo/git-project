@@ -1,12 +1,12 @@
 <style>
-    .poster-frame{ width: 100vw; height: 100vh; position: absolute; top: 0; left: 0; z-index: 600; font-size: 0; overflow: hidden;}
+    .poster-frame{ width: 100vw; height: 100vh; position: absolute; top: 0; left: 0; z-index: 600; font-size: 0; overflow-x: hidden; overflow-y: scroll;}
     .poster-frame canvas{ width: 100vw;}
-    .poster-frame .btns{ width: 100%; display: flex; justify-content: space-around;}
+    .poster-frame .btns{ width: 100%; display: flex; justify-content: space-around; margin-bottom: 15px;}
     .poster-frame .btns a{ width: 2.7rem; height: 0.8rem; border-radius: 30px; color: #FFFFFF; font-size: 0.36rem; display: flex; justify-content: center; align-items: center; background-color: #2B5FD5; text-decoration: none;}
 </style>
 
 <template>
-    <div class="poster-frame" v-show="showPoster" :style="{background:bgColor}">
+    <div class="poster-frame" v-show="showPoster" :style="{background:bgColor}" @touchmove.stop="touchmove">
         <canvas id="poster" width="750" height="1213"></canvas>
         <div class="btns">
             <a href="javascript:;" @click="showPoster = false">换个风格</a>
@@ -42,6 +42,7 @@
             }
         },
         methods:{
+            touchmove(){},
             draw(){
                 this.showPoster = true;
                 canvas = document.getElementById('poster');
@@ -49,6 +50,7 @@
                 let title = '/static/images/title10.png';
                 let colorArr = ['#efe9e1','#f0f9fe','#fff1fe'];
                 window.tagStyle = this.styleKey;
+                window.posterTimes += 1;
                 this.bgColor = colorArr[this.styleKey-1];
                 if(this.styleKey == 1){
                     title = '/static/images/title11.png';
@@ -170,7 +172,13 @@
                 }
             },
             doShare(){
-                window.posterimgData = canvas.toDataURL();
+                window.posterimgData = canvas.toDataURL().replace('data:image/png;base64,','');
+                let endTime = new Date().getTime();
+                if(window.stayTime['page'+window.outPage]){
+                    window.stayTime['page'+window.outPage] += endTime - window.intoPageStartTime;
+                }else{
+                    window.stayTime['page'+window.outPage] = endTime - window.intoPageStartTime;
+                }
                 window.location = '/doShare';
             },
             doError(){

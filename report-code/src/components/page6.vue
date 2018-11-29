@@ -1,6 +1,9 @@
 <style>
     .page6-container{ height: 100vh; background-color: #EFF7FD;}
     .page6-container .bg{ width: 100%; position: absolute; left: 0; bottom: 0; font-size: 0;}
+    .page6-container .bg .p6car{ width: 100vw; position: absolute; left: 0; top: 30%; z-index: 10;}
+    .page6-container .bg .wind1{ position: absolute; top:-5%; left: 26%;}
+    .page6-container .bg .wind2{ position: absolute; top:-5%; left: 68%;}
     .page6-container .page-title{ width: 35.4%;}
 
     .page6-container .cloud1{ width: 8%; position: absolute; top: 15%; left: 100%; animation: cloud 50s linear infinite ;}
@@ -23,7 +26,12 @@
     <section class="page6-container">
         <div class="bg">
             <img src="/static/images/bg6.jpg">
+            <img src="@/assets/images/p6car.png" class="p6car">
+
+            <windmill class="wind1"></windmill>
+            <windmill class="wind2"></windmill>
         </div>
+        <div class="next-arrow"><img src="@/assets/images/nextpage.png"> </div>
         <div class="page-title"><img src="@/assets/images/title6.png"> </div>
 
         <div class="page-context">
@@ -50,8 +58,10 @@
 </template>
 
 <script type='es6'>
+    import windmill from '@/components/windmill.vue'
     export default {
         name: 'app',
+        components:{windmill},
         data(){
             return{
                 recharge:0,

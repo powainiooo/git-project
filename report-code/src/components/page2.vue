@@ -11,6 +11,7 @@
         <div class="bg">
             <img src="/static/images/bg2.jpg">
         </div>
+        <div class="next-arrow"><img src="@/assets/images/nextpage.png"> </div>
         <div class="page-title"><img src="@/assets/images/title2.png"> </div>
 
         <div class="page-context">
@@ -36,6 +37,7 @@
         },
         mounted(){
             this.chart = echarts.init(document.getElementById('chart1'));
+            //this.setValues();
         },
         methods:{
             drawTable(data){
@@ -46,13 +48,14 @@
                         type: 'category',
                         axisTick:{show:false},
                         axisLine:{lineStyle:{color:'#2B5FD5'}},
+                        boundaryGap:false,
                         data: ['0', '4', '8', '12', '16', '20', '24(h)']
                     },
+                    graphic:[{type:'text',style:{text:'(%)',fill:'#2B5FD5',x:14}}],
                     yAxis: {
                         type: 'value',
-                        name:'(%)',
-                        nameTextStyle:{color:'#2B5FD5'},
                         axisLabel:{color:'#2B5FD5'},
+                        boundaryGap:['5%','5%'],
                         splitLine:{lineStyle:{color:'#2B5FD5'}},
                         axisTick:{show:false},
                         axisLine:{show:false}

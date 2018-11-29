@@ -15,17 +15,23 @@
             return null;
         }
         let getParams = {};
-        getParams.identifier = getQueryString('identifier') || 'LC0TEST2583691470';
-        getParams.loginType = getQueryString('loginType') || 0;
-        getParams.availableData = getQueryString('availableData') || 'asdfsdaf';
+        getParams.vin = getQueryString('vin') || 'LC0TEST2583691470';
+        getParams.userName = getQueryString('userName') || 0;
+        getParams.carType = getQueryString('carType') || 'asdfsdaf';
         //所有页停留时间
         var stayTime = {};
         //当前页
-        var outPage = 'page1';
+        var outPage = '1';
         //所选风格
-        var tagStyle = 'wangjiawei';
+        var tagStyle = 100;
         //图片资源
         var posterimgData = '';
+        //生成小传次数
+        var posterTimes = 0;
+        //进入页面开始时间
+        var intoPageStartTime = 0;
+        //接口错误数据
+        var errorData = {};
 
         //设置fontSize
         (function (doc, win) {
@@ -49,3 +55,7 @@
 <!-- ?identifier=LC0TEST2583691470&loginType=0&availableData=asd -->
 </body>
 </html>
+<!--
+    http://10.9.32.19:8080/nianbao
+    https://webtestservice.bydauto.com.cn:5018/nianbao
+-->

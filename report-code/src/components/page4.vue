@@ -29,6 +29,7 @@
                 <p class="unit">L</p>
             </div>
         </div>
+        <div class="next-arrow"><img src="@/assets/images/nextpage.png"> </div>
         <div class="page-title"><img src="@/assets/images/title4.png"> </div>
 
         <div class="page-context">

@@ -6,7 +6,7 @@
 
     .page1-circle{ width: 80%; position: absolute; left: 10%; bottom: 6%; display: flex; justify-content: space-between;}
     .page1-circle li{ width: 22vw; height: 22vw; list-style: none;}
-    .page1-circle li div{ width: 100%; height: 100%; border: 2px solid #46B3E9; border-radius: 50%; background-color: rgba(255,255,255,0.5); display: flex; justify-content: center; align-items: center; flex-direction: column; font-size: 0.24rem; color: #333333;}
+    .page1-circle li div{ width: 100%; height: 100%; border: 2px solid #46B3E9; border-radius: 50%; background-color: rgba(255,255,255,0.5); display: flex; justify-content: center; align-items: center; flex-direction: column; font-size: 0.24rem; color: #333333; line-height: 1.1; padding-top: 0.16rem; box-sizing: border-box;}
     .page1-circle li span{ font-size: 0.46rem; color: #2B5FD5;}
     .page1-circle li:nth-child(1) div{ margin-top: -1vw;}
     .page1-circle li:nth-child(2) div{ margin-top: -10vw; border-color: #EBA729;}
@@ -59,6 +59,8 @@
             <img src="@/assets/images/car1.png" class="car">
             <img src="/static/images/bgCover1.png" class="cover">
         </div>
+
+        <div class="next-arrow"><img src="@/assets/images/nextpage.png"> </div>
 
         <div class="page-title"><img src="@/assets/images/title1.png"> </div>
 

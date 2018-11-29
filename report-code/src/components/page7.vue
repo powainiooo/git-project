@@ -77,6 +77,7 @@
         <div class="bg">
             <img src="/static/images/bg7.jpg">
         </div>
+        <div class="next-arrow"><img src="@/assets/images/nextpage.png"> </div>
         <div class="page-title"><img src="@/assets/images/title7.png"> </div>
 
         <div class="page-context">

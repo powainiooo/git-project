@@ -1,10 +1,15 @@
 <style>
     .page8-container{ height: 100vh; background-color: #EFF7FD;}
     .page8-container .bg{ width: 100%; position: absolute; left: 0; bottom: 0; font-size: 0;}
+    .page8-container .bg>img{ position: relative;}
+    .page8-container .bg .wind1{ position: absolute; top:-30%; left: 16%;}
+    .page8-container .bg .wind2{ position: absolute; top:-30%; left: 78%;}
     .page8-container .page-title{ width: 40.4%;}
 
-    .page8-container .phone{ width: 71%; position: absolute; bottom: 0; left: 0; transform-origin: 0 100%; font-size: 0; transform: rotateZ(90deg);}
+    .page8-container .phone{ width: 71%; position: absolute; bottom: 0; left: 0; z-index: 20; transform-origin: 0 100%; font-size: 0; transform: rotateZ(90deg);}
     .page8-container .show-phone{ transform: rotateZ(0deg); transition: transform 0.7s cubic-bezier(.39,.91,.77,1.04);}
+    .page8-container .phone .print{ width: 7vw; position: absolute; top: 30%; right: 25.6%;}
+    .page8-container .phone .print .cover{ height: 0%; position: absolute; top: 0; left: 0; overflow: hidden; transition: height 1s linear;}
 
     .page8-container .hint{ width: 100%; text-align: center; position: absolute; left: 0; bottom: 7%; font-size: 0.36rem; color: #333333; font-weight: bold;}
     .page8-container .hint span{ color: #2B5FD5;}
@@ -21,7 +26,15 @@
     @keyframes fly {
         0%{ transform: translate(50px,10px); opacity: 0;}
         15%{ opacity: 1;}
-        100%{ transform: translate(-90vw,-10vw); opacity: 1;}
+        100%{ transform: translate(-90vw,-20vw); opacity: 1;}
+    }
+
+    .page8-container .half-car{ width: 12vw; position: absolute; top: 12%; right: 0; z-index: 11;}
+    .page8-container .half-car .shine{ width: 100%; position: absolute; left: 0; top: 0; opacity: 0;}
+    .page8-container .half-car .do-shine{ animation: shine 0.5s linear 3;}
+    @keyframes shine {
+        0%,100%{ opacity: 0;}
+        50%{ opacity: 1;}
     }
 </style>
 
@@ -30,7 +43,12 @@
         <div v-if="showName == 'control'">
             <div class="bg">
                 <!--<img src="@/assets/images/bg7.jpg">-->
-                <img src="/static/images/bg7.jpg">
+                <img src="/static/images/bg8-3.jpg">
+
+                <div class="half-car">
+                    <img src="@/assets/images/car-normal.png">
+                    <img src="@/assets/images/car-shine.png" class="shine" :class="{'do-shine':showShine}">
+                </div>
             </div>
             <div class="page-title"><img src="@/assets/images/title7.png"> </div>
 
@@ -39,7 +57,13 @@
                 <p>你使用车门解锁<span class="tag1">{{animTimes}}</span>次，<span class="tag1">有底气</span></p>
             </div>
 
-            <div class="phone"  :class="{'show-phone':showPhone}"><img src="/static/images/phone3.png"> </div>
+            <div class="phone"  :class="{'show-phone':showPhone}">
+                <img src="/static/images/phone3.png">
+                <div class="print">
+                    <img src="@/assets/images/print.png">
+                    <div class="cover" :style="{height:showCover ? '100%' : '0'}"><img src="@/assets/images/print-cover.png"></div>
+                </div>
+            </div>
         </div>
         <div v-if="showName == 'infos'">
             <div class="bg">
@@ -68,9 +92,12 @@
 
             <div class="svg-frame">
                 <div class="svg-container" :class="{'show-svg':showSvg}">
-                    <svg width="100%" viewBox="0 0 170 270">
-                        <path class="st0" d="M0,0c0,0,170,47,162,170S0,290,0,290" stroke="#74a7bf" fill="none" stroke-width="2" stroke-dasharray="10 5"></path>
-                    </svg>
+                    <transition leave-active-class="animated fadeOut">
+                        <svg width="100%" viewBox="0 0 168.4 268" v-if="showSvgLine">
+                            <path class="st0" d="M0,0c0,0,128.7,28,160,107c34,85.8-44.6,153.4-63,161" stroke="#74a7bf" fill="none" stroke-width="2" stroke-dasharray="10 5"></path>
+                        </svg>
+                    </transition>
+
                 </div>
                 <div class="fly" :class="{'fly-anim':showFly}"><img src="@/assets/images/fly.png"> </div>
             </div>
@@ -80,7 +107,11 @@
         <div v-if="showName == 'order'">
             <div class="bg">
                 <!--<img src="@/assets/images/bg7.jpg">-->
-                <img src="/static/images/bg8.jpg">
+                <div style="position: relative; font-size: 0; overflow: hidden;">
+                    <img src="/static/images/bg8.jpg">
+                    <skywheel></skywheel>
+                </div>
+                <img src="/static/images/bg8-1.jpg">
             </div>
             <div class="page-title"><img src="@/assets/images/title7.png"> </div>
 
@@ -98,21 +129,44 @@
 
             <car :scale="0.5" :class="{'c-car-active':showCar}" :driving="driving"></car>
         </div>
+        <div v-if="showName == 'elec'">
+            <div class="bg">
+                <!--<img src="@/assets/images/bg7.jpg">-->
+                <img src="/static/images/bg8-2.png" style="z-index: 10;">
+
+                <windmill class="wind1" :scale="0.8"></windmill>
+                <windmill class="wind2" :scale="0.8"></windmill>
+            </div>
+            <div class="page-title"><img src="@/assets/images/title7.png"> </div>
+
+            <div class="page-context">
+                <p>全年查看电桩<span class="tag2">{{animTimes}}</span>次</p>
+                <p>追求便利，过<span class="tag1">有态度</span>的生活</p>
+            </div>
+
+            <div class="phone"  :class="{'show-phone':showPhone}"><img src="/static/images/phone4.png"> </div>
+        </div>
+        <div class="next-arrow"><img src="@/assets/images/nextpage.png"> </div>
     </section>
 </template>
 
 <script type='es6'>
     import car from '@/components/car.vue'
+    import windmill from '@/components/windmill.vue'
+    import skywheel from '@/components/skywheel.vue'
     export default {
         name: 'app',
-        components:{car},
+        components:{car,windmill,skywheel},
         data(){
             return{
                 showSvg:false,
                 showPhone:false,
                 showCar:false,
                 showFly:false,
+                showCover:false,
+                showShine:false,
                 driving:true,
+                showSvgLine:true,
                 times:0
             }
         },
@@ -134,12 +188,17 @@
                 this.showCar = true;
                 setTimeout(()=>{
                     this.showSvg = true;
-                },500);
+                },900);
                 setTimeout(()=>{
                     this.showFly = true;
-                },700);
+                },1200);
+                setTimeout(()=>{
+                    this.showCover = true;
+                },1000);
                 setTimeout(()=>{
                     this.driving = false;
+                    this.showShine = true;
+                    this.showSvgLine = false;
                 },2000)
             },
             resetValues(){
@@ -149,6 +208,9 @@
                 this.showCar = false;
                 this.showFly = false;
                 this.driving = true;
+                this.showCover = false;
+                this.showShine = false;
+                this.showSvgLine = true;
             }
         }
     }

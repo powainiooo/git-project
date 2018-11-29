@@ -1,7 +1,7 @@
 <style>
     .page3-container{ height: 100vh; background-color: #EFF7FD;}
     .page3-container .bg{ width: 100%; position: absolute; left: 0; top: 45%; font-size: 0; overflow: hidden;}
-    .page3-container .bg .moves{ width: 200vw; display: flex; align-items: flex-start; animation: road1 6s linear infinite;}
+    .page3-container .bg .moves{ width: 200vw; display: flex; align-items: flex-start; animation: road1 8s linear infinite;}
     .page3-container .bg .moves img{ width: 100vw;}
     .page3-container .page-title{ width: 39.7%;}
     @keyframes road1 {
@@ -15,7 +15,7 @@
     .page3-container .c-car{ position: absolute; top: 51%; left: 55%;}
     .page3-container .page-context{ z-index: 10;}
     .page3-container .birds{ width: 2.48rem; height: 2.5rem; background: url('../assets/images/birds.png') no-repeat; background-size: 400%; position: absolute; top: 40%; right: -40%; transform: scale(0.7);}
-    .page3-container .birds-active{ animation:birds 10s linear;}
+    .page3-container .birds-active{ animation:birds 15s linear;}
     @keyframes birds {
         0%{transform: translate(0,0) scale(0.7);}
         /*30%,50%{transform: translate(-70vw,-20vh);}*/
@@ -32,6 +32,7 @@
                 <img src="/static/images/bg3.jpg">
             </div>
         </div>
+        <div class="next-arrow"><img src="@/assets/images/nextpage.png"> </div>
         <div class="page-title"><img src="@/assets/images/title3.png"> </div>
 
         <div class="page-context">
@@ -66,6 +67,7 @@
         mounted(){
             this.chart = echarts.init(document.getElementById('chart2'));
             this.birdMove();
+            this.setValues();
         },
         methods:{
             drawTable(){
@@ -76,12 +78,12 @@
                         type: 'category',
                         axisTick:{show:false},
                         axisLine:{lineStyle:{color:'#2B5FD5'}},
+                        boundaryGap:false,
                         data: ['0', '4', '8', '12', '16', '20', '24(月)']
                     },
+                    graphic:[{type:'text',style:{text:'(km)',fill:'#2B5FD5',x:12}}],
                     yAxis: {
                         type: 'value',
-                        name:'(km)',
-                        nameTextStyle:{color:'#2B5FD5'},
                         axisLabel:{color:'#2B5FD5'},
                         splitLine:{lineStyle:{color:'#2B5FD5'}},
                         axisTick:{show:false},

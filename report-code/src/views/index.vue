@@ -66,6 +66,7 @@
     import page8 from '@/components/page8'
     import page9 from '@/components/page9'
     import Loading from '@/components/loading'
+    import axios from 'axios'
     export default {
         name: 'app',
         components:{page1,page2,page3,page4,page5,page6,page7,page8,page9,Loading},
@@ -74,6 +75,7 @@
             setTimeout(()=>{
                 this.currentPage = this.$refs.mySwiper.$children[0].$attrs.page;
             },300)
+            this.getData();
         },
         data(){
             let self = this;
@@ -138,7 +140,23 @@
             }
         },
         methods:{
-
+            getData(){
+                axios.post('/AnnuallyDataServer/AnnuallyData/getMonthData',{
+                    vin:'123123',
+                    imeiMD5:'123123',
+                    userID:'123123',
+                    year:'2018',
+                    month:'11'
+                }).then(function(res){
+                    if(res.data.result == 0){
+                        self.detailData = res.data.data;
+                        self.adList = res.data.data.list;
+                        self.setValues();
+                    }else{
+                        window.errorData = res.data;
+                    }
+                })
+            }
         }
     }
 

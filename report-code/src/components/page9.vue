@@ -23,15 +23,6 @@
 
     .page9-container .btn{ width: 50%; position: absolute; left: 25%; bottom: 6.7%;}
 
-    .style-container{ width: 100vw; height: 100vh; background-color: rgba(0,0,0,0.5); position: absolute; top: 0; left: 0; z-index: 500;}
-    .style-container .style-frame{ width: 80%; margin: 50% auto; background-color: #FFFFFF; border-radius: 10px; overflow: hidden;}
-    .style-container .style-frame h3{ font-size: 0.34rem; color: #030303; text-align: center; margin: 10px 0 0 0; font-weight: normal;}
-    .style-container .style-frame ul{ display: flex; justify-content: space-between; margin: 0.6rem 0.3rem;}
-    .style-container .style-frame ul li{ width: 1.6rem; height: 1.3rem; border: 1px solid rgba(77,77,77,0.3); display: flex; justify-content: center; align-items: center; font-size: 0.32rem; color: rgba(77,77,77,0.6);}
-    .style-container .style-frame ul li.active{ border-color: #2B5FD5; color: #2B5FD5;}
-    .style-container .style-frame .btns{ border-top: 1px solid rgba(77,77,77,0.3); display: flex;}
-    .style-container .style-frame .btns a{ display: flex; width: 50%; box-sizing: border-box; height: 0.8rem; font-size: 0.32rem; color:#007AFF; text-decoration: none; justify-content: center; align-items: center;}
-    .style-container .style-frame .btns a:first-child{ border-right: 1px solid rgba(77,77,77,0.3);}
 </style>
 
 <template>
@@ -85,12 +76,12 @@
         components:{poster},
         data(){
             return{
-                showStyle:false,
-                styleKey:1
+                showStyle:true,
+                styleKey:3
             }
         },
         mounted(){
-
+            this.doDraw()
         },
         methods:{
             setValues(){

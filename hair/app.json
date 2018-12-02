@@ -1,7 +1,8 @@
 {
   "pages": [
-    "pages/package/personal",
     "pages/index/index",
+    "pages/date/date",
+    "pages/package/personal",
     "pages/order/notuse",
     "pages/order/list",
     "pages/order/useing",
@@ -11,7 +12,6 @@
     "pages/order/confirm",
     "pages/select/select",
     "pages/package/package",
-    "pages/date/date",
     "pages/store/store",
     "pages/information/information",
     "pages/package/editor",

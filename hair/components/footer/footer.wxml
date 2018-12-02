@@ -6,5 +6,5 @@
 </view>
 <view class="menu-list" style="bottom:{{showMenuList ? '200rpx' : '-200rpx'}}">
     <view class="menu-list-item" bindtap="gotoOrderList">已预约订单 | <text class="en">Booked order</text></view>
-    <view class="menu-list-item" bindtap="gotoPersonal">个人常用套餐 | <text class="en">Personal package</text></view>
+    <view class="menu-list-item {{isDisabled ? 'menu-list-item-disable' : ''}}" bindtap="gotoPersonal">个人常用套餐 | <text class="en">Personal package</text></view>
 </view>

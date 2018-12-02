@@ -30,7 +30,7 @@ Page({
         if(this.data.selectedId == -1){
             wx.showToast({
                 title:'请选择套餐',
-                icon:'none'
+                image:'../../res/img/warn.png'
             })
         }else{
             app.globalData.proPackage = this.data.listData[this.data.selectedIndex];
@@ -74,7 +74,8 @@ Page({
             url:app.globalData.ajaxSrc+"group_list",
             data:{
                 keyword:'',
-                shop_id:app.globalData.store.id
+                shop_id:app.globalData.store.id,
+                openid:app.globalData.userOpenID
             },
             success:res=>{
                 this.setData({

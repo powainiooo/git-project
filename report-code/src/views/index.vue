@@ -1,5 +1,6 @@
 <style>
     @import "../assets/animate.min.css";
+    @import "../assets/helve.css";
     * {
         moz-user-select: -moz-none;
         -moz-user-select: none;
@@ -9,7 +10,7 @@
         -ms-user-select: none;
         user-select: none;
     }
-    body{ background-color: #EFF7FD;}
+    body{ background-color: #EFF7FD; font-family: 'Helve','Micro Yahei', 'Avenir', Helvetica, Arial, sans-serif;}
     @font-face {
         font-family: 'quartz';
         src: url('../assets/QuartzRegular.ttf') format('woff2'),
@@ -22,7 +23,7 @@
 
     .page-title{ width: 30%; position: absolute; top: 5%; left: 10%;}
 
-    .page-context{ font-size: 0.4rem; color: #151515; position: absolute; left: 10%; top: 15%; font-family: "Micro Yahei", 'Avenir', Helvetica, Arial, sans-serif; z-index: 10;}
+    .page-context{ font-size: 0.4rem; color: #151515; position: absolute; left: 10%; top: 15%; z-index: 10;}
     .page-context p{ margin-bottom: 6px;}
     .page-context .tag1{ color: #2B5FD5; font-weight: bold;}
     .page-context .tag2{ color: #2B5FD5; font-size: 0.56rem; font-weight: bold;}
@@ -33,6 +34,17 @@
         40%{ transform: translate(0,-10px);}
         80%,100%{ transform: translate(0,-10px); opacity: 0;}
     }
+
+    .style-container{ width: 100vw; height: 100vh; background-color: rgba(0,0,0,0.5); position: absolute; top: 0; left: 0; z-index: 500;}
+    .style-container .style-frame{ width: 80%; margin: 50% auto; background-color: #FFFFFF; border-radius: 10px; overflow: hidden;}
+    .style-container .style-frame h3{ font-size: 0.34rem; color: #030303; text-align: center; margin: 10px 0 0 0; font-weight: normal;}
+    .style-container .style-frame ul{ display: flex; justify-content: space-between; margin: 0.6rem 0.3rem;}
+    .style-container .style-frame ul li{ width: 1.6rem; height: 1.3rem; border: 1px solid rgba(77,77,77,0.3); display: flex; justify-content: center; align-items: center; font-size: 0.32rem; color: rgba(77,77,77,0.6);}
+    .style-container .style-frame ul li.active{ border-color: #2B5FD5; color: #2B5FD5;}
+    .style-container .style-frame input{ width: 100%; border: 1px solid rgba(77,77,77,0.3); border-radius: 5px; padding: 5px 10px; box-sizing: border-box;}
+    .style-container .style-frame .btns{ border-top: 1px solid rgba(77,77,77,0.3); display: flex;}
+    .style-container .style-frame .btns a{ display: flex; width: 50%; box-sizing: border-box; height: 0.8rem; font-size: 0.32rem; color:#007AFF; text-decoration: none; justify-content: center; align-items: center;}
+    .style-container .style-frame .btns a:first-child{ border-right: 1px solid rgba(77,77,77,0.3);}
 </style>
 
 <template>
@@ -74,8 +86,7 @@
             window.intoPageStartTime = new Date().getTime();
             setTimeout(()=>{
                 this.currentPage = this.$refs.mySwiper.$children[0].$attrs.page;
-            },300)
-            this.getData();
+            },300);
         },
         data(){
             let self = this;
@@ -112,10 +123,10 @@
                 return this.$store.state.isLoading
             },
             p1Show(){
-                return false
+                return true
             },
             p2Show(){
-                return false
+                return true
             },
             p3Show(){
                 return true
@@ -140,23 +151,7 @@
             }
         },
         methods:{
-            getData(){
-                axios.post('/AnnuallyDataServer/AnnuallyData/getMonthData',{
-                    vin:'123123',
-                    imeiMD5:'123123',
-                    userID:'123123',
-                    year:'2018',
-                    month:'11'
-                }).then(function(res){
-                    if(res.data.result == 0){
-                        self.detailData = res.data.data;
-                        self.adList = res.data.data.list;
-                        self.setValues();
-                    }else{
-                        window.errorData = res.data;
-                    }
-                })
-            }
+
         }
     }
 

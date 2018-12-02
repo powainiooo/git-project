@@ -15,7 +15,6 @@ Page({
         result:''
     },
     onLoad: function (option) {
-        console.log(option);
         let result = option.result || 'index';
         this.setData({
             result:result
@@ -46,7 +45,6 @@ Page({
                 }
             })
         }
-
         this.getData();
     },
     getData(){

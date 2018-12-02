@@ -1,17 +1,45 @@
 <style>
     .poster-frame{ width: 100vw; height: 100vh; position: absolute; top: 0; left: 0; z-index: 600; font-size: 0; overflow-x: hidden; overflow-y: scroll;}
     .poster-frame canvas{ width: 100vw;}
-    .poster-frame .btns{ width: 100%; display: flex; justify-content: space-around; margin-bottom: 15px;}
-    .poster-frame .btns a{ width: 2.7rem; height: 0.8rem; border-radius: 30px; color: #FFFFFF; font-size: 0.36rem; display: flex; justify-content: center; align-items: center; background-color: #2B5FD5; text-decoration: none;}
+    .poster-frame .btns1{ width: 100%; display: flex; justify-content: space-around; margin-bottom: 15px;}
+    .poster-frame .btns1 a{ width: 2.7rem; height: 0.8rem; border-radius: 30px; color: #FFFFFF; font-size: 0.36rem; display: flex; justify-content: center; align-items: center; background-color: #2B5FD5; text-decoration: none;}
+
+    .poster-frame .hint{ display: flex; background-color: #fff; border-radius: 20px; font-size: 14px; color: #333; position: absolute; top: 17%; left: 50%; z-index: 20; align-items: center; padding: 4px 10px;}
+    .poster-frame .hint2{ top: 22vh; left: 44%; flex-direction: row-reverse;}
+    .poster-frame .hint3{ top: 14.5vh; left: 38%;}
+    .poster-frame .hint  img{ width: 20px; margin:0 5px;}
+
+    .poster-frame .btn-name{ width: 80px; height: 30px; background-color: rgba(0,0,0,0);position: absolute; top: 12vh; left: 46%; z-index: 25;}
+    .poster-frame .btn-name2{ width: 30px; height: 80px; top: 11vh; left: 70%;}
+    .poster-frame .btn-name3{ top: 14.5vh; left: 19%;}
 </style>
 
 <template>
     <div class="poster-frame" v-show="showPoster" :style="{background:bgColor}" @touchmove.stop="touchmove">
         <canvas id="poster" width="750" height="1213"></canvas>
-        <div class="btns">
+        <div class="btns1">
             <a href="javascript:;" @click="showPoster = false">换个风格</a>
             <a href="javascript:;" @click="doShare">分享给好友</a>
         </div>
+
+        <div class="btn-name" :class="'btn-name'+styleKey" @click="showName = true"></div>
+        <div class="hint" :class="'hint'+styleKey" @click="showName = true">
+            <img src="@/assets/images/hand.png">
+            <span>点击可修改姓名</span>
+        </div>
+
+        <transition enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
+            <div class="style-container" v-if="showName">
+                <div class="style-frame">
+                    <h3>选择风格</h3>
+                    <p style="margin: 20px;"><input type="text" v-model="name"></p>
+                    <div class="btns">
+                        <a href="javascript:;" @click="showName = false">取消</a>
+                        <a href="javascript:;" @click="draw">确定</a>
+                    </div>
+                </div>
+            </div>
+        </transition>
     </div>
 </template>
 
@@ -29,22 +57,50 @@
         })
     }
     let canvas;
+    import textConfig from '@/assets/document.json'
     export default {
         name: 'app',
         props:['styleKey'],
         data(){
             return{
                 showPoster:false,
+                showName:false,
                 car:'秦',
                 name:'王家卫',
-                textArr:['别人总是问我，为什么早出晚归？我也不知道，可是，忙碌跟充实的感觉真像。现在，是我距离节能王者最近的时候，只有0.001毫米，8760个小时之后，我依旧是个王者。','在远程解锁后的1小时27分36秒，一个念头一闪而过，原来，我是一个科技先锋。然而，2018年12月21日14点27分，年度报告生成的这一刻，我被确诊为健忘症，所幸，我仍旧可以用云服务解锁。','别以为要了解一个人是很容易的事，用的越久，云服务越懂你!'],
+                textArr:[],
                 bgColor:'#fff'
+            }
+        },
+        computed:{
+            tag1(){
+                return '朝九晚五'
+            },
+            tag2(){
+                return '会省钱'
+            },
+            tag3(){
+                return '科技先锋'
+            },
+            tag4(){
+                return '分享达人'
             }
         },
         methods:{
             touchmove(){},
+            initText(){
+                let data = textConfig.poster['style'+this.styleKey];
+                this.textArr = [];
+                if(this.styleKey == 3)this.textArr.push('2018年，我们度过了激动人心的一年： ');
+                this.textArr.push(data[this.tag1]);
+                this.textArr.push(data[this.tag2]);
+                this.textArr.push(data[this.tag3]);
+                this.textArr.push(data[this.tag4]);
+                this.textArr.push(data.add);
+            },
             draw(){
                 this.showPoster = true;
+                this.showName = false;
+                this.initText();
                 canvas = document.getElementById('poster');
                 let ctx = canvas.getContext('2d');
                 let title = '/static/images/title10.png';
@@ -66,7 +122,7 @@
             },
             style1(ctx,res){
                 ctx.drawImage(res[0],0,0);
-                ctx.drawImage(res[1],570,850);
+                ctx.drawImage(res[1],570,890);
 
                 //姓名
                 ctx.font = '40px Micro Yahei';
@@ -99,7 +155,7 @@
                 let txtHeight = 320;
                 for(let i=0;i<this.textArr.length;i++){
                     let h = ctx.wrapText(this.textArr[i],65,txtHeight,623,50);
-                    txtHeight = h+70;
+                    txtHeight = h+60;
                 }
             },
             style2(ctx,res){
@@ -121,10 +177,10 @@
                 //车型
                 ctx.font = '30px Micro Yahei';
                 ctx.fillStyle = '#333333';
-                ctx.fillTextVertical('我想告诉你，我的车是'+this.car,490,100);
+                ctx.fillTextVertical('2018年，我遇见了我人生中的最爱，就是'+this.car,490,100);
                 ctx.beginPath();
                 ctx.moveTo(520,70);
-                ctx.lineTo(520,185+(this.car.length+10)*20);
+                ctx.lineTo(520,185+(this.car.length+23)*20);
                 ctx.strokeStyle = '#000000';
                 ctx.stroke();
 
@@ -142,12 +198,12 @@
                     }
                 }
                 for(let i=0;i<arr.length;i++){
-                    ctx.fillTextVertical(arr[i],420-i*50,94);
+                    ctx.fillTextVertical(arr[i],430-i*45,94);
                 }
             },
             style3(ctx,res){
                 ctx.drawImage(res[0],0,0);
-                ctx.drawImage(res[1],64,880);
+                ctx.drawImage(res[1],580,900);
 
                 //姓名
                 ctx.font = '40px Micro Yahei';
@@ -159,7 +215,7 @@
                 //车型
                 ctx.font = '30px Micro Yahei';
                 ctx.fillStyle = '#333333';
-                ctx.fillText('我想告诉你，我的车是'+this.car,64,300);
+                ctx.wrapText('我对钱没有兴趣哦，我的爱车是'+this.car,64,300,623,50);
 
                 //内容
                 ctx.font = '24px Micro Yahei';
@@ -168,7 +224,7 @@
                 let txtHeight = 370;
                 for(let i=0;i<this.textArr.length;i++){
                     let h = ctx.wrapText(this.textArr[i],65,txtHeight,623,50);
-                    txtHeight = h+70;
+                    txtHeight = h+60;
                 }
             },
             doShare(){

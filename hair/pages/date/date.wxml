@@ -1,8 +1,8 @@
 <header-view>选择时间段 | Selection time</header-view>
 <view class="container container-date">
     <view class="date-list">
-        <view class="item"
-              data-date="{{item}}"
+        <view data-date="{{item}}"
+              class="item {{selectDate == item.date ? 'active' : ''}}"
               bindtap="changeDay"
               wx:for="{{dateList}}"
               wx:for-item="item"

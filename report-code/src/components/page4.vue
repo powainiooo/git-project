@@ -35,7 +35,7 @@
         <div class="page-context">
             <p>这一年，</p>
             <p>平均每公里花费<span class="tag2">{{animMiles}}</span>元</p>
-            <p>原来是传说中的节能王者<span class="tag1">远方</span>？</p>
+            <p>原来是传说中的<span class="tag1">节能王者</span>？</p>
         </div>
 
         <div class="text1">计算参考 油：7.87元/升 电：0.68元/度</div>

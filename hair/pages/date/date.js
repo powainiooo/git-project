@@ -6,8 +6,8 @@ Page({
      * 页面的初始数据
      */
     data: {
-        selectTime:'',
-        selectDate:'',
+        selectTime:'10:00',
+        selectDate:'2018-12-02',
         selectWeek:'',
         dateList:[],
         timeList:[]
@@ -23,6 +23,13 @@ Page({
     },
     //下一步
     doNext(){
+        if(this.data.selectTime == ''){
+            wx.showToast({
+                title:'请选择时间',
+                image:'../../res/img/warn.png'
+            });
+            return;
+        }
         app.globalData.selectDate = this.data.selectDate;
         app.globalData.selectTime = this.data.selectTime;
         app.globalData.selectWeek = this.data.selectWeek;
@@ -42,7 +49,9 @@ Page({
             data:{shop_id:app.globalData.storeId},
             success:res=>{
                 this.setData({
-                    dateList:res.data.data.list
+                    dateList:res.data.data.list,
+                    selectDate: res.data.data.list[0].date,
+                    selectWeek: res.data.data.list[0].week
                 });
                 this.getTime(this.data.dateList[0].date);
             }
@@ -53,7 +62,7 @@ Page({
             url:app.globalData.ajaxSrc+"working_time",
             data:{
                 shop_id:app.globalData.store.id,
-                date:'2018-11-15'
+                date:date
             },
             success:res=>{
                 this.setData({
@@ -64,7 +73,9 @@ Page({
     },
     changeDay(e){
         let date = e.currentTarget.dataset.date;
-        this.data.selectDate = date.date;
+        this.setData({
+            selectDate: date.date
+        });
         this.data.selectWeek = date.week;
         this.getTime(date);
     },

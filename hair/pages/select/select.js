@@ -91,7 +91,7 @@ Page({
             if(this.data.selectedID[2] == -1){
                 wx.showToast({
                     title:'请选择产品',
-                    icon:'none'
+                    image:'../../res/img/warn.png'
                 })
             }else{
                 app.globalData.proPackage.id = {};
@@ -106,7 +106,7 @@ Page({
             if(this.data.selectedID[this.data.step-1] == -1){
                 wx.showToast({
                     title:'请选择产品',
-                    icon:'none'
+                    image:'../../res/img/warn.png'
                 })
             }else{
                 let step = this.data.step + 1;

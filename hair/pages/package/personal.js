@@ -1,11 +1,13 @@
 // pages/package/personal.js
+const app = getApp();
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-
+        detailData:app.globalData.personalPackage,
+        imgSrc:app.globalData.imgSrc
     },
     gotoList(e){
         let type = e.currentTarget.dataset.type;
@@ -17,9 +19,23 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-
+        this.setData({
+            detailData:app.globalData.personalPackage
+        })
     },
-
+    doNext(){
+        wx.showModal({
+          title: '提示',
+          content: '保存成功 可返回首页预定',
+          success: res=>{
+            if (res.confirm) {
+                wx.reLaunch({
+                    url: '/pages/index/index'
+                })
+            }
+          }
+        })
+    },
     /**
      * 生命周期函数--监听页面初次渲染完成
      */

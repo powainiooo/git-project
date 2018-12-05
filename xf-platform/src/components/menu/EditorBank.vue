@@ -19,10 +19,10 @@
         </div>
         <div class="line"><input type="password" placeholder="密码" v-model="password"></div>
         <h3 style="font-size: 16px; padding-left: 20px;  margin:0 auto 20px auto; width: 270px; color: #000;">新银行卡信息</h3>
-        <div class="line"><input type="text" placeholder="开户名" v-model="name"></div>
+        <div class="line"><input type="text" placeholder="个人开户名" v-model="name"></div>
         <div class="line"><input type="text" placeholder="预留手机" v-model="phone"></div>
         <div class="line"><input type="text" placeholder="身份证号" v-model="idsnum"></div>
-        <div class="line"><input type="text" placeholder="银行卡号" v-model="banknum"></div>
+        <div class="line"><input type="text" placeholder="个人银行卡号" v-model="banknum"></div>
         <div class="line">
             <Select v-model="bankcode" placeholder="选择银行">
                 <Option v-for="item in bankList" :value="item.value" :key="item.value">{{ item.label }}</Option>

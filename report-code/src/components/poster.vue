@@ -72,16 +72,16 @@
             }
         },
         computed:{
-            tag1(){
+            tag1(){//p2
                 return '朝九晚五'
             },
-            tag2(){
+            tag2(){//p4
                 return '会省钱'
             },
-            tag3(){
+            tag3(){//p7
                 return '科技先锋'
             },
-            tag4(){
+            tag4(){//p8
                 return '分享达人'
             }
         },
@@ -105,8 +105,8 @@
                 let ctx = canvas.getContext('2d');
                 let title = '/static/images/title10.png';
                 let colorArr = ['#efe9e1','#f0f9fe','#fff1fe'];
-                window.tagStyle = this.styleKey;
-                window.posterTimes += 1;
+                window.footPrinter.tagStyle = this.styleKey;
+                window.footPrinter.posterTimes += 1;
                 this.bgColor = colorArr[this.styleKey-1];
                 if(this.styleKey == 1){
                     title = '/static/images/title11.png';
@@ -116,7 +116,7 @@
                     getImg(src),
                     getImg(title)
                 ]).then((res)=>{
-                    let tag = 'style'+window.tagStyle;
+                    let tag = 'style'+window.footPrinter.tagStyle;
                     this[tag](ctx,res);
                 })
             },
@@ -228,12 +228,12 @@
                 }
             },
             doShare(){
-                window.posterimgData = canvas.toDataURL().replace('data:image/png;base64,','');
+                window.footPrinter.posterimgData = canvas.toDataURL().replace('data:image/png;base64,','');
                 let endTime = new Date().getTime();
-                if(window.stayTime['page'+window.outPage]){
-                    window.stayTime['page'+window.outPage] += endTime - window.intoPageStartTime;
+                if(window.footPrinter.stayTime['page'+window.footPrinter.outPage]){
+                    window.footPrinter.stayTime['page'+window.footPrinter.outPage] += endTime - window.footPrinter.intoPageStartTime;
                 }else{
-                    window.stayTime['page'+window.outPage] = endTime - window.intoPageStartTime;
+                    window.footPrinter.stayTime['page'+window.footPrinter.outPage] = endTime - window.footPrinter.intoPageStartTime;
                 }
                 window.location = '/doShare';
             },

@@ -35,11 +35,15 @@
         <div class="next-arrow"><img src="@/assets/images/nextpage.png"> </div>
         <div class="page-title"><img src="@/assets/images/title3.png"> </div>
 
-        <div class="page-context">
-            <p>今年<span class="tag2">3</span>月，</p>
+        <div class="page-context" v-if="pageData.tag == '远方'">
+            <p>今年<span class="tag2">{{maxMonth}}</span>月，</p>
             <p>你的里程最高达到<span class="tag2">{{animMiles}}</span>公里</p>
             <p>是回了故乡？</p>
-            <p>还是去了<span class="tag1">远方</span>？</p>
+            <p>还是去了<span class="tag1">{{pageData.tag}}？</span></p>
+        </div>
+        <div class="page-context" v-if="pageData.tag == '平淡是真'">
+            <p>每月里程相差无几？</p>
+            <p>生活也是这样，<span class="tag1">{{pageData.tag}}~</span></p>
         </div>
 
         <div class="birds" :style="{'background-position':-birdIndex*2.48+'rem 0'}" :class="showBird ? 'birds-active' : ''"></div>
@@ -60,6 +64,7 @@
             return{
                 miles:0,
                 birdIndex:0,
+                maxMonth:'--',
                 showBird:false,
                 chart:{}
             }
@@ -67,19 +72,20 @@
         mounted(){
             this.chart = echarts.init(document.getElementById('chart2'));
             this.birdMove();
-            this.setValues();
+            //this.setValues();
         },
         methods:{
-            drawTable(){
+            drawTable(xArr,yArr){
                 this.chart.setOption({
                     title:{text:'每月里程分布',left:'center',bottom:'0',textStyle:{fontSize:14}},
                     grid:{top:'13%',borderColor:'#2B5FD5'},
                     xAxis: {
                         type: 'category',
                         axisTick:{show:false},
+                        axisLabel:{showMaxLabel:true},
                         axisLine:{lineStyle:{color:'#2B5FD5'}},
                         boundaryGap:false,
-                        data: ['0', '4', '8', '12', '16', '20', '24(月)']
+                        data: xArr
                     },
                     graphic:[{type:'text',style:{text:'(km)',fill:'#2B5FD5',x:12}}],
                     yAxis: {
@@ -90,7 +96,7 @@
                         axisLine:{show:false}
                     },
                     series: [{
-                        data: [1, 2, 15, 20, 10, 6, 15],
+                        data:yArr,
                         type: 'line',
                         smooth: true,
                         lineStyle:{color:'#2B5FD5',shadowColor:'#ffffff',shadowBlur:0,shadowOffsetX:2},
@@ -114,8 +120,29 @@
                 })
             },
             setValues(){
-                TweenLite.to(this.$data,1,{miles:2511});
-                this.drawTable();
+                let data = this.pageData.mileageByMonth,arr = [],xArr = [],yArr = [];
+                for(let item in data){
+                    arr.push({
+                        name:item.replace('m',''),
+                        value:data[item]
+                    })
+                }
+                arr.sort(function(a,b){
+                    return parseInt(a.name) - parseInt(b.name)
+                });
+                let max = arr[0].value,maxMonth = '';
+                for(let item of arr){
+                    xArr.push(item.name);
+                    yArr.push(item.value);
+                    if(item.value > max) {
+                        max = item.value;
+                        maxMonth = item.name;
+                    }
+                }
+                xArr[xArr.length-1] += '(月)';
+                this.drawTable(xArr,yArr);
+                TweenLite.to(this.$data,1,{miles:max});
+                this.maxMonth = maxMonth;
                 this.showBird = true;
             },
             resetValues(){
@@ -132,6 +159,9 @@
         computed:{
             animMiles(){
                 return this.miles.toFixed(0);
+            },
+            pageData(){
+                return this.$store.state.pageData.P3
             }
         }
     }

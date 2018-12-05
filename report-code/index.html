@@ -14,22 +14,24 @@
             if (r != null) return unescape(r[2]);
             return null;
         }
-        let getParams = {};
-        getParams.vin = getQueryString('vin') || 'LC0TEST2583691470';
+        var getParams = {};
+        getParams.data = getQueryString('data') || 'FdmNx5tygr6LP2FDxZOsOcQQ+y1ZtjQpBcy/SKqTfcsdsxVN2aUUMS+J2cuEUCKOI5F70lKOj8JFvFYwm/m82jek0QoAeUZ0S+dVxs9753mC7/CneLTH8jxrtmhPu5tcSwQke+ZaX/7Mfq1k2cdmIUPUfwi1ezbMYX47ZD/Us5e4lBff/pWPSS4K9dGE90HLZtmIJ6plRCwWbek/lSHERlkM107uhvo4hJqbr45KOWSuDoZDyZojUGARhe6NyUZlgMmbjo7Ynz6cmaWvUXVN7nVYUL50qL9TC6mrDAnbVhaF7r3bJ9JlwkuLeb3cmWGUhUMe1AEvJtZXB90su+kLY2FP1ZJ0JNhphmHx/dw53JC8=';
         getParams.userName = getQueryString('userName') || 0;
         getParams.carType = getQueryString('carType') || 'asdfsdaf';
+
+        var footPrinter = {};//脚印数据
         //所有页停留时间
-        var stayTime = {};
+        footPrinter.stayTime = {};
         //当前页
-        var outPage = '1';
+        footPrinter.outPage = '1';
         //所选风格
-        var tagStyle = 100;
+        footPrinter.tagStyle = 100;
         //图片资源
-        var posterimgData = '';
+        footPrinter.posterimgData = '';
         //生成小传次数
-        var posterTimes = 0;
+        footPrinter.posterTimes = 0;
         //进入页面开始时间
-        var intoPageStartTime = 0;
+        footPrinter.intoPageStartTime = 0;
         //接口错误数据
         var errorData = {};
 

@@ -65,8 +65,8 @@
         <div class="page-title"><img src="@/assets/images/title1.png"> </div>
 
         <div class="page-context">
-            <p><span class="tag1">2018</span>年<span class="tag1">2</span>月<span class="tag1">4</span>日</p>
-            <p>您加入云服务</p>
+            <p v-if="pageData.regTime"><span class="tag1">2018</span>年<span class="tag1">2</span>月<span class="tag1">4</span>日</p>
+            <p v-if="pageData.regTime">您加入云服务</p>
             <p>到年底行驶了<span class="tag2">{{animTotalMiles}}</span>公里</p>
             <p>在<span class="tag2">{{animDaysDrive}}</span>天里开过车</p>
             <p>在<span class="tag2">{{animDaysService}}</span>天里用过云服务</p>
@@ -75,17 +75,17 @@
         <ul class="page1-circle">
             <li class="animated" :class="floatCircle1">
                 <transition enter-active-class=" scaleIn">
-                <div v-if="showCircle1">使用云服务<span>1245</span>次</div>
+                <div v-if="showCircle1">使用云服务<span>{{pageData.useTimes}}</span>次</div>
                 </transition>
             </li>
             <li class="animated" :class="floatCircle2">
                 <transition enter-active-class=" scaleIn">
-                <div v-if="showCircle2">在深圳排名<span>1245</span>位</div>
+                <div v-if="showCircle2">在{{pageData.city}}排名<span>{{pageData.cityRank}}</span>位</div>
                 </transition>
             </li>
             <li class="animated" :class="floatCircle3">
                 <transition enter-active-class=" scaleIn">
-                <div v-if="showCircle3">击败全国<span>12%</span>用户</div>
+                <div v-if="showCircle3">击败全国<span>{{pageData.countryRank}}%</span>用户</div>
                 </transition>
             </li>
         </ul>
@@ -108,14 +108,15 @@
                 floatCircle3:''
             }
         },
+
         mounted(){
             this.setValues();
         },
         methods:{
             setValues(){
-                TweenLite.to(this.$data,1,{totalMiles:12540});
-                TweenLite.to(this.$data,1,{daysDrive:238});
-                TweenLite.to(this.$data,1,{daysService:132});
+                TweenLite.to(this.$data,1,{totalMiles:this.pageData.mileage});
+                TweenLite.to(this.$data,1,{daysDrive:this.pageData.driveDays});
+                TweenLite.to(this.$data,1,{daysService:this.pageData.useDays});
                 setTimeout(()=>{
                     this.showCircle1 = true;
                 },1000);
@@ -156,6 +157,9 @@
             },
             animDaysService(){
                 return parseInt(this.daysService);
+            },
+            pageData(){
+                return this.$store.state.pageData.P1
             }
         }
     }

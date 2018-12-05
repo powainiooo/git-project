@@ -82,19 +82,14 @@
 
         <div class="page-context">
             <p>今年</p>
-            <p>你使用最多的控制是<span class="tag1">车门解锁</span></p>
-            <p>享便利生活，当<span class="tag1">科技先锋</span></p>
+            <p>你使用最多的控制是<span class="tag1">{{mostControl}}</span></p>
+            <p>享便利生活，当<span class="tag1">{{pageData.tag}}</span></p>
         </div>
 
         <ul class="times-list">
-            <li :class="{active:showTags,animate:showTags}"><div><span>车门解锁</span><span class="value">306</span><span>次</span></div></li>
-            <li :class="{active:showTags,animate:showTags}"><div><span>预约开空调</span><span class="value">245</span><span>次</span></div></li>
-            <li :class="{active:showTags,animate:showTags}"><div><span>开启空调</span><span class="value">198</span><span>次</span></div></li>
-            <li :class="{active:showTags,animate:showTags}"><div><span>闪灯鸣笛</span><span class="value">152</span><span>次</span></div></li>
-            <li :class="{active:showTags,animate:showTags}"><div><span>车门上锁</span><span class="value">137</span><span>次</span></div></li>
-            <li :class="{active:showTags,animate:showTags}"><div><span>关闭空调</span><span class="value">98</span><span>次</span></div></li>
-            <li :class="{active:showTags,animate:showTags}"><div><span>开车窗</span><span class="value">56</span><span>次</span></div></li>
-            <li :class="{active:showTags,animate:showTags}"><div><span>预约充电</span><span class="value">36</span><span>次</span></div></li>
+            <li :class="{active:showTags,animate:showTags}" v-for="item in timesList">
+                <div><span>{{item.name}}</span><span class="value">{{item.value}}</span><span>次</span></div>
+            </li>
         </ul>
 
         <div class="hint">云服务全年为用户提供<span>{{animTimes}}+</span>次服务</div>
@@ -107,13 +102,39 @@
         data(){
             return{
                 showTags:false,
+                mostControl:'',
+                timesList:[],
                 times:0
             }
         },
+        mounted(){
+            this.setValues();
+        },
         methods:{
             setValues(){
-                this.showTags = true;
-                TweenLite.to(this.$data,1,{times:100000});
+                let keys = {
+                    airOpen:'开启空调',
+                    doorUnlock:'车门解锁',
+                    doorLock:'车门上锁',
+                    airClose:'关闭空调',
+                    lightWhistle:'闪灯鸣笛',
+                    light:'闪灯',
+                    airRes:'预约开空调'
+                };
+                let data = this.pageData.controlByType,arr = [];
+                for(let item in data){
+                    if(keys[item] != undefined){
+                        arr.push({
+                            name:keys[item],
+                            value:data[item]
+                        })
+                    }
+                }
+                this.timesList = arr;
+                TweenLite.to(this.$data,1,{times:this.pageData.totalTimes});
+                this.$nextTick(()=>{
+                    this.showTags = true;
+                })
             },
             resetValues(){
                 this.times = 0;
@@ -123,6 +144,9 @@
         computed:{
             animTimes(){
                 return this.times.toFixed(0);
+            },
+            pageData(){
+                return this.$store.state.pageData.P7
             }
         }
     }

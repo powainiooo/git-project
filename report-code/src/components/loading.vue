@@ -56,6 +56,7 @@
 
 <script type='es6'>
     import car from '@/components/car'
+    import axios from 'axios'
     export default {
         name: 'app',
         components:{car},
@@ -78,11 +79,14 @@
                     '/static/images/phone2.png',
                     '/static/images/phone3.png'
                 ],
-                isOver:false
+                isOver:false,
+                imgLoadOver:false,
+                dataLoadOver:false
             }
         },
         mounted(){
-            this.loadAll()
+            this.loadAll();
+            this.getData()
         },
         methods:{
             loadImgs(src){
@@ -106,11 +110,31 @@
                     arr.push(this.loadImgs(item))
                 }
                 Promise.all(arr).then(res=>{
+                    this.imgLoadOver = true;
+                    this.isAllLoad();
+                })
+            },
+            getData(){
+                let data = window.getParams.data;
+                axios.post('/mobileserve/Vehicle/getAnnuallyData',{data:data}).then(res=>{
+                    let data = res.data;
+                    if(data.result == 0){
+                        this.dataLoadOver = true;
+                        this.$store.commit('setPageData',res.data.data);
+                        this.isAllLoad();
+                    }else{
+                        window.errorData = data;
+                        window.location = '/error';
+                    }
+                })
+            },
+            isAllLoad(){
+                if(this.imgLoadOver && this.dataLoadOver){
                     this.isOver = true;
                     setTimeout(()=>{
                         this.$store.commit('setLoading',false)
                     },1000)
-                })
+                }
             }
         }
     }

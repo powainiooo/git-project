@@ -49,7 +49,7 @@
                 <div class="step1">
                     <h3 class="title"><span>1</span>填写提款账户信息</h3>
                     <div class="mt20">
-                        <p class="mb20 tc"><input type="text" placeholder="开户名" v-model="name"></p>
+                        <p class="mb20 tc"><input type="text" placeholder="个人开户名" v-model="name"></p>
                         <p class="mb20 tc"><input type="text" placeholder="预留手机号" :value="userMobile" readonly></p>
                         <div class="line code-line">
                             <input type="text" placeholder="验证码" v-model="vericode">
@@ -63,7 +63,7 @@
                                 <Option v-for="item in bankList" :value="item.value" :key="item.value">{{ item.label }}</Option>
                             </Select>
                         </p>
-                        <p class="mb20 tc"><input type="text" placeholder="开户支行" v-model="bankname"></p>
+                        <p class="mb20 tc"><input type="text" placeholder="个人开户支行" v-model="bankname"></p>
                     </div>
 
                     <div class="warn" :style="{top:warnTop+'px'}" v-if="showWarn">{{warnTxt}}</div>

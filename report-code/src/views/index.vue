@@ -83,9 +83,9 @@
         name: 'app',
         components:{page1,page2,page3,page4,page5,page6,page7,page8,page9,Loading},
         mounted(){
-            window.intoPageStartTime = new Date().getTime();
+            window.footPrinter.intoPageStartTime = new Date().getTime();
             setTimeout(()=>{
-                this.currentPage = this.$refs.mySwiper.$children[0].$attrs.page;
+                //this.currentPage = this.$refs.mySwiper.$children[0].$attrs.page;
             },300);
         },
         data(){
@@ -100,18 +100,18 @@
                     on:{
                         slideChangeTransitionStart(){
                             let endTime = new Date().getTime();
-                            if(window.stayTime[self.currentPage]){
-                                window.stayTime[self.currentPage] += endTime - window.intoPageStartTime;
+                            if(window.footPrinter.stayTime[self.currentPage]){
+                                window.footPrinter.stayTime[self.currentPage] += endTime - window.footPrinter.intoPageStartTime;
                             }else{
-                                window.stayTime[self.currentPage] = endTime - window.intoPageStartTime;
+                                window.footPrinter.stayTime[self.currentPage] = endTime - window.footPrinter.intoPageStartTime;
                             }
-                            window.intoPageStartTime = endTime;
+                            window.footPrinter.intoPageStartTime = endTime;
                             self.$refs[self.currentPage].$children[0].resetValues();
                         },
                         slideChangeTransitionEnd(){
                             let pageName = self.$refs.mySwiper.$children[this.activeIndex].$attrs.page;
                             self.currentPage = pageName;
-                            window.outPage = pageName.replace('page','');
+                            window.footPrinter.outPage = pageName.replace('page','');
                             self.$refs[self.currentPage].$children[0].setValues();
                         }
                     }
@@ -123,22 +123,22 @@
                 return this.$store.state.isLoading
             },
             p1Show(){
-                return true
+                return false
             },
             p2Show(){
-                return true
+                return false
             },
             p3Show(){
-                return true
+                return false
             },
             p4Show(){
-                return true
+                return false
             },
             p5Show(){
-                return true
+                return false
             },
             p6Show(){
-                return true
+                return false
             },
             p7Show(){
                 return true

@@ -83,7 +83,9 @@
         <div class="page-context">
             <p>今年</p>
             <p>你使用最多的控制是<span class="tag1">{{mostControl}}</span></p>
-            <p>享便利生活，当<span class="tag1">{{pageData.tag}}</span></p>
+            <p v-if="pageData.tag == '科技先锋'">享便利生活，当<span class="tag1">{{pageData.tag}}</span></p>
+            <p v-else-if="pageData.tag == '停车场不迷路'">我有<span class="tag1">{{pageData.tag}}的技巧</span></p>
+            <p v-else>会生活，<span class="tag1">{{pageData.tag}}</span></p>
         </div>
 
         <ul class="times-list">
@@ -92,7 +94,7 @@
             </li>
         </ul>
 
-        <div class="hint">云服务全年为用户提供<span>{{animTimes}}+</span>次服务</div>
+        <div class="hint">云服务全年为用户提供<span>{{animTimes}}</span>次服务</div>
     </section>
 </template>
 
@@ -108,7 +110,7 @@
             }
         },
         mounted(){
-            this.setValues();
+            //this.setValues();
         },
         methods:{
             setValues(){
@@ -132,9 +134,10 @@
                 }
                 this.timesList = arr;
                 TweenLite.to(this.$data,1,{times:this.pageData.totalTimes});
-                this.$nextTick(()=>{
+                setTimeout(()=>{
+                    console.log('s')
                     this.showTags = true;
-                })
+                },100)
             },
             resetValues(){
                 this.times = 0;

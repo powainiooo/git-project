@@ -37,7 +37,8 @@
         <div class="page-context">
             <p>全年充电<span class="tag2">{{animRecharge}}</span>次</p>
             <p>超过全国<span class="tag2">{{animPercent}}%</span>用户</p>
-            <p><span class="tag1">电动出行</span>，让世界更美好</p>
+            <p v-if="energy == 0"><span class="tag1">电动出行</span>，让世界更美好</p>
+            <p v-if="energy == 2"><span class="tag1">电动出行</span>，省钱才是王道！</p>
         </div>
 
         <div class="cloud1"><img src="../assets/images/cloud.png"> </div>
@@ -70,17 +71,21 @@
                 timeStartHour:0,
                 timeStartMin:0,
                 timeEndHour:0,
-                timeEndMin:0
+                timeEndMin:0,
+                energy:0
             }
+        },
+        mounted(){
+            this.energy = window.getParams.energy;
         },
         methods:{
             setValues(){
-                TweenLite.to(this.$data,1,{recharge:124});
-                TweenLite.to(this.$data,1,{percent:20});
-                TweenLite.to(this.$data,1,{hours:4.2});
-                TweenLite.to(this.$data,1,{timeStartHour:0});
+                TweenLite.to(this.$data,1,{recharge:this.pageData.chargeTimes});
+                TweenLite.to(this.$data,1,{percent:this.pageData.chargeRank});
+                TweenLite.to(this.$data,1,{hours:this.pageData.chargeAvgTime});
+                TweenLite.to(this.$data,1,{timeStartHour:this.pageData.timeByHour.h1});
                 TweenLite.to(this.$data,1,{timeStartMin:0});
-                TweenLite.to(this.$data,1,{timeEndHour:7});
+                TweenLite.to(this.$data,1,{timeEndHour:this.pageData.timeByHour.h2});
                 TweenLite.to(this.$data,1,{timeEndMin:0});
             },
             resetValues(){
@@ -112,6 +117,9 @@
                 let em = this.timeEndMin.toFixed(0);
                 em = em < 10 ? '0'+em : em;
                 return sh+':'+sm+'-'+eh+':'+em;
+            },
+            pageData(){
+                return this.$store.state.pageData.P6
             }
         }
     }

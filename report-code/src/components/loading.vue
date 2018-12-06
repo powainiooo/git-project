@@ -34,7 +34,7 @@
             <div class="loading-title" v-if="!isOver">
                 <img src="@/assets/images/title-loading.png">
                 <p class="year">2018</p>
-                <p class="name"><span>王家卫</span>的年度报告</p>
+                <p class="name"><span>{{userName}}</span>的年度报告</p>
             </div>
         </transition>
 
@@ -64,6 +64,7 @@
             return{
                 precent:0,
                 steps:0,
+                userName:getParams.userName,
                 imgsList:[
                     '/static/images/bg1.jpg',
                     '/static/images/bg2.jpg',
@@ -123,8 +124,8 @@
                         this.$store.commit('setPageData',res.data.data);
                         this.isAllLoad();
                     }else{
-                        window.errorData = data;
-                        window.location = '/error';
+                        //window.errorData = data;
+                        //window.location = '/error';
                     }
                 })
             },

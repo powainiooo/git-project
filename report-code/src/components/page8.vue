@@ -40,7 +40,7 @@
 
 <template>
     <section class="page8-container">
-        <div v-if="showName == 'control'">
+        <div v-if="pageData.tag == '有底气'">
             <div class="bg">
                 <!--<img src="@/assets/images/bg7.jpg">-->
                 <img src="/static/images/bg8-3.jpg">
@@ -53,8 +53,9 @@
             <div class="page-title"><img src="@/assets/images/title7.png"> </div>
 
             <div class="page-context">
-                <p><span class="tag1">3</span>月<span class="tag1">20</span>日</p>
-                <p>你使用车门解锁<span class="tag1">{{animTimes}}</span>次，<span class="tag1">有底气</span></p>
+                <p><span class="tag1">{{pageData.date.substr(0,2)}}</span>月<span class="tag1">{{pageData.date.substr(3,2)}}</span>日</p>
+                <p>你使用车门解锁<span class="tag1">{{animTimes}}</span>次</p>
+                <p>即使忘了带钥匙，心里也很<span class="tag1">有底气</span></p>
             </div>
 
             <div class="phone"  :class="{'show-phone':showPhone}">
@@ -65,7 +66,7 @@
                 </div>
             </div>
         </div>
-        <div v-if="showName == 'infos'">
+        <div v-if="pageData.tag == '强迫症'">
             <div class="bg">
                 <!--<img src="@/assets/images/bg7.jpg">-->
                 <img src="/static/images/bg7.jpg">
@@ -79,7 +80,7 @@
 
             <div class="phone"  :class="{'show-phone':showPhone}"><img src="/static/images/phone2.png"> </div>
         </div>
-        <div v-if="showName == 'share'">
+        <div v-if="pageData.tag == '分享达人'">
             <div class="bg">
                 <img src="/static/images/bg7.jpg">
             </div>
@@ -104,7 +105,7 @@
 
             <div class="phone" :class="{'show-phone':showPhone}"><img src="/static/images/phone1.png"> </div>
         </div>
-        <div v-if="showName == 'order'">
+        <div v-if="pageData.tag == '有计划' || pageData.tag == '新尝试'">
             <div class="bg">
                 <!--<img src="@/assets/images/bg7.jpg">-->
                 <div style="position: relative; font-size: 0; overflow: hidden;">
@@ -115,13 +116,14 @@
             </div>
             <div class="page-title"><img src="@/assets/images/title7.png"> </div>
 
-            <div class="page-context">
-                <p>你还没有使用过预约服务</p>
+            <div class="page-context" v-if="pageData.tag == '新尝试'">
+                <p>你还没有使用过服务预约</p>
                 <p>不排队，能省钱，新一年<span class="tag1">新尝试</span></p>
             </div>
-            <div class="page-context" style="display: none;">
-                <p><span class="tag1">3</span>月<span class="tag1">20</span>日</p>
-                <p>你首次使用预约服务</p>
+            <div class="page-context" style="display: none;" v-if="pageData.tag == '有计划'">
+                <p><span class="tag1">{{pageData.date.substr(0,2)}}</span>月<span class="tag1">{{pageData.date.substr(3,2)}}</span>日</p>
+                <p v-if="pageData.times == 1">你首次使用服务预约</p>
+                <p v-else>使用服务预约<span class="tag1">{{animTimes}}</span>次</p>
                 <p>生活就要<span class="tag1">有计划</span></p>
             </div>
 
@@ -129,7 +131,7 @@
 
             <car :scale="0.5" :class="{'c-car-active':showCar}" :driving="driving"></car>
         </div>
-        <div v-if="showName == 'elec'">
+        <div v-if="pageData.tag == '有态度'">
             <div class="bg">
                 <!--<img src="@/assets/images/bg7.jpg">-->
                 <img src="/static/images/bg8-2.png" style="z-index: 10;">
@@ -176,6 +178,9 @@
             },
             animTimes(){
                 return this.times.toFixed(0);
+            },
+            pageData(){
+                return this.$store.state.pageData.P8
             }
         },
         mounted(){
@@ -183,7 +188,7 @@
         },
         methods:{
             setValues(){
-                TweenLite.to(this.$data,1,{times:11});
+                TweenLite.to(this.$data,1,{times:this.pageData.times});
                 this.showPhone = true;
                 this.showCar = true;
                 setTimeout(()=>{

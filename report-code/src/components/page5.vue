@@ -40,7 +40,8 @@
             <p>全年绿色出行</p>
             <p>减少CO2排放<span class="tag2">{{animCo2Per}}</span>kg</p>
             <p>相当于种植<span class="tag2">{{animTree}}</span>棵冷杉树</p>
-            <p><span class="tag1">环保达人</span>就是你了</p>
+            <p v-if="this.pageData.tag == '环保达人'"><span class="tag1">{{pageData.tag}}</span>就是你了</p>
+            <p v-if="this.pageData.tag == '积少成多'">为地球降温，<span class="tag1">{{pageData.tag}}~</span></p>
         </div>
 
         <div class="context2">
@@ -72,10 +73,10 @@
         },
         methods:{
             setValues(){
-                TweenLite.to(this.$data,1,{co2Per:22});
-                TweenLite.to(this.$data,1,{tree:10});
-                TweenLite.to(this.$data,1,{co2Total:2012});
-                TweenLite.to(this.$data,1,{treeTotal:12.1});
+                TweenLite.to(this.$data,1,{co2Per:this.pageData.co2});
+                TweenLite.to(this.$data,1,{tree:this.pageData.tree});
+                TweenLite.to(this.$data,1,{co2Total:this.pageData.co2ALL});
+                TweenLite.to(this.$data,1,{treeTotal:this.pageData.treeALL});
             },
             resetValues(){
                 this.co2Per = 0;
@@ -96,6 +97,9 @@
             },
             animTreeTotal(){
                 return this.treeTotal.toFixed(1);
+            },
+            pageData(){
+                return this.$store.state.pageData.P5
             }
         }
     }

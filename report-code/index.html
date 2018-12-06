@@ -5,19 +5,20 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,shrink-to-fit=no">
     <meta content="yes" name="apple-mobile-web-app-capable">
     <meta content="black" name="apple-mobile-web-app-status-bar-style">
-    <title>report-code</title>
+    <title>比亚迪云服务年报</title>
     <script src="static/TweenMax.min.js"></script>
     <script>
         function getQueryString(name) {
             var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
             var r = window.location.hash.substr(8).match(reg);
-            if (r != null) return unescape(r[2]);
+            if (r != null) return r[2];
             return null;
         }
         var getParams = {};
-        getParams.data = getQueryString('data') || 'FdmNx5tygr6LP2FDxZOsOcQQ+y1ZtjQpBcy/SKqTfcsdsxVN2aUUMS+J2cuEUCKOI5F70lKOj8JFvFYwm/m82jek0QoAeUZ0S+dVxs9753mC7/CneLTH8jxrtmhPu5tcSwQke+ZaX/7Mfq1k2cdmIUPUfwi1ezbMYX47ZD/Us5e4lBff/pWPSS4K9dGE90HLZtmIJ6plRCwWbek/lSHERlkM107uhvo4hJqbr45KOWSuDoZDyZojUGARhe6NyUZlgMmbjo7Ynz6cmaWvUXVN7nVYUL50qL9TC6mrDAnbVhaF7r3bJ9JlwkuLeb3cmWGUhUMe1AEvJtZXB90su+kLY2FP1ZJ0JNhphmHx/dw53JC8=';
-        getParams.userName = getQueryString('userName') || 0;
-        getParams.carType = getQueryString('carType') || 'asdfsdaf';
+        getParams.data = getQueryString('data');
+        getParams.userName = decodeURI(getQueryString('userName'));
+        getParams.carType = decodeURI(getQueryString('carType'));
+        getParams.energy = getQueryString('energyType') || '2';
 
         var footPrinter = {};//脚印数据
         //所有页停留时间
@@ -26,12 +27,12 @@
         footPrinter.outPage = '1';
         //所选风格
         footPrinter.tagStyle = 100;
-        //图片资源
-        footPrinter.posterimgData = '';
         //生成小传次数
         footPrinter.posterTimes = 0;
         //进入页面开始时间
         footPrinter.intoPageStartTime = 0;
+        //图片资源
+        var posterImgData = '';
         //接口错误数据
         var errorData = {};
 
@@ -59,5 +60,11 @@
 </html>
 <!--
     http://10.9.32.19:8080/nianbao
-    https://webtestservice.bydauto.com.cn:5018/nianbao
+    https://webtestservice.bydauto.com.cn:5011/nianbao
+
+    https://webtestservice.bydauto.com.cn:5011/nianbao?userName=杨锦伦&carType=秦EV&data=FdmNx5tygr6LP2FDxZOsOcSTF1pImwGaFjyqsiDmOEGmHZeslUYAIbcgaXiP+k1I3Yx+wYkW7YSDbQvemFBz/mKWLbXaQKJc9tUPh0bFBONRv5FQoppaWkZEh/n4ZbnYGeg6jOuRdF1hOh/CrMWObDjGa3SXWiOwLCeqQ08H0ZeMqv7roNGgabDokaJ5mGgOBDYZUSTGuYxV5+K+nTpoxiTulbq3INoR3w9GZkt+Nym92CxCK8NSGII76oX1Aj77takD/GFnxrqmXxqOyQlMuQRWqpxnOkLjg95ZoJjVt2EvWVPmMNTT8drt8THPp9y9kNcFFjxQ4db12vjC1cBJ/AiSdRGTPU9Xgn9BSRH6SkGU=
+
+    https://webtestservice.bydauto.com.cn:5011/nianbao?userName=杨锦伦&carType=全新唐&data=FVtivYZICEcA/G41iVG3a0ifdUKIkB1HWkDCfg7UTvxvczVod08FeZHvBvxRiTXW73+WUOaFlrdVBchrFXvuoIyPgymCWWGmtgSaATxeQJSDfp30OYOz+mRfU0+CyYYVllqM0QekCHeU0V73MWFPEOMVfKQRJ/TAehsKLUxCVfEPDQeCDRZ0SlBsh2Dv2J5O2khWcHg7qrrsp4q6nat4YbCjNlXtEDvrOdUsIMA1fdnD0U4gH2DYXWsuAPGao55t6iFwIlerzWcArqm7Z3syMZIAM2Vfwb+xnYVs9nmKALCFDmr+dyvIyMxBTOWAhiXr0/0ohyw8FdlCR29B6BZQaNBHDAq0jEiWvaRPZ5umlvUM=
+
+    https://webtestservice.bydauto.com.cn:5011/nianbao?userName=杨锦伦&carType=秦 &data=FdmNx5tygr6LP2FDxZOsOcQQ+y1ZtjQpBcy/SKqTfcsdsxVN2aUUMS +J2cuEUCKOI5F70lKOj8JFvFYwm/m82jek0QoAeUZ0S +dVxs9753mC7/CneLTH8jxrtmhPu5tcSwQke +ZaX/7Mfq1k2cdmIUPUfwi1ezbMYX47ZD/Us5e4lBff/pWPSS4K9dGE90HLZtmIJ6plRCwWbek/lSHE RlkM107uhvo4hJqbr45KOWSuDoZDyZojUGARhe6NyUZlgyv2LU/b3a9SIOJjIkyYKfqi982W0mCFu5L W2he7tKq7GBFXqCJC7vknKpXu3BGcHeY8oH4V4BNMYJNXsrx5hz436p7m0aj+ShhPvHKP3PSc=
 -->

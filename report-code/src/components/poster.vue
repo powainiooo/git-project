@@ -65,8 +65,8 @@
             return{
                 showPoster:false,
                 showName:false,
-                car:'秦',
-                name:'王家卫',
+                car:getParams.carType,
+                name:getParams.userName,
                 textArr:[],
                 bgColor:'#fff'
             }
@@ -83,6 +83,15 @@
             },
             tag4(){//p8
                 return '分享达人'
+            },
+            tagList(){
+                let tagName = ['P2','P4','P7','P8'],arr = [],data = this.$store.state.pageData;
+                for(let item of tagName){
+                    if(data[item] != undefined){
+                        arr.push(data[item].tag)
+                    }
+                }
+                return arr
             }
         },
         methods:{
@@ -91,10 +100,9 @@
                 let data = textConfig.poster['style'+this.styleKey];
                 this.textArr = [];
                 if(this.styleKey == 3)this.textArr.push('2018年，我们度过了激动人心的一年： ');
-                this.textArr.push(data[this.tag1]);
-                this.textArr.push(data[this.tag2]);
-                this.textArr.push(data[this.tag3]);
-                this.textArr.push(data[this.tag4]);
+                for(let item of this.tagList){
+                    this.textArr.push(data[item]);
+                }
                 this.textArr.push(data.add);
             },
             draw(){
@@ -228,7 +236,7 @@
                 }
             },
             doShare(){
-                window.footPrinter.posterimgData = canvas.toDataURL().replace('data:image/png;base64,','');
+                window.posterImgData = canvas.toDataURL().replace('data:image/png;base64,','');
                 let endTime = new Date().getTime();
                 if(window.footPrinter.stayTime['page'+window.footPrinter.outPage]){
                     window.footPrinter.stayTime['page'+window.footPrinter.outPage] += endTime - window.footPrinter.intoPageStartTime;

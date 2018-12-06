@@ -9,6 +9,7 @@
         -webkit-user-select: none;
         -ms-user-select: none;
         user-select: none;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     }
     body{ background-color: #EFF7FD; font-family: 'Helve','Micro Yahei', 'Avenir', Helvetica, Arial, sans-serif;}
     @font-face {
@@ -123,28 +124,28 @@
                 return this.$store.state.isLoading
             },
             p1Show(){
-                return false
+                return this.$store.state.pageData.P1 != undefined
             },
             p2Show(){
-                return false
+                return this.$store.state.pageData.P2 != undefined
             },
             p3Show(){
-                return false
+                return this.$store.state.pageData.P3 != undefined
             },
             p4Show(){
-                return false
+                return this.$store.state.pageData.P4 != undefined
             },
             p5Show(){
-                return false
+                return this.$store.state.pageData.P5 != undefined
             },
             p6Show(){
-                return false
+                return this.$store.state.pageData.P6 != undefined
             },
             p7Show(){
-                return true
+                return this.$store.state.pageData.P7 != undefined
             },
             p8Show(){
-                return true
+                return this.$store.state.pageData.P8 != undefined
             },
             p9Show(){
                 return true

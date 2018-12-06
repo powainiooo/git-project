@@ -34,17 +34,7 @@
         <div class="title"><img src="@/assets/images/title9.png"> </div>
 
         <ul class="keywords-list">
-            <li>科技先锋</li>
-            <li>早出晚归</li>
-            <li>强迫症</li>
-            <li>旋转的陀螺</li>
-            <li>节能王者</li>
-            <li>潜力股</li>
-            <li>环保达人</li>
-            <li>故乡</li>
-            <li>远方</li>
-            <li>分享达人</li>
-            <li>轻松出行</li>
+            <li v-for="item in tagList">{{item}}</li>
         </ul>
 
         <div class="btn" @click="showStyle = true"><img src="@/assets/images/btn.png"></div>
@@ -76,12 +66,12 @@
         components:{poster},
         data(){
             return{
-                showStyle:true,
-                styleKey:3
+                showStyle:false,
+                styleKey:1
             }
         },
         mounted(){
-            this.doDraw()
+            //this.doDraw()
         },
         methods:{
             setValues(){
@@ -92,6 +82,15 @@
             },
             doDraw(){
                 this.$refs.poster.draw();
+            }
+        },
+        computed:{
+            tagList(){
+                let pageData = this.$store.state.pageData,arr = [];
+                for(let item in pageData){
+                    if(pageData[item].tag != undefined) arr.push(pageData[item].tag)
+                }
+                return arr;
             }
         }
     }

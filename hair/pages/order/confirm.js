@@ -18,6 +18,7 @@ Page({
         selectDate:app.globalData.selectDate,
         selectWeek:app.globalData.selectWeek,
         selectTime:app.globalData.selectTime,
+        ruleContent:'',
         proInfo:[
             {
                 show:false,
@@ -150,6 +151,18 @@ Page({
      */
     onLoad: function (options) {
         this.proInit();
+        this.setData({
+            proPackage:app.globalData.proPackage,
+            proClean:app.globalData.proClean,
+            proConditioner:app.globalData.proConditioner,
+            proTreatment:app.globalData.proTreatment,
+            buyerInfo:app.globalData.buyerInfo,
+            store:app.globalData.store,
+            selectDate:app.globalData.selectDate,
+            selectWeek:app.globalData.selectWeek,
+            selectTime:app.globalData.selectTime,
+            ruleContent:app.globalData.ruleContent
+        })
     },
     proInit(){
         let arr = this.data.proInfo;

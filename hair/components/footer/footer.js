@@ -51,11 +51,13 @@ Component({
         },
         openMenu(){
             const app = getApp();
+            let obj = {};
+
             this.setData({
                 showMenu:false,
                 showClose:true,
                 showMenuList:true,
-                isDisabled:typeof app.globalData.personalPackage == 'array'
+                isDisabled:app.globalData.personalPackage.length != undefined
             });
             this.triggerEvent('openMenu')
         },

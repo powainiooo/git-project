@@ -78,6 +78,7 @@ App({
         userInfo: null,
         ajaxSrc:'http://hair.pc-online.cc/mobile/applet/',
         imgSrc:'http://hair.pc-online.cc/upload/',
+        ruleContent:'',
         orderNum:'T2018112414571003',
         store:{
             address:"深圳市福田区购物广场6号wh",

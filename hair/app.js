@@ -76,8 +76,8 @@ App({
     globalData: {
         userOpenID:'',
         userInfo: null,
-        ajaxSrc:'http://hair.pc-online.cc/mobile/applet/',
-        imgSrc:'http://hair.pc-online.cc/upload/',
+        ajaxSrc:'https://hair.designbyho.com/mobile/applet/',
+        imgSrc:'https://hair.designbyho.com/upload/',
         ruleContent:'',
         orderNum:'T2018112414571003',
         store:{
@@ -125,7 +125,9 @@ App({
  hair2@designbyho.com
  Hahadiaozhale1
 
- http://hair.pc-online.cc/main/manage
+ https://hair.designbyho.com/main/manage
  hairadmin
  123456
+
+ https://hair.designbyho.com/store
  * */

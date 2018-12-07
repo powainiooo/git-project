@@ -96,7 +96,7 @@
                     let img = new Image();
                     img.onload = function(){
                         self.steps += 1;
-                        self.precent = Math.floor(self.steps / self.imgsList.length * 100);
+                        self.precent = Math.floor(self.steps / (self.imgsList.length+1) * 100);
                         resolve(img);
                     };
                     img.onerror = function(){
@@ -123,6 +123,8 @@
                         this.dataLoadOver = true;
                         this.$store.commit('setPageData',res.data.data);
                         this.isAllLoad();
+                        this.steps += 1;
+                        this.precent = Math.floor(this.steps / (this.imgsList.length+1) * 100);
                     }else{
                         //window.errorData = data;
                         //window.location = '/error';

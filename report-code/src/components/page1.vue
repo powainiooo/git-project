@@ -5,7 +5,7 @@
     .page1-container .bg .car{ width: 12%; position: absolute; left: 58%; bottom: 33%;}
 
     .page1-circle{ width: 80%; position: absolute; left: 10%; bottom: 6%; display: flex; justify-content: space-between;}
-    .page1-circle li{ width: 22vw; height: 22vw; list-style: none;}
+    .page1-circle li{ width: 23vw; height: 23vw; list-style: none;}
     .page1-circle li div{ width: 100%; height: 100%; border: 2px solid #46B3E9; border-radius: 50%; background-color: rgba(255,255,255,0.5); display: flex; justify-content: center; align-items: center; flex-direction: column; font-size: 0.24rem; color: #333333; line-height: 1.1; padding-top: 0.16rem; box-sizing: border-box;}
     .page1-circle li span{ font-size: 0.46rem; color: #2B5FD5;}
     .page1-circle li:nth-child(1) div{ margin-top: -1vw;}
@@ -65,7 +65,7 @@
         <div class="page-title"><img src="@/assets/images/title1.png"> </div>
 
         <div class="page-context">
-            <p v-if="pageData.regTime"><span class="tag1">2018</span>年<span class="tag1">2</span>月<span class="tag1">4</span>日</p>
+            <p v-if="pageData.regTime"><span class="tag1">{{pageData.regTime.substr(0,4)}}</span>年<span class="tag1">{{pageData.regTime.substr(5,2)}}</span>月<span class="tag1">{{pageData.regTime.substr(8,2)}}</span>日</p>
             <p v-if="pageData.regTime">您加入云服务</p>
             <p>到年底行驶了<span class="tag2">{{animTotalMiles}}</span>公里</p>
             <p>在<span class="tag2">{{animDaysDrive}}</span>天里开过车</p>

@@ -123,6 +123,7 @@
                     light:'闪灯',
                     airRes:'预约开空调'
                 };
+                this.mostControl = keys[this.pageData.control];
                 let data = this.pageData.controlByType,arr = [];
                 for(let item in data){
                     if(keys[item] != undefined){

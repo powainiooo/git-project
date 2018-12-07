@@ -53,7 +53,7 @@
             <div class="page-title"><img src="@/assets/images/title7.png"> </div>
 
             <div class="page-context">
-                <p><span class="tag1">{{pageData.date.substr(0,2)}}</span>月<span class="tag1">{{pageData.date.substr(3,2)}}</span>日</p>
+                <p><span class="tag1">{{pageData.date.substr(5,2)}}</span>月<span class="tag1">{{pageData.date.substr(8,2)}}</span>日</p>
                 <p>你使用车门解锁<span class="tag1">{{animTimes}}</span>次</p>
                 <p>即使忘了带钥匙，心里也很<span class="tag1">有底气</span></p>
             </div>
@@ -121,13 +121,13 @@
                 <p>不排队，能省钱，新一年<span class="tag1">新尝试</span></p>
             </div>
             <div class="page-context" style="display: none;" v-if="pageData.tag == '有计划'">
-                <p><span class="tag1">{{pageData.date.substr(0,2)}}</span>月<span class="tag1">{{pageData.date.substr(3,2)}}</span>日</p>
+                <p><span class="tag1">{{pageData.date.substr(5,2)}}</span>月<span class="tag1">{{pageData.date.substr(8,2)}}</span>日</p>
                 <p v-if="pageData.times == 1">你首次使用服务预约</p>
                 <p v-else>使用服务预约<span class="tag1">{{animTimes}}</span>次</p>
                 <p>生活就要<span class="tag1">有计划</span></p>
             </div>
 
-            <div class="hint">全国最爱预约的城市<span>深圳</span></div>
+            <div class="hint">全国最爱预约的城市<span>{{pageData.city}}</span></div>
 
             <car :scale="0.5" :class="{'c-car-active':showCar}" :driving="driving"></car>
         </div>

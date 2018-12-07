@@ -76,7 +76,7 @@
                 TweenLite.to(this.$data,1,{co2Per:this.pageData.co2});
                 TweenLite.to(this.$data,1,{tree:this.pageData.tree});
                 TweenLite.to(this.$data,1,{co2Total:this.pageData.co2ALL});
-                TweenLite.to(this.$data,1,{treeTotal:this.pageData.treeALL});
+                TweenLite.to(this.$data,1,{treeTotal:this.pageData.treeAll});
             },
             resetValues(){
                 this.co2Per = 0;

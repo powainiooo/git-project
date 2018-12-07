@@ -83,9 +83,11 @@
                 TweenLite.to(this.$data,1,{recharge:this.pageData.chargeTimes});
                 TweenLite.to(this.$data,1,{percent:this.pageData.chargeRank});
                 TweenLite.to(this.$data,1,{hours:this.pageData.chargeAvgTime});
-                TweenLite.to(this.$data,1,{timeStartHour:this.pageData.timeByHour.h1});
+                let hour1 = parseInt(this.pageData.timeByHour.substr(0,2));
+                TweenLite.to(this.$data,1,{timeStartHour:hour1});
                 TweenLite.to(this.$data,1,{timeStartMin:0});
-                TweenLite.to(this.$data,1,{timeEndHour:this.pageData.timeByHour.h2});
+                let hour2 = parseInt(this.pageData.timeByHour.substr(4,2));
+                TweenLite.to(this.$data,1,{timeEndHour:hour2});
                 TweenLite.to(this.$data,1,{timeEndMin:0});
             },
             resetValues(){

@@ -66,7 +66,7 @@
     <view class="icons icon-guanbi" bindtap="hideRules"></view>
     <view class="tips-frame">
         <view class="icons icon-tips"></view>
-        <text>Hair 会确保您的个人信息不被泄露，姓名与联系电话仅在到店身份验证以及紧急情况下使用。</text>
+        <text>{{ruleContent}}</text>
     </view>
     <view class="logo">
         <view class="icons icon-logo"></view>

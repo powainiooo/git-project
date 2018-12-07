@@ -53,7 +53,8 @@ Page({
             success:res=>{
                 this.setData({
                     pageData:res.data.data
-                })
+                });
+                app.globalData.ruleContent = res.data.data.rule;
             }
         })
     },

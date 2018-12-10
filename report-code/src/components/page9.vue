@@ -37,7 +37,7 @@
             <li v-for="item in tagList">{{item}}</li>
         </ul>
 
-        <div class="btn" @click="showStyle = true"><img src="@/assets/images/btn.png"></div>
+        <div class="btn" @click="openSelect"><img src="@/assets/images/btn.png"></div>
 
         <transition enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
         <div class="style-container" v-if="showStyle">
@@ -49,7 +49,7 @@
                     <li :class="styleKey == 3 ? 'active' : ''" @click="styleKey = 3">天猫体</li>
                 </ul>
                 <div class="btns">
-                    <a href="javascript:;" @click="showStyle = false">取消</a>
+                    <a href="javascript:;" @click="doCancel">取消</a>
                     <a href="javascript:;" @click="doDraw">确定</a>
                 </div>
             </div>
@@ -80,8 +80,14 @@
             resetValues(){
 
             },
+            openSelect(){
+                this.showStyle = true;
+            },
             doDraw(){
                 this.$refs.poster.draw();
+            },
+            doCancel(){
+                this.showStyle = false;
             }
         },
         computed:{

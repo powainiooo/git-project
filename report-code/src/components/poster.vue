@@ -1,6 +1,7 @@
 <style>
     .poster-frame{ width: 100vw; height: 100vh; position: absolute; top: 0; left: 0; z-index: 600; font-size: 0; overflow-x: hidden; overflow-y: scroll;}
-    .poster-frame canvas{ width: 100vw;}
+    .poster-frame canvas{ width: 100vw; position: fixed; top: -10000px; left: -10000px;}
+    .poster-frame .shareImg{ width: 100vw; display: block;}
     .poster-frame .btns1{ width: 100%; display: flex; justify-content: space-around; margin-bottom: 15px;}
     .poster-frame .btns1 a{ width: 2.7rem; height: 0.8rem; border-radius: 30px; color: #FFFFFF; font-size: 0.36rem; display: flex; justify-content: center; align-items: center; background-color: #2B5FD5; text-decoration: none;}
 
@@ -17,6 +18,7 @@
 <template>
     <div class="poster-frame" v-show="showPoster" :style="{background:bgColor}" @touchmove.stop="touchmove">
         <canvas id="poster" width="750" height="1213"></canvas>
+        <img :src="shareImgSrc" class="shareImg"/>
         <div class="btns1">
             <a href="javascript:;" @click="showPoster = false">换个风格</a>
             <a href="javascript:;" @click="doShare">分享给好友</a>
@@ -68,22 +70,11 @@
                 car:getParams.carType,
                 name:getParams.userName,
                 textArr:[],
-                bgColor:'#fff'
+                bgColor:'#fff',
+                shareImgSrc:''
             }
         },
         computed:{
-            tag1(){//p2
-                return '朝九晚五'
-            },
-            tag2(){//p4
-                return '会省钱'
-            },
-            tag3(){//p7
-                return '科技先锋'
-            },
-            tag4(){//p8
-                return '分享达人'
-            },
             tagList(){
                 let tagName = ['P2','P4','P7','P8'],arr = [],data = this.$store.state.pageData;
                 for(let item of tagName){
@@ -126,6 +117,7 @@
                 ]).then((res)=>{
                     let tag = 'style'+window.footPrinter.tagStyle;
                     this[tag](ctx,res);
+                    this.shareImgSrc = canvas.toDataURL();
                 })
             },
             style1(ctx,res){
@@ -236,13 +228,8 @@
                 }
             },
             doShare(){
-                window.posterImgData = canvas.toDataURL().replace('data:image/png;base64,','');
-                let endTime = new Date().getTime();
-                if(window.footPrinter.stayTime['page'+window.footPrinter.outPage]){
-                    window.footPrinter.stayTime['page'+window.footPrinter.outPage] += endTime - window.footPrinter.intoPageStartTime;
-                }else{
-                    window.footPrinter.stayTime['page'+window.footPrinter.outPage] = endTime - window.footPrinter.intoPageStartTime;
-                }
+                window.posterImgData = this.shareImgSrc.replace('data:image/png;base64,','');
+                window.pageOutFunc();
                 window.location = '/doShare';
             },
             doError(){

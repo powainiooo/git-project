@@ -126,8 +126,8 @@
                         this.steps += 1;
                         this.precent = Math.floor(this.steps / (this.imgsList.length+1) * 100);
                     }else{
-                        //window.errorData = data;
-                        //window.location = '/error';
+                        window.errorData = data;
+                        window.location = '/error';
                     }
                 })
             },

@@ -15,7 +15,7 @@
             return null;
         }
         var getParams = {};
-        getParams.data = getQueryString('data') || 'FuBx104Il9nW4Dv8qIkuhBkw6w9m8f7p0GTJ6lFmbCwlfCfPaXD3/9QAxE/wx2dF/t3T1iQPgQI4nRvjlRYHD4deDArmYNfonL9UDpSPMAcLEJA5iB077akmRMOr+1r0OuGvhNe4NOj2TQfBsIf4aW2kLayO8M3LQHP7lkR706/D3/Em3HhwOAv4ADDG5CauvG3vsFVSPyw9JZq72WNTvmcbvjTK1XBT3ewkfno+C3CWs/TbEDwqsUIij5o29UKcAfroUK5GBRcUDpOy+udqy51+SUxEhBmFnDWglceVE0t/q/DiHU0VDbrLkZX/dPkEj0oO7fAO3D8hjfQOJp3vnA+q2FCI8JpYOWGbDsD23rtkpfMjZxtSXsUOBgBdpQZL0fpuNEKzDPJJ71R5dGGH7Kw==';
+        getParams.data = getQueryString('data') || 'F2APX2ln5BUDNNms0qjl3D65n+b5UcNEMa9XWGXjUO+uZFnsGsHMy1tmV1D6FSFRHE/Wj1Al9JR3UcGTpPH4AKpaLgGO9o9z1+yi3Mvm1u5UCMar9UQF6rx7HnoHBxiyPxBp9d+3c8pimiyf+yTmCZc8NvlYifbQ3wVxLDZGll6aZ/1dGv8n1awfRXxqXisc9GhiQA/N/nT/E5dzwSfbRmr976y2GilcWpYSmbUwTOoXZlW/JCAKWXRdcYBSiV5TjbU/8nII/OeyWXIENyCWoOgjyZvFIdwZzN5Wmnx5/twMjHxVZJvO8kYoPO7c1TYzobcxwBnwZKnf7z6vvJKtzf/pGNEdadaZmjHXtHCJOPbA=';
         getParams.userName = decodeURI(getQueryString('userName'));
         getParams.carType = decodeURI(getQueryString('carType'));
         getParams.energy = getQueryString('energyType') || '2';
@@ -24,13 +24,15 @@
         //所有页停留时间
         footPrinter.stayTime = {};
         //当前页
-        footPrinter.outPage = '1';
+        footPrinter.currentPage = '1';
         //所选风格
         footPrinter.tagStyle = 100;
         //生成小传次数
         footPrinter.posterTimes = 0;
         //进入页面开始时间
         footPrinter.intoPageStartTime = 0;
+        //浏览到的最大页面
+        footPrinter.lastPage = 1;
         //图片资源
         var posterImgData = '';
         //接口错误数据
@@ -59,6 +61,15 @@
             alert('success!');
             alert(name);
             testName = name;
+        }
+        function pageOutFunc(){
+            let endTime = new Date().getTime();
+            if(window.footPrinter.stayTime['page'+footPrinter.currentPage]){
+                window.footPrinter.stayTime['page'+footPrinter.currentPage] += endTime - window.footPrinter.intoPageStartTime;
+            }else{
+                window.footPrinter.stayTime['page'+footPrinter.currentPage] = endTime - window.footPrinter.intoPageStartTime;
+            }
+            window.footPrinter.intoPageStartTime = endTime;
         }
     </script>
 </head>

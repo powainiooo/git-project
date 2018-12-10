@@ -13,7 +13,7 @@
     .page5-container .context2 p{ margin-bottom: 6px;}
     .page5-container .context2 p span{ color: #2B5FD5;}
 
-    .page5-container .c-car{ position: absolute; left: 75%; bottom: 18%;}
+    .page5-container .c-car{ position: absolute; left: 75%; bottom: 40%;}
 
     .page5-container .cloud1{ width: 8%; position: absolute; top: 15%; left: 100%; animation: cloud 27s linear infinite ;}
     .page5-container .cloud2{ width: 9%; position: absolute; top: 45%; left: 100%; animation: cloud 25s linear infinite 4s;}
@@ -31,6 +31,7 @@
                 <img src="/static/images/bg5.jpg">
                 <img src="/static/images/bg5.jpg">
             </div>
+            <car :scale="0.8"></car>
         </div>
         <div class="next-arrow"><img src="@/assets/images/nextpage.png"> </div>
 
@@ -54,7 +55,6 @@
         <div class="cloud2"><img src="../assets/images/cloud.png"> </div>
         <div class="cloud3"><img src="../assets/images/cloud.png"> </div>
 
-        <car :scale="0.8"></car>
     </section>
 </template>
 

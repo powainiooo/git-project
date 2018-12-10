@@ -100,19 +100,14 @@
                     height:window.innerHeight,
                     on:{
                         slideChangeTransitionStart(){
-                            let endTime = new Date().getTime();
-                            if(window.footPrinter.stayTime[self.currentPage]){
-                                window.footPrinter.stayTime[self.currentPage] += endTime - window.footPrinter.intoPageStartTime;
-                            }else{
-                                window.footPrinter.stayTime[self.currentPage] = endTime - window.footPrinter.intoPageStartTime;
-                            }
-                            window.footPrinter.intoPageStartTime = endTime;
+                            window.pageOutFunc();
                             self.$refs[self.currentPage].$children[0].resetValues();
                         },
                         slideChangeTransitionEnd(){
                             let pageName = self.$refs.mySwiper.$children[this.activeIndex].$attrs.page;
                             self.currentPage = pageName;
-                            window.footPrinter.outPage = pageName.replace('page','');
+                            window.footPrinter.currentPage = pageName.replace('page','');
+                            window.footPrinter.lastPage = window.footPrinter.currentPage > window.footPrinter.lastPage ? window.footPrinter.currentPage : window.footPrinter.lastPage;
                             self.$refs[self.currentPage].$children[0].setValues();
                         }
                     }
@@ -124,27 +119,35 @@
                 return this.$store.state.isLoading
             },
             p1Show(){
+                //return false
                 return this.$store.state.pageData.P1 != undefined
             },
             p2Show(){
+                //return false
                 return this.$store.state.pageData.P2 != undefined
             },
             p3Show(){
+                //return false
                 return this.$store.state.pageData.P3 != undefined
             },
             p4Show(){
+                //return false
                 return this.$store.state.pageData.P4 != undefined
             },
             p5Show(){
+                //return false
                 return this.$store.state.pageData.P5 != undefined
             },
             p6Show(){
+                //return false
                 return this.$store.state.pageData.P6 != undefined
             },
             p7Show(){
+                //return false
                 return this.$store.state.pageData.P7 != undefined
             },
             p8Show(){
+                //return false
                 return this.$store.state.pageData.P8 != undefined
             },
             p9Show(){

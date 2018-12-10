@@ -2,9 +2,10 @@
     .page8-container{ height: 100vh; background-color: #EFF7FD;}
     .page8-container .bg{ width: 100%; position: absolute; left: 0; bottom: 0; font-size: 0;}
     .page8-container .bg>img{ position: relative;}
-    .page8-container .bg .wind1{ position: absolute; top:-30%; left: 16%;}
-    .page8-container .bg .wind2{ position: absolute; top:-30%; left: 78%;}
+    .page8-container .bg .wind1{ position: absolute; bottom:70%; left: 16%;}
+    .page8-container .bg .wind2{ position: absolute; bottom:70%; left: 78%;}
     .page8-container .page-title{ width: 40.4%;}
+    .page8-container .page-context{ z-index: 25;}
 
     .page8-container .phone{ width: 71%; position: absolute; bottom: 0; left: 0; z-index: 20; transform-origin: 0 100%; font-size: 0; transform: rotateZ(90deg);}
     .page8-container .show-phone{ transform: rotateZ(0deg); transition: transform 0.7s cubic-bezier(.39,.91,.77,1.04);}
@@ -14,7 +15,7 @@
     .page8-container .hint{ width: 100%; text-align: center; position: absolute; left: 0; bottom: 7%; font-size: 0.36rem; color: #333333; font-weight: bold;}
     .page8-container .hint span{ color: #2B5FD5;}
 
-    .page8-container .c-car{ position: absolute; left: -10%; bottom: 23%;}
+    .page8-container .c-car{ position: absolute; left: -10%; bottom: 38%;}
     .page8-container .c-car-active{left: 73%; transition: left 2s ease-out;}
 
     .page8-container .svg-frame{ width: 22vw; height: 35vw; position: absolute; top: 30%; right: 10%;}
@@ -113,6 +114,7 @@
                     <skywheel></skywheel>
                 </div>
                 <img src="/static/images/bg8-1.jpg">
+                <car :scale="0.5" :class="{'c-car-active':showCar}" :driving="driving"></car>
             </div>
             <div class="page-title"><img src="@/assets/images/title7.png"> </div>
 
@@ -129,7 +131,6 @@
 
             <div class="hint">全国最爱预约的城市<span>{{pageData.city}}</span></div>
 
-            <car :scale="0.5" :class="{'c-car-active':showCar}" :driving="driving"></car>
         </div>
         <div v-if="pageData.tag == '有态度'">
             <div class="bg">

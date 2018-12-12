@@ -19,3 +19,8 @@
 .time-item-disabled{ color: #e4e3df;}
 .time-item-disabled .time{ color: #e4e3df; text-shadow: none;}
 .time-item-disabled .hint{ font-size: 30rpx;}
+
+.result-frame{ padding: 0 60rpx; box-sizing: border-box; height: calc(100vh - 600rpx); display: flex; flex-direction: column; position: relative; justify-content: center;}
+.result-frame .icon-tips{ color: #e7e3e0; font-size: 70rpx; margin-bottom: 60rpx; color: #372c1e;}
+.result-frame .title-en{ font-size: 67rpx; font-family: 'Helve'; text-shadow: 0 0 3px rgba(55,44,30,0.25); margin-bottom: 10rpx; color: #372c1e;}
+.result-frame .title-cn{ font-size: 60rpx; text-shadow: 0 0 3px rgba(55,44,30,0.25); color: #372c1e;}

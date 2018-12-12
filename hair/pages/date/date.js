@@ -65,19 +65,21 @@ Page({
                 date:date
             },
             success:res=>{
+                let time = res.data.data.info.workdata;
                 this.setData({
-                    timeList:res.data.data.info.workdata
+                    timeList:time == undefined ? [] : time
                 })
             }
         })
     },
     changeDay(e){
         let date = e.currentTarget.dataset.date;
+        console.log(date);
         this.setData({
             selectDate: date.date
         });
         this.data.selectWeek = date.week;
-        this.getTime(date);
+        this.getTime(date.date);
     },
     /**
      * 生命周期函数--监听页面初次渲染完成

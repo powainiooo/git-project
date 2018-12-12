@@ -26,13 +26,15 @@
             <view class="end">预计结束时间{{m1.getTime(item.time)}}</view>
         </view>
     </view>
-    <!--<view class="time-item time-item-disabled">-->
-    <!--<view class="hint">已预订</view>-->
-    <!--<view>-->
-    <!--<view class="time">21:35</view>-->
-    <!--<view class="end">预计结束时间21:45</view>-->
-    <!--</view>-->
-    <!--</view>-->
+    <view wx:if="{{timeList.length == 0}}">
+        <view class="result-frame">
+            <view style="position: relative;">
+                <view class="icons icon-tips"></view>
+            </view>
+            <view class="title-en">Irrelevant Content!</view>
+            <view class="title-cn">无相关内容!</view>
+        </view>
+    </view>
 </view>
 <footer-view bindbtn="doNext"><view slot="btn">下一步 | Next</view></footer-view>
 

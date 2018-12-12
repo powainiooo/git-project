@@ -19,73 +19,76 @@
             </view>
         </view>
     </view>
-    <view class="goods-frame" style="transform: translate({{-(step-1)*100}}vw,0)">
-        <!--清洁列表-->
-        <view class="goods-page">
-            <view wx:for="{{cleanList}}"
-                  wx:for-item="item"
-                  wx:for-index="index"
-                  wx:key="{{item.id}}"
-                  data-id="{{item.id}}"
-                  data-index="{{index}}"
-                  data-price="{{item.price}}"
-                  bindtap="doSelectClean"
-                  hover-class="list-item-hover"
-                  hover-stay-time="50"
-                  class="list-item {{selectedID[0] == item.id ? 'list-item-selected' : ''}}">
-                <image src="{{imgSrc+item.cover}}" mode="scaleToFill" class="img"></image>
-                <view class="name">{{item.englist_name}}</view>
-                <view class="name" style="margin-bottom: 30rpx;">{{item.china_name}}</view>
-                <view class="decs">{{item.intro}}</view>
-                <view class="tips"><text>适用于\n{{item.apply}}</text></view>
-                <view class="price">+6元</view>
-                <view class="icons icon-weixuan"></view>
-                <view class="icons icon-xuanzhong"></view>
+    <view style="overflow: hidden;">
+        <view class="goods-frame" style="transform: translate({{-(step-1)*100}}vw,0)">
+            <!--清洁列表-->
+            <view class="goods-page">
+                <view wx:for="{{cleanList}}"
+                      wx:for-item="item"
+                      wx:for-index="index"
+                      wx:key="{{item.id}}"
+                      data-id="{{item.id}}"
+                      data-index="{{index}}"
+                      data-price="{{item.price}}"
+                      bindtap="doSelectClean"
+                      hover-class="list-item-hover"
+                      hover-stay-time="50"
+                      class="list-item {{selectedID[0] == item.id ? 'list-item-selected' : ''}}">
+                    <image src="{{imgSrc+item.cover}}" mode="scaleToFill" class="img"></image>
+                    <view class="name">{{item.englist_name}}</view>
+                    <view class="name" style="margin-bottom: 30rpx;">{{item.china_name}}</view>
+                    <view class="decs">{{item.intro}}</view>
+                    <view class="tips"><text>适用于\n{{item.apply}}</text></view>
+                    <view class="price">+6元</view>
+                    <view class="icons icon-weixuan"></view>
+                    <view class="icons icon-xuanzhong"></view>
+                </view>
             </view>
-        </view>
-        <!--润发列表-->
-        <view class="goods-page">
-            <view wx:for="{{conditionerList}}"
-                  wx:for-item="item"
-                  wx:for-index="index"
-                  wx:key="{{item.id}}"
-                  data-id="{{item.id}}"
-                  data-index="{{index}}"
-                  data-price="{{item.price}}"
-                  bindtap="doSelectConditioner"
-                  class="list-item {{selectedID[1] == item.id ? 'list-item-selected' : ''}}">
-                <image src="{{imgSrc+item.cover}}" mode="scaleToFill" class="img"></image>
-                <view class="name">{{item.englist_name}}</view>
-                <view class="name" style="margin-bottom: 30rpx;">{{item.china_name}}</view>
-                <view class="decs">{{item.intro}}</view>
-                <view class="tips"><text>适用于\n{{item.apply}}</text></view>
-                <view class="price">+6元</view>
-                <view class="icons icon-weixuan"></view>
-                <view class="icons icon-xuanzhong"></view>
+            <!--润发列表-->
+            <view class="goods-page">
+                <view wx:for="{{conditionerList}}"
+                      wx:for-item="item"
+                      wx:for-index="index"
+                      wx:key="{{item.id}}"
+                      data-id="{{item.id}}"
+                      data-index="{{index}}"
+                      data-price="{{item.price}}"
+                      bindtap="doSelectConditioner"
+                      class="list-item {{selectedID[1] == item.id ? 'list-item-selected' : ''}}">
+                    <image src="{{imgSrc+item.cover}}" mode="scaleToFill" class="img"></image>
+                    <view class="name">{{item.englist_name}}</view>
+                    <view class="name" style="margin-bottom: 30rpx;">{{item.china_name}}</view>
+                    <view class="decs">{{item.intro}}</view>
+                    <view class="tips"><text>适用于\n{{item.apply}}</text></view>
+                    <view class="price">+6元</view>
+                    <view class="icons icon-weixuan"></view>
+                    <view class="icons icon-xuanzhong"></view>
+                </view>
             </view>
-        </view>
-        <!--调理列表-->
-        <view class="goods-page">
-            <view wx:for="{{treatmentList}}"
-                  wx:for-item="item"
-                  wx:for-index="index"
-                  wx:key="{{item.id}}"
-                  data-id="{{item.id}}"
-                  data-index="{{index}}"
-                  data-price="{{item.price}}"
-                  bindtap="doSelectTreatment"
-                  class="list-item {{selectedID[2] == item.id ? 'list-item-selected' : ''}}">
-                <image src="{{imgSrc+item.cover}}" mode="scaleToFill" class="img"></image>
-                <view class="name">{{item.englist_name}}</view>
-                <view class="name" style="margin-bottom: 30rpx;">{{item.china_name}}</view>
-                <view class="decs">{{item.intro}}</view>
-                <view class="tips"><text>适用于\n{{item.apply}}</text></view>
-                <view class="price">+6元</view>
-                <view class="icons icon-weixuan"></view>
-                <view class="icons icon-xuanzhong"></view>
+            <!--调理列表-->
+            <view class="goods-page">
+                <view wx:for="{{treatmentList}}"
+                      wx:for-item="item"
+                      wx:for-index="index"
+                      wx:key="{{item.id}}"
+                      data-id="{{item.id}}"
+                      data-index="{{index}}"
+                      data-price="{{item.price}}"
+                      bindtap="doSelectTreatment"
+                      class="list-item {{selectedID[2] == item.id ? 'list-item-selected' : ''}}">
+                    <image src="{{imgSrc+item.cover}}" mode="scaleToFill" class="img"></image>
+                    <view class="name">{{item.englist_name}}</view>
+                    <view class="name" style="margin-bottom: 30rpx;">{{item.china_name}}</view>
+                    <view class="decs">{{item.intro}}</view>
+                    <view class="tips"><text>适用于\n{{item.apply}}</text></view>
+                    <view class="price">+6元</view>
+                    <view class="icons icon-weixuan"></view>
+                    <view class="icons icon-xuanzhong"></view>
+                </view>
             </view>
         </view>
     </view>
+
 </view>
 <footer-view showPrice bindbtn="doNext">
     <view slot="price">{{selectedPrice[0]+selectedPrice[1]+selectedPrice[2]}}</view>

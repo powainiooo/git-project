@@ -1,7 +1,8 @@
 {
   "pages": [
-    "pages/feedback/feedback",
+    "pages/select/select",
     "pages/index/index",
+    "pages/feedback/feedback",
     "pages/store/store",
     "pages/order/list",
     "pages/result/result",
@@ -12,7 +13,6 @@
     "pages/order/overdue",
     "pages/order/used",
     "pages/order/confirm",
-    "pages/select/select",
     "pages/package/package",
     "pages/information/information",
     "pages/package/editor",

@@ -1,4 +1,5 @@
 // pages/feedback/feedback.js
+const app = getApp();
 Page({
 
     /**
@@ -29,11 +30,12 @@ Page({
     //回到上一页
     doBack(){
         let obj = {};
+        obj.openid = app.globalData.userOpenID;
         obj.orderNum = this.data.orderNum;
         obj.score = this.data.score;
-        obj.text = this.data.text;
+        obj.content = this.data.text;
         wx.request({
-            url:app.globalData.ajaxSrc+"order_desc",
+            url:app.globalData.ajaxSrc+"feedback_add",
             data:obj,
             success:res=>{
                 wx.navigateBack({

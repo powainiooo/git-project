@@ -9,7 +9,8 @@ Page({
         sexArr:['男','女'],
         sexVal:'',
         name:'',
-        mobile:''
+        mobile:'',
+        price:''
     },
     bindSexChange(e){
         let sex = this.data.sexArr[e.detail.value];
@@ -55,7 +56,17 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-
+        let price = 0,g = app.globalData;
+        if(g.proPackage.id == -1){//未选择套餐
+            price += parseFloat(g.proClean.price);
+            price += parseFloat(g.proConditioner.price);
+            price += parseFloat(g.proTreatment.price);
+        }else{
+            price = g.proPackage.price
+        }
+        this.setData({
+            price:price
+        })
     },
 
     /**

@@ -42,7 +42,7 @@
             <p v-if="pageData.tag == '省省吧'">能耗有点高，<span class="tag1">{{pageData.tag}}！</span></p>
         </div>
 
-        <div class="text1">计算参考　油: 6.2元/升　电: 0.68元/度</div>
+        <div class="text1">计算参考　油: 6.86元/升　电: 0.68元/度</div>
     </section>
 </template>
 
@@ -76,7 +76,7 @@
                 return this.elecValue.toFixed(1);
             },
             animMiles(){
-                return this.elecValue.toFixed(1);
+                return this.elecValue.toFixed(2);
             },
             pageData(){
                 return this.$store.state.pageData.P4

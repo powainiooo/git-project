@@ -34,9 +34,9 @@ Page({
             })
         }else{
             app.globalData.proPackage = this.data.listData[this.data.selectedIndex];
-            app.globalData.proClean.id = 0;
-            app.globalData.proConditioner.id = 0;
-            app.globalData.proTreatment.id = 0;
+            app.globalData.proClean.id = -1;
+            app.globalData.proConditioner.id = -1;
+            app.globalData.proTreatment.id = -1;
             wx.navigateTo({
                 url: '/pages/information/information'
             })

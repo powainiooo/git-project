@@ -37,7 +37,7 @@
             <li v-for="item in tagList">{{item}}</li>
         </ul>
 
-        <div class="btn" @click="openSelect"><img src="@/assets/images/btn.png"></div>
+        <div class="btn" @click="openSelect" v-if="showBtn"><img src="@/assets/images/btn.png"></div>
 
         <transition enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
         <div class="style-container" v-if="showStyle">
@@ -97,6 +97,15 @@
                     if(pageData[item].tag != undefined) arr.push(pageData[item].tag)
                 }
                 return arr;
+            },
+            showBtn(){
+                let tagName = ['P2','P4','P7','P8'],arr = [],data = this.$store.state.pageData;
+                for(let item of tagName){
+                    if(data[item] != undefined){
+                        arr.push(data[item].tag)
+                    }
+                }
+                return arr.length != 0
             }
         }
     }

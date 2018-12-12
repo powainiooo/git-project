@@ -39,7 +39,7 @@
 
         <div class="page-context">
             <p>全年绿色出行</p>
-            <p>减少CO2排放<span class="tag2">{{animCo2Per}}</span>kg</p>
+            <p>减少CO2排放<span class="tag2">{{animCo2Per}}</span>{{co2Unit}}</p>
             <p>相当于种植<span class="tag2">{{animTree}}</span>棵冷杉树</p>
             <p v-if="this.pageData.tag == '环保达人'"><span class="tag1">{{pageData.tag}}</span>就是你了</p>
             <p v-if="this.pageData.tag == '积少成多'">为地球降温，<span class="tag1">{{pageData.tag}}~</span></p>
@@ -47,7 +47,7 @@
 
         <div class="context2">
             <p>所有云服务用户，</p>
-            <p>全年减少CO2排放<span>{{animCo2Total}}</span>吨</p>
+            <p>全年减少CO2排放<span>{{animCo2Total}}</span>万吨</p>
             <p>相当于绿化了<span>{{animTreeTotal}}</span>个澳门</p>
         </div>
 
@@ -68,12 +68,22 @@
                 co2Per:0,
                 tree:0,
                 co2Total:0,
-                treeTotal:0
+                treeTotal:0,
+                co2Unit:'kg'
             }
         },
         methods:{
             setValues(){
-                TweenLite.to(this.$data,1,{co2Per:this.pageData.co2});
+                let co2 = this.pageData.co2,unit = 'kg';
+                if(co2 < 1){
+                    co2 = co2*1000;
+                    unit = 'g';
+                }else if(co2 > 1000){
+                    co2 = co2/1000;
+                    unit = 't';
+                }
+                this.co2Unit = unit;
+                TweenLite.to(this.$data,1,{co2Per:co2});
                 TweenLite.to(this.$data,1,{tree:this.pageData.tree});
                 TweenLite.to(this.$data,1,{co2Total:this.pageData.co2ALL});
                 TweenLite.to(this.$data,1,{treeTotal:this.pageData.treeAll});
@@ -87,10 +97,15 @@
         },
         computed:{
             animCo2Per(){
-                return this.co2Per.toFixed(1);
+                let num = 1;
+                let co2 = this.pageData.co2;
+                if(co2 < 1){
+                    num = 0;
+                }
+                return this.co2Per.toFixed(num);
             },
             animTree(){
-                return this.tree.toFixed(1);
+                return this.tree.toFixed(2);
             },
             animCo2Total(){
                 return this.co2Total.toFixed(0);

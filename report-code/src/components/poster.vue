@@ -1,40 +1,45 @@
 <style>
     .poster-frame{ width: 100vw; height: 100vh; position: absolute; top: 0; left: 0; z-index: 600; font-size: 0; overflow-x: hidden; overflow-y: scroll;}
     .poster-frame canvas{ width: 100vw; position: fixed; top: -10000px; left: -10000px;}
-    .poster-frame .shareImg{ width: 100vw; display: block;}
+    .poster-frame .shareImg{ width: 100vw; height:161.7vw;  display: block;}
     .poster-frame .btns1{ width: 100%; display: flex; justify-content: space-around; margin-bottom: 15px;}
-    .poster-frame .btns1 a{ width: 2.7rem; height: 0.8rem; border-radius: 30px; color: #FFFFFF; font-size: 0.36rem; display: flex; justify-content: center; align-items: center; background-color: #2B5FD5; text-decoration: none;}
+    .poster-frame .btns1 a{ width: 2.7rem; height: 0.8rem; border-radius: 30px; color: #FFFFFF; font-size: 0.32rem; display: flex; justify-content: center; align-items: center; background-color: #2B5FD5; text-decoration: none;}
 
-    .poster-frame .hint{ display: flex; background-color: #fff; border-radius: 20px; font-size: 14px; color: #333; position: absolute; top: 17%; left: 50%; z-index: 20; align-items: center; padding: 4px 10px;}
-    .poster-frame .hint2{ top: 22vh; left: 44%; flex-direction: row-reverse;}
-    .poster-frame .hint3{ top: 14.5vh; left: 38%;}
-    .poster-frame .hint  img{ width: 20px; margin:0 5px;}
+    .poster-frame .hint{ width: 110px; display: flex; background-color: #fff; border-radius: 20px; font-size: 14px; color: #333; position: absolute; top: 21vw; left: 5vw; z-index: 20; align-items: center; padding: 4px 10px; transform-origin: 0 50%;}
+    .poster-frame .hint2{ top: 35vw; left: 71vw; width: 20px; flex-direction: column; justify-content: center; align-items: center; padding: 10px 6px; text-align: center; transform-origin: 50% 0;}
+    .poster-frame .hint3{ top: 25.5vw; left: 33vw;}
+    .poster-frame .hint  img{ width: 20px; margin-right:5px;}
 
-    .poster-frame .btn-name{ width: 80px; height: 30px; background-color: rgba(0,0,0,0);position: absolute; top: 12vh; left: 46%; z-index: 25;}
-    .poster-frame .btn-name2{ width: 30px; height: 80px; top: 11vh; left: 70%;}
-    .poster-frame .btn-name3{ top: 14.5vh; left: 19%;}
+    .poster-frame .btn-name{ min-width: 12vw;  height: 10vw; background-color: rgba(0,0,0,0);position: absolute; top: 20vw; left: 45vw; z-index: 25;}
+    .poster-frame .btn-name2{ width: 10vw; height: 15vw; top: 20vw; left: 70vw;}
+    .poster-frame .btn-name3{ top: 25vw; left: 19vw;}
 </style>
 
 <template>
     <div class="poster-frame" v-show="showPoster" :style="{background:bgColor}" @touchmove.stop="touchmove">
         <canvas id="poster" width="750" height="1213"></canvas>
-        <img :src="shareImgSrc" class="shareImg"/>
+        <img :src="shareImgSrc" class="shareImg" :style="{opacity:shareImgSrc == '' ? 0 : 1}"/>
         <div class="btns1">
-            <a href="javascript:;" @click="showPoster = false">换个风格</a>
+            <a href="javascript:;" @click="doChange">换个风格</a>
             <a href="javascript:;" @click="doShare">分享给好友</a>
         </div>
 
-        <div class="btn-name" :class="'btn-name'+styleKey" @click="showName = true"></div>
-        <div class="hint" :class="'hint'+styleKey" @click="showName = true">
+        <div class="btn-name" :class="'btn-name'+styleKey" @click="showName = true">{{name}}</div>
+        <div class="hint"
+             v-if="showHint"
+             :class="'hint'+styleKey"
+             @click="showName = true"
+             :style="{left:hintLeft+'px',top:hintTop+'px',transform:'scale('+hintScale+')'}">
             <img src="@/assets/images/hand.png">
-            <span>点击可修改姓名</span>
+            <span>点击编辑姓名</span>
         </div>
 
         <transition enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
             <div class="style-container" v-if="showName">
                 <div class="style-frame">
-                    <h3>选择风格</h3>
-                    <p style="margin: 20px;"><input type="text" v-model="name"></p>
+                    <h3>编辑名字</h3>
+                    <p style="margin: 20px; margin-bottom: 0;"><input type="text" v-model="lastname" maxlength="5"></p>
+                    <p style="margin: 20px; margin-top: 0; font-size: 12px; color: #ccc;">所取名字仅在生成小传时使用</p>
                     <div class="btns">
                         <a href="javascript:;" @click="showName = false">取消</a>
                         <a href="javascript:;" @click="draw">确定</a>
@@ -69,9 +74,14 @@
                 showName:false,
                 car:getParams.carType,
                 name:getParams.userName,
+                lastname:getParams.userName,
                 textArr:[],
                 bgColor:'#fff',
-                shareImgSrc:''
+                shareImgSrc:'',
+                showHint:false,
+                hintLeft:0,
+                hintTop:0,
+                hintScale:1
             }
         },
         computed:{
@@ -87,6 +97,11 @@
         },
         methods:{
             touchmove(){},
+            doChange(){
+                this.lastname = this.name;
+                this.showPoster = false;
+                this.showHint = false;
+            },
             initText(){
                 let data = textConfig.poster['style'+this.styleKey];
                 this.textArr = [];
@@ -99,6 +114,7 @@
             draw(){
                 this.showPoster = true;
                 this.showName = false;
+                this.name = this.lastname;
                 this.initText();
                 canvas = document.getElementById('poster');
                 let ctx = canvas.getContext('2d');
@@ -118,6 +134,7 @@
                     let tag = 'style'+window.footPrinter.tagStyle;
                     this[tag](ctx,res);
                     this.shareImgSrc = canvas.toDataURL();
+                    this.showHint = true;
                 })
             },
             style1(ctx,res){
@@ -125,11 +142,16 @@
                 ctx.drawImage(res[1],570,890);
 
                 //姓名
-                ctx.font = '40px Micro Yahei';
+                ctx.font = 'bold 40px Micro Yahei';
                 ctx.fillStyle = '#2F7478';
                 ctx.fillText('我是',375-(this.name.length+2)*20,200);
                 ctx.fillStyle = '#2B5FD5';
                 ctx.fillText(this.name,375+80-(this.name.length+2)*20,200);
+                let nameWidth = (this.name.length+2)*40;
+                let gap = (750 - nameWidth)/2/750*window.innerWidth;
+                this.hintScale = gap*0.9/130;
+                this.hintLeft = window.innerWidth - gap + gap*0.05;
+                this.hintTop = window.innerWidth*0.205;
 
                 //框
                 ctx.beginPath();
@@ -143,7 +165,7 @@
                 ctx.stroke();
 
                 //车型
-                ctx.font = '30px Micro Yahei';
+                ctx.font = 'bold 30px Micro Yahei';
                 ctx.fillStyle = '#2F7478';
                 ctx.textAlign = 'center';
                 ctx.fillText('我想告诉你，我的车是'+this.car,375,250);
@@ -163,7 +185,7 @@
                 ctx.drawImage(res[1],580,800);
 
                 //姓名
-                ctx.font = '40px Micro Yahei';
+                ctx.font = 'bold 40px Micro Yahei';
                 ctx.fillStyle = '#333333';
                 ctx.fillTextVertical('我是',560,110);
                 ctx.fillStyle = '#2B5FD5';
@@ -173,9 +195,14 @@
                 ctx.lineTo(600,185+(this.name.length+2)*20);
                 ctx.strokeStyle = '#000000';
                 ctx.stroke();
+                let nameWidth = (this.name.length+2)*40;
+                let gap = (nameWidth+64)/750*window.innerWidth;
+                this.hintScale = 1;
+                this.hintLeft = window.innerWidth*0.71;
+                this.hintTop = gap + gap*0.05;
 
                 //车型
-                ctx.font = '30px Micro Yahei';
+                ctx.font = 'bold 30px Micro Yahei';
                 ctx.fillStyle = '#333333';
                 ctx.fillTextVertical('2018年，我遇见了我人生中的最爱，就是'+this.car,490,100);
                 ctx.beginPath();
@@ -206,14 +233,19 @@
                 ctx.drawImage(res[1],580,900);
 
                 //姓名
-                ctx.font = '40px Micro Yahei';
+                ctx.font = 'bold 40px Micro Yahei';
                 ctx.fillStyle = '#333333';
                 ctx.fillText('我是',64,240);
                 ctx.fillStyle = '#2B5FD5';
                 ctx.fillText(this.name,64+80,240);
+                let nameWidth = (this.name.length+2)*40;
+                let gap = (nameWidth+64)/750*window.innerWidth;
+                this.hintScale = 1;
+                this.hintLeft = gap + gap*0.05;
+                this.hintTop = window.innerWidth*0.255;
 
                 //车型
-                ctx.font = '30px Micro Yahei';
+                ctx.font = 'bold 30px Micro Yahei';
                 ctx.fillStyle = '#333333';
                 ctx.wrapText('我对钱没有兴趣哦，我的爱车是'+this.car,64,300,623,50);
 

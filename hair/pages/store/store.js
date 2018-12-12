@@ -9,6 +9,8 @@ Page({
         lnglat:[114.053987,22.533577],
         shopList:[],
         selectId:0,
+        bannerImgSrc:'',
+        imgSrc:app.globalData.imgSrc,
         store:{}
     },
     //下一步
@@ -41,17 +43,20 @@ Page({
             data:{page:1},
             success:res=>{
                 this.setData({
-                    shopList:res.data.data.list
+                    shopList:res.data.data.list,
+                    bannerImgSrc:res.data.data.list[0].cover,
+                    selectId:res.data.data.list[0].id
                 })
+                this.data.store = res.data.data.list[0];
             }
         })
     },
     doSelect(e){
-        let id = e.target.dataset.id;
         let store = e.target.dataset.store;
         this.setData({
-            selectId:id,
-            store:store
+            selectId:store.id,
+            store:store,
+            bannerImgSrc:store.cover
         })
     },
     doCancel(){

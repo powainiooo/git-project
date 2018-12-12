@@ -8,13 +8,13 @@
 
     .loading .loading-progress{ width: 88%; position: absolute; left: 6%; bottom: 16%;}
     .loading .loading-progress .progress-bar{ width: 100%; height: 8px; border-radius: 10px; background: #FFFFFF;border: 1px solid #2B5FD5; overflow: hidden;}
-    .loading .loading-progress .progress-bar .progress-line{ width: 50%; height: 100%;background: #2B5FD5;}
-    .loading .loading-progress .progress-bar .progress-number{ font-size: 10px; color: #333333; position: absolute; top: 15px; left: 50%; margin-left: -10px;}
+    .loading .loading-progress .progress-bar .progress-line{ width: 50%; height: 100%;background: #2B5FD5; transition: width 0.1s linear;}
+    .loading .loading-progress .progress-bar .progress-number{ font-size: 10px; color: #333333; position: absolute; top: 15px; left: 50%; margin-left: -10px; transition: left 0.1s linear;}
     .loading .loading-progress .tree1{ width: 18%; position: absolute; left: 2%; bottom: 10px; font-size: 0;}
     .loading .loading-progress .tree1 img{ width: 100%;}
     .loading .loading-progress .tree2{ width: 24%; position: absolute; left: 54%; bottom: 10px; font-size: 0;}
     .loading .loading-progress .tree2 img{ width: 100%;}
-    .loading .loading-progress .c-car{ position: absolute; left:80%; bottom: 10px;}
+    .loading .loading-progress .c-car{ position: absolute; left:80%; bottom: 10px;transition: left 0.1s linear;}
 
     .loading .loading-cloud1{ width: 9%; position: absolute; bottom: 35%; left: 80%; animation: cloud1 15s ease-in-out infinite;}
     @keyframes cloud1 {
@@ -64,7 +64,7 @@
             return{
                 precent:0,
                 steps:0,
-                userName:getParams.userName,
+                userName:'',
                 imgsList:[
                     '/static/images/bg1.jpg',
                     '/static/images/bg2.jpg',
@@ -87,7 +87,13 @@
         },
         mounted(){
             this.loadAll();
-            this.getData()
+            this.getData();
+            let name = window.getParams.userName;
+            if(name.length > 4){
+                this.userName = '*' + name.substr(1,3) + '...';
+            }else{
+                this.userName = '*' + name.substr(1,3);
+            }
         },
         methods:{
             loadImgs(src){

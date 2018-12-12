@@ -1,6 +1,8 @@
 {
   "pages": [
+    "pages/feedback/feedback",
     "pages/index/index",
+    "pages/store/store",
     "pages/order/list",
     "pages/result/result",
     "pages/date/date",
@@ -12,10 +14,8 @@
     "pages/order/confirm",
     "pages/select/select",
     "pages/package/package",
-    "pages/store/store",
     "pages/information/information",
     "pages/package/editor",
-    "pages/feedback/feedback",
     "pages/logs/logs"
   ],
   "window": {

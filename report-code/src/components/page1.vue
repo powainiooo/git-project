@@ -67,7 +67,9 @@
         <div class="page-context">
             <p v-if="pageData.regTime"><span class="tag1">{{pageData.regTime.substr(0,4)}}</span>年<span class="tag1">{{pageData.regTime.substr(5,2)}}</span>月<span class="tag1">{{pageData.regTime.substr(8,2)}}</span>日</p>
             <p v-if="pageData.regTime">您加入云服务</p>
-            <p>到年底行驶了<span class="tag2">{{animTotalMiles}}</span>公里</p>
+            <p v-if="pageData.regTime == undefined"><span class="tag1">2018</span>年</p>
+            <p v-if="pageData.regTime">到年底行驶了<span class="tag2">{{animTotalMiles}}</span>公里</p>
+            <p v-if="pageData.regTime == undefined">你行驶了<span class="tag2">{{animTotalMiles}}</span>公里</p>
             <p>在<span class="tag2">{{animDaysDrive}}</span>天里开过车</p>
             <p>在<span class="tag2">{{animDaysService}}</span>天里用过云服务</p>
         </div>

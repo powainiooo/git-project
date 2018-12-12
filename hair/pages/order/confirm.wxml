@@ -62,7 +62,7 @@
     <view slot="btn" wx:if="{{showRule}}">付款 | Payment</view>
 </footer-view>
 <!--rule-->
-<view class="rule-frame" style="top:{{showRule ? '0' : '100vh'}}" catchtouchmove="ruleMove">
+<view class="rule-frame" style="top:{{showRule ? '0' : '101vh'}}" catchtouchmove="ruleMove">
     <view class="icons icon-guanbi" bindtap="hideRules"></view>
     <view class="tips-frame">
         <view class="icons icon-tips"></view>

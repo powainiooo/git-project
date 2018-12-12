@@ -22,5 +22,5 @@
         bindhideMenu="hideBlur"
         bindbtn="doOrder"><view slot="btn">预约 | Order</view></footer-view>
 <view class="foot-btn" wx:if="{{result == 'auth'}}">
-    <button slot="auth-btn" class="auth-btn" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="getUserInfo">授权申请 | Authorization</button>
+    <button plain class="auth-btn" open-type="getUserInfo" bindgetuserinfo="getUserInfo">授权申请 | Authorization</button>
 </view>

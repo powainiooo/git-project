@@ -150,7 +150,6 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        this.proInit();
         this.setData({
             proPackage:app.globalData.proPackage,
             proClean:app.globalData.proClean,
@@ -162,12 +161,13 @@ Page({
             selectWeek:app.globalData.selectWeek,
             selectTime:app.globalData.selectTime,
             ruleContent:app.globalData.ruleContent
-        })
+        });
+        this.proInit();
     },
     proInit(){
         let arr = this.data.proInfo;
         let pro1 = {},pro2 = {},pro3 = {},price = 0;
-        if(this.data.proPackage.id == 0){
+        if(this.data.proPackage.id == -1){
             pro1 = this.data.proClean;
             pro2 = this.data.proConditioner;
             pro3 = this.data.proTreatment;

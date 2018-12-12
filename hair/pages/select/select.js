@@ -94,7 +94,7 @@ Page({
                     image:'../../res/img/warn.png'
                 })
             }else{
-                app.globalData.proPackage.id = {};
+                app.globalData.proPackage.id = -1;
                 app.globalData.proClean = this.data.cleanList[this.data.selectedIndex[0]];
                 app.globalData.proConditioner = this.data.conditionerList[this.data.selectedIndex[1]];
                 app.globalData.proTreatment = this.data.treatmentList[this.data.selectedIndex[2]];

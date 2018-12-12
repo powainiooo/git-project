@@ -38,9 +38,16 @@ Page({
             url:app.globalData.ajaxSrc+"feedback_add",
             data:obj,
             success:res=>{
-                wx.navigateBack({
-                    delta: 1
-                })
+                if(res.data.status == 1){
+                    wx.showToast({
+                      title: '提交成功！'
+                    });
+                    setTimeout(()=>{
+                        wx.navigateBack({
+                            delta: 1
+                        })
+                    },1500)
+                }
             }
         })
     },

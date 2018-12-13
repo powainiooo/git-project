@@ -74,7 +74,6 @@ Page({
     },
     changeDay(e){
         let date = e.currentTarget.dataset.date;
-        console.log(date);
         this.setData({
             selectDate: date.date
         });

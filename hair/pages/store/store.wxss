@@ -1,5 +1,6 @@
 .banner{ width: 100%; margin-bottom: 50rpx;}
-.store-item{ margin: 0 60rpx 60rpx 60rpx;}
+.store-item{ margin: 0 60rpx 60rpx 60rpx;transition:transform 0.15s ease-out;}
+.store-item-hover{ transform: scale(0.95);}
 .store-item .title{ font-size: 60rpx; text-shadow: 0 0 3px rgba(55,44,30,0.25); letter-spacing: 8rpx; margin-bottom: 30rpx;}
 .store-item .address{ font-size: 30rpx; letter-spacing: 5rpx; margin-bottom: 50rpx;}
 .store-item .btns{ display: flex; justify-content: space-between; align-items: center; position: relative; font-size: 60rpx;}

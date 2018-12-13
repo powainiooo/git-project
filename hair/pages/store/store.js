@@ -52,12 +52,14 @@ Page({
         })
     },
     doSelect(e){
-        let store = e.target.dataset.store;
-        this.setData({
-            selectId:store.id,
-            store:store,
-            bannerImgSrc:store.cover
-        })
+        setTimeout(()=>{
+            let store = e.currentTarget.dataset.store;
+            this.setData({
+                selectId:store.id,
+                store:store,
+                bannerImgSrc:store.cover
+            })
+        },200)
     },
     doCancel(){
         this.setData({

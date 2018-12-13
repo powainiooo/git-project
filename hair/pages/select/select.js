@@ -14,7 +14,19 @@ Page({
         cleanList:[],
         conditionerList:[],
         treatmentList:[],
-        imgSrc:app.globalData.imgSrc
+        imgSrc:app.globalData.imgSrc,
+        clean:{
+            lastPrice:0,
+            gapPirce:0
+        },
+        conditioner:{
+            lastPrice:0,
+            gapPirce:0
+        },
+        treatment:{
+            lastPrice:0,
+            gapPirce:0
+        }
     },
     //切换选择
     changeStep(e){
@@ -29,7 +41,7 @@ Page({
     doSelectClean(e){
         setTimeout(()=>{
             let id = e.currentTarget.dataset.id;
-            let price = e.currentTarget.dataset.price;
+            let price = parseFloat(e.currentTarget.dataset.price);
             let index = e.currentTarget.dataset.index;
             let arr = this.data.selectedID;
             let arr2 = this.data.selectedPrice;
@@ -37,10 +49,18 @@ Page({
             arr[0] = id;
             arr2[0] = parseFloat(price);
             arr3[0] = index;
+            let gap = 0;
+            if(this.data.clean.lastPrice != 0){
+                gap = price - this.data.clean.lastPrice;
+            }
             this.setData({
                 selectedID:arr,
                 selectedPrice:arr2,
-                selectedIndex:arr3
+                selectedIndex:arr3,
+                clean:{
+                    lastPrice:price,
+                    gapPirce:gap
+                }
             })
         },150)
 
@@ -57,13 +77,20 @@ Page({
             arr[1] = id;
             arr2[1] = parseFloat(price);
             arr3[1] = index;
+            let gap = 0;
+            if(this.data.conditioner.lastPrice != 0){
+                gap = price - this.data.conditioner.lastPrice;
+            }
             this.setData({
                 selectedID:arr,
                 selectedPrice:arr2,
-                selectedIndex:arr3
+                selectedIndex:arr3,
+                conditioner:{
+                    lastPrice:price,
+                    gapPirce:gap
+                }
             })
         },150)
-
     },
     //选择调理
     doSelectTreatment(e){
@@ -77,10 +104,18 @@ Page({
             arr[2] = id;
             arr2[2] = parseFloat(price);
             arr3[2] = index;
+            let gap = 0;
+            if(this.data.treatment.lastPrice != 0){
+                gap = price - this.data.treatment.lastPrice;
+            }
             this.setData({
                 selectedID:arr,
                 selectedPrice:arr2,
-                selectedIndex:arr3
+                selectedIndex:arr3,
+                treatment:{
+                    lastPrice:price,
+                    gapPirce:gap
+                }
             })
         },150)
 

@@ -4,11 +4,15 @@
     <view class="store-item {{selectId == item.id ? 'store-item-active' : ''}}"
           wx:for="{{shopList}}"
           wx:for-item="item"
-          wx:key="item.id">
+          wx:key="item.id"
+          data-store="{{item}}"
+          bindtap="doSelect"
+          hover-class="store-item-hover"
+          hover-stay-time="50">
         <view class="title">{{item.title}}</view>
         <view class="address">{{item.address}}</view>
         <view class="btns">
-            <view class="icons icon-weixuan" data-store="{{item}}" bindtap="doSelect"></view>
+            <view class="icons icon-weixuan"></view>
             <view class="icons icon-xuanzhong"></view>
             <view class="btn-map" data-lnglat="{{m1.lnglat(item.longitude,item.latitude)}}" bindtap="openMap" hover-class="btn-map-hover" hover-stay-time="50">查看地图</view>
         </view>

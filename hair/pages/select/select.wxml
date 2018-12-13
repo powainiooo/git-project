@@ -39,7 +39,7 @@
                     <view class="name" style="margin-bottom: 30rpx;">{{item.china_name}}</view>
                     <view class="decs">{{item.intro}}</view>
                     <view class="tips"><text>适用于\n{{item.apply}}</text></view>
-                    <view class="price">+6元</view>
+                    <view class="price" wx:if="{{clean.gapPirce != 0 && selectedID[0] == item.id}}">{{clean.gapPirce > 0 ? '+' : ''}}{{clean.gapPirce}}元</view>
                     <view class="icons icon-weixuan"></view>
                     <view class="icons icon-xuanzhong"></view>
                 </view>
@@ -60,7 +60,7 @@
                     <view class="name" style="margin-bottom: 30rpx;">{{item.china_name}}</view>
                     <view class="decs">{{item.intro}}</view>
                     <view class="tips"><text>适用于\n{{item.apply}}</text></view>
-                    <view class="price">+6元</view>
+                    <view class="price" wx:if="{{conditioner.gapPirce != 0 && selectedID[1] == item.id}}">{{conditioner.gapPirce > 0 ? '+' : ''}}{{conditioner.gapPirce}}元</view>
                     <view class="icons icon-weixuan"></view>
                     <view class="icons icon-xuanzhong"></view>
                 </view>
@@ -81,7 +81,7 @@
                     <view class="name" style="margin-bottom: 30rpx;">{{item.china_name}}</view>
                     <view class="decs">{{item.intro}}</view>
                     <view class="tips"><text>适用于\n{{item.apply}}</text></view>
-                    <view class="price">+6元</view>
+                    <view class="price" wx:if="{{treatment.gapPirce != 0 && selectedID[2] == item.id}}">{{treatment.gapPirce > 0 ? '+' : ''}}{{treatment.gapPirce}}元</view>
                     <view class="icons icon-weixuan"></view>
                     <view class="icons icon-xuanzhong"></view>
                 </view>

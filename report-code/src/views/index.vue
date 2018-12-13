@@ -2,14 +2,13 @@
     @import "../assets/animate.min.css";
     @import "../assets/helve.css";
     * {
-        moz-user-select: -moz-none;
-        -moz-user-select: none;
-        -o-user-select: none;
-        -khtml-user-select: none;
         -webkit-user-select: none;
-        -ms-user-select: none;
         user-select: none;
         -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    }
+    *:not(input,textarea) {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
     }
     body{ background-color: #EFF7FD; font-family: 'Helve','Micro Yahei', 'Avenir', Helvetica, Arial, sans-serif;}
     @font-face {

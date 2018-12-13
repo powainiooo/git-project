@@ -30,7 +30,7 @@
 
 <template>
     <div class="loading">
-        <transition leave-active-class="animated fadeOutUp">
+        <transition leave-active-class="animated fadeOut">
             <div class="loading-title" v-if="!isOver">
                 <img src="@/assets/images/title-loading.png">
                 <p class="year">2018</p>

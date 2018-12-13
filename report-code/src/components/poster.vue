@@ -1,8 +1,8 @@
 <style>
-    .poster-frame{ width: 100vw; height: 100vh; position: absolute; top: 0; left: 0; z-index: 600; font-size: 0; overflow-x: hidden; overflow-y: scroll;}
+    .poster-frame{ width: 100vw; height: 100vh; position: absolute; top: 0; left: 0; z-index: 600; font-size: 0; overflow: hidden;}
     .poster-frame canvas{ width: 100vw; position: fixed; top: -10000px; left: -10000px;}
     .poster-frame .shareImg{ width: 100vw; height:161.7vw;  display: block;}
-    .poster-frame .btns1{ width: 100%; display: flex; justify-content: space-around; margin-bottom: 15px;}
+    .poster-frame .btns1{ width: 100%; display: flex; justify-content: space-around; position: absolute; bottom: 3%; left: 0;}
     .poster-frame .btns1 a{ width: 2.7rem; height: 0.8rem; border-radius: 30px; color: #FFFFFF; font-size: 0.32rem; display: flex; justify-content: center; align-items: center; background-color: #2B5FD5; text-decoration: none;}
 
     .poster-frame .hint{ width: 110px; display: flex; background-color: #fff; border-radius: 20px; font-size: 14px; color: #333; position: absolute; top: 21vw; left: 5vw; z-index: 20; align-items: center; padding: 4px 10px; transform-origin: 0 50%;}
@@ -38,7 +38,7 @@
             <div class="style-container" v-if="showName">
                 <div class="style-frame">
                     <h3>编辑名字</h3>
-                    <p style="margin: 20px; margin-bottom: 0;"><input type="text" v-model="lastname" maxlength="5"></p>
+                    <p style="margin: 20px; margin-bottom: 0;"><input type="text" v-model="lastname" maxlength="5" /></p>
                     <p style="margin: 20px; margin-top: 0; font-size: 12px; color: #ccc;">所取名字仅在生成小传时使用</p>
                     <div class="btns">
                         <a href="javascript:;" @click="showName = false">取消</a>

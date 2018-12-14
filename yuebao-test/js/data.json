@@ -1,0 +1,25 @@
+{
+  "result":0,
+  "rebackCode":0,
+  "data":{
+    "rank":75,
+    "peiBanDays":123,
+    "driveMileage":6922,
+    "driveDays":18,
+    "driveTime":123,
+    "OilTimes":5,
+    "oilConsumption":10.6,
+    "ChargeTimes":1,
+    "powerConsumption":123.3,
+    "unlockTimes":0,
+    "lockDoorTimes":15,
+    "openAirTimes":22,
+    "closeAirTimes":17,
+    "appointmentAirTimes":12,
+    "ligthAndWhistle":20,
+    "lightTimes":0,
+    "closeWidnowTimes":0,
+    "remoteControlTimes":60
+  },
+  "bannerList":[{"picUrl":"http://218.17.29.44:8081/AD_image_test/1543883569.jpg"}]
+}

@@ -8,7 +8,7 @@
     <meta content="telephone=no" name="format-detection">
     <meta content="email=no" name="format-detection">
     <meta http-equiv="Cache-Control" content="no-siteapp" />
-    <title>月度报告1</title>
+    <title>月度报告2</title>
     <link href="css/reset.css" type="text/css" rel="stylesheet" />
     <link href="css/helve.css" type="text/css" rel="stylesheet" />
     <link href="css/swiper.min.css" type="text/css" rel="stylesheet" />
@@ -532,7 +532,7 @@ http://10.9.32.19:8080/yuebao/?energyType=2&fixeds=1001,1002,1003,1004,1005&data
                 for(var i=0;i<this.selectYear - this.years[0];i++){
                     this.years.push(this.years[0]+i+1)
                 }
-                let self = this;
+                var self = this;
                 this.$nextTick(function(){
                     self.$refs.year.scrollTop = (self.selectYear - self.years[0])*40;
                 });
@@ -585,7 +585,7 @@ http://10.9.32.19:8080/yuebao/?energyType=2&fixeds=1001,1002,1003,1004,1005&data
                 this.showDate = true;
                 this.selectMonth = this.lastMonth;
                 this.selectYear = this.lastYear;
-                let self = this;
+                var self = this;
                 this.$nextTick(function(){
                     self.$refs.month.scrollTop = (self.selectMonth - 1)*40;
                     self.$refs.year.scrollTop = (self.selectYear - self.years[0])*40;

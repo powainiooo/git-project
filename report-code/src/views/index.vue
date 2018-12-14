@@ -45,6 +45,8 @@
     .style-container .style-frame .btns{ border-top: 1px solid rgba(77,77,77,0.3); display: flex;}
     .style-container .style-frame .btns a{ display: flex; width: 50%; box-sizing: border-box; height: 0.8rem; font-size: 0.32rem; color:#007AFF; text-decoration: none; justify-content: center; align-items: center;}
     .style-container .style-frame .btns a:first-child{ border-right: 1px solid rgba(77,77,77,0.3);}
+
+    .log{ width: 100%; position: absolute; top: 0; left: 0; z-index: 1000; background-color: #ffffff; font-size: 16px;}
 </style>
 
 <template>
@@ -64,6 +66,11 @@
         </swiper>
         </transition>
         <loading v-if="showLoading"></loading>
+
+
+        <!--<div class="log">-->
+            <!--<p v-for="(item,index) in logList">{{index+1}}:{{item}}</p>-->
+        <!--</div>-->
     </div>
 </template>
 
@@ -78,7 +85,7 @@
     import page8 from '@/components/page8'
     import page9 from '@/components/page9'
     import Loading from '@/components/loading'
-    import axios from 'axios'
+    import window from '@/components/params.js'
     export default {
         name: 'app',
         components:{page1,page2,page3,page4,page5,page6,page7,page8,page9,Loading},
@@ -94,6 +101,7 @@
                 startTime:0,
                 endTime:0,
                 currentPage:'page1',
+                logList:[],
                 swiperOption: {
                     direction : 'vertical',
                     height:window.innerHeight,
@@ -101,7 +109,6 @@
                         slideChangeTransitionStart(){
                             window.pageOutFunc();
                             self.$refs[self.currentPage].$children[0].resetValues();
-
                         },
                         slideChangeTransitionEnd(){
                             let pageName = self.$refs.mySwiper.$children[this.activeIndex].$attrs.page;
@@ -155,7 +162,9 @@
             }
         },
         methods:{
-
+            addLog(txt){
+                this.logList.push(txt);
+            }
         }
     }
 

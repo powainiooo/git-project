@@ -3,7 +3,7 @@
     .page2-container .bg{ width: 100%; position: absolute; left: 0; bottom: 0; font-size: 0;}
     .page2-container .page-title{ width: 33.7%;}
 
-    #chart1{ width: 100%; height: 4rem; position: absolute; left: 0; bottom: 8%;}
+    .chart1{ width: 100%; height: 4rem; position: absolute; left: 0; bottom: 8%;}
 </style>
 
 <template>
@@ -26,7 +26,7 @@
             <p>{{getText(pageData.tag)}}</p>
         </div>
 
-        <div id="chart1"></div>
+        <div ref="chart1" class="chart1"></div>
     </section>
 </template>
 
@@ -41,7 +41,7 @@
             }
         },
         mounted(){
-            this.chart = echarts.init(document.getElementById('chart1'));
+            this.chart = echarts.init(this.$refs.chart1);
             //this.setValues();
         },
         methods:{

@@ -9,7 +9,7 @@
         100%{ transform: translate(-100vw,0);}
     }
 
-    #chart2{ width: 100%; height: 4rem; position: absolute; left: 0; bottom: 8%;}
+    .chart2{ width: 100%; height: 4rem; position: absolute; left: 0; bottom: 8%;}
 
     .page3-container .page-context p{ margin-bottom: 10px;}
     .page3-container .c-car{ position: absolute; top: 51%; left: 55%;}
@@ -50,7 +50,7 @@
 
         <car :scale="0.5"></car>
 
-        <div id="chart2"></div>
+        <div ref="chart2" class="chart2"></div>
     </section>
 </template>
 
@@ -70,7 +70,7 @@
             }
         },
         mounted(){
-            this.chart = echarts.init(document.getElementById('chart2'));
+            this.chart = echarts.init(this.$refs.chart2);
             this.birdMove();
             //this.setValues();
         },

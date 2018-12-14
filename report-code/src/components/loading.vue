@@ -53,15 +53,16 @@
         <div class="loading-cloud1" v-if="!isOver"><img src="@/assets/images/cloud.png"> </div>
         <div class="loading-cloud2" v-if="!isOver"><img src="@/assets/images/cloud.png"> </div>
 
-        <div class="log">
-            <p v-for="(item,index) in logList">{{index+1}}:{{item}}</p>
-        </div>
+        <!--<div class="log">-->
+            <!--<p v-for="(item,index) in logList">{{index+1}}:{{item}}</p>-->
+        <!--</div>-->
     </div>
 </template>
 
 <script type='es6'>
     import car from '@/components/car'
     import axios from 'axios'
+    import window from './params.js'
     export default {
         name: 'app',
         components:{car},
@@ -92,9 +93,11 @@
             }
         },
         mounted(){
+            let name = window.getParams.userName;
+            this.addLog(`name:${name}`);
             this.loadAll();
             this.getData();
-            let name = window.getParams.userName;
+
             if(name.length > 4){
                 this.userName = '*' + name.substr(1,3) + '...';
             }else{
@@ -109,7 +112,6 @@
                     img.onload = function(){
                         self.steps += 1;
                         self.precent = Math.floor(self.steps / (self.imgsList.length+1) * 100);
-                        self.addLog(`imgs:${self.steps}`);
                         resolve(img);
                     };
                     img.onerror = function(){
@@ -131,31 +133,37 @@
             },
             getData(){
                 this.addLog(`start getData`);
-                let data = window.getParams.data;
-                this.addLog(`params:${data}`);
-                axios.post('/mobileserve/Vehicle/getAnnuallyData',{data:data}).then(res=>{
-                    let data = res.data;
-                    this.addLog(`getData over:${data.result}`);
-                    if(data.result == 0){
-                        this.dataLoadOver = true;
-                        this.steps += 1;
-                        this.precent = Math.floor(this.steps / (this.imgsList.length+1) * 100);
-                        this.isAllLoad();
-                        this.$store.commit('setPageData',res.data.data);
-                    }else{
-                        window.errorData = data;
-                        window.location = '/error';
-                    }
-                }).catch(err=>{
-                    this.addLog(`getData error`);
-                })
+                let data;
+                this.addLog(`window:${typeof window}`);
+                this.addLog(`getParams:${typeof window.getParams}`);
+                try{
+                    data = window.getParams.data;
+                    this.addLog(`data:${data}`);
+                    axios.post('/mobileserve/Vehicle/getAnnuallyData',{data:data}).then(res=>{
+                        let data = res.data;
+                        this.addLog(`getData over:${data.result}`);
+                        if(data.result == 0){
+                            this.dataLoadOver = true;
+                            this.steps += 1;
+                            this.precent = Math.floor(this.steps / (this.imgsList.length+1) * 100);
+                            this.isAllLoad();
+                            this.$store.commit('setPageData',res.data.data);
+                        }else{
+                            window.errorData = data;
+                            window.location = '/error';
+                        }
+                    })
+                }catch(err){
+                    this.addLog(`data err:${err}`);
+                }
+
             },
             isAllLoad(){
                 this.addLog(`isAllLoad--imgLoadOver:${this.imgLoadOver},dataLoadOver:${this.dataLoadOver}`);
                 if(this.imgLoadOver && this.dataLoadOver){
                     this.isOver = true;
                     setTimeout(()=>{
-                        //this.$store.commit('setLoading',false)
+                        this.$store.commit('setLoading',false)
                     },1000)
                 }
             },

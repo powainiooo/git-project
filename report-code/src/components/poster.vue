@@ -65,6 +65,7 @@
     }
     let canvas;
     import textConfig from '@/assets/document.json'
+    import window from './params.js'
     export default {
         name: 'app',
         props:['styleKey'],

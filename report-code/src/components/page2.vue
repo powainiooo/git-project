@@ -118,7 +118,7 @@
             getText(tag){
                 let str = '',h = this.pageData.driveTime;
                 if(tag == '轻松出行'){
-                    str = '难道你上班只需1脚油门？';
+                    str = '难道你上班只需一脚油门？';
                 }else if(tag == '旋转的陀螺'){
                     str = '谁不是负重前行，再忙也要照顾好自己';
                 }else if(tag == '早出晚归'){
@@ -151,7 +151,9 @@
         },
         computed:{
             animHours(){
-                return this.hours.toFixed(1);
+                let time = this.pageData.driveTime;
+                let num = time < 1 ? 0 : 1;
+                return this.hours.toFixed(num);
             },
             pageData(){
                 return this.$store.state.pageData.P2

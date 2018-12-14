@@ -77,7 +77,7 @@
         <ul class="page1-circle">
             <li class="animated" :class="floatCircle1">
                 <transition enter-active-class=" scaleIn">
-                <div v-if="showCircle1">使用云服务<span>{{pageData.useTimes}}</span>次</div>
+                <div v-if="showCircle1">使用云服务<span>{{pageData.useTimes}}</span>万次</div>
                 </transition>
             </li>
             <li class="animated" :class="floatCircle2">

@@ -26,6 +26,7 @@
         0%,100%{ transform: translate(0,0);}
         50%{ transform: translate(60px,0);}
     }
+    .log{ width: 100%; position: absolute; top: 0; left: 0; z-index: 1000; background-color: #ffffff; font-size: 16px;}
 </style>
 
 <template>
@@ -51,6 +52,10 @@
         </transition>
         <div class="loading-cloud1" v-if="!isOver"><img src="@/assets/images/cloud.png"> </div>
         <div class="loading-cloud2" v-if="!isOver"><img src="@/assets/images/cloud.png"> </div>
+
+        <div class="log">
+            <p v-for="(item,index) in logList">{{index+1}}:{{item}}</p>
+        </div>
     </div>
 </template>
 
@@ -80,6 +85,7 @@
                     '/static/images/phone2.png',
                     '/static/images/phone3.png'
                 ],
+                logList:[],
                 isOver:false,
                 imgLoadOver:false,
                 dataLoadOver:false
@@ -103,6 +109,7 @@
                     img.onload = function(){
                         self.steps += 1;
                         self.precent = Math.floor(self.steps / (self.imgsList.length+1) * 100);
+                        self.addLog(`imgs:${self.steps}`);
                         resolve(img);
                     };
                     img.onerror = function(){
@@ -118,32 +125,42 @@
                 }
                 Promise.all(arr).then(res=>{
                     this.imgLoadOver = true;
+                    this.addLog(`loadAll images`);
                     this.isAllLoad();
                 })
             },
             getData(){
+                this.addLog(`start getData`);
                 let data = window.getParams.data;
+                this.addLog(`params:${data}`);
                 axios.post('/mobileserve/Vehicle/getAnnuallyData',{data:data}).then(res=>{
                     let data = res.data;
+                    this.addLog(`getData over:${data.result}`);
                     if(data.result == 0){
                         this.dataLoadOver = true;
-                        this.$store.commit('setPageData',res.data.data);
-                        this.isAllLoad();
                         this.steps += 1;
                         this.precent = Math.floor(this.steps / (this.imgsList.length+1) * 100);
+                        this.isAllLoad();
+                        this.$store.commit('setPageData',res.data.data);
                     }else{
                         window.errorData = data;
                         window.location = '/error';
                     }
+                }).catch(err=>{
+                    this.addLog(`getData error`);
                 })
             },
             isAllLoad(){
+                this.addLog(`isAllLoad--imgLoadOver:${this.imgLoadOver},dataLoadOver:${this.dataLoadOver}`);
                 if(this.imgLoadOver && this.dataLoadOver){
                     this.isOver = true;
                     setTimeout(()=>{
-                        this.$store.commit('setLoading',false)
+                        //this.$store.commit('setLoading',false)
                     },1000)
                 }
+            },
+            addLog(txt){
+                this.logList.push(txt);
             }
         }
     }

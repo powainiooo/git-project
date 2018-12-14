@@ -101,6 +101,7 @@
                         slideChangeTransitionStart(){
                             window.pageOutFunc();
                             self.$refs[self.currentPage].$children[0].resetValues();
+
                         },
                         slideChangeTransitionEnd(){
                             let pageName = self.$refs.mySwiper.$children[this.activeIndex].$attrs.page;

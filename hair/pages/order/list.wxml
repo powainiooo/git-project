@@ -4,7 +4,6 @@
           wx:for="{{listData}}"
           wx:for-item="item"
           wx:key="{{item}}"
-          data-status="{{item.status}}"
           data-num="{{item.order_num}}"
           bindtap="gotoDetail"
           hover-class="list-item-hover"

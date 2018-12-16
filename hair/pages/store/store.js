@@ -23,10 +23,12 @@ Page({
     //打开地图
     openMap(e){
         setTimeout(function(){
-            let lnglat = e.currentTarget.dataset.lnglat;
+            let store = e.currentTarget.dataset.store;
             wx.openLocation({
-                latitude: lnglat[1],
-                longitude: lnglat[0],
+                latitude: parseFloat(store.latitude),
+                longitude: parseFloat(store.longitude),
+                name:store.title,
+                address:store.address,
                 scale: 28
             })
         },150);

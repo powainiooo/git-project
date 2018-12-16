@@ -16,7 +16,8 @@
     "pages/package/package",
     "pages/information/information",
     "pages/package/editor",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/order/detail"
   ],
   "window": {
     "backgroundTextStyle": "light",

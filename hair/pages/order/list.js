@@ -8,25 +8,10 @@ Page({
         listData:[]
     },
     gotoDetail(e){
-        let status = e.currentTarget.dataset.status;
         let num = e.currentTarget.dataset.num;
-        if(status == 'used'){
-            wx.navigateTo({
-                url: '/pages/order/used?orderNum='+num
-            })
-        }else if(status == 'over'){
-            wx.navigateTo({
-                url: '/pages/order/overdue?orderNum='+num
-            })
-        }else if(status == 'useing'){
-            wx.navigateTo({
-                url: '/pages/order/useing?orderNum='+num
-            })
-        }else if(status == 'nouse'){
-            wx.navigateTo({
-                url: '/pages/order/notuse?orderNum='+num
-            })
-        }
+        wx.navigateTo({
+            url: '/pages/order/detail?orderNum='+num
+        })
     },
     /**
      * 生命周期函数--监听页面加载

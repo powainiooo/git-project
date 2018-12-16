@@ -32,7 +32,7 @@
             <view class="name" style="margin-bottom: 30rpx;">{{item.china_name}}</view>
             <view class="decs">{{item.intro}}</view>
             <view class="tips"><text>适用于\n{{item.apply}}</text></view>
-            <view class="price">+6元</view>
+            <view class="price" wx:if="{{m1.getGap(item.price,lastPrice) != 0}}">{{m1.getGap(item.price,lastPrice) > 0 ? '+' : ''}}{{m1.getGap(item.price,lastPrice)}}元</view>
             <view class="icons icon-weixuan"></view>
             <view class="icons icon-xuanzhong"></view>
         </view>
@@ -42,3 +42,11 @@
     <view slot="price">{{price}}</view>
     <view slot="btn">确认 | Confirm</view>
 </footer-view>
+
+<wxs module="m1">
+    function getGap(price,last){
+    return last == 0 ? 0 : parseFloat(price) - last
+    }
+
+    module.exports.getGap = getGap;
+</wxs>

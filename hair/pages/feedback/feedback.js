@@ -31,7 +31,7 @@ Page({
     doBack(){
         let obj = {};
         obj.openid = app.globalData.userOpenID;
-        obj.orderNum = this.data.orderNum;
+        obj.order_num = this.data.orderNum;
         obj.score = this.data.score;
         obj.content = this.data.text;
         wx.request({

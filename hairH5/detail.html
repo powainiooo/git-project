@@ -120,8 +120,7 @@
                     },1000);
                     if(window.Notification && Notification.permission !== "denied") {
                         Notification.requestPermission(function(status) {
-                            var n = new Notification('服务通知', { body: '服务已经结束了！'
-                            });
+                            var n = new Notification('服务通知', { body: '服务已经结束了！'});
                         });
                     }
 

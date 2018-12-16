@@ -15,10 +15,11 @@
           wx:for-item="item"
           wx:key="{{item}}"
             class="time-item {{selectTime == item.time ? 'time-item-selected':''}} {{item.reserved == '1' ? 'time-item-disabled' : ''}}"
-            data-index="{{item.time}}"
+            data-item="{{item}}"
             bindtap="doselect"
             hover-class="time-item-hover"
             hover-stay-time="50">
+        <view class="hint">已预订</view>
         <view class="icons icon-weixuan"></view>
         <view class="icons icon-xuanzhong"></view>
         <view>

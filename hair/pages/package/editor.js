@@ -13,7 +13,8 @@ Page({
         type:0,
         imgSrc:app.globalData.imgSrc,
         price:0,
-        index:0
+        index:0,
+        lastPrice:0
     },
     //选择清洁
     doSelectClean(e){
@@ -22,6 +23,7 @@ Page({
             let price = e.currentTarget.dataset.price;
             let index = e.currentTarget.dataset.index;
             this.setData({
+                lastPrice:price,
                 selectedID:id,
                 price:price,
                 index:index

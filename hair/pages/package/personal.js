@@ -10,10 +10,12 @@ Page({
         imgSrc:app.globalData.imgSrc
     },
     gotoList(e){
-        let type = e.currentTarget.dataset.type;
-        wx.navigateTo({
-            url: '/pages/package/editor?type='+type
-        })
+        setTimeout(()=>{
+            let type = e.currentTarget.dataset.type;
+            wx.navigateTo({
+                url: '/pages/package/editor?type='+type
+            })
+        },150)
     },
     /**
      * 生命周期函数--监听页面加载

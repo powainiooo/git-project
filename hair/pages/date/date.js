@@ -14,10 +14,11 @@ Page({
     },
     //选择
     doselect(e){
+        let item = e.currentTarget.dataset.item;
+        if(item.reserved == 1) return;
         setTimeout(()=>{
-            let index = e.currentTarget.dataset.index;
             this.setData({
-                selectTime:index
+                selectTime:item.time
             })
         },200);
     },

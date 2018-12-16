@@ -1,4 +1,4 @@
-// pages/order/useing.js
+// pages/order/detail.js
 const app = getApp();
 Page({
 
@@ -22,24 +22,22 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        this.data.orderNum = options.orderNum || 'T2018112414511001';
+        this.data.orderNum = options.orderNum;
         this.getData(this.data.orderNum);
     },
     doGetDetail(e){
+        let id = e.currentTarget.dataset.id;
         setTimeout(()=>{
-            let id = e.currentTarget.dataset.id;
-            setTimeout(()=>{
-                wx.request({
-                    url:app.globalData.ajaxSrc+"product_info",
-                    data:{id:id},
-                    success:res=>{
-                        this.setData({
-                            proDetailData:res.data.data.info,
-                            showDetails:true
-                        })
-                    }
-                });
-            },150)
+            wx.request({
+                url:app.globalData.ajaxSrc+"product_info",
+                data:{id:id},
+                success:res=>{
+                    this.setData({
+                        proDetailData:res.data.data.info,
+                        showDetails:true
+                    })
+                }
+            });
         },150)
     },
     timerCount(){
@@ -62,15 +60,25 @@ Page({
             },
             success:res=>{
                 let date = res.data.data.date;
+                let start = parseInt(res.data.data.use_time);
+                let now = parseInt(new Date().getTime()/1000);
+                let timer = 30*60 - (start - now);
                 this.setData({
                     detailData:res.data.data,
                     year:date.slice(0,4),
                     month:date.slice(5,7),
                     day:date.slice(8,10),
-                    timer:30*60-parseInt(res.data.data.use_time)
+                    timer:timer
                 });
-
+                if(res.data.data.status == 'useing'){
+                    this.timerCount();
+                }
             }
+        })
+    },
+    gotoFeedback(){
+        wx.navigateTo({
+            url: '/pages/feedback/feedback?orderNum='+this.data.orderNum
         })
     },
     /**

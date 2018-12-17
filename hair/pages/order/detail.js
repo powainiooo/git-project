@@ -60,9 +60,7 @@ Page({
             },
             success:res=>{
                 let date = res.data.data.date;
-                let start = parseInt(res.data.data.use_time);
-                let now = parseInt(new Date().getTime()/1000);
-                let timer = 30*60 - (start - now);
+                let timer = parseInt(res.data.data.sec);
                 this.setData({
                     detailData:res.data.data,
                     year:date.slice(0,4),

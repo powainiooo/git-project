@@ -40,13 +40,16 @@
         <div class="btn" @click="openSelect" v-if="showBtn"><img src="@/assets/images/btn.png"></div>
 
         <transition enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
-        <div class="style-container" v-if="showStyle">
+        <div class="style-container" v-if="showStyle" style="z-index: 650;">
             <div class="style-frame">
                 <h3>选择风格</h3>
                 <ul>
-                    <li :class="styleKey == 1 ? 'active' : ''" @click="styleKey = 1">王家卫体</li>
-                    <li :class="styleKey == 2 ? 'active' : ''" @click="styleKey = 2">琼瑶体</li>
-                    <li :class="styleKey == 3 ? 'active' : ''" @click="styleKey = 3">天猫体</li>
+                    <li v-for="item in styleList"
+                        :class="styleKey == item.key ? 'active' : ''"
+                        @click="styleKey = item.key">
+                        <div class="imgs"><img :src='"@/assets/images/style"+item.key+".jpg"' /> </div>
+                        <p>{{item.name}}</p>
+                    </li>
                 </ul>
                 <div class="btns">
                     <a href="javascript:;" @click="doCancel">取消</a>
@@ -55,7 +58,7 @@
             </div>
         </div>
         </transition>
-        <poster ref="poster" :styleKey="styleKey"></poster>
+        <poster ref="poster" :styleKey="lastStyleKey" @showChange="openSelect"></poster>
     </section>
 </template>
 
@@ -67,7 +70,22 @@
         data(){
             return{
                 showStyle:false,
-                styleKey:1
+                lastStyleKey:1,
+                styleKey:1,
+                styleList:[
+                    {
+                        name:'王家卫体',
+                        key:1
+                    },
+                    {
+                        name:'琼瑶体',
+                        key:2
+                    },
+                    {
+                        name:'天猫体',
+                        key:3
+                    }
+                ]
             }
         },
         mounted(){
@@ -81,10 +99,15 @@
 
             },
             openSelect(){
+                this.styleKey = this.lastStyleKey;
                 this.showStyle = true;
             },
             doDraw(){
-                this.$refs.poster.draw();
+                this.lastStyleKey = this.styleKey;
+                this.$nextTick(()=>{
+                    this.$refs.poster.draw();
+                    this.doCancel();
+                })
             },
             doCancel(){
                 this.showStyle = false;

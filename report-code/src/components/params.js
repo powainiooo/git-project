@@ -20,8 +20,8 @@ if(window.getParams == undefined){
         recalc();
     })(document, window);
     window.getParams = {};
-    getParams.data = getQueryString('data') || 'F2APX2ln5BUDNNms0qjl3D65n+b5UcNEMa9XWGXjUO+uZFnsGsHMy1tmV1D6FSFRHE/Wj1Al9JR3UcGTpPH4AKpaLgGO9o9z1+yi3Mvm1u5UCMar9UQF6rx7HnoHBxiyPxBp9d+3c8pimiyf+yTmCZc8NvlYifbQ3wVxLDZGll6aZ/1dGv8n1awfRXxqXisc9GhiQA/N/nT/E5dzwSfbRmr976y2GilcWpYSmbUwTOoXZlW/JCAKWXRdcYBSiV5TjbU/8nII/OeyWXIENyCWoOgjyZvFIdwZzN5Wmnx5/twMjHxVZJvO8kYoPO7c1TYzobcxwBnwZKnf7z6vvJKtzf/pGNEdadaZmjHXtHCJOPbA=';
-    getParams.userName = decodeURI(getQueryString('userName') || '%E6%B5%8B%E8%AF%95%E6%B5%8B%E8%AF%95');
+    getParams.data = getQueryString('data');
+    getParams.userName = decodeURI(getQueryString('userName'));
     getParams.carType = decodeURI(getQueryString('carType'));
     getParams.energy = getQueryString('energyType') || '2';
 

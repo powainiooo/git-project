@@ -94,7 +94,7 @@
             </li>
         </ul>
 
-        <div class="hint">云服务全年为用户提供<span>{{animTimes}}</span>次服务</div>
+        <div class="hint">云服务全年为用户提供<span>{{animTimes}}</span>万次服务</div>
     </section>
 </template>
 

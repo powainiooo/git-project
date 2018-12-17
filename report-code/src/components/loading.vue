@@ -89,10 +89,12 @@
                 logList:[],
                 isOver:false,
                 imgLoadOver:false,
-                dataLoadOver:false
+                dataLoadOver:false,
+                startTime:0
             }
         },
         mounted(){
+            this.startTime = new Date().getTime();
             let name = window.getParams.userName;
             this.addLog(`name:${name}`);
             this.loadAll();
@@ -161,10 +163,14 @@
             isAllLoad(){
                 this.addLog(`isAllLoad--imgLoadOver:${this.imgLoadOver},dataLoadOver:${this.dataLoadOver}`);
                 if(this.imgLoadOver && this.dataLoadOver){
-                    this.isOver = true;
+                    let end = new Date().getTime();
+                    let time = end - this.startTime > 0 ? end - this.startTime : 0;
                     setTimeout(()=>{
-                        this.$store.commit('setLoading',false)
-                    },1000)
+                        this.isOver = true;
+                        setTimeout(()=>{
+                            this.$store.commit('setLoading',false)
+                        },1000)
+                    },2000 - time)
                 }
             },
             addLog(txt){

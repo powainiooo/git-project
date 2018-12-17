@@ -58,6 +58,7 @@
         },
         methods:{
             setValues(){
+                console.log(this.pageData.oCost);
                 TweenLite.to(this.$data,1,{elecValue:this.pageData.eCost});
                 TweenLite.to(this.$data,1,{gasValue:this.pageData.oCost});
                 TweenLite.to(this.$data,1,{miles:this.pageData.mCost});
@@ -73,10 +74,10 @@
                 return this.elecValue.toFixed(1);
             },
             animGasValue(){
-                return this.elecValue.toFixed(1);
+                return this.gasValue.toFixed(1);
             },
             animMiles(){
-                return this.elecValue.toFixed(2);
+                return this.miles.toFixed(2);
             },
             pageData(){
                 return this.$store.state.pageData.P4

@@ -13,6 +13,8 @@
     .poster-frame .btn-name{ min-width: 12vw;  height: 10vw; background-color: rgba(0,0,0,0);position: absolute; top: 20vw; left: 45vw; z-index: 25;}
     .poster-frame .btn-name2{ width: 10vw; height: 15vw; top: 20vw; left: 70vw;}
     .poster-frame .btn-name3{ top: 25vw; left: 19vw;}
+
+    .poster-frame .btn-close{ width: 8vw; position: absolute; top: 3vw; right: 3vw;}
 </style>
 
 <template>
@@ -24,11 +26,13 @@
             <a href="javascript:;" @click="doShare">分享给好友</a>
         </div>
 
+        <div class="btn-close" @click="closePoster"><img src="@/assets/images/btn-close.png"/> </div>
+
         <div class="btn-name" :class="'btn-name'+styleKey" @click="showName = true">{{name}}</div>
         <div class="hint"
              v-if="showHint"
              :class="'hint'+styleKey"
-             @click="showName = true"
+             @click="showEditor"
              :style="{left:hintLeft+'px',top:hintTop+'px',transform:'scale('+hintScale+')'}">
             <img src="@/assets/images/hand.png">
             <span>点击编辑姓名</span>
@@ -89,7 +93,7 @@
             tagList(){
                 let tagName = ['P2','P4','P7','P8'],arr = [],data = this.$store.state.pageData;
                 for(let item of tagName){
-                    if(data[item] != undefined){
+                    if(data[item] != undefined && data[item].tag != undefined){
                         arr.push(data[item].tag)
                     }
                 }
@@ -98,8 +102,16 @@
         },
         methods:{
             touchmove(){},
+            showEditor(){
+                this.lastname = this.name;
+                this.showName = true;
+            },
             doChange(){
                 this.lastname = this.name;
+                //this.closePoster();
+                this.$emit('showChange')
+            },
+            closePoster(){
                 this.showPoster = false;
                 this.showHint = false;
             },

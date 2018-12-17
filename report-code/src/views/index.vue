@@ -21,9 +21,9 @@
     .swiper-container{ height: 100vh; overflow: hidden;}
     .swiper-container .swiper-slide{ overflow: hidden;}
 
-    .page-title{ width: 30%; position: absolute; top: 5%; left: 10%;}
+    .page-title{ width: 30%; position: absolute; top: 5%; left: 8%;}
 
-    .page-context{ font-size: 0.4rem; color: #151515; position: absolute; left: 10%; top: 15%; z-index: 10;}
+    .page-context{ font-size: 0.4rem; color: #151515; position: absolute; left: 8%; right: 5%; top: 15%; z-index: 10;}
     .page-context p{ margin-bottom: 6px;}
     .page-context .tag1{ color: #2B5FD5; font-weight: bold;}
     .page-context .tag2{ color: #2B5FD5; font-size: 0.56rem; font-weight: bold;}
@@ -39,8 +39,11 @@
     .style-container .style-frame{ width: 80%; margin: 50% auto; background-color: #FFFFFF; border-radius: 10px; overflow: hidden;}
     .style-container .style-frame h3{ font-size: 0.34rem; color: #030303; text-align: center; margin: 10px 0 0 0; font-weight: normal;}
     .style-container .style-frame ul{ display: flex; justify-content: space-between; margin: 0.6rem 0.3rem;}
-    .style-container .style-frame ul li{ width: 1.6rem; height: 1.3rem; border: 1px solid rgba(77,77,77,0.3); display: flex; justify-content: center; align-items: center; font-size: 0.32rem; color: rgba(77,77,77,0.6);}
+    .style-container .style-frame ul li{ width: 1.5rem; font-size: 0.28rem; color: rgba(77,77,77,0.6); list-style: none;}
     .style-container .style-frame ul li.active{ border-color: #2B5FD5; color: #2B5FD5;}
+    .style-container .style-frame ul li .imgs{ font-size: 0; border: 1px solid rgba(77,77,77,0.3);}
+    .style-container .style-frame ul li.active .imgs{ border: 2px solid #2B5FD5;}
+    .style-container .style-frame ul li p{ text-align: center; margin-top: 5px;}
     .style-container .style-frame input{ width: 100%; border: 1px solid rgba(77,77,77,0.3); font-size: 0.32rem; border-radius: 5px; padding: 5px 10px; box-sizing: border-box; -webkit-user-select: text;user-select: text;}
     .style-container .style-frame .btns{ border-top: 1px solid rgba(77,77,77,0.3); display: flex;}
     .style-container .style-frame .btns a{ display: flex; width: 50%; box-sizing: border-box; height: 0.8rem; font-size: 0.32rem; color:#007AFF; text-decoration: none; justify-content: center; align-items: center;}

@@ -130,11 +130,11 @@
                 arr.sort(function(a,b){
                     return parseInt(a.name) - parseInt(b.name)
                 });
-                let max = arr[0].value,maxMonth = '';
+                let max = arr[0].value,maxMonth = arr[0].name;
                 for(let item of arr){
                     xArr.push(item.name);
                     yArr.push(item.value);
-                    if(item.value > max) {
+                    if(item.value >= max) {
                         max = item.value;
                         maxMonth = item.name;
                     }

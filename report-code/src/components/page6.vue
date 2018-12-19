@@ -37,8 +37,8 @@
         <div class="page-context">
             <p>全年充电<span class="tag2">{{animRecharge}}</span>次</p>
             <p>超过全国<span class="tag2">{{animPercent}}%</span>用户</p>
-            <p v-if="energy == 0"><span class="tag1">电动出行</span>，让世界更美好</p>
-            <p v-if="energy == 2"><span class="tag1">电动出行</span>，省钱才是王道！</p>
+            <p v-if="energy == '电动'"><span class="tag1">电动出行</span>，让世界更美好</p>
+            <p v-if="energy == '双模'"><span class="tag1">电动出行</span>，省钱才是王道！</p>
         </div>
 
         <div class="cloud1"><img src="../assets/images/cloud.png"> </div>
@@ -76,10 +76,11 @@
             }
         },
         mounted(){
-            this.energy = window.getParams.energy;
+            // this.energy = window.getParams.energy;
         },
         methods:{
             setValues(){
+                this.energy = this.pageData.powerType;
                 TweenLite.to(this.$data,1,{recharge:this.pageData.chargeTimes});
                 TweenLite.to(this.$data,1,{percent:this.pageData.chargeRank});
                 TweenLite.to(this.$data,1,{hours:this.pageData.chargeAvgTime});

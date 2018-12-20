@@ -28,7 +28,7 @@
 
         <div class="btn-close" @click="closePoster"><img src="@/assets/images/btn-close.png"/> </div>
 
-        <div class="btn-name" :class="'btn-name'+styleKey" @click="showName = true">{{name}}</div>
+        <div class="btn-name" :class="'btn-name'+styleKey" @click="showEditor">{{name}}</div>
         <div class="hint"
              v-if="showHint"
              :class="'hint'+styleKey"

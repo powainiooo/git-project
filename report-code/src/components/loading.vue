@@ -151,8 +151,8 @@
                             this.isAllLoad();
                             this.$store.commit('setPageData',res.data.data);
                         }else{
-                            //window.errorData = data;
-                            //window.location = '/error';
+                            window.errorData = data;
+                            window.location = '/error';
                         }
                     })
                 }catch(err){

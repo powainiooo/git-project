@@ -136,7 +136,6 @@
                 this.timesList = arr;
                 TweenLite.to(this.$data,1,{times:this.pageData.totalTimes/10000});
                 setTimeout(()=>{
-                    console.log('s')
                     this.showTags = true;
                 },100)
             },

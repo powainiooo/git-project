@@ -26,7 +26,7 @@
     .bind-form .step2 .hint p span{ font-size: 22px;}
     .bind-form .btns{ position: absolute; bottom: 50px; right: 55px;}
     .bind-frame .anim-item{ animation-duration: 0.5s; animation-timing-function: cubic-bezier(.25,.76,.36,.97)}
-    .bind-frame .warn{ width: 130px; position: absolute; top: 270px; left: 330px; background-color: #e73828; padding: 10px 15px; border-radius: 5px; z-index: 50; font-size: 12px; color: #fff;}
+    .bind-frame .warn{ width: 140px; position: absolute; top: 270px; left: 330px; background-color: #e73828; padding: 10px 15px; border-radius: 5px; z-index: 50; font-size: 12px; color: #fff;}
     .bind-frame .warn:before{ content: ''; width: 10px; height: 10px; border: 5px solid rgba(0,0,0,0); border-right-color: #e73828; position: absolute; top: 50%; left: -10px; margin-top: -5px;}
 
     #bindFrame .ivu-select-placeholder,#bindFrame .ivu-select-selected-value{ width: 270px; height: 40px; border-radius: 5px; box-sizing: border-box; padding: 5px 16px; font-size: 16px; text-align: left; color: rgb(117,117,117)}
@@ -56,7 +56,7 @@
                             <t-button :isDisabled="veriBtnDisabled" size="min" @dotap="getCode">{{codeBtnName}}</t-button>
                         </div>
                         <p class="mb20 tc"><input type="text" placeholder="身份证号" v-model="idsnum" @keyup="inputBlur('idsnum')"></p>
-                        <p class="mb20 tc"><input type="text" placeholder="银行卡号" v-model="banknum"></p>
+                        <p class="mb20 tc"><input type="text" placeholder="银行卡号" v-model="banknum" @keyup="inputBlur('banknum')"></p>
                         <p class="mb20 tc"><input type="text" placeholder="预留手机" v-model="phone" @keyup="inputBlur('phone')"></p>
                         <p class="mb20 tc">
                             <Select v-model="bankcode" style="width:270px; text-align: left;" placeholder="选择银行">
@@ -121,6 +121,10 @@
             idsnumCheck(){
                 let reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
                 return reg.test(this.idsnum)
+            },
+            banknumCheck(){
+                let reg = /^[0-9]*$/;
+                return reg.test(this.banknum)
             },
             btnDisabled(){
                 if(this.name != '' && !this.phoneDisabled && this.vericode != '' && this.idsnumCheck && this.banknum != '' && this.bankname != '' && this.bankcode != ''){
@@ -203,6 +207,10 @@
                     this.showWarn = !this.idsnumCheck;
                     this.warnTop = 300;
                     this.warnTxt = '身份证格式不正确';
+                }else if(name == 'banknum'){
+                    this.showWarn = !this.banknumCheck;
+                    this.warnTop = 361;
+                    this.warnTxt = '银行卡号格式不正确';
                 }
             }
         }

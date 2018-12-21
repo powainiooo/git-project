@@ -87,7 +87,7 @@
                 obj.password = this.password;
                 obj.vericode = this.vericode;
                 obj.idnums = this.idsnum;
-                obj.cardnums = this.banknum;
+                obj.cardnums = this.banknum.replace(/\D*/,"");
                 obj.bankname = this.bankname;
                 obj.bankcode = this.bankcode;
                 this.$ajax.post('/client/api/bind_card',qs.stringify(obj)).then(res=>{

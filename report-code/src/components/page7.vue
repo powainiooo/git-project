@@ -94,7 +94,7 @@
             </li>
         </ul>
 
-        <div class="hint">云服务全年为用户提供<span>{{animTimes}}</span>万次服务</div>
+        <div class="hint">云服务全年为用户提供<span>{{animTimes}}亿</span>次服务</div>
     </section>
 </template>
 
@@ -134,7 +134,7 @@
                     }
                 }
                 this.timesList = arr;
-                TweenLite.to(this.$data,1,{times:this.pageData.totalTimes});
+                TweenLite.to(this.$data,1,{times:this.pageData.totalTimes/10000});
                 setTimeout(()=>{
                     console.log('s')
                     this.showTags = true;
@@ -147,7 +147,7 @@
         },
         computed:{
             animTimes(){
-                return this.times.toFixed(0);
+                return this.times.toFixed(2);
             },
             pageData(){
                 return this.$store.state.pageData.P7

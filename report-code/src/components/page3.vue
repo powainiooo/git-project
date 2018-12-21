@@ -78,7 +78,7 @@
             drawTable(xArr,yArr){
                 this.chart.setOption({
                     title:{text:'每月里程分布',left:'center',bottom:'0',textStyle:{fontSize:14}},
-                    grid:{top:'13%',borderColor:'#2B5FD5'},
+                    grid:{top:'13%',borderColor:'#2B5FD5',left:48},
                     xAxis: {
                         type: 'category',
                         axisTick:{show:false},
@@ -87,7 +87,7 @@
                         boundaryGap:false,
                         data: xArr
                     },
-                    graphic:[{type:'text',style:{text:'(km)',fill:'#2B5FD5',x:12}}],
+                    graphic:[{type:'text',style:{text:'(km)',fill:'#2B5FD5',x:16}}],
                     yAxis: {
                         type: 'value',
                         axisLabel:{color:'#2B5FD5'},

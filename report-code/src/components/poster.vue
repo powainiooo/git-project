@@ -120,7 +120,17 @@
                 this.textArr = [];
                 if(this.styleKey == 3)this.textArr.push('2018年，我们度过了激动人心的一年： ');
                 for(let item of this.tagList){
-                    this.textArr.push(data[item]);
+                    if(this.styleKey == 1 && item == '强迫症' || item == '分享达人' || item == '有底气' || item == '有态度' || item == '有计划'){
+                        let date = new Date(),time = '';
+                        time += `${date.getFullYear()}年`;
+                        time += `${date.getMonth()+1}月`;
+                        time += `${date.getDate()}日 `;
+                        time += `${date.getHours()}时`;
+                        time += `${date.getMinutes()}分`;
+                        this.textArr.push(time+data[item]);
+                    }else{
+                        this.textArr.push(data[item]);
+                    }
                 }
                 this.textArr.push(data.add);
             },
@@ -243,7 +253,7 @@
             },
             style3(ctx,res){
                 ctx.drawImage(res[0],0,0);
-                ctx.drawImage(res[1],580,900);
+                ctx.drawImage(res[1],580,1000);
 
                 //姓名
                 ctx.font = 'bold 40px Micro Yahei';

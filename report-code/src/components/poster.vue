@@ -2,7 +2,7 @@
     .poster-frame{ width: 100vw; height: 100vh; position: absolute; top: 0; left: 0; z-index: 600; font-size: 0; overflow: hidden;}
     .poster-frame canvas{ width: 100vw; position: fixed; top: -10000px; left: -10000px;}
     .poster-frame .shareImg{ width: 100vw; height:161.7vw;  display: block;}
-    .poster-frame .btns1{ width: 100%; display: flex; justify-content: space-around; position: absolute; bottom: 3%; left: 0;}
+    .poster-frame .btns1{ width: 100%; display: flex; justify-content: space-around; position: absolute; top: 89vh; left: 0;}
     .poster-frame .btns1 a{ width: 2.7rem; height: 0.8rem; border-radius: 30px; color: #FFFFFF; font-size: 0.32rem; display: flex; justify-content: center; align-items: center; background-color: #2B5FD5; text-decoration: none;}
 
     .poster-frame .hint{ width: 110px; display: flex; background-color: #fff; border-radius: 20px; font-size: 14px; color: #333; position: absolute; top: 21vw; left: 5vw; z-index: 20; align-items: center; padding: 4px 10px; transform-origin: 0 50%;}
@@ -43,7 +43,8 @@
                 <div class="style-frame">
                     <h3>编辑名字</h3>
                     <p style="margin: 20px; margin-bottom: 0;"><input type="text" v-model="lastname" maxlength="5" /></p>
-                    <p style="margin: 20px; margin-top: 0; font-size: 12px; color: #ccc;">所取名字仅在生成小传时使用</p>
+                    <p style="margin: 20px; margin-top: 0; font-size: 12px; color: #ccc;" v-if="!nameError">所取名字仅在生成小传时使用</p>
+                    <p style="margin: 20px; margin-top: 0; font-size: 12px; color: #f00;" v-if="nameError">名字不能为空</p>
                     <div class="btns">
                         <a href="javascript:;" @click="showName = false">取消</a>
                         <a href="javascript:;" @click="draw">确定</a>
@@ -86,7 +87,8 @@
                 showHint:false,
                 hintLeft:0,
                 hintTop:0,
-                hintScale:1
+                hintScale:1,
+                nameError:false
             }
         },
         computed:{
@@ -103,6 +105,7 @@
         methods:{
             touchmove(){},
             showEditor(){
+                this.nameError = false;
                 this.lastname = this.name;
                 this.showName = true;
             },
@@ -120,21 +123,26 @@
                 this.textArr = [];
                 if(this.styleKey == 3)this.textArr.push('2018年，我们度过了激动人心的一年： ');
                 for(let item of this.tagList){
-                    if(this.styleKey == 1 && item == '强迫症' || item == '分享达人' || item == '有底气' || item == '有态度' || item == '有计划'){
-                        let date = new Date(),time = '';
-                        time += `${date.getFullYear()}年`;
-                        time += `${date.getMonth()+1}月`;
-                        time += `${date.getDate()}日 `;
-                        time += `${date.getHours()}时`;
-                        time += `${date.getMinutes()}分`;
-                        this.textArr.push(time+data[item]);
-                    }else{
-                        this.textArr.push(data[item]);
-                    }
+                    // if(this.styleKey == 1 && item == '强迫症' || item == '分享达人' || item == '有底气' || item == '有态度' || item == '有计划'){
+                    //     let date = new Date(),time = '';
+                    //     time += `${date.getFullYear()}年`;
+                    //     time += `${date.getMonth()+1}月`;
+                    //     time += `${date.getDate()}日 `;
+                    //     time += `${date.getHours()}时`;
+                    //     time += `${date.getMinutes()}分`;
+                    //     this.textArr.push(time+data[item]);
+                    // }else{
+                    //     this.textArr.push(data[item]);
+                    // }
+                    this.textArr.push(data[item]);
                 }
                 this.textArr.push(data.add);
             },
             draw(){
+                if(this.lastname.length == 0){
+                    this.nameError = true;
+                    return;
+                }
                 this.showPoster = true;
                 this.showName = false;
                 this.name = this.lastname;
@@ -248,7 +256,7 @@
                     }
                 }
                 for(let i=0;i<arr.length;i++){
-                    ctx.fillTextVertical(arr[i],430-i*45,94);
+                    ctx.fillTextVertical(arr[i],435-i*45,100);
                 }
             },
             style3(ctx,res){
@@ -359,20 +367,40 @@
             // 是否需要旋转判断
             var code = letter.charCodeAt(0);
             if (code <= 256) {
-                context.translate(x, y);
-                // 英文字符，旋转90°
-                context.rotate(90 * Math.PI / 180);
-                context.translate(-x, -y);
+                if(code>=48 && code<=57){
+                    y = y + 12;
+                }else{
+                    context.translate(x, y);
+                    // 英文字符，旋转90°
+                    context.rotate(90 * Math.PI / 180);
+                    context.translate(-x, -y);
+                }
             } else if (index > 0 && text.charCodeAt(index - 1) < 256) {
                 // y修正
                 y = y + arrWidth[index - 1] / 2;
             }
-            context.fillText(letter, x, y);
+            // 确定下一个字符的纵坐标位置
+            if(code == 8230){
+                context.translate(x, y);
+                // 英文字符，旋转90°
+                context.rotate(90 * Math.PI / 180);
+                context.translate(-x, -y);
+            }
+            var letterWidth = arrWidth[index];
+            if(code == 65292 || code == 65307 || code == 12290 || code == 12289){//符合兼容
+                context.fillText(letter, x, y-4);
+                y = y + letterWidth+4;
+            }else if(code == 8230){//…兼容
+                context.fillText(letter, x-2, y-4);
+                y = y + letterWidth+4;
+            }else{
+                context.fillText(letter, x, y);
+                y = y + letterWidth+1;
+            }
             // 旋转坐标系还原成初始态
             context.setTransform(1, 0, 0, 1, 0, 0);
-            // 确定下一个字符的纵坐标位置
-            var letterWidth = arrWidth[index];
-            y = y + letterWidth;
+
+
         });
         // 水平垂直对齐方式还原
         context.textAlign = align;

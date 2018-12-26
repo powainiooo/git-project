@@ -96,7 +96,7 @@
 
             },
             resetValues(){
-
+                this.showStyle = false;
             },
             openSelect(){
                 this.styleKey = this.lastStyleKey;

@@ -83,14 +83,14 @@
         <div class="page-context">
             <p>今年</p>
             <p>你使用最多的控制是<span class="tag1">{{mostControl}}</span></p>
-            <p v-if="pageData.tag == '科技先锋'">享便利生活，当<span class="tag1">{{pageData.tag}}</span></p>
-            <p v-else-if="pageData.tag == '停车场不迷路'">我有<span class="tag1">{{pageData.tag}}的技巧</span></p>
+            <p v-if="pageData.tag == '科技先锋'">享便利生活，当<span class="tag1">科技先锋</span></p>
+            <p v-else-if="pageData.tag == '停车场不迷路'">我有<span class="tag1">停车场不迷路的技巧</span></p>
             <p v-else>会生活，<span class="tag1">{{pageData.tag}}</span></p>
         </div>
 
         <ul class="times-list">
             <li :class="{active:showTags,animate:showTags}" v-for="item in timesList">
-                <div><span>{{item.name}}</span><span class="value">{{item.value}}</span><span>次</span></div>
+                <div><span>{{item.name || '--'}}</span><span class="value">{{item.value || '--'}}</span><span>次</span></div>
             </li>
         </ul>
 
@@ -146,7 +146,11 @@
         },
         computed:{
             animTimes(){
-                return this.times.toFixed(2);
+                if(this.pageData.control){
+                    return this.times.toFixed(2);
+                }else{
+                    return '--'
+                }
             },
             pageData(){
                 return this.$store.state.pageData.P7

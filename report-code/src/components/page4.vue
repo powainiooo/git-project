@@ -35,11 +35,11 @@
         <div class="page-context">
             <p>这一年，</p>
             <p>平均每公里花费<span class="tag2">{{animMiles}}</span>元</p>
-            <p v-if="pageData.tag == '节能王者'">原来是传说中的<span class="tag1">{{pageData.tag}}？</span></p>
-            <p v-if="pageData.tag == '太会省钱'">简直不要<span class="tag1">{{pageData.tag}}！</span></p>
-            <p v-if="pageData.tag == '潜力股'">能耗一般，但是看好你哦，<span class="tag1">{{pageData.tag}}！</span></p>
-            <p v-if="pageData.tag == '还能更省点'">努努力<span class="tag1">{{pageData.tag}}钱哦！</span></p>
-            <p v-if="pageData.tag == '省省吧'">能耗有点高，<span class="tag1">{{pageData.tag}}！</span></p>
+            <p v-if="pageData.tag == '节能王者'">原来是传说中的<span class="tag1">节能王者？</span></p>
+            <p v-if="pageData.tag == '太会省钱'">简直不要<span class="tag1">太会省钱！</span></p>
+            <p v-if="pageData.tag == '潜力股'">能耗一般，但是看好你哦，<span class="tag1">潜力股！</span></p>
+            <p v-if="pageData.tag == '还能更省点'">努努力<span class="tag1">还能更省点钱哦！</span></p>
+            <p v-if="pageData.tag == '省省吧'">能耗有点高，<span class="tag1">省省吧！</span></p>
         </div>
 
         <div class="text1">计算参考　电: 0.68元/度　油: 6.86元/升</div>
@@ -71,13 +71,25 @@
         },
         computed:{
             animElecValue(){
-                return this.elecValue.toFixed(1);
+                if(this.pageData.eCost){
+                    return this.elecValue.toFixed(1);
+                }else{
+                    return '--'
+                }
             },
             animGasValue(){
-                return this.gasValue.toFixed(1);
+                if(this.pageData.oCost){
+                    return this.gasValue.toFixed(1);
+                }else{
+                    return '--'
+                }
             },
             animMiles(){
-                return this.miles.toFixed(2);
+                if(this.pageData.mCost){
+                    return this.miles.toFixed(2);
+                }else{
+                    return '--'
+                }
             },
             pageData(){
                 return this.$store.state.pageData.P4

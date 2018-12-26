@@ -41,8 +41,8 @@
             <p>全年绿色出行</p>
             <p>减少CO2排放<span class="tag2">{{animCo2Per}}</span>{{co2Unit}}</p>
             <p>相当于种植<span class="tag2">{{animTree}}</span>棵冷杉树</p>
-            <p v-if="this.pageData.tag == '环保达人'"><span class="tag1">{{pageData.tag}}</span>就是你了</p>
-            <p v-if="this.pageData.tag == '积少成多'">为地球降温，<span class="tag1">{{pageData.tag}}~</span></p>
+            <p v-if="this.pageData.tag == '环保达人'"><span class="tag1">环保达人</span>就是你了</p>
+            <p v-if="this.pageData.tag == '积少成多'">为地球降温，<span class="tag1">积少成多~</span></p>
         </div>
 
         <div class="context2">
@@ -99,19 +99,35 @@
             animCo2Per(){
                 let num = 1;
                 let co2 = this.pageData.co2;
-                if(co2 < 1){
-                    num = 0;
+                if(co2){
+                    if(co2 < 1){
+                        num = 0;
+                    }
+                    return this.co2Per.toFixed(num);
+                }else{
+                    return '--'
                 }
-                return this.co2Per.toFixed(num);
             },
             animTree(){
-                return this.tree.toFixed(2);
+                if(this.pageData.tree){
+                    return this.tree.toFixed(2);
+                }else{
+                    return '--'
+                }
             },
             animCo2Total(){
-                return this.co2Total.toFixed(0);
+                if(this.pageData.co2ALL){
+                    return this.co2Total.toFixed(0);
+                }else{
+                    return '--'
+                }
             },
             animTreeTotal(){
-                return this.treeTotal.toFixed(1);
+                if(this.pageData.treeAll){
+                    return this.treeTotal.toFixed(1);
+                }else{
+                    return '--'
+                }
             },
             pageData(){
                 return this.$store.state.pageData.P5

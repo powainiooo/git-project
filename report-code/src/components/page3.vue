@@ -39,11 +39,11 @@
             <p>今年<span class="tag2">{{maxMonth}}</span>月，</p>
             <p>你的里程最高达到<span class="tag2">{{animMiles}}</span>公里</p>
             <p>是回了故乡？</p>
-            <p>还是去了<span class="tag1">{{pageData.tag}}？</span></p>
+            <p>还是去了<span class="tag1">{{pageData.tag || '--'}}？</span></p>
         </div>
         <div class="page-context" v-if="pageData.tag == '平淡是真'">
             <p>每月里程相差无几？</p>
-            <p>生活也是这样，<span class="tag1">{{pageData.tag}}~</span></p>
+            <p>生活也是这样，<span class="tag1">{{pageData.tag || '--'}}~</span></p>
         </div>
 
         <div class="birds" :style="{'background-position':-birdIndex*2.48+'rem 0'}" :class="showBird ? 'birds-active' : ''"></div>
@@ -65,6 +65,7 @@
                 miles:0,
                 birdIndex:0,
                 maxMonth:'--',
+                maxValue:0,
                 showBird:false,
                 chart:{}
             }
@@ -76,6 +77,15 @@
         },
         methods:{
             drawTable(xArr,yArr){
+                let max = yArr[0],index = 0,dotArr=[];
+                if(this.pageData.tag == '远方'){
+                    for(let i=0;i<yArr.length;i++){
+                        if(this.maxValue == yArr[i]){
+                            dotArr.push([i,yArr[i]])
+                        }
+                    }
+                }
+
                 this.chart.setOption({
                     title:{text:'每月里程分布',left:'center',bottom:'0',textStyle:{fontSize:14}},
                     grid:{top:'13%',borderColor:'#2B5FD5',left:48},
@@ -92,6 +102,7 @@
                         type: 'value',
                         axisLabel:{color:'#2B5FD5'},
                         splitLine:{lineStyle:{color:'#2B5FD5'}},
+                        boundaryGap:false,
                         axisTick:{show:false},
                         axisLine:{show:false}
                     },
@@ -116,6 +127,11 @@
                                 globalCoord: false // 缺省为 false
                             }
                         }
+                    },{
+                        type: "effectScatter",
+                        itemStyle:{normal:{color:'#2B5FD5'}},
+                        rippleEffect:{scale:3.5,brushType:'stroke'},
+                        data:dotArr
                     }]
                 })
             },
@@ -139,6 +155,7 @@
                         maxMonth = item.name;
                     }
                 }
+                this.maxValue = max;
                 xArr[xArr.length-1] += '(月)';
                 this.drawTable(xArr,yArr);
                 TweenLite.to(this.$data,1,{miles:max});

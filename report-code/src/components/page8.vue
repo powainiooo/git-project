@@ -54,7 +54,7 @@
             <div class="page-title"><img src="@/assets/images/title7.png"> </div>
 
             <div class="page-context">
-                <p><span class="tag1">{{pageData.date.substr(5,2)}}</span>月<span class="tag1">{{pageData.date.substr(8,2)}}</span>日</p>
+                <p><span class="tag1">{{pageData.date.substr(5,2) || '--'}}</span>月<span class="tag1">{{pageData.date.substr(8,2) || '--'}}</span>日</p>
                 <p>你使用车门解锁<span class="tag1">{{animTimes}}</span>次</p>
                 <p>即使忘了带钥匙，心里也很<span class="tag1">有底气</span></p>
             </div>
@@ -123,13 +123,13 @@
                 <p>不排队，能省钱，新一年<span class="tag1">新尝试</span></p>
             </div>
             <div class="page-context" v-if="pageData.tag == '有计划'">
-                <p><span class="tag1">{{pageData.date.substr(5,2)}}</span>月<span class="tag1">{{pageData.date.substr(8,2)}}</span>日</p>
+                <p><span class="tag1">{{pageData.date.substr(5,2) || '--'}}</span>月<span class="tag1">{{pageData.date.substr(8,2) || '--'}}</span>日</p>
                 <p v-if="pageData.times == 1">你首次使用服务预约</p>
                 <p v-else>使用服务预约<span class="tag1">{{animTimes}}</span>次</p>
                 <p>生活就要<span class="tag1">有计划</span></p>
             </div>
 
-            <div class="hint">全国最爱预约的城市<span>{{pageData.city}}</span></div>
+            <div class="hint">全国最爱预约的城市<span>{{pageData.city || '--'}}</span></div>
 
         </div>
         <div v-if="pageData.tag == '有态度'">
@@ -174,11 +174,12 @@
             }
         },
         computed:{
-            showName(){
-                return this.$store.state.p8Name
-            },
             animTimes(){
-                return this.times.toFixed(0);
+                if(this.pageData.times){
+                    return this.times.toFixed(0);
+                }else{
+                    return '--'
+                }
             },
             pageData(){
                 return this.$store.state.pageData.P8

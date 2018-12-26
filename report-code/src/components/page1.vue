@@ -6,7 +6,7 @@
 
     .page1-circle{ width: 80%; position: absolute; left: 10%; bottom: 6%; display: flex; justify-content: space-between;}
     .page1-circle li{ width: 23vw; height: 23vw; list-style: none;}
-    .page1-circle li div{ width: 100%; height: 100%; border: 2px solid #46B3E9; border-radius: 50%; background-color: rgba(255,255,255,0.5); display: flex; justify-content: center; align-items: center; flex-direction: column; font-size: 0.24rem; color: #333333; line-height: 1.1; padding-top: 0.16rem; box-sizing: border-box;}
+    .page1-circle li div{ width: 100%; height: 100%; border: 2px solid #46B3E9; border-radius: 50%; background-color: rgba(255,255,255,0.5); display: flex; justify-content: center; align-items: center; flex-direction: column; font-size: 0.24rem; color: #333333; line-height: 1.1; padding: 0.16rem 0.08rem 0 0.08rem; box-sizing: border-box; text-align: center;}
     .page1-circle li span{ font-size: 0.46rem; color: #2B5FD5;}
     .page1-circle li:nth-child(1) div{ margin-top: -1vw;}
     .page1-circle li:nth-child(2) div{ margin-top: -10vw; border-color: #EBA729;}
@@ -77,17 +77,17 @@
         <ul class="page1-circle">
             <li class="animated" :class="floatCircle1">
                 <transition enter-active-class=" scaleIn">
-                <div v-if="showCircle1">使用云服务<span>{{pageData.useTimes}}</span>次</div>
+                <div v-if="showCircle1">使用云服务<span>{{pageData.useTimes || '--'}}</span>次</div>
                 </transition>
             </li>
-            <li class="animated" :class="floatCircle2">
+            <li class="animated" :class="floatCircle2" style="width: 26vw; height: 26vw;">
                 <transition enter-active-class=" scaleIn">
-                <div v-if="showCircle2">在{{pageData.city}}排名<span>{{pageData.cityRank}}</span>位</div>
+                <div v-if="showCircle2">在{{city}}排名<span>{{pageData.cityRank || '--'}}</span>位</div>
                 </transition>
             </li>
             <li class="animated" :class="floatCircle3">
                 <transition enter-active-class=" scaleIn">
-                <div v-if="showCircle3">击败全国<span>{{pageData.countryRank}}%</span>用户</div>
+                <div v-if="showCircle3">击败全国<span>{{pageData.countryRank || '--'}}%</span>用户</div>
                 </transition>
             </li>
         </ul>
@@ -107,7 +107,8 @@
                 showCircle3:false,
                 floatCircle1:'',
                 floatCircle2:'',
-                floatCircle3:''
+                floatCircle3:'',
+                city:''
             }
         },
 
@@ -116,6 +117,10 @@
         },
         methods:{
             setValues(){
+                this.city = this.pageData.city || '--';
+                if(this.city.length > 4){
+                    this.city = this.city.substr(0,3)+'…';
+                }
                 TweenLite.to(this.$data,1,{totalMiles:this.pageData.mileage});
                 TweenLite.to(this.$data,1,{daysDrive:this.pageData.driveDays});
                 TweenLite.to(this.$data,1,{daysService:this.pageData.useDays});
@@ -152,13 +157,25 @@
         },
         computed:{
             animTotalMiles(){
-                return parseInt(this.totalMiles);
+                if(this.pageData.mileage){
+                    return parseInt(this.totalMiles);
+                }else{
+                    return '--';
+                }
             },
             animDaysDrive(){
-                return parseInt(this.daysDrive);
+                if(this.pageData.driveDays){
+                    return parseInt(this.daysDrive);
+                }else{
+                    return '--';
+                }
             },
             animDaysService(){
-                return parseInt(this.daysService);
+                if(this.pageData.useDays){
+                    return parseInt(this.daysService);
+                }else{
+                    return '--';
+                }
             },
             pageData(){
                 return this.$store.state.pageData.P1

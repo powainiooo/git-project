@@ -9,7 +9,7 @@
     .loading .loading-progress{ width: 88%; position: absolute; left: 6%; bottom: 16%;}
     .loading .loading-progress .progress-bar{ width: 100%; height: 8px; border-radius: 10px; background: #FFFFFF;border: 1px solid #2B5FD5; overflow: hidden;}
     .loading .loading-progress .progress-bar .progress-line{ width: 50%; height: 100%;background: #2B5FD5; transition: width 0.1s linear;}
-    .loading .loading-progress .progress-bar .progress-number{ font-size: 10px; color: #333333; position: absolute; top: 15px; left: 50%; margin-left: -10px; transition: left 0.1s linear;}
+    .loading .loading-progress .progress-bar .progress-number{ font-size: 10px; color: #333333; position: absolute; top: 15px; left: 50%; margin-left: -30px; transition: left 0.15s linear;}
     .loading .loading-progress .tree1{ width: 18%; position: absolute; left: 2%; bottom: 10px; font-size: 0;}
     .loading .loading-progress .tree1 img{ width: 100%;}
     .loading .loading-progress .tree2{ width: 24%; position: absolute; left: 54%; bottom: 10px; font-size: 0;}
@@ -47,7 +47,7 @@
                 </div>
                 <div class="tree1"><img src="@/assets/images/tree1.png"></div>
                 <div class="tree2"><img src="@/assets/images/tree2.png"></div>
-                <car :scale="0.6" :style="{left:precent+'%'}"></car>
+                <car :scale="0.6" :style="{left:precent+'%'}" style="margin-left: -10px;"></car>
             </div>
         </transition>
         <div class="loading-cloud1" v-if="!isOver"><img src="@/assets/images/cloud.png"> </div>

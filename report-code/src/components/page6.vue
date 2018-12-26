@@ -102,24 +102,40 @@
         },
         computed:{
             animRecharge(){
-                return this.recharge.toFixed(0);
+                if(this.pageData.chargeTimes){
+                    return this.recharge.toFixed(0);
+                }else{
+                    return '--'
+                }
             },
             animPercent(){
-                return this.percent.toFixed(0);
+                if(this.pageData.chargeRank){
+                    return this.percent.toFixed(0);
+                }else{
+                    return '--'
+                }
             },
             animHours(){
-                return this.hours.toFixed(1);
+                if(this.pageData.chargeAvgTime){
+                    return this.hours.toFixed(1);
+                }else{
+                    return '--'
+                }
             },
             animTimes(){
-                let sh = this.timeStartHour.toFixed(0);
-                sh = sh < 10 ? '0'+sh : sh;
-                let sm = this.timeStartMin.toFixed(0);
-                sm = sm < 10 ? '0'+sm : sm;
-                let eh = this.timeEndHour.toFixed(0);
-                eh = eh < 10 ? '0'+eh : eh;
-                let em = this.timeEndMin.toFixed(0);
-                em = em < 10 ? '0'+em : em;
-                return sh+':'+sm+'-'+eh+':'+em;
+                if(this.pageData.timeByHour){
+                    let sh = this.timeStartHour.toFixed(0);
+                    sh = sh < 10 ? '0'+sh : sh;
+                    let sm = this.timeStartMin.toFixed(0);
+                    sm = sm < 10 ? '0'+sm : sm;
+                    let eh = this.timeEndHour.toFixed(0);
+                    eh = eh < 10 ? '0'+eh : eh;
+                    let em = this.timeEndMin.toFixed(0);
+                    em = em < 10 ? '0'+em : em;
+                    return sh+':'+sm+'-'+eh+':'+em;
+                }else{
+                    return '--'
+                }
             },
             pageData(){
                 return this.$store.state.pageData.P6

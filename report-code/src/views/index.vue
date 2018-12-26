@@ -69,8 +69,6 @@
         </swiper>
         </transition>
         <loading v-if="showLoading"></loading>
-
-
         <!--<div class="log">-->
             <!--<p v-for="(item,index) in logList">{{index+1}}:{{item}}</p>-->
         <!--</div>-->

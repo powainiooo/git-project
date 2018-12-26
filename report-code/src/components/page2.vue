@@ -23,7 +23,7 @@
             <p v-if="pageData.tag == '朝九晚五'">平均每天驾驶{{pageData.driveTime >= 1 && pageData.driveTime < 2 ? '只' : ''}}<span class="tag2">{{animHours}}</span>小时</p>
             <p v-if="pageData.tag == '错峰出行'">{{pageData.driveTime >= 1 && pageData.driveTime < 2 ? '好在' : ''}}平均每天驾驶{{pageData.driveTime >= 1 && pageData.driveTime < 2 ? '只' : ''}}<span class="tag2">{{animHours}}</span>小时</p>
 
-            <p>{{getText(pageData.tag)}}</p>
+            <p>{{getText(pageData.tag || '--')}}</p>
         </div>
 
         <div ref="chart1" class="chart1"></div>
@@ -61,7 +61,7 @@
                     yAxis: {
                         type: 'value',
                         axisLabel:{color:'#2B5FD5'},
-                        boundaryGap:['5%','5%'],
+                        boundaryGap:false,
                         splitLine:{lineStyle:{color:'#2B5FD5'}},
                         axisTick:{show:false},
                         axisLine:{show:false}
@@ -151,9 +151,13 @@
         },
         computed:{
             animHours(){
-                let time = this.pageData.driveTime;
-                let num = time < 1 ? 0 : 1;
-                return this.hours.toFixed(num);
+                if(this.pageData.driveTime){
+                    let time = this.pageData.driveTime;
+                    let num = time < 1 ? 0 : 1;
+                    return this.hours.toFixed(num);
+                }else{
+                    return '--'
+                }
             },
             pageData(){
                 return this.$store.state.pageData.P2

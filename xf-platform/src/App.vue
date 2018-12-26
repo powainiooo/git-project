@@ -5,41 +5,19 @@
         </div>
         <index v-if="showMenus"></index>
         <router-view v-if="isRouterAlive"/>
-
-        <div class="cropper-frame">
-            <vueCropper
-                ref="cropper"
-                :img="option.img"
-                :outputSize="option.size"
-                :outputType="option.outputType"
-                autoCrop
-                style="width: 400px; height: 400px;"
-            ></vueCropper>
-            <div>
-                <label class="btn" for="uploads">upload</label>
-                <input type="file" id="uploads" style="position:absolute; clip:rect(0 0 0 0);" accept="image/png, image/jpeg, image/gif, image/jpg" @change="uploadImg($event, 1)">
-                <button @click="getImg">生成</button>
-            </div>
-            <img :src="cropSrc" />
-        </div>
     </div>
 </template>
 
 <script type="es6">
     import index from '@/components/menu/index.vue'
     import { VueCropper }  from 'vue-cropper'
+    import TUpload from '@/components/common/TUpload.vue'
     export default {
         name: 'App',
-        components:{index,VueCropper},
+        components:{index,VueCropper,TUpload},
         data(){
             return{
                 isRouterAlive:true,
-                option:{
-                    img:'',
-                    size:1,
-                    outputType:'jpeg'
-                },
-                cropSrc:''
             }
         },
         provide(){
@@ -80,24 +58,9 @@
                 }
             },
             reload(){
-                console.log('reload');
                 this.isRouterAlive = false;
                 this.$nextTick(function(){
                     this.isRouterAlive = true;
-                })
-            },
-            uploadImg(e){
-                let file = e.target.files[0];
-                let fr = new FileReader();
-                fr.onload = (result)=>{
-                    this.option.img = result.currentTarget.result;
-                };
-                fr.readAsDataURL(file);
-            },
-            getImg(){
-                console.log('save')
-                this.$refs.cropper.getCropData((data)=>{
-                    this.cropSrc = data;
                 })
             }
         }
@@ -113,5 +76,5 @@
     }
     #app>.logo{ font-size: 32px; color: #ffffff; position: absolute; top: 60px; left: 60px; cursor: pointer; z-index: 1500;}
 
-    .cropper-frame{ width: 100%; height: 100vh; position: fixed; top: 0; left: 0; z-index: 10000; background-color: #ffffff;}
+    .cropper-frame{ width: 100%; height: 100vh; position: fixed; top: 0; left: 0; z-index: 10000; background-color: #fff; padding: 100px;}
 </style>

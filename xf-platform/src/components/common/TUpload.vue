@@ -10,7 +10,7 @@
     .n-upload.min .btn{ right: auto; left: 120px; top: 68px;}
     .n-upload input[type=file]{ display: none;}
 
-    .n-cropper{ width: 800px; height: 600px; background-color: #ffffff;box-shadow: 0 2px 10px rgba(0,0,0,0.2); overflow: hidden; border-radius: 5px; position: fixed; top: 50%; left: 50%; margin: -300px 0 0 -400px; box-sizing: border-box; padding:10px 30px;}
+    .n-cropper{ width: 800px; height: 600px; background-color: #ffffff;box-shadow: 0 2px 10px rgba(0,0,0,0.2); overflow: hidden; border-radius: 5px; position: fixed; top: 50%; left: 50%; margin: -300px 0 0 -400px; box-sizing: border-box; padding:10px 30px; z-index: 1000;}
     .n-cropper .n-cropper-title{ font-size: 24px; color: #000000; display: flex; justify-content: space-between; align-items: center;}
     .n-cropper .n-cropper-title a{ font-size: 40px; color: #012cac;}
     .n-cropper .n-cropper-subtitle{ font-size: 14px; color: #888888; display: flex; align-items: center;}

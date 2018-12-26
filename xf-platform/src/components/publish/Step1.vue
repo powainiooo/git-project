@@ -157,6 +157,7 @@
                 </div>
                 <div class="pl50 pt20 pb20 pr" style="border-bottom: 1px solid #e5e5e5;">
                     <t-upload  v-model="formData.cover2"
+                               cropper
                                :redButton="isEditor ? errorData.cover2 != '' : false"
                                :hideButton="isEditor ? errorData.cover2 == '' : false">
                         <template slot="title">

@@ -39,7 +39,6 @@
                                 </ul>
                             </t-ques>
                         </div>
-
                     </div>
                     <div class="pr20 pr" v-for="(item,index) in activityListData">
                         <a href="javascript:;" class="btn-del" @click="doDelActivity(index)" v-if="!isEditor"><Icon type="md-close" /></a>

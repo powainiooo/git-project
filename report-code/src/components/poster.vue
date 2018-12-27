@@ -218,7 +218,7 @@
                 //姓名
                 ctx.font = 'bold 40px Micro Yahei';
                 ctx.fillStyle = '#333333';
-                ctx.fillTextVertical('我是',560,110);
+                ctx.fillTextVertical('我叫',560,110);
                 ctx.fillStyle = '#2B5FD5';
                 ctx.fillTextVertical(this.name,560,195);
                 ctx.beginPath();
@@ -228,14 +228,14 @@
                 ctx.stroke();
                 let nameWidth = (this.name.length+2)*40;
                 let gap = (nameWidth+64)/750*window.innerWidth;
-                this.hintScale = 1;
+                this.hintScale = 0.7;
                 this.hintLeft = window.innerWidth*0.71;
                 this.hintTop = gap + gap*0.05;
 
                 //车型
                 ctx.font = 'bold 30px Micro Yahei';
                 ctx.fillStyle = '#333333';
-                ctx.fillTextVertical('2018年，我遇见了我人生中的最爱，就是'+this.car,490,100);
+                ctx.fillTextVertical('2018年，同我的人生最爱一起度过，她就是'+this.car,490,100);
                 ctx.beginPath();
                 ctx.moveTo(520,70);
                 ctx.lineTo(520,185+(this.car.length+23)*20);
@@ -368,16 +368,17 @@
             var code = letter.charCodeAt(0);
             if (code <= 256) {
                 if(code>=48 && code<=57){
-                    y = y + 12;
+                    y = y + letterWidth;
                 }else{
-                    context.translate(x, y);
-                    // 英文字符，旋转90°
-                    context.rotate(90 * Math.PI / 180);
-                    context.translate(-x, -y);
+                    // context.translate(x, y);
+                    // // 英文字符，旋转90°
+                    // context.rotate(90 * Math.PI / 180);
+                    // context.translate(-x, -y);
+                    y = y + 8;
                 }
             } else if (index > 0 && text.charCodeAt(index - 1) < 256) {
                 // y修正
-                y = y + arrWidth[index - 1] / 2;
+                y = y + arrWidth[index - 1] / 2 + 8;
             }
             // 确定下一个字符的纵坐标位置
             if(code == 8230){
@@ -399,8 +400,6 @@
             }
             // 旋转坐标系还原成初始态
             context.setTransform(1, 0, 0, 1, 0, 0);
-
-
         });
         // 水平垂直对齐方式还原
         context.textAlign = align;

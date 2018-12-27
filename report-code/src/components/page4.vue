@@ -1,7 +1,7 @@
 <style>
     .page4-container{ height: 100vh; background-color: #EFF7FD;}
     .page4-container .bg{ width: 100%; position: absolute; left: 0; bottom: 0; font-size: 0;}
-    .page4-container .page-title{ width: 29.6%;}
+    .page4-container .page-title{ width: 47%;}
 
     .page4-container .text1{ width: 100%; position: absolute; left: 0; bottom: 8%; font-size: 0.28rem; color: #666666; text-align: center;}
 

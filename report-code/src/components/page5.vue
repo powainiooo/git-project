@@ -3,7 +3,7 @@
     .page5-container .bg{ width: 100%; position: absolute; left: 0; bottom: 0; font-size: 0; overflow: hidden;}
     .page5-container .bg .moves{ width: 400vw; display: flex; align-items: flex-start; animation: road 14s linear infinite;}
     .page5-container .bg .moves img{ width: 200vw;}
-    .page5-container .page-title{ width: 35.4%;}
+    .page5-container .page-title{ width: 56%;}
     @keyframes road {
         0%{ transform: translate(0,0);}
         100%{ transform: translate(-200vw,0);}
@@ -69,18 +69,18 @@
                 tree:0,
                 co2Total:0,
                 treeTotal:0,
-                co2Unit:'kg'
+                co2Unit:'千克'
             }
         },
         methods:{
             setValues(){
-                let co2 = this.pageData.co2,unit = 'kg';
+                let co2 = this.pageData.co2,unit = '千克';
                 if(co2 < 1){
                     co2 = co2*1000;
-                    unit = 'g';
+                    unit = '克';
                 }else if(co2 > 1000){
                     co2 = co2/1000;
-                    unit = 't';
+                    unit = '吨';
                 }
                 this.co2Unit = unit;
                 TweenLite.to(this.$data,1,{co2Per:co2});

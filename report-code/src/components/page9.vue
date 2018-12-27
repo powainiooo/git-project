@@ -1,7 +1,7 @@
 <style>
     .page9-container{ height: 100vh; background-color: #EFF7FD;}
     .page9-container .bg{ width: 100%; position: absolute; left: 0; bottom: 0; font-size: 0;}
-    .page9-container .title{ width: 90%; position: absolute; top: 5%; left: 5%;}
+    .page9-container .title{ width: 100%; position: absolute; top: 5%; left: 0;}
 
     .keywords-list{ width: 100%; height: 4.4rem;  position: absolute; left: 0; top: 25%; list-style: none;}
     .keywords-list li{ font-size: 0.7rem; color: #333333; position: absolute;left: -100%; animation: keyword 8s linear infinite both;}

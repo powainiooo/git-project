@@ -36,11 +36,11 @@
 
         <div class="n-cropper" v-if="showCropper">
             <h3 class="n-cropper-title">
-                <span>宣传海报</span>
+                <span>{{title}}</span>
                 <a href="javascript:;" @click="showCropper = false"><Icon type="md-close" /></a>
             </h3>
             <div class="n-cropper-subtitle">
-                <span>海报尺寸为750px*650px</span>
+                <span>海报尺寸为{{fixedNumber[0]}}px*{{fixedNumber[1]}}px</span>
                 <t-button @dotap="openFile" size="min" style="width: 100px; margin-left: 20px;">选择图片</t-button>
             </div>
             <div class="n-cropper-area">
@@ -49,6 +49,9 @@
                     :img="imgUrl"
                     :outputSize="1"
                     autoCrop
+                    fixed
+                    :info="false"
+                    :fixedNumber="fixedNumber"
                     style="width: 300px; height: 350px;"
                 ></vueCropper>
                 <p style="text-align: center; color: #aaa; margin-top: 5px;">鼠标滑轮控制图片放大缩小</p>
@@ -86,6 +89,14 @@
             cropper:{
                 type:Boolean,
                 default:false
+            },
+            fixedNumber:{
+                type:Array,
+                default:[1,1]
+            },
+            title:{
+                type:String,
+                default:''
             }
         },
         data(){

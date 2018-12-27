@@ -159,7 +159,8 @@
                         for(let item of step3.actListData){
                             if(item.logoUrl != '' || item.imgUrl != ''){
                                 obj.person_desc.push({
-                                    img:item.logoUrl,
+                                    img:'',
+                                    username:item.logoUrl,
                                     picture:item.imgUrl
                                 })
                             }

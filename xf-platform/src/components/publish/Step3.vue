@@ -1,5 +1,5 @@
 <style>
-    .step3-frame{ width: 1400px; position: absolute; bottom: 0; left: 60px; display: flex; justify-content: space-between; z-index: 100;}
+    .step3-frame{ width: 1400px; position: absolute; bottom: 0; left: 60px; display: flex; justify-content: space-between;}
     .step3-frame .frame{ width: 1200px; height: 630px; box-sizing: border-box; background-color: #ffffff; display: flex; position: relative;}
     .step3-frame .frame:before{ content: ''; width: 100%; height: 3px; background: url("../../assets/img/ticket-top.png") repeat-x; position: absolute; left: 0; top: -3px;}
     .step3-frame .frame:after{ content: ''; width: 1px; position: absolute; left: 50%; top: 60px; bottom: 20px; z-index: 100; background-color: #e5e5e5;}
@@ -12,8 +12,8 @@
     .step3-frame .frame .title>div{ margin: 35px 20px 0 0; }
     .step3-frame .frame .index{ font-size: 20px; color: #000000; font-family: 'Helve'; padding: 4px 0 4px 50px;border-bottom: 1px solid #e5e5e5;}
     .step3-frame .frame .text{ height: 143px;border-bottom: 3px solid #e5e5e5; padding-left: 50px; display: flex; align-items: center;}
-    .step3-frame .frame .text textarea{ width: 460px;; box-sizing: border-box; border: 1px solid #888888; border-radius: 5px; padding: 7px 16px; color: #888888; font-size: 16px;}
-    .step3-frame .frame .text textarea[readonly]{ background-color: #eeeef0;}
+    .step3-frame .frame .text textarea,.step3-frame .frame .text input{ width: 460px;; box-sizing: border-box; border: 1px solid #888888; border-radius: 5px; padding: 7px 16px; color: #888888; font-size: 16px;}
+    .step3-frame .frame .text textarea[readonly],.step3-frame .frame .text input[readonly]{ background-color: #eeeef0;}
     .step3-frame .ques1{ position: absolute; top: 78px; left: 558px;}
     .step3-frame .ques2{ position: absolute; top: 78px; right: 20px;}
     .step3-frame .btn-del{ position: absolute; top: 0; right: 18px; font-size:  24px; color: #002aa6;}
@@ -45,6 +45,9 @@
                         <h3 class="index">{{index < 9 ? 0 : ''}}{{index + 1}}</h3>
                         <div class="pl50 pt20 pb20 pr" style="border-bottom: 1px solid #e5e5e5;">
                             <t-upload v-model="item.imgUrl"
+                                      cropper
+                                      :fixedNumber="[660,333]"
+                                      title="活动宣传图片"
                                       :redButton="isEditor ? errorData.goods_desc.length == 0 ? false : errorData.goods_desc[index].img != '' : false"
                                       :hideButton="activityCheck(index,'img')">
                                 <template slot="title">
@@ -72,13 +75,13 @@
                             <t-ques :redbg="errorData.person_desc.length != 0"
                                     v-if="isEditor ? showActError : true">
                                 <ul class="list1" v-if="!showActError">
-                                    <li><span>1</span>艺人logo尺寸为230px*230px</li>
+                                    <li><span>1</span>请输入艺人名称</li>
                                     <li><span>2</span>一个艺人logo对应上传一个艺人照片</li>
                                 </ul>
                                 <ul class="list1" v-if="showActError">
                                     <li
                                         v-for="(item,index) in errorData.person_desc"
-                                        v-if="item.img != '' || item.picture != ''">{{item.img == '' ? '' : '艺人logo '+(index+1)+'：'+item.img+'  '}}<br v-if="item.img != ''" />{{item.picture == '' ? '' : '艺人照片 '+(index+1)+'：'+item.picture}}</li>
+                                        v-if="item.img != '' || item.picture != ''">{{item.img == '' ? '' : '艺人姓名 '+(index+1)+'：'+item.img+'  '}}<br v-if="item.img != ''" />{{item.picture == '' ? '' : '艺人照片 '+(index+1)+'：'+item.picture}}</li>
                                 </ul>
                             </t-ques>
                         </div>
@@ -87,19 +90,23 @@
                         <a href="javascript:;" class="btn-del" @click="doDelAct(index)" style="right: 15px;" v-if="!isEditor"><Icon type="md-close" /></a>
                         <h3 class="index">{{index < 9 ? 0 : ''}}{{index + 1}}</h3>
                         <div class="pl50 pt20 pb20 pr" style="border-bottom: 1px solid #e5e5e5;">
-                            <t-upload v-model="item.logoUrl"
-                                      :class="item.logoUrl != '' ? 'act-upload' : ''"
-                                      :redButton="isEditor ? errorData.person_desc.length == 0 ? false : errorData.person_desc[index].img != '' : false"
-                                      :hideButton="actCheck(index,'img')">
-                                <template slot="title">
-                                    <h3>艺人LOGO</h3>
-                                    <p>尺寸为230px*230px</p>
-                                    <p>图片为透明底白图案PNG格式，LOGO统一使用R255 G255 B255色值</p>
-                                </template>
-                            </t-upload>
+                            <!--<t-upload v-model="item.logoUrl"-->
+                                      <!--:class="item.logoUrl != '' ? 'act-upload' : ''"-->
+                                      <!--:redButton="isEditor ? errorData.person_desc.length == 0 ? false : errorData.person_desc[index].img != '' : false"-->
+                                      <!--:hideButton="actCheck(index,'img')">-->
+                                <!--<template slot="title">-->
+                                    <!--<h3>艺人LOGO</h3>-->
+                                    <!--<p>尺寸为230px*230px</p>-->
+                                    <!--<p>图片为透明底白图案PNG格式，LOGO统一使用R255 G255 B255色值</p>-->
+                                <!--</template>-->
+                            <!--</t-upload>-->
+                            <div class="text" style="padding-left: 0; height: 100px;"><input type="text" placeholder="请填写艺人名称" style="width: 300px;" v-model="item.logoUrl"/></div>
                         </div>
                         <div class="pl50 pt20 pb20 pr" style="border-bottom: 3px solid #e5e5e5;">
                             <t-upload v-model="item.imgUrl"
+                                      cropper
+                                      :fixedNumber="[480,230]"
+                                      title="艺人照片"
                                       :redButton="isEditor ? errorData.person_desc.length == 0 ? false : errorData.person_desc[index].picture != '' : false"
                                       :hideButton="actCheck(index,'picture')">
                                 <template slot="title">
@@ -128,21 +135,6 @@
         //props:['errorData'],
         computed:{
             canNext(){
-                //let arr1 = this.activityListData;
-                //for(let item of arr1){
-                //    if(item.imgUrl == '' || item.desc == ''){
-                //        this.$emit('input',false);
-                //        return false;
-                //    }
-                //}
-                //let arr2 = this.actListData;
-                //for(let item of arr2){
-                //    if(item.logoUrl == '' || item.imgUrl == ''){
-                //        this.$emit('input',false);
-                //        return false;
-                //    }
-                //}
-
                 this.$emit('input',true);
                 return true
             },
@@ -182,7 +174,6 @@
                 let list1 = editorData.goods_desc,goods_desc = this.errorData.goods_desc;
                 this.showActivityError = false;
                 for(let i=0;i<list1.length;i++){
-
                     this.activityListData.push({
                         imgUrl:list1[i].img == '' ? '' : fileurl+list1[i].img,
                         desc:list1[i].desc
@@ -195,7 +186,7 @@
                 this.showActError = false;
                 for(let i=0;i<list2.length;i++){
                     this.actListData.push({
-                        logoUrl:list2[i].img == '' ? '' : fileurl+list2[i].img,
+                        logoUrl:list2[i].username == '' ? '' : list2[i].username,
                         imgUrl:list2[i].picture == '' ? '' : fileurl+list2[i].picture
                     });
                     if(person_desc[i].img != '' || person_desc[i].picture != ''){

@@ -142,6 +142,8 @@
                 if(this.lastname.length == 0){
                     this.nameError = true;
                     return;
+                }else if(this.lastname.length > 5){
+                    this.lastname = this.lastname.substr(0,5);
                 }
                 this.showPoster = true;
                 this.showName = false;
@@ -230,7 +232,7 @@
                 let gap = (nameWidth+64)/750*window.innerWidth;
                 this.hintScale = 0.7;
                 this.hintLeft = window.innerWidth*0.71;
-                this.hintTop = gap + gap*0.05;
+                this.hintTop = gap + gap*0.1;
 
                 //车型
                 ctx.font = 'bold 30px Micro Yahei';

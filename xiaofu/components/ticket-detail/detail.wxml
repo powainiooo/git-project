@@ -8,8 +8,8 @@
               wx:for-item="item"
               wx:for-index="index"
               wx:key="{{index}}">
-            <view class="name">{{item.username}}</view>
-            <image class="logo" src="{{imgSrc+item.img}}" mode="aspectFit"></image>
+            <view class="name" wx:if="{{item.img == ''}}">{{item.username}}</view>
+            <image class="logo" src="{{imgSrc+item.img}}" mode="aspectFit" wx:if="{{item.img != ''}}"></image>
             <image class="img" src="{{imgSrc+item.picture}}" mode="aspectFit"></image>
         </view>
 

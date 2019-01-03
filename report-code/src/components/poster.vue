@@ -134,7 +134,7 @@
                     // }else{
                     //     this.textArr.push(data[item]);
                     // }
-                    this.textArr.push(data[item]);
+                    this.textArr.push(data[item].replace('比亚迪秦',this.car));
                 }
                 this.textArr.push(data.add);
             },

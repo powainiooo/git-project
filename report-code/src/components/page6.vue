@@ -84,6 +84,7 @@
                 TweenLite.to(this.$data,1,{recharge:this.pageData.chargeTimes});
                 TweenLite.to(this.$data,1,{percent:this.pageData.chargeRank});
                 TweenLite.to(this.$data,1,{hours:this.pageData.chargeAvgTime});
+                console.log(this.pageData.timeByHour.substr(0,2))
                 let hour1 = parseInt(this.pageData.timeByHour.substr(0,2));
                 TweenLite.to(this.$data,1,{timeStartHour:hour1});
                 TweenLite.to(this.$data,1,{timeStartMin:0});

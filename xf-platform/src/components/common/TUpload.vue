@@ -50,6 +50,7 @@
                     :outputSize="1"
                     autoCrop
                     fixed
+                    full
                     :info="false"
                     :fixedNumber="fixedNumber"
                     style="width: 300px; height: 350px;"
@@ -92,7 +93,7 @@
             },
             fixedNumber:{
                 type:Array,
-                default:[1,1]
+                default:()=>{[1,1]}
             },
             title:{
                 type:String,
@@ -131,6 +132,7 @@
             doCropper(){
                 this.showCropper = false;
                 this.$refs.cropper.getCropData((data)=>{
+                    console.log(data);
                     this.$emit('input',data);
                 })
             }

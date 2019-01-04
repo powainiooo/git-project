@@ -124,8 +124,7 @@
             </div>
             <div class="page-context" v-if="pageData.tag == '有计划'">
                 <p><span class="tag1">{{pageData.date.substr(5,2) || '--'}}</span>月<span class="tag1">{{pageData.date.substr(8,2) || '--'}}</span>日</p>
-                <p v-if="pageData.times == 1">你首次使用服务预约</p>
-                <p v-else>使用服务预约<span class="tag1">{{animTimes}}</span>次</p>
+                <p>你首次使用服务预约</p>
                 <p>生活就要<span class="tag1">有计划</span></p>
             </div>
 

@@ -42,7 +42,7 @@
             <p v-if="pageData.tag == '省省吧'">能耗有点高，<span class="tag1">省省吧！</span></p>
         </div>
 
-        <div class="text1">计算参考　电: 0.68元/度　油: 6.86元/升</div>
+        <div class="text1">计算参考　电: 0.68元/度　油: 6.47元/升</div>
     </section>
 </template>
 

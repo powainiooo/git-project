@@ -70,6 +70,12 @@ Component({
         type:'navigate'
       },
       {
+        name: '每周推荐',
+        nameEn: 'weekly recommendation',
+        url: '/pages/index/index?type=recommend',
+        type:'navigate'
+      },
+      {
         name: '隶属于',
         nameEn: 'member of Ho',
         url: '/pages/member/member?page=member',

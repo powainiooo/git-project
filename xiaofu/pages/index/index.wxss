@@ -5,7 +5,8 @@
 .address-frame view{ width: 150rpx; height: 100rpx; display: flex; justify-content: center; align-items: center; font-size: 30rpx; color: #0092db;}
 .address-frame .active{ font-size: 34rpx; color: #fff;}
 
-.banner{ width: 100%; height: 315rpx; box-shadow: 0 5rpx 10rpx rgba(0,0,0,0.1); margin-top: 100rpx}
+.banner{ width: 100%; height: 315rpx; box-shadow: 0 5rpx 10rpx rgba(0,0,0,0.1);}
+.mt100{ margin-top: 100rpx}
 
 .pro-list{ padding-bottom: 60rpx;}
 .pro-list .item-frame{ height: 725rpx; position: relative;}

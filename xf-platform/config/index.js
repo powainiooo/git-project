@@ -12,7 +12,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
         '/client':{
-            target:'http://client.pc-online.cc/client',//http://client.pc-online.cc/client
+            target:'https://editor.leesticket.com/client',//http://client.pc-online.cc/client
             changeOrigin:true,
             pathRewrite:{
                 '^/client':''

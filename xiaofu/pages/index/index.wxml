@@ -21,12 +21,13 @@
                          class='address-select'
                          scroll-left="{{citiesLeft}}"
                          scroll-with-animation
+                         wx:if="{{indexType =='index'}}"
                          style="transform: translateY({{showIndex ? '0' : '-120'}}rpx)">
                 <view class='address-frame' style='width:{{(addressList.length+1)*cityItemWidth}}px'>
                     <view data-id="0"
                           data-index="0"
                           bindtap="changeCity"
-                          style="width: :{{cityItemWidth}}px"
+                          style="width:{{cityItemWidth}}px"
                           class="{{addressIndex == 0 ? 'active' : ''}}">全部</view>
                     <view
                             wx:for="{{addressList}}"
@@ -41,7 +42,11 @@
                 </view>
             </scroll-view>
 
-            <image src="{{imgSrc+bannerImg}}" class='banner' mode='scaleToFill' bindtap="bannerGoOut" wx:if="{{showIndex && bannerImg != ''}}"></image>
+            <image src="{{imgSrc+bannerImg}}"
+                   class="banner {{indexType =='index' ? 'mt100' : ''}}"
+                   mode='scaleToFill'
+                   bindtap="bannerGoOut"
+                   wx:if="{{showIndex && bannerImg != ''}}"></image>
         </view>
 
         <view class="sponsor-logo" wx:if="{{activityID != '' && showIndex && listData.length != 0}}"><image src="{{imgSrc+sponsorSrc}}" mode="widthFix"></image></view>

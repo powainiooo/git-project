@@ -5,7 +5,7 @@
     .record-list .table-opera>div .ivu-select-selection{ border-color: #878787;}
     .record-list .table-opera>div .ivu-input{ border-color: #878787;}
 
-    .record-list .table-list{ width: 100%;}
+    .record-list .table-list{ width: 100%; margin-bottom: 20px;}
     .record-list .table-list th{ height: 50px; font-size: 16px; color: #000000;border-top: 1px solid #dcdcdc;border-bottom: 1px solid #dcdcdc; vertical-align: middle; text-align: left; padding:0 15px;}
     .record-list .table-list td{ font-size: 14px; color: #888888;border-bottom: 1px solid #dcdcdc; padding: 15px;}
     .record-list .table-list td .sign1{ font-size: 16px; color: #000000; font-weight: bold;}
@@ -76,8 +76,8 @@
                 </tr>
                 </tbody>
             </table>
+            <Page :total="allnums" @on-change="changePage" />
         </div>
-
         <crash-out v-if="showCrashOut" @toggle="hideOut" :data="cashobj"></crash-out>
     </div>
 </template>
@@ -96,7 +96,9 @@
                 listData:[],
                 site:0,
                 showCrashOut:false,
-                cashobj:{}
+                cashobj:{},
+                allnums:0,
+                page:1
             }
         },
         mounted(){
@@ -108,12 +110,18 @@
                 this.$ajax.get('/client/api/bills',{
                     params:{
                         keyword:this.keyword,
-                        cate:this.selectType
+                        cate:this.selectType,
+                        page:this.page
                     }
                 }).then(res=>{
                     self.listData = res.data.data;
                     self.site = res.data.site;
+                    self.allnums = parseInt(res.data.nums)
                 });
+            },
+            changePage(val){
+                this.page = val;
+                this.getListData();
             },
             hideOut(){
                 this.showCrashOut = false;

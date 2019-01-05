@@ -62,12 +62,12 @@ Component({
       if(over == 1) return;
       let val = event.target.dataset.val == undefined ? -1 : event.target.dataset.val;
       let obj = val == -1 ? this.data.selectTicket : this.data.typeList[val];
-      let isShow = event.target.dataset.show;
+      // let isShow = event.target.dataset.show;
       this.setNums(obj);
       let params = {};
-      params.typeBottom = isShow ? '160rpx' : -this.data.typeList.length*100+'rpx';
-      params.showTypeList = isShow;
-      if(!isShow && obj.is_over == 1)return;
+      // params.typeBottom = isShow ? '160rpx' : -this.data.typeList.length*100+'rpx';
+      // params.showTypeList = isShow;
+      if(obj.is_over == 1)return;
       params.selectTicket = obj;
       this.setData(params)
     },

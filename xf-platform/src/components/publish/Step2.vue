@@ -19,6 +19,7 @@
     .step2-frame .ticke-type-list .name{ width: 128px; height: 40px; font-size: 16px; color: #000000; display: flex; align-items: center; margin: 10px 0;}
     .step2-frame .ticke-type-list .input{ width: 128px; height: 40px; position: relative; margin: 10px 0;}
     .step2-frame .ticke-type-list .input input{ width: 100%; height: 100%; box-sizing: border-box; font-size: 16px; color: #000000; border: 1px solid #a5a5a5; border-radius: 6px; line-height: 40px; padding: 0 15px;}
+    .step2-frame .ticke-type-list .input .namelen{ font-size: 12px; color: #CCCCCC; position: absolute; top: 11px; right: 8px;}
     .step2-frame .ticke-type-list .input input::-webkit-input-placeholder{ color: #a5a5a5; }
     .step2-frame .ticke-type-list .input-price:after{content: '元'; line-height: 40px; position: absolute; top: 0; right: 15px; font-size: 16px; color: #a5a5a5;}
     .step2-frame .ticke-type-list-readonly .input-price:after{color: #000;}
@@ -64,7 +65,8 @@
                             <input type="checkbox" class="radio" v-model="item.checked" v-if="!isEditor">
                             <h3 class="name" v-if="item.isDefault">{{item.name}}</h3>
                             <div class="input" v-if="!item.isDefault">
-                                <input type="text" placeholder="票种名称" v-model="item.name" :readonly="isEditor" maxlength="12"/>
+                                <input type="text" placeholder="票种名称" v-model="item.name" :readonly="isEditor" maxlength="12" style="padding-right: 40px;"/>
+                                <span class="namelen">{{item.name.length}}/12</span>
                             </div>
                             <div class="input" :class="item.price == '' ? '' : 'input-price'">
                                 <input type="text" placeholder="价格" v-model="item.price" :readonly="isEditor">
@@ -73,7 +75,7 @@
                                 <input type="text" placeholder="张数" v-model="item.sale_nums" :readonly="isEditor">
                             </div>
                             <div class="input" :class="item.sale_limit == '' ? '' : 'input-limit'">
-                                <input type="text" placeholder="限购张数" v-model="item.sale_limit" :readonly="isEditor" @focus="onFocus(index)" @blur="onBlur(index)" @keyup="onFocus(index)">
+                                <input type="text" placeholder="限购张数" v-model="item.sale_limit" :readonly="isEditor">
                             </div>
                             <a href="javascript:;" class="btn-del" v-if="!item.isDefault && !isEditor" @click="doDelType(index)"><Icon type="md-close" /></a>
                         </div>
@@ -81,7 +83,6 @@
                     <div class="tc mt30 mb30" v-if="!isEditor">
                         <a href="javascript:;" @click="newTypeItem"><img src="@/assets/img/add.png"> </a>
                     </div>
-                    <div class="warn" :style="{top:warnTop+'px'}" v-if="showWarn">{{warnTxt}}</div>
                 </div>
                 <div class="step2">
                     <div class="title mr20"><h3><span>4</span>票务类型及时间</h3></div>
@@ -260,9 +261,6 @@
         },
         data(){
             return{
-                warnTop:0,
-                showWarn:false,
-                warnTxt:'1',
                 ticketType:'1',
                 ids:'1',
                 saleStart:'',
@@ -309,16 +307,6 @@
         methods:{
             dateChange(date){
                 console.log(this.showTime)
-            },
-            onFocus(index){
-                let list = this.typeListData[index];
-                this.warnTop = 190 + 120*index;
-                if(list.sale_limit > list.sale_nums) list.sale_limit = list.sale_nums;
-                this.warnTxt = list.name+'：'+list.sale_limit+'/'+list.sale_nums;
-                this.showWarn = true;
-            },
-            onBlur(index){
-                this.showWarn = false;
             },
             dataInit(){
                 let editorData = this.$store.state.editorData;

@@ -376,7 +376,7 @@
                     // // 英文字符，旋转90°
                     // context.rotate(90 * Math.PI / 180);
                     // context.translate(-x, -y);
-                    y = y + 8;
+                    y = y + 20;
                 }
             } else if (index > 0 && text.charCodeAt(index - 1) < 256) {
                 // y修正

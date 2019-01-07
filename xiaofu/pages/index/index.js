@@ -394,19 +394,21 @@ Page({
                         index = i + 1;
                     }
                 }
-                let banner = '';
+              let banner = '', bannerType = '';
                 if(self.data.indexType == 'index'){
                     banner = res.data.data.cover;
+                    bannerType = res.data.data.type;
                 }else if(self.data.indexType == 'recommend'){
                     banner = res.data.data.recommend;
+                    bannerType = 4;
                 }
                 self.setData({
                     citiesLeft:self.data.cityItemWidth*(index-2),
                     addressList:city,
                     addressIndex:index,
                     bannerImg:banner,
-                    bannerID:res.data.data.b_id,
-                    bannerType:res.data.data.type
+                    bannerID: res.data.data.b_id,
+                    bannerType: bannerType
                 });
                 self.getLocation();
             },

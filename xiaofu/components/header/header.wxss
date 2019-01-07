@@ -16,12 +16,12 @@
 .header .search-frame .btn:last-child{ justify-content: flex-end; border-left: 2rpx solid #d5d5d5;}
 
 .nav-frame{ width: 100%; height: calc(100% - 120rpx); background-color: #002aac; position: fixed; top: -100%; left: 0; z-index: 450; overflow-y: scroll;}
-.nav-frame .person-info{ margin: 0 15rpx; height: 220rpx; display: flex; align-items: center; border-bottom: 1rpx solid rgba(255,255,255,0.5);}
+.nav-frame .person-info{ margin: 0 15rpx; height: 220rpx; display: flex; align-items: center; border-bottom: 1rpx solid #b3ceff;}
 .nav-frame .person-info .avatar{ width: 140rpx; height: 140rpx; border-radius: 8px; margin: 0 40rpx;}
-.nav-frame .person-info .name{ font-size: 34rpx; color: #fff;}
+.nav-frame .person-info .name{ font-size: 34rpx; color: #b3ceff;}
 .nav-frame .nav-list{ margin:0 15rpx 300rpx 15rpx;}
-.nav-frame .nav-list .nav-item{ height: 130rpx; display: flex; align-items: center; border-bottom: 1px solid #001052; padding-left: 40rpx;}
-.nav-frame .nav-list .nav-item .name{ font-size: 34rpx; color: #fff;}
+.nav-frame .nav-list .nav-item{ height: 130rpx; display: flex; align-items: center; border-bottom: 1px solid #002684; padding-left: 40rpx;}
+.nav-frame .nav-list .nav-item .name{ font-size: 34rpx; color: #b3ceff;}
 
 .nav-order{ height: 160rpx; position: fixed; bottom: -300rpx; left: 10rpx; right: 10rpx; background: #fff; z-index: 550;}
 .nav-order .menu-line{ width: 100%; position: absolute; top: -82rpx; left: 0;}

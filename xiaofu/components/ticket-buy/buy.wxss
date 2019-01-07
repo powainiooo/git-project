@@ -28,6 +28,6 @@
 .hint-section{ margin: 40rpx 50rpx; font-size: 24rpx; color: #888888; line-height: 1.5; }
 
 .ticket-list{ padding-top: 40rpx; border-top: 1rpx solid #c9c9c9; overflow: hidden; margin: 0 50rpx; position: relative; z-index: 100;}
-.ticket-list .ticket-item{ font-size: 28rpx; padding: 16rpx 36rpx; background-color: #ffffff; border-radius: 8rpx; box-shadow: 4rpx 8rpx 12rpx rgba(0,0,0,0.08); margin: 0 30rpx 40rpx 0; float: left;}
+.ticket-list .ticket-item{ font-size: 28rpx; padding: 16rpx 36rpx; background-color: #ffffff; border-radius: 8rpx; box-shadow: 4rpx 8rpx 12rpx rgba(0,0,0,0.08); margin: 0 30rpx 40rpx 0; float: left; text-align: center; box-sizing: border-box;}
 .ticket-list .disabled{ box-shadow: none; background-color: #c7c8c9; color: #ffffff;}
 .ticket-list .selected{ box-shadow: 4rpx 8rpx 12rpx rgba(0,42,172,0.5); background-color: #002aac; color: #ffffff;}

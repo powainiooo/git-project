@@ -11,9 +11,7 @@
               wx:for="{{typeList}}"
               wx:for-item="item"
               wx:for-index="index"
-              wx:key="index">
-            {{item.select}}
-        </view>
+              wx:key="index">{{item.select}}票</view>
     </view>
     <view class="form-frame">
       <input placeholder="姓名" class="input" bindinput="checkValues" data-key="nameVal"/>

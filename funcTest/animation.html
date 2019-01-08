@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,shrink-to-fit=no">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <title>Title</title>
+    <style>
+        .page1-container{ height: 100vh; background-color: #EFF7FD;}
+        .page1-container .bg{ width: 100%; position: absolute; left: 0; bottom: 0; font-size: 0;}
+        .page1-container .bg .cover{ position: absolute; left: 0; bottom: 0;}
+        .page1-container .bg .car{ width: 12%; position: absolute; left: 58%; bottom: 33%;}
+
+        .page1-circle{ width: 80%; position: absolute; left: 0; bottom: 6%; display: flex; justify-content: space-between;}
+        .page1-circle li{ width: 23vw; height: 23vw; list-style: none;}
+        .page1-circle li div{ width: 100%; height: 100%; border: 2px solid #46B3E9; border-radius: 50%; background-color: rgba(255,255,255,0.5); display: flex; justify-content: center; align-items: center; flex-direction: column; font-size: 0.24rem; color: #333333; line-height: 1.1; padding: 0.16rem 0.08rem 0 0.08rem; box-sizing: border-box; text-align: center;}
+        .page1-circle li span{ font-size: 0.46rem; color: #2B5FD5;}
+        .page1-circle li:nth-child(1) div{ margin-top: -1vw;}
+        .page1-circle li:nth-child(2) div{ margin-top: -10vw; border-color: #EBA729;}
+        .page1-circle li:nth-child(3) div{ margin-top: 0; border-color: #2B5FD5;}
+        .page1-circle-pos2 li:nth-child(1){ margin-top: -9vw;}
+        .page1-circle-pos2 li:nth-child(2){ margin-top: 0;}
+        .page1-circle-pos2 li:nth-child(3){ margin-top: -4vw;}
+
+        .scaleIn{ animation: scaleIn 0.4s cubic-bezier(.29,.73,.46,1.29);}
+        @keyframes scaleIn {
+            0%{ transform: scale(0);}
+            100%{ transform: scale(1);}
+        }
+
+        .floatCircle1{ animation: floatCircle1 8.5s linear infinite; -webkit-animation: floatCircle1 8.5s linear infinite;}
+        @keyframes floatCircle1 {
+            0%,100%{ transform: translate(0,0);}
+            12%{ transform: translate(-3px,-3px);}
+            24%{ transform: translate(-5px,-5px);}
+            36%{ transform: translate(-3px,-8px);}
+            48%{ transform: translate(0,-10px);}
+            60%{ transform: translate(3px,-8px);}
+            72%{ transform: translate(5px,-5px);}
+            84%{ transform: translate(3px,-3px);}
+        }
+        .floatCircle2{ animation: floatCircle2 7.5s linear infinite; -webkit-animation: floatCircle2 7.5s linear infinite;}
+        @keyframes floatCircle2 {
+            0%,100%{ transform: translate(0,0);}
+            25%{ transform: translate(-5px,5px);}
+            50%{ transform: translate(-10px,0);}
+            75%{ transform: translate(-5px,-5px);}
+        }
+        .floatCircle3{ animation: floatCircle3 6.5s linear infinite; -webkit-animation: floatCircle3 6.5s linear infinite;}
+        @keyframes floatCircle3 {
+            0%,100%{ transform: translate(0,0);}
+            12%{ transform: translate(-3px,-4px);}
+            24%{ transform: translate(-6px,-5px);}
+            36%{ transform: translate(-8px,-4px);}
+            48%{ transform: translate(-11px,0);}
+            60%{ transform: translate(-8px,4px);}
+            72%{ transform: translate(-6px,6px);}
+            84%{ transform: translate(-4px,3px);}
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <ul class="page1-circle">
+        <li class="animated" :class="floatCircle1">
+            <transition enter-active-class=" scaleIn">
+                <div v-if="showCircle1">使用云服务<span>1</span>次</div>
+            </transition>
+        </li>
+        <li class="animated" :class="floatCircle2" style="width: 26vw; height: 26vw;">
+            <transition enter-active-class=" scaleIn">
+                <div v-if="showCircle2">在排名<span>1</span>位</div>
+            </transition>
+        </li>
+        <li class="animated" :class="floatCircle3">
+            <transition enter-active-class=" scaleIn">
+                <div v-if="showCircle3">击败全国<span>1%</span>用户</div>
+            </transition>
+        </li>
+    </ul>
+</div>
+
+<script src="js/vue.js"></script>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data:{
+            showCircle1:false,
+            showCircle2:false,
+            showCircle3:false,
+            floatCircle1:'',
+            floatCircle2:'',
+            floatCircle3:''
+        },
+        mounted:function () {
+            var self = this;
+            setTimeout(function () {
+                self.showCircle1 = true;
+            },1000);
+            setTimeout(function () {
+                self.showCircle2 = true;
+            },1100);
+            setTimeout(function () {
+                self.showCircle3 = true;
+            },1200);
+            setTimeout(function () {
+                self.floatCircle1 = 'floatCircle1';
+            },1400);
+            setTimeout(function () {
+                self.floatCircle2 = 'floatCircle2';
+            },1500);
+            setTimeout(function () {
+                self.floatCircle3 = 'floatCircle3';
+            },1600)
+        }
+    })
+</script>
+</body>
+</html>

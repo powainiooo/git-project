@@ -21,7 +21,7 @@
         100%{ transform: scale(1);}
     }
 
-    .floatCircle1{ animation: floatCircle1 8.5s linear infinite;}
+    .floatCircle1{ animation: floatCircle1 8.5s linear infinite; -webkit-animation: floatCircle1 8.5s linear infinite;}
     @keyframes floatCircle1 {
         0%,100%{ transform: translate(0,0);}
         12%{ transform: translate(-3px,-3px);}
@@ -32,14 +32,14 @@
         72%{ transform: translate(5px,-5px);}
         84%{ transform: translate(3px,-3px);}
     }
-    .floatCircle2{ animation: floatCircle2 7.5s linear infinite;}
+    .floatCircle2{ animation: floatCircle2 7.5s linear infinite; -webkit-animation: floatCircle2 7.5s linear infinite;}
     @keyframes floatCircle2 {
         0%,100%{ transform: translate(0,0);}
         25%{ transform: translate(-5px,5px);}
         50%{ transform: translate(-10px,0);}
         75%{ transform: translate(-5px,-5px);}
     }
-    .floatCircle3{ animation: floatCircle3 6.5s linear infinite;}
+    .floatCircle3{ animation: floatCircle3 6.5s linear infinite; -webkit-animation: floatCircle3 6.5s linear infinite;}
     @keyframes floatCircle3 {
         0%,100%{ transform: translate(0,0);}
         12%{ transform: translate(-3px,-4px);}

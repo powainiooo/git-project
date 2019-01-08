@@ -15,13 +15,13 @@
     .page1-circle-pos2 li:nth-child(2){ margin-top: 0;}
     .page1-circle-pos2 li:nth-child(3){ margin-top: -4vw;}
 
-    .scaleIn{ animation: scaleIn 0.4s cubic-bezier(.29,.73,.46,1.29);}
+    .scaleIn{ transform: scale(1);}
     @keyframes scaleIn {
         0%{ transform: scale(0);}
         100%{ transform: scale(1);}
     }
 
-    .floatCircle1{ animation: floatCircle1 8.5s linear infinite; -webkit-animation: floatCircle1 8.5s linear infinite;}
+    .floatCircle1{ animation: floatCircle1 9s linear infinite;}
     @keyframes floatCircle1 {
         0%,100%{ transform: translate(0,0);}
         12%{ transform: translate(-3px,-3px);}
@@ -32,14 +32,14 @@
         72%{ transform: translate(5px,-5px);}
         84%{ transform: translate(3px,-3px);}
     }
-    .floatCircle2{ animation: floatCircle2 7.5s linear infinite; -webkit-animation: floatCircle2 7.5s linear infinite;}
+    .floatCircle2{ animation: floatCircle2 8s linear infinite;}
     @keyframes floatCircle2 {
         0%,100%{ transform: translate(0,0);}
         25%{ transform: translate(-5px,5px);}
         50%{ transform: translate(-10px,0);}
         75%{ transform: translate(-5px,-5px);}
     }
-    .floatCircle3{ animation: floatCircle3 6.5s linear infinite; -webkit-animation: floatCircle3 6.5s linear infinite;}
+    .floatCircle3{ animation: floatCircle3 7s linear infinite;}
     @keyframes floatCircle3 {
         0%,100%{ transform: translate(0,0);}
         12%{ transform: translate(-3px,-4px);}
@@ -76,17 +76,15 @@
 
         <ul class="page1-circle">
             <li class="animated" :class="floatCircle1">
-                <transition enter-active-class=" scaleIn">
                 <div v-if="showCircle1">使用云服务<span>{{pageData.useTimes || '--'}}</span>次</div>
-                </transition>
             </li>
             <li class="animated" :class="floatCircle2" style="width: 26vw; height: 26vw;">
-                <transition enter-active-class=" scaleIn">
+                <transition enter-active-class="scaleIn">
                 <div v-if="showCircle2">在{{city}}排名<span>{{pageData.cityRank || '--'}}</span>位</div>
                 </transition>
             </li>
             <li class="animated" :class="floatCircle3">
-                <transition enter-active-class=" scaleIn">
+                <transition enter-active-class="scaleIn">
                 <div v-if="showCircle3">击败全国<span>{{pageData.countryRank || '--'}}%</span>用户</div>
                 </transition>
             </li>

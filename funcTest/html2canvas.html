@@ -21,7 +21,7 @@
         <!-- slides -->
         <swiper-slide v-for="item in 20">{{txt}} {{item}}</swiper-slide>
     </swiper>
-    <div id="imgsframe" v-if="showImgs"><img :src="imgSrc" id="imgs" style="width: 100%;"></div>
+    <div id="imgsframe" v-if="!showImgs"><img :src="imgSrc" id="imgs" style="width: 100%;"></div>
 </div>
 
 
@@ -47,7 +47,7 @@
         mounted:function () {
             var self = this;
             setTimeout(function () {
-                self.txt = 'this is a';
+                self.txt = 'this is a 2';
                 self.draw()
             },1000)
         },

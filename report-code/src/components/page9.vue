@@ -4,7 +4,8 @@
     .page9-container .title{ width: 100%; position: absolute; top: 5%; left: 0;}
 
     .keywords-list{ width: 100%; height: 4.4rem;  position: absolute; left: 0; top: 25%; list-style: none;}
-    .keywords-list li{ font-size: 0.7rem; color: #333333; position: absolute;left: -100%; animation: keyword 8s linear infinite both;}
+    .keywords-list li{ font-size: 0.7rem; color: #333333; position: absolute;left: -100%;}
+    .keywords-list li.animate{ animation: keyword 8s linear infinite both;}
     .keywords-list li:nth-child(1){ top:1.5rem; left: 30%;}
     .keywords-list li:nth-child(2){ top:0.7rem; left: 57%; opacity: 0.83; transform: scale(0.71); animation-delay: 0.5s;}
     .keywords-list li:nth-child(3){ top:2.8rem; left: 26%; opacity: 0.68; transform: scale(0.71); animation-delay: 1s;}
@@ -34,12 +35,12 @@
         <div class="title"><img src="@/assets/images/title9.png"> </div>
 
         <ul class="keywords-list">
-            <li v-for="item in tagList">{{item}}</li>
+            <li v-for="item in tagList" :class="{animate:!isPosting}">{{item}}</li>
         </ul>
 
-        <div class="btn" @click="openSelect" v-if="showBtn"><img src="@/assets/images/btn.png"></div>
+        <div class="btn" @click="openSelect" v-if="showBtn && !isPosting"><img src="@/assets/images/btn.png"></div>
 
-        <transition enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
+        <transition enter-active-class="fadeIn" leave-active-class="fadeOut">
         <div class="style-container" v-if="showStyle" style="z-index: 650;">
             <div class="style-frame">
                 <h3>选择风格</h3>
@@ -58,7 +59,8 @@
             </div>
         </div>
         </transition>
-        <poster ref="poster" :styleKey="lastStyleKey" @showChange="openSelect"></poster>
+        <!--<poster ref="poster" :styleKey="lastStyleKey" @showChange="openSelect"></poster>-->
+
     </section>
 </template>
 
@@ -104,10 +106,11 @@
             },
             doDraw(){
                 this.lastStyleKey = this.styleKey;
-                this.$nextTick(()=>{
-                    this.$refs.poster.draw();
-                    this.doCancel();
-                })
+                // this.$nextTick(()=>{
+                //     this.$refs.poster.draw();
+                //     this.doCancel();
+                // })
+                this.$emit('draw',this.lastStyleKey)
             },
             doCancel(){
                 this.showStyle = false;
@@ -129,6 +132,9 @@
                     }
                 }
                 return arr.length != 0
+            },
+            isPosting(){
+                return this.$store.state.isPosting
             }
         }
     }

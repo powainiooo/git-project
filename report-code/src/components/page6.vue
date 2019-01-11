@@ -31,7 +31,7 @@
             <windmill class="wind1"></windmill>
             <windmill class="wind2"></windmill>
         </div>
-        <div class="next-arrow"><img src="@/assets/images/nextpage.png"> </div>
+        <div class="next-arrow" v-if="!isPosting"><img src="@/assets/images/nextpage.png"> </div>
         <div class="page-title"><img src="@/assets/images/title6.png"> </div>
 
         <div class="page-context">
@@ -81,16 +81,26 @@
         methods:{
             setValues(){
                 this.energy = this.pageData.powerType;
-                TweenLite.to(this.$data,1,{recharge:this.pageData.chargeTimes});
-                TweenLite.to(this.$data,1,{percent:this.pageData.chargeRank});
-                TweenLite.to(this.$data,1,{hours:this.pageData.chargeAvgTime});
-                console.log(this.pageData.timeByHour.substr(0,2))
                 let hour1 = parseInt(this.pageData.timeByHour.substr(0,2));
-                TweenLite.to(this.$data,1,{timeStartHour:hour1});
-                TweenLite.to(this.$data,1,{timeStartMin:0});
                 let hour2 = parseInt(this.pageData.timeByHour.substr(4,2));
-                TweenLite.to(this.$data,1,{timeEndHour:hour2});
-                TweenLite.to(this.$data,1,{timeEndMin:0});
+                if(this.isPosting){
+                    this.recharge = this.pageData.chargeTimes;
+                    this.percent = this.pageData.chargeRank;
+                    this.hours = this.pageData.chargeAvgTime;
+                    this.timeStartHour = hour1;
+                    this.timeStartMin = 0;
+                    this.timeEndHour = hour2;
+                    this.timeEndMin = 0;
+                }else{
+                    TweenLite.to(this.$data,1,{recharge:this.pageData.chargeTimes});
+                    TweenLite.to(this.$data,1,{percent:this.pageData.chargeRank});
+                    TweenLite.to(this.$data,1,{hours:this.pageData.chargeAvgTime});
+                    TweenLite.to(this.$data,1,{timeStartHour:hour1});
+                    TweenLite.to(this.$data,1,{timeStartMin:0});
+                    TweenLite.to(this.$data,1,{timeEndHour:hour2});
+                    TweenLite.to(this.$data,1,{timeEndMin:0});
+                }
+
             },
             resetValues(){
                 this.recharge = 0;
@@ -140,6 +150,9 @@
             },
             pageData(){
                 return this.$store.state.pageData.P6
+            },
+            isPosting(){
+                return this.$store.state.isPosting
             }
         }
     }

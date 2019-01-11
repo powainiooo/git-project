@@ -33,7 +33,7 @@
             </div>
             <car :scale="0.8"></car>
         </div>
-        <div class="next-arrow"><img src="@/assets/images/nextpage.png"> </div>
+        <div class="next-arrow" v-if="!isPosting"><img src="@/assets/images/nextpage.png"> </div>
 
         <div class="page-title"><img src="@/assets/images/title5.png"> </div>
 
@@ -83,10 +83,18 @@
                     unit = '吨';
                 }
                 this.co2Unit = unit;
-                TweenLite.to(this.$data,1,{co2Per:co2});
-                TweenLite.to(this.$data,1,{tree:this.pageData.tree});
-                TweenLite.to(this.$data,1,{co2Total:this.pageData.co2ALL});
-                TweenLite.to(this.$data,1,{treeTotal:this.pageData.treeAll});
+                if(this.isPosting){
+                    this.co2Per = co2;
+                    this.tree = this.pageData.tree;
+                    this.co2Total = this.pageData.co2ALL;
+                    this.treeTotal = this.pageData.treeAll;
+                }else{
+                    TweenLite.to(this.$data,1,{co2Per:co2});
+                    TweenLite.to(this.$data,1,{tree:this.pageData.tree});
+                    TweenLite.to(this.$data,1,{co2Total:this.pageData.co2ALL});
+                    TweenLite.to(this.$data,1,{treeTotal:this.pageData.treeAll});
+                }
+
             },
             resetValues(){
                 this.co2Per = 0;
@@ -131,6 +139,9 @@
             },
             pageData(){
                 return this.$store.state.pageData.P5
+            },
+            isPosting(){
+                return this.$store.state.isPosting
             }
         }
     }

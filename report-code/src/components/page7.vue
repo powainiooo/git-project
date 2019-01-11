@@ -6,6 +6,7 @@
     .page7-container .times-list{ width: 100%; height: 6rem; position: absolute; top: 30%; left: 0;}
     .page7-container .times-list li{ width: 30vw; height: 30vw; position: absolute; list-style: none; transform: scale(0);}
     .page7-container .times-list li.active{ transform: scale(1); transition: transform 0.4s cubic-bezier(.29,.73,.46,1.29);}
+    .page7-container .times-list li.activep{ transform: scale(1); transition: transform 0s cubic-bezier(.29,.73,.46,1.29);}
     .page7-container .times-list li div{ width: 100%; height: 100%; border: 2px solid #2B5FD5; border-radius: 50%; background-color: #FFFFFF; display: flex; justify-content: center; align-items: center; flex-direction: column; font-size: 0.32rem; color: #333333; padding-top: 0.24rem; box-sizing: border-box;}
     .page7-container .times-list li span.value{ font-size: 0.66rem; color: #2B5FD5;}
     .page7-container .times-list li:first-child{ left: 28%; top: 2rem;}
@@ -77,7 +78,7 @@
         <div class="bg">
             <img src="/static/images/bg7.jpg">
         </div>
-        <div class="next-arrow"><img src="@/assets/images/nextpage.png"> </div>
+        <div class="next-arrow" v-if="!isPosting"><img src="@/assets/images/nextpage.png"> </div>
         <div class="page-title"><img src="@/assets/images/title7.png"> </div>
 
         <div class="page-context">
@@ -89,7 +90,7 @@
         </div>
 
         <ul class="times-list">
-            <li :class="{active:showTags,animate:showTags}" v-for="item in timesList">
+            <li :class="{active:showTags,activep:isPosting,animate:showTags && !isPosting}" v-for="item in timesList">
                 <div><span>{{item.name || '--'}}</span><span class="value">{{item.value || '--'}}</span><span>次</span></div>
             </li>
         </ul>
@@ -134,7 +135,12 @@
                     }
                 }
                 this.timesList = arr;
-                TweenLite.to(this.$data,1,{times:this.pageData.totalTimes/10000});
+                if(this.isPosting){
+                    this.times = this.pageData.totalTimes/10000;
+                }else{
+                    TweenLite.to(this.$data,1,{times:this.pageData.totalTimes/10000});
+                }
+
                 setTimeout(()=>{
                     this.showTags = true;
                 },100)
@@ -154,6 +160,9 @@
             },
             pageData(){
                 return this.$store.state.pageData.P7
+            },
+            isPosting(){
+                return this.$store.state.isPosting
             }
         }
     }

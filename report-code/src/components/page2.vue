@@ -11,7 +11,7 @@
         <div class="bg">
             <img src="/static/images/bg2.jpg">
         </div>
-        <div class="next-arrow"><img src="@/assets/images/nextpage.png"> </div>
+        <div class="next-arrow" v-if="!isPosting"><img src="@/assets/images/nextpage.png"> </div>
         <div class="page-title"><img src="@/assets/images/title2.png"> </div>
 
         <div class="page-context">
@@ -69,6 +69,7 @@
                     series: [{
                         data: yArr,
                         type: 'line',
+                        animation:!this.isPosting,
                         smooth: true,
                         lineStyle:{color:'#2B5FD5',shadowColor:'#ffffff',shadowBlur:0,shadowOffsetX:2},
                         itemStyle:{opacity:0},
@@ -109,7 +110,11 @@
                 this.drawTable(xArr,yArr);
                 let time = this.pageData.driveTime;
                 time = time < 1 ? time*60 : time;
-                TweenLite.to(this.$data,1,{hours:time});
+                if(this.isPosting){
+                    this.hours = time;
+                }else{
+                    TweenLite.to(this.$data,1,{hours:time});
+                }
             },
             resetValues(){
                 this.hours = 0;
@@ -161,6 +166,9 @@
             },
             pageData(){
                 return this.$store.state.pageData.P2
+            },
+            isPosting(){
+                return this.$store.state.isPosting
             }
         }
     }

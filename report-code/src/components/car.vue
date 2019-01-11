@@ -13,8 +13,8 @@
 <template>
     <div class="c-car" :style="{transform:'scale('+scale+')'}">
         <img src="@/assets/images/car.png" class="car-body">
-        <img src="@/assets/images/wheel.png" class="car-wheel1" :class="driving ? 'driving' : ''">
-        <img src="@/assets/images/wheel.png" class="car-wheel2" :class="driving ? 'driving' : ''">
+        <img src="@/assets/images/wheel.png" class="car-wheel1" :class="doDrive ? 'driving' : ''">
+        <img src="@/assets/images/wheel.png" class="car-wheel2" :class="doDrive ? 'driving' : ''">
     </div>
 </template>
 
@@ -29,6 +29,14 @@
             driving:{
                 type:Boolean,
                 default:true
+            }
+        },
+        computed:{
+            isPosting(){
+                return this.$store.state.isPosting
+            },
+            doDrive(){
+                return this.driving && !this.isPosting
             }
         },
         data(){

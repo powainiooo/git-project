@@ -15,7 +15,7 @@
     .page1-circle-pos2 li:nth-child(2){ margin-top: 0;}
     .page1-circle-pos2 li:nth-child(3){ margin-top: -4vw;}
 
-    .scaleIn{ transform: scale(1);}
+    .scaleIn{ animation: scaleIn 0.4s cubic-bezier(.29,.73,.46,1.29);}
     @keyframes scaleIn {
         0%{ transform: scale(0);}
         100%{ transform: scale(1);}
@@ -60,7 +60,7 @@
             <img src="/static/images/bgCover1.png" class="cover">
         </div>
 
-        <div class="next-arrow"><img src="@/assets/images/nextpage.png"> </div>
+        <div class="next-arrow" v-if="!isPosting"><img src="@/assets/images/nextpage.png"> </div>
 
         <div class="page-title"><img src="@/assets/images/title1.png"> </div>
 
@@ -76,15 +76,17 @@
 
         <ul class="page1-circle">
             <li class="animated" :class="floatCircle1">
+                <transition :enter-active-class="isPosting ? '' : 'scaleIn'">
                 <div v-if="showCircle1">使用云服务<span>{{pageData.useTimes || '--'}}</span>次</div>
+                </transition>
             </li>
             <li class="animated" :class="floatCircle2" style="width: 26vw; height: 26vw;">
-                <transition enter-active-class="scaleIn">
+                <transition :enter-active-class="isPosting ? '' : 'scaleIn'">
                 <div v-if="showCircle2">在{{city}}排名<span>{{pageData.cityRank || '--'}}</span>位</div>
                 </transition>
             </li>
             <li class="animated" :class="floatCircle3">
-                <transition enter-active-class="scaleIn">
+                <transition :enter-active-class=" isPosting ? '' : 'scaleIn'">
                 <div v-if="showCircle3">击败全国<span>{{pageData.countryRank || '--'}}%</span>用户</div>
                 </transition>
             </li>
@@ -109,7 +111,6 @@
                 city:''
             }
         },
-
         mounted(){
             this.setValues();
         },
@@ -119,27 +120,39 @@
                 if(this.city.length > 4){
                     this.city = this.city.substr(0,3)+'…';
                 }
-                TweenLite.to(this.$data,1,{totalMiles:this.pageData.mileage});
-                TweenLite.to(this.$data,1,{daysDrive:this.pageData.driveDays});
-                TweenLite.to(this.$data,1,{daysService:this.pageData.useDays});
-                setTimeout(()=>{
+                if(this.isPosting){
+                    this.totalMiles = this.pageData.mileage;
+                    this.daysDrive = this.pageData.driveDays;
+                    this.daysService = this.pageData.useDays;
                     this.showCircle1 = true;
-                },1000);
-                setTimeout(()=>{
                     this.showCircle2 = true;
-                },1100);
-                setTimeout(()=>{
                     this.showCircle3 = true;
-                },1200);
-                setTimeout(()=>{
-                    this.floatCircle1 = 'floatCircle1';
-                },1400);
-                setTimeout(()=>{
-                    this.floatCircle2 = 'floatCircle2';
-                },1500);
-                setTimeout(()=>{
-                    this.floatCircle3 = 'floatCircle3';
-                },1600)
+                    // this.floatCircle1 = 'floatCircle1';
+                    // this.floatCircle2 = 'floatCircle2';
+                    // this.floatCircle3 = 'floatCircle3';
+                }else{
+                    TweenLite.to(this.$data,1,{totalMiles:this.pageData.mileage});
+                    TweenLite.to(this.$data,1,{daysDrive:this.pageData.driveDays});
+                    TweenLite.to(this.$data,1,{daysService:this.pageData.useDays});
+                    setTimeout(()=>{
+                        this.showCircle1 = true;
+                    },1000);
+                    setTimeout(()=>{
+                        this.showCircle2 = true;
+                    },1100);
+                    setTimeout(()=>{
+                        this.showCircle3 = true;
+                    },1200);
+                    setTimeout(()=>{
+                        this.floatCircle1 = 'floatCircle1';
+                    },1400);
+                    setTimeout(()=>{
+                        this.floatCircle2 = 'floatCircle2';
+                    },1500);
+                    setTimeout(()=>{
+                        this.floatCircle3 = 'floatCircle3';
+                    },1600)
+                }
             },
             resetValues(){
                 this.totalMiles = 0;
@@ -177,6 +190,9 @@
             },
             pageData(){
                 return this.$store.state.pageData.P1
+            },
+            isPosting(){
+                return this.$store.state.isPosting
             }
         }
     }

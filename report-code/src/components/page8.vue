@@ -8,7 +8,8 @@
     .page8-container .page-context{ z-index: 25;}
 
     .page8-container .phone{ width: 71%; position: absolute; bottom: 0; left: 0; z-index: 20; transform-origin: 0 100%; font-size: 0; transform: rotateZ(90deg);}
-    .page8-container .show-phone{ transform: rotateZ(0deg); transition: transform 0.7s cubic-bezier(.39,.91,.77,1.04);}
+    .page8-container .show-phone{ transform: rotateZ(0deg); }
+    .page8-container .show-phone-move{transition: transform 0.7s cubic-bezier(.39,.91,.77,1.04);}
     .page8-container .phone .print{ width: 7vw; position: absolute; top: 30%; right: 25.6%;}
     .page8-container .phone .print .cover{ height: 0%; position: absolute; top: 0; left: 0; overflow: hidden; transition: height 1s linear;}
 
@@ -37,6 +38,7 @@
         0%,100%{ opacity: 0;}
         50%{ opacity: 1;}
     }
+
 </style>
 
 <template>
@@ -59,7 +61,7 @@
                 <p>即使忘了带钥匙，心里也很<span class="tag1">有底气</span></p>
             </div>
 
-            <div class="phone"  :class="{'show-phone':showPhone}">
+            <div class="phone"  :class="{'show-phone':showPhone,'show-phone-move':!isPosting}">
                 <img src="/static/images/phone3.png">
                 <div class="print">
                     <img src="@/assets/images/print.png">
@@ -79,7 +81,7 @@
                 <p>快看，这里发现一个<span class="tag1">强迫症</span></p>
             </div>
 
-            <div class="phone"  :class="{'show-phone':showPhone}"><img src="/static/images/phone2.png"> </div>
+            <div class="phone"  :class="{'show-phone':showPhone,'show-phone-move':!isPosting}"><img src="/static/images/phone2.png"> </div>
         </div>
         <div v-if="pageData.tag == '分享达人'">
             <div class="bg">
@@ -94,7 +96,7 @@
 
             <div class="svg-frame">
                 <div class="svg-container" :class="{'show-svg':showSvg}">
-                    <transition leave-active-class="animated fadeOut">
+                    <transition leave-active-class="fadeOut">
                         <svg width="100%" viewBox="0 0 168.4 268" v-if="showSvgLine">
                             <path class="st0" d="M0,0c0,0,128.7,28,160,107c34,85.8-44.6,153.4-63,161" stroke="#74a7bf" fill="none" stroke-width="2" stroke-dasharray="10 5"></path>
                         </svg>
@@ -104,7 +106,7 @@
                 <div class="fly" :class="{'fly-anim':showFly}"><img src="@/assets/images/fly.png"> </div>
             </div>
 
-            <div class="phone" :class="{'show-phone':showPhone}"><img src="/static/images/phone1.png"> </div>
+            <div class="phone" :class="{'show-phone':showPhone,'show-phone-move':!isPosting}"><img src="/static/images/phone1.png"> </div>
         </div>
         <div v-if="pageData.tag == '有计划' || pageData.tag == '新尝试'">
             <div class="bg">
@@ -146,9 +148,9 @@
                 <p>追求便利，过<span class="tag1">有态度</span>的生活</p>
             </div>
 
-            <div class="phone"  :class="{'show-phone':showPhone}"><img src="/static/images/phone4.png"> </div>
+            <div class="phone"  :class="{'show-phone':showPhone,'show-phone-move':!isPosting}"><img src="/static/images/phone4.png"> </div>
         </div>
-        <div class="next-arrow"><img src="@/assets/images/nextpage.png"> </div>
+        <div class="next-arrow" v-if="!isPosting"><img src="@/assets/images/nextpage.png"> </div>
     </section>
 </template>
 
@@ -182,6 +184,9 @@
             },
             pageData(){
                 return this.$store.state.pageData.P8
+            },
+            isPosting(){
+                return this.$store.state.isPosting
             }
         },
         mounted(){
@@ -189,7 +194,12 @@
         },
         methods:{
             setValues(){
-                TweenLite.to(this.$data,1,{times:this.pageData.times});
+                if(this.isPosting){
+                    this.times = this.pageData.times;
+                }else{
+                    TweenLite.to(this.$data,1,{times:this.pageData.times});
+                }
+
                 this.showPhone = true;
                 this.showCar = true;
                 setTimeout(()=>{

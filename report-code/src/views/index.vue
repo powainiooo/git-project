@@ -1,5 +1,4 @@
 <style>
-    @import "../assets/animate.min.css";
     @import "../assets/helve.css";
     * {
         -webkit-user-select: none;
@@ -18,7 +17,7 @@
         font-weight: 100;
         font-style: normal;
     }
-    .swiper-container{ height: 100vh; overflow: hidden;}
+    .swiper-container{overflow: hidden;}
     .swiper-container .swiper-slide{ overflow: hidden;}
 
     .page-title{ width: 30%; position: absolute; top: 5%; left: 8%;}
@@ -50,14 +49,25 @@
     .style-container .style-frame .btns a:first-child{ border-right: 1px solid rgba(77,77,77,0.3);}
 
     .log{ width: 100%; position: absolute; top: 0; left: 0; z-index: 1000; background-color: #ffffff; font-size: 16px;}
+
+    .fadeOut{animation:fadeOut 0.6s linear;}
+    @keyframes fadeOut{0%{opacity:1}to{opacity:0}}
+    .fadeIn{animation:fadeIn 0.6s linear;}
+    @keyframes fadeIn{0%{opacity:0}to{opacity:1}}
+
+    .poster{ width: 100%; height: 100vh; overflow-y: scroll; position: absolute; top: 0; left: 0; z-index: 900;}
+    .poster img{ width: 100%;}
+
+    .btns1{ width: 100%; display: flex; justify-content: space-around; position: absolute; bottom: 5vh; left: 0; z-index: 1000;}
+    .btns1 a{ width: 2.7rem; height: 0.8rem; border-radius: 30px; color: #FFFFFF; font-size: 0.32rem; display: flex; justify-content: center; align-items: center; background-color: #2B5FD5; text-decoration: none;}
 </style>
 
 <template>
     <div>
         <transition enter-active-class="animated fadeIn">
-        <swiper :options="swiperOption" ref="mySwiper" v-if="!showLoading">
+        <swiper :options="swiperOption" ref="mySwiper" v-if="!showLoading" id="swiper" :style="{height:isPosting ? 'auto' : '100vh'}">
             <!-- slides -->
-            <swiper-slide v-if="p1Show" page="page1" ref="page1"><page1></page1></swiper-slide>
+            <swiper-slide v-if="p1Show" page="page1" ref="page1" id="page1"><page1></page1></swiper-slide>
             <swiper-slide v-if="p2Show" page="page2" ref="page2"><page2></page2></swiper-slide>
             <swiper-slide v-if="p3Show" page="page3" ref="page3"><page3></page3></swiper-slide>
             <swiper-slide v-if="p4Show" page="page4" ref="page4"><page4></page4></swiper-slide>
@@ -65,17 +75,32 @@
             <swiper-slide v-if="p6Show" page="page6" ref="page6"><page6></page6></swiper-slide>
             <swiper-slide v-if="p7Show" page="page7" ref="page7"><page7></page7></swiper-slide>
             <swiper-slide v-if="p8Show" page="page8" ref="page8"><page8></page8></swiper-slide>
-            <swiper-slide v-if="p9Show" page="page9" ref="page9"><page9></page9></swiper-slide>
+            <swiper-slide v-if="p9Show" page="page9" ref="page9">
+                <page9 @draw="doDrawPoster"></page9>
+            </swiper-slide>
+            <swiper-slide v-if="p10Show" page="page10" ref="page10">
+                <poster ref="poster" :styleKey="lastStyleKey" @showChange="back"></poster>
+            </swiper-slide>
         </swiper>
         </transition>
         <loading v-if="showLoading"></loading>
-        <!--<div class="log">-->
-            <!--<p v-for="(item,index) in logList">{{index+1}}:{{item}}</p>-->
-        <!--</div>-->
+        <div class="log">
+            <p v-for="(item,index) in logList">{{index+1}}:{{item}}</p>
+        </div>
+        <div class="btns1" v-if="showShare">
+            <a href="javascript:;" @click="doChange">换个风格</a>
+            <a href="javascript:;" @click="drawCanvas2">{{btnShareName}}</a>
+        </div>
+
+        <!-- @touchmove.prevent="tmove"-->
+        <div class="poster" :style="{background:bgColor,'z-index':isPosting ? 900 : 0}">
+            <img :src="posterImg" />
+        </div>
     </div>
 </template>
 
 <script type='es6'>
+    import html2canvas from 'html2canvas'
     import page1 from '@/components/page1'
     import page2 from '@/components/page2'
     import page3 from '@/components/page3'
@@ -85,16 +110,14 @@
     import page7 from '@/components/page7'
     import page8 from '@/components/page8'
     import page9 from '@/components/page9'
+    import poster from '@/components/poster'
     import Loading from '@/components/loading'
     import window from '@/components/params.js'
     export default {
         name: 'app',
-        components:{page1,page2,page3,page4,page5,page6,page7,page8,page9,Loading},
+        components:{page1,page2,page3,page4,page5,page6,page7,page8,page9,Loading,poster},
         mounted(){
             window.footPrinter.intoPageStartTime = new Date().getTime();
-            setTimeout(()=>{
-                //this.currentPage = this.$refs.mySwiper.$children[0].$attrs.page;
-            },300);
         },
         data(){
             let self = this;
@@ -103,20 +126,38 @@
                 endTime:0,
                 currentPage:'page1',
                 logList:[],
+                posterImg:'',
+                bgColor:'#fff',
+                p10Show:false,
+                showShare:false,
+                isDrawing:false,
+                lastStyleKey:1,
+                btnShareName:'分享年报',
                 swiperOption: {
                     direction : 'vertical',
                     height:window.innerHeight,
                     on:{
                         slideChangeTransitionStart(){
                             window.pageOutFunc();
-                            self.$refs[self.currentPage].$children[0].resetValues();
+                            if(typeof self.$refs[self.currentPage].$children[0].resetValues == 'function'){
+                                self.$refs[self.currentPage].$children[0].resetValues();
+                            }
+                            let pageName = self.$refs.mySwiper.$children[this.activeIndex].$attrs.page;
+                            if(pageName == 'page9'){
+                                self.showShare = false;
+                            }
                         },
                         slideChangeTransitionEnd(){
                             let pageName = self.$refs.mySwiper.$children[this.activeIndex].$attrs.page;
                             self.currentPage = pageName;
                             window.footPrinter.currentPage = pageName.replace('page','');
                             window.footPrinter.lastPage = window.footPrinter.currentPage > window.footPrinter.lastPage ? window.footPrinter.currentPage : window.footPrinter.lastPage;
-                            self.$refs[self.currentPage].$children[0].setValues();
+                            if(typeof self.$refs[self.currentPage].$children[0].setValues == 'function'){
+                                self.$refs[self.currentPage].$children[0].setValues();
+                            }
+                            if(pageName == 'page10'){
+                                self.showShare = true;
+                            }
                         }
                     }
                 }
@@ -160,11 +201,129 @@
             },
             p9Show(){
                 return true
+            },
+            isPosting(){
+                return this.$store.state.isPosting
             }
         },
         methods:{
             addLog(txt){
                 this.logList.push(txt);
+            },
+            tmove(){},
+            doDrawPoster(style){
+                this.lastStyleKey = style;
+                this.p10Show = true;
+                this.$nextTick(()=>{
+                    this.$refs.poster.draw();
+                    this.$refs.mySwiper.swiper.slideNext();
+                })
+            },
+            doChange(){
+                if(this.isPosting) return;
+                this.showShare = false;
+                this.$refs.mySwiper.swiper.slidePrev();
+                this.$refs.page9.$children[0].openSelect()
+            },
+            back(){
+                this.showShare = false;
+                this.$refs.mySwiper.swiper.slidePrev();
+            },
+            drawCanvas2(){
+                this.addLog('1');
+                if(this.isPosting) return;
+                this.$store.commit('setPosting',true);
+                this.btnShareName = '生成图片中';
+                let index = 0;
+                let t = setInterval(()=>{
+                    index += 1;
+                    if(index > 3){
+                        index = 0;
+                    }
+                    this.btnShareName = '生成图片中';
+                    for (let i=0;i<index;i++){
+                        this.btnShareName += '.';
+                    }
+                },300);
+                let dateStart = new Date().getTime();
+                this.$refs.mySwiper.swiper.slideTo(0,0);
+                let list = this.$refs.mySwiper.$children;
+                for(let i of list){
+                    if(typeof i.$children[0].setValues == 'function'){
+                        i.$children[0].setValues();
+                    }
+                }
+                this.addLog('2');
+                this.$nextTick(()=>{
+                    this.addLog(typeof html2canvas);
+                    html2canvas(document.getElementById('swiper')).then((canvas)=>{
+                        document.body.appendChild(canvas);
+                        this.addLog('3');
+                        let img = canvas.toDataURL();
+                        canvas.id = 'sharePoster';
+                        this.posterImg = img;
+                        this.addLog(img.length);
+                        clearInterval(t);
+
+                        this.addLog('4');
+                        let dateEnd = new Date().getTime();
+                        this.btnShareName = '费时：'+(dateEnd - dateStart);
+
+                        window.posterImgData = img.replace('data:image/png;base64,','');
+                        window.pageOutFunc();
+                        // window.location = '/doShare';
+                    })
+                })
+            },
+            drawCanvas(){
+                if(this.isPosting) return;
+                this.$store.commit('setPosting',true);
+                this.btnShareName = '生成图片中';
+                let index = 0;
+                let t = setInterval(()=>{
+                    index += 1;
+                    if(index > 3){
+                        index = 0;
+                    }
+                    this.btnShareName = '生成图片中';
+                    for (let i=0;i<index;i++){
+                        this.btnShareName += '.';
+                    }
+                },300);
+                let dateStart = new Date().getTime();
+                this.$nextTick(()=>{
+                    this.posterImg = this.$refs.poster.shareImgSrc;
+                    this.bgColor = this.$refs.poster.bgColor;
+                    this.$refs.mySwiper.swiper.slideTo(0,0);
+                    let list = this.$refs.mySwiper.$children;
+                    for(let i of list){
+                        if(typeof i.$children[0].setValues == 'function'){
+                            i.$children[0].setValues();
+                        }
+                    }
+                    setTimeout(()=>{
+
+                        html2canvas(document.getElementById('page1')).then((canvas)=>{
+                            document.body.appendChild(canvas);
+                            let img = canvas.toDataURL();
+                            canvas.id = 'sharePoster';
+                            this.posterImg = img;
+                            clearInterval(t);
+                            let dateEnd = new Date().getTime();
+                            this.btnShareName = '费时：'+(dateEnd - dateStart);
+
+                            setTimeout(()=>{
+                                // this.$store.commit('setPosting',false);
+                                window.posterImgData = img.replace('data:image/png;base64,','');
+                                window.pageOutFunc();
+                                window.location = '/doShare';
+                                this.$refs.mySwiper.swiper.slideTo(list.length-1,0);
+                                this.btnShareName = window.posterImgData.length;
+                                document.body.removeChild(canvas);
+                            },1000);
+                        })
+                    },1200);
+                });
             }
         }
     }

@@ -1,9 +1,7 @@
 <style>
-    .poster-frame{ width: 100vw; height: 100vh; position: absolute; top: 0; left: 0; z-index: 600; font-size: 0; overflow: hidden;}
+    .poster-frame{ width: 100vw; height: 100vh;  font-size: 0; overflow: hidden;}
     .poster-frame canvas{ width: 100vw; position: fixed; top: -10000px; left: -10000px;}
     .poster-frame .shareImg{ width: 100vw; height:161.7vw;  display: block;}
-    .poster-frame .btns1{ width: 100%; display: flex; justify-content: space-around; position: absolute; top: 89vh; left: 0;}
-    .poster-frame .btns1 a{ width: 2.7rem; height: 0.8rem; border-radius: 30px; color: #FFFFFF; font-size: 0.32rem; display: flex; justify-content: center; align-items: center; background-color: #2B5FD5; text-decoration: none;}
 
     .poster-frame .hint{ width: 110px; display: flex; background-color: #fff; border-radius: 20px; font-size: 14px; color: #333; position: absolute; top: 21vw; left: 5vw; z-index: 20; align-items: center; padding: 4px 10px; transform-origin: 0 50%;}
     .poster-frame .hint2{ top: 35vw; left: 71vw; width: 20px; flex-direction: column; justify-content: center; align-items: center; padding: 10px 6px; text-align: center; transform-origin: 50% 0;}
@@ -18,19 +16,15 @@
 </style>
 
 <template>
-    <div class="poster-frame" v-show="showPoster" :style="{background:bgColor}" @touchmove.stop="touchmove">
+    <div class="poster-frame" :style="{background:bgColor}">
         <canvas id="poster" width="750" height="1213"></canvas>
         <img :src="shareImgSrc" class="shareImg" :style="{opacity:shareImgSrc == '' ? 0 : 1}"/>
-        <div class="btns1">
-            <a href="javascript:;" @click="doChange">换个风格</a>
-            <a href="javascript:;" @click="doShare">分享给好友</a>
-        </div>
 
-        <div class="btn-close" @click="closePoster"><img src="@/assets/images/btn-close.png"/> </div>
+        <div class="btn-close" @click="closePoster" v-if="!isPosting"><img src="@/assets/images/btn-close.png"/> </div>
 
-        <div class="btn-name" :class="'btn-name'+styleKey" @click="showEditor">{{name}}</div>
+        <div class="btn-name" :class="'btn-name'+styleKey" @click="showEditor" v-if="!isPosting">{{name}}</div>
         <div class="hint"
-             v-if="showHint"
+             v-if="showHint && !isPosting"
              :class="'hint'+styleKey"
              @click="showEditor"
              :style="{left:hintLeft+'px',top:hintTop+'px',transform:'scale('+hintScale+')'}">
@@ -38,7 +32,7 @@
             <span>点击编辑姓名</span>
         </div>
 
-        <transition enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
+        <transition enter-active-class="fadeIn" leave-active-class="fadeOut">
             <div class="style-container" v-if="showName">
                 <div class="style-frame">
                     <h3>编辑名字</h3>
@@ -100,6 +94,9 @@
                     }
                 }
                 return arr
+            },
+            isPosting(){
+                return this.$store.state.isPosting
             }
         },
         methods:{
@@ -115,7 +112,7 @@
                 this.$emit('showChange')
             },
             closePoster(){
-                this.showPoster = false;
+                this.$emit('showChange');
                 this.showHint = false;
             },
             initText(){
@@ -123,17 +120,6 @@
                 this.textArr = [];
                 if(this.styleKey == 3)this.textArr.push('2018年，我们度过了激动人心的一年： ');
                 for(let item of this.tagList){
-                    // if(this.styleKey == 1 && item == '强迫症' || item == '分享达人' || item == '有底气' || item == '有态度' || item == '有计划'){
-                    //     let date = new Date(),time = '';
-                    //     time += `${date.getFullYear()}年`;
-                    //     time += `${date.getMonth()+1}月`;
-                    //     time += `${date.getDate()}日 `;
-                    //     time += `${date.getHours()}时`;
-                    //     time += `${date.getMinutes()}分`;
-                    //     this.textArr.push(time+data[item]);
-                    // }else{
-                    //     this.textArr.push(data[item]);
-                    // }
                     this.textArr.push(data[item].replace('比亚迪秦',this.car));
                 }
                 this.textArr.push(data.add);
@@ -167,6 +153,7 @@
                     let tag = 'style'+window.footPrinter.tagStyle;
                     this[tag](ctx,res);
                     this.shareImgSrc = canvas.toDataURL();
+                    console.log(this.shareImgSrc.length);
                     this.showHint = true;
                 })
             },

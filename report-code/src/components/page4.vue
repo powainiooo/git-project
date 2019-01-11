@@ -29,7 +29,7 @@
                 <p class="unit">L</p>
             </div>
         </div>
-        <div class="next-arrow"><img src="@/assets/images/nextpage.png"> </div>
+        <div class="next-arrow" v-if="!isPosting"><img src="@/assets/images/nextpage.png"> </div>
         <div class="page-title"><img src="@/assets/images/title4.png"> </div>
 
         <div class="page-context">
@@ -58,10 +58,15 @@
         },
         methods:{
             setValues(){
-                console.log(this.pageData.oCost);
-                TweenLite.to(this.$data,1,{elecValue:this.pageData.eCost});
-                TweenLite.to(this.$data,1,{gasValue:this.pageData.oCost});
-                TweenLite.to(this.$data,1,{miles:this.pageData.mCost});
+                if(this.isPosting){
+                    this.elecValue = this.pageData.eCost;
+                    this.gasValue = this.pageData.oCost;
+                    this.miles = this.pageData.mCost;
+                }else{
+                    TweenLite.to(this.$data,1,{elecValue:this.pageData.eCost});
+                    TweenLite.to(this.$data,1,{gasValue:this.pageData.oCost});
+                    TweenLite.to(this.$data,1,{miles:this.pageData.mCost});
+                }
             },
             resetValues(){
                 this.elecValue = 0;
@@ -93,6 +98,9 @@
             },
             pageData(){
                 return this.$store.state.pageData.P4
+            },
+            isPosting(){
+                return this.$store.state.isPosting
             }
         }
     }

@@ -32,7 +32,7 @@
                 <img src="/static/images/bg3.jpg">
             </div>
         </div>
-        <div class="next-arrow"><img src="@/assets/images/nextpage.png"> </div>
+        <div class="next-arrow" v-if="!isPosting"><img src="@/assets/images/nextpage.png"> </div>
         <div class="page-title"><img src="@/assets/images/title3.png"> </div>
 
         <div class="page-context" v-if="pageData.tag == '远方'">
@@ -110,6 +110,7 @@
                         data:yArr,
                         type: 'line',
                         smooth: true,
+                        animation:!this.isPosting,
                         lineStyle:{color:'#2B5FD5',shadowColor:'#ffffff',shadowBlur:0,shadowOffsetX:2},
                         itemStyle:{opacity:0},
                         areaStyle:{
@@ -158,7 +159,11 @@
                 this.maxValue = max;
                 xArr[xArr.length-1] += '(月)';
                 this.drawTable(xArr,yArr);
-                TweenLite.to(this.$data,1,{miles:max});
+                if(this.isPosting){
+                    this.miles = max;
+                }else{
+                    TweenLite.to(this.$data,1,{miles:max});
+                }
                 this.maxMonth = maxMonth;
                 this.showBird = true;
             },
@@ -179,6 +184,9 @@
             },
             pageData(){
                 return this.$store.state.pageData.P3
+            },
+            isPosting(){
+                return this.$store.state.isPosting
             }
         }
     }

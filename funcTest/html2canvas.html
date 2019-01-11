@@ -19,16 +19,7 @@
     <!-- Swiper -->
     <swiper :options="swiperOption" ref="mySwiper" id="swiper">
         <!-- slides -->
-        <swiper-slide>I'm Slide 1</swiper-slide>
-        <swiper-slide>I'm Slide 2</swiper-slide>
-        <swiper-slide>I'm Slide 3</swiper-slide>
-        <swiper-slide>I'm Slide 4</swiper-slide>
-        <swiper-slide>I'm Slide 5</swiper-slide>
-        <swiper-slide>I'm Slide 6</swiper-slide>
-        <swiper-slide>I'm Slide 7</swiper-slide>
-        <swiper-slide>I'm Slide 8</swiper-slide>
-        <swiper-slide>I'm Slide 9</swiper-slide>
-        <swiper-slide>I'm Slide 10</swiper-slide>
+        <swiper-slide v-for="item in 10">{{txt}} {{item}}</swiper-slide>
     </swiper>
     <div id="imgsframe" v-if="showImgs"><img :src="imgSrc" id="imgs" style="width: 100%;"></div>
 </div>
@@ -50,11 +41,13 @@
                 height:window.innerHeight
             },
             showImgs:false,
-            imgSrc:''
+            imgSrc:'',
+            txt:'slide'
         },
         mounted:function () {
             var self = this;
             setTimeout(function () {
+                self.txt = 'this is a';
                 self.draw()
             },1000)
         },

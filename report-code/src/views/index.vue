@@ -68,17 +68,17 @@
         <swiper :options="swiperOption" ref="mySwiper" v-if="!showLoading" id="swiper" :style="{height:isPosting ? 'auto' : '100vh'}">
             <!-- slides -->
             <swiper-slide v-if="p1Show" page="page1" ref="page1" id="page1"><page1></page1></swiper-slide>
-            <swiper-slide v-if="p2Show" page="page2" ref="page2"><page2></page2></swiper-slide>
-            <swiper-slide v-if="p3Show" page="page3" ref="page3"><page3></page3></swiper-slide>
-            <swiper-slide v-if="p4Show" page="page4" ref="page4"><page4></page4></swiper-slide>
-            <swiper-slide v-if="p5Show" page="page5" ref="page5"><page5></page5></swiper-slide>
-            <swiper-slide v-if="p6Show" page="page6" ref="page6"><page6></page6></swiper-slide>
-            <swiper-slide v-if="p7Show" page="page7" ref="page7"><page7></page7></swiper-slide>
-            <swiper-slide v-if="p8Show" page="page8" ref="page8"><page8></page8></swiper-slide>
-            <swiper-slide v-if="p9Show" page="page9" ref="page9">
+            <swiper-slide v-if="p2Show" page="page2" ref="page2" id="page2"><page2></page2></swiper-slide>
+            <swiper-slide v-if="p3Show" page="page3" ref="page3" id="page3"><page3></page3></swiper-slide>
+            <swiper-slide v-if="p4Show" page="page4" ref="page4" id="page4"><page4></page4></swiper-slide>
+            <swiper-slide v-if="p5Show" page="page5" ref="page5" id="page5"><page5></page5></swiper-slide>
+            <swiper-slide v-if="p6Show" page="page6" ref="page6" id="page6"><page6></page6></swiper-slide>
+            <swiper-slide v-if="p7Show" page="page7" ref="page7" id="page7"><page7></page7></swiper-slide>
+            <swiper-slide v-if="p8Show" page="page8" ref="page8" id="page8"><page8></page8></swiper-slide>
+            <swiper-slide v-if="p9Show" page="page9" ref="page9" id="page9">
                 <page9 @draw="doDrawPoster"></page9>
             </swiper-slide>
-            <swiper-slide v-if="p10Show" page="page10" ref="page10">
+            <swiper-slide v-if="p10Show" page="page10" ref="page10" id="page10">
                 <poster ref="poster" :styleKey="lastStyleKey" @showChange="back"></poster>
             </swiper-slide>
         </swiper>
@@ -256,7 +256,7 @@
                 this.addLog('2');
                 this.$nextTick(()=>{
                     this.addLog(typeof html2canvas);
-                    html2canvas(document.getElementById('swiper')).then((canvas)=>{
+                    html2canvas(document.getElementById('page4')).then((canvas)=>{
                         document.body.appendChild(canvas);
                         this.addLog('3');
                         let img = canvas.toDataURL();
@@ -303,7 +303,7 @@
                     }
                     setTimeout(()=>{
 
-                        html2canvas(document.getElementById('page1')).then((canvas)=>{
+                        html2canvas(document.getElementById('page111')).then((canvas)=>{
                             document.body.appendChild(canvas);
                             let img = canvas.toDataURL();
                             canvas.id = 'sharePoster';

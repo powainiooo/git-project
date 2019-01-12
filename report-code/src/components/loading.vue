@@ -63,6 +63,7 @@
     import car from '@/components/car'
     import axios from 'axios'
     import window from './params.js'
+    import mockdata from '@/assets/mock.js'
     export default {
         name: 'app',
         components:{car},
@@ -141,20 +142,21 @@
                 try{
                     data = window.getParams.data;
                     this.addLog(`data:${data}`);
-                    axios.post('/mobileserve/Vehicle/getAnnuallyData',{data:data}).then(res=>{
-                        let data = res.data;
+                    // axios.post('/mobileserve/Vehicle/getAnnuallyData',{data:data}).then(res=>{
+                    //     let data = res.data;
+                        let data = mockdata;
                         this.addLog(`getData over:${data.result}`);
                         if(data.result == 0){
                             this.dataLoadOver = true;
                             this.steps += 1;
                             this.precent = Math.floor(this.steps / (this.imgsList.length+1) * 100);
                             this.isAllLoad();
-                            this.$store.commit('setPageData',res.data.data);
+                            this.$store.commit('setPageData',data.data);
                         }else{
                             window.errorData = data;
                             window.location = '/error';
                         }
-                    })
+                    // })
                 }catch(err){
                     this.addLog(`data err:${err}`);
                 }

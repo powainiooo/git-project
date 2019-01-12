@@ -12,7 +12,8 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
         '/':{
-            target:'http://10.9.32.19:8080',
+            // target:'http://10.9.32.19:8080',
+            target:'https://webtestservice.bydauto.com.cn:5011',
             changeOrigin:true,
             pathRewrite:{
                 '^/':'/'
@@ -21,7 +22,7 @@ module.exports = {
     },
 
     // Various Dev Server settings
-    host: 'localhost', // can be overwritten by process.env.HOST
+    host: '192.168.0.106', // can be overwritten by process.env.HOST
     port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: true,
     errorOverlay: true,

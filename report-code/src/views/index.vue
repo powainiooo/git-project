@@ -89,7 +89,7 @@
         </div>
         <div class="btns1" v-if="showShare">
             <a href="javascript:;" @click="doChange">换个风格</a>
-            <a href="javascript:;" @click="drawCanvas2">{{btnShareName}}</a>
+            <a href="javascript:;" @click="drawCanvas3">{{btnShareName}}{{loadIndex}}</a>
         </div>
 
         <!-- @touchmove.prevent="tmove"-->
@@ -132,6 +132,9 @@
                 showShare:false,
                 isDrawing:false,
                 lastStyleKey:1,
+                loadIndex:0,
+                posterWidth:0,
+                posterHeight:0,
                 btnShareName:'分享年报',
                 swiperOption: {
                     direction : 'vertical',
@@ -228,6 +231,37 @@
             back(){
                 this.showShare = false;
                 this.$refs.mySwiper.swiper.slidePrev();
+            },
+            pageload(id){
+                let self = this;
+                return new Promise(function(resolve,reject){
+                    html2canvas(document.getElementById(id)).then((canvas)=>{
+                        document.body.appendChild(canvas);
+                        self.loadIndex += 1;
+                        let image = new Image();
+                        image.id = `${id}-img`;
+                        image.onload = function(){
+                            self.posterWidth = image.width;
+                            self.posterHeight += image.height;
+                            resolve(image);
+                        };
+                        image.onerror = function(){
+                            reject(new Error('Could not load image at ' + src))
+                        };
+                        image.src = canvas.toDataURL();
+                    })
+                })
+            },
+            drawCanvas3(){
+                let dateStart = new Date().getTime();
+                let list = this.$refs.mySwiper.$children,arr = [];
+                for(let i of list){
+                    arr.push(this.pageload(i.$attrs.id));
+                }
+                Promise.all(arr).then((res)=>{
+                    let dateEnd = new Date().getTime();
+                    this.btnShareName = '费时：'+(dateEnd - dateStart);
+                });
             },
             drawCanvas2(){
                 this.addLog('1');

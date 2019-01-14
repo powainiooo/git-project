@@ -141,9 +141,8 @@
                 try{
                     data = window.getParams.data;
                     this.addLog(`data:${data}`);
-                    // axios.post('/mobileserve/Vehicle/getAnnuallyData',{data:data}).then(res=>{
-                    //     let data = res.data;
-                    let data = {"result":"0","data":{"P4":{"tag":"太会省钱","oCost":4.4,"eCost":4.8,"mCost":0.32},"P6":{"tag":"电动出行","powerType":"双模","chargeTimes":52,"chargeRank":35,"chargeAvgTime":1.7,"timeByHour":"08--09"},"P3":{"tag":"平淡是真","mileageByMonth":{"m1":240,"m2":524,"m3":418,"m4":185,"m5":246,"m6":319,"m7":291,"m8":555,"m9":433,"m10":319,"m11":550,"m12":370}},"P2":{"tag":"轻松出行","driveTime":0.8,"timeByHour":{"h0":0,"h1":0,"h2":0,"h3":0,"h4":0,"h5":0,"h6":0,"h7":17,"h8":10,"h9":9,"h10":5,"h11":4,"h12":3,"h13":7,"h14":8,"h15":6,"h16":3,"h17":3,"h18":9,"h19":6,"h20":6,"h21":3,"h22":1,"h23":0}},"P5":{"tag":"环保达人","co2":274.32,"tree":2.47,"co2ALL":24.4,"treeAll":4.4},"P1":{"useDays":203,"useTimes":1441,"city":"深圳","cityRank":248,"countryRank":99,"mileage":4450,"driveDays":178},"P8":{"tag":"强迫症","times":1471},"P7":{"tag":"科技先锋","control":"doorLock","totalTimes":12293,"controlByType":{"doorLock":32,"airOpen":15,"doorUnlock":13,"airClose":1,"lightWhistle":1}}}};
+                    axios.post('/mobileserve/Vehicle/getAnnuallyData',{data:data}).then(res=>{
+                        let data = res.data;
                         this.addLog(`getData over:${data.result}`);
                         if(data.result == 0){
                             this.dataLoadOver = true;
@@ -155,7 +154,7 @@
                             window.errorData = data;
                             window.location = '/error';
                         }
-                    // })
+                    })
                 }catch(err){
                     this.addLog(`data err:${err}`);
                 }

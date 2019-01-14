@@ -89,7 +89,7 @@
         </div>
         <div class="btns1" v-if="showShare">
             <a href="javascript:;" @click="doChange">换个风格</a>
-            <a href="javascript:;" @click="drawCanvas2">{{btnShareName}}</a>
+            <a href="javascript:;" @click="drawCanvas3">{{btnShareName}}{{loadIndex}}</a>
         </div>
 
         <!-- @touchmove.prevent="tmove"-->
@@ -238,7 +238,6 @@
                     html2canvas(document.getElementById(id)).then((canvas)=>{
                         document.body.appendChild(canvas);
                         self.loadIndex += 1;
-
                         resolve(canvas);
                         let image = new Image();
                         image.id = `${id}-img`;

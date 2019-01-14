@@ -523,6 +523,15 @@ Page({
         if(type != 4){
             wx.navigateTo({
                 url: src
+            });
+            wx.request({
+                url: app.globalData.ajaxSrc+'/banner_visit',
+                data: {
+                    type: type
+                },
+                success: function(res) {
+
+                }
             })
         }
     },

@@ -65,23 +65,23 @@
 <template>
     <div>
         <transition enter-active-class="animated fadeIn">
-        <swiper :options="swiperOption" ref="mySwiper" v-if="!showLoading" id="swiper" :style="{height:isPosting ? 'auto' : '100vh'}">
-            <!-- slides -->
-            <swiper-slide v-if="p1Show" page="page1" ref="page1" id="page1"><page1></page1></swiper-slide>
-            <swiper-slide v-if="p2Show" page="page2" ref="page2" id="page2"><page2></page2></swiper-slide>
-            <swiper-slide v-if="p3Show" page="page3" ref="page3" id="page3"><page3></page3></swiper-slide>
-            <swiper-slide v-if="p4Show" page="page4" ref="page4" id="page4"><page4></page4></swiper-slide>
-            <swiper-slide v-if="p5Show" page="page5" ref="page5" id="page5"><page5></page5></swiper-slide>
-            <swiper-slide v-if="p6Show" page="page6" ref="page6" id="page6"><page6></page6></swiper-slide>
-            <swiper-slide v-if="p7Show" page="page7" ref="page7" id="page7"><page7></page7></swiper-slide>
-            <swiper-slide v-if="p8Show" page="page8" ref="page8" id="page8"><page8></page8></swiper-slide>
-            <swiper-slide v-if="p9Show" page="page9" ref="page9" id="page9">
-                <page9 @draw="doDrawPoster"></page9>
-            </swiper-slide>
-            <swiper-slide v-if="p10Show" page="page10" ref="page10" id="page10">
-                <poster ref="poster" :styleKey="lastStyleKey" @showChange="back"></poster>
-            </swiper-slide>
-        </swiper>
+            <swiper :options="swiperOption" ref="mySwiper" v-if="!showLoading" id="swiper" :style="{height:isPosting ? 'auto' : '100vh'}">
+                <!-- slides -->
+                <swiper-slide v-if="p1Show" page="page1" ref="page1" id="page1"><page1></page1></swiper-slide>
+                <swiper-slide v-if="p2Show" page="page2" ref="page2" id="page2"><page2></page2></swiper-slide>
+                <swiper-slide v-if="p3Show" page="page3" ref="page3" id="page3"><page3></page3></swiper-slide>
+                <swiper-slide v-if="p4Show" page="page4" ref="page4" id="page4"><page4></page4></swiper-slide>
+                <swiper-slide v-if="p5Show" page="page5" ref="page5" id="page5"><page5></page5></swiper-slide>
+                <swiper-slide v-if="p6Show" page="page6" ref="page6" id="page6"><page6></page6></swiper-slide>
+                <swiper-slide v-if="p7Show" page="page7" ref="page7" id="page7"><page7></page7></swiper-slide>
+                <swiper-slide v-if="p8Show" page="page8" ref="page8" id="page8"><page8></page8></swiper-slide>
+                <swiper-slide v-if="p9Show" page="page9" ref="page9" id="page9">
+                    <page9 @draw="doDrawPoster"></page9>
+                </swiper-slide>
+                <swiper-slide v-if="p10Show" page="page10" ref="page10" id="page10">
+                    <poster ref="poster" :styleKey="lastStyleKey" @showChange="back"></poster>
+                </swiper-slide>
+            </swiper>
         </transition>
         <loading v-if="showLoading"></loading>
         <div class="log">
@@ -132,6 +132,9 @@
                 showShare:false,
                 isDrawing:false,
                 lastStyleKey:1,
+                loadIndex:0,
+                posterWidth:0,
+                posterHeight:0,
                 btnShareName:'分享年报',
                 swiperOption: {
                     direction : 'vertical',
@@ -229,6 +232,39 @@
                 this.showShare = false;
                 this.$refs.mySwiper.swiper.slidePrev();
             },
+            pageload(id){
+                let self = this;
+                return new Promise(function(resolve,reject){
+                    html2canvas(document.getElementById(id)).then((canvas)=>{
+                        document.body.appendChild(canvas);
+                        self.loadIndex += 1;
+
+                        resolve(canvas);
+                        let image = new Image();
+                        image.id = `${id}-img`;
+                        image.onload = function(){
+                            self.posterWidth = image.width;
+                            self.posterHeight += image.height;
+                            resolve(image);
+                        };
+                        image.onerror = function(){
+                            reject(new Error('Could not load image at ' + src))
+                        };
+                        image.src = canvas.toDataURL();
+                    })
+                })
+            },
+            drawCanvas3(){
+                let dateStart = new Date().getTime();
+                let list = this.$refs.mySwiper.$children,arr = [];
+                for(let i of list){
+                    arr.push(this.pageload(i.$attrs.id));
+                }
+                Promise.all(arr).then((res)=>{
+                    let dateEnd = new Date().getTime();
+                    this.btnShareName = '费时：'+(dateEnd - dateStart);
+                });
+            },
             drawCanvas2(){
                 this.addLog('1');
                 if(this.isPosting) return;
@@ -256,7 +292,7 @@
                 this.addLog('2');
                 this.$nextTick(()=>{
                     this.addLog(typeof html2canvas);
-                    html2canvas(document.getElementById('page4')).then((canvas)=>{
+                    html2canvas(document.getElementById('swiper')).then((canvas)=>{
                         document.body.appendChild(canvas);
                         this.addLog('3');
                         let img = canvas.toDataURL();

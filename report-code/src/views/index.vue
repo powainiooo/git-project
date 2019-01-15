@@ -79,7 +79,7 @@
                     <page9 @draw="doDrawPoster"></page9>
                 </swiper-slide>
                 <swiper-slide v-if="p10Show" page="page10" ref="page10" id="page10">
-                    <poster ref="poster" :styleKey="lastStyleKey" @showChange="back"></poster>
+                    <poster ref="poster" :styleKey="lastStyleKey" @showChange="doChange" @goBack="back"></poster>
                 </swiper-slide>
             </swiper>
         </transition>
@@ -87,15 +87,11 @@
         <div class="log">
             <p v-for="(item,index) in logList">{{index+1}}:{{item}}</p>
         </div>
-        <div class="btns1" v-if="showShare">
-            <a href="javascript:;" @click="doChange">换个风格</a>
-            <a href="javascript:;" @click="drawCanvas3">{{btnShareName}}{{loadIndex}}</a>
-        </div>
 
         <!-- @touchmove.prevent="tmove"-->
-        <div class="poster" :style="{background:bgColor,'z-index':isPosting ? 900 : 0}">
-            <img :src="posterImg" />
-        </div>
+        <!--<div class="poster" :style="{background:bgColor,'z-index':isPosting ? 900 : 0}">-->
+            <!--<img :src="posterImg" />-->
+        <!--</div>-->
     </div>
 </template>
 

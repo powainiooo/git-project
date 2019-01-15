@@ -22,9 +22,9 @@
 
         <div class="btn-close" @click="closePoster" v-if="!isPosting"><img src="@/assets/images/btn-close.png"/> </div>
 
-        <div class="btn-name" :class="'btn-name'+styleKey" @click="showEditor" v-if="!isPosting">{{name}}</div>
+        <div class="btn-name" :class="'btn-name'+styleKey" @click="showEditor" v-if="!isPosting && source == 'app'">{{name}}</div>
         <div class="hint"
-             v-if="showHint && !isPosting"
+             v-if="showHint && !isPosting && source == 'app'"
              :class="'hint'+styleKey"
              @click="showEditor"
              :style="{left:hintLeft+'px',top:hintTop+'px',transform:'scale('+hintScale+')'}">
@@ -46,6 +46,11 @@
                 </div>
             </div>
         </transition>
+
+        <div class="btns1">
+            <a href="javascript:;" @click="doChange">换个风格</a>
+            <a href="javascript:;" @click="doShare" v-if="source == 'app'">分享年报</a>
+        </div>
     </div>
 </template>
 
@@ -75,6 +80,7 @@
                 car:getParams.carType,
                 name:getParams.userName,
                 lastname:getParams.userName,
+                source:getParams.source,
                 textArr:[],
                 bgColor:'#fff',
                 shareImgSrc:'',
@@ -108,11 +114,10 @@
             },
             doChange(){
                 this.lastname = this.name;
-                //this.closePoster();
                 this.$emit('showChange')
             },
             closePoster(){
-                this.$emit('showChange');
+                this.$emit('goBack');
                 this.showHint = false;
             },
             initText(){
@@ -153,7 +158,6 @@
                     let tag = 'style'+window.footPrinter.tagStyle;
                     this[tag](ctx,res);
                     this.shareImgSrc = canvas.toDataURL();
-                    console.log(this.shareImgSrc.length);
                     this.showHint = true;
                 })
             },

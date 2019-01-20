@@ -125,6 +125,7 @@
                 this.textArr.push(data.add);
             },
             draw(){
+                console.log(new Date().getTime());
                 if(this.lastname.length == 0){
                     this.nameError = true;
                     return;
@@ -153,7 +154,6 @@
                     let tag = 'style'+window.footPrinter.tagStyle;
                     this[tag](ctx,res);
                     this.shareImgSrc = canvas.toDataURL();
-                    console.log(this.shareImgSrc.length);
                     this.showHint = true;
                 })
             },
@@ -199,6 +199,7 @@
                     let h = ctx.wrapText(this.textArr[i],65,txtHeight,623,50);
                     txtHeight = h+60;
                 }
+                console.log(new Date().getTime());
             },
             style2(ctx,res){
                 ctx.drawImage(res[0],0,0);

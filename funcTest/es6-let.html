@@ -6,10 +6,13 @@
 </head>
 <body>
 <script>
-    function aa(...str){
-        console.log(str)
-    }
-    aa('a','b');
+    var o = Object.create({x:1,y:2})
+    console.log(o)
+    o.z = 3
+    let {x, ...c} = o
+    console.log(x)
+    console.log(c)
+    // console.log(z)
 </script>
 </body>
 </html>

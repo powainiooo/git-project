@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+
+    </style>
+</head>
+<body>
+<h3>1. Proxy 给一个对象的属性操作提供钩子方法</h3>
+<ul>
+    <li>1.get(target, propKey, receiver)</li>
+    <li>2.set(target, propKey, value, receiver)</li>
+    <li>3.has(target, propKey), break propKey in proxy</li>
+    <li>4.deleteProperty(target, propKey),break delete proxy[propKey]</li>
+</ul>
+</body>
+</html>
+<script>
+    const dom = new Proxy({},{
+      get(target,key) {
+        return (attrs = {}, ...children) => {
+          const el = document.createElement(key)
+          for (let prop of Object.keys(attrs)) {
+            el.setAttribute(prop, attrs[prop])
+          }
+          for (let child of children) {
+            if (typeof child === 'string') {
+              child = document.createTextNode(child)
+            }
+            el.appendChild(child)
+          }
+          return el
+        }
+      }
+    })
+    const el = dom.div({},
+        'Hello, my name is',
+        dom.a({href:'http://www.baidu.com'}, 'mark'),
+        '. I like:',
+        dom.ul({},
+            dom.li({}, 'The web1'),
+            dom.li({}, 'The web2'),
+            dom.li({}, 'The web3')
+        )
+    )
+
+    document.body.appendChild(el)
+</script>

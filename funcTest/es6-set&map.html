@@ -40,7 +40,13 @@
 </body>
 </html>
 <script>
-    const m2 = new Map([['baz',3]])
-    const m3 = new Map(m2)
-    console.log(m3.get('baz'))
+    const test = function (params) {
+      console.log(params)
+      return '345'
+    }
+    let map = new Map().set(test,'123')
+    for(let [key,val] of map){
+      console.log(key('234'))
+      console.log(val)
+    }
 </script>

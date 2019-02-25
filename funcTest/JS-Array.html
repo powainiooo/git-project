@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        code{ padding: 10px 20px; display: block; background-color: #eeeeee; margin-left: 20px; margin-top: 10px}
+    </style>
+</head>
+<body>
+<h2>Methods of Array </h2>
+<ul>
+    <li>
+        <h3>1.contact(), array1.contact(array2, array3)</h3>
+        <ol>
+            <li>链接多个数组</li>
+            <li>不会改变现有数组，只返回被连接数组的副本</li>
+        </ol>
+        <code>
+            let [arr0, arr1, arr2] = [[1,2], [3,4], [5,6]]<br>
+            let arr3 = arr0.concat(arr1, arr2)<br>
+            console.log(arr0) \\[1,2]<br>
+            console.log(arr1) \\[3,4]<br>
+            console.log(arr2) \\[5,6]<br>
+            console.log(arr3) \\[1,2,3,4,5,6]<br>
+        </code>
+    </li>
+    <li>
+        <h3>2.copyWithin, array1.copyWithin(target, start, end)</h3>
+        <ol>
+            <li>复制数组指定位置的内容到数组的另一个指定位置中，会改变现有数组</li>
+            <li>target:必需，复制到指定目标索引位置</li>
+            <li>start:可选，复制的起始位置</li>
+            <li>end:可选，复制的停止位置，负数为倒数,即：length - end</li>
+        </ol>
+        <code>
+            let arr = [0,2,4,6,8,10] <br>
+            arr.copyWithin(3) \\ [0,2,4,0,2,4] <br>
+            arr.copyWithin(3,1) \\ [0,2,4,2,4,6] <br>
+            arr.copyWithin(3,1,3) \\ [0,2,4,2,4,10] <br>
+            arr.copyWithin(3,1,-1) \\ [0,2,4,2,4,6] <br>
+        </code>
+    </li>
+    <li>
+        <h3>3.entries(), array.entries()</h3>
+        <ol>
+            <li>返回键名和键值的Iterator集合</li>
+            <li>可以替换 for(let i = 0; i < array.length; i ++) 的写法</li>
+        </ol>
+        <code>
+            let arr = ['a', 'b', 'c'] <br>
+            arr.entries() <br>
+            [0,'a'] <br>
+            [1,'b'] <br>
+            [2,'c'] <br>
+            for(let [index, val] of arr.entries()){ <br>
+                console.log(`${index}:${val}`) <br>
+            } <br>
+            0:a <br>
+            1:b <br>
+            2:c
+        </code>
+    </li>
+</ul>
+</body>
+</html>
+<script>
+    let arr = ['a', 'b', 'c']
+    for(let [index, val] of arr.entries()){
+      console.log(`${index}:${val}`)
+    }
+</script>

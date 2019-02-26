@@ -75,9 +75,12 @@
   font-family: 'Helve';
   padding: 20rpx;
   overflow: hidden;
+  
+  border-bottom: 1px solid #f0f0f0;
+}
+.ticket-frame-simple .title{
   white-space: nowrap;
   text-overflow: ellipsis;
-  border-bottom: 1px solid #f0f0f0;
 }
 .ticket-small .title{ font-size: 33rpx;}
 

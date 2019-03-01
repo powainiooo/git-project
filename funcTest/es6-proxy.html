@@ -33,6 +33,17 @@
           }
           return el
         }
+      },
+      set(target, key, value) {
+        if(key === 'age') {
+          if (!Number.isInteger(value)) {
+            throw new TypeError('The age is not an Ineger')
+          }
+          if (value > 200) {
+            throw new TypeError('The age seems invalid')
+          }
+        }
+        target[key] = value
       }
     })
     const el = dom.div({},
@@ -45,6 +56,37 @@
             dom.li({}, 'The web3')
         )
     )
-
     document.body.appendChild(el)
+
+    const proxy = new Proxy({}, {
+      set (obj, key, val, receiver) {
+        console.log('set')
+        obj[key] = receiver
+      }
+    })
+    const  myobj = {aa: '123'}
+    Object.setPrototypeOf(myobj, proxy)
+    myobj.aa = '231'
+    myobj.foo = 123
+    console.log(myobj.aa === myobj)
+    console.log(myobj.foo === myobj)
+    console.log(myobj)
+</script>
+<script>
+    console.log('------------------------')
+    var target = function () {
+      return 'I am the target'
+    }
+    var p = new Proxy({
+      abc:'123',
+      show(){
+        return 'I am the target'
+      }
+    }, {
+      apply() {
+        return 'I am the proxy'
+      }
+    })
+    console.log(p.abc)
+    console.log(p.show())
 </script>

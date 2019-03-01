@@ -30,6 +30,7 @@ Page({
         showIndex:true,
         showTicketDetail:false,
         showBuyInfos:false,
+        showBuyInfosClass:'',
         footerPos:170,
         footerDuration:'0.5s',
         selectTicketTop:'0px',
@@ -130,6 +131,7 @@ Page({
             self = this;
         self.data.id = e.target.dataset.id;
         this.data.lastLoadHint = this.data.loadHint;
+
         wx.createSelectorQuery().select('#bodyFrame').boundingClientRect(function(rect){
             self.data.lastBodyTop = rect.top;
             self.data.lastTop = top+rect.top+'px';
@@ -208,21 +210,25 @@ Page({
     },
     //进入购买页
     gotoBuy(){
+      wx.createSelectorQuery().select('.item-absolute').boundingClientRect((rect) => {
+        console.log(rect.height/rect.width)
         if(this.data.detailData.info.is_end != '') return;
         this.setData({
-            footerDuration:'0s'
+          footerDuration:'0s'
         });
         setTimeout(()=>{
-            wx.pageScrollTo({
-                scrollTop: 0,
-                duration: 0
-            });
-            this.setData({
-                footerPos:170,
-                showDetailsInfos:false,
-                showBuyInfos:true
-            })
+          wx.pageScrollTo({
+            scrollTop: 0,
+            duration: 0
+          });
+          this.setData({
+            showBuyInfosClass: rect.height/rect.width > 1.47 ? 'index-buys2' : 'index-buys',
+            footerPos:170,
+            showDetailsInfos:false,
+            showBuyInfos:true
+          })
         },50);
+      }).exec()
     },
     //生成海报
     drawPoster(){

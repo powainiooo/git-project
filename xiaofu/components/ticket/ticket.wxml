@@ -4,7 +4,9 @@
       return val.slice(start,end)
     }
   }
-  module.exports.sub = sub;
+  module.exports = {
+        sub: sub
+    };
 </wxs>
 <view class="ticket-frame {{isSimple ? 'ticket-frame-simple' : ''}} {{extraClass}}" hover-class="{{isSimple ? 'ticket-touch' : ''}}" hover-stay-time="10">
   <view class='line1'>

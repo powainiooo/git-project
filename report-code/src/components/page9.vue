@@ -35,7 +35,7 @@
         <div class="title"><img src="@/assets/images/title9.png"> </div>
 
         <ul class="keywords-list">
-            <li v-for="item in tagList" :class="{animate:!isPosting}">{{item}}</li>
+            <li v-for="item in tagList" :class="{active:showTags}">{{item == '玩的溜' ? '玩得溜' : item}}</li>
         </ul>
 
         <div class="btn" @click="openSelect" v-if="showBtn && !isPosting"><img src="@/assets/images/btn.png"></div>

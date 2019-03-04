@@ -5,11 +5,26 @@
     <title></title>
 </head>
 <body>
+5.Symbol.for and Symbol.keyFor
+6.singleton mode
+7.Symbol.hasInstance
+  Symbol.isConcatSpreadable
+  Symbol.species
+  Symbol.match
 <script>
-    function aa(...str){
-        console.log(str)
+    function getobj() {
+        let s = Symbol('s')
+        let obj = {
+            [s]:'123',
+            a:'123'
+        }
+        return obj
     }
-    aa('a','b');
+    let obj = getobj()
+    let ss = Object.getOwnPropertySymbols(obj)
+    let s1 = Symbol('s1')
+    let s2 = s1
+    console.log(s1 === s2)
 </script>
 </body>
 </html>

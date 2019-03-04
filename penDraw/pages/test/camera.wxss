@@ -1,0 +1,3 @@
+/* pages/test/camera.wxss */
+.cover{ width: 100%; height: 100vh;}
+.cover .coverImg{ width: 100%; height: 100vh;}

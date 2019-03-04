@@ -13,7 +13,6 @@
             binddosearch="doSearch"
             binddoposter="drawPoster">
     </header-view>
-
     <!--  style="opacity: {{showTicketDetail ? '0' : '1'}}"-->
     <view class='body'>
         <view wx:if="{{activityID == ''}}">
@@ -80,8 +79,8 @@
             <view class='hint-cn'>无相关内容</view>
         </view>
     </view>
-
-    <view class="index-details {{showBuyInfos ? 'index-buys' : ''}}" wx:if="{{!showIndex}}">
+    <!-- style="margin-top: {{buyInfoHeight}}"-->
+    <view class="index-details {{showBuyInfos ? showBuyInfosClass : ''}}" wx:if="{{!showIndex}}">
         <!-- 详情页-->
         <ticket-detail showInfos="{{showTicketDetail}}" showBuyInfos="{{showBuyInfos}}" itemData="{{detailData}}"></ticket-detail>
     </view>

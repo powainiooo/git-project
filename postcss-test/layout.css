@@ -1,0 +1,2 @@
+body{ background-color: #eeeeee; display: flex; justify-content: center; align-items: center;}
+div{ transform: translate(0,100px)}

@@ -14,7 +14,7 @@
 
     <view class='member-content contact-content' wx:if="{{page == 'contact'}}">
       <text>合作联系\n{{mail}}</text>
-      <view class='btn-phone' bindtap='makePhoneCall' hover-class="btn-phone-touch" hover-stay-time="10" data-phone="{{phone}}">{{phone}}</view>
+      <!-- <view class='btn-phone' bindtap='makePhoneCall' hover-class="btn-phone-touch" hover-stay-time="10" data-phone="{{phone}}">{{phone}}</view> -->
       <view class='line'></view>
       <text>售后及服务\n{{wechat}}</text>
       <image src='../../res/images/icon-wechat.png' mode='widthFix' style='width:80rpx; margin-top:20rpx; display:block'></image>

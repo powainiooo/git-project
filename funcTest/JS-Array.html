@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        code{ padding: 10px 20px; display: block; background-color: #eeeeee; margin-left: 20px; margin-top: 10px}
+    </style>
+</head>
+<body>
+<h2>Methods of Array </h2>
+<ul>
+    <li>
+        <h3>1.contact(), array1.contact(array2, array3)</h3>
+        <ol>
+            <li>链接多个数组</li>
+            <li>不会改变现有数组，只返回被连接数组的副本</li>
+        </ol>
+        <code>
+            let [arr0, arr1, arr2] = [[1,2], [3,4], [5,6]]<br>
+            let arr3 = arr0.concat(arr1, arr2)<br>
+            console.log(arr0) \\[1,2]<br>
+            console.log(arr1) \\[3,4]<br>
+            console.log(arr2) \\[5,6]<br>
+            console.log(arr3) \\[1,2,3,4,5,6]<br>
+        </code>
+    </li>
+    <li>
+        <h3>2.copyWithin, array1.copyWithin(target, start, end)</h3>
+        <ol>
+            <li>复制数组指定位置的内容到数组的另一个指定位置中，会改变现有数组</li>
+            <li>target:必需，复制到指定目标索引位置</li>
+            <li>start:可选，复制的起始位置</li>
+            <li>end:可选，复制的停止位置，负数为倒数,即：length + end</li>
+        </ol>
+        <code>
+            let arr = [0,2,4,6,8,10] <br>
+            arr.copyWithin(3) \\ [0,2,4,0,2,4] <br>
+            arr.copyWithin(3,1) \\ [0,2,4,2,4,6] <br>
+            arr.copyWithin(3,1,3) \\ [0,2,4,2,4,10] <br>
+            arr.copyWithin(3,1,-1) \\ [0,2,4,2,4,6] <br>
+        </code>
+    </li>
+    <li>
+        <h3>3.entries(), array.entries()</h3>
+        <ol>
+            <li>返回键名和键值的Iterator集合</li>
+            <li>可以替换 for(let i = 0; i < array.length; i ++) 的写法</li>
+        </ol>
+        <code>
+            let arr = ['a', 'b', 'c'] <br>
+            arr.entries() <br>
+            [0,'a'] <br>
+            [1,'b'] <br>
+            [2,'c'] <br>
+            for(let [index, val] of arr.entries()){ <br>
+                console.log(`${index}:${val}`) <br>
+            } <br>
+            0:a <br>
+            1:b <br>
+            2:c
+        </code>
+    </li>
+    <li>
+        <h3>4.every(), array.every(func)</h3>
+        <ol>
+            <li>检测所有元素是否符合条件，返回boolean</li>
+            <li>当遇到不符合条件的值就会中断下面的判断</li>
+        </ol>
+        <code>
+            let arr = [12,14,18,20] <br>
+            let result1 = arr.every(i => i <= 20) \\ true <br>
+            let result2 = arr.every(i => i > 20) \\ false
+        </code>
+    </li>
+    <li>
+        <h3>5.fill(), array.fill(value, start, end)</h3>
+        <ol>
+            <li>用一个固定值替换数组的元素</li>
+            <li>value, 必填</li>
+            <li>start, 非必填 开始填充的位置</li>
+            <li>end, 非必填 结束填充的位置</li>
+        </ol>
+        <code>
+            let arr = [12,14,18,20] <br>
+            arr.fill(20) \\ [20,20,20,20] <br>
+            arr.fill(20,0,1) \\ [20,14,18,20]
+        </code>
+    </li>
+    <li>
+        <h3>6.find(), array.find(func(currentVal, index, arr),value)</h3>
+        <ol>
+            <li>返回符合条件的第一个值，遇到符合条件的值后不再执行判断</li>
+            <li>无匹配返回undefined</li>
+            <li>currentVal，必填</li>
+            <li>index，非必填</li>
+            <li>arr，非必填</li>
+            <li>value，非必填，如果传空，undefined会传给this</li>
+        </ol>
+        <code>
+            let arr = [12,14,18,20] <br>
+            arr.find(currentVal => currentVal > 16) \\18 <br>
+        </code>
+    </li>
+    <li>
+        <h3>7.findIndex(), array.findIndex(func(currentVal, index, arr),value)</h3>
+        <ol>
+            <li>返回符合条件的第一个值的下标，遇到符合条件的值后不再执行判断</li>
+            <li>无匹配返回-1</li>
+            <li>currentVal，必填</li>
+            <li>index，非必填</li>
+            <li>arr，非必填</li>
+            <li>value，非必填，如果传空，undefined会传给this</li>
+        </ol>
+        <code>
+            let arr = [12,14,18,20] <br>
+            arr.findIndex(currentVal => currentVal > 16) \\2 <br>
+        </code>
+    </li>
+    <li>
+        <h3>8.forEach(), array.forEach(func(currentVal, index, arr),value)</h3>
+        <ol>
+            <li>遍历所有元素</li>
+            <li>currentVal，必填</li>
+            <li>index，非必填</li>
+            <li>arr，非必填</li>
+            <li>value，非必填，如果传空，undefined会传给this</li>
+        </ol>
+        <code>
+            let arr = [12,14,18,20] <br>
+            let result1 = arr.forEach((currentVal, index) => { <br>
+                console.log(`${index}:${currentVal}`) <br>
+            }) <br>
+            0:12 <br>
+            1:14 <br>
+            2:18 <br>
+            3:20
+        </code>
+    </li>
+    <li>
+        <h3>9.from(), Array.from(object,mapFunc,value)</h3>
+        <ol>
+            <li>可将类似数组的对象和可遍历的对象转成数组</li>
+            <li>object,必填</li>
+            <li>mapFunc,非必填</li>
+            <li>value,非必填</li>
+        </ol>
+        <code>
+            let setObj = new Set(['a','b','c']) <br>
+            let arr = Array.from(setObj) \\['a','b','c'] <br>
+            let arr = Array.from(setObj,i => `arr+${i}`) \\['arr+a','arr+b','arr+c'] <br>
+        </code>
+    </li>
+    <li>
+        <h3>10.includes, array.includes(el, start)</h3>
+        <ol>
+            <li>判断数组是否包含指定的值，返回boolean</li>
+            <li>start，非必填 开始检索的下标，负数为倒数，即len+start</li>
+        </ol>
+        <code>
+            let arr = ['a','b','c'] <br>
+            arr.includes('a') \\ true <br>
+            arr.includes('d') \\ false <br>
+            arr.includes('a',1) \\ false <br>
+        </code>
+    </li>
+    <li>
+        <h3>11.indexOf(), array.indexOf(el, start)</h3>
+        <ol>
+            <li>返回指定值第一个匹配到的小标，未匹配返回-1</li>
+            <li>start，非必填 开始检索的下标</li>
+        </ol>
+        <code>
+            let arr = ['a','b','c'] <br>
+            arr.indexOf('a') \\ 0 <br>
+            arr.indexOf('d') \\ -1 <br>
+        </code>
+    </li>
+    <li>
+        <h3>12.isArray(), Array.isArray(obj)</h3>
+        <ol>
+            <li>判断对象是否为数组</li>
+        </ol>
+    </li>
+    <li>
+        <h3>13.join(), array.join(separator)</h3>
+        <ol>
+            <li>将数组按separator转成字符串</li>
+            <li>separator,可选 默认 ‘,’</li>
+        </ol>
+    </li>
+    <li>
+        <h3>14.keys(), array.keys()</h3>
+        <ol>
+            <li>返回键名的Iterator集合</li>
+        </ol>
+    </li>
+    <li>
+        <h3>15.lastIndexOf(), array.lastIndexOf(el,start)</h3>
+        <ol>
+            <li>indexOf 的倒数</li>
+        </ol>
+    </li>
+    <li>
+        <h3>16.map(), array.findIndex(func(currentVal, index, arr),value)</h3>
+        <ol>
+            <li>遍历所有元素,返回所有条件判断的数组集合</li>
+            <li>currentVal，必填</li>
+            <li>index，非必填</li>
+            <li>arr，非必填</li>
+            <li>value，非必填，如果传空，undefined会传给this</li>
+        </ol>
+        <code>
+            let arr = [12,14,18,20] <br>
+            arr.map(i => i < 18) \\ [true,true,false,false]
+        </code>
+    </li>
+    <li>
+        <h3>17.prop(), array.prop()</h3>
+        <ol>
+            <li>删除最后一个元素并返回删除的元素</li>
+        </ol>
+    </li>
+    <li>
+        <h3>18.push(), array.push()</h3>
+        <ol>
+            <li>添加新元素并返回新的数组长度</li>
+        </ol>
+    </li>
+    <li>
+        <h3>19.reduce(), array.reduce(func(total, currentVal, currentIndex, arr),initVal)</h3>
+        <ol>
+            <li>接受一个方法对数组元素进行累加，从左到右</li>
+            <li>total，必填</li>
+            <li>currentVal，必填</li>
+            <li>currentIndex，非必填</li>
+            <li>arr，非必填</li>
+            <li>initVal，非必填，初始值</li>
+        </ol>
+        <code>
+            let arr = [1,2,3,4] <br>
+            arr.reduce((total, currentVal) => total + currentVal) \\ 10 <br>
+            arr.reduce((total, currentVal) => total + currentVal, 10) \\ 20 <br>
+        </code>
+    </li>
+    <li>
+        <h3>20.reduceRight(),array.reduceRight(func(total, currentVal, currentIndex, arr),initVal)</h3>
+        <ol>
+            <li>同reduce，顺序从右到左</li>
+        </ol>
+    </li>
+    <li>
+        <h3>21.reverse(), array.reverse()</h3>
+        <ol>
+            <li>颠倒数组中的顺序</li>
+        </ol>
+    </li>
+    <li>
+        <h3>21.shift(), array.shift()</h3>
+        <ol>
+            <li>删除数组第一个元素并返回删除的值</li>
+        </ol>
+    </li>
+    <li>
+        <h3>22.slice(), array.slice(start,end)</h3>
+        <ol>
+            <li>从已有数组中返回选定的元素集合</li>
+            <li>不会改变原始数组</li>
+            <li>start, 可选</li>
+            <li>end, 可选</li>
+        </ol>
+        <code>
+            let arr = [1,2,3,4] <br>
+            arr.slice(1,3) \\ [2,3]
+        </code>
+    </li>
+    <li>
+        <h3>23.some(),array.some(func(currentVal, index, arr),value)</h3>
+        <ol>
+            <li>对应every()，只要有一个元素符合条件就返回true</li>
+        </ol>
+    </li>
+    <li>
+        <h3>24.sort(),array.sort(func)</h3>
+        <ol>
+            <li>排序顺序可以是字母或数字，并按升序或降序,默认排序顺序为按字母升序</li>
+        </ol>
+    </li>
+    <li>
+        <h3>25.splice(), array.splice(index, howmany, items)</h3>
+        <ol>
+            <li>删除数组项并返回删除的元素集合</li>
+            <li>index,必填 开始删除的下标</li>
+            <li>howmany,必填 删除的个数</li>
+            <li>items,选填 替换的元素</li>
+        </ol>
+    </li>
+    <li>
+        <h3>26.toString(), array.toString()</h3>
+        <ol>
+            <li>等于 join()</li>
+        </ol>
+    </li>
+    <li>
+        <h3>27.unshift(), array.unshift(...items)</h3>
+        <ol>
+            <li>向数组开头添加多个元素</li>
+        </ol>
+    </li>
+</ul>
+</body>
+</html>
+<script>
+    let arr = [1,2,3,4]
+    let s1 = arr.splice(2,1,5,5,5)
+    console.log(s1)
+    console.log(arr.valueOf())
+</script>

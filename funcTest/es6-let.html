@@ -12,19 +12,7 @@
   Symbol.species
   Symbol.match
 <script>
-    function getobj() {
-        let s = Symbol('s')
-        let obj = {
-            [s]:'123',
-            a:'123'
-        }
-        return obj
-    }
-    let obj = getobj()
-    let ss = Object.getOwnPropertySymbols(obj)
-    let s1 = Symbol('s1')
-    let s2 = s1
-    console.log(s1 === s2)
+
 </script>
 </body>
 </html>

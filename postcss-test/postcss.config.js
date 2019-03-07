@@ -1,5 +1,12 @@
 module.exports = {
   plugins: {
-    autoprefixer: {}
+    autoprefixer: {},
+    "postcss-variables": {},
+    "postcss-mixins": {},
+    "postcss-calc": {}
   }
 }
+/*
+* autoprefixer
+* postcss-will-change
+* */

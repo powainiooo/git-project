@@ -1,3 +1,4 @@
+import './globle.css'
 import './layout.css'
 function show(str) {
   let el = document.createElement('div')

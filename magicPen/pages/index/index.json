@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "banner": "../../components/index/banner/banner",
+    "guide": "../../components/index/guide/guide",
+    "list-item": "../../components/index/list-item/list-item",
+    "location": "../../components/index/location/location",
+    "nav-bar": "../../components/index/nav-bar/nav-bar"
+  }
+}

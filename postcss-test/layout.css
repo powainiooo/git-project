@@ -1,2 +1,6 @@
-body{ background-color: #eeeeee; display: flex; justify-content: center; align-items: center;}
+
+body{ background-color: var(--lighter); display: flex; justify-content: center; align-items: center;}
 div{ transform: translate(0,100px)}
+p{
+    @mixin fontstyle 32, #fff
+}

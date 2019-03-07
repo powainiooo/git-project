@@ -1,0 +1,9 @@
+:root {
+    --lighter: #dddddd;
+}
+
+@define-mixin fontstyle $size, #color {
+    font-size: $(size)px;
+    font-size: calc($size/16) rem;
+    color: $color;
+}

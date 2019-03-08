@@ -1,19 +1,17 @@
 //index.js
 //获取应用实例
 const app = getApp()
+const {getSlideList, getChoicenessWorks} = require('../../utils/api.js')
 
 Page({
   data: {
     motto: 'Hello World',
     userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
-  },
-  //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
+    hasUserInfo: app.globalData.userInfo !== null,
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    bannerList: [],
+    worksList: [],
+    pageNo:1
   },
   onLoad: function () {
     if (app.globalData.userInfo) {
@@ -42,6 +40,8 @@ Page({
         }
       })
     }
+    this.getBannerData()
+    this.getWorksData()
   },
   getUserInfo: function(e) {
     console.log(e)
@@ -50,5 +50,26 @@ Page({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
+  },
+  getBannerData() {
+    getSlideList().then(res => {
+      const bannerList = res.data
+      this.setData({bannerList})
+    })
+  },
+  getWorksData() {
+    getChoicenessWorks({
+      startPage: this.data.pageNo,
+      pageSize: 5
+    }).then(res => {
+      const list = res.data.pageData
+      this.setData({
+        worksList: this.data.worksList.concat(list)
+      })
+    })
+  },
+  pageNoAdd() {
+    this.data.pageNo ++
+    this.getWorksData()
   }
 })

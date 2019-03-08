@@ -16,9 +16,15 @@ App({
 
   },
   async doInit() {
-    const {code} = await login()
-    const getSettingData = await getSetting()
+    console.time()
+    const resArr = await Promise.all([
+      login(),
+      getSetting()
+    ])
+    const {code} = resArr[0]
+    const getSettingData = resArr[1]
     if(getSettingData.authSetting['scope.userInfo']){
+      console.timeEnd()
       const userInfoData = await getUserInfo()
       const {encryptedData, iv, userInfo} = userInfoData
       this.globalData.userInfo = userInfo
@@ -26,14 +32,16 @@ App({
         this.userInfoReadyCallback(userInfoData)
       }
       const resData = await ajax({
-        url: 'http://wx.newryun.com/api/user/onLogin',
+        url: 'https://xcx.newryun.com/api/user/onLogin',
         method: 'POST',
         data:{code, encryptedData, iv}
       }).catch(e => console.log(e))
-      const sKey = resData.data.data.sKey
+      this.globalData.sKey = resData.data.data.sKey
     }
   },
   globalData: {
-    userInfo: null
+    ajaxSrc: 'https://xcx.newryun.com',
+    userInfo: null,
+    sKey: null
   }
 })

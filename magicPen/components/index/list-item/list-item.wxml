@@ -1,2 +1,14 @@
-<!--components/index/list-item/list-item.wxml-->
-<text>components/index/list-item/list-item.wxml</text>
+<view class="list-item" bindtap="gotoDetail">
+  <image src="{{itemData.worksUrl}}" mode="widthFix" class="list-item-img"/>
+  <view class="list-item-right">
+    <view class="list-item-name">{{itemData.worksName || '--'}}</view>
+    <view class="list-item-author">
+      <image src="{{itemData.avatarUrl}}" mode="scaleToFill" class="list-item-avatar"/>
+      <text class="list-item-nick">{{itemData.nick}}</text>
+    </view>
+    <view class="list-item-like">
+      <image src="{{itemData.avatarUrl}}" mode="scaleToFill" class="list-item-icon"/>
+      <text class="list-item-nums">{{itemData.zan}}</text>
+    </view>
+  </view>
+</view>

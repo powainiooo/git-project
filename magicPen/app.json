@@ -6,19 +6,23 @@
     "pages/interaction/interaction",
     "pages/onscreen/list/list",
     "pages/onscreen/generate/generate",
-    "pages/works/works",
     "pages/medal/medal",
     "pages/personal/personal",
     "pages/coupon/coupon",
     "pages/drawing/drawing",
     "pages/recharge/recharge",
     "pages/aboutus/aboutus",
-    "pages/feedback/feedback"
+    "pages/feedback/feedback",
+    "pages/works/list/list",
+    "pages/works/detail/detail"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle": "black"
+  },
+  "usingComponents": {
+    "i-message": "../../components/iview/message/index"
   }
 }

@@ -2,16 +2,21 @@
 //获取应用实例
 const app = getApp()
 const {getSlideList, getChoicenessWorks} = require('../../utils/api.js')
-
+const useGuide = wx.getStorageSync('useGuide')
+console.log('useGuide:'+useGuide)
 Page({
   data: {
-    motto: 'Hello World',
+    useGuide: typeof useGuide === 'string' ? false : true,
+    guideStep: typeof useGuide === 'string' ? 1 : 'end',
     userInfo: {},
     hasUserInfo: app.globalData.userInfo !== null,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     bannerList: [],
     worksList: [],
-    pageNo:1
+    isWorksLIstEnd: false,
+    isLoadingList: false,
+    pageSize: 10,
+    pageNo: 1
   },
   onLoad: function () {
     if (app.globalData.userInfo) {
@@ -58,18 +63,36 @@ Page({
     })
   },
   getWorksData() {
+    this.setData({
+      isLoadingList: true
+    })
     getChoicenessWorks({
       startPage: this.data.pageNo,
-      pageSize: 5
+      pageSize: this.data.pageSize
     }).then(res => {
       const list = res.data.pageData
       this.setData({
-        worksList: this.data.worksList.concat(list)
+        isWorksLIstEnd: list.length < this.data.pageSize,
+        worksList: this.data.worksList.concat(list),
+        isLoadingList: false
       })
     })
   },
   pageNoAdd() {
     this.data.pageNo ++
     this.getWorksData()
+  },
+  changeStep(e) {
+    const guideStep = e.detail
+    this.setData({guideStep})
+    if(guideStep === 'end'){
+      this.setData({
+        useGuide: true
+      })
+      wx.setStorage({
+        key:'useGuide',
+        data: true
+      })
+    }
   }
 })

@@ -2,6 +2,7 @@ const ajaxUrl = 'https://xcx.newryun.com'
 const { $Message } = require('../components/iview/base/index')
 const ajax = (opts) => {
   return new Promise((resolve, reject) => {
+    wx.showNavigationBarLoading()
     const extras = {
       success(res) {
         if(res.data.code === 0) {
@@ -12,12 +13,14 @@ const ajax = (opts) => {
             type: 'warning'
           });
         }
+        wx.hideNavigationBarLoading()
       },
       fail(err) {
         $Message({
           content: err.errMsg,
           type: 'error'
         });
+        wx.hideNavigationBarLoading()
         reject()
       }
     }

@@ -1,2 +1,11 @@
-<!--components/index/nav-bar/nav-bar.wxml-->
-<text>components/index/nav-bar/nav-bar.wxml</text>
+<view class="nav-bar">
+  <view class="nav-bar-item"
+        wx:for="{{list}}"
+        wx:for-item="item"
+        wx:key="item"
+        data-url="{{item.url}}"
+        bindtap="jumpPage">
+    <image src="{{item.src}}" mode="scaleToFill" class="nav-bar-icon"></image>
+    <view class="nav-bar-name">{{item.name}}</view>
+  </view>
+</view>

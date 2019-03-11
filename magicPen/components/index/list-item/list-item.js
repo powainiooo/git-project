@@ -4,7 +4,7 @@ Component({
    * 组件的属性列表
    */
   properties: {
-    listData: {
+    itemData: {
       type: Object,
       value: {}
     }
@@ -23,7 +23,7 @@ Component({
   methods: {
     gotoDetail(){
       wx.navigateTo({
-        url: ''
+        url: `/pages/works/detail/detail?userId=${this.data.itemData.userId}`
       })
     }
   }

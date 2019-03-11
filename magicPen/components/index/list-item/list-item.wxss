@@ -1,1 +1,10 @@
-/* components/index/list-item/list-item.wxss */
+.list-item { width: 88%; height: 245rpx; background-color: #ffffff; border-radius: 40rpx; box-shadow: 0 0 50rpx rgba(0,0,0,0.2); margin: 100rpx auto 0 auto; display: flex; justify-content: space-between; padding: 0 30rpx; box-sizing: border-box;}
+.list-item .list-item-img { width: 310rpx; height: 235rpx; border-radius: 20rpx; box-shadow: 0 0 30rpx rgba(0,0,0,0.2); margin-top: -40rpx;}
+.list-item .list-item-right { width: 230rpx; margin-left: 30rpx;}
+.list-item .list-item-right .list-item-author { display: flex; align-items: center; margin: 30rpx 0 20rpx 0;}
+.list-item .list-item-right .list-item-author .list-item-avatar{ width: 60rpx; height: 60rpx; border-radius: 50%; margin-right: 20rpx;}
+.list-item .list-item-right .list-item-author .list-item-nick{ font-size: 24rpx; color: #000000;}
+.list-item .list-item-right .list-item-name { font-size: 24rpx; color: #7d7d7d;}
+.list-item .list-item-right .list-item-like { display: flex; margin-top: 20rpx;}
+.list-item .list-item-right .list-item-like .list-item-icon{ width: 40rpx; height: 40rpx;}
+.list-item .list-item-right .list-item-like .list-item-nums{ font-size: 28rpx; color: #ff3a65; margin-left: 10rpx;}

@@ -16,6 +16,7 @@ Component({
   data: {
     step: 1,
     showScan: false,
+    showCamera: false,
     opacity: 0
   },
 
@@ -45,6 +46,20 @@ Component({
     },
     openScan() {
       console.log('scan')
+      // this.setData({
+      //   showCamera: true
+      // })
+      wx.scanCode({
+        success(e){
+          console.log(e)
+        },
+        fail(e){
+          console.log(e)
+        }
+      })
+    },
+    scanEnd(e) {
+      console.log(e)
     }
   }
 })

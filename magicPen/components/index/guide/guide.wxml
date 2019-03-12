@@ -7,7 +7,7 @@
     <view class="content">开启你的神笔画画奇梦之旅，亲子游乐，拍照上屏，角色互动　都在这里。</view>
   </view>
   <view class="step2" wx:if="{{step === 2}}" data-next="end" bindtap="changeStep">
-    <image src="../../../res/index/mascot1.png" mode="widthFix" class="mascot2"></image>
+    <image src="../../../res/index/mascot2.png" mode="widthFix" class="mascot2"></image>
     <image src="../../../res/index/modal.png" mode="widthFix" class="modal2"></image>
     <view class="content">
       <text>扫描现场你的画纸二维码，赶快　　收藏作品吧。必须先上传到大屏后再扫描才可以喔。记得随时到这里来找我。</text>
@@ -36,3 +36,6 @@
     <!--<view class="btn-close"><i-icon type="close" size="20" color="#2c8df4"/></view>-->
   </view>
 </view>
+
+<!--&lt;!&ndash;camera组件&ndash;&gt;-->
+<!--<camera mode="scanCode" bindscancode="scanEnd" class="camera" wx:if="{{showCamera}}"></camera>-->

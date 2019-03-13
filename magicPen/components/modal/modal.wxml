@@ -1,2 +1,5 @@
-<!--components/modal/modal.wxml-->
-<text>components/modal/modal.wxml</text>
+<view class="z-modal">
+  <view class="z-modal-container">
+    <slot></slot>
+  </view>
+</view>

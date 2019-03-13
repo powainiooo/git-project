@@ -1,1 +1,3 @@
-/* pages/onscreen/generate/generate.wxss */
+.camera-frame { width: 100%; height: 100vh; overflow: hidden;}
+.camera-container { width: 750rpx; height: 1333rpx;}
+.camera-container .cover{ width: 100%; height: 100%;}

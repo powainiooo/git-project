@@ -5,7 +5,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    originX: 0,
+    originY: 0,
+    scale: 1
   },
 
   /**
@@ -14,7 +16,15 @@ Page({
   onLoad: function (options) {
 
   },
-
+  coverLoad(e) {
+    const {width, height} = e.detail
+    const [x, y, w, h] = [338, 268, 329, 332]
+    const originX = ((x + w/2)/width*100).toFixed(2)
+    const originY = ((y + h/2)/height*100).toFixed(2)
+    const scale = width/w
+    console.log(scale)
+    this.setData({originX, originY, scale})
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

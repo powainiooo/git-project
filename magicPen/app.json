@@ -1,11 +1,11 @@
 {
   "pages": [
+    "pages/onscreen/generate/generate",
     "pages/index/index",
     "pages/logs/logs",
     "pages/map/map",
     "pages/interaction/interaction",
     "pages/onscreen/list/list",
-    "pages/onscreen/generate/generate",
     "pages/medal/medal",
     "pages/personal/personal",
     "pages/coupon/coupon",

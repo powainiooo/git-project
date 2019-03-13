@@ -1,4 +1,9 @@
 // components/index/guide/guide.js
+import regeneratorRuntime from '../../../utils/runtime.js'
+const {promisify} = require('../../../utils/util.js')
+const scan = promisify(wx.scanCode)
+const request = promisify(wx.request)
+const { $Message } = require('../../iview/base/index')
 Component({
   /**
    * 组件的属性列表
@@ -17,6 +22,11 @@ Component({
     step: 1,
     showScan: false,
     showCamera: false,
+    starList: [false, false, false, false, false],
+    showSuccessModal: false,
+    showFailModal: false,
+    failText: '',
+    starRate: 0,
     opacity: 0
   },
 
@@ -41,25 +51,63 @@ Component({
         })
       })
     },
-    showScanChange() {
-      console.log('end')
+    async openScan() {
+      const {result} = await scan()
+      const {ajaxSrc, sKey} = getApp().globalData
+      const res = await request({
+        url: `${ajaxSrc}/api/works/uploadTuzhiNu?tuzhiNu=${result}`,
+        method: 'POST',
+        header: {sKey}
+      })
+      if(res.data.code === 4000){ //作品不存在
+        this.setData({
+          showScan: false,
+          showFailModal: true,
+          failText: '需要先上传到大屏后\\n才可以扫描成功喔！'
+        })
+      }else if(res.data.code === 4001){ //已被扫描
+        this.setData({
+          showScan: false,
+          showFailModal: true,
+          failText: '该作品已经被添加了！'
+        })
+      }else if(res.data.code === 0){
+        this.setData({
+          showScan: false,
+          showSuccessModal: true
+        })
+        setTimeout(() => {
+          this.setData({
+            starRate: Math.random() > 0.5 ? 5 : 4
+          })
+        }, 300)
+      }else {
+        $Message({
+          content: res.data.msg,
+          type: 'warning'
+        });
+      }
+
     },
-    openScan() {
-      console.log('scan')
-      // this.setData({
-      //   showCamera: true
-      // })
-      wx.scanCode({
-        success(e){
-          console.log(e)
-        },
-        fail(e){
-          console.log(e)
-        }
+    gotoWorksList() {
+      wx.navigateTo({
+        url: '/pages/works/list/list'
       })
     },
-    scanEnd(e) {
-      console.log(e)
+    closeSuccessModal() {
+      this.setData({
+        showSuccessModal: false
+      })
+    },
+    closeFailModal() {
+      this.setData({
+        showFailModal: false
+      })
     }
   }
 })
+/*
+* mx1c37igmy 4001 已被扫描
+* 1109155229466129 4000 作品不存在
+* vo4zlt2v8v yamux1c3yo pvno4zlp5j 4lt2yea4uo hno4zlthps c7igqwfcy1 可以成功
+* */

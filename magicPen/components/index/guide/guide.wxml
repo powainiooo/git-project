@@ -19,7 +19,6 @@
 <!--吉祥物-->
 <view class="mascot-btn"
       bindtap="openScanModal"
-      bindtransitionend="showScanChange"
       style="right: {{showScan ? '30rpx' : '-80rpx'}}">
   <image src="../../../res/index/mascot.png"
          class="mascot-icon"
@@ -37,5 +36,30 @@
   </view>
 </view>
 
-<!--&lt;!&ndash;camera组件&ndash;&gt;-->
-<!--<camera mode="scanCode" bindscancode="scanEnd" class="camera" wx:if="{{showCamera}}"></camera>-->
+<!--上传成功-->
+<z-modal wx:if="{{showSuccessModal}}">
+  <view class="modal-success">
+    <view class="star-list">
+      <view wx:for="{{starList}}"
+            wx:for-item="item"
+            wx:for-index="i"
+            wx:key="i"
+            class="star-item {{i < starRate ? 'star-item-move' : ''}}"></view>
+    </view>
+    <view class="txt1">非常棒的作品！</view>
+    <view class="txt2">已将你的作品收集到〈我的作品〉空间</view>
+    <view class="btns">
+      <z-button class="btn-item" bindtap="gotoWorksList">去查看</z-button>
+      <z-button class="btn-item" bindtap="closeSuccessModal">我知道了</z-button>
+    </view>
+  </view>
+</z-modal>
+
+<!--上传成功-->
+<z-modal wx:if="{{showFailModal}}">
+  <view class="modal-fail">
+    <i-icon type="delete" size="70" color="#f4f4f4" class="fail-icon"/>
+    <text class="txt">{{failText}}</text>
+    <z-button class="btn-item" bindtap="closeFailModal">知道了</z-button>
+  </view>
+</z-modal>

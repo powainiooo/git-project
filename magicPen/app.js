@@ -16,15 +16,19 @@ App({
 
   },
   async doInit() {
-    console.time()
-    const resArr = await Promise.all([
-      login(),
-      getSetting()
-    ])
-    const {code} = resArr[0]
-    const getSettingData = resArr[1]
+    console.time('code')
+    // const resArr = await Promise.all([
+    //   login(),
+    //   getSetting()
+    // ])
+    // const {code} = resArr[0]
+    // const getSettingData = resArr[1]
+    const {code} = await login()
+    console.timeEnd('code')
+    console.time('getting')
+    const getSettingData = await getSetting()
+    console.timeEnd('getting')
     if(getSettingData.authSetting['scope.userInfo']){
-      console.timeEnd()
       const userInfoData = await getUserInfo()
       const {encryptedData, iv, userInfo} = userInfoData
       this.globalData.userInfo = userInfo

@@ -1,2 +1,3 @@
-<!--components/button/button.wxml-->
-<text>components/button/button.wxml</text>
+<view class="z-button">
+  <slot></slot>
+</view>

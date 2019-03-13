@@ -1,2 +1,6 @@
-<!--pages/onscreen/generate/generate.wxml-->
-<text>pages/onscreen/generate/generate.wxml</text>
+<view class="camera-frame">
+  <camera class="camera-container"
+          style="transform-origin: `${originX}% ${originY}%`; transform: scale({{scale}}) translate(0,100px);">
+    <cover-image class="cover" src="../../../res/temp/module.png" bindload="coverLoad"></cover-image>
+  </camera>
+</view>

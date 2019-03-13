@@ -1,1 +1,3 @@
 /* 44,142,243,0.59 */
+.z-modal{ width: 100%; height: 100vh; position: fixed; top: 0; left: 0; z-index: 1000; background-color: rgba(0,0,0,0.1); display: flex; justify-content: center; align-items: center;}
+.z-modal .z-modal-container{ width: 84%; background-color: #ffffff; border-radius: 10rpx; box-shadow: 10rpx 10rpx 20rpx rgba(44,142,243,0.2);}

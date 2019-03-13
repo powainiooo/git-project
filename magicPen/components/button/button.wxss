@@ -1,1 +1,1 @@
-/* 74,219,250 0.25*/
+.z-button { height: 70rpx; background-color: rgb(44,142,243); box-shadow: 0 5rpx 20rpx rgba(44,142,243,0.25); border-radius: 10rpx; display: flex; justify-content: center; align-items: center; color: #ffffff; font-size: 32rpx;}

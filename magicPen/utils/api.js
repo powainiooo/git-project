@@ -1,9 +1,13 @@
-const ajaxUrl = 'https://xcx.newryun.com'
+const ajaxUrl = getApp().globalData.ajaxSrc
 const { $Message } = require('../components/iview/base/index')
 const ajax = (opts) => {
   return new Promise((resolve, reject) => {
     wx.showNavigationBarLoading()
+    const app = getApp()
     const extras = {
+      header: {
+        sKey: app.globalData.sKey
+      },
       success(res) {
         if(res.data.code === 0) {
           resolve(res.data)
@@ -40,5 +44,13 @@ export const getChoicenessWorks = data => {
   return ajax({
     url: `${ajaxUrl}/api/works/getChoicenessWorks`,
     data
+  })
+}
+
+//扫一扫,上传图纸作品编号
+export const uploadTuzhiNu = data => {
+  return ajax({
+    method: 'POST',
+    url: `${ajaxUrl}/api/works/uploadTuzhiNu?tuzhiNu=`+data
   })
 }

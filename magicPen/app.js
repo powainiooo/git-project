@@ -30,22 +30,25 @@ App({
     console.timeEnd('getting')
     if(getSettingData.authSetting['scope.userInfo']){
       const userInfoData = await getUserInfo()
-      const {encryptedData, iv, userInfo} = userInfoData
-      this.globalData.userInfo = userInfo
-      if (this.userInfoReadyCallback) {
-        this.userInfoReadyCallback(userInfoData)
-      }
+      const {encryptedData, iv} = userInfoData
+      console.time('login')
       const resData = await ajax({
         url: 'https://xcx.newryun.com/api/user/onLogin',
         method: 'POST',
         data:{code, encryptedData, iv}
       }).catch(e => console.log(e))
+      console.timeEnd('login')
+      this.globalData.userInfo = resData.data.data
       this.globalData.sKey = resData.data.data.sKey
+      if (this.userInfoReadyCallback) {
+        this.userInfoReadyCallback(userInfoData)
+      }
     }
   },
   globalData: {
     ajaxSrc: 'https://xcx.newryun.com',
     userInfo: null,
-    sKey: null
+    sKey: null,
+    locationData: null
   }
 })

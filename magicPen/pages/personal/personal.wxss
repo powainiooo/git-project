@@ -1,1 +1,15 @@
-/* pages/personal/personal.wxss */
+.personal-container .user { padding: 35rpx 80rpx; display: flex; align-items: center; border-bottom: 2rpx solid #f0f0f0;}
+.personal-container .user image { width: 150rpx; height: 150rpx; border-radius: 50%; margin-right: 60rpx;}
+.personal-container .user text { font-size: 32rpx; color: #151515;}
+
+.personal-container .accout { padding: 15rpx 0; display: flex;}
+.personal-container .accout view{ flex: 1; text-align: center; font-size: 32rpx; color: #151515; padding: 10rpx 0 20rpx 0;}
+.personal-container .accout view.fans { border-right: 2rpx solid #f0f0f0;}
+.personal-container .accout view.coin { background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEgAAABBCAMAAABFPBK9AAAA9lBMVEUAAAD/lgD/mQD/jAD/mwD/mAD/mwD/mgD/nwD/mQD/lwD/mgD/mAD/mQD/mAD/mQD/mgD/lwD/mgD/mQD/mQD/mgD/mQD/mQD/mgD/mQD/mQD/mgD/mQD/mQD/nQD/wwD/mQD/mQD/mAD/wAD/xAD/wAD/wwD/uQD/wQD/mgD/wgD/wQD/xAD/wwD/wwD/wgD/wwD/vwD/wgD/wgD/vgD/xQD/qQD/vwD/tQD/wwD/pgD/xQD/uQD/vgD/tgD/xAD/sgD/qgD/vwD/xAD/////4X//++//2l//yx//8sr/6J//0j//xw//99//7K//1k//zy//3W9c9I90AAAAQ3RSTlMAAgcECg0WIA8bExEmGSsuJB0oNTA3PkQzRzxNOUpB8FNPQNS/s5B2ZlHp3c/CsGAvH+XLpoFUvI9wZFBDQCifh2hXExC3wwAAA3tJREFUWMPt11lX2lAUBWAJSQjIPAQMCJWWySqD89whAWdt//+f6Tl34GpOMNf60ofuV5ff2vsk4HJNP87kC2Z8Olv7SGbfOr7M4Qecc2BUdqZ/YyQgE/91OpP3K5hLCShpmni/k0x2fCo5CX2KK0nj1I9IH374LscwbCxEK61zSd8x+35kzpOaEjoGOEMfc7d4CEGHSZR0HdP86WPmwW0YGhsoaTtDdqDrYHHjh7JrGDqV2H3Mq7HPneCXTyCTSfGFZhfDni92Le4jnr8ZX2na31G/cH8bLKAPydCKq+SMfZXnuyC4vfEjMrNM8y0oMZXv383v+d1jEDw++1HprVvWSigBcZarngLI0/VDpNO5zDh8G1VYkjvqOPP5tRhF07czotKKT+ihr5W9q5ydcSREHfyAamVQSkdDnDGMgZ6zX0ylc7CNQ9QxzV0tp3NRTJVytoKIY3X0hpWzKdhGoaVjaTm9Qj5bZEeSkCrEHcfROlAboVQUJJ31jIbztd0gjVQh4dif49+gowpA5EaqkGU5GTt3EOdsH7Uq1QIeO0chWci205O4XUderVLNl9l75ERAfFgundp709ltuq1aQ96aQgZC6JRSw7ecg3rbfbUsBLFlUAicYvZ49awfG3XXCxcKQbAMCoFTru2vuPLJ5ka9670otALihcr5QqMX1eakCQ4ME89eFCIQLmOF8oVqpTXYDpXpnTWZo4bJQhTCZbxQzXPrg+PPMgffz7a2hCMefagQgUqpbBkLue36ZnNr9ElkhIxwxIHS8ntWHxqNeJ1XDg4ThVZC+SqbtrHZbG5hmqAwprt08EA4zOQOhcSxG1CpCxJQiDAG68AbjU5ROOpCUY8fK0lJpo5t4IOBz106clg0JCvBOJDadZY2Kp4HThUc3JWOdBTEtpXEm1Rrea7bhbhcgTrCkX34E6PQshIbV4V1LY+l1YIygoH3RzmqEP0asfFKUqrxoAJMrKMgUQmlbB6pRgUCCCqMIU4kxCoJqYilCoUqpAAKMqIOPHfqkC9/IaVRAkoElZd1qEMrSanEKUyWKZyJdxBSkqR4uPKSIQ79S4uSonhKpSUj61CHSrwUUmDxoKIY4lAIJSyFFLQCC2MzBUZpMEpSFFo8UlEMOhoSH4gYjyUUxej90ykt1IQhFcXoUWiFkkRFMbqU5DCCIIouRrP2P/9S/gCBdVh1PdohXwAAAABJRU5ErkJggg==) no-repeat; background-size: 50rpx; background-position: 30% 85%;}
+
+.personal-container .hr { height: 18rpx; border-top: 1rpx solid #f0f0f0; border-bottom: 1rpx solid #f0f0f0; background-color: #eff2f9;}
+
+.personal-container .link-line { height: 100rpx; border-bottom: 3rpx solid #f0f0f0; display: flex; align-items: center; padding-left: 70rpx; position: relative;}
+.personal-container .link-line .arrow { position: absolute; top: 25rpx; right: 40rpx;}
+.personal-container .link-line image{ width: 70rpx; margin-right: 30rpx; margin-top: 15rpx;}
+.personal-container .link-line text{ font-size: 32rpx; color: #8b8e98;}

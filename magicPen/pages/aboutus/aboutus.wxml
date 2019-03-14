@@ -1,2 +1,4 @@
-<!--pages/aboutus/aboutus.wxml-->
-<text>pages/aboutus/aboutus.wxml</text>
+<view class="aboutus">
+  <image src="../../res/web/aboutus.jpg" mode="widthFix" class="aboutus-img"></image>
+  <view class="aboutus-btn">在线聊天</view>
+</view>

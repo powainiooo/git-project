@@ -1,9 +1,12 @@
 //index.js
 //获取应用实例
 const app = getApp()
-const {getSlideList, getChoicenessWorks} = require('../../utils/api.js')
+const {getSlideList, getNearbyMerchant, getChoicenessWorks} = require('../../utils/api.js')
 const useGuide = wx.getStorageSync('useGuide')
 console.log('useGuide:'+useGuide)
+import regeneratorRuntime from '../../utils/runtime.js'
+const {promisify} = require('../../utils/util.js')
+const getLocation = promisify(wx.getLocation)
 Page({
   data: {
     useGuide: typeof useGuide === 'string' ? false : true,
@@ -15,6 +18,7 @@ Page({
     worksList: [],
     isWorksLIstEnd: false,
     isLoadingList: false,
+    locationData: {},
     pageSize: 10,
     pageNo: 1
   },
@@ -32,6 +36,7 @@ Page({
           userInfo: res.userInfo,
           hasUserInfo: true
         })
+        this.getStore()
       }
     } else {
       // 在没有 open-type=getUserInfo 版本的兼容处理
@@ -60,6 +65,14 @@ Page({
     getSlideList().then(res => {
       const bannerList = res.data
       this.setData({bannerList})
+    })
+  },
+  async getStore() {
+    const {longitude, latitude} = await getLocation()
+    const res = await getNearbyMerchant(`${longitude},${latitude}`)
+    app.globalData.locationData = res.data
+    this.setData({
+      locationData: res.data
     })
   },
   getWorksData() {

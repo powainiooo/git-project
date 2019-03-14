@@ -1,11 +1,11 @@
 {
   "pages": [
-    "pages/onscreen/generate/generate",
     "pages/index/index",
     "pages/logs/logs",
     "pages/map/map",
     "pages/interaction/interaction",
     "pages/onscreen/list/list",
+    "pages/onscreen/generate/generate",
     "pages/medal/medal",
     "pages/personal/personal",
     "pages/coupon/coupon",
@@ -25,5 +25,10 @@
   "usingComponents": {
     "i-message": "../../components/iview/message/index",
     "i-icon": "../../components/iview/icon/index"
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序获取门店位置"
+    }
   }
 }

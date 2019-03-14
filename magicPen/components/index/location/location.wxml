@@ -1,2 +1,3 @@
-<!--components/index/location/location.wxml-->
-<text>components/index/location/location.wxml</text>
+<view class="location" wx:if="{{locationData.mchName}}" bindtap="openStore">
+  <text>{{locationData.mchName}}\n 距您{{locationData.minKM}}KM</text>
+</view>

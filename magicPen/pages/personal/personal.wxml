@@ -1,2 +1,26 @@
-<!--pages/personal/personal.wxml-->
-<text>pages/personal/personal.wxml</text>
+<view class="personal-container">
+  <view class="user">
+    <image src="{{avatarUrl}}" mode="widthFix"></image>
+    <text>{{nickName}}</text>
+  </view>
+  <view class="accout">
+    <view class="fans"><text>123 \n 粉丝</text></view>
+    <view class="coin"><text>123 \n 画豆</text></view>
+  </view>
+  <view class="hr"></view>
+  <view class="link-line" data-url="/pages/coupon/coupon" bindtap="linkTo">
+    <image src="../../res/personal/coupon.png" mode="widthFix"></image>
+    <text>优惠券</text>
+    <i-icon type="enter" class="arrow" size="22" color="#8b8e98" />
+  </view>
+  <view class="link-line" data-url="/pages/feedback/feedback" bindtap="linkTo">
+    <image src="../../res/personal/feedback.png" mode="widthFix"></image>
+    <text>建议反馈</text>
+    <i-icon type="enter" class="arrow" size="22" color="#8b8e98" />
+  </view>
+  <view class="link-line" data-url="/pages/aboutus/aboutus" bindtap="linkTo">
+    <image src="../../res/personal/aboutus.png" mode="widthFix"></image>
+    <text>关于我们</text>
+    <i-icon type="enter" class="arrow" size="22" color="#8b8e98" />
+  </view>
+</view>

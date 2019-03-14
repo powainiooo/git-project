@@ -5,14 +5,25 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    longitude: 0,
+    latitude: 0,
+    markers:[],
+    locationData: {}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    const locationData = getApp().globalData.locationData
+    const {longitude, latitude} = locationData
+    const markers = [{
+      iconPath: '../../res/index/icon-geo.png',
+      id: 0,
+      latitude,
+      longitude,
+    }]
+    this.setData({locationData, longitude, latitude, markers})
   },
 
   /**

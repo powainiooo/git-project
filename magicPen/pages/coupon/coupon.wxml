@@ -1,2 +1,4 @@
 <!--pages/coupon/coupon.wxml-->
 <text>pages/coupon/coupon.wxml</text>
+
+<i-message id="message" />

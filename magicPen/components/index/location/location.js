@@ -4,7 +4,10 @@ Component({
    * 组件的属性列表
    */
   properties: {
-
+    locationData: {
+      type: Object,
+      value: {}
+    }
   },
 
   /**
@@ -18,6 +21,10 @@ Component({
    * 组件的方法列表
    */
   methods: {
-
+    openStore(){
+      wx.navigateTo({
+        url: '/pages/map/map'
+      })
+    }
   }
 })

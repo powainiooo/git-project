@@ -47,10 +47,26 @@ export const getChoicenessWorks = data => {
   })
 }
 
-//扫一扫,上传图纸作品编号
-export const uploadTuzhiNu = data => {
+//获取我的优惠券列表
+export const getCouponList = data => {
+  return ajax({
+    url: `${ajaxUrl}/api/coupon/getCouponList`
+  })
+}
+
+//用户提交建议反馈
+export const userSuggest = data => {
   return ajax({
     method: 'POST',
-    url: `${ajaxUrl}/api/works/uploadTuzhiNu?tuzhiNu=`+data
+    url: `${ajaxUrl}/api/userInfo/userSuggest`,
+    data
+  })
+}
+
+//获取我附近的体验店
+export const getNearbyMerchant = data => {
+  return ajax({
+    method: 'POST',
+    url: `${ajaxUrl}/api/user/getNearbyMerchant?coord=${data}`
   })
 }

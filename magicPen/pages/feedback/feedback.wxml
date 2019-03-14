@@ -1,2 +1,6 @@
-<!--pages/feedback/feedback.wxml-->
-<text>pages/feedback/feedback.wxml</text>
+<textarea class="txt" bindinput="inputChange"></textarea>
+<view class="btns">
+  <z-button bindtap="doSubmit">提交</z-button>
+</view>
+
+<i-message id="message" />

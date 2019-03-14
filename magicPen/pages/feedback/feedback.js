@@ -1,11 +1,13 @@
 // pages/feedback/feedback.js
+const {userSuggest} = require('../../utils/api.js')
+const { $Message } = require('../../components/iview/base/index')
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    txt:''
   },
 
   /**
@@ -14,7 +16,26 @@ Page({
   onLoad: function (options) {
 
   },
-
+  inputChange(e) {
+    this.data.txt = e.detail.value
+  },
+  doSubmit() {
+    userSuggest({
+      content: this.data.txt
+    }).then(res => {
+      if(res.code === 0){
+        $Message({
+          content: '反馈成功！',
+          type: 'success'
+        });
+        setTimeout(() => {
+          wx.navigateTo({
+            url: '/pages/personal/personal'
+          })
+        },2000)
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

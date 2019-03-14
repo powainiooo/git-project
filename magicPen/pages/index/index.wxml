@@ -3,6 +3,9 @@
   <!--轮播图-->
   <banner listData="{{bannerList}}"></banner>
 
+  <!--定位-->
+  <location locationData="{{locationData}}"></location>
+
   <!--导航栏-->
   <view  style="z-index: {{guideStep === 1 ? 10 : 0}}; position: relative;">
     <nav-bar></nav-bar>

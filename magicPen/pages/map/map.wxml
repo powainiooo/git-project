@@ -6,3 +6,11 @@
     show-location
     style="width: 100%; height: 670rpx;"
 ></map>
+<view class="map-info">
+  <view class="name">{{locationData.mchName}}</view>
+  <view class="distance">
+    <text>距您{{locationData.minKM}}KM</text>
+    <image src="../../res/index/icon-geo.png" mode="widthFix"></image>
+  </view>
+</view>
+<view class="map-addr">{{locationData.location}}</view>

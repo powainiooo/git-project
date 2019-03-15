@@ -1,6 +1,16 @@
 <view class="camera-frame">
-  <camera class="camera-container"
-          style="transform-origin: `${originX}% ${originY}%`; transform: scale({{scale}}) translate(0,100px);">
-    <cover-image class="cover" src="../../../res/temp/module.png" bindload="coverLoad"></cover-image>
+  <camera class="camera-container" animation="{{cameraAni}}">
+    <cover-view class="cover" animation="{{coverAni}}">
+      <cover-image src="../../../res/web/module.png" bindload="coverLoad"></cover-image>
+    </cover-view>
   </camera>
 </view>
+<!--<camera-->
+    <!--device-position="back"-->
+    <!--flash="off"-->
+    <!--binderror="error"-->
+    <!--style="width: 100px; height: 110px;"-->
+<!--&gt;</camera>-->
+<!--<button type="primary" bindtap="takePhoto">拍照</button>-->
+<!--<view>预览</view>-->
+<!--<image mode="widthFix" src="{{src}}" bindload="coverLoad"></image>-->

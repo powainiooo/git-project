@@ -1,1 +1,5 @@
-/* pages/map/map.wxss */
+.map-info{ margin: 40rpx 40rpx 40rpx 100rpx; display: flex; justify-content: space-between; align-items: center;}
+.map-info .name{ font-size: 32rpx; color: #151515;}
+.map-info .distance{ font-size: 28rpx; color: #565656;}
+.map-info .distance image{ width: 20rpx; margin-left: 15rpx;}
+.map-addr{ font-size: 28rpx; color: #565656; margin-left: 100rpx;}

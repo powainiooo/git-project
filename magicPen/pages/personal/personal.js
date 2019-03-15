@@ -1,4 +1,5 @@
 // pages/personal/personal.js
+const {getUserIq} = require('../../utils/api.js')
 Page({
 
   /**
@@ -6,7 +7,9 @@ Page({
    */
   data: {
     avatarUrl: '',
-    nickName: ''
+    nickName: '',
+    userIq: 0,
+    userFans: 0
   },
 
   /**
@@ -17,6 +20,13 @@ Page({
     const avatarUrl = app.globalData.userInfo.avatarUrl
     const nickName = app.globalData.userInfo.nickName
     this.setData({avatarUrl, nickName})
+    this.getData()
+  },
+  getData() {
+    getUserIq().then(res => {
+      const {userIq, userFans} = res.data
+      this.setData({userIq, userFans})
+    })
   },
   linkTo(e) {
     const url = e.currentTarget.dataset.url

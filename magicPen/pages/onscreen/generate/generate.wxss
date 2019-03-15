@@ -1,3 +1,4 @@
 .camera-frame { width: 100%; height: 100vh; overflow: hidden;}
-.camera-container { width: 750rpx; height: 1333rpx;}
-.camera-container .cover{ width: 100%; height: 100%;}
+.camera-container { width: 233rpx; height: 233rpx; position: relative; top: 184rpx; left: 233rpx;}
+.camera-container .cover{ width: 750rpx; height: 1333rpx; position: fixed; top: 0; left: 0; opacity: 0.5;}
+.camera-container .cover cover-image{ width: 100%; height: 100%;}

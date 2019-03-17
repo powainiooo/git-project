@@ -1,4 +1,12 @@
-<!--pages/coupon/coupon.wxml-->
-<text>pages/coupon/coupon.wxml</text>
+<view class="coupon-container">
+    <view class="coupon-item">
+        <image src="" mode="widthFix" class="img"></image>
+        <image src="../../res/coupon/icon.png" mode="widthFix" class="icon"></image>
+    </view>
+    <view class="coupon-item coupon-item-free">
+        <image src="" mode="widthFix" class="img"></image>
+        <image src="../../res/coupon/icon2.png" mode="widthFix" class="icon"></image>
+    </view>
+</view>
 
 <i-message id="message" />

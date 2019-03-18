@@ -16,6 +16,7 @@ Page({
    */
   onLoad: function (options) {
     const app = getApp()
+    console.log(app.globalData)
     const avatarUrl = app.globalData.userInfo.avatarUrl
     const nickName = app.globalData.userInfo.nickName
     const userIq = app.globalData.userInfo.userIq

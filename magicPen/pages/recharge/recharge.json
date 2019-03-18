@@ -1,5 +1,8 @@
 {
   "usingComponents": {
-    "z-button": "../../components/button/button"
+    "z-button": "../../components/button/button",
+    "i-checkbox-group": "../../components/iview/checkbox-group/index",
+    "i-checkbox": "../../components/iview/checkbox/index",
+    "i-panel": "../../components/iview/panel/index"
   }
 }

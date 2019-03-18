@@ -20,6 +20,19 @@
             <z-button bindtap="doBuy">确认购买</z-button>
         </view>
     </view>
+  <i-panel title="">
+    <i-checkbox wx:for="{{couponUserVos}}"
+                wx:for-item="item"
+                wx:key="{{item.couponId}}"
+                data-id="{{item.couponId}}"
+                position="right"
+                color="#2c8df4"
+                value="{{item.msg}}"
+                disabled="{{false}}"
+                checked="{{couponId === item.couponId}}"
+                bindchange="handleAnimalChange">
+    </i-checkbox>
+  </i-panel>
 </view>
 
 <i-message id="message" />

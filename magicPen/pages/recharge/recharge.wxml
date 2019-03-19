@@ -10,11 +10,17 @@
             <view>画豆可用于游玩各种特色游戏</view>
         </view>
         <view class="list">
-            <image src="../../res/recharge/icon1.png" mode="widthFix" class="item"></image>
-            <image src="../../res/recharge/icon2.png" mode="widthFix" class="item"></image>
-            <image src="../../res/recharge/icon3.png" mode="widthFix" class="item"></image>
-            <image src="../../res/recharge/icon4.png" mode="widthFix" class="item"></image>
-            <image src="../../res/recharge/icon5.png" mode="widthFix" class="item"></image>
+            <view class="bean-item {{iqGoodsId === item.iqGoodsId ? 'bean-item-select' : ''}}"
+                  wx:for="{{iqGoodsVos}}"
+                  wx:for-item="item"
+                  wx:key="{{item.iqGoodsId}}"
+                  data-id="{{item.iqGoodsId}}"
+                  data-price="{{item.price}}"
+                  bindtap="selectIqGoods">
+              <view class="bean">{{item.ruleIq}}<text wx:if="{{item.addIq != 0}}">+{{item.addIq}}</text></view>
+              <image src="../../res/recharge/icon1.png"></image>
+              <view class="price">{{item.price}}元</view>
+            </view>
         </view>
         <view class="btn">
             <z-button bindtap="doBuy">确认购买</z-button>
@@ -28,9 +34,9 @@
                 position="right"
                 color="#2c8df4"
                 value="{{item.msg}}"
-                disabled="{{false}}"
+                disabled="{{item.fullMoney > iqPrice}}"
                 checked="{{couponId === item.couponId}}"
-                bindchange="handleAnimalChange">
+                bindchange="couponChange">
     </i-checkbox>
   </i-panel>
 </view>

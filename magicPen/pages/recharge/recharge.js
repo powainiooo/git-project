@@ -8,6 +8,7 @@ Page({
    */
   data: {
     iqGoodsId: '',
+    iqPrice: 0,
     iqGoodsVos: [],
     couponId: '',
     couponUserVos: []
@@ -27,10 +28,18 @@ Page({
       this.setData({couponUserVos, iqGoodsVos})
     })
   },
-  handleAnimalChange(e) {
+  couponChange(e) {
     console.log(e)
     const couponId = e.currentTarget.dataset.id
     this.setData({couponId})
+  },
+  selectIqGoods(e) {
+    console.log(e)
+    const {id, price} = e.currentTarget.dataset
+    this.setData({
+      iqGoodsId: id,
+      iqPrice: parseInt(price)
+    })
   },
   async doBuy() {
     const obj = {

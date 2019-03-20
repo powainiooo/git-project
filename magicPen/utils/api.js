@@ -94,3 +94,19 @@ export const payIqGoods = data => {
         data
     })
 }
+
+//获取作品列表
+export const getMyWorks = data => {
+    return ajax({
+        url: `${ajaxUrl}/api/works/getMyWorks`,
+        data
+    })
+}
+
+//获取我关注的好友
+export const getMyFriend = data => {
+    return ajax({
+        url: `${ajaxUrl}/api/userAtt/getMyFriend`,
+        data
+    })
+}

@@ -1,6 +1,6 @@
 {
   "pages": [
-    "pages/recharge/recharge",
+     "pages/works/list/list",
     "pages/index/index",
     "pages/coupon/coupon",
     "pages/logs/logs",
@@ -13,7 +13,7 @@
     "pages/drawing/drawing",
     "pages/aboutus/aboutus",
     "pages/feedback/feedback",
-    "pages/works/list/list",
+     "pages/recharge/recharge",
     "pages/works/detail/detail"
   ],
   "window": {

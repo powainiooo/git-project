@@ -1,3 +1,6 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+     "list-item": "../../../components/works/list-item/list-item",
+     "i-icon": "../../../components/iview/icon/index"
+  }
 }

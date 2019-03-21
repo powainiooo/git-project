@@ -5,7 +5,7 @@
     "pages/coupon/coupon",
     "pages/logs/logs",
     "pages/map/map",
-    "pages/interaction/interaction",
+     "pages/interaction/interaction",
     "pages/onscreen/list/list",
     "pages/onscreen/generate/generate",
     "pages/medal/medal",

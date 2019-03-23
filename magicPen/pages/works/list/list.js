@@ -24,8 +24,8 @@ Page({
     */
    onLoad: function (options) {
       setTimeout(()=>{
-         this.getWorkList()
-         this.getMyFriend()
+         // this.getWorkList()
+         // this.getMyFriend()
       },2000)
    },
    getWorkList() {
@@ -54,6 +54,21 @@ Page({
    async openFile() {
       const img = await chooseImage({
          count: 1
+      })
+      wx.uploadFile({
+         url: 'https://xcx.newryun.com/api/upload/fileUp', // 仅为示例，非真实的接口地址
+         filePath: img.tempFilePaths[0],
+         name: 'file',
+         formData: {
+            fileType: '2'
+         },
+         header: {
+            sKey: '1822043964'
+         },
+         success(res) {
+            const data = res.data
+            // do something
+         }
       })
       this.setData({
          topUrl: img.tempFilePaths[0]

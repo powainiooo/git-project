@@ -1,0 +1,15 @@
+<view class="modal-hint">
+   <view class="modal-hint-container">
+      <image src="{{step === medalData[type].steps ? medalData[type].srcDone : medalData[type].src}}" mode="widthFix" class="modal-hint-icon"></image>
+      <view class="modal-hint-text1">{{medalData[type].name}}</view>
+      <view class="modal-hint-text2">{{medalData[type].hint}}</view>
+      <view class="modal-hint-steps">
+         <view class="modal-hint-step-item {{step > item ? 'modal-hint-step-item-active' : ''}}"
+               wx:for="{{medalData[type].steps}}"
+               wx:for-item="item"
+               wx:key="{{item}}">{{item+1}}</view>
+      </view>
+      <view class="modal-hint-btn" wx:if="{{step === medalData[type].steps}}">领取勋章</view>
+      <view class="modal-hint-btn modal-hint-btn2" wx:else>完成度 {{step}}/{{medalData[type].steps}}</view>
+   </view>
+</view>

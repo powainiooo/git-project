@@ -3,19 +3,24 @@
       <image src="{{itemData.worksUrl}}" mode="scaleToFill" class="list-item-img"/>
    </view>
    <view class="list-item-right">
-      <view class="list-item-name">{{itemData.worksName || '--'}}</view>
-      <view class="list-item-like">
-         <image src="../../../res/index/icon-like.png" mode="scaleToFill" class="list-item-icon"/>
-         <text class="list-item-nums">{{itemData.zan}}</text>
+      <view class="list-item-line">
+         <view class="list-item-name">{{itemData.worksName || '--'}}</view>
+         <image src="../../../res/work/edit.png" mode="widthFix" class="list-item-edit"/>
       </view>
-      <view class="list-item-list">
-         <image class="avatars"
-                wx:for="{{itemData.userList}}"
-                wx:for-item="item"
-                wx:key="{{item.userId}}"
-                src="{{item.avatarUrl}}"
-                data-id="{{item.userId}}"></image>
-         <text>他们喜欢</text>
+      <view class="list-item-line" style="margin-top: 20rpx;">
+         <view class="list-item-like">
+            <image src="../../../res/index/icon-like.png" mode="scaleToFill" class="list-item-icon"/>
+            <text class="list-item-nums">{{itemData.zan}}</text>
+         </view>
+         <view class="list-item-list">
+            <image class="avatars"
+                   wx:for="{{itemData.userList}}"
+                   wx:for-item="item"
+                   wx:key="{{item.userId}}"
+                   src="{{item.avatarUrl}}"
+                   data-id="{{item.userId}}"></image>
+         </view>
       </view>
+      <view class="list-item-line2">他们喜欢</view>
    </view>
 </view>

@@ -2,3 +2,5 @@
 <text>pages/medal/medal.wxml</text>
 
 <modal-hint></modal-hint>
+
+<i-message id="message" />

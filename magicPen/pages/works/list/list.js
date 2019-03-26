@@ -8,7 +8,7 @@ Page({
     * 页面的初始数据
     */
    data: {
-      page: 'attention',
+      page: 'works',
       topUrl: '',
       nickName: '章剑',
       avatarUrl: 'https://wx.qlogo.cn/mmopen/vi_32/MvelplkvWEzHUQB7XFF9ljGmialZeKib3gOpfRickfkp5Nfwah7mfLHPTaic9kmvGu6SLmqlXhv5ia3FpRvHhf3picsQ/132',
@@ -24,8 +24,8 @@ Page({
     */
    onLoad: function (options) {
       setTimeout(()=>{
-         // this.getWorkList()
-         // this.getMyFriend()
+         this.getWorkList()
+         this.getMyFriend()
       },2000)
    },
    getWorkList() {

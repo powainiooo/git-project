@@ -1,0 +1,6 @@
+.loading-frame { display: flex; justify-content: center; margin: 10rpx 0;}
+.loading-frame .icon-load { animation: spin 1s linear infinite;}
+@keyframes spin {
+   0% { transform: rotateZ(0deg)}
+   100% { transform: rotateZ(360deg)}
+}

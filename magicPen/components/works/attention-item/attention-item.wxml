@@ -1,0 +1,11 @@
+<view class="attention-item">
+   <view class="attention-item-avatar">
+      <image src="{{itemData.avatarUrl}}" mode="widthFix" class="attention-item-avatar-img"></image>
+   </view>
+   <view class="attention-item-info">
+      <view class="attention-item-name">{{itemData.nick}}</view>
+      <view class="attention-item-fans">粉丝数 {{itemData.fans}} 人</view>
+   </view>
+   <view class="attention-item-btn" wx:if="{{isAttention}}" bindtap="delAttention">取消关注</view>
+   <view class="attention-item-btn attention-item-btn2" wx:if="{{!isAttention}}" bindtap="addAttention">关注</view>
+</view>

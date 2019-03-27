@@ -126,3 +126,59 @@ export const takeState = data => {
       data
    })
 }
+
+//获取用户个人空间信息
+export const getUserInterspaceInfo = data => {
+   return ajax({
+      url: `${ajaxUrl}/api/userInfo/getUserInterspaceInfo`,
+      data
+   })
+}
+
+//关注用户
+export const addAttention = data => {
+   return ajax({
+      method: 'POST',
+      url: `${ajaxUrl}/api/userAtt/addAttention?userId=${data}`
+   })
+}
+
+//取消关注用户
+export const cancelAttention = data => {
+   return ajax({
+      method: 'DELETE',
+      url: `${ajaxUrl}/api/userAtt/cancelAttention/${data}`
+   })
+}
+
+//文件上传
+export const fileUp = (filePath, fileType) => {
+   const app = getApp()
+   return new Promise((resolve, reject) => {
+      wx.uploadFile({
+         url: `${ajaxUrl}/api/upload/fileUp`,
+         formData: {
+            fileType: fileType
+         },
+         name: 'file',
+         filePath: filePath,
+         header: {
+            sKey: app.globalData.sKey
+         },
+         success(res) {
+            resolve(JSON.parse(res.data))
+         },
+         fail(err) {
+            reject(err)
+         }
+      })
+   })
+}
+
+//上传顶图
+export const uploadTopImg = data => {
+   return ajax({
+      method: 'POST',
+      url: `${ajaxUrl}/api/userInfo/uploadTopImg?topUrl=${data}`
+   })
+}

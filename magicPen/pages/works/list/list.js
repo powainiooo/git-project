@@ -1,16 +1,21 @@
 import regeneratorRuntime from '../../../utils/runtime.js'
 const {promisify} = require('../../../utils/util.js')
 const chooseImage = promisify(wx.chooseImage)
-const {getMyWorks, getMyFriend} = require('../../../utils/api.js')
+const {getMyWorks, getMyFriend, getUserInterspaceInfo, addAttention, cancelAttention, fileUp, uploadTopImg} = require('../../../utils/api.js')
 Page({
 
    /**
     * 页面的初始数据
     */
    data: {
+      isUser: true,
+      attentionThisUser: false,
+      userId: 0,
       page: 'works',
       topUrl: '',
-      nickName: '章剑',
+      nick: '章剑',
+      zanSum: 0,
+      fans: 0,
       avatarUrl: 'https://wx.qlogo.cn/mmopen/vi_32/MvelplkvWEzHUQB7XFF9ljGmialZeKib3gOpfRickfkp5Nfwah7mfLHPTaic9kmvGu6SLmqlXhv5ia3FpRvHhf3picsQ/132',
       worksList: [],
       attentionList: [],
@@ -23,16 +28,23 @@ Page({
     * 生命周期函数--监听页面加载
     */
    onLoad: function (options) {
+      this.data.userId = options.id || 0;
       setTimeout(()=>{
          this.getWorkList()
-         this.getMyFriend()
+         this.getPersonInfo()
+         if (this.data.userId === 0) {
+            this.getMyFriend()
+         }
       },2000)
+      this.setData({
+         isUser: this.data.userId === 0
+      })
    },
    getWorkList() {
       const obj = {
          startPage: this.data.pageNo,
          pageSize: this.data.pageSize,
-         userId: 0
+         userId: this.data.userId
       }
       getMyWorks(obj).then(res => {
          this.setData({
@@ -51,32 +63,42 @@ Page({
          })
       })
    },
+   getPersonInfo() {
+      getUserInterspaceInfo({userId: this.data.userId}).then(res => {
+         const {topUrl, nick, zanSum, fans, avatarUrl, isAttention} = res.data
+         this.setData({
+            topUrl: topUrl ? topUrl : '',
+            nick,
+            zanSum,
+            fans,
+            avatarUrl,
+            attentionThisUser: isAttention ? true : false
+         })
+      })
+   },
    async openFile() {
       const img = await chooseImage({
          count: 1
       })
-      wx.uploadFile({
-         url: 'https://xcx.newryun.com/api/upload/fileUp', // 仅为示例，非真实的接口地址
-         filePath: img.tempFilePaths[0],
-         name: 'file',
-         formData: {
-            fileType: '2'
-         },
-         header: {
-            sKey: '1822043964'
-         },
-         success(res) {
-            const data = res.data
-            // do something
-         }
-      })
-      this.setData({
-         topUrl: img.tempFilePaths[0]
-      })
-      console.log(img)
-   },
-   cancelAttention() {
+      const data = await fileUp(img.tempFilePaths[0], '2')
+      if(data.code === 0) {
+         this.setData({
+            topUrl: data.data
+         })
+         uploadTopImg(data.data).tehn(res => {
 
+         })
+      }
+   },
+   addAttention() {
+      addAttention({userId: this.data.userId}).then(res => {
+
+      })
+   },
+   changePage (e) {
+      this.setData({
+         page: e.currentTarget.dataset.page
+      })
    },
    /**
     * 生命周期函数--监听页面初次渲染完成
@@ -117,7 +139,7 @@ Page({
     * 页面上拉触底事件的处理函数
     */
    onReachBottom: function () {
-
+      console.log('123')
    },
 
    /**

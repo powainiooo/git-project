@@ -1,5 +1,9 @@
 // pages/ticket-buy/buy.js
 const app = getApp();
+const nameVal = wx.getStorageSync('nameVal')
+const phoneVal = wx.getStorageSync('phoneVal')
+const addressVal = wx.getStorageSync('addressVal')
+const idnum = wx.getStorageSync('idnum')
 Component({
   properties: {
     itemData: {
@@ -33,10 +37,10 @@ Component({
     numberIndex:0,
     idTypeArr:['身份证','护照'],
     idTypeIndex:-1,
-    nameVal:'',
-    phoneVal:'',
-    addressVal:'',
-    idnum:'',
+    nameVal:nameVal,
+    phoneVal:phoneVal,
+    addressVal:addressVal,
+    idnum:idnum,
     btnDisabled:false,
     typeList:[],
     selectTicket:{},
@@ -116,6 +120,23 @@ Component({
       if(self.data.btnDisabled){
         self.data.btnDisabled = false;
         wx.showNavigationBarLoading();
+
+         wx.setStorage({
+            key:'nameVal',
+            data: self.data.nameVal
+         })
+         wx.setStorage({
+            key:'phoneVal',
+            data: self.data.phoneVal
+         })
+         wx.setStorage({
+            key:'addressVal',
+            data: self.data.addressVal
+         })
+         wx.setStorage({
+            key:'idnum',
+            data: self.data.idnum
+         })
         wx.request({
           url: self.data.ajaxSrc+'/create_order', //仅为示例，并非真实的接口地址
           data: {

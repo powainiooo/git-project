@@ -54,6 +54,6 @@
    </attention-item>
 </view>
 
-<loading></loading>
+<loading wx:if="{{isLoading}}"></loading>
 
 <i-message id="message" />

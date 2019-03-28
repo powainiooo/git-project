@@ -1,7 +1,7 @@
 import regeneratorRuntime from '../../../utils/runtime.js'
 const {promisify} = require('../../../utils/util.js')
 const chooseImage = promisify(wx.chooseImage)
-const {getMyWorks, getMyFriend, getUserInterspaceInfo, addAttention, cancelAttention, fileUp, uploadTopImg} = require('../../../utils/api.js')
+const {getMyWorks, getMyFriend, getUserInterspaceInfo, addAttention, fileUp, uploadTopImg} = require('../../../utils/api.js')
 Page({
 
    /**
@@ -11,6 +11,7 @@ Page({
       isUser: true,
       attentionThisUser: false,
       userId: 0,
+      isLoading: false,
       page: 'works',
       topUrl: '',
       nick: '章剑',
@@ -41,25 +42,35 @@ Page({
       })
    },
    getWorkList() {
+      this.setData({
+         isLoading: true
+      })
       const obj = {
          startPage: this.data.pageNo,
          pageSize: this.data.pageSize,
          userId: this.data.userId
       }
       getMyWorks(obj).then(res => {
+         let list = res.data.pageData === null ? [] : res.data.pageData
          this.setData({
-            worksList: res.data.pageData
+            isLoading: false,
+            worksList: this.data.worksList.concat(list)
          })
       })
    },
    getMyFriend() {
+      this.setData({
+         isLoading: true
+      })
       const obj = {
          startPage: this.data.pageNoAttention,
          pageSize: this.data.pageSize
       }
       getMyFriend(obj).then(res => {
+         let list = res.data.pageData === null ? [] : res.data.pageData
          this.setData({
-            attentionList: res.data.pageData === null ? [] : res.data.pageData
+            isLoading: false,
+            attentionList: this.data.attentionList.concat(list)
          })
       })
    },
@@ -92,7 +103,9 @@ Page({
    },
    addAttention() {
       addAttention({userId: this.data.userId}).then(res => {
-
+         this.setData({
+            attentionThisUser: true
+         })
       })
    },
    changePage (e) {
@@ -139,7 +152,13 @@ Page({
     * 页面上拉触底事件的处理函数
     */
    onReachBottom: function () {
-      console.log('123')
+      if (this.data.page === 'works') {
+         this.data.pageNo ++
+         this.getWorkList()
+      } else if (this.data.page === 'attention') {
+         this.data.pageNoAttention ++
+         this.getMyFriend()
+      }
    },
 
    /**

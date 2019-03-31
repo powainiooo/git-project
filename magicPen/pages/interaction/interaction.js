@@ -5,20 +5,17 @@ Page({
     * 页面的初始数据
     */
    data: {
-      current: 1
+      currentKey: 'photo'
    },
-
+   swiperChange(e) {
+      const {currentKey} = e.detail
+      this.setData({currentKey})
+   },
    /**
     * 生命周期函数--监听页面加载
     */
    onLoad: function (options) {
 
-   },
-   swiperChange(e) {
-      const {current} = e.detail
-      this.setData({
-         current: current + 1
-      })
    },
    /**
     * 生命周期函数--监听页面初次渲染完成

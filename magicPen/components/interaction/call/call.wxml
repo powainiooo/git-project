@@ -1,0 +1,36 @@
+<view class="call-title">
+   <z-button>
+      <view class="dot"></view>
+      <text>华丽召唤</text>
+      <view class="dot"></view>
+   </z-button>
+</view>
+<view class="call-desc"><text>召唤今天场景中您的作品，表演华丽特级！</text></view>
+<view class="coin-line">
+   <view class="mine">
+      我的
+      <image src="../../../res/interaction/pea.png" mode="widthFix" class="icon-pea"></image>
+      20
+   </view>
+   <view class="photo-recharge">
+      <image src="../../../res/interaction/pea2.png" mode="widthFix" class="icon-pea"></image>
+      <text>立即充值</text>
+   </view>
+</view>
+<view class="coin-line call-works-title">
+   <text>可召唤的作品：</text>
+   <view class="cost">
+      消费
+      1
+      <image src="../../../res/interaction/pea.png" mode="widthFix" class="icon-pea"></image>
+   </view>
+</view>
+
+<view class="call-works-list">
+   <view wx:for="{{6}}" class="call-works-item">
+      <view class="picture">
+         <image src="../../../res/interaction/bg.png" mode="widthFix" class="picture-img"></image>
+      </view>
+      <view class="name">作品名</view>
+   </view>
+</view>

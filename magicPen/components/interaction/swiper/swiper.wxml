@@ -1,0 +1,13 @@
+<image src="../../../res/interaction/bg.png" mode="widthFix" class="swiper-bg"></image>
+<image src="../../../res/interaction/light.png" mode="widthFix" class="swiper-light"></image>
+<swiper class="swiper-frame" circular display-multiple-items="3" bindchange="swiperChange">
+   <swiper-item wx:for="{{list}}"
+                wx:for-item="item"
+                wx:key="{{item.key}}" style="overflow: visible;">
+      <view class="swiper-item">
+         <image class="icon {{currentKey === item.key ? 'current' : ''}}"
+                src="{{item.icon}}"
+                mode="widthFix"></image>
+      </view>
+   </swiper-item>
+</swiper>

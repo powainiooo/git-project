@@ -1,0 +1,37 @@
+<view class="call-title">
+   <z-button>
+      <view class="dot"></view>
+      <text>3 D 复 活</text>
+      <view class="dot"></view>
+   </z-button>
+</view>
+<view class="call-desc"><text>选择您的一个作品，在场景中3D复活！</text></view>
+<view class="coin-line">
+   <view class="mine">
+      我的
+      <image src="../../../res/interaction/pea.png" mode="widthFix" class="icon-pea"></image>
+      20
+   </view>
+   <view class="photo-recharge">
+      <image src="../../../res/interaction/pea2.png" mode="widthFix" class="icon-pea"></image>
+      <text>立即充值</text>
+   </view>
+</view>
+<view class="coin-line call-works-title">
+   <text>选择您想复活的作品：</text>
+   <view class="cost">
+      我的
+      1
+      <image src="../../../res/interaction/pea.png" mode="widthFix" class="icon-pea"></image>
+   </view>
+</view>
+
+<view class="call-works-list">
+   <view wx:for="{{6}}" class="call-works-item call-works-item-check">
+      <view class="picture">
+         <image src="../../../res/interaction/bg.png" mode="widthFix" class="picture-img"></image>
+      </view>
+      <view class="name">作品名</view>
+      <i-icon type="success_fill" class="check" color="#ff306a" size="20" />
+   </view>
+</view>

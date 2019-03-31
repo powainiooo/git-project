@@ -1,0 +1,3 @@
+<view class="loading-frame">
+   <i-icon type="refresh" size="20" i-class="icon-load" color="rgb(255,153,0)"></i-icon>
+</view>

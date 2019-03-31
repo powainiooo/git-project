@@ -1,16 +1,15 @@
-<view class="camera-frame">
-  <camera class="camera-container" animation="{{cameraAni}}">
-    <cover-view class="cover" animation="{{coverAni}}">
-      <cover-image src="../../../res/web/module.png" bindload="coverLoad"></cover-image>
-    </cover-view>
-  </camera>
+<view class="camera-frame" wx:if="{{showCamera}}">
+   <camera class="camera-container" animation="{{cameraAni}}">
+      <cover-view class="cover" animation="{{coverAni}}">
+         <cover-image src="../../../res/web/module.png"></cover-image>
+      </cover-view>
+   </camera>
 </view>
-<!--<camera-->
-    <!--device-position="back"-->
-    <!--flash="off"-->
-    <!--binderror="error"-->
-    <!--style="width: 100px; height: 110px;"-->
-<!--&gt;</camera>-->
-<!--<button type="primary" bindtap="takePhoto">拍照</button>-->
-<!--<view>预览</view>-->
-<!--<image mode="widthFix" src="{{src}}" bindload="coverLoad"></image>-->
+<view class="animation-frame">
+   <image src="../../../res/web/module.png"
+          animation="{{coverAni}}"
+          class="cover"
+          bindload="coverLoad"></image>
+</view>
+<image src="{{photos}}" mode="widthFix" wx:if="{{photosWidth !== 0}}"></image>
+<view>照片宽：{{photosWidth}}，照片高：{{photosHeight}}</view>

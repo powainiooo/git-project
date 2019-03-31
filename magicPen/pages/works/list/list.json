@@ -1,6 +1,8 @@
 {
   "usingComponents": {
      "list-item": "../../../components/works/list-item/list-item",
-     "i-icon": "../../../components/iview/icon/index"
+     "attention-item": "../../../components/works/attention-item/attention-item",
+     "i-icon": "../../../components/iview/icon/index",
+     "loading": "../../../components/loading/index"
   }
 }

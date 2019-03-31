@@ -1,72 +1,59 @@
-<image src="../../../res/work/camera.png"
-       wx:if="{{topUrl === ''}}"
-       class="btn"
-       mode="widthFix"
-       bindtap="openFile"></image>
-<!--<view class="upload-frame">-->
-   <!--<image src="{{topUrl}}"-->
-          <!--class="img"-->
-          <!--wx:if="{{topUrl !== ''}}"-->
-          <!--mode="aspectFill"-->
-          <!--bindtap="openFile"></image>-->
-   <!--<image src="../../../res/work/camera.png"-->
-          <!--wx:if="{{topUrl === ''}}"-->
-          <!--class="btn"-->
-          <!--mode="widthFix"-->
-          <!--bindtap="openFile"></image>-->
-<!--</view>-->
+<view class="upload-frame">
+   <image src="{{topUrl}}"
+          class="img"
+          wx:if="{{topUrl !== ''}}"
+          mode="aspectFill"
+          bindtap="openFile"></image>
+   <image src="../../../res/work/camera.png"
+          wx:if="{{topUrl === ''}}"
+          class="btn"
+          mode="widthFix"
+          bindtap="openFile"></image>
+</view>
 
-<!--<view class="person-info">-->
-   <!--<view class="avatar">-->
-      <!--<image src="{{avatarUrl}}" mode="scaleToFill"></image>-->
-   <!--</view>-->
-   <!--<view class="info">-->
-      <!--<view class="name">{{nickName}}</view>-->
-      <!--<view class="fans">粉丝数 123人</view>-->
-   <!--</view>-->
-   <!--<view class="zans">-->
-      <!--<view class="nums">-->
-         <!--<image src="../../../res/index/icon-like.png" mode="widthFix"></image> 53-->
-      <!--</view>-->
-      <!--<view class="title">总赞数</view>-->
-   <!--</view>-->
-   <!--<view class="medal">-->
-      <!--<image src="../../../res/medal/level1.png" mode="widthFix"></image>-->
-      <!--<i-icon type="enter" size="24" color="rgb(141,159,170)" />-->
-   <!--</view>-->
-<!--</view>-->
+<view class="person-info">
+   <view class="avatar">
+      <image src="{{avatarUrl}}" mode="scaleToFill"></image>
+   </view>
+   <view class="zans">
+      <image src="../../../res/index/icon-like.png" mode="widthFix"></image>
+      <view class="title">{{zanSum}}</view>
+   </view>
+   <view class="info">
+      <view class="name">{{nick}}</view>
+      <view class="fans">粉丝数 {{fans}}人</view>
+   </view>
+   <view class="medal">
+      <image src="../../../res/medal/level1-done.png" mode="widthFix"></image>
+      <view>勋章</view>
+      <i-icon type="enter" size="20" color="#c1c1c1" class="icon" />
+   </view>
+   <view class="attention"
+         bindtap="addAttention"
+         wx:if="{{!isUser && !attentionThisUser}}">+关注</view>
+</view>
 
-<!--<view class="tabs">-->
-   <!--<view class="{{page === 'works' ? 'active' : ''}}">我的作品</view>-->
-   <!--<view class="{{page === 'attention' ? 'active' : ''}}">关注的人</view>-->
-<!--</view>-->
+<view class="tabs">
+   <view class="{{page === 'works' ? 'active' : ''}}" data-page="works" bindtap="changePage">{{isUser ? '我的作品' : 'TA的作品'}}</view>
+   <view class="{{page === 'attention' ? 'active' : ''}}" wx:if="{{isUser}}" data-page="attention" bindtap="changePage">关注的人</view>
+</view>
 
-<!--<view class="works-list" wx:if="{{page === 'works'}}">-->
-   <!--<list-item wx:for="{{worksList}}"-->
-              <!--wx:for-item="item"-->
-              <!--wx:key="{{item.userId}}"-->
-              <!--itemData="{{item}}"></list-item>-->
-<!--</view>-->
+<view class="works-list" wx:if="{{page === 'works'}}">
+   <list-item wx:for="{{worksList}}"
+              wx:for-item="item"
+              wx:key="{{item.userId}}"
+              itemData="{{item}}"></list-item>
+</view>
 
-<!--<view class="attention-list" wx:if="{{page === 'attention'}}">-->
-   <!--<view class="person-info attention-item"-->
-         <!--wx:for="{{attentionList}}"-->
-         <!--wx:for-item="item"-->
-         <!--wx:for-index="index"-->
-         <!--wx:key="{{item.userId}}">-->
-      <!--<view class="avatar">-->
-         <!--<image src="{{item.avatarUrl}}" mode="scaleToFill"></image>-->
-      <!--</view>-->
-      <!--<view class="info">-->
-         <!--<view class="name">{{item.nick}}</view>-->
-         <!--<view class="fans">粉丝数 {{item.fans}}人</view>-->
-      <!--</view>-->
-      <!--<view class="btn"-->
-            <!--data-id="{{item.userId}}"-->
-            <!--data-index="{{index}}"-->
-            <!--bindtap="cancelAttention">取消关注</view>-->
-   <!--</view>-->
-<!--</view>-->
+<view class="attention-list" wx:if="{{page === 'attention'}}">
+   <attention-item class="attention-item"
+                   wx:for="{{attentionList}}"
+                   wx:for-item="item"
+                   wx:key="{{item.userId}}"
+                   itemData="{{item}}">
+   </attention-item>
+</view>
 
+<loading wx:if="{{isLoading}}"></loading>
 
 <i-message id="message" />

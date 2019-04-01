@@ -1,2 +1,33 @@
-<!--pages/onscreen/list/list.wxml-->
-<text>pages/onscreen/list/list.wxml</text>
+<image src="" mode="widthFix" class="bigImg"></image>
+<view class="info-line">
+   <view class="project">
+      <view class="name">123123</view>
+      <view class="price">
+         <image src="../../../res/interaction/camera.png" mode="widthFix" class="icon"></image>
+         <text>1</text>
+         <image src="../../../res/interaction/pea.png" mode="widthFix" class="pea"></image>
+         <image src="../../../res/interaction/video.png" mode="widthFix" class="icon"></image>
+         <text>1</text>
+         <image src="../../../res/interaction/pea.png" mode="widthFix" class="pea"></image>
+      </view>
+   </view>
+   <view class="likes">
+      <view class="list">
+         <image src="" class="users"></image>
+      </view>
+      <view class="nums">
+         <text>他们正在玩</text>
+         <text>204人使用</text>
+      </view>
+   </view>
+</view>
+<scroll-view scroll-x>
+   <view class="screen-list" style="width: {{280*6}}rpx">
+      <image src="../../../res/interaction/camera.png"></image>
+      <image src="../../../res/interaction/camera.png"></image>
+      <image src="../../../res/interaction/camera.png"></image>
+      <image src="../../../res/interaction/camera.png"></image>
+      <image src="../../../res/interaction/camera.png"></image>
+      <image src="../../../res/interaction/camera.png"></image>
+   </view>
+</scroll-view>

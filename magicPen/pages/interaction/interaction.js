@@ -1,23 +1,31 @@
 // pages/interaction/interaction.js
+const {getUserAsset} = require('../../utils/api.js')
 Page({
 
    /**
     * 页面的初始数据
     */
    data: {
-      current: 1
+      currentKey: 'photo',
+      myPeas: 0,
    },
-
+   swiperChange(e) {
+      const {currentKey} = e.detail
+      this.setData({currentKey})
+   },
    /**
     * 生命周期函数--监听页面加载
     */
    onLoad: function (options) {
-
+      setTimeout(()=>{
+         this.getUserAsset()
+      },2000)
    },
-   swiperChange(e) {
-      const {current} = e.detail
-      this.setData({
-         current: current + 1
+   getUserAsset () {
+      getUserAsset().then(res=>{
+         this.setData({
+            myPeas: res.data
+         })
       })
    },
    /**

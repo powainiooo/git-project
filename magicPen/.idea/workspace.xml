@@ -17,18 +17,63 @@
       <file leaf-file-name="app.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app.json">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="48">
               <caret line="2" column="30" lean-forward="false" selection-start-line="2" selection-start-column="30" selection-end-line="2" selection-end-column="30" />
+=======
+            <state relative-caret-position="203">
+              <caret line="7" column="24" lean-forward="false" selection-start-line="7" selection-start-column="24" selection-end-line="7" selection-end-column="24" />
+>>>>>>> 5c1a0f2e44a8067cef46a2e0b1c24bfaf09985ce
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="app.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app.js">
+      <file leaf-file-name="interaction.wxml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pages/interaction/interaction.wxml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="156">
-              <caret line="40" column="27" lean-forward="false" selection-start-line="40" selection-start-column="27" selection-end-line="40" selection-end-column="27" />
+            <state relative-caret-position="58">
+              <caret line="2" column="39" lean-forward="false" selection-start-line="2" selection-start-column="34" selection-end-line="2" selection-end-column="39" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="interaction.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pages/interaction/interaction.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="87">
+              <caret line="3" column="38" lean-forward="false" selection-start-line="3" selection-start-column="38" selection-end-line="3" selection-end-column="38" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="wind.wxml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/components/interaction/wind/wind.wxml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="58">
+              <caret line="2" column="18" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="wind.wxss" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/components/interaction/wind/wind.wxss">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="29">
+              <caret line="0" column="121" lean-forward="true" selection-start-line="0" selection-start-column="121" selection-end-line="0" selection-end-column="121" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="interaction.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/pages/interaction/interaction.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="203">
+              <caret line="7" column="24" lean-forward="false" selection-start-line="7" selection-start-column="24" selection-end-line="7" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -59,29 +104,13 @@
       <find>animationend</find>
       <find>getMyFriend</find>
       <find>cancelAttention</find>
+      <find>24</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/pages/coupon/coupon.js" />
-        <option value="$PROJECT_DIR$/pages/coupon/coupon.wxml" />
-        <option value="$PROJECT_DIR$/pages/feedback/feedback.json" />
-        <option value="$PROJECT_DIR$/pages/feedback/feedback.wxss" />
-        <option value="$PROJECT_DIR$/components/button/button.wxss" />
-        <option value="$PROJECT_DIR$/pages/feedback/feedback.wxml" />
-        <option value="$PROJECT_DIR$/pages/feedback/feedback.js" />
-        <option value="$PROJECT_DIR$/pages/aboutus/aboutus.wxss" />
-        <option value="$PROJECT_DIR$/pages/aboutus/aboutus.wxml" />
-        <option value="$PROJECT_DIR$/pages/index/index.wxml" />
-        <option value="$PROJECT_DIR$/components/index/location/location.wxss" />
-        <option value="$PROJECT_DIR$/components/index/location/location.wxml" />
-        <option value="$PROJECT_DIR$/components/index/location/location.js" />
-        <option value="$PROJECT_DIR$/pages/map/map.js" />
-        <option value="$PROJECT_DIR$/pages/map/map.wxml" />
-        <option value="$PROJECT_DIR$/pages/map/map.wxss" />
         <option value="$PROJECT_DIR$/pages/personal/personal.wxml" />
-        <option value="$PROJECT_DIR$/../.gitignore" />
         <option value="$PROJECT_DIR$/pages/personal/personal.js" />
         <option value="$PROJECT_DIR$/pages/index/index.js" />
         <option value="$PROJECT_DIR$/pages/recharge/recharge.json" />
@@ -89,9 +118,6 @@
         <option value="$PROJECT_DIR$/pages/recharge/recharge.wxml" />
         <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/pages/recharge/recharge.js" />
-        <option value="$PROJECT_DIR$/pages/interaction/interaction.wxml" />
-        <option value="$PROJECT_DIR$/pages/interaction/interaction.js" />
-        <option value="$PROJECT_DIR$/pages/interaction/interaction.wxss" />
         <option value="$PROJECT_DIR$/pages/medal/medal.json" />
         <option value="$PROJECT_DIR$/components/medal/modal-hint/modal-hint.wxss" />
         <option value="$PROJECT_DIR$/components/medal/modal-hint/modal-hint.wxml" />
@@ -101,7 +127,6 @@
         <option value="$PROJECT_DIR$/pages/onscreen/generate/generate.js" />
         <option value="$PROJECT_DIR$/pages/onscreen/generate/generate.wxml" />
         <option value="$PROJECT_DIR$/pages/onscreen/generate/generate.wxss" />
-        <option value="$PROJECT_DIR$/app.json" />
         <option value="$PROJECT_DIR$/components/works/list-item/list-item.wxml" />
         <option value="$PROJECT_DIR$/components/works/list-item/list-item.wxss" />
         <option value="$PROJECT_DIR$/pages/works/list/list.wxss" />
@@ -115,6 +140,27 @@
         <option value="$PROJECT_DIR$/components/loading/index.wxss" />
         <option value="$PROJECT_DIR$/pages/works/list/list.wxml" />
         <option value="$PROJECT_DIR$/pages/works/list/list.js" />
+        <option value="$PROJECT_DIR$/../xiaofu/.idea/workspace.xml" />
+        <option value="$PROJECT_DIR$/../.gitignore" />
+        <option value="$PROJECT_DIR$/app.json" />
+        <option value="$PROJECT_DIR$/pages/interaction/interaction.wxss" />
+        <option value="$PROJECT_DIR$/components/interaction/swiper/swiper.wxss" />
+        <option value="$PROJECT_DIR$/components/interaction/swiper/swiper.wxml" />
+        <option value="$PROJECT_DIR$/components/interaction/photo/photo.json" />
+        <option value="$PROJECT_DIR$/components/interaction/photo/photo.wxml" />
+        <option value="$PROJECT_DIR$/components/interaction/call/call.json" />
+        <option value="$PROJECT_DIR$/components/interaction/photo/photo.wxss" />
+        <option value="$PROJECT_DIR$/components/interaction/swiper/swiper.js" />
+        <option value="$PROJECT_DIR$/components/interaction/revive/revive.wxml" />
+        <option value="$PROJECT_DIR$/components/interaction/revive/revive.json" />
+        <option value="$PROJECT_DIR$/components/interaction/call/call.wxml" />
+        <option value="$PROJECT_DIR$/components/interaction/call/call.wxss" />
+        <option value="$PROJECT_DIR$/components/interaction/revive/revive.wxss" />
+        <option value="$PROJECT_DIR$/pages/interaction/interaction.wxml" />
+        <option value="$PROJECT_DIR$/components/interaction/wind/wind.wxml" />
+        <option value="$PROJECT_DIR$/components/interaction/wind/wind.wxss" />
+        <option value="$PROJECT_DIR$/pages/interaction/interaction.json" />
+        <option value="$PROJECT_DIR$/pages/interaction/interaction.js" />
       </list>
     </option>
   </component>
@@ -130,10 +176,17 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
+<<<<<<< HEAD
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="1912" />
     <option name="y" value="87" />
     <option name="width" value="1601" />
+=======
+  <component name="ProjectFrameBounds" extendedState="1">
+    <option name="x" value="309" />
+    <option name="y" value="55" />
+    <option name="width" value="1113" />
+>>>>>>> 5c1a0f2e44a8067cef46a2e0b1c24bfaf09985ce
     <option name="height" value="916" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
@@ -179,6 +232,10 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+<<<<<<< HEAD
+=======
+      <pane id="Scratches" />
+>>>>>>> 5c1a0f2e44a8067cef46a2e0b1c24bfaf09985ce
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -195,7 +252,42 @@
               <item name="magicPen" type="b2602c69:ProjectViewProjectNode" />
               <item name="magicPen" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="loading" type="462c0819:PsiDirectoryNode" />
+              <item name="interaction" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="magicPen" type="b2602c69:ProjectViewProjectNode" />
+              <item name="magicPen" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="interaction" type="462c0819:PsiDirectoryNode" />
+              <item name="call" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="magicPen" type="b2602c69:ProjectViewProjectNode" />
+              <item name="magicPen" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="interaction" type="462c0819:PsiDirectoryNode" />
+              <item name="photo" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="magicPen" type="b2602c69:ProjectViewProjectNode" />
+              <item name="magicPen" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="interaction" type="462c0819:PsiDirectoryNode" />
+              <item name="revive" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="magicPen" type="b2602c69:ProjectViewProjectNode" />
+              <item name="magicPen" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="interaction" type="462c0819:PsiDirectoryNode" />
+              <item name="swiper" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="magicPen" type="b2602c69:ProjectViewProjectNode" />
+              <item name="magicPen" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="interaction" type="462c0819:PsiDirectoryNode" />
+              <item name="wind" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="magicPen" type="b2602c69:ProjectViewProjectNode" />
@@ -206,7 +298,13 @@
               <item name="magicPen" type="b2602c69:ProjectViewProjectNode" />
               <item name="magicPen" type="462c0819:PsiDirectoryNode" />
               <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="index" type="462c0819:PsiDirectoryNode" />
+              <item name="interaction" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="magicPen" type="b2602c69:ProjectViewProjectNode" />
+              <item name="magicPen" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="personal" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="magicPen" type="b2602c69:ProjectViewProjectNode" />
@@ -230,6 +328,12 @@
               <item name="magicPen" type="b2602c69:ProjectViewProjectNode" />
               <item name="magicPen" type="462c0819:PsiDirectoryNode" />
               <item name="res" type="462c0819:PsiDirectoryNode" />
+              <item name="interaction" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="magicPen" type="b2602c69:ProjectViewProjectNode" />
+              <item name="magicPen" type="462c0819:PsiDirectoryNode" />
+              <item name="res" type="462c0819:PsiDirectoryNode" />
               <item name="medal" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -248,7 +352,10 @@
         </subPane>
       </pane>
       <pane id="Scope" />
+<<<<<<< HEAD
       <pane id="Scratches" />
+=======
+>>>>>>> 5c1a0f2e44a8067cef46a2e0b1c24bfaf09985ce
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -317,20 +424,29 @@
       <workItem from="1553570248008" duration="12627000" />
       <workItem from="1553646384309" duration="19356000" />
       <workItem from="1553733420188" duration="3986000" />
+<<<<<<< HEAD
       <workItem from="1553766354590" duration="36000" />
       <workItem from="1553819351645" duration="26000" />
       <workItem from="1554080072548" duration="122000" />
       <workItem from="1554097232474" duration="651000" />
+=======
+      <workItem from="1553999251168" duration="13858000" />
+>>>>>>> 5c1a0f2e44a8067cef46a2e0b1c24bfaf09985ce
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
     <option name="totallyTimeSpent" value="216003000" />
+=======
+    <option name="totallyTimeSpent" value="229026000" />
+>>>>>>> 5c1a0f2e44a8067cef46a2e0b1c24bfaf09985ce
   </component>
   <component name="ToolWindowManager">
-    <frame x="1912" y="71" width="1616" height="916" extended-state="6" />
+    <frame x="309" y="55" width="1113" height="916" extended-state="1" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18441065" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21209303" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -360,181 +476,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/pages/personal/personal.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="18" column="30" lean-forward="false" selection-start-line="18" selection-start-column="30" selection-end-line="18" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/iview/panel/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/iview/checkbox/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/recharge/recharge.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="5" column="39" lean-forward="false" selection-start-line="5" selection-start-column="39" selection-end-line="5" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/iview/cell/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/iview/cell-group/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/iview/checkbox/index.wxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/recharge/recharge.wxss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="12" column="81" lean-forward="false" selection-start-line="12" selection-start-column="81" selection-end-line="12" selection-end-column="81" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/recharge/recharge.wxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="438">
-          <caret line="35" column="35" lean-forward="false" selection-start-line="35" selection-start-column="35" selection-end-line="35" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/index/nav-bar/nav-bar.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-144">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/index/nav-bar/nav-bar.wxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/recharge/recharge.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="20" column="19" lean-forward="false" selection-start-line="20" selection-start-column="19" selection-end-line="20" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/index/guide/guide.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="48">
-          <caret line="2" column="22" lean-forward="true" selection-start-line="2" selection-start-column="22" selection-end-line="3" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/index/index.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="3" column="50" lean-forward="true" selection-start-line="3" selection-start-column="50" selection-end-line="4" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/interaction/interaction.wxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="17" column="42" lean-forward="false" selection-start-line="17" selection-start-column="42" selection-end-line="17" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/interaction/interaction.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="456">
-          <caret line="19" column="29" lean-forward="false" selection-start-line="19" selection-start-column="29" selection-end-line="19" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/interaction/interaction.wxss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="48">
-          <caret line="2" column="130" lean-forward="false" selection-start-line="2" selection-start-column="130" selection-end-line="2" selection-end-column="130" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/modal/modal.wxss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="2" column="28" lean-forward="false" selection-start-line="2" selection-start-column="28" selection-end-line="2" selection-end-column="141" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/medal/medal.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="48">
-          <caret line="2" column="16" lean-forward="false" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/button/button.wxss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="109" lean-forward="true" selection-start-line="0" selection-start-column="109" selection-end-line="0" selection-end-column="131" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/index/guide/guide.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="11" column="4" lean-forward="false" selection-start-line="11" selection-start-column="4" selection-end-line="14" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/medal/modal-hint/modal-hint.wxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="48">
-          <caret line="2" column="76" lean-forward="false" selection-start-line="2" selection-start-column="76" selection-end-line="2" selection-end-column="76" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/medal/modal-hint/modal-hint.wxss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="11" column="85" lean-forward="false" selection-start-line="11" selection-start-column="85" selection-end-line="11" selection-end-column="85" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/medal/modal-hint/modal-hint.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="528">
-          <caret line="22" column="49" lean-forward="false" selection-start-line="22" selection-start-column="49" selection-end-line="22" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/modal/modal.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pages/index/index.wxml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="588">
@@ -574,14 +515,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
           <caret line="6" column="91" lean-forward="false" selection-start-line="6" selection-start-column="91" selection-end-line="6" selection-end-column="91" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="48">
-          <caret line="2" column="30" lean-forward="false" selection-start-line="2" selection-start-column="30" selection-end-line="2" selection-end-column="30" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -656,13 +589,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pages/works/list/list.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="4" column="5" lean-forward="true" selection-start-line="4" selection-start-column="5" selection-end-line="4" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/components/loading/index.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="72">
@@ -705,10 +631,268 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/../xiaofu/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="674">
+          <caret line="800" column="10" lean-forward="false" selection-start-line="800" selection-start-column="10" selection-end-line="800" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../xf-platform/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="232">
+          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="232">
+          <caret line="8" column="5" lean-forward="false" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="40" column="27" lean-forward="false" selection-start-line="40" selection-start-column="27" selection-end-line="40" selection-end-column="27" />
+        <state relative-caret-position="290">
+          <caret line="26" column="40" lean-forward="true" selection-start-line="26" selection-start-column="40" selection-end-line="26" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="7" column="24" lean-forward="false" selection-start-line="7" selection-start-column="24" selection-end-line="7" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/interaction/interaction.wxss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/works/list/list.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="58">
+          <caret line="2" column="5" lean-forward="false" selection-start-line="2" selection-start-column="5" selection-end-line="2" selection-end-column="66" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/interaction/swiper/swiper.wxss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="232">
+          <caret line="8" column="52" lean-forward="false" selection-start-line="8" selection-start-column="52" selection-end-line="8" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/personal/personal.wxml">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="48">
+          <caret line="2" column="30" lean-forward="false" selection-start-line="2" selection-start-column="30" selection-end-line="2" selection-end-column="30" />
+=======
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+>>>>>>> 5c1a0f2e44a8067cef46a2e0b1c24bfaf09985ce
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/personal/personal.wxss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="7" column="56" lean-forward="false" selection-start-line="7" selection-start-column="56" selection-end-line="7" selection-end-column="1794" />
+          <folding>
+            <element signature="e#613#2356#1" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/index/guide/guide.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="145">
+          <caret line="5" column="4" lean-forward="false" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/interaction/photo/photo.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="87">
+          <caret line="3" column="5" lean-forward="false" selection-start-line="3" selection-start-column="5" selection-end-line="3" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/interaction/photo/photo.wxml">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="480">
+          <caret line="39" column="20" lean-forward="false" selection-start-line="39" selection-start-column="9" selection-end-line="39" selection-end-column="20" />
+=======
+        <state relative-caret-position="522">
+          <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="21" selection-end-column="7" />
+          <folding />
+>>>>>>> 5c1a0f2e44a8067cef46a2e0b1c24bfaf09985ce
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/interaction/photo/photo.wxss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="261">
+          <caret line="6" column="89" lean-forward="true" selection-start-line="6" selection-start-column="89" selection-end-line="7" selection-end-column="89" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/interaction/swiper/swiper.wxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="12" lean-forward="true" selection-start-line="0" selection-start-column="12" selection-end-line="0" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/index/list-item/list-item.wxss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="145">
+          <caret line="2" column="27" lean-forward="true" selection-start-line="2" selection-start-column="27" selection-end-line="2" selection-end-column="76" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/interaction/swiper/swiper.js">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="240">
+          <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+=======
+        <state relative-caret-position="406">
+          <caret line="23" column="13" lean-forward="false" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+          <folding />
+>>>>>>> 5c1a0f2e44a8067cef46a2e0b1c24bfaf09985ce
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/interaction/call/call.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="87">
+          <caret line="3" column="6" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="5" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/interaction/revive/revive.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="145">
+          <caret line="5" column="1" lean-forward="false" selection-start-line="5" selection-start-column="1" selection-end-line="5" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/interaction/revive/revive.wxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="32" column="13" lean-forward="true" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/interaction/call/call.wxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="558">
+          <caret line="35" column="7" lean-forward="true" selection-start-line="35" selection-start-column="7" selection-end-line="35" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/interaction/revive/revive.wxss">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="120">
+          <caret line="5" column="1" lean-forward="false" selection-start-line="5" selection-start-column="1" selection-end-line="5" selection-end-column="1" />
+=======
+        <state relative-caret-position="210">
+          <caret line="9" column="73" lean-forward="false" selection-start-line="9" selection-start-column="73" selection-end-line="9" selection-end-column="73" />
+          <folding />
+>>>>>>> 5c1a0f2e44a8067cef46a2e0b1c24bfaf09985ce
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/interaction/call/call.wxss">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="516">
+          <caret line="26" column="27" lean-forward="false" selection-start-line="26" selection-start-column="27" selection-end-line="26" selection-end-column="41" />
+=======
+        <state relative-caret-position="319">
+          <caret line="9" column="73" lean-forward="false" selection-start-line="9" selection-start-column="65" selection-end-line="9" selection-end-column="73" />
+          <folding />
+>>>>>>> 5c1a0f2e44a8067cef46a2e0b1c24bfaf09985ce
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/interaction/wind/wind.wxml">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="24">
+          <caret line="1" column="45" lean-forward="false" selection-start-line="1" selection-start-column="45" selection-end-line="1" selection-end-column="54" />
+=======
+        <state relative-caret-position="58">
+          <caret line="2" column="18" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="18" />
+          <folding />
+>>>>>>> 5c1a0f2e44a8067cef46a2e0b1c24bfaf09985ce
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/interaction/wind/wind.wxss">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="348">
+          <caret line="47" column="57" lean-forward="false" selection-start-line="47" selection-start-column="48" selection-end-line="47" selection-end-column="57" />
+=======
+        <state relative-caret-position="29">
+          <caret line="0" column="121" lean-forward="true" selection-start-line="0" selection-start-column="121" selection-end-line="0" selection-end-column="121" />
+          <folding />
+>>>>>>> 5c1a0f2e44a8067cef46a2e0b1c24bfaf09985ce
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/interaction/interaction.json">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="288">
+          <caret line="12" column="16" lean-forward="true" selection-start-line="12" selection-start-column="16" selection-end-line="12" selection-end-column="16" />
+=======
+        <state relative-caret-position="87">
+          <caret line="3" column="38" lean-forward="false" selection-start-line="3" selection-start-column="38" selection-end-line="3" selection-end-column="38" />
+          <folding />
+>>>>>>> 5c1a0f2e44a8067cef46a2e0b1c24bfaf09985ce
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/interaction/interaction.wxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="58">
+          <caret line="2" column="39" lean-forward="false" selection-start-line="2" selection-start-column="34" selection-end-line="2" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/interaction/interaction.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="7" column="24" lean-forward="false" selection-start-line="7" selection-start-column="24" selection-end-line="7" selection-end-column="24" />
           <folding />
         </state>
       </provider>

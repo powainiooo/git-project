@@ -1,20 +1,11 @@
-<swiper class="swiper-frame" circular display-multiple-items="3" bindchange="swiperChange">
-   <swiper-item>
-      <view class="content {{current === 0 ? 'current' : ''}}" style="background-color: #da570d">1</view>
-   </swiper-item>
-   <swiper-item>
-      <view class="content {{current === 1 ? 'current' : ''}}" style="background-color: #dddee1">2</view>
-   </swiper-item>
-   <swiper-item>
-      <view class="content {{current === 2 ? 'current' : ''}}" style="background-color: #2d8cf0">3</view>
-   </swiper-item>
-   <swiper-item>
-      <view class="content {{current === 3 ? 'current' : ''}}" style="background-color: #da570d">1</view>
-   </swiper-item>
-   <swiper-item>
-      <view class="content {{current === 4 ? 'current' : ''}}" style="background-color: #dddee1">2</view>
-   </swiper-item>
-   <swiper-item>
-      <view class="content {{current === 5 ? 'current' : ''}}" style="background-color: #2d8cf0">3</view>
-   </swiper-item>
-</swiper>
+<z-swiper bindchange="swiperChange"></z-swiper>
+
+<z-photo wx:if="{{currentKey === 'photo'}}" peas="{{myPeas}}"></z-photo>
+
+<z-revive wx:if="{{currentKey === 'revive'}}" peas="{{myPeas}}"></z-revive>
+
+<z-call wx:if="{{currentKey === 'call'}}" peas="{{myPeas}}"></z-call>
+
+<z-wind wx:if="{{currentKey === 'wind'}}"></z-wind>
+
+<i-message id="message" />

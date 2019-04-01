@@ -1,1 +1,14 @@
-/* pages/onscreen/list/list.wxss */
+.bigImg { width: 100%; height: 800rpx;}
+.info-line { height: 150rpx; display: flex; justify-content: space-between; align-items: center; padding: 0 40rpx;}
+.info-line .project .name { font-size: 32rpx; line-height: 32rpx; color: #1c1c1c; margin-bottom: 20rpx;}
+.info-line .project .price { display: flex; align-items: center; font-size: 24rpx; color: #ff306a;}
+.info-line .project image { width: 50rpx; margin-right: 20rpx;}
+.info-line .project .pea { margin-top: 15rpx;}
+.info-line .project text { margin-right: 20rpx;}
+.info-line .likes { width: 260rpx;}
+.info-line .likes .list { width: 190rpx; display: flex; justify-content: space-between; margin-bottom: 20rpx;}
+.info-line .likes .list .users { width: 40rpx; height: 40rpx; border-radius: 50%;}
+.info-line .likes .nums { font-size: 22rpx; color: #8a9294; display: flex; justify-content: space-between;}
+
+.screen-list { padding: 10rpx; display: flex; background-color: #f0f3fb;}
+.screen-list image { width: 260rpx; height: 240rpx; border-radius: 15rpx; margin: 0 10rpx;}

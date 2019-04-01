@@ -1,3 +1,9 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+     "z-swiper": "../../../components/interaction/swiper/swiper",
+     "z-photo": "../../../components/interaction/photo/photo",
+     "z-revive": "../../../components/interaction/revive/revive",
+     "z-call": "../../../components/interaction/call/call",
+     "z-wind": "../../../components/interaction/wind/wind"
+  }
 }

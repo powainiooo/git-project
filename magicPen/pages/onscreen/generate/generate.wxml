@@ -1,15 +1,27 @@
-<view class="camera-frame" wx:if="{{showCamera}}">
-   <camera class="camera-container" animation="{{cameraAni}}">
-      <cover-view class="cover" animation="{{coverAni}}">
-         <cover-image src="../../../res/web/module.png"></cover-image>
-      </cover-view>
-   </camera>
+<view class="generate-frame">
+   <view class="camera-frame" wx:if="{{showCamera}}">
+      <camera class="camera-container" animation="{{cameraAni}}">
+         <cover-view class="cover" animation="{{coverAni}}">
+            <cover-image src="../../../res/web/module.png"></cover-image>
+         </cover-view>
+      </camera>
+   </view>
 </view>
+
 <view class="animation-frame">
    <image src="../../../res/web/module.png"
           animation="{{coverAni}}"
           class="cover"
           bindload="coverLoad"></image>
 </view>
-<image src="{{photos}}" mode="widthFix" wx:if="{{photosWidth !== 0}}"></image>
-<view>照片宽：{{photosWidth}}，照片高：{{photosHeight}}</view>
+
+<view class="btns-frame">
+   <view class="btn">
+      <image src="../../../res/interaction/camera.png" mode="widthFix"></image>
+      <text>拍照</text>
+   </view>
+   <view class="btn">
+      <image src="../../../res/interaction/video.png" mode="widthFix"></image>
+      <text>录像</text>
+   </view>
+</view>

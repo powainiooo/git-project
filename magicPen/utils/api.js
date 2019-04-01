@@ -71,11 +71,11 @@ export const getNearbyMerchant = data => {
    })
 }
 
-//获取我的币余额、粉丝数
-export const getUserIq = data => {
+//获取我的币余额
+export const getUserAsset = data => {
    return ajax({
       method: 'POST',
-      url: `${ajaxUrl}/api/user/getUserIq`
+      url: `${ajaxUrl}/api/user/getUserAsset`
    })
 }
 

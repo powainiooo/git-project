@@ -10,7 +10,7 @@
    <view class="mine">
       我的
       <image src="../../../res/interaction/pea.png" mode="widthFix" class="icon-pea"></image>
-      20
+      {{peas}}
    </view>
    <view class="photo-recharge">
       <image src="../../../res/interaction/pea2.png" mode="widthFix" class="icon-pea"></image>
@@ -21,16 +21,38 @@
    <text>可召唤的作品：</text>
    <view class="cost">
       消费
-      1
+      {{cost}}
       <image src="../../../res/interaction/pea.png" mode="widthFix" class="icon-pea"></image>
    </view>
 </view>
 
 <view class="call-works-list">
-   <view wx:for="{{6}}" class="call-works-item">
+   <view wx:for="{{listData}}"
+         wx:for-item="item"
+         wx:for-index="index"
+         data-index="{{index}}"
+         wx:key="{{item.tuzhiNu}}"
+         class="call-works-item {{index === tuzhiNu ? 'call-works-item-check' : ''}}"
+         bindtap="selectWorks">
       <view class="picture">
-         <image src="../../../res/interaction/bg.png" mode="widthFix" class="picture-img"></image>
+         <image src="{{item.worksUrl}}" mode="widthFix" class="picture-img"></image>
       </view>
-      <view class="name">作品名</view>
+      <view class="name">{{item.worksName}}</view>
    </view>
 </view>
+
+<z-modal wx:if="showModal">
+   <view class="modal-content" wx:if="{{modalContent === 'select'}}">
+      <view class="txt1">请选择一个复活的作品</view>
+      <view class="btn"><z-button>确定</z-button></view>
+   </view>
+   <view class="modal-content" wx:if="{{modalContent === 'cost'}}">
+      <view class="txt1">是否消耗{{cost}}豆完成复活？</view>
+      <view class="btn">
+         <z-button>
+            <text>确定</text>
+            <image src="../../../res/interaction/pea.png" mode="widthFix" class="pea"></image>
+         </z-button>
+      </view>
+   </view>
+</z-modal>

@@ -1,9 +1,11 @@
 <z-swiper bindchange="swiperChange"></z-swiper>
 
-<z-photo wx:if="{{currentKey === 'photo'}}"></z-photo>
+<z-photo wx:if="{{currentKey === 'photo'}}" peas="{{myPeas}}"></z-photo>
 
-<z-revive wx:if="{{currentKey === 'revive'}}"></z-revive>
+<z-revive wx:if="{{currentKey === 'revive'}}" peas="{{myPeas}}" cost="{{fuhuoIq}}"></z-revive>
 
-<z-call wx:if="{{currentKey === 'call'}}"></z-call>
+<z-call wx:if="{{currentKey === 'call'}}" peas="{{myPeas}}" cost="{{zhaohuanIq}}" listData="{{callListData}}"></z-call>
 
 <z-wind wx:if="{{currentKey === 'wind'}}"></z-wind>
+
+<i-message id="message" />

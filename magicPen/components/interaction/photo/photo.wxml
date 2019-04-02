@@ -8,7 +8,7 @@
    <view class="mine">
       我的
       <image src="../../../res/interaction/pea.png" mode="widthFix" class="icon-pea"></image>
-      20
+      {{peas}}
    </view>
 </view>
 

@@ -4,7 +4,14 @@ Component({
    * 组件的属性列表
    */
   properties: {
-
+     peas: {
+        type: Number,
+        value: 0
+     },
+     cost: {
+        type: Number,
+        value: 0
+     }
   },
 
   /**

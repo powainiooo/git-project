@@ -20,3 +20,7 @@
 .call-works-item .name { height: 40rpx; color: #a1aaac; font-size: 22rpx; display: flex; justify-content: center; align-items: center; position: relative;}
 .call-works-item .name::before { content: ''; height: 2rpx; position: absolute; left: 30rpx; right: 30rpx; top: 0; background-color: #f4f4f4; }
 .call-works-item .check { position: absolute; bottom: 0rpx; right: 5rpx;}
+
+.modal-content .txt1 { font-size: 32rpx; color: #30aac2; text-align: center; padding: 60rpx 50rpx;}
+.modal-content .btn { width: 240rpx; margin: 0 auto 50rpx auto;}
+.modal-content .btn .pea{ width: 50rpx; margin-top: 20rpx; margin-left: 15rpx;}

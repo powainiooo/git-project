@@ -17,8 +17,13 @@
       <file leaf-file-name="app.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app.json">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+            <state relative-caret-position="48">
+              <caret line="2" column="30" lean-forward="false" selection-start-line="2" selection-start-column="30" selection-end-line="2" selection-end-column="30" />
+=======
             <state relative-caret-position="203">
               <caret line="7" column="24" lean-forward="false" selection-start-line="7" selection-start-column="24" selection-end-line="7" selection-end-column="24" />
+>>>>>>> 5c1a0f2e44a8067cef46a2e0b1c24bfaf09985ce
               <folding />
             </state>
           </provider>
@@ -171,10 +176,21 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
+<<<<<<< HEAD
   <component name="ProjectFrameBounds">
+=======
+<<<<<<< HEAD
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="1912" />
+    <option name="y" value="87" />
+    <option name="width" value="1601" />
+=======
+  <component name="ProjectFrameBounds" extendedState="1">
+>>>>>>> 01faa479001a2a9a0abffb491d80e9ad4873ae4b
     <option name="x" value="309" />
     <option name="y" value="55" />
     <option name="width" value="1113" />
+>>>>>>> 5c1a0f2e44a8067cef46a2e0b1c24bfaf09985ce
     <option name="height" value="916" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
@@ -220,8 +236,14 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+<<<<<<< HEAD
       <pane id="Scope" />
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> 01faa479001a2a9a0abffb491d80e9ad4873ae4b
       <pane id="Scratches" />
+>>>>>>> 5c1a0f2e44a8067cef46a2e0b1c24bfaf09985ce
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -337,6 +359,14 @@
           <select />
         </subPane>
       </pane>
+<<<<<<< HEAD
+=======
+      <pane id="Scope" />
+<<<<<<< HEAD
+      <pane id="Scratches" />
+=======
+>>>>>>> 5c1a0f2e44a8067cef46a2e0b1c24bfaf09985ce
+>>>>>>> 01faa479001a2a9a0abffb491d80e9ad4873ae4b
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -405,14 +435,32 @@
       <workItem from="1553570248008" duration="12627000" />
       <workItem from="1553646384309" duration="19356000" />
       <workItem from="1553733420188" duration="3986000" />
+<<<<<<< HEAD
+      <workItem from="1553766354590" duration="36000" />
+      <workItem from="1553819351645" duration="26000" />
+      <workItem from="1554080072548" duration="122000" />
+      <workItem from="1554097232474" duration="651000" />
+=======
       <workItem from="1553999251168" duration="13858000" />
+<<<<<<< HEAD
       <workItem from="1554040993934" duration="67000" />
       <workItem from="1554208768815" duration="13000" />
+=======
+>>>>>>> 5c1a0f2e44a8067cef46a2e0b1c24bfaf09985ce
+>>>>>>> 01faa479001a2a9a0abffb491d80e9ad4873ae4b
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
     <option name="totallyTimeSpent" value="229106000" />
+=======
+<<<<<<< HEAD
+    <option name="totallyTimeSpent" value="216003000" />
+=======
+    <option name="totallyTimeSpent" value="229026000" />
+>>>>>>> 5c1a0f2e44a8067cef46a2e0b1c24bfaf09985ce
+>>>>>>> 01faa479001a2a9a0abffb491d80e9ad4873ae4b
   </component>
   <component name="ToolWindowManager">
     <frame x="309" y="55" width="1113" height="916" extended-state="0" />
@@ -421,12 +469,17 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+<<<<<<< HEAD
       <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4433121" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+=======
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4433121" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+>>>>>>> 01faa479001a2a9a0abffb491d80e9ad4873ae4b
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -661,8 +714,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pages/personal/personal.wxml">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="48">
+          <caret line="2" column="30" lean-forward="false" selection-start-line="2" selection-start-column="30" selection-end-line="2" selection-end-column="30" />
+=======
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+<<<<<<< HEAD
+=======
+>>>>>>> 5c1a0f2e44a8067cef46a2e0b1c24bfaf09985ce
+          <folding />
+>>>>>>> 01faa479001a2a9a0abffb491d80e9ad4873ae4b
         </state>
       </provider>
     </entry>
@@ -689,8 +751,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/components/interaction/photo/photo.wxml">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="480">
+          <caret line="39" column="20" lean-forward="false" selection-start-line="39" selection-start-column="9" selection-end-line="39" selection-end-column="20" />
+=======
         <state relative-caret-position="522">
           <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="21" selection-end-column="7" />
+<<<<<<< HEAD
+=======
+          <folding />
+>>>>>>> 5c1a0f2e44a8067cef46a2e0b1c24bfaf09985ce
+>>>>>>> 01faa479001a2a9a0abffb491d80e9ad4873ae4b
         </state>
       </provider>
     </entry>
@@ -717,9 +788,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/components/interaction/swiper/swiper.js">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="240">
+          <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+=======
         <state relative-caret-position="406">
           <caret line="23" column="13" lean-forward="false" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
           <folding />
+>>>>>>> 5c1a0f2e44a8067cef46a2e0b1c24bfaf09985ce
         </state>
       </provider>
     </entry>
@@ -753,39 +829,77 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/components/interaction/revive/revive.wxss">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="120">
+          <caret line="5" column="1" lean-forward="false" selection-start-line="5" selection-start-column="1" selection-end-line="5" selection-end-column="1" />
+=======
         <state relative-caret-position="210">
           <caret line="9" column="73" lean-forward="false" selection-start-line="9" selection-start-column="73" selection-end-line="9" selection-end-column="73" />
+<<<<<<< HEAD
+=======
+          <folding />
+>>>>>>> 5c1a0f2e44a8067cef46a2e0b1c24bfaf09985ce
+>>>>>>> 01faa479001a2a9a0abffb491d80e9ad4873ae4b
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/components/interaction/call/call.wxss">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="516">
+          <caret line="26" column="27" lean-forward="false" selection-start-line="26" selection-start-column="27" selection-end-line="26" selection-end-column="41" />
+=======
         <state relative-caret-position="319">
           <caret line="9" column="73" lean-forward="false" selection-start-line="9" selection-start-column="65" selection-end-line="9" selection-end-column="73" />
+<<<<<<< HEAD
+=======
+          <folding />
+>>>>>>> 5c1a0f2e44a8067cef46a2e0b1c24bfaf09985ce
+>>>>>>> 01faa479001a2a9a0abffb491d80e9ad4873ae4b
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/components/interaction/wind/wind.wxml">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="24">
+          <caret line="1" column="45" lean-forward="false" selection-start-line="1" selection-start-column="45" selection-end-line="1" selection-end-column="54" />
+=======
         <state relative-caret-position="58">
           <caret line="2" column="18" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="18" />
           <folding />
+>>>>>>> 5c1a0f2e44a8067cef46a2e0b1c24bfaf09985ce
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/components/interaction/wind/wind.wxss">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="0">
           <caret line="0" column="121" lean-forward="false" selection-start-line="0" selection-start-column="121" selection-end-line="0" selection-end-column="121" />
+=======
+<<<<<<< HEAD
+        <state relative-caret-position="348">
+          <caret line="47" column="57" lean-forward="false" selection-start-line="47" selection-start-column="48" selection-end-line="47" selection-end-column="57" />
+=======
+        <state relative-caret-position="29">
+          <caret line="0" column="121" lean-forward="true" selection-start-line="0" selection-start-column="121" selection-end-line="0" selection-end-column="121" />
+>>>>>>> 01faa479001a2a9a0abffb491d80e9ad4873ae4b
           <folding />
+>>>>>>> 5c1a0f2e44a8067cef46a2e0b1c24bfaf09985ce
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pages/interaction/interaction.json">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="288">
+          <caret line="12" column="16" lean-forward="true" selection-start-line="12" selection-start-column="16" selection-end-line="12" selection-end-column="16" />
+=======
         <state relative-caret-position="87">
           <caret line="3" column="38" lean-forward="false" selection-start-line="3" selection-start-column="38" selection-end-line="3" selection-end-column="38" />
           <folding />
+>>>>>>> 5c1a0f2e44a8067cef46a2e0b1c24bfaf09985ce
         </state>
       </provider>
     </entry>

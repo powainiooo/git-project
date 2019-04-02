@@ -21,7 +21,7 @@
    <text>可召唤的作品：</text>
    <view class="cost">
       消费
-      1
+      {{cost}}
       <image src="../../../res/interaction/pea.png" mode="widthFix" class="icon-pea"></image>
    </view>
 </view>

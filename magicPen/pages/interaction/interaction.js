@@ -1,5 +1,5 @@
 // pages/interaction/interaction.js
-const {getUserAsset} = require('../../utils/api.js')
+const {getUserAsset, getFuhuoIqAndZhaohuanIq} = require('../../utils/api.js')
 Page({
 
    /**
@@ -8,6 +8,8 @@ Page({
    data: {
       currentKey: 'photo',
       myPeas: 0,
+      fuhuoIq: 0,
+      zhaohuanIq: 0,
    },
    swiperChange(e) {
       const {currentKey} = e.detail
@@ -19,6 +21,7 @@ Page({
    onLoad: function (options) {
       setTimeout(()=>{
          this.getUserAsset()
+         this.getFuhuoIqAndZhaohuanIq()
       },2000)
    },
    getUserAsset () {
@@ -26,6 +29,12 @@ Page({
          this.setData({
             myPeas: res.data
          })
+      })
+   },
+   getFuhuoIqAndZhaohuanIq() {
+      getFuhuoIqAndZhaohuanIq().then(res => {
+         const {fuhuoIq, zhaohuanIq} = res.data
+         this.setData({fuhuoIq, zhaohuanIq})
       })
    },
    /**

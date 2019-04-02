@@ -2,9 +2,9 @@
 
 <z-photo wx:if="{{currentKey === 'photo'}}" peas="{{myPeas}}"></z-photo>
 
-<z-revive wx:if="{{currentKey === 'revive'}}" peas="{{myPeas}}"></z-revive>
+<z-revive wx:if="{{currentKey === 'revive'}}" peas="{{myPeas}}" cost="{{fuhuoIq}}"></z-revive>
 
-<z-call wx:if="{{currentKey === 'call'}}" peas="{{myPeas}}"></z-call>
+<z-call wx:if="{{currentKey === 'call'}}" peas="{{myPeas}}" cost="{{zhaohuanIq}}"></z-call>
 
 <z-wind wx:if="{{currentKey === 'wind'}}"></z-wind>
 

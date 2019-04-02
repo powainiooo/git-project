@@ -182,3 +182,40 @@ export const uploadTopImg = data => {
       url: `${ajaxUrl}/api/userInfo/uploadTopImg?topUrl=${data}`
    })
 }
+
+//获取复活、召唤的币价格
+export const getFuhuoIqAndZhaohuanIq = data => {
+   return ajax({
+      url: `${ajaxUrl}/api/index/getFuhuoIqAndZhaohuanIq`
+   })
+}
+
+//获取自拍模板列表
+export const getPsdList = data => {
+   return ajax({
+      url: `${ajaxUrl}/api/psd/getPsdList?coord=${data}`
+   })
+}
+
+//验证模板是否可以购买
+export const checkPsd = data => {
+   return ajax({
+      url: `${ajaxUrl}/api/psd/checkPsd`
+   })
+}
+
+//确认购买自拍模板
+export const payPsdGoods = data => {
+   return ajax({
+      method: 'POST',
+      url: `${ajaxUrl}/api/psd/payPsdGoods`
+   })
+}
+
+//自拍上屏，付款成功后上屏的操作
+export const psdUpTv = data => {
+   return ajax({
+      method: 'POST',
+      url: `${ajaxUrl}/api/psd/psdUpTv`
+   })
+}

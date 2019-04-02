@@ -7,6 +7,10 @@ Component({
      peas: {
         type: Number,
         value: 0
+     },
+     cost: {
+        type: Number,
+        value: 0
      }
   },
 

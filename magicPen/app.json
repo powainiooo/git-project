@@ -1,14 +1,14 @@
 {
    "pages": [
-      "pages/interaction/interaction",
+      "pages/onscreen/generate/generate",
+      "pages/onscreen/list/list",
       "pages/works/list/list",
+      "pages/interaction/interaction",
       "pages/medal/medal",
       "pages/index/index",
       "pages/coupon/coupon",
       "pages/logs/logs",
       "pages/map/map",
-      "pages/onscreen/list/list",
-      "pages/onscreen/generate/generate",
       "pages/personal/personal",
       "pages/drawing/drawing",
       "pages/aboutus/aboutus",

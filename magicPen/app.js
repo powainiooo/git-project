@@ -53,7 +53,11 @@ App({
    globalData: {
       ajaxSrc: 'https://xcx.newryun.com',
       userInfo: {},
-      sKey: null,
+      sKey: '1645040202',
+      generateData: {
+         pngCoordinate: "242,326,260,206",
+         psdUrl: "https://sbhh.newryun.com/back/psd/201904/hvg3zbaw7t.png"
+      },
       locationData: null
    }
 })

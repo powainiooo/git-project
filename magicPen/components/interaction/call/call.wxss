@@ -23,5 +23,6 @@
 .call-works-item .check { position: absolute; bottom: 0rpx; right: 5rpx;}
 
 .modal-content .txt1 { font-size: 32rpx; color: #30aac2; text-align: center; padding: 60rpx 50rpx;}
+.modal-content .txt2 { font-size: 32rpx; color: #ff3a65; text-align: center; padding: 0 50rpx 60rpx 50rpx; margin-top: -40rpx; line-height: 2; font-weight: bold;}
 .modal-content .btn { width: 240rpx; margin: 0 auto 50rpx auto;}
 .modal-content .btn .pea{ width: 50rpx; margin-top: 20rpx; margin-left: 15rpx;}

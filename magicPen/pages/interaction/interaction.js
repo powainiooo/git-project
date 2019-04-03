@@ -1,5 +1,5 @@
 // pages/interaction/interaction.js
-const {getUserAsset, getFuhuoIqAndZhaohuanIq, getMyWorksScene} = require('../../utils/api.js')
+const {getUserAsset, getFuhuoIqAndZhaohuanIq, getMyWorksScene, getZhaoHuanWorks} = require('../../utils/api.js')
 import regeneratorRuntime from '../../utils/runtime.js'
 const {promisify} = require('../../utils/util.js')
 const getLocation = promisify(wx.getLocation)
@@ -9,13 +9,14 @@ Page({
     * 页面的初始数据
     */
    data: {
-      currentKey: 'revive',
+      currentKey: 'call',
       myPeas: 0,
       fuhuoIq: 0,
       zhaohuanIq: 0,
       pageNoCall: 1,
       pageSize: 20,
-      callResData: []
+      reviveData: {},
+      callResData: {}
    },
    swiperChange(e) {
       const {currentKey} = e.detail
@@ -44,16 +45,22 @@ Page({
    },
    async getMyWorksScene () {
       const {longitude, latitude} = await getLocation()
-      const callRes = await getMyWorksScene({
+      getMyWorksScene({
          startPage: this.data.pageNoCall,
          pageSize: this.data.pageSize,
          // coord: `${longitude},${latitude}`
          coord: '114.0281724930,22.6092965074'
+      }).then(res => {
+         this.setData({
+            reviveData: res
+         })
       })
-      console.log(callRes)
-      this.setData({
-         callResData: callRes
+      getZhaoHuanWorks('114.0281724930,22.6092965074').then(res => {
+         this.setData({
+            callResData: res
+         })
       })
+
    },
    /**
     * 生命周期函数--监听页面初次渲染完成

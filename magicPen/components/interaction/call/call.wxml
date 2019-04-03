@@ -1,7 +1,8 @@
 <view class="call-title">
-   <z-button>
+   <z-button bindtap="doCall">
       <view class="dot"></view>
-      <text>华丽召唤</text>
+      <text wx:if="{{count === 0}}">华丽召唤</text>
+      <text wx:if="{{count !== 0}}">倒计时{{count}}秒</text>
       <view class="dot"></view>
    </z-button>
 </view>
@@ -12,7 +13,7 @@
       <image src="../../../res/interaction/pea.png" mode="widthFix" class="icon-pea"></image>
       {{peas}}
    </view>
-   <view class="photo-recharge">
+   <view class="photo-recharge" bindtap="gotoRecharge">
       <image src="../../../res/interaction/pea2.png" mode="widthFix" class="icon-pea"></image>
       <text>立即充值</text>
    </view>
@@ -33,13 +34,30 @@
          wx:for-index="index"
          data-index="{{index}}"
          wx:key="{{item.tuzhiNu}}"
-         class="call-works-item {{index === tuzhiNu ? 'call-works-item-check' : ''}}"
-         bindtap="selectWorks">
+         class="call-works-item">
       <view class="picture">
          <image src="{{item.worksUrl}}" mode="widthFix" class="picture-img"></image>
       </view>
       <view class="name">{{item.worksName}}</view>
    </view>
-   <view class="call-works-hint" wx:if="{{resData.code === 0 && resData.data === null}}">没有可以复活的作品！</view>
-   <view class="call-works-hint" wx:if="{{resData.code === 11}}">{{resData.msg}}</view>
+   <view class="call-works-hint" wx:if="{{resData.code === 0 && resData.data === null}}">没有可以召唤的作品！</view>
+   <view class="call-works-hint" wx:if="{{resData.code !== 0}}">{{resData.msg}}</view>
 </view>
+
+<z-modal wx:if="{{showModal}}" bindtap="closeModal">
+   <view class="modal-content">
+      <view class="txt1">{{modalContent}}</view>
+      <view class="txt2" wx:if="{{modalType === 'hint'}}"><text>{{modalContent2}}</text></view>
+      <view class="btn" style="width: {{modalType === 'recharge' ? '540rpx' : '240rpx'}}" wx:if="{{modalType !== 'hint'}}">
+         <z-button catchtap="modalConfirm" wx:if="{{modalType === 'recharge'}}">
+            <text>您的智力币不足{{cost}}</text>
+            <image src="../../../res/interaction/pea.png" mode="widthFix" class="pea"></image>
+            <text>，去兑换些〉</text>
+         </z-button>
+         <z-button catchtap="modalConfirm" wx:if="{{modalType === 'cost'}}">
+            <text>{{cost}}</text>
+            <image src="../../../res/interaction/pea.png" mode="widthFix" class="pea"></image>
+         </z-button>
+      </view>
+   </view>
+</z-modal>

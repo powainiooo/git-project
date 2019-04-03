@@ -239,3 +239,18 @@ export const payFuHuo = (coord, tuzhiUn) => {
       url: `${ajaxUrl}/api/works/payFuHuo?coord=${coord}&tuzhiUn=${tuzhiUn}`,
    }, false)
 }
+
+//获取我可以召唤的作品
+export const getZhaoHuanWorks = data => {
+   return ajax({
+      url: `${ajaxUrl}/api/zhaohuan/getZhaoHuanWorks?coord=${data}`
+   }, false)
+}
+
+//确认购买华丽召唤
+export const payZhaohuan = data => {
+   return ajax({
+      method: 'POST',
+      url: `${ajaxUrl}/api/zhaohuan/payZhaohuan?coord=${data}`
+   }, false)
+}

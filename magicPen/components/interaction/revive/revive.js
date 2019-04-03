@@ -45,9 +45,16 @@ Component({
      modalConfirm () {
         if (this.data.modalType === 'hint') {
             this.closeModal()
+        } else if (this.data.modalType === 'recharge') {
+           this.gotoRecharge()
         } else if (this.data.modalType === 'cost') {
            this.doBuy()
         }
+     },
+     gotoRecharge () {
+        wx.navigateTo({
+           url: '/pages/recharge/recharge'
+        })
      },
      closeModal () {
         this.setData({
@@ -93,7 +100,6 @@ Component({
                  modalContent: payRes.msg,
               })
            }
-
         }
      }
   }

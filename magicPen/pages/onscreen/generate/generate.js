@@ -75,7 +75,6 @@ Page({
       this.data.functType = 1
       const self = this
       const ctx = wx.createCameraContext()
-      const getLocation = promisify(ctx.takePhoto)
       ctx.takePhoto({
          quality: 'high',
          success: (res) => {
@@ -113,6 +112,21 @@ Page({
             })
          }
       })
+   },
+   takeVideo () {
+      const ctx = wx.createCameraContext()
+      ctx.startRecord({
+         success: (res) => {
+            console.log('startRecord')
+         }
+      })
+      setTimeout(()=>{
+         ctx.stopRecord({
+            success: (res) => {
+               console.log(res)
+            }
+         })
+      },3000)
    },
    async doBuy() {
       const {longitude, latitude} = await getLocation()

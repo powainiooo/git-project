@@ -23,7 +23,7 @@
          <image src="../../../res/interaction/camera.png" mode="widthFix"></image>
          <text>拍照</text>
       </view>
-      <view class="btn">
+      <view class="btn" bindtap="takeVideo">
          <image src="../../../res/interaction/video.png" mode="widthFix"></image>
          <text>录像</text>
       </view>

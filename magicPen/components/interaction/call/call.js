@@ -12,9 +12,9 @@ Component({
          type: Number,
          value: 0
       },
-      listData: {
-         type: Array,
-         value: []
+      resData: {
+         type: Object,
+         value: {}
       }
    },
 
@@ -23,7 +23,7 @@ Component({
     */
    data: {
       tuzhiNu: '',
-      showModal: true,
+      showModal: false,
       modalContent: 'cost'
    },
 
@@ -31,11 +31,6 @@ Component({
     * 组件的方法列表
     */
    methods: {
-      selectWorks (e) {
-         const {index} = e.currentTarget.dataset
-         this.setData({
-            tuzhiNu: index
-         })
-      }
+
    }
 })

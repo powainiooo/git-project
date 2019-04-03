@@ -22,7 +22,7 @@ App({
          const {encryptedData, iv, userInfo} = userInfoData
          Object.assign(this.globalData.userInfo, userInfo)
          const now = new Date().getTime()
-         if(sKeyTime === '' || now > sKeyTime + 47*60*60*1000) {
+         if(sKeyTime === '' || now > sKeyTime + 46*60*60*1000) {
             console.time('code')
             const {code} = await login()
             console.timeEnd('code')
@@ -53,7 +53,7 @@ App({
    globalData: {
       ajaxSrc: 'https://xcx.newryun.com',
       userInfo: {},
-      sKey: '1645040202',
+      sKey: sKey,
       generateData: {
          pngCoordinate: "242,326,260,206",
          psdUrl: "https://sbhh.newryun.com/back/psd/201904/hvg3zbaw7t.png"

@@ -1,5 +1,5 @@
 <view class="call-title">
-   <z-button>
+   <z-button bindtap="doCall">
       <view class="dot"></view>
       <text>3 D 复 活</text>
       <view class="dot"></view>
@@ -27,11 +27,31 @@
 </view>
 
 <view class="call-works-list">
-   <view wx:for="{{6}}" class="call-works-item call-works-item-check">
+   <view wx:if="{{resData.data && resData.data !== null && resData.data.pageData.length !== 0}}"
+         wx:for="{{resData.data.pageData}}"
+         wx:for-item="item"
+         data-id="{{item.tuzhiNu}}"
+         wx:key="{{item.tuzhiNu}}"
+         class="call-works-item {{item.tuzhiNu === tuzhiNu ? 'call-works-item-check' : ''}}"
+         bindtap="selectWorks">
       <view class="picture">
-         <image src="../../../res/interaction/bg.png" mode="widthFix" class="picture-img"></image>
+         <image src="{{item.worksUrl}}" mode="widthFix" class="picture-img"></image>
       </view>
-      <view class="name">作品名</view>
+      <view class="name">{{item.worksName}}</view>
       <i-icon type="success_fill" class="check" color="#ff306a" size="20" />
    </view>
+   <view class="call-works-hint" wx:if="{{resData.code === 0 && resData.data === null}}">没有可以复活的作品！</view>
+   <view class="call-works-hint" wx:if="{{resData.code === 11}}">{{resData.msg}}</view>
 </view>
+
+<z-modal wx:if="{{showModal}}" bindtap="closeModal">
+   <view class="modal-content">
+      <view class="txt1">{{modalContent}}</view>
+      <view class="btn">
+         <z-button catchtap="modalConfirm">
+            <text>确定</text>
+            <!--<image src="../../../res/interaction/pea.png" mode="widthFix" class="pea"></image>-->
+         </z-button>
+      </view>
+   </view>
+</z-modal>

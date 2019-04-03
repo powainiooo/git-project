@@ -27,7 +27,8 @@
 </view>
 
 <view class="call-works-list">
-   <view wx:for="{{listData}}"
+   <view wx:if="{{resData.data && resData.data !== null && resData.data.pageData.length !== 0}}"
+         wx:for="{{resData.data.pageData}}"
          wx:for-item="item"
          wx:for-index="index"
          data-index="{{index}}"
@@ -39,20 +40,6 @@
       </view>
       <view class="name">{{item.worksName}}</view>
    </view>
+   <view class="call-works-hint" wx:if="{{resData.code === 0 && resData.data === null}}">没有可以复活的作品！</view>
+   <view class="call-works-hint" wx:if="{{resData.code === 11}}">{{resData.msg}}</view>
 </view>
-
-<z-modal wx:if="showModal">
-   <view class="modal-content" wx:if="{{modalContent === 'select'}}">
-      <view class="txt1">请选择一个复活的作品</view>
-      <view class="btn"><z-button>确定</z-button></view>
-   </view>
-   <view class="modal-content" wx:if="{{modalContent === 'cost'}}">
-      <view class="txt1">是否消耗{{cost}}豆完成复活？</view>
-      <view class="btn">
-         <z-button>
-            <text>确定</text>
-            <image src="../../../res/interaction/pea.png" mode="widthFix" class="pea"></image>
-         </z-button>
-      </view>
-   </view>
-</z-modal>

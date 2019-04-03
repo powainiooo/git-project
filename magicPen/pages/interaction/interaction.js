@@ -9,13 +9,13 @@ Page({
     * 页面的初始数据
     */
    data: {
-      currentKey: 'call',
+      currentKey: 'revive',
       myPeas: 0,
       fuhuoIq: 0,
       zhaohuanIq: 0,
       pageNoCall: 1,
       pageSize: 20,
-      callListData: []
+      callResData: []
    },
    swiperChange(e) {
       const {currentKey} = e.detail
@@ -47,10 +47,12 @@ Page({
       const callRes = await getMyWorksScene({
          startPage: this.data.pageNoCall,
          pageSize: this.data.pageSize,
+         // coord: `${longitude},${latitude}`
          coord: '114.0281724930,22.6092965074'
       })
+      console.log(callRes)
       this.setData({
-         callListData: callRes.data.pageData
+         callResData: callRes
       })
    },
    /**

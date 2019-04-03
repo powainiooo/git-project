@@ -1,6 +1,6 @@
 const ajaxUrl = getApp().globalData.ajaxSrc
 const { $Message } = require('../components/iview/base/index')
-const ajax = (opts) => {
+const ajax = (opts, autoMsg = true) => {
    return new Promise((resolve, reject) => {
       wx.showNavigationBarLoading()
       const app = getApp()
@@ -12,10 +12,14 @@ const ajax = (opts) => {
             if(res.data.code === 0) {
                resolve(res.data)
             }else {
-               $Message({
-                  content: res.data.msg,
-                  type: 'warning'
-               });
+               if(autoMsg) {
+                  $Message({
+                     content: res.data.msg,
+                     type: 'warning'
+                  });
+               }else {
+                  resolve(res.data)
+               }
             }
             wx.hideNavigationBarLoading()
          },
@@ -225,5 +229,13 @@ export const getMyWorksScene = data => {
    return ajax({
       url: `${ajaxUrl}/api/works/getMyWorksScene`,
       data
-   })
+   }, false)
+}
+
+//确认复活作品
+export const payFuHuo = (coord, tuzhiUn) => {
+   return ajax({
+      method: 'POST',
+      url: `${ajaxUrl}/api/works/payFuHuo?coord=${coord}&tuzhiUn=${tuzhiUn}`,
+   }, false)
 }

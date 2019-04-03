@@ -28,8 +28,8 @@
 </view>
 
 <view class="call-works-list">
-   <view wx:if="{{resData.data && resData.data !== null && resData.data.pageData.length !== 0}}"
-         wx:for="{{resData.data.pageData}}"
+   <view wx:if="{{resData.data && resData.data !== null && resData.data.length !== 0}}"
+         wx:for="{{resData.data}}"
          wx:for-item="item"
          wx:for-index="index"
          data-index="{{index}}"

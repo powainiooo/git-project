@@ -27,6 +27,7 @@ Component({
    */
   data: {
      tuzhiNu: '',
+     freeFuhuoState: 1,
      showModal: false,
      modalType: 'cost',
      modalContent: 'cost',
@@ -37,9 +38,10 @@ Component({
    */
   methods: {
      selectWorks (e) {
-        const {id} = e.currentTarget.dataset
+        const {id, state} = e.currentTarget.dataset
         this.setData({
-           tuzhiNu: id
+           tuzhiNu: id,
+           freeFuhuoState: state,
         })
      },
      modalConfirm () {
@@ -70,10 +72,11 @@ Component({
               modalContent: '请选择一个要复活的作品！',
            })
         }else {
+           const msg = this.data.freeFuhuoState === 2 ? '第一次免费复活哟！' `是否花费${this.data.cost}智力币复活？`:
            this.setData({
               showModal: true,
               modalType: 'cost',
-              modalContent: `是否花费${this.data.cost}智力币复活？`,
+              modalContent: msg,
            })
         }
      },

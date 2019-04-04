@@ -31,6 +31,7 @@
          wx:for="{{resData.data.pageData}}"
          wx:for-item="item"
          data-id="{{item.tuzhiNu}}"
+         data-state="{{item.freeFuhuoState}}"
          wx:key="{{item.tuzhiNu}}"
          class="call-works-item {{item.tuzhiNu === tuzhiNu ? 'call-works-item-check' : ''}}"
          bindtap="selectWorks">

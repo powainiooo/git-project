@@ -87,7 +87,7 @@ Component({
          if(this.data.nameVal == ''){
             btn = false;
          }
-         let myreg=/^[1][3,4,5,6,7,8][0-9]{9}$/;
+         let myreg=/^[1][0-9]{10}$/;
          if(!myreg.test(this.data.phoneVal)){
             btn = false
          }

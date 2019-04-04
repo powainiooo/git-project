@@ -204,7 +204,8 @@ export const getPsdList = data => {
 //验证模板是否可以购买
 export const checkPsd = data => {
    return ajax({
-      url: `${ajaxUrl}/api/psd/checkPsd`
+      url: `${ajaxUrl}/api/psd/checkPsd`,
+      data
    })
 }
 
@@ -212,7 +213,7 @@ export const checkPsd = data => {
 export const payPsdGoods = data => {
    return ajax({
       method: 'POST',
-      url: `${ajaxUrl}/api/psd/payPsdGoods`
+      url: `${ajaxUrl}/api/psd/payPsdGoods?${data}`
    })
 }
 
@@ -220,7 +221,8 @@ export const payPsdGoods = data => {
 export const psdUpTv = data => {
    return ajax({
       method: 'POST',
-      url: `${ajaxUrl}/api/psd/psdUpTv`
+      url: `${ajaxUrl}/api/psd/psdUpTv`,
+      data
    })
 }
 

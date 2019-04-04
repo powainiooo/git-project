@@ -91,12 +91,12 @@ Page({
       const img = await chooseImage({
          count: 1
       })
-      const data = await fileUp(img.tempFilePaths[0], '2')
+      const data = await fileUp(img.tempFilePaths[0], '1')
       if(data.code === 0) {
          this.setData({
             topUrl: data.data
          })
-         uploadTopImg(data.data).tehn(res => {
+         uploadTopImg(data.data).then(res => {
 
          })
       }

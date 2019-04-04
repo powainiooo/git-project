@@ -1,5 +1,5 @@
 // pages/onscreen/generate/generate.js
-const {checkPsd, payPsdGoods, psdUpTv} = require('../../../utils/api.js')
+const {checkPsd, payPsdGoods, psdUpTv, fileUp} = require('../../../utils/api.js')
 import regeneratorRuntime from '../../../utils/runtime.js'
 const {promisify} = require('../../../utils/util.js')
 const getLocation = promisify(wx.getLocation)
@@ -12,14 +12,19 @@ Page({
       showCamera: false,
       cameraAni: {},
       coverAni: {},
-      photos: '',
+      photos: "http://tmp/wx55f0bb628b5d75d0.o6zAJsyF-_WBcvEkwQ6GlgYUPJCU.JTiBa3C3UECxd67c2fe0301f0bc4c9ce08f04f2a3cf7.png",
       photosInfo: [],
       photosWidth: 0,
       photosHeight: 0,
       generateData: null,
       showBottom: false,
       showBottom2: false,
-      functType: 1
+      functType: 1,
+      modalContent: '',
+      showModal: false,
+      count: 0,
+      recordTime: 3,
+      videos: '',
    },
 
    /**
@@ -27,11 +32,15 @@ Page({
     */
    onLoad: function (options) {
       const {generateData} = getApp().globalData
-      console.log(generateData)
       this.setData({generateData})
-      setTimeout(()=>{
-         this.coverAnimation()
-      },1000)
+      // setTimeout(()=>{
+      //    this.coverAnimation()
+      // },1000)
+   },
+   closeModal () {
+      this.setData({
+         showModal: false,
+      })
    },
    coverAnimation() {
       const [padding, moduleWidth, moduleHeight] = [20, 750, 1333]
@@ -72,7 +81,9 @@ Page({
    },
    takePhoto() {
       console.log('takePhoto')
-      this.data.functType = 1
+      this.setData({
+         functType: 1
+      })
       const self = this
       const ctx = wx.createCameraContext()
       ctx.takePhoto({
@@ -84,70 +95,118 @@ Page({
                showCamera: false,
                showBottom: false,
             })
-            wx.nextTick(()=>{
-               const [x, y, w, h] = this.data.generateData.pngCoordinate.split(',')
-               //摄像机动画
-               const camera = wx.createAnimation({
-                  duration: 1000,
-                  timingFunction: 'ease',
-               })
-               camera.width(`${w}rpx`).height(`${h}rpx`).top(`${y}rpx`).left(`${x}rpx`).step()
-               //遮罩图动画
-               const cover = wx.createAnimation({
-                  duration: 1000,
-                  timingFunction: 'ease',
-               })
-               cover
-                   .width(`750rpx`)
-                   .height(`1333rpx`)
-                   .top(`0rpx`)
-                   .left(`0rpx`)
-                   .step()
-
-               this.setData({
-                  cameraAni: camera.export(),
-                  coverAni: cover.export(),
-                  showBottom2: true
-               })
-            })
+            this.zoomBack()
          }
       })
    },
    takeVideo () {
       const ctx = wx.createCameraContext()
-      ctx.startRecord({
-         success: (res) => {
-            console.log('startRecord')
-         }
+      ctx.startRecord()
+      this.setData({
+         count: this.data.recordTime,
+         functType: 2
       })
-      setTimeout(()=>{
-         ctx.stopRecord({
-            success: (res) => {
-               console.log(res)
-            }
-         })
-      },3000)
+      const t = setInterval(()=>{
+         if(this.data.count === 0) {
+            clearInterval(t)
+            ctx.stopRecord({
+               success: (res) => {
+                  console.log(res.tempVideoPath)
+                  this.setData({
+                     videos: res.tempVideoPath
+                  })
+                  this.zoomBack()
+               }
+            })
+         }else {
+            this.data.count --
+            this.setData({
+               count: this.data.recordTime
+            })
+         }
+      }, 1000)
    },
    async doBuy() {
+      wx.showLoading({
+         title: '请求中'
+      })
       const {longitude, latitude} = await getLocation()
       const checkRes = await checkPsd({
          psdId: this.data.generateData.psdId,
-         coord: `${longitude},${latitude}`
+         // coord: `${longitude},${latitude}`
+         coord: `114.0281724930,22.6092965074`
       })
-      if(checkRes.data === '33'){
-         const payRes = await payPsdGoods({
-            psdId: this.data.generateData.psdId,
-            isTutorials: this.data.generateData.isTutorials,
-            functType: this.data.functType,
-         })
-         psdUpTv({
-            rVo: {
-               coord: `${longitude},${latitude}`,
-               materialUrl: '',
-               psdOrderNu: payRes.data.psdOrderNu
+      if(checkRes.code === 0){
+         const payData = `psdId=${this.data.generateData.psdId}&isTutorials=${this.data.generateData.isTutorials}&functType=${this.data.functType}`
+         const payRes = await payPsdGoods(payData)
+         if(payRes.code === 0) {
+            const urlRes = await fileUp(this.data.photos, this.data.functType)
+            if(urlRes.code === 0) {
+               const upRes = await psdUpTv({
+                  // coord: `${longitude},${latitude}`,
+                  coord: `114.0281724930,22.6092965074`,
+                  materialUrl: urlRes.data,
+                  psdOrderNu: payRes.data.psdOrderNu
+               })
+               console.log(upRes)
+               this.setData({
+                  showModal: true,
+                  modalContent: upRes.msg,
+               })
+               wx.hideLoading()
             }
-         })
+         }
       }
+   },
+   zoomBack () {
+      wx.nextTick(()=>{
+         const [x, y, w, h] = this.data.generateData.pngCoordinate.split(',')
+         //摄像机动画
+         const camera = wx.createAnimation({
+            duration: 1000,
+            timingFunction: 'ease',
+         })
+         camera.width(`${w}rpx`).height(`${h}rpx`).top(`${y}rpx`).left(`${x}rpx`).step()
+         //遮罩图动画
+         const cover = wx.createAnimation({
+            duration: 1000,
+            timingFunction: 'ease',
+         })
+         cover
+             .width(`750rpx`)
+             .height(`1333rpx`)
+             .top(`0rpx`)
+             .left(`0rpx`)
+             .step()
+
+         this.setData({
+            cameraAni: camera.export(),
+            coverAni: cover.export(),
+            showBottom2: true
+         })
+      })
+   },
+   doShare () {
+
+   },
+   doSave () {
+
+   },
+   tryAnother () {
+      wx.navigateTo({
+         url: '/pages/onscreen/list/list'
+      })
+   },
+   doRetry () {
+      this.setData({
+         showBottom2: false
+      })
+      this.coverAnimation()
+   },
+   gotoMore () {
+      wx.navigateTo({
+         url: '/pages/interaction/interaction'
+      })
    },
    /**
     * 生命周期函数--监听页面初次渲染完成

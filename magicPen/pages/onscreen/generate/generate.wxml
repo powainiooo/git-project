@@ -10,11 +10,21 @@
    <view class="animation-frame">
       <image src="{{photos}}"
              class="photos"
-             animation="{{cameraAni}}">
+             animation="{{cameraAni}}"
+             wx:if="{{functType === 1}}">
       </image>
+      <video src="{{videos}}"
+             class="photos"
+             controls="{{false}}"
+             autoplay
+             loop
+             animation="{{cameraAni}}"
+             wx:if="{{functType === 2}}">
+      </video>
       <image src="{{generateData.psdUrl}}"
              animation="{{coverAni}}"
-             class="cover">
+             class="cover"
+             bindload="coverAnimation">
       </image>
    </view>
 
@@ -27,17 +37,42 @@
          <image src="../../../res/interaction/video.png" mode="widthFix"></image>
          <text>录像</text>
       </view>
+      <view class="count" wx:if="{{count !== 0}}">录像倒计时：{{count}}秒</view>
    </view>
    <view class="btns-frame" style="bottom: {{showBottom2 ? '0' : '-140rpx'}}">
-      <view class="btn" bindtap="takePhoto">
-         <text>OK</text>
+      <view class="btn2" bindtap="doShare">
+         <image src="../../../res/interaction/share.png" mode="aspectFit"></image>
+         <view>分享</view>
       </view>
-      <view class="btn">
-         <i-icon type="refresh" color="#999999" size="20"/>
-         <text>重拍</text>
+      <view class="btn2" bindtap="doSave">
+         <image src="../../../res/interaction/save.png" mode="aspectFit"></image>
+         <view>保存</view>
+      </view>
+      <view class="btn2" bindtap="tryAnother">
+         <image src="../../../res/interaction/camera.png" mode="aspectFit"></image>
+         <view>再拍一个</view>
+      </view>
+      <view class="btn2" bindtap="doRetry">
+         <i-icon type="refresh" color="#999999" size="23" style="margin-bottom: 20rpx;"/>
+         <view>重拍</view>
+      </view>
+      <view class="btn2" bindtap="gotoMore">
+         <image src="../../../res/interaction/more.png" mode="aspectFit"></image>
+         <view>更好玩得</view>
+      </view>
+      <view class="btn3" bindtap="doBuy" wx:if="{{showBottom2}}">
+         <z-button>拍照上屏</z-button>
       </view>
    </view>
 </view>
 
+<z-modal wx:if="{{showModal}}" bindtap="closeModal">
+   <view class="modal-content">
+      <view class="txt1">{{modalContent}}</view>
+      <view class="btn">
+         <z-button>确定</z-button>
+      </view>
+   </view>
+</z-modal>
 
 <i-message id="message" />

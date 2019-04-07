@@ -48,16 +48,10 @@ App({
    },
    globalData: {
       ajaxSrc: 'https://xcx.newryun.com',
+      imgSrc: 'https://xcx.newryun.com',
       userInfo: {},
       sKey: sKey,
-      generateData: {
-         psdId: 13,
-         isTutorials: 2,
-         pricePhoto: '20',
-         priceVideo: '35',
-         pngCoordinate: "242,326,260,206",
-         psdUrl: "https://sbhh.newryun.com/back/psd/201904/hvg3zbaw7t.png"
-      },
+      generateData: null,
       locationData: null
    }
 })

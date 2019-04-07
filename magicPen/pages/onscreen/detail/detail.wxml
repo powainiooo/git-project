@@ -1,0 +1,35 @@
+<view class="animation-frame">
+   <image src="{{itemData.materialUrl}}"
+          class="photos"
+          animation="{{cameraAni}}"
+          wx:if="{{itemData.functType === 1}}">
+   </image>
+   <video src="{{itemData.materialUrl}}"
+          class="photos"
+          controls="{{false}}"
+          autoplay
+          loop
+          animation="{{cameraAni}}"
+          wx:if="{{itemData.functType === 2}}">
+   </video>
+   <image src="{{itemData.psdUrl}}"
+          class="cover">
+   </image>
+</view>
+
+<view class="bottom-bg">
+   <image src="../../../res/work/wave.png" mode="widthFix"></image>
+</view>
+
+<view class="person">
+   <z-avatar url="{{itemData.avatarUrl}}" grade="{{itemData.grade}}" class="avatar"></z-avatar>
+   <view class="info">
+      <view class="btn" bindtap="gotoPerson">去TA空间</view>
+      <view class="nick">{{itemData.nick}}</view>
+      <view class="fans">粉丝数 {{itemData.fans}}</view>
+   </view>
+</view>
+
+<view class="btn-home" bindtap="gotoHome">
+   <image src="../../../res/work/home.png" mode="widthFix"></image>
+</view>

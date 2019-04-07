@@ -41,8 +41,8 @@ Page({
   },
   async doBuy() {
     const obj = {
-      "couponId": '',
-      "iqGoodsId": 8
+      "couponId": this.data.couponId,
+      "iqGoodsId": this.data.iqGoodsId
     }
     const res = await payIqGoods(obj)
     const {timeStamp, nonceStr, payPackage, signType, paySign} = res.data

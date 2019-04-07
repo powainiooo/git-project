@@ -1,11 +1,17 @@
 <view class="coupon-container">
-    <view class="coupon-item">
-        <image src="" mode="widthFix" class="img"></image>
+    <view wx:for="{{listData}}"
+          wx:for-item="item"
+          wx:for-index="index"
+          wx:key="{{item.couponId}}"
+          data-index="{{index}}"
+          bindtap="getPeas"
+          class="coupon-item {{item.couponValueType  === 1 ? 'coupon-item-free' : ''}}">
+        <image src="../../res/coupon/coupon.png" mode="widthFix" class="img" wx:if="{{item.couponValueType  !== 1}}"></image>
+        <image src="../../res/coupon/free.png" mode="widthFix" class="img" wx:if="{{item.couponValueType  === 1}}"></image>
         <image src="../../res/coupon/icon.png" mode="widthFix" class="icon"></image>
-    </view>
-    <view class="coupon-item coupon-item-free">
-        <image src="" mode="widthFix" class="img"></image>
-        <image src="../../res/coupon/icon2.png" mode="widthFix" class="icon"></image>
+       <view class="value1">{{item.couponValue}}</view>
+       <view class="value2">{{item.couponValue}}</view>
+       <view class="value3">{{item.fullMoney }}</view>
     </view>
 </view>
 

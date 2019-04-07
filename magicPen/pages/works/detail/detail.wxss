@@ -1,1 +1,21 @@
-/* pages/works/detail/detail.wxss */
+.detail-container { width: 100%; min-height: 100vh; background-color: #eaf1f7; overflow: hidden;}
+.person { display: flex; justify-content: center; align-items: center; margin: 100rpx 0 80rpx 0;}
+.person .avatar { margin-right: 90rpx; transform: scale(2)}
+.person .info .btn { font-size: 24rpx; color: #ff306a; margin-bottom: 15rpx;}
+.person .info .nick { font-size: 32rpx; color: #353535; margin-bottom: 15rpx;}
+.person .info .fans { font-size: 28rpx; color: #8d9faa;}
+
+.title { font-size: 32rpx; color: #353535; margin-bottom: 15rpx; text-align: center;}
+
+.works { width: 750rpx; height: 540rpx; overflow: hidden; background-color: #ffffff; box-shadow: 0 5rpx 15rpx rgba(0,0,0,0.1);}
+.works image { width: 100%; height: 100%; transform: scale(1.6)}
+
+.likes { display: flex; justify-content: flex-end; margin-top: 20rpx; align-items: flex-start;}
+.likes .nums { font-size: 24rpx; color: #353535; margin-right: 20rpx;}
+.likes .icon { width: 50rpx; margin-right: 20rpx;}
+.likes .hint { font-size: 24rpx; color: #8d9faa; margin-right: 60rpx;}
+
+.btn-enter { width: 420rpx; margin: 80rpx auto;}
+
+.btn-home { width: 170rpx; height: 70rpx;position: fixed; top: 30rpx; right: 0;}
+.btn-home image { width: 100%;}

@@ -1,15 +1,39 @@
 <view class="modal-hint">
    <view class="modal-hint-container">
-      <image src="{{step === medalData[type].steps ? medalData[type].srcDone : medalData[type].src}}" mode="widthFix" class="modal-hint-icon"></image>
-      <view class="modal-hint-text1">{{medalData[type].name}}</view>
-      <view class="modal-hint-text2">{{medalData[type].hint}}</view>
-      <view class="modal-hint-steps">
-         <view class="modal-hint-step-item {{step > item ? 'modal-hint-step-item-active' : ''}}"
-               wx:for="{{medalData[type].steps}}"
-               wx:for-item="item"
-               wx:key="{{item}}">{{item+1}}</view>
+      <image src="{{util.getSrc(medalData)}}" mode="widthFix" class="modal-hint-icon"></image>
+      <view class="modal-hint-text1">{{medalData.name}}</view>
+      <view class="modal-hint-text2" wx:if="{{medalData.takeMedalState !== 1}}">{{medalData.depict}}</view>
+      <view class="modal-hint-text2" wx:if="{{medalData.takeMedalState === 1 && medalData.takeGiftState === 2}}">
+         <text>恭喜获得勋章\n请找站点服务人员兑换奖品！\n（奖品有效期<text class="red">7天</text>）</text>
       </view>
-      <view class="modal-hint-btn" wx:if="{{step === medalData[type].steps}}">领取勋章</view>
-      <view class="modal-hint-btn modal-hint-btn2" wx:else>完成度 {{step}}/{{medalData[type].steps}}</view>
+      <view class="modal-hint-text2" wx:if="{{medalData.takeMedalState === 1 && medalData.takeGiftState === 3}}">
+         <text>该奖品已经过了有效领取时间</text>
+      </view>
+      <view class="modal-hint-text2" wx:if="{{medalData.takeMedalState === 1 && medalData.takeGiftState === 1}}">
+         <text>该奖品已经领取了</text>
+      </view>
+      <!--<view class="modal-hint-steps">-->
+         <!--<view class="modal-hint-step-item {{step > item ? 'modal-hint-step-item-active' : ''}}"-->
+               <!--wx:for="{{medalData.steps}}"-->
+               <!--wx:for-item="item"-->
+               <!--wx:key="{{item}}">{{item+1}}</view>-->
+      <!--</view>-->
+      <view class="modal-hint-btn"
+            wx:if="{{medalData.takeMedalState === 2}}" catchtap="getMedal">领取勋章</view>
+      <view class="modal-hint-btn modal-hint-btn2"
+            wx:if="{{medalData.takeMedalState === 0}}">完成度 {{util.getProgress(medalData)}}</view>
    </view>
 </view>
+
+<wxs module="util">
+   var getSrc = function(data){
+      return data.meetJindu <= data.myJindu ? data.brightUrl : data.darkUrl
+   }
+   var getProgress = function(data){
+      return data.myJindu+'/'+data.meetJindu
+   }
+   module.exports = {
+      getSrc: getSrc,
+      getProgress: getProgress
+   };
+</wxs>

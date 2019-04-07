@@ -82,7 +82,7 @@ Component({
      },
      async doBuy () {
         const {longitude, latitude} = await getLocation()
-        const payRes = await payFuHuo('114.0281724930,22.6092965074', this.data.tuzhiNu)
+        const payRes = await payFuHuo(`${longitude},${latitude}`, this.data.tuzhiNu)
         if(payRes.code === 0) {
            this.setData({
               showModal: true,

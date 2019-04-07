@@ -1,2 +1,32 @@
-<!--pages/works/detail/detail.wxml-->
-<text>pages/works/detail/detail.wxml</text>
+<view class="detail-container">
+   <view class="person">
+      <z-avatar url="{{itemData.avatarUrl}}" grade="{{itemData.grade}}" class="avatar"></z-avatar>
+      <view class="info">
+         <view class="btn" bindtap="doAttention">{{isAttention ? '取消关注' : '+关注'}}</view>
+         <view class="nick">{{itemData.nick}}</view>
+         <view class="fans">粉丝数 {{itemData.fans}}</view>
+      </view>
+   </view>
+
+   <view class="title">{{itemData.worksName}}</view>
+   <view class="works">
+      <image src="{{itemData.worksUrl}}"></image>
+   </view>
+
+   <view class="likes">
+      <view class="nums">{{zan}}</view>
+      <image src="../../../res/index/icon-dislike.png" mode="widthFix" class="icon" bindtap="doThumbup" wx:if="{{!isLike}}"></image>
+      <image src="../../../res/index/icon-like.png" mode="widthFix" class="icon" wx:if="{{isLike}}"></image>
+      <view class="hint">{{isLike ? '已点赞' : '为它点赞'}}</view>
+   </view>
+
+   <view class="btn-enter" bindtap="gotoPerson">
+      <z-button>进入作者个人空间</z-button>
+   </view>
+
+   <view class="btn-home" bindtap="gotoHome">
+      <image src="../../../res/work/home.png" mode="widthFix"></image>
+   </view>
+</view>
+
+<i-message id="message" />

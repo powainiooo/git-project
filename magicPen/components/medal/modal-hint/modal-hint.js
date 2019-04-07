@@ -12,27 +12,28 @@ Component({
          type: Number,
          value: 1
       },
+      medalData: {
+         type: Object,
+         value: {}
+      }
    },
 
    /**
     * 组件的初始数据
     */
    data: {
-      medalData: [
-         {
-            src: '../../../res/medal/level1.png',
-            srcDone: '../../../res/medal/level1-done.png',
-            name: '一级小画家勋章',
-            hint: '收集3张图片作品获得',
-            steps: 3
-         }
-      ]
+
    },
 
    /**
     * 组件的方法列表
     */
    methods: {
-
+      getMedal () {
+         this.triggerEvent('getMedal',{
+            medalId: this.data.medalData.medalId,
+            takeType: 1,
+         })
+      }
    }
 })

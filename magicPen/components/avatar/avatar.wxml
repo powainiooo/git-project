@@ -1,0 +1,4 @@
+<view class="z-avatar" wx:if="{{url !== ''}}">
+   <image src="{{url}}" class="z-avatar-img"></image>
+   <image src="../../res/avatar/{{grade}}.png" class="z-avatar-grade" wx:if="{{grade !== 0}}"></image>
+</view>

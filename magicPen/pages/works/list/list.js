@@ -1,7 +1,8 @@
 import regeneratorRuntime from '../../../utils/runtime.js'
 const {promisify} = require('../../../utils/util.js')
 const chooseImage = promisify(wx.chooseImage)
-const {getMyWorks, getMyFriend, getUserInterspaceInfo, addAttention, fileUp, uploadTopImg} = require('../../../utils/api.js')
+const getLocation = promisify(wx.getLocation)
+const {getMyWorks, getMyFriend, getUserInterspaceInfo, addAttention, fileUp, uploadTopImg, getFuhuoIqAndZhaohuanIq, payFuHuo} = require('../../../utils/api.js')
 Page({
 
    /**
@@ -15,28 +16,33 @@ Page({
       page: 'works',
       topUrl: '',
       nick: '章剑',
+      grade: 0,
       zanSum: 0,
       fans: 0,
-      avatarUrl: 'https://wx.qlogo.cn/mmopen/vi_32/MvelplkvWEzHUQB7XFF9ljGmialZeKib3gOpfRickfkp5Nfwah7mfLHPTaic9kmvGu6SLmqlXhv5ia3FpRvHhf3picsQ/132',
+      fuhuoIq: 0,
+      avatarUrl: '',
       worksList: [],
       attentionList: [],
       pageNo: 1,
       pageSize: 20,
-      pageNoAttention: 1
+      pageNoAttention: 1,
+      tuzhiNu: '',
+      showModal: false,
+      modalType: 'cost',
+      modalContent: 'cost',
    },
 
    /**
     * 生命周期函数--监听页面加载
     */
    onLoad: function (options) {
-      this.data.userId = options.id || 0;
-      setTimeout(()=>{
-         this.getWorkList()
-         this.getPersonInfo()
-         if (this.data.userId === 0) {
-            this.getMyFriend()
-         }
-      },2000)
+      this.data.userId = options.userId || 0;
+      this.getWorkList()
+      this.getPersonInfo()
+      if (this.data.userId === 0) {
+         this.getMyFriend()
+         this.getFuhuoIqAndZhaohuanIq()
+      }
       this.setData({
          isUser: this.data.userId === 0
       })
@@ -76,10 +82,11 @@ Page({
    },
    getPersonInfo() {
       getUserInterspaceInfo({userId: this.data.userId}).then(res => {
-         const {topUrl, nick, zanSum, fans, avatarUrl, isAttention} = res.data
+         const {topUrl, nick, grade, zanSum, fans, avatarUrl, isAttention} = res.data
          this.setData({
             topUrl: topUrl ? topUrl : '',
             nick,
+            grade,
             zanSum,
             fans,
             avatarUrl,
@@ -87,7 +94,14 @@ Page({
          })
       })
    },
+   getFuhuoIqAndZhaohuanIq() {
+      getFuhuoIqAndZhaohuanIq().then(res => {
+         const {fuhuoIq} = res.data
+         this.setData({fuhuoIq})
+      })
+   },
    async openFile() {
+      if(!this.data.isUser) return;
       const img = await chooseImage({
          count: 1
       })
@@ -112,6 +126,73 @@ Page({
       this.setData({
          page: e.currentTarget.dataset.page
       })
+   },
+   doRevive (e) {
+      const {tuzhiNu, freeFuhuoState} = e.detail
+      const msg = freeFuhuoState === 2 ? '第一次免费复活哟！': `是否花费${this.data.fuhuoIq}智力币复活？`
+      this.setData({
+         tuzhiNu,
+         showModal: true,
+         modalType: 'cost',
+         modalContent: msg,
+      })
+   },
+   closeModal () {
+      this.setData({
+         showModal: false,
+      })
+   },
+   modalConfirm () {
+      if (this.data.modalType === 'hint') {
+         this.closeModal()
+      } else if (this.data.modalType === 'recharge') {
+         this.gotoRecharge()
+      } else if (this.data.modalType === 'cost') {
+         this.doBuy()
+      }
+   },
+   gotoRecharge () {
+      wx.navigateTo({
+         url: '/pages/recharge/recharge'
+      })
+   },
+   async doBuy () {
+      const {longitude, latitude} = await getLocation()
+      const payRes = await payFuHuo(`${longitude},${latitude}`, this.data.tuzhiNu)
+      if(payRes.code === 0) {
+         this.setData({
+            showModal: true,
+            modalType: 'hint',
+            modalContent: payRes.msg,
+         })
+      }else {
+         if (payRes.code === 988) {
+            this.setData({
+               showModal: true,
+               modalType: 'recharge',
+               modalContent: '智力币不足，是否前往充值？',
+            })
+         } else {
+            this.setData({
+               showModal: true,
+               modalType: 'hint',
+               modalContent: payRes.msg,
+            })
+         }
+      }
+   },
+   getwork () {
+      this.data.pageNo = 1
+      this.data.worksList = []
+      this.getWorkList()
+   },
+   gotoMedal () {
+      wx.navigateTo({
+         url: '/pages/medal/medal?userId='+this.data.userId
+      })
+   },
+   doShare (e) {
+
    },
    /**
     * 生命周期函数--监听页面初次渲染完成
@@ -164,7 +245,12 @@ Page({
    /**
     * 用户点击右上角分享
     */
-   onShareAppMessage: function () {
-
+   onShareAppMessage: function (e) {
+      const {id, url, name} = e.target.dataset
+      return {
+         title: name,
+         imageUrl: url,
+         path:'/pages/works/detail/detail?id='+id
+      }
    }
 })

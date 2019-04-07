@@ -1,0 +1,15 @@
+.animation-frame { width: 100%; height: 100vh; overflow: hidden;}
+.animation-frame .photos { position: absolute;}
+.animation-frame .cover { width: 750rpx; height: 1333rpx; position: absolute; top: 0; left: 0;}
+
+.bottom-bg { width: 100%; height: 40rpx; position: fixed; bottom: 0; left: 0; background-color: #ffffff;}
+.bottom-bg image { width: 100%; position: absolute; left: 0; top: -189rpx;}
+
+.person { display: flex; justify-content: center; align-items: center; position: fixed; left: 140rpx; bottom: 40rpx;}
+.person .avatar { margin-right: 90rpx; transform: scale(2)}
+.person .info .btn { font-size: 24rpx; color: #ff306a; margin-bottom: 15rpx;}
+.person .info .nick { font-size: 32rpx; color: #353535; margin-bottom: 15rpx;}
+.person .info .fans { font-size: 28rpx; color: #8d9faa;}
+
+.btn-home { width: 170rpx; height: 70rpx;position: fixed; bottom: 60rpx; right: 0;}
+.btn-home image { width: 100%;}

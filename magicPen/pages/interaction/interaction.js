@@ -48,14 +48,13 @@ Page({
       getMyWorksScene({
          startPage: this.data.pageNoCall,
          pageSize: this.data.pageSize,
-         // coord: `${longitude},${latitude}`
-         coord: '114.0281724930,22.6092965074'
+         coord: `${longitude},${latitude}`
       }).then(res => {
          this.setData({
             reviveData: res
          })
       })
-      getZhaoHuanWorks('114.0281724930,22.6092965074').then(res => {
+      getZhaoHuanWorks(`${longitude},${latitude}`).then(res => {
          this.setData({
             callResData: res
          })

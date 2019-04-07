@@ -1,9 +1,9 @@
-<view class="list-item" bindtap="gotoDetail">
+<view class="list-item">
   <view class="list-item-left">
     <image src="{{itemData.worksUrl}}" mode="scaleToFill" class="list-item-img"/>
   </view>
   <view class="list-item-right">
-    <view class="list-item-author">
+    <view class="list-item-author" catchtap="gotoPerson">
       <image src="{{itemData.avatarUrl}}" mode="scaleToFill" class="list-item-avatar"/>
       <text class="list-item-nick">{{itemData.nick}}</text>
     </view>

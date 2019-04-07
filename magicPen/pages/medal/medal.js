@@ -1,26 +1,79 @@
 // pages/medal/medal.js
-const {getMedalList, takeState} = require('../../utils/api.js')
+const {getMedalList, getUserInterspaceInfo, takeState} = require('../../utils/api.js')
 Page({
 
    /**
     * 页面的初始数据
     */
    data: {
-      userId: 0
+      userId: 0,
+      showHint: false,
+      medalList: [],
+      selectData: {},
+      isUser: true,
    },
 
    /**
     * 生命周期函数--监听页面加载
     */
    onLoad: function (options) {
-      this.data.userId = options.id || 0
-      setTimeout(()=>{
-         this.getData()
-      },2000)
+      this.data.userId = options.userId || 0
+      this.getPersonInfo()
+      this.getData()
+      this.setData({
+         isUser: this.data.userId === 0
+      })
    },
    getData() {
       getMedalList({userId: this.data.userId}).then(res => {
-         console.log(res)
+         this.setData({
+            medalList: res.data
+         })
+      })
+   },
+   getPersonInfo() {
+      getUserInterspaceInfo({userId: 0}).then(res => {
+         const {nick, avatarUrl} = res.data
+         this.setData({
+            nick,
+            avatarUrl,
+         })
+      })
+   },
+   selectMedal (e) {
+      if (!this.data.isUser) return
+      const {item} = e.currentTarget.dataset
+      this.setData({
+         showHint: true,
+         selectData: item
+      })
+   },
+   closeHint () {
+      this.setData({
+         showHint: false,
+      })
+   },
+   getMedal (e) {
+      if (!this.data.isUser) return
+      const {medalId, takeType} = e.detail
+      this.takeState(medalId, takeType)
+   },
+   getGift (e) {
+      if (!this.data.isUser) return
+      const {item} = e.currentTarget.dataset
+      if (item.takeMedalState === 1 && item.takeGiftState === 2) {
+         this.takeState(item.medalId, 2)
+      }
+   },
+   takeState (id, type) {
+      takeState(`medalId=${id}&takeType=${type}`).then(res => {
+         wx.showToast({
+            title: '领取成功',
+            icon: 'success',
+            duration: 2000
+         })
+         this.closeHint()
+         this.getData()
       })
    },
    /**

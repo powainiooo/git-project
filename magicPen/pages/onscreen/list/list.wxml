@@ -1,4 +1,7 @@
-<image src="{{selectData.bigUrl}}" class="bigImg" bindtap="gotoDetail"></image>
+<view class="bigImg">
+   <image src="{{selectData.bigUrl}}" bindtap="gotoDetail" mode="widthFix"></image>
+</view>
+
 <view class="info-line">
    <view class="project">
       <view class="name">{{selectData.title}}</view>

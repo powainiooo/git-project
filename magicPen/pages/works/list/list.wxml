@@ -12,9 +12,8 @@
 </view>
 
 <view class="person-info">
-   <view class="avatar">
-      <image src="{{avatarUrl}}" mode="scaleToFill"></image>
-   </view>
+   <image src="../../../res/work/wave.png" class="wave"></image>
+   <z-avatar class="avatar" url="{{avatarUrl}}" grade="{{grade}}"></z-avatar>
    <view class="zans">
       <image src="../../../res/index/icon-like.png" mode="widthFix"></image>
       <view class="title">{{zanSum}}</view>
@@ -23,8 +22,8 @@
       <view class="name">{{nick}}</view>
       <view class="fans">粉丝数 {{fans}}人</view>
    </view>
-   <view class="medal">
-      <image src="../../../res/medal/level1-done.png" mode="widthFix"></image>
+   <view class="medal" bindtap="gotoMedal">
+      <image src="../../../res/work/medal.png" mode="widthFix"></image>
       <view>勋章</view>
       <i-icon type="enter" size="20" color="#c1c1c1" class="icon" />
    </view>
@@ -42,6 +41,10 @@
    <list-item wx:for="{{worksList}}"
               wx:for-item="item"
               wx:key="{{item.userId}}"
+              isUser="{{isUser}}"
+              bindrevive="doRevive"
+              bindgetwork="getwork"
+              bindshare="doShare"
               itemData="{{item}}"></list-item>
 </view>
 
@@ -55,5 +58,17 @@
 </view>
 
 <loading wx:if="{{isLoading}}"></loading>
+
+<z-modal wx:if="{{showModal}}" bindtap="closeModal">
+   <view class="modal-content">
+      <view class="txt1">{{modalContent}}</view>
+      <view class="btn">
+         <z-button catchtap="modalConfirm">
+            <text>确定</text>
+            <!--<image src="../../../res/interaction/pea.png" mode="widthFix" class="pea"></image>-->
+         </z-button>
+      </view>
+   </view>
+</z-modal>
 
 <i-message id="message" />

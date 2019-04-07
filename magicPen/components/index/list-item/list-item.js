@@ -25,6 +25,11 @@ Component({
       wx.navigateTo({
         url: `/pages/works/detail/detail?userId=${this.data.itemData.userId}`
       })
+    },
+     gotoPerson(){
+      wx.navigateTo({
+        url: `/pages/works/list/list?userId=${this.data.itemData.userId}`
+      })
     }
   }
 })

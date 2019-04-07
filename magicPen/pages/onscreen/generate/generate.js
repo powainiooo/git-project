@@ -3,6 +3,8 @@ const {checkPsd, payPsdGoods, psdUpTv, fileUp} = require('../../../utils/api.js'
 import regeneratorRuntime from '../../../utils/runtime.js'
 const {promisify} = require('../../../utils/util.js')
 const getLocation = promisify(wx.getLocation)
+const canvasToTempFilePath = promisify(wx.canvasToTempFilePath)
+const downloadFile = promisify(wx.downloadFile)
 Page({
 
    /**
@@ -12,7 +14,7 @@ Page({
       showCamera: false,
       cameraAni: {},
       coverAni: {},
-      photos: "http://tmp/wx55f0bb628b5d75d0.o6zAJsyF-_WBcvEkwQ6GlgYUPJCU.JTiBa3C3UECxd67c2fe0301f0bc4c9ce08f04f2a3cf7.png",
+      photos: "",
       photosInfo: [],
       photosWidth: 0,
       photosHeight: 0,
@@ -25,6 +27,9 @@ Page({
       count: 0,
       recordTime: 3,
       videos: '',
+      isSaving: false,
+      canShare: false,
+      psdOrderNu: '',
    },
 
    /**
@@ -113,15 +118,16 @@ Page({
                success: (res) => {
                   console.log(res.tempVideoPath)
                   this.setData({
-                     videos: res.tempVideoPath
+                     videos: res.tempVideoPath,
+                     showCamera: false,
+                     showBottom: false,
                   })
                   this.zoomBack()
                }
             })
          }else {
-            this.data.count --
             this.setData({
-               count: this.data.recordTime
+               count: this.data.count - 1
             })
          }
       }, 1000)
@@ -133,8 +139,8 @@ Page({
       const {longitude, latitude} = await getLocation()
       const checkRes = await checkPsd({
          psdId: this.data.generateData.psdId,
-         // coord: `${longitude},${latitude}`
-         coord: `114.0281724930,22.6092965074`
+         coord: `${longitude},${latitude}`
+         // coord: `114.0281724930,22.6092965074`
       })
       if(checkRes.code === 0){
          const payData = `psdId=${this.data.generateData.psdId}&isTutorials=${this.data.generateData.isTutorials}&functType=${this.data.functType}`
@@ -143,20 +149,21 @@ Page({
             const urlRes = await fileUp(this.data.photos, this.data.functType)
             if(urlRes.code === 0) {
                const upRes = await psdUpTv({
-                  // coord: `${longitude},${latitude}`,
-                  coord: `114.0281724930,22.6092965074`,
+                  coord: `${longitude},${latitude}`,
+                  // coord: `114.0281724930,22.6092965074`,
                   materialUrl: urlRes.data,
                   psdOrderNu: payRes.data.psdOrderNu
                })
-               console.log(upRes)
                this.setData({
+                  canShare: true,
+                  psdOrderNu: payRes.data.psdOrderNu,
                   showModal: true,
                   modalContent: upRes.msg,
                })
-               wx.hideLoading()
             }
          }
       }
+      wx.hideLoading()
    },
    zoomBack () {
       wx.nextTick(()=>{
@@ -189,8 +196,40 @@ Page({
    doShare () {
 
    },
-   doSave () {
-
+   async doSave () {
+      console.log('draw')
+      if (this.data.isSaving) return
+      wx.showLoading({
+         title:'生成中'
+      });
+      this.data.isSaving = true
+      const ctx = wx.createCanvasContext('firstCanvas')
+      const [x, y, w, h] = this.data.generateData.pngCoordinate.split(',')
+      ctx.drawImage(this.data.photos, x, y, w, h)
+      const cover = await downloadFile({
+         url: this.data.generateData.psdUrl
+      })
+      ctx.drawImage(cover.tempFilePath, 0, 0, 750, 1333)
+      ctx.draw()
+      const imgUrl = await canvasToTempFilePath({
+         canvasId: 'firstCanvas',
+         quality: 1,
+         x: 0,
+         y: 0,
+         width: 750,
+         height: 1333,
+      })
+      wx.saveImageToPhotosAlbum({
+         filePath: imgUrl.tempFilePath,
+         success(){
+            wx.showToast({
+               title: '保存成功',
+               icon: 'success',
+               duration: 2000
+            })
+            this.data.isSaving = false
+         }
+      })
    },
    tryAnother () {
       wx.navigateTo({
@@ -254,6 +293,10 @@ Page({
     * 用户点击右上角分享
     */
    onShareAppMessage: function () {
-
+      return {
+         title: this.data.generateData.title,
+         imageUrl: this.data.generateData.bigUrl ,
+         path:'/pages/onscreen/detail/detail?id='+this.data.psdOrderNu
+      }
    }
 })

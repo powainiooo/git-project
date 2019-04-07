@@ -17,6 +17,8 @@ const ajax = (opts, autoMsg = true) => {
                      content: res.data.msg,
                      type: 'warning'
                   });
+                  wx.hideLoading()
+                  reject(res.data)
                }else {
                   resolve(res.data)
                }
@@ -55,6 +57,14 @@ export const getChoicenessWorks = data => {
 export const getCouponList = data => {
    return ajax({
       url: `${ajaxUrl}/api/coupon/getCouponList`
+   })
+}
+
+//确认兑换来画豆
+export const affirmGetIq = data => {
+   return ajax({
+      method: 'POST',
+      url: `${ajaxUrl}/api/coupon/affirmGetIq?couponId=${data}`
    })
 }
 
@@ -126,8 +136,7 @@ export const getMedalList = data => {
 export const takeState = data => {
    return ajax({
       method: 'POST',
-      url: `${ajaxUrl}/api/medal/takeState`,
-      data
+      url: `${ajaxUrl}/api/medal/takeState?${data}`
    })
 }
 
@@ -234,6 +243,15 @@ export const getMyWorksScene = data => {
    }, false)
 }
 
+//修改作品名
+export const updataWorksName = (data) => {
+   return ajax({
+      method: 'POST',
+      url: `${ajaxUrl}/api/works/updataWorksName`,
+      data
+   })
+}
+
 //确认复活作品
 export const payFuHuo = (coord, tuzhiUn) => {
    return ajax({
@@ -255,4 +273,52 @@ export const payZhaohuan = data => {
       method: 'POST',
       url: `${ajaxUrl}/api/zhaohuan/payZhaohuan?coord=${data}`
    }, false)
+}
+
+//给作品置顶1、取消置顶2
+export const updataWorksTop = data => {
+   return ajax({
+      method: 'POST',
+      url: `${ajaxUrl}/api/works/updataWorksTop?${data}`
+   })
+}
+
+//删除我的作品
+export const deleteWorks = data => {
+   return ajax({
+      method: 'DELETE',
+      url: `${ajaxUrl}/api/works/deleteWorks/${data}`
+   })
+}
+
+//更新我的头饰等级，用户打开小程序时更新一次等级
+export const updateUserGrade = data => {
+   return ajax({
+      method: 'POST',
+      url: `${ajaxUrl}/api/userInfo/updateUserGrade`
+   })
+}
+
+//根据图纸编号获取作品（分享作品）
+export const getWorksByTuzhiNu = data => {
+   return ajax({
+      url: `${ajaxUrl}/api/works/getWorksByTuzhiNu`,
+      data
+   })
+}
+
+//给作品点赞
+export const worksZan = data => {
+   return ajax({
+      method: 'POST',
+      url: `${ajaxUrl}/api/works/worksZan?tuzhiNu=${data}`,
+   }, false)
+}
+
+//根据模板订单编号获取合成图（分享页数据）
+export const getSharePsdByOrderNu = data => {
+   return ajax({
+      url: `${ajaxUrl}/api/psd/getSharePsdByOrderNu`,
+      data
+   })
 }

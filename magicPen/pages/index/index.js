@@ -1,7 +1,7 @@
 //index.js
 //获取应用实例
 const app = getApp()
-const {getSlideList, getNearbyMerchant, getChoicenessWorks, getUserIq} = require('../../utils/api.js')
+const {getSlideList, getNearbyMerchant, getChoicenessWorks} = require('../../utils/api.js')
 const useGuide = wx.getStorageSync('useGuide')
 console.log('useGuide:'+useGuide)
 import regeneratorRuntime from '../../utils/runtime.js'
@@ -33,7 +33,6 @@ Page({
       // 所以此处加入 callback 以防止这种情况
       app.sKeyReadyCallback = res => {
         this.getStore()
-        this.getUserIq()
       }
     } else {
       // 在没有 open-type=getUserInfo 版本的兼容处理
@@ -53,7 +52,6 @@ Page({
     if(sKey !== ''){
       app.globalData.sKey = sKey
       this.getStore()
-      this.getUserIq()
     }
   },
   getUserInfo: function(e) {
@@ -92,13 +90,6 @@ Page({
         worksList: this.data.worksList.concat(list),
         isLoadingList: false
       })
-    })
-  },
-  getUserIq() {
-    getUserIq().then(res => {
-      const {userIq, userFans} = res.data
-      app.globalData.userInfo.userIq = userIq
-      app.globalData.userInfo.userFans = userFans
     })
   },
   pageNoAdd() {

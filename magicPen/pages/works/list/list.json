@@ -1,8 +1,11 @@
 {
   "usingComponents": {
+     "z-avatar": "../../../components/avatar/avatar",
      "list-item": "../../../components/works/list-item/list-item",
      "attention-item": "../../../components/works/attention-item/attention-item",
      "i-icon": "../../../components/iview/icon/index",
-     "loading": "../../../components/loading/index"
+     "loading": "../../../components/loading/index",
+     "z-modal": "../../../components/modal/modal",
+     "z-button": "../../../components/button/button"
   }
 }

@@ -1,0 +1,4 @@
+.z-avatar { width: 80rpx; height: 80rpx; position: relative}
+.z-avatar .z-avatar-img { width: 100%; height: 100%; border-radius: 50%;}
+
+.z-avatar .z-avatar-grade { width: 118rpx; height: 123rpx; position: absolute; top: -28rpx; left: -16rpx;}

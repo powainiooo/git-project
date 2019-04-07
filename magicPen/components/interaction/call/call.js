@@ -76,7 +76,7 @@ Component({
       },
       async doBuy () {
          const {longitude, latitude} = await getLocation()
-         const payRes = await payZhaohuan('114.0281724930,22.6092965074')
+         const payRes = await payZhaohuan(`${longitude},${latitude}`)
          if (payRes.code === 0) {
 
          } else if (payRes.code === 15) {

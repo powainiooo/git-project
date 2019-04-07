@@ -1,11 +1,20 @@
-<view class="list-item" bindtap="gotoDetail">
+<view class="list-item">
    <view class="list-item-left">
       <image src="{{itemData.worksUrl}}" mode="scaleToFill" class="list-item-img"/>
    </view>
    <view class="list-item-right">
-      <view class="list-item-line">
-         <view class="list-item-name">{{itemData.worksName || '--'}}</view>
-         <image src="../../../res/work/edit.png" mode="widthFix" class="list-item-edit"/>
+      <view class="list-item-line" wx:if="{{!isEdit}}">
+         <view class="list-item-name">{{nameValue || '--'}}</view>
+         <image src="../../../res/work/edit.png"
+                mode="widthFix"
+                class="list-item-edit"
+                wx:if="{{isUser}}"
+                bindtap="showEdit"/>
+      </view>
+      <view class="list-item-line" wx:if="{{isEdit}}">
+         <input value="{{nameValue}}"  class="list-item-name-input" bindinput="nameChange" />
+         <view class="list-item-ok" bindtap="confirmEdit">确定</view>
+         <view class="list-item-ok" bindtap="hideEdit">取消</view>
       </view>
       <view class="list-item-line" style="margin-top: 20rpx;">
          <view class="list-item-like">
@@ -24,3 +33,41 @@
       <view class="list-item-line2">他们喜欢</view>
    </view>
 </view>
+<view class="list-item-opera" wx:if="{{isUser}}">
+   <view class="btn-item" bindtap="doRevive">
+      <image src="../../../res/work/revive.png" mode="widthFix" class="btn-item-icon"></image>
+      <text>复活</text>
+   </view>
+   <view class="btn-item" bindtap="doTop">
+      <image src="../../../res/work/top.png" mode="widthFix" class="btn-item-icon"></image>
+      <text>{{itemData.isTop === 1 ? '取消' : '' }}置顶</text>
+   </view>
+   <view class="btn-item">
+      <image src="../../../res/work/share.png" mode="widthFix" class="btn-item-icon"></image>
+      <text>分享</text>
+      <button class="btn-share"
+              plain
+              open-type="share"
+              data-id="{{itemData.tuzhiNu}}"
+              data-url="{{itemData.worksUrl}}"
+              data-name="{{itemData.worksName}}">分享</button>
+   </view>
+   <view class="btn-item" bindtap="doDel">
+      <image src="../../../res/work/del.png" mode="widthFix" class="btn-item-icon"></image>
+      <text>删除</text>
+   </view>
+   <view class="time">{{util.format(itemData.createAt)}}</view>
+</view>
+
+<wxs module="util">
+   var format = function(sec){
+      var time = getDate(sec*1000)
+      var year = time.getFullYear()
+      var month = time.getMonth()
+      var day = time.getDay()
+      return year+'.'+month+'.'+day
+   }
+   module.exports = {
+   format: format,
+   };
+</wxs>

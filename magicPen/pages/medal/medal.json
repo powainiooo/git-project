@@ -1,5 +1,6 @@
 {
   "usingComponents": {
-     "modal-hint": "../../../components/medal/modal-hint/modal-hint"
+     "medal-hint": "../../../components/medal/modal-hint/modal-hint",
+     "z-avatar": "../../../components/avatar/avatar"
   }
 }

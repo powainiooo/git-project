@@ -1,6 +1,28 @@
-<!--pages/medal/medal.wxml-->
-<text>pages/medal/medal.wxml</text>
+<view class="medal-frame">
+   <view class="person-info">
+      <z-avatar url="{{avatarUrl}}"></z-avatar>
+      <view class="name">{{nick}}</view>
+   </view>
+   <view class="medal-list">
+      <view class="medal-item {{item.takeMedalState === 2 ? 'medal-item-dot' : ''}}"
+            wx:for="{{medalList}}"
+            wx:for-item="item"
+            wx:key="{{item.medalId}}"
+            data-item="{{item}}"
+            bindtap="selectMedal"
+            bindlongpress="getGift">
+         <image src="{{item.brightUrl}}" wx:if="{{item.takeMedalState === 1}}"></image>
+         <image src="{{item.darkUrl}}" wx:if="{{item.takeMedalState !== 1}}"></image>
+         <view>{{item.name}}</view>
+      </view>
+   </view>
 
-<modal-hint></modal-hint>
+   <view class="hint">收集勋章可获得神秘奖品</view>
+</view>
+
+<medal-hint wx:if="{{showHint}}"
+            medalData="{{selectData}}"
+            bindtap="closeHint"
+            bindgetMedal="getMedal"></medal-hint>
 
 <i-message id="message" />

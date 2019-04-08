@@ -9,9 +9,9 @@
          <text class="list-item-nick">{{itemData.nick}}</text>
       </view>
       <view class="list-item-name">{{itemData.worksName || '--'}}</view>
-      <view class="list-item-like">
+      <view class="list-item-like" bindtap="doThumbup">
          <image src="../../../res/index/icon-like.png" mode="scaleToFill" class="list-item-icon"/>
-         <text class="list-item-nums">{{itemData.zan}}</text>
+         <text class="list-item-nums">{{zan}}</text>
       </view>
    </view>
 </view>

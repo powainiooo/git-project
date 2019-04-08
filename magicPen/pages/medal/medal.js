@@ -32,7 +32,7 @@ Page({
       })
    },
    getPersonInfo() {
-      getUserInterspaceInfo({userId: 0}).then(res => {
+      getUserInterspaceInfo({userId: this.data.userId}).then(res => {
          const {nick, avatarUrl} = res.data
          this.setData({
             nick,
@@ -41,7 +41,7 @@ Page({
       })
    },
    selectMedal (e) {
-      if (!this.data.isUser) return
+      // if (!this.data.isUser) return
       const {item} = e.currentTarget.dataset
       this.setData({
          showHint: true,

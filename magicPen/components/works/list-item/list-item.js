@@ -1,5 +1,6 @@
 // components/index/list-item/list-item.js
-const {updataWorksTop, deleteWorks, updataWorksName} = require('../../../utils/api.js')
+const {updataWorksTop, deleteWorks, updataWorksName, worksZan} = require('../../../utils/api.js')
+const { $Message } = require('../../../components/iview/base/index')
 Component({
    /**
     * 组件的属性列表
@@ -17,7 +18,8 @@ Component({
    observers: {
       'itemData'(val) {
          this.setData({
-            nameValue: val.worksName
+            nameValue: val.worksName,
+            zan: val.zan
          })
       }
    },
@@ -25,8 +27,10 @@ Component({
     * 组件的初始数据
     */
    data: {
+      showOpera: false,
       isEdit: false,
-      nameValue: ''
+      nameValue: '',
+      zan: 0,
    },
 
    /**
@@ -82,6 +86,29 @@ Component({
       doShare () {
          this.triggerEvent('share',{
             tuzhiNu: this.data.itemData.tuzhiNu
+         })
+      },
+      doThumbup () {
+         if(this.data.isUser) return
+         worksZan(this.data.itemData.tuzhiNu).then(res => {
+            let zan = this.data.zan
+            if(res.code === 0) {
+               zan += 1
+            }else {
+               $Message({
+                  content: res.msg,
+                  type: 'warning'
+               });
+            }
+            this.setData({
+               zan,
+               isLike: true
+            })
+         })
+      },
+      doOpera () {
+         this.setData({
+            showOpera: !this.data.showOpera
          })
       }
    }

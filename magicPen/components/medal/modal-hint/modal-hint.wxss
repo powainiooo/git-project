@@ -2,6 +2,7 @@
 .modal-hint .modal-hint-container { width: 84%; background-color: #ffffff; border-radius: 10rpx; box-shadow: 10rpx 10rpx 20rpx rgba(44,142,243,0.2); position: relative;}
 .modal-hint .modal-hint-text1 { font-size: 40rpx; line-height: 40rpx; color: rgb(61, 153, 173); text-align: center; margin-top: 80rpx;}
 .modal-hint .modal-hint-text2 { font-size: 24rpx; line-height: 1.8; color: rgb(141, 159, 170); text-align: center; margin-top: 40rpx; margin-bottom: 60rpx;}
+.modal-hint .modal-hint-text3 { font-size: 32rpx; line-height: 1.8; color: #ff9900; text-align: center; margin-top: -40rpx; margin-bottom: 60rpx;}
 .modal-hint .modal-hint-text2 .red { color: #ff306a;}
 .modal-hint .modal-hint-steps { display: flex; align-items: center; justify-content: center; margin-top: 40rpx;}
 .modal-hint .modal-hint-steps .modal-hint-step-item { width: 50rpx; height: 50rpx; border-radius: 50%; background-color: #cccccc; border: 3rpx solid #edf2fc; margin: 0 20rpx; position: relative; font-size: 30rpx; line-height: 30rpx; color: #ffffff; display: flex; justify-content: center; align-items: center;}
@@ -12,3 +13,8 @@
 .modal-hint .modal-hint-btn { width: 240rpx; height: 60rpx; font-size: 30rpx; line-height: 30rpx; color: #ffffff; display: flex; justify-content: center; align-items: center; background-color: rgba(255, 203, 1, 1); box-shadow: 0 5rpx 20rpx rgba(255, 203, 1,0.25); border-radius: 20rpx; margin: 0 auto 45rpx auto;}
 .modal-hint .modal-hint-btn2 { background-color: rgba(204, 204, 204, 1); box-shadow: 0 5rpx 20rpx rgba(204, 204, 204,0.25);}
 .modal-hint .modal-hint-icon { width: 284rpx; position: absolute; top: -200rpx; left: 50%; margin-left: -142rpx;}
+.modal-hint .modal-hint-light { width: 450rpx; position: absolute; top: -300rpx; left: 50%; margin-left: -220rpx; z-index: -1; animation: light 10s linear infinite;}
+@keyframes light {
+   0% { transform: rotateZ( 0deg )}
+   100% { transform: rotateZ( 360deg )}
+}

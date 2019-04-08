@@ -21,6 +21,7 @@
 </view>
 
 <medal-hint wx:if="{{showHint}}"
+            isUser="{{isUser}}"
             medalData="{{selectData}}"
             bindtap="closeHint"
             bindgetMedal="getMedal"></medal-hint>

@@ -15,6 +15,10 @@ Component({
       medalData: {
          type: Object,
          value: {}
+      },
+      isUser: {
+         type: Boolean,
+         value: true
       }
    },
 

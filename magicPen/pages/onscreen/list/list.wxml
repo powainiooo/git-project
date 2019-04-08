@@ -1,5 +1,5 @@
 <view class="bigImg">
-   <image src="{{selectData.bigUrl}}" bindtap="gotoDetail" mode="widthFix"></image>
+   <image src="{{selectData.bigUrl}}" bindtap="gotoDetail"></image>
 </view>
 
 <view class="info-line">

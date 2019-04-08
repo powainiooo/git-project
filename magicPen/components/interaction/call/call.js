@@ -59,7 +59,6 @@ Component({
       },
       doCall () {
          if (this.data.count !== 0) return
-         this.countDown(15)
          if (this.data.resData.data === null) return
          if (this.data.cost > this.data.peas) {
             this.setData({

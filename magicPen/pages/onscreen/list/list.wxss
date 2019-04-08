@@ -1,5 +1,5 @@
 .bigImg { width: 100%; height: 800rpx; overflow: hidden;}
-.bigImg image { width: 100%;}
+.bigImg image { width: 100%; height: 100%;}
 .info-line { height: 150rpx; display: flex; justify-content: space-between; align-items: center; padding: 0 40rpx;}
 .info-line .project .name { font-size: 32rpx; line-height: 32rpx; color: #1c1c1c; margin-bottom: 20rpx;}
 .info-line .project .price { display: flex; align-items: center; font-size: 24rpx; color: #ff306a;}

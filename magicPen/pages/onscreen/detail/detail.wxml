@@ -9,6 +9,7 @@
           controls="{{false}}"
           autoplay
           loop
+          muted
           animation="{{cameraAni}}"
           wx:if="{{itemData.functType === 2}}">
    </video>

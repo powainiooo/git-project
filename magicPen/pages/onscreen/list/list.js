@@ -22,7 +22,10 @@ Page({
       },1000)
    },
    async getData() {
-      const {longitude, latitude} = await getLocation()
+      const {longitude, latitude} = await getLocation({
+         type: 'gcj02 ',
+         altitude: 'true',
+      })
       //113.266531 23.132191
       console.log(longitude,latitude)
       getPsdList(`${longitude},${latitude}`).then(res => {

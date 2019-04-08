@@ -1,5 +1,5 @@
-.personal-container .user { padding: 35rpx 80rpx; display: flex; align-items: center; border-bottom: 2rpx solid #f0f0f0;}
-.personal-container .user image { width: 150rpx; height: 150rpx; border-radius: 50%; margin-right: 60rpx;}
+.personal-container .user { padding: 60rpx 110rpx; display: flex; align-items: center; border-bottom: 2rpx solid #f0f0f0;}
+.personal-container .user .avatar { transform: scale(1.8); margin-right: 90rpx;}
 .personal-container .user text { font-size: 32rpx; color: #151515;}
 
 .personal-container .accout { padding: 15rpx 0; display: flex;}
@@ -13,3 +13,4 @@
 .personal-container .link-line .arrow { position: absolute; top: 25rpx; right: 40rpx;}
 .personal-container .link-line image{ width: 70rpx; margin-right: 30rpx; margin-top: 15rpx;}
 .personal-container .link-line text{ font-size: 32rpx; color: #8b8e98;}
+.personal-container .link-line .btn{ width: 100%; height: 100%; position: absolute; top: 0; left: 0; opacity: 0;}

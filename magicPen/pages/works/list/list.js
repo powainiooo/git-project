@@ -157,7 +157,10 @@ Page({
       })
    },
    async doBuy () {
-      const {longitude, latitude} = await getLocation()
+      const {longitude, latitude} = await getLocation({
+         type: 'gcj02 ',
+         altitude: 'true',
+      })
       const payRes = await payFuHuo(`${longitude},${latitude}`, this.data.tuzhiNu)
       if(payRes.code === 0) {
          this.setData({

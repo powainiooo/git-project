@@ -1,0 +1,3 @@
+.item-container { width: 100%; overflow: hidden;}
+.item-scroll { width: 100vw; display: flex; transition: left 0.3s ease-out; position: relative;}
+.func-item { width: 100vh}

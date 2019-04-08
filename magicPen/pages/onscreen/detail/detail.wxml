@@ -33,3 +33,5 @@
 <view class="btn-home" bindtap="gotoHome">
    <image src="../../../res/work/home.png" mode="widthFix"></image>
 </view>
+
+<i-message id="message" />

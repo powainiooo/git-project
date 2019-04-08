@@ -136,7 +136,10 @@ Page({
       wx.showLoading({
          title: '请求中'
       })
-      const {longitude, latitude} = await getLocation()
+      const {longitude, latitude} = await getLocation({
+         type: 'gcj02 ',
+         altitude: 'true',
+      })
       const checkRes = await checkPsd({
          psdId: this.data.generateData.psdId,
          coord: `${longitude},${latitude}`

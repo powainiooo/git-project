@@ -1,11 +1,27 @@
 <z-swiper bindchange="swiperChange"></z-swiper>
 
-<z-photo wx:if="{{currentKey === 'photo'}}" peas="{{myPeas}}"></z-photo>
+<view class="item-container">
+   <view class="item-scroll" animation="{{funcMove}}">
+      <z-photo wx:if="{{currentKey === 'photo'}}"
+               peas="{{myPeas}}"
+               class="func-item"></z-photo>
 
-<z-revive wx:if="{{currentKey === 'revive'}}" peas="{{myPeas}}" cost="{{fuhuoIq}}" resData="{{reviveData}}"></z-revive>
+      <z-revive wx:if="{{currentKey === 'revive'}}"
+                peas="{{myPeas}}"
+                cost="{{fuhuoIq}}"
+                resData="{{reviveData}}"
+                class="func-item"></z-revive>
 
-<z-call wx:if="{{currentKey === 'call'}}" peas="{{myPeas}}" cost="{{zhaohuanIq}}" resData="{{callResData}}"></z-call>
+      <z-call wx:if="{{currentKey === 'call'}}"
+              peas="{{myPeas}}"
+              cost="{{zhaohuanIq}}"
+              resData="{{callResData}}"
+              class="func-item"></z-call>
 
-<z-wind wx:if="{{currentKey === 'wind'}}"></z-wind>
+      <z-wind wx:if="{{currentKey === 'wind'}}"
+              class="func-item"></z-wind>
+   </view>
+</view>
+
 
 <i-message id="message" />

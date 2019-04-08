@@ -75,7 +75,10 @@ Component({
          })
       },
       async doBuy () {
-         const {longitude, latitude} = await getLocation()
+         const {longitude, latitude} = await getLocation({
+            type: 'gcj02 ',
+            altitude: 'true',
+         })
          const payRes = await payZhaohuan(`${longitude},${latitude}`)
          if (payRes.code === 0) {
 

@@ -13,7 +13,7 @@
 </view>
 
 <view class="photo-btn">
-   <z-button>开始游玩</z-button>
+   <z-button bindtap="gotoList">开始游玩</z-button>
 </view>
 
 <view class="photo-recharge">

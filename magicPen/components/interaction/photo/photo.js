@@ -21,6 +21,10 @@ Component({
    * 组件的方法列表
    */
   methods: {
-
+     gotoList () {
+        wx.navigateTo({
+           url: '/pages/onscreen/list/list'
+        })
+     }
   }
 })

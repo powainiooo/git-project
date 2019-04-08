@@ -8,6 +8,7 @@ Page({
    data: {
       avatarUrl: '',
       nickName: '',
+      grade: 0,
       userIq: 0,
       userFans: 0
    },
@@ -20,10 +21,11 @@ Page({
    },
    getPersonInfo() {
       getUserInterspaceInfo({userId: 0}).then(res => {
-         const {nick, avatarUrl, fans} = res.data
+         const {nick, avatarUrl, fans, grade} = res.data
          this.setData({
             nickName: nick,
             avatarUrl,
+            grade,
             userFans: fans
          })
       })

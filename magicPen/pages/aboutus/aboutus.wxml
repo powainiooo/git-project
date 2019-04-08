@@ -2,3 +2,5 @@
   <image src="{{imgSrc}}aboutus.jpg" mode="widthFix" class="aboutus-img"></image>
   <view class="aboutus-btn">在线聊天</view>
 </view>
+
+<i-message id="message" />

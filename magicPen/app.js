@@ -1,5 +1,6 @@
 //app.js
-import regeneratorRuntime from 'utils/runtime.js'
+// import regeneratorRuntime from 'utils/runtime.js'
+const regeneratorRuntime = require('utils/runtime.js')
 const {promisify} = require('utils/util.js')
 const login = promisify(wx.login)
 const getSetting = promisify(wx.getSetting)
@@ -48,7 +49,7 @@ App({
    },
    globalData: {
       ajaxSrc: 'https://xcx.newryun.com',
-      imgSrc: 'https://xcx.newryun.com',
+      imgSrc: 'https://xcx.newryun.com/xcxstatic/',
       userInfo: {},
       sKey: sKey,
       generateData: null,

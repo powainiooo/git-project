@@ -9,18 +9,37 @@ Page({
     * 页面的初始数据
     */
    data: {
-      currentKey: 'call',
+      currentKey: 'photo',
       myPeas: 0,
       fuhuoIq: 0,
       zhaohuanIq: 0,
       pageNoCall: 1,
       pageSize: 20,
       reviveData: {},
-      callResData: {}
+      callResData: {},
+      funcMove: {},
    },
    swiperChange(e) {
       const {currentKey} = e.detail
-      this.setData({currentKey})
+      const hide = wx.createAnimation({
+         duration: 0,
+         timingFunction: 'ease',
+      })
+      hide.opacity(0).step()
+      this.setData({
+         currentKey,
+         funcMove: hide.export()
+      })
+      wx.nextTick(()=>{
+         const show = wx.createAnimation({
+            duration: 1000,
+            timingFunction: 'ease',
+         })
+         show.opacity(1).step()
+         this.setData({
+            funcMove: show.export()
+         })
+      })
    },
    /**
     * 生命周期函数--监听页面加载
@@ -44,7 +63,10 @@ Page({
       })
    },
    async getMyWorksScene () {
-      const {longitude, latitude} = await getLocation()
+      const {longitude, latitude} = await getLocation({
+         type: 'gcj02 ',
+         altitude: 'true',
+      })
       getMyWorksScene({
          startPage: this.data.pageNoCall,
          pageSize: this.data.pageSize,

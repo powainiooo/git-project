@@ -52,6 +52,16 @@ Component({
             })
          })
       },
+      closeScanModal() {
+         this.setData({
+            opacity: 0
+         })
+         setTimeout(() => {
+            this.setData({
+               showScan: false
+            })
+         }, 300)
+      },
       async openScan() {
          const {result} = await scan()
          const {ajaxSrc, sKey} = getApp().globalData

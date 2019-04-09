@@ -1,5 +1,5 @@
 <view class="aboutus">
-  <image src="{{imgSrc}}aboutus.jpg" mode="widthFix" class="aboutus-img"></image>
+  <image src="{{imgSrc}}aboutus.jpg" mode="widthFix" class="aboutus-img"></image>git
 </view>
 
 <i-message id="message" />

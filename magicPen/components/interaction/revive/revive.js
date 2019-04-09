@@ -30,7 +30,8 @@ Component({
      freeFuhuoState: 1,
      showModal: false,
      modalType: 'cost',
-     modalContent: 'cost',
+     modalContent: '',
+     isBuying: false
   },
 
   /**
@@ -72,7 +73,7 @@ Component({
               modalContent: '请选择一个要复活的作品！',
            })
         }else {
-           const msg = this.data.freeFuhuoState === 2 ? '第一次免费复活哟！' `是否花费${this.data.cost}智力币复活？`:
+           const msg = this.data.freeFuhuoState === 2 ? '第一次免费复活哟！': `是否花费${this.data.cost}智力币复活？`
            this.setData({
               showModal: true,
               modalType: 'cost',
@@ -81,9 +82,10 @@ Component({
         }
      },
      async doBuy () {
+        if(this.data.isBuying) return
+        this.data.isBuying = true
         const {longitude, latitude} = await getLocation({
-           type: 'gcj02 ',
-           altitude: 'true',
+           type: 'gcj02',
         })
         const payRes = await payFuHuo(`${longitude},${latitude}`, this.data.tuzhiNu)
         if(payRes.code === 0) {
@@ -92,6 +94,7 @@ Component({
               modalType: 'hint',
               modalContent: payRes.msg,
            })
+           this.triggerEvent('reset')
         }else {
            if (payRes.code === 988) {
               this.setData({
@@ -107,6 +110,7 @@ Component({
               })
            }
         }
+        this.data.isBuying = false
      }
   }
 })

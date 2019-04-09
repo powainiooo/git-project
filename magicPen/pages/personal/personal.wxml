@@ -30,7 +30,7 @@
     <i-icon type="enter" class="arrow" size="22" color="#8b8e98" />
   </view>
   <view class="link-line" data-url="/pages/rule/rule" bindtap="linkTo">
-    <image src="../../res/personal/aboutus.png" mode="widthFix"></image>
+    <image src="../../res/personal/rule.png" mode="widthFix"></image>
     <text>规则说明</text>
     <i-icon type="enter" class="arrow" size="22" color="#8b8e98" />
   </view>

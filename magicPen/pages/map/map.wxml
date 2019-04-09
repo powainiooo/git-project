@@ -15,4 +15,6 @@
 </view>
 <view class="map-addr">{{locationData.location}}</view>
 
+<image src="{{storeUrl}}" mode="widthFix" class="store-img"></image>
+
 <i-message id="message" />

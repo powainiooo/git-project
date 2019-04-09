@@ -44,6 +44,7 @@
               isUser="{{isUser}}"
               bindrevive="doRevive"
               bindgetwork="getwork"
+              binddelwork="delwork"
               bindshare="doShare"
               itemData="{{item}}"></list-item>
    <view class="list-hint" wx:if="{{worksList.length === 0}}">你还没作品哟！</view>

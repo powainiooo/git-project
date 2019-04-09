@@ -64,13 +64,13 @@ Page({
    },
    async getMyWorksScene () {
       const {longitude, latitude} = await getLocation({
-         type: 'gcj02 ',
-         altitude: 'true',
+         type: 'gcj02',
       })
       getMyWorksScene({
          startPage: this.data.pageNoCall,
          pageSize: this.data.pageSize,
          coord: `${longitude},${latitude}`
+         // coord: `114.0422219038,22.5186571950`
       }).then(res => {
          this.setData({
             reviveData: res

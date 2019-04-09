@@ -32,6 +32,7 @@ Component({
       modalContent2: '',
       countT: 0,
       count: 0,
+      isBuying: false,
    },
 
    /**
@@ -74,13 +75,19 @@ Component({
          })
       },
       async doBuy () {
+         if(this.data.isBuying) return
+         this.data.isBuying = true
          const {longitude, latitude} = await getLocation({
-            type: 'gcj02 ',
-            altitude: 'true',
+            type: 'gcj02',
          })
          const payRes = await payZhaohuan(`${longitude},${latitude}`)
          if (payRes.code === 0) {
-
+            this.setData({
+               showModal: true,
+               modalType: 'hint',
+               modalContent2: payRes.msg,
+            })
+            this.triggerEvent('reset')
          } else if (payRes.code === 15) {
             this.countDown(payRes.data)
          } else {
@@ -90,6 +97,7 @@ Component({
                modalContent2: payRes.msg,
             })
          }
+         this.data.isBuying = false
       },
       countDown (count) {
          count = parseInt(count)

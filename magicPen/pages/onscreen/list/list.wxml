@@ -4,7 +4,7 @@
 
 <view class="info-line">
    <view class="project">
-      <view class="name">{{selectData.title}}</view>
+      <view class="name">{{selectData.title}}  <text>{{selectData.pricePhoto == 0 || selectData.priceVideo == 0 ? '新人免费' : ''}}</text></view>
       <view class="price">
          <image src="../../../res/interaction/camera.png" mode="widthFix" class="icon"></image>
          <text>{{selectData.pricePhoto}}</text>
@@ -19,7 +19,7 @@
          <image wx:for="{{selectData.playUsers}}" wx:for-item="item" wx:key="{{item.nick}}" src="{{item.avatarUrl}}" class="users"></image>
       </view>
       <view class="nums">
-         <text>他们正在玩</text>
+         <text wx:if="{{selectData.playUsers !== null}}">他们正在玩</text>
          <text>{{selectData.use}}人使用</text>
       </view>
    </view>

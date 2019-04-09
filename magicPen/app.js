@@ -12,27 +12,17 @@ App({
       this.doInit()
    },
    async doInit() {
-      console.time('code')
       const {code} = await login()
-      console.timeEnd('code')
-      console.time('getting')
       const getSettingData = await getSetting()
-      console.log(getSettingData)
-      console.timeEnd('getting')
       if(getSettingData.authSetting['scope.userInfo']) {
-         console.time('userInfo')
          const userInfoData = await getUserInfo()
-         console.timeEnd('userInfo')
          const {encryptedData, iv, userInfo} = userInfoData
          Object.assign(this.globalData.userInfo, userInfo)
-
-         console.time('login')
          const resData = await ajax({
             url: `${this.globalData.ajaxSrc}/api/user/onLogin`,
             method: 'POST',
             data:{code, encryptedData, iv}
          }).catch(e => console.log(e))
-         console.timeEnd('login')
          this.globalData.sKey = resData.data.data.sKey
          wx.setStorage({
             key:'sKey',
@@ -48,8 +38,8 @@ App({
       }
    },
    globalData: {
-      // ajaxSrc: 'https://xcx.newryun.com',
-      ajaxSrc: 'http://n5ucvg.natappfree.cc',
+      ajaxSrc: 'https://xcx.newryun.com',
+      // ajaxSrc: 'http://n5ucvg.natappfree.cc',
       imgSrc: 'https://xcx.newryun.com/xcxstatic/',
       userInfo: {},
       sKey: sKey,

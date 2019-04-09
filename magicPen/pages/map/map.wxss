@@ -3,3 +3,5 @@
 .map-info .distance{ font-size: 28rpx; color: #565656;}
 .map-info .distance image{ width: 20rpx; margin-left: 15rpx;}
 .map-addr{ font-size: 28rpx; color: #565656; margin-left: 100rpx;}
+
+.store-img { width: 100%; margin-top: 50rpx;}

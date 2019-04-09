@@ -8,7 +8,8 @@ Page({
     longitude: 0,
     latitude: 0,
     markers:[],
-    locationData: {}
+    locationData: {},
+     storeUrl: ''
   },
 
   /**
@@ -16,14 +17,20 @@ Page({
    */
   onLoad: function (options) {
     const locationData = getApp().globalData.locationData
-    const {longitude, latitude} = locationData
+    const {longitude, latitude, mchImg} = locationData
     const markers = [{
       iconPath: '../../res/index/icon-geo.png',
       id: 0,
       latitude,
-      longitude,
+      longitude
     }]
-    this.setData({locationData, longitude, latitude, markers})
+    this.setData({
+       locationData,
+       longitude,
+       latitude,
+       markers,
+       storeUrl: mchImg
+    })
   },
 
   /**

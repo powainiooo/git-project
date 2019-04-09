@@ -65,7 +65,7 @@
          <view>更好玩得</view>
       </view>
       <view class="btn3" bindtap="doBuy" wx:if="{{showBottom2}}">
-         <z-button>拍照上屏</z-button>
+         <z-button>{{btnText}}</z-button>
       </view>
    </view>
 </view>
@@ -79,6 +79,6 @@
    </view>
 </z-modal>
 
-<canvas canvas-id="firstCanvas" style="width: 750px; height: 1333px; position: fixed; top: -10000px; left: -10000px;"></canvas>
+<canvas canvas-id="firstCanvas" class="draw-frame"></canvas>
 
 <i-message id="message" />

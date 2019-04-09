@@ -1,5 +1,5 @@
 // components/index/list-item/list-item.js
-const {updataWorksTop, deleteWorks, updataWorksName, worksZan} = require('../../../utils/api.js')
+const {updataWorksTop, updataWorksName, worksZan} = require('../../../utils/api.js')
 const { $Message } = require('../../../components/iview/base/index')
 Component({
    /**
@@ -58,8 +58,8 @@ Component({
          })
       },
       doDel () {
-         deleteWorks(this.data.itemData.tuzhiNu).then(res => {
-            this.triggerEvent('getwork')
+         this.triggerEvent('delwork',{
+            tuzhiNu: this.data.itemData.tuzhiNu
          })
       },
       showEdit () {

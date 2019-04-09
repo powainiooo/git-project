@@ -10,12 +10,14 @@
                 peas="{{myPeas}}"
                 cost="{{fuhuoIq}}"
                 resData="{{reviveData}}"
+                bindreset="getUserAsset"
                 class="func-item"></z-revive>
 
       <z-call wx:if="{{currentKey === 'call'}}"
               peas="{{myPeas}}"
               cost="{{zhaohuanIq}}"
               resData="{{callResData}}"
+              bindreset="getUserAsset"
               class="func-item"></z-call>
 
       <z-wind wx:if="{{currentKey === 'wind'}}"

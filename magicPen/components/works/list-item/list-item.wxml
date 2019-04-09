@@ -67,6 +67,7 @@
    <view class="time">{{util.format(itemData.createAt)}}</view>
 </view>
 
+
 <wxs module="util">
    var format = function(sec){
       var time = getDate(sec*1000)

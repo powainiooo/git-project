@@ -2,7 +2,7 @@ import regeneratorRuntime from '../../../utils/runtime.js'
 const {promisify} = require('../../../utils/util.js')
 const chooseImage = promisify(wx.chooseImage)
 const getLocation = promisify(wx.getLocation)
-const {getMyWorks, getMyFriend, getUserInterspaceInfo, addAttention, fileUp, uploadTopImg, getFuhuoIqAndZhaohuanIq, payFuHuo} = require('../../../utils/api.js')
+const {getMyWorks, getMyFriend, getUserInterspaceInfo, addAttention, fileUp, uploadTopImg, getFuhuoIqAndZhaohuanIq, payFuHuo, deleteWorks} = require('../../../utils/api.js')
 Page({
 
    /**
@@ -158,6 +158,8 @@ Page({
          this.gotoRecharge()
       } else if (this.data.modalType === 'cost') {
          this.doBuy()
+      } else if (this.data.modalType === 'del') {
+         this.confimDelwork()
       }
    },
    gotoRecharge () {
@@ -167,8 +169,7 @@ Page({
    },
    async doBuy () {
       const {longitude, latitude} = await getLocation({
-         type: 'gcj02 ',
-         altitude: 'true',
+         type: 'gcj02',
       })
       const payRes = await payFuHuo(`${longitude},${latitude}`, this.data.tuzhiNu)
       if(payRes.code === 0) {
@@ -197,6 +198,21 @@ Page({
       this.data.pageNo = 1
       this.data.worksList = []
       this.getWorkList()
+   },
+   delwork (e) {
+      const {tuzhiNu} = e.detail
+      this.setData({
+         tuzhiNu,
+         showModal: true,
+         modalType: 'del',
+         modalContent: '是否确认删除作品？',
+      })
+   },
+   confimDelwork () {
+      deleteWorks(this.data.tuzhiNu).then(res => {
+         this.getwork()
+         this.closeModal()
+      })
    },
    gotoMedal () {
       wx.navigateTo({

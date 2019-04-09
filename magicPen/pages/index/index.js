@@ -71,8 +71,7 @@ Page({
   },
   async getStore() {
     const {longitude, latitude} = await getLocation({
-       type: 'gcj02 ',
-       altitude: 'true',
+       type: 'gcj02',
     })
     const res = await getNearbyMerchant(`${longitude},${latitude}`)
     app.globalData.locationData = res.data

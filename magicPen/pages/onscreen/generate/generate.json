@@ -2,5 +2,6 @@
   "usingComponents": {
      "z-button": "../../../components/button/button",
      "z-modal": "../../../components/modal/modal"
-  }
+  },
+   "disableScroll": true
 }

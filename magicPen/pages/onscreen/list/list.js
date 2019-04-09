@@ -23,13 +23,11 @@ Page({
    async getData() {
       console.log('getData')
       const {longitude, latitude, accuracy} = await getLocation({
-         // type: 'gcj02 ',
-      }).catch(err=>{
-         console.log(err)
+         type: 'gcj02',
       })
       //113.266531 23.132191
       console.log(longitude,latitude, accuracy)
-      getPsdList(`${longitude},${latitude}`).then(res => {
+      getPsdList(`114.0422219038,22.518657195`).then(res => {
          this.setData({
             listData: res.data,
             selectData: res.data[0]

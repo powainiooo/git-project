@@ -5,6 +5,7 @@ const {promisify} = require('../../../utils/util.js')
 const getLocation = promisify(wx.getLocation)
 const canvasToTempFilePath = promisify(wx.canvasToTempFilePath)
 const downloadFile = promisify(wx.downloadFile)
+const saveImageToPhotosAlbum = promisify(wx.saveImageToPhotosAlbum)
 Page({
 
    /**
@@ -41,6 +42,14 @@ Page({
       // setTimeout(()=>{
       //    this.coverAnimation()
       // },1000)
+      // const self = this
+      // wx.chooseImage({
+      //    success(res){
+      //       self.setData({
+      //          photos: res.tempFilePaths[0]
+      //       })
+      //    }
+      // })
    },
    closeModal () {
       this.setData({
@@ -137,23 +146,23 @@ Page({
          title: '请求中'
       })
       const {longitude, latitude} = await getLocation({
-         type: 'gcj02 ',
-         altitude: 'true',
+         type: 'gcj02',
       })
       const checkRes = await checkPsd({
          psdId: this.data.generateData.psdId,
-         coord: `${longitude},${latitude}`
-         // coord: `114.0281724930,22.6092965074`
+         // coord: `${longitude},${latitude}`
+         coord: `114.0422219038,22.5186571950`
       })
       if(checkRes.code === 0){
          const payData = `psdId=${this.data.generateData.psdId}&isTutorials=${this.data.generateData.isTutorials}&functType=${this.data.functType}`
          const payRes = await payPsdGoods(payData)
          if(payRes.code === 0) {
-            const urlRes = await fileUp(this.data.photos, this.data.functType)
+            const src = this.data.functType === 1 ? this.data.photos : this.data.videos
+            const urlRes = await fileUp(src, this.data.functType)
             if(urlRes.code === 0) {
                const upRes = await psdUpTv({
-                  coord: `${longitude},${latitude}`,
-                  // coord: `114.0281724930,22.6092965074`,
+                  // coord: `${longitude},${latitude}`,
+                  coord: `114.0422219038,22.5186571950`,
                   materialUrl: urlRes.data,
                   psdOrderNu: payRes.data.psdOrderNu
                })
@@ -188,11 +197,12 @@ Page({
              .top(`0rpx`)
              .left(`0rpx`)
              .step()
-
+         let btnText = this.data.functType === 1 ? `拍照上屏${this.data.generateData.pricePhoto}豆` : `录像上屏${this.data.generateData.priceVideo}豆`
          this.setData({
             cameraAni: camera.export(),
             coverAni: cover.export(),
-            showBottom2: true
+            showBottom2: true,
+            btnText
          })
       })
    },
@@ -213,26 +223,32 @@ Page({
          url: this.data.generateData.psdUrl
       })
       ctx.drawImage(cover.tempFilePath, 0, 0, 750, 1333)
-      ctx.draw()
-      const imgUrl = await canvasToTempFilePath({
-         canvasId: 'firstCanvas',
-         quality: 1,
-         x: 0,
-         y: 0,
-         width: 750,
-         height: 1333,
+      ctx.drawImage('../../../res/interaction/print.png', 454, 1030, 296, 303)
+      const self = this
+      ctx.draw(false, ()=>{
+         wx.canvasToTempFilePath({
+            canvasId: 'firstCanvas',
+            quality: 1,
+            x: 0,
+            y: 0,
+            width: 750,
+            height: 1333,
+            success (res) {
+               wx.saveImageToPhotosAlbum({
+                  filePath: res.tempFilePath,
+                  success () {
+                     wx.showToast({
+                        title: '保存成功',
+                        icon: 'success',
+                        duration: 2000
+                     })
+                     self.data.isSaving = false
+                  }
+               })
+            }
+         })
       })
-      wx.saveImageToPhotosAlbum({
-         filePath: imgUrl.tempFilePath,
-         success(){
-            wx.showToast({
-               title: '保存成功',
-               icon: 'success',
-               duration: 2000
-            })
-            this.data.isSaving = false
-         }
-      })
+
    },
    tryAnother () {
       wx.navigateTo({

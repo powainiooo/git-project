@@ -26,8 +26,10 @@
 .tabs view { height: 100%; font-size: 32rpx; color: rgb(61,153,173); display: flex; align-items: center;}
 .tabs view.active { color: rgb(255,153,0);}
 
-.works-list{ background-color: #eff2f9; overflow: hidden;}
+.works-list{ overflow: hidden;}
 
 .modal-content .txt1 { font-size: 32rpx; color: #30aac2; text-align: center; padding: 60rpx 50rpx;}
 .modal-content .btn { width: 240rpx; margin: 0 auto 50rpx auto;}
 .modal-content .btn .pea{ width: 50rpx; margin-top: 20rpx; margin-left: 15rpx;}
+
+.list-hint { text-align: center; margin: 20rpx 0; font-size: 28rpx; color: rgb(255,153,0)}

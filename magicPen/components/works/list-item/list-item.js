@@ -19,7 +19,8 @@ Component({
       'itemData'(val) {
          this.setData({
             nameValue: val.worksName,
-            zan: val.zan
+            zan: val.zan,
+            isLike: val.isZan === 1
          })
       }
    },
@@ -29,6 +30,8 @@ Component({
    data: {
       showOpera: false,
       isEdit: false,
+      isLike: false,
+      isFocus: false,
       nameValue: '',
       zan: 0,
    },
@@ -61,7 +64,8 @@ Component({
       },
       showEdit () {
          this.setData({
-            isEdit: true
+            isEdit: true,
+            isFocus: true
          })
       },
       hideEdit () {
@@ -89,27 +93,31 @@ Component({
          })
       },
       doThumbup () {
-         if(this.data.isUser) return
+         if(this.data.isLike) return
          worksZan(this.data.itemData.tuzhiNu).then(res => {
-            let zan = this.data.zan
             if(res.code === 0) {
-               zan += 1
+               this.setData({
+                  zan: this.data.zan + 1,
+                  isLike: true
+               })
             }else {
                $Message({
                   content: res.msg,
                   type: 'warning'
                });
             }
-            this.setData({
-               zan,
-               isLike: true
-            })
+
          })
       },
       doOpera () {
          this.setData({
             showOpera: !this.data.showOpera
          })
-      }
+      },
+      gotoPerson(e){
+         wx.navigateTo({
+            url: `/pages/works/list/list?userId=${e.currentTarget.dataset.id}`
+         })
+      },
    }
 })

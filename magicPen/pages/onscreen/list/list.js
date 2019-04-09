@@ -17,17 +17,18 @@ Page({
     * 生命周期函数--监听页面加载
     */
    onLoad: function (options) {
-      setTimeout(()=>{
-         this.getData()
-      },1000)
+      console.log('list')
+      this.getData()
    },
    async getData() {
-      const {longitude, latitude} = await getLocation({
-         type: 'gcj02 ',
-         altitude: 'true',
+      console.log('getData')
+      const {longitude, latitude, accuracy} = await getLocation({
+         // type: 'gcj02 ',
+      }).catch(err=>{
+         console.log(err)
       })
       //113.266531 23.132191
-      console.log(longitude,latitude)
+      console.log(longitude,latitude, accuracy)
       getPsdList(`${longitude},${latitude}`).then(res => {
          this.setData({
             listData: res.data,

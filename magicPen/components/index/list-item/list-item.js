@@ -22,7 +22,8 @@ Component({
     * 组件的初始数据
     */
    data: {
-      zan: 0
+      zan: 0,
+      isLike: false
    },
 
    /**
@@ -42,9 +43,12 @@ Component({
       doThumbup () {
          worksZan(this.data.itemData.tuzhiNu).then(res => {
             let zan = this.data.zan
+            let like = false
             if(res.code === 0) {
                zan += 1
+               like = true
             }else {
+               if(res.code === 4002) like = true
                $Message({
                   content: res.msg,
                   type: 'warning'
@@ -52,7 +56,7 @@ Component({
             }
             this.setData({
                zan,
-               isLike: true
+               isLike: like
             })
          })
       },

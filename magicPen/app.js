@@ -48,7 +48,8 @@ App({
       }
    },
    globalData: {
-      ajaxSrc: 'https://xcx.newryun.com',
+      // ajaxSrc: 'https://xcx.newryun.com',
+      ajaxSrc: 'http://n5ucvg.natappfree.cc',
       imgSrc: 'https://xcx.newryun.com/xcxstatic/',
       userInfo: {},
       sKey: sKey,

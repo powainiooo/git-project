@@ -25,7 +25,9 @@ Page({
       attentionList: [],
       pageNo: 1,
       pageSize: 20,
+      pageAll: 1,
       pageNoAttention: 1,
+      pageAllAttention: 1,
       tuzhiNu: '',
       showModal: false,
       modalType: 'cost',
@@ -57,10 +59,11 @@ Page({
          userId: this.data.userId
       }
       getMyWorks(obj).then(res => {
-         let list = res.data.pageData === null ? [] : res.data.pageData
+         let list = res.data === null ? [] : res.data.pageData
          this.setData({
             isLoading: false,
-            worksList: this.data.worksList.concat(list)
+            worksList: this.data.worksList.concat(list),
+            pageAll: res.data === null ? 1 : res.data.pageSum
          })
       })
    },
@@ -73,10 +76,11 @@ Page({
          pageSize: this.data.pageSize
       }
       getMyFriend(obj).then(res => {
-         let list = res.data.pageData === null ? [] : res.data.pageData
+         let list = res.data === null ? [] : res.data.pageData
          this.setData({
             isLoading: false,
-            attentionList: this.data.attentionList.concat(list)
+            attentionList: this.data.attentionList.concat(list),
+            pageAllAttention: res.data === null ? 1 : res.data.pageSum
          })
       })
    },
@@ -116,9 +120,14 @@ Page({
       }
    },
    addAttention() {
-      addAttention({userId: this.data.userId}).then(res => {
+      addAttention(this.data.userId).then(res => {
          this.setData({
             attentionThisUser: true
+         })
+         wx.showToast({
+            title: '关注成功',
+            icon: 'success',
+            duration: 2000
          })
       })
    },
@@ -238,10 +247,15 @@ Page({
    onReachBottom: function () {
       if (this.data.page === 'works') {
          this.data.pageNo ++
-         this.getWorkList()
+         if(this.data.pageNo < this.data.pageAll){
+            this.getWorkList()
+         }
+
       } else if (this.data.page === 'attention') {
          this.data.pageNoAttention ++
-         this.getMyFriend()
+         if(this.data.pageNoAttention < this.data.pageAllAttention) {
+            this.getMyFriend()
+         }
       }
    },
 

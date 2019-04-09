@@ -1,11 +1,11 @@
 {
   "pages": [
+     "pages/index/index",
+     "pages/onscreen/list/list",
      "pages/works/list/list",
      "pages/interaction/interaction",
      "pages/recharge/recharge",
-     "pages/index/index",
      "pages/medal/medal",
-     "pages/onscreen/list/list",
      "pages/onscreen/generate/generate",
     "pages/personal/personal",
     "pages/onscreen/detail/detail",

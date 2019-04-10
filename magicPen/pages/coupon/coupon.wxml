@@ -13,6 +13,7 @@
        <view class="value2">{{item.couponValue}}</view>
        <view class="value3">{{item.fullMoney }}</view>
     </view>
+   <view class="hint" wx:if="{{listData === null || listData.length === 0}}">暂无可用优惠券</view>
 </view>
 
 <i-message id="message" />

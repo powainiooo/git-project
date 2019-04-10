@@ -73,12 +73,21 @@ Component({
               modalContent: '请选择一个要复活的作品！',
            })
         }else {
-           const msg = this.data.freeFuhuoState === 2 ? '第一次免费复活哟！': `是否花费${this.data.cost}智力币复活？`
-           this.setData({
-              showModal: true,
-              modalType: 'cost',
-              modalContent: msg,
-           })
+           if (this.data.cost > this.data.peas) {
+              this.setData({
+                 showModal: true,
+                 modalType: 'recharge',
+                 modalContent: `发动3D复活特技`,
+              })
+           } else {
+              const msg = this.data.freeFuhuoState === 2 ? '第一次免费复活哟！': `是否花费${this.data.cost}智力币复活？`
+              this.setData({
+                 showModal: true,
+                 modalType: 'cost',
+                 modalContent: msg,
+              })
+           }
+
         }
      },
      async doBuy () {

@@ -48,10 +48,15 @@
 <z-modal wx:if="{{showModal}}" bindtap="closeModal">
    <view class="modal-content">
       <view class="txt1">{{modalContent}}</view>
-      <view class="btn">
-         <z-button catchtap="modalConfirm">
+      <view class="btn" style="width: {{modalType === 'recharge' ? '540rpx' : '240rpx'}}">
+         <z-button catchtap="modalConfirm" wx:if="{{modalType !== 'recharge'}}">
             <text>确定</text>
             <!--<image src="../../../res/interaction/pea.png" mode="widthFix" class="pea"></image>-->
+         </z-button>
+         <z-button catchtap="modalConfirm" wx:if="{{modalType === 'recharge'}}">
+            <text>您的智力币不足{{cost}}</text>
+            <image src="../../../res/interaction/pea.png" mode="widthFix" class="pea"></image>
+            <text>，去兑换些〉</text>
          </z-button>
       </view>
    </view>

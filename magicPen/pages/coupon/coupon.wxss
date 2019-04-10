@@ -10,3 +10,5 @@
 .coupon-item-free .value1 { width: 90rpx; height: 50rpx; top: 130rpx; left: 510rpx; color: #ff306a; font-size: 50rpx;}
 .coupon-item-free .value2 { display: none;}
 .coupon-item-free .value3 { display: none;}
+
+.coupon-container .hint { font-size: 28rpx; text-align: center; margin: 20rpx 0; color: #ff306a;}

@@ -1,15 +1,16 @@
-.bigImg { width: 100%; height: calc(100vh - 150rpx - 260rpx); max-height: 800rpx; overflow: hidden;}
+.bigImg { width: 100%; height: calc(100vh - 150rpx - 260rpx); max-height: 800rpx; overflow: hidden; position: relative;}
 .bigImg image { width: 100%; height: 800rpx;}
+.non-hint { width: 280rpx; height: 50rpx; border-radius: 25rpx; background-color: #ffffff; color: #151515; font-size: 24rpx; display: flex; justify-content: center; align-items: center; position: absolute; bottom: 50rpx; left: 235rpx;}
 .info-line { height: 150rpx; display: flex; justify-content: space-between; align-items: center; padding: 0 40rpx;}
 .info-line .project .name { font-size: 32rpx; line-height: 32rpx; color: #1c1c1c; margin-bottom: 20rpx;}
-.info-line .project .name text { color: #ff306a;}
+.info-line .project .name text { color: #ff306a; font-size: 20rpx;}
 .info-line .project .price { display: flex; align-items: center; font-size: 24rpx; color: #ff306a;}
 .info-line .project image { width: 50rpx; margin-right: 20rpx;}
 .info-line .project .pea { margin-top: 15rpx;}
 .info-line .project text { margin-right: 20rpx;}
 .info-line .likes { width: 260rpx;}
-.info-line .likes .list { width: 190rpx; display: flex; justify-content: space-between; margin-bottom: 20rpx;}
-.info-line .likes .list .users { width: 40rpx; height: 40rpx; border-radius: 50%;}
+.info-line .likes .list { width: 200rpx; height: 40rpx; display: flex; margin-bottom: 20rpx;}
+.info-line .likes .list .users { width: 40rpx; height: 40rpx; border-radius: 50%; margin-right: 10rpx;}
 .info-line .likes .nums { font-size: 22rpx; color: #8a9294; display: flex; justify-content: space-between;}
 
 .screen-list { padding: 10rpx; display: flex; background-color: #f0f3fb;}

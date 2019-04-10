@@ -40,6 +40,7 @@
       </view>
       <view class="count" wx:if="{{count !== 0}}">录像倒计时：{{count}}秒</view>
    </view>
+
    <view class="btns-frame" style="bottom: {{showBottom2 ? '0' : '-140rpx'}}">
       <view class="btn2" bindtap="doShare" wx:if="{{canShare}}">
          <image src="../../../res/interaction/share.png" mode="aspectFit"></image>
@@ -65,7 +66,7 @@
          <view>更好玩得</view>
       </view>
       <view class="btn3" bindtap="doBuy" wx:if="{{showBottom2}}">
-         <z-button>{{btnText}}</z-button>
+         <view class="msg-btn">{{btnText}}<text wx:if="{{(functType === 1 && generateData.pricePhoto == 0) || (functType === 2 && generateData.priceVideo == 0)}}">新人免费</text></view>
       </view>
    </view>
 </view>
@@ -74,7 +75,7 @@
    <view class="modal-content">
       <view class="txt1">{{modalContent}}</view>
       <view class="btn">
-         <z-button>确定</z-button>
+         <z-button catchtap="btnConfirm">确定</z-button>
       </view>
    </view>
 </z-modal>

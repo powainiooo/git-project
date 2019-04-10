@@ -17,7 +17,9 @@
 .btns-frame .btn2 view { font-size: 22rpx; color: #999999;}
 .btns-frame .btn-share { width: 100%; height: 100%; position: absolute; top: 0; left: 0; opacity: 0;}
 
-.btns-frame .btn3 { width: 240rpx; position: absolute; top: -100rpx; left: 265rpx;}
+.btns-frame .btn3 { width: 100%; position: absolute; top: -100rpx; left: 0; text-align: center;}
+.btns-frame .msg-btn { background-color: rgb(44,142,243); box-shadow: 0 5rpx 20rpx rgba(44,142,243,0.25); border-radius: 20rpx; display: inline-block; color: #ffffff; font-size: 32rpx; padding: 12rpx 30rpx;}
+.btns-frame .msg-btn text { font-size: 20rpx; color: #ff3067;}
 
 .btns-frame .count { width: 100%; height: 100%; font-size: 32rpx; color: #ff3067; position: absolute; top: 0; left: 0; display: flex; justify-content: center; align-items: center; background-color: #ffffff;}
 

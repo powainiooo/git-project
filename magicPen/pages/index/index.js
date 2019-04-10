@@ -3,7 +3,6 @@
 const app = getApp()
 const {getSlideList, getNearbyMerchant, getChoicenessWorks} = require('../../utils/api.js')
 const useGuide = wx.getStorageSync('useGuide')
-console.log('useGuide:'+useGuide)
 // import regeneratorRuntime from '../../utils/runtime.js'
 const regeneratorRuntime = require('../../utils/runtime.js')
 const {promisify} = require('../../utils/util.js')
@@ -73,6 +72,7 @@ Page({
     const {longitude, latitude} = await getLocation({
        type: 'gcj02',
     })
+     console.log(longitude,latitude)
     const res = await getNearbyMerchant(`${longitude},${latitude}`)
     app.globalData.locationData = res.data
     this.setData({
@@ -111,5 +111,13 @@ Page({
         data: true
       })
     }
-  }
+  },
+   /**
+    * 生命周期函数--监听页面显示
+    */
+   onShow: function () {
+      this.getBannerData()
+      this.getWorksData()
+      this.getStore()
+   },
 })

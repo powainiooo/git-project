@@ -12,7 +12,7 @@
                 catchtap="showEdit"/>
       </view>
       <view class="list-item-line" wx:if="{{isEdit}}">
-         <input value="{{nameValue}}"  class="list-item-name-input" focus="{{isFocus}}" bindinput="nameChange" />
+         <input value="{{nameValue}}"  class="list-item-name-input" focus="{{isFocus}}" bindinput="nameChange" maxlength="11" />
          <view class="list-item-ok" catchtap="confirmEdit">确定</view>
          <view class="list-item-ok" catchtap="hideEdit">取消</view>
       </view>

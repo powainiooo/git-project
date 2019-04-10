@@ -10,7 +10,7 @@
     <image src="../../../res/index/mascot2.png" mode="widthFix" class="mascot2"></image>
     <image src="../../../res/index/modal.png" mode="widthFix" class="modal2"></image>
     <view class="content">
-      <text>扫描现场你的画纸二维码，赶快　　收藏作品吧。必须先上传到大屏后再扫描才可以喔。记得随时到这里来找我。</text>
+      <text>扫描现场你的画纸二维码，赶快\n收藏作品吧。必须先上传到大屏后再扫描才可以喔。记得随时到这里来找我。</text>
       <view class="btn">【立即体验】</view>
     </view>
   </view>

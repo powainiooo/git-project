@@ -1,20 +1,29 @@
-<map
-    id="map"
-    longitude="{{longitude}}"
-    latitude="{{latitude}}"
-    markers="{{markers}}"
-    show-location
-    style="width: 100%; height: 670rpx;"
-></map>
-<view class="map-info">
-  <view class="name">{{locationData.mchName}}</view>
-  <view class="distance">
-    <text>距您{{locationData.minKM}}KM</text>
-    <image src="../../res/index/icon-geo.png" mode="widthFix"></image>
-  </view>
+<view wx:if="{{locationData !== null}}">
+   <map
+       id="map"
+       longitude="{{longitude}}"
+       latitude="{{latitude}}"
+       markers="{{markers}}"
+       show-location
+       style="width: 100%; height: 670rpx;"
+   ></map>
+   <view class="map-info">
+      <view class="name">{{locationData.mchName}}</view>
+      <view class="distance">
+         <text>距您{{locationData.minKM}}KM</text>
+         <image src="../../res/index/icon-geo.png" mode="widthFix"></image>
+      </view>
+   </view>
+   <view class="map-addr">{{locationData.location}}</view>
+   <view class="btn">
+      <z-button bindtap="getStore">刷新位置</z-button>
+   </view>
+   <image src="{{storeUrl}}" mode="widthFix" class="store-img"></image>
 </view>
-<view class="map-addr">{{locationData.location}}</view>
+<view class="btn" wx:if="{{locationData === null}}">
+   <z-button bindtap="getStore">刷新位置</z-button>
+</view>
+<image src="{{placeholderUrl}}" mode="widthFix" style="width: 100%;" wx:if="{{locationData === null}}"></image>
 
-<image src="{{storeUrl}}" mode="widthFix" class="store-img"></image>
 
 <i-message id="message" />

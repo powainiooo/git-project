@@ -14,7 +14,7 @@
          <text>已完成领取礼品</text>
       </view>
       <view class="modal-hint-text2" wx:if="{{isUser && medalData.takeMedalState === 1 && medalData.takeGiftState === 2}}">
-         <text>请找站点服务人员兑换奖品！\n（奖品有效期<text class="red">7天</text>）</text>
+         <text>请找站点服务人员兑换奖品！\n（奖品有效期<text class="red">{{util.getGiftTime(medalData.giftTime)}}</text>）</text>
       </view>
       <view class="modal-hint-text2" wx:if="{{isUser && medalData.takeMedalState === 1 && medalData.takeGiftState === 3}}">
          <text>已过期未领取礼品</text>
@@ -33,8 +33,19 @@
    var getProgress = function(data){
       return data.myJindu+'/'+data.meetJindu
    }
+   var getGiftTime = function(sec){
+      var day = 24 * 60 * 60, hour = 60 * 60, min = 60
+      if (sec >= day) {
+         return Math.floor(sec/day)+'天'
+      } else if (sec >= hour && sec < day) {
+         return Math.floor(sec/hour)+'小时'
+      } else if (sec >= min && sec < hour) {
+         return Math.floor(sec/min)+'分'
+      }
+   }
    module.exports = {
       getSrc: getSrc,
-      getProgress: getProgress
+      getProgress: getProgress,
+      getGiftTime: getGiftTime
    };
 </wxs>

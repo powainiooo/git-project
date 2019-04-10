@@ -1,3 +1,6 @@
 <view class="location" wx:if="{{locationData.mchName}}" bindtap="openStore">
   <text>{{locationData.mchName}}\n 距您{{locationData.minKM}}KM</text>
 </view>
+<view class="location" wx:else bindtap="openStore">
+  <text>附近暂无体验店</text>
+</view>

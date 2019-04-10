@@ -2,22 +2,22 @@
   "pages": [
      "pages/index/index",
      "pages/onscreen/list/list",
-     "pages/works/list/list",
-     "pages/interaction/interaction",
+     "pages/aboutus/aboutus",
+     "pages/rule/rule",
      "pages/medal/medal",
+     "pages/interaction/interaction",
+     "pages/coupon/coupon",
+     "pages/works/list/list",
      "pages/recharge/recharge",
      "pages/onscreen/generate/generate",
     "pages/personal/personal",
     "pages/onscreen/detail/detail",
     "pages/works/detail/detail",
-    "pages/coupon/coupon",
     "pages/auth/auth",
     "pages/logs/logs",
     "pages/map/map",
     "pages/drawing/drawing",
-    "pages/aboutus/aboutus",
-    "pages/feedback/feedback",
-    "pages/rule/rule"
+    "pages/feedback/feedback"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -41,6 +41,7 @@ Component({
          })
       },
       doThumbup () {
+         if (this.data.isLike) return
          worksZan(this.data.itemData.tuzhiNu).then(res => {
             let zan = this.data.zan
             let like = false

@@ -1,5 +1,8 @@
 <view class="bigImg">
    <image src="{{selectData.bigUrl}}" bindtap="gotoDetail"></image>
+   <view class="non-hint" wx:if="{{selectData.scene === -1}}">
+      <text>无匹配游戏场景</text>
+   </view>
 </view>
 
 <view class="info-line">
@@ -15,11 +18,11 @@
       </view>
    </view>
    <view class="likes">
-      <view class="list" wx:if="{{selectData.playUsers !== null}}">
+      <view class="list">
          <image wx:for="{{selectData.playUsers}}" wx:for-item="item" wx:key="{{item.nick}}" src="{{item.avatarUrl}}" class="users"></image>
       </view>
       <view class="nums">
-         <text wx:if="{{selectData.playUsers !== null}}">他们正在玩</text>
+         <text>{{selectData.playUsers === null ? '　' : '他们正在玩'}}</text>
          <text>{{selectData.use}}人使用</text>
       </view>
    </view>

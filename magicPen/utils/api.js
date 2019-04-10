@@ -82,7 +82,7 @@ export const getNearbyMerchant = data => {
    return ajax({
       method: 'POST',
       url: `${ajaxUrl}/api/user/getNearbyMerchant?coord=${data}`
-   })
+   }, false)
 }
 
 //获取我的币余额

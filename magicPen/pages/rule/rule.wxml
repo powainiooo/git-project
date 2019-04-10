@@ -1,2 +1,1 @@
-<!--pages/rule/rule.wxml-->
-<text>pages/rule/rule.wxml</text>
+<image src="{{url}}" mode="widthFix" class="img"></image>

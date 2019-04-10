@@ -8,20 +8,18 @@ Component({
    properties: {
       itemData: {
          type: Object,
-         value: {}
+         value: {},
+         observer (val) {
+            this.setData({
+               nameValue: val.worksName,
+               zan: val.zan,
+               isLike: val.isZan === 1
+            })
+         }
       },
       isUser: {
          type: Boolean,
          value: false
-      }
-   },
-   observers: {
-      'itemData'(val) {
-         this.setData({
-            nameValue: val.worksName,
-            zan: val.zan,
-            isLike: val.isZan === 1
-         })
       }
    },
    /**

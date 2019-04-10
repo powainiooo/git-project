@@ -3,7 +3,10 @@
 <swiper class="swiper-frame" circular display-multiple-items="3" bindchange="swiperChange">
    <swiper-item wx:for="{{list}}"
                 wx:for-item="item"
-                wx:key="{{item.key}}" style="overflow: visible;">
+                wx:key="{{item.key}}"
+                style="overflow: visible;"
+                data-key="{{item.key}}"
+                bindtap="doFunc">
       <view class="swiper-item">
          <image class="icon {{currentKey === item.key ? 'current' : ''}}"
                 src="{{item.icon}}"

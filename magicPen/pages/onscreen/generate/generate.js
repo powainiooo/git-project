@@ -67,7 +67,7 @@ Page({
       const [padding, moduleWidth, moduleHeight] = [20, 750, 1333]
       const showWidth = 750 - padding*2
       const [x, y, w, h] = this.data.generateData.pngCoordinate.split(',')
-      const paddingTop = 300
+      const paddingTop = 200
       const scale = showWidth / w
       //摄像机动画
       const camera = wx.createAnimation({
@@ -168,6 +168,22 @@ Page({
          })
          return
       }
+      if(this.data.generateData.scene === -1) {
+         this.setData({
+            showModal: true,
+            modalType: 'hint',
+            modalContent: `请到体验店现场哟`,
+         })
+         return
+      }
+      if(this.data.generateData.scene !== this.data.generateData.psdType) {
+         this.setData({
+            showModal: true,
+            modalType: 'hint',
+            modalContent: `模板不能在当前场景使用`,
+         })
+         return
+      }
       this.data.isBuying = true
       wx.showLoading({
          title: '请求中'
@@ -175,14 +191,14 @@ Page({
       const {longitude, latitude} = await getLocation({
          type: 'gcj02',
       })
-      const checkRes = await checkPsd({
-         psdId: this.data.generateData.psdId,
-         coord: `${longitude},${latitude}`
-         // coord: `114.0422219038,22.5186571950`
-      }).catch(err => {
-         this.data.isBuying = false
-      })
-      if(checkRes.code === 0){
+      // const checkRes = await checkPsd({
+      //    psdId: this.data.generateData.psdId,
+      //    coord: `${longitude},${latitude}`
+      //    // coord: `114.0422219038,22.5186571950`
+      // }).catch(err => {
+      //    this.data.isBuying = false
+      // })
+      // if(checkRes.code === 0){
          const payData = `psdId=${this.data.generateData.psdId}&isTutorials=${this.data.generateData.isTutorials}&functType=${this.data.functType}`
          const payRes = await payPsdGoods(payData).catch(err => {
             this.data.isBuying = false
@@ -213,7 +229,7 @@ Page({
                })
             }
          }
-      }
+      // }
       this.data.isBuying = false
       wx.hideLoading()
    },

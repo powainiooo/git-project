@@ -1,6 +1,7 @@
 .bigImg { width: 100%; height: calc(100vh - 150rpx - 260rpx); max-height: 800rpx; overflow: hidden; position: relative;}
 .bigImg image { width: 100%; height: 800rpx;}
-.non-hint { width: 280rpx; height: 50rpx; border-radius: 25rpx; background-color: #ffffff; color: #151515; font-size: 24rpx; display: flex; justify-content: center; align-items: center; position: absolute; bottom: 50rpx; left: 235rpx;}
+.non-hint { width: 270rpx; height: 50rpx; border-radius: 25rpx; background-color: #ffffff; color: #151515; font-size: 24rpx; display: flex; justify-content: center; align-items: center; position: absolute; bottom: 50rpx; left: 240rpx;}
+.non-hint .icon { width: 40rpx; height: 40rpx; margin-right: 10rpx;}
 .info-line { height: 150rpx; display: flex; justify-content: space-between; align-items: center; padding: 0 40rpx;}
 .info-line .project .name { font-size: 32rpx; line-height: 32rpx; color: #1c1c1c; margin-bottom: 20rpx;}
 .info-line .project .name text { color: #ff306a; font-size: 20rpx;}

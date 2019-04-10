@@ -33,5 +33,13 @@ Component({
          })
          this.triggerEvent('change', {currentKey})
       },
+      doFunc (e) {
+         const {key} = e.currentTarget.dataset
+         if(key === 'photo') {
+            wx.navigateTo({
+               url: '/pages/onscreen/list/list'
+            })
+         }
+      }
    }
 })

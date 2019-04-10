@@ -8,14 +8,12 @@ Component({
    properties: {
       itemData: {
          type: Object,
-         value: {}
-      }
-   },
-   observers: {
-      'itemData'(val) {
-         this.setData({
-            zan: val.zan
-         })
+         value: {},
+         observer (val) {
+            this.setData({
+               zan: val.zan
+            })
+         }
       }
    },
    /**
@@ -61,5 +59,11 @@ Component({
             })
          })
       },
+      preview () {
+         wx.previewImage({
+            current: this.data.itemData.worksUrl,
+            urls: [this.data.itemData.worksUrl]
+         })
+      }
    }
 })

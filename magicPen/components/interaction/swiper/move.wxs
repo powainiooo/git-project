@@ -1,0 +1,9 @@
+module.exports.swiperChange = function (e, instance) {
+   instance.callMethod('swiperChange', e)
+}
+
+module.exports.swiperMove = function (e, instance) {
+   var dx = e.detail.dx
+   var ww = e.currentTarget.dataset.ww
+   console.log(ww)
+}

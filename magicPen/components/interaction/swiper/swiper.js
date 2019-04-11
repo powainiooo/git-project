@@ -6,7 +6,16 @@ Component({
    properties: {
 
    },
-
+   attached () {
+      const self = this
+      wx.getSystemInfo({
+         success (res) {
+            self.setData({
+               windowWidth: res.windowWidth
+            })
+         }
+      })
+   },
    /**
     * 组件的初始数据
     */
@@ -17,7 +26,8 @@ Component({
          {key: 'photo', icon: '../../../res/interaction/icon1.png'},
          {key: 'revive', icon: '../../../res/interaction/icon4.png'},
          {key: 'call', icon: '../../../res/interaction/icon3.png'},
-      ]
+      ],
+      windowWidth: 375
    },
 
    /**
@@ -40,6 +50,9 @@ Component({
                url: '/pages/onscreen/list/list'
             })
          }
+      },
+      swiperMove (e) {
+         // console.log(e.detail)
       }
    }
 })

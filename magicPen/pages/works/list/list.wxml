@@ -1,14 +1,12 @@
-<view class="upload-frame">
+<view class="upload-frame" bindtap="openFile">
    <image src="{{topUrl}}"
           class="img"
           wx:if="{{topUrl !== ''}}"
-          mode="aspectFill"
-          bindtap="openFile"></image>
+          mode="aspectFill"></image>
    <image src="../../../res/work/camera.png"
           wx:if="{{isUser && topUrl === ''}}"
           class="btn"
-          mode="widthFix"
-          bindtap="openFile"></image>
+          mode="widthFix"></image>
 </view>
 
 <view class="person-info">

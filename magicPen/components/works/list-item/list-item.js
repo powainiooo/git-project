@@ -117,5 +117,11 @@ Component({
             url: `/pages/works/list/list?userId=${e.currentTarget.dataset.id}`
          })
       },
+      preview () {
+         wx.previewImage({
+            current: this.data.itemData.worksUrl,
+            urls: [this.data.itemData.worksUrl]
+         })
+      }
    }
 })

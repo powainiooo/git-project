@@ -12,8 +12,21 @@
        <view class="value1">{{item.couponValue}}</view>
        <view class="value2">{{item.couponValue}}</view>
        <view class="value3">{{item.fullMoney }}</view>
+       <view class="time">{{util.format(item.validEnd) }}</view>
     </view>
    <view class="hint" wx:if="{{listData === null || listData.length === 0}}">暂无可用优惠券</view>
 </view>
 
+<wxs module="util">
+   var format = function(sec){
+   var time = getDate(sec*1000)
+   var year = time.getFullYear()
+   var month = time.getMonth()
+   var day = time.getDay()
+   return year+'.'+month+'.'+day
+   }
+   module.exports = {
+   format: format,
+   };
+</wxs>
 <i-message id="message" />

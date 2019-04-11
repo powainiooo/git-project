@@ -34,10 +34,10 @@ Component({
     */
    methods: {
       getMedal () {
-         this.triggerEvent('getMedal',{
-            medalId: this.data.medalData.medalId,
-            takeType: 1,
-         })
+         // this.triggerEvent('getMedal',{
+         //    medalId: this.data.medalData.medalId,
+         //    takeType: 1,
+         // })
       }
    }
 })

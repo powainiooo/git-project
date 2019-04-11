@@ -60,7 +60,7 @@ export const getCouponList = data => {
    })
 }
 
-//确认兑换来画豆
+//确认兑换来来画豆
 export const affirmGetIq = data => {
    return ajax({
       method: 'POST',

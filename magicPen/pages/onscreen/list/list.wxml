@@ -1,8 +1,11 @@
 <view class="bigImg">
    <image src="{{selectData.bigUrl}}" bindtap="gotoDetail"></image>
-   <view class="non-hint" wx:if="{{selectData.scene === -1}}">
+   <view class="non-hint" wx:if="{{selectData.scene !== selectData.psdType}}">
       <image src="../../../res/interaction/icon-warn.png" mode="widthFix" class="icon"></image>
       <text>无匹配游戏场景</text>
+   </view>
+   <view class="non-hint" wx:if="{{selectData.scene === selectData.psdType}}">
+      <text>可以匹配</text>
    </view>
 </view>
 

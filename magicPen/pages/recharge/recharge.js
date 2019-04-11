@@ -9,8 +9,10 @@ Page({
    data: {
       iqGoodsId: '',
       userIq: 0,
+      iqPrice: 0,
       iqGoodsVos: [],
       couponId: '',
+      fullMoney: 0,
       couponUserVos: []
    },
 
@@ -35,16 +37,20 @@ Page({
       })
    },
    couponChange(e) {
-      console.log(e)
       const couponId = e.currentTarget.dataset.id
-      this.setData({couponId})
+      const fullMoney = e.currentTarget.dataset.price
+      this.setData({
+         couponId,
+         fullMoney
+      })
    },
    selectIqGoods(e) {
-      console.log(e)
       const {id, price} = e.currentTarget.dataset
+      const couponId = this.data.fullMoney > price ? '' : this.data.couponId
       this.setData({
          iqGoodsId: id,
-         iqPrice: parseInt(price)
+         iqPrice: Number(price),
+         couponId
       })
    },
    async doBuy() {

@@ -28,7 +28,7 @@
 
 <wxs module="util">
    var getSrc = function(data){
-      return data.meetJindu <= data.myJindu ? data.brightUrl : data.darkUrl
+      return data.takeMedalState == 1 ? data.brightUrl : data.darkUrl
    }
    var getProgress = function(data){
       return data.myJindu+'/'+data.meetJindu

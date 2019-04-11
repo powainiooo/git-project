@@ -6,7 +6,8 @@ Page({
     * 页面的初始数据
     */
    data: {
-      listData: []
+      listData: [],
+      isAjax: false
    },
 
    /**
@@ -26,13 +27,25 @@ Page({
       const {index} = e.currentTarget.dataset
       const data = this.data.listData[index]
       if(data.couponValueType === 1) {
+         if (this.data.isAjax) return
+         this.data.isAjax = true
          affirmGetIq(data.couponId).then(res => {
             wx.showToast({
                title: '领取成功',
                icon: 'success',
                duration: 2000
             })
-            this.getData()
+            setTimeout(()=>{
+               wx.navigateTo({
+                  url: '/pages/personal/personal'
+               })
+            },2000)
+         }).catch(err => {
+            this.data.isAjax = false
+         })
+      } else if (data.couponValueType === 2) {
+         wx.navigateTo({
+            url: '/pages/recharge/recharge'
          })
       }
    },

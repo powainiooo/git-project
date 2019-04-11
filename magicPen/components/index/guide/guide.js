@@ -5,6 +5,7 @@ const {promisify} = require('../../../utils/util.js')
 const scan = promisify(wx.scanCode)
 const request = promisify(wx.request)
 const { $Message } = require('../../iview/base/index')
+const app = getApp()
 Component({
    /**
     * 组件的属性列表
@@ -64,7 +65,7 @@ Component({
       },
       async openScan() {
          const {result} = await scan()
-         const {ajaxSrc, sKey} = getApp().globalData
+         const {ajaxSrc, sKey} = app.globalData
          const res = await request({
             url: `${ajaxSrc}/api/works/uploadTuzhiNu?tuzhiNu=${result}`,
             method: 'POST',
@@ -87,10 +88,20 @@ Component({
                showScan: false,
                showSuccessModal: true
             })
+            const audio = wx.createInnerAudioContext()
+            audio.obeyMuteSwitch = false
+            audio.src = app.globalData.audioSrc.star
+            audio.onPlay(()=>{
+               console.log('play')
+            })
+            audio.onError((err)=>{
+               console.log(err)
+            })
             setTimeout(() => {
                this.setData({
                   starRate: Math.random() > 0.5 ? 5 : 4
                })
+               audio.play()
             }, 300)
             updateUserGrade().then(res => {
                console.log(res)

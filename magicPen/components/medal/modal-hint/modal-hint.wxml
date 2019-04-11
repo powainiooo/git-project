@@ -3,26 +3,31 @@
       <image src="../../../res/interaction/light.png"
              mode="widthFix"
              class="modal-hint-light"
-             wx:if="{{medalData.takeMedalState === 1}}"></image>
-      <image src="{{util.getSrc(medalData)}}" mode="widthFix" class="modal-hint-icon"></image>
+             style="opacity: {{showLight ? 1 : 0}}"></image>
+      <image src="{{medalData.brightUrl}}"
+             mode="widthFix"
+             class="modal-hint-icon modal-hint-icon-bright {{showBright ? '' : 'modal-hint-icon-hide'}}"></image>
+      <image src="{{medalData.darkUrl}}"
+             mode="widthFix"
+             class="modal-hint-icon modal-hint-icon-dark {{showDark ? '' : 'modal-hint-icon-hide'}}"></image>
       <view class="modal-hint-text1">{{medalData.name}}</view>
       <view class="modal-hint-text2">{{medalData.depict}}</view>
-      <view class="modal-hint-text3" wx:if="{{medalData.takeMedalState === 1}}">
+      <view class="modal-hint-text3" wx:if="{{takeMedalState === 1}}">
          <text>达成目标</text>
       </view>
-      <view class="modal-hint-text2" wx:if="{{isUser && medalData.takeMedalState === 1 && medalData.takeGiftState === 1}}">
+      <view class="modal-hint-text2" wx:if="{{isUser && takeMedalState === 1 && medalData.takeGiftState === 1}}">
          <text>已完成领取礼品</text>
       </view>
-      <view class="modal-hint-text2" wx:if="{{isUser && medalData.takeMedalState === 1 && medalData.takeGiftState === 2}}">
+      <view class="modal-hint-text2" wx:if="{{isUser && takeMedalState === 1 && medalData.takeGiftState === 2}}">
          <text>请找站点服务人员兑换奖品！\n（奖品有效期<text class="red">{{util.getGiftTime(medalData.giftTime)}}</text>）</text>
       </view>
-      <view class="modal-hint-text2" wx:if="{{isUser && medalData.takeMedalState === 1 && medalData.takeGiftState === 3}}">
+      <view class="modal-hint-text2" wx:if="{{isUser && takeMedalState === 1 && medalData.takeGiftState === 3}}">
          <text>已过期未领取礼品</text>
       </view>
       <view class="modal-hint-btn"
-            wx:if="{{isUser && medalData.takeMedalState === 2}}" catchtap="getMedal">领取勋章</view>
+            wx:if="{{isUser && takeMedalState === 2}}" catchtap="getMedal">领取勋章</view>
       <view class="modal-hint-btn modal-hint-btn2"
-            wx:if="{{isUser && medalData.takeMedalState === 0}}">完成度 {{util.getProgress(medalData)}}</view>
+            wx:if="{{isUser && takeMedalState === 0}}">完成度 {{util.getProgress(medalData)}}</view>
    </view>
 </view>
 

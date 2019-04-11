@@ -39,7 +39,10 @@ App({
    },
    globalData: {
       ajaxSrc: 'https://xcx.newryun.com',
-      // ajaxSrc: 'http://n5ucvg.natappfree.cc',
+      audioSrc: {
+         medal: 'http://www.w3school.com.cn/i/horse.ogg',
+         star: 'http://www.w3school.com.cn/i/horse.ogg',
+      },
       imgSrc: 'https://xcx.newryun.com/xcxstatic/',
       userInfo: {},
       sKey: sKey,

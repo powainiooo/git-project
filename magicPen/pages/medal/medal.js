@@ -11,6 +11,7 @@ Page({
       medalList: [],
       selectData: {},
       isUser: true,
+      hideState: 'close'
    },
 
    /**
@@ -52,16 +53,21 @@ Page({
       this.setData({
          showHint: false,
       })
+      if(this.data.hideState === 'getMedal') {
+         this.getData()
+      }
    },
    getMedal (e) {
       if (!this.data.isUser) return
       const {medalId, takeType} = e.detail
+      this.data.hideState = 'getMedal'
       this.takeState(medalId, takeType)
    },
    getGift (e) {
       if (!this.data.isUser) return
       const {item} = e.currentTarget.dataset
       if (item.takeMedalState === 1 && item.takeGiftState === 2) {
+         this.data.hideState = 'close'
          this.takeState(item.medalId, 2)
       }
    },
@@ -72,8 +78,10 @@ Page({
             icon: 'success',
             duration: 2000
          })
-         this.closeHint()
-         this.getData()
+         if(this.data.hideState === 'close') {
+            this.closeHint()
+            this.getData()
+         }
       })
    },
    /**

@@ -1,37 +1,37 @@
 {
-  "pages": [
-     "pages/works/list/list",
-     "pages/index/index",
-     "pages/medal/medal",
-     "pages/recharge/recharge",
-     "pages/coupon/coupon",
-     "pages/onscreen/list/list",
-     "pages/interaction/interaction",
-     "pages/aboutus/aboutus",
-     "pages/rule/rule",
-     "pages/onscreen/generate/generate",
-    "pages/personal/personal",
-    "pages/onscreen/detail/detail",
-    "pages/works/detail/detail",
-    "pages/auth/auth",
-    "pages/logs/logs",
-    "pages/map/map",
-    "pages/drawing/drawing",
-    "pages/feedback/feedback"
-  ],
-  "window": {
-    "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "神笔画画",
-    "navigationBarTextStyle": "black"
-  },
-  "usingComponents": {
-    "i-message": "../../components/iview/message/index",
-    "i-icon": "../../components/iview/icon/index"
-  },
-  "permission": {
-    "scope.userLocation": {
-      "desc": "你的位置信息将用于小程序获取门店位置"
-    }
-  }
+   "pages": [
+      "pages/index/index",
+      "pages/medal/medal",
+      "pages/interaction/interaction",
+      "pages/works/list/list",
+      "pages/recharge/recharge",
+      "pages/coupon/coupon",
+      "pages/onscreen/list/list",
+      "pages/aboutus/aboutus",
+      "pages/rule/rule",
+      "pages/onscreen/generate/generate",
+      "pages/personal/personal",
+      "pages/onscreen/detail/detail",
+      "pages/works/detail/detail",
+      "pages/auth/auth",
+      "pages/logs/logs",
+      "pages/map/map",
+      "pages/drawing/drawing",
+      "pages/feedback/feedback"
+   ],
+   "window": {
+      "backgroundTextStyle": "light",
+      "navigationBarBackgroundColor": "#fff",
+      "navigationBarTitleText": "神笔画画",
+      "navigationBarTextStyle": "black"
+   },
+   "usingComponents": {
+      "i-message": "../../components/iview/message/index",
+      "i-icon": "../../components/iview/icon/index"
+   },
+   "permission": {
+      "scope.userLocation": {
+         "desc": "你的位置信息将用于小程序获取门店位置"
+      }
+   }
 }

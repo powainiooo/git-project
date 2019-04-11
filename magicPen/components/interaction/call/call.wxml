@@ -62,4 +62,10 @@
    </view>
 </z-modal>
 
-<view class=""></view>
+<!--<view class="success-frame">-->
+   <!--<view class="images">-->
+      <!--<image src="../../../res/interaction/circle-in.png" class="in"></image>-->
+      <!--<image src="../../../res/interaction/circle-out.png" class="out"></image>-->
+      <!--<image src="../../../res/interaction/light2.png" class="light"></image>-->
+   <!--</view>-->
+<!--</view>-->

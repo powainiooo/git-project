@@ -1,20 +1,21 @@
 // components/medal/modal-hint/modal-hint.js
+const app = getApp()
 Component({
    /**
     * 组件的属性列表
     */
    properties: {
-      type: {
-         type: Number,
-         value: 0
-      },
-      step: {
-         type: Number,
-         value: 1
-      },
       medalData: {
          type: Object,
-         value: {}
+         value: {},
+         observer (val) {
+            this.setData({
+               showLight: val.takeMedalState === 1,
+               showDark: val.takeMedalState !== 1,
+               showBright: val.takeMedalState === 1,
+               takeMedalState: val.takeMedalState,
+            })
+         }
       },
       isUser: {
          type: Boolean,
@@ -26,7 +27,10 @@ Component({
     * 组件的初始数据
     */
    data: {
-
+      showLight: false,
+      showDark: false,
+      showBright: false,
+      takeMedalState: ''
    },
 
    /**
@@ -34,10 +38,30 @@ Component({
     */
    methods: {
       getMedal () {
-         // this.triggerEvent('getMedal',{
-         //    medalId: this.data.medalData.medalId,
-         //    takeType: 1,
-         // })
+         this.triggerEvent('getMedal',{
+            medalId: this.data.medalData.medalId,
+            takeType: 1,
+         })
+         const audio = wx.createInnerAudioContext()
+         audio.obeyMuteSwitch = false
+         audio.src = app.globalData.audioSrc.medal
+         audio.play()
+         audio.onPlay(()=>{
+            console.log('play')
+         })
+         audio.onError((err)=>{
+            console.log(err)
+         })
+         this.setData({
+            showLight: true,
+            showDark: false,
+            takeMedalState: 1,
+         })
+         setTimeout(()=>{
+            this.setData({
+               showBright: true,
+            })
+         },400)
       }
    }
 })

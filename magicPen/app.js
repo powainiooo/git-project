@@ -40,7 +40,7 @@ App({
    globalData: {
       ajaxSrc: 'https://xcx.newryun.com',
       audioSrc: {
-         medal: 'http://www.w3school.com.cn/i/horse.ogg',
+         medal: 'http://sbhh.newryun.com/xcxstatic/sound/medal.mp3',
          star: 'http://www.w3school.com.cn/i/horse.ogg',
       },
       imgSrc: 'https://xcx.newryun.com/xcxstatic/',

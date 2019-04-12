@@ -1,5 +1,8 @@
 // components/medal/modal-hint/modal-hint.js
 const app = getApp()
+const audio = wx.createInnerAudioContext()
+audio.obeyMuteSwitch = false
+audio.src = app.globalData.audioSrc.medal
 Component({
    /**
     * 组件的属性列表
@@ -42,9 +45,6 @@ Component({
             medalId: this.data.medalData.medalId,
             takeType: 1,
          })
-         const audio = wx.createInnerAudioContext()
-         audio.obeyMuteSwitch = false
-         audio.src = app.globalData.audioSrc.medal
          audio.play()
          audio.onPlay(()=>{
             console.log('play')

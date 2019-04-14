@@ -48,7 +48,9 @@ Component({
       showTypeList:false,
       ajaxSrc:app.globalData.ajaxSrc,
       imgSrc:app.globalData.imgSrc,
-      typeBottom:0
+      typeBottom:0,
+      uploadImg:'',
+      showExample: false
    },
    methods:{
       numberChange: function(e) {
@@ -147,6 +149,7 @@ Component({
                   mobile:self.data.phoneVal,
                   address:self.data.addressVal,
                   idnum:self.data.idnum,
+                  passport:self.data.uploadImg,
                   idnum_type:parseInt(this.data.idTypeIndex) + 1,
                   sele:self.data.selectTicket.select,
                   nums:self.data.numbersArr[self.data.numberIndex],
@@ -247,6 +250,38 @@ Component({
          this.setData({
             numbersArr:arr
          })
-      }
+      },
+      doShowExample () {
+         this.setData({
+            showExample: true
+         })
+      },
+      doHideExample () {
+         this.setData({
+            showExample: false
+         })
+      },
+      doUpload () {
+         const self = this
+         wx.chooseImage({
+            sourceType: ['album'],
+            success(res) {
+               const tempFilePaths = res.tempFilePaths
+               self.doHideExample()
+               wx.uploadFile({
+                  url: self.data.ajaxSrc+'/image_upload', // 仅为示例，非真实的接口地址
+                  filePath: tempFilePaths[0],
+                  name: 'file',
+                  success(res) {
+                     const data = JSON.parse(res.data)
+                     self.setData({
+                        uploadImg: data.url
+                     })
+                  }
+               })
+            }
+         })
+      },
+      tmove(){}
    }
 });

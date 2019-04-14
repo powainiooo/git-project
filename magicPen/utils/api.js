@@ -53,6 +53,13 @@ export const getChoicenessWorks = data => {
    })
 }
 
+//获取小喇叭公告
+export const getAnnoun = data => {
+   return ajax({
+      url: `${ajaxUrl}/api/index/getAnnoun`
+   })
+}
+
 //获取我的优惠券列表
 export const getCouponList = data => {
    return ajax({

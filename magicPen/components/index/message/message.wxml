@@ -1,0 +1,7 @@
+<swiper vertical autoplay class="msg-swiper" wx:if="{{listData.length !== 0}}">
+   <block wx:for="{{listData}}">
+      <swiper-item class="msg-swiper-item">
+         {{item}}
+      </swiper-item>
+   </block>
+</swiper>

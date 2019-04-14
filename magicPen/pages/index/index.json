@@ -1,8 +1,10 @@
 {
   "usingComponents": {
     "banner": "../../components/index/banner/banner",
+    "z-message": "../../components/index/message/message",
     "guide": "../../components/index/guide/guide",
     "list-item": "../../components/index/list-item/list-item",
+     "loading": "../../components/loading/index",
     "location": "../../components/index/location/location",
     "nav-bar": "../../components/index/nav-bar/nav-bar"
   },

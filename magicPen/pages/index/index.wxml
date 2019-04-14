@@ -2,6 +2,8 @@
 <view class="container">
   <!--轮播图-->
   <banner listData="{{bannerList}}"></banner>
+   <!--滚动消息-->
+   <z-message></z-message>
 
   <!--定位-->
   <location locationData="{{locationData}}"></location>
@@ -20,7 +22,8 @@
                wx:key="{{item.userId}}"
                itemData="{{item}}"></list-item>
   </view>
-  <view class="loading">
+   <loading wx:if="{{isLoadingList}}"></loading>
+  <view class="loading" wx:if="{{!isLoadingList}}">
     <view class="btn" wx:if="{{!isWorksLIstEnd}}" bindtap="pageNoAdd">
       <view>更多作品</view>
       <image src="../../res/index/arrow-down.png" mode="widthFix"></image>

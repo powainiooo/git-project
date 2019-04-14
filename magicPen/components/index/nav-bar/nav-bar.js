@@ -24,7 +24,7 @@ Component({
       },
       {
         src: '../../../res/index/nav-icon3.png',
-        name: '我的作品',
+        name: '作品空间',
         url: '/pages/works/list/list'
       },
       {

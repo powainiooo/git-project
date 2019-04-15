@@ -13,9 +13,10 @@ Page({
       userIq: 0,
       showCamera: false,
       cameraAni: {},
-      coverAni: {},
-      photos: "",
-      photosInfo: [],
+      coverImageAni: {},
+      moveImageAni: {},
+      moveCoverAni: {},
+      photos: '',
       photosWidth: 0,
       photosHeight: 0,
       generateData: null,
@@ -33,6 +34,8 @@ Page({
       psdOrderNu: '',
       btnText: '拍照上屏',
       isBuying: false,
+      cameraSize: [],
+      coverSize: [],
    },
 
    /**
@@ -52,11 +55,22 @@ Page({
       //       })
       //    }
       // })
+      this.initSize()
       getUserAsset().then(res=>{
          this.setData({
             userIq: res.data
          })
       })
+   },
+   initSize () {
+      const [padding, moduleWidth, moduleHeight] = [20, 750, 1333]
+      const showWidth = 750 - padding*2
+      const [x, y, w, h] = this.data.generateData.pngCoordinate.split(',')
+      const paddingTop = 200
+      const scale = showWidth / w
+      const cameraHeight = `${showWidth * h / w}rpx`
+      this.data.cameraSize = [showWidth, cameraHeight, paddingTop, padding]
+      this.data.coverSize = [moduleWidth * scale, moduleHeight * scale, y * scale - paddingTop, x * scale - padding]
    },
    closeModal () {
       this.setData({
@@ -64,41 +78,123 @@ Page({
       })
    },
    coverAnimation() {
-      const [padding, moduleWidth, moduleHeight] = [20, 750, 1333]
-      const showWidth = 750 - padding*2
-      const [x, y, w, h] = this.data.generateData.pngCoordinate.split(',')
-      const paddingTop = 200
-      const scale = showWidth / w
+      const [caw, cah, cay, cax] = this.data.cameraSize
+      const [cow, coh, coy, cox] = this.data.coverSize
       //摄像机动画
       const camera = wx.createAnimation({
          duration: 0,
          timingFunction: 'ease',
       })
-      const cameraHeight = `${showWidth * h / w}rpx`
-      camera.width(`${showWidth}rpx`).height(cameraHeight).top(`${paddingTop}rpx`).left(`${padding}rpx`).step()
+      camera.width(`${caw}rpx`).height(cah).top(`${cay}rpx`).left(`${cax}rpx`).step()
       //遮罩图动画
       const cover = wx.createAnimation({
-         duration: 1000,
-         timingFunction: 'ease',
+         duration: 1500,
+         timingFunction: 'ease-out',
       })
-      cover
-          .width(`${moduleWidth * scale}rpx`)
-          .height(`${moduleHeight * scale}rpx`)
-          .top(`-${y * scale - paddingTop}rpx`)
-          .left(`-${x * scale - padding}rpx`)
-          .step()
+      cover.width(`${cow}rpx`).height(`${coh}rpx`).top(`-${coy}rpx`).left(`-${cox}rpx`).step()
 
       this.setData({
-         cameraAni: camera.export(),
-         coverAni: cover.export(),
-         photosInfo: [x, y, w, h]
+         moveImageAni: camera.export(),
+         moveCoverAni: cover.export(),
       })
-      setTimeout(()=>{
-         this.setData({
-            showCamera: true,
-            showBottom: true,
+      // setTimeout(()=>{
+      //    this.setData({
+      //       showCamera: true,
+      //       showBottom: true,
+      //       cameraAni: camera.export(),
+      //    })
+      // },1500)
+      // setTimeout(()=>{
+      //    camera.width(`${showWidth}rpx`).height(cameraHeight).top(`${paddingTop}rpx`).left(`${padding}rpx`).step()
+      //    this.setData({
+      //       cameraAni: camera.export(),
+      //    })
+      // },3500)
+   },
+   coverAnimEnd (e) {
+      console.log('anim end')
+      console.log(e)
+      setTimeout(() => {
+         //摄像机动画
+
+         if (this.data.showCamera) { //缩小后
+            console.log(1)
+            const camera = wx.createAnimation({
+               duration: 0,
+               timingFunction: 'ease',
+            })
+            //遮罩图动画
+            const cover = wx.createAnimation({
+               duration: 0,
+               timingFunction: 'ease',
+            })
+            camera.width(`233rpx`).height(`233rpx`).top(`-233rpxrpx`).left(`-233rpxrpx`).step()
+
+            cover.width(`750rpx`).height(`1333rpx`).top(`0rpx`).left(`-10000px`).step()
+            this.setData({
+               coverImageAni: cover.export(),
+               cameraAni: camera.export(),
+            })
+            this.data.showCamera = false
+         } else { //放大后
+            console.log(2)
+            const [caw, cah, cay, cax] = this.data.cameraSize
+            const [cow, coh, coy, cox] = this.data.coverSize
+
+            const camera = wx.createAnimation({
+               duration: 0,
+               timingFunction: 'ease',
+            })
+            //遮罩图动画
+            const cover = wx.createAnimation({
+               duration: 0,
+               timingFunction: 'ease',
+            })
+
+            camera.width(`${caw}rpx`).height(cah).top(`${cay}rpx`).left(`${cax}rpx`).step()
+
+            cover.width(`${cow}rpx`).height(`${coh}rpx`).top(`-${coy}rpx`).left(`-${cox}rpx`).step()
+
+            this.setData({
+               coverImageAni: cover.export(),
+            })
+            setTimeout(()=>{
+               this.setData({
+                  cameraAni: camera.export(),
+               })
+            }, 1000)
+            this.data.showCamera = true
+         }
+      }, 1000)
+   },
+   zoomBack () {
+      wx.nextTick(()=>{
+         const [x, y, w, h] = this.data.generateData.pngCoordinate.split(',')
+         //照片动画
+         const photo = wx.createAnimation({
+            duration: 1000,
+            timingFunction: 'ease',
          })
-      },1500)
+         photo.width(`${w}rpx`).height(`${h}rpx`).top(`${y}rpx`).left(`${x}rpx`).step()
+         //遮罩图动画
+         const cover = wx.createAnimation({
+            duration: 1000,
+            timingFunction: 'ease',
+         })
+         cover.width(`750rpx`).height(`1333rpx`).top(`0rpx`).left(`0rpx`).step()
+         let btnText
+         if (this.data.functType === 1) {
+            btnText = this.data.generateData.pricePhoto == 0 ? '拍照上屏' : `拍照上屏${this.data.generateData.pricePhoto}豆`
+         } else if (this.data.functType === 2) {
+            btnText = this.data.generateData.priceVideo == 0 ? '录像上屏' : `录像上屏${this.data.generateData.priceVideo}豆`
+         }
+         this.setData({
+            moveImageAni: photo.export(),
+            moveCoverAni: cover.export(),
+            showBottom2: true,
+            btnText
+         })
+      })
    },
    takePhoto() {
       console.log('takePhoto')
@@ -116,7 +212,7 @@ Page({
                showCamera: false,
                showBottom: false,
             })
-            this.zoomBack()
+            self.zoomBack()
          }
       })
    },
@@ -233,43 +329,6 @@ Page({
       this.data.isBuying = false
       wx.hideLoading()
    },
-   zoomBack () {
-      wx.nextTick(()=>{
-         const [x, y, w, h] = this.data.generateData.pngCoordinate.split(',')
-         //摄像机动画
-         const camera = wx.createAnimation({
-            duration: 1000,
-            timingFunction: 'ease',
-         })
-         camera.width(`${w}rpx`).height(`${h}rpx`).top(`${y}rpx`).left(`${x}rpx`).step()
-         //遮罩图动画
-         const cover = wx.createAnimation({
-            duration: 1000,
-            timingFunction: 'ease',
-         })
-         cover
-             .width(`750rpx`)
-             .height(`1333rpx`)
-             .top(`0rpx`)
-             .left(`0rpx`)
-             .step()
-         let btnText
-         if (this.data.functType === 1) {
-            btnText = this.data.generateData.pricePhoto == 0 ? '拍照上屏' : `拍照上屏${this.data.generateData.pricePhoto}豆`
-         } else if (this.data.functType === 2) {
-            btnText = this.data.generateData.priceVideo == 0 ? '录像上屏' : `录像上屏${this.data.generateData.priceVideo}豆`
-         }
-         this.setData({
-            cameraAni: camera.export(),
-            coverAni: cover.export(),
-            showBottom2: true,
-            btnText
-         })
-      })
-   },
-   doShare () {
-
-   },
    async doSave () {
       console.log('draw')
       if (this.data.isSaving) return
@@ -318,9 +377,11 @@ Page({
    },
    doRetry () {
       this.setData({
-         showBottom2: false
+         showBottom2: false,
       })
-      this.coverAnimation()
+      wx.nextTick(() => {
+         this.coverAnimation()
+      })
    },
    gotoMore () {
       wx.navigateTo({

@@ -36,6 +36,7 @@ Page({
       isBuying: false,
       cameraSize: [],
       coverSize: [],
+      tAnimEnd: 0,
    },
 
    /**
@@ -82,13 +83,13 @@ Page({
       const [cow, coh, coy, cox] = this.data.coverSize
       //摄像机动画
       const camera = wx.createAnimation({
-         duration: 0,
+         duration: 1000,
          timingFunction: 'ease',
       })
       camera.width(`${caw}rpx`).height(cah).top(`${cay}rpx`).left(`${cax}rpx`).step()
       //遮罩图动画
       const cover = wx.createAnimation({
-         duration: 1500,
+         duration: 1000,
          timingFunction: 'ease-out',
       })
       cover.width(`${cow}rpx`).height(`${coh}rpx`).top(`-${coy}rpx`).left(`-${cox}rpx`).step()
@@ -97,13 +98,9 @@ Page({
          moveImageAni: camera.export(),
          moveCoverAni: cover.export(),
       })
-      // setTimeout(()=>{
-      //    this.setData({
-      //       showCamera: true,
-      //       showBottom: true,
-      //       cameraAni: camera.export(),
-      //    })
-      // },1500)
+      setTimeout(()=>{
+         this.coverAnimEnd()
+      },1500)
       // setTimeout(()=>{
       //    camera.width(`${showWidth}rpx`).height(cameraHeight).top(`${paddingTop}rpx`).left(`${padding}rpx`).step()
       //    this.setData({
@@ -111,25 +108,23 @@ Page({
       //    })
       // },3500)
    },
-   coverAnimEnd (e) {
-      console.log('anim end')
-      console.log(e)
-      setTimeout(() => {
+   coverAnimEnd () {
+      clearTimeout(this.data.tAnimEnd)
+      this.data.tAnimEnd = setTimeout(() => {
+         console.log('coverAnimEnd')
          //摄像机动画
-
+         const camera = wx.createAnimation({
+            duration: 0,
+            timingFunction: 'ease',
+         })
+         //遮罩图动画
+         const cover = wx.createAnimation({
+            duration: 0,
+            timingFunction: 'ease',
+         })
          if (this.data.showCamera) { //缩小后
             console.log(1)
-            const camera = wx.createAnimation({
-               duration: 0,
-               timingFunction: 'ease',
-            })
-            //遮罩图动画
-            const cover = wx.createAnimation({
-               duration: 0,
-               timingFunction: 'ease',
-            })
-            camera.width(`233rpx`).height(`233rpx`).top(`-233rpxrpx`).left(`-233rpxrpx`).step()
-
+            camera.width(`233rpx`).height(`233rpx`).top(`-233rpx`).left(`-233rpx`).step()
             cover.width(`750rpx`).height(`1333rpx`).top(`0rpx`).left(`-10000px`).step()
             this.setData({
                coverImageAni: cover.export(),
@@ -140,23 +135,11 @@ Page({
             console.log(2)
             const [caw, cah, cay, cax] = this.data.cameraSize
             const [cow, coh, coy, cox] = this.data.coverSize
-
-            const camera = wx.createAnimation({
-               duration: 0,
-               timingFunction: 'ease',
-            })
-            //遮罩图动画
-            const cover = wx.createAnimation({
-               duration: 0,
-               timingFunction: 'ease',
-            })
-
             camera.width(`${caw}rpx`).height(cah).top(`${cay}rpx`).left(`${cax}rpx`).step()
-
             cover.width(`${cow}rpx`).height(`${coh}rpx`).top(`-${coy}rpx`).left(`-${cox}rpx`).step()
-
             this.setData({
                coverImageAni: cover.export(),
+               showBottom: true,
             })
             setTimeout(()=>{
                this.setData({
@@ -165,10 +148,12 @@ Page({
             }, 1000)
             this.data.showCamera = true
          }
-      }, 1000)
+      }, 1300)
    },
    zoomBack () {
-      wx.nextTick(()=>{
+      this.coverAnimEnd()
+      // return;
+      setTimeout(()=>{
          const [x, y, w, h] = this.data.generateData.pngCoordinate.split(',')
          //照片动画
          const photo = wx.createAnimation({
@@ -194,7 +179,7 @@ Page({
             showBottom2: true,
             btnText
          })
-      })
+      }, 1500)
    },
    takePhoto() {
       console.log('takePhoto')
@@ -209,7 +194,6 @@ Page({
             console.log(res)
             self.setData({
                photos: res.tempImagePath,
-               showCamera: false,
                showBottom: false,
             })
             self.zoomBack()
@@ -231,7 +215,6 @@ Page({
                   console.log(res.tempVideoPath)
                   this.setData({
                      videos: res.tempVideoPath,
-                     showCamera: false,
                      showBottom: false,
                   })
                   this.zoomBack()

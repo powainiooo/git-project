@@ -11,8 +11,9 @@
             data-item="{{item}}"
             bindtap="selectMedal"
             bindlongpress="getGift">
-         <image src="{{item.brightUrl}}" wx:if="{{item.takeMedalState === 1}}"></image>
-         <image src="{{item.darkUrl}}" wx:if="{{item.takeMedalState !== 1}}"></image>
+         <image src="{{item.brightUrl}}" wx:if="{{item.takeMedalState === 1}}" class="medal-icon"></image>
+         <image src="{{item.darkUrl}}" wx:if="{{item.takeMedalState !== 1}}" class="medal-icon"></image>
+         <image src="../../res/medal/gift.png" wx:if="{{item.takeGiftState === 2 && item.takeMedalState  === 1}}" mode="widthFix" class="gift-icon"></image>
          <view>{{item.name}}</view>
       </view>
    </view>

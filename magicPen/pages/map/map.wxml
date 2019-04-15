@@ -18,7 +18,13 @@
    <view class="btn">
       <z-button bindtap="getStore">刷新位置</z-button>
    </view>
-   <image src="{{storeUrl}}" mode="widthFix" class="store-img"></image>
+   <swiper autoplay style="width: 100%; height: 423rpx" wx:if="{{locationData !== null}}">
+      <block wx:for="{{storeUrl}}" wx:key="{{item}}">
+         <swiper-item>
+            <image src="{{item}}" class="slide-image" style="width: 100%;" mode="widthFix" />
+         </swiper-item>
+      </block>
+   </swiper>
 </view>
 <view class="btn" wx:if="{{locationData === null}}">
    <z-button bindtap="getStore">刷新位置</z-button>

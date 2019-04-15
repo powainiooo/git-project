@@ -19,7 +19,7 @@
     <i-icon type="enter" class="arrow" size="22" color="#8b8e98" />
   </view>
   <view class="link-line">
-    <image src="../../res/personal/feedback.png" mode="widthFix"></image>
+    <image src="../../res/personal/contact.png" mode="widthFix"></image>
     <text>在线聊天</text>
     <i-icon type="enter" class="arrow" size="22" color="#8b8e98" />
      <button open-type="contact" class="btn">在线聊天</button>

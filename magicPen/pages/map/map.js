@@ -13,7 +13,7 @@ Page({
       latitude: 0,
       markers:[],
       locationData: null,
-      storeUrl: '',
+      storeUrl: [],
       placeholderUrl: ''
    },
 
@@ -23,7 +23,7 @@ Page({
    onLoad: function (options) {
       const {locationData, imgSrc} = getApp().globalData
       if(locationData !== null) {
-         const {longitude, latitude, mchImg} = locationData
+         const {longitude, latitude, mchImgs} = locationData
          const markers = [{
             iconPath: '../../res/index/icon-geo.png',
             id: 0,
@@ -35,7 +35,7 @@ Page({
             longitude,
             latitude,
             markers,
-            storeUrl: mchImg,
+            storeUrl: mchImgs,
             placeholderUrl: `${imgSrc}images/tiyandian.png`
          })
       }else {
@@ -51,7 +51,8 @@ Page({
       })
       const res = await getNearbyMerchant(`${longitude},${latitude}`)
       this.setData({
-         locationData: res.data
+         locationData: res.data,
+         storeUrl: res.data.mchImgs,
       })
    },
    /**

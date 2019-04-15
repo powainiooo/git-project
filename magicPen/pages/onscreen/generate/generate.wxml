@@ -25,7 +25,7 @@
       <image src="{{generateData.psdUrl}}"
              animation="{{moveCoverAni}}"
              class="cover"
-             bindload="coverAnimation" bindtransitionend="coverAnimEnd">
+             bindload="coverAnimation">
       </image>
    </view>
 

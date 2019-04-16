@@ -1,15 +1,26 @@
+<!--导航图标-->
+<view class="nav-bar" wx:if="{{showNavBar}}">
+   <view class="nav-bar-item"
+         wx:for="{{navList}}"
+         wx:for-item="item"
+         wx:key="item">
+      <image src="{{item.src}}" mode="scaleToFill" class="nav-bar-icon {{step === 1 ? 'nav-bar-icon-move' : ''}}"></image>
+      <view class="nav-bar-name">　</view>
+   </view>
+</view>
+
 <!--引导-->
-<view class="guide" wx:if="{{!useGuide}}">
+<view class="guide" wx:if="{{!useGuide}}" catchtouchmove="tmove">
   <view class="cover"></view>
   <view class="step1" wx:if="{{step === 1}}" data-next="{{2}}" bindtap="changeStep">
-    <image src="../../../res/index/mascot1.png" mode="widthFix" class="mascot1"></image>
-    <image src="../../../res/index/modal.png" mode="widthFix" class="modal1"></image>
-    <view class="content">开启你的神笔画画奇梦之旅，亲子游乐，拍照上屏，角色互动　都在这里。</view>
+    <image src="../../../res/index/mascot1.png" mode="widthFix" class="mascot1" animation="{{mascot1Ani}}"></image>
+    <image src="../../../res/index/modal.png" mode="widthFix" class="modal1" animation="{{modal1Ani}}"></image>
+    <view class="content" animation="{{modal1Ani}}">开启你的神笔画画奇梦之旅，亲子游乐，拍照上屏，角色互动　都在这里。</view>
   </view>
   <view class="step2" wx:if="{{step === 2}}" data-next="end" bindtap="changeStep">
-    <image src="../../../res/index/mascot2.png" mode="widthFix" class="mascot2"></image>
-    <image src="../../../res/index/modal.png" mode="widthFix" class="modal2"></image>
-    <view class="content">
+    <image src="../../../res/index/mascot2.png" mode="widthFix" class="mascot2" animation="{{mascot2Ani}}"></image>
+    <image src="../../../res/index/modal2.png" mode="widthFix" class="modal2" animation="{{modal2Ani}}"></image>
+    <view class="content" animation="{{modal2Ani}}">
       <text>扫描现场你的画纸二维码，赶快\n收藏作品吧。必须先上传到大屏后再扫描才可以喔。记得随时到这里来找我。</text>
       <view class="btn">【立即体验】</view>
     </view>

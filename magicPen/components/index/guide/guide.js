@@ -13,7 +13,13 @@ Component({
    properties: {
       useGuide: {
          type: Boolean,
-         value: true
+         value: true,
+         observer (val) {
+            wx.nextTick(()=>{
+               this.stepInit()
+               this.stepMove()
+            })
+         }
       }
    },
 
@@ -24,24 +30,123 @@ Component({
       step: 1,
       showScan: false,
       showCamera: false,
+      showNavBar: false,
       starList: [false, false, false, false, false],
       showSuccessModal: false,
       showFailModal: false,
       failText: '',
       starRate: 0,
-      opacity: 0
+      opacity: 0,
+      navList:[
+         {src: '../../../res/index/nav-icon1.png'},
+         {src: '../../../res/index/nav-icon2.png'},
+         {src: '../../../res/index/nav-icon3.png'},
+         {src: '../../../res/index/nav-icon4.png'},
+      ],
+      mascot1Ani: {},
+      mascot2Ani: {},
+      modal1Ani: {},
+      modal2Ani: {},
    },
 
    /**
     * 组件的方法列表
     */
    methods: {
-      changeStep(e) {
-         const step = e.currentTarget.dataset.next
-         this.setData({
-            step
+      tmove(){},
+      stepInit () {
+         const mascot1 = wx.createAnimation({
+            duration: 0,
          })
-         this.triggerEvent('changeStep',step)
+         const modal1 = wx.createAnimation({
+            duration: 0,
+         })
+         const mascot2 = wx.createAnimation({
+            duration: 0,
+         })
+         const modal2 = wx.createAnimation({
+            duration: 0,
+         })
+         mascot1.scale(0, 0).step()
+         modal1.opacity(0).step()
+         mascot2.translateX(100).step()
+         modal2.opacity(0).step()
+         this.setData({
+            mascot1Ani: mascot1.export(),
+            modal1Ani: modal1.export(),
+            mascot2Ani: mascot2.export(),
+            modal2Ani: modal2.export(),
+         })
+      },
+      changeStep(e) {
+         this.stepOut()
+         setTimeout(()=>{
+            const step = e.currentTarget.dataset.next
+            this.setData({
+               step,
+               showNavBar: step === 1
+            })
+            this.triggerEvent('changeStep',step)
+            this.stepMove()
+         }, 600)
+      },
+      stepMove () {
+         const mascot = wx.createAnimation({
+            duration: 300,
+            timingFunction: 'ease-out',
+         })
+         const modal = wx.createAnimation({
+            delay: 300,
+            duration: 300,
+            timingFunction: 'ease-out',
+         })
+         setTimeout(()=>{
+            if (this.data.step === 1) {
+               mascot.scale(1, 1).step()
+               modal.opacity(1).step()
+               this.setData({
+                  mascot1Ani: mascot.export(),
+                  modal1Ani: modal.export(),
+               })
+               setTimeout(()=>{
+                  this.setData({
+                     showNavBar: true
+                  })
+               }, 300)
+            } else if (this.data.step === 2) {
+               mascot.translateX(0).step()
+               modal.opacity(1).step()
+               this.setData({
+                  mascot2Ani: mascot.export(),
+                  modal2Ani: modal.export(),
+               })
+            }
+         }, 300)
+      },
+      stepOut () {
+         const mascot = wx.createAnimation({
+            duration: 300,
+            timingFunction: 'ease-out',
+         })
+         const modal = wx.createAnimation({
+            duration: 300,
+            timingFunction: 'ease-out',
+         })
+         if (this.data.step === 1) {
+            mascot.scale(0, 0).step()
+            modal.opacity(0).step()
+            this.setData({
+               mascot1Ani: mascot.export(),
+               modal1Ani: modal.export(),
+            })
+         } else if (this.data.step === 2) {
+            mascot.translateX(100).step()
+            modal.opacity(0).step()
+            this.setData({
+               mascot2Ani: mascot.export(),
+               modal2Ani: modal.export(),
+            })
+         }
       },
       openScanModal() {
          this.setData({

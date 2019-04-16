@@ -8,8 +8,8 @@
   <!--定位-->
   <location locationData="{{locationData}}"></location>
 
-  <!--导航栏-->
-  <view  style="z-index: {{guideStep === 1 ? 10 : 0}}; position: relative;">
+  <!--导航栏   style="z-index: {{guideStep === 1 ? 10 : 0}}; position: relative;"-->
+  <view>
     <nav-bar></nav-bar>
   </view>
 

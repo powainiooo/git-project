@@ -1,7 +1,7 @@
 {
    "pages": [
-      "pages/medal/medal",
       "pages/index/index",
+      "pages/medal/medal",
       "pages/map/map",
       "pages/onscreen/list/list",
       "pages/interaction/interaction",

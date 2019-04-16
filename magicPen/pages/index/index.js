@@ -9,7 +9,8 @@ const {promisify} = require('../../utils/util.js')
 const getLocation = promisify(wx.getLocation)
 Page({
    data: {
-      useGuide: typeof useGuide === 'string' ? false : true,
+      // useGuide: typeof useGuide === 'string' ? false : true,
+      useGuide: false,
       guideStep: typeof useGuide === 'string' ? 1 : 'end',
       userInfo: {},
       hasUserInfo: app.globalData.userInfo !== null,

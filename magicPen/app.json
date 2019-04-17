@@ -1,10 +1,10 @@
 {
    "pages": [
+      "pages/interaction/interaction",
       "pages/index/index",
       "pages/medal/medal",
       "pages/map/map",
       "pages/onscreen/list/list",
-      "pages/interaction/interaction",
       "pages/works/list/list",
       "pages/recharge/recharge",
       "pages/coupon/coupon",

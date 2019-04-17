@@ -2,11 +2,11 @@
 	"description": "项目配置文件",
 	"packOptions": {
 		"ignore": [
-         {
-            "type": "folder",
-            "value": ".idea"
-         }
-      ]
+			{
+				"type": "folder",
+				"value": ".idea"
+			}
+		]
 	},
 	"setting": {
 		"urlCheck": false,
@@ -17,7 +17,7 @@
 		"autoAudits": false
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.6.1",
+	"libVersion": "2.6.5",
 	"appid": "wx55f0bb628b5d75d0",
 	"projectname": "magicPen",
 	"debugOptions": {

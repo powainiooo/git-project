@@ -22,10 +22,14 @@ Component({
    data: {
       currentKey: 'photo',
       list: [
+         {key: 'photo', icon: '../../../res/interaction/icon1.png'},
+         {key: 'revive', icon: '../../../res/interaction/icon4.png'},
+         {key: 'call', icon: '../../../res/interaction/icon3.png'},
          {key: 'wind', icon: '../../../res/interaction/icon2.png'},
          {key: 'photo', icon: '../../../res/interaction/icon1.png'},
          {key: 'revive', icon: '../../../res/interaction/icon4.png'},
          {key: 'call', icon: '../../../res/interaction/icon3.png'},
+         {key: 'wind', icon: '../../../res/interaction/icon2.png'},
       ],
       windowWidth: 375
    },

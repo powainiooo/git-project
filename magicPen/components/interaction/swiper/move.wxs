@@ -1,9 +1,55 @@
-module.exports.swiperChange = function (e, instance) {
-   instance.callMethod('swiperChange', e)
+var startX = 0, startTime = 0, rotateZ = 0, circumference = Math.PI*2*250;
+module.exports.swiperStart = function (e, instance) {
+   startX = e.touches[0].pageX
+   startTime = e.timeStamp
+   var roll = instance.selectComponent('.roll-frame')
+   roll.removeClass('transition-end')
+}
+module.exports.swiperMove = function (e, instance) {
+   var dx = e.touches[0].pageX;
+   var angle = getAngle(dx - startX)
+   var roll = instance.selectComponent('.roll-frame')
+   roll.setStyle({
+      'transform': 'rotateZ('+(rotateZ + angle)+'deg)'
+   })
+}
+module.exports.swiperEnd = function (e, instance) {
+   var dx = e.changedTouches[0].pageX
+   var endTime = e.timeStamp
+   var roll = instance.selectComponent('.roll-frame')
+   var speed = (dx - startX)/(endTime - startTime)
+   if (speed > 1.5) speed = 1.5
+   if (speed < -1.5) speed = -1.5
+   var v = Math.abs(speed * 30)
+   var dir = speed > 0 ? 1 : -1;//顺时针 逆时针
+   var deceleration = 1.5;
+   var t = setInterval(function (){
+      v -= deceleration
+      if (Math.floor(Math.abs(v)) === 0) {
+         clearInterval(t)
+      } else {
+         var mx = startX + dir*v
+         var angle = getAngle(mx)
+         console.log(angle)
+      }
+   }, 16)
+   // var angle = getAngle(dx - startX)
+   // roll.addClass('transition-end')
+   // if (angle > 0) { //顺时针
+   //    rotateZ = angle > 23 ? rotateZ + 45 : rotateZ
+   // } else { //逆时针
+   //    rotateZ = angle < -23 ? rotateZ - 45 : rotateZ
+   // }
+   // console.log('rotate1:'+rotateZ)
+   roll.setStyle({
+      'transform': 'rotateZ('+rotateZ+'deg)'
+   })
 }
 
-module.exports.swiperMove = function (e, instance) {
-   var dx = e.detail.dx
-   var ww = e.currentTarget.dataset.ww
-   console.log(ww)
+function getAngle(dis) {
+   return Math.floor(360 * dis / circumference)
 }
+
+
+var aa = {"type":"touchstart","timeStamp":1027,"target":{"id":"","offsetLeft":-100,"offsetTop":-100,"dataset":{}},"currentTarget":{"id":"","offsetLeft":0,"offsetTop":0,"dataset":{}},"touches":[{"identifier":0,"pageX":260,"pageY":148,"clientX":260,"clientY":148,"force":1}],"changedTouches":[{"identifier":0,"pageX":260,"pageY":148,"clientX":260,"clientY":148,"force":1}],"instance":{"selectAllComponents":null,"selectComponent":null,"removeClass":null,"addClass":null,"hasClass":null,"setStyle":null,"getDataset":null,"getState":null,"triggerEvent":null,"callMethod":null,"requestAnimationFrame":null}}
+var bb = {"type":"touchend","timeStamp":2551,"target":{"id":"","offsetLeft":-100,"offsetTop":-100,"dataset":{}},"currentTarget":{"id":"","offsetLeft":0,"offsetTop":0,"dataset":{}},"touches":[],"changedTouches":[{"identifier":0,"pageX":256,"pageY":175,"clientX":256,"clientY":175,"force":0}],"instance":{"selectAllComponents":null,"selectComponent":null,"removeClass":null,"addClass":null,"hasClass":null,"setStyle":null,"getDataset":null,"getState":null,"triggerEvent":null,"callMethod":null,"requestAnimationFrame":null}}

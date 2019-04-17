@@ -1,24 +1,16 @@
-<image src="../../../res/interaction/bg.png" mode="widthFix" class="swiper-bg"></image>
-<image src="../../../res/interaction/light.png" mode="widthFix" class="swiper-light"></image>
-<swiper class="swiper-frame"
-        circular
-        display-multiple-items="3"
-        data-ww="{{windowWidth}}"
-        bindchange="{{util.swiperChange}}"
-        bindtransition="{{util.swiperMove}}">
-   <swiper-item wx:for="{{list}}"
-                wx:for-item="item"
-                wx:for-index="index"
-                wx:key="{{item.key}}"
-                style="overflow: visible;"
-                data-key="{{item.key}}"
-                bindtap="doFunc">
-      <view class="swiper-item">
-         <image class="icon move{{index}} {{currentKey === item.key ? 'current' : ''}}"
-                src="{{item.icon}}"
-                mode="widthFix"></image>
+<view class="swiper-frame"
+      bindtouchstart="{{util.swiperStart}}"
+      bindtouchmove="{{util.swiperMove}}"
+      bindtouchend="{{util.swiperEnd}}">
+   <image src="../../../res/interaction/bg.jpg" mode="widthFix" class="swiper-bg"></image>
+   <image src="../../../res/interaction/wheel.png" mode="widthFix" class="wheel"></image>
+   <view class="roll-frame">
+      <view wx:for="{{list}}" wx:key="{{item.key}}" class="roll-item">
+         <image src="{{item.icon}}" class="roll-img"></image>
       </view>
-   </swiper-item>
-</swiper>
+   </view>
+</view>
 
-<wxs module="util" src="./move.wxs"></wxs>
+
+
+<wxs src="./move.wxs" module="util"></wxs>

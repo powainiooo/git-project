@@ -1,37 +1,38 @@
 {
-   "pages": [
-      "pages/interaction/interaction",
-      "pages/index/index",
-      "pages/medal/medal",
-      "pages/map/map",
-      "pages/onscreen/list/list",
-      "pages/works/list/list",
-      "pages/recharge/recharge",
-      "pages/coupon/coupon",
-      "pages/aboutus/aboutus",
-      "pages/rule/rule",
-      "pages/onscreen/generate/generate",
-      "pages/personal/personal",
-      "pages/onscreen/detail/detail",
-      "pages/works/detail/detail",
-      "pages/auth/auth",
-      "pages/logs/logs",
-      "pages/drawing/drawing",
-      "pages/feedback/feedback"
-   ],
-   "window": {
-      "backgroundTextStyle": "light",
-      "navigationBarBackgroundColor": "#fff",
-      "navigationBarTitleText": "神笔画画",
-      "navigationBarTextStyle": "black"
-   },
-   "usingComponents": {
-      "i-message": "../../components/iview/message/index",
-      "i-icon": "../../components/iview/icon/index"
-   },
-   "permission": {
-      "scope.userLocation": {
-         "desc": "你的位置信息将用于小程序获取门店位置"
-      }
-   }
+  "pages": [
+    "pages/interaction/interaction",
+    "pages/index/index",
+    "pages/medal/medal",
+    "pages/map/map",
+    "pages/onscreen/list/list",
+    "pages/works/list/list",
+    "pages/recharge/recharge",
+    "pages/coupon/coupon",
+    "pages/aboutus/aboutus",
+    "pages/rule/rule",
+    "pages/onscreen/generate/generate",
+    "pages/personal/personal",
+    "pages/onscreen/detail/detail",
+    "pages/works/detail/detail",
+    "pages/auth/auth",
+    "pages/logs/logs",
+    "pages/drawing/drawing",
+    "pages/feedback/feedback"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "神笔画画",
+    "navigationBarTextStyle": "black"
+  },
+  "usingComponents": {
+    "i-message": "../../components/iview/message/index",
+    "i-icon": "../../components/iview/icon/index"
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序获取门店位置"
+    }
+  },
+  "sitemapLocation": "sitemap.json"
 }

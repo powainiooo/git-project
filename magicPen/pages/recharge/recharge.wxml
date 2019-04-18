@@ -3,6 +3,7 @@
         <text class="name">我的来画豆</text>
         <image src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEgAAABBCAMAAABFPBK9AAAA9lBMVEUAAAD/lgD/mQD/jAD/mwD/mAD/mwD/mgD/nwD/mQD/lwD/mgD/mAD/mQD/mAD/mQD/mgD/lwD/mgD/mQD/mQD/mgD/mQD/mQD/mgD/mQD/mQD/mgD/mQD/mQD/nQD/wwD/mQD/mQD/mAD/wAD/xAD/wAD/wwD/uQD/wQD/mgD/wgD/wQD/xAD/wwD/wwD/wgD/wwD/vwD/wgD/wgD/vgD/xQD/qQD/vwD/tQD/wwD/pgD/xQD/uQD/vgD/tgD/xAD/sgD/qgD/vwD/xAD/////4X//++//2l//yx//8sr/6J//0j//xw//99//7K//1k//zy//3W9c9I90AAAAQ3RSTlMAAgcECg0WIA8bExEmGSsuJB0oNTA3PkQzRzxNOUpB8FNPQNS/s5B2ZlHp3c/CsGAvH+XLpoFUvI9wZFBDQCifh2hXExC3wwAAA3tJREFUWMPt11lX2lAUBWAJSQjIPAQMCJWWySqD89whAWdt//+f6Tl34GpOMNf60ofuV5ff2vsk4HJNP87kC2Z8Olv7SGbfOr7M4Qecc2BUdqZ/YyQgE/91OpP3K5hLCShpmni/k0x2fCo5CX2KK0nj1I9IH374LscwbCxEK61zSd8x+35kzpOaEjoGOEMfc7d4CEGHSZR0HdP86WPmwW0YGhsoaTtDdqDrYHHjh7JrGDqV2H3Mq7HPneCXTyCTSfGFZhfDni92Le4jnr8ZX2na31G/cH8bLKAPydCKq+SMfZXnuyC4vfEjMrNM8y0oMZXv383v+d1jEDw++1HprVvWSigBcZarngLI0/VDpNO5zDh8G1VYkjvqOPP5tRhF07czotKKT+ihr5W9q5ydcSREHfyAamVQSkdDnDGMgZ6zX0ylc7CNQ9QxzV0tp3NRTJVytoKIY3X0hpWzKdhGoaVjaTm9Qj5bZEeSkCrEHcfROlAboVQUJJ31jIbztd0gjVQh4dif49+gowpA5EaqkGU5GTt3EOdsH7Uq1QIeO0chWci205O4XUderVLNl9l75ERAfFgundp709ltuq1aQ96aQgZC6JRSw7ecg3rbfbUsBLFlUAicYvZ49awfG3XXCxcKQbAMCoFTru2vuPLJ5ka9670otALihcr5QqMX1eakCQ4ME89eFCIQLmOF8oVqpTXYDpXpnTWZo4bJQhTCZbxQzXPrg+PPMgffz7a2hCMefagQgUqpbBkLue36ZnNr9ElkhIxwxIHS8ntWHxqNeJ1XDg4ThVZC+SqbtrHZbG5hmqAwprt08EA4zOQOhcSxG1CpCxJQiDAG68AbjU5ROOpCUY8fK0lJpo5t4IOBz106clg0JCvBOJDadZY2Kp4HThUc3JWOdBTEtpXEm1Rrea7bhbhcgTrCkX34E6PQshIbV4V1LY+l1YIygoH3RzmqEP0asfFKUqrxoAJMrKMgUQmlbB6pRgUCCCqMIU4kxCoJqYilCoUqpAAKMqIOPHfqkC9/IaVRAkoElZd1qEMrSanEKUyWKZyJdxBSkqR4uPKSIQ79S4uSonhKpSUj61CHSrwUUmDxoKIY4lAIJSyFFLQCC2MzBUZpMEpSFFo8UlEMOhoSH4gYjyUUxej90ykt1IQhFcXoUWiFkkRFMbqU5DCCIIouRrP2P/9S/gCBdVh1PdohXwAAAABJRU5ErkJggg==" mode="widthFix" class="icon"></image>
         <text class="price">{{userIq}}</text>
+        <text class="price-add" wx:if="{{showIqAdd}}">+{{userIqAdd}}</text>
     </view>
     <view class="frame">
         <view class="title">
@@ -16,6 +17,7 @@
                   wx:key="{{item.iqGoodsId}}"
                   data-id="{{item.iqGoodsId}}"
                   data-price="{{item.price}}"
+                  data-peas="{{item.ruleIq}}"
                   bindtap="selectIqGoods">
               <view class="bean">{{item.ruleIq}}<text wx:if="{{item.addIq != 0}}">+{{item.addIq}}</text></view>
               <image src="../../res/recharge/icon1.png"></image>

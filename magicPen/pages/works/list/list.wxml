@@ -14,7 +14,8 @@
    <z-avatar class="avatar" url="{{avatarUrl}}" grade="{{grade}}"></z-avatar>
    <view class="zans">
       <image src="../../../res/index/icon-like.png" mode="widthFix"></image>
-      <view class="title">{{zanSum}}</view>
+      <view class="title">{{zanSumTxt}}</view>
+      <view class="star-add" wx:if="{{zanDis > 0}}">+{{zanDis}}</view>
    </view>
    <view class="info">
       <view class="name">{{nick}}</view>

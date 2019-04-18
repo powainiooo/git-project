@@ -1,7 +1,13 @@
 .recharge { min-height: 100vh; background-color: #eff2f9;}
 .recharge .line1 { height: 70rpx; display: flex; align-items: center; font-size: 28rpx; color: #15191b; padding-left: 70rpx;}
 .recharge .line1 .icon { width: 50rpx; margin: 15rpx 40rpx 0 20rpx;}
-.recharge .line1 .price { color: #ff3067;}
+.recharge .line1 .price-add { color: #ff3067; animation: add 2s linear both; margin-left: 20rpx;}
+@keyframes add {
+   0% { transform: scale(0)}
+   20%,40%,60%,80% { transform: scale(2)}
+   30%,50%,70% { transform: scale(1)}
+   100% { transform: scale(0)}
+}
 .recharge .frame { background-color: #ffffff; overflow: hidden;}
 .recharge .frame .title { text-align: center; margin-top: 60rpx;}
 .recharge .frame .title view:first-child { color: #da570d; font-weight: bold; font-size: 40rpx; letter-spacing: 2rpx; margin-bottom: 20rpx;}

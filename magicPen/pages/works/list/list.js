@@ -3,6 +3,7 @@ const {promisify} = require('../../../utils/util.js')
 const chooseImage = promisify(wx.chooseImage)
 const getLocation = promisify(wx.getLocation)
 const {getMyWorks, getMyFriend, getUserInterspaceInfo, addAttention, fileUp, uploadTopImg, getFuhuoIqAndZhaohuanIq, payFuHuo, deleteWorks} = require('../../../utils/api.js')
+const userStar = wx.getStorageSync('userStar')
 Page({
 
    /**
@@ -18,6 +19,8 @@ Page({
       nick: '章剑',
       grade: 0,
       zanSum: 0,
+      zanSumTxt: userStar,
+      zanDis: 0,
       fans: 0,
       fuhuoIq: 0,
       avatarUrl: '',
@@ -96,7 +99,41 @@ Page({
             avatarUrl,
             attentionThisUser: isAttention ? true : false
          })
+         if (this.data.isUser) {
+            if (typeof userStar === 'string') {
+               this.setData({
+                  zanSumTxt: zanSum
+               })
+            } else if (typeof userStar === 'number') {
+               this.setFansMove()
+            }
+            wx.setStorage({
+               key:'userStar',
+               data: zanSum
+            })
+         } else {
+            this.setData({
+               zanSumTxt: zanSum
+            })
+         }
       })
+   },
+   setFansMove () {
+      const dis = this.data.zanSum - userStar
+      if (dis > 0) {
+         this.setData({
+            zanDis: dis
+         })
+         setTimeout(()=>{
+            this.setData({
+               zanSumTxt: this.data.zanSum
+            })
+         }, 2200)
+      } else {
+         this.setData({
+            zanSumTxt: this.data.zanSum
+         })
+      }
    },
    getFuhuoIqAndZhaohuanIq() {
       getFuhuoIqAndZhaohuanIq().then(res => {

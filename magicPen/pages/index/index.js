@@ -3,8 +3,7 @@
 const app = getApp()
 const {getSlideList, getNearbyMerchant, getChoicenessWorks, getAnnoun} = require('../../utils/api.js')
 const useGuide = wx.getStorageSync('useGuide')
-// import regeneratorRuntime from '../../utils/runtime.js'
-const regeneratorRuntime = require('../../utils/runtime.js')
+import regeneratorRuntime from '../../utils/runtime.js'
 const {promisify} = require('../../utils/util.js')
 const getLocation = promisify(wx.getLocation)
 Page({
@@ -22,7 +21,9 @@ Page({
       locationData: {},
       pageSize: 10,
       pageNo: 1,
-      msgList: []
+      msgList: [],
+      newsHintMsg: '',
+      showNewsHint: true
    },
    onLoad: function () {
       if (app.globalData.userInfo) {

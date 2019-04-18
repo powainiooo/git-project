@@ -1,5 +1,6 @@
 // pages/personal/personal.js
 const {getUserInterspaceInfo, getUserAsset} = require('../../utils/api.js')
+const userFans = wx.getStorageSync('userFans')
 Page({
 
    /**
@@ -10,7 +11,9 @@ Page({
       nickName: '',
       grade: 0,
       userIq: 0,
-      userFans: 0
+      userFans: 0,
+      userFansTxt: userFans,
+      fansDis: 0,
    },
 
    /**
@@ -28,6 +31,17 @@ Page({
             grade,
             userFans: fans
          })
+         if (typeof userFans === 'string') {
+            this.setData({
+               userFansTxt: fans
+            })
+         } else if (typeof userFans === 'number') {
+            this.setFansMove()
+         }
+         wx.setStorage({
+            key:'userFans',
+            data: fans
+         })
       })
       getUserAsset().then(res=>{
          this.setData({
@@ -38,6 +52,23 @@ Page({
    linkTo(e) {
       const url = e.currentTarget.dataset.url
       wx.navigateTo({url})
+   },
+   setFansMove () {
+      const dis = this.data.userFans - userFans
+      if (dis > 0) {
+         this.setData({
+            fansDis: dis
+         })
+         setTimeout(()=>{
+            this.setData({
+               userFansTxt: this.data.userFans
+            })
+         }, 2200)
+      } else {
+         this.setData({
+            userFansTxt: this.data.userFans
+         })
+      }
    },
    /**
     * 生命周期函数--监听页面初次渲染完成

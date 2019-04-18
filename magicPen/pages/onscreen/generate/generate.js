@@ -37,6 +37,8 @@ Page({
       cameraSize: [],
       coverSize: [],
       tAnimEnd: 0,
+      waitCount: 0,
+      playCount: 0,
    },
 
    /**
@@ -77,6 +79,11 @@ Page({
       this.setData({
          showModal: false,
       })
+   },
+   posterLoadDone () {
+      setTimeout(()=>{
+         this.coverAnimation()
+      }, 1000)
    },
    coverAnimation() {
       const [caw, cah, cay, cax] = this.data.cameraSize
@@ -200,15 +207,62 @@ Page({
          }
       })
    },
+   waitCountDown () {
+      this.setData({
+         waitCount: 3,
+         functType: 2,
+         showBottom: false,
+      })
+      const t = setInterval(()=>{
+         if (this.data.waitCount === 0) {
+            clearInterval(t)
+            this.takeVideo();
+         } else {
+            this.setData({
+               waitCount: this.data.waitCount - 1,
+            })
+         }
+      }, 1000)
+   },
    takeVideo () {
       const ctx = wx.createCameraContext()
-      ctx.startRecord()
+      const self = this;
+      ctx.startRecord({
+         success () {
+            self.setData({
+               playCount: 3,
+            })
+            const t = setInterval(()=>{
+               if(self.data.playCount === 0) {
+                  clearInterval(t)
+                  ctx.stopRecord({
+                     success: (res) => {
+                        console.log(res.tempVideoPath)
+                        self.setData({
+                           videos: res.tempVideoPath,
+                           showBottom: false,
+                        })
+                        self.zoomBack()
+                     }
+                  })
+               }else {
+                  self.setData({
+                     playCount: self.data.playCount - 1,
+                  })
+               }
+            }, 1000)
+         }
+      })
+   },
+   takeVideo2 () {
+      const ctx = wx.createCameraContext()
+
       this.setData({
-         count: this.data.recordTime,
+         waitCount: 6,
          functType: 2
       })
       const t = setInterval(()=>{
-         if(this.data.count === 0) {
+         if(this.data.waitCount === 0) {
             clearInterval(t)
             ctx.stopRecord({
                success: (res) => {
@@ -221,8 +275,11 @@ Page({
                }
             })
          }else {
+            if (this.data.waitCount === 3) {
+               ctx.startRecord()
+            }
             this.setData({
-               count: this.data.count - 1
+               waitCount: this.data.waitCount - 1,
             })
          }
       }, 1000)

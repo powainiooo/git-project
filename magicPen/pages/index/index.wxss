@@ -4,3 +4,7 @@
 .loading { text-align: center; margin-top: 100rpx; margin-bottom: 20rpx;}
 .loading .btn{ font-size: 20rpx; color: #cccccc;}
 .loading .btn image{ width: 20rpx;}
+
+.news-hint { width: 100%; position: fixed; left: 0; bottom: -80rpx; text-align: center; transition: transform 0.5s ease-out;}
+.news-hint-show { transform: translate(0, -120rpx);}
+.news-hint text { font-size: 24rpx; color: #ffffff; padding: 10rpx 40rpx; background-color: rgba(0,0,0,0.5); border-radius: 8rpx;}

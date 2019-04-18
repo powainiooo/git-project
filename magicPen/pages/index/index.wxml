@@ -35,7 +35,8 @@
   <guide useGuide="{{useGuide}}" bindchangeStep="changeStep"></guide>
 </view>
 
-
-<button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" style="display: none;"> 获取头像昵称 </button>
+<view class="news-hint {{showNewsHint ? 'news-hint-show' : ''}}">
+   <text>{{newsHintMsg}}</text>
+</view>
 
 <i-message id="message" />

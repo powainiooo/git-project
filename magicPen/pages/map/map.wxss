@@ -1,8 +1,9 @@
-.map-info{ margin: 40rpx 40rpx 40rpx 100rpx; display: flex; justify-content: space-between; align-items: center;}
+.map-info{ margin: 10rpx 40rpx; display: flex; justify-content: space-between; align-items: center;}
 .map-info .name{ font-size: 32rpx; color: #151515;}
 .map-info .distance{ font-size: 28rpx; color: #565656;}
 .map-info .distance image{ width: 20rpx; margin-left: 15rpx;}
-.map-addr{ font-size: 28rpx; color: #565656; margin-left: 100rpx;}
+.map-addr{ font-size: 28rpx; color: #565656; margin-left: 40rpx; margin-bottom: 10rpx;}
+.map-info .working { font-size: 24rpx; padding: 4rpx 10rpx; border-radius: 8rpx; color: #2c8df4; border: 1px solid #2c8df4;}
 .btn { width: 400rpx; margin: 30rpx auto;}
 
 .store-img { width: 100%;}

@@ -9,11 +9,13 @@ Page({
    data: {
       iqGoodsId: '',
       userIq: 0,
+      userIqAdd: 0,
       iqPrice: 0,
       iqGoodsVos: [],
       couponId: '',
       fullMoney: 0,
-      couponUserVos: []
+      couponUserVos: [],
+      showIqAdd: false
    },
 
    /**
@@ -45,11 +47,12 @@ Page({
       })
    },
    selectIqGoods(e) {
-      const {id, price} = e.currentTarget.dataset
+      const {id, price, peas} = e.currentTarget.dataset
       const couponId = this.data.fullMoney > price ? '' : this.data.couponId
       this.setData({
          iqGoodsId: id,
          iqPrice: Number(price),
+         userIqAdd: peas,
          couponId
       })
    },
@@ -71,7 +74,15 @@ Page({
             wx.showToast({
                title:'支付成功'
             });
-            self.getMyPeas()
+            self.setData({
+               showIqAdd: true,
+            })
+            setTimeout(()=>{
+               self.setData({
+                  showIqAdd: false,
+                  userIq: self.data.userIq + self.data.userIqAdd,
+               })
+            }, 2000)
          },
          'fail':function(res){
             wx.showToast({

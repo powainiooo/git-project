@@ -21,6 +21,7 @@
             <image src="../../../res/index/icon-like.png" mode="scaleToFill" class="list-item-icon" wx:if="{{isLike}}"/>
             <image src="../../../res/index/icon-dislike.png" mode="scaleToFill" class="list-item-icon" wx:if="{{!isLike}}"/>
             <text class="list-item-nums">{{zan}}</text>
+            <text class="list-item-nums" style="color: #ff306a" wx:if="{{itemData.zanRate !== 0}}">+{{itemData.zanRate}}</text>
          </view>
          <view class="list-item-list">
             <image class="avatars"
@@ -41,31 +42,35 @@
            class="list-item-arrow {{showOpera ? 'list-item-arrow-back' : ''}}"
            bindtap="doOpera"/>
 </view>
-<view class="list-item-opera" wx:if="{{isUser}}" style="height:{{showOpera ? 86 : 0}}rpx">
-   <view class="btn-item" bindtap="doRevive">
-      <image src="../../../res/work/revive.png" mode="widthFix" class="btn-item-icon"></image>
-      <text>复活</text>
+
+<view class="list-item-opera-frame" style="height:{{showOpera ? 86 : 20}}rpx">
+   <view class="list-item-opera" wx:if="{{isUser}}">
+      <view class="btn-item" bindtap="doRevive">
+         <image src="../../../res/work/revive.png" mode="widthFix" class="btn-item-icon"></image>
+         <text>复活</text>
+      </view>
+      <view class="btn-item" bindtap="doTop">
+         <image src="../../../res/work/top.png" mode="widthFix" class="btn-item-icon"></image>
+         <text>{{itemData.isTop === 1 ? '取消' : '' }}置顶</text>
+      </view>
+      <view class="btn-item">
+         <image src="../../../res/work/share.png" mode="widthFix" class="btn-item-icon"></image>
+         <text>分享</text>
+         <button class="btn-share"
+                 plain
+                 open-type="share"
+                 data-id="{{itemData.tuzhiNu}}"
+                 data-url="{{itemData.worksUrl}}"
+                 data-name="{{itemData.worksName}}">分享</button>
+      </view>
+      <view class="btn-item" bindtap="doDel">
+         <image src="../../../res/work/del.png" mode="widthFix" class="btn-item-icon"></image>
+         <text>删除</text>
+      </view>
+      <view class="time">{{util.format(itemData.createAt)}}</view>
    </view>
-   <view class="btn-item" bindtap="doTop">
-      <image src="../../../res/work/top.png" mode="widthFix" class="btn-item-icon"></image>
-      <text>{{itemData.isTop === 1 ? '取消' : '' }}置顶</text>
-   </view>
-   <view class="btn-item">
-      <image src="../../../res/work/share.png" mode="widthFix" class="btn-item-icon"></image>
-      <text>分享</text>
-      <button class="btn-share"
-              plain
-              open-type="share"
-              data-id="{{itemData.tuzhiNu}}"
-              data-url="{{itemData.worksUrl}}"
-              data-name="{{itemData.worksName}}">分享</button>
-   </view>
-   <view class="btn-item" bindtap="doDel">
-      <image src="../../../res/work/del.png" mode="widthFix" class="btn-item-icon"></image>
-      <text>删除</text>
-   </view>
-   <view class="time">{{util.format(itemData.createAt)}}</view>
 </view>
+
 
 
 <wxs module="util">

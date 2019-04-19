@@ -35,6 +35,12 @@ Component({
                isAttention: true
             })
          })
-      }
+      },
+      intoWorks () {
+         const dyn = this.data.itemData.userDyn > 0 ? 1 : 2
+         wx.navigateTo({
+            url: `/pages/works/list/list?userId=${this.data.itemData.userId}&dyn=${dyn}`
+         })
+      },
    }
 })

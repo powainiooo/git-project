@@ -191,7 +191,8 @@ Page({
    takePhoto() {
       console.log('takePhoto')
       this.setData({
-         functType: 1
+         functType: 1,
+         showBottom: false,
       })
       const self = this
       const ctx = wx.createCameraContext()

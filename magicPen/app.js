@@ -46,6 +46,7 @@ App({
       imgSrc: 'https://xcx.newryun.com/xcxstatic/',
       userInfo: {},
       sKey: sKey,
+      myDyn: null,
       generateData: null,
       locationData: null
    }

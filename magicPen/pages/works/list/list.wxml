@@ -33,7 +33,10 @@
 
 <view class="tabs">
    <view class="{{page === 'works' ? 'active' : ''}}" data-page="works" bindtap="changePage">{{isUser ? '我的作品' : 'TA的作品'}}</view>
-   <view class="{{page === 'attention' ? 'active' : ''}}" wx:if="{{isUser}}" data-page="attention" bindtap="changePage">关注的人</view>
+   <view class="{{page === 'attention' ? 'active' : ''}} {{userDynSum > 0 ? 'dot' : ''}}"
+         wx:if="{{isUser}}"
+         data-page="attention"
+         bindtap="changePage">关注的人</view>
 </view>
 
 <view class="works-list" wx:if="{{page === 'works'}}">

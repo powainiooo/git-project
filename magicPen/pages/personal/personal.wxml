@@ -1,41 +1,54 @@
 <view class="personal-container">
-  <view class="user">
-     <z-avatar url="{{avatarUrl}}" grade="{{grade}}" class="avatar"></z-avatar>
-    <text>{{nickName}}</text>
-  </view>
-  <view class="accout">
-    <view class="fans">
-       <text>{{userFansTxt}} \n 粉丝</text>
-       <view class="fans-add" wx:if="{{fansDis > 0}}">+{{fansDis}}</view>
-    </view>
-    <view class="coin" data-url="/pages/recharge/recharge" bindtap="linkTo"><text>{{userIq}} \n 来画豆</text></view>
-  </view>
-  <view class="hr"></view>
-  <view class="link-line" data-url="/pages/coupon/coupon" bindtap="linkTo">
-    <image src="../../res/personal/coupon.png" mode="widthFix"></image>
-    <text>优惠券</text>
-    <i-icon type="enter" class="arrow" size="22" color="#8b8e98" />
-  </view>
-  <view class="link-line" data-url="/pages/feedback/feedback" bindtap="linkTo">
-    <image src="../../res/personal/feedback.png" mode="widthFix"></image>
-    <text>建议反馈</text>
-    <i-icon type="enter" class="arrow" size="22" color="#8b8e98" />
-  </view>
-  <view class="link-line">
-    <image src="../../res/personal/contact.png" mode="widthFix"></image>
-    <text>在线聊天</text>
-    <i-icon type="enter" class="arrow" size="22" color="#8b8e98" />
-     <button open-type="contact" class="btn">在线聊天</button>
-  </view>
-  <view class="link-line" data-url="/pages/aboutus/aboutus" bindtap="linkTo">
-    <image src="../../res/personal/aboutus.png" mode="widthFix"></image>
-    <text>关于我们</text>
-    <i-icon type="enter" class="arrow" size="22" color="#8b8e98" />
-  </view>
-  <view class="link-line" data-url="/pages/rule/rule" bindtap="linkTo">
-    <image src="../../res/personal/rule.png" mode="widthFix"></image>
-    <text>规则说明</text>
-    <i-icon type="enter" class="arrow" size="22" color="#8b8e98" />
-  </view>
+   <view class="user">
+      <z-avatar url="{{avatarUrl}}" grade="{{grade}}" class="avatar"></z-avatar>
+      <text>{{nickName}}</text>
+      <image src="../../res/personal/qrcode.png" mode="widthFix" class="icon-qrcode" bindtap="openQrcode"></image>
+   </view>
+   <view class="accout">
+      <view class="fans">
+         <text>{{userFansTxt}} \n 粉丝</text>
+         <view class="fans-add" wx:if="{{fansDis > 0}}">+{{fansDis}}</view>
+      </view>
+      <view class="coin" data-url="/pages/recharge/recharge" bindtap="linkTo"><text>{{userIq}} \n 来画豆</text></view>
+   </view>
+   <view class="hr"></view>
+   <view class="link-line" data-url="/pages/coupon/coupon" bindtap="linkTo">
+      <image src="../../res/personal/coupon.png" mode="widthFix"></image>
+      <text>优惠券</text>
+      <i-icon type="enter" class="arrow" size="22" color="#8b8e98" />
+   </view>
+   <view class="link-line" data-url="/pages/feedback/feedback" bindtap="linkTo">
+      <image src="../../res/personal/feedback.png" mode="widthFix"></image>
+      <text>建议反馈</text>
+      <i-icon type="enter" class="arrow" size="22" color="#8b8e98" />
+   </view>
+   <view class="link-line">
+      <image src="../../res/personal/contact.png" mode="widthFix"></image>
+      <text>在线聊天</text>
+      <i-icon type="enter" class="arrow" size="22" color="#8b8e98" />
+      <button open-type="contact" class="btn">在线聊天</button>
+   </view>
+   <view class="link-line" data-url="/pages/aboutus/aboutus" bindtap="linkTo">
+      <image src="../../res/personal/aboutus.png" mode="widthFix"></image>
+      <text>关于我们</text>
+      <i-icon type="enter" class="arrow" size="22" color="#8b8e98" />
+   </view>
+   <view class="link-line" data-url="/pages/rule/rule" bindtap="linkTo">
+      <image src="../../res/personal/rule.png" mode="widthFix"></image>
+      <text>规则说明</text>
+      <i-icon type="enter" class="arrow" size="22" color="#8b8e98" />
+   </view>
 </view>
 <i-message id="message" />
+
+<z-modal bindtap="closeQrcode" style="display: {{showQrcodeFrame ? 'flex' : 'none'}}">
+   <view class="info-modal">
+      <view class="user">
+         <z-avatar url="{{avatarUrl}}" grade="{{grade}}" class="avatar"></z-avatar>
+         <text>{{nickName}}</text>
+      </view>
+      <canvas class='qrcode-canvas' canvas-id='canvas'></canvas>
+      <view class="hint">扫一扫上面的二维码，关注我</view>
+   </view>
+
+</z-modal>

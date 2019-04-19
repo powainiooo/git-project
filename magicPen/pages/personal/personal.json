@@ -1,5 +1,6 @@
 {
   "usingComponents": {
-     "z-avatar": "../../components/avatar/avatar"
+     "z-avatar": "../../components/avatar/avatar",
+     "z-modal": "../../components/modal/modal"
   }
 }

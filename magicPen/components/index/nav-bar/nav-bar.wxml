@@ -1,9 +1,10 @@
 <view class="nav-bar">
-  <view class="nav-bar-item"
+  <view class="nav-bar-item {{item.showDot ? 'nav-bar-item-dot' : ''}}"
         wx:for="{{list}}"
         wx:for-item="item"
-        wx:key="item"
+        wx:key="{{item.key}}"
         data-url="{{item.url}}"
+        data-key="{{item.key}}"
         bindtap="jumpPage">
     <image src="{{item.src}}" mode="scaleToFill" class="nav-bar-icon"></image>
     <view class="nav-bar-name">{{item.name}}</view>

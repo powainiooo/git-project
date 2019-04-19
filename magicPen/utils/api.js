@@ -60,6 +60,13 @@ export const getAnnoun = data => {
    })
 }
 
+//获取我的动态消息
+export const getMyDyn = data => {
+   return ajax({
+      url: `${ajaxUrl}/api/index/getMyDyn`
+   })
+}
+
 //获取我的优惠券列表
 export const getCouponList = data => {
    return ajax({

@@ -3,7 +3,7 @@ const {promisify} = require('../../../utils/util.js')
 const chooseImage = promisify(wx.chooseImage)
 const getLocation = promisify(wx.getLocation)
 const {getMyWorks, getMyFriend, getUserInterspaceInfo, addAttention, fileUp, uploadTopImg, getFuhuoIqAndZhaohuanIq, payFuHuo, deleteWorks} = require('../../../utils/api.js')
-const userStar = wx.getStorageSync('userStar')
+// const userStar = wx.getStorageSync('userStar')
 Page({
 
    /**
@@ -13,17 +13,19 @@ Page({
       isUser: true,
       attentionThisUser: false,
       userId: 0,
+      dyn: 0,
       isLoading: false,
       page: 'works',
       topUrl: '',
       nick: '章剑',
       grade: 0,
       zanSum: 0,
-      zanSumTxt: userStar,
+      zanSumTxt: 0,
       zanDis: 0,
       fans: 0,
       fuhuoIq: 0,
       avatarUrl: '',
+      userDynSum: 0,
       worksList: [],
       attentionList: [],
       pageNo: 1,
@@ -42,6 +44,7 @@ Page({
     */
    onLoad: function (options) {
       this.data.userId = options.userId || 0;
+      this.data.dyn = options.dyn || 2;
       this.getWorkList()
       this.getPersonInfo()
       if (this.data.userId === 0) {
@@ -88,8 +91,11 @@ Page({
       })
    },
    getPersonInfo() {
-      getUserInterspaceInfo({userId: this.data.userId}).then(res => {
-         const {topUrl, nick, grade, zanSum, fans, avatarUrl, isAttention} = res.data
+      getUserInterspaceInfo({
+         userId: this.data.userId,
+         isReadDyn: this.data.dyn,
+      }).then(res => {
+         const {topUrl, nick, grade, zanSum, fans, avatarUrl, isAttention, zanSumAdd, userDynSum} = res.data
          this.setData({
             topUrl: topUrl ? topUrl : '',
             nick,
@@ -97,29 +103,38 @@ Page({
             zanSum,
             fans,
             avatarUrl,
-            attentionThisUser: isAttention ? true : false
+            userDynSum,
+            attentionThisUser: isAttention ? true : false,
+            zanSumTxt: zanSum - zanSumAdd
          })
          if (this.data.isUser) {
-            if (typeof userStar === 'string') {
-               this.setData({
-                  zanSumTxt: zanSum
-               })
-            } else if (typeof userStar === 'number') {
-               this.setFansMove()
-            }
+            this.setFansMove(zanSumAdd)
+            // if (typeof userStar === 'string') {
+            //    this.setData({
+            //       zanSumTxt: zanSum
+            //    })
+            // } else if (typeof userStar === 'number') {
+            //    this.setFansMove()
+            // }
+            // wx.setStorage({
+            //    key:'userStar',
+            //    data: zanSum
+            // })
+            const myDynData = wx.getStorageSync('myDynData')
+            myDynData.userDynSum = userDynSum
             wx.setStorage({
-               key:'userStar',
-               data: zanSum
+               key:'myDynData',
+               data: myDynData
             })
          } else {
             this.setData({
                zanSumTxt: zanSum
             })
          }
+
       })
    },
-   setFansMove () {
-      const dis = this.data.zanSum - userStar
+   setFansMove (dis) {
       if (dis > 0) {
          this.setData({
             zanDis: dis

@@ -1,11 +1,12 @@
 //index.js
 //获取应用实例
 const app = getApp()
-const {getSlideList, getNearbyMerchant, getChoicenessWorks, getAnnoun} = require('../../utils/api.js')
+const {getSlideList, getNearbyMerchant, getChoicenessWorks, getAnnoun, getMyDyn} = require('../../utils/api.js')
 const useGuide = wx.getStorageSync('useGuide')
 import regeneratorRuntime from '../../utils/runtime.js'
 const {promisify} = require('../../utils/util.js')
 const getLocation = promisify(wx.getLocation)
+const myDynData = wx.getStorageSync('myDynData')
 Page({
    data: {
       useGuide: typeof useGuide === 'string' ? false : true,
@@ -23,7 +24,8 @@ Page({
       pageNo: 1,
       msgList: [],
       newsHintMsg: '',
-      showNewsHint: true
+      showNewsHint: false,
+      myDynData: null
    },
    onLoad: function () {
       if (app.globalData.userInfo) {
@@ -49,13 +51,16 @@ Page({
             }
          })
       }
-      this.getBannerData()
-      this.getWorksData()
-      this.getMsgData()
+      // this.getBannerData()
+      // this.getWorksData()
+      // this.getMsgData()
       const sKey = wx.getStorageSync('sKey')
       if(sKey !== ''){
          app.globalData.sKey = sKey
          this.getStore()
+         if (app.globalData.myDyn === null) {
+            this.getMyDyn()
+         }
       }
    },
    getUserInfo: function(e) {
@@ -106,6 +111,24 @@ Page({
          })
       })
    },
+   getMyDyn () {
+      getMyDyn().then(res => {
+         this.setData({
+            myDynData: res.data
+         })
+         app.globalData.myDyn = res.data
+         if (typeof myDynData !== 'string') {
+            const msg = this.getWarnText(res.data)
+            this.setData({
+               newsHintMsg: msg,
+               showNewsHint: msg !== ''
+            })
+            setTimeout(()=>{
+
+            }, 3000)
+         }
+      })
+   },
    pageNoAdd() {
       this.data.pageNo ++
       this.getWorksData()
@@ -123,6 +146,30 @@ Page({
          })
       }
    },
+   getWarnText (data) {
+      if (data.couponDue === 1) {
+         return '你的优惠券快过期啦'
+      }
+      if (data.couponSum > myDynData.couponSum) {
+         return '你有获得新的优惠券哟'
+      }
+      if (data.medalDue  === 1) {
+         return '你的勋章礼品快过期啦'
+      }
+      if (data.medalSum > myDynData.medalSum) {
+         return '你有获得新的勋章哟'
+      }
+      if (data.fans > myDynData.fans) {
+         return `新增${data.fans - myDynData.fans}个粉丝`
+      }
+      if (data.zanSum > myDynData.zanSum) {
+         return `你的作品新增${data.zanSum - myDynData.zanSum}个赞啦`
+      }
+      if (data.userDynSum  > 0) {
+         return `你关注的好友更新动态啦`
+      }
+      return ''
+   },
    /**
     * 生命周期函数--监听页面显示
     */
@@ -130,6 +177,13 @@ Page({
       this.getBannerData()
       this.getWorksData()
       this.getStore()
+      this.getMsgData()
+      if(this.data.myDynData !== null) {
+         const myDynData = wx.getStorageSync('myDynData')
+         this.setData({
+            myDynData
+         })
+      }
    },
    onReachBottom: function () {
       this.pageNoAdd()

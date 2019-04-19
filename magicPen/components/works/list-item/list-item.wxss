@@ -4,11 +4,16 @@
 .list-item .list-item-right { width: 380rpx; margin-left: 30rpx;}
 .list-item .list-item-right .list-item-line { display: flex; justify-content: space-between; align-items: center; margin-top: 40rpx;}
 .list-item .list-item-right .list-item-name { font-size: 32rpx; color: rgb(53,53,53);}
-.list-item .list-item-right .list-item-name-input { width: 220rpx; min-height:40rpx; height: 40rpx; line-height: 40rpx; font-size: 24rpx; color: #999999; border: 1px solid #999999}
+.list-item .list-item-right .list-item-name-input { width: 220rpx; min-height:40rpx; height: 40rpx; line-height: 40rpx; font-size: 24rpx; color: #999999; border-bottom: 1px solid #999999}
 .list-item .list-item-right .list-item-edit { width: 30rpx;}
-.list-item .list-item-right .list-item-ok { font-size: 28rpx; color: #999999; margin: 0 5rpx;}
-.list-item .list-item-right .list-item-like { display: flex; margin-top: 20rpx;}
+.list-item .list-item-right .list-item-ok { font-size: 28rpx; color: #999999; margin: 0 7rpx;}
+.list-item .list-item-right .list-item-like { display: flex; margin-top: 20rpx; position: relative;}
 .list-item .list-item-right .list-item-like .list-item-icon{ width: 40rpx; height: 40rpx;}
+.list-item .list-item-right .list-item-like .list-item-icon-like{ animation: like 0.55s ease-out both; position: absolute; top: 0; left: 0;}
+@keyframes like {
+   0%,100% { transform: scale(1); opacity: 1;}
+   50% { transform: scale(2.5); opacity: 0.5;}
+}
 .list-item .list-item-right .list-item-like .list-item-nums{ font-size: 28rpx; color: rgb(53,53,53); margin-left: 10rpx;}
 .list-item .list-item-right .list-item-list { display: flex; align-items: baseline; color: rgb(141,159,170); font-size: 22rpx;}
 .list-item .list-item-right .list-item-list .avatars { width: 40rpx; height: 40rpx; border-radius: 50%; margin-right: 10rpx;}

@@ -14,7 +14,8 @@ Page({
       markers:[],
       locationData: null,
       storeUrl: [],
-      placeholderUrl: ''
+      placeholderUrl: '',
+      imgSrc: ''
    },
 
    /**
@@ -22,6 +23,24 @@ Page({
     */
    onLoad: function (options) {
       const {locationData, imgSrc} = getApp().globalData
+      this.setData({
+         locationData,
+         imgSrc
+      })
+      this.initData()
+   },
+   async getStore() {
+      const {longitude, latitude} = await getLocation({
+         type: 'gcj02',
+      })
+      const res = await getNearbyMerchant(`${longitude},${latitude}`)
+      this.setData({
+         locationData: res.data,
+      })
+      this.initData()
+   },
+   initData () {
+      const locationData = this.data.locationData
       if(locationData !== null) {
          const {longitude, latitude, mchImgs} = locationData
          const markers = [{
@@ -36,23 +55,19 @@ Page({
             latitude,
             markers,
             storeUrl: mchImgs,
-            placeholderUrl: `${imgSrc}images/tiyandian.png`
+            placeholderUrl: `${this.data.imgSrc}images/tiyandian.png`
          })
       }else {
          this.setData({
-            placeholderUrl: `${imgSrc}images/tiyandian.png`
+            placeholderUrl: `${this.data.imgSrc}images/tiyandian.png`
          })
       }
-
    },
-   async getStore() {
-      const {longitude, latitude} = await getLocation({
-         type: 'gcj02',
-      })
-      const res = await getNearbyMerchant(`${longitude},${latitude}`)
-      this.setData({
-         locationData: res.data,
-         storeUrl: res.data.mchImgs,
+   doGuide () {
+      const {longitude, latitude} = this.data.locationData
+      wx.openLocation({
+         latitude: Number(latitude),
+         longitude: Number(longitude),
       })
    },
    /**

@@ -30,8 +30,9 @@
 .person-info .attention { font-size: 20rpx; color: #f41905; position: absolute; right: 220rpx; top: 0;}
 
 .tabs { height: 80rpx; display: flex; justify-content: space-around; background-color: #eff2f9;}
-.tabs view { height: 100%; font-size: 32rpx; color: rgb(61,153,173); display: flex; align-items: center;}
+.tabs view { height: 100%; font-size: 32rpx; color: rgb(61,153,173); display: flex; align-items: center; position: relative;}
 .tabs view.active { color: rgb(255,153,0);}
+.tabs view.dot::before { content: ''; width: 14rpx; height: 14rpx; border-radius: 50%; background-color: #ff3067; position: absolute; top: 35rpx; left: 135rpx;}
 
 .works-list{ overflow: hidden;}
 

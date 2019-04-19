@@ -1,5 +1,5 @@
-<view class="attention-item">
-   <view class="attention-item-avatar">
+<view class="attention-item {{itemData.userDyn !== 0 ? 'attention-item-dot' : ''}}">
+   <view class="attention-item-avatar" bindtap="intoWorks">
       <image src="{{itemData.avatarUrl}}" mode="widthFix" class="attention-item-avatar-img"></image>
    </view>
    <view class="attention-item-info">

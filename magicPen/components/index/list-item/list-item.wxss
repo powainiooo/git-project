@@ -6,6 +6,11 @@
 .list-item .list-item-right .list-item-author .list-item-avatar{ margin-right: 20rpx; transform: scale(0.9)}
 .list-item .list-item-right .list-item-author .list-item-nick{ font-size: 24rpx; color: #000000;}
 .list-item .list-item-right .list-item-name { font-size: 24rpx; color: #7d7d7d;}
-.list-item .list-item-right .list-item-like { display: flex; margin-top: 20rpx;}
+.list-item .list-item-right .list-item-like { display: flex; margin-top: 20rpx; position: relative;}
 .list-item .list-item-right .list-item-like .list-item-icon{ width: 40rpx; height: 40rpx;}
+.list-item .list-item-right .list-item-like .list-item-icon-like{ animation: like 0.55s ease-out both; position: absolute; top: 0; left: 0;}
+@keyframes like {
+   0%,100% { transform: scale(1); opacity: 1;}
+   50% { transform: scale(2.5); opacity: 0.5;}
+}
 .list-item .list-item-right .list-item-like .list-item-nums{ font-size: 28rpx; color: #ff3a65; margin-left: 10rpx;}

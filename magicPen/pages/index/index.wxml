@@ -10,7 +10,7 @@
 
   <!--导航栏   style="z-index: {{guideStep === 1 ? 10 : 0}}; position: relative;"-->
   <view>
-    <nav-bar></nav-bar>
+    <nav-bar myDynData="{{myDynData}}"></nav-bar>
   </view>
 
 

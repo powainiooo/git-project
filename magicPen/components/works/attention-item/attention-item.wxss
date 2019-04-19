@@ -6,3 +6,5 @@
 .attention-item .attention-item-info .attention-item-fans { font-size: 20rpx; line-height: 20rpx; color: #c1c1c1; letter-spacing: 2rpx;}
 .attention-item .attention-item-btn { width: 190rpx; height: 54rpx; border: 1px solid #eff2f9; background-color: #eff2f9; border-radius: 20rpx; color: #99a3ac; font-size: 24rpx; display: flex; justify-content: center; align-items: center; margin-left: 20rpx;}
 .attention-item .attention-item-btn2 { background-color: rgb(255,153,0); color: #ffffff;}
+
+.attention-item-dot::before { content: ''; width: 16rpx; height: 16rpx; border-radius: 50%; background-color: #ff3067; position: absolute; top: 30rpx; left: 30rpx;}

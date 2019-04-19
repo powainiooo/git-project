@@ -7,3 +7,5 @@
 .btn { width: 400rpx; margin: 30rpx auto;}
 
 .store-img { width: 100%;}
+
+.btn-guide { width: 100rpx; height: 100rpx; position: absolute; bottom: 40rpx; right: 40rpx;}

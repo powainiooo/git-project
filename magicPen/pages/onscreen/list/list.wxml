@@ -11,7 +11,7 @@
 
 <view class="info-line">
    <view class="project">
-      <view class="name">{{selectData.title}}  <text>{{selectData.pricePhoto == 0 || selectData.priceVideo == 0 ? '新人免费' : ''}}</text></view>
+      <view class="name">{{selectData.title}}  <text wx:if="{{selectData.pricePhoto == 0 || selectData.priceVideo == 0}}">新人免费</text></view>
       <view class="price">
          <image src="../../../res/interaction/camera.png" mode="widthFix" class="icon"></image>
          <text>{{selectData.pricePhoto}}</text>
@@ -23,7 +23,13 @@
    </view>
    <view class="likes">
       <view class="list">
-         <image wx:for="{{selectData.playUsers}}" wx:for-item="item" wx:key="{{item.nick}}" src="{{item.avatarUrl}}" class="users"></image>
+         <image wx:for="{{selectData.playUsers}}"
+                wx:for-item="item"
+                wx:key="{{item.nick}}"
+                src="{{item.avatarUrl}}"
+                data-id="{{item.userId}}"
+                bindtap="gotoPerson"
+                class="users"></image>
       </view>
       <view class="nums">
          <text>{{selectData.playUsers === null ? '　' : '他们正在玩'}}</text>

@@ -33,6 +33,7 @@ Component({
       countT: 0,
       count: 0,
       isBuying: false,
+      showCallSuc: false,
    },
 
    /**
@@ -83,9 +84,7 @@ Component({
          const payRes = await payZhaohuan(`${longitude},${latitude}`)
          if (payRes.code === 0) {
             this.setData({
-               showModal: true,
-               modalType: 'hint',
-               modalContent2: payRes.msg,
+               showCallSuc: true,
             })
             this.triggerEvent('reset')
          } else if (payRes.code === 15) {
@@ -98,6 +97,11 @@ Component({
             })
          }
          this.data.isBuying = false
+      },
+      closeSucModal () {
+         this.setData({
+            showCallSuc: false,
+         })
       },
       countDown (count) {
          count = parseInt(count)

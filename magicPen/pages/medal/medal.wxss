@@ -4,7 +4,7 @@
 .medal-list .medal-item { width: 160rpx; margin:0 5rpx 60rpx 5rpx; position: relative;}
 .medal-list .medal-item-dot::after { content: ''; width: 10rpx; height: 10rpx; border-radius: 50%; background-color: #ff3a65; position: absolute; top: 0; right: 0;}
 .medal-list .medal-item .medal-icon { width: 100%; height: 135rpx; margin-bottom: 15rpx;}
-.medal-list .medal-item .gift-icon { width: 30rpx; position: absolute; top: -20rpx; right: 20rpx; animation: float 2s linear infinite;}
+.medal-list .medal-item .gift-icon { width: 40rpx; position: absolute; top: -50rpx; right: 30rpx; animation: float 1s linear infinite;}
 @keyframes float {
    0%,100% { transform: translate(0,0)}
    50% { transform: translate(0,10rpx)}

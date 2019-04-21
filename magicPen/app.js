@@ -40,8 +40,13 @@ App({
    globalData: {
       ajaxSrc: 'https://xcx.newryun.com',
       audioSrc: {
-         medal: 'http://sbhh.newryun.com/xcxstatic/sound/medal.mp3',
-         star: 'http://www.w3school.com.cn/i/horse.ogg',
+         wheel: 'http://sbhh.newryun.com/xcxstatic/sound/s01.mp3',
+         wheelActive: 'http://sbhh.newryun.com/xcxstatic/sound/s02.mp3',
+         thumbup: 'http://sbhh.newryun.com/xcxstatic/sound/s03.mp3',
+         medal: 'http://sbhh.newryun.com/xcxstatic/sound/s04.mp3',
+         takePhoto: 'http://sbhh.newryun.com/xcxstatic/sound/s05.mp3',
+         star4: 'http://sbhh.newryun.com/xcxstatic/sound/s07.mp3',
+         star5: 'http://sbhh.newryun.com/xcxstatic/sound/s08.mp3',
       },
       imgSrc: 'https://xcx.newryun.com/xcxstatic/',
       userInfo: {},

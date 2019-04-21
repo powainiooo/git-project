@@ -3,6 +3,10 @@ const {getUserAsset, getFuhuoIqAndZhaohuanIq, getMyWorksScene, getZhaoHuanWorks}
 import regeneratorRuntime from '../../utils/runtime.js'
 const {promisify} = require('../../utils/util.js')
 const getLocation = promisify(wx.getLocation)
+const app = getApp()
+const audio = wx.createInnerAudioContext()
+audio.obeyMuteSwitch = false
+audio.src = app.globalData.audioSrc.wheelActive
 Page({
 
    /**
@@ -49,6 +53,10 @@ Page({
       this.getFuhuoIqAndZhaohuanIq()
       this.getMyWorksScene()
    },
+   resetAsset () {
+      this.getUserAsset()
+      this.showActive()
+   },
    getUserAsset () {
       getUserAsset().then(res=>{
          this.setData({
@@ -76,12 +84,15 @@ Page({
             reviveData: res
          })
       })
-      getZhaoHuanWorks(`${longitude},${latitude}`).then(res => {
+      getZhaoHuanWorks(`114.0422219038,22.5186571950`).then(res => {
          this.setData({
             callResData: res
          })
       })
-
+   },
+   showActive () {
+      this.selectComponent('#swiper').doActive()
+      audio.play()
    },
    /**
     * 生命周期函数--监听页面初次渲染完成

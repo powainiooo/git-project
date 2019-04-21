@@ -1,5 +1,5 @@
 .recharge { min-height: 100vh; background-color: #eff2f9;}
-.recharge .line1 { height: 70rpx; display: flex; align-items: center; font-size: 28rpx; color: #15191b; padding-left: 70rpx;}
+.recharge .line1 { width: 100%; height: 70rpx; display: flex; align-items: center; font-size: 28rpx; color: #15191b; padding-left: 70rpx; position: fixed; top: 0; left: 0; background-color: #ffffff; z-index: 100;}
 .recharge .line1 .icon { width: 50rpx; margin: 15rpx 40rpx 0 20rpx;}
 .recharge .line1 .price-add { color: #ff3067; animation: add 2s linear both; margin-left: 20rpx;}
 @keyframes add {
@@ -8,7 +8,7 @@
    30%,50%,70% { transform: scale(1)}
    100% { transform: scale(0)}
 }
-.recharge .frame { background-color: #ffffff; overflow: hidden;}
+.recharge .frame { background-color: #ffffff; overflow: hidden; margin-top:70rpx;}
 .recharge .frame .title { text-align: center; margin-top: 60rpx;}
 .recharge .frame .title view:first-child { color: #da570d; font-weight: bold; font-size: 40rpx; letter-spacing: 2rpx; margin-bottom: 20rpx;}
 .recharge .frame .title view:nth-child(2) { color: #85baad; font-size: 24rpx; letter-spacing: 6rpx; margin-bottom: 50rpx;}
@@ -16,7 +16,10 @@
 .recharge .list .bean-item { width: 200rpx; height: 200rpx; margin: 0 20rpx 10rpx 20rpx; position: relative; box-sizing: border-box; border-radius: 50%;}
 .recharge .list .bean-item-select { border: 4rpx solid #00a0f6;}
 .recharge .list .bean-item .bean { width: 100%; text-align: center; position: absolute; left: 0; top: 20rpx; font-size: 28rpx; color: #ffa700;}
-.recharge .list .bean-item image { width: 100%; height: 100%; border-radius: 50%;}
+.recharge .list .bean-item .icon { width: 100%; height: 100%; border-radius: 50%;}
 .recharge .list .bean-item .bean text { font-size: 22rpx; color: #ec441c;}
 .recharge .list .bean-item .price { width: 100%; text-align: center; position: absolute; left: 0; bottom: 10rpx; font-size: 30rpx; color: #559893;}
 .recharge .btn { width: 240rpx; margin: 70rpx auto;}
+.recharge .list .bean-item .tag { width: 180rpx; position: absolute; top: 60rpx; left: -30rpx;}
+.recharge .list .bean-item .tag image { width: 100%;}
+.recharge .list .bean-item .tag view { width: 130rpx; text-align: center; position: absolute; top: 5rpx; left: 15rpx; font-size: 20rpx; color: #ffffff;}

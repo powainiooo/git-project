@@ -46,6 +46,7 @@ Component({
             if(res.code === 0) {
                zan += 1
                like = true
+               this.triggerEvent('thumbup')
             }else {
                if(res.code === 4002) like = true
                $Message({

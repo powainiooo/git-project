@@ -10,5 +10,5 @@
 
 .photo-btn { width: 240rpx; margin: 40rpx auto 60rpx auto;}
 
-.photo-recharge { width: 240rpx; margin: 0 auto; display: flex; justify-content: center; align-items: center; font-size: 26rpx; color: #ff306a;}
+.photo-recharge { width: 240rpx; display: flex; justify-content: flex-end; align-items: center; font-size: 26rpx; color: #ff306a;}
 .photo-recharge .icon-pea { width: 60rpx; margin-top: 16rpx; margin-right: 10rpx;}

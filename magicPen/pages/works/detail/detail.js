@@ -1,5 +1,6 @@
 // pages/works/detail/detail.js
 const {getWorksByTuzhiNu, worksZan, addAttention, cancelAttention} = require('../../../utils/api.js')
+const app = getApp()
 Page({
 
    /**
@@ -11,6 +12,7 @@ Page({
       zan:0,
       isLike: false,
       isAttention: false,
+      imgSrc: app.globalData.imgSrc
    },
 
    /**

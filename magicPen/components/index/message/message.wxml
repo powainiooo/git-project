@@ -1,7 +1,10 @@
-<swiper vertical autoplay class="msg-swiper" wx:if="{{listData.length !== 0}}">
-   <block wx:for="{{listData}}">
-      <swiper-item class="msg-swiper-item">
-         {{item}}
-      </swiper-item>
-   </block>
-</swiper>
+<view class="msg-container">
+   <swiper vertical autoplay class="msg-swiper" wx:if="{{listData.length !== 0}}">
+      <block wx:for="{{listData}}" wx:key="{{item.content}}">
+         <swiper-item class="msg-swiper-item">
+            {{item.content}}
+         </swiper-item>
+      </block>
+   </swiper>
+   <image src="../../../res/index/icon-horn.png" mode="widthFix" class="icon-horn"></image>
+</view>

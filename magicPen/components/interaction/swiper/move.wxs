@@ -18,8 +18,56 @@ module.exports.swiperMove = function (e, instance) {
    wheel.setStyle({
       'transform': 'rotateZ('+(rotateZ + angle)+'deg)'
    })
+   instance.callMethod('wheelplay')
+
 }
 module.exports.swiperEnd = function (e, instance) {
+   var dx = e.changedTouches[0].pageX
+   var endTime = e.timeStamp
+   var roll = instance.selectComponent('.roll-frame')
+   var wheel = instance.selectComponent('.wheel')
+   var endRotate = rotateZ
+   var speed = (dx - startX)/(endTime - startTime)
+   var limit = 0.7
+   if (speed > limit) speed = limit
+   if (speed < -limit) speed = -limit
+   // console.log('speed:'+speed)
+   // console.log('dis:'+(dx - startX))
+   // console.log('time:'+(endTime - startTime))
+   var v = Math.abs(speed * 10)
+   var dir = speed > 0 ? 1 : -1;//顺时针 逆时针
+   var deceleration = 1.5;
+   while (Math.floor(Math.abs(v)) !== 0) {
+      v -= deceleration
+      var angle = getAngle(v+dx-startX)
+      endRotate += angle
+   }
+   // console.log('rotate1:'+endRotate)
+   var dis = endRotate % 45
+   if (dir > 0) { //顺时针
+      endRotate = dis > 23 ? endRotate + 45 - dis : endRotate - dis
+   } else { //逆时针
+      endRotate = endRotate % 45 < -23 ? endRotate - 45 - dis : endRotate - dis
+   }
+   // console.log('rotate2:'+endRotate)
+   var t = Math.abs(endRotate - rotateZ) / 45 * 0.4
+   t = t === 0 ? 0.4 : t
+   // console.log(t)
+   roll.setStyle({
+      'transform': 'rotateZ('+endRotate+'deg)',
+      'transition-duration': t+'s',
+   })
+   wheel.setStyle({
+      'transform': 'rotateZ('+endRotate+'deg)',
+      'transition-duration': t+'s',
+   })
+   rotateZ = endRotate % 360
+   instance.callMethod('moveEnd', {
+      angle: rotateZ,
+      time: t
+   })
+}
+module.exports.swiperEnd2 = function (e, instance) {
    var dx = e.changedTouches[0].pageX
    // var endTime = e.timeStamp
    var roll = instance.selectComponent('.roll-frame')

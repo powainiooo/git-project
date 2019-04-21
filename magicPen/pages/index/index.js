@@ -7,6 +7,10 @@ import regeneratorRuntime from '../../utils/runtime.js'
 const {promisify} = require('../../utils/util.js')
 const getLocation = promisify(wx.getLocation)
 const myDynData = wx.getStorageSync('myDynData')
+console.log(myDynData)
+const audio = wx.createInnerAudioContext()
+audio.obeyMuteSwitch = false
+audio.src = app.globalData.audioSrc.thumbup
 Page({
    data: {
       useGuide: typeof useGuide === 'string' ? false : true,
@@ -25,7 +29,9 @@ Page({
       msgList: [],
       newsHintMsg: '',
       showNewsHint: false,
-      myDynData: null
+      myDynData: null,
+      tWarn: 0,
+      warnMsgList: []
    },
    onLoad: function () {
       if (app.globalData.userInfo) {
@@ -117,15 +123,19 @@ Page({
             myDynData: res.data
          })
          app.globalData.myDyn = res.data
-         if (typeof myDynData !== 'string') {
-            const msg = this.getWarnText(res.data)
-            this.setData({
-               newsHintMsg: msg,
-               showNewsHint: msg !== ''
+         if (typeof myDynData !== 'string' && myDynData !== null) {
+            this.data.warnMsgList = this.getWarnText(res.data)
+            console.log(this.data.warnMsgList)
+            if (this.data.warnMsgList.length !== 0) {
+               setTimeout(()=>{
+                  this.rollWarnMsg()
+               }, 2000)
+            }
+         } else {
+            wx.setStorage({
+               key:'myDynData',
+               data: res.data
             })
-            setTimeout(()=>{
-
-            }, 3000)
          }
       })
    },
@@ -147,28 +157,64 @@ Page({
       }
    },
    getWarnText (data) {
+      let arr = []
       if (data.couponDue === 1) {
-         return '你的优惠券快过期啦'
-      }
-      if (data.couponSum > myDynData.couponSum) {
-         return '你有获得新的优惠券哟'
+         arr.push('你的优惠券快过期啦')
+      } else {
+         if (data.couponSum > myDynData.couponSum) {
+            arr.push('你有获得新的优惠券哟')
+         }
       }
       if (data.medalDue  === 1) {
-         return '你的勋章礼品快过期啦'
-      }
-      if (data.medalSum > myDynData.medalSum) {
-         return '你有获得新的勋章哟'
+         arr.push('你的勋章礼品快过期啦')
+      } else {
+         if (data.medalSum > myDynData.medalSum) {
+            arr.push('你有获得新的勋章哟')
+         }
       }
       if (data.fans > myDynData.fans) {
-         return `新增${data.fans - myDynData.fans}个粉丝`
+         arr.push(`新增${data.fans - myDynData.fans}个粉丝`)
       }
       if (data.zanSum > myDynData.zanSum) {
-         return `你的作品新增${data.zanSum - myDynData.zanSum}个赞啦`
+         arr.push(`你的作品新增${data.zanSum - myDynData.zanSum}个赞啦`)
       }
       if (data.userDynSum  > 0) {
-         return `你关注的好友更新动态啦`
+         arr.push(`你关注的好友更新动态啦`)
       }
-      return ''
+      return arr
+   },
+   rollWarnMsg () {
+      this.setData({
+         newsHintMsg: this.data.warnMsgList.shift(),
+         showNewsHint: true
+      })
+      this.data.tWarn = setInterval(()=>{
+         this.setData({
+            showNewsHint: false
+         })
+         wx.nextTick(()=>{
+            if (this.data.warnMsgList.length === 0) {
+               clearInterval(this.data.tWarn)
+            } else {
+               this.setData({
+                  newsHintMsg: this.data.warnMsgList.shift(),
+                  showNewsHint: true
+               })
+            }
+         })
+      }, 5000)
+   },
+   nextMsg () {
+      clearInterval(this.data.tWarn)
+      this.setData({
+         showNewsHint: false
+      })
+      if (this.data.warnMsgList.length !== 0) {
+         this.rollWarnMsg()
+      }
+   },
+   thumbup () {
+      audio.play()
    },
    /**
     * 生命周期函数--监听页面显示

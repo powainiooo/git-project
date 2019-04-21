@@ -7,7 +7,9 @@ Page({
     */
    data: {
       listData: [],
-      isAjax: false
+      isAjax: false,
+      showModal: false,
+      selectIndex: 0,
    },
 
    /**
@@ -23,25 +25,38 @@ Page({
          })
       })
    },
+   confirmGet () {
+      const data = this.data.listData[this.data.selectIndex]
+      if (this.data.isAjax) return
+      this.data.isAjax = true
+      this.closeModal()
+      affirmGetIq(data.couponId).then(res => {
+         wx.showToast({
+            title: '领取成功',
+            icon: 'success',
+            duration: 2000
+         })
+         setTimeout(()=>{
+            wx.navigateTo({
+               url: '/pages/personal/personal'
+            })
+         },2000)
+      }).catch(err => {
+         this.data.isAjax = false
+      })
+   },
+   closeModal () {
+      this.setData({
+         showModal: false
+      })
+   },
    getPeas (e) {
       const {index} = e.currentTarget.dataset
       const data = this.data.listData[index]
+      this.data.selectIndex = index
       if(data.couponValueType === 1) {
-         if (this.data.isAjax) return
-         this.data.isAjax = true
-         affirmGetIq(data.couponId).then(res => {
-            wx.showToast({
-               title: '领取成功',
-               icon: 'success',
-               duration: 2000
-            })
-            setTimeout(()=>{
-               wx.navigateTo({
-                  url: '/pages/personal/personal'
-               })
-            },2000)
-         }).catch(err => {
-            this.data.isAjax = false
+         this.setData({
+            showModal: true
          })
       } else if (data.couponValueType === 2) {
          wx.navigateTo({

@@ -37,16 +37,16 @@
 </view>
 
 <!--扫描弹窗-->
-<view class="scan-container"
-      wx:if="{{showScan}}"
-      bindtap="closeScanModal"
-      style="opacity: {{opacity}}">
-  <view class="scan-frame">
-    <image src="../../../res/index/can-frame.png" mode="widthFix" class="frame-img"></image>
-    <image src="../../../res/index/btn-scan.png" mode="widthFix" class="btn-img" catchtap="openScan"></image>
-    <!--<view class="btn-close"><i-icon type="close" size="20" color="#2c8df4"/></view>-->
-  </view>
-</view>
+<!--<view class="scan-container"-->
+      <!--wx:if="{{showScan}}"-->
+      <!--bindtap="closeScanModal"-->
+      <!--style="opacity: {{opacity}}">-->
+  <!--<view class="scan-frame">-->
+    <!--<image src="../../../res/index/can-frame.png" mode="widthFix" class="frame-img"></image>-->
+    <!--<image src="../../../res/index/btn-scan.png" mode="widthFix" class="btn-img" catchtap="openScan"></image>-->
+    <!--&lt;!&ndash;<view class="btn-close"><i-icon type="close" size="20" color="#2c8df4"/></view>&ndash;&gt;-->
+  <!--</view>-->
+<!--</view>-->
 
 <!--上传成功-->
 <z-modal wx:if="{{showSuccessModal}}">
@@ -61,8 +61,8 @@
     <view class="txt1">非常棒的作品！</view>
     <view class="txt2">已将你的作品收集到〈我的作品〉空间</view>
     <view class="btns">
-      <z-button class="btn-item" bindtap="gotoWorksList">去查看</z-button>
-      <z-button class="btn-item" bindtap="closeSuccessModal">我知道了</z-button>
+      <z-button class="btn-item" bindtap="gotoWorksList" style="width: 240rpx;">去查看</z-button>
+      <z-button class="btn-item" bindtap="closeSuccessModal" style="width: 240rpx;">我知道了</z-button>
     </view>
   </view>
 </z-modal>
@@ -74,4 +74,30 @@
     <text class="txt">{{failText}}</text>
     <z-button class="btn-item" bindtap="closeFailModal">知道了</z-button>
   </view>
+</z-modal>
+
+<!--关注好友成功-->
+<z-modal wx:if="{{showFriendModal}}">
+  <view class="modal-fail">
+    <i-icon type="success" size="70" color="#28a4af" class="fail-icon"/>
+    <text class="txt">{{friendText}}</text>
+    <z-button class="btn-item" bindtap="closeFriendModal">知道了</z-button>
+  </view>
+</z-modal>
+
+<!--领取活动-->
+<view class="gitf-modal" wx:if="{{showGiftModal}}" bindtap="closeGift">
+   <image src="{{giftImage}}" mode="widthFix"></image>
+   <z-button class="btn-item" catchtap="getGift" style="width: {{(giftBtnText.length + 2) * 32}}rpx">{{giftBtnText}}</z-button>
+</view>
+
+<!--领取活动成功-->
+<z-modal wx:if="{{showGiftSuc}}">
+   <view class="gift-success">
+      <image src="../../../res/index/mascot3.png" mode="widthFix" class="icon"></image>
+      <text class="text" wx:if="{{giftSucData.surpriseType === 1}}">需获取{{giftSucData.surpriseSum}}个豆，\n已充值到您的帐号中！</text>
+      <text class="text" wx:if="{{giftSucData.surpriseType === 2}}">获取一张画纸，请到商家领取！</text>
+      <z-button class="btn-item" bindtap="closeGiftSuc" wx:if="{{giftSucData.surpriseType === 1}}">确认领取</z-button>
+      <z-button class="btn-item" bindlongpress="closeGiftSuc" wx:if="{{giftSucData.surpriseType === 2}}">商家确认领取</z-button>
+   </view>
 </z-modal>

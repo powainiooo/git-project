@@ -1,1 +1,1 @@
-.z-button { height: 70rpx; background-color: rgb(44,142,243); box-shadow: 0 5rpx 20rpx rgba(44,142,243,0.25); border-radius: 20rpx; display: flex; justify-content: center; align-items: center; color: #ffffff; font-size: 32rpx;}
+.z-button { height: 70rpx; background-color: rgb(255,58,101); box-shadow: 0 5rpx 20rpx rgba(255,58,101,0.25); border-radius: 20rpx; display: flex; justify-content: center; align-items: center; color: #ffffff; font-size: 32rpx;}

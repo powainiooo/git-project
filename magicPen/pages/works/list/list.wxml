@@ -28,7 +28,9 @@
    </view>
    <view class="attention"
          bindtap="addAttention"
-         wx:if="{{!isUser && !attentionThisUser}}">+关注</view>
+         wx:if="{{!isUser && attentionThisUser === 2}}">+关注</view>
+   <view class="attention"
+         wx:if="{{!isUser && attentionThisUser === 1}}">已关注</view>
 </view>
 
 <view class="tabs">
@@ -48,6 +50,7 @@
               bindgetwork="getwork"
               binddelwork="delwork"
               bindshare="doShare"
+              bindthumbup="thumbup"
               itemData="{{item}}"></list-item>
    <view class="list-hint" wx:if="{{worksList.length === 0}}">你还没作品哟！</view>
 </view>

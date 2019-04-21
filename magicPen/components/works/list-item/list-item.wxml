@@ -16,12 +16,14 @@
          <view class="list-item-ok" catchtap="confirmEdit">确定</view>
          <view class="list-item-ok" catchtap="hideEdit">取消</view>
       </view>
-      <view class="list-item-line" style="margin-top: 20rpx;">
+      <view class="list-item-line" style="margin-top: 0rpx;">
          <view class="list-item-like" catchtap="doThumbup">
             <image src="../../../res/index/icon-like.png" mode="scaleToFill" class="list-item-icon list-item-icon-like" wx:if="{{isLike}}"/>
             <image src="../../../res/index/icon-dislike.png" mode="scaleToFill" class="list-item-icon"/>
             <text class="list-item-nums">{{zan}}</text>
-            <text class="list-item-nums" style="color: #ff306a" wx:if="{{itemData.zanRate !== 0}}">↑ {{itemData.zanRate}}</text>
+            <text class="list-item-nums" style="color: #ff306a" wx:if="{{itemData.zanRate !== 0}}">
+               <text style="font-size: 20rpx;">↑</text>{{itemData.zanRate}}
+            </text>
          </view>
          <view class="list-item-list">
             <image class="avatars"

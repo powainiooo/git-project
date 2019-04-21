@@ -1,11 +1,13 @@
-.map-info{ margin: 10rpx 40rpx; display: flex; justify-content: space-between; align-items: center;}
-.map-info .name{ font-size: 32rpx; color: #151515;}
+.map-info{ margin: 20rpx 40rpx; display: flex; align-items: center;}
+.map-info .name{ font-size: 40rpx; color: #151515;}
 .map-info .distance{ font-size: 28rpx; color: #565656;}
 .map-info .distance image{ width: 20rpx; margin-left: 15rpx;}
-.map-addr{ font-size: 28rpx; color: #565656; margin-left: 40rpx; margin-bottom: 10rpx;}
+.map-addr{ font-size: 28rpx; color: #565656; display: flex; align-items: center;}
+.map-info .tag { font-size: 20rpx; color: rgb(0,200,83); border: 1px solid rgb(0,200,83); border-radius: 6rpx; padding: 4rpx 8rpx; margin-left: 10rpx;}
 .map-info .working { font-size: 24rpx; padding: 4rpx 10rpx; border-radius: 8rpx; color: #2c8df4; border: 1px solid #2c8df4;}
 .btn { width: 400rpx; margin: 30rpx auto;}
 
 .store-img { width: 100%;}
 
-.btn-guide { width: 100rpx; height: 100rpx; position: absolute; bottom: 40rpx; right: 40rpx;}
+.guide-bg { width: 100%; height: 50rpx; position: absolute; bottom: 0; right: 0; background-color: #ffffff;}
+.btn-guide { width: 100rpx; height: 100rpx; position: absolute; bottom: 0; right: 40rpx;}

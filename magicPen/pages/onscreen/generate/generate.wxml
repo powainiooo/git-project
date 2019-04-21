@@ -4,35 +4,6 @@
          <cover-view class="cover">
             <cover-image src="{{generateData.psdUrl}}" animation="{{coverImageAni}}"></cover-image>
          </cover-view>
-         <cover-view class="count-down">
-            <cover-image
-                src="../../../res/interaction/one-outline.png"
-                wx:if="{{waitCount === 1}}"
-                class="number"></cover-image>
-            <cover-image
-                src="../../../res/interaction/two-outline.png"
-                wx:if="{{waitCount === 2}}"
-                class="number"></cover-image>
-            <cover-image
-                src="../../../res/interaction/three-outline.png"
-                wx:if="{{waitCount === 3}}"
-                class="number"></cover-image>
-            <cover-image src="../../../res/interaction/ready.png"
-                   style=" margin-left: -55rpx;"
-                   wx:if="{{waitCount > 0}}"
-                   class="title"></cover-image>
-            <cover-view class="number2" wx:if="{{playCount > 0}}">
-               <cover-image src="../../../res/interaction/count-bg.png" mode="widthFix" class="bg"></cover-image>
-               <cover-image src="../../../res/interaction/one.png" mode="widthFix" wx:if="{{playCount === 1}}"></cover-image>
-               <cover-image src="../../../res/interaction/two.png" mode="widthFix" wx:if="{{playCount === 2}}"></cover-image>
-               <cover-image src="../../../res/interaction/three.png" mode="widthFix" wx:if="{{playCount === 3}}"></cover-image>
-            </cover-view>
-            <cover-image src="../../../res/interaction/recording.png"
-                   mode="widthFix"
-                   style="width: 210rpx; margin-left: -105rpx;"
-                   wx:if="{{playCount > 0}}"
-                   class="title"></cover-image>
-         </cover-view>
       </camera>
    </view>
 
@@ -65,7 +36,7 @@
       </view>
       <view class="btn" bindtap="waitCountDown">
          <image src="../../../res/interaction/video.png" mode="widthFix"></image>
-         <text>录像{{waitCount}}</text>
+         <text>录像</text>
       </view>
    </view>
 
@@ -110,5 +81,43 @@
 
 <canvas canvas-id="firstCanvas" class="draw-frame"></canvas>
 
+<view class="count-down">
+   <image
+           src="../../../res/interaction/one-outline.png"
+           wx:if="{{waitCount === 1}}"
+           class="number"></image>
+   <image
+           src="../../../res/interaction/two-outline.png"
+           wx:if="{{waitCount === 2}}"
+           class="number"></image>
+   <image
+           src="../../../res/interaction/three-outline.png"
+           wx:if="{{waitCount === 3}}"
+           class="number"></image>
+   <image src="../../../res/interaction/ready.png"
+                style=" margin-left: -55rpx;"
+                wx:if="{{waitCount > 0}}"
+                class="title"></image>
+   <view class="number2" wx:if="{{playCount > 0}}">
+      <image src="../../../res/interaction/count-bg.png" mode="widthFix" class="bg"></image>
+      <image src="../../../res/interaction/one.png" mode="widthFix" wx:if="{{playCount === 1}}"></image>
+      <image src="../../../res/interaction/two.png" mode="widthFix" wx:if="{{playCount === 2}}"></image>
+      <image src="../../../res/interaction/three.png" mode="widthFix" wx:if="{{playCount === 3}}"></image>
+   </view>
+   <image src="../../../res/interaction/recording.png"
+                mode="widthFix"
+                style="width: 210rpx; margin-left: -105rpx;"
+                wx:if="{{playCount > 0}}"
+                class="title"></image>
+</view>
+
+<view class="success-frame" wx:if="{{showCallSuc}}" bindtap="closeSucModal">
+   <view class="images">
+      <image src="../../../res/interaction/light3.png" class="light"></image>
+      <image src="../../../res/interaction/icon1.png" class="in"></image>
+   </view>
+   <image class="content" src="../../../res/interaction/content3.png" mode="widthFix" wx:if="{{functType === 1}}"></image>
+   <image class="content" src="../../../res/interaction/content4.png" mode="widthFix" wx:if="{{functType === 2}}"></image>
+</view>
 
 <i-message id="message" />

@@ -4,6 +4,10 @@ import regeneratorRuntime from '../../../utils/runtime.js'
 const {promisify} = require('../../../utils/util.js')
 const getLocation = promisify(wx.getLocation)
 const downloadFile = promisify(wx.downloadFile)
+const app = getApp()
+const audio = wx.createInnerAudioContext()
+audio.obeyMuteSwitch = false
+audio.src = app.globalData.audioSrc.takePhoto
 Page({
 
    /**
@@ -22,6 +26,7 @@ Page({
       generateData: null,
       showBottom: false,
       showBottom2: false,
+      showCallSuc: false,
       functType: 1,
       modalContent: '',
       showModal: false,
@@ -176,9 +181,9 @@ Page({
          cover.width(`750rpx`).height(`1333rpx`).top(`0rpx`).left(`0rpx`).step()
          let btnText
          if (this.data.functType === 1) {
-            btnText = this.data.generateData.pricePhoto == 0 ? '拍照上屏' : `拍照上屏${this.data.generateData.pricePhoto}豆`
+            btnText = '拍照上屏'
          } else if (this.data.functType === 2) {
-            btnText = this.data.generateData.priceVideo == 0 ? '录像上屏' : `录像上屏${this.data.generateData.priceVideo}豆`
+            btnText = '录像上屏'
          }
          this.setData({
             moveImageAni: photo.export(),
@@ -190,6 +195,7 @@ Page({
    },
    takePhoto() {
       console.log('takePhoto')
+      audio.play()
       this.setData({
          functType: 1,
          showBottom: false,
@@ -360,15 +366,18 @@ Page({
                this.setData({
                   canShare: true,
                   psdOrderNu: payRes.data.psdOrderNu,
-                  showModal: true,
-                  modalType: 'hint',
-                  modalContent: upRes.msg,
+                  showCallSuc: true,
                })
             }
          }
       // }
       this.data.isBuying = false
       wx.hideLoading()
+   },
+   closeSucModal () {
+      this.setData({
+         showCallSuc: false,
+      })
    },
    async doSave () {
       console.log('draw')

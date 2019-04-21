@@ -1,9 +1,10 @@
 <view class="swiper-frame"
       bindtouchstart="{{util.swiperStart}}"
-      bindtouchmove="{{util.swiperMove}}"
+      catchtouchmove="{{util.swiperMove}}"
       bindtouchend="{{util.swiperEnd}}">
    <image src="../../../res/interaction/bg.jpg" mode="widthFix" class="swiper-bg"></image>
    <image src="../../../res/interaction/wheel.png" mode="widthFix" class="wheel"></image>
+   <image src="../../../res/interaction/light3.png" mode="widthFix" class="light" wx:if="{{showActive}}"></image>
    <view class="roll-frame">
       <view wx:for="{{list}}" wx:key="{{item.key}}" class="roll-item">
          <image src="{{item.icon}}" class="roll-img"></image>

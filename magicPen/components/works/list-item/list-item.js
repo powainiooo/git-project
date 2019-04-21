@@ -98,6 +98,7 @@ Component({
                   zan: this.data.zan + 1,
                   isLike: true
                })
+               this.triggerEvent('thumbup')
             }else {
                $Message({
                   content: res.msg,

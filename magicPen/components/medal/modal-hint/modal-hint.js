@@ -23,6 +23,10 @@ Component({
       isUser: {
          type: Boolean,
          value: true
+      },
+      giftTime: {
+         type: String,
+         value: ''
       }
    },
 

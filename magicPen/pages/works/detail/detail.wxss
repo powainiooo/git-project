@@ -1,21 +1,22 @@
-.detail-container { width: 100%; min-height: 100vh; background-color: #eaf1f7; overflow: hidden;}
-.person { display: flex; justify-content: center; align-items: center; margin: 100rpx 0 80rpx 0;}
+.detail-container { width: 100%; min-height: 100vh; overflow: hidden;}
+.bg-img { width: 750rpx; position: relative; z-index: 2;}
+.person { display: flex; justify-content: center; align-items: center; position: absolute; top: 900rpx; left: 210rpx; z-index: 10;}
 .person .avatar { margin-right: 90rpx; transform: scale(2)}
 .person .info .btn { font-size: 24rpx; color: #ff306a; margin-bottom: 15rpx;}
 .person .info .nick { font-size: 32rpx; color: #353535; margin-bottom: 15rpx;}
 .person .info .fans { font-size: 28rpx; color: #8d9faa;}
 
-.title { font-size: 32rpx; color: #353535; margin-bottom: 15rpx; text-align: center;}
+.title { width: 100%; position: absolute; left: 0; top: 40rpx; font-size: 32rpx; color: #07a0e1; margin-bottom: 15rpx; text-align: center; z-index: 10;}
 
-.works { width: 750rpx; height: 540rpx; overflow: hidden; background-color: #ffffff; box-shadow: 0 5rpx 15rpx rgba(0,0,0,0.1);}
+.works { width: 750rpx; height: 534rpx; overflow: hidden; background-color: #ffffff; position: absolute; top: 118rpx; left: 0;}
 .works image { width: 100%; height: 100%; transform: scale(1.6)}
 
-.likes { display: flex; justify-content: flex-end; margin-top: 20rpx; align-items: flex-start;}
-.likes .nums { font-size: 24rpx; color: #353535; margin-right: 20rpx;}
+.likes { width: 100%; position: absolute; left: 0; top: 700rpx; z-index: 10; display: flex; justify-content: center; align-items: flex-start;}
+.likes .nums { font-size: 24rpx; color: #353535; margin-right: 20rpx; margin-left: 110rpx;}
 .likes .icon { width: 50rpx; margin-right: 20rpx;}
 .likes .hint { font-size: 24rpx; color: #8d9faa; margin-right: 60rpx;}
 
-.btn-enter { width: 420rpx; margin: 80rpx auto;}
+.btn-enter { width: 240rpx; position: absolute; top: 1100rpx; left: -10rpx; z-index: 10;}
 
-.btn-home { width: 170rpx; height: 70rpx;position: fixed; top: 30rpx; right: 0;}
+.btn-home { width: 170rpx; height: 70rpx;position: fixed; top: 1100rpx; right: 0; z-index: 10;}
 .btn-home image { width: 100%;}

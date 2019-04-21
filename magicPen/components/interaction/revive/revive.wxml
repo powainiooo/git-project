@@ -61,3 +61,11 @@
       </view>
    </view>
 </z-modal>
+
+<view class="success-frame" wx:if="{{showCallSuc}}" bindtap="closeSucModal">
+   <view class="images">
+      <image src="../../../res/interaction/egg.png" class="in" mode="widthFix"></image>
+      <image src="../../../res/interaction/light.png" class="light"></image>
+   </view>
+   <image class="content" src="../../../res/interaction/content2.png" mode="widthFix"></image>
+</view>

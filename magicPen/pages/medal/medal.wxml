@@ -1,6 +1,6 @@
 <view class="medal-frame">
    <view class="person-info">
-      <z-avatar url="{{avatarUrl}}"></z-avatar>
+      <z-avatar url="{{avatarUrl}}" grade="{{grade}}"></z-avatar>
       <view class="name">{{nick}}</view>
    </view>
    <view class="medal-list">
@@ -24,6 +24,7 @@
 <medal-hint wx:if="{{showHint}}"
             isUser="{{isUser}}"
             medalData="{{selectData}}"
+            giftTime="{{giftTime}}"
             bindtap="closeHint"
             bindgetMedal="getMedal"></medal-hint>
 

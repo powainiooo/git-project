@@ -27,7 +27,7 @@
 .person-info .medal view { font-size: 20rpx; line-height: 20rpx; color: #c1c1c1; letter-spacing: 2rpx; text-align: center;}
 .person-info .medal .icon { position: absolute; top: 5rpx; right: -50rpx;}
 
-.person-info .attention { font-size: 20rpx; color: #f41905; position: absolute; right: 220rpx; top: 0;}
+.person-info .attention { font-size: 20rpx; color: #f41905; position: absolute; right: 240rpx; top: -25rpx;}
 
 .tabs { height: 80rpx; display: flex; justify-content: space-around; background-color: #eff2f9;}
 .tabs view { height: 100%; font-size: 32rpx; color: rgb(61,153,173); display: flex; align-items: center; position: relative;}

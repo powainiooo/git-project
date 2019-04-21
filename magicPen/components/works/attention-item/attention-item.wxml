@@ -1,11 +1,9 @@
-<view class="attention-item {{itemData.userDyn !== 0 ? 'attention-item-dot' : ''}}">
-   <view class="attention-item-avatar" bindtap="intoWorks">
-      <image src="{{itemData.avatarUrl}}" mode="widthFix" class="attention-item-avatar-img"></image>
-   </view>
+<view class="attention-item {{isUserDyn === 1 ? 'attention-item-dot' : ''}}" bindtap="intoWorks">
+   <z-avatar class="avatar" url="{{itemData.avatarUrl}}" grade="{{itemData.grade}}" class="attention-item-avatar"></z-avatar>
    <view class="attention-item-info">
       <view class="attention-item-name">{{itemData.nick}}</view>
       <view class="attention-item-fans">粉丝数 {{itemData.fans}} 人</view>
    </view>
-   <view class="attention-item-btn" wx:if="{{isAttention}}" bindtap="delAttention">取消关注</view>
-   <view class="attention-item-btn attention-item-btn2" wx:if="{{!isAttention}}" bindtap="addAttention">关注</view>
+   <view class="attention-item-btn" wx:if="{{isAttention}}" catchtap="delAttention">取消关注</view>
+   <view class="attention-item-btn attention-item-btn2" wx:if="{{!isAttention}}" catchtap="addAttention">关注</view>
 </view>

@@ -7,7 +7,12 @@ Component({
    properties: {
       itemData: {
          type: Object,
-         value: {}
+         value: {},
+         observer (val) {
+            this.setData({
+               isUserDyn: val.isUserDyn
+            })
+         }
       }
    },
 
@@ -15,7 +20,8 @@ Component({
     * 组件的初始数据
     */
    data: {
-      isAttention: true
+      isAttention: true,
+      isUserDyn: 2
    },
 
    /**
@@ -37,7 +43,10 @@ Component({
          })
       },
       intoWorks () {
-         const dyn = this.data.itemData.userDyn > 0 ? 1 : 2
+         const dyn = this.data.itemData.isUserDyn
+         this.setData({
+            isUserDyn: 2
+         })
          wx.navigateTo({
             url: `/pages/works/list/list?userId=${this.data.itemData.userId}&dyn=${dyn}`
          })

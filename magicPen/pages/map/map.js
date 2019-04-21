@@ -15,13 +15,14 @@ Page({
       locationData: null,
       storeUrl: [],
       placeholderUrl: '',
-      imgSrc: ''
+      imgSrc: '',
    },
 
    /**
     * 生命周期函数--监听页面加载
     */
    onLoad: function (options) {
+      // this.getStore()
       const {locationData, imgSrc} = getApp().globalData
       this.setData({
          locationData,
@@ -55,11 +56,11 @@ Page({
             latitude,
             markers,
             storeUrl: mchImgs,
-            placeholderUrl: `${this.data.imgSrc}images/tiyandian.png`
+            placeholderUrl: `${this.data.imgSrc}images/gywm.png`
          })
       }else {
          this.setData({
-            placeholderUrl: `${this.data.imgSrc}images/tiyandian.png`
+            placeholderUrl: `${this.data.imgSrc}images/gywm.png`
          })
       }
    },

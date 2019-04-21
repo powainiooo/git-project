@@ -7,22 +7,25 @@ Page({
     */
    data: {
       userId: 0,
+      grade: 0,
       showHint: false,
       medalList: [],
       selectData: {},
       isUser: true,
-      hideState: 'close'
+      hideState: 'close',
+      giftTime: ''
    },
 
    /**
     * 生命周期函数--监听页面加载
     */
    onLoad: function (options) {
+      console.log(options)
       this.data.userId = options.userId || 0
       this.getPersonInfo()
       this.getData()
       this.setData({
-         isUser: this.data.userId === 0
+         isUser: this.data.userId == 0
       })
    },
    getData() {
@@ -34,10 +37,11 @@ Page({
    },
    getPersonInfo() {
       getUserInterspaceInfo({userId: this.data.userId}).then(res => {
-         const {nick, avatarUrl} = res.data
+         const {nick, avatarUrl, grade} = res.data
          this.setData({
             nick,
             avatarUrl,
+            grade,
          })
       })
    },
@@ -77,6 +81,9 @@ Page({
             title: '领取成功',
             icon: 'success',
             duration: 2000
+         })
+         this.setData({
+            giftTime: res.data
          })
          if(this.data.hideState === 'close') {
             this.closeHint()

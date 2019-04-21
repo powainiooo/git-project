@@ -39,7 +39,9 @@ Page({
                userFansTxt: fans
             })
          } else if (typeof userFans === 'number') {
-            this.setFansMove()
+            setTimeout(()=>{
+               this.setFansMove()
+            }, 1500)
          }
          wx.setStorage({
             key:'userFans',

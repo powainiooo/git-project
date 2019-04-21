@@ -3,7 +3,7 @@
   <!--轮播图-->
   <banner listData="{{bannerList}}"></banner>
    <!--滚动消息-->
-   <z-message></z-message>
+   <z-message listData="{{msgList}}"></z-message>
 
   <!--定位-->
   <location locationData="{{locationData}}"></location>
@@ -20,6 +20,7 @@
     <list-item wx:for="{{worksList}}"
                wx:for-item="item"
                wx:key="{{item.userId}}"
+               bindthumbup="thumbup"
                itemData="{{item}}"></list-item>
   </view>
    <loading wx:if="{{isLoadingList}}"></loading>
@@ -35,7 +36,7 @@
   <guide useGuide="{{useGuide}}" bindchangeStep="changeStep"></guide>
 </view>
 
-<view class="news-hint {{showNewsHint ? 'news-hint-show' : ''}}">
+<view class="news-hint {{showNewsHint ? 'news-hint-show' : ''}}" bindtap="nextMsg">
    <text>{{newsHintMsg}}</text>
 </view>
 

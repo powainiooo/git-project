@@ -1,3 +1,6 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+     "z-modal": "../../components/modal/modal",
+     "z-button": "../../components/button/button"
+  }
 }

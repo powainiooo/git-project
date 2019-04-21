@@ -31,7 +31,8 @@ Component({
      showModal: false,
      modalType: 'cost',
      modalContent: '',
-     isBuying: false
+     isBuying: false,
+     showCallSuc: false,
   },
 
   /**
@@ -90,6 +91,11 @@ Component({
 
         }
      },
+     closeSucModal () {
+        this.setData({
+           showCallSuc: false,
+        })
+     },
      async doBuy () {
         if(this.data.isBuying) return
         this.data.isBuying = true
@@ -99,9 +105,7 @@ Component({
         const payRes = await payFuHuo(`${longitude},${latitude}`, this.data.tuzhiNu)
         if(payRes.code === 0) {
            this.setData({
-              showModal: true,
-              modalType: 'hint',
-              modalContent: payRes.msg,
+              showCallSuc: true,
            })
            this.triggerEvent('reset')
         }else {

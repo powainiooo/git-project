@@ -1,10 +1,13 @@
 // components/interaction/swiper/swiper.js
+const app = getApp()
+const audio = wx.createInnerAudioContext()
+audio.obeyMuteSwitch = false
+audio.src = app.globalData.audioSrc.wheel
 Component({
    /**
     * 组件的属性列表
     */
    properties: {
-
    },
    attached () {
       const self = this
@@ -31,7 +34,8 @@ Component({
          {key: 'call', icon: '../../../res/interaction/icon3.png'},
          {key: 'wind', icon: '../../../res/interaction/icon2.png'},
       ],
-      windowWidth: 375
+      windowWidth: 375,
+      showActive: false
    },
 
    /**
@@ -55,8 +59,38 @@ Component({
             })
          }
       },
-      swiperMove (e) {
-         // console.log(e.detail)
+      moveEnd (params) {
+         const t = setInterval(()=>{
+            audio.play()
+         }, 30)
+         setTimeout(()=>{
+            clearInterval(t)
+         }, params.time*1000 - 500)
+         setTimeout(()=>{
+            audio.play()
+            const angle = -params.angle
+            let i = angle/45
+            i = i >= 0 ? i : 8 + i
+            const key = this.data.list[i].key
+            console.log(key)
+            if (this.data.currentKey !== key) {
+               this.triggerEvent('change', {currentKey : key})
+               this.data.currentKey = key
+            }
+         }, params.time*1000)
+      },
+      wheelplay () {
+         audio.play()
+      },
+      doActive () {
+         this.setData({
+            showActive: true
+         })
+         setTimeout(()=>{
+            this.setData({
+               showActive: false
+            })
+         }, 1500)
       }
    }
 })

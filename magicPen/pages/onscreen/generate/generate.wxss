@@ -1,7 +1,7 @@
 .generate-frame { width: 100%; height: 100vh; overflow: hidden; position: relative; z-index: 10; }
 .camera-frame { width: 100%; height: 100vh; overflow: hidden; position: absolute; top: 0; left: 0;}
 .camera-container { width: 233rpx; height: 233rpx; position: relative; top: -233rpx; left: -233rpx;}
-.camera-container .cover{ width: 750rpx; position: fixed; top: 0; left: 0; bottom: 140rpx; overflow: hidden;}
+.camera-container .cover{ width: 750rpx; position: fixed; top: 0; left: 0; bottom: 320rpx; overflow: hidden;}
 .camera-container .cover cover-image{ width: 750rpx; height: 1333rpx; position: relative; left: -10000px}
 
 .animation-frame { width: 100%; height: 100vh; overflow: hidden; position: relative; }
@@ -18,7 +18,17 @@
 .btns-frame .btn-share { width: 100%; height: 100%; position: absolute; top: 0; left: 0; opacity: 0;}
 
 .btns-frame .btn3 { width: 100%; position: absolute; top: -100rpx; left: 0; text-align: center;}
-.btns-frame .msg-btn { background-color: rgb(44,142,243); box-shadow: 0 5rpx 20rpx rgba(44,142,243,0.25); border-radius: 20rpx; display: inline-block; color: #ffffff; font-size: 32rpx; padding: 12rpx 30rpx;}
+.btns-frame .msg-btn { background-color: rgb(255,58,101); box-shadow: 0 5rpx 20rpx rgba(255,58,101,0.25); border-radius: 20rpx; display: inline-block; color: #ffffff; font-size: 32rpx; padding: 12rpx 30rpx; animation: shake 0.6s linear 1s both;}
+@keyframes shake {
+   0% { transform: translate(0, 12rpx); opacity: 0;}
+   15% { transform: translate(0, -6rpx); opacity: 1;}
+   30% { transform: translate(0, 5rpx); opacity: 1;}
+   45% { transform: translate(0, -4rpx); opacity: 1;}
+   60% { transform: translate(0, 3rpx); opacity: 1;}
+   75% { transform: translate(0, -2rpx); opacity: 1;}
+   90% { transform: translate(0, 1rpx); opacity: 1;}
+   100% { transform: translate(0, 0); opacity: 1;}
+}
 .btns-frame .msg-btn text { font-size: 20rpx; color: #ff3067;}
 
 .btns-frame .count { width: 100%; height: 100%; font-size: 32rpx; color: #ff3067; position: absolute; top: 0; left: 0; display: flex; justify-content: center; align-items: center; background-color: #ffffff;}
@@ -42,4 +52,28 @@
    0% { transform: rotateZ(0deg)}
    100% { transform: rotateZ(360deg)}
 }
-.count-down .number2 cover-image { width: 30rpx; height: 43rpx;}
+.count-down .number2 image { width: 30rpx; height: 43rpx;}
+
+.success-frame { width: 100%; height: 100vh; position: fixed; top: 0; left: 0; z-index: 100; background-color: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; flex-direction: column; animation: frame 1s linear both;}
+@keyframes frame {
+   0%{ opacity: 0;}
+   100%{ opacity: 1;}
+}
+.success-frame .images { width: 500rpx; position: relative; animation: scaleIn 0.5s ease-out 1s both; margin-top: -100rpx;}
+@keyframes scaleIn {
+   0% { transform: scale(0)}
+   100% { transform: scale(1)}
+}
+.success-frame .images .in { width: 500rpx; height: 500rpx; position: relative; z-index: 10;}
+.success-frame .images .light { width: 650rpx; height: 650rpx; position: absolute; top: -40rpx; left: -50rpx; animation: light 10s linear infinite;}
+@keyframes light {
+   0% { transform: rotateZ(360deg); opacity: 0.5;}
+   25%, 75% { opacity: 1;}
+   50% { opacity: 0.5;}
+   100% { transform: rotateZ(0deg); opacity: 1}
+}
+.success-frame .content { width: 490rpx; animation: content 0.5s ease-out 2s both;}
+@keyframes content {
+   0% { transform: translate(0, 100rpx); opacity: 0;}
+   100% { transform: translate(0, 0); opacity: 1;}
+}

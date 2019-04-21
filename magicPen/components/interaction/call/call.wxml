@@ -62,10 +62,11 @@
    </view>
 </z-modal>
 
-<!--<view class="success-frame">-->
-   <!--<view class="images">-->
-      <!--<image src="../../../res/interaction/circle-in.png" class="in"></image>-->
-      <!--<image src="../../../res/interaction/circle-out.png" class="out"></image>-->
-      <!--<image src="../../../res/interaction/light2.png" class="light"></image>-->
-   <!--</view>-->
-<!--</view>-->
+<view class="success-frame" wx:if="{{showCallSuc}}" bindtap="closeSucModal">
+   <view class="images">
+      <image src="../../../res/interaction/light2.png" class="light"></image>
+      <image src="../../../res/interaction/circle-in.png" class="in"></image>
+      <image src="../../../res/interaction/circle-out.png" class="out"></image>
+   </view>
+   <image class="content" src="../../../res/interaction/content.png" mode="widthFix"></image>
+</view>

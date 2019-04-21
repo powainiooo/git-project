@@ -82,6 +82,14 @@ export const affirmGetIq = data => {
    })
 }
 
+//确认领取商家活动惊喜
+export const activityNu = data => {
+   return ajax({
+      method: 'POST',
+      url: `${ajaxUrl}/api/mchActivity/takeSurprise?activityNu=${data}`
+   })
+}
+
 //用户提交建议反馈
 export const userSuggest = data => {
    return ajax({

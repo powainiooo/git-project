@@ -1,11 +1,17 @@
 // components/index/guide/guide.js
 import regeneratorRuntime from '../../../utils/runtime.js'
-const {updateUserGrade} = require('../../../utils/api.js')
+const {updateUserGrade, activityNu} = require('../../../utils/api.js')
 const {promisify} = require('../../../utils/util.js')
 const scan = promisify(wx.scanCode)
 const request = promisify(wx.request)
 const { $Message } = require('../../iview/base/index')
 const app = getApp()
+const star4 = wx.createInnerAudioContext()
+star4.obeyMuteSwitch = false
+star4.src = app.globalData.audioSrc.star4
+const star5 = wx.createInnerAudioContext()
+star5.obeyMuteSwitch = false
+star5.src = app.globalData.audioSrc.star5
 Component({
    /**
     * 组件的属性列表
@@ -34,6 +40,13 @@ Component({
       starList: [false, false, false, false, false],
       showSuccessModal: false,
       showFailModal: false,
+      showFriendModal: false,
+      friendText: '',
+      showGiftModal: false,
+      showGiftSuc: false,
+      giftSucData: null,
+      giftBtnText: '',
+      gitfData: null,
       failText: '',
       starRate: 0,
       opacity: 0,
@@ -47,6 +60,7 @@ Component({
       mascot2Ani: {},
       modal1Ani: {},
       modal2Ani: {},
+      giftImage: ''
    },
 
    /**
@@ -152,11 +166,17 @@ Component({
          this.setData({
             showScan: true
          })
-         wx.nextTick(() => {
+         // wx.nextTick(() => {
+         //    this.setData({
+         //       opacity: 1
+         //    })
+         // })
+         setTimeout(()=>{
+            this.openScan()
             this.setData({
-               opacity: 1
+               showScan: false
             })
-         })
+         },500)
       },
       closeScanModal() {
          this.setData({
@@ -172,10 +192,12 @@ Component({
          const {result} = await scan()
          const {ajaxSrc, sKey} = app.globalData
          const res = await request({
-            url: `${ajaxSrc}/api/works/uploadTuzhiNu?tuzhiNu=${result}`,
+            url: `${ajaxSrc}/api/index/scanCode?scanCode=${result}`,
             method: 'POST',
             header: {sKey}
          })
+         //mchActivity:sbhh2019 mchActivity:sbhh2018
+         console.log(res)
          if(res.data.code === 4000){ //作品不存在
             this.setData({
                showScan: false,
@@ -189,35 +211,61 @@ Component({
                failText: '该作品已经被添加了！'
             })
          }else if(res.data.code === 0){
-            this.setData({
-               showScan: false,
-               showSuccessModal: true
-            })
-            const audio = wx.createInnerAudioContext()
-            audio.obeyMuteSwitch = false
-            audio.src = app.globalData.audioSrc.star
-            audio.onPlay(()=>{
-               console.log('play')
-            })
-            audio.onError((err)=>{
-               console.log(err)
-            })
-            setTimeout(() => {
+            if (res.data.data.scanType === 1) { //图纸
                this.setData({
-                  starRate: Math.random() > 0.5 ? 5 : 4
+                  showScan: false,
+                  showSuccessModal: true
                })
-               audio.play()
-            }, 300)
-            updateUserGrade().then(res => {
-               console.log(res)
-            })
+               setTimeout(() => {
+                  const rate = Math.random() > 0.5 ? 5 : 4
+                  this.setData({
+                     starRate: rate
+                  })
+                  if (rate === 4) {
+                     star4.play()
+                  } else {
+                     star5.play()
+                  }
+               }, 300)
+               updateUserGrade().then(res => {
+                  console.log(res)
+               })
+            } else if (res.data.data.scanType === 2) { //关注好友
+               this.setData({
+                  showScan: false,
+                  friendText: '关注好友成功',
+                  showFriendModal: true,
+               })
+            } else if (res.data.data.scanType === 3) { //商家活动
+               const gData = res.data.data
+               let btn = ''
+               if (gData.surpriseMsg === null) {
+                  if (gData.activityStatus === 1) {
+                     btn = '未开始'
+                  } else if (gData.activityStatus === 2) {
+                     btn = '点击领取'
+                  } else if (gData.activityStatus === 3) {
+                     btn = '已过期'
+                  } else if (gData.activityStatus === 4) {
+                     btn = '惊喜领取完了'
+                  }
+               } else {
+                  btn = gData.surpriseMsg
+               }
+               this.setData({
+                  showScan: false,
+                  showGiftModal: true,
+                  giftBtnText: btn,
+                  gitfData: gData,
+                  giftImage: gData.activityInfoImg,
+               })
+            }
          }else {
             $Message({
                content: res.data.msg,
                type: 'warning'
             });
          }
-
       },
       gotoWorksList() {
          wx.navigateTo({
@@ -232,6 +280,40 @@ Component({
       closeFailModal() {
          this.setData({
             showFailModal: false
+         })
+      },
+      closeFriendModal() {
+         this.setData({
+            showFriendModal: false
+         })
+      },
+      closeGift () {
+         this.setData({
+            showGiftModal: false,
+         })
+      },
+      getGift() {
+         const gData = this.data.gitfData
+         if (gData.surpriseMsg === null) {
+            if (gData.activityStatus === 2) {
+               activityNu(gData.activityNu).then(res => {
+                  const data = res.data
+                  this.setData({
+                     showGiftModal: false,
+                     giftSucData: data,
+                     showGiftSuc: true,
+                  })
+               })
+            } else {
+               this.closeGift()
+            }
+         } else {
+            this.closeGift()
+         }
+      },
+      closeGiftSuc () {
+         this.setData({
+            showGiftSuc: false,
          })
       }
    }

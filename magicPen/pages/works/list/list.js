@@ -4,6 +4,10 @@ const chooseImage = promisify(wx.chooseImage)
 const getLocation = promisify(wx.getLocation)
 const {getMyWorks, getMyFriend, getUserInterspaceInfo, addAttention, fileUp, uploadTopImg, getFuhuoIqAndZhaohuanIq, payFuHuo, deleteWorks} = require('../../../utils/api.js')
 // const userStar = wx.getStorageSync('userStar')
+const app = getApp()
+const audio = wx.createInnerAudioContext()
+audio.obeyMuteSwitch = false
+audio.src = app.globalData.audioSrc.thumbup
 Page({
 
    /**
@@ -17,7 +21,7 @@ Page({
       isLoading: false,
       page: 'works',
       topUrl: '',
-      nick: '章剑',
+      nick: '',
       grade: 0,
       zanSum: 0,
       zanSumTxt: 0,
@@ -43,6 +47,7 @@ Page({
     * 生命周期函数--监听页面加载
     */
    onLoad: function (options) {
+      console.log(options)
       this.data.userId = options.userId || 0;
       this.data.dyn = options.dyn || 2;
       this.getWorkList()
@@ -104,22 +109,14 @@ Page({
             fans,
             avatarUrl,
             userDynSum,
-            attentionThisUser: isAttention ? true : false,
+            attentionThisUser: isAttention,
             zanSumTxt: zanSum - zanSumAdd
          })
          if (this.data.isUser) {
-            this.setFansMove(zanSumAdd)
-            // if (typeof userStar === 'string') {
-            //    this.setData({
-            //       zanSumTxt: zanSum
-            //    })
-            // } else if (typeof userStar === 'number') {
-            //    this.setFansMove()
-            // }
-            // wx.setStorage({
-            //    key:'userStar',
-            //    data: zanSum
-            // })
+            setTimeout(()=>{
+               this.setFansMove(zanSumAdd)
+            }, 1500)
+
             const myDynData = wx.getStorageSync('myDynData')
             myDynData.userDynSum = userDynSum
             wx.setStorage({
@@ -270,6 +267,9 @@ Page({
       wx.navigateTo({
          url: '/pages/medal/medal?userId='+this.data.userId
       })
+   },
+   thumbup () {
+      audio.play()
    },
    doShare (e) {
 

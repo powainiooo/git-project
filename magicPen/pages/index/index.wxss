@@ -5,6 +5,10 @@
 .loading .btn{ font-size: 20rpx; color: #cccccc;}
 .loading .btn image{ width: 20rpx;}
 
-.news-hint { width: 100%; height: 60rpx; position: fixed; left: 0; bottom: -60rpx; background-color: #ffcb01; border-radius: 8rpx; transition: transform 0.5s ease-out; display: flex; justify-content: center; align-items: center;}
-.news-hint-show { transform: translate(0, -60rpx);}
-.news-hint text { font-size: 24rpx; color: #353535;}
+.news-hint { width: 90%; height: 70rpx; position: fixed; left: 5%; bottom: -70rpx; background-color: #ffcb01; border-radius: 14rpx; transition: transform 0.5s ease-out; display: flex; justify-content: center; align-items: center;}
+.news-hint-show { animation: warn 4.9s ease-out;}
+@keyframes warn {
+   0% { transform: translate(0,0)}
+   15%,100% { transform: translate(0,-100rpx)}
+}
+.news-hint text { font-size: 28rpx; color: #ffffff;}

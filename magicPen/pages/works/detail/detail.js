@@ -1,6 +1,9 @@
 // pages/works/detail/detail.js
 const {getWorksByTuzhiNu, worksZan, addAttention, cancelAttention} = require('../../../utils/api.js')
 const app = getApp()
+const audio = wx.createInnerAudioContext()
+audio.obeyMuteSwitch = false
+audio.src = app.globalData.audioSrc.thumbup
 Page({
 
    /**
@@ -40,6 +43,7 @@ Page({
             zan,
             isLike: true
          })
+         audio.play()
       })
    },
    doAttention () {

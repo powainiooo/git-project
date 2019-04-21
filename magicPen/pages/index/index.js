@@ -124,14 +124,15 @@ Page({
          })
          app.globalData.myDyn = res.data
          if (typeof myDynData !== 'string' && myDynData !== null) {
+            console.log('has myDynData')
             this.data.warnMsgList = this.getWarnText(res.data)
-            console.log(this.data.warnMsgList)
             if (this.data.warnMsgList.length !== 0) {
                setTimeout(()=>{
                   this.rollWarnMsg()
                }, 2000)
             }
          } else {
+            console.log('has not myDynData')
             wx.setStorage({
                key:'myDynData',
                data: res.data
@@ -157,6 +158,8 @@ Page({
       }
    },
    getWarnText (data) {
+      console.log('get text')
+      console.log(data)
       let arr = []
       if (data.couponDue === 1) {
          arr.push('你的优惠券快过期啦')

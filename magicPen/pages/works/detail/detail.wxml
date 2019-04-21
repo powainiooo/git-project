@@ -16,8 +16,8 @@
 
    <view class="likes">
       <view class="nums">{{zan}}</view>
-      <image src="../../../res/index/icon-dislike.png" mode="widthFix" class="icon" bindtap="doThumbup" wx:if="{{!isLike}}"></image>
-      <image src="../../../res/index/icon-like.png" mode="widthFix" class="icon" wx:if="{{isLike}}"></image>
+      <image src="../../../res/index/icon-dislike.png" mode="widthFix" class="icon" bindtap="doThumbup"></image>
+      <image src="../../../res/index/icon-like.png" mode="widthFix" class="icon icon-like" wx:if="{{isLike}}"></image>
       <view class="hint">{{isLike ? '已点赞' : '为它点赞'}}</view>
    </view>
 

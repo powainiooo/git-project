@@ -56,11 +56,11 @@ Page({
             latitude,
             markers,
             storeUrl: mchImgs,
-            placeholderUrl: `${this.data.imgSrc}images/gywm.png`
+            placeholderUrl: `${this.data.imgSrc}images/tiyandian.png`
          })
       }else {
          this.setData({
-            placeholderUrl: `${this.data.imgSrc}images/gywm.png`
+            placeholderUrl: `${this.data.imgSrc}images/tiyandian.png`
          })
       }
    },

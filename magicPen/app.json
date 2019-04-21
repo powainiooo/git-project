@@ -1,12 +1,12 @@
 {
   "pages": [
-    "pages/index/index",
+     "pages/index/index",
+     "pages/works/detail/detail",
     "pages/interaction/interaction",
     "pages/onscreen/list/list",
     "pages/coupon/coupon",
     "pages/recharge/recharge",
     "pages/medal/medal",
-    "pages/works/detail/detail",
     "pages/works/list/list",
     "pages/personal/personal",
     "pages/map/map",

@@ -1,4 +1,7 @@
 {
-  "component": true,
-  "usingComponents": {}
+   "component": true,
+   "usingComponents": {
+      "z-button": "../../button/button",
+      "z-modal": "../../modal/modal"
+   }
 }

@@ -61,7 +61,7 @@ Page({
       // this.getWorksData()
       // this.getMsgData()
       const sKey = wx.getStorageSync('sKey')
-      if(sKey !== ''){
+      if(sKey !== '' && sKey !== null){
          app.globalData.sKey = sKey
          this.getStore()
          if (app.globalData.myDyn === null) {
@@ -229,9 +229,11 @@ Page({
       this.getMsgData()
       if(this.data.myDynData !== null) {
          const myDynData = wx.getStorageSync('myDynData')
-         this.setData({
-            myDynData
-         })
+         if (typeof myDynData !== 'string' && myDynData !== null) {
+            this.setData({
+               myDynData
+            })
+         }
       }
    },
    onReachBottom: function () {

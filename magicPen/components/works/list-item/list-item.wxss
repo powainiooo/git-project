@@ -15,6 +15,7 @@
    50% { transform: scale(2.5); opacity: 0.5;}
 }
 .list-item .list-item-right .list-item-like .list-item-nums{ font-size: 28rpx; color: rgb(53,53,53); margin-left: 5rpx; vertical-align: middle;}
+.list-item .list-item-right .list-item-like .list-item-nums-add{ font-size: 22rpx; color: rgb(53,53,53); margin-left: 5rpx; vertical-align: middle; margin-top: -10rpx;}
 .list-item .list-item-right .list-item-list { display: flex; align-items: baseline; color: rgb(141,159,170); font-size: 22rpx;}
 .list-item .list-item-right .list-item-list .avatars { width: 40rpx; height: 40rpx; border-radius: 50%; margin-right: 10rpx;}
 .list-item .list-item-right .list-item-line2 { font-size: 20rpx; color: #cccccc; text-align: right;}

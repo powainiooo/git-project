@@ -1,4 +1,4 @@
-<textarea class="txt" bindinput="inputChange"></textarea>
+<textarea class="txt" bindinput="inputChange" placeholder="将好的建议或不足之处进行反应，达到完善的目的。"></textarea>
 <view class="btns">
   <z-button bindtap="doSubmit">提交</z-button>
 </view>

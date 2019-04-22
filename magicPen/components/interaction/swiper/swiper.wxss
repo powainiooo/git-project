@@ -1,8 +1,8 @@
 .swiper-frame { width: 100%; height: 670rpx; position: relative; overflow: hidden;}
 .swiper-bg { width: 100%; height: 100%;}
 .wheel { width: 400rpx; position: absolute; bottom: -134rpx; left: 175rpx; transition: transform 0s cubic-bezier(.21,.59,.55,1.38);}
-.light { width: 500rpx; height: 500rpx; position: absolute; top: 0rpx; left: 125rpx; animation: light 1s linear both;}
-@keyframes light {
+.light { width: 500rpx; height: 500rpx; position: absolute; top: 0rpx; left: 125rpx; animation: light6 1s linear both;}
+@keyframes light6 {
    0% { transform: rotateZ(0deg) scale(0); opacity: 0}
    40% { transform: rotateZ(-40deg) scale(1); opacity: 1}
    60% { transform: rotateZ(-60deg) scale(1); opacity: 1}

@@ -6,7 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-     url: `${app.globalData.imgSrc}images/gzsm.png`
+     url: `${app.globalData.imgSrc}images/gzsm.png?${Math.random()}`
   },
 
   /**

@@ -10,7 +10,7 @@
       <image src="../../../res/interaction/pea.png" mode="widthFix" class="icon-pea"></image>
       {{peas}}
    </view>
-   <view class="photo-recharge">
+   <view class="photo-recharge" bindtap="gotoRecharge">
       <image src="../../../res/interaction/pea2.png" mode="widthFix" class="icon-pea"></image>
       <text>立即充值</text>
    </view>
@@ -19,4 +19,3 @@
 <view class="photo-btn">
    <z-button bindtap="gotoList">开始游玩</z-button>
 </view>
-

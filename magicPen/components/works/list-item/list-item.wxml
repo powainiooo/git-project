@@ -21,8 +21,8 @@
             <image src="../../../res/index/icon-like.png" mode="scaleToFill" class="list-item-icon list-item-icon-like" wx:if="{{isLike}}"/>
             <image src="../../../res/index/icon-dislike.png" mode="scaleToFill" class="list-item-icon"/>
             <text class="list-item-nums">{{zan}}</text>
-            <text class="list-item-nums" style="color: #ff306a" wx:if="{{itemData.zanRate !== 0}}">
-               <text style="font-size: 20rpx;">↑</text>{{itemData.zanRate}}
+            <text class="list-item-nums list-item-nums-add" style="color: #ff306a" wx:if="{{itemData.zanRate !== 0}}">
+               <text style="font-size: 16rpx;">↑</text>{{itemData.zanRate}}
             </text>
          </view>
          <view class="list-item-list">

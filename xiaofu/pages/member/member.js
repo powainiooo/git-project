@@ -24,7 +24,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let page = options.page || 'insurance',titleEn,titleCn,content;
+    let page = options.page || 'contact',titleEn,titleCn,content;
     if(page == 'member'){
       titleEn = 'Member of \n Ho';
       titleCn = '隶属于';

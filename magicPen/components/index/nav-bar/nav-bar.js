@@ -1,5 +1,5 @@
 // components/index/nav-bar/nav-bar.js
-let myDynData
+let myDynData = null
 Component({
    /**
     * 组件的属性列表
@@ -11,7 +11,7 @@ Component({
          observer (val) {
             if(val === null) return
             myDynData = wx.getStorageSync('myDynData')
-            if (typeof myDynData === 'string') {
+            if (typeof myDynData === 'string' || myDynData === null) {
                wx.setStorage({
                   key:'myDynData',
                   data: val
@@ -71,12 +71,15 @@ Component({
    methods: {
       jumpPage(e) {
          const {url, key} = e.currentTarget.dataset
-         this.setStorage(key)
+         if (typeof myDynData !== 'string' && myDynData !== null) {
+            this.setStorage(key)
+         }
          wx.navigateTo({
             url
          })
       },
       setStorage (key) {
+         console.log('nav bar setStorage')
          if (key === 'medal') {
             // myDynData.medalSum = this.data.myDynData.medalSum
             this.data.myDynData.medalDue = 0

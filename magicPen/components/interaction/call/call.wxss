@@ -43,11 +43,11 @@
    0% { transform: rotateZ(0deg)}
    100% { transform: rotateZ(360deg)}
 }
-.success-frame .images .light { width: 650rpx; height: 650rpx; position: absolute; top: -75rpx; left: -75rpx; animation: light 10s linear infinite;}
-@keyframes light {
-   0% { transform: rotateZ(360deg); opacity: 0;}
-   25%, 75% { opacity: 1;}
-   50% { opacity: 0;}
+.success-frame .images .light { width: 650rpx; height: 650rpx; position: absolute; top: -75rpx; left: -75rpx; animation: light1 8s linear infinite;}
+@keyframes light1 {
+   0% { transform: rotateZ(360deg); opacity: 0.2;}
+   20%, 60% { opacity: 1;}
+   40%, 80% { opacity: 0.2;}
    100% { transform: rotateZ(0deg); opacity: 1}
 }
 .success-frame .content { width: 490rpx; animation: content 0.5s ease-out 2s both;}

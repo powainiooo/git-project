@@ -42,6 +42,7 @@ Page({
       cameraSize: [],
       coverSize: [],
       tAnimEnd: 0,
+      showCount: false,
       waitCount: 0,
       playCount: 0,
    },
@@ -74,7 +75,7 @@ Page({
       const [padding, moduleWidth, moduleHeight] = [20, 750, 1333]
       const showWidth = 750 - padding*2
       const [x, y, w, h] = this.data.generateData.pngCoordinate.split(',')
-      const paddingTop = 200
+      const paddingTop = 50
       const scale = showWidth / w
       const cameraHeight = `${showWidth * h / w}rpx`
       this.data.cameraSize = [showWidth, cameraHeight, paddingTop, padding]
@@ -219,6 +220,7 @@ Page({
          waitCount: 3,
          functType: 2,
          showBottom: false,
+         showCount: true,
       })
       const t = setInterval(()=>{
          if (this.data.waitCount === 0) {
@@ -247,7 +249,7 @@ Page({
                         console.log(res.tempVideoPath)
                         self.setData({
                            videos: res.tempVideoPath,
-                           showBottom: false,
+                           showCount: false,
                         })
                         self.zoomBack()
                      }

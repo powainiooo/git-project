@@ -56,11 +56,6 @@ Page({
             latitude,
             markers,
             storeUrl: mchImgs,
-            placeholderUrl: `${this.data.imgSrc}images/tiyandian.png`
-         })
-      }else {
-         this.setData({
-            placeholderUrl: `${this.data.imgSrc}images/tiyandian.png`
          })
       }
    },
@@ -82,7 +77,9 @@ Page({
     * 生命周期函数--监听页面显示
     */
    onShow: function () {
-
+      this.setData({
+         placeholderUrl: `${this.data.imgSrc}images/tiyandian.png?${Math.random()}`
+      })
    },
 
    /**

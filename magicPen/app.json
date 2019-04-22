@@ -2,8 +2,9 @@
   "pages": [
      "pages/index/index",
      "pages/works/detail/detail",
-    "pages/interaction/interaction",
-    "pages/onscreen/list/list",
+     "pages/feedback/feedback",
+     "pages/onscreen/list/list",
+     "pages/interaction/interaction",
     "pages/coupon/coupon",
     "pages/recharge/recharge",
     "pages/medal/medal",
@@ -16,7 +17,6 @@
     "pages/onscreen/detail/detail",
     "pages/auth/auth",
     "pages/drawing/drawing",
-    "pages/feedback/feedback",
     "pages/webview/webview"
   ],
   "window": {

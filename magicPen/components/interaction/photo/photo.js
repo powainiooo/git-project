@@ -25,6 +25,11 @@ Component({
         wx.navigateTo({
            url: '/pages/onscreen/list/list'
         })
-     }
+     },
+     gotoRecharge () {
+        wx.navigateTo({
+           url: '/pages/recharge/recharge'
+        })
+     },
   }
 })

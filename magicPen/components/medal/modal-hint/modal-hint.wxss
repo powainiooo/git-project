@@ -16,8 +16,8 @@
 .modal-hint .modal-hint-icon-bright { transition: transform 0.4s cubic-bezier(.28,.84,.67,1.37);}
 .modal-hint .modal-hint-icon-dark { transition: transform 0.4s cubic-bezier(.45,-0.27,.72,.19);}
 .modal-hint .modal-hint-icon-hide { transform: scale(0)}
-.modal-hint .modal-hint-light { width: 450rpx; position: absolute; top: -300rpx; left: 50%; margin-left: -220rpx; z-index: -1; animation: light 10s linear infinite; transition: opacity 0.8s ease-out 0.8s;}
-@keyframes light {
+.modal-hint .modal-hint-light { width: 450rpx; position: absolute; top: -300rpx; left: 50%; margin-left: -220rpx; z-index: -1; animation: light5 10s linear infinite; transition: opacity 0.8s ease-out 0.8s;}
+@keyframes light5 {
    0% { transform: rotateZ( 0deg )}
    100% { transform: rotateZ( 360deg )}
 }

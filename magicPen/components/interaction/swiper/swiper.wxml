@@ -1,4 +1,5 @@
 <view class="swiper-frame"
+      bindtap="doItem"
       bindtouchstart="{{util.swiperStart}}"
       catchtouchmove="{{util.swiperMove}}"
       bindtouchend="{{util.swiperEnd}}">

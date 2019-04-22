@@ -41,6 +41,7 @@ Page({
       showModal: false,
       modalType: 'cost',
       modalContent: 'cost',
+      showCallSuc: false,
    },
 
    /**
@@ -50,7 +51,7 @@ Page({
       console.log(options)
       this.data.userId = options.userId || 0;
       this.data.dyn = options.dyn || 2;
-      this.getWorkList()
+
       this.getPersonInfo()
       if (this.data.userId === 0) {
          this.getMyFriend()
@@ -118,17 +119,20 @@ Page({
             }, 1500)
 
             const myDynData = wx.getStorageSync('myDynData')
-            myDynData.userDynSum = userDynSum
-            wx.setStorage({
-               key:'myDynData',
-               data: myDynData
-            })
+            if (typeof myDynData !== 'string' && myDynData !== null) {
+               myDynData.userDynSum = userDynSum
+               wx.setStorage({
+                  key:'myDynData',
+                  data: myDynData
+               })
+            }
+
          } else {
             this.setData({
                zanSumTxt: zanSum
             })
          }
-
+         this.getWorkList()
       })
    },
    setFansMove (dis) {
@@ -220,12 +224,11 @@ Page({
       const {longitude, latitude} = await getLocation({
          type: 'gcj02',
       })
+      this.closeModal();
       const payRes = await payFuHuo(`${longitude},${latitude}`, this.data.tuzhiNu)
       if(payRes.code === 0) {
          this.setData({
-            showModal: true,
-            modalType: 'hint',
-            modalContent: payRes.msg,
+            showCallSuc: true,
          })
       }else {
          if (payRes.code === 988) {
@@ -270,6 +273,11 @@ Page({
    },
    thumbup () {
       audio.play()
+   },
+   closeSucModal () {
+      this.setData({
+         showCallSuc: false,
+      })
    },
    doShare (e) {
 

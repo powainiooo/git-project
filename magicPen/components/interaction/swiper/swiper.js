@@ -42,6 +42,17 @@ Component({
     * 组件的方法列表
     */
    methods: {
+      doItem () {
+         if (this.data.currentKey === 'photo') {
+            wx.navigateTo({
+               url: '/pages/onscreen/list/list'
+            })
+         } else {
+            this.triggerEvent('tapitem', {
+               currentKey: this.data.currentKey
+            })
+         }
+      },
       swiperChange(e) {
          let {current} = e.detail
          current = current === this.data.list.length - 1 ? -1 : current

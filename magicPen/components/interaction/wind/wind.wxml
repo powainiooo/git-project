@@ -1,3 +1,52 @@
-<!--components/interaction/wind/wind.wxml-->
-<view class="title">呼风唤雨！</view>
-<view class="title">敬请期待！</view>
+<view class="call-title">
+   <z-button bindtap="doCall">
+      <view class="dot"></view>
+      <text>呼风唤雨</text>
+      <view class="dot"></view>
+   </z-button>
+</view>
+<view class="photo-desc"><text>使用魔法水晶球的力量，变换场景中的天气</text></view>
+<view class="coin-line">
+   <view class="mine">
+      我的
+      <image src="../../../res/interaction/pea.png" mode="widthFix" class="icon-pea"></image>
+      {{peas}}
+   </view>
+   <view class="photo-recharge" bindtap="gotoRecharge">
+      <image src="../../../res/interaction/pea2.png" mode="widthFix" class="icon-pea"></image>
+      <text>立即充值</text>
+   </view>
+</view>
+<view class="coin-line call-works-title">
+   <text>变换天气效果</text>
+   <view class="cost">
+      消费
+      {{cost}}
+      <image src="../../../res/interaction/pea.png" mode="widthFix" class="icon-pea"></image>
+   </view>
+</view>
+
+<z-modal wx:if="{{showModal}}" bindtap="closeModal">
+   <view class="modal-content">
+      <view class="txt1">{{modalContent}}</view>
+      <view class="btn" style="width: {{modalType === 'recharge' ? '580rpx' : '240rpx'}}">
+         <z-button catchtap="modalConfirm" wx:if="{{modalType !== 'recharge'}}">
+            <text>确定</text>
+            <!--<image src="../../../res/interaction/pea.png" mode="widthFix" class="pea"></image>-->
+         </z-button>
+         <z-button catchtap="modalConfirm" wx:if="{{modalType === 'recharge'}}">
+            <text>您的智力币不足{{cost}}</text>
+            <image src="../../../res/interaction/pea.png" mode="widthFix" class="pea"></image>
+            <text>，去兑换些〉</text>
+         </z-button>
+      </view>
+   </view>
+</z-modal>
+
+<view class="wind-success-frame" wx:if="{{showCallSuc}}" bindtap="closeSucModal">
+   <view class="images">
+      <image src="../../../res/interaction/icon2.png" class="in" mode="widthFix"></image>
+      <image src="../../../res/interaction/light.png" class="light"></image>
+   </view>
+   <image class="content" src="../../../res/interaction/content5.png" mode="widthFix"></image>
+</view>

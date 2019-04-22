@@ -65,7 +65,7 @@
          <view>更好玩得</view>
       </view>
       <view class="btn3" bindtap="doBuy" wx:if="{{showBottom2}}">
-         <view class="msg-btn">{{btnText}}<text wx:if="{{(functType === 1 && generateData.pricePhoto == 0) || (functType === 2 && generateData.priceVideo == 0)}}">新人免费</text></view>
+         <view class="msg-btn">{{btnText}}</view>
       </view>
    </view>
 </view>
@@ -81,7 +81,7 @@
 
 <canvas canvas-id="firstCanvas" class="draw-frame"></canvas>
 
-<view class="count-down">
+<view class="count-down" wx:if="{{showCount}}">
    <image
            src="../../../res/interaction/one-outline.png"
            wx:if="{{waitCount === 1}}"

@@ -1,4 +1,4 @@
-<z-swiper bindchange="swiperChange" id="swiper"></z-swiper>
+<z-swiper bindchange="swiperChange" id="swiper" bindtapitem="tapitem"></z-swiper>
 
 <view class="item-container">
    <view class="item-scroll" animation="{{funcMove}}">
@@ -11,6 +11,7 @@
                 cost="{{fuhuoIq}}"
                 resData="{{reviveData}}"
                 bindreset="resetAsset"
+                id="revive"
                 class="func-item"></z-revive>
 
       <z-call wx:if="{{currentKey === 'call'}}"
@@ -18,9 +19,14 @@
               cost="{{zhaohuanIq}}"
               resData="{{callResData}}"
               bindreset="resetAsset"
+              id="call"
               class="func-item"></z-call>
 
       <z-wind wx:if="{{currentKey === 'wind'}}"
+              peas="{{myPeas}}"
+              cost="{{fengyunIq}}"
+              bindreset="resetAsset"
+              id="wind"
               class="func-item"></z-wind>
    </view>
 </view>

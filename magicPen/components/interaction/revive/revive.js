@@ -99,6 +99,7 @@ Component({
      async doBuy () {
         if(this.data.isBuying) return
         this.data.isBuying = true
+        this.closeModal()
         const {longitude, latitude} = await getLocation({
            type: 'gcj02',
         })

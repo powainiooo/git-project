@@ -282,6 +282,14 @@ export const payFuHuo = (coord, tuzhiUn) => {
    }, false)
 }
 
+//确认购买呼风唤雨
+export const payFengyu = (coord) => {
+   return ajax({
+      method: 'POST',
+      url: `${ajaxUrl}/api/fengyu/payFengyu?coord=${coord}`,
+   }, false)
+}
+
 //获取我可以召唤的作品
 export const getZhaoHuanWorks = data => {
    return ajax({

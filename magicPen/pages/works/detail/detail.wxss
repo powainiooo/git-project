@@ -14,7 +14,7 @@
 .likes { width: 100%; position: absolute; left: 300rpx; top: 700rpx; z-index: 10; display: flex; }
 .likes .nums { font-size: 24rpx; color: #353535; margin-right: 10rpx;}
 .likes .icon { width: 60rpx; margin-right: 10rpx; margin-top: -4rpx;}
-.likes .icon-like { width: 60rpx; margin-right: 0; margin-top: -4rpx; position: absolute; top: 0; left: 38rpx;  animation: like 0.55s ease-out both;}
+.likes .icon-like { width: 60rpx; margin-right: 0; margin-top: -4rpx; position: absolute; top: 0; left: 0;  animation: like 0.55s ease-out both;}
 @keyframes like {
    0%,100% { transform: scale(1); opacity: 1;}
    50% { transform: scale(2.5); opacity: 0.5;}

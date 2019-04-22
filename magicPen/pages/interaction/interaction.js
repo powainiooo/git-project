@@ -17,6 +17,7 @@ Page({
       myPeas: 0,
       fuhuoIq: 0,
       zhaohuanIq: 0,
+      fengyunIq: 0,
       pageNoCall: 1,
       pageSize: 20,
       reviveData: {},
@@ -45,6 +46,10 @@ Page({
          })
       })
    },
+   tapitem (e) {
+      const {currentKey} = e.detail
+      this.selectComponent(`#${currentKey}`).doCall()
+   },
    /**
     * 生命周期函数--监听页面加载
     */
@@ -66,8 +71,12 @@ Page({
    },
    getFuhuoIqAndZhaohuanIq() {
       getFuhuoIqAndZhaohuanIq().then(res => {
-         const {fuhuoIq, zhaohuanIq} = res.data
-         this.setData({fuhuoIq, zhaohuanIq})
+         const {fuhuoIq, zhaohuanIq, fengyu} = res.data
+         this.setData({
+            fuhuoIq,
+            zhaohuanIq,
+            fengyunIq: fengyu
+         })
       })
    },
    async getMyWorksScene () {

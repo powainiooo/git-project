@@ -1,6 +1,6 @@
 <view class="generate-frame">
    <view class="camera-frame">
-      <camera class="camera-container" animation="{{cameraAni}}" device-position="front">
+      <camera class="camera-container" animation="{{cameraAni}}" device-position="{{postion}}" binderror="cameraErr">
          <cover-view class="cover">
             <cover-image src="{{generateData.psdUrl}}" animation="{{coverImageAni}}"></cover-image>
          </cover-view>
@@ -29,6 +29,7 @@
       </image>
    </view>
 
+   <image src="../../../res/interaction/reback.png" class="btn-switch" bindtap="doSwitch" wx:if="{{showBottom}}"></image>
    <view class="btns-frame" style="bottom: {{showBottom ? '0' : '-140rpx'}}">
       <view class="btn" bindtap="takePhoto">
          <image src="../../../res/interaction/camera.png" mode="widthFix"></image>

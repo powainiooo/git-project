@@ -14,6 +14,7 @@ Page({
     * 页面的初始数据
     */
    data: {
+      postion: 'front',
       userIq: 0,
       showCamera: false,
       cameraAni: {},
@@ -80,6 +81,15 @@ Page({
       const cameraHeight = `${showWidth * h / w}rpx`
       this.data.cameraSize = [showWidth, cameraHeight, paddingTop, padding]
       this.data.coverSize = [moduleWidth * scale, moduleHeight * scale, y * scale - paddingTop, x * scale - padding]
+   },
+   cameraErr (e) {
+      console.log('camera error')
+      console.log(e)
+   },
+   doSwitch () {
+      this.setData({
+         postion: this.data.postion === 'back' ? 'front' : 'back'
+      })
    },
    closeModal () {
       this.setData({
@@ -212,6 +222,9 @@ Page({
                showBottom: false,
             })
             self.zoomBack()
+         },
+         fail (err) {
+            console.log(err)
          }
       })
    },
@@ -260,6 +273,9 @@ Page({
                   })
                }
             }, 1000)
+         },
+         fail (err) {
+            console.log(err)
          }
       })
    },

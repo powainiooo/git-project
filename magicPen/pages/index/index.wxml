@@ -1,3 +1,4 @@
+<z-header></z-header>
 <!--index.wxml-->
 <view class="container">
   <!--轮播图-->

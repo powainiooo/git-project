@@ -20,6 +20,7 @@
     "pages/webview/webview"
   ],
   "window": {
+     "navigationStyle": "custom",
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "神笔画画",
@@ -27,7 +28,8 @@
   },
   "usingComponents": {
     "i-message": "../../components/iview/message/index",
-    "i-icon": "../../components/iview/icon/index"
+    "i-icon": "../../components/iview/icon/index",
+    "z-header": "../../components/header/header"
   },
   "permission": {
     "scope.userLocation": {

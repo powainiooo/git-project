@@ -54,7 +54,7 @@
             <!--<image src="../../../res/interaction/pea.png" mode="widthFix" class="pea"></image>-->
          </z-button>
          <z-button catchtap="modalConfirm" wx:if="{{modalType === 'recharge'}}">
-            <text>您的智力币不足{{cost}}</text>
+            <text>您的来画豆不足{{cost}}</text>
             <image src="../../../res/interaction/pea.png" mode="widthFix" class="pea"></image>
             <text>，去兑换些〉</text>
          </z-button>

@@ -22,7 +22,7 @@ Page({
     * 生命周期函数--监听页面加载
     */
    onLoad: function (options) {
-      this.getPersonInfo()
+
    },
    getPersonInfo() {
       getUserInterspaceInfo({userId: 0}).then(res => {
@@ -106,7 +106,7 @@ Page({
     * 生命周期函数--监听页面显示
     */
    onShow: function () {
-
+      this.getPersonInfo()
    },
 
    /**

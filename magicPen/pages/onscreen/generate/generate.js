@@ -66,11 +66,7 @@ Page({
       //    }
       // })
       this.initSize()
-      getUserAsset().then(res=>{
-         this.setData({
-            userIq: res.data
-         })
-      })
+
    },
    initSize () {
       const [padding, moduleWidth, moduleHeight] = [20, 750, 1333]
@@ -325,7 +321,7 @@ Page({
          this.setData({
             showModal: true,
             modalType: 'recharge',
-            modalContent: `您的智力币不足${price}，是否去充值？`,
+            modalContent: `您的来画豆不足${price}，是否去充值？`,
          })
          return
       }
@@ -352,14 +348,6 @@ Page({
       const {longitude, latitude} = await getLocation({
          type: 'gcj02',
       })
-      // const checkRes = await checkPsd({
-      //    psdId: this.data.generateData.psdId,
-      //    coord: `${longitude},${latitude}`
-      //    // coord: `114.0422219038,22.5186571950`
-      // }).catch(err => {
-      //    this.data.isBuying = false
-      // })
-      // if(checkRes.code === 0){
          const payData = `psdId=${this.data.generateData.psdId}&isTutorials=${this.data.generateData.isTutorials}&functType=${this.data.functType}`
          const payRes = await payPsdGoods(payData).catch(err => {
             this.data.isBuying = false
@@ -367,7 +355,7 @@ Page({
                this.setData({
                   showModal: true,
                   modalType: 'recharge',
-                  modalContent: `您的智力币不足${price}，是否去充值？`,
+                  modalContent: `您的来画豆不足${price}，是否去充值？`,
                })
             }
          })
@@ -385,6 +373,7 @@ Page({
                   canShare: true,
                   psdOrderNu: payRes.data.psdOrderNu,
                   showCallSuc: true,
+                  btnText: '再次上屏',
                })
             }
          }
@@ -406,7 +395,7 @@ Page({
       this.data.isSaving = true
       const ctx = wx.createCanvasContext('firstCanvas')
       const [x, y, w, h] = this.data.generateData.pngCoordinate.split(',')
-      ctx.drawImage(this.data.photos, x, y, w, h)
+      ctx.drawImage(this.data.photos, Number(x), Number(y), Number(w), Number(h))
       const cover = await downloadFile({
          url: this.data.generateData.psdUrl
       })
@@ -467,7 +456,11 @@ Page({
     * 生命周期函数--监听页面显示
     */
    onShow: function () {
-
+      getUserAsset().then(res=>{
+         this.setData({
+            userIq: res.data
+         })
+      })
    },
 
    /**

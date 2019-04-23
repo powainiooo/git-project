@@ -81,7 +81,7 @@ Component({
                  modalContent: `发动3D复活特技`,
               })
            } else {
-              const msg = this.data.freeFuhuoState === 2 ? '第一次免费复活哟！': `是否花费${this.data.cost}智力币复活？`
+              const msg = this.data.freeFuhuoState === 2 ? '第一次免费复活哟！': `是否花费${this.data.cost}来画豆复活？`
               this.setData({
                  showModal: true,
                  modalType: 'cost',
@@ -114,7 +114,7 @@ Component({
               this.setData({
                  showModal: true,
                  modalType: 'recharge',
-                 modalContent: '智力币不足，是否前往充值？',
+                 modalContent: '来画豆不足，是否前往充值？',
               })
            } else {
               this.setData({

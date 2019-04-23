@@ -1,0 +1,2 @@
+.z-header-bg, .z-header { height: 130rpx; background-color: #ffffff;}
+.z-header { width: 100%; position: fixed; top: 0; left: 0; z-index: 10000;}

@@ -16,7 +16,7 @@ Page({
     * 生命周期函数--监听页面加载
     */
    onLoad: function (options) {
-      this.getData()
+
    },
    getData () {
       getCouponList().then(res => {
@@ -75,7 +75,7 @@ Page({
     * 生命周期函数--监听页面显示
     */
    onShow: function () {
-
+      this.getData()
    },
 
    /**

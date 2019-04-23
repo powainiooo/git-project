@@ -267,6 +267,14 @@ Component({
             });
          }
       },
+      gotoFriend () {
+         this.setData({
+            showFriendModal: false,
+         })
+         wx.navigateTo({
+            url: `/pages/works/list/list?page=attention`
+         })
+      },
       gotoWorksList() {
          wx.navigateTo({
             url: '/pages/works/list/list'

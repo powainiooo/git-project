@@ -53,6 +53,7 @@
               bindthumbup="thumbup"
               itemData="{{item}}"></list-item>
    <view class="list-hint" wx:if="{{worksList.length === 0}}">你还没作品哟！</view>
+   <view class="list-hint" wx:if="{{worksList.length !== 0 && pageNo >= pageAll}}">没有更多了</view>
 </view>
 
 <view class="attention-list" wx:if="{{page === 'attention'}}">
@@ -63,6 +64,7 @@
                    itemData="{{item}}">
    </attention-item>
    <view class="list-hint" wx:if="{{attentionList.length === 0}}">你还没关注的人哟！</view>
+   <view class="list-hint" wx:if="{{attentionList.length !== 0 && pageNoAttention >= pageAllAttention}}">没有更多了</view>
 </view>
 
 <loading wx:if="{{isLoading}}"></loading>

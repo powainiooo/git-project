@@ -30,7 +30,7 @@
 <!--吉祥物-->
 <view class="mascot-btn"
       bindtap="openScanModal"
-      style="right: {{showScan ? '30rpx' : '-80rpx'}}">
+      style="right: {{showScan ? '0' : '-80rpx'}}">
   <image src="../../../res/index/mascot.png"
          class="mascot-icon"
          mode="widthFix"></image>
@@ -81,7 +81,11 @@
   <view class="modal-fail">
     <i-icon type="success" size="70" color="#28a4af" class="fail-icon"/>
     <text class="txt">{{friendText}}</text>
-    <z-button class="btn-item" bindtap="closeFriendModal">知道了</z-button>
+     <view style="width: 100%; display: flex; justify-content: space-around;">
+        <z-button class="btn-item" bindtap="closeFriendModal">知道了</z-button>
+        <z-button class="btn-item" bindtap="gotoFriend">去查看</z-button>
+     </view>
+
   </view>
 </z-modal>
 

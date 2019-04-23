@@ -31,6 +31,7 @@ Page({
       avatarUrl: '',
       userDynSum: 0,
       worksList: [],
+      worksListEnd: false,
       attentionList: [],
       pageNo: 1,
       pageSize: 20,
@@ -51,6 +52,7 @@ Page({
       console.log(options)
       this.data.userId = options.userId || 0;
       this.data.dyn = options.dyn || 2;
+      const page = options.page || 'works';
 
       this.getPersonInfo()
       if (this.data.userId === 0) {
@@ -58,7 +60,8 @@ Page({
          this.getFuhuoIqAndZhaohuanIq()
       }
       this.setData({
-         isUser: this.data.userId === 0
+         isUser: this.data.userId === 0,
+         page
       })
    },
    getWorkList() {
@@ -185,13 +188,19 @@ Page({
       })
    },
    changePage (e) {
+      const {page} = e.currentTarget.dataset
+      if (page === 'attention') {
+         this.data.pageNoAttention = 1
+         this.data.attentionList = []
+         this.getMyFriend()
+      }
       this.setData({
-         page: e.currentTarget.dataset.page
+         page: page
       })
    },
    doRevive (e) {
       const {tuzhiNu, freeFuhuoState} = e.detail
-      const msg = freeFuhuoState === 2 ? '第一次免费复活哟！': `是否花费${this.data.fuhuoIq}智力币复活？`
+      const msg = freeFuhuoState === 2 ? '第一次免费复活哟！': `是否花费${this.data.fuhuoIq}来画豆复活？`
       this.setData({
          tuzhiNu,
          showModal: true,
@@ -235,7 +244,7 @@ Page({
             this.setData({
                showModal: true,
                modalType: 'recharge',
-               modalContent: '智力币不足，是否前往充值？',
+               modalContent: '来画豆不足，是否前往充值？',
             })
          } else {
             this.setData({

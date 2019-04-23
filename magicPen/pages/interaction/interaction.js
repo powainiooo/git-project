@@ -54,9 +54,7 @@ Page({
     * 生命周期函数--监听页面加载
     */
    onLoad: function (options) {
-      this.getUserAsset()
-      this.getFuhuoIqAndZhaohuanIq()
-      this.getMyWorksScene()
+
    },
    resetAsset () {
       this.getUserAsset()
@@ -93,7 +91,7 @@ Page({
             reviveData: res
          })
       })
-      getZhaoHuanWorks(`114.0422219038,22.5186571950`).then(res => {
+      getZhaoHuanWorks(`${longitude},${latitude}`).then(res => {
          this.setData({
             callResData: res
          })
@@ -114,7 +112,9 @@ Page({
     * 生命周期函数--监听页面显示
     */
    onShow: function () {
-
+      this.getUserAsset()
+      this.getFuhuoIqAndZhaohuanIq()
+      this.getMyWorksScene()
    },
 
    /**

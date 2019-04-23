@@ -6,7 +6,7 @@ const login = promisify(wx.login)
 const getSetting = promisify(wx.getSetting)
 const getUserInfo = promisify(wx.getUserInfo)
 const ajax = promisify(wx.request)
-const sKey = wx.getStorageSync('sKey')
+// const sKey = wx.getStorageSync('sKey')
 App({
    onLaunch: function () {
       this.doInit()
@@ -50,7 +50,7 @@ App({
       },
       imgSrc: 'https://xcx.newryun.com/xcxstatic/',
       userInfo: {},
-      sKey: sKey,
+      sKey: null,
       myDyn: null,
       generateData: null,
       locationData: null

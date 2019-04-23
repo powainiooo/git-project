@@ -20,10 +20,8 @@ Page({
     * 生命周期函数--监听页面加载
     */
    onLoad: function (options) {
-      console.log(options)
       this.data.userId = options.userId || 0
-      this.getPersonInfo()
-      this.getData()
+
       this.setData({
          isUser: this.data.userId == 0
       })
@@ -102,7 +100,8 @@ Page({
     * 生命周期函数--监听页面显示
     */
    onShow: function () {
-
+      this.getPersonInfo()
+      this.getData()
    },
 
    /**

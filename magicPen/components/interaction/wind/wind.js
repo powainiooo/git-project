@@ -63,7 +63,7 @@ Component({
            this.setData({
               showModal: true,
               modalType: 'cost',
-              modalContent: `是否花费${this.data.cost}智力币发动特技？`,
+              modalContent: `是否花费${this.data.cost}来画豆发动特技？`,
            })
         }
      },
@@ -90,7 +90,7 @@ Component({
               this.setData({
                  showModal: true,
                  modalType: 'recharge',
-                 modalContent: '智力币不足，是否前往充值？',
+                 modalContent: '来画豆不足，是否前往充值？',
               })
            } else {
               this.setData({

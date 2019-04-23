@@ -42,9 +42,7 @@ Page({
       } else if (this.data.canIUse){
          // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
          // 所以此处加入 callback 以防止这种情况
-         app.sKeyReadyCallback = res => {
-            this.getStore()
-         }
+
       } else {
          // 在没有 open-type=getUserInfo 版本的兼容处理
          wx.getUserInfo({
@@ -57,17 +55,21 @@ Page({
             }
          })
       }
-      // this.getBannerData()
-      // this.getWorksData()
-      // this.getMsgData()
-      const sKey = wx.getStorageSync('sKey')
-      if(sKey !== '' && sKey !== null){
-         app.globalData.sKey = sKey
+      app.sKeyReadyCallback = res => {
          this.getStore()
          if (app.globalData.myDyn === null) {
             this.getMyDyn()
          }
       }
+      // this.getBannerData()
+      // this.getWorksData()
+      // this.getMsgData()
+      // const sKey = wx.getStorageSync('sKey')
+      // if(sKey !== '' && sKey !== null){
+      //    app.globalData.sKey = sKey
+      //    this.getStore()
+      //
+      // }
    },
    getUserInfo: function(e) {
       console.log(e)
@@ -104,7 +106,7 @@ Page({
       }).then(res => {
          const list = res.data.pageData
          this.setData({
-            isWorksLIstEnd: list.length < this.data.pageSize,
+            isWorksLIstEnd: res.data.pageSum === res.data.pageCurrent,
             worksList: this.data.worksList.concat(list),
             isLoadingList: false
          })
@@ -141,6 +143,7 @@ Page({
       })
    },
    pageNoAdd() {
+      if (this.data.isWorksLIstEnd) return;
       this.data.pageNo ++
       this.getWorksData()
    },
@@ -225,8 +228,10 @@ Page({
    onShow: function () {
       this.getBannerData()
       this.getWorksData()
-      this.getStore()
       this.getMsgData()
+      if (app.globalData.sKey !== null) {
+         this.getStore()
+      }
       if(this.data.myDynData !== null) {
          const myDynData = wx.getStorageSync('myDynData')
          if (typeof myDynData !== 'string' && myDynData !== null) {

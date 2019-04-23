@@ -53,8 +53,8 @@
    var format = function(sec){
    var time = getDate(sec*1000)
    var year = time.getFullYear()
-   var month = time.getMonth()
-   var day = time.getDay()
+   var month = time.getMonth() + 1
+   var day = time.getDate()
    return year+'.'+month+'.'+day
    }
    module.exports = {

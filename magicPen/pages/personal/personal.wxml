@@ -1,3 +1,4 @@
+
 <view class="personal-container">
    <view class="user">
       <z-avatar url="{{avatarUrl}}" grade="{{grade}}" class="avatar"></z-avatar>

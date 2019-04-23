@@ -32,7 +32,7 @@ App({
             this.sKeyReadyCallback()
          }
       } else {
-         wx.navigateTo({
+         wx.reLaunch({
             url: '/pages/auth/auth'
          })
       }

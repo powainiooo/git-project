@@ -400,7 +400,7 @@ Page({
          url: this.data.generateData.psdUrl
       })
       ctx.drawImage(cover.tempFilePath, 0, 0, 750, 1333)
-      ctx.drawImage('../../../res/interaction/print.png', 454, 1030, 296, 303)
+      ctx.drawImage('../../../res/interaction/qrcode.png', 750-126-8, 1333-126-8, 126, 126)
       const self = this
       ctx.draw(false, ()=>{
          wx.canvasToTempFilePath({
@@ -428,8 +428,8 @@ Page({
 
    },
    tryAnother () {
-      wx.navigateTo({
-         url: '/pages/onscreen/list/list'
+      wx.navigateBack({
+         delta: 1
       })
    },
    doRetry () {

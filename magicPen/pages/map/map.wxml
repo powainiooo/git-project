@@ -1,3 +1,4 @@
+
 <view wx:if="{{locationData !== null}}">
    <map
        id="map"

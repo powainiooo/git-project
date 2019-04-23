@@ -10,7 +10,7 @@ Page({
    onGotUserInfo () {
      const app = getApp()
       app.doInit()
-      wx.navigateTo({
+      wx.reLaunch({
          url: '/pages/index/index'
       })
    },

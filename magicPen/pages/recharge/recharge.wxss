@@ -1,4 +1,4 @@
-.recharge { min-height: 100vh; background-color: #eff2f9;}
+.recharge { min-height: 100vh; background-color: #eff2f9; overflow: hidden;}
 .recharge .line1 { width: 100%; height: 70rpx; display: flex; align-items: center; font-size: 28rpx; color: #15191b; padding-left: 70rpx; position: fixed; top: 0; left: 0; background-color: #ffffff; z-index: 100;}
 .recharge .line1 .icon { width: 50rpx; margin: 15rpx 40rpx 0 20rpx;}
 .recharge .line1 .price-add { color: #ff3067; animation: add 2s linear both; margin-left: 20rpx;}

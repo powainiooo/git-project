@@ -1,3 +1,4 @@
+
 <view class="bigImg">
    <image src="{{selectData.bigUrl}}" bindtap="gotoDetail"></image>
    <view class="non-hint" wx:if="{{selectData.scene !== selectData.psdType}}">

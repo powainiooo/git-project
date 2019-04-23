@@ -1,6 +1,7 @@
 {
   "pages": [
      "pages/index/index",
+     "pages/onscreen/detail/detail",
      "pages/onscreen/list/list",
      "pages/works/detail/detail",
      "pages/feedback/feedback",
@@ -14,13 +15,11 @@
     "pages/aboutus/aboutus",
     "pages/rule/rule",
     "pages/onscreen/generate/generate",
-    "pages/onscreen/detail/detail",
     "pages/auth/auth",
     "pages/drawing/drawing",
     "pages/webview/webview"
   ],
   "window": {
-     "navigationStyle": "custom",
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "神笔画画",
@@ -28,8 +27,7 @@
   },
   "usingComponents": {
     "i-message": "../../components/iview/message/index",
-    "i-icon": "../../components/iview/icon/index",
-    "z-header": "../../components/header/header"
+    "i-icon": "../../components/iview/icon/index"
   },
   "permission": {
     "scope.userLocation": {

@@ -1,3 +1,4 @@
+
 <view class="upload-frame" bindtap="openFile">
    <image src="{{topUrl}}"
           class="img"

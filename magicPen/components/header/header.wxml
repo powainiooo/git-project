@@ -1,4 +1,12 @@
 <view class="z-header-bg"></view>
 <view class="z-header">
-
+   <image src="../../res/index/icon-arrow.png"
+          mode="aspectFit" class="icon"
+          wx:if="{{showBackBtn}}"
+          bindtap="gotoBack"></image>
+   <image src="../../res/index/icon-home.png"
+          mode="aspectFit"
+          class="icon"
+          wx:if="{{showHomeBtn}}"
+          bindtap="gotoHome"></image>
 </view>

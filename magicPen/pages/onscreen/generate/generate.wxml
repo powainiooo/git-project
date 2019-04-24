@@ -1,4 +1,3 @@
-
 <view class="generate-frame">
    <view class="camera-frame">
       <camera class="camera-container" animation="{{cameraAni}}" device-position="{{postion}}" binderror="cameraErr">

@@ -1,6 +1,6 @@
 <view class="generate-frame">
    <view class="camera-frame">
-      <camera class="camera-container" animation="{{cameraAni}}" device-position="{{postion}}" binderror="cameraErr">
+      <camera class="camera-container" animation="{{cameraAni}}" device-position="{{postion}}" hidden="{{!showCamera}}">
          <cover-view class="cover">
             <cover-image src="{{generateData.psdUrl}}" animation="{{coverImageAni}}"></cover-image>
          </cover-view>

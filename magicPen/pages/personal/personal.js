@@ -16,13 +16,22 @@ Page({
       userFansTxt: userFans,
       fansDis: 0,
       showQrcodeFrame: false,
+      showPeas: true,
    },
 
    /**
     * 生命周期函数--监听页面加载
     */
    onLoad: function (options) {
-
+      const self = this
+      wx.getSystemInfo({
+         success(res) {
+            console.log(res)
+            self.setData({
+               showPeas: res.platform !== 'ios'
+            })
+         }
+      })
    },
    getPersonInfo() {
       getUserInterspaceInfo({userId: 0}).then(res => {

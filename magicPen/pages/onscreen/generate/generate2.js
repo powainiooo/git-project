@@ -77,25 +77,10 @@ Page({
       const cameraHeight = `${showWidth * h / w}rpx`
       this.data.cameraSize = [showWidth, cameraHeight, paddingTop, padding]
       this.data.coverSize = [moduleWidth * scale, moduleHeight * scale, y * scale - paddingTop, x * scale - padding]
-
-      //摄像机动画
-      const camera = wx.createAnimation({
-         duration: 0,
-         timingFunction: 'ease',
-      })
-      //遮罩图动画
-      const cover = wx.createAnimation({
-         duration: 0,
-         timingFunction: 'ease',
-      })
-      const [caw, cah, cay, cax] = this.data.cameraSize
-      const [cow, coh, coy, cox] = this.data.coverSize
-      camera.width(`${caw}rpx`).height(cah).top(`${cay}rpx`).left(`${cax}rpx`).opacity(1).step()
-      cover.width(`${cow}rpx`).height(`${coh}rpx`).top(`-${coy}rpx`).left(`-${cox}rpx`).opacity(1).step()
-      this.setData({
-         cameraAni: camera.export(),
-         coverImageAni: cover.export(),
-      })
+   },
+   cameraErr (e) {
+      console.log('camera error')
+      console.log(e)
    },
    doSwitch () {
       this.setData({
@@ -134,23 +119,57 @@ Page({
       })
       setTimeout(()=>{
          this.coverAnimEnd()
-      },1100)
+      },1500)
+      // setTimeout(()=>{
+      //    camera.width(`${showWidth}rpx`).height(cameraHeight).top(`${paddingTop}rpx`).left(`${padding}rpx`).step()
+      //    this.setData({
+      //       cameraAni: camera.export(),
+      //    })
+      // },3500)
    },
    coverAnimEnd () {
-      console.log('coverAnimEnd')
-      if (this.data.showCamera) { //缩小后
-         this.setData({
-            showCamera: false,
+      clearTimeout(this.data.tAnimEnd)
+      this.data.tAnimEnd = setTimeout(() => {
+         console.log('coverAnimEnd')
+         //摄像机动画
+         const camera = wx.createAnimation({
+            duration: 0,
+            timingFunction: 'ease',
          })
-      } else { //放大后
-         this.setData({
-            showCamera: true,
-            showBottom: true,
+         //遮罩图动画
+         const cover = wx.createAnimation({
+            duration: 0,
+            timingFunction: 'ease',
          })
-      }
+         if (this.data.showCamera) { //缩小后
+            camera.width(`233rpx`).height(`233rpx`).top(`-233rpx`).left(`-233rpx`).opacity(0).step()
+            cover.width(`750rpx`).height(`1333rpx`).top(`0rpx`).left(`-10000px`).opacity(0).step()
+            this.setData({
+               coverImageAni: cover.export(),
+               cameraAni: camera.export(),
+            })
+            this.data.showCamera = false
+         } else { //放大后
+            const [caw, cah, cay, cax] = this.data.cameraSize
+            const [cow, coh, coy, cox] = this.data.coverSize
+            camera.width(`${caw}rpx`).height(cah).top(`${cay}rpx`).left(`${cax}rpx`).opacity(1).step()
+            cover.width(`${cow}rpx`).height(`${coh}rpx`).top(`-${coy}rpx`).left(`-${cox}rpx`).opacity(1).step()
+            this.setData({
+               coverImageAni: cover.export(),
+               showBottom: true,
+            })
+            setTimeout(()=>{
+               this.setData({
+                  cameraAni: camera.export(),
+               })
+            }, 1000)
+            this.data.showCamera = true
+         }
+      }, 1300)
    },
    zoomBack () {
       this.coverAnimEnd()
+      return;
       setTimeout(()=>{
          const [x, y, w, h] = this.data.generateData.pngCoordinate.split(',')
          //照片动画
@@ -177,7 +196,7 @@ Page({
             showBottom2: true,
             btnText
          })
-      }, 500)
+      }, 2000)
    },
    takePhoto() {
       console.log('takePhoto')

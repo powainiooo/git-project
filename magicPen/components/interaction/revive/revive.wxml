@@ -14,13 +14,13 @@
    </view>
    <view class="photo-recharge" bindtap="gotoRecharge">
       <image src="../../../res/interaction/pea2.png" mode="widthFix" class="icon-pea"></image>
-      <text>立即充值</text>
+      <!--<text>立即充值</text>-->
    </view>
 </view>
 <view class="coin-line call-works-title">
    <text>选择您想复活的作品：</text>
    <view class="cost">
-      消费
+      <!--消费-->
       {{cost}}
       <image src="../../../res/interaction/pea.png" mode="widthFix" class="icon-pea"></image>
    </view>
@@ -56,7 +56,7 @@
          <z-button catchtap="modalConfirm" wx:if="{{modalType === 'recharge'}}">
             <text>您的来画豆不足{{cost}}</text>
             <image src="../../../res/interaction/pea.png" mode="widthFix" class="pea"></image>
-            <text>，去兑换些〉</text>
+            <!--<text>，去兑换些〉</text>-->
          </z-button>
       </view>
    </view>

@@ -319,7 +319,7 @@ Page({
          this.setData({
             showModal: true,
             modalType: 'recharge',
-            modalContent: `您的来画豆不足${price}，是否去充值？`,
+            modalContent: `您的来画豆不足${price}`,
          })
          return
       }
@@ -353,7 +353,7 @@ Page({
                this.setData({
                   showModal: true,
                   modalType: 'recharge',
-                  modalContent: `您的来画豆不足${price}，是否去充值？`,
+                  modalContent: `您的来画豆不足${price}`,
                })
             }
          })

@@ -3,6 +3,7 @@ const {payFuHuo} = require('../../../utils/api.js')
 import regeneratorRuntime from '../../../utils/runtime.js'
 const {promisify} = require('../../../utils/util.js')
 const getLocation = promisify(wx.getLocation)
+const app = getApp()
 Component({
   /**
    * 组件的属性列表
@@ -33,6 +34,7 @@ Component({
      modalContent: '',
      isBuying: false,
      showCallSuc: false,
+     isIOS: app.globalData.isIOS,
   },
 
   /**
@@ -50,7 +52,11 @@ Component({
         if (this.data.modalType === 'hint') {
             this.closeModal()
         } else if (this.data.modalType === 'recharge') {
-           this.gotoRecharge()
+           if (this.data.isIOS) {
+              this.closeModal()
+           } else {
+              this.gotoRecharge()
+           }
         } else if (this.data.modalType === 'cost') {
            this.doBuy()
         }
@@ -81,7 +87,7 @@ Component({
                  modalContent: `发动3D复活特技`,
               })
            } else {
-              const msg = this.data.freeFuhuoState === 2 ? '第一次免费复活哟！': `是否花费${this.data.cost}来画豆复活？`
+              const msg = this.data.freeFuhuoState === 2 ? '第一次免费复活哟！': `是否${this.data.cost}来画豆复活？`
               this.setData({
                  showModal: true,
                  modalType: 'cost',

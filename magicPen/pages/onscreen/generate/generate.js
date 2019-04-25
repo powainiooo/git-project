@@ -46,6 +46,7 @@ Page({
       showCount: false,
       waitCount: 0,
       playCount: 0,
+      isIOS: app.globalData.isIOS,
    },
 
    /**
@@ -288,9 +289,13 @@ Page({
       if (this.data.modalType === 'hint') {
          this.closeModal()
       } else if (this.data.modalType === 'recharge') {
-         wx.navigateTo({
-            url: '/pages/recharge/recharge'
-         })
+         if (this.data.isIOS) {
+            this.closeModal()
+         } else {
+            wx.navigateTo({
+               url: '/pages/recharge/recharge'
+            })
+         }
       }
    },
    async doBuy() {
@@ -300,7 +305,7 @@ Page({
          this.setData({
             showModal: true,
             modalType: 'recharge',
-            modalContent: `您的来画豆不足${price}，是否去充值？`,
+            modalContent: `您的来画豆不足${price}`,
          })
          return
       }
@@ -334,7 +339,7 @@ Page({
                this.setData({
                   showModal: true,
                   modalType: 'recharge',
-                  modalContent: `您的来画豆不足${price}，是否去充值？`,
+                  modalContent: `您的来画豆不足${price}`,
                })
             }
          })

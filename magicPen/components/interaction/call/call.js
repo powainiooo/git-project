@@ -3,6 +3,7 @@ const {payZhaohuan} = require('../../../utils/api.js')
 import regeneratorRuntime from '../../../utils/runtime.js'
 const {promisify} = require('../../../utils/util.js')
 const getLocation = promisify(wx.getLocation)
+const app = getApp()
 Component({
    /**
     * 组件的属性列表
@@ -34,6 +35,7 @@ Component({
       count: 0,
       isBuying: false,
       showCallSuc: false,
+      isIOS: app.globalData.isIOS,
    },
 
    /**
@@ -44,7 +46,11 @@ Component({
          if (this.data.modalType === 'hint') {
             this.closeModal()
          } else if (this.data.modalType === 'recharge') {
-            this.gotoRecharge()
+            if (this.data.isIOS) {
+               this.closeModal()
+            } else {
+               this.gotoRecharge()
+            }
          } else if (this.data.modalType === 'cost') {
             this.doBuy()
          }

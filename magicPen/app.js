@@ -9,6 +9,13 @@ const ajax = promisify(wx.request)
 // const sKey = wx.getStorageSync('sKey')
 App({
    onLaunch: function () {
+      const self = this
+      wx.getSystemInfo({
+         success(res) {
+            console.log(res)
+            self.globalData.isIOS = res.platform === 'ios'
+         }
+      })
       this.doInit()
    },
    async doInit() {
@@ -49,6 +56,7 @@ App({
          star5: 'http://sbhh.newryun.com/xcxstatic/sound/s08.mp3',
       },
       imgSrc: 'https://xcx.newryun.com/xcxstatic/',
+      isIOS: true,
       userInfo: {},
       sKey: null,
       myDyn: null,

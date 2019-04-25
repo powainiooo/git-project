@@ -12,7 +12,7 @@
    </view>
    <view class="photo-recharge" bindtap="gotoRecharge">
       <image src="../../../res/interaction/pea2.png" mode="widthFix" class="icon-pea"></image>
-      <text>立即充值</text>
+      <!--<text>立即充值</text>-->
    </view>
 </view>
 

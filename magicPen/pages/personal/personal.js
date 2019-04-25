@@ -2,6 +2,7 @@
 const {getUserInterspaceInfo, getUserAsset} = require('../../utils/api.js')
 const userFans = wx.getStorageSync('userFans')
 import QRCode from '../../utils/weapp-qrcode'
+const app = getApp()
 Page({
 
    /**
@@ -16,22 +17,14 @@ Page({
       userFansTxt: userFans,
       fansDis: 0,
       showQrcodeFrame: false,
-      showPeas: true,
+      isIOS: app.globalData.isIOS,
    },
 
    /**
     * 生命周期函数--监听页面加载
     */
    onLoad: function (options) {
-      const self = this
-      wx.getSystemInfo({
-         success(res) {
-            console.log(res)
-            self.setData({
-               showPeas: res.platform !== 'ios'
-            })
-         }
-      })
+
    },
    getPersonInfo() {
       getUserInterspaceInfo({userId: 0}).then(res => {
@@ -64,8 +57,16 @@ Page({
       })
    },
    linkTo(e) {
-      const url = e.currentTarget.dataset.url
-      wx.navigateTo({url})
+      if (this.data.isIOS) {
+         wx.showModal({
+            title: '提示',
+            content: '由于相关规范，ios用户暂不支持。'
+         })
+      }else {
+         const url = e.currentTarget.dataset.url
+         wx.navigateTo({url})
+      }
+
    },
    setFansMove () {
       const dis = this.data.userFans - userFans

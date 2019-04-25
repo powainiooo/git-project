@@ -1,7 +1,7 @@
 {
   "pages": [
-     "pages/member/member",
-    "pages/index/index",
+     "pages/index/index",
+    "pages/member/member",
     "pages/index/detail",
     "pages/order-ticket/order",
     "pages/order-drink/order",
@@ -23,9 +23,10 @@
     "navigationBarTitleText": "",
     "navigationBarTextStyle": "white"
   },
-  "permission":{
-    "scope.userLocation":{
-      "desc":"获取当前用户所在的城市，快速选择对应所在城市。"
+  "permission": {
+    "scope.userLocation": {
+      "desc": "获取当前用户所在的城市，快速选择对应所在城市。"
     }
-  }
+  },
+  "sitemapLocation": "sitemap.json"
 }

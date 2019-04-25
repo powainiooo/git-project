@@ -24,8 +24,9 @@ Component({
             const nameVal = wx.getStorageSync('nameVal')
             const phoneVal = wx.getStorageSync('phoneVal')
             const addressVal = wx.getStorageSync('addressVal')
+            const emailVal = wx.getStorageSync('emailVal')
             const idnum = wx.getStorageSync('idnum')
-            this.setData({nameVal, phoneVal, addressVal, idnum})
+            this.setData({nameVal, phoneVal, addressVal, idnum, emailVal})
             this.checkValues();
          }
       }
@@ -41,6 +42,7 @@ Component({
       nameVal:'',
       phoneVal:'',
       addressVal:'',
+      emailVal:'',
       idnum:'',
       btnDisabled:false,
       typeList:[],
@@ -112,7 +114,12 @@ Component({
                   btn = false;
                }
             }
-
+         }
+         if(data.info.is_email == '1'){
+            var reg = /[\w]+(\.[\w]+)*@[\w]+(\.[\w])+/
+            if(!reg.test(this.data.emailVal)){
+               btn = false;
+            }
          }
          this.setData({
             btnDisabled:btn
@@ -148,6 +155,7 @@ Component({
                   name:self.data.nameVal,
                   mobile:self.data.phoneVal,
                   address:self.data.addressVal,
+                  email:self.data.emailVal,
                   idnum:self.data.idnum,
                   passport:self.data.uploadImg,
                   idnum_type:parseInt(this.data.idTypeIndex) + 1,

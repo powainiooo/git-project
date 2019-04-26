@@ -190,6 +190,13 @@ Component({
       },
       async openScan() {
          const {result} = await scan()
+         // const result = 'iqGoodsId:99'
+         if(/iqGoodsId/.test(result) && !app.globalData.isIOS) {
+            wx.navigateTo({
+               url: '/pages/recharge/recharge'
+            })
+            return
+         }
          const {ajaxSrc, sKey} = app.globalData
          const res = await request({
             url: `${ajaxSrc}/api/index/scanCode?scanCode=${result}`,
@@ -258,6 +265,26 @@ Component({
                   giftBtnText: btn,
                   gitfData: gData,
                   giftImage: gData.activityInfoImg,
+               })
+            } else if (res.data.data.scanType === 4) { //ios 充值
+               const {timeStamp, nonceStr, payPackage, signType, paySign} = res.data.data
+               const self = this
+               wx.requestPayment({
+                  timeStamp,
+                  nonceStr,
+                  'package': payPackage,
+                  signType,
+                  paySign,
+                  'success':function(res){
+                     wx.navigateTo({
+                        url: '/pages/personal/personal'
+                     })
+                  },
+                  'fail':function(res){
+                     wx.showToast({
+                        title:'支付失败'
+                     });
+                  }
                })
             }
          }else {

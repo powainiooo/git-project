@@ -1,6 +1,7 @@
 // pages/personal/personal.js
 const {getUserInterspaceInfo, getUserAsset} = require('../../utils/api.js')
-const userFans = wx.getStorageSync('userFans')
+let userFans = 0;
+let userIq = 0;
 import QRCode from '../../utils/weapp-qrcode'
 const app = getApp()
 Page({
@@ -13,8 +14,10 @@ Page({
       nickName: '',
       grade: 0,
       userIq: 0,
+      userIqTxt: 0,
+      userIqDis: 0,
       userFans: 0,
-      userFansTxt: userFans,
+      userFansTxt: 0,
       fansDis: 0,
       showQrcodeFrame: false,
       isIOS: app.globalData.isIOS,
@@ -24,7 +27,12 @@ Page({
     * 生命周期函数--监听页面加载
     */
    onLoad: function (options) {
-
+      userFans = wx.getStorageSync('userFans')
+      userIq = wx.getStorageSync('userIq')
+      this.setData({
+         userIqTxt: userIq,
+         userFansTxt: userFans,
+      })
    },
    getPersonInfo() {
       getUserInterspaceInfo({userId: 0}).then(res => {
@@ -54,6 +62,19 @@ Page({
          this.setData({
             userIq: res.data
          })
+         if (typeof userIq === 'string') {
+            this.setData({
+               userIqTxt: res.data
+            })
+         } else if (typeof userIq === 'number') {
+            setTimeout(()=>{
+               this.setIqMove()
+            }, 1500)
+         }
+         wx.setStorage({
+            key:'userIq',
+            data: res.data
+         })
       })
    },
    linkTo(e) {
@@ -82,6 +103,23 @@ Page({
       } else {
          this.setData({
             userFansTxt: this.data.userFans
+         })
+      }
+   },
+   setIqMove () {
+      const dis = this.data.userIq - userIq
+      if (dis > 0) {
+         this.setData({
+            userIqDis: dis
+         })
+         setTimeout(()=>{
+            this.setData({
+               userIqTxt: this.data.userIq
+            })
+         }, 2200)
+      } else {
+         this.setData({
+            userIqTxt: this.data.userIq
          })
       }
    },

@@ -1,5 +1,6 @@
 // pages/coupon/coupon.js
 const {getCouponList, affirmGetIq} = require('../../utils/api.js')
+const app = getApp()
 Page({
 
    /**
@@ -59,9 +60,16 @@ Page({
             showModal: true
          })
       } else if (data.couponValueType === 2) {
-         wx.navigateTo({
-            url: '/pages/recharge/recharge'
-         })
+         if (app.globalData.isIOS) {
+            wx.showModal({
+               title: '提示',
+               content: '由于相关规范，ios用户暂不支持。'
+            })
+         }else {
+            wx.navigateTo({
+               url: '/pages/recharge/recharge'
+            })
+         }
       }
    },
    /**

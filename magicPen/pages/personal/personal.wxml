@@ -51,7 +51,7 @@
          <z-avatar url="{{avatarUrl}}" grade="{{grade}}" class="avatar"></z-avatar>
          <text>{{nickName}}</text>
       </view>
-      <canvas class='qrcode-canvas' canvas-id='canvas'>
+      <canvas class='qrcode-canvas' canvas-id='canvas' style="width: {{qrcodeSize}}px; height: {{qrcodeSize}}px">
          <cover-view class="qrcode-avatar">
             <cover-image src="{{avatarUrl}}" mode="widthFix"></cover-image>
          </cover-view>

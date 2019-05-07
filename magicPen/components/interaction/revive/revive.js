@@ -62,9 +62,16 @@ Component({
         }
      },
      gotoRecharge () {
-        wx.navigateTo({
-           url: '/pages/recharge/recharge'
-        })
+        if (this.data.isIOS) {
+           wx.showModal({
+              title: '提示',
+              content: '由于相关规范，ios用户暂不支持。'
+           })
+        } else {
+           wx.navigateTo({
+              url: '/pages/recharge/recharge'
+           })
+        }
      },
      closeModal () {
         this.setData({

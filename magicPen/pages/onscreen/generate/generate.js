@@ -425,8 +425,8 @@ Page({
       })
    },
    gotoMore () {
-      wx.navigateTo({
-         url: '/pages/interaction/interaction'
+      wx.navigateBack({
+         delta: 2
       })
    },
    /**

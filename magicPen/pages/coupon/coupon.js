@@ -11,6 +11,7 @@ Page({
       isAjax: false,
       showModal: false,
       selectIndex: 0,
+      isIOS: app.globalData.isIOS,
    },
 
    /**

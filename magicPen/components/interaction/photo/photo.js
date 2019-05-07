@@ -1,4 +1,5 @@
 // components/interaction/photo/photo.js
+const app = getApp()
 Component({
   /**
    * 组件的属性列表
@@ -14,7 +15,7 @@ Component({
    * 组件的初始数据
    */
   data: {
-
+     isIOS: app.globalData.isIOS,
   },
 
   /**
@@ -27,9 +28,16 @@ Component({
         })
      },
      gotoRecharge () {
-        wx.navigateTo({
-           url: '/pages/recharge/recharge'
-        })
+        if (this.data.isIOS) {
+           wx.showModal({
+              title: '提示',
+              content: '由于相关规范，ios用户暂不支持。'
+           })
+        } else {
+           wx.navigateTo({
+              url: '/pages/recharge/recharge'
+           })
+        }
      },
   }
 })

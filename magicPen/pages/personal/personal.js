@@ -20,6 +20,7 @@ Page({
       userFansTxt: 0,
       fansDis: 0,
       showQrcodeFrame: false,
+      qrcodeSize: 250,
       isIOS: app.globalData.isIOS,
    },
 
@@ -78,16 +79,19 @@ Page({
       })
    },
    linkTo(e) {
-      if (this.data.isIOS) {
-         wx.showModal({
-            title: '提示',
-            content: '由于相关规范，ios用户暂不支持。'
-         })
-      }else {
-         const url = e.currentTarget.dataset.url
+      const url = e.currentTarget.dataset.url
+      if (url === '/pages/recharge/recharge') {
+         if (this.data.isIOS) {
+            wx.showModal({
+               title: '提示',
+               content: '由于相关规范，ios用户暂不支持。'
+            })
+         }else {
+            wx.navigateTo({url})
+         }
+      } else {
          wx.navigateTo({url})
       }
-
    },
    setFansMove () {
       const dis = this.data.userFans - userFans
@@ -124,10 +128,15 @@ Page({
       }
    },
    initQrcode (userId) {
+      const res = wx.getSystemInfoSync()
+      const size = res.windowWidth * 0.6666
+      this.setData({
+         qrcodeSize: size
+      })
       const qrcode = new QRCode('canvas', {
          text: `userId:${userId}`,
-         width: 250,
-         height: 250,
+         width: size,
+         height: size,
          colorDark: "#000000",
          colorLight: "#ffffff",
          correctLevel: QRCode.CorrectLevel.H,

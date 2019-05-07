@@ -6,6 +6,7 @@
           wx:key="{{item.couponId}}"
           data-index="{{index}}"
           bindtap="getPeas"
+          hidden="{{isIOS && item.couponValueType === 2}}"
           class="coupon-item {{item.couponValueType  === 1 ? 'coupon-item-free' : ''}}">
         <image src="../../res/coupon/coupon.png" mode="widthFix" class="img" wx:if="{{item.couponValueType  !== 1}}"></image>
         <image src="../../res/coupon/free.png" mode="widthFix" class="img" wx:if="{{item.couponValueType  === 1}}"></image>

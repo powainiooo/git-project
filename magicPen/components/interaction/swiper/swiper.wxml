@@ -1,7 +1,7 @@
 <view class="swiper-frame"
       bindtap="doItem"
       bindtouchstart="{{util.swiperStart}}"
-      catchtouchmove="{{util.swiperMove}}"
+      catchtouchmove="{{util.touchmove}}"
       bindtouchend="{{util.swiperEnd}}">
    <image src="../../../res/interaction/bg.jpg" mode="widthFix" class="swiper-bg"></image>
    <image src="../../../res/interaction/wheel.png" mode="widthFix" class="wheel"></image>
@@ -13,6 +13,14 @@
    </view>
 </view>
 
-
-
-<wxs src="./move.wxs" module="util"></wxs>
+<!--<wxs src="./move2.wxs" module="util"></wxs>-->
+<wxs module="util">
+   module.exports = {
+   swiperStart:function(event, instance) {
+   var roll = instance.selectComponent('.roll-frame');
+   roll.setStyle({
+   'transform': 'rotateZ(100deg)'
+   });
+   }
+   }
+</wxs>

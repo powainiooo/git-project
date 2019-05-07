@@ -108,7 +108,3 @@ module.exports.swiperEnd2 = function (e, instance) {
 function getAngle(dis) {
    return Math.floor(360 * dis / circumference)
 }
-
-
-var aa = {"type":"touchstart","timeStamp":1027,"target":{"id":"","offsetLeft":-100,"offsetTop":-100,"dataset":{}},"currentTarget":{"id":"","offsetLeft":0,"offsetTop":0,"dataset":{}},"touches":[{"identifier":0,"pageX":260,"pageY":148,"clientX":260,"clientY":148,"force":1}],"changedTouches":[{"identifier":0,"pageX":260,"pageY":148,"clientX":260,"clientY":148,"force":1}],"instance":{"selectAllComponents":null,"selectComponent":null,"removeClass":null,"addClass":null,"hasClass":null,"setStyle":null,"getDataset":null,"getState":null,"triggerEvent":null,"callMethod":null,"requestAnimationFrame":null}}
-var bb = {"type":"touchend","timeStamp":2551,"target":{"id":"","offsetLeft":-100,"offsetTop":-100,"dataset":{}},"currentTarget":{"id":"","offsetLeft":0,"offsetTop":0,"dataset":{}},"touches":[],"changedTouches":[{"identifier":0,"pageX":256,"pageY":175,"clientX":256,"clientY":175,"force":0}],"instance":{"selectAllComponents":null,"selectComponent":null,"removeClass":null,"addClass":null,"hasClass":null,"setStyle":null,"getDataset":null,"getState":null,"triggerEvent":null,"callMethod":null,"requestAnimationFrame":null}}

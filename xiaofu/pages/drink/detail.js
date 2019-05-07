@@ -14,7 +14,7 @@ Page({
     shareImgSrc:'',
     imgSrc:app.globalData.imgSrc,
     wxcodeimg:'',
-    showRefresh:false
+    showRefresh:false,
   },
   checkValues(event){
     let key = event.target.dataset.key;

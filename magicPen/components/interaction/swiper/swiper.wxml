@@ -13,6 +13,4 @@
    </view>
 </view>
 
-
-
 <wxs src="./move.wxs" module="util"></wxs>

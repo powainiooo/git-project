@@ -1,11 +1,11 @@
 {
   "pages": [
      "pages/index/index",
+     "pages/drink/index",
     "pages/member/member",
     "pages/index/detail",
     "pages/order-ticket/order",
     "pages/order-drink/order",
-    "pages/drink/index",
     "pages/login/login",
     "pages/drink/detail",
     "pages/error/error",

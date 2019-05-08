@@ -1,7 +1,5 @@
-
 var startX = 0, startTime = 0, rotateZ = 0, circumference = Math.PI*2*250;
 module.exports.swiperStart = function (e, instance) {
-   console.log('swiper start');
    startX = e.touches[0].pageX;
    startTime = e.timeStamp;
    var roll = instance.selectComponent('.roll-frame');
@@ -10,7 +8,6 @@ module.exports.swiperStart = function (e, instance) {
    wheel.removeClass('transition-end')
 }
 module.exports.swiperMove = function (e, instance) {
-   console.log('swiper move');
    var dx = e.touches[0].pageX;
    var angle = getAngle(dx - startX);
    var roll = instance.selectComponent('.roll-frame');
@@ -25,7 +22,6 @@ module.exports.swiperMove = function (e, instance) {
 
 }
 module.exports.swiperEnd = function (e, instance) {
-   console.log('swiper end');
    var dx = e.changedTouches[0].pageX;
    var endTime = e.timeStamp;
    var roll = instance.selectComponent('.roll-frame');
@@ -71,7 +67,6 @@ module.exports.swiperEnd = function (e, instance) {
       time: t
    })
 };
-
 function getAngle(dis) {
    return Math.floor(360 * dis / circumference)
 }

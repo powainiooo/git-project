@@ -1,6 +1,6 @@
 .personal-container .user { padding: 60rpx 110rpx; display: flex; align-items: center; border-bottom: 2rpx solid #f0f0f0; position: relative;}
 .personal-container .user .avatar { transform: scale(1.8); margin-right: 90rpx;}
-.personal-container .user text { font-size: 32rpx; color: #151515;}
+.personal-container .user text { width: 260rpx; font-size: 32rpx; color: #151515;}
 .personal-container .user .icon-qrcode { width: 70rpx; position: absolute; top: 66rpx; right: 140rpx;}
 
 .personal-container .accout { padding: 15rpx 0; display: flex;}

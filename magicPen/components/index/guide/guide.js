@@ -209,7 +209,7 @@ Component({
             this.setData({
                showScan: false,
                showFailModal: true,
-               failText: '需要先上传到大屏后\\n才可以扫描成功喔！'
+               failText: '需要先上传到大屏后\n才可以扫描成功喔！'
             })
          }else if(res.data.code === 4001){ //已被扫描
             this.setData({

@@ -1,0 +1,11 @@
+module.exports = {
+   swiperStart: function(event, instance) {
+      console.log('swiper start')
+   },
+   swiperMove: function(event, instance) {
+      console.log('swiper move')
+   },
+   swiperEnd: function(event, instance) {
+      console.log('swiper end')
+   }
+}

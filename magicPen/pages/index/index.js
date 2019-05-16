@@ -227,6 +227,7 @@ Page({
     */
    onShow: function () {
       this.getBannerData()
+	   this.data.worksList = []
       this.getWorksData()
       this.getMsgData()
       if (app.globalData.sKey !== null) {

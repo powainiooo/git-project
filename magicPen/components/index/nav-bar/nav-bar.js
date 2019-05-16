@@ -43,7 +43,7 @@ Component({
          },
          {
             src: '../../../res/index/nav-icon2.png',
-            name: '勋章搜集',
+            name: '勋章收集',
             url: '/pages/medal/medal',
             key: 'medal',
             showDot: false,

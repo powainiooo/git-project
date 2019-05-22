@@ -21,10 +21,8 @@ Component({
          type: Boolean,
          value: true,
          observer (val) {
-            wx.nextTick(()=>{
-               this.stepInit()
-               this.stepMove()
-            })
+	         this.stepInit()
+	         this.stepMove()
          }
       }
    },

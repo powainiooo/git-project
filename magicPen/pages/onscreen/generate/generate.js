@@ -66,8 +66,9 @@ Page({
       //       })
       //    }
       // })
-      this.initSize()
-
+	   wx.nextTick(()=>{
+		   this.initSize()
+	   })
    },
    initSize () {
       const [padding, moduleWidth, moduleHeight] = [20, 750, 1333]

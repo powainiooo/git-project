@@ -4,7 +4,7 @@
 .list-item .list-item-right { width: 230rpx; margin-left: 30rpx;}
 .list-item .list-item-right .list-item-author { display: flex; align-items: center; margin: 30rpx 0 10rpx 0;}
 .list-item .list-item-right .list-item-author .list-item-avatar{ margin-right: 20rpx; transform: scale(0.9)}
-.list-item .list-item-right .list-item-author .list-item-nick{ font-size: 24rpx; color: #000000;}
+.list-item .list-item-right .list-item-author .list-item-nick{ height: 32rpx; overflow: hidden; white-space:nowrap; text-overflow: ellipsis; font-size: 24rpx; color: #000000;}
 .list-item .list-item-right .list-item-name { height: 68rpx; font-size: 24rpx; color: #7d7d7d;}
 .list-item .list-item-right .list-item-like { display: flex; margin-top: 10rpx; position: relative; margin-left: -12rpx;}
 .list-item .list-item-right .list-item-like .list-item-icon{ width: 60rpx; height: 60rpx; margin-top: -4rpx;}

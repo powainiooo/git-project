@@ -84,7 +84,7 @@ Page({
          if (this.data.isIOS) {
             wx.showModal({
                title: '提示',
-               content: '由于相关规范，ios用户暂不支持。'
+               content: '由于相关规范，请联系线下神笔画画站点获取。'
             })
          }else {
             wx.navigateTo({url})

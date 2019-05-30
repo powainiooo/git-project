@@ -18,17 +18,12 @@ images/source-375@3x.jpeg 1125w"
 </body>
 </html>
 <script>
-const arrayProto = Array.prototype
-const arrayMethods = Object.create(arrayProto)
-['push', 'pop', 'shift', 'unshift', 'splice', 'sort', 'reverse'].forEach(method => {
-	const original = arrayProto[method]
-   Object.defineProperties(arrayMethods, method, {
-   	value: function mutator (...args) {
-         return original.apply(this, args)
-	   },
-      enumerable: false,
-      writable: true,
-      configurable: true
-   })
-})
+function f(y) {
+   return this.x + y
+}
+const obj = {
+	x: 1
+}
+const g = f.bind(obj)
+console.log(obj)
 </script>

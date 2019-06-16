@@ -24,7 +24,7 @@
     <div class="organizer-frame">
         <div class="frame">
             <div class="step1">
-                <h3 class="title"><span>1</span>填写企业基本信息</h3>
+                <h3 class="title"><span>1</span>填写{{registerType === 'company' ? '企业' : '个人'}}基本信息</h3>
                 <div class="mt20">
                     <p class="mb20 tc"><input type="text" placeholder="活动方名称" v-model="logoName"></p>
                     <div v-if="registerType == 'company'">

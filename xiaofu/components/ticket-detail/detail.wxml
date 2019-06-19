@@ -8,9 +8,8 @@
               wx:for-item="item"
               wx:for-index="index"
               wx:key="{{index}}">
+           <image class="img" src="{{imgSrc+item.picture}}" mode="aspectFit"></image>
             <view class="name" wx:if="{{item.img == ''}}">{{item.username}}</view>
-            <image class="logo" src="{{imgSrc+item.img}}" mode="aspectFit" wx:if="{{item.img != ''}}"></image>
-            <image class="img" src="{{imgSrc+item.picture}}" mode="aspectFit"></image>
         </view>
 
         <view class="title" wx:if="{{itemData.info.notify.length != 0}}">须知</view>

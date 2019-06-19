@@ -53,4 +53,4 @@
 .shadow-frame .infos .index{ width: 25%; font-size: 70rpx; padding: 15rpx 20rpx; text-align: center; font-family: 'Helve';}
 .shadow-frame .infos .index text{ font-size: 25rpx;}
 
-.detail-frame .hint-section{ margin:100rpx 0 50rpx 0; border-top: 1rpx solid #e2e2e2; padding-top: 50rpx;}
+.detail-frame .hint-section{ margin:100rpx 0 50rpx 0; border-top: 1rpx solid #0d1025; padding-top: 50rpx; color: #ffffff;}

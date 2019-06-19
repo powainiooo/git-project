@@ -1,7 +1,7 @@
-<view class="container bg-gray" id="bodyFrame">
+<view class="container bg-gradient" id="bodyFrame">
     <header-view showMenu="{{false}}"></header-view>
     <!--详情列表 -->
-    <view class="detail-frame bg-gray">
+    <view class="detail-frame">
         <view class="ticket {{itemData.is_check == '1' ? '' : 'shadow-top'}} {{isSimple ? 'ticket-simple' : ''}}">
             <view class="check-icon" wx:if="{{itemData.is_check == '1'}}"></view>
             <view class="">

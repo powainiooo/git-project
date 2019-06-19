@@ -2,6 +2,7 @@
 
 .container{ width: 100%; min-height: 100vh; overflow: hidden;}
 .bg-gray{ background-color: #f6f6f6;}
+.bg-gradient { background: repeating-linear-gradient(200deg,#000000, #232961 100%);}
 .container .body{ margin-top: 120rpx;}
 
 .hint-section{ margin: 40rpx 50rpx; font-size: 24rpx; color: #888888; line-height: 1.5; }

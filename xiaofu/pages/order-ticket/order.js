@@ -49,26 +49,14 @@ Page({
       scrollTop: 0,
       duration: 0
     });
-    let empty = false;
-    if(val){
-      this.getListData2();
-      if(this.data.listData2.length == 0) empty = true;
-    }else{
-      this.getListData();
-      if(this.data.listData.length == 0) empty = true;
-    }
+	  if(val){
+		  this.getListData2();
+	  }else{
+		  this.getListData();
+	  }
     this.setData({
-      isList:true,
-      isDrink:true,
       isMove:val
     });
-    setTimeout(()=>{
-      this.setData({
-        isEmpty:empty,
-        isDrink:val,
-        isList:!val
-      });
-    },500)
   },
   getListData(){
     let self = this;
@@ -79,12 +67,9 @@ Page({
         openid:app.globalData.userOpenID
       },
       success: function(res) {
-        let list = res.data.data.list,val = false;
-        if(list.length == 0 && !self.data.isMove) val = true;
-        self.setData({
-          isEmpty:val,
-          listData:list
-        });
+	      self.setData({
+		      listData:res.data.data.list
+	      });
         wx.hideNavigationBarLoading();
       },
       fail(){
@@ -103,12 +88,9 @@ Page({
         openid:app.globalData.userOpenID
       },
       success:res=>{
-        let list = res.data.data.list,val = false;
-        if(list.length == 0 && this.data.isMove) val = true;
-        this.setData({
-          isEmpty:val,
-          listData2:list
-        });
+	      self.setData({
+		      listData2:res.data.data.list
+	      });
         wx.hideNavigationBarLoading();
       },
       fail(){

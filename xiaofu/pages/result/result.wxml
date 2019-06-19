@@ -1,5 +1,5 @@
 <!--index.wxml-->
-<view class="container bg-gray">
+<view class="container {{pageName === 'drinkSuc' ? 'bg-gradient' : 'bg-gray'}}">
     <header-view></header-view>
     <view class='body'>
         <view class='result-frame'>

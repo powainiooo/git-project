@@ -111,7 +111,7 @@
                                       :hideButton="actCheck(index,'picture')">
                                 <template slot="title">
                                     <h3>艺人照片</h3>
-                                    <p>尺寸为480px*230px的JPG格式图片</p>
+                                    <p>尺寸为710px*340px的JPG格式图片</p>
                                 </template>
                             </t-upload>
                         </div>

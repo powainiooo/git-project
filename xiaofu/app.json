@@ -1,6 +1,7 @@
 {
   "pages": [
      "pages/index/index",
+     "pages/drink/detail",
      "pages/order-ticket/order",
      "pages/order-drink/order",
      "pages/drink/index",
@@ -8,7 +9,6 @@
     "pages/member/member",
     "pages/index/detail",
     "pages/login/login",
-    "pages/drink/detail",
     "pages/error/error",
     "pages/sponsor/list",
     "pages/order-drink/detail",

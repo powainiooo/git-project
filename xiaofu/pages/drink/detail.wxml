@@ -49,6 +49,6 @@
     </view>
 </view>
 <!-- 画图 -->
-<canvas canvas-id="poster" style='width:750px; height:410px; background-color:#fff; position: fixed; top: -1000px; left: -1000px;' />
+<canvas canvas-id="poster" style='width:750px; height:410px; background-color:#fff; position: fixed; top: -10000px; left: -10000px; ' />
 <!-- 画分享图 -->
-<canvas canvas-id="posterShare" style='width:750px; height:510px; background-color:#fff; position: fixed; top:-1000px; left: -1000px;' />
+<canvas canvas-id="posterShare" style='width:750px; height:600px; background-color:#fff; position: fixed; top: -10000px; left: -10000px;' />

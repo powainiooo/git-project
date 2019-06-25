@@ -1,6 +1,10 @@
 @import '../../res/css/icons.wxss';
-.title-en{ font-size: 100rpx; font-family: 'Helve'; line-height: 0.9; background-color: #ffffff; padding: 40rpx; border-bottom: 1rpx solid #e5e5e5;}
-.title-cn{ font-size: 72rpx; font-weight: bold;  background-color: #ffffff; padding: 20rpx 40rpx; border-bottom: 1rpx solid #e5e5e5;}
+.bg-gradient2 { background: repeating-linear-gradient(200deg,#000000, #232961 50%, #232961 100%);}
+.bg-white { background-color: #ffffff;}
+.title-en{ font-size: 100rpx; font-family: 'Helve'; line-height: 0.9; padding: 40rpx; border-bottom: 1rpx solid #e5e5e5;}
+.title-cn{ font-size: 72rpx; font-weight: bold; padding: 20rpx 40rpx; border-bottom: 1rpx solid #e5e5e5;}
+.bg-gradient2 .title-en { border-bottom: 1rpx solid #0d1025; color: #ffffff;}
+.bg-gradient2 .title-cn { border-bottom: 1rpx solid #0d1025; color: #ffffff;}
 
 .order-frame{ width: 200%; display: flex; transition: transform 0.5s ease-in-out;}
 .order-frame-left{ transform:translateX(-50%);}

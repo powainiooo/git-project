@@ -34,7 +34,7 @@
                   hover-start-time="10"
                   data-id="{{item.id}}"
                   bindtap="gotoDetail">
-               <view class="img"><image src="{{imgSrc+item.cover}}" mode="aspectFill"></image></view>
+               <view class="img"><image src="{{imgSrc+item.cover}}" mode="widthFix"></image></view>
                <view class="title">
                   <image src="../../res/images/bottom4.png" mode="widthFix"></image>
                   <view class="name">

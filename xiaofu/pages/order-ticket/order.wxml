@@ -1,8 +1,10 @@
-<view class="container bg-gray" id="bodyFrame">
+<view class="container {{isMove ? 'bg-gradient' : 'bg-gray'}}" id="bodyFrame">
     <header-view showMenu="{{false}}"></header-view>
     <view class='body order-body' animation="{{indexAniData}}" wx:if="{{showTicketIndex}}">
-        <view class='title-en'><text>Order\nCenter</text></view>
-        <view class='title-cn'><text>订单中心</text></view>
+       <view class="{{isMove ? 'bg-gradient2' : 'bg-white'}}">
+          <view class='title-en'><text>Order\nCenter</text></view>
+          <view class='title-cn'><text>订单中心</text></view>
+       </view>
 
         <view class="order-frame {{isMove ? 'order-frame-left' : ''}}">
             <view class="order-list">
@@ -35,7 +37,7 @@
                       hover-start-time="10"
                       data-id="{{item.order_num}}"
                       bindtap="gotoDetail2">
-                   <view class="img"><image src="{{imgSrc+item.cover}}" mode="aspectFill"></image></view>
+                   <view class="img"><image src="{{imgSrc+item.cover}}" mode="widthFix"></image></view>
                    <view class="title">
                       <image src="../../res/images/bottom4.png" mode="widthFix"></image>
                       <view class="name">

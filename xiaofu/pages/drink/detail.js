@@ -178,7 +178,7 @@ Page({
 			//底部logo
 			ctx.drawImage('../../res/images/bottom2.png',0,265,750,145);
 			//名称
-			ctx.font = "bold 27px 'Helve'";
+			ctx.font = "normal bold 27px 'Helve'";
 			ctx.setFillStyle('#000');
 			ctx.setFontSize(26);
 			let len = gblen(data.drink_name),row = Math.ceil(len/14);
@@ -254,7 +254,7 @@ Page({
 			//右上角logo
 			ctx.drawImage('../../res/images/top3.png',0,offsetY,188,188);
 			//名称
-			ctx.font = "bold 27px 'Helve'";
+			ctx.font = "normal bold 27px 'Helve'";
 			ctx.setFillStyle('#000');
 			ctx.setFontSize(26);
 			let len = gblen(data.drink_name),row = Math.ceil(len/14);

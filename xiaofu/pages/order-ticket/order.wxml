@@ -22,7 +22,9 @@
                 </view>
                <!--无搜索结果  -->
                <view class='result-frame' wx:if="{{listData.length === 0}}">
-                  <view class='icons icon-cuowu'></view>
+                  <view class='icons icon-cuowu'>
+                     <view class="white"></view>
+                  </view>
                   <view><text class='hint-en'>Irrelevant \n Content</text></view>
                   <view class='hint-cn'>无相关内容</view>
                </view>
@@ -48,7 +50,9 @@
                 </view>
                <!--无搜索结果  -->
                <view class='result-frame' wx:if="{{listData2.length === 0}}">
-                  <view class='icons icon-cuowu'></view>
+                  <view class='icons icon-cuowu'>
+                     <view class="white"></view>
+                  </view>
                   <view><text class='hint-en'>Irrelevant \n Content</text></view>
                   <view class='hint-cn'>无相关内容</view>
                </view>

@@ -178,7 +178,7 @@ Page({
 			//底部logo
 			ctx.drawImage('../../res/images/bottom2.png',0,265,750,145);
 			//名称
-			ctx.font = "27px 'Helve'";
+			ctx.font = "bold 27px 'Helve'";
 			ctx.setFillStyle('#000');
 			ctx.setFontSize(26);
 			let len = gblen(data.drink_name),row = Math.ceil(len/14);
@@ -189,9 +189,10 @@ Page({
 			ctx.font = "24px 'Helve'";
 			ctx.setFillStyle('#000');
 			ctx.setFontSize(24);
-			let len2 = gblen(data.logo_pic),row2 = Math.ceil(len2/14);
+         let logo = `在 ${data.logo_pic} 使用`
+         let len2 = gblen(logo),row2 = Math.ceil(len2/14);
 			for(let i=0;i<row2;i++){
-				ctx.fillText(data.logo_pic.slice(i*14,i*14+14), 500, 40*(i+1) + row*40,230);
+				ctx.fillText(logo.slice(i*14,i*14+14), 500, 40*(i+1) + row*40,230);
 			}
 			//横线
 			ctx.beginPath();
@@ -248,12 +249,12 @@ Page({
 
 			ctx.drawImage(res[0].tempFilePath,0,offsetY,800,276);
 			//右边白色遮罩
-			ctx.setFillStyle('#f6f6f6');
+			ctx.setFillStyle('#ffffff');
 			ctx.fillRect(485, offsetY, 265, 410);
 			//右上角logo
 			ctx.drawImage('../../res/images/top3.png',0,offsetY,188,188);
 			//名称
-			ctx.font = "27px 'Helve'";
+			ctx.font = "bold 27px 'Helve'";
 			ctx.setFillStyle('#000');
 			ctx.setFontSize(26);
 			let len = gblen(data.drink_name),row = Math.ceil(len/14);
@@ -264,14 +265,15 @@ Page({
 			ctx.font = "24px 'Helve'";
 			ctx.setFillStyle('#000');
 			ctx.setFontSize(24);
-			let len2 = gblen(data.logo_pic),row2 = Math.ceil(len2/14);
+			let logo = `在 ${data.logo_pic} 使用`
+			let len2 = gblen(logo),row2 = Math.ceil(len2/14);
 			for(let i=0;i<row2;i++){
-				ctx.fillText(data.logo_pic.slice(i*14,i*14+14), 500, 40*(i+1) + row*40 + offsetY,230);
+				ctx.fillText(logo.slice(i*14,i*14+14), 500, 40*(i+1) + row*40 + offsetY,230);
 			}
 			//横线
 			ctx.beginPath();
-			ctx.moveTo(500,40*row+20 + 40*row2);
-			ctx.lineTo(730,40*row+20 + 40*row2);
+			ctx.moveTo(500,40*row+20 + 40*row2 + offsetY);
+			ctx.lineTo(730,40*row+20 + 40*row2 + offsetY);
 			ctx.stroke();
 
 			//二维码

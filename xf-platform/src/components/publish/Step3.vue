@@ -105,7 +105,7 @@
                         <div class="pl50 pt20 pb20 pr" style="border-bottom: 3px solid #e5e5e5;">
                             <t-upload v-model="item.imgUrl"
                                       cropper
-                                      :fixedNumber="[480,230]"
+                                      :fixedNumber="[710,340]"
                                       title="艺人照片"
                                       :redButton="isEditor ? errorData.person_desc.length == 0 ? false : errorData.person_desc[index].picture != '' : false"
                                       :hideButton="actCheck(index,'picture')">

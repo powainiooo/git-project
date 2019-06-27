@@ -1,11 +1,13 @@
 @import '../../res/css/icons.wxss';
 
 .result-frame{ margin: 200rpx 50rpx;}
-.result-frame .icons{ font-size: 200rpx; color: #002aac; display: block; margin-bottom: 60rpx;}
+.result-frame .icons{ font-size: 200rpx; color: #002aac; display: block; position: relative; margin-bottom: 60rpx; z-index: 5;}
+.result-frame .white { width: 120rpx; height: 120rpx; background-color: #ffffff; position: absolute; top: 40rpx; left: 45rpx; z-index: -1}
 .result-frame .hint-en{ font-size: 100rpx; font-family: 'Helve'; line-height: 0.9;}
 .bg-gradient .result-frame .hint-en{ color: #ffffff}
 .result-frame .hint-cn{ font-size: 72rpx; margin-top: 50rpx; font-weight: bold;}
 .bg-gradient .result-frame .hint-cn{ color: #ffffff}
+
 
 .result-frame .hint-frame{ margin: 120rpx -50rpx 0 -50rpx;}
 .bg-gradient .result-frame .hint-section{ color: #ffffff}

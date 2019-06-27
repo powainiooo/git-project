@@ -4,7 +4,9 @@
     <view class='body'>
         <view class='result-frame'>
             <view class="icon-auth"  wx:if="{{pageName == 'login'}}"></view>
-            <view class='icons icon-chenggong' wx:if="{{pageName != 'login'}}"></view>
+            <view class='icons icon-chenggong' wx:if="{{pageName != 'login'}}">
+               <view class="white"></view>
+            </view>
             <view><text class='hint-en'>{{titleEn}}</text></view>
             <view class='hint-cn'>{{titleCn}}</view>
             <!-- 票务支付成功-->

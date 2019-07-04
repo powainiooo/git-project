@@ -13,6 +13,11 @@ export default new Router({
          path: '/home',
          name: 'home',
          component: () => import('./views/Home.vue')
+      },
+      {
+         path: '/pics',
+         name: 'pics',
+         component: () => import('./views/pics.vue')
       }
    ]
 })

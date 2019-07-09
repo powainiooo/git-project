@@ -204,7 +204,7 @@ export default {
                   if (data.status === 1) {
                      self.$tModal.warn({
                         title: '提交成功！',
-                        content: '后台将在3个工作日内完成活动审核。',
+                        content: '后台将在3个工作日内完成退款申请审核，<br>退款申请是否通过审核，请自行登录查询结果。',
                         onOk () {
                            self.$emit('switch-page', 'table')
                         }

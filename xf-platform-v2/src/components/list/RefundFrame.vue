@@ -56,7 +56,7 @@
          </thead>
          <tbody>
          <tr v-for="item in listData">
-            <td><input type="radio" class="radio" :value="item.id" v-model="ids" /></td>
+            <td><input type="radio" class="radio" :value="item.id" v-model="condition.ids" /></td>
             <td>{{item.sele}}</td>
             <td>{{fmt(item.order_time)}}</td>
             <td>{{item.name}}</td>
@@ -78,16 +78,16 @@
       <ul class="radio-list">
          <li v-for="i in reasonSelects" :key="i.value">
             <div>
-               <input type="radio" class="radio" :value="i.value" />
+               <input type="radio" class="radio" :value="i.value" v-model="condition.reasonSelects" />
                <span>{{i.name}}</span>
             </div>
          </li>
          <li style="width: 100%">
             <div>
-               <input type="radio" class="radio" value="4" />
+               <input type="radio" class="radio" :value="4" v-model="condition.reasonSelects" />
                <span>其它原因</span>
             </div>
-            <textarea rows="3" class="text" style="width: 300px;" placeholder="在此填写其它退款原因" v-model="textSelects"></textarea>
+            <textarea rows="3" class="text" style="width: 300px;" placeholder="在此填写其它退款原因" v-model="condition.textSelects"></textarea>
          </li>
       </ul>
    </div>
@@ -97,16 +97,16 @@
       <ul class="radio-list">
          <li v-for="i in reasonSelects" :key="i.value">
             <div>
-               <input type="radio" class="radio" :value="i.value" />
+               <input type="radio" class="radio" :value="i.value" v-model="condition.reasonAll" />
                <span>{{i.name}}</span>
             </div>
          </li>
          <li style="width: 100%">
             <div>
-               <input type="radio" class="radio" value="4" />
+               <input type="radio" class="radio" :value="5" v-model="condition.reasonAll" />
                <span>其它原因</span>
             </div>
-            <textarea rows="3" class="text" style="width: 300px;" placeholder="在此填写其它退款原因" v-model="textAll"></textarea>
+            <textarea rows="3" class="text" style="width: 300px;" placeholder="在此填写其它退款原因" v-model="condition.textAll"></textarea>
          </li>
       </ul>
       <h3 class="title" style="margin-top: 50px;"><span>3</span>通知凭证</h3>
@@ -186,16 +186,35 @@ export default {
             content:'请仔细核查申请退款内容，<br/>若因活动方原因导致退款行为，且未通知到位退款申请将被驳回。',
             onOk(){
                let obj = {}
-               obj.param1 = this.condition.refundType
+               obj.goods_id = this.itemData.id
+               obj.act_name = this.itemData.activity
+               obj.goods_name = this.itemData.goods_name
+               obj.re_type = this.condition.refundType
                if (this.condition.refundType === 1) { // 个别退款
-                  obj.param2 = this.condition.reasonSelects
-                  obj.ids = this.condition.ids
-                  obj.text = this.condition.textSelects
+                  obj.re_id = this.condition.reasonSelects
+                  obj.orders = this.condition.ids
+                  obj.reason = this.condition.textSelects
                } else if (this.condition.refundType === 2) { // 全部退款
-                  obj.param2 = this.condition.reasonSelects
-                  obj.text = this.condition.textAll
-                  obj.url = this.condition.infor
+                  obj.re_id = this.condition.reasonAll
+                  obj.reason = this.condition.textAll
+                  obj.notify_img = this.condition.infor
                }
+               this.$ajax.get('/client/api/refund_check',obj).then(res=>{
+                  let data = res.data
+                  if (data.status === 1) {
+                     self.$tModal.warn({
+                        title: '提交成功！',
+                        content: '后台将在3个工作日内完成活动审核。',
+                        onOk () {
+                           self.$emit('switch-page', 'table')
+                        }
+                     })
+                  } else {
+                     self.$tModal.warn({
+                        title: data.msg
+                     })
+                  }
+               })
             }
          })
       }

@@ -1,6 +1,6 @@
 <style scoped>
 .refund-frame { border-top: 1px solid #e5e5e5; margin: 0 20px;}
-.refund-frame .title{ font-size: 18px; color: #000000; font-weight: bold; border-bottom: 1px solid #e5e5e5; padding-left: 50px;}
+.refund-frame .title{ font-size: 18px; color: #000000; border-bottom: 1px solid #e5e5e5; padding-left: 50px;}
 .refund-frame .title span{ font-size: 66px; margin-right: 10px; font-family: 'Helve';}
 .refund-frame .radio-list { display: flex; align-items: center; flex-wrap: wrap; margin: 30px 50px;}
 .refund-frame .radio-list li{ margin-right: 25px; margin-bottom: 20px; font-size: 16px; color: #000000;}
@@ -74,7 +74,17 @@
          </tbody>
       </table>
       <Page :total="allnums" @on-change="changePage" />
-      <h3 class="title" style="margin-top: 80px;"><span>2</span>退款原因</h3>
+      <div class="title" style="margin-top: 80px;">
+         <h3><span>2</span>退款原因</h3>
+         <t-ques width="290"
+                 redbg
+                 v-if="isChecking && errorData.chk_reason === '2'"
+                 style="z-index: 410;">
+            <ul class="list1">
+               <li>{{errorData.reason_msg}}</li>
+            </ul>
+         </t-ques>
+      </div>
       <ul class="radio-list">
          <li v-for="i in reasonSelects" :key="i.value">
             <div>
@@ -93,7 +103,17 @@
    </div>
    <!-- 全部退款 -->
    <div class="all" v-if="condition.refundType === 2">
-      <h3 class="title" style="margin-top: 80px;"><span>2</span>退款原因</h3>
+      <div class="title" style="margin-top: 80px;">
+         <h3><span>2</span>退款原因</h3>
+         <t-ques width="290"
+                 redbg
+                 v-if="isChecking && errorData.chk_reason === '2'"
+                 style="z-index: 410;">
+            <ul class="list1">
+               <li>{{errorData.reason_msg}}</li>
+            </ul>
+         </t-ques>
+      </div>
       <ul class="radio-list">
          <li v-for="i in reasonSelects" :key="i.value">
             <div>
@@ -109,7 +129,17 @@
             <textarea rows="3" class="text" style="width: 300px;" placeholder="在此填写其它退款原因" v-model="condition.textAll"></textarea>
          </li>
       </ul>
-      <h3 class="title" style="margin-top: 50px;"><span>3</span>通知凭证</h3>
+      <div class="title" style="margin-top: 50px;">
+         <h3><span>3</span>通知凭证</h3>
+         <t-ques width="290"
+                 redbg
+                 v-if="isChecking && errorData. chk_notify === '2'"
+                 style="z-index: 410;">
+            <ul class="list1">
+               <li>{{errorData.notify_msg}}</li>
+            </ul>
+         </t-ques>
+      </div>
       <div style="margin: 30px 50px;">
          <t-upload v-model="condition.infor">
             <template slot="title">
@@ -162,7 +192,12 @@ export default {
          },
          allnums: 0,
          page: 1,
+         isChecking: false,
+         errorData: {}
       }
+   },
+   mounted () {
+
    },
    methods: {
       getListData(){
@@ -177,6 +212,23 @@ export default {
          }).then(res=>{
             self.listData = res.data.data.data.list;
             self.allnums = parseInt(res.data.data.data.nums);
+         })
+      },
+      getErrorData(){
+         this.isChecking = true
+         this.$ajax.get('/client/api/refund_info',{
+            params:{
+               goods_id:this.itemData.id
+            }
+         }).then(res=>{
+            let data = res.data
+            if (data.status === 1) {
+               this.errorData = res.data.data
+            } else {
+               this.$tModal.warn({
+                  title: data.msg
+               })
+            }
          })
       },
       doSubmit () {

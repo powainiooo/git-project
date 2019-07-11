@@ -48,6 +48,7 @@
             </transition>
             <transition enter-active-class="animated anim-detail slideInRight" leave-active-class="animated anim-detail slideOutRight">
             <detail-frame v-if="showDetail"
+                          ref="detailFrame"
                           @close="doCloseDetail"
                           @change="itemChange"
                           :itemData="detailData"
@@ -105,6 +106,7 @@ export default {
          return Promise.reject(error)
       })
       this.getListData()
+      this.getNoticeList()
    },
    methods: {
       dosearch (keyword) {
@@ -116,6 +118,32 @@ export default {
          if (data.status !== 3) {
             this.touchIndex = index
          }
+      },
+      getNoticeList () {
+         let self = this
+         this.$ajax.get('/client/api/notify_list').then(res => {
+            let data = res.data
+            for (let i of data.data) {
+               let func = i.checked === '2' ? 'success' : 'error'
+               let name = i.checked === '2' ? 'table' : 'refund-error'
+               this.$Notice[func]({
+                  title: '通知',
+                  duration: 0,
+                  render: h => {
+                     return h('span',{
+                        style: {
+                           cursor: 'pointer'
+                        },
+                        on: {
+                           click () {
+                              self.gotoDetail2(i.goods_id, name)
+                           }
+                        }
+                     }, i.content)
+                  }
+               })
+            }
+         })
       },
       getListData () {
          let self = this
@@ -147,6 +175,20 @@ export default {
                this.$store.commit('doShowGlobalMenuDetail', false)
             }, 200)
          }
+      },
+      gotoDetail2 (id, name) {
+         this.$ajax.get('/client/api/activity_info', {
+            params: {
+               aid: id
+            }
+         }).then(res => {
+            this.detailData = res.data.data
+            this.showDetail = true
+            this.$store.commit('doShowGlobalMenuDetail', false)
+            this.$nextTick(() => {
+               this.$refs.detailFrame.switchPage(name)
+            })
+         })
       },
       pageScroll (e) {
          this.frameST = e.target.scrollTop

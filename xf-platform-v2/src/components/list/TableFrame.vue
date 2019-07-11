@@ -29,7 +29,9 @@
                         <li><span>3</span>由于微信消息通知限制，只可在用户已购票后的7日内发送消息，超过7日的用户则无法收取该消息。</li>
                     </ul>
                 </t-ques>
-               <t-button size="min" style="width: 90px; margin-left: 30px;" @dotap="doRefund">退款申请</t-button>
+               <t-button size="min" style="width: 90px; margin-left: 30px;" @dotap="gotoRefund" v-if="itemData.refund_chk === 1">退款申请</t-button>
+               <t-button size="min" style="width: 130px; margin-left: 30px;" v-if="itemData.refund_chk === 3">退款申请 审核中</t-button>
+               <t-button size="min" style="width: 130px; margin-left: 30px;" @dotap="gotoRefundError" v-if="itemData.refund_chk === 4" red>退款申请 审核不通过</t-button>
             </div>
             <div>
                 <Select style="width:130px; margin-right: 20px;" v-model="selectType">
@@ -73,7 +75,7 @@
                         <span v-if="item.status === 3">已退款</span>
                     </td>
                     <td>
-                        <span style="cursor: pointer; color: #2d8cf0;" @click="doRefund(item.id)" v-if="item.status !== 3 && item.price !== 0 && itemData.checked === 0">退款</span>
+                        <span style="cursor: pointer; color: #2d8cf0;" @click="doRefund(item.id)" v-if="item.is_refund !== '0' && item.status !== 3 && item.price !== 0 && itemData.checked === 0">退款</span>
                     </td>
                 </tr>
                 </tbody>
@@ -124,22 +126,25 @@ export default {
       },
       doRefund (id) {
          let self = this
-         // self.$tModal.confirm({
-         //    title: '是否确认退款?',
-         //    content: '确认退款之后款项将原路返回到该用户账上，请谨慎操作。',
-         //    onOk () {
-         //       self.$ajax.post('/client/api/order_refund', qs.stringify({ id: id })).then(res => {
-         //          let data = res.data
-         //          if (data.status === 1) {
-         //             self.$Message.success('退款成功')
-         //             self.getListData()
-         //             self.$emit('change', self.itemData.id)
-         //          } else {
-         //             self.$Message.warning(data.msg)
-         //          }
-         //       })
-         //    }
-         // })
+         self.$tModal.confirm({
+            title: '是否确认退款?',
+            content: '确认退款之后款项将原路返回到该用户账上，请谨慎操作。',
+            onOk () {
+               self.$ajax.post('/client/api/order_refund', qs.stringify({ id: id })).then(res => {
+                  let data = res.data
+                  if (data.status === 1) {
+                     self.$Message.success('退款成功')
+                     self.getListData()
+                     self.$emit('change', self.itemData.id)
+                  } else {
+                     self.$Message.warning(data.msg)
+                  }
+               })
+            }
+         })
+      },
+      gotoRefund () {
+         let self = this
          self.$tModal.confirm({
             title: '是否确认申请退款?',
             content: '为保障购票者的权益，小夫有票将开启对活动方的信用记录，<br/>若因活动方原因导致多次活动退款，将影响到活动方的信用记录。<br/>请认真填写退款信息，此举措将影响到您的信用记录。',
@@ -147,6 +152,9 @@ export default {
                self.$emit('switch-page', 'refund')
             }
          })
+      },
+      gotoRefundError () {
+         this.$emit('switch-page', 'refund-error')
       },
       changePage (val) {
          this.page = val
@@ -186,7 +194,7 @@ export default {
                         }
                      }).then(res => {
                         let data = res.data
-                        if (data.status === '1') {
+                        if (data.status === 1) {
                            self.$Message.success(data.msg)
                            self.isInfor = true
                         } else {

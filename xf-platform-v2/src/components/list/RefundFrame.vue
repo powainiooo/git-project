@@ -1,6 +1,7 @@
 <style scoped>
 .refund-frame { border-top: 1px solid #e5e5e5; margin: 0 20px;}
 .refund-frame .title{ font-size: 18px; color: #000000; border-bottom: 1px solid #e5e5e5; padding-left: 50px;}
+.refund-frame .title h3 { display: inline-block; margin-right: 15px;}
 .refund-frame .title span{ font-size: 66px; margin-right: 10px; font-family: 'Helve';}
 .refund-frame .radio-list { display: flex; align-items: center; flex-wrap: wrap; margin: 30px 50px;}
 .refund-frame .radio-list li{ margin-right: 25px; margin-bottom: 20px; font-size: 16px; color: #000000;}
@@ -23,14 +24,14 @@
    <ul class="radio-list">
       <li v-for="i in refundType" :key="i.value">
          <div>
-            <input type="radio" class="radio" :value="i.value" v-model="condition.refundType" />
+            <input type="radio" class="radio" :value="i.value" v-model="condition.refundType" :disabled="isChecking && errorData.chk_type === '1'"/>
             <span>{{i.name}}</span>
          </div>
       </li>
    </ul>
    <!-- 个别退款 -->
    <div class="selects" v-if="condition.refundType === 1">
-      <div style="display: flex; align-items: center; margin-left: 50px; margin-bottom: 20px;">
+      <div style="display: flex; align-items: center; margin:-30px 0 20px 50px;">
          <Select style="width:130px; margin-right: 20px;" v-model="selectType">
             <Option value="0">全部</Option>
             <Option v-for="(item,index) in itemData.classes" :key="index" :value="item.select">{{item.select}}</Option>
@@ -56,7 +57,7 @@
          </thead>
          <tbody>
          <tr v-for="item in listData">
-            <td><input type="radio" class="radio" :value="item.id" v-model="condition.ids" /></td>
+            <td><input type="checkbox" class="radio" :value="item.id" v-model="condition.ids" :disabled="isChecking" /></td>
             <td>{{item.sele}}</td>
             <td>{{fmt(item.order_time)}}</td>
             <td>{{item.name}}</td>
@@ -88,16 +89,16 @@
       <ul class="radio-list">
          <li v-for="i in reasonSelects" :key="i.value">
             <div>
-               <input type="radio" class="radio" :value="i.value" v-model="condition.reasonSelects" />
+               <input type="radio" class="radio" :value="i.value" v-model="condition.reasonSelects" :disabled="isChecking && errorData.chk_reason === '1'" />
                <span>{{i.name}}</span>
             </div>
          </li>
          <li style="width: 100%">
             <div>
-               <input type="radio" class="radio" :value="4" v-model="condition.reasonSelects" />
+               <input type="radio" class="radio" :value="4" v-model="condition.reasonSelects" :disabled="isChecking && errorData.chk_reason === '1'" />
                <span>其它原因</span>
             </div>
-            <textarea rows="3" class="text" style="width: 300px;" placeholder="在此填写其它退款原因" v-model="condition.textSelects"></textarea>
+            <textarea rows="3" class="text" style="width: 300px;" placeholder="在此填写其它退款原因" v-model="condition.textSelects" :readonly="isChecking && errorData.chk_reason === '1'"></textarea>
          </li>
       </ul>
    </div>
@@ -117,16 +118,16 @@
       <ul class="radio-list">
          <li v-for="i in reasonSelects" :key="i.value">
             <div>
-               <input type="radio" class="radio" :value="i.value" v-model="condition.reasonAll" />
+               <input type="radio" class="radio" :value="i.value" v-model="condition.reasonAll" :disabled="isChecking && errorData.chk_reason === '1'" />
                <span>{{i.name}}</span>
             </div>
          </li>
          <li style="width: 100%">
             <div>
-               <input type="radio" class="radio" :value="5" v-model="condition.reasonAll" />
+               <input type="radio" class="radio" :value="5" v-model="condition.reasonAll" :disabled="isChecking && errorData.chk_reason === '1'" />
                <span>其它原因</span>
             </div>
-            <textarea rows="3" class="text" style="width: 300px;" placeholder="在此填写其它退款原因" v-model="condition.textAll"></textarea>
+            <textarea rows="3" class="text" style="width: 300px;" placeholder="在此填写其它退款原因" v-model="condition.textAll" :readonly="isChecking && errorData.chk_reason === '1'"></textarea>
          </li>
       </ul>
       <div class="title" style="margin-top: 50px;">
@@ -158,6 +159,8 @@
 import TButton from '@/components/common/TButton.vue'
 import TQues from '@/components/common/TQues.vue'
 import TUpload from '@/components/common/TUpload.vue'
+import { formatDate } from '@/assets/js/date.js'
+import qs from 'qs'
 export default {
    name: 'App',
    props:['itemData'],
@@ -190,18 +193,25 @@ export default {
             ids: [],
             infor: ''
          },
+         listData: [],
          allnums: 0,
          page: 1,
          isChecking: false,
          errorData: {}
       }
    },
+   watch: {
+      'condition.refundType' (val) {
+         if (val === 1) {
+            this.getListData()
+         }
+      }
+   },
    mounted () {
-
+      this.getErrorData()
    },
    methods: {
       getListData(){
-         let self = this;
          this.$ajax.get('/client/api/act_order',{
             params:{
                id:this.itemData.id,
@@ -210,9 +220,13 @@ export default {
                page:this.page
             }
          }).then(res=>{
-            self.listData = res.data.data.data.list;
-            self.allnums = parseInt(res.data.data.data.nums);
+            this.listData = res.data.data.data.list;
+            this.allnums = parseInt(res.data.data.data.nums);
          })
+      },
+      changePage (val) {
+         this.page = val
+         this.getListData()
       },
       getErrorData(){
          this.isChecking = true
@@ -221,13 +235,18 @@ export default {
                goods_id:this.itemData.id
             }
          }).then(res=>{
-            let data = res.data
-            if (data.status === 1) {
-               this.errorData = res.data.data
-            } else {
-               this.$tModal.warn({
-                  title: data.msg
-               })
+            let data = res.data.data
+            this.errorData = data
+            this.condition.refundType = parseInt(data.re_type)
+            if (this.condition.refundType === 1) { // 个别退款
+               this.condition.reasonSelects = parseInt(data.re_id)
+               this.condition.ids = data.orders.split(',')
+               console.log(this.condition.ids)
+               this.condition.textSelects = data.reason
+            } else if (this.condition.refundType === 2) { // 全部退款
+               this.condition.reasonAll = parseInt(data.re_id)
+               this.condition.textAll = data.reason
+               this.condition.infor = this.notify_img
             }
          })
       },
@@ -238,20 +257,20 @@ export default {
             content:'请仔细核查申请退款内容，<br/>若因活动方原因导致退款行为，且未通知到位退款申请将被驳回。',
             onOk(){
                let obj = {}
-               obj.goods_id = this.itemData.id
-               obj.act_name = this.itemData.activity
-               obj.goods_name = this.itemData.goods_name
-               obj.re_type = this.condition.refundType
-               if (this.condition.refundType === 1) { // 个别退款
-                  obj.re_id = this.condition.reasonSelects
-                  obj.orders = this.condition.ids
-                  obj.reason = this.condition.textSelects
-               } else if (this.condition.refundType === 2) { // 全部退款
-                  obj.re_id = this.condition.reasonAll
-                  obj.reason = this.condition.textAll
-                  obj.notify_img = this.condition.infor
+               obj.goods_id = self.itemData.id
+               obj.act_name = self.itemData.activity
+               obj.goods_name = self.itemData.goods_name
+               obj.re_type = self.condition.refundType
+               if (self.condition.refundType === 1) { // 个别退款
+                  obj.re_id = self.condition.reasonSelects
+                  obj.orders = self.condition.ids.join(',')
+                  obj.reason = self.condition.textSelects
+               } else if (self.condition.refundType === 2) { // 全部退款
+                  obj.re_id = self.condition.reasonAll
+                  obj.reason = self.condition.textAll
+                  obj.notify_img = self.condition.infor
                }
-               this.$ajax.get('/client/api/refund_check',obj).then(res=>{
+               self.$ajax.post('/client/api/refund_check',qs.stringify(obj)).then(res=>{
                   let data = res.data
                   if (data.status === 1) {
                      self.$tModal.warn({
@@ -259,6 +278,7 @@ export default {
                         content: '后台将在3个工作日内完成退款申请审核，<br>退款申请是否通过审核，请自行登录查询结果。',
                         onOk () {
                            self.$emit('switch-page', 'table')
+                           self.$emit('change', self.itemData.id)
                         }
                      })
                   } else {
@@ -269,6 +289,10 @@ export default {
                })
             }
          })
+      },
+      fmt (time) {
+         let date = new Date(parseInt(time) * 1000)
+         return formatDate(date, 'yyyy-MM-dd')
       }
    }
 }

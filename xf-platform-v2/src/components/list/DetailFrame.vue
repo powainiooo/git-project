@@ -29,7 +29,7 @@
    <info-frame v-if="showItem === 'info'" @openstatistics="showItem = 'chart'" :itemData="itemData" :fileurl="fileurl"  @change="change"></info-frame>
    <chart-frame v-if="showItem === 'chart'" :id="itemData.id"></chart-frame>
    <table-frame v-if="showItem === 'table'" :itemData="itemData" @change="change" @switch-page="switchPage"></table-frame>
-   <refund-frame v-if="showItem === 'refund'" :itemData="itemData" @change="change" @switch-page="switchPage"></refund-frame>
+   <refund-frame v-if="showItem === 'refund'" :itemData="itemData" @change="change" @switch-page="switchPage" ref="refund"></refund-frame>
 </div>
 </template>
 
@@ -44,7 +44,7 @@ export default {
    props:['itemData','fileurl'],
    data(){
       return{
-         showItem: 'refund',
+         showItem: 'info',
          showChart:true
       }
    },
@@ -53,7 +53,14 @@ export default {
          this.$emit('change',id)
       },
       switchPage (name) {
-         this.showItem = name
+         if (name === 'refund-error') {
+            this.showItem = 'refund'
+            this.$nextTick(() => {
+               this.$refs.refund.getErrorData()
+            })
+         } else {
+            this.showItem = name
+         }
       }
    }
 }

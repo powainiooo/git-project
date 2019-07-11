@@ -96,7 +96,7 @@
                     <div>/{{getAllnums(selectType)}}</div>
                 </div>
             </div>
-            <div class="status status3" v-if="itemdata.status === '0'">
+            <div class="status status3" v-if="itemdata.status === 0">
                 <div class="top">
                     <p>审核中<br>Under review<br>审查中</p>
                 </div>
@@ -136,8 +136,8 @@
                 </div>
             </div>
             <div class="line-mid" v-if="itemdata.status !== ''">
-                <img src="@/assets/img/ticket-middle.png" style="display: block;" v-if="itemdata.status === '1' || itemdata.status === '2' || itemdata.status === '4'">
-                <img src="@/assets/img/ticket-middle2.png" style="display: block;" v-if="itemdata.status === '3' || itemdata.status === '0' || itemdata.status === '5'">
+                <img src="@/assets/img/ticket-middle.png" style="display: block;" v-if="itemdata.status === 1 || itemdata.status === 2 || itemdata.status === 4">
+                <img src="@/assets/img/ticket-middle2.png" style="display: block;" v-if="itemdata.status === 3 || itemdata.status === 0 || itemdata.status === 5">
             </div>
             <div class="line-mid" v-if="itemdata.status === ''"><img src="@/assets/img/ticket-top.png" style="display: block;"></div>
             <div class="info-frame">
@@ -167,7 +167,7 @@ export default {
    props: ['itemdata', 'fileurl'],
    data () {
       return {
-         selectType: '0'
+         selectType: 0
       }
    },
    methods: {

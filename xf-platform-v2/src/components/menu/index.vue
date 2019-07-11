@@ -1,5 +1,5 @@
 <style>
-    .n-menu{ position: fixed; top: 0; right: 0; z-index: 1700;}
+    .n-menu{ position: fixed; top: 0; right: 0; z-index: 1010;}
     .n-menu .btn{ font-size: 32px; color: #ffffff; margin-top: 6px; display: block;}
     .n-menu .btn2{ font-size: 40px; color: #0129ac;}
     .n-menu .btn2 .ivu-icon{ display: block;}

@@ -75,7 +75,7 @@
                         <span v-if="item.status === 3">已退款</span>
                     </td>
                     <td>
-                        <span style="cursor: pointer; color: #2d8cf0;" @click="doRefund(item.id)" v-if="item.is_refund !== '0' && item.status !== 3 && item.price !== 0 && itemData.checked === 0">退款</span>
+                        <span style="cursor: pointer; color: #2d8cf0;" @click="doRefund(item.id)" v-if="item.is_refund !== '0' && item.status !== 3 && item.price !== 0 && item.is_check === '0'">退款</span>
                     </td>
                 </tr>
                 </tbody>

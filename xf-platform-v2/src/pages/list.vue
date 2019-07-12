@@ -126,8 +126,9 @@ export default {
             for (let i of data.data) {
                let func = i.checked === '2' ? 'success' : 'error'
                let name = i.checked === '2' ? 'table' : 'refund-error'
+               let title = i.checked === '2' ? '退款申请审核通过' : '退款申请审核不通过'
                this.$Notice[func]({
-                  title: '通知',
+                  title: title,
                   duration: 0,
                   render: h => {
                      return h('span',{

@@ -30,7 +30,7 @@
             </div>
         </div>
         <div class="btn" v-if="value !== ''">
-            <t-button @dotap="doAdd" size="min" v-if="!hideButton" :red="false">重新上传</t-button>
+            <t-button @dotap="doAdd" size="min" v-if="!hideButton" :red="redButton">重新上传</t-button>
         </div>
         <input type="file" ref="file" @change="fileChange" accept="image/gif,image/jpeg,image/jpg,image/png,image/svg">
 

@@ -215,7 +215,7 @@ export default {
       }
    },
    mounted () {
-      this.getErrorData()
+      // this.getErrorData()
    },
    methods: {
       getListData(){
@@ -252,12 +252,18 @@ export default {
             } else if (this.condition.refundType === 2) { // 全部退款
                this.condition.reasonAll = parseInt(data.re_id)
                this.condition.textAll = data.reason
-               this.condition.infor = this.fileurl + this.notify_img
+               this.condition.infor = this.fileurl + data.notify_img
             }
          })
       },
       doSubmit () {
          let self = this
+         if (self.condition.infor === '') {
+            self.$tModal.warn({
+               title: '请上传凭证'
+            })
+            return
+         }
          self.$tModal.confirm({
             title:'是否提交退款申请？',
             content:'请仔细核查申请退款内容，<br/>若因活动方原因导致退款行为，且未通知到位退款申请将被驳回。',

@@ -19,16 +19,26 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="vue-test.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="vue-test.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vue-test.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="470">
-              <caret line="123" column="10" lean-forward="true" selection-start-line="123" selection-start-column="10" selection-end-line="123" selection-end-column="10" />
+            <state relative-caret-position="500">
+              <caret line="123" column="10" lean-forward="false" selection-start-line="123" selection-start-column="10" selection-end-line="123" selection-end-column="10" />
               <folding>
                 <element signature="e#663#793#0" expanded="false" />
                 <element signature="e#819#1057#0" expanded="false" />
                 <element signature="e#1917#2198#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="JS-Array.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/JS-Array.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2232">
+              <caret line="105" column="42" lean-forward="false" selection-start-line="105" selection-start-column="33" selection-end-line="105" selection-end-column="42" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -56,7 +66,7 @@
       <file leaf-file-name="empty.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/empty.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
+            <state relative-caret-position="408">
               <caret line="17" column="23" lean-forward="false" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="23" />
               <folding />
             </state>
@@ -176,8 +186,8 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -316,11 +326,12 @@
       <workItem from="1560902542396" duration="1643000" />
       <workItem from="1560905281726" duration="3009000" />
       <workItem from="1562117515084" duration="8304000" />
+      <workItem from="1562915100215" duration="215000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="120796000" />
+    <option name="totallyTimeSpent" value="121011000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
@@ -661,13 +672,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/JS-Array.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="24">
-          <caret line="55" column="12" lean-forward="false" selection-start-line="55" selection-start-column="12" selection-end-line="57" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/img-srcset-sizes.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="96">
@@ -708,7 +712,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/empty.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
+        <state relative-caret-position="408">
           <caret line="17" column="23" lean-forward="false" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="23" />
           <folding />
         </state>
@@ -716,13 +720,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vue-test.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="470">
-          <caret line="123" column="10" lean-forward="true" selection-start-line="123" selection-start-column="10" selection-end-line="123" selection-end-column="10" />
+        <state relative-caret-position="500">
+          <caret line="123" column="10" lean-forward="false" selection-start-line="123" selection-start-column="10" selection-end-line="123" selection-end-column="10" />
           <folding>
             <element signature="e#663#793#0" expanded="false" />
             <element signature="e#819#1057#0" expanded="false" />
             <element signature="e#1917#2198#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/JS-Array.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2232">
+          <caret line="105" column="42" lean-forward="false" selection-start-line="105" selection-start-column="33" selection-end-line="105" selection-end-column="42" />
+          <folding />
         </state>
       </provider>
     </entry>

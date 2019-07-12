@@ -142,7 +142,9 @@
          </t-ques>
       </div>
       <div style="margin: 30px 50px;">
-         <t-upload v-model="condition.infor">
+         <t-upload v-model="condition.infor"
+                   :redButton="isChecking && errorData.chk_notify === '2'"
+                   :hideButton="isChecking && errorData.chk_notify === '1'">
             <template slot="title">
             <p>因活动方原因导致退款行为，活动方已通知到位方可提交退款申请，<br/>需提供通知凭证（如推文告知用户），若未通知到位退款申请将驳回。</p>
             </template>
@@ -207,6 +209,11 @@ export default {
          }
       }
    },
+   computed: {
+      fileurl () {
+         return this.$store.state.fileurl
+      }
+   },
    mounted () {
       this.getErrorData()
    },
@@ -241,12 +248,11 @@ export default {
             if (this.condition.refundType === 1) { // 个别退款
                this.condition.reasonSelects = parseInt(data.re_id)
                this.condition.ids = data.orders.split(',')
-               console.log(this.condition.ids)
                this.condition.textSelects = data.reason
             } else if (this.condition.refundType === 2) { // 全部退款
                this.condition.reasonAll = parseInt(data.re_id)
                this.condition.textAll = data.reason
-               this.condition.infor = this.notify_img
+               this.condition.infor = this.fileurl + this.notify_img
             }
          })
       },

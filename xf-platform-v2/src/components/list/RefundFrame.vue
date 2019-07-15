@@ -116,7 +116,7 @@
          </t-ques>
       </div>
       <ul class="radio-list">
-         <li v-for="i in reasonSelects" :key="i.value">
+         <li v-for="i in reasonAll" :key="i.value">
             <div>
                <input type="radio" class="radio" :value="i.value" v-model="condition.reasonAll" :disabled="isChecking && errorData.chk_reason === '1'" />
                <span>{{i.name}}</span>
@@ -187,7 +187,7 @@ export default {
          keyword: '',
          selectType: '0',
          condition: {
-            refundType: 2,
+            refundType: 1,
             reasonSelects: 1,
             textSelects: '',
             reasonAll: 1,
@@ -216,6 +216,7 @@ export default {
    },
    mounted () {
       // this.getErrorData()
+      this.getListData()
    },
    methods: {
       getListData(){
@@ -258,7 +259,7 @@ export default {
       },
       doSubmit () {
          let self = this
-         if (self.condition.infor === '') {
+         if (self.condition.refundType === 2 && self.condition.infor === '') {
             self.$tModal.warn({
                title: '请上传凭证'
             })

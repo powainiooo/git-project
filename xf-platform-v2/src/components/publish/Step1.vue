@@ -69,9 +69,9 @@
                     </div>
                     <div class="inp-line" v-if="!isEditor">
                         <Select v-model="formData.type" placeholder="活动类型" @on-change="typeChange">
-                            <Option value="1">单日</Option>
-                            <Option value="2">多日</Option>
-                            <Option value="3">跨月多日</Option>
+                            <Option :value="1">单日</Option>
+                            <Option :value="2">多日</Option>
+                            <Option :value="3">跨月多日</Option>
                         </Select>
                     </div>
                     <div class="inp-line" v-if="formData.type === 1">
@@ -314,9 +314,9 @@ export default {
             this.formData.begin = date[0]
             this.formData.end = date[1]
             if (date[0].substr(5, 2) === date[1].substr(5, 2)) {
-               this.formData.type = '2'
+               this.formData.type = 2
             } else {
-               this.formData.type = '3'
+               this.formData.type = 3
             }
          }
       },

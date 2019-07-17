@@ -13,11 +13,11 @@
         <div class="base-info-list">
             <div class="info-item">
                 <p class="name">合作联系</p>
-                <p class="info" style="width: 300px;">18023095011</p>
+                <p class="info" style="width: 300px;">13148886289</p>
             </div>
             <div class="info-item">
                 <p class="name">工作邮箱</p>
-                <p class="info" style="width: 300px;">2290907780@qq.com</p>
+                <p class="info" style="width: 300px;">leesticket@qq.com</p>
             </div>
             <div class="info-item">
                 <p class="name">操作疑问</p>

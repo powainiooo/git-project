@@ -130,6 +130,7 @@ export default {
                this.$Notice[func]({
                   title: title,
                   duration: 0,
+                  name: `notice${i.id}`,
                   render: h => {
                      return h('span',{
                         style: {
@@ -139,6 +140,7 @@ export default {
                         on: {
                            click () {
                               self.gotoDetail2(i.goods_id, name)
+                              self.$Notice.close(`notice${i.id}`)
                            }
                         }
                      }, i.content)

@@ -71,8 +71,8 @@
                     <td>{{item.price}}</td>
                     <td><span class="numbers">{{item.nums}}</span></td>
                     <td>
-                        <span v-if="item.status !== 3">{{item.is_check === '1' ? '已验票' : '未验票'}}</span>
-                        <span v-if="item.status === 3">已退款</span>
+                        <span v-if="item.status !== '3'">{{item.is_check === '1' ? '已验票' : '未验票'}}</span>
+                        <span v-if="item.status === '3'">已退款</span>
                     </td>
                     <td>
                         <span style="cursor: pointer; color: #2d8cf0;" @click="doRefund(item.id)" v-if="item.is_refund !== '0' && item.status !== '3' && item.price != 0 && item.is_check === '0'">退款</span>

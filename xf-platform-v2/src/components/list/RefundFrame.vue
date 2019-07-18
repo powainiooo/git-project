@@ -56,7 +56,7 @@
          </tr>
          </thead>
          <tbody>
-         <tr v-for="item in listData">
+         <tr v-for="(item, index) in listData" :key="index" v-if="item.status !== '3'">
             <td><input type="checkbox" class="radio" :value="item.id" v-model="condition.ids" :disabled="isChecking" /></td>
             <td>{{item.sele}}</td>
             <td>{{fmt(item.order_time)}}</td>
@@ -68,8 +68,8 @@
             <td>{{item.price}}</td>
             <td><span class="numbers">{{item.nums}}</span></td>
             <td>
-               <span v-if="item.status !== 3">{{item.is_check === '1' ? '已验票' : '未验票'}}</span>
-               <span v-if="item.status === 3">已退款</span>
+               <span v-if="item.status !== '3'">{{item.is_check === '1' ? '已验票' : '未验票'}}</span>
+               <span v-if="item.status === '3'">已退款</span>
             </td>
          </tr>
          </tbody>

@@ -56,7 +56,7 @@
          </tr>
          </thead>
          <tbody>
-         <tr v-for="(item, index) in listData" :key="index" v-if="item.status !== '3'">
+         <tr v-for="(item, index) in listData" :key="index" v-if="item.is_refund === '0'">
             <td><input type="checkbox" class="radio" :value="item.id" v-model="condition.ids" :disabled="isChecking" /></td>
             <td>{{item.sele}}</td>
             <td>{{fmt(item.order_time)}}</td>
@@ -269,6 +269,7 @@ export default {
             title:'是否提交退款申请？',
             content:'请仔细核查申请退款内容，<br/>若因活动方原因导致退款行为，且未通知到位退款申请将被驳回。',
             onOk(){
+               console.log('refund ok')
                let obj = {}
                obj.goods_id = self.itemData.id
                obj.act_name = self.itemData.activity

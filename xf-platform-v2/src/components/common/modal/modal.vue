@@ -19,7 +19,7 @@
         <div class="modal-frame">
             <div class="top">
                 <i class="icon-logo"></i>
-                <Icon type="md-close" @click="onCancel" />
+                <Icon type="md-close" @click="onCancel" v-if="!isWarn" />
             </div>
             <div class="title" v-if="type === ''">{{title}}</div>
             <div class="content" v-html="content" v-if="type === ''"></div>

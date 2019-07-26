@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width,initial-scale=1.0">
+   <title>汽车旋转</title>
+   <style>
+   * { margin: 0; padding: 0;}
+   .cars-frame { display: flex; align-items: center; justify-content: center;}
+   .cars-frame ul li { display: none;}
+   .cars-frame ul li img{ width: 100%; display: block;}
+   </style>
+</head>
+<body>
+<div class="cars-frame">
+   <ul id="carList"></ul>
+</div>
+
+</body>
+</html>
+<script>
+var ww = window.innerWidth
+var frame = document.getElementById('carList')
+var lis
+var angle = 0
+init()
+function init() {
+   let html = ''
+   for (var i = 0; i < 36; i++) {
+   	html += '<li><img src="../images/cars/'+ (i+1) +'.jpg"></li>'
+   }
+   frame.innerHTML = html
+	lis = frame.children
+	lis[angle].style.display = 'block'
+	touchs()
+}
+function getAngle(dis) {
+   return Math.floor(dis * 360 / ww / 10)
+}
+function touchs() {
+	var sx = 0
+	var ma = 0
+   frame.addEventListener('touchstart', function (e) {
+   	sx = e.changedTouches[0].clientX
+   })
+   frame.addEventListener('touchmove', function (e) {
+   	e.preventDefault()
+   	mx = e.changedTouches[0].clientX
+	   ma = angle + getAngle(mx - sx)
+      ma = ma % 36
+	   setItemShow(ma)
+   })
+   frame.addEventListener('touchend', function (e) {
+	   angle = ma
+   })
+}
+function setItemShow(index) {
+	index = index < 0 ? 36 + index : index
+   for (var i of lis) {
+   	i.style.display = 'none'
+   }
+   lis[index].style.display = 'block'
+}
+</script>

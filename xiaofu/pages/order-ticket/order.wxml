@@ -59,7 +59,6 @@
             </view>
         </view>
 
-
         <view class="footer-tab">
             <view class="{{isMove ? '' : 'active'}}" data-val="{{false}}" bindtap="changeTab"><text>已购票务</text></view>
             <view class="{{isMove ? 'active' : ''}}" data-val="{{true}}" bindtap="changeTab"><text>小夫特饮</text></view>

@@ -25,9 +25,13 @@
 
 <!-- 更多菜单 -->
 <view class='nav-frame' animation="{{navAniData}}">
-  <view class='person-info'>
+  <view class='person-info' wx:if="{{userInfo !== null}}">
     <image src="{{userInfo.avatarUrl}}" class="avatar"></image>
     <text class='name'>{{userInfo.nickName}}</text>
+  </view>
+  <view class='person-info' wx:if="{{userInfo === null}}" bindtap="gotoLogin">
+    <image src="../../res/images/default-avatar.jpg" class="avatar"></image>
+    <text class='name'>点击登录账户</text>
   </view>
   <view class='nav-list'>
     <navigator wx:for="{{navList}}" wx:for-index="idx" wx:for-item="item" wx:key="{{idx}}" url="{{item.url}}" class='nav-item' hover-class='none' bindtap="doClose" open-type="{{item.type}}">

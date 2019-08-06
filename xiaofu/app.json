@@ -1,32 +1,32 @@
 {
-  "pages": [
-     "pages/index/index",
-     "pages/drink/detail",
-     "pages/order-ticket/order",
-     "pages/order-drink/order",
-     "pages/drink/index",
-     "pages/result/result",
-    "pages/member/member",
-    "pages/index/detail",
-    "pages/login/login",
-    "pages/error/error",
-    "pages/sponsor/list",
-    "pages/order-drink/detail",
-    "pages/order-ticket/detail",
-    "pages/insured/insured",
-    "pages/search/search"
-  ],
-  "window": {
-    "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#002aac",
-    "backgroundColor": "#f6f6f6",
-    "navigationBarTitleText": "",
-    "navigationBarTextStyle": "white"
-  },
-  "permission": {
-    "scope.userLocation": {
-      "desc": "获取当前用户所在的城市，快速选择对应所在城市。"
-    }
-  },
-  "sitemapLocation": "sitemap.json"
+   "pages": [
+      "pages/index/index",
+      "pages/result/result",
+      "pages/drink/detail",
+      "pages/order-ticket/order",
+      "pages/order-drink/order",
+      "pages/drink/index",
+      "pages/member/member",
+      "pages/index/detail",
+      "pages/login/login",
+      "pages/error/error",
+      "pages/sponsor/list",
+      "pages/order-drink/detail",
+      "pages/order-ticket/detail",
+      "pages/insured/insured",
+      "pages/search/search"
+   ],
+   "window": {
+      "backgroundTextStyle": "light",
+      "navigationBarBackgroundColor": "#002aac",
+      "backgroundColor": "#f6f6f6",
+      "navigationBarTitleText": "",
+      "navigationBarTextStyle": "white"
+   },
+   "permission": {
+      "scope.userLocation": {
+         "desc": "获取当前用户所在的城市，快速选择对应所在城市。"
+      }
+   },
+   "sitemapLocation": "sitemap.json"
 }

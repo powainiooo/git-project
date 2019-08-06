@@ -48,7 +48,7 @@
 
             <!-- 授权申请-->
             <view class="hint-frame" wx:if="{{pageName == 'login'}}">
-                <view class="hint-section"><text>申请获得您的公开信息（昵称、头像等），\n用于完成购票流程，拒绝无法使用本票务平台。</text></view>
+                <view class="hint-section" style="border-top: 1rpx solid #e2e2e2; margin-top: 60rpx; padding-top: 60rpx;"><text>申请获得您的公开信息（昵称、头像等），\n用于完成购票流程，拒绝无法使用本票务平台。</text></view>
             </view>
             <view class="footer" wx:if="{{pageName == 'login'}}">
                 <button class="btn" style="width: 100%;" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">允许使用</button>

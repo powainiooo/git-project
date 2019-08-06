@@ -6,7 +6,6 @@
           <view class='title-cn'><text>订单中心</text></view>
        </view>
 
-
         <view class="item-list">
             <view class="item"
                   wx:for="{{listData}}"

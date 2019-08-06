@@ -68,15 +68,15 @@ App({
                      })
                   },
                   fail(err){
-                     wx.navigateTo({
-                        url: '/pages/result/result?page=login'
-                     })
+                     // wx.navigateTo({
+                     //    url: '/pages/result/result?page=login'
+                     // })
                   }
                })
             }else{
-               wx.navigateTo({
-                  url: '/pages/result/result?page=login'
-               })
+               // wx.navigateTo({
+               //    url: '/pages/result/result?page=login'
+               // })
             }
          }
       })

@@ -39,7 +39,7 @@
                 <div class="line"><input type="password" placeholder="密码" v-model="password"></div>
                 <div class="line" style="margin-top: 100px;"><t-button :isDisabled="nextDisabled" @dotap="doConfirm">提交申请</t-button></div>
             </div>
-            <div class="crashout-frame-right" v-if="isNeed === 1">
+            <div class="crashout-frame-right" v-if="isNeed === '1'">
                 <h3 style="font-size: 14px; color: #ffffff; margin-bottom: 30px; margin-top: 10px;">小夫有票代售服务费发票</h3>
                 <div class="info-item">
                     <p class="name">发票名称</p>
@@ -53,7 +53,7 @@
                 <div class="line"><input type="text" placeholder="开户姓名" v-model="bankusername"></div>
                 <div class="line"><input type="text" placeholder="银行账号" v-model="banknum"></div>
             </div>
-            <div class="crashout-frame-right" v-if="isNeed === 1">
+            <div class="crashout-frame-right" v-if="isNeed === '1'">
                 <h3 style="font-size: 14px; color: #ffffff; margin-bottom: 30px; margin-top: 10px;">发票邮件地址</h3>
                 <div class="line"><input type="text" placeholder="发票邮件地址" v-model="kd_address"></div>
                 <div class="line"><input type="text" placeholder="收件人" v-model="kd_user"></div>
@@ -90,7 +90,7 @@ export default {
       }
    },
    mounted () {
-      this.isNeed = this.data.invoice === '' ? '2' : this.data.invoice
+      this.isNeed = this.data.invoice === '' || this.data.invoice === null ? '2' : this.data.invoice
    },
    computed: {
       userMobile () {

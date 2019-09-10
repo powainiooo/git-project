@@ -60,7 +60,7 @@ Page({
             wx.hideNavigationBarLoading()
          },
          fail () {
-            self.showToast({
+            wx.showToast({
                title: '加载失败'
             })
             self.setData({

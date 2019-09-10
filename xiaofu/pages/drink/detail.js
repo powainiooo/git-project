@@ -134,7 +134,7 @@ Page({
                self.drawSharePoster2()
                wx.hideNavigationBarLoading()
             } else {
-               self.showToast({
+               wx.showToast({
                   title: data.msg
                })
                self.setData({
@@ -144,7 +144,7 @@ Page({
             }
          },
          fail () {
-            self.showToast({
+            wx.showToast({
                title: '加载失败'
             })
             self.setData({

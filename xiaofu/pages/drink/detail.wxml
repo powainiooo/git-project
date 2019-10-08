@@ -20,8 +20,8 @@
             <view class="price">{{itemData.price == 0 ? 0 : itemData.price*numbersArr[numberIndex]}}<text>RMB</text></view>
         </view>
         <view class="form-frame">
-            <input placeholder="姓名" class="input" bindinput="checkValues" data-key="nameVal"/>
-            <input placeholder="电话" class="input" bindinput="checkValues" data-key="phoneVal"/>
+            <input placeholder="姓名 name" class="input" bindinput="checkValues" data-key="nameVal"/>
+            <input placeholder="电话 mobile phone" class="input" bindinput="checkValues" data-key="phoneVal"/>
         </view>
        <view class="hint-section"><rich-text nodes="{{itemData.desc}}"></rich-text></view>
 

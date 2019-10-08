@@ -41,7 +41,7 @@ Component({
    data: {
       numbersArr: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
       numberIndex: 0,
-      idTypeArr: ['身份证', '护照'],
+      idTypeArr: ['身份证 ID card', '护照 passport'],
       idTypeIndex: -1,
       nameVal: '',
       phoneVal: '',

@@ -14,15 +14,15 @@
                wx:key="index">{{item.select}}票</view>
       </view>
       <view class="form-frame">
-         <input placeholder="姓名" class="input" bindinput="checkValues" data-key="nameVal" value="{{nameVal}}"/>
-         <input placeholder="电话" class="input" bindinput="checkValues" data-key="phoneVal" value="{{phoneVal}}"/>
-         <input placeholder="收货地址" class="input" bindinput="checkValues" data-key="addressVal" wx:if="{{itemData.info.is_post == '1'}}" value="{{addressVal}}"/>
-         <input placeholder="邮箱地址" class="input" bindinput="checkValues" data-key="emailVal" wx:if="{{itemData.info.is_email == '1'}}" value="{{emailVal}}"/>
+         <input placeholder="姓名 name" class="input" bindinput="checkValues" data-key="nameVal" value="{{nameVal}}"/>
+         <input placeholder="电话 mobile phone" class="input" bindinput="checkValues" data-key="phoneVal" value="{{phoneVal}}"/>
+         <input placeholder="收货地址 address" class="input" bindinput="checkValues" data-key="addressVal" wx:if="{{itemData.info.is_post == '1'}}" value="{{addressVal}}"/>
+         <input placeholder="邮箱地址 E-mail" class="input" bindinput="checkValues" data-key="emailVal" wx:if="{{itemData.info.is_email == '1'}}" value="{{emailVal}}"/>
          <picker class="input" value="{{idTypeIndex}}" range="{{idTypeArr}}" bindchange="idTypeChange" wx:if="{{itemData.info.is_idnum == '1'}}">
-            <view class="id-item id-item-placeholder" wx:if="{{idTypeIndex == -1}}">证件类型</view>
+            <view class="id-item id-item-placeholder" wx:if="{{idTypeIndex == -1}}">证件类型 identity</view>
             <view class="id-item" wx:else>{{idTypeArr[idTypeIndex]}}</view>
          </picker>
-         <input placeholder="{{itemData.info.is_upload == '1' ? '护照号码' : '证件号码'}}"
+         <input placeholder="{{itemData.info.is_upload == '1' ? '护照号码' : '证件号码'}} numbers"
                 class="input"
                 bindinput="checkValues"
                 data-key="idnum"

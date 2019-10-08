@@ -54,7 +54,6 @@ Page({
    },
    // 事件处理函数
    onLoad: function (options) {
-      console.log(options)
       let type = options.type || 'index'
       this.setData({
          indexType: type

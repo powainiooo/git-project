@@ -443,7 +443,7 @@ Page({
       let self = this
       let lastGetCityTime = wx.getStorageSync('lastGetCityTime')
       let now = new Date().getTime()
-      if (lastGetCityTime == '' || now > lastGetCityTime + 24 * 60 * 60 * 1000) {
+      if (lastGetCityTime === '' || lastGetCityTime === null || now > lastGetCityTime + 24 * 60 * 60 * 1000) {
          wx.setStorageSync('lastGetCityTime', now)
       } else {
          return
@@ -458,6 +458,7 @@ Page({
                },
                success: function (res) {
                   let city = res.result.address_component.city
+                  app.globalData.city = city
                   let cities = self.data.addressList
                   let cityID
                   let index = -1

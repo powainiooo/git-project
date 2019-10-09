@@ -164,7 +164,7 @@ Component({
                   idnum_type: parseInt(this.data.idTypeIndex) + 1,
                   sele: self.data.selectTicket.select,
                   nums: self.data.numbersArr[self.data.numberIndex],
-                  city: app.globalData.city
+                  city: getApp().globalData.city
                },
                success: function (res) {
                   if (res.data.status != 0) {

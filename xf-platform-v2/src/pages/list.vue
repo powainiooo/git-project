@@ -126,7 +126,12 @@ export default {
             for (let i of data.data) {
                let func = i.checked === '2' ? 'success' : 'error'
                let name = i.checked === '2' ? 'table' : 'refund-error'
-               let title = i.checked === '2' ? '退款申请审核通过' : '退款申请审核不通过'
+               let title
+               if (i.type === '1') {
+                  title = i.checked === '2' ? '退款申请审核通过' : '退款申请审核不通过'
+               } else if (i.type === '2') {
+                  title = i.checked === '2' ? '提现申请审核通过' : '提现申请审核不通过'
+               }
                this.$Notice[func]({
                   title: title,
                   duration: 0,
@@ -139,7 +144,9 @@ export default {
                         },
                         on: {
                            click () {
-                              self.gotoDetail2(i.goods_id, name)
+                              if (i.type === 1) {
+                                 self.gotoDetail2(i.goods_id, name)
+                              }
                               self.$Notice.close(`notice${i.id}`)
                            }
                         }

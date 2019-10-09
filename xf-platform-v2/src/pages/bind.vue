@@ -76,7 +76,7 @@
                     </div>
                     <div class="hint">
                         <div>7<span style="font-size: 24px;">days</span></div>
-                        <p>提款时间在活动结束<span>7</span>个工作日后可以发起申请，审核及打款在<span>2</span>个工作日左右。</p>
+                        <p>提款时间在活动结束<span>7</span>个工作日后可以发起申请，审核及打款在<span>5</span>个工作日左右。</p>
                     </div>
                     <p style="font-size: 14px; color: #888888; padding-left: 50px;">如需开发票在提款时选择发票选项，需另收取手续费总额的3.6%作为税点，发票为普票。</p>
                 </div>

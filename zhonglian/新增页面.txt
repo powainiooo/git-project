@@ -1,0 +1,7 @@
+2019-10-20:
+框架页：frame.html
+首页：home.html
+我的消息：message.html
+新闻热点：news.html
+新闻详情：news-detail.html
+平台公告：notice.html

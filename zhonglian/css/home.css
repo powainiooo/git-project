@@ -1,0 +1,60 @@
+.home-left { width: 390px; float: left; margin-left: 10px;}
+.title1 { color: #53d3bc; font-size: 16px; margin: 40px 20px;}
+
+.bar-list li { margin-bottom: 20px; margin-left: 16px;}
+.bar-list li p { font-size: 16px; line-height: 1; color: #333333; margin-bottom: 20px;}
+.bar-list li p span { font-size: 28px;}
+.bar-list li .bar { width: 365px; height: 8px; border-radius: 4px; background-color: #ddf6f2;}
+.bar-list li .bar .progress { height: 100%; border-radius: 4px; background-color: #53d3bc; box-shadow: rgba(83, 211, 188, 0.1);}
+
+.nums-list { margin:30px 40px;}
+.nums-list li { font-size: 14px; line-height: 1; color: #333333; display: flex; justify-content: space-between; margin-bottom: 20px;}
+
+.home-right { margin-left: 410px; margin-right: 20px; padding-top: 1px;}
+
+.nav-order { height: 146px; padding: 0 18%; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); display: flex; align-items: center; justify-content: space-between; background-color: #ffffff; margin-bottom: 10px;}
+.nav-order li { position: relative;}
+.nav-order li span { width: 28px; height: 28px; border-radius: 50%; font-size: 14px; color: #ffffff; display: flex; justify-content: center; align-items: center; position: absolute; top: 0; right: -5px; background-color: #f38f52;}
+
+.banner-swiper { margin-bottom: 10px;}
+.banner-swiper .swiper-slide { height: 348px; background-repeat: no-repeat; background-position: center center;}
+.banner-swiper .swiper-pagination { text-align: left; padding-left: 26px;}
+.banner-swiper .swiper-pagination-bullet { background-color: #494949; opacity: 1;}
+.banner-swiper .swiper-pagination-bullet-active { width: 60px; border-radius: 4px; background-color: #ffffff; opacity: 1; box-shadow: 0 1px 6px rgba(0,0,0,0.2);}
+
+.top-line { display: flex; justify-content: space-between; align-items: center; margin: 16px 26px 30px 40px;}
+.top-line ul li { float: left; position: relative; cursor: pointer; font-size: 20px; line-height: 20px; color: #999999; margin-right: 60px; font-weight: bold;}
+.top-line ul li.active { color: #333333;}
+.top-line ul li.active:before { content: ''; width: 22px; height: 5px; border-radius: 3px; background-color: #41d5bc; position: absolute; bottom: -16px; left: 50%; margin-left: -11px;}
+.top-line a { font-size: 14px; color: #666666; display: flex; align-items: center;}
+.top-line a .icon-refresh { width: 17px; height: 16px; display: inline-block; background: url("../images/icons.png") no-repeat; background-position: -90px -58px; margin-right: 10px;}
+
+.news-list { margin: 0 66px;}
+.news-list li { overflow: hidden; margin-bottom: 10px;}
+.news-list li img { width: 155px; height: 87px; border-radius: 6px; float: left;}
+.news-list li a { font-size: 14px; line-height: 1.5; color: #666666; display: block; margin-left: 205px; margin-top: 20px;}
+
+.message-list li { border-bottom: 1px solid #f2f2f2; position: relative; padding: 40px;}
+.message-list li:last-child { border-bottom: none;}
+.message-list li div { display: flex; align-items: center; margin-bottom: 20px;}
+.message-list li div h3 { color: #37cd9a; font-size: 20px; margin-right: 50px;}
+.message-list li div span { font-size: 14px; color: #999999;}
+.message-list li p { font-size: 14px; line-height: 1.5; color: #666666;}
+.message-list li a.icon-close { width: 16px; height: 16px; background: url("../images/icons.png") no-repeat; background-position: -3px -64px; position: absolute; top: 40px; right: 40px;}
+
+.search-line { margin: 20px 0 15px 40px; display: flex; align-items: center;}
+.search-line .input { position: relative; margin-right: 10px;}
+.search-line .input:before { content: ''; width: 14px; height: 14px; background: url("../images/icons.png") no-repeat; background-position: -77px -89px; position: absolute; top: 12px; left: 24px;}
+.search-line .input input { width: 230px; font-size: 12px; color: #999999; padding:10px 10px 10px 45px; background-color: #f7f6f7; border-radius: 8px;}
+.search-line button { padding: 8px 16px; background-color: #37cd9a; font-size: 14px; color: #ffffff; border-radius: 8px;}
+
+.news-list li { padding: 30px 20% 30px 40px; border-bottom: 1px solid #f2f2f2; overflow: hidden;}
+.news-list li:last-child { border-bottom: none;}
+.news-list li img { width: 246px; height: 166px; border-radius: 10px; float: left; margin-right: 40px;}
+.news-list li div h3 { font-size: 20px; color: #333333; line-height: 1; margin-top: 10px;}
+.news-list li div div { height: 70px; overflow: hidden; font-size: 14px; color: #808080; line-height: 1.6; margin-top: 20px;}
+.news-list li div p { font-size: 14px; color: #999999; line-height: 1; margin-top: 20px;}
+
+.news-detail { padding: 50px 110px;}
+.news-detail h3 { font-size: 20px; color: #333333; line-height: 1; margin-bottom: 20px; text-align: center; font-weight: normal;}
+.news-detail h4 { font-size: 14px; color: #999999; line-height: 1; margin-bottom: 30px; text-align: center; font-weight: normal;}

@@ -5,3 +5,14 @@
 新闻热点：news.html
 新闻详情：news-detail.html
 平台公告：notice.html
+
+2019-10-21:
+全部订单：order.html
+待备货：order2.html
+待发货：order3.html
+待补发：order4.html
+已发货：order5.html
+已收货：order6.html
+已入库：order7.html
+待备货详情：order-detail2.html
+已发货详情：order-detail5.html

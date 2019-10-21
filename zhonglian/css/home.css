@@ -10,7 +10,7 @@
 .nums-list { margin:30px 40px;}
 .nums-list li { font-size: 14px; line-height: 1; color: #333333; display: flex; justify-content: space-between; margin-bottom: 20px;}
 
-.home-right { margin-left: 410px; margin-right: 20px; padding-top: 1px;}
+.home-right { min-width: 850px; margin-left: 410px; margin-right: 20px; padding-top: 1px;}
 
 .nav-order { height: 146px; padding: 0 18%; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); display: flex; align-items: center; justify-content: space-between; background-color: #ffffff; margin-bottom: 10px;}
 .nav-order li { position: relative;}
@@ -29,10 +29,10 @@
 .top-line a { font-size: 14px; color: #666666; display: flex; align-items: center;}
 .top-line a .icon-refresh { width: 17px; height: 16px; display: inline-block; background: url("../images/icons.png") no-repeat; background-position: -90px -58px; margin-right: 10px;}
 
-.news-list { margin: 0 66px;}
-.news-list li { overflow: hidden; margin-bottom: 10px;}
-.news-list li img { width: 155px; height: 87px; border-radius: 6px; float: left;}
-.news-list li a { font-size: 14px; line-height: 1.5; color: #666666; display: block; margin-left: 205px; margin-top: 20px;}
+.home-news-list { margin: 0 66px;}
+.home-news-list li { overflow: hidden; margin-bottom: 10px;}
+.home-news-list li img { width: 155px; height: 87px; border-radius: 6px; float: left;}
+.home-news-list li a { font-size: 14px; line-height: 1.5; color: #666666; display: block; margin-left: 205px; margin-top: 20px; height: 68px; overflow: hidden;}
 
 .message-list li { border-bottom: 1px solid #f2f2f2; position: relative; padding: 40px;}
 .message-list li:last-child { border-bottom: none;}

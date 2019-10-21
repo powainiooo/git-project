@@ -6,12 +6,20 @@
 
 .order-detail-title { margin: 20px 0 0 20px; display: flex; align-items: center; color:rgba(102,102,102,1); font-size: 16px;}
 .order-detail-title .icon-paper { width: 14px; height: 16px; background: url("../images/icons.png") no-repeat; background-position: -110px -58px; margin-right: 10px;}
-.icon-edit { width: 14px; height: 16px; background: url("../images/icons.png") no-repeat; background-position: -110px -58px; margin-right: 10px; display: inline-block;}
+.icon-edit { width: 12px; height: 12px; background: url("../images/icons.png") no-repeat; background-position: -114px -131px; margin-left: 4px; display: inline-block;}
+.icon-edit2 { width: 15px; height: 15px; background: url("../images/icons.png") no-repeat; background-position: -129px -128px; margin-left: 4px; display: inline-block;}
 
 .order-info { overflow: hidden; margin: -10px 0;}
-.order-info .img { width: 90px; height: 80px; float: left; position: relative; background:rgba(220,220,220,1); box-shadow:0px 1px 6px 0px; border-radius:2px;}
+.order-info .img { width: 90px; height: 80px; float: left; position: relative; background:rgba(220,220,220,1); box-shadow:0 1px 6px 0; border-radius:2px;}
 .order-info .img img { width: 100%; height: 100%; border-radius:2px;}
 .order-info .img a.icon-view { width: 32px; height: 32px;  background: url("../images/icons.png") no-repeat; background-position: -33px -114px; position: absolute; right: 0; bottom: 0;}
 .order-info .content { float: left; margin-left: 30px;}
 .order-info .content h4 { font-size: 14px; font-weight: 400; line-height: 1; color: #666666; margin-top: 10px;}
 .order-info .content p { font-size: 14px; font-weight: 400; line-height: 1; color: #999999; margin-top: 10px;}
+
+.editnums-frame { width: 184px; height: 140px; background-color: #ffffff; border-radius: 4px; box-shadow: 0 0 20px rgba(0,0,0,0.2); position: fixed; top: 30%; left: 30%; padding: 20px;}
+.editnums-frame h3 { font-size: 12px; line-height: 1; color: #6D6F77; margin-bottom: 10px;}
+.editnums-frame input { width: 100%; font-size: 12px; border:1px solid rgba(231,231,231,1); color: #CCCCCC; padding: 8px; margin-bottom: 10px;}
+.editnums-frame input::-webkit-input-placeholder { color: #CCCCCC;}
+.arrow-right:after { content: ''; width: 0; height: 0; border-right: 10px solid rgba(0,0,0,0); border-left: 10px solid #ffffff; border-top: 6px solid rgba(0,0,0,0); border-bottom: 6px solid rgba(0,0,0,0); position: absolute; right: -18px; top: 10px;}
+.arrow-left:after { content: ''; width: 0; height: 0; border-right: 10px solid #ffffff; border-left: 10px solid rgba(0,0,0,0); border-top: 6px solid rgba(0,0,0,0); border-bottom: 6px solid rgba(0,0,0,0); position: absolute; left: -18px; top: 10px;}

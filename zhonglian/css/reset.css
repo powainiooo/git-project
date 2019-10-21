@@ -1,5 +1,5 @@
 
-*{ margin:0;padding:0;border:0; outline:0;font-size:100%;vertical-align:baseline;background:transparent; box-sizing: border-box; -webkit-box-sizing: border-box;}
+*{ margin:0;padding:0;border:0; outline:0;font-size:100%;vertical-align:baseline;background:transparent; box-sizing: border-box; -webkit-box-sizing: border-box; font-family:Microsoft YaHei;}
 article,aside,canvas,details,figcaption,figure,
 footer,header,hgroup,menu,nav,section,summary {
     display:block;

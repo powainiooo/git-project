@@ -1,0 +1,17 @@
+.order-form { overflow: hidden;}
+.order-form h3 { font-size: 24px; line-height: 1; color:rgba(51,51,51,1); font-weight: 400; text-align: center; margin: 30px 0;}
+.order-form h4 { font-size: 14px; line-height: 1; color:rgba(51,51,51,1); font-weight: 400;}
+.order-form table { width: 100%; border-collapse: collapse; border-spacing: 0; border: 1px solid rgba(221,221,221,1);}
+.order-form table th, .order-form table td { font-size: 14px; color:rgba(102,102,102,1); text-align: center; border: 1px solid rgba(221,221,221,1); padding: 15px;}
+
+.order-detail-title { margin: 20px 0 0 20px; display: flex; align-items: center; color:rgba(102,102,102,1); font-size: 16px;}
+.order-detail-title .icon-paper { width: 14px; height: 16px; background: url("../images/icons.png") no-repeat; background-position: -110px -58px; margin-right: 10px;}
+.icon-edit { width: 14px; height: 16px; background: url("../images/icons.png") no-repeat; background-position: -110px -58px; margin-right: 10px; display: inline-block;}
+
+.order-info { overflow: hidden; margin: -10px 0;}
+.order-info .img { width: 90px; height: 80px; float: left; position: relative; background:rgba(220,220,220,1); box-shadow:0px 1px 6px 0px; border-radius:2px;}
+.order-info .img img { width: 100%; height: 100%; border-radius:2px;}
+.order-info .img a.icon-view { width: 32px; height: 32px;  background: url("../images/icons.png") no-repeat; background-position: -33px -114px; position: absolute; right: 0; bottom: 0;}
+.order-info .content { float: left; margin-left: 30px;}
+.order-info .content h4 { font-size: 14px; font-weight: 400; line-height: 1; color: #666666; margin-top: 10px;}
+.order-info .content p { font-size: 14px; font-weight: 400; line-height: 1; color: #999999; margin-top: 10px;}

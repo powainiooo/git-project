@@ -21,52 +21,48 @@
    <div class="z-title">订单管理</div>
    <div class="z-card">
       <ul class="z-tab">
-         <li class="active">全部订单</li>
+         <li>全部订单</li>
          <li>待备货</li>
          <li>待发货</li>
          <li>待补发</li>
-         <li>已发货</li>
+         <li class="active">已发货</li>
          <li>已收货</li>
          <li>已入库</li>
       </ul>
-      <div style="display:flex; align-items: center;" class="ml20 mb10">
-         <div class="z-date mr15"><input type="text" placeholder="开始时间 - 结束时间" id="datePicker"></div>
-         <div class="z-select mr15" style="width: 115px;">
-            <select>
-               <option>高值耗材</option>
-            </select>
+      <div style="display: flex; justify-content: space-between;">
+         <div style="display:flex; align-items: center;" class="ml20 mb10">
+            <div class="z-date mr15"><input type="text" placeholder="开始时间 - 结束时间" id="datePicker"></div>
+            <div class="z-select mr15" style="width: 115px;">
+               <select>
+                  <option>高值耗材</option>
+               </select>
+            </div>
+            <div class="z-search mr15"><input type="text" placeholder="耗材名称/编号"></div>
+            <button class="z-btn">搜索</button>
          </div>
-         <div class="z-search mr15"><input type="text" placeholder="耗材名称/编号"></div>
-         <button class="z-btn">搜索</button>
+         <div class="mr20">
+            <button class="z-btn-border2 z-btn-border-success mr10">补发</button>
+            <button class="z-btn-border2 z-btn-border-info">打印订单</button>
+         </div>
       </div>
       <!-- 表单 -->
       <div class="z-table">
-         <table style="min-width: 1330px;">
+         <table style="min-width: 1330px; width: 100%;">
             <colgroup>
                <col style="width: 60px">
-               <col style="width: 225px">
-               <col style="width: 210px">
-               <col style="width: 210px">
-               <col style="width: 120px">
-               <col style="width: 100px">
-               <col style="width: 140px">
-               <col style="width: 100px">
-               <col style="width: 100px">
-               <col style="width: 225px">
-               <col style="width: 180px">
             </colgroup>
             <thead>
             <tr>
                <th></th>
                <th>订单编号</th>
-               <th>下单单位</th>
+               <th>发货编号</th>
                <th>创建时间</th>
-               <th>订单状态</th>
+               <th>下单单位</th>
+               <th>已发数量</th>
                <th>总数量</th>
                <th>总金额</th>
                <th>详情</th>
                <th>审核意见</th>
-               <th>发货单号</th>
                <th>操作</th>
             </tr>
             </thead>
@@ -74,16 +70,16 @@
             <tr>
                <td class="radio"><input type="checkbox" class="z-radio"></td>
                <td>abcd15644544886511</td>
-               <td>深圳市第一人民医院</td>
+               <td>abcd15644544886511 </td>
                <td>2019-7-25 20:30:30</td>
-               <td>待备货</td>
+               <td>深圳市第一人民医院</td>
+               <td>666</td>
                <td>666</td>
                <td>68888.00</td>
                <td><a href="javascript:;" class="link-primary">查看</a> </td>
                <td><a href="javascript:;" class="link-primary" onclick="getCheckBack()">查看</a> </td>
-               <td>abcd15644544886511 </td>
                <td>
-                  <a href="javascript:;" class="link-success mr40" onclick="getBackup()">备货</a>
+                  <a href="javascript:;" class="link-success mr40">补发</a>
                   <a href="javascript:;" class="link-info" onclick="getOrderForm()">打印订单</a>
                </td>
             </tr>

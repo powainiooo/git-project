@@ -21,13 +21,13 @@
    <div class="z-title">订单管理</div>
    <div class="z-card">
       <ul class="z-tab">
-         <li>全部订单</li>
-         <li>待备货</li>
-         <li>待发货</li>
-         <li class="active">待补发</li>
-         <li>已发货</li>
-         <li>已收货</li>
-         <li>已入库</li>
+         <li><a href="#">全部订单</a> </li>
+         <li><a href="#">待备货</a> </li>
+         <li><a href="#">待发货</a> </li>
+         <li class="active"><a href="#">待补发</a> </li>
+         <li><a href="#">已发货</a> </li>
+         <li><a href="#">已收货</a> </li>
+         <li><a href="#">已入库</a> </li>
       </ul>
       <div style="display: flex; justify-content: space-between;">
          <div style="display:flex; align-items: center;" class="ml20 mb10">
@@ -71,7 +71,7 @@
                <td>abcd15644544886511</td>
                <td>2019-7-25 20:30:30</td>
                <td>深圳市第一人民医院</td>
-               <td>666 <a href="javascript:;" class="icon-edit"></a></td>
+               <td>666 <a href="javascript:;" class="icon-edit2" onclick="showEditNumsFrame(1000)"></a></td>
                <td>68888.00</td>
                <td><a href="javascript:;" class="link-primary">查看</a> </td>
                <td><a href="javascript:;" class="link-primary" onclick="getCheckBack()">查看</a> </td>
@@ -190,6 +190,16 @@
          </div>
       </div>
    </div>
+
+   <!-- 修改数量 -->
+   <div class="editnums-frame arrow-left" id="editNums" style="display: block;">
+      <h3>总数量</h3>
+      <input type="text" placeholder="请输入总数量"/>
+      <div class="btns">
+         <button class="z-btn-border2 z-btn-border-success" id="editNumsConfirm">确定</button>
+         <button class="z-btn-border2" id="editNumsCancel">取消</button>
+      </div>
+   </div>
 </div>
 
 <link href="../plugin/daterangepicker/daterangepicker.css" rel="stylesheet">
@@ -231,6 +241,23 @@ function getOrderForm() {
 }
 $("#orderForm .z-modal-frame-close").on('click', function () {
 	$("#orderForm").hide()
+})
+
+// 打开数量编辑框
+function showEditNumsFrame(nums) {
+   $("#editNums input").val(nums)
+   $("#editNums").css({
+      top: event.clientY - event.offsetY - 10,
+      left:event.clientX - event.offsetX + 30
+   }).show()
+}
+// 点击确定按钮
+$("#editNumsConfirm").on('click', function () {
+   $("#editNums").hide()
+})
+// 点击确定按钮
+$("#editNumsCancel").on('click', function () {
+   $("#editNums").hide()
 })
 </script>
 </body>

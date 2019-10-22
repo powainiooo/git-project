@@ -79,8 +79,10 @@
 
 /* 标签 */
 .z-tab { margin: 20px; border-bottom: 1px solid #efefef; display: flex;}
-.z-tab li { margin-right: 70px; padding-bottom: 12px; font-size: 16px; line-height: 1; color: #949494; cursor: pointer; position: relative;}
-.z-tab li.active { font-size: 18px; color: #666666; font-weight: bold;}
+.z-tab li { margin-right: 70px; padding-bottom: 12px; font-size: 16px; line-height: 1; cursor: pointer; position: relative;}
+.z-tab li a { color: #949494;}
+.z-tab li.active { font-size: 18px; font-weight: bold;}
+.z-tab li.active a { color: #666666;}
 .z-tab li.active:after { content: ''; width: 56px; height: 2px; background-color: #37cd9a; position: absolute; bottom: -1px; left: 50%; margin-left: -28px;}
 
 /* 链接颜色 */

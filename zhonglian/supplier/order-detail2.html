@@ -61,15 +61,106 @@
                <td>666</td>
                <td>68888.00</td>
                <td>深圳市福田区第一制药厂 </td>
-               <td>10 <i class="icon-edit"></i> </td>
+               <td>10<a href="javascript:;" class="icon-edit" onclick="showEditNumsFrame(10)"></a> </td>
+            </tr>
+            <tr>
+               <td>
+                  <div class="order-info">
+                     <div class="img">
+                        <img src="../images/avatar.png"/>
+                        <a href="javascript:;" class="icon-view"></a>
+                     </div>
+                     <div class="content">
+                        <h4>耗材名称耗材名称</h4>
+                        <p>耗材编号：15644544886511</p>
+                        <p>耗材价格：888元</p>
+                     </div>
+                  </div>
+               </td>
+               <td>个</td>
+               <td>25片/盒  0408-6623</td>
+               <td>666</td>
+               <td>68888.00</td>
+               <td>深圳市福田区第一制药厂 </td>
+               <td>88<a href="javascript:;" class="icon-edit" onclick="showEditNumsFrame(88)"></a> </td>
+            </tr>
+            <tr>
+               <td>
+                  <div class="order-info">
+                     <div class="img">
+                        <img src="../images/avatar.png"/>
+                        <a href="javascript:;" class="icon-view"></a>
+                     </div>
+                     <div class="content">
+                        <h4>耗材名称耗材名称</h4>
+                        <p>耗材编号：15644544886511</p>
+                        <p>耗材价格：888元</p>
+                     </div>
+                  </div>
+               </td>
+               <td>个</td>
+               <td>25片/盒  0408-6623</td>
+               <td>666</td>
+               <td>68888.00</td>
+               <td>深圳市福田区第一制药厂 </td>
+               <td>100<a href="javascript:;" class="icon-edit" onclick="showEditNumsFrame(100)"></a> </td>
+            </tr>
+            <tr>
+               <td>
+                  <div class="order-info">
+                     <div class="img">
+                        <img src="../images/avatar.png"/>
+                        <a href="javascript:;" class="icon-view"></a>
+                     </div>
+                     <div class="content">
+                        <h4>耗材名称耗材名称</h4>
+                        <p>耗材编号：15644544886511</p>
+                        <p>耗材价格：888元</p>
+                     </div>
+                  </div>
+               </td>
+               <td>个</td>
+               <td>25片/盒  0408-6623</td>
+               <td>666</td>
+               <td>68888.00</td>
+               <td>深圳市福田区第一制药厂 </td>
+               <td>1000<a href="javascript:;" class="icon-edit" onclick="showEditNumsFrame(1000)"></a> </td>
             </tr>
             </tbody>
          </table>
       </div>
-      <div class="tr mt20 mr20 mb20c">
+      <div class="tr mt20 mr20 mb20">
          <button class="z-btn">确认备货</button>
       </div>
    </div>
 </div>
+<!-- 修改数量 -->
+<div class="editnums-frame arrow-right" id="editNums" style="display: none;">
+   <h3>备货数量</h3>
+   <input type="text" placeholder="请输入备货数量"/>
+   <div class="btns">
+      <button class="z-btn-border2 z-btn-border-success" id="editNumsConfirm">确定</button>
+      <button class="z-btn-border2" id="editNumsCancel">取消</button>
+   </div>
+</div>
+
+<script>
+   // 打开数量编辑框
+   function showEditNumsFrame(nums) {
+      $("#editNums input").val(nums)
+      $("#editNums").css({
+         top: event.clientY - event.offsetY - 10,
+         left:event.clientX - event.offsetX - 200 - nums.toString().length * 9
+      }).show()
+   }
+   // 点击确定按钮
+   $("#editNumsConfirm").on('click', function () {
+      $("#editNums").hide()
+   })
+   // 点击确定按钮
+   $("#editNumsCancel").on('click', function () {
+      $("#editNums").hide()
+   })
+</script>
 </body>
 </html>

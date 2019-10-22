@@ -9,9 +9,49 @@
 .icon-edit { width: 14px; height: 16px; background: url("../images/icons.png") no-repeat; background-position: -110px -58px; margin-right: 10px; display: inline-block;}
 
 .order-info { overflow: hidden; margin: -10px 0;}
-.order-info .img { width: 90px; height: 80px; float: left; position: relative; background:rgba(220,220,220,1); box-shadow:0px 1px 6px 0px; border-radius:2px;}
+.order-info .img { width: 90px; height: 80px; float: left; position: relative; background:rgba(220,220,220,1); box-shadow:0 1px 6px 0; border-radius:2px;}
 .order-info .img img { width: 100%; height: 100%; border-radius:2px;}
 .order-info .img a.icon-view { width: 32px; height: 32px;  background: url("../images/icons.png") no-repeat; background-position: -33px -114px; position: absolute; right: 0; bottom: 0;}
 .order-info .content { float: left; margin-left: 30px;}
 .order-info .content h4 { font-size: 14px; font-weight: 400; line-height: 1; color: #666666; margin-top: 10px;}
 .order-info .content p { font-size: 14px; font-weight: 400; line-height: 1; color: #999999; margin-top: 10px;}
+
+/* 字典管理 */
+.dictionary-form { width: 1100px; display: flex; margin: 60px auto;}
+.dictionary-form>div { width: 550px;}
+.dictionary-form .form-item { display: flex; align-items: center; margin-bottom: 20px;}
+.dictionary-form .form-item .name { width: 105px; font-size: 14px; color: #333333; font-weight: 400;}
+.dictionary-form .form-item .inputs { width: 298px; height: 34px; border-radius: 4px; background-color: #F7F6F7; font-size: 12px; line-height: 34px; padding: 0 20px; color: #999999;}
+.dictionary-form .form-item .inputs::-webkit-input-placeholder { color: #999999;}
+.dictionary-form .form-item-upload .name { align-self: baseline}
+.dictionary-form .form-item-upload .hint { align-self: flex-end;  font-size: 12px; color: #898989; margin-left: 30px;}
+.dictionary-form .form-item-upload .z-upload { width: 150px; height: 150px;}
+
+.dictionary-form-btns { width: 400px; display: flex; justify-content: space-between; margin: 0 auto 60px auto;}
+.dictionary-form-btns button { width: 140px; height: 40px; border-radius: 4px; font-size: 14px; color: #ffffff;}
+.dictionary-form-btns button.info { background:rgba(95,170,255,1); box-shadow:0 1px 4px 0 rgba(102,179,251,0.77);}
+.dictionary-form-btns button.success { background:rgba(55,205,154,1); box-shadow:0 1px 4px 0 rgba(84,221,183,0.77);}
+
+
+/* 证件管理 */
+.credentials-item { width: 300px; height: 380px; float: left; margin: 0 50px 14px 50px;}
+.credentials-item .pic { width: 100%; height: 200px; border-radius: 4px; background-color: #E6E6E6; position: relative; margin-bottom: 20px;}
+.credentials-item .pic img { width: 100%; height: 100%; display: block; border-radius: 4px;}
+.credentials-item .pic .z-radio { position: absolute; top: 12px; left: 12px; display: none;}
+.credentials-item .pic .btn-view { width: 32px; height: 32px;  background: url("../images/icons.png") no-repeat; background-position: -33px -114px; position: absolute; bottom: 6px; right: 48px;}
+.credentials-item .pic .btn-download { width: 32px; height: 32px;  background: url("../images/icons.png") no-repeat; background-position: 0 -114px; position: absolute; bottom: 6px; right: 12px;}
+.credentials-item p { font-size: 14px; color: #666666; line-height: 1; margin-bottom: 15px;}
+.credentials-item p span { font-weight: bold;}
+.credentials-item .btns { margin-top: 22px; display: flex; justify-content: space-around;}
+.credentials-item .btns button { width: 120px; height: 40px; border-radius: 4px; line-height: 40px;}
+
+.cred-edit-frame .title { font-size: 16px; color: #666666; line-height: 1; text-align: center; padding: 32px 0 0 0;}
+.cred-edit-frame .form-item { position: relative; display: flex; align-items: center; margin-bottom: 18px;}
+.cred-edit-frame .form-item-date:after { content: ''; width: 9px; height: 16px;  background: url("../images/icons.png") no-repeat; background-position: -145px -58px; position: absolute; top: 9px; right: 15px;}
+.cred-edit-frame .form-item .name { width: 120px; text-align: right; font-size: 14px; color: #666666; margin-right: 10px;}
+.cred-edit-frame .form-item .inputs { width: 277px; height: 34px; border:1px solid rgba(230,230,230,1); border-radius: 4px; font-size: 14px; line-height: 34px; padding: 0 14px; color: #666666;}
+.cred-edit-frame .form-item-upload .name { align-self: baseline}
+.cred-edit-frame .btns { display: flex; justify-content: space-between; margin: 40px 70px 0 70px;}
+.cred-edit-frame .btns button { width: 120px; height: 40px; line-height: 40px; font-size: 14px; padding: 0; border-radius: 4px;}
+.cred-edit-frame .picture { margin: 0 20px; height: 288px; border-radius: 4px; background-color: #EEEEEE; margin-top: 20px;}
+.cred-edit-frame .picture img { width: 100%; height: 100%; display: block; border-radius: 4px;}

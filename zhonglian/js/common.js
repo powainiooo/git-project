@@ -1,23 +1,30 @@
-// 上传组件初始化
+/*
+* 上传组件初始化
+* z-upload-style2 实线样式
+* z-upload-readonly 如果只展示图片不适用上传功能 添加此class
+* */
 function initUpload(id) {
-    var frame = $(id)
-    var input = frame.find('input')
-    var img = frame.find('img')
-    frame.on('click', function () {
-        input.click()
-    })
-    input.on('click', function (e) {
-        e.stopPropagation()
-    })
-    input.on('change', function (e) {
-        var file = e.currentTarget.files[0]
-        var reader = new FileReader()
-        reader.readAsDataURL(file)
-        reader.onload = function (ev) {
-            img.attr('src', ev.currentTarget.result)
-            frame.addClass('z-upload-img')
-        }
-    })
+	var frame = $(id)
+	var input = frame.find('input')
+	var img = frame.find('img')
+	frame.on('click', function () {
+		if (!frame.hasClass('z-upload-readonly')) {
+			input.click()
+		}
+	})
+	input.on('click', function (e) {
+		e.stopPropagation()
+	})
+	input.on('change', function (e) {
+		console.log(e)
+		var file = e.currentTarget.files[0]
+		var reader = new FileReader()
+		reader.readAsDataURL(file)
+		reader.onload = function (ev) {
+			img.attr('src', ev.currentTarget.result)
+			frame.addClass('z-upload-img')
+		}
+	})
 }
 
 // 显示审核意见
@@ -60,5 +67,21 @@ function showConfirm(msg, callback) {
 	})
 	$("#confirm .cancel").on('click', function () {
 		$("#confirm").remove()
+	})
+}
+
+// alert 弹窗
+function showAlert(msg) {
+	var html = ''
+	html += '<div class="z-modal" id="alert">' +
+		 '<div class="z-modal-frame" style="width: 460px; height: 280px;">' +
+		 '<a href="javascript:;" class="alert-close"><i></i></a>' +
+		 '<div class="alert-frame">' +
+		 '<i class="icon-success"></i>' +
+		 '<div class="content">'+ msg +'</div>' +
+		 '</div></div></div>'
+	$("body").append(html)
+	$("#alert .alert-close").on('click', function () {
+		$("#alert").remove()
 	})
 }

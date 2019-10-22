@@ -1,10 +1,210 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-   <meta charset="UTF-8">
-   <title>Title</title>
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+   <meta name="Keywords" content="">
+   <meta name="description" content="">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+   <title>字典管理</title>
+   <!-- html5.js for IE less than 9 -->
+   <!--[if lt IE 9]>
+   <script src="../js/html5.js"></script>
+   <![endif]-->
+   <link href="../css/reset.css" rel="stylesheet">
+   <link href="../css/common.css" rel="stylesheet">
+   <link href="../css/order.css" rel="stylesheet">
+   <script src="../js/jquery-2.1.4.min.js"></script>
+   <script src="../js/common.js"></script>
 </head>
 <body>
-dictionary
+<div class="ml20 mr20">
+   <div class="z-title">字典管理</div>
+   <div class="z-card">
+      <div style="display: flex; justify-content: space-between;" class="mt20">
+         <div style="display:flex; align-items: center;" class="ml20 mb10">
+            <div class="z-select mr15" style="width: 115px;">
+               <select>
+                  <option>全部分类</option>
+               </select>
+            </div>
+            <div class="z-search mr15"><input type="text" placeholder="耗材名称/编号"></div>
+            <button class="z-btn">搜索</button>
+         </div>
+         <div class="mr20">
+            <a href="#" class="z-btn-border2 z-btn-border-success mr10">新增字典</a>
+            <button class="z-btn-border2 z-btn-border-info">字典分类</button>
+         </div>
+      </div>
+      <!-- 表单 -->
+      <div class="z-table">
+         <table style="min-width: 2760px;">
+            <colgroup>
+               <col style="width: 60px">
+            </colgroup>
+            <thead>
+            <tr>
+               <th></th>
+               <th>基本信息</th>
+               <th>单位</th>
+               <th>规格型号</th>
+               <th>常用名称</th>
+               <th>所属分类</th>
+               <th>是否高值</th>
+               <th>供应商编号</th>
+               <th>厂家编号</th>
+               <th>注册证件号</th>
+               <th>产品许可证</th>
+               <th>拼音简码</th>
+               <th>五笔简码</th>
+               <th>创建时间</th>
+               <th>创建人</th>
+               <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+               <td class="radio"><input type="checkbox" class="z-radio"></td>
+               <td>
+                  <div class="order-info">
+                     <div class="img">
+                        <img src="../images/avatar.png"/>
+                        <a href="javascript:;" class="icon-view"></a>
+                     </div>
+                     <div class="content">
+                        <h4>耗材名称耗材名称</h4>
+                        <p>耗材编号：15644544886511</p>
+                        <p>耗材价格：888元</p>
+                     </div>
+                  </div>
+               </td>
+               <td>个</td>
+               <td>25片/盒  0408-6623</td>
+               <td>黄连清热解毒胶囊</td>
+               <td>一级分类+二级分类</td>
+               <td>是</td>
+               <td>dabcd64359764313</td>
+               <td>dabcd64359764313</td>
+               <td>dabcd64359764313</td>
+               <td><a href="javascript:;" class="link-primary">查看</a> </td>
+               <td>pinyinpinyin </td>
+               <td>pinyinpinyin </td>
+               <td>2019-6-27 18:30:30</td>
+               <td>祝君成</td>
+               <td>
+                  <a href="javascript:;" class="link-success mr40">编辑</a>
+                  <a href="javascript:;" class="link-wrong" onclick="doDel()">删除</a>
+               </td>
+            </tr>
+            </tbody>
+         </table>
+      </div>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin: 20px;">
+         <div style="display: flex; align-items: center;">
+            <input type="checkbox" class="z-radio mr20" />
+            <span style="color: #999999">全选</span>
+         </div>
+         <!-- 分页 -->
+         <div id="page" class="z-page"></div>
+      </div>
+   </div>
+</div>
+
+<!-- 选择分类 -->
+<div class="z-modal" id="classify" style="display: none;">
+   <div class="z-modal-frame classify-frame" style="width: 1060px; max-height: 740px; margin-top: 50px; overflow: auto;">
+      <div class="theme">
+         <h3><i class="icon-classify"></i>选择分类</h3>
+         <a href="javascript:;" class="btn-close"></a>
+      </div>
+      <div class="classify-block">
+         <div class="title">
+            <h4>分类一</h4>
+            <div>
+               <input type="checkbox" class="z-radio">
+               全选
+            </div>
+         </div>
+         <ul class="list">
+            <li class="active">类别名称一</li>
+            <li>类别名称一</li>
+            <li>类别名称一</li>
+            <li>类别名称一</li>
+            <li>类别名称一</li>
+            <li>类别名称一</li>
+            <li>类别名称一</li>
+            <li>类别名称一</li>
+         </ul>
+      </div>
+      <div class="classify-block">
+         <div class="title">
+            <h4>分类二</h4>
+            <div>
+               <input type="checkbox" class="z-radio">
+               全选
+            </div>
+         </div>
+         <ul class="list">
+            <li class="active">类别名称一</li>
+            <li>类别名称一</li>
+            <li>类别名称一</li>
+            <li>类别名称一</li>
+            <li>类别名称一</li>
+            <li>类别名称一</li>
+            <li>类别名称一</li>
+            <li>类别名称一</li>
+         </ul>
+      </div>
+      <div class="tc mb40">
+         <button class="z-btn-border">开始创建</button>
+      </div>
+   </div>
+</div>
+
+<!-- 图片查看 -->
+<!-- 如果是查看单独 就按下面那样加上class picture-frame-single -->
+<div class="z-modal" id="picture" style="display: none;">
+   <div class="z-modal-frame picture-frame picture-frame-single" style=" margin-top: 100px;">
+      <a href="javascript:;" class="btn-close"><i></i></a>
+      <div class="swiper-container picture-swiper">
+         <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="../images/img2.jpg"></div>
+            <div class="swiper-slide"><img src="../images/img2.jpg"></div>
+            <div class="swiper-slide"><img src="../images/img2.jpg"></div>
+         </div>
+      </div>
+      <div class="picture-button-prev"></div>
+      <div class="picture-button-next"></div>
+   </div>
+</div>
+
+<link href="../plugin/page/zxf_page.css" rel="stylesheet">
+<script src="../plugin/page/zxf_page.js"></script>
+<link href="../plugin/swiper/swiper.min.css" rel="stylesheet">
+<script src="../plugin/swiper/swiper.min.js"></script>
+<script>
+// 分页
+$("#page").createPage({
+	pageNum: 20,
+	current: 6,
+	backfun: function(e) {
+		//console.log(e);//回调
+	}
+});
+
+// 删除
+function doDel() {
+   showConfirm('确认删除“耗材名称耗材名称”？', function () {
+	   showAlert('删除成功！')
+   })
+}
+
+// 轮播图
+var mySwiper = new Swiper ('.picture-swiper', {
+	navigation: {
+		nextEl: '.picture-button-next',
+		prevEl: '.picture-button-prev'
+	}
+})
+</script>
 </body>
 </html>

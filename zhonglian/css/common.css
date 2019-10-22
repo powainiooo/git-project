@@ -31,7 +31,7 @@
 .frame-aside .menu-list .level2 li a { display: block; font-size: 16px; line-height: 1; padding:25px 10px 25px 60px;  color: #888888; font-weight: bold;}
 .frame-aside .menu-list .level2 li a:hover, .frame-aside .menu-list .level2 li.active a { color: #6fd7bb;}
 
-.frame-container { margin: 60px 0 0 310px; height: calc(100vh - 64px);}
+.frame-container { margin: 60px 0 0 310px; height: calc(100vh - 60px);}
 .frame-container iframe { width: 100%; height: 100%; border: none;}
 
 .z-card { border-radius: 6px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); background-color: #ffffff; overflow: hidden;}
@@ -40,20 +40,26 @@
 
 /* 上传 */
 .z-upload { width: 180px; height: 180px; border: 1px dashed #dddddd; background-color: #fafafa; display: flex; flex-direction: column; justify-content: center; align-items: center; cursor: pointer;}
+.z-upload-style2 { width: 120px; height: 120px; border: 1px solid #E6E6E6; border-radius: 4px; background-color: #ffffff;}
 .z-upload .icon-add { width: 32px; height: 32px; background: url("../images/icons.png") no-repeat; background-position: -118px 0;}
+.z-upload-style2 .icon-add { width: 24px; height: 24px; background: url("../images/icons.png") no-repeat; background-position: -21px -59px;}
 .z-upload p { font-size: 14px; line-height: 1; color: #cccccc; margin-top: 20px;}
 .z-upload input { display: none;}
 .z-upload img { width: 100%; display: none;}
 .z-upload-img .icon-add{ display: none;}
 .z-upload-img p{ display: none;}
 .z-upload-img img { display: block;}
+.z-upload-readonly .icon-add{ display: none;}
+.z-upload-readonly p{ display: none;}
+.z-upload-readonly img { display: block;}
 
 /* 按钮 */
 .z-btn { padding: 8px 16px 7px 16px; background-color: #37cd9a; font-size: 14px; color: #ffffff; border-radius: 8px; border: none;}
 
 .z-btn-border { height: 40px; background:rgba(255,255,255,1); border:1px solid rgba(55,205,154,1); border-radius:4px; color: #37CD9A; padding: 0 40px;}
 
-.z-btn-border2 { height: 34px; border-radius:4px; padding: 0 18px; font-size: 12px; font-weight: 400;}
+.z-btn-border2 { height: 34px; border-radius:4px; padding: 0 18px; font-size: 12px; line-height: 34px; font-weight: 400; display: inline-block;}
+.z-btn-border-primary { border:1px solid rgba(137,174,242,1); background:rgba(229,238,255,1); color:#5386E3;}
 .z-btn-border-success { border:1px solid rgba(114,226,188,1); background:rgba(221,251,241,1); color:rgba(55,205,154,1);}
 .z-btn-border-warn { border:1px solid rgba(245,179,139,1); background:rgba(255,238,227,1); color:rgba(243,143,82,1);}
 .z-btn-border-info { border:1px solid rgba(202,192,222,1); background:rgba(240,233,254,1); color:rgba(171,150,218,1);}
@@ -82,13 +88,14 @@
 .link-success { color: #21C79A}
 .link-info { color: #AB96DA}
 .link-warn { color: #F38F52}
+.link-wrong { color: #FC6E96}
 
 /* 单选框 */
 .z-radio { width: 20px; height: 20px; -webkit-appearance: none; background: url("../images/icons.png") no-repeat; background-position: -88px -119px;}
 .z-radio:checked { background-position: -66px -119px;}
 
    /* 表格 */
-.z-table { width: 100%; overflow-x: scroll;}
+.z-table { width: 100%; overflow-x: auto;}
 .z-table::-webkit-scrollbar { height: 12px; border-radius: 6px; background-color: #F2F2F5;}
 .z-table::-webkit-scrollbar-thumb { height: 12px; border-radius: 6px; background-color: #DEDEE0;}
 .z-table th, .z-table td { font-size: 14px; color: #6D6F77; text-align: left; padding: 20px 0 20px 20px; vertical-align: middle;}
@@ -98,7 +105,7 @@
 
 
 /* 弹窗 */
-.z-modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.3); z-index: 2000;}
+.z-modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.3); z-index: 2000; overflow: auto;}
 .z-modal-frame { background:rgba(255,255,255,1); border-radius:4px; position: relative; margin: 200px auto 0 auto;}
 .z-modal-frame-close { width: 16px; height: 16px; background: url("../images/icons.png") no-repeat; background-position: -3px -64px; position: absolute; top: 20px; right: 16px;}
 
@@ -109,10 +116,44 @@
 .check-back-frame .content { margin: 0 40px; min-height: 150px; margin-bottom: 20px; font-size:14px; font-weight:400; color:rgba(136,136,136,1); line-height:26px;}
 
 /* 弹窗 */
-.confirm-frame { overflow: hidden;}
-.confirm-frame .icon-warn { width: 48px; height: 48px; background: url("../images/icons.png") no-repeat; background-position: -111px -77px; display: block; margin: 40px auto;}
+.icon-warn { width: 48px; height: 48px; background: url("../images/icons.png") no-repeat; background-position: -111px -77px; display: block;}
+.icon-success { width: 68px; height: 68px; background: url("../images/icons.png") no-repeat; background-position: -160px -63px; display: block;}
+.confirm-frame, .alert-frame { overflow: hidden;}
+.confirm-frame .icon-warn { margin: 40px auto;}
 .confirm-frame .content { margin: 0 40px 50px 40px; font-size:16px; font-weight:400; color:rgba(102,102,102,1); text-align: center;}
 .confirm-frame .btns { margin: 0 70px; display: flex; justify-content: space-between; align-items: center;}
 .confirm-frame .btns a { width:120px; height:40px; border-radius:4px; display: flex; justify-content: center; align-items: center;}
 .confirm-frame .btns a.confirm { background:rgba(55,205,154,1); box-shadow:0px 1px 4px 0px rgba(84,221,183,0.77); color: #ffffff;}
 .confirm-frame .btns a.cancel { box-shadow:0px 1px 4px 0px rgba(84,221,183,0.77); color:rgba(55,205,154,1); border:1px solid rgba(55,205,154,1);}
+
+.alert-frame .icon-success { margin: 70px auto 30px;}
+.alert-frame .content { margin: 0 40px 50px 40px; font-size:16px; font-weight:400; color: #666666; text-align: center;}
+.alert-close { width: 46px; height: 46px; background-color: rgba(58,58,58,0.5); border-radius: 50%; position: absolute; top: -100px; right: -100px; display: flex; justify-content: center; align-items: center;}
+.alert-close i { width: 16px; height: 16px; background: url("../images/icons.png") no-repeat; background-position: -58px -88px;}
+
+
+/* 选择分类 */
+.classify-frame .theme { height: 66px; margin: 0 35px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #EBEBEB;}
+.classify-frame .theme h3 { font-size: 20px; font-weight: 400; color: #333333;  display: flex; align-items: center;}
+.classify-frame .theme h3 .icon-classify { width: 19px; height: 19px; background: url("../images/icons.png") no-repeat; background-position: -48px -63px; margin-right: 14px;}
+.classify-frame .theme .btn-close { width: 16px; height: 16px; background: url("../images/icons.png") no-repeat; background-position: -58px -88px;}
+.classify-block { margin: 0 35px;}
+.classify-block .title { display: flex; justify-content: space-between; align-items: center; margin: 29px 0 20px 0;}
+.classify-block .title h4 { font-size: 16px; color: #999999; font-weight: 400;}
+.classify-block .title div { display: flex; align-items: center;}
+.classify-block .title input[type=checkbox] { transform: scale(0.9); margin-right: 10px;}
+.classify-block .list { overflow: hidden; margin: 0 -9px;}
+.classify-block .list li { width: 150px; height: 42px; border:1px solid rgba(229,229,229,1); border-radius:6px; font-size: 16px; line-height: 42px; color: #666666; text-align: center; float: left; margin: 0 9px 20px 9px;}
+.classify-block .list li.active { background:linear-gradient(-79deg,rgba(134,236,201,1),rgba(119,173,240,1)); box-shadow:0px 1px 4px 0px rgba(184,220,219,0.77); color: #ffffff;}
+
+/* 图片预览 */
+.picture-frame { width: 1150px; padding: 20px 40px;}
+.picture-frame-single { width: 1080px; padding: 20px;}
+.picture-frame .picture-swiper { width: 1040px; height: 658px; background-color: #ECECEC; margin: 0 auto;}
+.picture-frame .picture-swiper .swiper-slide img { width: 1040px; height: 658px;}
+.picture-frame .picture-button-prev {  width: 15px; height: 28px; background: url("../images/icons.png") no-repeat; background-position: -72px -58px; position: absolute; top: 50%; left: 20px; margin-top: -14px; z-index: 10; cursor: pointer;}
+.picture-frame .picture-button-next {  width: 15px; height: 28px; background: url("../images/icons.png") no-repeat; background-position: -232px -62px; position: absolute; top: 50%; right: 20px; margin-top: -14px; z-index: 10; cursor: pointer;}
+.picture-frame-single .picture-button-prev { display: none;}
+.picture-frame-single .picture-button-next { display: none;}
+.picture-frame .btn-close { width: 46px; height: 46px; background-color: rgba(58,58,58,0.5); border-radius: 50%; position: absolute; top: -60px; right: 0; display: flex; justify-content: center; align-items: center;}
+.picture-frame .btn-close i { width: 16px; height: 16px; background: url("../images/icons.png") no-repeat; background-position: -58px -88px;}

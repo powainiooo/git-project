@@ -16,3 +16,13 @@
 已入库：order7.html
 待备货详情：order-detail2.html
 已发货详情：order-detail5.html
+
+2019-10-22:
+字典管理：dictionary.html
+字典管理-新增：dictionary-new.html
+证件管理-有效证件：credentials.html
+证件管理-失效证件：credentials2.html
+报表管理-订单汇总表：report-form.html
+报表管理-发货汇总表：report-form2.html
+报表管理-订单明细表：report-form3.html
+报表管理-发货明细表：设计图里没有，不知道是不是重复了

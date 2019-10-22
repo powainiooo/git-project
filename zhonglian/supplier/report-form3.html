@@ -21,9 +21,9 @@
    <div class="z-title">报表管理</div>
    <div class="z-card">
       <ul class="z-tab">
-         <li class="active"><a href="#">订单汇总表</a> </li>
+         <li><a href="#">订单汇总表</a> </li>
          <li><a href="#">发货汇总表</a> </li>
-         <li><a href="#">订单明细表</a> </li>
+         <li class="active"><a href="#">订单明细表</a> </li>
          <li><a href="#">发货明细表</a> </li>
       </ul>
       <div style="display: flex; justify-content: space-between;">
@@ -40,39 +40,54 @@
             <button class="z-btn-border2 z-btn-border-info">导出</button>
          </div>
       </div>
-      <div class="mt20 ml20">
-         <div class="z-tag"><span>合计</span>10.689.00</div>
-      </div>
       <!-- 表单 -->
       <div class="z-table">
-         <table style="min-width: 1330px; width: 100%;">
+         <table style="min-width: 2660px; width: 100%;">
             <colgroup>
                <col style="width: 60px">
             </colgroup>
             <thead>
             <tr>
                <th></th>
-               <th>仓库</th>
-               <th>医院编号</th>
-               <th>医院名称</th>
+               <th>医院</th>
+               <th>耗材编号</th>
+               <th>耗材名称</th>
+               <th>单位</th>
+               <th>规格</th>
+               <th>申请数量</th>
+               <th>发货数量</th>
+               <th>未发货数量</th>
+               <th>单价</th>
                <th>金额</th>
-               <th>制表时间</th>
-               <th>制表人</th>
-               <th>审核人</th>
-               <th>复核人</th>
+               <th>厂家</th>
+               <th>品牌</th>
+               <th>产地</th>
+               <th>注册证件号</th>
+               <th>生产许可证</th>
+               <th>状态</th>
+               <th>日期</th>
             </tr>
             </thead>
             <tbody>
             <tr>
                <td class="radio"><input type="checkbox" class="z-radio"></td>
-               <td>医疗库</td>
-               <td>123456789123456</td>
                <td>深圳市第一人民医院</td>
-               <td>68888.00</td>
-               <td>2019-7-25</td>
-               <td>陈海霞</td>
-               <td>陈海霞</td>
-               <td>陈海霞</td>
+               <td>123456789123456</td>
+               <td>复合树脂填充材料</td>
+               <td>支</td>
+               <td>4.5g/支 型号：beautifil ll 色号：A2</td>
+               <td>5000</td>
+               <td>5000</td>
+               <td>5000</td>
+               <td>5000.00</td>
+               <td>5000.00</td>
+               <td>贵阳柯尔医疗器械有限公司</td>
+               <td>品牌名称</td>
+               <td>贵州</td>
+               <td>123456789123</td>
+               <td>查看 </td>
+               <td>状态 </td>
+               <td>2019-06-20 </td>
             </tr>
             </tbody>
          </table>
@@ -86,8 +101,8 @@
          <div id="page" class="z-page"></div>
       </div>
    </div>
-</div>
 
+</div>
 <link href="../plugin/page/zxf_page.css" rel="stylesheet">
 <script src="../plugin/page/zxf_page.js"></script>
 <script>

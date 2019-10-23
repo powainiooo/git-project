@@ -33,6 +33,10 @@
 .dictionary-form-btns button.info { background:rgba(95,170,255,1); box-shadow:0 1px 4px 0 rgba(102,179,251,0.77);}
 .dictionary-form-btns button.success { background:rgba(55,205,154,1); box-shadow:0 1px 4px 0 rgba(84,221,183,0.77);}
 
+.announce-form { display: block; width: 830px;}
+.announce-form>div { width: auto;}
+.announce-form .form-item { align-items: flex-start;}
+.announce-form .form-item .inputs { width: 730px; height: auto;}
 
 /* 证件管理 */
 .credentials-item { width: 300px; height: 380px; float: left; margin: 0 50px 14px 50px;}
@@ -45,6 +49,10 @@
 .credentials-item p span { font-weight: bold;}
 .credentials-item .btns { margin-top: 22px; display: flex; justify-content: space-around;}
 .credentials-item .btns button { width: 120px; height: 40px; border-radius: 4px; line-height: 40px;}
+
+.announce-item p.title { line-height: 24px; margin-bottom: 5px; height: 48px; overflow: hidden;}
+.announce-item p.time { color: #999999;}
+.announce-item .btns { justify-content: flex-start;}
 
 .cred-edit-frame .title, .annex-frame .title { font-size: 16px; color: #666666; line-height: 1; text-align: center; padding: 32px 0 0 0;}
 .cred-edit-frame .form-item { position: relative; display: flex; align-items: center; margin-bottom: 18px;}

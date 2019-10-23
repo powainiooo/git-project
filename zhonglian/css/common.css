@@ -27,6 +27,9 @@
 .frame-aside .menu-list .level1>li>a i.icon-manage { background-position: -25px -37px;}
 .frame-aside .menu-list .level1>li>a i.icon-person { background-position: -48px -37px;}
 .frame-aside .menu-list .level1>li>a i.icon-setting { background-position: -70px -37px;}
+.frame-aside .menu-list .level1>li>a i.icon-person2 { height: 19px; background-position: -306px -75px;}
+.frame-aside .menu-list .level1>li>a i.icon-seal { height: 19px; background-position: -328px -75px;}
+.frame-aside .menu-list .level1>li>a i.icon-manage2 { background-position: -306px -55px;}
 .frame-aside .menu-list .level1>li>a:hover, .frame-aside .menu-list .level1>li.active>a { border-left: 6px solid #41d5bc; background-color: #e5f7f4; color: #6fd7bb;}
 .frame-aside .menu-list .level2 { display: none;}
 .frame-aside .menu-list .level1>li.active .level2 { display: block;}

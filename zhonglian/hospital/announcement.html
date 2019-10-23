@@ -5,7 +5,7 @@
    <meta name="Keywords" content="">
    <meta name="description" content="">
    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-   <title>证件审核</title>
+   <title>公告管理</title>
    <!-- html5.js for IE less than 9 -->
    <!--[if lt IE 9]>
    <script src="../js/html5.js"></script>
@@ -18,27 +18,38 @@
 </head>
 <body>
 <div class="ml20 mr20">
-   <div class="z-title">证件审核</div>
+   <div class="z-title">公告管理</div>
    <div class="z-card">
-      <ul class="z-tab">
-         <li class="active"><a href="#">待审核</a> </li>
-         <li><a href="#">已审核</a></li>
-      </ul>
+      <div style="display: flex; justify-content: space-between;" class="mt20">
+         <div style="display:flex; align-items: center;" class="ml20 mb10">
+            <div class="z-select mr15" style="width: 115px;">
+               <select>
+                  <option>已发布</option>
+               </select>
+            </div>
+            <div class="z-select mr15" style="width: 115px;">
+               <select>
+                  <option>一个月</option>
+               </select>
+            </div>
+            <div class="z-search mr15"><input type="text" placeholder="医院编号/名称"></div>
+            <button class="z-btn">搜索</button>
+         </div>
+         <div class="mr20">
+            <button class="z-btn-border2 z-btn-border-info">发布公告</button>
+         </div>
+      </div>
       <!-- 列表 -->
       <div style="overflow: hidden;" class="ml20 mr20 mt30">
          <div class="clearfix" style="margin: 0 -50px;" id="credList">
-            <div class="credentials-item">
+            <div class="credentials-item announce-item">
                <div class="pic">
                   <img src="../images/bg.jpg" />
-                  <input type="checkbox" class="z-radio">
-                  <a href="javascript:;" class="btn-view"></a>
-                  <a href="javascript:;" class="btn-download"></a>
                </div>
-               <p><span>证件名称：</span>名称名称名称</p>
-               <p><span>供应商：</span>深圳市第一制药医疗耗材中心</p>
+               <p class="title">标题标题标题标题标题标题标题标题标题标题标 题标题标题标题标题标题标题标...</p>
+               <p class="time">2019-05-12</p>
                <div class="btns">
-                  <button class="z-btn-border-success">审核</button>
-                  <button class="z-btn-border-success" style="background-color: #ffffff;">查看</button>
+                  <button class="z-btn-border-success">编辑</button>
                </div>
             </div>
          </div>

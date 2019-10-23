@@ -5,7 +5,7 @@
    <meta name="Keywords" content="">
    <meta name="description" content="">
    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-   <title>我的医院</title>
+   <title>订单审核</title>
    <!-- html5.js for IE less than 9 -->
    <!--[if lt IE 9]>
    <script src="../js/html5.js"></script>
@@ -18,19 +18,28 @@
 </head>
 <body>
 <div class="ml20 mr20">
-   <div class="z-title">我的医院</div>
+   <div class="z-title">订单审核</div>
    <div class="z-card">
       <ul class="z-tab">
-         <li class="active"><a href="#">我的医院</a> </li>
-         <li><a href="#">待审核医院</a> </li>
+         <li><a href="#">全部订单</a> </li>
+         <li><a href="#">待备货</a> </li>
+         <li><a href="#">待发货</a> </li>
+         <li class="active"><a href="#">待收货</a> </li>
+         <li><a href="#">已完成</a> </li>
       </ul>
       <div style="display: flex; justify-content: space-between;">
          <div style="display:flex; align-items: center;" class="ml20 mb10">
-            <div class="z-search mr15"><input type="text" placeholder="医院编号/名称"></div>
+            <div class="z-date mr15"><input type="text" placeholder="开始时间 - 结束时间" id="datePicker"></div>
+            <div class="z-select mr15" style="width: 115px;">
+               <select>
+                  <option>高值耗材</option>
+               </select>
+            </div>
+            <div class="z-search mr15"><input type="text" placeholder="耗材名称/订单编号/医院名称"></div>
             <button class="z-btn">搜索</button>
          </div>
          <div class="mr20">
-            <button class="z-btn-border2 z-btn-border-info">新建医院</button>
+            <button class="z-btn-border2 z-btn-border-warn">审批</button>
          </div>
       </div>
       <!-- 表单 -->
@@ -42,33 +51,25 @@
             <thead>
             <tr>
                <th></th>
-               <th>医院名称</th>
-               <th>医院编号</th>
-               <th>医院联系人</th>
-               <th>联系电话</th>
-               <th>联系地址</th>
-               <th>关系</th>
+               <th>订单编号</th>
+               <th>发货编号</th>
                <th>创建时间</th>
-               <th>审核意见</th>
-               <th>供货目录</th>
+               <th>供应商名称</th>
+               <th>总数量</th>
+               <th>总金额</th>
+               <th>详情</th>
             </tr>
             </thead>
             <tbody>
             <tr>
                <td class="radio"><input type="checkbox" class="z-radio"></td>
+               <td>abcd15644544886511</td>
+               <td>abcd15644544886511</td>
+               <td>2019-7-25 20:30:30</td>
                <td>深圳市第一人民医院</td>
-               <td>123456789123456</td>
-               <td>陈晓红</td>
-               <td>13715456542</td>
-               <td>深圳市福田区车公庙劲松大厦12D</td>
-               <td>已绑定</td>
-               <td>2019-05-20 19:20:06</td>
-               <td>
-                  <a href="#" class="link-primary" onclick="getCheckBack()">查看</a>
-               </td>
-               <td>
-                  <a href="#" class="link-info">新建</a>
-               </td>
+               <td>666</td>
+               <td>68888.00</td>
+               <td><a href="javascript:;" class="link-primary">查看</a> </td>
             </tr>
             </tbody>
          </table>
@@ -82,11 +83,28 @@
          <div id="page" class="z-page"></div>
       </div>
    </div>
+
 </div>
 
+<link href="../plugin/daterangepicker/daterangepicker.css" rel="stylesheet">
+<script src="../plugin/daterangepicker/moment.min.js"></script>
+<script src="../plugin/daterangepicker/daterangepicker.js"></script>
 <link href="../plugin/page/zxf_page.css" rel="stylesheet">
 <script src="../plugin/page/zxf_page.js"></script>
 <script>
+// 日期插件
+$("#datePicker").daterangepicker({
+	startDate: moment().hours(0).minutes(0).seconds(0), //设置开始日期
+	endDate: moment(new Date()), //设置结束器日期
+	showWeekNumbers: true,
+	locale: {
+		format: "YYYY-MM-DD", //设置显示格式
+		applyLabel: '确定', //确定按钮文本
+		cancelLabel: '取消', //取消按钮文本
+		daysOfWeek: ['日', '一', '二', '三', '四', '五', '六'],
+		monthNames: ['一月', '二月', '三月', '四月', '五月', '六月','七月', '八月', '九月', '十月', '十一月', '十二月']
+	}
+})
 // 分页
 $("#page").createPage({
 	pageNum: 20,
@@ -95,11 +113,6 @@ $("#page").createPage({
 		//console.log(e);//回调
 	}
 });
-
-//获取审核意见
-function getCheckBack() {
-	showCheckBack('123')
-}
 </script>
 </body>
 </html>

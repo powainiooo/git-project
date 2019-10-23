@@ -19,6 +19,7 @@
 .banner-swiper { margin-bottom: 10px;}
 .banner-swiper .swiper-slide { height: 348px; background-repeat: no-repeat; background-position: center center;}
 .banner-swiper .swiper-pagination { text-align: left; padding-left: 26px;}
+.hospital-banner-swiper .swiper-pagination { text-align: center;}
 .banner-swiper .swiper-pagination-bullet { background-color: #494949; opacity: 1;}
 .banner-swiper .swiper-pagination-bullet-active { width: 60px; border-radius: 4px; background-color: #ffffff; opacity: 1; box-shadow: 0 1px 6px rgba(0,0,0,0.2);}
 

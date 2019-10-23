@@ -71,15 +71,18 @@ function showConfirm(msg, callback) {
 }
 
 // alert 弹窗
-function showAlert(msg) {
+function showAlert(msg, submsg) {
 	var html = ''
 	html += '<div class="z-modal" id="alert">' +
 		 '<div class="z-modal-frame" style="width: 460px; height: 280px;">' +
 		 '<a href="javascript:;" class="alert-close"><i></i></a>' +
 		 '<div class="alert-frame">' +
 		 '<i class="icon-success"></i>' +
-		 '<div class="content">'+ msg +'</div>' +
-		 '</div></div></div>'
+		 '<div class="content">'+ msg +'</div>'
+	if (submsg) {
+		html += '<div class="sub-content">'+ submsg +'</div>'
+	}
+	 html += '</div></div></div>'
 	$("body").append(html)
 	$("#alert .alert-close").on('click', function () {
 		$("#alert").remove()

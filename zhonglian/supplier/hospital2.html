@@ -21,8 +21,8 @@
    <div class="z-title">我的医院</div>
    <div class="z-card">
       <ul class="z-tab">
-         <li class="active"><a href="#">我的医院</a> </li>
-         <li><a href="#">待审核医院</a> </li>
+         <li><a href="#">我的医院</a> </li>
+         <li class="active"><a href="#">待审核医院</a> </li>
       </ul>
       <div style="display: flex; justify-content: space-between;">
          <div style="display:flex; align-items: center;" class="ml20 mb10">
@@ -36,50 +36,68 @@
       <!-- 表单 -->
       <div class="z-table">
          <table style="min-width: 1330px; width: 100%;">
-            <colgroup>
-               <col style="width: 60px">
-            </colgroup>
             <thead>
             <tr>
-               <th></th>
                <th>医院名称</th>
                <th>医院编号</th>
                <th>医院联系人</th>
                <th>联系电话</th>
                <th>联系地址</th>
                <th>关系</th>
-               <th>创建时间</th>
-               <th>审核意见</th>
-               <th>供货目录</th>
             </tr>
             </thead>
             <tbody>
             <tr>
-               <td class="radio"><input type="checkbox" class="z-radio"></td>
                <td>深圳市第一人民医院</td>
                <td>123456789123456</td>
                <td>陈晓红</td>
                <td>13715456542</td>
                <td>深圳市福田区车公庙劲松大厦12D</td>
                <td>已绑定</td>
-               <td>2019-05-20 19:20:06</td>
-               <td>
-                  <a href="#" class="link-primary" onclick="getCheckBack()">查看</a>
-               </td>
-               <td>
-                  <a href="#" class="link-info">新建</a>
-               </td>
             </tr>
             </tbody>
          </table>
       </div>
-      <div style="display: flex; justify-content: space-between; align-items: center; margin: 20px;">
-         <div style="display: flex; align-items: center;">
-            <input type="checkbox" class="z-radio mr20" />
-            <span style="color: #999999">全选</span>
-         </div>
+      <div style="display: flex; justify-content: flex-end; align-items: center; margin: 20px;">
          <!-- 分页 -->
          <div id="page" class="z-page"></div>
+      </div>
+   </div>
+</div>
+
+<!-- 新增医院 -->
+<div class="z-modal" id="newHospital" style="display: none;">
+   <div class="z-modal-frame cred-edit-frame" style="width: 460px; height: 230px;">
+      <div class="title">新增医院</div>
+      <div class="mr50 mt40">
+         <div class="form-item">
+            <span class="name">医院编码</span>
+            <input type="text" class="inputs" placeholder="请输入医院编码">
+         </div>
+      </div>
+      <div class="btns">
+         <button class="z-btn" id="btnNew">确认</button>
+         <button class="z-btn-border-success btnClose">取消</button>
+      </div>
+   </div>
+</div>
+
+<!-- 关联医院 -->
+<div class="z-modal" id="connectHospital" style="display: none;">
+   <div class="z-modal-frame cred-edit-frame" style="width: 614px; height: 360px; overflow: hidden;">
+      <div class="hospital-info">
+         <div class="imgs"><img src="../images/bg.jpg"></div>
+         <div>
+            <p><span>医院名称：</span>深圳市福田区人民第一医院</p>
+            <p><span>医院编号：</span>abc12345678912345</p>
+            <p><span>医院联系人：</span>陈晓红</p>
+            <p><span>联系电话：</span>13719456254</p>
+            <p><span>联系地址：</span>深圳市福田区车公庙劲松大厦12D</p>
+         </div>
+      </div>
+      <div class="btns" style="margin-left: 150px; margin-right: 150px;">
+         <button class="z-btn">确认关联</button>
+         <button class="z-btn-border-success btnClose">取消</button>
       </div>
    </div>
 </div>
@@ -96,10 +114,14 @@ $("#page").createPage({
 	}
 });
 
-//获取审核意见
-function getCheckBack() {
-	showCheckBack('123')
-}
+// 点击关闭弹窗
+$(".z-modal .btnClose").on('click', function () {
+	$(this).parents('.z-modal').hide()
+})
+// 确定新增一元
+$("#btnNew").on('click', function () {
+   showAlert('添加成功！', '请耐心等待医院验证通过')
+})
 </script>
 </body>
 </html>

@@ -5,7 +5,7 @@
    <meta name="Keywords" content="">
    <meta name="description" content="">
    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-   <title>我的医院</title>
+   <title>我的供应商</title>
    <!-- html5.js for IE less than 9 -->
    <!--[if lt IE 9]>
    <script src="../js/html5.js"></script>
@@ -18,57 +18,57 @@
 </head>
 <body>
 <div class="ml20 mr20">
-   <div class="z-title">我的医院</div>
+   <div class="z-title">我的供应商</div>
    <div class="z-card">
       <ul class="z-tab">
-         <li class="active"><a href="#">我的医院</a> </li>
-         <li><a href="#">待审核医院</a> </li>
+         <li class="active"><a href="#">我的供应商</a> </li>
+         <li><a href="#">待审核供应商</a> </li>
       </ul>
       <div style="display: flex; justify-content: space-between;">
          <div style="display:flex; align-items: center;" class="ml20 mb10">
-            <div class="z-search mr15"><input type="text" placeholder="医院编号/名称"></div>
+            <div class="z-search mr15"><input type="text" placeholder="供应商名称/编号"></div>
             <button class="z-btn">搜索</button>
          </div>
          <div class="mr20">
-            <button class="z-btn-border2 z-btn-border-info">新建医院</button>
+            <button class="z-btn-border2 z-btn-border-primary mr10">添加供应商</button>
+            <button class="z-btn-border2 z-btn-border-success mr10">解除关系</button>
+            <button class="z-btn-border2 z-btn-border-info">导出</button>
          </div>
       </div>
       <!-- 表单 -->
       <div class="z-table">
-         <table style="min-width: 1330px; width: 100%;">
+         <table style="min-width: 1730px; width: 100%;">
             <colgroup>
                <col style="width: 60px">
             </colgroup>
             <thead>
             <tr>
                <th></th>
-               <th>医院名称</th>
-               <th>医院编号</th>
-               <th>医院联系人</th>
+               <th>供应商名称</th>
+               <th>供应商编号</th>
+               <th>供应商联系人</th>
                <th>联系电话</th>
                <th>联系地址</th>
-               <th>关系</th>
+               <th>状态</th>
                <th>创建时间</th>
-               <th>审核意见</th>
+               <th>关系解除</th>
                <th>供货目录</th>
+               <th>操作</th>
             </tr>
             </thead>
             <tbody>
             <tr>
                <td class="radio"><input type="checkbox" class="z-radio"></td>
                <td>深圳市第一人民医院</td>
-               <td>123456789123456</td>
-               <td>陈晓红</td>
-               <td>13715456542</td>
+               <td>abcd15644544886511</td>
+               <td>陈洪涛</td>
+               <td>13715456525</td>
                <td>深圳市福田区车公庙劲松大厦12D</td>
                <td>已绑定</td>
-               <td>2019-05-20 19:20:06</td>
-               <td>
-                  <a href="#" class="link-primary" onclick="getCheckBack()">查看</a>
-               </td>
-               <td>
-                  <a href="#" class="link-info">新建</a>
-               </td>
+               <td>2019-7-25  20:30:30</td>
+               <td><a href="javascript:;" class="link-success" onclick="disConnect('深圳市第一人民医院')">解除关系</a> </td>
+               <td><a href="javascript:;" class="link-primary">查看</a> </td>
+               <td><a href="javascript:;" class="link-info">导出</a></td>
             </tr>
             </tbody>
          </table>
@@ -96,9 +96,11 @@ $("#page").createPage({
 	}
 });
 
-//获取审核意见
-function getCheckBack() {
-	showCheckBack('123')
+// 解除关系
+function disConnect(name) {
+   showConfirm('确认解除与“'+ name +'”的关系？', function () {
+      showAlert('解除成功！')
+   })
 }
 </script>
 </body>

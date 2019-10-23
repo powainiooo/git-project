@@ -26,3 +26,17 @@
 报表管理-发货汇总表：report-form2.html
 报表管理-订单明细表：report-form3.html
 报表管理-发货明细表：设计图里没有，不知道是不是重复了
+
+2019-10-23:
+我的医院：hospital.html
+待审核医院：hospital2.html
+供货目录：hospital-catalogue.html
+新建目录：catalogue-new.html
+我的厂家：factory.html
+我的厂家-编辑：factory-edit.html
+待审核厂家：factory2.html
+个人信息：personal.html
+账号设置：setting.html
+修改手机号：revise-phone.html
+修改密码：revise-psw.html
+子账号管理：users.html

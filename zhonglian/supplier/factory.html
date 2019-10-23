@@ -1,10 +1,109 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-   <meta charset="UTF-8">
-   <title>Title</title>
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+   <meta name="Keywords" content="">
+   <meta name="description" content="">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+   <title>我的厂家</title>
+   <!-- html5.js for IE less than 9 -->
+   <!--[if lt IE 9]>
+   <script src="../js/html5.js"></script>
+   <![endif]-->
+   <link href="../css/reset.css" rel="stylesheet">
+   <link href="../css/common.css" rel="stylesheet">
+   <link href="../css/order.css" rel="stylesheet">
+   <script src="../js/jquery-2.1.4.min.js"></script>
+   <script src="../js/common.js"></script>
 </head>
 <body>
-factory
+<div class="ml20 mr20">
+   <div class="z-title">我的厂家</div>
+   <div class="z-card">
+      <ul class="z-tab">
+         <li class="active"><a href="#">我的厂家</a> </li>
+         <li><a href="#">待审核厂家</a> </li>
+      </ul>
+      <div style="display: flex; justify-content: space-between;">
+         <div style="display:flex; align-items: center;" class="ml20 mb10">
+            <div class="z-search mr15"><input type="text" placeholder="厂家编号/名称"></div>
+            <button class="z-btn">搜索</button>
+         </div>
+         <div class="mr20">
+            <button class="z-btn-border2 z-btn-border-info">新建厂家</button>
+         </div>
+      </div>
+      <!-- 表单 -->
+      <div class="z-table">
+         <table style="min-width: 2060px; width: 100%;">
+            <colgroup>
+               <col style="width: 60px">
+            </colgroup>
+            <thead>
+            <tr>
+               <th></th>
+               <th>厂家名称</th>
+               <th>厂家编号</th>
+               <th>厂家联系人</th>
+               <th>联系电话</th>
+               <th>联系地址</th>
+               <th>拼音简码</th>
+               <th>五笔简码</th>
+               <th>创建时间</th>
+               <th>审核意见</th>
+               <th>证件附件</th>
+               <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+               <td class="radio"><input type="checkbox" class="z-radio"></td>
+               <td>深圳市第一人民医院</td>
+               <td>123456789123456</td>
+               <td>陈晓红</td>
+               <td>13715456542</td>
+               <td>深圳市福田区车公庙劲松大厦12D</td>
+               <td>pinyinjianma</td>
+               <td>pinyinjianma</td>
+               <td>2019-05-20 19:20:06</td>
+               <td>审核意见审核意见审核意见...</td>
+               <td>
+                  <a href="#" class="link-primary" onclick="getCheckBack()">查看</a>
+               </td>
+               <td>
+                  <a href="#" class="link-primary">编辑</a>
+               </td>
+            </tr>
+            </tbody>
+         </table>
+      </div>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin: 20px;">
+         <div style="display: flex; align-items: center;">
+            <input type="checkbox" class="z-radio mr20" />
+            <span style="color: #999999">全选</span>
+         </div>
+         <!-- 分页 -->
+         <div id="page" class="z-page"></div>
+      </div>
+   </div>
+</div>
+
+<link href="../plugin/page/zxf_page.css" rel="stylesheet">
+<script src="../plugin/page/zxf_page.js"></script>
+<script>
+// 分页
+$("#page").createPage({
+	pageNum: 20,
+	current: 6,
+	backfun: function(e) {
+		//console.log(e);//回调
+	}
+});
+
+//获取审核意见
+function getCheckBack() {
+	showCheckBack('123')
+}
+</script>
 </body>
 </html>

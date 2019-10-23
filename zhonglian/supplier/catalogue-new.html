@@ -18,7 +18,7 @@
 </head>
 <body>
 <div class="ml20 mr20">
-   <div class="z-title">新建字典</div>
+   <div class="z-title">新建目录</div>
    <div class="z-card">
       <div class="dictionary-form">
          <div>
@@ -47,7 +47,6 @@
                <input type="text" placeholder="请输入商品价格" class="inputs" />
             </div>
             <div class="form-item">
-               <h4 class="name">是否高值</h4>
                <h4 class="name">是否高值</h4>
                <input type="radio" class="z-radio mr10" id="yes"/>
                <label for="yes">是</label>
@@ -89,22 +88,13 @@
                <input type="text" placeholder="请输入创建时间" class="inputs" />
             </div>
             <div class="form-item form-item-upload">
-               <h4 class="name">生产许可证图</h4>
-               <div class="z-upload" id="upload1">
+               <h4 class="name">产品缩略图</h4>
+               <div class="z-upload" id="upload2">
                   <i class="icon-add"></i>
                   <input type="file">
                   <img src="" />
                </div>
-               <p class="hint">图片尺寸180*180PX最佳</p>
-            </div>
-            <div class="form-item form-item-upload">
-               <h4 class="name">产品缩略图</h4>
-               <div class="z-upload" id="upload2">
-                  <i class="icon-add"></i>
-                  <input type="file" multiple="multiple" size="2">
-                  <img src="" />
-               </div>
-               <p class="hint">最多上传6张<br>图片尺寸180*180PX最佳</p>
+               <p class="hint">最多上传1张<br>图片尺寸180*180PX最佳</p>
             </div>
          </div>
       </div>
@@ -116,7 +106,6 @@
 </div>
 
 <script>
-initUpload('#upload1')
 initUpload('#upload2')
 </script>
 </body>

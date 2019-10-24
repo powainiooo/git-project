@@ -18,15 +18,10 @@
 </head>
 <body>
 <div class="ml20 mr20">
-   <div class="z-title">供货目录-深圳市第一人民医院</div>
+   <div class="z-title">选择字典-新建供货目录</div>
    <div class="z-card">
       <div style="display: flex; justify-content: space-between;" class="mt20">
          <div style="display:flex; align-items: center;" class="ml20 mb10">
-            <div class="z-select mr15" style="width: 115px;">
-               <select>
-                  <option>默认排序</option>
-               </select>
-            </div>
             <div class="z-select mr15" style="width: 115px;">
                <select>
                   <option>全部状态</option>
@@ -36,17 +31,20 @@
             <button class="z-btn">搜索</button>
          </div>
          <div class="mr20">
-            <button class="z-btn-border2 z-btn-border-info">新建目录</button>
+            <button class="z-btn-border2 z-btn-border-info">确认</button>
+            <button class="z-btn-border2 z-btn-border-success mr20" style="display: none">提交</button>
+            <button class="z-btn-border2 z-btn-border-info" style="display: none">添加</button>
          </div>
       </div>
-      <!-- 表单 -->
+      <!-- 选择表单 -->
       <div class="z-table">
          <table style="min-width: 2360px; width: 100%;">
             <colgroup>
-               <col style="width: 400px">
+               <col style="width: 60px">
             </colgroup>
             <thead>
             <tr>
+               <th></th>
                <th>基本信息</th>
                <th>单位</th>
                <th>规格型号</th>
@@ -60,11 +58,11 @@
                <th>创建人</th>
                <th>创建时间</th>
                <th>附件</th>
-               <th>操作</th>
             </tr>
             </thead>
             <tbody>
             <tr>
+               <td class="radio"><input type="checkbox" class="z-radio"></td>
                <td>
                   <div class="order-info">
                      <div class="img">
@@ -92,9 +90,63 @@
                <td>
                   <a href="#" class="link-primary">查看</a>
                </td>
+            </tr>
+            </tbody>
+         </table>
+      </div>
+      <!-- 已选中表单 -->
+      <div class="z-table" style="display: none">
+         <table style="min-width: 2360px; width: 100%;">
+            <colgroup>
+               <col style="width: 60px">
+            </colgroup>
+            <thead>
+            <tr>
+               <th></th>
+               <th>基本信息</th>
+               <th>单位</th>
+               <th>规格型号</th>
+               <th>常用名称</th>
+               <th>是否高值</th>
+               <th>供应商编号</th>
+               <th>厂家编号</th>
+               <th>注册证件号</th>
+               <th>拼音简码</th>
+               <th>五笔简码</th>
+               <th>创建人</th>
+               <th>创建时间</th>
+               <th>附件</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+               <td class="radio"><a href="javascript:;" class="icon-del"></a> </td>
                <td>
-                  <a href="#" class="link-success mr20">编辑</a>
-                  <a href="#" class="link-warn">删除</a>
+                  <div class="order-info">
+                     <div class="img">
+                        <img src="../images/avatar.png"/>
+                        <a href="javascript:;" class="icon-view"></a>
+                     </div>
+                     <div class="content">
+                        <h4>耗材名称耗材名称</h4>
+                        <p>耗材编号：15644544886511</p>
+                        <p>耗材价格：888元</p>
+                     </div>
+                  </div>
+               </td>
+               <td>个</td>
+               <td>25片/盒 0408-6623</td>
+               <td>黄连清热解毒胶囊</td>
+               <td>是</td>
+               <td>abcd123456789</td>
+               <td>abcd123456789</td>
+               <td>abcd123456789</td>
+               <td>pinyinjianma</td>
+               <td>pinyinjianma</td>
+               <td>陈晓红</td>
+               <td>2019-05-20</td>
+               <td>
+                  <a href="#" class="link-primary">查看</a>
                </td>
             </tr>
             </tbody>

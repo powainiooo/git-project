@@ -114,7 +114,7 @@
    <div class="z-modal-frame classify-frame" style="width: 1060px; max-height: 740px; margin-top: 50px; overflow: auto;">
       <div class="theme">
          <h3><i class="icon-classify"></i>选择分类</h3>
-         <a href="javascript:;" class="btn-close"></a>
+         <a href="javascript:;" class="btn-close btnClose"></a>
       </div>
       <div class="classify-block">
          <div class="title">
@@ -221,6 +221,11 @@ $("#classify .checkAll").on('click', function () {
    } else { // 未选中
 	   $(this).parents('.classify-block').find('li').removeClass('active')
    }
+})
+
+// 点击关闭弹窗
+$(".z-modal .btnClose").on('click', function () {
+	$(this).parents('.z-modal').hide()
 })
 </script>
 </body>

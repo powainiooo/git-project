@@ -89,6 +89,7 @@
 .personal-form { width: 400px; margin: 0 auto; overflow: hidden;}
 .personal-form .avatar { text-align: center; margin-top: 24px; margin-bottom: 24px;}
 .personal-form .avatar img { width: 140px; height: 140px; border-radius: 50%; margin-bottom: 20px;}
+.personal-form .avatarEdit img { cursor: pointer}
 .personal-form .avatar h3 { font-size: 22px; line-height: 1; color: #333333; margin-bottom: 10px}
 .personal-form .avatar p { font-size: 14px; line-height: 1; color: #37CD9A;}
 
@@ -96,7 +97,7 @@
 .personal-form .form-item .name { width: 90px; text-align: right; margin-right: 10px; color: #666666; font-size: 14px;}
 .personal-form .form-item input[type=text] { width: 300px; height: 34px; color: #999999; line-height: 34px; font-size: 14px; padding: 0 14px; border: 1px solid #E6E3E6; border-radius: 4px;}
 .personal-form .form-item input[type=text]:read-only { background-color: #F6F5F6; border-color: #F6F5F6;}
-.personal-form .form-item .imgs { width: 184px; height: 130px; border: 1px dashed #E6E3E6; border-radius: 4px;}
+.personal-form .form-item .imgs { width: 184px; height: 130px; border: 1px dashed #E6E3E6; border-radius: 4px; overflow: hidden;}
 .personal-form .form-item .imgs img { width: 100%; height: 100%; border-radius: 4px;}
 .personal-form .z-btn { width: 200px; height: 40px; border-radius: 0;}
 

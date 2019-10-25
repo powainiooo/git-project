@@ -92,7 +92,7 @@
          <div class="fl" style="width: 50%; padding-right: 5px;">
             <div class="z-title">公告通知</div>
             <div class="z-card">
-               <div class="top-line">
+               <div class="top-line newTab">
                   <ul>
                      <li class="active">平台公告</li>
                      <li>医院公告</li>
@@ -102,20 +102,39 @@
                      <span>换一批</span>
                   </a>
                </div>
-               <ul class="home-news-list">
-                  <li>
-                     <img src="../images/img1.jpg" />
-                     <a href="#">新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻</a>
-                  </li>
-                  <li>
-                     <img src="../images/img1.jpg" />
-                     <a href="#">新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻</a>
-                  </li>
-                  <li>
-                     <img src="../images/img1.jpg" />
-                     <a href="#">新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻</a>
-                  </li>
-               </ul>
+               <div class="newsContent">
+                  <!--平台公告-->
+                  <ul class="home-news-list">
+                     <li>
+                        <img src="../images/img1.jpg" />
+                        <a href="#">1新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻</a>
+                     </li>
+                     <li>
+                        <img src="../images/img1.jpg" />
+                        <a href="#">1新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻</a>
+                     </li>
+                     <li>
+                        <img src="../images/img1.jpg" />
+                        <a href="#">1新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻</a>
+                     </li>
+                  </ul>
+                  <!--医院公告-->
+                  <ul class="home-news-list" style="display: none;">
+                     <li>
+                        <img src="../images/img1.jpg" />
+                        <a href="#">2新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻</a>
+                     </li>
+                     <li>
+                        <img src="../images/img1.jpg" />
+                        <a href="#">2新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻</a>
+                     </li>
+                     <li>
+                        <img src="../images/img1.jpg" />
+                        <a href="#">2新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻</a>
+                     </li>
+                  </ul>
+               </div>
+
                <div class="tc mt20 mb15">
                   <a href="#" style="color: #47be9d">查看更多</a>
                </div>
@@ -207,6 +226,15 @@
       pagination: {
          el: '.swiper-pagination',
       }
+   })
+
+   // 切换新闻内容
+   $(".newTab li").on('click', function () {
+      $(this).addClass('active').siblings('li').removeClass('active')
+      var index = $(this).index()
+      var contents = $(this).parents('.newTab').next().find('.home-news-list')
+	   contents.hide()
+	   contents.eq(index).show()
    })
 </script>
 </body>

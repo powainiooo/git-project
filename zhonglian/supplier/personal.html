@@ -21,10 +21,11 @@
    <div class="z-title">个人信息</div>
    <div class="z-card">
       <div class="personal-form" id="form">
-         <div class="avatar">
+         <div class="avatar uploadFrame" readonly>
             <img src="../images/avatar.png">
             <h3>李海图</h3>
             <p>VIP有效期至2019-05-20</p>
+            <input type="file" style="display: none;">
          </div>
          <div class="form-item">
             <span class="name">用户名</span>
@@ -64,7 +65,10 @@
          </div>
          <div class="form-item">
             <span class="name">营业执照</span>
-            <div class="imgs"><img src="../images/bg.jpg"></div>
+            <div class="imgs uploadFrame" readonly>
+               <img src="../images/bg.jpg">
+               <input type="file" style="display: none;">
+            </div>
          </div>
          <div class="tc mb40">
             <button class="z-btn" id="btnEdit">修改信息</button>
@@ -77,6 +81,7 @@
 <script>
 // 修改信息
 $("#btnEdit").on('click', function () {
+	$(".uploadFrame").addClass('avatarEdit').attr('readonly', false)
    $("#form .canEdit").attr('readonly', false)
    $(this).hide()
    $('#btnConfirm').show()
@@ -84,9 +89,29 @@ $("#btnEdit").on('click', function () {
 // 修改信息
 $("#btnConfirm").on('click', function () {
 	showAlert('提交成功！', '请耐心等待平台通过审核')
+	$(".uploadFrame").removeClass('avatarEdit').attr('readonly', true)
    $("#form .canEdit").attr('readonly', true)
    $(this).hide()
    $('#btnEdit').show()
+})
+// 头像修改
+$(".uploadFrame").on('click', function () {
+	if (!$(this).attr('readonly')) {
+		$(this).find("input").click()
+   }
+})
+$(".uploadFrame input").on('click', function (e) {
+   e.stopPropagation()
+})
+$(".uploadFrame input").on('change', function (e) {
+	console.log(e)
+   var self = this;
+	var file = e.currentTarget.files[0]
+	var reader = new FileReader()
+	reader.readAsDataURL(file)
+	reader.onload = function (ev) {
+		$(self).parent().find('img').attr('src', ev.currentTarget.result)
+	}
 })
 </script>
 </body>

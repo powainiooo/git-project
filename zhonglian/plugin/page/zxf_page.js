@@ -19,15 +19,14 @@
 				/*中间页*/
 				if (pageinit.current >4 && pageinit.pageNum > 4) {
 					obj.append('<a href="javascript:;" class="zxfPagenum">'+1+'</a>');
-					obj.append('<a href="javascript:;" class="zxfPagenum">'+2+'</a>');
 					obj.append('<span>...</span>');
 				}
 				if (pageinit.current >4 && pageinit.current <= pageinit.pageNum-5) {
 					var start  = pageinit.current - 2,end = pageinit.current + 2;
 				}else if(pageinit.current >4 && pageinit.current > pageinit.pageNum-5){
-					var start  = pageinit.pageNum - 4,end = pageinit.pageNum;
+					var start  = pageinit.pageNum - 5,end = pageinit.pageNum;
 				}else{
-					var start = 1,end = 9;
+					var start = 1,end = 5;
 				}
 				for (;start <= end;start++) {
 					if (start <= pageinit.pageNum && start >=1) {
@@ -42,6 +41,7 @@
 				}
 				if (end < pageinit.pageNum) {
 					obj.append('<span>...</span>');
+					obj.append('<a href="javascript:;" class="zxfPagenum">'+pageinit.pageNum+'</a>');
 				}
 				/*下一页*/
 				if (pageinit.current >= pageinit.pageNum) {

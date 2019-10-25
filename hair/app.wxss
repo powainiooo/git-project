@@ -1,8 +1,0 @@
-@import 'res/css/helvetica.wxss';
-@import 'res/css/icons.wxss';
-/**app.wxss**/
-.container {
-    color: #372c1e;
-    margin-top: 220rpx;
-    padding-bottom: 200rpx;
-}

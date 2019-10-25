@@ -1,8 +1,0 @@
-{
-  "usingComponents": {
-    "header-view":"../../components/header/header",
-    "footer-view":"../../components/footer/footer",
-    "timer-view":"../../components/timer/timer",
-    "detail-view":"../../components/detail/detail"
-  }
-}

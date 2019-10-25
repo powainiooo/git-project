@@ -1,4 +1,0 @@
-<view class="header {{size == 'large' ? 'header-large' : ''}}">
-    <view class="header-logo" bindtap="gotoIndex"><view class="icons icon-logo"></view></view>
-    <view class="title" wx:if="{{showTitle}}"><slot></slot></view>
-</view>

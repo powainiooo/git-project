@@ -1,0 +1,97 @@
+<style lang="stylus" type="text/stylus">
+   .aside-frame
+      width 460px
+      position fixed
+      top 0
+      left 0
+      bottom 0
+   .aside-search
+      width 335px
+      position absolute
+      top 360px
+      right 20px
+      h3
+         font-size 20px
+         font-family 'Helve'
+         line-height 26px
+         color #ffffff
+         margin 0 0 20px 65px
+      .search-frame
+         background url("../assets/images/search-frame.png") no-repeat
+         width 335px
+         height 281px
+         overflow hidden
+         input
+            width 200px
+            height 38px
+            font-size 16px
+            line-height 38px
+            border none
+            background-color transparent
+            outline none
+         a
+            box-sizing content-box
+            width 38px
+            height 38px
+            padding-left 8px
+         .keywords
+            margin 35px 0 0 48px
+            display flex
+            align-items center
+            input
+               color #333333
+               border-right 1px solid #e5e5e5
+               &::-webkit-input-placeholder
+                  color #b5b5b5
+            a
+               border-left 1px solid #f6f6f6
+               background url("../assets/images/icon-search.png") no-repeat center center
+         .date
+            margin 42px 0 0 48px
+            display flex
+            align-items center
+            input
+               color #ffffff
+               border-right 1px solid #002cad
+               &::-webkit-input-placeholder
+                  color #ffffff
+            a
+               border-left 1px solid #0033b2
+               cursor default
+               background url("../assets/images/icon-calendar.png") no-repeat center center
+   .to-xiaofu
+      position absolute
+      right 40px
+      bottom 40px
+</style>
+
+<template>
+   <aside class="aside-frame">
+      <div class="aside-search">
+         <h3>直达你的活动现场<br>Go to your events</h3>
+         <div class="search-frame">
+            <div class="keywords">
+               <input type="text" placeholder="输入活动、艺人或城市"/>
+               <a href="javascript:;"></a>
+            </div>
+            <div class="date">
+               <input type="text" placeholder="或选择日期"/>
+               <a href="javascript:;"></a>
+            </div>
+         </div>
+      </div>
+      <a href="https://editor.leesticket.com" class="to-xiaofu">
+         <img src="../assets/images/btn.png">
+      </a>
+   </aside>
+</template>
+
+<script type='es6'>
+   export default {
+      name: 'search',
+      data() {
+         return {}
+      },
+      methods: {}
+   }
+</script>

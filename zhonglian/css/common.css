@@ -1,5 +1,5 @@
 /* 框架 */
-.frame-bg { background-color: #f6f5f6}
+.frame-bg { min-width: 1300px; background-color: #f6f5f6}
 .frame-header { width: 100%; height: 60px;background-color: #ffffff; box-shadow: 0 1px 6px rgba(55, 205, 154, 0.1); position: fixed; top: 0; left: 0; z-index: 1000;}
 
 .user-frame { width: 200px; height: 100%; float: right; border-left: 1px solid #e5e5e5;}
@@ -74,16 +74,17 @@
 .z-btn-border-info { border:1px solid rgba(202,192,222,1); background:rgba(240,233,254,1); color:rgba(171,150,218,1);}
 
 /* 搜索框 */
-.z-search { position: relative;}
+.z-search { position: relative; display: inline-block}
 .z-search:before { content: ''; width: 14px; height: 14px; background: url("../images/icons.png") no-repeat; background-position: -77px -89px; position: absolute; top: 12px; left: 24px;}
 .z-search input { width: 230px; font-size: 12px; color: #999999; padding:10px 10px 10px 45px; background-color: #f7f6f7; border-radius: 8px;}
 
 /* 时间选择框 */
-.z-date {  position: relative;}
+.z-date {  position: relative; display: inline-block}
 .z-date:before { content: ''; width: 13px; height: 13px; background: url("../images/icons.png") no-repeat; background-position: -77px -104px; position: absolute; top: 10px; right: 14px;}
 .z-date input { width: 230px; font-size: 12px; color: #999999; padding:10px 32px 10px 12px; background-color: #f7f6f7; border-radius: 8px;}
 
 /* 下拉框 */
+.z-select { display: inline-block}
 .z-select select { width: 100%; height: 34px; border: none; background-color: #f7f6f7; border-radius: 8px; color: #999999; padding: 0 10px;}
 
 /* 标签页 */

@@ -1,6 +1,0 @@
-{
-  "usingComponents": {
-    "header-view":"../../components/header/header",
-    "footer-view":"../../components/footer/footer"
-  }
-}

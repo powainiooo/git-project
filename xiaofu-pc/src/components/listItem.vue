@@ -18,7 +18,7 @@
             content ''
             width 100%
             height 174px
-            background url("../assets/images/ticket-shadow.png") no-repeat
+            background url("../assets/images/ticket-shadow2.png") no-repeat
             position absolute
             bottom -84px
             left 0
@@ -85,6 +85,9 @@
          img
             width 100%
    .list-item-fold
+      .frame
+         &::after
+            background-image url("../assets/images/ticket-shadow2.png")
       .title
          word-break break-all
          white-space nowrap
@@ -99,7 +102,7 @@
 
 <template>
    <div class="list-item" :class="{'list-item-fold': fold}" :style="{width: width + 'px'}">
-      <div class="frame" :style="{transform: 'scale('+ width/330 + ')'}">
+      <div class="frame" :style="{transform: 'scale('+ width/330 + ')'}" ref="frame">
          <div class="top">
             <div class="date">
                <div class="year">

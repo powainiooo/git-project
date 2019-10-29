@@ -111,14 +111,15 @@
                   <span>1</span>
                   <span>8</span>
                </div>
-               <div class="days">06/30</div>
+               <div class="days">{{itemData.date}}</div>
             </div>
-            <div class="logo"><img src="../assets/images/logo2.png"/></div>
+            <div class="logo"><img :src="imgSrc + itemData.cover"/></div>
          </div>
-         <div class="title">Disco back to 90sback to 90s | Sector</div>
-         <div class="time">10:00pm-3:00am</div>
-         <div class="address">上海市 巨鹿路</div>
-         <div class="imgs"><img src="../assets/images/img.jpg"/></div>
+         <div class="title" v-if="itemData.activity === ''">{{itemData.goods_name}}</div>
+         <div class="title" v-else>{{itemData.goods_name}} | {{itemData.activity}}</div>
+         <div class="time">{{itemData.hour_b}}-{{itemData.hour_e}}</div>
+         <div class="address">{{itemData.address}}</div>
+         <div class="imgs"><img :src="imgSrc + itemData.cover2"/></div>
       </div>
    </div>
 </template>
@@ -134,6 +135,15 @@
           width: {
              type: Number,
              default: 330
+          },
+          itemData: {
+             type: Object,
+             default: () => {}
+          }
+       },
+       computed: {
+          imgSrc () {
+             return this.$store.state.imgSrc
           }
        }
     }

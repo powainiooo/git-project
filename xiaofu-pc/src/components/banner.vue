@@ -11,14 +11,15 @@
       color #000000
       font-weight bold
    .z-select
-      select
-         width 200px
+      width 200px
+      .vs__dropdown-toggle
          height 40px
          border-radius 20px
          box-shadow 0 2px 3px rgba(0, 0, 0, 0.2)
-         padding 0 20px
+         padding 0 10px
          outline none
          border none
+         background-color #ffffff
    .banner-container
       min-width 1090px
       height 365px
@@ -43,19 +44,21 @@
    <a href="javascript:;" class="z-btn">了解详情</a>
    <div class="opera">
       <div class="z-select">
-         <select>
-            <option>深圳</option>
-         </select>
+         <v-select :options="citys" placeholder="选择城市"></v-select>
       </div>
    </div>
 </div>
 </template>
 
 <script type='es6'>
+import vSelect from 'vue-select'
 export default {
 	name: 'app',
+   components: {vSelect},
 	data() {
-		return {}
+		return {
+         citys: ['深圳', '广州']
+      }
 	},
 	methods: {}
 }

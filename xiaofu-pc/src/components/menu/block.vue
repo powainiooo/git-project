@@ -1,5 +1,9 @@
 <style lang="stylus" type="text/stylus" scoped>
 .menu-block
+   width 100%
+   position absolute
+   top 0
+   right 0
    height 100vh
    overflow auto
    background-color #f2f2f2

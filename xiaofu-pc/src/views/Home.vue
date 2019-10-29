@@ -28,14 +28,14 @@
          <banner></banner>
          <div class="pro-list-container">
             <div class="pro-list">
-               <list-item fold></list-item>
+               <list-item fold @click.native="showDetail = true"></list-item>
                <list-item fold></list-item>
                <list-item fold></list-item>
                <list-item fold></list-item>
             </div>
          </div>
       </div>
-      <pro-detail style="display: none"></pro-detail>
+      <pro-detail :show.sync="showDetail"></pro-detail>
       <z-menu></z-menu>
    </div>
 </template>
@@ -54,6 +54,11 @@
          listItem,
          proDetail,
          zMenu
+      },
+      data() {
+         return {
+            showDetail: false
+         }
       }
    }
 </script>

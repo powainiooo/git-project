@@ -21,13 +21,9 @@
 <template>
 <div>
    <ul class="notice-list">
-      <li>
-         <span>01</span>
-         <p>本消费券本消费券本消费券本消费券本消费券本消费券本消费券本消费券</p>
-      </li>
-      <li>
-         <span>01</span>
-         <p>本消费券</p>
+      <li v-for="(item, index) in listData" :keys="index">
+         <span>{{index<9 ? 0 : ''}}{{index + 1}}</span>
+         <p>{{本消费券本消费券本消费券本消费券本消费券本消费券本消费券本消费券}}</p>
       </li>
    </ul>
 </div>
@@ -39,6 +35,12 @@ export default {
 	data() {
 		return {}
 	},
+   props: {
+      listData: {
+         type: Object,
+         default: () => []
+      }
+   },
 	methods: {}
 }
 </script>

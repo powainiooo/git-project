@@ -31,13 +31,9 @@
 <template>
 <div>
    <ul class="actor-list">
-      <li>
-         <img src="../../assets/images/img2.jpg">
-         <h3>姓名</h3>
-      </li>
-      <li>
-         <img src="../../assets/images/img2.jpg">
-         <h3>姓名</h3>
+      <li v-for="i in listData" :key="i.username">
+         <img :src="imgSrc + i.img">
+         <h3>{{i.username}}</h3>
       </li>
    </ul>
 </div>
@@ -49,6 +45,17 @@ export default {
 	data() {
 		return {}
 	},
+   props: {
+      listData: {
+         type: Object,
+         default: () => []
+      }
+   },
+   computed: {
+      imgSrc () {
+         return this.$store.state.imgSrc
+      }
+   },
 	methods: {}
 }
 </script>

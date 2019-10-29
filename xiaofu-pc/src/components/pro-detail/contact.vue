@@ -13,8 +13,8 @@
 
 <template>
 <div class="contact-frame">
-   <img src="../../assets/images/logo2.png" />
-   <p>+86-123-1234-1234</p>
+   <img :src="imgSrc + itemData.cover" />
+   <p>{{itemData.mobile}}</p>
 </div>
 </template>
 
@@ -24,6 +24,17 @@ export default {
 	data() {
 		return {}
 	},
+   props: {
+      itemData: {
+         type: Object,
+         default: () => {}
+      }
+   },
+   computed: {
+      imgSrc () {
+         return this.$store.state.imgSrc
+      }
+   },
 	methods: {}
 }
 </script>

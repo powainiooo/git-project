@@ -52,13 +52,23 @@
             align-items center
             input
                color #ffffff
-               border-right 1px solid #002cad
+               border-right 1px solid #002aa6
                &::-webkit-input-placeholder
                   color #ffffff
             a
                border-left 1px solid #0033b2
                cursor default
                background url("../assets/images/icon-calendar.png") no-repeat center center
+         .v2-date-wrap
+            width 200px
+            background-color transparent
+            border none
+            svg
+               display none
+            .v2-picker-trigger
+               font-size 16px
+               padding 0
+               color #ffffff
    .to-xiaofu
       position absolute
       right 40px
@@ -75,7 +85,8 @@
                <a href="javascript:;"></a>
             </div>
             <div class="date">
-               <input type="text" placeholder="或选择日期"/>
+               <!--<input type="text" placeholder="或选择日期"/>-->
+               <v2-datepicker v-model='date' placeholder="或选择日期"></v2-datepicker>
                <a href="javascript:;"></a>
             </div>
          </div>
@@ -90,7 +101,9 @@
    export default {
       name: 'search',
       data() {
-         return {}
+         return {
+            date: ''
+         }
       },
       methods: {}
    }

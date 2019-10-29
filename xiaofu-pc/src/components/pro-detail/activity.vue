@@ -70,16 +70,15 @@
 <div>
    <swiper :options="swiperOption" ref="mySwiper" class="activity-swiper">
       <!-- slides -->
-      <swiper-slide><img src="../../assets/images/img.jpg" class="activity-img"> </swiper-slide>
-      <swiper-slide><img src="../../assets/images/img.jpg" class="activity-img"> </swiper-slide>
-      <swiper-slide><img src="../../assets/images/img.jpg" class="activity-img"> </swiper-slide>
-      <swiper-slide><img src="../../assets/images/img.jpg" class="activity-img"> </swiper-slide>
+      <swiper-slide v-for="(item, index) in listData" :key="index">
+         <img :src="imgSrc + item.img" class="activity-img">
+      </swiper-slide>
       <!-- Optional controls -->
       <div class="swiper-btn swiper-btn-prev" slot="button-prev"><i></i></div>
       <div class="swiper-btn swiper-btn-next" slot="button-next"><i></i></div>
    </swiper>
    <div class="swiper-pagination"  slot="pagination"></div>
-   <div class="swiper-content">活动详情活动详情活动详情活动详情活动详情活动详情活动详情活动详情活动详情活动详情活动详情活动详情活动详情活动详情</div>
+   <div class="swiper-content">{{content}}</div>
 </div>
 </template>
 
@@ -98,9 +97,21 @@ export default {
                nextEl: '.swiper-btn-next',
                prevEl: '.swiper-btn-prev',
             }
-         }
+         },
+         content: this.listData[0].desc
       }
 	},
+   props: {
+      listData: {
+         type: Object,
+         default: () => []
+      }
+   },
+   computed: {
+      imgSrc () {
+         return this.$store.state.imgSrc
+      }
+   },
 	methods: {}
 }
 </script>

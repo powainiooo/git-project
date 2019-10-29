@@ -5,9 +5,9 @@
 
 <template>
     <ul class="menu-nav">
-        <li @click="$emit('toggle','baseinfo')">隶属于丨member of Ho</li>
-        <li @click="$emit('toggle','baseinfo')">售后声明丨after sales</li>
-        <li @click="$emit('toggle','baseinfo')">联系方式丨contact information</li>
+        <li @click="$emit('toggle','member')">隶属于丨member of Ho</li>
+        <li @click="$emit('toggle','aftersales')">售后声明丨after sales</li>
+        <li @click="$emit('toggle','contact')">联系方式丨contact information</li>
     </ul>
 </template>
 

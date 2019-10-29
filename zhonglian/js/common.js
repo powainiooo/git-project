@@ -88,3 +88,15 @@ function showAlert(msg, submsg) {
 		$("#alert").remove()
 	})
 }
+
+// 设置菜单选中
+// level1 一级菜单序号 0为第一个
+// level2 二级菜单序号 如果没有就不传
+function setMenu(level1, level2) {
+	var li = $("#menu>li", parent.document)
+	$("#menu li", parent.document).removeClass('active')
+	li.eq(level1).addClass('active')
+	if (level2 !== undefined) {
+		li.find('li').eq(level2).addClass('active')
+	}
+}

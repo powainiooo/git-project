@@ -35,11 +35,25 @@
 
 <script type="es6">
 import mBlock from './block'
+import getMenuInfo from '@/api.js'
 export default {
    name: 'App',
    components: {mBlock},
    data () {
       return {
+
+      }
+   },
+   computed: {
+      contactData () {
+         return this.$store.state.contactData
+      }
+   },
+   mounted () {
+      this.getData()
+   },
+   methods: {
+      getData () {
 
       }
    }

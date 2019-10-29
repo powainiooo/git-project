@@ -42,10 +42,9 @@
 <div>
    <swiper :options="swiperOption" ref="mySwiper" class="recommond-swiper">
       <!-- slides -->
-      <swiper-slide><list-item :width="320" fold></list-item> </swiper-slide>
-      <swiper-slide><list-item :width="320" fold></list-item> </swiper-slide>
-      <swiper-slide><list-item :width="320" fold></list-item> </swiper-slide>
-      <swiper-slide><list-item :width="320" fold></list-item> </swiper-slide>
+      <swiper-slide v-for="i in listData" :key="i.id">
+         <list-item :width="320" fold :itemData="i"></list-item>
+      </swiper-slide>
       <!-- Optional controls -->
       <div class="swiper-btn swiper-btn-prev" slot="button-prev" style="top: 180px"><i></i></div>
       <div class="swiper-btn swiper-btn-next" slot="button-next" style="top: 180px"><i></i></div>
@@ -73,6 +72,12 @@ export default {
          }
       }
 	},
+   props: {
+      listData: {
+         type: Object,
+         default: () => []
+      }
+   },
 	methods: {}
 }
 </script>

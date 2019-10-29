@@ -16,7 +16,7 @@
 
 <template>
 <div class="qrcode">
-   <img :src="imgSrc + imgData" class="code"/>
+   <img :src="imgData" class="code"/>
    <img src="@/assets/images/scan-hint.png" class="hint"/>
 </div>
 </template>
@@ -31,11 +31,6 @@ export default {
       imgData: {
          type: String,
          default: ''
-      }
-   },
-   computed: {
-      imgSrc () {
-         return this.$store.state.imgSrc
       }
    },
 	methods: {}

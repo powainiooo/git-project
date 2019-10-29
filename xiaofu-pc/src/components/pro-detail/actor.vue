@@ -3,7 +3,7 @@
    width 470px
    margin-left 15px
    &>li
-      height 330px
+      height 225px
       margin-bottom 24px
       box-shadow 0 0 20rpx rgba(0,0,0,0.25)
       border-radius 15px
@@ -32,7 +32,7 @@
 <div>
    <ul class="actor-list">
       <li v-for="i in listData" :key="i.username">
-         <img :src="imgSrc + i.img">
+         <img :src="imgSrc + i.picture">
          <h3>{{i.username}}</h3>
       </li>
    </ul>
@@ -47,7 +47,7 @@ export default {
 	},
    props: {
       listData: {
-         type: Object,
+         type: Array,
          default: () => []
       }
    },

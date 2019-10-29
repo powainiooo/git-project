@@ -33,7 +33,7 @@
          <div class="detail-frame" v-if="showFrame">
             <btn-func @click.native="doClose"></btn-func>
             <z-block style="margin-top: 65px; height: 765px;">
-               <list-item :width="500"></list-item>
+               <list-item :width="500" :itemData="itemData.info"></list-item>
             </z-block>
             <z-block title="艺人信息" v-if="itemData.person.length !== 0">
                <z-actor :listData="itemData.person"></z-actor>
@@ -54,7 +54,7 @@
       </transition>
       <transition enter-active-class="slideUp" leave-active-class="slideDown">
       <div class="scan-frame" v-if="showFrame">
-         <qrcode :imgData="itemData.info.cover"></qrcode>
+         <qrcode :imgData="itemData.info.wxacode"></qrcode>
       </div>
       </transition>
    </div>

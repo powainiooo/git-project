@@ -23,7 +23,7 @@
    <ul class="notice-list">
       <li v-for="(item, index) in listData" :keys="index">
          <span>{{index<9 ? 0 : ''}}{{index + 1}}</span>
-         <p>{{本消费券本消费券本消费券本消费券本消费券本消费券本消费券本消费券}}</p>
+         <p>{{item}}</p>
       </li>
    </ul>
 </div>
@@ -37,7 +37,7 @@ export default {
 	},
    props: {
       listData: {
-         type: Object,
+         type: Array,
          default: () => []
       }
    },

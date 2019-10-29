@@ -1,5 +1,6 @@
 import axios from 'axios'
-const ajax = 'https://wechat.leesticket.com/mobile/applet'
+// const ajax = 'https://wechat.leesticket.com/mobile/applet'
+const ajax = ''
 
 // 获取票务列表
 export const getProList = (params) => {
@@ -16,7 +17,9 @@ export const getProList = (params) => {
 // 获取票务详情
 export const getProDetail = (params) => {
    return new Promise((resolve, reject) => {
-      axios.post(`${ajax}/product_info`, params).then(res => {
+      axios.get(`${ajax}/product_info`, {
+         params
+      }).then(res => {
          resolve(res.data)
       }).catch(err => {
          console.log(err)
@@ -28,7 +31,7 @@ export const getProDetail = (params) => {
 // 获取菜单信息
 export const getMenuInfo = (src) => {
    return new Promise((resolve, reject) => {
-      axios.post(`${ajax}/${src}`).then(res => {
+      axios.get(`/mock/contact.json`).then(res => {
          resolve(res.data)
       }).catch(err => {
          console.log(err)

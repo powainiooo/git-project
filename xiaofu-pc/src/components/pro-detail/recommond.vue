@@ -74,7 +74,7 @@ export default {
 	},
    props: {
       listData: {
-         type: Object,
+         type: Array,
          default: () => []
       }
    },

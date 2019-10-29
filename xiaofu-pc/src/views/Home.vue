@@ -8,7 +8,7 @@
    .right
       margin-left 460px
       height 100vh
-      overflow hidden
+      overflow auto
       background-color rgba(255, 255, 255, 0.1)
    .pro-list-container
       width 1090px
@@ -28,14 +28,17 @@
          <banner></banner>
          <div class="pro-list-container">
             <div class="pro-list">
-               <list-item fold @click.native="showDetail = true"></list-item>
-               <list-item fold></list-item>
-               <list-item fold></list-item>
-               <list-item fold></list-item>
+               <list-item
+                  v-for="i in listData"
+                  :key="i.id"
+                  :itemData="i"
+                  fold
+                  @click.native="getDetailData">
+               </list-item>
             </div>
          </div>
       </div>
-      <pro-detail :show.sync="showDetail"></pro-detail>
+      <pro-detail :show.sync="showDetail" :itemData="detailData"></pro-detail>
       <z-menu></z-menu>
    </div>
 </template>
@@ -46,6 +49,7 @@
    import listItem from '@/components/listItem.vue'
    import proDetail from '@/components/pro-detail/index.vue'
    import zMenu from '@/components/menu/index.vue'
+   import {getProList, getProDetail, getMenuInfo} from '@/api.js'
    export default {
       name: 'home',
       components: {
@@ -57,7 +61,36 @@
       },
       data() {
          return {
-            showDetail: false
+            showDetail: false,
+            listData: [],
+            detailData: {}
+         }
+      },
+      mounted () {
+         this.getListData()
+      },
+      methods: {
+         getListData () {
+            getProList({
+               keyword: '',
+               page: 1,
+               city: '',
+               mid: ''
+            }).then(res => {
+               this.listData = res.data.list
+            })
+            getMenuInfo().then(res => {
+               console.log(res)
+            })
+         },
+         getDetailData (id) {
+            getProDetail({
+               tid: 1478,
+               city: ''
+            }).then(res => {
+               this.detailData = res.data
+               this.showDetail = true
+            })
          }
       }
    }

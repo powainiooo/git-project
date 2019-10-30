@@ -1,6 +1,7 @@
 <style lang="stylus" type="text/stylus" scoped>
    .list-item
       width 330px
+      transition transform 0.1s ease-out
       .frame
          width 330px
          font-family 'Helve'
@@ -98,18 +99,21 @@
          display none
       .imgs
          height 143px
+   .list-item-tap
+      transform scale(0.96)
 </style>
 
 <template>
-   <div class="list-item" :class="{'list-item-fold': fold}" :style="{width: width + 'px'}">
+   <div class="list-item"
+        :class="classes"
+        :style="{width: width + 'px'}"
+        @mousedown="tap = true"
+        @mouseup="tapup">
       <div class="frame" :style="{transform: 'scale('+ width/330 + ')'}" ref="frame">
          <div class="top">
-            <div class="date">
+            <div class="date" :class="`date${itemData.type}`">
                <div class="year">
-                  <span>2</span>
-                  <span>0</span>
-                  <span>1</span>
-                  <span>8</span>
+                  <span v-for="i in itemData.begin.slice(0, 4)">{{i}}</span>
                </div>
                <div class="days">{{itemData.date}}</div>
             </div>
@@ -141,9 +145,26 @@
              default: () => {}
           }
        },
+       data() {
+          return {
+             tap: false
+          }
+       },
        computed: {
           imgSrc () {
              return this.$store.state.imgSrc
+          },
+          classes () {
+             return {
+                'list-item-fold': this.fold,
+                'list-item-tap': this.tap
+             }
+          }
+       },
+       methods: {
+          tapup () {
+             this.tap = false
+             this.$emit('tap', this.itemData.id)
           }
        }
     }

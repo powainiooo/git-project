@@ -9,20 +9,30 @@
 <m-block>
    <template slot="en">After<br/>Sales</template>
    <template slot="cn">售后声明</template>
-   <div class="content">
-      <p>123123123123123123</p>
-   </div>
+   <div class="content" v-html="content"></div>
 </m-block>
 </template>
 
 <script type='es6'>
 import mBlock from './block'
+import {getMenuInfo} from '@/api.js'
 export default {
 	name: 'app',
    components: {mBlock},
 	data() {
-		return {}
+		return {
+		   content: ''
+      }
 	},
-	methods: {}
+   mounted () {
+      this.getData()
+   },
+	methods: {
+      getData () {
+         getMenuInfo('aftersales').then(res => {
+            this.content = res.data.aftersales.replace(/\n/g,"<br/>")
+         })
+      }
+   }
 }
 </script>

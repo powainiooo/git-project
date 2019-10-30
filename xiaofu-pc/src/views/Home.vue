@@ -33,7 +33,7 @@
                   :key="i.id"
                   :itemData="i"
                   fold
-                  @click.native="getDetailData">
+                  @tap="getDetailData">
                </list-item>
             </div>
          </div>
@@ -49,7 +49,7 @@
    import listItem from '@/components/listItem.vue'
    import proDetail from '@/components/pro-detail/index.vue'
    import zMenu from '@/components/menu/index.vue'
-   import {getProList, getProDetail, getMenuInfo} from '@/api.js'
+   import {getProList, getProDetail} from '@/api.js'
    export default {
       name: 'home',
       components: {
@@ -79,11 +79,9 @@
             }).then(res => {
                this.listData = res.data.list
             })
-            getMenuInfo().then(res => {
-               console.log(res)
-            })
          },
          getDetailData (id) {
+            console.log(id)
             getProDetail({
                tid: 1478,
                city: ''

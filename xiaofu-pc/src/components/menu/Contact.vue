@@ -21,27 +21,29 @@
    <template slot="cn">联系方式</template>
    <div class="contact-frame">
       <p>合作联系</p>
-      <p>Lee910123</p>
+      <p>{{mail}}</p>
       <img src="@/assets/images/icon-wechat.png" />
    </div>
    <div class="contact-frame">
       <p>售后及服务</p>
-      <p>leesticketaftersales</p>
+      <p>{{wechat}}</p>
       <img src="@/assets/images/icon-wechat.png" />
-      <div>+86-176-2036-1663</div>
+      <div>{{phone}}</div>
    </div>
 </m-block>
 </template>
 
 <script type="es6">
 import mBlock from './block'
-import getMenuInfo from '@/api.js'
+import {getMenuInfo} from '@/api.js'
 export default {
    name: 'App',
    components: {mBlock},
    data () {
       return {
-
+         mail: '',
+         phone: '',
+         wechat: ''
       }
    },
    computed: {
@@ -54,7 +56,13 @@ export default {
    },
    methods: {
       getData () {
-
+         getMenuInfo('contact').then(res => {
+            console.log(res)
+            const contact = res.data.contact
+            this.mail = contact.match(/邮箱：\S*；/)[0].replace('邮箱：', '').replace('；', '')
+            this.phone = contact.match(/电话：\S*；/)[0].replace('电话：', '').replace('；', '')
+            this.wechat = contact.match(/微信号：\S*；/)[0].replace('微信号：', '').replace('；', '')
+         })
       }
    }
 }

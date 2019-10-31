@@ -1,0 +1,21 @@
+<view class="drink-item">
+   <image src="../../res/img/drink-tag.png" class="drink-item-tag"></image>
+   <view class="drink-item-top">
+      <image src="../../res/img/banner1.jpg" class="drink-item-img"></image>
+      <view class="drink-item-right">
+         <view class="drink-item-price"><text>50</text>RMB/杯</view>
+         <view class="drink-item-btns {{nums === 0 ? 'drink-item-btns-fold' : ''}}">
+            <view class="drink-item-reduce" bindtap="doReduce"></view>
+            <view class="drink-item-nums">{{nums}}</view>
+            <view class="drink-item-add" bindtap="doAdd"></view>
+         </view>
+      </view>
+   </view>
+   <view class="drink-item-bottom">
+      <image src="../../res/img/drink-frame-bottom.png" class="drink-item-bottom-bg" mode="widthFix"></image>
+      <view class="drink-item-info">
+         <text class="title">花园试验鸡尾酒</text>
+         <text class="name">在 ARKHAM 使用</text>
+      </view>
+   </view>
+</view>

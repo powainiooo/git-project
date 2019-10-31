@@ -8,7 +8,7 @@ Page({
 		userInfo: {},
 		hasUserInfo: false,
 		canIUse: wx.canIUse('button.open-type.getUserInfo'),
-		showDate: true,
+		showDate: false,
 		selectedDate: '2019-05-10'
 	},
 	//事件处理函数

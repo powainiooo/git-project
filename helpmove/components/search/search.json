@@ -1,0 +1,7 @@
+{
+   "component": true,
+   "usingComponents": {
+      "datepicker": "../../components/datepicker/datepicker",
+      "banner": "../../components/banner/banner"
+   }
+}

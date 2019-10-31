@@ -1,0 +1,10 @@
+<view class="drinks">
+   <image src="../../res/img/drink-logo.png" class="drinks-logo" mode="widthFix"></image>
+   <image src="../../res/img/drink-title.png" class="drinks-title" mode="widthFix"></image>
+   <view class="drinks-list">
+      <list-item></list-item>
+      <list-item></list-item>
+      <list-item></list-item>
+   </view>
+
+</view>

@@ -1,5 +1,5 @@
 <!--index.wxml-->
 <view class="container">
-  <datepicker wx:if="{{showDate}}" currentDate="{{selectedDate}}"></datepicker>
+   <ticket-item></ticket-item>
 </view>
-<button bindtap="toggleShow" style="position: fixed; top: 0; right: 0;">toggleShow</button>
+<button bindtap="toggleShow" style="position: fixed; top: 0; right: 0; display: none;">toggleShow</button>

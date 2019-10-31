@@ -1,11 +1,11 @@
 import axios from 'axios'
-// const ajax = 'https://wechat.leesticket.com/mobile/applet'
-const ajax = ''
+const ajax = 'https://wechat.leesticket.com/mobile/applet'
+// const ajax = ''
 
-// 获取票务列表 ${ajax}/pro_list
+// 获取票务列表 ${ajax}/pro_list /mock/list.json
 export const getProList = (params) => {
    return new Promise((resolve, reject) => {
-      axios.get(`/mock/list.json`, {
+      axios.get(`${ajax}/pro_list`, {
          params
       }).then(res => {
          resolve(res.data)
@@ -16,10 +16,10 @@ export const getProList = (params) => {
    })
 }
 
-// 获取票务详情 ${ajax}/product_info
+// 获取票务详情 ${ajax}/product_info /mock/detail.json
 export const getProDetail = (params) => {
    return new Promise((resolve, reject) => {
-      axios.get(`/mock/detail.json`, {
+      axios.get(`${ajax}/product_info`, {
          params
       }).then(res => {
          resolve(res.data)
@@ -30,10 +30,10 @@ export const getProDetail = (params) => {
    })
 }
 
-// 获取菜单信息
+// 获取菜单信息 ${ajax}/${src} /mock/${src}.json
 export const getMenuInfo = (src) => {
    return new Promise((resolve, reject) => {
-      axios.get(`/mock/${src}.json`).then(res => {
+      axios.get(`${ajax}/${src}`).then(res => {
          resolve(res.data)
       }).catch(err => {
          console.log(err)

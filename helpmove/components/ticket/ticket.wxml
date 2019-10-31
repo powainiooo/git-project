@@ -1,0 +1,35 @@
+<wxs module="util">
+  var sub = function(val,start,end) {
+    if(val){
+      return val.slice(start,end)
+    }
+  }
+  module.exports = {
+        sub: sub
+    };
+</wxs>
+<view class="ticket-item">
+   <view class="ticket-frame">
+      <view class='top'>
+         <view class='date date3'>
+            <view class='year'>
+               <text>2</text>
+               <text>0</text>
+               <text>1</text>
+               <text>8</text>
+            </view>
+            <view class='days'>09/08-09/08</view>
+         </view>
+         <view class="logo">
+            <image src='../../res/img/logo2.png' mode='aspectFit' class='logo-img'></image>
+         </view>
+      </view>
+      <view class='title'>Odalys China Tour with Drew Alexander | OIL</view>
+      <view class='time'>22:00-03:00</view>
+      <view class='address'>深圳市福田区车公庙泰然大厦01层L1-11A</view>
+      <view class="imgs-frame">
+         <image src='../../res/img/img.jpg' mode='widthFix' class='imgs'></image>
+      </view>
+   </view>
+</view>
+

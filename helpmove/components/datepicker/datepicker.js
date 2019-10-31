@@ -94,7 +94,7 @@ Component({
 					day: i + 1
 				})
 			}
-			console.log(list)
+			// console.log(list)
 			this.setData({
 				daysList: list
 			})
@@ -132,6 +132,10 @@ Component({
 			this.setData({
 				selectedDate: date.date
 			})
+		},
+		doConfirm () {
+			if (this.data.selectedDate === '') return
+			this.triggerEvent('selectDate', this.data.selectedDate)
 		}
 	}
 })

@@ -1,7 +1,6 @@
-.datepicker { min-height: 100vh; background: linear-gradient(320deg, #2353dd, #002bab 10%,#003ebe); position: relative; overflow: hidden;}
+.datepicker { height: 100vh; background: linear-gradient(320deg, #2353dd, #002bab 10%,#003ebe); position: relative; overflow: auto;}
 .datepicker .logo { width: 100%; position: absolute; top: 0; left: 0; z-index: 0;}
-.datepicker .title { color: #ffffff; font-family: 'Helve'; font-size: 42rpx; line-height: 1; margin: 100rpx 0 110rpx 50rpx}
-.datepicker .title .en { font-size: 48rpx; margin-top: 6rpx;}
+.datepicker .title { width: 300rpx; margin: 100rpx 0 110rpx 50rpx}
 
 .datepicker .selects { width: 350rpx; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;}
 .datepicker .selects .month { font-size: 42rpx; color: #ffffff; font-family: 'Helve';}

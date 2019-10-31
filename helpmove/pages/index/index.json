@@ -1,5 +1,5 @@
 {
   "usingComponents": {
-     "datepicker": "../../components/datepicker/datepicker"
+     "ticket-item": "../../components/ticket/ticket"
   }
 }

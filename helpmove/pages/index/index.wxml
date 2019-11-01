@@ -1,5 +1,5 @@
 <!--index.wxml-->
 <view class="container">
-   <ticket-item></ticket-item>
+   <address></address>
 </view>
-<button bindtap="toggleShow" style="position: fixed; top: 0; right: 0; display: none;">toggleShow</button>
+<!--<button bindtap="toggleShow" style="position: fixed; top: 0; right: 0;">toggleShow</button>-->

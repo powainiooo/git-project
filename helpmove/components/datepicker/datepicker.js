@@ -27,7 +27,6 @@ Component({
 		daysList: []
 	},
 	attached() {
-		console.log('attached2')
 		let year, month
 		if (this.data.selectedDate === '') {
 			const date = new Date()

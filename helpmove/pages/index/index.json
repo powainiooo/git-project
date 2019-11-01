@@ -1,5 +1,5 @@
 {
   "usingComponents": {
-     "ticket-item": "../../components/ticket/ticket"
+     "address": "../../components/address/address"
   }
 }

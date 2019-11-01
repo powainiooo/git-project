@@ -1,0 +1,6 @@
+.address-container { width: 100%; height: 100rpx; position: absolute; top: 0; left: 0; background-color: #002ab0; z-index: 1000;}
+.address-container .address-selected { width: 200rpx; height: 100%; display: flex; justify-content: center; align-items: center; font-size: 50rpx; color: #ffffff; position: absolute; top: 0; left: 0;}
+.address-container .address-selected::after { content: ''; width: 0; border: 8rpx solid rgba(0, 0, 0, 0); border-left-color: #ffffff; margin-left: 20rpx; border-left-width: 14rpx;}
+.address-container .address-list { width: 550rpx; height: 100%; margin-left: 200rpx;}
+.address-container .address-list .list-frame { height: 100%; display: flex;}
+.address-container .address-list .address-list-item { width: 120rpx; box-sizing: border-box; padding-left: 8rpx; height: 100%; display: flex; align-items: center; font-size: 28rpx; color: #0092df; margin-right: 10rpx;}

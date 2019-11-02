@@ -1,16 +1,21 @@
 <style lang="stylus" type="text/stylus">
    .aside-frame
-      width 460px
-      position absolute
-      top 0
-      left 0
-      bottom 0
-      z-index 1000
+      width 24vw
+      min-width 335px
+      max-width 460px
+      height 100vh
+      /*position absolute*/
+      /*top 0*/
+      /*left 0*/
+      /*bottom 0*/
+      /*z-index 1000*/
+      position relative
+      float left
    .aside-search
       width 335px
       position absolute
       top 360px
-      right 20px
+      right 25px
       h3
          font-size 20px
          font-family 'Helve'
@@ -78,7 +83,7 @@
 
 <template>
    <aside class="aside-frame">
-      <div class="aside-search">
+      <div class="aside-search" :style="searchStyle">
          <h3>直达你的活动现场<br>Go to your events {{date}}</h3>
          <div class="search-frame">
             <div class="keyword">
@@ -92,7 +97,7 @@
             </div>
          </div>
       </div>
-      <a href="https://editor.leesticket.com" class="to-xiaofu">
+      <a href="https://editor.leesticket.com" class="to-xiaofu" :style="xiaofuStyle">
          <img src="../assets/images/btn.png">
       </a>
    </aside>
@@ -106,6 +111,18 @@
             keyword: '',
             date: ''
          }
+      },
+      computed: {
+         searchStyle () {
+            return {
+               right: this.$store.state.leftDis + 'px'
+            }
+         },
+         xiaofuStyle () {
+            return {
+               right: this.$store.state.leftDis + 15 + 'px'
+            }
+         },
       },
       methods: {
          doSearch (e) {

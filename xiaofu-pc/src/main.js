@@ -21,7 +21,7 @@ new Vue({
    store,
    render: h => h(App)
 }).$mount('#app')
-
-// window.onresize = function () {
-//    store.commit('setWidth', window.innerWidth)
-// }
+store.commit('setWidth', window.innerWidth)
+window.onresize = function () {
+   store.commit('setWidth', window.innerWidth)
+}

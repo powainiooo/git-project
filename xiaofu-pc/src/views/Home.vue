@@ -5,9 +5,9 @@
    background-repeat no-repeat
    background-position 0 42%
    background-attachment fixed
+   overflow hidden
    .right
-      margin-left 460px
-      min-width 1090px
+      min-width 1030px
       height 100vh
       overflow-y auto
       overflow-x hidden
@@ -15,32 +15,34 @@
       &::-webkit-scrollbar{ width: 3px; background-color: #ffffff;}
       &::-webkit-scrollbar-thumb{ background-color: #002aa6;}
    .pro-list-container
-      width 1090px
+      max-width 1090px
+      min-width 1030px
       margin 70px auto 0 auto
       .pro-list
          margin 0 -25px
          display flex
          flex-wrap wrap
-         .list-item
-            margin 0 25px 100px 25px
+         &>.pro-item
+            margin-bottom 100px
 </style>
 
 <template>
    <div class="container">
       <search @search="doSearch"></search>
       <div class="right">
-         <banner></banner>
-         <div class="pro-list-container" v-infinite-scroll="loadMore" infinite-scroll-disabled="isLoading" infinite-scroll-distance="10">
-            <div class="pro-list">
-               <list-item
-                  v-for="i in listData"
-                  :key="i.id"
-                  :itemData="i"
-                  fold
-                  v-if="i.cate === 'activity'"
-                  @tap="getDetailData">
-               </list-item>
-               <!--<recommend></recommend>-->
+         <banner showCity></banner>
+         <div class="pro-list-container" :style="proContainerStyle" v-infinite-scroll="loadMore" infinite-scroll-disabled="isLoading" infinite-scroll-distance="10">
+            <div class="pro-list" :style="proListStyle">
+               <div v-for="i in listData" :key="i.id" :style="getProItemStyle(i.cate)">
+                  <list-item
+                     :itemData="i"
+                     fold
+                     v-if="i.cate === 'activity'"
+                     @tap="getDetailData">
+                  </list-item>
+                  <!--<recommend v-if="i.cate === 'recommend'" :listData="i.list"></recommend>-->
+                  <!--<banner v-if="i.cate === 'banner'"></banner>-->
+               </div>
             </div>
          </div>
          <loading v-if="isLoading"></loading>
@@ -86,6 +88,26 @@
       mounted () {
          this.getListData()
       },
+      computed: {
+         marginDis () {
+            return this.$store.state.marginDis
+         },
+         proContainerStyle () {
+            return {
+               width: `${(330 + 2*this.marginDis)*3 - 2*this.marginDis}px`
+            }
+         },
+         proListStyle () {
+            return {
+               margin: `0 -${this.marginDis}px`
+            }
+         },
+         proItemStyle () {
+            return {
+               margin: `0 ${this.marginDis}px 100px ${this.marginDis}px`
+            }
+         }
+      },
       methods: {
          getListData () {
             const date = this.date === '' ? '' : formatDate(this.date, 'yyyy/MM/dd')
@@ -108,6 +130,15 @@
                this.detailData = res.data
                this.showDetail = true
             })
+         },
+         getProItemStyle(cate) {
+            if (cate === 'activity') {
+               return {
+                  margin: `0 ${this.marginDis}px 100px ${this.marginDis}px`
+               }
+            } else {
+               return {}
+            }
          },
          doSearch (data) {
             this.keyword = data.keyword

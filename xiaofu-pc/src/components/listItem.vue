@@ -21,7 +21,7 @@
             height 174px
             background url("../assets/images/ticket-shadow2.png") no-repeat
             position absolute
-            bottom -84px
+            bottom -85px
             left 0
       .top
          height 85px
@@ -164,7 +164,7 @@
        methods: {
           tapup () {
              this.tap = false
-             this.$emit('tap', this.itemData.id)
+             // this.$emit('tap', this.itemData.id)
           }
        }
     }

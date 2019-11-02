@@ -11,7 +11,7 @@
       box-sizing border-box
    body
       min-height 100vh
-      min-width 1550px
+      min-width 1365px
       background linear-gradient(160deg, #0951db, #0026aa 54%,#003bbd)
    a
       text-decoration none

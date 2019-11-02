@@ -42,7 +42,7 @@
 <template>
 <div class="banner-container">
    <a href="javascript:;" class="z-btn">了解详情</a>
-   <div class="opera">
+   <div class="opera" v-if="showCity">
       <div class="z-select">
          <v-select :options="citys" placeholder="选择城市"></v-select>
       </div>
@@ -60,6 +60,12 @@ export default {
          citys: ['深圳', '广州']
       }
 	},
+   props: {
+	   showCity: {
+	      type: Boolean,
+         default: false
+      }
+   },
 	methods: {}
 }
 </script>

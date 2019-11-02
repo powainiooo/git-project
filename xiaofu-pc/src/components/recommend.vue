@@ -19,7 +19,7 @@
 </style>
 
 <template>
-   <div class="recommend-list" :style="styles">
+   <div class="recommend-list">
       <list-item
          :width="265"
          v-for="i in listData"

@@ -28,10 +28,15 @@
 
 <template>
    <div class="container">
-      <search @search="doSearch"></search>
+      <search @search="doSearch" ref="search"></search>
       <div class="right">
          <banner showCity></banner>
-         <div class="pro-list-container" :style="proContainerStyle" v-infinite-scroll="loadMore" infinite-scroll-disabled="isLoading" infinite-scroll-distance="10">
+         <div class="pro-list-container"
+              ref="container"
+              :style="proContainerStyle"
+              v-infinite-scroll="loadMore"
+              infinite-scroll-disabled="isLoading"
+              infinite-scroll-distance="10">
             <div class="pro-list" :style="proListStyle">
                <div v-for="i in listData" :key="i.id" :style="getProItemStyle(i.cate)">
                   <list-item
@@ -40,7 +45,7 @@
                      v-if="i.cate === 'activity'"
                      @tap="getDetailData">
                   </list-item>
-                  <!--<recommend v-if="i.cate === 'recommend'" :listData="i.list"></recommend>-->
+                  <recommend v-if="i.cate === 'recommend'" :listData="i.list"></recommend>
                   <!--<banner v-if="i.cate === 'banner'"></banner>-->
                </div>
             </div>
@@ -92,9 +97,15 @@
          marginDis () {
             return this.$store.state.marginDis
          },
+         wWidth () {
+            return this.$store.state.wWidth
+         },
+         containerWidth () {
+            return (330 + 2*this.marginDis)*3 - 2*this.marginDis
+         },
          proContainerStyle () {
             return {
-               width: `${(330 + 2*this.marginDis)*3 - 2*this.marginDis}px`
+               width: `${this.containerWidth}px`
             }
          },
          proListStyle () {
@@ -136,8 +147,13 @@
                return {
                   margin: `0 ${this.marginDis}px 100px ${this.marginDis}px`
                }
-            } else {
-               return {}
+            } else if (cate === 'recommend') {
+               const searchW = this.$refs.search.$el.clientWidth
+               let containerW = this.containerWidth
+               return {
+                  width: `${this.wWidth - searchW + this.marginDis}px`,
+                  marginLeft: `-${(this.wWidth - searchW - containerW - this.marginDis) / 2}px`
+               }
             }
          },
          doSearch (data) {

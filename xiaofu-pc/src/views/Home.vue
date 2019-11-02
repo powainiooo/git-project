@@ -7,9 +7,13 @@
    background-attachment fixed
    .right
       margin-left 460px
+      min-width 1090px
       height 100vh
-      overflow auto
+      overflow-y auto
+      overflow-x hidden
       background-color rgba(255, 255, 255, 0.1)
+      &::-webkit-scrollbar{ width: 3px; background-color: #ffffff;}
+      &::-webkit-scrollbar-thumb{ background-color: #002aa6;}
    .pro-list-container
       width 1090px
       margin 70px auto 0 auto
@@ -23,20 +27,23 @@
 
 <template>
    <div class="container">
-      <search></search>
+      <search @search="doSearch"></search>
       <div class="right">
          <banner></banner>
-         <div class="pro-list-container">
+         <div class="pro-list-container" v-infinite-scroll="loadMore" infinite-scroll-disabled="isLoading" infinite-scroll-distance="10">
             <div class="pro-list">
                <list-item
                   v-for="i in listData"
                   :key="i.id"
                   :itemData="i"
                   fold
+                  v-if="i.cate === 'activity'"
                   @tap="getDetailData">
                </list-item>
+               <!--<recommend></recommend>-->
             </div>
          </div>
+         <loading v-if="isLoading"></loading>
       </div>
       <pro-detail :show.sync="showDetail" :itemData="detailData"></pro-detail>
       <z-menu></z-menu>
@@ -49,7 +56,10 @@
    import listItem from '@/components/listItem.vue'
    import proDetail from '@/components/pro-detail/index.vue'
    import zMenu from '@/components/menu/index.vue'
+   import recommend from '@/components/recommend.vue'
+   import loading from '@/components/loading.vue'
    import {getProList, getProDetail} from '@/api.js'
+   import {formatDate} from '@/util.js'
    export default {
       name: 'home',
       components: {
@@ -57,13 +67,20 @@
          banner,
          listItem,
          proDetail,
-         zMenu
+         zMenu,
+         recommend,
+         loading,
       },
       data() {
          return {
             showDetail: false,
+            isLoading: false,
             listData: [],
-            detailData: {}
+            detailData: {},
+            keyword: '',
+            date: '',
+            page: 1,
+            city: '',
          }
       },
       mounted () {
@@ -71,10 +88,12 @@
       },
       methods: {
          getListData () {
+            const date = this.date === '' ? '' : formatDate(this.date, 'yyyy/MM/dd')
             getProList({
-               keyword: '',
-               page: 1,
-               city: '',
+               keyword: this.keyword,
+               date,
+               page: this.page,
+               city: this.city,
                mid: ''
             }).then(res => {
                this.listData = res.data.list
@@ -83,12 +102,20 @@
          getDetailData (id) {
             console.log(id)
             getProDetail({
-               tid: 1478,
+               tid: id,
                city: ''
             }).then(res => {
                this.detailData = res.data
                this.showDetail = true
             })
+         },
+         doSearch (data) {
+            this.keyword = data.keyword
+            this.date = data.date
+            this.getListData()
+         },
+         loadMore () {
+            console.log('loadMore')
          }
       }
    }

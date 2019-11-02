@@ -1,10 +1,11 @@
 <style lang="stylus" type="text/stylus">
    .aside-frame
       width 460px
-      position fixed
+      position absolute
       top 0
       left 0
       bottom 0
+      z-index 1000
    .aside-search
       width 335px
       position absolute
@@ -34,7 +35,7 @@
             width 38px
             height 38px
             padding-left 8px
-         .keywords
+         .keyword
             margin 35px 0 0 48px
             display flex
             align-items center
@@ -78,15 +79,15 @@
 <template>
    <aside class="aside-frame">
       <div class="aside-search">
-         <h3>直达你的活动现场<br>Go to your events</h3>
+         <h3>直达你的活动现场<br>Go to your events {{date}}</h3>
          <div class="search-frame">
-            <div class="keywords">
-               <input type="text" placeholder="输入活动、艺人或城市"/>
-               <a href="javascript:;"></a>
+            <div class="keyword">
+               <input type="text" placeholder="输入活动、艺人或城市" v-model="keyword"/>
+               <a href="javascript:;" @click="doSearch"></a>
             </div>
             <div class="date">
                <!--<input type="text" placeholder="或选择日期"/>-->
-               <v2-datepicker v-model='date' placeholder="或选择日期"></v2-datepicker>
+               <v2-datepicker v-model='date' placeholder="或选择日期" @change="dateChange" ref="picker"></v2-datepicker>
                <a href="javascript:;"></a>
             </div>
          </div>
@@ -102,9 +103,26 @@
       name: 'search',
       data() {
          return {
+            keyword: '',
             date: ''
          }
       },
-      methods: {}
+      methods: {
+         doSearch (e) {
+            this.date = ''
+            this.$refs.picker.displayDate = ''
+            this.$emit('search', {
+               keyword: this.keyword,
+               date: this.date
+            })
+         },
+         dateChange (e) {
+            this.keyword = ''
+            this.$emit('search', {
+               keyword: this.keyword,
+               date: this.date
+            })
+         }
+      }
    }
 </script>

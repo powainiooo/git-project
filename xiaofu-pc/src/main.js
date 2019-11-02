@@ -8,7 +8,8 @@ import vSelect from 'vue-select'
 import 'vue-select/dist/vue-select.css'
 import V2Datepicker from 'v2-datepicker'
 import './assets/css/V2Datepicker.css'
-
+import infiniteScroll from 'vue-infinite-scroll'
+Vue.use(infiniteScroll)
 Vue.use(VueAwesomeSwiper)
 Vue.use(vSelect)
 Vue.use(V2Datepicker)
@@ -20,3 +21,7 @@ new Vue({
    store,
    render: h => h(App)
 }).$mount('#app')
+
+// window.onresize = function () {
+//    store.commit('setWidth', window.innerWidth)
+// }

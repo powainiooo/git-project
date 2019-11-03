@@ -40,11 +40,11 @@
 </style>
 
 <template>
-<div class="banner-container">
-   <a href="javascript:;" class="z-btn">了解详情</a>
+<div class="banner-container" :style="styles">
+   <a href="javascript:;" class="z-btn" @click="gotoDetail">了解详情</a>
    <div class="opera" v-if="showCity">
       <div class="z-select">
-         <v-select :options="citys" placeholder="选择城市"></v-select>
+         <v-select label="name" :options="citys" placeholder="选择城市" @input="cityChange"></v-select>
       </div>
    </div>
 </div>
@@ -56,16 +56,43 @@ export default {
 	name: 'app',
    components: {vSelect},
 	data() {
-		return {
-         citys: ['深圳', '广州']
-      }
+		return {}
 	},
    props: {
 	   showCity: {
 	      type: Boolean,
          default: false
+      },
+	   id: {
+	      type: [String, Number],
+         default: ''
+      },
+      citys: {
+	      type: Array,
+         default: () => []
+      },
+      img: {
+	      type: String,
+         default: ''
       }
    },
-	methods: {}
+   computed: {
+      imgSrc () {
+         return this.$store.state.imgSrc
+      },
+      styles () {
+         return {
+            'background-image' : `url('${this.imgSrc + this.img}')`
+         }
+      }
+   },
+	methods: {
+	   gotoDetail () {
+	      this.$emit('linkTo', this.id)
+      },
+      cityChange (e) {
+	      this.$emit('getcity', e.id)
+      }
+   }
 }
 </script>

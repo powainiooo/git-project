@@ -18,7 +18,6 @@ export default new Vuex.Store({
    },
    mutations: {
       setWidth (state, ww) {
-         console.log('setWidth')
          if (ww < minWidth) ww = minWidth
          state.wWidth = ww
          state.marginDis = 10 + ((ww - minWidth) / (maxWidth - minWidth)) * 15

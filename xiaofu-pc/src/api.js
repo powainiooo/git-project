@@ -16,6 +16,20 @@ export const getProList = (params) => {
    })
 }
 
+// 获取城市 ${ajax}/pro_list /mock/list.json
+export const getCityBanner = (params) => {
+   return new Promise((resolve, reject) => {
+      axios.get(`${ajax}/city_banner`, {
+         params
+      }).then(res => {
+         resolve(res.data)
+      }).catch(err => {
+         console.log(err)
+         reject(err)
+      })
+   })
+}
+
 // 获取票务详情 ${ajax}/product_info /mock/detail.json
 export const getProDetail = (params) => {
    return new Promise((resolve, reject) => {

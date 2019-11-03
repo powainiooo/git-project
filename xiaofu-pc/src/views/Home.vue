@@ -30,9 +30,13 @@
    <div class="container">
       <search @search="doSearch" ref="search"></search>
       <div class="right">
-         <banner showCity></banner>
+         <banner showCity
+                 :id="bannerId"
+                 :citys="cityList"
+                 @getcity="setCity"
+                 :img="bannerImg"
+                 @linkTo="getDetailData"></banner>
          <div class="pro-list-container"
-              ref="container"
               :style="proContainerStyle"
               v-infinite-scroll="loadMore"
               infinite-scroll-disabled="isLoading"
@@ -65,7 +69,7 @@
    import zMenu from '@/components/menu/index.vue'
    import recommend from '@/components/recommend.vue'
    import loading from '@/components/loading.vue'
-   import {getProList, getProDetail} from '@/api.js'
+   import {getProList, getProDetail, getCityBanner} from '@/api.js'
    import {formatDate} from '@/util.js'
    export default {
       name: 'home',
@@ -88,10 +92,14 @@
             date: '',
             page: 1,
             city: '',
+            bannerId: '',
+            cityList: [],
+            bannerImg: ''
          }
       },
       mounted () {
          this.getListData()
+         this.getCityBanner()
       },
       computed: {
          marginDis () {
@@ -121,6 +129,9 @@
       },
       methods: {
          getListData () {
+            if(this.isLoading) return
+            console.log('getListData')
+            this.isLoading = true
             const date = this.date === '' ? '' : formatDate(this.date, 'yyyy/MM/dd')
             getProList({
                keyword: this.keyword,
@@ -130,6 +141,14 @@
                mid: ''
             }).then(res => {
                this.listData = res.data.list
+               this.isLoading = false
+            })
+         },
+         getCityBanner () {
+            getCityBanner().then(res => {
+               this.bannerId = res.data.b_id
+               this.cityList = res.data.citys
+               this.bannerImg = res.data.pccover
             })
          },
          getDetailData (id) {
@@ -161,8 +180,18 @@
             this.date = data.date
             this.getListData()
          },
+         setCity (id) {
+            this.city = id
+            this.page = 1
+            this.keyword = ''
+            this.date = ''
+            this.getListData()
+         },
          loadMore () {
+            if(this.isLoading) return
             console.log('loadMore')
+            this.page += 1
+            this.getListData()
          }
       }
    }

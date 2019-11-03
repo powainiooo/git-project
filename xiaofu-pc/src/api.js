@@ -1,7 +1,8 @@
 import axios from 'axios'
 // const ajax = 'https://wechat.leesticket.com/mobile/applet'
-const ajax = 'http://ticket.pc-online.cc/mobile/applet'
-// const ajax = ''
+// const ajax = 'https://wechat.leesticket.com/mobile/applet_v2'
+// const ajax = 'http://ticket.pc-online.cc/mobile/applet'
+const ajax = ''
 
 // 获取票务列表 ${ajax}/pro_list /mock/list.json
 export const getProList = (params) => {

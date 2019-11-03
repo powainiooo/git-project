@@ -49,7 +49,7 @@
                      v-if="i.cate === 'activity'"
                      @tap="getDetailData">
                   </list-item>
-                  <recommend v-if="i.cate === 'recommend'" :listData="i.list"></recommend>
+                  <recommend v-if="i.cate === 'recommend' && i.list.length !== 0" :listData="i.list"></recommend>
                   <banner v-if="i.cate === 'banner'" :id="i.id" :img="i.pc_image" @linkTo="getDetailData" :style="{width: frameW + 'px'}"></banner>
                </div>
             </div>

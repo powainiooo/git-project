@@ -42,7 +42,7 @@
               infinite-scroll-disabled="isLoading"
               infinite-scroll-distance="10">
             <div class="pro-list" :style="proListStyle">
-               <div v-for="i in listData" :key="i.id" :style="getProItemStyle(i.cate)">
+               <div v-for="(i, index) in listData" :key="index" :style="getProItemStyle(i.cate)">
                   <list-item
                      :itemData="i"
                      fold
@@ -50,7 +50,7 @@
                      @tap="getDetailData">
                   </list-item>
                   <recommend v-if="i.cate === 'recommend'" :listData="i.list"></recommend>
-                  <!--<banner v-if="i.cate === 'banner'"></banner>-->
+                  <banner v-if="i.cate === 'banner'" :id="i.id" :img="i.pc_image" @linkTo="getDetailData" :style="{width: frameW + 'px'}"></banner>
                </div>
             </div>
          </div>
@@ -85,7 +85,7 @@
       data() {
          return {
             showDetail: false,
-            isLoading: false,
+            isLoading: true,
             listData: [],
             detailData: {},
             keyword: '',
@@ -125,13 +125,14 @@
             return {
                margin: `0 ${this.marginDis}px 100px ${this.marginDis}px`
             }
+         },
+         frameW () {
+            const searchW = this.$refs.search.$el.clientWidth
+            return this.wWidth - searchW + this.marginDis
          }
       },
       methods: {
          getListData () {
-            if(this.isLoading) return
-            console.log('getListData')
-            this.isLoading = true
             const date = this.date === '' ? '' : formatDate(this.date, 'yyyy/MM/dd')
             getProList({
                keyword: this.keyword,
@@ -140,7 +141,7 @@
                city: this.city,
                mid: ''
             }).then(res => {
-               this.listData = res.data.list
+               this.listData = this.listData.concat(res.data.list)
                this.isLoading = false
             })
          },
@@ -162,22 +163,32 @@
             })
          },
          getProItemStyle(cate) {
+            const searchW = this.$refs.search.$el.clientWidth
             if (cate === 'activity') {
                return {
                   margin: `0 ${this.marginDis}px 100px ${this.marginDis}px`
                }
             } else if (cate === 'recommend') {
-               const searchW = this.$refs.search.$el.clientWidth
                let containerW = this.containerWidth
                return {
-                  width: `${this.wWidth - searchW + this.marginDis}px`,
+                  width: `${this.frameW}px`,
                   marginLeft: `-${(this.wWidth - searchW - containerW - this.marginDis) / 2}px`
+               }
+            } else if (cate === 'banner') {
+               let containerW = this.containerWidth
+               return {
+                  width: `${this.frameW}px`,
+                  marginLeft: `-${(this.wWidth - searchW - containerW - this.marginDis) / 2}px`,
+                  marginTop: '-50px',
+                  marginBottom: '50px'
                }
             }
          },
          doSearch (data) {
             this.keyword = data.keyword
             this.date = data.date
+            this.page = 1
+            this.listData = []
             this.getListData()
          },
          setCity (id) {
@@ -185,11 +196,12 @@
             this.page = 1
             this.keyword = ''
             this.date = ''
+            this.listData = []
             this.getListData()
          },
          loadMore () {
-            if(this.isLoading) return
-            console.log('loadMore')
+            this.isLoading = true
+            console.log('loadMore'+this.isLoading)
             this.page += 1
             this.getListData()
          }

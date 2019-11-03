@@ -22,6 +22,7 @@
          background-color #ffffff
    .banner-container
       min-width 1090px
+      width 100%
       height 365px
       position relative
       background-position center center

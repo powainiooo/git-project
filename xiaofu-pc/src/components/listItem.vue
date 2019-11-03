@@ -164,7 +164,7 @@
        methods: {
           tapup () {
              this.tap = false
-             // this.$emit('tap', this.itemData.id)
+             this.$emit('tap', this.itemData.id)
           }
        }
     }

@@ -1,5 +1,24 @@
 <!--index.wxml-->
-<view class="container">
-   <address></address>
-</view>
+<scroll-view scroll-y class="container" bindscroll="containerScroll">
+   <header initButton="{{headerBtns}}" id="header"></header>
+   <view class="search-frame" id="search">
+      <search></search>
+   </view>
+   <view class="address-frame {{addressFixed ? 'address-frame-fixed' : ''}}" id="address">
+      <address hasbg="{{addressFixed}}"></address>
+   </view>
+   <view class="pro-list">
+      <view class="item-frame"
+            wx:for="{{4}}"
+            wx:for-item="item"
+            wx:for-index="index"
+            wx:key="{{index}}"
+            data-index="{{index}}"
+            bindtap="gotoDetail">
+         <ticket-item fold="{{selectedTicketIndex !== index}}"
+                      class="item {{selectedTicketIndex === index ? 'item-selected' : ''}}"
+                      style="{{selectedTicketIndex === index ? selectedTicketStyles : ''}}"></ticket-item>
+      </view>
+   </view>
+</scroll-view>
 <!--<button bindtap="toggleShow" style="position: fixed; top: 0; right: 0;">toggleShow</button>-->

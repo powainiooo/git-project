@@ -13,10 +13,10 @@ Component({
          type: Boolean,
          value: false,
 	      observer (newVal) {
-         	console.log('fold')
+         	// console.log('fold')
 		      setTimeout(() => {
 			      wx.createSelectorQuery().in(this).select("#ticket").boundingClientRect(res => {
-				      console.log(res)
+				      // console.log(res)
 				      this.setData({
 					      height: res.height
 				      })
@@ -47,10 +47,8 @@ Component({
 	   height: 0
    },
 	attached() {
-   	console.log('attached1')
 		setTimeout(() => {
 			wx.createSelectorQuery().in(this).select("#ticket").boundingClientRect(res => {
-				console.log(res)
 				this.setData({
 					height: res.height
 				})

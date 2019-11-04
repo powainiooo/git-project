@@ -9,7 +9,14 @@ Page({
 		hasUserInfo: false,
 		canIUse: wx.canIUse('button.open-type.getUserInfo'),
 		showDate: true,
-		selectedDate: '2019-05-10'
+		selectedDate: '2019-05-10',
+		headerBtns: ['menu'],
+		headerHeight: 60,
+		searchHeight: 612,
+		scrollTop: 0,
+		addressFixed: false,
+		selectedTicketIndex: -1,
+		selectedTicketStyles: ''
 	},
 	//事件处理函数
 	bindViewTap: function() {
@@ -45,6 +52,9 @@ Page({
 			})
 		}
 	},
+	onShow () {
+		this.getComponentsSize()
+	},
 	toggleShow () {
 		this.setData({
 			showDate: !this.data.showDate
@@ -57,5 +67,38 @@ Page({
 			userInfo: e.detail.userInfo,
 			hasUserInfo: true
 		})
+	},
+	getComponentsSize () { // 获取部分组件的尺寸信息
+		setTimeout(() => {
+			wx.createSelectorQuery().select("#header").boundingClientRect(rect => {
+				// console.log(rect)
+				this.data.headerHeight = rect.top
+			}).exec()
+			wx.createSelectorQuery().select("#search").boundingClientRect(rect => {
+				console.log(rect)
+				this.data.searchHeight = rect.height
+			}).exec()
+		}, 1000)
+	},
+	containerScroll (e) {
+		this.data.scrollTop = e.detail.scrollTop
+		this.setData({
+			addressFixed: e.detail.scrollTop >= this.data.searchHeight
+		})
+	},
+	gotoDetail (e) {
+		const top = e.currentTarget.offsetTop
+		const index = e.currentTarget.dataset.index
+		this.data.lastTop = top - this.data.scrollTop
+		console.log('---------------')
+		this.setData({
+			selectedTicketIndex: index,
+			selectedTicketStyles: `top: ${this.data.lastTop}px`
+		})
+		setTimeout(() => {
+			this.setData({
+				selectedTicketStyles: `top: 120rpx; transition-duration: 0.5s;`
+			})
+		}, 50)
 	}
 })

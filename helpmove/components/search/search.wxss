@@ -1,4 +1,4 @@
-.c-search { min-height: 100vh; background: linear-gradient(320deg, #2353dd, #002bab 10%,#003ebe); position: relative; overflow: hidden;}
+.c-search { min-height: 100vh; background: #002ab0; position: relative; overflow: hidden;}
 .c-search .logo { width: 440rpx; position: absolute; top: 0; left: 0; z-index: 0;}
 .c-search .title { width: 400rpx; margin: 90rpx 0 50rpx 170rpx}
 

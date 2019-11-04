@@ -7,6 +7,7 @@ function initUpload(id) {
 	var frame = $(id)
 	var input = frame.find('input')
 	var img = frame.find('img')
+	var imgs = frame.find('.imgs')
 	frame.on('click', function () {
 		if (!frame.hasClass('z-upload-readonly')) {
 			input.click()
@@ -16,14 +17,29 @@ function initUpload(id) {
 		e.stopPropagation()
 	})
 	input.on('change', function (e) {
-		console.log(e)
-		var file = e.currentTarget.files[0]
-		var reader = new FileReader()
-		reader.readAsDataURL(file)
-		reader.onload = function (ev) {
-			img.attr('src', ev.currentTarget.result)
-			frame.addClass('z-upload-img')
+		var files = e.currentTarget.files
+		if (img.length === 1) {
+			var reader = new FileReader()
+			reader.readAsDataURL(files[0])
+			reader.onload = function (ev) {
+				img.attr('src', ev.currentTarget.result)
+				frame.addClass('z-upload-img')
+			}
 		}
+		if (imgs.length === 1) {
+			imgs.html('')
+			frame.addClass('z-upload-img')
+			for (var item in files) {
+				if (item === 'length') return
+				var reader = new FileReader()
+				reader.readAsDataURL(files[item])
+				reader.onload = function (ev) {
+					// img.attr('src', ev.currentTarget.result)
+					imgs.append('<img src="'+ ev.currentTarget.result +'" />')
+				}
+			}
+		}
+
 	})
 }
 

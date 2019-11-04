@@ -48,18 +48,22 @@
 .z-title { font-size: 20px; line-height: 1; color: #666666; font-weight: bold; padding-left: 15px; border-left: 5px solid #41d5bc; margin: 12px 0 15px 0; font-family:SourceHanSansSC;}
 
 /* 上传 */
-.z-upload { width: 180px; height: 180px; border: 1px dashed #dddddd; background-color: #fafafa; display: flex; flex-direction: column; justify-content: center; align-items: center; cursor: pointer;}
+.z-upload { width: 180px; height: 180px; border: 1px dashed #dddddd; background-color: #fafafa; display: flex; flex-direction: column; justify-content: center; align-items: center; cursor: pointer; overflow: hidden;}
 .z-upload-style2 { width: 120px; height: 120px; border: 1px solid #E6E6E6; border-radius: 4px; background-color: #ffffff;}
 .z-upload .icon-add { width: 32px; height: 32px; background: url("../images/icons.png") no-repeat; background-position: -118px 0;}
 .z-upload-style2 .icon-add { width: 24px; height: 24px; background: url("../images/icons.png") no-repeat; background-position: -21px -59px;}
 .z-upload p { font-size: 14px; line-height: 1; color: #cccccc; margin-top: 20px;}
 .z-upload input { display: none;}
+.z-upload .imgs { width: 100%; height: 100%; overflow: auto; display: none;}
+.z-upload .imgs img { margin: 2px 0;}
 .z-upload img { width: 100%; display: none;}
 .z-upload-img .icon-add{ display: none;}
 .z-upload-img p{ display: none;}
+.z-upload-img .imgs { display: block;}
 .z-upload-img img { display: block;}
 .z-upload-readonly .icon-add{ display: none;}
 .z-upload-readonly p{ display: none;}
+.z-upload-readonly .imgs { display: block;}
 .z-upload-readonly img { display: block;}
 
 /* 按钮 */

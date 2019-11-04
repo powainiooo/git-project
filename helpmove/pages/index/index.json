@@ -1,5 +1,8 @@
 {
   "usingComponents": {
-     "address": "../../components/address/address"
+     "header": "../../components/header/header",
+     "search": "../../components/search/search",
+     "address": "../../components/address/address",
+     "ticket-item": "../../components/ticket/ticket"
   }
 }

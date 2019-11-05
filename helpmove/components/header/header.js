@@ -15,6 +15,7 @@ Component({
 					showShare: newVal.includes('share'),
 					showRefresh: newVal.includes('refresh'),
 					showShadow: newVal.includes('shadow'),
+					showArrow: newVal.includes('arrow'),
 				})
 		   }
       },
@@ -33,6 +34,7 @@ Component({
 	   showShare: false,
 	   showRefresh: false,
 	   showShadow: false,
+	   showArrow: false,
       navAniData: {},
       orderAniData: {},
       userInfo: {},
@@ -121,7 +123,7 @@ Component({
             })
          } else { // 其它关闭操作
             this.toggleShare()
-            this.triggerEvent('doclose')
+            this.triggerEvent('btntap', 'close')
          }
       },
       toggleMenu (isShow) {
@@ -157,6 +159,9 @@ Component({
          if (this.data.name !== 'search') {
             this.triggerEvent('dosearch', this.data.keywords)
          }
+      },
+	   tapArrow () {
+		   this.triggerEvent('btntap', 'arrow')
       },
       doRefresh () {
          this.triggerEvent('doRefresh')

@@ -8,10 +8,12 @@
         sub: sub
     };
 </wxs>
-<view class="ticket-item {{fold ? 'ticket-item-fold' : ''}} {{hideImgs ? 'ticket-item-hideimg' : ''}}"
-      style="width: {{width}}rpx"
+<!--
       hover-class="{{fold ? 'ticket-item-tap' : ''}}"
-      hover-stay-time="10">
+      hover-stay-time="10"
+-->
+<view class="ticket-item {{fold ? 'ticket-item-fold' : ''}} {{hideImgs ? 'ticket-item-hideimg' : ''}}"
+      style="width: {{width}}rpx">
    <view class="ticket-frame" id="ticket" style="transform: scale({{width / 750}})">
       <view class='top'>
          <view class='date date3'>

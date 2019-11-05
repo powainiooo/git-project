@@ -1,0 +1,76 @@
+<view class="detail-frame">
+    <view style="background-color: #f6f6f6;padding-bottom: 180rpx; overflow: hidden; opacity: 0;" animation="{{detailAniData}}">
+        <view class="title" wx:if="{{itemData.person.length !== 0}}">艺人信息</view>
+        <view class="actor-item"
+              wx:if="{{itemData.person.length !== 0}}"
+              wx:for="{{itemData.person}}"
+              wx:for-item="item"
+              wx:for-index="index"
+              wx:key="{{index}}">
+           <image class="img" src="{{imgSrc+item.picture}}" mode="aspectFit"></image>
+            <view class="name" wx:if="{{item.img == ''}}">{{item.username}}</view>
+        </view>
+
+        <view class="title" wx:if="{{itemData.info.notify.length !== 0}}">须知</view>
+        <view class="notice-item"
+              wx:if="{{itemData.info.notify.length !== 0}}"
+              wx:for="{{itemData.info.notify}}"
+              wx:for-item="item"
+              wx:for-index="index"
+              wx:key="{{index}}">
+            <text class="number">{{index < 9 ? 0 : ''}}{{index+1}}</text>
+            <text class="descript">{{item}}</text>
+        </view>
+
+        <view class="title" wx:if="{{itemData.info.goods_desc.length !== 0}}">活动详情</view>
+        <view class="activity-frame" wx:if="{{itemData.info.goods_desc.length !== 0}}">
+            <swiper class="swiper"
+                    previous-margin="40rpx"
+                    next-margin="40rpx"
+                    duration="200"
+                    bindchange="activityChange">
+                <swiper-item  class="swiper-item"
+                              wx:for="{{itemData.info.goods_desc}}"
+                              wx:for-index="index"
+                              wx:for-item="item"
+                              wx:key="index">
+                    <image class="img" src="{{imgSrc+item.img}}" mode="aspectFill"></image>
+                    <view class="infos">{{item.desc}}</view>
+                </swiper-item>
+            </swiper>
+            <view class="nav-dots">
+                <view wx:for="{{itemData.info.image_arr}}"
+                      wx:for-index="index"
+                      wx:key="index"
+                      class="dot-item {{index == activityIndex ? 'active' : ''}}"></view>
+            </view>
+        </view>
+
+        <view class="title">联系主办方</view>
+        <view class="contact-frame" wx:if="{{itemData.info}}">
+            <image src="{{imgSrc+itemData.info.cover}}" mode="widthFix" class="logo"></image>
+            <view class="btn-phone"
+                  hover-class="btn-phone-touch"
+                  hover-stay-time="10"
+                  bindtap="docall"
+                  data-phone="{{itemData.info.mobile}}">{{itemData.info.mobile}}</view>
+        </view>
+
+        <view class="title" wx:if="{{itemData.recommend.length != 0}}">更多推荐活动</view>
+        <swiper class="recommond-swiper"
+                wx:if="{{itemData.recommend.length != 0}}"
+                duration="200"
+                previous-margin="30rpx"
+                next-margin="240rpx">
+            <swiper-item class="recommond-item"
+                         wx:for="{{itemData.recommend}}"
+                         wx:for-index="index"
+                         wx:for-item="item"
+                         wx:key="index"
+                         data-id="{{item.id}}"
+                         bindtap="gotoDetail">
+                <ticket-item itemData="{{item}}" width="{{480}}" fold></ticket-item>
+            </swiper-item>
+        </swiper>
+    </view>
+</view>

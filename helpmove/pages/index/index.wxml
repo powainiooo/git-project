@@ -1,6 +1,6 @@
 <!--index.wxml-->
 <scroll-view scroll-y class="container" bindscroll="containerScroll">
-   <header initButton="{{headerBtns}}" id="header"></header>
+   <header initButton="{{headerBtns}}" id="header" bindbtntap="headBtn"></header>
    <view class="search-frame" id="search">
       <search></search>
    </view>
@@ -15,10 +15,12 @@
             wx:key="{{index}}"
             data-index="{{index}}"
             bindtap="gotoDetail">
-         <ticket-item fold="{{selectedTicketIndex !== index}}"
-                      class="item {{selectedTicketIndex === index ? 'item-selected' : ''}}"
-                      style="{{selectedTicketIndex === index ? selectedTicketStyles : ''}}"></ticket-item>
+         <ticket-container fold="{{selectedTicketIndex === index ? selectedFold : true}}"
+                           class="item {{selectedTicketIndex === index ? 'item-selected' : ''}}"
+                           style="{{selectedTicketIndex === index ? selectedTicketStyles : ''}}"
+                           detailData="{{selectedTicketIndex === index ? detailData : null}}"
+                           id="{{selectedTicketIndex === index ? 'ticket' : ''}}"></ticket-container>
       </view>
    </view>
 </scroll-view>
-<!--<button bindtap="toggleShow" style="position: fixed; top: 0; right: 0;">toggleShow</button>-->
+<footer itemData="{{detailData}}" bindbtns="btnFunc" id="footer"></footer>

@@ -31,11 +31,7 @@ Component({
 	   hideImgs: {
       	type: Boolean,
 		   value: false
-	   },
-      extraClass: {
-         type: String,
-         value: ''
-      }
+	   }
    },
 
    /**

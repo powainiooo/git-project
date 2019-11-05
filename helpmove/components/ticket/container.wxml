@@ -1,0 +1,5 @@
+<view style="background-color: #f6f6f6">
+   <ticket fold="{{fold}}" hideImgs="{{showItem === 'buy'}}"></ticket>
+   <detail itemData="{{detailData}}" wx:if="{{showItem === 'detail'}}" showInfos="{{showItem === 'detail'}}"></detail>
+   <buy itemData="{{detailData}}" wx:if="{{showItem === 'buy'}}"></buy>
+</view>

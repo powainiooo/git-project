@@ -3,6 +3,7 @@
   <view class="opera-line">
     <image src='../../res/img/logo.png' mode="widthFix" class="logo" bindtap='gotoHome'></image>
     <view class="btns">
+       <view class="icons icon-xuanze" wx:if="{{showArrow}}" bindtap="tapArrow"></view>
       <view class="icons icon-gengduo" wx:if="{{showMenu}}" bindtap="openMenu"></view>
       <view class="icons icon-guanbi" wx:if="{{showClose}}" bindtap="doClose"></view>
       <view class="icon-search" wx:if="{{showRefresh}}" bindtap="doRefresh"></view>

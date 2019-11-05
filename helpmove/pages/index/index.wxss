@@ -2,7 +2,9 @@
 .search-frame { margin-top: 120rpx}
 .address-frame { width: 100%; position: absolute; top: 1404rpx; left: 0; z-index: 800;}
 .address-frame-fixed { position: fixed; top: 120rpx;}
-.pro-list { margin-top: 120rpx;}
+.pro-list { margin-top: 70rpx;}
 .pro-list .item-frame { height: 580rpx; position: relative;}
-.pro-list .item-frame .item { position: absolute; top: 0; left: 0; transform: scale(0.875); transition: all 0 linear;}
-.pro-list .item-frame .item-selected { transform: scale(1); position: fixed; height: calc(100vh - 120rpx); overflow: scroll; background-color: #f3f3f3; z-index: 900;}
+.pro-list .item-frame .item { height: auto; position: absolute; top: 0; left: 0; transform: scale(0.875); transition: all 0 cubic-bezier(.22,.62,.4,1.16);}
+.pro-list .item-frame .item-selected { transform: scale(1); position: fixed; height: calc(100vh - 120rpx); overflow: scroll; z-index: 900;}
+
+

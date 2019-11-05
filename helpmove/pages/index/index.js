@@ -1,7 +1,8 @@
 //index.js
 //获取应用实例
 const app = getApp()
-
+const detailData = require('../../res/mock/detail')
+console.log(detailData.data)
 Page({
 	data: {
 		motto: 'Hello World',
@@ -15,8 +16,11 @@ Page({
 		searchHeight: 612,
 		scrollTop: 0,
 		addressFixed: false,
-		selectedTicketIndex: -1,
-		selectedTicketStyles: ''
+		selectedTicketIndex: -1, // 选中票务的下标
+		selectedTicketStyles: '', // 选中票务的附加样式
+		selectedFold: true, // 选中票务是否折叠
+		detailData: null,
+		showBottom: false
 	},
 	//事件处理函数
 	bindViewTap: function() {
@@ -86,19 +90,66 @@ Page({
 			addressFixed: e.detail.scrollTop >= this.data.searchHeight
 		})
 	},
+	headBtn (e) {
+		console.log(e)
+		if (e.detail === 'close') {
+			this.closeDetail()
+		} else if (e.detail === 'arrow') {
+			const ticket = this.selectComponent("#ticket")
+			ticket.togglePage('detail')
+			const footer = this.selectComponent("#footer")
+			footer.togglePage('detail')
+			this.setData({
+				headerBtns: ['share', 'close']
+			})
+		}
+	},
 	gotoDetail (e) {
+		console.log(e)
+		if (this.data.selectedTicketIndex !== -1) return
 		const top = e.currentTarget.offsetTop
 		const index = e.currentTarget.dataset.index
 		this.data.lastTop = top - this.data.scrollTop
-		console.log('---------------')
 		this.setData({
 			selectedTicketIndex: index,
 			selectedTicketStyles: `top: ${this.data.lastTop}px`
 		})
 		setTimeout(() => {
 			this.setData({
-				selectedTicketStyles: `top: 120rpx; transition-duration: 0.5s;`
+				selectedFold: false,
+				selectedTicketStyles: `top: 120rpx; transition-duration: 0.5s;`,
+				headerBtns: ['share', 'close']
 			})
 		}, 50)
+		setTimeout(() => {
+			this.getDetailData()
+		}, 600)
+	},
+	closeDetail () {
+		this.setData({
+			selectedFold: true,
+			detailData: null,
+			selectedTicketStyles: `top: ${this.data.lastTop}px; transform: scale(0.875); transition-duration: 0.5s;`
+		})
+		setTimeout(() => {
+			this.setData({
+				selectedTicketIndex: -1,
+				headerBtns: ['menu']
+			})
+		}, 500)
+	},
+	getDetailData () {
+		this.setData({
+			detailData: detailData.data
+		})
+	},
+	btnFunc (e) {
+		if (e.detail === 'intoBuy') {
+			const ticket = this.selectComponent("#ticket")
+			ticket.togglePage('buy')
+			this.setData({
+				headerBtns: ['share', 'arrow']
+			})
+		}
 	}
 })

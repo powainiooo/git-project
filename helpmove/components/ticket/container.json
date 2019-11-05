@@ -1,0 +1,8 @@
+{
+   "component": true,
+   "usingComponents": {
+      "ticket": "./ticket",
+      "detail": "./detail",
+      "buy": "./buy"
+   }
+}

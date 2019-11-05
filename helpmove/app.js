@@ -33,8 +33,43 @@ App({
 			}
 		})
 	},
+	watchCallBack: {},
+	watchingKeys: [],
+	setGlobalData(data){
+		// 为了便于管理，应通过此方法修改全局变量
+		Object.keys(data).map(key => {
+			this.globalData[key] = data[key]
+		})
+		console.log('mutation', data);
+		wx.setStorageSync('store', this.globalData)// 加入缓存
+	},
+	$watch(key, cb){
+		this.watchCallBack = Object.assign({}, this.watchCallBack,{
+			[key]: this.watchCallBack[key] || []
+		});
+		this.watchCallBack[key].push(cb);
+		if(!this.watchingKeys.find(x => x === key)){
+			const that = this;
+			this.watchingKeys.push(key);
+			let val = this.globalData[key];
+			Object.defineProperty(this.globalData, key, {
+				configurable: true,
+				enumerable: true,
+				set(value){
+					const old = that.globalData[key];
+					val = value;
+					that.watchCallBack[key].map(func => func(value, old));
+				},
+				get(){
+					return val
+				}
+			})
+		}
+	},
 	globalData: {
 		userInfo: null,
-		ajaxUrl: 'http://ticket.pc-online.cc/mobile/applet'
+		ajaxUrl: 'http://ticket.pc-online.cc/mobile/applet',
+		ticketNumsArr: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+		ticketNumsSelected: 0
 	}
 })

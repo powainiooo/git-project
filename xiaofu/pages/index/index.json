@@ -1,7 +1,12 @@
 {
-  "usingComponents":{
-    "header-view":"../../components/header/header",
-    "ticket-item": "../../components/ticket/ticket",
-    "ticket-detail": "../../components/ticket-detail/detail"
+  "usingComponents": {
+     "header": "../../components/header/header",
+     "search": "../../components/search/search",
+     "address": "../../components/address/address",
+     "banner": "../../components/banner/banner",
+     "ticket-container": "../../components/ticket/container",
+     "recommend": "../../components/ticket/recommend",
+     "footer": "../../components/ticket/footer",
+     "loading": "../../components/loading/loading"
   }
 }

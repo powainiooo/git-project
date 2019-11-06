@@ -1,0 +1,6 @@
+<view class="z-loading">
+   <view wx:for="{{4}}"
+         wx:for-index="index"
+         wx:key="{{index}}"
+         class="z-loading-item {{current === index ? 'z-loading-item-active' : ''}}"></view>
+</view>

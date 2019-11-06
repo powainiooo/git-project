@@ -9,14 +9,29 @@ Component({
          type: Object,
          value: {}
       },
-      isSimple: {
+      fold: {
          type: Boolean,
-         value: true
+         value: false,
+	      observer (newVal) {
+         	// console.log('fold')
+		      setTimeout(() => {
+			      wx.createSelectorQuery().in(this).select("#ticket").boundingClientRect(res => {
+				      // console.log(res)
+				      this.setData({
+					      height: res.height
+				      })
+			      }).exec()
+		      }, 350)
+	      }
       },
-      extraClass: {
-         type: String,
-         value: ''
-      }
+	   width: {
+      	type: Number,
+		   value: 750
+	   },
+	   hideImgs: {
+      	type: Boolean,
+		   value: false
+	   }
    },
 
    /**
@@ -24,9 +39,18 @@ Component({
    */
    data: {
       ajaxSrc: app.globalData.ajaxSrc,
-      imgSrc: app.globalData.imgSrc
+      imgSrc: app.globalData.imgSrc,
+	   height: 0
    },
-
+	attached() {
+		setTimeout(() => {
+			wx.createSelectorQuery().in(this).select("#ticket").boundingClientRect(res => {
+				this.setData({
+					height: res.height
+				})
+			}).exec()
+		}, 350)
+	},
    /**
    * 组件的方法列表
    */

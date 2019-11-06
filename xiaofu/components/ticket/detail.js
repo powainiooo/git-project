@@ -9,10 +9,6 @@ Component({
          type: Object,
          value: {}
       },
-      isSimple: {
-         type: Boolean,
-         value: true
-      },
       showInfos: {
          type: Boolean,
          value: false,
@@ -27,14 +23,6 @@ Component({
                detailAniData: animation.export()
             })
          }
-      },
-      showBuyInfos: {
-         type: Boolean,
-         value: false
-      },
-      extraClass: {
-         type: String,
-         value: ''
       }
    },
 

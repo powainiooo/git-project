@@ -6,8 +6,7 @@ Component({
          type: Object,
          value: {},
          observer (newVal, oldVal, change) {
-            let keys = Object.keys(newVal)
-            if (keys.length === 0) return
+            if (newVal === null) return
             if (newVal.anew) {
                let list = newVal.anew
                let obj = {}
@@ -21,7 +20,6 @@ Component({
                this.setNums(obj)
                this.setData({
                   typeList: newVal.anew,
-                  typeBottom: -newVal.anew.length * 100 + 'rpx',
                   selectTicket: obj
                })
             }
@@ -39,10 +37,11 @@ Component({
     * 页面的初始数据
     */
    data: {
-      numbersArr: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+      numbersArr: app.globalData.ticketNumsArr,
       numberIndex: 0,
       idTypeArr: ['身份证 ID card', '护照 passport'],
       idTypeIndex: -1,
+	   ticketPrice: 0,
       nameVal: '',
       phoneVal: '',
       addressVal: '',
@@ -54,23 +53,29 @@ Component({
       showTypeList: false,
       ajaxSrc: app.globalData.ajaxSrc,
       imgSrc: app.globalData.imgSrc,
-      typeBottom: 0,
       uploadImg: '',
       showExample: false
    },
+	attached() {
+		app.$watch('ticketNumsArr', (val, old) => { // 监听选择票数范围
+			this.setData({
+				numbersArr: val
+			})
+		})
+		app.$watch('ticketNumsSelected', (val, old) => { // 监听选择票数
+			this.setData({
+				numberIndex: val
+			})
+		})
+	},
    methods: {
-      numberChange: function (e) {
-         this.setData({
-            numberIndex: e.detail.value
-         })
-      },
-      idTypeChange: function (e) {
+      idTypeChange: function (e) { // 证件类型切换
          this.setData({
             idTypeIndex: e.detail.value
          })
          this.checkValues()
       },
-      toggleTypeList (event) {
+      toggleTypeList (event) { // 票种切换
          let over = event.target.dataset.over
          if (over === 1) return
          let val = event.target.dataset.val === undefined ? -1 : event.target.dataset.val
@@ -78,13 +83,11 @@ Component({
          // let isShow = event.target.dataset.show;
          this.setNums(obj)
          let params = {}
-         // params.typeBottom = isShow ? '160rpx' : -this.data.typeList.length*100+'rpx';
-         // params.showTypeList = isShow;
          if (obj.is_over === 1) return
          params.selectTicket = obj
          this.setData(params)
       },
-      checkValues (event) {
+      checkValues (event) { // 检测信息是否全部输入
          let data = this.data.itemData
          if (event) {
             let key = event.target.dataset.key
@@ -127,6 +130,7 @@ Component({
          this.setData({
             btnDisabled: btn
          })
+	      app.globalData.buyBtnDisabled = btn
       },
       doPay () {
          let self = this
@@ -219,6 +223,20 @@ Component({
             })
          }
       },
+	   getParams () {
+      	return {
+		      tid: this.data.itemData.info.id,
+		      name: this.data.nameVal,
+		      mobile: this.data.phoneVal,
+		      address: this.data.addressVal,
+		      email: this.data.emailVal,
+		      idnum: this.data.idnum,
+		      passport: this.data.uploadImg,
+		      idnum_type: parseInt(this.data.idTypeIndex) + 1,
+		      sele: this.data.selectTicket.select,
+		      nums: this.data.numbersArr[this.data.numberIndex],
+	      }
+	   },
       doBuySuccess (tid, orderNum) {
          let self = this
          wx.request({
@@ -239,7 +257,7 @@ Component({
             }
          })
       },
-      setNums (obj) {
+      setNums (obj) { // 设置可选票的数量列表
          let arr = []
          let nums = parseInt(obj.nums)
          if (obj.max != '') {
@@ -257,21 +275,19 @@ Component({
                arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
             }
          }
-         this.setData({
-            numbersArr: arr
-         })
+         app.globalData.ticketNumsArr = arr
       },
-      doShowExample () {
+      doShowExample () { // 显示证件照示例
          this.setData({
             showExample: true
          })
       },
-      doHideExample () {
+      doHideExample () { // 关闭证件照示例
          this.setData({
             showExample: false
          })
       },
-      doUpload () {
+      doUpload () { // 上传证件照
          const self = this
          wx.chooseImage({
             sourceType: ['album'],

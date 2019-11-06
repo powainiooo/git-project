@@ -5,39 +5,21 @@ Component({
    * 组件的属性列表
    */
    properties: {
-      showMenu: {
-         type: Boolean,
-         value: true
-      },
-      showClose: {
-         type: Boolean,
-         value: false
-      },
-      showSearch: {
-         type: Boolean,
-         value: false
-      },
-      showShare: {
-         type: Boolean,
-         value: false
-      },
-      showRefresh: {
-         type: Boolean,
-         value: false
-      },
-      showShadow: {
-         type: Boolean,
-         value: true
-      },
-      showSearchFrame: {
-         type: Boolean,
-         value: false
+	   initButton: {
+         type: Array,
+		   value: [],
+		   observer (newVal) {
+				this.setData({
+					showMenu: newVal.includes('menu'),
+					showClose: newVal.includes('close'),
+					showShare: newVal.includes('share'),
+					showRefresh: newVal.includes('refresh'),
+					showShadow: newVal.includes('shadow'),
+					showArrow: newVal.includes('arrow'),
+				})
+		   }
       },
       name: {
-         type: String,
-         value: ''
-      },
-      keywords: {
          type: String,
          value: ''
       }
@@ -47,6 +29,12 @@ Component({
    * 组件的初始数据
    */
    data: {
+	   showMenu: false,
+	   showClose: false,
+	   showShare: false,
+	   showRefresh: false,
+	   showShadow: false,
+	   showArrow: false,
       navAniData: {},
       orderAniData: {},
       userInfo: {},
@@ -58,21 +46,9 @@ Component({
             type: 'reLaunch'
          },
          {
-            name: '小夫特饮',
-            nameEn: 'lee\'s drink',
-            url: '/pages/drink/index',
-            type: 'reLaunch'
-         },
-         {
             name: '推荐主办方',
             nameEn: '1th organizers',
             url: '/pages/sponsor/list',
-            type: 'navigate'
-         },
-         {
-            name: '每周推荐',
-            nameEn: 'weekly recommendation',
-            url: '/pages/index/index?type=recommend',
             type: 'navigate'
          },
          {
@@ -103,55 +79,17 @@ Component({
       showCover: false,
       isShowMenu: false,
       lastShowBtn: '',
-      shareAnimate: {},
-      initButton: []
+      shareAnimate: {}
    },
-   ready () {
-      this.init()
-   },
-   attached () {
-      this.init()
-   },
-
    /**
    * 组件的方法列表
    */
    methods: {
-      init () {
-         if (this.data.showMenu) {
-            this.data.initButton.push('menu')
-         }
-         if (this.data.showClose) {
-            this.data.initButton.push('close')
-         }
-         if (this.data.showSearch) {
-            this.data.initButton.push('search')
-         }
-         if (this.data.showShare) {
-            this.data.initButton.push('share')
-         }
-         if (this.data.showShadow) {
-            this.data.initButton.push('shadow')
-         }
-      },
-      toggleSearch (event) {
-         let isShow = event.currentTarget.dataset.val
-         if (isShow) {
-            this.triggerEvent('dosearch', '')
-         }
-         this.setData({
-            keywords: '',
-            showSearchFrame: !isShow,
-            showSearch: isShow
-         })
-      },
       openMenu () {
          this.data.isShowMenu = true
          this.toggleMenu(this.data.isShowMenu)
          this.setData({
             userInfo: app.globalData.userInfo,
-            showSearch: false,
-            showSearchFrame: false,
             showClose: true
          })
       },
@@ -169,12 +107,11 @@ Component({
             }
             this.setData({
                showClose: false,
-               showSearch: search,
                showShadow: shadow
             })
          } else { // 其它关闭操作
             this.toggleShare()
-            this.triggerEvent('doclose')
+            this.triggerEvent('btntap', 'close')
          }
       },
       toggleMenu (isShow) {
@@ -210,6 +147,9 @@ Component({
          if (this.data.name !== 'search') {
             this.triggerEvent('dosearch', this.data.keywords)
          }
+      },
+	   tapArrow () {
+		   this.triggerEvent('btntap', 'arrow')
       },
       doRefresh () {
          this.triggerEvent('doRefresh')
@@ -248,7 +188,7 @@ Component({
          })
       },
       drawPoster () {
-         this.triggerEvent('doposter')
+	      this.triggerEvent('btntap', 'poster')
       },
       gotoLogin () {
          wx.navigateTo({

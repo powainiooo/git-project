@@ -84,15 +84,51 @@ App({
       // this.getCity();
       // this.getAccessToken();
    },
+   watchCallBack: {},
+   watchingKeys: [],
+   setGlobalData(data){
+      // 为了便于管理，应通过此方法修改全局变量
+      Object.keys(data).map(key => {
+         this.globalData[key] = data[key]
+      })
+      console.log('mutation', data);
+      wx.setStorageSync('store', this.globalData)// 加入缓存
+   },
+   $watch(key, cb){
+      this.watchCallBack = Object.assign({}, this.watchCallBack,{
+         [key]: this.watchCallBack[key] || []
+      });
+      this.watchCallBack[key].push(cb);
+      if(!this.watchingKeys.find(x => x === key)){
+         const that = this;
+         this.watchingKeys.push(key);
+         let val = this.globalData[key];
+         Object.defineProperty(this.globalData, key, {
+            configurable: true,
+            enumerable: true,
+            set(value){
+               const old = that.globalData[key];
+               val = value;
+               that.watchCallBack[key].map(func => func(value, old));
+            },
+            get(){
+               return val
+            }
+         })
+      }
+   },
    globalData: {
       userInfo: null,
       userOpenID: null,
-      ajaxSrc: 'https://wechat.leesticket.com/mobile/applet',
-      imgSrc: 'https://wechat.leesticket.com/upload/',
+      ajaxSrc: 'http://ticket.pc-online.cc/mobile/applet',
+      imgSrc: 'http://ticket.pc-online.cc/upload/',
       ticketOrderNum: null,
       ticketBuyNum: 0,
       access_token: '',
-      city: ''
+      city: '',
+      ticketNumsArr: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+      ticketNumsSelected: 0,
+      buyBtnDisabled: true
    },
    getCity () {
       let self = this

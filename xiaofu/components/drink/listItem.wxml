@@ -1,0 +1,21 @@
+<view class="drink-item">
+   <image src="../../res/images/drink-tag.png" class="drink-item-tag"></image>
+   <view class="drink-item-top">
+      <image src="{{imgSrc + itemData.cover}}" class="drink-item-img"></image>
+      <view class="drink-item-right">
+         <view class="drink-item-price"><text>{{itemData.price}}</text>RMB/杯</view>
+         <view class="drink-item-btns {{nums === 0 ? 'drink-item-btns-fold' : ''}}">
+            <view class="drink-item-reduce" bindtap="doReduce"></view>
+            <view class="drink-item-nums">{{nums}}</view>
+            <view class="drink-item-add" bindtap="doAdd"></view>
+         </view>
+      </view>
+   </view>
+   <view class="drink-item-bottom">
+      <image src="../../res/images/drink-frame-bottom.png" class="drink-item-bottom-bg" mode="widthFix"></image>
+      <view class="drink-item-info">
+         <text class="title">{{itemData.drink_name}}</text>
+         <text class="name">在 {{itemData.activity}} 使用</text>
+      </view>
+   </view>
+</view>

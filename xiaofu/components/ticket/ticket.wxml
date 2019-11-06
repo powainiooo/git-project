@@ -8,26 +8,33 @@
         sub: sub
     };
 </wxs>
-<view class="ticket-frame {{isSimple ? 'ticket-frame-simple' : ''}} {{extraClass}}" hover-class="{{isSimple ? 'ticket-touch' : ''}}" hover-stay-time="10">
-  <view class='line1'>
-    <view class='date'>
-      <view class='year'>
-        <text>2</text>
-        <text>0</text>
-        <text>{{util.sub(itemData.begin,2,3)}}</text>
-        <text>{{util.sub(itemData.begin,3,4)}}</text>
+<!--
+      hover-class="{{fold ? 'ticket-item-tap' : ''}}"
+      hover-stay-time="10"
+-->
+<view class="ticket-item {{fold ? 'ticket-item-fold' : ''}} {{hideImgs ? 'ticket-item-hideimg' : ''}}"
+      style="width: {{width}}rpx">
+   <view class="ticket-frame" id="ticket" style="transform: scale({{width / 750}})">
+      <view class='top'>
+         <view class='date date{{itemData.type}}'>
+            <view class='year'>
+               <text wx:for="{{util.sub(itemData.begin, 0, 4)}}"
+                     wx:for-item="item"
+                     wx:for-index="index"
+                     wx:key="{{index}}">{{item}}</text>
+            </view>
+            <view class='days'>{{itemData.date}}</view>
+         </view>
+         <view class="logo">
+            <image src='{{imgSrc+itemData.cover}}' mode='aspectFit' class='logo-img'></image>
+         </view>
       </view>
-      <view class='day day{{itemData.type}}'>{{itemData.date}}</view>
-    </view>
-    <view class="logo {{itemData.type == 1 ? '' : 'logo2'}}">
-      <image src='{{imgSrc+itemData.cover}}' mode='aspectFit' class='logo-img'></image>
-    </view>
-  </view>
-  <view class='title' wx:if="{{itemData.activity != ''}}">{{itemData.goods_name}} | {{itemData.activity}}</view>
-  <view class='title' wx:if="{{itemData.activity == ''}}">{{itemData.goods_name}}</view>
-  <view class='range'>{{itemData.hour_b}}-{{itemData.hour_e}}</view>
-  <view class='address'>{{itemData.address}}</view>
-  <view class="imgs-frame {{itemData.is_end == 'over' && isSimple ? 'sold-out' : ''}}">
-    <image src='{{imgSrc+itemData.cover2}}' mode='widthFix' class='imgs'></image>
-  </view>
+      <view class='title' wx:if="{{itemData.activity != ''}}">{{itemData.goods_name}} | {{itemData.activity}}</view>
+      <view class='title' wx:else>{{itemData.goods_name}}</view>
+      <view class='time'>{{itemData.hour_b}}-{{itemData.hour_e}}</view>
+      <view class='address'>{{itemData.address}}</view>
+      <view class="imgs-frame {{itemData.is_end == 'over' && fold ? 'sold-out' : ''}}">
+         <image src='{{imgSrc+itemData.cover2}}' mode='widthFix' class='imgs'></image>
+      </view>
+   </view>
 </view>

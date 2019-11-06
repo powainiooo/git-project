@@ -9,7 +9,7 @@
                wx:foritem="item"
                wx:key="{{item}}"
                data-item="{{item}}"
-               bindtap="doChange">{{item}}</view>
+               bindtap="doChange">{{item.name}}</view>
       </view>
    </scroll-view>
 </view>

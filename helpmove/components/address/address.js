@@ -6,8 +6,18 @@ Component({
    properties: {
 		list: {
 			type: Array,
-			value: ['深圳', '武汉', '广州', '杭州', '珠海', '上海', '东莞', '泰国', '佛山', '澳门', '其他城市']
+			value: []
 		},
+	   id: {
+			type: String,
+		   value: '',
+		   observer (val) {
+				const item = this.data.list.find(i => i.id === val)
+			   this.setData({
+				   selected: item.name || '全部'
+			   })
+		   }
+	   },
 	   hasbg: {
 			type: Boolean,
 		   value: false
@@ -28,8 +38,9 @@ Component({
    methods: {
 	   doChange (e) {
 	   	this.setData({
-			   selected: e.target.dataset.item
+			   selected: e.target.dataset.item.name
 		   })
+		   this.triggerEvent('change', e.target.dataset.item.id)
 	   },
 	   toggle () {
 	   	this.setData({

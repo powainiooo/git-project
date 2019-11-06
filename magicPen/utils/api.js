@@ -1,4 +1,4 @@
-                                                                                                                                                                              const ajaxUrl = getApp().globalData.ajaxSrc
+const ajaxUrl = getApp().globalData.ajaxSrc
 const { $Message } = require('../components/iview/base/index')
 const ajax = (opts, autoMsg = true) => {
    return new Promise((resolve, reject) => {

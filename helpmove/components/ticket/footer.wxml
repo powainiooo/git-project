@@ -26,7 +26,7 @@
       <picker bindchange="numberChange" value="{{numberIndex}}" range="{{numbersArr}}"  class="ticket-number">
          <view>{{numbersArr[numberIndex]}} <text>张</text></view>
       </picker>
-      <view class="btn {{btnDisabled ? '' : 'btn-disabled'}}" bindtap="doPay">确认付款</view>
+      <view class="btn {{btnDisabled ? '' : 'btn-disabled'}}" bindtap="doPay">{{itemData.drink_list.length === 0 ? '确认付款' : '下一步'}}</view>
    </view>
    <!-- 特饮底部 -->
    <view class="detail-footer" wx:if="{{showItem === 'drink'}}">

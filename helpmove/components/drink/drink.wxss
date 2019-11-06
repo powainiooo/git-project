@@ -1,5 +1,5 @@
-.drinks { width: 100%; height: 100vh; overflow: auto; background: linear-gradient(0deg,rgba(35, 41, 97, 0.97),rgba(0, 0, 0, 0.97)); }
+.drinks { width: 100%; height: calc(100vh - 120rpx); box-sizing: border-box; background: linear-gradient(0deg,rgba(35, 41, 97, 0.97),rgba(0, 0, 0, 0.97)); }
 .drinks-logo { width: 430rpx; margin: 30rpx auto 0 auto; display: block;}
 .drinks-title { width: 534rpx; margin: 0 auto; display: block;}
 
-.drinks-list { width: 646rpx; margin: 60rpx auto;}
+.drinks-list { width: 646rpx; margin: 60rpx auto 160rpx auto;}

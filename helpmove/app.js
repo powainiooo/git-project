@@ -70,6 +70,7 @@ App({
 		userInfo: null,
 		ajaxUrl: 'http://ticket.pc-online.cc/mobile/applet',
 		ticketNumsArr: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-		ticketNumsSelected: 0
+		ticketNumsSelected: 0,
+		buyBtnDisabled: true
 	}
 })

@@ -16,25 +16,25 @@
       style="width: {{width}}rpx">
    <view class="ticket-frame" id="ticket" style="transform: scale({{width / 750}})">
       <view class='top'>
-         <view class='date date3'>
+         <view class='date date{{itemData.type}}'>
             <view class='year'>
-               <text>2</text>
-               <text>0</text>
-               <text>1</text>
-               <text>8</text>
+               <!--<text wx:for="{{util.sub(itemData.begin, 0, 4)}}"-->
+                     <!--wx:for-item="item"-->
+                     <!--wx:for-index="index"-->
+                     <!--wx:key="{{index}}">{{item}}</text>-->
             </view>
-            <view class='days'>09/08-09/08</view>
+            <view class='days'>{{itemData.date}}</view>
          </view>
          <view class="logo">
-            <image src='../../res/img/logo2.png' mode='aspectFit' class='logo-img'></image>
+            <image src='{{imgSrc+itemData.cover}}' mode='aspectFit' class='logo-img'></image>
          </view>
       </view>
-      <view class='title'>Odalys China Tour with Drew Alexander | OIL</view>
-      <view class='time'>22:00-03:00</view>
-      <view class='address'>深圳市福田区车公庙泰然大厦01层L1-11A</view>
-      <view class="imgs-frame">
-         <image src='../../res/img/img.jpg' mode='widthFix' class='imgs'></image>
+      <view class='title' wx:if="{{itemData.activity != ''}}">{{itemData.goods_name}} | {{itemData.activity}}</view>
+      <view class='title' wx:else>{{itemData.goods_name}}</view>
+      <view class='time'>{{itemData.hour_b}}-{{itemData.hour_e}}</view>
+      <view class='address'>{{itemData.address}}</view>
+      <view class="imgs-frame {{itemData.is_end == 'over' && fold ? 'sold-out' : ''}}">
+         <image src='{{imgSrc+itemData.cover2}}' mode='widthFix' class='imgs'></image>
       </view>
    </view>
 </view>
-<banner src="../../res/img/banner1.jpg" wx:if="{{false}}"></banner>

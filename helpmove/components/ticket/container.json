@@ -3,6 +3,7 @@
    "usingComponents": {
       "ticket": "./ticket",
       "detail": "./detail",
-      "buy": "./buy"
+      "buy": "./buy",
+      "drink": "../drink/drink"
    }
 }

@@ -130,6 +130,7 @@ Component({
          this.setData({
             btnDisabled: btn
          })
+	      app.globalData.buyBtnDisabled = btn
       },
       doPay () {
          let self = this
@@ -222,6 +223,20 @@ Component({
             })
          }
       },
+	   getParams () {
+      	return {
+		      tid: this.data.itemData.info.id,
+		      name: this.data.nameVal,
+		      mobile: this.data.phoneVal,
+		      address: this.data.addressVal,
+		      email: this.data.emailVal,
+		      idnum: this.data.idnum,
+		      passport: this.data.uploadImg,
+		      idnum_type: parseInt(this.data.idTypeIndex) + 1,
+		      sele: this.data.selectTicket.select,
+		      nums: this.data.numbersArr[this.data.numberIndex],
+	      }
+	   },
       doBuySuccess (tid, orderNum) {
          let self = this
          wx.request({

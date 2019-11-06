@@ -1,13 +1,13 @@
 {
-  "pages": [
-    "pages/index/index",
-    "pages/logs/logs"
-  ],
-  "window": {
-    "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#002ab0",
-    "navigationBarTitleText": "",
-    "navigationBarTextStyle": "white"
-  },
-  "sitemapLocation": "sitemap.json"
+   "pages": [
+      "pages/logs/logs",
+      "pages/index/index"
+   ],
+   "window": {
+      "backgroundTextStyle": "light",
+      "navigationBarBackgroundColor": "#002ab0",
+      "navigationBarTitleText": "",
+      "navigationBarTextStyle": "white"
+   },
+   "sitemapLocation": "sitemap.json"
 }

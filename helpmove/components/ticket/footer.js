@@ -32,18 +32,25 @@ Component({
 			}
 		}
    },
-
+	attached() {
+		app.$watch('buyBtnDisabled', (val, old) => { // 监听选择票数范围
+			this.setData({
+				btnDisabled: val
+			})
+		})
+	},
    /**
     * 组件的初始数据
     */
    data: {
 	   showFrame: false,
 	   showItem: '',
+	   btnDisabled: true,
 	   minprice: 0,
 	   saleStart: 0,
 	   numbersArr: app.globalData.ticketNumsArr,
 	   numberIndex: 0,
-	   totalPrice: 10000
+	   totalPrice: 100
    },
    /**
     * 组件的方法列表
@@ -64,5 +71,13 @@ Component({
 		   })
 		   app.globalData.ticketNumsSelected = e.detail.value
 	   },
+	   doPay () {
+	   	if (this.data.itemData.drink_list.length === 0) { // 确认付款
+			   this.triggerEvent('btns', 'doPay')
+		   } else { // 进入特饮页
+			   this.togglePage('drink')
+			   this.triggerEvent('btns', 'intoDrink')
+		   }
+	   }
    }
 })

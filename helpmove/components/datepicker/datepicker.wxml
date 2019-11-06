@@ -1,25 +1,28 @@
-<view class="datepicker">
-   <image src="../../res/img/sales.png" mode="widthFix" class="logo"></image>
-   <image src="../../res/img/title-date.png" mode="widthFix" class="title"></image>
-   <view class="selects">
-      <view class="btn-frame" hover-class="btn-hover" bindtap="prevMonth"><view class="btn btn-prev"></view></view>
-      <text class="month">{{year}}/{{month + 1 < 10 ? '0' + (month + 1) : month + 1}}</text>
-      <view class="btn-frame" hover-class="btn-hover" bindtap="nextMonth"><view class="btn btn-next"></view></view>
+<view class="datepicker fadeIn1">
+   <image src="../../res/img/sales.png" mode="widthFix" class="logo fadeIn2"></image>
+   <image src="../../res/img/title-date.png" mode="widthFix" class="title fadeIn2"></image>
+   <view class="slideIn">
+      <view class="selects">
+         <view class="btn-frame" hover-class="btn-hover" bindtap="prevMonth"><view class="btn btn-prev"></view></view>
+         <text class="month">{{year}}/{{month + 1 < 10 ? '0' + (month + 1) : month + 1}}</text>
+         <view class="btn-frame" hover-class="btn-hover" bindtap="nextMonth"><view class="btn btn-next"></view></view>
+      </view>
+      <view class="date-week">
+         <view class="date-week-item"
+               wx:for="{{week}}"
+               wx:for-item="item"
+               wx:key="{{item}}">{{item}}</view>
+      </view>
+      <view class="date-days">
+         <view class="date-days-item {{item.activity ? 'date-days-item-light' : ''}} {{selectedDate === item.date ? 'date-days-item-active' : ''}}"
+               wx:for="{{daysList}}"
+               wx:for-item="item"
+               wx:for-index="index"
+               wx:key="{{item.date}}"
+               data-item="{{item}}"
+               bindtap="selectDate">{{item.day}}</view>
+      </view>
    </view>
-   <view class="date-week">
-      <view class="date-week-item"
-            wx:for="{{week}}"
-            wx:for-item="item"
-            wx:key="{{item}}">{{item}}</view>
-   </view>
-   <view class="date-days">
-      <view class="date-days-item {{item.activity ? 'date-days-item-light' : ''}} {{selectedDate === item.date ? 'date-days-item-active' : ''}}"
-            wx:for="{{daysList}}"
-            wx:for-item="item"
-            wx:for-index="index"
-            wx:key="{{item.date}}"
-            data-item="{{item}}"
-            bindtap="selectDate">{{item.day}}</view>
-   </view>
-   <view class="btn-confirm {{selectedDate === '' ? 'btn-confirm-disabled' : ''}}" bindtap="doConfirm">确认</view>
+
+   <view class="btn-confirm zoomIn {{selectedDate === '' ? 'btn-confirm-disabled' : ''}}" bindtap="doConfirm">确认</view>
 </view>

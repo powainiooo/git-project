@@ -46,21 +46,9 @@ Component({
             type: 'reLaunch'
          },
          {
-            name: '小夫特饮',
-            nameEn: 'lee\'s drink',
-            url: '/pages/drink/index',
-            type: 'reLaunch'
-         },
-         {
             name: '推荐主办方',
             nameEn: '1th organizers',
             url: '/pages/sponsor/list',
-            type: 'navigate'
-         },
-         {
-            name: '每周推荐',
-            nameEn: 'weekly recommendation',
-            url: '/pages/index/index?type=recommend',
             type: 'navigate'
          },
          {
@@ -200,7 +188,7 @@ Component({
          })
       },
       drawPoster () {
-         this.triggerEvent('doposter')
+	      this.triggerEvent('btntap', 'poster')
       },
       gotoLogin () {
          wx.navigateTo({

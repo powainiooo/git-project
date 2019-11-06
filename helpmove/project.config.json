@@ -20,7 +20,7 @@
 		}
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.0.4",
+	"libVersion": "2.9.1",
 	"appid": "wx00436486105458e9",
 	"projectname": "helpmove",
 	"debugOptions": {

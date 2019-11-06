@@ -1,4 +1,4 @@
 <view class="banner-frame">
    <image src="{{src}}" mode="widthFix" class="banner-img"></image>
-   <view class="btn-confirm">了解详情</view>
+   <view class="btn-confirm" bindtap="gotoDetail">了解详情</view>
 </view>

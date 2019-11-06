@@ -1,13 +1,12 @@
-// components/banner/banner.js
+// components/ticket/recommend.js
 Component({
    /**
     * 组件的属性列表
     */
    properties: {
-		src: String,
-	   id: {
-		   type: String,
-		   value: ''
+	   listData: {
+		   type: Array,
+		   value: []
 	   }
    },
 
@@ -22,10 +21,6 @@ Component({
     * 组件的方法列表
     */
    methods: {
-	   gotoDetail () {
-		   wx.navigateTo({
-			   url: `/pages/index/detail?id=${this.data.id}`
-		   })
-	   }
+
    }
 })

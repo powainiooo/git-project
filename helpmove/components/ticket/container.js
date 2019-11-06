@@ -33,9 +33,33 @@ Component({
     * 组件的初始数据
     */
    data: {
-		showItem: ''
+		showItem: '',
+	   showDrink: false,
+	   drinkTop: '100%'
    },
-
+	observers: {
+		showItem (newVal) {
+			if (newVal === 'drink') {
+				this.setData({
+					showDrink: true
+				})
+				wx.nextTick(() => {
+					this.setData({
+						drinkTop: 0
+					})
+				})
+			} else {
+				this.setData({
+					drinkTop: '100%'
+				})
+				setTimeout(() => {
+					this.setData({
+						showDrink: false
+					})
+				}, 500)
+			}
+	   }
+	},
    /**
     * 组件的方法列表
     */
@@ -44,6 +68,10 @@ Component({
 			this.setData({
 				showItem: name
 			})
-		}
+		},
+	   getParams () {
+			const buy = this.selectComponent('#buy')
+		   return buy.getParams()
+	   }
    }
 })

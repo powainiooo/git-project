@@ -6,7 +6,7 @@ Component({
     */
    properties: {
 		src: String,
-	   id: {
+      linkId: {
 		   type: String,
 		   value: ''
 	   }
@@ -25,7 +25,7 @@ Component({
    methods: {
 	   gotoDetail () {
 		   wx.navigateTo({
-			   url: `/pages/index/detail?id=${this.data.id}`
+			   url: `/pages/index/detail?id=${this.data.linkId}`
 		   })
 	   }
    }

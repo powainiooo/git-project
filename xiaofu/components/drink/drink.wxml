@@ -2,6 +2,11 @@
    <image src="../../res/images/drink-logo.png" class="drinks-logo" mode="widthFix"></image>
    <image src="../../res/images/drink-title.png" class="drinks-title" mode="widthFix"></image>
    <view class="drinks-list">
-      <list-item wx:for="{{listData}}" wx:for-item="item" wx:key="{{item.id}}" itemData="{{item}}"></list-item>
+      <list-item wx:for="{{listData}}"
+                 wx:for-item="item"
+                 wx:key="{{item.id}}"
+                 data-id="{{item.id}}"
+                 itemData="{{item}}"
+                 bindchange="numsChange"></list-item>
    </view>
 </scroll-view>

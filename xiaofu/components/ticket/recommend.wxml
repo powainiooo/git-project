@@ -1,5 +1,13 @@
 <scroll-view scroll-x class="recommends">
    <view class="recommends-frame">
-      <ticket wx:for="{{listData}}" wx:for-item="item" wx:key="{{item.id}}" itemData="{{item}}" width="{{480}}" class="recommends-item" fold></ticket>
+      <ticket wx:for="{{listData}}"
+              wx:for-item="item"
+              wx:key="{{item.id}}"
+              data-id="{{item.id}}"
+              itemData="{{item}}"
+              width="{{480}}"
+              class="recommends-item"
+              fold
+              bindtap="gotoDetail"></ticket>
    </view>
 </scroll-view>

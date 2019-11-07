@@ -1,7 +1,8 @@
 {
   "usingComponents":{
-    "header-view":"../../components/header/header",
-    "ticket-item": "../../components/ticket/ticket",
-    "ticket-detail": "../../components/ticket-detail/detail"
+     "header": "../../components/header/header",
+     "ticket-container": "../../components/ticket/container",
+     "footer": "../../components/ticket/footer",
+     "loading": "../../components/loading/loading"
   }
 }

@@ -28,11 +28,13 @@ Component({
 	   	this.setData({
 			   nums: this.data.nums - 1
 		   })
+         this.triggerEvent('change', this.data.nums)
 	   },
 	   doAdd () {
 	   	this.setData({
 			   nums: this.data.nums + 1
 		   })
+         this.triggerEvent('change', this.data.nums)
 	   }
    }
 })

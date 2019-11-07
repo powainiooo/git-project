@@ -38,6 +38,16 @@ Component({
 				btnDisabled: val
 			})
 		})
+		app.$watch('ticketPrice', (val, old) => { // 监听票价
+			this.setData({
+            ticketPrice: val
+			})
+		})
+		app.$watch('drinkPrice', (val, old) => { // 监听票价
+			this.setData({
+            drinkPrice: val
+			})
+		})
 	},
    /**
     * 组件的初始数据
@@ -50,7 +60,16 @@ Component({
 	   saleStart: 0,
 	   numbersArr: app.globalData.ticketNumsArr,
 	   numberIndex: 0,
-	   totalPrice: 100
+      ticketPrice: 0,
+      drinkPrice: 0,
+	   totalPrice: 0
+   },
+   observers: {
+      'ticketPrice, drinkPrice' (ticketPrice, drinkPrice) {
+         this.setData({
+            totalPrice: ticketPrice + drinkPrice
+         })
+      }
    },
    /**
     * 组件的方法列表
@@ -77,6 +96,8 @@ Component({
 		   } else { // 进入特饮页
 			   this.togglePage('drink')
 			   this.triggerEvent('btns', 'intoDrink')
+            app.globalData.drinkPrice  = 0
+            app.globalData.drinkParams  = []
 		   }
 	   },
       doPayDrink () {

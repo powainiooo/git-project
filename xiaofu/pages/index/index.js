@@ -2,7 +2,7 @@
 //获取应用实例
 const app = getApp()
 const ajaxSrc = app.globalData.ajaxSrc
-import {getBannerCity, getIndexListData, getIndexDetailData, createOrder} from '../../utils/api'
+import {getBannerCity, getIndexListData, getIndexDetailData} from '../../utils/api'
 Page({
 	data: {
 		userInfo: {},
@@ -31,6 +31,9 @@ Page({
 		bannerId: '',
 		page: 1,
 		keyword: '',
+      drinkParams: [],
+      showSearchTitle: false,
+      searchTitle: ''
 	},
 	onLoad: function (options) {
 		const activityID = options.id || ''
@@ -51,6 +54,11 @@ Page({
 	},
 	onShow () {
 		this.getComponentsSize()
+      app.$watch('drinkParams', (val, old) => { // 监听选择的特饮票数
+         this.setData({
+            drinkParams: val
+         })
+      })
 	},
 	// 获取部分组件的尺寸信息
 	getComponentsSize () {
@@ -75,7 +83,22 @@ Page({
 	// 响应顶部按钮点击
 	headBtn (e) {
 		if (e.detail === 'close') {
-			this.closeDetail()
+		   if (this.data.detailData === null) { // 没有打开详情
+		      if (this.data.showSearchTitle) { // 关闭搜索结果
+               this.setData({
+                  page: 1,
+                  listData: [],
+                  headerBtns: ['menu'],
+                  showSearchTitle: false,
+                  searchTitle: '',
+                  keyword: '',
+                  selectedDate: '',
+               })
+               this.getListData()
+            }
+         } else { // 打开
+            this.closeDetail()
+         }
 		} else if (e.detail === 'arrow') {
 			const ticket = this.selectComponent("#ticket")
 			const footer = this.selectComponent("#footer")
@@ -88,6 +111,7 @@ Page({
 			} else if (this.data.detailPage === 'drink') {
 				ticket.togglePage('buy')
 				footer.togglePage('buy')
+            this.data.detailPage = 'buy'
 			}
 		} else if (e.detail === 'poster') {
 			this.drawPoster()
@@ -95,6 +119,8 @@ Page({
    },
 	// 打开详情页
 	gotoDetail (e) {
+      const cate = e.currentTarget.dataset.cate
+		if (cate !== 'activity') return
 		if (this.data.selectedTicketIndex !== -1) return
 		const top = e.currentTarget.offsetTop
 		const index = e.currentTarget.dataset.index
@@ -125,7 +151,7 @@ Page({
 		setTimeout(() => {
 			this.setData({
 				selectedTicketIndex: -1,
-				headerBtns: ['menu']
+				headerBtns: this.data.showSearchTitle ? ['menu', 'close'] : ['menu']
 			})
 		}, 600)
 	},
@@ -181,7 +207,7 @@ Page({
          data: params.idnum
       })
       params.openid = app.globalData.userOpenID
-      params.city = this.data.cityID
+      params.city = app.globalData.city
       wx.request({
          url: ajaxSrc + '/create_order',
          data: params,
@@ -333,9 +359,16 @@ Page({
 	},
 	// 搜索
 	doSearch (e) {
+      let title = ''
+      if (e.detail.keywords !== '') title = e.detail.keywords
+      if (e.detail.date !== '') title = e.detail.date
 		this.setData({
 			page: 1,
-			keyword: e.detail.keyword,
+         listData: [],
+         headerBtns: ['menu', 'close'],
+         showSearchTitle: true,
+         searchTitle: title,
+			keyword: e.detail.keywords,
 			selectedDate: e.detail.date,
 		})
 		this.getListData()
@@ -358,6 +391,11 @@ Page({
 			})
 		})
 	},
+   // 加载更多
+   touchBottom () {
+	   this.data.page += 1
+      this.getListData()
+   },
 	// 生成海报
 	drawPoster () {
 		let poster = this.data.detailData.info.poster

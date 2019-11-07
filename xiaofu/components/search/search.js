@@ -8,9 +8,9 @@ Component({
 	   	type: String,
 		   value: ''
 	   },
-	   id: {
+      linkId: {
 	   	type: String,
-		   value: ''
+		   value: '1'
 	   }
    },
 
@@ -42,7 +42,7 @@ Component({
 			   date: this.data.selectedDate
 		   })
 	   },
-	   bindKeyInput () {
+	   bindKeyInput (e) {
 		   this.setData({
 			   keywords: e.detail.value
 		   })

@@ -1,6 +1,6 @@
 <!--index.wxml-->
 <view class='body buy-frame'>
-   <view class="price">{{selectTicket.price == 0 ? 0 :selectTicket.price * numbersArr[numberIndex]}}<text class="unit">RMB</text></view>
+   <view class="price">{{selectTicket.price == 0 ? 0 : selectTicket.price * numbersArr[numberIndex]}}<text class="unit">RMB</text></view>
    <view class="ticket-list">
       <view class="ticket-item {{item.is_over == 1 ? 'disabled' : ''}} {{selectTicket.select == item.select ? 'selected' : ''}}"
             data-over="{{item.is_over}}"

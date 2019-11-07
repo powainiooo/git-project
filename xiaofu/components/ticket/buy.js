@@ -68,6 +68,11 @@ Component({
 			})
 		})
 	},
+   observers: {
+      'selectTicket.price, numberIndex' (price, index) {
+         app.globalData.ticketPrice = price * this.data.numbersArr[index]
+      }
+   },
    methods: {
       idTypeChange: function (e) { // 证件类型切换
          this.setData({

@@ -13,6 +13,7 @@ const ajax = (opts, autoMsg = true) => {
 				wx.hideNavigationBarLoading()
 			},
 			fail(err) {
+			   console.log(err)
 				wx.navigateTo({
 					url: '/pages/error/error'
 				})
@@ -24,14 +25,14 @@ const ajax = (opts, autoMsg = true) => {
 	})
 }
 
-// 首页banner 地址
+// 首页banner 地址  http://localhost:8080/mock/banner.json
 export const getBannerCity = () => {
 	return ajax({
 		url: `${ajaxUrl}/city_banner`
 	})
 }
 
-// 首页列表数据
+// 首页列表数据  http://localhost:8080/mock/list.json
 export const getIndexListData = (data) => {
 	return ajax({
 		url: `${ajaxUrl}/pro_list`,
@@ -39,7 +40,7 @@ export const getIndexListData = (data) => {
 	})
 }
 
-// 首页详情数据
+// 首页详情数据  http://localhost:8080/mock/detail.json
 export const getIndexDetailData = (data) => {
 	return ajax({
 		url: `${ajaxUrl}/product_info`,

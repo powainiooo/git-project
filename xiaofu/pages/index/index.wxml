@@ -1,11 +1,15 @@
 <!--index.wxml-->
-<scroll-view scroll-y="{{indexScroll}}" class="container" bindscroll="containerScroll">
+<scroll-view scroll-y="{{indexScroll}}" class="container" bindscroll="containerScroll" bindscrolltolower="touchBottom">
    <header initButton="{{headerBtns}}" id="header" bindbtntap="headBtn"></header>
-   <view class="search-frame" id="search">
-      <search url="{{bannerUrl}}" id="{{bannerId}}" bindsearch="doSearch"></search>
+   <view class="search-frame" id="search" wx:if="{{!showSearchTitle}}">
+      <search url="{{bannerUrl}}" linkId="{{bannerId}}" bindsearch="doSearch"></search>
    </view>
-   <view class="address-frame {{addressFixed ? 'address-frame-fixed' : ''}}" id="address">
+   <view class="address-frame {{addressFixed ? 'address-frame-fixed' : ''}}" id="address" wx:if="{{!showSearchTitle}}">
       <address hasbg="{{addressFixed}}" list="{{citysList}}" id="{{cityID}}" bindchange="cityChange"></address>
+   </view>
+   <view class="search-title" wx:if="{{showSearchTitle}}">
+      <view>{{searchTitle}}</view>
+      <view>搜索结果</view>
    </view>
    <view class="pro-list">
       <view class="{{item.cate === 'activity' ? 'item-ticket-frame' : 'item-frame'}}"
@@ -15,6 +19,7 @@
             wx:key="{{index}}"
             data-index="{{index}}"
             data-id="{{item.id}}"
+            data-cate="{{item.cate}}"
             bindtap="gotoDetail">
          <ticket-container wx:if="{{item.cate === 'activity'}}"
                            fold="{{selectedTicketIndex === index ? selectedFold : true}}"
@@ -24,7 +29,7 @@
                            detailData="{{selectedTicketIndex === index ? detailData : null}}"
                            id="{{selectedTicketIndex === index ? 'ticket' : ''}}"></ticket-container>
          <recommend wx:if="{{item.cate === 'recommend' && item.list.length !== 0}}" listData="{{item.list}}"></recommend>
-         <banner wx:if="{{item.cate === 'banner'}}" src="{{item.cover}}" id="{{i.id}}"></banner>
+         <banner wx:if="{{item.cate === 'banner'}}" src="{{item.cover}}" linkId="{{item.id}}"></banner>
       </view>
    </view>
    <loading wx:if="{{isLoading}}"></loading>

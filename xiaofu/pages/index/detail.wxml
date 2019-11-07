@@ -1,39 +1,7 @@
-<view class="container bg-gray" id="bodyFrame" wx:if="{{showTicketDetail}}">
-    <header-view
-            showMenu="{{false}}"
-            showShadow
-            showClose="{{!showRefresh}}"
-            showRefresh="{{showRefresh}}"
-            showShare
-            binddoRefresh="getDetailData"
-            binddoclose="doClose"
-            binddoposter="drawPoster">
-    </header-view>
-    <view class='body'>
-        <view class="item-frame">
-            <ticket-item
-                    isSimple="{{false}}"
-                    itemData="{{detailData.info}}"
-                    extraClass="{{showBuyInfos ? 'ticket-buy' : ''}}"></ticket-item>
-        </view>
-        <!-- 详情页-->
-        <ticket-detail showInfos="{{true}}" showBuyInfos="{{showBuyInfos}}" itemData="{{detailData}}"></ticket-detail>
-    </view>
-
-    <view class="footer" style="transform: translateY({{footerPos}}rpx); transition-duration: {{footerDuration}}">
-        <view class="price" wx:if="{{detailData.info.is_end == '' || detailData.info.is_end == 'over'}}">{{minprice}}<text class="unit">RMB</text></view>
-        <view class="stop-sale" wx:if="{{detailData.info.is_end == 'nosale'}}">
-            <view>未开售</view>
-            <view>开票时间：{{saleStart}}</view>
-        </view>
-        <view class="stop-sale" wx:if="{{detailData.info.is_end == 'salestop' || detailData.info.is_end == 'under'}}">
-            <view>售票停止</view>
-            <view>如有疑问，详情请联系主办方</view>
-        </view>
-        <view class="btn" bindtap="gotoBuy" wx:if="{{detailData.info.is_end == ''}}">购买</view>
-        <view class="btn btn-diabled" wx:if="{{detailData.info.is_end == 'over'}}">已售罄</view>
-        <view class="btn btn-diabled" wx:if="{{detailData.info.is_end == 'nosale'}}">未开售</view>
-        <view class="btn btn-diabled" wx:if="{{detailData.info.is_end == 'salestop'}}">已停止</view>
-        <view class="btn btn-diabled" wx:if="{{detailData.info.is_end == 'under'}}">已停止</view>
-    </view>
+<view class="item-frame bg-gray" id="bodyFrame">
+   <header initButton="{{headerBtns}}" id="header" bindbtntap="headBtn"></header>
+   <ticket-container ticketData="{{detailData.info}}"
+                     detailData="{{detailData}}"
+                     id="ticket"></ticket-container>
 </view>
+<footer itemData="{{detailData}}" bindbtns="footerBtnFunc" id="footer"></footer>

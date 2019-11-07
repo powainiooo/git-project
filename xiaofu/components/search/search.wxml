@@ -18,7 +18,7 @@
       </view>
    </view>
    <view class="c-search-banner">
-      <banner src="{{url}}" id="{{id}}"></banner>
+      <banner src="{{url}}" linkId="{{linkId}}"></banner>
    </view>
 </view>
 <view class="datepicker-frame" wx:if="{{showDate}}">

@@ -40,7 +40,8 @@ Component({
    data: {
       ajaxSrc: app.globalData.ajaxSrc,
       imgSrc: app.globalData.imgSrc,
-	   height: 0
+	   height: 0,
+      isTap: false
    },
 	attached() {
 		setTimeout(() => {

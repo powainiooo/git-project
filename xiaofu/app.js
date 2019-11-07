@@ -16,19 +16,19 @@ App({
       if (openid === '') {
          wx.login({
             success: res => {
-               // wx.request({
-               //    url: self.globalData.ajaxSrc + '/get_weixin',
-               //    data: {
-               //       code: res.code
-               //    },
-               //    header: {
-               //       'content-type': 'json'
-               //    },
-               //    success: function (res) {
-               //       self.globalData.userOpenID = res.data.openid
-               //       wx.setStorageSync('openid', res.data.openid)
-               //    }
-               // })
+               wx.request({
+                  url: self.globalData.ajaxSrc + '/get_weixin',
+                  data: {
+                     code: res.code
+                  },
+                  header: {
+                     'content-type': 'json'
+                  },
+                  success: function (res) {
+                     self.globalData.userOpenID = res.data.openid
+                     wx.setStorageSync('openid', res.data.openid)
+                  }
+               })
             }
          })
       } else {
@@ -48,25 +48,24 @@ App({
                      if (self.userInfoReadyCallback) {
                         self.userInfoReadyCallback(res)
                      }
-
-                     // wx.request({
-                     //    url: self.globalData.ajaxSrc + '/wxuser_add',
-                     //    data: {
-                     //       openid: self.globalData.userOpenID,
-                     //       country: res.userInfo.country,
-                     //       province: res.userInfo.province,
-                     //       city: res.userInfo.city,
-                     //       gender: res.userInfo.gender,
-                     //       nickName: res.userInfo.nickName,
-                     //       avatarUrl: res.userInfo.avatarUrl
-                     //    },
-                     //    header: {
-                     //       'content-type': 'json'
-                     //    },
-                     //    success: res => {
-                     //       console.log('add user success!')
-                     //    }
-                     // })
+                     wx.request({
+                        url: self.globalData.ajaxSrc + '/wxuser_add',
+                        data: {
+                           openid: self.globalData.userOpenID,
+                           country: res.userInfo.country,
+                           province: res.userInfo.province,
+                           city: res.userInfo.city,
+                           gender: res.userInfo.gender,
+                           nickName: res.userInfo.nickName,
+                           avatarUrl: res.userInfo.avatarUrl
+                        },
+                        header: {
+                           'content-type': 'json'
+                        },
+                        success: res => {
+                           console.log('add user success!')
+                        }
+                     })
                   },
                   // fail (err) {
                   //    wx.navigateTo({

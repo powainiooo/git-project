@@ -190,6 +190,7 @@ Page({
 	doPay () { // 付款
       const ticket = this.selectComponent("#ticket")
       const params = ticket.getParams()
+      const self = this
       wx.setStorage({
          key: 'nameVal',
          data: params.name
@@ -208,6 +209,7 @@ Page({
       })
       params.openid = app.globalData.userOpenID
       params.city = app.globalData.city
+      params.drinks = this.data.drinkParams
       wx.request({
          url: ajaxSrc + '/create_order',
          data: params,
@@ -237,7 +239,7 @@ Page({
                         wx.showToast({
                            title: '支付成功'
                         })
-                        this.doBuySuccess(tid, order_num)
+                        self.doBuySuccess(tid, order_num)
                      },
                      'fail': function (res) {
                         wx.showToast({

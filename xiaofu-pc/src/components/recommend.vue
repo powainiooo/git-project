@@ -5,8 +5,8 @@
       flex-shrink 0
       background url("../assets/images/bg1.jpg") no-repeat
       background-position left center
+      background-size cover
       background-color #dddddd
-      margin-top -50px
       margin-bottom 50px
       display flex
       overflow-y hidden

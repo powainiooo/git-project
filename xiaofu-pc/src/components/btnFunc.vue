@@ -1,11 +1,11 @@
 <style lang="stylus" type="text/stylus" scoped>
 .btn-func
-   position absolute
-   top 60px
-   right 60px
+   position fixed
+   top 23px
+   right 43px
    a
-      width 30px
-      height 30px
+      width 26px
+      height 26px
       display block
       background-position center center
       background-repeat no-repeat
@@ -43,7 +43,9 @@ export default {
 	   styles () {
 	      return {
 	         'z-index': this.zIndex,
-	         'position': this.type === 'menu' ? 'fixed' : 'absolute'
+	         // 'position': this.type === 'menu' ? 'fixed' : 'absolute'
+            "top": this.type === 'menu' ? '23px' : '58px',
+            "right": this.type === 'menu' ? '43px' : '53px',
          }
       }
    }

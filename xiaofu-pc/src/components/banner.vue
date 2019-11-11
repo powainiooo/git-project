@@ -1,25 +1,4 @@
 <style lang="stylus" type="text/stylus">
-   .z-btn
-      width 270px
-      height 40px
-      display flex
-      justify-content center
-      align-items center
-      background-color #ffffff
-      border-radius 20px
-      box-shadow 0 2px 3px rgba(0, 0, 0, 0.2)
-      color #000000
-      font-weight bold
-   .z-select
-      width 200px
-      .vs__dropdown-toggle
-         height 40px
-         border-radius 20px
-         box-shadow 0 2px 3px rgba(0, 0, 0, 0.2)
-         padding 0 10px
-         outline none
-         border none
-         background-color #ffffff
    .banner-container
       min-width 1090px
       width 100%
@@ -27,8 +6,10 @@
       position relative
       background-position center center
       background-repeat no-repeat
+      background-size cover
       background-image: url("../assets/images/banner.jpg")
       .z-btn
+         width 280px
          position absolute
          top 160px
          right 160px
@@ -38,26 +19,39 @@
          bottom -20px
          left 50%
          margin-left -545px
+      .z-select
+         .ivu-select-selection
+            height 40px
+            border-radius 20px
+            border none
+            .ivu-select-placeholder,.ivu-select-selected-value
+               height 40px
+               line-height 40px
+               padding-left 20px
 </style>
 
 <template>
 <div class="banner-container" :style="styles">
-   <a href="javascript:;" class="z-btn" @click="gotoDetail">了解详情</a>
+   <t-button class="z-btn" @dotap="gotoDetail" extraClass="white">了解详情</t-button>
    <div class="opera" v-if="showCity">
       <div class="z-select">
-         <v-select label="name" :options="citys" placeholder="选择城市" @input="cityChange"></v-select>
+         <Select v-model="city" style="width:200px" class="z-select" clearable @on-change="cityChange" placeholder="选择城市">
+            <Option v-for="item in citys" :value="item.id" :key="item.id">{{ item.name }}</Option>
+         </Select>
       </div>
    </div>
 </div>
 </template>
 
 <script type='es6'>
-import vSelect from 'vue-select'
+import TButton from './TButton.vue'
 export default {
 	name: 'app',
-   components: {vSelect},
+   components: { TButton },
 	data() {
-		return {}
+		return {
+         city: ''
+      }
 	},
    props: {
 	   showCity: {

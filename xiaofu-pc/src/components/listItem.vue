@@ -59,19 +59,19 @@
                height 100%
 
       .title
-         font-size 24px
+         font-size 18px
          background-color #ffffff
          line-height 1.2
          font-family 'Helve'
          padding 6px 12px
          overflow hidden
       .time
-         font-size 16px
+         font-size 14px
          border-top 1px solid #c1c1c1
          padding 6px 12px
          background-color #ffffff
       .address
-         font-size 16px
+         font-size 14px
          border-top 1px solid #c1c1c1
          padding 6px 12px
          background-color #ffffff
@@ -107,7 +107,7 @@
    <div class="list-item"
         :class="classes"
         :style="{width: width + 'px'}"
-        @mousedown="tap = true"
+        @mousedown="tapdown"
         @mouseup="tapup">
       <div class="frame" :style="{transform: 'scale('+ width/330 + ')'}" ref="frame">
          <div class="top">
@@ -162,6 +162,9 @@
           }
        },
        methods: {
+          tapdown () {
+             if (this.fold) this.tap = true
+          },
           tapup () {
              this.tap = false
              this.$emit('tap', this.itemData.id)

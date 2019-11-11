@@ -47,9 +47,9 @@
                      :itemData="i"
                      fold
                      v-if="i.cate === 'activity'"
-                     @tap="getDetailData">
+                     @tap="getDetailData" style="margin: 50px 0;">
                   </list-item>
-                  <recommend v-if="i.cate === 'recommend' && i.list.length !== 0" :listData="i.list"></recommend>
+                  <recommend v-if="i.cate === 'recommend' && i.list.length !== 0" :listData="i.list" :style="{width: frameW + 'px'}"></recommend>
                   <banner v-if="i.cate === 'banner'" :id="i.id" :img="i.pc_image" @linkTo="getDetailData" :style="{width: frameW + 'px'}"></banner>
                </div>
             </div>
@@ -94,7 +94,8 @@
             city: '',
             bannerId: '',
             cityList: [],
-            bannerImg: ''
+            bannerImg: '',
+            isListOver: false
          }
       },
       mounted () {
@@ -128,7 +129,12 @@
          },
          frameW () {
             const searchW = this.$refs.search.$el.clientWidth
-            return this.wWidth - searchW + this.marginDis
+            return this.wWidth - searchW
+         }
+      },
+      provide () {
+         return {
+            getDetailData: this.getDetailData
          }
       },
       methods: {
@@ -143,6 +149,9 @@
             }).then(res => {
                this.listData = this.listData.concat(res.data.list)
                this.isLoading = false
+               if (res.data.list.length === 0 && this.page > 1) {
+                  this.isListOver = true
+               }
             })
          },
          getCityBanner () {
@@ -166,20 +175,19 @@
             const searchW = this.$refs.search.$el.clientWidth
             if (cate === 'activity') {
                return {
-                  margin: `0 ${this.marginDis}px 100px ${this.marginDis}px`
+                  margin: `0 ${this.marginDis}px 0 ${this.marginDis}px`
                }
             } else if (cate === 'recommend') {
                let containerW = this.containerWidth
                return {
                   width: `${this.frameW}px`,
-                  marginLeft: `-${(this.wWidth - searchW - containerW - this.marginDis) / 2}px`
+                  marginLeft: `-${(this.wWidth - searchW - containerW) / 2 - this.marginDis}px`
                }
             } else if (cate === 'banner') {
                let containerW = this.containerWidth
                return {
                   width: `${this.frameW}px`,
-                  marginLeft: `-${(this.wWidth - searchW - containerW - this.marginDis) / 2}px`,
-                  marginTop: '-50px',
+                  marginLeft: `-${(this.wWidth - searchW - containerW) / 2 - this.marginDis}px`,
                   marginBottom: '50px'
                }
             }
@@ -200,6 +208,7 @@
             this.getListData()
          },
          loadMore () {
+            if (this.isListOver) return
             this.isLoading = true
             console.log('loadMore'+this.isLoading)
             this.page += 1

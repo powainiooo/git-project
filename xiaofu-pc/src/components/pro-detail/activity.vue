@@ -31,7 +31,7 @@
    width 440px
    margin-left 30px
    margin-top 30px
-   font-size 16px
+   font-size 14px
    line-height 1.8
    color #888888
 .swiper-btn
@@ -68,7 +68,7 @@
 
 <template>
 <div>
-   <swiper :options="swiperOption" ref="mySwiper" class="activity-swiper">
+   <swiper :options="swiperOption" ref="mySwiper" class="activity-swiper" v-if="listData.length !== 0">
       <!-- slides -->
       <swiper-slide v-for="(item, index) in listData" :key="index">
          <img :src="imgSrc + item.img" class="activity-img">
@@ -76,8 +76,8 @@
       <!-- Optional controls -->
       <div class="swiper-btn swiper-btn-prev" slot="button-prev"><i></i></div>
       <div class="swiper-btn swiper-btn-next" slot="button-next"><i></i></div>
+      <div class="swiper-pagination"  slot="pagination"></div>
    </swiper>
-   <div class="swiper-pagination"  slot="pagination"></div>
    <div class="swiper-content">{{content}}</div>
 </div>
 </template>
@@ -91,7 +91,8 @@ export default {
             slidesPerView: 'auto',
             spaceBetween: 16,
             pagination: {
-               el: '.swiper-pagination'
+               el: '.swiper-pagination',
+               clickable :true
             },
             navigation: {
                nextEl: '.swiper-btn-next',

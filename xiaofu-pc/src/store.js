@@ -11,7 +11,7 @@ const asideMinWidth = 335
 export default new Vuex.Store({
    state: {
       // imgSrc: 'https://wechat.leesticket.com/upload/',
-      imgSrc: 'http://ticket.pc-online.cc/upload/',
+      imgSrc: 'https://wechat.leesticket.com/upload/',
       wWidth: window.innerWidth,
       marginDis: 25,
       leftDis: 25

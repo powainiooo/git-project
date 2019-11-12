@@ -8,7 +8,7 @@
 .pro-list .item-ticket-frame .item { height: auto; position: absolute; top: 0; left: 0; transform: scale(0.875); transform-origin: center 0; transition: all 0 cubic-bezier(.22,.62,.34,1);}
 .pro-list .item-ticket-frame .item-selected { transform: scale(1); position: fixed; height: calc(100vh - 120rpx); overflow: scroll; z-index: 900;}
 
-.result-frame{ margin:  0 50rpx 50rpx 50rpx;}
+.result-frame{ margin:  0 50rpx 150rpx 50rpx;}
 .result-frame .icons{ font-size: 200rpx; color: #002aac; display: block; margin-bottom: 60rpx;}
 .result-frame .hint-en{ font-size: 100rpx; font-family: 'Helve'; line-height: 0.9;}
 .result-frame .hint-cn{ font-size: 72rpx; margin-top: 60rpx;}

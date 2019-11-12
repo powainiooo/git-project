@@ -33,7 +33,8 @@ Page({
 		keyword: '',
       drinkParams: [],
       showSearchTitle: false,
-      searchTitle: ''
+      searchTitle: '',
+      isLoadover: false
 	},
 	onLoad: function (options) {
 		const activityID = options.id || ''
@@ -83,21 +84,26 @@ Page({
 	// 响应顶部按钮点击
 	headBtn (e) {
 		if (e.detail === 'close') {
-		   if (this.data.detailData === null) { // 没有打开详情
-		      if (this.data.showSearchTitle) { // 关闭搜索结果
-               this.setData({
-                  page: 1,
-                  listData: [],
-                  headerBtns: ['menu'],
-                  showSearchTitle: false,
-                  searchTitle: '',
-                  keyword: '',
-                  selectedDate: '',
-               })
-               this.getListData()
+		   if (this.data.detailPage === '') { // 在首页
+            if (this.data.detailData === null) { // 没有打开详情
+               if (this.data.showSearchTitle) { // 关闭搜索结果
+                  this.setData({
+                     page: 1,
+                     listData: [],
+                     headerBtns: ['menu'],
+                     showSearchTitle: false,
+                     searchTitle: '',
+                     keyword: '',
+                     selectedDate: '',
+                  })
+                  this.getListData()
+               }
+            } else { // 打开
+               this.closeDetail()
             }
-         } else { // 打开
-            this.closeDetail()
+         } else if (this.data.detailPage === 'calendar') { // 打开了日历页
+            const search = this.selectComponent('#search')
+            search.hideCalendar()
          }
 		} else if (e.detail === 'arrow') {
 			const ticket = this.selectComponent("#ticket")
@@ -351,7 +357,8 @@ Page({
          activityID: '',
          keyword: '',
          selectedDate: '',
-			cityID: e.detail
+			cityID: e.detail,
+         isLoadover: false
 		})
 		wx.setStorage({
 			key: 'lastCityID',
@@ -372,9 +379,24 @@ Page({
          searchTitle: title,
 			keyword: e.detail.keywords,
 			selectedDate: e.detail.date,
+         isLoadover: false
 		})
 		this.getListData()
 	},
+   // 监听打开关闭日历
+   toggleCalendar (e) {
+      if (e.detail) {
+	      this.setData({
+            headerBtns: ['close'],
+            detailPage: 'calendar'
+         })
+      } else {
+         this.setData({
+            headerBtns: ['menu'],
+            detailPage: ''
+         })
+      }
+   },
 	// 获取列表数据
 	getListData () {
 		this.setData({
@@ -389,12 +411,14 @@ Page({
 		}).then(res => {
 			this.setData({
 				listData: this.data.listData.concat(res.data.list),
-				isLoading: false
+				isLoading: false,
+            isLoadover: res.data.list.length === 0
 			})
 		})
 	},
    // 加载更多
    touchBottom () {
+	   if (this.data.isLoadover) return
 	   this.data.page += 1
       this.getListData()
    },

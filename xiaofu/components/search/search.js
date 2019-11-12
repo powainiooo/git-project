@@ -31,12 +31,19 @@ Component({
 	   	this.setData({
 			   showDate: true
 		   })
+         this.triggerEvent('toggleCalendar', true)
+	   },
+	   hideCalendar () {
+	   	this.setData({
+			   showDate: false
+		   })
+         this.triggerEvent('toggleCalendar', false)
 	   },
 	   getDate (e) {
 		   this.setData({
-			   selectedDate: e.detail,
-			   showDate: false
+			   selectedDate: e.detail
 		   })
+         this.hideCalendar()
 		   this.triggerEvent('search', {
 			   keywords: '',
 			   date: this.data.selectedDate

@@ -2,7 +2,7 @@
 <scroll-view scroll-y="{{indexScroll}}" class="container" bindscroll="containerScroll" bindscrolltolower="touchBottom">
    <header initButton="{{headerBtns}}" id="header" bindbtntap="headBtn"></header>
    <view class="search-frame" id="search" wx:if="{{!showSearchTitle}}">
-      <search url="{{bannerUrl}}" linkId="{{bannerId}}" bindsearch="doSearch"></search>
+      <search url="{{bannerUrl}}" linkId="{{bannerId}}" bindsearch="doSearch" bindtoggleCalendar="toggleCalendar" id="search"></search>
    </view>
    <view class="address-frame {{addressFixed ? 'address-frame-fixed' : ''}}" id="address" wx:if="{{!showSearchTitle}}">
       <address hasbg="{{addressFixed}}" list="{{citysList}}" id="{{cityID}}" bindchange="cityChange"></address>

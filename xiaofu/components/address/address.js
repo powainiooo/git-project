@@ -38,7 +38,8 @@ Component({
    methods: {
 	   doChange (e) {
 	   	this.setData({
-			   selected: e.target.dataset.item.name
+			   selected: e.target.dataset.item.name,
+            fold: true
 		   })
 		   this.triggerEvent('change', e.target.dataset.item.id)
 	   },

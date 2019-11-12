@@ -12,21 +12,36 @@
       overflow-y hidden
       overflow-x auto
       padding-left 200px
+      position relative
       &::-webkit-scrollbar{ width: 3px; background-color: #ffffff;}
       &::-webkit-scrollbar-thumb{ background-color: #002aa6;}
-      .list-item
-         margin 80px 10px 0 0
+      &>h3
+         font-size 16px
+         position absolute
+         left 200px
+         top 30px
+      .recommend-swiper
+         margin-top 75px
+         padding-top 5px
+         .swiper-slide
+            width 265px
+      &:hover
+         .swiper-btn
+            display flex
 </style>
 
 <template>
    <div class="recommend-list">
-      <list-item
-         :width="265"
-         v-for="i in listData"
-         :key="i.id"
-         :itemData="i"
-         fold>
-      </list-item>
+      <h3>本周精选 {{name}} 活动</h3>
+      <swiper :options="swiperOption" ref="mySwiper" class="recommend-swiper">
+         <!-- slides -->
+         <swiper-slide v-for="i in listData" :key="i.id">
+            <list-item :width="265" fold :itemData="i"></list-item>
+         </swiper-slide>
+         <!-- Optional controls -->
+      </swiper>
+      <div class="swiper-btn swiper-btn-prev" slot="button-prev" style="top: 180px"><i></i></div>
+      <div class="swiper-btn swiper-btn-next" slot="button-next" style="top: 180px"><i></i></div>
    </div>
 </template>
 
@@ -39,17 +54,21 @@
          listData: {
             type: Array,
             default: () => []
+         },
+         name: {
+            type: String,
+            default: 'Techo'
          }
       },
-      computed: {
-         wWidth () {
-            return this.$store.state.wWidth
-         },
-         styles () {
-            const w = this.wWidth
-            return {
-               'margin-left': -(w - 460 - 1090 - 50)/2 + 'px',
-               'width': (w - 460) + 'px'
+      data() {
+         return {
+            swiperOption: {
+               slidesPerView: 'auto',
+               spaceBetween: 15,
+               navigation: {
+                  nextEl: '.swiper-btn-next',
+                  prevEl: '.swiper-btn-prev',
+               }
             }
          }
       }

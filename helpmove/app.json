@@ -1,13 +1,12 @@
 {
    "pages": [
-      "pages/logs/logs",
       "pages/index/index"
    ],
    "window": {
       "backgroundTextStyle": "light",
-      "navigationBarBackgroundColor": "#002ab0",
-      "navigationBarTitleText": "",
-      "navigationBarTextStyle": "white"
+      "navigationBarBackgroundColor": "#ededed",
+      "navigationBarTitleText": "小象搬家",
+      "navigationBarTextStyle": "black"
    },
    "sitemapLocation": "sitemap.json"
 }

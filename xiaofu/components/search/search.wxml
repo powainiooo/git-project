@@ -13,8 +13,9 @@
          <view class="btn-search" bindtap="doSearch"></view>
       </view>
       <view class="c-search-date">
-         <view class="c-search-input" bindtap="showCalendar">{{selectedDate === '' ? '或选择日期' : selectedDate}}</view>
+         <view class="c-search-input">{{selectedDate === '' ? '或选择日期' : selectedDate}}</view>
          <view class="btn-date"></view>
+         <view class="btn-cover" bindtap="showCalendar"></view>
       </view>
    </view>
    <view class="c-search-banner">

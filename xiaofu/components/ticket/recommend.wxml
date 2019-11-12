@@ -1,13 +1,26 @@
 <scroll-view scroll-x class="recommends">
    <view class="recommends-frame">
-      <ticket wx:for="{{listData}}"
-              wx:for-item="item"
-              wx:key="{{item.id}}"
-              data-id="{{item.id}}"
-              itemData="{{item}}"
-              width="{{480}}"
-              class="recommends-item"
-              fold
-              bindtap="gotoDetail"></ticket>
+      <!--<ticket wx:for="{{listData}}"-->
+              <!--wx:for-item="item"-->
+              <!--wx:key="{{item.id}}"-->
+              <!--data-id="{{item.id}}"-->
+              <!--itemData="{{item}}"-->
+              <!--width="{{480}}"-->
+              <!--class="recommends-item"-->
+              <!--fold-->
+              <!--bindtap="gotoDetail"></ticket>-->
+      <swiper class="recommond-swiper"
+              duration="200"
+              next-margin="240rpx">
+         <swiper-item class="recommond-item"
+                      wx:for="{{listData}}"
+                      wx:for-index="index"
+                      wx:for-item="item"
+                      wx:key="index"
+                      data-id="{{item.id}}"
+                      bindtap="gotoDetail">
+            <ticket itemData="{{item}}" width="{{480}}" fold></ticket>
+         </swiper-item>
+      </swiper>
    </view>
 </scroll-view>

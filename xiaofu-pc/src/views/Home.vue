@@ -49,7 +49,7 @@
                      v-if="i.cate === 'activity'"
                      @tap="getDetailData" style="margin: 50px 0;">
                   </list-item>
-                  <recommend v-if="i.cate === 'recommend' && i.list.length !== 0" :listData="i.list" :style="{width: frameW + 'px'}"></recommend>
+                  <recommend v-if="i.cate === 'recommend' && i.list.length !== 0" :listData="i.list" :style="{width: frameW + 'px'}" :title="recommendTitle"></recommend>
                   <banner v-if="i.cate === 'banner'" :id="i.id" :img="i.pc_image" @linkTo="getDetailData" :style="{width: frameW + 'px'}"></banner>
                </div>
             </div>
@@ -95,7 +95,8 @@
             bannerId: '',
             cityList: [],
             bannerImg: '',
-            isListOver: false
+            isListOver: false,
+            recommendTitle: ''
          }
       },
       mounted () {
@@ -159,6 +160,7 @@
                this.bannerId = res.data.b_id
                this.cityList = res.data.citys
                this.bannerImg = res.data.pccover
+               this.recommendTitle = res.data.words
             })
          },
          getDetailData (id) {

@@ -49,7 +49,7 @@ Page({
 		}
 		this.setData({
 			activityID,
-			cityID
+			// cityID
 		})
 		this.getListData()
 	},
@@ -83,8 +83,9 @@ Page({
 	},
 	// 响应顶部按钮点击
 	headBtn (e) {
+	   console.log(e)
 		if (e.detail === 'close') {
-		   if (this.data.detailPage === '') { // 在首页
+		   if (this.data.detailPage === 'detail') { // 在详情页
             if (this.data.detailData === null) { // 没有打开详情
                if (this.data.showSearchTitle) { // 关闭搜索结果
                   this.setData({

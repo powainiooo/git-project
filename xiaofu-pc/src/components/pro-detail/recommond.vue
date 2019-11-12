@@ -7,36 +7,6 @@
    &:hover
       .swiper-btn
          display flex
-.swiper-btn
-   width 30px
-   height 30px
-   border-radius 50%
-   display none
-   justify-content center
-   align-items center
-   background-color #ffffff
-   position absolute
-   top 98px
-   z-index 10
-   &:hover
-      background-color #002aa6
-   i
-      width 6px
-      height 10px
-.swiper-btn-prev
-   left 20px
-   i
-      background-image url("../../assets/images/arrow-left.png")
-   &:hover
-      i
-         background-image url("../../assets/images/arrow-left-active.png")
-.swiper-btn-next
-   right 20px
-   i
-      background-image url("../../assets/images/arrow-right.png")
-   &:hover
-      i
-         background-image url("../../assets/images/arrow-right-active.png")
 </style>
 
 <template>

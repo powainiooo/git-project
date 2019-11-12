@@ -95,6 +95,13 @@
       position absolute
       right 40px
       bottom 40px
+      &::before
+         content '在 小夫有票 发布票务？'
+         font-size 16px
+         color #ffffff
+         position absolute
+         top -25px
+         left 60px
 </style>
 
 <template>

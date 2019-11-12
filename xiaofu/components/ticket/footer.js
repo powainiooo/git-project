@@ -48,6 +48,11 @@ Component({
             drinkPrice: val
 			})
 		})
+		app.$watch('ticketNumsArr', (val, old) => { // 监听可选票数
+			this.setData({
+            numbersArr: val
+			})
+		})
 	},
    /**
     * 组件的初始数据
@@ -66,8 +71,12 @@ Component({
    },
    observers: {
       'ticketPrice, drinkPrice' (ticketPrice, drinkPrice) {
+         let price = ticketPrice + drinkPrice
+         if (price.toString().split('.').length > 1) { // 是小数
+            price = price.toFixed(2)
+         }
          this.setData({
-            totalPrice: ticketPrice + drinkPrice
+            totalPrice: price
          })
       }
    },

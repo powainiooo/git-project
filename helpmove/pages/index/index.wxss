@@ -1,11 +1,9 @@
-.container { height: 100vh; background-color: #f3f3f3;}
-.search-frame { margin-top: 120rpx;  z-index: 500; display: none;}
-.address-frame { width: 100%; position: absolute; top: 1404rpx; left: 0; z-index: 300; display: none;}
-.address-frame-fixed { position: fixed; top: 120rpx;}
-.pro-list { margin-top: 150rpx;}
-.pro-list .item-ticket-frame { height: 580rpx; position: relative;}
-.pro-list .item-frame { height: 630rpx; position: relative; margin-bottom: 50rpx;}
-.pro-list .item-ticket-frame .item { height: auto; position: absolute; top: 0; left: 0; transform: scale(0.875); transform-origin: center 0; transition: all 0 cubic-bezier(.22,.62,.34,1);}
-.pro-list .item-ticket-frame .item-selected { transform: scale(1); position: fixed; height: calc(100vh - 120rpx); overflow: scroll; z-index: 900;}
-
-
+.container { min-height: 100vh; background-color: #d1e9db; position: relative; overflow: hidden;}
+.bg1 { width: 100%; position: absolute; top: 0; left: 0; z-index: 0;}
+.bg2 { width: 100%; position: absolute; bottom: 0; left: 0; z-index: 0;}
+.frame { width: 540rpx; height: 540rpx; background-color: #3bab70; border-radius: 20rpx; margin: 190rpx auto 0 auto; position: relative; overflow: hidden;}
+.frame .input { width: 440rpx; height: 72rpx; background-color: #ffffff; border-radius: 10rpx; margin: 0 auto 38rpx auto; position: relative;}
+.frame .input .icons { position: absolute; top: 24rpx; left: 32rpx;}
+.frame .input input { width: 370rpx; height: 72rpx; line-height: 72rpx; margin-left: 70rpx; border: none; font-size: 24rpx; color: #000000;}
+.frame .input-placeholder .icons { opacity: 0.5}
+.frame .btn { width: 440rpx; height: 72rpx; line-height: 72rpx; background-color: #ffdd4f; border-radius: 10rpx; font-size: 24rpx; border: none; margin-top: 70rpx;}

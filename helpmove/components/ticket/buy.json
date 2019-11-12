@@ -1,7 +1,0 @@
-{
-  "component": true,
-  "usingComponents": {
-    "header-view": "../../components/header/header",
-    "ticket-item": "../../components/ticket/ticket"
-  }
-}

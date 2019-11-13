@@ -31,7 +31,7 @@
 <template>
 <div>
    <ul class="actor-list">
-      <li v-for="i in listData" :key="i.username">
+      <li v-for="(i, index) in listData" :key="index">
          <img :src="imgSrc + i.picture">
          <h3>{{i.username}}</h3>
       </li>

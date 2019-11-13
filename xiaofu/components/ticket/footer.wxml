@@ -30,7 +30,7 @@
    </view>
    <!-- 特饮底部 -->
    <view class="detail-footer" wx:if="{{showItem === 'drink'}}">
-      <view class="price" style="width: 45%;">{{totalPrice}}<text class="unit">RMB</text></view>
-      <view class="btn" bindtap="doPayDrink" style="width: 55%;">确认付款</view>
+      <view class="price">{{totalPrice}}<text class="unit">RMB</text></view>
+      <view class="btn" bindtap="doPayDrink">确认付款</view>
    </view>
 </view>

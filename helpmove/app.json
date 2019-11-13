@@ -1,5 +1,7 @@
 {
    "pages": [
+      "pages/step2/step2",
+      "pages/step1/step1",
       "pages/index/index"
    ],
    "window": {

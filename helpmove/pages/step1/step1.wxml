@@ -1,0 +1,53 @@
+<view class="input-container">
+   <view class="title">户型面积</view>
+   <view class="frame">
+      <view class="li">
+         <view class="name">户型</view>
+         <picker bindchange="selectChange" data-key="layoutIndex" value="{{layoutIndex}}" range="{{layoutList}}">
+            <view class="input {{layoutIndex === -1 ? 'input-placeholder' : ''}}">{{layoutIndex === -1 ? '选择户型' : layoutList[layoutIndex]}}</view>
+         </picker>
+      </view>
+      <view class="li">
+         <view class="name">面积</view>
+         <input placeholder="输入面积" class="input" placeholder-style="color: #999999"/>
+      </view>
+   </view>
+</view>
+<view class="hr"></view>
+<view class="input-container">
+   <view class="title">出发地</view>
+   <view class="frame">
+      <view class="li">
+         <view class="name">搬出</view>
+         <input placeholder="填写地址" class="input" placeholder-style="color: #999999"/>
+      </view>
+      <view class="li">
+         <view class="name">楼层</view>
+         <picker bindchange="selectChange" data-key="outBuildIndex" value="{{outBuildIndex}}" range="{{buildingList}}">
+            <view class="input {{outBuildIndex === -1 ? 'input-placeholder' : ''}}">{{outBuildIndex === -1 ? '选择楼层' : buildingList[outBuildIndex]}}</view>
+         </picker>
+      </view>
+   </view>
+</view>
+<view class="hr"></view>
+<view class="input-container">
+   <view class="title">目的地</view>
+   <view class="frame">
+      <view class="li">
+         <view class="name">搬入</view>
+         <input placeholder="填写地址" class="input" placeholder-style="color: #999999"/>
+      </view>
+      <view class="li">
+         <view class="name">楼层</view>
+         <picker bindchange="selectChange" data-key="inBuildIndex" value="{{inBuildIndex}}" range="{{buildingList}}">
+            <view class="input {{inBuildIndex === -1 ? 'input-placeholder' : ''}}">{{inBuildIndex === -1 ? '选择楼层' : buildingList[inBuildIndex]}}</view>
+         </picker>
+      </view>
+   </view>
+</view>
+<view class="hr"></view>
+<view class="price-line">基础价格预估　￥0</view>
+<view class="hr"></view>
+<button class="btn btn-step">下一步</button>
+<view class="hint">备注：停车距离超过100米需要增加费用，具体增加费用请通过人工客服咨询。</view>
+<view class="btn-phone" bindtap="makePhone">电话下单：{{phone}}</view>

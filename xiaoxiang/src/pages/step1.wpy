@@ -1,0 +1,99 @@
+<style lang="less">
+
+</style>
+<template>
+<div>
+   <div class="input-container">
+      <div class="title">户型面积</div>
+      <div class="frame">
+         <div class="li">
+            <div class="name">户型</div>
+            <!--<picker bindchange="selectChange" data-key="layoutIndex" value="{{layoutIndex}}" range="{{layoutList}}">-->
+               <!--<div class="input {{layoutIndex === -1 ? 'input-placeholder' : ''}}">{{layoutIndex === -1 ? '选择户型' : layoutList[layoutIndex]}}</div>-->
+            <!--</picker>-->
+            <select class="input" :class="{'input-placeholder':layout === ''}" range="{{layoutList}}" v-model="layout">
+               <option>{{layout === '' ? '选择户型' : layoutList[layout]}}</option>
+            </select>
+         </div>
+         <div class="li">
+            <div class="name">面积</div>
+            <input placeholder="输入面积" class="input" placeholder-style="color: #999999"/>
+         </div>
+      </div>
+   </div>
+   <div class="hr"></div>
+   <div class="input-container">
+      <div class="title">出发地</div>
+      <div class="frame">
+         <div class="li">
+            <div class="name">搬出</div>
+            <input placeholder="填写地址" class="input" placeholder-style="color: #999999"/>
+         </div>
+         <div class="li">
+            <div class="name">楼层</div>
+            <select class="input" :class="{'input-placeholder':outBuild === ''}" range="{{buildingList}}" v-model="outBuild">
+               <option>{{outBuild === '' ? '选择楼层' : buildingList[outBuild]}}</option>
+            </select>
+         </div>
+      </div>
+   </div>
+   <div class="hr"></div>
+   <div class="input-container">
+      <div class="title">目的地</div>
+      <div class="frame">
+         <div class="li">
+            <div class="name">搬入</div>
+            <input placeholder="填写地址" class="input" placeholder-style="color: #999999"/>
+         </div>
+         <div class="li">
+            <div class="name">楼层</div>
+            <select class="input" :class="{'input-placeholder':inBuild === ''}" range="{{buildingList}}" v-model="inBuild">
+               <option>{{inBuild === '' ? '选择楼层' : buildingList[inBuild]}}</option>
+            </select>
+         </div>
+      </div>
+   </div>
+   <div class="hr"></div>
+   <div class="price-line">基础价格预估　￥0</div>
+   <div class="hr"></div>
+   <button class="btn btn-step">下一步</button>
+   <div class="hint">备注：停车距离超过100米需要增加费用，具体增加费用请通过人工客服咨询。</div>
+   <div class="btn-phone" @tap="makePhone">电话下单：{{phone}}</div>
+</div>
+</template>
+
+<script>
+import wepy from '@wepy/core'
+import store from '../store'
+
+wepy.page({
+   store,
+   data: {
+      layoutList: ['一居室', '二居室', '三居室'],
+      buildingList: [1, 2, 3, 4, 5, 6, 7, 8],
+      layout: '',
+      outBuild: '',
+      inBuild: ''
+   },
+   computed: {
+      phone () {
+         return store.state.phone
+      }
+   },
+   onLoad() {},
+   methods: {
+      makePhone () {
+         wx.makePhoneCall({
+            phoneNumber: this.phone
+         })
+      }
+   }
+})
+</script>
+<config>
+   {
+      "usingComponents": {},
+      "navigationBarBackgroundColor": "#3bab70",
+      "navigationBarTextStyle": "white"
+   }
+</config>

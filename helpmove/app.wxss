@@ -3,9 +3,27 @@
 .icon-phone { width: 26rpx; height: 24rpx; background-position: -48rpx -4rpx;}
 .checkbox { width: 36rpx; height: 36rpx; -webkit-appearance: none; background-position: -4rpx -31rpx;}
 .checkbox:checked { background-position: -46rpx -31rpx;}
-
 .icon-add { width: 19rpx; height: 19rpx; background-position: -9rpx -81rpx;}
 .icon-add-min { width: 15rpx; height: 15rpx; background-position: -34rpx -83rpx;}
 .icon-add-large { width: 33rpx; height: 33rpx; background-position: -52rpx -74rpx;}
-
 .icon-reduce { width: 15rpx; height: 2rpx; background-position: -34rpx -78rpx;}
+
+.btn { width: 600rpx; height: 72rpx; line-height: 72rpx; background-color: #3bab70; color: #ffffff; border-radius: 10rpx; font-size: 24rpx; border: none;}
+
+.input-container .title { font-size: 28rpx; color: #3bab70; height: 72rpx; padding-left: 30rpx; display: flex; align-items: center;}
+.input-container .frame { border-top: 1rpx solid #eeeeee; padding: 0 30rpx;}
+.input-container .frame .li { height: 94rpx; border-bottom: 1rpx solid #eeeeee; display: flex; justify-content: space-between; align-items: center;}
+.input-container .frame .li:last-child { border-bottom: none;}
+.input-container .frame .li .name { color: #252525; font-size: 28rpx;}
+.input-container .frame .li .input { width: 490rpx; height: 100%; line-height: 94rpx; font-size: 28rpx; color: #252525; border: none;}
+.input-container .frame .li .input-placeholder { color: #999999;}
+
+.hr { width: 100%; height: 16rpx; background-color: #eeeeee;}
+
+.price-line { height: 94rpx; padding-left: 30rpx; display: flex; align-items: center; font-size: 28rpx; color: #f06161;}
+
+.btn-step { margin: 50rpx auto;}
+
+.hint { font-size: 24rpx; color: #999999; line-height: 1.8; margin: 0 50rpx;}
+
+.btn-phone { color: #3bab70; font-size: 24rpx; line-height: 1.8; margin: 0 0 50rpx 50rpx; text-decoration: underline;}

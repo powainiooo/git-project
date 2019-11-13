@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+     "numbers": "../../components/numbers/numbers"
+  },
+   "navigationBarBackgroundColor": "#3bab70",
+   "navigationBarTextStyle": "white"
+}

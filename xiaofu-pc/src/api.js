@@ -1,13 +1,13 @@
 import axios from 'axios'
 // const ajax = 'https://wechat.leesticket.com/mobile/applet'
-// const ajax = 'https://wechat.leesticket.com/mobile/applet_v2'
+const ajax = 'https://wechat.leesticket.com/mobile/applet_v2'
 // const ajax = 'http://ticket.pc-online.cc/mobile/applet'
-const ajax = ''
+// const ajax = ''
 
 // 获取票务列表 ${ajax}/pro_list /mock/list.json
 export const getProList = (params) => {
    return new Promise((resolve, reject) => {
-      axios.get(`/mock/list.json`, {
+      axios.get(`${ajax}/pro_list`, {
          params
       }).then(res => {
          resolve(res.data)
@@ -18,10 +18,10 @@ export const getProList = (params) => {
    })
 }
 
-// 获取城市 ${ajax}/pro_list /mock/list.json
+// 获取城市 ${ajax}/city_banner /mock/list.json
 export const getCityBanner = (params) => {
    return new Promise((resolve, reject) => {
-      axios.get(`/mock/list.json`, {
+      axios.get(`${ajax}/city_banner`, {
          params
       }).then(res => {
          resolve(res.data)
@@ -35,7 +35,7 @@ export const getCityBanner = (params) => {
 // 获取票务详情 ${ajax}/product_info /mock/detail.json
 export const getProDetail = (params) => {
    return new Promise((resolve, reject) => {
-      axios.get(`/mock/detail.json`, {
+      axios.get(`${ajax}/product_info`, {
          params
       }).then(res => {
          resolve(res.data)

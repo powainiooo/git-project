@@ -5,8 +5,8 @@
       flex-shrink 0
       background url("../assets/images/bg1.jpg") no-repeat
       background-position left center
+      background-size cover
       background-color #dddddd
-      margin-top -50px
       margin-bottom 50px
       display flex
       overflow-y hidden
@@ -21,7 +21,7 @@
          left 200px
          top 30px
       .recommend-swiper
-         margin-top 75px
+         margin 75px 0 0 0
          padding-top 5px
          .swiper-slide
             width 265px
@@ -32,7 +32,7 @@
 
 <template>
    <div class="recommend-list">
-      <h3>本周精选 {{name}} 活动</h3>
+      <h3>{{title}}</h3>
       <swiper :options="swiperOption" ref="mySwiper" class="recommend-swiper">
          <!-- slides -->
          <swiper-slide v-for="i in listData" :key="i.id">
@@ -55,9 +55,9 @@
             type: Array,
             default: () => []
          },
-         name: {
+         title: {
             type: String,
-            default: 'Techo'
+            default: ''
          }
       },
       data() {

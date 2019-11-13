@@ -11,6 +11,14 @@
       /*z-index 1000*/
       position relative
       float left
+      .logo
+         font-size 32px
+         color #ffffff
+         position absolute
+         top 60px
+         left 60px
+         cursor pointer
+         z-index 1500
    .aside-search
       width 335px
       position absolute
@@ -53,7 +61,7 @@
                border-left 1px solid #f6f6f6
                background url("../assets/images/icon-search.png") no-repeat center center
          .date
-            margin 42px 0 0 48px
+            margin 32px 0 0 18px
             display flex
             align-items center
             input
@@ -65,10 +73,18 @@
                border-left 1px solid #0033b2
                cursor default
                background url("../assets/images/icon-calendar.png") no-repeat center center
+               position absolute
+               top 185px
+               right 40px
+               z-index 0
          .v2-date-wrap
-            width 200px
+            width 300px
+            height 54px
+            padding 12px 0 0 30px
             background-color transparent
             border none
+            position relative
+            z-index 1
             svg
                display none
             .v2-picker-trigger
@@ -79,12 +95,22 @@
       position absolute
       right 40px
       bottom 40px
+      &::before
+         content '在 小夫有票 发布票务？'
+         font-size 16px
+         color #ffffff
+         position absolute
+         top -25px
+         left 60px
 </style>
 
 <template>
    <aside class="aside-frame">
+      <div class="logo">
+         <i class="icon-logo"></i>
+      </div>
       <div class="aside-search" :style="searchStyle">
-         <h3>直达你的活动现场<br>Go to your events {{date}}</h3>
+         <h3>直达你的活动现场<br>Go to your events</h3>
          <div class="search-frame">
             <div class="keyword">
                <input type="text" placeholder="输入活动、艺人或城市" v-model="keyword"/>

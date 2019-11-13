@@ -30,7 +30,7 @@
 <transition enter-active-class="fadeIn" leave-active-class="fadeOut">
    <div class="pro-detail" v-if="show">
       <transition enter-active-class="slideIn750" leave-active-class="slideOut750">
-         <div class="detail-frame" v-if="showFrame">
+         <div class="detail-frame" v-if="showFrame" ref="frame">
             <btn-func @click.native="doClose"></btn-func>
             <z-block style="margin-top: 65px; height: 765px;">
                <list-item :width="500" :itemData="itemData.info"></list-item>
@@ -48,7 +48,7 @@
                <z-contact :itemData="itemData.info"></z-contact>
             </z-block>
             <z-block title="更多推荐活动" v-if="itemData.recommend.length !== 0">
-               <z-recommond :listData="itemData.recommend"></z-recommond>
+               <z-recommond :listData="itemData.recommend" @refresh="backTop"></z-recommond>
             </z-block>
          </div>
       </transition>
@@ -114,6 +114,9 @@ export default {
          this.$nextTick(() => {
             this.$emit('update:show', false)
          })
+      },
+      backTop () {
+         this.$refs.frame.scrollTop = 0
       }
    }
 }

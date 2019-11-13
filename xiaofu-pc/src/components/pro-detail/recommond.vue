@@ -1,6 +1,7 @@
 <style lang="stylus" type="text/stylus" scoped>
 .recommond-swiper
    margin-left 30px
+   padding-top 4px
    .swiper-slide
       width 320px
    &:hover
@@ -13,7 +14,7 @@
    <swiper :options="swiperOption" ref="mySwiper" class="recommond-swiper">
       <!-- slides -->
       <swiper-slide v-for="i in listData" :key="i.id">
-         <list-item :width="320" fold :itemData="i"></list-item>
+         <list-item :width="320" fold :itemData="i" @tap="getDetail(i.id)"></list-item>
       </swiper-slide>
       <!-- Optional controls -->
       <div class="swiper-btn swiper-btn-prev" slot="button-prev" style="top: 180px"><i></i></div>
@@ -32,9 +33,7 @@ export default {
          swiperOption: {
             slidesPerView: 'auto',
             spaceBetween: 16,
-            pagination: {
-               el: '.swiper-pagination'
-            },
+            simulateTouch: false,
             navigation: {
                nextEl: '.swiper-btn-next',
                prevEl: '.swiper-btn-prev',
@@ -48,6 +47,12 @@ export default {
          default: () => []
       }
    },
-	methods: {}
+   inject: ['getDetailData'],
+	methods: {
+	   getDetail (id) {
+	      this.getDetailData(id)
+         this.$emit('refresh')
+      }
+   }
 }
 </script>

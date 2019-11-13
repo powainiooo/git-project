@@ -265,7 +265,7 @@ Component({
       setNums (obj) { // 设置可选票的数量列表
          let arr = []
          let nums = parseInt(obj.nums)
-         if (obj.max != '') {
+         if (obj.max !== '') {
             let max = parseInt(obj.max)
             let val = max > nums ? nums : max
             for (let i = 0; i < val; i++) {

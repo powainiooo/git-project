@@ -1,7 +1,7 @@
 <view class="container">
    <image src="../../res/images/bg1.jpg" mode="widthFix" class="bg1"></image>
    <image src="../../res/images/bg2.jpg" mode="widthFix" class="bg2"></image>
-   <view class="frame">
+   <view class="index-frame">
       <view class="input {{name === '' ? 'input-placeholder' : ''}}" style="margin-top: 110rpx;">
          <view class="icons icon-person"></view>
          <input placeholder="联系人" placeholder-style="color: #889286;" value="{{name}}" data-key="name" bindinput="bindKeyInput"/>

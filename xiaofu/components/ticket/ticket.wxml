@@ -14,7 +14,7 @@
 -->
 <view class="ticket-item {{fold ? 'ticket-item-fold' : ''}} {{hideImgs ? 'ticket-item-hideimg' : ''}}"
       style="width: {{width}}rpx"
-      hover-class="ticket-item-tap"
+      hover-class="{{fold ? 'ticket-item-tap' : ''}}"
       hover-start-time="10"
       hover-stay-time="50">
    <view class="ticket-frame" id="ticket" style="transform: scale({{width / 750}})">

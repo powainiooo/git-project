@@ -1,0 +1,17 @@
+{
+	"description": "xiao xiang ban jia",
+	"setting": {
+		"urlCheck": true,
+		"es6": false,
+		"postcss": false,
+		"minified": false
+	},
+	"compileType": "miniprogram",
+	"appid": "wx00436486105458e9",
+	"projectname": "xiaoxiang",
+	"miniprogramRoot": "weapp/",
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
+	"libVersion": "2.9.2",
+	"condition": {}
+}

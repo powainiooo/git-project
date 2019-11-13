@@ -1,0 +1,3 @@
+<!--components/numbers/numbers.wxml-->
+<text>{{itemData.nums}}</text>
+<button bindtap="doAdd">add</button>

@@ -13,6 +13,7 @@
       p
          width 345px
          color #888888
+         font-size 14px
          line-height 1.4
          margin-bottom 2px
          align-self flex-end

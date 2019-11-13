@@ -17,5 +17,5 @@
 
 .drink-item-bottom { width: 100%; position: relative;}
 .drink-item-bottom-bg { width: 100%;}
-.drink-item-info { width: 600rpx; position: absolute; top: 34rpx; left: 63rpx; display: flex; justify-content: space-between; align-items: center; color: #ffffff; font-size: 28rpx;}
+.drink-item-info { width: 626rpx; position: absolute; top: 34rpx; left: 10rpx; display: flex; justify-content: space-between; align-items: center; color: #ffffff; font-size: 28rpx;}
 .drink-item-info .name { font-size: 24rpx;}

@@ -1,7 +1,7 @@
 <view class="datepicker fadeIn1">
    <image src="../../res/images/sales.png" mode="widthFix" class="logo fadeIn2"></image>
    <image src="../../res/images/title-date.png" mode="widthFix" class="title fadeIn2"></image>
-   <view class="slideIn">
+   <view class="zoomIn">
       <view class="selects">
          <view class="btn-frame" hover-class="btn-hover" bindtap="prevMonth"><view class="btn btn-prev"></view></view>
          <text class="month">{{year}}/{{month + 1 < 10 ? '0' + (month + 1) : month + 1}}</text>

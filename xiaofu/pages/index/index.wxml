@@ -1,5 +1,5 @@
 <!--index.wxml-->
-<scroll-view scroll-y="{{indexScroll}}" class="container" bindscroll="containerScroll" bindscrolltolower="touchBottom">
+<scroll-view scroll-y="{{detailPage === ''}}" class="container" bindscroll="containerScroll" bindscrolltolower="touchBottom">
    <header initButton="{{headerBtns}}" id="header" bindbtntap="headBtn"></header>
    <view class="search-frame" id="search" wx:if="{{!showSearchTitle}}">
       <search url="{{bannerUrl}}" linkId="{{bannerId}}" bindsearch="doSearch" bindtoggleCalendar="toggleCalendar" id="search"></search>

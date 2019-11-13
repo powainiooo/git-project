@@ -18,11 +18,12 @@
          &::after
             content ''
             width 100%
-            height 174px
+            height 102px
             background url("../assets/images/ticket-shadow2.png") no-repeat
+            background-size 330px
             position absolute
-            bottom -85px
-            left 0
+            bottom -13px
+            right 0px
       .top
          height 85px
          border-bottom 1px solid #c1c1c1
@@ -88,7 +89,10 @@
    .list-item-fold
       .frame
          &::after
-            background-image url("../assets/images/ticket-shadow2.png")
+            height 174px
+            bottom -83px
+            background-size 332px
+            background-image url("../assets/images/ticket-shadow.png")
       .title
          word-break break-all
          white-space nowrap
@@ -98,7 +102,7 @@
       .address
          display none
       .imgs
-         height 143px
+         height 142px
    .list-item-tap
       transform scale(0.96)
 </style>

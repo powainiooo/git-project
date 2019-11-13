@@ -21,7 +21,7 @@
                     <view class='icons icon-guanbi'></view>
                 </view>
                 <!--<view class="btn" bindtap="gotoInsured">免费保险</view>-->
-               <view class="btn" bindtap="backIndex">回到首页</view>
+               <view class="btn" bindtap="backOrder">订单中心</view>
             </view>
 
             <!-- 投保成功-->

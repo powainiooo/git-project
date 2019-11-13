@@ -31,8 +31,10 @@ Component({
          this.triggerEvent('change', this.data.nums)
 	   },
 	   doAdd () {
+	      let limit = parseInt(this.data.itemData.limit)
+         let num = this.data.nums >= limit ? this.data.nums : this.data.nums + 1
 	   	this.setData({
-			   nums: this.data.nums + 1
+			   nums: num
 		   })
          this.triggerEvent('change', this.data.nums)
 	   }

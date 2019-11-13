@@ -57,6 +57,11 @@ Page({
          url: '/pages/drink/index'
       })
    },
+   backOrder () {
+      wx.reLaunch({
+         url: '/pages/order-ticket/order'
+      })
+   },
    onGotUserInfo (e) {
       app.globalData.userInfo = e.detail.userInfo
       wx.request({

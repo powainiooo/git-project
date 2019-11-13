@@ -35,7 +35,8 @@
                  :citys="cityList"
                  @getcity="setCity"
                  :img="bannerImg"
-                 @linkTo="getDetailData"></banner>
+                 @linkTo="getDetailData"
+                 ref="banner"></banner>
          <div class="pro-list-container"
               :style="proContainerStyle"
               v-infinite-scroll="loadMore"
@@ -140,9 +141,7 @@
       },
       methods: {
          getListData () {
-            console.log(this.date)
             const date = this.date === '' ? '' : formatDate(this.date, 'yyyy/MM/dd')
-            console.log(date)
             getProList({
                keyword: this.keyword,
                date,
@@ -199,16 +198,19 @@
          doSearch (data) {
             this.keyword = data.keyword
             this.date = data.date
+            this.city = ''
             this.page = 1
             this.listData = []
+            this.$refs.banner.resetCity()
             this.getListData()
          },
          setCity (id) {
-            this.city = id
+            this.city = id === 0 ? '' : id
             this.page = 1
             this.keyword = ''
             this.date = ''
             this.listData = []
+            this.$refs.search.reset()
             this.getListData()
          },
          loadMore () {

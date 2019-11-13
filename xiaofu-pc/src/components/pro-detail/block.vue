@@ -16,6 +16,9 @@
       font-weight bold
       margin-bottom 30px
       margin-left 30px
+.z-block-none
+   &::after
+      height 0
 </style>
 
 <template>

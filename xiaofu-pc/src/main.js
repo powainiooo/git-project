@@ -4,7 +4,7 @@ import router from './router'
 import store from './store'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'
-import { Select, Option } from 'view-design'
+import { Select, Option, Icon } from 'view-design'
 import 'view-design/dist/styles/iview.css'
 import V2Datepicker from 'v2-datepicker'
 import './assets/css/V2Datepicker.css'
@@ -14,6 +14,7 @@ Vue.use(infiniteScroll)
 Vue.use(VueAwesomeSwiper)
 Vue.component('Select', Select)
 Vue.component('Option', Option)
+Vue.component('Icon', Icon)
 Vue.use(V2Datepicker)
 
 Vue.config.productionTip = false

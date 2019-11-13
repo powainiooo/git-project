@@ -2,6 +2,7 @@
 .recommond-swiper
    margin-left 30px
    padding-top 4px
+   height 330px
    .swiper-slide
       width 320px
    &:hover

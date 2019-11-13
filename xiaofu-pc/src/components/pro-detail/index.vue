@@ -47,7 +47,7 @@
             <z-block title="联系主办方">
                <z-contact :itemData="itemData.info"></z-contact>
             </z-block>
-            <z-block title="更多推荐活动" v-if="itemData.recommend.length !== 0">
+            <z-block title="更多推荐活动" v-if="itemData.recommend.length !== 0" class="z-block-none">
                <z-recommond :listData="itemData.recommend" @refresh="backTop"></z-recommond>
             </z-block>
          </div>

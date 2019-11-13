@@ -36,7 +36,7 @@
       <swiper :options="swiperOption" ref="mySwiper" class="recommend-swiper">
          <!-- slides -->
          <swiper-slide v-for="i in listData" :key="i.id">
-            <list-item :width="265" fold :itemData="i"></list-item>
+            <list-item :width="268" fold :itemData="i"></list-item>
          </swiper-slide>
          <!-- Optional controls -->
       </swiper>

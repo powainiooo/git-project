@@ -92,6 +92,7 @@
                padding 0
                color #ffffff
    .to-xiaofu
+      width 290px
       position absolute
       right 40px
       bottom 40px
@@ -102,18 +103,20 @@
          position absolute
          top -25px
          left 60px
+      .n-btn a
+         font-size 22px
 </style>
 
 <template>
    <aside class="aside-frame">
       <div class="logo">
-         <i class="icon-logo"></i>
+         <img src="@/assets/images/logo.png" />
       </div>
       <div class="aside-search" :style="searchStyle">
          <h3>直达你的活动现场<br>Go to your events</h3>
          <div class="search-frame">
             <div class="keyword">
-               <input type="text" placeholder="输入活动、艺人或城市" v-model="keyword"/>
+               <input type="text" placeholder="输入活动、艺人或城市" v-model="keyword" @keydown.enter="doSearch"/>
                <a href="javascript:;" @click="doSearch"></a>
             </div>
             <div class="date">
@@ -123,15 +126,20 @@
             </div>
          </div>
       </div>
-      <a href="https://editor.leesticket.com" class="to-xiaofu" :style="xiaofuStyle">
-         <img src="../assets/images/btn.png">
-      </a>
+      <div class="to-xiaofu">
+         <t-button @dotap="toXiaofu">
+            <i class="icon-logo"></i>
+         </t-button>
+      </div>
+
    </aside>
 </template>
 
 <script type='es6'>
+   import TButton from './TButton.vue'
    export default {
       name: 'search',
+      components: { TButton },
       data() {
          return {
             keyword: '',
@@ -165,6 +173,14 @@
                keyword: this.keyword,
                date: this.date
             })
+         },
+         toXiaofu () {
+            window.location = 'https://editor.leesticket.com'
+         },
+         reset () {
+            this.keyword = ''
+            this.date = ''
+            this.$refs.picker.displayDate = ''
          }
       }
    }

@@ -4,22 +4,14 @@
    top 23px
    right 43px
    a
-      width 26px
-      height 26px
-      display block
-      background-position center center
-      background-repeat no-repeat
-      background-size 100%
-   .btn-close
-      background-image url("../assets/images/icon-close.png")
-   .btn-menu
-      background-image url("../assets/images/icon-menu.png")
+      font-size 32px
+      color #ffffff
 </style>
 
 <template>
 <div class="btn-func" :style="styles">
-   <a href="javascript:;" class="btn-close" v-if="type === 'close'"></a>
-   <a href="javascript:;" class="btn-menu" v-if="type === 'menu'"></a>
+   <a href="javascript:;" style="color: #002aa6" v-if="type === 'close'"><Icon type="md-close" /></a>
+   <a href="javascript:;" v-if="type === 'menu'"><Icon type="ios-menu" /></a>
 </div>
 </template>
 
@@ -37,13 +29,17 @@ export default {
       type: {
 	      type: String,
          default: 'close'
+      },
+      fixed: {
+	      type: Boolean,
+         default: false
       }
    },
 	computed: {
 	   styles () {
 	      return {
 	         'z-index': this.zIndex,
-	         // 'position': this.type === 'menu' ? 'fixed' : 'absolute'
+	         'position': this.fixed ? 'fixed' : 'absolute',
             "top": this.type === 'menu' ? '23px' : '58px',
             "right": this.type === 'menu' ? '43px' : '53px',
          }

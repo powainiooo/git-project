@@ -5,6 +5,7 @@ const ajaxSrc = app.globalData.ajaxSrc
 import {getBannerCity, getIndexListData, getIndexDetailData} from '../../utils/api'
 Page({
 	data: {
+      imgSrc: app.globalData.imgSrc,
 		userInfo: {},
 		hasUserInfo: false,
 		canIUse: wx.canIUse('button.open-type.getUserInfo'),
@@ -113,12 +114,15 @@ Page({
 				ticket.togglePage('detail')
 				footer.togglePage('detail')
 				this.setData({
-					headerBtns: ['share', 'close']
+					headerBtns: ['share', 'close'],
+               detailPage: 'detail'
 				})
 			} else if (this.data.detailPage === 'drink') {
 				ticket.togglePage('buy')
 				footer.togglePage('buy')
-            this.data.detailPage = 'buy'
+            this.setData({
+               detailPage: 'buy'
+            })
 			}
 		} else if (e.detail === 'poster') {
 			this.drawPoster()
@@ -158,6 +162,7 @@ Page({
 		setTimeout(() => {
 			this.setData({
 				selectedTicketIndex: -1,
+            detailPage: '',
 				headerBtns: this.data.showSearchTitle ? ['menu', 'close'] : ['menu']
 			})
 		}, 600)
@@ -410,6 +415,9 @@ Page({
 			city: this.data.cityID,
 			mid: this.data.activityID
 		}).then(res => {
+		   if (this.data.page === 1) {
+            this.data.listData = []
+         }
 			this.setData({
 				listData: this.data.listData.concat(res.data.list),
 				isLoading: false,
@@ -430,20 +438,22 @@ Page({
 		wx.showLoading({
 			title: '生成中'
 		})
-
 		wx.downloadFile({
 			url: imgSrc + poster,
 			success (res) {
 				if (res.statusCode === 200) {
 					wx.saveImageToPhotosAlbum({
 						filePath: res.tempFilePath,
-						success () {
+						success (res2) {
 							wx.showToast({
 								title: '保存成功',
 								icon: 'success',
 								duration: 2000
 							})
-						}
+						},
+                  fail (err) {
+						   console.log(err)
+                  }
 					})
 				}
 			}

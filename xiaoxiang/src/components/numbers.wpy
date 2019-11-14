@@ -1,0 +1,65 @@
+<style lang="less">
+@import "../res/layout.wxss";
+
+.checkbox { width: 36rpx; height: 36rpx; -webkit-appearance: none; background-position: -4rpx -30rpx;}
+.numbers-item-name-active .checkbox { background-position: -46rpx -30rpx;}
+
+.numbers-item-name { display: flex; align-items: center; font-size: 28rpx; color: #252525;}
+.numbers-item-name .icons { margin-right: 18rpx;}
+
+.numbers-item .operas { width: 180rpx; height: 46rpx; box-sizing: border-box; border: 1rpx solid #e7e7e7; display: flex; border-radius: 6rpx;}
+.numbers-item .operas .btn { width: 48rpx; height: 100%; display: flex; align-items: center; justify-content: center; background-color: transparent;}
+.numbers-item .operas .nums { width: 80rpx; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 28rpx; color: #252525;border-left: 1rpx solid #e7e7e7; border-right: 1rpx solid #e7e7e7;}
+</style>
+<template>
+<div class="input-container">
+   <div class="title">
+      <text>拆件</text>
+      <div class="icons icon-add"></div>
+   </div>
+   <div class="frame">
+      <div class="li numbers-item">
+         <div class="numbers-item-name" :class="{'numbers-item-name-active':checked}" @tap="toggle">
+            <div class="icons checkbox"></div>
+            <text>燃气灶油烟机套</text>
+         </div>
+         <div class="operas">
+            <div class="btn" @tap="doReduce"><i class="icons icon-reduce"></i></div>
+            <div class="nums">{{nums}}</div>
+            <div class="btn" @tap="doAdd"><i class="icons icon-add-min"></i></div>
+         </div>
+      </div>
+   </div>
+   <div class="hr"></div>
+</div>
+</template>
+
+<script>
+import wepy from '@wepy/core'
+
+wepy.component({
+   data: {
+      checked: false,
+      nums: 0
+   },
+   attached() {
+   },
+   methods: {
+      toggle () {
+         this.checked = !this.checked
+      },
+      doReduce () {
+         if (this.nums === 0) return
+         this.nums -= 1
+      },
+      doAdd () {
+         this.nums += 1
+      }
+   }
+})
+</script>
+<config>
+   {
+      "usingComponents": {}
+   }
+</config>

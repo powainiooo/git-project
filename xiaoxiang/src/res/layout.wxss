@@ -1,0 +1,28 @@
+.icons { background: url(data:image/png;base64,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) no-repeat; background-size: 90rpx; display: inline-block;}
+.icon-person { width: 26rpx; height: 24rpx; background-position: -9rpx -4rpx;}
+.icon-phone { width: 26rpx; height: 24rpx; background-position: -48rpx -4rpx;}
+.icon-add { width: 19rpx; height: 19rpx; background-position: -9rpx -81rpx;}
+.icon-add-min { width: 15rpx; height: 15rpx; background-position: -34rpx -83rpx;}
+.icon-add-large { width: 33rpx; height: 33rpx; background-position: -52rpx -74rpx;}
+.icon-reduce { width: 15rpx; height: 2rpx; background-position: -34rpx -78rpx;}
+
+.btn { width: 600rpx; height: 72rpx; line-height: 72rpx; background-color: #3bab70; color: #ffffff; border-radius: 10rpx; font-size: 24rpx; border: none;}
+
+.input-container .title { font-size: 28rpx; color: #3bab70; height: 72rpx; padding: 0 30rpx; display: flex; align-items: center; justify-content: space-between;}
+.input-container .frame { border-top: 1rpx solid #eeeeee; padding: 0 30rpx;}
+.input-container .frame .li { height: 94rpx; border-bottom: 1rpx solid #eeeeee; display: flex; justify-content: space-between; align-items: center;}
+.input-container .frame .li2 { height: auto; padding: 30rpx 0;}
+.input-container .frame .li:last-child { border-bottom: none;}
+.input-container .frame .li .name { color: #252525; font-size: 28rpx;}
+.input-container .frame .li .input { width: 490rpx; height: 100%; line-height: 94rpx; font-size: 28rpx; color: #252525; border: none;}
+.input-container .frame .li .input-placeholder { color: #999999;}
+
+.hr { width: 100%; height: 16rpx; background-color: #eeeeee;}
+
+.price-line { height: 94rpx; padding-left: 30rpx; display: flex; align-items: center; font-size: 28rpx; color: #f06161;}
+
+.btn-step { margin: 50rpx auto;}
+
+.hint { font-size: 24rpx; color: #999999; line-height: 1.8; margin: 0 50rpx;}
+
+.btn-phone { color: #3bab70; font-size: 24rpx; line-height: 1.8; margin: 0 0 50rpx 50rpx; text-decoration: underline;}

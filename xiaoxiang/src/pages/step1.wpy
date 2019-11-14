@@ -1,5 +1,5 @@
 <style lang="less">
-
+@import "../res/layout.wxss";
 </style>
 <template>
 <div>
@@ -17,7 +17,7 @@
          </div>
          <div class="li">
             <div class="name">面积</div>
-            <input placeholder="输入面积" class="input" placeholder-style="color: #999999"/>
+            <input type="number" placeholder="输入面积" class="input" placeholder-style="color: #999999" v-model="area"/>
          </div>
       </div>
    </div>
@@ -27,7 +27,7 @@
       <div class="frame">
          <div class="li">
             <div class="name">搬出</div>
-            <input placeholder="填写地址" class="input" placeholder-style="color: #999999"/>
+            <input placeholder="填写地址" class="input" placeholder-style="color: #999999" v-model="outAddress"/>
          </div>
          <div class="li">
             <div class="name">楼层</div>
@@ -43,7 +43,7 @@
       <div class="frame">
          <div class="li">
             <div class="name">搬入</div>
-            <input placeholder="填写地址" class="input" placeholder-style="color: #999999"/>
+            <input placeholder="填写地址" class="input" placeholder-style="color: #999999" v-model="inAddress"/>
          </div>
          <div class="li">
             <div class="name">楼层</div>
@@ -56,7 +56,7 @@
    <div class="hr"></div>
    <div class="price-line">基础价格预估　￥0</div>
    <div class="hr"></div>
-   <button class="btn btn-step">下一步</button>
+   <button class="btn btn-step" @tap="doConfirm">下一步</button>
    <div class="hint">备注：停车距离超过100米需要增加费用，具体增加费用请通过人工客服咨询。</div>
    <div class="btn-phone" @tap="makePhone">电话下单：{{phone}}</div>
 </div>
@@ -65,26 +65,61 @@
 <script>
 import wepy from '@wepy/core'
 import store from '../store'
+import {getHouseType, createOrderTwo} from '@/res/api.js'
 
 wepy.page({
    store,
    data: {
       layoutList: ['一居室', '二居室', '三居室'],
-      buildingList: [1, 2, 3, 4, 5, 6, 7, 8],
+      buildingList: [],
       layout: '',
       outBuild: '',
-      inBuild: ''
+      inBuild: '',
+      area: '',
+      outAddress: '',
+      inAddress: ''
    },
    computed: {
       phone () {
          return store.state.phone
+      },
+      userOpenID () {
+         return store.state.userOpenID
+      },
+      orderNums () {
+         return store.state.orderNums
       }
    },
-   onLoad() {},
+   onLoad() {
+      for (let i = 0; i < 30; i++) {
+         this.buildingList.push(i + 1)
+      }
+      getHouseType().then(res => {
+         this.layoutList = res.data
+      })
+   },
    methods: {
       makePhone () {
          wx.makePhoneCall({
             phoneNumber: this.phone
+         })
+      },
+      doConfirm () {
+         const obj = {
+            order_num: this.orderNums,
+            house_type: this.layoutList[this.layout],
+            area: this.area,
+            s_address: this.outAddress,
+            f_address: this.inAddress,
+            s_floor: this.buildingList[this.outBuild],
+            f_floor: this.buildingList[this.inBuild]
+         }
+         createOrderTwo(obj).then(res => {
+            if (res.status === 0) {
+               wx.navigateTo({
+                  url: '/pages/step2'
+               })
+            }
          })
       }
    }

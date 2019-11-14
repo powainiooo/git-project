@@ -1,28 +1,20 @@
+import wepy from '@wepy/core'
 import Vuex from '@wepy/x'
+wepy.use(Vuex)
 
 export default new Vuex.Store({
    state: {
-      phone: '0755-88888888'
+      phone: '0755-88888888',
+      ajaxSrc: 'http://move.pc-online.cc/mobile/applet/',
+      userOpenID: '',
+      orderNums: ''
    },
    mutations: {
-      increment (state) {
-         state.counter++
+      setOpenId (state, data) {
+         state.userOpenID = data
       },
-      decrement (state) {
-         state.counter--
-      }
-   },
-   actions: {
-      increment ({ commit }) {
-         commit('increment')
-      },
-      decrement ({ commit }) {
-         commit('decrement')
-      },
-      incrementAsync ({ commit }) {
-         setTimeout(() => {
-            commit('increment')
-         }, 1000)
+      setOrderNums (state, data) {
+         state.orderNums = data
       }
    }
 })

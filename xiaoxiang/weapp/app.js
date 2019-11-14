@@ -1,14 +1,25 @@
 "use strict";
 
+var _regeneratorRuntime2 = _interopRequireDefault(require('vendor.js')(2));
+
 var _core = _interopRequireDefault(require('vendor.js')(0));
 
 var _eventHub = _interopRequireDefault(require('common/eventHub.js'));
 
-var _x = _interopRequireDefault(require('vendor.js')(2));
+var _util = require('res/util.js');
+
+var _api = require('res/api.js');
+
+var _store = _interopRequireDefault(require('store/index.js'));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-_core["default"].use(_x["default"]);
+// import vuex from '@wepy/x'
+var login = (0, _util.promisify)(wx.login);
+
+var _getSetting = (0, _util.promisify)(wx.getSetting);
+
+var getUserInfo = (0, _util.promisify)(wx.getUserInfo);
 
 _core["default"].app({
   hooks: {// App 级别 hook，对整个 App 生效
@@ -31,6 +42,95 @@ _core["default"].app({
 
       console.log(args);
     });
+
+    this.onlogin();
+    this.getSetting();
   },
-  methods: {}
+  methods: {
+    // 登录
+    onlogin: function onlogin() {
+      var openid, res, resWeixin;
+      return _regeneratorRuntime2["default"].async(function onlogin$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _store["default"].commit('setOpenId', '123312');
+
+              openid = wx.getStorageSync('openid');
+
+              if (!(openid === '' || openid === undefined)) {
+                _context.next = 13;
+                break;
+              }
+
+              _context.next = 5;
+              return _regeneratorRuntime2["default"].awrap(login());
+
+            case 5:
+              res = _context.sent;
+              _context.next = 8;
+              return _regeneratorRuntime2["default"].awrap((0, _api.getWeixin)({
+                code: res.code
+              }));
+
+            case 8:
+              resWeixin = _context.sent;
+
+              _store["default"].commit('setOpenId', resWeixin.data.openid);
+
+              wx.setStorageSync('openid', resWeixin.data.openid);
+              _context.next = 14;
+              break;
+
+            case 13:
+              _store["default"].commit('setOpenId', openid);
+
+            case 14:
+            case "end":
+              return _context.stop();
+          }
+        }
+      });
+    },
+    // 查看是否授权
+    getSetting: function getSetting() {
+      var resSetting, res;
+      return _regeneratorRuntime2["default"].async(function getSetting$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.next = 2;
+              return _regeneratorRuntime2["default"].awrap(_getSetting());
+
+            case 2:
+              resSetting = _context2.sent;
+
+              if (!resSetting.authSetting['scope.userInfo']) {
+                _context2.next = 8;
+                break;
+              }
+
+              _context2.next = 6;
+              return _regeneratorRuntime2["default"].awrap(getUserInfo());
+
+            case 6:
+              res = _context2.sent;
+              (0, _api.wxUserAdd)({
+                openid: _store["default"].state.userOpenID,
+                country: res.userInfo.country,
+                province: res.userInfo.province,
+                city: res.userInfo.city,
+                gender: res.userInfo.gender,
+                nickName: res.userInfo.nickName,
+                avatarUrl: res.userInfo.avatarUrl
+              });
+
+            case 8:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      });
+    }
+  }
 }, {info: {"noPromiseAPI":["createSelectorQuery"]}, handlers: {}, models: {} });

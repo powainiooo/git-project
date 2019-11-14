@@ -1,13 +1,15 @@
 {
-    "pages": [
-        "pages/step1",
-        "pages/login",
-        "pages/index"
-    ],
-    "window": {
-        "backgroundTextStyle": "light",
-        "navigationBarBackgroundColor": "#ededed",
-        "navigationBarTitleText": "小象搬家",
-        "navigationBarTextStyle": "black"
-    }
+   "pages": [
+      "pages/step1",
+      "pages/login",
+      "pages/step2",
+      "pages/index"
+   ],
+   "window": {
+      "backgroundTextStyle": "light",
+      "navigationBarBackgroundColor": "#ededed",
+      "navigationBarTitleText": "小象搬家",
+      "navigationBarTextStyle": "black"
+   },
+   "sitemapLocation": "sitemap14.json"
 }

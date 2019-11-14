@@ -1,0 +1,12 @@
+
+<view class="z-upload">
+   <view class="title"></view>
+   <view class="list">
+      <view wx:for="{{ srcList }}" wx:for-index="index" wx:for-item="i" wx:key="index" key="{{ i }}" class="list-item">
+         <image src="{{ i }}" mode="aspectFill" class="img"></image>
+      </view>
+      <view data-wpy-evt="19-0" bindtap="_proxy" class="list-item">
+         <view class="icons icon-add-large"></view>
+      </view>
+   </view>
+</view>

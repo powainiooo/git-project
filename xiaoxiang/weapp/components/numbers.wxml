@@ -1,0 +1,21 @@
+
+<view class="input-container">
+   <view class="title">
+      <text>拆件</text>
+      <view class="icons icon-add"></view>
+   </view>
+   <view class="frame">
+      <view class="li numbers-item">
+         <view data-wpy-evt="18-0" bindtap="_proxy" class="numbers-item-name {{ [ checked ? 'numbers-item-name-active' : '' ] }}">
+            <view class="icons checkbox"></view>
+            <text>燃气灶油烟机套</text>
+         </view>
+         <view class="operas">
+            <view data-wpy-evt="18-1" bindtap="_proxy" class="btn"><view class="icons icon-reduce"></view></view>
+            <view class="nums">{{nums}}</view>
+            <view data-wpy-evt="18-2" bindtap="_proxy" class="btn"><view class="icons icon-add-min"></view></view>
+         </view>
+      </view>
+   </view>
+   <view class="hr"></view>
+</view>

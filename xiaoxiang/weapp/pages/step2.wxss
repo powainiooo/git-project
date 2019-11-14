@@ -114,4 +114,25 @@
   margin: 0 0 50rpx 50rpx;
   text-decoration: underline;
 }
+.tab {
+  width: 520rpx;
+  display: flex;
+  overflow: hidden;
+  border-radius: 10rpx;
+  margin: 34rpx auto 0 auto;
+}
+.tab .tab-item {
+  width: 50%;
+  height: 80rpx;
+  background-color: #eeeeee;
+  color: #252525;
+  font-size: 30rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.tab .tab-item.active {
+  background-color: #3bab70;
+  color: #ffffff;
+}
 

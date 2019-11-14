@@ -79,6 +79,7 @@ Page({
    doPay () { // 付款
       const ticket = this.selectComponent("#ticket")
       const params = ticket.getParams()
+      const self = this
       wx.setStorage({
          key: 'nameVal',
          data: params.name
@@ -126,7 +127,7 @@ Page({
                         wx.showToast({
                            title: '支付成功'
                         })
-                        this.doBuySuccess(tid, order_num)
+                        self.doBuySuccess(tid, order_num)
                      },
                      'fail': function (res) {
                         wx.showToast({

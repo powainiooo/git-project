@@ -23,7 +23,7 @@
          <div class="icons icon-phone"></div>
          <input type="number" placeholder="联系方式" placeholder-style="color: #889286;" v-model="phone"/>
       </div>
-      <button class="btn" @tap="doLogin">立即预约</button>
+      <button class="btn" @tap="doLogin">立即预约{{userOpenID}}</button>
    </div>
 </div>
 </template>
@@ -31,7 +31,7 @@
 <script>
 import wepy from '@wepy/core'
 import store from '../store'
-
+import {createOrderOne} from '@/res/api.js'
 wepy.page({
    store,
    data: {
@@ -39,12 +39,24 @@ wepy.page({
       phone: ''
    },
    computed: {
-
+      userOpenID () {
+         return store.state.userOpenID
+      }
    },
    methods: {
       doLogin () {
-         console.log(this)
-         this.phone = '321'
+         createOrderOne({
+            openid: store.state.userOpenID,
+            name: this.name,
+            mobile: this.phone
+         }).then(res => {
+            if (res.status === 0) {
+               store.commit('setOrderNums', res.order_num)
+               wx.navigateTo({
+                  url: '/pages/step1'
+               })
+            }
+         })
       }
    },
    created () {

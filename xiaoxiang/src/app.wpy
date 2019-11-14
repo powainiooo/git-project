@@ -1,42 +1,18 @@
-<style>
-.icons { background: url(data:image/png;base64,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) no-repeat; background-size: 90rpx; display: inline-block;}
-.icon-person { width: 26rpx; height: 24rpx; background-position: -9rpx -4rpx;}
-.icon-phone { width: 26rpx; height: 24rpx; background-position: -48rpx -4rpx;}
-.checkbox { width: 36rpx; height: 36rpx; -webkit-appearance: none; background-position: -4rpx -31rpx;}
-.checkbox:checked { background-position: -46rpx -31rpx;}
-.icon-add { width: 19rpx; height: 19rpx; background-position: -9rpx -81rpx;}
-.icon-add-min { width: 15rpx; height: 15rpx; background-position: -34rpx -83rpx;}
-.icon-add-large { width: 33rpx; height: 33rpx; background-position: -52rpx -74rpx;}
-.icon-reduce { width: 15rpx; height: 2rpx; background-position: -34rpx -78rpx;}
-
-.btn { width: 600rpx; height: 72rpx; line-height: 72rpx; background-color: #3bab70; color: #ffffff; border-radius: 10rpx; font-size: 24rpx; border: none;}
-
-.input-container .title { font-size: 28rpx; color: #3bab70; height: 72rpx; padding-left: 30rpx; display: flex; align-items: center;}
-.input-container .frame { border-top: 1rpx solid #eeeeee; padding: 0 30rpx;}
-.input-container .frame .li { height: 94rpx; border-bottom: 1rpx solid #eeeeee; display: flex; justify-content: space-between; align-items: center;}
-.input-container .frame .li:last-child { border-bottom: none;}
-.input-container .frame .li .name { color: #252525; font-size: 28rpx;}
-.input-container .frame .li .input { width: 490rpx; height: 100%; line-height: 94rpx; font-size: 28rpx; color: #252525; border: none;}
-.input-container .frame .li .input-placeholder { color: #999999;}
-
-.hr { width: 100%; height: 16rpx; background-color: #eeeeee;}
-
-.price-line { height: 94rpx; padding-left: 30rpx; display: flex; align-items: center; font-size: 28rpx; color: #f06161;}
-
-.btn-step { margin: 50rpx auto;}
-
-.hint { font-size: 24rpx; color: #999999; line-height: 1.8; margin: 0 50rpx;}
-
-.btn-phone { color: #3bab70; font-size: 24rpx; line-height: 1.8; margin: 0 0 50rpx 50rpx; text-decoration: underline;}
-
+<style lang="less">
+@import "res/layout.wxss";
 </style>
 
 <script>
 import wepy from '@wepy/core'
 import eventHub from './common/eventHub'
-import vuex from '@wepy/x'
+// import vuex from '@wepy/x'
+import {promisify} from '@/res/util.js'
+import {getWeixin, wxUserAdd} from '@/res/api.js'
+const login = promisify(wx.login)
+const getSetting = promisify(wx.getSetting)
+const getUserInfo = promisify(wx.getUserInfo)
 
-wepy.use(vuex)
+import store from './store'
 
 wepy.app({
    hooks: {
@@ -55,9 +31,41 @@ wepy.app({
          console.log('app-launch event emitted, the params are:')
          console.log(args)
       })
+      this.onlogin()
+      this.getSetting()
    },
    methods: {
-
+      // 登录
+      async onlogin () {
+         store.commit('setOpenId', '123312')
+         const openid = wx.getStorageSync('openid')
+         if (openid === '' || openid === undefined) {
+            const res = await login()
+            const resWeixin = await getWeixin({
+               code: res.code
+            })
+            store.commit('setOpenId', resWeixin.data.openid)
+            wx.setStorageSync('openid', resWeixin.data.openid)
+         } else {
+            store.commit('setOpenId', openid)
+         }
+      },
+      // 查看是否授权
+      async getSetting () {
+         const resSetting = await getSetting()
+         if (resSetting.authSetting['scope.userInfo']) { // 已经授权，可以直接调用 getUserInfo 获取头像昵称
+            const res = await getUserInfo()
+            wxUserAdd({
+               openid: store.state.userOpenID,
+               country: res.userInfo.country,
+               province: res.userInfo.province,
+               city: res.userInfo.city,
+               gender: res.userInfo.gender,
+               nickName: res.userInfo.nickName,
+               avatarUrl: res.userInfo.avatarUrl
+            })
+         }
+      }
    }
 })
 </script>
@@ -66,6 +74,7 @@ wepy.app({
       "pages": [
          "pages/step1",
          "pages/login",
+         "pages/step2",
          "pages/index"
       ],
       "window": {

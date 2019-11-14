@@ -1,0 +1,26 @@
+
+<view>
+   <view class="tab">
+      <view data-wpy-evt="12-0" bindtap="_proxy" class="tab-item {{ [ page === \'standard\' ? 'active' : '' ] }}">标准下单</view>
+      <view data-wpy-evt="12-1" bindtap="_proxy" class="tab-item {{ [ page === \'picture\' ? 'active' : '' ] }}">图片下单</view>
+   </view>
+   
+   <view wx:if="{{ page === 'standard' }}">
+      <numbers bind_init="_initComponent"></numbers>
+   </view>
+   
+   <view wx:if="{{ page === 'picture' }}" class="input-container">
+      <view class="title">上传图片/视频</view>
+      <view class="frame">
+         <view class="li li2">
+            <upload bind_init="_initComponent"></upload>
+         </view>
+      </view>
+   </view>
+
+   <view class="price-line">最终价格预估　￥0</view>
+   <view class="hr"></view>
+   <button class="btn btn-step">立即下单</button>
+   <view class="hint">备注：工艺品易碎品请咨询人工客服</view>
+   <view data-wpy-evt="12-2" bindtap="_proxy" class="btn-phone">电话下单：{{phone}}</view>
+</view>

@@ -1,0 +1,9 @@
+{
+    "navigationBarBackgroundColor": "#3bab70",
+    "navigationBarTextStyle": "white",
+    "component": true,
+    "usingComponents": {
+        "numbers": "../components/numbers",
+        "upload": "../components/upload"
+    }
+}

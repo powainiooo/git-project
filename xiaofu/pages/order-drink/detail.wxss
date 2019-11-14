@@ -9,7 +9,7 @@
 .ticket .top{ height: 320rpx; overflow: hidden; transition:height 0.5s cubic-bezier(.22,.62,.37,1);}
 .ticket-simple .top{ height: 0;}
 .ticket  .frame1{ width: 100%; height: 300rpx; background-color: #fff; display: flex; flex-direction: column; justify-content: center; align-items: center;}
-.ticket .check-frame1{ background-color: #f6f6f6;}
+.ticket .check-frame1{ background-color: #f3f3f3;}
 .ticket  .frame1 .line1{ width: 210rpx; height: 210rpx; margin-bottom: 10rpx; display: flex; justify-content: center; align-items: center; font-size: 70rpx; color: #878787;}
 .ticket  .frame1 .line1 .qrcode{ width: 100%; height: 100%;}
 .ticket  .frame1 .ids{ font-size: 21rpx; letter-spacing: 6rpx; color: #000;}
@@ -53,4 +53,8 @@
 .shadow-frame .infos .index{ width: 25%; font-size: 70rpx; padding: 15rpx 20rpx; text-align: center; font-family: 'Helve';}
 .shadow-frame .infos .index text{ font-size: 25rpx;}
 
-.detail-frame .hint-section{ margin:100rpx 0 50rpx 0; border-top: 1rpx solid #0d1025; padding-top: 50rpx; color: #ffffff;}
+.detail-frame .check-infos{ margin: 50rpx 0 0 0; display: flex; justify-content: space-between;}
+.detail-frame .check-infos view{ font-size: 28rpx; color: #ffffff;}
+.detail-frame .check-infos view text{ font-size: 70rpx; font-family: 'Helve'; margin-left: 16rpx;}
+
+.detail-frame .hint-section{ margin: 50rpx 0; border-top: 1rpx solid #0d1025; padding-top: 50rpx; color: #ffffff;}

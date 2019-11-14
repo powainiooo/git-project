@@ -29,6 +29,10 @@ Component({
     */
    data: {
 		selected: '全部',
+      allCity: {
+		   name: '全部',
+         id: ''
+      },
 	   fold: true
    },
 

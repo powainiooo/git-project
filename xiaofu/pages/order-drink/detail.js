@@ -7,7 +7,9 @@ Page({
    */
    data: {
       itemData: {},
-      imgSrc: app.globalData.imgSrc
+      imgSrc: app.globalData.imgSrc,
+      notCheckNum: 0,
+      checkNum: 0
    },
 
    /**

@@ -1,16 +1,17 @@
 <!--index.wxml-->
 <scroll-view scroll-y="{{detailPage === ''}}" class="container" bindscroll="containerScroll" bindscrolltolower="touchBottom">
    <header initButton="{{headerBtns}}" id="header" bindbtntap="headBtn"></header>
-   <view class="search-frame" id="search" wx:if="{{!showSearchTitle}}">
+   <view class="search-frame" id="search" wx:if="{{!showSearchTitle}}" wx:if="{{!isActivity}}">
       <search url="{{bannerUrl}}" linkId="{{bannerId}}" bindsearch="doSearch" bindtoggleCalendar="toggleCalendar" id="search"></search>
    </view>
-   <view class="address-frame {{addressFixed ? 'address-frame-fixed' : ''}}" id="address" wx:if="{{!showSearchTitle}}">
+   <view class="address-frame {{addressFixed ? 'address-frame-fixed' : ''}}" id="address" wx:if="{{!showSearchTitle}}" wx:if="{{!isActivity}}">
       <address hasbg="{{addressFixed}}" list="{{citysList}}" id="{{cityID}}" bindchange="cityChange"></address>
    </view>
    <view class="search-title" wx:if="{{showSearchTitle}}">
       <view>{{searchTitle}}</view>
       <view>搜索结果</view>
    </view>
+   <image src="{{acticityLogo}}" mode="widthFix" class="acticity-logo" wx:if="{{isActivity}}"></image>
    <view class="pro-list">
       <view class="{{item.cate === 'activity' ? 'item-ticket-frame' : 'item-frame'}}"
             wx:for="{{listData}}"

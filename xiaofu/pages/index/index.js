@@ -9,6 +9,8 @@ Page({
 		userInfo: {},
 		hasUserInfo: false,
 		canIUse: wx.canIUse('button.open-type.getUserInfo'),
+      isActivity: false,
+      acticityLogo: app.globalData.acticityLogo,
 		indexScroll: true,
 		isLoading: true,
 		selectedDate: '',
@@ -38,7 +40,9 @@ Page({
       isLoadover: false
 	},
 	onLoad: function (options) {
+	   console.log(options)
 		const activityID = options.id || ''
+		const acticityLogo = options.src || ''
 		let cityID = 0
 		if (activityID === '') {
 			this.getAddressData()
@@ -50,12 +54,16 @@ Page({
 		}
 		this.setData({
 			activityID,
+         isActivity: activityID !== '',
+         acticityLogo
 			// cityID
 		})
 		this.getListData()
+      if (!this.data.isActivity) {
+         this.getComponentsSize()
+      }
 	},
 	onShow () {
-		this.getComponentsSize()
       app.$watch('drinkParams', (val, old) => { // 监听选择的特饮票数
          this.setData({
             drinkParams: val
@@ -84,28 +92,25 @@ Page({
 	},
 	// 响应顶部按钮点击
 	headBtn (e) {
-	   console.log(e)
 		if (e.detail === 'close') {
 		   if (this.data.detailPage === 'detail') { // 在详情页
-            if (this.data.detailData === null) { // 没有打开详情
-               if (this.data.showSearchTitle) { // 关闭搜索结果
-                  this.setData({
-                     page: 1,
-                     listData: [],
-                     headerBtns: ['menu'],
-                     showSearchTitle: false,
-                     searchTitle: '',
-                     keyword: '',
-                     selectedDate: '',
-                  })
-                  this.getListData()
-               }
-            } else { // 打开
-               this.closeDetail()
-            }
+            this.closeDetail()
          } else if (this.data.detailPage === 'calendar') { // 打开了日历页
             const search = this.selectComponent('#search')
             search.hideCalendar()
+         } else if (this.data.detailPage === '') { // 打开的搜索页
+            if (this.data.showSearchTitle) { // 关闭搜索结果
+               this.setData({
+                  page: 1,
+                  listData: [],
+                  headerBtns: ['menu'],
+                  showSearchTitle: false,
+                  searchTitle: '',
+                  keyword: '',
+                  selectedDate: '',
+               })
+               this.getListData()
+            }
          }
 		} else if (e.detail === 'arrow') {
 			const ticket = this.selectComponent("#ticket")
@@ -380,7 +385,7 @@ Page({
 		this.setData({
 			page: 1,
          listData: [],
-         headerBtns: ['menu', 'close'],
+         headerBtns: ['close'],
          showSearchTitle: true,
          searchTitle: title,
 			keyword: e.detail.keywords,

@@ -6,7 +6,7 @@
             <view class="check-icon" wx:if="{{itemData.is_check == '1'}}"></view>
             <view class="">
                 <view class="top {{itemData.is_check == '1' ? '' : 'shadow-frame'}}">
-                    <view class="frame1 check-frame1" style="background-color: #f6f6f6;"  wx:if="{{itemData.is_check == '1'}}">
+                    <view class="frame1 check-frame1" style="background-color: #f3f3f3;"  wx:if="{{itemData.is_check == '1'}}">
                         <view class="line1">已兑换</view>
                         <text class="ids">{{itemData.order_num}}</text>
                     </view>
@@ -34,6 +34,10 @@
                 </view>
             </view>
         </view>
-        <view class="hint-section">一个二维码对应一张门票，请提前将二维码给到同行伙伴，到活动现场后，将本二维码出示给工作人员用于验票进场</view>
+       <view class="check-infos">
+          <view>未验票<text>{{notCheckNum < 10 ? 0 : ''}}{{notCheckNum}}</text></view>
+          <view>已验票<text>{{checkNum < 10 ? 0 : ''}}{{checkNum}}</text></view>
+       </view>
+        <view class="hint-section">一个二维码对应一张或多张特饮兑换券，到活动现场后，将本二维码出示给工作人员用于兑换特饮。</view>
     </view>
 </view>

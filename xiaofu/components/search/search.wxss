@@ -1,8 +1,7 @@
-.c-search { min-height: 1280rpx; background: #002ab0; position: relative; overflow: hidden;}
-.c-search .logo { width: 440rpx; position: absolute; top: 0; left: 0; z-index: 0;}
-.c-search .title { width: 400rpx; margin: 90rpx 0 50rpx 170rpx}
+.c-search { min-height: 1280rpx; background: #002bb0; position: relative; overflow: hidden;}
+.c-search .logo { width: 100%; position: absolute; top: 0; left: 0; z-index: 1;}
 
-.c-search-frame { width: 720rpx; height: 474rpx; position: relative; margin: 0 auto; z-index: 10;}
+.c-search-frame { width: 720rpx; height: 474rpx; position: relative; margin: 260rpx auto 0 auto; z-index: 10;}
 .c-search-frame .bg { width: 100%; height: 100%;}
 
 .c-search-keywords { display: flex; align-items: center; position: absolute; top: 74rpx; left: 110rpx;}
@@ -14,6 +13,6 @@
 .c-search-date .btn-date { width: 80rpx; height: 80rpx; background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC0AAAAqCAYAAAAnH9IiAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAoxJREFUeNrUWetxgzAMdnL5HzYoG8QblG6QDeINmk5QNijdgEzQbFAyQckEpRs4E1D7Kq5ChzE2z+hORzhD/EWPT7KyKsuS9ZBQaeHxXqBU+m667gFYKP2GqyvgTGnqvbO2tIfysi7c4d0cvZf47O9r6cBy3yY79JlPHR6zyaZlLQI1JSCN78gzkWPDWg6xL7vEdKxUlsuRVGmAMa4Q5VVZvVtgRNzAk9r6NdA5Afyj9GzgU+3WA7o/OfD1K9nDRH17gucGiVvgkMASW2gnIs9HDpSFJeuwj6TPV4vSAfCUoJtqQrSGWNkid8UdXCyJ21xK+ZUwhE1yCL//sFHIj54VSoCHuGNFC6Aqpg7vYM9mG1LNXJqYtCVRbV6K5mqYWI+NZZ9N77KM9wUdgqvDewCtGaaEfvoTrhIKAu1fyo4ajQk6QVVNU+QFaE/T5ofS49IsrcvoMyrdODwuyAsVI+leZtWiJ/Rd2VigBbKwIGxQ3W8bwqRJjtC/XF2PbD6WZsDPVApkbd7he94grPZjh8cjcnuTZB1Bpyg/iqnYo09xiKHl7NrnzF5cAsQu8VTs0VcEJOrNkBeLBH1EMT1Zw3SzJFpoYYwHkoiTgM4t4MKW5h5zfD4HaNEwVeKIEnPDHIW5VL6hQKeo6iXIshytmZJs53DEGtzS7/D5AN2dLg5fCJRoSDLueC4cnD00A7xAbDKUXPr+yWBl3yOd8yzP1p4myIo261Xd3mCtqexIWbbkHLuS1kBnZBQVsOWJqHkN5goFmVKyBakgE6awWtiThbNenBls0DBjTOmoNyWTUIaa+jmEo3FdNU77G/KQX5eUy5QcD9ZNc7PzQsAWENPM9E8Aa+kX5pDCdBT7FWAAU8zxPPG+pAoAAAAASUVORK5CYII=) no-repeat; background-position: center center; background-size: 44rpx;}
 .c-search-date .btn-cover { width: 654rpx; height: 120rpx; background-color: rgba(255, 0, 0, 0); position: absolute; top: -20rpx; left: -75rpx;}
 
-.c-search-banner { margin-top: -360rpx; position: relative; z-index: 0;}
+.c-search-banner { margin-top: -380rpx; position: relative; z-index: 0;}
 
 .datepicker-frame { width: 100%; position: fixed; top: 120rpx; left: 0; z-index: 100}

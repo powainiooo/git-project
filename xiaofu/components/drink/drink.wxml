@@ -1,6 +1,5 @@
 <scroll-view scroll-y class="drinks">
-   <image src="../../res/images/drink-logo.png" class="drinks-logo" mode="widthFix"></image>
-   <image src="../../res/images/drink-title.png" class="drinks-title" mode="widthFix"></image>
+   <image src="../../res/images/drink-banner.png" class="drinks-logo" mode="widthFix"></image>
    <view class="drinks-list">
       <list-item wx:for="{{listData}}"
                  wx:for-item="item"

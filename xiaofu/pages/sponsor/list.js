@@ -40,7 +40,13 @@ Page({
    onReady: function () {
 
    },
-
+   toIndex (e) {
+      const item = e.currentTarget.dataset.item
+      const src = this.data.imgSrc + item.logo_img
+      wx.navigateTo({
+        url: `/pages/index/index?id=${item.mid}&src=${src}`
+      })
+   },
    /**
    * 生命周期函数--监听页面显示
    */

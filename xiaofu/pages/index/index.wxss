@@ -17,3 +17,4 @@
 .search-title view { font-size: 32rpx; color: #9ea09f;}
 .search-title view:first-child { font-size: 40rpx;}
 
+.acticity-logo { width: 230rpx; margin: 120rpx auto -120rpx auto; display: block;}

@@ -1,4 +1,4 @@
-<view style="">
+<view style="background-color: #f3f3f3">
    <ticket itemData="{{ticketData}}" fold="{{fold}}" hideImgs="{{showItem === 'buy' || showItem === 'drink'}}"></ticket>
    <detail itemData="{{detailData}}" wx:if="{{showItem === 'detail'}}" showInfos="{{showItem === 'detail'}}"></detail>
    <buy itemData="{{detailData}}" wx:if="{{showItem === 'buy' || showItem === 'drink'}}" style="display: {{showItem === 'drink' ? 'none' : 'block'}}" id="buy"></buy>

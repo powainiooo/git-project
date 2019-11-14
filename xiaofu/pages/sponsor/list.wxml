@@ -3,14 +3,15 @@
   <header-view></header-view>
   <view class='body'>
     <view class='sponsor-list'>
-      <navigator wx:for="{{dataList}}"
-      wx:for-index="index"
-      wx:for-item="item"
-      wx:key="{{index}}"
-      url="/pages/index/index?id={{item.mid}}"
-      hover-class='none'>
+      <view wx:for="{{dataList}}"
+            wx:for-index="index"
+            wx:for-item="item"
+            wx:key="{{index}}"
+            data-item="{{item}}"
+            bindtap="toIndex"
+            hover-class='none'>
         <image src="{{imgSrc+item.logo_img}}" mode='aspectFit'></image>
-      </navigator>
+      </view>
     </view>
   </view>
 </view>

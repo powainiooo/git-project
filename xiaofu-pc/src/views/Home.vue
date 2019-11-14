@@ -28,7 +28,7 @@
 
 <template>
    <div class="container">
-      <search @search="doSearch" ref="search"></search>
+      <search @search="doSearch" ref="search" @taplogo="resetSearch"></search>
       <div class="right">
          <banner showCity
                  :id="bannerId"
@@ -218,6 +218,16 @@
             this.isLoading = true
             console.log('loadMore'+this.isLoading)
             this.page += 1
+            this.getListData()
+         },
+         resetSearch () {
+            this.keyword = ''
+            this.date = ''
+            this.city = ''
+            this.page = 1
+            this.listData = []
+            this.$refs.banner.resetCity()
+            this.$refs.search.reset()
             this.getListData()
          }
       }

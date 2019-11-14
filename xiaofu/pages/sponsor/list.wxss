@@ -1,3 +1,3 @@
 .sponsor-list{ display: flex; flex-wrap: wrap;}
-.sponsor-list navigator{ width: calc(100% / 3); height: 33.3vw; border: 1rpx solid #dcdcdc; display: flex; align-items: center; box-sizing: border-box;-webkit-tap-highlight-color: transparent; overflow: hidden;}
-.sponsor-list navigator image{ width: 230rpx; height: 140rpx; flex: 1;-webkit-tap-highlight-color: transparent;}
+.sponsor-list view{ width: calc(100% / 3); height: 33.3vw; border: 1rpx solid #dcdcdc; display: flex; align-items: center; box-sizing: border-box;-webkit-tap-highlight-color: transparent; overflow: hidden;}
+.sponsor-list view image{ width: 230rpx; height: 140rpx; flex: 1;-webkit-tap-highlight-color: transparent;}

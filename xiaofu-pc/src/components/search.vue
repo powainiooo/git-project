@@ -109,7 +109,7 @@
 
 <template>
    <aside class="aside-frame">
-      <div class="logo">
+      <div class="logo" @click="backIndex">
          <img src="@/assets/images/logo.png" />
       </div>
       <div class="aside-search" :style="searchStyle">
@@ -181,6 +181,9 @@
             this.keyword = ''
             this.date = ''
             this.$refs.picker.displayDate = ''
+         },
+         backIndex () {
+            this.$emit('taplogo')
          }
       }
    }

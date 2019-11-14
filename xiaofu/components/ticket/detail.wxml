@@ -1,5 +1,5 @@
 <view class="detail-frame">
-    <view style="background-color: #f6f6f6;padding-bottom: 180rpx; overflow: hidden; opacity: 0;" animation="{{detailAniData}}">
+    <view style="background-color: #f3f3f3;padding-bottom: 180rpx; overflow: hidden; opacity: 0;" animation="{{detailAniData}}">
         <view class="title" wx:if="{{itemData.person.length !== 0}}">艺人信息</view>
         <view class="actor-item"
               wx:if="{{itemData.person.length !== 0}}"

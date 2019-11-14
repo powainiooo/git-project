@@ -1,6 +1,5 @@
 <view class="c-search">
    <image src="../../res/images/go.png" mode="widthFix" class="logo"></image>
-   <image src="../../res/images/title-events.png" mode="widthFix" class="title"></image>
    <view class="c-search-frame">
       <image src="../../res/images/frame.png" class="bg"></image>
       <view class="c-search-keywords">

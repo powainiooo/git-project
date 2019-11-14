@@ -2,7 +2,7 @@
    <view class="address-selected {{fold ? 'address-selected-arrow' : ''}}" bindtap="toggle">{{selected}}</view>
    <scroll-view class="address-list {{fold ? 'address-list-fold' : ''}}" scroll-x>
       <view class="list-frame" style="width: {{130 * list.length}}rpx">
-         <view class="address-list-item" wx:if="{{selected !== '全部'}}">全部</view>
+         <view class="address-list-item" wx:if="{{selected !== '全部'}}" data-item="{{allCity}}" bindtap="doChange">{{allCity.name}}</view>
          <view class="address-list-item"
                wx:if="{{selected !== item}}"
                wx:for="{{list}}"

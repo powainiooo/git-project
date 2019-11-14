@@ -10,7 +10,7 @@
     <view class="check-icon" wx:if="{{itemData.is_check == '1'}}"></view>
     <view class="">
         <view class="top {{itemData.child[itemIndex].is_check == '1' ? '' : 'shadow-frame'}}">
-            <view class="frame1 check-frame1" style="background-color: #f6f6f6;"  wx:if="{{itemData.child[itemIndex].is_check == '1'}}">
+            <view class="frame1 check-frame1" style="background-color: #f3f3f3;"  wx:if="{{itemData.child[itemIndex].is_check == '1'}}">
                 <view class="line1">已验票</view>
                 <text class="ids">{{itemData.order_num}}</text>
             </view>

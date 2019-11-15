@@ -1,12 +1,18 @@
 "use strict";
 
+var _regeneratorRuntime2 = _interopRequireDefault(require('../vendor.js')(2));
+
 var _core = _interopRequireDefault(require('../vendor.js')(0));
 
 var _store = _interopRequireDefault(require('../store/index.js'));
 
 var _api = require('../res/api.js');
 
+var _util = require('../res/util.js');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+var chooseLocation = (0, _util.promisify)(wx.chooseLocation);
 
 _core["default"].page({
   store: _store["default"],
@@ -14,11 +20,19 @@ _core["default"].page({
     layoutList: ['一居室', '二居室', '三居室'],
     buildingList: [],
     layout: '',
-    outBuild: '',
-    inBuild: '',
     area: '',
-    outAddress: '',
-    inAddress: ''
+    moveOut: {
+      index: '',
+      address: '',
+      lat: '',
+      lng: ''
+    },
+    moveIn: {
+      index: '',
+      address: '',
+      lat: '',
+      lng: ''
+    }
   },
   computed: {
     phone: function phone() {
@@ -53,10 +67,10 @@ _core["default"].page({
         order_num: this.orderNums,
         house_type: this.layoutList[this.layout],
         area: this.area,
-        s_address: this.outAddress,
-        f_address: this.inAddress,
-        s_floor: this.buildingList[this.outBuild],
-        f_floor: this.buildingList[this.inBuild]
+        s_address: this.moveOut.address,
+        f_address: this.moveIn.address,
+        s_floor: this.buildingList[this.moveOut.index],
+        f_floor: this.buildingList[this.moveIn.index]
       };
       (0, _api.createOrderTwo)(obj).then(function (res) {
         if (res.status === 0) {
@@ -65,23 +79,59 @@ _core["default"].page({
           });
         }
       });
+    },
+    openMap: function openMap(key) {
+      var res;
+      return _regeneratorRuntime2["default"].async(function openMap$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return _regeneratorRuntime2["default"].awrap(chooseLocation());
+
+            case 2:
+              res = _context.sent;
+              this["move".concat(key)].address = res.address;
+              this["move".concat(key)].lat = res.latitude;
+              this["move".concat(key)].lng = res.longitude;
+
+            case 6:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, null, this);
     }
   }
-}, {info: {"components":{},"on":{}}, handlers: {'10-18': {"tap": function proxy () {
+}, {info: {"components":{},"on":{}}, handlers: {'10-33': {"tap": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.openMap('Out')
+      })();
+    
+  }},'10-34': {"tap": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.openMap('In')
+      })();
+    
+  }},'10-35': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.doConfirm($event)
       })();
     
-  }},'10-19': {"tap": function proxy () {
+  }},'10-36': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.makePhone($event)
       })();
     
-  }}}, models: {'49': {
+  }}}, models: {'69': {
       type: "change",
       expr: "layout",
       handler: function set ($v) {
@@ -89,7 +139,7 @@ _core["default"].page({
         _vm.layout = $v;
       
     }
-    },'50': {
+    },'70': {
       type: "input",
       expr: "area",
       handler: function set ($v) {
@@ -97,36 +147,36 @@ _core["default"].page({
         _vm.area = $v;
       
     }
-    },'51': {
+    },'71': {
       type: "input",
-      expr: "outAddress",
+      expr: "moveOut.address",
       handler: function set ($v) {
       var _vm=this;
-        _vm.outAddress = $v;
+        _vm.$set(_vm.moveOut, "address", $v);
       
     }
-    },'52': {
+    },'72': {
       type: "change",
-      expr: "outBuild",
+      expr: "moveOut.index",
       handler: function set ($v) {
       var _vm=this;
-        _vm.outBuild = $v;
+        _vm.$set(_vm.moveOut, "index", $v);
       
     }
-    },'53': {
+    },'73': {
       type: "input",
-      expr: "inAddress",
+      expr: "moveIn.address",
       handler: function set ($v) {
       var _vm=this;
-        _vm.inAddress = $v;
+        _vm.$set(_vm.moveIn, "address", $v);
       
     }
-    },'54': {
+    },'74': {
       type: "change",
-      expr: "inBuild",
+      expr: "moveIn.index",
       handler: function set ($v) {
       var _vm=this;
-        _vm.inBuild = $v;
+        _vm.$set(_vm.moveIn, "index", $v);
       
     }
     }} });

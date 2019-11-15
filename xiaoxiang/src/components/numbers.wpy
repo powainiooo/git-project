@@ -13,20 +13,20 @@
 </style>
 <template>
 <div class="input-container">
-   <div class="title">
-      <text>拆件</text>
+   <div class="title" @tap="hidden = !hidden">
+      <text>{{itemData.name}}</text>
       <div class="icons icon-add"></div>
    </div>
-   <div class="frame">
-      <div class="li numbers-item">
-         <div class="numbers-item-name" :class="{'numbers-item-name-active':checked}" @tap="toggle">
+   <div class="frame" v-show="!hidden">
+      <div class="li numbers-item" v-for="(item, index) in list">
+         <div class="numbers-item-name" :class="{'numbers-item-name-active':item.checked}" @tap="toggle(index)">
             <div class="icons checkbox"></div>
-            <text>燃气灶油烟机套</text>
+            <text>{{item.name}}</text>
          </div>
          <div class="operas">
-            <div class="btn" @tap="doReduce"><i class="icons icon-reduce"></i></div>
-            <div class="nums">{{nums}}</div>
-            <div class="btn" @tap="doAdd"><i class="icons icon-add-min"></i></div>
+            <div class="btn" @tap="doReduce(index)"><i class="icons icon-reduce"></i></div>
+            <div class="nums">{{item.nums}}</div>
+            <div class="btn" @tap="doAdd(index)"><i class="icons icon-add-min"></i></div>
          </div>
       </div>
    </div>
@@ -38,22 +38,44 @@
 import wepy from '@wepy/core'
 
 wepy.component({
+   props: {
+      itemData: {
+         type: Object,
+         default: () => {}
+      }
+   },
    data: {
+      hidden: true,
       checked: false,
-      nums: 0
+      nums: 0,
+      list: []
+   },
+   watch: {
+      itemData (val) {
+         if (val.sub_button) {
+            for (let p in val.sub_button) {
+               this.list.push({
+                  name: val.sub_button[p].name,
+                  price: parseInt(val.sub_button[p].price),
+                  nums: 0,
+                  checked: false
+               })
+            }
+         }
+      }
    },
    attached() {
    },
    methods: {
-      toggle () {
-         this.checked = !this.checked
+      toggle (i) {
+         this.list[i].checked = !this.list[i].checked
       },
-      doReduce () {
-         if (this.nums === 0) return
-         this.nums -= 1
+      doReduce (i) {
+         if (this.list[i].nums === 0) return
+         this.list[i].nums -= 1
       },
-      doAdd () {
-         this.nums += 1
+      doAdd (i) {
+         this.list[i].nums += 1
       }
    }
 })

@@ -44,7 +44,7 @@ _core["default"].page({
         _vm.doLogin($event)
       })();
     
-  }}}, models: {'4': {
+  }}}, models: {'6': {
       type: "input",
       expr: "name",
       handler: function set ($v) {
@@ -52,7 +52,30 @@ _core["default"].page({
         _vm.name = $v;
       
     }
-    },'5': {
+    },'7': {
+      type: "input",
+      expr: "phone",
+      handler: function set ($v) {
+      var _vm=this;
+        _vm.phone = $v;
+      
+    }
+    }} }, {info: {"components":{},"on":{}}, handlers: {'11-0': {"tap": function proxy () {
+    var $event = arguments[arguments.length - 1];
+    var _vm=this;
+      return (function () {
+        _vm.doLogin($event)
+      })();
+    
+  }}}, models: {'6': {
+      type: "input",
+      expr: "name",
+      handler: function set ($v) {
+      var _vm=this;
+        _vm.name = $v;
+      
+    }
+    },'7': {
       type: "input",
       expr: "phone",
       handler: function set ($v) {

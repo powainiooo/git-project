@@ -3,13 +3,19 @@
 * z-upload-style2 实线样式
 * z-upload-readonly 如果只展示图片不适用上传功能 添加此class
 * */
-function initUpload(id) {
+function initUpload(id, mutil) {
 	var frame = $(id)
 	var input = frame.find('input')
-	var img = frame.find('img')
-	var imgs = frame.find('.imgs')
-	frame.on('click', function () {
-		if (!frame.hasClass('z-upload-readonly')) {
+	var img
+	var btn = frame.find('.z-upload')
+	mutil = mutil ? true : false
+	if (mutil) {
+		img = frame.find('.z-upload-mutil-list')
+	} else {
+		img = frame.find('img')
+	}
+	btn.on('click', function () {
+		if (!btn.hasClass('z-upload-readonly')) {
 			input.click()
 		}
 	})
@@ -18,28 +24,25 @@ function initUpload(id) {
 	})
 	input.on('change', function (e) {
 		var files = e.currentTarget.files
-		if (img.length === 1) {
+		if (!mutil) {
 			var reader = new FileReader()
 			reader.readAsDataURL(files[0])
 			reader.onload = function (ev) {
 				img.attr('src', ev.currentTarget.result)
 				frame.addClass('z-upload-img')
 			}
-		}
-		if (imgs.length === 1) {
-			imgs.html('')
-			frame.addClass('z-upload-img')
+		} else {
+			img.html('')
 			for (var item in files) {
 				if (item === 'length') return
 				var reader = new FileReader()
 				reader.readAsDataURL(files[item])
 				reader.onload = function (ev) {
 					// img.attr('src', ev.currentTarget.result)
-					imgs.append('<img src="'+ ev.currentTarget.result +'" />')
+					img.append('<li><img src="'+ ev.currentTarget.result +'" /></li>')
 				}
 			}
 		}
-
 	})
 }
 

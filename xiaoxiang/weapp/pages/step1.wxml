@@ -8,13 +8,13 @@
             
                
             
-            <picker range="{{layoutList}}" value="{{ layout }}" bindchange="_proxy" data-model-id="49" class="input {{ [ layout === \'\' ? 'input-placeholder' : '' ] }}">
+            <picker range="{{layoutList}}" value="{{ layout }}" bindchange="_proxy" data-model-id="69" class="input {{ [ layout === \'\' ? 'input-placeholder' : '' ] }}">
                <view>{{layout === '' ? '选择户型' : layoutList[layout]}}</view>
             </picker>
          </view>
          <view class="li">
             <view class="name">面积</view>
-            <input type="number" placeholder="输入面积" placeholder-style="color: #999999" value="{{ area }}" bindinput="_proxy" data-model-id="50" class="input"></input>
+            <input type="number" placeholder="输入面积" placeholder-style="color: #999999" value="{{ area }}" bindinput="_proxy" data-model-id="70" class="input"></input>
          </view>
       </view>
    </view>
@@ -24,12 +24,12 @@
       <view class="frame">
          <view class="li">
             <view class="name">搬出</view>
-            <input placeholder="填写地址" placeholder-style="color: #999999" value="{{ outAddress }}" bindinput="_proxy" data-model-id="51" class="input"></input>
+            <input placeholder="填写地址" placeholder-style="color: #999999" value="{{ moveOut.address }}" bindinput="_proxy" data-model-id="71" data-wpy-evt="10-33" bindtap="_proxy" class="input"></input>
          </view>
          <view class="li">
             <view class="name">楼层</view>
-            <picker range="{{buildingList}}" value="{{ outBuild }}" bindchange="_proxy" data-model-id="52" class="input {{ [ outBuild === \'\' ? 'input-placeholder' : '' ] }}">
-               <view>{{outBuild === '' ? '选择楼层' : buildingList[outBuild]}}</view>
+            <picker range="{{buildingList}}" value="{{ moveOut.index }}" bindchange="_proxy" data-model-id="72" class="input {{ [ moveOut.index === \'\' ? 'input-placeholder' : '' ] }}">
+               <view>{{moveOut.index === '' ? '选择楼层' : buildingList[moveOut.index]}}</view>
             </picker>
          </view>
       </view>
@@ -40,12 +40,12 @@
       <view class="frame">
          <view class="li">
             <view class="name">搬入</view>
-            <input placeholder="填写地址" placeholder-style="color: #999999" value="{{ inAddress }}" bindinput="_proxy" data-model-id="53" class="input"></input>
+            <input placeholder="填写地址" placeholder-style="color: #999999" value="{{ moveIn.address }}" bindinput="_proxy" data-model-id="73" data-wpy-evt="10-34" bindtap="_proxy" class="input"></input>
          </view>
          <view class="li">
             <view class="name">楼层</view>
-            <picker range="{{buildingList}}" value="{{ inBuild }}" bindchange="_proxy" data-model-id="54" class="input {{ [ inBuild === \'\' ? 'input-placeholder' : '' ] }}">
-               <view>{{inBuild === '' ? '选择楼层' : buildingList[inBuild]}}</view>
+            <picker range="{{buildingList}}" value="{{ moveIn.index }}" bindchange="_proxy" data-model-id="74" class="input {{ [ moveIn.index === \'\' ? 'input-placeholder' : '' ] }}">
+               <view>{{moveIn.index === '' ? '选择楼层' : buildingList[moveIn.index]}}</view>
             </picker>
          </view>
       </view>
@@ -53,7 +53,7 @@
    <view class="hr"></view>
    <view class="price-line">基础价格预估　￥0</view>
    <view class="hr"></view>
-   <button data-wpy-evt="10-18" bindtap="_proxy" class="btn btn-step">下一步</button>
+   <button data-wpy-evt="10-35" bindtap="_proxy" class="btn btn-step">下一步</button>
    <view class="hint">备注：停车距离超过100米需要增加费用，具体增加费用请通过人工客服咨询。</view>
-   <view data-wpy-evt="10-19" bindtap="_proxy" class="btn-phone">电话下单：{{phone}}</view>
+   <view data-wpy-evt="10-36" bindtap="_proxy" class="btn-phone">电话下单：{{phone}}</view>
 </view>

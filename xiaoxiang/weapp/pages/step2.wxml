@@ -1,12 +1,12 @@
 
 <view>
    <view class="tab">
-      <view data-wpy-evt="12-0" bindtap="_proxy" class="tab-item {{ [ page === \'standard\' ? 'active' : '' ] }}">标准下单</view>
-      <view data-wpy-evt="12-1" bindtap="_proxy" class="tab-item {{ [ page === \'picture\' ? 'active' : '' ] }}">图片下单</view>
+      <view data-wpy-evt="12-27" bindtap="_proxy" class="tab-item {{ [ page === \'standard\' ? 'active' : '' ] }}">标准下单</view>
+      <view data-wpy-evt="12-28" bindtap="_proxy" class="tab-item {{ [ page === \'picture\' ? 'active' : '' ] }}">图片下单</view>
    </view>
    
    <view wx:if="{{ page === 'standard' }}">
-      <numbers bind_init="_initComponent"></numbers>
+      <numbers bind_init="_initComponent" wx:for="{{ configData }}" wx:for-index="index" wx:for-item="item" wx:key="index" key="{{ index }}" itemData="{{ item }}"></numbers>
    </view>
    
    <view wx:if="{{ page === 'picture' }}" class="input-container">
@@ -22,5 +22,5 @@
    <view class="hr"></view>
    <button class="btn btn-step">立即下单</button>
    <view class="hint">备注：工艺品易碎品请咨询人工客服</view>
-   <view data-wpy-evt="12-2" bindtap="_proxy" class="btn-phone">电话下单：{{phone}}</view>
+   <view data-wpy-evt="12-29" bindtap="_proxy" class="btn-phone">电话下单：{{phone}}</view>
 </view>

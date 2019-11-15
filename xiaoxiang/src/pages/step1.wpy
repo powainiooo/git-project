@@ -27,12 +27,12 @@
       <div class="frame">
          <div class="li">
             <div class="name">搬出</div>
-            <input placeholder="填写地址" class="input" placeholder-style="color: #999999" v-model="outAddress"/>
+            <input placeholder="填写地址" class="input" placeholder-style="color: #999999" v-model="moveOut.address" @tap="openMap('Out')"/>
          </div>
          <div class="li">
             <div class="name">楼层</div>
-            <select class="input" :class="{'input-placeholder':outBuild === ''}" range="{{buildingList}}" v-model="outBuild">
-               <option>{{outBuild === '' ? '选择楼层' : buildingList[outBuild]}}</option>
+            <select class="input" :class="{'input-placeholder':moveOut.index === ''}" range="{{buildingList}}" v-model="moveOut.index">
+               <option>{{moveOut.index === '' ? '选择楼层' : buildingList[moveOut.index]}}</option>
             </select>
          </div>
       </div>
@@ -43,12 +43,12 @@
       <div class="frame">
          <div class="li">
             <div class="name">搬入</div>
-            <input placeholder="填写地址" class="input" placeholder-style="color: #999999" v-model="inAddress"/>
+            <input placeholder="填写地址" class="input" placeholder-style="color: #999999" v-model="moveIn.address" @tap="openMap('In')"/>
          </div>
          <div class="li">
             <div class="name">楼层</div>
-            <select class="input" :class="{'input-placeholder':inBuild === ''}" range="{{buildingList}}" v-model="inBuild">
-               <option>{{inBuild === '' ? '选择楼层' : buildingList[inBuild]}}</option>
+            <select class="input" :class="{'input-placeholder':moveIn.index === ''}" range="{{buildingList}}" v-model="moveIn.index">
+               <option>{{moveIn.index === '' ? '选择楼层' : buildingList[moveIn.index]}}</option>
             </select>
          </div>
       </div>
@@ -66,18 +66,27 @@
 import wepy from '@wepy/core'
 import store from '../store'
 import {getHouseType, createOrderTwo} from '@/res/api.js'
-
+import {promisify} from '@/res/util.js'
+const chooseLocation = promisify(wx.chooseLocation)
 wepy.page({
    store,
    data: {
       layoutList: ['一居室', '二居室', '三居室'],
       buildingList: [],
       layout: '',
-      outBuild: '',
-      inBuild: '',
       area: '',
-      outAddress: '',
-      inAddress: ''
+      moveOut: {
+         index: '',
+         address: '',
+         lat: '',
+         lng: ''
+      },
+      moveIn: {
+         index: '',
+         address: '',
+         lat: '',
+         lng: ''
+      }
    },
    computed: {
       phone () {
@@ -109,10 +118,10 @@ wepy.page({
             order_num: this.orderNums,
             house_type: this.layoutList[this.layout],
             area: this.area,
-            s_address: this.outAddress,
-            f_address: this.inAddress,
-            s_floor: this.buildingList[this.outBuild],
-            f_floor: this.buildingList[this.inBuild]
+            s_address: this.moveOut.address,
+            f_address: this.moveIn.address,
+            s_floor: this.buildingList[this.moveOut.index],
+            f_floor: this.buildingList[this.moveIn.index]
          }
          createOrderTwo(obj).then(res => {
             if (res.status === 0) {
@@ -121,6 +130,12 @@ wepy.page({
                })
             }
          })
+      },
+      async openMap (key) {
+         const res = await chooseLocation()
+         this[`move${key}`].address = res.address
+         this[`move${key}`].lat = res.latitude
+         this[`move${key}`].lng = res.longitude
       }
    }
 })

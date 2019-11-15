@@ -29,6 +29,7 @@
 .dictionary-form .form-item-upload .name { align-self: baseline}
 .dictionary-form .form-item-upload .hint { align-self: flex-end;  font-size: 12px; color: #898989; margin-left: 30px;}
 .dictionary-form .form-item-upload .z-upload { width: 150px; height: 150px;}
+.dictionary-form .form-item-upload .z-upload-mutil .z-upload { width: 60px; height: 60px;}
 
 .dictionary-form-btns { width: 400px; display: flex; justify-content: space-between; margin: 0 auto 60px auto;}
 .dictionary-form-btns button { width: 140px; height: 40px; border-radius: 4px; font-size: 14px; color: #ffffff;}

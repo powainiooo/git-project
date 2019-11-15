@@ -1,10 +1,10 @@
 <!--index.wxml-->
 <scroll-view scroll-y="{{detailPage === ''}}" class="container" bindscroll="containerScroll" bindscrolltolower="touchBottom">
    <header initButton="{{headerBtns}}" id="header" bindbtntap="headBtn"></header>
-   <view class="search-frame" id="search" wx:if="{{!showSearchTitle}}" wx:if="{{!isActivity}}">
+   <view class="search-frame" id="search" wx:if="{{!showSearchTitle && !isActivity}}">
       <search url="{{bannerUrl}}" linkId="{{bannerId}}" bindsearch="doSearch" bindtoggleCalendar="toggleCalendar" id="search"></search>
    </view>
-   <view class="address-frame {{addressFixed ? 'address-frame-fixed' : ''}}" id="address" wx:if="{{!showSearchTitle}}" wx:if="{{!isActivity}}">
+   <view class="address-frame {{addressFixed ? 'address-frame-fixed' : ''}}" id="address" wx:if="{{!showSearchTitle && !isActivity}}">
       <address hasbg="{{addressFixed}}" list="{{citysList}}" id="{{cityID}}" bindchange="cityChange"></address>
    </view>
    <view class="search-title" wx:if="{{showSearchTitle}}">

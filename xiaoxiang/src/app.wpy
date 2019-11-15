@@ -31,8 +31,8 @@ wepy.app({
          console.log('app-launch event emitted, the params are:')
          console.log(args)
       })
-      this.onlogin()
-      this.getSetting()
+      // this.onlogin()
+      // this.getSetting()
    },
    methods: {
       // 登录
@@ -73,8 +73,8 @@ wepy.app({
    {
       "pages": [
          "pages/step1",
-         "pages/login",
          "pages/step2",
+         "pages/login",
          "pages/index"
       ],
       "window": {

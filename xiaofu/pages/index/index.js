@@ -227,10 +227,14 @@ Page({
       params.openid = app.globalData.userOpenID
       params.city = app.globalData.city
       params.drinks = this.data.drinkParams
+      console.log(params)
+      console.log('create_order')
+
       wx.request({
          url: ajaxSrc + '/create_order',
          data: params,
          success: function (res) {
+            console.log(res)
             if (res.data.status !== 0) {
                wx.showToast({
                   image: '../../res/images/warn.png',

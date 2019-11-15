@@ -20,18 +20,39 @@
 </head>
 <body>
 <div class="clearfix">
-   <div class="home-right" style="margin-left: 20px;">
+   <div style="width: 70%; padding: 0 20px; float: left;">
       <div class="z-title">待办事项</div>
       <!--导航按钮-->
-      <ul class="nav-order">
-         <li>
-            <a href="#"><img src="../images/home-icon5.png"></a>
-            <span>6</span>
-         </li>
-         <li><a href="#"><img src="../images/home-icon6.png"></a></li>
-         <li><a href="#"><img src="../images/home-icon7.png"></a></li>
-         <li><a href="#"><img src="../images/home-icon8.png"></a></li>
-      </ul>
+      <div class="nav-order">
+         <a href="#">
+            <div>
+               <img src="../images/home-icon5.png">
+               <span>6</span>
+            </div>
+            <p>订单审核</p>
+         </a>
+         <a href="#">
+            <div>
+               <img src="../images/home-icon6.png">
+               <span>6</span>
+            </div>
+            <p>供货目录审核</p>
+         </a>
+         <a href="#">
+            <div>
+               <img src="../images/home-icon7.png">
+               <span>6</span>
+            </div>
+            <p>关系审核</p>
+         </a>
+         <a href="#">
+            <div>
+               <img src="../images/home-icon8.png">
+               <span>6</span>
+            </div>
+            <p>证件审核</p>
+         </a>
+      </div>
       <!-- 轮播图 -->
       <div class="swiper-container banner-swiper hospital-banner-swiper">
          <div class="swiper-wrapper">
@@ -41,70 +62,132 @@
          </div>
          <div class="swiper-pagination"></div>
       </div>
-
       <div class="clearfix">
-         <div class="fl" style="width: 50%; padding-right: 5px;">
-            <div class="z-title">公告通知</div>
-            <div class="z-card">
-               <div class="top-line">
-                  <ul>
-                     <li class="active">平台公告</li>
-                     <li>医院公告</li>
-                  </ul>
-                  <a href="javascript:;">
-                     <i class="icon-refresh"></i>
-                     <span>换一批</span>
-                  </a>
-               </div>
-               <ul class="home-news-list">
-                  <li>
-                     <img src="../images/img1.jpg" />
-                     <a href="#">新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻</a>
-                  </li>
-                  <li>
-                     <img src="../images/img1.jpg" />
-                     <a href="#">新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻</a>
-                  </li>
-                  <li>
-                     <img src="../images/img1.jpg" />
-                     <a href="#">新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻</a>
-                  </li>
-               </ul>
-               <div class="tc mt20 mb15">
-                  <a href="#" style="color: #47be9d">查看更多</a>
-               </div>
-            </div>
+         <div class="z-title fl">公告通知</div>
+         <a href="javascript:;" class="btn-refresh fr mt10">
+            <i class="icon-refresh"></i>
+            <span>换一批</span>
+         </a>
+      </div>
+      <div class="z-card">
+         <div class="top-line newTab">
+            <ul>
+               <li class="active">平台公告</li>
+               <li>医院公告</li>
+            </ul>
+            <a href="#" style="color: #47be9d">查看更多</a>
          </div>
-         <div class="fl" style="width: 50%; padding-left: 5px;">
-            <div class="z-title">热点新闻</div>
-            <div class="z-card">
-               <div class="top-line">
-                  <ul>
-                     <li>实事资讯</li>
-                  </ul>
-                  <a href="javascript:;">
-                     <i class="icon-refresh"></i>
-                     <span>换一批</span>
-                  </a>
-               </div>
-               <ul class="home-news-list">
-                  <li>
-                     <img src="../images/img1.jpg" />
-                     <a href="#">新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻</a>
-                  </li>
-                  <li>
-                     <img src="../images/img1.jpg" />
-                     <a href="#">新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻</a>
-                  </li>
-                  <li>
-                     <img src="../images/img1.jpg" />
-                     <a href="#">新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻</a>
-                  </li>
-               </ul>
-               <div class="tc mt20 mb15">
-                  <a href="#" style="color: #47be9d">查看更多</a>
-               </div>
-            </div>
+         <div class="newsContent">
+            <!--平台公告-->
+            <ul class="home-news-list">
+               <li>
+                  <img src="../images/img1.jpg" />
+                  <a href="#">1新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻</a>
+                  <p>发布于2019-11-12   19:00</p>
+               </li>
+               <li>
+                  <img src="../images/img1.jpg" />
+                  <a href="#">1新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻</a>
+                  <p>发布于2019-11-12   19:00</p>
+               </li>
+               <li>
+                  <img src="../images/img1.jpg" />
+                  <a href="#">1新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻</a>
+                  <p>发布于2019-11-12   19:00</p>
+               </li>
+               <li>
+                  <img src="../images/img1.jpg" />
+                  <a href="#">1新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻</a>
+                  <p>发布于2019-11-12   19:00</p>
+               </li>
+               <li>
+                  <img src="../images/img1.jpg" />
+                  <a href="#">1新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻</a>
+                  <p>发布于2019-11-12   19:00</p>
+               </li>
+               <li>
+                  <img src="../images/img1.jpg" />
+                  <a href="#">1新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻</a>
+                  <p>发布于2019-11-12   19:00</p>
+               </li>
+            </ul>
+            <!--医院公告-->
+            <ul class="home-news-list" style="display: none;">
+               <li>
+                  <img src="../images/img1.jpg" />
+                  <a href="#">1新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻</a>
+                  <p>发布于2019-11-12   19:00</p>
+               </li>
+               <li>
+                  <img src="../images/img1.jpg" />
+                  <a href="#">1新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻</a>
+                  <p>发布于2019-11-12   19:00</p>
+               </li>
+               <li>
+                  <img src="../images/img1.jpg" />
+                  <a href="#">1新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻</a>
+                  <p>发布于2019-11-12   19:00</p>
+               </li>
+               <li>
+                  <img src="../images/img1.jpg" />
+                  <a href="#">1新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻</a>
+                  <p>发布于2019-11-12   19:00</p>
+               </li>
+               <li>
+                  <img src="../images/img1.jpg" />
+                  <a href="#">1新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻</a>
+                  <p>发布于2019-11-12   19:00</p>
+               </li>
+               <li>
+                  <img src="../images/img1.jpg" />
+                  <a href="#">1新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻</a>
+                  <p>发布于2019-11-12   19:00</p>
+               </li>
+            </ul>
+         </div>
+      </div>
+   </div>
+   <div style="width: 30%; float: left">
+      <div class="z-title">热点新闻</div>
+      <div class="z-card">
+         <div class="top-line">
+            <ul>
+               <li style="color: #333333">实事资讯</li>
+            </ul>
+            <a href="javascript:;" class="btn-refresh">
+               <i class="icon-refresh"></i>
+               <span>换一批</span>
+            </a>
+         </div>
+         <ul class="home-news-list home-news-list2">
+            <li>
+               <img src="../images/img1.jpg" />
+               <a href="#">1新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻</a>
+               <p>发布于2019-11-12   19:00</p>
+            </li>
+            <li>
+               <img src="../images/img1.jpg" />
+               <a href="#">1新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻</a>
+               <p>发布于2019-11-12   19:00</p>
+            </li>
+            <li>
+               <img src="../images/img1.jpg" />
+               <a href="#">1新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻</a>
+               <p>发布于2019-11-12   19:00</p>
+            </li>
+            <li>
+               <img src="../images/img1.jpg" />
+               <a href="#">1新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻</a>
+               <p>发布于2019-11-12   19:00</p>
+            </li>
+            <li>
+               <img src="../images/img1.jpg" />
+               <a href="#">1新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻</a>
+               <p>发布于2019-11-12   19:00</p>
+            </li>
+         </ul>
+         <div class="tr mt20 mb15 mr20">
+            <a href="#" style="color: #47be9d">查看更多</a>
          </div>
       </div>
    </div>
@@ -112,15 +195,15 @@
 
 <script>
 
-   // 轮播图
-   var mySwiper = new Swiper ('.banner-swiper', {
-      autoplay: true,
-      loop: true, // 循环模式选项
-      // 如果需要分页器
-      pagination: {
-         el: '.swiper-pagination',
-      }
-   })
+// 轮播图
+var mySwiper = new Swiper ('.banner-swiper', {
+	autoplay: true,
+	loop: true, // 循环模式选项
+	// 如果需要分页器
+	pagination: {
+		el: '.swiper-pagination',
+	}
+})
 </script>
 </body>
 </html>

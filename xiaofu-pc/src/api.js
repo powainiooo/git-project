@@ -18,7 +18,7 @@ export const getProList = (params) => {
    })
 }
 
-// 获取城市 ${ajax}/city_banner /mock/list.json
+// 获取城市 ${ajax}/city_banner /mock/banner.json
 export const getCityBanner = (params) => {
    return new Promise((resolve, reject) => {
       axios.get(`${ajax}/city_banner`, {

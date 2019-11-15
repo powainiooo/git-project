@@ -11,7 +11,8 @@ Page({
       id: -1,
       detailData: null,
       headerBtns: ['share', 'close'],
-      detailPage: ''
+      detailPage: '',
+      drinkParams: [],
    },
    /**
    * 生命周期函数--监听页面加载
@@ -21,6 +22,13 @@ Page({
       this.data.id = options.id || options.scene
       // this.data.id = '1517'
       this.getDetailData()
+   },
+   onShow () {
+      app.$watch('drinkParams', (val, old) => { // 监听选择的特饮票数
+         this.setData({
+            drinkParams: val
+         })
+      })
    },
    // 获取详情数据
    getDetailData () {
@@ -98,6 +106,7 @@ Page({
       })
       params.openid = app.globalData.userOpenID
       params.city = app.globalData.city
+      params.drinks = this.data.drinkParams
       wx.request({
          url: ajaxSrc + '/create_order',
          data: params,

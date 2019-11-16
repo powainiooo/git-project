@@ -68,6 +68,17 @@ export const createOrderTwo = (data) => {
    })
 }
 
+// 生成订单3
+export const createOrderThree = (data) => {
+   return ajax({
+      url: `${ajaxUrl}/create_order_three`,
+      data,
+      header: {
+         'content-type': 'json'
+      }
+   })
+}
+
 // 获取户型
 export const getHouseType = (data) => {
    return ajax({

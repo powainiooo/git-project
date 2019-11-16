@@ -18,15 +18,15 @@
    <div class="input-container" v-if="page === 'picture'">
       <div class="title">上传图片/视频</div>
       <div class="frame">
-         <div class="li li2">
-            <upload></upload>
+         <div class="li li2" v-for="i in imgList" :key="i">
+            <upload :itemData="i"></upload>
          </div>
       </div>
    </div>
 
    <div class="price-line">最终价格预估　￥{{basePrice + price}}</div>
    <div class="hr"></div>
-   <button class="btn btn-step" @tap="countPrice">立即下单</button>
+   <button class="btn btn-step" @tap="doConfirm">立即下单</button>
    <div class="hint">备注：工艺品易碎品请咨询人工客服</div>
    <div class="btn-phone" @tap="makePhone">电话下单：{{phone}}</div>
 </div>
@@ -35,7 +35,7 @@
 <script>
 import wepy from '@wepy/core'
 import store from '../store'
-import {getMenuList} from '@/res/api.js'
+import {getMenuList, createOrderThree} from '@/res/api.js'
 
 wepy.page({
    store,
@@ -43,6 +43,7 @@ wepy.page({
       check: '',
       page: 'standard',
       menuList: [],
+      imgList: [],
       price: 0
    },
    computed: {
@@ -51,6 +52,9 @@ wepy.page({
       },
       basePrice () {
          return store.state.basePrice
+      },
+      orderNums () {
+         return store.state.orderNums
       }
    },
    onLoad() {
@@ -68,6 +72,9 @@ wepy.page({
       getMenuList () {
          getMenuList().then(res => {
             this.menuList = res.data.wxmenu
+            for (let p in res.data.imgmenu) {
+               this.imgList.push(res.data.imgmenu[p])
+            }
          })
       },
       countPrice () {
@@ -77,6 +84,55 @@ wepy.page({
                this.price += item.price
             }
          }
+      },
+      doConfirm () {
+         let wxmenu = []
+         let imgmenu = []
+         if (this.page === 'standard') {
+            for (let item of this.$children) {
+               if (item.$is === 'components/numbers') {
+                  // console.log(item)
+                  let list = {
+                     name: item.itemData.name,
+                     child: []
+                  }
+                  for (let child of item.list) {
+                     if (child.checked) {
+                        list.child.push({
+                           name: child.name,
+                           nums: child.nums
+                        })
+                     }
+                  }
+                  wxmenu.push(list)
+               }
+            }
+         } else if (this.page === 'picture') {
+            for (let item of this.$children) {
+               if (item.$is === 'components/upload') {
+                  let list = []
+                  for (let child of item.srcList) {
+                     list.push({
+                        type: child.type,
+                        url: child.url
+                     })
+                  }
+                  imgmenu.push(list)
+               }
+            }
+         }
+         console.log(wxmenu)
+         createOrderThree({
+            order_num: this.orderNums,
+            wxmenu,
+            imgmenu
+         }).then(res => {
+            if (res.status === 0) {
+               wx.navigateTo({
+                  url: '/pages/success'
+               })
+            }
+         })
       }
    }
 })

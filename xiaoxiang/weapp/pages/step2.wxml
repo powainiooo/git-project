@@ -1,26 +1,26 @@
 
 <view>
    <view class="tab">
-      <view data-wpy-evt="10-5" bindtap="_proxy" class="tab-item {{ [ page === \'standard\' ? 'active' : '' ] }}">标准下单</view>
-      <view data-wpy-evt="10-6" bindtap="_proxy" class="tab-item {{ [ page === \'picture\' ? 'active' : '' ] }}">图片下单</view>
+      <view data-wpy-evt="10-150" bindtap="_proxy" class="tab-item {{ [ page === \'standard\' ? 'active' : '' ] }}">标准下单</view>
+      <view data-wpy-evt="10-151" bindtap="_proxy" class="tab-item {{ [ page === \'picture\' ? 'active' : '' ] }}">图片下单</view>
    </view>
    
    <view wx:if="{{ page === 'standard' }}">
-      <numbers bind_init="_initComponent" wx:for="{{ menuList }}" wx:for-index="index" wx:for-item="item" wx:key="index" key="{{ index }}" itemData="{{ item }}" data-wpy-evt="10-7" bindcount="_proxy"></numbers>
+      <numbers bind_init="_initComponent" wx:for="{{ menuList }}" wx:for-index="index" wx:for-item="item" wx:key="index" key="{{ index }}" itemData="{{ item }}" data-wpy-evt="10-152" bindcount="_proxy"></numbers>
    </view>
    
    <view wx:if="{{ page === 'picture' }}" class="input-container">
       <view class="title">上传图片/视频</view>
       <view class="frame">
-         <view class="li li2">
-            <upload bind_init="_initComponent"></upload>
+         <view wx:for="{{ imgList }}" wx:for-index="index" wx:for-item="i" wx:key="index" key="{{ i }}" class="li li2">
+            <upload bind_init="_initComponent" itemData="{{ i }}"></upload>
          </view>
       </view>
    </view>
 
    <view class="price-line">最终价格预估　￥{{basePrice + price}}</view>
    <view class="hr"></view>
-   <button data-wpy-evt="10-8" bindtap="_proxy" class="btn btn-step">立即下单</button>
+   <button data-wpy-evt="10-153" bindtap="_proxy" class="btn btn-step">立即下单</button>
    <view class="hint">备注：工艺品易碎品请咨询人工客服</view>
-   <view data-wpy-evt="10-9" bindtap="_proxy" class="btn-phone">电话下单：{{phone}}</view>
+   <view data-wpy-evt="10-154" bindtap="_proxy" class="btn-phone">电话下单：{{phone}}</view>
 </view>

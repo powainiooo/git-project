@@ -1,12 +1,22 @@
 
 <view class="z-upload">
-   <view class="title"></view>
+   <view class="title">{{itemData}}</view>
    <view class="list">
       <view wx:for="{{ srcList }}" wx:for-index="index" wx:for-item="i" wx:key="index" key="{{ i }}" class="list-item">
-         <image src="{{ i }}" mode="aspectFill" class="img"></image>
+         <image src="{{ i.url }}" mode="aspectFill" wx:if="{{ i.type === 'image' }}" class="img"></image>
+         <video src="{{ i.url }}" controls="{{ false }}" wx:if="{{ i.type === 'video' }}" class="img"></video>
       </view>
-      <view data-wpy-evt="19-0" bindtap="_proxy" class="list-item">
+      <view data-wpy-evt="19-77" bindtap="_proxy" class="list-item">
          <view class="icons icon-add-large"></view>
+      </view>
+   </view>
+
+   <view wx:if="{{ showSelect }}" class="z-upload-select">
+      <view class="z-upload-select-frame">
+         <view data-wpy-evt="19-78" bindtap="_proxy" class="z-upload-select-btn">上传视频</view>
+         <view data-wpy-evt="19-79" bindtap="_proxy" class="z-upload-select-btn">上传图片</view>
+         <view class="hr"></view>
+         <view data-wpy-evt="19-80" bindtap="_proxy" class="z-upload-select-btn">取消</view>
       </view>
    </view>
 </view>

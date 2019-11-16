@@ -5,12 +5,12 @@
    <view class="index-frame">
       <view style="margin-top: 110rpx;" class="input {{name === '' ? 'input-placeholder' : ''}}">
          <view class="icons icon-person"></view>
-         <input placeholder="联系人" placeholder-style="color: #889286;" value="{{ name }}" bindinput="_proxy" data-model-id="6"></input>
+         <input placeholder="联系人" placeholder-style="color: #889286;" value="{{ name }}" bindinput="_proxy" data-model-id="23"></input>
       </view>
       <view class="input {{phone === '' ? 'input-placeholder' : ''}}">
          <view class="icons icon-phone"></view>
-         <input type="number" placeholder="联系方式" placeholder-style="color: #889286;" value="{{ phone }}" bindinput="_proxy" data-model-id="7"></input>
+         <input type="number" placeholder="联系方式" placeholder-style="color: #889286;" value="{{ phone }}" bindinput="_proxy" data-model-id="24"></input>
       </view>
-      <button data-wpy-evt="12-0" bindtap="_proxy" class="btn">立即预约{{userOpenID}}</button>
+      <button data-wpy-evt="12-2" bindtap="_proxy" class="btn">立即预约{{userOpenID}}</button>
    </view>
 </view>

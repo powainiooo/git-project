@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getMenuList = exports.getBasicAmount = exports.getHouseType = exports.createOrderTwo = exports.createOrderOne = exports.wxUserAdd = exports.getWeixin = void 0;
+exports.getMenuList = exports.getBasicAmount = exports.getHouseType = exports.createOrderThree = exports.createOrderTwo = exports.createOrderOne = exports.wxUserAdd = exports.getWeixin = void 0;
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
@@ -89,10 +89,23 @@ var createOrderTwo = function createOrderTwo(data) {
       'content-type': 'json'
     }
   });
-}; // 获取户型
+}; // 生成订单3
 
 
 exports.createOrderTwo = createOrderTwo;
+
+var createOrderThree = function createOrderThree(data) {
+  return ajax({
+    url: "".concat(ajaxUrl, "/create_order_three"),
+    data: data,
+    header: {
+      'content-type': 'json'
+    }
+  });
+}; // 获取户型
+
+
+exports.createOrderThree = createOrderThree;
 
 var getHouseType = function getHouseType(data) {
   return ajax({

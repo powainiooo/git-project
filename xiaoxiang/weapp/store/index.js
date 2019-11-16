@@ -16,7 +16,7 @@ _core["default"].use(_x["default"]);
 var _default = new _x["default"].Store({
   state: {
     phone: '0755-88888888',
-    ajaxSrc: 'http://move.pc-online.cc/mobile/applet/',
+    ajaxSrc: 'http://move.pc-online.cc/mobile/',
     userOpenID: '',
     orderNums: 'T2019111616231001',
     basePrice: 1200

@@ -58,56 +58,980 @@ _core["default"].component({
       this.$emit('count');
     }
   }
-}, {info: {"components":{},"on":{}}, handlers: {'18-8': {"tap": function proxy () {
+}, {info: {"components":{},"on":{}}, handlers: {'18-0': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.hidden = !_vm.hidden
       })();
     
-  }},'18-9': {"tap": function proxy (index) {
+  }},'18-1': {"tap": function proxy (index) {
     
     var _vm=this;
       return (function () {
         _vm.toggle(index)
       })();
     
-  }},'18-10': {"tap": function proxy (index) {
+  }},'18-2': {"tap": function proxy (index) {
     
     var _vm=this;
       return (function () {
         _vm.doReduce(index)
       })();
     
-  }},'18-11': {"tap": function proxy (index) {
+  }},'18-3': {"tap": function proxy (index) {
     
     var _vm=this;
       return (function () {
         _vm.doAdd(index)
       })();
     
-  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'18-8': {"tap": function proxy () {
+  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'18-0': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.hidden = !_vm.hidden
       })();
     
-  }},'18-9': {"tap": function proxy (index) {
+  }},'18-1': {"tap": function proxy (index) {
     
     var _vm=this;
       return (function () {
         _vm.toggle(index)
       })();
     
-  }},'18-10': {"tap": function proxy (index) {
+  }},'18-2': {"tap": function proxy (index) {
     
     var _vm=this;
       return (function () {
         _vm.doReduce(index)
       })();
     
-  }},'18-11': {"tap": function proxy (index) {
+  }},'18-3': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.doAdd(index)
+      })();
+    
+  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'18-0': {"tap": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.hidden = !_vm.hidden
+      })();
+    
+  }},'18-1': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.toggle(index)
+      })();
+    
+  }},'18-2': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.doReduce(index)
+      })();
+    
+  }},'18-3': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.doAdd(index)
+      })();
+    
+  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'18-0': {"tap": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.hidden = !_vm.hidden
+      })();
+    
+  }},'18-1': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.toggle(index)
+      })();
+    
+  }},'18-2': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.doReduce(index)
+      })();
+    
+  }},'18-3': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.doAdd(index)
+      })();
+    
+  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'18-0': {"tap": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.hidden = !_vm.hidden
+      })();
+    
+  }},'18-1': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.toggle(index)
+      })();
+    
+  }},'18-2': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.doReduce(index)
+      })();
+    
+  }},'18-3': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.doAdd(index)
+      })();
+    
+  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'18-0': {"tap": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.hidden = !_vm.hidden
+      })();
+    
+  }},'18-1': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.toggle(index)
+      })();
+    
+  }},'18-2': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.doReduce(index)
+      })();
+    
+  }},'18-3': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.doAdd(index)
+      })();
+    
+  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'18-0': {"tap": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.hidden = !_vm.hidden
+      })();
+    
+  }},'18-1': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.toggle(index)
+      })();
+    
+  }},'18-2': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.doReduce(index)
+      })();
+    
+  }},'18-3': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.doAdd(index)
+      })();
+    
+  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'18-0': {"tap": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.hidden = !_vm.hidden
+      })();
+    
+  }},'18-1': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.toggle(index)
+      })();
+    
+  }},'18-2': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.doReduce(index)
+      })();
+    
+  }},'18-3': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.doAdd(index)
+      })();
+    
+  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'18-0': {"tap": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.hidden = !_vm.hidden
+      })();
+    
+  }},'18-1': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.toggle(index)
+      })();
+    
+  }},'18-2': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.doReduce(index)
+      })();
+    
+  }},'18-3': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.doAdd(index)
+      })();
+    
+  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'18-0': {"tap": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.hidden = !_vm.hidden
+      })();
+    
+  }},'18-1': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.toggle(index)
+      })();
+    
+  }},'18-2': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.doReduce(index)
+      })();
+    
+  }},'18-3': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.doAdd(index)
+      })();
+    
+  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'18-0': {"tap": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.hidden = !_vm.hidden
+      })();
+    
+  }},'18-1': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.toggle(index)
+      })();
+    
+  }},'18-2': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.doReduce(index)
+      })();
+    
+  }},'18-3': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.doAdd(index)
+      })();
+    
+  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'18-0': {"tap": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.hidden = !_vm.hidden
+      })();
+    
+  }},'18-1': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.toggle(index)
+      })();
+    
+  }},'18-2': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.doReduce(index)
+      })();
+    
+  }},'18-3': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.doAdd(index)
+      })();
+    
+  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'18-0': {"tap": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.hidden = !_vm.hidden
+      })();
+    
+  }},'18-1': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.toggle(index)
+      })();
+    
+  }},'18-2': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.doReduce(index)
+      })();
+    
+  }},'18-3': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.doAdd(index)
+      })();
+    
+  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'18-0': {"tap": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.hidden = !_vm.hidden
+      })();
+    
+  }},'18-1': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.toggle(index)
+      })();
+    
+  }},'18-2': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.doReduce(index)
+      })();
+    
+  }},'18-3': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.doAdd(index)
+      })();
+    
+  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'18-0': {"tap": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.hidden = !_vm.hidden
+      })();
+    
+  }},'18-1': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.toggle(index)
+      })();
+    
+  }},'18-2': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.doReduce(index)
+      })();
+    
+  }},'18-3': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.doAdd(index)
+      })();
+    
+  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'18-0': {"tap": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.hidden = !_vm.hidden
+      })();
+    
+  }},'18-1': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.toggle(index)
+      })();
+    
+  }},'18-2': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.doReduce(index)
+      })();
+    
+  }},'18-3': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.doAdd(index)
+      })();
+    
+  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'18-0': {"tap": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.hidden = !_vm.hidden
+      })();
+    
+  }},'18-1': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.toggle(index)
+      })();
+    
+  }},'18-2': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.doReduce(index)
+      })();
+    
+  }},'18-3': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.doAdd(index)
+      })();
+    
+  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'18-0': {"tap": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.hidden = !_vm.hidden
+      })();
+    
+  }},'18-1': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.toggle(index)
+      })();
+    
+  }},'18-2': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.doReduce(index)
+      })();
+    
+  }},'18-3': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.doAdd(index)
+      })();
+    
+  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'18-0': {"tap": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.hidden = !_vm.hidden
+      })();
+    
+  }},'18-1': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.toggle(index)
+      })();
+    
+  }},'18-2': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.doReduce(index)
+      })();
+    
+  }},'18-3': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.doAdd(index)
+      })();
+    
+  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'18-0': {"tap": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.hidden = !_vm.hidden
+      })();
+    
+  }},'18-1': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.toggle(index)
+      })();
+    
+  }},'18-2': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.doReduce(index)
+      })();
+    
+  }},'18-3': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.doAdd(index)
+      })();
+    
+  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'18-0': {"tap": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.hidden = !_vm.hidden
+      })();
+    
+  }},'18-1': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.toggle(index)
+      })();
+    
+  }},'18-2': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.doReduce(index)
+      })();
+    
+  }},'18-3': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.doAdd(index)
+      })();
+    
+  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'18-0': {"tap": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.hidden = !_vm.hidden
+      })();
+    
+  }},'18-1': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.toggle(index)
+      })();
+    
+  }},'18-2': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.doReduce(index)
+      })();
+    
+  }},'18-3': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.doAdd(index)
+      })();
+    
+  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'18-0': {"tap": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.hidden = !_vm.hidden
+      })();
+    
+  }},'18-1': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.toggle(index)
+      })();
+    
+  }},'18-2': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.doReduce(index)
+      })();
+    
+  }},'18-3': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.doAdd(index)
+      })();
+    
+  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'18-0': {"tap": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.hidden = !_vm.hidden
+      })();
+    
+  }},'18-1': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.toggle(index)
+      })();
+    
+  }},'18-2': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.doReduce(index)
+      })();
+    
+  }},'18-3': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.doAdd(index)
+      })();
+    
+  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'18-0': {"tap": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.hidden = !_vm.hidden
+      })();
+    
+  }},'18-1': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.toggle(index)
+      })();
+    
+  }},'18-2': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.doReduce(index)
+      })();
+    
+  }},'18-3': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.doAdd(index)
+      })();
+    
+  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'18-0': {"tap": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.hidden = !_vm.hidden
+      })();
+    
+  }},'18-1': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.toggle(index)
+      })();
+    
+  }},'18-2': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.doReduce(index)
+      })();
+    
+  }},'18-3': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.doAdd(index)
+      })();
+    
+  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'18-0': {"tap": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.hidden = !_vm.hidden
+      })();
+    
+  }},'18-1': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.toggle(index)
+      })();
+    
+  }},'18-2': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.doReduce(index)
+      })();
+    
+  }},'18-3': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.doAdd(index)
+      })();
+    
+  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'18-0': {"tap": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.hidden = !_vm.hidden
+      })();
+    
+  }},'18-1': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.toggle(index)
+      })();
+    
+  }},'18-2': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.doReduce(index)
+      })();
+    
+  }},'18-3': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.doAdd(index)
+      })();
+    
+  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'18-0': {"tap": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.hidden = !_vm.hidden
+      })();
+    
+  }},'18-1': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.toggle(index)
+      })();
+    
+  }},'18-2': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.doReduce(index)
+      })();
+    
+  }},'18-3': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.doAdd(index)
+      })();
+    
+  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'18-0': {"tap": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.hidden = !_vm.hidden
+      })();
+    
+  }},'18-1': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.toggle(index)
+      })();
+    
+  }},'18-2': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.doReduce(index)
+      })();
+    
+  }},'18-3': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.doAdd(index)
+      })();
+    
+  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'18-0': {"tap": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.hidden = !_vm.hidden
+      })();
+    
+  }},'18-1': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.toggle(index)
+      })();
+    
+  }},'18-2': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.doReduce(index)
+      })();
+    
+  }},'18-3': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.doAdd(index)
+      })();
+    
+  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'18-0': {"tap": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.hidden = !_vm.hidden
+      })();
+    
+  }},'18-1': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.toggle(index)
+      })();
+    
+  }},'18-2': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.doReduce(index)
+      })();
+    
+  }},'18-3': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.doAdd(index)
+      })();
+    
+  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'18-0': {"tap": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.hidden = !_vm.hidden
+      })();
+    
+  }},'18-1': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.toggle(index)
+      })();
+    
+  }},'18-2': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.doReduce(index)
+      })();
+    
+  }},'18-3': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.doAdd(index)
+      })();
+    
+  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'18-0': {"tap": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.hidden = !_vm.hidden
+      })();
+    
+  }},'18-1': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.toggle(index)
+      })();
+    
+  }},'18-2': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.doReduce(index)
+      })();
+    
+  }},'18-3': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.doAdd(index)
+      })();
+    
+  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'18-0': {"tap": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.hidden = !_vm.hidden
+      })();
+    
+  }},'18-1': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.toggle(index)
+      })();
+    
+  }},'18-2': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.doReduce(index)
+      })();
+    
+  }},'18-3': {"tap": function proxy (index) {
     
     var _vm=this;
       return (function () {

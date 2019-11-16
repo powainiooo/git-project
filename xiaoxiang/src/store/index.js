@@ -5,7 +5,7 @@ wepy.use(Vuex)
 export default new Vuex.Store({
    state: {
       phone: '0755-88888888',
-      ajaxSrc: 'http://move.pc-online.cc/mobile/applet/',
+      ajaxSrc: 'http://move.pc-online.cc/mobile/',
       userOpenID: '',
       orderNums: 'T2019111616231001',
       basePrice: 1200

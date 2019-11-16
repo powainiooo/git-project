@@ -3,6 +3,7 @@
         "pages/step2",
         "pages/step1",
         "pages/login",
+        "pages/success",
         "pages/index"
     ],
     "window": {

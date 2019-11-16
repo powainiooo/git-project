@@ -121,12 +121,12 @@ wepy.page({
                }
             }
          }
-         console.log(wxmenu)
          createOrderThree({
             order_num: this.orderNums,
             wxmenu,
             imgmenu
          }).then(res => {
+            console.log(res)
             if (res.status === 0) {
                wx.navigateTo({
                   url: '/pages/success'

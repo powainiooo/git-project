@@ -4,10 +4,10 @@ const ajax = (opts, autoMsg = true) => {
       wx.showNavigationBarLoading()
       const extras = {
          success(res) {
+            console.log(res.data)
             if (res.data.status === 0) {
                resolve(res.data)
             } else {
-               console.log(res.data)
                resolve(res.data)
             }
             wx.hideNavigationBarLoading()

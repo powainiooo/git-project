@@ -1,0 +1,31 @@
+<style>
+.container { min-height: 100vh; background-color: #d1e9db; position: relative; overflow: hidden; display: flex; justify-content: center; align-items: center; flex-direction: column;}
+.container .img { width: 360rpx; margin-bottom: 40rpx;}
+.container .title { font-size: 32rpx; line-height: 1; color: #3bab70; text-align: center; margin-bottom: 20rpx;}
+.container .des { font-size: 24rpx; line-height: 1.6; color: #889286; margin: 0 90rpx;}
+
+</style>
+<template>
+<div class="container">
+   <img src="../res/images/success.jpg" class="img" mode="widthFix"/>
+   <div class="title">恭喜您！下单成功！</div>
+   <div class="des">工作时间期间，我们将在1小时内与您取得联系，请随时留意您的手机，感谢您使用小象搬家，祝您生活愉快！</div>
+</div>
+</template>
+
+<script>
+import wepy from '@wepy/core'
+import store from '../store'
+import {createOrderOne} from '@/res/api.js'
+wepy.page({
+   store,
+   data: {},
+   methods: {}
+})
+</script>
+<config>
+   {
+      "navigationBarBackgroundColor": "#3bab70",
+      "navigationBarTextStyle": "white"
+   }
+</config>

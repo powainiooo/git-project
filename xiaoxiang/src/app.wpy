@@ -72,10 +72,10 @@ wepy.app({
 <config>
    {
       "pages": [
+         "pages/login",
          "pages/success",
          "pages/step2",
          "pages/step1",
-         "pages/login",
          "pages/index"
       ],
       "window": {

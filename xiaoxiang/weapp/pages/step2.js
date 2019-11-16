@@ -218,35 +218,140 @@ _core["default"].page({
       });
     }
   }
-}, {info: {"components":{"numbers":{"path":"..\\components\\numbers"},"upload":{"path":"..\\components\\upload"}},"on":{"10-152":["count"]}}, handlers: {'10-150': {"tap": function proxy () {
+}, {info: {"components":{"numbers":{"path":"..\\components\\numbers"},"upload":{"path":"..\\components\\upload"}},"on":{"10-157":["count"]}}, handlers: {'10-155': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.togglePage('standard')
       })();
     
-  }},'10-151': {"tap": function proxy () {
+  }},'10-156': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.togglePage('picture')
       })();
     
-  }},'10-152': {"count": function proxy () {
+  }},'10-157': {"count": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.countPrice($event)
       })();
     
-  }},'10-153': {"tap": function proxy () {
+  }},'10-158': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.doConfirm($event)
       })();
     
-  }},'10-154': {"tap": function proxy () {
+  }},'10-159': {"tap": function proxy () {
+    var $event = arguments[arguments.length - 1];
+    var _vm=this;
+      return (function () {
+        _vm.makePhone($event)
+      })();
+    
+  }}}, models: {} }, {info: {"components":{"numbers":{"path":"..\\components\\numbers"},"upload":{"path":"..\\components\\upload"}},"on":{"10-157":["count"]}}, handlers: {'10-155': {"tap": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.togglePage('standard')
+      })();
+    
+  }},'10-156': {"tap": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.togglePage('picture')
+      })();
+    
+  }},'10-157': {"count": function proxy () {
+    var $event = arguments[arguments.length - 1];
+    var _vm=this;
+      return (function () {
+        _vm.countPrice($event)
+      })();
+    
+  }},'10-158': {"tap": function proxy () {
+    var $event = arguments[arguments.length - 1];
+    var _vm=this;
+      return (function () {
+        _vm.doConfirm($event)
+      })();
+    
+  }},'10-159': {"tap": function proxy () {
+    var $event = arguments[arguments.length - 1];
+    var _vm=this;
+      return (function () {
+        _vm.makePhone($event)
+      })();
+    
+  }}}, models: {} }, {info: {"components":{"numbers":{"path":"..\\components\\numbers"},"upload":{"path":"..\\components\\upload"}},"on":{"10-157":["count"]}}, handlers: {'10-155': {"tap": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.togglePage('standard')
+      })();
+    
+  }},'10-156': {"tap": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.togglePage('picture')
+      })();
+    
+  }},'10-157': {"count": function proxy () {
+    var $event = arguments[arguments.length - 1];
+    var _vm=this;
+      return (function () {
+        _vm.countPrice($event)
+      })();
+    
+  }},'10-158': {"tap": function proxy () {
+    var $event = arguments[arguments.length - 1];
+    var _vm=this;
+      return (function () {
+        _vm.doConfirm($event)
+      })();
+    
+  }},'10-159': {"tap": function proxy () {
+    var $event = arguments[arguments.length - 1];
+    var _vm=this;
+      return (function () {
+        _vm.makePhone($event)
+      })();
+    
+  }}}, models: {} }, {info: {"components":{"numbers":{"path":"..\\components\\numbers"},"upload":{"path":"..\\components\\upload"}},"on":{"10-157":["count"]}}, handlers: {'10-155': {"tap": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.togglePage('standard')
+      })();
+    
+  }},'10-156': {"tap": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.togglePage('picture')
+      })();
+    
+  }},'10-157': {"count": function proxy () {
+    var $event = arguments[arguments.length - 1];
+    var _vm=this;
+      return (function () {
+        _vm.countPrice($event)
+      })();
+    
+  }},'10-158': {"tap": function proxy () {
+    var $event = arguments[arguments.length - 1];
+    var _vm=this;
+      return (function () {
+        _vm.doConfirm($event)
+      })();
+    
+  }},'10-159': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {

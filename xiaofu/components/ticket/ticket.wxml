@@ -24,7 +24,7 @@
                <text wx:for="{{util.sub(itemData.begin, 0, 4)}}"
                      wx:for-item="item"
                      wx:for-index="index"
-                     wx:key="{{index}}">{{item}}</text>
+                     wx:key="index">{{item}}</text>
             </view>
             <view class='days'>{{itemData.date}}</view>
          </view>

@@ -7,7 +7,7 @@
                wx:if="{{selected !== item}}"
                wx:for="{{list}}"
                wx:foritem="item"
-               wx:key="{{item}}"
+               wx:key="id"
                data-item="{{item}}"
                bindtap="doChange">{{item.name}}</view>
       </view>

@@ -17,7 +17,7 @@
             wx:for="{{listData}}"
             wx:for-item="item"
             wx:for-index="index"
-            wx:key="{{index}}"
+            wx:key="index"
             data-index="{{index}}"
             data-id="{{item.id}}"
             data-cate="{{item.cate}}"

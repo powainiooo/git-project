@@ -37,14 +37,14 @@ _core["default"].page({
     }
   },
   created: function created() {}
-}, {info: {"components":{},"on":{}}, handlers: {'12-2': {"tap": function proxy () {
+}, {info: {"components":{},"on":{}}, handlers: {'12-0': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.doLogin($event)
       })();
     
-  }}}, models: {'120': {
+  }}}, models: {'6': {
       type: "input",
       expr: "name",
       handler: function set ($v) {
@@ -52,7 +52,7 @@ _core["default"].page({
         _vm.name = $v;
       
     }
-    },'121': {
+    },'7': {
       type: "input",
       expr: "phone",
       handler: function set ($v) {

@@ -82,11 +82,12 @@ wepy.component({
          this.setPrice()
       },
       setPrice () {
-         this.price = this.list.reduce((total, i) => {
+         this.price = 0
+         this.list.forEach(i => {
             const price = i.checked ? i.price * i.nums : 0
-            return total + price
+            this.price += price
          })
-         console.log(this.price)
+         this.$emit('count')
       }
    }
 })

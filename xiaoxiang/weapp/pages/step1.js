@@ -125,63 +125,63 @@ _core["default"].page({
       }, null, this);
     }
   }
-}, {info: {"components":{},"on":{}}, handlers: {'10-87': {"change": function proxy () {
+}, {info: {"components":{},"on":{}}, handlers: {'11-0': {"change": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.getPrice($event)
       })();
     
-  }},'10-88': {"blur": function proxy () {
+  }},'11-1': {"blur": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.getPrice($event)
       })();
     
-  }},'10-89': {"tap": function proxy () {
+  }},'11-2': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.openMap('Out')
       })();
     
-  }},'10-90': {"change": function proxy () {
+  }},'11-3': {"change": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.getPrice($event)
       })();
     
-  }},'10-91': {"tap": function proxy () {
+  }},'11-4': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.openMap('In')
       })();
     
-  }},'10-92': {"change": function proxy () {
+  }},'11-5': {"change": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.getPrice($event)
       })();
     
-  }},'10-93': {"tap": function proxy () {
+  }},'11-6': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.doConfirm($event)
       })();
     
-  }},'10-94': {"tap": function proxy () {
+  }},'11-7': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.makePhone($event)
       })();
     
-  }}}, models: {'122': {
+  }}}, models: {'0': {
       type: "change",
       expr: "layout",
       handler: function set ($v) {
@@ -189,7 +189,7 @@ _core["default"].page({
         _vm.layout = $v;
       
     }
-    },'123': {
+    },'1': {
       type: "input",
       expr: "area",
       handler: function set ($v) {
@@ -197,7 +197,7 @@ _core["default"].page({
         _vm.area = $v;
       
     }
-    },'124': {
+    },'2': {
       type: "input",
       expr: "moveOut.address",
       handler: function set ($v) {
@@ -205,7 +205,7 @@ _core["default"].page({
         _vm.$set(_vm.moveOut, "address", $v);
       
     }
-    },'125': {
+    },'3': {
       type: "change",
       expr: "moveOut.index",
       handler: function set ($v) {
@@ -213,7 +213,7 @@ _core["default"].page({
         _vm.$set(_vm.moveOut, "index", $v);
       
     }
-    },'126': {
+    },'4': {
       type: "input",
       expr: "moveIn.address",
       handler: function set ($v) {
@@ -221,7 +221,7 @@ _core["default"].page({
         _vm.$set(_vm.moveIn, "address", $v);
       
     }
-    },'127': {
+    },'5': {
       type: "change",
       expr: "moveIn.index",
       handler: function set ($v) {

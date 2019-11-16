@@ -44,41 +44,64 @@ _core["default"].page({
       });
     },
     countPrice: function countPrice() {
-      for (var i = 0; i < this.menuList.length; i++) {
-        var item = this.selectComponent("#numbers".concat(i));
-        console.log(item);
+      this.price = 0;
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
+
+      try {
+        for (var _iterator = this.$children[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+          var item = _step.value;
+
+          if (item.$is === 'components/numbers') {
+            this.price += item.price;
+          }
+        }
+      } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+            _iterator["return"]();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
       }
     }
   }
-}, {info: {"components":{"numbers":{"path":"..\\components\\numbers"},"upload":{"path":"..\\components\\upload"}},"on":{"11-45":["count"]}}, handlers: {'11-43': {"tap": function proxy () {
+}, {info: {"components":{"numbers":{"path":"..\\components\\numbers"},"upload":{"path":"..\\components\\upload"}},"on":{"10-7":["count"]}}, handlers: {'10-5': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.togglePage('standard')
       })();
     
-  }},'11-44': {"tap": function proxy () {
+  }},'10-6': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.togglePage('picture')
       })();
     
-  }},'11-45': {"count": function proxy () {
+  }},'10-7': {"count": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.countPrice($event)
       })();
     
-  }},'11-46': {"tap": function proxy () {
+  }},'10-8': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.countPrice($event)
       })();
     
-  }},'11-47': {"tap": function proxy () {
+  }},'10-9': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {

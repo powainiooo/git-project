@@ -154,127 +154,63 @@ _core["default"].page({
       }
     });
   }
-}, {info: {"components":{"list":{"path":"..\\components\\wepy-list"},"group":{"path":"..\\components\\group"},"panel":{"path":"..\\components\\panel"},"counter":{"path":"..\\components\\counter"},"slide-view":{"path":"..\\$vendor\\miniprogram-slide-view\\miniprogram_dist\\index"}},"on":{"13-15":["index-emit"]}}, handlers: {'13-8': {"tap": function proxy () {
+}, {info: {"components":{"list":{"path":"..\\components\\wepy-list"},"group":{"path":"..\\components\\group"},"panel":{"path":"..\\components\\panel"},"counter":{"path":"..\\components\\counter"},"slide-view":{"path":"..\\$vendor\\miniprogram-slide-view\\miniprogram_dist\\index"}},"on":{"13-7":["index-emit"]}}, handlers: {'13-0': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.handleViewTap($event)
       })();
     
-  }},'13-9': {"tap": function proxy () {
+  }},'13-1': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.currentTime = +new Date()
       })();
     
-  }},'13-10': {"tap": function proxy () {
+  }},'13-2': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.mixintap($event)
       })();
     
-  }},'13-11': {"tap": function proxy () {
+  }},'13-3': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.communicate($event)
       })();
     
-  }},'13-12': {"tap": function proxy () {
+  }},'13-4': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.tap($event)
       })();
     
-  }},'13-13': {"tap": function proxy () {
+  }},'13-5': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.request($event)
       })();
     
-  }},'13-14': {"tap": function proxy () {
+  }},'13-6': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.mynum++
       })();
     
-  }},'13-15': {"index-emit": function proxy () {
+  }},'13-7': {"index-emit": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.counterEmit($event)
       })();
     
-  }}}, models: {'17': {
-      type: "input",
-      expr: "inputmodel",
-      handler: function set ($v) {
-      var _vm=this;
-        _vm.inputmodel = $v;
-      
-    }
-    }} }, {info: {"components":{"list":{"path":"..\\components\\wepy-list"},"group":{"path":"..\\components\\group"},"panel":{"path":"..\\components\\panel"},"counter":{"path":"..\\components\\counter"},"slide-view":{"path":"..\\$vendor\\miniprogram-slide-view\\miniprogram_dist\\index"}},"on":{"13-15":["index-emit"]}}, handlers: {'13-8': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.handleViewTap($event)
-      })();
-    
-  }},'13-9': {"tap": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.currentTime = +new Date()
-      })();
-    
-  }},'13-10': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.mixintap($event)
-      })();
-    
-  }},'13-11': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.communicate($event)
-      })();
-    
-  }},'13-12': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.tap($event)
-      })();
-    
-  }},'13-13': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.request($event)
-      })();
-    
-  }},'13-14': {"tap": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.mynum++
-      })();
-    
-  }},'13-15': {"index-emit": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.counterEmit($event)
-      })();
-    
-  }}}, models: {'17': {
+  }}}, models: {'8': {
       type: "input",
       expr: "inputmodel",
       handler: function set ($v) {

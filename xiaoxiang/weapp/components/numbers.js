@@ -48,147 +48,66 @@ _core["default"].component({
       this.setPrice();
     },
     setPrice: function setPrice() {
-      this.price = this.list.reduce(function (total, i) {
+      var _this = this;
+
+      this.price = 0;
+      this.list.forEach(function (i) {
         var price = i.checked ? i.price * i.nums : 0;
-        return total + price;
+        _this.price += price;
       });
-      console.log(this.price);
+      this.$emit('count');
     }
   }
-}, {info: {"components":{},"on":{}}, handlers: {'18-24': {"tap": function proxy () {
+}, {info: {"components":{},"on":{}}, handlers: {'18-8': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.hidden = !_vm.hidden
       })();
     
-  }},'18-25': {"tap": function proxy (index) {
+  }},'18-9': {"tap": function proxy (index) {
     
     var _vm=this;
       return (function () {
         _vm.toggle(index)
       })();
     
-  }},'18-26': {"tap": function proxy (index) {
+  }},'18-10': {"tap": function proxy (index) {
     
     var _vm=this;
       return (function () {
         _vm.doReduce(index)
       })();
     
-  }},'18-27': {"tap": function proxy (index) {
+  }},'18-11': {"tap": function proxy (index) {
     
     var _vm=this;
       return (function () {
         _vm.doAdd(index)
       })();
     
-  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'18-24': {"tap": function proxy () {
+  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'18-8': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.hidden = !_vm.hidden
       })();
     
-  }},'18-25': {"tap": function proxy (index) {
+  }},'18-9': {"tap": function proxy (index) {
     
     var _vm=this;
       return (function () {
         _vm.toggle(index)
       })();
     
-  }},'18-26': {"tap": function proxy (index) {
+  }},'18-10': {"tap": function proxy (index) {
     
     var _vm=this;
       return (function () {
         _vm.doReduce(index)
       })();
     
-  }},'18-27': {"tap": function proxy (index) {
-    
-    var _vm=this;
-      return (function () {
-        _vm.doAdd(index)
-      })();
-    
-  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'18-24': {"tap": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.hidden = !_vm.hidden
-      })();
-    
-  }},'18-25': {"tap": function proxy (index) {
-    
-    var _vm=this;
-      return (function () {
-        _vm.toggle(index)
-      })();
-    
-  }},'18-26': {"tap": function proxy (index) {
-    
-    var _vm=this;
-      return (function () {
-        _vm.doReduce(index)
-      })();
-    
-  }},'18-27': {"tap": function proxy (index) {
-    
-    var _vm=this;
-      return (function () {
-        _vm.doAdd(index)
-      })();
-    
-  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'18-24': {"tap": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.hidden = !_vm.hidden
-      })();
-    
-  }},'18-25': {"tap": function proxy (index) {
-    
-    var _vm=this;
-      return (function () {
-        _vm.toggle(index)
-      })();
-    
-  }},'18-26': {"tap": function proxy (index) {
-    
-    var _vm=this;
-      return (function () {
-        _vm.doReduce(index)
-      })();
-    
-  }},'18-27': {"tap": function proxy (index) {
-    
-    var _vm=this;
-      return (function () {
-        _vm.doAdd(index)
-      })();
-    
-  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'18-24': {"tap": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.hidden = !_vm.hidden
-      })();
-    
-  }},'18-25': {"tap": function proxy (index) {
-    
-    var _vm=this;
-      return (function () {
-        _vm.toggle(index)
-      })();
-    
-  }},'18-26': {"tap": function proxy (index) {
-    
-    var _vm=this;
-      return (function () {
-        _vm.doReduce(index)
-      })();
-    
-  }},'18-27': {"tap": function proxy (index) {
+  }},'18-11': {"tap": function proxy (index) {
     
     var _vm=this;
       return (function () {

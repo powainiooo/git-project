@@ -12,7 +12,7 @@
    </div>
    <!-- 标准下单 -->
    <div v-if="page === 'standard'">
-      <numbers v-for="(item, index) in menuList" :key="index" :itemData="item" :id="'numbers'+index" @count="countPrice"></numbers>
+      <numbers v-for="(item, index) in menuList" :key="index" :itemData="item" @count="countPrice"></numbers>
    </div>
    <!-- 图片下单 -->
    <div class="input-container" v-if="page === 'picture'">
@@ -71,9 +71,11 @@ wepy.page({
          })
       },
       countPrice () {
-         for (let i = 0; i < this.menuList.length; i++) {
-            const item = this.selectComponent(`#numbers${i}`)
-            console.log(item)
+         this.price = 0
+         for (let item of this.$children) {
+            if (item.$is === 'components/numbers') {
+               this.price += item.price
+            }
          }
       }
    }

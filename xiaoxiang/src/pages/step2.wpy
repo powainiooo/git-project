@@ -12,7 +12,7 @@
    </div>
    <!-- 标准下单 -->
    <div v-if="page === 'standard'">
-      <numbers v-for="(item, index) in configData" :key="index" :itemData="item"></numbers>
+      <numbers v-for="(item, index) in menuList" :key="index" :itemData="item" :id="'numbers'+index" @count="countPrice"></numbers>
    </div>
    <!-- 图片下单 -->
    <div class="input-container" v-if="page === 'picture'">
@@ -24,9 +24,9 @@
       </div>
    </div>
 
-   <div class="price-line">最终价格预估　￥0</div>
+   <div class="price-line">最终价格预估　￥{{basePrice + price}}</div>
    <div class="hr"></div>
-   <button class="btn btn-step">立即下单</button>
+   <button class="btn btn-step" @tap="countPrice">立即下单</button>
    <div class="hint">备注：工艺品易碎品请咨询人工客服</div>
    <div class="btn-phone" @tap="makePhone">电话下单：{{phone}}</div>
 </div>
@@ -35,21 +35,26 @@
 <script>
 import wepy from '@wepy/core'
 import store from '../store'
-const configData = {"status":0,"data":{"wxmenu":[{"name":"\u62c6\u4ef6","sub_button":{"1":{"name":"\u71c3\u6c14\u7076\u6cb9\u70df\u673a\u5957","price":"10"},"2":{"name":"\u6c14\u538b\u5e8a\/\u5b50\u6bcd\u5e8a","price":"15"},"3":{"name":"\u7a7a\u8c03","price":"20"}}},{"name":"\u5927\u4ef6","sub_button":{"1":{"name":"5\u95e8\u4ee5\u4e0a\u8863\u67dc","price":"10"},"2":{"name":"1.5\u7c73\u540c\u4ee5\u4e0a\u4fdd\u9669\u67dc","price":"15"},"3":{"name":"65-75\u82f1\u5bf8\u7535\u89c6","price":"30"}}},{"name":"\u53ef\u9009\u670d\u52a1","sub_button":{"1":{"name":"\u6253\u5305\u7eb8\u76d2","price":"15"},"2":{"name":"\u98ce\u6c34\u6307\u5bfc","price":"20"},"3":{"name":"\u4e0a\u95e8\u5305\u88c5","price":"25"}}}]}}
+import {getMenuList} from '@/res/api.js'
+
 wepy.page({
    store,
    data: {
       check: '',
       page: 'standard',
-      configData: configData.data.wxmenu
+      menuList: [],
+      price: 0
    },
    computed: {
       phone () {
          return store.state.phone
+      },
+      basePrice () {
+         return store.state.basePrice
       }
    },
    onLoad() {
-      console.log(configData)
+      this.getMenuList()
    },
    methods: {
       makePhone () {
@@ -59,6 +64,17 @@ wepy.page({
       },
       togglePage (page) {
          this.page = page
+      },
+      getMenuList () {
+         getMenuList().then(res => {
+            this.menuList = res.data.wxmenu
+         })
+      },
+      countPrice () {
+         for (let i = 0; i < this.menuList.length; i++) {
+            const item = this.selectComponent(`#numbers${i}`)
+            console.log(item)
+         }
       }
    }
 })

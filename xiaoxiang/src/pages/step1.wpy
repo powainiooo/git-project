@@ -11,13 +11,13 @@
             <!--<picker bindchange="selectChange" data-key="layoutIndex" value="{{layoutIndex}}" range="{{layoutList}}">-->
                <!--<div class="input {{layoutIndex === -1 ? 'input-placeholder' : ''}}">{{layoutIndex === -1 ? '选择户型' : layoutList[layoutIndex]}}</div>-->
             <!--</picker>-->
-            <select class="input" :class="{'input-placeholder':layout === ''}" range="{{layoutList}}" v-model="layout">
+            <select class="input" :class="{'input-placeholder':layout === ''}" range="{{layoutList}}" v-model="layout" @change="getPrice">
                <option>{{layout === '' ? '选择户型' : layoutList[layout]}}</option>
             </select>
          </div>
          <div class="li">
             <div class="name">面积</div>
-            <input type="number" placeholder="输入面积" class="input" placeholder-style="color: #999999" v-model="area"/>
+            <input type="number" placeholder="输入面积" class="input" placeholder-style="color: #999999" v-model="area" @blur="getPrice"/>
          </div>
       </div>
    </div>
@@ -31,7 +31,7 @@
          </div>
          <div class="li">
             <div class="name">楼层</div>
-            <select class="input" :class="{'input-placeholder':moveOut.index === ''}" range="{{buildingList}}" v-model="moveOut.index">
+            <select class="input" :class="{'input-placeholder':moveOut.index === ''}" range="{{buildingList}}" v-model="moveOut.index" @change="getPrice">
                <option>{{moveOut.index === '' ? '选择楼层' : buildingList[moveOut.index]}}</option>
             </select>
          </div>
@@ -47,14 +47,14 @@
          </div>
          <div class="li">
             <div class="name">楼层</div>
-            <select class="input" :class="{'input-placeholder':moveIn.index === ''}" range="{{buildingList}}" v-model="moveIn.index">
+            <select class="input" :class="{'input-placeholder':moveIn.index === ''}" range="{{buildingList}}" v-model="moveIn.index" @change="getPrice">
                <option>{{moveIn.index === '' ? '选择楼层' : buildingList[moveIn.index]}}</option>
             </select>
          </div>
       </div>
    </div>
    <div class="hr"></div>
-   <div class="price-line">基础价格预估　￥0</div>
+   <div class="price-line">基础价格预估　￥{{price}}</div>
    <div class="hr"></div>
    <button class="btn btn-step" @tap="doConfirm">下一步</button>
    <div class="hint">备注：停车距离超过100米需要增加费用，具体增加费用请通过人工客服咨询。</div>
@@ -65,7 +65,7 @@
 <script>
 import wepy from '@wepy/core'
 import store from '../store'
-import {getHouseType, createOrderTwo} from '@/res/api.js'
+import {getHouseType, createOrderTwo, getBasicAmount} from '@/res/api.js'
 import {promisify} from '@/res/util.js'
 const chooseLocation = promisify(wx.chooseLocation)
 wepy.page({
@@ -86,7 +86,8 @@ wepy.page({
          address: '',
          lat: '',
          lng: ''
-      }
+      },
+      price: 0
    },
    computed: {
       phone () {
@@ -131,11 +132,29 @@ wepy.page({
             }
          })
       },
+      getPrice () {
+         getBasicAmount({
+            house_type: this.layoutList[this.layout],
+            area: this.area,
+            start_lon: this.moveOut.lng,
+            start_lat: this.moveOut.lat,
+            finish_lon: this.moveIn.lng,
+            finish_lat: this.moveIn.lat,
+            s_floor: this.buildingList[this.moveOut.index],
+            f_floor: this.buildingList[this.moveIn.index]
+         }).then(res => {
+            if (res.status === 0) {
+               this.price = res.result.total
+               store.commit('setBasePrice', res.result.total)
+            }
+         })
+      },
       async openMap (key) {
          const res = await chooseLocation()
          this[`move${key}`].address = res.address
          this[`move${key}`].lat = res.latitude
          this[`move${key}`].lng = res.longitude
+         this.getPrice()
       }
    }
 })

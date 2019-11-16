@@ -32,7 +32,8 @@ _core["default"].page({
       address: '',
       lat: '',
       lng: ''
-    }
+    },
+    price: 0
   },
   computed: {
     phone: function phone() {
@@ -80,6 +81,26 @@ _core["default"].page({
         }
       });
     },
+    getPrice: function getPrice() {
+      var _this2 = this;
+
+      (0, _api.getBasicAmount)({
+        house_type: this.layoutList[this.layout],
+        area: this.area,
+        start_lon: this.moveOut.lng,
+        start_lat: this.moveOut.lat,
+        finish_lon: this.moveIn.lng,
+        finish_lat: this.moveIn.lat,
+        s_floor: this.buildingList[this.moveOut.index],
+        f_floor: this.buildingList[this.moveIn.index]
+      }).then(function (res) {
+        if (res.status === 0) {
+          _this2.price = res.result.total;
+
+          _store["default"].commit('setBasePrice', res.result.total);
+        }
+      });
+    },
     openMap: function openMap(key) {
       var res;
       return _regeneratorRuntime2["default"].async(function openMap$(_context) {
@@ -94,8 +115,9 @@ _core["default"].page({
               this["move".concat(key)].address = res.address;
               this["move".concat(key)].lat = res.latitude;
               this["move".concat(key)].lng = res.longitude;
+              this.getPrice();
 
-            case 6:
+            case 7:
             case "end":
               return _context.stop();
           }
@@ -103,35 +125,63 @@ _core["default"].page({
       }, null, this);
     }
   }
-}, {info: {"components":{},"on":{}}, handlers: {'10-33': {"tap": function proxy () {
+}, {info: {"components":{},"on":{}}, handlers: {'10-87': {"change": function proxy () {
+    var $event = arguments[arguments.length - 1];
+    var _vm=this;
+      return (function () {
+        _vm.getPrice($event)
+      })();
+    
+  }},'10-88': {"blur": function proxy () {
+    var $event = arguments[arguments.length - 1];
+    var _vm=this;
+      return (function () {
+        _vm.getPrice($event)
+      })();
+    
+  }},'10-89': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.openMap('Out')
       })();
     
-  }},'10-34': {"tap": function proxy () {
+  }},'10-90': {"change": function proxy () {
+    var $event = arguments[arguments.length - 1];
+    var _vm=this;
+      return (function () {
+        _vm.getPrice($event)
+      })();
+    
+  }},'10-91': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.openMap('In')
       })();
     
-  }},'10-35': {"tap": function proxy () {
+  }},'10-92': {"change": function proxy () {
+    var $event = arguments[arguments.length - 1];
+    var _vm=this;
+      return (function () {
+        _vm.getPrice($event)
+      })();
+    
+  }},'10-93': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.doConfirm($event)
       })();
     
-  }},'10-36': {"tap": function proxy () {
+  }},'10-94': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.makePhone($event)
       })();
     
-  }}}, models: {'69': {
+  }}}, models: {'122': {
       type: "change",
       expr: "layout",
       handler: function set ($v) {
@@ -139,7 +189,7 @@ _core["default"].page({
         _vm.layout = $v;
       
     }
-    },'70': {
+    },'123': {
       type: "input",
       expr: "area",
       handler: function set ($v) {
@@ -147,7 +197,7 @@ _core["default"].page({
         _vm.area = $v;
       
     }
-    },'71': {
+    },'124': {
       type: "input",
       expr: "moveOut.address",
       handler: function set ($v) {
@@ -155,7 +205,7 @@ _core["default"].page({
         _vm.$set(_vm.moveOut, "address", $v);
       
     }
-    },'72': {
+    },'125': {
       type: "change",
       expr: "moveOut.index",
       handler: function set ($v) {
@@ -163,7 +213,7 @@ _core["default"].page({
         _vm.$set(_vm.moveOut, "index", $v);
       
     }
-    },'73': {
+    },'126': {
       type: "input",
       expr: "moveIn.address",
       handler: function set ($v) {
@@ -171,7 +221,7 @@ _core["default"].page({
         _vm.$set(_vm.moveIn, "address", $v);
       
     }
-    },'74': {
+    },'127': {
       type: "change",
       expr: "moveIn.index",
       handler: function set ($v) {

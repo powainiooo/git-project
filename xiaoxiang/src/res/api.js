@@ -78,3 +78,25 @@ export const getHouseType = (data) => {
       }
    })
 }
+
+// 计算基本价格
+export const getBasicAmount = (data) => {
+   return ajax({
+      url: `${ajaxUrl}/count_basic_amount`,
+      data,
+      header: {
+         'content-type': 'json'
+      }
+   })
+}
+
+// 四．附加信息的菜单
+export const getMenuList = (data) => {
+   return ajax({
+      url: `${ajaxUrl}/menu_ext`,
+      data,
+      header: {
+         'content-type': 'json'
+      }
+   })
+}

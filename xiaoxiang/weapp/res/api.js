@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getHouseType = exports.createOrderTwo = exports.createOrderOne = exports.wxUserAdd = exports.getWeixin = void 0;
+exports.getMenuList = exports.getBasicAmount = exports.getHouseType = exports.createOrderTwo = exports.createOrderOne = exports.wxUserAdd = exports.getWeixin = void 0;
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
@@ -102,6 +102,32 @@ var getHouseType = function getHouseType(data) {
       'content-type': 'json'
     }
   });
-};
+}; // 计算基本价格
+
 
 exports.getHouseType = getHouseType;
+
+var getBasicAmount = function getBasicAmount(data) {
+  return ajax({
+    url: "".concat(ajaxUrl, "/count_basic_amount"),
+    data: data,
+    header: {
+      'content-type': 'json'
+    }
+  });
+}; // 四．附加信息的菜单
+
+
+exports.getBasicAmount = getBasicAmount;
+
+var getMenuList = function getMenuList(data) {
+  return ajax({
+    url: "".concat(ajaxUrl, "/menu_ext"),
+    data: data,
+    header: {
+      'content-type': 'json'
+    }
+  });
+};
+
+exports.getMenuList = getMenuList;

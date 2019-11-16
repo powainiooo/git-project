@@ -34,7 +34,7 @@ var process = { env: {} };
    return __wepy_require;
 })([
 /***** module 0 start *****/
-/***** D:\code\git-project\xiaoxiang\node_modules\@wepy\core\dist\wepy.js *****/
+/***** G:\BaiduNetdiskDownload\xiaoxiang\node_modules\@wepy\core\dist\wepy.js *****/
 function(module, exports, __wepy_require) {'use strict';
 
 // can we use __proto__?
@@ -2689,7 +2689,7 @@ module.exports = wepy;
 
 
 /***** module 1 start *****/
-/***** D:\code\git-project\xiaoxiang\node_modules\regenerator-runtime\runtime.js *****/
+/***** G:\BaiduNetdiskDownload\xiaoxiang\node_modules\regenerator-runtime\runtime.js *****/
 function(module, exports, __wepy_require) {/**
  * Copyright (c) 2014-present, Facebook, Inc.
  *
@@ -3422,7 +3422,7 @@ function(module, exports, __wepy_require) {/**
 
 
 /***** module 2 start *****/
-/***** D:\code\git-project\xiaoxiang\node_modules\regenerator-runtime\runtime-module.js *****/
+/***** G:\BaiduNetdiskDownload\xiaoxiang\node_modules\regenerator-runtime\runtime-module.js *****/
 function(module, exports, __wepy_require) {/**
  * Copyright (c) 2014-present, Facebook, Inc.
  *
@@ -3463,7 +3463,7 @@ if (hadRuntime) {
 
 
 /***** module 3 start *****/
-/***** D:\code\git-project\xiaoxiang\node_modules\vuex\dist\vuex.common.js *****/
+/***** G:\BaiduNetdiskDownload\xiaoxiang\node_modules\vuex\dist\vuex.common.js *****/
 function(module, exports, __wepy_require) {/**
  * vuex v3.1.2
  * (c) 2019 Evan You
@@ -4519,7 +4519,7 @@ module.exports = index;
 
 
 /***** module 4 start *****/
-/***** D:\code\git-project\xiaoxiang\node_modules\@wepy\x\dist\index.js *****/
+/***** G:\BaiduNetdiskDownload\xiaoxiang\node_modules\@wepy\x\dist\index.js *****/
 function(module, exports, __wepy_require) {'use strict';
 
 Object.defineProperty(exports, '__esModule', { value: true });

@@ -18,7 +18,8 @@ var _default = new _x["default"].Store({
     phone: '0755-88888888',
     ajaxSrc: 'http://move.pc-online.cc/mobile/applet/',
     userOpenID: '',
-    orderNums: ''
+    orderNums: 'T2019111616231001',
+    basePrice: 1200
   },
   mutations: {
     setOpenId: function setOpenId(state, data) {
@@ -26,6 +27,9 @@ var _default = new _x["default"].Store({
     },
     setOrderNums: function setOrderNums(state, data) {
       state.orderNums = data;
+    },
+    setBasePrice: function setBasePrice(state, data) {
+      state.basePrice = data;
     }
   }
 });

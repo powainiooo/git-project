@@ -72,8 +72,8 @@ wepy.app({
 <config>
    {
       "pages": [
-         "pages/step1",
          "pages/step2",
+         "pages/step1",
          "pages/login",
          "pages/index"
       ],

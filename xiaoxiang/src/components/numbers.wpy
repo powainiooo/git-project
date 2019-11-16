@@ -48,7 +48,8 @@ wepy.component({
       hidden: true,
       checked: false,
       nums: 0,
-      list: []
+      list: [],
+      price: 0
    },
    watch: {
       itemData (val) {
@@ -69,13 +70,23 @@ wepy.component({
    methods: {
       toggle (i) {
          this.list[i].checked = !this.list[i].checked
+         this.setPrice()
       },
       doReduce (i) {
          if (this.list[i].nums === 0) return
          this.list[i].nums -= 1
+         this.setPrice()
       },
       doAdd (i) {
          this.list[i].nums += 1
+         this.setPrice()
+      },
+      setPrice () {
+         this.price = this.list.reduce((total, i) => {
+            const price = i.checked ? i.price * i.nums : 0
+            return total + price
+         })
+         console.log(this.price)
       }
    }
 })

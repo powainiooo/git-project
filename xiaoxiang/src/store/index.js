@@ -7,7 +7,8 @@ export default new Vuex.Store({
       phone: '0755-88888888',
       ajaxSrc: 'http://move.pc-online.cc/mobile/applet/',
       userOpenID: '',
-      orderNums: ''
+      orderNums: 'T2019111616231001',
+      basePrice: 1200
    },
    mutations: {
       setOpenId (state, data) {
@@ -15,6 +16,9 @@ export default new Vuex.Store({
       },
       setOrderNums (state, data) {
          state.orderNums = data
+      },
+      setBasePrice (state, data) {
+         state.basePrice = data
       }
    }
 })

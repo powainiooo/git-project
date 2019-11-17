@@ -7,7 +7,17 @@ Component({
    properties: {
 		itemData: {
 			type: Object,
-			value: {}
+			value: {},
+         observer (data) {
+            const limit = data.limit === '0' ? 10 : parseInt(data.limit)
+            let arr = []
+            for (let i = 0; i <= limit; i++) {
+               arr.push(i)
+            }
+            this.setData({
+               numsArr: arr
+            })
+         }
 		}
    },
 
@@ -16,7 +26,9 @@ Component({
     */
    data: {
 		nums: 0,
-      imgSrc: app.globalData.imgSrc
+      imgSrc: app.globalData.imgSrc,
+      numsArr: [],
+      numsIndex: 0
    },
 
    /**
@@ -37,6 +49,12 @@ Component({
 			   nums: num
 		   })
          this.triggerEvent('change', this.data.nums)
-	   }
+	   },
+      bindPickerChange (e) {
+         this.setData({
+            numsIndex: e.detail.value,
+            nums: this.data.numsArr[e.detail.value]
+         })
+      }
    }
 })

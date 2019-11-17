@@ -137,97 +137,6 @@ Component({
          })
 	      app.globalData.buyBtnDisabled = btn
       },
-      doPay () {
-         let self = this
-         if (self.data.btnDisabled) {
-            self.data.btnDisabled = false
-            wx.showNavigationBarLoading()
-
-            wx.setStorage({
-               key: 'nameVal',
-               data: self.data.nameVal
-            })
-            wx.setStorage({
-               key: 'phoneVal',
-               data: self.data.phoneVal
-            })
-            wx.setStorage({
-               key: 'addressVal',
-               data: self.data.addressVal
-            })
-            wx.setStorage({
-               key: 'idnum',
-               data: self.data.idnum
-            })
-            wx.request({
-               url: self.data.ajaxSrc + '/create_order',
-               data: {
-                  openid: app.globalData.userOpenID,
-                  tid: self.data.itemData.info.id,
-                  name: self.data.nameVal,
-                  mobile: self.data.phoneVal,
-                  address: self.data.addressVal,
-                  email: self.data.emailVal,
-                  idnum: self.data.idnum,
-                  passport: self.data.uploadImg,
-                  idnum_type: parseInt(this.data.idTypeIndex) + 1,
-                  sele: self.data.selectTicket.select,
-                  nums: self.data.numbersArr[self.data.numberIndex],
-                  city: getApp().globalData.city
-               },
-               success: function (res) {
-                  if (res.data.status != 0) {
-                     wx.showToast({
-                        image: '../../res/images/warn.png',
-                        title: res.data.msg
-                     })
-                  } else {
-                     let jsapi = res.data.jsapiparam
-                     let order_num = res.data.order_num
-                     let tid = res.data.tid
-                     app.globalData.ticketOrderNum = order_num
-                     app.globalData.ticketBuyNum = self.data.numbersArr[self.data.numberIndex]
-                     if (res.data.flag == 1) { // 福利票
-                        self.doBuySuccess(tid, order_num)
-                     } else {
-                        wx.requestPayment({
-                           'timeStamp': jsapi.timeStamp,
-                           'nonceStr': jsapi.nonceStr,
-                           'package': jsapi.package,
-                           'signType': jsapi.signType,
-                           'paySign': jsapi.paySign,
-                           'success': function (res) {
-                              console.log(res)
-                              wx.showToast({
-                                 title: '支付成功'
-                              })
-                              self.doBuySuccess(tid, order_num)
-                           },
-                           'fail': function (res) {
-                              wx.showToast({
-                                 image: '../../res/images/warn.png',
-                                 title: '支付失败'
-                              })
-                              wx.hideNavigationBarLoading()
-                              self.data.btnDisabled = true
-                           }
-                        })
-                     }
-                  }
-               },
-               fail () {
-                  wx.showModal({
-                     title: '购买失败，请重试',
-                     success () {
-                        self.data.btnDisabled = true
-                        self.doPay()
-                     }
-                  })
-                  wx.hideNavigationBarLoading()
-               }
-            })
-         }
-      },
 	   getParams () {
       	return {
 		      tid: this.data.itemData.info.id,
@@ -242,26 +151,6 @@ Component({
 		      nums: this.data.numbersArr[this.data.numberIndex],
 	      }
 	   },
-      doBuySuccess (tid, orderNum) {
-         let self = this
-         wx.request({
-            url: self.data.ajaxSrc + '/pay_success',
-            data: {
-               tid: tid,
-               order_num: orderNum
-            },
-            success: res => {
-               wx.navigateTo({
-                  url: '/pages/result/result?page=ticketSuc'
-               })
-            },
-            fail () {
-               wx.reLaunch({
-                  url: '/pages/error/error'
-               })
-            }
-         })
-      },
       setNums (obj) { // 设置可选票的数量列表
          let arr = []
          let nums = parseInt(obj.nums)
@@ -286,11 +175,13 @@ Component({
          this.setData({
             showExample: true
          })
+         app.globalData.showPassport = true
       },
       doHideExample () { // 关闭证件照示例
          this.setData({
             showExample: false
          })
+         app.globalData.showPassport = false
       },
       doUpload () { // 上传证件照
          const self = this

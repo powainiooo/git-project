@@ -37,14 +37,14 @@ _core["default"].page({
     }
   },
   created: function created() {}
-}, {info: {"components":{},"on":{}}, handlers: {'12-3': {"tap": function proxy () {
+}, {info: {"components":{},"on":{}}, handlers: {'10-0': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.doLogin($event)
       })();
     
-  }}}, models: {'32': {
+  }}}, models: {'0': {
       type: "input",
       expr: "name",
       handler: function set ($v) {
@@ -52,76 +52,7 @@ _core["default"].page({
         _vm.name = $v;
       
     }
-    },'33': {
-      type: "input",
-      expr: "phone",
-      handler: function set ($v) {
-      var _vm=this;
-        _vm.phone = $v;
-      
-    }
-    }} }, {info: {"components":{},"on":{}}, handlers: {'12-3': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.doLogin($event)
-      })();
-    
-  }}}, models: {'32': {
-      type: "input",
-      expr: "name",
-      handler: function set ($v) {
-      var _vm=this;
-        _vm.name = $v;
-      
-    }
-    },'33': {
-      type: "input",
-      expr: "phone",
-      handler: function set ($v) {
-      var _vm=this;
-        _vm.phone = $v;
-      
-    }
-    }} }, {info: {"components":{},"on":{}}, handlers: {'12-3': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.doLogin($event)
-      })();
-    
-  }}}, models: {'32': {
-      type: "input",
-      expr: "name",
-      handler: function set ($v) {
-      var _vm=this;
-        _vm.name = $v;
-      
-    }
-    },'33': {
-      type: "input",
-      expr: "phone",
-      handler: function set ($v) {
-      var _vm=this;
-        _vm.phone = $v;
-      
-    }
-    }} }, {info: {"components":{},"on":{}}, handlers: {'12-3': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.doLogin($event)
-      })();
-    
-  }}}, models: {'32': {
-      type: "input",
-      expr: "name",
-      handler: function set ($v) {
-      var _vm=this;
-        _vm.name = $v;
-      
-    }
-    },'33': {
+    },'1': {
       type: "input",
       expr: "phone",
       handler: function set ($v) {

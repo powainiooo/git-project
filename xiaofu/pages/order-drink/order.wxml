@@ -17,7 +17,7 @@
                   bindtap="gotoDetail">
                <view class="img"><image src="{{imgSrc+item.cover}}" mode="widthFix"></image></view>
                <view class="title">
-                  <image src="../../res/images/bottom4.png" mode="widthFix"></image>
+                  <image src="../../res/images/drink-frame-bottom.png" mode="widthFix"></image>
                   <view class="name">
                      <view>{{item.drink_name}}</view>
                      <view style="font-size: 24rpx;">在 {{item.logo_pic}} 使用</view>

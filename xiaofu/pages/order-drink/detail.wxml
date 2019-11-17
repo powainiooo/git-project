@@ -2,38 +2,16 @@
     <header-view showMenu="{{false}}"></header-view>
     <!--详情列表 -->
     <view class="detail-frame">
-        <view class="ticket {{itemData.is_check == '1' ? '' : 'shadow-top'}} {{isSimple ? 'ticket-simple' : ''}}">
-            <view class="check-icon" wx:if="{{itemData.is_check == '1'}}"></view>
-            <view class="">
-                <view class="top {{itemData.is_check == '1' ? '' : 'shadow-frame'}}">
-                    <view class="frame1 check-frame1" style="background-color: #f3f3f3;"  wx:if="{{itemData.is_check == '1'}}">
-                        <view class="line1">已兑换</view>
-                        <text class="ids">{{itemData.order_num}}</text>
-                    </view>
-                    <view class="frame1"  wx:if="{{itemData.is_check == '0'}}">
-                        <view class="line1">
-                            <image src="{{itemData.ewm_url}}" mode="widthFix" class="qrcode"></image>
-                        </view>
-                        <text class="ids">{{itemData.order_num}}</text>
-                    </view>
-                    <view class="line-top"  wx:if="{{itemData.is_check == '0'}}"></view>
-                    <view class="line-bottom {{itemData.is_check == '1' ? 'line-bottom-check' : ''}}"></view>
-                </view>
-                <view class="shadow-frame">
-                    <view class='title'>{{itemData.title}}</view>
-                    <view class='address'>{{itemData.address}}</view>
-                    <view class="imgs"><image src="{{imgSrc+itemData.cover}}" mode="widthFix"></image></view>
-                    <view class="user-info">
-                        <view class="name">{{itemData.name}}</view>
-                        <view class="phone">{{itemData.mobile}}</view>
-                    </view>
-                    <view class="infos">
-                        <view class="type">兑换券</view>
-                        <view class="index">{{itemData.nums}} <text>张</text></view>
-                    </view>
-                </view>
-            </view>
-        </view>
+       <swiper previous-margin="70rpx" next-margin="70rpx" current="{{currentIndex}}" duration="200" bindchange="swiperChange" style="height:900rpx;">
+          <swiper-item class="swiper-item"
+                       wx:for="{{itemData.child}}"
+                       wx:for-index="index"
+                       wx:for-item="item"
+                       wx:key="index"
+                       data-index="{{index}}">
+             <order-item itemData="{{itemData}}" itemIndex="{{index}}" isSimple="{{isSimple}}"></order-item>
+          </swiper-item>
+       </swiper>
        <view class="check-infos">
           <view>未验票<text>{{notCheckNum < 10 ? 0 : ''}}{{notCheckNum}}</text></view>
           <view>已验票<text>{{checkNum < 10 ? 0 : ''}}{{checkNum}}</text></view>

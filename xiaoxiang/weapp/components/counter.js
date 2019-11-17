@@ -52,140 +52,35 @@ _core["default"].component({
       console.log(this.$name + ' minus tap');
     }
   })
-}, {info: {"components":{},"on":{}}, handlers: {'23-10': {"tap": function proxy () {
+}, {info: {"components":{},"on":{}}, handlers: {'25-0': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.plus($event)
       })();
     
-  }},'23-11': {"tap": function proxy () {
+  }},'25-1': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.minus($event)
       })();
     
-  }},'23-12': {"tap": function proxy () {
+  }},'25-2': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.increment($event)
       })();
     
-  }},'23-13': {"tap": function proxy () {
+  }},'25-3': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.decrement($event)
       })();
     
-  }},'23-14': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.incrementAsync($event)
-      })();
-    
-  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'23-10': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.plus($event)
-      })();
-    
-  }},'23-11': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.minus($event)
-      })();
-    
-  }},'23-12': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.increment($event)
-      })();
-    
-  }},'23-13': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.decrement($event)
-      })();
-    
-  }},'23-14': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.incrementAsync($event)
-      })();
-    
-  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'23-10': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.plus($event)
-      })();
-    
-  }},'23-11': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.minus($event)
-      })();
-    
-  }},'23-12': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.increment($event)
-      })();
-    
-  }},'23-13': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.decrement($event)
-      })();
-    
-  }},'23-14': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.incrementAsync($event)
-      })();
-    
-  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'23-10': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.plus($event)
-      })();
-    
-  }},'23-11': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.minus($event)
-      })();
-    
-  }},'23-12': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.increment($event)
-      })();
-    
-  }},'23-13': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.decrement($event)
-      })();
-    
-  }},'23-14': {"tap": function proxy () {
+  }},'25-4': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {

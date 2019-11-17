@@ -1,9 +1,9 @@
 {
   "pages": [
+    "pages/login",
     "pages/success",
     "pages/step2",
     "pages/step1",
-    "pages/login",
     "pages/index"
   ],
   "window": {
@@ -12,5 +12,5 @@
     "navigationBarTitleText": "小象搬家",
     "navigationBarTextStyle": "black"
   },
-  "sitemapLocation": "sitemap44.json"
+  "sitemapLocation": "sitemap60.json"
 }

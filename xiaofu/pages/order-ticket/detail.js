@@ -35,9 +35,9 @@ Page({
             let not = 0
             let check = 0
             for (let item of data.child) {
-               if (item.is_check == '0') {
+               if (item.is_check === '0') {
                   not++
-               } else if (item.is_check == '1') {
+               } else if (item.is_check === '1') {
                   check++
                }
             }

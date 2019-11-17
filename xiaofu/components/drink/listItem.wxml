@@ -4,11 +4,12 @@
       <image src="{{imgSrc + itemData.cover}}" class="drink-item-img"></image>
       <view class="drink-item-right">
          <view class="drink-item-price"><text>{{itemData.price}}</text>RMB/杯</view>
-         <view class="drink-item-btns {{nums === 0 ? 'drink-item-btns-fold' : ''}}">
-            <view class="drink-item-reduce" bindtap="doReduce"></view>
-            <view class="drink-item-nums">{{nums}}</view>
-            <view class="drink-item-add" bindtap="doAdd"></view>
-         </view>
+         <picker bindchange="bindPickerChange" value="{{numsIndex}}" range="{{numsArr}}">
+            <view class="drink-item-btns {{numsArr[numsIndex] === 0 ? 'drink-item-btns-fold' : ''}}">
+               <view class="drink-item-nums">{{numsArr[numsIndex]}} 杯</view>
+               <view class="drink-item-add"></view>
+            </view>
+         </picker>
       </view>
    </view>
    <view class="drink-item-bottom">

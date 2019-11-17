@@ -1,5 +1,5 @@
 <!--index.wxml-->
-<view class='body buy-frame'>
+<view class='body buy-frame' hidden="{{showExample}}">
    <view class="price">{{selectTicket.price == 0 ? 0 : selectTicket.price * numbersArr[numberIndex]}}<text class="unit">RMB</text></view>
    <view class="ticket-list">
       <view class="ticket-item {{item.is_over == 1 ? 'disabled' : ''}} {{selectTicket.select == item.select ? 'selected' : ''}}"
@@ -34,15 +34,16 @@
          <image src="{{imgSrc+uploadImg}}" mode="aspectFit" class="photos" wx:if="{{uploadImg !== ''}}"></image>
       </view>
    </view>
-   <view class="passport-example" style="top:{{showExample ? 0 : '100vh'}}" wx:if="{{showExample}}" catchtouchmove="tmove">
-      <image src="../../res/images/close.png" mode="widthFix" class="btn-close" bindtap="doHideExample"></image>
-      <image src="../../res/images/passport.png" mode="widthFix" class="img"></image>
-      <view class="hint">请上传护照扫描件，确保护照内容文字清晰，避免带来不必要的麻烦。</view>
-   </view>
 
    <view class="hint-section">本票务一经购买，无主办方的通知，任何情况都不支持退票。未满十八岁请勿购票！</view>
 
-   <view class="footer" wx:if="{{showExample}}">
-      <view class="btn" style="width: 100%;" bindtap="doUpload">上传护照照片</view>
-   </view>
 </view>
+
+<view class="passport-example" style="top:{{showExample ? 0 : '100vh'}}" wx:if="{{showExample}}" catchtouchmove="tmove">
+   <image src="../../res/images/close.png" mode="widthFix" class="btn-close" bindtap="doHideExample"></image>
+   <image src="../../res/images/passport.png" mode="widthFix" class="img"></image>
+   <view class="hint">请上传护照扫描件，确保护照内容文字清晰，避免带来不必要的麻烦。</view>
+</view>
+<!--<view class="passport-footer" wx:if="{{showExample}}">-->
+   <!--<view class="btn" style="width: 100%;" bindtap="doUpload">上传护照照片</view>-->
+<!--</view>-->

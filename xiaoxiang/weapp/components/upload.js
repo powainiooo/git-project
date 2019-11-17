@@ -190,112 +190,28 @@ _core["default"].component({
       }, null, this);
     }
   }
-}, {info: {"components":{},"on":{}}, handlers: {'19-81': {"tap": function proxy () {
+}, {info: {"components":{},"on":{}}, handlers: {'21-0': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.showSelect = true
       })();
     
-  }},'19-82': {"tap": function proxy () {
+  }},'21-1': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.openVideoFile($event)
       })();
     
-  }},'19-83': {"tap": function proxy () {
+  }},'21-2': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.openImgFile($event)
       })();
     
-  }},'19-84': {"tap": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.showSelect = false
-      })();
-    
-  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'19-81': {"tap": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.showSelect = true
-      })();
-    
-  }},'19-82': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.openVideoFile($event)
-      })();
-    
-  }},'19-83': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.openImgFile($event)
-      })();
-    
-  }},'19-84': {"tap": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.showSelect = false
-      })();
-    
-  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'19-81': {"tap": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.showSelect = true
-      })();
-    
-  }},'19-82': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.openVideoFile($event)
-      })();
-    
-  }},'19-83': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.openImgFile($event)
-      })();
-    
-  }},'19-84': {"tap": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.showSelect = false
-      })();
-    
-  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'19-81': {"tap": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.showSelect = true
-      })();
-    
-  }},'19-82': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.openVideoFile($event)
-      })();
-    
-  }},'19-83': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.openImgFile($event)
-      })();
-    
-  }},'19-84': {"tap": function proxy () {
+  }},'21-3': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {

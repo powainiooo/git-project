@@ -122,7 +122,11 @@ wepy.page({
             s_address: this.moveOut.address,
             f_address: this.moveIn.address,
             s_floor: this.buildingList[this.moveOut.index],
-            f_floor: this.buildingList[this.moveIn.index]
+            f_floor: this.buildingList[this.moveIn.index],
+            start_lon: this.moveOut.lng,
+            start_lat: this.moveOut.lat,
+            finish_lon: this.moveIn.lng,
+            finish_lat: this.moveIn.lat
          }
          createOrderTwo(obj).then(res => {
             if (res.status === 0) {

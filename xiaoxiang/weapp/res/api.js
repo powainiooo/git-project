@@ -19,10 +19,11 @@ var ajax = function ajax(opts) {
     wx.showNavigationBarLoading();
     var extras = {
       success: function success(res) {
+        console.log(res.data);
+
         if (res.data.status === 0) {
           resolve(res.data);
         } else {
-          console.log(res.data);
           resolve(res.data);
         }
 

@@ -2,14 +2,14 @@
    "pages": [
       "pages/index/index",
       "pages/index/detail",
-      "pages/result/result",
       "pages/order-ticket/order",
+      "pages/order-drink/detail",
       "pages/order-drink/order",
+      "pages/result/result",
       "pages/member/member",
       "pages/login/login",
       "pages/error/error",
       "pages/sponsor/list",
-      "pages/order-drink/detail",
       "pages/order-ticket/detail",
       "pages/insured/insured",
       "pages/search/search"

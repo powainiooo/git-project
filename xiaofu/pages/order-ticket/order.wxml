@@ -41,7 +41,7 @@
                       bindtap="gotoDetail2">
                    <view class="img"><image src="{{imgSrc+item.cover}}" mode="widthFix"></image></view>
                    <view class="title">
-                      <image src="../../res/images/bottom4.png" mode="widthFix"></image>
+                      <image src="../../res/images/drink-frame-bottom.png" mode="widthFix"></image>
                       <view class="name">
                          <view>{{item.title}}</view>
                          <view style="font-size: 24rpx;">{{item.is_check === '0' ? '未使用' : '已使用'}}</view>

@@ -8,11 +8,11 @@
 
 .drink-item-top .drink-item-btns { width: 126rpx; height: 42rpx; border: 2rpx solid #012aaa; display: flex; align-items: center; position: relative; border-radius: 22rpx; margin: 60rpx auto 0 auto; transition: width 0.1s ease-out;}
 .drink-item-top .drink-item-btns-fold { width: 42rpx; border-color: rgba(0, 0, 0, 0)}
-.drink-item-top .drink-item-btns>view { width: 42rpx; height: 100%; line-height: 42rpx; display: flex; align-items: center; justify-content: center; transition: opacity 0.1s ease-out;}
+.drink-item-top .drink-item-btns>view { height: 100%; line-height: 42rpx; display: flex; align-items: center; justify-content: center; transition: opacity 0.1s ease-out;}
 .drink-item-top .drink-item-reduce { background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAADCAYAAABxhjRXAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAChJREFUeNpiZNBaZcDAwDCBgXJQwAIkNgCxPBUMmwAyLACKKTYMIMAAf/AEnXjMlwoAAAAASUVORK5CYII=) no-repeat; background-size: 20rpx; background-position: center center;}
-.drink-item-top .drink-item-nums { font-size: 28rpx;}
-.drink-item-top .drink-item-add { border-radius: 50%; background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAHZJREFUeNpi/P//PwORQAGIHxBUBTKQCDwBiD8AsQEhtcQaeOA/BDQQUsvEQGUwauAgNBAW3Qv+Uw7A6ZQRSAgAzT0AxPpUcF8iIzTrgQw1wKNwAtTChUC8AIeaD0B8YTSnjBqImiQYwMmCSiW2ABAHEKMWIMAAeL5UVGyaOUcAAAAASUVORK5CYII=) no-repeat; background-size: 20rpx; background-position: center center; background-color: #012aaa; position: absolute; top: 0; right: -2rpx;}
-.drink-item-top .drink-item-btns-fold .drink-item-reduce { opacity: 0}
+.drink-item-top .drink-item-nums { width: 126rpx; font-size: 28rpx;}
+.drink-item-top .drink-item-add { width: 42rpx; border-radius: 50%; background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAHZJREFUeNpi/P//PwORQAGIHxBUBTKQCDwBiD8AsQEhtcQaeOA/BDQQUsvEQGUwauAgNBAW3Qv+Uw7A6ZQRSAgAzT0AxPpUcF8iIzTrgQw1wKNwAtTChUC8AIeaD0B8YTSnjBqImiQYwMmCSiW2ABAHEKMWIMAAeL5UVGyaOUcAAAAASUVORK5CYII=) no-repeat; background-size: 20rpx; background-position: center center; background-color: #012aaa; position: absolute; top: 0; right: -2rpx; opacity: 0;}
+.drink-item-top .drink-item-btns-fold .drink-item-add { opacity: 1}
 .drink-item-top .drink-item-btns-fold .drink-item-nums { opacity: 0}
 
 .drink-item-bottom { width: 100%; position: relative; margin-top: -1rpx;}

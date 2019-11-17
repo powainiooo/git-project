@@ -2,6 +2,10 @@
    <header initButton="{{headerBtns}}" id="header" bindbtntap="headBtn"></header>
    <ticket-container ticketData="{{detailData.info}}"
                      detailData="{{detailData}}"
-                     id="ticket"></ticket-container>
+                     id="ticket" style="margin-top: 120rpx;"></ticket-container>
 </view>
 <footer itemData="{{detailData}}" bindbtns="footerBtnFunc" id="footer"></footer>
+<!-- 上传护照照片 -->
+<view class="passport-footer" wx:if="{{showPassport}}">
+   <view class="btn" bindtap="openUploadFile">上传护照照片</view>
+</view>

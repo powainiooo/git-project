@@ -1,5 +1,6 @@
 {
   "usingComponents":{
-    "header-view":"../../components/header/header"
+    "header-view":"../../components/header/header",
+     "order-item":"../../components/order-item/drink"
   }
 }

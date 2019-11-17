@@ -1,4 +1,4 @@
-.buy-frame{ overflow: hidden; margin-bottom: 200rpx;}
+.buy-frame{ overflow: hidden; margin-bottom: 160rpx;}
 
 .buy-frame .price{ font-size: 100rpx; line-height:1; font-family: 'Helve'; padding-bottom: 10rpx; padding-top:20rpx;color: #002aac; margin: 0 50rpx;}
 .buy-frame .price .unit{ font-size: 33rpx; align-self: flex-end; margin-bottom: 30rpx; margin-left: 10rpx;}
@@ -14,16 +14,6 @@
 .upload-frame .btn-edit { width: 80rpx; position: absolute; top: 10rpx; right: 10rpx;}
 .upload-frame .photos { width: 100%; height: 100%; border-radius: 8rpx;}
 
-.buy-frame .footer{ width: 100%; height: 160rpx; display: flex; position: fixed; left: 0; bottom: 0;z-index: 110;box-shadow: 0 -5rpx 10rpx rgba(0,0,0,0.1);}
-.buy-frame .footer-shaodow{ box-shadow: none; }
-.buy-frame .footer .ticket-type,.buy-frame .footer .ticket-number{padding-bottom: 10rpx; display: flex; justify-content: center; align-items: center; font-size: 24rpx;background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAUCAYAAADoZO9yAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAMBJREFUeNpi/P//PwOlgJGRUQFozgNKzGCigiMWAKkLQNqAIoNAIUIuBgKQI/5D8QcgNiDbLCo5gmLHUNMRFDmGGo4AWbyBUsdQwxEGhOSo6hBiLKLEMVRzBKWOoaojKNJDbQPJ1UsTR5AVpbRyBKlm0dQRJOU4WjuCWLPp4giiCkSoggm0dgQhx8AkD9DDEXgc04DeMPoIxA5AxRcYaAiA5icAqYUoDSyQC6GtKwEgfkBpk4/E1h3IQQ6gpAEQYABdR/dzEXcE3wAAAABJRU5ErkJggg=="); background-repeat: no-repeat; background-size: 22rpx 13rpx;}
-.buy-frame .footer .ticket-type{ width: 35%; background-color: #ffffff;  background-position: 78% 70rpx;}
-.buy-frame .footer .ticket-number{ width: 25%; background-color: #f5f5f5; font-size: 33rpx;  background-position: 78% 70rpx;align-items: stretch;}
-.buy-frame .footer .ticket-number view{ width: 100rpx; height: 100%; display: flex; justify-content: center; align-items: center;}
-.buy-frame .footer .ticket-number text{font-size: 24rpx;}
-.buy-frame .footer .btn{ width: 75%; background-color: #002aac; padding-bottom: 10rpx; display: flex; justify-content: center; align-items: center; font-size: 34rpx; color: #fff;}
-.buy-frame .footer .btn-disabled{ background-color: #b5b5b6;}
-
 .buy-frame .ticket-type-list{ width: 100%; max-height: 500rpx; overflow-y: scroll; position: fixed; left: 0; bottom: 160rpx; box-shadow: 0 -5rpx 10rpx rgba(0,0,0,0.1); z-index: 100; background-color: #ffffff;  transition: bottom 0.3s cubic-bezier(.22,.62,.37,1);}
 .buy-frame .ticket-type-list view{ height: 100rpx; box-sizing: border-box; font-size: 24rpx; display: flex; justify-content: center; align-items: center; position: relative;}
 .buy-frame .ticket-type-list view.disabled{ background-color: #b5b5b6; color: #ffffff;}
@@ -37,7 +27,7 @@
 .ticket-list .disabled{ box-shadow: none; background-color: #c7c8c9; color: #ffffff;}
 .ticket-list .selected{ box-shadow: 4rpx 8rpx 12rpx rgba(0,42,172,0.5); background-color: #002aac; color: #ffffff;}
 
-.passport-example { width: 100%; height: 100vh; background-color: rgba(244,244,244,0.98);  position: fixed; top: 0; left: 0; z-index: 100; transition: top 0.3s ease-out; display: flex; flex-direction: column; justify-content: center;}
-.passport-example .img { width: 500rpx; margin: 0 0 0 125rpx;}
-.passport-example .hint { margin: 0 50rpx; border-top: 2rpx solid #c7c7c7; color: #868686; font-size: 24rpx; padding: 50rpx 0;}
-.passport-example .btn-close { width: 46rpx; position: absolute; top: 200rpx; right: 54rpx;}
+.passport-example { width: 100%; background-color: rgba(244,244,244,0.98); display: flex; flex-direction: column; justify-content: center; position: relative;}
+.passport-example .img { width: 500rpx; margin: 100rpx 0 0 125rpx;}
+.passport-example .hint { margin: 0 50rpx 160rpx 50rpx; border-top: 2rpx solid #c7c7c7; color: #868686; font-size: 24rpx; padding: 50rpx 0;}
+.passport-example .btn-close { width: 46rpx; position: absolute; top: 50rpx; right: 50rpx;}

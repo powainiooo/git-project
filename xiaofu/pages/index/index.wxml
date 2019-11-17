@@ -42,3 +42,8 @@
    </view>
 </scroll-view>
 <footer itemData="{{detailData}}" bindbtns="footerBtnFunc" id="footer"></footer>
+
+<!-- 上传护照照片 -->
+<view class="passport-footer" wx:if="{{showPassport}}">
+   <view class="btn" bindtap="openUploadFile">上传护照照片</view>
+</view>

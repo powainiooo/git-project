@@ -128,7 +128,8 @@ App({
       buyBtnDisabled: true,
       ticketPrice: 0,
       drinkPrice: 0,
-      drinkParams: []
+      drinkParams: [],
+      showPassport: false
    },
    getCity () {
       let self = this

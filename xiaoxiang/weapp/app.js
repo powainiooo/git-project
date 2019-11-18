@@ -41,9 +41,10 @@ _core["default"].app({
       }
 
       console.log(args);
-    }); // this.onlogin()
-    // this.getSetting()
+    });
 
+    this.onlogin();
+    this.getSetting();
   },
   methods: {
     // 登录

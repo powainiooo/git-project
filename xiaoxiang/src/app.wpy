@@ -31,8 +31,8 @@ wepy.app({
          console.log('app-launch event emitted, the params are:')
          console.log(args)
       })
-      // this.onlogin()
-      // this.getSetting()
+      this.onlogin()
+      this.getSetting()
    },
    methods: {
       // 登录
@@ -73,16 +73,20 @@ wepy.app({
    {
       "pages": [
          "pages/login",
-         "pages/success",
-         "pages/step2",
          "pages/step1",
-         "pages/index"
+         "pages/success",
+         "pages/step2"
       ],
       "window": {
          "backgroundTextStyle": "light",
          "navigationBarBackgroundColor": "#ededed",
          "navigationBarTitleText": "小象搬家",
          "navigationBarTextStyle": "black"
+      },
+      "permission": {
+         "scope.userLocation": {
+            "desc": "你的位置信息将用于计算运送距离。" // 高速公路行驶持续后台定位
+         }
       }
    }
 </config>

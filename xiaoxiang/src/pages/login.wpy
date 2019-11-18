@@ -3,10 +3,11 @@
 .bg1 { width: 100%; position: absolute; top: 0; left: 0; z-index: 0;}
 .bg2 { width: 100%; position: absolute; bottom: 0; left: 0; z-index: 0;}
 .index-frame { width: 540rpx; height: 540rpx; background-color: #3bab70; border-radius: 20rpx; margin: 190rpx auto 0 auto; position: relative; overflow: hidden;}
-.index-frame .input { width: 440rpx; height: 72rpx; background-color: #ffffff; border-radius: 10rpx; margin: 0 auto 38rpx auto; position: relative;}
+.index-frame .input { width: 440rpx; height: 72rpx; background-color: #ffffff; border-radius: 10rpx; margin: 0 auto 50rpx auto; position: relative;}
 .index-frame .input .icons { position: absolute; top: 24rpx; left: 32rpx;}
 .index-frame .input input { width: 370rpx; height: 72rpx; line-height: 72rpx; margin-left: 70rpx; border: none; font-size: 24rpx; color: #000000;}
 .index-frame .input-placeholder .icons { opacity: 0.5}
+.index-frame .input .warn { font-size: 24rpx; color: #ffdd4f; position: absolute; bottom: -40rpx; left: 70rpx;}
 .index-frame .btn { width: 440rpx; background-color: #ffdd4f; margin-top: 70rpx; color: #252525;}
 
 </style>
@@ -15,15 +16,17 @@
    <img src="../res/images/bg1.jpg" mode="widthFix" class="bg1"/>
    <img src="../res/images/bg2.jpg" mode="widthFix" class="bg2"/>
    <div class="index-frame">
-      <div class="input {{name === '' ? 'input-placeholder' : ''}}" style="margin-top: 110rpx;">
+      <div class="input {{name === '' ?  'input-placeholder' : ''}}" style="margin-top: 110rpx;">
          <div class="icons icon-person"></div>
-         <input placeholder="联系人" placeholder-style="color: #889286;" v-model="name"/>
+         <input placeholder="联系人" placeholder-style="color: #889286;" v-model="name" @input="isChecked = false"/>
+         <div class="warn" v-if="isChecked && name === ''">请输入联系人</div>
       </div>
       <div class="input {{phone === '' ? 'input-placeholder' : ''}}">
          <div class="icons icon-phone"></div>
-         <input type="number" placeholder="联系方式" placeholder-style="color: #889286;" v-model="phone"/>
+         <input type="number" placeholder="联系方式" placeholder-style="color: #889286;" v-model="phone" @input="isChecked = false"/>
+         <div class="warn" v-if="isChecked && phoneWarn !== ''">{{phoneWarn}}</div>
       </div>
-      <button class="btn" @tap="doLogin">立即预约{{userOpenID}}</button>
+      <button class="btn" @tap="doLogin">立即预约</button>
    </div>
 </div>
 </template>
@@ -31,12 +34,14 @@
 <script>
 import wepy from '@wepy/core'
 import store from '../store'
-import {createOrderOne} from '@/res/api.js'
+import {createOrderOne, getRemarks} from '@/res/api.js'
 wepy.page({
    store,
    data: {
       name: '',
-      phone: ''
+      phone: '',
+      isChecked: false,
+      phoneWarn: ''
    },
    computed: {
       userOpenID () {
@@ -45,6 +50,19 @@ wepy.page({
    },
    methods: {
       doLogin () {
+         if (this.name === '') {
+            this.isChecked = true
+         }
+         if (this.phone === '') {
+            this.isChecked = true
+            this.phoneWarn = '请输入手机号'
+         }
+         const myreg = /^[1][0-9]{10}$/
+         if (!myreg.test(this.phone)) {
+            this.isChecked = true
+            this.phoneWarn = '手机号格式错误'
+         }
+         if (this.isChecked) return
          createOrderOne({
             openid: store.state.userOpenID,
             name: this.name,
@@ -57,10 +75,19 @@ wepy.page({
                })
             }
          })
+      },
+      getRemarks () {
+         getRemarks().then(res => {
+            store.commit('setRemarks', {
+               remarks1: res.data.remarks1,
+               remarks2: res.data.remarks2
+            })
+            store.commit('setPhone', res.data.phone)
+         })
       }
    },
-   created () {
-
+   onLoad () {
+      this.getRemarks()
    }
 })
 </script>

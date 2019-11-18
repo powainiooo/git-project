@@ -27,7 +27,7 @@
    <div class="price-line">最终价格预估　￥{{basePrice + price}}</div>
    <div class="hr"></div>
    <button class="btn btn-step" @tap="doConfirm">立即下单</button>
-   <div class="hint">备注：工艺品易碎品请咨询人工客服</div>
+   <div class="hint">备注：{{remarks.remarks2}}</div>
    <div class="btn-phone" @tap="makePhone">电话下单：{{phone}}</div>
 </div>
 </template>
@@ -55,6 +55,9 @@ wepy.page({
       },
       orderNums () {
          return store.state.orderNums
+      },
+      remarks () {
+         return store.state.remarks
       }
    },
    onLoad() {

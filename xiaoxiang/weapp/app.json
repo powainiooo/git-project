@@ -1,16 +1,19 @@
 {
-  "pages": [
-    "pages/login",
-    "pages/success",
-    "pages/step2",
-    "pages/step1",
-    "pages/index"
-  ],
-  "window": {
-    "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#ededed",
-    "navigationBarTitleText": "小象搬家",
-    "navigationBarTextStyle": "black"
-  },
-  "sitemapLocation": "sitemap60.json"
+    "pages": [
+        "pages/login",
+        "pages/step1",
+        "pages/success",
+        "pages/step2"
+    ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#ededed",
+        "navigationBarTitleText": "小象搬家",
+        "navigationBarTextStyle": "black"
+    },
+    "permission": {
+        "scope.userLocation": {
+            "desc": "你的位置信息将用于计算运送距离。"
+        }
+    }
 }

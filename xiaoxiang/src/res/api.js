@@ -1,4 +1,4 @@
-const ajaxUrl = 'http://move.pc-online.cc/mobile/applet/'
+const ajaxUrl = 'http://move.pc-online.cc/mobile/applet'
 const ajax = (opts, autoMsg = true) => {
    return new Promise((resolve, reject) => {
       wx.showNavigationBarLoading()
@@ -105,6 +105,17 @@ export const getBasicAmount = (data) => {
 export const getMenuList = (data) => {
    return ajax({
       url: `${ajaxUrl}/menu_ext`,
+      data,
+      header: {
+         'content-type': 'json'
+      }
+   })
+}
+
+// 获取备注信息
+export const getRemarks = (data) => {
+   return ajax({
+      url: `${ajaxUrl}/get_remarks`,
       data,
       header: {
          'content-type': 'json'

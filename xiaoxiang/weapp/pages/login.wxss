@@ -3,10 +3,11 @@
 .bg1 { width: 100%; position: absolute; top: 0; left: 0; z-index: 0;}
 .bg2 { width: 100%; position: absolute; bottom: 0; left: 0; z-index: 0;}
 .index-frame { width: 540rpx; height: 540rpx; background-color: #3bab70; border-radius: 20rpx; margin: 190rpx auto 0 auto; position: relative; overflow: hidden;}
-.index-frame .input { width: 440rpx; height: 72rpx; background-color: #ffffff; border-radius: 10rpx; margin: 0 auto 38rpx auto; position: relative;}
+.index-frame .input { width: 440rpx; height: 72rpx; background-color: #ffffff; border-radius: 10rpx; margin: 0 auto 50rpx auto; position: relative;}
 .index-frame .input .icons { position: absolute; top: 24rpx; left: 32rpx;}
 .index-frame .input input { width: 370rpx; height: 72rpx; line-height: 72rpx; margin-left: 70rpx; border: none; font-size: 24rpx; color: #000000;}
 .index-frame .input-placeholder .icons { opacity: 0.5}
+.index-frame .input .warn { font-size: 24rpx; color: #ffdd4f; position: absolute; bottom: -40rpx; left: 70rpx;}
 .index-frame .btn { width: 440rpx; background-color: #ffdd4f; margin-top: 70rpx; color: #252525;}
 
 

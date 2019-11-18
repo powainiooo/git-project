@@ -12,7 +12,9 @@ _core["default"].page({
   store: _store["default"],
   data: {
     name: '',
-    phone: ''
+    phone: '',
+    isChecked: false,
+    phoneWarn: ''
   },
   computed: {
     userOpenID: function userOpenID() {
@@ -21,6 +23,23 @@ _core["default"].page({
   },
   methods: {
     doLogin: function doLogin() {
+      if (this.name === '') {
+        this.isChecked = true;
+      }
+
+      if (this.phone === '') {
+        this.isChecked = true;
+        this.phoneWarn = '请输入手机号';
+      }
+
+      var myreg = /^[1][0-9]{10}$/;
+
+      if (!myreg.test(this.phone)) {
+        this.isChecked = true;
+        this.phoneWarn = '手机号格式错误';
+      }
+
+      if (this.isChecked) return;
       (0, _api.createOrderOne)({
         openid: _store["default"].state.userOpenID,
         name: this.name,
@@ -34,17 +53,43 @@ _core["default"].page({
           });
         }
       });
+    },
+    getRemarks: function getRemarks() {
+      (0, _api.getRemarks)().then(function (res) {
+        _store["default"].commit('setRemarks', {
+          remarks1: res.data.remarks1,
+          remarks2: res.data.remarks2
+        });
+
+        _store["default"].commit('setPhone', res.data.phone);
+      });
     }
   },
-  created: function created() {}
-}, {info: {"components":{},"on":{}}, handlers: {'10-0': {"tap": function proxy () {
+  onLoad: function onLoad() {
+    this.getRemarks();
+  }
+}, {info: {"components":{},"on":{}}, handlers: {'10-23': {"input": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.isChecked = false
+      })();
+    
+  }},'10-24': {"input": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.isChecked = false
+      })();
+    
+  }},'10-25': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.doLogin($event)
       })();
     
-  }}}, models: {'0': {
+  }}}, models: {'83': {
       type: "input",
       expr: "name",
       handler: function set ($v) {
@@ -52,7 +97,7 @@ _core["default"].page({
         _vm.name = $v;
       
     }
-    },'1': {
+    },'84': {
       type: "input",
       expr: "phone",
       handler: function set ($v) {

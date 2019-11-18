@@ -27,7 +27,7 @@
       <div class="frame">
          <div class="li">
             <div class="name">搬出</div>
-            <input placeholder="填写地址" class="input" placeholder-style="color: #999999" v-model="moveOut.address" @tap="openMap('Out')"/>
+            <input placeholder="填写地址" class="input" placeholder-style="color: #999999" :disabled="true" v-model="moveOut.address" @tap="openMap('Out')"/>
          </div>
          <div class="li">
             <div class="name">楼层</div>
@@ -43,7 +43,7 @@
       <div class="frame">
          <div class="li">
             <div class="name">搬入</div>
-            <input placeholder="填写地址" class="input" placeholder-style="color: #999999" v-model="moveIn.address" @tap="openMap('In')"/>
+            <input placeholder="填写地址" class="input" placeholder-style="color: #999999" :disabled="true" v-model="moveIn.address" @tap="openMap('In')"/>
          </div>
          <div class="li">
             <div class="name">楼层</div>
@@ -57,7 +57,7 @@
    <div class="price-line">基础价格预估　￥{{price}}</div>
    <div class="hr"></div>
    <button class="btn btn-step" @tap="doConfirm">下一步</button>
-   <div class="hint">备注：停车距离超过100米需要增加费用，具体增加费用请通过人工客服咨询。</div>
+   <div class="hint">备注：{{remarks.remarks1}}</div>
    <div class="btn-phone" @tap="makePhone">电话下单：{{phone}}</div>
 </div>
 </template>
@@ -98,6 +98,9 @@ wepy.page({
       },
       orderNums () {
          return store.state.orderNums
+      },
+      remarks () {
+         return store.state.remarks
       }
    },
    onLoad() {

@@ -15,11 +15,15 @@ _core["default"].use(_x["default"]);
 
 var _default = new _x["default"].Store({
   state: {
-    phone: '0755-88888888',
+    phone: '',
     ajaxSrc: 'http://move.pc-online.cc/mobile/',
     userOpenID: '',
     orderNums: '',
-    basePrice: 0
+    basePrice: 0,
+    remarks: {
+      remarks1: '',
+      remarks2: ''
+    }
   },
   mutations: {
     setOpenId: function setOpenId(state, data) {
@@ -30,6 +34,12 @@ var _default = new _x["default"].Store({
     },
     setBasePrice: function setBasePrice(state, data) {
       state.basePrice = data;
+    },
+    setRemarks: function setRemarks(state, data) {
+      state.remarks = data;
+    },
+    setPhone: function setPhone(state, data) {
+      state.phone = data;
     }
   }
 });

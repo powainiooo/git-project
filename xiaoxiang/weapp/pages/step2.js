@@ -26,6 +26,9 @@ _core["default"].page({
     },
     orderNums: function orderNums() {
       return _store["default"].state.orderNums;
+    },
+    remarks: function remarks() {
+      return _store["default"].state.remarks;
     }
   },
   onLoad: function onLoad() {
@@ -219,35 +222,140 @@ _core["default"].page({
       });
     }
   }
-}, {info: {"components":{"numbers":{"path":"..\\components\\numbers"},"upload":{"path":"..\\components\\upload"}},"on":{"12-2":["count"]}}, handlers: {'12-0': {"tap": function proxy () {
+}, {info: {"components":{"numbers":{"path":"..\\components\\numbers"},"upload":{"path":"..\\components\\upload"}},"on":{"12-12":["count"]}}, handlers: {'12-10': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.togglePage('standard')
       })();
     
-  }},'12-1': {"tap": function proxy () {
+  }},'12-11': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.togglePage('picture')
       })();
     
-  }},'12-2': {"count": function proxy () {
+  }},'12-12': {"count": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.countPrice($event)
       })();
     
-  }},'12-3': {"tap": function proxy () {
+  }},'12-13': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.doConfirm($event)
       })();
     
-  }},'12-4': {"tap": function proxy () {
+  }},'12-14': {"tap": function proxy () {
+    var $event = arguments[arguments.length - 1];
+    var _vm=this;
+      return (function () {
+        _vm.makePhone($event)
+      })();
+    
+  }}}, models: {} }, {info: {"components":{"numbers":{"path":"..\\components\\numbers"},"upload":{"path":"..\\components\\upload"}},"on":{"12-12":["count"]}}, handlers: {'12-10': {"tap": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.togglePage('standard')
+      })();
+    
+  }},'12-11': {"tap": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.togglePage('picture')
+      })();
+    
+  }},'12-12': {"count": function proxy () {
+    var $event = arguments[arguments.length - 1];
+    var _vm=this;
+      return (function () {
+        _vm.countPrice($event)
+      })();
+    
+  }},'12-13': {"tap": function proxy () {
+    var $event = arguments[arguments.length - 1];
+    var _vm=this;
+      return (function () {
+        _vm.doConfirm($event)
+      })();
+    
+  }},'12-14': {"tap": function proxy () {
+    var $event = arguments[arguments.length - 1];
+    var _vm=this;
+      return (function () {
+        _vm.makePhone($event)
+      })();
+    
+  }}}, models: {} }, {info: {"components":{"numbers":{"path":"..\\components\\numbers"},"upload":{"path":"..\\components\\upload"}},"on":{"12-12":["count"]}}, handlers: {'12-10': {"tap": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.togglePage('standard')
+      })();
+    
+  }},'12-11': {"tap": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.togglePage('picture')
+      })();
+    
+  }},'12-12': {"count": function proxy () {
+    var $event = arguments[arguments.length - 1];
+    var _vm=this;
+      return (function () {
+        _vm.countPrice($event)
+      })();
+    
+  }},'12-13': {"tap": function proxy () {
+    var $event = arguments[arguments.length - 1];
+    var _vm=this;
+      return (function () {
+        _vm.doConfirm($event)
+      })();
+    
+  }},'12-14': {"tap": function proxy () {
+    var $event = arguments[arguments.length - 1];
+    var _vm=this;
+      return (function () {
+        _vm.makePhone($event)
+      })();
+    
+  }}}, models: {} }, {info: {"components":{"numbers":{"path":"..\\components\\numbers"},"upload":{"path":"..\\components\\upload"}},"on":{"12-12":["count"]}}, handlers: {'12-10': {"tap": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.togglePage('standard')
+      })();
+    
+  }},'12-11': {"tap": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.togglePage('picture')
+      })();
+    
+  }},'12-12': {"count": function proxy () {
+    var $event = arguments[arguments.length - 1];
+    var _vm=this;
+      return (function () {
+        _vm.countPrice($event)
+      })();
+    
+  }},'12-13': {"tap": function proxy () {
+    var $event = arguments[arguments.length - 1];
+    var _vm=this;
+      return (function () {
+        _vm.doConfirm($event)
+      })();
+    
+  }},'12-14': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {

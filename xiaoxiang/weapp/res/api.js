@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getMenuList = exports.getBasicAmount = exports.getHouseType = exports.createOrderThree = exports.createOrderTwo = exports.createOrderOne = exports.wxUserAdd = exports.getWeixin = void 0;
+exports.getRemarks = exports.getMenuList = exports.getBasicAmount = exports.getHouseType = exports.createOrderThree = exports.createOrderTwo = exports.createOrderOne = exports.wxUserAdd = exports.getWeixin = void 0;
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
@@ -11,7 +11,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var ajaxUrl = 'http://move.pc-online.cc/mobile/applet/';
+var ajaxUrl = 'http://move.pc-online.cc/mobile/applet';
 
 var ajax = function ajax(opts) {
   var autoMsg = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
@@ -142,6 +142,19 @@ var getMenuList = function getMenuList(data) {
       'content-type': 'json'
     }
   });
-};
+}; // 获取备注信息
+
 
 exports.getMenuList = getMenuList;
+
+var getRemarks = function getRemarks(data) {
+  return ajax({
+    url: "".concat(ajaxUrl, "/get_remarks"),
+    data: data,
+    header: {
+      'content-type': 'json'
+    }
+  });
+};
+
+exports.getRemarks = getRemarks;

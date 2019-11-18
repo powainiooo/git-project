@@ -4,11 +4,15 @@ wepy.use(Vuex)
 
 export default new Vuex.Store({
    state: {
-      phone: '0755-88888888',
+      phone: '',
       ajaxSrc: 'http://move.pc-online.cc/mobile/',
       userOpenID: '',
       orderNums: '',
-      basePrice: 0
+      basePrice: 0,
+      remarks: {
+         remarks1: '',
+         remarks2: ''
+      }
    },
    mutations: {
       setOpenId (state, data) {
@@ -19,6 +23,12 @@ export default new Vuex.Store({
       },
       setBasePrice (state, data) {
          state.basePrice = data
+      },
+      setRemarks (state, data) {
+         state.remarks = data
+      },
+      setPhone (state, data) {
+         state.phone = data
       }
    }
 })

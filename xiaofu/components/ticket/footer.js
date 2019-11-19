@@ -101,7 +101,7 @@ Component({
 	   },
 	   doPay () {
 	   	if (this.data.itemData.drink_list.length === 0) { // 确认付款
-			   this.triggerEvent('btns', 'doPay')
+			   this.checkCanPay()
 		   } else { // 进入特饮页
 			   this.togglePage('drink')
 			   this.triggerEvent('btns', 'intoDrink')
@@ -110,7 +110,16 @@ Component({
 		   }
 	   },
       doPayDrink () {
-         this.triggerEvent('btns', 'doPay')
+         this.checkCanPay()
+      },
+      checkCanPay () {
+	      if (app.globalData.userInfo === null) {
+            wx.navigateTo({
+               url: '/pages/result/result?page=login'
+            })
+         } else {
+            this.triggerEvent('btns', 'doPay')
+         }
       }
    }
 })

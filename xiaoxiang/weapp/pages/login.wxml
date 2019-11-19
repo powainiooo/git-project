@@ -5,14 +5,14 @@
    <view class="index-frame">
       <view style="margin-top: 110rpx;" class="input {{name === '' ?  'input-placeholder' : ''}}">
          <view class="icons icon-person"></view>
-         <input placeholder="联系人" placeholder-style="color: #889286;" value="{{ name }}" bindinput="_proxy" data-model-id="83" data-wpy-evt="10-23"></input>
+         <input placeholder="联系人" placeholder-style="color: #889286;" value="{{ name }}" bindinput="_proxy" data-model-id="6" data-wpy-evt="11-0"></input>
          <view wx:if="{{ isChecked && name === '' }}" class="warn">请输入联系人</view>
       </view>
       <view class="input {{phone === '' ? 'input-placeholder' : ''}}">
          <view class="icons icon-phone"></view>
-         <input type="number" placeholder="联系方式" placeholder-style="color: #889286;" value="{{ phone }}" bindinput="_proxy" data-model-id="84" data-wpy-evt="10-24"></input>
+         <input type="number" placeholder="联系方式" placeholder-style="color: #889286;" value="{{ phone }}" bindinput="_proxy" data-model-id="7" data-wpy-evt="11-1"></input>
          <view wx:if="{{ isChecked && phoneWarn !== '' }}" class="warn">{{phoneWarn}}</view>
       </view>
-      <button data-wpy-evt="10-25" bindtap="_proxy" class="btn">立即预约</button>
+      <button data-wpy-evt="11-2" bindtap="_proxy" class="btn">立即预约</button>
    </view>
 </view>

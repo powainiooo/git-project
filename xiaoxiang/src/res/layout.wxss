@@ -8,6 +8,8 @@
 
 .btn { width: 600rpx; height: 72rpx; line-height: 72rpx; background-color: #3bab70; color: #ffffff; border-radius: 10rpx; font-size: 24rpx; border: none;}
 
+.checkbox { width: 36rpx; height: 36rpx; -webkit-appearance: none; background-position: -4rpx -30rpx;}
+
 .input-container .title { font-size: 28rpx; color: #3bab70; height: 72rpx; padding: 0 30rpx; display: flex; align-items: center; justify-content: space-between;}
 .input-container .frame { border-top: 1rpx solid #eeeeee; padding: 0 30rpx;}
 .input-container .frame .li { height: 94rpx; border-bottom: 1rpx solid #eeeeee; display: flex; justify-content: space-between; align-items: center;}

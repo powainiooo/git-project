@@ -222,140 +222,140 @@ _core["default"].page({
       });
     }
   }
-}, {info: {"components":{"numbers":{"path":"..\\components\\numbers"},"upload":{"path":"..\\components\\upload"}},"on":{"12-12":["count"]}}, handlers: {'12-10': {"tap": function proxy () {
+}, {info: {"components":{"numbers":{"path":"..\\components\\numbers"},"upload":{"path":"..\\components\\upload"}},"on":{"13-7":["count"]}}, handlers: {'13-5': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.togglePage('standard')
       })();
     
-  }},'12-11': {"tap": function proxy () {
+  }},'13-6': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.togglePage('picture')
       })();
     
-  }},'12-12': {"count": function proxy () {
+  }},'13-7': {"count": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.countPrice($event)
       })();
     
-  }},'12-13': {"tap": function proxy () {
+  }},'13-8': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.doConfirm($event)
       })();
     
-  }},'12-14': {"tap": function proxy () {
+  }},'13-9': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.makePhone($event)
       })();
     
-  }}}, models: {} }, {info: {"components":{"numbers":{"path":"..\\components\\numbers"},"upload":{"path":"..\\components\\upload"}},"on":{"12-12":["count"]}}, handlers: {'12-10': {"tap": function proxy () {
+  }}}, models: {} }, {info: {"components":{"numbers":{"path":"..\\components\\numbers"},"upload":{"path":"..\\components\\upload"}},"on":{"13-7":["count"]}}, handlers: {'13-5': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.togglePage('standard')
       })();
     
-  }},'12-11': {"tap": function proxy () {
+  }},'13-6': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.togglePage('picture')
       })();
     
-  }},'12-12': {"count": function proxy () {
+  }},'13-7': {"count": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.countPrice($event)
       })();
     
-  }},'12-13': {"tap": function proxy () {
+  }},'13-8': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.doConfirm($event)
       })();
     
-  }},'12-14': {"tap": function proxy () {
+  }},'13-9': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.makePhone($event)
       })();
     
-  }}}, models: {} }, {info: {"components":{"numbers":{"path":"..\\components\\numbers"},"upload":{"path":"..\\components\\upload"}},"on":{"12-12":["count"]}}, handlers: {'12-10': {"tap": function proxy () {
+  }}}, models: {} }, {info: {"components":{"numbers":{"path":"..\\components\\numbers"},"upload":{"path":"..\\components\\upload"}},"on":{"13-7":["count"]}}, handlers: {'13-5': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.togglePage('standard')
       })();
     
-  }},'12-11': {"tap": function proxy () {
+  }},'13-6': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.togglePage('picture')
       })();
     
-  }},'12-12': {"count": function proxy () {
+  }},'13-7': {"count": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.countPrice($event)
       })();
     
-  }},'12-13': {"tap": function proxy () {
+  }},'13-8': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.doConfirm($event)
       })();
     
-  }},'12-14': {"tap": function proxy () {
+  }},'13-9': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.makePhone($event)
       })();
     
-  }}}, models: {} }, {info: {"components":{"numbers":{"path":"..\\components\\numbers"},"upload":{"path":"..\\components\\upload"}},"on":{"12-12":["count"]}}, handlers: {'12-10': {"tap": function proxy () {
+  }}}, models: {} }, {info: {"components":{"numbers":{"path":"..\\components\\numbers"},"upload":{"path":"..\\components\\upload"}},"on":{"13-7":["count"]}}, handlers: {'13-5': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.togglePage('standard')
       })();
     
-  }},'12-11': {"tap": function proxy () {
+  }},'13-6': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.togglePage('picture')
       })();
     
-  }},'12-12': {"count": function proxy () {
+  }},'13-7': {"count": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.countPrice($event)
       })();
     
-  }},'12-13': {"tap": function proxy () {
+  }},'13-8': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.doConfirm($event)
       })();
     
-  }},'12-14': {"tap": function proxy () {
+  }},'13-9': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {

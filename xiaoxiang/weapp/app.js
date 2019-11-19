@@ -54,38 +54,36 @@ _core["default"].app({
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _store["default"].commit('setOpenId', '123312');
-
               openid = wx.getStorageSync('openid');
 
               if (!(openid === '' || openid === undefined)) {
-                _context.next = 13;
+                _context.next = 12;
                 break;
               }
 
-              _context.next = 5;
+              _context.next = 4;
               return _regeneratorRuntime2["default"].awrap(login());
 
-            case 5:
+            case 4:
               res = _context.sent;
-              _context.next = 8;
+              _context.next = 7;
               return _regeneratorRuntime2["default"].awrap((0, _api.getWeixin)({
                 code: res.code
               }));
 
-            case 8:
+            case 7:
               resWeixin = _context.sent;
 
-              _store["default"].commit('setOpenId', resWeixin.data.openid);
+              _store["default"].commit('setOpenId', resWeixin.openid);
 
-              wx.setStorageSync('openid', resWeixin.data.openid);
-              _context.next = 14;
+              wx.setStorageSync('openid', resWeixin.openid);
+              _context.next = 13;
               break;
 
-            case 13:
+            case 12:
               _store["default"].commit('setOpenId', openid);
 
-            case 14:
+            case 13:
             case "end":
               return _context.stop();
           }

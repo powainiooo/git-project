@@ -1,5 +1,9 @@
 <style lang="less">
 @import "../res/layout.wxss";
+   .build-type { width: 490rpx; display: flex; align-items: center;}
+   .build-type .check-label { display: flex; align-items: center; margin-right: 30rpx; color: #252525; font-size: 28rpx;}
+   .build-type .check-label .checkbox { margin-right: 10rpx;}
+   .build-type .check-label .checkbox-check { background-position: -46rpx -30rpx;}
 </style>
 <template>
 <div>
@@ -26,10 +30,23 @@
       <div class="title">出发地</div>
       <div class="frame">
          <div class="li">
-            <div class="name">搬出</div>
-            <input placeholder="填写地址" class="input" placeholder-style="color: #999999" :disabled="true" v-model="moveOut.address" @tap="openMap('Out')"/>
+            <div class="name">类型</div>
+            <div class="build-type">
+               <div class="check-label" @tap="changeType('Out', '1')">
+                  <div class="icons checkbox {{moveOut.type === '1' ? 'checkbox-check' : ''}}"></div>
+                  <text>电梯</text>
+               </div>
+               <div class="check-label" @tap="changeType('Out', '2')">
+                  <div class="icons checkbox {{moveOut.type === '2' ? 'checkbox-check' : ''}}"></div>
+                  <text>楼梯</text>
+               </div>
+            </div>
          </div>
          <div class="li">
+            <div class="name">搬出</div>
+            <input placeholder="填写地址" class="input" placeholder-style="color: #999999" :disabled="true" v-model="moveOut.name" @tap="openMap('Out')"/>
+         </div>
+         <div class="li" v-if="moveOut.type === '2'">
             <div class="name">楼层</div>
             <select class="input" :class="{'input-placeholder':moveOut.index === ''}" range="{{buildingList}}" v-model="moveOut.index" @change="getPrice">
                <option>{{moveOut.index === '' ? '选择楼层' : buildingList[moveOut.index]}}</option>
@@ -42,10 +59,23 @@
       <div class="title">目的地</div>
       <div class="frame">
          <div class="li">
-            <div class="name">搬入</div>
-            <input placeholder="填写地址" class="input" placeholder-style="color: #999999" :disabled="true" v-model="moveIn.address" @tap="openMap('In')"/>
+            <div class="name">类型</div>
+            <div class="build-type">
+               <div class="check-label" @tap="changeType('In', '1')">
+                  <div class="icons checkbox {{moveIn.type === '1' ? 'checkbox-check' : ''}}"></div>
+                  <text>电梯</text>
+               </div>
+               <div class="check-label" @tap="changeType('In', '2')">
+                  <div class="icons checkbox {{moveIn.type === '2' ? 'checkbox-check' : ''}}"></div>
+                  <text>楼梯</text>
+               </div>
+            </div>
          </div>
          <div class="li">
+            <div class="name">搬入</div>
+            <input placeholder="填写地址" class="input" placeholder-style="color: #999999" :disabled="true" v-model="moveIn.name" @tap="openMap('In')"/>
+         </div>
+         <div class="li" v-if="moveIn.type === '2'">
             <div class="name">楼层</div>
             <select class="input" :class="{'input-placeholder':moveIn.index === ''}" range="{{buildingList}}" v-model="moveIn.index" @change="getPrice">
                <option>{{moveIn.index === '' ? '选择楼层' : buildingList[moveIn.index]}}</option>
@@ -77,12 +107,16 @@ wepy.page({
       area: '',
       moveOut: {
          index: '',
+         type: '1',
+         name: '',
          address: '',
          lat: '',
          lng: ''
       },
       moveIn: {
          index: '',
+         type: '1',
+         name: '',
          address: '',
          lat: '',
          lng: ''
@@ -104,7 +138,7 @@ wepy.page({
       }
    },
    onLoad() {
-      for (let i = 0; i < 30; i++) {
+      for (let i = 0; i < 10; i++) {
          this.buildingList.push(i + 1)
       }
       getHouseType().then(res => {
@@ -122,14 +156,19 @@ wepy.page({
             order_num: this.orderNums,
             house_type: this.layoutList[this.layout],
             area: this.area,
+            out_type: this.moveOut.type,
+            out_address_name: this.moveOut.name,
             s_address: this.moveOut.address,
+            in_type: this.moveIn.type,
+            in_address_name: this.moveIn.name,
             f_address: this.moveIn.address,
-            s_floor: this.buildingList[this.moveOut.index],
-            f_floor: this.buildingList[this.moveIn.index],
+            s_floor: this.moveOut.type === '1' ? 0 : this.buildingList[this.moveOut.index],
+            f_floor: this.moveIn.type === '1' ? 0 : this.buildingList[this.moveIn.index],
             start_lon: this.moveOut.lng,
             start_lat: this.moveOut.lat,
             finish_lon: this.moveIn.lng,
             finish_lat: this.moveIn.lat
+
          }
          createOrderTwo(obj).then(res => {
             if (res.status === 0) {
@@ -143,12 +182,14 @@ wepy.page({
          getBasicAmount({
             house_type: this.layoutList[this.layout],
             area: this.area,
+            out_type: this.moveOut.type,
+            in_type: this.moveIn.type,
             start_lon: this.moveOut.lng,
             start_lat: this.moveOut.lat,
             finish_lon: this.moveIn.lng,
             finish_lat: this.moveIn.lat,
-            s_floor: this.buildingList[this.moveOut.index],
-            f_floor: this.buildingList[this.moveIn.index]
+            s_floor: this.moveOut.type === '1' ? 0 : this.buildingList[this.moveOut.index],
+            f_floor: this.moveIn.type === '1' ? 0 : this.buildingList[this.moveIn.index]
          }).then(res => {
             if (res.status === 0) {
                this.price = res.result.total
@@ -156,8 +197,13 @@ wepy.page({
             }
          })
       },
+      changeType (key, data) {
+         this[`move${key}`].type = data
+         this.getPrice()
+      },
       async openMap (key) {
          const res = await chooseLocation()
+         this[`move${key}`].name = res.name
          this[`move${key}`].address = res.address
          this[`move${key}`].lat = res.latitude
          this[`move${key}`].lng = res.longitude

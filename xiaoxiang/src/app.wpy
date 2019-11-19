@@ -37,15 +37,14 @@ wepy.app({
    methods: {
       // 登录
       async onlogin () {
-         store.commit('setOpenId', '123312')
          const openid = wx.getStorageSync('openid')
          if (openid === '' || openid === undefined) {
             const res = await login()
             const resWeixin = await getWeixin({
                code: res.code
             })
-            store.commit('setOpenId', resWeixin.data.openid)
-            wx.setStorageSync('openid', resWeixin.data.openid)
+            store.commit('setOpenId', resWeixin.openid)
+            wx.setStorageSync('openid', resWeixin.openid)
          } else {
             store.commit('setOpenId', openid)
          }

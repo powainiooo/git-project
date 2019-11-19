@@ -43,6 +43,12 @@
   font-size: 24rpx;
   border: none;
 }
+.checkbox {
+  width: 36rpx;
+  height: 36rpx;
+  -webkit-appearance: none;
+  background-position: -4rpx -30rpx;
+}
 .input-container .title {
   font-size: 28rpx;
   color: #3bab70;

@@ -8,13 +8,13 @@
             
                
             
-            <picker range="{{layoutList}}" value="{{ layout }}" bindchange="_proxy" data-model-id="49" data-wpy-evt="13-56" class="input {{ [ layout === \'\' ? 'input-placeholder' : '' ] }}">
+            <picker range="{{layoutList}}" value="{{ layout }}" bindchange="_proxy" data-model-id="171" data-wpy-evt="10-297" class="input {{ [ layout === \'\' ? 'input-placeholder' : '' ] }}">
                <view>{{layout === '' ? '选择户型' : layoutList[layout]}}</view>
             </picker>
          </view>
          <view class="li">
             <view class="name">面积</view>
-            <input type="number" placeholder="输入面积" placeholder-style="color: #999999" value="{{ area }}" bindinput="_proxy" data-model-id="50" data-wpy-evt="13-57" bindblur="_proxy" class="input"></input>
+            <input type="number" placeholder="输入面积" placeholder-style="color: #999999" value="{{ area }}" bindinput="_proxy" data-model-id="172" data-wpy-evt="10-298" bindblur="_proxy" class="input"></input>
          </view>
       </view>
    </view>
@@ -23,12 +23,25 @@
       <view class="title">出发地</view>
       <view class="frame">
          <view class="li">
-            <view class="name">搬出</view>
-            <input placeholder="填写地址" placeholder-style="color: #999999" disabled="{{ true }}" value="{{ moveOut.address }}" bindinput="_proxy" data-model-id="51" data-wpy-evt="13-58" bindtap="_proxy" class="input"></input>
+            <view class="name">类型</view>
+            <view class="build-type">
+               <view data-wpy-evt="10-299" bindtap="_proxy" class="check-label">
+                  <view class="icons checkbox {{moveOut.type === '1' ? 'checkbox-check' : ''}}"></view>
+                  <text>电梯</text>
+               </view>
+               <view data-wpy-evt="10-300" bindtap="_proxy" class="check-label">
+                  <view class="icons checkbox {{moveOut.type === '2' ? 'checkbox-check' : ''}}"></view>
+                  <text>楼梯</text>
+               </view>
+            </view>
          </view>
          <view class="li">
+            <view class="name">搬出</view>
+            <input placeholder="填写地址" placeholder-style="color: #999999" disabled="{{ true }}" value="{{ moveOut.name }}" bindinput="_proxy" data-model-id="173" data-wpy-evt="10-301" bindtap="_proxy" class="input"></input>
+         </view>
+         <view wx:if="{{ moveOut.type === '2' }}" class="li">
             <view class="name">楼层</view>
-            <picker range="{{buildingList}}" value="{{ moveOut.index }}" bindchange="_proxy" data-model-id="52" data-wpy-evt="13-59" class="input {{ [ moveOut.index === \'\' ? 'input-placeholder' : '' ] }}">
+            <picker range="{{buildingList}}" value="{{ moveOut.index }}" bindchange="_proxy" data-model-id="174" data-wpy-evt="10-302" class="input {{ [ moveOut.index === \'\' ? 'input-placeholder' : '' ] }}">
                <view>{{moveOut.index === '' ? '选择楼层' : buildingList[moveOut.index]}}</view>
             </picker>
          </view>
@@ -39,12 +52,25 @@
       <view class="title">目的地</view>
       <view class="frame">
          <view class="li">
-            <view class="name">搬入</view>
-            <input placeholder="填写地址" placeholder-style="color: #999999" disabled="{{ true }}" value="{{ moveIn.address }}" bindinput="_proxy" data-model-id="53" data-wpy-evt="13-60" bindtap="_proxy" class="input"></input>
+            <view class="name">类型</view>
+            <view class="build-type">
+               <view data-wpy-evt="10-303" bindtap="_proxy" class="check-label">
+                  <view class="icons checkbox {{moveIn.type === '1' ? 'checkbox-check' : ''}}"></view>
+                  <text>电梯</text>
+               </view>
+               <view data-wpy-evt="10-304" bindtap="_proxy" class="check-label">
+                  <view class="icons checkbox {{moveIn.type === '2' ? 'checkbox-check' : ''}}"></view>
+                  <text>楼梯</text>
+               </view>
+            </view>
          </view>
          <view class="li">
+            <view class="name">搬入</view>
+            <input placeholder="填写地址" placeholder-style="color: #999999" disabled="{{ true }}" value="{{ moveIn.name }}" bindinput="_proxy" data-model-id="175" data-wpy-evt="10-305" bindtap="_proxy" class="input"></input>
+         </view>
+         <view wx:if="{{ moveIn.type === '2' }}" class="li">
             <view class="name">楼层</view>
-            <picker range="{{buildingList}}" value="{{ moveIn.index }}" bindchange="_proxy" data-model-id="54" data-wpy-evt="13-61" class="input {{ [ moveIn.index === \'\' ? 'input-placeholder' : '' ] }}">
+            <picker range="{{buildingList}}" value="{{ moveIn.index }}" bindchange="_proxy" data-model-id="176" data-wpy-evt="10-306" class="input {{ [ moveIn.index === \'\' ? 'input-placeholder' : '' ] }}">
                <view>{{moveIn.index === '' ? '选择楼层' : buildingList[moveIn.index]}}</view>
             </picker>
          </view>
@@ -53,7 +79,7 @@
    <view class="hr"></view>
    <view class="price-line">基础价格预估　￥{{price}}</view>
    <view class="hr"></view>
-   <button data-wpy-evt="13-62" bindtap="_proxy" class="btn btn-step">下一步</button>
+   <button data-wpy-evt="10-307" bindtap="_proxy" class="btn btn-step">下一步</button>
    <view class="hint">备注：{{remarks.remarks1}}</view>
-   <view data-wpy-evt="13-63" bindtap="_proxy" class="btn-phone">电话下单：{{phone}}</view>
+   <view data-wpy-evt="10-308" bindtap="_proxy" class="btn-phone">电话下单：{{phone}}</view>
 </view>

@@ -68,28 +68,28 @@ _core["default"].page({
   onLoad: function onLoad() {
     this.getRemarks();
   }
-}, {info: {"components":{},"on":{}}, handlers: {'10-23': {"input": function proxy () {
+}, {info: {"components":{},"on":{}}, handlers: {'11-0': {"input": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.isChecked = false
       })();
     
-  }},'10-24': {"input": function proxy () {
+  }},'11-1': {"input": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.isChecked = false
       })();
     
-  }},'10-25': {"tap": function proxy () {
+  }},'11-2': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.doLogin($event)
       })();
     
-  }}}, models: {'83': {
+  }}}, models: {'6': {
       type: "input",
       expr: "name",
       handler: function set ($v) {
@@ -97,7 +97,155 @@ _core["default"].page({
         _vm.name = $v;
       
     }
-    },'84': {
+    },'7': {
+      type: "input",
+      expr: "phone",
+      handler: function set ($v) {
+      var _vm=this;
+        _vm.phone = $v;
+      
+    }
+    }} }, {info: {"components":{},"on":{}}, handlers: {'11-0': {"input": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.isChecked = false
+      })();
+    
+  }},'11-1': {"input": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.isChecked = false
+      })();
+    
+  }},'11-2': {"tap": function proxy () {
+    var $event = arguments[arguments.length - 1];
+    var _vm=this;
+      return (function () {
+        _vm.doLogin($event)
+      })();
+    
+  }}}, models: {'6': {
+      type: "input",
+      expr: "name",
+      handler: function set ($v) {
+      var _vm=this;
+        _vm.name = $v;
+      
+    }
+    },'7': {
+      type: "input",
+      expr: "phone",
+      handler: function set ($v) {
+      var _vm=this;
+        _vm.phone = $v;
+      
+    }
+    }} }, {info: {"components":{},"on":{}}, handlers: {'11-0': {"input": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.isChecked = false
+      })();
+    
+  }},'11-1': {"input": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.isChecked = false
+      })();
+    
+  }},'11-2': {"tap": function proxy () {
+    var $event = arguments[arguments.length - 1];
+    var _vm=this;
+      return (function () {
+        _vm.doLogin($event)
+      })();
+    
+  }}}, models: {'6': {
+      type: "input",
+      expr: "name",
+      handler: function set ($v) {
+      var _vm=this;
+        _vm.name = $v;
+      
+    }
+    },'7': {
+      type: "input",
+      expr: "phone",
+      handler: function set ($v) {
+      var _vm=this;
+        _vm.phone = $v;
+      
+    }
+    }} }, {info: {"components":{},"on":{}}, handlers: {'11-0': {"input": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.isChecked = false
+      })();
+    
+  }},'11-1': {"input": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.isChecked = false
+      })();
+    
+  }},'11-2': {"tap": function proxy () {
+    var $event = arguments[arguments.length - 1];
+    var _vm=this;
+      return (function () {
+        _vm.doLogin($event)
+      })();
+    
+  }}}, models: {'6': {
+      type: "input",
+      expr: "name",
+      handler: function set ($v) {
+      var _vm=this;
+        _vm.name = $v;
+      
+    }
+    },'7': {
+      type: "input",
+      expr: "phone",
+      handler: function set ($v) {
+      var _vm=this;
+        _vm.phone = $v;
+      
+    }
+    }} }, {info: {"components":{},"on":{}}, handlers: {'11-0': {"input": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.isChecked = false
+      })();
+    
+  }},'11-1': {"input": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.isChecked = false
+      })();
+    
+  }},'11-2': {"tap": function proxy () {
+    var $event = arguments[arguments.length - 1];
+    var _vm=this;
+      return (function () {
+        _vm.doLogin($event)
+      })();
+    
+  }}}, models: {'6': {
+      type: "input",
+      expr: "name",
+      handler: function set ($v) {
+      var _vm=this;
+        _vm.name = $v;
+      
+    }
+    },'7': {
       type: "input",
       expr: "phone",
       handler: function set ($v) {

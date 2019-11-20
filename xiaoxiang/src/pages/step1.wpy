@@ -15,13 +15,20 @@
             <!--<picker bindchange="selectChange" data-key="layoutIndex" value="{{layoutIndex}}" range="{{layoutList}}">-->
                <!--<div class="input {{layoutIndex === -1 ? 'input-placeholder' : ''}}">{{layoutIndex === -1 ? '选择户型' : layoutList[layoutIndex]}}</div>-->
             <!--</picker>-->
-            <select class="input" :class="{'input-placeholder':layout === ''}" range="{{layoutList}}" v-model="layout" @change="getPrice">
+            <select class="input"
+                    :class="{
+                    'input-placeholder':layout === '',
+                    'input-warn': layout === '' && isChecked
+                    }"
+                    range="{{layoutList}}"
+                    v-model="layout"
+                    @change="getPrice">
                <option>{{layout === '' ? '选择户型' : layoutList[layout]}}</option>
             </select>
          </div>
          <div class="li">
             <div class="name">面积</div>
-            <input type="number" placeholder="输入面积" class="input" placeholder-style="color: #999999" v-model="area" @blur="getPrice"/>
+            <input type="number" placeholder="输入面积" class="input" placeholder-class="input-placeholder" v-model="area" @blur="getPrice"/>
          </div>
       </div>
    </div>
@@ -44,7 +51,12 @@
          </div>
          <div class="li">
             <div class="name">搬出</div>
-            <input placeholder="填写地址" class="input" placeholder-style="color: #999999" :disabled="true" v-model="moveOut.name" @tap="openMap('Out')"/>
+            <input placeholder="填写地址"
+                   class="input"
+                   :placeholder-class="isChecked ? 'input-warn' : 'input-placeholder'"
+                   :disabled="true"
+                   v-model="moveOut.name"
+                   @tap="openMap('Out')"/>
          </div>
          <div class="li" v-if="moveOut.type === '2'">
             <div class="name">楼层</div>
@@ -73,7 +85,12 @@
          </div>
          <div class="li">
             <div class="name">搬入</div>
-            <input placeholder="填写地址" class="input" placeholder-style="color: #999999" :disabled="true" v-model="moveIn.name" @tap="openMap('In')"/>
+            <input placeholder="填写地址"
+                   class="input"
+                   :placeholder-class="isChecked ? 'input-warn' : 'input-placeholder'"
+                   :disabled="true"
+                   v-model="moveIn.name"
+                   @tap="openMap('In')"/>
          </div>
          <div class="li" v-if="moveIn.type === '2'">
             <div class="name">楼层</div>
@@ -106,7 +123,7 @@ wepy.page({
       layout: '',
       area: '',
       moveOut: {
-         index: '',
+         index: 0,
          type: '1',
          name: '',
          address: '',
@@ -114,14 +131,15 @@ wepy.page({
          lng: ''
       },
       moveIn: {
-         index: '',
+         index: 0,
          type: '1',
          name: '',
          address: '',
          lat: '',
          lng: ''
       },
-      price: 0
+      price: 0,
+      isChecked: false
    },
    computed: {
       phone () {
@@ -152,35 +170,45 @@ wepy.page({
          })
       },
       doConfirm () {
-         const obj = {
-            order_num: this.orderNums,
-            house_type: this.layoutList[this.layout],
-            area: this.area,
-            out_type: this.moveOut.type,
-            out_address_name: this.moveOut.name,
-            s_address: this.moveOut.address,
-            in_type: this.moveIn.type,
-            in_address_name: this.moveIn.name,
-            f_address: this.moveIn.address,
-            s_floor: this.moveOut.type === '1' ? 0 : this.buildingList[this.moveOut.index],
-            f_floor: this.moveIn.type === '1' ? 0 : this.buildingList[this.moveIn.index],
-            start_lon: this.moveOut.lng,
-            start_lat: this.moveOut.lat,
-            finish_lon: this.moveIn.lng,
-            finish_lat: this.moveIn.lat
-
-         }
-         createOrderTwo(obj).then(res => {
+         this.isChecked = false
+         if (this.layout === '') this.isChecked = true
+         if (this.moveOut.name === '') this.isChecked = true
+         if (this.moveIn.name === '') this.isChecked = true
+         if (this.isChecked) return
+         const params = this.getParams()
+         params.order_num = this.orderNums
+         params.out_address_name = this.moveOut.name
+         params.s_address = this.moveOut.name
+         params.in_address_name = this.moveIn.name
+         params.f_address = this.moveIn.name
+         createOrderTwo(params).then(res => {
             if (res.status === 0) {
-               wx.navigateTo({
+               wx.redirectTo({
                   url: '/pages/step2'
                })
             }
          })
       },
       getPrice () {
-         getBasicAmount({
-            house_type: this.layoutList[this.layout],
+         const params = this.getParams()
+         getBasicAmount(params).then(res => {
+            if (res.status === 0) {
+               this.price = res.result.total
+               store.commit('setBasePrice', res.result.total)
+            }
+         })
+      },
+      getParams () {
+         let sFloor = 0
+         let fFloor = 0
+         if (this.moveOut.type !== '1') {
+            sFloor = this.moveOut.index === '' ? 0 : this.buildingList[this.moveOut.index]
+         }
+         if (this.moveIn.type !== '1') {
+            fFloor = this.moveIn.index === '' ? 0 : this.buildingList[this.moveIn.index]
+         }
+         return {
+            house_type: this.layout === '' ? '' : this.layoutList[this.layout],
             area: this.area,
             out_type: this.moveOut.type,
             in_type: this.moveIn.type,
@@ -188,14 +216,9 @@ wepy.page({
             start_lat: this.moveOut.lat,
             finish_lon: this.moveIn.lng,
             finish_lat: this.moveIn.lat,
-            s_floor: this.moveOut.type === '1' ? 0 : this.buildingList[this.moveOut.index],
-            f_floor: this.moveIn.type === '1' ? 0 : this.buildingList[this.moveIn.index]
-         }).then(res => {
-            if (res.status === 0) {
-               this.price = res.result.total
-               store.commit('setBasePrice', res.result.total)
-            }
-         })
+            s_floor: sFloor,
+            f_floor: fFloor
+         }
       },
       changeType (key, data) {
          this[`move${key}`].type = data

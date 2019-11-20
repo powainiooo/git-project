@@ -70,7 +70,7 @@ wepy.page({
          }).then(res => {
             if (res.status === 0) {
                store.commit('setOrderNums', res.order_num)
-               wx.navigateTo({
+               wx.redirectTo({
                   url: '/pages/step1'
                })
             }

@@ -11,7 +11,8 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var ajaxUrl = 'http://move.pc-online.cc/mobile/applet';
+// const ajaxUrl = 'http://move.pc-online.cc/mobile/applet'
+var ajaxUrl = 'https://www.xx-bj.com/mobile/applet';
 
 var ajax = function ajax(opts) {
   var autoMsg = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;

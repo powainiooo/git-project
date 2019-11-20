@@ -43,8 +43,7 @@ _core["default"].app({
       console.log(args);
     });
 
-    this.onlogin();
-    this.getSetting();
+    this.onlogin(); // this.getSetting()
   },
   methods: {
     // 登录
@@ -57,7 +56,7 @@ _core["default"].app({
               openid = wx.getStorageSync('openid');
 
               if (!(openid === '' || openid === undefined)) {
-                _context.next = 12;
+                _context.next = 13;
                 break;
               }
 
@@ -73,17 +72,20 @@ _core["default"].app({
 
             case 7:
               resWeixin = _context.sent;
+              (0, _api.wxUserAdd)({
+                openid: resWeixin.openid
+              });
 
               _store["default"].commit('setOpenId', resWeixin.openid);
 
               wx.setStorageSync('openid', resWeixin.openid);
-              _context.next = 13;
+              _context.next = 14;
               break;
 
-            case 12:
+            case 13:
               _store["default"].commit('setOpenId', openid);
 
-            case 13:
+            case 14:
             case "end":
               return _context.stop();
           }

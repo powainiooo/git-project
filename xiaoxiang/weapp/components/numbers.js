@@ -58,112 +58,56 @@ _core["default"].component({
       this.$emit('count');
     }
   }
-}, {info: {"components":{},"on":{}}, handlers: {'17-4': {"tap": function proxy () {
+}, {info: {"components":{},"on":{}}, handlers: {'17-12': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.hidden = !_vm.hidden
       })();
     
-  }},'17-5': {"tap": function proxy (index) {
+  }},'17-13': {"tap": function proxy (index) {
     
     var _vm=this;
       return (function () {
         _vm.toggle(index)
       })();
     
-  }},'17-6': {"tap": function proxy (index) {
+  }},'17-14': {"tap": function proxy (index) {
     
     var _vm=this;
       return (function () {
         _vm.doReduce(index)
       })();
     
-  }},'17-7': {"tap": function proxy (index) {
+  }},'17-15': {"tap": function proxy (index) {
     
     var _vm=this;
       return (function () {
         _vm.doAdd(index)
       })();
     
-  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'17-4': {"tap": function proxy () {
+  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'17-12': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.hidden = !_vm.hidden
       })();
     
-  }},'17-5': {"tap": function proxy (index) {
+  }},'17-13': {"tap": function proxy (index) {
     
     var _vm=this;
       return (function () {
         _vm.toggle(index)
       })();
     
-  }},'17-6': {"tap": function proxy (index) {
+  }},'17-14': {"tap": function proxy (index) {
     
     var _vm=this;
       return (function () {
         _vm.doReduce(index)
       })();
     
-  }},'17-7': {"tap": function proxy (index) {
-    
-    var _vm=this;
-      return (function () {
-        _vm.doAdd(index)
-      })();
-    
-  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'17-4': {"tap": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.hidden = !_vm.hidden
-      })();
-    
-  }},'17-5': {"tap": function proxy (index) {
-    
-    var _vm=this;
-      return (function () {
-        _vm.toggle(index)
-      })();
-    
-  }},'17-6': {"tap": function proxy (index) {
-    
-    var _vm=this;
-      return (function () {
-        _vm.doReduce(index)
-      })();
-    
-  }},'17-7': {"tap": function proxy (index) {
-    
-    var _vm=this;
-      return (function () {
-        _vm.doAdd(index)
-      })();
-    
-  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'17-4': {"tap": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.hidden = !_vm.hidden
-      })();
-    
-  }},'17-5': {"tap": function proxy (index) {
-    
-    var _vm=this;
-      return (function () {
-        _vm.toggle(index)
-      })();
-    
-  }},'17-6': {"tap": function proxy (index) {
-    
-    var _vm=this;
-      return (function () {
-        _vm.doReduce(index)
-      })();
-    
-  }},'17-7': {"tap": function proxy (index) {
+  }},'17-15': {"tap": function proxy (index) {
     
     var _vm=this;
       return (function () {

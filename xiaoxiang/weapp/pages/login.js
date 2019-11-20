@@ -48,7 +48,7 @@ _core["default"].page({
         if (res.status === 0) {
           _store["default"].commit('setOrderNums', res.order_num);
 
-          wx.navigateTo({
+          wx.redirectTo({
             url: '/pages/step1'
           });
         }
@@ -68,28 +68,28 @@ _core["default"].page({
   onLoad: function onLoad() {
     this.getRemarks();
   }
-}, {info: {"components":{},"on":{}}, handlers: {'11-0': {"input": function proxy () {
+}, {info: {"components":{},"on":{}}, handlers: {'10-0': {"input": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.isChecked = false
       })();
     
-  }},'11-1': {"input": function proxy () {
+  }},'10-1': {"input": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.isChecked = false
       })();
     
-  }},'11-2': {"tap": function proxy () {
+  }},'10-2': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.doLogin($event)
       })();
     
-  }}}, models: {'6': {
+  }}}, models: {'0': {
       type: "input",
       expr: "name",
       handler: function set ($v) {
@@ -97,7 +97,7 @@ _core["default"].page({
         _vm.name = $v;
       
     }
-    },'7': {
+    },'1': {
       type: "input",
       expr: "phone",
       handler: function set ($v) {
@@ -105,28 +105,28 @@ _core["default"].page({
         _vm.phone = $v;
       
     }
-    }} }, {info: {"components":{},"on":{}}, handlers: {'11-0': {"input": function proxy () {
+    }} }, {info: {"components":{},"on":{}}, handlers: {'10-0': {"input": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.isChecked = false
       })();
     
-  }},'11-1': {"input": function proxy () {
+  }},'10-1': {"input": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.isChecked = false
       })();
     
-  }},'11-2': {"tap": function proxy () {
+  }},'10-2': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.doLogin($event)
       })();
     
-  }}}, models: {'6': {
+  }}}, models: {'0': {
       type: "input",
       expr: "name",
       handler: function set ($v) {
@@ -134,7 +134,7 @@ _core["default"].page({
         _vm.name = $v;
       
     }
-    },'7': {
+    },'1': {
       type: "input",
       expr: "phone",
       handler: function set ($v) {
@@ -142,28 +142,28 @@ _core["default"].page({
         _vm.phone = $v;
       
     }
-    }} }, {info: {"components":{},"on":{}}, handlers: {'11-0': {"input": function proxy () {
+    }} }, {info: {"components":{},"on":{}}, handlers: {'10-0': {"input": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.isChecked = false
       })();
     
-  }},'11-1': {"input": function proxy () {
+  }},'10-1': {"input": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.isChecked = false
       })();
     
-  }},'11-2': {"tap": function proxy () {
+  }},'10-2': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.doLogin($event)
       })();
     
-  }}}, models: {'6': {
+  }}}, models: {'0': {
       type: "input",
       expr: "name",
       handler: function set ($v) {
@@ -171,7 +171,7 @@ _core["default"].page({
         _vm.name = $v;
       
     }
-    },'7': {
+    },'1': {
       type: "input",
       expr: "phone",
       handler: function set ($v) {
@@ -179,28 +179,28 @@ _core["default"].page({
         _vm.phone = $v;
       
     }
-    }} }, {info: {"components":{},"on":{}}, handlers: {'11-0': {"input": function proxy () {
+    }} }, {info: {"components":{},"on":{}}, handlers: {'10-0': {"input": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.isChecked = false
       })();
     
-  }},'11-1': {"input": function proxy () {
+  }},'10-1': {"input": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.isChecked = false
       })();
     
-  }},'11-2': {"tap": function proxy () {
+  }},'10-2': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.doLogin($event)
       })();
     
-  }}}, models: {'6': {
+  }}}, models: {'0': {
       type: "input",
       expr: "name",
       handler: function set ($v) {
@@ -208,7 +208,7 @@ _core["default"].page({
         _vm.name = $v;
       
     }
-    },'7': {
+    },'1': {
       type: "input",
       expr: "phone",
       handler: function set ($v) {
@@ -216,28 +216,28 @@ _core["default"].page({
         _vm.phone = $v;
       
     }
-    }} }, {info: {"components":{},"on":{}}, handlers: {'11-0': {"input": function proxy () {
+    }} }, {info: {"components":{},"on":{}}, handlers: {'10-0': {"input": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.isChecked = false
       })();
     
-  }},'11-1': {"input": function proxy () {
+  }},'10-1': {"input": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.isChecked = false
       })();
     
-  }},'11-2': {"tap": function proxy () {
+  }},'10-2': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.doLogin($event)
       })();
     
-  }}}, models: {'6': {
+  }}}, models: {'0': {
       type: "input",
       expr: "name",
       handler: function set ($v) {
@@ -245,7 +245,229 @@ _core["default"].page({
         _vm.name = $v;
       
     }
-    },'7': {
+    },'1': {
+      type: "input",
+      expr: "phone",
+      handler: function set ($v) {
+      var _vm=this;
+        _vm.phone = $v;
+      
+    }
+    }} }, {info: {"components":{},"on":{}}, handlers: {'10-0': {"input": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.isChecked = false
+      })();
+    
+  }},'10-1': {"input": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.isChecked = false
+      })();
+    
+  }},'10-2': {"tap": function proxy () {
+    var $event = arguments[arguments.length - 1];
+    var _vm=this;
+      return (function () {
+        _vm.doLogin($event)
+      })();
+    
+  }}}, models: {'0': {
+      type: "input",
+      expr: "name",
+      handler: function set ($v) {
+      var _vm=this;
+        _vm.name = $v;
+      
+    }
+    },'1': {
+      type: "input",
+      expr: "phone",
+      handler: function set ($v) {
+      var _vm=this;
+        _vm.phone = $v;
+      
+    }
+    }} }, {info: {"components":{},"on":{}}, handlers: {'10-0': {"input": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.isChecked = false
+      })();
+    
+  }},'10-1': {"input": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.isChecked = false
+      })();
+    
+  }},'10-2': {"tap": function proxy () {
+    var $event = arguments[arguments.length - 1];
+    var _vm=this;
+      return (function () {
+        _vm.doLogin($event)
+      })();
+    
+  }}}, models: {'0': {
+      type: "input",
+      expr: "name",
+      handler: function set ($v) {
+      var _vm=this;
+        _vm.name = $v;
+      
+    }
+    },'1': {
+      type: "input",
+      expr: "phone",
+      handler: function set ($v) {
+      var _vm=this;
+        _vm.phone = $v;
+      
+    }
+    }} }, {info: {"components":{},"on":{}}, handlers: {'10-0': {"input": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.isChecked = false
+      })();
+    
+  }},'10-1': {"input": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.isChecked = false
+      })();
+    
+  }},'10-2': {"tap": function proxy () {
+    var $event = arguments[arguments.length - 1];
+    var _vm=this;
+      return (function () {
+        _vm.doLogin($event)
+      })();
+    
+  }}}, models: {'0': {
+      type: "input",
+      expr: "name",
+      handler: function set ($v) {
+      var _vm=this;
+        _vm.name = $v;
+      
+    }
+    },'1': {
+      type: "input",
+      expr: "phone",
+      handler: function set ($v) {
+      var _vm=this;
+        _vm.phone = $v;
+      
+    }
+    }} }, {info: {"components":{},"on":{}}, handlers: {'10-0': {"input": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.isChecked = false
+      })();
+    
+  }},'10-1': {"input": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.isChecked = false
+      })();
+    
+  }},'10-2': {"tap": function proxy () {
+    var $event = arguments[arguments.length - 1];
+    var _vm=this;
+      return (function () {
+        _vm.doLogin($event)
+      })();
+    
+  }}}, models: {'0': {
+      type: "input",
+      expr: "name",
+      handler: function set ($v) {
+      var _vm=this;
+        _vm.name = $v;
+      
+    }
+    },'1': {
+      type: "input",
+      expr: "phone",
+      handler: function set ($v) {
+      var _vm=this;
+        _vm.phone = $v;
+      
+    }
+    }} }, {info: {"components":{},"on":{}}, handlers: {'10-0': {"input": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.isChecked = false
+      })();
+    
+  }},'10-1': {"input": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.isChecked = false
+      })();
+    
+  }},'10-2': {"tap": function proxy () {
+    var $event = arguments[arguments.length - 1];
+    var _vm=this;
+      return (function () {
+        _vm.doLogin($event)
+      })();
+    
+  }}}, models: {'0': {
+      type: "input",
+      expr: "name",
+      handler: function set ($v) {
+      var _vm=this;
+        _vm.name = $v;
+      
+    }
+    },'1': {
+      type: "input",
+      expr: "phone",
+      handler: function set ($v) {
+      var _vm=this;
+        _vm.phone = $v;
+      
+    }
+    }} }, {info: {"components":{},"on":{}}, handlers: {'10-0': {"input": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.isChecked = false
+      })();
+    
+  }},'10-1': {"input": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.isChecked = false
+      })();
+    
+  }},'10-2': {"tap": function proxy () {
+    var $event = arguments[arguments.length - 1];
+    var _vm=this;
+      return (function () {
+        _vm.doLogin($event)
+      })();
+    
+  }}}, models: {'0': {
+      type: "input",
+      expr: "name",
+      handler: function set ($v) {
+      var _vm=this;
+        _vm.name = $v;
+      
+    }
+    },'1': {
       type: "input",
       expr: "phone",
       handler: function set ($v) {

@@ -32,7 +32,7 @@ wepy.app({
          console.log(args)
       })
       this.onlogin()
-      this.getSetting()
+      // this.getSetting()
    },
    methods: {
       // 登录
@@ -42,6 +42,9 @@ wepy.app({
             const res = await login()
             const resWeixin = await getWeixin({
                code: res.code
+            })
+            wxUserAdd({
+               openid: resWeixin.openid
             })
             store.commit('setOpenId', resWeixin.openid)
             wx.setStorageSync('openid', resWeixin.openid)

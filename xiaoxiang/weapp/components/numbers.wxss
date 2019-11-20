@@ -91,6 +91,9 @@
 .input-container .frame .li .input-placeholder {
   color: #999999;
 }
+.input-container .frame .li .input-warn {
+  color: #f06161;
+}
 .hr {
   width: 100%;
   height: 16rpx;

@@ -1,4 +1,5 @@
-const ajaxUrl = 'http://move.pc-online.cc/mobile/applet'
+// const ajaxUrl = 'http://move.pc-online.cc/mobile/applet'
+const ajaxUrl = 'https://www.xx-bj.com/mobile/applet'
 const ajax = (opts, autoMsg = true) => {
    return new Promise((resolve, reject) => {
       wx.showNavigationBarLoading()

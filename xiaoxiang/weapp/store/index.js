@@ -16,7 +16,8 @@ _core["default"].use(_x["default"]);
 var _default = new _x["default"].Store({
   state: {
     phone: '',
-    ajaxSrc: 'http://move.pc-online.cc/mobile/',
+    // ajaxSrc: 'http://move.pc-online.cc/mobile/',
+    ajaxSrc: 'https://www.xx-bj.com/mobile/',
     userOpenID: '',
     orderNums: '',
     basePrice: 0,

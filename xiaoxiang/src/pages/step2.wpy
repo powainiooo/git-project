@@ -131,7 +131,7 @@ wepy.page({
          }).then(res => {
             console.log(res)
             if (res.status === 0) {
-               wx.navigateTo({
+               wx.redirectTo({
                   url: '/pages/success'
                })
             }

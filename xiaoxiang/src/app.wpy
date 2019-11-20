@@ -75,9 +75,9 @@ wepy.app({
    {
       "pages": [
          "pages/login",
+         "pages/step2",
          "pages/step1",
-         "pages/success",
-         "pages/step2"
+         "pages/success"
       ],
       "window": {
          "backgroundTextStyle": "light",

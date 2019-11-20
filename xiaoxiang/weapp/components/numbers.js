@@ -41,10 +41,12 @@ _core["default"].component({
     doReduce: function doReduce(i) {
       if (this.list[i].nums === 0) return;
       this.list[i].nums -= 1;
+      this.list[i].checked = this.list[i].nums !== 0;
       this.setPrice();
     },
     doAdd: function doAdd(i) {
       this.list[i].nums += 1;
+      this.list[i].checked = true;
       this.setPrice();
     },
     setPrice: function setPrice() {
@@ -58,56 +60,56 @@ _core["default"].component({
       this.$emit('count');
     }
   }
-}, {info: {"components":{},"on":{}}, handlers: {'17-12': {"tap": function proxy () {
+}, {info: {"components":{},"on":{}}, handlers: {'17-20': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.hidden = !_vm.hidden
       })();
     
-  }},'17-13': {"tap": function proxy (index) {
+  }},'17-21': {"tap": function proxy (index) {
     
     var _vm=this;
       return (function () {
         _vm.toggle(index)
       })();
     
-  }},'17-14': {"tap": function proxy (index) {
+  }},'17-22': {"tap": function proxy (index) {
     
     var _vm=this;
       return (function () {
         _vm.doReduce(index)
       })();
     
-  }},'17-15': {"tap": function proxy (index) {
+  }},'17-23': {"tap": function proxy (index) {
     
     var _vm=this;
       return (function () {
         _vm.doAdd(index)
       })();
     
-  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'17-12': {"tap": function proxy () {
+  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'17-20': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.hidden = !_vm.hidden
       })();
     
-  }},'17-13': {"tap": function proxy (index) {
+  }},'17-21': {"tap": function proxy (index) {
     
     var _vm=this;
       return (function () {
         _vm.toggle(index)
       })();
     
-  }},'17-14': {"tap": function proxy (index) {
+  }},'17-22': {"tap": function proxy (index) {
     
     var _vm=this;
       return (function () {
         _vm.doReduce(index)
       })();
     
-  }},'17-15': {"tap": function proxy (index) {
+  }},'17-23': {"tap": function proxy (index) {
     
     var _vm=this;
       return (function () {

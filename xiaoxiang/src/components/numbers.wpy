@@ -75,10 +75,12 @@ wepy.component({
       doReduce (i) {
          if (this.list[i].nums === 0) return
          this.list[i].nums -= 1
+         this.list[i].checked = this.list[i].nums !== 0
          this.setPrice()
       },
       doAdd (i) {
          this.list[i].nums += 1
+         this.list[i].checked = true
          this.setPrice()
       },
       setPrice () {

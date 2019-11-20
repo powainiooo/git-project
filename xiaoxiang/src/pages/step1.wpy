@@ -178,9 +178,9 @@ wepy.page({
          const params = this.getParams()
          params.order_num = this.orderNums
          params.out_address_name = this.moveOut.name
-         params.s_address = this.moveOut.name
+         params.s_address = this.moveOut.address
          params.in_address_name = this.moveIn.name
-         params.f_address = this.moveIn.name
+         params.f_address = this.moveIn.address
          createOrderTwo(params).then(res => {
             if (res.status === 0) {
                wx.redirectTo({

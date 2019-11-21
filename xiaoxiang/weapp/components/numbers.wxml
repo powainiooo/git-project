@@ -1,19 +1,19 @@
 
 <view class="input-container">
-   <view data-wpy-evt="17-20" bindtap="_proxy" class="title">
+   <view data-wpy-evt="17-0" bindtap="_proxy" class="title">
       <text>{{itemData.name}}</text>
       <view class="icons icon-add"></view>
    </view>
    <view hidden="{{ !(!hidden) }}" class="frame">
       <view wx:for="{{ list }}" wx:for-index="index" wx:for-item="item" wx:key="index" class="li numbers-item">
-         <view data-wpy-evt="17-21" bindtap="_proxy" data-wpytap-a="{{ index }}" class="numbers-item-name {{ [ item.checked ? 'numbers-item-name-active' : '' ] }}">
+         <view data-wpy-evt="17-1" bindtap="_proxy" data-wpytap-a="{{ index }}" class="numbers-item-name {{ [ item.checked ? 'numbers-item-name-active' : '' ] }}">
             <view class="icons checkbox"></view>
             <text>{{item.name}}</text>
          </view>
          <view class="operas">
-            <view data-wpy-evt="17-22" bindtap="_proxy" data-wpytap-a="{{ index }}" class="btn"><view class="icons icon-reduce"></view></view>
+            <view data-wpy-evt="17-2" bindtap="_proxy" data-wpytap-a="{{ index }}" class="btn"><view class="icons icon-reduce"></view></view>
             <view class="nums">{{item.nums}}</view>
-            <view data-wpy-evt="17-23" bindtap="_proxy" data-wpytap-a="{{ index }}" class="btn"><view class="icons icon-add-min"></view></view>
+            <view data-wpy-evt="17-3" bindtap="_proxy" data-wpytap-a="{{ index }}" class="btn"><view class="icons icon-add-min"></view></view>
          </view>
       </view>
    </view>

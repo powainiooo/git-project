@@ -136,6 +136,13 @@ wepy.page({
                })
             }
          })
+      },
+      onShareAppMessage () {
+         return {
+            title: '小象搬家',
+            path: 'pages/login',
+            imageUrl: 'https://www.xx-bj.com/static/xx-bj.png'
+         }
       }
    }
 })

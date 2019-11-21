@@ -63,33 +63,40 @@ _core["default"].page({
 
         _store["default"].commit('setPhone', res.data.phone);
       });
+    },
+    onShareAppMessage: function onShareAppMessage() {
+      return {
+        title: '小象搬家',
+        path: 'pages/login',
+        imageUrl: 'https://www.xx-bj.com/static/xx-bj.png'
+      };
     }
   },
   onLoad: function onLoad() {
     this.getRemarks();
   }
-}, {info: {"components":{},"on":{}}, handlers: {'10-0': {"input": function proxy () {
+}, {info: {"components":{},"on":{}}, handlers: {'10-9': {"input": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.isChecked = false
       })();
     
-  }},'10-1': {"input": function proxy () {
+  }},'10-10': {"input": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.isChecked = false
       })();
     
-  }},'10-2': {"tap": function proxy () {
+  }},'10-11': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.doLogin($event)
       })();
     
-  }}}, models: {'0': {
+  }}}, models: {'12': {
       type: "input",
       expr: "name",
       handler: function set ($v) {
@@ -97,81 +104,7 @@ _core["default"].page({
         _vm.name = $v;
       
     }
-    },'1': {
-      type: "input",
-      expr: "phone",
-      handler: function set ($v) {
-      var _vm=this;
-        _vm.phone = $v;
-      
-    }
-    }} }, {info: {"components":{},"on":{}}, handlers: {'10-0': {"input": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.isChecked = false
-      })();
-    
-  }},'10-1': {"input": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.isChecked = false
-      })();
-    
-  }},'10-2': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.doLogin($event)
-      })();
-    
-  }}}, models: {'0': {
-      type: "input",
-      expr: "name",
-      handler: function set ($v) {
-      var _vm=this;
-        _vm.name = $v;
-      
-    }
-    },'1': {
-      type: "input",
-      expr: "phone",
-      handler: function set ($v) {
-      var _vm=this;
-        _vm.phone = $v;
-      
-    }
-    }} }, {info: {"components":{},"on":{}}, handlers: {'10-0': {"input": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.isChecked = false
-      })();
-    
-  }},'10-1': {"input": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.isChecked = false
-      })();
-    
-  }},'10-2': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.doLogin($event)
-      })();
-    
-  }}}, models: {'0': {
-      type: "input",
-      expr: "name",
-      handler: function set ($v) {
-      var _vm=this;
-        _vm.name = $v;
-      
-    }
-    },'1': {
+    },'13': {
       type: "input",
       expr: "phone",
       handler: function set ($v) {

@@ -220,107 +220,44 @@ _core["default"].page({
           });
         }
       });
+    },
+    onShareAppMessage: function onShareAppMessage() {
+      return {
+        title: '小象搬家',
+        path: 'pages/login',
+        imageUrl: 'https://www.xx-bj.com/static/xx-bj.png'
+      };
     }
   }
-}, {info: {"components":{"numbers":{"path":"..\\components\\numbers"},"upload":{"path":"..\\components\\upload"}},"on":{"13-2":["count"]}}, handlers: {'13-0': {"tap": function proxy () {
+}, {info: {"components":{"numbers":{"path":"..\\components\\numbers"},"upload":{"path":"..\\components\\upload"}},"on":{"11-12":["count"]}}, handlers: {'11-10': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.togglePage('standard')
       })();
     
-  }},'13-1': {"tap": function proxy () {
+  }},'11-11': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.togglePage('picture')
       })();
     
-  }},'13-2': {"count": function proxy () {
+  }},'11-12': {"count": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.countPrice($event)
       })();
     
-  }},'13-3': {"tap": function proxy () {
+  }},'11-13': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.doConfirm($event)
       })();
     
-  }},'13-4': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.makePhone($event)
-      })();
-    
-  }}}, models: {} }, {info: {"components":{"numbers":{"path":"..\\components\\numbers"},"upload":{"path":"..\\components\\upload"}},"on":{"13-2":["count"]}}, handlers: {'13-0': {"tap": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.togglePage('standard')
-      })();
-    
-  }},'13-1': {"tap": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.togglePage('picture')
-      })();
-    
-  }},'13-2': {"count": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.countPrice($event)
-      })();
-    
-  }},'13-3': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.doConfirm($event)
-      })();
-    
-  }},'13-4': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.makePhone($event)
-      })();
-    
-  }}}, models: {} }, {info: {"components":{"numbers":{"path":"..\\components\\numbers"},"upload":{"path":"..\\components\\upload"}},"on":{"13-2":["count"]}}, handlers: {'13-0': {"tap": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.togglePage('standard')
-      })();
-    
-  }},'13-1': {"tap": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.togglePage('picture')
-      })();
-    
-  }},'13-2': {"count": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.countPrice($event)
-      })();
-    
-  }},'13-3': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.doConfirm($event)
-      })();
-    
-  }},'13-4': {"tap": function proxy () {
+  }},'11-14': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {

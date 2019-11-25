@@ -39,7 +39,7 @@
 
 </view>
 
-<view class="passport-example" style="top:{{showExample ? 0 : '100vh'}}" wx:if="{{showExample}}" catchtouchmove="tmove">
+<view class="passport-example" style="top:{{showExample ? '10rpx' : '100vh'}}" wx:if="{{showExample}}">
    <image src="../../res/images/close.png" mode="widthFix" class="btn-close" bindtap="doHideExample"></image>
    <image src="../../res/images/passport.png" mode="widthFix" class="img"></image>
    <view class="hint">请上传护照扫描件，确保护照内容文字清晰，避免带来不必要的麻烦。</view>

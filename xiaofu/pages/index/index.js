@@ -173,7 +173,8 @@ Page({
       }).then(res => {
          this.setData({
          	detailData: res.data,
-         	detailPage: 'detail'
+         	detailPage: 'detail',
+            selectedTicketStyles: `top: 120rpx; transition-duration: 0s; background-color: #002bb0;`,
          })
       })
 	},

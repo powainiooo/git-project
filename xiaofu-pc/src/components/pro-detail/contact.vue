@@ -9,6 +9,7 @@
       width 120px
    p
       font-size 16px
+      font-weight bolder
 </style>
 
 <template>

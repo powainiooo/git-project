@@ -65,6 +65,10 @@
             display flex
             align-items center
             input
+               width 300px
+               height 54px
+               line-height 54px
+               padding 4px 0 0 30px
                color #ffffff
                border-right 1px solid #002aa6
                &::-webkit-input-placeholder
@@ -77,20 +81,14 @@
                top 185px
                right 40px
                z-index 0
-         .v2-date-wrap
-            width 300px
-            height 54px
-            padding 12px 0 0 30px
-            background-color transparent
-            border none
-            position relative
-            z-index 1
-            svg
-               display none
-            .v2-picker-trigger
-               font-size 16px
-               padding 0
-               color #ffffff
+            .date-picker
+               width 300px
+               height 54px
+               position absolute
+               bottom 120px
+               left 18px
+               .ivu-date-picker-rel
+                  opacity 0
    .to-xiaofu
       width 290px
       position absolute
@@ -98,11 +96,11 @@
       bottom 40px
       &::before
          content '在 小夫有票 发布票务？'
-         font-size 16px
+         font-size 14px
          color #ffffff
          position absolute
          top -25px
-         left 60px
+         left 70px
       .n-btn a
          font-size 22px
 </style>
@@ -120,8 +118,8 @@
                <a href="javascript:;" @click="doSearch"></a>
             </div>
             <div class="date">
-               <!--<input type="text" placeholder="或选择日期"/>-->
-               <v2-datepicker v-model='date' placeholder="或选择日期" @change="dateChange" ref="picker"></v2-datepicker>
+               <input type="text" v-model='dateVal' placeholder="或选择日期" readonly/>
+               <DatePicker v-model='date' format="yyyy/MM/dd" @on-change="dateChange" class="date-picker"></DatePicker>
                <a href="javascript:;"></a>
             </div>
          </div>
@@ -143,7 +141,8 @@
       data() {
          return {
             keyword: '',
-            date: ''
+            date: '',
+            dateVal: '',
          }
       },
       computed: {
@@ -161,7 +160,7 @@
       methods: {
          doSearch (e) {
             this.date = ''
-            this.$refs.picker.displayDate = ''
+            this.dateVal = ''
             this.$emit('search', {
                keyword: this.keyword,
                date: this.date
@@ -169,9 +168,10 @@
          },
          dateChange (e) {
             this.keyword = ''
+            this.dateVal = e
             this.$emit('search', {
                keyword: this.keyword,
-               date: this.date
+               date: e
             })
          },
          toXiaofu () {
@@ -180,7 +180,7 @@
          reset () {
             this.keyword = ''
             this.date = ''
-            this.$refs.picker.displayDate = ''
+            this.dateVal = ''
          },
          backIndex () {
             this.$emit('taplogo')

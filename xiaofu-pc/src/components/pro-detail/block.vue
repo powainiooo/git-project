@@ -1,14 +1,15 @@
 <style lang="stylus" type="text/stylus" scoped>
 .z-block
    position relative
-   margin 0 0 100px 125px
+   margin 0 0 100px 0
+   padding-left 125px
    &::after
       content ''
       width 435px
       height 1px
       position absolute
       bottom -50px
-      left 33px
+      left 158px
       background-color #dddddd
    .title
       font-size 26px

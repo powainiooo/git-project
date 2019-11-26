@@ -41,7 +41,7 @@ export default {
 	         'z-index': this.zIndex,
 	         'position': this.fixed ? 'fixed' : 'absolute',
             "top": this.type === 'menu' ? '23px' : '58px',
-            "right": this.type === 'menu' ? '43px' : '53px',
+            "right": this.type === 'menu' ? '43px' : '103px',
          }
       }
    }

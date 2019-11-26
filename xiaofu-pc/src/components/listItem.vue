@@ -54,10 +54,12 @@
                font-size 32px
          .logo
             height 100%
-            text-align center
+            display flex
+            align-items center
+            justify-content center
             img
                width auto
-               height 100%
+               height 70%
 
       .title
          font-size 18px
@@ -121,6 +123,7 @@
                </div>
                <div class="days">{{itemData.date}}</div>
             </div>
+            <!--<div class="logo"><img src="@/assets/images/logo2.png"/></div>-->
             <div class="logo"><img :src="imgSrc + itemData.cover"/></div>
          </div>
          <div class="title" v-if="itemData.activity === ''">{{itemData.goods_name}}</div>

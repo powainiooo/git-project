@@ -31,7 +31,7 @@
    <div class="pro-detail" v-if="show">
       <transition enter-active-class="slideIn750" leave-active-class="slideOut750">
          <div class="detail-frame" v-if="showFrame" ref="frame">
-            <btn-func @click.native="doClose" fixed></btn-func>
+            <btn-func @click.native="doClose" fixed style="right: 53px"></btn-func>
             <z-block style="margin-top: 65px; height: 765px;">
                <list-item :width="500" :itemData="itemData.info"></list-item>
             </z-block>

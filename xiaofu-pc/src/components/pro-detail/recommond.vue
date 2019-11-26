@@ -1,6 +1,6 @@
 <style lang="stylus" type="text/stylus" scoped>
 .recommond-swiper
-   margin-left 30px
+   margin-left -125px
    padding-top 4px
    height 330px
    .swiper-slide
@@ -8,6 +8,10 @@
    &:hover
       .swiper-btn
          display flex
+   .swiper-btn-prev
+      left 165px
+   .swiper-btn-next
+      right 280px
 </style>
 
 <template>
@@ -18,8 +22,8 @@
          <list-item :width="320" fold :itemData="i" @tap="getDetail(i.id)"></list-item>
       </swiper-slide>
       <!-- Optional controls -->
-      <div class="swiper-btn swiper-btn-prev" slot="button-prev" style="top: 180px"><i></i></div>
-      <div class="swiper-btn swiper-btn-next" slot="button-next" style="top: 180px"><i></i></div>
+      <div class="swiper-btn swiper-btn-prev" slot="button-prev" style="top: 130px"><i></i></div>
+      <div class="swiper-btn swiper-btn-next" slot="button-next" style="top: 130px"><i></i></div>
    </swiper>
 </div>
 </template>
@@ -34,6 +38,7 @@ export default {
          swiperOption: {
             slidesPerView: 'auto',
             spaceBetween: 16,
+            slidesOffsetBefore: 155,
             simulateTouch: false,
             navigation: {
                nextEl: '.swiper-btn-next',

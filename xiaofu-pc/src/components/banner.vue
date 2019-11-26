@@ -35,7 +35,7 @@
    <t-button class="z-btn" @dotap="gotoDetail" extraClass="white">了解详情</t-button>
    <div class="opera" v-if="showCity">
       <div class="z-select">
-         <Select v-model="city" style="width:200px" class="z-select" @on-change="cityChange" placeholder="选择城市">
+         <Select v-model="city" style="width:200px" class="z-select" @on-change="cityChange" placeholder="选择城市" :capture="false">
             <Option :value="0">全部</Option>
             <Option v-for="item in citys" :value="item.id" :key="item.id">{{ item.name }}</Option>
          </Select>

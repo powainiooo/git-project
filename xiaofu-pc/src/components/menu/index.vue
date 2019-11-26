@@ -1,7 +1,7 @@
 <style>
 .n-menu{ position: fixed; top: 0; right: 0; z-index: 1500;}
 .n-menu-bg { position: fixed; top: 0; right: 0; bottom: 0; left: 0;  background-color: rgba(0, 0, 0, 0.7);}
-.n-menu .n-menu-frame{ width: 500px; height: 100vh; position: absolute; top: 0; right: 0; background-color: #ffffff; box-shadow: 0 2px 10px rgba(0,0,0,0.2); overflow: hidden; z-index: 10}
+.n-menu .n-menu-frame{ width: 550px; height: 100vh; position: absolute; top: 0; right: -50px; background-color: #ffffff; box-shadow: 0 2px 10px rgba(0,0,0,0.2); overflow: hidden; z-index: 10}
 .n-menu .n-menu-frame::-webkit-scrollbar{ width: 3px; background-color: #ffffff;}
 .n-menu .n-menu-frame::-webkit-scrollbar-thumb{ background-color: #002aa6;}
 .n-menu .copyright{ position: absolute; left: 35px; bottom: 30px;}

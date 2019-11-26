@@ -2,16 +2,18 @@
 .actor-list
    width 470px
    margin-left 15px
+   list-style none
    &>li
       height 225px
       margin-bottom 24px
-      box-shadow 0 0 20rpx rgba(0,0,0,0.25)
+      box-shadow 0 0 20px rgba(0, 0, 0, .25)
       border-radius 15px
       overflow hidden
       position relative
       img
          width 100%
          height 100%
+         border-radius 15px
       h3
          color #ffffff
          width 100%

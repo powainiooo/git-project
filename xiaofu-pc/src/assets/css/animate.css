@@ -10,23 +10,23 @@
 }
 .slideIn750 { animation: slideIn750 0.3s ease-out;}
 @keyframes slideIn750 {
-   0% { right: -750px}
-   100% { right: 0}
+   0% { transform: translateX(750px)}
+   100% { transform: translateX(0)}
 }
 .slideOut750 { animation: slideOut750 0.3s ease-out;}
 @keyframes slideOut750 {
-   0% { right: 0}
-   100% { right: -750px}
+   0% { transform: translateX(0)}
+   100% { transform: translateX(750px)}
 }
-.slideIn500 { animation: slideIn500 0.3s ease-out;}
+.slideIn500 { animation: slideIn500 0.4s cubic-bezier(.25,.84,.48,1.14);}
 @keyframes slideIn500 {
-   0% { right: -500px}
-   100% { right: 0}
+   0% { transform: translateX(500px)}
+   100% { transform: translateX(0)}
 }
 .slideOut500 { animation: slideOut500 0.3s ease-out;}
 @keyframes slideOut500 {
-   0% { right: 0}
-   100% { right: -500px}
+   0% { transform: translateX(0)}
+   100% { transform: translateX(500px)}
 }
 .slideUp { animation: slideUp 0.3s ease-out}
 @keyframes slideUp {

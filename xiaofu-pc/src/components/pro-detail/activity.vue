@@ -1,6 +1,6 @@
 <style lang="stylus" type="text/stylus" scoped>
 .activity-swiper
-   margin-left 30px
+   margin-left -125px
    .swiper-slide
       width 440px
       height 226px
@@ -12,6 +12,10 @@
    &:hover
       .swiper-btn
          display flex
+   .swiper-btn-prev
+      left 170px
+   .swiper-btn-next
+      right 170px
 .swiper-pagination
    width 500px
    position relative
@@ -44,9 +48,9 @@
          <img :src="imgSrc + item.img" class="activity-img">
       </swiper-slide>
       <!-- Optional controls -->
-      <div class="swiper-btn swiper-btn-prev" slot="button-prev"><i></i></div>
-      <div class="swiper-btn swiper-btn-next" slot="button-next"><i></i></div>
-      <div class="swiper-pagination"  slot="pagination"></div>
+      <div class="swiper-btn swiper-btn-prev" slot="button-prev" v-if="listData.length > 1"><i></i></div>
+      <div class="swiper-btn swiper-btn-next" slot="button-next" v-if="listData.length > 1"><i></i></div>
+      <div class="swiper-pagination"  slot="pagination" v-if="listData.length > 1"></div>
    </swiper>
    <div class="swiper-content">{{content}}</div>
 </div>
@@ -60,6 +64,7 @@ export default {
          swiperOption: {
             slidesPerView: 'auto',
             spaceBetween: 16,
+            centeredSlides: true,
             pagination: {
                el: '.swiper-pagination',
                clickable :true

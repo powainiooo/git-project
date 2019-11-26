@@ -16,6 +16,6 @@
           <view>未验票<text>{{notCheckNum < 10 ? 0 : ''}}{{notCheckNum}}</text></view>
           <view>已验票<text>{{checkNum < 10 ? 0 : ''}}{{checkNum}}</text></view>
        </view>
-        <view class="hint-section">一个二维码对应一张或多张特饮兑换券，到活动现场后，将本二维码出示给工作人员用于兑换特饮。</view>
+        <view class="hint-section">一个二维码对应一张特饮兑换券，到活动现场后，将本二维码出示给工作人员用于兑换特饮。</view>
     </view>
 </view>

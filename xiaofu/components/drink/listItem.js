@@ -55,6 +55,7 @@ Component({
             numsIndex: e.detail.value,
             nums: this.data.numsArr[e.detail.value]
          })
+         this.triggerEvent('change', this.data.nums)
       }
    }
 })

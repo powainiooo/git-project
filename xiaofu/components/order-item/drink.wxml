@@ -1,12 +1,12 @@
-<view class="ticket {{itemData.child[itemIndex].is_check == '1' ? '' : 'shadow-top'}} {{isSimple ? 'ticket-simple' : ''}}">
+<view class="ticket {{itemData.child[itemIndex].is_check === '1' ? '' : 'shadow-top'}} {{isSimple ? 'ticket-simple' : ''}}">
    <view class="check-icon" wx:if="{{itemData.child[itemIndex].is_check == '1'}}"></view>
    <view class="">
       <view class="top {{itemData.child[itemIndex].is_check == '1' ? '' : 'shadow-frame'}}">
-         <view class="frame1 check-frame1" style="background-color: #f3f3f3;"  wx:if="{{itemData.child[itemIndex].is_check == '1'}}">
+         <view class="frame1 check-frame1"  wx:if="{{itemData.child[itemIndex].is_check === '1'}}">
             <view class="line1">已兑换</view>
             <text class="ids">{{itemData.order_num}}</text>
          </view>
-         <view class="frame1"  wx:if="{{itemData.child[itemIndex].is_check == '0'}}">
+         <view class="frame1"  wx:if="{{itemData.child[itemIndex].is_check === '0'}}">
             <view class="line1">
                <image src="{{itemData.child[itemIndex].ewm_url}}" mode="widthFix" class="qrcode"></image>
             </view>

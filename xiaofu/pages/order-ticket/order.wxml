@@ -1,67 +1,68 @@
-<view class="container {{isMove ? 'bg-gradient' : 'bg-gray'}}" id="bodyFrame">
+<view class="container bg-gray" id="bodyFrame">
     <header-view showMenu="{{false}}"></header-view>
-    <view class='body order-body' animation="{{indexAniData}}" wx:if="{{showTicketIndex}}">
-       <view class="{{isMove ? 'bg-gradient2' : 'bg-white'}}">
-          <view class='title-en'><text>Order\nCenter</text></view>
-          <view class='title-cn'><text>订单中心</text></view>
-       </view>
-
-        <view class="order-frame {{isMove ? 'order-frame-left' : ''}}">
-            <view class="order-list">
-                <view class="order-item"
-                      wx:if="{{listData.length !== 0}}"
-                      wx:for="{{listData}}"
-                      wx:for-index="index"
-                      wx:for-item="item"
-                      wx:key="index"
-                      data-id="{{item.order_num}}"
-                      bindtap="gotoDetail"
-                      hover-class="order-item-touch"
-                      hover-start-time="10">
-                    <order-item itemData="{{item}}" itemIndex="{{index}}"></order-item>
-                </view>
-               <!--无搜索结果  -->
-               <view class='result-frame' wx:if="{{listData.length === 0}}">
-                  <view class='icons icon-cuowu'>
-                     <view class="white"></view>
-                  </view>
-                  <view><text class='hint-en'>Irrelevant \n Content</text></view>
-                  <view class='hint-cn'>无相关内容</view>
+   <view class="order-frame {{isMove ? 'order-frame-left' : ''}}">
+      <scroll-view scroll-y class="order-list">
+         <view class="title-frame bg-white">
+            <view class='title-en'><text>Order\nCenter</text></view>
+            <view class='title-cn'><text>订单中心</text></view>
+         </view>
+         <view class="order-item"
+               wx:if="{{listData.length !== 0}}"
+               wx:for="{{listData}}"
+               wx:for-index="index"
+               wx:for-item="item"
+               wx:key="index"
+               data-id="{{item.order_num}}"
+               bindtap="gotoDetail"
+               hover-class="order-item-touch"
+               hover-start-time="10">
+            <order-item itemData="{{item}}" itemIndex="{{index}}"></order-item>
+         </view>
+         <!--无搜索结果  -->
+         <view class='result-frame' wx:if="{{listData.length === 0}}">
+            <view class='icons icon-cuowu'>
+               <view class="white"></view>
+            </view>
+            <view><text class='hint-en'>Irrelevant \n Content</text></view>
+            <view class='hint-cn'>无相关内容</view>
+         </view>
+      </scroll-view>
+      <scroll-view scroll-y class="item-list bg-gradient">
+         <view class="title-frame bg-gradient2">
+            <view class='title-en'><text>Order\nCenter</text></view>
+            <view class='title-cn'><text>订单中心</text></view>
+         </view>
+         <view class="item"
+               wx:if="{{listData2.length !== 0}}"
+               wx:for="{{listData2}}"
+               wx:for-item="item"
+               wx:key="{{item.id}}"
+               hover-class="item-touch"
+               hover-start-time="10"
+               data-id="{{item.order_num}}"
+               bindtap="gotoDetail2">
+            <view class="img"><image src="{{imgSrc+item.cover}}" mode="widthFix"></image></view>
+            <view class="title">
+               <image src="../../res/images/drink-frame-bottom.png" mode="widthFix"></image>
+               <view class="name">
+                  <view>{{item.title}}</view>
+                  <view style="font-size: 24rpx;">{{item.is_check === '0' ? '未使用' : '已使用'}}</view>
                </view>
             </view>
-            <view class="item-list">
-                <view class="item"
-                      wx:if="{{listData2.length !== 0}}"
-                      wx:for="{{listData2}}"
-                      wx:for-item="item"
-                      wx:key="{{item.id}}"
-                      hover-class="item-touch"
-                      hover-start-time="10"
-                      data-id="{{item.order_num}}"
-                      bindtap="gotoDetail2">
-                   <view class="img"><image src="{{imgSrc+item.cover}}" mode="widthFix"></image></view>
-                   <view class="title">
-                      <image src="../../res/images/drink-frame-bottom.png" mode="widthFix"></image>
-                      <view class="name">
-                         <view>{{item.title}}</view>
-                         <view style="font-size: 24rpx;">{{item.is_check === '0' ? '未使用' : '已使用'}}</view>
-                      </view>
-                   </view>
-                </view>
-               <!--无搜索结果  -->
-               <view class='result-frame' wx:if="{{listData2.length === 0}}">
-                  <view class='icons icon-cuowu'>
-                     <view class="white"></view>
-                  </view>
-                  <view><text class='hint-en'>Irrelevant \n Content</text></view>
-                  <view class='hint-cn'>无相关内容</view>
-               </view>
+         </view>
+         <!--无搜索结果  -->
+         <view class='result-frame' wx:if="{{listData2.length === 0}}">
+            <view class='icons icon-cuowu'>
+               <view class="white"></view>
             </view>
-        </view>
+            <view><text class='hint-en'>Irrelevant \n Content</text></view>
+            <view class='hint-cn'>无相关内容</view>
+         </view>
+      </scroll-view>
+   </view>
 
-        <view class="footer-tab">
-            <view class="{{isMove ? '' : 'active'}}" data-val="{{false}}" bindtap="changeTab"><text>已购票务</text></view>
-            <view class="{{isMove ? 'active' : ''}}" data-val="{{true}}" bindtap="changeTab"><text>小夫特饮</text></view>
-        </view>
-    </view>
+   <view class="footer-tab">
+      <view class="{{isMove ? '' : 'active'}}" data-val="{{false}}" bindtap="changeTab"><text>已购票务</text></view>
+      <view class="{{isMove ? 'active' : ''}}" data-val="{{true}}" bindtap="changeTab"><text>小夫特饮</text></view>
+   </view>
 </view>

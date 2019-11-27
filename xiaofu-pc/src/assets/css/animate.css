@@ -28,13 +28,24 @@
    0% { transform: translateX(0)}
    100% { transform: translateX(500px)}
 }
-.slideUp { animation: slideUp 0.3s ease-out}
+.slideIn100 { animation: slideIn100 0.3s cubic-bezier(.25,.84,.48,1.14);}
+@keyframes slideIn100 {
+   0% { transform: translateX(100px)}
+   100% { transform: translateX(0)}
+}
+.slideUp { animation: slideUp 0.8s cubic-bezier(.18,.78,.52,.94) both}
 @keyframes slideUp {
-   0% { opacity: 0; transform: translate(0, 100px)}
+   0% { opacity: 0; transform: translate(0, 150px)}
    100% { opacity: 1; transform: translate(0, 0)}
 }
 .slideDown { animation: slideDown 0.3s ease-out}
 @keyframes slideDown {
    0% { opacity: 1; transform: translate(0, 0)}
    100% { opacity: 0; transform: translate(0, 100px)}
+}
+
+.scaleIn { animation: scaleIn 0.3s cubic-bezier(.18,.83,.61,1.36) 1s both}
+@keyframes scaleIn {
+   0% { opacity: 0; transform: scale(0)}
+   100% { opacity: 1; transform: scale(1)}
 }

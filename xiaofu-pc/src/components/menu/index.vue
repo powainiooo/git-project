@@ -18,12 +18,15 @@
    <transition enter-active-class="slideIn500" leave-active-class="slideOut500">
    <div class="n-menu-frame" v-if="showFrame">
       <menu-nav @toggle="toggle"></menu-nav>
-      <transition enter-active-class="" leave-active-class="">
+
+      <transition enter-active-class="fadeIn" leave-active-class="fadeOut">
       <member v-if="showItem === 'member'"></member>
       <after-sales v-else-if="showItem === 'aftersales'"></after-sales>
       <contact v-else-if="showItem === 'contact'"></contact>
       </transition>
+
       <btn-func @click.native="doToggleMenu"></btn-func>
+
       <div class="copyright" v-if="showItem === 'nav'">
          <img src="@/assets/images/logo3.png" /><br>
          <span>Copyright &copyright; 2018HO.AllRights reserved.粤ICP备16121686号-1</span>

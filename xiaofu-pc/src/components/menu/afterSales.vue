@@ -6,10 +6,10 @@
 </style>
 
 <template>
-<m-block>
+<m-block class="slideUp" style="animation-delay: 0.2s">
    <template slot="en">After<br/>Sales</template>
    <template slot="cn">售后声明</template>
-   <div class="content" v-html="content"></div>
+   <div class="content slideUp" v-html="content" style="animation-delay: 0.4s"></div>
 </m-block>
 </template>
 

@@ -20,9 +20,11 @@
       <menu-nav @toggle="toggle"></menu-nav>
 
       <transition enter-active-class="fadeIn" leave-active-class="fadeOut">
-      <member v-if="showItem === 'member'"></member>
-      <after-sales v-else-if="showItem === 'aftersales'"></after-sales>
-      <contact v-else-if="showItem === 'contact'"></contact>
+         <div v-if="showItem !== 'nav'">
+            <member v-if="showItem === 'member'"></member>
+            <after-sales v-else-if="showItem === 'aftersales'"></after-sales>
+            <contact v-else-if="showItem === 'contact'"></contact>
+         </div>
       </transition>
 
       <btn-func @click.native="doToggleMenu"></btn-func>

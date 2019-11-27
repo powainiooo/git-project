@@ -16,15 +16,15 @@
 </style>
 
 <template>
-<m-block>
+<m-block class="slideUp" style="animation-delay: 0.2s">
    <template slot="en">Contact<br/>Information</template>
    <template slot="cn">联系方式</template>
-   <div class="contact-frame">
+   <div class="contact-frame slideUp" style="animation-delay: 0.4s">
       <p>合作联系</p>
       <p>{{mail}}</p>
       <img src="@/assets/images/icon-wechat.png" />
    </div>
-   <div class="contact-frame">
+   <div class="contact-frame slideUp" style="animation-delay: 0.6s">
       <p>售后及服务</p>
       <p>{{wechat}}</p>
       <img src="@/assets/images/icon-wechat.png" />

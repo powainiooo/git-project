@@ -47,7 +47,7 @@
                height 70%
 
       .title
-         font-size 30px
+         font-size 20px
          line-height 1.2
          font-family 'Helve'
          padding 15px 20px
@@ -58,13 +58,13 @@
       .time
          width 210px
          height 40px
-         border-right 1px solid #c1c1c1
-         font-size 18px
+         font-size 16px
          padding 0 20px
          display flex
          align-items center
       .address
-         font-size 18px
+         border-left 1px solid #c1c1c1
+         font-size 16px
          padding 0 20px
          display flex
          align-items center
@@ -93,8 +93,8 @@
                </div>
                <div class="days">{{itemData.date}}</div>
             </div>
-            <div class="logo"><img src="@/assets/images/logo2.png"/></div>
-            <!--<div class="logo"><img :src="imgSrc + itemData.cover"/></div>-->
+            <!--<div class="logo"><img src="@/assets/images/logo2.png"/></div>-->
+            <div class="logo"><img :src="imgSrc + itemData.cover"/></div>
          </div>
          <div class="title" v-if="itemData.activity === ''">{{itemData.goods_name}}</div>
          <div class="title" v-else>{{itemData.goods_name}} | {{itemData.activity}}</div>

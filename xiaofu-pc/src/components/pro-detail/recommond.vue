@@ -11,7 +11,7 @@
    .swiper-btn-prev
       left 165px
    .swiper-btn-next
-      right 280px
+      right 165px
 </style>
 
 <template>

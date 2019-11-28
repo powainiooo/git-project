@@ -13,7 +13,7 @@
 <div class="n-menu">
    <btn-func @click.native="doShowMenu" type="menu"></btn-func>
    <transition enter-active-class="fadeIn" leave-active-class="fadeOut">
-   <div class="n-menu-bg" v-if="showFrame"></div>
+   <div class="n-menu-bg" v-if="showFrame" @click="doToggleMenu"></div>
    </transition>
    <transition enter-active-class="slideIn500" leave-active-class="slideOut500">
    <div class="n-menu-frame" v-if="showFrame">

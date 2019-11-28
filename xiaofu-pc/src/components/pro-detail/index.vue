@@ -132,6 +132,7 @@ export default {
    methods: {
       doClose () {
          this.showFrame = false
+         this.showScan = false
          this.$nextTick(() => {
             this.$emit('update:show', false)
          })

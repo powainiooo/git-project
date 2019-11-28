@@ -1,6 +1,7 @@
 <style lang="stylus" type="text/stylus" scoped>
 .content
-   margin 50px
+   margin 50px 100px 50px 50px
+   text-align justify
    font-size 14px
    color #717071
 </style>

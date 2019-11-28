@@ -5,4 +5,4 @@
 .detail-frame .check-infos{ margin: -130rpx 90rpx 20rpx 90rpx; display: flex; justify-content: space-between;}
 .detail-frame .check-infos view{ font-size: 28rpx;}
 .detail-frame .check-infos view text{ font-size: 70rpx; font-family: 'Helve'; margin-left: 16rpx;}
-.detail-frame .hint-section{ margin: 50rpx 90rpx; border-top: 1rpx solid #e2e2e2; padding-top: 50rpx;}
+.detail-frame .hint-section{ margin: 50rpx 90rpx;}

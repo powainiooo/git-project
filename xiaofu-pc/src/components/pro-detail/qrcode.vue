@@ -6,7 +6,7 @@
    justify-content space-between
    align-items center
    background-color #ffffff
-   padding 0 40px 0 20px
+   padding 0 20px 0 20px
    border-radius 20px
    box-shadow 0 2px 3px rgba(0, 0, 0, 0.2)
    .code
@@ -15,7 +15,6 @@
    .hint
       width 264px
       height 132px
-      margin-left 30px
 </style>
 
 <template>

@@ -16,21 +16,20 @@
       left 170px
    .swiper-btn-next
       right 170px
-.swiper-pagination
-   width 500px
-   position relative
-   margin-top 20px
-   text-align center
-/deep/ .swiper-pagination-bullet
-   width 10px
-   height 10px
-   background-color transparent
-   border 1px solid #868686
-   opacity 1
-   margin 0 4px
-/deep/ .swiper-pagination-bullet-active
-   border-color #002aa6
-   background-color #002aa6
+   .swiper-pagination
+      position relative
+      margin-top 20px
+      text-align center
+   /deep/ .swiper-pagination-bullet
+      width 10px
+      height 10px
+      background-color transparent
+      border 1px solid #868686
+      opacity 1
+      margin 0 4px
+   /deep/ .swiper-pagination-bullet-active
+      border-color #002aa6
+      background-color #002aa6
 .swiper-content
    width 440px
    margin-left 30px

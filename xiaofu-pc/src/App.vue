@@ -25,6 +25,7 @@
       width 30px
       height 30px
       border-radius 50%
+      box-shadow 0 0 20px rgba(0, 0, 0, 0.25)
       display none
       justify-content center
       align-items center

@@ -119,7 +119,7 @@
             </div>
             <div class="date">
                <input type="text" v-model='dateVal' placeholder="或选择日期" readonly/>
-               <DatePicker v-model='date' format="yyyy/MM/dd" @on-change="dateChange" class="date-picker"></DatePicker>
+               <DatePicker v-model='date' format="yyyy/MM/dd" @on-change="dateChange" class="date-picker" placement="bottom"></DatePicker>
                <a href="javascript:;"></a>
             </div>
          </div>

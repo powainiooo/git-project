@@ -2,7 +2,7 @@
     <header-view showMenu="{{false}}"></header-view>
     <!--详情列表 -->
     <view class="detail-frame">
-       <swiper previous-margin="70rpx" next-margin="70rpx" current="{{currentIndex}}" duration="200" bindchange="swiperChange" style="height:900rpx;">
+       <swiper previous-margin="70rpx" next-margin="70rpx" current="{{currentIndex}}" duration="200" bindchange="swiperChange" style="height:910rpx;">
           <swiper-item class="swiper-item"
                        wx:for="{{itemData.child}}"
                        wx:for-index="index"
@@ -16,6 +16,7 @@
           <view>未验票<text>{{notCheckNum < 10 ? 0 : ''}}{{notCheckNum}}</text></view>
           <view>已验票<text>{{checkNum < 10 ? 0 : ''}}{{checkNum}}</text></view>
        </view>
+       <view style=" height: 1px; margin: 50rpx 90rpx; background-color: #0d1025"></view>
         <view class="hint-section">一个二维码对应一张特饮兑换券，到活动现场后，将本二维码出示给工作人员用于兑换特饮。</view>
     </view>
 </view>

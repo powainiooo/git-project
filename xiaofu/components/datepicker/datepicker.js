@@ -1,4 +1,5 @@
 // components/datepicker/datepicker.js
+import {getActivityDays} from '../../utils/api.js'
 Component({
 	/**
 	 * 组件的属性列表
@@ -24,7 +25,8 @@ Component({
 		year: '',
 		month: '',
 		selectedDate: '',
-		daysList: []
+		daysList: [],
+		activityList: [],
 	},
 	attached() {
 		let year, month
@@ -41,7 +43,7 @@ Component({
 			year,
 			month
 		})
-		this.initCalendar(year, month)
+		this.getActivityDays()
 	},
 	/**
 	 * 组件的方法列表
@@ -53,7 +55,7 @@ Component({
 			month += 1
 			month = month < 10 ? `0${month}` : month
 			day = day < 10 ? `0${day}` : day
-			return `${year}-${month}-${day}`
+			return `${year}/${month}/${day}`
 		},
 		initCalendar(year, month) { // 初始化日历
 			const monthDays = [31, 28 + is_leap(year), 31, 30, 31, 31, 30, 31, 30, 31, 30, 31] // 每个月有多少天
@@ -81,7 +83,7 @@ Component({
 			}
 			for (let i = 0; i < thisMonthDay; i++) { // 当月 日期
 				list.push({
-					activity: true,
+					activity: this.data.activityList[i].is_act !== 0,
 					date: this.formatDate(year, month, i + 1),
 					day: i + 1
 				})
@@ -109,7 +111,7 @@ Component({
 				year,
 				month
 			})
-			this.initCalendar(year, month)
+         this.getActivityDays()
 		},
 		nextMonth () { // 下一个月
 			let month = this.data.month + 1
@@ -122,7 +124,7 @@ Component({
 				year,
 				month
 			})
-			this.initCalendar(year, month)
+         this.getActivityDays()
 		},
 		selectDate (e) {
 			console.log(e)
@@ -135,7 +137,15 @@ Component({
 		doConfirm () {
 			if (this.data.selectedDate === '') return
 			this.triggerEvent('selectDate', this.data.selectedDate)
-		}
+		},
+      getActivityDays () {
+         getActivityDays({
+            month: `${this.data.year}/${this.data.month + 1}`
+         }).then(res => {
+            this.data.activityList = res.list
+            this.initCalendar(this.data.year, this.data.month)
+         })
+      }
 	}
 })
 

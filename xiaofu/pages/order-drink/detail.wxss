@@ -6,4 +6,4 @@
 .detail-frame .check-infos view{ font-size: 28rpx; color: #ffffff;}
 .detail-frame .check-infos view text{ font-size: 70rpx; font-family: 'Helve'; margin-left: 16rpx;}
 
-.detail-frame .hint-section{ margin: 50rpx 90rpx; border-top: 1rpx solid #0d1025; padding-top: 50rpx; color: #ffffff;}
+.detail-frame .hint-section{ margin: 50rpx 90rpx; color: #ffffff;}

@@ -141,7 +141,8 @@
       },
       methods: {
          getListData () {
-            const date = this.date === '' ? '' : formatDate(this.date, 'yyyy/MM/dd')
+            // const date = this.date === '' ? '' : formatDate(this.date, 'yyyy/MM/dd')
+            const date = this.date
             getProList({
                keyword: this.keyword,
                date,

@@ -2,8 +2,8 @@
    "pages": [
       "pages/index/index",
       "pages/order-ticket/order",
-      "pages/index/detail",
       "pages/order-drink/detail",
+      "pages/index/detail",
       "pages/order-drink/order",
       "pages/result/result",
       "pages/member/member",

@@ -22,8 +22,9 @@
    .aside-search
       width 335px
       position absolute
-      top 360px
+      top 50%
       right 25px
+      margin-top -170px
       h3
          font-size 20px
          font-family 'Helve'
@@ -43,7 +44,7 @@
             border none
             background-color transparent
             outline none
-         a
+         a.icon
             box-sizing content-box
             width 38px
             height 38px
@@ -73,7 +74,7 @@
                border-right 1px solid #002aa6
                &::-webkit-input-placeholder
                   color #ffffff
-            a
+            a.icon
                border-left 1px solid #0033b2
                cursor default
                background url("../assets/images/icon-calendar.png") no-repeat center center
@@ -115,12 +116,14 @@
          <div class="search-frame">
             <div class="keyword">
                <input type="text" placeholder="输入活动、艺人或城市" v-model="keyword" @keydown.enter="doSearch"/>
-               <a href="javascript:;" @click="doSearch"></a>
+               <a href="javascript:;" @click="doSearch" class="icon"></a>
             </div>
             <div class="date">
-               <input type="text" v-model='dateVal' placeholder="或选择日期" readonly/>
-               <DatePicker v-model='date' format="yyyy/MM/dd" @on-change="dateChange" class="date-picker" placement="bottom"></DatePicker>
-               <a href="javascript:;"></a>
+               <input type="text" v-model='date' placeholder="或选择日期" readonly @click.stop="showCalandar = true" name="dateInput"/>
+               <a href="javascript:;" class="icon"></a>
+               <transition enter-active-class="dropIn" leave-active-class="dropOut">
+                  <date-picker v-model="date" @change="dateChange" v-if="showCalandar" v-click-outside:pointerdown="calandarClickOutside"></date-picker>
+               </transition>
             </div>
          </div>
       </div>
@@ -135,14 +138,19 @@
 
 <script type='es6'>
    import TButton from './TButton.vue'
+   import datePicker from './datePicker.vue'
+   import * as vClickOutside from 'v-click-outside-x'
    export default {
       name: 'search',
-      components: { TButton },
+      components: { TButton, datePicker },
+      directives: {
+         clickOutside: vClickOutside.directive,
+      },
       data() {
          return {
             keyword: '',
             date: '',
-            dateVal: '',
+            showCalandar: false
          }
       },
       computed: {
@@ -160,15 +168,16 @@
       methods: {
          doSearch (e) {
             this.date = ''
-            this.dateVal = ''
             this.$emit('search', {
                keyword: this.keyword,
                date: this.date
             })
          },
          dateChange (e) {
+            console.log(e)
+            this.showCalandar = false
             this.keyword = ''
-            this.dateVal = e
+            this.date = e
             this.$emit('search', {
                keyword: this.keyword,
                date: e
@@ -180,10 +189,14 @@
          reset () {
             this.keyword = ''
             this.date = ''
-            this.dateVal = ''
          },
          backIndex () {
             this.$emit('taplogo')
+         },
+         calandarClickOutside (e) {
+            if (e.target.name !== 'dateInput') {
+               this.showCalandar = false
+            }
          }
       }
    }

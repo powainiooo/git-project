@@ -11,7 +11,6 @@
       display flex
       overflow-y hidden
       overflow-x auto
-      padding-left 200px
       position relative
       &::-webkit-scrollbar{ width: 3px; background-color: #ffffff;}
       &::-webkit-scrollbar-thumb{ background-color: #002aa6;}
@@ -21,6 +20,7 @@
          left 200px
          top 30px
       .recommend-swiper
+         width 100%
          margin 75px 0 0 0
          padding-top 5px
          .swiper-slide
@@ -40,8 +40,8 @@
          </swiper-slide>
          <!-- Optional controls -->
       </swiper>
-      <div class="swiper-btn swiper-btn-prev" slot="button-prev" style="top: 180px"><i></i></div>
-      <div class="swiper-btn swiper-btn-next" slot="button-next" style="top: 180px"><i></i></div>
+      <div class="swiper-btn swiper-btn-prev" slot="button-prev" style="top: 180px" v-if="listData.length > 4"><i></i></div>
+      <div class="swiper-btn swiper-btn-next" slot="button-next" style="top: 180px" v-if="listData.length > 4"><i></i></div>
    </div>
 </template>
 
@@ -66,6 +66,7 @@
                slidesPerView: 'auto',
                spaceBetween: 15,
                simulateTouch: false,
+               slidesOffsetBefore: 200,
                navigation: {
                   nextEl: '.swiper-btn-next',
                   prevEl: '.swiper-btn-prev',

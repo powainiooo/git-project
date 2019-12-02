@@ -55,3 +55,11 @@ export const createOrder = (data) => {
 		data
 	})
 }
+
+// 获取日期是否有活动
+export const getActivityDays = (data) => {
+	return ajax({
+		url: `${ajaxUrl}/activity_days`,
+		data
+	})
+}

@@ -7,39 +7,42 @@
    <view class="address-frame {{addressFixed ? 'address-frame-fixed' : ''}}" id="address" wx:if="{{!showSearchTitle && !isActivity}}">
       <address hasbg="{{addressFixed}}" list="{{citysList}}" id="{{cityID}}" bindchange="cityChange"></address>
    </view>
-   <view class="search-title" wx:if="{{showSearchTitle}}">
-      <view>{{searchTitle}}</view>
-      <view>搜索结果</view>
-   </view>
-   <image src="{{acticityLogo}}" mode="widthFix" class="acticity-logo" wx:if="{{isActivity}}"></image>
-   <view class="pro-list">
-      <view class="{{item.cate === 'activity' ? 'item-ticket-frame' : 'item-frame'}}"
-            wx:for="{{listData}}"
-            wx:for-item="item"
-            wx:for-index="index"
-            wx:key="index"
-            data-index="{{index}}"
-            data-id="{{item.id}}"
-            data-cate="{{item.cate}}"
-            bindtap="gotoDetail">
-         <ticket-container wx:if="{{item.cate === 'activity'}}"
-                           fold="{{selectedTicketIndex === index ? selectedFold : true}}"
-                           class="item {{selectedTicketIndex === index ? 'item-selected' : ''}}"
-                           style="{{selectedTicketIndex === index ? selectedTicketStyles : ''}}"
-                           ticketData="{{item}}"
-                           detailData="{{selectedTicketIndex === index ? detailData : null}}"
-                           id="{{selectedTicketIndex === index ? 'ticket' : ''}}"></ticket-container>
-         <recommend wx:if="{{item.cate === 'recommend' && item.list.length !== 0}}" listData="{{item.list}}"></recommend>
-         <banner wx:if="{{item.cate === 'banner'}}" src="{{item.cover}}" linkId="{{item.id}}"></banner>
+   <view class="result-container">
+      <view class="search-title" wx:if="{{showSearchTitle}}">
+         <view>{{searchTitle}}</view>
+         <view>搜索结果</view>
+      </view>
+      <image src="{{acticityLogo}}" mode="widthFix" class="acticity-logo" wx:if="{{isActivity}}"></image>
+      <view class="pro-list" wx:if="{{!isLoading && listData.length !== 0}}">
+         <view class="{{item.cate === 'activity' ? 'item-ticket-frame' : 'item-frame'}}"
+               wx:for="{{listData}}"
+               wx:for-item="item"
+               wx:for-index="index"
+               wx:key="index"
+               data-index="{{index}}"
+               data-id="{{item.id}}"
+               data-cate="{{item.cate}}"
+               bindtap="gotoDetail">
+            <ticket-container wx:if="{{item.cate === 'activity'}}"
+                              fold="{{selectedTicketIndex === index ? selectedFold : true}}"
+                              class="item {{selectedTicketIndex === index ? 'item-selected' : ''}}"
+                              style="{{selectedTicketIndex === index ? selectedTicketStyles : ''}}"
+                              ticketData="{{item}}"
+                              detailData="{{selectedTicketIndex === index ? detailData : null}}"
+                              id="{{selectedTicketIndex === index ? 'ticket' : ''}}"></ticket-container>
+            <recommend wx:if="{{item.cate === 'recommend' && item.list.length !== 0}}" listData="{{item.list}}"></recommend>
+            <banner wx:if="{{item.cate === 'banner'}}" src="{{item.cover}}" linkId="{{item.id}}"></banner>
+         </view>
+      </view>
+      <loading wx:if="{{isLoading}}"></loading>
+      <!--无搜索结果  -->
+      <view class='result-frame' wx:if="{{!isLoading && listData.length === 0}}">
+         <view class='icons icon-cuowu'></view>
+         <view><text class='hint-en'>Irrelevant \n Content</text></view>
+         <view class='hint-cn'>无相关内容</view>
       </view>
    </view>
-   <loading wx:if="{{isLoading}}"></loading>
-   <!--无搜索结果  -->
-   <view class='result-frame' wx:if="{{!isLoading && listData.length === 0}}">
-      <view class='icons icon-cuowu'></view>
-      <view><text class='hint-en'>Irrelevant \n Content</text></view>
-      <view class='hint-cn'>无相关内容</view>
-   </view>
+
 </scroll-view>
 <footer itemData="{{detailData}}" bindbtns="footerBtnFunc" id="footer"></footer>
 

@@ -49,3 +49,15 @@
    0% { opacity: 0; transform: scale(0)}
    100% { opacity: 1; transform: scale(1)}
 }
+
+.dropIn { animation: dropIn 0.3s ease-in-out both; transform-origin: center 0;}
+@keyframes dropIn {
+   0% { opacity: 0; transform: scaleY(0.8)}
+   100% { opacity: 1; transform: scaleY(1)}
+}
+
+.dropOut { animation: dropOut 0.3s ease-in-out both; transform-origin: center 0;}
+@keyframes dropOut {
+   0% { opacity: 1; transform: scaleY(1)}
+   100% { opacity: 0; transform: scaleY(0.8)}
+}

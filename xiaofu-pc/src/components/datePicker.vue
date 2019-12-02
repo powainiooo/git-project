@@ -18,9 +18,9 @@
 <template>
 <div class="z-date-picker">
    <div class="z-date-picker-opera">
-      <a href="javascript:;" class="z-date-picker-opera-btn"><img src="../assets/images/arrow-left-active.png"></a>
+      <a href="javascript:;" class="z-date-picker-opera-btn" @click="prevMonth"><img src="../assets/images/arrow-left-active.png"></a>
       <p>{{year}}/{{month + 1 < 10 ? '0' + (month + 1) : month + 1}}</p>
-      <a href="javascript:;" class="z-date-picker-opera-btn"><img src="../assets/images/arrow-right-active.png"></a>
+      <a href="javascript:;" class="z-date-picker-opera-btn" @click="nextMonth"><img src="../assets/images/arrow-right-active.png"></a>
    </div>
    <ul class="z-date-picker-header">
       <li v-for="i in week" :key="i">{{i}}</li>
@@ -102,8 +102,8 @@ export default {
          }
          for (let i = 0; i < thisMonthDay; i++) { // 当月 日期
             list.push({
-               // activity: this.activityList[i].is_act !== 0,
-               activity: true,
+               activity: this.activityList[i].is_act !== 0,
+               // activity: true,
                date: this.formatDate(year, month, i + 1),
                day: i + 1
             })
@@ -125,8 +125,8 @@ export default {
          }
       },
       prevMonth () { // 上一个月
-         let month = this.data.month - 1
-         let year = this.data.year
+         let month = this.month - 1
+         let year = this.year
          if (month === -1) {
             month = 11
             year -= 1
@@ -136,8 +136,8 @@ export default {
          this.getActivityDays()
       },
       nextMonth () { // 下一个月
-         let month = this.data.month + 1
-         let year = this.data.year
+         let month = this.month + 1
+         let year = this.year
          if (month === 12) {
             month = 0
             year += 1

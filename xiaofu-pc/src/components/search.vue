@@ -82,6 +82,14 @@
                top 185px
                right 40px
                z-index 0
+            .icon-back
+               width 18px
+               height 17px
+               background url("../assets/images/icon-back.png") no-repeat
+               position absolute
+               top 196px
+               right 110px
+               z-index 0
             .date-picker
                width 300px
                height 54px
@@ -121,6 +129,7 @@
             <div class="date">
                <input type="text" v-model='date' placeholder="或选择日期" readonly @click.stop="showCalandar = true" name="dateInput"/>
                <a href="javascript:;" class="icon"></a>
+               <a href="javascript:;" class="icon-back" v-if="date !== ''" @click="backIndex"></a>
                <transition enter-active-class="dropIn" leave-active-class="dropOut">
                   <date-picker v-model="date" @change="dateChange" v-if="showCalandar" v-click-outside:pointerdown="calandarClickOutside"></date-picker>
                </transition>

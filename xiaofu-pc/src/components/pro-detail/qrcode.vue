@@ -1,7 +1,7 @@
 <style lang="stylus" type="text/stylus" scoped>
 .qrcode
    width 480px
-   height 200px
+   height 190px
    display flex
    justify-content space-between
    align-items center
@@ -13,8 +13,9 @@
       width 150px
       height 150px
    .hint
-      width 264px
-      height 132px
+      width 255px
+      height 72px
+      margin-right 10px
 </style>
 
 <template>

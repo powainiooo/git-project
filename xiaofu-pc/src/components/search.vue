@@ -129,13 +129,12 @@
          <div class="search-frame">
             <div class="keyword">
                <input type="text" placeholder="输入活动、艺人或城市" v-model="keyword" @keydown.enter="doSearch"/>
-               <a href="javascript:;" class="icon-back" v-if="keyword === ''" @click="backIndex"></a>
                <a href="javascript:;" @click="doSearch" class="icon"></a>
             </div>
             <div class="date">
                <input type="text" v-model='date' placeholder="或选择日期" readonly @click.stop="showCalandar = true" name="dateInput"/>
                <a href="javascript:;" class="icon"></a>
-               <a href="javascript:;" class="icon-back" v-if="date === ''" @click="backIndex"></a>
+               <a href="javascript:;" class="icon-back" v-if="date !== '' || keyword !== ''" @click="backIndex" title="清空搜索"></a>
                <transition enter-active-class="dropIn" leave-active-class="dropOut">
                   <date-picker v-model="date" @change="dateChange" v-if="showCalandar" v-click-outside:pointerdown="calandarClickOutside"></date-picker>
                </transition>

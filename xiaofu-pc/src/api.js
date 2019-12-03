@@ -64,7 +64,9 @@ export const getMenuInfo = (src) => {
 // 获取日期是否有活动
 export const getActivityDays = (data) => {
    return new Promise((resolve, reject) => {
-      axios.get(`${ajax}/activity_days`).then(res => {
+      axios.get(`${ajax}/activity_days`, {
+         params: data
+      }).then(res => {
          resolve(res.data)
       }).catch(err => {
          console.log(err)

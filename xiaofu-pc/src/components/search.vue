@@ -49,6 +49,11 @@
             width 38px
             height 38px
             padding-left 8px
+         .icon-back
+            width 18px
+            height 17px
+            background url("../assets/images/icon-back.png") no-repeat
+            position absolute
          .keyword
             margin 35px 0 0 48px
             display flex
@@ -58,7 +63,10 @@
                border-right 1px solid #e5e5e5
                &::-webkit-input-placeholder
                   color #b5b5b5
-            a
+            .icon-back
+               top 196px
+               right 110px
+            a.icon
                border-left 1px solid #f6f6f6
                background url("../assets/images/icon-search.png") no-repeat center center
          .date
@@ -69,6 +77,7 @@
                width 300px
                height 54px
                line-height 54px
+               cursor pointer
                padding 4px 0 0 30px
                color #ffffff
                border-right 1px solid #002aa6
@@ -83,10 +92,6 @@
                right 40px
                z-index 0
             .icon-back
-               width 18px
-               height 17px
-               background url("../assets/images/icon-back.png") no-repeat
-               position absolute
                top 196px
                right 110px
                z-index 0
@@ -124,12 +129,13 @@
          <div class="search-frame">
             <div class="keyword">
                <input type="text" placeholder="输入活动、艺人或城市" v-model="keyword" @keydown.enter="doSearch"/>
+               <a href="javascript:;" class="icon-back" v-if="keyword === ''" @click="backIndex"></a>
                <a href="javascript:;" @click="doSearch" class="icon"></a>
             </div>
             <div class="date">
                <input type="text" v-model='date' placeholder="或选择日期" readonly @click.stop="showCalandar = true" name="dateInput"/>
                <a href="javascript:;" class="icon"></a>
-               <a href="javascript:;" class="icon-back" v-if="date !== ''" @click="backIndex"></a>
+               <a href="javascript:;" class="icon-back" v-if="date === ''" @click="backIndex"></a>
                <transition enter-active-class="dropIn" leave-active-class="dropOut">
                   <date-picker v-model="date" @change="dateChange" v-if="showCalandar" v-click-outside:pointerdown="calandarClickOutside"></date-picker>
                </transition>

@@ -7,6 +7,7 @@
          font-family 'Helve'
          position relative
          transform-origin 0 0
+         cursor pointer
          &::before
             content ''
             width 100%

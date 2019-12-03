@@ -1,8 +1,10 @@
 <style lang="stylus" type="text/stylus" scoped>
 .activity-swiper
    padding-top 10px
+   padding-bottom 10px
    margin-left -125px
    margin-top -10px
+   margin-bottom -10px
    .swiper-slide
       width 440px
       height 226px

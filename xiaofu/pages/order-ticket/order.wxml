@@ -16,7 +16,7 @@
                bindtap="gotoDetail"
                hover-class="order-item-touch"
                hover-start-time="10">
-            <order-item itemData="{{item}}" itemIndex="{{index}}"></order-item>
+            <view><order-item itemData="{{item}}" itemIndex="{{index}}"></order-item></view>
          </view>
          <!--无搜索结果  -->
          <view class='result-frame' wx:if="{{listData.length === 0}}">

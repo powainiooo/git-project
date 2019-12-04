@@ -17,7 +17,7 @@
 		"checkInvalidKey": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.9.2",
+	"libVersion": "2.9.4",
 	"appid": "wx3b740b88a384f9ea",
 	"projectname": "xiaofu",
 	"isGameTourist": false,

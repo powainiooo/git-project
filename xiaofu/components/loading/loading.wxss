@@ -1,3 +1,3 @@
-.z-loading { width: 100%; height: 20rpx; display: flex; justify-content: center; align-items: center;}
+.z-loading { width: 100%; height: 60rpx; display: flex; justify-content: center; align-items: center;}
 .z-loading .z-loading-item { width: 14rpx; height: 14rpx; box-sizing: border-box; border: 2rpx solid #012aaa; margin: 0 5rpx; border-radius: 50%; transition: background-color 0.25s linear;}
 .z-loading .z-loading-item-active { background-color: #012aaa;}

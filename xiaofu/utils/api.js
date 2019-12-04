@@ -3,6 +3,7 @@ const ajax = (opts, autoMsg = true) => {
 	return new Promise((resolve, reject) => {
 		wx.showNavigationBarLoading()
 		const extras = {
+         header: {'content-type': 'application/x-www-form-urlencoded'},
 			success(res) {
 				if(res.data.status === 0) {
 					resolve(res.data)
@@ -29,6 +30,7 @@ const ajax = (opts, autoMsg = true) => {
 export const getBannerCity = () => {
 	return ajax({
 		url: `${ajaxUrl}/city_banner`
+		// url: `http://localhost:8080/mock/banner.json`
 	})
 }
 
@@ -36,6 +38,7 @@ export const getBannerCity = () => {
 export const getIndexListData = (data) => {
 	return ajax({
 		url: `${ajaxUrl}/pro_list`,
+		// url: `http://localhost:8080/mock/list.json`,
 		data
 	})
 }
@@ -44,6 +47,7 @@ export const getIndexListData = (data) => {
 export const getIndexDetailData = (data) => {
 	return ajax({
 		url: `${ajaxUrl}/product_info`,
+		// url: `http://localhost:8080/mock/detail.json`,
 		data
 	})
 }

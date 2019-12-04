@@ -290,6 +290,7 @@ Page({
    },
 	// 获取列表数据
 	getListData () {
+      console.log("page:"+this.data.page)
 		this.setData({
 			isLoading: true
 		})
@@ -312,6 +313,7 @@ Page({
 	},
    // 加载更多
    touchBottom () {
+      console.log("touchBottom")
 	   if (this.data.isLoadover) return
 	   this.data.page += 1
       this.getListData()

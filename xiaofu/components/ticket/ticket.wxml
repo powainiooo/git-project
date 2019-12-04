@@ -30,7 +30,7 @@
             <view class='days'>{{itemData.date}}</view>
          </view>
          <view class="logo">
-            <image src='{{imgSrc+itemData.cover}}' mode='aspectFit' class='logo-img'></image>
+            <image src='{{imgSrc+itemData.cover}}' mode='aspectFit' class='logo-img' lazy-load></image>
          </view>
       </view>
       <view class='title' wx:if="{{itemData.activity != ''}}">{{itemData.goods_name}} | {{itemData.activity}}</view>
@@ -39,6 +39,7 @@
       <view class='address'>{{itemData.address}}</view>
       <view class="imgs-frame {{itemData.is_end == 'over' && fold ? 'sold-out' : ''}}">
          <image src='{{imgSrc+itemData.cover2}}' mode='widthFix' class='imgs'></image>
+         <!--<image src='../../res/images/default-avatar.jpg' mode='widthFix' class='imgs'></image>-->
       </view>
    </view>
 </view>

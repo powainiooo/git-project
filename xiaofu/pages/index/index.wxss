@@ -1,7 +1,7 @@
 .container { height: 100vh; background-color: #002bb0;}
 .search-frame { margin-top: 120rpx;  z-index: 200; position: relative}
 .address-frame { width: 100%; position: absolute; top: 1404rpx; left: 0; z-index: 100;}
-.address-frame-fixed { position: fixed; top: 120rpx;}
+.address-frame-fixed { position: fixed; top: 118rpx;}
 .result-container { min-height: 100vh; background-color: #f3f3f3; overflow: hidden;}
 .pro-list { padding-top: 100rpx; background-color: #f3f3f3;}
 .pro-list .item-ticket-frame { height: 580rpx; position: relative;}
@@ -23,3 +23,4 @@
 .passport-footer{ width: 100%; height: 160rpx; display: flex; position: fixed; left: 0; bottom: 0;z-index: 1000;box-shadow: 0 -5rpx 10rpx rgba(0,0,0,0.1);}
 .passport-footer .btn{ width: 100%; background-color: #002aac; padding-bottom: 10rpx; display: flex; justify-content: center; align-items: center; font-size: 34rpx; color: #fff;}
 
+.load-over-hint { font-size: 24rpx; color: #9ea09f; text-align: center; padding: 80rpx 0;}

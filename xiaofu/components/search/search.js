@@ -20,7 +20,8 @@ Component({
    data: {
 	   keywords: '',
 	   selectedDate: '',
-	   showDate: false
+	   showDate: false,
+      dateClass: ''
    },
 
    /**
@@ -28,16 +29,26 @@ Component({
     */
    methods: {
 	   showCalendar () {
-	   	this.setData({
-			   showDate: true
-		   })
-         this.triggerEvent('toggleCalendar', true)
+         this.setData({
+            dateClass: ''
+         })
+         wx.nextTick(() => {
+            this.setData({
+               showDate: true
+            })
+            this.triggerEvent('toggleCalendar', true)
+         })
 	   },
 	   hideCalendar () {
-	   	this.setData({
-			   showDate: false
-		   })
-         this.triggerEvent('toggleCalendar', false)
+	      this.setData({
+            dateClass: 'datepicker-frame-hide'
+         })
+         setTimeout(() => {
+            this.setData({
+               showDate: false
+            })
+            this.triggerEvent('toggleCalendar', false)
+         }, 300)
 	   },
 	   getDate (e) {
 		   this.setData({

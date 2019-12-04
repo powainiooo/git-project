@@ -11,7 +11,8 @@
               <!--bindtap="gotoDetail"></ticket>-->
       <swiper class="recommond-swiper"
               duration="200"
-              next-margin="240rpx">
+              previous-margin="40rpx"
+              next-margin="230rpx">
          <swiper-item class="recommond-item"
                       wx:for="{{listData}}"
                       wx:for-index="index"

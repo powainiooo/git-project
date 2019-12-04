@@ -39,6 +39,7 @@
       <view class='address'>{{itemData.address}}</view>
       <view class="imgs-frame {{itemData.is_end == 'over' && fold ? 'sold-out' : ''}}">
          <image src='{{imgSrc+itemData.cover2}}' mode='widthFix' class='imgs'></image>
+         <image src='../../res/images/bottom.png' mode='widthFix' class='bottom'></image>
          <!--<image src='../../res/images/default-avatar.jpg' mode='widthFix' class='imgs'></image>-->
       </view>
    </view>

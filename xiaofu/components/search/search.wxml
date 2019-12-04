@@ -21,7 +21,7 @@
       <banner src="{{url}}" linkId="{{linkId}}"></banner>
    </view>
 </view>
-<view class="datepicker-frame" wx:if="{{showDate}}">
+<view class="datepicker-frame {{dateClass}}" wx:if="{{showDate}}">
    <datepicker currentDate="{{selectedDate}}" bindselectDate="getDate"></datepicker>
 </view>
 

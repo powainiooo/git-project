@@ -34,6 +34,7 @@
       top 98px
       z-index 10
       outline none
+      cursor pointer
       &:hover
          background-color #002aa6
       i

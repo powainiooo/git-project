@@ -282,8 +282,9 @@ Page({
             detailPage: 'calendar'
          })
       } else {
+         console.log(this.data.selectedDate)
          this.setData({
-            headerBtns: ['menu'],
+            headerBtns: this.data.selectedDate === '' ? ['menu'] : ['close'],
             detailPage: ''
          })
       }

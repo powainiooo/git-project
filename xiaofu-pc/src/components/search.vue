@@ -80,12 +80,11 @@
                cursor pointer
                padding 4px 0 0 30px
                color #ffffff
-               border-right 1px solid #002aa6
                &::-webkit-input-placeholder
                   color #ffffff
             a.icon
                border-left 1px solid #0033b2
-               cursor default
+               cursor pointer
                background url("../assets/images/icon-calendar.png") no-repeat center center
                position absolute
                top 185px
@@ -133,8 +132,8 @@
             </div>
             <div class="date">
                <input type="text" v-model='date' placeholder="或选择日期" readonly @click.stop="showCalandar = true" name="dateInput"/>
-               <a href="javascript:;" class="icon"></a>
-               <a href="javascript:;" class="icon-back" v-if="date !== '' || keyword !== ''" @click="backIndex" title="清空搜索"></a>
+               <a href="javascript:;" name="dateInput" class="icon" @click.stop="showCalandar = true"></a>
+               <a href="javascript:;" class="icon-back" v-if="isSearch" @click="backIndex" title="清空搜索"></a>
                <transition enter-active-class="dropIn" leave-active-class="dropOut">
                   <date-picker v-model="date" @change="dateChange" v-if="showCalandar" v-click-outside:pointerdown="calandarClickOutside"></date-picker>
                </transition>
@@ -164,7 +163,8 @@
          return {
             keyword: '',
             date: '',
-            showCalandar: false
+            showCalandar: false,
+            isSearch: false
          }
       },
       computed: {
@@ -181,6 +181,7 @@
       },
       methods: {
          doSearch (e) {
+            this.isSearch = true
             this.date = ''
             this.$emit('search', {
                keyword: this.keyword,
@@ -188,7 +189,7 @@
             })
          },
          dateChange (e) {
-            console.log(e)
+            this.isSearch = true
             this.showCalandar = false
             this.keyword = ''
             this.date = e
@@ -205,6 +206,7 @@
             this.date = ''
          },
          backIndex () {
+            this.isSearch = false
             this.$emit('taplogo')
          },
          calandarClickOutside (e) {

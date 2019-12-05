@@ -4,6 +4,7 @@
    100% { opacity: 1}
 }
 .fadeOut { animation: fadeOut 0.3s ease-out;}
+.fadeOut2 { animation: fadeOut 0.1s ease-out;}
 @keyframes fadeOut {
    0% { opacity: 1}
    100% { opacity: 0}

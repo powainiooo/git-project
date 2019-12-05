@@ -34,7 +34,6 @@
             <banner wx:if="{{item.cate === 'banner'}}" src="{{item.cover}}" linkId="{{item.id}}"></banner>
          </view>
       </view>
-      <view wx:if="{{isLoadover}}" class="load-over-hint">已经到底啦！</view>
       <loading wx:if="{{isLoading}}"></loading>
       <!--无搜索结果  -->
       <view class='result-frame' wx:if="{{!isLoading && listData.length === 0}}">

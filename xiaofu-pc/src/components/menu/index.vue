@@ -19,7 +19,7 @@
    <div class="n-menu-frame" v-if="showFrame">
       <menu-nav @toggle="toggle"></menu-nav>
 
-      <transition enter-active-class="fadeIn" leave-active-class="fadeOut">
+      <transition enter-active-class="fadeIn" leave-active-class="fadeOut2">
          <div v-if="showItem !== 'nav'">
             <member v-if="showItem === 'member'"></member>
             <after-sales v-else-if="showItem === 'aftersales'"></after-sales>

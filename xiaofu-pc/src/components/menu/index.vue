@@ -17,7 +17,7 @@
    </transition>
    <transition enter-active-class="slideIn500" leave-active-class="slideOut500">
    <div class="n-menu-frame" v-if="showFrame">
-      <menu-nav @toggle="toggle"></menu-nav>
+      <menu-nav @toggle="toggle" v-if="showItem === 'nav'"></menu-nav>
 
       <transition enter-active-class="fadeIn" leave-active-class="fadeOut2">
          <div v-if="showItem !== 'nav'">

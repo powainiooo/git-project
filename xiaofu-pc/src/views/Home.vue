@@ -18,6 +18,11 @@
       max-width 1090px
       min-width 1030px
       margin 70px auto 0 auto
+      position relative
+      .empty
+         position absolute
+         top 0
+         left 0
       .pro-list
          margin 0 -25px
          display flex
@@ -42,6 +47,7 @@
               v-infinite-scroll="loadMore"
               infinite-scroll-disabled="isLoading"
               infinite-scroll-distance="10">
+            <img src="@/assets/images/empty.png" class="empty" v-if="listData.length === 0"/>
             <div class="pro-list" :style="proListStyle">
                <div v-for="(i, index) in listData" :key="index" :style="getProItemStyle(i.cate)">
                   <list-item
@@ -142,6 +148,7 @@
       methods: {
          getListData () {
             // const date = this.date === '' ? '' : formatDate(this.date, 'yyyy/MM/dd')
+            this.$store.commit('toggleCitySelect', this.date === '' && this.keyword === '')
             const date = this.date
             getProList({
                keyword: this.keyword,

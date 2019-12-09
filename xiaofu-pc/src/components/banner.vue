@@ -34,7 +34,7 @@
 <div class="banner-container" :style="styles">
    <t-button class="z-btn" @dotap="gotoDetail" extraClass="white">了解详情</t-button>
    <div class="opera" v-if="showCity">
-      <div class="z-select">
+      <div class="z-select" v-if="showCitySelect">
          <Select v-model="city" style="width:200px" class="z-select" @on-change="cityChange" placeholder="选择城市" :capture="false">
             <Option :value="0">全部</Option>
             <Option v-for="item in citys" :value="item.id" :key="item.id">{{ item.name }}</Option>
@@ -75,6 +75,9 @@ export default {
    computed: {
       imgSrc () {
          return this.$store.state.imgSrc
+      },
+      showCitySelect () {
+         return this.$store.state.showCitySelect
       },
       styles () {
          return {

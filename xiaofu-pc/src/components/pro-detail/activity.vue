@@ -63,6 +63,7 @@
 export default {
 	name: 'app',
 	data() {
+	   const self = this
 		return {
          swiperOption: {
             slidesPerView: 'auto',
@@ -75,6 +76,12 @@ export default {
             navigation: {
                nextEl: '.swiper-btn-next',
                prevEl: '.swiper-btn-prev',
+            },
+            on: {
+               slideChange () {
+                  const index = this.activeIndex
+                  self.content = self.listData[index].desc
+               }
             }
          },
          content: this.listData[0].desc

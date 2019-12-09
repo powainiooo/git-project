@@ -7,8 +7,8 @@ const ajax = 'https://wechat.leesticket.com/mobile/applet_v2'
 // 获取票务列表 ${ajax}/pro_list /mock/list.json
 export const getProList = (params) => {
    return new Promise((resolve, reject) => {
-      axios.get(`${ajax}/pro_list`, {
-      // axios.get(`/mock/list.json`, {
+      // axios.get(`${ajax}/pro_list`, {
+      axios.get(`/mock/list.json`, {
          params
       }).then(res => {
          resolve(res.data)
@@ -22,8 +22,8 @@ export const getProList = (params) => {
 // 获取城市 ${ajax}/city_banner /mock/banner.json
 export const getCityBanner = (params) => {
    return new Promise((resolve, reject) => {
-      axios.get(`${ajax}/city_banner`, {
-      // axios.get(`/mock/banner.json`, {
+      // axios.get(`${ajax}/city_banner`, {
+      axios.get(`/mock/banner.json`, {
          params
       }).then(res => {
          resolve(res.data)
@@ -37,8 +37,8 @@ export const getCityBanner = (params) => {
 // 获取票务详情 ${ajax}/product_info /mock/detail.json
 export const getProDetail = (params) => {
    return new Promise((resolve, reject) => {
-      axios.get(`${ajax}/product_info`, {
-      // axios.get(`/mock/detail.json`, {
+      // axios.get(`${ajax}/product_info`, {
+      axios.get(`/mock/detail.json`, {
          params
       }).then(res => {
          resolve(res.data)

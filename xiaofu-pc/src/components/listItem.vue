@@ -89,12 +89,19 @@
          align-items center
          img
             width 100%
+      .tag
+         position absolute
+         right 0
+         bottom -6px
+         img
+            width 100%
    .list-item-fold
       .frame
          &::after
-            height 174px
-            bottom -83px
-            background-size 332px
+            height 348px
+            top 0
+            z-index -1
+            background-size 330px
             background-image url("../assets/images/ticket-shadow.png")
       .title
          word-break break-all
@@ -132,6 +139,8 @@
          <div class="time">{{itemData.hour_b}}-{{itemData.hour_e}}</div>
          <div class="address">{{itemData.address}}</div>
          <div class="imgs"><img :src="imgSrc + itemData.cover2"/></div>
+         <!--<div class="imgs"><img src="@/assets/images/img.jpg"/></div>-->
+         <div class="tag"><img src="@/assets/images/ticket-tag.png"/></div>
       </div>
    </div>
 </template>

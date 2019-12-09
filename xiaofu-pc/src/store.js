@@ -14,7 +14,8 @@ export default new Vuex.Store({
       imgSrc: 'https://wechat.leesticket.com/upload/',
       wWidth: window.innerWidth,
       marginDis: 25,
-      leftDis: 25
+      leftDis: 25,
+      showCitySelect: true
    },
    mutations: {
       setWidth (state, ww) {
@@ -22,6 +23,9 @@ export default new Vuex.Store({
          state.wWidth = ww
          state.marginDis = 10 + ((ww - minWidth) / (maxWidth - minWidth)) * 15
          state.leftDis = ((ww * 0.24 - asideMinWidth) / (asideMaxWidth - asideMinWidth)) * 25
+      },
+      toggleCitySelect (state, data) {
+         state.showCitySelect = data
       }
    },
    actions: {

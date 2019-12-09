@@ -64,8 +64,9 @@
                &::-webkit-input-placeholder
                   color #b5b5b5
             .icon-back
-               top 196px
-               right 110px
+               background-image url("../assets/images/icon-back2.png")
+               top 117px
+               right 54px
             a.icon
                border-left 1px solid #f6f6f6
                background url("../assets/images/icon-search.png") no-repeat center center
@@ -128,12 +129,13 @@
          <div class="search-frame">
             <div class="keyword">
                <input type="text" placeholder="输入活动、艺人或城市" v-model="keyword" @keydown.enter="doSearch"/>
-               <a href="javascript:;" @click="doSearch" class="icon"></a>
+               <a href="javascript:;" class="icon-back" v-if="isSearch && keyword !== ''" @click="backIndex" title="清空搜索"></a>
+               <a href="javascript:;" @click="doSearch" class="icon" v-else></a>
             </div>
             <div class="date">
                <input type="text" v-model='date' placeholder="或选择日期" readonly @click.stop="showCalandar = true" name="dateInput"/>
                <a href="javascript:;" name="dateInput" class="icon" @click.stop="showCalandar = true"></a>
-               <a href="javascript:;" class="icon-back" v-if="isSearch" @click="backIndex" title="清空搜索"></a>
+               <a href="javascript:;" class="icon-back" v-if="isSearch && date !== ''" @click="backIndex" title="清空搜索"></a>
                <transition enter-active-class="dropIn" leave-active-class="dropOut">
                   <date-picker v-model="date" @change="dateChange" v-if="showCalandar" v-click-outside:pointerdown="calandarClickOutside"></date-picker>
                </transition>

@@ -16,7 +16,21 @@ Component({
 			}
 		}
 	},
-
+   observers: {
+	   'year, month' (year, month) {
+	      let disable = true
+         if (this.data.year < this.data.nowYear) {
+            disable = true
+         } else if (this.data.year === this.data.nowYear) {
+            disable = this.data.month <= this.data.nowMonth
+         } else {
+            disable = false
+         }
+         this.setData({
+            prevBtnDisable: disable
+         })
+      }
+   },
 	/**
 	 * 组件的初始数据
 	 */
@@ -24,14 +38,21 @@ Component({
 		week: ['日', '一', '二', '三', '四', '五', '六'],
 		year: '',
 		month: '',
+      nowYear: '',
+      nowMonth: '',
 		selectedDate: '',
 		daysList: [],
 		activityList: [],
+      prevBtnDisable: true
 	},
 	attached() {
 		let year, month
+      const date = new Date()
+      this.setData({
+         nowYear: date.getFullYear(),
+         nowMonth: date.getMonth(),
+      })
 		if (this.data.selectedDate === '') {
-			const date = new Date()
 			year = date.getFullYear()
 			month = date.getMonth()
 		} else {
@@ -101,6 +122,7 @@ Component({
 			})
 		},
 		prevMonth () { // 上一个月
+         if (this.data.prevBtnDisable) return
 			let month = this.data.month - 1
 			let year = this.data.year
 			if (month === -1) {

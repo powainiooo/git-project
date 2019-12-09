@@ -4,7 +4,9 @@
 .z-date-picker:after { content: ''; width: 100%; height: 63px; background: url("../assets/images/date-bottom.png") no-repeat; position: absolute; bottom: -63px; left: 0;}
 .z-date-picker-opera { height: 40px; display: flex; justify-content: center; align-items: center;}
 .z-date-picker-opera-btn { width: 14px; height: 14px; border-radius: 50%; background-color: #002aa6; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);}
+.z-date-picker-opera-btn-disable { background-color: #585657; opacity: 0.5; cursor: default;}
 .z-date-picker-opera-btn:active { transform: scale(0.8);}
+.z-date-picker-opera-btn-disable:active { transform: scale(1);}
 .z-date-picker-opera-btn img { width: 4px; display: block;}
 .z-date-picker-opera p { font-size: 16px; font-family: Helve; color: #585657; margin: 0 10px;}
 .z-date-picker-header { margin: 0 24px; display: flex; justify-content: space-between; align-items: center;}
@@ -18,7 +20,7 @@
 <template>
 <div class="z-date-picker">
    <div class="z-date-picker-opera">
-      <a href="javascript:;" class="z-date-picker-opera-btn" @click="prevMonth"><img src="../assets/images/arrow-left-active.png"></a>
+      <a href="javascript:;" class="z-date-picker-opera-btn" :class="{'z-date-picker-opera-btn-disable':prevBtnDisable}" @click="prevMonth"><img src="../assets/images/arrow-left-active.png"></a>
       <p>{{year}}/{{month + 1 < 10 ? '0' + (month + 1) : month + 1}}</p>
       <a href="javascript:;" class="z-date-picker-opera-btn" @click="nextMonth"><img src="../assets/images/arrow-right-active.png"></a>
    </div>
@@ -48,14 +50,29 @@ export default {
 		   week: ['日', '一', '二', '三', '四', '五', '六'],
          year: '',
          month: '',
+         nowYear: '',
+         nowMonth: '',
          daysList: [],
          activityList: [],
       }
 	},
+   computed: {
+	   prevBtnDisable () {
+	      if (this.year < this.nowYear) {
+	         return true
+         } else if (this.year === this.nowYear) {
+	         return this.month <= this.nowMonth
+         } else {
+	         return false
+         }
+      }
+   },
    mounted () {
       let year, month
+      const date = new Date()
+      this.nowYear = date.getFullYear()
+      this.nowMonth = date.getMonth()
       if (this.value === '') {
-         const date = new Date()
          year = date.getFullYear()
          month = date.getMonth()
       } else {
@@ -125,6 +142,7 @@ export default {
          }
       },
       prevMonth () { // 上一个月
+         if (this.prevBtnDisable) return
          let month = this.month - 1
          let year = this.year
          if (month === -1) {

@@ -3,7 +3,7 @@
    <image src="../../res/images/title-date.png" mode="widthFix" class="title fadeIn2"></image>
    <view class="fadeIn2">
       <view class="selects">
-         <view class="btn-frame" hover-class="btn-hover" bindtap="prevMonth"><view class="btn btn-prev"></view></view>
+         <view class="btn-frame" hover-class="{{prevBtnDisable ? '' : 'btn-hover'}}" bindtap="prevMonth"><view class="btn btn-prev {{prevBtnDisable ? 'btn-prev-disabled' : ''}}"></view></view>
          <text class="month">{{year}}/{{month + 1 < 10 ? '0' + (month + 1) : month + 1}}</text>
          <view class="btn-frame" hover-class="btn-hover" bindtap="nextMonth"><view class="btn btn-next"></view></view>
       </view>

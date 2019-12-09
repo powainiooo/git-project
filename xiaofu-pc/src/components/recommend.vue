@@ -31,7 +31,7 @@
 </style>
 
 <template>
-   <div class="recommend-list">
+   <div class="recommend-list" :style="styles">
       <h3>{{title}}</h3>
       <swiper :options="swiperOption" ref="mySwiper" class="recommend-swiper">
          <!-- slides -->
@@ -58,6 +58,20 @@
          title: {
             type: String,
             default: ''
+         },
+         bgSrc: {
+            type: String,
+            default: ''
+         }
+      },
+      computed: {
+         imgSrc () {
+            return this.$store.state.imgSrc
+         },
+         styles () {
+            return {
+               'background-image': `url("${this.imgSrc}${this.bgSrc}")`
+            }
          }
       },
       data() {

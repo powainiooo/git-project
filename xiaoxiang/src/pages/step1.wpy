@@ -102,7 +102,8 @@
    </div>
    <div class="hr"></div>
    <div class="price-line">基础价格预估　￥{{price}}</div>
-   <div class="hr"></div>
+   <div class="hint">备注：基础价格含--8工时内+3名搬运工+一辆4.2米中货车+15公里运输里程。</div>
+   <div class="hr" style="margin-top: 10rpx;"></div>
    <button class="btn btn-step" @tap="doConfirm">下一步</button>
    <div class="hint">备注：{{remarks.remarks1}}</div>
    <div class="btn-phone" @tap="makePhone">电话下单：{{phone}}</div>
@@ -183,7 +184,7 @@ wepy.page({
          params.f_address = this.moveIn.address
          createOrderTwo(params).then(res => {
             if (res.status === 0) {
-               wx.redirectTo({
+               wx.navigateTo({
                   url: '/pages/step2'
                })
             }

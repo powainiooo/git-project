@@ -114,13 +114,13 @@
   font-size: 24rpx;
   color: #999999;
   line-height: 1.8;
-  margin: 0 50rpx;
+  margin: 0 30rpx;
 }
 .btn-phone {
   color: #3bab70;
   font-size: 24rpx;
   line-height: 1.8;
-  margin: 0 0 50rpx 50rpx;
+  margin: 0 0 50rpx 30rpx;
   text-decoration: underline;
 }
 .tab {

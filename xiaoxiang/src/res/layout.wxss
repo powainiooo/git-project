@@ -26,6 +26,6 @@
 
 .btn-step { margin: 50rpx auto;}
 
-.hint { font-size: 24rpx; color: #999999; line-height: 1.8; margin: 0 50rpx;}
+.hint { font-size: 24rpx; color: #999999; line-height: 1.8; margin: 0 30rpx;}
 
-.btn-phone { color: #3bab70; font-size: 24rpx; line-height: 1.8; margin: 0 0 50rpx 50rpx; text-decoration: underline;}
+.btn-phone { color: #3bab70; font-size: 24rpx; line-height: 1.8; margin: 0 0 50rpx 30rpx; text-decoration: underline;}

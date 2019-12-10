@@ -190,56 +190,56 @@ _core["default"].component({
       }, null, this);
     }
   }
-}, {info: {"components":{},"on":{}}, handlers: {'18-16': {"tap": function proxy () {
+}, {info: {"components":{},"on":{}}, handlers: {'18-0': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.showSelect = true
       })();
     
-  }},'18-17': {"tap": function proxy () {
+  }},'18-1': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.openVideoFile($event)
       })();
     
-  }},'18-18': {"tap": function proxy () {
+  }},'18-2': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.openImgFile($event)
       })();
     
-  }},'18-19': {"tap": function proxy () {
+  }},'18-3': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.showSelect = false
       })();
     
-  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'18-16': {"tap": function proxy () {
+  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'18-0': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.showSelect = true
       })();
     
-  }},'18-17': {"tap": function proxy () {
+  }},'18-1': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.openVideoFile($event)
       })();
     
-  }},'18-18': {"tap": function proxy () {
+  }},'18-2': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.openImgFile($event)
       })();
     
-  }},'18-19': {"tap": function proxy () {
+  }},'18-3': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {

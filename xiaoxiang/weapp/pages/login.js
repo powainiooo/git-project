@@ -75,28 +75,28 @@ _core["default"].page({
   onLoad: function onLoad() {
     this.getRemarks();
   }
-}, {info: {"components":{},"on":{}}, handlers: {'10-0': {"input": function proxy () {
+}, {info: {"components":{},"on":{}}, handlers: {'10-6': {"input": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.isChecked = false
       })();
     
-  }},'10-1': {"input": function proxy () {
+  }},'10-7': {"input": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.isChecked = false
       })();
     
-  }},'10-2': {"tap": function proxy () {
+  }},'10-8': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.doLogin($event)
       })();
     
-  }}}, models: {'0': {
+  }}}, models: {'40': {
       type: "input",
       expr: "name",
       handler: function set ($v) {
@@ -104,229 +104,7 @@ _core["default"].page({
         _vm.name = $v;
       
     }
-    },'1': {
-      type: "input",
-      expr: "phone",
-      handler: function set ($v) {
-      var _vm=this;
-        _vm.phone = $v;
-      
-    }
-    }} }, {info: {"components":{},"on":{}}, handlers: {'10-0': {"input": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.isChecked = false
-      })();
-    
-  }},'10-1': {"input": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.isChecked = false
-      })();
-    
-  }},'10-2': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.doLogin($event)
-      })();
-    
-  }}}, models: {'0': {
-      type: "input",
-      expr: "name",
-      handler: function set ($v) {
-      var _vm=this;
-        _vm.name = $v;
-      
-    }
-    },'1': {
-      type: "input",
-      expr: "phone",
-      handler: function set ($v) {
-      var _vm=this;
-        _vm.phone = $v;
-      
-    }
-    }} }, {info: {"components":{},"on":{}}, handlers: {'10-0': {"input": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.isChecked = false
-      })();
-    
-  }},'10-1': {"input": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.isChecked = false
-      })();
-    
-  }},'10-2': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.doLogin($event)
-      })();
-    
-  }}}, models: {'0': {
-      type: "input",
-      expr: "name",
-      handler: function set ($v) {
-      var _vm=this;
-        _vm.name = $v;
-      
-    }
-    },'1': {
-      type: "input",
-      expr: "phone",
-      handler: function set ($v) {
-      var _vm=this;
-        _vm.phone = $v;
-      
-    }
-    }} }, {info: {"components":{},"on":{}}, handlers: {'10-0': {"input": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.isChecked = false
-      })();
-    
-  }},'10-1': {"input": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.isChecked = false
-      })();
-    
-  }},'10-2': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.doLogin($event)
-      })();
-    
-  }}}, models: {'0': {
-      type: "input",
-      expr: "name",
-      handler: function set ($v) {
-      var _vm=this;
-        _vm.name = $v;
-      
-    }
-    },'1': {
-      type: "input",
-      expr: "phone",
-      handler: function set ($v) {
-      var _vm=this;
-        _vm.phone = $v;
-      
-    }
-    }} }, {info: {"components":{},"on":{}}, handlers: {'10-0': {"input": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.isChecked = false
-      })();
-    
-  }},'10-1': {"input": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.isChecked = false
-      })();
-    
-  }},'10-2': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.doLogin($event)
-      })();
-    
-  }}}, models: {'0': {
-      type: "input",
-      expr: "name",
-      handler: function set ($v) {
-      var _vm=this;
-        _vm.name = $v;
-      
-    }
-    },'1': {
-      type: "input",
-      expr: "phone",
-      handler: function set ($v) {
-      var _vm=this;
-        _vm.phone = $v;
-      
-    }
-    }} }, {info: {"components":{},"on":{}}, handlers: {'10-0': {"input": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.isChecked = false
-      })();
-    
-  }},'10-1': {"input": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.isChecked = false
-      })();
-    
-  }},'10-2': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.doLogin($event)
-      })();
-    
-  }}}, models: {'0': {
-      type: "input",
-      expr: "name",
-      handler: function set ($v) {
-      var _vm=this;
-        _vm.name = $v;
-      
-    }
-    },'1': {
-      type: "input",
-      expr: "phone",
-      handler: function set ($v) {
-      var _vm=this;
-        _vm.phone = $v;
-      
-    }
-    }} }, {info: {"components":{},"on":{}}, handlers: {'10-0': {"input": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.isChecked = false
-      })();
-    
-  }},'10-1': {"input": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.isChecked = false
-      })();
-    
-  }},'10-2': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.doLogin($event)
-      })();
-    
-  }}}, models: {'0': {
-      type: "input",
-      expr: "name",
-      handler: function set ($v) {
-      var _vm=this;
-        _vm.name = $v;
-      
-    }
-    },'1': {
+    },'41': {
       type: "input",
       expr: "phone",
       handler: function set ($v) {

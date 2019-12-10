@@ -18,7 +18,7 @@
       <div class="icons icon-add"></div>
    </div>
    <div class="frame" v-show="!hidden">
-      <div class="li numbers-item" v-for="(item, index) in list">
+      <div class="li numbers-item" v-for="(item, index) in list" :key="index">
          <div class="numbers-item-name" :class="{'numbers-item-name-active':item.checked}" @tap="toggle(index)">
             <div class="icons checkbox"></div>
             <text>{{item.name}}</text>

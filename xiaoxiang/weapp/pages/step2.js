@@ -32,6 +32,7 @@ _core["default"].page({
     }
   },
   onLoad: function onLoad() {
+    console.log(getCurrentPages());
     this.getMenuList();
   },
   methods: {
@@ -229,70 +230,35 @@ _core["default"].page({
       };
     }
   }
-}, {info: {"components":{"numbers":{"path":"..\\components\\numbers"},"upload":{"path":"..\\components\\upload"}},"on":{"11-22":["count"]}}, handlers: {'11-20': {"tap": function proxy () {
+}, {info: {"components":{"numbers":{"path":"..\\components\\numbers"},"upload":{"path":"..\\components\\upload"}},"on":{"11-7":["count"]}}, handlers: {'11-5': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.togglePage('standard')
       })();
     
-  }},'11-21': {"tap": function proxy () {
+  }},'11-6': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.togglePage('picture')
       })();
     
-  }},'11-22': {"count": function proxy () {
+  }},'11-7': {"count": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.countPrice($event)
       })();
     
-  }},'11-23': {"tap": function proxy () {
+  }},'11-8': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.doConfirm($event)
       })();
     
-  }},'11-24': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.makePhone($event)
-      })();
-    
-  }}}, models: {} }, {info: {"components":{"numbers":{"path":"..\\components\\numbers"},"upload":{"path":"..\\components\\upload"}},"on":{"11-22":["count"]}}, handlers: {'11-20': {"tap": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.togglePage('standard')
-      })();
-    
-  }},'11-21': {"tap": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.togglePage('picture')
-      })();
-    
-  }},'11-22': {"count": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.countPrice($event)
-      })();
-    
-  }},'11-23': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.doConfirm($event)
-      })();
-    
-  }},'11-24': {"tap": function proxy () {
+  }},'11-9': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {

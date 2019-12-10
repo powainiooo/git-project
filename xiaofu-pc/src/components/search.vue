@@ -61,12 +61,13 @@
             input
                color #333333
                border-right 1px solid #e5e5e5
+               padding-right 40px
                &::-webkit-input-placeholder
                   color #b5b5b5
             .icon-back
                background-image url("../assets/images/icon-back2.png")
                top 117px
-               right 54px
+               right 105px
             a.icon
                border-left 1px solid #f6f6f6
                background url("../assets/images/icon-search.png") no-repeat center center
@@ -93,7 +94,7 @@
                z-index 0
             .icon-back
                top 196px
-               right 110px
+               right 105px
                z-index 0
             .date-picker
                width 300px
@@ -130,7 +131,7 @@
             <div class="keyword">
                <input type="text" placeholder="输入活动、艺人或城市" v-model="keyword" @keydown.enter="doSearch"/>
                <a href="javascript:;" class="icon-back" v-if="isSearch && keyword !== ''" @click="backIndex" title="清空搜索"></a>
-               <a href="javascript:;" @click="doSearch" class="icon" v-else></a>
+               <a href="javascript:;" @click="doSearch" class="icon"></a>
             </div>
             <div class="date">
                <input type="text" v-model='date' placeholder="或选择日期" readonly @click.stop="showCalandar = true" name="dateInput"/>

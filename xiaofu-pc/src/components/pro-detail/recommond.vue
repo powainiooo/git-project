@@ -16,7 +16,7 @@
 
 <template>
 <div>
-   <swiper :options="swiperOption" ref="mySwiper" class="recommond-swiper">
+   <swiper :options="recomOption" ref="mySwiper" class="recommond-swiper">
       <!-- slides -->
       <swiper-slide v-for="i in listData" :key="i.id">
          <list-item :width="320" fold :itemData="i" @tap="getDetail(i.id)"></list-item>
@@ -35,7 +35,7 @@ export default {
    components: {listItem},
 	data() {
 		return {
-         swiperOption: {
+         recomOption: {
             slidesPerView: 'auto',
             spaceBetween: 16,
             slidesOffsetBefore: 155,

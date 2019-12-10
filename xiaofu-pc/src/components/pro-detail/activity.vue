@@ -45,7 +45,7 @@
 
 <template>
 <div>
-   <swiper :options="swiperOption" ref="mySwiper" class="activity-swiper" v-if="listData.length !== 0">
+   <swiper :options="activityOption" ref="mySwiper" class="activity-swiper" v-if="listData.length !== 0">
       <!-- slides -->
       <swiper-slide v-for="(item, index) in listData" :key="index">
          <img :src="imgSrc + item.img" class="activity-img">
@@ -65,7 +65,7 @@ export default {
 	data() {
 	   const self = this
 		return {
-         swiperOption: {
+         activityOption: {
             slidesPerView: 'auto',
             spaceBetween: 16,
             centeredSlides: true,

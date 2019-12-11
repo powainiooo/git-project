@@ -117,8 +117,10 @@ App({
    globalData: {
       userInfo: null,
       userOpenID: null,
-      ajaxSrc: 'http://ticket.pc-online.cc/mobile/applet',
-      imgSrc: 'http://ticket.pc-online.cc/upload/',
+      // ajaxSrc: 'http://ticket.pc-online.cc/mobile/applet',
+      // imgSrc: 'http://ticket.pc-online.cc/upload/',
+      ajaxSrc: 'https://wechat.leesticket.com/mobile/applet_v2',
+      imgSrc: 'https://wechat.leesticket.com/upload/',
       ticketOrderNum: null,
       ticketBuyNum: 0,
       access_token: '',

@@ -19,6 +19,7 @@
          position absolute
          left 200px
          top 30px
+         color #ffffff
       .recommend-swiper
          width 100%
          margin 75px 0 0 0

@@ -35,6 +35,7 @@ Page({
 		bannerId: '',
 		page: 1,
 		keyword: '',
+      recTitle: '',
       showSearchTitle: false,
       searchTitle: '',
       isLoadover: false,
@@ -185,6 +186,7 @@ Page({
 				citysList: res.data.citys,
 				bannerUrl: res.data.cover,
 				bannerId: res.data.b_id,
+				recTitle: res.data.words,
 			})
 		})
 	},

@@ -50,6 +50,10 @@ wepy.page({
    },
    methods: {
       doLogin () {
+         // wx.redirectTo({
+         //    url: '/pages/step1'
+         // })
+         // return
          if (this.name === '') {
             this.isChecked = true
          }

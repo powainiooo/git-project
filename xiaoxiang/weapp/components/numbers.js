@@ -21,12 +21,19 @@ _core["default"].component({
   watch: {
     itemData: function itemData(val) {
       if (val.sub_button) {
+        var lastSelect = wx.getStorageSync('lastSelect');
+        console.log('----------2----------');
+        console.log(lastSelect);
+        this.hidden = lastSelect[val.name] === undefined ? true : lastSelect[val.name];
+
         for (var p in val.sub_button) {
+          var name = val.sub_button[p].name;
+          var item = lastSelect[name];
           this.list.push({
-            name: val.sub_button[p].name,
+            name: name,
             price: parseInt(val.sub_button[p].price),
-            nums: 0,
-            checked: false
+            nums: item === undefined ? 0 : item.nums,
+            checked: item === undefined ? false : item.checked
           });
         }
       }
@@ -34,6 +41,15 @@ _core["default"].component({
   },
   attached: function attached() {},
   methods: {
+    toggleShow: function toggleShow() {
+      this.hidden = !this.hidden;
+      var lastSelect = wx.getStorageSync('lastSelect');
+      lastSelect[this.itemData.name] = this.hidden;
+      wx.setStorage({
+        key: 'lastSelect',
+        data: lastSelect
+      });
+    },
     toggle: function toggle(i) {
       this.list[i].checked = !this.list[i].checked;
       this.setPrice();
@@ -42,12 +58,24 @@ _core["default"].component({
       if (this.list[i].nums === 0) return;
       this.list[i].nums -= 1;
       this.list[i].checked = this.list[i].nums !== 0;
+      this.setLastSelect(this.list[i]);
       this.setPrice();
     },
     doAdd: function doAdd(i) {
       this.list[i].nums += 1;
       this.list[i].checked = true;
+      this.setLastSelect(this.list[i]);
       this.setPrice();
+    },
+    setLastSelect: function setLastSelect(item) {
+      var lastSelect = wx.getStorageSync('lastSelect');
+      if (lastSelect[item.name] === undefined) lastSelect[item.name] = {};
+      lastSelect[item.name].nums = item.nums;
+      lastSelect[item.name].checked = item.checked;
+      wx.setStorage({
+        key: 'lastSelect',
+        data: lastSelect
+      });
     },
     setPrice: function setPrice() {
       var _this = this;
@@ -60,252 +88,28 @@ _core["default"].component({
       this.$emit('count');
     }
   }
-}, {info: {"components":{},"on":{}}, handlers: {'17-0': {"tap": function proxy () {
-    
+}, {info: {"components":{},"on":{}}, handlers: {'18-56': {"tap": function proxy () {
+    var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
-        _vm.hidden = !_vm.hidden
+        _vm.toggleShow($event)
       })();
     
-  }},'17-1': {"tap": function proxy (index) {
-    
-    var _vm=this;
-      return (function () {
-        _vm.toggle(index)
-      })();
-    
-  }},'17-2': {"tap": function proxy (index) {
-    
-    var _vm=this;
-      return (function () {
-        _vm.doReduce(index)
-      })();
-    
-  }},'17-3': {"tap": function proxy (index) {
-    
-    var _vm=this;
-      return (function () {
-        _vm.doAdd(index)
-      })();
-    
-  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'17-0': {"tap": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.hidden = !_vm.hidden
-      })();
-    
-  }},'17-1': {"tap": function proxy (index) {
+  }},'18-57': {"tap": function proxy (index) {
     
     var _vm=this;
       return (function () {
         _vm.toggle(index)
       })();
     
-  }},'17-2': {"tap": function proxy (index) {
+  }},'18-58': {"tap": function proxy (index) {
     
     var _vm=this;
       return (function () {
         _vm.doReduce(index)
       })();
     
-  }},'17-3': {"tap": function proxy (index) {
-    
-    var _vm=this;
-      return (function () {
-        _vm.doAdd(index)
-      })();
-    
-  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'17-0': {"tap": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.hidden = !_vm.hidden
-      })();
-    
-  }},'17-1': {"tap": function proxy (index) {
-    
-    var _vm=this;
-      return (function () {
-        _vm.toggle(index)
-      })();
-    
-  }},'17-2': {"tap": function proxy (index) {
-    
-    var _vm=this;
-      return (function () {
-        _vm.doReduce(index)
-      })();
-    
-  }},'17-3': {"tap": function proxy (index) {
-    
-    var _vm=this;
-      return (function () {
-        _vm.doAdd(index)
-      })();
-    
-  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'17-0': {"tap": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.hidden = !_vm.hidden
-      })();
-    
-  }},'17-1': {"tap": function proxy (index) {
-    
-    var _vm=this;
-      return (function () {
-        _vm.toggle(index)
-      })();
-    
-  }},'17-2': {"tap": function proxy (index) {
-    
-    var _vm=this;
-      return (function () {
-        _vm.doReduce(index)
-      })();
-    
-  }},'17-3': {"tap": function proxy (index) {
-    
-    var _vm=this;
-      return (function () {
-        _vm.doAdd(index)
-      })();
-    
-  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'17-0': {"tap": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.hidden = !_vm.hidden
-      })();
-    
-  }},'17-1': {"tap": function proxy (index) {
-    
-    var _vm=this;
-      return (function () {
-        _vm.toggle(index)
-      })();
-    
-  }},'17-2': {"tap": function proxy (index) {
-    
-    var _vm=this;
-      return (function () {
-        _vm.doReduce(index)
-      })();
-    
-  }},'17-3': {"tap": function proxy (index) {
-    
-    var _vm=this;
-      return (function () {
-        _vm.doAdd(index)
-      })();
-    
-  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'17-0': {"tap": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.hidden = !_vm.hidden
-      })();
-    
-  }},'17-1': {"tap": function proxy (index) {
-    
-    var _vm=this;
-      return (function () {
-        _vm.toggle(index)
-      })();
-    
-  }},'17-2': {"tap": function proxy (index) {
-    
-    var _vm=this;
-      return (function () {
-        _vm.doReduce(index)
-      })();
-    
-  }},'17-3': {"tap": function proxy (index) {
-    
-    var _vm=this;
-      return (function () {
-        _vm.doAdd(index)
-      })();
-    
-  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'17-0': {"tap": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.hidden = !_vm.hidden
-      })();
-    
-  }},'17-1': {"tap": function proxy (index) {
-    
-    var _vm=this;
-      return (function () {
-        _vm.toggle(index)
-      })();
-    
-  }},'17-2': {"tap": function proxy (index) {
-    
-    var _vm=this;
-      return (function () {
-        _vm.doReduce(index)
-      })();
-    
-  }},'17-3': {"tap": function proxy (index) {
-    
-    var _vm=this;
-      return (function () {
-        _vm.doAdd(index)
-      })();
-    
-  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'17-0': {"tap": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.hidden = !_vm.hidden
-      })();
-    
-  }},'17-1': {"tap": function proxy (index) {
-    
-    var _vm=this;
-      return (function () {
-        _vm.toggle(index)
-      })();
-    
-  }},'17-2': {"tap": function proxy (index) {
-    
-    var _vm=this;
-      return (function () {
-        _vm.doReduce(index)
-      })();
-    
-  }},'17-3': {"tap": function proxy (index) {
-    
-    var _vm=this;
-      return (function () {
-        _vm.doAdd(index)
-      })();
-    
-  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'17-0': {"tap": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.hidden = !_vm.hidden
-      })();
-    
-  }},'17-1': {"tap": function proxy (index) {
-    
-    var _vm=this;
-      return (function () {
-        _vm.toggle(index)
-      })();
-    
-  }},'17-2': {"tap": function proxy (index) {
-    
-    var _vm=this;
-      return (function () {
-        _vm.doReduce(index)
-      })();
-    
-  }},'17-3': {"tap": function proxy (index) {
+  }},'18-59': {"tap": function proxy (index) {
     
     var _vm=this;
       return (function () {

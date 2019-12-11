@@ -82,7 +82,7 @@
       .imgs
          height 286px
          mask-image: url('../assets/images/cover.png');
-         mask-position center bottom
+         mask-position 0 142px
          overflow hidden
          display flex
          justify-content center

@@ -72,6 +72,10 @@ _core["default"].page({
       });
     },
     doConfirm: function doConfirm() {
+      wx.navigateTo({
+        url: '/pages/step2'
+      });
+      return;
       this.isChecked = false;
       if (this.layout === '') this.isChecked = true;
       if (this.moveOut.name === '') this.isChecked = true;
@@ -164,91 +168,91 @@ _core["default"].page({
       };
     }
   }
-}, {info: {"components":{},"on":{}}, handlers: {'12-60': {"change": function proxy () {
+}, {info: {"components":{},"on":{}}, handlers: {'12-12': {"change": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.getPrice($event)
       })();
     
-  }},'12-61': {"blur": function proxy () {
+  }},'12-13': {"blur": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.getPrice($event)
       })();
     
-  }},'12-62': {"tap": function proxy () {
+  }},'12-14': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.changeType('Out', '1')
       })();
     
-  }},'12-63': {"tap": function proxy () {
+  }},'12-15': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.changeType('Out', '2')
       })();
     
-  }},'12-64': {"tap": function proxy () {
+  }},'12-16': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.openMap('Out')
       })();
     
-  }},'12-65': {"change": function proxy () {
+  }},'12-17': {"change": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.getPrice($event)
       })();
     
-  }},'12-66': {"tap": function proxy () {
+  }},'12-18': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.changeType('In', '1')
       })();
     
-  }},'12-67': {"tap": function proxy () {
+  }},'12-19': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.changeType('In', '2')
       })();
     
-  }},'12-68': {"tap": function proxy () {
+  }},'12-20': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.openMap('In')
       })();
     
-  }},'12-69': {"change": function proxy () {
+  }},'12-21': {"change": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.getPrice($event)
       })();
     
-  }},'12-70': {"tap": function proxy () {
+  }},'12-22': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.doConfirm($event)
       })();
     
-  }},'12-71': {"tap": function proxy () {
+  }},'12-23': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.makePhone($event)
       })();
     
-  }}}, models: {'40': {
+  }}}, models: {'10': {
       type: "change",
       expr: "layout",
       handler: function set ($v) {
@@ -256,7 +260,7 @@ _core["default"].page({
         _vm.layout = $v;
       
     }
-    },'41': {
+    },'11': {
       type: "input",
       expr: "area",
       handler: function set ($v) {
@@ -264,7 +268,7 @@ _core["default"].page({
         _vm.area = $v;
       
     }
-    },'42': {
+    },'12': {
       type: "input",
       expr: "moveOut.name",
       handler: function set ($v) {
@@ -272,7 +276,7 @@ _core["default"].page({
         _vm.$set(_vm.moveOut, "name", $v);
       
     }
-    },'43': {
+    },'13': {
       type: "change",
       expr: "moveOut.index",
       handler: function set ($v) {
@@ -280,7 +284,7 @@ _core["default"].page({
         _vm.$set(_vm.moveOut, "index", $v);
       
     }
-    },'44': {
+    },'14': {
       type: "input",
       expr: "moveIn.name",
       handler: function set ($v) {
@@ -288,139 +292,7 @@ _core["default"].page({
         _vm.$set(_vm.moveIn, "name", $v);
       
     }
-    },'45': {
-      type: "change",
-      expr: "moveIn.index",
-      handler: function set ($v) {
-      var _vm=this;
-        _vm.$set(_vm.moveIn, "index", $v);
-      
-    }
-    }} }, {info: {"components":{},"on":{}}, handlers: {'12-60': {"change": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.getPrice($event)
-      })();
-    
-  }},'12-61': {"blur": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.getPrice($event)
-      })();
-    
-  }},'12-62': {"tap": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.changeType('Out', '1')
-      })();
-    
-  }},'12-63': {"tap": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.changeType('Out', '2')
-      })();
-    
-  }},'12-64': {"tap": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.openMap('Out')
-      })();
-    
-  }},'12-65': {"change": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.getPrice($event)
-      })();
-    
-  }},'12-66': {"tap": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.changeType('In', '1')
-      })();
-    
-  }},'12-67': {"tap": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.changeType('In', '2')
-      })();
-    
-  }},'12-68': {"tap": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.openMap('In')
-      })();
-    
-  }},'12-69': {"change": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.getPrice($event)
-      })();
-    
-  }},'12-70': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.doConfirm($event)
-      })();
-    
-  }},'12-71': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.makePhone($event)
-      })();
-    
-  }}}, models: {'40': {
-      type: "change",
-      expr: "layout",
-      handler: function set ($v) {
-      var _vm=this;
-        _vm.layout = $v;
-      
-    }
-    },'41': {
-      type: "input",
-      expr: "area",
-      handler: function set ($v) {
-      var _vm=this;
-        _vm.area = $v;
-      
-    }
-    },'42': {
-      type: "input",
-      expr: "moveOut.name",
-      handler: function set ($v) {
-      var _vm=this;
-        _vm.$set(_vm.moveOut, "name", $v);
-      
-    }
-    },'43': {
-      type: "change",
-      expr: "moveOut.index",
-      handler: function set ($v) {
-      var _vm=this;
-        _vm.$set(_vm.moveOut, "index", $v);
-      
-    }
-    },'44': {
-      type: "input",
-      expr: "moveIn.name",
-      handler: function set ($v) {
-      var _vm=this;
-        _vm.$set(_vm.moveIn, "name", $v);
-      
-    }
-    },'45': {
+    },'15': {
       type: "change",
       expr: "moveIn.index",
       handler: function set ($v) {

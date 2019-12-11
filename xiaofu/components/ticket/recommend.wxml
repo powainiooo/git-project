@@ -1,4 +1,5 @@
 <scroll-view scroll-x class="recommends">
+   <view class="recommend-title">{{title}}</view>
    <view class="recommends-frame">
       <!--<ticket wx:for="{{listData}}"-->
               <!--wx:for-item="item"-->

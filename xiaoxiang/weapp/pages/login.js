@@ -23,6 +23,10 @@ _core["default"].page({
   },
   methods: {
     doLogin: function doLogin() {
+      // wx.redirectTo({
+      //    url: '/pages/step1'
+      // })
+      // return
       if (this.name === '') {
         this.isChecked = true;
       }
@@ -96,7 +100,7 @@ _core["default"].page({
         _vm.doLogin($event)
       })();
     
-  }}}, models: {'38': {
+  }}}, models: {'20': {
       type: "input",
       expr: "name",
       handler: function set ($v) {
@@ -104,7 +108,7 @@ _core["default"].page({
         _vm.name = $v;
       
     }
-    },'39': {
+    },'21': {
       type: "input",
       expr: "phone",
       handler: function set ($v) {

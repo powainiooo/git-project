@@ -171,6 +171,10 @@ wepy.page({
          })
       },
       doConfirm () {
+         // wx.navigateTo({
+         //    url: '/pages/step2'
+         // })
+         // return
          this.isChecked = false
          if (this.layout === '') this.isChecked = true
          if (this.moveOut.name === '') this.isChecked = true

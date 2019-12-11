@@ -13,12 +13,12 @@
 </style>
 <template>
 <div class="input-container">
-   <div class="title" @tap="hidden = !hidden">
+   <div class="title" @tap="toggleShow">
       <text>{{itemData.name}}</text>
       <div class="icons icon-add"></div>
    </div>
    <div class="frame" v-show="!hidden">
-      <div class="li numbers-item" v-for="(item, index) in list">
+      <div class="li numbers-item" v-for="(item, index) in list" :key="index">
          <div class="numbers-item-name" :class="{'numbers-item-name-active':item.checked}" @tap="toggle(index)">
             <div class="icons checkbox"></div>
             <text>{{item.name}}</text>
@@ -54,12 +54,18 @@ wepy.component({
    watch: {
       itemData (val) {
          if (val.sub_button) {
+            const lastSelect = wx.getStorageSync('lastSelect')
+            console.log('----------2----------')
+            console.log(lastSelect)
+            this.hidden = lastSelect[val.name] === undefined ? true : lastSelect[val.name]
             for (let p in val.sub_button) {
+               const name = val.sub_button[p].name
+               const item = lastSelect[name]
                this.list.push({
-                  name: val.sub_button[p].name,
+                  name,
                   price: parseInt(val.sub_button[p].price),
-                  nums: 0,
-                  checked: false
+                  nums: item === undefined ? 0 : item.nums,
+                  checked: item === undefined ? false : item.checked
                })
             }
          }
@@ -68,6 +74,15 @@ wepy.component({
    attached() {
    },
    methods: {
+      toggleShow () {
+         this.hidden = !this.hidden
+         const lastSelect = wx.getStorageSync('lastSelect')
+         lastSelect[this.itemData.name] = this.hidden
+         wx.setStorage({
+            key: 'lastSelect',
+            data: lastSelect
+         })
+      },
       toggle (i) {
          this.list[i].checked = !this.list[i].checked
          this.setPrice()
@@ -76,12 +91,24 @@ wepy.component({
          if (this.list[i].nums === 0) return
          this.list[i].nums -= 1
          this.list[i].checked = this.list[i].nums !== 0
+         this.setLastSelect(this.list[i])
          this.setPrice()
       },
       doAdd (i) {
          this.list[i].nums += 1
          this.list[i].checked = true
+         this.setLastSelect(this.list[i])
          this.setPrice()
+      },
+      setLastSelect (item) {
+         let lastSelect = wx.getStorageSync('lastSelect')
+         if (lastSelect[item.name] === undefined) lastSelect[item.name] = {}
+         lastSelect[item.name].nums = item.nums
+         lastSelect[item.name].checked = item.checked
+         wx.setStorage({
+            key: 'lastSelect',
+            data: lastSelect
+         })
       },
       setPrice () {
          this.price = 0

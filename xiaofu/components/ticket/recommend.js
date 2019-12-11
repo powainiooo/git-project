@@ -7,7 +7,11 @@ Component({
 	   listData: {
 		   type: Array,
 		   value: []
-	   }
+	   },
+      title: {
+         type: String,
+         value: 'test'
+      }
    },
 
    /**

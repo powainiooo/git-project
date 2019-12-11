@@ -32,6 +32,18 @@ _core["default"].page({
     }
   },
   onLoad: function onLoad() {
+    var lastSelect = wx.getStorageSync('lastSelect');
+    console.log('----------1----------');
+    console.log(lastSelect);
+
+    if (!lastSelect) {
+      console.log('dont');
+      wx.setStorage({
+        key: 'lastSelect',
+        data: {}
+      });
+    }
+
     this.getMenuList();
   },
   methods: {
@@ -215,6 +227,10 @@ _core["default"].page({
         console.log(res);
 
         if (res.status === 0) {
+          wx.setStorage({
+            key: 'lastSelect',
+            data: {}
+          });
           wx.reLaunch({
             url: '/pages/success'
           });
@@ -229,35 +245,35 @@ _core["default"].page({
       };
     }
   }
-}, {info: {"components":{"numbers":{"path":"..\\components\\numbers"},"upload":{"path":"..\\components\\upload"}},"on":{"11-27":["count"]}}, handlers: {'11-25': {"tap": function proxy () {
+}, {info: {"components":{"numbers":{"path":"..\\components\\numbers"},"upload":{"path":"..\\components\\upload"}},"on":{"13-42":["count"]}}, handlers: {'13-40': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.togglePage('standard')
       })();
     
-  }},'11-26': {"tap": function proxy () {
+  }},'13-41': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.togglePage('picture')
       })();
     
-  }},'11-27': {"count": function proxy () {
+  }},'13-42': {"count": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.countPrice($event)
       })();
     
-  }},'11-28': {"tap": function proxy () {
+  }},'13-43': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.doConfirm($event)
       })();
     
-  }},'11-29': {"tap": function proxy () {
+  }},'13-44': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {

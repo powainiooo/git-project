@@ -61,6 +61,16 @@ wepy.page({
       }
    },
    onLoad() {
+      const lastSelect = wx.getStorageSync('lastSelect')
+      console.log('----------1----------')
+      console.log(lastSelect)
+      if (!lastSelect) {
+         console.log('dont')
+         wx.setStorage({
+            key: 'lastSelect',
+            data: {}
+         })
+      }
       this.getMenuList()
    },
    methods: {
@@ -131,6 +141,10 @@ wepy.page({
          }).then(res => {
             console.log(res)
             if (res.status === 0) {
+               wx.setStorage({
+                  key: 'lastSelect',
+                  data: {}
+               })
                wx.reLaunch({
                   url: '/pages/success'
                })

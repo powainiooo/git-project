@@ -30,7 +30,7 @@
                               ticketData="{{item}}"
                               detailData="{{selectedTicketIndex === index ? detailData : null}}"
                               id="{{selectedTicketIndex === index ? 'ticket' : ''}}"></ticket-container>
-            <recommend wx:if="{{item.cate === 'recommend' && item.list.length !== 0}}" listData="{{item.list}}"></recommend>
+            <recommend wx:if="{{item.cate === 'recommend' && item.list.length !== 0}}" listData="{{item.list}}" title="{{recTitle}}"></recommend>
             <banner wx:if="{{item.cate === 'banner'}}" src="{{item.cover}}" linkId="{{item.id}}"></banner>
          </view>
       </view>

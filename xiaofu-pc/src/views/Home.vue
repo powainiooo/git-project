@@ -47,7 +47,7 @@
               v-infinite-scroll="loadMore"
               infinite-scroll-disabled="isLoading"
               infinite-scroll-distance="10">
-            <img src="@/assets/images/empty.png" class="empty" v-if="listData.length === 0"/>
+            <img src="@/assets/images/empty.png" class="empty" v-if="showEmpty"/>
             <div class="pro-list" :style="proListStyle">
                <div v-for="(i, index) in listData" :key="index" :style="getProItemStyle(i.cate)">
                   <list-item
@@ -93,6 +93,7 @@
          return {
             showDetail: false,
             isLoading: true,
+            showEmpty: false,
             listData: [],
             detailData: {},
             keyword: '',
@@ -163,6 +164,7 @@
                if (res.data.list.length === 0 && this.page > 1) {
                   this.isListOver = true
                }
+               this.showEmpty = res.data.list.length === 0
             })
          },
          getCityBanner () {

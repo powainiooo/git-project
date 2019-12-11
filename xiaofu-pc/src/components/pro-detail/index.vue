@@ -143,6 +143,10 @@ export default {
          this.showScan = true
       },
       backTop () {
+         this.showFrame = false
+         this.$nextTick(() => {
+            this.showFrame = true
+         })
          this.$refs.frame.scrollTop = 0
       }
    }

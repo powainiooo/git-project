@@ -31,7 +31,12 @@ _core["default"].component({
       return _store["default"].state.ajaxSrc;
     }
   },
-  attached: function attached() {},
+  attached: function attached() {
+    var lastImgmenu = wx.getStorageSync('lastImgmenu');
+    console.log('----------3----------');
+    console.log(lastImgmenu);
+    this.srcList = lastImgmenu[this.itemData] === undefined ? [] : lastImgmenu[this.itemData];
+  },
   methods: {
     openImgFile: function openImgFile() {
       var _this = this;
@@ -145,6 +150,8 @@ _core["default"].component({
                     }
                   }
                 }
+
+                _this.setImgStore();
               });
 
             case 35:
@@ -181,317 +188,158 @@ _core["default"].component({
                 type: 'video',
                 url: data.url
               });
+              this.setImgStore();
 
-            case 9:
+            case 10:
             case "end":
               return _context2.stop();
           }
         }
       }, null, this);
+    },
+    setImgStore: function setImgStore() {
+      var lastImgmenu = wx.getStorageSync('lastImgmenu');
+      lastImgmenu[this.itemData] = this.srcList;
+      wx.setStorage({
+        key: 'lastImgmenu',
+        data: lastImgmenu
+      });
     }
   }
-}, {info: {"components":{},"on":{}}, handlers: {'19-0': {"tap": function proxy () {
+}, {info: {"components":{},"on":{}}, handlers: {'19-4': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.showSelect = true
       })();
     
-  }},'19-1': {"tap": function proxy () {
+  }},'19-5': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.openVideoFile($event)
       })();
     
-  }},'19-2': {"tap": function proxy () {
+  }},'19-6': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.openImgFile($event)
       })();
     
-  }},'19-3': {"tap": function proxy () {
+  }},'19-7': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.showSelect = false
       })();
     
-  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'19-0': {"tap": function proxy () {
+  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'19-4': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.showSelect = true
       })();
     
-  }},'19-1': {"tap": function proxy () {
+  }},'19-5': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.openVideoFile($event)
       })();
     
-  }},'19-2': {"tap": function proxy () {
+  }},'19-6': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.openImgFile($event)
       })();
     
-  }},'19-3': {"tap": function proxy () {
+  }},'19-7': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.showSelect = false
       })();
     
-  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'19-0': {"tap": function proxy () {
+  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'19-4': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.showSelect = true
       })();
     
-  }},'19-1': {"tap": function proxy () {
+  }},'19-5': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.openVideoFile($event)
       })();
     
-  }},'19-2': {"tap": function proxy () {
+  }},'19-6': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.openImgFile($event)
       })();
     
-  }},'19-3': {"tap": function proxy () {
+  }},'19-7': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.showSelect = false
       })();
     
-  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'19-0': {"tap": function proxy () {
+  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'19-4': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.showSelect = true
       })();
     
-  }},'19-1': {"tap": function proxy () {
+  }},'19-5': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.openVideoFile($event)
       })();
     
-  }},'19-2': {"tap": function proxy () {
+  }},'19-6': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.openImgFile($event)
       })();
     
-  }},'19-3': {"tap": function proxy () {
+  }},'19-7': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.showSelect = false
       })();
     
-  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'19-0': {"tap": function proxy () {
+  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'19-4': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.showSelect = true
       })();
     
-  }},'19-1': {"tap": function proxy () {
+  }},'19-5': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.openVideoFile($event)
       })();
     
-  }},'19-2': {"tap": function proxy () {
+  }},'19-6': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.openImgFile($event)
       })();
     
-  }},'19-3': {"tap": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.showSelect = false
-      })();
-    
-  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'19-0': {"tap": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.showSelect = true
-      })();
-    
-  }},'19-1': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.openVideoFile($event)
-      })();
-    
-  }},'19-2': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.openImgFile($event)
-      })();
-    
-  }},'19-3': {"tap": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.showSelect = false
-      })();
-    
-  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'19-0': {"tap": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.showSelect = true
-      })();
-    
-  }},'19-1': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.openVideoFile($event)
-      })();
-    
-  }},'19-2': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.openImgFile($event)
-      })();
-    
-  }},'19-3': {"tap": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.showSelect = false
-      })();
-    
-  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'19-0': {"tap": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.showSelect = true
-      })();
-    
-  }},'19-1': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.openVideoFile($event)
-      })();
-    
-  }},'19-2': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.openImgFile($event)
-      })();
-    
-  }},'19-3': {"tap": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.showSelect = false
-      })();
-    
-  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'19-0': {"tap": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.showSelect = true
-      })();
-    
-  }},'19-1': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.openVideoFile($event)
-      })();
-    
-  }},'19-2': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.openImgFile($event)
-      })();
-    
-  }},'19-3': {"tap": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.showSelect = false
-      })();
-    
-  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'19-0': {"tap": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.showSelect = true
-      })();
-    
-  }},'19-1': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.openVideoFile($event)
-      })();
-    
-  }},'19-2': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.openImgFile($event)
-      })();
-    
-  }},'19-3': {"tap": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.showSelect = false
-      })();
-    
-  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'19-0': {"tap": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.showSelect = true
-      })();
-    
-  }},'19-1': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.openVideoFile($event)
-      })();
-    
-  }},'19-2': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.openImgFile($event)
-      })();
-    
-  }},'19-3': {"tap": function proxy () {
+  }},'19-7': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {

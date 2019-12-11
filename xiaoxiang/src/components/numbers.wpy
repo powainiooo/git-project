@@ -55,8 +55,8 @@ wepy.component({
       itemData (val) {
          if (val.sub_button) {
             const lastSelect = wx.getStorageSync('lastSelect')
-            console.log('----------2----------')
-            console.log(lastSelect)
+            // console.log('----------2----------')
+            // console.log(lastSelect)
             this.hidden = lastSelect[val.name] === undefined ? true : lastSelect[val.name]
             for (let p in val.sub_button) {
                const name = val.sub_button[p].name
@@ -68,6 +68,7 @@ wepy.component({
                   checked: item === undefined ? false : item.checked
                })
             }
+            this.setPrice()
          }
       }
    },

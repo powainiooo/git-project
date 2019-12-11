@@ -22,8 +22,8 @@
          <list-item :width="320" fold :itemData="i" @tap="getDetail(i.id)"></list-item>
       </swiper-slide>
       <!-- Optional controls -->
-      <div class="swiper-btn swiper-btn-prev" slot="button-prev" style="top: 130px"><i></i></div>
-      <div class="swiper-btn swiper-btn-next" slot="button-next" style="top: 130px"><i></i></div>
+      <div class="swiper-btn swiper-btn-prev recommond-prev" slot="button-prev" style="top: 130px"><i></i></div>
+      <div class="swiper-btn swiper-btn-next recommond-next" slot="button-next" style="top: 130px"><i></i></div>
    </swiper>
 </div>
 </template>
@@ -41,8 +41,8 @@ export default {
             slidesOffsetBefore: 155,
             simulateTouch: false,
             navigation: {
-               nextEl: '.swiper-btn-next',
-               prevEl: '.swiper-btn-prev',
+               nextEl: '.recommond-next',
+               prevEl: '.recommond-prev',
             }
          }
       }

@@ -62,12 +62,18 @@ wepy.page({
    },
    onLoad() {
       const lastSelect = wx.getStorageSync('lastSelect')
-      console.log('----------1----------')
-      console.log(lastSelect)
+      const lastImgmenu = wx.getStorageSync('lastImgmenu')
+      // console.log('----------1----------')
+      // console.log(lastImgmenu)
       if (!lastSelect) {
-         console.log('dont')
          wx.setStorage({
             key: 'lastSelect',
+            data: {}
+         })
+      }
+      if (!lastImgmenu) {
+         wx.setStorage({
+            key: 'lastImgmenu',
             data: {}
          })
       }
@@ -143,6 +149,10 @@ wepy.page({
             if (res.status === 0) {
                wx.setStorage({
                   key: 'lastSelect',
+                  data: {}
+               })
+               wx.setStorage({
+                  key: 'lastImgmenu',
                   data: {}
                })
                wx.reLaunch({

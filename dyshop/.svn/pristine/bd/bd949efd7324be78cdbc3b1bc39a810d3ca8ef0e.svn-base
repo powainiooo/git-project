@@ -1,0 +1,87 @@
+<!--pages/kanjia/index.wxml-->
+<view class='container bg1'>
+  <view class='kanjiaBox'>
+    <view class='kanjiaProBox kjbox'>
+      <view class='userBox'>
+        <image src='{{kjInfo.info.headimg}}'></image>
+      </view>
+      <view class='kjtips'>我发现，快来帮我一起砍价吧</view>
+      <view class='proBox start'>
+        <image src='{{kjInfo.info.goods_cover}}'></image>
+        <view class='rText'>
+          <view class='name'>{{kjInfo.info.goods_name}}</view>
+          <p>￥<span>{{kjInfo.info.goods_price / 100}}</span></p>
+        </view>
+      </view>
+    </view>
+    <view class='kanjiaInfoBox kjbox'>
+        <view class='item between' bindtap='SelcetTap'>
+          <view class='row'><label>选择规格：</label><span class="gg">{{yixuan}}</span></view>
+          <image hidden='{{!isguige}}' src='/images/ico_jt.png'></image>
+        </view>
+        <view class='item start'>
+          <view class='row'><label>已砍：</label><span class="jg">{{kjInfo.yk}}元</span></view>
+        </view>
+        <view class='item start'>
+          <view class='row'><label>当前价格：</label><span class="jg">{{kjInfo.current}}元</span></view>
+        </view>
+    </view>
+    <view class='Countdown'>
+      <view class='CountdownBox center'>
+        还剩
+        <span class="num">{{Time.hour < 10?'0'+Time.hour:Time.hour}}</span>
+        <span class="dd">:</span>
+        <span class="num">{{Time.minute < 10?'0'+Time.minute:Time.minute}}</span>
+        <span class="dd">:</span>
+        <span class="num">{{Time.second < 10?'0'+Time.second:Time.second}}</span>
+        结束
+      </view>
+      <view class='fxhy'>赶快分享给您的好友吧</view>
+    </view>
+    <view class='kjlist kjbox'>
+      <view class='title'>砍价记录</view>
+      <view class='listBox'>
+        <view class='row between' wx:for="{{kjInfo.kj_list}}" wx:key="{{index}}">
+          <view class='l start'><image src='{{item.headimg}}'></image>{{item.username}}</view>
+          <view class='r'>砍掉<span>{{item.price/100}}元</span></view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!--选择规格  -->
+  <view class='mask' bindtap='maskTap' hidden='{{!guige}}'>
+    <view class='Popup fff' catchtap="handleTap">
+      <view class='SelectLayer'>
+        <view class='close end'><image src='/images/ico_xx.png' bindtap='maskTap'></image></view>
+        <view class='cons'>
+          <view class='pro bb1 start'>
+            <view class='cover'><image wx:if="{{kjInfo.info.goods_cover}}" src='{{kjInfo.info.goods_cover}}'></image></view>
+            <view class='info'>
+              <view class='name'>{{kjInfo.info.goods_name}}</view>
+              <view class='price'>￥<span>{{kjInfo.info.goods_price / 100}}</span></view>
+              <view class='productSelect'>已选：{{yixuan && yixuan!=""?yixuan:"请选择"}}</view>
+            </view>
+          </view>
+          <view class='select' wx:for="{{kjInfo.gg_list}}" wx:key="{{index}}">
+            <view class='titleBox'>
+              <view class='title'>{{item.name}}</view>
+            </view>
+            <view class='guige'>
+              <span class="{{ids[index] == idx?'active':''}} {{its.bool == 0?'nokucun':''}}" wx:for="{{item.sub}}" wx:key="{{index}}" wx:for-item="its" wx:for-index="idx" data-index="{{index}}" data-idx="{{idx}}" bindtap="selectGGTap">{{its.name}}</span>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='kjBtn between'>
+    <button open-type='share' hover-class="none" class='btn1' >分享砍价</button>
+    <view class='btn2' wx:if="{{isguige}}" bindtap='ljShopTap'>立即购买</view>
+    <navigator url='../index/index' wx:else class='btn2'>返回首页</navigator>
+  </view>
+</view>
+
+<import src="../template/template.wxml" />
+<block wx:if="{{isShowGetUser}}">
+  <template is="getUserInfo"></template>
+</block>

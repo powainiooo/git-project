@@ -1,0 +1,64 @@
+/**index.wxss**/
+@import "../template/template.wxss";
+.activityTab{
+}
+.moreTab{
+	display:flex;
+    justify-content:space-around;
+	text-align: center;
+    padding: 26rpx 0 30rpx 0;
+}
+.tabImg{
+	display: inline-block;
+}
+.tabImg image{
+	width: 100rpx;
+	height: 100rpx;
+}
+.tabImg .tabTitle{
+	width: 100rpx;
+	font-size: 26rpx;
+}
+.onlyOne image{
+	width: 750rpx;
+	height: 194rpx;
+}
+.title > .text{
+	font-size: 34rpx!important;
+}
+.textTitle{
+	font-size: 24rpx;
+	color: #999;
+	font-weight: 400;
+	margin-left: 20rpx;
+}
+.searchAll{	
+	font-size: 26rpx;
+	color: #999;
+	float:right;
+	margin-right:20rpx;
+	margin-top:10rpx;
+	position:relative;
+	right:35rpx;
+}
+.toAllImg{
+	display: inline-block!important;
+	width: 27rpx!important;
+	height: 27rpx!important;
+	margin-left: 10rpx;
+	position:absolute;
+	top:6rpx;
+}
+.bannerImg{
+	width: 750rpx!important;
+	height: 260rpx!important;
+	margin-top: 5rpx;
+}
+.youxuanBox .itemBox.topMove {
+	margin:-70rpx 0 0 0;
+	justify-content: flex-start;
+	padding: 0 30rpx;
+}
+.topMove .item{
+	border: 1rpx solid #e5e5e5;
+}

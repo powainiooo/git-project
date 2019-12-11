@@ -77,6 +77,14 @@ wepy.page({
                wx.redirectTo({
                   url: '/pages/step1'
                })
+               wx.setStorage({
+                  key: 'lastSelect',
+                  data: {}
+               })
+               wx.setStorage({
+                  key: 'lastImgmenu',
+                  data: {}
+               })
             }
          })
       },

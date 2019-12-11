@@ -51,8 +51,8 @@
          <img :src="imgSrc + item.img" class="activity-img">
       </swiper-slide>
       <!-- Optional controls -->
-      <div class="swiper-btn swiper-btn-prev" slot="button-prev" v-if="listData.length > 1"><i></i></div>
-      <div class="swiper-btn swiper-btn-next" slot="button-next" v-if="listData.length > 1"><i></i></div>
+      <div class="swiper-btn swiper-btn-prev activity-prev" slot="button-prev" v-if="listData.length > 1"><i></i></div>
+      <div class="swiper-btn swiper-btn-next activity-next" slot="button-next" v-if="listData.length > 1"><i></i></div>
       <div class="swiper-pagination"  slot="pagination" v-if="listData.length > 1"></div>
    </swiper>
    <div class="swiper-content">{{content}}</div>
@@ -74,8 +74,8 @@ export default {
                clickable :true
             },
             navigation: {
-               nextEl: '.swiper-btn-next',
-               prevEl: '.swiper-btn-prev',
+               nextEl: '.activity-next',
+               prevEl: '.activity-prev',
             },
             on: {
                slideChange () {

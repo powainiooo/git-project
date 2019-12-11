@@ -55,6 +55,14 @@ _core["default"].page({
           wx.redirectTo({
             url: '/pages/step1'
           });
+          wx.setStorage({
+            key: 'lastSelect',
+            data: {}
+          });
+          wx.setStorage({
+            key: 'lastImgmenu',
+            data: {}
+          });
         }
       });
     },
@@ -79,28 +87,28 @@ _core["default"].page({
   onLoad: function onLoad() {
     this.getRemarks();
   }
-}, {info: {"components":{},"on":{}}, handlers: {'10-12': {"input": function proxy () {
+}, {info: {"components":{},"on":{}}, handlers: {'10-9': {"input": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.isChecked = false
       })();
     
-  }},'10-13': {"input": function proxy () {
+  }},'10-10': {"input": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.isChecked = false
       })();
     
-  }},'10-14': {"tap": function proxy () {
+  }},'10-11': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.doLogin($event)
       })();
     
-  }}}, models: {'20': {
+  }}}, models: {'18': {
       type: "input",
       expr: "name",
       handler: function set ($v) {
@@ -108,7 +116,7 @@ _core["default"].page({
         _vm.name = $v;
       
     }
-    },'21': {
+    },'19': {
       type: "input",
       expr: "phone",
       handler: function set ($v) {

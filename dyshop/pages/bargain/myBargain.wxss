@@ -1,0 +1,97 @@
+/* pages/bargain/myBargain.wxss */
+page{
+  background: #F3F3F3;
+}
+.container{
+  padding: 110rpx 0;
+}
+.orderNav{display: flex;background-color: #fff;position: fixed;top:0;width: 100%;z-index: 100;}
+.orderNav_li{flex:1;text-align: center;font-size: 30rpx;color: #999;line-height: 100rpx;border-bottom: 2rpx solid #fff;}
+.orderNav_li.on{color: #de3031;border-bottom: 2rpx solid #de3031;}
+
+.itemList{
+  width:690rpx;
+  height:270rpx;
+  background:rgba(255,255,255,1);
+  border-radius:8rpx;
+  margin: 15rpx auto;
+  display: flex;
+  align-items: center;
+  position: relative
+}
+.itemList .img .k_tip{
+  position: absolute;
+  top:10rpx;
+  left: 14rpx
+}
+.itemList .img .k_tip image{
+  width:78rpx;
+  margin: 0;
+  position: relative
+}
+.itemList .img .k_tip text{
+  font-size:18rpx;
+  font-family:PingFang-SC-Medium;
+  font-weight:500;
+  color:rgba(255,255,255,1);
+  position: absolute;
+  top:2rpx;
+  left: 10rpx
+}
+.itemList .img image{
+  width:206rpx;
+  border-radius:4rpx;
+  margin: 32rpx 18rpx
+}
+.itemList .content{
+  margin-right: 18rpx
+}
+.itemList .content text{
+  display: block
+}
+.itemList .content .title{
+  font-size:32rpx;
+  font-family:PingFang-SC-Medium;
+  font-weight:500;
+  color:rgba(51,51,51,1);
+  height: 85rpx;
+  overflow: hidden
+}
+.itemList .content .base_price{
+  font-size:24rpx;
+  font-family:PingFang-SC-Regular;
+  font-weight:400;
+  color:rgba(236,61,82,1);
+  margin-top: 30rpx;
+}
+.itemList .content .base_price text{
+  display: inline-block
+}
+.itemList .content .base_price .money{
+  font-size:28rpx;
+  font-family:PingFang-SC-Bold;
+  font-weight:bold;
+  color:rgba(236,61,82,1);
+}
+.itemList .content .price{
+  font-size:24rpx;
+  font-family:PingFang-SC-Regular;
+  font-weight:400;
+  color:rgba(153,153,153,1);
+  margin-top: 30rpx
+}
+.itemList .content .btn{
+  width:182rpx;
+  height:60rpx;
+  line-height: 60rpx;
+  background:linear-gradient(90deg,rgba(235,51,73,1) 0%,rgba(244,92,67,1) 100%);
+  border-radius:30rpx;
+  font-size:32rpx;
+  font-family:PingFang-SC-Medium;
+  font-weight:500;
+  color:rgba(255,255,255,1);
+  position: absolute;
+  right: 18rpx;
+  bottom: 18rpx;
+  padding: 0
+}

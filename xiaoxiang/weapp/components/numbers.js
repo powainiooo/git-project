@@ -21,9 +21,9 @@ _core["default"].component({
   watch: {
     itemData: function itemData(val) {
       if (val.sub_button) {
-        var lastSelect = wx.getStorageSync('lastSelect');
-        console.log('----------2----------');
-        console.log(lastSelect);
+        var lastSelect = wx.getStorageSync('lastSelect'); // console.log('----------2----------')
+        // console.log(lastSelect)
+
         this.hidden = lastSelect[val.name] === undefined ? true : lastSelect[val.name];
 
         for (var p in val.sub_button) {
@@ -36,6 +36,8 @@ _core["default"].component({
             checked: item === undefined ? false : item.checked
           });
         }
+
+        this.setPrice();
       }
     }
   },
@@ -88,28 +90,28 @@ _core["default"].component({
       this.$emit('count');
     }
   }
-}, {info: {"components":{},"on":{}}, handlers: {'18-56': {"tap": function proxy () {
+}, {info: {"components":{},"on":{}}, handlers: {'18-8': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.toggleShow($event)
       })();
     
-  }},'18-57': {"tap": function proxy (index) {
+  }},'18-9': {"tap": function proxy (index) {
     
     var _vm=this;
       return (function () {
         _vm.toggle(index)
       })();
     
-  }},'18-58': {"tap": function proxy (index) {
+  }},'18-10': {"tap": function proxy (index) {
     
     var _vm=this;
       return (function () {
         _vm.doReduce(index)
       })();
     
-  }},'18-59': {"tap": function proxy (index) {
+  }},'18-11': {"tap": function proxy (index) {
     
     var _vm=this;
       return (function () {

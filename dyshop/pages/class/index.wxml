@@ -1,0 +1,34 @@
+<!--pages/class/index.wxml-->
+<view class='container f3'>
+  <view class='searchBox mySearch fff center'>
+    <view class='serch mtb25 fff center'>
+      <image class='ico_search' src='/images/ico_search.png'></image>
+      <input type='text' placeholder-class='serchPlace' placeholder='搜索你喜欢的商品' bindfocus="SerchFocus"></input>
+    </view>
+  </view>
+  <view class='cateList'>
+    <view class='leftMenu'>
+      <view wx:for="{{list}}" wx:key="{{index}}" class='item {{isActive==index?"active":""}}' data-idx="{{index}}" bindtap='isActiveTap'>
+        <view class='text'>{{item.cname}}</view>
+      </view>
+    </view>
+    <view class='rightInfo' wx:for="{{list}}" wx:key="{{index}}" wx:if="{{isActive==index}}">
+      <block wx:for="{{item.sub}}" wx:key="{{index}}" wx:for-item="its">
+      <navigator url='/pages/product/index?id={{its.id}}' class='item'>
+        <image src='{{imgUrl}}{{its.cover}}'></image>
+        <text>{{its.cname}}</text>
+      </navigator>
+      </block>
+      <view class='rightInfoNoData' wx:if="{{item.sub.length==0}}">
+        <rich-text nodes="<br /><br /><br />暂无数据"></rich-text>
+      </view>
+    </view>
+  </view>
+</view>
+
+<footer num="2" bindswitchlag="SwitchLag"></footer>
+
+<import src="../template/template.wxml" />
+<block wx:if="{{isShowGetUser}}">
+  <template is="getUserInfo"></template>
+</block>

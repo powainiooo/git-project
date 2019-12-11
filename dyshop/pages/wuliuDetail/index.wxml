@@ -1,0 +1,22 @@
+<!--pages/wuliuDetail/index.wxml-->
+<view class='container'>
+  <view class='wuliuTop fff start'>
+    <image src='/images/ico_10.png'></image>
+    <view class='info'>
+      <view class='name'>物流状态：<span>{{status[data.state]}}</span></view> 
+      <view class='text'>承运公司：{{data.kd_company}}</view>
+      <view class='text'>物流单号：{{data.kd_num}}</view>
+    </view>
+  </view>
+  <view class='wuliuList'>
+    <view class='box'>
+      <view class='item' wx:for="{{list}}" wx:key="{{index}}">
+        <view class='line'>
+          <view class='title'>{{item.context}}</view>
+          <view class='time'>{{item.ftime}}</view>
+          <span class='{{index==0?"active":""}}'></span>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

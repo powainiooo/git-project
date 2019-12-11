@@ -1,0 +1,167 @@
+<view class="cut-box">
+    <!-- 顶部头像横条 -->
+    <view class="cut-header" style=" background: url(../../../../images/k/k03.png) no-repeat;background-size: 100% 100%;">
+        <image src="../../images/k/k01.png" />
+    </view>
+    <view class="cut-title">我的砍价进度</view>
+    <!-- 倒计时 -->
+    <view class="cut-time">
+        还剩 
+        <span class="cut-time-num">01</span><span class="cut-time-text">天</span>
+        <span class="cut-time-num">01</span><span class="cut-time-text">时</span>
+        <span class="cut-time-num">01</span><span class="cut-time-text">分</span>
+        <span class="cut-time-num">01</span><span class="cut-time-text">秒</span>
+        结束
+    </view>
+    <!-- 商品 -->
+    <view class="cut-detail">
+        <image src="../../images/k/k07.png" class="cut-detail-img"/>
+        <view class="cut-detail-box">
+            <view class="cut-detail-txt1">澳洲Swisse蔓越莓饮料高浓缩蔓越莓精华口服液...</view>
+            <view class="cut-detail-txt2">最低可砍至 <span>￥ 139.00</span> </view>
+            <view class="cut-detail-txt3">原价 <span>￥ 228.00</span></view>
+        </view>
+    </view>
+    <!-- 正常砍价 -->
+    <!-- 进度条 -->
+    <block wx:if="{{cutType == 1}}">
+        <view class="cut-process">
+            <view class="cut-process-line01">
+                <!-- 进度条红线 -->
+                <view class="cut-process-line02" style="width:{{moneyNow/moneyAll*560}}rpx"> </view>
+                <view class="cut-process-pot02" style="left:{{moneyNow/moneyAll*560 -12}}rpx"></view>
+                <view class="cut-process-txt02" style="left:{{moneyNow/moneyAll*560}}rpx">当前价￥{{moneyNow}}</view>
+                <view class="cut-process-pot03" style="left:{{moneyAverage/moneyAll*560 -12}}rpx"></view>
+                <div class="cut-process-tan" style="left:{{moneyAverage/moneyAll*560 -7.5}}rpx"></div>
+                <text class="cut-process-txt03" style="left:{{moneyAverage/moneyAll*560 -12}}rpx">160人已砍价成功，平均砍至￥149.26</text>
+            </view>
+        </view>
+        <view class="cut-txt1">陈**刚刚已￥189.22购买</view>
+        <view class="cut-txt2"><image src="../../images/k/k01.png" /> 陈**刚刚已￥189.22购买</view>
+        <button class="cut-btn1">邀请好友帮我砍价</button>
+        <button class="cut-btn2">当前价购买（仅剩56件）</button>
+    </block>
+    <!-- 帮好有砍价 我也要砍-->
+    <block wx:if="{{cutType == 2}}">
+        <view class="cut-process">
+            <view class="cut-process-line01">
+                <!-- 进度条红线 -->
+                <view class="cut-process-line02" style="width:{{moneyNow/moneyAll*560}}rpx"> </view>
+                <view class="cut-process-pot02" style="left:{{moneyNow/moneyAll*560 -12}}rpx"></view>
+                <view class="cut-process-txt02" style="left:{{moneyNow/moneyAll*560}}rpx">当前价￥{{moneyNow}}</view>
+                <view class="cut-process-pot03" style="left:{{moneyAverage/moneyAll*560 -12}}rpx"></view>
+                <div class="cut-process-tan" style="left:{{moneyAverage/moneyAll*560 -7.5}}rpx"></div>
+                <text class="cut-process-txt03" style="left:{{moneyAverage/moneyAll*560 -12}}rpx">160人已砍价成功，平均砍至￥149.26</text>
+            </view>
+        </view>
+        <view class="cut-txt1">陈**刚刚已￥189.22购买</view>
+        <view class="cut-txt2"><image src="../../images/k/k01.png" /> 陈**刚刚已￥189.22购买</view>
+        <button class="cut-btn1">试试手气，帮TA砍一刀</button>
+    </block>
+    <!-- 砍至底价 -->
+    <block wx:if="{{cutType == 3}}">
+        <view class="cut-process">
+            <view class="cut-process-line01">
+                <!-- 进度条红线 -->
+                <view class="cut-process-line02" style="width:{{moneyAll/moneyAll*560}}rpx"> </view>
+                <view class="cut-process-pot02" style="left:{{moneyAll/moneyAll*560 -12}}rpx"></view>
+                <view class="cut-process-txt02" style="left:{{moneyAll/moneyAll*560}}rpx">当前价￥{{moneyNow}}</view>
+                <div class="cut-process-tan" style="left:{{moneyAll/moneyAll*560 -7.5}}rpx"></div>
+                <text class="cut-process-txt03" style="left:{{moneyAll/moneyAll*560 -12}}rpx">160人已砍价成功，平均砍至￥149.26</text>
+            </view>
+        </view>
+        <view class="cut-txt1">陈**刚刚已￥189.22购买</view>
+        <view class="cut-txt2"><image src="../../images/k/k01.png" /> 陈**刚刚已￥189.22购买</view>
+        <button class="cut-btn1">试试手气，帮TA砍一刀</button>
+    </block>
+    <!-- 砍价失败 -->
+    <block wx:if="{{cutType == 4}}">
+        <image src="../../images/k/k09.png" class="cut-icon" />
+        <view class="cut-state"><image src="../../images/k/k10.png" /> 砍价失败</view>
+        <view class="cut-state-txt"> 砍价至 <span>￥198.89</span> ，活动已过期</view>
+        <button class="cut-btn1">去砍其他商品</button>
+    </block>
+    <!-- 砍价成功 -->
+    <block wx:if="{{cutType == 5}}">
+        <image src="../../images/k/k11.png" class="cut-icon" />
+        <view class="cut-state"><image src="../../images/k/k12.png" /> 砍价成功</view>
+        <view class="cut-state-txt"> 砍价至 <span>￥198.89</span> ，已购买</view>
+        <button class="cut-btn1">去砍其他商品</button>
+    </block>
+</view>
+<view class="cut-btnBox">
+        <view class="cut-btn3">我的砍价</view>
+        <view class="cut-btn4">砍价规则</view>
+</view>
+<!-- 砍价记录 -->
+<view class="cut-userBox">
+    <view class="cut-user-header">
+        <image src="../../images/k/k04.png" />
+        砍价记录
+        <image src="../../images/k/k04.png" />
+    </view>
+    <view class="cut-userBox-txt">已有10位好友助力</view>
+    <view class="cut-user-box">
+        <block wx:for="{{7}}">
+            <view class="cut-user-list">
+                <image src="../../images/k/k01.png"/>
+                <view>10.8元</view>
+            </view>
+        </block>
+    </view>
+</view>
+<!-- 砍价好货推荐 -->
+<view class="cut-userBox">
+    <view class="cut-user-header">
+        <image src="../../images/k/k04.png" />
+        砍价好货推荐
+        <image src="../../images/k/k04.png" />
+    </view>
+    <view class="cut-shop-box">
+        <block wx:for="{{5}}">
+            <view class="cut-shop-list">
+                <image src="../../images/k/k07.png" />
+                <view class="cut-shop-name">澳洲Swisse蔓越莓饮料高浓缩蔓越莓精华澳洲Swisse蔓越莓饮料高浓缩蔓越莓精华...</view>
+                <view class="cut-shop-txt">原价￥228.00</view>
+                <button class="cut-shop-btn">￥23.00砍走</button>
+            </view>
+        </block>
+    </view>
+</view>
+<view class="mask" wx:if="{{model>=5}}"></view>
+<!-- 弹窗 toast类-->
+<view class="model-toast01" wx:if="{{model == 1}}">
+    <image src="../../images/k/k08.png" />
+    <view >恭喜你，成功砍掉 <span>10.56</span> 元</view>
+</view>
+<view class="model-toast02" wx:if="{{model == 2}}">
+    <image src="../../images/k/k06.png" />
+    <view >恭喜你</view>
+    <view >帮TA砍掉了 <span>2.22</span> 元</view>
+</view>
+<!-- 弹窗遮罩类 -->
+<view class="model05" wx:if="{{model == 5}}">
+    <image src="../../images/k/k05.png" />
+</view>
+<view class="model06" wx:if="{{model == 6}}">
+    <view class="model06-box">
+        <view class="model06-header">【砍价规则】</view>
+        <scroll-view scroll-y="{{true}}" class="model06-scroll">
+
+            1、用户先选择地址发起砍价活动，如用户所选地址区域无货将无法发起；邀请好友帮助砍价，砍到任意价格可下单购买该商品，最低可砍到底价购买，每次砍价后只有一次下单机会，不能重复下单；
+            2、用户需在活动有效期内（见活动页面倒计时）砍价并进行购买，活动结束后无法进行砍价及下单购买；
+            3、砍价商品数量有限，先买先得，砍价商品被发起用户购买完后，砍价活动停止，无法继续砍价及下单购买；
+            4、每个用户每个砍价活动只能发起一次；每天最多可以助力3次砍价，对同一用户只能助力一次；
+            5、购买砍价商品不支持使用优惠券，邮费按商城原定标准结算；
+            6、砍价起点价格与用户发起时的商详实时价格为准
+            1、用户先选择地址发起砍价活动，如用户所选地址区域无货将无法发起；邀请好友帮助砍价，砍到任意价格可下单购买该商品，最低可砍到底价购买，每次砍价后只有一次下单机会，不能重复下单；
+            2、用户需在活动有效期内（见活动页面倒计时）砍价并进行购买，活动结束后无法进行砍价及下单购买；
+            3、砍价商品数量有限，先买先得，砍价商品被发起用户购买完后，砍价活动停止，无法继续砍价及下单购买；
+            4、每个用户每个砍价活动只能发起一次；每天最多可以助力3次砍价，对同一用户只能助力一次；
+            5、购买砍价商品不支持使用优惠券，邮费按商城原定标准结算；
+            6、砍价起点价格与用户发起时的商详实时价格为准
+                        
+        </scroll-view>
+    </view>
+    <view class="model06-close">知道了</view>
+</view>

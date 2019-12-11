@@ -89,6 +89,16 @@
          align-items center
          img
             width 100%
+      .sold-out
+         &::after
+            content ''
+            width 100%
+            height 100%
+            background url("../assets/images/sold-out.png") no-repeat 10px 150px
+            background-color rgba(0,0,0,0.5)
+            position absolute
+            top 0
+            left 0
       .tag
          position absolute
          right 0
@@ -138,7 +148,7 @@
          <div class="title" v-else>{{itemData.goods_name}} | {{itemData.activity}}</div>
          <div class="time">{{itemData.hour_b}}-{{itemData.hour_e}}</div>
          <div class="address">{{itemData.address}}</div>
-         <div class="imgs"><img :src="imgSrc + itemData.cover2"/></div>
+         <div class="imgs" :class="{'sold-out': itemData.is_end === 'over'}"><img :src="imgSrc + itemData.cover2"/></div>
          <!--<div class="imgs"><img src="@/assets/images/img.jpg"/></div>-->
          <div class="tag"><img src="@/assets/images/ticket-tag.png"/></div>
       </div>

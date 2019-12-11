@@ -61,6 +61,10 @@ wepy.component({
       }
    },
    attached() {
+      const lastImgmenu = wx.getStorageSync('lastImgmenu')
+      // console.log('----------3----------')
+      // console.log(lastImgmenu)
+      this.srcList = lastImgmenu[this.itemData] === undefined ? [] : lastImgmenu[this.itemData]
    },
    methods: {
       async openImgFile () { // 选择图片
@@ -82,6 +86,7 @@ wepy.component({
                   url: data.url
                })
             }
+            this.setImgStore()
          })
       },
       async openVideoFile () { // 选择视频
@@ -96,6 +101,15 @@ wepy.component({
          this.srcList.push({
             type: 'video',
             url: data.url
+         })
+         this.setImgStore()
+      },
+      setImgStore () {
+         const lastImgmenu = wx.getStorageSync('lastImgmenu')
+         lastImgmenu[this.itemData] = this.srcList
+         wx.setStorage({
+            key: 'lastImgmenu',
+            data: lastImgmenu
          })
       }
    }

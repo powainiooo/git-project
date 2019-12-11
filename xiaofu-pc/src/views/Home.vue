@@ -150,6 +150,7 @@
       methods: {
          getListData () {
             // const date = this.date === '' ? '' : formatDate(this.date, 'yyyy/MM/dd')
+            this.showEmpty = false
             this.$store.commit('toggleCitySelect', this.date === '' && this.keyword === '')
             const date = this.date
             getProList({
@@ -164,7 +165,7 @@
                if (res.data.list.length === 0 && this.page > 1) {
                   this.isListOver = true
                }
-               this.showEmpty = res.data.list.length === 0
+               this.showEmpty = this.listData.length === 0
             })
          },
          getCityBanner () {

@@ -215,7 +215,7 @@ _core["default"].page({
         console.log(res);
 
         if (res.status === 0) {
-          wx.redirectTo({
+          wx.reLaunch({
             url: '/pages/success'
           });
         }
@@ -229,70 +229,35 @@ _core["default"].page({
       };
     }
   }
-}, {info: {"components":{"numbers":{"path":"..\\components\\numbers"},"upload":{"path":"..\\components\\upload"}},"on":{"11-22":["count"]}}, handlers: {'11-20': {"tap": function proxy () {
+}, {info: {"components":{"numbers":{"path":"..\\components\\numbers"},"upload":{"path":"..\\components\\upload"}},"on":{"11-27":["count"]}}, handlers: {'11-25': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.togglePage('standard')
       })();
     
-  }},'11-21': {"tap": function proxy () {
+  }},'11-26': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.togglePage('picture')
       })();
     
-  }},'11-22': {"count": function proxy () {
+  }},'11-27': {"count": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.countPrice($event)
       })();
     
-  }},'11-23': {"tap": function proxy () {
+  }},'11-28': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.doConfirm($event)
       })();
     
-  }},'11-24': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.makePhone($event)
-      })();
-    
-  }}}, models: {} }, {info: {"components":{"numbers":{"path":"..\\components\\numbers"},"upload":{"path":"..\\components\\upload"}},"on":{"11-22":["count"]}}, handlers: {'11-20': {"tap": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.togglePage('standard')
-      })();
-    
-  }},'11-21': {"tap": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.togglePage('picture')
-      })();
-    
-  }},'11-22': {"count": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.countPrice($event)
-      })();
-    
-  }},'11-23': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.doConfirm($event)
-      })();
-    
-  }},'11-24': {"tap": function proxy () {
+  }},'11-29': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {

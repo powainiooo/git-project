@@ -6,17 +6,17 @@
          <image src="{{ i.url }}" mode="aspectFill" wx:if="{{ i.type === 'image' }}" class="img"></image>
          <video src="{{ i.url }}" controls="{{ false }}" wx:if="{{ i.type === 'video' }}" class="img"></video>
       </view>
-      <view data-wpy-evt="18-16" bindtap="_proxy" class="list-item">
+      <view data-wpy-evt="18-0" bindtap="_proxy" class="list-item">
          <view class="icons icon-add-large"></view>
       </view>
    </view>
 
    <view wx:if="{{ showSelect }}" class="z-upload-select">
       <view class="z-upload-select-frame">
-         <view data-wpy-evt="18-17" bindtap="_proxy" class="z-upload-select-btn">上传视频</view>
-         <view data-wpy-evt="18-18" bindtap="_proxy" class="z-upload-select-btn">上传图片</view>
+         <view data-wpy-evt="18-1" bindtap="_proxy" class="z-upload-select-btn">上传视频</view>
+         <view data-wpy-evt="18-2" bindtap="_proxy" class="z-upload-select-btn">上传图片</view>
          <view class="hr"></view>
-         <view data-wpy-evt="18-19" bindtap="_proxy" class="z-upload-select-btn">取消</view>
+         <view data-wpy-evt="18-3" bindtap="_proxy" class="z-upload-select-btn">取消</view>
       </view>
    </view>
 </view>

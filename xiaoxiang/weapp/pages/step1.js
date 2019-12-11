@@ -164,91 +164,91 @@ _core["default"].page({
       };
     }
   }
-}, {info: {"components":{},"on":{}}, handlers: {'12-120': {"change": function proxy () {
+}, {info: {"components":{},"on":{}}, handlers: {'12-60': {"change": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.getPrice($event)
       })();
     
-  }},'12-121': {"blur": function proxy () {
+  }},'12-61': {"blur": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.getPrice($event)
       })();
     
-  }},'12-122': {"tap": function proxy () {
+  }},'12-62': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.changeType('Out', '1')
       })();
     
-  }},'12-123': {"tap": function proxy () {
+  }},'12-63': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.changeType('Out', '2')
       })();
     
-  }},'12-124': {"tap": function proxy () {
+  }},'12-64': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.openMap('Out')
       })();
     
-  }},'12-125': {"change": function proxy () {
+  }},'12-65': {"change": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.getPrice($event)
       })();
     
-  }},'12-126': {"tap": function proxy () {
+  }},'12-66': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.changeType('In', '1')
       })();
     
-  }},'12-127': {"tap": function proxy () {
+  }},'12-67': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.changeType('In', '2')
       })();
     
-  }},'12-128': {"tap": function proxy () {
+  }},'12-68': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.openMap('In')
       })();
     
-  }},'12-129': {"change": function proxy () {
+  }},'12-69': {"change": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.getPrice($event)
       })();
     
-  }},'12-130': {"tap": function proxy () {
+  }},'12-70': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.doConfirm($event)
       })();
     
-  }},'12-131': {"tap": function proxy () {
+  }},'12-71': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.makePhone($event)
       })();
     
-  }}}, models: {'62': {
+  }}}, models: {'40': {
       type: "change",
       expr: "layout",
       handler: function set ($v) {
@@ -256,7 +256,7 @@ _core["default"].page({
         _vm.layout = $v;
       
     }
-    },'63': {
+    },'41': {
       type: "input",
       expr: "area",
       handler: function set ($v) {
@@ -264,7 +264,7 @@ _core["default"].page({
         _vm.area = $v;
       
     }
-    },'64': {
+    },'42': {
       type: "input",
       expr: "moveOut.name",
       handler: function set ($v) {
@@ -272,7 +272,7 @@ _core["default"].page({
         _vm.$set(_vm.moveOut, "name", $v);
       
     }
-    },'65': {
+    },'43': {
       type: "change",
       expr: "moveOut.index",
       handler: function set ($v) {
@@ -280,7 +280,7 @@ _core["default"].page({
         _vm.$set(_vm.moveOut, "index", $v);
       
     }
-    },'66': {
+    },'44': {
       type: "input",
       expr: "moveIn.name",
       handler: function set ($v) {
@@ -288,7 +288,139 @@ _core["default"].page({
         _vm.$set(_vm.moveIn, "name", $v);
       
     }
-    },'67': {
+    },'45': {
+      type: "change",
+      expr: "moveIn.index",
+      handler: function set ($v) {
+      var _vm=this;
+        _vm.$set(_vm.moveIn, "index", $v);
+      
+    }
+    }} }, {info: {"components":{},"on":{}}, handlers: {'12-60': {"change": function proxy () {
+    var $event = arguments[arguments.length - 1];
+    var _vm=this;
+      return (function () {
+        _vm.getPrice($event)
+      })();
+    
+  }},'12-61': {"blur": function proxy () {
+    var $event = arguments[arguments.length - 1];
+    var _vm=this;
+      return (function () {
+        _vm.getPrice($event)
+      })();
+    
+  }},'12-62': {"tap": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.changeType('Out', '1')
+      })();
+    
+  }},'12-63': {"tap": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.changeType('Out', '2')
+      })();
+    
+  }},'12-64': {"tap": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.openMap('Out')
+      })();
+    
+  }},'12-65': {"change": function proxy () {
+    var $event = arguments[arguments.length - 1];
+    var _vm=this;
+      return (function () {
+        _vm.getPrice($event)
+      })();
+    
+  }},'12-66': {"tap": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.changeType('In', '1')
+      })();
+    
+  }},'12-67': {"tap": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.changeType('In', '2')
+      })();
+    
+  }},'12-68': {"tap": function proxy () {
+    
+    var _vm=this;
+      return (function () {
+        _vm.openMap('In')
+      })();
+    
+  }},'12-69': {"change": function proxy () {
+    var $event = arguments[arguments.length - 1];
+    var _vm=this;
+      return (function () {
+        _vm.getPrice($event)
+      })();
+    
+  }},'12-70': {"tap": function proxy () {
+    var $event = arguments[arguments.length - 1];
+    var _vm=this;
+      return (function () {
+        _vm.doConfirm($event)
+      })();
+    
+  }},'12-71': {"tap": function proxy () {
+    var $event = arguments[arguments.length - 1];
+    var _vm=this;
+      return (function () {
+        _vm.makePhone($event)
+      })();
+    
+  }}}, models: {'40': {
+      type: "change",
+      expr: "layout",
+      handler: function set ($v) {
+      var _vm=this;
+        _vm.layout = $v;
+      
+    }
+    },'41': {
+      type: "input",
+      expr: "area",
+      handler: function set ($v) {
+      var _vm=this;
+        _vm.area = $v;
+      
+    }
+    },'42': {
+      type: "input",
+      expr: "moveOut.name",
+      handler: function set ($v) {
+      var _vm=this;
+        _vm.$set(_vm.moveOut, "name", $v);
+      
+    }
+    },'43': {
+      type: "change",
+      expr: "moveOut.index",
+      handler: function set ($v) {
+      var _vm=this;
+        _vm.$set(_vm.moveOut, "index", $v);
+      
+    }
+    },'44': {
+      type: "input",
+      expr: "moveIn.name",
+      handler: function set ($v) {
+      var _vm=this;
+        _vm.$set(_vm.moveIn, "name", $v);
+      
+    }
+    },'45': {
       type: "change",
       expr: "moveIn.index",
       handler: function set ($v) {

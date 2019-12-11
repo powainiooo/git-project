@@ -1,9 +1,10 @@
 {
     "pages": [
         "pages/login",
-        "pages/step2",
+        "pages/success",
         "pages/step1",
-        "pages/success"
+        "pages/step2",
+        "pages/test"
     ],
     "window": {
         "backgroundTextStyle": "light",

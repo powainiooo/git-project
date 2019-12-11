@@ -29,16 +29,16 @@ const ajax = (opts, autoMsg = true) => {
 // 首页banner 地址 ${ajaxUrl}/city_banner  http://localhost:8080/mock/banner.json
 export const getBannerCity = () => {
 	return ajax({
-		url: `${ajaxUrl}/city_banner`
-		// url: `http://localhost:8080/mock/banner.json`
+		// url: `${ajaxUrl}/city_banner`
+		url: `http://localhost:8080/mock/banner.json`
 	})
 }
 
 // 首页列表数据 ${ajaxUrl}/pro_list  http://localhost:8080/mock/list.json
 export const getIndexListData = (data) => {
 	return ajax({
-		url: `${ajaxUrl}/pro_list`,
-		// url: `http://localhost:8080/mock/list.json`,
+		// url: `${ajaxUrl}/pro_list`,
+		url: `http://localhost:8080/mock/list.json`,
 		data
 	})
 }

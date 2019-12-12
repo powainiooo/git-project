@@ -4,7 +4,10 @@ const app = getApp()
 const ajaxSrc = app.globalData.ajaxSrc
 import {getBannerCity, getIndexListData, getIndexDetailData} from '../../utils/api'
 const common = require('common')
-console.log(common)
+const QQMapWX = require('../../utils/qqmap-wx-jssdk.min.js')
+const qMap = new QQMapWX({
+   key: 'AH7BZ-VV736-WNUSA-EP35M-3TCOZ-DTBXG'
+})
 Page({
    behaviors: [common],
 	data: {
@@ -56,8 +59,8 @@ Page({
 		this.setData({
 			activityID,
          isActivity: activityID !== '',
-         acticityLogo
-			// cityID
+         acticityLogo,
+			cityID
 		})
 		this.getListData()
       if (!this.data.isActivity) {
@@ -188,6 +191,7 @@ Page({
 				bannerId: res.data.b_id,
 				recTitle: res.data.words,
 			})
+         this.getLocation()
 		})
 	},
 	// 获取定位
@@ -209,9 +213,10 @@ Page({
 						longitude: res.longitude
 					},
 					success: function (res) {
+					   console.log(res)
 						let city = res.result.address_component.city
 						app.globalData.city = city
-						let cities = self.data.addressList
+						let cities = self.data.citysList
 						let cityID
 						// 判断本地地址是否匹配城市列表
 						for (let i = 0; i < cities.length; i++) {
@@ -221,7 +226,9 @@ Page({
 								break
 							}
 						}
-						if (cityID != self.data.cityID) {
+						console.log('city:' + city)
+						console.log('cityID:' + cityID)
+						if (cityID !== self.data.cityID) {
 							wx.showModal({
 								content: '是否切换到 ' + city,
 								success: function (res) {
@@ -238,7 +245,10 @@ Page({
 								}
 							})
 						}
-					}
+					},
+               fail (err) {
+					   console.log(err)
+               }
 				})
 			}
 		})

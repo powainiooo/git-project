@@ -56,8 +56,10 @@ export default {
    inject: ['getDetailData'],
 	methods: {
 	   getDetail (id) {
-	      this.getDetailData(id)
-         this.$emit('refresh')
+	      this.getDetailData(id, () => {
+            this.$emit('refresh')
+         })
+         // this.$emit('refresh')
       }
    }
 }

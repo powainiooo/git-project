@@ -147,7 +147,6 @@ export default {
          this.$nextTick(() => {
             this.showFrame = true
          })
-         this.$refs.frame.scrollTop = 0
       }
    }
 }

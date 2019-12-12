@@ -5,7 +5,7 @@
       <search url="{{bannerUrl}}" linkId="{{bannerId}}" bindsearch="doSearch" bindtoggleCalendar="toggleCalendar" id="search"></search>
    </view>
    <view class="address-frame {{addressFixed ? 'address-frame-fixed' : ''}}" id="address" wx:if="{{!showSearchTitle && !isActivity}}">
-      <address hasbg="{{addressFixed}}" list="{{citysList}}" id="{{cityID}}" bindchange="cityChange"></address>
+      <address hasbg="{{addressFixed}}" list="{{citysList}}" cityID="{{cityID}}" bindchange="cityChange"></address>
    </view>
    <view class="result-container">
       <view class="search-title" wx:if="{{showSearchTitle}}">

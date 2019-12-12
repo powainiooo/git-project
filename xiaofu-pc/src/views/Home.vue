@@ -177,7 +177,7 @@
                this.bgSrc = res.data.drink
             })
          },
-         getDetailData (id) {
+         getDetailData (id, callback) {
             console.log(id)
             getProDetail({
                tid: id,
@@ -185,6 +185,7 @@
             }).then(res => {
                this.detailData = res.data
                this.showDetail = true
+               if (typeof callback === 'function') callback()
             })
          },
          getProItemStyle(cate) {

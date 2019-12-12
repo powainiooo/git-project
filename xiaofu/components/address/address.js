@@ -8,14 +8,16 @@ Component({
 			type: Array,
 			value: []
 		},
-	   id: {
+      cityID: {
 			type: String,
 		   value: '',
 		   observer (val) {
-				const item = this.data.list.find(i => i.id === val)
-			   this.setData({
-				   selected: item.name || '全部'
-			   })
+            setTimeout(() => {
+               const item = this.data.list.find(i => i.id === val)
+               this.setData({
+                  selected: item === undefined ? '全部' : item.name
+               })
+            }, 500)
 		   }
 	   },
 	   hasbg: {

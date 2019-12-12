@@ -1,4 +1,4 @@
-.drinks { width: 100%; height: calc(100vh - 120rpx); box-sizing: border-box; background: linear-gradient(0deg,rgba(35, 41, 97, 0.97),rgba(0, 0, 0, 0.97)); }
+.drinks { width: 100%; height: calc(100vh - 120rpx); padding-top: 120rpx; box-sizing: border-box; background: linear-gradient(0deg,rgba(35, 41, 97, 0.97),rgba(0, 0, 0, 0.97)); }
 .drinks-logo { width: 100%;  margin: 0 auto; display: block;}
 
 .drinks-list { width: 646rpx; margin: 60rpx auto 160rpx auto;}

@@ -47,13 +47,13 @@ Page({
 	   console.log(options)
 		const activityID = options.id || ''
 		const acticityLogo = options.src || ''
-		let cityID = 0
+		let cityID = ''
 		if (activityID === '') {
 			this.getAddressData()
 			try {
 				cityID = wx.getStorageSync('lastCityID')
 			} catch (e) {
-				cityID = 0
+				cityID = ''
 			}
 		}
 		this.setData({
@@ -199,7 +199,7 @@ Page({
 		let self = this
 		let lastGetCityTime = wx.getStorageSync('lastGetCityTime')
 		let now = new Date().getTime()
-		if (lastGetCityTime === '' || lastGetCityTime === null || now > lastGetCityTime + 24 * 60 * 60 * 1000) {
+		if (lastGetCityTime === '' || lastGetCityTime === null || now > lastGetCityTime + 1 * 1 * 1 * 1000) {
 			wx.setStorageSync('lastGetCityTime', now)
 		} else {
 			return
@@ -213,7 +213,6 @@ Page({
 						longitude: res.longitude
 					},
 					success: function (res) {
-					   console.log(res)
 						let city = res.result.address_component.city
 						app.globalData.city = city
 						let cities = self.data.citysList
@@ -226,9 +225,24 @@ Page({
 								break
 							}
 						}
-						console.log('city:' + city)
-						console.log('cityID:' + cityID)
-						if (cityID !== self.data.cityID) {
+                  // console.log('city:'+ city)
+                  // console.log('cityID:'+ cityID)
+                  // cityID = cityID === undefined ? '' : cityID
+
+                  // city = '广州'
+                  // cityID = '8'
+                  if (cityID === undefined) {
+                     cityID = ''
+                     self.setData({
+                        cityID: ''
+                     })
+                     self.getListData()
+                     wx.setStorage({
+                        key: 'lastCityID',
+                        data: cityID
+                     })
+                  }
+						if (cityID !== '' && cityID !== self.data.cityID) {
 							wx.showModal({
 								content: '是否切换到 ' + city,
 								success: function (res) {

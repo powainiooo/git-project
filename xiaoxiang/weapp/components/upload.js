@@ -32,9 +32,9 @@ _core["default"].component({
     }
   },
   attached: function attached() {
-    var lastImgmenu = wx.getStorageSync('lastImgmenu');
-    console.log('----------3----------');
-    console.log(lastImgmenu);
+    var lastImgmenu = wx.getStorageSync('lastImgmenu'); // console.log('----------3----------')
+    // console.log(lastImgmenu)
+
     this.srcList = lastImgmenu[this.itemData] === undefined ? [] : lastImgmenu[this.itemData];
   },
   methods: {
@@ -206,140 +206,28 @@ _core["default"].component({
       });
     }
   }
-}, {info: {"components":{},"on":{}}, handlers: {'19-4': {"tap": function proxy () {
+}, {info: {"components":{},"on":{}}, handlers: {'19-0': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.showSelect = true
       })();
     
-  }},'19-5': {"tap": function proxy () {
+  }},'19-1': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.openVideoFile($event)
       })();
     
-  }},'19-6': {"tap": function proxy () {
+  }},'19-2': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.openImgFile($event)
       })();
     
-  }},'19-7': {"tap": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.showSelect = false
-      })();
-    
-  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'19-4': {"tap": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.showSelect = true
-      })();
-    
-  }},'19-5': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.openVideoFile($event)
-      })();
-    
-  }},'19-6': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.openImgFile($event)
-      })();
-    
-  }},'19-7': {"tap": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.showSelect = false
-      })();
-    
-  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'19-4': {"tap": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.showSelect = true
-      })();
-    
-  }},'19-5': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.openVideoFile($event)
-      })();
-    
-  }},'19-6': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.openImgFile($event)
-      })();
-    
-  }},'19-7': {"tap": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.showSelect = false
-      })();
-    
-  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'19-4': {"tap": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.showSelect = true
-      })();
-    
-  }},'19-5': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.openVideoFile($event)
-      })();
-    
-  }},'19-6': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.openImgFile($event)
-      })();
-    
-  }},'19-7': {"tap": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.showSelect = false
-      })();
-    
-  }}}, models: {} }, {info: {"components":{},"on":{}}, handlers: {'19-4': {"tap": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.showSelect = true
-      })();
-    
-  }},'19-5': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.openVideoFile($event)
-      })();
-    
-  }},'19-6': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.openImgFile($event)
-      })();
-    
-  }},'19-7': {"tap": function proxy () {
+  }},'19-3': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {

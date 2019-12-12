@@ -4,5 +4,6 @@
      "ticket-container": "../../components/ticket/container",
      "footer": "../../components/ticket/footer",
      "loading": "../../components/loading/loading"
-  }
+  },
+   "backgroundColor": "#002bb0"
 }

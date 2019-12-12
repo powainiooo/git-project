@@ -113,9 +113,10 @@ Component({
          this.checkCanPay()
       },
       checkCanPay () {
-	      if (app.globalData.userInfo === null) {
+         const appNow = getApp()
+	      if (appNow.globalData.userInfo === null) {
             wx.navigateTo({
-               url: '/pages/result/result?page=login'
+               url: `/pages/result/result?page=login&id=${this.data.itemData.info.id}&from=ticket`
             })
          } else {
             this.triggerEvent('btns', 'doPay')

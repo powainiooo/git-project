@@ -33,9 +33,8 @@ _core["default"].page({
   },
   onLoad: function onLoad() {
     var lastSelect = wx.getStorageSync('lastSelect');
-    var lastImgmenu = wx.getStorageSync('lastImgmenu');
-    console.log('----------1----------');
-    console.log(lastImgmenu);
+    var lastImgmenu = wx.getStorageSync('lastImgmenu'); // console.log('----------1----------')
+    // console.log(lastImgmenu)
 
     if (!lastSelect) {
       wx.setStorage({
@@ -256,35 +255,35 @@ _core["default"].page({
       };
     }
   }
-}, {info: {"components":{"numbers":{"path":"..\\components\\numbers"},"upload":{"path":"..\\components\\upload"}},"on":{"13-27":["count"]}}, handlers: {'13-25': {"tap": function proxy () {
+}, {info: {"components":{"numbers":{"path":"..\\components\\numbers"},"upload":{"path":"..\\components\\upload"}},"on":{"13-2":["count"]}}, handlers: {'13-0': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.togglePage('standard')
       })();
     
-  }},'13-26': {"tap": function proxy () {
+  }},'13-1': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.togglePage('picture')
       })();
     
-  }},'13-27': {"count": function proxy () {
+  }},'13-2': {"count": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.countPrice($event)
       })();
     
-  }},'13-28': {"tap": function proxy () {
+  }},'13-3': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.doConfirm($event)
       })();
     
-  }},'13-29': {"tap": function proxy () {
+  }},'13-4': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {

@@ -72,10 +72,10 @@ _core["default"].page({
       });
     },
     doConfirm: function doConfirm() {
-      wx.navigateTo({
-        url: '/pages/step2'
-      });
-      return;
+      // wx.navigateTo({
+      //    url: '/pages/step2'
+      // })
+      // return
       this.isChecked = false;
       if (this.layout === '') this.isChecked = true;
       if (this.moveOut.name === '') this.isChecked = true;
@@ -168,91 +168,91 @@ _core["default"].page({
       };
     }
   }
-}, {info: {"components":{},"on":{}}, handlers: {'12-12': {"change": function proxy () {
+}, {info: {"components":{},"on":{}}, handlers: {'12-0': {"change": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.getPrice($event)
       })();
     
-  }},'12-13': {"blur": function proxy () {
+  }},'12-1': {"blur": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.getPrice($event)
       })();
     
-  }},'12-14': {"tap": function proxy () {
+  }},'12-2': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.changeType('Out', '1')
       })();
     
-  }},'12-15': {"tap": function proxy () {
+  }},'12-3': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.changeType('Out', '2')
       })();
     
-  }},'12-16': {"tap": function proxy () {
+  }},'12-4': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.openMap('Out')
       })();
     
-  }},'12-17': {"change": function proxy () {
+  }},'12-5': {"change": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.getPrice($event)
       })();
     
-  }},'12-18': {"tap": function proxy () {
+  }},'12-6': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.changeType('In', '1')
       })();
     
-  }},'12-19': {"tap": function proxy () {
+  }},'12-7': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.changeType('In', '2')
       })();
     
-  }},'12-20': {"tap": function proxy () {
+  }},'12-8': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.openMap('In')
       })();
     
-  }},'12-21': {"change": function proxy () {
+  }},'12-9': {"change": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.getPrice($event)
       })();
     
-  }},'12-22': {"tap": function proxy () {
+  }},'12-10': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.doConfirm($event)
       })();
     
-  }},'12-23': {"tap": function proxy () {
+  }},'12-11': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.makePhone($event)
       })();
     
-  }}}, models: {'10': {
+  }}}, models: {'2': {
       type: "change",
       expr: "layout",
       handler: function set ($v) {
@@ -260,7 +260,7 @@ _core["default"].page({
         _vm.layout = $v;
       
     }
-    },'11': {
+    },'3': {
       type: "input",
       expr: "area",
       handler: function set ($v) {
@@ -268,7 +268,7 @@ _core["default"].page({
         _vm.area = $v;
       
     }
-    },'12': {
+    },'4': {
       type: "input",
       expr: "moveOut.name",
       handler: function set ($v) {
@@ -276,7 +276,7 @@ _core["default"].page({
         _vm.$set(_vm.moveOut, "name", $v);
       
     }
-    },'13': {
+    },'5': {
       type: "change",
       expr: "moveOut.index",
       handler: function set ($v) {
@@ -284,7 +284,7 @@ _core["default"].page({
         _vm.$set(_vm.moveOut, "index", $v);
       
     }
-    },'14': {
+    },'6': {
       type: "input",
       expr: "moveIn.name",
       handler: function set ($v) {
@@ -292,7 +292,7 @@ _core["default"].page({
         _vm.$set(_vm.moveIn, "name", $v);
       
     }
-    },'15': {
+    },'7': {
       type: "change",
       expr: "moveIn.index",
       handler: function set ($v) {

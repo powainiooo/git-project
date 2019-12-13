@@ -30,17 +30,17 @@ Component({
             isCN: tt.getStorageSync('isCN')
           })
           break;
-        case 1:
+        case 1: 
           tt.reLaunch({
             url: '/pages/index/index'
           })
           break;
-        case 2:
+        case 2: 
           tt.reLaunch({
             url: '/pages/class/index'
           })
           break;
-        case 3:
+        case 3: 
           tt.reLaunch({
             url: '/pages/cart/index'
           })

@@ -1,9 +1,8 @@
-// pages/getUser/getUser.js
+// pages/template/template.js
 Page({
-  data:{
+  data: {
 
   },
-
   onLoad: function (options) {
 
   }

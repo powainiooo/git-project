@@ -1,5 +1,5 @@
 /**index.wxss**/
-@import "../template/template.wxss";
+@import "../template/template.ttss";
 .activityTab{
 }
 .moreTab{

@@ -1,25 +1,25 @@
 <!--footer.wxml-->
 <view class='footer'>
-  <view class='foot'>
-    <view class='foot_li {{num == 1?"active":""}}' bindtap='bindTab' data-num="1">
-      <image src='../images/m_1.png' class='img img1'></image>
-      <image src='../images/m_11.png' class='img img2'></image>
-      <view class='txt'>首页</view>
-    </view>
-    <view class='foot_li {{num == 2?"active":""}}' bindtap='bindTab' data-num="2">
-      <image src='../images/m_2.png' class='img img1'></image>
-      <image src='../images/m_22.png' class='img img2'></image>
-      <view class='txt'>分类</view>
-    </view>
-    <view class='foot_li {{num == 3?"active":""}}' bindtap='bindTab' data-num="3">
-      <image src='../images/m_3.png' class='img img1'></image>
-      <image src='../images/m_33.png' class='img img2'></image>
-      <view class='txt'>购物车</view>
-    </view>
-    <view class='foot_li {{num == 4?"active":""}}' bindtap='bindTab' data-num="4">
-      <image src='../images/m_4.png' class='img img1'></image>
-      <image src='../images/m_44.png' class='img img2'></image>
-      <view class='txt'>我的</view>
-    </view>
-  </view>
+   <view class='foot'>
+      <view class='foot_li {{num == 1?"active":""}}' bindtap='bindTab' data-num="1">
+         <image src='../images/m_1.png' class='img img1'></image>
+         <image src='../images/m_11.png' class='img img2'></image>
+         <view class='txt'>首页</view>
+      </view>
+      <view class='foot_li {{num == 2?"active":""}}' bindtap='bindTab' data-num="2">
+         <image src='../images/m_2.png' class='img img1'></image>
+         <image src='../images/m_22.png' class='img img2'></image>
+         <view class='txt'>分类</view>
+      </view>
+      <view class='foot_li {{num == 3?"active":""}}' bindtap='bindTab' data-num="3">
+         <image src='../images/m_3.png' class='img img1'></image>
+         <image src='../images/m_33.png' class='img img2'></image>
+         <view class='txt'>购物车</view>
+      </view>
+      <view class='foot_li {{num == 4?"active":""}}' bindtap='bindTab' data-num="4">
+         <image src='../images/m_4.png' class='img img1'></image>
+         <image src='../images/m_44.png' class='img img2'></image>
+         <view class='txt'>我的</view>
+      </view>
+   </view>
 </view>

@@ -1,6 +1,3 @@
 {
-  "navigationBarTitleText": "砍价列表",
-  "usingComponents": {
-    "time": "/Component/times"
-  }
+  "usingComponents": {}
 }

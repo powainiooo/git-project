@@ -1,4 +1,1 @@
-/* pages/orderAccount/index.wxss */
-.bottomBtn{
-	z-index: 10;
-}
+/* pages/orderAccount/index.ttss */

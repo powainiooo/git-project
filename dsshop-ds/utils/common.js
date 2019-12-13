@@ -1,20 +1,20 @@
 export default {
     toastTF (message, state, tiem = 2000) {
-        tt.showToast({
+        wx.showToast({
             title: message,
             image: state ? '../../static/img/public/true.png' : '../../static/img/public/networkError.png',
             duration: tiem
         })
     },
     getUserInfo (isId) {
-        let storage = tt.getStorageSync('personageToken')
+        let storage = wx.getStorageSync('personageToken')
         if (storage) {
             return isId ? storage.info.id : storage.info
         } else
             return isId ? 0 : {}
     },
     showToast(message){
-      tt.showToast({
+      wx.showToast({
         title: message,
         icon: 'none'
       })

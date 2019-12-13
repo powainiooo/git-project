@@ -115,12 +115,12 @@ Component({
          if (data.info.is_idnum === '1') {
             if (this.data.idTypeIndex === -1) {
                btn = false
-            } else if (this.data.idTypeIndex === 0) {
+            } else if (this.data.idTypeIndex === '0') {
                let reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/
                if (!reg.test(this.data.idnum)) {
                   btn = false
                }
-            } else if (this.data.idTypeIndex === 1) {
+            } else if (this.data.idTypeIndex === '1') {
                if (this.data.idnum === '') {
                   btn = false
                }

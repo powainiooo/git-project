@@ -1,7 +1,1 @@
-/* pages/myOrder/index.wxss */
-page{background-color: #f3f3f3;}
-.hr16{height: 16rpx;background-color: #f3f3f3;}
-.orderNav{display: flex;background-color: #fff;position: fixed;top:0;width: 100%;z-index: 100;}
-.orderNav_li{flex:1;text-align: center;font-size: 30rpx;color: #999;line-height: 100rpx;border-bottom: 2rpx solid #fff;}
-.orderNav_li.on{color: #de3031;border-bottom: 2rpx solid #de3031;}
-.orderList{padding-top:102rpx;}
+/* pages/fenxiaoOrder/index.ttss */

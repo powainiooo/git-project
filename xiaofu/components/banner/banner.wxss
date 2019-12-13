@@ -2,3 +2,4 @@
 .banner-img { width: 100%; display: block;}
 
 .banner-frame .btn-confirm { width: 530rpx; height: 80rpx;  background: linear-gradient(244deg,rgb(0,42,169),rgb(0,61,188)); border-radius: 40rpx; font-size: 32rpx; color: #ffffff; display: flex; justify-content: center; align-items: center; box-shadow: 0 5rpx 2rpx rgba(0, 0, 0, 0.22); position: absolute; left: 110rpx; bottom: 66rpx;}
+.btn-confirm-hover { transition: all 0.1s linear; transform: scale(0.94)}

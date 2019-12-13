@@ -14,7 +14,7 @@
          <view>售票结束</view>
          <view>如有疑问，详情请联系主办方</view>
       </view>
-      <view class="btn" bindtap="gotoBuy" wx:if="{{itemData.info.is_end == ''}}">购买</view>
+      <view class="btn" hover-class="btn-hover" bindtap="gotoBuy" wx:if="{{itemData.info.is_end == ''}}">购买</view>
       <view class="btn btn-diabled" wx:if="{{itemData.info.is_end == 'over'}}">已售罄</view>
       <view class="btn btn-diabled" wx:if="{{itemData.info.is_end == 'nosale'}}">未开售</view>
       <view class="btn btn-diabled" wx:if="{{itemData.info.is_end == 'salestop'}}">已停止</view>
@@ -26,11 +26,11 @@
       <picker bindchange="numberChange" value="{{numberIndex}}" range="{{numbersArr}}"  class="ticket-number">
          <view>{{numbersArr[numberIndex]}} <text>张</text></view>
       </picker>
-      <view class="btn {{btnDisabled ? '' : 'btn-disabled'}}" bindtap="doPay">{{itemData.drink_list.length === 0 ? '确认付款' : '下一步'}}</view>
+      <view class="btn {{btnDisabled ? '' : 'btn-disabled'}}" hover-class="btn-hover" bindtap="doPay">{{itemData.drink_list.length === 0 ? '确认付款' : '下一步'}}</view>
    </view>
    <!-- 特饮底部 -->
    <view class="detail-footer" wx:if="{{showItem === 'drink'}}">
       <view class="price">{{totalPrice}}<text class="unit">RMB</text></view>
-      <view class="btn" bindtap="doPayDrink">确认付款</view>
+      <view class="btn" hover-class="btn-hover" bindtap="doPayDrink">确认付款</view>
    </view>
 </view>

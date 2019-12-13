@@ -1,6 +1,3 @@
 {
-  "navigationBarTitleText": "订单详情",
-  "usingComponents": {
-    "time": "/Component/times"
-  }
+  "usingComponents": {}
 }

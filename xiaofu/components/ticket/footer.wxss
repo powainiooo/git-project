@@ -5,6 +5,7 @@
 .detail-footer .price { width: 64%; font-size: 100rpx;font-family: 'Helve'; padding-bottom: 20rpx; display: flex; justify-content: center; align-items: center; color: #002aac;}
 .detail-footer .price .unit { font-size: 33rpx; align-self: flex-end; margin-bottom: 30rpx; margin-left: 10rpx;}
 .detail-footer .btn { width: 36%; font-size: 34rpx; color: #ffffff; background-color: #002aac; padding-bottom: 20rpx; display: flex; justify-content: center; align-items: center;}
+.detail-footer .btn-hover { background-color: #0212a3}
 .detail-footer .btn-diabled { background-color: rgb(181,181,182);}
 .detail-footer .stop-sale { width: 64%; display: flex; justify-content: center; color: #888888; font-size: 24rpx; flex-direction: column;}
 .detail-footer .stop-sale view { margin-left: 70rpx;}
@@ -18,4 +19,5 @@
 .buy-footer .ticket-number view { width: 100rpx; height: 100%; display: flex; justify-content: center; align-items: center;}
 .buy-footer .ticket-number text {font-size: 24rpx;}
 .buy-footer .btn { width: 75%; background-color: #002aac; padding-bottom: 10rpx; display: flex; justify-content: center; align-items: center; font-size: 34rpx; color: #fff;}
+.buy-footer .btn-hover { background-color: #0212a3}
 .buy-footer .btn-disabled { background-color: #b5b5b6;}

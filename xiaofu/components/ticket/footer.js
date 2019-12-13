@@ -100,6 +100,7 @@ Component({
 		   app.globalData.ticketNumsSelected = e.detail.value
 	   },
 	   doPay () {
+	      if (!this.data.btnDisabled) return
 	   	if (this.data.itemData.drink_list.length === 0) { // 确认付款
 			   this.checkCanPay()
 		   } else { // 进入特饮页

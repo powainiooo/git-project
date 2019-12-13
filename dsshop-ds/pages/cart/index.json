@@ -1,6 +1,3 @@
 {
-  "navigationBarTitleText": "购物车",
-  "usingComponents": {
-    "footer": "/Component/footer"
-  }
+  "usingComponents": {}
 }

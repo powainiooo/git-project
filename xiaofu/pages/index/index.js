@@ -199,7 +199,7 @@ Page({
 		let self = this
 		let lastGetCityTime = wx.getStorageSync('lastGetCityTime')
 		let now = new Date().getTime()
-		if (lastGetCityTime === '' || lastGetCityTime === null || now > lastGetCityTime + 1 * 1 * 1 * 1000) {
+		if (lastGetCityTime === '' || lastGetCityTime === null || now > lastGetCityTime + 24 * 60 * 60 * 1000) {
 			wx.setStorageSync('lastGetCityTime', now)
 		} else {
 			return

@@ -1,0 +1,14 @@
+/* pages/tixian/index.wxss */
+page{background-color: #f3f3f3;}
+.allMoney{line-height: 120rpx;font-size: 30rpx;color: #666;background-color: #fff;padding:0 30rpx;border-top: 2rpx solid #f3f3f3;}
+.allMoney .money{font-size: 36rpx;color: #333;font-weight: bold;margin-left: 8rpx;}
+.tixian_tips{text-align: center;position: relative;line-height: 100rpx;}
+.tixian_tips .cont{font-size: 26rpx;color: #666;position: relative;z-index: 5;background-color: #f3f3f3;display: inline-block;padding: 0 30rpx;}
+.tixian_tips .line{position: absolute;top:50%;left:30rpx;width: 690rpx;height:2rpx;background-color: #e5e5e5;}
+
+
+.table{background-color: #fff;}
+.table .tr{line-height: 120rpx;display: flex;border-bottom: 2rpx solid #f3f3f3;}
+.table .th .td{color: #333;}
+.table .td{color: #666;font-size: 34rpx;float: left;flex: 1;text-align: center;}
+.table .td.red{color: #de3031;}

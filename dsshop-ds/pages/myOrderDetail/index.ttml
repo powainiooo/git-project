@@ -1,0 +1,80 @@
+<!--pages/myOrderDetail/index.wxml-->
+<view class='container'>
+<view class='orderAddress'>
+  <view class='cont'>
+    <text class='name'>收货人：{{address.rev_name}}</text>
+    <text class='phone'>{{address.rev_mobile}}</text>
+  </view>
+  <view class='address'>
+    <image src='/images/icon_address.png' class='icon'></image>
+    <text class='txt'>{{address.rev_province}}{{address.rev_city}}{{address.rev_area}}{{address.rev_address}}</text>
+  </view>
+</view>
+<view class='hr16'></view>
+<view class='orderLi'>
+  <view class='hr16'></view>
+  <view class='orderLi_top'>
+    <text class='num'>商品明细</text>
+    <text class='status' tt:if="{{info.group_buy_success != -1}}">{{info.order_status}}</text>
+    <text class='status' tt:if="{{info.group_buy_success == -1}}">已超时拼单失败</text>
+  </view>
+  <view class='orderLi_shop' tt:for='{{goods_list}}' tt:key='unquit'>
+    <image src='{{imgUrl}}{{item.goods_cover}}' class='img'></image>
+    <view class='cont'>
+      <view class='tit'>{{item.goods_name}}</view>
+      <view class='style'>{{item.goods_attr}}</view>
+      <view class='numView'>
+        <text class='num'>x{{item.buy_num}}</text>
+        <view class=''>
+          <text class='money1'>￥</text>
+          <text class='money2'>{{item.goods_price / 100}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<view class='hr16'></view>
+<view class='txtH100'>下单时间：{{info.order_time}}</view>
+<view class='txtH100'>订单编号：{{info.order_num}}</view>
+<view class='hr16'></view>
+<view class="txtH100"><span class="lInfo">费用信息</span></view>
+<view class='txtH100'>商品合计：¥{{info.sphj / 100}}</view>
+<view class='txtH100'>运费：¥{{info.spyf}}</view>
+<view class='txtH100'>税费：¥{{info.shui_fei / 100}}</view>
+<view class='txtH100'>积分抵扣：¥{{info.dk_amount}}</view>
+<view class='txtH100'>实付：¥{{info.order_amount / 100}}</view>
+<view class='hr16'></view>
+<navigator hover-class='none' url='../paySuccess/index?id={{info.id}}&isToDeatil=true&hd_id={{info.hd_id}}&title={{title}}'
+ tt:if="{{info.status != 1 && info.status != 6 && info.status != 15 && info.activity_type == 4 && info.group_buy_success != -1}}">
+  <view class='txtH100 spell-display'>
+    <span tt:if="{{info.group_buy_success == 1}}">拼单成功</span>
+    <span tt:if="{{info.group_buy_success == 0}}">拼单进行中</span>
+    <span tt:if="{{info.group_buy_success == -1}}" class="spell-red">拼单失败</span>
+    <view class="spell-right">
+      <image src='{{item.headimg}}' class="spell-image" tt:for="{{info.group_buy_user}}" tt:key
+    tt:if="{{(info.group_buy_success == 1 && index<4) || (info.group_buy_success != 1 && index<3)}}"></image>
+      <image src='/images/pt/noperson.png' class="spell-image" tt:if="{{info.group_buy_success != 1}}"></image>
+      <image src='/images/ico_jt.png' class="right-arrow"></image>
+    </view>
+  </view>
+</navigator>
+<view class='hr16' tt:if="{{info.fp_status!='0'}}"></view>
+<view class="txtH100" tt:if="{{info.fp_status!='0'}}"><span class="lInfo">发票信息</span></view>
+<view class='txtH100' tt:if="{{info.fp_status!='0'}}">{{info.fp_status == '1' ? '个人' : '公司'}} {{info.fp_sh}}</view>
+<view class='txtH100' tt:if="{{info.fp_status!='0'}}">{{info.fp_name}}</view>
+<view class='hr16'></view>
+<view class="txtH100"><span class="lInfo">其他信息</span></view>
+<view class='txtH100'>真实姓名：{{info.real_name}}</view>
+<view class='txtH100'>身份证号：{{info.card_number}}</view>
+<view class='txtH100'>备注:{{info.bz}}</view>
+<view class='footer_btn' hidden='{{info.status == 4}}'>
+  <view class='foot_btn'>
+    <view class='btn' tt:if='{{info.status == 1}}' bindtap='fukuan' data-oid='{{info.id}}'>立即付款
+      <time time='{{info.order_time_new}}' id='{{info.id}}' data-oid='{{info.id}}' bindmyevent="autoCancel"></time>
+    </view>
+    <!--view class='btn' hidden='{{info.status != 4}}' data-id='{{info.id}}' bindtap='shenqingtuikuanTap'>申请退款</view-->
+    <view class='btn' hidden='{{info.status != 5}}' data-id='{{info.id}}' bindtap='bindConfirm'>确认收货</view>
+    <view class='btn' hidden='{{info.status != 6&&info.status != 7}}' data-id='{{info.id}}' bindtap='bindDel'>删除订单</view>
+  </view>
+</view>
+</view>

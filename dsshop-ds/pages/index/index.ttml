@@ -1,2 +1,166 @@
-<!-- pages/index/index.ttml -->
-<text>pages/index/index.ttml</text>
+<!--index.wxml-->
+<view class='container f3'>
+   <view style="text-align:center;font-size:28rpx;">
+      点击 ··· 添加到我的小程序，优惠抢先领
+   </view>
+   <view class='pb120'>
+      <view class='searchBox center indexSearch fff'>
+         <view class='serch mtb25 start' bindtap="SerchFocus">
+            <image class='ico_search' src='/images/ico_search.png'></image>
+            <input type='text' placeholder-class='serchPlace' placeholder='搜索你喜欢的商品' disabled='true'></input>
+         </view>
+      </view>
+      <view class='banner'>
+         <swiper indicator-dots="true" circular="true" autoplay="true" indicator-color="#fff" indicator-active-color="#de3031">
+            <swiper-item tt:for="{{ads_list_max}}" tt:key="{{index}}">
+               <image tt:if="{{item.linktype==1}}" src="{{www}}{{item.img}}" class="slide-image"/>
+               <navigator tt:elif="{{item.linktype==2}}" url='../detail/index?id={{item.link}}&activity_type=0&hd_id=0'><image src="{{www}}{{item.img}}" class="slide-image"/></navigator>
+               <navigator tt:elif="{{item.linktype==3}}" url='{{item.link}}'><image src="{{www}}{{item.img}}" class="slide-image"/></navigator>
+            </swiper-item>
+         </swiper>
+         <!-- <image class='bgStyle' src='/images/banbg.png'></image> -->
+      </view>
+      <!-- 活动tab -->
+      <view class="activityTab fff">
+         <view tt:if="{{activityList.length>1}}" class="moreTab">
+            <navigator hover-class='none' url='{{item.url}}' tt:for="{{activityList}}" tt:key="{{index}}" class="tabImg">
+               <image src="/images/pt/{{item.img}}.png"/>
+               <view class="tabTitle">{{item.title}}</view>
+            </navigator>
+         </view>
+         <navigator hover-class='none' url='{{activityList[0].url}}' tt:elif="{{activityList.length==1}}" class="onlyOne">
+            <image src="/images/pt/{{activityList[0].img}}1.png"/>
+         </navigator>
+      </view>
+      <view class='tehuiBox indexList'>
+         <!-- <view class='title'>
+           <view class='center'>
+             <image src='/images/ico_dd.png'></image>
+             <view class='text'>今日特惠</view>
+             <image src='/images/ico_dd.png'></image>
+           </view>
+         </view> -->
+         <view class='itemBox'>
+            <view class='itemRow between wrap'>
+               <block tt:for="{{ads_list_zhong}}" tt:key="{{index}}">
+                  <view class='now_day' tt:if="{{item.linktype==1}}"><image src='{{www}}{{item.img}}'></image></view>
+                  <navigator tt:elif="{{item.linktype==2}}" class='now_day' url='../detail/index?id={{item.link}}' hover-class='none'>
+                     <image src='{{www}}{{item.img}}'></image>
+                  </navigator>
+                  <navigator tt:elif="{{item.linktype==3}}" class='now_day' url='{{item.link}}' hover-class='none'>
+                     <image src='{{www}}{{item.img}}'></image>
+                  </navigator>
+               </block>
+            </view>
+            <view class='now_day_min between'>
+               <block tt:for="{{ads_list_min}}" tt:key="{{index}}">
+                  <image tt:if="{{item.linktype==1}}" class='now_day' src='{{www}}{{item.img}}'></image>
+                  <navigator tt:elif="{{item.linktype==2}}" class='now_day' url='../detail/index?id={{item.link}}' hover-class='none'>
+                     <image src='{{www}}{{item.img}}'></image>
+                  </navigator>
+                  <navigator tt:elif="{{item.linktype==3}}" class='now_day' url='{{item.link}}' hover-class='none'>
+                     <image src='{{www}}{{item.img}}'></image>
+                  </navigator>
+               </block>
+            </view>
+         </view>
+      </view>
+
+      <!-- 砍价入口 -->
+      <!-- <view bindtap='bargain' tt:if="{{kj_nums>0}}"><image class="bannerImg" mode="widthFix" src='/images/pt/kanjiabanner.png'></image></view> -->
+      <view class='youxuanBox indexList' tt:if="{{kj_list.length>0}}">
+         <navigator class='title' url='../bargain/index' hover-class='none'>
+            <span class='text'>砍价<span class="textTitle">你想要的低价都在这里</span></span>
+            <view class="searchAll">查看全部<image class="toAllImg" src="/images/ico_right.png"/></view>
+            <image class="bannerImg" src="/images/pt/kanjiabanner.png"/>
+         </navigator>
+         <view class='itemBox between wrap topMove'>
+            <navigator tt:for="{{kj_list}}" tt:key="{{index}}" url='../bargain/initiator?id={{item.id}}' hover-class='none' class="item" >
+               <image src='{{imgUrl}}{{item.cover}}'></image>
+               <view class='name'>{{item.goods_name}}</view>
+               <view class='price'>￥<span>{{item.min_price}}</span></view>
+               <view class='icon'><image mode="widthFix" src='/images/kanjia.png'></image></view>
+            </navigator>
+         </view>
+      </view>
+
+      <!-- 秒杀入口 -->
+      <view class='youxuanBox indexList' tt:if="{{ms_list.length>0}}">
+         <navigator class='title' url='../spikeList/index' hover-class='none'>
+            <span class='text'>秒杀<span class="textTitle">特价好物，快来抢</span></span>
+            <span class="searchAll">查看全部<image class="toAllImg" src="/images/ico_right.png"/></span>
+            <image class="bannerImg" src="/images/pt/miaoshabanner.png"/>
+         </navigator>
+         <view class='itemBox between wrap topMove'>
+            <navigator tt:for="{{ms_list}}" tt:key="{{index}}" url='../detail/index?id={{item.id}}&activity_type={{item.activity_type}}&hd_id={{item.id}}' hover-class='none' class="item">
+               <image src='{{imgUrl}}{{item.cover}}'></image>
+               <view class='name'>{{item.goods_name}}</view>
+               <view class='price'>￥<span>{{item.min_price}}</span></view>
+               <view class='icon'><image mode="widthFix" src='/images/miaosha.png'></image></view>
+            </navigator>
+         </view>
+      </view>
+
+      <!-- 限时购入口 -->
+      <view class='youxuanBox indexList' tt:if="{{xsg_list.length>0}}">
+         <navigator class='title' url='../limitedTimeList/index' hover-class='none'>
+            <span class='text'>限时购<span class="textTitle">先到先得</span></span>
+            <span class="searchAll">查看全部<image class="toAllImg" src="/images/ico_right.png"/></span>
+            <image class="bannerImg" src="/images/pt/xianshigoubanner.png"/>
+         </navigator>
+         <view class='itemBox between wrap topMove'>
+            <navigator tt:for="{{xsg_list}}" tt:key="{{index}}" url='../detail/index?id={{item.id}}&activity_type={{item.activity_type}}&hd_id={{item.id}}' hover-class='none' class="item">
+               <image src='{{imgUrl}}{{item.cover}}'></image>
+               <view class='name'>{{item.goods_name}}</view>
+               <view class='price'>￥<span>{{item.min_price}}</span></view>
+               <view class='icon'><image mode="widthFix" src='/images/xianshigou.png'></image></view>
+            </navigator>
+         </view>
+      </view>
+
+      <!-- 拼团入口 原团购入口 -->
+      <view class='youxuanBox indexList' tt:if="{{group_buy_list.length>0}}">
+         <navigator class='title' url='../spellList/index' hover-class='none'>
+            <span class='text'>拼团<span class="textTitle">爱拼才会赢</span></span>
+            <span class="searchAll">查看全部<image class="toAllImg" src="/images/ico_right.png"/></span>
+            <image class="bannerImg" src="/images/pt/pintuanbanner.png"/>
+            <!-- <view class='center'>
+              <image src='/images/ico_dd.png'></image>
+              <view class='text'>团购</view>
+              <image src='/images/ico_dd.png'></image>
+            </view> -->
+         </navigator>
+         <view class='itemBox between wrap topMove'>
+            <navigator tt:for="{{group_buy_list}}" tt:key="{{index}}" url='../detail/index?id={{item.id}}&activity_type=4&hd_id={{item.id}}' hover-class='none' class="item">
+               <image src='{{imgUrl}}{{item.cover}}'></image>
+               <view class='name'>{{item.goods_name}}</view>
+               <view class='price'>￥<span>{{item.price_range.min_price}}</span></view>
+               <view class='icon'><image mode="widthFix" src='/images/pintuan.png'></image></view>
+            </navigator>
+         </view>
+      </view>
+
+      <view class='youxuanBox indexList'>
+         <view class='title'>
+            <view class='center'>
+               <image src='/images/ico_dd.png'></image>
+               <view class='text'>今日优选</view>
+               <image src='/images/ico_dd.png'></image>
+            </view>
+         </view>
+         <view class='itemBox between wrap'>
+            <navigator url='../detail/index?id={{item.id}}&activity_type=0&hd_id=0' hover-class='none' class='item' tt:for="{{yx_goods}}" tt:key="{{index}}">
+               <image src='{{imgUrl}}{{item.cover}}'></image>
+               <view class='name'>{{item.goods_name}}</view>
+               <view class='price'>￥<span>{{item.price}}</span></view>
+            </navigator>
+         </view>
+      </view>
+   </view>
+</view>
+
+<footer num="1" bindswitchlag="SwitchLag"></footer>
+<import src="../template/template.wxml" />
+<block tt:if="{{isShowGetUser}}">
+   <template is="getUserInfo"></template>
+</block>

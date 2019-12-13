@@ -1,0 +1,24 @@
+<!--pages/kanjiaList/index.wxml-->
+<view class='orderList'>
+  <view class='orderLi'>
+    <navigator url='../kanjia/index?id={{item.id}}' hover-class='none' tt:for="{{list}}" tt:key="{{index}}" class='orderLi_shop bb10'>
+      <image src='/images/img1.jpg' class='img'></image>
+      <view class='cont'>
+        <view class='tit' style='font-size:30rpx;height: 80rpx;'>{{item.goods_name}}</view>
+        <view class='style'>{{item.gg_name}}</view>
+        <view class='numView' style='align-items:center'>
+          <text class='money2'>￥{{item.current / 100}}</text>
+          <view class='orderLi_btn' style='padding:0'>
+            <view class='btn2 btn' style='margin:0' data-uid='{{item.kj_uid}}' catchtap='payTap'>立即支付
+              <!-- <time time='{{item.ctime}}' orderId='{{item.id}}' timeWait="{{item.kj_time}}" bindmyevent="autoCancel"></time> -->
+            </view>
+          </view>
+        </view>
+      </view>
+    </navigator>
+  </view>
+  <view class='orderNone' tt:if='{{list.length==0}}'>
+    <image src='/images/none_order.png' class='img'></image>
+    <text class='txt'>暂无砍价活动！</text>
+  </view>
+</view>

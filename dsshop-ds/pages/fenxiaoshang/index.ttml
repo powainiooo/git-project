@@ -1,0 +1,40 @@
+<!--pages/fenxiaoshang/index.wxml-->
+<view class='orderNav'>
+  <view class='orderNav_li {{navIndex == 1?"on":""}}' bindtap='bindnav' data-num='1'>二级分销商</view>
+  <view class='orderNav_li {{navIndex == 2?"on":""}}' bindtap='bindnav' data-num='2'>三级分销商</view>
+</view>
+
+<view class='list' tt:if='{{navIndex == 1}}'>
+  <view class='list_li' tt:for='{{list1}}' tt:key='unquit'>
+    <view class='line'>
+      <view class='head'>
+        <image class='img' src='{{item.headimg}}'></image>
+        <text class='name te'>{{item.nickname}}</text>
+      </view>
+      <view class='money'>
+        <text class='txt'> 贡献利润：{{item.gxlr}}元</text>
+      </view>
+    </view>
+    <view class='num line'>
+      <text>下级会员:{{item.xjhy_num}}位</text>
+      <text>分销商：{{item.fxs_num}}位</text>
+    </view>
+  </view>
+</view>
+<view class='list' tt:else>
+  <view class='list_li' tt:for='{{list2}}' tt:key='unquit'>
+    <view class='line'>
+      <view class='head'>
+        <image class='img' src='{{item.headimg}}'></image>
+        <text class='name te'>{{item.nickname}}</text>
+      </view>
+      <view class='money'>
+        <text class='txt'> 贡献利润：{{item.gxlr}}元</text>
+      </view>
+    </view>
+    <view class='num line'>
+      <text>下级会员:{{item.xjhy_num}}位</text>
+      <text>分销商：{{item.fxs_num}}位</text>
+    </view>
+  </view>
+</view>

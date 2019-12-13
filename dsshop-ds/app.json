@@ -3,10 +3,12 @@
     "pages/index/index",
     "pages/index2/index"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "Mini Program",
-    "navigationBarTextStyle":"black"
-  }
+   "window": {
+      "backgroundTextStyle": "light",
+      "navigationBarBackgroundColor": "#fff",
+      "navigationBarTitleText": "kesslord Paris Mall",
+      "navigationBarTextStyle": "black"
+   },
+   "sitemapLocation": "sitemap.json"
 }
+//chooseInvoiceTitle  setTabBarBadge

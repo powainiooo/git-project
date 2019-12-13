@@ -1,0 +1,22 @@
+/* pages/fenxiaoCenter/index.wxss */
+page{background-color: #f3f3f3;}
+
+.fenxiao_top{position: relative;width: 750rpx;height:350rpx;overflow: hidden;}
+.fenxiao_top .bg{width: 750rpx;height:350rpx;position: absolute;top: 0;left: 0;z-index: 1;}
+.fenxiao_top .cont{position: relative;z-index: 5;}
+.head_img{width: 120rpx;height: 120rpx;padding:8rpx;background-color: #f7abab;border-radius: 50%;display: block;margin: 20rpx auto 12rpx;}
+.head_img .img{width: 120rpx;height: 120rpx;border-radius: 50%;}
+.fenxiao_top .tit{font-size: 36rpx;color: #fff;text-align: center;font-weight: bold;padding-bottom: 4rpx;}
+.fenxiao_top .time{font-size: 26rpx;color: #fff;text-align: center;}
+
+.fenxiao_data{display: flex;padding:30rpx 0;background-color: #fff;}
+.fenxiao_data .data_li:last-child{border-right: 0;}
+.data_li{flex:1;text-align: center;border-right: 2rpx solid #f7f7f7;}
+.data_li .tip{color: #666;font-size: 20rpx;}
+.data_li .money{color: #333;font-size: 30rpx;}
+
+.fenxiao_nav{background-color: #fff;overflow: hidden;}
+.fenxiao_nav .nav_li:nth-child(3n){border-right: 0;}
+.nav_li{box-sizing: border-box;width: 250rpx;text-align: center;padding: 50rpx 0;border-right: 2rpx solid #f3f3f3;border-bottom: 2rpx solid #f3f3f3;float: left;}
+.nav_li .img{width: 100rpx;height: 100rpx;display: block;margin:0 auto 16rpx;}
+.nav_li .tit{font-size: 28rpx;color: #333;}

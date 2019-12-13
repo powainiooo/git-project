@@ -1,0 +1,66 @@
+/* pages/getUser/getUser.wxss */
+.getUserBox{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #fff;
+  z-index: 999999;
+  overflow: hidden;
+}
+
+.getUserInfo{
+  width: 80%;
+  height: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.getUserBox .qx {
+  padding: 30% 0; 
+  overflow: hidden;
+}
+
+.getUserBox .qx image{
+  width: 120rpx;
+  height: 120rpx;
+  padding: 10rpx;
+  border-radius: 50%;
+  border: 1rpx solid #d5d5d5;
+  margin: 0 auto 30rpx;
+  display: block;
+}
+
+.getUserBox .qx .title{
+  font-size: 30rpx;
+  color: #000000;
+  margin-bottom: 10rpx;
+  text-indent: 100rpx;
+}
+
+.getUserBox .qx .text{
+  font-size: 28rpx;
+  color: #b0b0b0;
+  text-indent: 100rpx;
+  margin-bottom: 10rpx;
+}
+
+.getUserBox button{
+  /*background-color: #32b16c;
+  color: #fff;*/
+  padding: 34rpx 0;
+  border-radius: 8rpx;
+}
+
+.getuserinfo{
+  width:45%;
+  border-radius: 0;
+  padding: 0;
+  margin: 0;
+  line-height: 28rpx;
+  float:left;
+}
+.refuse {
+  margin-left:10%;
+}

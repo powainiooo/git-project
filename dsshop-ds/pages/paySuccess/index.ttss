@@ -1,1 +1,373 @@
-/* pages/paySuccess/index.ttss */
+/* pages/paySuccess/index.wxss */
+
+@import "../template/template.wxss";
+.bLine {
+   width: 750rpx;
+   height: 1rpx;
+   background-color: #e5e5e5;
+   position: fixed;
+   top: 0;
+}
+
+.first {
+   display: flex;
+   width: 750rpx;
+   height: 620rpx;
+   align-items: center;
+   flex-direction: column;
+   margin-bottom: 20rpx;
+   /*border-top:1rpx solid #e5e5e5;*/
+}
+
+.toDetial {
+   display: flex;
+   height: 420rpx;
+   align-items: center;
+   flex-direction: column;
+   margin-bottom: 20rpx;
+   /*border-top:1rpx solid #e5e5e5;*/
+}
+
+.detail-pd {
+   margin-top: 60rpx;
+   margin-bottom: 50rpx;
+   font-size: 32rpx;
+   height: 30rpx;
+   color: #333;
+}
+.detail-btn {
+   margin-top: 20rpx;
+   text-align: center;
+   width: 690rpx;
+   height: 90rpx;
+   line-height: 90rpx;
+   color: #fff;
+   background-color: #E60012;
+   font-size: 32rpx;
+   border-radius: 4rpx;
+}
+
+.detail-btn2 {
+   padding: -1rpx;
+   color: #E60012;
+   background-color: #fff;
+   border: 1rpx solid #E60012;
+}
+
+.payImg {
+   display: block;
+   width: 120rpx;
+   height: 120rpx;
+   margin-top: 100rpx;
+   margin-bottom: 40rpx;
+}
+
+.payTitle {
+   font-size: 38rpx;
+   height: 38rpx;
+   color: #333;
+   font-weight: 600;
+}
+
+.pdStatus {
+   margin-top: 30rpx;
+   font-size: 30rpx;
+   height: 30rpx;
+   color: #333;
+}
+
+.red {
+   color: red;
+}
+
+.pdTime {
+   font-size: 30rpx;
+   margin: 30rpx 0;
+}
+
+.invite {
+   width: 450rpx;
+   height: 100rpx;
+   background: rgba(222, 48, 49, 1);
+   border-radius: 4rpx;
+   color: #fff;
+   font-size: 36rpx;
+   line-height: 100rpx;
+   text-align: center;
+}
+
+.personImgList {
+   text-align: center;
+   padding: 30rpx;
+   border-bottom: 1rpx solid #e5e5e5;
+}
+
+.personItem {
+   display: inline-block;
+   position: relative;
+   margin: 0 20rpx;
+}
+
+.personImg {
+   width: 114rpx;
+   height: 114rpx;
+   border-radius: 50%;
+}
+
+.pinzu {
+   width: 58rpx;
+   height: 30rpx;
+   position: absolute;
+   left: 10rpx;
+}
+
+.detail {
+   height: 90rpx;
+   line-height: 90rpx;
+   padding-left: 30rpx;
+   border-bottom: 1rpx solid #e5e5e5;
+}
+
+.dTitle {
+   display: inline-block;
+   font-size: 30rpx;
+   color: #333;
+   width: 120rpx;
+}
+
+.dName {
+   display: inline-block;
+   font-size: 24rpx;
+   width: 530rpx;
+   color: #999;
+   text-align: right;
+   margin-right: 20rpx;
+   vertical-align: middle;
+}
+
+.dImg {
+   display: inline-block;
+   width: 20rpx;
+   height: 24rpx;
+}
+
+.third {
+   margin-top: 20rpx;
+   padding-bottom: 80rpx;
+}
+
+.bButton {
+   width: 750rpx;
+   height: 105rpx;
+   position: fixed;
+   bottom: 0;
+}
+
+.cButton {
+   display: inline-block;
+   width: 375rpx;
+   height: 105rpx;
+   line-height: 105rpx;
+   text-align: center;
+   font-size: 34rpx;
+}
+
+.rList {
+   background-color: #fff;
+   color: #000;
+   border-top: 1rpx solid #e5e5e5;
+}
+
+.toOrder {
+   background-color: #DE3031;
+   color: #fff;
+   border-top: 1rpx solid #DE3031;
+}
+
+.invite-firends {
+   position: absolute;
+   background-color: #FFF;
+   top: 20%;
+   left: 50%;
+   transform: translate(-50%);
+   padding: 76rpx 65rpx 80rpx 65rpx;
+   box-sizing: border-box;
+   white-space: nowrap;
+   border-radius: 10rpx;
+}
+
+.arrow {
+   position: absolute;
+   top: 5%;
+   right: 10%;
+   width: 162rpx;
+   height: 162rpx;
+}
+
+.wechatIcon {
+   margin-left: 6rpx;
+   width: 36rpx;
+   height: 36rpx;
+}
+
+.invite-send-firends {
+   display: flex;
+   align-items: center;
+   font-size: 34rpx;
+   color: #000;
+}
+
+.invite-send {
+   text-align: center;
+   font-size: 32rpx;
+   color: #FF4A4A;
+}
+
+.invite-cancel {
+   position: absolute;
+   padding: 13rpx 34rpx;
+   bottom: 10%;
+   left: 50%;
+   transform: translate(-50%);
+   font-size: 28rpx;
+   color: #fff;
+   border: 1px solid #fff;
+}
+
+.rule-dialog {
+   position: absolute;
+   top: 45%;
+   left: 50%;
+   transform: translate(-50%, -45%);
+   background-color: #fff;
+   font-size: 32rpx;
+   border-radius: 10rpx;
+   min-width: 600rpx;
+}
+
+.rule-text {
+   padding: 56rpx 44rpx 25rpx 44rpx;
+   color: #999;
+   max-height: 600rpx;
+   overflow: auto;
+}
+
+.rule-btn {
+   margin-top: 45rpx;
+   border-top: 1px solid #E5E5E5;
+   padding: 32rpx;
+   text-align: center;
+   color: #E60012;
+}
+
+.toPtDialog {
+   width: 678rpx;
+   position: fixed;
+   top: 240rpx;
+   left: 36rpx;
+   border-radius: 16rpx;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
+}
+.closeImg {
+   width: 44rpx;
+   height: 44rpx;
+   position: absolute;
+   right: -20rpx;
+   top: -20rpx;
+}
+.pdSuccessTitle{
+   margin-top: 60rpx;
+   font-size: 34rpx;
+   color: #2CD66C;
+   display:flex;
+   align-items:center;
+}
+.pdsImg{
+   display: inline-block;
+   width: 37rpx;
+   height: 37rpx;
+   margin-right: 20rpx;
+}
+.personImgList1{
+   margin-top: 20rpx;
+}
+.personItem1 {
+   display: inline-block;
+   position: relative;
+   width: 164rpx;
+   height: 166rpx;
+}
+.personImg1 {
+   width: 114rpx;
+   height: 114rpx;
+   border-radius: 50%;
+   margin-top:40rpx;
+   margin-left:20rpx;
+}
+.personImg2 {
+   width: 114rpx;
+   height: 114rpx;
+   border-radius: 50%;
+   margin-top:40rpx;
+   margin-left:20rpx;
+}
+.pinzu1 {
+   width: 58rpx;
+   height: 30rpx;
+   position: absolute;
+   left:30rpx;
+   top:40rpx;
+}
+.pds1{
+   width: 164rpx;
+   height: 166rpx;
+   position: absolute;
+   top:0;
+   left: 0;
+}
+.goshopping{
+   width:548rpx;
+   height:98rpx;
+   background:rgba(230,0,18,1);
+   border:1rpx solid rgba(254,18,18,1);
+   border-radius:4rpx;
+   line-height: 98rpx;
+   text-align: center;
+   color: #fff;
+   font-size: 38rpx;
+   margin-top: 30rpx;
+}
+.watchOrder{
+   margin: 40rpx 0;
+   display:flex;
+   align-items:center;
+   font-size: 30rpx;
+   color: #666;
+}
+.rightIcon{
+   width: 26rpx;
+   height: 26rpx;
+}
+.pdSuccess{
+   width: 100%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
+   padding-bottom:20rpx;
+}
+.spell-close-text {
+   display: flex;
+   margin-top: 80rpx;
+   margin-bottom: 40rpx;
+   align-items: center;
+   font-size: 34rpx;
+}
+.spell-close {
+   margin-right: 15rpx;
+   width: 37rpx;
+   height: 37rpx;
+}

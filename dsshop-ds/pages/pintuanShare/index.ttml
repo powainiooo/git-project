@@ -1,2 +1,79 @@
-<!-- pages/pintuanShare/index.ttml -->
-<text>pages/pintuanShare/index.ttml</text>
+<!--pages/spikeList/index.wxml-->
+<view class="f3">
+   <view class="bLine"></view>
+   <!-- 商品下架展示 -->
+   <view class="zero fff" wx:if="{{order_data.remain_time <= 0}}">
+      <image src="/images/pt/nogoods.png" class="nogoods"/>
+      <view class="xiaja">此商品已下架</view>
+      <navigator url='../index/index' hover-class='none' class="toIndex">前往商品首页</navigator>
+      <navigator url='../spellList/index?isShare=true' hover-class='none' class="seeOther">看看其他拼团商品</navigator>
+   </view>
+
+   <view class="first fff" wx:if="{{order_data.remain_time > 0}}">
+      <view class='list-group'>
+         <view class='content'>
+            <view class='list-left'>
+               <image src='{{imgUrl}}{{order_data.cover}}' class='img' mode="widthFix"></image>
+            </view>
+            <view class='list-right'>
+               <view class='title'>{{order_data.goods_name}}</view>
+               <view class='middle'>
+                  <view>
+                     <text class='num'>已拼{{order_data.buy_num}}件</text>
+                     <text class='spell-people'>{{order_data.user_num}}人团</text>
+                  </view>
+               </view>
+               <view class='list-footer'>
+                  <view class='list-price'>
+                     <text class='price'>￥<text class='now-price'>{{order_data.hd_price/100}}</text></text>
+                     <view class='old-price'>原价:￥{{order_data.price/100}}</view>
+                  </view>
+               </view>
+            </view>
+         </view>
+      </view>
+      <view class="personImgList">
+         <view class="personItem" wx:for="{{order_data.group_buy_user}}" wx:key="{{index}}">
+            <image class="personImg" src="{{item.headimg}}"  wx:if="{{item.headimg}}"/>
+            <image class="personImg" src="/images/pt/noperson.png" wx:if="{{!item.headimg}}" />
+            <image class="pinzu" src="/images/pt/pinzu.png" wx:if="{{index == 0}}"/>
+         </view>
+      </view>
+      <view class="pdStatus" wx:if="{{order_data.remain_nums>0}}">仅剩<span class="red">{{order_data.remain_nums}}</span>个名额，{{order_data.lastTime}}</view>
+      <view class="pdStatus" wx:if="{{order_data.remain_nums==0}}">团队名额已满</view>
+      <navigator url='../detail/index?type=fromShare&id={{order_data.hd_id}}&activity_type=4&hd_id={{order_data.hd_id}}&gbc_id={{order_data.gbc_id}}&nickname={{order_data.group_buy_user[0].nickname}}' hover-class='none' class="invite" wx:if="{{order_data.remain_nums>0}}">参与{{order_data.group_buy_user[0].nickname}}的拼团</navigator>
+      <navigator url='../detail/index?id={{order_data.hd_id}}&activity_type=4&hd_id={{order_data.hd_id}}' hover-class='none' class="invite" wx:if="{{order_data.remain_nums==0}}">我也要发起拼团</navigator>
+      <view class="detail"  bindtap="isShowRule">
+         <span class="dTitle">拼单规则</span>
+         <span class="dName">好友拼单·人满发货·不满退款</span>
+         <image class="dImg" src='/images/ico_right.png'/>
+      </view>
+   </view>
+
+   <!-- 拼团商品推荐 -->
+   <view class="third youxuanBox indexList">
+      <view class='itemBox between wrap'>
+         <navigator wx:for="{{group_buy_list}}" wx:key="{{index}}" url='../detail/index?id={{item.id}}&activity_type=4&hd_id={{item.id}}' hover-class='none' class='item'>
+            <image src='{{imgUrl}}{{item.cover}}'></image>
+            <view class='name'>{{item.goods_name}}</view>
+            <view class='price'>￥<span>{{item.tg_price}}</span></view>
+            <view class='icon'><image mode="widthFix" src='/images/pintuan.png'></image></view>
+         </navigator>
+      </view>
+   </view>
+   <view class="bButton">
+      <navigator url='../spellList/index?isShare=true' class="goodsList" hover-class='none'>看看其他拼团商品</navigator>
+   </view>
+
+   <!-- 规则弹窗 -->
+   <view class="mask ptMask" wx:if="{{isShowRule}}">
+      <view class="fff">
+         <view class="rule-dialog">
+            <view class="rule-text">
+               好友拼单人满发货不满退款好友拼单好友拼单人满发货不满退款好友拼单好友拼单人满发货不满退款好友拼单好友拼单人满发货不满退款好友拼
+            </view>
+            <view class="rule-btn" bindtap="isShowRule">知道了</view>
+         </view>
+      </view>
+   </view>
+</view>

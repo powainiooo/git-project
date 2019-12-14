@@ -1,2 +1,20 @@
-<!-- pages/fenxiao/index.ttml -->
-<text>pages/fenxiao/index.ttml</text>
+<!--pages/fenxiao/index.wxml-->
+<view class='container f3'>
+   <view class='fenxiaoHead fff'>
+      <image src='/images/bg2.png'></image>
+      <navigator class='help' url='../helpCenter/index' hover-class='none'>帮助说明</navigator>
+   </view>
+   <view class='formBox' hidden='{{isFenxiao}}'>
+      <view class='itemBox fff'>
+         <view class='item start bb1'><view class='label'>姓名:</view><input type='text' bindinput='nameTap' placeholder='请输入您真实姓名，以保证您的权益' placeholder-class='place'></input></view>
+         <view class='item start'><view class='label'>电话:</view><input type='number' maxlength='11' bindinput='phoneTap' placeholder='请输入您真实姓名，以保证您的权益' placeholder-class='place'></input></view>
+      </view>
+      <view class='SubbtnBox'>
+         <view class='subbtn' bindtap='shenqingTap'>立即入驻</view>
+      </view>
+   </view>
+   <view class='nowre fff' hidden='{{!isFenxiao}}'>
+      <image src='/images/ico_nono.png'></image>
+      <view class='text'>正在审核，请耐心等待...</view>
+   </view>
+</view>

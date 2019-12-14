@@ -1,2 +1,34 @@
-<!-- pages/userPl/index.ttml -->
-<text>pages/userPl/index.ttml</text>
+<!--pages/userPl/index.wxml-->
+<view class='container f3'>
+   <view class='headpl between fff'>
+      <view class='le start'>
+         <span>评价</span>
+         <view class='starbox'>
+            <block wx:for="{{starNum}}" wx:key="{{index}}">
+               <image src='/images/ico_star_y.png'></image>
+            </block>
+            <block wx:for="{{5-starNum}}" wx:key="{{index}}">
+               <image src='/images/ico_star_n.png'></image>
+            </block>
+         </view>
+      </view>
+      <view class='ri' wx:if="{{starNum==0}}">{{data.hp_percent}}</view>
+      <view class='ri' wx:else>{{data.hp_percent}}好评</view>
+   </view>
+   <view class='plList'>
+      <view class='item fff' wx:for="{{list}}" wx:key="{{index}}">
+         <view class='top between'>
+            <view class='l'><image src='{{item.headimg}}'></image>{{item.uname}}</view>
+            <view class='r'>{{item.ctime}}</view>
+         </view>
+         <block wx:for="{{item.detail}}" wx:for-item="its" wx:key="{{index}}">
+            <view class='plContent' wx:if="{{its.type==1}}">{{its.content}}</view>
+            <view class='ContentBox' wx:else>
+               <image class='top_jt' src='/images/ico_top_jt.png'></image>
+               <view class='hfContent'><span>回复</span>{{its.content}}</view>
+            </view>
+         </block>
+      </view>
+   </view>
+   <view class='noText' hidden='{{noReturn}}'>别扯了，没有更多了~</view>
+</view>

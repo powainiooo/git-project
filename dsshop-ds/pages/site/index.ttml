@@ -1,2 +1,48 @@
-<!-- pages/site/index.ttml -->
-<text>pages/site/index.ttml</text>
+<!--pages/site/index.wxml-->
+<view class="page">
+   <view class="site">
+      <view class="weui-cells weui-cells_after-title">
+         <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+               <view class="weui-label">收件人</view>
+            </view>
+            <view class="weui-cell__bd">
+               <input class="weui-input" placeholder="请输入收件人" bindinput="name" name="name" value="{{name}}" />
+            </view>
+         </view>
+         <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+               <view class="weui-label">联系方式</view>
+            </view>
+            <view class="weui-cell__bd">
+               <input class="weui-input" placeholder="请输入手机号码" bindinput="iphone" name="iphone" value="{{iphone}}" />
+            </view>
+         </view>
+         <view class="weui-cell weui-cell_select">
+            <view class="weui-cell__hd weui-cell__hd_in-select-after">
+               <view class="weui-label">所在地区</view>
+            </view>
+            <view class="weui-cell__bd">
+
+               <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
+                  <view style="overflow:hidden;" class="weui-select weui-select_in-select-after">{{region[0]}} {{region[1]}} {{region[2]}}</view>
+               </picker>
+            </view>
+         </view>
+         <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+               <view class="weui-label">详细地址</view>
+            </view>
+            <view class="weui-cell__bd">
+               <input class="weui-input" placeholder="街道门牌信息" bindinput="addresslist" name="addresslist" value="{{addresslist}}" />
+            </view>
+         </view>
+      </view>
+   </view>
+   <view class="weui-btn-area">
+      <button class="weui-btn site_btn" bindtap="showTopTips">确认并使用该地址</button>
+   </view>
+   <!-- <view class="weui-btn-area" hidden='{{deleteShow}}'>
+     <button class="weui-btn delete_btn" bindtap="addrdelete">删除</button>
+   </view> -->
+</view>

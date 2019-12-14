@@ -1,1 +1,14 @@
-/* pages/yongjin/index.ttss */
+/* pages/yongjin/index.wxss */
+page{background-color: #f3f3f3;}
+.allMoney{background-color: #004265;padding:40rpx 0;text-align: center;color: #fff;font-size: 30rpx;}
+.allMoney .money{font-size: 60rpx;font-weight: bold;padding-top: 6rpx;}
+
+.data_ul{display: flex;background-color: #1a5575;color: #fff;}
+.data_ul .data_li:last-child{border-right: 0;}
+.data_li{flex:1;text-align: center;border-right: 2rpx solid #487791;padding:20rpx 0;}
+.data_li .tip{font-size: 20rpx;}
+.data_li .money{font-size: 36rpx;font-weight: bold;}
+
+.link120{line-height: 120rpx;color: #000;font-size: 34rpx;padding: 0 30rpx;position: relative;background-color: #fff;border-bottom: 2rpx solid #f3f3f3;}
+.link120 .icon{position: absolute;top:40rpx;right: 20rpx;width: 40rpx;height: 40rpx;}
+.btn{margin: 150rpx 30rpx 40rpx;background-color: #de3031;color: #fff;line-height: 100rpx;text-align: center;font-size: 34rpx;padding:0;}

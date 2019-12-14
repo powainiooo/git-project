@@ -1,2 +1,68 @@
-<!-- pages/tuihuan/index.ttml -->
-<text>pages/tuihuan/index.ttml</text>
+<!--pages/tuihuan/index.wxml-->
+<view class='container f3'>
+   <view class='switchTuihuan start fff' wx:if="{{fh_time>0}}">
+      <view class='label'>售后类型</view>
+      <view class='TypeBox start'>
+         <view class='item start' data-s="3" bindtap='thTap'>
+            <image wx:if="{{type!=3}}" src='/images/ico_noo.png'></image>
+            <image wx:elif="{{type==3}}" src='/images/ico_yes.png'></image>
+            退货</view>
+         <view class='item start' data-s="2" bindtap='thTap'>
+            <image wx:if="{{type!=2}}" src='/images/ico_noo.png'></image>
+            <image wx:elif="{{type==2}}" src='/images/ico_yes.png'></image>
+            换货</view>
+         <view class='item start' data-s="1" bindtap='thTap'>
+            <image wx:if="{{type!=1}}" src='/images/ico_noo.png'></image>
+            <image wx:elif="{{type==1}}" src='/images/ico_yes.png'></image>
+            退款</view>
+      </view>
+   </view>
+   <view class='thInfo fff bb10'>
+      <view class='item between bb1' wx:if="{{sh_address.flag==11 || sh_address.flag==13 || sh_address.flag==14}}">
+         <view class='label'>驳回原因</view>
+         <text class='rInfo'>{{sh_address.bhyy}}</text>
+      </view>
+      <view class='item between bb1'>
+         <view class='label'>申请原因</view>
+         <view class='rInfo center'>
+            <picker bindchange="yuanyinTap" mode="selector" value="{{index}}" range="{{yuanyin}}">
+               <view class="picker ">{{idx!=null?"":"请选择"}}{{yuanyin[idx]}}</view>
+            </picker>
+            <image src='/images/ico_jt.png'></image>
+         </view>
+      </view>
+      <view class='item between bb1' wx:if="{{type==1 || type==3}}">
+         <view class='label'>退款金额</view>
+         <view class='rInfoInput'>
+            <input value='{{tk_amount}}' bindinput='tkAmountTap' maxlength='10' />
+         </view>
+      </view>
+      <view class='item'>
+         <view class='label'>问题描述</view>
+         <view class='rInfoContent'>
+            <textarea placeholder='填写售后原因' placeholder-class='place' value='{{sh_detail.cause}}' bindinput='xiangxiyyTap' maxlength="120"></textarea>
+            <view class='tip'>你还可以输入{{word_num}}个字符</view>
+         </view>
+      </view>
+   </view>
+   <view class='Receive fff' >
+      <view wx:if="{{type==2}}" class='item bb1 between' bindtap='selectAddsTap'>
+         <view class='label start'><image src='/images/ico_adds.png'></image>收货地址</view>
+         <block wx:if="{{!isNewAdds}}">
+            <view class='rInfo start'>{{sh_address?(sh_address.province + sh_address.city + sh_address.area + sh_address.address + ' ' + sh_address.lxr + ' ' + sh_address.phone):''}}</view>
+            <view class='rInfo start'><image src='/images/ico_jt.png'></image></view>
+         </block>
+         <block wx:else>
+            <view class='rInfo start'>{{adds?(adds.provinceName + adds.cityName + adds.countyName + adds.detailInfo + ' ' + adds.userName + ' ' + adds.telNumber):''}}</view>
+            <view class='rInfo start'><image src='/images/ico_jt.png'></image></view>
+         </block>
+      </view>
+      <view wx:if="{{type>1}}" class='item between' bindtap='huijiAddsTap'>
+         <view class='label start'><image src='/images/ico_adds.png'></image>回寄地址</view>
+      </view>
+      <view wx:if="{{type>1}}" class='rInfo adds'>{{hj_address.address + hj_address.name + hj_address.phone}}</view>
+   </view>
+   <view class='SubbtnBox'>
+      <view class='subbtn' bindtap='subsqTap'>提交申请</view>
+   </view>
+</view>

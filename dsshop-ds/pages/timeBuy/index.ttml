@@ -1,2 +1,147 @@
-<!-- pages/timeBuy/index.ttml -->
-<text>pages/timeBuy/index.ttml</text>
+<view class='container {{Canshu || Select || ScHb?"oh":""}}'>
+   <view class='slide'>
+      <swiper autoplay="true" current='0' circular="true" bindchange="sourceChange">
+         <block  wx:key="{{index}}">
+            <swiper-item wx:if="{{item != ''}}">
+               <image src="https://hwsc.vsapp.cn/upload/7/2018/0820/1534746643852.jpg" class="slide-image" />
+            </swiper-item>
+         </block>
+      </swiper>
+      <view class='number'>{{bannerNum}} / {{goods_info.banner.length}}</view>
+   </view>
+   <view class='numList'>
+      <view class='price'>
+         <text class='p1'>¥5900</text>
+         <text class='p2'>¥6900</text>
+      </view>
+      <view class='activity'>
+         <text class='time'>活动时间</text>
+         <text class='day'>2018.05.05-2018.08.08</text>
+      </view>
+   </view>
+   <view class='product bt1' style="padding-bottom:0">
+      <view class='name'>1111{{goods_info.goods_name}}</view>
+      <view class='LyText'>111111111{{goods_info.title}}</view>
+   </view>
+   <view class='canshu'>
+      <view class='item bb1' bindtap='SelcetTap'>
+         <view class='label'>
+            <span>选择</span>{{yixuan && yixuan!=""?yixuan:"产品规格"}}</view>
+         <image src='/images/ico_jt.png'></image>
+      </view>
+   </view>
+   <view class='canshu'>
+      <view class='item bb1' bindtap='CanshuTap'>
+         <view class='label'><span>查看</span>{{yixuan && yixuan!=""?yixuan:"产品参数"}}</view>
+         <image src='/images/ico_jt.png'></image>
+      </view>
+   </view>
+   <view class='DetailContent pb120'>
+      <!-- <view class='detailTitle'>
+        <view class='lInfo'>产品详情</view>
+      </view> -->
+      <rich-text nodes="{{goods_desc}}"></rich-text>
+   </view>
+   <view class='bottomTool between'>
+      <view class='l start'>
+         <navigator open-type='reLaunch' url="/pages/index/index" hover-class='none' class='gow'>
+            <image src='/images/ico_7.png'></image>
+         </navigator>
+         <navigator open-type='reLaunch' url="/pages/cart/index" hover-class='none' class='gow relative'>
+            <image src='/images/ico_8.png'></image>
+            <span wx:if="{{nums != 0 || nums != ''}}">{{nums}}</span>
+         </navigator>
+         <button open-type='contact' class='gow'>
+            <image src='/images/ico_9.png'></image>
+         </button>
+      </view>
+      <view class='r addCartBtn' bindtap='addCart1Tap'>立刻抢购</view>
+   </view>
+   <view class='mask' bindtap='maskTap' hidden='{{!Canshu && !Select && !ScHb}}'>
+      <view class='Popup fff'>
+         <!--选择规格  -->
+         <view class='SelectLayer' catchtap="handleTap2" hidden='{{!Select}}'>
+            <view class='close end'>
+               <image src='/images/ico_xx.png' bindtap='isCloseTap'></image>
+            </view>
+            <view class='con'>
+               <view class='pro bb1 start'>
+                  <view class='cover'>
+                     <image wx:if="{{returnData.cover == ''?goods_info.cover:returnData.cover}}" src="{{imgUrl}}{{returnData.cover == ''?goods_info.cover:returnData.cover}}"></image>
+                  </view>
+                  <view class='info'>
+                     <view class='name'>{{goods_info.goods_name}}</view>
+                     <view class='price'>￥
+                        <span>{{returnData.price / 100}}</span>
+                     </view>
+                     <view class='code'>库存：{{returnData.num}}</view>
+                     <view class='productSelect'>已选：{{yixuan && yixuan!=""?yixuan:"请选择"}}</view>
+                  </view>
+               </view>
+               <view class='select' wx:for="{{all_attrs}}" wx:key="{{index}}">
+                  <view class='titleBox'>
+                     <view class='title'>{{item.name}}</view>
+                  </view>
+                  <view class='guige'>
+                     <span class="{{ids[index] == idx?'active':''}} {{its.bool == 0?'nokucun':''}}" wx:for="{{item.sub}}" wx:key="{{index}}" wx:for-item="its" wx:for-index="idx" data-index="{{index}}" data-idx="{{idx}}" bindtap="selectGGTap">{{its.name}}</span>
+                  </view>
+               </view>
+               <view class='select'>
+                  <view class='titleBox between'>
+                     <view class='title'>购买数量</view>
+                     <view class='AETool center'>
+                        <view class='an less' data-t="0" bindtap='slTap'>-</view>
+                        <view class='num'>{{sl}}</view>
+                        <view class='an add active' data-t="1" bindtap='slTap'>+</view>
+                     </view>
+                  </view>
+               </view>
+            </view>
+            <view class='btnBox between'>
+               <view class='toolBtn addCart' bindtap='addCart2Tap'>加入购物车</view>
+               <view class='toolBtn ljShop' bindtap='ljShop'>立即购买</view>
+            </view>
+         </view>
+         <!--查看参数  -->
+         <view class='lookLayer' catchtap="handleTap2" hidden='{{!Canshu}}'>
+            <view class='SelectLayer'>
+               <view class='close end'>
+                  <image src='/images/ico_xx.png' bindtap='isCloseTap'></image>
+               </view>
+               <view class='cont'>
+                  <view class='pro bb1 between'>
+                     <view class='cover'>
+                        <image wx:if="{{goods_info.cover}}" src='{{imgUrl}}{{goods_info.cover}}'></image>
+                     </view>
+                     <view class='info'>
+                        <view class='name'>{{goods_info.goods_name}}</view>
+                        <view class='price'>￥
+                           <span>{{goods_info.price}}</span>
+                        </view>
+                     </view>
+                  </view>
+                  <view class='lookCanshu'>
+                     <view class='title bb1'>产品参数</view>
+                     <view class='ItemBox'>
+                        <view class='item' wx:for="{{goods_info.cs_val_arr}}" wx:key="{{index}}">
+                           <span>{{goods_info.cs_name_arr[index]}}：</span>{{item}}</view>
+                     </view>
+                  </view>
+               </view>
+            </view>
+         </view>
+         <!-- 生成海报 -->
+         <view class='ScHbBox' hidden='{{!ScHb}}'>
+            <image class='CoverHb' wx:if="{{hbImg}}" src='{{www}}{{hbImg}}'></image>
+            <view class='x' bindtap='ScHbXTap'>
+               <image src='/images/xx.png'></image>
+            </view>
+         </view>
+      </view>
+   </view>
+</view>
+
+<import src="../template/template.wxml" />
+<block wx:if="{{isShowGetUser}}">
+   <template is="getUserInfo"></template>
+</block>

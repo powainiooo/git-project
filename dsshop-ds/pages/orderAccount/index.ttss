@@ -1,1 +1,4 @@
-/* pages/orderAccount/index.ttss */
+/* pages/orderAccount/index.wxss */
+.bottomBtn{
+   z-index: 10;
+}

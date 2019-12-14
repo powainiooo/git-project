@@ -1,1 +1,2 @@
-/* pages/class/index.ttss */
+/* pages/class/index.wxss */
+@import "../template/template.wxss";

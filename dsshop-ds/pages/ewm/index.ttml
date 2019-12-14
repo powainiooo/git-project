@@ -1,2 +1,14 @@
-<!-- pages/ewm/index.ttml -->
-<text>pages/ewm/index.ttml</text>
+<!--pages/ewm/index.wxml-->
+<view class='ewm'>
+   <image src='/images/ewm_bg.png' class='bg'></image>
+
+   <view class='ewm_top'>
+      <image src='{{headimg}}' class='headImg'></image>
+      <text>{{nickname}}</text>
+   </view>
+   <view class='ewm-cont'>
+      <image src='{{urlPath + ewm}}' class='img'></image>
+      <view class='txt'>将二维码分享给朋友，让更多人关注您</view>
+   </view>
+   <view class='btn1' bindtap='saveEwm'>保存二维码</view>
+</view>

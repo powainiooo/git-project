@@ -1,1 +1,2 @@
-/* pages/kanjia/index.ttss */
+/* pages/kanjia/index.wxss */
+@import "../template/template.wxss";

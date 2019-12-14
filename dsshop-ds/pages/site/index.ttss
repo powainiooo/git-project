@@ -1,1 +1,16 @@
-/* pages/site/index.ttss */
+/* pages/site/index.wxss */
+@import '../../utils/weui.ttss';
+page{
+   background: #f3f3f3
+}
+.site_btn{
+   width:621rpx;
+   height:110rpx;
+   line-height: 110rpx;
+   background:rgba(235,51,73,1);
+   border-radius:8rpx;
+   font-size:36rpx;
+   font-family:PingFang-SC-Medium;
+   font-weight:500;
+   color:rgba(254,254,254,1);
+}

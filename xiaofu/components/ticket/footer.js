@@ -10,6 +10,7 @@ Component({
 			type: Object,
 			value: null,
 			observer (data) {
+			   console.log(data)
 				let min = 100000
 				let date = 0
 				if (data !== null) {

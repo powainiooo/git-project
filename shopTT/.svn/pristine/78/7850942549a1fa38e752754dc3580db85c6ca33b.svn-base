@@ -1,0 +1,107 @@
+/* pages/spikeList/index.wxss */
+
+.list-group {
+   padding: 34rpx 32rpx;
+}
+
+.content {
+   display: flex;
+   border-bottom: 1rpx solid #EEEEEE;
+}
+
+.img {
+   margin-right: 20rpx;
+   width: 200rpx;
+   height: 200rpx;
+}
+
+.list-right {
+   margin-bottom: 42rpx;
+   font-size: 28rpx;
+}
+
+.title {
+   font-size: 28rpx;
+   display: -webkit-box;
+   -webkit-box-orient: vertical;
+   -webkit-line-clamp: 2;
+   overflow: hidden;
+   width: 470rpx;
+}
+
+.active {
+   display:inline-block;
+   margin-top:13rpx;
+   margin-bottom:24rpx;
+   height:34rpx;
+   background:#FFEAED;
+   border-radius:4rpx;
+   color:#333;
+   padding-left:15rpx;
+   box-sizing:border-box;
+}
+
+.active-time {
+   margin-left: 10rpx;
+   margin-right: 10rpx;
+   color: #E60012;
+   font-size: 24rpx;
+}
+
+.list-footer {
+   display: flex;
+   justify-content: space-between;
+   align-items: flex-end;
+}
+
+.list-price {
+   display: flex;
+   flex-direction: column;
+}
+
+.price {
+   color: #DE3031;
+   font-size: 26rpx;
+}
+
+.now-price {
+   font-size: 36rpx;
+   font-family: HiraginoSansGB-W6;
+   font-weight: normal;
+}
+
+.num {
+   font-size: 24rpx;
+   font-family: PingFang-SC-Medium;
+   font-weight: 500;
+   color: #EB3349;
+}
+
+.old-price {
+   text-decoration: line-through;
+   color: #999;
+}
+
+.list-button {
+   background-color: #DE3031;
+   color: #fff;
+   font-size: 34rpx;
+   border-radius: 4rpx;
+   width: 166rpx;
+   height: 60rpx;
+   line-height: 60rpx;
+   text-align: center;
+}
+.active-out {
+   margin-top:13rpx;
+   margin-bottom:24rpx;
+   height:34rpx;
+   color: #EB3349;
+   font-size: 24rpx;
+}
+.is-over {
+   text-align: center;
+   font-size: 24rpx;
+   margin-bottom: 20rpx;
+   color: #999;
+}

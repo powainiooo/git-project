@@ -1,4 +1,0 @@
-/* pages/helpDetail/index.wxss */
-.textContet {
-  margin:10rpx 0px 30rpx 0rpx;
-}

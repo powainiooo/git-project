@@ -1,5 +1,7 @@
 // pages/index/detail.js
 const app = getApp()
+const ajaxSrc = app.globalData.ajaxSrc
+const imgSrc = app.globalData.imgSrc
 const common = require('common')
 import { getIndexDetailData} from '../../utils/api'
 Page({
@@ -207,6 +209,7 @@ Page({
                   fail (err) {
                      wx.showToast({
                         title: '保存失败',
+                        image: '../../res/images/warn.png',
                         duration: 2000
                      })
                   }
@@ -214,6 +217,7 @@ Page({
             } else {
                wx.showToast({
                   title: '保存失败',
+                  image: '../../res/images/warn.png',
                   duration: 2000
                })
             }

@@ -1,0 +1,21 @@
+<!--pages/pingjia/index.wxml-->
+<view class='container f3'>
+   <view class='plList'>
+      <view class='item start fff'>
+         <view class='l'><image tt:if='{{img}}' src='{{imgUrl + img}}'></image></view>
+         <view class='r between wrap'>
+            <view class='title'>商品评分</view>
+            <view class='starBox'>
+               <block tt:for="{{5}}" tt:key="{{index}}">
+                  <image tt:if="{{starNum >= index+1}}" data-num="{{index+1}}" src='/images/ico_star_y.png' bindtap='starTap'></image>
+                  <image tt:else data-num="{{index+1}}" src='/images/ico_star_n.png' bindtap='starTap'></image>
+               </block>
+            </view>
+         </view>
+      </view>
+   </view>
+   <view class='comment fff'>
+      <view class='commentBox'><textarea placeholder-class="place" placeholder='请填写您的评价' bindinput='inputContent' value='{{content}}' disabled="{{!isNull?true:false}}"></textarea></view>
+   </view>
+   <view class='fabuPj' hidden='{{!isNull}}' bindtap='fabuTap'>发布评价</view>
+</view>

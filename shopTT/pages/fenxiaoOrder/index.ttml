@@ -1,0 +1,67 @@
+<!--pages/myOrder/index.wxml-->
+<view class='orderNav'>
+   <view class='orderNav_li {{navIndex == 0?"on":""}}' data-num='0' bindtap='bindnav'>全部</view>
+   <view class='orderNav_li {{navIndex == 1?"on":""}}' data-num='1' bindtap='bindnav'>待付款</view>
+   <view class='orderNav_li {{navIndex == 4?"on":""}}' data-num='4' bindtap='bindnav'>待发货</view>
+   <view class='orderNav_li {{navIndex == 5?"on":""}}' data-num='5' bindtap='bindnav'>待收货</view>
+   <view class='orderNav_li {{navIndex == 7?"on":""}}' data-num='7' bindtap='bindnav'>已完成</view>
+</view>
+<view class='orderList'>
+
+   <view class='orderLi' tt:for='{{list}}' tt:key='unquit'>
+      <view class='hr16'></view>
+      <navigator url='/pages/fenxiaoOrderDetail/index?id={{item.id}}'>
+         <view class='orderLi_top'>
+            <text class='num'>订单号：{{item.order_num}}</text>
+            <text class='status'>{{item.order_status}}</text>
+         </view>
+         <view class='orderLi_shop' tt:if='{{item.child.length == 1}}'>
+
+            <image src='{{imgUrl + item.child[0].goods_cover}}' class='img'></image>
+            <view class='cont'>
+               <view class='tit'>{{item.child[0].goods_name}}</view>
+               <view class='style'>{{item.child[0].goods_attr}}</view>
+               <view class='numView'>
+                  <text class='num'>x{{item.child[0].buy_num}}</text>
+                  <view class=''>
+                     <text class='money1'>￥</text>
+                     <text class='money2'>{{item.child[0].goods_price/100}}</text>
+                     <!-- <text class='money3'>.00</text> -->
+                  </view>
+
+               </view>
+            </view>
+         </view>
+         <view class='orderLi_shop_more' tt:else>
+            <image src='{{imgUrl + itemName.goods_cover}}' class='img' tt:for='{{item.child}}' tt:key='unquit' tt:for-item="itemName" tt:for-index="idx" tt:if='{{idx<3}}'></image>
+            <image src='/images/icon_order_back.png' class='icon'></image>
+         </view>
+      </navigator>
+      <view class='orderLi_tip'>
+         <text class=''>应付:￥{{item.order_amount}}</text>
+         <text class=''>预计佣金:￥{{item.yjyj}}</text>
+      </view>
+   </view>
+   <!-- <view class='orderLi'>
+     <view class='hr16'></view>
+     <view class='orderLi_top'>
+       <text class='num'>订单号：1256567582162</text>
+       <text class='status'>待收货</text>
+     </view>
+     <view class='orderLi_shop_more'>
+       <image src='/images/img1.jpg' class='img'></image>
+       <image src='/images/img1.jpg' class='img'></image>
+       <image src='/images/img1.jpg' class='img'></image>
+       <image src='/images/icon_order_back.png' class='icon'></image>
+     </view>
+
+     <view class='orderLi_btn'>
+       <view class='btn2 btn'>付款 59:40</view>
+       <view class='btn1 btn'>取消订单</view>
+     </view>
+   </view> -->
+</view>
+<view class='orderNone' tt:if='{{list.length==0}}'>
+   <image src='/images/none_order.png' class='img'></image>
+   <text class='txt'>订单为空,去买点什么吧！</text>
+</view>

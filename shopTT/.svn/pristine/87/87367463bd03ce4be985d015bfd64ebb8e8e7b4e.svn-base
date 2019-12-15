@@ -1,0 +1,4 @@
+/* pages/shouhouList/index.wxss */
+.orderLi_top{overflow: hidden;padding:0 30rpx;line-height: 60rpx;border-bottom: 2rpx solid #f3f3f3;}
+.orderLi_top .num{font-size: 26rpx;color: #999;float: left}
+.orderLi_top .status{font-size: 26rpx;color: #de3031;float: right;}

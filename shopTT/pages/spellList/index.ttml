@@ -1,0 +1,41 @@
+<!--pages/spellList/index.wxml-->
+<view>
+   <view tt:for='{{listData}}' tt:key="index" class='list-group'>
+      <navigator url='../detail/index?id={{item.id}}&hd_id={{item.id}}&activity_type=4' hover-class='none'>
+         <view class='content'>
+            <view class='list-left'>
+               <image src='https://hwsc.vsapp.cn/upload/{{item.cover}}' class='img' mode="widthFix"></image>
+            </view>
+            <view class='list-right'>
+               <view class='title'>{{item.goods_name}}</view>
+               <view class='middle'>
+                  <view>
+                     <text class='num'>已拼{{item.buy_num}}件</text>
+                     <text class='spell-people'>{{item.user_num}}人团</text>
+                  </view>
+                  <text class='spell-time' tt:if='{{item.remain_time>0}}'>
+                     倒计时:<text class='spell-time-out'> {{item.lastTime}}</text>
+                  </text>
+                  <text class='spell-time-out' tt:else>活动已截止</text>
+               </view>
+
+               <view class='list-footer'>
+                  <view class='list-price'>
+                     <text class='price'>￥<text class='now-price'>{{item.tg_price/100}}</text></text>
+                     <view class='old-price'>原价:￥{{item.price/100}}</view>
+                  </view>
+                  <view class='list-button'>
+                     去开团
+                  </view>
+               </view>
+            </view>
+         </view>
+      </navigator>
+   </view>
+   <view class='orderNone' tt:if='{{listData.length==0}}'>
+      <image src='/images/none_order.png' class='img'></image>
+      <text class='txt'>暂无拼单活动！</text>
+   </view>
+   <view tt:if='{{isOver && listData.length}}' class='is-over'>已经到最后了</view>
+   <navigator url='../index/index' class='detail-btn' hover-class="none" tt:if="{{isShare}}">去首页</navigator>
+</view>

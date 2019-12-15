@@ -1,0 +1,25 @@
+<!--pages/yongjin/index.wxml-->
+<view class='allMoney'>
+   <view>可提现金额</view>
+   <view class='money'>￥{{zhye}}</view>
+</view>
+<view class='data_ul'>
+   <view class='data_li'>
+      <view class='tip'>冻结金额</view>
+      <view class='num'>￥{{dj_money}}</view>
+   </view>
+   <view class='data_li'>
+      <view class='tip'>已提金额</view>
+      <view class='num'>￥{{max_withdraw}}</view>
+   </view>
+</view>
+
+<navigator url='/pages/yingshou/index' class='link120'>
+   <text>营收明细</text>
+   <image src='/images/icon_order_back.png' class='icon'></image>
+</navigator>
+<navigator url='/pages/tixian/index' class='link120'>
+   <text>提现明细</text>
+   <image src='/images/icon_order_back.png' class='icon'></image>
+</navigator>
+<navigator url='/pages/tixianForm/index' class='btn'>提现</navigator>

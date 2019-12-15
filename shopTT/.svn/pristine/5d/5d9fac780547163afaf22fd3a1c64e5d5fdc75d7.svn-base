@@ -1,0 +1,214 @@
+<!-- 活动规则 -->
+<view class='rule' bindtap='binRule'>
+   <text>活动</text>
+   <text>规则</text>
+</view>
+<view class="cut-box">
+   <!-- 顶部头像横条 -->
+   <view class="cut-header" style=" background: url(../../../../images/k/k03.png) no-repeat;background-size: 100% 100%;">
+      <image src="{{kj_info.help_kj_user[0].headimg}}" />
+   </view>
+   <view class="cut-title" tt:if="{{options.money}}">我的砍价进度</view>
+   <view class="cut-title" tt:if="{{!options.money}}">TA的砍价进度</view>
+   <!-- 倒计时 -->
+   <view class="cut-time">
+      还剩
+      <span class="cut-time-num">{{kj_info.dd}}</span>
+      <span class="cut-time-text">天</span>
+      <span class="cut-time-num">{{kj_info.hh}}</span>
+      <span class="cut-time-text">时</span>
+      <span class="cut-time-num">{{kj_info.mm}}</span>
+      <span class="cut-time-text">分</span>
+      <span class="cut-time-num">{{kj_info.ss}}</span>
+      <span class="cut-time-text">秒</span>
+      结束
+   </view>
+   <!-- 商品 -->
+   <view class="cut-detail">
+      <image src="{{imgUrl + kj_info.goods_info.cover}}" class="cut-detail-img" />
+      <view class="cut-detail-box">
+         <view class="cut-detail-txt1">{{kj_info.goods_info.goods_name}}</view>
+         <view style="font-size:28rpx;color:999">{{kj_info.goods_info.gg_name}}</view>
+         <view class="cut-detail-txt2">最低可砍至
+            <span>￥ {{kj_info.goods_info.min_price/100}}</span>
+         </view>
+         <view class="cut-detail-txt3">原价
+            <span>￥ {{kj_info.goods_info.price/100}}</span>
+         </view>
+      </view>
+   </view>
+   <!-- 正常砍价 -->
+   <block tt:if="{{kj_info.status == 0}}">
+      <!-- 进度条 -->
+      <view class='kj-progress'>
+         <view class="progress-body">
+            <!-- <view class="progress-body-anim anim-floor" style="width: 100%;">
+              <span class="point_average"></span>
+              <view class="top_arrow_border"></view>
+              <view class="top_arrow"></view>
+            </view> -->
+            <view class="progress-body-anim" style="width: {{100-((kj_info.goods_info.current-kj_info.goods_info.min_price)/(kj_info.goods_info.price-kj_info.goods_info.min_price))*100}}%;">
+               <span class="point"></span>
+            </view>
+         </view>
+         <view class='up-text'>
+            <view class="up-text-inner _up-text-inner" style="text-align:center;">
+               当前价￥{{kj_info.goods_info.current/100}}
+            </view>
+         </view>
+         <!-- <view class="down-text">
+           <view class="down-text-outer _down-text-outer" style="margin-left: 143.297rpx;">
+             <view class="down-text-inner">76人已砍价成功 平均砍至￥9.90</view>
+           </view>
+         </view> -->
+         <view class='down-text1'>{{kj_info.more_info.success_nums}}人已砍价成功 平均砍至￥{{kj_info.more_info.pj_price}}</view>
+      </view>
+      <!-- end -->
+      <swiper autoplay circular="true" displayMultipleItems="1" interval="2000" vertical="true">
+         <swiper-item tt:for="{{kj_info.buy_list}}" tt:key="index" class="contents">
+            <view class="cut-txt2">
+               <image src="{{item.headimg}}" /> {{item.nickname}}刚刚已￥{{item.current/100}}购买</view>
+         </swiper-item>
+      </swiper>
+      <!-- 未邀请好友显示 -->
+      <block tt:if="{{kj_info.is_own == 1}}">
+         <button class="cut-btn1" bindtap='binInvited'>邀请好友帮我砍价</button>
+         <button class="cut-btn2" bindtap='wxPay'>当前价购买（仅剩{{kj_info.goods_info.kucun}}件）</button>
+      </block>
+      <!-- 邀请好友砍价显示 -->
+      <block tt:if="{{kj_info.is_own == 0}}">
+         <button class="cut-btn1" bindtap='help_kj'>试试手气，帮TA砍一刀</button>
+      </block>
+   </block>
+   <!-- 砍价成功 -->
+   <block tt:if="{{kj_info.status == 1}}">
+      <image src="../../images/k/k11.png" class="cut-icon" />
+      <view class="cut-state">
+         <image src="../../images/k/k12.png" /> 砍价成功</view>
+      <view class="cut-state-txt"> 砍价至
+         <span>￥{{kj_info.goods_info.current}}</span> ，已购买</view>
+      <button class="cut-btn1" bindtap='binIndex'>去砍其他商品</button>
+   </block>
+   <!-- 砍价失败 -->
+   <block tt:if="{{kj_info.status == 2}}">
+      <image src="../../images/k/k09.png" class="cut-icon" />
+      <view class="cut-state">
+         <image src="../../images/k/k10.png" /> 砍价失败</view>
+      <view class="cut-state-txt"> 砍价至
+         <span>￥{{kj_info.goods_info.current}}</span> ，活动已过期</view>
+      <button class="cut-btn1" bindtap='binIndex'>去砍其他商品</button>
+   </block>
+   <!-- 砍至底价 -->
+   <block tt:if="{{kj_info.status == 3}}">
+      <!-- 进度条 -->
+      <view class='kj-progress'>
+         <view class="progress-body">
+            <!-- <view class="progress-body-anim anim-floor" style="width: 100%;">
+              <span class="point_average"></span>
+              <view class="top_arrow_border"></view>
+              <view class="top_arrow"></view>
+            </view> -->
+            <view class="progress-body-anim" style="width: {{100-((kj_info.goods_info.current-kj_info.goods_info.min_price)/(kj_info.goods_info.price-kj_info.goods_info.min_price))*100}}%;">
+               <span class="point"></span>
+            </view>
+         </view>
+         <view class='up-text'>
+            <view class="up-text-inner _up-text-inner" style="text-align:center;">
+               当前价￥{{kj_info.goods_info.current/100}}
+            </view>
+         </view>
+         <!-- <view class="down-text">
+           <view class="down-text-outer _down-text-outer" style="margin-left: 143.297rpx;">
+             <view class="down-text-inner">76人已砍价成功 平均砍至￥9.90</view>
+           </view>
+         </view> -->
+         <view class='down-text1'>{{kj_info.more_info.success_nums}}人已砍价成功 平均砍至￥{{kj_info.more_info.pj_price}}</view>
+      </view>
+      <!-- end -->
+      <swiper autoplay circular="true" displayMultipleItems="1" interval="2000" vertical="true">
+         <swiper-item tt:for="{{kj_info.buy_list}}" tt:key="index" class="contents">
+            <view class="cut-txt2">
+               <image src="{{item.headimg}}" /> {{item.nickname}}刚刚已￥{{item.current/100}}购买</view>
+         </swiper-item>
+      </swiper>
+      <block tt:if="{{kj_info.is_own == 0}}">
+         <button class="cut-btn1" style="background:#999">该商品已砍至底价</button>
+      </block>
+      <block tt:else>
+         <button class="cut-btn1" bindtap='wxPay'>底价拿走</button>
+      </block>
+   </block>
+   <block tt:if="{{kj_info.is_own == 0}}">
+      <button class="cut-btn1" bindtap='toBargain' data-id='{{kj_info.hd_id}}'>我也要去砍这个商品</button>
+   </block>
+</view>
+<view class="cut-btnBox">
+   <view class="cut-btn3" bindtap='myBargain'>我的砍价</view>
+   <view class="cut-btn4" bindtap='binRule'>砍价规则</view>
+</view>
+<!-- 砍价记录 -->
+<view class="cut-userBox">
+   <view class="cut-user-header">
+      <image src="../../images/k/k04.png" /> 砍价记录
+      <image src="../../images/k/k04.png" />
+   </view>
+   <view class="cut-userBox-txt">已有{{kj_info.help_kj_user.length}}位好友助力</view>
+   <view class="cut-user-box">
+      <block tt:for="{{kj_info.help_kj_user}}" tt:key="index">
+         <view class="cut-user-list">
+            <image src="{{item.headimg}}" />
+            <view>{{item.price/100}}</view>
+         </view>
+      </block>
+   </view>
+</view>
+<!-- 砍价好货推荐 -->
+<view class="cut-userBox">
+   <view class="cut-user-header">
+      <image src="../../images/k/k04.png" /> 砍价好货推荐
+      <image src="../../images/k/k04.png" />
+   </view>
+   <view class="cut-shop-box">
+      <block tt:for="{{kj_info.other_goods}}" tt:key="index">
+         <view class="cut-shop-list" bindtap='toBargain' data-id='{{item.id}}'>
+            <image src="{{imgUrl + item.cover}}" />
+            <view class="cut-shop-name">{{item.goods_name}}</view>
+            <view class="cut-shop-txt">原价￥{{item.price_range.max_price}}</view>
+            <button class="cut-shop-btn">￥{{item.price_range.min_price}}砍走</button>
+         </view>
+      </block>
+   </view>
+</view>
+<view class="mask" tt:if="{{model>=5}}"></view>
+<!-- 弹窗 toast类-->
+<view class="model-toast01" tt:if="{{model == 1}}">
+   <image src="../../images/k/k08.png" />
+   <view>恭喜你，成功砍掉
+      <span>{{options.money}}</span> 元</view>
+</view>
+<view class="model-toast02" tt:if="{{model == 2}}">
+   <image src="../../images/k/k06.png" />
+   <view>恭喜你</view>
+   <view>帮TA砍掉了
+      <span>{{help_kj.money}}</span> 元</view>
+</view>
+<!-- 弹窗遮罩类 -->
+<view class="model05" tt:if="{{model == 5}}" bindtap='cancel'>
+   <image mode="widthFix" src="../../images/k/k05.png" />
+</view>
+<view class="model06" tt:if="{{model == 6}}">
+   <view class="model06-box">
+      <view class="model06-header">【砍价规则】</view>
+      <scroll-view scroll-y="{{true}}" class="model06-scroll">
+         <import src="../../wxParse/wxParse.ttml" />
+         <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+      </scroll-view>
+   </view>
+   <view class="model06-close" bindtap='cancel'>知道了</view>
+</view>
+
+<!-- 判断是否授权 -->
+<import src="../template/template.wxml" />
+<block tt:if="{{isShowGetUser}}">
+   <template is="getUserInfo"></template>
+</block>

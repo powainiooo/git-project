@@ -1,3 +1,0 @@
-<!--pages/fenxiaoInfo/index.wxml-->
-<import src="../../wxParse/wxParse.wxml"/> 
-<template is="wxParse" data="{{wxParseData:desc.nodes}}"/>

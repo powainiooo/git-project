@@ -362,16 +362,6 @@ Page({
 	   this.data.page += 1
       this.getListData()
    },
-   // 获取详情数据
-   getDetailData (tid) {
-      getIndexDetailData({
-         tid
-      }).then(res => {
-         this.setData({
-            detailData: res.data
-         })
-      })
-   },
    // 响应底部按钮点击
    footerBtnFunc (e) {
       const ticket = this.selectComponent("#ticket")
@@ -509,6 +499,7 @@ Page({
                   },
                   fail (err) {
                      wx.showToast({
+                        image: '../../res/images/warn.png',
                         title: '保存失败',
                         duration: 2000
                      })
@@ -516,6 +507,7 @@ Page({
                })
             } else {
                wx.showToast({
+                  image: '../../res/images/warn.png',
                   title: '保存失败',
                   duration: 2000
                })

@@ -1,0 +1,60 @@
+/* pages/seckill/index.wxss */
+@import "../template/template.ttss";
+.numList{
+   height:120rpx;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+}
+.numList .price{
+   width: 490rpx;
+   height: 120rpx;
+   background:linear-gradient(90deg,rgba(232,45,76,1) 0%,rgba(233,101,60,1) 100%);
+   padding-left:30rpx;
+}
+.numList .price text,.numList .activity text{
+   display: block
+}
+.numList .price .p1{
+   font-size:50rpx;
+   font-family:PingFang-SC-Bold;
+   font-weight:bold;
+   color:rgba(243,243,243,1);
+}
+.numList .price .p2{
+   font-size:30rpx;
+   font-family:PingFang-SC-Medium;
+   font-weight:500;
+   text-decoration:line-through;
+   color:rgba(243,243,243,1);
+}
+.numList .activity{
+   width:230rpx;
+   height:120rpx;
+   background:#FDF0EC;
+   text-align: center
+}
+.numList .activity .text{
+   font-size:24rpx;
+   font-family:PingFang-SC-Medium;
+   font-weight:500;
+   color:rgba(233,68,69,1);
+   margin-top:20rpx;
+}
+.numList .activity .time{
+   display: flex;
+   align-items: center;
+   color:rgba(233,68,69,1);
+   margin-left: 35rpx
+}
+.numList .activity .time text{
+   width:40rpx;
+   height:39rpx;
+   line-height: 39rpx;
+   background:rgba(233,68,69,1);
+   border-radius:4rpx;
+   font-size:24rpx;
+   font-family:PingFang-SC-Medium;
+   font-weight:500;
+   color:#fff
+}

@@ -1,0 +1,33 @@
+/* pages/myOrderDetail/index.wxss */
+page{background-color: #f3f3f3;}
+.foot_btn .btn{line-height: 90rpx;text-align: center;color: #fff;font-size: 34rpx;background-color: #de3031;padding: 0;}
+.lInfo {
+   font-size: 34rpx;
+   color: #333333;
+   border-left: 10rpx solid #333333;
+   padding-left: 20rpx;
+   height: 36rpx;
+   line-height: 36rpx;
+}
+.spell-display {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+.right-arrow {
+   width: 26rpx;
+   height: 48rpx;
+}
+.spell-image {
+   margin: 7rpx;
+   width: 63rpx;
+   height: 63rpx;
+   border-radius: 50%;
+}
+.spell-right {
+   display: flex;
+   align-items: center;
+}
+.spell-red {
+   color: #E60012;
+}

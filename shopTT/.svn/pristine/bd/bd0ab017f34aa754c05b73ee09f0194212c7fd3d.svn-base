@@ -1,0 +1,5 @@
+<!--pages/helpDetail/index.wxml-->
+<import src="../../wxParse/wxParse.ttml"/>
+<view class='textContet'>
+   <rich-text nodes="{{_desc}}"></rich-text>
+</view>

@@ -1,0 +1,20 @@
+/* pages/tixianForm/index.wxss */
+.fl{float: left;}
+.tixianForm{padding: 0 30rpx;}
+.tixian_top{padding: 110rpx 0 10rpx;border-bottom: 2rpx solid #e5e5e5;}
+.tixian_top .tit{color: #666;font-size: 30rpx;}
+.tixian_top .input{font-size: 120rpx;color: #de3031;padding-top: 20rpx;line-height: 160rpx;height: 160rpx;overflow: hidden;display: flex;}
+.tixian_top .wold{left: -30rpx;position: relative;}
+.tixian_top .input input{display: inline-block;height: 120rpx;padding:20rpx 0;color: #666;left: -40rpx;position: relative;}
+.input-placeholder{color: #ccc;}
+
+.tixian_center .line{display: flex;justify-content:space-between;position: relative;padding: 50rpx 0 30rpx;color: #666;font-size: 34rpx;}
+.tixian_center .line .btn1{color: #de3031;padding-right: 42rpx;position: relative;z-index: 5;}
+.line .icon{position: absolute;top: 70rpx;right: 0;width: 0;height: 0;border-color: #cccccc transparent transparent transparent;border-style: solid;border-width: 16rpx;z-index: 1;}
+.tixian_center .tips{color: #999;font-size: 26rpx;}
+
+.tixian_gz{padding: 60rpx 0 30rpx;color: #999;font-size: 24rpx;line-height: 40rpx;}
+.tixian_gz .tit{font-size: 28rpx;padding-bottom: 12rpx;}
+
+.foot_btn .btn1{line-height: 90rpx;text-align: center;color: #fff;font-size: 34rpx;background-color: #999999;}
+.foot_btn .btn1.bgcred{background-color: #de3031;}

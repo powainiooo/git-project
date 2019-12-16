@@ -24,9 +24,11 @@ Component({
     */
    methods: {
 	   gotoDetail () {
-		   wx.navigateTo({
-			   url: `/pages/index/detail?id=${this.data.linkId}`
-		   })
+		   setTimeout(() => {
+         wx.navigateTo({
+           url: `/pages/index/detail?id=${this.data.linkId}`
+         })
+       }, 200)
 	   }
    }
 })

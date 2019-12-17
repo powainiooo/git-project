@@ -67,9 +67,6 @@ Page({
 			cityID
 		})
 		this.getListData()
-      if (!this.data.isActivity) {
-         this.getComponentsSize()
-      }
 	},
    onShow () {
       app.$watch('drinkParams', (val, old) => { // 监听选择的特饮票数
@@ -82,6 +79,9 @@ Page({
             showPassport: val
          })
       })
+      if (!this.data.isActivity) {
+         this.getComponentsSize()
+      }
    },
 	// 获取部分组件的尺寸信息
 	getComponentsSize () {

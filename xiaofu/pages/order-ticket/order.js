@@ -60,6 +60,8 @@ Page({
    },
    getListData () {
       let self = this
+      console.log('获取订单信息')
+      console.log('openid:' + app.globalData.userOpenID)
       wx.showNavigationBarLoading()
       wx.request({
          url: app.globalData.ajaxSrc + '/user_order',
@@ -70,6 +72,8 @@ Page({
             self.setData({
                listData: res.data.data.list
             })
+            console.log('获取结果')
+            console.log(res.data.data.list)
             wx.hideNavigationBarLoading()
          },
          fail () {

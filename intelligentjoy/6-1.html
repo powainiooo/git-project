@@ -18,7 +18,7 @@
 </head>
 <body style=" background-color: #edf1f7">
 <div class="so_main">
-   <div class="page_tit">消息统计</div>
+   <div class="page_tit">消息回复统计</div>
    <div class="form2">
       <dl class="lineD">
          <dd style="margin-left: 20px;">
@@ -33,11 +33,25 @@
       </dl>
       <div id="chart1" style="height: 500px; margin-top: 20px;"></div>
    </div>
+   <div class="form2">
+      <dl class="lineD">
+         <dd style="margin-left: 20px;">
+            <select name="vip_levels" class="s-select member_select" style="width:60px;" onchange="selectChange(event)">
+               <option value="0">日</option>
+               <option value="1">月</option>
+            </select>
+            <span style="margin: 0 20px 0 30px;">时间</span>
+            <input type="text" value=""  class="s-txt" style='width:200px' onfocus="core.rcalendar(this,'full');">-
+            <input type="text" value=""  class="s-txt" style='width:200px' onfocus="core.rcalendar(this,'full');">
+         </dd>
+      </dl>
+      <div id="chart2" style="height: 500px; margin-top: 20px;"></div>
+   </div>
 </div>
 <script>
-var chart
-function drawChart(title, legend, xdata, data1, data2) {
-	chart.setOption({
+var chart1, chart2
+function getOption(title, legend, xdata, data1, data2) {
+	return {
 		title: {
 			text: title
 		},
@@ -76,15 +90,16 @@ function drawChart(title, legend, xdata, data1, data2) {
 				data: data2
 			}
 		]
-	})
+	}
 }
 function selectChange(e) {
-	console.log(e)
-	drawChart()
+
 }
 window.onload = function (ev) {
-	chart = echarts.init(document.getElementById("chart1"))
-	drawChart('2019-12-01至2019-12-30数据', ['消息数', '人数'], ['01','02','03','04','05','06'], [18203, 23489, 29034, 104970, 131744, 630230], [19325, 23438, 31000, 121594, 134141, 681807])
+	chart1 = echarts.init(document.getElementById("chart1"))
+   chart1.setOption(getOption('2019-12-01至2019-12-30数据', ['回复消息数', '人数'], ['01','02','03','04','05','06'], [18203, 23489, 29034, 104970, 131744, 630230], [19325, 23438, 31000, 121594, 134141, 681807]))
+	chart2 = echarts.init(document.getElementById("chart2"))
+   chart2.setOption(getOption('2019-12-01至2019-12-30数据', ['被回复消息数', '人数'], ['01','02','03','04','05','06'], [18203, 23489, 29034, 104970, 131744, 630230], [19325, 23438, 31000, 121594, 134141, 681807]))
 }
 
 </script>

@@ -96,7 +96,7 @@ export default {
       isAllLoad(){
          if(this.imgLoadOver && this.dataLoadOver){
             setTimeout(() => {
-               this.$store.commit('changePage', '')
+               this.$store.commit('changePage', 'loading-over')
             }, 200)
             setTimeout(() => {
                this.$store.commit('changePage', 'p1')

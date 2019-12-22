@@ -1,8 +1,10 @@
 <style scoped>
 .z-road { width: 100%; height: 60vh; overflow: hidden; position: absolute; bottom: 0; left: 0; z-index: 0;}
-.z-road .roads { width: 100%; position: absolute; bottom: 0; left: 0; transition: transform 1.1s linear; transform-origin: 0% 100%;}
-.z-road .roads-loading { transform: scale(0.6); transform-origin: 0% 100%;}
-.z-road .roads-p1 { transition-duration: 2s }
+.z-road .roads { width: 100%; position: absolute; bottom: 0; left: 0; transition: transform 1s linear; transform-origin: 0 100%;}
+.z-road .roads-loading { transform: scale(0.6); transform-origin: 0 100%;}
+.z-road .roads-loading-over { transform: scale(1); transform-origin: 0 100%;}
+.z-road .roads- { transform-origin: 50% 0; }
+.z-road .roads-p1 { transition-duration: 2s; transform-origin: 50% 0; }
 .z-road .roads-p2 { transform: scale(1.85); transform-origin: 50% 0; }
 .z-road .roads .roads-move { width: 2266px; height: 146px; background: url('../assets/img/road.png') repeat-x; background-size: 100% 100%;}
 .z-road .roads img { width: calc(100% / 3); display: block;}
@@ -26,7 +28,7 @@
    0% { transform: scale(0.7); opacity: 0.8;}
    100% { transform: scale(1); opacity: 1;}
 }
-.fadeIn { animation: fadeIn 0.5s linear}
+.fadeIn { animation: fadeIn 1s linear}
 .fadeOut { animation: fadeOut 0.5s linear}
 
 .page3-bg {bottom: 144px;}
@@ -67,7 +69,7 @@
       <div class="bg-move" :style="bgMove" ref="bg"></div>
    </div>
    </transition>
-   <transition enter-active-class="bgIn" leave-active-class="bgOut">
+   <transition enter-active-class="bgIn" leave-active-class="fadeOut">
       <div class="page2-bg" v-if="currentPage === 'p2'">
          <img src="static/bg2.png" class="building"/>
          <img src="@/assets/img/spot.png" class="spot"/>
@@ -179,10 +181,12 @@ export default {
          this.$nextTick(() => {
             this.bgCurrent = 0
             this.bgBottomCurrent = 0
+            this.bgSpeedPecent = 0.1
+            this.maxSpeed = 4
             if (val === 'p6') {
                this.bgSpeedPecent = 0.4
-            } else {
-               this.bgSpeedPecent = 0.1
+            } else if (val === 'p5') {
+               this.maxSpeed = 1
             }
          })
       }

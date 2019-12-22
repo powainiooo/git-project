@@ -17,7 +17,7 @@
 
 <template>
 <transition enter-active-class="fadeIn">
-   <div class="z-title" v-if="currentPage !== 'loading' && currentPage !== ''">
+   <div class="z-title" v-if="currentPage !== 'loading'">
       <img src="@/assets/img/title2.png">
       <transition enter-active-class="nameIn" leave-active-class="nameOut" mode="out-in">
       <p v-if="showName !== ''">{{showName}}</p>
@@ -62,7 +62,6 @@ export default {
    },
    watch: {
 	   name (val) {
-	      console.log(val)
 	      this.showName = ''
          this.$nextTick(() => {
             this.showName = val

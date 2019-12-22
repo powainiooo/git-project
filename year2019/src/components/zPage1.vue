@@ -5,9 +5,10 @@
 .z-page1 .earth img { width: 1100px; height: 1100px; display: block; margin-top: 54px; margin-left: -175px; animation: roll 30s linear infinite;}
 .z-page1 .fadeIn { animation: fadeIn 0.5s linear;}
 .z-page1 .fadeOut { animation: fadeOut 0.5s linear;}
-.z-page1 .slideUpIn { animation: slideUpIn 0.5s cubic-bezier(.32,.6,.62,1.22);}
+.z-page1 .slideUpIn { animation: slideUpIn 0.5s cubic-bezier(.32,.6,.62,1.22) 0.5s both;}
 .z-page1 .tag-content { width: 500px; left: 125px; bottom: 220px;  text-align: center; color: #ffffff;}
 .z-page1 .tag-content span { color: #ffea00;}
+.z-page1 .scaleIn { animation: scaleIn 0.5s cubic-bezier(.34,.66,.62,1.18) 1s both;}
 </style>
 
 <template>
@@ -34,7 +35,7 @@
    <transition enter-active-class="fadeIn" leave-active-class="fadeOut">
       <div class="earth" v-if="showParts"><img src="static/earth.png"/></div>
    </transition>
-   <transition enter-active-class="fadeIn" leave-active-class="fadeOut">
+   <transition enter-active-class="scaleIn" leave-active-class="fadeOut">
       <div class="tag-content" v-if="showParts" v-html="tagContent"></div>
    </transition>
 

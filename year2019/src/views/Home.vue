@@ -8,12 +8,8 @@ button { width: 100px; margin: 0 10px;}
 <template>
 <div class="home">
    <div style="position: absolute; top: 0; left: 0; z-index: 10000">
-      <button @click="gotoPage('p1')">p1</button>
-      <button @click="gotoPage('p2')">p2</button>
-      <button @click="gotoPage('p3')">p3</button>
-      <button @click="gotoPage('p4')">p4</button>
-      <button @click="gotoPage('p9')">p9</button>
-      <button @click="toggleTap">tag</button>
+      <button @click="changePage('prev')">prev</button>
+      <button @click="changePage('next')">next</button>
    </div>
    <z-title></z-title>
    <z-tag></z-tag>
@@ -28,9 +24,10 @@ button { width: 100px; margin: 0 10px;}
    <z-page8 ref="p8"></z-page8>
    <z-page9 ref="p9"></z-page9>
    <!--<z-page-share ref="share"></z-page-share>-->
-   <div class="bottom-fix" :class="{'bottom-fix-p9':currentPage === 'p9'}">
-      <z-road :status="roadStatus"></z-road>
-      <z-car :status="roadStatus"></z-car>
+   <!-- :class="{'bottom-fix-p9':currentPage === 'p9'}"-->
+   <div class="bottom-fix" :style="{'z-index':currentPage === 'p5' ? 10 : 5}">
+      <!--<z-road :status="roadStatus"></z-road>-->
+      <!--<z-car :status="roadStatus"></z-car>-->
       <z-car :status="roadStatus" type="1" pos="1" v-if="currentPage === 'p5'"></z-car>
       <z-car :status="roadStatus" type="2" pos="2" v-if="currentPage === 'p5'"></z-car>
       <z-car :status="roadStatus" type="3" pos="3" v-if="currentPage === 'p5'"></z-car>
@@ -82,7 +79,10 @@ export default {
    },
    data() {
       return {
-         roadStatus: 'move'
+         roadStatus: 'move',
+         pageList: ['p1', 'p2', 'p3', 'p4', 'p5', 'p6', 'p7', 'p8', 'p9', 'share'],
+         pageIndex: 0,
+         tMove: 0
       }
    },
    computed: {
@@ -93,20 +93,34 @@ export default {
          return this.$store.state.tagName
       }
    },
-   methods: {
-      toggle () {
-         if (this.roadStatus === 'move') {
+   watch: {
+      currentPage (page) {
+         if (page === 'p2') {
             this.roadStatus = 'stop'
+         } else if (page === 'p5') {
+            this.roadStatus = 'move'
+            // this.tMove = setInterval(() => {
+            //    this.roadStatus = this.roadStatus === 'stop' ? 'move' : 'stop'
+            // }, 3000)
          } else {
             this.roadStatus = 'move'
          }
+      }
+   },
+   methods: {
+      changePage (direct) {
+         if (direct === 'prev') {
+            this.pageIndex = this.pageIndex === 0 ? 0 : this.pageIndex - 1
+         } else if (direct === 'next') {
+            this.pageIndex = this.pageIndex === this.pageList.length - 1 ? this.pageList.length - 1 : this.pageIndex + 1
+         }
+         this.gotoPage(this.pageList[this.pageIndex])
       },
       toggleTap () {
          this.$store.commit('changeTagName', this.tagName === '' ? 'baozou' : '')
       },
       gotoPage (page) {
          const nowPage = this.$refs[this.currentPage]
-         console.log(nowPage)
          this.$store.commit('changePage', '')
          setTimeout(() => {
             this.$store.commit('changePage', page)

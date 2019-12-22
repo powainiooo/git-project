@@ -5,15 +5,16 @@
 .z-page2 .content2 { top: 730px; left: 170px;}
 .z-page2 .recharge { width: 250px; position: absolute; bottom: 94px; left: 84px;}
 .z-page2 .fadeIn { animation: fadeIn 1s linear 1.5s both;}
-.z-page2 .fadeOut { animation: fadeOut 1s linear;}
-.z-page2 .slideUpIn1 { animation: slideUpIn 0.5s ease-out 2.7s both}
-.z-page2 .slideUpIn2 { animation: slideUpIn 0.5s ease-out 2.9s both}
-.z-page2 .slideUpIn3 { animation: slideUpIn 0.5s ease-out 3.1s both}
+.z-page2 .fadeOut { animation: fadeOut 0.5s linear;}
+.z-page2 .fadeOut0 { animation: fadeOut 0s linear;}
+.z-page2 .slideUpIn1 { animation: slideUpIn 0.5s ease-out 1.7s both}
+.z-page2 .slideUpIn2 { animation: slideUpIn 0.5s ease-out 1.9s both}
+.z-page2 .slideUpIn3 { animation: slideUpIn 0.5s ease-out 2.1s both}
 </style>
 
 <template>
-<div class="z-page2">
-   <transition enter-active-class="fadeIn" leave-active-class="fadeOut">
+<div class="z-page2" :style="{'z-index':showParts ? 13 : 5}">
+   <transition enter-active-class="fadeIn" leave-active-class="fadeOut0">
    <img src="static/recharge.png" class="recharge" v-if="showParts">
    </transition>
    <transition enter-active-class="slideUpIn1" leave-active-class="fadeOut">
@@ -40,7 +41,7 @@ export default {
 	name: 'app',
 	data() {
 		return {
-         outTime: 2000,
+         outTime: 1000,
          times: 126,
          percent: 52,
          hours: 8,

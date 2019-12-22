@@ -2,6 +2,9 @@
 .z-page7 { width: 100%; height: 100vh; overflow: hidden; position: fixed; top: 0; left: 0; z-index: 12;}
 .z-page7 .fadeIn { animation: fadeIn 1s linear 1.5s both;}
 .z-page7 .fadeOut { animation: fadeOut 1s linear;}
+.z-page7 .slideUpIn1 { animation: slideUpIn 0.5s ease-out 0.7s both}
+.z-page7 .slideUpIn2 { animation: slideUpIn 0.5s ease-out 0.9s both}
+.z-page7 .slideUpIn3 { animation: slideUpIn 0.5s ease-out 1.1s both}
 .z-page7 .content1 { top: 200px; left: 120px;}
 .z-page7 .content2 { top: 470px; left: 120px;}
 .z-page7 .content3 { top: 560px; left: 120px;}
@@ -13,12 +16,12 @@
 </style>
 
 <template>
-<div class="z-page7">
-   <transition enter-active-class="fadeIn" leave-active-class="fadeOut">
+<div class="z-page7" :style="{'z-index':showParts ? 10 : 5}">
+   <transition enter-active-class="slideUpIn1" leave-active-class="fadeOut">
       <div class="data-content content1" v-if="showParts">你知道你每月平均使用多少流量吗？{{startX}}-{{moveX}}</div>
    </transition>
-   <transition enter-active-class="fadeIn" leave-active-class="fadeOut">
-      <div class="rule-frame" @touchstart="start" @touchmove="move" ref="rule" v-if="showParts">
+   <transition enter-active-class="slideUpIn2" leave-active-class="fadeOut" @after-enter="ruleIn">
+      <div class="rule-frame" @touchstart="start" @touchmove="move" @touchend="end" ref="rule" v-if="showParts">
          <img src="@/assets/img/rule.png" class="rule"/>
          <div class="water" :style="{left: left+'px'}">
             <img src="@/assets/img/water.png"/>
@@ -26,11 +29,11 @@
          </div>
       </div>
    </transition>
-   <transition enter-active-class="fadeIn" leave-active-class="fadeOut">
-      <div class="data-content content2" v-if="showParts"><span>{{resultTxt}}</span></div>
+   <transition enter-active-class="slideUpIn1" leave-active-class="fadeOut">
+      <div class="data-content content2" v-if="showParts&& showResult"><span>{{resultTxt}}</span></div>
    </transition>
-   <transition enter-active-class="fadeIn" leave-active-class="fadeOut">
-      <div class="tag-content content3" v-if="showParts">爱了！你就是传说中的<br/>DiLink达人</div>
+   <transition enter-active-class="slideUpIn1" leave-active-class="fadeOut">
+      <div class="tag-content content3" v-if="showParts&& showResult">爱了！你就是传说中的<br/>DiLink达人</div>
    </transition>
 
 </div>
@@ -41,7 +44,7 @@ export default {
    name: 'app',
    data() {
       return {
-         outTime: 2000,
+         outTime: 1000,
          startX: 0,
          moveX: 0,
          ruleWidth: 0,
@@ -49,6 +52,8 @@ export default {
          left: 0,
          value: 0,
          useValue: 0,
+         showResult: false,
+         t: 0
       }
    },
    computed: {
@@ -73,25 +78,32 @@ export default {
    },
    watch: {
       currentPage (val) {
-         if (val === 'p8') {
-            this.ruleWidth = this.$refs.rule.offsetWidth
+         if (val === 'p7') {
+            // this.ruleWidth = this.$refs.rule.offsetWidth
          }
       }
    },
    methods: {
+      ruleIn () {
+         this.ruleWidth = this.$refs.rule.offsetWidth
+      },
       start (e) {
-         console.log(e)
          this.startX = e.touches[0].pageX
          this.startLeft = this.left
+         clearTimeout(this.t)
       },
       move (e) {
-         console.log(e)
          e.preventDefault()
          this.moveX = e.touches[0].pageX
          this.left = this.startLeft + this.moveX - this.startX
          if (this.left < 0) this.left = 0
          if (this.left > this.ruleWidth) this.left = this.ruleWidth
          this.value = parseFloat(((this.left / this.ruleWidth) * 5).toFixed(1))
+      },
+      end () {
+         this.t = setTimeout(() => {
+            this.showResult = true
+         }, 2000)
       }
    }
 }

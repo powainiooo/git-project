@@ -5,14 +5,14 @@
 .z-page3 .content2 { top: 710px; left: 120px;}
 .z-page3 .recharge { width: 250px; position: absolute; bottom: 94px; left: 84px;}
 .z-page3 .fadeIn { animation: fadeIn 1s linear 1.5s both;}
-.z-page3 .fadeOut { animation: fadeOut 1s linear;}
-.z-page3 .slideUpIn1 { animation: slideUpIn 0.5s ease-out 1.2s both}
-.z-page3 .slideUpIn2 { animation: slideUpIn 0.5s ease-out 1.4s both}
-.z-page3 .slideUpIn3 { animation: slideUpIn 0.5s ease-out 1.6s both}
+.z-page3 .fadeOut { animation: fadeOut 0.5s linear;}
+.z-page3 .slideUpIn1 { animation: slideUpIn 0.5s ease-out 0.7s both}
+.z-page3 .slideUpIn2 { animation: slideUpIn 0.5s ease-out 0.9s both}
+.z-page3 .slideUpIn3 { animation: slideUpIn 0.5s ease-out 1.1s both}
 </style>
 
 <template>
-<div class="z-page3">
+<div class="z-page3" :style="{'z-index':showParts ? 10 : 5}">
    <transition enter-active-class="slideUpIn1" leave-active-class="fadeOut">
    <div class="data-content content1" v-if="showParts">
       过去一年<br/>
@@ -35,7 +35,7 @@ export default {
 	name: 'app',
 	data() {
 		return {
-         outTime: 2000,
+         outTime: 1000,
          max: 130,
          average: 90
       }

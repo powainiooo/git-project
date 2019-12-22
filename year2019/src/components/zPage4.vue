@@ -5,19 +5,19 @@
 .z-page4 .progress { width: 460px; margin-bottom: 30px;}
 .z-page4 .progress h4 { font-size: 20px; color: #F84F1C; margin-bottom: 12px;}
 .z-page4 .progress-all h4 { color: #0475B5}
-.z-page4 .progress .line { width: 100%; height: 14px; border-left: 4px solid #F84F1C; background-color: #F84F1C; position: relative;}
+.z-page4 .progress .line { width: 100%; height: 14px; border-left: 4px solid #F84F1C; background-color: #F84F1C; position: relative; transition: all 1s linear;}
 .z-page4 .progress-all .line { border-left-color: #0475B5; background-color: #0475B5;}
 .z-page4 .progress .line span { width: 100px; font-size: 20px; color: #F84F1C; position: absolute; top: -10px; left: calc(100% + 15px);}
 .z-page4 .progress-all .line span { color: #0475B5}
 .z-page4 .fadeIn { animation: fadeIn 1s linear 1.5s both;}
-.z-page4 .fadeOut { animation: fadeOut 1s linear;}
-.z-page4 .slideUpIn1 { animation: slideUpIn 0.5s ease-out 1.2s both}
-.z-page4 .slideUpIn2 { animation: slideUpIn 0.5s ease-out 1.4s both}
-.z-page4 .slideUpIn3 { animation: slideUpIn 0.5s ease-out 1.6s both}
+.z-page4 .fadeOut { animation: fadeOut 0.5s linear;}
+.z-page4 .slideUpIn1 { animation: slideUpIn 0.5s ease-out 0.7s both}
+.z-page4 .slideUpIn2 { animation: slideUpIn 0.5s ease-out 0.9s both}
+.z-page4 .slideUpIn3 { animation: slideUpIn 0.5s ease-out 2.6s both}
 </style>
 
 <template>
-<div class="z-page4">
+<div class="z-page4" :style="{'z-index':showParts ? 10 : 5}">
    <transition enter-active-class="slideUpIn1" leave-active-class="fadeOut">
    <div class="data-content" v-if="showParts">
       过去一年<br/>
@@ -25,19 +25,23 @@
       小迪累计被唤醒了<span class="value">{{times}}</span>次
    </div>
    </transition>
+   <transition enter-active-class="slideUpIn2" leave-active-class="fadeOut" @after-enter="timesEnter">
    <div class="progress" v-if="showParts && isDiLink">
       <h4>我的唤醒次数</h4>
-      <div class="line">
+      <div class="line" :style="{'width': widthTimes + '%'}">
          <span>{{times}}次</span>
       </div>
    </div>
+   </transition>
+   <transition enter-active-class="slideUpIn2" leave-active-class="fadeOut" @after-enter="averageEnter">
    <div class="progress progress-all" v-if="showParts && isDiLink">
       <h4>全国车主平均唤醒次数</h4>
-      <div class="line">
+      <div class="line" :style="{'width': widthAverage + '%'}">
          <span>{{average}}次</span>
       </div>
    </div>
-   <transition enter-active-class="slideUpIn2" leave-active-class="fadeOut">
+   </transition>
+   <transition enter-active-class="slideUpIn3" leave-active-class="fadeOut">
       <div class="tag-content" v-if="showParts" v-html="tagContent"></div>
    </transition>
 </div>
@@ -48,10 +52,12 @@ export default {
 	name: 'app',
 	data() {
 		return {
-         outTime: 2000,
+         outTime: 1000,
          hours: 320,
          times: 576,
          average: 576,
+         widthTimes: 0,
+         widthAverage: 0,
          isDiLink: true
       }
 	},
@@ -78,6 +84,13 @@ export default {
          }
       }
    },
-	methods: {}
+	methods: {
+      timesEnter () {
+         this.widthTimes = this.times > this.average ? 100 : (this.times / this.average) * 100
+      },
+      averageEnter () {
+         this.widthAverage = this.average > this.times ? 100 : (this.average / this.times) * 100
+      }
+   }
 }
 </script>

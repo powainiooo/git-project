@@ -1,9 +1,11 @@
 <style scoped>
-.z-page9 { width: 100%; height: 100vh; overflow: hidden; position: fixed; top: 0; left: 0; z-index: 12; background: url("../assets/img/bg.jpg") no-repeat; background-size: cover;}
+.z-page9 { width: 100%; height: 200px; position: fixed; bottom: 0; left: 0; z-index: 12; transition: all 1s linear;}
+.z-page9-show { height: 1060px; left: 0; bottom: 100px;}
 .z-page9 .fadeIn { animation: fadeIn 1s linear 1.5s both;}
 .z-page9 .fadeOut { animation: fadeOut 1s linear;}
-.z-page9 .calandar { width: 600px; height: 1060px; background: url("../assets/img/calandar.png") no-repeat; background-size: 100%; position: fixed; left: 80px; top: 50%; margin-top: -540px}
+.z-page9 .calandar { width: 600px; height: 1060px; background: url("../assets/img/calandar.png") no-repeat; background-size: 100%; position: absolute; left: 80px; top: 0;}
 .z-page9 .calandar .paper { width: 580px; position: absolute; left: 4px; top: 160px;}
+.z-page9 .calandar .operas { width: 100%; height: 100%; position: absolute; top: 0; left: 0; z-index: 20;}
 .z-page9 .piece { width: 584px; height: 880px; background-color: #ffffff; position: absolute; top: 164px; left: 2px; z-index: 10;}
 .z-page9 .frame { width: 540px; height: 810px; border: 2px solid #333333; margin: 56px 0 0 24px; position: relative;}
 .z-page9 .content { line-height: 1.5; color: #333333; font-size: 30px;}
@@ -18,7 +20,9 @@
    70% { transform: translateY(30px); opacity: 1}
    100% { transform: translateY(30px); opacity: 1}
 }
-.z-page9 .diary .bottom { width: 100vw; position: absolute; bottom: 6px; left: 6px; transform: scale(0.7);transform-origin: 0% 100%;}
+.z-page9 .piece .roads { width: 100vw; height: 100px; position: absolute; left: 30px; bottom: -8px; transform: scale(0.7);  transform-origin: 0 0;}
+.z-page9 .bottom { height: 100px; position: absolute; bottom: 0; left: 0; right: 0; z-index: 10; transition: all 1s linear; transform-origin: 50% 100%;}
+.z-page9-show .bottom { transform: scale(0.7); bottom: 38px;}
 .z-page9 .pageDown { animation: pageDown 1s ease-out; transform-origin: 0 0;}
 @keyframes pageDown {
    0% { transform: translateY(0) rotateZ(0deg); opacity: 1}
@@ -28,9 +32,10 @@
 </style>
 
 <template>
-<div class="z-page9" :style="{'z-index':showParts ? 20 : 5}">
+<div class="z-page9" :class="{'z-page9-show': showParts}">
    <transition enter-active-class="fadeIn" leave-active-class="fadeOut">
-      <div class="calandar" v-if="showParts" ref="calandar" @touchstart="tstart" @touchend="tend">
+      <div class="calandar" v-show="showParts" ref="calandar">
+         <div class="operas" @touchstart="tstart" @touchend="tend"></div>
          <img src="@/assets/img/paper.png" class="paper">
          <transition leave-active-class="pageDown">
          <div class="piece" v-if="showHint">
@@ -40,11 +45,11 @@
                   <img src="@/assets/img/point.png" class="point"/>
                   <img src="@/assets/img/hand.png" class="hand"/>
                   <div class="content" style="text-align: center; margin: 30px 0 0 0; color: #0475B5;">下拉开启你的穿越时空之旅</div>
-                  <div class="bottom">
-                     <z-road status="stop"></z-road>
-                     <z-car status="stop"></z-car>
-                  </div>
                </div>
+            </div>
+            <div class="roads">
+               <z-road :status="roadStatus"></z-road>
+               <z-car :status="roadStatus"></z-car>
             </div>
          </div>
          </transition>
@@ -54,6 +59,10 @@
       </div>
    </transition>
 
+   <div class="bottom" v-if="showRoads">
+      <z-road :status="roadStatus"></z-road>
+      <z-car :status="roadStatus"></z-car>
+   </div>
 </div>
 </template>
 
@@ -71,18 +80,31 @@ export default {
          keyList: ['date_city', 'date_mile', 'date_night', 'date_city_hight', 'date_air_open', 'date_vehicle_status', 'date_energy', 'date_door_unlock', 'date_whistle', 'date_music', 'date_game', 'date_learn'],
          showKeyList: [],
          fitKeyList: [],
-         startY: 0
+         startY: 0,
+         roadStatus: 'move',
+         showRoads: true
       }
    },
    watch: {
       currentPage (page) {
          if (page === 'p9') {
             this.$nextTick(() => {
-               console.dir(this.$refs.calandar)
                this.showKeyList = this.keyList.reverse()
                this.fitKeyList = [].concat(this.keyList)
-               console.log(this.fitKeyList)
             })
+            this.roadStatus = 'stop'
+            setTimeout(() => {
+               this.showRoads = false
+            }, 2500)
+         } else if (page === 'p2') {
+            this.roadStatus = 'stop'
+         } else if (page === 'p5') {
+            this.roadStatus = 'move'
+            // this.tMove = setInterval(() => {
+            //    this.roadStatus = this.roadStatus === 'stop' ? 'move' : 'stop'
+            // }, 3000)
+         } else {
+            this.roadStatus = 'move'
          }
       }
    },
@@ -104,6 +126,7 @@ export default {
          console.log(this.fitKeyList)
       },
       tstart (e) {
+         console.log('start')
          this.startY = e.touches[0].pageY
       },
       tend (e) {

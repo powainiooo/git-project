@@ -4,13 +4,13 @@
 .z-page6 .tag-content { position: static; margin-bottom: 30px;}
 .z-page6 .fadeIn { animation: fadeIn 1s linear 1.5s both;}
 .z-page6 .fadeOut { animation: fadeOut 1s linear;}
-.z-page6 .slideUpIn1 { animation: slideUpIn 0.5s ease-out 1.2s both}
-.z-page6 .slideUpIn2 { animation: slideUpIn 0.5s ease-out 1.4s both}
-.z-page6 .slideUpIn3 { animation: slideUpIn 0.5s ease-out 1.6s both}
+.z-page6 .slideUpIn1 { animation: slideUpIn 0.5s ease-out 0.7s both}
+.z-page6 .slideUpIn2 { animation: slideUpIn 0.5s ease-out 0.9s both}
+.z-page6 .slideUpIn3 { animation: slideUpIn 0.5s ease-out 1.1s both}
 </style>
 
 <template>
-<div class="z-page6">
+<div class="z-page6" :style="{'z-index':showParts ? 10 : 5}">
    <transition enter-active-class="slideUpIn1" leave-active-class="fadeOut">
       <div class="data-content" v-if="showParts">
          <p v-if="tagName !== '火星人'">今年你使用最多的远程控制是</p>
@@ -62,7 +62,7 @@ export default {
    name: 'app',
    data() {
       return {
-         outTime: 2000,
+         outTime: 1000,
          times: 333,
          unUseFunction: '解锁/上锁'
       }

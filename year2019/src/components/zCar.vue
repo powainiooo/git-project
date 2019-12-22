@@ -35,15 +35,15 @@
 .z-car-5>img.wheel2 { left: 112px}
 
 
-.z-car-pos-1 { left: 360px; bottom: 110px; z-index: 90;}
-.z-car-pos-2 { left: 590px; bottom: 120px; z-index: 90;}
-.z-car-pos-3 { left: 660px; bottom: 90px; z-index: 90;}
-.z-car-pos-4 { left: 490px; bottom: 90px; z-index: 90;}
-.z-car-pos-5 { left: 70px; bottom: 90px; z-index: 90;}
-.z-car-pos-6 { left: 170px; bottom: 120px; z-index: 80;}
-.z-car-pos-7 { left: 30px; bottom: 30px; z-index: 100;}
-.z-car-pos-8 { left: 240px; bottom: 30px; z-index: 100;}
-.z-car-pos-9 { left: 540px; bottom: 30px; z-index: 100;}
+.z-car-pos-1 { left: 360px; bottom: 110px; z-index: 90; animation: fadeIn 0.5s linear 0.2s both;}
+.z-car-pos-2 { left: 590px; bottom: 120px; z-index: 90; animation: fadeIn 0.5s linear 0.3s both;}
+.z-car-pos-3 { left: 660px; bottom: 90px; z-index: 90; animation: fadeIn 0.5s linear 0.4s both;}
+.z-car-pos-4 { left: 490px; bottom: 90px; z-index: 90; animation: fadeIn 0.5s linear 0.5s both;}
+.z-car-pos-5 { left: 70px; bottom: 90px; z-index: 90; animation: fadeIn 0.5s linear 0.6s both;}
+.z-car-pos-6 { left: 170px; bottom: 120px; z-index: 80; animation: fadeIn 0.5s linear 0.7s both;}
+.z-car-pos-7 { left: 30px; bottom: 30px; z-index: 100; animation: fadeIn 0.5s linear 0.8s both;}
+.z-car-pos-8 { left: 240px; bottom: 30px; z-index: 100; animation: fadeIn 0.5s linear 0.9s both;}
+.z-car-pos-9 { left: 540px; bottom: 30px; z-index: 100; animation: fadeIn 0.5s linear 1s both;}
 </style>
 
 <template>

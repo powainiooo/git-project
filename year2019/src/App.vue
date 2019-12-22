@@ -30,4 +30,8 @@ body { width: 100%; height: 100vh; overflow: hidden; background: url("assets/img
    0% { transform: translateY(60px); opacity: 0;}
    100% { transform: translateY(0); opacity: 1;}
 }
+@keyframes scaleIn {
+   0% { transform: scale(0); opacity: 0;}
+   100% { transform: scale(1); opacity: 1;}
+}
 </style>

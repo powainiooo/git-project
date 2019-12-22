@@ -8,7 +8,7 @@ export default new Vuex.Store({
       loadingPecent: 0,
       currentPage: 'loading',
       tagName: 'baozou',
-      pageData: {}
+      pageData: {},
    },
    mutations: {
       changePage (state, data) {
@@ -18,7 +18,6 @@ export default new Vuex.Store({
          state.tagName = data
       },
       setLoadingPecent (state, data) {
-         console.log(data)
          state.loadingPecent = data
       },
       setPageData (state, data) {

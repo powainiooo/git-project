@@ -3,12 +3,12 @@
 .z-page5-dark { background: -webkit-linear-gradient(#060239, #0f2595)}
 .z-page5 .tag-content { top: 230px; left: 120px;}
 .z-page5-dark .tag-content { color: #ffffff}
-.z-page5 .slideUpIn1 { animation: slideUpIn 0.5s ease-out 1.2s both}
+.z-page5 .slideUpIn1 { animation: slideUpIn 0.5s ease-out 0.7s both}
 </style>
 
 <template>
-<div class="z-page5" :class="{'z-page5-dark':tagName === '夜猫族'}">
-   <transition enter-active-class="slideUpIn2" leave-active-class="fadeOut">
+<div class="z-page5" :class="{'z-page5-dark':tagName === '夜猫族'}" :style="{'z-index':showParts ? 10 : 5}">
+   <transition enter-active-class="slideUpIn1" leave-active-class="fadeOut">
    <div class="tag-content" v-if="showParts" v-html="tagContent"></div>
    </transition>
 </div>
@@ -19,7 +19,7 @@ export default {
 	name: 'app',
 	data() {
 		return {
-         outTime: 2000
+         outTime: 1000
       }
 	},
    computed: {

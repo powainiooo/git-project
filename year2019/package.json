@@ -36,10 +36,10 @@
       "@vue/standard"
     ],
     "rules": {
-       "indent": [
-          2,
-          3
-       ]
+      "indent": [
+        2,
+        3
+      ]
     },
     "parserOptions": {
       "parser": "babel-eslint"
@@ -48,13 +48,13 @@
   "postcss": {
     "plugins": {
       "autoprefixer": {},
-       "postcss-px-to-viewport": {
-          "viewportWidth": 750,
-          "unitPrecision": 3,
-          "selectorBlackList": [
-             ".ignore"
-          ]
-       }
+      "postcss-px-to-viewport": {
+        "viewportWidth": 750,
+        "unitPrecision": 3,
+        "selectorBlackList": [
+          ".ignore"
+        ]
+      }
     }
   },
   "browserslist": [

@@ -187,6 +187,8 @@ export default {
                this.bgSpeedPecent = 0.4
             } else if (val === 'p5') {
                this.maxSpeed = 1
+            } else if (val === 'p8') {
+               this.bgSpeedPecent = 0.3
             }
          })
       }

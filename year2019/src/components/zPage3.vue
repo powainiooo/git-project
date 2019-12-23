@@ -16,28 +16,30 @@
    <transition enter-active-class="slideUpIn1" leave-active-class="fadeOut">
    <div class="data-content content1" v-if="showParts">
       过去一年<br/>
-      你的最高时速是<span class="value">{{max}}</span>km/h
+      你的最高时速是<span class="value">{{max_speed}}</span>km/h
    </div>
    </transition>
    <transition enter-active-class="slideUpIn2" leave-active-class="fadeOut">
    <div class="tag-content" v-if="showParts" v-html="tagContent"></div>
    </transition>
-   <transition enter-active-class="slideUpIn3" leave-active-class="fadeOut">
+   <transition enter-active-class="slideUpIn3" leave-active-class="fadeOut" @after-enter="enter">
    <div class="data-content content2" v-if="showParts">
-      你的全年平均车速为<span class="value">{{average}}</span>km/h
+      你的全年平均车速为<span class="value">{{avg_speed}}</span>km/h
    </div>
    </transition>
 </div>
 </template>
 
 <script type='es6'>
+import TweenLite from 'gsap'
 export default {
 	name: 'app',
 	data() {
 		return {
          outTime: 1000,
-         max: 130,
-         average: 90
+         max_speed: 0,
+         avg_speed: 0,
+         numsInterval: 1,
       }
 	},
    computed: {
@@ -48,15 +50,37 @@ export default {
          return this.currentPage === 'p3'
       },
       tagContent () {
-         if (this.average >= 130) {
+         if (this.avg_speed >= 130) {
             return '好嗨呦<br/>感觉人生到达了巅峰！'
-         } else if (this.average >= 80 && this.average < 130) {
+         } else if (this.avg_speed >= 80 && this.avg_speed < 130) {
             return '全年驾车安全评分99分<br/>多一分怕你骄傲'
          } else {
             return '安全就好<br/>其他随缘'
          }
       }
    },
-	methods: {}
+   watch: {
+      currentPage (page, lastPage) {
+         if (lastPage === 'p3') {
+            this.reset()
+         }
+      }
+   },
+	methods: {
+      reset () {
+         this.max_speed = 0
+         this.avg_speed = 0
+      },
+      enter () {
+         TweenLite.to(
+            this.$data,
+            this.numsInterval,
+            {
+               max_speed: 20,
+               avg_speed: 20,
+            }
+         )
+      }
+   }
 }
 </script>

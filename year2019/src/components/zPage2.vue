@@ -7,9 +7,9 @@
 .z-page2 .fadeIn { animation: fadeIn 1s linear 1.5s both;}
 .z-page2 .fadeOut { animation: fadeOut 0.5s linear;}
 .z-page2 .fadeOut0 { animation: fadeOut 0s linear;}
-.z-page2 .slideUpIn1 { animation: slideUpIn 0.5s ease-out 1.7s both}
-.z-page2 .slideUpIn2 { animation: slideUpIn 0.5s ease-out 1.9s both}
-.z-page2 .slideUpIn3 { animation: slideUpIn 0.5s ease-out 2.1s both}
+.z-page2 .slideUpIn1 { animation: slideUpIn 0.5s ease-out 1.2s both}
+.z-page2 .slideUpIn2 { animation: slideUpIn 0.5s ease-out 1.4s both}
+.z-page2 .slideUpIn3 { animation: slideUpIn 0.5s ease-out 1.6s both}
 </style>
 
 <template>
@@ -20,16 +20,16 @@
    <transition enter-active-class="slideUpIn1" leave-active-class="fadeOut">
    <div class="data-content content1" v-if="showParts">
       过去一年<br/>
-      你总共充电<span class="value">{{times}}次</span><br/>
-      超过全国<span class="value">{{percent}}%</span>的车主
+      你总共充电<span class="value">{{charge_counts.toFixed(0)}}次</span><br/>
+      超过全国<span class="value">{{charge_over_per.toFixed(0)}}%</span>的车主
    </div>
    </transition>
    <transition enter-active-class="slideUpIn2" leave-active-class="fadeOut">
    <div class="tag-content" v-if="showParts" v-html="tagContent"></div>
    </transition>
-   <transition enter-active-class="slideUpIn3" leave-active-class="fadeOut">
+   <transition enter-active-class="slideUpIn3" leave-active-class="fadeOut" @after-enter="enter">
    <div class="data-content content2" v-if="showParts">
-      每次平均充电{{hours}}小时<br/>
+      每次平均充电{{charge_avg_time}}小时<br/>
       最常充电时段19:00-07:00
    </div>
    </transition>
@@ -37,14 +37,16 @@
 </template>
 
 <script type='es6'>
+import TweenLite from 'gsap'
 export default {
 	name: 'app',
 	data() {
 		return {
          outTime: 1000,
-         times: 126,
-         percent: 52,
-         hours: 8,
+         charge_counts: 0,
+         charge_over_per: 0,
+         charge_avg_time: 0,
+         numsInterval: 1,
       }
 	},
    computed: {
@@ -59,9 +61,9 @@ export default {
       },
       tagContent () {
          if (this.type === 'DM') {
-            if (this.percent >= 70) {
+            if (this.charge_over_per >= 70) {
                return '一直插电一直爽<br/>插电不耗油，倍儿爽'
-            } else if (this.percent >= 30 && this.percent < 70) {
+            } else if (this.charge_over_per >= 30 && this.charge_over_per < 70) {
                return '短途用电 经济节省<br/>长途用油 动力强劲<br/>我为比亚迪混动车 “带盐”'
             } else {
                return '这么土壕吗？<br/>买混动车是为了<br/>面儿还是牌儿？'
@@ -71,6 +73,30 @@ export default {
          }
       }
    },
-	methods: {}
+   watch: {
+      currentPage (page, lastPage) {
+         if (lastPage === 'p2') {
+            this.reset()
+         }
+      }
+   },
+	methods: {
+      reset () {
+         this.charge_counts = 0
+         this.charge_over_per = 0
+         this.charge_avg_time = 0
+      },
+      enter () {
+         TweenLite.to(
+            this.$data,
+            this.numsInterval,
+            {
+               charge_counts: 20,
+               charge_over_per: 20,
+               charge_avg_time: 20,
+            }
+         )
+      }
+   }
 }
 </script>

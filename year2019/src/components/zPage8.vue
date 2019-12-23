@@ -44,18 +44,20 @@
 </template>
 
 <script type='es6'>
+import TweenLite from 'gsap'
 export default {
    name: 'app',
    data() {
       return {
          outTime: 1000,
-         nums: 30,
-         hours: 30,
-         average: 30,
+         nums: 0,
+         hours: 0,
+         average: 0,
          app1: '网易云音乐',
          app2: '抖音',
          widthHours: 0,
          widthAverage: 0,
+         numsInterval: 1,
       }
    },
    computed: {
@@ -66,14 +68,39 @@ export default {
          return this.currentPage === 'p8'
       },
    },
+   watch: {
+      currentPage (page, lastPage) {
+         if (lastPage === 'p8') {
+            this.reset()
+         }
+      }
+   },
    methods: {
+      reset () {
+         this.widthHours = 0
+         this.widthAverage = 0
+         this.nums = 0
+         this.hours = 0
+         this.average = 0
+      },
       enter () {
-         if (this.hours > this.average) {
+         const hours = 30
+         const average = 30
+         TweenLite.to(
+            this.$data,
+            this.numsInterval,
+            {
+               nums: 30,
+               hours: 30,
+               average: 30,
+            }
+         )
+         if (hours > average) {
             this.widthHours = 100
-            this.widthAverage = (this.average / this.hours) * 100
-         } else if (this.hours < this.average) {
+            this.widthAverage = (average / hours) * 100
+         } else if (hours < average) {
             this.widthAverage = 100
-            this.widthHours = (this.hours / this.average) * 100
+            this.widthHours = (hours / average) * 100
          } else {
             this.widthHours = 100
             this.widthAverage = 100

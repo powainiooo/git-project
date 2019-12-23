@@ -7,7 +7,7 @@ export default new Vuex.Store({
    state: {
       loadingPecent: 0,
       currentPage: 'loading',
-      tagName: 'baozou',
+      tagName: '',
       pageData: {},
    },
    mutations: {

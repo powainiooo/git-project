@@ -21,6 +21,7 @@
 </template>
 
 <script type='es6'>
+import axios from 'axios'
 export default {
 	name: 'app',
 	data() {
@@ -68,7 +69,7 @@ export default {
          })
       },
       getData(){
-         let data;
+         let data = 'F/WTJVAVEPkjP0+wvIeowcWeC+G57LU4QEw7zUHLEY8upe0QV9AOxLSJbftzI7wxLOQ4NIFwSTdt+cqj+hbxXIOxlTswCdUIxTCRaa0o5SggQVaq7i/Zrcib8sMuQ/mjBtNDVs4DTe2vWk3Z+LYLp+IvGZUI+F12S9RHEkyBiEletjiXGLxsPfdriVc15bflPnVav9qjfzwBkMVL0mtUEYDTeu2vvRIlalfc9m46mTMcmOS7Uux9WBUtICRYIf8KjxMdETVKecC8TqkesYmEUqRNwT9sCq6fYcv2eqke/8XaNaJejNk07UV7ZkjqyfyPpW4yKlolbx2abUxHqkKNCVIjh4ulypZb19hmtnNeIFw95kcujran/KAkckqf4Z1MR';
          try{
             this.dataLoadOver = true;
             this.steps += 1;
@@ -76,31 +77,32 @@ export default {
             this.$store.commit('setLoadingPecent', this.precent)
             this.isAllLoad();
             this.$store.commit('setPageData', {});
-            // axios.post('/mobileserve/Vehicle/getAnnuallyData',{data:data}).then(res=>{
-            //    let data = res.data;
-            //    if(data.result == 0){
-            //       this.dataLoadOver = true;
-            //       this.steps += 1;
-            //       this.precent = Math.floor(this.steps / (this.imgsList.length+1) * 100);
-            //       this.isAllLoad();
-            //       this.$store.commit('setPageData',data.data);
-            //    }else{
-            //       window.errorData = data;
-            //       window.location = '/error';
-            //    }
-            // })
+            axios.post('/mobileserve/Vehicle/getAnnuallyData',{data:data}).then(res=>{
+               let data = res.data;
+               if(data.result == 0){
+                  this.dataLoadOver = true;
+                  this.steps += 1;
+                  this.precent = Math.floor(this.steps / (this.imgsList.length+1) * 100);
+                  this.isAllLoad();
+                  this.$store.commit('setPageData',data.data);
+               }else{
+                  // window.errorData = data;
+                  // window.location = '/error';
+               }
+            })
          }catch(err){
-
+            console.log(err)
          }
       },
       isAllLoad(){
          if(this.imgLoadOver && this.dataLoadOver){
             setTimeout(() => {
                this.$store.commit('changePage', 'loading-over')
+               setTimeout(() => {
+                  this.$store.commit('changePage', 'p1')
+               }, this.outTime)
             }, 200)
-            setTimeout(() => {
-               this.$store.commit('changePage', 'p1')
-            }, this.outTime)
+
          }
       },
    }

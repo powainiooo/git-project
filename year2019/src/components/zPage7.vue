@@ -13,12 +13,18 @@
 .z-page7 .rule-frame .water { width: 40px; position: absolute; top: 50px; left: 0; margin-left: -20px;}
 .z-page7 .rule-frame .water img { width: 100%;}
 .z-page7 .rule-frame .water span { width: 100%; position: absolute; bottom: 14px; text-align: center; font-size: 20px; color: #ffffff; left: 0;}
+.z-page7 .my-rule { width: 50%; height: 20px; position: absolute; left: 0; top: 20px; background-color: rgba(248, 79, 28, 0.3); transition: all 1s ease-out;}
+.z-page7 .my-rule:before { content: '你的使用量'; width: 200px; height: 80px; text-align: right; color: #F84F1C; position: absolute; right: 0; bottom: 0; font-size: 20px; padding-right: 10px;}
+.z-page7 .my-rule:after { content: ''; width: 1px; height: 76px; position: absolute; right: 0; bottom: 0; background-color: rgba(248, 79, 28, 0.3);}
+.z-page7 .average-rule { width: 50%; height: 12px; position: absolute; left: 0; top: 28px; background-color: rgba(4, 117, 181, 0.3); transition: all 1s ease-out;}
+.z-page7 .average-rule:before { content: '全国平均使用量'; width: 200px; height: 120px; text-align: right; color: #0475B5; position: absolute; right: 0; bottom: 0; font-size: 20px; padding-right: 10px;}
+.z-page7 .average-rule:after { content: ''; width: 1px; height: 116px; position: absolute; right: 0; bottom: 0; background-color: rgba(4, 117, 181, 0.3);}
 </style>
 
 <template>
 <div class="z-page7" :style="{'z-index':showParts ? 10 : 5}">
    <transition enter-active-class="slideUpIn1" leave-active-class="fadeOut">
-      <div class="data-content content1" v-if="showParts">你知道你每月平均使用多少流量吗？{{startX}}-{{moveX}}</div>
+      <div class="data-content content1" v-if="showParts">你知道你每月平均使用多少流量吗？</div>
    </transition>
    <transition enter-active-class="slideUpIn2" leave-active-class="fadeOut" @after-enter="ruleIn">
       <div class="rule-frame" @touchstart="start" @touchmove="move" @touchend="end" ref="rule" v-if="showParts">
@@ -27,13 +33,15 @@
             <img src="@/assets/img/water.png"/>
             <span>{{value}}</span>
          </div>
+         <div class="my-rule" v-show="showParts && showResult" :style="{width: myWidth+'%'}"></div>
+         <div class="average-rule" v-show="showParts && showResult" :style="{width: avgWidth+'%'}"></div>
       </div>
    </transition>
    <transition enter-active-class="slideUpIn1" leave-active-class="fadeOut">
-      <div class="data-content content2" v-if="showParts&& showResult"><span>{{resultTxt}}</span></div>
+      <div class="data-content content2" v-show="showParts && showResult"><span>{{resultTxt}}</span></div>
    </transition>
    <transition enter-active-class="slideUpIn1" leave-active-class="fadeOut">
-      <div class="tag-content content3" v-if="showParts&& showResult">爱了！你就是传说中的<br/>DiLink达人</div>
+      <div class="tag-content content3" v-if="showParts && showResult">爱了！你就是传说中的<br/>DiLink达人</div>
    </transition>
 
 </div>
@@ -52,8 +60,11 @@ export default {
          left: 0,
          value: 0,
          useValue: 0,
+         avgValue: 0,
          showResult: false,
-         t: 0
+         t: 0,
+         myWidth: 0,
+         avgWidth: 0,
       }
    },
    computed: {
@@ -86,6 +97,8 @@ export default {
    methods: {
       ruleIn () {
          this.ruleWidth = this.$refs.rule.offsetWidth
+         this.useValue = 3
+         this.avgValue = 4
       },
       start (e) {
          this.startX = e.touches[0].pageX
@@ -102,8 +115,19 @@ export default {
       },
       end () {
          this.t = setTimeout(() => {
+            this.setResultPos()
             this.showResult = true
          }, 2000)
+      },
+      setResultPos () {
+         setTimeout(() => {
+            this.myWidth = this.useValue > 5 ? 100 : (this.useValue / 5) * 100
+            // this.avgWidth = this.avgValue > 5 ? 100 : (this.avgValue / 5) * 100
+         }, 100)
+         setTimeout(() => {
+            // this.myWidth = this.useValue > 5 ? 100 : (this.useValue / 5) * 100
+            this.avgWidth = this.avgValue > 5 ? 100 : (this.avgValue / 5) * 100
+         }, 600)
       }
    }
 }

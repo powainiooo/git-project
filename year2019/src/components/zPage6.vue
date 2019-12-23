@@ -15,19 +15,19 @@
       <div class="data-content" v-if="showParts">
          <p v-if="tagName !== '火星人'">今年你使用最多的远程控制是</p>
          <div v-if="tagName === '冷暖自由'">
-            <p><span class="value">开/关空调 {{times}}次</span></p>
+            <p><span class="value">开/关空调 {{most_control_counts}}次</span></p>
             <p>都说你是享福命，这就是证明</p>
          </div>
          <div v-if="tagName === '钥匙自由'">
-            <p><span class="value">解锁/上锁 {{times}}次</span></p>
+            <p><span class="value">解锁/上锁 {{most_control_counts}}次</span></p>
             <p>别问没钥匙开锁哪家强，比亚迪云服务帮你忙</p>
          </div>
          <div v-if="tagName === '闪灯鸣笛'">
-            <p><span class="value">解锁/上锁 {{times}}次</span></p>
+            <p><span class="value">解锁/上锁 {{most_control_counts}}次</span></p>
             <p>资深路痴有救啦，几千平方的停车场，一口气找车不费劲</p>
          </div>
          <div v-if="tagName === '健忘症患者'">
-            <p><span class="value">远程升窗 {{times}}次</span></p>
+            <p><span class="value">远程升窗 {{most_control_counts}}次</span></p>
             <p>再也不用半夜穿着秋裤下楼，忘关窗快用云服务，成功人士都爱用！</p>
          </div>
          <div v-if="tagName === '火星人'">
@@ -46,7 +46,7 @@
          <p v-else-if="unUseFunction === '远程升窗'">试着用用，我保证</p>
       </div>
    </transition>
-   <transition enter-active-class="slideUpIn3" leave-active-class="fadeOut">
+   <transition enter-active-class="slideUpIn3" leave-active-class="fadeOut" @after-enter="enter">
       <div class="tag-content" v-if="showParts">
          <p v-if="unUseFunction === '开/关空调'">从此冷暖自己掌控，<span>用TA</span>！</p>
          <p v-else-if="unUseFunction === '解锁/上锁'"><span>用TA</span>就够了！</p>
@@ -58,12 +58,14 @@
 </template>
 
 <script type='es6'>
+import TweenLite from 'gsap'
 export default {
    name: 'app',
    data() {
       return {
          outTime: 1000,
-         times: 333,
+         most_control_counts: 333,
+         numsInterval: 1,
          unUseFunction: '解锁/上锁'
       }
    },
@@ -78,6 +80,27 @@ export default {
          return '冷暖自由'
       },
    },
-   methods: {}
+   watch: {
+      currentPage (page, lastPage) {
+         if (lastPage === 'p6') {
+            this.reset()
+         }
+      }
+   },
+   methods: {
+      reset () {
+         this.most_control_counts = 0
+         this.avg_speed = 0
+      },
+      enter () {
+         TweenLite.to(
+            this.$data,
+            this.numsInterval,
+            {
+               most_control_counts: 20,
+            }
+         )
+      }
+   }
 }
 </script>

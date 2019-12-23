@@ -21,23 +21,23 @@
    <transition enter-active-class="slideUpIn1" leave-active-class="fadeOut">
    <div class="data-content" v-if="showParts">
       过去一年<br/>
-      你与爱车相处了<span class="value">{{hours}}</span>小时<br/>
-      小迪累计被唤醒了<span class="value">{{times}}</span>次
+      你与爱车相处了<span class="value">{{drive_time}}</span>小时<br/>
+      小迪累计被唤醒了<span class="value">{{voice_counts}}</span>次
    </div>
    </transition>
-   <transition enter-active-class="slideUpIn2" leave-active-class="fadeOut" @after-enter="timesEnter">
+   <transition enter-active-class="slideUpIn2" leave-active-class="fadeOut">
    <div class="progress" v-if="showParts && isDiLink">
       <h4>我的唤醒次数</h4>
       <div class="line" :style="{'width': widthTimes + '%'}">
-         <span>{{times}}次</span>
+         <span>{{voice_counts}}次</span>
       </div>
    </div>
    </transition>
-   <transition enter-active-class="slideUpIn2" leave-active-class="fadeOut" @after-enter="averageEnter">
+   <transition enter-active-class="slideUpIn2" leave-active-class="fadeOut" @after-enter="enter">
    <div class="progress progress-all" v-if="showParts && isDiLink">
       <h4>全国车主平均唤醒次数</h4>
       <div class="line" :style="{'width': widthAverage + '%'}">
-         <span>{{average}}次</span>
+         <span>{{avg_voice_counts}}次</span>
       </div>
    </div>
    </transition>
@@ -48,16 +48,18 @@
 </template>
 
 <script type='es6'>
+import TweenLite from 'gsap'
 export default {
 	name: 'app',
 	data() {
 		return {
          outTime: 1000,
-         hours: 320,
-         times: 576,
-         average: 576,
+         drive_time: 320,
+         voice_counts: 576,
+         avg_voice_counts: 576,
          widthTimes: 0,
          widthAverage: 0,
+         numsInterval: 1,
          isDiLink: true
       }
 	},
@@ -70,11 +72,11 @@ export default {
       },
       tagContent () {
          if (this.isDiLink) {
-            if (this.times > 100) {
+            if (this.voice_counts > 100) {
                return 'Skr Skr<br/>是谁在耳边~说~<br/>小迪你好鸭'
-            } else if (this.times > 50 && this.times <= 100) {
+            } else if (this.voice_counts > 50 && this.voice_counts <= 100) {
                return '想要问问你敢不敢<br/>像从前那样呼唤我的名字'
-            } else if (this.times > 0 && this.times <= 50) {
+            } else if (this.voice_counts > 0 && this.voice_counts <= 50) {
                return '别冷落小迪<br/>天青色等烟雨，而她在等你 '
             } else {
                return '敢不敢叫一声小迪<br/>看看我敢答应吗'
@@ -84,12 +86,39 @@ export default {
          }
       }
    },
+   watch: {
+      currentPage (page, lastPage) {
+         if (lastPage === 'p4') {
+            this.reset()
+         }
+      }
+   },
 	methods: {
+      reset () {
+         this.widthTimes = 0
+         this.widthAverage = 0
+         this.drive_time = 0
+         this.voice_counts = 0
+         this.avg_voice_counts = 0
+      },
+      enter () {
+         TweenLite.to(
+            this.$data,
+            this.numsInterval,
+            {
+               drive_time: 20,
+               voice_counts: 20,
+               avg_voice_counts: 20,
+            }
+         )
+         this.timesEnter()
+         this.averageEnter()
+      },
       timesEnter () {
-         this.widthTimes = this.times > this.average ? 100 : (this.times / this.average) * 100
+         this.widthTimes = this.voice_counts > this.avg_voice_counts ? 100 : (this.voice_counts / this.avg_voice_counts) * 100
       },
       averageEnter () {
-         this.widthAverage = this.average > this.times ? 100 : (this.average / this.times) * 100
+         this.widthAverage = this.avg_voice_counts > this.voice_counts ? 100 : (this.avg_voice_counts / this.voice_counts) * 100
       }
    }
 }

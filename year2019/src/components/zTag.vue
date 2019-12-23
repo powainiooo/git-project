@@ -1,5 +1,5 @@
 <style scoped>
-.z-tag { width: 120px; position: fixed; top: 30px; right: 30px;}
+.z-tag { width: 120px; position: fixed; top: 30px; right: 30px; z-index: 100;}
 .z-tag img { width: 100%;}
 .z-tag .tagIn { animation: tagIn 1s ease-out;}
 @keyframes tagIn {
@@ -25,7 +25,7 @@
       <img src="@/assets/img/tag/4.png" v-if="tagName === '电动砖家'">
       <img src="@/assets/img/tag/5.png" v-if="tagName === '火星人'">
       <img src="@/assets/img/tag/6.png" v-if="tagName === '健忘症患者'">
-      <img src="@/assets/img/tag/7.png" v-if="tagName === '钥匙自由'">
+      <img src="@/assets/img/tag/7.png" v-if="tagName === '解锁自由'">
       <img src="@/assets/img/tag/8.png" v-if="tagName === '冷暖自由'">
       <img src="@/assets/img/tag/9.png" v-if="tagName === '潜力股'">
       <img src="@/assets/img/tag/10.png" v-if="tagName === '勤奋家'">

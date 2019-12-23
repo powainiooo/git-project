@@ -9,7 +9,7 @@
 </style>
 
 <template>
-<div class="z-page-share">
+<div class="z-page-share" :style="{'z-index':showParts ? 10 : 5}">
    <transition enter-active-class="fadeIn" leave-active-class="fadeOut">
       <div class="poster" v-if="showParts">
          <canvas width="720" height="1174" ref="poster"></canvas>
@@ -27,9 +27,10 @@ export default {
    name: 'app',
    data() {
       return {
-         outTime: 2000,
+         outTime: 1000,
          max: 100,
-         values: [90, 90, 90, 90, 90, 90]
+         values: [90, 90, 90, 90, 90, 90],
+         hasPoster: false
       }
    },
    computed: {
@@ -40,18 +41,26 @@ export default {
          return this.currentPage === 'share'
       },
    },
-   mounted () {
-      let arr = []
-      arr.push(this.loadImgs('/static/poster/bg.png'))
-      arr.push(this.loadImgs('/static/poster/title.png'))
-      arr.push(this.loadImgs('/static/poster/qrcode.png'))
-      arr.push(this.loadImgs('/static/poster/rada.png'))
-      arr.push(this.loadImgs('/static/poster/baozou.png'))
-      // Promise.all(arr).then(res=>{
-      //    this.drawPoster(res)
-      // })
+   watch: {
+      currentPage (page, lastPage) {
+         if (page === 'share') {
+            this.loadAll()
+         }
+      }
    },
    methods: {
+      loadAll () {
+         if (this.hasPoster) return
+         let arr = []
+         arr.push(this.loadImgs('/static/poster/bg.png'))
+         arr.push(this.loadImgs('/static/poster/title.png'))
+         arr.push(this.loadImgs('/static/poster/qrcode.png'))
+         arr.push(this.loadImgs('/static/poster/rada.png'))
+         arr.push(this.loadImgs('/static/poster/baozou.png'))
+         Promise.all(arr).then(res=>{
+            this.drawPoster(res)
+         })
+      },
       loadImgs(src){
          let self = this;
          return new Promise((resolve,reject)=>{

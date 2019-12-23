@@ -23,20 +23,12 @@ button { width: 100px; margin: 0 10px;}
    <z-page7 ref="p7"></z-page7>
    <z-page8 ref="p8"></z-page8>
    <z-page9 ref="p9"></z-page9>
-   <!--<z-page-share ref="share"></z-page-share>-->
+   <z-page-share ref="share"></z-page-share>
    <!-- :class="{'bottom-fix-p9':currentPage === 'p9'}"-->
    <div class="bottom-fix" :style="{'z-index':currentPage === 'p5' ? 10 : 5}">
       <!--<z-road :status="roadStatus"></z-road>-->
       <!--<z-car :status="roadStatus"></z-car>-->
-      <z-car :status="roadStatus" type="1" pos="1" v-if="currentPage === 'p5'"></z-car>
-      <z-car :status="roadStatus" type="2" pos="2" v-if="currentPage === 'p5'"></z-car>
-      <z-car :status="roadStatus" type="3" pos="3" v-if="currentPage === 'p5'"></z-car>
-      <z-car :status="roadStatus" type="4" pos="4" v-if="currentPage === 'p5'"></z-car>
-      <z-car :status="roadStatus" type="5" pos="5" v-if="currentPage === 'p5'"></z-car>
-      <z-car :status="roadStatus" type="3" pos="6" v-if="currentPage === 'p5'"></z-car>
-      <z-car :status="roadStatus" type="4" pos="7" v-if="currentPage === 'p5'"></z-car>
-      <z-car :status="roadStatus" type="1" pos="8" v-if="currentPage === 'p5'"></z-car>
-      <z-car :status="roadStatus" type="2" pos="9" v-if="currentPage === 'p5'"></z-car>
+
    </div>
 </div>
 </template>
@@ -80,7 +72,7 @@ export default {
    data() {
       return {
          roadStatus: 'move',
-         pageList: ['p1', 'p2', 'p3', 'p4', 'p5', 'p6', 'p7', 'p8', 'p9', 'share'],
+         pageList: ['p1', 'p5', 'p3', 'p4', 'p5', 'p6', 'p7', 'p8', 'p9', 'share'],
          pageIndex: 0,
          tMove: 0
       }
@@ -117,7 +109,7 @@ export default {
          this.gotoPage(this.pageList[this.pageIndex])
       },
       toggleTap () {
-         this.$store.commit('changeTagName', this.tagName === '' ? 'baozou' : '')
+         this.$store.commit('changeTagName', this.tagName === '' ? '暴走老司机' : '')
       },
       gotoPage (page) {
          const nowPage = this.$refs[this.currentPage]

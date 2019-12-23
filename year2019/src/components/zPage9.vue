@@ -4,7 +4,7 @@
 .z-page9 .fadeIn { animation: fadeIn 1s linear 1.5s both;}
 .z-page9 .fadeOut { animation: fadeOut 1s linear;}
 .z-page9 .calandar { width: 600px; height: 1060px; background: url("../assets/img/calandar.png") no-repeat; background-size: 100%; position: absolute; left: 80px; top: 0;}
-.z-page9 .calandar .paper { width: 580px; position: absolute; left: 4px; top: 160px;}
+.z-page9 .calandar .paper { width: 580px; position: absolute; left: 4px; top: 160px; z-index: 9;}
 .z-page9 .calandar .operas { width: 100%; height: 100%; position: absolute; top: 0; left: 0; z-index: 20;}
 .z-page9 .piece { width: 584px; height: 880px; background-color: #ffffff; position: absolute; top: 164px; left: 2px; z-index: 10;}
 .z-page9 .frame { width: 540px; height: 810px; border: 2px solid #333333; margin: 56px 0 0 24px; position: relative;}
@@ -32,7 +32,7 @@
 </style>
 
 <template>
-<div class="z-page9" :class="{'z-page9-show': showParts}">
+<div class="z-page9" :class="{'z-page9-show': showParts}" :style="{bottom: bottom + 'px'}">
    <transition enter-active-class="fadeIn" leave-active-class="fadeOut">
       <div class="calandar" v-show="showParts" ref="calandar">
          <div class="operas" @touchstart="tstart" @touchend="tend"></div>
@@ -62,6 +62,15 @@
    <div class="bottom" v-if="showRoads">
       <z-road :status="roadStatus"></z-road>
       <z-car :status="roadStatus"></z-car>
+      <!--<z-car :status="roadStatus" type="1" pos="1" v-if="currentPage === 'p5'"></z-car>-->
+      <!--<z-car :status="roadStatus" type="2" pos="2" v-if="currentPage === 'p5'"></z-car>-->
+      <!--<z-car :status="roadStatus" type="3" pos="3" v-if="currentPage === 'p5'"></z-car>-->
+      <z-car :status="roadStatus" type="4" pos="4" v-if="currentPage === 'p5'"></z-car>
+      <z-car :status="roadStatus" type="5" pos="5" v-if="currentPage === 'p5'"></z-car>
+      <!--<z-car :status="roadStatus" type="3" pos="6" v-if="currentPage === 'p5'"></z-car>-->
+      <z-car :status="roadStatus" type="4" pos="7" v-if="currentPage === 'p5'"></z-car>
+      <z-car :status="roadStatus" type="1" pos="8" v-if="currentPage === 'p5'"></z-car>
+      <z-car :status="roadStatus" type="2" pos="9" v-if="currentPage === 'p5'"></z-car>
    </div>
 </div>
 </template>
@@ -75,22 +84,25 @@ export default {
    components: {zCar, zRoad, zDiary},
    data() {
       return {
-         outTime: 2000,
+         outTime: 1000,
          showHint: true,
          keyList: ['date_city', 'date_mile', 'date_night', 'date_city_hight', 'date_air_open', 'date_vehicle_status', 'date_energy', 'date_door_unlock', 'date_whistle', 'date_music', 'date_game', 'date_learn'],
          showKeyList: [],
          fitKeyList: [],
          startY: 0,
          roadStatus: 'move',
-         showRoads: true
+         showRoads: true,
+         bottom: 0
       }
    },
    watch: {
       currentPage (page) {
+         this.bottom = 0
          if (page === 'p9') {
             this.$nextTick(() => {
                this.showKeyList = this.keyList.reverse()
                this.fitKeyList = [].concat(this.keyList)
+               this.bottom = (window.innerHeight - this.$refs.calandar.offsetHeight) / 2
             })
             this.roadStatus = 'stop'
             setTimeout(() => {
@@ -99,10 +111,10 @@ export default {
          } else if (page === 'p2') {
             this.roadStatus = 'stop'
          } else if (page === 'p5') {
-            this.roadStatus = 'move'
-            // this.tMove = setInterval(() => {
-            //    this.roadStatus = this.roadStatus === 'stop' ? 'move' : 'stop'
-            // }, 3000)
+            // this.roadStatus = 'stop'
+            this.tMove = setInterval(() => {
+               this.roadStatus = this.roadStatus === 'stop' ? 'move' : 'stop'
+            }, 4000)
          } else {
             this.roadStatus = 'move'
          }
@@ -123,10 +135,8 @@ export default {
          } else {
             this.fitKeyList.pop()
          }
-         console.log(this.fitKeyList)
       },
       tstart (e) {
-         console.log('start')
          this.startY = e.touches[0].pageY
       },
       tend (e) {

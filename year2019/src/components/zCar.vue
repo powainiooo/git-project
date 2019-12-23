@@ -38,12 +38,34 @@
 .z-car-pos-1 { left: 360px; bottom: 110px; z-index: 90; animation: fadeIn 0.5s linear 0.2s both;}
 .z-car-pos-2 { left: 590px; bottom: 120px; z-index: 90; animation: fadeIn 0.5s linear 0.3s both;}
 .z-car-pos-3 { left: 660px; bottom: 90px; z-index: 90; animation: fadeIn 0.5s linear 0.4s both;}
-.z-car-pos-4 { left: 490px; bottom: 90px; z-index: 90; animation: fadeIn 0.5s linear 0.5s both;}
-.z-car-pos-5 { left: 70px; bottom: 90px; z-index: 90; animation: fadeIn 0.5s linear 0.6s both;}
+.z-car-pos-4 { left: 490px; bottom: 90px; z-index: 90; animation: carmove2 8s linear 0s both infinite;}
+.z-car-pos-5 { left: 30px; bottom: 90px; z-index: 90; animation: carmove3 8s linear 1s both infinite;}
 .z-car-pos-6 { left: 170px; bottom: 120px; z-index: 80; animation: fadeIn 0.5s linear 0.7s both;}
-.z-car-pos-7 { left: 30px; bottom: 30px; z-index: 100; animation: fadeIn 0.5s linear 0.8s both;}
-.z-car-pos-8 { left: 240px; bottom: 30px; z-index: 100; animation: fadeIn 0.5s linear 0.9s both;}
-.z-car-pos-9 { left: 540px; bottom: 30px; z-index: 100; animation: fadeIn 0.5s linear 1s both;}
+.z-car-pos-7 { left: 0; bottom: 30px; z-index: 100; transform: scaleX(-1); transform-origin: 50% 50%; animation: carmove 10s ease-out infinite both;}
+.z-car-pos-8 { left: 100px; bottom: 30px; z-index: 100; transform: scaleX(-1); transform-origin: 50% 50%; animation: carmove 10s linear infinite 3s both;}
+.z-car-pos-9 { left: 200px; bottom: 30px; z-index: 100; transform: scaleX(-1); transform-origin: 50% 50%; animation: carmove 10s linear infinite 5s both;}
+@keyframes carmove {
+   0% { transform: translateX(850px) scaleX(-1);}
+   100% { transform: translateX(-500px) scaleX(-1);}
+}
+@keyframes carmove2 {
+   0%{ transform: translateX(40px);}
+   /*16.6% { transform: translateX(40px);}*/
+   33% { transform: translateX(40px);}
+   49% { transform: translateX(10px);}
+   /*66.4% { transform: translateX(40px);}*/
+   88% { transform: translateX(10px);}
+   100% { transform: translateX(40px);}
+}
+@keyframes carmove3 {
+   0%{ transform: translateX(0px);}
+   16.6% { transform: translateX(0px);}
+   33% { transform: translateX(0px);}
+   49% { transform: translateX(20px);}
+   66.4% { transform: translateX(20px);}
+   89% { transform: translateX(20px);}
+   100% { transform: translateX(0px);}
+}
 </style>
 
 <template>
@@ -137,6 +159,17 @@ export default {
    },
    mounted () {
       this.t = setInterval(this.move, 16)
+   },
+   watch: {
+      currentPage (val) {
+         if (val === '') return
+         this.$nextTick(() => {
+            this.maxSpeed = 8
+            if (val === 'p5') {
+               this.maxSpeed = 2
+            }
+         })
+      }
    },
 	methods: {
       move () {

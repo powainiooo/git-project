@@ -13,7 +13,7 @@ App({
 
       // 登录
       let openid = wx.getStorageSync('openid')
-      if (openid === '') {
+      if (openid === '' || openid === null || openid === undefined) {
          wx.login({
             success: res => {
                wx.request({

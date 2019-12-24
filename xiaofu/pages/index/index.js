@@ -45,7 +45,8 @@ Page({
       detailData: null,
       detailPage: '',
       drinkParams: [],
-      showPassport: false
+      showPassport: false,
+      getSizeTimes: 0,
 	},
 	onLoad: function (options) {
 	   console.log(options)
@@ -88,13 +89,27 @@ Page({
 		setTimeout(() => {
 			wx.createSelectorQuery().select("#header").boundingClientRect(rect => {
 				// console.log(rect)
-				this.data.headerHeight = rect.top
+            if (rect === null) {
+               if (this.data.getSizeTimes < 10) {
+                  this.getComponentsSize()
+                  this.data.getSizeTimes += 1
+               }
+            } else {
+               this.data.headerHeight = rect.top
+            }
 			}).exec()
 			wx.createSelectorQuery().select("#search").boundingClientRect(rect => {
 				// console.log(rect)
-				this.data.searchHeight = rect.height
+            if (rect === null) {
+               if (this.data.getSizeTimes < 10) {
+                  this.getComponentsSize()
+                  this.data.getSizeTimes += 1
+               }
+            } else {
+               this.data.searchHeight = rect.height
+            }
 			}).exec()
-		}, 1000)
+		}, 2000)
 	},
 	// 监听页面滑动
 	containerScroll (e) {

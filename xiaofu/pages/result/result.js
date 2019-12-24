@@ -86,7 +86,7 @@ Page({
                if (from === 'ticket') {
                   url = `/pages/index/detail?id=${id}`
                } else if (from === 'drink') {
-                  url = `/pages/drink/detail?id=${id}`
+                  // url = `/pages/drink/detail?id=${id}`
                }
             } else {
                url = '/pages/index/index'

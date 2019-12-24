@@ -22,11 +22,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
    onLoad: function (options) {
-      if (app.globalData.userOpenID != null) {
+      if (app.globalData.userOpenID !== null) {
+         console.log('1')
          this.getListData()
          this.getListData2()
       }
       app.userInfoReadyCallback = res => {
+         console.log('2')
          this.getListData()
          this.getListData2()
       }

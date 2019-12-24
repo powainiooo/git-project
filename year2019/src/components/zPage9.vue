@@ -62,15 +62,17 @@
    <div class="bottom" v-if="showRoads">
       <z-road :status="roadStatus"></z-road>
       <z-car :status="roadStatus"></z-car>
-      <!--<z-car :status="roadStatus" type="1" pos="1" v-if="currentPage === 'p5'"></z-car>-->
-      <!--<z-car :status="roadStatus" type="2" pos="2" v-if="currentPage === 'p5'"></z-car>-->
-      <!--<z-car :status="roadStatus" type="3" pos="3" v-if="currentPage === 'p5'"></z-car>-->
-      <z-car :status="roadStatus" type="4" pos="4" v-if="currentPage === 'p5'"></z-car>
-      <z-car :status="roadStatus" type="5" pos="5" v-if="currentPage === 'p5'"></z-car>
-      <!--<z-car :status="roadStatus" type="3" pos="6" v-if="currentPage === 'p5'"></z-car>-->
-      <z-car :status="roadStatus" type="4" pos="7" v-if="currentPage === 'p5'"></z-car>
-      <z-car :status="roadStatus" type="1" pos="8" v-if="currentPage === 'p5'"></z-car>
-      <z-car :status="roadStatus" type="2" pos="9" v-if="currentPage === 'p5'"></z-car>
+      <transition-group enter-active-class="fadeIn" leave-active-class="fadeOut">
+      <!--<z-car :status="roadStatus" type="1" pos="1" v-if="showCars"></z-car>-->
+      <!--<z-car :status="roadStatus" type="2" pos="2" v-if="showCars"></z-car>-->
+      <!--<z-car :status="roadStatus" type="3" pos="3" v-if="showCars"></z-car>-->
+      <z-car :status="roadStatus" type="4" pos="4" v-if="showCars" :key="4"></z-car>
+      <z-car :status="roadStatus" type="5" pos="5" v-if="showCars" :key="5"></z-car>
+      <!--<z-car :status="roadStatus" type="3" pos="6" v-if="showCars"></z-car>-->
+      <z-car :status="roadStatus" type="4" pos="7" v-if="showCars" :key="7"></z-car>
+      <z-car :status="roadStatus" type="1" pos="8" v-if="showCars" :key="8"></z-car>
+      <z-car :status="roadStatus" type="2" pos="9" v-if="showCars" :key="9"></z-car>
+      </transition-group>
    </div>
 </div>
 </template>
@@ -86,7 +88,7 @@ export default {
       return {
          outTime: 1000,
          showHint: true,
-         keyList: ['date_city', 'date_mile', 'date_night', 'date_city_hight', 'date_air_open', 'date_vehicle_status', 'date_energy', 'date_door_unlock', 'date_whistle', 'date_music', 'date_game', 'date_learn'],
+         // keyList: ['city', 'travel', 'late', 'high', 'air', 'status', 'energy', 'unlock', 'whistle', 'music', 'game', 'learn'],
          showKeyList: [],
          fitKeyList: [],
          startY: 0,
@@ -98,6 +100,7 @@ export default {
    watch: {
       currentPage (page) {
          this.bottom = 0
+         this.showRoads = true
          if (page === 'p9') {
             this.$nextTick(() => {
                this.showKeyList = this.keyList.reverse()
@@ -112,9 +115,11 @@ export default {
             this.roadStatus = 'stop'
          } else if (page === 'p5') {
             // this.roadStatus = 'stop'
-            this.tMove = setInterval(() => {
-               this.roadStatus = this.roadStatus === 'stop' ? 'move' : 'stop'
-            }, 4000)
+            if (this.showCars) {
+               this.tMove = setInterval(() => {
+                  this.roadStatus = this.roadStatus === 'stop' ? 'move' : 'stop'
+               }, 4000)
+            }
          } else {
             this.roadStatus = 'move'
          }
@@ -127,6 +132,15 @@ export default {
       showParts () {
          return this.currentPage === 'p9'
       },
+      tagName () {
+         return this.$store.state.tagName
+      },
+      keyList () {
+         return this.$store.state.useKeyList
+      },
+      showCars () {
+         return this.currentPage === 'p5' && this.tagName === '上班族'
+      }
    },
    methods: {
       slidePages () {

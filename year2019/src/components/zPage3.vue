@@ -16,7 +16,7 @@
    <transition enter-active-class="slideUpIn1" leave-active-class="fadeOut">
    <div class="data-content content1" v-if="showParts">
       过去一年<br/>
-      你的最高时速是<span class="value">{{max_speed}}</span>km/h
+      你的最高时速是<span class="value">{{parseFloat(max_speed.toFixed(1))}}</span>km/h
    </div>
    </transition>
    <transition enter-active-class="slideUpIn2" leave-active-class="fadeOut">
@@ -24,7 +24,7 @@
    </transition>
    <transition enter-active-class="slideUpIn3" leave-active-class="fadeOut" @after-enter="enter">
    <div class="data-content content2" v-if="showParts">
-      你的全年平均车速为<span class="value">{{avg_speed}}</span>km/h
+      你的全年平均车速为<span class="value">{{parseFloat(avg_speed.toFixed(1))}}</span>km/h
    </div>
    </transition>
 </div>
@@ -48,6 +48,9 @@ export default {
       },
       showParts () {
          return this.currentPage === 'p3'
+      },
+      pageData () {
+         return this.$store.state.pageData.P3
       },
       tagContent () {
          if (this.avg_speed >= 130) {
@@ -76,8 +79,8 @@ export default {
             this.$data,
             this.numsInterval,
             {
-               max_speed: 20,
-               avg_speed: 20,
+               max_speed: this.pageData.maxSpeed,
+               avg_speed: this.pageData.avgSpeed,
             }
          )
       }

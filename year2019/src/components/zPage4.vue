@@ -18,26 +18,26 @@
 
 <template>
 <div class="z-page4" :style="{'z-index':showParts ? 10 : 5}">
-   <transition enter-active-class="slideUpIn1" leave-active-class="fadeOut">
+   <transition enter-active-class="slideUpIn1" leave-active-class="fadeOut" @after-enter="enter">
    <div class="data-content" v-if="showParts">
-      过去一年<br/>
-      你与爱车相处了<span class="value">{{drive_time}}</span>小时<br/>
-      小迪累计被唤醒了<span class="value">{{voice_counts}}</span>次
+      <p>过去一年</p>
+      <p v-if="showTimes">你与爱车相处了<span class="value">{{drive_time.toFixed(1)}}</span>小时</p>
+      <p v-if="showVCount">小迪累计被唤醒了<span class="value">{{voice_counts.toFixed(0)}}</span>次</p>
    </div>
    </transition>
    <transition enter-active-class="slideUpIn2" leave-active-class="fadeOut">
    <div class="progress" v-if="showParts && isDiLink">
       <h4>我的唤醒次数</h4>
       <div class="line" :style="{'width': widthTimes + '%'}">
-         <span>{{voice_counts}}次</span>
+         <span>{{voice_counts.toFixed(0)}}次</span>
       </div>
    </div>
    </transition>
-   <transition enter-active-class="slideUpIn2" leave-active-class="fadeOut" @after-enter="enter">
+   <transition enter-active-class="slideUpIn2" leave-active-class="fadeOut">
    <div class="progress progress-all" v-if="showParts && isDiLink">
       <h4>全国车主平均唤醒次数</h4>
       <div class="line" :style="{'width': widthAverage + '%'}">
-         <span>{{avg_voice_counts}}次</span>
+         <span>{{avg_voice_counts.toFixed(0)}}次</span>
       </div>
    </div>
    </transition>
@@ -54,13 +54,12 @@ export default {
 	data() {
 		return {
          outTime: 1000,
-         drive_time: 320,
-         voice_counts: 576,
-         avg_voice_counts: 576,
+         drive_time: 0,
+         voice_counts: 0,
+         avg_voice_counts: 0,
          widthTimes: 0,
          widthAverage: 0,
          numsInterval: 1,
-         isDiLink: true
       }
 	},
    computed: {
@@ -69,6 +68,12 @@ export default {
       },
       showParts () {
          return this.currentPage === 'p4'
+      },
+      pageData () {
+         return this.$store.state.pageData.P4
+      },
+      isDiLink () {
+         return this.$store.state.isDiLink
       },
       tagContent () {
          if (this.isDiLink) {
@@ -84,6 +89,12 @@ export default {
          } else {
             return '在车上遇到的故事<br/>远比你想象的精彩'
          }
+      },
+      showTimes () {
+         return this.pageData.driveTime !== undefined
+      },
+      showVCount () {
+         return this.pageData.voiceCount !== undefined
       }
    },
    watch: {
@@ -106,9 +117,9 @@ export default {
             this.$data,
             this.numsInterval,
             {
-               drive_time: 20,
-               voice_counts: 20,
-               avg_voice_counts: 20,
+               drive_time: this.pageData.driveTime,
+               voice_counts: this.pageData.voiceCount,
+               avg_voice_counts: this.pageData.avgVoiceCount,
             }
          )
          this.timesEnter()

@@ -1,7 +1,5 @@
 <style>
 .home { width: 100%; height: 100vh; overflow: hidden; position: relative;}
-.bottom-fix { width: 100%; height: 100vh; overflow: hidden; position: fixed; bottom: 0; left: 0; z-index: 10;}
-.bottom-fix-p9 { transform: scale(0.7); bottom: 184px; transform-origin: 50% 100%; transition: all 1s linear}
 button { width: 100px; margin: 0 10px;}
 </style>
 
@@ -14,6 +12,7 @@ button { width: 100px; margin: 0 10px;}
    <z-title></z-title>
    <z-tag></z-tag>
    <z-loading ref="loading"></z-loading>
+   <z-page0 ref="p0"></z-page0>
    <z-page1 ref="p1"></z-page1>
    <z-page2 ref="p2"></z-page2>
    <z-page3 ref="p3"></z-page3>
@@ -23,13 +22,7 @@ button { width: 100px; margin: 0 10px;}
    <z-page7 ref="p7"></z-page7>
    <z-page8 ref="p8"></z-page8>
    <z-page9 ref="p9"></z-page9>
-   <z-page-share ref="share"></z-page-share>
-   <!-- :class="{'bottom-fix-p9':currentPage === 'p9'}"-->
-   <div class="bottom-fix" :style="{'z-index':currentPage === 'p5' ? 10 : 5}">
-      <!--<z-road :status="roadStatus"></z-road>-->
-      <!--<z-car :status="roadStatus"></z-car>-->
-
-   </div>
+   <z-page-share ref="p10"></z-page-share>
 </div>
 </template>
 
@@ -39,6 +32,7 @@ import zTag from '@/components/zTag.vue'
 import zRoad from '@/components/zRoad.vue'
 import zCar from '@/components/zCar.vue'
 import zLoading from '@/components/zLoading.vue'
+import zPage0 from '@/components/zPage0.vue'
 import zPage1 from '@/components/zPage1.vue'
 import zPage2 from '@/components/zPage2.vue'
 import zPage3 from '@/components/zPage3.vue'
@@ -58,6 +52,7 @@ export default {
       zRoad,
       zCar,
       zLoading,
+      zPage0,
       zPage1,
       zPage2,
       zPage3,
@@ -72,7 +67,6 @@ export default {
    data() {
       return {
          roadStatus: 'move',
-         pageList: ['p1', 'p5', 'p3', 'p4', 'p5', 'p6', 'p7', 'p8', 'p9', 'share'],
          pageIndex: 0,
          tMove: 0
       }
@@ -83,13 +77,17 @@ export default {
       },
       tagName () {
          return this.$store.state.tagName
+      },
+      pageList () {
+         // return this.$store.state.pageList
+         return ['p0', 'p9']
       }
    },
    watch: {
       currentPage (page) {
          if (page === 'p2') {
             this.roadStatus = 'stop'
-         } else if (page === 'p5') {
+         } else if (page === 'p2') {
             this.roadStatus = 'move'
             // this.tMove = setInterval(() => {
             //    this.roadStatus = this.roadStatus === 'stop' ? 'move' : 'stop'

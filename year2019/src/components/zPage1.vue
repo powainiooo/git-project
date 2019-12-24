@@ -16,19 +16,19 @@
    <transition enter-active-class="slideUpIn" leave-active-class="fadeOut" @after-enter="enter">
    <div class="data-content" v-if="showParts">
       <p>过去一年</p>
-      <p>你行驶了<span class="value">{{total_mile}}</span>公里</p>
+      <p>你行驶了<span class="value">{{total_mile.toFixed(0)}}</span>公里</p>
       <div v-if="type === 'gasoline'">
-         <p>全年总油耗<span class="value">{{total_fuel}}</span>升</p>
-         <p>百公里能耗排名超过全国<span class="value">{{fuel100_over_per}}</span>% 的车主</p>
+         <p>全年总油耗<span class="value">{{total_fuel.toFixed(0)}}</span>升</p>
+         <p>百公里能耗排名超过全国<span class="value">{{rank.toFixed(0)}}</span>% 的车主</p>
       </div>
       <div v-if="type === 'DM'">
-         <p>纯电里程<span class="value">{{total_evmile}}</span>公里</p>
-         <p>全年总能耗<span class="value">{{total_elect}}</span>度+<span class="value">{{total_fuel}}</span>升</p>
-         <p>相比用油，一年节省<span class="value">{{save_money}}</span>元</p>
+         <p v-if="showEvMileage">纯电里程<span class="value">{{total_evmile.toFixed(0)}}</span>公里</p>
+         <div v-html="energyHtml"></div>
+         <p v-if="showMoney">相比用油，一年节省<span class="value">{{save_money.toFixed(0)}}</span>元</p>
       </div>
       <div v-if="type === 'EV'">
-         <p>全年总电耗<span class="value">{{total_elect}}</span>度</p>
-         <p>相比燃油车一年节省<span class="value">{{save_money}}</span>元</p>
+         <p v-if="showElect">全年总电耗<span class="value">{{total_elect.toFixed(0)}}</span>度</p>
+         <p v-if="showMoney">相比燃油车一年节省<span class="value">{{save_money.toFixed(0)}}</span>元</p>
       </div>
    </div>
    </transition>
@@ -51,13 +51,10 @@ export default {
 		   outTime: 300,
          oilPrecent: 20,
          total_mile: 0,
-         total_mile_over_per: 0,
          total_evmile: 0,
          total_fuel: 0,
          total_elect: 0,
-         fuel100: 0,
-         fuel100_over_per: 0,
-         elect100: 0,
+         rank: 0,
          save_money: 0,
          save_co2: 0,
          save_meat: 0,
@@ -72,7 +69,7 @@ export default {
          return this.currentPage === 'p1'
       },
       type () {
-         return 'EV'
+         return this.$store.state.powerMode
       },
       tagContent () {
          if (this.type === 'gasoline') {
@@ -84,10 +81,51 @@ export default {
                return '别的咱不说<br/><span style="color: #ffea00;">踩油门</span><br/>咱一定是专业的'
             }
          } else if (this.type === 'DM') {
-            return `省下的钱可以<br/>买${this.save_meat}斤猪肉<br/><span style="color: #ffea00;">恩，真香！</span>`
+            if (this.pokeMeat === '--') {
+               return ''
+            } else {
+               return `省下的钱可以<br/>买${this.pokeMeat.toFixed(1)}斤猪肉<br/><span style="color: #ffea00;">恩，真香！</span>`
+            }
          } else if (this.type === 'EV') {
             return '节能省钱<br/>又环保<br/><span style="color: #ffea00;">从此不再关注油价</span>'
          }
+      },
+      pageData () {
+         return this.$store.state.pageData.P1
+      },
+      showEvMileage () {
+         return this.pageData.evMileage !== undefined
+      },
+      showElect () {
+         return this.pageData.eConsumption !== undefined
+      },
+      energyHtml () {
+         const fuel = this.pageData.fConsumption
+         const elect = this.pageData.eConsumption
+         if (fuel === undefined && elect === undefined) {
+            return ''
+         } else if (fuel === undefined && elect !== undefined) {
+            return `全年总能耗<span class="value">{{elect}}</span>度`
+         } else if (fuel !== undefined && elect === undefined) {
+            return `全年总能耗<span class="value">{{fuel}}</span>升`
+         } else if (fuel !== undefined && elect !== undefined) {
+            return `全年总能耗<span class="value">{{elect}}</span>度+<span class="value">{{fuel}}</span>升`
+         }
+      },
+      saveMoney () {
+         if (this.pageData.eConsumption === undefined) {
+            return '--'
+         } else {
+            return this.pageData.eConsumption/2.5*6.74-this.pageData.eConsumption*0.68
+         }
+      },
+      showMoney () {
+         if (this.type === 'DM') {
+            return typeof this.saveMoney === 'number'
+         }
+      },
+      pokeMeat () {
+         return this.saveMoney === '--' ? '--' : this.saveMoney / 30
       }
    },
    watch: {
@@ -100,15 +138,11 @@ export default {
 	methods: {
 	   reset () {
 	      this.total_mile = 0
-	      this.total_mile_over_per = 0
 	      this.total_evmile = 0
 	      this.total_fuel = 0
 	      this.total_elect = 0
-	      this.fuel100 = 0
-	      this.fuel100_over_per = 0
-	      this.elect100 = 0
+	      this.rank = 0
 	      this.save_money = 0
-	      this.save_co2 = 0
 	      this.save_meat = 0
       },
       enter () {
@@ -117,17 +151,12 @@ export default {
             this.$data,
             this.numsInterval,
             {
-               total_mile: 20,
-               total_mile_over_per: 20,
-               total_evmile: 20,
-               total_fuel: 20,
-               total_elect: 20,
-               fuel100: 20,
-               fuel100_over_per: 20,
-               elect100: 20,
-               save_money: 20,
-               save_co2: 20,
-               save_meat: 20,
+               total_mile: this.pageData.mileage,
+               total_evmile: this.pageData.evMileage,
+               total_fuel: this.pageData.fConsumption,
+               total_elect: this.pageData.eConsumption,
+               rank: this.pageData.fPlacing,
+               save_money: this.saveMoney,
             }
          )
       }

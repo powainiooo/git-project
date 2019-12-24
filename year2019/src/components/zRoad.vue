@@ -50,12 +50,12 @@
 .page6-front .bg-move { width: 1030px; height: 74px; background-image: url('/static/bg6-front.png');}
 
 .page8-back {bottom: 144px;}
-.page8-back .bg-move { width: 2750px; height: 490px; background-image: url('/static/bg8-back.png');}
+.page8-back .bg-move { width: 2750px; height: 490px; background-image: url('/static/bg7-back.png');}
 .page8-front {bottom: 0;}
-.page8-front .bg-move { width: 2540px; height: 440px; background-image: url('/static/bg8-front.png');}
+.page8-front .bg-move { width: 2540px; height: 440px; background-image: url('/static/bg7-front.png');}
 
 .page9-bg {bottom: 140px;}
-.page9-bg .bg-move { width: 2060px; height: 390px; background-image: url('/static/bg9.png');}
+.page9-bg .bg-move { width: 2060px; height: 390px; background-image: url('/static/bg8.png');}
 </style>
 
 <template>

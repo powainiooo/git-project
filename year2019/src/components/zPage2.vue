@@ -2,7 +2,7 @@
 .z-page2 { width: 100%; height: 100vh; overflow: hidden; position: relative; z-index: 12;}
 .z-page2 .content1 { top: 240px; left: 120px;}
 .z-page2 .tag-content { top: 470px; left: 120px;}
-.z-page2 .content2 { top: 730px; left: 170px;}
+.z-page2 .content2 { top: 730px; left: 120px;}
 .z-page2 .recharge { width: 250px; position: absolute; bottom: 94px; left: 84px;}
 .z-page2 .fadeIn { animation: fadeIn 1s linear 1.5s both;}
 .z-page2 .fadeOut { animation: fadeOut 0.5s linear;}
@@ -19,9 +19,9 @@
    </transition>
    <transition enter-active-class="slideUpIn1" leave-active-class="fadeOut">
    <div class="data-content content1" v-if="showParts">
-      过去一年<br/>
-      你总共充电<span class="value">{{charge_counts.toFixed(0)}}次</span><br/>
-      超过全国<span class="value">{{charge_over_per.toFixed(0)}}%</span>的车主
+      <p>过去一年</p>
+      <p>你总共充电<span class="value">{{charge_counts.toFixed(0)}}次</span></p>
+      <p>超过全国<span class="value">{{charge_over_per.toFixed(0)}}%</span>的车主</p>
    </div>
    </transition>
    <transition enter-active-class="slideUpIn2" leave-active-class="fadeOut">
@@ -29,8 +29,8 @@
    </transition>
    <transition enter-active-class="slideUpIn3" leave-active-class="fadeOut" @after-enter="enter">
    <div class="data-content content2" v-if="showParts">
-      每次平均充电{{charge_avg_time}}小时<br/>
-      最常充电时段19:00-07:00
+      <p>每次平均充电{{charge_avg_time.toFixed(1)}}小时</p>
+      <p>最常充电时段{{timeZone}}</p>
    </div>
    </transition>
 </div>
@@ -47,6 +47,7 @@ export default {
          charge_over_per: 0,
          charge_avg_time: 0,
          numsInterval: 1,
+         timeZone: ''
       }
 	},
    computed: {
@@ -57,16 +58,19 @@ export default {
          return this.currentPage === 'p2'
       },
       type () {
-         return 'EV'
+         return this.$store.state.powerMode
+      },
+      pageData () {
+         return this.$store.state.pageData.P2
       },
       tagContent () {
          if (this.type === 'DM') {
             if (this.charge_over_per >= 70) {
-               return '一直插电一直爽<br/>插电不耗油，倍儿爽'
+               return '一直插电一直爽插电不耗油，倍儿爽'
             } else if (this.charge_over_per >= 30 && this.charge_over_per < 70) {
-               return '短途用电 经济节省<br/>长途用油 动力强劲<br/>我为比亚迪混动车 “带盐”'
+               return '短途用电 经济节省长途用油 动力强劲我为比亚迪混动车 “带盐”'
             } else {
-               return '这么土壕吗？<br/>买混动车是为了<br/>面儿还是牌儿？'
+               return '这么土壕吗？买混动车是为了面儿还是牌儿？'
             }
          } else if (this.type === 'EV') {
             return '比亚迪新能源，倍儿爽！'
@@ -87,13 +91,14 @@ export default {
          this.charge_avg_time = 0
       },
       enter () {
+         this.timeZone = this.pageData.timeZone
          TweenLite.to(
             this.$data,
             this.numsInterval,
             {
-               charge_counts: 20,
-               charge_over_per: 20,
-               charge_avg_time: 20,
+               charge_counts: this.pageData.chargeTimes,
+               charge_over_per: this.pageData.cPlacing,
+               charge_avg_time: this.pageData.avgChargeTime,
             }
          )
       }

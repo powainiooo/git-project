@@ -30,7 +30,7 @@ export default {
          return this.currentPage === 'p5'
       },
       tagName () {
-         return '上班族'
+         return this.$store.state.tagName
       },
       tagContent () {
          if (this.tagName === '人生赢家') {

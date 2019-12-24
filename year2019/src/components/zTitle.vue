@@ -52,11 +52,11 @@ export default {
          } else if (this.currentPage === 'p6') {
             return '远程控制'
          } else if (this.currentPage === 'p7') {
-            return '穿越日记'
-         } else if (this.currentPage === 'p8') {
             return '流量使用'
-         } else if (this.currentPage === 'p9') {
+         } else if (this.currentPage === 'p8') {
             return '应用使用'
+         } else if (this.currentPage === 'p9') {
+            return '穿越日记'
          }
       },
    },

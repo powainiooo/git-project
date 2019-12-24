@@ -38,7 +38,7 @@ export default {
          return this.$store.state.currentPage
       },
       showParts () {
-         return this.currentPage === 'share'
+         return this.currentPage === 'p10'
       },
    },
    watch: {

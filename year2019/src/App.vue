@@ -5,13 +5,14 @@
 </template>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, "Helvetica Neue", "Microsoft YaHei", Helvetica, sans-serif}
-body { width: 100%; height: 100vh; overflow: hidden; background: url("assets/img/bg.jpg") no-repeat; background-size: cover;}
+body { width: 100%; height: 100vh; overflow: hidden; background: url("assets/img/bg.jpg") repeat;}
 
-.data-content { font-size: 30px; color: #0475B5; line-height: 54px; position: absolute;}
+.data-content { font-size: 30px; color: #0475B5; line-height: 54px; position: absolute; letter-spacing: 2px;}
 .data-content span { color: rgb(248, 79, 28)}
+.data-content div div { display: inline-block}
 .data-content .value { font-size: 36px;}
 
-.tag-content { font-size: 48px; line-height: 60px; color: #0475B5; position: absolute;}
+.tag-content { font-size: 48px; line-height: 60px; color: #0475B5; position: absolute; letter-spacing: 2px;}
 .tag-content span { color: #F84F1C}
 
 @keyframes fadeIn {

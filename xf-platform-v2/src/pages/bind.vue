@@ -50,7 +50,7 @@
                     <h3 class="title"><span>1</span>填写提款账户信息</h3>
                     <div class="mt20">
                         <p class="mb20 tc"><input type="text" placeholder="个人开户名" v-model="name"></p>
-                        <p class="mb20 tc"><input type="text" placeholder="预留手机号" :value="userMobile" readonly></p>
+                        <p class="mb20 tc"><input type="text" placeholder="预留手机号" :value="userMobile"></p>
                         <div class="line code-line">
                             <input type="text" placeholder="验证码" v-model="vericode">
                             <t-button :isDisabled="veriBtnDisabled" size="min" @dotap="getCode">{{codeBtnName}}</t-button>

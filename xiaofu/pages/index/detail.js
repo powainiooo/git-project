@@ -143,6 +143,7 @@ Page({
                         wx.showToast({
                            title: '支付成功'
                         })
+                        self.getMessageAuth()
                         self.doBuySuccess(tid, order_num)
                      },
                      'fail': function (res) {
@@ -162,6 +163,26 @@ Page({
                   this.doPay()
                }
             })
+         }
+      })
+   },
+   getMessageAuth () {
+      console.log('发起订阅消息')
+      wx.requestSubscribeMessage({
+         tmplIds: [
+            'WRge3txz54ZhpQ4md9mG0RHSdLSaMlcuW5TPTWUi_Xk',
+            'Qr4BpwVZGPkOYqBHpPDryPuDZkmYoEEDPY-VMBpOGR8',
+            'BCUfqqnuvWiwzYjvcQDKEUumjXsMioiEBKzl3chuE_w'
+         ],
+         success (res) {
+            console.log('订阅消息成功')
+            console.log(res)
+            console.log('--------------------')
+         },
+         fail (err) {
+            console.log('订阅消息失败')
+            console.log(err)
+            console.log('--------------------')
          }
       })
    },

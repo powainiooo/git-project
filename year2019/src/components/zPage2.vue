@@ -29,8 +29,8 @@
    </transition>
    <transition enter-active-class="slideUpIn3" leave-active-class="fadeOut" @after-enter="enter">
    <div class="data-content content2" v-if="showParts">
-      <p>每次平均充电{{charge_avg_time.toFixed(1)}}小时</p>
-      <p>最常充电时段{{timeZone}}</p>
+      <p>每次平均充电<span>{{charge_avg_time.toFixed(1)}}</span>小时</p>
+      <p>最常充电时段<span>{{timeZone}}</span></p>
    </div>
    </transition>
 </div>
@@ -65,12 +65,12 @@ export default {
       },
       tagContent () {
          if (this.type === 'DM') {
-            if (this.charge_over_per >= 70) {
-               return '一直插电一直爽插电不耗油，倍儿爽'
-            } else if (this.charge_over_per >= 30 && this.charge_over_per < 70) {
-               return '短途用电 经济节省长途用油 动力强劲我为比亚迪混动车 “带盐”'
+            if (this.pageData.cPlacing >= 70) {
+               return '一直插电一直爽<br/>插电不耗油，倍儿爽'
+            } else if (this.pageData.cPlacing >= 30 && this.pageData.cPlacing < 70) {
+               return '短途用电 经济节省<br/>长途用油 动力强劲<br/>我为比亚迪混动车 “带盐”'
             } else {
-               return '这么土壕吗？买混动车是为了面儿还是牌儿？'
+               return '这么土壕吗？<br/>买混动车是为了<br/>面儿还是牌儿？'
             }
          } else if (this.type === 'EV') {
             return '比亚迪新能源，倍儿爽！'

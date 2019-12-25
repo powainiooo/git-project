@@ -105,11 +105,11 @@ export default {
          if (fuel === undefined && elect === undefined) {
             return ''
          } else if (fuel === undefined && elect !== undefined) {
-            return `全年总能耗<span class="value">{{elect}}</span>度`
+            return `全年总能耗<span class="value">${this.total_elect.toFixed(1)}</span>度`
          } else if (fuel !== undefined && elect === undefined) {
-            return `全年总能耗<span class="value">{{fuel}}</span>升`
+            return `全年总能耗<span class="value">${this.total_fuel.toFixed(1)}</span>升`
          } else if (fuel !== undefined && elect !== undefined) {
-            return `全年总能耗<span class="value">{{elect}}</span>度+<span class="value">{{fuel}}</span>升`
+            return `全年总能耗<span class="value">${this.total_elect.toFixed(1)}</span>度+<span class="value">${this.total_fuel.toFixed(1)}</span>升`
          }
       },
       saveMoney () {

@@ -1,5 +1,7 @@
 <style scoped>
 .z-car { width: 400px; height: 160px; transform-origin: 0 50%; transform: scale(0.55); position: absolute; left: 260px; bottom: 40px; z-index: 100; transition: all 1.1s linear;}
+.z-car-p0 { transform: scale(0.85); bottom: 56px; left: 204px;}
+.z-car-loading-over { transform: scale(0.85); bottom: 56px; left: 204px;}
 .z-car-p1 { transition-duration: 2s}
 .z-car-p2 { transform: scale(1); bottom: 86px;}
 .z-car-loading { transform: scale(0.3); bottom: 0; transition-duration: 0.1s;}

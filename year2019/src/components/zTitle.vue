@@ -1,5 +1,5 @@
 <style scoped>
-.z-title { width: 150px; position: fixed; top: 50px; left: 40px; z-index: 1000;}
+.z-title { width: 150px; position: fixed; top: 50px; left: 40px; z-index: 50;}
 .z-title img { width: 100%;}
 .z-title p { font-size: 24px; color: #0475B5; position: absolute; bottom: 6px; left: 10px;}
 .z-title .fadeIn { animation: fadeIn 1s linear;}
@@ -17,7 +17,7 @@
 
 <template>
 <transition enter-active-class="fadeIn">
-   <div class="z-title" v-if="currentPage !== 'loading'">
+   <div class="z-title" v-if="showTitle">
       <img src="@/assets/img/title2.png">
       <transition enter-active-class="nameIn" leave-active-class="nameOut" mode="out-in">
       <p v-if="showName !== ''">{{showName}}</p>
@@ -59,6 +59,12 @@ export default {
             return '穿越日记'
          }
       },
+      showTitle () {
+         if (this.currentPage === 'loading' || this.currentPage === 'p0' || this.currentPage === 'p10') {
+            return false
+         }
+         return true
+      }
    },
    watch: {
 	   name (val) {

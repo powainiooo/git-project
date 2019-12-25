@@ -78,14 +78,17 @@ export default {
          return Math.abs(this.value - this.useValue) > 0.2 ? '猜错，太不了解自己了！' : '选择正确，策无遗算！'
       },
       tagContent () {
-         if (this.average >= 3) {
+         if (this.useValue >= 3) {
             return '爱了！你就是传说中的<br/>DiLink达人！'
-         } else if (this.average >= 1 && this.average < 3) {
+         } else if (this.useValue >= 1 && this.useValue < 3) {
             return '流量用的少，路都很难找'
          } else {
             return '兄弟，咋的了~<br/>是不是你村里没信号？<br/>赶紧用起来！'
          }
-      }
+      },
+      pageData () {
+         return this.$store.state.pageData.P7
+      },
    },
    watch: {
       currentPage (val) {
@@ -97,15 +100,17 @@ export default {
    methods: {
       ruleIn () {
          this.ruleWidth = this.$refs.rule.offsetWidth
-         this.useValue = 3
-         this.avgValue = 4
+         this.useValue = this.pageData.avgFlow
+         this.avgValue = this.pageData.avgFlowAll
       },
       start (e) {
+         if (this.showResult) return
          this.startX = e.touches[0].pageX
          this.startLeft = this.left
          clearTimeout(this.t)
       },
       move (e) {
+         if (this.showResult) return
          e.preventDefault()
          this.moveX = e.touches[0].pageX
          this.left = this.startLeft + this.moveX - this.startX
@@ -114,6 +119,7 @@ export default {
          this.value = parseFloat(((this.left / this.ruleWidth) * 5).toFixed(1))
       },
       end () {
+         if (this.showResult) return
          this.t = setTimeout(() => {
             this.setResultPos()
             this.showResult = true

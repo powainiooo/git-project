@@ -122,14 +122,15 @@ export default {
                avg_voice_counts: this.pageData.avgVoiceCount,
             }
          )
-         this.timesEnter()
-         this.averageEnter()
+         this.timesEnter(this.pageData.voiceCount, this.pageData.avgVoiceCount)
+         this.averageEnter(this.pageData.voiceCount, this.pageData.avgVoiceCount)
       },
-      timesEnter () {
-         this.widthTimes = this.voice_counts > this.avg_voice_counts ? 100 : (this.voice_counts / this.avg_voice_counts) * 100
+      timesEnter (count, avg) {
+         this.widthTimes = count > avg ? 100 : (count / avg) * 100
+         console.log(this.widthTimes)
       },
-      averageEnter () {
-         this.widthAverage = this.avg_voice_counts > this.voice_counts ? 100 : (this.avg_voice_counts / this.voice_counts) * 100
+      averageEnter (count, avg) {
+         this.widthAverage = avg > count ? 100 : (avg / count) * 100
       }
    }
 }

@@ -2,7 +2,9 @@
 .z-page9 { width: 100%; height: 200px; position: fixed; bottom: 0; left: 0; z-index: 12; transition: all 1s linear;}
 .z-page9-show { height: 1060px; left: 0; bottom: 100px;}
 .z-page9 .fadeIn { animation: fadeIn 1s linear 1.5s both;}
+.z-page9 .fadeInRoad { animation: fadeIn 1s linear both;}
 .z-page9 .fadeOut { animation: fadeOut 1s linear;}
+.z-page9 .fadeOut0 { animation: fadeOut 0 linear;}
 .z-page9 .calandar { width: 600px; height: 1060px; background: url("../assets/img/calandar.png") no-repeat; background-size: 100%; position: absolute; left: 80px; top: 0;}
 .z-page9 .calandar .paper { width: 580px; position: absolute; left: 4px; top: 160px; z-index: 9;}
 .z-page9 .calandar .operas { width: 100%; height: 100%; position: absolute; top: 0; left: 0; z-index: 20;}
@@ -33,7 +35,7 @@
 
 <template>
 <div class="z-page9" :class="{'z-page9-show': showParts}" :style="{bottom: bottom + 'px'}">
-   <transition enter-active-class="fadeIn" leave-active-class="fadeOut">
+   <transition enter-active-class="fadeIn" leave-active-class="fadeOut0">
       <div class="calandar" v-show="showParts" ref="calandar">
          <div class="operas" @touchstart="tstart" @touchend="tend"></div>
          <img src="@/assets/img/paper.png" class="paper">
@@ -59,8 +61,11 @@
       </div>
    </transition>
 
-   <div class="bottom" v-if="showRoads">
-      <z-road :status="roadStatus"></z-road>
+   <transition enter-active-class="fadeIn" leave-active-class="fadeOut0">
+   <div class="bottom" v-if="showBottom">
+      <transition enter-active-class="fadeInRoad" leave-active-class="fadeOut">
+      <z-road :status="roadStatus" v-if="showRoad"></z-road>
+      </transition>
       <z-car :status="roadStatus"></z-car>
       <transition-group enter-active-class="fadeIn" leave-active-class="fadeOut">
       <!--<z-car :status="roadStatus" type="1" pos="1" v-if="showCars"></z-car>-->
@@ -74,6 +79,7 @@
       <z-car :status="roadStatus" type="2" pos="9" v-if="showCars" :key="9"></z-car>
       </transition-group>
    </div>
+   </transition>
 </div>
 </template>
 
@@ -93,14 +99,17 @@ export default {
          fitKeyList: [],
          startY: 0,
          roadStatus: 'move',
-         showRoads: true,
+         showBottom: true,
+         showRoad: true,
          bottom: 0
       }
    },
    watch: {
       currentPage (page) {
          this.bottom = 0
-         this.showRoads = true
+         this.showBottom = true
+         this.showRoad = true
+         clearInterval(this.tMove)
          if (page === 'p9') {
             this.$nextTick(() => {
                this.showKeyList = this.keyList.reverse()
@@ -109,8 +118,8 @@ export default {
             })
             this.roadStatus = 'stop'
             setTimeout(() => {
-               this.showRoads = false
-            }, 2500)
+               this.showBottom = false
+            }, 1500)
          } else if (page === 'p2') {
             this.roadStatus = 'stop'
          } else if (page === 'p5') {
@@ -120,6 +129,12 @@ export default {
                   this.roadStatus = this.roadStatus === 'stop' ? 'move' : 'stop'
                }, 4000)
             }
+         } else if (page === 'p10') {
+            this.showBottom = false
+         } else if (page === 'p0') {
+            this.showRoad = false
+         } else if (page === 'loading-over') {
+            this.showRoad = false
          } else {
             this.roadStatus = 'move'
          }
@@ -144,6 +159,7 @@ export default {
    },
    methods: {
       slidePages () {
+         if (this.fitKeyList.length === 1) return
          if (this.showHint) {
             this.showHint = false
          } else {

@@ -79,7 +79,9 @@ export default {
             if (this.pageData.tag === undefined) {
                this.tagName = ''
             } else {
-               this.tagName = this[page][this.pageData.tag]
+               if (page !== 'p10') {
+                  this.tagName = this[page][this.pageData.tag]
+               }
             }
          }
          this.$store.commit('changeTagName', this.tagName)

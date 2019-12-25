@@ -1,7 +1,7 @@
 <style scoped>
-.z-page-share { width: 100%; height: 100vh; overflow: hidden; position: fixed; top: 0; left: 0; z-index: 12;}
-.z-page-share .fadeIn { animation: fadeIn 1s linear 1.5s both;}
-.z-page-share .fadeOut { animation: fadeOut 1s linear;}
+.z-page-share { width: 100%; height: 100vh; overflow: hidden; position: fixed; top: 0; left: 0; z-index: 15; background: url("../assets/img/bg.jpg") repeat;}
+.z-page-share-fadeIn { animation: fadeIn 1s linear both;}
+.z-page-share-fadeOut { animation: fadeOut 1s linear;}
 .z-page-share .poster { width: 720px; height: 1174px; margin: 15px auto; background-color: rgba(0, 0, 0, 0)}
 .z-page-share .poster canvas { width: 100%; height: 100%;}
 .z-page-share .btns { display: flex; justify-content: space-between; margin: 0 36px;}
@@ -9,17 +9,17 @@
 </style>
 
 <template>
-<div class="z-page-share" :style="{'z-index':showParts ? 10 : 5}">
-   <transition enter-active-class="fadeIn" leave-active-class="fadeOut">
-      <div class="poster" v-if="showParts">
+<transition enter-active-class="z-page-share-fadeIn" leave-active-class="z-page-share-fadeOut">
+<div class="z-page-share" v-show="showParts">
+      <div class="poster">
          <canvas width="720" height="1174" ref="poster"></canvas>
       </div>
-   </transition>
-   <div class="btns" v-if="showParts">
+   <div class="btns">
       <a href="javascript:;">分享</a>
       <a href="javascript:;">保存图片</a>
    </div>
 </div>
+</transition>
 </template>
 
 <script type='es6'>
@@ -29,7 +29,7 @@ export default {
       return {
          outTime: 1000,
          max: 100,
-         values: [90, 90, 90, 90, 90, 90],
+         // values: [90, 90, 90, 90, 90, 90],
          hasPoster: false
       }
    },
@@ -40,10 +40,26 @@ export default {
       showParts () {
          return this.currentPage === 'p10'
       },
+      pageData () {
+         return this.$store.state.pageData.P10
+      },
+      values () {
+         let arr = []
+         if (this.pageData !== undefined) {
+            arr.push(this.pageData.score.techno || 0)
+            arr.push(this.pageData.score.routine || 0)
+            arr.push(this.pageData.score.intell || 0)
+            arr.push(this.pageData.score.entert || 0)
+            arr.push(this.pageData.score.envir || 0)
+            arr.push(this.pageData.score.energy || 0)
+         }
+         return arr
+      }
    },
    watch: {
-      currentPage (page, lastPage) {
-         if (page === 'share') {
+      pageData (data) {
+         if (data !== undefined) {
+            console.log('startDraw')
             this.loadAll()
          }
       }
@@ -56,7 +72,7 @@ export default {
          arr.push(this.loadImgs('/static/poster/title.png'))
          arr.push(this.loadImgs('/static/poster/qrcode.png'))
          arr.push(this.loadImgs('/static/poster/rada.png'))
-         arr.push(this.loadImgs('/static/poster/baozou.png'))
+         arr.push(this.loadImgs(`/static/poster/${this.pageData.tag}.png`))
          Promise.all(arr).then(res=>{
             this.drawPoster(res)
          })
@@ -95,8 +111,8 @@ export default {
          const cy = y + 113
          ctx.drawImage(res[3], x, y)
          //雷达中心点
-         ctx.fillStyle = '#f00'
-         ctx.fillRect(cx, cy, 2, 2)
+         // ctx.fillStyle = '#f00'
+         // ctx.fillRect(cx, cy, 2, 2)
          //雷达区域
          const list = this.getCords(this.values)
          ctx.beginPath()

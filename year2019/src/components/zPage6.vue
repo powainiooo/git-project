@@ -10,7 +10,7 @@
 </style>
 
 <template>
-<div class="z-page6" :style="{'z-index':showParts ? 10 : 5}">
+<div class="z-page6" :style="{'z-index':showParts ? 13 : 5}">
    <transition enter-active-class="slideUpIn1" leave-active-class="fadeOut" @after-enter="enter">
       <div class="data-content" v-if="showParts">
          <p v-if="mostControl !== 0">今年你使用最多的远程控制是</p>
@@ -39,7 +39,7 @@
    </transition>
    <transition enter-active-class="slideUpIn2" leave-active-class="fadeOut">
       <div class="data-content" v-if="showParts && showUnUse">
-         <p>你最不常使用的是<span>{{unUseFunction}}</span></p>
+         <p>你最不常使用的是<span>{{unUseList[unUseFunction]}}</span></p>
          <p v-if="unUseFunction === 1">夏天不热冬天不冷</p>
          <p v-else-if="unUseFunction === 2">你有健忘症吗？出门忘带钥匙</p>
          <p v-else-if="unUseFunction === 3">闪灯鸣笛也很炫酷</p>
@@ -66,7 +66,8 @@ export default {
          outTime: 1000,
          most_control_counts: 0,
          numsInterval: 1,
-         unUseFunction: '解锁/上锁'
+         unUseFunction: '解锁/上锁',
+         unUseList: ['', '开/关空调', '解锁/上锁', '闪灯鸣笛', '远程升窗']
       }
    },
    computed: {

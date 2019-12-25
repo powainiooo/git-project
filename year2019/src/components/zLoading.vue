@@ -76,7 +76,9 @@ export default {
          })
       },
       getData(){
-         let data = 'F/WTJVAVEPkjP0+wvIeowcWeC+G57LU4QEw7zUHLEY8upe0QV9AOxLSJbftzI7wxLOQ4NIFwSTdt+cqj+hbxXIOxlTswCdUIxTCRaa0o5SggQVaq7i/Zrcib8sMuQ/mjBtNDVs4DTe2vWk3Z+LYLp+IvGZUI+F12S9RHEkyBiEletjiXGLxsPfdriVc15bflPnVav9qjfzwBkMVL0mtUEYDTeu2vvRIlalfc9m46mTMcmOS7Uux9WBUtICRYIf8KjxMdETVKecC8TqkesYmEUqRNwT9sCq6fYcv2eqke/8XaNaJejNk07UV7ZkjqyfyPpW4yKlolbx2abUxHqkKNCVIjh4ulypZb19hmtnNeIFw95kcujran/KAkckqf4Z1MR';
+         let data = 'F/WTJVAVEPkjP0+wvIeowcbgr+uaOODKjFLtuBYjOOt7fmS8aopECWTxyJWJ6vThqxUbQQ0OxPnjR71NC037H7ibskTpAtz4R6ta9kDNTuEMWRnktjJJJ/WqUMhN23c7vTOSvsJVCx66jZL7kQe+CX/vM13BqyTb14Ul4dwU6aELAKWwSFPQZ76I7VONHrL4mOZVGCBPk6WAX+cYcNzTT84Jn5TEi1oIJA4vCtraqLWi8TQmXcij0HrE5hnndVBkpp0ck1+4JDFTC1g+gOCPvDqkGlwsM4hFx4PrjLveA3icIDJXPOKRwfu7gL/Hi4kt1rhqt4OhTI9sW26dq1SWKw2SaIUUdWpcl8ik6LZOtFo7o97YqUNhcYJagMWIQzSqL';
+         // F/WTJVAVEPkjP0+wvIeowcWeC+G57LU4QEw7zUHLEY8upe0QV9AOxLSJbftzI7wxLOQ4NIFwSTdt+cqj+hbxXIOxlTswCdUIxTCRaa0o5SggQVaq7i/Zrcib8sMuQ/mjBtNDVs4DTe2vWk3Z+LYLp+IvGZUI+F12S9RHEkyBiEletjiXGLxsPfdriVc15bflPnVav9qjfzwBkMVL0mtUEYDTeu2vvRIlalfc9m46mTMcmOS7Uux9WBUtICRYIf8KjxMdETVKecC8TqkesYmEUqRNwT9sCq6fYcv2eqke/8XaNaJejNk07UV7ZkjqyfyPpW4yKlolbx2abUxHqkKNCVIjh4ulypZb19hmtnNeIFw95kcujran/KAkckqf4Z1MR  杨锦伦
+         // F/WTJVAVEPkjP0+wvIeowcbgr+uaOODKjFLtuBYjOOt7fmS8aopECWTxyJWJ6vThqxUbQQ0OxPnjR71NC037H7ibskTpAtz4R6ta9kDNTuEMWRnktjJJJ/WqUMhN23c7vTOSvsJVCx66jZL7kQe+CX/vM13BqyTb14Ul4dwU6aELAKWwSFPQZ76I7VONHrL4mOZVGCBPk6WAX+cYcNzTT84Jn5TEi1oIJA4vCtraqLWi8TQmXcij0HrE5hnndVBkpp0ck1+4JDFTC1g+gOCPvDqkGlwsM4hFx4PrjLveA3icIDJXPOKRwfu7gL/Hi4kt1rhqt4OhTI9sW26dq1SWKw2SaIUUdWpcl8ik6LZOtFo7o97YqUNhcYJagMWIQzSqL  张绍裕
          try{
             this.dataLoadOver = true;
             // this.steps += 1;
@@ -107,7 +109,9 @@ export default {
             if (data[`P${i}`] !== undefined) {
                pageList.push(`p${i}`)
                if (i === 0) {
-
+                  imgsList.push('static/bg0.png')
+                  imgsList.push('static/bg0-top.png')
+                  imgsList.push('static/ticket.png')
                } else if (i === 1) {
                   imgsList.push('static/earth.png')
                } else if (i === 2) {
@@ -153,7 +157,6 @@ export default {
          if(this.imgLoadOver && this.dataLoadOver){
             setTimeout(() => {
                this.$store.commit('changePage', 'loading-over')
-               console.log(this.pageList[0])
                setTimeout(() => {
                   this.$store.commit('changePage', this.pageList[0])
                }, this.outTime)

@@ -2,7 +2,7 @@
 .z-page3 { width: 100%; height: 100vh; overflow: hidden; position: fixed; top: 0; left: 0; z-index: 12;}
 .z-page3 .content1 { top: 240px; left: 120px;}
 .z-page3 .tag-content { top: 410px; left: 120px;}
-.z-page3 .content2 { top: 710px; left: 120px;}
+.z-page3 .content2 { top: 610px; left: 120px;}
 .z-page3 .recharge { width: 250px; position: absolute; bottom: 94px; left: 84px;}
 .z-page3 .fadeIn { animation: fadeIn 1s linear 1.5s both;}
 .z-page3 .fadeOut { animation: fadeOut 0.5s linear;}

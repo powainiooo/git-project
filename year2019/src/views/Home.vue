@@ -79,8 +79,8 @@ export default {
          return this.$store.state.tagName
       },
       pageList () {
-         // return this.$store.state.pageList
-         return ['p0', 'p9']
+         return this.$store.state.pageList
+         // return ['p0', 'p8']
       }
    },
    watch: {

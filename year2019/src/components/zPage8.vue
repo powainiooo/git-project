@@ -22,8 +22,8 @@
    <transition enter-active-class="slideUpIn1" leave-active-class="fadeOut">
       <div class="data-content content1" v-if="showParts">
          <p>过去一年</p>
-         <p>你共使用APP<span class="value">{{nums}}</span>个，使用总时长为<span class="value">{{hours}}</span>小时</p>
-         <p>你最常用的应用有<span>{{app1}}、{{app2}}</span></p>
+         <p>你共使用APP<span class="value">{{parseFloat(nums.toFixed(1))}}</span>个，使用总时长为<span class="value">{{hours.toFixed(0)}}</span>小时</p>
+         <p>你最常用的应用有<span>{{topApp}}</span></p>
       </div>
    </transition>
    <transition enter-active-class="slideUpIn2" leave-active-class="fadeOut" @after-enter="enter">
@@ -33,10 +33,10 @@
             <li style="color: #0475B5">全国平均时长</li>
          </ul>
          <div class="line" :style="{'width': widthHours + '%'}">
-            <span>{{hours}}次</span>
+            <span>{{hours.toFixed(0)}}次</span>
          </div>
          <div class="line line-all" :style="{'width': widthAverage + '%'}">
-            <span>{{average}}次</span>
+            <span>{{average.toFixed(1)}}次</span>
          </div>
       </div>
    </transition>
@@ -53,8 +53,7 @@ export default {
          nums: 0,
          hours: 0,
          average: 0,
-         app1: '网易云音乐',
-         app2: '抖音',
+         topApp: '',
          widthHours: 0,
          widthAverage: 0,
          numsInterval: 1,
@@ -66,6 +65,9 @@ export default {
       },
       showParts () {
          return this.currentPage === 'p8'
+      },
+      pageData () {
+         return this.$store.state.pageData.P8
       },
    },
    watch: {
@@ -84,15 +86,16 @@ export default {
          this.average = 0
       },
       enter () {
-         const hours = 30
-         const average = 30
+         const hours = this.pageData.appTime
+         const average = this.pageData.appTimeAvg
+         this.topApp = this.pageData.topApp
          TweenLite.to(
             this.$data,
             this.numsInterval,
             {
-               nums: 30,
-               hours: 30,
-               average: 30,
+               nums: this.pageData.appCounts,
+               hours,
+               average,
             }
          )
          if (hours > average) {

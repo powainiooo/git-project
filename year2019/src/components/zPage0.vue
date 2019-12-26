@@ -18,18 +18,20 @@
 .z-page0 .ticket .content div .title { color: #F84F1C}
 .z-page0 .ticket .content div span { color: #0475B5}
 .z-page0:after { content: '';  width: 100%; height: 130px; background-color: #A9E4F5; position: absolute; bottom: 0; left: 0;}
+.z-page0 .arrow { width: 100%; font-size: 24px; color: #ffffff; justify-content: center; align-items: center; display: flex; position: absolute; top: 1050px; left: 0;}
+.z-page0 .arrow img { width: 40px; margin-left: 20px;}
 </style>
 
 <template>
-<transition enter-active-class="z-page0-fadeIn" leave-active-class="z-page0-fadeOut">
+<transition enter-active-class="z-page0-fadeIn" leave-active-class="z-page0-fadeOut" @after-enter="enter">
    <div class="z-page0" v-if="showParts">
       <img src="static/bg0.png" class="bg">
       <img src="static/bg0-top.png" class="bg-top">
       <div class="ticket">
          <img src="static/ticket.png">
-         <img src="static/badge.png" class="badge">
+         <img :src="'static/badge/'+pageData.tag+'.png'" class="badge">
          <div class="content">
-            <p>Hi～ <span class="name">梵哲希</span> 同学</p>
+            <p>Hi～ <span class="name">{{params.userName}}</span> 同学</p>
             <div>
                综合您在2019年的用车表现<br/>
                特授予您<span class="title">{{tagName}}</span>科技宅称号
@@ -37,6 +39,7 @@
             <div v-html="content"></div>
          </div>
       </div>
+      <div class="arrow">左滑查看年报<img src="@/assets/img/arrow2.png"></div>
    </div>
 </transition>
 </template>
@@ -73,22 +76,22 @@ export default {
             if (this.isDiLink) {
                if (this.type === 'gasoline') {
                   if (this.pageData.tag === 0) {
-                     return `在<span>${this.pageData.recommend}</span>方面还有待提升，我很好得，一得就能得到哦`
+                     return `在<span style="color: #0475B5">${this.pageData.recommend}</span>方面还有待提升，我很好得，一得就能得到哦`
                   } else {
-                     return `但在<span>${this.pageData.recommend}</span>方面还有欠缺，2020年看你表现喽`
+                     return `但在<span style="color: #0475B5">${this.pageData.recommend}</span>方面还有欠缺，2020年看你表现喽`
                   }
                } else {
                   if (this.pageData.tag === 0) {
-                     return `在<span>${this.pageData.recommend}</span>方面还有待提升，我很好得，一得就能得到哦`
+                     return `在<span style="color: #0475B5">${this.pageData.recommend}</span>方面还有待提升，我很好得，一得就能得到哦`
                   } else {
-                     return `但在<span>${this.pageData.recommend}</span>方面还有欠缺，2020年看你表现喽`
+                     return `但在<span style="color: #0475B5">${this.pageData.recommend}</span>方面还有欠缺，2020年看你表现喽`
                   }
                }
             } else {
                if (this.type === 'gasoline') {
-                  return `但在<span>${this.pageData.recommend}</span>方面还有欠缺，2020年看你表现喽`
+                  return `但在<span style="color: #0475B5">${this.pageData.recommend}</span>方面还有欠缺，2020年看你表现喽`
                } else {
-                  return `但在<span>${this.pageData.recommend}</span>方面还有欠缺，2020年看你表现喽`
+                  return `但在<span style="color: #0475B5">${this.pageData.recommend}</span>方面还有欠缺，2020年看你表现喽`
                }
             }
          }
@@ -99,17 +102,15 @@ export default {
          } else {
             return this.tagList[this.pageData.tag]
          }
-      }
-   },
-   watch: {
-      currentPage (page, lastPage) {
-         if (lastPage === 'p0') {
-            // this.reset()
-         }
+      },
+      params () {
+         return this.$store.state.params
       }
    },
 	methods: {
-      reset () {}
+      enter () {
+         this.$store.commit('setCanChangePage', true)
+      }
    }
 }
 </script>

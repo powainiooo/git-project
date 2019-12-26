@@ -3,15 +3,57 @@
 <head>
    <meta charset="utf-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+   <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no,viewport-fit=cover">
    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
    <!--<script src="TweenMax.min.js"></script>-->
    <title>BYD2019年度报告</title>
    <script>
    //annualReport.doShare() getErrorData(String errorJson)
+   const u = navigator.userAgent
+   const isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1 // g
+   const isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/) // ios终端
+   // 分享调用
+   function doShare (label) {
+	   console.log(label)
+	   if (isAndroid) {
+		   annualReport.doShare(label)
+	   }
+	   if (isIOS) {
+		   window.webkit.messageHandlers.doShare.postMessage(label)
+	   }
+   }
+   // 报错调用
+   function getErrorData (err) {
+	   console.log(err)
+	   if (isAndroid) {
+		   annualReport.getErrorData(err)
+	   }
+	   if (isIOS) {
+		   window.webkit.messageHandlers.getErrorData.postMessage(err)
+	   }
+   }
+   // 脚印数据
+   var footPrinter = {}
+   //进入页面开始时间
+   intoPageStartTime = 0
+   // 停留时长
+   footPrinter.stayTime = {}
+   // 浏览到的最大页面
+   footPrinter.lastPage = 1
+   // 当前页
+   footPrinter.currentPage = '1'
+   // 回退次数
+   footPrinter.backTimes = 0
+   // 保存图片次数
+   footPrinter.savePosterTimes = 0
+
+   function pageOutFunc() {
+      let time = new Date().getTime()
+	   footPrinter.stayTime[footPrinter.currentPage] += time - intoPageStartTime
+   }
    </script>
 </head>
-<body>
+<body ontouchmove="event.preventDefault()">
 <noscript>
    <strong>We're sorry but year2019 doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
 </noscript>
@@ -22,7 +64,16 @@
 <!--
 bydi
 guihuaIsys
-10.9.32.51
-10.9.32.19
-/home/bydi/sysapp/apache-tomcat-8.0.26/webapps/nianbao/
+10.9.32.51  /home/bydi/sysapp/apache-tomcat-8.0.32/webapps/nianbao/
+10.9.32.19  /home/bydi/sysapp/apache-tomcat-8.0.26/webapps/nianbao/
+
+
+https://webtestservice.bydauto.com.cn:5011/nianbao/
+https://10.9.31.89:5011/nianbao/
+
+10.198.100.52
+10.198.100.53
+用户名root
+密码Q1w2e3r4
+
 -->

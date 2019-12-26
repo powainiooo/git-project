@@ -91,9 +91,10 @@ export default {
       },
    },
    watch: {
-      currentPage (val) {
-         if (val === 'p7') {
+      currentPage (page) {
+         if (page === 'p7') {
             // this.ruleWidth = this.$refs.rule.offsetWidth
+            this.$store.commit('setCanChangePage', this.showResult)
          }
       }
    },
@@ -123,6 +124,7 @@ export default {
          this.t = setTimeout(() => {
             this.setResultPos()
             this.showResult = true
+            this.$store.commit('setCanChangePage', this.showResult)
          }, 2000)
       },
       setResultPos () {

@@ -1,9 +1,11 @@
 <style scoped>
 .z-page-share { width: 100%; height: 100vh; overflow: hidden; position: fixed; top: 0; left: 0; z-index: 15; background: url("../assets/img/bg.jpg") repeat;}
-.z-page-share-fadeIn { animation: fadeIn 1s linear both;}
-.z-page-share-fadeOut { animation: fadeOut 1s linear;}
-.z-page-share .poster { width: 720px; height: 1174px; margin: 15px auto; background-color: rgba(0, 0, 0, 0)}
-.z-page-share .poster canvas { width: 100%; height: 100%;}
+.z-page-share-fadeIn { animation: fadeIn 0.5s linear both;}
+.z-page-share-fadeOut { animation: fadeOut 0.5s linear;}
+.z-page-share .poster { width: 720px; height: 1174px; margin: 15px auto; background-color: rgba(0, 0, 0, 0); position: relative;}
+.z-page-share .poster img { width: 100%; height: 100%;}
+.z-page-share .poster .btn-back { width: 40px; height: auto; position: absolute; bottom: 40px; left: 40px;}
+.z-page-share canvas { width: 720px; height: 1174px; position: absolute; top: -10000px; left: 0;}
 .z-page-share .btns { display: flex; justify-content: space-between; margin: 0 36px;}
 .z-page-share .btns a { width: 320px; height: 90px; display: flex; justify-content: center; align-items: center; background-color: #0475B5;  font-size: 36px; color: #ffffff; text-decoration: none;}
 </style>
@@ -12,12 +14,14 @@
 <transition enter-active-class="z-page-share-fadeIn" leave-active-class="z-page-share-fadeOut">
 <div class="z-page-share" v-show="showParts">
       <div class="poster">
-         <canvas width="720" height="1174" ref="poster"></canvas>
+         <img :src="posterSrc"/>
+         <img src="@/assets/img/arrow2.png" class="btn-back" @click="doReview">
       </div>
    <div class="btns">
-      <a href="javascript:;">分享</a>
-      <a href="javascript:;">保存图片</a>
+      <a href="javascript:;" @click="doShare">分享</a>
+      <a :href="posterSrc" download="比亚迪年报评分图">保存图片</a>
    </div>
+   <canvas width="720" height="1174" ref="poster"></canvas>
 </div>
 </transition>
 </template>
@@ -30,7 +34,9 @@ export default {
          outTime: 1000,
          max: 100,
          // values: [90, 90, 90, 90, 90, 90],
-         hasPoster: false
+         tagList: ['山顶洞人', '科技宅', '节能家', '暴走家', '环保家', '语音控', '潮人范儿'],
+         hasPoster: false,
+         posterSrc: ''
       }
    },
    computed: {
@@ -57,9 +63,13 @@ export default {
       }
    },
    watch: {
+      currentPage (page, lastPage) {
+         if (page === 'p10') {
+            this.$store.commit('setCanChangePage', false)
+         }
+      },
       pageData (data) {
          if (data !== undefined) {
-            console.log('startDraw')
             this.loadAll()
          }
       }
@@ -93,6 +103,10 @@ export default {
       drawPoster (res) {
          const canvas = this.$refs.poster
          const ctx = canvas.getContext('2d')
+         // 背景色
+         ctx.fillStyle = '#DCF4FE'
+         ctx.fillRect(0, 0, 750, 1174)
+         // 边框
          ctx.strokeStyle = '#0475B5'
          ctx.lineWidth = 5
          ctx.strokeRect(22, 22, 676, 1130)
@@ -101,7 +115,7 @@ export default {
          // 标题图片
          ctx.drawImage(res[1], 65, 260)
          // 二维码
-         ctx.drawImage(res[2], 71, 964)
+         ctx.drawImage(res[2], 71, 940)
          // 内容图
          ctx.drawImage(res[4], 23, 452)
          // 雷达底图
@@ -134,6 +148,8 @@ export default {
          grdFill.addColorStop(1, 'rgba(68, 0, 255, 0.1)')
          ctx.fillStyle = grdFill
          ctx.fill()
+
+         this.posterSrc = canvas.toDataURL('image/png')
       },
       getCords (vals) {
          const x = 416
@@ -160,8 +176,14 @@ export default {
                arr.push([cx - lin, cy - dui])
             }
          }
-         console.log(arr)
          return arr
+      },
+      doShare () {
+         doShare(this.tagList[this.pageData.tag])
+      },
+      doReview () {
+         console.log(this)
+         this.$parent.review()
       }
    }
 }

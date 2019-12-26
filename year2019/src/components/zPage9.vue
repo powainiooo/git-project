@@ -3,7 +3,7 @@
 .z-page9-show { height: 1060px; left: 0; bottom: 100px;}
 .z-page9 .fadeIn { animation: fadeIn 1s linear 1.5s both;}
 .z-page9 .fadeInRoad { animation: fadeIn 1s linear both;}
-.z-page9 .fadeOut { animation: fadeOut 1s linear;}
+.z-page9 .fadeOut { animation: fadeOut 0.4s linear;}
 .z-page9 .fadeOut0 { animation: fadeOut 0 linear;}
 .z-page9 .calandar { width: 600px; height: 1060px; background: url("../assets/img/calandar.png") no-repeat; background-size: 100%; position: absolute; left: 80px; top: 0;}
 .z-page9 .calandar .paper { width: 580px; position: absolute; left: 4px; top: 160px; z-index: 9;}
@@ -63,7 +63,7 @@
 
    <transition enter-active-class="fadeIn" leave-active-class="fadeOut0">
    <div class="bottom" v-if="showBottom">
-      <transition enter-active-class="fadeInRoad" leave-active-class="fadeOut">
+      <transition enter-active-class="fadeInRoad" leave-active-class="fadeOut0">
       <z-road :status="roadStatus" v-if="showRoad"></z-road>
       </transition>
       <z-car :status="roadStatus"></z-car>
@@ -92,34 +92,40 @@ export default {
    components: {zCar, zRoad, zDiary},
    data() {
       return {
-         outTime: 1000,
+         outTime: 0,
          showHint: true,
-         // keyList: ['city', 'travel', 'late', 'high', 'air', 'status', 'energy', 'unlock', 'whistle', 'music', 'game', 'learn'],
+         // useKeyList: ['city', 'travel', 'late', 'high', 'air', 'status', 'energy', 'unlock', 'whistle', 'music', 'game', 'learn'],
          showKeyList: [],
          fitKeyList: [],
          startY: 0,
          roadStatus: 'move',
          showBottom: true,
          showRoad: true,
-         bottom: 0
+         bottom: 0,
+         startTime: 0,
+         lastPage: ''
       }
    },
    watch: {
-      currentPage (page) {
+      currentPage (page, lastPage) {
+         if (lastPage !== '') this.lastPage = lastPage
+         console.log(this.lastPage)
          this.bottom = 0
          this.showBottom = true
          this.showRoad = true
          clearInterval(this.tMove)
          if (page === 'p9') {
             this.$nextTick(() => {
-               this.showKeyList = this.keyList.reverse()
-               this.fitKeyList = [].concat(this.keyList)
+               this.showKeyList = this.useKeyList.reverse()
+               this.fitKeyList = [].concat(this.useKeyList)
                this.bottom = (window.innerHeight - this.$refs.calandar.offsetHeight) / 2
             })
             this.roadStatus = 'stop'
             setTimeout(() => {
                this.showBottom = false
+               this.startTime = new Date().getTime()
             }, 1500)
+            this.$store.commit('setCanChangePage', false)
          } else if (page === 'p2') {
             this.roadStatus = 'stop'
          } else if (page === 'p5') {
@@ -133,10 +139,15 @@ export default {
             this.showBottom = false
          } else if (page === 'p0') {
             this.showRoad = false
+            this.roadStatus = 'stop'
          } else if (page === 'loading-over') {
             this.showRoad = false
+            this.roadStatus = 'stop'
          } else {
             this.roadStatus = 'move'
+         }
+         if (this.lastPage === 'p10') {
+            this.showRoad = false
          }
       }
    },
@@ -150,8 +161,14 @@ export default {
       tagName () {
          return this.$store.state.tagName
       },
-      keyList () {
+      useKeyList () {
          return this.$store.state.useKeyList
+      },
+      keyList () {
+         return this.$store.state.keyList
+      },
+      canChangePage () {
+         return this.$store.state.canChangePage
       },
       showCars () {
          return this.currentPage === 'p5' && this.tagName === '上班族'
@@ -162,17 +179,37 @@ export default {
          if (this.fitKeyList.length === 1) return
          if (this.showHint) {
             this.showHint = false
+            this.setP9PageName()
          } else {
             this.fitKeyList.pop()
+            this.setP9PageName()
+         }
+         if (this.fitKeyList.length === 1) {
+            this.$store.commit('setCanChangePage', true)
          }
       },
+      setP9PageName () {
+         let time = new Date().getTime()
+         let key = this.fitKeyList[this.fitKeyList.length - 1]
+         let i = this.keyList.findIndex(i => i === key)
+         let name = `stayTimeP${i + 12}`
+         window.footPrinter.currentPage = name
+         window.footPrinter.stayTime[name] += time - this.startTime
+         this.startTime = time
+      },
       tstart (e) {
-         this.startY = e.touches[0].pageY
+         if (!this.canChangePage) {
+            e.stopPropagation()
+            this.startY = e.touches[0].pageY
+         }
       },
       tend (e) {
-         const endy = e.changedTouches[0].pageY
-         if (endy > this.startY + 50) {
-            this.slidePages()
+         if (!this.canChangePage) {
+            e.stopPropagation()
+            const endy = e.changedTouches[0].pageY
+            if (endy > this.startY + 50) {
+               this.slidePages()
+            }
          }
       }
    }

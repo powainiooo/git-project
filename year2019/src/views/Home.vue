@@ -1,14 +1,17 @@
 <style>
 .home { width: 100%; height: 100vh; overflow: hidden; position: relative;}
 button { width: 100px; margin: 0 10px;}
+.home .arrow { width: 40px; position: absolute; top: 50%; right: 42px; margin-top: -16px; z-index: 50;}
+.home .fadeInA { animation: fadeIn 0.3s linear;}
+.home .fadeOutA { animation: fadeOut 0.3s linear;}
 </style>
 
 <template>
-<div class="home">
-   <div style="position: absolute; top: 0; left: 0; z-index: 10000">
-      <button @click="changePage('prev')">prev</button>
-      <button @click="changePage('next')">next</button>
-   </div>
+<div class="home" @touchstart="tstart" @touchend="tend" v-if="showPages">
+   <!--<div style="position: absolute; top: 0; left: 0; z-index: 10000">-->
+      <!--<button @click="changePage('prev')">prev</button>-->
+      <!--<button @click="changePage('next')">next</button>-->
+   <!--</div>-->
    <z-title></z-title>
    <z-tag></z-tag>
    <z-loading ref="loading"></z-loading>
@@ -23,6 +26,10 @@ button { width: 100px; margin: 0 10px;}
    <z-page8 ref="p8"></z-page8>
    <z-page9 ref="p9"></z-page9>
    <z-page-share ref="p10"></z-page-share>
+   <transition enter-active-class="fadeInA" leave-active-class="fadeOutA">
+      <img src="@/assets/img/arrow.png" class="arrow" v-if="canChangePage && currentPage !== 'p0'"/>
+   </transition>
+
 </div>
 </template>
 
@@ -66,10 +73,16 @@ export default {
    },
    data() {
       return {
-         roadStatus: 'move',
          pageIndex: 0,
-         tMove: 0
+         tMove: 0,
+         startTime: 0,
+         startX: 0,
+         showPages: true
       }
+   },
+   mounted () {
+      this.startTime = new Date().getTime()
+      window.intoPageStartTime = this.startTime
    },
    computed: {
       currentPage () {
@@ -80,20 +93,36 @@ export default {
       },
       pageList () {
          return this.$store.state.pageList
-         // return ['p0', 'p8']
+         // return ['p0', 'p9', 'p10']
+      },
+      canChangePage () {
+         return this.$store.state.canChangePage
       }
    },
    watch: {
-      currentPage (page) {
-         if (page === 'p2') {
-            this.roadStatus = 'stop'
-         } else if (page === 'p2') {
-            this.roadStatus = 'move'
-            // this.tMove = setInterval(() => {
-            //    this.roadStatus = this.roadStatus === 'stop' ? 'move' : 'stop'
-            // }, 3000)
-         } else {
-            this.roadStatus = 'move'
+      currentPage (page, lastPage) {
+         // console.log('page:'+page+';lastPage:'+lastPage)
+         if (lastPage !== '' && lastPage !== 'loading-over') {
+            const time = new Date().getTime()
+            if (lastPage === 'loading') {
+               window.footPrinter.stayTime.stayTimeP1 += time - this.startTime
+            } else if (lastPage === 'p10') {
+               window.footPrinter.stayTime.stayTimeP1 += time - this.startTime
+            } else {
+               let i = parseInt(lastPage.replace('p', ''))
+               window.footPrinter.stayTime[`stayTimeP${i + 2}`] += time - this.startTime
+            }
+            this.startTime = time
+            window.intoPageStartTime = time
+         }
+
+         if (page !== '' && page !== 'loading-over') {
+            if (page === 'p10') {
+               window.footPrinter.currentPage = 'stayTimeP24'
+            } else {
+               let i = parseInt(page.replace('p', ''))
+               window.footPrinter.currentPage = `stayTimeP${i + 2}`
+            }
          }
       }
    },
@@ -112,12 +141,33 @@ export default {
       gotoPage (page) {
          const nowPage = this.$refs[this.currentPage]
          this.$store.commit('changePage', '')
+         // this.$store.commit('changePage', page)
          setTimeout(() => {
             this.$store.commit('changePage', page)
-            if (page === 'p2') {
-               this.roadStatus = 'stop'
-            }
          }, nowPage.outTime)
+      },
+      tstart (e) {
+         if (!this.canChangePage) return
+         this.startX = e.touches[0].pageX
+      },
+      tend (e) {
+         if (!this.canChangePage) return
+         const endx = e.changedTouches[0].pageX
+         if (endx < this.startX - 50) {
+            this.changePage('next')
+         } else if (endx > this.startX + 50) {
+            this.changePage('prev')
+         }
+      },
+      review () {
+         this.showPages = false
+         this.$nextTick(() => {
+            this.showPages = true
+            this.pageIndex = 0
+            this.$nextTick(() => {
+               this.gotoPage(this.pageList[this.pageIndex])
+            })
+         })
       }
    }
 }

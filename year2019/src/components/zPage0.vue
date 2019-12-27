@@ -31,10 +31,10 @@
          <img src="static/ticket.png">
          <img :src="'static/badge/'+pageData.tag+'.png'" class="badge">
          <div class="content">
-            <p>Hi～ <span class="name">{{params.userName}}</span> 同学</p>
+            <p>Hi～ <span class="name">{{userName}}</span> 同学</p>
             <div>
-               综合您在2019年的用车表现<br/>
-               特授予您<span class="title">{{tagName}}</span>科技宅称号
+               综合你在2019年的用车表现<br/>
+               特授予你<span class="title">{{tagName}}</span>科技宅称号
             </div>
             <div v-html="content"></div>
          </div>
@@ -73,26 +73,10 @@ export default {
          if (this.pageData === undefined) {
             return ''
          } else {
-            if (this.isDiLink) {
-               if (this.type === 'gasoline') {
-                  if (this.pageData.tag === 0) {
-                     return `在<span style="color: #0475B5">${this.pageData.recommend}</span>方面还有待提升，我很好得，一得就能得到哦`
-                  } else {
-                     return `但在<span style="color: #0475B5">${this.pageData.recommend}</span>方面还有欠缺，2020年看你表现喽`
-                  }
-               } else {
-                  if (this.pageData.tag === 0) {
-                     return `在<span style="color: #0475B5">${this.pageData.recommend}</span>方面还有待提升，我很好得，一得就能得到哦`
-                  } else {
-                     return `但在<span style="color: #0475B5">${this.pageData.recommend}</span>方面还有欠缺，2020年看你表现喽`
-                  }
-               }
+            if (this.pageData.tag === 0) {
+               return `在<span style="color: #0475B5">${this.pageData.recommend}</span>方面还有待提升，我很好得，一得就能得到哦`
             } else {
-               if (this.type === 'gasoline') {
-                  return `但在<span style="color: #0475B5">${this.pageData.recommend}</span>方面还有欠缺，2020年看你表现喽`
-               } else {
-                  return `但在<span style="color: #0475B5">${this.pageData.recommend}</span>方面还有欠缺，2020年看你表现喽`
-               }
+               return `但在<span style="color: #0475B5">${this.pageData.recommend}</span>方面还有欠缺，2020年看你表现喽`
             }
          }
       },
@@ -105,6 +89,14 @@ export default {
       },
       params () {
          return this.$store.state.params
+      },
+      userName () {
+         let name = this.params.userName
+         if(name.length > 4){
+            return '*' + name.substr(1,3) + '...';
+         }else{
+            return '*' + name.substr(1,3);
+         }
       }
    },
 	methods: {

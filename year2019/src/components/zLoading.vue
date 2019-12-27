@@ -87,6 +87,8 @@ export default {
             // this.isAllLoad();
             axios.post('/mobileserve/Vehicle/getAnnuallyData',{data: this.params.data}).then(res=>{
                let data = res.data;
+               console.log('下面是年报数据')
+               console.log(data)
                if(data.result === '0'){
                   this.dataLoadOver = true
                   // this.isAllLoad()
@@ -108,7 +110,14 @@ export default {
          let imgsList = []
          for (let i = 0; i <= 10; i++) {
             if (data[`P${i}`] !== undefined) {
-               pageList.push(`p${i}`)
+               if (i === 9) {
+                  if (this.params.source !== 'web') {
+                     pageList.push(`p${i}`)
+                  }
+               } else {
+                  pageList.push(`p${i}`)
+               }
+
                if (i === 0) {
                   imgsList.push('static/bg0.png')
                   imgsList.push('static/bg0-top.png')
@@ -138,20 +147,21 @@ export default {
                } else if (i === 8) {
                   imgsList.push('static/bg8.png')
                } else if (i === 9) {
-                  const keyList = this.keyList
-                  let arr = []
-                  for (let j = 0; j < keyList.length; j++) {
-                     if (data[`P${i}`][keyList[j]] !== undefined) {
-                        imgsList.push(`static/diary/${j+2}.png`)
-                        arr.push(keyList[j])
+                  if (this.params.source !== 'web') {
+                     const keyList = this.keyList
+                     let arr = []
+                     for (let j = 0; j < keyList.length; j++) {
+                        if (data[`P${i}`][keyList[j]] !== undefined) {
+                           imgsList.push(`static/diary/${j+2}.png`)
+                           arr.push(keyList[j])
+                        }
                      }
+                     this.$store.commit('setUseKeyList', arr)
                   }
-                  this.$store.commit('setUseKeyList', arr)
                }
             }
          }
          this.$store.commit('setPageList', pageList)
-         // console.log(imgsList)
          this.imgsList = imgsList
       },
       isAllLoad(){

@@ -109,7 +109,6 @@ export default {
    watch: {
       currentPage (page, lastPage) {
          if (lastPage !== '') this.lastPage = lastPage
-         console.log(this.lastPage)
          this.bottom = 0
          this.showBottom = true
          this.showRoad = true
@@ -137,6 +136,7 @@ export default {
             }
          } else if (page === 'p10') {
             this.showBottom = false
+            this.bottom = (window.innerHeight - this.$refs.calandar.offsetHeight) / 2
          } else if (page === 'p0') {
             this.showRoad = false
             this.roadStatus = 'stop'
@@ -146,7 +146,9 @@ export default {
          } else {
             this.roadStatus = 'move'
          }
-         if (this.lastPage === 'p10') {
+         if (this.lastPage === 'p9') {
+            this.showRoad = false
+         } else if (this.lastPage === 'p10') {
             this.showRoad = false
          }
       }
@@ -156,7 +158,7 @@ export default {
          return this.$store.state.currentPage
       },
       showParts () {
-         return this.currentPage === 'p9'
+         return this.currentPage === 'p9' || this.currentPage === 'p10'
       },
       tagName () {
          return this.$store.state.tagName
@@ -193,8 +195,10 @@ export default {
          let key = this.fitKeyList[this.fitKeyList.length - 1]
          let i = this.keyList.findIndex(i => i === key)
          let name = `stayTimeP${i + 12}`
-         window.footPrinter.currentPage = name
-         window.footPrinter.stayTime[name] += time - this.startTime
+         window.footPrinter.outPage = i + 12
+         if (window.footPrinter.outPage > window.footPrinter.maxPage) window.footPrinter.maxPage = window.footPrinter.outPage
+         window.currentPage = name
+         window.footPrinter[name] += time - this.startTime
          this.startTime = time
       },
       tstart (e) {

@@ -1,7 +1,7 @@
 <style>
 .home { width: 100%; height: 100vh; overflow: hidden; position: relative;}
 button { width: 100px; margin: 0 10px;}
-.home .arrow { width: 40px; position: absolute; top: 50%; right: 42px; margin-top: -16px; z-index: 50;}
+.home .arrow { width: 40px; position: absolute; top: 50%; right: 24px; margin-top: -16px; z-index: 50;}
 .home .fadeInA { animation: fadeIn 0.3s linear;}
 .home .fadeOutA { animation: fadeOut 0.3s linear;}
 </style>
@@ -14,7 +14,7 @@ button { width: 100px; margin: 0 10px;}
    <!--</div>-->
    <z-title></z-title>
    <z-tag></z-tag>
-   <z-loading ref="loading"></z-loading>
+   <z-loading ref="loading" v-if="showLoading"></z-loading>
    <z-page0 ref="p0"></z-page0>
    <z-page1 ref="p1"></z-page1>
    <z-page2 ref="p2"></z-page2>
@@ -77,7 +77,8 @@ export default {
          tMove: 0,
          startTime: 0,
          startX: 0,
-         showPages: true
+         showPages: true,
+         showLoading: true,
       }
    },
    mounted () {
@@ -93,7 +94,7 @@ export default {
       },
       pageList () {
          return this.$store.state.pageList
-         // return ['p0', 'p9', 'p10']
+         // return ['p0', 'p7', 'p10']
       },
       canChangePage () {
          return this.$store.state.canChangePage
@@ -105,12 +106,12 @@ export default {
          if (lastPage !== '' && lastPage !== 'loading-over') {
             const time = new Date().getTime()
             if (lastPage === 'loading') {
-               window.footPrinter.stayTime.stayTimeP1 += time - this.startTime
+               window.footPrinter.stayTimeP1 += time - this.startTime
             } else if (lastPage === 'p10') {
-               window.footPrinter.stayTime.stayTimeP1 += time - this.startTime
+               window.footPrinter.stayTimeP1 += time - this.startTime
             } else {
                let i = parseInt(lastPage.replace('p', ''))
-               window.footPrinter.stayTime[`stayTimeP${i + 2}`] += time - this.startTime
+               window.footPrinter[`stayTimeP${i + 2}`] += time - this.startTime
             }
             this.startTime = time
             window.intoPageStartTime = time
@@ -118,18 +119,26 @@ export default {
 
          if (page !== '' && page !== 'loading-over') {
             if (page === 'p10') {
-               window.footPrinter.currentPage = 'stayTimeP24'
+               window.currentPage = 'stayTimeP24'
+               window.footPrinter.outPage = 24
             } else {
                let i = parseInt(page.replace('p', ''))
-               window.footPrinter.currentPage = `stayTimeP${i + 2}`
+               window.currentPage = `stayTimeP${i + 2}`
+               window.footPrinter.outPage = i + 2
             }
+            if (window.footPrinter.outPage > window.footPrinter.maxPage) window.footPrinter.maxPage = window.footPrinter.outPage
+         } else {
+            this.showLoading = false
          }
       }
    },
    methods: {
       changePage (direct) {
          if (direct === 'prev') {
+            if (this.currentPage === 'p9') return
+            if (this.pageIndex === 0) return
             this.pageIndex = this.pageIndex === 0 ? 0 : this.pageIndex - 1
+            window.footPrinter.rollBackTimes += 1
          } else if (direct === 'next') {
             this.pageIndex = this.pageIndex === this.pageList.length - 1 ? this.pageList.length - 1 : this.pageIndex + 1
          }
@@ -140,11 +149,15 @@ export default {
       },
       gotoPage (page) {
          const nowPage = this.$refs[this.currentPage]
-         this.$store.commit('changePage', '')
-         // this.$store.commit('changePage', page)
-         setTimeout(() => {
+         if (nowPage.outTime === 0) {
             this.$store.commit('changePage', page)
-         }, nowPage.outTime)
+         } else {
+            this.$store.commit('changePage', '')
+            setTimeout(() => {
+               this.$store.commit('changePage', page)
+            }, nowPage.outTime)
+         }
+
       },
       tstart (e) {
          if (!this.canChangePage) return
@@ -152,6 +165,7 @@ export default {
       },
       tend (e) {
          if (!this.canChangePage) return
+         if (this.currentPage === '') return
          const endx = e.changedTouches[0].pageX
          if (endx < this.startX - 50) {
             this.changePage('next')
@@ -162,6 +176,7 @@ export default {
       review () {
          this.showPages = false
          this.$nextTick(() => {
+            console.log(this.showLoading)
             this.showPages = true
             this.pageIndex = 0
             this.$nextTick(() => {

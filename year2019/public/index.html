@@ -36,20 +36,22 @@
    var footPrinter = {}
    //进入页面开始时间
    intoPageStartTime = 0
-   // 停留时长
-   footPrinter.stayTime = {}
    // 浏览到的最大页面
-   footPrinter.lastPage = 1
+   footPrinter.maxPage = 1
    // 当前页
-   footPrinter.currentPage = '1'
+   currentPage = 'stayTimeP1'
+   // 离开页
+   footPrinter.outPage = 1
+   // 流量页面“拖动滑块”的时间
+   footPrinter.dragSliderTime = 0
    // 回退次数
-   footPrinter.backTimes = 0
+   footPrinter.rollBackTimes = 0
    // 保存图片次数
-   footPrinter.savePosterTimes = 0
+   footPrinter.savePicTimes = 0
 
    function pageOutFunc() {
       let time = new Date().getTime()
-	   footPrinter.stayTime[footPrinter.currentPage] += time - intoPageStartTime
+	   footPrinter[currentPage] += time - intoPageStartTime
    }
    </script>
 </head>

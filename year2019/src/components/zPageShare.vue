@@ -1,10 +1,14 @@
 <style scoped>
 .z-page-share { width: 100%; height: 100vh; overflow: hidden; position: fixed; top: 0; left: 0; z-index: 15; background: url("../assets/img/bg.jpg") repeat;}
-.z-page-share-fadeIn { animation: fadeIn 0.5s linear both;}
-.z-page-share-fadeOut { animation: fadeOut 0.5s linear;}
+.z-page-share-fadeIn { animation: p10In 0.5s ease-out both;}
+@keyframes p10In {
+   0% { transform: translateX(100vw)}
+   100% { transform: translateX(0vw)}
+}
+.z-page-share-fadeOut { animation: fadeOut 0s linear;}
 .z-page-share .poster { width: 720px; height: 1174px; margin: 15px auto; background-color: rgba(0, 0, 0, 0); position: relative;}
 .z-page-share .poster img { width: 100%; height: 100%;}
-.z-page-share .poster .btn-back { width: 40px; height: auto; position: absolute; bottom: 40px; left: 40px;}
+.z-page-share .poster .btn-back { width: 174px; height: auto; position: absolute; bottom: 40px; left: 40px;}
 .z-page-share canvas { width: 720px; height: 1174px; position: absolute; top: -10000px; left: 0;}
 .z-page-share .btns { display: flex; justify-content: space-between; margin: 0 36px;}
 .z-page-share .btns a { width: 320px; height: 90px; display: flex; justify-content: center; align-items: center; background-color: #0475B5;  font-size: 36px; color: #ffffff; text-decoration: none;}
@@ -15,11 +19,11 @@
 <div class="z-page-share" v-show="showParts">
       <div class="poster">
          <img :src="posterSrc"/>
-         <img src="@/assets/img/arrow2.png" class="btn-back" @click="doReview">
+         <img src="@/assets/img/btn-back.png" class="btn-back" @click="doReview">
       </div>
-   <div class="btns">
+   <div class="btns" v-if="source === 'app'">
       <a href="javascript:;" @click="doShare">分享</a>
-      <a :href="posterSrc" download="比亚迪年报评分图">保存图片</a>
+      <a :href="posterSrc" download="比亚迪年报评分图" @click="download">保存图片</a>
    </div>
    <canvas width="720" height="1174" ref="poster"></canvas>
 </div>
@@ -48,6 +52,9 @@ export default {
       },
       pageData () {
          return this.$store.state.pageData.P10
+      },
+      source () {
+         return this.$store.state.params.source
       },
       values () {
          let arr = []
@@ -78,11 +85,11 @@ export default {
       loadAll () {
          if (this.hasPoster) return
          let arr = []
-         arr.push(this.loadImgs('/static/poster/bg.png'))
-         arr.push(this.loadImgs('/static/poster/title.png'))
-         arr.push(this.loadImgs('/static/poster/qrcode.png'))
-         arr.push(this.loadImgs('/static/poster/rada.png'))
-         arr.push(this.loadImgs(`/static/poster/${this.pageData.tag}.png`))
+         arr.push(this.loadImgs('static/poster/bg.png'))
+         arr.push(this.loadImgs('static/poster/title.png'))
+         arr.push(this.loadImgs('static/poster/qrcode.png'))
+         arr.push(this.loadImgs('static/poster/rada.png'))
+         arr.push(this.loadImgs(`static/poster/${this.pageData.tag}.png`))
          Promise.all(arr).then(res=>{
             this.drawPoster(res)
          })
@@ -179,11 +186,15 @@ export default {
          return arr
       },
       doShare () {
+         console.log(window.footPrinter)
          doShare(this.tagList[this.pageData.tag])
       },
       doReview () {
-         console.log(this)
          this.$parent.review()
+      },
+      download () {
+         console.log('download')
+         window.footPrinter.savePicTimes += 1
       }
    }
 }

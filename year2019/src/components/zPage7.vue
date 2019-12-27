@@ -11,6 +11,7 @@
 .z-page7 .rule-frame { width: 504px; height: 120px; background-color: rgba(0, 0, 0, 0); position: absolute; top: 340px; left: 120px;}
 .z-page7 .rule-frame .rule { width: 550px; margin-left: -4px}
 .z-page7 .rule-frame .water { width: 40px; position: absolute; top: 50px; left: 0; margin-left: -20px;}
+.z-page7 .rule-frame .water-move { transition: left 1s ease-out}
 .z-page7 .rule-frame .water img { width: 100%;}
 .z-page7 .rule-frame .water span { width: 100%; position: absolute; bottom: 14px; text-align: center; font-size: 20px; color: #ffffff; left: 0;}
 .z-page7 .my-rule { width: 50%; height: 20px; position: absolute; left: 0; top: 20px; background-color: rgba(248, 79, 28, 0.3); transition: all 1s ease-out;}
@@ -24,12 +25,12 @@
 <template>
 <div class="z-page7" :style="{'z-index':showParts ? 10 : 5}">
    <transition enter-active-class="slideUpIn1" leave-active-class="fadeOut">
-      <div class="data-content content1" v-if="showParts">你知道你每月平均使用多少流量吗？</div>
+      <div class="data-content content1" v-if="showParts && source === 'app'">你知道你每月平均使用多少流量吗？</div>
    </transition>
    <transition enter-active-class="slideUpIn2" leave-active-class="fadeOut" @after-enter="ruleIn">
       <div class="rule-frame" @touchstart="start" @touchmove="move" @touchend="end" ref="rule" v-if="showParts">
          <img src="@/assets/img/rule.png" class="rule"/>
-         <div class="water" :style="{left: left+'px'}">
+         <div class="water" :class="{'water-move':source !== 'app'}" :style="{left: left+'px'}">
             <img src="@/assets/img/water.png"/>
             <span>{{value}}</span>
          </div>
@@ -38,7 +39,7 @@
       </div>
    </transition>
    <transition enter-active-class="slideUpIn1" leave-active-class="fadeOut">
-      <div class="data-content content2" v-show="showParts && showResult"><span>{{resultTxt}}</span></div>
+      <div class="data-content content2" v-show="showParts && showResult && source === 'app'"><span>{{resultTxt}}</span></div>
    </transition>
    <transition enter-active-class="slideUpIn1" leave-active-class="fadeOut">
       <div class="tag-content content3" v-if="showParts && showResult">爱了！你就是传说中的<br/>DiLink达人</div>
@@ -65,6 +66,7 @@ export default {
          t: 0,
          myWidth: 0,
          avgWidth: 0,
+         startTime: 0
       }
    },
    computed: {
@@ -73,6 +75,9 @@ export default {
       },
       showParts () {
          return this.currentPage === 'p7'
+      },
+      source () {
+         return this.$store.state.params.source
       },
       resultTxt () {
          return Math.abs(this.value - this.useValue) > 0.2 ? '猜错，太不了解自己了！' : '选择正确，策无遗算！'
@@ -94,7 +99,9 @@ export default {
       currentPage (page) {
          if (page === 'p7') {
             // this.ruleWidth = this.$refs.rule.offsetWidth
-            this.$store.commit('setCanChangePage', this.showResult)
+            if (this.source === 'app') {
+               this.$store.commit('setCanChangePage', this.showResult)
+            }
          }
       }
    },
@@ -103,15 +110,24 @@ export default {
          this.ruleWidth = this.$refs.rule.offsetWidth
          this.useValue = this.pageData.avgFlow
          this.avgValue = this.pageData.avgFlowAll
+         if (this.source !== 'app') {
+            this.setResultPos()
+            this.showResult = true
+            this.value = this.useValue
+            this.left = this.useValue > 5 ? this.ruleWidth : (this.useValue / 5) * this.ruleWidth
+         }
       },
       start (e) {
          if (this.showResult) return
+         if (this.source !== 'app') return
          this.startX = e.touches[0].pageX
          this.startLeft = this.left
          clearTimeout(this.t)
+         this.startTime = new Date().getTime()
       },
       move (e) {
          if (this.showResult) return
+         if (this.source !== 'app') return
          e.preventDefault()
          this.moveX = e.touches[0].pageX
          this.left = this.startLeft + this.moveX - this.startX
@@ -121,15 +137,19 @@ export default {
       },
       end () {
          if (this.showResult) return
+         if (this.source !== 'app') return
          this.t = setTimeout(() => {
             this.setResultPos()
             this.showResult = true
             this.$store.commit('setCanChangePage', this.showResult)
          }, 2000)
+         const time = new Date().getTime()
+         window.footPrinter.dragSliderTime += time - this.startTime
       },
       setResultPos () {
          setTimeout(() => {
             this.myWidth = this.useValue > 5 ? 100 : (this.useValue / 5) * 100
+            console.log(this.myWidth)
             // this.avgWidth = this.avgValue > 5 ? 100 : (this.avgValue / 5) * 100
          }, 100)
          setTimeout(() => {

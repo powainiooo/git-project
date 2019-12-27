@@ -5,10 +5,10 @@
 .z-piece .content span { color: #F84F1C;}
 .z-piece .line { position: relative;}
 .z-piece .line:before { content: ''; width: 60px; height: 2px; background-color: #333333; position: absolute; top: -25px; left: 0;}
-.z-piece .diary-table { display: flex; flex-wrap: wrap;}
-.z-piece .diary-table .pics { width: 396px; display: flex; align-items: center; justify-content: center; border-right: 2px solid #333333;}
+.z-piece .diary-table { width: 100%; display: flex; flex-wrap: wrap;}
+.z-piece .diary-table .pics { width: 73%; display: flex; align-items: center; justify-content: center; border-right: 2px solid #333333;}
 .z-piece .diary-table .pics img { width: 100%; padding: 10px;}
-.z-piece .diary-table .date { width: 140px; text-align: center;}
+.z-piece .diary-table .date { width: 27%; text-align: center;}
 .z-piece .diary-table .date .day { font-size: 80px; font-weight: bold;}
 .z-piece .diary-table .date .month { font-size: 80px; font-weight: lighter;}
 .z-piece .diary-table .date .year { font-size: 20px;}
@@ -21,18 +21,18 @@
    <div class="frame">
       <div class="diary-table">
          <div class="pics">
-            <img src="/static/diary/2.png" v-if="keys === keyList[0]"/>
-            <img src="/static/diary/3.png" v-else-if="keys === keyList[1]"/>
-            <img src="/static/diary/4.png" v-else-if="keys === keyList[2]"/>
-            <img src="/static/diary/5.png" v-else-if="keys === keyList[3]"/>
-            <img src="/static/diary/6.png" v-else-if="keys === keyList[4]"/>
-            <img src="/static/diary/7.png" v-else-if="keys === keyList[5]"/>
-            <img src="/static/diary/8.png" v-else-if="keys === keyList[6]"/>
-            <img src="/static/diary/9.png" v-else-if="keys === keyList[7]"/>
-            <img src="/static/diary/10.png" v-else-if="keys === keyList[8]"/>
-            <img src="/static/diary/11.png" v-else-if="keys === keyList[9]"/>
-            <img src="/static/diary/12.png" v-else-if="keys === keyList[10]"/>
-            <img src="/static/diary/13.png" v-else-if="keys === keyList[11]"/>
+            <img src="static/diary/2.png" v-if="keys === keyList[0]"/>
+            <img src="static/diary/3.png" v-else-if="keys === keyList[1]"/>
+            <img src="static/diary/4.png" v-else-if="keys === keyList[2]"/>
+            <img src="static/diary/5.png" v-else-if="keys === keyList[3]"/>
+            <img src="static/diary/6.png" v-else-if="keys === keyList[4]"/>
+            <img src="static/diary/7.png" v-else-if="keys === keyList[5]"/>
+            <img src="static/diary/8.png" v-else-if="keys === keyList[6]"/>
+            <img src="static/diary/9.png" v-else-if="keys === keyList[7]"/>
+            <img src="static/diary/10.png" v-else-if="keys === keyList[8]"/>
+            <img src="static/diary/11.png" v-else-if="keys === keyList[9]"/>
+            <img src="static/diary/12.png" v-else-if="keys === keyList[10]"/>
+            <img src="static/diary/13.png" v-else-if="keys === keyList[11]"/>
          </div>
          <div class="date">
             <p class="day">{{dates.day}}</p>

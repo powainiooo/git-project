@@ -74,7 +74,7 @@ export default {
       tagContent () {
          if (this.type === 'gasoline') {
             if (this.fuel100_over_per >= 70) {
-               return '恭喜你！获得<br/>“2019感动比亚迪<br/><span style="color: #ffea00;">年度环保卫士</span>“称号'
+               return `恭喜你！获得<br/>“2019感动比亚迪<br/><span style="color: #ffea00;">年度环保卫士</span>“称号`
             } else if (this.fuel100_over_per >= 30 && this.fuel100_over_per < 70) {
                return '沉稳开车<br/>油耗随缘'
             } else {

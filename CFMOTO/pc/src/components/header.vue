@@ -1,7 +1,7 @@
 <style scoped>
-.z-header { width: 100%; height: 90px; display: flex; justify-content: space-between; align-items: center;}
+.z-header { width: 100%; height: 90px; display: flex; justify-content: space-between; align-items: center; position: fixed; top: 0; left: 0; z-index: 1000;}
 .z-header .logo { margin-left: 60px;}
-.z-header .operas { display: flex; justify-content: flex-end; align-items: center; margin-right: 60px; flex-direction: row-reverse;}
+.z-header .operas { display: flex; justify-content: flex-end; align-items: center; margin-right: 30px; flex-direction: row-reverse;}
 .z-header .operas .language { width: 80px; height: 40px; background-color: #000000; display: flex;}
 .z-header .operas .language a { width: 40px; display: flex; justify-content: center; align-items: center; font-family: TTHBold; font-size: 14px; color: #ffffff;}
 .z-header .operas .language a:hover, .z-header .operas .language a.active { background-color: #ffd400; color: #000000;}
@@ -34,6 +34,6 @@
 
 <script>
 export default {
-   name: "header"
+   name: 'header'
 }
 </script>

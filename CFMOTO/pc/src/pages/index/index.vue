@@ -1,17 +1,20 @@
 <style>
-@import "../../assets/reset.css";
-   body { background-color: #000000;}
+@import "../../assets/css/reset.css";
+@import "../../assets/css/fonts.css";
+   body { background-color: #000000; color: #fff}
 </style>
 
 <template>
    <div id="app">
-      {{name}}
+      <z-header></z-header>
    </div>
 </template>
 
 <script>
+import zHeader from '@/components/header.vue'
 export default {
    name: 'index',
+   components: { zHeader },
    data () {
       return {
          name: 'index1'

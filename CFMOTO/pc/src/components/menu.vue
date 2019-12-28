@@ -11,10 +11,25 @@
 
    .nav-list { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;}
    .nav-list .level1 { width: 960px;}
-   .nav-list .level1>li { margin-bottom: 50px;}
+   .nav-list .level1>li { margin-bottom: 50px; position: relative;}
    .nav-list .level1>li:last-child { margin-bottom: 0;}
    .nav-list .level1>li>a { display: block; font-size: 80px; line-height: 80px; color: #ffffff; font-family: TTHBold; transition: all 0.15s linear;}
    .nav-list .level1>li>a:hover { color: #ffd400; transform: translateX(-40px)}
+   .nav-list .level2 { width: 350px; position: absolute; left: -340px; top: 0; padding-top: 80px;}
+   .nav-list .level2:before { content: ''; width: 300px; height: 1px; background-color: #afafaf; position: absolute; top: 80px; left: 0;}
+   .nav-list .level2 li { margin-top: 20px;}
+   .nav-list .level2 li a { font-size: 16px; font-family: TTHBold; color: #ffffff;}
+   .nav-list .level2 li a:hover { color: #ffd400;}
+   .nav-list .menuIn { animation: menuIn 0.2s linear}
+   @keyframes menuIn {
+      0% { transform: translateX(40px); opacity: 0;}
+      100% { transform: translateX(0); opacity: 1;}
+   }
+   .nav-list .menuOut { animation: menuOut 0.2s linear}
+   @keyframes menuOut {
+      0% { transform: translateX(0); opacity: 1;}
+      100% { transform: translateX(40px); opacity: 0;}
+   }
 </style>
 
 <template>
@@ -26,20 +41,15 @@
 
    <nav class="nav-list">
       <ul class="level1">
-         <li>
-            <a href="javascript:;">Brand</a>
-         </li>
-         <li>
-            <a href="javascript:;">Series</a>
-         </li>
-         <li>
-            <a href="javascript:;">Accessories</a>
-         </li>
-         <li>
-            <a href="javascript:;">Test Drive & After-sales</a>
-         </li>
-         <li>
-            <a href="javascript:;">About EV</a>
+         <li v-for="(item, index) in navList"
+             @mouseover="level2Index = index"
+             @mouselever="level2Index = -1">
+            <a href="javascript:;">{{item.name}}</a>
+            <transition enter-active-class="menuIn" leave-active-class="menuOut">
+               <ul class="level2" v-if="item.list && level2Index === index">
+                  <li v-for="item2 in item.list"><a href="javascript:;">{{item2}}</a></li>
+               </ul>
+            </transition>
          </li>
       </ul>
    </nav>
@@ -52,7 +62,14 @@
       data () {
          return {
             fold: false,
-            smallBtn: true
+            smallBtn: true,
+            navList: [
+               {name: 'Brand', list: ['Brand1', 'Brand2']},
+               {name: 'Series', list: ['Series1', 'Series2']},
+               {name: 'Accessories', list: ['Accessories1', 'Accessories2']},
+               {name: 'Test Drive & After-sales'},
+            ],
+            level2Index: -1
          }
       },
       methods: {

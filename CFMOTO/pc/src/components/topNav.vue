@@ -1,5 +1,5 @@
 <style scoped>
-.z-header { width: 100%; height: 90px; display: flex; justify-content: space-between; align-items: center; position: fixed; top: 0; left: 0; z-index: 1000;}
+.z-header { width: 100%; height: 90px; display: flex; justify-content: space-between; align-items: center; position: fixed; top: 0; left: 0; z-index: 1000; background-color: rgba(0, 0, 0, 0.5)}
 .z-header .logo { margin-left: 60px;}
 .z-header .operas { display: flex; justify-content: flex-end; align-items: center; margin-right: 30px; flex-direction: row-reverse;}
 .z-header .operas .language { width: 80px; height: 40px; background-color: #000000; display: flex;}

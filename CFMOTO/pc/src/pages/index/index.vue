@@ -20,7 +20,7 @@ body { background-color: #000000; color: #fff}
    100% { transform: translateX(20px)}
 }
 .index-container .index-swiper { height: 100vh}
-.index-container .footer { height: 190px; background: -webkit-linear-gradient(-90deg, #2d2c2c, #595757);}
+.index-container .footer { height: 190px;}
 </style>
 
 <template>

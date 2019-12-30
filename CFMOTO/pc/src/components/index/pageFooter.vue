@@ -1,5 +1,5 @@
 <style scoped>
-.z-page-footer { width: 100%; height: 100%; position: relative;}
+.z-page-footer { width: 100%; height: 190px; position: relative; background: -webkit-linear-gradient(-90deg, #2d2c2c, #595757); overflow: hidden;}
 .z-page-footer .top { height: 100px; display: flex; justify-content: space-between; align-items: center; padding: 0 120px 0 70px;}
 .z-page-footer .operas { display: flex; justify-content: flex-end; align-items: center; margin-right: 30px; flex-direction: row-reverse;}
 .z-page-footer .btns { display: flex;}

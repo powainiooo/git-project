@@ -13,16 +13,16 @@
 .z-page8 .progress ul li:last-child:before { background-color: #0475B5;}
 .z-page8 .progress .line { width: 100%; height: 14px; border-left: 4px solid #F84F1C; background-color: #F84F1C; position: relative; margin-bottom: 18px; transition: all 1s linear;}
 .z-page8 .progress  .line-all { border-left-color: #0475B5; background-color: #0475B5;}
-.z-page8 .progress .line span { width: 100px; font-size: 20px; color: #F84F1C; position: absolute; top: -10px; left: calc(100% + 15px);}
+.z-page8 .progress .line span { width: 150px; font-size: 20px; color: #F84F1C; position: absolute; top: -10px; left: calc(100% + 15px);}
 .z-page8 .progress  .line-all span { color: #0475B5}
 </style>
 
 <template>
-<div class="z-page8" :style="{'z-index':showParts ? 10 : 5}">
+<div class="z-page8" :style="{'z-index':showParts ? 13 : 5}">
    <transition enter-active-class="slideUpIn1" leave-active-class="fadeOut">
       <div class="data-content content1" v-if="showParts">
          <p>过去一年</p>
-         <p>你共使用APP<span class="value">{{parseFloat(nums.toFixed(1))}}</span>个，使用总时长为<span class="value">{{hours.toFixed(0)}}</span>小时</p>
+         <p>你共使用APP<span class="value">{{parseFloat(nums.toFixed(0))}}</span>个，使用总时长为<span class="value">{{hours.toFixed(0)}}</span>小时</p>
          <p>你最常用的应用有<span>{{topApp}}</span></p>
       </div>
    </transition>
@@ -33,10 +33,10 @@
             <li style="color: #0475B5">全国平均时长</li>
          </ul>
          <div class="line" :style="{'width': widthHours + '%'}">
-            <span>{{hours.toFixed(0)}}次</span>
+            <span>{{hours.toFixed(0)}}小时</span>
          </div>
          <div class="line line-all" :style="{'width': widthAverage + '%'}">
-            <span>{{average.toFixed(1)}}次</span>
+            <span>{{average.toFixed(1)}}小时</span>
          </div>
       </div>
    </transition>

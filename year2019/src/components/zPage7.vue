@@ -11,6 +11,7 @@
 .z-page7 .rule-frame { width: 504px; height: 120px; background-color: rgba(0, 0, 0, 0); position: absolute; top: 340px; left: 120px;}
 .z-page7 .rule-frame .rule { width: 550px; margin-left: -4px}
 .z-page7 .rule-frame .water { width: 40px; position: absolute; top: 50px; left: 0; margin-left: -20px;}
+.z-page7 .rule-frame .water-hint:after { content: '拖动滑块选择'; width: 200px; color: #0475b5; font-size: 24px; position: absolute; top: 20px; left: 70px; margin-left: -20px; opacity: 0.5;}
 .z-page7 .rule-frame .water-move { transition: left 1s ease-out}
 .z-page7 .rule-frame .water img { width: 100%;}
 .z-page7 .rule-frame .water span { width: 100%; position: absolute; bottom: 14px; text-align: center; font-size: 20px; color: #ffffff; left: 0;}
@@ -23,14 +24,14 @@
 </style>
 
 <template>
-<div class="z-page7" :style="{'z-index':showParts ? 10 : 5}">
+<div class="z-page7" :style="{'z-index':showParts ? 13 : 5}">
    <transition enter-active-class="slideUpIn1" leave-active-class="fadeOut">
       <div class="data-content content1" v-if="showParts && source === 'app'">你知道你每月平均使用多少流量吗？</div>
    </transition>
    <transition enter-active-class="slideUpIn2" leave-active-class="fadeOut" @after-enter="ruleIn">
       <div class="rule-frame" @touchstart="start" @touchmove="move" @touchend="end" ref="rule" v-if="showParts">
          <img src="@/assets/img/rule.png" class="rule"/>
-         <div class="water" :class="{'water-move':source !== 'app'}" :style="{left: left+'px'}">
+         <div class="water" :class="{'water-move':source !== 'app','water-hint':showHint}" :style="{left: left+'px'}">
             <img src="@/assets/img/water.png"/>
             <span>{{value}}</span>
          </div>
@@ -42,7 +43,7 @@
       <div class="data-content content2" v-show="showParts && showResult && source === 'app'"><span>{{resultTxt}}</span></div>
    </transition>
    <transition enter-active-class="slideUpIn1" leave-active-class="fadeOut">
-      <div class="tag-content content3" v-if="showParts && showResult">爱了！你就是传说中的<br/>DiLink达人</div>
+      <div class="tag-content content3" v-if="showParts && showResult" v-html="tagContent"></div>
    </transition>
 
 </div>
@@ -63,6 +64,7 @@ export default {
          useValue: 0,
          avgValue: 0,
          showResult: false,
+         showHint: true,
          t: 0,
          myWidth: 0,
          avgWidth: 0,
@@ -101,6 +103,8 @@ export default {
             // this.ruleWidth = this.$refs.rule.offsetWidth
             if (this.source === 'app') {
                this.$store.commit('setCanChangePage', this.showResult)
+            } else {
+               this.showHint = false
             }
          }
       }
@@ -120,6 +124,7 @@ export default {
       start (e) {
          if (this.showResult) return
          if (this.source !== 'app') return
+         this.showHint = false
          this.startX = e.touches[0].pageX
          this.startLeft = this.left
          clearTimeout(this.t)

@@ -13,6 +13,9 @@
 
 <template>
 <div class="z-page1" :style="{'z-index':showParts ? 10 : 5}">
+   <transition enter-active-class="fadeIn" leave-active-class="fadeOut">
+      <div class="earth" v-if="showParts"><img src="static/earth.png"/></div>
+   </transition>
    <transition enter-active-class="slideUpIn" leave-active-class="fadeOut" @after-enter="enter">
    <div class="data-content" v-if="showParts">
       <p>过去一年</p>
@@ -31,9 +34,6 @@
          <p v-if="showMoney">相比燃油车一年节省<span class="value">{{save_money.toFixed(0)}}</span>元</p>
       </div>
    </div>
-   </transition>
-   <transition enter-active-class="fadeIn" leave-active-class="fadeOut">
-      <div class="earth" v-if="showParts"><img src="static/earth.png"/></div>
    </transition>
    <transition enter-active-class="scaleIn" leave-active-class="fadeOut">
       <div class="tag-content" v-if="showParts" v-html="tagContent"></div>

@@ -17,7 +17,7 @@
 </style>
 
 <template>
-<div class="z-page4" :style="{'z-index':showParts ? 10 : 5}">
+<div class="z-page4" :style="{'z-index':showParts ? 13 : 5}">
    <transition enter-active-class="slideUpIn1" leave-active-class="fadeOut" @after-enter="enter">
    <div class="data-content" v-if="showParts">
       <p>过去一年</p>

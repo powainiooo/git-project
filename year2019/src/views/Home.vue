@@ -94,7 +94,7 @@ export default {
       },
       pageList () {
          return this.$store.state.pageList
-         // return ['p0', 'p7', 'p10']
+         // return ['p0', 'p2', 'p10']
       },
       canChangePage () {
          return this.$store.state.canChangePage

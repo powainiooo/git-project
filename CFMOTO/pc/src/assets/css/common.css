@@ -1,0 +1,5 @@
+.info-section>h3 { font-size: 80px; color: #ffffff; font-family: TTHBold; line-height: 80px;}
+.info-section>p { width: 690px; font-size: 16px; color: #ffffff; font-family: TTHBR; line-height: 35px; margin-top: 30px;}
+.info-section>.btn1 { margin-top: 120px;}
+
+.btn1 { width: 150px; height: 50px; background-color: #ffd400; color: #1a1a1a; font-size: 16px; font-family: TTHBold; display: flex; justify-content: center; align-items: center;}

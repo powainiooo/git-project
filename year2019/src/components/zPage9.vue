@@ -139,10 +139,8 @@ export default {
             this.bottom = (window.innerHeight - this.$refs.calandar.offsetHeight) / 2
          } else if (page === 'p0') {
             this.showRoad = false
-            this.roadStatus = 'stop'
          } else if (page === 'loading-over') {
             this.showRoad = false
-            this.roadStatus = 'stop'
          } else {
             this.roadStatus = 'move'
          }

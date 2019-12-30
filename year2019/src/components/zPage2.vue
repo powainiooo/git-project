@@ -21,7 +21,7 @@
    <div class="data-content content1" v-if="showParts">
       <p>过去一年</p>
       <p>你总共充电<span class="value">{{charge_counts.toFixed(0)}}次</span></p>
-      <p>超过全国<span class="value">{{charge_over_per.toFixed(0)}}%</span>的车主</p>
+      <p>超过全国<span class="value">{{charge_over_per.toFixed(1)}}%</span>的车主</p>
    </div>
    </transition>
    <transition enter-active-class="slideUpIn2" leave-active-class="fadeOut">
@@ -68,7 +68,7 @@ export default {
             if (this.pageData.cPlacing >= 70) {
                return '一直插电一直爽<br/>插电不耗油，倍儿爽'
             } else if (this.pageData.cPlacing >= 30 && this.pageData.cPlacing < 70) {
-               return '短途用电 经济节省<br/>长途用油 动力强劲<br/>我为比亚迪混动车 “带盐”'
+               return '短途用电 经济节省<br/>长途用油 动力强劲<br/>我为比亚迪混动车“带盐”'
             } else {
                return '这么土壕吗？<br/>买混动车是为了<br/>面儿还是牌儿？'
             }

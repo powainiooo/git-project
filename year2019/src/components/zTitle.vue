@@ -1,7 +1,7 @@
 <style scoped>
 .z-title { width: 150px; position: fixed; top: 50px; left: 40px; z-index: 50;}
 .z-title img { width: 100%;}
-.z-title p { font-size: 24px; color: #0475B5; position: absolute; bottom: 6px; left: 10px;}
+.z-title p { width: 200px; font-size: 24px; color: #0475B5; position: absolute; bottom: 6px; left: 10px;}
 .z-title .fadeIn { animation: fadeIn 1s linear;}
 .z-title .nameIn { animation: nameIn 0.5s ease-out;}
 @keyframes nameIn {

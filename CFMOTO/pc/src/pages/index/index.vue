@@ -1,6 +1,8 @@
 <style>
 @import "../../assets/css/reset.css";
 @import "../../assets/css/fonts.css";
+@import "../../assets/css/animate.min.css";
+@import "../../assets/css/common.css";
 body { background-color: #000000; color: #fff}
 .index-container { width: 100%; height: 100vh; overflow: hidden;}
 .index-container .pagination { height: 126px; position: fixed; top: 50%; right: 30px; margin-top: -53px; z-index: 100;}
@@ -17,44 +19,58 @@ body { background-color: #000000; color: #fff}
    0% { transform: translateX(0)}
    100% { transform: translateX(20px)}
 }
+.index-container .index-swiper { height: 100vh}
+.index-container .footer { height: 190px; background: -webkit-linear-gradient(-90deg, #2d2c2c, #595757);}
 </style>
 
 <template>
-   <div id="app" class="index-container">
-      <z-header></z-header>
-      <z-menu></z-menu>
-      <swiper :options="swiperOption" ref="mySwiper" @slideChange="slideChange">
-         <!-- slides -->
-         <swiper-slide>I'm Slide 1</swiper-slide>
-         <swiper-slide>I'm Slide 2</swiper-slide>
-         <swiper-slide>I'm Slide 3</swiper-slide>
-         <swiper-slide>I'm Slide 4</swiper-slide>
-         <swiper-slide>I'm Slide 5</swiper-slide>
-         <swiper-slide>I'm Slide 6</swiper-slide>
-         <swiper-slide>I'm Slide 7</swiper-slide>
-      </swiper>
-      <ul class="pagination">
-         <li v-for="i in 7" :key="i">
-            <transition enter-active-class="navShow" leave-active-class="navHide">
-               <div v-if="i === navIndex">{{i}}</div>
-            </transition>
-         </li>
-      </ul>
-   </div>
+<div id="app" class="index-container">
+   <top-nav></top-nav>
+   <z-menu></z-menu>
+   <swiper :options="swiperOption" ref="mySwiper" @slideChange="slideChange" class="index-swiper">
+      <!-- slides -->
+      <swiper-slide><z-page1></z-page1></swiper-slide>
+      <swiper-slide><z-page2></z-page2></swiper-slide>
+      <swiper-slide><z-page3></z-page3></swiper-slide>
+      <swiper-slide><z-page4></z-page4></swiper-slide>
+      <swiper-slide><z-page5></z-page5></swiper-slide>
+      <swiper-slide><z-page6></z-page6></swiper-slide>
+      <swiper-slide><z-page7></z-page7></swiper-slide>
+      <swiper-slide class="footer"><page-footer></page-footer></swiper-slide>
+   </swiper>
+   <ul class="pagination">
+      <li v-for="i in 7" :key="i">
+         <transition enter-active-class="navShow" leave-active-class="navHide">
+            <div v-if="i === navIndex">{{i}}</div>
+         </transition>
+      </li>
+   </ul>
+</div>
 </template>
 
 <script>
-import zHeader from '@/components/header.vue'
+import topNav from '@/components/topNav.vue'
 import zMenu from '@/components/menu.vue'
+import zPage1 from '@/components/index/page1.vue'
+import zPage2 from '@/components/index/page2.vue'
+import zPage3 from '@/components/index/page3.vue'
+import zPage4 from '@/components/index/page4.vue'
+import zPage5 from '@/components/index/page5.vue'
+import zPage6 from '@/components/index/page6.vue'
+import zPage7 from '@/components/index/page7.vue'
+import pageFooter from '@/components/index/pageFooter.vue'
 export default {
    name: 'index',
-   components: { zHeader, zMenu },
+   components: { topNav, zMenu, zPage1, zPage2, zPage3, zPage4, zPage5, zPage6, zPage7, pageFooter },
    data () {
       return {
          navIndex: 1,
          swiperOption: {
-            direction : 'vertical',
-            height : window.innerHeight,
+            // initialSlide: 7,
+            direction: 'vertical',
+            simulateTouch : false,
+            // height: window.innerHeight,
+            slidesPerView: 'auto',
             mousewheel: true
          }
       }

@@ -41,8 +41,8 @@
       <img src="@/assets/img/tag/20.png" v-else-if="tagName === '热血青铜'">
       <img src="@/assets/img/tag/21.png" v-else-if="tagName === '忠实粉丝'">
       <img src="@/assets/img/tag/22.png" v-else-if="tagName === '铁杆粉丝'">
-      <img src="@/assets/img/tag/23.png" v-else-if="tagName === '语音爱好者'">
-      <img src="@/assets/img/tag/24.png" v-else-if="tagName === '高冷范'">
+      <img src="@/assets/img/tag/23.png" v-else-if="tagName === '高冷范'">
+      <img src="@/assets/img/tag/24.png" v-else-if="tagName === '语音爱好者'">
       <img src="@/assets/img/tag/25.png" v-else-if="tagName === '语音重灾区'">
    </transition>
 </div>

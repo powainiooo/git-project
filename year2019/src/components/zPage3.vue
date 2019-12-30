@@ -53,9 +53,9 @@ export default {
          return this.$store.state.pageData.P3
       },
       tagContent () {
-         if (this.avg_speed >= 130) {
+         if (this.pageData.maxSpeed >= 130) {
             return '好嗨呦<br/>感觉人生到达了巅峰！'
-         } else if (this.avg_speed >= 80 && this.avg_speed < 130) {
+         } else if (this.pageData.maxSpeed >= 80 && this.pageData.maxSpeed < 130) {
             return `全年驾车安全评分99分<br/>多一分怕你骄傲`
          } else {
             return '安全就好<br/>其他随缘'

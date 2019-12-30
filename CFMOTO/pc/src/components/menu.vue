@@ -1,6 +1,6 @@
 <style scoped>
    .z-menu { width: 100%; height: 100vh; position: fixed; top: 0; left: 0; z-index: 500; background-color: rgba(0, 0, 0, 1); transition: all 1s ease-out;}
-   .z-menu .btn-menu { position: absolute; top: 50%; right: 0; display: flex; align-items: center; margin-top: -75px; transition: all 0.3s ease-out;}
+   .z-menu .btn-menu { position: absolute; top: 50%; right: 0; display: flex; align-items: center; margin-top: -75px; transition: all 0.3s ease-out; z-index: 10;}
    .z-menu .btn-menu .icon-menu { width: 32px; margin-right: 18px; transition: all 0.3s ease-out;}
    .z-menu .btn-menu div { width: 80px; height: 150px; background-color: #ffd400; display: flex; align-items: center; overflow: hidden; transition: all 0.3s ease-out;}
    .z-menu .btn-menu div img { width: 18px; margin-left: 20px;}
@@ -34,7 +34,10 @@
 
 <template>
 <div class="z-menu" :class="{'z-menu-fold':fold}">
-   <a href="javascript:;" class="btn-menu" :class="{'btn-menu-small':smallBtn}" @click="toggleFold">
+   <a href="javascript:;"
+      class="btn-menu"
+      :class="{'btn-menu-small':smallBtn}"
+      @click="toggleFold">
       <img src="@/assets/images/icon-menu.png" class="icon-menu"/>
       <div><img src="@/assets/images/icon-arrow.png"/></div>
    </a>
@@ -43,11 +46,12 @@
       <ul class="level1">
          <li v-for="(item, index) in navList"
              @mouseover="level2Index = index"
-             @mouselever="level2Index = -1">
+             @mouselever="level2Index = -1"
+             :key="index" v-if="!fold">
             <a href="javascript:;">{{item.name}}</a>
             <transition enter-active-class="menuIn" leave-active-class="menuOut">
                <ul class="level2" v-if="item.list && level2Index === index">
-                  <li v-for="item2 in item.list"><a href="javascript:;">{{item2}}</a></li>
+                  <li v-for="item2 in item.list" :key="item2"><a href="javascript:;">{{item2}}</a></li>
                </ul>
             </transition>
          </li>
@@ -57,35 +61,35 @@
 </template>
 
 <script>
-   export default {
-      name: 'menu',
-      data () {
-         return {
-            fold: false,
-            smallBtn: true,
-            navList: [
-               {name: 'Brand', list: ['Brand1', 'Brand2']},
-               {name: 'Series', list: ['Series1', 'Series2']},
-               {name: 'Accessories', list: ['Accessories1', 'Accessories2']},
-               {name: 'Test Drive & After-sales'},
-            ],
-            level2Index: -1
-         }
-      },
-      methods: {
-         toggleFold () {
-            if (this.fold) {
-               this.fold = false
-               setTimeout(() => {
-                  this.smallBtn = false
-               }, 1000)
-            } else {
-               this.smallBtn = true
-               setTimeout(() => {
-                  this.fold = true
-               }, 300)
-            }
+export default {
+   name: 'zMenu',
+   data () {
+      return {
+         fold: true,
+         smallBtn: true,
+         navList: [
+            { name: 'Brand', list: ['Brand1', 'Brand2'] },
+            { name: 'Series', list: ['Series1', 'Series2'] },
+            { name: 'Accessories', list: ['Accessories1', 'Accessories2'] },
+            { name: 'Test Drive & After-sales' }
+         ],
+         level2Index: -1
+      }
+   },
+   methods: {
+      toggleFold () {
+         if (this.fold) {
+            this.fold = false
+            setTimeout(() => {
+               this.smallBtn = false
+            }, 1000)
+         } else {
+            this.smallBtn = true
+            setTimeout(() => {
+               this.fold = true
+            }, 300)
          }
       }
    }
+}
 </script>

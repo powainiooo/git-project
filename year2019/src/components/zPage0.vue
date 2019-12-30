@@ -1,10 +1,10 @@
 <style scoped>
-.z-page0 { width: 100%; height: 100vh; position: absolute; top: 0; left: 0; z-index: 12; overflow: hidden; background-color: #A9E4F5;}
+.z-page0 { width: 100%; height: 100vh; position: absolute; top: 0; left: 0; z-index: 13; overflow: hidden; background-color: #A9E4F5;}
 .z-page0-fadeIn { animation: fadeIn 0.5s linear;}
 .z-page0-fadeOut { animation: fadeOut 0.5s linear;}
 .z-page0 .bg { width: 100%; display: block;}
-.z-page0 .bg-top { width: 100%; display: block; position: absolute; top: 0; left: 0; z-index: 10;}
-.z-page0 .ticket { width: 528px; position: absolute; top: 200px; left: 138px; animation: ticket 1s ease-out 0.5s both;}
+.z-page0 .bg-top { width: 100%; display: block; position: absolute; top: 0; left: 0; z-index: 130;}
+.z-page0 .ticket { width: 528px; position: absolute; top: 200px; left: 138px; animation: ticket 1s ease-out 0.5s both;z-index: 120;}
 @keyframes ticket {
    0% { transform: translateY(-850px)}
    100% { transform: translateY(0)}
@@ -18,7 +18,7 @@
 .z-page0 .ticket .content div .title { color: #F84F1C}
 .z-page0 .ticket .content div span { color: #0475B5}
 .z-page0:after { content: '';  width: 100%; height: 130px; background-color: #A9E4F5; position: absolute; bottom: 0; left: 0;}
-.z-page0 .arrow { width: 100%; font-size: 24px; color: #ffffff; justify-content: center; align-items: center; display: flex; position: absolute; top: 1050px; left: 0;}
+.z-page0 .arrow { width: 100%; font-size: 24px; color: #ffffff; justify-content: center; align-items: center; display: flex; position: absolute; top: 1050px; left: 0; z-index: 120;}
 .z-page0 .arrow img { width: 40px; margin-left: 20px;}
 </style>
 
@@ -34,19 +34,22 @@
             <p>Hi～ <span class="name">{{userName}}</span> 同学</p>
             <div>
                综合你在2019年的用车表现<br/>
-               特授予你<span class="title">{{tagName}}</span>科技宅称号
+               特授予你<span class="title">{{tagName}}</span>称号
             </div>
             <div v-html="content"></div>
          </div>
       </div>
       <div class="arrow">左滑查看年报<img src="@/assets/img/arrow2.png"></div>
+      <z-car status="stop" v-if="showParts"></z-car>
    </div>
 </transition>
 </template>
 
 <script type='es6'>
+import zCar from '@/components/zCar.vue'
 export default {
 	name: 'app',
+   components: { zCar },
 	data() {
 		return {
 		   outTime: 300,

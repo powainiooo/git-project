@@ -3,3 +3,18 @@
 .info-section>.btn1 { margin-top: 120px;}
 
 .btn1 { width: 150px; height: 50px; background-color: #ffd400; color: #1a1a1a; font-size: 16px; font-family: TTHBold; display: flex; justify-content: center; align-items: center;}
+.btn2 { width: 150px; height: 50px; border: 1px solid #ffd400; color: #ffffff; font-size: 16px; font-family: TTHBold; display: flex; justify-content: center; align-items: center;}
+
+.z-select.ivu-select-single .ivu-select-selection { height: 40px}
+.z-select .ivu-select-selection { border: 1px solid #e6e6e6; background-color: transparent; border-radius: 0;}
+.z-select.ivu-select-single .ivu-select-selection .ivu-select-placeholder, .z-select.ivu-select-single .ivu-select-selection .ivu-select-selected-value { height: 40px; line-height: 40px; font-family: TTHR;}
+.z-select .ivu-select-arrow { color: #e6e6e6; font-size: 20px;}
+
+.z-input { width: 200px; height: 40px; border: 1px solid #e6e6e6; line-height: 40px; font-size: 16px; font-family: TTHR; padding: 0 20px;}
+
+.z-tab { display: flex; margin-top: 30px; margin-bottom: 30px;}
+.z-tab li { width: 200px; height: 50px; display: flex; justify-content: center; align-items: center; font-size: 16px; font-family: TTHBold; color: #ffffff;  border: 1px solid #ffd400;}
+.z-tab li.active { background-color: #ffd400; color: #1a1a1a;}
+
+.z-checkbox { width: 18px; height: 18px; -webkit-appearance: none; border: none; background: url("../images/icon-ckeckbox.png") no-repeat;}
+.z-checkbox:checked { background-position: -18px 0;}

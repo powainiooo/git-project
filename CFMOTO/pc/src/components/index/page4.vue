@@ -64,9 +64,9 @@
 
 <script type='es6'>
 export default {
-	name: 'app',
-	data() {
-		return {
+   name: 'app',
+   data () {
+      return {
          swiperP4: {
             centeredSlides: true,
             slidesPerView: 3,
@@ -74,11 +74,11 @@ export default {
             loop: true,
             navigation: {
                nextEl: '.swiper-button-next',
-               prevEl: '.swiper-button-prev',
-            },
+               prevEl: '.swiper-button-prev'
+            }
          }
       }
-	},
-	methods: {}
+   },
+   methods: {}
 }
 </script>

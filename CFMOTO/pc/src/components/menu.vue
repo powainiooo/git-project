@@ -43,11 +43,12 @@
    </a>
 
    <nav class="nav-list">
-      <ul class="level1">
+      <ul class="level1" v-if="!fold">
          <li v-for="(item, index) in navList"
              @mouseover="level2Index = index"
              @mouselever="level2Index = -1"
-             :key="index" v-if="!fold">
+             :key="index"
+             >
             <a href="javascript:;">{{item.name}}</a>
             <transition enter-active-class="menuIn" leave-active-class="menuOut">
                <ul class="level2" v-if="item.list && level2Index === index">

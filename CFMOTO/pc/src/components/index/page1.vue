@@ -16,10 +16,10 @@
 
 <script type='es6'>
 export default {
-	name: 'app',
-	data() {
-		return {}
-	},
-	methods: {}
+   name: 'app',
+   data () {
+      return {}
+   },
+   methods: {}
 }
 </script>

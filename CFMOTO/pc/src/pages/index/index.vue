@@ -45,6 +45,7 @@ body { background-color: #000000; color: #fff}
          </transition>
       </li>
    </ul>
+   <detail></detail>
 </div>
 </template>
 
@@ -59,16 +60,17 @@ import zPage5 from '@/components/index/page5.vue'
 import zPage6 from '@/components/index/page6.vue'
 import zPage7 from '@/components/index/page7.vue'
 import pageFooter from '@/components/index/pageFooter.vue'
+import detail from '@/components/index/detail.vue'
 export default {
    name: 'index',
-   components: { topNav, zMenu, zPage1, zPage2, zPage3, zPage4, zPage5, zPage6, zPage7, pageFooter },
+   components: { topNav, zMenu, zPage1, zPage2, zPage3, zPage4, zPage5, zPage6, zPage7, pageFooter, detail },
    data () {
       return {
          navIndex: 1,
          swiperOption: {
             // initialSlide: 7,
             direction: 'vertical',
-            simulateTouch : false,
+            simulateTouch: false,
             // height: window.innerHeight,
             slidesPerView: 'auto',
             mousewheel: true

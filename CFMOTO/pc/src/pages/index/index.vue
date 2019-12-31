@@ -45,7 +45,7 @@ body { background-color: #000000; color: #fff}
          </transition>
       </li>
    </ul>
-   <detail></detail>
+   <cart></cart>
 </div>
 </template>
 
@@ -61,9 +61,10 @@ import zPage6 from '@/components/index/page6.vue'
 import zPage7 from '@/components/index/page7.vue'
 import pageFooter from '@/components/index/pageFooter.vue'
 import detail from '@/components/index/detail.vue'
+import cart from '@/components/index/cart.vue'
 export default {
    name: 'index',
-   components: { topNav, zMenu, zPage1, zPage2, zPage3, zPage4, zPage5, zPage6, zPage7, pageFooter, detail },
+   components: { topNav, zMenu, zPage1, zPage2, zPage3, zPage4, zPage5, zPage6, zPage7, pageFooter, detail, cart },
    data () {
       return {
          navIndex: 1,

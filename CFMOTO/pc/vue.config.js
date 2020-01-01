@@ -1,4 +1,5 @@
 module.exports = {
+   publicPath: '',
    pages: {
       index: 'src/pages/index/index.js',
       dare: 'src/pages/dare/dare.js',
@@ -11,6 +12,7 @@ module.exports = {
       test: 'src/pages/test/test.js'
    },
    devServer: {
+      disableHostCheck: true,
       overlay: false
    }
 }

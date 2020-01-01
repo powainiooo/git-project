@@ -1,12 +1,12 @@
 @font-face {
     font-family: 'TTHB';
-    src: url(../font/TTHB.otf)
+    src: url(../font/TTHB.otf), url(../font/TTHB.ttf)
 }
 @font-face {
     font-family: 'TTHBold';
-    src: url(../font/TTHBold.otf)
+    src: url(../font/TTHBold.otf), url(../font/TTHBold.ttf)
 }
 @font-face {
     font-family: 'TTHR';
-    src: url(../font/TTHR.otf)
+    src: url(../font/TTHR.otf), url(../font/TTHR.ttf)
 }

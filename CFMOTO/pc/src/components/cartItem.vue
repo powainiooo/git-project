@@ -5,6 +5,7 @@
 .z-cart-item .line2 { margin-left: 20px;}
 .z-cart-item .line2 h3 { font-size: 24px; color: #ffffff; font-family: TTHBold; margin-bottom: 10px;}
 .z-cart-item .nums { width: 100px; height: 32px; border: 1px solid #ffd400; border-radius: 16px; display: flex; justify-content: space-between; align-items: center; color: #ffffff; padding: 0 8px; margin-top: 6px;}
+.z-cart-item .nums i { cursor: pointer;}
 .z-cart-item .price { font-size: 16px; color: #ffd400; font-family: TTHBold; margin-left: 60px;}
 .z-cart-item .price span { font-size: 36px; font-family: TTHBold; margin-left: 10px;}
 .z-cart-item .btn-close { width: 60px; height: 60px; position: absolute; right: -60px; top: -1px; color: #ffffff; font-size: 60px;}
@@ -22,9 +23,9 @@
       </div>
       <div style="width: 100px; height: 32px; margin-left: 90px;">
          <div class="nums" v-if="type === 'cart'">
-            <Icon type="md-remove" />
-            <span>1</span>
-            <Icon type="md-add" />
+            <Icon type="md-remove" @click="doReduce"/>
+            <span>{{nums}}</span>
+            <Icon type="md-add" @click="doAdd"/>
          </div>
       </div>
       <div class="price">RMB<span>6,999</span></div>
@@ -34,12 +35,22 @@
 </template>
 
 <script type="es6">
-   export default {
-      name: 'App',
-      props: ['type'],
-      data() {
-         return {}
+export default {
+   name: 'App',
+   props: ['type'],
+   data () {
+      return {
+         nums: 1
+      }
+   },
+   methods: {
+      doAdd () {
+         this.nums += 1
+      },
+      doReduce () {
+         if (this.nums === 0) return
+         this.nums -= 1
       }
    }
+}
 </script>
-

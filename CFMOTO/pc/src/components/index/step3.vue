@@ -6,7 +6,7 @@
 .step3 .btns a:hover, .step3 .btns a.active { border: 2px solid #ffd400; border-radius: 4px;}
 .step3 .icons { margin-right: 40px; display: flex;}
 .step3 .info { width: 450px; float: left; margin-right: 250px;}
-.step3 .info h3 { font-size: 80px; font-family: TTHBold; color: #ffffff; margin-bottom: 20px;}
+.step3 .info h3 { font-size: 80px; font-family: TTHBold; margin-bottom: 20px;-webkit-text-stroke: 2px #ffffff; color: rgba(0,0,0,0)}
 .step3 .info p { font-size: 14px; font-family: TTHR; color: #ffffff; margin-bottom: 20px;}
 .step3 .info p.tel { font-size: 36px; font-family: TTHBold; color: #ffd400; margin-bottom: 20px;}
 </style>
@@ -27,7 +27,7 @@
       </div>
    </div>
    <div class="info">
-      <a href="#" class="btn1" style="margin-top: 100px;">Back</a>
+      <a href="#" class="btn1" style="margin-top: 100px;" @click="goBack">Back</a>
    </div>
 </div>
 </template>
@@ -38,6 +38,11 @@ export default {
    data () {
       return {}
    },
-   methods: {}
+   methods: {
+      goBack () {
+         this.$parent.page = 'map'
+         this.$parent.store = null
+      }
+   }
 }
 </script>

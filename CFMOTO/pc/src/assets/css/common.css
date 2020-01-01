@@ -1,5 +1,6 @@
 .info-section>h3 { font-size: 80px; color: #ffffff; font-family: TTHBold; line-height: 80px;}
-.info-section>p { width: 690px; font-size: 16px; color: #ffffff; font-family: TTHBR; line-height: 35px; margin-top: 30px;}
+.info-section>h3.border { -webkit-text-stroke: 2px #ffffff; color: rgba(0,0,0,0)}
+.info-section>p { width: 690px; font-size: 16px; color: #ffffff; font-family: TTHR; line-height: 35px; margin-top: 30px;}
 .info-section>.btn1 { margin-top: 120px;}
 
 .btn1 { width: 150px; height: 50px; background-color: #ffd400; color: #1a1a1a; font-size: 16px; font-family: TTHBold; display: flex; justify-content: center; align-items: center;}
@@ -7,14 +8,31 @@
 
 .z-select.ivu-select-single .ivu-select-selection { height: 40px}
 .z-select .ivu-select-selection { border: 1px solid #e6e6e6; background-color: transparent; border-radius: 0;}
-.z-select.ivu-select-single .ivu-select-selection .ivu-select-placeholder, .z-select.ivu-select-single .ivu-select-selection .ivu-select-selected-value { height: 40px; line-height: 40px; font-family: TTHR;}
+.z-select.ivu-select-single .ivu-select-selection .ivu-select-placeholder, .z-select.ivu-select-single .ivu-select-selection .ivu-select-selected-value { height: 40px; line-height: 40px; font-family: TTHR; color: #e6e6e6;}
 .z-select .ivu-select-arrow { color: #e6e6e6; font-size: 20px;}
 
 .z-input { width: 200px; height: 40px; border: 1px solid #e6e6e6; line-height: 40px; font-size: 16px; font-family: TTHR; padding: 0 20px;}
 
 .z-tab { display: flex; margin-top: 30px; margin-bottom: 30px;}
-.z-tab li { width: 200px; height: 50px; display: flex; justify-content: center; align-items: center; font-size: 16px; font-family: TTHBold; color: #ffffff;  border: 1px solid #ffd400;}
+.z-tab li { width: 200px; height: 50px; display: flex; justify-content: center; align-items: center; font-size: 16px; font-family: TTHBold; color: #ffffff;  border: 1px solid #ffd400; cursor: pointer;}
 .z-tab li.active { background-color: #ffd400; color: #1a1a1a;}
 
 .z-checkbox { width: 18px; height: 18px; -webkit-appearance: none; border: none; background: url("../images/icon-ckeckbox.png") no-repeat;}
 .z-checkbox:checked { background-position: -18px 0;}
+
+@keyframes slideInLeft100 {
+   0% { transform: translateX(-100px); opacity: 0;}
+   100% { transform: translateX(0); opacity: 1;}
+}
+@keyframes slideInRight100 {
+   0% { transform: translateX(100px); opacity: 0;}
+   100% { transform: translateX(0); opacity: 1;}
+}
+@keyframes slideInUp100 {
+   0% { transform: translateY(100px); opacity: 0;}
+   100% { transform: translateY(0); opacity: 1;}
+}
+@keyframes slideInDown100 {
+   0% { transform: translateY(-100px); opacity: 0;}
+   100% { transform: translateY(0); opacity: 1;}
+}

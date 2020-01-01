@@ -5,8 +5,13 @@
    @import "../../assets/css/common.css";
    body { background-color: #000000; color: #fff}
    .detail-container .bg { width: 100%; display: block;}
-   .detail-container .page1 .info-section { width: 100%; position: absolute; top: 50%; left: 0; margin-top: -125px;}
+   .detail-container .page1 { animation: fadeIn 1s linear 0.3s both;}
+   .detail-container .page1 .info-section { width: 100%; position: absolute; top: 50%; left: 0; margin-top: -125px; animation: fadeIn 1s linear 1.3s both;}
    .detail-container .page1 .info-section p { margin-left: auto; margin-right: auto;}
+   .detail-container .page2 .bg { opacity: 0; transition: all 1s linear;}
+   .detail-container .page2 .info-section { opacity: 0; transition: all 1s linear 1s;}
+   .detail-container .page2Show .bg { opacity: 1}
+   .detail-container .page2Show .info-section { opacity: 1}
    .detail-container .page4 .content { position: absolute; top: 50%; left: 13%; margin-top: -300px;}
    .detail-container .page8 { width: 880px; margin: 140px auto;}
    .detail-container .page8 h3 { font-size: 36px; color: #ffffff; font-family: TTHBold; margin-bottom: 40px;}
@@ -33,8 +38,8 @@
                <p class="tc">It is not just a vehicle that takes you to your destination. It is not just a machine you have to use every day. </p>
             </div>
          </div>
-         <div class="mt100 tc">
-            <img src="@/assets/images/detail2/img2.jpg">
+         <div class="mt100 tc page2" :class="{'page2Show':page2Show}">
+            <img src="@/assets/images/detail2/img2.jpg" class="bg">
             <div class="info-section mt60 tc">
                <h3 class="tc">Build for Future</h3>
                <p class="tc" style="margin-left: auto; margin-right: auto;">It is not just a vehicle that takes you to your destination. It is not just a machine you have to use every day. It is so much more! ZEEHO is your environmentally-friendly companion that gives you an amazing riding experience. It represents your dedication towards urban mobility. It symbolizes the high-quality lifestyle you always wished for.</p>
@@ -105,7 +110,19 @@ export default {
    name: 'App',
    components: { topNav, zMenu, pageFooter },
    data () {
-      return {}
+      return {
+         page2Show: false
+      }
+   },
+   mounted () {
+      const self = this
+      window.onscroll = function () {
+         const st = document.documentElement.scrollTop
+         console.log(st)
+         if (st > 800) {
+            self.page2Show = true
+         }
+      }
    }
 }
 </script>

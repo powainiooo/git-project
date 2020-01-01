@@ -1,6 +1,6 @@
 <style scoped>
-.z-page3 { width: 100%; height: 100%; position: relative; background: url("../../assets/images/index/bg3.jpg") no-repeat; background-size: auto 100%; background-position: right bottom;}
-.z-page3 .info-section { position: absolute; left: 13%; top: 50%; margin-top: -165px;}
+.z-page3 { width: 100%; height: 100%; position: relative; background: url("../../assets/images/index/bg3.jpg") no-repeat; background-size: auto 100%; background-position: right bottom; animation: fadeIn 1s linear 0.5s both;}
+.z-page3 .info-section { position: absolute; left: 13%; top: 50%; margin-top: -165px; animation: infoIn 0.5s ease-out 0.5s both;}
 .z-page3 .btn-arrow { height: 80px; position: absolute; left: 13%; bottom: 0;}
 </style>
 

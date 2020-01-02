@@ -21,17 +21,17 @@
          <a href="javascript:;">CN</a>
          <a href="javascript:;" class="active">EN</a>
       </div>
-      <div class="btns">
+      <div class="btns" v-if="type==='all'">
          <a href="javascript:;" class="active">App</a>
          <a href="javascript:;" @click="showLogin=true" v-if="!isLogin">log In</a>
          <a href="personal.html" v-if="isLogin">Personal center</a>
       </div>
-      <div class="icons">
+      <div class="icons" v-if="type==='all'">
          <a href="javascript:;" class="active"><img src="@/assets/images/icon-search.png" width="26" height="26"/></a>
          <a href="javascript:;"><img src="@/assets/images/icon2.png" width="31" height="26"/></a>
       </div>
    </div>
-   <a href="javascript:;" class="btn1 btn-cart" @click="showCart=true"><img src="@/assets/images/icon-cart.png" width="27" height="26" class="mr20"/>Cart</a>
+   <a href="javascript:;" class="btn1 btn-cart" @click="showCart=true" v-if="type==='all'"><img src="@/assets/images/icon-cart.png" width="27" height="26" class="mr20"/>Cart</a>
    <login :show.sync="showLogin"></login>
    <cart :show.sync="showCart"></cart>
 </div>
@@ -43,6 +43,12 @@ import cart from '@/components/index/cart.vue'
 export default {
    name: 'topNav',
    components: { login, cart },
+   props: {
+      type: {
+         type: String,
+         default: 'all'
+      }
+   },
    data () {
       return {
          showLogin: false,

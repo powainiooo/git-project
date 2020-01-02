@@ -8,7 +8,7 @@
 <div class="z-page1">
    <div class="info-section">
       <h3>Evolution?<br/>No, it´s revolution!</h3>
-      <a href="javascript:;" class="btn1">Learn more</a>
+      <a href="update.html" class="btn1">Learn more</a>
    </div>
    <a href="javascript:;" class="btn1 btn-arrow" @click="gotoNext"><img src="@/assets/images/icon-arrow-down.png"></a>
 </div>

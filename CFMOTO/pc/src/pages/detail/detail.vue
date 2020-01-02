@@ -19,6 +19,7 @@
       0% { transform: scaleX(0)}
       100% { transform: scaleX(1)}
    }
+   .detail-container .page5 .info-section { position: absolute; top: 20%; left: 15%; margin-top: -125px;}
    .detail-container .page6 .info-section { position: absolute; top: 50%; right: 15%; margin-top: -125px;}
    .detail-container .page8 { width: 880px; margin: 140px auto;}
    .detail-container .page8 h3 { font-size: 36px; color: #ffffff; font-family: TTHBold; margin-bottom: 40px;}
@@ -68,6 +69,11 @@
             </div>
          </div>
          <div class="pr page5" ref="page5">
+            <div class="info-section">
+               <h3>Turn it Up</h3>
+               <p style="width: 620px;">We pushed our G1 motor to unleash even more power in the city and on the race track. The result is the G1-S performance motor. It’s faster. More efficient. Delivering more torque than ever.
+                  <br/>This is what you’ve been waiting for.</p>
+            </div>
             <img src="@/assets/images/detail/bg4.jpg" class="bg"/>
          </div>
          <div class="pr page6" ref="page6">
@@ -139,17 +145,14 @@ export default {
       }
    },
    mounted () {
-      setTimeout(() => {
-         this.p1H = this.$refs.page1.clientHeight
-         this.p2H = this.$refs.page2.offsetHeight
-         this.p3H = this.$refs.page3.offsetHeight
-         this.p4H = this.$refs.page4.offsetHeight
-         console.log(this.p1H + this.p2H + this.p3H)
-      }, 100)
       window.onscroll = this.scroll
    },
    methods: {
       scroll (e) {
+         this.p1H = this.$refs.page1.clientHeight
+         this.p2H = this.$refs.page2.offsetHeight
+         this.p3H = this.$refs.page3.offsetHeight
+         this.p4H = this.$refs.page4.offsetHeight
          if (this.p1H === 0) return
          const st = document.documentElement.scrollTop
          if (st > (this.p1H + this.p2H / 2)) {

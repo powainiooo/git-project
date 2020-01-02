@@ -9,6 +9,8 @@ module.exports = {
       list: 'src/pages/list/list.js',
       personal: 'src/pages/personal/personal.js',
       news: 'src/pages/news/news.js',
+      error: 'src/pages/404/404.js',
+      update: 'src/pages/update/update.js',
       test: 'src/pages/test/test.js'
    },
    devServer: {

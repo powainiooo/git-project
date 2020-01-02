@@ -9,7 +9,7 @@
    <div class="info-section">
       <h3>Why EV? Why not EV!</h3>
       <p>It is not just a vehicle that takes you to your destination. It is not just a machine you have to use every day. It is so much more! ZEEHO is your environmentally-friendly companion that gives you an amazing riding experience. It represents your dedication towards urban mobility. It symbolizes the high-quality lifestyle you always wished for.</p>
-      <a href="javascript:;" class="btn1">Learn more</a>
+      <a href="error.html" class="btn1">Learn more</a>
    </div>
 </div>
 </template>

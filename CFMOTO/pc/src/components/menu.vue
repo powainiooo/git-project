@@ -4,7 +4,7 @@
    .z-menu .btn-menu .icon-menu { width: 32px; margin-right: 12px; transition: all 0.3s ease-out; opacity: 0;}
    .z-menu .btn-menu div { width: 80px; height: 150px; background-color: #ffd400; display: flex; align-items: center; overflow: hidden; transition: all 0.3s ease-out;}
    .z-menu .btn-menu div img { width: 18px; margin-left: 20px;}
-   .z-menu-fold { width: 60px; background-color: rgba(0, 0, 0, 0);}
+   .z-menu-fold { width: 60px; background-color: rgba(0, 0, 0, 0); transition-duration: 0.4s}
    .z-menu-fold .btn-menu { margin-left: -30px;}
    .z-menu-fold .btn-menu .icon-menu { opacity: 1;}
    .z-menu .btn-menu-small { margin-top: -20px;}
@@ -43,6 +43,7 @@
    .nav-list .li1:nth-child(3) .name1 { animation-delay: 0.3s;}
    .nav-list .li1:nth-child(4) .name1 { animation-delay: 0.4s;}
    .nav-list .li1:nth-child(5) .name1 { animation-delay: 0.5s;}
+   .nav-list .li1 .name1.fadeOut { animation: fadeOut 0s ease-out 0s both}
 </style>
 
 <template>
@@ -66,7 +67,7 @@
              :key="index"
              class="li1"
              :class="{'active':level2Index === index}">
-            <transition enter-active-class="firstIn">
+            <transition enter-active-class="firstIn" leave-active-class="fadeOut">
             <a href="javascript:;" class="name1" v-if="showMenu">{{item.name}}</a>
             </transition>
             <transition enter-active-class="menuIn" leave-active-class="menuOut">

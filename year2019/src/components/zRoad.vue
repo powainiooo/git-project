@@ -32,30 +32,30 @@
 .fadeOut { animation: fadeOut 0.5s linear}
 
 .page3-bg {bottom: 144px;}
-.page3-bg .bg-move { width: 1590px; height: 200px; background-image: url('/static/bg3-up.png');}
+.page3-bg .bg-move { width: 1590px; height: 200px;}
 .page3-bg-bottom {bottom: 0;}
-.page3-bg-bottom .bg-move { width: 1820px; height: 80px; background-image: url('/static/bg3-bottom.png');}
+.page3-bg-bottom .bg-move { width: 1820px; height: 80px;}
 
 .page4-bg {bottom: 110px;}
-.page4-bg .bg-move { width: 1990px; height: 340px; background-image: url('/static/bg4.png');}
+.page4-bg .bg-move { width: 1990px; height: 340px;}
 
 .page5-back {bottom: 146px;}
-.page5-back .bg-move { width: 2440px; height: 430px; background-image: url('/static/bg5-back.png');}
+.page5-back .bg-move { width: 2440px; height: 430px;}
 .page5-front {bottom: 0;}
-.page5-front .bg-move { width: 1890px; height: 320px; background-image: url('/static/bg5-front.png');}
+.page5-front .bg-move { width: 1890px; height: 320px;}
 
 .page6-back {bottom: 138px;}
-.page6-back .bg-move { width: 3120px; height: 630px; background-image: url('/static/bg6-back.png');}
+.page6-back .bg-move { width: 3120px; height: 630px;}
 .page6-front {bottom: 0;}
-.page6-front .bg-move { width: 1030px; height: 74px; background-image: url('/static/bg6-front.png');}
+.page6-front .bg-move { width: 1030px; height: 74px;}
 
 .page8-back {bottom: 144px;}
-.page8-back .bg-move { width: 2750px; height: 490px; background-image: url('/static/bg7-back.png');}
+.page8-back .bg-move { width: 2750px; height: 490px;}
 .page8-front {bottom: 0;}
-.page8-front .bg-move { width: 2540px; height: 440px; background-image: url('/static/bg7-front.png');}
+.page8-front .bg-move { width: 2540px; height: 440px;}
 
 .page9-bg {bottom: 140px;}
-.page9-bg .bg-move { width: 2060px; height: 390px; background-image: url('/static/bg8.png');}
+.page9-bg .bg-move { width: 2060px; height: 390px;}
 </style>
 
 <template>
@@ -71,28 +71,28 @@
    </transition>
    <transition enter-active-class="bgIn" leave-active-class="fadeOut">
       <div class="page2-bg" v-if="currentPage === 'p2'">
-         <img src="static/bg2.png" class="building"/>
-         <img src="@/assets/img/spot.png" class="spot"/>
+         <img :src="imgSrc+'static/bg2.png'" class="building"/>
+         <img src="@/assets/img/spot.png" class="spot" v-if="type !== 'gasoline'"/>
       </div>
    </transition>
    <transition enter-active-class="fadeIn" leave-active-class="fadeOut">
       <div class="page-bg page3-bg" v-if="currentPage === 'p3'">
-         <div class="bg-move" :style="bgMove" ref="bg"></div>
+         <div class="bg-move" :style="bgMove3" ref="bg"></div>
       </div>
    </transition>
    <transition enter-active-class="fadeIn" leave-active-class="fadeOut">
       <div class="page-bg page3-bg-bottom" v-if="currentPage === 'p3'">
-         <div class="bg-move" :style="bgBottomMove" ref="bgBottom"></div>
+         <div class="bg-move" :style="bgBottomMove3" ref="bgBottom"></div>
       </div>
    </transition>
    <transition enter-active-class="fadeIn" leave-active-class="fadeOut">
       <div class="page-bg page4-bg" v-if="currentPage === 'p4'">
-         <div class="bg-move" :style="bgMove" ref="bg"></div>
+         <div class="bg-move" :style="bgMove4" ref="bg"></div>
       </div>
    </transition>
    <transition enter-active-class="fadeIn" leave-active-class="fadeOut">
       <div class="page-bg page5-back" v-if="currentPage === 'p5'">
-         <div class="bg-move" :style="bgMove" ref="bg"></div>
+         <div class="bg-move" :style="bgMove5" ref="bg"></div>
       </div>
    </transition>
    <!--<transition enter-active-class="fadeIn" leave-active-class="fadeOut">-->
@@ -102,17 +102,17 @@
    <!--</transition>-->
    <transition enter-active-class="fadeIn" leave-active-class="fadeOut">
       <div class="page-bg page6-back" v-if="currentPage === 'p6'">
-         <div class="bg-move" :style="bgMove" ref="bg"></div>
+         <div class="bg-move" :style="bgMove6" ref="bg"></div>
       </div>
    </transition>
    <transition enter-active-class="fadeIn" leave-active-class="fadeOut">
       <div class="page-bg page6-front" v-if="currentPage === 'p6'">
-         <div class="bg-move" :style="bgBottomMove" ref="bg"></div>
+         <div class="bg-move" :style="bgBottomMove6" ref="bg"></div>
       </div>
    </transition>
    <transition enter-active-class="fadeIn" leave-active-class="fadeOut">
       <div class="page-bg page8-back" v-if="currentPage === 'p7'">
-         <div class="bg-move" :style="bgMove" ref="bg"></div>
+         <div class="bg-move" :style="bgMove7" ref="bg"></div>
       </div>
    </transition>
    <!--<transition enter-active-class="fadeIn" leave-active-class="fadeOut">-->
@@ -122,7 +122,7 @@
    <!--</transition>-->
    <transition enter-active-class="fadeIn" leave-active-class="fadeOut">
       <div class="page-bg page9-bg" v-if="currentPage === 'p8'">
-         <div class="bg-move" :style="bgMove" ref="bg"></div>
+         <div class="bg-move" :style="bgMove8" ref="bg"></div>
       </div>
    </transition>
 </div>
@@ -153,8 +153,14 @@ export default {
       }
 	},
    computed: {
+      imgSrc () {
+         return this.$store.state.imgSrc
+      },
       currentPage () {
          return this.$store.state.currentPage
+      },
+      type () {
+         return this.$store.state.powerMode
       },
       roadsExtraClass () {
          return `roads-${this.currentPage}`
@@ -169,11 +175,62 @@ export default {
             'background-position-x': `${this.bgCurrent}px`,
          }
       },
+      bgMove3 () {
+         return {
+            'background-position-x': `${this.bgCurrent}px`,
+            'background-image': `url('${this.imgSrc}static/bg3-up.png')`
+         }
+      },
+      bgMove4 () {
+         return {
+            'background-position-x': `${this.bgCurrent}px`,
+            'background-image': `url('${this.imgSrc}static/bg4.png')`
+         }
+      },
+      bgMove5 () {
+         return {
+            'background-position-x': `${this.bgCurrent}px`,
+            'background-image': `url('${this.imgSrc}static/bg5-back.png')`
+         }
+      },
+      bgMove6 () {
+         return {
+            'background-position-x': `${this.bgCurrent}px`,
+            'background-image': `url('${this.imgSrc}static/bg6-back.png')`
+         }
+      },
+      bgMove7 () {
+         return {
+            'background-position-x': `${this.bgCurrent}px`,
+            'background-image': `url('${this.imgSrc}static/bg7-back.png')`
+         }
+      },
+      bgMove8 () {
+         return {
+            'background-position-x': `${this.bgCurrent}px`,
+            'background-image': `url('${this.imgSrc}static/bg8.png')`
+         }
+      },
       bgBottomMove () {
          return {
             'background-position-x': `${this.bgBottomCurrent}px`,
          }
-      }
+      },
+      bgBottomMove3 () {
+         return {
+            'background-position-x': `${this.bgBottomCurrent}px`,
+            'background-image': `url('${this.imgSrc}static/bg3-bottom.png')`
+         }
+      },
+      bgBottomMove6 () {
+         return {
+            'background-position-x': `${this.bgBottomCurrent}px`,
+            'background-image': `url('${this.imgSrc}static/bg6-front.png')`
+         }
+      },
+      p5Data () {
+         return this.$store.state.pageData.P5
+      },
    },
    watch: {
       currentPage (val) {
@@ -186,7 +243,11 @@ export default {
             if (val === 'p6') {
                this.bgSpeedPecent = 0.4
             } else if (val === 'p5') {
-               this.maxSpeed = 1
+               if (this.p5Data.tag === 3) {
+                  this.maxSpeed = 1
+               } else {
+                  this.maxSpeed = 4
+               }
             } else if (val === 'p8') {
                this.bgSpeedPecent = 0.3
             }

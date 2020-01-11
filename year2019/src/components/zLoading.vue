@@ -22,69 +22,7 @@
 
 <script type='es6'>
 import axios from 'axios'
-//{"result":"0","data":{"P0":{"powerMode":"混动","dLink":"No","enrollDays":1499},"P1":{"mileage":4600,"evMileage":2350,"tag":4},"P2":{"chargeTimes":19,"cPlacing":19,"avgChargeTime":1.1,"timeZone":"07:00-07:59","tag":3},"P3":{"maxSpeed":125,"avgSpeed":40.4,"tag":2},"P4":{"driveTime":161.3},"P5":{"tag":3},"P6":{"tag":2,"mostControl":2,"controlTimes":25},"P9":{"city":{"month":5,"day":1,"name":"惠州市"},"travel":{"month":2,"day":7,"mileage":132},"high":{"month":5,"day":1,"city":"惠州市","altitude":1336},"air":{"month":6,"day":20,"times":3},"status":{"month":1,"day":4,"times":36},"energy":{"month":4,"day":19,"times":26},"unlock":{"month":4,"day":25,"times":4}},"P10":{"tag":2,"recommend":"远程控制、充电","total":85.2,"score":{"routine":74.8,"techno":82.2,"energy":96,"envir":87.9}}}}
-const tempData = {
-   "p0": {
-      "dLink": "No",
-      "enrollDays": 1287,
-      "powerMode": "混动"
-   },
-   "p1": {
-      "eConsumption": 915.5,
-      "evMileage": 3704,
-      "fConsumption": 590.3,
-      "mileage": 9833,
-      "tag": 2
-   },
-   "p10": {
-      "recommend": "节能、充电",
-      "score": "{\"routine\":85.7,\"envir\":77.9,\"techno\":99.8,\"energy\":71.3}",
-      "tag": 1,
-      "total": 83
-   },
-   "p2": {
-      "avgChargeTime": 2.1,
-      "cPlacing": 50,
-      "chargeTimes": 0,
-      "tag": 1,
-      "timeZone": "08:00-08:59"
-   },
-   "p3": {
-      "avgSpeed": 43,
-      "maxSpeed": 136,
-      "tag": 1
-   },
-   "p4": {
-      "driveTime": 497.3
-   },
-   "p5": {
-      "tag": 3
-   },
-   "p6": {
-      "controlTimes": 473,
-      "leastControl": 3,
-      "mostControl": 2,
-      "tag": 2
-   },
-   "p7": {},
-   "p8": {
-      "topApp": ""
-   },
-   "p9": {
-      "air": "{\"times\":5,\"month\":10,\"day\":10}",
-      "city": "{\"month\":6,\"name\":\"广州市\",\"day\":16}",
-      "energy": "{\"times\":3,\"month\":10,\"day\":18}",
-      "game": "",
-      "high": "{\"altitude\":1336,\"month\":10,\"city\":\"惠州市\",\"day\":4}",
-      "late": "{\"month\":2,\"time\":2,\"day\":4}",
-      "music": "",
-      "status": "{\"times\":111,\"month\":9,\"day\":2}",
-      "study": "",
-      "travel": "{\"month\":2,\"day\":6,\"mileage\":901}",
-      "unlock": "{\"times\":14,\"month\":7,\"day\":19}",
-      "whistle": "{\"times\":5,\"month\":8,\"day\":6}"
-   }
-}
+
 export default {
 	name: 'app',
 	data() {
@@ -99,6 +37,9 @@ export default {
       }
 	},
    computed: {
+      imgSrc () {
+         return this.$store.state.imgSrc
+      },
       pageList () {
          return this.$store.state.pageList
       },
@@ -119,6 +60,7 @@ export default {
          return new Promise((resolve,reject)=>{
             let img = new Image();
             img.onload = function(){
+               console.log('img onload')
                self.steps += 1;
                self.precent = Math.floor(self.steps / self.imgsList.length * 100);
                self.$store.commit('setLoadingPecent', self.precent)
@@ -131,6 +73,7 @@ export default {
          })
       },
       loadAll(){
+         console.log('loadAll start1')
          let arr = [];
          for(let item of this.imgsList){
             arr.push(this.loadImgs(item))
@@ -138,6 +81,8 @@ export default {
          Promise.all(arr).then(res=>{
             this.imgLoadOver = true;
             this.isAllLoad();
+         }).catch(err => {
+            console.log(err)
          })
       },
       getData(){
@@ -147,15 +92,25 @@ export default {
             // this.precent = Math.floor(this.steps / (this.imgsList.length+1) * 100);
             // this.$store.commit('setLoadingPecent', this.precent)
             // this.isAllLoad();
-            axios.post('/mobileserve/Vehicle/getAnnuallyData',{data: this.params.data}).then(res=>{
+            console.log('this is params')
+            console.log(this.params)
+            axios.post('/mobileserve/Vehicle/getAnnuallyData',{
+               data: this.params.data,
+               source: this.params.source
+            }).then(res=>{
                let data = res.data;
                console.log('下面是年报数据')
                console.log(data)
                if(data.result === '0'){
                   this.dataLoadOver = true
                   // this.isAllLoad()
+                  // data.data.P7 = {
+                  //    avgFlow: 1,
+                  //    avgFlowAll: 2,
+                  // }
                   this.$store.commit('setPageData', data.data)
                   this.initLoadList(data.data)
+                  console.log('loadAll start0')
                   this.loadAll()
                }else{
                   getErrorData(JSON.stringify(data))
@@ -165,6 +120,7 @@ export default {
             })
          }catch(err){
             console.log(err)
+            getErrorData(JSON.stringify({result: "1",rebackDesc: "2"}))
          }
       },
       initLoadList (data) {
@@ -214,7 +170,7 @@ export default {
                      let arr = []
                      for (let j = 0; j < keyList.length; j++) {
                         if (data[`P${i}`][keyList[j]] !== undefined) {
-                           imgsList.push(`static/diary/${j+2}.png`)
+                           imgsList.push(`static/diary/diary-${j+2}.png`)
                            arr.push(keyList[j])
                         }
                      }
@@ -223,6 +179,10 @@ export default {
                }
             }
          }
+         for (let i = 0; i < imgsList.length; i++) {
+            imgsList[i] = this.imgSrc + imgsList[i]
+         }
+         console.log(imgsList)
          this.$store.commit('setPageList', pageList)
          this.imgsList = imgsList
       },
@@ -234,7 +194,6 @@ export default {
                   this.$store.commit('changePage', this.pageList[0])
                }, this.outTime)
             }, 200)
-
          }
       },
    }

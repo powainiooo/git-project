@@ -24,15 +24,15 @@
          </div>
          <div v-if="mostControl === 3">
             <p><span class="value">闪灯鸣笛 {{most_control_counts.toFixed(0)}}次</span></p>
-            <p>资深路痴有救啦，几千平方的停车场，一口气找车不费劲</p>
+            <p>资深路痴有救啦，几千平方的停车场<br/>一口气找车不费劲</p>
          </div>
          <div v-if="mostControl === 4">
             <p><span class="value">远程升窗 {{most_control_counts.toFixed(0)}}次</span></p>
-            <p>再也不用半夜穿着秋裤下楼，忘关窗快用云服务，成功人士都爱用！</p>
+            <p>再也不用半夜穿着秋裤下楼，忘关窗<br/>快用云服务，成功人士都爱用！</p>
          </div>
          <div v-if="mostControl === 0">
             <p>全年没有使用过任何远程操作</p>
-            <p>小拳拳捶你胸口，这么高科技你竟然都不用，快去解锁远程控制，坐躺人生赢家</p>
+            <p>小拳拳捶你胸口，这么高科技你竟然<br/>都不用，快去解锁远程控制，坐躺人<br/>生赢家</p>
          </div>
 
       </div>
@@ -41,17 +41,17 @@
       <div class="data-content" v-if="showParts && showUnUse">
          <p>你最不常使用的是<span>{{unUseList[unUseFunction]}}</span></p>
          <p v-if="unUseFunction === 1">夏天不热冬天不冷</p>
-         <p v-else-if="unUseFunction === 2">你有健忘症吗？出门忘带钥匙</p>
+         <p v-else-if="unUseFunction === 2">出门忘带钥匙</p>
          <p v-else-if="unUseFunction === 3">闪灯鸣笛也很炫酷</p>
          <p v-else-if="unUseFunction === 4">试着用用，我保证</p>
       </div>
    </transition>
    <transition enter-active-class="slideUpIn3" leave-active-class="fadeOut">
       <div class="tag-content" v-if="showParts && showUnUse">
-         <p v-if="unUseFunction === 1">从此冷暖自己掌控，<span>用TA</span>！</p>
+         <p v-if="unUseFunction === 1">从此冷暖自己掌控，<span>用TA！</span></p>
          <p v-else-if="unUseFunction === 2"><span>用TA</span>就够了！</p>
-         <p v-else-if="unUseFunction === 3">轻松帮你找车，<span>用TA</span>！</p>
-         <p v-else-if="unUseFunction === 4">强迫症不会再犯，<span>用TA</span>！</p>
+         <p v-else-if="unUseFunction === 3">轻松帮你找车，<span>用TA！</span></p>
+         <p v-else-if="unUseFunction === 4">强迫症不会再犯，<span>用TA！</span></p>
       </div>
    </transition>
 </div>
@@ -79,6 +79,7 @@ export default {
       },
       mostControl () {
          return this.pageData.mostControl
+         // return 4
       },
       showUnUse () {
          return this.pageData.leastControl !== undefined
@@ -107,6 +108,7 @@ export default {
                most_control_counts: this.pageData.controlTimes,
             }
          )
+         this.$store.commit('setCanChangePage', true)
       }
    }
 }

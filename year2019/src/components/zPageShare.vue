@@ -19,11 +19,15 @@
 <div class="z-page-share" v-show="showParts" @touchmove="tmove">
       <div class="poster">
          <img :src="posterSrc"/>
-         <img src="@/assets/img/btn-back.png" class="btn-back" @click="doReview">
+         <img src="@/assets/img/btn-back.png" class="btn-back" @click="doReview" v-if="source === 'app'">
       </div>
    <div class="btns" v-if="source === 'app'">
       <a href="javascript:;" @click="doShare">分享</a>
-      <a :href="posterSrc" download="比亚迪年报评分图" @click="download">保存图片</a>
+      <!--<a :href="posterSrc" download="比亚迪年报评分图" @click="download">保存图片</a>-->
+      <a href="javascript:;" @click="download">保存图片</a>
+   </div>
+   <div class="btns" v-if="source !== 'app'" style="justify-content: center;">
+      <a href="javascript:;" @click="doReview">再看一次</a>
    </div>
    <canvas width="720" height="1174" ref="poster"></canvas>
 </div>
@@ -38,7 +42,7 @@ export default {
          outTime: 1000,
          max: 100,
          // values: [90, 90, 90, 90, 90, 90],
-         tagList: ['山顶洞人', '科技宅', '节能家', '暴走家', '环保家', '语音控', '潮人范儿'],
+         tagList: ['山顶洞人', '科技控', '节能家', '暴走家', '环保家', '语音控', '潮人范儿'],
          hasPoster: false,
          posterSrc: ''
       }
@@ -69,6 +73,11 @@ export default {
          return arr
       }
    },
+   mounted () {
+      if (this.pageData !== undefined) {
+         this.loadAll()
+      }
+   },
    watch: {
       currentPage (page, lastPage) {
          if (page === 'p10') {
@@ -85,11 +94,11 @@ export default {
       loadAll () {
          if (this.hasPoster) return
          let arr = []
-         arr.push(this.loadImgs('static/poster/bg.png'))
-         arr.push(this.loadImgs('static/poster/title.png'))
-         arr.push(this.loadImgs('static/poster/qrcode.png'))
-         arr.push(this.loadImgs('static/poster/rada.png'))
-         arr.push(this.loadImgs(`static/poster/${this.pageData.tag}.png`))
+         arr.push(this.loadImgs('static/poster/poster-bg.png'))
+         arr.push(this.loadImgs('static/poster/poster-title.png'))
+         arr.push(this.loadImgs('static/poster/poster-qrcode.png'))
+         arr.push(this.loadImgs('static/poster/poster-rada.png'))
+         arr.push(this.loadImgs(`static/poster/poster-${this.pageData.tag}.png`))
          Promise.all(arr).then(res=>{
             this.drawPoster(res)
          })
@@ -108,6 +117,8 @@ export default {
          })
       },
       drawPoster (res) {
+         console.log('poster download success')
+         console.log(res)
          const canvas = this.$refs.poster
          const ctx = canvas.getContext('2d')
          // 背景色
@@ -121,10 +132,10 @@ export default {
          ctx.drawImage(res[0], 24, 24, 672, 200)
          // 标题图片
          ctx.drawImage(res[1], 65, 260)
-         // 二维码
-         ctx.drawImage(res[2], 71, 940)
          // 内容图
          ctx.drawImage(res[4], 23, 452)
+         // 二维码
+         ctx.drawImage(res[2], 71, 940)
          // 雷达底图
          const x = 416
          const y = 275
@@ -157,6 +168,7 @@ export default {
          ctx.fill()
 
          this.posterSrc = canvas.toDataURL('image/png')
+         console.log('图片数据：' + this.posterSrc.length)
       },
       getCords (vals) {
          const x = 416
@@ -195,6 +207,8 @@ export default {
       download () {
          console.log('download')
          window.footPrinter.savePicTimes += 1
+         let src = this.posterSrc.replace('data:image/png;base64,', '')
+         downloadPoster(src)
       },
       tmove (e) {
          e.stopPropagation()

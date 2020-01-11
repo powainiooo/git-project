@@ -22,7 +22,8 @@
    <transition enter-active-class="slideUpIn1" leave-active-class="fadeOut">
       <div class="data-content content1" v-if="showParts">
          <p>过去一年</p>
-         <p>你共使用APP<span class="value">{{parseFloat(nums.toFixed(0))}}</span>个，使用总时长为<span class="value">{{hours.toFixed(0)}}</span>小时</p>
+         <p>你共使用APP<span class="value">{{parseFloat(nums.toFixed(0))}}</span>个</p>
+         <p>使用总时长为<span class="value">{{hours.toFixed(1)}}</span>小时</p>
          <p>你最常用的应用有<span>{{topApp}}</span></p>
       </div>
    </transition>
@@ -33,7 +34,7 @@
             <li style="color: #0475B5">全国平均时长</li>
          </ul>
          <div class="line" :style="{'width': widthHours + '%'}">
-            <span>{{hours.toFixed(0)}}小时</span>
+            <span>{{hours.toFixed(1)}}小时</span>
          </div>
          <div class="line line-all" :style="{'width': widthAverage + '%'}">
             <span>{{average.toFixed(1)}}小时</span>
@@ -108,6 +109,7 @@ export default {
             this.widthHours = 100
             this.widthAverage = 100
          }
+         this.$store.commit('setCanChangePage', true)
       }
    }
 }

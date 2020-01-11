@@ -1,8 +1,13 @@
 <style scoped>
-.z-page1 { width: 100%; height: 100vh; position: absolute; top: 0; left: 0; overflow: hidden;}
+.z-page1 { width: 100%; position: fixed; top: 0; left: 0; bottom: 0; overflow: hidden;}
 .z-page1 .data-content { position: absolute; top: 250px; left: 120px; z-index: 10;}
-.z-page1 .earth { width: 100vw; height: 100vw; position: absolute; left: 0; bottom: 0;}
-.z-page1 .earth img { width: 1100px; height: 1100px; display: block; margin-top: 54px; margin-left: -175px; animation: roll 30s linear infinite;}
+.z-page1 .earth { width: 1100px; height: 1100px; position: absolute; left: -175px; bottom: -400px; display: flex; justify-content: center; align-items: center;}
+.z-page1 .earth img { width: 100%; height: 100%;}
+/* animation: roll 120s linear infinite;*/
+@keyframes roll {
+   0% { transform: rotateZ(1440deg);}
+   100% { transform: rotateZ(0deg);}
+}
 .z-page1 .fadeIn { animation: fadeIn 0.5s linear;}
 .z-page1 .fadeOut { animation: fadeOut 0.5s linear;}
 .z-page1 .slideUpIn { animation: slideUpIn 0.5s cubic-bezier(.32,.6,.62,1.22) 0.5s both;}
@@ -14,7 +19,7 @@
 <template>
 <div class="z-page1" :style="{'z-index':showParts ? 10 : 5}">
    <transition enter-active-class="fadeIn" leave-active-class="fadeOut">
-      <div class="earth" v-if="showParts"><img src="static/earth.png"/></div>
+      <div class="earth" v-if="showParts" :style="earth"><img :src="imgSrc+'static/earth.png'"/></div>
    </transition>
    <transition enter-active-class="slideUpIn" leave-active-class="fadeOut" @after-enter="enter">
    <div class="data-content" v-if="showParts">
@@ -58,10 +63,14 @@ export default {
          save_money: 0,
          save_co2: 0,
          save_meat: 0,
-         numsInterval: 1
+         numsInterval: 1,
+         rotate: 1440
       }
 	},
    computed: {
+      imgSrc () {
+         return this.$store.state.imgSrc
+      },
       currentPage () {
          return this.$store.state.currentPage
       },
@@ -73,9 +82,9 @@ export default {
       },
       tagContent () {
          if (this.type === 'gasoline') {
-            if (this.fuel100_over_per >= 70) {
+            if (this.pageData.fPlacing >= 70) {
                return `恭喜你！获得<br/>“2019感动比亚迪<br/><span style="color: #ffea00;">年度环保卫士</span>“称号`
-            } else if (this.fuel100_over_per >= 30 && this.fuel100_over_per < 70) {
+            } else if (this.pageData.fPlacing >= 30 && this.pageData.fPlacing < 70) {
                return '沉稳开车<br/>油耗随缘'
             } else {
                return '别的咱不说<br/><span style="color: #ffea00;">踩油门</span><br/>咱一定是专业的'
@@ -84,7 +93,7 @@ export default {
             if (this.pokeMeat === '--') {
                return ''
             } else {
-               return `省下的钱可以<br/>买${this.pokeMeat.toFixed(1)}斤猪肉<br/><span style="color: #ffea00;">恩，真香！</span>`
+               return `省下的钱可以<br/>买${this.pokeMeat.toFixed(1)}斤猪肉<br/><span style="color: #ffea00;">嗯，真香！</span>`
             }
          } else if (this.type === 'EV') {
             return '节能省钱<br/>又环保<br/><span style="color: #ffea00;">从此不再关注油价</span>'
@@ -126,6 +135,11 @@ export default {
       },
       pokeMeat () {
          return this.saveMoney === '--' ? '--' : this.saveMoney / 30
+      },
+      earth () {
+         return {
+            'transform': `rotate(${this.rotate}deg)`
+         }
       }
    },
    watch: {
@@ -134,6 +148,12 @@ export default {
             this.reset()
          }
       }
+   },
+   mounted () {
+	   setInterval(() => {
+	      this.rotate -= 0.3
+         if (this.rotate < 0) this.rotate += 1440
+      }, 16)
    },
 	methods: {
 	   reset () {
@@ -159,6 +179,7 @@ export default {
                save_money: this.saveMoney,
             }
          )
+         this.$store.commit('setCanChangePage', true)
       }
    }
 }

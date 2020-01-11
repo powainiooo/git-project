@@ -1,5 +1,5 @@
 <style scoped>
-.z-page2 { width: 100%; height: 100vh; overflow: hidden; position: relative; z-index: 12;}
+.z-page2 { width: 100%; position: fixed; top: 0; left: 0; bottom: 0; overflow: hidden; z-index: 12;}
 .z-page2 .content1 { top: 240px; left: 120px;}
 .z-page2 .tag-content { top: 470px; left: 120px;}
 .z-page2 .content2 { top: 730px; left: 120px;}
@@ -15,13 +15,13 @@
 <template>
 <div class="z-page2" :style="{'z-index':showParts ? 13 : 5}">
    <transition enter-active-class="fadeIn" leave-active-class="fadeOut0">
-   <img src="static/recharge.png" class="recharge" v-if="showParts">
+   <img :src="imgSrc+'static/recharge.png'" class="recharge" v-if="showParts">
    </transition>
    <transition enter-active-class="slideUpIn1" leave-active-class="fadeOut">
    <div class="data-content content1" v-if="showParts">
       <p>过去一年</p>
       <p>你总共充电<span class="value">{{charge_counts.toFixed(0)}}次</span></p>
-      <p>超过全国<span class="value">{{charge_over_per.toFixed(1)}}%</span>的车主</p>
+      <p>超过全国<span class="value">{{parseFloat(charge_over_per.toFixed(1))}}%</span>的车主</p>
    </div>
    </transition>
    <transition enter-active-class="slideUpIn2" leave-active-class="fadeOut">
@@ -29,7 +29,7 @@
    </transition>
    <transition enter-active-class="slideUpIn3" leave-active-class="fadeOut" @after-enter="enter">
    <div class="data-content content2" v-if="showParts">
-      <p>每次平均充电<span>{{charge_avg_time.toFixed(1)}}</span>小时</p>
+      <p>平均每次充电<span>{{charge_avg_time.toFixed(1)}}</span>小时</p>
       <p>最常充电时段<span>{{timeZone}}</span></p>
    </div>
    </transition>
@@ -51,6 +51,9 @@ export default {
       }
 	},
    computed: {
+      imgSrc () {
+         return this.$store.state.imgSrc
+      },
       currentPage () {
          return this.$store.state.currentPage
       },
@@ -65,9 +68,9 @@ export default {
       },
       tagContent () {
          if (this.type === 'DM') {
-            if (this.pageData.cPlacing >= 70) {
+            if (this.pageData.cPlacing > 70) {
                return '一直插电一直爽<br/>插电不耗油，倍儿爽'
-            } else if (this.pageData.cPlacing >= 30 && this.pageData.cPlacing < 70) {
+            } else if (this.pageData.cPlacing > 30 && this.pageData.cPlacing <= 70) {
                return '短途用电 经济节省<br/>长途用油 动力强劲<br/>我为比亚迪混动车“带盐”'
             } else {
                return '这么土壕吗？<br/>买混动车是为了<br/>面儿还是牌儿？'
@@ -101,6 +104,7 @@ export default {
                charge_avg_time: this.pageData.avgChargeTime,
             }
          )
+         this.$store.commit('setCanChangePage', true)
       }
    }
 }

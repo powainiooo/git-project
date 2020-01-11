@@ -11,7 +11,7 @@
 .z-page7 .rule-frame { width: 504px; height: 120px; background-color: rgba(0, 0, 0, 0); position: absolute; top: 340px; left: 120px;}
 .z-page7 .rule-frame .rule { width: 550px; margin-left: -4px}
 .z-page7 .rule-frame .water { width: 40px; position: absolute; top: 50px; left: 0; margin-left: -20px;}
-.z-page7 .rule-frame .water-hint:after { content: '拖动滑块选择'; width: 200px; color: #0475b5; font-size: 24px; position: absolute; top: 20px; left: 70px; margin-left: -20px; opacity: 0.5;}
+.z-page7 .rule-frame .water-hint:after { content: '拖动滑块选择，2秒后呈现答案'; width: 400px; color: #0475b5; font-size: 24px; position: absolute; top: 20px; left: 70px; margin-left: -20px; opacity: 0.5;}
 .z-page7 .rule-frame .water-move { transition: left 1s ease-out}
 .z-page7 .rule-frame .water img { width: 100%;}
 .z-page7 .rule-frame .water span { width: 100%; position: absolute; bottom: 14px; text-align: center; font-size: 20px; color: #ffffff; left: 0;}
@@ -65,6 +65,7 @@ export default {
          avgValue: 0,
          showResult: false,
          showHint: true,
+         isRuleIn: false,
          t: 0,
          myWidth: 0,
          avgWidth: 0,
@@ -82,7 +83,7 @@ export default {
          return this.$store.state.params.source
       },
       resultTxt () {
-         return Math.abs(this.value - this.useValue) > 0.2 ? '猜错，太不了解自己了！' : '选择正确，策无遗算！'
+         return Math.abs(this.value - this.useValue) > 0.2 ? '哎呀，相差有点远！' : 'YES！接近实际用量'
       },
       tagContent () {
          if (this.useValue >= 3) {
@@ -105,6 +106,7 @@ export default {
                this.$store.commit('setCanChangePage', this.showResult)
             } else {
                this.showHint = false
+               this.$store.commit('setCanChangePage', true)
             }
          }
       }
@@ -114,6 +116,7 @@ export default {
          this.ruleWidth = this.$refs.rule.offsetWidth
          this.useValue = this.pageData.avgFlow
          this.avgValue = this.pageData.avgFlowAll
+         this.isRuleIn = true
          if (this.source !== 'app') {
             this.setResultPos()
             this.showResult = true
@@ -123,6 +126,7 @@ export default {
       },
       start (e) {
          if (this.showResult) return
+         if (!this.isRuleIn) return
          if (this.source !== 'app') return
          this.showHint = false
          this.startX = e.touches[0].pageX
@@ -132,6 +136,7 @@ export default {
       },
       move (e) {
          if (this.showResult) return
+         if (!this.isRuleIn) return
          if (this.source !== 'app') return
          e.preventDefault()
          this.moveX = e.touches[0].pageX
@@ -142,6 +147,7 @@ export default {
       },
       end () {
          if (this.showResult) return
+         if (!this.isRuleIn) return
          if (this.source !== 'app') return
          this.t = setTimeout(() => {
             this.setResultPos()

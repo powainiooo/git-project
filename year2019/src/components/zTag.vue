@@ -1,6 +1,8 @@
 <style scoped>
-.z-tag { width: 120px; position: fixed; top: 30px; right: 30px; z-index: 100;}
+.z-tag { width: 150px; position: fixed; top: 30px; right: 30px; z-index: 100;}
 .z-tag img { width: 100%;}
+.z-tag .fadeIn { animation: fadeIn 1s ease-out;}
+.z-tag .fadeOut { animation: fadeOut 1s ease-out;}
 .z-tag .tagIn { animation: tagIn 1s ease-out;}
 @keyframes tagIn {
    0% { transform: rotateX(90deg)}
@@ -18,7 +20,7 @@
 <template>
 <div class="z-tag">
    <!-- 语音爱好者 高冷范 语音重灾区-->
-   <transition enter-active-class="tagIn" leave-active-class="tagOut">
+   <transition enter-active-class="fadeIn" leave-active-class="fadeOut">
       <img src="@/assets/img/tag/1.png" v-if="tagName === '暴走老司机'">
       <img src="@/assets/img/tag/2.png" v-else-if="tagName === '充电困难户'">
       <img src="@/assets/img/tag/3.png" v-else-if="tagName === '电动达人'">

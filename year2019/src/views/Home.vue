@@ -1,7 +1,7 @@
 <style>
 .home { width: 100%; height: 100vh; overflow: hidden; position: relative;}
 button { width: 100px; margin: 0 10px;}
-.home .arrow { width: 40px; position: absolute; top: 50%; right: 24px; margin-top: -16px; z-index: 50;}
+.home .arrow { width: 40px; position: absolute; top: 50%; right: 24px; margin-top: -16px; z-index: 50; transform: scale(-1);}
 .home .fadeInA { animation: fadeIn 0.3s linear;}
 .home .fadeOutA { animation: fadeOut 0.3s linear;}
 </style>
@@ -27,7 +27,7 @@ button { width: 100px; margin: 0 10px;}
    <z-page9 ref="p9"></z-page9>
    <z-page-share ref="p10"></z-page-share>
    <transition enter-active-class="fadeInA" leave-active-class="fadeOutA">
-      <img src="@/assets/img/arrow.png" class="arrow" v-if="canChangePage && currentPage !== 'p0'"/>
+      <img src="@/assets/img/arrow.png" class="arrow" v-if="canChangePage && currentPage !== 'p0'" @click="changePage('next')"/>
    </transition>
 
 </div>
@@ -94,7 +94,7 @@ export default {
       },
       pageList () {
          return this.$store.state.pageList
-         // return ['p0', 'p2', 'p10']
+         // return ['p0', 'p9', 'p10']
       },
       canChangePage () {
          return this.$store.state.canChangePage
@@ -134,20 +134,24 @@ export default {
    },
    methods: {
       changePage (direct) {
+         if (!this.canChangePage) return
          if (direct === 'prev') {
             if (this.currentPage === 'p9') return
             if (this.pageIndex === 0) return
             this.pageIndex = this.pageIndex === 0 ? 0 : this.pageIndex - 1
             window.footPrinter.rollBackTimes += 1
+            this.gotoPage(this.pageList[this.pageIndex])
          } else if (direct === 'next') {
             this.pageIndex = this.pageIndex === this.pageList.length - 1 ? this.pageList.length - 1 : this.pageIndex + 1
+            this.gotoPage(this.pageList[this.pageIndex])
          }
-         this.gotoPage(this.pageList[this.pageIndex])
       },
       toggleTap () {
          this.$store.commit('changeTagName', this.tagName === '' ? '暴走老司机' : '')
       },
       gotoPage (page) {
+         if (this.currentPage === '') return
+         this.$store.commit('setCanChangePage', false)
          const nowPage = this.$refs[this.currentPage]
          if (nowPage.outTime === 0) {
             this.$store.commit('changePage', page)
@@ -157,13 +161,17 @@ export default {
                this.$store.commit('changePage', page)
             }, nowPage.outTime)
          }
-
+         // setTimeout(() => {
+         //    this.$store.commit('setCanChangePage', true)
+         // }, nowPage.outTime + 1500)
       },
       tstart (e) {
+         console.log('home tstart:' + this.canChangePage)
          if (!this.canChangePage) return
          this.startX = e.touches[0].pageX
       },
       tend (e) {
+         console.log('home tend:' + this.canChangePage)
          if (!this.canChangePage) return
          if (this.currentPage === '') return
          const endx = e.changedTouches[0].pageX
@@ -176,7 +184,6 @@ export default {
       review () {
          this.showPages = false
          this.$nextTick(() => {
-            console.log(this.showLoading)
             this.showPages = true
             this.pageIndex = 0
             this.$nextTick(() => {

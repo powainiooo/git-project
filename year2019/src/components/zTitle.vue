@@ -1,5 +1,5 @@
 <style scoped>
-.z-title { width: 150px; position: fixed; top: 50px; left: 40px; z-index: 50;}
+.z-title { width: 150px; position: fixed; top: 30px; left: 40px; z-index: 50;}
 .z-title img { width: 100%;}
 .z-title p { width: 200px; font-size: 24px; color: #0475B5; position: absolute; bottom: 6px; left: 10px;}
 .z-title .fadeIn { animation: fadeIn 1s linear;}
@@ -38,6 +38,9 @@ export default {
       currentPage () {
          return this.$store.state.currentPage
       },
+      isDiLink () {
+         return this.$store.state.isDiLink
+      },
       name () {
          if (this.currentPage === 'p1') {
             return '里程 油/电耗'
@@ -46,7 +49,7 @@ export default {
          } else if (this.currentPage === 'p3') {
             return '车速'
          } else if (this.currentPage === 'p4') {
-            return '行驶时长'
+            return this.isDiLink ? '行驶时长 语音' : '行驶时长'
          } else if (this.currentPage === 'p5') {
             return '出行时间'
          } else if (this.currentPage === 'p6') {

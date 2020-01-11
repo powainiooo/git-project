@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>比亚迪云服务</title>
+
+</head>
+<body>
+<script>
+var u = navigator.userAgent, app = navigator.appVersion;
+var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //g
+var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+if (isAndroid) {
+	//这个是安卓操作系统
+	console.log('android')
+	window.location = 'http://appdlc.hicloud.com/dl/appdl/application/apk/39/39e5c36059f6416d97955717d234bd0c/com.byd.aeri.caranywhere.1910291728.apk?sign=portal@portal1577322151401&source=portalsite&maple=0&trackId=0&distOpEntity=HWSW'
+}
+if (isIOS) {
+	//这个是ios操作系统
+	console.log('ios')
+	window.location = 'https://itunes.apple.com/cn/app/id493482713?mt=8'
+}
+</script>
+</body>
+</html>

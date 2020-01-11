@@ -10,7 +10,7 @@
 .z-page9 .calandar .operas { width: 100%; height: 100%; position: absolute; top: 0; left: 0; z-index: 20;}
 .z-page9 .piece { width: 584px; height: 880px; background-color: #ffffff; position: absolute; top: 164px; left: 2px; z-index: 10;}
 .z-page9 .frame { width: 540px; height: 810px; border: 2px solid #333333; margin: 56px 0 0 24px; position: relative;}
-.z-page9 .content { line-height: 1.5; color: #333333; font-size: 30px;}
+.z-page9 .content { line-height: 1.6; color: #333333; font-size: 30px;}
 .z-page9 .content span { color: #F84F1C;}
 .z-page9 .line { position: relative;}
 .z-page9 .line:before { content: ''; width: 60px; height: 2px; background-color: #333333; position: absolute; top: -25px; left: 0;}
@@ -25,12 +25,31 @@
 .z-page9 .piece .roads { width: 100vw; height: 100px; position: absolute; left: 30px; bottom: -8px; transform: scale(0.7);  transform-origin: 0 0;}
 .z-page9 .bottom { height: 100px; position: absolute; bottom: 0; left: 0; right: 0; z-index: 10; transition: all 1s linear; transform-origin: 50% 100%;}
 .z-page9-show .bottom { transform: scale(0.7); bottom: 38px;}
-.z-page9 .pageDown { animation: pageDown 1s ease-out; transform-origin: 0 0;}
+.z-page9 .pageDown { animation: pageDown 4s ease-out; transform-origin: 0 0;}
 @keyframes pageDown {
    0% { transform: translateY(0) rotateZ(0deg); opacity: 1}
-   10% { transform: translateY(150px) rotateZ(6deg); opacity: 1}
-   100% { transform: translateY(1500px); opacity: 0}
+   /*10% { transform: translateY(150px) rotateZ(4deg); opacity: 1}*/
+   99% { transform: translateY(1500px) rotateZ(20deg); opacity: 1}
+   100% { transform: translateY(1500px) rotateZ(20deg); opacity: 0}
 }
+.z-page9 .pageUp { animation: pageUp 1s ease-out both; transform-origin: 0 0;}
+.z-page9 .pageUp:nth-child(1) { animation-delay: 0s}
+.z-page9 .pageUp:nth-child(2) { animation-delay: 0.2s}
+.z-page9 .pageUp:nth-child(3) { animation-delay: 0.4s}
+.z-page9 .pageUp:nth-child(4) { animation-delay: 0.6s}
+.z-page9 .pageUp:nth-child(5) { animation-delay: 0.8s}
+.z-page9 .pageUp:nth-child(6) { animation-delay: 1s}
+.z-page9 .pageUp:nth-child(7) { animation-delay: 1.2s}
+.z-page9 .pageUp:nth-child(8) { animation-delay: 1.4s}
+.z-page9 .pageUp:nth-child(9) { animation-delay: 1.6s}
+.z-page9 .pageUp:nth-child(10) { animation-delay: 1.8s}
+.z-page9 .pageUp:nth-child(11) { animation-delay: 2s}
+.z-page9 .pageUp:nth-child(12) { animation-delay: 2.2s}
+@keyframes pageUp {
+   0% { transform: translateY(1000px); opacity: 0}
+   100% { transform: translateY(0) rotateZ(0deg); opacity: 1}
+}
+.z-page9 .btn-back { width: 170px; position: fixed; top: 30px; right: 80px;}
 </style>
 
 <template>
@@ -39,7 +58,7 @@
       <div class="calandar" v-show="showParts" ref="calandar">
          <div class="operas" @touchstart="tstart" @touchend="tend"></div>
          <img src="@/assets/img/paper.png" class="paper">
-         <transition leave-active-class="pageDown">
+         <transition enter-active-class="pageUp" leave-active-class="pageDown">
          <div class="piece" v-if="showHint">
             <div class="frame">
                <div class="diary">
@@ -55,7 +74,7 @@
             </div>
          </div>
          </transition>
-         <transition-group leave-active-class="pageDown">
+         <transition-group :enter-active-class="isReview ? 'pageUp' : ''" leave-active-class="pageDown">
          <z-diary v-for="i in showKeyList" :key="i" :keys="i" v-if="fitKeyList.includes(i)"></z-diary>
          </transition-group>
       </div>
@@ -80,6 +99,9 @@
       </transition-group>
    </div>
    </transition>
+   <transition enter-active-class="fadeInA" leave-active-class="fadeOutA">
+   <img src="@/assets/img/btn-back2.png" class="btn-back" @click="doReview" v-if="currentPage === 'p9' && canChangePage"/>
+   </transition>
 </div>
 </template>
 
@@ -103,7 +125,8 @@ export default {
          showRoad: true,
          bottom: 0,
          startTime: 0,
-         lastPage: ''
+         lastPage: '',
+         isReview: false
       }
    },
    watch: {
@@ -115,8 +138,9 @@ export default {
          clearInterval(this.tMove)
          if (page === 'p9') {
             this.$nextTick(() => {
-               this.showKeyList = this.useKeyList.reverse()
-               this.fitKeyList = [].concat(this.useKeyList)
+               let arr = [].concat(this.useKeyList)
+               this.showKeyList = arr.reverse()
+               this.fitKeyList = [].concat(arr)
                this.bottom = (window.innerHeight - this.$refs.calandar.offsetHeight) / 2
             })
             this.roadStatus = 'stop'
@@ -172,7 +196,7 @@ export default {
       },
       showCars () {
          return this.currentPage === 'p5' && this.tagName === '上班族'
-      }
+      },
    },
    methods: {
       slidePages () {
@@ -213,6 +237,15 @@ export default {
                this.slidePages()
             }
          }
+      },
+      doReview () {
+         this.isReview = true
+         let arr = [].concat(this.useKeyList)
+         this.fitKeyList = [].concat(arr.reverse())
+         setTimeout(() => {
+            this.showHint = true
+            this.$store.commit('setCanChangePage', false)
+         }, this.fitKeyList.length*200 - 200)
       }
    }
 }

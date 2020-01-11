@@ -2,9 +2,9 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import vconsole from 'vconsole'
-
-const vConsole = new vconsole()
+// import vconsole from 'vconsole'
+//
+// const vConsole = new vconsole()
 
 Vue.config.productionTip = false
 

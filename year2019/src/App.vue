@@ -12,8 +12,8 @@ body { width: 100%; height: 100vh; overflow: hidden; background: url("assets/img
 .data-content div div { display: inline-block}
 .data-content .value { font-size: 36px;}
 
-.tag-content { font-size: 48px; line-height: 60px; color: #0475B5; position: absolute; letter-spacing: 2px;}
-.tag-content span { color: #F84F1C}
+.tag-content { font-size: 44px; line-height: 70px; color: #0475B5; position: absolute; letter-spacing: 2px;}
+.tag-content span { color: #F84F1C;}
 
 @keyframes fadeIn {
    0% { opacity: 0;}
@@ -22,10 +22,6 @@ body { width: 100%; height: 100vh; overflow: hidden; background: url("assets/img
 @keyframes fadeOut {
    0% { opacity: 1;}
    100% { opacity: 0;}
-}
-@keyframes roll {
-   0% { transform: rotateZ(0deg);}
-   100% { transform: rotateZ(-360deg);}
 }
 @keyframes slideUpIn {
    0% { transform: translateY(60px); opacity: 0;}

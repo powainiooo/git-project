@@ -5,13 +5,12 @@
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no,viewport-fit=cover">
    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-   <!--<script src="TweenMax.min.js"></script>-->
    <title>2019云服务年度报告</title>
    <script>
    //annualReport.doShare() getErrorData(String errorJson)
-   const u = navigator.userAgent
-   const isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1 // g
-   const isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/) // ios终端
+   var u = navigator.userAgent;
+   var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; // g
+   var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); // ios终端
    // 分享调用
    function doShare (label) {
 	   console.log(label)
@@ -43,25 +42,25 @@
 	   }
    }
    // 脚印数据
-   var footPrinter = {}
+   var footPrinter = {};
    //进入页面开始时间
-   intoPageStartTime = 0
+   intoPageStartTime = 0;
    // 浏览到的最大页面
-   footPrinter.maxPage = 1
+   footPrinter.maxPage = 1;
    // 当前页
-   currentPage = 'stayTimeP1'
+   currentPage = 'stayTimeP1';
    // 离开页
-   footPrinter.outPage = 1
+   footPrinter.outPage = 1;
    // 流量页面“拖动滑块”的时间
-   footPrinter.dragSliderTime = 0
+   footPrinter.dragSliderTime = 0;
    // 回退次数
-   footPrinter.rollBackTimes = 0
+   footPrinter.rollBackTimes = 0;
    // 保存图片次数
-   footPrinter.savePicTimes = 0
+   footPrinter.savePicTimes = 0;
 
    function pageOutFunc() {
-      let time = new Date().getTime()
-	   footPrinter[currentPage] += time - intoPageStartTime
+      var time = new Date().getTime();
+	   footPrinter[currentPage] += time - intoPageStartTime;
    }
    </script>
 </head>

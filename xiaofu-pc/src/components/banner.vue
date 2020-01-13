@@ -46,6 +46,7 @@
 
 <script type='es6'>
 import TButton from './TButton.vue'
+import { bannerVisit } from '@/api.js'
 export default {
 	name: 'app',
    components: { TButton },
@@ -70,6 +71,10 @@ export default {
       img: {
 	      type: String,
          default: ''
+      },
+      type: {
+	      type: String,
+         default: '1'
       }
    },
    computed: {
@@ -87,6 +92,9 @@ export default {
    },
 	methods: {
 	   gotoDetail () {
+         bannerVisit(this.type, this.id).then(res => {
+            console.log(res)
+         })
 	      this.$emit('linkTo', this.id)
       },
       cityChange (e) {

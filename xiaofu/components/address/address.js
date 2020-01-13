@@ -53,6 +53,14 @@ Component({
 	   	this.setData({
 			   fold: !this.data.fold
 		   })
-	   }
+	   },
+      cityChange (e) {
+         console.log(e)
+         let item = this.data.list[e.detail.value]
+         this.setData({
+            selected: item.name
+         })
+         this.triggerEvent('change', item.id)
+      }
    }
 })

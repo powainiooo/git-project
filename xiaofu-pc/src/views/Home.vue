@@ -57,7 +57,7 @@
                      @tap="getDetailData" style="margin: 50px 0;">
                   </list-item>
                   <recommend v-if="i.cate === 'recommend' && i.list.length !== 0" :listData="i.list" :bgSrc="bgSrc" :style="{width: frameW + 'px'}" :title="recommendTitle"  @linkTo="getDetailData"></recommend>
-                  <banner v-if="i.cate === 'banner'" :id="i.id" :img="i.pc_image" @linkTo="getDetailData" :style="{width: frameW + 'px'}"></banner>
+                  <banner v-if="i.cate === 'banner'" :id="i.id" :img="i.pc_image" @linkTo="getDetailData" :style="{width: frameW + 'px'}" type="2"></banner>
                </div>
             </div>
          </div>

@@ -74,3 +74,21 @@ export const getActivityDays = (data) => {
       })
    })
 }
+
+// banner点击脚印
+export const bannerVisit = (type, id) => {
+   return new Promise((resolve, reject) => {
+      axios.get(`${ajax}/banner_visit`, {
+         params: {
+            type,
+            id,
+            cate: 'pc'
+         }
+      }).then(res => {
+         resolve(res.data)
+      }).catch(err => {
+         console.log(err)
+         reject(err)
+      })
+   })
+}

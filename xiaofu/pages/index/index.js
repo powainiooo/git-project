@@ -21,10 +21,12 @@ Page({
 		isLoading: true,
 		selectedDate: '',
 		headerBtns: ['menu'],
+      windowHeight: 667,
 		headerHeight: 60,
 		searchHeight: 612,
 		scrollTop: 0,
 		addressFixed: false,
+		addressShow: false,
 		selectedTicketIndex: -1, // 选中票务的下标
 		selectedTicketStyles: '', // 选中票务的附加样式
 		selectedFold: true, // 选中票务是否折叠
@@ -87,6 +89,11 @@ Page({
 	// 获取部分组件的尺寸信息
 	getComponentsSize () {
 		setTimeout(() => {
+         wx.getSystemInfo({
+            success: res => {
+               this.data.windowHeight = res.windowHeight
+            }
+         })
 			wx.createSelectorQuery().select("#header").boundingClientRect(rect => {
 				// console.log(rect)
             if (rect === null) {
@@ -113,9 +120,11 @@ Page({
 	},
 	// 监听页面滑动
 	containerScroll (e) {
+	   console.log(this.data.searchHeight - this.data.windowHeight)
 		this.data.scrollTop = e.detail.scrollTop
 		this.setData({
-			addressFixed: e.detail.scrollTop >= this.data.searchHeight
+			addressFixed: e.detail.scrollTop >= this.data.searchHeight,
+         addressShow: e.detail.scrollTop >= this.data.searchHeight - this.data.windowHeight + 200,
 		})
 	},
 	// 响应顶部按钮点击

@@ -1,5 +1,6 @@
 // components/banner/banner.js
 const app = getApp()
+import {bannerVisit} from '../../utils/api'
 Component({
    /**
     * 组件的属性列表
@@ -9,6 +10,10 @@ Component({
       linkId: {
 		   type: String,
 		   value: ''
+	   },
+      type: {
+		   type: String,
+		   value: '1'
 	   }
    },
 
@@ -24,11 +29,14 @@ Component({
     */
    methods: {
 	   gotoDetail () {
-		   setTimeout(() => {
-         wx.navigateTo({
-           url: `/pages/index/detail?id=${this.data.linkId}`
+         bannerVisit(this.data.type, this.data.linkId).then(res => {
+            console.log(res)
          })
-       }, 200)
+		   setTimeout(() => {
+            wx.navigateTo({
+              url: `/pages/index/detail?id=${this.data.linkId}`
+            })
+          }, 200)
 	   }
    }
 })

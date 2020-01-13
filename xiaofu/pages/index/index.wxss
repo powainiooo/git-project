@@ -1,9 +1,10 @@
 .container { height: 100vh; background-color: #002bb0;}
 .search-frame { margin-top: 120rpx;  z-index: 200; position: relative}
-.address-frame { width: 100%; position: absolute; top: 1404rpx; left: 0; z-index: 100;}
-.address-frame-fixed { position: fixed; top: 118rpx;}
+.address-frame { position: absolute; top: 1420rpx; right: 30rpx; z-index: 100; transform: scale(0); transition: transform 0.3s cubic-bezier(.21,.55,.5,1.32);}
+.address-frame-fixed { position: fixed; top: 138rpx;}
+.address-frame-show { transform: scale(1);}
 .result-container { min-height: 100vh; background-color: #f3f3f3; overflow: hidden;}
-.pro-list { padding-top: 100rpx; background-color: #f3f3f3; padding-bottom: 200rpx;}
+.pro-list { padding-top: 50rpx; background-color: #f3f3f3; padding-bottom: 120rpx;}
 .pro-list .item-ticket-frame { height: 580rpx; position: relative;}
 .pro-list .item-frame { height: 630rpx; position: relative; margin-bottom: 50rpx; margin-top: 50rpx;}
 .pro-list .item-ticket-frame .item { height: auto; position: absolute; top: 0; left: 0; transform: scale(0.875); transform-origin: center 0; transition: all 0 cubic-bezier(.22,.62,.34,1);}

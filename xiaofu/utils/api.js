@@ -67,3 +67,15 @@ export const getActivityDays = (data) => {
 		data
 	})
 }
+
+// banner点击脚印
+export const bannerVisit = (type, id) => {
+	return ajax({
+		url: `${ajaxUrl}/banner_visit`,
+		data: {
+         type,
+         id,
+         cate: 'wx'
+      }
+	})
+}

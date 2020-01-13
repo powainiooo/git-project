@@ -41,9 +41,23 @@ export default {
       isDiLink () {
          return this.$store.state.isDiLink
       },
+      pageData () {
+         return this.$store.state.pageData.P1
+      },
       name () {
          if (this.currentPage === 'p1') {
-            return '里程 油/电耗'
+            const fuel = this.pageData.fConsumption
+            const elect = this.pageData.eConsumption
+            if (fuel === undefined && elect === undefined) {
+               return '里程'
+            } else if (fuel !== undefined && elect === undefined) {
+               return '里程 油耗'
+            } else if (fuel === undefined && elect !== undefined) {
+               return '里程 电耗'
+            } else if (fuel !== undefined && elect !== undefined) {
+               return '里程 油/电耗'
+            }
+
          } else if (this.currentPage === 'p2') {
             return '充电行为'
          } else if (this.currentPage === 'p3') {

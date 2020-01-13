@@ -96,7 +96,7 @@ export default {
          let arr = []
          arr.push(this.loadImgs('static/poster/poster-bg.png'))
          arr.push(this.loadImgs('static/poster/poster-title.png'))
-         arr.push(this.loadImgs('static/poster/poster-qrcode.png'))
+         arr.push(this.loadImgs('static/poster/poster-qrcode.jpg'))
          arr.push(this.loadImgs('static/poster/poster-rada.png'))
          arr.push(this.loadImgs(`static/poster/poster-${this.pageData.tag}.png`))
          Promise.all(arr).then(res=>{
@@ -135,7 +135,7 @@ export default {
          // 内容图
          ctx.drawImage(res[4], 23, 452)
          // 二维码
-         ctx.drawImage(res[2], 71, 940)
+         ctx.drawImage(res[2], 71, 940, 140, 140)
          // 雷达底图
          const x = 416
          const y = 275

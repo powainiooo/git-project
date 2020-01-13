@@ -4,7 +4,7 @@
    <view class="search-frame" id="search" wx:if="{{!showSearchTitle && !isActivity}}">
       <search url="{{bannerUrl}}" linkId="{{bannerId}}" bindsearch="doSearch" bindtoggleCalendar="toggleCalendar" id="search"></search>
    </view>
-   <view class="address-frame {{addressFixed ? 'address-frame-fixed' : ''}}" id="address" wx:if="{{!showSearchTitle && !isActivity}}">
+   <view class="address-frame {{addressFixed ? 'address-frame-fixed' : ''}} {{addressShow ? 'address-frame-show' : ''}}" id="address" wx:if="{{!showSearchTitle && !isActivity}}">
       <address hasbg="{{addressFixed}}" list="{{citysList}}" cityID="{{cityID}}" bindchange="cityChange"></address>
    </view>
    <view class="result-container">
@@ -31,7 +31,7 @@
                               detailData="{{selectedTicketIndex === index ? detailData : null}}"
                               id="{{selectedTicketIndex === index ? 'ticket' : ''}}"></ticket-container>
             <recommend wx:if="{{item.cate === 'recommend' && item.list.length !== 0}}" listData="{{item.list}}" title="{{recTitle}}"></recommend>
-            <banner wx:if="{{item.cate === 'banner'}}" src="{{item.cover}}" linkId="{{item.id}}"></banner>
+            <banner wx:if="{{item.cate === 'banner'}}" src="{{item.cover}}" linkId="{{item.id}}" type="2"></banner>
          </view>
       </view>
       <loading wx:if="{{isLoading}}"></loading>

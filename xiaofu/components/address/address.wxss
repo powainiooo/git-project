@@ -13,5 +13,7 @@
 
 .z-address { width: 200rpx; height: 100rpx; box-sizing: border-box; background-color: #ffffff; border-radius: 10rpx; box-shadow: 0 10rpx 20rpx rgba(0, 0, 0, 0.2); padding: 16rpx 0; display: flex; align-items: center;}
 .z-address-hover { transform: scale(0.92); transition: all 0.2s linear;}
-.z-address .z-address-name { width: 50%; height: 100%; border-right: 2rpx solid #e5e5e5; display: flex; justify-content: center; align-items: center; font-size: 28rpx; color: #b5b5b5;}
+.z-address-large { width: 240rpx;}
+.z-address .z-address-name { width: 100rpx; height: 100%; border-right: 2rpx solid #e5e5e5; display: flex; justify-content: center; align-items: center; font-size: 28rpx; color: #b5b5b5;}
+.z-address-large .z-address-name { width: 140rpx;}
 .z-address .z-address-icon { width: 30rpx; margin-left: 32rpx;}

@@ -6,7 +6,13 @@ Component({
    properties: {
 		list: {
 			type: Array,
-			value: []
+			value: [],
+         observer (val) {
+            val.unshift(this.data.allCity)
+            this.setData({
+               addrList: val
+            })
+         }
 		},
       cityID: {
 			type: String,
@@ -35,7 +41,8 @@ Component({
 		   name: '全部',
          id: ''
       },
-	   fold: true
+	   fold: true,
+      addrList: []
    },
 
    /**
@@ -58,7 +65,7 @@ Component({
          console.log(e)
          let item = this.data.list[e.detail.value]
          this.setData({
-            selected: item.name
+            selected: item.name.length >= 4 ? item.name.substr(0, 4) : item.name
          })
          this.triggerEvent('change', item.id)
       }

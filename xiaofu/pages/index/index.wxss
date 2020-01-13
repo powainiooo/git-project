@@ -1,6 +1,6 @@
 .container { height: 100vh; background-color: #002bb0;}
 .search-frame { margin-top: 120rpx;  z-index: 200; position: relative}
-.address-frame { position: absolute; top: 1420rpx; right: 30rpx; z-index: 100; transform: scale(0); transition: transform 0.3s cubic-bezier(.21,.55,.5,1.32);}
+.address-frame { position: absolute; top: 1420rpx; right: 30rpx; z-index: 200; transform: scale(0); transition: transform 0.3s cubic-bezier(.21,.55,.5,1.32);}
 .address-frame-fixed { position: fixed; top: 138rpx;}
 .address-frame-show { transform: scale(1);}
 .result-container { min-height: 100vh; background-color: #f3f3f3; overflow: hidden;}

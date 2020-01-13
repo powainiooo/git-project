@@ -13,8 +13,8 @@
       <!--</view>-->
    <!--</scroll-view>-->
 <!--</view>-->
-<picker bindchange="cityChange" range="{{list}}" range-key="name">
-<view class="z-address" hover-class="z-address-hover" hover-stay-time="50">
+<picker bindchange="cityChange" range="{{addrList}}" range-key="name">
+<view class="z-address {{selected.length === 4 ? 'z-address-large' : ''}}" hover-class="z-address-hover" hover-stay-time="50">
    <view class="z-address-name">{{selected}}</view>
    <image src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAkCAYAAACe0YppAAAACXBIWXMAAAsSAAALEgHS3X78AAACo0lEQVRYha2X7W3iQBCGX7uBcBUc+R1LcSqIr4JNByEdUAIlcBUEOrArCKkAkPb/kQ5wBXuaMLbH+4G9Jq9kCe3HPOvZ+TCJMQZjlGTVDEABIAcw54d04mcH4GC0Oo+yNwROsopgSwDKmfRrC2BjtNp5Z4fASVbRG20APDuT41QBWIQ84AUnWfXC0Dtr6gigJJcCaAzO2P2059FaX9O47+0dcJJVCwDv1jpy38podXJO2d9LXloBeLWm3oxWmyDYA/1idzknviaOi9Ly2B9ppwXzaQ9iMbm1CN3RCPiMI71xP7k9b7yWirXyTr9ugZJ4b8FAsO11ezB6Y3bNh9j3ZLQ6ONa6tynY6JlzN3gVHtvfLm/AO5E2W6PVwrHQRTud+rc1RR5aGq1KZ9Nl30YEXGW0eknwUNLd/hPr7n3R6wk8n5zoRRc/kvErZZc1qgLQuQWle/vLTy3G33ltT2zzKMaKlJO/UeiuluI3GZgbrci1S67Zx8BaKXkNuQ0OBZRcs5LRzr9XgbVS8qXy1JkekC+AfGMDmkWDObIHx4Y0FizdtE6yqnUn/5aRPOrtU+teQ/ezFtFLObyn3Of834uKV1uHkJLZs7PBhbO8CyC7qDxbvbq+1n8t26fUcqPi4u6IA+gJwKczeRkrQkHGuS0PWaac3NJYKA8JTnWZTn5PNZcfqnTFtdpupRsVqXNTq2U57LWvW8XBtxdmuibB7jiI3nlTL27k6cmf7LFeOsngeZS984egtbzGFsx39Cb2vnI7+wkouG22cdArINzStrfAA1CnXTqViz8CJsHHQr3gqfAYaBAcC4+FXgWPhU+BDoKH4FOh8P2FCcn6UgQfJp8CjQLDD5caDUXEh8C3PG5vFAWNBgfg0VBSlKt7Gy9d5zypiwH4DwQ/f6CAbVG6AAAAAElFTkSuQmCC" class="z-address-icon" mode="widthFix"></image>
 </view>

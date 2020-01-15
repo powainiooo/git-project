@@ -6,11 +6,11 @@
    100% { transform: translateX(0vw)}
 }
 .z-page-share-fadeOut { animation: fadeOut 0s linear;}
-.z-page-share .poster { width: 720px; height: 1174px; margin: 15px auto; background-color: rgba(0, 0, 0, 0); position: relative;}
+.z-page-share .poster { width: 720px; height: 1174px; margin: 15px auto 130px auto; background-color: rgba(0, 0, 0, 0); position: relative;}
 .z-page-share .poster img { width: 100%; height: 100%;}
 .z-page-share .poster .btn-back { width: 174px; height: auto; position: absolute; bottom: 40px; left: 40px;}
 .z-page-share canvas { width: 720px; height: 1174px; position: absolute; top: -10000px; left: 0;}
-.z-page-share .btns { display: flex; justify-content: space-between; margin: 0 36px 50px 36px;}
+.z-page-share .btns { display: flex; justify-content: space-between; position: fixed; bottom: 0; left: 0; right: 0; background-color: rgba(255, 255, 255, 0.5); padding: 20px 36px 20px 36px;}
 .z-page-share .btns a { width: 320px; height: 90px; display: flex; justify-content: center; align-items: center; background-color: #0475B5;  font-size: 36px; color: #ffffff; text-decoration: none;}
 </style>
 

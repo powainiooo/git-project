@@ -115,7 +115,8 @@ export default {
       ruleIn () {
          this.ruleWidth = this.$refs.rule.offsetWidth
          this.useValue = this.pageData.avgFlow
-         this.avgValue = this.pageData.avgFlowAll
+         // this.avgValue = this.pageData.avgFlowAll
+         this.avgValue = 3
          this.isRuleIn = true
          if (this.source !== 'app') {
             this.setResultPos()

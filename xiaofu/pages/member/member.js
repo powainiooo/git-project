@@ -8,6 +8,9 @@ Page({
       titleEn: '',
       titleCn: '',
       content: '',
+      mail: '',
+      phone: '',
+      wechat: '',
       page: ''
    },
    makePhoneCall: function (e) {
@@ -100,6 +103,17 @@ Page({
                   }
                })
             }
+         }
+      })
+   },
+   doCopy (e) {
+      wx.setClipboardData({
+         //准备复制的数据
+         data: e.currentTarget.dataset.text,
+         success: function (res) {
+            wx.showToast({
+               title: '复制成功',
+            });
          }
       })
    },

@@ -46,8 +46,8 @@ Component({
             type: 'reLaunch'
          },
          {
-            name: '推荐主办方',
-            nameEn: '1th organizers',
+            name: '合作主办方',
+            nameEn: 'cooperative organizers',
             url: '/pages/sponsor/list',
             type: 'navigate'
          },

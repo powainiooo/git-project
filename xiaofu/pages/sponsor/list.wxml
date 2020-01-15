@@ -8,7 +8,6 @@
             wx:for-item="item"
             wx:key="{{index}}"
             data-item="{{item}}"
-            bindtap="toIndex"
             hover-class='none'>
         <image src="{{imgSrc+item.logo_img}}" mode='aspectFit'></image>
       </view>

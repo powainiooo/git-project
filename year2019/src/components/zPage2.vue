@@ -1,8 +1,8 @@
 <style scoped>
 .z-page2 { width: 100%; position: fixed; top: 0; left: 0; bottom: 0; overflow: hidden; z-index: 12;}
-.z-page2 .content1 { top: 240px; left: 120px;}
-.z-page2 .tag-content { top: 470px; left: 120px;}
-.z-page2 .content2 { top: 730px; left: 120px;}
+.z-page2 .content1 { top: 12vh; left: 120px;}
+.z-page2 .tag-content { top: 28vh; left: 120px;}
+.z-page2 .content2 { top: 47vh; left: 120px;}
 .z-page2 .recharge { width: 250px; position: absolute; bottom: 94px; left: 84px;}
 .z-page2 .fadeIn { animation: fadeIn 1s linear 1.5s both;}
 .z-page2 .fadeOut { animation: fadeOut 0.5s linear;}

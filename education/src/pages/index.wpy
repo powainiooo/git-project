@@ -1,0 +1,27 @@
+<style lang="less">
+
+</style>
+
+<template>
+  <div class="container">
+
+  </div>
+</template>
+
+<script>
+import wepy from '@wepy/core'
+import store from '../store'
+
+wepy.page({
+  store,
+  data: {
+  },
+  methods: {
+  }
+})
+</script>
+<config>
+{
+  "backgroundColor": "#edecea"
+}
+</config>

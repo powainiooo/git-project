@@ -1,27 +1,35 @@
-<style lang="less">
-
+<style>
+.container { width: 100%;}
+.container .top { height: 900rpx; background: repeating-linear-gradient(180deg, #e5ad84, #ed8f6f 100%); position: relative;}
+.container .top .circle1 { width: 570rpx; height: 570rpx; border-radius: 50%; background-color: #ee8f6f; position: absolute; top: 10rpx; left: -140rpx;}
+.container .top .circle2 { width: 260rpx; height: 260rpx; border-radius: 50%; background-color: #e5ad84; opacity: 0.6; position: absolute; bottom: -80rpx; right: -60rpx;}
 </style>
 
 <template>
-  <div class="container">
-
+<div class="container">
+  <div class="top">
+    <div class="circle1"></div>
+    <div class="circle2"></div>
   </div>
+</div>
 </template>
 
 <script>
 import wepy from '@wepy/core'
 import store from '../store'
-
+// https://github.com/wx-plugin/image-cropper
 wepy.page({
   store,
   data: {
+
   },
   methods: {
+
   }
 })
 </script>
 <config>
-{
-  "backgroundColor": "#edecea"
-}
+  {
+
+  }
 </config>

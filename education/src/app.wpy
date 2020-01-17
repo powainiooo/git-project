@@ -1,4 +1,4 @@
-<style>
+<style lang="less">
 @import "res/helvetica.wxss";
 page { background-color: #edecea}
 </style>
@@ -24,7 +24,6 @@ wepy.app({
   },
 
   onLaunch() {
-    this.testAsync()
     eventHub.$on('app-launch', (...args) => {
       console.log('app-launch event emitted, the params are:')
       console.log(args)
@@ -42,7 +41,7 @@ wepy.app({
     ],
     "window": {
       "backgroundTextStyle": "light",
-      "navigationBarBackgroundColor": "#e4ad84",
+      "navigationBarBackgroundColor": "#e5ad84",
       "navigationBarTitleText": "",
       "navigationBarTextStyle": "black",
       "backgroundColor": "#edecea"

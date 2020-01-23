@@ -15,7 +15,7 @@
 .result-frame .hint-en{ font-size: 100rpx; font-family: 'Helve'; line-height: 0.9;}
 .result-frame .hint-cn{ font-size: 72rpx; margin-top: 60rpx;}
 
-.search-title { display: flex; justify-content: space-between; align-items: center; margin: 140rpx 50rpx -100rpx 50rpx; }
+.search-title { display: flex; justify-content: space-between; align-items: center; margin: 140rpx 50rpx -60rpx 50rpx; }
 .search-title view { font-size: 32rpx; color: #9ea09f;}
 .search-title view:first-child { font-size: 40rpx;}
 

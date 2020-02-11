@@ -1,16 +1,35 @@
 <style>
 .container { width: 100%;}
-.container .top { height: 900rpx; background: repeating-linear-gradient(180deg, #e5ad84, #ed8f6f 100%); position: relative;}
-.container .top .circle1 { width: 570rpx; height: 570rpx; border-radius: 50%; background-color: #ee8f6f; position: absolute; top: 10rpx; left: -140rpx;}
-.container .top .circle2 { width: 260rpx; height: 260rpx; border-radius: 50%; background-color: #e5ad84; opacity: 0.6; position: absolute; bottom: -80rpx; right: -60rpx;}
+.container .top { height: 900rpx; background: repeating-linear-gradient(180deg, #e5ad84, #ed8f6f 100%); position: relative; overflow: hidden; z-index: 10;}
+.container .top .circle1 { width: 570rpx; height: 570rpx; border-radius: 50%; background-color: #ee8f6f; position: absolute; top: 10rpx; left: -140rpx; animation: float1 4s ease infinite alternate;}
+.container .top .circle2 { width: 260rpx; height: 260rpx; border-radius: 50%; background-color: #e5ad84; position: absolute; bottom: -80rpx; right: -60rpx; animation: float2 4s ease infinite alternate;}
+.container .circle3 { width: 260rpx; height: 260rpx; border-radius: 50%; background-color: #c7c8c8; opacity: 0.6; position: absolute; top: 720rpx; right: -60rpx; animation: float2 4s ease infinite alternate;}
+  @keyframes float1 {
+    0% { transform: translateY(0);}
+    100% { transform: translateY(60rpx);}
+  }
+  @keyframes float2 {
+    0% { transform: translateY(0);}
+    100% { transform: translateY(-100rpx);}
+  }
+.container .top .logo { width: 380rpx; position: absolute; top: 300rpx; left: 70rpx;}
+.container .top .title { width: 336rpx; position: absolute; bottom: 80rpx; left: 70rpx;}
+.container .titles { font-size: 60rpx; color: #221715; margin: 70rpx 0 300rpx 70rpx;}
+.container .titles span { font-size: 66rpx; color: #221715;}
 </style>
 
 <template>
 <div class="container">
+  <div class="circle3"></div>
   <div class="top">
     <div class="circle1"></div>
     <div class="circle2"></div>
+    <img src="../res/img/logo.png" class="logo" mode="widthFix"/>
+    <img src="../res/img/index-title.png" class="title" mode="widthFix"/>
   </div>
+  <div class="titles text-shadow"><span>Welcome</span> <br/> 欢迎2</div>
+
+  <menu></menu>
 </div>
 </template>
 
@@ -19,13 +38,13 @@ import wepy from '@wepy/core'
 import store from '../store'
 // https://github.com/wx-plugin/image-cropper
 wepy.page({
-  store,
-  data: {
+   store,
+   data: {
 
-  },
-  methods: {
+   },
+   methods: {
 
-  }
+   }
 })
 </script>
 <config>

@@ -1,0 +1,65 @@
+<style>
+   .container { width: 100%;}
+   .container .list { margin: 55rpx 40rpx 300rpx 40rpx;}
+   .container .store-item { border-radius: 20rpx; overflow: hidden; box-shadow: 0 20rpx 15rpx rhga(0, 0, 0, 0.12); margin-bottom: 80rpx;  transition: transform 0.15s linear;}
+   .container .store-item .img { width: 100%; display: block;}
+   .container .store-item .info { height: 150rpx; background-color: #ffffff; display: flex; justify-content: space-between; align-items: center;}
+   .container .store-item-select .info { background-color: #e5ad84;}
+   .container .store-item .info .left { width: 550rpx; margin-left: 20rpx;}
+   .container .store-item .info .left .name { font-size: 40rpx; margin-bottom: 6rpx;}
+   .container .store-item-select .info .left .name { color: #ffffff}
+   .container .store-item .info .left .address { font-size: 25rpx; color: #878887;}
+   .container .store-item-select .info .left .address { color: #ffffff;}
+   .container .store-item .info .checkbox { width: 74rpx; margin-right: 40rpx;}
+</style>
+
+<template>
+   <div class="container">
+      <div class="header">
+         <img src="../res/img/logo.png" class="logo" mode="widthFix"/>
+      </div>
+      <div class="list">
+         <div v-for="(item, index) in list"
+              class="store-item {{selectedIndex === index ? 'store-item-select' : ''}}"
+              hover-class="hscale"
+              hover-stay-time="10"
+              @tap="doSelect(index)">
+            <img src="../res/img/img3.jpg" mode="widthFix" class="img"/>
+            <div class="info">
+               <div class="left">
+                  <div class="name text-shadow">虎门南部万科店</div>
+                  <div class="address">虎门南部万科店</div>
+               </div>
+               <img src="../res/img/icon-checkbox-checked.png" mode="widthFix" class="checkbox" v-if="selectedIndex === index"/>
+               <img src="../res/img/icon-checkbox.png" mode="widthFix" class="checkbox" v-else/>
+            </div>
+         </div>
+      </div>
+      <menu btnText="下一步 | Next"></menu>
+   </div>
+</template>
+
+<script>
+   import wepy from '@wepy/core'
+   import store from '../store'
+   // https://github.com/wx-plugin/image-cropper
+   wepy.page({
+      store,
+      data: {
+         list: [{}, {}, {}, {}],
+         selectedIndex: 0
+      },
+      methods: {
+         doSelect (index) {
+            setTimeout(() => {
+               this.selectedIndex = index
+            }, 200)
+         }
+      }
+   })
+</script>
+<config>
+   {
+
+   }
+</config>

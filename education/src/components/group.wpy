@@ -17,19 +17,19 @@
 // import GroupItem from './groupitem'
 
 wepy.component({
-    props: {
-      grouplist: {},
-      index: {}
-    },
+     props: {
+        grouplist: {},
+        index: {}
+     },
 
-    methods: {
-      tap () {
-        this.grouplist.name = `Parent Random(${Math.random()})`
-        let groups = this.$parent.$children.filter(com => com.$is === 'components/group')
-        let index = groups.indexOf(this)
-        console.log(`Clicked Group ${index}, ID is ${this.grouplist.id}`)
-      }
-    }
+     methods: {
+        tap () {
+           this.grouplist.name = `Parent Random(${Math.random()})`
+           let groups = this.$parent.$children.filter(com => com.$is === 'components/group')
+           let index = groups.indexOf(this)
+           console.log(`Clicked Group ${index}, ID is ${this.grouplist.id}`)
+        }
+     }
   })
 </script>
 <config>

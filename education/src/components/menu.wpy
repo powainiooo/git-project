@@ -1,0 +1,43 @@
+<style>
+   .z-menu { width: 100%; position: fixed; bottom: 40rpx; left: 0; z-index: 1000;}
+   .z-menu-btns { width: 100%;  display: flex; justify-content: space-around;}
+   .z-menu-btns .btn-menu { width: 170rpx; height: 170rpx; border-radius: 20rpx; background-color: #e5ad84; display: flex; justify-content: center; align-items: center; box-shadow: 0 20rpx 15rpx rhga(0, 0, 0, 0.12);}
+   .z-menu-btns .btn-menu .icon { width: 70rpx;}
+   .z-menu-btns .btn-next { width: 540rpx; height: 170rpx; border-radius: 20rpx; background-color: #ffffff; display: flex; justify-content: center; align-items: center; box-shadow: 0 20rpx 15rpx rhga(0, 0, 0, 0.12); font-size: 40rpx; text-shadow: 0 0 3px rgba(54, 42, 26, 0.33);}
+</style>
+<template>
+   <div class="z-menu">
+      <div class="z-menu-btns">
+         <div class="btn-menu" @tap="toggleMenu">
+            <img src="../res/img/icon-menu.png" mode="widthFix" class="icon" v-if="!showMenu"/>
+            <img src="../res/img/icon-close.png" mode="widthFix" class="icon" v-if="showMenu"/>
+         </div>
+         <div class="btn-next text-shadow">{{btnText}}</div>
+      </div>
+   </div>
+</template>
+<script>
+   import wepy from '@wepy/core'
+   import store from '../store'
+   import { mapState, mapActions } from '@wepy/x'
+
+   wepy.component({
+      store,
+      props: {
+         btnText: {
+            type: String,
+            default: '进入 | Enter1'
+         }
+      },
+      data: {
+         showMenu: false
+      },
+      computed: mapState([ 'counter' ]),
+      methods: {
+         toggleMenu () {
+            console.log('123')
+            this.showMenu = !this.showMenu
+         }
+      }
+   })
+</script>

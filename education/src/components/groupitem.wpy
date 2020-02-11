@@ -12,17 +12,17 @@
   import wepy from '@wepy/core'
 
 wepy.component({
-    props: {
-      gitem: {}
-    },
-    data: {
-    },
-    methods: {
-      tap () {
-        this.gitem.childname = `Child Random(${Math.random()})`
-        let index = this.$parent.$children.indexOf(this)
-        console.log(`Item ${index}, ID is ${this.gitem.childid}`)
-      }
-    }
+     props: {
+        gitem: {}
+     },
+     data: {
+     },
+     methods: {
+        tap () {
+           this.gitem.childname = `Child Random(${Math.random()})`
+           let index = this.$parent.$children.indexOf(this)
+           console.log(`Item ${index}, ID is ${this.gitem.childid}`)
+        }
+     }
   })
 </script>

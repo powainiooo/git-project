@@ -1,43 +1,64 @@
 <style>
    .z-menu { width: 100%; position: fixed; bottom: 40rpx; left: 0; z-index: 1000;}
-   .z-menu-btns { width: 100%;  display: flex; justify-content: space-around;}
-   .z-menu-btns .btn-menu { width: 170rpx; height: 170rpx; border-radius: 20rpx; background-color: #e5ad84; display: flex; justify-content: center; align-items: center; box-shadow: 0 20rpx 15rpx rhga(0, 0, 0, 0.12);}
+   .z-menu-btns { width: 100%;  display: flex; justify-content: space-around; position: relative; z-index: 10;}
+   .z-menu-btns .btn-menu { width: 170rpx; height: 170rpx; border-radius: 30rpx; background-color: #e5ad84; display: flex; justify-content: center; align-items: center; box-shadow: 0 20rpx 15rpx rhga(0, 0, 0, 0.12); transition: transform 0.15s linear;}
    .z-menu-btns .btn-menu .icon { width: 70rpx;}
-   .z-menu-btns .btn-next { width: 540rpx; height: 170rpx; border-radius: 20rpx; background-color: #ffffff; display: flex; justify-content: center; align-items: center; box-shadow: 0 20rpx 15rpx rhga(0, 0, 0, 0.12); font-size: 40rpx; text-shadow: 0 0 3px rgba(54, 42, 26, 0.33);}
+   .z-menu-btns .btn-next { width: 540rpx; height: 170rpx; border-radius: 30rpx; background-color: #ffffff; display: flex; justify-content: center; align-items: center; box-shadow: 0 20rpx 15rpx rhga(0, 0, 0, 0.12); font-size: 40rpx; color: #221715; text-shadow: 0 0 3px rgba(54, 42, 26, 0.33); transition: all 0.15s linear;}
+   .z-menu .blur { filter: blur(2px); -webkit-filter: blur(2px);}
+   .z-menu-list-frame { position: fixed; top: 0; left: 0; right: 0; bottom: 0;}
+   .z-menu-nav { position: fixed; left: 10rpx; right: 10rpx; bottom: 235rpx; background-color: #ffffff; border-radius: 30rpx; box-shadow: 0 20rpx 15rpx rhga(0, 0, 0, 0.12);}
+   .z-menu-nav-item { display: flex; align-items: center; height: 160rpx; font-size: 40rpx; color: #221715; margin: 0 10rpx; padding-left: 50rpx; border-bottom: 2rpx solid #ececec}
+   .z-menu-nav-item:last-child { border-bottom: none;}
+   .hscale { transform: scale(0.95);}
 </style>
 <template>
    <div class="z-menu">
       <div class="z-menu-btns">
-         <div class="btn-menu" @tap="toggleMenu">
+         <div class="btn-menu" @click="toggleMenu"
+              hover-class="hscale"
+              hover-stay-time="10">
             <img src="../res/img/icon-menu.png" mode="widthFix" class="icon" v-if="!showMenu"/>
             <img src="../res/img/icon-close.png" mode="widthFix" class="icon" v-if="showMenu"/>
          </div>
-         <div class="btn-next text-shadow">{{btnText}}</div>
+         <div class="btn-next text-shadow {{showMenu ? 'blur' : ''}}"
+              hover-class="hscale"
+              hover-stay-time="10"
+              @click="doFunc">{{btnText}}</div>
+      </div>
+      <div class="z-menu-list-frame" @touchmove.stop="tmove" v-if="showMenu">
+         <div class="z-menu-nav">
+            <a href="#" class="z-menu-nav-item text-shadow">关于我们 | About us</a>
+            <a href="#" class="z-menu-nav-item text-shadow">近期活动 | News</a>
+         </div>
       </div>
    </div>
 </template>
 <script>
    import wepy from '@wepy/core'
    import store from '../store'
-   import { mapState, mapActions } from '@wepy/x'
+   import { mapState } from '@wepy/x'
 
    wepy.component({
       store,
       props: {
          btnText: {
             type: String,
-            default: '进入 | Enter1'
+            default: '进入 | Enter'
          }
       },
-      data: {
-         showMenu: false
-      },
-      computed: mapState([ 'counter' ]),
+      computed: mapState([ 'showMenu' ]),
       methods: {
          toggleMenu () {
-            console.log('123')
-            this.showMenu = !this.showMenu
-         }
+            setTimeout(() => {
+               this.$store.commit('toggleMenu', !this.showMenu)
+            }, 200)
+         },
+         doFunc () {
+            setTimeout(() => {
+               this.$emit('doFunc')
+            }, 200)
+         },
+         tmove () {}
       }
    })
 </script>

@@ -1,0 +1,57 @@
+<style>
+   .header { margin-bottom: 200rpx;}
+   .person { position: absolute; top: 70rpx; right: 60rpx; text-align: center;}
+   .person .avatar { width: 200rpx; border-radius: 50%;}
+   .person .name { font-size: 40rpx; color: #221715;}
+</style>
+
+<template>
+   <div>
+      <div class="container {{showMenu ? 'blur' : ''}}">
+         <div class="header shadow1">
+            <img src="../res/img/logo.png" class="logo" mode="widthFix"/>
+         </div>
+         <div class="person">
+            <img src="../res/img/avatar.png" mode="widthFix" class="avatar"/>
+            <div class="name">儿童画</div>
+         </div>
+         <div class="lesson-item lesson-item-student">
+            <img src="../res/img/img1.jpg" class="img" mode="widthFix"/>
+            <div class="name text-shadow">儿童画</div>
+            <div class="use-over"></div>
+            <div class="nums">100<span class="unit">节</span></div>
+         </div>
+         <div class="lesson-item">
+            <img src="../res/img/img1.jpg" class="img" mode="widthFix"/>
+            <div class="name text-shadow">儿童画</div>
+         </div>
+      </div>
+   </div>
+</template>
+
+<script>
+   import wepy from '@wepy/core'
+   import store from '../store'
+   import { mapState } from '@wepy/x'
+   // https://github.com/wx-plugin/image-cropper
+   wepy.page({
+      store,
+      data: {
+         date: '',
+         sex: '',
+         sexList: [
+            {name: '男', value: 1},
+            {name: '女', value: 2}
+         ]
+      },
+      computed: mapState([ 'showMenu' ]),
+      methods: {}
+   })
+</script>
+<config>
+   {
+      "usingComponents": {
+         "menu": "~@/components/menu"
+      }
+   }
+</config>

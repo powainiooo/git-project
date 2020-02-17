@@ -11,6 +11,10 @@ Component({
       linkId: {
 	   	type: String,
 		   value: '1'
+	   },
+      linkType: {
+	   	type: String,
+		   value: '1'
 	   }
    },
 

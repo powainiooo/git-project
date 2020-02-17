@@ -1,7 +1,6 @@
 <style>
-   .container { width: 100%;}
-   .container .list { margin: 55rpx 40rpx 300rpx 40rpx;}
-   .container .store-item { border-radius: 20rpx; overflow: hidden; box-shadow: 0 20rpx 15rpx rhga(0, 0, 0, 0.12); margin-bottom: 80rpx;  transition: transform 0.15s linear;}
+   .container .list { margin: 55rpx 40rpx 0 40rpx;}
+   .container .store-item { border-radius: 30rpx; overflow: hidden; box-shadow: 0 20rpx 15rpx rhga(0, 0, 0, 0.12); margin-bottom: 80rpx;  transition: transform 0.15s linear;}
    .container .store-item .img { width: 100%; display: block;}
    .container .store-item .info { height: 150rpx; background-color: #ffffff; display: flex; justify-content: space-between; align-items: center;}
    .container .store-item-select .info { background-color: #e5ad84;}
@@ -11,37 +10,48 @@
    .container .store-item .info .left .address { font-size: 25rpx; color: #878887;}
    .container .store-item-select .info .left .address { color: #ffffff;}
    .container .store-item .info .checkbox { width: 74rpx; margin-right: 40rpx;}
+   .others { width: 160rpx; margin: 80rpx auto 0 auto; text-align: center;}
+   .others .icon { width: 84rpx;}
+   .others .hint { margin: 0;}
 </style>
 
 <template>
-   <div class="container">
-      <div class="header">
-         <img src="../res/img/logo.png" class="logo" mode="widthFix"/>
-      </div>
-      <div class="list">
-         <div v-for="(item, index) in list"
-              class="store-item {{selectedIndex === index ? 'store-item-select' : ''}}"
-              hover-class="hscale"
-              hover-stay-time="10"
-              @tap="doSelect(index)">
-            <img src="../res/img/img3.jpg" mode="widthFix" class="img"/>
-            <div class="info">
-               <div class="left">
-                  <div class="name text-shadow">虎门南部万科店</div>
-                  <div class="address">虎门南部万科店</div>
+   <div>
+      <div class="container {{showMenu ? 'blur' : ''}}">
+         <div class="header">
+            <img src="../res/img/logo.png" class="logo" mode="widthFix"/>
+         </div>
+         <div class="list">
+            <div v-for="(item, index) in list"
+                 class="store-item {{selectedIndex === index ? 'store-item-select' : ''}}"
+                 v-if="selectedIndex === index ? true : !hasAcount"
+                 hover-class="hscale"
+                 hover-stay-time="10"
+                 @tap="doSelect(index)">
+               <img src="../res/img/img3.jpg" mode="widthFix" class="img"/>
+               <div class="info">
+                  <div class="left">
+                     <div class="name text-shadow">虎门南部万科店</div>
+                     <div class="address">虎门南部万科店</div>
+                  </div>
+                  <img src="../res/img/icon-checkbox-checked.png" mode="widthFix" class="checkbox" v-if="selectedIndex === index"/>
+                  <img src="../res/img/icon-checkbox.png" mode="widthFix" class="checkbox" v-else/>
                </div>
-               <img src="../res/img/icon-checkbox-checked.png" mode="widthFix" class="checkbox" v-if="selectedIndex === index"/>
-               <img src="../res/img/icon-checkbox.png" mode="widthFix" class="checkbox" v-else/>
             </div>
          </div>
+         <div class="others">
+            <img src="../res/img/icon-house.png" mode="widthFix" class="icon"/>
+            <div class="hint">Others<br/>查看其它门店</div>
+         </div>
       </div>
-      <menu btnText="下一步 | Next"></menu>
+      <menu btnText="下一步 | Next" @doFunc="doEnter"></menu>
    </div>
 </template>
 
 <script>
    import wepy from '@wepy/core'
    import store from '../store'
+   import { mapState } from '@wepy/x'
    // https://github.com/wx-plugin/image-cropper
    wepy.page({
       store,
@@ -49,11 +59,23 @@
          list: [{}, {}, {}, {}],
          selectedIndex: 0
       },
+      computed: {
+         ...mapState(['showMenu', 'personalInfo']),
+         hasAcount () {
+            return this.personalInfo !== null
+         }
+      },
       methods: {
          doSelect (index) {
             setTimeout(() => {
                this.selectedIndex = index
             }, 200)
+         },
+         doEnter () {
+            const state = this.hasAcount ? 'input' : 'new'
+            wx.navigateTo({
+               url: `/pages/password?state=${state}`
+            })
          }
       }
    })

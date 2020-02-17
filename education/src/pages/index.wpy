@@ -19,31 +19,38 @@
 </style>
 
 <template>
-<div class="container">
-  <div class="circle3"></div>
-  <div class="top">
-    <div class="circle1"></div>
-    <div class="circle2"></div>
-    <img src="../res/img/logo.png" class="logo" mode="widthFix"/>
-    <img src="../res/img/index-title.png" class="title" mode="widthFix"/>
-  </div>
-  <div class="titles text-shadow"><span>Welcome</span> <br/> 欢迎2</div>
-
-  <menu></menu>
+<div>
+   <div class="container {{showMenu ? 'blur' : ''}}">
+      <div class="circle3"></div>
+      <div class="top">
+         <div class="circle1"></div>
+         <div class="circle2"></div>
+         <img src="../res/img/logo.png" class="logo" mode="widthFix"/>
+         <img src="../res/img/index-title.png" class="title" mode="widthFix"/>
+      </div>
+      <div class="titles text-shadow"><span>Welcome</span> <br/> 欢迎2</div>
+   </div>
+   <menu @doFunc="doEnter"></menu>
 </div>
 </template>
 
 <script>
 import wepy from '@wepy/core'
 import store from '../store'
+import { mapState } from '@wepy/x'
 // https://github.com/wx-plugin/image-cropper
 wepy.page({
    store,
    data: {
 
    },
+   computed: mapState([ 'showMenu' ]),
    methods: {
-
+      doEnter () {
+         wx.redirectTo({
+            url: '/pages/store'
+         })
+      }
    }
 })
 </script>

@@ -1,0 +1,57 @@
+<style>
+   .title2 { margin: 60rpx 0 40rpx 70rpx;}
+
+   .btn-new { width: 110rpx; margin: 100rpx auto; text-align: center;}
+   .btn-new .icon { width: 70rpx;}
+   .btn-new .hint { text-align: center; margin: 0;}
+</style>
+
+<template>
+   <div>
+      <div class="container {{showMenu ? 'blur' : ''}}">
+         <div class="header shadow1">
+            <img src="../res/img/logo.png" class="logo" mode="widthFix"/>
+         </div>
+         <div class="title2 text-shadow">Select <br/> 选择学生</div>
+         <div class="student-item">
+            <img src="../res/img/avatar.png" class="avatar"/>
+            <div class="name text-shadow">杨心怡</div>
+         </div>
+         <div class="student-item">
+            <img src="../res/img/avatar.png" class="avatar"/>
+            <div class="name text-shadow">杨心怡</div>
+         </div>
+         <div class="btn-new">
+            <img src="../res/img/icon-add1.png" class="icon" mode="widthFix"/>
+            <div class="hint">New <br/> 新增学生</div>
+         </div>
+      </div>
+   </div>
+</template>
+
+<script>
+   import wepy from '@wepy/core'
+   import store from '../store'
+   import { mapState } from '@wepy/x'
+   // https://github.com/wx-plugin/image-cropper
+   wepy.page({
+      store,
+      data: {
+         date: '',
+         sex: '',
+         sexList: [
+            {name: '男', value: 1},
+            {name: '女', value: 2}
+         ]
+      },
+      computed: mapState([ 'showMenu' ]),
+      methods: {}
+   })
+</script>
+<config>
+   {
+      "usingComponents": {
+         "menu": "~@/components/menu"
+      }
+   }
+</config>

@@ -2,14 +2,13 @@ import Vuex from '@wepy/x'
 
 export default new Vuex.Store({
    state: {
-      counter: 0
+      counter: 0,
+      showMenu: false,
+      personalInfo: null
    },
    mutations: {
-      increment (state) {
-         state.counter++
-      },
-      decrement (state) {
-         state.counter--
+      toggleMenu (state, data) {
+         state.showMenu = data
       }
    },
    actions: {

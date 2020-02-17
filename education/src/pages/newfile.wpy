@@ -1,0 +1,85 @@
+<style>
+   .title2 { margin: 60rpx 0 40rpx 70rpx;}
+   .form-line { margin: 0 60rpx 40rpx 60rpx; display: flex; justify-content: flex-end; align-items: flex-end; position: relative;}
+   .form-line .portrait { margin-right: 40rpx; position: relative;}
+   .form-line .portrait .avatar { width: 160rpx;}
+   .form-line .input { width: 100%; border: none; background-color: transparent; border-bottom: 2rpx solid #b9babc; text-shadow: 0 0 3px rgba(54, 42, 26, 0.33); position: relative; text-align: right; font-size: 35rpx; color: #221715; height: 70rpx; line-height: 70rpx;}
+   .form-line .input::before { content: ''; width: 10rpx; height: 10rpx; background-color: #b9babc; border-radius: 50%; position: absolute; bottom: -5rpx; left: -10rpx;}
+   .form-line .input::after { content: ''; width: 10rpx; height: 10rpx; background-color: #b9babc; border-radius: 50%; position: absolute; bottom: -5rpx; right: -10rpx;}
+   .form-line .input .txt { width: 100%; text-align: right; font-size: 35rpx; color: #221715; height: 70rpx; line-height: 70rpx;}
+   .form-line .input .select-icon { width: 18rpx; position: absolute; top: 30rpx; left: 0;}
+</style>
+
+<template>
+   <div>
+      <div class="container {{showMenu ? 'blur' : ''}}">
+         <div class="header shadow1">
+            <img src="../res/img/logo.png" class="logo" mode="widthFix"/>
+         </div>
+         <div class="title2 text-shadow">Set up <br/> 建立学生档案</div>
+         <div class="form-line">
+            <div class="portrait">
+               <img src="../res/img/avatar.png" mode="widthFix" class="avatar"/>
+               <img src="../res/img/icon-add2.png" mode="widthFix" class="icon"/>
+            </div>
+            <div class="input" style=" margin-bottom: 16rpx; width: 400rpx;">
+               <input placeholder="学生姓名" class="txt text-shadow" placeholder-class="txt" />
+            </div>
+         </div>
+         <div class="form-line">
+            <picker mode="date" style="width: 100%" v-model="date">
+               <div class="input text-shadow">
+                  {{date === '' ? '出生年-月-日': date}}
+                  <img src="../res/img/icon-select.png" mode="widthFix" class="select-icon"/>
+               </div>
+            </picker>
+         </div>
+         <div class="form-line">
+            <picker style="width: 180rpx" :range="sexList" range-key="name" v-model="sex">
+               <div class="input text-shadow">
+                  {{sex === '' ? '性别': sexList[sex].name}}
+                  <img src="../res/img/icon-select.png" mode="widthFix" class="select-icon"/>
+               </div>
+            </picker>
+         </div>
+         <div class="form-line">
+            <div class="input">
+               <input placeholder="家长姓名" class="txt text-shadow" placeholder-class="txt" />
+            </div>
+         </div>
+         <div class="form-line">
+            <div class="input">
+               <input placeholder="家长联系电话" type="number" class="txt text-shadow" placeholder-class="txt" />
+            </div>
+         </div>
+      </div>
+      <menu btnText="下一步 | Next"></menu>
+   </div>
+</template>
+
+<script>
+   import wepy from '@wepy/core'
+   import store from '../store'
+   import { mapState } from '@wepy/x'
+   // https://github.com/wx-plugin/image-cropper
+   wepy.page({
+      store,
+      data: {
+         date: '',
+         sex: '',
+         sexList: [
+            {name: '男', value: 1},
+            {name: '女', value: 2}
+         ]
+      },
+      computed: mapState([ 'showMenu' ]),
+      methods: {}
+   })
+</script>
+<config>
+   {
+      "usingComponents": {
+         "menu": "~@/components/menu"
+      }
+   }
+</config>

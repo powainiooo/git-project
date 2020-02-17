@@ -38,6 +38,7 @@ Page({
 		listData: [],
 		bannerUrl: '',
 		bannerId: '',
+		bannerType: '',
 		page: 1,
 		keyword: '',
       recTitle: '',
@@ -230,6 +231,7 @@ Page({
 				citysList: res.data.citys,
 				bannerUrl: res.data.cover,
 				bannerId: res.data.b_id,
+            bannerType: res.data.type,
 				recTitle: res.data.words,
 			})
          this.getLocation()

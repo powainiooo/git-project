@@ -37,6 +37,7 @@
       <div class="right">
          <banner showCity
                  :id="bannerId"
+                 :type="bannerType"
                  :citys="cityList"
                  @getcity="setCity"
                  :img="bannerImg"
@@ -57,7 +58,7 @@
                      @tap="getDetailData" style="margin: 50px 0;">
                   </list-item>
                   <recommend v-if="i.cate === 'recommend' && i.list.length !== 0" :listData="i.list" :bgSrc="bgSrc" :style="{width: frameW + 'px'}" :title="recommendTitle"  @linkTo="getDetailData"></recommend>
-                  <banner v-if="i.cate === 'banner'" :id="i.id" :img="i.pc_image" @linkTo="getDetailData" :style="{width: frameW + 'px'}" type="2"></banner>
+                  <banner v-if="i.cate === 'banner'" :id="i.id" :img="i.pc_image" @linkTo="getDetailData" :style="{width: frameW + 'px'}" :type="i.re_type"></banner>
                </div>
             </div>
          </div>
@@ -101,6 +102,7 @@
             page: 1,
             city: '',
             bannerId: '',
+            bannerType: '',
             cityList: [],
             bannerImg: '',
             isListOver: false,
@@ -171,6 +173,7 @@
          getCityBanner () {
             getCityBanner().then(res => {
                this.bannerId = res.data.b_id
+               this.bannerType = res.data.type
                this.cityList = res.data.citys
                this.bannerImg = res.data.pccover
                this.recommendTitle = res.data.words

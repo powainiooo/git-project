@@ -1,0 +1,75 @@
+<style>
+   .header { z-index: 10;}
+   .lesson-item-detail { width: 100%; border-radius: 0; height: 200rpx; margin: 0;}
+   .lesson-item-detail .name { left: auto; right: 30rpx; bottom: auto; top: 30rpx;}
+   .progress { height: 170rpx; background-color: #ffffff; overflow: hidden; margin-bottom: 70rpx;}
+   .progress .nums { text-align: right; padding-right: 50rpx; font-size: 25rpx; color: #b9babb; margin-top: 40rpx; margin-bottom: 10rpx;}
+   .progress .nums .val { font-size: 40rpx;}
+   .progress .line-bg { margin: 0 50rpx; height: 8rpx; background-color: #edecea; border-radius: 4rpx;}
+   .progress .line-bg .line { width: 50%; height: 100%; background-color: #e9ba90; border-radius: 4rpx;}
+   .list-frame { margin-bottom: 80rpx;}
+   .list-frame .year { font-size: 40rpx; color: #cacaca; margin-bottom: 24rpx; margin-left: 50rpx;}
+   .list-frame .list { width: 696rpx; display: flex; flex-wrap: wrap; margin: 0 auto;}
+   .list-frame .list .list-item { width: 200rpx; height: 200rpx; border-radius: 30rpx; box-shadow: 0 20rpx 15rpx rgba(0, 0, 0, 0.15); background-color: #ffffff; overflow: hidden; margin: 0 16rpx 32rpx 16rpx;}
+   .list-frame .list .list-item .date { height: 70rpx; display: flex; justify-content: center; align-items: center;  font-size: 40rpx; color: #ffffff; background-color: #e5ad84;}
+   .list-frame .list .list-item .name { height: 130rpx; display: flex; justify-content: center; align-items: center; font-size: 25rpx; color: #878887;}
+</style>
+
+<template>
+   <div>
+      <div class="container {{showMenu ? 'blur' : ''}}">
+         <div class="header shadow1">
+            <img src="../res/img/logo.png" class="logo" mode="widthFix"/>
+         </div>
+         <div class="lesson-item lesson-item-detail">
+            <img src="../res/img/img1.jpg" class="img" mode="widthFix"/>
+            <div class="name text-shadow">儿童画</div>
+            <div class="nums">100<span class="unit">节</span></div>
+         </div>
+         <div class="progress shadow1">
+            <div class="nums">
+               已使用<span class="val">10</span>节
+            </div>
+            <div class="line-bg">
+               <div class="line"></div>
+            </div>
+         </div>
+         <div class="list-frame">
+            <div class="year">2019</div>
+            <ul class="list">
+               <li class="list-item" v-for="i in 6">
+                  <div class="date text-shadow">11/05</div>
+                  <div class="name">逃跑的小绵羊</div>
+               </li>
+            </ul>
+         </div>
+      </div>
+   </div>
+</template>
+
+<script>
+   import wepy from '@wepy/core'
+   import store from '../store'
+   import { mapState } from '@wepy/x'
+   // https://github.com/wx-plugin/image-cropper
+   wepy.page({
+      store,
+      data: {
+         date: '',
+         sex: '',
+         sexList: [
+            {name: '男', value: 1},
+            {name: '女', value: 2}
+         ]
+      },
+      computed: mapState([ 'showMenu' ]),
+      methods: {}
+   })
+</script>
+<config>
+   {
+      "usingComponents": {
+         "menu": "~@/components/menu"
+      }
+   }
+</config>

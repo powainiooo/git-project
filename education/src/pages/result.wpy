@@ -1,0 +1,43 @@
+<style>
+   .psw-frame { background-color: #e5ad84; height: 710rpx; position: relative; overflow: hidden;}
+   .psw-frame .title1 { margin: 60rpx 0 0 70rpx;}
+   .psw-frame .icon { width: 160rpx; display: block; margin: 100rpx auto;}
+   .psw-frame .tips { width: 70rpx; position: absolute; bottom: 25rpx; left: 70rpx;}
+</style>
+
+<template>
+   <div>
+      <div class="container {{showMenu ? 'blur' : ''}}">
+         <div class="header shadow1">
+            <img src="../res/img/logo.png" class="logo" mode="widthFix"/>
+         </div>
+         <div class="psw-frame shadow1">
+            <div class="title1 text-shadow">Successfilly <br/> 密码设置成功</div>
+            <img src="../res/img/icon-success.png" mode="widthFix" class="icon"/>
+            <img src="../res/img/tips.png" mode="widthFix" class="tips"/>
+         </div>
+         <div class="hint">请牢记您设置的密码，BBArt不会查阅您的密码，不慎遗忘请联系店面店长申请找回。</div>
+      </div>
+      <menu btnText="确认 | Confirm"></menu>
+   </div>
+</template>
+
+<script>
+   import wepy from '@wepy/core'
+   import store from '../store'
+   import { mapState } from '@wepy/x'
+   // https://github.com/wx-plugin/image-cropper
+   wepy.page({
+      store,
+      data: {},
+      computed: mapState([ 'showMenu' ]),
+      methods: {}
+   })
+</script>
+<config>
+   {
+      "usingComponents": {
+         "menu": "~@/components/menu"
+      }
+   }
+</config>

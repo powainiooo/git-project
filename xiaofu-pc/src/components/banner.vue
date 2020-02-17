@@ -32,7 +32,7 @@
 
 <template>
 <div class="banner-container" :style="styles">
-   <t-button class="z-btn" @dotap="gotoDetail" extraClass="white">了解详情</t-button>
+   <t-button class="z-btn" @dotap="gotoDetail" extraClass="white" v-if="type !== '4'">了解详情</t-button>
    <div class="opera" v-if="showCity">
       <div class="z-select" v-if="showCitySelect">
          <Select v-model="city" style="width:200px" class="z-select" @on-change="cityChange" placeholder="选择城市" :capture="false">

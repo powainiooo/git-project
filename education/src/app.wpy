@@ -2,13 +2,30 @@
    @import "res/helvetica.wxss";
    page { background-color: #edecea}
    .text-shadow { text-shadow: 0 0 3px rgba(54, 42, 26, 0.33);}
+   .container { width: 100%; margin-bottom: 300rpx; transition: all 0.15s linear;}
    .header { height: 180rpx; background-color: #e5ad84; display: flex; align-items: center;}
    .header .logo { width: 260rpx; margin-left: 70rpx;}
    .shadow1 { position: relative;}
    .shadow1::after { content: ''; width: 100%; height: 40rpx; background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAnAgMAAACzjsoxAAAADFBMVEU2Khw2Khw2Khw2KhwarhFMAAAABHRSTlMBBA0JwFRvygAAABNJREFUCNdjcGBoAMIDQBoEKQQAxQ4CwQhBwMsAAAAASUVORK5CYII=) repeat-x; background-size: auto 100%; position: absolute; top: 100%; left: 0;}
    .hscale { transform: scale(0.95);}
    .title1 { font-size: 40rpx; color: #ffffff;}
+   .title2 { font-size: 40rpx; color: #221715;}
    .hint { margin: 40rpx 60rpx;  font-size: 25rpx; color: #b9babb; line-height: 1.7}
+   .blur { filter: blur(2px); -webkit-filter: blur(2px);}
+
+   .student-item { height: 170rpx; margin: 0 40rpx 40rpx 40rpx; display: flex; align-items: center; justify-content: space-between; padding: 0 30rpx; background-color: #ffffff; border-radius: 30rpx; box-shadow: 0 20rpx 15rpx rgba(0, 0, 0, 0.15);}
+   .student-item .avatar { width: 140rpx; height: 140rpx; display: block; border-radius: 50%; border: 1rpx solid rgba(0, 0, 0, 0.28);}
+   .student-item .name { color: #221715; font-size: 35rpx;}
+
+   .lesson-item { margin: 0 40rpx 40rpx 40rpx; display: flex; align-items: center; justify-content: center; background-color: #e5ad84; border-radius: 30rpx; box-shadow: 0 20rpx 15rpx rgba(0, 0, 0, 0.15); position: relative; overflow: hidden;}
+   .lesson-item .img { width: 100%; display: block;}
+   .lesson-item .name { font-size: 40rpx; color: #ffffff; position: absolute; left: 25rpx; bottom: 50rpx;}
+   .lesson-item-student::before { content: ''; width: 1prx; height: 100%; border-left: 1px dashed #d0a583; position: absolute; right: 72rpx; top: 0;}
+   .lesson-item-student::after { content: ''; width: 1prx; height: 100%; border-left: 1px dashed #e8d3c2; position: absolute; right: 71rpx; top: 0;}
+   .lesson-item .use-over { width: 70rpx; height: 100%; position: absolute; top: 0; right: 0; background-color: #7e9eab;}
+   .lesson-item .use-over::after { content: '已用完'; width: 100rpx; font-size: 30rpx; color: #ffffff; position: absolute; top: 170rpx; right: -14rpx; transform: rotateZ(90deg);}
+   .lesson-item .nums { width: 130rpx; height: 130rpx; box-sizing: border-box; position: absolute; top: 0; left: 0; background-color: #ffffff; border-radius: 0 0 130rpx 0; text-align: center; color: #221715; font-size: 36rpx; padding-top: 24rpx;}
+   .lesson-item .nums .unit { color: #b9babc; font-size: 25rpx;}
 </style>
 
 <script>
@@ -45,9 +62,16 @@
 <config>
    {
    "pages": [
-   "pages/password",
-   "pages/store",
-   "pages/index"
+      "pages/store",
+      "pages/index",
+      "pages/lessonDetail",
+      "pages/studentlesson",
+      "pages/lesson",
+      "pages/student",
+      "pages/newfile",
+      "pages/result",
+      "pages/password",
+      "pages/welcome"
    ],
    "window": {
    "backgroundTextStyle": "light",

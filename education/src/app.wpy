@@ -32,6 +32,11 @@
    import wepy from '@wepy/core'
    import eventHub from './common/eventHub'
    import vuex from '@wepy/x'
+   import {promisify} from '@/res/util.js'
+   import {doLogin} from '@/res/api.js'
+   const login = promisify(wx.login)
+   const getSetting = promisify(wx.getSetting)
+   const getUserInfo = promisify(wx.getUserInfo)
 
    wepy.use(vuex)
 
@@ -45,7 +50,8 @@
          }
       },
       globalData: {
-         userInfo: null
+         userInfo: null,
+         code: null
       },
 
       onLaunch() {
@@ -53,9 +59,28 @@
             console.log('app-launch event emitted, the params are:')
             console.log(args)
          })
+         this.onlogin()
       },
 
       methods: {
+         async onlogin () {
+            const resLogin = await login()
+            this.$options.globalData.code = resLogin.code
+            const resSetting = await getSetting()
+            if (resSetting.authSetting['scope.userInfo']) {
+               const userInfo = await getUserInfo()
+               doLogin({
+                  code: resLogin.code,
+                  rawData: userInfo.rawData
+               }).then(res => {
+                  this.$options.globalData.userInfo = res.data.userInfo
+               })
+            } else {
+               wx.redirectTo({
+                  url: '/pages/index?type=auth'
+               })
+            }
+         }
       }
    })
 </script>

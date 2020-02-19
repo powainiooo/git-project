@@ -1,0 +1,19 @@
+<header-view>客户反馈表 | Feedback table</header-view>
+<view class="container">
+    <view class="star-list">
+        <view wx:for="{{[1,2,3,4,5]}}"
+              wx:for-item="item"
+              wx:key="{{item}}"
+              data-score="{{item}}"
+              bindtap="setScore"
+              class="icons icon-xingxing {{item <= score ? 'active' : ''}}"></view>
+    </view>
+    <view class="title">意见及反馈</view>
+    <view style="margin: 20rpx 60rpx;">
+        <textarea class="textarea" bindinput="bindTextAreaBlur"/>
+    </view>
+
+</view>
+<footer-view showClose binddoclose="doclose">
+    <view slot="btn" bindtap="doBack">确认 | Confirm</view>
+</footer-view>

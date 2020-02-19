@@ -1,0 +1,26 @@
+<scroll-view scroll-y="{{!showBlur}}" class="index-frame {{showBlur ? 'blur' : ''}}" bindscroll="doScroll">
+    <header-view showTitle="{{false}}" size="{{headerSize}}"></header-view>
+    <view class="container index-container">
+        <image src="{{imgSrc+pageData.cover}}" class="banner" mode="widthFix" wx:if="{{pageData.cover != undefined}}"></image>
+        <view class="content">
+            <view class="title-en">Welcome</view>
+            <view class="title-cn">欢迎</view>
+            <view class="decs" wx:if="{{result == 'index'}}">
+                <text class="icons icon-logo"></text>{{pageData.indexpage}}
+            </view>
+            <view class="decs" wx:if="{{result == 'auth'}}">
+                <text class="icons icon-logo"></text>申请获得您的公开信息（昵称、头像等），用于完成洗发服务预定，拒绝则无法使用本服务体验。
+            </view>
+            <view class="tips">{{pageData.comment}}</view>
+        </view>
+    </view>
+</scroll-view>
+<footer-view
+        wx:if="{{result == 'index'}}"
+        showMenu
+        bindopenMenu="doBlur"
+        bindhideMenu="hideBlur"
+        bindbtn="doOrder"><view slot="btn">预约 | Order</view></footer-view>
+<view class="foot-btn" wx:if="{{result == 'auth'}}">
+    <button plain class="auth-btn" open-type="getUserInfo" bindgetuserinfo="getUserInfo">授权申请 | Authorization</button>
+</view>

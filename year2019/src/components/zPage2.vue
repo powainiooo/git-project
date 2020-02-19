@@ -71,9 +71,9 @@ export default {
             if (this.pageData.cPlacing > 70) {
                return '一直插电一直爽<br/>插电不耗油，倍儿爽'
             } else if (this.pageData.cPlacing > 30 && this.pageData.cPlacing <= 70) {
-               return '短途用电 经济节省<br/>长途用油 动力强劲<br/>我为比亚迪混动车“带盐”'
+               return '短途用电 经济节省<br/>长途用油 动力强劲<br/>我为比亚迪双模车“带盐”'
             } else {
-               return '这么土壕吗？<br/>买混动车是为了<br/>面儿还是牌儿？'
+               return '这么土壕吗？<br/>买双模车是为了<br/>面儿还是牌儿？'
             }
          } else if (this.type === 'EV') {
             return '比亚迪新能源，倍儿爽！'

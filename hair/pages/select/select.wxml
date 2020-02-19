@@ -1,0 +1,104 @@
+<header-view>选择洗护产品 | Selection products</header-view>
+<view class="container container-selection">
+    <view class="selection-step">
+        <view class="bg">
+            <view wx:for="{{stepArr}}"
+                  wx:for-index="index"
+                  wx:key="{{index}}"
+                  class="{{step-1 == index ? 'bg-active' : ''}} {{selectedID[index] != -1 ? 'bg-selected' : ''}}"></view>
+        </view>
+        <view class="tag">
+            <view wx:for="{{stepArr}}"
+                  wx:for-item="item"
+                  wx:for-index="index"
+                  wx:key="{{item}}"
+                  data-index="{{index}}"
+                  bindtap="changeStep"
+                  class="{{selectedID[index] != -1 ? 'tag-selected' : ''}}">
+                <text>{{item}}</text>
+            </view>
+        </view>
+    </view>
+    <view style="overflow: hidden;">
+        <view class="goods-frame" style="transform: translate({{-(step-1)*100}}vw,0)">
+            <!--清洁列表-->
+            <view class="goods-page">
+                <view wx:for="{{cleanList}}"
+                      wx:for-item="item"
+                      wx:for-index="index"
+                      wx:key="{{item.id}}"
+                      data-id="{{item.id}}"
+                      data-index="{{index}}"
+                      data-price="{{item.price}}"
+                      bindtap="doSelectClean"
+                      hover-class="list-item-hover"
+                      hover-stay-time="50"
+                      class="list-item {{selectedID[0] == item.id ? 'list-item-selected' : ''}}">
+                    <image src="{{imgSrc+item.cover}}" mode="scaleToFill" class="img"></image>
+                    <view class="name">{{item.englist_name}}</view>
+                    <view class="name" style="margin-bottom: 30rpx;">{{item.china_name}}</view>
+                    <view class="decs">{{item.intro}}</view>
+                    <view class="tips"><text>适用于\n{{item.apply}}</text></view>
+                    <view class="price" wx:if="{{m1.getGap(item.price,clean.lastPrice) != 0}}">{{m1.getGap(item.price,clean.lastPrice) > 0 ? '+' : ''}}{{m1.getGap(item.price,clean.lastPrice)}}元</view>
+                    <view class="icons icon-weixuan"></view>
+                    <view class="icons icon-xuanzhong"></view>
+                </view>
+            </view>
+            <!--润发列表-->
+            <view class="goods-page">
+                <view wx:for="{{conditionerList}}"
+                      wx:for-item="item"
+                      wx:for-index="index"
+                      wx:key="{{item.id}}"
+                      data-id="{{item.id}}"
+                      data-index="{{index}}"
+                      data-price="{{item.price}}"
+                      bindtap="doSelectConditioner"
+                      class="list-item {{selectedID[1] == item.id ? 'list-item-selected' : ''}}">
+                    <image src="{{imgSrc+item.cover}}" mode="scaleToFill" class="img"></image>
+                    <view class="name">{{item.englist_name}}</view>
+                    <view class="name" style="margin-bottom: 30rpx;">{{item.china_name}}</view>
+                    <view class="decs">{{item.intro}}</view>
+                    <view class="tips"><text>适用于\n{{item.apply}}</text></view>
+                    <view class="price" wx:if="{{m1.getGap(item.price,conditioner.lastPrice) != 0}}">{{m1.getGap(item.price,conditioner.lastPrice) > 0 ? '+' : ''}}{{m1.getGap(item.price,conditioner.lastPrice)}}元</view>
+                    <view class="icons icon-weixuan"></view>
+                    <view class="icons icon-xuanzhong"></view>
+                </view>
+            </view>
+            <!--调理列表-->
+            <view class="goods-page">
+                <view wx:for="{{treatmentList}}"
+                      wx:for-item="item"
+                      wx:for-index="index"
+                      wx:key="{{item.id}}"
+                      data-id="{{item.id}}"
+                      data-index="{{index}}"
+                      data-price="{{item.price}}"
+                      bindtap="doSelectTreatment"
+                      class="list-item {{selectedID[2] == item.id ? 'list-item-selected' : ''}}">
+                    <image src="{{imgSrc+item.cover}}" mode="scaleToFill" class="img"></image>
+                    <view class="name">{{item.englist_name}}</view>
+                    <view class="name" style="margin-bottom: 30rpx;">{{item.china_name}}</view>
+                    <view class="decs">{{item.intro}}</view>
+                    <view class="tips"><text>适用于\n{{item.apply}}</text></view>
+                    <view class="price" wx:if="{{m1.getGap(item.price,treatment.lastPrice) != 0}}">{{m1.getGap(item.price,treatment.lastPrice) > 0 ? '+' : ''}}{{m1.getGap(item.price,treatment.lastPrice)}}元</view>
+                    <view class="icons icon-weixuan"></view>
+                    <view class="icons icon-xuanzhong"></view>
+                </view>
+            </view>
+        </view>
+    </view>
+
+</view>
+<footer-view showPrice bindbtn="doNext">
+    <view slot="price">{{selectedPrice[0]+selectedPrice[1]+selectedPrice[2]}}</view>
+    <view slot="btn">下一步 | Next</view>
+</footer-view>
+
+<wxs module="m1">
+    function getGap(price,last){
+        return last == 0 ? 0 : parseFloat(price) - last
+    }
+
+    module.exports.getGap = getGap;
+</wxs>

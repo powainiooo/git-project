@@ -16,6 +16,9 @@
 .container .top .title { width: 336rpx; position: absolute; bottom: 80rpx; left: 70rpx;}
 .container .titles { font-size: 60rpx; color: #221715; margin: 70rpx 0 300rpx 70rpx;}
 .container .titles span { font-size: 66rpx; color: #221715;}
+
+.footer { width: 100%; position: fixed; bottom: 40rpx; left: 0; display: flex; justify-content: center;}
+.footer .auth-btn { width: 540rpx; height: 170rpx; border-radius: 30rpx; background-color: #e5ad84; display: flex; justify-content: center; align-items: center; box-shadow: 0 20rpx 15rpx rhga(0, 0, 0, 0.12); font-size: 40rpx; color: #ffffff; text-shadow: 0 0 3px rgba(54, 42, 26, 0.33); transition: all 0.15s linear; border: none;}
 </style>
 
 <template>
@@ -28,9 +31,13 @@
          <img src="../res/img/logo.png" class="logo" mode="widthFix"/>
          <img src="../res/img/index-title.png" class="title" mode="widthFix"/>
       </div>
-      <div class="titles text-shadow"><span>Welcome</span> <br/> 欢迎2</div>
+      <div class="titles text-shadow" v-if="type === 'index'"><span>Welcome</span> <br/> 欢迎</div>
+      <div class="hint" v-else-if="type === 'auth'">申请获得您的公开信息（昵称、头像等），用于完成洗发服务预定，拒绝则无法使用本服务体验。</div>
    </div>
-   <menu @doFunc="doEnter"></menu>
+   <menu @doFunc="doEnter" v-if="type === 'index'"></menu>
+   <div class="footer" v-else-if="type === 'auth'">
+      <button plain class="auth-btn" open-type="getUserInfo" bindgetuserinfo="getUserInfo">授权申请 | Authorization</button>
+   </div>
 </div>
 </template>
 
@@ -38,11 +45,12 @@
 import wepy from '@wepy/core'
 import store from '../store'
 import { mapState } from '@wepy/x'
+import {doLogin} from '@/res/api.js'
 // https://github.com/wx-plugin/image-cropper
 wepy.page({
    store,
    data: {
-
+      type: 'index'
    },
    computed: mapState([ 'showMenu' ]),
    methods: {
@@ -50,7 +58,22 @@ wepy.page({
          wx.redirectTo({
             url: '/pages/store'
          })
+      },
+      getUserInfo (e) {
+         const app = getApp()
+         doLogin({
+            code: app.$wepy.$options.globalData.code,
+            rawData: JSON.stringify(e.$wx.detail.userInfo)
+         }).then(res => {
+            app.$wepy.$options.globalData.userInfo = res.data.userInfo
+            wx.redirectTo({
+               url: '/pages/index?type=index'
+            })
+         })
       }
+   },
+   onLoad (data) {
+      this.type = data.type || 'index'
    }
 })
 </script>

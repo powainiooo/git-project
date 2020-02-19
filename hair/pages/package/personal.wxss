@@ -1,0 +1,25 @@
+
+.selection-title{ width: 100%; position: relative; overflow: hidden;}
+.selection-title::before{ content: ''; width: 50%; height: 70rpx; background-color: #dac49f; position: absolute; top: 0; left: -20rpx; transform: skewX(-25deg); z-index: 10;}
+.selection-title::after{ content: ''; width: 50%; height: 70rpx; font-size: 30rpx; color: #ffffff; font-family: 'Helve'; display: flex; justify-content: center; align-items: center; position: absolute; top: 0; left: -20rpx; z-index: 11;}
+.selection-title1::after{ content: 'Clean 清洁';}
+.selection-title2::after{ content: 'Conditioner 润发';}
+.selection-title3::after{ content: 'Treatment 调理';}
+.list-item{width: 100%; height: 450rpx; position: relative; }
+.list-item-frame{width: 100%; height: 100%; box-sizing: border-box; padding: 0 100rpx 0 270rpx; border-bottom: 1rpx solid #f1f1ef; display: flex; flex-direction: column; justify-content: center;overflow: hidden;transition:transform 0.15s ease-out;}
+.list-item-hover{ transform: scale(0.95);}
+.list-item-selected{ background-color: #dac49f;}
+.list-item .name{font-size: 30rpx;text-shadow: 0 0 3px rgba(55,44,30,0.25);}
+.list-item .decs{font-size: 19rpx; color: #dbc19c; line-height: 1.5; margin-bottom: 30rpx;}
+.list-item-selected .decs{ color: #fffdfe;}
+.list-item .tips{font-size: 19rpx; color: #aeaeae; line-height: 1.5;}
+.list-item-selected .tips{ color: #fffdfe;}
+.list-item .img{ width: 270rpx; height: 392rpx; position: absolute; bottom: 0; left: 0;}
+.list-item .price{ width: 220rpx; height: 220rpx; box-sizing: border-box; border-radius: 50%; position: absolute; top: -110rpx; right: -110rpx; background-color: #dac49f; display: flex; align-items: flex-end; color: #ffffff; font-size: 30rpx; padding: 0 0 45rpx 20rpx;}
+.list-item .price-low{ background-color: #e7e3e2; color: inherit;}
+.list-item-selected .price{ color: #dac49f; background-color: #ffffff;}
+.list-item .icon-xiugai{ position: absolute; bottom: 40rpx; right: 70rpx; color: #dac49f; font-size: 60rpx; border-radius: 50%; box-shadow: 0 0 6rpx rgba(0,0,0,0.2); transform: rotateZ(180deg);}
+
+.tips-frame{ padding:0 60rpx; height: 330rpx; box-sizing: border-box; background-color: #efebea; overflow: hidden; display: flex; flex-direction: column; justify-content: center;}
+.tips-frame .icon-tips{ font-size: 70rpx; color: #9e9c9d; margin-bottom: 10rpx;}
+.tips-frame text{ font-size: 30rpx; line-height: 1.8; letter-spacing: 3rpx; color: #9e9c9d;}

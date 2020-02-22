@@ -12,11 +12,14 @@
             <img src="../res/img/logo.png" class="logo" mode="widthFix"/>
          </div>
          <div class="psw-frame shadow1">
-            <div class="title1 text-shadow">Successfilly <br/> 密码设置成功</div>
+            <div class="title1 text-shadow">{{result === 'success' ? 'Successfilly' : 'Failure'}} <br/> {{resultTxt}}</div>
             <img src="../res/img/icon-success.png" mode="widthFix" class="icon"/>
             <img src="../res/img/tips.png" mode="widthFix" class="tips"/>
          </div>
-         <div class="hint">请牢记您设置的密码，BBArt不会查阅您的密码，不慎遗忘请联系店面店长申请找回。</div>
+         <div class="hint" v-if="type === 'password'">请牢记您设置的密码，BBArt不会查阅您的密码，不慎遗忘请联系店面店长申请找回。</div>
+         <div class="hint" v-else-if="type === 'file'">家长与学生信息不可随意修改，如若必要进行修改，请联系店长申请修改。</div>
+         <div class="hint" v-else-if="type === 'payment' && result === 'success'">对应购买的课程已加入学生档案中，可前往学生档案查看详情。</div>
+         <div class="hint" v-else-if="type === 'payment' && result === 'fail'">网络链接失败 或 用户量拥挤等原因导致支付出错，请尝试重新支付。</div>
       </div>
       <menu btnText="确认 | Confirm"></menu>
    </div>
@@ -29,8 +32,26 @@
    // https://github.com/wx-plugin/image-cropper
    wepy.page({
       store,
-      data: {},
+      data: {
+         type: '',
+         result: '',
+         resultTxt: ''
+      },
       computed: mapState([ 'showMenu' ]),
+      onLoad (options) {
+         this.type = options.type
+         this.result = options.result
+         let txt1 = ''
+         let txt2 = this.result === 'success' ? '成功' : '失败'
+         if (this.type === 'password') {
+            txt1 = '密码设置'
+         } else if (this.type === 'file') {
+            txt1 = '建立学生建立'
+         } else if (this.type === 'payment') {
+            txt1 = '支付'
+         }
+         this.resultTxt = `${txt1}${txt2}`
+      },
       methods: {}
    })
 </script>

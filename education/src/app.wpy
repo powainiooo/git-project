@@ -32,6 +32,7 @@
    import wepy from '@wepy/core'
    import eventHub from './common/eventHub'
    import vuex from '@wepy/x'
+   import store from './store'
    import {promisify} from '@/res/util.js'
    import {doLogin} from '@/res/api.js'
    const login = promisify(wx.login)
@@ -74,6 +75,7 @@
                   rawData: userInfo.rawData
                }).then(res => {
                   this.$options.globalData.userInfo = res.data.userInfo
+                  store.commit('setPersonInfo', res.data.userInfo)
                })
             } else {
                wx.redirectTo({
@@ -87,8 +89,8 @@
 <config>
    {
    "pages": [
-      "pages/store",
       "pages/index",
+      "pages/store",
       "pages/lessonDetail",
       "pages/studentlesson",
       "pages/lesson",

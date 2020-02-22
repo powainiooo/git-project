@@ -1,10 +1,20 @@
 const baseUrl = 'https://bbart.waiting8.com'
+let token = ''
 const ajax = (opts, autoMsg = true) => {
    return new Promise((resolve, reject) => {
       wx.showNavigationBarLoading()
+      if (token === '') {
+         const app = getApp()
+         const userInfo = app.$wepy.$options.globalData.userInfo
+         if (userInfo) {
+            token = userInfo.token
+         }
+      }
       const extras = {
+         header: {
+            token
+         },
          success(res) {
-            console.log(res.data)
             if (res.data.status === 0) {
                resolve(res.data)
             } else {
@@ -30,6 +40,21 @@ export const doLogin = data => {
    return ajax({
       method: 'POST',
       url: `${baseUrl}/api/wxapp/login`,
+      data
+   })
+}
+// 门店查询
+export const getStoreList = () => {
+   return ajax({
+      method: 'POST',
+      url: `${baseUrl}/api/store/lists`
+   })
+}
+// 课程密码设置
+export const setPassword = data => {
+   return ajax({
+      method: 'POST',
+      url: `${baseUrl}/api/user/set_course_password`,
       data
    })
 }

@@ -1,7 +1,7 @@
 <style>
    .container .list { margin: 55rpx 40rpx 0 40rpx;}
    .container .store-item { border-radius: 30rpx; overflow: hidden; box-shadow: 0 20rpx 15rpx rhga(0, 0, 0, 0.12); margin-bottom: 80rpx;  transition: transform 0.15s linear;}
-   .container .store-item .img { width: 100%; display: block;}
+   .container .store-item .img { width: 100%; height: 280rpx; display: block;}
    .container .store-item .info { height: 150rpx; background-color: #ffffff; display: flex; justify-content: space-between; align-items: center;}
    .container .store-item-select .info { background-color: #e5ad84;}
    .container .store-item .info .left { width: 550rpx; margin-left: 20rpx;}
@@ -22,29 +22,29 @@
             <img src="../res/img/logo.png" class="logo" mode="widthFix"/>
          </div>
          <div class="list">
-            <div v-for="(item, index) in list"
-                 class="store-item {{selectedIndex === index ? 'store-item-select' : ''}}"
-                 v-if="selectedIndex === index ? true : !hasAcount"
+            <div v-for="item in list"
+                 class="store-item {{selectedId === item.id ? 'store-item-select' : ''}}"
+                 v-if="hasSelected ? selectedId === item.id : true"
                  hover-class="hscale"
                  hover-stay-time="10"
-                 @tap="doSelect(index)">
-               <img src="../res/img/img3.jpg" mode="widthFix" class="img"/>
+                 @tap="doSelect(item.id)">
+               <img :src="imgSrc + item.image" class="img"/>
                <div class="info">
                   <div class="left">
-                     <div class="name text-shadow">虎门南部万科店</div>
-                     <div class="address">虎门南部万科店</div>
+                     <div class="name text-shadow">{{item.name}}</div>
+                     <div class="address">{{item.address}}</div>
                   </div>
-                  <img src="../res/img/icon-checkbox-checked.png" mode="widthFix" class="checkbox" v-if="selectedIndex === index"/>
+                  <img src="../res/img/icon-checkbox-checked.png" mode="widthFix" class="checkbox" v-if="selectedId === item.id"/>
                   <img src="../res/img/icon-checkbox.png" mode="widthFix" class="checkbox" v-else/>
                </div>
             </div>
          </div>
-         <div class="others">
+         <div class="others" v-if="hasSelected" @click="hasSelected = false">
             <img src="../res/img/icon-house.png" mode="widthFix" class="icon"/>
             <div class="hint">Others<br/>查看其它门店</div>
          </div>
       </div>
-      <menu btnText="下一步 | Next" @doFunc="doEnter"></menu>
+      <menu btnText="下一步 | Next" @doFunc="doEnter" :btnDisable="selectedId === 0"></menu>
    </div>
 </template>
 
@@ -52,29 +52,40 @@
    import wepy from '@wepy/core'
    import store from '../store'
    import { mapState } from '@wepy/x'
+   import { getStoreList } from '@/res/api.js'
    // https://github.com/wx-plugin/image-cropper
    wepy.page({
       store,
       data: {
-         list: [{}, {}, {}, {}],
-         selectedIndex: 0
+         list: [],
+         selectedId: 0,
+         hasSelected: false
       },
       computed: {
-         ...mapState(['showMenu', 'personalInfo']),
-         hasAcount () {
-            return this.personalInfo !== null
+         ...mapState(['showMenu', 'personalInfo', 'imgSrc']),
+         hasPassword () {
+            return this.personalInfo === null ? false : this.personalInfo.course_password_flag === 1
          }
       },
+      onLoad () {
+         console.log(this.personalInfo)
+         this.getData()
+      },
       methods: {
-         doSelect (index) {
+         doSelect (id) {
             setTimeout(() => {
-               this.selectedIndex = index
+               this.selectedId = id
             }, 200)
          },
          doEnter () {
-            const state = this.hasAcount ? 'input' : 'new'
+            const state = this.hasPassword ? 'input' : 'new'
             wx.navigateTo({
                url: `/pages/password?state=${state}`
+            })
+         },
+         getData () {
+            getStoreList().then(res => {
+               this.list = res.data
             })
          }
       }

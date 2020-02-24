@@ -66,6 +66,9 @@ wepy.page({
             rawData: JSON.stringify(e.$wx.detail.userInfo)
          }).then(res => {
             app.$wepy.$options.globalData.userInfo = res.data.userInfo
+            const now = new Date().getTime()
+            wx.setStorageSync('lastGetCityTime', now)
+            wx.setStorageSync('bbaUserInfo', res.data.userInfo)
             wx.redirectTo({
                url: '/pages/index?type=index'
             })

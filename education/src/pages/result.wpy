@@ -13,7 +13,8 @@
          </div>
          <div class="psw-frame shadow1">
             <div class="title1 text-shadow">{{result === 'success' ? 'Successfilly' : 'Failure'}} <br/> {{resultTxt}}</div>
-            <img src="../res/img/icon-success.png" mode="widthFix" class="icon"/>
+            <img src="../res/img/icon-success.png" mode="widthFix" class="icon" v-if="result === 'success'"/>
+            <img src="../res/img/icon-fail.png" mode="widthFix" class="icon" v-else-if="result === 'fail'"/>
             <img src="../res/img/tips.png" mode="widthFix" class="tips"/>
          </div>
          <div class="hint" v-if="type === 'password'">请牢记您设置的密码，BBArt不会查阅您的密码，不慎遗忘请联系店面店长申请找回。</div>

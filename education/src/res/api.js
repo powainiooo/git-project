@@ -12,7 +12,8 @@ const ajax = (opts, autoMsg = true) => {
       }
       const extras = {
          header: {
-            token
+            token,
+            'Content-Type': 'application/x-www-form-urlencoded'
          },
          success(res) {
             if (res.data.status === 0) {
@@ -55,6 +56,22 @@ export const setPassword = data => {
    return ajax({
       method: 'POST',
       url: `${baseUrl}/api/user/set_course_password`,
+      data
+   })
+}
+// 课程密码验证
+export const checkPassword = data => {
+   return ajax({
+      method: 'POST',
+      url: `${baseUrl}/api/user/check_course_password`,
+      data
+   })
+}
+// 课程列表查询
+export const getCourseList = data => {
+   return ajax({
+      method: 'POST',
+      url: `${baseUrl}/api/course/lists`,
       data
    })
 }

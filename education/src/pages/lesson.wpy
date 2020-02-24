@@ -12,13 +12,9 @@
             <img src="../res/img/logo.png" class="logo" mode="widthFix"/>
          </div>
          <div class="title2 text-shadow">Select <br/> 选择课程</div>
-         <div class="lesson-item">
-            <img src="../res/img/img1.jpg" class="img" mode="widthFix"/>
-            <div class="name text-shadow">儿童画</div>
-         </div>
-         <div class="lesson-item">
-            <img src="../res/img/img1.jpg" class="img" mode="widthFix"/>
-            <div class="name text-shadow">儿童画</div>
+         <div class="lesson-item" v-for="item in list">
+            <img :src="imgSrc + item.image" class="img" mode="widthFix"/>
+            <div class="name text-shadow">{{item.name}}</div>
          </div>
       </div>
    </div>
@@ -28,6 +24,7 @@
    import wepy from '@wepy/core'
    import store from '../store'
    import { mapState } from '@wepy/x'
+   import { getCourseList } from '@/res/api.js'
    // https://github.com/wx-plugin/image-cropper
    wepy.page({
       store,
@@ -37,10 +34,20 @@
          sexList: [
             {name: '男', value: 1},
             {name: '女', value: 2}
-         ]
+         ],
+         list: []
       },
-      computed: mapState([ 'showMenu' ]),
-      methods: {}
+      computed: mapState(['showMenu', 'imgSrc']),
+      onLoad () {
+         this.getData()
+      },
+      methods: {
+         getData () {
+            getCourseList().then(res => {
+               this.list = res.data
+            })
+         }
+      }
    })
 </script>
 <config>

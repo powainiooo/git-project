@@ -65,22 +65,35 @@
 
       methods: {
          async onlogin () {
-            const resLogin = await login()
-            this.$options.globalData.code = resLogin.code
-            const resSetting = await getSetting()
-            if (resSetting.authSetting['scope.userInfo']) {
-               const userInfo = await getUserInfo()
-               doLogin({
-                  code: resLogin.code,
-                  rawData: userInfo.rawData
-               }).then(res => {
-                  this.$options.globalData.userInfo = res.data.userInfo
-                  store.commit('setPersonInfo', res.data.userInfo)
-               })
+            let lastGetCityTime = wx.getStorageSync('lastGetCityTime')
+            if (lastGetCityTime === '' || lastGetCityTime === null) {
+               lastGetCityTime = 0
+            }
+            const now = new Date().getTime()
+            const userInfo = wx.getStorageSync('bbaUserInfo')
+            if (userInfo === '' || userInfo === null || now > lastGetCityTime + 24 * 60 * 60 * 1000) {
+               const resLogin = await login()
+               this.$options.globalData.code = resLogin.code
+               const resSetting = await getSetting()
+               if (resSetting.authSetting['scope.userInfo']) {
+                  const resUserInfo = await getUserInfo()
+                  doLogin({
+                     code: resLogin.code,
+                     rawData: resUserInfo.rawData
+                  }).then(res => {
+                     this.$options.globalData.userInfo = res.data.userInfo
+                     store.commit('setPersonInfo', res.data.userInfo)
+                     wx.setStorageSync('lastGetCityTime', now)
+                     wx.setStorageSync('bbaUserInfo', res.data.userInfo)
+                  })
+               } else {
+                  wx.redirectTo({
+                     url: '/pages/index?type=auth'
+                  })
+               }
             } else {
-               wx.redirectTo({
-                  url: '/pages/index?type=auth'
-               })
+               this.$options.globalData.userInfo = userInfo
+               store.commit('setPersonInfo', userInfo)
             }
          }
       }

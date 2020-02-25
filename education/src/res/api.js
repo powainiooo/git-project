@@ -75,3 +75,11 @@ export const getCourseList = data => {
       data
    })
 }
+// 新建学生档案
+export const newStudentFile = data => {
+   return ajax({
+      method: 'POST',
+      url: `${baseUrl}/api/student/create`,
+      data
+   })
+}

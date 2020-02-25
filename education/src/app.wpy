@@ -102,13 +102,13 @@
 <config>
    {
    "pages": [
+      "pages/lesson",
+      "pages/newfile",
       "pages/index",
       "pages/store",
       "pages/lessonDetail",
       "pages/studentlesson",
-      "pages/lesson",
       "pages/student",
-      "pages/newfile",
       "pages/result",
       "pages/password",
       "pages/welcome"

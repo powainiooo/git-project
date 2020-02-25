@@ -78,6 +78,7 @@
             }, 200)
          },
          doEnter () {
+            store.commit('setStoreID', this.selectedId)
             const state = this.hasPassword ? 'input' : 'new'
             wx.navigateTo({
                url: `/pages/password?state=${state}`

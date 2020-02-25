@@ -3,6 +3,7 @@
    .form-line { margin: 0 60rpx 40rpx 60rpx; display: flex; justify-content: flex-end; align-items: flex-end; position: relative;}
    .form-line .portrait { margin-right: 40rpx; position: relative;}
    .form-line .portrait .avatar { width: 160rpx;}
+   .form-line .portrait .icon { width: 30rpx; position: absolute; top: 65rpx; left: 65rpx;}
    .form-line .input { width: 100%; border: none; background-color: transparent; border-bottom: 2rpx solid #b9babc; text-shadow: 0 0 3px rgba(54, 42, 26, 0.33); position: relative; text-align: right; font-size: 35rpx; color: #221715; height: 70rpx; line-height: 70rpx;}
    .form-line .input::before { content: ''; width: 10rpx; height: 10rpx; background-color: #b9babc; border-radius: 50%; position: absolute; bottom: -5rpx; left: -10rpx;}
    .form-line .input::after { content: ''; width: 10rpx; height: 10rpx; background-color: #b9babc; border-radius: 50%; position: absolute; bottom: -5rpx; right: -10rpx;}
@@ -23,7 +24,7 @@
                <img src="../res/img/icon-add2.png" mode="widthFix" class="icon"/>
             </div>
             <div class="input" style=" margin-bottom: 16rpx; width: 400rpx;">
-               <input placeholder="学生姓名" class="txt text-shadow" placeholder-class="txt" />
+               <input placeholder="学生姓名" class="txt text-shadow" placeholder-class="txt" v-model="name" />
             </div>
          </div>
          <div class="form-line">
@@ -44,16 +45,16 @@
          </div>
          <div class="form-line">
             <div class="input">
-               <input placeholder="家长姓名" class="txt text-shadow" placeholder-class="txt" />
+               <input placeholder="家长姓名" class="txt text-shadow" placeholder-class="txt" v-model="parentName" />
             </div>
          </div>
          <div class="form-line">
             <div class="input">
-               <input placeholder="家长联系电话" type="number" class="txt text-shadow" placeholder-class="txt" />
+               <input placeholder="家长联系电话" type="number" class="txt text-shadow" placeholder-class="txt" v-model="mobile" />
             </div>
          </div>
       </div>
-      <menu btnText="下一步 | Next"></menu>
+      <menu btnText="下一步 | Next" :btnDisable="btnDisable" @doFunc="doConfirm"></menu>
    </div>
 </template>
 
@@ -61,19 +62,54 @@
    import wepy from '@wepy/core'
    import store from '../store'
    import { mapState } from '@wepy/x'
+   import { newStudentFile } from '@/res/api.js'
    // https://github.com/wx-plugin/image-cropper
    wepy.page({
       store,
       data: {
+         name: '',
+         parentName: '',
+         mobile: '',
          date: '',
          sex: '',
          sexList: [
             {name: '男', value: 1},
-            {name: '女', value: 2}
+            {name: '女', value: 0}
          ]
       },
-      computed: mapState([ 'showMenu' ]),
-      methods: {}
+      computed: {
+         ...mapState(['showMenu', 'selectedStore']),
+         btnDisable () {
+            if (this.name === '' || this.parentName === '' || this.mobile === '' || this.date === '' || this.sex === '') {
+               return true
+            }
+            return false
+         }
+      },
+      methods: {
+         doConfirm () {
+            newStudentFile({
+               store_id: this.selectedStore,
+               avatar: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1582627598871&di=0c614501ad2145b532d276a0668293aa&imgtype=0&src=http%3A%2F%2Fimg.qqzhi.com%2Fuploads%2F2019-01-17%2F015954654.jpg',
+               name: this.name,
+               birthday: this.date,
+               gender: this.sex,
+               parent_name: this.parentName,
+               parent_mobile: this.mobile
+            }).then(res => {
+               if (res.code === 1) {
+                  wx.redirectTo({
+                     url: `/pages/lesson`
+                  })
+               } else {
+                  wx.showToast({
+                     title: res.msg,
+                     image: '../res/img/warn.png'
+                  })
+               }
+            })
+         }
+      }
    })
 </script>
 <config>

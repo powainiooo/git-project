@@ -37,13 +37,15 @@
          ],
          list: []
       },
-      computed: mapState(['showMenu', 'imgSrc']),
+      computed: mapState(['showMenu', 'imgSrc', 'selectedStore']),
       onLoad () {
          this.getData()
       },
       methods: {
          getData () {
-            getCourseList().then(res => {
+            getCourseList({
+               store_id: this.selectedStore
+            }).then(res => {
                this.list = res.data
             })
          }

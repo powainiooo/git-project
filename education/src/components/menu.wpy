@@ -1,7 +1,7 @@
 <style>
    .z-menu { width: 100%; position: fixed; bottom: 40rpx; left: 0; z-index: 1000;}
-   .z-menu-btns { width: 100%;  display: flex; justify-content: space-around; position: relative; z-index: 10;}
-   .z-menu-btns .btn-menu { width: 170rpx; height: 170rpx; border-radius: 30rpx; background-color: #e5ad84; display: flex; justify-content: center; align-items: center; box-shadow: 0 20rpx 15rpx rhga(0, 0, 0, 0.12); transition: transform 0.15s linear;}
+   .z-menu-btns { width: 100%; box-sizing: border-box; padding: 0 14rpx;  display: flex; justify-content: space-between; position: relative; z-index: 10;}
+   .z-menu-btns .btn-menu { width: 170rpx; height: 170rpx; border-radius: 30rpx; background-color: #e5ad84; display: flex; justify-content: center; align-items: center; box-shadow: 0 20rpx 15rpx rhga(0, 0, 0, 0.12); transition: transform 0.15s linear; margin-right: 12rpx;}
    .z-menu-btns .btn-menu .icon { width: 70rpx;}
    .z-menu-btns .btn-next { width: 540rpx; height: 170rpx; border-radius: 30rpx; background-color: #ffffff; display: flex; justify-content: center; align-items: center; box-shadow: 0 20rpx 15rpx rhga(0, 0, 0, 0.12); font-size: 40rpx; color: #221715; text-shadow: 0 0 3px rgba(54, 42, 26, 0.33); transition: all 0.15s linear;}
    .z-menu-btns .btn-disable { background-color: #cacaca; color: #ffffff;}
@@ -14,22 +14,29 @@
 </style>
 <template>
    <div class="z-menu">
-      <div class="z-menu-btns">
-         <div class="btn-menu" @click="toggleMenu"
+      <div class="z-menu-btns {{func === 'menu'}}">
+         <div class="btn-menu"
+              @click="toggleMenu"
               hover-class="hscale"
-              hover-stay-time="10">
+              hover-stay-time="10"
+              v-if="func !== 'btn'">
             <img src="../res/img/icon-menu.png" mode="widthFix" class="icon" v-if="!showMenu"/>
             <img src="../res/img/icon-close.png" mode="widthFix" class="icon" v-if="showMenu"/>
          </div>
          <div class="btn-next text-shadow {{showMenu ? 'blur' : ''}} {{btnDisable ? 'btn-disable' : ''}}"
               hover-class="hscale"
               hover-stay-time="10"
-              @click="doFunc">{{btnText}}</div>
+              @click="doFunc"
+              v-if="func !== 'menu'">{{btnText}}</div>
       </div>
       <div class="z-menu-list-frame" @touchmove.stop="tmove" v-if="showMenu">
          <div class="z-menu-nav">
             <a href="#" class="z-menu-nav-item text-shadow">关于我们 | About us</a>
             <a href="#" class="z-menu-nav-item text-shadow">近期活动 | News</a>
+         </div>
+         <div class="z-menu-nav" style="bottom: 580rpx;" v-if="func === 'menu'">
+            <a url="/pages/lesson" class="z-menu-nav-item text-shadow" @click="linkTo">购买课程 | Buy</a>
+            <a href="#" class="z-menu-nav-item text-shadow">购买记录 | Purchase records</a>
          </div>
       </div>
    </div>
@@ -49,9 +56,13 @@
          btnDisable: {
             type: Boolean,
             default: false
+         },
+         func: {
+            type: String,
+            default: 'all'
          }
       },
-      computed: mapState([ 'showMenu' ]),
+      computed: mapState(['showMenu']),
       methods: {
          toggleMenu () {
             setTimeout(() => {
@@ -64,7 +75,10 @@
                this.$emit('doFunc')
             }, 200)
          },
-         tmove () {}
+         tmove () {},
+         linkTo () {
+            this.$store.commit('toggleMenu', !this.showMenu)
+         }
       }
    })
 </script>

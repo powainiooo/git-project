@@ -13,13 +13,14 @@
             <img src="../res/img/logo.png" class="logo" mode="widthFix"/>
          </div>
          <div class="title2 text-shadow">Select <br/> 选择学生</div>
-         <div class="student-item">
-            <img src="../res/img/avatar.png" class="avatar"/>
-            <div class="name text-shadow">杨心怡</div>
-         </div>
-         <div class="student-item">
-            <img src="../res/img/avatar.png" class="avatar"/>
-            <div class="name text-shadow">杨心怡</div>
+         <div class="student-item"
+              hover-class="hscale"
+              hover-stay-time="10"
+              v-for="item in list"
+              :key="item.id"
+              @click="gotoNext(item)">
+            <img :src="imgSrc + item.avatar" class="avatar"/>
+            <div class="name text-shadow">{{item.name}}</div>
          </div>
          <div class="btn-new">
             <img src="../res/img/icon-add1.png" class="icon" mode="widthFix"/>
@@ -33,19 +34,34 @@
    import wepy from '@wepy/core'
    import store from '../store'
    import { mapState } from '@wepy/x'
+   import {getStudentList} from '@/res/api.js'
    // https://github.com/wx-plugin/image-cropper
    wepy.page({
       store,
       data: {
-         date: '',
-         sex: '',
-         sexList: [
-            {name: '男', value: 1},
-            {name: '女', value: 2}
-         ]
+         list: []
       },
-      computed: mapState([ 'showMenu' ]),
-      methods: {}
+      computed: mapState(['showMenu', 'imgSrc', 'selectedStore']),
+      onLoad () {
+         this.getData()
+      },
+      methods: {
+         getData () {
+            getStudentList({
+               store_id: this.selectedStore
+            }).then(res => {
+               this.list = res.data
+            })
+         },
+         gotoNext (data) {
+            store.commit('setStudentID', data)
+            setTimeout(() => {
+               wx.navigateTo({
+                  url: '/pages/studentlesson'
+               })
+            }, 200)
+         }
+      }
    })
 </script>
 <config>

@@ -1,8 +1,9 @@
 <style>
    .header { margin-bottom: 200rpx;}
    .person { position: absolute; top: 70rpx; right: 60rpx; text-align: center;}
-   .person .avatar { width: 200rpx; border-radius: 50%;}
+   .person .avatar { width: 200rpx; height: 200rpx; border-radius: 50%;}
    .person .name { font-size: 40rpx; color: #221715;}
+   .hint2 { font-size: 40rpx; color: #221715; margin: 60rpx; text-align: center;}
 </style>
 
 <template>
@@ -12,20 +13,23 @@
             <img src="../res/img/logo.png" class="logo" mode="widthFix"/>
          </div>
          <div class="person">
-            <img src="../res/img/avatar.png" mode="widthFix" class="avatar"/>
-            <div class="name">儿童画</div>
+            <img :src="imgSrc + selectedStudent.avatar" mode="widthFix" class="avatar"/>
+            <div class="name">{{selectedStudent.name}}</div>
          </div>
-         <div class="lesson-item lesson-item-student">
-            <img src="../res/img/img1.jpg" class="img" mode="widthFix"/>
-            <div class="name text-shadow">儿童画</div>
-            <div class="use-over"></div>
-            <div class="nums">100<span class="unit">节</span></div>
-         </div>
-         <div class="lesson-item">
-            <img src="../res/img/img1.jpg" class="img" mode="widthFix"/>
-            <div class="name text-shadow">儿童画</div>
+         <div class="hint2" v-if="list.length === 0">未购买课程</div>
+         <div class="lesson-item lesson-item-student"
+              hover-class="hscale"
+              hover-stay-time="10"
+              v-for="item in list"
+              :key="item.id"
+              @click="gotoNext(item.id)">
+            <img :src="imgSrc + item.image" class="img" mode="widthFix"/>
+            <div class="name text-shadow">{{item.name}}</div>
+            <div class="use-over" v-if="item.user_num >= item.num"></div>
+            <div class="nums">{{item.num}}<span class="unit">节</span></div>
          </div>
       </div>
+      <menu func="menu"></menu>
    </div>
 </template>
 
@@ -33,19 +37,33 @@
    import wepy from '@wepy/core'
    import store from '../store'
    import { mapState } from '@wepy/x'
+   import {getCourseListByStudent} from '@/res/api.js'
    // https://github.com/wx-plugin/image-cropper
    wepy.page({
       store,
       data: {
-         date: '',
-         sex: '',
-         sexList: [
-            {name: '男', value: 1},
-            {name: '女', value: 2}
-         ]
+         list: []
       },
-      computed: mapState([ 'showMenu' ]),
-      methods: {}
+      computed: mapState(['showMenu', 'imgSrc', 'selectedStudent']),
+      onLoad(query) {
+         this.getData()
+      },
+      methods: {
+         getData () {
+            getCourseListByStudent({
+               student_id: this.selectedStudent.id
+            }).then(res => {
+               this.list = res.data
+            })
+         },
+         gotoNext (id) {
+            setTimeout(() => {
+               wx.navigateTo({
+                  url: `/pages/lessonDetail?id=${id}`
+               })
+            }, 200)
+         }
+      }
    })
 </script>
 <config>

@@ -14,7 +14,16 @@
    .list-frame .list .list-item .date { height: 70rpx; display: flex; justify-content: center; align-items: center;  font-size: 40rpx; color: #ffffff; background-color: #e5ad84;}
    .list-frame .list .list-item .name { height: 130rpx; display: flex; justify-content: center; align-items: center; font-size: 25rpx; color: #878887;}
 </style>
-
+<wxs module="util" lang="babel">
+   const format = (date, type) => {
+      if (type === 'year') {
+         return date.substring(0, 4)
+      } else if (type === 'month') {
+         return date.substring(4, 12)
+      }
+   }
+   module.exports.format = format
+</wxs>
 <template>
    <div>
       <div class="container {{showMenu ? 'blur' : ''}}">
@@ -22,24 +31,24 @@
             <img src="../res/img/logo.png" class="logo" mode="widthFix"/>
          </div>
          <div class="lesson-item lesson-item-detail">
-            <img src="../res/img/img1.jpg" class="img" mode="widthFix"/>
-            <div class="name text-shadow">儿童画</div>
-            <div class="nums">100<span class="unit">节</span></div>
+            <img :src="imgSrc + itemData.image" class="img" mode="widthFix"/>
+            <div class="name text-shadow">{{itemData.name}}</div>
+            <div class="nums">{{itemData.num}}<span class="unit">节</span></div>
          </div>
          <div class="progress shadow1">
             <div class="nums">
-               已使用<span class="val">10</span>节
+               已使用<span class="val">{{itemData.use_num}}</span>节
             </div>
             <div class="line-bg">
                <div class="line"></div>
             </div>
          </div>
-         <div class="list-frame">
-            <div class="year">2019</div>
+         <div class="list-frame" v-if="itemData.reviews.length !== 0">
+            <div class="year">{{util.format(i.class_date, 'year')}}</div>
             <ul class="list">
-               <li class="list-item" v-for="i in 6">
-                  <div class="date text-shadow">11/05</div>
-                  <div class="name">逃跑的小绵羊</div>
+               <li class="list-item" v-for="i in itemData.reviews" :key="i.id">
+                  <div class="date text-shadow">{{util.format(i.class_date, 'month')}}</div>
+                  <div class="name">{{i.title}}</div>
                </li>
             </ul>
          </div>
@@ -51,19 +60,25 @@
    import wepy from '@wepy/core'
    import store from '../store'
    import { mapState } from '@wepy/x'
+   import {getCourseDetailByStudent} from '@/res/api.js'
    // https://github.com/wx-plugin/image-cropper
    wepy.page({
       store,
       data: {
-         date: '',
-         sex: '',
-         sexList: [
-            {name: '男', value: 1},
-            {name: '女', value: 2}
-         ]
+         itemData: {}
       },
-      computed: mapState([ 'showMenu' ]),
-      methods: {}
+      computed: mapState(['showMenu', 'imgSrc']),
+      onLoad(query) {
+         const id = query.id || 1
+         this.getData(id)
+      },
+      methods: {
+         getData (id) {
+            getCourseDetailByStudent({id}).then(res => {
+               this.itemData = res.data
+            })
+         }
+      }
    })
 </script>
 <config>

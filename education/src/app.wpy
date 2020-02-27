@@ -13,7 +13,7 @@
    .hint { margin: 40rpx 60rpx;  font-size: 25rpx; color: #b9babb; line-height: 1.7}
    .blur { filter: blur(2px); -webkit-filter: blur(2px);}
 
-   .student-item { height: 170rpx; margin: 0 40rpx 40rpx 40rpx; display: flex; align-items: center; justify-content: space-between; padding: 0 30rpx; background-color: #ffffff; border-radius: 30rpx; box-shadow: 0 20rpx 15rpx rgba(0, 0, 0, 0.15);}
+   .student-item { height: 170rpx; margin: 0 40rpx 40rpx 40rpx; display: flex; align-items: center; justify-content: space-between; padding: 0 30rpx; background-color: #ffffff; border-radius: 30rpx; box-shadow: 0 20rpx 15rpx rgba(0, 0, 0, 0.15); transition: transform 0.1s linear;}
    .student-item .avatar { width: 140rpx; height: 140rpx; display: block; border-radius: 50%; border: 1rpx solid rgba(0, 0, 0, 0.28);}
    .student-item .name { color: #221715; font-size: 35rpx;}
 
@@ -102,13 +102,13 @@
 <config>
    {
    "pages": [
+      "pages/student",
+      "pages/studentlesson",
+      "pages/index",
       "pages/lesson",
       "pages/newfile",
-      "pages/index",
       "pages/store",
       "pages/lessonDetail",
-      "pages/studentlesson",
-      "pages/student",
       "pages/result",
       "pages/password",
       "pages/welcome"

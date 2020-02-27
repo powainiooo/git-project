@@ -75,11 +75,35 @@ export const getCourseList = data => {
       data
    })
 }
+// 学生已购买课程列表
+export const getCourseListByStudent = data => {
+   return ajax({
+      method: 'POST',
+      url: `${baseUrl}/api/student_course/lists`,
+      data
+   })
+}
+// 已购课程详情
+export const getCourseDetailByStudent = data => {
+   return ajax({
+      method: 'POST',
+      url: `${baseUrl}/api/student_course/detail`,
+      data
+   })
+}
 // 新建学生档案
 export const newStudentFile = data => {
    return ajax({
       method: 'POST',
       url: `${baseUrl}/api/student/create`,
+      data
+   })
+}
+// 学生档案查询
+export const getStudentList = data => {
+   return ajax({
+      method: 'POST',
+      url: `${baseUrl}/api/student/lists`,
       data
    })
 }

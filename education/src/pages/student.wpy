@@ -54,7 +54,7 @@
             })
          },
          gotoNext (data) {
-            store.commit('setStudentID', data)
+            store.commit('setSelectedStudent', data)
             setTimeout(() => {
                wx.navigateTo({
                   url: '/pages/studentlesson'

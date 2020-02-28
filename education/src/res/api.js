@@ -107,3 +107,11 @@ export const getStudentList = data => {
       data
    })
 }
+// 课程详情查询
+export const getCourseDetail = data => {
+   return ajax({
+      method: 'POST',
+      url: `${baseUrl}/api/course/detail`,
+      data
+   })
+}

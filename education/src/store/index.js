@@ -9,7 +9,8 @@ export default new Vuex.Store({
       personalInfo: null,
       imgSrc: 'https://bbart.waiting8.com',
       selectedStore: 1,
-      selectedStudent: {}
+      selectedStudent: {},
+      orderData: {}
    },
    mutations: {
       toggleMenu (state, data) {
@@ -21,8 +22,11 @@ export default new Vuex.Store({
       setStoreID (state, data) {
          state.selectedStore = data
       },
-      setStudentID (state, data) {
+      setSelectedStudent (state, data) {
          state.selectedStudent = data
+      },
+      setOrderData (state, data) {
+         state.orderData = data
       }
    },
    actions: {

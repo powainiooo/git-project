@@ -1,0 +1,88 @@
+<style>
+.banner { width: 100%; height: 280rpx; display: block;}
+.intro { padding: 40rpx 65rpx; background-color: #ffffff; margin-bottom: 30rpx;}
+.intro .name { font-size: 40rpx; color: #221715; margin-bottom: 30rpx;}
+.intro .descirp { font-size: 25rpx; color: #878887; line-height: 1.8}
+.list { margin: 0 40rpx;}
+
+</style>
+
+<template>
+   <div>
+      <div class="container {{showMenu ? 'blur' : ''}}">
+         <div class="header shadow1">
+            <img src="../res/img/logo.png" class="logo" mode="widthFix"/>
+         </div>
+         <img :src="itemData.detail_image" class="banner"/>
+         <div class="intro shadow1">
+            <div class="name text-shadow">{{itemData.english_name}}<br/>{{itemData.name}}</div>
+            <div class="descirp">{{itemData.content}}</div>
+         </div>
+         <div class="list">
+            <div class="buy-item"
+                 hover-class="hscale"
+                 hover-stay-time="10"
+                 v-for="item in itemData.course_prices"
+                 :key="item.id"
+                 @click="gotoNext(item)">
+               <div class="lesson">{{item.name}}<span class="unit">课</span></div>
+               <div class="price">
+                  <div class="line1">{{item.total_price}}<span class="unit">元</span></div>
+                  <div class="unit">{{itemData.remark}}</div>
+               </div>
+            </div>
+         </div>
+
+      </div>
+   </div>
+</template>
+
+<script>
+   import wepy from '@wepy/core'
+   import store from '../store'
+   import { mapState } from '@wepy/x'
+   import { getCourseDetail } from '@/res/api.js'
+   // https://github.com/wx-plugin/image-cropper
+   wepy.page({
+      store,
+      data: {
+         itemData: {}
+      },
+      computed: mapState(['showMenu', 'imgSrc', 'selectedStudent']),
+      onLoad (query) {
+         const id = query.id || 1
+         this.getData(id)
+      },
+      methods: {
+         getData (id) {
+            getCourseDetail({
+               id
+            }).then(res => {
+               this.itemData = res.data
+            })
+         },
+         gotoNext (data) {
+            const order = {
+               course_id: this.itemData.id,
+               name: this.itemData.name,
+               english_name: this.itemData.english_name,
+               price: data,
+               student: this.selectedStudent
+            }
+            store.commit('setOrderData', order)
+            setTimeout(() => {
+               wx.navigateTo({
+                  url: '/pages/orderConfirm'
+               })
+            }, 200)
+         }
+      }
+   })
+</script>
+<config>
+   {
+      "usingComponents": {
+         "menu": "~@/components/menu"
+      }
+   }
+</config>

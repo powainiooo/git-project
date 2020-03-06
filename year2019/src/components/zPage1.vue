@@ -32,7 +32,7 @@
       <div v-if="type === 'DM'">
          <p v-if="showEvMileage">纯电里程<span class="value">{{total_evmile.toFixed(0)}}</span>公里</p>
          <div v-html="energyHtml"></div>
-         <p v-if="showMoney">相比用油，一年节省<span class="value">{{save_money.toFixed(0)}}</span>元</p>
+         <p v-if="showMoney">纯电里程相比用油，一年节省<span class="value">{{save_money.toFixed(0)}}</span>元</p>
       </div>
       <div v-if="type === 'EV'">
          <p v-if="showElect">全年总电耗<span class="value">{{total_elect.toFixed(0)}}</span>度</p>

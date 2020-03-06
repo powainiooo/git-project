@@ -5,7 +5,7 @@ const data1 = 'F/WTJVAVEPkjP0+wvIeowcWeC+G57LU4QEw7zUHLEY8upe0QV9AOxLSJbftzI7wxL
 const data2 = 'F/WTJVAVEPkjP0+wvIeowcbgr+uaOODKjFLtuBYjOOt7fmS8aopECWTxyJWJ6vThqxUbQQ0OxPnjR71NC037H7ibskTpAtz4R6ta9kDNTuEMWRnktjJJJ/WqUMhN23c7vTOSvsJVCx66jZL7kQe+CX/vM13BqyTb14Ul4dwU6aELAKWwSFPQZ76I7VONHrL4mOZVGCBPk6WAX+cYcNzTT84Jn5TEi1oIJA4vCtraqLWi8TQmXcij0HrE5hnndVBkpp0ck1+4JDFTC1g+gOCPvDioVqaOC5979BuH3CXl10dvjR/wxOXaVOj24o96801JE8XpKzcazfawN1PKm293rZrU3vIeziKicIY714FK5OV1XREaBgsB8zQ/KgCzTL5ff' //  张绍裕
 
 const params = {
-   data: getQueryString('data') || data1,
+   data: getQueryString('data') || data2,
    userName: decodeURI(getQueryString('userName') || '%E6%B5%8B%E8%AF%95%E6%B5%8B%E8%AF%95'),
    source: getQueryString('source') || 'app'
 }

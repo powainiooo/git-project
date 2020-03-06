@@ -115,7 +115,12 @@ export default {
             } else if (this.keys === this.keyList[9]) {
                return `你在车上听了<span style="color:#F84F1C">${this.pageData.minutes}分钟</span>的歌，热爱音乐的你，一定有一颗热爱生活的心。`
             } else if (this.keys === this.keyList[10]) {
-               return `你在车上玩了<span style="color:#F84F1C">${this.pageData.minutes}分钟</span>的游戏，大屏玩游戏虽然过瘾，但不要沉迷哦！`
+               const min = this.pageData.minutes
+               if (min > 60) {
+                  return `你在车上玩了<span style="color:#F84F1C">${min}分钟</span>的游戏，大屏玩游戏虽然过瘾，但不要沉迷哦！`
+               } else {
+                  return `你在车上玩了<span style="color:#F84F1C">${min}分钟</span>的游戏，大屏玩游戏，过瘾又自在！`
+               }
             } else if (this.keys === this.keyList[11]) {
                return `你使用App学习了<span style="color:#F84F1C">${this.pageData.minutes}分钟</span>，看来利用碎片时间学习已经成为了你的习惯。 `
             }

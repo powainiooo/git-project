@@ -60,15 +60,15 @@
 <script type='es6'>
 import zCar from '@/components/zCar.vue'
 export default {
-	name: 'app',
+   name: 'app',
    components: { zCar },
-	data() {
-		return {
+   data () {
+      return {
 		   outTime: 300,
          tagList: ['山顶洞人', '科技控, 远程控制使用', '节能家, 年均能耗', '暴走族, 行驶里程', '环保家, 节能减排', '语音控, 智能语音使用', '潮人范儿, 玩应用'],
          recommend: ['远程控制使用', '年均能耗', '行驶里程', '节能减排', '智能语音使用', '玩应用']
       }
-	},
+   },
    computed: {
       imgSrc () {
          return this.$store.state.imgSrc
@@ -96,9 +96,9 @@ export default {
                // return `在<span style="color: #0475B5">${this.pageData.recommend}</span>方面还有待提升，我很好得，一得就能得到哦`
                return `你的2019年度关键词为<span style="color: #F84F1C">山顶洞人，智能语音、流量、应用使用</span>均低于全国<span style="color: #F84F1C">85%</span>的车主，浪费这么高科技的智能大屏，试着去探索一下吧！`
             } else {
-               const rank1 = this.pageData.tagPercent
+               const rank1 = this.pageData.tagPercent > 99 ? 99 : this.pageData.tagPercent
                const funcName2 = this.recommend[this.pageData.recommend - 1]
-               const rank2 = this.pageData.rePercent
+               const rank2 = this.pageData.rePercent > 99 ? 99 : this.pageData.rePercent
                const nameArr = this.tagName.split(',')
                let str
                if (rank1 > 60 && rank2 > 60) {
@@ -106,24 +106,24 @@ export default {
                } else {
                   str = `你的2019年度关键词为<span style="color: #F84F1C">${nameArr[0]}</span><br/><span style="color: #F84F1C">${nameArr[1]}</span>超过全国<span style="color: #F84F1C">${rank1}%</span>车主，但<span style="color: #F84F1C">${funcName2}</span>仅超过全国<span style="color: #F84F1C">${rank2}%</span>车主`
                   switch (this.pageData.recommend) {
-                     case 1:
-                        str += '，期待你解锁更多精彩！'
-                        break;
-                     case 2:
-                        str += '，建设美丽中国，需要你的参与！'
-                        break;
-                     case 3:
-                        str += '，大千世界，带上家人多出去走走吧。'
-                        break;
-                     case 4:
-                        str += '，建设美丽中国，需要你的参与！'
-                        break;
-                     case 5:
-                        str += '，期待你解锁更多精彩！'
-                        break;
-                     case 6:
-                        str += '，期待你解锁更多精彩！'
-                        break;
+                  case 1:
+                     str += '，期待你解锁更多精彩！'
+                     break
+                  case 2:
+                     str += '，建设美丽中国，需要你的参与！'
+                     break
+                  case 3:
+                     str += '，大千世界，带上家人多出去走走吧。'
+                     break
+                  case 4:
+                     str += '，建设美丽中国，需要你的参与！'
+                     break
+                  case 5:
+                     str += '，期待你解锁更多精彩！'
+                     break
+                  case 6:
+                     str += '，期待你解锁更多精彩！'
+                     break
                   }
                }
                return str
@@ -142,14 +142,14 @@ export default {
       },
       userName () {
          let name = this.params.userName
-         if(name.length > 4){
-            return '*' + name.substr(1,3) + '...';
-         }else{
-            return '*' + name.substr(1,3);
+         if (name.length > 4) {
+            return '*' + name.substr(1, 3) + '...'
+         } else {
+            return '*' + name.substr(1, 3)
          }
       }
    },
-	methods: {
+   methods: {
       enter () {
          this.$store.commit('setCanChangePage', true)
       },

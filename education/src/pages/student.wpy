@@ -22,7 +22,7 @@
             <img :src="item.avatar" class="avatar"/>
             <div class="name text-shadow">{{item.name}}</div>
          </div>
-         <div class="btn-new">
+         <div class="btn-new" @click="toStudent">
             <img src="../res/img/icon-add1.png" class="icon" mode="widthFix"/>
             <div class="hint">New <br/> 新增学生</div>
          </div>
@@ -60,6 +60,11 @@
                   url: '/pages/studentlesson'
                })
             }, 200)
+         },
+         toStudent () {
+            wx.navigateTo({
+               url: '/pages/newfile'
+            })
          }
       }
    })

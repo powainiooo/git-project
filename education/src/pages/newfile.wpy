@@ -117,6 +117,7 @@
                parent_mobile: this.mobile
             }).then(res => {
                if (res.code === 1) {
+                  store.commit('setSelectedStudent', res.data)
                   wx.redirectTo({
                      url: `/pages/lesson`
                   })

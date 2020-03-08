@@ -1,7 +1,7 @@
 <style>
    .title2 { margin: 60rpx 0 40rpx 70rpx;}
-   .lesson-item { margin: 0 40rpx 40rpx 40rpx; display: flex; align-items: center; justify-content: center; background-color: #e5ad84; border-radius: 30rpx; box-shadow: 0 20rpx 15rpx rgba(0, 0, 0, 0.15); position: relative; overflow: hidden;}
-   .lesson-item .img { width: 100%; display: block;}
+   .lesson-item { height: 345rpx; margin: 0 40rpx 40rpx 40rpx; display: flex; align-items: center; justify-content: center; background-color: #e5ad84; border-radius: 30rpx; box-shadow: 0 20rpx 15rpx rgba(0, 0, 0, 0.15); position: relative; overflow: hidden;}
+   .lesson-item .img { width: 100%; height: 100%; display: block;}
    .lesson-item .name { font-size: 40rpx; color: #ffffff; position: absolute; left: 25rpx; bottom: 50rpx;}
 </style>
 
@@ -12,8 +12,13 @@
             <img src="../res/img/logo.png" class="logo" mode="widthFix"/>
          </div>
          <div class="title2 text-shadow">Select <br/> 选择课程</div>
-         <div class="lesson-item" v-for="item in list">
-            <img :src="imgSrc + item.image" class="img" mode="widthFix"/>
+         <div class="lesson-item"
+              v-for="item in list"
+              :key="item.id"
+              hover-class="hscale"
+              hover-stay-time="10"
+              @click="gotoNext(item)">
+            <img :src="item.image" class="img" mode="widthFix"/>
             <div class="name text-shadow">{{item.name}}</div>
          </div>
       </div>
@@ -37,7 +42,7 @@
          ],
          list: []
       },
-      computed: mapState(['showMenu', 'imgSrc', 'selectedStore']),
+      computed: mapState(['showMenu', 'selectedStore']),
       onLoad () {
          this.getData()
       },
@@ -48,6 +53,13 @@
             }).then(res => {
                this.list = res.data
             })
+         },
+         gotoNext (data) {
+            setTimeout(() => {
+               wx.navigateTo({
+                  url: `/pages/lessonBuy?id=${data.id}`
+               })
+            }, 200)
          }
       }
    })

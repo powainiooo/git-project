@@ -1,0 +1,90 @@
+<style>
+   .title2 { margin: 60rpx 0 40rpx 70rpx;}
+   .order-item { width: 660rpx; margin: 0 auto 56rpx auto; border-radius: 30rpx 30rpx 0 0; background-color: #ffffff; position: relative; overflow: hidden;}
+   .order-item .line1 { display: flex; justify-content: space-between;}
+   .order-item .line1 .info { width: 400rpx; margin: 0 10rpx 0 16rpx;}
+   .order-item .line1 .info-item { padding: 10rpx 0; display: flex; border-bottom: 1rpx solid #cacbcd;}
+   .order-item .line1 .info-name { width: 144rpx; height: 44rpx; margin-right: 30rpx; border-right: 1rpx solid #cacbcd;  color: #cacbcd; font-size: 25rpx; display: flex; justify-content: center; align-items: center;}
+   .order-item .line1 .info-value { height: 40rpx;  color: #211715; font-size: 25rpx; display: flex; justify-content: center; align-items: baseline;}
+   .order-item .line1 .info-value .info-num { font-size: 35rpx;}
+   .order-item .line1 .price { width: 230rpx; background-color: #e5ad84; font-size: 25rpx; color: #ffffff; display: flex; flex-direction: column; justify-content: center; align-items: center;}
+   .order-item .line1 .price .pirce-item { text-align: center;}
+   .order-item .line1 .price .pirce-item .price-val { font-size: 50rpx;}
+   .order-item .line2 { height: 65rpx; display: flex; align-items: center; font-size: 25rpx; color: #cacbcd;}
+</style>
+
+<template>
+   <div>
+      <div class="container {{showMenu ? 'blur' : ''}}">
+         <div class="header shadow1">
+            <img src="../res/img/logo.png" class="logo" mode="widthFix"/>
+         </div>
+         <div class="title2 text-shadow">Purchase records <br/> 购买记录</div>
+         <div class="order-item"
+              v-for="item in list"
+              :key="item.id">
+            <div class="line1">
+               <ul class="info">
+                  <li class="info-item">
+                     <div class="info-name">购买日期</div>
+                     <div class="info-value">{{item.updatetime_text}}</div>
+                  </li>
+                  <li class="info-item">
+                     <div class="info-name">购买课程</div>
+                     <div class="info-value">{{item.name}}<span class="info-num">{{item.num}}</span>节</div>
+                  </li>
+               </ul>
+               <div class="price">
+                  <div class="pirce-item"><span class="price-val">{{item.price}}</span>元</div>
+                  <div class="pirce-item">{{item.remark}}</div>
+               </div>
+            </div>
+            <div class="line2">
+               <img src="../res/img/tips2.png" style="width: 34rpx; height: 34rpx; margin: 0 16rpx 0 36rpx; "/>
+               优惠退款{{item.refund_amt}}元，实收{{item.price - item.refund_amt}}元。
+            </div>
+         </div>
+      </div>
+   </div>
+</template>
+
+<script>
+   import wepy from '@wepy/core'
+   import store from '../store'
+   import { mapState } from '@wepy/x'
+   import { getOrderList } from '@/res/api.js'
+   // https://github.com/wx-plugin/image-cropper
+   wepy.page({
+      store,
+      data: {
+         list: []
+      },
+      computed: mapState(['showMenu', 'selectedStudent']),
+      onLoad () {
+         this.getData()
+      },
+      methods: {
+         getData () {
+            getOrderList({
+               student_id: this.selectedStudent.id || 1
+            }).then(res => {
+               this.list = res.data
+            })
+         },
+         gotoNext (data) {
+            setTimeout(() => {
+               wx.navigateTo({
+                  url: `/pages/lessonBuy?id=${data.id}`
+               })
+            }, 200)
+         }
+      }
+   })
+</script>
+<config>
+   {
+      "usingComponents": {
+         "menu": "~@/components/menu"
+      }
+   }
+</config>

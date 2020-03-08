@@ -13,7 +13,7 @@
             <img src="../res/img/logo.png" class="logo" mode="widthFix"/>
          </div>
          <div class="person">
-            <img :src="imgSrc + selectedStudent.avatar" mode="widthFix" class="avatar"/>
+            <img :src="selectedStudent.avatar" mode="widthFix" class="avatar"/>
             <div class="name">{{selectedStudent.name}}</div>
          </div>
          <div class="hint2" v-if="list.length === 0">未购买课程</div>
@@ -23,7 +23,7 @@
               v-for="item in list"
               :key="item.id"
               @click="gotoNext(item.id)">
-            <img :src="imgSrc + item.image" class="img" mode="widthFix"/>
+            <img :src="item.image" class="img" mode="widthFix"/>
             <div class="name text-shadow">{{item.name}}</div>
             <div class="use-over" v-if="item.user_num >= item.num"></div>
             <div class="nums">{{item.num}}<span class="unit">节</span></div>
@@ -44,7 +44,7 @@
       data: {
          list: []
       },
-      computed: mapState(['showMenu', 'imgSrc', 'selectedStudent']),
+      computed: mapState(['showMenu', 'selectedStudent']),
       onLoad(query) {
          this.getData()
       },

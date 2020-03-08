@@ -31,7 +31,7 @@
             <img src="../res/img/logo.png" class="logo" mode="widthFix"/>
          </div>
          <div class="lesson-item lesson-item-detail">
-            <img :src="imgSrc + itemData.image" class="img" mode="widthFix"/>
+            <img :src="itemData.image" class="img" mode="widthFix"/>
             <div class="name text-shadow">{{itemData.name}}</div>
             <div class="nums">{{itemData.num}}<span class="unit">节</span></div>
          </div>
@@ -67,7 +67,7 @@
       data: {
          itemData: {}
       },
-      computed: mapState(['showMenu', 'imgSrc']),
+      computed: mapState(['showMenu']),
       onLoad(query) {
          const id = query.id || 1
          this.getData(id)

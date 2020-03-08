@@ -4,7 +4,8 @@
 .intro .name { font-size: 40rpx; color: #221715; margin-bottom: 30rpx;}
 .intro .descirp { font-size: 25rpx; color: #878887; line-height: 1.8}
 .list { margin: 0 40rpx;}
-
+.title3 { margin: 40rpx; color: #888888; padding-top: 40rpx; border-top: 1px solid #c6c6c8;}
+.btn-confirm { width: 540rpx; height: 170rpx; border-radius: 30rpx; background-color: #e5ad84; display: flex; justify-content: center; align-items: center; box-shadow: 0 20rpx 15rpx rgba(0, 0, 0, 0.12); font-size: 40rpx; color: #ffffff; text-shadow: 0 0 3px rgba(54, 42, 26, 0.33); transition: all 0.15s linear; position: fixed; left: 105rpx; bottom: 40rpx;}
 </style>
 
 <template>
@@ -25,13 +26,13 @@
                </div>
             </div>
          </div>
-         <div class="title2 text-shadow">Payment for Student <br/> 购买学生</div>
+         <div class="title2 title3">Payment for Student <br/> 购买学生</div>
          <div class="student-item">
-            <img :src="imgSrc + orderData.student.avatar" class="avatar"/>
+            <img :src="orderData.student.avatar" class="avatar"/>
             <div class="name text-shadow">{{orderData.student.name}}</div>
          </div>
       </div>
-      <menu func="btn" btnText="确认付款 | Confirm"></menu>
+      <button class="btn-confirm" @click="createOrder">确认付款 | Confirm</button>
    </div>
 </template>
 
@@ -39,40 +40,57 @@
    import wepy from '@wepy/core'
    import store from '../store'
    import { mapState } from '@wepy/x'
-   import { getCourseDetail } from '@/res/api.js'
+   import { createOrder, payOrder } from '@/res/api.js'
    // https://github.com/wx-plugin/image-cropper
    wepy.page({
       store,
       data: {
-         itemData: {}
       },
-      computed: mapState(['showMenu', 'imgSrc', 'orderData']),
+      computed: mapState(['showMenu', 'orderData', 'personalInfo']),
       onLoad (query) {
-         const id = query.id || 1
-         this.getData(id)
+         console.log(this.orderData)
       },
       methods: {
-         getData (id) {
-            getCourseDetail({
-               id
-            }).then(res => {
-               this.itemData = res.data
-            })
-         },
-         gotoNext (data) {
-            const order = {
-               course_id: this.itemData.id,
-               name: this.itemData.name,
-               english_name: this.itemData.english_name,
-               price: data,
-               student: this.selectedStudent
-            }
-            store.commit('setOrderData', order)
+         createOrder () {
             setTimeout(() => {
-               wx.navigateTo({
-                  url: '/pages/studentlesson'
+               createOrder({
+                  course_id: this.orderData.course_id,
+                  price_id: this.orderData.price.id,
+                  student_id: this.orderData.student.id || 3,
+               }).then(res => {
+                  const order_no = res.data.order_no
+                  this.payOrder(order_no)
                })
             }, 200)
+         },
+         payOrder (order_no) {
+            payOrder({
+               order_no,
+               openid: this.personalInfo.openid
+            }).then(res => {
+               wx.requestPayment({
+                  'timeStamp': res.timeStamp,
+                  'nonceStr': res.nonceStr,
+                  'package': res.package,
+                  'signType': res.signType,
+                  'paySign': res.paySign,
+                  'success' (res) {
+                     console.log(res)
+                     wx.showToast({
+                        title: '支付成功'
+                     })
+                     wx.redirectTo({
+                        url: `/pages/result?type=payment&result=success`
+                     })
+                  },
+                  'fail': function (res) {
+                     wx.showToast({
+                        image: '../../res/images/warn.png',
+                        title: '支付失败'
+                     })
+                  }
+               })
+            })
          }
       }
    })

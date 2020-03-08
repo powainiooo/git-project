@@ -1,6 +1,6 @@
 <style>
    .container .list { margin: 55rpx 40rpx 0 40rpx;}
-   .container .store-item { border-radius: 30rpx; overflow: hidden; box-shadow: 0 20rpx 15rpx rhga(0, 0, 0, 0.12); margin-bottom: 80rpx;  transition: transform 0.15s linear;}
+   .container .store-item { border-radius: 30rpx; overflow: hidden; box-shadow: 0 20rpx 15rpx rgba(0, 0, 0, 0.12); margin-bottom: 80rpx;  transition: transform 0.15s linear;}
    .container .store-item .img { width: 100%; height: 280rpx; display: block;}
    .container .store-item .info { height: 150rpx; background-color: #ffffff; display: flex; justify-content: space-between; align-items: center;}
    .container .store-item-select .info { background-color: #e5ad84;}
@@ -28,7 +28,7 @@
                  hover-class="hscale"
                  hover-stay-time="10"
                  @tap="doSelect(item.id)">
-               <img :src="imgSrc + item.image" class="img"/>
+               <img :src="item.image" class="img"/>
                <div class="info">
                   <div class="left">
                      <div class="name text-shadow">{{item.name}}</div>
@@ -62,7 +62,7 @@
          hasSelected: false
       },
       computed: {
-         ...mapState(['showMenu', 'personalInfo', 'imgSrc']),
+         ...mapState(['showMenu', 'personalInfo']),
          hasPassword () {
             return this.personalInfo === null ? false : this.personalInfo.course_password_flag === 1
          }
@@ -87,6 +87,9 @@
          getData () {
             getStoreList().then(res => {
                this.list = res.data
+               const item = res.data.find(i =>  i.select_flag === 1)
+               this.hasSelected = item !== undefined
+               this.selectedId = item.id
             })
          }
       }

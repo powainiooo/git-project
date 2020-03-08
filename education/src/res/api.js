@@ -115,3 +115,36 @@ export const getCourseDetail = data => {
       data
    })
 }
+// 订单创建
+export const createOrder = data => {
+   return ajax({
+      method: 'POST',
+      url: `${baseUrl}/api/order/create`,
+      data
+   })
+}
+// 订单支付
+export const payOrder = data => {
+   return ajax({
+      method: 'POST',
+      url: `${baseUrl}/api/order/pay`,
+      data
+   })
+}
+// 订单列表/购买记录
+export const getOrderList = data => {
+   return ajax({
+      method: 'POST',
+      url: `${baseUrl}/api/order/lists`,
+      data
+   })
+}
+// 订单列表/购买记录
+export const upload = url => {
+   return ajax({
+      method: 'POST',
+      url: `${baseUrl}/api/common/upload`,
+      filePath: url,
+      name: 'file'
+   })
+}

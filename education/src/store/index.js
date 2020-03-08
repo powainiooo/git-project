@@ -7,8 +7,8 @@ export default new Vuex.Store({
       counter: 0,
       showMenu: false,
       personalInfo: null,
-      imgSrc: 'https://bbart.waiting8.com',
       selectedStore: 1,
+      imgSrc: 'https://bbart.waiting8.com',
       selectedStudent: {},
       orderData: {}
    },

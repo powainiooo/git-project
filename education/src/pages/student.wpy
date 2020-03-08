@@ -19,7 +19,7 @@
               v-for="item in list"
               :key="item.id"
               @click="gotoNext(item)">
-            <img :src="imgSrc + item.avatar" class="avatar"/>
+            <img :src="item.avatar" class="avatar"/>
             <div class="name text-shadow">{{item.name}}</div>
          </div>
          <div class="btn-new">
@@ -41,7 +41,7 @@
       data: {
          list: []
       },
-      computed: mapState(['showMenu', 'imgSrc', 'selectedStore']),
+      computed: mapState(['showMenu', 'selectedStore']),
       onLoad () {
          this.getData()
       },

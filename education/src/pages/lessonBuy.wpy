@@ -28,7 +28,7 @@
                <div class="lesson">{{item.name}}<span class="unit">课</span></div>
                <div class="price">
                   <div class="line1">{{item.total_price}}<span class="unit">元</span></div>
-                  <div class="unit">{{itemData.remark}}</div>
+                  <div class="unit">{{item.remark}}</div>
                </div>
             </div>
          </div>
@@ -48,7 +48,7 @@
       data: {
          itemData: {}
       },
-      computed: mapState(['showMenu', 'imgSrc', 'selectedStudent']),
+      computed: mapState(['showMenu', 'selectedStudent']),
       onLoad (query) {
          const id = query.id || 1
          this.getData(id)

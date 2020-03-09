@@ -12,7 +12,7 @@
          <div class="header shadow1">
             <img src="../res/img/logo.png" class="logo" mode="widthFix"/>
          </div>
-         <div class="title2 text-shadow">Select <br/> 选择学生</div>
+         <div class="title2 text-shadow"><span class="en">Select</span> <br/> 选择学生</div>
          <div class="student-item"
               hover-class="hscale"
               hover-stay-time="10"

@@ -20,7 +20,7 @@
          <div class="header shadow1">
             <img src="../res/img/logo.png" class="logo" mode="widthFix"/>
          </div>
-         <div class="title2 text-shadow">Set up <br/> 建立学生档案</div>
+         <div class="title2 text-shadow"><span class="en">Set up</span> <br/> 建立学生档案</div>
          <image-cropper v-if="showCropper"
                         id="image-cropper"
                         limit_move="{{true}}"
@@ -119,7 +119,7 @@
                if (res.code === 1) {
                   store.commit('setSelectedStudent', res.data)
                   wx.redirectTo({
-                     url: `/pages/lesson`
+                     url: `/pages/student`
                   })
                } else {
                   wx.showToast({

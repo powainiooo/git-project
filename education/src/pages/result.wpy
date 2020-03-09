@@ -12,7 +12,7 @@
             <img src="../res/img/logo.png" class="logo" mode="widthFix"/>
          </div>
          <div class="psw-frame shadow1">
-            <div class="title1 text-shadow">{{result === 'success' ? 'Successfilly' : 'Failure'}} <br/> {{resultTxt}}</div>
+            <div class="title1 text-shadow"><span class="en">{{result === 'success' ? 'Successfilly' : 'Failure'}}</span> <br/> {{resultTxt}}</div>
             <img src="../res/img/icon-success.png" mode="widthFix" class="icon" v-if="result === 'success'"/>
             <img src="../res/img/icon-fail.png" mode="widthFix" class="icon" v-else-if="result === 'fail'"/>
             <img src="../res/img/tips.png" mode="widthFix" class="tips"/>
@@ -57,7 +57,7 @@
          doFunc () {
             if (this.type === 'payment') {
                if (this.result === 'success') {
-                  wx.navigateTo({
+                  wx.redirectTo({
                      url: '/pages/studentlesson'
                   })
                } else if (this.result === 'fail') {
@@ -66,11 +66,11 @@
                   })
                }
             } else if (this.type === 'file') {
-               wx.navigateTo({
-                  url: '/pages/studentlesson'
+               wx.redirectTo({
+                  url: '/pages/student'
                })
             } else if (this.type === 'password') {
-               wx.navigateTo({
+               wx.redirectTo({
                   url: '/pages/newfile'
                })
             }

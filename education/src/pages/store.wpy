@@ -67,7 +67,7 @@
             return this.personalInfo === null ? false : this.personalInfo.course_password_flag === 1
          }
       },
-      onLoad () {
+      onShow () {
          console.log(this.personalInfo)
          this.getData()
       },

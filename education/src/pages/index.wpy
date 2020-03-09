@@ -55,7 +55,7 @@ wepy.page({
    computed: mapState([ 'showMenu' ]),
    methods: {
       doEnter () {
-         wx.redirectTo({
+         wx.navigateTo({
             url: '/pages/store'
          })
       },
@@ -69,7 +69,7 @@ wepy.page({
             const now = new Date().getTime()
             wx.setStorageSync('lastGetCityTime', now)
             wx.setStorageSync('bbaUserInfo', res.data.userInfo)
-            wx.redirectTo({
+            wx.navigateTo({
                url: '/pages/index?type=index'
             })
          })

@@ -19,7 +19,7 @@
          <div class="header shadow1">
             <img src="../res/img/logo.png" class="logo" mode="widthFix"/>
          </div>
-         <div class="title2 text-shadow">Purchase records <br/> 购买记录</div>
+         <div class="title2 text-shadow"><span class="en">Purchase records</span> <br/> 购买记录</div>
          <div class="order-item"
               v-for="item in list"
               :key="item.id">
@@ -36,7 +36,7 @@
                </ul>
                <div class="price">
                   <div class="pirce-item"><span class="price-val">{{item.price}}</span>元</div>
-                  <div class="pirce-item">{{item.remark}}</div>
+                  <div class="pirce-item">{{item.price_remark}}</div>
                </div>
             </div>
             <div class="line2">

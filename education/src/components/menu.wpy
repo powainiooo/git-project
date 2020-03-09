@@ -36,7 +36,7 @@
          </div>
          <div class="z-menu-nav" style="bottom: 580rpx;" v-if="func === 'menu'">
             <a url="/pages/lesson" class="z-menu-nav-item text-shadow" @click="linkTo">购买课程 | Buy</a>
-            <a url="/pages/order" class="z-menu-nav-item text-shadow">购买记录 | Purchase records</a>
+            <a url="/pages/order" class="z-menu-nav-item text-shadow" @click="linkTo">购买记录 | Purchase records</a>
          </div>
       </div>
    </div>

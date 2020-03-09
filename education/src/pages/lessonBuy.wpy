@@ -15,7 +15,7 @@
          </div>
          <img :src="itemData.detail_image" class="banner"/>
          <div class="intro shadow1">
-            <div class="name text-shadow">{{itemData.english_name}}<br/>{{itemData.name}}</div>
+            <div class="name text-shadow"><span class="en">{{itemData.english_name}}</span><br/>{{itemData.name}}</div>
             <div class="descirp">{{itemData.content}}</div>
          </div>
          <div class="list">

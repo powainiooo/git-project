@@ -15,7 +15,7 @@
             <img src="../res/img/logo.png" class="logo" mode="widthFix"/>
          </div>
          <div class="intro shadow1">
-            <div class="name text-shadow">{{orderData.english_name}}<br/>{{orderData.name}}</div>
+            <div class="name text-shadow"><span class="en">{{orderData.english_name}}</span><br/>{{orderData.name}}</div>
          </div>
          <div class="list">
             <div class="buy-item">

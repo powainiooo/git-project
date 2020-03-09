@@ -138,13 +138,17 @@
          doShowCropper () {
             this.showCropper = true
             this.$nextTick(() => {
-               this.$wx.selectComponent("#image-cropper").upload()
+               this.$wx.selectComponent('#image-cropper').upload()
             })
          },
          getImg () {
             const self = this
-            this.$wx.selectComponent("#image-cropper").getImg((obj)=>{
-               console.log(obj.url);
+            wx.showLoading({
+               title: '上传中',
+               mask: true
+            })
+            this.$wx.selectComponent('#image-cropper').getImg((obj) => {
+               console.log(obj.url)
                wx.uploadFile({
                   url: 'https://bbart.waiting8.com/api/common/upload', // 仅为示例，非真实的接口地址
                   filePath: obj.url,
@@ -163,9 +167,10 @@
                            image: '../res/img/warn.png'
                         })
                      }
+                     wx.hideLoading()
                   }
                })
-            });
+            })
          }
       }
    })

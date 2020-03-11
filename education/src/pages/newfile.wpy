@@ -17,9 +17,7 @@
 <template>
    <div>
       <div class="container {{showMenu ? 'blur' : ''}}">
-         <div class="header shadow1">
-            <img src="../res/img/logo.png" class="logo" mode="widthFix"/>
-         </div>
+         <zHeader></zHeader>
          <div class="title2 text-shadow"><span class="en">Set up</span> <br/> 建立学生档案</div>
          <image-cropper v-if="showCropper"
                         id="image-cropper"

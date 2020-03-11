@@ -27,9 +27,7 @@
 <template>
    <div>
       <div class="container {{showMenu ? 'blur' : ''}}">
-         <div class="header shadow1">
-            <img src="../res/img/logo.png" class="logo" mode="widthFix"/>
-         </div>
+         <zHeader></zHeader>
          <div class="lesson-item lesson-item-detail">
             <img :src="itemData.image" class="img" mode="widthFix"/>
             <div class="name text-shadow">{{itemData.name}}</div>

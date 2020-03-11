@@ -1,15 +1,17 @@
 <style>
    .z-menu { width: 100%; position: fixed; bottom: 40rpx; left: 0; z-index: 1000;}
    .z-menu-btns { width: 100%; box-sizing: border-box; padding: 0 14rpx;  display: flex; justify-content: space-between; position: relative; z-index: 10;}
-   .z-menu-btns .btn-menu { width: 170rpx; height: 170rpx; border-radius: 30rpx; background-color: #e5ad84; display: flex; justify-content: center; align-items: center; box-shadow: 0 20rpx 15rpx rgba(0, 0, 0, 0.12); transition: transform 0.15s linear; margin-right: 12rpx;}
+   .z-menu-btns .btn-menu { width: 170rpx; height: 170rpx; border-radius: 30rpx; background-color: #e5ad84; display: flex; justify-content: center; align-items: center; box-shadow: 0 20rpx 15rpx rgba(0, 0, 0, 0.12); transition: transform 0.15s ease-out; margin-right: 12rpx;}
    .z-menu-btns .btn-menu .icon { width: 70rpx;}
-   .z-menu-btns .btn-next { width: 540rpx; height: 170rpx; border-radius: 30rpx; background-color: #ffffff; display: flex; justify-content: center; align-items: center; box-shadow: 0 20rpx 15rpx rgba(0, 0, 0, 0.12); font-size: 40rpx; color: #221715; text-shadow: 0 0 3px rgba(54, 42, 26, 0.33); transition: all 0.15s linear;}
+   .z-menu-btns .btn-next { width: 540rpx; height: 170rpx; border-radius: 30rpx; background-color: #ffffff; display: flex; justify-content: center; align-items: center; box-shadow: 0 20rpx 15rpx rgba(0, 0, 0, 0.12); font-size: 40rpx; color: #221715; text-shadow: 0 0 3px rgba(54, 42, 26, 0.33); transition: all 0.15s ease-out;}
    .z-menu-btns .btn-disable { background-color: #cacaca; color: #ffffff;}
    .z-menu .blur { filter: blur(2px); -webkit-filter: blur(2px);}
-   .z-menu-list-frame { position: fixed; top: 0; left: 0; right: 0; bottom: 0;}
-   .z-menu-nav { position: fixed; left: 10rpx; right: 10rpx; bottom: 235rpx; background-color: #ffffff; border-radius: 30rpx; box-shadow: 0 20rpx 15rpx rgba(0, 0, 0, 0.12);}
-   .z-menu-nav-item { display: flex; align-items: center; height: 160rpx; font-size: 40rpx; color: #221715; margin: 0 10rpx; padding-left: 50rpx; border-bottom: 2rpx solid #ececec}
+   .z-menu-list-frame { position: fixed; left: 0; right: 0; bottom: 0;}
+   .z-menu-nav { position: fixed; left: 10rpx; right: 10rpx; bottom: 235rpx; background-color: #ffffff; border-radius: 30rpx; overflow: hidden; box-shadow: 0 20rpx 15rpx rgba(0, 0, 0, 0.12); transition: bottom 0.5s cubic-bezier(.21,.68,.27,1.01);}
+   .z-menu-nav-item { display: flex; align-items: center; height: 160rpx; font-size: 40rpx; color: #221715; padding-left: 50rpx; border-bottom: 2rpx solid #ececec; text-shadow: 0 0 3px rgba(54, 42, 26, 0.33); transition: all 0.15s ease-out;}
    .z-menu-nav-item:last-child { border-bottom: none;}
+   .z-menu-nav-item.active { background-color: #e5ad84; color: #ffffff;}
+   .z-menu-nav-item .en { font-weight: bold;}
    .hscale { transform: scale(0.95);}
 </style>
 <template>
@@ -23,20 +25,28 @@
             <img src="../res/img/icon-menu.png" mode="widthFix" class="icon" v-if="!showMenu"/>
             <img src="../res/img/icon-close.png" mode="widthFix" class="icon" v-if="showMenu"/>
          </div>
-         <div class="btn-next text-shadow {{showMenu ? 'blur' : ''}} {{btnDisable ? 'btn-disable' : ''}}"
+         <div class="btn-next {{showMenu ? 'blur' : ''}} {{btnDisable ? 'btn-disable' : ''}}"
               hover-class="hscale"
               hover-stay-time="10"
               @click="doFunc"
               v-if="func !== 'menu'">{{btnText}}</div>
       </div>
-      <div class="z-menu-list-frame" @touchmove.stop="tmove" v-if="showMenu">
-         <div class="z-menu-nav">
-            <a href="#" class="z-menu-nav-item text-shadow">关于我们 | About us</a>
-            <a href="#" class="z-menu-nav-item text-shadow">近期活动 | News</a>
+      <div class="z-menu-list-frame" @touchmove.stop="tmove">
+         <div class="z-menu-nav" :style="{bottom: showMenu ? '235rpx' : '-330rpx'}">
+            <a href="#" class="z-menu-nav-item" hover-class="hscale" hover-stay-time="10">关于我们 | <span class="en">About us</span></a>
+            <a href="#" class="z-menu-nav-item" hover-class="hscale" hover-stay-time="10">近期活动 | <span class="en">News</span></a>
          </div>
-         <div class="z-menu-nav" style="bottom: 580rpx;" v-if="func === 'menu'">
-            <a url="/pages/lesson" class="z-menu-nav-item text-shadow" @click="linkTo">购买课程 | Buy</a>
-            <a url="/pages/order" class="z-menu-nav-item text-shadow" @click="linkTo">购买记录 | Purchase records</a>
+         <div class="z-menu-nav" :style="{bottom: (showMenu && func === 'menu') ? '580rpx' : '-330rpx'}">
+            <a url="/pages/lesson"
+               class="z-menu-nav-item active"
+               @click="linkTo"
+               hover-class="hscale"
+               hover-stay-time="10">购买课程 | <span class="en">Buy</span></a>
+            <a url="/pages/order"
+               class="z-menu-nav-item"
+               @click="linkTo"
+               hover-class="hscale"
+               hover-stay-time="10">购买记录 | <span class="en">Purchase records</span></a>
          </div>
       </div>
    </div>
@@ -65,15 +75,11 @@
       computed: mapState(['showMenu']),
       methods: {
          toggleMenu () {
-            setTimeout(() => {
-               this.$store.commit('toggleMenu', !this.showMenu)
-            }, 200)
+            this.$store.commit('toggleMenu', !this.showMenu)
          },
          doFunc () {
             if (this.btnDisable) return
-            setTimeout(() => {
-               this.$emit('doFunc')
-            }, 200)
+            this.$emit('doFunc')
          },
          tmove () {},
          linkTo () {

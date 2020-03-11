@@ -8,9 +8,7 @@
 <template>
    <div>
       <div class="container {{showMenu ? 'blur' : ''}}">
-         <div class="header shadow1">
-            <img src="../res/img/logo.png" class="logo" mode="widthFix"/>
-         </div>
+         <zHeader></zHeader>
          <div class="title2 text-shadow"><span class="en">Select</span> <br/> 选择课程</div>
          <div class="lesson-item"
               v-for="item in list"
@@ -55,11 +53,9 @@
             })
          },
          gotoNext (data) {
-            setTimeout(() => {
-               wx.navigateTo({
-                  url: `/pages/lessonBuy?id=${data.id}`
-               })
-            }, 200)
+            wx.navigateTo({
+               url: `/pages/lessonBuy?id=${data.id}`
+            })
          }
       }
    })

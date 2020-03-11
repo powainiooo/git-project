@@ -10,7 +10,7 @@
    .container .store-item .info .left .address { font-size: 25rpx; color: #878887;}
    .container .store-item-select .info .left .address { color: #ffffff;}
    .container .store-item .info .checkbox { width: 74rpx; margin-right: 40rpx;}
-   .others { width: 160rpx; margin: 80rpx auto 0 auto; text-align: center;}
+   .others { width: 160rpx; margin: 80rpx auto 0 auto; text-align: center; transition: all 0.15s ease-out;}
    .others .icon { width: 84rpx;}
    .others .hint { margin: 0;}
 </style>
@@ -18,9 +18,7 @@
 <template>
    <div>
       <div class="container {{showMenu ? 'blur' : ''}}">
-         <div class="header">
-            <img src="../res/img/logo.png" class="logo" mode="widthFix"/>
-         </div>
+         <zHeader></zHeader>
          <div class="list">
             <div v-for="item in list"
                  class="store-item {{selectedId === item.id ? 'store-item-select' : ''}}"
@@ -39,7 +37,11 @@
                </div>
             </div>
          </div>
-         <div class="others" v-if="hasSelected" @click="hasSelected = false">
+         <div class="others"
+              v-if="hasSelected"
+              @click="hasSelected = false"
+              hover-class="hscale"
+              hover-stay-time="10">
             <img src="../res/img/icon-house.png" mode="widthFix" class="icon"/>
             <div class="hint">Others<br/>查看其它门店</div>
          </div>
@@ -73,9 +75,7 @@
       },
       methods: {
          doSelect (id) {
-            setTimeout(() => {
-               this.selectedId = id
-            }, 200)
+            this.selectedId = id
          },
          doEnter () {
             store.commit('setStoreID', this.selectedId)
@@ -87,7 +87,7 @@
          getData () {
             getStoreList().then(res => {
                this.list = res.data
-               const item = res.data.find(i =>  i.select_flag === 1)
+               const item = res.data.find(i => i.select_flag === 1)
                this.hasSelected = item !== undefined
                this.selectedId = item.id
             })
@@ -97,6 +97,5 @@
 </script>
 <config>
    {
-
    }
 </config>

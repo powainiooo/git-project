@@ -8,9 +8,7 @@
 <template>
    <div>
       <div class="container {{showMenu ? 'blur' : ''}}">
-         <div class="header shadow1">
-            <img src="../res/img/logo.png" class="logo" mode="widthFix"/>
-         </div>
+         <zHeader></zHeader>
          <div class="psw-frame shadow1">
             <div class="title1 text-shadow"><span class="en">{{result === 'success' ? 'Successfilly' : 'Failure'}}</span> <br/> {{resultTxt}}</div>
             <img src="../res/img/icon-success.png" mode="widthFix" class="icon" v-if="result === 'success'"/>

@@ -1,7 +1,7 @@
 <style>
    .title2 { margin: 60rpx 0 40rpx 70rpx;}
 
-   .btn-new { width: 110rpx; margin: 100rpx auto; text-align: center;}
+   .btn-new { width: 110rpx; margin: 100rpx auto; text-align: center; transition: all 0.15s ease-out;}
    .btn-new .icon { width: 70rpx;}
    .btn-new .hint { text-align: center; margin: 0;}
 </style>
@@ -9,9 +9,7 @@
 <template>
    <div>
       <div class="container {{showMenu ? 'blur' : ''}}">
-         <div class="header shadow1">
-            <img src="../res/img/logo.png" class="logo" mode="widthFix"/>
-         </div>
+         <zHeader></zHeader>
          <div class="title2 text-shadow"><span class="en">Select</span> <br/> 选择学生</div>
          <div class="student-item"
               hover-class="hscale"
@@ -22,7 +20,10 @@
             <img :src="item.avatar" class="avatar"/>
             <div class="name text-shadow">{{item.name}}</div>
          </div>
-         <div class="btn-new" @click="toStudent">
+         <div class="btn-new"
+              @click="toStudent"
+              hover-class="hscale"
+              hover-stay-time="10">
             <img src="../res/img/icon-add1.png" class="icon" mode="widthFix"/>
             <div class="hint">New <br/> 新增学生</div>
          </div>
@@ -34,7 +35,7 @@
    import wepy from '@wepy/core'
    import store from '../store'
    import { mapState } from '@wepy/x'
-   import {getStudentList} from '@/res/api.js'
+   import {getStudentList, getCourseListByStudent} from '@/res/api.js'
    // https://github.com/wx-plugin/image-cropper
    wepy.page({
       store,
@@ -55,11 +56,19 @@
          },
          gotoNext (data) {
             store.commit('setSelectedStudent', data)
-            setTimeout(() => {
-               wx.navigateTo({
-                  url: '/pages/studentlesson'
-               })
-            }, 200)
+            getCourseListByStudent({
+               student_id: data.id
+            }).then(res => {
+               if (res.data.length > 0) {
+                  wx.navigateTo({
+                     url: '/pages/studentlesson'
+                  })
+               } else {
+                  wx.navigateTo({
+                     url: '/pages/lesson'
+                  })
+               }
+            })
          },
          toStudent () {
             wx.navigateTo({

@@ -1,15 +1,16 @@
 <style>
    .title2 { margin: 60rpx 0 40rpx 70rpx;}
    .order-item { width: 660rpx; margin: 0 auto 56rpx auto; border-radius: 30rpx 30rpx 0 0; background-color: #ffffff; position: relative; overflow: hidden;}
+   .order-item::after { content: ''; width: 100%; height: 66rpx; background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAu4AAABDAgMAAAC+bmhAAAAADFBMVEUAAAAAAAAAAAAAAAA16TeWAAAABHRSTlMABgoP3U7vMwAAAW9JREFUaN7swYEAAAAAgKD9qRepAgAAAAAA4Hbq3rZhGAjDsAjcAHeF9mGA0wAEeCk8gAvvk8a9DZgpMkL2yQgpovBkWj+O4yRIoSv4wC5sqPjw4qCqqqqqqqqq+j+yA/+8u7EDWP3ySW+yvO76Afthf3kSeG3z8nB/PvNQ3lL2onFEmMfd2Z4fQUdZK6ZEzryW/y4+cMP66UQkkBgStCUT6US4tV7/Zb0XiZ0YxOf57AlvbQd2BCKtsZMZRRHU8u7req/lOzFZvQhBAiGha64QeKI2RpnbpNUdZKENWv4qvcvluQtSPKbBcbu6XRo8TesJ3fJwHFLefsmeH94mU075K0UgXB5O/kVUuu/SPhm0TafS/oEc8iy8Q0JpzwdzTEYdL8cD7Bo/hUfgTtTmlCavvQEf8+M5SBYCIcMU3hHFxfbemHS2P4hibrwfwyO3s1fjS2/Qe1I7XR8FGWAsDxT03ofuz71Rb+NLM7Afyn8CAlS3yhE0DzcAAAAASUVORK5CYII=) repeat-x; background-size: 100% 100%; position: absolute; bottom: 0; left: 0;}
    .order-item .line1 { display: flex; justify-content: space-between;}
    .order-item .line1 .info { width: 400rpx; margin: 0 10rpx 0 16rpx;}
    .order-item .line1 .info-item { padding: 10rpx 0; display: flex; border-bottom: 1rpx solid #cacbcd;}
    .order-item .line1 .info-name { width: 144rpx; height: 44rpx; margin-right: 30rpx; border-right: 1rpx solid #cacbcd;  color: #cacbcd; font-size: 25rpx; display: flex; justify-content: center; align-items: center;}
-   .order-item .line1 .info-value { height: 40rpx;  color: #211715; font-size: 25rpx; display: flex; justify-content: center; align-items: baseline;}
-   .order-item .line1 .info-value .info-num { font-size: 35rpx;}
+   .order-item .line1 .info-value { height: 40rpx;  color: #211715; font-size: 25rpx; display: flex; justify-content: center; align-items: baseline; font-family: Arial;}
+   .order-item .line1 .info-value .info-num { font-size: 35rpx; font-weight: bold;}
    .order-item .line1 .price { width: 230rpx; background-color: #e5ad84; font-size: 25rpx; color: #ffffff; display: flex; flex-direction: column; justify-content: center; align-items: center;}
    .order-item .line1 .price .pirce-item { text-align: center;}
-   .order-item .line1 .price .pirce-item .price-val { font-size: 50rpx;}
+   .order-item .line1 .price .pirce-item .price-val { font-size: 50rpx; font-weight: bold; font-family: Arial;}
    .order-item .line2 { height: 65rpx; display: flex; align-items: center; font-size: 25rpx; color: #cacbcd;}
 </style>
 
@@ -25,9 +26,9 @@
                <ul class="info">
                   <li class="info-item">
                      <div class="info-name">购买日期</div>
-                     <div class="info-value">{{item.updatetime_text}}</div>
+                     <div class="info-value" style=" font-weight: bold;">{{item.updatetime_text}}</div>
                   </li>
-                  <li class="info-item">
+                  <li class="info-item" :style="{'border-width': item.refund_order_no !== '' ? '1prx' : '0'}">
                      <div class="info-name">购买课程</div>
                      <div class="info-value">{{item.name}}<span class="info-num">{{item.num}}</span>节</div>
                   </li>
@@ -37,7 +38,7 @@
                   <div class="pirce-item">{{item.price_remark}}</div>
                </div>
             </div>
-            <div class="line2">
+            <div class="line2" v-if="item.refund_order_no !== ''">
                <img src="../res/img/tips2.png" style="width: 34rpx; height: 34rpx; margin: 0 16rpx 0 36rpx; "/>
                优惠退款{{item.refund_amt}}元，实收{{item.price - item.refund_amt}}元。
             </div>
@@ -64,7 +65,7 @@
       methods: {
          getData () {
             getOrderList({
-               student_id: this.selectedStudent.id || 1
+               student_id: this.selectedStudent.id || 3
             }).then(res => {
                this.list = res.data
             })

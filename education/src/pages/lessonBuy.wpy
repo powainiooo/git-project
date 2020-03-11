@@ -26,7 +26,7 @@
                  @click="gotoNext(item)">
                <div class="lesson">{{item.name}}<span class="unit">课</span></div>
                <div class="price">
-                  <div class="line1">{{item.total_price}}<span class="unit">元</span></div>
+                  <div class="line1">{{item.price}}<span class="unit">元</span></div>
                   <div class="unit">{{item.remark}}</div>
                </div>
             </div>

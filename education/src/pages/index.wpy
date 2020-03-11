@@ -1,5 +1,5 @@
 <style>
-.container { width: 100%; overflow: hidden;}
+.container { width: 100%; overflow: hidden; position: relative;}
 .container .top { height: 900rpx; background: repeating-linear-gradient(180deg, #e5ad84, #ed8f6f 100%); position: relative; overflow: hidden; z-index: 10;}
 .container .top .circle1 { width: 570rpx; height: 570rpx; border-radius: 50%; background-color: #ee8f6f; position: absolute; top: 10rpx; left: -140rpx; animation: float1 4s ease infinite alternate;}
 .container .top .circle2 { width: 260rpx; height: 260rpx; border-radius: 50%; background-color: #e5ad84; position: absolute; bottom: -80rpx; right: -60rpx; animation: float2 4s ease infinite alternate;}
@@ -14,7 +14,7 @@
   }
 .container .top .logo { width: 380rpx; position: absolute; top: 300rpx; left: 70rpx;}
 .container .top .title { width: 336rpx; position: absolute; bottom: 80rpx; left: 70rpx;}
-.container .titles { font-size: 60rpx; color: #221715; margin: 70rpx 0 300rpx 70rpx;}
+.container .titles { font-size: 60rpx; color: #221715; margin: 70rpx 0 0 70rpx;}
 .container .titles span { font-size: 66rpx; color: #221715;}
 
 </style>
@@ -41,7 +41,6 @@
               hover-class="hscale"
               hover-stay-time="10">授权申请 | Authorization</button>
    </div>
-
 </div>
 </template>
 

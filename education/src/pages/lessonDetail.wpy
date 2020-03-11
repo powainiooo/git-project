@@ -4,7 +4,7 @@
    .lesson-item-detail .name { left: auto; right: 30rpx; bottom: auto; top: 30rpx;}
    .progress { height: 170rpx; background-color: #ffffff; overflow: hidden; margin-bottom: 70rpx;}
    .progress .nums { text-align: right; padding-right: 50rpx; font-size: 25rpx; color: #b9babb; margin-top: 40rpx; margin-bottom: 10rpx;}
-   .progress .nums .val { font-size: 40rpx;}
+   .progress .nums .val { font-size: 40rpx; color: #221715; font-weight: bold; font-family: Arial;}
    .progress .line-bg { margin: 0 50rpx; height: 8rpx; background-color: #edecea; border-radius: 4rpx;}
    .progress .line-bg .line { width: 50%; height: 100%; background-color: #e9ba90; border-radius: 4rpx;}
    .list-frame { margin-bottom: 80rpx;}
@@ -19,7 +19,7 @@
       if (type === 'year') {
          return date.substring(0, 4)
       } else if (type === 'month') {
-         return date.substring(4, 12)
+         return date.substring(5, 12)
       }
    }
    module.exports.format = format
@@ -35,14 +35,14 @@
          </div>
          <div class="progress shadow1">
             <div class="nums">
-               已使用<span class="val">{{itemData.use_num}}</span>节
+               已使用<span class="val"> {{itemData.use_num}} </span>节
             </div>
             <div class="line-bg">
-               <div class="line"></div>
+               <div class="line" :style="{width: percent + '%'}"></div>
             </div>
          </div>
          <div class="list-frame" v-if="itemData.reviews.length !== 0">
-            <div class="year">{{util.format(i.class_date, 'year')}}</div>
+            <div class="year">{{util.format(itemData.reviews[0].class_date, 'year')}}</div>
             <ul class="list">
                <li class="list-item" v-for="i in itemData.reviews" :key="i.id">
                   <div class="date text-shadow">{{util.format(i.class_date, 'month')}}</div>
@@ -63,17 +63,19 @@
    wepy.page({
       store,
       data: {
-         itemData: {}
+         itemData: {},
+         percent: 0
       },
       computed: mapState(['showMenu']),
       onLoad(query) {
-         const id = query.id || 1
+         const id = query.id || 13
          this.getData(id)
       },
       methods: {
          getData (id) {
             getCourseDetailByStudent({id}).then(res => {
                this.itemData = res.data
+               this.percent = parseInt(this.itemData.use_num / this.itemData.num * 100)
             })
          }
       }

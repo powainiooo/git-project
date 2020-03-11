@@ -20,7 +20,14 @@
          <div class="hint" v-else-if="type === 'payment' && result === 'success'">对应购买的课程已加入学生档案中，可前往学生档案查看详情。</div>
          <div class="hint" v-else-if="type === 'payment' && result === 'fail'">网络链接失败 或 用户量拥挤等原因导致支付出错，请尝试重新支付。</div>
       </div>
-      <menu btnText="确认 | Confirm" @doFunc="doFunc"></menu>
+      <menu btnText="确认 | Confirm" @doFunc="doFunc" v-if="type !== 'payment'"></menu>
+      <div class="footer" v-else>
+         <button class="button"
+                 plain
+                 @click="doFunc"
+                 hover-class="hscale"
+                 hover-stay-time="10">确认 | Confirm</button>
+      </div>
    </div>
 </template>
 

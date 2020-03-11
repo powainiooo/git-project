@@ -2,7 +2,7 @@
    @import "res/helvetica.wxss";
    page { background-color: #edecea}
    .text-shadow { text-shadow: 0 0 3px rgba(54, 42, 26, 0.33);}
-   .container { width: 100%; margin-bottom: 300rpx; transition: all 0.15s ease-out;}
+   .container { width: 100%; padding-bottom: 300rpx; transition: all 0.15s ease-out;}
 
    .shadow1 { position: relative;}
    .shadow1::after { content: ''; width: 100%; height: 40rpx; background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAnAgMAAACzjsoxAAAADFBMVEU2Khw2Khw2Khw2KhwarhFMAAAABHRSTlMBBA0JwFRvygAAABNJREFUCNdjcGBoAMIDQBoEKQQAxQ4CwQhBwMsAAAAASUVORK5CYII=) repeat-x; background-size: auto 100%; position: absolute; top: 100%; left: 0;}
@@ -18,7 +18,7 @@
    .footer .button { width: 540rpx; height: 170rpx; border-radius: 30rpx; background-color: #e5ad84; display: flex; justify-content: center; align-items: center; box-shadow: 0 20rpx 15rpx rgba(0, 0, 0, 0.12); font-size: 40rpx; color: #ffffff; text-shadow: 0 0 3px rgba(54, 42, 26, 0.33); transition: all 0.15s ease-out; border: none;}
 
    .student-item { height: 170rpx; margin: 0 40rpx 40rpx 40rpx; display: flex; align-items: center; justify-content: space-between; padding: 0 30rpx; background-color: #ffffff; border-radius: 30rpx; box-shadow: 0 20rpx 15rpx rgba(0, 0, 0, 0.15); transition: transform 0.1s linear;}
-   .student-item .avatar { width: 140rpx; height: 140rpx; display: block; border-radius: 50%; border-shadow: 0 0 1px rgba(0, 0, 0, 0.28);}
+   .student-item .avatar { width: 140rpx; height: 140rpx; display: block; border-radius: 50%; box-shadow: 0 0 1px rgba(0, 0, 0, 0.28);}
    .student-item .name { color: #221715; font-size: 35rpx;}
 
    .lesson-item { margin: 0 40rpx 40rpx 40rpx; display: flex; align-items: center; justify-content: center; background-color: #e5ad84; border-radius: 30rpx; box-shadow: 0 20rpx 15rpx rgba(0, 0, 0, 0.12); position: relative; overflow: hidden; transition: transform 0.1s linear;}
@@ -28,8 +28,8 @@
    .lesson-item-student::after { content: ''; width: 1prx; height: 100%; border-left: 1px dashed #e8d3c2; position: absolute; right: 71rpx; top: 0;}
    .lesson-item .use-over { width: 70rpx; height: 100%; position: absolute; top: 0; right: 0; background-color: #7e9eab;}
    .lesson-item .use-over::after { content: '已用完'; width: 100rpx; font-size: 30rpx; color: #ffffff; position: absolute; top: 170rpx; right: -14rpx; transform: rotateZ(90deg);}
-   .lesson-item .nums { width: 130rpx; height: 130rpx; box-sizing: border-box; position: absolute; top: 0; left: 0; background-color: #ffffff; border-radius: 0 0 130rpx 0; text-align: center; color: #221715; font-size: 36rpx; padding-top: 24rpx;}
-   .lesson-item .nums .unit { color: #b9babc; font-size: 25rpx;}
+   .lesson-item .nums { width: 130rpx; height: 130rpx; box-sizing: border-box; position: absolute; top: -2rpx; left: -2rpx; background-color: #ffffff; border-radius: 0 0 130rpx 0; text-align: center; color: #221715; font-size: 40rpx; padding-top: 24rpx; font-weight: bold; font-family: Arial}
+   .lesson-item .nums .unit { color: #b9babc; font-size: 25rpx; font-weight: normal;}
 
    .buy-item { height: 174rpx; border-radius: 30rpx; background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAVUAAACuCAMAAACx8G5yAAAAM1BMVEUAAADpuZDpuZDpuZDpuZDpuZDpuZDpuZDpuZDpuZDpuZDpuZDpuZDpuZDpuZDpuZDpuZC73H2XAAAAEHRSTlMAgMBAEPDgMKBg0CBQsJBwbvKTPQAAAqJJREFUeNrt2llu1kAQReHbg+ep9r9afhASkBAe4ltSLM63hKNWdbllvdWWgps2/a4vR+C+pl/6PATMVQtN7VV7DbirThxUo0bUiKSqG1H9VfsasFc9A1Zd0hTw0gs7VULVLWDGVM0gaQyYcVclqNIVMKuM1QSVvSqCqo9QqBpB1UegaoadqgkaVSOo+gi8A75Q9QlGqiaoVI2g6iMUqkZQ9REaVSOo+gj8DfBC1SeoVE1wUDVBoWqChaoJGlUTiKp+I1UTVKomKFRNsFA1QaNqAlHVb6VqgpmqCS6qJmhUTSCq+q1UTTBTNcFF1QQTVROIqn6VqgkKVRM0qiYQVf1WqiY4qZpgp2qCTlW/Kqr6FaomaFT1G0RVv4OqCRaqJtio6reKqn4nVRNMVPUbRVW/maoJdqr6DaKq30zVBDtV/QZR1W+maoKdqn6DqOo3UzXBRFW/UVT1K1RNsFHVr4qqfgtV/YZOVb9ZVPWbqOq3iqp+C1X9hk5Vv1lU9duo6ldFVb+dqn6jqOp3UdVv6FT1O0VVv42qfrOo6rdR1e8QVf0aVf2qqOrXqOpXRVW/RlW/Kqr6Nar6VVHVr1HVr4qqfhtV/WZR1W+jql8RVe2GTlW/S1S1G0VVv0ZVvyqq+m1U9Suiqt3Yqeq3i6p2VVT126jqV0RVu1FU9WtU9TtFVbuxU9VvF1XtDlHVbuhU9dtFVbtZVLUbO1X9mqhqd4qqdquoajdMVPVbRFW7Q1S1GztV/SZR1e7SZxwB81B9KYGPrV2fsgcMm+obPfDvTZXB6nXq05bA31XdMAY+Wv85rBFf46b6aQ28t+ueKfBO0V1X4I1Z982BP6wSWX/4Ah+qPAcYr/+PNdZWf1SplyHw3SKnXjivL4vcpnL8798ERfd9A7oYafqu+FkaAAAAAElFTkSuQmCC) no-repeat; background-size: auto 100%; background-color: #ffffff; display: flex; justify-content: space-between; transition: transform 0.1s linear; margin-bottom: 30rpx; box-shadow: 0 20rpx 15rpx rgba(0, 0, 0, 0.12);}
    .buy-item .lesson { width: 300rpx; display: flex; justify-content: center; align-items: baseline; font-size: 60rpx; color: #ffffff; padding-top: 30rpx; font-weight: bold;}
@@ -116,16 +116,16 @@
 <config>
    {
    "pages": [
+      "pages/lessonDetail",
       "pages/index",
-      "pages/newfile",
       "pages/order",
+      "pages/newfile",
       "pages/student",
       "pages/lessonBuy",
       "pages/lesson",
       "pages/store",
       "pages/orderConfirm",
       "pages/studentlesson",
-      "pages/lessonDetail",
       "pages/result",
       "pages/password",
       "pages/welcome"

@@ -11,7 +11,7 @@
    .z-menu-nav-item { display: flex; align-items: center; height: 160rpx; font-size: 40rpx; color: #221715; padding-left: 50rpx; border-bottom: 2rpx solid #ececec; text-shadow: 0 0 3px rgba(54, 42, 26, 0.33); transition: all 0.15s ease-out;}
    .z-menu-nav-item:last-child { border-bottom: none;}
    .z-menu-nav-item.active { background-color: #e5ad84; color: #ffffff;}
-   .z-menu-nav-item .en { font-weight: bold;}
+   .z-menu-nav-item .en { font-weight: bold; margin-left: 20rpx;}
    .hscale { transform: scale(0.95);}
 </style>
 <template>
@@ -26,27 +26,27 @@
             <img src="../res/img/icon-close.png" mode="widthFix" class="icon" v-if="showMenu"/>
          </div>
          <div class="btn-next {{showMenu ? 'blur' : ''}} {{btnDisable ? 'btn-disable' : ''}}"
-              hover-class="hscale"
+              :hover-class="btnDisable ? '' : 'hscale'"
               hover-stay-time="10"
               @click="doFunc"
               v-if="func !== 'menu'">{{btnText}}</div>
       </div>
       <div class="z-menu-list-frame" @touchmove.stop="tmove">
          <div class="z-menu-nav" :style="{bottom: showMenu ? '235rpx' : '-330rpx'}">
-            <a href="#" class="z-menu-nav-item" hover-class="hscale" hover-stay-time="10">关于我们 | <span class="en">About us</span></a>
-            <a href="#" class="z-menu-nav-item" hover-class="hscale" hover-stay-time="10">近期活动 | <span class="en">News</span></a>
+            <a href="#" class="z-menu-nav-item" hover-class="hscale" hover-stay-time="10">关于我们 |  <span class="en">About us</span></a>
+            <a href="#" class="z-menu-nav-item" hover-class="hscale" hover-stay-time="10">近期活动 |  <span class="en">News</span></a>
          </div>
          <div class="z-menu-nav" :style="{bottom: (showMenu && func === 'menu') ? '580rpx' : '-330rpx'}">
             <a url="/pages/lesson"
                class="z-menu-nav-item active"
                @click="linkTo"
                hover-class="hscale"
-               hover-stay-time="10">购买课程 | <span class="en">Buy</span></a>
+               hover-stay-time="10">购买课程 |  <span class="en">Buy</span></a>
             <a url="/pages/order"
                class="z-menu-nav-item"
                @click="linkTo"
                hover-class="hscale"
-               hover-stay-time="10">购买记录 | <span class="en">Purchase records</span></a>
+               hover-stay-time="10">购买记录 |  <span class="en">Purchase records</span></a>
          </div>
       </div>
    </div>

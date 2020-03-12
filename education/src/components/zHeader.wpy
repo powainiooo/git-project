@@ -1,5 +1,5 @@
 <style>
-.header { height: 180rpx; background-color: #e5ad84; display: flex; align-items: center; position: relative}
+.header { height: 180rpx; background-color: #e5ad84; display: flex; align-items: center; position: relative; z-index: 100;}
 .header::after { content: ''; width: 100%; height: 40rpx; background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAnAgMAAACzjsoxAAAADFBMVEU2Khw2Khw2Khw2KhwarhFMAAAABHRSTlMBBA0JwFRvygAAABNJREFUCNdjcGBoAMIDQBoEKQQAxQ4CwQhBwMsAAAAASUVORK5CYII=) repeat-x; background-size: auto 100%; position: absolute; top: 100%; left: 0;}
 .header .logo { width: 260rpx; margin-left: 70rpx;}
 </style>

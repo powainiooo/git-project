@@ -1,6 +1,6 @@
 <style>
-   .psw-frame { background-color: #e5ad84; height: 710rpx; position: relative; overflow: hidden;}
-   .psw-frame .title1 { margin: 60rpx 0 0 70rpx;}
+   .psw-frame { background-color: #e5ad84; height: 710rpx; position: relative; padding-top: 60rpx; z-index: 101;}
+   .psw-frame .title1 { margin: 0 0 0 70rpx;}
    .psw-frame .icon { width: 160rpx; display: block; margin: 100rpx auto;}
    .psw-frame .tips { width: 70rpx; position: absolute; bottom: 25rpx; left: 70rpx;}
 </style>

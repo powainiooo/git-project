@@ -1,7 +1,7 @@
 <style>
    .title2 { margin: 60rpx 0 40rpx 70rpx;}
    .form-line { margin: 0 60rpx 40rpx 60rpx; display: flex; justify-content: flex-end; align-items: flex-end; position: relative;}
-   .form-line .portrait { margin-right: 40rpx; position: relative;}
+   .form-line .portrait { margin-right: 40rpx; position: relative; transition: all 0.15s ease-out;}
    .form-line .portrait .avatar { width: 160rpx; height: 160rpx; border-radius: 50%;}
    .form-line .portrait .icon { width: 30rpx; position: absolute; top: 65rpx; left: 65rpx;}
    .form-line .input { width: 100%; border: none; background-color: transparent; border-bottom: 2rpx solid #b9babc; text-shadow: 0 0 3px rgba(54, 42, 26, 0.33); position: relative; text-align: right; font-size: 35rpx; color: #221715; height: 70rpx; line-height: 70rpx;}
@@ -33,7 +33,10 @@
             <button size="mini" @click="getImg">确认</button>
          </div>
          <div class="form-line">
-            <div class="portrait" @click="doShowCropper">
+            <div class="portrait"
+                 @click="doShowCropper"
+                 hover-class="hscale"
+                 hover-stay-time="10">
                <img src="../res/img/avatar.png" mode="widthFix" class="avatar" v-if="avatar === ''"/>
                <img :src="imgSrc + avatar" mode="widthFix" class="avatar" v-else/>
                <img src="../res/img/icon-add2.png" mode="widthFix" class="icon"  v-if="avatar === ''"/>

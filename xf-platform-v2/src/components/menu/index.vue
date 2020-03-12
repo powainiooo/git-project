@@ -9,7 +9,7 @@
     .n-menu .n-menu-btns{ overflow: hidden; margin: 50px 40px 100px 40px;}
     .n-menu .info-item{ display: flex; height: 40px; margin-bottom: 20px;}
     .n-menu .info-item .name{ width: 100px; height: 100%; box-sizing: border-box; font-size: 16px; color: #ffffff; padding-left: 15px; display: flex; align-items: center; background: linear-gradient(244deg,rgb(0,42,169),rgb(0,61,188)); border-radius: 5px 0 0 5px;}
-    .n-menu .info-item .info{ width: 170px; height: 100%; box-sizing: border-box; font-size: 16px; color: #000000; font-weight: bold; padding-left: 15px; display: flex; align-items: center; background-color: #eeeef0; border-radius: 0 5px 5px 0;}
+    .n-menu .info-item .info{ width: 170px; height: 100%; box-sizing: border-box; font-size: 16px; color: #000000; font-weight: bold; padding-left: 15px; padding-top: 8px; background-color: #eeeef0; border-radius: 0 5px 5px 0; overflow: hidden; white-space: nowrap;text-overflow: ellipsis;}
     .n-menu .copyright{ position: absolute; left: 35px; bottom: 30px; font-size: 20px; color: #000000;}
     .n-menu .copyright span{ font-size: 12px; color: #bebebe;}
     .n-menu .anim{ animation-duration: 0.5s; animation-timing-function: cubic-bezier(.25,.76,.36,.97);}

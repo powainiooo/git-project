@@ -116,8 +116,8 @@
 <config>
    {
    "pages": [
-      "pages/lessonDetail",
       "pages/index",
+      "pages/lessonDetail",
       "pages/order",
       "pages/newfile",
       "pages/student",

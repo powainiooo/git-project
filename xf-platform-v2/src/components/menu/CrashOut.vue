@@ -19,7 +19,7 @@
             <div class="crashout-frame-left">
                 <div class="info-item">
                     <p class="name">活动名称</p>
-                    <p class="info" style="width: 300px;">Disco back</p>
+                    <p class="info" style="width: 300px;">{{activityName}}</p>
                 </div>
                 <div class="info-item">
                     <p class="name">提款额</p>
@@ -115,6 +115,9 @@ export default {
             return (this.data.total - this.data.total * (this.data.site / 100) * 1.036).toFixed(2)
          }
          return ''
+      },
+      activityName () {
+         return `${this.data.goods_name}|\`${this.data.activity}`
       }
    },
    methods: {

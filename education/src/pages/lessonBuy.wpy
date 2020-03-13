@@ -24,7 +24,7 @@
                  v-for="item in itemData.course_prices"
                  :key="item.id"
                  @click="gotoNext(item)">
-               <div class="lesson">{{item.name}}<span class="unit">课</span></div>
+               <div class="lesson" :style="{'font-size': item.name.length >= 4 ? '60rpx' : '80rpx','padding-top': item.name.length >= 4 ? '46rpx' : '30rpx'}">{{item.name}}<span class="unit">课</span></div>
                <div class="price">
                   <div class="line1">{{item.price}}<span class="unit">元</span></div>
                   <div class="unit">{{item.remark}}</div>
@@ -49,7 +49,7 @@
       },
       computed: mapState(['showMenu', 'selectedStudent']),
       onLoad (query) {
-         const id = query.id || 1
+         const id = query.id || 2
          this.getData(id)
       },
       methods: {

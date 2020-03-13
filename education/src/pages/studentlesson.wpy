@@ -51,7 +51,7 @@
       methods: {
          getData () {
             getCourseListByStudent({
-               student_id: this.selectedStudent.id
+               student_id: this.selectedStudent.id || 10
             }).then(res => {
                this.list = res.data
             })

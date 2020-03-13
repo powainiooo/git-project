@@ -97,6 +97,8 @@
 </script>
 <config>
    {
-
+      "usingComponents": {
+         "zHeader": "~@/components/zHeader.wpy"
+      }
    }
 </config>

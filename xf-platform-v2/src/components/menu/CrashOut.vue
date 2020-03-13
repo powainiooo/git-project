@@ -117,7 +117,7 @@ export default {
          return ''
       },
       activityName () {
-         return `${this.data.goods_name}|\`${this.data.activity}`
+         return `${this.data.goods_name}|${this.data.activity}`
       }
    },
    methods: {

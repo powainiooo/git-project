@@ -1,10 +1,10 @@
 <style>
    .title2 { margin: 60rpx 0 40rpx 70rpx;}
    .order-item { width: 660rpx; margin: 0 auto 56rpx auto; border-radius: 30rpx 30rpx 0 0; background-color: #ffffff; position: relative; overflow: hidden;}
-   .order-item::after { content: ''; width: 100%; height: 66rpx; background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAu4AAABDAgMAAAC+bmhAAAAADFBMVEUAAAAAAAAAAAAAAAA16TeWAAAABHRSTlMABgoP3U7vMwAAAW9JREFUaN7swYEAAAAAgKD9qRepAgAAAAAA4Hbq3rZhGAjDsAjcAHeF9mGA0wAEeCk8gAvvk8a9DZgpMkL2yQgpovBkWj+O4yRIoSv4wC5sqPjw4qCqqqqqqqqq+j+yA/+8u7EDWP3ySW+yvO76Afthf3kSeG3z8nB/PvNQ3lL2onFEmMfd2Z4fQUdZK6ZEzryW/y4+cMP66UQkkBgStCUT6US4tV7/Zb0XiZ0YxOf57AlvbQd2BCKtsZMZRRHU8u7req/lOzFZvQhBAiGha64QeKI2RpnbpNUdZKENWv4qvcvluQtSPKbBcbu6XRo8TesJ3fJwHFLefsmeH94mU075K0UgXB5O/kVUuu/SPhm0TafS/oEc8iy8Q0JpzwdzTEYdL8cD7Bo/hUfgTtTmlCavvQEf8+M5SBYCIcMU3hHFxfbemHS2P4hibrwfwyO3s1fjS2/Qe1I7XR8FGWAsDxT03ofuz71Rb+NLM7Afyn8CAlS3yhE0DzcAAAAASUVORK5CYII=) repeat-x; background-size: 100% 100%; position: absolute; bottom: -2rpx; left: 0;}
+   .order-item::after { content: ''; width: 100%; height: 66rpx; background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAu4AAABDCAYAAADDAIDTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAFIGlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS42LWMxNDUgNzkuMTYzNDk5LCAyMDE4LzA4LzEzLTE2OjQwOjIyICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5zOmRjPSJodHRwOi8vcHVybC5vcmcvZGMvZWxlbWVudHMvMS4xLyIgeG1sbnM6cGhvdG9zaG9wPSJodHRwOi8vbnMuYWRvYmUuY29tL3Bob3Rvc2hvcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RFdnQ9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZUV2ZW50IyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ0MgMjAxOSAoTWFjaW50b3NoKSIgeG1wOkNyZWF0ZURhdGU9IjIwMjAtMDEtMTZUMTU6NDE6NDgrMDg6MDAiIHhtcDpNb2RpZnlEYXRlPSIyMDIwLTAxLTE2VDE1OjQ0OjUxKzA4OjAwIiB4bXA6TWV0YWRhdGFEYXRlPSIyMDIwLTAxLTE2VDE1OjQ0OjUxKzA4OjAwIiBkYzpmb3JtYXQ9ImltYWdlL3BuZyIgcGhvdG9zaG9wOkNvbG9yTW9kZT0iMyIgcGhvdG9zaG9wOklDQ1Byb2ZpbGU9InNSR0IgSUVDNjE5NjYtMi4xIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOmMxMTRlN2U0LTk5MjMtNGNkOC1hNWI0LTY3YWNjNDQ2OGMyMSIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpjMTE0ZTdlNC05OTIzLTRjZDgtYTViNC02N2FjYzQ0NjhjMjEiIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDpjMTE0ZTdlNC05OTIzLTRjZDgtYTViNC02N2FjYzQ0NjhjMjEiPiA8eG1wTU06SGlzdG9yeT4gPHJkZjpTZXE+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJjcmVhdGVkIiBzdEV2dDppbnN0YW5jZUlEPSJ4bXAuaWlkOmMxMTRlN2U0LTk5MjMtNGNkOC1hNWI0LTY3YWNjNDQ2OGMyMSIgc3RFdnQ6d2hlbj0iMjAyMC0wMS0xNlQxNTo0MTo0OCswODowMCIgc3RFdnQ6c29mdHdhcmVBZ2VudD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTkgKE1hY2ludG9zaCkiLz4gPC9yZGY6U2VxPiA8L3htcE1NOkhpc3Rvcnk+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+/BD70wAAA6VJREFUeJzt3UFu2zAQQNG46P2vrC6Kokib2BI5M+RY7y1tkZKTzRdBy4/jOD4AAIC9/Vh9AQAAwGvCHQAAGhDuAADQgHAHAIAGhDsAADQg3AEAoAHhDgAADQh3AABoQLgDAEADwh0AABoQ7gAA0IBwBwCABoQ7AAA0INwBAKAB4Q4AAA0IdwAAaEC4AwBAA8IdAAAaEO4AANCAcAcAgAaEOwAANCDcAQCgAeEOAAANCHcAAGhAuAMAQAPCHQAAGhDuAADQgHAHAIAGhDsAADQg3AEAoAHhDgAADQh3AABoQLgDAEADwh0AABoQ7gAA0IBwBwCABoQ7AAA0INwBAKAB4Q4AAA0IdwAAaODn6gvgr8fj8Vh9DQAAXzmO41h9DXf38D84R1QDAORyc/DcrcNdjAMA9HTHyH/bcBflAAD39m5x3zrcxTkAACM6Rn2LcBfoAABU2Dnotwv3m0b6HT8zANDTXvGYbKeQXx7uTUO94zUDAOxomzA+a1XMl4f7xqG+63UBAPDblpFfFfIl4b5RrO9yHdnu8jkBgNe2jN0EW3zOzIhPC/eFsb46WlefHwBgN6ujesn5oyM+NNwXxHr2+UQ4AMAa2bFdGvMRER8S7kXBnnGOqjB3AwAA3EVVEGecJ/3aZwJ+ONwLYj1q/sjrjP7Mgh4A6Co6ciPni5orNeSvRvzlcE8M9oh5Z+e4Ol54AwCMuRrFsxEdEeEpIX824E+H+4bBnj2u89YcAIBqK7eujJ67etzzSV+E+ctwTwr2kTkzVsOrbxp2OwcAwDMV+9Uz47liVT/8b/RdwH8b7gnBnh3rz46Nmidz7CyhDwC8svKxjFWr28+OvzLX8oj/N+D/C/fgYM+M9e+Oy9gKs/PKPADAjipCfXYrTeZWnLCI/xPwn8I9MNort7W8Ghsd8iIeAOBr2bEeddxMyFd/qfb3JMdxPI7jWBXso7E+G+qRe99FPABwdzvE+mioP3s/OuLnf4Dpo/4xjCNhPbN/PWvsyHFR46rmAwDexy7PXc9eNc8YO3tjMHrsJ7PhnhnsI8E9GumzX2yNugE4S6ADAFGqg352JTv6vStjlgb8aLhnPu3lapRnv/7de5XPgxfqAECVyh8qurq6fTW+M18vf3rNSLhHBOvZ1fUrr2fcBGSvxEeNAQDIlPVUlYjV7tnYnp03IuDP/XLqR+1TV86EcXSsn5kvcnX+zPujx85wQwAA76/qOe2RK8oz4TwT17MRXx7wvwDkyg9ICDTy+AAAAABJRU5ErkJggg==) repeat-x; background-size: 100% 100%; position: absolute; bottom: -2rpx; left: 0;}
    .order-item .line1 { display: flex; justify-content: space-between;}
    .order-item .line1 .info { width: 400rpx; margin: 0 10rpx 0 16rpx;}
-   .order-item .line1 .info-item { padding: 10rpx 0; display: flex; border-bottom: 1rpx solid #cacbcd;}
+   .order-item .line1 .info-item { padding: 10rpx 0; display: flex; align-items: center; border-bottom: 1rpx solid #cacbcd;}
    .order-item .line1 .info-name { width: 144rpx; height: 44rpx; margin-right: 30rpx; border-right: 1rpx solid #cacbcd;  color: #cacbcd; font-size: 25rpx; display: flex; justify-content: center; align-items: center;}
    .order-item .line1 .info-value { height: 40rpx;  color: #211715; font-size: 25rpx; display: flex; justify-content: center; align-items: baseline; font-family: Arial;}
    .order-item .line1 .info-value .info-num { font-size: 35rpx; font-weight: bold;}
@@ -26,7 +26,7 @@
                <ul class="info">
                   <li class="info-item">
                      <div class="info-name">购买日期</div>
-                     <div class="info-value" style=" font-weight: bold;">{{item.updatetime_text}}</div>
+                     <div class="info-value" style=" font-weight: bold; align-items: center;">{{item.updatetime_text}}</div>
                   </li>
                   <li class="info-item" :style="{'border-width': item.refund_order_no !== '' ? '1prx' : '0'}">
                      <div class="info-name">购买课程</div>
@@ -40,7 +40,7 @@
             </div>
             <div class="line2" v-if="item.refund_order_no !== ''">
                <img src="../res/img/tips2.png" style="width: 34rpx; height: 34rpx; margin: 0 16rpx 0 36rpx; "/>
-               优惠退款{{item.refund_amt}}元，实收{{item.price - item.refund_amt}}元。
+               {{item.refund_remark}}
             </div>
          </div>
       </div>

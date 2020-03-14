@@ -13,6 +13,7 @@
    .z-menu-nav-item-btn { width: 100%; height: 100%; display: flex; align-items: center;  transition: transform 0.15s linear;}
    .z-menu-nav-item:last-child { border-bottom: none;}
    .z-menu-nav-item.active { background-color: #e5ad84; color: #ffffff;}
+   .link-class { -webkit-tap-highlight-color: #e5ad84;}
    .z-menu-nav-item .en { font-weight: bold; margin-left: 20rpx;}
    .hscale { transform: scale(0.95);}
 </style>
@@ -42,6 +43,7 @@
          <div class="z-menu-nav" :style="{bottom: (showMenu && func === 'menu') ? '580rpx' : '-330rpx'}">
             <a url="/pages/lesson"
                class="z-menu-nav-item active"
+               hover-class="link-class"
                @click="linkTo">
                <div class="z-menu-nav-item-btn" hover-class="hscale" hover-stay-time="10">
                   购买课程 |  <span class="en">Buy </span>

@@ -148,3 +148,11 @@ export const upload = url => {
       name: 'file'
    })
 }
+// 订单列表/购买记录
+export const getCommentData = data => {
+   return ajax({
+      method: 'POST',
+      url: `${baseUrl}/api/review/detail`,
+      data
+   })
+}

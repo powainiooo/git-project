@@ -5,7 +5,7 @@
    .container { width: 100%; padding-bottom: 300rpx; transition: all 0.15s ease-out;}
 
    .shadow1 { position: relative;}
-   .shadow1::after { content: ''; width: 100%; height: 40rpx; background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAnAgMAAACzjsoxAAAADFBMVEU2Khw2Khw2Khw2KhwarhFMAAAABHRSTlMBBA0JwFRvygAAABNJREFUCNdjcGBoAMIDQBoEKQQAxQ4CwQhBwMsAAAAASUVORK5CYII=) repeat-x; background-size: auto 100%; position: absolute; top: 100%; left: 0;}
+   .shadow1::after { content: ''; width: 100%; height: 40rpx; background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAAnCAYAAAAl15mhAAAACXBIWXMAAAsTAAALEwEAmpwYAAAFIGlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS42LWMxNDUgNzkuMTYzNDk5LCAyMDE4LzA4LzEzLTE2OjQwOjIyICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5zOmRjPSJodHRwOi8vcHVybC5vcmcvZGMvZWxlbWVudHMvMS4xLyIgeG1sbnM6cGhvdG9zaG9wPSJodHRwOi8vbnMuYWRvYmUuY29tL3Bob3Rvc2hvcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RFdnQ9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZUV2ZW50IyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ0MgMjAxOSAoTWFjaW50b3NoKSIgeG1wOkNyZWF0ZURhdGU9IjIwMjAtMDMtMTJUMTU6MzU6MDYrMDg6MDAiIHhtcDpNb2RpZnlEYXRlPSIyMDIwLTAzLTEyVDE1OjM2OjE2KzA4OjAwIiB4bXA6TWV0YWRhdGFEYXRlPSIyMDIwLTAzLTEyVDE1OjM2OjE2KzA4OjAwIiBkYzpmb3JtYXQ9ImltYWdlL3BuZyIgcGhvdG9zaG9wOkNvbG9yTW9kZT0iMyIgcGhvdG9zaG9wOklDQ1Byb2ZpbGU9InNSR0IgSUVDNjE5NjYtMi4xIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjgxZWE0OGY5LWE2Y2YtNDVhNS05NDI4LTJlNDQ5NmRlZWYwYyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo4MWVhNDhmOS1hNmNmLTQ1YTUtOTQyOC0yZTQ0OTZkZWVmMGMiIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo4MWVhNDhmOS1hNmNmLTQ1YTUtOTQyOC0yZTQ0OTZkZWVmMGMiPiA8eG1wTU06SGlzdG9yeT4gPHJkZjpTZXE+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJjcmVhdGVkIiBzdEV2dDppbnN0YW5jZUlEPSJ4bXAuaWlkOjgxZWE0OGY5LWE2Y2YtNDVhNS05NDI4LTJlNDQ5NmRlZWYwYyIgc3RFdnQ6d2hlbj0iMjAyMC0wMy0xMlQxNTozNTowNiswODowMCIgc3RFdnQ6c29mdHdhcmVBZ2VudD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTkgKE1hY2ludG9zaCkiLz4gPC9yZGY6U2VxPiA8L3htcE1NOkhpc3Rvcnk+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8++qelhQAAAClJREFUGJVjNNOS4WNgYGBgYoACFgYGhr+4Gf8JMBj////PgGLgSGYAAFZ0CtVq9vBKAAAAAElFTkSuQmCC) repeat-x; background-size: auto 100%; position: absolute; top: 100%; left: 0;}
    .hscale { transform: scale(0.95);}
    .title1 { font-size: 40rpx; color: #ffffff;}
    .title1 .en { font-weight: bold}
@@ -116,17 +116,18 @@
 <config>
    {
    "pages": [
+      "pages/comment",
       "pages/index",
-      "pages/studentlesson",
+      "pages/lesson",
+      "pages/store",
+      "pages/lessonDetail",
       "pages/order",
+      "pages/studentlesson",
       "pages/password",
       "pages/result",
-      "pages/lessonDetail",
       "pages/newfile",
       "pages/lessonBuy",
       "pages/student",
-      "pages/lesson",
-      "pages/store",
       "pages/orderConfirm",
       "pages/welcome"
    ],
@@ -135,7 +136,7 @@
    "navigationBarBackgroundColor": "#e5ad84",
    "navigationBarTitleText": "",
    "navigationBarTextStyle": "black",
-   "backgroundColor": "#edecea"
+   "backgroundColor": "#edeceb"
    },
    "usingComponents": {
       "menu": "~@/components/menu",

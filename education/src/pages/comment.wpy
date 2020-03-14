@@ -1,0 +1,115 @@
+<style>
+   .page-img { width: 726rpx; display: block; margin: 30rpx auto;}
+</style>
+
+<template>
+   <div>
+      <zHeader class="draw"></zHeader>
+      <painter customStyle='position: absolute; left: -9999rpx;' :palette="paleData" bind:imgOK="onImgOK" widthPixels="1000"/>
+      <img :src="imgSrc" class="page-img" mode="widthFix"/>
+   </div>
+</template>
+
+<script>
+   import wepy from '@wepy/core'
+   import store from '../store'
+   import { mapState } from '@wepy/x'
+   import { getCommentData } from '@/res/api.js'
+   import { getLength } from '@/res/util.js'
+   // https://github.com/wx-plugin/image-cropper
+   wepy.page({
+      store,
+      data: {
+         imgSrc: '',
+         paleData: {
+            width: '726px',
+            height: '1000px',
+            background: '#eee',
+            views: [
+               {type: 'rect',css: { width: '726px', height: '210px', color: '#e5ad84',}}, // 课程图底色块
+               {type: 'rect',css: { width: '726px', height: '188px', color: '#f4f4f4', top: '210px'}}, // 日期底色块
+               {type: 'rect',css: { width: '726px', height: '2px', color: '#bababa', top: '398px'}}, // 日期底线
+               {type: 'rect',css: { width: '210px', height: '2px', color: '#bababa', top: '284px', left: '50px'}}, // 日期分割线
+            ]
+         },
+         itemData: null
+      },
+      onLoad (option) {
+         let id = option.id || 21
+         this.getData(id)
+      },
+      computed: {
+         title () {
+            return '儿童画'
+         },
+         bgSrc () {
+            return 'https://bbart.waiting8.com/uploads/20200312/eb756ddb88e4f2ecc01eeb57b11b3d82.jpg'
+         },
+         avatar () {
+            return 'https://bbart.waiting8.com/uploads/20200311/7c8eeaa8545fe894b86d85516d3226f2.png'
+         }
+      },
+      methods: {
+         getData (id) {
+            getCommentData({id}).then(res => {
+               this.itemData = res.data
+               this.draw()
+            })
+         },
+         onImgOK (e) {
+            this.imgSrc = e.$wx.detail.path
+            console.log(e)
+         },
+         draw () {
+            let startTop = 400 // 变动区开始绘制的top 距离
+            // 课程图
+            this.paleData.views.push({type: 'image',url: this.bgSrc, css: { width: '726px', height: '210px', top: '0px', left: '0px'}})
+            // 课程名
+            this.paleData.views.push({type: 'text',text: this.title, css: { color: '#ffffff', top: '110px', left: '50px', fontSize: '40px'}})
+            // 头像
+            this.paleData.views.push({type: 'image',url: this.avatar, css: { width: '200px', height: '200px', top: '100px', right: '50px', borderRadius: '100px'}})
+            let date = this.itemData.class_date.split('-')
+            // 年
+            let year = date[0].split('')
+            this.paleData.views.push({type: 'text',text: `${year[0]}   ${year[1]}   ${year[2]}   ${year[3]}`, css: { color: '#211715', top: '234px', left: '50px', fontSize: '40px', fontWeight: 'bold'}})
+            // 月日
+            this.paleData.views.push({type: 'text',text: `${date[1]}/${date[2]}`, css: { color: '#211715', top: '284px', left: '50px', fontSize: '70px', fontWeight: 'bold'}})
+            // 主题部分
+            const title = this.itemData.title
+            // const title = '主题：主题：主题：主题：主题：主题：主题：主题：主题：主题：'
+            const titleStartTop = startTop
+            const titleLen = getLength(title)
+            const titleMaxLine = 2
+            const titleLine = Math.ceil(titleLen / 30) > titleMaxLine ? titleMaxLine : Math.ceil(titleLen / 30)
+            const titleBgH = 130 + titleLine * 45
+            // 主题曲背景块
+            this.paleData.views.push({type: 'rect',css: { width: '726px', height: `${titleBgH}px`, color: '#ffffff', top: `${titleStartTop}px`}})
+            this.paleData.views.push({type: 'rect',css: { width: '726px', height: '2px', color: '#bababa', top: `${titleStartTop + titleBgH - 2}px`}})
+            // 主题
+            this.paleData.views.push({type: 'text',text: `主题：`, css: { color: '#b9b9b9', top: `${titleStartTop + 40}px`, left: '50px', fontSize: '25px'}})
+            this.paleData.views.push({type: 'text',text: title, css: { width: '626px', color: '#211715', top: `${titleStartTop + 80}px`, left: '50px', fontSize: '40px', maxLines: titleMaxLine, lineHeight: '46px'}})
+            // 课程核心内容部分
+            const desp = this.itemData.description
+            // const title = '主题：主题：主题：主题：主题：主题：主题：主题：主题：主题：'
+            const despLen = getLength(desp)
+            const despStartTop = startTop + titleBgH
+            const despMaxLine = 4
+            const despLine = Math.ceil(despLen / 30) > despMaxLine ? despMaxLine : Math.ceil(despLen / 30)
+            const despBgH = 130 + despLine * 45
+            // 主题曲背景块
+            this.paleData.views.push({type: 'rect',css: { width: '726px', height: `${despBgH}px`, color: '#f4f4f4', top: `${despStartTop}px`}})
+            this.paleData.views.push({type: 'rect',css: { width: '726px', height: '2px', color: '#bababa', top: `${despStartTop + despBgH - 2}px`}})
+            // 主题
+            this.paleData.views.push({type: 'text',text: `课程核心内容：`, css: { color: '#b9b9b9', top:`${despStartTop + 40}px`, left: '50px', fontSize: '25px'}})
+            this.paleData.views.push({type: 'text',text: desp, css: { width: '626px', color: '#211715', top: `${despStartTop + 80}px`, left: '50px', fontSize: '40px', maxLines: despMaxLine, lineHeight: '46px'}})
+         }
+      }
+   })
+</script>
+<config>
+   {
+      "usingComponents": {
+         "painter": "~@/components/painter/painter"
+      }
+   }
+</config>

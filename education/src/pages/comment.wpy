@@ -1,5 +1,5 @@
 <style>
-   .page-img { width: 726rpx; display: block; margin: 30rpx auto;}
+   .page-img { width: 726rpx; display: block; margin: 30rpx auto 0 auto;}
 </style>
 
 <template>
@@ -15,7 +15,8 @@
    import store from '../store'
    import { mapState } from '@wepy/x'
    import { getCommentData } from '@/res/api.js'
-   import { getLength } from '@/res/util.js'
+   import { getLength, promisify } from '@/res/util.js'
+   const getImageInfo = promisify(wx.getImageInfo)
    // https://github.com/wx-plugin/image-cropper
    wepy.page({
       store,
@@ -24,7 +25,7 @@
          paleData: {
             width: '726px',
             height: '1000px',
-            background: '#eee',
+            background: '#ffffff',
             views: [
                {type: 'rect',css: { width: '726px', height: '210px', color: '#e5ad84',}}, // 课程图底色块
                {type: 'rect',css: { width: '726px', height: '188px', color: '#f4f4f4', top: '210px'}}, // 日期底色块
@@ -32,27 +33,85 @@
                {type: 'rect',css: { width: '210px', height: '2px', color: '#bababa', top: '284px', left: '50px'}}, // 日期分割线
             ]
          },
-         itemData: null
+         itemData: null,
+         titleData: {
+            height: 0,
+            maxLine: 2
+         },
+         despData: {
+            height: 0,
+            maxLine: 4
+         },
+         reviewData: {
+            height: 0,
+            maxLine: 15
+         },
+         imagesData: [],
+         canvasHeight: 400
       },
       onLoad (option) {
          let id = option.id || 21
          this.getData(id)
       },
       computed: {
+         ...mapState(['selectedStudent', 'leassonData']),
          title () {
-            return '儿童画'
+            return this.leassonData.name
          },
          bgSrc () {
-            return 'https://bbart.waiting8.com/uploads/20200312/eb756ddb88e4f2ecc01eeb57b11b3d82.jpg'
+            return this.leassonData.image
          },
          avatar () {
-            return 'https://bbart.waiting8.com/uploads/20200311/7c8eeaa8545fe894b86d85516d3226f2.png'
+            return this.selectedStudent.avatar
          }
       },
       methods: {
          getData (id) {
             getCommentData({id}).then(res => {
                this.itemData = res.data
+               if (this.itemData.images.length > 0) {
+                  this.canvasHeight += 60
+                  this.loadImgs()
+               } else {
+                  this.draw()
+               }
+            })
+         },
+         async loadImgs () {
+            const urls = this.itemData.images
+            let arr = []
+            for (let i of urls) {
+               arr.push(getImageInfo({src: i}))
+            }
+            Promise.all(arr).then(res => {
+               console.log(res)
+               const title = this.itemData.title
+               const titleLen = getLength(title)
+               const titleMaxLine = this.titleData.maxLine
+               const titleLines = Math.ceil(titleLen / 30) > titleMaxLine ? titleMaxLine : Math.ceil(titleLen / 30)
+               this.titleData.height = 130 + titleLines * 45
+               this.canvasHeight += this.titleData.height
+
+               const desp = this.itemData.description
+               const despLen = getLength(desp)
+               const despMaxLine = this.despData.maxLine
+               const despLine = Math.ceil(despLen / 30) > despMaxLine ? despMaxLine : Math.ceil(despLen / 30)
+               this.despData.height = 130 + despLine * 45
+               this.canvasHeight += this.despData.height
+
+               const review = this.itemData.review
+               const reviewLen = getLength(review)
+               const reviewMaxLine = this.reviewData.maxLine
+               const reviewLine = Math.ceil(reviewLen / 30) > reviewMaxLine ? reviewMaxLine : Math.ceil(reviewLen / 30)
+               this.reviewData.height = 130 + reviewLine * 30
+               this.canvasHeight += this.reviewData.height
+
+               for (let i of res) {
+                  this.canvasHeight += i.height + 50
+               }
+               this.canvasHeight += 10
+               this.imagesData = res
+               this.paleData.height = `${this.canvasHeight}px`
                this.draw()
             })
          },
@@ -68,7 +127,7 @@
             this.paleData.views.push({type: 'text',text: this.title, css: { color: '#ffffff', top: '110px', left: '50px', fontSize: '40px'}})
             // 头像
             this.paleData.views.push({type: 'image',url: this.avatar, css: { width: '200px', height: '200px', top: '100px', right: '50px', borderRadius: '100px'}})
-            let date = this.itemData.class_date.split('-')
+            let date = this.itemData.class_date.split('/')
             // 年
             let year = date[0].split('')
             this.paleData.views.push({type: 'text',text: `${year[0]}   ${year[1]}   ${year[2]}   ${year[3]}`, css: { color: '#211715', top: '234px', left: '50px', fontSize: '40px', fontWeight: 'bold'}})
@@ -78,10 +137,8 @@
             const title = this.itemData.title
             // const title = '主题：主题：主题：主题：主题：主题：主题：主题：主题：主题：'
             const titleStartTop = startTop
-            const titleLen = getLength(title)
-            const titleMaxLine = 2
-            const titleLine = Math.ceil(titleLen / 30) > titleMaxLine ? titleMaxLine : Math.ceil(titleLen / 30)
-            const titleBgH = 130 + titleLine * 45
+            const titleMaxLine = this.titleData.maxLine
+            const titleBgH = this.titleData.height
             // 主题曲背景块
             this.paleData.views.push({type: 'rect',css: { width: '726px', height: `${titleBgH}px`, color: '#ffffff', top: `${titleStartTop}px`}})
             this.paleData.views.push({type: 'rect',css: { width: '726px', height: '2px', color: '#bababa', top: `${titleStartTop + titleBgH - 2}px`}})
@@ -90,18 +147,38 @@
             this.paleData.views.push({type: 'text',text: title, css: { width: '626px', color: '#211715', top: `${titleStartTop + 80}px`, left: '50px', fontSize: '40px', maxLines: titleMaxLine, lineHeight: '46px'}})
             // 课程核心内容部分
             const desp = this.itemData.description
-            // const title = '主题：主题：主题：主题：主题：主题：主题：主题：主题：主题：'
-            const despLen = getLength(desp)
+            // const desp = '主题：主题：主题：主题：主题：主题：主题：主题：主题：主题：题：主题：主题：主题：主题：主题：主题：'
             const despStartTop = startTop + titleBgH
-            const despMaxLine = 4
-            const despLine = Math.ceil(despLen / 30) > despMaxLine ? despMaxLine : Math.ceil(despLen / 30)
-            const despBgH = 130 + despLine * 45
+            const despMaxLine = this.despData.maxLine
+            const despBgH = this.despData.height
             // 主题曲背景块
             this.paleData.views.push({type: 'rect',css: { width: '726px', height: `${despBgH}px`, color: '#f4f4f4', top: `${despStartTop}px`}})
             this.paleData.views.push({type: 'rect',css: { width: '726px', height: '2px', color: '#bababa', top: `${despStartTop + despBgH - 2}px`}})
             // 主题
             this.paleData.views.push({type: 'text',text: `课程核心内容：`, css: { color: '#b9b9b9', top:`${despStartTop + 40}px`, left: '50px', fontSize: '25px'}})
             this.paleData.views.push({type: 'text',text: desp, css: { width: '626px', color: '#211715', top: `${despStartTop + 80}px`, left: '50px', fontSize: '40px', maxLines: despMaxLine, lineHeight: '46px'}})
+
+            // 评论图
+            const imgStartTop = despStartTop + despBgH + 60
+            let lastImgHeight = 0
+            let imgHeight = 0
+            for (let i of this.imagesData) {
+               this.paleData.views.push({type: 'image',url: i.path, css: { width: '600px', height: 'auto', top: `${imgStartTop + lastImgHeight}px`, left: '63px'}})
+               lastImgHeight = i.height + 50
+               imgHeight += i.height + 50
+            }
+
+            // 课程核心内容部分
+            const review = this.itemData.review
+            // const desp = '主题：主题：主题：主题：主题：主题：主题：主题：主题：主题：题：主题：主题：主题：主题：主题：主题：'
+            const reviewStartTop = imgStartTop + imgHeight + 10
+            const reviewMaxLine = this.reviewData.maxLine
+            const reviewBgH = this.reviewData.height
+            // 主题曲背景块
+            this.paleData.views.push({type: 'rect',css: { width: '726px', height: `${reviewBgH}px`, color: '#f4f4f4', top: `${reviewStartTop}px`}})
+            // 主题
+            this.paleData.views.push({type: 'text',text: `评语：`, css: { color: '#b9b9b9', top:`${reviewStartTop + 40}px`, left: '50px', fontSize: '25px'}})
+            this.paleData.views.push({type: 'text',text: review, css: { width: '626px', color: '#211715', top: `${reviewStartTop + 80}px`, left: '50px', fontSize: '25px', maxLines: reviewMaxLine, lineHeight: '46px'}})
          }
       }
    })

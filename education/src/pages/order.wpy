@@ -26,7 +26,7 @@
                <ul class="info">
                   <li class="info-item">
                      <div class="info-name">购买日期</div>
-                     <div class="info-value" style=" font-weight: bold; align-items: center;">{{item.updatetime_text}}</div>
+                     <div class="info-value" style=" font-weight: bold; align-items: center;">{{item.paytime_text}}</div>
                   </li>
                   <li class="info-item" :style="{'border-width': item.refund_order_no !== '' ? '1prx' : '0'}">
                      <div class="info-name">购买课程</div>

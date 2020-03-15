@@ -72,7 +72,6 @@
          }
       },
       onShow () {
-         console.log(this.personalInfo)
          this.getData()
       },
       methods: {

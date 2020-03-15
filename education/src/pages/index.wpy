@@ -72,6 +72,7 @@ wepy.page({
          }).then(res => {
             app.$wepy.$options.globalData.userInfo = res.data.userInfo
             const now = new Date().getTime()
+            store.commit('setPersonInfo', res.data.userInfo)
             wx.setStorageSync('lastGetCityTime', now)
             wx.setStorageSync('bbaUserInfo', res.data.userInfo)
             wx.navigateTo({

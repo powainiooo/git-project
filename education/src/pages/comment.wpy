@@ -1,10 +1,13 @@
 <style>
-   .page-img { width: 726rpx; display: block; margin: 30rpx auto 0 auto;}
+   .page-img { width: 726rpx; display: block; margin: 30rpx auto 0 auto; border-radius: 30rpx 30rpx 0 0}
+   .btn-share { width: 50rpx; height: 50rpx; display: flex; justify-content: center; align-items: center; position: absolute; top: 60rpx; right: 70rpx; z-index: 101;}
+   .btn-share .icon { width: 38rpx; height: 32rpx;}
 </style>
 
 <template>
    <div>
       <zHeader class="draw"></zHeader>
+      <div class="btn-share" @click="download"><img src="../res/img/icon-share.png" class="icon"/></div>
       <painter customStyle='position: absolute; left: -9999rpx;' :palette="paleData" bind:imgOK="onImgOK" widthPixels="1000"/>
       <img :src="imgSrc" class="page-img" mode="widthFix"/>
    </div>
@@ -47,10 +50,12 @@
             maxLine: 15
          },
          imagesData: [],
-         canvasHeight: 400
+         canvasHeight: 400,
+         id: 0
       },
       onLoad (option) {
          let id = option.id || 21
+         this.id = id
          this.getData(id)
       },
       computed: {
@@ -67,6 +72,10 @@
       },
       methods: {
          getData (id) {
+            wx.showLoading({
+               title: '生成评价中',
+               mask: true
+            })
             getCommentData({id}).then(res => {
                this.itemData = res.data
                if (this.itemData.images.length > 0) {
@@ -116,6 +125,7 @@
             })
          },
          onImgOK (e) {
+            wx.hideLoading()
             this.imgSrc = e.$wx.detail.path
             console.log(e)
          },
@@ -179,6 +189,38 @@
             // 主题
             this.paleData.views.push({type: 'text',text: `评语：`, css: { color: '#b9b9b9', top:`${reviewStartTop + 40}px`, left: '50px', fontSize: '25px'}})
             this.paleData.views.push({type: 'text',text: review, css: { width: '626px', color: '#211715', top: `${reviewStartTop + 80}px`, left: '50px', fontSize: '25px', maxLines: reviewMaxLine, lineHeight: '46px'}})
+         },
+         download () {
+            wx.showLoading({
+               title: '保存中',
+               mask: true
+            })
+            wx.saveImageToPhotosAlbum({
+               filePath: this.imgSrc,
+               success (res) {
+                  console.log(res)
+                  wx.hideLoading()
+                  wx.showToast({
+                     title: '保存成功',
+                     icon: 'success',
+                     duration: 2000
+                  })
+               },
+               fail (err) {
+                  wx.hideLoading()
+                  wx.showToast({
+                     image: '../res/img/warn.png',
+                     title: '保存失败',
+                     duration: 2000
+                  })
+               }
+            })
+         }
+      },
+      onShareAppMessage: function () {
+         return {
+            title: this.itemData.title,
+            path: 'pages/comment?id=' + this.itemData.id
          }
       }
    })

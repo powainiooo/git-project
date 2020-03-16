@@ -27,7 +27,7 @@
 </wxs>
 <template>
    <div>
-      <div class="container {{showMenu ? 'blur' : ''}}">
+      <div class="container {{showMenu ? 'blur' : ''}}" style="padding-bottom: 0;">
          <zHeader></zHeader>
          <div class="lesson-item lesson-item-detail">
             <img :src="itemData.image" class="img" mode="widthFix"/>
@@ -46,15 +46,15 @@
             <img src="../res/img/tips3.png" style="width: 70rpx; height: 70rpx; display: block; margin-bottom: 20rpx;"/>
             课程尚未开始，暂无课程评论。若已开始上课，尚未有课程评论，请耐心等候教师发布课程评论。
          </div>
-         <div class="list-frame" v-if="itemData.reviews.length !== 0">
-            <div class="year">{{util.format(itemData.reviews[0].class_date, 'year')}}</div>
+         <div class="list-frame" v-for="(item, key) in reviewsData">
+            <div class="year">{{key}}</div>
             <ul class="list">
-               <li class="list-item" v-for="i in itemData.reviews"
+               <li class="list-item" v-for="i in item"
                    :key="i.id"
                    @click="intoComment(i.id)"
                    hover-class="hscale"
                    hover-stay-time="10">
-                  <div class="date text-shadow">{{util.format(i.class_date, 'month')}}</div>
+                  <div class="date text-shadow">{{i.date}}</div>
                   <div class="name">{{i.title}}</div>
                </li>
             </ul>
@@ -73,11 +73,12 @@
       store,
       data: {
          itemData: {},
-         percent: 0
+         percent: 0,
+         reviewsData: {}
       },
       computed: mapState(['showMenu']),
       onLoad(query) {
-         const id = query.id || 13
+         const id = query.id || 15
          this.getData(id)
       },
       methods: {
@@ -85,6 +86,19 @@
             getCourseDetailByStudent({id}).then(res => {
                this.itemData = res.data
                this.percent = parseInt(this.itemData.use_num / this.itemData.num * 100)
+               let obj = {}
+               for (let i of res.data.reviews) {
+                  const date = i.class_date.split('/')
+                  if (obj[date[0]] === undefined) {
+                     obj[date[0]] = []
+                  }
+                  obj[date[0]].push({
+                     id: i.id,
+                     title: i.title,
+                     date: `${date[1]}/${date[2]}`
+                  })
+               }
+               this.reviewsData = obj
             })
          },
          intoComment (id) {

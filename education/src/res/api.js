@@ -16,6 +16,9 @@ const ajax = (opts, autoMsg = true) => {
             'Content-Type': 'application/x-www-form-urlencoded'
          },
          success(res) {
+            console.log('token', token)
+            console.log('请求参数', opts)
+            console.log('返回数据', res)
             if (res.data.status === 0) {
                resolve(res.data)
             } else {
@@ -146,5 +149,13 @@ export const upload = url => {
       url: `${baseUrl}/api/common/upload`,
       filePath: url,
       name: 'file'
+   })
+}
+// 订单列表/购买记录
+export const getCommentData = data => {
+   return ajax({
+      method: 'POST',
+      url: `${baseUrl}/api/review/detail`,
+      data
    })
 }

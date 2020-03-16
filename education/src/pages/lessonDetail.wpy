@@ -16,6 +16,7 @@
 </style>
 <wxs module="util" lang="babel">
    const format = (date, type) => {
+      if (date === undefined) return ''
       if (type === 'year') {
          return date.substring(0, 4)
       } else if (type === 'month') {
@@ -41,10 +42,18 @@
                <div class="line" :style="{width: percent + '%'}"></div>
             </div>
          </div>
+         <div class="hint" v-if="itemData.reviews.length === 0">
+            <img src="../res/img/tips3.png" style="width: 70rpx; height: 70rpx; display: block; margin-bottom: 20rpx;"/>
+            课程尚未开始，暂无课程评论。若已开始上课，尚未有课程评论，请耐心等候教师发布课程评论。
+         </div>
          <div class="list-frame" v-if="itemData.reviews.length !== 0">
             <div class="year">{{util.format(itemData.reviews[0].class_date, 'year')}}</div>
             <ul class="list">
-               <li class="list-item" v-for="i in itemData.reviews" :key="i.id">
+               <li class="list-item" v-for="i in itemData.reviews"
+                   :key="i.id"
+                   @click="intoComment(i.id)"
+                   hover-class="hscale"
+                   hover-stay-time="10">
                   <div class="date text-shadow">{{util.format(i.class_date, 'month')}}</div>
                   <div class="name">{{i.title}}</div>
                </li>
@@ -76,6 +85,15 @@
             getCourseDetailByStudent({id}).then(res => {
                this.itemData = res.data
                this.percent = parseInt(this.itemData.use_num / this.itemData.num * 100)
+            })
+         },
+         intoComment (id) {
+            store.commit('setLeassonData', {
+               name: this.itemData.name,
+               image: this.itemData.image
+            })
+            wx.navigateTo({
+               url: `/pages/comment?id=${id}`
             })
          }
       }

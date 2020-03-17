@@ -29,12 +29,7 @@
             width: '726px',
             height: '1000px',
             background: '#ffffff',
-            views: [
-               {type: 'rect',css: { width: '726px', height: '210px', color: '#e5ad84',}}, // 课程图底色块
-               {type: 'rect',css: { width: '726px', height: '188px', color: '#f4f4f4', top: '210px'}}, // 日期底色块
-               {type: 'rect',css: { width: '726px', height: '2px', color: '#bababa', top: '398px'}}, // 日期底线
-               {type: 'rect',css: { width: '210px', height: '2px', color: '#bababa', top: '284px', left: '50px'}}, // 日期分割线
-            ]
+            views: []
          },
          itemData: null,
          titleData: {
@@ -67,7 +62,8 @@
             return this.leassonData.image
          },
          avatar () {
-            return this.selectedStudent.avatar
+            // return this.selectedStudent.avatar
+            return 'https://bbart.waiting8.com/uploads/20200311/7c8eeaa8545fe894b86d85516d3226f2.png'
          }
       },
       methods: {
@@ -130,19 +126,23 @@
             console.log(e)
          },
          draw () {
+            this.paleData.views.push({type: 'rect',css: { width: '726px', height: '210px', color: '#e5ad84',}}) // 课程图底色块
+            this.paleData.views.push({type: 'rect',css: { width: '726px', height: '188px', color: '#f4f4f4', top: '210px'}}) // 日期底色块
+            this.paleData.views.push({type: 'rect',css: { width: '726px', height: '2px', color: '#bababa', top: '398px'}}) // 日期底线
+            this.paleData.views.push({type: 'rect',css: { width: '210px', height: '2px', color: '#bababa', top: '284px', left: '50px'}}) // 日期分割线
             let startTop = 400 // 变动区开始绘制的top 距离
             // 课程图
             this.paleData.views.push({type: 'image',url: this.bgSrc, css: { width: '726px', height: '210px', top: '0px', left: '0px'}})
             // 课程名
             this.paleData.views.push({type: 'text',text: this.title, css: { color: '#ffffff', top: '110px', left: '50px', fontSize: '40px'}})
             // 头像
-            this.paleData.views.push({type: 'image',url: this.avatar, css: { width: '200px', height: '200px', top: '100px', right: '50px', borderRadius: '100px'}})
+            this.paleData.views.push({type: 'image',url: this.avatar, css: { width: '200px', height: '200px', top: '100px', right: '50px', borderRadius: '100px',borderWidth: '2px',borderColor: '#b9bfaba'}})
             let date = this.itemData.class_date.split('/')
             // 年
             let year = date[0].split('')
-            this.paleData.views.push({type: 'text',text: `${year[0]}   ${year[1]}   ${year[2]}   ${year[3]}`, css: { color: '#211715', top: '234px', left: '50px', fontSize: '40px', fontWeight: 'bold'}})
+            this.paleData.views.push({type: 'text',text: `${year[0]}    ${year[1]}    ${year[2]}   ${year[3]}`, css: { color: '#211715', top: '234px', left: '50px', fontSize: '40px', fontWeight: 'bold'}})
             // 月日
-            this.paleData.views.push({type: 'text',text: `${date[1]}/${date[2]}`, css: { color: '#211715', top: '284px', left: '50px', fontSize: '70px', fontWeight: 'bold'}})
+            this.paleData.views.push({type: 'text',text: `${date[1]} / ${date[2]}`, css: { color: '#211715', top: '284px', left: '50px', fontSize: '70px', fontWeight: 'bold',letterSpacing: '10px'}})
             // 主题部分
             const title = this.itemData.title
             // const title = '主题：主题：主题：主题：主题：主题：主题：主题：主题：主题：'

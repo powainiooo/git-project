@@ -1,0 +1,4 @@
+.list-item { height: 110rpx; border-bottom: 1px solid #e7e3e2; margin: 0 40rpx; display: flex; justify-content: space-between; align-items: center;}
+.list-item:last-child { border-bottom: none}
+.list-item .index { color: #d9c39f; font-size: 60rpx; font-family: Helve; margin-left: 20rpx;}
+.list-item .item { color: #372c1e; font-size: 28rpx;}

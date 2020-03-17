@@ -1,0 +1,10 @@
+@import 'res/css/helvetica.wxss';
+@import 'res/css/icons.wxss';
+/**app.wxss**/
+.container {
+    color: #372c1e;
+    margin-top: 220rpx;
+    padding-bottom: 200rpx;
+}
+.tap { transition: all 0.15s ease-out;}
+.tap-hover { transform: scale(0.95);}

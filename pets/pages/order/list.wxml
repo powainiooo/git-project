@@ -1,0 +1,43 @@
+<header-view>已预约订单 | Booked order</header-view>
+<view class="container container-order">
+    <view class="list-item"
+          wx:for="{{listData}}"
+          wx:for-item="item"
+          wx:key="{{item}}"
+          data-num="{{item.order_num}}"
+          bindtap="gotoDetail"
+          hover-class="list-item-hover"
+          hover-stay-time="50">
+        <view class="order-time {{item.status == 'used' ? 'order-time-used' : ''}} {{item.status == 'over' ? 'order-time-out' : ''}}">
+            <view></view>
+            <view class="year">{{m1.getStr(item.date,0,4)}}</view>
+            <view class="line">
+                <view class="date">
+                    <view class="month">{{m1.getStr(item.date,5,7)}}/</view>
+                    <view>
+                        <view class="day">{{m1.getStr(item.date,8,10)}}</view>
+                        <view class="week">{{item.week}}</view>
+                    </view>
+                </view>
+                <view class="time">{{item.worktime}}</view>
+            </view>
+        </view>
+    </view>
+
+    <view wx:if="{{listData.length == 0}}">
+        <view class="result-frame">
+            <view style="position: relative;">
+                <view class="icons icon-tips"></view>
+            </view>
+            <view class="title-en">Irrelevant Content!</view>
+            <view class="title-cn">无相关内容!</view>
+        </view>
+    </view>
+</view>
+
+<wxs module="m1">
+    function getStr(str,start,end){
+    return str.slice(start,end)
+    }
+    module.exports.getStr = getStr;
+</wxs>

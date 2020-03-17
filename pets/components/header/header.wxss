@@ -1,0 +1,10 @@
+@import '../../res/css/icons.wxss';
+
+.header{ width: 100%; position: fixed; left: 0; top: 0; z-index: 500;}
+.header-logo{ width: 100%; height: 100rpx; background-color: #d9c39f; display: flex; align-items: center; color: #ffffff; padding-left: 60rpx; transition: all 0.25s ease-out;}
+.header-logo .logo { width: 60rpx; height: 80rpx; transition: all 0.25s ease-out;}
+.header-logo .logo-title { width: 125rpx; height: 80rpx; transition: all 0.25s ease-out; opacity: 0;}
+.header-large .header-logo{ height: 300rpx;}
+.header-large .header-logo .logo { width: 120rpx; height: 160rpx;}
+.header-large .header-logo .logo-title { width: 250rpx; height: 160rpx; opacity: 1;}
+.header .title{ font-size: 34rpx; height: 120rpx; padding: 0 50rpx; display: flex; align-items: center; background-color: #e7e3e2; color: #372c1e;}

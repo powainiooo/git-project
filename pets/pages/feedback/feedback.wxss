@@ -1,0 +1,5 @@
+.star-list{ height: 200rpx; padding: 0 60rpx; display: flex; justify-content: space-between; align-items: center;  font-size: 80rpx; color: #e7e3e2;}
+.star-list .active{ color: #dac49f;}
+.title{ margin: 0 60rpx;font-size: 30rpx; text-align: right;}
+
+.textarea{ width: 100%; display: block; border: 1rpx solid #e4e4e4; border-radius: 10rpx;}

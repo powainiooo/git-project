@@ -1,0 +1,27 @@
+{
+   "pages": [
+      "pages/select/second",
+      "pages/select/select",
+      "pages/index/index",
+      "pages/package/package",
+      "pages/date/date",
+      "pages/requires/requires",
+      "pages/feedback/feedback",
+      "pages/store/store",
+      "pages/order/list",
+      "pages/result/result",
+      "pages/package/personal",
+      "pages/order/confirm",
+      "pages/information/information",
+      "pages/package/editor",
+      "pages/logs/logs",
+      "pages/order/detail"
+   ],
+   "window": {
+      "backgroundTextStyle": "light",
+      "navigationBarBackgroundColor": "#d9c39f",
+      "navigationBarTitleText": "",
+      "navigationBarTextStyle": "white"
+   },
+   "sitemapLocation": "sitemap.json"
+}

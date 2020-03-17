@@ -1,0 +1,32 @@
+<header-view>选择时间段 | Selection time</header-view>
+<view class="container container-date">
+   <view class="datepicker fadeIn1">
+      <view class="fadeIn2">
+         <view class="selects">
+            <view class="btn-frame" hover-class="{{prevBtnDisable ? '' : 'btn-hover'}}" bindtap="prevMonth">
+               <image src="../../res/img/btn-left.png" class="btn btn-prev {{prevBtnDisable ? 'btn-prev-disabled' : ''}}" mode="widthFix"></image>
+            </view>
+            <text class="month">{{year}}/{{month + 1 < 10 ? '0' + (month + 1) : month + 1}}</text>
+            <view class="btn-frame" hover-class="btn-hover" bindtap="nextMonth">
+               <image src="../../res/img/btn-right.png" class="btn btn-next" mode="widthFix"></image>
+            </view>
+         </view>
+         <view class="date-week">
+            <view class="date-week-item"
+                  wx:for="{{week}}"
+                  wx:for-item="item"
+                  wx:key="{{item}}"><text>{{item}}</text></view>
+         </view>
+         <view class="date-days">
+            <view class="date-days-item {{item.activity ? 'date-days-item-light' : ''}} {{selectedDate === item.date ? 'date-days-item-active' : ''}}"
+                  wx:for="{{daysList}}"
+                  wx:for-item="item"
+                  wx:for-index="index"
+                  wx:key="{{item.date}}"
+                  data-item="{{item}}"
+                  bindtap="selectDate">{{item.day}}</view>
+         </view>
+      </view>
+   </view>
+</view>
+<footer-view bindbtn="doConfirm"><view slot="btn">下一步 | Next</view></footer-view>

@@ -1,0 +1,57 @@
+<header-view>选择洗护套餐 | Selection packages</header-view>
+<view class="container container-date">
+    <view wx:for="{{listData}}"
+          wx:for-item="item"
+          wx:for-index="index"
+          wx:key="{{item.id}}"
+          data-id="{{item.id}}"
+          data-index="{{index}}"
+          data-price="{{item.price}}"
+          bindtap="doselected"
+          class="packages-item {{item.recom == '1' ? 'packages-item-recommond' : ''}} {{selectedId == item.id ? 'packages-item-selected' : ''}}"
+          hover-class="packages-item-hover"
+          hover-stay-time="50">
+        <view class="line1">
+            <view>
+                <view class="name">{{item.englist_name}}</view>
+                <view class="name">{{item.china_name}}</view>
+            </view>
+            <view class="price">{{item.price}}<text>元</text></view>
+        </view>
+        <view class="line2">
+            <view class="pro-item" catchtap="openDetail"
+                  data-id="{{item.pro_one.id}}"
+                  wx:if="{{item.pro_one != '0'}}"
+                  hover-stop-propagation="true"
+                  hover-class="pro-item-hover"
+                  hover-stay-time="50"><view class="frame"><image src="{{imgSrc+item.pro_one.share_logo}}" mode="scaleToFill"></image></view></view>
+            <view class="pro-item" catchtap="openDetail"
+                  wx:if="{{item.pro_two != '0'}}"
+                  data-id="{{item.pro_two.id}}"
+                  hover-stop-propagation="true"
+                  hover-class="pro-item-hover"
+                  hover-stay-time="50"><view class="frame"><image src="{{imgSrc+item.pro_two.share_logo}}" mode="scaleToFill"></image></view></view>
+            <view class="pro-item" catchtap="openDetail"
+                  wx:if="{{item.pro_three != '0'}}"
+                  data-id="{{item.pro_three.id}}"
+                  hover-stop-propagation="true"
+                  hover-class="pro-item-hover"
+                  hover-stay-time="50"><view class="frame"><image src="{{imgSrc+item.pro_three.share_logo}}" mode="scaleToFill"></image></view></view>
+        </view>
+        <view class="line3">适用于：{{item.apply}}</view>
+        <view class="icons icon-weixuan"></view>
+        <view class="icons icon-xuanzhong"></view>
+    </view>
+    <view class="pro-more" bindtap="gotoSelect">
+        <view class="icons icon-more"></view>
+        <text class="name">Customized package \n 自定义套餐</text>
+        <view class="icons icon-zixuan1"></view>
+    </view>
+</view>
+<footer-view showPrice bindbtn="doNext">
+    <view slot="price">{{selectedPrice}}</view>
+    <view slot="btn">下一步 | Next</view>
+</footer-view>
+
+<!--pro detail-->
+<detail-view showDetails="{{showDetails}}" prodata="{{proDetailData}}"></detail-view>

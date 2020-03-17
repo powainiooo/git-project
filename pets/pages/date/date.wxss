@@ -1,0 +1,18 @@
+.container-date{ margin-top: 270rpx; padding-bottom: 250rpx;}
+.datepicker { position: relative;}
+
+.datepicker .selects { width: 350rpx; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;}
+.datepicker .selects .month { font-size: 60rpx; font-family: 'Helve';}
+.datepicker .selects .btn-frame { width: 40rpx; height: 40rpx; display: flex; justify-content: center; align-items: center;}
+.datepicker .selects .btn { width: 20rpx;}
+.datepicker .selects .btn-prev-disabled { opacity: 0.5;}
+
+.datepicker .date-week { width: 742rpx; margin: 0 auto 6rpx auto; display: flex}
+.datepicker .date-week .date-week-item { width: 98rpx; height: 98rpx; margin: 0 4rpx; display: flex; justify-content: center; align-items: center; font-size: 22rpx; color: #9D9C9C; text-align: center;}
+
+.datepicker .date-days { width: 742rpx; margin: 0 auto; display: flex; flex-wrap: wrap;}
+.datepicker .date-days .date-days-item { width: 98rpx; height: 98rpx; box-sizing: border-box; border-radius: 10rpx; margin:0 4rpx 8rpx 4rpx; border: 2rpx solid #E6E3E1; font-size: 66rpx; display: flex; justify-content: center; align-items: center; color: #9D9C9C; font-family: 'Helve'; background-color: #E6E3E1;}
+.datepicker .date-days .date-days-item-light { color: #362B1D; border-color: #D9C39F; text-shadow: 0 0 3px rgba(0,0,0,0.25); background-color: #ffffff;}
+.datepicker .date-days .date-days-item-active { color: #ffffff; border-color: #D9C39F; background-color: #D9C39F;}
+
+

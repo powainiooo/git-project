@@ -1,0 +1,28 @@
+<header-view>细化宠物类型 | Selection</header-view>
+<view class="container container-selection">
+   <block wx:for="{{dogList}}"
+          wx:for-item="list"
+          wx:for-index="name"
+          wx:key="{{name}}">
+      <view class="type-name" id="{{name}}">{{name}}</view>
+      <view wx:for="{{list}}"
+            class="type-item tap {{selectItem === 'dog' ? 'type-item-select' : ''}}"
+            hover-class="tap-hover"
+            hover-stay-time="10"
+            data-item="dog"
+            bindtap="doSelect">
+         <image src="../../res/img/dog2.png" class="img"></image>
+         <view class="name">拉布拉多 | <text>Labrador</text></view>
+      </view>
+   </block>
+   <view class="nav">
+      <view wx:for="{{dogList}}"
+            wx:for-index="name"
+            wx:key="{{name}}"
+            data-id="{{name}}"
+            bindtap="gotoBlock">{{name}}</view>
+   </view>
+</view>
+<footer-view bindbtn="doNext">
+   <view slot="btn">下一步 | Next</view>
+</footer-view>

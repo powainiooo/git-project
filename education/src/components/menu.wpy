@@ -30,7 +30,7 @@
             <img src="../res/img/icon-close.png" mode="widthFix" class="icon" v-if="showMenu"/>
          </div>
          <div class="btn-next {{showMenu ? 'blur' : ''}} {{btnDisable ? 'btn-disable' : ''}}"
-              :hover-class="btnDisable ? '' : 'hscale'"
+              :hover-class="(showMenu || btnDisable) ? '' : 'hscale'"
               hover-stay-time="10"
               @click="doFunc"
               v-if="func !== 'menu'">{{btnText}}</div>
@@ -86,6 +86,7 @@
          },
          doFunc () {
             if (this.btnDisable) return
+            if (this.showMenu) return
             this.$emit('doFunc')
          },
          tmove () {},

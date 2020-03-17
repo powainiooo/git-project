@@ -18,7 +18,7 @@
    .footer .button { width: 540rpx; height: 170rpx; border-radius: 30rpx; background-color: #e5ad84; display: flex; justify-content: center; align-items: center; box-shadow: 0 20rpx 15rpx rgba(0, 0, 0, 0.12); font-size: 40rpx; color: #ffffff; text-shadow: 0 0 3px rgba(54, 42, 26, 0.33); transition: all 0.15s ease-out; border: none;}
 
    .student-item { height: 170rpx; margin: 0 40rpx 40rpx 40rpx; display: flex; align-items: center; justify-content: space-between; padding: 0 30rpx; background-color: #ffffff; border-radius: 30rpx; box-shadow: 0 20rpx 15rpx rgba(0, 0, 0, 0.15); transition: transform 0.1s linear;}
-   .student-item .avatar { width: 140rpx; height: 140rpx; display: block; border-radius: 50%; box-shadow: 0 0 1px rgba(0, 0, 0, 0.28);}
+   .student-item .avatar { width: 140rpx; height: 140rpx; display: block; border-radius: 50%; box-shadow: 0 0 2px rgba(0, 0, 0, 0.28);}
    .student-item .name { color: #221715; font-size: 35rpx;}
 
    .lesson-item { margin: 0 40rpx 40rpx 40rpx; display: flex; align-items: center; justify-content: center; background-color: #e5ad84; border-radius: 30rpx; box-shadow: 0 20rpx 15rpx rgba(0, 0, 0, 0.12); position: relative; overflow: hidden; transition: transform 0.1s linear;}
@@ -117,8 +117,8 @@
    {
    "pages": [
       "pages/index",
-      "pages/lessonDetail",
       "pages/comment",
+      "pages/lessonDetail",
       "pages/lesson",
       "pages/store",
       "pages/order",

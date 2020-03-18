@@ -72,6 +72,9 @@
             console.log(args)
          })
          this.onlogin()
+         wx.onAppRoute(res => {
+            store.commit('toggleMenu', false)
+         })
       },
 
       methods: {
@@ -117,10 +120,10 @@
    {
    "pages": [
       "pages/index",
+      "pages/lessonDetail",
+      "pages/order",
       "pages/store",
       "pages/comment",
-      "pages/order",
-      "pages/lessonDetail",
       "pages/lesson",
       "pages/studentlesson",
       "pages/password",

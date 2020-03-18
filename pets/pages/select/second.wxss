@@ -1,10 +1,12 @@
-.container-selection{ margin-top: 290rpx;}
+.container-selection{ padding-top: 220rpx; height: 100vh; box-sizing: border-box; margin-top: 0;}
 .type-item { width: 660rpx; height: 166rpx; margin: 0 auto 30rpx auto; border-radius: 20rpx; position: relative; background-color: #ddd9d8; box-shadow: 0 10px 20px 0 rgba(0,0,0,0.12);}
 .type-item-select { background-color: #dac49f;}
 .type-item .img { width: 250rpx; height: 100%; position: absolute; top: 0; right: 0;}
 .type-item .name { font-size: 34rpx; position: absolute; top: 56rpx; left: 40rpx; display: flex; align-items: center;}
 .type-item .name text { font-size: 40rpx; font-family: 'Helve'; margin-left: 5rpx;}
 .type-name { font-size: 100rpx; line-height: 100rpx; color: #362B1D; text-shadow: 0 0 3rpx rgba(0,0,0,0.25); margin-bottom: 30rpx; margin-left: 70rpx;font-family: 'Helve';}
+.container-selection .section { padding: 50rpx 0 30rpx;}
+.container-selection .section .type-item:last-child { margin-bottom: 0;}
 
 .nav { display: flex; flex-direction: column; justify-content: center; align-items: center; position: fixed; top: 0; bottom: 0; right: 10rpx; z-index: 100;}
 .nav view { font-size: 20rpx; color: #9D9C9C;}

@@ -1,24 +1,25 @@
 {
-  "pages": [
-    "pages/index/index",
-    "pages/select/select",
-    "pages/feedback/feedback",
-    "pages/store/store",
-    "pages/order/list",
-    "pages/result/result",
-    "pages/date/date",
-    "pages/package/personal",
-    "pages/order/confirm",
-    "pages/package/package",
-    "pages/information/information",
-    "pages/package/editor",
-    "pages/logs/logs",
-    "pages/order/detail"
-  ],
-  "window": {
-    "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#d9c39f",
-    "navigationBarTitleText": "",
-    "navigationBarTextStyle": "white"
-  }
+   "pages": [
+      "pages/index/index",
+      "pages/select/select",
+      "pages/feedback/feedback",
+      "pages/store/store",
+      "pages/order/list",
+      "pages/result/result",
+      "pages/date/date",
+      "pages/package/personal",
+      "pages/order/confirm",
+      "pages/package/package",
+      "pages/information/information",
+      "pages/package/editor",
+      "pages/logs/logs",
+      "pages/order/detail"
+   ],
+   "window": {
+      "backgroundTextStyle": "light",
+      "navigationBarBackgroundColor": "#d9c39f",
+      "navigationBarTitleText": "",
+      "navigationBarTextStyle": "white"
+   },
+   "sitemapLocation": "sitemap.json"
 }

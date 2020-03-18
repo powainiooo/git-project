@@ -10,8 +10,8 @@
    .list-frame { margin-bottom: 80rpx;}
    .list-frame .year { font-size: 40rpx; color: #cacaca; margin-bottom: 24rpx; margin-left: 50rpx;}
    .list-frame .list { width: 696rpx; display: flex; flex-wrap: wrap; margin: 0 auto;}
-   .list-frame .list .list-item { width: 200rpx; height: 200rpx; border-radius: 30rpx; box-shadow: 0 20rpx 15rpx rgba(0, 0, 0, 0.15); background-color: #ffffff; overflow: hidden; margin: 0 16rpx 32rpx 16rpx;}
-   .list-frame .list .list-item .date { height: 70rpx; display: flex; justify-content: center; align-items: center;  font-size: 40rpx; color: #ffffff; background-color: #e5ad84;}
+   .list-frame .list .list-item { width: 200rpx; height: 200rpx; border-radius: 30rpx; box-shadow: 0 25rpx 20rpx rgba(0, 0, 0, 0.1); background-color: #ffffff; overflow: hidden; margin: 0 16rpx 32rpx 16rpx;}
+   .list-frame .list .list-item .date { height: 70rpx; display: flex; justify-content: center; align-items: center;  font-size: 40rpx; color: #ffffff; background-color: #e5ad84; letter-spacing: 4rpx;}
    .list-frame .list .list-item .name { height: 130rpx; display: flex; justify-content: center; align-items: center; font-size: 25rpx; color: #878887;}
 </style>
 <wxs module="util" lang="babel">

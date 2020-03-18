@@ -1,28 +1,54 @@
 <style>
+   /*.comment { transition: all 0.15s ease-out;}*/
    .page-img { width: 726rpx; display: block; margin: 30rpx auto 0 auto; border-radius: 30rpx 30rpx 0 0}
    .btn-share { width: 50rpx; height: 50rpx; display: flex; justify-content: center; align-items: center; position: absolute; top: 60rpx; right: 70rpx; z-index: 101;}
    .btn-share .icon { width: 38rpx; height: 32rpx;}
    .menu-share { position: fixed; left: 12rpx; right: 12rpx; bottom: -500rpx; background-color: #ffffff; z-index: 100; border-radius: 20rpx; overflow: hidden; transition: bottom 0.5s cubic-bezier(.21,.68,.27,1.01);}
    .menu-share-show { bottom: 40rpx;}
    .menu-share:before { content: ''; height: 2rpx; background-color: #ececec; position: absolute; bottom: 160rpx; left: 12rpx; right: 12rpx;}
-   .menu-share .menu-share-item { width: 100%; display: flex; align-items: center; height: 160rpx; font-size: 40rpx; color: #221715; padding-left: 50rpx; border-bottom: 2rpx solid #ececec; text-shadow: 0 0 3px rgba(54, 42, 26, 0.33); transition: all 0.15s ease-out; border: none; border-radius: 0;}
+   .menu-share .menu-share-item { width: 100%; display: flex; align-items: center; height: 160rpx; font-size: 40rpx; color: #221715; padding-left: 50rpx; text-shadow: 0 0 3px rgba(54, 42, 26, 0.33); transition: all 0.15s ease-out; border: none; border-radius: 0;}
    .menu-share .menu-share-item .en { font-weight: bold; margin-left: 10rpx;}
    .menu-share .ben-close { width: 56rpx; height: 56rpx; position: absolute; top: 56rpx; right: 44rpx;}
+   .menu-share .ben-close .icon { width: 100%; height: 100%;}
+   .menu-share-bg { position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 90;}
 </style>
 
 <template>
-   <div>
+<div>
+   <div class="comment {{showMenu ? 'blur' : ''}}">
       <zHeader class="draw"></zHeader>
-      <div class="btn-share" @click="showMenu = true"><img src="../res/img/icon-share.png" class="icon"/></div>
+      <div class="btn-share"
+           @click="showMenu = true"
+           hover-class="hscale"
+           hover-stay-time="10">
+         <img src="../res/img/icon-share.png" class="icon"/>
+      </div>
       <painter customStyle='position: absolute; left: -9999rpx;' :palette="paleData" bind:imgOK="onImgOK" widthPixels="1000"/>
       <img :src="imgSrc" class="page-img" mode="widthFix"/>
-      <div class="menu-share" :class="{'menu-share-show':showMenu}">
-         <div class="menu-share-item" style="background-color: #e5ad84; color: #ffffff;">分享</div>
-         <button class="menu-share-item" plain @click="download">保存海报 |  <span class="en">Save</span></button>
-         <button class="menu-share-item" plain open-type="share">转发给好友 |  <span class="en">Transmit</span></button>
-         <img src="../res/img/icon-close.png" class="ben-close" @click="showMenu = false">
-      </div>
    </div>
+   <div class="menu-share-bg" v-if="showMenu" @touchmove.stop="tmove"></div>
+   <div class="menu-share" :class="{'menu-share-show':showMenu}">
+      <div class="menu-share-item" style="background-color: #e5ad84; color: #ffffff;">分享</div>
+      <button class="menu-share-item"
+              plain
+              @click="download"
+              hover-class="hscale"
+              hover-stay-time="10">保存海报 |  <span class="en">Save</span></button>
+      <button class="menu-share-item"
+              plain
+              open-type="share"
+              hover-class="hscale"
+              hover-stay-time="10"
+              @click="showMenu = false">转发给好友 |  <span class="en">Transmit</span></button>
+      <view class="ben-close"
+            @click="showMenu = false"
+            hover-class="hscale"
+            hover-stay-time="10">
+         <img src="../res/img/icon-close.png" class="icon">
+      </view>
+   </div>
+</div>
+
 </template>
 
 <script>
@@ -62,7 +88,7 @@
          showMenu: false
       },
       onLoad (option) {
-         let id = option.id || 21
+         let id = option.id || 34
          this.id = id
          this.getData(id)
       },
@@ -102,6 +128,7 @@
                arr.push(getImageInfo({src: i}))
             }
             Promise.all(arr).then(res => {
+               wx.hideLoading()
                console.log(res)
                const title = this.itemData.title
                const titleLen = getLength(title)
@@ -125,7 +152,9 @@
                this.canvasHeight += this.reviewData.height
 
                for (let i of res) {
-                  this.canvasHeight += i.height + 50
+                  const h = Math.floor(600 * i.height / i.width)
+                  i.height = h
+                  this.canvasHeight += h + 50
                }
                this.canvasHeight += 10
                this.imagesData = res
@@ -134,15 +163,14 @@
             })
          },
          onImgOK (e) {
-            wx.hideLoading()
             this.imgSrc = e.$wx.detail.path
             console.log(e)
          },
          draw () {
             this.paleData.views.push({type: 'rect', css: {width: '726px', height: '210px', color: '#e5ad84'}}) // 课程图底色块
             this.paleData.views.push({type: 'rect', css: {width: '726px', height: '188px', color: '#f4f4f4', top: '210px'}}) // 日期底色块
-            this.paleData.views.push({type: 'rect', css: {width: '726px', height: '2px', color: '#bababa', top: '398px'}}) // 日期底线
-            this.paleData.views.push({type: 'rect', css: {width: '210px', height: '2px', color: '#bababa', top: '284px', left: '50px'}}) // 日期分割线
+            this.paleData.views.push({type: 'rect', css: {width: '726px', height: '2px', color: '#ececec', top: '398px'}}) // 日期底线
+            this.paleData.views.push({type: 'rect', css: {width: '215px', height: '2px', color: '#d7d7d7', top: '284px', left: '50px'}}) // 日期分割线
             let startTop = 400 // 变动区开始绘制的top 距离
             // 课程图
             this.paleData.views.push({type: 'image', url: this.bgSrc, css: {width: '726px', height: '210px', top: '0px', left: '0px'}})
@@ -153,9 +181,9 @@
             let date = this.itemData.class_date.split('/')
             // 年
             let year = date[0].split('')
-            this.paleData.views.push({type: 'text', text: `${year[0]}    ${year[1]}    ${year[2]}   ${year[3]}`, css: {color: '#211715', top: '234px', left: '50px', fontSize: '40px', fontWeight: 'bold'}})
+            this.paleData.views.push({type: 'text', text: `${year[0]}    ${year[1]}   ${year[2]}    ${year[3]}`, css: {color: '#211715', top: '234px', left: '50px', fontSize: '40px', fontWeight: 'bold'}})
             // 月日
-            this.paleData.views.push({type: 'text', text: `${date[1]} / ${date[2]}`, css: {color: '#211715', top: '284px', left: '50px', fontSize: '70px', fontWeight: 'bold', letterSpacing: '10px'}})
+            this.paleData.views.push({type: 'text', text: `${date[1]}/${date[2]}`, css: {color: '#211715', top: '284px', left: '40px', fontSize: '90px', fontWeight: 'bold', letterSpacing: '10px'}})
             // 主题部分
             const title = this.itemData.title
             // const title = '主题：主题：主题：主题：主题：主题：主题：主题：主题：主题：'
@@ -164,7 +192,7 @@
             const titleBgH = this.titleData.height
             // 主题曲背景块
             this.paleData.views.push({type: 'rect', css: {width: '726px', height: `${titleBgH}px`, color: '#ffffff', top: `${titleStartTop}px`}})
-            this.paleData.views.push({type: 'rect', css: {width: '726px', height: '2px', color: '#bababa', top: `${titleStartTop + titleBgH - 2}px`}})
+            this.paleData.views.push({type: 'rect', css: {width: '726px', height: '2px', color: '#ececec', top: `${titleStartTop + titleBgH - 2}px`}})
             // 主题
             this.paleData.views.push({type: 'text', text: `主题：`, css: {color: '#b9b9b9', top: `${titleStartTop + 40}px`, left: '50px', fontSize: '25px'}})
             this.paleData.views.push({type: 'text', text: title, css: {width: '626px', color: '#211715', top: `${titleStartTop + 80}px`, left: '50px', fontSize: '40px', maxLines: titleMaxLine, lineHeight: '46px'}})
@@ -176,7 +204,7 @@
             const despBgH = this.despData.height
             // 主题曲背景块
             this.paleData.views.push({type: 'rect', css: {width: '726px', height: `${despBgH}px`, color: '#f4f4f4', top: `${despStartTop}px`}})
-            this.paleData.views.push({type: 'rect', css: {width: '726px', height: '2px', color: '#bababa', top: `${despStartTop + despBgH - 2}px`}})
+            this.paleData.views.push({type: 'rect', css: {width: '726px', height: '2px', color: '#ececec', top: `${despStartTop + despBgH - 2}px`}})
             // 主题
             this.paleData.views.push({type: 'text', text: `课程核心内容：`, css: {color: '#b9b9b9', top: `${despStartTop + 40}px`, left: '50px', fontSize: '25px'}})
             this.paleData.views.push({type: 'text', text: desp, css: {width: '626px', color: '#211715', top: `${despStartTop + 80}px`, left: '50px', fontSize: '40px', maxLines: despMaxLine, lineHeight: '46px'}})
@@ -229,11 +257,14 @@
                   })
                }
             })
-         }
+         },
+         tmove () {},
+         tapShare () {}
       },
       onShareAppMessage: function () {
          return {
             title: this.itemData.title,
+            // imageUrl: this.imgSrc,
             path: 'pages/comment?id=' + this.itemData.id
          }
       }

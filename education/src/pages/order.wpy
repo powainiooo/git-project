@@ -6,7 +6,7 @@
    .order-item .line1 .info { width: 400rpx; margin: 0 10rpx 0 16rpx;}
    .order-item .line1 .info-item { padding: 10rpx 0; display: flex; align-items: center; border-bottom: 1rpx solid #cacbcd;}
    .order-item .line1 .info-name { width: 144rpx; height: 44rpx; margin-right: 30rpx; border-right: 1rpx solid #cacbcd;  color: #cacbcd; font-size: 25rpx; display: flex; justify-content: center; align-items: center;}
-   .order-item .line1 .info-value { height: 40rpx;  color: #211715; font-size: 25rpx; display: flex; justify-content: center; align-items: baseline; font-family: Arial;}
+   .order-item .line1 .info-value { height: 40rpx;  color: #211715; font-size: 25rpx; display: flex; justify-content: center; align-items: baseline; font-family: Arial; letter-spacing: 4rpx;}
    .order-item .line1 .info-value .info-num { font-size: 35rpx; font-weight: bold; margin: 0 5rpx;}
    .order-item .line1 .price { width: 230rpx; background-color: #e5ad84; font-size: 25rpx; color: #ffffff; display: flex; flex-direction: column; justify-content: center; align-items: center;}
    .order-item .line1 .price .pirce-item { text-align: center;}

@@ -2,7 +2,7 @@
 <view class="container container-information">
     <view style="background-color: #ffffff;">
         <view class="input" style="padding-top: 20rpx;">
-            <input placeholder="姓名" placeholder-class="place" data-name="name" bindinput="inputChange" />
+            <input placeholder="主人姓名" placeholder-class="place" data-name="name" bindinput="inputChange" />
         </view>
         <view class="input">
             <input placeholder="联系电话" placeholder-class="place" class="phone" maxlength="11" data-name="mobile" bindinput="inputChange"/>

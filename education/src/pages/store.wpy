@@ -1,6 +1,6 @@
 <style>
    .container .list { margin: 55rpx 40rpx 0 40rpx;}
-   .container .store-item { border-radius: 30rpx; overflow: hidden; box-shadow: 0 20rpx 15rpx rgba(0, 0, 0, 0.15); margin-bottom: 80rpx;  transition: transform 0.15s linear;}
+   .container .store-item { border-radius: 30rpx; overflow: hidden; box-shadow: 0 25rpx 20rpx rgba(0, 0, 0, 0.1); margin-bottom: 80rpx;  transition: transform 0.15s linear;}
    .container .store-item .img { width: 100%; height: 280rpx; display: block;}
    .container .store-item .info { height: 150rpx; background-color: #ffffff; display: flex; justify-content: space-between; align-items: center;}
    .container .store-item-select .info { background-color: #e5ad84;}

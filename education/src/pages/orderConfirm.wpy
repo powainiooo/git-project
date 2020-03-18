@@ -26,7 +26,7 @@
             </div>
          </div>
          <div class="title2 title3"><span class="en">Payment for Student</span> <br/> 购买学生</div>
-         <div class="student-item">
+         <div class="student-item" style="box-shadow: none">
             <img :src="orderData.student.avatar" class="avatar"/>
             <div class="name text-shadow">{{orderData.student.name}}</div>
          </div>

@@ -2,14 +2,26 @@
    .page-img { width: 726rpx; display: block; margin: 30rpx auto 0 auto; border-radius: 30rpx 30rpx 0 0}
    .btn-share { width: 50rpx; height: 50rpx; display: flex; justify-content: center; align-items: center; position: absolute; top: 60rpx; right: 70rpx; z-index: 101;}
    .btn-share .icon { width: 38rpx; height: 32rpx;}
+   .menu-share { position: fixed; left: 12rpx; right: 12rpx; bottom: -500rpx; background-color: #ffffff; z-index: 100; border-radius: 20rpx; overflow: hidden; transition: bottom 0.5s cubic-bezier(.21,.68,.27,1.01);}
+   .menu-share-show { bottom: 40rpx;}
+   .menu-share:before { content: ''; height: 2rpx; background-color: #ececec; position: absolute; bottom: 160rpx; left: 12rpx; right: 12rpx;}
+   .menu-share .menu-share-item { width: 100%; display: flex; align-items: center; height: 160rpx; font-size: 40rpx; color: #221715; padding-left: 50rpx; border-bottom: 2rpx solid #ececec; text-shadow: 0 0 3px rgba(54, 42, 26, 0.33); transition: all 0.15s ease-out; border: none; border-radius: 0;}
+   .menu-share .menu-share-item .en { font-weight: bold; margin-left: 10rpx;}
+   .menu-share .ben-close { width: 56rpx; height: 56rpx; position: absolute; top: 56rpx; right: 44rpx;}
 </style>
 
 <template>
    <div>
       <zHeader class="draw"></zHeader>
-      <div class="btn-share" @click="download"><img src="../res/img/icon-share.png" class="icon"/></div>
+      <div class="btn-share" @click="showMenu = true"><img src="../res/img/icon-share.png" class="icon"/></div>
       <painter customStyle='position: absolute; left: -9999rpx;' :palette="paleData" bind:imgOK="onImgOK" widthPixels="1000"/>
       <img :src="imgSrc" class="page-img" mode="widthFix"/>
+      <div class="menu-share" :class="{'menu-share-show':showMenu}">
+         <div class="menu-share-item" style="background-color: #e5ad84; color: #ffffff;">分享</div>
+         <button class="menu-share-item" plain @click="download">保存海报 |  <span class="en">Save</span></button>
+         <button class="menu-share-item" plain open-type="share">转发给好友 |  <span class="en">Transmit</span></button>
+         <img src="../res/img/icon-close.png" class="ben-close" @click="showMenu = false">
+      </div>
    </div>
 </template>
 
@@ -46,7 +58,8 @@
          },
          imagesData: [],
          canvasHeight: 400,
-         id: 0
+         id: 0,
+         showMenu: false
       },
       onLoad (option) {
          let id = option.id || 21
@@ -62,8 +75,8 @@
             return this.leassonData.image
          },
          avatar () {
-            // return this.selectedStudent.avatar
-            return 'https://bbart.waiting8.com/uploads/20200311/7c8eeaa8545fe894b86d85516d3226f2.png'
+            return this.selectedStudent.avatar
+            // return 'https://bbart.waiting8.com/uploads/20200311/7c8eeaa8545fe894b86d85516d3226f2.png'
          }
       },
       methods: {
@@ -126,23 +139,23 @@
             console.log(e)
          },
          draw () {
-            this.paleData.views.push({type: 'rect',css: { width: '726px', height: '210px', color: '#e5ad84',}}) // 课程图底色块
-            this.paleData.views.push({type: 'rect',css: { width: '726px', height: '188px', color: '#f4f4f4', top: '210px'}}) // 日期底色块
-            this.paleData.views.push({type: 'rect',css: { width: '726px', height: '2px', color: '#bababa', top: '398px'}}) // 日期底线
-            this.paleData.views.push({type: 'rect',css: { width: '210px', height: '2px', color: '#bababa', top: '284px', left: '50px'}}) // 日期分割线
+            this.paleData.views.push({type: 'rect', css: {width: '726px', height: '210px', color: '#e5ad84'}}) // 课程图底色块
+            this.paleData.views.push({type: 'rect', css: {width: '726px', height: '188px', color: '#f4f4f4', top: '210px'}}) // 日期底色块
+            this.paleData.views.push({type: 'rect', css: {width: '726px', height: '2px', color: '#bababa', top: '398px'}}) // 日期底线
+            this.paleData.views.push({type: 'rect', css: {width: '210px', height: '2px', color: '#bababa', top: '284px', left: '50px'}}) // 日期分割线
             let startTop = 400 // 变动区开始绘制的top 距离
             // 课程图
-            this.paleData.views.push({type: 'image',url: this.bgSrc, css: { width: '726px', height: '210px', top: '0px', left: '0px'}})
+            this.paleData.views.push({type: 'image', url: this.bgSrc, css: {width: '726px', height: '210px', top: '0px', left: '0px'}})
             // 课程名
-            this.paleData.views.push({type: 'text',text: this.title, css: { color: '#ffffff', top: '110px', left: '50px', fontSize: '40px'}})
+            this.paleData.views.push({type: 'text', text: this.title, css: {color: '#ffffff', top: '110px', left: '50px', fontSize: '40px'}})
             // 头像
-            this.paleData.views.push({type: 'image',url: this.avatar, css: { width: '200px', height: '200px', top: '100px', right: '50px', borderRadius: '100px',borderWidth: '2px',borderColor: '#b9bfaba'}})
+            this.paleData.views.push({type: 'image', url: this.avatar, css: {width: '200px', height: '200px', top: '100px', right: '50px', borderRadius: '100px', borderWidth: '2px', borderColor: '#b9baba'}})
             let date = this.itemData.class_date.split('/')
             // 年
             let year = date[0].split('')
-            this.paleData.views.push({type: 'text',text: `${year[0]}    ${year[1]}    ${year[2]}   ${year[3]}`, css: { color: '#211715', top: '234px', left: '50px', fontSize: '40px', fontWeight: 'bold'}})
+            this.paleData.views.push({type: 'text', text: `${year[0]}    ${year[1]}    ${year[2]}   ${year[3]}`, css: {color: '#211715', top: '234px', left: '50px', fontSize: '40px', fontWeight: 'bold'}})
             // 月日
-            this.paleData.views.push({type: 'text',text: `${date[1]} / ${date[2]}`, css: { color: '#211715', top: '284px', left: '50px', fontSize: '70px', fontWeight: 'bold',letterSpacing: '10px'}})
+            this.paleData.views.push({type: 'text', text: `${date[1]} / ${date[2]}`, css: {color: '#211715', top: '284px', left: '50px', fontSize: '70px', fontWeight: 'bold', letterSpacing: '10px'}})
             // 主题部分
             const title = this.itemData.title
             // const title = '主题：主题：主题：主题：主题：主题：主题：主题：主题：主题：'
@@ -150,11 +163,11 @@
             const titleMaxLine = this.titleData.maxLine
             const titleBgH = this.titleData.height
             // 主题曲背景块
-            this.paleData.views.push({type: 'rect',css: { width: '726px', height: `${titleBgH}px`, color: '#ffffff', top: `${titleStartTop}px`}})
-            this.paleData.views.push({type: 'rect',css: { width: '726px', height: '2px', color: '#bababa', top: `${titleStartTop + titleBgH - 2}px`}})
+            this.paleData.views.push({type: 'rect', css: {width: '726px', height: `${titleBgH}px`, color: '#ffffff', top: `${titleStartTop}px`}})
+            this.paleData.views.push({type: 'rect', css: {width: '726px', height: '2px', color: '#bababa', top: `${titleStartTop + titleBgH - 2}px`}})
             // 主题
-            this.paleData.views.push({type: 'text',text: `主题：`, css: { color: '#b9b9b9', top: `${titleStartTop + 40}px`, left: '50px', fontSize: '25px'}})
-            this.paleData.views.push({type: 'text',text: title, css: { width: '626px', color: '#211715', top: `${titleStartTop + 80}px`, left: '50px', fontSize: '40px', maxLines: titleMaxLine, lineHeight: '46px'}})
+            this.paleData.views.push({type: 'text', text: `主题：`, css: {color: '#b9b9b9', top: `${titleStartTop + 40}px`, left: '50px', fontSize: '25px'}})
+            this.paleData.views.push({type: 'text', text: title, css: {width: '626px', color: '#211715', top: `${titleStartTop + 80}px`, left: '50px', fontSize: '40px', maxLines: titleMaxLine, lineHeight: '46px'}})
             // 课程核心内容部分
             const desp = this.itemData.description
             // const desp = '主题：主题：主题：主题：主题：主题：主题：主题：主题：主题：题：主题：主题：主题：主题：主题：主题：'
@@ -162,18 +175,18 @@
             const despMaxLine = this.despData.maxLine
             const despBgH = this.despData.height
             // 主题曲背景块
-            this.paleData.views.push({type: 'rect',css: { width: '726px', height: `${despBgH}px`, color: '#f4f4f4', top: `${despStartTop}px`}})
-            this.paleData.views.push({type: 'rect',css: { width: '726px', height: '2px', color: '#bababa', top: `${despStartTop + despBgH - 2}px`}})
+            this.paleData.views.push({type: 'rect', css: {width: '726px', height: `${despBgH}px`, color: '#f4f4f4', top: `${despStartTop}px`}})
+            this.paleData.views.push({type: 'rect', css: {width: '726px', height: '2px', color: '#bababa', top: `${despStartTop + despBgH - 2}px`}})
             // 主题
-            this.paleData.views.push({type: 'text',text: `课程核心内容：`, css: { color: '#b9b9b9', top:`${despStartTop + 40}px`, left: '50px', fontSize: '25px'}})
-            this.paleData.views.push({type: 'text',text: desp, css: { width: '626px', color: '#211715', top: `${despStartTop + 80}px`, left: '50px', fontSize: '40px', maxLines: despMaxLine, lineHeight: '46px'}})
+            this.paleData.views.push({type: 'text', text: `课程核心内容：`, css: {color: '#b9b9b9', top: `${despStartTop + 40}px`, left: '50px', fontSize: '25px'}})
+            this.paleData.views.push({type: 'text', text: desp, css: {width: '626px', color: '#211715', top: `${despStartTop + 80}px`, left: '50px', fontSize: '40px', maxLines: despMaxLine, lineHeight: '46px'}})
 
             // 评论图
             const imgStartTop = despStartTop + despBgH + 60
             let lastImgHeight = 0
             let imgHeight = 0
             for (let i of this.imagesData) {
-               this.paleData.views.push({type: 'image',url: i.path, css: { width: '600px', height: 'auto', top: `${imgStartTop + lastImgHeight}px`, left: '63px'}})
+               this.paleData.views.push({type: 'image', url: i.path, css: {width: '600px', height: 'auto', top: `${imgStartTop + lastImgHeight}px`, left: '63px'}})
                lastImgHeight = i.height + 50
                imgHeight += i.height + 50
             }
@@ -185,10 +198,10 @@
             const reviewMaxLine = this.reviewData.maxLine
             const reviewBgH = this.reviewData.height
             // 主题曲背景块
-            this.paleData.views.push({type: 'rect',css: { width: '726px', height: `${reviewBgH}px`, color: '#f4f4f4', top: `${reviewStartTop}px`}})
+            this.paleData.views.push({type: 'rect', css: {width: '726px', height: `${reviewBgH}px`, color: '#f4f4f4', top: `${reviewStartTop}px`}})
             // 主题
-            this.paleData.views.push({type: 'text',text: `评语：`, css: { color: '#b9b9b9', top:`${reviewStartTop + 40}px`, left: '50px', fontSize: '25px'}})
-            this.paleData.views.push({type: 'text',text: review, css: { width: '626px', color: '#211715', top: `${reviewStartTop + 80}px`, left: '50px', fontSize: '25px', maxLines: reviewMaxLine, lineHeight: '46px'}})
+            this.paleData.views.push({type: 'text', text: `评语：`, css: {color: '#b9b9b9', top: `${reviewStartTop + 40}px`, left: '50px', fontSize: '25px'}})
+            this.paleData.views.push({type: 'text', text: review, css: {width: '626px', color: '#211715', top: `${reviewStartTop + 80}px`, left: '50px', fontSize: '25px', maxLines: reviewMaxLine, lineHeight: '46px'}})
          },
          download () {
             wx.showLoading({
@@ -207,6 +220,7 @@
                   })
                },
                fail (err) {
+                  console.log(err)
                   wx.hideLoading()
                   wx.showToast({
                      image: '../res/img/warn.png',

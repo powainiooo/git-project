@@ -1,5 +1,7 @@
 {
    "pages": [
+      "pages/information/information",
+      "pages/information/remarks",
       "pages/select/second",
       "pages/select/select",
       "pages/index/index",
@@ -12,7 +14,6 @@
       "pages/result/result",
       "pages/package/personal",
       "pages/order/confirm",
-      "pages/information/information",
       "pages/package/editor",
       "pages/logs/logs",
       "pages/order/detail"

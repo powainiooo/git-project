@@ -23,7 +23,8 @@
            hover-stay-time="10">
          <img src="../res/img/icon-share.png" class="icon"/>
       </div>
-      <painter customStyle='position: absolute; left: -9999rpx;' :palette="paleData" bind:imgOK="onImgOK" widthPixels="1000"/>
+      <painter customStyle='position: absolute; left: -9999rpx;' :palette="paleData" bind:imgOK="onImgOK" widthPixels="726"/>
+      <painter customStyle='position: absolute; left: -9999rpx;' :palette="paleData2" bind:imgOK="onImgOK2" widthPixels="726"/>
       <img :src="imgSrc" class="page-img" mode="widthFix"/>
    </div>
    <div class="menu-share-bg" v-if="showMenu" @touchmove.stop="tmove"></div>
@@ -63,9 +64,16 @@
       store,
       data: {
          imgSrc: '',
+         imgSrcShare: '',
          paleData: {
             width: '726px',
             height: '1000px',
+            background: '#ffffff',
+            views: []
+         },
+         paleData2: {
+            width: '726px',
+            height: '580px',
             background: '#ffffff',
             views: []
          },
@@ -101,7 +109,7 @@
             return this.leassonData.image
          },
          avatar () {
-            return this.selectedStudent.avatar
+            return this.selectedStudent.avatar || 'https://bbart.waiting8.com/uploads/20200311/7c8eeaa8545fe894b86d85516d3226f2.png'
             // return 'https://bbart.waiting8.com/uploads/20200311/7c8eeaa8545fe894b86d85516d3226f2.png'
          }
       },
@@ -113,6 +121,7 @@
             })
             getCommentData({id}).then(res => {
                this.itemData = res.data
+               this.drawShare()
                if (this.itemData.images.length > 0) {
                   this.canvasHeight += 60
                   this.loadImgs()
@@ -164,6 +173,10 @@
          },
          onImgOK (e) {
             this.imgSrc = e.$wx.detail.path
+            console.log(e)
+         },
+         onImgOK2 (e) {
+            this.imgSrcShare = e.$wx.detail.path
             console.log(e)
          },
          draw () {
@@ -231,6 +244,27 @@
             this.paleData.views.push({type: 'text', text: `评语：`, css: {color: '#b9b9b9', top: `${reviewStartTop + 40}px`, left: '50px', fontSize: '25px'}})
             this.paleData.views.push({type: 'text', text: review, css: {width: '626px', color: '#211715', top: `${reviewStartTop + 80}px`, left: '50px', fontSize: '25px', maxLines: reviewMaxLine, lineHeight: '46px'}})
          },
+         drawShare () {
+            const posTop = 182
+            this.paleData2.views.push({type: 'rect', css: {width: '726px', height: '210px', color: '#e5ad84', top: `${posTop}px`}}) // 课程图底色块
+            this.paleData2.views.push({type: 'rect', css: {width: '726px', height: '188px', color: '#f4f4f4', top: `${posTop + 210}px`}}) // 日期底色块
+            this.paleData2.views.push({type: 'rect', css: {width: '726px', height: '2px', color: '#ececec', top: `${posTop + 398}px`}}) // 日期底线
+            this.paleData2.views.push({type: 'rect', css: {width: '215px', height: '2px', color: '#d7d7d7', top: `${posTop + 284}px`, left: '50px'}}) // 日期分割线
+            // 课程图
+            this.paleData2.views.push({type: 'image', url: this.bgSrc, css: {width: '726px', height: '210px', top: `${posTop}px`, left: '0px'}})
+            // 课程名
+            this.paleData2.views.push({type: 'text', text: this.title, css: {color: '#ffffff', top: `${posTop + 110}px`, left: '50px', fontSize: '40px'}})
+            // 头像
+            this.paleData2.views.push({type: 'image', url: this.avatar, css: {width: '200px', height: '200px', top: `${posTop + 100}px`, right: '50px', borderRadius: '100px', borderWidth: '2px', borderColor: '#b9baba'}})
+            let date = this.itemData.class_date.split('/')
+            // 年
+            let year = date[0].split('')
+            this.paleData2.views.push({type: 'text', text: `${year[0]}    ${year[1]}   ${year[2]}    ${year[3]}`, css: {color: '#211715', top: `${posTop + 234}px`, left: '50px', fontSize: '40px', fontWeight: 'bold'}})
+            // 月日
+            this.paleData2.views.push({type: 'text', text: `${date[1]}/${date[2]}`, css: {color: '#211715', top: `${posTop + 284}px`, left: '40px', fontSize: '90px', fontWeight: 'bold', letterSpacing: '10px'}})
+            // logo图
+            this.paleData2.views.push({type: 'image', url: '/res/img/header.png', css: {width: '726px', height: '220px', top: `0px`, left: '0px'}})
+         },
          download () {
             wx.showLoading({
                title: '保存中',
@@ -264,7 +298,7 @@
       onShareAppMessage: function () {
          return {
             title: this.itemData.title,
-            // imageUrl: this.imgSrc,
+            imageUrl: this.imgSrcShare,
             path: 'pages/comment?id=' + this.itemData.id
          }
       }

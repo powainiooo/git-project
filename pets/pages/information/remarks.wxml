@@ -1,0 +1,18 @@
+<header-view>备注信息 | Postscript</header-view>
+<view class="container container-information">
+   <view style="background-color: #ffffff;">
+      <textarea placeholder="告诉我们需要注意的事项（非必填）"
+             placeholder-class="place"
+             data-name="remarks"
+             bindinput="inputChange"
+             class="input" />
+   </view>
+   <view class="tips-frame">
+      <view class="icons icon-tips"></view>
+      <text>我们会确保您的个人信息不被泄露，姓名与联系电话仅在到店身份验证以及紧急情况下使用。</text>
+   </view>
+</view>
+<footer-view showPrice bindbtn="doNext">
+   <view slot="price">{{price}}</view>
+   <view slot="btn">下一步 | Next</view>
+</footer-view>

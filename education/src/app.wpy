@@ -120,10 +120,10 @@
    {
    "pages": [
       "pages/index",
+      "pages/comment",
       "pages/lessonDetail",
       "pages/order",
       "pages/store",
-      "pages/comment",
       "pages/lesson",
       "pages/studentlesson",
       "pages/password",

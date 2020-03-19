@@ -6,16 +6,21 @@ Page({
      * 页面的初始数据
      */
     data: {
-        sexArr:['男','女'],
-        sexVal:'',
+        sexArr:[
+	        {name: '公', value: '1'},
+	        {name: '母', value: '2'},
+	        {name: '绝育', value: '3'}
+        ],
+        selectedSex: null,
         name:'',
+	     petsname:'',
         mobile:'',
         price:''
     },
     bindSexChange(e){
         let sex = this.data.sexArr[e.detail.value];
         this.setData({
-            sexVal: sex
+            selectedSex: sex
         })
     },
     inputChange(e){
@@ -31,6 +36,13 @@ Page({
             });
             return;
         }
+        if(this.data.petsname == ''){
+            wx.showToast({
+                title: '请输入宠物姓名',
+                icon: 'none'
+            });
+            return;
+        }
         if(this.data.mobile == ''){
             wx.showToast({
                 title: '请输入手机号',
@@ -38,7 +50,7 @@ Page({
             });
             return;
         }
-        if(this.data.sexVal == ''){
+        if(this.data.selectedSex.name == ''){
             wx.showToast({
                 title: '请选择性别',
                 icon: 'none'
@@ -46,10 +58,11 @@ Page({
             return;
         }
         app.globalData.buyerInfo.name = this.data.name;
+        app.globalData.buyerInfo.petsname = this.data.petsname;
         app.globalData.buyerInfo.mobile = this.data.mobile;
-        app.globalData.buyerInfo.sex = this.data.sexVal == '男' ? 1 : 2;
+        app.globalData.buyerInfo.sex = this.data.selectedSex.value;
         wx.navigateTo({
-          url: '/pages/order/confirm'
+          url: '/pages/information/remarks'
         })
     },
     /**

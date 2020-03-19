@@ -4,21 +4,27 @@
         <view class="input" style="padding-top: 20rpx;">
             <input placeholder="主人姓名" placeholder-class="place" data-name="name" bindinput="inputChange" />
         </view>
+         <view style="display: flex; align-items: center; justify-content: space-between; margin: 0 60rpx;">
+            <view class="input" style="width:320rpx; padding-top: 20rpx; margin: 0;">
+               <input placeholder="宠物姓名" placeholder-class="place" data-name="petsname" bindinput="inputChange" />
+            </view>
+            <picker bindchange="bindSexChange" range="{{sexArr}}" range-key="name">
+               <view style="display: flex; justify-content: flex-end; width: 270rpx;">
+                  <view class="input sex" style="margin: 0;">
+                     <view class="icons icon-xiala"></view>
+                     {{selectedSex === null ? '性别' : selectedSex.name}}
+                  </view>
+               </view>
+            </picker>
+         </view>
+
         <view class="input">
             <input placeholder="联系电话" placeholder-class="place" class="phone" maxlength="11" data-name="mobile" bindinput="inputChange"/>
         </view>
-        <picker bindchange="bindSexChange" value="{{index}}" range="{{sexArr}}">
-            <view style="display: flex; justify-content: flex-end;">
-                <view class="input sex">
-                    <view class="icons icon-xiala"></view>
-                    {{sexVal == '' ? '性别' : sexVal}}
-                </view>
-            </view>
-        </picker>
     </view>
     <view class="tips-frame">
         <view class="icons icon-tips"></view>
-        <text>Hair 会确保您的个人信息不被泄露，姓名与联系电话仅在到店身份验证以及紧急情况下使用。</text>
+        <text>我们会确保您的个人信息不被泄露，姓名与联系电话仅在到店身份验证以及紧急情况下使用。</text>
     </view>
 </view>
 <footer-view showPrice bindbtn="doNext">

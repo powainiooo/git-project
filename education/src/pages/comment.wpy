@@ -139,27 +139,28 @@
             Promise.all(arr).then(res => {
                wx.hideLoading()
                console.log(res)
+               // 标题区域高度
                const title = this.itemData.title
                const titleLen = getLength(title)
                const titleMaxLine = this.titleData.maxLine
                const titleLines = Math.ceil(titleLen / 30) > titleMaxLine ? titleMaxLine : Math.ceil(titleLen / 30)
                this.titleData.height = 130 + titleLines * 45
                this.canvasHeight += this.titleData.height
-
+               // 描述区域高度
                const desp = this.itemData.description
                const despLen = getLength(desp)
                const despMaxLine = this.despData.maxLine
                const despLine = Math.ceil(despLen / 30) > despMaxLine ? despMaxLine : Math.ceil(despLen / 30)
                this.despData.height = 130 + despLine * 45
                this.canvasHeight += this.despData.height
-
+               // 评语区域高度
                const review = this.itemData.review
                const reviewLen = getLength(review)
                const reviewMaxLine = this.reviewData.maxLine
                const reviewLine = Math.ceil(reviewLen / 30) > reviewMaxLine ? reviewMaxLine : Math.ceil(reviewLen / 30)
                this.reviewData.height = 130 + reviewLine * 30
                this.canvasHeight += this.reviewData.height
-
+               // 图片区域高度
                for (let i of res) {
                   const h = Math.floor(600 * i.height / i.width)
                   i.height = h
@@ -167,6 +168,8 @@
                }
                this.canvasHeight += 10
                this.imagesData = res
+               // 底部logo区域高度
+               this.canvasHeight += 164
                this.paleData.height = `${this.canvasHeight}px`
                this.draw()
             })
@@ -194,9 +197,9 @@
             let date = this.itemData.class_date.split('/')
             // 年
             let year = date[0].split('')
-            this.paleData.views.push({type: 'text', text: `${year[0]}    ${year[1]}   ${year[2]}    ${year[3]}`, css: {color: '#211715', top: '234px', left: '50px', fontSize: '40px', fontWeight: 'bold'}})
+            this.paleData.views.push({type: 'text', text: `${year[0]}    ${year[1]}   ${year[2]}    ${year[3]}`, css: {color: '#211715', top: '234px', left: '50px', fontSize: '40px', fontWeight: 'bold', fontFamily: 'Helve'}})
             // 月日
-            this.paleData.views.push({type: 'text', text: `${date[1]}/${date[2]}`, css: {color: '#211715', top: '284px', left: '40px', fontSize: '90px', fontWeight: 'bold', letterSpacing: '10px'}})
+            this.paleData.views.push({type: 'text', text: `${date[1]}/${date[2]}`, css: {color: '#211715', top: '284px', left: '40px', fontSize: '90px', fontWeight: 'bold', fontFamily: 'Helve'}})
             // 主题部分
             const title = this.itemData.title
             // const title = '主题：主题：主题：主题：主题：主题：主题：主题：主题：主题：'
@@ -243,6 +246,10 @@
             // 主题
             this.paleData.views.push({type: 'text', text: `评语：`, css: {color: '#b9b9b9', top: `${reviewStartTop + 40}px`, left: '50px', fontSize: '25px'}})
             this.paleData.views.push({type: 'text', text: review, css: {width: '626px', color: '#211715', top: `${reviewStartTop + 80}px`, left: '50px', fontSize: '25px', maxLines: reviewMaxLine, lineHeight: '46px'}})
+            // logo图
+            const logoStartTop = reviewStartTop + reviewBgH
+            this.paleData.views.push({type: 'rect', css: {width: '726px', height: `${164}px`, color: '#f4f4f4', top: `${logoStartTop}px`}})
+            this.paleData.views.push({type: 'image', url: '/res/img/footer-logo.png', css: {width: '240px', height: '86px', top: `${logoStartTop}px`, left: '50px'}})
          },
          drawShare () {
             const posTop = 182
@@ -259,9 +266,9 @@
             let date = this.itemData.class_date.split('/')
             // 年
             let year = date[0].split('')
-            this.paleData2.views.push({type: 'text', text: `${year[0]}    ${year[1]}   ${year[2]}    ${year[3]}`, css: {color: '#211715', top: `${posTop + 234}px`, left: '50px', fontSize: '40px', fontWeight: 'bold'}})
+            this.paleData2.views.push({type: 'text', text: `${year[0]}    ${year[1]}   ${year[2]}    ${year[3]}`, css: {color: '#211715', top: `${posTop + 234}px`, left: '50px', fontSize: '40px', fontWeight: 'bold', fontFamily: 'Helve'}})
             // 月日
-            this.paleData2.views.push({type: 'text', text: `${date[1]}/${date[2]}`, css: {color: '#211715', top: `${posTop + 284}px`, left: '40px', fontSize: '90px', fontWeight: 'bold', letterSpacing: '10px'}})
+            this.paleData2.views.push({type: 'text', text: `${date[1]}/${date[2]}`, css: {color: '#211715', top: `${posTop + 284}px`, left: '40px', fontSize: '90px', fontWeight: 'bold', fontFamily: 'Helve'}})
             // logo图
             this.paleData2.views.push({type: 'image', url: '/res/img/header.png', css: {width: '726px', height: '220px', top: `0px`, left: '0px'}})
          },

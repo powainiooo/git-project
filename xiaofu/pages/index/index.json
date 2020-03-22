@@ -7,7 +7,8 @@
      "ticket-container": "../../components/ticket/container",
      "recommend": "../../components/ticket/recommend",
      "footer": "../../components/ticket/footer",
-     "loading": "../../components/loading/loading"
+     "loading": "../../components/loading/loading",
+     "vip": "../../components/vip/vip"
   },
    "backgroundColor": "#002bb0"
 }

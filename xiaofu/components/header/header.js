@@ -79,7 +79,8 @@ Component({
       showCover: false,
       isShowMenu: false,
       lastShowBtn: '',
-      shareAnimate: {}
+      shareAnimate: {},
+      vipData: {}
    },
    /**
    * 组件的方法列表
@@ -90,6 +91,7 @@ Component({
          this.toggleMenu(this.data.isShowMenu)
          this.setData({
             userInfo: app.globalData.userInfo,
+            vipData: app.globalData.vipData,
             showClose: true
          })
       },
@@ -157,6 +159,11 @@ Component({
       gotoHome () {
          wx.reLaunch({
             url: '/pages/index/index'
+         })
+      },
+      toVip () {
+         wx.navigateTo({
+           url: `/pages/vips/vips?page=renew`
          })
       },
       doShowCover () {

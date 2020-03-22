@@ -79,3 +79,40 @@ export const bannerVisit = (type, id) => {
       }
 	})
 }
+
+// 查询用户vip状态
+export const getVipStatus = (data) => {
+	return ajax({
+		url: `${ajaxUrl}/vip_status`,
+		data
+	})
+}
+
+// ＶＩＰ卡列表
+export const getVipList = (data) => {
+	return ajax({
+		url: `${ajaxUrl}/card_list`,
+		data
+	})
+}
+// ＶＩＰ卡详情
+export const getVipDetail = (data) => {
+	return ajax({
+		url: `${ajaxUrl}/card_info`,
+		data
+	})
+}
+// 生成VIP订单
+export const createVipOrder = (data) => {
+	return ajax({
+		url: `${ajaxUrl}/create_viporder`,
+		data
+	})
+}
+// 购买VIP成功
+export const buyVipSuccess = (data) => {
+	return ajax({
+		url: `${ajaxUrl}/pay_vip_success`,
+		data
+	})
+}

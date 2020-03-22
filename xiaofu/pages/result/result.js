@@ -19,7 +19,7 @@ Page({
    onLoad: function (options) {
       let page = options.page || 'login'
       let titleEn, titleCn
-      if (page === 'ticketSuc' || page === 'drinkSuc') {
+      if (page === 'ticketSuc' || page === 'drinkSuc' || page === 'vipSuc') {
          titleEn = 'Payment\nSuccess!'
          titleCn = '支付成功！'
       } else if (page === 'insuredSuc') {

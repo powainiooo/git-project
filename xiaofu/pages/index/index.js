@@ -3,7 +3,7 @@
 const app = getApp()
 const ajaxSrc = app.globalData.ajaxSrc
 const imgSrc = app.globalData.imgSrc
-import {getBannerCity, getIndexListData, getIndexDetailData} from '../../utils/api'
+import {getBannerCity, getIndexListData, getIndexDetailData, getVipStatus, getVipList} from '../../utils/api'
 const common = require('common')
 const QQMapWX = require('../../utils/qqmap-wx-jssdk.min.js')
 const qMap = new QQMapWX({
@@ -50,6 +50,7 @@ Page({
       drinkParams: [],
       showPassport: false,
       getSizeTimes: 0,
+      vipListData: []
 	},
 	onLoad: function (options) {
 	   console.log(options)
@@ -71,6 +72,7 @@ Page({
 			cityID
 		})
 		this.getListData()
+		this.getVipStatus()
 	},
    onShow () {
       app.$watch('drinkParams', (val, old) => { // 监听选择的特饮票数
@@ -567,6 +569,26 @@ Page({
       const ticket = this.selectComponent("#ticket")
       const buy = ticket.selectComponent("#buy")
       buy.doUpload()
+   },
+   // 获取用户vip信息
+   getVipStatus () {
+      const app = getApp()
+      getVipStatus({
+         openid: app.globalData.userOpenID
+      }).then(res => {
+         app.globalData.vipData = res
+         if (res.status === 0) {
+            this.getVipList()
+         }
+      })
+   },
+   // 获取vip Card
+   getVipList () {
+      getVipList().then(res => {
+         this.setData({
+            vipListData: res.data.list
+         })
+      })
    },
    // 用户点击右上角分享
    onShareAppMessage: function () {

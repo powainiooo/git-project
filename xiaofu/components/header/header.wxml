@@ -18,6 +18,15 @@
     <image src="{{userInfo.avatarUrl}}" class="avatar"></image>
     <text class='name'>{{userInfo.nickName}}</text>
   </view>
+   <view class="vip-logo"
+         hover-class="vip-logo-tap"
+         hover-start-time="10"
+         hover-stay-time="50"
+         bindtap="toVip"
+         wx:if="{{vipData.status === 1}}">
+      <image src='../../res/images/vip-logo.png' mode="widthFix" class="icon"></image>
+      <view class="time">{{vipData.data.vaild}} 到期</view>
+   </view>
   <view class='person-info' wx:if="{{userInfo === null}}" bindtap="gotoLogin">
     <image src="../../res/images/default-avatar.jpg" class="avatar"></image>
     <text class='name'>点击登录账户</text>

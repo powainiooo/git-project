@@ -1,7 +1,7 @@
 <!--index.wxml-->
 <header initButton="{{headerBtns}}" id="header" bindbtntap="headBtn"></header>
 <scroll-view scroll-y="{{detailPage === ''}}" class="container" bindscroll="containerScroll" bindscrolltolower="touchBottom">
-   <view class="search-frame" id="search" wx:if="{{!showSearchTitle && !isActivity}}">
+   <view class="search-frame" id="search" wx:if="{{!showSearchTitle && !isActivity}}" style="display: none;">
       <search url="{{bannerUrl}}" linkId="{{bannerId}}" linkType="{{bannerType}}" bindsearch="doSearch" bindtoggleCalendar="toggleCalendar" id="search"></search>
    </view>
    <view class="address-frame {{addressFixed ? 'address-frame-fixed' : ''}} {{addressShow ? 'address-frame-show' : ''}}" id="address" wx:if="{{!showSearchTitle && !isActivity}}">
@@ -13,6 +13,9 @@
          <view>搜索结果</view>
       </view>
       <image src="{{acticityLogo}}" mode="widthFix" class="acticity-logo" wx:if="{{isActivity}}"></image>
+      <!-- vip列表 -->
+      <vip listData="{{vipListData}}" wx:if="{{vipListData.length !== 0}}"></vip>
+      <!-- 票务列表 -->
       <view class="pro-list" wx:if="{{listData.length !== 0}}">
          <view class="{{item.cate === 'activity' ? 'item-ticket-frame' : 'item-frame'}}"
                wx:for="{{listData}}"

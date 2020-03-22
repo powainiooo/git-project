@@ -1,0 +1,16 @@
+<swiper class="vip-frame" previous-margin="35rpx" next-margin="35rpx">
+   <swiper-item wx:for="{{listData}}"
+                wx:key="id">
+      <view class="vip-item">
+         <view class="img"
+               hover-class="img-tap"
+               hover-start-time="10"
+               hover-stay-time="50"
+               data-id="{{item.id}}"
+               bindtap="gotoVips">
+            <image src="{{imgSrc + item.cover}}" mode="widthFix"></image>
+         </view>
+         <view class="tips">{{item.advert}}</view>
+      </view>
+   </swiper-item>
+</swiper>

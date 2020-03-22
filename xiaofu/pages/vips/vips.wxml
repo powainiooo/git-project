@@ -1,0 +1,39 @@
+<header initButton="{{headerBtns}}" bindbtntap="headBtn"></header>
+<view class="blue"></view>
+<view class="card">
+   <image src="{{imgSrc + itemData.cover}}" mode="widthFix"></image>
+   <view class="date" wx:if="{{page === 'renew'}}">{{itemData.vaild}} 到期</view>
+</view>
+<scroll-view scroll-y class="vips-frame">
+   <view class="power-item" wx:for="{{itemData.attention}}" wx:key="index">
+      <image src="{{'../../res/images/'+(index + 1)+'.png'}}" mode="widthFix"></image>
+      <view>{{item}}</view>
+   </view>
+   <view class="info-content" wx:if="{{page === 'renew'}}">
+      <view class="title">会员信息</view>
+      <view class="input-line">
+         <input placeholder="姓名 name" class="input" bindinput="checkValues" data-key="nameVal" value="{{nameVal}}" disabled/>
+         <input placeholder="电话 mobile phone" class="input" bindinput="checkValues" data-key="phoneVal" value="{{phoneVal}}" disabled/>
+      </view>
+      <view class="input-line">
+         <input placeholder="收货地址 address" class="input" bindinput="checkValues" data-key="addressVal"  value="{{addressVal}}" disabled style="width: 100%;"/>
+      </view>
+   </view>
+</scroll-view>
+<scroll-view scroll-y class="vips-frame vips-confirm {{page === 'confirm' ? 'vips-confirm-show' : ''}}">
+   <view class="info-content" style="margin-top: 250rpx;">
+      <view class="title">会员信息</view>
+      <view class="input-line">
+         <input placeholder="姓名 name" class="input" bindinput="checkValues" data-key="nameVal" value="{{nameVal}}"/>
+         <input placeholder="电话 mobile phone" class="input" bindinput="checkValues" data-key="phoneVal" value="{{phoneVal}}"/>
+      </view>
+      <view class="input-line">
+         <input placeholder="收货地址 address" class="input" bindinput="checkValues" data-key="addressVal"  value="{{addressVal}}" style="width: 100%;"/>
+      </view>
+   </view>
+   <view class="hint-section vip-hint">请确保填写的信息真实有效，本信息用于邮寄 小夫有票 周边福袋，邮费到付。</view>
+</scroll-view>
+<view class="vip-footer">
+   <view class="price">{{itemData.price}}<text class="unit">RMB / 年</text></view>
+   <view class="btn {{btnDisabled ? 'btn-diabled' : ''}}" hover-class="btn-hover" bindtap="doNext">{{btnName}}</view>
+</view>

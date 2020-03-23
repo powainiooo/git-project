@@ -37,7 +37,7 @@
 <script type='es6'>
 export default {
    name: 'app',
-   data() {
+   data () {
       return {
          outTime: 1000,
          max: 100,
@@ -99,21 +99,21 @@ export default {
          arr.push(this.loadImgs('static/poster/poster-qrcode.jpg'))
          arr.push(this.loadImgs('static/poster/poster-rada.png'))
          arr.push(this.loadImgs(`static/poster/poster-${this.pageData.tag}.png`))
-         Promise.all(arr).then(res=>{
+         Promise.all(arr).then(res => {
             this.drawPoster(res)
          })
       },
-      loadImgs(src){
-         let self = this;
-         return new Promise((resolve,reject)=>{
-            let img = new Image();
-            img.onload = function(){
-               resolve(img);
-            };
-            img.onerror = function(){
-               reject(new Error('Could not load image at ' + src));
-            };
-            img.src = src;
+      loadImgs (src) {
+         let self = this
+         return new Promise((resolve, reject) => {
+            let img = new Image()
+            img.onload = function () {
+               resolve(img)
+            }
+            img.onerror = function () {
+               reject(new Error('Could not load image at ' + src))
+            }
+            img.src = src
          })
       },
       drawPoster (res) {
@@ -142,10 +142,10 @@ export default {
          const cx = x + 123
          const cy = y + 113
          ctx.drawImage(res[3], x, y)
-         //雷达中心点
+         // 雷达中心点
          // ctx.fillStyle = '#f00'
          // ctx.fillRect(cx, cy, 2, 2)
-         //雷达区域
+         // 雷达区域
          const list = this.getCords(this.values)
          ctx.beginPath()
          ctx.moveTo(list[0][0], list[0][1])

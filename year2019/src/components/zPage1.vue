@@ -50,9 +50,9 @@
 <script type='es6'>
 import TweenLite from 'gsap'
 export default {
-	name: 'app',
-	data() {
-		return {
+   name: 'app',
+   data () {
+      return {
 		   outTime: 300,
          oilPrecent: 20,
          total_mile: 0,
@@ -66,7 +66,7 @@ export default {
          numsInterval: 1,
          rotate: 1440
       }
-	},
+   },
    computed: {
       imgSrc () {
          return this.$store.state.imgSrc
@@ -125,7 +125,7 @@ export default {
          if (this.pageData.eConsumption === undefined) {
             return '--'
          } else {
-            return this.pageData.eConsumption/2.5*6.74-this.pageData.eConsumption*0.68
+            return this.pageData.eConsumption / 2.5 * 6.74 - this.pageData.eConsumption * 0.68
          }
       },
       showMoney () {
@@ -155,7 +155,7 @@ export default {
          if (this.rotate < 0) this.rotate += 1440
       }, 16)
    },
-	methods: {
+   methods: {
 	   reset () {
 	      this.total_mile = 0
 	      this.total_evmile = 0
@@ -176,7 +176,7 @@ export default {
                total_fuel: this.pageData.fConsumption,
                total_elect: this.pageData.eConsumption,
                rank: this.pageData.fPlacing,
-               save_money: this.saveMoney,
+               save_money: this.saveMoney
             }
          )
          this.$store.commit('setCanChangePage', true)

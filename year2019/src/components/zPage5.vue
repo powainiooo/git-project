@@ -16,12 +16,12 @@
 
 <script type='es6'>
 export default {
-	name: 'app',
-	data() {
-		return {
+   name: 'app',
+   data () {
+      return {
          outTime: 1000
       }
-	},
+   },
    computed: {
       currentPage () {
          return this.$store.state.currentPage
@@ -44,7 +44,7 @@ export default {
          }
       }
    },
-	methods: {
+   methods: {
 	   enter () {
          this.$store.commit('setCanChangePage', true)
       }

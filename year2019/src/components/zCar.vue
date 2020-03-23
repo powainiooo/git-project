@@ -36,7 +36,6 @@
 .z-car-5>img.wheel1 { left: 10px}
 .z-car-5>img.wheel2 { left: 112px}
 
-
 .z-car-pos-1 { left: 360px; bottom: 110px; z-index: 90; animation: fadeIn 0.5s linear 0.2s both;}
 .z-car-pos-2 { left: 590px; bottom: 120px; z-index: 90; animation: fadeIn 0.5s linear 0.3s both;}
 .z-car-pos-3 { left: 660px; bottom: 90px; z-index: 90; animation: fadeIn 0.5s linear 0.4s both;}
@@ -109,7 +108,7 @@
 
 <script type='es6'>
 export default {
-	name: 'app',
+   name: 'app',
    props: {
       status: {
          type: String,
@@ -122,17 +121,17 @@ export default {
       pos: {
          type: String,
          default: '1'
-      },
+      }
    },
-	data() {
-		return {
+   data () {
+      return {
 		   rotate: 0,
          g: 0.1,
          maxSpeed: 8,
          speed: 8,
-         t: 0,
+         t: 0
       }
-	},
+   },
    computed: {
       loadingPecent () {
          return this.$store.state.loadingPecent
@@ -155,7 +154,7 @@ export default {
       wheelMove () {
          return {
             'transform': `rotateZ(${this.rotate}deg)`,
-            '-webkit-transform': `rotateZ(${this.rotate}deg)`,
+            '-webkit-transform': `rotateZ(${this.rotate}deg)`
          }
       }
    },
@@ -173,7 +172,7 @@ export default {
          })
       }
    },
-	methods: {
+   methods: {
       move () {
          if (this.status === 'move') {
             this.speed += this.g

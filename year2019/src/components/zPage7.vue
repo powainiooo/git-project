@@ -52,7 +52,7 @@
 <script type='es6'>
 export default {
    name: 'app',
-   data() {
+   data () {
       return {
          outTime: 1000,
          startX: 0,
@@ -96,7 +96,7 @@ export default {
       },
       pageData () {
          return this.$store.state.pageData.P7
-      },
+      }
    },
    watch: {
       currentPage (page) {

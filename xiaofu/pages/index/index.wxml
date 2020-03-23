@@ -1,7 +1,7 @@
 <!--index.wxml-->
 <header initButton="{{headerBtns}}" id="header" bindbtntap="headBtn"></header>
 <scroll-view scroll-y="{{detailPage === ''}}" class="container" bindscroll="containerScroll" bindscrolltolower="touchBottom">
-   <view class="search-frame" id="search" wx:if="{{!showSearchTitle && !isActivity}}" style="display: none;">
+   <view class="search-frame" id="search" wx:if="{{!showSearchTitle && !isActivity}}">
       <search url="{{bannerUrl}}" linkId="{{bannerId}}" linkType="{{bannerType}}" bindsearch="doSearch" bindtoggleCalendar="toggleCalendar" id="search"></search>
    </view>
    <view class="address-frame {{addressFixed ? 'address-frame-fixed' : ''}} {{addressShow ? 'address-frame-show' : ''}}" id="address" wx:if="{{!showSearchTitle && !isActivity}}">

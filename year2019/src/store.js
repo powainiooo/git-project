@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import { getQueryString } from './util.js'
-const data1 = 'F/WTJVAVEPkjP0+wvIeowcWeC+G57LU4QEw7zUHLEY8upe0QV9AOxLSJbftzI7wxLOQ4NIFwSTdt+cqj+hbxXIOxlTswCdUIxTCRaa0o5SggQVaq7i/Zrcib8sMuQ/mjBtNDVs4DTe2vWk3Z+LYLp+IvGZUI+F12S9RHEkyBiEletjiXGLxsPfdriVc15bflPnVav9qjfzwBkMVL0mtUEYDTeu2vvRIlalfc9m46mTMcmOS7Uux9WBUtICRYIf8KjxMdETVKecC8TqkesYmEUqTwX3mC1AuuxI8dRftruQ7tDsnHnDy5i88EyUZwUwICa+00QERjOSxVpmjTD77le+XXHjQvAalhCaqWvlR6WCttGBqKXjf9F0EEPHtzz4XAm' //  杨锦伦
-const data2 = 'F/WTJVAVEPkjP0+wvIeowcbgr+uaOODKjFLtuBYjOOt7fmS8aopECWTxyJWJ6vThqxUbQQ0OxPnjR71NC037H7ibskTpAtz4R6ta9kDNTuEMWRnktjJJJ/WqUMhN23c7vTOSvsJVCx66jZL7kQe+CX/vM13BqyTb14Ul4dwU6aELAKWwSFPQZ76I7VONHrL4mOZVGCBPk6WAX+cYcNzTT84Jn5TEi1oIJA4vCtraqLWi8TQmXcij0HrE5hnndVBkpp0ck1+4JDFTC1g+gOCPvDioVqaOC5979BuH3CXl10dvjR/wxOXaVOj24o96801JE8XpKzcazfawN1PKm293rZrU3vIeziKicIY714FK5OV1XREaBgsB8zQ/KgCzTL5ff' //  张绍裕
+const data1 = 'F/WTJVAVEPkjP0+wvIeowcWLQhV67feI+AQQKHQh6fhEDNR4JZCYiRgzINAXfhcWdGCJVhE3hciFstCdd4LUd0aK91h+s0lo3zAez3rK8slBEDX5BG9jpQlmzr1eB/wAMe52tIcPEtLUYTyj0JZDJ5e04byF2xdkQC3ep3buyWpLy8F5JoLBn9+7IUyEbv+jfp/3QZ8cPwIy2vrrjQcQTLK56AGziD0HfSlbCh/yM5BOnBjV8jVb4Fi8w/9PQenEiRCe5clxnPu1j2PtVnNPxNNlSLx1beCoJeGN9jwaquubDlxS+CyYuWeo2Xo1IHkAtY3ZfF6U/mPdfOKYAOQHpMrR8P1VTePqxcDD6MWtY5QnlYCB55RpT6XZdP4WP4DM9WpY8Uk2/cyAip2qmKUbqEg==' //  杨锦伦
+const data2 = 'F/WTJVAVEPkjP0+wvIeowcWLQhV67feI+AQQKHQh6fhEDNR4JZCYiRgzINAXfhcWdGCJVhE3hciFstCdd4LUd0aK91h+s0lo3zAez3rK8slBEDX5BG9jpQlmzr1eB/wAMe52tIcPEtLUYTyj0JZDJ5e04byF2xdkQC3ep3buyWpLy8F5JoLBn9+7IUyEbv+jfp/3QZ8cPwIy2vrrjQcQTLK56AGziD0HfSlbCh/yM5BOnBjV8jVb4Fi8w/9PQenEiRCe5clxnPu1j2PtVnNPxNNlSLx1beCoJeGN9jwaquubDlxS+CyYuWeo2Xo1IHkAtY3ZfF6U/mPdfOKYAOQHpMrR8P1VTePqxcDD6MWtY5QnlYCB55RpT6XZdP4WP4DM9WpY8Uk2/cyAip2qmKUbqEg==' //  张绍裕
 
 const params = {
-   data: getQueryString('data') || data2,
+   data: getQueryString('data') || data1,
    userName: decodeURI(getQueryString('userName') || '%E6%B5%8B%E8%AF%95%E6%B5%8B%E8%AF%95'),
    source: getQueryString('source') || 'app'
 }

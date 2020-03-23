@@ -51,15 +51,15 @@
 </template>
 
 <script type='es6'>
-import {formatDate} from '@/util.js'
+import { formatDate } from '@/util.js'
 export default {
-	name: 'app',
+   name: 'app',
    props: ['keys'],
-	data() {
-		return {
+   data () {
+      return {
 		   week: ['日', '一', '二', '三', '四', '五', '六']
       }
-	},
+   },
    computed: {
       imgSrc () {
          return this.$store.state.imgSrc
@@ -75,7 +75,7 @@ export default {
          if (this.pageData !== undefined) {
             const date = new Date()
             date.setFullYear('2019')
-            date.setMonth(this.pageData.month-1)
+            date.setMonth(this.pageData.month - 1)
             date.setDate(this.pageData.day)
             return {
                day: formatDate(date, 'dd'),
@@ -83,7 +83,7 @@ export default {
                year: formatDate(date, 'yyyy.MM.dd'),
                week: `星期${this.week[date.getDay()]}`
             }
-         }else {
+         } else {
             return {
                day: '',
                month: '',
@@ -129,6 +129,6 @@ export default {
          }
       }
    },
-	methods: {}
+   methods: {}
 }
 </script>

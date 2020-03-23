@@ -48,7 +48,7 @@
 import TweenLite from 'gsap'
 export default {
    name: 'app',
-   data() {
+   data () {
       return {
          outTime: 1000,
          nums: 0,
@@ -57,7 +57,7 @@ export default {
          topApp: '',
          widthHours: 0,
          widthAverage: 0,
-         numsInterval: 1,
+         numsInterval: 1
       }
    },
    computed: {
@@ -69,7 +69,7 @@ export default {
       },
       pageData () {
          return this.$store.state.pageData.P8
-      },
+      }
    },
    watch: {
       currentPage (page, lastPage) {
@@ -96,7 +96,7 @@ export default {
             {
                nums: this.pageData.appCounts,
                hours,
-               average,
+               average
             }
          )
          if (hours > average) {

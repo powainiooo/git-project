@@ -33,15 +33,15 @@
 <script type='es6'>
 import TweenLite from 'gsap'
 export default {
-	name: 'app',
-	data() {
-		return {
+   name: 'app',
+   data () {
+      return {
          outTime: 1000,
          max_speed: 0,
          avg_speed: 0,
-         numsInterval: 1,
+         numsInterval: 1
       }
-	},
+   },
    computed: {
       currentPage () {
          return this.$store.state.currentPage
@@ -69,7 +69,7 @@ export default {
          }
       }
    },
-	methods: {
+   methods: {
       reset () {
          this.max_speed = 0
          this.avg_speed = 0
@@ -80,7 +80,7 @@ export default {
             this.numsInterval,
             {
                max_speed: this.pageData.maxSpeed,
-               avg_speed: this.pageData.avgSpeed,
+               avg_speed: this.pageData.avgSpeed
             }
          )
          this.$store.commit('setCanChangePage', true)

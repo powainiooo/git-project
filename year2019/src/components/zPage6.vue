@@ -61,7 +61,7 @@
 import TweenLite from 'gsap'
 export default {
    name: 'app',
-   data() {
+   data () {
       return {
          outTime: 1000,
          most_control_counts: 0,
@@ -86,7 +86,7 @@ export default {
       },
       pageData () {
          return this.$store.state.pageData.P6
-      },
+      }
    },
    watch: {
       currentPage (page, lastPage) {
@@ -105,7 +105,7 @@ export default {
             this.$data,
             this.numsInterval,
             {
-               most_control_counts: this.pageData.controlTimes,
+               most_control_counts: this.pageData.controlTimes
             }
          )
          this.$store.commit('setCanChangePage', true)

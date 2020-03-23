@@ -11,7 +11,8 @@
    .order-item .line1 .price { width: 230rpx; background-color: #e5ad84; font-size: 25rpx; color: #ffffff; display: flex; flex-direction: column; justify-content: center; align-items: center;}
    .order-item .line1 .price .pirce-item { text-align: center;}
    .order-item .line1 .price .pirce-item .price-val { font-size: 50rpx; font-weight: bold; font-family: Arial;}
-   .order-item .line2 { height: 65rpx; display: flex; align-items: center; font-size: 25rpx; color: #cacbcd;}
+   .order-item .line2 {}
+   .order-item .line2-item { height: 65rpx; display: flex; align-items: center; font-size: 25rpx; color: #cacbcd;}
 </style>
 
 <template>
@@ -28,7 +29,7 @@
                      <div class="info-name">购买日期</div>
                      <div class="info-value" style=" font-weight: bold; align-items: center;">{{item.paytime_text}}</div>
                   </li>
-                  <li class="info-item" :style="{'border-width': item.refund_order_no !== '' ? '1prx' : '0'}">
+                  <li class="info-item" :style="{'border-width': item.refundOrders.length > 0 ? '1prx' : '0'}">
                      <div class="info-name">购买课程</div>
                      <div class="info-value" style="letter-spacing: 0;">{{item.name}}<span class="info-num">{{item.num}}</span>节</div>
                   </li>
@@ -37,9 +38,11 @@
                   <div class="pirce-item"><span class="price-val">{{item.price}}</span>元</div>
                </div>
             </div>
-            <div class="line2" v-if="item.refund_order_no !== ''">
-               <img src="../res/img/tips2.png" style="width: 34rpx; height: 34rpx; margin: 0 16rpx 0 36rpx; "/>
-               {{item.refund_remark}}
+            <div class="line2" v-if="item.refundOrders.length > 0">
+               <div v-for="refund in item.refundOrders" class="line2-item">
+                  <img src="../res/img/tips2.png" style="width: 34rpx; height: 34rpx; margin: 0 16rpx 0 36rpx; "/>
+                  {{refund.refund_remark}}
+               </div>
             </div>
          </div>
       </div>
@@ -64,7 +67,7 @@
       methods: {
          getData () {
             getOrderList({
-               student_id: this.selectedStudent.id || 3
+               student_id: this.selectedStudent.id || 5
             }).then(res => {
                this.list = res.data
             })

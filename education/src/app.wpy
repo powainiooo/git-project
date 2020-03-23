@@ -121,8 +121,8 @@
    "pages": [
       "pages/index",
       "pages/comment",
-      "pages/lessonDetail",
       "pages/order",
+      "pages/lessonDetail",
       "pages/store",
       "pages/lesson",
       "pages/studentlesson",

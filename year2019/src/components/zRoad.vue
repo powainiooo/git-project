@@ -130,15 +130,15 @@
 
 <script type='es6'>
 export default {
-	name: 'app',
+   name: 'app',
    props: {
 	   status: {
 	      type: String,
          default: 'move'
       }
    },
-	data() {
-		return {
+   data () {
+      return {
 		   t: 0,
          maxSpeed: 4,
          speed: 4,
@@ -149,9 +149,9 @@ export default {
          bgCurrent: 0,
          bgWidth: 0,
          bgBottomCurrent: 0,
-         bgBottomWidth: 0,
+         bgBottomWidth: 0
       }
-	},
+   },
    computed: {
       imgSrc () {
          return this.$store.state.imgSrc
@@ -167,12 +167,12 @@ export default {
       },
       roadMove () {
          return {
-            'background-position-x': `${this.current}px`,
+            'background-position-x': `${this.current}px`
          }
       },
       bgMove () {
          return {
-            'background-position-x': `${this.bgCurrent}px`,
+            'background-position-x': `${this.bgCurrent}px`
          }
       },
       bgMove3 () {
@@ -213,7 +213,7 @@ export default {
       },
       bgBottomMove () {
          return {
-            'background-position-x': `${this.bgBottomCurrent}px`,
+            'background-position-x': `${this.bgBottomCurrent}px`
          }
       },
       bgBottomMove3 () {
@@ -230,7 +230,7 @@ export default {
       },
       p5Data () {
          return this.$store.state.pageData.P5
-      },
+      }
    },
    watch: {
       currentPage (val) {
@@ -257,7 +257,7 @@ export default {
    mounted () {
 	   this.t = setInterval(this.move, 16)
    },
-	methods: {
+   methods: {
 	   move () {
 	      if (this.status === 'move') {
 	         this.speed += this.g

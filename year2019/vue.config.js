@@ -40,8 +40,8 @@ module.exports = {
    productionSourceMap: false,
    // 这里写你调用接口的基础路径，来解决跨域，如果设置了代理，那你本地开发环境的axios的baseUrl要写为 '' ，即空字符串
    devServer: {
-      // proxy: 'http://10.198.100.52:8080'
-      proxy: 'http://10.9.32.51:8080'
+      // proxy: 'http://10.9.32.51:8080'
+      proxy: 'http://10.9.32.18:8080'
       // proxy: "http://wx.newryun.com"
    }
 }

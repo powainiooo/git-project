@@ -111,8 +111,8 @@ import zRoad from '@/components/zRoad.vue'
 import zDiary from '@/components/zDiary.vue'
 export default {
    name: 'app',
-   components: {zCar, zRoad, zDiary},
-   data() {
+   components: { zCar, zRoad, zDiary },
+   data () {
       return {
          outTime: 0,
          showHint: true,
@@ -196,7 +196,7 @@ export default {
       },
       showCars () {
          return this.currentPage === 'p5' && this.tagName === '上班族'
-      },
+      }
    },
    methods: {
       slidePages () {
@@ -245,7 +245,7 @@ export default {
          setTimeout(() => {
             this.showHint = true
             this.$store.commit('setCanChangePage', false)
-         }, this.fitKeyList.length*200 - 200)
+         }, this.fitKeyList.length * 200 - 200)
       }
    }
 }

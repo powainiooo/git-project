@@ -69,16 +69,16 @@ export default {
       zPage7,
       zPage8,
       zPage9,
-      zPageShare,
+      zPageShare
    },
-   data() {
+   data () {
       return {
          pageIndex: 0,
          tMove: 0,
          startTime: 0,
          startX: 0,
          showPages: true,
-         showLoading: true,
+         showLoading: true
       }
    },
    mounted () {

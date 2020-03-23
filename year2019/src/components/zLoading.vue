@@ -24,18 +24,18 @@
 import axios from 'axios'
 
 export default {
-	name: 'app',
-	data() {
-		return {
+   name: 'app',
+   data () {
+      return {
          imgsList: [],
-         precent:0,
-         steps:0,
-         isOver:false,
-         imgLoadOver:false,
-         dataLoadOver:false,
+         precent: 0,
+         steps: 0,
+         isOver: false,
+         imgLoadOver: false,
+         dataLoadOver: false,
          outTime: 2000
       }
-	},
+   },
    computed: {
       imgSrc () {
          return this.$store.state.imgSrc
@@ -52,56 +52,56 @@ export default {
    },
    mounted () {
       // this.loadAll();
-      this.getData();
+      this.getData()
    },
-	methods: {
-      loadImgs(src){
-         let self = this;
-         return new Promise((resolve,reject)=>{
-            let img = new Image();
-            img.onload = function(){
+   methods: {
+      loadImgs (src) {
+         let self = this
+         return new Promise((resolve, reject) => {
+            let img = new Image()
+            img.onload = function () {
                console.log('img onload')
-               self.steps += 1;
-               self.precent = Math.floor(self.steps / self.imgsList.length * 100);
+               self.steps += 1
+               self.precent = Math.floor(self.steps / self.imgsList.length * 100)
                self.$store.commit('setLoadingPecent', self.precent)
-               resolve(img);
-            };
-            img.onerror = function(){
-               reject(new Error('Could not load image at ' + src));
-            };
-            img.src = src;
+               resolve(img)
+            }
+            img.onerror = function () {
+               reject(new Error('Could not load image at ' + src))
+            }
+            img.src = src
          })
       },
-      loadAll(){
+      loadAll () {
          console.log('loadAll start1')
-         let arr = [];
-         for(let item of this.imgsList){
+         let arr = []
+         for (let item of this.imgsList) {
             arr.push(this.loadImgs(item))
          }
-         Promise.all(arr).then(res=>{
-            this.imgLoadOver = true;
-            this.isAllLoad();
+         Promise.all(arr).then(res => {
+            this.imgLoadOver = true
+            this.isAllLoad()
          }).catch(err => {
             console.log(err)
          })
       },
-      getData(){
-         try{
-            this.dataLoadOver = true;
+      getData () {
+         try {
+            this.dataLoadOver = true
             // this.steps += 1;
             // this.precent = Math.floor(this.steps / (this.imgsList.length+1) * 100);
             // this.$store.commit('setLoadingPecent', this.precent)
             // this.isAllLoad();
             console.log('this is params')
             console.log(this.params)
-            axios.post('/mobileserve/Vehicle/getAnnuallyData',{
+            axios.post('/mobileserve/Vehicle/getAnnuallyData', {
                data: this.params.data,
                source: this.params.source
-            }).then(res=>{
-               let data = res.data;
+            }).then(res => {
+               let data = res.data
                console.log('下面是年报数据')
                console.log(data)
-               if(data.result === '0'){
+               if (data.result === '0') {
                   this.dataLoadOver = true
                   // this.isAllLoad()
                   // data.data.P7 = {
@@ -112,15 +112,15 @@ export default {
                   this.initLoadList(data.data)
                   console.log('loadAll start0')
                   this.loadAll()
-               }else{
+               } else {
                   getErrorData(JSON.stringify(data))
                   // window.errorData = data;
                   // window.location = '/error';
                }
             })
-         }catch(err){
+         } catch (err) {
             console.log(err)
-            getErrorData(JSON.stringify({result: "1",rebackDesc: "2"}))
+            getErrorData(JSON.stringify({ result: '1', rebackDesc: '2' }))
          }
       },
       initLoadList (data) {
@@ -151,7 +151,7 @@ export default {
                } else if (i === 4) {
                   imgsList.push('static/bg4.png')
                } else if (i === 5) {
-                  if (data[`P${i}`].tag === 2) { //夜猫子
+                  if (data[`P${i}`].tag === 2) { // 夜猫子
                      imgsList.push('static/p5-dark.png')
                   } else {
                      imgsList.push('static/bg5-back.png')
@@ -170,7 +170,7 @@ export default {
                      let arr = []
                      for (let j = 0; j < keyList.length; j++) {
                         if (data[`P${i}`][keyList[j]] !== undefined) {
-                           imgsList.push(`static/diary/diary-${j+2}.png`)
+                           imgsList.push(`static/diary/diary-${j + 2}.png`)
                            arr.push(keyList[j])
                         }
                      }
@@ -186,8 +186,8 @@ export default {
          this.$store.commit('setPageList', pageList)
          this.imgsList = imgsList
       },
-      isAllLoad(){
-         if(this.imgLoadOver && this.dataLoadOver){
+      isAllLoad () {
+         if (this.imgLoadOver && this.dataLoadOver) {
             setTimeout(() => {
                this.$store.commit('changePage', 'loading-over')
                setTimeout(() => {
@@ -195,7 +195,7 @@ export default {
                }, this.outTime)
             }, 200)
          }
-      },
+      }
    }
 }
 </script>

@@ -53,7 +53,7 @@
 <script type='es6'>
 export default {
    name: 'app',
-   data() {
+   data () {
       return {
          tagName: '',
          p1: ['', '最强王者', '暴走老司机', '通勤大军', '热血青铜'],
@@ -62,7 +62,7 @@ export default {
          p4: ['', '语音爱好者', '高冷范', '语音重灾区'],
          p5: ['', '勤奋家', '夜猫族', '上班族', '人生赢家'],
          p6: ['火星人', '冷暖自由', '钥匙自由', '停车自由', '健忘症患者'],
-         p8: ['', '铁杆粉丝', '忠实粉丝', '潜力股'],
+         p8: ['', '铁杆粉丝', '忠实粉丝', '潜力股']
       }
    },
    computed: {
@@ -71,7 +71,7 @@ export default {
       },
       pageData () {
          return this.$store.state.pageData[this.currentPage.toUpperCase()]
-      },
+      }
    },
    watch: {
       currentPage (page) {

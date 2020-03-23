@@ -77,7 +77,7 @@
             background: '#ffffff',
             views: []
          },
-         itemData: null,
+         itemData: {},
          titleData: {
             height: 0,
             maxLine: 2
@@ -101,16 +101,14 @@
          this.getData(id)
       },
       computed: {
-         ...mapState(['selectedStudent', 'leassonData']),
          title () {
-            return this.leassonData.name
+            return this.itemData.course_name || ''
          },
          bgSrc () {
-            return this.leassonData.image
+            return this.itemData.course_image || ''
          },
          avatar () {
-            return this.selectedStudent.avatar || 'https://bbart.waiting8.com/uploads/20200311/7c8eeaa8545fe894b86d85516d3226f2.png'
-            // return 'https://bbart.waiting8.com/uploads/20200311/7c8eeaa8545fe894b86d85516d3226f2.png'
+            return this.itemData.student_avatar || ''
          }
       },
       methods: {

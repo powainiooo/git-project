@@ -28,12 +28,12 @@
 
 <script type='es6'>
 export default {
-	name: 'app',
-	data() {
-		return {
+   name: 'app',
+   data () {
+      return {
 		   showName: ''
       }
-	},
+   },
    computed: {
       currentPage () {
          return this.$store.state.currentPage
@@ -57,7 +57,6 @@ export default {
             } else if (fuel !== undefined && elect !== undefined) {
                return '里程 油/电耗'
             }
-
          } else if (this.currentPage === 'p2') {
             return '充电行为'
          } else if (this.currentPage === 'p3') {
@@ -91,6 +90,6 @@ export default {
          })
       }
    },
-	methods: {}
+   methods: {}
 }
 </script>

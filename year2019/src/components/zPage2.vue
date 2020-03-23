@@ -39,9 +39,9 @@
 <script type='es6'>
 import TweenLite from 'gsap'
 export default {
-	name: 'app',
-	data() {
-		return {
+   name: 'app',
+   data () {
+      return {
          outTime: 1000,
          charge_counts: 0,
          charge_over_per: 0,
@@ -49,7 +49,7 @@ export default {
          numsInterval: 1,
          timeZone: ''
       }
-	},
+   },
    computed: {
       imgSrc () {
          return this.$store.state.imgSrc
@@ -87,7 +87,7 @@ export default {
          }
       }
    },
-	methods: {
+   methods: {
       reset () {
          this.charge_counts = 0
          this.charge_over_per = 0
@@ -101,7 +101,7 @@ export default {
             {
                charge_counts: this.pageData.chargeTimes,
                charge_over_per: this.pageData.cPlacing,
-               charge_avg_time: this.pageData.avgChargeTime,
+               charge_avg_time: this.pageData.avgChargeTime
             }
          )
          this.$store.commit('setCanChangePage', true)

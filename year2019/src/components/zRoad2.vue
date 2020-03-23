@@ -91,15 +91,15 @@
 
 <script type='es6'>
 export default {
-	name: 'app',
+   name: 'app',
    props: {
 	   status: {
 	      type: String,
          default: 'move'
       }
    },
-	data() {
-		return {
+   data () {
+      return {
 		   t: 0,
          maxSpeed: 4,
          speed: 4,
@@ -110,9 +110,9 @@ export default {
          bgCurrent: 0,
          bgWidth: 0,
          bgBottomCurrent: 0,
-         bgBottomWidth: 0,
+         bgBottomWidth: 0
       }
-	},
+   },
    computed: {
       currentPage () {
          return this.$store.state.currentPage
@@ -123,19 +123,19 @@ export default {
       roadMove () {
          return {
             'transform': `translateX(${this.current}px)`,
-            '-webkit-transform': `translateX(${this.current}px)`,
+            '-webkit-transform': `translateX(${this.current}px)`
          }
       },
       bgMove () {
          return {
             'transform': `translateX(${this.bgCurrent}px)`,
-            '-webkit-transform': `translateX(${this.bgCurrent}px)`,
+            '-webkit-transform': `translateX(${this.bgCurrent}px)`
          }
       },
       bgBottomMove () {
          return {
             'transform': `translateX(${this.bgBottomCurrent}px)`,
-            '-webkit-transform': `translateX(${this.bgBottomCurrent}px)`,
+            '-webkit-transform': `translateX(${this.bgBottomCurrent}px)`
          }
       }
    },
@@ -157,7 +157,7 @@ export default {
       this.bgWidth = this.$refs.bg.offsetWidth / 2
 	   this.t = setInterval(this.move, 16)
    },
-	methods: {
+   methods: {
 	   move () {
 	      if (this.status === 'move') {
 	         this.speed += this.g

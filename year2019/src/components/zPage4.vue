@@ -67,18 +67,18 @@
 <script type='es6'>
 import TweenLite from 'gsap'
 export default {
-	name: 'app',
-	data() {
-		return {
+   name: 'app',
+   data () {
+      return {
          outTime: 1000,
          drive_time: 0,
          voice_counts: 0,
          avg_voice_counts: 0,
          widthTimes: 0,
          widthAverage: 0,
-         numsInterval: 1,
+         numsInterval: 1
       }
-	},
+   },
    computed: {
       currentPage () {
          return this.$store.state.currentPage
@@ -121,7 +121,7 @@ export default {
          }
       }
    },
-	methods: {
+   methods: {
       reset () {
          this.widthTimes = 0
          this.widthAverage = 0
@@ -136,7 +136,7 @@ export default {
             {
                drive_time: this.pageData.driveTime,
                voice_counts: this.pageData.voiceCount,
-               avg_voice_counts: this.pageData.avgVoiceCount,
+               avg_voice_counts: this.pageData.avgVoiceCount
             }
          )
          this.timesEnter(this.pageData.voiceCount, this.pageData.avgVoiceCount)

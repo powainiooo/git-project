@@ -53,7 +53,6 @@ Page({
       vipListData: []
 	},
 	onLoad: function (options) {
-	   console.log(options)
 		const activityID = options.id || ''
 		const acticityLogo = options.src || ''
 		let cityID = ''
@@ -98,7 +97,6 @@ Page({
             }
          })
 			wx.createSelectorQuery().select("#header").boundingClientRect(rect => {
-				// console.log(rect)
             if (rect === null) {
                if (this.data.getSizeTimes < 10) {
                   this.getComponentsSize()
@@ -109,7 +107,6 @@ Page({
             }
 			}).exec()
 			wx.createSelectorQuery().select("#search").boundingClientRect(rect => {
-				// console.log(rect)
             if (rect === null) {
                if (this.data.getSizeTimes < 10) {
                   this.getComponentsSize()
@@ -123,7 +120,6 @@ Page({
 	},
 	// 监听页面滑动
 	containerScroll (e) {
-	   console.log(this.data.searchHeight - this.data.windowHeight)
 		this.data.scrollTop = e.detail.scrollTop
 		this.setData({
 			addressFixed: e.detail.scrollTop >= this.data.searchHeight,
@@ -216,7 +212,8 @@ Page({
 	getDetailData () {
       getIndexDetailData({
          tid: this.data.detailId,
-         city: this.data.cityID
+         city: this.data.cityID,
+         openid: app.globalData.userOpenID
       }).then(res => {
          console.log(res.data)
          this.setData({
@@ -270,8 +267,6 @@ Page({
 								break
 							}
 						}
-                  // console.log('city:'+ city)
-                  // console.log('cityID:'+ cityID)
                   // cityID = cityID === undefined ? '' : cityID
 
                   // city = '广州'
@@ -353,7 +348,6 @@ Page({
             detailPage: 'calendar'
          })
       } else {
-         console.log(this.data.selectedDate)
          this.setData({
             headerBtns: this.data.selectedDate === '' ? ['menu'] : ['close'],
             detailPage: ''
@@ -362,7 +356,6 @@ Page({
    },
 	// 获取列表数据
 	getListData () {
-      console.log("page:"+this.data.page)
 		this.setData({
 			isLoading: true
 		})
@@ -371,11 +364,13 @@ Page({
 			date: this.data.selectedDate,
 			page: this.data.page,
 			city: this.data.cityID,
-			mid: this.data.activityID
+			mid: this.data.activityID,
+         openid: app.globalData.userOpenID
 		}).then(res => {
 		   if (this.data.page === 1) {
             this.data.listData = []
          }
+         console.log('列表数据：',res)
 			this.setData({
 				listData: this.data.listData.concat(res.data.list),
 				isLoading: false,

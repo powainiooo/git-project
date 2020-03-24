@@ -1,5 +1,6 @@
 <swiper class="vip-frame" previous-margin="35rpx" next-margin="35rpx">
-   <swiper-item wx:for="{{listData}}"
+   <swiper-item duration="200"
+                wx:for="{{listData}}"
                 wx:key="id">
       <view class="vip-item">
          <view class="img"
@@ -10,6 +11,7 @@
                bindtap="gotoVips">
             <image src="{{imgSrc + item.cover}}" mode="widthFix"></image>
          </view>
+         <image src="../../res/images/card-shadow.png" class="shadow"></image>
          <view class="tips">{{item.advert}}</view>
       </view>
    </swiper-item>

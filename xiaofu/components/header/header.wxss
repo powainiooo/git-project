@@ -17,7 +17,7 @@
 .nav-frame .nav-list{ margin:0 15rpx 300rpx 15rpx;}
 .nav-frame .nav-list .nav-item{ height: 130rpx; display: flex; align-items: center; border-bottom: 1px solid #002684; padding-left: 40rpx;}
 .nav-frame .nav-list .nav-item .name{ font-size: 34rpx; color: #b3ceff;}
-.nav-frame .vip-logo { width: 160rpx; position: absolute; top: 50rpx; right: 40rpx; text-align: center; transition: transform 0.15s cubic-bezier(.18,.47,.31,.96);}
+.nav-frame .vip-logo { width: 180rpx; position: absolute; top: 50rpx; right: 30rpx; text-align: center; transition: transform 0.15s cubic-bezier(.18,.47,.31,.96);}
  .nav-frame .vip-logo-tap { transform: scale(0.95)}
 .nav-frame .vip-logo .icon { width: 125rpx;}
 .nav-frame .vip-logo .time { font-size: 20rpx; color: rgba(255, 255, 255, 0.3); margin-top: 10rpx;}

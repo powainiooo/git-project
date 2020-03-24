@@ -370,7 +370,6 @@ Page({
 		   if (this.data.page === 1) {
             this.data.listData = []
          }
-         console.log('列表数据：',res)
 			this.setData({
 				listData: this.data.listData.concat(res.data.list),
 				isLoading: false,
@@ -572,7 +571,7 @@ Page({
          openid: app.globalData.userOpenID
       }).then(res => {
          app.globalData.vipData = res
-         if (res.status === 0) {
+         if (res.status === 1) {
             this.getVipList()
          }
       })

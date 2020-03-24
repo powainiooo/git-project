@@ -1,10 +1,10 @@
 {
    "pages": [
+      "pages/index/index",
       "pages/information/information",
       "pages/information/remarks",
       "pages/select/second",
       "pages/select/select",
-      "pages/index/index",
       "pages/package/package",
       "pages/date/date",
       "pages/requires/requires",

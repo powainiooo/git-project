@@ -78,7 +78,7 @@ Page({
          page
       })
       if (page === 'buy') {
-         const id = options.page || '3'
+         const id = options.id || '3'
          this.data.id = id
          this.getData(id)
       } else if (page === 'renew') {

@@ -76,34 +76,10 @@ App({
     globalData: {
         userOpenID:'',
         userInfo: null,
-        ajaxSrc:'https://hair.designbyho.com/mobile/applet/',
-        imgSrc:'https://hair.designbyho.com/upload/',
+        ajaxSrc:'http://hair.pc-online.cc/mobile/applet/',
+        imgSrc:'http://hair.pc-online.cc/upload/',
         ruleContent:'',
         orderNum:'T2018112414571003',
-        store:{
-            address:"深圳市福田区购物广场6号wh",
-            cover:"11/2018/1107/1541578800089.jpg",
-            ctime:"1541574117",
-            id:"1",
-            latitude:"25.1354",
-            longitude:"122.465656",
-            status:"1",
-            title:"福田COCO park 店s",
-            url:"https://www.baidu.com/aaa"
-        },
-        selectDate:'2018-11-21',
-        selectTime:'10:00',
-        selectWeek:'周四',
-        proPackage:{"id":"-1"},
-        proClean:{"id":"-1","english_name":"Aesop® Calming shampoo","china_name":"伊索 舒缓洗发露","apply":"中性至敏感性、干燥发质","intro":"洋甘菊花和茴香果的舒缓配方加入鼠尾草叶，有效温和的洁净头发和头皮。","type":"1","price":"30.00","cover":"11/2018/1119/1542622302211.png","cover_two":"11/2018/1119/1542622310773.png","share_logo":"11/2018/1119/1542622294120.png","status":"1","ctime":"1542622391"},
-        proConditioner:{"id":"-1","english_name":"Aesop® Rose Hair & Scalp Moisturising Masque","china_name":"伊索 玫瑰滋润护发膜","apply":"中性至敏感性、干燥发质","intro":"深入润发护理有助头发恢复细软，带来活力光泽，同时舒缓干燥及有屑头皮。","type":"2","price":"30.00","cover":"11/2018/1119/1542621245385.png","cover_two":"11/2018/1119/1542621203801.png","share_logo":"11/2018/1119/1542621226629.png","status":"1","ctime":"1542621310"},
-        proTreatment:{"id":"-1","english_name":"Aesop® Parsley Seed Anti -Oxidant Serum","china_name":"伊索 香芹籽抗氧化精华","apply":"中性至敏感性、干燥发质","intro":"轻盈配方有效抗氧化剂软化皮肤，并蕴含具舒缓作用的芦荟，保湿头皮。","type":"3","price":"20.00","cover":"11/2018/1119/1542622530181.png","cover_two":"11/2018/1119/1542622537708.png","share_logo":"11/2018/1119/1542622533178.png","status":"1","ctime":"1542622762"},
-        buyerInfo:{
-            name:'',
-            mobile:'',
-            sex:''
-        },
-        personalPackage:{}
     },
     getPerson(){
         wx.request({

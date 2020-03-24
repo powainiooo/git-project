@@ -159,3 +159,11 @@ export const getCommentData = data => {
       data
    })
 }
+// 上报已选择的门店信息
+export const updateStore = data => {
+   return ajax({
+      method: 'POST',
+      url: `${baseUrl}/api/user/update_last_store`,
+      data
+   })
+}

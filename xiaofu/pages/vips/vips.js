@@ -89,7 +89,8 @@ Page({
             phoneVal: app.globalData.vipData.data.mobile,
             addressVal: app.globalData.vipData.data.address,
             id: app.globalData.vipData.data.card_id,
-            btnName: '续费'
+            btnName: '续费',
+            headerBtns: []
          })
       }
    },

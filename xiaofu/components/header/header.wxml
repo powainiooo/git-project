@@ -7,7 +7,13 @@
        <view class="icons icon-guanbi" wx:if="{{showClose}}" bindtap="doClose"></view>
       <view class="icons icon-gengduo" wx:if="{{showMenu}}" bindtap="openMenu"></view>
       <view class="icon-search" wx:if="{{showRefresh}}" bindtap="doRefresh"></view>
-      <view class="icons icon-fenxiang" wx:if="{{showShare}}"  data-val="{{true}}" bindtap="toggleShare"></view>
+      <button
+         class="icons icon-fenxiang"
+         plain
+         open-type="{{onlyShare ? 'share' : ''}}"
+         wx:if="{{showShare}}"
+         data-val="{{true}}"
+         bindtap="toggleShare"></button>
     </view>
   </view>
 </view>

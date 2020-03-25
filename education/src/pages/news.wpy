@@ -1,0 +1,91 @@
+<style>
+   .title2 { margin: 0 0 40rpx 70rpx;}
+   .title-frame { height: 140rpx; background-color: #ffffff; padding-top: 30rpx; position: relative;}
+   .title-frame::after { content: ''; width: 100%; height: 40rpx; background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAAnCAYAAAAl15mhAAAACXBIWXMAAAsSAAALEgHS3X78AAAAMUlEQVQYlWM005LhZ2BgYGBigAIWBgaGvww4Gf9gjP/YGYz//4NphIFwk0cag4GBAQBWoQrVi8zgKgAAAABJRU5ErkJggg==) repeat-x; background-size: auto 100%; position: absolute; top: 100%; left: 0;}
+   .news-item { margin: 0 40rpx; padding: 45rpx 25rpx 65rpx 25rpx; display: flex; align-items: flex-start; justify-content: space-between; position: relative;}
+   .news-item::after { content: ''; width: 100%; height: 3px; background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAADCAYAAAB1c+RqAAAACXBIWXMAAAsSAAALEgHS3X78AAAARUlEQVQImWM8v7QpgYGBAYRxgQsGUbUFeOQZGF9eO7aBS1jKH5eCX18/PhVS1JPBZwjLs/N7JoBsw6PmgZCiHm5ZBgYGAH6NEhN5AJscAAAAAElFTkSuQmCC) repeat-x; background-size: auto 100%; position: absolute; top: 100%; left: 0;}
+   .news-item .time .year { font-size: 27rpx; color: #221715; display: flex; font-family: Helve; justify-content: space-between;}
+   .news-item .time .date { font-size: 40rpx; color: #221715; font-weight: bold; font-family: Helve;}
+   .news-item .content { width: 466rpx;}
+   .news-item .content .img { width: 466rpx; margin-bottom: 10rpx;}
+   .news-item .content .text { font-size: 25rpx; color: #717071; line-height: 1.8;}
+</style>
+
+<template>
+   <div>
+      <div class="container {{showMenu ? 'blur' : ''}}">
+         <zHeader></zHeader>
+         <div class="title-frame">
+            <div class="title2 text-shadow"><span class="en">News</span> <br/> 近期活动</div>
+         </div>
+
+         <div class="news-item">
+            <div class="time">
+               <div class="year">
+                  <span v-for="i in '2020'">{{i}}</span>
+               </div>
+               <div class="date">09/10</div>
+            </div>
+            <div class="content">
+               <img src="../res/img/news.png" mode="widthFix" class="img" />
+               <div class="text">虎门万科1</div>
+            </div>
+         </div>
+      </div>
+   </div>
+</template>
+
+<script>
+   import wepy from '@wepy/core'
+   import store from '../store'
+   import { mapState } from '@wepy/x'
+   import {getStudentList, getCourseListByStudent} from '@/res/api.js'
+   // https://github.com/wx-plugin/image-cropper
+   wepy.page({
+      store,
+      data: {
+         list: []
+      },
+      computed: mapState(['showMenu', 'selectedStore']),
+      onLoad () {
+         this.getData()
+      },
+      methods: {
+         getData () {
+            getStudentList({
+               store_id: this.selectedStore
+            }).then(res => {
+               this.list = res.data
+            })
+         },
+         gotoNext (data) {
+            store.commit('setSelectedStudent', data)
+            getCourseListByStudent({
+               student_id: data.id
+            }).then(res => {
+               if (res.data.length > 0) {
+                  wx.navigateTo({
+                     url: '/pages/studentlesson'
+                  })
+               } else {
+                  wx.navigateTo({
+                     url: '/pages/lesson'
+                  })
+               }
+            })
+         },
+         toStudent () {
+            wx.navigateTo({
+               url: '/pages/newfile'
+            })
+         }
+      }
+   })
+</script>
+<config>
+   {
+      "usingComponents": {
+         "menu": "~@/components/menu"
+      }
+   }
+</config>

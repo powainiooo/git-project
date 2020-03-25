@@ -12,7 +12,8 @@
    .order-item .line1 .price .pirce-item { text-align: center;}
    .order-item .line1 .price .pirce-item .price-val { font-size: 50rpx; font-weight: bold; font-family: Arial;}
    .order-item .line2 {}
-   .order-item .line2-item { height: 65rpx; display: flex; align-items: center; font-size: 25rpx; color: #cacbcd;}
+   .order-item .line2-item { height: 65rpx; margin: 0 16rpx; display: flex; align-items: center; font-size: 25rpx; color: #cacbcd; border-bottom: 1rpx solid #cacbcd;}
+   .order-item .line2-item:last-child { border-bottom: none;}
 </style>
 
 <template>

@@ -119,13 +119,15 @@
 <config>
    {
    "pages": [
-      "pages/index",
-      "pages/comment",
+      "pages/news",
+      "pages/aboutus",
       "pages/order",
+      "pages/index",
+      "pages/studentlesson",
+      "pages/comment",
       "pages/lessonDetail",
       "pages/store",
       "pages/lesson",
-      "pages/studentlesson",
       "pages/password",
       "pages/result",
       "pages/newfile",

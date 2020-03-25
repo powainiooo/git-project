@@ -1,0 +1,76 @@
+<style>
+   .title2 { margin: 0 0 40rpx 70rpx;}
+   .title-frame { height: 140rpx; background-color: #ffffff; padding-top: 30rpx; position: relative;}
+   .title-frame::after { content: ''; width: 100%; height: 40rpx; background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAAnCAYAAAAl15mhAAAACXBIWXMAAAsSAAALEgHS3X78AAAAMUlEQVQYlWM005LhZ2BgYGBigAIWBgaGvww4Gf9gjP/YGYz//4NphIFwk0cag4GBAQBWoQrVi8zgKgAAAABJRU5ErkJggg==) repeat-x; background-size: auto 100%; position: absolute; top: 100%; left: 0;}
+.content { margin: 60rpx; font-size: 25rpx; color: #717071; line-height: 1.8;}
+</style>
+
+<template>
+   <div>
+      <div class="container {{showMenu ? 'blur' : ''}}">
+         <zHeader></zHeader>
+         <div class="title-frame">
+            <div class="title2 text-shadow"><span class="en">About us</span> <br/> 关于我们</div>
+         </div>
+
+         <div class="content">
+            网站所有权，使用条款协议网站所有权，使用条款协议网站所有权，使用条款协议网站所有权，使用条款协议网站所有权，使用条款协议
+         </div>
+      </div>
+   </div>
+</template>
+
+<script>
+   import wepy from '@wepy/core'
+   import store from '../store'
+   import { mapState } from '@wepy/x'
+   import {getStudentList, getCourseListByStudent} from '@/res/api.js'
+   // https://github.com/wx-plugin/image-cropper
+   wepy.page({
+      store,
+      data: {
+         list: []
+      },
+      computed: mapState(['showMenu', 'selectedStore']),
+      onLoad () {
+         this.getData()
+      },
+      methods: {
+         getData () {
+            getStudentList({
+               store_id: this.selectedStore
+            }).then(res => {
+               this.list = res.data
+            })
+         },
+         gotoNext (data) {
+            store.commit('setSelectedStudent', data)
+            getCourseListByStudent({
+               student_id: data.id
+            }).then(res => {
+               if (res.data.length > 0) {
+                  wx.navigateTo({
+                     url: '/pages/studentlesson'
+                  })
+               } else {
+                  wx.navigateTo({
+                     url: '/pages/lesson'
+                  })
+               }
+            })
+         },
+         toStudent () {
+            wx.navigateTo({
+               url: '/pages/newfile'
+            })
+         }
+      }
+   })
+</script>
+<config>
+   {
+      "usingComponents": {
+         "menu": "~@/components/menu"
+      }
+   }
+</config>

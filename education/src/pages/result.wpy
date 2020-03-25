@@ -62,7 +62,7 @@
          doFunc () {
             if (this.type === 'payment') {
                if (this.result === 'success') {
-                  wx.redirectTo({
+                  wx.reLaunch({
                      url: '/pages/studentlesson'
                   })
                } else if (this.result === 'fail') {

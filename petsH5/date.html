@@ -1,0 +1,243 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="apple-touch-icon-precomposed" href="images/cover.png">
+    <link rel="apple-touch-icon" href="images/cover.png">
+    <title>工作人员</title>
+    <link href="css/reset.css" type="text/css" rel="stylesheet" />
+    <link href="css/icons.css" type="text/css" rel="stylesheet" />
+    <link href="css/helvetica.css" type="text/css" rel="stylesheet" />
+    <link href="css/layout.css" type="text/css" rel="stylesheet" />
+    <script src="js/jquery-2.1.1.min.js" type="application/javascript" language="javascript"></script>
+</head>
+<body>
+<header class="header">
+    <img src="images/logo.png" class="logo">
+    <!--<a href="javascript:;" class="icons icon-xiugai"></a>-->
+</header>
+<section class="container date-container">
+   <div class="month-selector">
+      <div class="frame">
+         <div class="month-opera">
+            <a class="btn btn-prev" onclick="prevMonth()"></a>
+            <p id="currentDate">2020/04</p>
+            <a class="btn btn-next" onclick="nextMonth()"></a>
+         </div>
+      </div>
+   </div>
+   <div class="frame">
+      <div class="week-list">
+         <div>Sun<br/>周日</div>
+         <div>Mon<br/>周一</div>
+         <div>Tue<br/>周二</div>
+         <div>Wed<br/>周三</div>
+         <div>Thur<br/>周四</div>
+         <div>Fri<br/>周五</div>
+         <div>Sat<br/>周六</div>
+      </div>
+      <div class="day-list" id="dayList">
+         <a>1</a>
+         <a class="book">8</a>
+         <a class="book full">10</a>
+         <a class="book selected">18</a>
+         <a class="book full selected">20</a>
+         <a>20</a>
+         <a>26</a>
+         <a>26</a>
+         <a>26</a>
+      </div>
+   </div>
+
+    <!-- 1:有订单 2：无订单 3：订单进行中 4：订单完成 -->
+
+    <!-- 选择日期-->
+</section>
+
+<script>
+var dateObj = {}
+Object.defineProperties(dateObj, {
+	'year': {
+		get () {
+			return this._year
+		},
+		set (val) {
+			this._year = val
+         var month = this._month + 1
+         month = month < 10 ? '0'+month : month
+         $("#currentDate").html(this._year+'/'+month)
+		}
+   },
+	'month': {
+		get () {
+			return this._month
+		},
+		set (val) {
+			this._month = val
+			var month = this._month + 1
+			month = month < 10 ? '0'+month : month
+			$("#currentDate").html(this._year+'/'+month)
+		}
+   },
+   'nowYear': {
+		value: '',
+      writable: true
+   },
+   'nowMonth': {
+		value: '',
+      writable: true
+   }
+})
+// 已选择的日期
+var selectedDate = ''
+var prevBtnDisable = true
+var now = new Date()
+dateObj.year = dateObj.nowYear = now.getFullYear()
+dateObj.month = dateObj.nowMonth = now.getMonth()
+var activityList = []
+
+getActivityDays()
+
+// ajax 取每个月的预定情况
+// 返回结构我参考的小夫
+// 看设计图 有三种状态 1.过期 2.未有预约 3.有预约 4.预约已满  我就先按这个来写生成的代码了  具体生成代码的地方我也会注释
+function getActivityDays() {
+   // ajax后执行
+	activityList = [
+      {day: '2020/03/01', status: 1},
+      {day: '2020/03/02', status: 2},
+      {day: '2020/03/03', status: 3},
+      {day: '2020/03/04', status: 4},
+      {day: '2020/03/05', status: 1},
+      {day: '2020/03/06', status: 1},
+      {day: '2020/03/07', status: 1},
+      {day: '2020/03/08', status: 1},
+      {day: '2020/03/09', status: 1},
+      {day: '2020/03/10', status: 1},
+      {day: '2020/03/11', status: 1},
+      {day: '2020/03/12', status: 1},
+      {day: '2020/03/13', status: 1},
+      {day: '2020/03/14', status: 1},
+      {day: '2020/03/15', status: 1},
+      {day: '2020/03/16', status: 1},
+      {day: '2020/03/17', status: 1},
+      {day: '2020/03/18', status: 1},
+      {day: '2020/03/19', status: 1},
+      {day: '2020/03/20', status: 1},
+      {day: '2020/03/21', status: 1},
+      {day: '2020/03/22', status: 1},
+      {day: '2020/03/23', status: 1},
+      {day: '2020/03/24', status: 1},
+      {day: '2020/03/25', status: 1},
+      {day: '2020/03/26', status: 1},
+      {day: '2020/03/27', status: 1},
+      {day: '2020/03/28', status: 1},
+      {day: '2020/03/29', status: 1},
+      {day: '2020/03/30', status: 1},
+      {day: '2020/03/31', status: 1},
+   ]
+	initCalendar(dateObj.year, dateObj.month)
+}
+// 生成日历数据
+function initCalendar(year, month) {
+	const monthDays = [31, 28 + is_leap(year), 31, 30, 31, 31, 30, 31, 30, 31, 30, 31] // 每个月有多少天
+	const lastMonth = month - 1 === -1 ? 11 : month - 1
+	const lastMonthDay = monthDays[lastMonth] // 上个月的天数
+	const thisMonthDay = monthDays[month] // 这个月的天数
+	const startWeek = new Date(year, month, 1).getDay() // 获取当月第一天的星期
+	const endWeek = new Date(year, month, thisMonthDay).getDay() // 获取当月最后一天的星期
+	let list = []
+	let beforeDays = 0
+	let afterDays = 0
+	if (startWeek === 0) {
+		beforeDays = startWeek + 7
+		afterDays = 6 - endWeek
+	} else {
+		beforeDays = startWeek
+		afterDays = 13 - endWeek
+	}
+	for (let i = beforeDays - 1; i >= 0; i--) { // 前一个月 日期
+		list.push({
+			status: 1,
+			date: formatDate(year, month - 1, lastMonthDay - i),
+			day: lastMonthDay - i
+		})
+	}
+	for (let i = 0; i < thisMonthDay; i++) { // 当月 日期
+		list.push({
+			status: activityList[i].status,
+			date: formatDate(year, month, i + 1),
+			day: i + 1
+		})
+	}
+	for (let i = 0; i < afterDays; i++) { // 下一个月 日期
+		list.push({
+			status: 1,
+			date: formatDate(year, month + 1, i + 1),
+			day: i + 1
+		})
+	}
+	// console.log(list)
+	let html = ''
+	for (let i of list) {
+		if (i.status === 1) { // 过期
+			html += '<a data-date="'+i.date+'">'+i.day+'</a>'
+      } else if (i.status === 2) { // 未有预约
+			html += '<a data-date="'+i.date+'">'+i.day+'</a>'
+      } else if (i.status === 3) { // 有预约
+			html += '<a data-date="'+i.date+'" class="book">'+i.day+'</a>'
+      } else if (i.status === 4) { // 预约已满
+			html += '<a data-date="'+i.date+'" class="book full">'+i.day+'</a>'
+      }
+   }
+	$("#dayList").html(html)
+   $("#dayList .book").on('click', function () {
+      $(this).addClass('selected').siblings('a').removeClass('selected')
+	   selectedDate = $(this).data('date')
+      console.log(selectedDate)
+   })
+}
+
+// 上一个月
+function prevMonth () { // 上一个月
+	// if (prevBtnDisable) return
+	dateObj.month -= 1
+	if (dateObj.month === -1) {
+		dateObj.month = 11
+		dateObj.year -= 1
+	}
+	getActivityDays()
+}
+// 下一个月
+function nextMonth () { // 下一个月
+	console.log('next')
+	dateObj.month += 1
+	if (dateObj.month === 12) {
+		dateObj.month = 0
+		dateObj.year += 1
+	}
+	getActivityDays()
+}
+
+//判断是否为闰年
+function is_leap(year) {
+	return (year % 100 === 0 ? (year % 400 === 0 ? 1 : 0) : (year % 4 === 0 ? 1 : 0))
+}
+// 格式化日期
+function formatDate(year, month, day) {
+	if (month === -1) month = 11
+	if (month === 12) month = 0
+	month += 1
+	month = month < 10 ? `0${month}` : month
+	day = day < 10 ? `0${day}` : day
+	return `${year}/${month}/${day}`
+}
+</script>
+</body>
+</html>

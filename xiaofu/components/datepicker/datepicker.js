@@ -163,6 +163,7 @@ Component({
          getActivityDays({
             month: `${this.data.year}/${this.data.month + 1}`
          }).then(res => {
+            console.log('date', res)
             this.data.activityList = res.list
             this.initCalendar(this.data.year, this.data.month)
          })

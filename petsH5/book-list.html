@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="apple-touch-icon-precomposed" href="images/cover.png">
+    <link rel="apple-touch-icon" href="images/cover.png">
+    <title>工作人员</title>
+    <link href="css/reset.css" type="text/css" rel="stylesheet" />
+    <link href="css/icons.css" type="text/css" rel="stylesheet" />
+    <link href="css/helvetica.css" type="text/css" rel="stylesheet" />
+    <link href="css/layout.css" type="text/css" rel="stylesheet" />
+    <script src="js/jquery-2.1.1.min.js" type="application/javascript" language="javascript"></script>
+</head>
+<body>
+<header class="header">
+    <img src="images/logo.png" class="logo">
+    <a href="javascript:;" class="icons icon-xiugai"></a>
+</header>
+<section class="container book-container">
+   <div class="month-selector">
+      <div class="frame">
+         <div class="month-opera">
+            <p id="currentDate">2020/04/04</p>
+         </div>
+         <div class="nums-opera">
+            <p>今日宠物数量上限</p>
+            <a onclick="doReduce()"><img src="images/icon-reduce.png"></a>
+            <input type="number" id="nums" value="0"/>
+            <a onclick="doAdd()"><img src="images/icon-add.png"></a>
+         </div>
+      </div>
+   </div>
+   <div class="frame">
+      <table class="book-table">
+         <tr>
+            <td class="index">1</td>
+            <td class="name">
+               <div>
+                  <span class="tag">爱宠名称</span>
+                  <p>Jacky</p>
+               </div>
+            </td>
+            <td class="name">
+               <div>
+                  <span class="tag">主人信息</span>
+                  <p>何方</p>
+               </div>
+            </td>
+            <td class="mobile">13412341234</td>
+            <td class="status"><img src="images/icon-use.png"></td>
+            <td class="price">120<span>元</span></td>
+            <td class="btn">
+               <a>查看详情</a>
+            </td>
+            <td class="operas">
+               <div>
+                  <a>优惠</a>
+                  <a>退款</a>
+               </div>
+            </td>
+         </tr>
+      </table>
+   </div>
+</section>
+<script>
+var numId = $("#nums")
+function doReduce() {
+   var nums = parseFloat(numId.val())
+   nums -= 1
+   if (nums < 0) nums = 0
+	numId.val(nums)
+}
+function doAdd() {
+   var nums = parseFloat(numId.val())
+   nums += 1
+	numId.val(nums)
+}
+</script>
+</body>
+</html>

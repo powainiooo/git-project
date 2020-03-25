@@ -1,0 +1,113 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+   <meta charset="utf-8">
+   <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+   <meta content="yes" name="apple-mobile-web-app-capable">
+   <meta content="black" name="apple-mobile-web-app-status-bar-style">
+   <meta content="telephone=no" name="format-detection">
+   <meta content="email=no" name="format-detection">
+   <meta http-equiv="Cache-Control" content="no-siteapp" />
+   <link rel="apple-touch-icon-precomposed" href="images/cover.png">
+   <link rel="apple-touch-icon" href="images/cover.png">
+   <title>服务订单</title>
+   <link href="css/reset.css" type="text/css" rel="stylesheet" />
+   <link href="css/icons.css" type="text/css" rel="stylesheet" />
+   <link href="css/helvetica.css" type="text/css" rel="stylesheet" />
+   <link href="css/layout.css" type="text/css" rel="stylesheet" />
+   <script src="js/jquery-2.1.1.min.js" type="application/javascript" language="javascript"></script>
+</head>
+<body style="background-color: #efebea;">
+<header class="header">
+   <div class="icons icon-logo"></div>
+   <a href="javascript:;" class="icons icon-xiugai" id="btnBack"></a>
+</header>
+<section class="container">
+   <div class="month-selector">
+      <div class="frame700">
+         <div class="month-opera">
+            <p id="currentDate">优惠</p>
+         </div>
+      </div>
+   </div>
+   <div class="person">
+      <div class="line" style="margin-bottom: 10px; margin-top: 30px;">
+         <div class="info info-border">
+            <img src="images/tag1.jpg"/>
+            <p>Jackey</p>
+            <div>已绝育</div>
+            <p>Jackey</p>
+         </div>
+         <div class="info" style="margin-left: 20px;">
+            <img src="images/tag2.jpg"/>
+            <div>何方</div>
+            <p>13412341234</p>
+         </div>
+      </div>
+      <div class="line" style="margin-bottom: 30px;">
+         <div class="info">
+            <img src="images/tag3.jpg"/>
+            <div>何方何方何方何方何方何方何方何方</div>
+         </div>
+      </div>
+   </div>
+
+   <div class="goods-info">
+      <div class="frame700">
+         <div class="left">
+            <div class="name">Hair Optional package<span>Hair 自选套餐</span></div>
+            <div class="price">120<span>元</span></div>
+         </div>
+         <div class="preferential">
+            <div class="price">
+               <input type="number" value="120">
+               <span>元</span>
+            </div>
+            <a>确 认 优 惠</a>
+         </div>
+      </div>
+   </div>
+
+   <div class="product">
+      <ul class="frame700">
+         <li>
+            <p class="img"><img src="images/pro1.png"></p>
+            <p class="name_en">Aesop<br>Calming shampoo</p>
+            <p class="name_cn">伊索 舒缓洗发露</p>
+         </li>
+         <li>
+            <p class="img"><img src="images/pro1.png"></p>
+            <p class="name_en">Aesop<br>Calming shampoo</p>
+            <p class="name_cn">伊索 舒缓洗发露</p>
+         </li>
+         <li>
+            <p class="img"><img src="images/pro1.png"></p>
+            <p class="name_en">Aesop<br>Calming shampoo</p>
+            <p class="name_cn">伊索 舒缓洗发露</p>
+         </li>
+      </ul>
+   </div>
+
+   <!-- 确认框 -->
+   <div class="confirm-container">
+      <div class="frame">
+         <p>是否确认优惠？</p>
+         <div>一旦确认将不可再给予更多优惠，请谨慎操作。</div>
+      </div>
+   </div>
+</section>
+<script>
+
+//点击返回
+$("#btnBack").on('touchstart',function(){
+	$(this).addClass('item-touch');
+});
+$("#btnBack").on('touchend',function(){
+	$(this).removeClass('item-touch');
+	setTimeout(function(){
+		window.location = 'list.html'
+	},150);
+});
+</script>
+</body>
+</html>

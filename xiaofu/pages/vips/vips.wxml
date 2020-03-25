@@ -1,4 +1,4 @@
-<header initButton="{{headerBtns}}" bindbtntap="headBtn"></header>
+<header initButton="{{headerBtns}}" onlyShare bindbtntap="headBtn"></header>
 <view class="blue"></view>
 <view class="card">
    <image src="{{imgSrc + itemData.cover}}" mode="widthFix"></image>

@@ -22,6 +22,10 @@ Component({
       name: {
          type: String,
          value: ''
+      },
+      onlyShare: {
+         type: Boolean,
+         value: false
       }
    },
 
@@ -177,22 +181,26 @@ Component({
          })
       },
       toggleShare (event) {
-         let isShow
-         try {
-            isShow = event.target.dataset.val
-         } catch (err) {
-            isShow = false
+         if (this.data.onlyShare) {
+
+         } else {
+            let isShow
+            try {
+               isShow = event.target.dataset.val
+            } catch (err) {
+               isShow = false
+            }
+            let animation = wx.createAnimation({
+               duration: 300,
+               timingFunction: 'ease-in-out'
+            })
+            let dis = isShow ? '0rpx' : '-330rpx'
+            animation.bottom(dis).step()
+            this.setData({
+               showCover: isShow,
+               shareAnimate: animation.export()
+            })
          }
-         let animation = wx.createAnimation({
-            duration: 300,
-            timingFunction: 'ease-in-out'
-         })
-         let dis = isShow ? '0rpx' : '-330rpx'
-         animation.bottom(dis).step()
-         this.setData({
-            showCover: isShow,
-            shareAnimate: animation.export()
-         })
       },
       drawPoster () {
 	      this.triggerEvent('btntap', 'poster')

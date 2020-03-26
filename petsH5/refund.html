@@ -1,0 +1,187 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+   <meta charset="utf-8">
+   <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+   <meta content="yes" name="apple-mobile-web-app-capable">
+   <meta content="black" name="apple-mobile-web-app-status-bar-style">
+   <meta content="telephone=no" name="format-detection">
+   <meta content="email=no" name="format-detection">
+   <meta http-equiv="Cache-Control" content="no-siteapp" />
+   <link rel="apple-touch-icon-precomposed" href="images/cover.png">
+   <link rel="apple-touch-icon" href="images/cover.png">
+   <title>服务订单</title>
+   <link href="css/reset.css" type="text/css" rel="stylesheet" />
+   <link href="css/icons.css" type="text/css" rel="stylesheet" />
+   <link href="css/helvetica.css" type="text/css" rel="stylesheet" />
+   <link href="css/layout.css" type="text/css" rel="stylesheet" />
+   <script src="js/jquery-2.1.1.min.js" type="application/javascript" language="javascript"></script>
+</head>
+<body style="background-color: #efebea;">
+<header class="header">
+   <div class="icons icon-logo"></div>
+   <a href="javascript:;" class="icons icon-xiugai" id="btnBack"></a>
+</header>
+<section class="container">
+   <div class="month-selector">
+      <div class="frame700">
+         <div class="month-opera">
+            <p id="currentDate">退款</p>
+         </div>
+      </div>
+   </div>
+   <div class="person">
+      <div class="line" style="margin-bottom: 10px; margin-top: 30px;">
+         <div class="info info-border">
+            <img src="images/tag1.jpg"/>
+            <p>Jackey</p>
+            <div>已绝育</div>
+            <p>Jackey</p>
+         </div>
+         <div class="info" style="margin-left: 20px;">
+            <img src="images/tag2.jpg"/>
+            <div>何方</div>
+            <p>13412341234</p>
+         </div>
+      </div>
+      <div class="line" style="margin-bottom: 30px;">
+         <div class="info">
+            <img src="images/tag3.jpg"/>
+            <div>何方何方何方何方何方何方何方何方</div>
+         </div>
+      </div>
+   </div>
+
+   <div class="goods-info">
+      <div class="frame700">
+         <div class="left">
+            <div class="name">Hair Optional package<span>Hair 自选套餐</span></div>
+            <div class="price">120<span>元</span></div>
+         </div>
+         <div class="preferential" style="justify-content: flex-end; border-left: none;">
+            <a id="btnPref">确 认 退 款</a>
+         </div>
+         <div class="preferential-result" style="display: none;">
+            已优惠 <span>10</span><span class="unit">元</span>
+         </div>
+      </div>
+   </div>
+
+   <div class="product">
+      <ul class="frame700">
+         <li>
+            <p class="img"><img src="images/pro1.png"></p>
+            <p class="name_en">Aesop<br>Calming shampoo</p>
+            <p class="name_cn">伊索 舒缓洗发露</p>
+         </li>
+         <li>
+            <p class="img"><img src="images/pro1.png"></p>
+            <p class="name_en">Aesop<br>Calming shampoo</p>
+            <p class="name_cn">伊索 舒缓洗发露</p>
+         </li>
+         <li>
+            <p class="img"><img src="images/pro1.png"></p>
+            <p class="name_en">Aesop<br>Calming shampoo</p>
+            <p class="name_cn">伊索 舒缓洗发露</p>
+         </li>
+      </ul>
+   </div>
+
+   <!-- 确认框 -->
+   <div class="confirm-container" id="confirm" style="display: none;">
+      <a href="javascript:;" class="close btnClose"><img src="images/icon-close.png"></a>
+      <div class="frame">
+         <p class="title">是否确认退款？</p>
+         <div class="des">一旦确认全款将原路返还给用户，请谨慎操作。</div>
+         <div class="progress">
+            <div class="line" id="progress">
+               <a class="dot" ontouchstart="tstart(event)"></a>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <!-- 成功框 -->
+   <div class="confirm-container" id="success" style="display: none;">
+      <a href="javascript:;" class="close btnClose"><img src="images/icon-close.png"></a>
+      <div class="frame">
+         <img src="images/icon-success.jpg">
+         <p class="title">Operate successfully!</p>
+         <p class="title">操作成功！</p>
+         <a class="btn btnClose">返回</a>
+      </div>
+   </div>
+
+   <!-- 失败框 -->
+   <div class="confirm-container" id="fail" style="display: none;">
+      <a href="javascript:;" class="close btnClose"><img src="images/icon-close.png"></a>
+      <div class="frame">
+         <img src="images/icon-fail.jpg">
+         <p class="title">Operate failuer!</p>
+         <p class="title">操作失败！</p>
+         <a class="btn">重试</a>
+      </div>
+   </div>
+</section>
+<script>
+// 滑块滑动
+var progress = document.getElementById('progress')
+var currentWidth = 50
+function tstart (e) {
+	console.log('tstart', e)
+   var sx = e.touches[0].clientX
+   var sw = currentWidth
+	progress.className = 'line'
+   document.ontouchmove = function (e) {
+      var mx = e.touches[0].clientX
+	   currentWidth = sw + mx - sx
+      if (currentWidth < 50) currentWidth = 50
+      if (currentWidth > 200) currentWidth = 200
+	   progress.style.width = currentWidth + 'px'
+   }
+   document.ontouchend = function () {
+	   document.ontouchmove = null
+	   document.ontouchend = null
+      // 滑动确认成功
+      if (currentWidth === 200) {
+      	console.log('confirm success')
+	      showResult('success')
+      } else {
+      	progress.className = 'line line-move'
+	      currentWidth = 50
+	      progress.style.width = currentWidth + 'px'
+      }
+   }
+}
+
+// 显示结果框 传参 success fail
+function showResult (result) {
+	$("#confirm").hide()
+	$("#" + result).show()
+}
+
+// 打开优惠
+$("#btnPref").on('click', function () {
+	currentWidth = 50
+	progress.style.width = currentWidth + 'px'
+   $("#confirm").show()
+})
+
+// 关闭弹窗
+$(".btnClose").on('click', function () {
+   $(this).parents('.confirm-container').hide()
+})
+
+//点击返回
+$("#btnBack").on('touchstart',function(){
+	$(this).addClass('item-touch');
+});
+$("#btnBack").on('touchend',function(){
+	$(this).removeClass('item-touch');
+	setTimeout(function(){
+		window.location = 'list.html'
+	},150);
+});
+</script>
+</body>
+</html>

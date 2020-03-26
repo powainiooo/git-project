@@ -94,6 +94,24 @@
 .goods-info .preferential .price input { width: 90px; height: 46px; font-size: 30px; color: #352c1d; line-height: 46px;box-shadow: 0 0 4px rgba(0, 0, 0, 0.2); border: none; font-family: Helve; text-align: center;}
 .goods-info .preferential .price span { font-size: 8px; margin-left: 4px;}
 .goods-info .preferential a { width: 100px; height: 50px; border-radius: 25px; background-color: #dac49f; display: flex; justify-content: center; align-items: center; font-size: 14px; color: #ffffff; box-shadow: 0 0 4px rgba(0, 0, 0, 0.2)}
+.goods-info .preferential-result { font-size: 30px; color: #9d9c9a; text-shadow: 0 0 3px rgba(54, 42, 26, 0.33); font-weight: lighter;}
+.goods-info .preferential-result span { font-family: Helve;}
+.goods-info .preferential-result .unit { font-size: 8px; margin-left: 4px;}
+
+
+.confirm-container { position: fixed; top: 70px; bottom: 0; left: 0; right: 0; background-color: rgba(255, 255, 255, 0.95); z-index: 1000; display: flex; justify-content: center; align-items: center;}
+.confirm-container .close { width: 40px; position: absolute; top: 35px; right: 35px;}
+.confirm-container .frame { width: 300px;}
+.confirm-container .frame img { width: 60px; margin-bottom: 20px;}
+.confirm-container .frame .title { font-size: 30px; color: #352c1d; font-family: Helve;}
+.confirm-container .frame .des { font-size: 12px; color: #352c1d; margin-top: 20px;}
+.confirm-container .progress { width: 210px; height: 60px; border-radius: 30px; background-color: #e7e3e2; box-shadow: 0 0 4px rgba(0, 0, 0, 0.2); position: relative; display: flex; align-items: center; padding: 0 5px; margin-top: 65px;}
+.confirm-container .progress .line { width: 25%; height: 50px; border-radius: 25px; background-color: #dac49f; position: relative;}
+.confirm-container .progress .line-move { transition: all 0.3s ease;}
+.confirm-container .progress .dot { width: 54px; height: 54px; border-radius: 50%; background-color: #ffffff; margin-right: -2px; position: absolute; top: -2px; right: 0; transition: all 0.15s ease-out}
+.confirm-container .progress .dot:active { transform: scale(1.07);}
+.confirm-container .frame .btn { width: 100px; height: 50px; border-radius: 30px; background-color: #dac49f; display: flex; justify-content: center; align-items: center; font-size: 14px; color: #ffffff; box-shadow: 0 0 4px rgba(0, 0, 0, 0.2); margin-top: 70px;}
+
 
 .goods{ background-color: #FFFFFF;}
 .goods .frame700{ height: 100px; display: flex; justify-content: space-between; align-items: center;}

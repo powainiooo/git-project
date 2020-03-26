@@ -58,12 +58,15 @@
             <div class="name">Hair Optional package<span>Hair 自选套餐</span></div>
             <div class="price">120<span>元</span></div>
          </div>
-         <div class="preferential">
+         <div class="preferential" style="display: none;">
             <div class="price">
                <input type="number" value="120">
                <span>元</span>
             </div>
-            <a>确 认 优 惠</a>
+            <a id="btnPref">确 认 优 惠</a>
+         </div>
+         <div class="preferential-result">
+            已优惠 <span>10</span><span class="unit">元</span>
          </div>
       </div>
    </div>
@@ -89,14 +92,89 @@
    </div>
 
    <!-- 确认框 -->
-   <div class="confirm-container">
+   <div class="confirm-container" id="confirm" style="display: none;">
+      <a href="javascript:;" class="close btnClose"><img src="images/icon-close.png"></a>
       <div class="frame">
-         <p>是否确认优惠？</p>
-         <div>一旦确认将不可再给予更多优惠，请谨慎操作。</div>
+         <p class="title">是否确认优惠？</p>
+         <div class="des">一旦确认将不可再给予更多优惠，请谨慎操作。</div>
+         <div class="progress">
+            <div class="line" id="progress">
+               <a class="dot" ontouchstart="tstart(event)"></a>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <!-- 成功框 -->
+   <div class="confirm-container" id="success" style="display: none;">
+      <a href="javascript:;" class="close btnClose"><img src="images/icon-close.png"></a>
+      <div class="frame">
+         <img src="images/icon-success.jpg">
+         <p class="title">Operate successfully!</p>
+         <p class="title">操作成功！</p>
+         <a class="btn btnClose">返回</a>
+      </div>
+   </div>
+
+   <!-- 失败框 -->
+   <div class="confirm-container" id="fail" style="display: none;">
+      <a href="javascript:;" class="close btnClose"><img src="images/icon-close.png"></a>
+      <div class="frame">
+         <img src="images/icon-fail.jpg">
+         <p class="title">Operate failuer!</p>
+         <p class="title">操作失败！</p>
+         <a class="btn">重试</a>
       </div>
    </div>
 </section>
 <script>
+// 滑块滑动
+var progress = document.getElementById('progress')
+var currentWidth = 50
+function tstart (e) {
+	console.log('tstart', e)
+   var sx = e.touches[0].clientX
+   var sw = currentWidth
+	progress.className = 'line'
+   document.ontouchmove = function (e) {
+      var mx = e.touches[0].clientX
+	   currentWidth = sw + mx - sx
+      if (currentWidth < 50) currentWidth = 50
+      if (currentWidth > 200) currentWidth = 200
+	   progress.style.width = currentWidth + 'px'
+   }
+   document.ontouchend = function () {
+	   document.ontouchmove = null
+	   document.ontouchend = null
+      // 滑动确认成功
+      if (currentWidth === 200) {
+      	console.log('confirm success')
+	      showResult('success')
+      } else {
+      	progress.className = 'line line-move'
+	      currentWidth = 50
+	      progress.style.width = currentWidth + 'px'
+      }
+   }
+}
+
+// 显示结果框 传参 success fail
+function showResult (result) {
+	$("#confirm").hide()
+	$("#" + result).show()
+}
+
+// 打开优惠
+$("#btnPref").on('click', function () {
+	currentWidth = 50
+	progress.style.width = currentWidth + 'px'
+   $("#confirm").show()
+})
+
+// 关闭弹窗
+$(".btnClose").on('click', function () {
+   $(this).parents('.confirm-container').hide()
+})
 
 //点击返回
 $("#btnBack").on('touchstart',function(){

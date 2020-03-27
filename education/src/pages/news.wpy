@@ -3,7 +3,8 @@
    .title-frame { height: 140rpx; background-color: #ffffff; padding-top: 30rpx; position: relative;}
    .title-frame::after { content: ''; width: 100%; height: 40rpx; background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAAnCAYAAAAl15mhAAAACXBIWXMAAAsSAAALEgHS3X78AAAAMUlEQVQYlWM005LhZ2BgYGBigAIWBgaGvww4Gf9gjP/YGYz//4NphIFwk0cag4GBAQBWoQrVi8zgKgAAAABJRU5ErkJggg==) repeat-x; background-size: auto 100%; position: absolute; top: 100%; left: 0;}
    .news-item { margin: 0 40rpx; padding: 45rpx 25rpx 65rpx 25rpx; display: flex; align-items: flex-start; justify-content: space-between; position: relative;}
-   .news-item::after { content: ''; width: 100%; height: 3px; background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAADCAYAAAB1c+RqAAAACXBIWXMAAAsSAAALEgHS3X78AAAARUlEQVQImWM8v7QpgYGBAYRxgQsGUbUFeOQZGF9eO7aBS1jKH5eCX18/PhVS1JPBZwjLs/N7JoBsw6PmgZCiHm5ZBgYGAH6NEhN5AJscAAAAAElFTkSuQmCC) repeat-x; background-size: auto 100%; position: absolute; top: 100%; left: 0;}
+   .news-item::after { content: ''; width: 100%; height: 3rpx; background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAADCAYAAAB1c+RqAAAACXBIWXMAAAsSAAALEgHS3X78AAAARUlEQVQImWM8v7QpgYGBAYRxgQsGUbUFeOQZGF9eO7aBS1jKH5eCX18/PhVS1JPBZwjLs/N7JoBsw6PmgZCiHm5ZBgYGAH6NEhN5AJscAAAAAElFTkSuQmCC) repeat-x; background-size: auto 100%; position: absolute; top: 100%; left: 0;}
+   .news-item:last-child::after { height: 0;}
    .news-item .time .year { font-size: 27rpx; color: #221715; display: flex; font-family: Helve; justify-content: space-between;}
    .news-item .time .date { font-size: 40rpx; color: #221715; font-weight: bold; font-family: Helve;}
    .news-item .content { width: 466rpx;}
@@ -13,22 +14,22 @@
 
 <template>
    <div>
-      <div class="container {{showMenu ? 'blur' : ''}}">
+      <div class="container {{showMenu ? 'blur' : ''}}" style="padding-bottom: 100rpx;">
          <zHeader></zHeader>
          <div class="title-frame">
             <div class="title2 text-shadow"><span class="en">News</span> <br/> 近期活动</div>
          </div>
 
-         <div class="news-item">
+         <div class="news-item" v-for="item in list" :key="item.id">
             <div class="time">
                <div class="year">
-                  <span v-for="i in '2020'">{{i}}</span>
+                  <span v-for="i in item.year">{{i}}</span>
                </div>
-               <div class="date">09/10</div>
+               <div class="date">{{item.date}}</div>
             </div>
             <div class="content">
-               <img src="../res/img/news.png" mode="widthFix" class="img" />
-               <div class="text">虎门万科1</div>
+               <img :src="item.image" mode="widthFix" class="img" />
+               <div class="text">{{item.content}}</div>
             </div>
          </div>
       </div>
@@ -39,7 +40,7 @@
    import wepy from '@wepy/core'
    import store from '../store'
    import { mapState } from '@wepy/x'
-   import {getStudentList, getCourseListByStudent} from '@/res/api.js'
+   import {getActivityList} from '@/res/api.js'
    // https://github.com/wx-plugin/image-cropper
    wepy.page({
       store,
@@ -52,31 +53,15 @@
       },
       methods: {
          getData () {
-            getStudentList({
-               store_id: this.selectedStore
-            }).then(res => {
-               this.list = res.data
-            })
-         },
-         gotoNext (data) {
-            store.commit('setSelectedStudent', data)
-            getCourseListByStudent({
-               student_id: data.id
-            }).then(res => {
-               if (res.data.length > 0) {
-                  wx.navigateTo({
-                     url: '/pages/studentlesson'
-                  })
-               } else {
-                  wx.navigateTo({
-                     url: '/pages/lesson'
-                  })
+            getActivityList().then(res => {
+               let list = []
+               for (let i of res.data) {
+                  let date = i.date.split('/')
+                  i.year = date[0]
+                  i.date = `${date[1]}/${date[2]}`
+                  list.push(i)
                }
-            })
-         },
-         toStudent () {
-            wx.navigateTo({
-               url: '/pages/newfile'
+               this.list = list
             })
          }
       }

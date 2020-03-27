@@ -167,3 +167,11 @@ export const updateStore = data => {
       data
    })
 }
+// 近期活动列表
+export const getActivityList = data => {
+   return ajax({
+      method: 'POST',
+      url: `${baseUrl}/api/activity/lists`,
+      data
+   })
+}

@@ -119,10 +119,10 @@
 <config>
    {
    "pages": [
+      "pages/index",
       "pages/news",
       "pages/aboutus",
       "pages/order",
-      "pages/index",
       "pages/studentlesson",
       "pages/comment",
       "pages/lessonDetail",

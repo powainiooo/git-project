@@ -1,6 +1,5 @@
-<swiper class="vip-frame" previous-margin="35rpx" next-margin="35rpx">
-   <swiper-item duration="200"
-                wx:for="{{listData}}"
+<swiper class="vip-frame" previous-margin="35rpx" next-margin="35rpx" duration="200">
+   <swiper-item wx:for="{{listData}}"
                 wx:key="id">
       <view class="vip-item">
          <view class="img"

@@ -1,4 +1,5 @@
 // pages/date/date.js
+import {getActivityDays} from '../../utils/api.js'
 const app = getApp();
 Page({
 
@@ -39,8 +40,8 @@ Page({
 		    year,
 		    month
 	    })
-	    // this.getActivityDays()
-	    this.initCalendar(this.data.year, this.data.month)
+	    this.getActivityDays()
+	    // this.initCalendar(this.data.year, this.data.month)
     },
 	formatDate (year, month, day) {
 		if (month === -1) month = 11
@@ -75,9 +76,9 @@ Page({
 			})
 		}
 		for (let i = 0; i < thisMonthDay; i++) { // 当月 日期
+			const aData = this.data.activityList[i]
 			list.push({
-				// activity: this.data.activityList[i].is_act !== 0,
-				activity: true,
+				activity: aData.nums < aData.max,
 				date: this.formatDate(year, month, i + 1),
 				day: i + 1
 			})
@@ -129,14 +130,15 @@ Page({
 		})
 	},
 	doConfirm () {
-		app.globalData.selectDate = this.data.selectedDate
+		app.globalData.selectedDate = this.data.selectedDate
 		wx.navigateTo({
 			url: '/pages/select/select'
 		})
 	},
 	getActivityDays () {
 		getActivityDays({
-			month: `${this.data.year}/${this.data.month + 1}`
+			month: `${this.data.year}/${this.data.month + 1}`,
+			shop_id: app.globalData.store.id
 		}).then(res => {
 			this.data.activityList = res.list
 			this.initCalendar(this.data.year, this.data.month)

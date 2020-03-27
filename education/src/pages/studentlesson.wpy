@@ -12,8 +12,9 @@
          <zHeader></zHeader>
          <div class="person">
             <div class="avatar"
-                 hover-class="hscale"
-                 hover-stay-time="10" @click="toStudent">
+                 :hover-class="studentList.length > 1 ? 'hscale' : ''"
+                 hover-stay-time="10"
+                 @click="toStudent">
                <img :src="selectedStudent.avatar" mode="widthFix" class="img"/>
             </div>
             <div class="name">{{selectedStudent.name}}</div>
@@ -47,7 +48,8 @@
    wepy.page({
       store,
       data: {
-         list: []
+         list: [],
+         studentList: []
       },
       computed: mapState(['showMenu', 'selectedStudent', 'selectedStore']),
       onLoad(query) {
@@ -60,6 +62,11 @@
             }).then(res => {
                this.list = res.data
             })
+            getStudentList({
+               store_id: this.selectedStore
+            }).then(res => {
+               this.studentList = res.data
+            })
          },
          gotoNext (id) {
             wx.navigateTo({
@@ -67,15 +74,11 @@
             })
          },
          toStudent () {
-            getStudentList({
-               store_id: this.selectedStore
-            }).then(res => {
-               if (res.data.length > 1) {
-                  wx.navigateTo({
-                     url: '/pages/student'
-                  })
-               }
-            })
+            if (this.studentList.length > 1) {
+               wx.navigateTo({
+                  url: '/pages/student'
+               })
+            }
          }
       }
    })

@@ -1,5 +1,7 @@
 // pages/select/second.js
 import regeneratorRuntime from '../../utils/runtime.js'
+import {getPetList} from '../../utils/api.js'
+const app = getApp()
 Page({
 
    /**
@@ -7,19 +9,9 @@ Page({
     */
    data: {
 	   type: '',
-	   dogList: {
-	   	A: [{}, {}, {}, {}],
-	   	B: [{}, {}, {}, {}],
-	   	C: [{}, {}, {}, {}],
-	   	I: [{}, {}, {}, {}],
-	   	L: [{}, {}, {}, {}],
-	   	M: [{}, {}, {}, {}],
-	   	N: [{}, {}, {}, {}],
-	   	O: [{}, {}, {}, {}],
-	   	P: [{}, {}, {}, {}],
-	   	Y: [{}, {}, {}, {}],
-	   	Z: [{}, {}, {}, {}],
-	   },
+	   imgSrc:app.globalData.imgSrc,
+	   dogList: {},
+	   catList: [],
 	   scrollId: '',
 	   heights: {},
 	   screenHeight: 0
@@ -29,7 +21,7 @@ Page({
     * 生命周期函数--监听页面加载
     */
    onLoad: function (options) {
-		const type = options.type || 'dog'
+		const type = options.type || '1'
 	   this.setData({
 		   type
 	   })
@@ -42,6 +34,29 @@ Page({
 	   })
 	   this.initSize()
    },
+	getData () {
+		getPetList({
+			type: this.data.type
+		}).then(res => {
+			if (this.data.type === '1') { // 狗
+				let obj = {}
+				for (let i of res.data) {
+					if (!obj[i.head_str]) obj[i.head_str] = []
+					obj[i.head_str].push(i)
+				}
+				this.setData({
+					dogList: obj
+				})
+				wx.nextTick(() => {
+					this.initSize()
+				})
+			} else if (this.data.type === '2') { //猫
+				this.setData({
+					catList: res.data
+				})
+			}
+		})
+	},
 	async initSize () {
    	for (let i in this.data.dogList) {
    		this.data.heights[i] = 0
@@ -79,6 +94,9 @@ Page({
 	},
 	scroll (e) {
    	// console.log(e.detail.scrollTop)
+	},
+	doSelect (e) {
+
 	},
 	doNext () {
    	wx.navigateTo({

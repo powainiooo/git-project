@@ -37,8 +37,8 @@
       </div>
       <div class="z-menu-list-frame" @touchmove.stop="tmove">
          <div class="z-menu-nav" :style="{bottom: showMenu ? '235rpx' : '-330rpx'}">
-            <a href="#" class="z-menu-nav-item" hover-class="hscale" hover-stay-time="10">关于我们 |  <span class="en">About us</span></a>
-            <a href="#" class="z-menu-nav-item" hover-class="hscale" hover-stay-time="10">近期活动 |  <span class="en">News</span></a>
+            <a url="/pages/aboutus" class="z-menu-nav-item" hover-class="hscale" hover-stay-time="10">关于我们 |  <span class="en">About us</span></a>
+            <a url="/pages/news" class="z-menu-nav-item" hover-class="hscale" hover-stay-time="10">近期活动 |  <span class="en">News</span></a>
          </div>
          <div class="z-menu-nav" :style="{bottom: (showMenu && func === 'menu') ? '580rpx' : '-330rpx'}">
             <a url="/pages/lesson"

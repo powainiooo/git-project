@@ -15,14 +15,14 @@
             <view class="date-week-item"
                   wx:for="{{week}}"
                   wx:for-item="item"
-                  wx:key="{{item}}"><text>{{item}}</text></view>
+                  wx:key="item"><text>{{item}}</text></view>
          </view>
          <view class="date-days">
             <view class="date-days-item {{item.activity ? 'date-days-item-light' : ''}} {{selectedDate === item.date ? 'date-days-item-active' : ''}}"
                   wx:for="{{daysList}}"
                   wx:for-item="item"
                   wx:for-index="index"
-                  wx:key="{{item.date}}"
+                  wx:key="date"
                   data-item="{{item}}"
                   bindtap="selectDate">{{item.day}}</view>
          </view>

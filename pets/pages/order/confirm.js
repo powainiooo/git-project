@@ -15,7 +15,7 @@ Page({
         proTreatment:app.globalData.proTreatment,
         buyerInfo:app.globalData.buyerInfo,
         store:app.globalData.store,
-        selectDate:app.globalData.selectDate,
+        selectDate:app.globalData.selectedDate,
         selectWeek:app.globalData.selectWeek,
         selectTime:app.globalData.selectTime,
         ruleContent:'',
@@ -37,8 +37,8 @@ Page({
             }
         ],
         imgSrc:app.globalData.imgSrc,
-        price:0,
-        proDetailData:{}
+        proDetailData:{},
+       week: ['Sun\n周日', 'Mon\n周一', 'Tue\n周二', 'Wed\n周三', 'Thur\n周四', 'Fri\n周五', 'Sat\n周六']
     },
     doGetDetail(e){
         setTimeout(()=>{
@@ -67,21 +67,16 @@ Page({
             wx.showNavigationBarLoading();
             let obj = {},gb = app.globalData;
             obj.openid = gb.userOpenID;
-            if(gb.proPackage.id == 0){
-                obj.one_id = gb.proClean.id;
-                obj.two_id = gb.proConditioner.id;
-                obj.three_id = gb.proTreatment.id;
-            }else{
-                obj.gid = gb.proPackage.id;
-                obj.one_id = gb.proPackage.pro_one.id;
-                obj.two_id = gb.proPackage.pro_two.id;
-                obj.three_id = gb.proPackage.pro_three.id;
-            }
+            obj.shop_id = gb.store.id;
+            obj.gid = gb.proPackage.id;
+            obj.pet_id = gb.petId;
             obj.name = gb.buyerInfo.name;
             obj.mobile = gb.buyerInfo.mobile;
-            obj.sex = gb.buyerInfo.sex;
-            obj.date = gb.selectDate;
-            obj.worktime = gb.selectTime;
+            obj.pet_sex = gb.buyerInfo.sex;
+            obj.pet_name = gb.buyerInfo.petsname;
+            obj.remark = gb.buyerInfo.remarks;
+            obj.date = gb.selectedDate;
+            obj.price = gb.proPackage.price;
             wx.request({
                 url:app.globalData.ajaxSrc+"create_order",
                 data:obj,
@@ -143,13 +138,12 @@ Page({
             showRule:false
         })
     },
-    ruleMove(){
-
-    },
+    ruleMove(){},
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+       const selectWeek = new Date(app.globalData.selectedDate).getDay()
         this.setData({
             proPackage:app.globalData.proPackage,
             proClean:app.globalData.proClean,
@@ -157,53 +151,24 @@ Page({
             proTreatment:app.globalData.proTreatment,
             buyerInfo:app.globalData.buyerInfo,
             store:app.globalData.store,
-            selectDate:app.globalData.selectDate,
-            selectWeek:app.globalData.selectWeek,
-            selectTime:app.globalData.selectTime,
+            selectDate:app.globalData.selectedDate,
+            selectWeek: this.data.week[selectWeek],
             ruleContent:app.globalData.ruleContent
         });
-        this.proInit();
     },
-    proInit(){
-        let arr = this.data.proInfo;
-        let pro1 = {},pro2 = {},pro3 = {},price = 0;
-        if(this.data.proPackage.id == -1){
-            pro1 = this.data.proClean;
-            pro2 = this.data.proConditioner;
-            pro3 = this.data.proTreatment;
-            price = parseFloat(pro1.price) + parseFloat(pro2.price) + parseFloat(pro3.price);
-        }else{
-            pro1 = this.data.proPackage.pro_one;
-            pro2 = this.data.proPackage.pro_two;
-            pro3 = this.data.proPackage.pro_three;
-            price = this.data.proPackage.price;
-        }
-        if(pro1 == 0){
-            arr[0].show = false;
-        }else{
-            arr[0].show = true;
-            arr[0].imgSrc = this.data.imgSrc+pro1.share_logo;
-        }
-        if(pro2 == 0){
-            arr[1].show = false;
-        }else{
-            arr[1].show = true;
-            arr[1].imgSrc = this.data.imgSrc+pro2.share_logo;
-        }
-        if(pro3 == 0){
-            arr[2].show = false;
-        }else{
-            arr[2].show = true;
-            arr[2].imgSrc = this.data.imgSrc+pro3.share_logo;
-        }
-        arr[0].id = pro1.id;
-        arr[1].id = pro2.id;
-        arr[2].id = pro3.id;
-        this.setData({
-            proInfo:arr,
-            price:price
-        })
-    },
+   //打开地图
+   openMap(e){
+      setTimeout(() => {
+         let store = this.data.store;
+         wx.openLocation({
+            latitude: parseFloat(store.latitude),
+            longitude: parseFloat(store.longitude),
+            name:store.title,
+            address:store.address,
+            scale: 28
+         })
+      },150);
+   },
     /**
      * 生命周期函数--监听页面初次渲染完成
      */

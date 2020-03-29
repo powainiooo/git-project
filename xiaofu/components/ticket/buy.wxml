@@ -1,6 +1,9 @@
 <!--index.wxml-->
 <view class='body buy-frame' hidden="{{showExample}}">
-   <view class="price">{{selectTicket.price == 0 ? 0 : selectTicket.price * numbersArr[numberIndex]}}<text class="unit">RMB</text></view>
+   <view class="price">
+      <view>{{selectTicket.price == 0 ? 0 : selectTicket.price * numbersArr[numberIndex]}}<text class="unit">RMB</text></view>
+      <view class="vip-hint" wx:if="{{vipData.status === 1}}">会员每场活动享有一张票价 {{vipData.data.discount}} 折优惠，付款时自动折扣。</view>
+   </view>
    <view class="ticket-list">
       <view class="ticket-item {{item.is_over == 1 ? 'disabled' : ''}} {{selectTicket.select == item.select ? 'selected' : ''}}"
             data-over="{{item.is_over}}"

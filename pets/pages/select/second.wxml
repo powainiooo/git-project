@@ -10,11 +10,12 @@
             wx:for="{{dogList}}"
             wx:for-item="list"
             wx:for-index="name"
-            wx:key="{{name}}"
+            wx:key="name"
             id="{{name}}">
          <view class="type-name">{{name}}</view>
          <view wx:for="{{list}}"
-               class="type-item tap {{selectItem === 'dog' ? 'type-item-select' : ''}}"
+               wx:key="id"
+               class="type-item tap {{selectedID === item.id  ? 'type-item-select' : ''}}"
                hover-class="tap-hover"
                hover-stay-time="10"
                data-item="{{item}}"
@@ -26,21 +27,24 @@
       <view class="nav">
          <view wx:for="{{dogList}}"
                wx:for-index="name"
-               wx:key="{{name}}"
+               wx:key="name"
                data-id="{{name}}"
                bindtap="gotoBlock">{{name}}</view>
       </view>
    </block>
    <!-- cat -->
    <block wx:if="{{type === '2'}}">
-      <view wx:for="{{catList}}"
-            class="type-item tap {{selectItem === 'dog' ? 'type-item-select' : ''}}"
-            hover-class="tap-hover"
-            hover-stay-time="10"
-            data-item="{{item}}"
-            bindtap="doSelect">
-         <image src="{{imgSrc + item.cover}}" class="img"></image>
-         <view class="name">{{item.china_name}} | <text>{{item.englist_name}}</text></view>
+      <view class="section">
+         <view wx:for="{{catList}}"
+               wx:key="id"
+               class="type-item tap {{selectedID === item.id ? 'type-item-select' : ''}}"
+               hover-class="tap-hover"
+               hover-stay-time="10"
+               data-item="{{item}}"
+               bindtap="doSelect">
+            <image src="{{imgSrc + item.cover}}" class="img"></image>
+            <view class="name">{{item.china_name}} | <text>{{item.englist_name}}</text></view>
+         </view>
       </view>
    </block>
 

@@ -37,7 +37,7 @@ export const getActivityDays = (data) => {
 // 取宠物类型列表
 export const getPetList = (data) => {
 	return ajax({
-		url: `${ajaxUrl}/pet_type  `,
+		url: `${ajaxUrl}/pet_type`,
 		data
 	})
 }

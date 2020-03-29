@@ -1,83 +1,81 @@
 <header-view>确认订单 | Order onfirmation</header-view>
 <view class="container">
-    <view class="order-time">
-        <view class="year">{{m1.getStr(selectDate,0,4)}}</view>
-        <view class="line">
-            <view class="date">
-                <view class="month">{{m1.getStr(selectDate,5,7)}}/</view>
-                <view>
-                    <view class="day">{{m1.getStr(selectDate,8,10)}}</view>
-                    <view class="week">{{selectWeek}}</view>
-                </view>
+   <view class="order-time">
+      <view class="line">
+         <view class="month">{{selectDate}}</view>
+         <view class="week">
+            <text>{{selectWeek}}</text>
+         </view>
+      </view>
+   </view>
+   <view class="store-item">
+      <view class="title">{{store.title}}</view>
+      <view class="address">{{store.address}}</view>
+      <view class="btn-map" data-store="{{item}}" bindtap="openMap" hover-class="btn-map-hover" hover-stay-time="50">查看地图</view>
+   </view>
+   <view class="person-frame">
+      <view class="person-info">
+         <view class="title">爱宠信息</view>
+         <view class="item">{{buyerInfo.petsname}}</view>
+         <view class="item">{{buyerInfo.sexName}}</view>
+      </view>
+      <view class="person-info">
+         <view class="title">主人信息</view>
+         <view class="item">{{buyerInfo.name}}</view>
+         <view class="item">{{buyerInfo.mobile}}</view>
+      </view>
+   </view>
+
+   <view class="packages-item">
+      <view class="line1">
+         <view>
+            <view class="name">{{proPackage.id == 0 ? 'Hair Optional package' : proPackage.english_name}}</view>
+            <view class="name">{{proPackage.id == 0 ? 'Hair 基础套餐' : proPackage.china_name}}</view>
+         </view>
+      </view>
+      <view class="line2">
+         <view class="pro-item"
+               wx:for="{{proPackage.product_list}}"
+               wx:key="id"
+               wx:for-item="child"
+               catchtap="openDetail"
+               data-id="{{child.id}}"
+               hover-stop-propagation="true"
+               hover-class="pro-item-hover"
+               hover-stay-time="50">
+            <view class="frame">
+               <image src="{{imgSrc+child.cover}}" mode="scaleToFill"></image>
             </view>
-            <view class="time">{{selectTime}}</view>
-        </view>
-    </view>
-    <view class="store-item">
-        <view class="title">{{store.title}}</view>
-        <view class="address">{{store.address}}</view>
-    </view>
-    <view class="person-info">
-        <view>{{buyerInfo.name}}</view>
-        <view>{{buyerInfo.mobile}}</view>
-    </view>
-    <view class="packages-item">
-        <view class="line1">
-            <view>
-                <view class="name">{{proPackage.id == 0 ? 'Hair Optional package' : proPackage.english_name}}</view>
-                <view class="name">{{proPackage.id == 0 ? 'Hair 基础套餐' : proPackage.china_name}}</view>
-            </view>
-        </view>
-        <view class="line2">
-            <view class="pro-item" bindtap="doGetDetail"
-                  wx:if="{{proInfo[0].show}}"
-                  data-id="{{proInfo[0].id}}"
-                  hover-stop-propagation="true"
-                  hover-class="pro-item-hover"
-                  hover-stay-time="50">
-                <view class="frame"><image src="{{proInfo[0].imgSrc}}" mode="scaleToFill"></image></view>
-            </view>
-            <view class="pro-item" bindtap="doGetDetail"
-                  wx:if="{{proInfo[1].show}}"
-                  data-id="{{proInfo[1].id}}"
-                  hover-stop-propagation="true"
-                  hover-class="pro-item-hover"
-                  hover-stay-time="50">
-                <view class="frame"><image src="{{proInfo[1].imgSrc}}" mode="scaleToFill"></image></view>
-            </view>
-            <view class="pro-item" bindtap="doGetDetail"
-                  wx:if="{{proInfo[2].show}}"
-                  data-id="{{proInfo[2].id}}"
-                  hover-stop-propagation="true"
-                  hover-class="pro-item-hover"
-                  hover-stay-time="50">
-                <view class="frame"><image src="{{proInfo[2].imgSrc}}" mode="scaleToFill"></image></view>
-            </view>
-        </view>
-    </view>
+         </view>
+      </view>
+      <view class="line3">{{proPackage.apply}}</view>
+   </view>
 </view>
 <footer-view showPrice bindbtn="doNext" btnColor="{{btnColor}}">
-    <view slot="price">{{price}}</view>
-    <view slot="btn" wx:if="{{!showRule}}">确认 | Confirm</view>
-    <view slot="btn" wx:if="{{showRule}}">付款 | Payment</view>
+   <view slot="price">{{proPackage.price}}</view>
+   <view slot="btn" wx:if="{{!showRule}}">确认 | Confirm</view>
+   <view slot="btn" wx:if="{{showRule}}">付款 | Payment</view>
 </footer-view>
 <!--rule-->
 <view class="rule-frame" style="top:{{showRule ? '0' : '101vh'}}" catchtouchmove="ruleMove">
-    <view class="icons icon-guanbi" bindtap="hideRules"></view>
-    <view class="tips-frame">
-        <view class="icons icon-tips"></view>
-        <text>{{ruleContent}}</text>
-    </view>
-    <view class="logo">
-        <view class="icons icon-logo"></view>
-    </view>
+   <view class="icons icon-guanbi" bindtap="hideRules"></view>
+   <view class="tips-frame">
+      <view class="icons icon-tips"></view>
+      <text>{{ruleContent}}</text>
+   </view>
+   <view class="line2">
+      <view class="header-logo">
+         <image src="../../res/img/logo.png" class="logo"></image>
+         <image src="../../res/img/logo-title.png" class="logo-title"></image>
+      </view>
+   </view>
 </view>
 <!--pro detail-->
 <detail-view showDetails="{{showDetails}}" prodata="{{proDetailData}}"></detail-view>
 
 <wxs module="m1">
-    function getStr(str,start,end){
-        return str.slice(start,end)
-    }
-    module.exports.getStr = getStr;
+   function getStr(str,start,end){
+   return str.slice(start,end)
+   }
+   module.exports.getStr = getStr;
 </wxs>

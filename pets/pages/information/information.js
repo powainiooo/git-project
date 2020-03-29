@@ -50,7 +50,7 @@ Page({
             });
             return;
         }
-        if(this.data.selectedSex.name == ''){
+        if(this.data.selectedSex === null){
             wx.showToast({
                 title: '请选择性别',
                 icon: 'none'
@@ -61,6 +61,7 @@ Page({
         app.globalData.buyerInfo.petsname = this.data.petsname;
         app.globalData.buyerInfo.mobile = this.data.mobile;
         app.globalData.buyerInfo.sex = this.data.selectedSex.value;
+        app.globalData.buyerInfo.sexName = this.data.selectedSex.name;
         wx.navigateTo({
           url: '/pages/information/remarks'
         })

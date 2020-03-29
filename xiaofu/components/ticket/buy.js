@@ -54,9 +54,14 @@ Component({
       ajaxSrc: app.globalData.ajaxSrc,
       imgSrc: app.globalData.imgSrc,
       uploadImg: '',
-      showExample: false
+      showExample: false,
+      vipData: {}
    },
 	attached() {
+      // const app = getApp()
+      this.setData({
+         vipData: app.globalData.vipData
+      })
 		app.$watch('ticketNumsArr', (val, old) => { // 监听选择票数范围
 			this.setData({
 				numbersArr: val

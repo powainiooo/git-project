@@ -15,6 +15,7 @@ Page({
     },
     //下一步
     doNext(){
+       console.log(JSON.stringify(this.data.store))
         app.globalData.store = this.data.store;
         wx.navigateTo({
             url: '/pages/date/date'

@@ -2,6 +2,7 @@
 
 .buy-frame .price{ font-size: 100rpx; line-height:1; font-family: 'Helve'; padding-bottom: 10rpx; padding-top:20rpx;color: #002aac; margin: 0 50rpx;}
 .buy-frame .price .unit{ font-size: 33rpx; align-self: flex-end; margin-bottom: 30rpx; margin-left: 10rpx;}
+.buy-frame .price .vip-hint { font-size: 24rpx; color: #888888; margin: 20rpx 0 10rpx 0;}
 
 .buy-frame .form-frame{ margin: 0 50rpx; border-top: 1rpx solid #c9c9c9; border-bottom: 2rpx solid #c9c9c9; padding-top: 50rpx; padding-bottom: 30rpx; position: relative;}
 .buy-frame .form-frame .input{ width: 400rpx; height: 55rpx; border: 2rpx solid #000; font-size: 30rpx; border-radius: 8rpx; padding:0 20rpx; box-sizing: border-box; margin-bottom: 20rpx;}

@@ -1,22 +1,22 @@
 {
    "pages": [
       "pages/index/index",
+      "pages/order/detail",
+      "pages/order/confirm",
       "pages/information/information",
-      "pages/information/remarks",
+      "pages/package/package",
       "pages/select/second",
       "pages/select/select",
-      "pages/package/package",
       "pages/date/date",
+      "pages/information/remarks",
       "pages/requires/requires",
       "pages/feedback/feedback",
       "pages/store/store",
       "pages/order/list",
       "pages/result/result",
       "pages/package/personal",
-      "pages/order/confirm",
       "pages/package/editor",
-      "pages/logs/logs",
-      "pages/order/detail"
+      "pages/logs/logs"
    ],
    "window": {
       "backgroundTextStyle": "light",

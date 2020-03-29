@@ -14,7 +14,8 @@ Page({
 	   catList: [],
 	   scrollId: '',
 	   heights: {},
-	   screenHeight: 0
+	   screenHeight: 0,
+      selectedID: ''
    },
 
    /**
@@ -26,13 +27,15 @@ Page({
 		   type
 	   })
 	   const self = this
-	   wx.getSystemInfo({
-		   success(res) {
-			   self.data.screenHeight = res.screenHeight
-			   console.log(res.screenHeight)
-		   }
-	   })
-	   this.initSize()
+      if (type === '1') {
+         wx.getSystemInfo({
+            success(res) {
+               self.data.screenHeight = res.screenHeight
+            }
+         })
+         this.initSize()
+      }
+	   this.getData()
    },
 	getData () {
 		getPetList({
@@ -87,7 +90,6 @@ Page({
 	},
 	gotoBlock (e) {
    	const id = e.target.dataset.id
-		console.log(id)
 		this.setData({
 			scrollId: `${id}`
 		})
@@ -96,9 +98,14 @@ Page({
    	// console.log(e.detail.scrollTop)
 	},
 	doSelect (e) {
-
+      console.log(e)
+      const id = e.currentTarget.dataset.item.id
+      this.setData({
+         selectedID: id
+      })
 	},
 	doNext () {
+      app.globalData.petId = this.data.selectedID
    	wx.navigateTo({
 		   url: '/pages/package/package'
 	   })

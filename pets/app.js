@@ -9,7 +9,7 @@ App({
 		// 登录
 		let self = this;
 		wx.login({
-			success: res => {
+			success (res)  {
 				wx.request({
 					url: self.globalData.ajaxSrc+'get_weixin',
 					data: {
@@ -20,7 +20,6 @@ App({
 					},
 					success: function (res) {
 						self.globalData.userOpenID = res.data.openid;
-						self.getPerson();
 						// 查看是否授权
 						wx.getSetting({
 							success: function(res){
@@ -79,18 +78,19 @@ App({
 		ajaxSrc:'http://hair.pc-online.cc/mobile/applet/',
 		imgSrc:'http://hair.pc-online.cc/upload/',
 		ruleContent:'',
-		orderNum:'T2018112414571003',
+		orderNum:'',
 		store: {},
-		selectedDate: ''
-	},
-	getPerson(){
-		wx.request({
-			url: this.globalData.ajaxSrc+'person_group',
-			data: {openid:this.globalData.userOpenID},
-			success:res=>{
-				this.globalData.personalPackage = res.data.data;
-			}
-		})
+		selectedDate: '',
+      petId: '',
+      proPackage: {},
+      buyerInfo: {
+         name: '',
+         petsname: '',
+         mobile: '',
+         sex: '',
+         sexName: '',
+         remarks: '',
+      }
 	}
 });
 

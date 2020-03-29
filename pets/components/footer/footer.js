@@ -56,8 +56,7 @@ Component({
             this.setData({
                 showMenu:false,
                 showClose:true,
-                showMenuList:true,
-                isDisabled:app.globalData.personalPackage.length != undefined
+                showMenuList:true
             });
             this.triggerEvent('openMenu')
         },

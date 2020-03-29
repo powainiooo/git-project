@@ -10,7 +10,7 @@ Page({
     },
     doNext(){
         wx.navigateTo({
-            url: '/pages/order/notuse?orderNum='+app.globalData.orderNum
+            url: '/pages/order/detail?orderNum='+app.globalData.orderNum
         })
     },
     gotoIndex(){

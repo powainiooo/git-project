@@ -4,7 +4,7 @@
     <view class="store-item {{selectId == item.id ? 'store-item-active' : ''}}"
           wx:for="{{shopList}}"
           wx:for-item="item"
-          wx:key="item.id"
+          wx:key="id"
           data-store="{{item}}"
           bindtap="doSelect"
           hover-class="store-item-hover"

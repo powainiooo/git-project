@@ -571,7 +571,7 @@ Page({
          openid: app.globalData.userOpenID
       }).then(res => {
          app.globalData.vipData = res
-         if (res.status === 0) {
+         if (res.status !== 1) {
             this.getVipList()
          }
       })

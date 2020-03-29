@@ -77,8 +77,16 @@ Page({
 		}
 		for (let i = 0; i < thisMonthDay; i++) { // 当月 日期
 			const aData = this.data.activityList[i]
+         const date = aData.date.split('/')
+         const day = new Date().getDate()
+         let activity = true
+         if (this.data.prevBtnDisable) {
+            activity = i + 1 < day ? false : aData.nums < aData.max
+         } else {
+            activity = aData.nums < aData.max
+         }
 			list.push({
-				activity: aData.nums < aData.max,
+				activity,
 				date: this.formatDate(year, month, i + 1),
 				day: i + 1
 			})
@@ -107,6 +115,7 @@ Page({
 			year,
 			month
 		})
+		this.checkDisable()
 		this.getActivityDays()
 	},
 	nextMonth () { // 下一个月
@@ -120,8 +129,22 @@ Page({
 			year,
 			month
 		})
+		this.checkDisable()
 		this.getActivityDays()
 	},
+   checkDisable () {
+      let disable = true
+      if (this.data.year < this.data.nowYear) {
+         disable = true
+      } else if (this.data.year === this.data.nowYear) {
+         disable = this.data.month <= this.data.nowMonth
+      } else {
+         disable = false
+      }
+      this.setData({
+         prevBtnDisable: disable
+      })
+   },
 	selectDate (e) {
 		const date = e.target.dataset.item
 		if (!date.activity) return

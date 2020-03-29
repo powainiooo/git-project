@@ -1,5 +1,5 @@
 // components/header/header.js
-const app = getApp()
+
 Component({
    /**
    * 组件的属性列表
@@ -91,6 +91,7 @@ Component({
    */
    methods: {
       openMenu () {
+         const app = getApp()
          this.data.isShowMenu = true
          this.toggleMenu(this.data.isShowMenu)
          this.setData({

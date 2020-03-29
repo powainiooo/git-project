@@ -9,3 +9,11 @@
 .detail-frame .line2{ background-color: rgba(239,235,234,0.95); padding: 60rpx;}
 .detail-frame .line2 .decs{ font-size: 30rpx; line-height: 1.6; margin-bottom: 70rpx;}
 .detail-frame .line2 .icon-logo{ font-size: 90rpx; color: #ffffff;}
+.detail-frame .line2 .header-logo{ display: flex; align-items: center;}
+.detail-frame .line2 .header-logo .logo { width: 60rpx; height: 80rpx; transition: all 0.25s ease-out;}
+.detail-frame .line2 .header-logo .logo-title { width: 125rpx; height: 80rpx; transition: all 0.25s ease-out;}
+.detail-frame .line3 { height: calc(100vh - 200rpx); background-color: rgba(255,255,255,0.95); padding: 60rpx; display: flex; align-items: center; box-sizing: border-box;}
+.detail-frame .line3 .icon-tips { font-size: 70rpx; color: #9d9b9c; margin-bottom: 30rpx;}
+.detail-frame .line3 .content { font-size: 30rpx; color: rgba(157, 155, 156, 0.7); line-height: 1.8; letter-spacing: 3rpx; margin-bottom: 80rpx;}
+.btn{ width: 350rpx; height: 70rpx; margin-top: -35rpx; background-color: #d9c39f; border-radius: 40rpx; font-size: 28rpx; color: #ffffff; display: flex; justify-content: center; align-items: center;transition:transform 0.15s ease-out;}
+.btn-hover{ transform: scale(0.9);}

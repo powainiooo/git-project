@@ -6,7 +6,7 @@
    .news-item::after { content: ''; width: 100%; height: 3rpx; background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAADCAYAAAB1c+RqAAAACXBIWXMAAAsSAAALEgHS3X78AAAARUlEQVQImWM8v7QpgYGBAYRxgQsGUbUFeOQZGF9eO7aBS1jKH5eCX18/PhVS1JPBZwjLs/N7JoBsw6PmgZCiHm5ZBgYGAH6NEhN5AJscAAAAAElFTkSuQmCC) repeat-x; background-size: auto 100%; position: absolute; top: 100%; left: 0;}
    .news-item:last-child::after { height: 0;}
    .news-item .time .year { font-size: 27rpx; color: #221715; display: flex; font-family: Helve; justify-content: space-between;}
-   .news-item .time .date { font-size: 40rpx; color: #221715; font-weight: bold; font-family: Helve;}
+   .news-item .time .date { font-size: 45rpx; color: #221715; font-weight: bold; font-family: Helve;}
    .news-item .content { width: 466rpx;}
    .news-item .content .img { width: 466rpx; margin-bottom: 10rpx;}
    .news-item .content .text { font-size: 25rpx; color: #717071; line-height: 1.8;}

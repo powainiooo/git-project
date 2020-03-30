@@ -9,7 +9,7 @@ Page({
         result:''
     },
     doNext(){
-        wx.navigateTo({
+        wx.reLaunch({
             url: '/pages/order/detail?orderNum='+app.globalData.orderNum
         })
     },

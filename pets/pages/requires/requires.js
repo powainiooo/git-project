@@ -23,7 +23,7 @@ Page({
 
    },
 	doOrder () {
-		wx.navigateTo({
+		wx.reLaunch({
 			url: '/pages/store/store'
 		})
 	},

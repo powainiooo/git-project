@@ -151,7 +151,7 @@
             this.$wx.selectComponent('#image-cropper').getImg((obj) => {
                console.log(obj.url)
                wx.uploadFile({
-                  url: 'https://bbart.waiting8.com/api/common/upload', // 仅为示例，非真实的接口地址
+                  url: 'https://www.bbart.vip/api/common/upload', // 仅为示例，非真实的接口地址
                   filePath: obj.url,
                   name: 'file',
                   header: {

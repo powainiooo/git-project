@@ -90,7 +90,9 @@
                this.list = res.data
                const item = res.data.find(i => i.select_flag === 1)
                this.hasSelected = item !== undefined
-               this.selectedId = item.id
+               if (item) {
+                  this.selectedId = item.id
+               }
             })
          }
       }

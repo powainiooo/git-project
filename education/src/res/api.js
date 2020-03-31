@@ -1,4 +1,4 @@
-const baseUrl = 'https://bbart.waiting8.com'
+const baseUrl = 'https://www.bbart.vip'
 let token = ''
 const ajax = (opts, autoMsg = true) => {
    return new Promise((resolve, reject) => {

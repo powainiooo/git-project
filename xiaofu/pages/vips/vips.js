@@ -1,9 +1,6 @@
 // pages/vips/vips.js
 import {getVipDetail, createVipOrder, buyVipSuccess} from '../../utils/api'
 const app = getApp()
-const nameVal = wx.getStorageSync('nameVal')
-const phoneVal = wx.getStorageSync('phoneVal')
-const addressVal = wx.getStorageSync('addressVal')
 Page({
 
    /**
@@ -16,9 +13,9 @@ Page({
          '一年内所有活动享有一人购票 95折 优惠，多人购票只有一人享受 95 优惠。',
          '获得 小夫有票 周边福袋 2 次'
       ],
-      nameVal,
-      phoneVal,
-      addressVal,
+      nameVal: '',
+      phoneVal: '',
+      addressVal: '',
       btnName: '购买',
       page: 'buy',
       id: 0,
@@ -109,6 +106,15 @@ Page({
             headerBtns: []
          })
       }
+      const nameVal = wx.getStorageSync('nameVal')
+      const phoneVal = wx.getStorageSync('phoneVal')
+      const addressVal = wx.getStorageSync('addressVal')
+      console.log('nameVal', nameVal)
+      this.setData({
+         nameVal,
+         phoneVal,
+         addressVal
+      })
    },
    getData (id) {
       getVipDetail({

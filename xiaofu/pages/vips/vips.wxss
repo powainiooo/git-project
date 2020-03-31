@@ -19,7 +19,7 @@
 .power-item image { width: 54rpx;}
 .power-item view { width: 480rpx; font-size: 24rpx; color: #969696; line-height: 1.8;}
 
-.info-content { width: 580rpx; margin: 60rpx auto;}
+.info-content { width: 580rpx; margin: 0 auto 60rpx auto;}
 .info-content .title { font-size: 24rpx; color: #969696; margin: 0 0 26rpx 20rpx;}
 .info-content .input-line { display: flex; justify-content: space-between; margin-bottom: 20rpx;}
 .info-content .input-line .input{ width: 280rpx; height: 55rpx; border: 2rpx solid #000; font-size: 24rpx; border-radius: 8rpx; padding:0 20rpx; box-sizing: border-box;}

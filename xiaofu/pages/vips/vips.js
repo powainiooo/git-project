@@ -35,9 +35,9 @@ Page({
          })
          this.checkValues()
       } else if (this.data.page === 'confirm') {
-         this.createVipOrder()
+         this.checkCanPay()
       } else if (this.data.page === 'renew') {
-         this.createVipOrder()
+         this.checkCanPay()
       }
    },
    headBtn (e) {
@@ -71,6 +71,19 @@ Page({
       this.setData({
          btnDisabled: btn
       })
+   },
+   checkCanPay () {
+      const appNow = getApp()
+      if (appNow.globalData.userInfo === null) {
+         wx.setStorageSync('nameVal', this.data.nameVal)
+         wx.setStorageSync('phoneVal', this.data.phoneVal)
+         wx.setStorageSync('addressVal', this.data.addressVal)
+         wx.navigateTo({
+            url: `/pages/result/result?page=login&id=${this.data.id}&from=vip`
+         })
+      } else {
+         this.createVipOrder()
+      }
    },
    /**
     * 生命周期函数--监听页面加载

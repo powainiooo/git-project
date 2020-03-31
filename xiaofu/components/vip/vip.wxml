@@ -8,9 +8,9 @@
                hover-stay-time="50"
                data-id="{{item.id}}"
                bindtap="gotoVips">
-            <image src="{{imgSrc + item.cover}}" mode="widthFix"></image>
+            <image src="{{imgSrc + item.cover}}" mode="widthFix" class="pic"></image>
+            <image src="../../res/images/card-shadow.png" class="shadow"></image>
          </view>
-         <image src="../../res/images/card-shadow.png" class="shadow"></image>
          <view class="tips">{{item.advert}}</view>
       </view>
    </swiper-item>

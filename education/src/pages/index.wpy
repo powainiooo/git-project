@@ -32,7 +32,7 @@
          </div>
       </div>
       <div class="titles text-shadow" v-if="type === 'index'"><span>Welcome</span> <br/> 欢迎</div>
-      <div class="hint" v-else-if="type === 'auth'">申请获得您的公开信息（昵称、头像等），用于完成洗发服务预定，拒绝则无法使用本服务体验。</div>
+      <div class="hint" v-else-if="type === 'auth'">申请获得您的公开信息（昵称、头像等），用于完成购课服务，拒绝则无法使用本服务体验。</div>
    </div>
    <menu @doFunc="doEnter" v-if="type === 'index'"></menu>
    <div class="footer" v-else-if="type === 'auth'">

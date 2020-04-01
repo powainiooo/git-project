@@ -1,0 +1,100 @@
+<style>
+.tab-list { width: auto; display: flex; padding-bottom: 20rpx;}
+.tab-list .tab-item { font-size: 38rpx; color: #333333; margin-right: 70rpx; position: relative;}
+.tab-list .tab-item::after { content: ''; width: 70rpx; height: 6rpx; border-radius: 2rpx; background-color: #8953ec; position: absolute; bottom: -14rpx; left: 50%; margin-left: -35rpx; transform: scale(0); transition: transform 0.2s ease-out;}
+.tab-list .tab-item:first-child { margin-left: 40rpx;}
+.tab-list .tab-item:last-child { margin-right: 40rpx;}
+.tab-list .active { font-weight: bold;}
+.tab-list .active::after { transform: scale(1)}
+
+.build-list { margin: 0 15rpx 40rpx 15rpx;}
+.build-item { height: 370rpx; border-radius: 6rpx; overflow: hidden; position: relative; margin-bottom: 10rpx;}
+.build-item::before{ content: ''; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.3); position: absolute; top: 0; left: 0;}
+.build-item .img { width: 100%; height: 100%; display: block;}
+.build-item .name { width: 420rpx; height: 108rpx; background-color: rgba(0, 0, 0, 0.2); font-size: 36rpx; color: #ffffff; display: flex; align-items: center; justify-content: center; position: absolute; top: 50%; left: 50%; margin: -54rpx 0 0 -210rpx;}
+.build-item .name-new { border: 1px dashed rgba(255, 255, 255, 0.4);}
+.build-item .name::after { content: ''; width: 70rpx; height: 4rpx; border-radius: 2rpx; background-color: #ffffff; position: absolute; left: 175rpx; bottom: 20rpx;}
+.build-item .new-icon { width: 70rpx; height: 80rpx; box-sizing: border-box; background-color: rgb(82, 22, 122); font-size: 25rpx; color: #ffffff; display: flex; justify-content: center; align-items: flex-end; padding-bottom: 18rpx; border-radius: 0 0 6rpx 6rpx; position: absolute; top: 0; left: 40rpx;}
+</style>
+<template>
+<div>
+   <scroll-view scroll-x style=" padding: 50rpx 0 30rpx 0;">
+      <ul class="tab-list" :style="{width: tabWidth + 'rpx'}">
+         <li v-for="item in listData"
+             :key="item.id"
+             class="tab-item"
+             :class="{'active': currentId === item.id}"
+             @click="changeTab(item.id)">{{item.name}}</li>
+      </ul>
+   </scroll-view>
+   <div class="build-list">
+      <div class="build-item" v-for="item in areaList">
+         <img :src="imgSrc + item.fm_image" class="img"/>
+         <div class="name" :class="{'name-new':item.type_id === '1'}">{{item.name}}</div>
+         <div class="new-icon" v-if="item.type_id === '1'">最新</div>
+      </div>
+   </div>
+</div>
+</template>
+
+<script>
+import wepy from '@wepy/core'
+import store from '../../store'
+import { mapState } from '@wepy/x'
+import {getLplist} from '@/res/api.js'
+
+wepy.component({
+   store,
+   props: {
+      listData: {
+         type: Array,
+         default: () => []
+      }
+   },
+   watch: {
+      listData (val) {
+         let len = 0
+         for (let i of val) {
+            if (i.sub) {
+               this.areaList = i.sub
+               this.currentId = i.id
+            }
+            len += i.name.length
+         }
+         this.nameLength = len
+      }
+   },
+   computed: {
+      ...mapState([ 'imgSrc' ]),
+      tabWidth () {
+         let w = 80
+         w += this.nameLength * 38
+         w += (this.listData.length - 1) * 70
+         return w
+      }
+   },
+   data: {
+      areaList: [],
+      nameLength: 0,
+      currentId: 0
+   },
+   attached() {
+   },
+   methods: {
+      changeTab (id) {
+         if (this.currentId === id) return
+         this.currentId = id
+         getLplist({
+            area_id: id
+         }).then(res => {
+            this.areaList = res.data
+         })
+      }
+   }
+})
+</script>
+<config>
+   {
+   "usingComponents": {}
+   }
+</config>

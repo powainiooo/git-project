@@ -13,6 +13,10 @@
       <area :listData="areaList" />
    </div>
    <div class="hr"></div>
+   <div class="section">
+      <contact />
+   </div>
+   <div class="hr"></div>
 </div>
 </template>
 
@@ -39,6 +43,8 @@
               this.banner = res.data.banner
               this.projectList = res.data.xm_list
               this.areaList = res.data.lp_list
+              store.commit('SET_EXEMPTION', res.data.sm.content)
+              store.commit('SET_PHONE', res.data.phone)
            })
         }
      },
@@ -53,7 +59,8 @@
     "usingComponents": {
       "banner": "~@/components/index/banner",
       "project": "~@/components/index/project",
-      "area": "~@/components/index/area"
+      "area": "~@/components/index/area",
+      "contact": "~@/components/contact"
     }
 }
 </config>

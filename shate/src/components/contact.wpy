@@ -1,17 +1,52 @@
-<style lang="less">
-
+<style>
+.contact { overflow: hidden;}
+.contact .title { font-size: 40rpx; color: #333333; text-align: center; margin: 56rpx 0;}
+.input-line { margin: 0 30rpx 0 70rpx; height: 115rpx; display: flex; align-items: center; border-bottom: 1px solid #E5E5E5;}
+.input-line .name { width: 150rpx; font-size: 30rpx; color: #333333;}
+.input-line .input { width: 500rpx; height: 100%; border: none; font-size: 30rpx; color: #333333; background-color: transparent;}
+.btn { width: 466rpx; height: 88rpx; background-color: #5D2F9E; font-size: 36rpx; color: #ffffff; border: none; border-radius: 10rpx; margin: 44rpx auto 80rpx auto;}
+.phone { height: 110rpx; background-color: #5D2F9E; display: flex; justify-content: center; align-items: center; font-size: 30rpx; color: #ffffff;}
+.phone .icon { width: 32rpx; height: 36rpx; margin-right: 28rpx;}
+.hint { height: 70rpx; text-align: center; color: #5D2F9E; font-size: 24rpx; line-height: 70rpx;}
 </style>
 <template>
-<div>
-
+<div class="contact">
+   <div class="title">欢迎联系我们</div>
+   <div class="input-line">
+      <div class="name">姓名</div>
+      <input type="text" placeholder="请输入您的姓名" v-model="name" class="input"/>
+   </div>
+   <div class="input-line">
+      <div class="name">手机</div>
+      <input type="text" placeholder="请输入您的手机号" v-model="mobile" class="input"/>
+   </div>
+   <div class="input-line">
+      <div class="name">邮箱</div>
+      <input type="text" placeholder="请输入您的邮箱（选填）" v-model="mail" class="input"/>
+   </div>
+   <div style="text-align: center;">
+      <button class="btn">提交</button>
+   </div>
+   <div class="phone">
+      <img src="../res/img/icon-phone.png" class="icon"/>
+      {{phone}}
+   </div>
+   <a class="hint">请点击了解本小程序的《免责声明》</a>
 </div>
 </template>
 
 <script>
 import wepy from '@wepy/core'
-
+import store from '../store'
+import { mapState } from '@wepy/x'
 wepy.component({
-   data: {},
+   store,
+   data: {
+      name: '',
+      mobile: '',
+      mail: '',
+   },
+   computed: mapState([ 'phone' ]),
    attached() {
    },
    methods: {}

@@ -75,7 +75,7 @@ wepy.page({
             store.commit('setPersonInfo', res.data.userInfo)
             wx.setStorageSync('lastGetCityTime', now)
             wx.setStorageSync('bbaUserInfo', res.data.userInfo)
-            wx.navigateTo({
+            wx.reLaunch({
                url: '/pages/index?type=index'
             })
          })

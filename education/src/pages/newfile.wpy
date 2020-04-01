@@ -97,6 +97,10 @@
          ],
          showCropper: false
       },
+      onLoad () {
+         this.parentName = wx.getStorageSync('parentName')
+         this.mobile = wx.getStorageSync('parentMobile')
+      },
       computed: {
          ...mapState(['showMenu', 'selectedStore', 'personalInfo', 'imgSrc']),
          btnDisable () {
@@ -118,6 +122,8 @@
                parent_mobile: this.mobile
             }).then(res => {
                if (res.code === 1) {
+                  wx.setStorageSync('parentName', this.parentName)
+                  wx.setStorageSync('parentMobile', this.mobile)
                   store.commit('setSelectedStudent', res.data)
                   wx.redirectTo({
                      url: `/pages/student`

@@ -66,3 +66,26 @@ export const getLplist = data => {
       data
    })
 }
+
+// 关于我们
+export const getAboutus = data => {
+   return ajax({
+      url: `${baseUrl}/api/xcx/aboutus`,
+      data
+   })
+}
+
+// 免责说明
+export const getSmData = () => {
+   return ajax({
+      url: `${baseUrl}/api/xcx/sm`
+   })
+}
+
+// 楼盘详情页
+export const getLpDetail = data => {
+   return ajax({
+      url: `${baseUrl}/api/xcx/lp_detail`,
+      data
+   })
+}

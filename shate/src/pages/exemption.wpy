@@ -1,0 +1,55 @@
+<style>
+.content { margin: 0 50rpx 60rpx 50rpx; font-size: 26rpx; color: #333333; line-height: 50rpx;}
+</style>
+
+<template>
+<div class="page-container">
+   <div class="section">
+      <div class="title">小程序信息免责声明</div>
+      <div class="content">
+         <rich-text nodes="{{exemption}}"></rich-text>
+      </div>
+
+   </div>
+   <div class="hr"></div>
+   <div class="section">
+      <contact :showExemption="false" />
+   </div>
+   <div class="hr"></div>
+   <zfooter page="index"/>
+</div>
+</template>
+
+<script>
+import wepy from '@wepy/core'
+import store from '../store'
+import {getSmData} from '@/res/api.js'
+
+wepy.page({
+   store,
+   data: {
+      exemption: ''
+   },
+   methods: {
+      getData () {
+         getSmData().then(res => {
+            this.exemption = res.data.content
+            store.commit('SET_PHONE', res.data.phone)
+         })
+      }
+   },
+
+   onLoad () {
+      this.getData()
+   }
+})
+</script>
+<config>
+   {
+      "navigationBarTitleText": "免责声明",
+      "usingComponents": {
+         "contact": "~@/components/contact",
+         "zfooter": "~@/components/footer"
+      }
+   }
+</config>

@@ -1,0 +1,53 @@
+<style>
+.banner { height: 380rpx; border-radius: 6rpx; overflow: hidden;}
+.banner .link { width: 100%; height: 100%; display: block; position: relative;}
+.banner .img { width: 100%; height: 100%; border-radius: 6rpx;}
+.banner-dot { width: 100%; display: flex; justify-content: center; position: absolute; left: 0; bottom: 16rpx;}
+.banner-dot-item { width: 26rpx; height: 6rpx; border-radius: 3rpx; background:rgba(218,218,218,0.5); margin: 0 5rpx;}
+.banner-dot .active { background:rgba(137,83,236,1);}
+</style>
+<template>
+<div style="position: relative;">
+   <swiper autoplay class="banner" @change="bannerChange">
+      <swiper-item v-for="item in listData">
+         <a class="link">
+            <img :src="imgSrc + item" class="img"/>
+         </a>
+      </swiper-item>
+   </swiper>
+   <ul class="banner-dot">
+      <li class="banner-dot-item"
+          v-for="(item, index) in listData"
+          :class="{'active': currentIndex === index}"></li>
+   </ul>
+</div>
+</template>
+
+<script>
+import wepy from '@wepy/core'
+import store from '../../store'
+import { mapState } from '@wepy/x'
+
+wepy.component({
+   store,
+   props: {
+      listData: []
+   },
+   computed: mapState([ 'imgSrc' ]),
+   data: {
+      currentIndex: 0
+   },
+   attached() {
+   },
+   methods: {
+      bannerChange (e) {
+         this.currentIndex = e.$wx.detail.current
+      }
+   }
+})
+</script>
+<config>
+   {
+   "usingComponents": {}
+   }
+</config>

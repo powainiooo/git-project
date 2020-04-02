@@ -6,7 +6,7 @@ export default new Vuex.Store({
    state: {
       imgSrc: 'https://st.vsapp.cn', // 图片地址前缀
       loginKey: '', // 登录密钥
-      exemption: '', // 免责声明
+      exemption: '小程序信息免责声明', // 免责声明
       phone: '' // 电话
    },
    mutations: {

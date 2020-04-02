@@ -3,7 +3,7 @@
 </style>
 
 <template>
-<div>
+<div class="page-container">
    <div class="section">
       <banner :listData="banner"></banner>
       <project :listData="projectList"></project>
@@ -17,6 +17,7 @@
       <contact />
    </div>
    <div class="hr"></div>
+   <zfooter page="index"/>
 </div>
 </template>
 
@@ -43,7 +44,6 @@
               this.banner = res.data.banner
               this.projectList = res.data.xm_list
               this.areaList = res.data.lp_list
-              store.commit('SET_EXEMPTION', res.data.sm.content)
               store.commit('SET_PHONE', res.data.phone)
            })
         }
@@ -60,7 +60,8 @@
       "banner": "~@/components/index/banner",
       "project": "~@/components/index/project",
       "area": "~@/components/index/area",
-      "contact": "~@/components/contact"
+      "contact": "~@/components/contact",
+      "zfooter": "~@/components/footer"
     }
 }
 </config>

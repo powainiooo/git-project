@@ -1,0 +1,78 @@
+<style>
+.banner-frame { position: absolute; top: 15rpx; left: 15rpx; right: 15rpx;}
+.media { display: flex; justify-content: center; align-items: center; margin-top: 110rpx;}
+.media-item { font-size: 25rpx; color: #5D2F9E; margin: 0 45rpx; display: flex; align-items: center;}
+.media-item .icon { width: 40rpx; height: 40rpx; margin-right: 16rpx;}
+.title .new { color: #5D2F9E;}
+.content { margin: 0 50rpx 60rpx 50rpx; font-size: 26rpx; color: #333333; line-height: 50rpx;}
+</style>
+
+<template>
+<div class="page-container">
+   <div class="section">
+      <div class="hr" style="height: 480rpx;"></div>
+      <div class="banner-frame">
+         <banner :listData="banner"></banner>
+      </div>
+      <div class="media">
+         <div class="media-item" v-if="itemData.vr !== ''">
+            <img src="../res/img/icon-vr.png" class="icon"/>VR看房
+         </div>
+         <div class="media-item" v-if="itemData.video !== ''">
+            <img src="../res/img/icon-vedio.png" class="icon" />视频看房
+         </div>
+      </div>
+      <div class="title">
+         <text class="new" v-if="itemData.type_id === '1'">【最新】</text>
+         {{itemData.name}}
+      </div>
+      <div class="content">
+         <rich-text nodes="{{itemData.content}}"></rich-text>
+      </div>
+   </div>
+   <div class="hr"></div>
+   <div class="section">
+      <contact />
+   </div>
+   <div class="hr"></div>
+   <zfooter page="index"/>
+</div>
+</template>
+
+<script>
+import wepy from '@wepy/core'
+import store from '../store'
+import {getLpDetail} from '@/res/api.js'
+
+wepy.page({
+   store,
+   data: {
+      exemption: '',
+      banner: [],
+      itemData: {}
+   },
+   methods: {
+      getData (id) {
+         getLpDetail({id}).then(res => {
+            this.banner = res.data.info.image.split('|')
+            this.itemData = res.data.info
+         })
+      }
+   },
+
+   onLoad (options) {
+      const id = options.id || '18'
+      this.getData(id)
+   }
+})
+</script>
+<config>
+   {
+      "navigationBarTitleText": "免责声明",
+      "usingComponents": {
+         "banner": "~@/components/building/banner",
+         "contact": "~@/components/contact",
+         "zfooter": "~@/components/footer"
+      }
+   }
+</config>

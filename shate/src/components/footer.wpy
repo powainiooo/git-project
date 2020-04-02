@@ -1,0 +1,56 @@
+<style>
+.z-footer { width: 100%; height: 126rpx; display: flex; justify-content: space-around; align-items: center; background-color: #ffffff; box-shadow:0 2rpx 6rpx 0 rgba(0, 0, 0, 0.15); position: fixed; left: 0; bottom: 0; z-index: 1000;}
+.z-footer-item { width: 110rpx; height: 78rpx; text-align: center; display: block;}
+.z-footer-item .img { width: 48rpx; height: 40rpx;}
+.z-footer-item .name { font-size: 26rpx; color: #666666;}
+.z-footer .active .name { color: #5D2F9E;}
+
+</style>
+<template>
+<div class="z-footer">
+   <div class="z-footer-item" :class="{'active':page === 'index'}" @click="linkTo('index')">
+      <img src="../res/img/icon-home-active.png" class="img" v-if="page === 'index'" />
+      <img src="../res/img/icon-home.png" class="img" v-if="page !== 'index'" />
+      <div class="name">首页</div>
+   </div>
+   <div class="z-footer-item" :class="{'active':page === 'aboutus'}" @click="linkTo('aboutus')">
+      <img src="../res/img/icon-aboutus-active.png" class="img" v-if="page === 'aboutus'" />
+      <img src="../res/img/icon-aboutus.png" class="img" v-if="page !== 'aboutus'" />
+      <div class="name">关于我们</div>
+   </div>
+   <div class="z-footer-item" :class="{'active':page === 'mine'}" @click="linkTo('mine')">
+      <img src="../res/img/icon-mine-active.png" class="img" v-if="page === 'mine'" />
+      <img src="../res/img/icon-mine.png" class="img" v-if="page !== 'mine'" />
+      <div class="name">我的</div>
+   </div>
+</div>
+</template>
+
+<script>
+import wepy from '@wepy/core'
+
+wepy.component({
+   data: {},
+   props: {
+      page: {
+         type: String,
+         default: 'index'
+      }
+   },
+   attached() {
+   },
+   methods: {
+      linkTo (page) {
+         if (page === this.page) return
+         wx.redirectTo({
+            url: `/pages/${page}`
+         })
+      }
+   }
+})
+</script>
+<config>
+   {
+   "usingComponents": {}
+   }
+</config>

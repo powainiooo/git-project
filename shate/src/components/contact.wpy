@@ -31,7 +31,7 @@
       <img src="../res/img/icon-phone.png" class="icon"/>
       {{phone}}
    </div>
-   <a class="hint">请点击了解本小程序的《免责声明》</a>
+   <a class="hint" v-if="showExemption">请点击了解本小程序的《免责声明》</a>
 </div>
 </template>
 
@@ -41,10 +41,16 @@ import store from '../store'
 import { mapState } from '@wepy/x'
 wepy.component({
    store,
+   props: {
+      showExemption: {
+         type: Boolean,
+         default: true
+      }
+   },
    data: {
       name: '',
       mobile: '',
-      mail: '',
+      mail: ''
    },
    computed: mapState([ 'phone' ]),
    attached() {

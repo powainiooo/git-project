@@ -1,0 +1,104 @@
+<style>
+.links-nav { margin: 20rpx 25rpx; display: flex; justify-content: space-between; flex-wrap: wrap;}
+.links-nav .item { width: 340rpx; height: 225rpx; margin-bottom: 20rpx; position: relative;}
+.links-nav .item .img { width: 100%; height: 100%;}
+.links-nav .item .title { width: 100%; height: 100%; position: absolute; top: 0; left: 0; display: flex; justify-content: center; align-items: center; font-size: 36rpx; color: #ffffff;}
+
+.news-item { margin: 0 46rpx 28rpx 26rpx; display: flex;}
+.news-item .img { width: 230rpx; height: 178rpx; border-radius: 6rpx; margin-right: 20rpx;}
+.news-item .news-title { font-size: 32rpx; font-weight: bold; color: #333333; margin-bottom: 14rpx;}
+.news-item .date { font-size: 24rpx; color: #333333; margin-bottom: 14rpx; display: flex; align-items: center;}
+.news-item .date .icon { width: 26rpx; height: 24rpx; margin-right: 16rpx;}
+.news-item .content { font-size: 22rpx; color: #999999; line-height: 35rpx;}
+.more { text-align: center; margin: 50rpx 0;}
+.more .link { font-size: 26rpx; color: #52167A;}
+</style>
+
+<template>
+<div class="page-container">
+   <div class="section">
+      <banner :listData="banner"></banner>
+      <div class="links-nav">
+         <a class="item">
+            <img src="../res/img/aboutus-img1.png" class="img"/>
+            <div class="title">我们是谁</div>
+         </a>
+         <a class="item">
+            <img src="../res/img/aboutus-img2.png" class="img"/>
+            <div class="title">我们是谁</div>
+         </a>
+         <a class="item">
+            <img src="../res/img/aboutus-img3.png" class="img"/>
+            <div class="title">投资者关系</div>
+         </a>
+         <a class="item">
+            <img src="../res/img/aboutus-img4.png" class="img"/>
+            <div class="title">公司概览</div>
+         </a>
+      </div>
+   </div>
+   <div class="hr"></div>
+   <div class="section">
+      <div class="title">最新新闻动态</div>
+      <div class="news-item" v-for="item in newsList">
+         <img :src="imgSrc + item.fm_image" class="img" />
+         <div style="width: 420rpx;">
+            <div class="news-title">{{item.title}}</div>
+            <div class="date"><img src="../res/img/icon-calanda.png" class="icon"/>{{item.date}}</div>
+            <div class="content">{{item.content}}</div>
+         </div>
+      </div>
+      <div class="more">
+         <a class="link">>>查看更多新闻资讯</a>
+      </div>
+   </div>
+   <div class="hr"></div>
+   <div class="section">
+      <contact />
+   </div>
+   <div class="hr"></div>
+   <zfooter page="aboutus"/>
+</div>
+</template>
+
+<script>
+  import wepy from '@wepy/core'
+  import store from '../store'
+  import { mapState } from '@wepy/x'
+  import {getAboutus} from '@/res/api.js'
+  import moment from 'moment'
+
+  wepy.page({
+     store,
+     data: {
+        banner: [],
+        newsList: []
+     },
+     computed: mapState([ 'imgSrc' ]),
+     methods: {
+        getData () {
+           getAboutus().then(res => {
+              this.banner = res.data.banner
+              this.newsList = res.data.list.map(i => {
+                 i.date = moment(parseInt(i.ctime) * 1000).format('YYYY-MM-DD HH:mm')
+                 return i
+              })
+           })
+        }
+     },
+
+     onLoad () {
+        this.getData()
+     }
+  })
+</script>
+<config>
+{
+   "navigationBarTitleText": "关于我们",
+    "usingComponents": {
+      "banner": "~@/components/aboutus/banner",
+       "contact": "~@/components/contact",
+      "zfooter": "~@/components/footer"
+    }
+}
+</config>

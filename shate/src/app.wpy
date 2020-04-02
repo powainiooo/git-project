@@ -1,4 +1,5 @@
 <style lang="less">
+.page-container { margin-bottom: 130rpx;}
 .section {
    position: relative;
    box-shadow:0 0 19rpx 1rpx rgba(93,47,158,0.13);
@@ -6,6 +7,7 @@
    overflow: hidden;
 }
 .hr { height: 20rpx; background-color: #5D2F9E; opacity: .13;}
+.title { font-size: 40rpx; color: #333333; text-align: center; margin: 56rpx 0;}
 </style>
 
 <script>
@@ -20,11 +22,11 @@ wepy.use(vuex)
 
 wepy.app({
    hooks: {
-    // App 级别 hook，对整个 App 生效
-    // 同时存在 Page hook 和 App hook 时，优先执行 Page hook，返回值再交由 App hook 处
+      // App 级别 hook，对整个 App 生效
+      // 同时存在 Page hook 和 App hook 时，优先执行 Page hook，返回值再交由 App hook 处
       'before-setData': function (dirty) {
-      // console.log('setData dirty: ', dirty);
-      // return dirty;
+         // console.log('setData dirty: ', dirty);
+         // return dirty;
       }
    },
    globalData: {
@@ -62,14 +64,17 @@ wepy.app({
 })
 </script>
 <config>
-{
-    "pages": [
-      "pages/index"
-    ],
-    "window": {
-      "navigationBarBackgroundColor": "#52167A",
-      "navigationBarTitleText": "达尔阿尔坎",
-      "navigationBarTextStyle": "white"
-    }
-}
+   {
+      "pages": [
+         "pages/building",
+         "pages/index",
+         "pages/exemption",
+         "pages/aboutus"
+      ],
+      "window": {
+         "navigationBarBackgroundColor": "#52167A",
+         "navigationBarTitleText": "达尔阿尔坎",
+         "navigationBarTextStyle": "white"
+      }
+   }
 </config>

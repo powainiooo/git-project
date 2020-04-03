@@ -1,0 +1,70 @@
+<style>
+.section2 { width: 100%; background-color: #ffffff; border-radius: 60rpx 60rpx 0 0; position: absolute; top: 314rpx; left: 0; z-index: 100; padding-bottom: 130rpx; overflow: hidden;}
+.content { margin: 0 50rpx 60rpx 50rpx; font-size: 26rpx; color: #333333; line-height: 50rpx;}
+.date { text-align: center; font-size: 24rpx; color: #999999; margin: -20rpx 0 40rpx 0;}
+</style>
+
+<template>
+<div class="page-container">
+   <banner :listData="banner"></banner>
+   <div class="section2">
+      <div class="section">
+         <div class="title title-border">{{itemData.title}}</div>
+         <div class="date">{{date}}</div>
+         <div class="content">
+            <rich-text nodes="{{itemData.content}}"></rich-text>
+         </div>
+      </div>
+      <div class="hr"></div>
+      <div class="section">
+         <contact />
+      </div>
+      <div class="hr"></div>
+   </div>
+
+   <zfooter page="aboutus"/>
+</div>
+</template>
+
+<script>
+import wepy from '@wepy/core'
+import store from '../store'
+import { mapState } from '@wepy/x'
+import {getNewsDetail} from '@/res/api.js'
+import moment from 'moment'
+
+wepy.page({
+   store,
+   data: {
+      itemData: {},
+      banner: [],
+      date: ''
+   },
+   computed: mapState([ 'imgSrc' ]),
+   methods: {
+      getData (id) {
+         getNewsDetail({id}).then(res => {
+            this.itemData = res.data.info
+            this.banner = res.data.info.banner.split('|')
+            this.date = moment(parseInt(res.data.info.fb_time) * 1000).format('YYYY-MM-DD HH:mm')
+            store.commit('SET_PHONE', res.data.phone)
+         })
+      }
+   },
+
+   onLoad (options) {
+      const id = options.id || '1'
+      this.getData(id)
+   }
+})
+</script>
+<config>
+   {
+      "navigationBarTitleText": "我们是谁",
+      "usingComponents": {
+         "banner": "~@/components/aboutus/banner",
+         "contact": "~@/components/contact",
+         "zfooter": "~@/components/footer"
+      }
+   }
+</config>

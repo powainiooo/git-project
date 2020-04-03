@@ -118,3 +118,43 @@ export const postContactForm = data => {
       data
    })
 }
+
+// 我们是谁
+export const getAboutWho = data => {
+   return ajax({
+      url: `${baseUrl}/api/xcx/about_who`,
+      data
+   })
+}
+
+// 简历与成就
+export const getAwards = data => {
+   return ajax({
+      url: `${baseUrl}/api/xcx/awards`,
+      data
+   })
+}
+
+// 投资者关系
+export const getRelation = data => {
+   return ajax({
+      url: `${baseUrl}/api/xcx/relation`,
+      data
+   })
+}
+
+// 新闻列表
+export const getNews = data => {
+   return ajax({
+      url: `${baseUrl}/api/xcx/news`,
+      data
+   })
+}
+
+// 新闻详情
+export const getNewsDetail = data => {
+   return ajax({
+      url: `${baseUrl}/api/xcx/news_detail`,
+      data
+   })
+}

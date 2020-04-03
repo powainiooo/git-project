@@ -8,6 +8,8 @@
 }
 .hr { height: 20rpx; background-color: #5D2F9E; opacity: .13;}
 .title { font-size: 40rpx; color: #333333; text-align: center; margin: 56rpx 0;}
+.title-border { position: relative;}
+.title-border::after { content: ''; width: 80rpx; height: 6rpx; background-color: #5D2F9E; position: absolute; bottom: -20rpx; left: 50%; margin-left: -40rpx;}
 </style>
 
 <script>
@@ -66,6 +68,11 @@ wepy.app({
 <config>
    {
       "pages": [
+         "pages/newsdetail",
+         "pages/news",
+         "pages/relation",
+         "pages/awards",
+         "pages/whoami",
          "pages/project",
          "pages/building",
          "pages/index",

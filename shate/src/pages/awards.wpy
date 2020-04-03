@@ -1,0 +1,76 @@
+<style>
+.section2 { width: 100%; background-color: #ffffff; border-radius: 60rpx 60rpx 0 0; position: absolute; top: 314rpx; left: 0; z-index: 100; padding-bottom: 130rpx; overflow: hidden;}
+.award-frame { margin: 0 50rpx 50rpx 50rpx;}
+.award-frame .year { font-size: 32rpx; color: #5D2F9E; margin-bottom: 24rpx;}
+.award-frame .item { font-size: 26rpx; color: #333333; padding: 0 0 40rpx 38rpx; line-height: 42rpx; position: relative;}
+.award-frame .item::before { content: ''; width: 10px; height: 10px; border-radius: 50%; background-color: #5D2F9E; position: absolute; left: 0; top: 14rpx;}
+.award-frame .item::after { content: ''; width: 1px; border-radius: 50%; background-color: #5D2F9E; position: absolute; left: 5px; top: 16rpx; bottom: -16rpx;}
+.award-frame .item:last-child::after { width: 0;}
+</style>
+
+<template>
+<div class="page-container">
+   <banner :listData="banner"></banner>
+   <div class="section2">
+      <div class="section">
+         <div class="title">奖状与成就</div>
+         <div class="award-frame" v-for="(list, key) in itemData">
+            <div class="year">{{key}}</div>
+            <div class="item" v-for="item in list">{{item}}</div>
+         </div>
+      </div>
+      <div class="hr"></div>
+      <div class="section">
+         <contact />
+      </div>
+      <div class="hr"></div>
+   </div>
+
+   <zfooter page="aboutus"/>
+</div>
+</template>
+
+<script>
+import wepy from '@wepy/core'
+import store from '../store'
+import {getAwards} from '@/res/api.js'
+
+wepy.page({
+   store,
+   data: {
+      itemData: {},
+      banner: []
+   },
+   methods: {
+      getData () {
+         getAwards().then(res => {
+            let arr = res.data.list.sort((a, b) => {
+               return parseInt(b.year) - parseInt(a.year)
+            })
+            let obj = {}
+            for (let i of arr) {
+               if (!obj[`${i.year}年`]) obj[`${i.year}年`] = []
+               obj[`${i.year}年`].push(i.content)
+            }
+            this.itemData = obj
+            this.banner = res.data.banner.split('|')
+            store.commit('SET_PHONE', res.data.phone)
+         })
+      }
+   },
+
+   onLoad () {
+      this.getData()
+   }
+})
+</script>
+<config>
+   {
+      "navigationBarTitleText": "奖状与成就",
+      "usingComponents": {
+         "banner": "~@/components/aboutus/banner",
+         "contact": "~@/components/contact",
+         "zfooter": "~@/components/footer"
+      }
+   }
+</config>

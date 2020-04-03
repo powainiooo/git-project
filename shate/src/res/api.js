@@ -89,3 +89,32 @@ export const getLpDetail = data => {
       data
    })
 }
+
+// 项目详情页
+export const getXmDetail = data => {
+   return ajax({
+      url: `${baseUrl}/api/xcx/xm_detail`,
+      data
+   })
+}
+
+// 关注取消关注楼盘
+export const toggleLike = data => {
+   return ajax({
+      method: 'POST',
+      url: `${baseUrl}/api/xcx/lp_like`,
+      data
+   })
+}
+
+// 提交表单信息
+export const postContactForm = data => {
+   return ajax({
+      method: 'POST',
+      header: {
+         'content-type': 'application/x-www-form-urlencoded'
+      },
+      url: `${baseUrl}/api/xcx/save_form`,
+      data
+   })
+}

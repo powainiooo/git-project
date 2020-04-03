@@ -8,6 +8,11 @@
 .phone { height: 110rpx; background-color: #5D2F9E; display: flex; justify-content: center; align-items: center; font-size: 30rpx; color: #ffffff;}
 .phone .icon { width: 32rpx; height: 36rpx; margin-right: 28rpx;}
 .hint { height: 70rpx; text-align: center; color: #5D2F9E; font-size: 24rpx; line-height: 70rpx;}
+
+.success-frame { width: 100%; height: 100vh; position: fixed; top: 0; left: 0; background-color: rgba(0, 0, 0, 0.5);  display: flex; justify-content: center; align-items: center; z-index: 1500;}
+.success-frame .frame { width: 400rpx; height: 360rpx; display: flex; flex-direction: column; justify-content: center; align-items: center; background-color: #ffffff; border-radius: 20rpx;}
+.success-frame .frame .icon { width: 115rpx; height: 115rpx; margin-bottom: 60rpx;}
+.success-frame .frame .title { font-size: 34rpx; color: #333333; text-align: center; margin: 0;}
 </style>
 <template>
 <div class="contact">
@@ -25,13 +30,20 @@
       <input type="text" placeholder="请输入您的邮箱（选填）" v-model="mail" class="input"/>
    </div>
    <div style="text-align: center;">
-      <button class="btn">提交</button>
+      <button class="btn" @click="doSubmit">提交</button>
    </div>
    <div class="phone">
       <img src="../res/img/icon-phone.png" class="icon"/>
       {{phone}}
    </div>
    <a class="hint" v-if="showExemption">请点击了解本小程序的《免责声明》</a>
+
+   <div class="success-frame" v-if="showResult" @click="showResult = false">
+      <div class="frame">
+         <img src="../res/img/icon-success.png" class="icon" />
+         <p class="title">信息资料提交成功!</p>
+      </div>
+   </div>
 </div>
 </template>
 
@@ -39,6 +51,7 @@
 import wepy from '@wepy/core'
 import store from '../store'
 import { mapState } from '@wepy/x'
+import {postContactForm} from '@/res/api.js'
 wepy.component({
    store,
    props: {
@@ -55,7 +68,22 @@ wepy.component({
    computed: mapState([ 'phone' ]),
    attached() {
    },
-   methods: {}
+   methods: {
+      doSubmit () {
+         postContactForm({
+            name: this.name,
+            lxfs: this.mobile,
+            email: this.mail
+         }).then(res => {
+            if (res.ret === 1) {
+               this.name = ''
+               this.mobile = ''
+               this.mail = ''
+               this.showResult = true
+            }
+         })
+      }
+   }
 })
 </script>
 <config>

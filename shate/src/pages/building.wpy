@@ -35,7 +35,7 @@
       <contact />
    </div>
    <div class="hr"></div>
-   <zfooter page="index"/>
+   <zfooter :cid="id" :isLike="isLike" />
 </div>
 </template>
 
@@ -49,20 +49,31 @@ wepy.page({
    data: {
       exemption: '',
       banner: [],
-      itemData: {}
+      itemData: {},
+      isLike: 0,
+      id: 0
    },
    methods: {
       getData (id) {
          getLpDetail({id}).then(res => {
             this.banner = res.data.info.image.split('|')
             this.itemData = res.data.info
+            this.isLike = res.data.is_like
+            store.commit('SET_PHONE', res.data.phone)
          })
       }
    },
 
    onLoad (options) {
       const id = options.id || '18'
+      this.id = id
       this.getData(id)
+   },
+   onShareAppMessage: function () {
+      return {
+         title: this.itemData.name,
+         path: 'pages/building?id=' + this.id
+      }
    }
 })
 </script>
@@ -72,7 +83,7 @@ wepy.page({
       "usingComponents": {
          "banner": "~@/components/building/banner",
          "contact": "~@/components/contact",
-         "zfooter": "~@/components/footer"
+         "zfooter": "~@/components/footer2"
       }
    }
 </config>

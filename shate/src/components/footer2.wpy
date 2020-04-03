@@ -1,0 +1,84 @@
+<style>
+.z-footer { width: 100%; height: 126rpx; display: flex; background-color: #ffffff; box-shadow:0 2rpx 6rpx 0 rgba(0, 0, 0, 0.15); position: fixed; left: 0; bottom: 0; z-index: 1000;}
+.z-footer .left { width: 370rpx; display: flex; justify-content: space-around; align-items: center;}
+.z-footer-item { width: 110rpx; height: 78rpx; text-align: center; display: block; position: relative;}
+.z-footer-item .img { width: 40rpx; height: 40rpx;}
+.z-footer-item .name { font-size: 26rpx; color: #666666;}
+.z-footer-item .btn-share { width: 100%; height: 100%; position: absolute; top: 0; left: 0; opacity: 0;}
+.z-footer .active .name { color: #5D2F9E;}
+.z-footer .btn { width: 380rpx; background-color: #5D2F9E; font-size: 36rpx; color: #ffffff; border: none; display: flex; align-items: center; justify-content: center; border-radius: 0;}
+</style>
+<template>
+<div class="z-footer">
+   <div class="left">
+      <div class="z-footer-item" @click="linkTo('index')">
+         <img src="../res/img/icon-home.png" class="img" style="width: 44rpx;" />
+         <div class="name">首页</div>
+      </div>
+      <div class="z-footer-item active" @click="toggleLike">
+         <img src="../res/img/icon-guanzhu.png" class="img" v-if="cisLike === 0"/>
+         <img src="../res/img/icon-guanzhu-active.png" class="img" v-else-if="cisLike === 1"/>
+         <div class="name">关注</div>
+      </div>
+      <div class="z-footer-item">
+         <img src="../res/img/icon-mine.png" class="img" />
+         <div class="name">分享</div>
+         <button open-type="share" class="btn-share">share</button>
+      </div>
+   </div>
+   <button class="btn" open-type="contact">免费咨询</button>
+</div>
+</template>
+
+<script>
+import wepy from '@wepy/core'
+import store from '../store'
+import { mapState } from '@wepy/x'
+import {toggleLike} from '@/res/api.js'
+
+wepy.component({
+   store,
+   data: {
+      cisLike: 0,
+      isAjax: false
+   },
+   props: {
+      cid: {
+         type: String,
+         default: ''
+      },
+      isLike: {
+         type: Number,
+         default: ''
+      }
+   },
+   computed: mapState([ 'loginKey' ]),
+   attached() {
+      this.cisLike = this.isLike
+   },
+   methods: {
+      linkTo (page) {
+         if (page === this.page) return
+         wx.redirectTo({
+            url: `/pages/${page}`
+         })
+      },
+      toggleLike () {
+         if (this.isAjax) return
+         this.isAjax = true
+         toggleLike({
+            id: this.cid,
+            login_key: this.loginKey
+         }).then(res => {
+            this.isAjax = false
+            this.cisLike = this.isLike === 0 ? 1 : 0
+         })
+      }
+   }
+})
+</script>
+<config>
+   {
+   "usingComponents": {}
+   }
+</config>

@@ -28,7 +28,7 @@
       </ul>
    </scroll-view>
    <div class="build-list">
-      <div class="build-item" v-for="item in areaList">
+      <div class="build-item" v-for="item in areaList" @click="toDetail(item.id)">
          <img :src="imgSrc + item.fm_image" class="img"/>
          <div class="name" :class="{'name-new':item.type_id === '1'}">{{item.name}}</div>
          <div class="new-icon" v-if="item.type_id === '1'">最新</div>
@@ -88,6 +88,11 @@ wepy.component({
             area_id: id
          }).then(res => {
             this.areaList = res.data
+         })
+      },
+      toDetail (id) {
+         wx.navigateTo({
+            url: `/pages/building?id=${id}`
          })
       }
    }

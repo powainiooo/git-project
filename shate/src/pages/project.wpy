@@ -11,7 +11,7 @@
 <div class="page-container">
    <div class="section">
       <div class="img-item" v-for="item in imgList">
-         <img :src="imgSrc + item.images" mode="widthFix" class="img"/>
+         <img :src="imgSrc + item.image" mode="widthFix" class="img"/>
          <div class="name">{{item.name}}</div>
       </div>
    </div>

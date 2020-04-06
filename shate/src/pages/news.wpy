@@ -13,7 +13,7 @@
 <div class="page-container">
    <div class="section">
       <div class="title">最新新闻动态</div>
-      <div class="news-item" v-for="item in newsList">
+      <div class="news-item" v-for="item in newsList" @click="toNewsDetail(item.id)">
          <img :src="imgSrc + item.fm_image" class="img" />
          <div style="width: 420rpx;">
             <div class="news-title">{{item.title}}</div>
@@ -53,6 +53,11 @@
                  return i
               })
               store.commit('SET_PHONE', res.data.phone)
+           })
+        },
+        toNewsDetail (id) {
+           wx.navigateTo({
+              url: `/pages/newsdetail?id=${id}`
            })
         }
      },

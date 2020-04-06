@@ -12,7 +12,7 @@
    <swiper class="project"
            next-margin="195rpx">
       <swiper-item v-for="item in listData">
-         <div class="link">
+         <div class="link" @click="toDetail(item.id)">
             <img :src="imgSrc + item.fm_image" class="img"/>
             <div class="name">{{item.name}}</div>
          </div>
@@ -35,7 +35,13 @@ wepy.component({
    data: {},
    attached() {
    },
-   methods: {}
+   methods: {
+      toDetail (id) {
+         wx.navigateTo({
+            url: `/pages/project?id=${id}`
+         })
+      }
+   }
 })
 </script>
 <config>

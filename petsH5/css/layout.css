@@ -113,7 +113,7 @@
 .confirm-container .frame .btn { width: 100px; height: 50px; border-radius: 30px; background-color: #dac49f; display: flex; justify-content: center; align-items: center; font-size: 14px; color: #ffffff; box-shadow: 0 0 4px rgba(0, 0, 0, 0.2); margin-top: 70px;}
 
 
-.goods{ background-color: #FFFFFF;}
+.goods{ background-color: #efebea;}
 .goods .frame700{ height: 100px; display: flex; justify-content: space-between; align-items: center;}
 .goods .name{ font-size: 18px; color: #352c1d; font-family: Helve;}
 .goods .name span{ font-size: 12px; display: block;}

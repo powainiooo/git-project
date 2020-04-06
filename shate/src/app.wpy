@@ -68,6 +68,7 @@ wepy.app({
 <config>
    {
       "pages": [
+         "pages/index",
          "pages/newsdetail",
          "pages/news",
          "pages/relation",
@@ -75,7 +76,6 @@ wepy.app({
          "pages/whoami",
          "pages/project",
          "pages/building",
-         "pages/index",
          "pages/exemption",
          "pages/aboutus"
       ],

@@ -43,9 +43,12 @@ export const doLogin = data => {
 }
 
 // 上传用户信息
-export const getUserInfo = data => {
+export const postUserInfo = data => {
    return ajax({
       method: 'POST',
+      header: {
+         'content-type': 'application/x-www-form-urlencoded'
+      },
       url: `${baseUrl}/wechat/main/getUserInfo`,
       data
    })
@@ -98,10 +101,21 @@ export const getXmDetail = data => {
    })
 }
 
+// 我的关注楼盘
+export const getAttentionList = data => {
+   return ajax({
+      url: `${baseUrl}/api/xcx/like_list`,
+      data
+   })
+}
+
 // 关注取消关注楼盘
 export const toggleLike = data => {
    return ajax({
       method: 'POST',
+      header: {
+         'content-type': 'application/x-www-form-urlencoded'
+      },
       url: `${baseUrl}/api/xcx/lp_like`,
       data
    })

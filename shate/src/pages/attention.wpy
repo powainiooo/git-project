@@ -1,26 +1,20 @@
 <style>
-.img-item { margin: 20rpx; border-radius: 6rpx; position: relative; overflow: hidden;}
+.img-item { border-radius: 6rpx; position: relative; overflow: hidden;}
 .img-item::before { content: ''; width: 100%; height: 100%; position: absolute; top: 0; left: 0; background-color: rgba(0, 0, 0, 0.3);}
 .img-item::after { content: ''; width: 66rpx; height: 4rpx; position: absolute; bottom: 80rpx; left: 20rpx; background-color: #ffffff;}
 .img-item:last-child { margin-bottom: 40rpx;}
+.img-item .icon { width: 52rpx; position: absolute; top: 27rpx; left: 50rpx;}
 .img-item .img { width: 100%;  display: block;}
 .img-item .name { font-size: 36rpx; color: #ffffff; position: absolute; left: 20rpx; bottom: 100rpx;}
 </style>
 
 <template>
-<div class="page-container">
-   <div class="section">
-      <div class="img-item" v-for="item in imgList">
-         <img :src="imgSrc + item.image" mode="widthFix" class="img"/>
-         <div class="name">{{item.name}}</div>
-      </div>
+<div>
+   <div class="img-item" v-for="item in imgList" @click="toDetail(item.floor_id)">
+      <img src="../res/img/icon-guanzhu-active.png" mode="widthFix" class="icon"/>
+      <img :src="imgSrc + item.fm_image" mode="widthFix" class="img"/>
+      <div class="name">{{item.name}}</div>
    </div>
-   <div class="hr"></div>
-   <div class="section">
-      <contact />
-   </div>
-   <div class="hr"></div>
-   <zfooter :cid="id" :isLike="isLike"/>
 </div>
 </template>
 
@@ -28,7 +22,7 @@
 import wepy from '@wepy/core'
 import store from '../store'
 import { mapState } from '@wepy/x'
-import {getXmDetail} from '@/res/api.js'
+import {getAttentionList} from '@/res/api.js'
 
 wepy.page({
    store,
@@ -38,14 +32,18 @@ wepy.page({
       isLike: 0,
       id: 0
    },
-   computed: mapState([ 'imgSrc' ]),
+   computed: mapState([ 'loginKey', 'imgSrc' ]),
    methods: {
-      getData (id) {
-         getXmDetail({id}).then(res => {
-            this.imgList = res.data.list
-            this.isLike = res.data.is_like
-            this.name = res.data.name
-            store.commit('SET_PHONE', res.data.phone)
+      getData () {
+         getAttentionList({
+            login_key: this.loginKey
+         }).then(res => {
+            this.imgList = res.data
+         })
+      },
+      toDetail (id) {
+         wx.navigateTo({
+            url: `/pages/building?id=${id}`
          })
       }
    },
@@ -65,11 +63,8 @@ wepy.page({
 </script>
 <config>
    {
-      "navigationBarTitleText": "酒店项目",
+      "navigationBarTitleText": "我关注的楼盘",
       "usingComponents": {
-         "banner": "~@/components/building/banner",
-         "contact": "~@/components/contact",
-         "zfooter": "~@/components/footer2"
       }
    }
 </config>

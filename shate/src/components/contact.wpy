@@ -32,11 +32,11 @@
    <div style="text-align: center;">
       <button class="btn" @click="doSubmit">提交</button>
    </div>
-   <div class="phone">
+   <div class="phone" @click="doCall">
       <img src="../res/img/icon-phone.png" class="icon"/>
       {{phone}}
    </div>
-   <a class="hint" v-if="showExemption">请点击了解本小程序的《免责声明》</a>
+   <a class="hint" url="/pages/exemption" v-if="showExemption">请点击了解本小程序的《免责声明》</a>
 
    <div class="success-frame" v-if="showResult" @click="showResult = false">
       <div class="frame">
@@ -81,6 +81,11 @@ wepy.component({
                this.mail = ''
                this.showResult = true
             }
+         })
+      },
+      doCall () {
+         wx.makePhoneCall({
+            phoneNumber: this.phone
          })
       }
    }

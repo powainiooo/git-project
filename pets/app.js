@@ -75,8 +75,8 @@ App({
 	globalData: {
 		userOpenID:'',
 		userInfo: null,
-		ajaxSrc:'http://hair.pc-online.cc/mobile/applet/',
-		imgSrc:'http://hair.pc-online.cc/upload/',
+		ajaxSrc:'https://hair.designbyho.com/mobile/applet/',
+		imgSrc:'https://hair.designbyho.com/upload/',
 		ruleContent:'',
 		orderNum:'',
 		store: {},

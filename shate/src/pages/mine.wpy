@@ -1,0 +1,82 @@
+<style>
+page { background-color: rgb(252, 250, 250)}
+.top { height: 616rpx; background-color: #52167A; position: relative;}
+.top .bg { width: 100%; height: 100%;}
+.top .title { width: 100%; font-size: 13px; color: #ffffff; text-align: center; position: absolute; top: 32px; left: 0; margin: 0;}
+.avatar { width: 180rpx; height: 180rpx; display: flex; justify-content: center; align-items: center; border-radius: 50%; position: absolute; top: 180rpx; left: 50%; margin-left: -90rpx; background-color: #ffffff;}
+.avatar image { width: 160rpx; height: 160rpx; border-radius: 50%;}
+.top .name { width: 100%; position: absolute; top: 380rpx; left: 0; font-size: 40rpx; color: #ffffff; display: flex; align-items: center; justify-content: center;}
+.top .name .icon { width: 32rpx; height: 32rpx; margin-left: 20rpx;}
+.top .btn { position: absolute; top: 50%; left: 50%; font-size: 36rpx; margin: -23px 0 0 -52px;}
+.link-item { background-color: #ffffff; margin-top: 20rpx; height: 130rpx; display: flex; justify-content: space-between; align-items: center;}
+.link-item .left { margin-left: 44rpx; display: flex; align-items: center; font-size: 34rpx; color: #666666;}
+.link-item .left .icon { width: 33rpx; height: 37rpx; margin-right: 25rpx;}
+.link-item .arrow { width: 17rpx; height: 30rpx; margin-right: 25rpx;}
+.hint { width: 100%; height: 70rpx; text-align: center; color: #5D2F9E; font-size: 24rpx; line-height: 70rpx; position: absolute; bottom: 150rpx; left: 0;}
+</style>
+
+<template>
+<div class="page-container">
+   <div class="top">
+      <div class="title">我的</div>
+      <img src="../res/img/bg.png" class="bg" />
+      <div class="avatar" v-if="personalInfo !== null">
+         <img :src="personalInfo.avatarUrl" />
+      </div>
+      <div class="name" v-if="personalInfo !== null">
+         {{personalInfo.nickName}}
+         <img src="../res/img/male.png" class="icon" v-if="personalInfo.gender === 1"/>
+         <img src="../res/img/female.png" class="icon" v-else/>
+      </div>
+      <button open-type="getUserInfo" class="btn" bindgetuserinfo="getUserInfo" v-if="personalInfo === null">立即登录</button>
+   </div>
+   <a url="/pages/attention" class="link-item" v-if="personalInfo !== null">
+      <div class="left">
+         <img src="../res/img/icon-guanzhu2.png" class="icon"/>
+         关注楼盘
+      </div>
+      <img src="../res/img/icon-arrow.png" class="arrow"/>
+   </a>
+   <a url="/pages/exemption" class="hint">请点击了解本小程序的《免责声明》</a>
+   <zfooter page="mine"/>
+</div>
+</template>
+
+<script>
+  import wepy from '@wepy/core'
+  import store from '../store'
+  import { mapState } from '@wepy/x'
+  import {postUserInfo} from '@/res/api.js'
+
+  wepy.page({
+     store,
+     computed: mapState([ 'loginKey', 'personalInfo' ]),
+     data: {
+
+     },
+     methods: {
+        getUserInfo (e) {
+           console.log(e)
+           const userInfo = e.$wx.detail.userInfo
+           userInfo.login_key = this.loginKey
+           postUserInfo(userInfo).then(res => {
+              if (res.ret === 1) {
+                 store.commit('SET_PERSONINFO', userInfo)
+              }
+           })
+        }
+     },
+
+     onLoad () {
+     }
+  })
+</script>
+<config>
+{
+   "navigationBarTitleText": "",
+    "usingComponents": {
+      "zfooter": "~@/components/footer"
+    },
+   "navigationStyle": "custom"
+}
+</config>

@@ -7,7 +7,8 @@ export default new Vuex.Store({
       imgSrc: 'https://st.vsapp.cn', // 图片地址前缀
       loginKey: '', // 登录密钥
       exemption: '小程序信息免责声明', // 免责声明
-      phone: '' // 电话
+      phone: '', // 电话
+      personalInfo: null
    },
    mutations: {
       SET_LOGIN_KEY (state, data) {
@@ -18,6 +19,9 @@ export default new Vuex.Store({
       },
       SET_PHONE (state, data) {
          state.phone = data
+      },
+      SET_PERSONINFO (state, data) {
+         state.personalInfo = data
       }
    },
    actions: {}

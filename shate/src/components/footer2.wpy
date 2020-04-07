@@ -15,7 +15,7 @@
          <img src="../res/img/icon-home.png" class="img" style="width: 44rpx;" />
          <div class="name">首页</div>
       </div>
-      <div class="z-footer-item active" @click="toggleLike">
+      <div class="z-footer-item active" @click="toggleLike" v-if="showShare">
          <img src="../res/img/icon-guanzhu.png" class="img" v-if="cisLike === 0"/>
          <img src="../res/img/icon-guanzhu-active.png" class="img" v-else-if="cisLike === 1"/>
          <div class="name">关注</div>
@@ -50,11 +50,17 @@ wepy.component({
       isLike: {
          type: Number,
          default: ''
+      },
+      showShare: {
+         type: Boolean,
+         default: false
       }
    },
    computed: mapState([ 'loginKey' ]),
-   attached() {
-      this.cisLike = this.isLike
+   watch: {
+      isLike (val) {
+         this.cisLike = this.isLike
+      }
    },
    methods: {
       linkTo (page) {
@@ -71,7 +77,9 @@ wepy.component({
             login_key: this.loginKey
          }).then(res => {
             this.isAjax = false
-            this.cisLike = this.isLike === 0 ? 1 : 0
+            if (res.ret === 1) {
+               this.cisLike = this.isLike === 0 ? 1 : 0
+            }
          })
       }
    }

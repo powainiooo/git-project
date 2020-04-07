@@ -1,5 +1,5 @@
 <style lang="less">
-.page-container { margin-bottom: 130rpx;}
+.page-container { padding-bottom: 130rpx;}
 .section {
    position: relative;
    box-shadow:0 0 19rpx 1rpx rgba(93,47,158,0.13);
@@ -17,8 +17,10 @@ import wepy from '@wepy/core'
 import vuex from '@wepy/x'
 import store from './store'
 import {promisify} from '@/res/util.js'
-import {doLogin, getUserInfo} from '@/res/api.js'
+import {doLogin, postUserInfo} from '@/res/api.js'
 const login = promisify(wx.login)
+const getSetting = promisify(wx.getSetting)
+const getUserInfo = promisify(wx.getUserInfo)
 
 wepy.use(vuex)
 
@@ -47,19 +49,24 @@ wepy.app({
          }
          const now = new Date().getTime()
          const loginKey = wx.getStorageSync('stLoginKey')
-         if (loginKey === '' || loginKey === null || now > lastGetCityTime + 0.5 * 60 * 60 * 1000) {
+         const resSetting = await getSetting()
+         console.log('resSetting', resSetting)
+         if (loginKey === '' || loginKey === null || now > lastGetCityTime + 1 * 60 * 60 * 1000) {
             const resLogin = await login()
             console.log('resLogin', resLogin)
-            doLogin({
+            const resDoLogin = await doLogin({
                code: resLogin.code
-            }).then(res => {
-               console.log(res)
-               store.commit('SET_LOGIN_KEY', res.login_key)
-               wx.setStorageSync('lastGetCityTime', now)
-               wx.setStorageSync('stLoginKey', res.login_key)
             })
+            store.commit('SET_LOGIN_KEY', resDoLogin.login_key)
+            wx.setStorageSync('lastGetCityTime', now)
+            wx.setStorageSync('stLoginKey', resDoLogin.login_key)
          } else {
             store.commit('SET_LOGIN_KEY', loginKey)
+         }
+         if (resSetting.authSetting['scope.userInfo']) {
+            const resUserInfo = await getUserInfo()
+            console.log('resUserInfo', resUserInfo)
+            store.commit('SET_PERSONINFO', resUserInfo.userInfo)
          }
       }
    }
@@ -69,13 +76,15 @@ wepy.app({
    {
       "pages": [
          "pages/index",
+         "pages/mine",
+         "pages/attention",
+         "pages/project",
+         "pages/building",
          "pages/newsdetail",
          "pages/news",
          "pages/relation",
          "pages/awards",
          "pages/whoami",
-         "pages/project",
-         "pages/building",
          "pages/exemption",
          "pages/aboutus"
       ],

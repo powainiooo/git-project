@@ -35,13 +35,14 @@
       <contact />
    </div>
    <div class="hr"></div>
-   <zfooter :cid="id" :isLike="isLike" />
+   <zfooter :cid="id" :isLike="isLike" showShare />
 </div>
 </template>
 
 <script>
 import wepy from '@wepy/core'
 import store from '../store'
+import { mapState } from '@wepy/x'
 import {getLpDetail} from '@/res/api.js'
 
 wepy.page({
@@ -53,9 +54,13 @@ wepy.page({
       isLike: 0,
       id: 0
    },
+   computed: mapState([ 'loginKey' ]),
    methods: {
       getData (id) {
-         getLpDetail({id}).then(res => {
+         getLpDetail({
+            id,
+            login_key: this.loginKey
+         }).then(res => {
             this.banner = res.data.info.image.split('|')
             this.itemData = res.data.info
             this.isLike = res.data.is_like

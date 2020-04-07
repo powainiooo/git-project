@@ -1,7 +1,7 @@
 <style>
 .news-item { margin: 0 46rpx 28rpx 26rpx; display: flex;}
 .news-item .img { width: 230rpx; height: 178rpx; border-radius: 6rpx; margin-right: 20rpx;}
-.news-item .news-title { font-size: 32rpx; font-weight: bold; color: #333333; margin-bottom: 14rpx;}
+.news-item .news-title { font-size: 32rpx; font-weight: bold; color: #333333; margin-bottom: 14rpx; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;}
 .news-item .date { font-size: 24rpx; color: #333333; margin-bottom: 14rpx; display: flex; align-items: center;}
 .news-item .date .icon { width: 26rpx; height: 24rpx; margin-right: 16rpx;}
 .news-item .content { font-size: 22rpx; color: #999999; line-height: 35rpx;}
@@ -12,12 +12,12 @@
 <template>
 <div class="page-container">
    <div class="section">
-      <div class="title">最新新闻动态</div>
+      <div class="title title-border">最新新闻动态</div>
       <div class="news-item" v-for="item in newsList" @click="toNewsDetail(item.id)">
          <img :src="imgSrc + item.fm_image" class="img" />
          <div style="width: 420rpx;">
             <div class="news-title">{{item.title}}</div>
-            <div class="date"><img src="../res/img/icon-calanda.png" class="icon"/>{{item.date}}</div>
+            <div class="date">{{item.date}}</div>
             <div class="content">{{item.content}}</div>
          </div>
       </div>

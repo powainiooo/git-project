@@ -8,7 +8,8 @@ export default new Vuex.Store({
       loginKey: '', // 登录密钥
       exemption: '小程序信息免责声明', // 免责声明
       phone: '', // 电话
-      personalInfo: null
+      personalInfo: null,
+      showResult: false
    },
    mutations: {
       SET_LOGIN_KEY (state, data) {
@@ -22,6 +23,9 @@ export default new Vuex.Store({
       },
       SET_PERSONINFO (state, data) {
          state.personalInfo = data
+      },
+      SET_RESULT (state, data) {
+         state.showResult = data
       }
    },
    actions: {}

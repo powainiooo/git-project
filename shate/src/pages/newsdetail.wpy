@@ -2,11 +2,19 @@
 .section2 { width: 100%; background-color: #ffffff; border-radius: 60rpx 60rpx 0 0; position: absolute; top: 314rpx; left: 0; z-index: 100; padding-bottom: 130rpx; overflow: hidden;}
 .content { margin: 0 50rpx 60rpx 50rpx; font-size: 26rpx; color: #333333; line-height: 50rpx;}
 .date { text-align: center; font-size: 24rpx; color: #999999; margin: -20rpx 0 40rpx 0;}
+.media { display: flex; justify-content: center; align-items: center; width: 100%; position: absolute; top: 260rpx; left: 0; z-index: 100;}
+.media-item { font-size: 25rpx; color: #ffffff; margin: 0 45rpx; display: flex; align-items: center;}
+.media-item .icon { width: 40rpx; height: 40rpx; margin-right: 16rpx;}
 </style>
 
 <template>
 <div class="page-container">
    <banner :listData="banner"></banner>
+   <div class="media">
+      <div class="media-item" v-if="itemData.video !== ''">
+         <img src="../res/img/icon-play.png" class="icon" />视频
+      </div>
+   </div>
    <div class="section2">
       <div class="section">
          <div class="title title-border">{{itemData.title}}</div>
@@ -53,14 +61,14 @@ wepy.page({
    },
 
    onLoad (options) {
-      const id = options.id || '1'
+      const id = options.id || '9'
       this.getData(id)
    }
 })
 </script>
 <config>
    {
-      "navigationBarTitleText": "我们是谁",
+      "navigationBarTitleText": "新闻资讯",
       "usingComponents": {
          "banner": "~@/components/aboutus/banner",
          "contact": "~@/components/contact",

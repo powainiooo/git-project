@@ -5,6 +5,10 @@
 .z-footer-item .name { font-size: 26rpx; color: #666666;}
 .z-footer .active .name { color: #5D2F9E;}
 
+.success-frame { width: 100%; height: 100vh; position: fixed; top: 0; left: 0; background-color: rgba(0, 0, 0, 0.5);  display: flex; justify-content: center; align-items: center; z-index: 1500;}
+.success-frame .frame { width: 400rpx; height: 360rpx; display: flex; flex-direction: column; justify-content: center; align-items: center; background-color: #ffffff; border-radius: 20rpx;}
+.success-frame .frame .icon { width: 115rpx; height: 115rpx; margin-bottom: 60rpx;}
+.success-frame .frame .title { font-size: 34rpx; color: #333333; text-align: center; margin: 0;}
 </style>
 <template>
 <div class="z-footer">
@@ -23,13 +27,23 @@
       <img src="../res/img/icon-mine.png" class="img" v-if="page !== 'mine'" />
       <div class="name">我的</div>
    </div>
+
+   <div class="success-frame" v-if="showResult" @click="hideResult">
+      <div class="frame">
+         <img src="../res/img/icon-success.png" class="icon" />
+         <p class="title">信息资料提交成功!</p>
+      </div>
+   </div>
 </div>
 </template>
 
 <script>
 import wepy from '@wepy/core'
+import store from '../store'
+import { mapState } from '@wepy/x'
 
 wepy.component({
+   store,
    data: {},
    props: {
       page: {
@@ -37,6 +51,7 @@ wepy.component({
          default: 'index'
       }
    },
+   computed: mapState([ 'showResult' ]),
    attached() {
    },
    methods: {
@@ -45,6 +60,9 @@ wepy.component({
          wx.redirectTo({
             url: `/pages/${page}`
          })
+      },
+      hideResult () {
+         store.commit('SET_RESULT', false)
       }
    }
 })

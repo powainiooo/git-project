@@ -56,7 +56,7 @@ wepy.component({
          default: false
       }
    },
-   computed: mapState([ 'loginKey' ]),
+   computed: mapState([ 'loginKey', 'personalInfo' ]),
    watch: {
       isLike (val) {
          this.cisLike = this.isLike
@@ -70,6 +70,13 @@ wepy.component({
          })
       },
       toggleLike () {
+         if (this.personalInfo === null) {
+            wx.showToast({
+               image: '../res/img/warn.png',
+               title: '请登录'
+            })
+            return
+         }
          if (this.isAjax) return
          this.isAjax = true
          toggleLike({

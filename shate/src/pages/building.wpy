@@ -15,10 +15,10 @@
          <banner :listData="banner"></banner>
       </div>
       <div class="media">
-         <div class="media-item" v-if="itemData.vr !== ''">
+         <div class="media-item" v-if="itemData.vr !== ''" @click="toWeb(itemData.vr)">
             <img src="../res/img/icon-vr.png" class="icon"/>VR看房
          </div>
-         <div class="media-item" v-if="itemData.video !== ''">
+         <div class="media-item" v-if="itemData.video !== ''" @click="toVideo(itemData.video)">
             <img src="../res/img/icon-vedio.png" class="icon" />视频看房
          </div>
       </div>
@@ -68,6 +68,16 @@ wepy.page({
             wx.setNavigationBarTitle({
                title: res.data.info.name
             })
+         })
+      },
+      toWeb (url) {
+         wx.navigateTo({
+            url: `/pages/web?url=${url}`
+         })
+      },
+      toVideo (url) {
+         wx.navigateTo({
+            url: `/pages/video?url=${url}`
          })
       }
    },

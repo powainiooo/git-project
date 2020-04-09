@@ -1,0 +1,29 @@
+<style lang="less">
+
+</style>
+<template>
+<web-view :src="url">
+
+</web-view>
+</template>
+
+<script>
+import wepy from '@wepy/core'
+import store from '../store'
+
+wepy.page({
+   store,
+   data: {
+      url: ''
+   },
+   onLoad (options) {
+      this.url = options.url || 'https://www.baidu.com/'
+   },
+   methods: {}
+})
+</script>
+<config>
+   {
+   "usingComponents": {}
+   }
+</config>

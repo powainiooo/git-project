@@ -75,12 +75,14 @@ wepy.app({
 <config>
    {
       "pages": [
-         "pages/newsdetail",
          "pages/index",
+         "pages/newsdetail",
+         "pages/building",
+         "pages/web",
+         "pages/video",
          "pages/mine",
          "pages/attention",
          "pages/project",
-         "pages/building",
          "pages/news",
          "pages/relation",
          "pages/awards",

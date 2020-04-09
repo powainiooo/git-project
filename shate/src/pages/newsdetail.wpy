@@ -11,7 +11,7 @@
 <div class="page-container">
    <banner :listData="banner"></banner>
    <div class="media">
-      <div class="media-item" v-if="itemData.video !== ''">
+      <div class="media-item" v-if="itemData.video !== ''" @click="toVideo(itemData.video)">
          <img src="../res/img/icon-play.png" class="icon" />视频
       </div>
    </div>
@@ -56,6 +56,11 @@ wepy.page({
             this.banner = res.data.info.banner.split('|')
             this.date = moment(parseInt(res.data.info.fb_time) * 1000).format('YYYY-MM-DD HH:mm')
             store.commit('SET_PHONE', res.data.phone)
+         })
+      },
+      toVideo (url) {
+         wx.navigateTo({
+            url: `/pages/video?url=${url}`
          })
       }
    },

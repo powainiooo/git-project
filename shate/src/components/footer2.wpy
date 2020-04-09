@@ -85,7 +85,7 @@ wepy.component({
          }).then(res => {
             this.isAjax = false
             if (res.ret === 1) {
-               this.cisLike = this.isLike === 0 ? 1 : 0
+               this.cisLike = this.cisLike === 0 ? 1 : 0
             }
          })
       }

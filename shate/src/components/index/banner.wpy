@@ -12,7 +12,7 @@
 <div>
    <swiper autoplay class="banner" @change="bannerChange">
       <swiper-item v-for="item in listData">
-         <a class="link">
+         <a :url="'/pages/building?id=' + item.link" class="link">
             <img :src="imgSrc + item.image" class="img"/>
             <div class="name">{{item.name}}</div>
          </a>

@@ -1,0 +1,40 @@
+<style>
+.video-frame { width: 100%; height: 100vh; display: flex; align-items: center;}
+.video-frame .video { width: 100%;}
+</style>
+<template>
+<div class="video-frame">
+   <video :src="imgSrc + url" class="video" binderror="error" v-if="url !== ''"></video>
+</div>
+</template>
+
+<script>
+import wepy from '@wepy/core'
+import store from '../store'
+import { mapState } from '@wepy/x'
+
+wepy.page({
+   store,
+   data: {
+      url: ''
+   },
+   computed: mapState([ 'imgSrc' ]),
+   onLoad (options) {
+      this.url = options.url
+   },
+   methods: {
+      error (e) {
+         console.log(e)
+         wx.showToast({
+            image: '../res/img/warn.png',
+            title: '加载失败'
+         })
+      }
+   }
+})
+</script>
+<config>
+   {
+   "usingComponents": {}
+   }
+</config>

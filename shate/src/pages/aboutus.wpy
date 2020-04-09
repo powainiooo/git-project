@@ -31,7 +31,7 @@
             <img src="../res/img/aboutus-img3.png" class="img"/>
             <div class="title">投资者关系</div>
          </a>
-         <a class="item">
+         <a :url="'/pages/web?url='+url" class="item">
             <img src="../res/img/aboutus-img4.png" class="img"/>
             <div class="title">公司概览</div>
          </a>
@@ -72,6 +72,7 @@
      store,
      data: {
         banner: [],
+        url: '',
         newsList: []
      },
      computed: mapState([ 'imgSrc' ]),
@@ -79,6 +80,7 @@
         getData () {
            getAboutus().then(res => {
               this.banner = res.data.banner
+              this.url = res.data.go
               this.newsList = res.data.list.map(i => {
                  i.date = moment(parseInt(i.ctime) * 1000).format('YYYY-MM-DD HH:mm')
                  return i

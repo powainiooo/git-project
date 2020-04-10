@@ -14,7 +14,7 @@
 .build-item .name { width: 420rpx; height: 108rpx; background-color: rgba(0, 0, 0, 0.2); font-size: 36rpx; color: #ffffff; display: flex; align-items: center; justify-content: center; position: absolute; top: 50%; left: 50%; margin: -54rpx 0 0 -210rpx;}
 .build-item .name-new { border: 1px dashed rgba(255, 255, 255, 0.4);}
 .build-item .name::after { content: ''; width: 70rpx; height: 4rpx; border-radius: 2rpx; background-color: #ffffff; position: absolute; left: 175rpx; bottom: 20rpx;}
-.build-item .new-icon { width: 70rpx; height: 80rpx; box-sizing: border-box; background-color: rgb(82, 22, 122); font-size: 25rpx; color: #ffffff; display: flex; justify-content: center; align-items: flex-end; padding-bottom: 18rpx; border-radius: 0 0 6rpx 6rpx; position: absolute; top: 0; left: 40rpx;}
+.build-item .new-icon { width: 70rpx; height: 80rpx; box-sizing: border-box; background-color: rgb(82, 22, 122); font-size: 25rpx; color: #ffffff; display: flex; justify-content: center; align-items: flex-end; padding-bottom: 18rpx; border-radius: 0 0 6rpx 6rpx; position: absolute; top: 0; left: 40rpx; border: 1px dashed rgba(255, 255, 255, 0.4);}
 </style>
 <template>
 <div>

@@ -12,10 +12,10 @@
 <div>
    <swiper autoplay class="banner" @change="bannerChange">
       <swiper-item v-for="item in listData">
-         <a :url="'/pages/building?id=' + item.link" class="link">
+         <div @click="toDetail(item.link)" class="link">
             <img :src="imgSrc + item.image" class="img"/>
-            <div class="name">{{item.name}}</div>
-         </a>
+            <div class="name" v-if="item.link !== '0'">{{item.name}}</div>
+         </div>
       </swiper-item>
    </swiper>
    <ul class="banner-dot">
@@ -45,6 +45,15 @@ wepy.component({
    methods: {
       bannerChange (e) {
          this.currentIndex = e.$wx.detail.current
+      },
+      toDetail (id) {
+         if (id === '0' || id === '') {
+
+         } else {
+            wx.navigateTo({
+               url: `/pages/building?id=${id}`
+            })
+         }
       }
    }
 })

@@ -16,9 +16,16 @@ Page({
 	},
 	//下一步
 	doNext(){
-		wx.navigateTo({
-			url: `/pages/select/second?type=${this.data.selectItem}`
-		})
+		if (this.data.selectItem === '') {
+			wx.showToast({
+				title: '请选择宠物类型',
+				icon: 'none'
+			});
+		} else {
+			wx.navigateTo({
+				url: `/pages/select/second?type=${this.data.selectItem}`
+			})
+		}
 	},
 	/**
 	 * 生命周期函数--监听页面加载

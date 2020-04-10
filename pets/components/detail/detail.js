@@ -39,6 +39,7 @@ Component({
          wx.makePhoneCall({
             phoneNumber: this.data.mobile
          })
-      }
+      },
+	   tmove () {}
    }
 })

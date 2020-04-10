@@ -1,8 +1,8 @@
-.container-information{ overflow: hidden;}
+.container-information{ overflow: hidden; box-sizing: border-box; min-height: calc(100vh - 220rpx); position: relative; display: flex; flex-direction: column; justify-content: space-between;}
 
-.input { margin: 90rpx 60rpx; border: 1px solid #e5e4e2; color: #372c1e; font-size: 32rpx; padding: 30rpx; border-radius: 20rpx;}
+.input { width: auto; display: block; box-sizing: border-box; margin: 90rpx 60rpx; border: 1px solid #e5e4e2; color: #372c1e; font-size: 32rpx; padding: 30rpx; border-radius: 20rpx;}
 .place { color: #372c1e;}
 
-.tips-frame{ padding: 60rpx; margin-top: 180rpx; background-color: #efebea;}
+.tips-frame{ padding: 60rpx; margin-top: 150rpx; background-color: #efebea;}
 .tips-frame .icon-tips{ font-size: 70rpx; color: #9e9c9d; margin-bottom: 10rpx;}
 .tips-frame text{ font-size: 30rpx; line-height: 1.8; letter-spacing: 4rpx; color: #9e9c9d;}

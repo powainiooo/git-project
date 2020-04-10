@@ -3,5 +3,5 @@
         <image src="../../res/img/logo.png" class="logo"></image>
         <image src="../../res/img/logo-title.png" class="logo-title"></image>
     </view>
-    <view class="title" wx:if="{{showTitle}}"><slot></slot></view>
+    <view class="title" wx:if="{{showTitle}}" style="background-color: {{bgColor}}"><slot></slot></view>
 </view>

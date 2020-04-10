@@ -11,7 +11,11 @@ Component({
     size:{
       type:String,
       value:'normal'
-    }
+    },
+	  bgColor: {
+    	type: String,
+		  value: '#e7e3e2'
+	  }
   },
 
   /**

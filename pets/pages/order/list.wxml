@@ -1,4 +1,4 @@
-<header-view>已预约订单 | Booked order</header-view>
+<header-view bgColor="#ffffff">已预约订单 | Booked order</header-view>
 <view class="container container-order">
    <view class="list-item"
          wx:for="{{listData}}"

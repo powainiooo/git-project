@@ -3,9 +3,9 @@
 .order-time .line .month{ font-size: 60rpx; font-family: 'Helve';text-shadow: 0 0 3px rgba(55,44,30,0.25);}
 .order-time .line .week { font-size: 24rpx; color: #ffffff; text-align: center;}
 
-.store-item{ margin: 60rpx; position: relative;}
+.store-item{ margin: 30rpx 60rpx; position: relative;}
 .store-item .title{ width: 450rpx; font-size: 60rpx; text-shadow: 0 0 3px rgba(55,44,30,0.25); letter-spacing: 8rpx; margin-bottom: 30rpx;}
-.store-item .address{ width: 450rpx; font-size: 30rpx; letter-spacing: 5rpx; margin-bottom: 50rpx;}
+.store-item .address{ width: 450rpx; font-size: 30rpx; letter-spacing: 5rpx;}
 .store-item .btn-map{ width: 140rpx; height: 70rpx; position: absolute; top: 50%; right: 0; margin-top: -35rpx; background-color: #d9c39f; border-radius: 40rpx; font-size: 20rpx; color: #ffffff; display: flex; justify-content: center; align-items: center;transition:transform 0.15s ease-out;}
 .store-item .btn-map-hover{ transform: scale(0.9);}
 

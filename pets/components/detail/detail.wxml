@@ -1,9 +1,9 @@
-<view class="detail-frame" style="top:{{showDetails ? '0' : '100vh'}}">
+<scroll-view scroll-y class="detail-frame" style="top:{{showDetails ? '0' : '100vh'}}" catchtouchmove="tmove">
    <view class="line1" wx:if="{{!showRefund}}">
       <view class="icons icon-guanbi" bindtap="hideDetails"></view>
       <view class="title1"><text>{{prodata.english_name}}\n{{prodata.china_name}}</text></view>
       <view class="title2">{{prodata.intro}}</view>
-      <image src="{{imgSrc+prodata.cover_two}}" mode="scaleToFill" class="img"></image>
+      <image src="{{imgSrc+prodata.cover_two}}" class="img"></image>
    </view>
    <view class="line3" wx:if="{{showRefund}}">
       <view class="icons icon-guanbi" bindtap="hideDetails"></view>
@@ -20,4 +20,4 @@
          <image src="../../res/img/logo-title.png" class="logo-title"></image>
       </view>
    </view>
-</view>
+</scroll-view>

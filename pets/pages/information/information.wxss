@@ -1,4 +1,4 @@
-.container-information{ overflow: hidden;}
+.container-information{ overflow: hidden; box-sizing: border-box; min-height: calc(100vh - 220rpx); position: relative; display: flex; flex-direction: column; justify-content: space-between;}
 
 .container-information .input{ margin: 0 60rpx; height: 130rpx; display: flex; align-items: flex-end; border-bottom: 1rpx solid #e6e3e1; position: relative; padding-right: 10rpx; font-size: 35rpx; box-sizing: border-box;}
 .container-information .input::before,.container-information .input::after{ content: ''; width: 10rpx; height: 10rpx; background-color: #e6e3e1; border-radius: 50%; position: absolute; bottom: -5rpx;}
@@ -11,6 +11,6 @@
 .container-information .input input.phone{ font-size: 96rpx; font-family: 'Helve'; padding-top: 0;}
 .container-information .input input.phone .place{ color: #372c1e; font-size: 35rpx; padding-top: 30rpx;}
 
-.tips-frame{ padding: 60rpx; margin-top: 180rpx; background-color: #efebea;}
+.tips-frame{ padding: 60rpx; background-color: #efebea; margin-top: 150rpx;}
 .tips-frame .icon-tips{ font-size: 70rpx; color: #9e9c9d; margin-bottom: 10rpx;}
 .tips-frame text{ font-size: 30rpx; line-height: 1.8; letter-spacing: 4rpx; color: #9e9c9d;}

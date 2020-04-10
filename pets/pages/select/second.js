@@ -105,10 +105,18 @@ Page({
       })
 	},
 	doNext () {
-      app.globalData.petId = this.data.selectedID
-   	wx.navigateTo({
-		   url: '/pages/package/package'
-	   })
+		if (this.data.selectedID === '') {
+			wx.showToast({
+				title: '请选择宠物品种',
+				icon: 'none'
+			});
+		} else {
+			app.globalData.petId = this.data.selectedID
+			wx.navigateTo({
+				url: '/pages/package/package'
+			})
+		}
+
 	},
    /**
     * 生命周期函数--监听页面初次渲染完成

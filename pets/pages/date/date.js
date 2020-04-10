@@ -153,10 +153,17 @@ Page({
 		})
 	},
 	doConfirm () {
-		app.globalData.selectedDate = this.data.selectedDate
-		wx.navigateTo({
-			url: '/pages/select/select'
-		})
+    	if (this.data.selectedDate === '') {
+	      wx.showToast({
+		      title: '请选择日期',
+		      icon: 'none'
+	      });
+      } else {
+	      app.globalData.selectedDate = this.data.selectedDate
+	      wx.navigateTo({
+		      url: '/pages/select/select'
+	      })
+      }
 	},
 	getActivityDays () {
 		getActivityDays({

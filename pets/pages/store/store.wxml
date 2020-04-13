@@ -17,7 +17,7 @@
             <view class="btn-map" data-store="{{item}}" bindtap="openMap" hover-class="btn-map-hover" hover-stay-time="50">查看地图</view>
         </view>
     </view>
-    <view class="tips"><text class="icons icon-logo"></text>目前只有一家体验店，更多店铺正在进行，敬请期待。</view>
+    <view class="tips"><image src="../../res/img/logo-text.png" class="logo-text"></image>目前只有一家体验店，更多店铺正在进行，敬请期待。</view>
 </view>
 <footer-view bindbtn="doNext"><view slot="btn">下一步 | Next</view></footer-view>
 

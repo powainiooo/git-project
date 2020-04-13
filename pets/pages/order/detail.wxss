@@ -5,8 +5,8 @@
 .order-time .line .week { font-size: 24rpx; color: #ffffff; text-align: center;}
 
 .store-item{ padding: 30rpx 60rpx; position: relative; border-bottom: 1px solid #ebeae8;}
-.store-item .title{ width: 450rpx; font-size: 60rpx; text-shadow: 0 0 3px rgba(55,44,30,0.25); letter-spacing: 8rpx; margin-bottom: 30rpx;}
-.store-item .address{ width: 450rpx; font-size: 30rpx; letter-spacing: 5rpx;}
+.store-item .title{ width: 450rpx; font-size: 60rpx; text-shadow: 0 0 3px rgba(55,44,30,0.25); margin-bottom: 30rpx;}
+.store-item .address{ width: 450rpx; font-size: 30rpx;}
 .btn-map{ width: 140rpx; height: 70rpx; position: absolute; top: 50%; right: 60rpx; margin-top: -35rpx; background-color: #d9c39f; border-radius: 40rpx; font-size: 20rpx; color: #ffffff; display: flex; justify-content: center; align-items: center;transition:transform 0.15s ease-out;}
 .btn-map-hover{ transform: scale(0.9);}
 
@@ -32,7 +32,7 @@
 
 .tips-frame{ padding:0 60rpx; height: 330rpx; box-sizing: border-box; background-color: #9d9c9c; overflow: hidden; display: flex; flex-direction: column; justify-content: center;}
 .tips-frame .icon-tips{ font-size: 70rpx; color: #ffffff; margin-bottom: 10rpx;}
-.tips-frame text{ font-size: 30rpx; line-height: 1.8; letter-spacing: 4rpx; color: #ffffff;}
+.tips-frame text{ font-size: 30rpx; line-height: 1.8; color: #ffffff;}
 
 .code-frame{ margin: 60rpx 10rpx; display: flex; justify-content: space-between; align-items: center; font-size: 100rpx; font-family: 'Helve';text-shadow: 0 0 3px rgba(55,44,30,0.25);}
 .code-frame view { width: 166rpx; height: 166rpx; border: 1px solid #d7c39e; border-radius: 8rpx; display: flex; justify-content: center; align-items: center; font-size: 120rpx; color: #372c1e; text-shadow: 0 0 3px rgba(55,44,30,0.25);}

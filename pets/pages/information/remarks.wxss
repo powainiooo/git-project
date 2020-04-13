@@ -5,4 +5,4 @@
 
 .tips-frame{ padding: 60rpx; margin-top: 150rpx; background-color: #efebea;}
 .tips-frame .icon-tips{ font-size: 70rpx; color: #9e9c9d; margin-bottom: 10rpx;}
-.tips-frame text{ font-size: 30rpx; line-height: 1.8; letter-spacing: 4rpx; color: #9e9c9d;}
+.tips-frame text{ font-size: 30rpx; line-height: 1.8; color: #9e9c9d;}

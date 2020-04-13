@@ -62,6 +62,10 @@ Page({
         app.globalData.buyerInfo.mobile = this.data.mobile;
         app.globalData.buyerInfo.sex = this.data.selectedSex.value;
         app.globalData.buyerInfo.sexName = this.data.selectedSex.name;
+	    wx.setStorageSync('petsname', this.data.name)
+	    wx.setStorageSync('petsname2', this.data.petsname)
+	    wx.setStorageSync('petsmobile', this.data.mobile)
+	    wx.setStorageSync('petssex', this.data.selectedSex)
         wx.navigateTo({
           url: '/pages/information/remarks'
         })
@@ -81,6 +85,16 @@ Page({
         this.setData({
             price:price
         })
+	    const petsname = wx.getStorageSync('petsname')
+	    const petsname2 = wx.getStorageSync('petsname2')
+	    const petsmobile = wx.getStorageSync('petsmobile')
+	    const petssex = wx.getStorageSync('petssex')
+	    this.setData({
+		    name: petsname,
+		    petsname: petsname2,
+		    mobile: petsmobile,
+		    selectedSex: petssex,
+	    })
     },
 
     /**

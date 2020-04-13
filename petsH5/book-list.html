@@ -59,9 +59,10 @@
                <a>查看详情</a>
             </td>
             <td class="operas">
-               <div>
+               <div class="btn-operas">
                   <a>优惠</a>
                   <a>退款</a>
+                  <div class="dot"><img src="images/icon-dot.png" /></div>
                </div>
             </td>
          </tr>
@@ -81,6 +82,10 @@ function doAdd() {
    nums += 1
 	numId.val(nums)
 }
+
+$('.btn-operas').on('click', function () {
+   $(this).addClass('show')
+})
 </script>
 </body>
 </html>

@@ -8,3 +8,5 @@
 }
 .tap { transition: all 0.15s ease-out;}
 .tap-hover { transform: scale(0.95);}
+
+.logo-text {width: 130rpx; height: 62rpx; vertical-align: middle; margin-top: -16rpx;}

@@ -4,8 +4,8 @@
 .order-time .line .week { font-size: 24rpx; color: #ffffff; text-align: center;}
 
 .store-item{ margin: 30rpx 60rpx; position: relative;}
-.store-item .title{ width: 450rpx; font-size: 60rpx; text-shadow: 0 0 3px rgba(55,44,30,0.25); letter-spacing: 8rpx; margin-bottom: 30rpx;}
-.store-item .address{ width: 450rpx; font-size: 30rpx; letter-spacing: 5rpx;}
+.store-item .title{ width: 450rpx; font-size: 60rpx; text-shadow: 0 0 3px rgba(55,44,30,0.25); margin-bottom: 30rpx;}
+.store-item .address{ width: 450rpx; font-size: 30rpx;}
 .store-item .btn-map{ width: 140rpx; height: 70rpx; position: absolute; top: 50%; right: 0; margin-top: -35rpx; background-color: #d9c39f; border-radius: 40rpx; font-size: 20rpx; color: #ffffff; display: flex; justify-content: center; align-items: center;transition:transform 0.15s ease-out;}
 .store-item .btn-map-hover{ transform: scale(0.9);}
 
@@ -34,7 +34,7 @@
 .rule-frame .icon-guanbi{ font-size: 30px; position: absolute; top: 60rpx; right: 60rpx;}
 .rule-frame .tips-frame{ box-sizing: border-box; height: calc(100% - 200rpx); background-color: rgba(255,255,255,0.95); padding: 0 60rpx; display: flex; flex-direction: column; justify-content: center;}
 .tips-frame .icon-tips{ font-size: 70rpx; color: #9e9c9d; margin-bottom: 10rpx;}
-.tips-frame text{ font-size: 30rpx; line-height: 1.8; letter-spacing: 4rpx; color: #9e9c9d;}
+.tips-frame text{ font-size: 30rpx; line-height: 1.8; color: #9e9c9d;}
 .rule-frame .line2 { height: 200rpx; background-color: rgba(239,235,234,0.95); box-sizing: border-box; padding: 0 60rpx; display: flex; align-items: center; font-size: 90rpx; color: #ffffff;}
 .rule-frame .line2 .header-logo{ display: flex; align-items: center;}
 .rule-frame .line2 .header-logo .logo { width: 60rpx; height: 80rpx; transition: all 0.25s ease-out;}

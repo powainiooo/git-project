@@ -7,4 +7,4 @@
 .result-frame .title-cn{ font-size: 60rpx; text-shadow: 0 0 3px rgba(55,44,30,0.25);}
 .tips-frame{ padding:0 60rpx; height: 330rpx; box-sizing: border-box; background-color: #efebea; overflow: hidden;}
 .tips-frame .icon-tips{ font-size: 70rpx; color: #9e9c9d; margin-bottom: 10rpx; margin-top: 40rpx;}
-.tips-frame text{ font-size: 30rpx; line-height: 1.8; letter-spacing: 4rpx; color: #9e9c9d;}
+.tips-frame text{ font-size: 30rpx; line-height: 1.8; color: #9e9c9d;}

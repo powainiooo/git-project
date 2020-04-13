@@ -24,14 +24,15 @@ Page({
          {name: '母', value: '2'},
          {name: '绝育', value: '3'}
       ],
-      sexName: ''
+      sexName: '',
+	   startSec: 0
    },
 
    /**
     * 生命周期函数--监听页面加载
     */
    onLoad: function (options) {
-      this.data.orderNum = options.orderNum || 'T2020032915251003';
+      this.data.orderNum = options.orderNum || 'T2020041318111002';
       this.getData(this.data.orderNum);
    },
    doGetDetail(e){
@@ -57,6 +58,7 @@ Page({
       })
    },
    timerCount(){
+   	this.data.startSec = new Date().getTime()
       this.data.timeT = setInterval(()=>{
          if(this.data.timer == 0){
             clearInterval(this.data.timeT)
@@ -123,7 +125,11 @@ Page({
     * 生命周期函数--监听页面显示
     */
    onShow: function () {
-
+		const currentSec = new Date().getTime()
+	   const timer = parseInt(this.data.detailData.sec) - parseInt((currentSec - this.data.startSec)/1000)
+	   this.setData({
+		   timer:timer
+	   })
    },
 
    /**

@@ -44,8 +44,8 @@ Page({
 			if (this.data.type === '1') { // 狗
 				let obj = {}
 				for (let i of res.data) {
-					if (!obj[i.head_str]) obj[i.head_str] = []
-					obj[i.head_str].push(i)
+					if (!obj[i.pinyin]) obj[i.pinyin] = []
+					obj[i.pinyin].push(i)
 				}
 				this.setData({
 					dogList: obj

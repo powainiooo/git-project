@@ -8,7 +8,7 @@
          </view>
       </view>
    </view>
-   <view class="store-item" wx:if="{{detailData.status == 'nouse'}}">
+   <view class="store-item">
       <view class="title">{{detailData.shop_info.title}}</view>
       <view class="address">{{detailData.shop_info.address}}</view>
       <view class="btn-map" bindtap="openMap" hover-class="btn-map-hover" hover-stay-time="50">查看地图</view>

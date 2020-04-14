@@ -44,7 +44,7 @@
                hover-class="pro-item-hover"
                hover-stay-time="50">
             <view class="frame">
-               <image src="{{imgSrc+child.cover}}" mode="scaleToFill"></image>
+               <image src="{{imgSrc+child.share_logo}}" mode="scaleToFill"></image>
             </view>
          </view>
       </view>

@@ -4,14 +4,14 @@
 .detail-frame .line1{ min-height: calc(100vh - 486rpx); background-color: rgba(255,255,255,0.95); padding: 60rpx;}
 .detail-frame .line1 .title1{ font-size: 60rpx; line-height: 1.6; font-family: 'Helve'; margin-bottom: 50rpx; margin-top: 140rpx;}
 .detail-frame .line1 .title2{ font-size: 30rpx; line-height: 1.6; margin-bottom: 50rpx;}
-.detail-frame .line1 .img{  width: 140rpx; height: 360rpx;}
+.detail-frame .line1 .img{  width: 630rpx; height: 360rpx;}
 .detail-frame .icon-guanbi{ font-size: 30px; position: absolute; top: 60rpx; right: 60rpx;}
 
 .detail-frame .line2{ background-color: rgba(239,235,234,0.95); padding: 60rpx;}
 .detail-frame .line2 .decs{ font-size: 30rpx; line-height: 1.6; margin-bottom: 70rpx;}
 .detail-frame .line2 .icon-logo{ font-size: 90rpx; color: #ffffff;}
 .detail-frame .line2 .header-logo{ display: flex; align-items: center;}
-.detail-frame .line2 .header-logo .logo { width: 60rpx; height: 80rpx; transition: all 0.25s ease-out;}
+.detail-frame .line2 .header-logo .logo { width: 60rpx; height: 80rpx; transition: all 0.25s ease-out; margin-right: 10rpx;}
 .detail-frame .line2 .header-logo .logo-title { width: 125rpx; height: 80rpx; transition: all 0.25s ease-out;}
 
 .detail-frame .line3 { height: calc(100vh - 200rpx); background-color: rgba(255,255,255,0.95); padding: 60rpx; display: flex; align-items: center; box-sizing: border-box;}

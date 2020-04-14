@@ -139,6 +139,22 @@ Page({
         })
     },
     ruleMove(){},
+	//打开详情页
+	openDetail(e){
+		let id = e.currentTarget.dataset.id;
+		setTimeout(()=>{
+			wx.request({
+				url:app.globalData.ajaxSrc+"product_info",
+				data:{id:id},
+				success:res=>{
+					this.setData({
+						proDetailData:res.data.data.info,
+						showDetails:true
+					})
+				}
+			});
+		},150)
+	},
     /**
      * 生命周期函数--监听页面加载
      */

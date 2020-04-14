@@ -2,11 +2,11 @@
 <view class="container container-information">
     <view style="background-color: #ffffff;">
         <view class="input" style="padding-top: 20rpx;">
-            <input placeholder="主人姓名" placeholder-class="place" data-name="name" bindinput="inputChange" />
+            <input placeholder="主人姓名" placeholder-class="place" data-name="name" bindinput="inputChange" value="{{name}}" />
         </view>
          <view style="display: flex; align-items: center; justify-content: space-between; margin: 0 60rpx;">
             <view class="input" style="width:320rpx; padding-top: 20rpx; margin: 0;">
-               <input placeholder="宠物姓名" placeholder-class="place" data-name="petsname" bindinput="inputChange" />
+               <input placeholder="宠物姓名" placeholder-class="place" data-name="petsname" bindinput="inputChange" value="{{petsname}}" />
             </view>
             <picker bindchange="bindSexChange" range="{{sexArr}}" range-key="name">
                <view style="display: flex; justify-content: flex-end; width: 270rpx;">
@@ -19,7 +19,7 @@
          </view>
 
         <view class="input">
-            <input placeholder="联系电话" placeholder-class="place" class="phone" maxlength="11" data-name="mobile" bindinput="inputChange"/>
+            <input placeholder="联系电话" placeholder-class="place" class="phone" maxlength="11" data-name="mobile" bindinput="inputChange" value="{{mobile}}"/>
         </view>
     </view>
     <view class="tips-frame">

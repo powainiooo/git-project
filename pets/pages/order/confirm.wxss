@@ -37,5 +37,5 @@
 .tips-frame text{ font-size: 30rpx; line-height: 1.8; color: #9e9c9d;}
 .rule-frame .line2 { height: 200rpx; background-color: rgba(239,235,234,0.95); box-sizing: border-box; padding: 0 60rpx; display: flex; align-items: center; font-size: 90rpx; color: #ffffff;}
 .rule-frame .line2 .header-logo{ display: flex; align-items: center;}
-.rule-frame .line2 .header-logo .logo { width: 60rpx; height: 80rpx; transition: all 0.25s ease-out;}
+.rule-frame .line2 .header-logo .logo { width: 60rpx; height: 80rpx; transition: all 0.25s ease-out; margin-right: 10rpx;}
 .rule-frame .line2 .header-logo .logo-title { width: 125rpx; height: 80rpx; transition: all 0.25s ease-out;}

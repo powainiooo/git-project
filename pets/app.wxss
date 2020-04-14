@@ -3,7 +3,7 @@
 /**app.wxss**/
 .container {
     color: #372c1e;
-    margin-top: 220rpx;
+    margin-top: 240rpx;
     padding-bottom: 200rpx;
 }
 .tap { transition: all 0.15s ease-out;}

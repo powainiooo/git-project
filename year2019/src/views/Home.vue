@@ -84,6 +84,7 @@ export default {
    mounted () {
       this.startTime = new Date().getTime()
       window.intoPageStartTime = this.startTime
+      console.log('intoPageStartTime', window.intoPageStartTime)
    },
    computed: {
       currentPage () {
@@ -115,6 +116,7 @@ export default {
             }
             this.startTime = time
             window.intoPageStartTime = time
+            console.log('intoPageStartTime', window.intoPageStartTime)
          }
 
          if (page !== '' && page !== 'loading-over') {

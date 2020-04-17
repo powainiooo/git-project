@@ -87,7 +87,8 @@
         <p><img src="images/end.png" width="230" style="width: 230px;"> </p>
     </div>
 </section>
-<audio src="mp3/over.mp3" id="audio"></audio>
+<audio src="mp3/over.mp3"
+       id="audio"></audio>
 <link href="css/flipclock.css" type="text/css" rel="stylesheet" />
 <script src="js/flipclock.min.js" type="application/javascript" language="javascript"></script>
 <script>
@@ -105,14 +106,14 @@ console.log('进去详情页')
     //开始服务
     $("#btnStart").on('touchstart',function(){
         $(this).addClass('item-touch');
-	    console.log('150毫秒后开始倒计时 10秒')
+	    console.log('150毫秒后开始倒计时 5秒')
     });
     $("#btnStart").on('touchend',function(){
         $(this).removeClass('item-touch');
         setTimeout(function(){
             //ajax 代码写在这
             $("#inputCode").hide();
-            countDown(10);
+            countDown(5);
         },150);
 
     });
@@ -127,7 +128,23 @@ console.log('进去详情页')
                 stop: function() {
 	                console.log('倒计时结束')
 	                console.log('开始播放声音')
-                    document.getElementById('audio').play();
+                   var audio = document.getElementById('audio')
+	                audio.play();
+	                audio.onplay = function (e) {
+	                	console.log('onplay', e)
+                   }
+	                audio.oncanplay = function (e) {
+	                	console.log('oncanplay', e)
+                   }
+	                audio.onerror = function (e) {
+	                	console.log('onerror', e)
+                   }
+	                audio.onloadeddata = function (e) {
+	                	console.log('onloadeddata', e)
+                   }
+	                audio.onended = function (e) {
+	                	console.log('onended', e)
+                   }
                     setTimeout(function(){
 	                    console.log('显示服务结束')
                         $("#clockFrame .clock").hide();

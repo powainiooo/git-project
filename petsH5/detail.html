@@ -41,7 +41,7 @@
       <div class="line" style="margin-bottom: 30px;">
          <div class="info">
             <img src="images/tag3.jpg"/>
-            <div>何方何方何方何方何方何方何方何方</div>
+            <div>何方何方何方何方何方何方何方何方1</div>
          </div>
       </div>
    </div>
@@ -94,6 +94,7 @@
 <script>
 window.vConsole = new window.VConsole();
 console.log('进去详情页')
+var audio
     //输入验证码
     $("#codeInput").on('input',function(){
         $("#codeList li").html('');
@@ -107,7 +108,7 @@ console.log('进去详情页')
     $("#btnStart").on('touchstart',function(){
         $(this).addClass('item-touch');
 	    console.log('150毫秒后开始倒计时 10秒')
-	    var audio = document.getElementById('audio')
+	    audio = document.getElementById('audio')
 	    audio.muted = true
 	    audio.play();
     });
@@ -131,7 +132,6 @@ console.log('进去详情页')
                 stop: function() {
 	                console.log('倒计时结束')
 	                console.log('开始播放声音')
-                   var audio = document.getElementById('audio')
 	                audio.muted = false
 	                audio.play();
                     setTimeout(function(){

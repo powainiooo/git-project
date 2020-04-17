@@ -41,7 +41,7 @@
       <div class="line" style="margin-bottom: 30px;">
          <div class="info">
             <img src="images/tag3.jpg"/>
-            <div>何方何方何方何方何方何方何方何方2</div>
+            <div>何方何方何方何方何方何方何方何方3</div>
          </div>
       </div>
    </div>
@@ -88,12 +88,15 @@
     </div>
 </section>
 <audio src="mp3/over.mp3"
-       id="audio" muted autoplay controls></audio>
+       id="audio"
+       muted
+       autoplay
+       controls
+       style="position: fixed; top: -1000px; left: -1000px;"></audio>
 <link href="css/flipclock.css" type="text/css" rel="stylesheet" />
 <script src="js/flipclock.min.js" type="application/javascript" language="javascript"></script>
 <script>
 window.vConsole = new window.VConsole();
-console.log('进去详情页')
 var audio
     //输入验证码
     $("#codeInput").on('input',function(){
@@ -107,7 +110,6 @@ var audio
     //开始服务
     $("#btnStart").on('touchstart',function(){
         $(this).addClass('item-touch');
-	    console.log('150毫秒后开始倒计时 10秒')
 	    audio = document.getElementById('audio')
 	    audio.muted = true
 	    audio.play();
@@ -124,29 +126,21 @@ var audio
     //倒计时
     //参数 秒
     function countDown(seconds){
-	    console.log('开始倒计时')
         var clock = $('.clock').FlipClock(seconds, {
             clockFace: 'MinuteCounter',
             countdown: true,
             callbacks: {
                 stop: function() {
-	                console.log('倒计时结束')
-	                console.log('开始播放声音')
-	                audio.muted = false
-	                audio.play();
                     setTimeout(function(){
-	                    console.log('显示服务结束')
+	                    audio.muted = false
+	                    audio.play();
                         $("#clockFrame .clock").hide();
                         $("#clockFrame>p").show();
                     },1000);
-	                console.log('发起浏览器提示')
                     if(window.Notification && Notification.permission !== "denied") {
                         Notification.requestPermission(function(status) {
-	                        console.log('发起浏览器成功')
                             var n = new Notification('服务通知', { body: '服务已经结束了！'});
                         });
-                    } else {
-	                    console.log('发起浏览器提示 不支持')
                     }
 
                 }

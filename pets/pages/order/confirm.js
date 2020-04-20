@@ -94,6 +94,7 @@ Page({
                             wx.showToast({
                                 title:'支付成功'
                             });
+                            this.getMessageAuth()
                             this.doBuySuccess(order_num);
                         },
                         'fail':function(res){
@@ -185,6 +186,24 @@ Page({
          })
       },150);
    },
+	getMessageAuth () {
+		console.log('发起订阅消息')
+		wx.requestSubscribeMessage({
+			tmplIds: [
+				'CVJxO6GHDXC5rL4nzcXh63dc9i_DXDiEhBM5G5uyymI'
+			],
+			success (res) {
+				console.log('订阅消息成功')
+				console.log(res)
+				console.log('--------------------')
+			},
+			fail (err) {
+				console.log('订阅消息失败')
+				console.log(err)
+				console.log('--------------------')
+			}
+		})
+	},
     /**
      * 生命周期函数--监听页面初次渲染完成
      */

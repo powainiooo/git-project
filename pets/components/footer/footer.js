@@ -76,15 +76,22 @@ Component({
             this.triggerEvent('btn')
         },
         gotoOrderList(){
-            wx.navigateTo({
-                url: '/pages/order/list'
-            })
+        	this.closeMenu()
+	        setTimeout(() => {
+		        wx.navigateTo({
+			        url: '/pages/order/list'
+		        })
+	        }, 500)
+
         },
         gotoPersonal(){
             if(!this.data.isDisabled){
-                wx.navigateTo({
-                    url: '/pages/package/personal'
-                })
+	            this.closeMenu()
+	            setTimeout(() => {
+		            wx.navigateTo({
+			            url: '/pages/order/list'
+		            })
+	            }, 500)
             }
         }
     }

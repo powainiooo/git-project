@@ -65,9 +65,7 @@
 .book-table .price { width: 90px; font-size: 12px; color: #352c1d; font-family: Helve; padding-right: 15px; text-align: right;}
 .book-table .price span { font-size: 8px;}
 .book-table .btn { width: 90px; text-align: center;}
-.book-table .btn a { width: 60px; height: 25px; font-size: 10px; display: flex; justify-content: center; align-items: center; color: #ffffff; background-color: #dac49f; border-radius: 30px; margin-left: auto; margin-right: auto; box-shadow: 0 0 4px rgba(0, 0, 0, 0.2); transition: all 0.3s ease;-moz-user-select: none;
-   -khtml-user-select: none;
-   user-select: none;}
+.book-table .btn a { width: 60px; height: 25px; font-size: 10px; display: flex; justify-content: center; align-items: center; color: #ffffff; background-color: #dac49f; border-radius: 30px; margin-left: auto; margin-right: auto; box-shadow: 0 0 4px rgba(0, 0, 0, 0.2); transition: all 0.3s ease;}
 .book-table .btn a:active { transform: scale(0.9);}
 .book-table .operas { width: 130px;}
 .book-table .operas div { width: 55px; height: 26px; margin-left: auto; margin-right: auto; background-color: #ffffff; box-shadow: 0 0 4px rgba(0, 0, 0, 0.2); border-radius: 30px; display: flex; position: relative; transition: all 0.3s ease;}

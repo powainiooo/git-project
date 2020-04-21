@@ -1,6 +1,8 @@
 {
    "usingComponents": {
       "header-view":"../../components/header/header",
-      "footer-view":"../../components/footer/footer"
+      "footer-view":"../../components/footer/footer",
+      "van-index-bar": "@vant/weapp/index-bar/index",
+      "van-index-anchor": "@vant/weapp/index-anchor/index"
    }
 }

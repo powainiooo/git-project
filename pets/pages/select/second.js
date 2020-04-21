@@ -8,13 +8,14 @@ Page({
     * 页面的初始数据
     */
    data: {
-	   type: '',
+	   type: '1',
 	   imgSrc:app.globalData.imgSrc,
-	   dogList: {},
+	   indexList: [],
+	   dogList: [],
 	   catList: [],
 	   scrollId: '',
 	   heights: {},
-	   screenHeight: 0,
+	   headerHeight: 0,
       selectedID: ''
    },
 
@@ -27,38 +28,71 @@ Page({
 		   type
 	   })
 	   const self = this
-      if (type === '1') {
-         wx.getSystemInfo({
-            success(res) {
-               self.data.screenHeight = res.screenHeight
-            }
-         })
-         this.initSize()
-      }
+	   wx.getSystemInfo({
+		   success(res) {
+			   self.setData({
+			   	headerHeight: parseInt(120 * res.screenWidth / 375) + 10
+			   })
+		   }
+	   })
 	   this.getData()
+
    },
 	getData () {
 		getPetList({
 			type: this.data.type
 		}).then(res => {
 			if (this.data.type === '1') { // 狗
-				let obj = {}
-				for (let i of res.data) {
-					if (!obj[i.pinyin]) obj[i.pinyin] = []
-					obj[i.pinyin].push(i)
+				// let obj = {}
+				// for (let i of res.data) {
+				// 	if (!obj[i.pinyin]) obj[i.pinyin] = []
+				// 	obj[i.pinyin].push(i)
+				// }
+				// this.setData({
+				// 	dogList: obj
+				// })
+				let storeCity = new Array(26);
+				const words = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
+				words.forEach((item,index)=>{
+					storeCity[index] = {
+						key : item,
+						list : []
+					}
+				})
+				res.data.forEach((item)=>{
+					let index = words.indexOf( item.pinyin );
+					storeCity[index].list.push({
+						data : item,
+						key : item.pinyin
+					});
+				})
+				console.log(storeCity)
+				let arr = []
+				let index = []
+				for (let i of storeCity) {
+					if (i.list.length > 0) {
+						arr.push(i)
+						index.push(i.key)
+					}
 				}
+				console.log(arr)
 				this.setData({
-					dogList: obj
+					dogList: arr,
+					indexList: index,
 				})
-				wx.nextTick(() => {
-					this.initSize()
-				})
+
+				wx.createSelectorQuery().select(`#header`).boundingClientRect((rect) => {
+					console.log(rect)
+				}).exec()
 			} else if (this.data.type === '2') { //猫
 				this.setData({
 					catList: res.data
 				})
 			}
 		})
+	},
+	selectType (e) {
+   	console.log('selectType', e.detail)
 	},
 	async initSize () {
    	for (let i in this.data.dogList) {

@@ -1,4 +1,4 @@
-.container-selection{ padding-top: 220rpx; height: 100vh; box-sizing: border-box; margin-top: 0;}
+.container-selection{ padding: 240rpx 0 200rpx 0; box-sizing: border-box;}
 .type-item { width: 660rpx; height: 166rpx; margin: 0 auto 30rpx auto; border-radius: 20rpx; position: relative; background-color: #ddd9d8; box-shadow: 0 10px 20px 0 rgba(0,0,0,0.12);}
 .type-item-select { background-color: #dac49f;}
 .type-item .img { width: 250rpx; height: 100%; position: absolute; top: 0; right: 0;}

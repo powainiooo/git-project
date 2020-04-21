@@ -7,7 +7,7 @@ button { width: 100px; height: 50px;}
      <button @click="play(true)" ref="btn">play</button>
      <button @click="btn">btn</button>
      <button @click="hold">hold</button>
-     <audio src="../assets/over.mp3" id="audio" muted autoplay @canplay="canplay"></audio>
+<!--     <audio src="../assets/over.mp3" id="audio" muted autoplay @canplay="canplay"></audio>-->
   </div>
 </template>
 <script>

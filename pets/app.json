@@ -1,11 +1,11 @@
 {
    "pages": [
       "pages/index/index",
+      "pages/select/second",
       "pages/order/detail",
       "pages/order/confirm",
       "pages/information/information",
       "pages/package/package",
-      "pages/select/second",
       "pages/select/select",
       "pages/date/date",
       "pages/information/remarks",

@@ -11,10 +11,10 @@
     <link rel="apple-touch-icon-precomposed" href="images/cover.png">
     <link rel="apple-touch-icon" href="images/cover.png">
     <title>工作人员</title>
-    <link href="css/reset.css" type="text/css" rel="stylesheet" />
+    <link href="css/reset.css?v=3" type="text/css" rel="stylesheet" />
     <link href="css/icons.css" type="text/css" rel="stylesheet" />
     <link href="css/helvetica.css" type="text/css" rel="stylesheet" />
-    <link href="css/layout.css" type="text/css" rel="stylesheet" />
+    <link href="css/layout.css?v=2" type="text/css" rel="stylesheet" />
     <script src="js/jquery-2.1.1.min.js" type="application/javascript" language="javascript"></script>
 </head>
 <body>
@@ -26,7 +26,7 @@
    <div class="month-selector">
       <div class="frame">
          <div class="month-opera">
-            <p id="currentDate">2020/04/04</p>
+            <p id="currentDate">2020/04/07</p>
          </div>
          <div class="nums-opera">
             <p>今日宠物数量上限</p>
@@ -70,6 +70,7 @@
    </div>
 </section>
 <script>
+document.body.addEventListener('touchstart', function () {});
 var numId = $("#nums")
 function doReduce() {
    var nums = parseFloat(numId.val())

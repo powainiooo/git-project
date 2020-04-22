@@ -76,7 +76,7 @@ Page({
             obj.pet_name = gb.buyerInfo.petsname;
             obj.remark = gb.buyerInfo.remarks;
             obj.date = gb.selectedDate;
-            obj.price = gb.proPackage.price;
+            // obj.price = gb.proPackage.price;
             wx.request({
                 url:app.globalData.ajaxSrc+"create_order",
                 data:obj,
@@ -188,6 +188,7 @@ Page({
    },
 	getMessageAuth () {
 		console.log('发起订阅消息')
+		const self = this
 		wx.requestSubscribeMessage({
 			tmplIds: [
 				'CVJxO6GHDXC5rL4nzcXh63dc9i_DXDiEhBM5G5uyymI'
@@ -196,6 +197,7 @@ Page({
 				console.log('订阅消息成功')
 				console.log(res)
 				console.log('--------------------')
+				self.doSendMsg()
 			},
 			fail (err) {
 				console.log('订阅消息失败')
@@ -203,6 +205,17 @@ Page({
 				console.log('--------------------')
 			}
 		})
+	},
+	doSendMsg () {
+		wx.request({
+			url:app.globalData.ajaxSrc+"buy_send",
+			data: {
+				order_num:app.globalData.orderNum
+			},
+			success:res=>{
+				console.log('发送订阅消息成功')
+			}
+		});
 	},
     /**
      * 生命周期函数--监听页面初次渲染完成

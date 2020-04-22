@@ -10,7 +10,7 @@
 .packages-item .line1{ display: flex; justify-content: space-between; align-items: center; padding: 0 25rpx 10rpx 25rpx; border-bottom: 1rpx solid #ebe9ea;}
 .packages-item-selected .line1{border-bottom: 1rpx solid #c5b291;}
 .packages-item .line1 .name{ font-size: 30rpx;text-shadow: 0 0 3px rgba(55,44,30,0.25);}
-.packages-item .line1 .price{ font-size: 100rpx;text-shadow: 0 0 3px rgba(55,44,30,0.25); font-family: 'Helve';}
+.packages-item .line1 .price{ font-size: 80rpx;text-shadow: 0 0 3px rgba(55,44,30,0.25); font-family: 'Helve';}
 .packages-item .line1 .price text{ font-size: 30rpx;text-shadow:none;}
 .packages-item .line2{ padding: 50rpx 120rpx 0 25rpx; border-top: 1rpx solid #f9f7f8; display: flex; box-sizing: border-box;}
 .packages-item-selected .line2{ border-top: 1rpx solid #e3d8c6;}

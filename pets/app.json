@@ -2,10 +2,10 @@
    "pages": [
       "pages/index/index",
       "pages/select/second",
+      "pages/package/package",
       "pages/order/detail",
       "pages/order/confirm",
       "pages/information/information",
-      "pages/package/package",
       "pages/select/select",
       "pages/date/date",
       "pages/information/remarks",

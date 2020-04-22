@@ -26,6 +26,11 @@ export default new Vuex.Store({
       },
       SET_RESULT (state, data) {
          state.showResult = data
+         if (data) {
+            setTimeout(() => {
+               state.showResult = false
+            }, 2000)
+         }
       }
    },
    actions: {}

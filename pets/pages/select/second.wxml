@@ -21,7 +21,7 @@
                data-item="{{child.data}}"
                bindtap="doSelect">
             <image src="{{imgSrc + child.data.cover}}" class="img"></image>
-            <view class="name">{{child.data.china_name}} | <text>{{child.data.english_name}}</text></view>
+            <view class="name">{{child.data.china_name}} <text>{{child.data.english_name}}</text></view>
          </view>
       </view>
    </van-index-bar>

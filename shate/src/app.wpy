@@ -39,6 +39,9 @@ wepy.app({
 
    onLaunch() {
       this.onlogin()
+      wx.onAppRoute(res => {
+         store.commit('SET_RESULT', false)
+      })
    },
 
    methods: {

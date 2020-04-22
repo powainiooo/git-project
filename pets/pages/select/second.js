@@ -33,6 +33,7 @@ Page({
 			   self.setData({
 			   	headerHeight: parseInt(120 * res.screenWidth / 375) + 10
 			   })
+			   console.log('headerHeight', self.data.headerHeight)
 		   }
 	   })
 	   this.getData()
@@ -66,7 +67,7 @@ Page({
 						key : item.pinyin
 					});
 				})
-				console.log(storeCity)
+				// console.log(storeCity)
 				let arr = []
 				let index = []
 				for (let i of storeCity) {
@@ -75,7 +76,7 @@ Page({
 						index.push(i.key)
 					}
 				}
-				console.log(arr)
+				// console.log(arr)
 				this.setData({
 					dogList: arr,
 					indexList: index,

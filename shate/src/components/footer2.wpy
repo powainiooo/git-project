@@ -7,6 +7,11 @@
 .z-footer-item .btn-share { width: 100%; height: 100%; position: absolute; top: 0; left: 0; opacity: 0;}
 .z-footer .active .name { color: #5D2F9E;}
 .z-footer .btn { width: 380rpx; background-color: #5D2F9E; font-size: 36rpx; color: #ffffff; border: none; display: flex; align-items: center; justify-content: center; border-radius: 0;}
+
+.success-frame { width: 100%; height: 100vh; position: fixed; top: 0; left: 0; background-color: rgba(0, 0, 0, 0.5);  display: flex; justify-content: center; align-items: center; z-index: 1500;}
+.success-frame .frame { width: 400rpx; height: 360rpx; display: flex; flex-direction: column; justify-content: center; align-items: center; background-color: #ffffff; border-radius: 20rpx;}
+.success-frame .frame .icon { width: 115rpx; height: 115rpx; margin-bottom: 60rpx;}
+.success-frame .frame .title { font-size: 34rpx; color: #333333; text-align: center; margin: 0;}
 </style>
 <template>
 <div class="z-footer">
@@ -27,6 +32,13 @@
       </div>
    </div>
    <button class="btn" open-type="contact">免费咨询</button>
+
+   <div class="success-frame" v-if="showResult" @click="hideResult">
+      <div class="frame">
+         <img src="../res/img/icon-success.png" class="icon" />
+         <p class="title">信息资料提交成功!</p>
+      </div>
+   </div>
 </div>
 </template>
 
@@ -56,7 +68,7 @@ wepy.component({
          default: false
       }
    },
-   computed: mapState([ 'loginKey', 'personalInfo' ]),
+   computed: mapState([ 'loginKey', 'personalInfo', 'showResult' ]),
    watch: {
       isLike (val) {
          this.cisLike = this.isLike
@@ -88,6 +100,9 @@ wepy.component({
                this.cisLike = this.cisLike === 0 ? 1 : 0
             }
          })
+      },
+      hideResult () {
+         store.commit('SET_RESULT', false)
       }
    }
 })

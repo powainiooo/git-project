@@ -5,8 +5,8 @@
 .footer .btn1{ width: 200rpx; height: 100%; box-sizing: border-box; padding-bottom: 40rpx; display: flex; justify-content: center; align-items: center; font-size: 12rpx; color: #ffffff; background-color: #d9c39f; float: left;}
 .footer .btn2{ height: 100%; box-sizing: border-box; padding-bottom: 40rpx; display: flex; justify-content: center; align-items: center; font-size: 40rpx; text-shadow: 0 0 3px rgba(55,44,30,0.25);}
 .footer .auth-btn{ width: 100%; height: 100%; position: absolute; top: 0; left: 0;}
-.footer .btn3{ width: 300rpx; height: 100%; box-sizing: border-box; padding-bottom: 20rpx; display: flex; justify-content: center; align-items: center; font-size: 120rpx; background-color: #ffffff; float: left;text-shadow: 0 0 3px rgba(55,44,30,0.25); font-family: 'Helve';}
-.footer .btn3 .unit{ font-size: 30rpx; align-self: flex-end; margin-bottom: 20rpx;}
+.footer .btn3{ width: 300rpx; height: 100%; box-sizing: border-box; padding-bottom: 20rpx; display: flex; justify-content: center; align-items: center; font-size: 100rpx; background-color: #ffffff; float: left;text-shadow: 0 0 3px rgba(55,44,30,0.25); font-family: 'Helve';}
+.footer .btn3 .unit{ font-size: 30rpx; align-self: flex-end; margin-bottom: 46rpx;}
 
 .menu-list{ width: 100%; background-color: #d9c39f; position: fixed; left: 0; bottom: -200rpx; z-index: 450; transition: bottom 0.5s cubic-bezier(.21,.68,.27,1.01);}
 .menu-list .menu-list-item{ width: 100%; height: 170rpx; border-top: 1rpx solid #d8cfbe; border-bottom: 1rpx solid #c6b192; font-size: 40rpx; color: #ffffff; padding-left: 60rpx; box-sizing: border-box; display: flex; align-items: center;}

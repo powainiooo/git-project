@@ -16,7 +16,7 @@
       <contact :showExemption="false" />
    </div>
    <div class="hr"></div>
-   <zfooter page="index"/>
+   <zfooter page=""/>
 </div>
 </template>
 

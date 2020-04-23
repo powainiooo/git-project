@@ -3,7 +3,7 @@
 .type-item-select { background-color: #dac49f;}
 .type-item .img { width: 250rpx; height: 100%; position: absolute; top: 0; right: 0;}
 .type-item .name { height: 100%; font-size: 34rpx; position: absolute; top: 0; left: 30rpx; display: flex; align-items: center;}
-.type-item .name text { font-size: 40rpx; font-family: 'Helve'; padding-left: 20rpx; word-break: break-all; position: relative;}
+.type-item .name text { font-size: 34rpx; font-family: 'Helve'; padding-left: 20rpx; word-break: break-all; position: relative;}
 .type-item .name text:before { content: ''; width: 4rpx; background-color: #372c1e; position: absolute; top: 6rpx; left: 8rpx; bottom: 4rpx;}
 .type-name { font-size: 100rpx; line-height: 100rpx; color: #362B1D; text-shadow: 0 0 3rpx rgba(0,0,0,0.25); margin-bottom: 30rpx; margin-left: 70rpx;font-family: 'Helve';}
 .container-selection .section { padding: 50rpx 0 30rpx;}

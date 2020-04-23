@@ -19,7 +19,7 @@
    </div>
    <div class="input-line">
       <div class="name">手机</div>
-      <input type="text" placeholder="请输入您的手机号" v-model="mobile" class="input"/>
+      <input type="number" placeholder="请输入您的手机号" v-model="mobile" class="input"/>
    </div>
    <div class="input-line">
       <div class="name">邮箱</div>

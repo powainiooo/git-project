@@ -191,7 +191,8 @@ Page({
 		const self = this
 		wx.requestSubscribeMessage({
 			tmplIds: [
-				'CVJxO6GHDXC5rL4nzcXh63dc9i_DXDiEhBM5G5uyymI'
+				'CVJxO6GHDXC5rL4nzcXh63dc9i_DXDiEhBM5G5uyymI',
+				 'gUczF-SZ04idnWNOWJtBOFoqU-csBAqohK2DWb5WPcg'
 			],
 			success (res) {
 				console.log('订阅消息成功')

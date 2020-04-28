@@ -77,7 +77,7 @@ Page({
             },
             success: res => {
                 let url = '/pages/index/index';
-                wx.redirectTo({
+                wx.reLaunch({
                     url: url
                 })
             },

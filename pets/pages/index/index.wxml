@@ -6,10 +6,10 @@
             <view class="title-en">Welcome</view>
             <view class="title-cn">欢迎</view>
             <view class="decs" wx:if="{{result == 'index'}}">
-               <image src="../../res/img/logo-text.png" class="logo-text"></image>{{pageData.indexpage}}
+               {{pageData.indexpage}}
             </view>
             <view class="decs" wx:if="{{result == 'auth'}}">
-               <image src="../../res/img/logo-text.png" class="logo-text"></image>申请获得您的公开信息（昵称、头像等），用于完成洗发服务预定，拒绝则无法使用本服务体验。
+               申请获得您的公开信息（昵称、头像等），用于完成洗发服务预定，拒绝则无法使用本服务体验。
             </view>
             <view class="tips">{{pageData.comment}}</view>
         </view>

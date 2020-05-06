@@ -8,7 +8,7 @@
               wx:for-index="index"
               wx:key="{{index}}">
            <image class="img" src="{{imgSrc+item.picture}}" mode="aspectFit"></image>
-            <view class="name" wx:if="{{item.img == ''}}">{{item.username}}</view>
+            <view class="name">{{item.username}}</view>
         </view>
 
         <view class="title" wx:if="{{itemData.info.notify.length !== 0}}">须知</view>

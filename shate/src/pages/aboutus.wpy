@@ -20,19 +20,19 @@
       <banner :listData="banner"></banner>
       <div class="links-nav">
          <a url="/pages/whoami" class="item">
-            <img src="../res/img/aboutus-img1.png" class="img"/>
+            <img :src="bgList['1']" class="img"/>
             <div class="title">我们是谁</div>
          </a>
          <a url="/pages/awards" class="item">
-            <img src="../res/img/aboutus-img2.png" class="img"/>
+            <img :src="bgList['2']" class="img"/>
             <div class="title">奖状与成就</div>
          </a>
          <a url="/pages/relation" class="item">
-            <img src="../res/img/aboutus-img3.png" class="img"/>
+            <img :src="bgList['3']" class="img"/>
             <div class="title">投资者关系</div>
          </a>
          <a :url="'/pages/web?url='+url" class="item">
-            <img src="../res/img/aboutus-img4.png" class="img"/>
+            <img :src="bgList['4']" class="img"/>
             <div class="title">公司概览</div>
          </a>
       </div>
@@ -65,7 +65,7 @@
   import wepy from '@wepy/core'
   import store from '../store'
   import { mapState } from '@wepy/x'
-  import {getAboutus} from '@/res/api.js'
+  import {getAboutus, getAboutusBglist} from '@/res/api.js'
   import moment from 'moment'
 
   wepy.page({
@@ -73,7 +73,8 @@
      data: {
         banner: [],
         url: '',
-        newsList: []
+        newsList: [],
+        bgList: []
      },
      computed: mapState([ 'imgSrc' ]),
      methods: {
@@ -86,6 +87,9 @@
                  return i
               })
               store.commit('SET_PHONE', res.data.phone)
+           })
+           getAboutusBglist().then(res => {
+              this.bgList = res.data.list
            })
         },
         toNewsDetail (id) {

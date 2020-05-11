@@ -46,6 +46,9 @@ wepy.page({
             this.isLike = res.data.is_like
             this.name = res.data.name
             store.commit('SET_PHONE', res.data.phone)
+            wx.setNavigationBarTitle({
+               title: res.data.name
+            })
          })
       }
    },
@@ -65,7 +68,7 @@ wepy.page({
 </script>
 <config>
    {
-      "navigationBarTitleText": "酒店项目",
+      "navigationBarTitleText": "",
       "usingComponents": {
          "banner": "~@/components/building/banner",
          "contact": "~@/components/contact",

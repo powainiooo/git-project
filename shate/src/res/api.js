@@ -78,6 +78,14 @@ export const getAboutus = data => {
    })
 }
 
+// 关于我们里面背景接口
+export const getAboutusBglist = data => {
+   return ajax({
+      url: `${baseUrl}/api/xcx/bg_list`,
+      data
+   })
+}
+
 // 免责说明
 export const getSmData = () => {
    return ajax({

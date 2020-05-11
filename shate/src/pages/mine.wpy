@@ -1,7 +1,7 @@
 <style>
 page { background-color: rgb(252, 250, 250)}
 .top { height: 460rpx; background-color: #52167A; position: relative; overflow: hidden;}
-.top .bg { width: 100%; height: 616rpx; position: absolute; left: 0; bottom: 0;}
+.top .bg { width: 100%; height: 455rpx; position: absolute; left: 0; bottom: 0;}
 .top .title { width: 100%; font-size: 28rpx; color: #ffffff; text-align: center; position: absolute; top: 32px; left: 0; margin: 0;}
 .avatar { width: 180rpx; height: 180rpx; display: flex; justify-content: center; align-items: center; border-radius: 50%; position: absolute; top: 80rpx; left: 50%; margin-left: -90rpx; background-color: #ffffff;}
 .avatar image { width: 160rpx; height: 160rpx; border-radius: 50%;}
@@ -18,7 +18,7 @@ page { background-color: rgb(252, 250, 250)}
 <template>
 <div class="page-container">
    <div class="top">
-      <img src="../res/img/bg.png" class="bg" />
+      <img src="../res/img/bg2.png" class="bg" />
       <div class="avatar" v-if="personalInfo !== null">
          <img :src="personalInfo.avatarUrl" />
       </div>

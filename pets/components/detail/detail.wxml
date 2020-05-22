@@ -9,7 +9,7 @@
       <view class="icons icon-guanbi" bindtap="hideDetails"></view>
       <view>
          <view class="icons icon-tips"></view>
-         <view class="content">如有特殊情况需退款，请拨打以下电话告知店长获取退款许可，若非特殊情况不预退款，还望谅解。</view>
+         <view class="content">如有特殊情况需退款，请拨打以下电话告知店长获取退款许可，若非特殊情况不予退款，还望谅解，其他疑问也可拨打以下电话。</view>
          <view class="btn" bindtap="doCall" hover-class="btn-hover" hover-stay-time="50">130-0000-0000</view>
       </view>
    </view>

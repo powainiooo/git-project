@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7f3a3886-6cf3-4499-a59b-af9c22254e9b" name="默认的" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/es6/JS-Array.html" beforeDir="false" afterPath="$PROJECT_DIR$/es6/JS-Array.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../hair/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/../hair/app.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../hair/project.config.json" beforeDir="false" afterPath="$PROJECT_DIR$/../hair/project.config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../year2019/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../year2019/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/features/img-srcset-sizes.html" beforeDir="false" afterPath="$PROJECT_DIR$/features/img-srcset-sizes.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,12 +49,6 @@
     <other-services-enabled>true</other-services-enabled>
     <auto-save>true</auto-save>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1056" />
-  </component>
   <component name="ProjectId" id="1Yxw21jP64fuV6o7uYDSa2vePS3" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -75,15 +65,15 @@
     <property name="JavaScriptWeakerCompletionTypeGuess" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\code\git-project\funcTest\images" />
-      <recent name="D:\code\git-project\funcTest\js" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\code\git-project\funcTest\features" />
       <recent name="D:\code\git-project\funcTest\es6" />
       <recent name="D:\code\git-project\funcTest\vue" />
       <recent name="D:\code\git-project\funcTest\css" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\code\git-project\funcTest\images" />
+      <recent name="D:\code\git-project\funcTest\js" />
     </key>
   </component>
   <component name="RunManager">
@@ -199,6 +189,7 @@
       <workItem from="1573027660764" duration="71000" />
       <workItem from="1578623136527" duration="675000" />
       <workItem from="1583897343771" duration="131000" />
+      <workItem from="1589255317107" duration="989000" />
     </task>
     <servers />
   </component>

@@ -63,7 +63,7 @@
                bindtap="openRefund"
                hover-class="btn-map-hover"
                hover-stay-time="50"
-               wx:if="{{detailData.status == 'nouse'}}">退款联系</view>
+               wx:if="{{detailData.status == 'nouse'}}">退款&联系</view>
       </view>
       <view class="line2">
          <view class="pro-item"

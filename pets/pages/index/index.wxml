@@ -1,7 +1,9 @@
 <scroll-view scroll-y="{{!showBlur}}" class="index-frame {{showBlur ? 'blur' : ''}}" bindscroll="doScroll">
     <header-view showTitle="{{false}}" size="{{headerSize}}"></header-view>
     <view class="container index-container">
-        <image src="{{imgSrc+pageData.cover}}" class="banner" mode="widthFix" wx:if="{{pageData.cover != undefined}}"></image>
+       <view class="banner" wx:if="{{pageData.cover != undefined}}">
+          <image src="{{imgSrc+pageData.cover}}" mode="widthFix"></image>
+       </view>
         <view class="content">
             <view class="title-en">Welcome</view>
             <view class="title-cn">欢迎</view>

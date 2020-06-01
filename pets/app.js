@@ -54,16 +54,16 @@ App({
 											})
 										},
 										fail(err){
-											wx.navigateTo({
-												url: '/pages/index/index?result=auth'
-											})
+											// wx.navigateTo({
+											// 	url: '/pages/index/index?result=auth'
+											// })
 										}
 									})
 								}else{
-									console.log('1')
-									wx.navigateTo({
-										url: '/pages/index/index?result=auth'
-									})
+									// console.log('1')
+									// wx.navigateTo({
+									// 	url: '/pages/index/index?result=auth'
+									// })
 								}
 							}
 						})

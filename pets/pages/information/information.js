@@ -88,7 +88,8 @@ Page({
 	    const petsname = wx.getStorageSync('petsname')
 	    const petsname2 = wx.getStorageSync('petsname2')
 	    const petsmobile = wx.getStorageSync('petsmobile')
-	    const petssex = wx.getStorageSync('petssex')
+	    let petssex = wx.getStorageSync('petssex')
+	    petssex = petssex === '' || petssex === undefined ? null : petssex
 	    this.setData({
 		    name: petsname,
 		    petsname: petsname2,

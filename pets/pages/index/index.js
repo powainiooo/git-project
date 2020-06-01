@@ -76,7 +76,7 @@ Page({
                 avatarUrl: e.detail.userInfo.avatarUrl
             },
             success: res => {
-                let url = '/pages/index/index';
+                let url = '/pages/order/confirm';
                 wx.reLaunch({
                     url: url
                 })

@@ -52,7 +52,7 @@ Page({
 		return `${year}/${month}/${day}`
 	},
 	initCalendar(year, month) { // 初始化日历
-		const monthDays = [31, 28 + is_leap(year), 31, 30, 31, 31, 30, 31, 30, 31, 30, 31] // 每个月有多少天
+		const monthDays = [31, 28 + is_leap(year), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31] // 每个月有多少天
 		const lastMonth = month - 1 === -1 ? 11 : month - 1
 		const lastMonthDay = monthDays[lastMonth] // 上个月的天数
 		const thisMonthDay = monthDays[month] // 这个月的天数
@@ -77,7 +77,7 @@ Page({
 		}
 		for (let i = 0; i < thisMonthDay; i++) { // 当月 日期
 			const aData = this.data.activityList[i]
-         const date = aData.date.split('/')
+         // const date = aData.date.split('/')
          const day = new Date().getDate()
          let activity = true
          if (this.data.prevBtnDisable) {

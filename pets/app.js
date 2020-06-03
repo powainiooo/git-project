@@ -82,6 +82,7 @@ App({
 		store: {},
 		selectedDate: '',
       petId: '',
+		petType: '',
       proPackage: {},
       buyerInfo: {
          name: '',

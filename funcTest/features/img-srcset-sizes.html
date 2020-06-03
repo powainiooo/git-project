@@ -18,28 +18,20 @@ images/source-375@3x.jpeg 1125w"
 </body>
 </html>
 <script>
-let data =[
-	[
-		{"P":39.615914,"O":116.81238400000001,"lng":116.812384,"lat":39.615914},
-		{"P":39.610695,"O":116.79227300000002,"lng":116.792273,"lat":39.610695},
-		{"P":39.594774,"O":116.78563700000001,"lng":116.785637,"lat":39.594774},
-		{"P":39.605714,"O":116.770351,"lng":116.770351,"lat":39.605714}
-   ]
-]
-function format(data, nums = 0) {
-   let arr = []
-	let index = 0
-   for (let i of data) {
-   	if (Array.isArray(i)) {
-         arr.push(format(i, nums))
-      } else {
-		   if (index === 0) {
-			   arr.push([i.lng, i.lat])
-		   }
-		   index = index === nums ? 0 : index + 1
-      }
-   }
-   return arr
+function Foo() {
+	getName = function () { alert (1); };
+	return this;
 }
-console.log(format(data))
+Foo.getName = function () { alert (2);};
+Foo.prototype.getName = function () { alert (3);};
+var getName = function () { alert (4);};
+function getName() { alert (5);}
+console.dir(Foo)
+// Foo.getName()
+// getName()
+// Foo().getName()
+// getName()
+// new Foo.getName()
+// new Foo().getName()
+// new new Foo().getName()
 </script>

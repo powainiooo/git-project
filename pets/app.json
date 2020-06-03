@@ -1,8 +1,8 @@
 {
    "pages": [
       "pages/index/index",
-      "pages/information/information",
       "pages/select/second",
+      "pages/information/information",
       "pages/package/package",
       "pages/order/detail",
       "pages/order/confirm",

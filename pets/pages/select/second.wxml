@@ -37,7 +37,7 @@
                data-item="{{item}}"
                bindtap="doSelect">
             <image src="{{imgSrc + item.cover}}" class="img"></image>
-            <view class="name">{{item.china_name}} | <text>{{item.english_name}}</text></view>
+            <view class="name">{{item.china_name}} <text>{{item.english_name}}</text></view>
          </view>
       </view>
    </block>

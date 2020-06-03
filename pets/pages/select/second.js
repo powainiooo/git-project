@@ -23,7 +23,7 @@ Page({
     * 生命周期函数--监听页面加载
     */
    onLoad: function (options) {
-		const type = options.type || '1'
+		const type = options.type || '2'
 	   this.setData({
 		   type
 	   })
@@ -147,6 +147,7 @@ Page({
 			});
 		} else {
 			app.globalData.petId = this.data.selectedID
+			app.globalData.petType = this.data.type
 			wx.navigateTo({
 				url: '/pages/package/package'
 			})

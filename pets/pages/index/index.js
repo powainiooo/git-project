@@ -118,5 +118,11 @@ Page({
 		this.setData({
 			headerSize:st > 100 ? 'normal' : 'large'
 		})
+	},
+	onShareAppMessage: function () {
+		return {
+			title: 'Hair for Pets',
+			path: 'pages/index/index'
+		}
 	}
 });

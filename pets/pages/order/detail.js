@@ -33,7 +33,7 @@ Page({
     */
    onLoad: function (options) {
       this.data.orderNum = options.orderNum || 'T2020041318111002';
-      this.getData(this.data.orderNum);
+      this.getData();
    },
    doGetDetail(e){
       let id = e.currentTarget.dataset.id;
@@ -60,8 +60,9 @@ Page({
    timerCount(){
    	this.data.startSec = new Date().getTime()
       this.data.timeT = setInterval(()=>{
-         if(this.data.timer == 0){
+         if(this.data.timer <= 0){
             clearInterval(this.data.timeT)
+	         this.getData()
          }else{
             let timer = this.data.timer - 1;
             this.setData({
@@ -70,13 +71,14 @@ Page({
          }
       },1000)
    },
-   getData(orderNum){
+   getData(){
       wx.request({
          url:app.globalData.ajaxSrc+"order_desc",
          data:{
-            order_num:orderNum
+            order_num: this.data.orderNum
          },
          success:res=>{
+         	console.log('订单详情数据', res.data.data)
             let date = res.data.data.date;
             let timer = parseInt(res.data.data.sec);
             const selectWeek = new Date(res.data.data.date).getDay()

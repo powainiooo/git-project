@@ -1,4 +1,17 @@
 <!--index.wxml-->
+<wxs module="util">
+   var showItem = function (data) {
+      if (data.cate === 'activity') {
+         return true
+      } else if (data.cate === 'recommend') {
+         return data.list.length !== 0
+      } else if (data.cate === 'banner') {
+         return data.cover !== ''
+      }
+      return false
+   }
+   module.exports.showItem = showItem;
+</wxs>
 <header initButton="{{headerBtns}}" id="header" bindbtntap="headBtn"></header>
 <scroll-view scroll-y="{{detailPage === ''}}" class="container" bindscroll="containerScroll" bindscrolltolower="touchBottom">
    <view class="search-frame" id="search" wx:if="{{!showSearchTitle && !isActivity}}">
@@ -25,7 +38,8 @@
                data-index="{{index}}"
                data-id="{{item.id}}"
                data-cate="{{item.cate}}"
-               bindtap="gotoDetail">
+               bindtap="gotoDetail"
+               wx:if="{{util.showItem(item)}}">
             <ticket-container wx:if="{{item.cate === 'activity'}}"
                               fold="{{selectedTicketIndex === index ? selectedFold : true}}"
                               class="item {{selectedTicketIndex === index ? 'item-selected' : ''}}"
@@ -34,7 +48,7 @@
                               detailData="{{selectedTicketIndex === index ? detailData : null}}"
                               id="{{selectedTicketIndex === index ? 'ticket' : ''}}"></ticket-container>
             <recommend wx:if="{{item.cate === 'recommend' && item.list.length !== 0}}" listData="{{item.list}}" title="{{recTitle}}"></recommend>
-            <banner wx:if="{{item.cate === 'banner'}}" src="{{item.cover}}" linkId="{{item.id}}" type="{{item.re_type}}"></banner>
+            <banner wx:if="{{item.cate === 'banner' && item.cover !== ''}}" src="{{item.cover}}" linkId="{{item.id}}" type="{{item.re_type}}"></banner>
          </view>
       </view>
       <loading wx:if="{{isLoading}}"></loading>

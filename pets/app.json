@@ -1,5 +1,6 @@
 {
    "pages": [
+      "pages/order/list",
       "pages/index/index",
       "pages/select/second",
       "pages/information/information",
@@ -12,11 +13,12 @@
       "pages/requires/requires",
       "pages/feedback/feedback",
       "pages/store/store",
-      "pages/order/list",
       "pages/result/result",
       "pages/package/personal",
       "pages/package/editor",
-      "pages/logs/logs"
+      "pages/logs/logs",
+      "pages/deposit/list",
+      "pages/deposit/form"
    ],
    "window": {
       "backgroundTextStyle": "light",

@@ -84,12 +84,12 @@ Component({
 	        }, 500)
 
         },
-        gotoPersonal(){
+	    gotoDeposit(){
             if(!this.data.isDisabled){
 	            this.closeMenu()
 	            setTimeout(() => {
 		            wx.navigateTo({
-			            url: '/pages/order/list'
+			            url: '/pages/deposit/list'
 		            })
 	            }, 500)
             }

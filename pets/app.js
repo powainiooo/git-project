@@ -82,6 +82,7 @@ App({
 		store: {},
 		selectedDate: '',
       petId: '',
+		petType: '',
       proPackage: {},
       buyerInfo: {
          name: '',
@@ -90,7 +91,15 @@ App({
          sex: '',
          sexName: '',
          remarks: '',
-      }
+      },
+		rechargeInfo: {
+			id: '',
+			price: '',
+			name: '',
+			mobile: '',
+			sex: '',
+			sexName: '',
+		}
 	}
 });
 

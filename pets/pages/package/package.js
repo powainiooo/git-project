@@ -71,7 +71,8 @@ Page({
       wx.request({
          url:app.globalData.ajaxSrc+"group_list",
          data:{
-            pet_id:app.globalData.petId
+            pet_id:app.globalData.petId,
+            type:app.globalData.petType,
          },
          success:res=>{
             this.setData({

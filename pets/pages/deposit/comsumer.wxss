@@ -1,0 +1,10 @@
+.container{ min-height: calc(100vh - 240rpx); overflow: hidden; background-color: #e7e3e2;}
+.consumer-list { margin: 0 40rpx; height: 110rpx; border-bottom: 2rpx solid #d5d3d4;  display: flex; justify-content: space-between; align-items: center; padding-left: 30rpx;}
+.consumer-list .price { font-size: 68rpx; color: #372c1e; font-family: Helve;}
+.consumer-list .price text { font-size: 30rpx; margin-left: 6rpx;}
+.consumer-list .date { font-size: 30rpx; color: #372c1e; font-family: Helve;}
+
+.consumer-list2 { height: 230rpx; background-color: #ffffff; padding: 0 40rpx 0 70rpx; display: flex; justify-content: space-between; align-items: center;}
+.consumer-list2 .price { font-size: 68rpx; color: #dac49f; font-family: Helve; line-height: 68rpx;}
+.consumer-list2 .price text { font-size: 30rpx; margin-left: 6rpx;}
+.consumer-list2 .info { font-size: 30rpx; color: #9d9d9d;}

@@ -1,0 +1,11 @@
+.hint-frame { position: fixed; height: calc(100vh - 440rpx); bottom: 200rpx; left: 0; right: 0; background-color: rgba(255,255,255,0.95); padding: 60rpx; display: flex; box-sizing: border-box; transition:bottom 0.2s ease-in-out;}
+.hint-frame .icon-tips { font-size: 70rpx; color: #9d9b9c; margin-bottom: 30rpx;}
+.hint-frame .content { font-size: 32rpx; color: rgba(157, 155, 156, 0.7); line-height: 1.8; margin-bottom: 80rpx; text-align: justify;}
+
+.list-item { height: 170rpx; border-radius: 20rpx; margin: 0 46rpx 30rpx 46rpx; display: flex; align-items: center; padding-left: 30rpx; position: relative; background-color: #ddd9d8; box-shadow: 0 10px 20px 0 rgba(0,0,0,0.12); font-size: 68rpx; font-family: Helve; color: #372c1e;}
+.list-item text { font-size: 30rpx; margin-left: 6rpx;}
+.list-item .icon-weixuan{ position: absolute; bottom: 50rpx; right: 70rpx; color: #ffffff; font-size: 60rpx;}
+.list-item-selected { background-color: #dac49f; color: #ffffff;}
+.list-item-selected .icon-weixuan{ color: #ffffff;}
+.list-item .icon-xuanzhong{ position: absolute; bottom: 65rpx; right: 70rpx; font-size: 46rpx; display: none; color: #372c1e;}
+.list-item-selected .icon-xuanzhong{ display: block;}

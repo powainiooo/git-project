@@ -54,7 +54,7 @@
 <footer-view showPrice bindbtn="doNext" btnColor="{{btnColor}}">
    <view slot="price">{{proPackage.price}}</view>
    <view slot="btn" wx:if="{{!showRule}}">确认 | Confirm</view>
-   <view slot="btn" wx:if="{{showRule}}">付款 | Payment</view>
+   <view slot="btn" wx:if="{{showRule}}" style="color: #ffffff;">付款 | Payment</view>
 </footer-view>
 <!--rule-->
 <view class="rule-frame" style="top:{{showRule ? '0' : '101vh'}}" catchtouchmove="ruleMove">

@@ -7,17 +7,21 @@
             <view class="icons icon-cuowu" wx:if="{{result == 'fail'}}"></view>
         </view>
         <view class="title-en" wx:if="{{result == 'suc'}}">Payment Success!</view>
-        <view class="title-cn" wx:if="{{result == 'suc'}}">支付成功!</view>
+        <view class="title-cn" wx:if="{{result == 'suc' && opera === 'buy'}}">支付成功!</view>
+        <view class="title-cn" wx:if="{{result == 'suc' && opera === 'recharge'}}">充值成功!</view>
         <view class="title-en" wx:if="{{result == 'fail'}}">Payment Error!</view>
-        <view class="title-cn" wx:if="{{result == 'fail'}}">支付出错!</view>
+        <view class="title-cn" wx:if="{{result == 'fail' && opera === 'buy'}}">支付出错!</view>
+        <view class="title-cn" wx:if="{{result == 'fail' && opera === 'recharge'}}">充值出错!</view>
     </view>
     <view class="tips-frame">
         <view class="icons icon-tips"></view>
-        <text wx:if="{{result == 'suc'}}">我们将以公众号消息通知形式发送洗发服务动态码。(取消关注的用户将无法收取动态码，请手动关注 Hair for pets）</text>
+        <text wx:if="{{result == 'suc' && opera === 'buy'}}">我们将以公众号消息通知形式发送洗发服务动态码。(取消关注的用户将无法收取动态码，请手动关注 Hair for pets）</text>
+        <text wx:if="{{result == 'suc' && opera === 'recharge'}}">所有金额都可以作为消费金额抵扣，无其他消费要求，请放心消费。</text>
         <text wx:if="{{result == 'fail'}}">网络链接失败或用户量拥挤等原因，支付出错，请尝试重新支付。</text>
     </view>
 </view>
 <footer-view showClose bindbtn="doNext" binddoclose="gotoIndex">
-    <view slot="btn" wx:if="{{result == 'suc'}}">订单详情 | Order details</view>
+    <view slot="btn" wx:if="{{result == 'suc' && opera === 'buy'}}">订单详情 | Order details</view>
+    <view slot="btn" wx:if="{{result == 'suc' && opera === 'recharge'}}">个人中心 | Personal center</view>
     <view slot="btn" wx:if="{{result == 'fail'}}">付款 | Payment</view>
 </footer-view>

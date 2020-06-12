@@ -1,0 +1,26 @@
+<header-view bgColor="#ffffff">消费明细 | Consumer details</header-view>
+<view class="container">
+   <view style="margin-top: 60rpx;">
+      <view class="consumer-list">
+         <view class="price">-208<text>元</text></view>
+         <view class="date">2020/06/17</view>
+      </view>
+      <view class="consumer-list">
+         <view class="price">-208<text>元</text></view>
+         <view class="date">2020/06/17</view>
+      </view>
+      <view class="consumer-list">
+         <view class="price">-208<text>元</text></view>
+         <view class="date">2020/06/17</view>
+      </view>
+      <view class="consumer-list2">
+         <view class="left">
+            <view class="price">+208<text>元</text></view>
+            <view class="info">实际充值1000元，赠送1000元</view>
+         </view>
+         <view class="date">2020/06/17</view>
+      </view>
+   </view>
+</view>
+
+

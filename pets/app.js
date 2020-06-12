@@ -91,7 +91,15 @@ App({
          sex: '',
          sexName: '',
          remarks: '',
-      }
+      },
+		rechargeInfo: {
+			id: '',
+			price: '',
+			name: '',
+			mobile: '',
+			sex: '',
+			sexName: '',
+		}
 	}
 });
 

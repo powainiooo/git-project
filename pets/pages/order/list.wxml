@@ -1,5 +1,12 @@
 <header-view bgColor="#ffffff">个人中心 | Personal center</header-view>
 <view class="container container-order">
+   <view class="balance">
+      <view class="title">账户余额</view>
+      <view class="line">
+         <view class="price">2000<text>元</text></view>
+         <view class="btn" bindtap="toConsumer" hover-class="btn-hover" hover-stay-time="50">消费明细</view>
+      </view>
+   </view>
    <view class="list-item"
          wx:for="{{listData}}"
          wx:for-item="item"

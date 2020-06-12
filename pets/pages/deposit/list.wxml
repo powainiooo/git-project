@@ -1,0 +1,28 @@
+<header-view>充值 | Deposit</header-view>
+<view class="container" style="overflow: hidden;">
+   <view class="hint-frame" style="bottom: {{showHint ? '200rpx' : '-100vh'}}">
+      <view>
+         <view class="icons icon-tips"></view>
+         <view class="content"><text>充值与赠送金额可用于洗护消费，无附加使用条件。除店铺关店，充值后将无法退回充值金额。如金额不足无法支付单次消费，请使用微信支付，无法使用金额加另付剩余款的形式完成支付。使用充值金额消费将不可再享受优惠及退款。\n请知悉。</text></view>
+      </view>
+   </view>
+   <view style="margin-top: 46rpx;">
+      <view class="tap list-item"
+            hover-class="tap-hover"
+            hover-stay-time="10">
+         <view>2000<text>元 送 100 元</text></view>
+         <view class="icons icon-weixuan"></view>
+         <view class="icons icon-xuanzhong"></view>
+      </view>
+      <view class="tap list-item list-item-selected"
+            hover-class="tap-hover"
+            hover-stay-time="10">
+         <view>2000<text>元 送 100 元</text></view>
+         <view class="icons icon-weixuan"></view>
+         <view class="icons icon-xuanzhong"></view>
+      </view>
+   </view>
+</view>
+<footer-view bindbtn="doNext">
+   <view slot="btn">{{showHint ? '了解 | Got it' : '下一步 | Next'}}</view>
+</footer-view>

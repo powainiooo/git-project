@@ -1,12 +1,15 @@
 {
    "pages": [
+      "pages/order/confirm",
+      "pages/deposit/form",
+      "pages/deposit/list",
+      "pages/deposit/comsumer",
       "pages/order/list",
       "pages/index/index",
       "pages/select/second",
       "pages/information/information",
       "pages/package/package",
       "pages/order/detail",
-      "pages/order/confirm",
       "pages/select/select",
       "pages/date/date",
       "pages/information/remarks",
@@ -16,9 +19,7 @@
       "pages/result/result",
       "pages/package/personal",
       "pages/package/editor",
-      "pages/logs/logs",
-      "pages/deposit/list",
-      "pages/deposit/form"
+      "pages/logs/logs"
    ],
    "window": {
       "backgroundTextStyle": "light",

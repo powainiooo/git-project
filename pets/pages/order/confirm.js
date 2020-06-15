@@ -1,5 +1,6 @@
 // pages/order/confirm.js
 const app = getApp();
+import {getUserMoney} from '../../utils/api.js'
 Page({
 
 	/**
@@ -10,9 +11,6 @@ Page({
 		showRule:false,
 		showDetails:false,
 		proPackage:app.globalData.proPackage,
-		proClean:app.globalData.proClean,
-		proConditioner:app.globalData.proConditioner,
-		proTreatment:app.globalData.proTreatment,
 		buyerInfo:app.globalData.buyerInfo,
 		store:app.globalData.store,
 		selectDate:app.globalData.selectedDate,
@@ -38,7 +36,11 @@ Page({
 		],
 		imgSrc:app.globalData.imgSrc,
 		proDetailData:{},
-		week: ['Sun\n周日', 'Mon\n周一', 'Tue\n周二', 'Wed\n周三', 'Thur\n周四', 'Fri\n周五', 'Sat\n周六']
+		week: ['Sun\n周日', 'Mon\n周一', 'Tue\n周二', 'Wed\n周三', 'Thur\n周四', 'Fri\n周五', 'Sat\n周六'],
+		userAmount: 0,
+		canUseAmount: true,
+		showPayWay: false,
+		hasAmount: false
 	},
 	doGetDetail(e){
 		setTimeout(()=>{
@@ -62,35 +64,65 @@ Page({
 			showDetails:false
 		})
 	},
+	amountPay () {
+		if (this.data.canUseAmount) {
+			this.doPay(2)
+		}
+	},
+	wechatPay () {
+		this.doPay(1)
+	},
 	doNext(){
 		if(this.data.showRule){
-			if (app.globalData.userInfo === null) {
-				wx.navigateTo({
-					url: '/pages/index/index?result=auth'
+			if (this.data.hasAmount) {
+				this.setData({
+					showPayWay: true
 				})
-				return
+			} else {
+				this.doPay(1)
 			}
-			wx.showNavigationBarLoading();
-			let obj = {},gb = app.globalData;
-			obj.openid = gb.userOpenID;
-			obj.shop_id = gb.store.id;
-			obj.gid = gb.proPackage.id;
-			obj.pet_id = gb.petId;
-			obj.name = gb.buyerInfo.name;
-			obj.mobile = gb.buyerInfo.mobile;
-			obj.pet_sex = gb.buyerInfo.sex;
-			obj.pet_name = gb.buyerInfo.petsname;
-			obj.remark = gb.buyerInfo.remarks;
-			obj.date = gb.selectedDate;
-			// obj.price = gb.proPackage.price;
-			wx.request({
-				url:app.globalData.ajaxSrc+"create_order",
-				data:obj,
-				success:res=>{
-					if (res.data.status === 0) {
+		}else{
+			this.setData({
+				btnColor:'#d9c39f',
+				showRule:true
+			})
+		}
+	},
+	hidePayWay () {
+		this.setData({
+			showPayWay: false
+		})
+	},
+	doPay (payType) {
+		if (app.globalData.userInfo === null) {
+			wx.navigateTo({
+				url: '/pages/index/index?result=auth'
+			})
+			return
+		}
+		wx.showNavigationBarLoading();
+		let obj = {},gb = app.globalData;
+		obj.openid = gb.userOpenID;
+		obj.shop_id = gb.store.id;
+		obj.gid = gb.proPackage.id;
+		obj.pet_id = gb.petId;
+		obj.name = gb.buyerInfo.name;
+		obj.mobile = gb.buyerInfo.mobile;
+		obj.pet_sex = gb.buyerInfo.sex;
+		obj.pet_name = gb.buyerInfo.petsname;
+		obj.remark = gb.buyerInfo.remarks;
+		obj.date = gb.selectedDate;
+		obj.pay_type = payType;
+		// obj.price = gb.proPackage.price;
+		wx.request({
+			url:app.globalData.ajaxSrc+"create_order",
+			data:obj,
+			success:res=>{
+				if (res.data.status === 0) {
+					let order_num = res.data.order_num;
+					app.globalData.orderNum = res.data.order_num;
+					if (res.data.pay_type === 1) {
 						let jsapi = res.data.jsapiparam;
-						let order_num = res.data.order_num;
-						app.globalData.orderNum = res.data.order_num;
 						wx.requestPayment({
 							'timeStamp': jsapi.timeStamp,
 							'nonceStr': jsapi.nonceStr,
@@ -113,19 +145,17 @@ Page({
 							}
 						})
 					} else {
-						wx.showToast({
-							image:'../../res/img/warn.png',
-							title:res.data.msg
-						});
+						this.getMessageAuth()
+						this.doBuySuccess(order_num);
 					}
+				} else {
+					wx.showToast({
+						image:'../../res/img/warn.png',
+						title:res.data.msg
+					});
 				}
-			});
-		}else{
-			this.setData({
-				btnColor:'#d9c39f',
-				showRule:true
-			})
-		}
+			}
+		});
 	},
 	doBuySuccess(orderNum){
 		let self = this;
@@ -135,7 +165,7 @@ Page({
 				order_num:orderNum
 			},
 			success:res=>{
-				wx.navigateTo({
+				wx.reLaunch({
 					url: '/pages/result/result?result=suc'
 				});
 			},
@@ -176,15 +206,13 @@ Page({
 		const selectWeek = new Date(app.globalData.selectedDate).getDay()
 		this.setData({
 			proPackage:app.globalData.proPackage,
-			proClean:app.globalData.proClean,
-			proConditioner:app.globalData.proConditioner,
-			proTreatment:app.globalData.proTreatment,
 			buyerInfo:app.globalData.buyerInfo,
 			store:app.globalData.store,
 			selectDate:app.globalData.selectedDate,
 			selectWeek: this.data.week[selectWeek],
 			ruleContent:app.globalData.ruleContent
 		});
+		this.getMoney();
 	},
 	//打开地图
 	openMap(e){
@@ -230,6 +258,23 @@ Page({
 				console.log('发送订阅消息成功')
 			}
 		});
+	},
+	getMoney () {
+		const openid = app.globalData.userOpenID
+		if (openid === '') return
+		getUserMoney({openid}).then(res=> {
+			let userAmount
+			if (Array.isArray(res.data)) {
+				userAmount = 0
+			} else {
+				userAmount = res.data.amount
+			}
+			this.setData({
+				userAmount,
+				canUseAmount: parseFloat(userAmount) > parseFloat(this.data.proPackage.price),
+				hasAmount: !Array.isArray(res.data)
+			})
+		})
 	},
 	/**
 	 * 生命周期函数--监听页面初次渲染完成

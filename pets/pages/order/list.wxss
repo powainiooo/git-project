@@ -12,12 +12,12 @@
 .order-time .line2 .en { font-size: 33rpx; color: #372c1e; font-family: 'Helve'; margin-bottom: 10rpx;}
 .order-time .line2 .cn { font-size: 30rpx; color: #372c1e;}
 
-.result-frame{ padding: 0 60rpx; box-sizing: border-box; display: flex; flex-direction: column; position: relative; justify-content: center;}
+.result-frame{ padding: 100rpx 60rpx 0 60rpx; box-sizing: border-box; display: flex; flex-direction: column; position: relative; justify-content: center;}
 .result-frame .icon-tips{ color: #e7e3e0; font-size: 70rpx; margin-bottom: 60rpx; color: #372c1e;}
 .result-frame .title-en{ font-size: 67rpx; font-family: 'Helve'; text-shadow: 0 0 3px rgba(55,44,30,0.25); margin-bottom: 10rpx; color: #372c1e;}
 .result-frame .title-cn{ font-size: 60rpx; text-shadow: 0 0 3px rgba(55,44,30,0.25); color: #372c1e;}
 
-.balance { margin: 60rpx 40rpx 80rpx 70rpx;}
+.balance { margin: 60rpx 40rpx 40rpx 70rpx;}
 .balance .title { font-size: 30rpx; color: #372c1e; line-height: 30rpx; margin-bottom: 40rpx;}
 .balance .line { display: flex; justify-content: space-between; align-items: center;}
 .balance .line .price { font-size: 100rpx; line-height: 100rpx; text-shadow: 0 0 3px rgba(55,44,30,0.25); font-family: 'Helve';}

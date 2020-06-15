@@ -39,3 +39,16 @@
 .rule-frame .line2 .header-logo{ display: flex; align-items: center;}
 .rule-frame .line2 .header-logo .logo { width: 60rpx; height: 80rpx; transition: all 0.25s ease-out; margin-right: 10rpx;}
 .rule-frame .line2 .header-logo .logo-title { width: 125rpx; height: 80rpx; transition: all 0.25s ease-out;}
+
+.pay-list { width: 100%; position: fixed; bottom: 200rpx; left: 0; z-index: 590; transition:bottom 0.2s ease-in-out;}
+.pay-list-item { height: 170rpx; position: relative; display: flex; justify-content: flex-end; align-items: center; padding-right: 90rpx; background-color: #d9c39f}
+.pay-list-item:before { content: ''; position: absolute; top: 0; left: 40rpx; right: 40rpx; height: 1px; background-color: #d8cfbe;}
+.pay-list-item:first-child:before { height: 0}
+.pay-list-item:after { content: ''; position: absolute; bottom: 0; left: 40rpx; right: 40rpx; height: 1px; background-color: #c6b192;}
+.pay-list-item:last-child:after { height: 0}
+.pay-list-item .pay-name { color: #ffffff; font-size: 36rpx; text-align: right; transition: all 0.15s ease-out;}
+.pay-item-hover .pay-name { transform: scale(0.95);}
+.pay-list-item .pay-balance { color: #ffffff; font-size: 64rpx; text-align: right; font-family: Helve; transition: all 0.15s ease-out;}
+.pay-list-item .pay-balance text { font-size: 30rpx; margin-left: 6rpx;}
+.pay-item-hover .pay-balance { transform: scale(0.95);}
+.pay-list-bg { width: 100%; height: 100vh; position: fixed; top: 0; left: 0; background-color: rgba(0, 0, 0, 0); z-index: 589;}

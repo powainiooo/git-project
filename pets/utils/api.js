@@ -42,4 +42,20 @@ export const getPetList = (data) => {
 	})
 }
 
+// 用户当前账户余额
+export const getUserMoney = (data) => {
+	return ajax({
+		url: `${ajaxUrl}/user_money`,
+		data
+	})
+}
+
+// 用户当前账户余额
+export const getAjax = (url, data = {}) => {
+	return ajax({
+		url: `${ajaxUrl}${url}`,
+		data
+	})
+}
+
 

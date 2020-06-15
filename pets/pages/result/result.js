@@ -16,7 +16,7 @@ Page({
 			})
 		} else if (this.data.opera === 'recharge') {
 			wx.reLaunch({
-				url: '/pages/order/lis'
+				url: '/pages/order/list'
 			})
 		}
 	},
@@ -30,7 +30,7 @@ Page({
 	 */
 	onLoad: function (options) {
 		let result = options.result || 'suc';
-		let opera = options.opera || 'recharge';
+		let opera = options.opera || 'buy';
 		this.setData({
 			result,
 			opera

@@ -73,6 +73,27 @@
 <!--pro detail-->
 <detail-view showDetails="{{showDetails}}" prodata="{{proDetailData}}"></detail-view>
 
+<view class="pay-list" style="bottom: {{showPayWay ? '200rpx' : '-600rpx'}}">
+   <view
+       class="pay-list-item"
+       style="background-color: {{canUseAmount ? '#d9c39f' : '#e7e3e2'}}"
+       bindtap="amountPay"
+       hover-class="{{canUseAmount ? 'pay-item-hover' : ''}}"
+       hover-stay-time="10">
+      <view>
+         <view class="pay-name">账户余额 | Account balance</view>
+         <view class="pay-balance">{{userAmount}}<text>元</text></view>
+      </view>
+   </view>
+   <view class="pay-list-item"
+         bindtap="wechatPay"
+         hover-class="pay-item-hover"
+         hover-stay-time="10">
+      <view class="pay-name">微信支付 | Wechat pay</view>
+   </view>
+</view>
+<view class="pay-list-bg" wx:if="{{showPayWay}}" bindtap="hidePayWay"></view>
+
 <wxs module="m1">
    function getStr(str,start,end){
    return str.slice(start,end)

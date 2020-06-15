@@ -1,4 +1,6 @@
 // pages/order/list.js
+import {getUserMoney} from "../../utils/api"
+
 const app = getApp();
 Page({
    /**
@@ -6,7 +8,9 @@ Page({
     */
    data: {
       listData:[],
-      week: ['Sun\n周日', 'Mon\n周一', 'Tue\n周二', 'Wed\n周三', 'Thur\n周四', 'Fri\n周五', 'Sat\n周六']
+      week: ['Sun\n周日', 'Mon\n周一', 'Tue\n周二', 'Wed\n周三', 'Thur\n周四', 'Fri\n周五', 'Sat\n周六'],
+	   userAmount: 0,
+	   hasAmount: false
    },
    gotoDetail(e){
       let num = e.currentTarget.dataset.num;
@@ -19,6 +23,10 @@ Page({
     */
    onLoad: function (options) {
       this.getData();
+      this.getMoney();
+      this.setData({
+	      userAmount: app.globalData.userAmount
+      })
    },
    getData(){
       wx.request({
@@ -40,6 +48,21 @@ Page({
          }
       })
    },
+	getMoney () {
+		const openid = app.globalData.userOpenID
+		if (openid === '') return
+		getUserMoney({openid}).then(res=> {
+			if (Array.isArray(res.data)) {
+				app.globalData.userAmount = 0
+			} else {
+				app.globalData.userAmount = res.data.amount
+			}
+			this.setData({
+				userAmount: app.globalData.userAmount,
+				hasAmount: !Array.isArray(res.data)
+			})
+		})
+	},
    toConsumer () {
       wx.navigateTo({
          url: '/pages/deposit/comsumer'

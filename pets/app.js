@@ -78,6 +78,7 @@ App({
 		ajaxSrc:'https://hair.designbyho.com/mobile/applet/',
 		imgSrc:'https://hair.designbyho.com/upload/',
 		ruleContent:'',
+		userAmount: 0,
 		orderNum:'',
 		store: {},
 		selectedDate: '',
@@ -93,7 +94,7 @@ App({
          remarks: '',
       },
 		rechargeInfo: {
-			id: '',
+			id: '1',
 			price: '',
 			name: '',
 			mobile: '',

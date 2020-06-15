@@ -7,17 +7,14 @@
       </view>
    </view>
    <view style="margin-top: 46rpx;">
-      <view class="tap list-item"
+      <view wx:for="{{listData}}"
+            wx:key="index"
+            class="tap list-item {{item.id === selectedID ? 'list-item-selected' : ''}}"
             hover-class="tap-hover"
-            hover-stay-time="10">
-         <view>2000<text>元 送 100 元</text></view>
-         <view class="icons icon-weixuan"></view>
-         <view class="icons icon-xuanzhong"></view>
-      </view>
-      <view class="tap list-item list-item-selected"
-            hover-class="tap-hover"
-            hover-stay-time="10">
-         <view>2000<text>元 送 100 元</text></view>
+            hover-stay-time="10"
+            data-item="{{item}}"
+            bindtap="doSelect">
+         <view>{{item.invest_money}}<text>元 送 {{item.give_money}} 元</text></view>
          <view class="icons icon-weixuan"></view>
          <view class="icons icon-xuanzhong"></view>
       </view>

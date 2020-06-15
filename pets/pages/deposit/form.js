@@ -27,7 +27,32 @@ Page({
 		let value = e.detail.value;
 		this.data[name] = value;
 	},
+	/**
+	 * 生命周期函数--监听页面加载
+	 */
+	onLoad: function (options) {
+		let g = app.globalData;
+		this.setData({
+			price:g.rechargeInfo.price
+		})
+		const petsname = wx.getStorageSync('petsname')
+		const petsmobile = wx.getStorageSync('petsmobile')
+		let petssex = wx.getStorageSync('humansex')
+		petssex = petssex === '' || petssex === undefined ? null : petssex
+		this.setData({
+			name: petsname,
+			mobile: petsmobile,
+			selectedSex: petssex,
+		})
+	},
 	doNext(){
+		console.log('doNext')
+		if (app.globalData.userInfo === null) {
+			wx.navigateTo({
+				url: '/pages/index/index?result=auth'
+			})
+			return
+		}
 		if(this.data.name == ''){
 			wx.showToast({
 				title: '请输入姓名',
@@ -49,36 +74,55 @@ Page({
 			});
 			return;
 		}
-		app.globalData.rechargeInfo.name = this.data.name;
-		app.globalData.rechargeInfo.mobile = this.data.mobile;
-		app.globalData.rechargeInfo.sex = this.data.selectedSex.value;
-		app.globalData.rechargeInfo.sexName = this.data.selectedSex.name;
+
 		wx.setStorageSync('petsname', this.data.name)
 		wx.setStorageSync('petsmobile', this.data.mobile)
 		wx.setStorageSync('humansex', this.data.selectedSex)
-		wx.navigateTo({
-			url: '/pages/information/remarks'
-		})
+		wx.showNavigationBarLoading();
+		let obj = {},gb = app.globalData;
+		obj.openid = gb.userOpenID;
+		obj.card_id = gb.rechargeInfo.id;
+		obj.sex = this.data.selectedSex.value;
+		obj.username = this.data.name;
+		obj.mobile = this.data.mobile;
+		wx.request({
+			url:app.globalData.ajaxSrc+"invest_order",
+			data:obj,
+			success:res=>{
+				if (res.data.status === 0) {
+					let jsapi = res.data.jsapiparam;
+					let order_num = res.data.order_num;
+					wx.requestPayment({
+						'timeStamp': jsapi.timeStamp,
+						'nonceStr': jsapi.nonceStr,
+						'package': jsapi.package,
+						'signType': jsapi.signType,
+						'paySign': jsapi.paySign,
+						'success':res=>{
+							wx.showToast({
+								title:'支付成功'
+							});
+							wx.reLaunch({
+								url: '/pages/result/result?result=suc&opera=recharge'
+							});
+						},
+						'fail':function(res){
+							wx.showToast({
+								image:'../../res/img/warn.png',
+								title:'支付失败'
+							});
+							wx.hideNavigationBarLoading();
+						}
+					})
+				} else {
+					wx.showToast({
+						image:'../../res/img/warn.png',
+						title:res.data.msg
+					});
+				}
+			}
+		});
 	},
-	/**
-	 * 生命周期函数--监听页面加载
-	 */
-	onLoad: function (options) {
-		let g = app.globalData;
-		this.setData({
-			price:g.rechargeInfo.price
-		})
-		const petsname = wx.getStorageSync('petsname')
-		const petsmobile = wx.getStorageSync('petsmobile')
-		let petssex = wx.getStorageSync('humansex')
-		petssex = petssex === '' || petssex === undefined ? null : petssex
-		this.setData({
-			name: petsname,
-			mobile: petsmobile,
-			selectedSex: petssex,
-		})
-	},
-
 	/**
 	 * 生命周期函数--监听页面初次渲染完成
 	 */

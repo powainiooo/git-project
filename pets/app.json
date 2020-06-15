@@ -1,11 +1,11 @@
 {
    "pages": [
+      "pages/index/index",
       "pages/order/confirm",
-      "pages/deposit/form",
       "pages/deposit/list",
+      "pages/deposit/form",
       "pages/deposit/comsumer",
       "pages/order/list",
-      "pages/index/index",
       "pages/select/second",
       "pages/information/information",
       "pages/package/package",

@@ -1,2 +1,0 @@
-webpackJsonp([12],{"6HZb":function(t,e,r){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var n={render:function(){var t=this.$createElement;return(this._self._c||t)("iframe",{attrs:{src:"http://m.intelligentjoy.com/topShare",width:"100%",height:"1650",frameborder:"0"}})},staticRenderFns:[]};var a=r("VU/8")({data:function(){return{}}},n,!1,function(t){r("JZ+5")},"data-v-f66b0c74",null);e.default=a.exports},"JZ+5":function(t,e){}});
-//# sourceMappingURL=12.944607ecc0b181212360.js.map

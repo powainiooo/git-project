@@ -1,0 +1,11 @@
+<svg id="el_nVUr17job" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 110"><style>@-webkit-keyframes el_1etpPE_MfB_JBo8b6fCh_Animation{0%{-webkit-transform: translate(32px, 32px) rotate(0deg) translate(-32px, -32px);transform: translate(32px, 32px) rotate(0deg) translate(-32px, -32px);}100%{-webkit-transform: translate(32px, 32px) rotate(360deg) translate(-32px, -32px);transform: translate(32px, 32px) rotate(360deg) translate(-32px, -32px);}}@keyframes el_1etpPE_MfB_JBo8b6fCh_Animation{0%{-webkit-transform: translate(32px, 32px) rotate(0deg) translate(-32px, -32px);transform: translate(32px, 32px) rotate(0deg) translate(-32px, -32px);}100%{-webkit-transform: translate(32px, 32px) rotate(360deg) translate(-32px, -32px);transform: translate(32px, 32px) rotate(360deg) translate(-32px, -32px);}}#el_nVUr17job *{-webkit-animation-duration: 1.5s;animation-duration: 1.5s;-webkit-animation-iteration-count: infinite;animation-iteration-count: infinite;-webkit-animation-timing-function: cubic-bezier(0, 0, 1, 1);animation-timing-function: cubic-bezier(0, 0, 1, 1);}#el_TPm369ZWsq{fill: none;}#el_8VJi7MqGSF{fill: #fff;}#el_1etpPE_MfB{fill: none;stroke: #fff;stroke-width: 2;}#el_qxo-8A0uJj{fill: none;stroke: #fff;}#el_GiLAa7j_r7{fill: #fff;}#el_XlfQCFaPX4{fill: #ca2027;}#el_1etpPE_MfB_JBo8b6fCh{-webkit-animation-name: el_1etpPE_MfB_JBo8b6fCh_Animation;animation-name: el_1etpPE_MfB_JBo8b6fCh_Animation;}</style>
+  <title>pin</title>
+  <rect x="-464.1" y="-2060.42" width="1440" height="5505" id="el_TPm369ZWsq"/>
+  <g id="el_wxp_P2YrFp">
+    <circle cx="32" cy="32" r="24" id="el_8VJi7MqGSF"/>
+    <g id="el_1etpPE_MfB_JBo8b6fCh" data-animator-group="true" data-animator-type="1"><circle cx="32" cy="32" r="31" stroke-miterlimit="10" stroke-dasharray="32.45 32.45" id="el_1etpPE_MfB"/></g>
+    <line x1="32" y1="63" x2="32" y2="105" stroke-miterlimit="10" id="el_qxo-8A0uJj"/>
+    <circle cx="32" cy="105" r="5" id="el_GiLAa7j_r7"/>
+    <path d="M39.07,42.82a7,7,0,0,0-5.38-6.09v6.32H30.31V36.73a7,7,0,0,0-5.38,6.09H21.49a10.37,10.37,0,0,1,8.82-9.5V30.68a10.36,10.36,0,0,1-8.82-9.5h3.44a7,7,0,0,0,5.38,6.09V21h3.38v6.32a7,7,0,0,0,5.38-6.09h3.44a10.36,10.36,0,0,1-8.82,9.5v2.64a10.36,10.36,0,0,1,8.82,9.5Z" fill-rule="evenodd" id="el_XlfQCFaPX4"/>
+  </g>
+</svg>

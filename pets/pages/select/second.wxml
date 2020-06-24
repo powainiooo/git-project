@@ -16,7 +16,7 @@
                wx:key="id"
                wx:for-item="child"
                class="type-item tap {{selectedID === child.data.id  ? 'type-item-select' : ''}}"
-               hover-class="tap-hover"
+               hover-class="tap-hover type-item-select"
                hover-stay-time="10"
                data-item="{{child.data}}"
                bindtap="doSelect">
@@ -32,7 +32,7 @@
          <view wx:for="{{catList}}"
                wx:key="id"
                class="type-item tap {{selectedID === item.id ? 'type-item-select' : ''}}"
-               hover-class="tap-hover"
+               hover-class="tap-hover type-item-select"
                hover-stay-time="10"
                data-item="{{item}}"
                bindtap="doSelect">
@@ -43,7 +43,7 @@
    </block>
 
 </view>
-<footer-view bindbtn="doNext">
-   <view slot="btn">下一步 | Next</view>
-</footer-view>
+<!--<footer-view bindbtn="doNext">-->
+<!--   <view slot="btn">下一步 | Next</view>-->
+<!--</footer-view>-->
 

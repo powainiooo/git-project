@@ -135,9 +135,14 @@ Page({
 	doSelect (e) {
       console.log(e)
       const id = e.currentTarget.dataset.item.id
-      this.setData({
-         selectedID: id
-      })
+      // this.setData({
+      //    selectedID: id
+      // })
+		app.globalData.petId = id
+		app.globalData.petType = this.data.type
+		wx.navigateTo({
+			url: '/pages/package/package'
+		})
 	},
 	doNext () {
 		if (this.data.selectedID === '') {

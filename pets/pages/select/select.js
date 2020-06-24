@@ -10,8 +10,11 @@ Page({
 	},
 	doSelect (e) {
 		console.log(e)
-		this.setData({
-			selectItem: e.currentTarget.dataset.item
+		// this.setData({
+		// 	selectItem: e.currentTarget.dataset.item
+		// })
+		wx.navigateTo({
+			url: `/pages/select/second?type=${e.currentTarget.dataset.item}`
 		})
 	},
 	//下一步

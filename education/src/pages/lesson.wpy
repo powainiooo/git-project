@@ -9,7 +9,7 @@
    <div>
       <div class="container {{showMenu ? 'blur' : ''}}">
          <zHeader></zHeader>
-         <div class="title2 text-shadow"><span class="en">Select</span> <br/> 选择课程</div>
+         <div class="title2 text-shadow"><span class="en">Buy</span> <br/> 购买课</div>
          <div class="lesson-item"
               v-for="item in list"
               :key="item.id"

@@ -1,7 +1,7 @@
 <header-view>选择宠物类型 | Selection</header-view>
 <view class="container container-selection">
    <view class="type-item tap {{selectItem === '2' ? 'type-item-select' : ''}}"
-         hover-class="tap-hover"
+         hover-class="tap-hover type-item-select"
          hover-stay-time="10"
          data-item="2"
          bindtap="doSelect">
@@ -10,7 +10,7 @@
       <view class="name"><text>Cat</text>猫</view>
    </view>
    <view class="type-item tap {{selectItem === '1' ? 'type-item-select' : ''}}"
-         hover-class="tap-hover"
+         hover-class="tap-hover type-item-select"
          hover-stay-time="10"
          data-item="1"
          bindtap="doSelect">
@@ -19,6 +19,6 @@
       <view class="name"><text>Dog</text>狗</view>
    </view>
 </view>
-<footer-view bindbtn="doNext">
-    <view slot="btn">下一步 | Next</view>
-</footer-view>
+<!--<footer-view bindbtn="doNext">-->
+<!--    <view slot="btn">下一步 | Next</view>-->
+<!--</footer-view>-->

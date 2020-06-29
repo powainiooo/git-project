@@ -31,6 +31,7 @@ Page({
             order_num: id
          },
          success: function (res) {
+            console.log('order detail', res)
             let data = res.data.data
             let not = 0
             let check = 0

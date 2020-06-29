@@ -522,6 +522,9 @@ export default {
             this.$emit("watchPageCtr", parmas);
         },
         loagin(to, next) {
+            console.log('uid', getCookie("uid"))
+            console.log('oauth_token', getCookie("oauth_token"))
+            console.log('oauth_token_secret', getCookie("oauth_token_secret"))
             if (
                 !getCookie("uid") ||
                 !getCookie("oauth_token") ||

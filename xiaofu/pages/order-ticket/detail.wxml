@@ -18,5 +18,15 @@
         </view>
        <view style=" height: 1px; margin: 50rpx 90rpx; background-color: #e2e2e2"></view>
         <view class="hint-section">一个二维码对应一张门票，请提前将二维码给到同行伙伴，到活动现场后，将本二维码出示给工作人员用于验票进场</view>
+
+       <view class="title">联系主办方</view>
+       <view class="contact-frame" wx:if="{{itemData.company}}">
+          <image src="{{imgSrc+itemData.company.logo_img}}" mode="widthFix" class="logo"></image>
+          <view class="btn-phone"
+                hover-class="btn-phone-touch"
+                hover-stay-time="10"
+                bindtap="docall"
+                data-phone="{{itemData.company.phone}}">{{itemData.company.phone}}</view>
+       </view>
     </view>
 </view>

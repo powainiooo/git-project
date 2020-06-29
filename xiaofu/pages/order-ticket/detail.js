@@ -10,7 +10,8 @@ Page({
       currentIndex: 0,
       duration: 0,
       notCheckNum: 0,
-      checkNum: 0
+      checkNum: 0,
+      imgSrc: app.globalData.imgSrc
    },
 
    /**
@@ -31,7 +32,6 @@ Page({
             order_num: id
          },
          success: function (res) {
-            console.log('order detail', res)
             let data = res.data.data
             let not = 0
             let check = 0
@@ -45,7 +45,7 @@ Page({
             self.setData({
                notCheckNum: not,
                checkNum: check,
-               itemData: data
+               itemData: data,
             })
             wx.hideNavigationBarLoading()
          },
@@ -59,6 +59,12 @@ Page({
    /**
    * 生命周期函数--监听页面初次渲染完成
    */
+   docall (e) {
+      let phone = e.target.dataset.phone
+      wx.makePhoneCall({
+         phoneNumber: phone// 仅为示例，并非真实的电话号码
+      })
+   },
    onReady: function () {
 
    },

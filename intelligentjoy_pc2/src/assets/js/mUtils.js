@@ -56,9 +56,10 @@ export const delAllCookie = () => {
     let keys = document.cookie.match(/[^ =;]+(?=\=)/g);
     if (keys) {
         for (let i = keys.length; i--; ) {
-            document.cookie =
-                keys[i] +
-                "=; expires=Thu, 01 Jan 1970 00:00:00 GMT;domain=.intelligentjoy.com;path=/";
+            // document.cookie =
+            //     keys[i] +
+            //     "=; expires=Thu, 01 Jan 1970 00:00:00 GMT;domain=.intelligentjoy.com;path=/";
+            document.cookie=keys[i]+"=; expire="+new Date().toGMTString()+"; path=/";
         }
     }
 };

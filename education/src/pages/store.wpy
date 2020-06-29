@@ -48,7 +48,7 @@
             <div class="hint">Others<br/>查看其它门店</div>
          </div>
       </div>
-      <menu btnText="下一步 | Next" @doFunc="doEnter" :btnDisable="selectedId === 0"></menu>
+      <menu btnText="下一步 | Next" @doFunc="doEnter" :btnDisable="selectedId === 0" :needAuth="needAuth"></menu>
    </div>
 </template>
 
@@ -63,7 +63,8 @@
       data: {
          list: [],
          selectedId: 0,
-         hasSelected: false
+         hasSelected: false,
+         needAuth: false
       },
       computed: {
          ...mapState(['showMenu', 'personalInfo']),
@@ -72,7 +73,11 @@
          }
       },
       onShow () {
-         this.getData()
+         const app = getApp()
+         this.needAuth = app.$wepy.$options.globalData.userInfo === null
+         if (!this.needAuth) {
+            this.getData()
+         }
       },
       methods: {
          doSelect (id) {

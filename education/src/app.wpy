@@ -103,10 +103,10 @@
                      wx.setStorageSync('bbaUserInfo', res.data.userInfo)
                   })
                } else {
-                  console.log('resSetting not')
-                  wx.navigateTo({
-                     url: '/pages/index?type=auth'
-                  })
+                  // console.log('resSetting not')
+                  // wx.navigateTo({
+                  //    url: '/pages/index?type=auth'
+                  // })
                }
             } else {
                this.$options.globalData.userInfo = userInfo

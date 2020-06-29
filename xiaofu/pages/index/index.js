@@ -219,7 +219,7 @@ Page({
          this.setData({
          	detailData: res.data,
          	detailPage: 'detail',
-            selectedTicketStyles: `top: 120rpx; transition-duration: 0s; background-color: #002bb0;`,
+            selectedTicketStyles: `top: 120rpx; transition-duration: 0s; background-color: #f3f3f3;`,
          })
       })
 	},

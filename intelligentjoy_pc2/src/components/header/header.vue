@@ -212,7 +212,7 @@ export default {
             this.userface = require("./images/userHeaderPic@2x.jpg");
             localStorage["userface"] = require("./images/userHeaderPic@2x.jpg");
             this.$router.push({ name: "home" });
-            store.commit("loginStatusCtr", false);
+            this.$store.commit("loginStatusCtr", false);
         },
         jumpPosi() {
             setTimeout(() => {

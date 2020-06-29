@@ -79,32 +79,34 @@
                 </div>
                 <div class="payMethods">
                     <p>{{$t("comfireOrder.14")}}</p>
-                    <div class="paymethodSelector">
+                    <div class="paymethodSelector" style="margin-bottom: 15px">
                         <div class="methodsItem" @click="payType=3">
                             <span :class="['circle ',payType==3?'circleActive ':' ']">
 
                             </span>
-                            <span>
+                            <span style="width: 410px;">
                                 <img src="./images/paypal.png" alt="">
                             </span>
                         </div>
-                        <div class="methodsItem" @click="payType=1">
-                            <span :class="['circle ',payType==1?'circleActive ':' ']">
-
-                            </span>
-                            <span>
-                                <img src="./images/alipay.png" alt="">
-                            </span>
-                        </div>
-                        <div class="methodsItem" @click="payType=2">
-                            <span :class="['circle ',payType==2?'circleActive ':' ']">
-
-                            </span>
-                            <span>
-                                <img src="./images/wx.png" alt="">
-                            </span>
-                        </div>
                     </div>
+<!--                    <div class="paymethodSelector">-->
+<!--                        <div class="methodsItem" @click="payType=1">-->
+<!--                            <span :class="['circle ',payType==1?'circleActive ':' ']">-->
+
+<!--                            </span>-->
+<!--                            <span>-->
+<!--                                <img src="./images/alipay.png" alt="">-->
+<!--                            </span>-->
+<!--                        </div>-->
+<!--                        <div class="methodsItem" @click="payType=2">-->
+<!--                            <span :class="['circle ',payType==2?'circleActive ':' ']">-->
+
+<!--                            </span>-->
+<!--                            <span>-->
+<!--                                <img src="./images/wx.png" alt="">-->
+<!--                            </span>-->
+<!--                        </div>-->
+<!--                    </div>-->
                 </div>
                 <div class="submit">
                     <p>
@@ -377,7 +379,8 @@ export default {
             // 重新选择支付方式
             if (!this.canSubmit) {
                 this.canSubmit = true;
-                this.cancelOrder();
+                this.payingVisible = false;
+                // this.cancelOrder();
             }
 
             if (this.payType == 2) {

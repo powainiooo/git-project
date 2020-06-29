@@ -73,11 +73,9 @@
          }
       },
       onShow () {
+         this.getData()
          const app = getApp()
          this.needAuth = app.$wepy.$options.globalData.userInfo === null
-         if (!this.needAuth) {
-            this.getData()
-         }
       },
       methods: {
          doSelect (id) {

@@ -117,7 +117,7 @@
                wx.setStorageSync('lastGetCityTime', now)
                wx.setStorageSync('bbaUserInfo', res.data.userInfo)
                wx.reLaunch({
-                  url: '/pages/index?type=index'
+                  url: '/pages/store'
                })
             })
          }

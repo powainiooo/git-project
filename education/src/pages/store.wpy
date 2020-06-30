@@ -92,7 +92,7 @@
             getStoreList().then(res => {
                this.list = res.data
                const item = res.data.find(i => i.select_flag === 1)
-               this.hasSelected = item !== undefined
+               this.hasSelected = item !== undefined && res.data.length > 1
                if (item) {
                   this.selectedId = item.id
                }

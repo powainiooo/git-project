@@ -8,7 +8,7 @@
 .detail-frame .hint-section{ margin: 50rpx 90rpx;}
 
 .detail-frame .title{ font-size: 42rpx; padding-top: 60rpx; margin: 60rpx 90rpx 40rpx 90rpx; border-top: 1rpx solid #e0e0e0; font-weight: bold;}
-.detail-frame .contact-frame{ display: flex; justify-content: space-between; align-items: center; margin: 0 90rpx;}
+.detail-frame .contact-frame{ display: flex; justify-content: space-between; align-items: center; margin: 0 90rpx 90rpx 90rpx;}
 .detail-frame .contact-frame .logo{ width: 200rpx;}
-.detail-frame .contact-frame .btn-phone{ width: 340rpx; color: #ffffff; background-color: #002aac; text-align: center; font-size: 28rpx; padding: 20rpx 0; border-radius: 60rpx; box-shadow: 0 5rpx 20rpx rgba(0,0,0,0.4); transition: transform 0.2s ease-out;}
+.detail-frame .contact-frame .btn-phone{ width: 270rpx; color: #ffffff; background-color: #002aac; text-align: center; font-size: 28rpx; padding: 20rpx 0; border-radius: 60rpx; box-shadow: 0 5rpx 20rpx rgba(0,0,0,0.4); transition: transform 0.2s ease-out;}
 .detail-frame .contact-frame .btn-phone-touch{ transform: scale(0.9,0.9);}

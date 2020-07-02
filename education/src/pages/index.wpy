@@ -84,6 +84,12 @@ wepy.page({
    onLoad (data) {
       this.type = data.type || 'index'
       console.log('index', data)
+   },
+   onShareAppMessage: function () {
+      return {
+         title: 'BBArt艺术创想空间',
+         path: 'pages/index'
+      }
    }
 })
 </script>

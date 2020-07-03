@@ -20,6 +20,10 @@ export default new Vuex.Store({
       setPersonInfo (state, data) {
          state.personalInfo = data
       },
+      setPswTag (state) {
+         state.personalInfo.course_password_flag = 1
+         wx.setStorageSync('bbaUserInfo', state.personalInfo)
+      },
       setStoreID (state, data) {
          state.selectedStore = data
       },

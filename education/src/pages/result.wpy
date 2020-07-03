@@ -75,9 +75,15 @@
                   url: '/pages/student'
                })
             } else if (this.type === 'password') {
-               wx.redirectTo({
-                  url: '/pages/newfile'
-               })
+               if (this.result === 'success') {
+                  wx.redirectTo({
+                     url: '/pages/newfile'
+                  })
+               } else if (this.result === 'fail') {
+                  wx.redirectTo({
+                     url: '/pages/password'
+                  })
+               }
             }
          }
       }

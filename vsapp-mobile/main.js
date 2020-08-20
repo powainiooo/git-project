@@ -1,5 +1,7 @@
 import Vue from 'vue/dist/vue.esm.js'
 import './assets/layout.css'
+// import './assets/swiper-bundle.min.css'
+// import './assets/swiper-bundle.min'
 
 const app = new Vue({
 	el: '#app',
@@ -7,3 +9,5 @@ const app = new Vue({
 		msg: 'this is vue'
 	}
 })
+
+

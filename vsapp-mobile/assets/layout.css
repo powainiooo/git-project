@@ -1,5 +1,43 @@
-* { margin: 0; padding: 0;}
-.container section:nth-child(2n) { background-color: #F3F7FB}
-.banner { height: 700px; overflow: hidden; position: relative; background-color: #236FCD;}
-.banner h3 { font-size: 34px; text-align: center; color: #ffffff; margin: 40px 0 20px 0;}
-.banner div { font-size: 28px; text-align: center; color: #ffffff; line-height: 39px;}
+* { margin: 0; padding: 0; box-sizing: border-box;}
+.container section:nth-child(2n) { background-color: #F3F7FB; overflow: hidden;}
+
+.header { width: 100%; position: fixed; top: 0; left: 0; z-index: 1000;}
+.header .top-line { width: 100%; height: 88px; display: flex; justify-content: space-between; align-items: center; padding: 0 30px; background-color: #06122A;}
+.header .top-line img { width: 50px;}
+.header .top-line .logo { width: 150px;}
+
+.banner { height: 700px; overflow: hidden; position: relative; background-color: #236FCD; margin-top: 88px; text-align: center;}
+.banner h3 { font-size: 34px; color: #ffffff; margin: 40px 0 20px 0;}
+.banner div { font-size: 28px; color: #ffffff; line-height: 39px; margin-bottom: 34px;}
+.banner button { width: 160px; height: 50px; background-color: #ffffff; border-radius: 5px; font-size: 24px; color: #236FCD; border: none;}
+.banner img { width: 540px; position: absolute; bottom: -50px; left: 50%; margin-left: -270px; animation: shake 5s linear infinite;}
+@keyframes shake {
+   0%,100% { transform: scale(1)}
+   50% { transform: scale(1.08)}
+}
+
+.sc-title { font-size: 34px; color: #555555; text-align: center; margin: 60px 0 38px 0; font-weight: bold;}
+.sc-title span { font-size: 24px; color: #666666; font-weight: normal;}
+
+.cando-item { width: 342px; height: 478px; padding: 26px 22px; background-color: #ffffff; box-shadow:0 0 15px 0 rgba(0, 0, 0, 0.1); border-radius:4px; display: flex; flex-direction: column; justify-content: center; align-items: center; margin-bottom: 72px;}
+.cando-item .icon { width: 114px; height: 114px; border-radius: 50%; background-color: #3B7FD2;}
+.cando-item .icon img { width: 100%; height: 100%;}
+.cando-item h3 { font-size: 34px; line-height: 34px; color: #333333; margin: 34px 0 28px 0;}
+.cando-item hr { width: 100%; color: #E5E5E5}
+.cando-item ul { width: 100%; padding: 32px 0 0 32px; list-style: none;}
+.cando-item ul li { font-size: 24px; margin-bottom: 10px; color: #666666;}
+
+.module-list { margin: 0 32px;}
+.module-list li { padding: 40px 0; position: relative; display: flex;}
+.module-list li::after { content: ''; width: 100%; height: 1px; background-color: #F3F3F3; transform: scaleY(0.5); position: absolute; left: 0; bottom: 0;}
+.module-list li:last-child::after { height: 0;}
+.module-list li img { width: 68px; height: 68px; margin-right: 20px;}
+.module-list li div h3 { font-size: 30px; color: #333333; margin-bottom: 12px;}
+.module-list li div p { font-size: 24px; color: #666666; line-height: 38px;}
+
+.company-list { margin: 0 30px; display: flex; flex-wrap: wrap;}
+.company-list a { width: 330px; height: 240px; margin-bottom: 30px; overflow: hidden; border-radius: 8px; background-color: #ffffff;}
+.company-list a:nth-child(2n) { margin-left: 30px;}
+.company-list a img { width: 100%; height: 100%;}
+
+.btn-more { display: block; font-size: 30px; padding: 10px 0; color: #999999; margin-top: 10px; text-align: center; text-decoration: none;}

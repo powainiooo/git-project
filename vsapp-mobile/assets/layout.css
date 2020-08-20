@@ -1,0 +1,5 @@
+* { margin: 0; padding: 0;}
+.container section:nth-child(2n) { background-color: #F3F7FB}
+.banner { height: 700px; overflow: hidden; position: relative; background-color: #236FCD;}
+.banner h3 { font-size: 34px; text-align: center; color: #ffffff; margin: 40px 0 20px 0;}
+.banner div { font-size: 28px; text-align: center; color: #ffffff; line-height: 39px;}

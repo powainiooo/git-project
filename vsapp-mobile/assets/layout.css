@@ -6,6 +6,16 @@
 .header .top-line img { width: 50px;}
 .header .top-line .logo { width: 150px;}
 
+.header nav { width: 34vw; background-color: rgba(0,0,0,.7); position: fixed; top: 98px; border-radius: 8px; transition: all 0.3s ease-out;}
+.header nav ul { list-style: none;}
+.header nav li { border-bottom: 1px solid rgba(255, 255, 255, .2);}
+.header nav li:last-child { border-bottom: none;}
+.header nav li a { display: block;  font-size: 32px; color: #ffffff; text-align: center; padding: 17px 0; text-decoration: none;}
+.header nav.menu { left: -34vw;}
+.header nav.menu-show { left: 10px;}
+.header nav.en { right: -34vw;}
+.header nav.en-show { right: 10px;}
+
 .banner { height: 700px; overflow: hidden; position: relative; background-color: #236FCD; margin-top: 88px; text-align: center;}
 .banner h3 { font-size: 34px; color: #ffffff; margin: 40px 0 20px 0;}
 .banner div { font-size: 28px; color: #ffffff; line-height: 39px; margin-bottom: 34px;}
@@ -19,12 +29,12 @@
 .sc-title { font-size: 34px; color: #555555; text-align: center; margin: 60px 0 38px 0; font-weight: bold;}
 .sc-title span { font-size: 24px; color: #666666; font-weight: normal;}
 
-.cando-item { width: 342px; height: 478px; padding: 26px 22px; background-color: #ffffff; box-shadow:0 0 15px 0 rgba(0, 0, 0, 0.1); border-radius:4px; display: flex; flex-direction: column; justify-content: center; align-items: center; margin-bottom: 72px;}
-.cando-item .icon { width: 114px; height: 114px; border-radius: 50%; background-color: #3B7FD2;}
+.cando-item { width: 342px; height: 500px; padding: 26px 22px; background-color: #ffffff; box-shadow:0 0 15px 0 rgba(0, 0, 0, 0.1); border-radius:4px; display: flex; flex-direction: column; align-items: center; margin:0 10px 72px 10px;}
+.cando-item .icon { width: 114px; height: 114px;}
 .cando-item .icon img { width: 100%; height: 100%;}
-.cando-item h3 { font-size: 34px; line-height: 34px; color: #333333; margin: 34px 0 28px 0;}
+.cando-item h3 { font-size: 34px; line-height: 34px; color: #333333; margin: 30px 0 24px 0;}
 .cando-item hr { width: 100%; color: #E5E5E5}
-.cando-item ul { width: 100%; padding: 32px 0 0 32px; list-style: none;}
+.cando-item ul { width: 100%; padding: 28px 0 0 30px; list-style: none;}
 .cando-item ul li { font-size: 24px; margin-bottom: 10px; color: #666666;}
 
 .module-list { margin: 0 32px;}
@@ -41,3 +51,29 @@
 .company-list a img { width: 100%; height: 100%;}
 
 .btn-more { display: block; font-size: 30px; padding: 10px 0; color: #999999; margin-top: 10px; text-align: center; text-decoration: none;}
+
+.team-frame { width: 100%; height: 533px; background: url('images/team.jpg') no-repeat; background-size: 100%;  background-position: 0 bottom; overflow: hidden;}
+.team-frame .sc-title { color: #ffffff; margin-top: 296px;}
+.team-frame .sc-title span { color: #ffffff;}
+
+.service-frame { width: 538px; height: 1116px; margin: 65px auto 118px auto; background: url('images/service.jpg') no-repeat; background-size: 100%; position: relative;}
+.service-frame li { width: 182px; height: 182px; border-radius: 4px; background-color: #ffffff; display: flex; flex-direction: column; justify-content: center; align-items: center; position: absolute;}
+.service-frame li img { width: 62px; height: 62px; margin-bottom: 14px;}
+.service-frame li p { font-size: 26px; color: #333333;}
+.service-frame li:nth-child(1) { top: 0; left: -46px;}
+.service-frame li:nth-child(2) { top: 160px; right: -30px;}
+.service-frame li:nth-child(3) { top: 320px; left: 0;}
+.service-frame li:nth-child(4) { top: 478px; right: 10px;}
+.service-frame li:nth-child(5) { top: 635px; left: -6px;}
+.service-frame li:nth-child(6) { top: 795px; right: 0;}
+.service-frame li:nth-child(7) { top: 953px; left: -40px;}
+
+.case-list { margin: 0 32px;}
+.case-list>a { display: block; overflow: hidden; border-radius: 8px; box-shadow:0px 0px 20px 0px rgba(0, 0, 0, 0.15); background-color: #ffffff; text-decoration: none; margin-bottom: 44px;}
+.case-list>a img { width: 100%; display: block;}
+.case-list>a h3 { font-size: 36px; color: #333333; margin: 44px 22px;}
+
+.details-container { margin-top: 88px; overflow: hidden;}
+.details-container .sc-title { margin: 30px 0;}
+.details-container .content { margin: 0 30px;}
+.details-container .content img { width: 100%;}

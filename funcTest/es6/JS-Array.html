@@ -311,9 +311,13 @@
 </body>
 </html>
 <script>
-    let arr = [1,2,3,4]
-    arr.forEach(item => {
-    	item += 1
-    })
-console.log(arr)
+let arr = [
+   {count: 12},
+   {count: 12},
+]
+const max = arr.reduce((total, item) => {
+	console.log(total, item)
+   return 0
+})
+console.log(max)
 </script>

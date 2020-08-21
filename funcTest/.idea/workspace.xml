@@ -3,7 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="7f3a3886-6cf3-4499-a59b-af9c22254e9b" name="默认的" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/features/img-srcset-sizes.html" beforeDir="false" afterPath="$PROJECT_DIR$/features/img-srcset-sizes.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/es6/JS-Array.html" beforeDir="false" afterPath="$PROJECT_DIR$/es6/JS-Array.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/es6/es6-proxy.html" beforeDir="false" afterPath="$PROJECT_DIR$/es6/es6-proxy.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,24 +22,10 @@
       <list>
         <option value="Html5" />
         <option value="CSS File" />
-        <option value="JavaScript File" />
         <option value="HTML File" />
+        <option value="JavaScript File" />
       </list>
     </option>
-  </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>animation</find>
-      <find>p3</find>
-      <find>filter</find>
-      <find>fi</find>
-      <find>100</find>
-      <find>//www.w3cplus.com/sites/default/files/blogs/2018/1811</find>
-    </findStrings>
-    <replaceStrings>
-      <replace>270</replace>
-      <replace>images</replace>
-    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -50,30 +37,33 @@
     <auto-save>true</auto-save>
   </component>
   <component name="ProjectId" id="1Yxw21jP64fuV6o7uYDSa2vePS3" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="HbShouldOpenHtmlAsHb" value="" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
-    <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="HbShouldOpenHtmlAsHb" value="" />
     <property name="JavaScriptWeakerCompletionTypeGuess" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\code\git-project\funcTest\images" />
+      <recent name="D:\code\git-project\funcTest\js" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\code\git-project\funcTest\vue\object" />
       <recent name="D:\code\git-project\funcTest\features" />
       <recent name="D:\code\git-project\funcTest\es6" />
       <recent name="D:\code\git-project\funcTest\vue" />
       <recent name="D:\code\git-project\funcTest\css" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\code\git-project\funcTest\images" />
-      <recent name="D:\code\git-project\funcTest\js" />
     </key>
   </component>
   <component name="RunManager">
@@ -100,6 +90,9 @@
       <option name="filePath" />
       <method />
     </configuration>
+    <configuration name="object.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/vue/object/object.js" working-dir="$PROJECT_DIR$/vue">
+      <method v="2" />
+    </configuration>
     <configuration default="true" type="js.build_tools.gulp">
       <node-interpreter>project</node-interpreter>
       <node-options />
@@ -109,6 +102,11 @@
       <pass-parent-envs>true</pass-parent-envs>
       <method v="2" />
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Node.js.object.js" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -192,11 +190,36 @@
       <workItem from="1589255317107" duration="989000" />
       <workItem from="1591148505891" duration="796000" />
       <workItem from="1591154559562" duration="363000" />
+      <workItem from="1596099936996" duration="234000" />
+      <workItem from="1596100185727" duration="2409000" />
+      <workItem from="1596153644394" duration="628000" />
+      <workItem from="1596438000791" duration="3159000" />
+      <workItem from="1596499054692" duration="597000" />
+      <workItem from="1597118365492" duration="110000" />
+      <workItem from="1597733021497" duration="5963000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="1540" height="305" key="GridCell.Tab.0.bottom" timestamp="1597741690260">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1540" height="305" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1600.0.1600.900@0.0.1920.1040" timestamp="1597741690260" />
+    <state width="1540" height="305" key="GridCell.Tab.0.center" timestamp="1597741690260">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1540" height="305" key="GridCell.Tab.0.center/0.0.1920.1040/-1600.0.1600.900@0.0.1920.1040" timestamp="1597741690260" />
+    <state width="1540" height="305" key="GridCell.Tab.0.left" timestamp="1597741690260">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1540" height="305" key="GridCell.Tab.0.left/0.0.1920.1040/-1600.0.1600.900@0.0.1920.1040" timestamp="1597741690260" />
+    <state width="1540" height="305" key="GridCell.Tab.0.right" timestamp="1597741690260">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1540" height="305" key="GridCell.Tab.0.right/0.0.1920.1040/-1600.0.1600.900@0.0.1920.1040" timestamp="1597741690260" />
   </component>
   <component name="masterDetails">
     <states>

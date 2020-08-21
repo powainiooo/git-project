@@ -1,17 +1,21 @@
 const path = require("path")
 const HtmlWebPackPlugin = require('html-webpack-plugin')
+const {CleanWebpackPlugin} = require('clean-webpack-plugin')
+console.log('process.env.NODE_ENV', process.env.NODE_ENV)
 module.exports = {
 	entry: path.resolve(__dirname, "./main.js"),
 	output: {
 		filename: "bundle.js",
 		path: path.resolve(__dirname, "./dist")
 	},
-	devtool: "source-map",
+
+	devtool: process.env.NODE_ENV === "production" ? "eval" : "source-map",
 	devServer: {
 		contentBase: path.resolve(__dirname, "./dist")
 	},
 	plugins: [
-		new HtmlWebPackPlugin({template: "./index.html"})
+		new HtmlWebPackPlugin({template: "./index.html"}),
+		 new CleanWebpackPlugin()
 	],
 	module: {
 		rules: [
@@ -23,7 +27,11 @@ module.exports = {
 				test:/\.(png|svg|jpeg|jpg|gif)$/,
 				use:[
 					{
-						loader:'file-loader'
+						loader:'url-loader',
+						options: {
+							limit: 1000,
+							name: 'img/[name].[hash:7].[ext]'
+						}
 					}
 				]
 			},

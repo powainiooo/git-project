@@ -1,92 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <style>
+   <meta charset="UTF-8">
+   <title>Title</title>
+   <style>
 
-    </style>
+   </style>
 </head>
 <body>
 <h3>1. Proxy 给一个对象的属性操作提供钩子方法</h3>
 <ul>
-    <li>1.get(target, propKey, receiver)</li>
-    <li>2.set(target, propKey, value, receiver)</li>
-    <li>3.has(target, propKey), break propKey in proxy</li>
-    <li>4.deleteProperty(target, propKey),break delete proxy[propKey]</li>
+   <li>1.get(target, propKey, receiver)</li>
+   <li>2.set(target, propKey, value, receiver)</li>
+   <li>3.has(target, propKey), break propKey in proxy</li>
+   <li>4.deleteProperty(target, propKey),break delete proxy[propKey]</li>
 </ul>
 </body>
 </html>
 <script>
-    const dom = new Proxy({},{
-      get(target,key) {
-        return (attrs = {}, ...children) => {
-          const el = document.createElement(key)
-          for (let prop of Object.keys(attrs)) {
-            el.setAttribute(prop, attrs[prop])
-          }
-          for (let child of children) {
-            if (typeof child === 'string') {
-              child = document.createTextNode(child)
-            }
-            el.appendChild(child)
-          }
-          return el
-        }
-      },
-      set(target, key, value) {
-        if(key === 'age') {
-          if (!Number.isInteger(value)) {
-            throw new TypeError('The age is not an Ineger')
-          }
-          if (value > 200) {
-            throw new TypeError('The age seems invalid')
-          }
-        }
-        target[key] = value
-      }
-    })
-    const el = dom.div({},
-        'Hello, my name is',
-        dom.a({href:'http://www.baidu.com'}, 'mark'),
-        '. I like:',
-        dom.ul({},
-            dom.li({}, 'The web1'),
-            dom.li({}, 'The web2'),
-            dom.li({}, 'The web3')
-        )
-    )
-    document.body.appendChild(el)
+const dom = new Proxy({},{
+	get(target,key) {
+		return (attrs = {}, ...children) => {
+			const el = document.createElement(key)
+			for (let prop of Object.keys(attrs)) {
+				el.setAttribute(prop, attrs[prop])
+			}
+			for (let child of children) {
+				if (typeof child === 'string') {
+					child = document.createTextNode(child)
+				}
+				el.appendChild(child)
+			}
+			return el
+		}
+	},
+	set(target, key, value) {
+		if(key === 'age') {
+			if (!Number.isInteger(value)) {
+				throw new TypeError('The age is not an Ineger')
+			}
+			if (value > 200) {
+				throw new TypeError('The age seems invalid')
+			}
+		}
+		target[key] = value
+	}
+})
+const el = dom.div({},
+	 'Hello, my name is',
+	 dom.a({href:'http://www.baidu.com'}, 'mark'),
+	 '. I like:',
+	 dom.ul({},
+		  dom.li({}, 'The web1'),
+		  dom.li({}, 'The web2'),
+		  dom.li({}, 'The web3')
+	 )
+)
+document.body.appendChild(el)
 
-    const proxy = new Proxy({}, {
-      set (obj, key, val, receiver) {
-        console.log('set')
-        obj[key] = receiver
-      }
-    })
-    const  myobj = {aa: '123'}
-    Object.setPrototypeOf(myobj, proxy)
-    myobj.aa = '231'
-    myobj.foo = 123
-    console.log(myobj.aa === myobj)
-    console.log(myobj.foo === myobj)
-    console.log(myobj)
+const proxy = new Proxy({}, {
+	set (obj, key, val, receiver) {
+		console.log('set')
+		obj[key] = receiver
+	}
+})
+const  myobj = {aa: '123'}
+Object.setPrototypeOf(myobj, proxy)
+myobj.aa = '231'
+myobj.foo = 123
+console.log(myobj.aa === myobj)
+console.log(myobj.foo === myobj)
+console.log(myobj)
 </script>
 <script>
-    console.log('------------------------')
-    var target = function () {
-      return 'I am the target'
-    }
-    var p = new Proxy({
-      abc:'123',
-      show(){
-        return 'I am the target'
-      }
-    }, {
-      apply() {
-        return 'I am the proxy'
-      }
-    })
-    console.log(p.abc)
-    console.log(p.show())
+console.log('------------------------')
+const obj = {
+	name: '1',
+	move () {
+		console.log('move')
+	}
+}
+var obj2 = new Proxy(obj, {
+	get (target, propKey, receiver) {
+		console.log('getting', target, propKey, receiver)
+		return Reflect.get(target, propKey, receiver)
+	},
+	set (target, propKey, receiver) {
+		console.log('setting', target, propKey, receiver)
+		return Reflect.set(target, propKey, receiver)
+	}
+})
+obj.name = '2'
+console.log(obj.name)
+console.log(typeof obj2)
 </script>

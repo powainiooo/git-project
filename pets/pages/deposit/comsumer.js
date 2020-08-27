@@ -75,12 +75,5 @@ Page({
 	   if (this.data.isLoadOver) return
 	   this.data.page += 1
 	   this.getData()
-   },
-
-   /**
-    * 用户点击右上角分享
-    */
-   onShareAppMessage: function () {
-
    }
 })

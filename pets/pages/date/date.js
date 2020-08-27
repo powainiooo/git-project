@@ -214,13 +214,6 @@ Page({
      */
     onReachBottom: function () {
 
-    },
-
-    /**
-     * 用户点击右上角分享
-     */
-    onShareAppMessage: function () {
-
     }
 })
 function is_leap(year) {  //判断是否为闰年

@@ -7,6 +7,7 @@ import './assets/layout.css'
 var swiper = new Swiper('.swiper-container', {
 	slidesPerView: "auto",
 	centeredSlides : true,
+	loop: true
 });
 
 // 菜单

@@ -1,0 +1,18 @@
+{
+  "pages": [
+    "pages/blessing/main",
+    "pages/goodsDetail/main",
+    "pages/goods/main",
+    "pages/agreement/main",
+    "pages/register/main",
+    "pages/ad/main",
+    "pages/index/main",
+    "pages/logs/main"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black"
+  }
+}

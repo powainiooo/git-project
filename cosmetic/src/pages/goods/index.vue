@@ -29,7 +29,7 @@ page { background-color: rgb(248, 248, 248)}
       </ul>
 
       <div class="goods-list">
-         <c-goods-item v-for="i in 5"/>
+         <c-goods-item v-for="i in 5" :key="i"/>
       </div>
    </div>
 

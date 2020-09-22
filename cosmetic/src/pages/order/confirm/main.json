@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "确认订单信息",
+   "usingComponents": {
+      "van-switch": "../../../static/vant/switch/index"
+   }
+}

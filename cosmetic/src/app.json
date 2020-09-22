@@ -1,5 +1,11 @@
 {
   "pages": [
+    "pages/point/main",
+    "pages/order/list/main",
+    "pages/personal/main",
+    "pages/order/success/main",
+    "pages/order/pay/main",
+    "pages/order/confirm/main",
     "pages/shoppingCart/main",
     "pages/blessing/main",
     "pages/goodsDetail/main",

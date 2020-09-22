@@ -40,4 +40,6 @@ export default {
 .goods-list .c-goods-item:nth-child(2n) { margin-left: 30px;}
 
 .load-over { font-size: 20px; color: #666666; text-align: center; margin: 30px 0 40px 0;}
+
+.link-arrow:after { content: ''; width: 14px; height: 24px; background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAYCAMAAAD9GTxlAAAAbFBMVEUAAAB4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHhrgHjoAAAAI3RSTlMA3Zr34wrNhl8vJhYQBAHz7dW+saSReGxmSDkeGtLDt1hQK4Rh8QoAAACESURBVBjTVc9HFoQgEEVREAwIZm1D537732OPkLJm91T4p9RvzZWogqEWLKH7ClcGlibZaRh9cniDPZLbG5hNHNh7mEVi/YTinpzPYB9iYYVMUGXYK7VMk8NhAu3PoAFe5+FPB1n8oynBVLHlR9Au6rAwhajNQNlGLdDvKV1fHlGuyoX+EpQJ3YRJEnIAAAAASUVORK5CYII=) no-repeat; background-size: 100%; position: absolute; top: 50%; right: 26px; transform: translateY(-50%);}
 </style>

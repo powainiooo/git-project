@@ -9,8 +9,8 @@
 <template>
 <div style="position: relative;">
    <swiper class="c-banner" autoplay @change="bannerChange">
-      <swiper-item v-for="(item, index) in list" :key="index">
-         <img src="/static/images/index/img1.png" class="c-banner-img" mode="widthFix" />
+      <swiper-item v-for="(item, index) in list" :key="index" @click="toDetail(item.link)">
+         <img :src="imgSrc + item.img" class="c-banner-img" mode="widthFix" />
       </swiper-item>
    </swiper>
    <ul class="c-banner-dots">
@@ -21,6 +21,7 @@
 </template>
 
 <script type='es6'>
+import store from '../store'
 export default {
 	name: 'app',
    props: {
@@ -31,9 +32,20 @@ export default {
 		   activeIndex: 0
       }
 	},
+   computed: {
+      imgSrc () {
+         return store.state.imgSrc
+      }
+   },
 	methods: {
       bannerChange (e) {
          this.activeIndex = e.mp.detail.current
+      },
+      toDetail (id) {
+         if (id === '') return
+         mpvue.navigateTo({
+            url: `/pages/goodsDetail/main?id=${id}`
+         })
       }
    }
 }

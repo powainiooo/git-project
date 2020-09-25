@@ -21,25 +21,30 @@ h3.title { font-size: 40px; color: #333333; font-weight: bold; text-align: cente
    <c-goods-swiper :list="goodsListMX" />
 
    <h2 class="title">品牌介绍</h2>
-   <img src="/static/images/index/img4.png" mode="widthFix" class="img_block"/>
+   <img :src="imgSrc + item.img"
+        mode="widthFix"
+        class="img_block"
+        v-for="item in ppjs"
+        :key="index"
+        @click="toDetail(item.link)"/>
 
    <h2 class="title">购买获积分</h2>
    <h3 class="title">积分可抵扣消费</h3>
    <ul class="integral-list">
-      <li>1、每<span>100</span>积分可抵扣1元</li>
-      <li>2、每消费<span>100</span>元可获得1积分</li>
-      <li>3、积分抵扣订单金额比例上限为<span>100</span>%</li>
+      <li>1、{{jfData.jfdk}}</li>
+      <li>2、{{jfData.gmhd}}</li>
+      <li>3、{{jfData.dksx}}</li>
    </ul>
-   <img src="/static/images/index/img2.png" mode="widthFix" class="img_block"/>
+   <img v-if="bottomAd.val !== '0'" :src="imgSrc + bottomAd.val" mode="widthFix" class="img_block"/>
 
-   <h2 class="title">会员权益</h2>
-   <h3 class="title">加入XXXX会员</h3>
-   <img src="/static/images/index/img2.png" mode="widthFix" class="img_block"/>
-   <div class="btns"><a href="#" class="btn-round">立即注册</a></div>
+   <h2 v-if="hyqy.val !== '0'" class="title">会员权益</h2>
+<!--   <h3 class="title">加入XXXX会员</h3>-->
+   <img v-if="hyqy.val !== '0'" :src="imgSrc + hyqy.val" mode="widthFix" class="img_block"/>
+   <div class="btns"><a href="/pages/register/main?source=index" class="btn-round">立即注册</a></div>
 
    <div class="ad-frame" v-if="showAd">
-      <img src="/static/images/index/img5.png" mode="widthFix" class="img"/>
-      <img src="/static/images/index/guanbi@2x.png" mode="widthFix" class="close"/>
+      <img :src="imgSrc + adData.tc" mode="widthFix" class="img" @click="toAdDetail"/>
+      <img src="/static/images/index/guanbi@2x.png" mode="widthFix" class="close" @click="doCloseAd"/>
    </div>
 
    <c-footer-nav />
@@ -50,22 +55,65 @@ h3.title { font-size: 40px; color: #333333; font-weight: bold; text-align: cente
 import cBanner from '@/components/banner'
 import cGoodsSwiper from '@/components/goodsSwiper'
 import cFooterNav from '@/components/footerNav'
+import { getAction } from '@/utils/api'
 
 export default {
    components: { cBanner, cGoodsSwiper, cFooterNav },
    data () {
       return {
+         imgSrc: mpvue.imgSrc,
          showAd: false,
-         bannerData: [{}, {}, {}],
-         goodsListMX: [{}, {}, {}]
+         adData: {},
+         bannerData: [],
+         goodsListMX: [],
+         ppjs: [],
+         jfData: {},
+         bottomAd: {},
+         hyqy: {}
+      }
+   },
+   methods: {
+      getData () {
+         getAction('index').then(res => {
+            console.log(res)
+            this.bannerData = res.data.get_first_page_banner
+            this.goodsListMX = res.data.get_first_page_mx_goods
+            this.ppjs = res.data.get_first_page_ppjs
+            this.jfData = res.data.get_first_page_jf
+            this.bottomAd = res.data.get_first_page_bottom_image
+            this.hyqy = res.data.get_first_page_hyqy_image
+            this.adData = res.data.get_ads_tc
+            let adTime = mpvue.getStorageSync('lastShowAdTime')
+            if (adTime === '' || adTime === null) {
+               adTime = 0
+            }
+            const now = new Date().getTime()
+            if (this.adData.tc !== '' && now > adTime + 24 * 60 * 60 * 1000) {
+               this.showAd = true
+            }
+         })
+      },
+      toDetail (id) {
+         if (id === '') return
+         mpvue.navigateTo({
+            url: `/pages/goodsDetail/main?id=${id}`
+         })
+      },
+      doCloseAd () {
+         this.showAd = false
+         const now = new Date().getTime()
+         mpvue.setStorageSync('lastShowAdTime', now)
+      },
+      toAdDetail () {
+         mpvue.navigateTo({
+            url: `/pages/ad/main`
+         })
       }
    },
 
-   methods: {
-   },
-
-   created () {
+   onLoad () {
       // let app = getApp()
+      this.getData()
    }
 }
 </script>

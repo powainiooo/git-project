@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "会员注册"
+  "navigationBarTitleText": "会员注册",
+   "usingComponents": {
+      "van-checkbox": "../../../static/vant/checkbox/index"
+   }
 }

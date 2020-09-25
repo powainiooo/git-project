@@ -18,6 +18,21 @@ export function formatTime (date) {
   return `${t1} ${t2}`
 }
 
+export const promisify = api => {
+   return (options, ...params) => {
+      return new Promise((resolve, reject) => {
+         const extras = {
+            success: resolve,
+            fail (err) {
+               console.log(err)
+               reject(err)
+            }
+         }
+         api({...options, ...extras}, ...params)
+      })
+   }
+}
+
 export default {
   formatNumber,
   formatTime

@@ -100,7 +100,8 @@ export default {
    methods: {
    },
 
-   created () {
+   onLoad (options) {
+      console.log(options)
       // let app = getApp()
    }
 }

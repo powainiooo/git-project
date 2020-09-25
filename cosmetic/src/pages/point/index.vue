@@ -29,7 +29,7 @@ page { background-color: rgb(248, 248, 248)}
       </div>
    </div>
    <ul class="tabs">
-      <li v-for="item in tabsList" :class="{active: currentTab === item.key}">{{item.name}}</li>
+      <li v-for="item in tabsList" :class="{active: currentTab === item.key}" :key="item">{{item.name}}</li>
    </ul>
    <div class="list-item">
       <div class="left">

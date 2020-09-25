@@ -1,4 +1,12 @@
 <script>
+import config from '@/config'
+import store from '@/store'
+import { promisify } from '@/utils'
+import { doLogin } from '@/utils/api'
+const { tokenKey } = config
+const login = promisify(mpvue.login)
+const getSetting = promisify(mpvue.getSetting)
+const getUserInfo = promisify(mpvue.getUserInfo)
 export default {
    created () {
       // 调用API从本地缓存中获取数据
@@ -10,22 +18,57 @@ export default {
        * 支付宝(蚂蚁)：mpvue === my, mpvuePlatform === 'my'
        */
       console.log('app created')
-      let logs
-      if (mpvuePlatform === 'my') {
-         logs = mpvue.getStorageSync({key: 'logs'}).data || []
-         logs.unshift(Date.now())
-         mpvue.setStorageSync({
-            key: 'logs',
-            data: logs
-         })
-      } else {
-         logs = mpvue.getStorageSync('logs') || []
-         logs.unshift(Date.now())
-         mpvue.setStorageSync('logs', logs)
-      }
+      // let logs
+      // if (mpvuePlatform === 'my') {
+      //    logs = mpvue.getStorageSync({key: 'logs'}).data || []
+      //    logs.unshift(Date.now())
+      //    mpvue.setStorageSync({
+      //       key: 'logs',
+      //       data: logs
+      //    })
+      // } else {
+      //    logs = mpvue.getStorageSync('logs') || []
+      //    logs.unshift(Date.now())
+      //    mpvue.setStorageSync('logs', logs)
+      // }
+      mpvue.imgSrc = store.state.imgSrc
+      console.log('onlogin1')
+      this.onlogin()
    },
    log () {
       console.log(`log at:${Date.now()}`)
+   },
+   methods: {
+      async onlogin () {
+         console.log('onlogin2')
+         let lastGetCityTime = mpvue.getStorageSync('lastGetCityTime')
+         if (lastGetCityTime === '' || lastGetCityTime === null) {
+            lastGetCityTime = 0
+         }
+         const now = new Date().getTime()
+         const loginKey = mpvue.getStorageSync(tokenKey)
+         if (loginKey === '' || loginKey === null || now > lastGetCityTime + 24 * 60 * 60 * 1000) {
+            const resLogin = await login()
+            console.log('resLogin', resLogin)
+            const resDoLogin = await doLogin({
+               code: resLogin.code
+            })
+            console.log('resDoLogin', resDoLogin)
+            if (resDoLogin.ret === 0) {
+               store.commit('SET_LOGIN_KEY', resDoLogin.data.login_key)
+               mpvue.setStorageSync('lastGetCityTime', now)
+            }
+         } else {
+            store.commit('SET_LOGIN_KEY', loginKey)
+         }
+         const resSetting = await getSetting()
+         console.log('resSetting', resSetting)
+         if (resSetting.authSetting['scope.userInfo']) {
+            const resUserInfo = await getUserInfo()
+            console.log('resUserInfo', resUserInfo)
+            store.commit('SET_PERSONINFO', resUserInfo.userInfo)
+         }
+      }
    }
 }
 </script>

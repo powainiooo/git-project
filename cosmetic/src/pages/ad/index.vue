@@ -7,23 +7,23 @@
 
 <template>
 <div >
-   <img src="/static/images/ad/img1.png" mode="widthFix" class="img_block"/>
+   <img :src="imgSrc + detailData.image" mode="widthFix" class="img_block"/>
 
    <ul class="tabs">
       <li :class="{active: tabKey === '1'}" @click="tabKey = '1'">新友入门</li>
       <li :class="{active: tabKey === '2'}" @click="tabKey = '2'">进阶指南</li>
    </ul>
 
-   <div v-if="tabKey === '1'">
-      <img src="/static/images/ad/img2.png" mode="widthFix" class="img_block" style="margin-bottom: 30rpx;"/>
-      <c-goods-swiper :list="goodsListMX" height="750rpx" showBtns/>
-      <img src="/static/images/ad/img3.png" mode="widthFix" class="img_block" style="margin-bottom: 60rpx;"/>
+   <div v-show="tabKey === '1'">
+      <img :src="imgSrc + detailData.xy_1" mode="widthFix" class="img_block" style="margin-bottom: 30rpx;"/>
+      <c-goods-swiper :list="detailData.xy_goods" height="750rpx" showBtns/>
+      <img :src="imgSrc + detailData.xy_2" mode="widthFix" class="img_block" style="margin-bottom: 60rpx;"/>
    </div>
 
-   <div v-if="tabKey === '2'">
-      <img src="/static/images/ad/img4.png" mode="widthFix" class="img_block" style="margin-bottom: 30rpx;"/>
-      <c-goods-swiper :list="goodsListMX" height="750rpx" showBtns/>
-      <img src="/static/images/ad/img5.png" mode="widthFix" class="img_block"/>
+   <div v-show="tabKey === '2'">
+      <img :src="imgSrc + detailData.zn_1" mode="widthFix" class="img_block" style="margin-bottom: 30rpx;"/>
+      <c-goods-swiper :list="detailData.zn_goods" height="750rpx" showBtns/>
+      <img :src="imgSrc + detailData.zn_2" mode="widthFix" class="img_block"/>
    </div>
 
 </div>
@@ -31,21 +31,32 @@
 
 <script>
 import cGoodsSwiper from '@/components/goodsSwiper'
+import { getAction } from '@/utils/api'
 
 export default {
    components: { cGoodsSwiper },
    data () {
       return {
+         imgSrc: mpvue.imgSrc,
          tabKey: '1',
-         goodsListMX: [{}, {}, {}]
+         detailData: {},
+         goodsListMX: []
       }
    },
 
    methods: {
+      getData () {
+         getAction('ads_info').then(res => {
+            console.log(res)
+            this.detailData = res.data
+            this.goodsListMX = [this.detailData.xy_goods[0]]
+         })
+      }
    },
 
-   created () {
+   onLoad () {
       // let app = getApp()
+      this.getData()
    }
 }
 </script>

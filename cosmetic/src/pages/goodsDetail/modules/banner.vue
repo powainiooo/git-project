@@ -10,7 +10,7 @@
 <div style="position: relative;">
    <swiper class="c-banner" autoplay @change="bannerChange">
       <swiper-item v-for="(item, index) in list" :key="index">
-         <img src="/static/images/goods/img2.png" class="c-banner-img" />
+         <img :src="imgSrc + item" class="c-banner-img" />
       </swiper-item>
    </swiper>
    <ul class="c-banner-dots">
@@ -28,6 +28,7 @@ export default {
    },
 	data() {
 		return {
+         imgSrc: mpvue.imgSrc,
 		   activeIndex: 0
       }
 	},

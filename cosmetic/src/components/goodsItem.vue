@@ -6,19 +6,30 @@
 </style>
 
 <template>
-<div class="c-goods-item">
-   <img src="/static/images/goods/img.png" mode="widthFix" class="c-goods-item-img"/>
-   <h3 class="c-goods-item-name">护肤品套装水乳护肤套</h3>
-   <div class="c-goods-item-price">￥2919.99</div>
+<div class="c-goods-item" @click="toDetail">
+   <img :src="imgSrc + itemData.cover" mode="aspectFill" class="c-goods-item-img"/>
+   <h3 class="c-goods-item-name">{{itemData.goods_name}}</h3>
+   <div class="c-goods-item-price">￥{{itemData.min_price === itemData.max_price ? (itemData.min_price / 100) : (itemData.min_price / 100) + '~' + (itemData.max_price / 100)}}</div>
 </div>
 </template>
 
 <script type='es6'>
 export default {
 	name: 'app',
+   props: {
+	   itemData: Object
+   },
 	data() {
-		return {}
+		return {
+         imgSrc: mpvue.imgSrc
+      }
 	},
-	methods: {}
+	methods: {
+      toDetail () {
+         mpvue.navigateTo({
+            url: `/pages/goodsDetail/main?id=${this.itemData.id}`
+         })
+      }
+   }
 }
 </script>

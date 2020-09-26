@@ -17,21 +17,21 @@
 
 <template>
 <div class="c-cart-item">
-   <van-checkbox shape="square" :name="itemData.id" checked-color="#333333" icon-size="26rpx" class="c-cart-item-cb" />
-   <img src="/static/images/index/img3.png" mode="aspectFit" class="c-cart-item-img"/>
+   <van-checkbox shape="square" :name="itemData.id" checked-color="#333333" icon-size="26rpx" class="c-cart-item-cb"/>
+   <img :src="imgSrc + itemData.cover" mode="aspectFit" class="c-cart-item-img"/>
    <div class="c-cart-item-infos">
       <div>
-         <h3 class="c-cart-item-title">护肤品套装水乳护肤套装</h3>
+         <h3 class="c-cart-item-title">{{itemData.goods_name}}</h3>
          <ul class="c-cart-item-tag">
-            <li>500ml</li>
+            <li>{{itemData.attr_name}}-{{nums}}</li>
          </ul>
       </div>
       <div class="c-cart-item-bottom">
-         <h3 class="c-cart-item-price">￥299.99</h3>
+         <h3 class="c-cart-item-price">￥{{itemData.price / 100}}</h3>
          <ul class="c-cart-item-nums">
-            <li class="c-cart-item-nums-btn">-</li>
-            <li class="c-cart-item-nums-val">1</li>
-            <li class="c-cart-item-nums-btn">+</li>
+            <li class="c-cart-item-nums-btn" @click="changeNum('reduce')">-</li>
+            <li class="c-cart-item-nums-val">{{buyNum}}</li>
+            <li class="c-cart-item-nums-btn" @click="changeNum('add')">+</li>
          </ul>
       </div>
    </div>
@@ -39,22 +39,32 @@
 </template>
 
 <script type='es6'>
+import { postAction } from '@/utils/api'
 export default {
    name: 'app',
    props: {
       itemData: {
          type: Object,
          default: () => {}
-      }
+      },
+      buyNum: String
    },
    data () {
       return {
+         imgSrc: mpvue.imgSrc,
          check: false
       }
    },
    methods: {
-      change (e) {
-         this.check = e.mp.detail
+      changeNum (op) {
+         postAction('cart_nums_update', {
+            id: this.itemData.id,
+            op
+         }).then(res => {
+            if (res.ret === 0) {
+               this.$emit('update:buyNum', res.data)
+            }
+         })
       }
    }
 }

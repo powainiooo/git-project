@@ -20,7 +20,7 @@
 <template>
 <div style="padding-bottom: 130rpx">
    <div class="banner">
-      <img src="/static/images/personal/banner.png" />
+      <img :src="imgSrc + banner" v-if="banner !== ''" />
 
       <ul class="nav">
          <li>
@@ -38,9 +38,9 @@
       </ul>
 
       <div class="person">
-         <h3>小怪兽123</h3>
-         <p>积分：1000</p>
-         <img src="/static/images/personal/avatar.png" />
+         <h3>{{userInfo.name}}</h3>
+         <p>积分：{{userInfo.score}}</p>
+         <img :src="userInfo.headimg" />
       </div>
    </div>
 
@@ -77,18 +77,32 @@
 
 <script>
 import cFooterNav from '@/components/footerNav'
+import { postAction } from '@/utils/api'
+import store from '../../store'
 
 export default {
    components: { cFooterNav },
    data () {
       return {
+         imgSrc: mpvue.imgSrc,
+         banner: '',
+         userInfo: {}
       }
    },
 
    methods: {
+      getData () {
+         postAction('get_preson_info').then(res => {
+            this.banner = res.data.get_person_bg_img.val
+            store.commit('SET_HHQY', res.data.get_hhqy)
+            store.commit('SET_THHZC', res.data.get_thhzc)
+            this.userInfo = res.data.user_info
+         })
+      }
    },
 
-   created () {
+   onLoad () {
+      this.getData()
       // let app = getApp()
    }
 }

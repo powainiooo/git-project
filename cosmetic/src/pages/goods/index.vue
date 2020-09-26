@@ -1,7 +1,7 @@
 <style>
 page { background-color: rgb(248, 248, 248)}
 .type-tab { width: 100%; height: 220px; background-color: #ffffff; display: flex; justify-content: space-around; align-items: center; margin-bottom: 30px;}
-.type-tab li div { width: 90px; height: 90px; border-radius: 50%; border: 1px solid #666666; margin-bottom: 14px;}
+.type-tab li div { width: 90px; height: 90px; border-radius: 50%; border: 1px solid #666666; margin-bottom: 14px; overflow: hidden;}
 .type-tab li.active div { border-color: #333333; background-color: #333333;}
 .type-tab li div img { width: 100%; height: 100%; }
 .type-tab li p { font-size: 26px; color: #666666; text-align: center;}
@@ -18,22 +18,22 @@ page { background-color: rgb(248, 248, 248)}
 <template>
 <div style="padding-bottom: 130rpx">
    <ul class="type-tab">
-      <li v-for="(item, index) in typeList" :key="index" :class="{active: firstType === item.key}">
-         <div><img :src="item.src + (firstType === item.key ? '-active' : '') + '.png'" mode="aspectFit"/></div>
-         <p>{{item.name}}</p>
+      <li v-for="(item, index) in typeList" :key="index" :class="{active: firstType === item.id}" @click="firstChange(item.id)">
+         <div><img :src="imgSrc + item.cover" mode="aspectFit"/></div>
+         <p>{{item.cname}}</p>
       </li>
    </ul>
    <div style="background-color: #ffffff; overflow: hidden;">
-      <ul class="second-tabs">
-         <li v-for="(item, index) in secondList" :key="index" :class="{active: secondType === item.id}">{{item.cname}}</li>
+      <ul class="second-tabs" v-if="secondList.length !== 0">
+         <li v-for="(item, index) in secondList" :key="index" :class="{active: secondType === item.id}" @click="secondChange(item.id)">{{item.cname}}</li>
       </ul>
 
       <div class="goods-list">
-         <c-goods-item v-for="i in 5" :key="i"/>
+         <c-goods-item v-for="i in goodsList" :key="id" :itemData="i"/>
       </div>
    </div>
 
-   <div class="load-over">- 没有更多商品 -</div>
+   <div class="load-over" v-if="isLoadAll">- 没有更多商品 -</div>
 
    <c-footer-nav active="goods"/>
 </div>
@@ -42,32 +42,69 @@ page { background-color: rgb(248, 248, 248)}
 <script>
 import cGoodsItem from '@/components/goodsItem'
 import cFooterNav from '@/components/footerNav'
+import { getAction } from '@/utils/api'
 
 export default {
    components: { cGoodsItem, cFooterNav },
    data () {
       return {
-         firstType: '1',
-         typeList: [
-            { name: '护 肤', src: '/static/images/goods/icon1', key: '1' },
-            { name: '彩 妆', src: '/static/images/goods/icon2', key: '2' },
-            { name: '美妆工具', src: '/static/images/goods/icon3', key: '3' },
-            { name: '套 装', src: '/static/images/goods/icon4', key: '4' }
-         ],
-         secondType: '1',
-         secondList: [
-            { cname: '面膜', id: '1' },
-            { cname: '卸妆', id: '2' },
-            { cname: '精华', id: '3' }
-         ]
+         imgSrc: mpvue.imgSrc,
+         firstType: '',
+         typeList: [],
+         secondType: '',
+         secondList: [],
+         page: 1,
+         goodsList: [],
+         totals: 0,
+         isLoadAll: false
+      }
+   },
+   methods: {
+      getTypeData () {
+         getAction('get_jpsp_page').then(res => {
+            this.typeList = res.data.cate_list
+            this.firstType = this.typeList[0].id
+            this.secondList = this.typeList[0].sub
+            this.secondType = this.secondList[0].id
+            this.getData()
+         })
+      },
+      getData () {
+         getAction('sub_list', {
+            page: this.page,
+            second_id: this.secondType
+         }).then(res => {
+            this.totals = parseInt(res.data.nums)
+            this.goodsList = this.goodsList.concat(res.data.list)
+            this.isLoadAll = this.totals === this.goodsList.length
+         })
+      },
+      firstChange (id) {
+         this.firstType = id
+         const item = this.typeList.find(i => i.id === id)
+         this.secondList = item.sub
+         this.secondType = this.secondList[0].id
+         this.page = 1
+         this.goodsList = []
+         this.getData()
+      },
+      secondChange (id) {
+         this.secondType = id
+         this.page = 1
+         this.goodsList = []
+         this.getData()
       }
    },
 
-   methods: {
-   },
-
-   created () {
+   onLoad () {
+      this.getTypeData()
       // let app = getApp()
+   },
+   onReachBottom () {
+      if (!this.isLoadAll) {
+         this.page += 1
+         this.getData()
+      }
    }
 }
 </script>

@@ -1,6 +1,7 @@
 <style>
 
 h2.title { font-size: 40px; color: #333333; font-weight: bold; line-height: 50px; margin: 20px 30px 30px 30px;}
+h3.title { font-size: 28px; color: #656565; text-align: center; margin: 40px 0 30px 0;}
 
 .line2 { display: flex; justify-content: space-between; align-items: center; margin: 0 40px 0 30px;}
 .line2 .price { font-size: 54px; color: #D1A158; font-weight: bold;}
@@ -34,11 +35,11 @@ h2.title { font-size: 40px; color: #333333; font-weight: bold; line-height: 50px
 <div style="padding-bottom: 130rpx">
    <c-banner :list="bannerData"/>
 
-   <h2 class="title">HFP低聚糖保湿乳液 夏季清爽不油腻水乳滋润补水面霜护肤品</h2>
+   <h2 class="title">{{goodsInfo.goods_name}}</h2>
 
    <div class="line2">
-      <div class="price"><span>￥</span>169.00</div>
-      <div class="jifen">（购买可得29积分）</div>
+      <div class="price"><span>￥</span>{{goodsInfo.min_price === goodsInfo.max_price ? (goodsInfo.min_price / 100) : (goodsInfo.min_price / 100) + '~' + (goodsInfo.max_price / 100)}}</div>
+      <div class="jifen">（购买可得{{jf}}积分）</div>
       <a href="javascript:;" class="btn-share">
          <img src="/static/images/goods/icon-share.png" />
          <p>分享</p>
@@ -48,8 +49,7 @@ h2.title { font-size: 40px; color: #333333; font-weight: bold; line-height: 50px
    <div class="type-list">
       <h3>请选择规格</h3>
       <ul>
-         <li>清爽卸妆油</li>
-         <li>清爽卸妆油</li>
+         <li v-for="item in ggList" :key="attr_id" @click="selectTypes(item)">{{item.attr_name}}</li>
       </ul>
    </div>
 
@@ -69,18 +69,25 @@ h2.title { font-size: 40px; color: #333333; font-weight: bold; line-height: 50px
 
    <img src="/static/images/goods/img2.png" mode="widthFix" class="img_block"/>
 
+   <div style="background-color: #ffffff; overflow: hidden;">
+      <h3 class="title">猜你喜欢</h3>
+      <div class="goods-list">
+         <c-goods-item v-for="i in goodsList" :key="id" :itemData="i"/>
+      </div>
+   </div>
+
    <div class="footer-nav">
       <div class="btn1">
          <button>
             <img src="/static/images/goods/icon-cart.png" />
-            <span>88</span>
+            <span>{{cartNums}}</span>
          </button>
          <button>
             <img src="/static/images/goods/icon-message.png" />
          </button>
       </div>
-      <button class="btn2">祝福卡</button>
-      <button class="btn3">加入购物车</button>
+      <button class="btn2" @click="toCard">祝福卡</button>
+      <button class="btn3" @click="addCart">加入购物车</button>
       <button class="btn4">立即购买</button>
    </div>
 </div>
@@ -88,20 +95,68 @@ h2.title { font-size: 40px; color: #333333; font-weight: bold; line-height: 50px
 
 <script>
 import cBanner from './modules/banner'
+import cGoodsItem from '@/components/goodsItem'
+import { postAction } from '@/utils/api'
 
 export default {
-   components: { cBanner },
+   components: { cBanner, cGoodsItem },
    data () {
       return {
-         bannerData: [{}, {}, {}]
+         imgSrc: mpvue.imgSrc,
+         id: 0,
+         attrId: '929',
+         bannerData: [],
+         goodsInfo: {},
+         ggList: {},
+         goodsList: [],
+         cartNums: 0,
+         jf: 0,
+         isAjax: false
       }
    },
 
    methods: {
+      getData (id) {
+         postAction('get_goods_details', {
+            goods_id: id
+         }).then(res => {
+            this.goodsInfo = res.data.goods_info
+            this.bannerData = res.data.goods_info.goods_img.split('|')
+            this.ggList = res.data.gg_list
+            this.goodsList = res.data.xg_goods_list
+            this.jf = res.data.jf
+            this.cartNums = res.data.cart_nums
+         })
+      },
+      selectTypes (data) {},
+      toCard () {
+         mpvue.navigateTo({
+            url: `/pages/blessing/main`
+         })
+      },
+      addCart () {
+         if (this.isAjax) return false
+         this.isAjax = true
+         postAction('cart_add', {
+            id: this.id,
+            attr_id: this.attrId,
+            buy_num: 1
+         }).then(res => {
+            this.isAjax = false
+            if (res.ret === 0) {
+               mpvue.showToast({ title: '添加成功！' })
+               this.cartNums = res.data.nums
+            } else {
+               mpvue.showToast({ title: res.msg, icon: 'none' })
+            }
+         })
+      }
    },
 
    onLoad (options) {
-      console.log(options)
+      const id = options.id || '296'
+      this.id = id
+      this.getData(id)
       // let app = getApp()
    }
 }

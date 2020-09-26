@@ -41,8 +41,7 @@ h3.title { font-size: 28px; color: #656565; text-align: center; margin: 40px 0 3
    <div style="background-color: #ffffff; overflow: hidden;">
       <h3 class="title">猜你喜欢</h3>
       <div class="goods-list">
-         <c-goods-item/>
-         <c-goods-item/>
+         <c-goods-item v-for="i in goodsList" :key="id" :itemData="i"/>
       </div>
    </div>
    </template>
@@ -52,11 +51,11 @@ h3.title { font-size: 28px; color: #656565; text-align: center; margin: 40px 0 3
       <van-checkbox :value="checkAll" @change="checkAllChange" checked-color="#333333" icon-size="30rpx">
          全选
       </van-checkbox>
-      <button>删除</button>
+      <button @click="doDel">删除</button>
    </div>
 
    <van-checkbox-group :value="selected" @change="singleChange">
-      <c-cart-item v-for="i in goodsList" :key="id" :itemData="i"/>
+      <c-cart-item v-for="i in cartsList" :key="id" :itemData="i" :buyNum.sync="i.buy_num"/>
    </van-checkbox-group>
 
    <div class="gift-hint">
@@ -76,7 +75,7 @@ h3.title { font-size: 28px; color: #656565; text-align: center; margin: 40px 0 3
    </div>
 
    <div class="footer-operas">
-      <h3>总价：<span>￥299.99</span></h3>
+      <h3>总价：<span>￥{{totalPrice}}</span></h3>
       <div>
          <button>定制祝福卡</button>
          <button>立即购买</button>
@@ -92,43 +91,86 @@ h3.title { font-size: 28px; color: #656565; text-align: center; margin: 40px 0 3
 import cGoodsItem from '@/components/goodsItem'
 import cFooterNav from '@/components/footerNav'
 import cCartItem from './modules/cartItem'
+import { postAction } from '@/utils/api'
 
 export default {
    components: { cGoodsItem, cFooterNav, cCartItem },
    data () {
       return {
+         imgSrc: mpvue.imgSrc,
          isEmpty: true,
-         checkAll: true,
+         checkAll: false,
          selected: [],
-         goodsList: [
-            { id: '1' },
-            { id: '2' },
-            { id: '3' }
-         ],
+         cartsList: [],
+         goodsList: [],
          giftCheck: true
       }
    },
-
+   computed: {
+      totalPrice () {
+         let price = 0
+         for (let i of this.cartsList) {
+            if (this.selected.includes(i.id)) {
+               price += parseFloat(i.price) / 100
+            }
+         }
+         return price
+      }
+   },
    methods: {
       checkAllChange (e) {
          this.checkAll = e.mp.detail
+         if (this.checkAll) {
+            this.selected = this.cartsList.map(i => i.id)
+         } else {
+            this.selected = []
+         }
       },
       singleChange (e) {
          this.selected = e.mp.detail
+         this.checkAll = this.selected.length === this.cartsList.length
       },
       giftChange (e) {
          this.giftCheck = e.mp.detail
       },
       toIndex () {
-         mpvue.chooseInvoice({
-            success (res) {
-               console.log(res)
+         mpvue.reLaunch({
+            url: '/pages/index/main'
+         })
+      },
+      getData () {
+         postAction('cart').then(res => {
+            this.cartsList = res.data.list
+            this.isEmpty = this.cartsList.length === 0
+            this.goodsList = res.data.xg_list
+         })
+      },
+      doDel () {
+         if (this.selected.length === 0) {
+            mpvue.showToast({title: '请选择商品', icon: 'none'})
+            return false
+         }
+         mpvue.showModal({
+            title: '提示',
+            content: '是否确定删除',
+            success: (res) => {
+               if (res.confirm) {
+                  postAction('cart_del', {
+                     id: this.selected.join('|')
+                  }).then(res => {
+                     if (res.ret === 0) {
+                        mpvue.showToast({title: '删除成功'})
+                        this.getData()
+                     }
+                  })
+               }
             }
          })
       }
    },
 
-   created () {
+   onLoad () {
+      this.getData()
       // let app = getApp()
    }
 }

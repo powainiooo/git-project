@@ -28,9 +28,9 @@ page { background-color: rgb(248, 248, 248)}
          <p>您共有{{score}}积分，可以抵扣{{dk_money}}元</p>
       </div>
    </div>
-   <ul class="tabs">
-      <li v-for="item in tabsList" :class="{active: currentTab === item.key}" :key="item">{{item.name}}</li>
-   </ul>
+<!--   <ul class="tabs">-->
+<!--      <li v-for="item in tabsList" :class="{active: currentTab === item.key}" :key="item">{{item.name}}</li>-->
+<!--   </ul>-->
    <div class="list-item" v-for="(i, index) in listData" :key="index">
       <div class="left">
          <img src="/static/images/point/icon2.png" v-if="i.type === '1'"/>

@@ -1,5 +1,7 @@
 {
    "pages": [
+      "pages/address/list/main",
+      "pages/address/edit/main",
       "pages/point/main",
       "pages/order/list/main",
       "pages/order/confirm/main",

@@ -15,7 +15,8 @@ const store = new Vuex.Store({
       hhqy: '',
       thhzc: '',
       sytk: '',
-      yszc: ''
+      yszc: '',
+      addressInfo: {}
    },
    mutations: {
       SET_LOGIN_KEY (state, data) {
@@ -36,6 +37,9 @@ const store = new Vuex.Store({
       },
       SET_YSZC (state, data) {
          state.yszc = data
+      },
+      SET_ADDRESS (state, data) {
+         state.addressInfo = data
       }
    }
 })

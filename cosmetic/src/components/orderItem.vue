@@ -12,18 +12,18 @@
 
 <template>
 <div class="c-cart-item">
-   <img src="/static/images/index/img3.png" mode="aspectFit" class="c-cart-item-img"/>
+   <img :src="imgSrc + itemData.cover" mode="aspectFit" class="c-cart-item-img"/>
    <div class="c-cart-item-infos">
       <div>
-         <h3 class="c-cart-item-title">护肤品套装水乳护肤套装</h3>
+         <h3 class="c-cart-item-title">{{itemData.goods_name}}</h3>
          <div class="c-cart-item-bottom">
             <ul class="c-cart-item-tag">
-               <li>已选规格：500ml</li>
+               <li>{{itemData.attr_name}}</li>
             </ul>
-            <div class="c-cart-item-nums">X1</div>
+            <div class="c-cart-item-nums">X{{itemData.by_discount}}</div>
          </div>
       </div>
-      <h3 class="c-cart-item-price">￥299.99</h3>
+      <h3 class="c-cart-item-price">￥{{itemData.price / 100}}</h3>
    </div>
 </div>
 </template>
@@ -39,6 +39,7 @@ export default {
    },
    data () {
       return {
+         imgSrc: mpvue.imgSrc,
          check: false
       }
    },

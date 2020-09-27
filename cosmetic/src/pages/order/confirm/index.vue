@@ -32,7 +32,7 @@ page { background-color: rgb(248, 248, 248)}
 
 <template>
 <div style="padding-bottom: 130rpx">
-   <div class="address-none link-arrow" v-if="!hasAddress">
+   <div class="address-none link-arrow" v-if="!hasAddress" @click="selectAddr">
       <img src="/static/images/order/address_icon@2x.png" />
       添加收货地址
    </div>
@@ -44,65 +44,103 @@ page { background-color: rgb(248, 248, 248)}
       </div>
    </div>
 
-   <c-order-item />
-   <c-order-item />
+   <c-order-item v-for="i in goodsList" :key="cart_id" :itemData="i" />
 
    <div class="gift-hint">
       <h3><van-switch :checked="giftCheck" @change="giftChange" size="28rpx" active-color="#333333" class="sw"/>使用积分抵扣</h3>
-      <p>本次使用了60积分抵扣6元 <img src="/static/images/order/jifen@2x.png" /></p>
+      <p v-if="giftCheck">本次使用了{{pageData.use_score}}积分抵扣{{pageData.dk_money}}元 <img src="/static/images/order/jifen@2x.png" /></p>
    </div>
 
    <div class="details">
       <ul>
          <li>
-            <span>总价</span>
-            <span>￥2100</span>
+            <span>商品总价</span>
+            <span>￥{{pageData.goods_money / 100}}</span>
          </li>
          <li>
             <span>运费</span>
-            <span>￥2100</span>
+            <span>￥{{pageData.kd_fee / 100}}</span>
          </li>
-         <li>
+         <li v-if="giftCheck">
             <span>积分抵扣</span>
-            <span>￥2100</span>
+            <span>-￥{{pageData.dk_money}}</span>
          </li>
-         <li>
-            <span>总金额</span>
-            <span>￥2100</span>
-         </li>
+<!--         <li>-->
+<!--            <span>总金额</span>-->
+<!--            <span>￥{{pageData.goods_money / 100}}</span>-->
+<!--         </li>-->
          <li>
             <span>可得积分</span>
-            <span>￥2100</span>
+            <span>{{pageData.add_score}}</span>
          </li>
       </ul>
-      <div>实际付款：<span>￥900</span></div>
+      <div>实际付款：<span>￥{{payPrice}}</span></div>
    </div>
 
    <div class="footer-btn">
-      <button>请填写收货地址</button>
+      <button v-if="hasAddress" @click="doPay">立即结算</button>
+      <button v-else>请填写收货地址</button>
    </div>
 </div>
 </template>
 
 <script>
 import cOrderItem from '@/components/orderItem'
+import { postAction } from '@/utils/api'
 
 export default {
    components: { cOrderItem },
    data () {
       return {
-         giftCheck: true,
-         hasAddress: true
+         giftCheck: false,
+         hasAddress: false,
+         ids: '',
+         flag: '',
+         goodsList: [],
+         pageData: {}
       }
    },
-
+   computed: {
+      payPrice () {
+         if (this.giftCheck) {
+            return (parseFloat(this.pageData.order_money) / 100) - (parseFloat(this.pageData.dk_money) / 100)
+         } else {
+            return (parseFloat(this.pageData.order_money) / 100)
+         }
+      }
+   },
    methods: {
       giftChange (e) {
          this.giftCheck = e.mp.detail
+      },
+      getData () {
+         postAction('begin_buy', {
+            id: this.ids,
+            gift_flag: this.flag
+         }).then(res => {
+            this.goodsList = res.data.goods_list
+            this.pageData = res.data
+         })
+      },
+      selectAddr () {
+         mpvue.chooseAddress({
+            success (res) {
+               console.log(res)
+            }
+         })
+      },
+      doPay () {
+         // postAction('creat_order', {
+         //    address_id:
+         // })
       }
    },
 
-   created () {
+   onLoad (options) {
+      console.log(options)
+      this.ids = options.id || '487'
+      this.flag = options.flag || '0'
+      this.getData()
       // let app = getApp()
    }
 }

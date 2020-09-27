@@ -63,7 +63,7 @@ h3.title { font-size: 28px; color: #656565; text-align: center; margin: 40px 0 3
       <p>这是一份礼品，您可以免费填写祝福语，我们会将祝福语印制在祝福卡上，并与所购商品及礼盒一起寄出。</p>
    </div>
 
-   <div class="preview-container">
+   <div class="preview-container" v-if="giftCheck">
       <img src="/static/images/blessing/banner.png" />
       <div class="form-item"><span>To:</span>DENGCHUN</div>
       <div class="form-item" style="padding-bottom: 60rpx;"><span>Message:</span>
@@ -77,8 +77,8 @@ h3.title { font-size: 28px; color: #656565; text-align: center; margin: 40px 0 3
    <div class="footer-operas">
       <h3>总价：<span>￥{{totalPrice}}</span></h3>
       <div>
-         <button>定制祝福卡</button>
-         <button>立即购买</button>
+         <button @click="toCard">定制祝福卡</button>
+         <button @click="doBuy">立即购买</button>
       </div>
    </div>
    </template>
@@ -103,7 +103,7 @@ export default {
          selected: [],
          cartsList: [],
          goodsList: [],
-         giftCheck: true
+         giftCheck: false
       }
    },
    computed: {
@@ -111,7 +111,7 @@ export default {
          let price = 0
          for (let i of this.cartsList) {
             if (this.selected.includes(i.id)) {
-               price += parseFloat(i.price) / 100
+               price += (parseFloat(i.price) / 100) * parseInt(i.buy_num)
             }
          }
          return price
@@ -136,6 +136,11 @@ export default {
       toIndex () {
          mpvue.reLaunch({
             url: '/pages/index/main'
+         })
+      },
+      toCard () {
+         mpvue.navigateTo({
+            url: '/pages/blessing/main'
          })
       },
       getData () {
@@ -166,11 +171,28 @@ export default {
                }
             }
          })
+      },
+      doBuy () {
+         if (this.selected.length === 0) {
+            mpvue.showToast({title: '请选择商品', icon: 'none'})
+            return false
+         }
+         const ids = this.selected.join('|')
+         console.log(this.selected)
+         const flag = this.giftCheck ? '1' : '0'
+         mpvue.navigateTo({
+            url: `/pages/order/confirm/main?id=${ids}&flag=${flag}`
+         })
       }
    },
-
-   onLoad () {
+   onShow () {
       this.getData()
+   },
+   onLoad (options) {
+      const selectId = options.id || ''
+      if (selectId !== '') {
+         this.selected = [selectId]
+      }
       // let app = getApp()
    }
 }

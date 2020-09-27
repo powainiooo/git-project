@@ -24,63 +24,57 @@ page { background-color: rgb(248, 248, 248)}
    <div class="banner">
       <img src="/static/images/point/banner.png" />
       <div>
-         <h3>2256</h3>
-         <p>您共有2256积分，可以抵扣225元</p>
+         <h3>{{score}}</h3>
+         <p>您共有{{score}}积分，可以抵扣{{dk_money}}元</p>
       </div>
    </div>
    <ul class="tabs">
       <li v-for="item in tabsList" :class="{active: currentTab === item.key}" :key="item">{{item.name}}</li>
    </ul>
-   <div class="list-item">
+   <div class="list-item" v-for="(i, index) in listData" :key="index">
       <div class="left">
-         <img src="/static/images/point/icon1.png" />
+         <img src="/static/images/point/icon2.png" v-if="i.type === '1'"/>
+         <img src="/static/images/point/icon1.png" v-else/>
          <div>
-            <h3>购物获得</h3>
-            <p>2020-08-06  18:52:23</p>
+            <h3>{{i.type_str}}</h3>
+            <p>{{i.ctime}}</p>
          </div>
       </div>
-      <div class="vals">+30</div>
-   </div>
-   <div class="list-item">
-      <div class="left">
-         <img src="/static/images/point/icon1.png" />
-         <div>
-            <h3>购物获得</h3>
-            <p>2020-08-06  18:52:23</p>
-         </div>
-      </div>
-      <div class="vals">+30</div>
-   </div>
-   <div class="list-item">
-      <div class="left">
-         <img src="/static/images/point/icon1.png" />
-         <div>
-            <h3>购物获得</h3>
-            <p>2020-08-06  18:52:23</p>
-         </div>
-      </div>
-      <div class="vals">+30</div>
+      <div class="vals">+{{i.score}}</div>
    </div>
 </div>
 </template>
 
 <script>
+import { postAction } from '@/utils/api'
 
 export default {
    data () {
       return {
+         imgSrc: mpvue.imgSrc,
          currentTab: '1',
          tabsList: [
             { name: '积分明细', key: '1' },
             { name: '总积分', key: '2' }
-         ]
+         ],
+         listData: [],
+         score: 0,
+         dk_money: 0
       }
    },
 
    methods: {
+      getData () {
+         postAction('get_user_score_detail').then(res => {
+            this.listData = res.data.jfmx
+            this.score = res.data.score
+            this.dk_money = res.data.dk_money
+         })
+      }
    },
 
-   created () {
+   onLoad () {
+      this.getData()
       // let app = getApp()
    }
 }

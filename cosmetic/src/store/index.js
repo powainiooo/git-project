@@ -13,7 +13,9 @@ const store = new Vuex.Store({
       personalInfo: null,
       imgSrc: 'https://yghzp.vsapp.cn',
       hhqy: '',
-      thhzc: ''
+      thhzc: '',
+      sytk: '',
+      yszc: ''
    },
    mutations: {
       SET_LOGIN_KEY (state, data) {
@@ -28,6 +30,12 @@ const store = new Vuex.Store({
       },
       SET_THHZC (state, data) {
          state.thhzc = data
+      },
+      SET_SYTK (state, data) {
+         state.sytk = data
+      },
+      SET_YSZC (state, data) {
+         state.yszc = data
       }
    }
 })

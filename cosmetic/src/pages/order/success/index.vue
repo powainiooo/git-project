@@ -74,7 +74,7 @@ export default {
          }).then(res => {
             if (res.ret === 0) {
                this.price = parseInt(res.data.order_info.order_amount) / 100
-               this.timeStr = formatTime(new Date(res.data.order_info.order_time))
+               this.timeStr = formatTime(new Date(parseInt(res.data.order_info.order_time) * 1000))
                this.goodsList = res.data.xg_goods_list
             }
          })

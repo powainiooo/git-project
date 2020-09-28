@@ -19,12 +19,12 @@ page { background-color: rgb(248, 248, 248)}
 <div>
    <van-radio-group :value="check" @change="onChange">
       <div class="addr-item" v-for="i in listData" :key="id">
-         <div class="line1">{{i.name}}<span>{{i.mobile}}</span></div>
-         <div class="line2">{{i.province}}{{i.city}}{{i.area}}{{i.address}}</div>
+         <div class="line1" @click="selectAddr(i)">{{i.name}}<span>{{i.mobile}}</span></div>
+         <div class="line2" @click="selectAddr(i)">{{i.province}}{{i.city}}{{i.area}}{{i.address}}</div>
          <div class="line3">
             <van-radio :name="i.id" icon-size="32rpx" checked-color="#333333"><span class="label">默认地址</span></van-radio>
             <ul>
-               <li>删除</li>
+               <li @click="doDel(i.id)">删除</li>
                <li @click="doEdit(i)">编辑</li>
             </ul>
          </div>
@@ -69,6 +69,30 @@ export default {
          store.commit('SET_ADDRESS', data)
          mpvue.navigateTo({
             url: `/pages/address/edit/main?page=edit`
+         })
+      },
+      selectAddr (item) {
+         store.commit('SET_ADDRESS', item)
+         mpvue.navigateBack({
+            delta: 1
+         })
+      },
+      doDel (id) {
+         mpvue.showModal({
+            title: '提示',
+            content: '是否确定删除该地址',
+            success: (res) => {
+               if (res.confirm) {
+                  postAction('del_address', {
+                     id
+                  }).then(res => {
+                     if (res.ret === 0) {
+                        mpvue.showToast({title: '删除成功'})
+                        this.getData()
+                     }
+                  })
+               }
+            }
          })
       }
    },

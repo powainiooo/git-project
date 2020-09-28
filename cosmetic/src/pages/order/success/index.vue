@@ -24,15 +24,15 @@ h3.title { font-size: 28px; color: #656565; text-align: center; margin: 40px 0 3
 
    <div class="card">
       <img src="/static/images/order/frame.png" />
-      <div class="price">￥818.65</div>
+      <div class="price">￥{{price}}</div>
       <ul>
          <li>
             <span>订单编号</span>
-            <span>2020015855231</span>
+            <span>{{orderNum}}</span>
          </li>
          <li>
             <span>下单时间</span>
-            <span>2020015855231</span>
+            <span>{{timeStr}}</span>
          </li>
       </ul>
    </div>
@@ -44,8 +44,7 @@ h3.title { font-size: 28px; color: #656565; text-align: center; margin: 40px 0 3
    <div style="background-color: #ffffff; overflow: hidden;">
       <h3 class="title">猜你喜欢</h3>
       <div class="goods-list">
-         <c-goods-item/>
-         <c-goods-item/>
+         <c-goods-item v-for="i in goodsList" :key="id" :itemData="i"/>
       </div>
    </div>
 
@@ -54,18 +53,37 @@ h3.title { font-size: 28px; color: #656565; text-align: center; margin: 40px 0 3
 
 <script>
 import cGoodsItem from '@/components/goodsItem'
+import { postAction } from '@/utils/api'
+import { formatTime } from '@/utils'
 
 export default {
    components: { cGoodsItem },
    data () {
       return {
+         orderNum: '',
+         price: 0,
+         timeStr: '',
+         goodsList: []
       }
    },
 
    methods: {
+      getData () {
+         postAction('show_pay_status', {
+            order_num: this.orderNum
+         }).then(res => {
+            if (res.ret === 0) {
+               this.price = parseInt(res.data.order_info.order_amount) / 100
+               this.timeStr = formatTime(new Date(res.data.order_info.order_time))
+               this.goodsList = res.data.xg_goods_list
+            }
+         })
+      }
    },
 
-   created () {
+   onLoad (options) {
+      this.orderNum = options.orderNum
+      this.getData()
       // let app = getApp()
    }
 }

@@ -36,11 +36,11 @@ page { background-color: rgb(248, 248, 248)}
       <img src="/static/images/order/address_icon@2x.png" />
       添加收货地址
    </div>
-   <div class="address-frame link-arrow" v-else>
+   <div class="address-frame link-arrow" v-else @click="selectAddr">
       <img src="/static/images/order/address_icon@2x.png" />
       <div>
-         <h3>张三 <span>15885244565</span></h3>
-         <p>广东省深圳市西丽区桃园街道某某某某社区某某某小区</p>
+         <h3>{{addressInfo.name}} <span>{{addressInfo.mobile}}</span></h3>
+         <p>{{addressInfo.province}}{{addressInfo.city}}{{addressInfo.area}}{{addressInfo.address}}</p>
       </div>
    </div>
 
@@ -77,14 +77,42 @@ page { background-color: rgb(248, 248, 248)}
       <div>实际付款：<span>￥{{payPrice}}</span></div>
    </div>
 
+   <div class="details">
+      <ul>
+         <li style="margin-bottom: 40px;">
+            <span style="color: #333333">发票信息</span>
+            <span style="color: #333333" @click="toInvoice">{{hasInvoice ? '修改' : '添加'}}发票信息</span>
+         </li>
+      </ul>
+      <ul v-if="hasInvoice">
+         <li>
+            <span>发票类型</span>
+            <span>{{invoiceInfo.fp_status === '1' ? '个人' : '公司'}}</span>
+         </li>
+         <li>
+            <span>发票抬头</span>
+            <span>{{invoiceInfo.fp_name}}</span>
+         </li>
+         <li>
+            <span>税号</span>
+            <span>{{invoiceInfo.fp_sh}}</span>
+         </li>
+         <li>
+            <span>电子邮箱</span>
+            <span>{{invoiceInfo.fp_email}}</span>
+         </li>
+      </ul>
+   </div>
+
    <div class="footer-btn">
       <button v-if="hasAddress" @click="doPay">立即结算</button>
-      <button v-else>请填写收货地址</button>
+      <button v-else @click="selectAddr">请填写收货地址</button>
    </div>
 </div>
 </template>
 
 <script>
+import store from '../../../store'
 import cOrderItem from '@/components/orderItem'
 import { postAction } from '@/utils/api'
 
@@ -93,11 +121,11 @@ export default {
    data () {
       return {
          giftCheck: false,
-         hasAddress: false,
          ids: '',
          flag: '',
          goodsList: [],
-         pageData: {}
+         pageData: {},
+         isAjax: false
       }
    },
    computed: {
@@ -107,6 +135,18 @@ export default {
          } else {
             return (parseFloat(this.pageData.order_money) / 100)
          }
+      },
+      hasAddress () {
+         return store.state.addressInfo !== null
+      },
+      addressInfo () {
+         return store.state.addressInfo
+      },
+      hasInvoice () {
+         return store.state.invoiceInfo !== null
+      },
+      invoiceInfo () {
+         return store.state.invoiceInfo
       }
    },
    methods: {
@@ -123,16 +163,56 @@ export default {
          })
       },
       selectAddr () {
-         mpvue.chooseAddress({
-            success (res) {
-               console.log(res)
-            }
+         mpvue.navigateTo({
+            url: '/pages/address/list/main'
+         })
+      },
+      toInvoice () {
+         mpvue.navigateTo({
+            url: '/pages/invoice/main'
          })
       },
       doPay () {
-         // postAction('creat_order', {
-         //    address_id:
-         // })
+         if (this.isAjax) return false
+         this.isAjax = true
+         mpvue.showLoading({
+            title: '创建订单',
+            mask: true
+         })
+         const params = {
+            address_id: this.addressInfo.id,
+            userjf_flag: this.giftCheck ? '1' : '0'
+         }
+         params.fp_status = this.hasInvoice ? this.invoiceInfo.fp_status : '0'
+         if (this.hasInvoice) {
+            params.fp_name = this.invoiceInfo.fp_name
+            params.fp_sh = this.invoiceInfo.fp_sh
+            params.fp_email = this.invoiceInfo.fp_email
+         }
+         postAction('creat_order', params).then(res => {
+            mpvue.hideLoading()
+            if (res.ret === 0) {
+               mpvue.showLoading({
+                  title: '支付中',
+                  mask: true
+               })
+               // const orderNum = res.data.order_num
+               postAction('pay', {
+                  id: res.data.id
+               }).then(res2 => {
+                  mpvue.hideLoading()
+                  if (res2.ret === 0) {
+                     mpvue.reLaunch({
+                        url: `/pages/order/success/main?orderNum=${res.data.order_num}`
+                     })
+                  } else {
+                     this.isAjax = false
+                  }
+               })
+            } else {
+               this.isAjax = false
+            }
+         })
       }
    },
 

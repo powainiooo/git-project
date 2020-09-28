@@ -1,12 +1,14 @@
 {
    "pages": [
+      "pages/goodsDetail/main",
+      "pages/logistics/main",
+      "pages/order/confirm/main",
+      "pages/invoice/main",
+      "pages/shoppingCart/main",
+      "pages/order/list/main",
       "pages/address/list/main",
       "pages/address/edit/main",
       "pages/point/main",
-      "pages/order/list/main",
-      "pages/order/confirm/main",
-      "pages/shoppingCart/main",
-      "pages/goodsDetail/main",
       "pages/personal/main",
       "pages/goods/main",
       "pages/blessing/main",

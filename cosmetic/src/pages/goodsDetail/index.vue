@@ -74,7 +74,7 @@ h3.title { font-size: 28px; color: #656565; text-align: center; margin: 40px 0 3
 
    <div class="footer-nav">
       <div class="btn1">
-         <button @click="toCart">
+         <button @click="toCart('')">
             <img src="/static/images/goods/icon-cart.png" />
             <span>{{cartNums}}</span>
          </button>
@@ -83,7 +83,7 @@ h3.title { font-size: 28px; color: #656565; text-align: center; margin: 40px 0 3
          </button>
       </div>
       <button class="btn2" @click="toCard">祝福卡</button>
-      <button class="btn3" @click="addCart">加入购物车</button>
+      <button class="btn3" @click="addCart('add')">加入购物车</button>
       <button class="btn4" @click="addCart('buy')">立即购买</button>
    </div>
 </div>
@@ -133,7 +133,7 @@ export default {
             url: `/pages/blessing/main`
          })
       },
-      toCart (id = '') {
+      toCart (id) {
          mpvue.navigateTo({
             url: `/pages/shoppingCart/main?id=${id}`
          })

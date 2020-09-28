@@ -190,6 +190,7 @@ export default {
    },
    onLoad (options) {
       const selectId = options.id || ''
+      console.log('selectId', selectId, options)
       if (selectId !== '') {
          this.selected = [selectId]
       }

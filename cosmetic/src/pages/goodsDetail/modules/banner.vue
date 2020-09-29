@@ -10,7 +10,7 @@
 <div style="position: relative;">
    <swiper class="c-banner" autoplay @change="bannerChange">
       <swiper-item v-for="(item, index) in list" :key="index">
-         <img :src="imgSrc + item" class="c-banner-img" />
+         <img :src="imgSrc + item" class="c-banner-img" mode="aspectFill" />
       </swiper-item>
    </swiper>
    <ul class="c-banner-dots">

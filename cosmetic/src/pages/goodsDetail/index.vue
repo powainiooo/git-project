@@ -78,7 +78,7 @@ h3.title { font-size: 28px; color: #656565; text-align: center; margin: 40px 0 3
             <img src="/static/images/goods/icon-cart.png" />
             <span>{{cartNums}}</span>
          </button>
-         <button>
+         <button open-type="contact">
             <img src="/static/images/goods/icon-message.png" />
          </button>
       </div>

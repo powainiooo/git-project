@@ -49,8 +49,8 @@ export default {
             page: this.page,
             status: this.currentTab
          }).then(res => {
-            this.orderList = this.orderList.concat(res.data.order_list.list)
-            this.totals = res.data.order_list.nums
+            this.orderList = this.orderList.concat(res.data.list)
+            this.totals = res.data.nums
             this.isLoadAll = this.totals === this.orderList.length
          })
       },
@@ -62,13 +62,15 @@ export default {
       },
       refresh () {
          this.page = 1
+         this.orderList = []
          this.getData()
       }
    },
-
+   onShow () {
+      this.refresh()
+   },
    onLoad (options) {
-      this.currentTab = options.status || ''
-      this.getData()
+      this.currentTab = options.status || '0'
       // let app = getApp()
    },
    onReachBottom () {

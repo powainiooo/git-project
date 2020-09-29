@@ -13,8 +13,7 @@
       <div class="c-goods-swiper-item" @click="toDetail(item.id)">
          <img :src="imgSrc + item.cover" class="c-goods-swiper-img" mode="aspectFill" />
          <h3 class="c-goods-swiper-title">{{item.goods_name}}</h3>
-         <p class="c-goods-swiper-des" v-if="descKey === 'price'">价格：{{item.min_price === item.max_price ? (itemData.min_price / 100) : (item.min_price / 100) + '~' + (item.max_price / 100)}}</p>
-         <p class="c-goods-swiper-des" v-else-if="descKey === 'desc'">{{item.goods_desc}}</p>
+         <p class="c-goods-swiper-des" v-if="descKey === 'price'">价格：{{item.min_price === item.max_price ? (item.min_price / 100) : (item.min_price / 100) + '~' + (item.max_price / 100)}}</p>
          <a href="#" class="c-goods-swiper-btn" v-if="showBtns">立即购买</a>
       </div>
    </swiper-item>

@@ -14,8 +14,8 @@
 </style>
 
 <template>
-<div class="c-cart-item">
-   <img :src="imgSrc + itemData.cover" mode="aspectFit" class="c-cart-item-img"/>
+<div class="c-cart-item" @click="toDetail">
+   <img :src="imgSrc + itemData.cover" mode="aspectFill" class="c-cart-item-img"/>
    <div class="c-cart-item-infos">
       <div>
          <h3 class="c-cart-item-title">订单号：{{itemData.order_num}}</h3>
@@ -32,10 +32,10 @@
       <div class="c-cart-item-bottom">
          <h3 class="c-cart-item-price">￥{{itemData.order_amount / 100}}</h3>
          <div style="display: flex;">
-            <button class="btn1" v-if="itemData.status === '1'" @click="doCancel">取 消</button>
-            <button class="btn2" v-if="itemData.status === '1'" @click="doPay">支 付</button>
-            <button class="btn1" v-if="itemData.status === '5'" @click="check">查看物流</button>
-            <button class="btn2" v-if="itemData.status === '5'" @click="confirm">确认收货</button>
+            <button class="btn1" v-if="itemData.status === '1'" @click.stop="doCancel">取 消</button>
+            <button class="btn2" v-if="itemData.status === '1'" @click.stop="doPay">支 付</button>
+            <button class="btn1" v-if="itemData.status === '5'" @click.stop="check">查看物流</button>
+            <button class="btn2" v-if="itemData.status === '5'" @click.stop="confirm">确认收货</button>
          </div>
       </div>
    </div>
@@ -80,7 +80,9 @@ export default {
 
       },
       check () {
-
+         mpvue.navigateTo({
+            url: `/pages/logistics/main?id=${this.itemData.id}`
+         })
       },
       confirm () {
          mpvue.showModal({
@@ -98,6 +100,11 @@ export default {
                   })
                }
             }
+         })
+      },
+      toDetail () {
+         mpvue.navigateTo({
+            url: `/pages/order/detail/main?id=${this.itemData.id}`
          })
       }
    }

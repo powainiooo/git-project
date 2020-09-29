@@ -12,7 +12,7 @@
 
 <template>
 <div class="c-cart-item">
-   <img :src="imgSrc + itemData.cover" mode="aspectFit" class="c-cart-item-img"/>
+   <img :src="imgSrc + itemData.cover" mode="aspectFill" class="c-cart-item-img"/>
    <div class="c-cart-item-infos">
       <div>
          <h3 class="c-cart-item-title">{{itemData.goods_name}}</h3>
@@ -20,7 +20,7 @@
             <ul class="c-cart-item-tag">
                <li>{{itemData.attr_name}}</li>
             </ul>
-            <div class="c-cart-item-nums">X{{itemData.by_discount}}</div>
+            <div class="c-cart-item-nums">X{{itemData.buy_num}}</div>
          </div>
       </div>
       <h3 class="c-cart-item-price">￥{{itemData.price / 100}}</h3>

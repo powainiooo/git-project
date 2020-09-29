@@ -63,15 +63,13 @@ h3.title { font-size: 28px; color: #656565; text-align: center; margin: 40px 0 3
       <p>这是一份礼品，您可以免费填写祝福语，我们会将祝福语印制在祝福卡上，并与所购商品及礼盒一起寄出。</p>
    </div>
 
-   <div class="preview-container" v-if="giftCheck">
-      <img src="/static/images/blessing/banner.png" />
-      <div class="form-item"><span>To:</span>DENGCHUN</div>
+   <div class="preview-container" v-if="giftCheck && wishInfo.to !== ''">
+      <img :src="imgSrc + wishInfo.wish_bg" />
+      <div class="form-item"><span>To:</span>{{wishInfo.to}}</div>
       <div class="form-item" style="padding-bottom: 60rpx;"><span>Message:</span>
-         Honey, happy holidays, this is my
-         gift for you, do you like it? Looking forward to
-         our meeting, love you
+         {{wishInfo.message}}
       </div>
-      <div class="form-item"><span>From:</span>DENGCHUN</div>
+      <div class="form-item"><span>From:</span>{{wishInfo.from}}</div>
    </div>
 
    <div class="footer-operas">
@@ -103,7 +101,8 @@ export default {
          selected: [],
          cartsList: [],
          goodsList: [],
-         giftCheck: false
+         giftCheck: false,
+         wishInfo: {}
       }
    },
    computed: {
@@ -132,6 +131,20 @@ export default {
       },
       giftChange (e) {
          this.giftCheck = e.mp.detail
+         if (this.giftCheck && this.wishInfo.to === '') {
+            mpvue.showModal({
+               title: '提示',
+               content: '尚未填写祝福卡，是否前往定制？',
+               confirmText: '前往',
+               success: (res) => {
+                  if (res.confirm) {
+                     this.toCard()
+                  } else {
+                     this.giftCheck = false
+                  }
+               }
+            })
+         }
       },
       toIndex () {
          mpvue.reLaunch({
@@ -148,6 +161,7 @@ export default {
             this.cartsList = res.data.list
             this.isEmpty = this.cartsList.length === 0
             this.goodsList = res.data.xg_list
+            this.wishInfo = res.data.wish_info
          })
       },
       doDel () {

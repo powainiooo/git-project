@@ -39,17 +39,18 @@ export default {
       return {
          imgSrc: mpvue.imgSrc,
          tabKey: '1',
-         detailData: {},
-         goodsListMX: []
+         detailData: {
+            xy_goods: [],
+            zn_goods: []
+         }
       }
    },
 
    methods: {
       getData () {
          getAction('ads_info').then(res => {
-            console.log(res)
+            // console.log(res)
             this.detailData = res.data
-            this.goodsListMX = [this.detailData.xy_goods[0]]
          })
       }
    },

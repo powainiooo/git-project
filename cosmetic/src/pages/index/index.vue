@@ -105,6 +105,7 @@ export default {
          mpvue.setStorageSync('lastShowAdTime', now)
       },
       toAdDetail () {
+         this.doCloseAd()
          mpvue.navigateTo({
             url: `/pages/ad/main`
          })

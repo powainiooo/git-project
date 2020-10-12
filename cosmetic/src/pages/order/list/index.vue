@@ -5,6 +5,10 @@ page { background-color: rgb(248, 248, 248)}
 .tabs li { height: 100%; position: relative; font-size: 30px; color: #333333; display: flex; align-items: center;}
 .tabs li.active:after { content: ''; width: 56px; height: 4px; background-color: #000000; border-radius: 2px; position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%);}
 
+.hint-empty { width: 100%; height: 750px; background-color: #ffffff; margin: 20px 0 30px 0; display: flex; flex-direction: column; justify-content: center; align-items: center;}
+.hint-empty img { width: 505px; height: 325px; margin-bottom: 30px;}
+.hint-empty p { font-size: 32px; color: #A5A5A5; line-height: 1; margin-bottom: 60px;}
+.hint-empty .btn-round { width: 344px; background-color: #000000;}
 </style>
 
 <template>
@@ -14,9 +18,18 @@ page { background-color: rgb(248, 248, 248)}
           :class="{active: currentTab === item.key}"
           :key="item" @click="changeTab(item.key)">{{item.name}}</li>
    </ul>
+   <template v-if="orderList.length === 0">
+   <div class="hint-empty">
+      <img src="/static/images/shoppingCart/empty.png" />
+      <p>您还没有相关的订单哦~</p>
+      <a href="/pages/index/main" class="btn-round" @click="toIndex">去逛逛</a>
+   </div>
+   </template>
 
+   <template v-else>
    <c-order-item v-for="i in orderList" :key="id" :itemData="i" @refresh="refresh"/>
    <div class="load-over" v-if="isLoadAll">- 没有更多订单了 -</div>
+   </template>
 </div>
 </template>
 

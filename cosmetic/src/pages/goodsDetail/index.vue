@@ -17,6 +17,7 @@ h3.title { font-size: 28px; color: #656565; text-align: center; margin: 40px 0 3
 .type-list ul { display: flex; flex-wrap: wrap; margin-bottom: 50px;}
 .type-list ul li { padding: 0 20px; height: 50px; border: 1px solid #BFBFBF; font-size: 18px; color: #333333; display: flex; justify-content: center; align-items: center; margin-right: 50px; margin-bottom: 30px;}
 .type-list ul li.active { border-color: #D1A158; color: #D1A158;}
+.type-list ul li img { width: 42px; height: 42px;}
 
 .pro-detail { font-size: 24px; color: #333333; margin: 50px 0;}
 /*.infos-list { margin: 40px 30px 60px 30px;}*/
@@ -57,7 +58,10 @@ h3.title { font-size: 28px; color: #656565; text-align: center; margin: 40px 0 3
          <li v-for="item in ggList"
              :key="attr_id"
              :class="{'active': attrId === item.attr_id}"
-             @click="selectTypes(item)">{{item.attr_name}}</li>
+             @click="selectTypes(item)">
+            <img :src="imgSrc + item.cover" mode="aspectFill" />
+            {{item.attr_name}}
+         </li>
       </ul>
    </div>
 

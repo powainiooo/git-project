@@ -31,7 +31,7 @@ page { background-color: rgb(248, 248, 248)}
       </div>
    </van-radio-group>
 
-   <div class="btns"><a href="#" class="btn-round">添加新地址</a> </div>
+   <div class="btns"><a href="/pages/address/edit/main" class="btn-round">添加新地址</a> </div>
 </div>
 </template>
 

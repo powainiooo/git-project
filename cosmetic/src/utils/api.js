@@ -19,12 +19,12 @@ const ajax = (opts, autoMsg = true) => {
             console.log('返回数据', res)
             resolve(res.data)
             if (res.data.ret === 1001 || res.data.ret === 1000) {
-               mpvue.showToast({ title: res.data.msg })
-               setTimeout(() => {
-                  mpvue.reLaunch({
-                     url: '/pages/personal/main'
-                  })
-               }, 1500)
+               mpvue.showToast({ title: res.data.msg, icon: 'none' })
+               // setTimeout(() => {
+               //    mpvue.reLaunch({
+               //       url: '/pages/personal/main'
+               //    })
+               // }, 1500)
             } else if (res.data.ret === 0) {
                // mpvue.showToast({ title: res.data.msg })
             } else {

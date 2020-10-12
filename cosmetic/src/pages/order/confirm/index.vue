@@ -202,9 +202,33 @@ export default {
                }).then(res2 => {
                   mpvue.hideLoading()
                   if (res2.ret === 0) {
-                     mpvue.reLaunch({
-                        url: `/pages/order/success/main?orderNum=${res.data.order_num}`
-                     })
+                     if (res2.data.need_pay === 0) {
+                        mpvue.reLaunch({
+                           url: `/pages/order/success/main?orderNum=${res.data.order_num}`
+                        })
+                     } else if (res2.data.need_pay === 1) {
+                        const jsapi = res2.data
+                        wx.requestPayment({
+                           'timeStamp': jsapi.timeStamp,
+                           'nonceStr': jsapi.nonceStr,
+                           'package': jsapi.package,
+                           'signType': jsapi.signType,
+                           'paySign': jsapi.paySign,
+                           'success' (res) {
+                              console.log(res)
+                              mpvue.reLaunch({
+                                 url: `/pages/order/success/main?orderNum=${res.data.order_num}`
+                              })
+                           },
+                           'fail': function (err) {
+                              console.log('pay fail', err)
+                              wx.showToast({
+                                 title: '支付失败',
+                                 icon: 'none'
+                              })
+                           }
+                        })
+                     }
                   } else {
                      this.isAjax = false
                   }

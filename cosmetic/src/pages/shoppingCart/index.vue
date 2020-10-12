@@ -36,7 +36,7 @@ h3.title { font-size: 28px; color: #656565; text-align: center; margin: 40px 0 3
    <div class="hint-empty">
       <img src="/static/images/shoppingCart/empty.png" />
       <p>购物车空空如也~</p>
-      <a href="#" class="btn-round" @click="toIndex">去逛逛</a>
+      <a href="/pages/index/main" class="btn-round" @click="toIndex">去逛逛</a>
    </div>
    <div style="background-color: #ffffff; overflow: hidden;">
       <h3 class="title">猜你喜欢</h3>

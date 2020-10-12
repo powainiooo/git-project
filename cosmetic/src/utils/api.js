@@ -14,7 +14,7 @@ const ajax = (opts, autoMsg = true) => {
             'Content-Type': 'application/x-www-form-urlencoded'
          },
          success (res) {
-            console.log('token', token)
+            console.log('token:', token)
             console.log('请求参数', opts)
             console.log('返回数据', res)
             resolve(res.data)
@@ -25,8 +25,10 @@ const ajax = (opts, autoMsg = true) => {
                      url: '/pages/personal/main'
                   })
                }, 1500)
+            } else if (res.data.ret === 0) {
+               // mpvue.showToast({ title: res.data.msg })
             } else {
-               mpvue.showToast({ title: res.data.msg })
+               mpvue.showToast({ title: res.data.msg, icon: 'none' })
             }
             wx.hideNavigationBarLoading()
          },

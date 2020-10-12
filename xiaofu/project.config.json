@@ -1,44 +1,60 @@
 {
-	"description": "项目配置文件。",
-	"packOptions": {
-		"ignore": [
-			{
-				"type": "folder",
-				"value": ".idea"
-			}
-		]
-	},
-	"setting": {
-		"urlCheck": false,
-		"es6": true,
-		"postcss": true,
-		"minified": true,
-		"newFeature": true,
-		"checkInvalidKey": true
-	},
-	"compileType": "miniprogram",
-	"libVersion": "2.9.4",
-	"appid": "wx3b740b88a384f9ea",
-	"projectname": "xiaofu",
-	"isGameTourist": false,
-	"simulatorType": "wechat",
-	"simulatorPluginLibVersion": {},
-	"condition": {
-		"search": {
-			"current": -1,
-			"list": []
-		},
-		"conversation": {
-			"current": -1,
-			"list": []
-		},
-		"game": {
-			"currentL": -1,
-			"list": []
-		},
-		"miniprogram": {
-			"current": -1,
-			"list": []
-		}
-	}
+   "description": "项目配置文件。",
+   "packOptions": {
+      "ignore": [
+         {
+            "type": "folder",
+            "value": ".idea"
+         }
+      ]
+   },
+   "setting": {
+      "urlCheck": false,
+      "es6": true,
+      "postcss": true,
+      "minified": true,
+      "newFeature": true,
+      "coverView": true,
+      "autoAudits": false,
+      "checkInvalidKey": true,
+      "checkSiteMap": true,
+      "uploadWithSourceMap": true,
+      "babelSetting": {
+         "ignore": [],
+         "disablePlugins": [],
+         "outputPath": ""
+      },
+      "useIsolateContext": true,
+      "useCompilerModule": true,
+      "userConfirmedUseCompilerModuleSwitch": false,
+      "packNpmManually": false,
+      "packNpmRelationList": [],
+      "useMultiFrameRuntime": false,
+      "useApiHook": false
+   },
+   "compileType": "miniprogram",
+   "libVersion": "2.9.4",
+   "appid": "wx3b740b88a384f9ea",
+   "projectname": "xiaofu",
+   "isGameTourist": false,
+   "simulatorType": "wechat",
+   "simulatorPluginLibVersion": {},
+   "condition": {
+      "search": {
+         "current": -1,
+         "list": []
+      },
+      "conversation": {
+         "current": -1,
+         "list": []
+      },
+      "game": {
+         "currentL": -1,
+         "list": []
+      },
+      "miniprogram": {
+         "current": -1,
+         "list": []
+      }
+   }
 }

@@ -19,8 +19,11 @@ page { background-color: rgb(248, 248, 248)}
 <div>
    <van-radio-group :value="check" @change="onChange">
       <div class="addr-item" v-for="i in listData" :key="id">
-         <div class="line1" @click="selectAddr(i)">{{i.name}}<span>{{i.mobile}}</span></div>
-         <div class="line2" @click="selectAddr(i)">{{i.province}}{{i.city}}{{i.area}}{{i.address}}</div>
+         <div @click="selectAddr(i)">
+            <div class="line1">{{i.name}}<span>{{i.mobile}}</span></div>
+            <div class="line2">{{i.province}}{{i.city}}{{i.area}}{{i.address}}</div>
+         </div>
+
          <div class="line3">
             <van-radio :name="i.id" icon-size="32rpx" checked-color="#333333"><span class="label">默认地址</span></van-radio>
             <ul>

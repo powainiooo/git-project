@@ -164,6 +164,10 @@ export default {
       addCart (status = 'add') {
          if (this.isAjax) return false
          this.isAjax = true
+         if (this.attrId === 0) {
+            mpvue.showToast({ title: '请选择商品规格', icon: 'none' })
+            return false
+         }
          postAction('cart_add', {
             id: this.id,
             attr_id: this.attrId,

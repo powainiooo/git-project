@@ -4,7 +4,7 @@ page { background-color: rgb(248, 248, 248)}
 .form-item { padding: 0 30px; height: 100px; display: flex; align-items: center; justify-content: space-between; position: relative;}
 .form-item:after { content: ''; width: 100%; height: 1px; background-color: #D2D2D2; position: absolute; bottom: 0; left: 0; transform: scaleY(.5);}
 .form-item p { font-size: 30px; color: #333333;}
-.form-item input { font-size: 30px; color: #333333; text-align: right; height: 80px; border: none; background-color: transparent;}
+.form-item input { width: 550px; font-size: 30px; color: #333333; text-align: right; height: 80px; border: none; background-color: transparent;}
 .form-item-addr { height: auto}
 .form-item-addr textarea { width: 100%; font-size: 30px; color: #333333; padding: 30px 0;}
 

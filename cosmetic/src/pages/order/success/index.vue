@@ -38,7 +38,7 @@ h3.title { font-size: 28px; color: #656565; text-align: center; margin: 40px 0 3
    </div>
 
    <div class="btns">
-      <a class="btn-round">返回商家</a>
+      <a class="btn-round" href="/pages/index/main" open-type="reLaunch">返回商家</a>
    </div>
 
    <div style="background-color: #ffffff; overflow: hidden;">

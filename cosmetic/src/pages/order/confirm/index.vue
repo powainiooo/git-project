@@ -125,7 +125,9 @@ export default {
          flag: '',
          goodsList: [],
          pageData: {},
-         isAjax: false
+         isAjax: false,
+         orderId: '',
+         orderNum: ''
       }
    },
    computed: {
@@ -176,64 +178,81 @@ export default {
       doPay () {
          if (this.isAjax) return false
          this.isAjax = true
+         if (this.orderId === '') {
+            mpvue.showLoading({
+               title: '创建订单',
+               mask: true
+            })
+            const params = {
+               address_id: this.addressInfo.id,
+               userjf_flag: this.giftCheck ? '1' : '0'
+            }
+            params.fp_status = this.hasInvoice ? this.invoiceInfo.fp_status : '0'
+            if (this.hasInvoice) {
+               params.fp_name = this.invoiceInfo.fp_name
+               params.fp_sh = this.invoiceInfo.fp_sh
+               params.fp_email = this.invoiceInfo.fp_email
+            }
+            postAction('creat_order', params).then(res => {
+               mpvue.hideLoading()
+               if (res.ret === 0) {
+                  // const orderNum = res.data.order_num
+                  if (res.data.is_reg === '1') {
+                     this.orderId = res.data.id
+                     this.orderNum = res.data.order_num
+                     this.doPayment(res.data.id)
+                  } else if (res.data.is_reg === '0') {
+                     this.isAjax = false
+                     mpvue.navigateTo({
+                        url: '/pages/register/main'
+                     })
+                  }
+               } else {
+                  this.isAjax = false
+               }
+            })
+         } else {
+            this.doPayment(this.orderId)
+         }
+      },
+      doPayment (id) {
          mpvue.showLoading({
-            title: '创建订单',
+            title: '支付中',
             mask: true
          })
-         const params = {
-            address_id: this.addressInfo.id,
-            userjf_flag: this.giftCheck ? '1' : '0'
-         }
-         params.fp_status = this.hasInvoice ? this.invoiceInfo.fp_status : '0'
-         if (this.hasInvoice) {
-            params.fp_name = this.invoiceInfo.fp_name
-            params.fp_sh = this.invoiceInfo.fp_sh
-            params.fp_email = this.invoiceInfo.fp_email
-         }
-         postAction('creat_order', params).then(res => {
+         postAction('pay', {
+            id
+         }).then(res => {
             mpvue.hideLoading()
             if (res.ret === 0) {
-               mpvue.showLoading({
-                  title: '支付中',
-                  mask: true
-               })
-               // const orderNum = res.data.order_num
-               postAction('pay', {
-                  id: res.data.id
-               }).then(res2 => {
-                  mpvue.hideLoading()
-                  if (res2.ret === 0) {
-                     if (res2.data.need_pay === 0) {
+               if (res.data.need_pay === 0) {
+                  mpvue.reLaunch({
+                     url: `/pages/order/success/main?orderNum=${this.orderNum}`
+                  })
+               } else if (res.data.need_pay === 1) {
+                  const jsapi = res.data
+                  wx.requestPayment({
+                     'timeStamp': jsapi.timeStamp,
+                     'nonceStr': jsapi.nonceStr,
+                     'package': jsapi.package,
+                     'signType': jsapi.signType,
+                     'paySign': jsapi.paySign,
+                     success: (res) => {
+                        console.log(res)
                         mpvue.reLaunch({
-                           url: `/pages/order/success/main?orderNum=${res.data.order_num}`
+                           url: `/pages/order/success/main?orderNum=${this.orderNum}`
                         })
-                     } else if (res2.data.need_pay === 1) {
-                        const jsapi = res2.data
-                        wx.requestPayment({
-                           'timeStamp': jsapi.timeStamp,
-                           'nonceStr': jsapi.nonceStr,
-                           'package': jsapi.package,
-                           'signType': jsapi.signType,
-                           'paySign': jsapi.paySign,
-                           'success' (res) {
-                              console.log(res)
-                              mpvue.reLaunch({
-                                 url: `/pages/order/success/main?orderNum=${res.data.order_num}`
-                              })
-                           },
-                           'fail': function (err) {
-                              console.log('pay fail', err)
-                              wx.showToast({
-                                 title: '支付失败',
-                                 icon: 'none'
-                              })
-                           }
+                     },
+                     fail: (err) => {
+                        console.log('pay fail', err)
+                        this.isAjax = false
+                        wx.showToast({
+                           title: '支付失败',
+                           icon: 'none'
                         })
                      }
-                  } else {
-                     this.isAjax = false
-                  }
-               })
+                  })
+               }
             } else {
                this.isAjax = false
             }

@@ -41,9 +41,9 @@
          <button class="btn-round" v-else style="width: 60%;" open-type="getUserInfo" @getuserinfo="getuserinfo">立即登陆</button>
       </div>
 
-      <div class="person" v-if="hasUserInfo">
+      <div class="person" v-if="hasUserInfo" @click="toLink('/pages/point/main')">
          <h3>{{userInfo.name}}</h3>
-         <p @click="toLink('/pages/point/main')">积分：{{userInfo.score}}</p>
+         <p>积分：{{userInfo.score}}</p>
          <img :src="userInfo.headimg" />
       </div>
    </div>

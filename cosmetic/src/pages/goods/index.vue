@@ -7,12 +7,12 @@ page { background-color: rgb(248, 248, 248)}
 .type-tab li p { font-size: 26px; color: #666666; text-align: center;}
 .type-tab li.active p { color: #333333;}
 
-.second-tabs { padding: 0 30px; height: 88px; position: relative; display: flex;}
+.second-tabs { height: 88px; position: relative; display: flex;}
 .second-tabs:after { content: ''; width: 100%; height: 1px; background-color: #E8E8E8; position: absolute; bottom: 0; left: 0; transform: scaleY(.5);}
-.second-tabs li { height: 100%; position: relative; font-size: 26px; color: #666666; margin-right: 50px; display: flex; align-items: center;}
-.second-tabs li:last-child { margin-right: 0;}
+.second-tabs li { height: 100%; position: relative; font-size: 26px; color: #666666; padding: 0 30px; display: flex; justify-content: center; align-items: center; flex: 1 0 auto; }
+/*.second-tabs li:last-child { padding-right: 30px;}*/
 .second-tabs li.active { color: #3A3A3A;}
-.second-tabs li.active:after { content: ''; width: 100%; height: 5px; background-color: #3A3A3A; position: absolute; bottom: 0; left: 0;}
+.second-tabs li.active:after { content: ''; width: 60px; height: 5px; background-color: #3A3A3A; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);}
 </style>
 
 <template>
@@ -24,9 +24,12 @@ page { background-color: rgb(248, 248, 248)}
       </li>
    </ul>
    <div style="background-color: #ffffff; overflow: hidden;">
-      <ul class="second-tabs" v-if="secondList.length !== 0">
-         <li v-for="(item, index) in secondList" :key="index" :class="{active: secondType === item.id}" @click="secondChange(item.id)">{{item.cname}}</li>
-      </ul>
+      <scroll-view scroll-x>
+         <ul class="second-tabs" v-if="secondList.length !== 0">
+            <li class="van-tab" v-for="(item, index) in secondList" :key="index" :class="{active: secondType === item.id}" @click="secondChange(item.id)">{{item.cname}}</li>
+         </ul>
+      </scroll-view>
+
 
       <div class="goods-list">
          <c-goods-item v-for="i in goodsList" :key="id" :itemData="i"/>
@@ -95,6 +98,10 @@ export default {
       reset () {
          this.page = 1
          this.goodsList = []
+      },
+      tabChange (e) {
+         console.log('tabChange', e)
+         this.secondType = e.mp.detail.name
       }
    },
 

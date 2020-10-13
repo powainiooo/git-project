@@ -20,6 +20,7 @@ h3.title { font-size: 28px; color: #656565; text-align: center; margin: 40px 0 3
 .type-list ul li img { width: 42px; height: 42px;}
 
 .pro-detail { font-size: 24px; color: #333333; margin: 50px 0;}
+.pro-detail .img { width: 100%;}
 /*.infos-list { margin: 40px 30px 60px 30px;}*/
 /*.infos-list li { font-size: 24px; color: #333333; line-height: 50px;}*/
 
@@ -43,7 +44,7 @@ h3.title { font-size: 28px; color: #656565; text-align: center; margin: 40px 0 3
    <h2 class="title">{{goodsInfo.goods_name}}</h2>
 
    <div class="line2">
-      <div class="price"><span>￥</span>{{goodsInfo.min_price === goodsInfo.max_price ? (goodsInfo.min_price / 100) : (goodsInfo.min_price / 100) + '~' + (goodsInfo.max_price / 100)}}</div>
+      <div class="price"><span>￥</span>{{showPrice}}</div>
       <div class="jifen">（购买可得{{jf}}积分）</div>
       <div class="btn-share">
          <img src="/static/images/goods/icon-share.png" />
@@ -66,7 +67,7 @@ h3.title { font-size: 28px; color: #656565; text-align: center; margin: 40px 0 3
    </div>
 
    <div class="pro-detail">
-      <rich-text :nodes="goodsInfo.goods_desc"></rich-text>
+      <rich-text :nodes="desc"></rich-text>
    </div>
 
    <div style="background-color: #ffffff; overflow: hidden;">
@@ -105,16 +106,30 @@ export default {
          imgSrc: mpvue.imgSrc,
          id: 0,
          attrId: 0,
+         attrPrice: 0,
          bannerData: [],
          goodsInfo: {},
          ggList: {},
          goodsList: [],
+         desc: '',
          cartNums: 0,
          jf: 0,
          isAjax: false
       }
    },
-
+   computed: {
+      showPrice () {
+         if (this.attrId === 0) {
+            if (this.goodsInfo.min_price === this.goodsInfo.max_price) {
+               return parseFloat(this.goodsInfo.min_price) / 100
+            } else {
+               return `${parseFloat(this.goodsInfo.min_price) / 100}~${parseFloat(this.goodsInfo.max_price) / 100}`
+            }
+         } else {
+            return this.attrPrice
+         }
+      }
+   },
    methods: {
       getData (id) {
          postAction('get_goods_details', {
@@ -123,7 +138,10 @@ export default {
             this.goodsInfo = res.data.goods_info
             this.bannerData = res.data.goods_info.goods_img.split('|')
             this.ggList = res.data.gg_list
-            this.attrId = this.ggList[0].attr_id
+            // this.attrId = this.ggList[0].attr_id
+            // this.attrPrice = parseFloat(data.price) / 100
+            this.desc = handleImage(this.goodsInfo.goods_desc)
+            console.log(this.desc)
             this.goodsList = res.data.xg_goods_list
             this.jf = res.data.jf
             this.cartNums = res.data.cart_nums
@@ -131,6 +149,7 @@ export default {
       },
       selectTypes (data) {
          this.attrId = data.attr_id
+         this.attrPrice = parseFloat(data.price) / 100
       },
       toCard () {
          mpvue.navigateTo({
@@ -177,5 +196,10 @@ export default {
          path: `/pages/goodsDetail/main?id=${this.id}`
       }
    }
+}
+
+function handleImage (content) {
+   var newStr = content.replace(/<img/ig, '<img class="img"')
+   return newStr
 }
 </script>

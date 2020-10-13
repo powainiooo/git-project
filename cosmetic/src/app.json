@@ -1,5 +1,7 @@
 {
    "pages": [
+      "pages/goods/main",
+      "pages/register/main",
       "pages/index/main",
       "pages/order/list/main",
       "pages/order/detail/main",
@@ -12,9 +14,7 @@
       "pages/address/edit/main",
       "pages/point/main",
       "pages/personal/main",
-      "pages/goods/main",
       "pages/blessing/main",
-      "pages/register/main",
       "pages/ad/main",
       "pages/order/success/main",
       "pages/agreement/main",

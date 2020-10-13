@@ -84,21 +84,30 @@ export default {
          const item = this.typeList.find(i => i.id === id)
          this.secondList = item.sub
          this.secondType = this.secondList[0].id
-         this.page = 1
-         this.goodsList = []
+         this.reset()
          this.getData()
       },
       secondChange (id) {
          this.secondType = id
+         this.reset()
+         this.getData()
+      },
+      reset () {
          this.page = 1
          this.goodsList = []
-         this.getData()
       }
    },
 
    onLoad () {
       this.getTypeData()
       // let app = getApp()
+   },
+   onHide () {
+      console.log('onHide')
+   },
+   onUnload () {
+      console.log('onUnload')
+      this.reset()
    },
    onReachBottom () {
       if (!this.isLoadAll) {

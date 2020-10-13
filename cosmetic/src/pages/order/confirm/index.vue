@@ -160,6 +160,7 @@ export default {
          }).then(res => {
             this.goodsList = res.data.goods_list
             this.pageData = res.data
+            store.commit('SET_ADDRESS', res.data.address)
          })
       },
       selectAddr () {

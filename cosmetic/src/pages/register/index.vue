@@ -49,7 +49,7 @@
                     @change="onChange"
                     shape="square"
                     icon-size="20rpx"
-                    class="content">本人已阅读并同意 <a href="/pages/agreement/main?page=sytk">使用条款</a> 和 <a href="/pages/agreement/main?page=yszc">隐私政策</a>，并且同意接受通过短信/微信/邮件信息等方式向我发送营销信息。</van-checkbox>
+                    class="content">本人已阅读并同意 <a href="/pages/agreement/main?page=sytk" style="display: inline;">使用条款</a> 和 <a href="/pages/agreement/main?page=yszc" style="display: inline;">隐私政策</a>，并且同意接受通过短信/微信/邮件信息等方式向我发送营销信息。</van-checkbox>
       <div class="content" style="color: #FF0000; margin: 0 0 14px 0" v-if="source === 'buy'">温馨提示：注册成功会员后，购物可活动积分，购物时积分可以直接抵扣使用</div>
       <img :src="imgSrc + pageData.get_first_page_hyqy_image.val" mode="widthFix" class="img_block"/>
    </div>

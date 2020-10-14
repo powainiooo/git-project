@@ -26,7 +26,7 @@ page { background-color: rgb(248, 248, 248)}
    </div>
    <ul class="list">
       <li v-for="(i, index) in listData" :key="index">
-         <h3>{{i.context}}</h3>
+         <h3>{{i.content}}</h3>
          <p>{{i.time}}</p>
       </li>
    </ul>
@@ -60,6 +60,7 @@ export default {
    },
 
    onLoad (options) {
+      Object.assign(this.$data, this.$options.data())
       this.id = options.id
       this.getData()
    }

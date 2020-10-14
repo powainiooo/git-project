@@ -102,7 +102,8 @@ export default {
          cartsList: [],
          goodsList: [],
          giftCheck: false,
-         wishInfo: {}
+         wishInfo: {},
+         isReg: ''
       }
    },
    computed: {
@@ -162,6 +163,7 @@ export default {
             this.isEmpty = this.cartsList.length === 0
             this.goodsList = res.data.xg_list
             this.wishInfo = res.data.wish_info
+            this.isReg = res.data.is_reg
          })
       },
       doDel () {
@@ -192,17 +194,23 @@ export default {
             return false
          }
          const ids = this.selected.join('|')
-         console.log(this.selected)
          const flag = this.giftCheck ? '1' : '0'
-         mpvue.navigateTo({
-            url: `/pages/order/confirm/main?id=${ids}&flag=${flag}`
-         })
+         if (this.isReg === '1') {
+            mpvue.navigateTo({
+               url: `/pages/order/confirm/main?id=${ids}&flag=${flag}`
+            })
+         } else if (this.isReg === '0') {
+            mpvue.navigateTo({
+               url: `/pages/register/main?source=buy&id=${ids}&flag=${flag}`
+            })
+         }
       }
    },
    onShow () {
       this.getData()
    },
    onLoad (options) {
+      Object.assign(this.$data, this.$options.data())
       const selectId = options.id || ''
       console.log('selectId', selectId, options)
       if (selectId !== '') {

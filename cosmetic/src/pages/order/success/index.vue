@@ -82,6 +82,7 @@ export default {
    },
 
    onLoad (options) {
+      Object.assign(this.$data, this.$options.data())
       this.orderNum = options.orderNum
       this.getData()
       // let app = getApp()

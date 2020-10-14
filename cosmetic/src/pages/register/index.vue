@@ -45,17 +45,24 @@
    </div>
 
    <div class="hints">
-      <van-checkbox :value="checked"
-                    @change="onChange"
-                    shape="square"
-                    icon-size="20rpx"
-                    class="content">本人已阅读并同意 <a href="/pages/agreement/main?page=sytk" style="display: inline;">使用条款</a> 和 <a href="/pages/agreement/main?page=yszc" style="display: inline;">隐私政策</a>，并且同意接受通过短信/微信/邮件信息等方式向我发送营销信息。</van-checkbox>
+<!--      <van-checkbox :value="checked"-->
+<!--                    @change="onChange"-->
+<!--                    icon-size="20rpx"-->
+<!--                    class="content">本人已阅读并同意 <a href="/pages/agreement/main?page=sytk" style="display: inline;">使用条款</a> 和 <a href="/pages/agreement/main?page=yszc" style="display: inline;">隐私政策</a>，并且同意接受通过短信/微信/邮件信息等方式向我发送营销信息。</van-checkbox>-->
+      <div class="content">
+         <van-checkbox :value="checked"
+                       @change="onChange"
+                       icon-size="20rpx"
+                       checked-color="#333333"
+                       class="content" style="display: inline-block; margin-right: 5px;"></van-checkbox>
+         <span @click="checked = !checked">本人已阅读并同意 <a href="/pages/agreement/main?page=sytk" style="display: inline;">使用条款</a> 和 <a href="/pages/agreement/main?page=yszc" style="display: inline;">隐私政策</a>，并且同意接受通过短信/微信/邮件信息等方式向我发送营销信息。</span>
+      </div>
       <div class="content" style="color: #FF0000; margin: 0 0 14px 0" v-if="source === 'buy'">温馨提示：注册成功会员后，购物可活动积分，购物时积分可以直接抵扣使用</div>
       <img :src="imgSrc + pageData.get_first_page_hyqy_image.val" mode="widthFix" class="img_block"/>
    </div>
 
    <div class="foot-btns">
-      <button v-if="source === 'buy'">暂不注册直接购买</button>
+      <button v-if="source === 'buy'" @click="skip">暂不注册直接购买</button>
       <button @click="doRegister">立即注册</button>
    </div>
 </div>
@@ -92,7 +99,9 @@ export default {
             sex: '',
             agree: ''
          },
-         isAjax: false
+         isAjax: false,
+         ids: '',
+         flag: ''
       }
    },
 
@@ -153,12 +162,22 @@ export default {
                this.isAjax = false
             }
          })
+      },
+      skip () {
+         mpvue.redirectTo({
+            url: `/pages/order/confirm/main?id=${this.ids}&flag=${this.flag}`
+         })
       }
    },
 
    onLoad (options) {
+      Object.assign(this.$data, this.$options.data())
       const source = options.source || 'index'
       this.source = source
+      if (source === 'buy') {
+         this.ids = options.id
+         this.flag = options.flag
+      }
       this.getData()
       // let app = getApp()
    }

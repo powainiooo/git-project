@@ -162,7 +162,9 @@ export default {
          }).then(res => {
             this.goodsList = res.data.goods_list
             this.pageData = res.data
-            store.commit('SET_ADDRESS', res.data.address)
+            if (!Array.isArray(res.data.address)) {
+               store.commit('SET_ADDRESS', res.data.address)
+            }
          })
       },
       selectAddr () {
@@ -204,7 +206,7 @@ export default {
                   } else if (res.data.is_reg === '0') {
                      this.isAjax = false
                      mpvue.navigateTo({
-                        url: '/pages/register/main'
+                        url: '/pages/register/main?source=buy'
                      })
                   }
                } else {
@@ -261,6 +263,7 @@ export default {
    },
 
    onLoad (options) {
+      Object.assign(this.$data, this.$options.data())
       console.log(options)
       this.ids = options.id || '487'
       this.flag = options.flag || '0'

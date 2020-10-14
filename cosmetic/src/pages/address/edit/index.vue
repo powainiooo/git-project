@@ -103,6 +103,7 @@ export default {
    },
 
    onLoad (options) {
+      Object.assign(this.$data, this.$options.data())
       this.page = options.page || 'new'
       if (this.page === 'new') {
          this.url = 'add_address'

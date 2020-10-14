@@ -102,6 +102,9 @@ export default {
 
    onShow (options) {
       this.getData()
+   },
+   onLoad () {
+      Object.assign(this.$data, this.$options.data())
    }
 }
 </script>

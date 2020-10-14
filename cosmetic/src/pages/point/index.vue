@@ -37,7 +37,7 @@ page { background-color: rgb(248, 248, 248)}
          <img src="/static/images/point/icon1.png" v-else/>
          <div>
             <h3>{{i.type_str}}</h3>
-            <p>{{i.ctime}}</p>
+            <p>{{i.timeStr}}</p>
          </div>
       </div>
       <div class="vals">+{{i.score}}</div>
@@ -47,6 +47,7 @@ page { background-color: rgb(248, 248, 248)}
 
 <script>
 import { postAction } from '@/utils/api'
+import { formatTime } from '@/utils'
 
 export default {
    data () {
@@ -69,11 +70,15 @@ export default {
             this.listData = res.data.jfmx
             this.score = res.data.score
             this.dk_money = res.data.dk_money
+            this.listData.forEach(i => {
+               i.timeStr = formatTime(new Date(parseInt(i.ctime) * 1000))
+            })
          })
       }
    },
 
    onLoad () {
+      Object.assign(this.$data, this.$options.data())
       this.getData()
       // let app = getApp()
    }

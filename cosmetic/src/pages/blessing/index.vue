@@ -99,6 +99,7 @@ export default {
    },
 
    onLoad () {
+      Object.assign(this.$data, this.$options.data())
       this.getData()
       // let app = getApp()
    }

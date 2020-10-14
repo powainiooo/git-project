@@ -37,6 +37,7 @@
   "projectname": "cosmetic",
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
+  "libVersion": "2.12.2",
   "condition": {
     "search": {
       "current": -1,

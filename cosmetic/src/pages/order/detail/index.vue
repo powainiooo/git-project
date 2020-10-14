@@ -244,6 +244,7 @@ export default {
    },
 
    onLoad (options) {
+      Object.assign(this.$data, this.$options.data())
       const id = options.id || ''
       this.getData(id)
       // let app = getApp()

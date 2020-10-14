@@ -83,6 +83,7 @@ export default {
       this.refresh()
    },
    onLoad (options) {
+      Object.assign(this.$data, this.$options.data())
       this.currentTab = options.status || '0'
       // let app = getApp()
    },

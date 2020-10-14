@@ -1,10 +1,11 @@
 {
    "pages": [
       "pages/index/main",
+      "pages/point/main",
+      "pages/register/main",
       "pages/goods/main",
       "pages/address/list/main",
       "pages/address/edit/main",
-      "pages/register/main",
       "pages/order/list/main",
       "pages/order/detail/main",
       "pages/goodsDetail/main",
@@ -12,7 +13,6 @@
       "pages/order/confirm/main",
       "pages/invoice/main",
       "pages/shoppingCart/main",
-      "pages/point/main",
       "pages/personal/main",
       "pages/blessing/main",
       "pages/ad/main",

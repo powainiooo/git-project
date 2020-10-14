@@ -107,14 +107,8 @@ export default {
 
    onLoad () {
       this.getTypeData()
+      Object.assign(this.$data, this.$options.data())
       // let app = getApp()
-   },
-   onHide () {
-      console.log('onHide')
-   },
-   onUnload () {
-      console.log('onUnload')
-      this.reset()
    },
    onReachBottom () {
       if (!this.isLoadAll) {

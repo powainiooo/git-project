@@ -26,11 +26,11 @@ page { background-color: rgb(248, 248, 248)}
       </div>
       <div class="form-item">
          <p>发票抬头</p>
-         <input v-model="formData.fp_name" type="number"/>
+         <input v-model="formData.fp_name"/>
       </div>
       <div class="form-item">
          <p>税号（个人不用填）</p>
-         <input  v-model="formData.fp_sh"/>
+         <input v-model="formData.fp_sh"/>
       </div>
       <div class="form-item">
          <p>电子邮箱</p>
@@ -70,6 +70,7 @@ export default {
    },
 
    onLoad (options) {
+      Object.assign(this.$data, this.$options.data())
       if (store.state.invoiceInfo !== null) {
          this.formData = {...store.state.invoiceInfo}
       }

@@ -162,12 +162,12 @@ export default {
          })
       },
       addCart (status = 'add') {
-         if (this.isAjax) return false
-         this.isAjax = true
          if (this.attrId === 0) {
             mpvue.showToast({ title: '请选择商品规格', icon: 'none' })
             return false
          }
+         if (this.isAjax) return false
+         this.isAjax = true
          postAction('cart_add', {
             id: this.id,
             attr_id: this.attrId,
@@ -187,11 +187,16 @@ export default {
          })
       }
    },
-
+   onShow () {
+      // console.log('this.attrId', this.attrId)
+      // console.log('this.isAjax', this.isAjax)
+   },
    onLoad (options) {
       const id = options.id || '296'
       this.id = id
       this.getData(id)
+      Object.assign(this.$data, this.$options.data())
+      // console.log('goods detail onLoad', this)
       // let app = getApp()
    },
    onShareAppMessage () {

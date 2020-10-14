@@ -1,5 +1,5 @@
 <style>
-.banner { position: relative;}
+.banner { position: relative; height: 460px; background-color: rgb(51, 51, 51)}
 .banner img { width: 100%; height: 460px;}
 .banner .nav { width: 630px; height: 210px; background-color: #ffffff; border-radius: 20px; box-shadow: 0 5px 12px 1px rgba(51, 51, 51, 0.2); box-sizing: border-box; position: absolute; left: 60px; bottom: -80px; display: flex; justify-content: center; align-items: center;}
 .banner .nav ul { width: 100%; height: 100%; display: flex; justify-content: space-between; align-items: center; padding: 0 120px;}
@@ -139,6 +139,7 @@ export default {
       this.getData()
    },
    onLoad () {
+      Object.assign(this.$data, this.$options.data())
       // let app = getApp()
    }
 }

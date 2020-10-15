@@ -152,11 +152,15 @@ export default {
          postAction('save_regnfo', this.formData).then(res => {
             if (res.ret === 0) {
                mpvue.showToast({ title: '注册成功！' })
-               setTimeout(() => {
-                  mpvue.navigateBack({
-                     delta: 1
-                  })
-               }, 1500)
+               if (this.source === 'buy') {
+                  this.skip()
+               } else {
+                  setTimeout(() => {
+                     mpvue.navigateBack({
+                        delta: 1
+                     })
+                  }, 1500)
+               }
             } else {
                mpvue.showToast({ title: res.msg, icon: 'none' })
                this.isAjax = false

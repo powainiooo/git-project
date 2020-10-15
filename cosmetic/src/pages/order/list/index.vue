@@ -34,7 +34,7 @@ page { background-color: rgb(248, 248, 248)}
 </template>
 
 <script>
-import cOrderItem from '@/components/orderItem2'
+import cOrderItem from './orderItem'
 import { postAction } from '@/utils/api'
 
 export default {
@@ -63,7 +63,7 @@ export default {
             status: this.currentTab
          }).then(res => {
             this.orderList = this.orderList.concat(res.data.list)
-            this.totals = res.data.nums
+            this.totals = parseInt(res.data.nums)
             this.isLoadAll = this.totals === this.orderList.length
          })
       },
@@ -80,14 +80,17 @@ export default {
       }
    },
    onShow () {
+      console.log('order list onshow')
       this.refresh()
    },
    onLoad (options) {
-      Object.assign(this.$data, this.$options.data())
+      // Object.assign(this.$data, this.$options.data())
+      console.log('order list onload')
       this.currentTab = options.status || '0'
       // let app = getApp()
    },
    onReachBottom () {
+      console.log('order list onReachBottom')
       if (!this.isLoadAll) {
          this.page += 1
          this.getData()

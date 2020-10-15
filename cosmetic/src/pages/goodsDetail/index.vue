@@ -192,10 +192,10 @@ export default {
       // console.log('this.isAjax', this.isAjax)
    },
    onLoad (options) {
+      Object.assign(this.$data, this.$options.data())
       const id = options.id || '296'
       this.id = id
       this.getData(id)
-      Object.assign(this.$data, this.$options.data())
       // console.log('goods detail onLoad', this)
       // let app = getApp()
    },

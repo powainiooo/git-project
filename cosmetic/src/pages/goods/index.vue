@@ -106,8 +106,8 @@ export default {
    },
 
    onLoad () {
-      this.getTypeData()
       Object.assign(this.$data, this.$options.data())
+      this.getTypeData()
       // let app = getApp()
    },
    onReachBottom () {

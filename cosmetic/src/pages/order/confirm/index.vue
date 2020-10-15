@@ -199,16 +199,19 @@ export default {
                mpvue.hideLoading()
                if (res.ret === 0) {
                   // const orderNum = res.data.order_num
-                  if (res.data.is_reg === '1') {
-                     this.orderId = res.data.id
-                     this.orderNum = res.data.order_num
-                     this.doPayment(res.data.id)
-                  } else if (res.data.is_reg === '0') {
-                     this.isAjax = false
-                     mpvue.navigateTo({
-                        url: '/pages/register/main?source=buy'
-                     })
-                  }
+                  this.orderId = res.data.id
+                  this.orderNum = res.data.order_num
+                  this.doPayment(res.data.id)
+                  // if (res.data.is_reg === '1') {
+                  //    this.orderId = res.data.id
+                  //    this.orderNum = res.data.order_num
+                  //    this.doPayment(res.data.id)
+                  // } else if (res.data.is_reg === '0') {
+                  //    this.isAjax = false
+                  //    mpvue.navigateTo({
+                  //       url: '/pages/register/main?source=buy'
+                  //    })
+                  // }
                } else {
                   this.isAjax = false
                }

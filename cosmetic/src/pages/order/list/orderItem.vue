@@ -84,6 +84,7 @@ export default {
          postAction('pay', {
             id: this.itemData.id
          }).then(res => {
+            console.log('hideLoading')
             mpvue.hideLoading()
             if (res.ret === 0) {
                if (res.data.need_pay === 0) {
@@ -114,6 +115,7 @@ export default {
                   })
                }
             } else {
+               mpvue.showToast({ title: res.data.msg, icon: 'none' })
                this.isAjax = false
             }
          })

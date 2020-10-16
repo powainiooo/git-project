@@ -25,7 +25,7 @@ page { background-color: rgb(248, 248, 248)}
       <img src="/static/images/point/banner.png" />
       <div>
          <h3>{{score}}</h3>
-         <p>您共有{{score}}积分，可以抵扣{{dk_money}}元</p>
+         <p>您共有{{score}}积分，可以抵扣{{dk_money / 100}}元</p>
       </div>
    </div>
 <!--   <ul class="tabs">-->
@@ -40,7 +40,7 @@ page { background-color: rgb(248, 248, 248)}
             <p>{{i.timeStr}}</p>
          </div>
       </div>
-      <div class="vals">+{{i.score}}</div>
+      <div class="vals">{{(i.type === '1' ? '+' : '') + i.score}}</div>
    </div>
 </div>
 </template>

@@ -21,7 +21,7 @@ page { background-color: rgb(248, 248, 248)}
       <div class="addr-item" v-for="i in listData" :key="id">
          <div @click="selectAddr(i)">
             <div class="line1">{{i.name}}<span>{{i.mobile}}</span></div>
-            <div class="line2">{{i.province}}{{i.city}}{{i.area}}{{i.address}}</div>
+            <div class="line2">{{i.address}}{{i.house_num}}</div>
          </div>
 
          <div class="line3">
@@ -63,6 +63,9 @@ export default {
                   this.check = i.id
                }
             })
+            if (this.listData.length === 0) {
+               store.commit('SET_ADDRESS', null)
+            }
          })
       },
       doEdit (item) {

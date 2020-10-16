@@ -6,7 +6,7 @@ page { background-color: rgb(248, 248, 248)}
 .form-item p { font-size: 30px; color: #333333;}
 .form-item input { width: 550px; font-size: 30px; color: #333333; text-align: right; height: 80px; border: none; background-color: transparent;}
 .form-item-addr { height: auto}
-.form-item-addr textarea { width: 100%; font-size: 30px; color: #333333; padding: 30px 0;}
+.form-item-addr textarea { width: 100%; height: 100px; font-size: 30px; color: #333333; padding: 30px 0;}
 
 .btns { width: 650px; margin: 70px auto;}
 .btns .btn-round { height: 80px; font-size: 36px;}
@@ -23,14 +23,22 @@ page { background-color: rgb(248, 248, 248)}
          <p>手机号码</p>
          <input v-model="formData.mobile" type="number"/>
       </div>
-      <picker mode="region" @change="addrChange">
-         <div class="form-item">
-            <p>所在地区</p>
-            <input disabled v-model="addr"/>
-         </div>
-      </picker>
-      <div class="form-item form-item-addr">
-         <textarea placeholder="详细地址：如道路、门牌号、小区名、楼栋号、单元室等"  v-model="formData.address"/>
+<!--      <picker mode="region" @change="addrChange">-->
+<!--         <div class="form-item">-->
+<!--            <p>所在地区</p>-->
+<!--            <input disabled v-model="addr"/>-->
+<!--         </div>-->
+<!--      </picker>-->
+<!--      <div class="form-item" @click="openAddr">-->
+<!--         <p>所在地区</p>-->
+<!--         <input disabled v-model="addr"/>-->
+<!--      </div>-->
+      <div class="form-item form-item-addr" @click="openAddr">
+         <textarea placeholder="详细地址"  v-model="formData.address"/>
+      </div>
+      <div class="form-item">
+         <p>门牌号</p>
+         <input  v-model="formData.house_num"/>
       </div>
       <div class="form-item">
          <p>邮政编码</p>
@@ -60,9 +68,10 @@ export default {
          formData: {
             name: '',
             mobile: '',
-            province: '',
-            city: '',
-            area: '',
+            // province: '',
+            // city: '',
+            // area: '',
+            house_num: '',
             address: '',
             yzbm: '',
             default: ''
@@ -97,6 +106,14 @@ export default {
                }, 1500)
             } else {
                this.isAjax = false
+            }
+         })
+      },
+      openAddr (e) {
+         wx.chooseLocation({
+            success: (res) => {
+               console.log(res)
+               this.formData.address = `${res.address}${res.name}`
             }
          })
       }

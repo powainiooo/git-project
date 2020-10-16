@@ -10,7 +10,7 @@ page { background-color: rgb(248, 248, 248)}
       <rich-text :nodes="contents"></rich-text>
    </div>
    <div class="btns">
-      <a href="#" class="btn-round">确 认</a>
+      <a href="#" class="btn-round" @click="goBack">确 认</a>
    </div>
 </div>
 </template>
@@ -29,6 +29,11 @@ export default {
       }
    },
    methods: {
+      goBack () {
+         mpvue.navigateBack({
+            delta: -1
+         })
+      }
    },
 
    onLoad (options) {

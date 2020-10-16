@@ -28,6 +28,7 @@ const ajax = (opts, autoMsg = true) => {
             } else if (res.data.ret === 0) {
                // mpvue.showToast({ title: res.data.msg })
             } else {
+               // console.log('res.data.ret')
                mpvue.showToast({ title: res.data.msg, icon: 'none' })
             }
             wx.hideNavigationBarLoading()

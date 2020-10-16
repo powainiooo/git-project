@@ -16,22 +16,22 @@
 </style>
 
 <template>
-<div class="c-cart-item">
-   <van-checkbox shape="square" :name="itemData.id" checked-color="#333333" icon-size="26rpx" class="c-cart-item-cb"/>
+<div class="c-cart-item" @click="doSelect">
+   <van-checkbox shape="square" :name="itemData.id" checked-color="#333333" icon-size="26rpx" class="c-cart-item-cb"  @click.stop="tap"/>
    <img :src="imgSrc + itemData.cover" mode="aspectFit" class="c-cart-item-img"/>
    <div class="c-cart-item-infos">
       <div>
          <h3 class="c-cart-item-title">{{itemData.goods_name}}</h3>
          <ul class="c-cart-item-tag">
-            <li>{{itemData.attr_name}}-{{nums}}</li>
+            <li>{{itemData.attr_name}}</li>
          </ul>
       </div>
       <div class="c-cart-item-bottom">
          <h3 class="c-cart-item-price">￥{{itemData.price / 100}}</h3>
          <ul class="c-cart-item-nums">
-            <li class="c-cart-item-nums-btn" @click="changeNum('reduce')">-</li>
+            <li class="c-cart-item-nums-btn" @click.stop="changeNum('reduce')">-</li>
             <li class="c-cart-item-nums-val">{{buyNum}}</li>
-            <li class="c-cart-item-nums-btn" @click="changeNum('add')">+</li>
+            <li class="c-cart-item-nums-btn" @click.stop="changeNum('add')">+</li>
          </ul>
       </div>
    </div>
@@ -65,7 +65,11 @@ export default {
                this.$emit('update:buyNum', res.data)
             }
          })
-      }
+      },
+      doSelect () {
+         this.$emit('select', this.itemData.id)
+      },
+      tap () {}
    }
 }
 </script>

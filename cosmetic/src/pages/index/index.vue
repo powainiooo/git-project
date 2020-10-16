@@ -87,9 +87,19 @@ export default {
             if (adTime === '' || adTime === null) {
                adTime = 0
             }
-            const now = new Date().getTime()
-            if (this.adData.tc !== '' && now > adTime + 24 * 60 * 60 * 1000) {
+            if (adTime === 0) {
                this.showAd = true
+            } else {
+               const old = new Date(adTime)
+               const oldMonth = old.getMonth()
+               const oldDate = old.getDate()
+               const now = new Date()
+               const nowTime = now.getTime()
+               const nowMonth = now.getMonth()
+               const nowDate = now.getDate()
+               if (this.adData.tc !== '' && nowTime > adTime && oldMonth !== nowMonth && oldDate !== nowDate) {
+                  this.showAd = true
+               }
             }
          })
       },

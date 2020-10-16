@@ -48,14 +48,14 @@ h3.title { font-size: 28px; color: #656565; text-align: center; margin: 40px 0 3
 
    <template v-else>
    <div class="operas">
-      <van-checkbox :value="checkAll" @change="checkAllChange" checked-color="#333333" icon-size="30rpx">
+      <van-checkbox :value="checkAll" @change="checkAllChange" checked-color="#333333" icon-size="36rpx">
          全选
       </van-checkbox>
       <button @click="doDel">删除</button>
    </div>
 
    <van-checkbox-group :value="selected" @change="singleChange">
-      <c-cart-item v-for="i in cartsList" :key="id" :itemData="i" :buyNum.sync="i.buy_num"/>
+      <c-cart-item v-for="i in cartsList" :key="id" :itemData="i" :buyNum.sync="i.buy_num" @select="singleSelect"/>
    </van-checkbox-group>
 
    <div class="gift-hint">
@@ -63,7 +63,7 @@ h3.title { font-size: 28px; color: #656565; text-align: center; margin: 40px 0 3
       <p>这是一份礼品，您可以免费填写祝福语，我们会将祝福语印制在祝福卡上，并与所购商品及礼盒一起寄出。</p>
    </div>
 
-   <div class="preview-container" v-if="giftCheck && wishInfo.to !== ''">
+   <div class="preview-container" v-if="giftCheck">
       <img :src="imgSrc + wishInfo.wish_bg" />
       <div class="form-item"><span>To:</span>{{wishInfo.to}}</div>
       <div class="form-item" style="padding-bottom: 60rpx;"><span>Message:</span>
@@ -127,7 +127,16 @@ export default {
          }
       },
       singleChange (e) {
+         console.log('singleChange', e)
          this.selected = e.mp.detail
+         this.checkAll = this.selected.length === this.cartsList.length
+      },
+      singleSelect (id) {
+         if (this.selected.includes(id)) {
+            this.selected.splice(this.selected.indexOf(id), 1)
+         } else {
+            this.selected.push(id)
+         }
          this.checkAll = this.selected.length === this.cartsList.length
       },
       giftChange (e) {

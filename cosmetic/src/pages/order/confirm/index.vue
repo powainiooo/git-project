@@ -40,7 +40,7 @@ page { background-color: rgb(248, 248, 248)}
       <img src="/static/images/order/address_icon@2x.png" />
       <div>
          <h3>{{addressInfo.name}} <span>{{addressInfo.mobile}}</span></h3>
-         <p>{{addressInfo.province}}{{addressInfo.city}}{{addressInfo.area}}{{addressInfo.address}}</p>
+         <p>{{addressInfo.address}}{{addressInfo.house_num}}</p>
       </div>
    </div>
 
@@ -48,7 +48,7 @@ page { background-color: rgb(248, 248, 248)}
 
    <div class="gift-hint">
       <h3><van-switch :checked="giftCheck" @change="giftChange" size="28rpx" active-color="#333333" class="sw"/>使用积分抵扣</h3>
-      <p v-if="giftCheck">本次使用了{{pageData.use_score}}积分抵扣{{pageData.dk_money}}元 <img src="/static/images/order/jifen@2x.png" /></p>
+      <p v-if="giftCheck">本次使用了{{pageData.use_score}}积分抵扣{{pageData.dk_money / 100}}元 <img src="/static/images/order/jifen@2x.png" /></p>
    </div>
 
    <div class="details">
@@ -63,7 +63,7 @@ page { background-color: rgb(248, 248, 248)}
          </li>
          <li v-if="giftCheck">
             <span>积分抵扣</span>
-            <span>-￥{{pageData.dk_money}}</span>
+            <span>-￥{{pageData.dk_money / 100}}</span>
          </li>
 <!--         <li>-->
 <!--            <span>总金额</span>-->
@@ -255,6 +255,11 @@ export default {
                            title: '支付失败',
                            icon: 'none'
                         })
+                        setTimeout(() => {
+                           mpvue.reLaunch({
+                              url: `/pages/order/list/main?status=1`
+                           })
+                        }, 1500)
                      }
                   })
                }

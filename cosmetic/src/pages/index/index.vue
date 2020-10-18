@@ -6,7 +6,8 @@ h3.title { font-size: 40px; color: #333333; font-weight: bold; text-align: cente
 .integral-list li { font-size: 22px; color: #333333; line-height: 70px; text-align: center;}
 .integral-list li span { display: inline-block; width: 86px; height: 36px; border: 1px solid #3a3a3a; line-height: 36px; text-align: center; margin: 0 10px;}
 
-.btns { width: 240px; margin: 100px auto 180px auto;}
+.btns { width: 100%; margin: 100px auto 180px auto;}
+.btns a { margin-right: auto; margin-left: auto}
 
 .ad-frame { width: 100%; height: 100vh; position: fixed; top: 0; left: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; background-color: rgba(0, 0, 0, .8); z-index: 10000;}
 .ad-frame .img { width: 500px; margin-bottom: 60px;}
@@ -40,7 +41,11 @@ h3.title { font-size: 40px; color: #333333; font-weight: bold; text-align: cente
    <h2 v-if="hyqy.val !== '0'" class="title">会员权益</h2>
 <!--   <h3 class="title">加入XXXX会员</h3>-->
    <img v-if="hyqy.val !== '0'" :src="imgSrc + hyqy.val" mode="widthFix" class="img_block"/>
-   <div class="btns"><a href="/pages/register/main?source=index" class="btn-round">立即注册</a></div>
+   <div class="btns">
+      <a href="" class="btn-round" v-if="hasSaveInfo" style="width: 430rpx">你已经成为了会员，感谢你的支持</a>
+<!--      <a href="/pages/register/main?source=index" class="btn-round" v-else style="width: 240rpx">立即注册</a>-->
+      <button v-else class="btn-round" open-type="getUserInfo" @getuserinfo="getuserinfo" style="width: 240rpx">立即注册</button>
+   </div>
 
    <div class="ad-frame" v-if="showAd">
       <img :src="imgSrc + adData.tc" mode="widthFix" class="img" @click="toAdDetail"/>
@@ -55,7 +60,8 @@ h3.title { font-size: 40px; color: #333333; font-weight: bold; text-align: cente
 import cBanner from '@/components/banner'
 import cGoodsSwiper from '@/components/goodsSwiper'
 import cFooterNav from '@/components/footerNav'
-import { getAction } from '@/utils/api'
+import { getAction, postAction } from '@/utils/api'
+import store from '@/store'
 
 export default {
    components: { cBanner, cGoodsSwiper, cFooterNav },
@@ -70,6 +76,11 @@ export default {
          jfData: {},
          bottomAd: {},
          hyqy: {}
+      }
+   },
+   computed: {
+      hasSaveInfo () {
+         return !Array.isArray(store.state.personalInfo)
       }
    },
    methods: {
@@ -118,6 +129,17 @@ export default {
          this.doCloseAd()
          mpvue.navigateTo({
             url: `/pages/ad/main`
+         })
+      },
+      getuserinfo (e) {
+         const userInfo = e.mp.detail.userInfo
+         postAction('save_userinfo', userInfo).then(res => {
+            if (res.ret === 0) {
+               store.commit('SET_PERSONINFO', userInfo)
+               mpvue.navigateTo({
+                  url: `/pages/register/main?source=index`
+               })
+            }
          })
       }
    },

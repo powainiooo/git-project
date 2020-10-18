@@ -11,6 +11,7 @@ const store = new Vuex.Store({
    state: {
       [tokenKey]: '',
       personalInfo: null,
+      settings: {},
       imgSrc: 'https://yghzp.vsapp.cn',
       hhqy: '',
       thhzc: '',
@@ -27,6 +28,9 @@ const store = new Vuex.Store({
       },
       SET_PERSONINFO (state, data) {
          state.personalInfo = data
+      },
+      SET_SETTING (state, data) {
+         state.settings = data
       },
       SET_HHQY (state, data) {
          state.hhqy = data

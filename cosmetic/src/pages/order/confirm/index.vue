@@ -124,7 +124,7 @@ export default {
          ids: '',
          flag: '',
          goodsList: [],
-         // pageData: {},
+         pageData: {},
          isAjax: false,
          orderId: '',
          orderNum: ''
@@ -219,7 +219,10 @@ export default {
                   //    })
                   // }
                } else {
-                  this.isAjax = false
+                  this.$nextTick(() => {
+                     mpvue.showToast({ title: res.msg, icon: 'none' })
+                     this.isAjax = false
+                  })
                }
             })
          } else {
@@ -270,7 +273,10 @@ export default {
                   })
                }
             } else {
-               this.isAjax = false
+               this.$nextTick(() => {
+                  mpvue.showToast({ title: res.msg, icon: 'none' })
+                  this.isAjax = false
+               })
             }
          })
       }

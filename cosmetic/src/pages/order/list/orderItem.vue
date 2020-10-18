@@ -116,8 +116,10 @@ export default {
                   })
                }
             } else {
-               mpvue.showToast({ title: res.data.msg, icon: 'none' })
-               this.isAjax = false
+               this.$nextTick(() => {
+                  mpvue.showToast({ title: res.msg, icon: 'none' })
+                  this.isAjax = false
+               })
             }
          })
       },

@@ -120,7 +120,7 @@ export default {
          return price
       },
       hasSaveInfo () {
-         return !Array.isArray(store.state.user_info)
+         return !Array.isArray(store.state.personalInfo)
       }
    },
    methods: {

@@ -214,7 +214,10 @@ export default {
                   })
                }
             } else {
-               this.isAjax = false
+               this.$nextTick(() => {
+                  mpvue.showToast({ title: res.msg, icon: 'none' })
+                  this.isAjax = false
+               })
             }
          })
       },

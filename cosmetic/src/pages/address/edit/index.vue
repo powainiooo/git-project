@@ -34,7 +34,7 @@ page { background-color: rgb(248, 248, 248)}
 <!--         <input disabled v-model="addr"/>-->
 <!--      </div>-->
       <div class="form-item form-item-addr" @click="openAddr">
-         <textarea placeholder="详细地址"  v-model="formData.address"/>
+         <textarea placeholder="详细地址" :disabled="userLocation" v-model="formData.address"/>
       </div>
       <div class="form-item">
          <p>门牌号</p>
@@ -50,6 +50,7 @@ page { background-color: rgb(248, 248, 248)}
       </div>
    </div>
 
+   <div class="btns"><a href="#" class="btn-round" @click="openAddr">地址测试</a> </div>
    <div class="btns"><a href="#" class="btn-round" @click="doSave">保 存</a> </div>
 </div>
 </template>
@@ -80,7 +81,11 @@ export default {
          isAjax: false
       }
    },
-
+   computed: {
+      userLocation () {
+         return store.state.settings['scope.userLocation']
+      }
+   },
    methods: {
       onChange (e) {
          this.check = e.mp.detail

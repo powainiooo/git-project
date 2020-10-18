@@ -27,6 +27,9 @@ const ajax = (opts, autoMsg = true) => {
                // }, 1500)
             } else if (res.data.ret === 0) {
                // mpvue.showToast({ title: res.data.msg })
+               // if (opts.url === 'https://yghzp.vsapp.cn/mobile/kservice?path=pay&login_key=ef83e08e4000540ceb2636b29fa12a7f') {
+               //    mpvue.showToast({ title: res.data.msg })
+               // }
             } else {
                // console.log('res.data.ret')
                mpvue.showToast({ title: res.data.msg, icon: 'none' })

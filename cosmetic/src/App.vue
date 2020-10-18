@@ -2,7 +2,7 @@
 import config from '@/config'
 import store from '@/store'
 import { promisify } from '@/utils'
-import { doLogin } from '@/utils/api'
+import { doLogin, postAction } from '@/utils/api'
 const { tokenKey } = config
 const login = promisify(mpvue.login)
 const getSetting = promisify(mpvue.getSetting)
@@ -34,6 +34,7 @@ export default {
       mpvue.imgSrc = store.state.imgSrc
       console.log('onlogin1')
       this.onlogin()
+      this.getPersonData()
    },
    log () {
       console.log(`log at:${Date.now()}`)
@@ -68,6 +69,14 @@ export default {
             console.log('resUserInfo', resUserInfo)
             store.commit('SET_PERSONINFO', resUserInfo.userInfo)
          }
+      },
+      getPersonData () {
+         postAction('get_preson_info').then(res => {
+            if (res.ret === 0) {
+               // store.commit('SET_SAVEINFO', !Array.isArray(res.data.user_info))
+               store.commit('SET_PERSONINFO', res.data.user_info)
+            }
+         })
       }
    }
 }

@@ -87,6 +87,7 @@ export default {
             console.log('hideLoading')
             mpvue.hideLoading()
             if (res.ret === 0) {
+               // mpvue.showToast({ title: '支付测试', icon: 'none' })
                if (res.data.need_pay === 0) {
                   mpvue.reLaunch({
                      url: `/pages/order/success/main?orderNum=${this.itemData.order_num}`

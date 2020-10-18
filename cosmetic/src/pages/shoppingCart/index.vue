@@ -24,10 +24,11 @@ h3.title { font-size: 28px; color: #656565; text-align: center; margin: 40px 0 3
 .footer-operas { width: 100%; height: 120px; background-color: #ffffff; position: fixed; left: 0; bottom: 132px; z-index: 1000; display: flex; align-items: center; justify-content: space-between;}
 .footer-operas h3 { color: #3A3A3A; font-size: 32px; margin-left: 50px;}
 .footer-operas h3 span { font-size: 36px;}
-.footer-operas div { margin-right: 20px; display: flex;}
+.footer-operas div { margin-right: 20px; display: flex; position: relative;}
 .footer-operas div button { padding: 0; margin: 0; width: 200px; height: 84px; line-height: 84px; font-size: 32px; color: #ffffff; border-radius: 0; border: none; background-color: #3A3A3A}
 .footer-operas div button:first-child { width: 210px; background-color: #F4F4F4; color: #3A3A3A;}
 .footer-operas div button:after { border-radius: 0; border: none;}
+.footer-operas div .auth-btns { width: 100%; height: 100%; position: absolute; top: 0; right: 0; opacity: 0;}
 </style>
 
 <template>
@@ -77,6 +78,7 @@ h3.title { font-size: 28px; color: #656565; text-align: center; margin: 40px 0 3
       <div>
          <button @click="toCard">定制祝福卡</button>
          <button @click="doBuy">立即购买</button>
+         <button class="auth-btns" open-type="getUserInfo" @getuserinfo="getuserinfo" v-if="!hasSaveInfo">在线客服</button>
       </div>
    </div>
    </template>
@@ -90,6 +92,7 @@ import cGoodsItem from '@/components/goodsItem'
 import cFooterNav from '@/components/footerNav'
 import cCartItem from './modules/cartItem'
 import { postAction } from '@/utils/api'
+import store from '@/store'
 
 export default {
    components: { cGoodsItem, cFooterNav, cCartItem },
@@ -115,6 +118,9 @@ export default {
             }
          }
          return price
+      },
+      hasSaveInfo () {
+         return !Array.isArray(store.state.user_info)
       }
    },
    methods: {
@@ -204,15 +210,37 @@ export default {
          }
          const ids = this.selected.join('|')
          const flag = this.giftCheck ? '1' : '0'
-         if (this.isReg === '1') {
-            mpvue.navigateTo({
-               url: `/pages/order/confirm/main?id=${ids}&flag=${flag}`
-            })
-         } else if (this.isReg === '0') {
-            mpvue.navigateTo({
-               url: `/pages/register/main?source=buy&id=${ids}&flag=${flag}`
-            })
-         }
+         this.getOrderData(ids, flag)
+      },
+      getOrderData (ids, flag) {
+         postAction('begin_buy', {
+            id: ids,
+            gift_flag: flag
+         }).then(res => {
+            if (res.ret === 0) {
+               // store.commit('SET_BEGINBUY', res.data)
+               // if (!Array.isArray(res.data.address)) {
+               //    store.commit('SET_ADDRESS', res.data.address)
+               // }
+               if (this.isReg === '1') {
+                  mpvue.navigateTo({
+                     url: `/pages/order/confirm/main?id=${ids}&flag=${flag}`
+                  })
+               } else if (this.isReg === '0') {
+                  mpvue.navigateTo({
+                     url: `/pages/register/main?source=buy&id=${ids}&flag=${flag}`
+                  })
+               }
+            }
+         })
+      },
+      getuserinfo (e) {
+         const userInfo = e.mp.detail.userInfo
+         postAction('save_userinfo', userInfo).then(res => {
+            if (res.ret === 0) {
+               store.commit('SET_PERSONINFO', userInfo)
+            }
+         })
       }
    },
    onShow () {

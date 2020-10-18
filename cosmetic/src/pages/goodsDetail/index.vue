@@ -35,6 +35,7 @@ h3.title { font-size: 28px; color: #656565; text-align: center; margin: 40px 0 3
 .footer-nav .btn2 { width: 160px; background-color: #F4F4F4; color: #3A3A3A;}
 .footer-nav .btn3 { width: 190px; background-color: #606060;}
 .footer-nav .btn4 { width: 210px; background-color: #3A3A3A;}
+.footer-nav .auth-btns { width: 560px; height: 100%; position: absolute; top: 0; right: 0; opacity: 0;}
 </style>
 
 <template>
@@ -90,6 +91,7 @@ h3.title { font-size: 28px; color: #656565; text-align: center; margin: 40px 0 3
       <button class="btn2" @click="toCard">祝福卡</button>
       <button class="btn3" @click="addCart('add')">加入购物车</button>
       <button class="btn4" @click="addCart('buy')">立即购买</button>
+      <button class="auth-btns" open-type="getUserInfo" @getuserinfo="getuserinfo" v-if="!hasSaveInfo">在线客服</button>
    </div>
 </div>
 </template>
@@ -98,6 +100,7 @@ h3.title { font-size: 28px; color: #656565; text-align: center; margin: 40px 0 3
 import cBanner from './modules/banner'
 import cGoodsItem from '@/components/goodsItem'
 import { postAction } from '@/utils/api'
+import store from '../../store'
 
 export default {
    components: { cBanner, cGoodsItem },
@@ -128,6 +131,9 @@ export default {
          } else {
             return this.attrPrice
          }
+      },
+      hasSaveInfo () {
+         return !Array.isArray(store.state.user_info)
       }
    },
    methods: {
@@ -183,6 +189,14 @@ export default {
                }
             } else {
                mpvue.showToast({ title: res.msg, icon: 'none' })
+            }
+         })
+      },
+      getuserinfo (e) {
+         const userInfo = e.mp.detail.userInfo
+         postAction('save_userinfo', userInfo).then(res => {
+            if (res.ret === 0) {
+               store.commit('SET_PERSONINFO', userInfo)
             }
          })
       }

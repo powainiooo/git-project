@@ -17,7 +17,8 @@ const store = new Vuex.Store({
       sytk: '',
       yszc: '',
       addressInfo: null,
-      invoiceInfo: null
+      invoiceInfo: null,
+      beginBuyData: {}
    },
    mutations: {
       SET_LOGIN_KEY (state, data) {
@@ -44,6 +45,9 @@ const store = new Vuex.Store({
       },
       SET_INVOICE (state, data) {
          state.invoiceInfo = data
+      },
+      SET_BEGINBUY (state, data) {
+         state.beginBuyData = data
       }
    }
 })

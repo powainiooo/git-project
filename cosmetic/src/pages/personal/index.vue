@@ -60,6 +60,7 @@
       <div class="list-item link-arrow" @click="toLink('/pages/register/main')" v-if="userInfo.is_reg === '0'">
          <img src="/static/images/personal/icon3.png" />
          <p>立即注册</p>
+         <button open-type="getUserInfo" @getuserinfo="getuserinfo" @click.stop="tap" v-if="!hasUserInfo">在线客服</button>
       </div>
       <div class="list-item link-arrow" @click="viewAgreement('hhqy')">
          <img src="/static/images/personal/icon4.png" />
@@ -133,7 +134,8 @@ export default {
          mpvue.navigateTo({
             url
          })
-      }
+      },
+      tap () {}
    },
    onShow () {
       this.getData()

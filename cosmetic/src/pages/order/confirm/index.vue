@@ -124,7 +124,7 @@ export default {
          ids: '',
          flag: '',
          goodsList: [],
-         pageData: {},
+         // pageData: {},
          isAjax: false,
          orderId: '',
          orderNum: ''
@@ -150,6 +150,12 @@ export default {
       invoiceInfo () {
          return store.state.invoiceInfo
       }
+      // pageData () {
+      //    return store.state.beginBuyData
+      // },
+      // goodsList () {
+      //    return store.state.beginBuyData.goods_list || []
+      // }
    },
    methods: {
       giftChange (e) {

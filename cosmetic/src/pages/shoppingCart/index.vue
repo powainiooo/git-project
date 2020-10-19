@@ -174,11 +174,15 @@ export default {
       },
       getData () {
          postAction('cart').then(res => {
-            this.cartsList = res.data.list
-            this.isEmpty = this.cartsList.length === 0
-            this.goodsList = res.data.xg_list
-            this.wishInfo = res.data.wish_info
-            this.isReg = res.data.is_reg
+            if (res.ret === 0) {
+               this.cartsList = res.data.list
+               this.isEmpty = this.cartsList.length === 0
+               this.goodsList = res.data.xg_list
+               this.wishInfo = res.data.wish_info
+               this.isReg = res.data.is_reg
+            } else {
+               mpvue.hideToast()
+            }
          })
       },
       doDel () {

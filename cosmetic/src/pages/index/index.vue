@@ -80,7 +80,12 @@ export default {
    },
    computed: {
       hasSaveInfo () {
-         return !Array.isArray(store.state.personalInfo)
+         if (Array.isArray(store.state.personalInfo)) {
+            return false
+         } else {
+            console.log(store.state.personalInfo)
+            return store.state.personalInfo.is_reg === '1'
+         }
       }
    },
    methods: {
@@ -108,7 +113,11 @@ export default {
                const nowTime = now.getTime()
                const nowMonth = now.getMonth()
                const nowDate = now.getDate()
-               if (this.adData.tc !== '' && nowTime > adTime && oldMonth !== nowMonth && oldDate !== nowDate) {
+               console.log('广告信息是否不为空', this.adData.tc !== '')
+               console.log('当前时间:', nowTime, '历史时间:', adTime)
+               console.log('当前天', nowDate, '历史天:', oldDate)
+               console.log('当前月', nowMonth, '历史月:', oldMonth)
+               if (this.adData.tc !== '' && nowTime > adTime && (oldMonth !== nowMonth || oldDate !== nowDate)) {
                   this.showAd = true
                }
             }

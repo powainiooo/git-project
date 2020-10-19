@@ -1,14 +1,14 @@
 <style>
 page { background-color: rgb(248, 248, 248)}
 
-.address-frame { margin: 0 0 44px 0; height: 200px; position: relative; background-color: #ffffff; font-size: 30px; color: #2F2F2F; display: flex; align-items: center;}
+.address-frame { margin: 0 0 44px 0; min-height: 200px; position: relative; background-color: #ffffff; font-size: 30px; color: #2F2F2F; display: flex; align-items: center;}
 .address-frame img { width: 40px; height: 56px; margin: 0 44px 0 36px;}
 .address-frame div { width: 520px;}
 .address-frame div h3 { font-size: 28px; color: #333333; margin-bottom: 20px;}
 .address-frame div h3 span { font-size: 30px; color: #999999; margin-left: 20px;}
 .address-frame div p { font-size: 26px; color: #333333; line-height: 40px;}
 
-.order-info-frame { margin-top: 30px; margin-bottom: 0; border-bottom: 1px solid #C7C7C7;}
+.order-info-frame { margin-top: 30px; margin-bottom: 0; border-bottom: 1px solid #C7C7C7; padding: 10px 0;}
 .order-info-frame img { width: 47px; height: 63px; margin: 0 32px 0 36px;}
 .order-info-frame div h3 { color: #2F2F2F;}
 .order-info-frame div h3:last-child { margin-bottom: 0;}
@@ -24,6 +24,12 @@ page { background-color: rgb(248, 248, 248)}
 .foot-btns { width: 100%; height: 100px; display: flex; position: fixed; left: 0; bottom: 0; z-index: 1000;}
 .foot-btns button { height: 100%; line-height: 100px; flex: 1; font-size: 30px; color: #ffffff; background-color: #5f5f5f; border-radius: 0; border: none}
 .foot-btns button:last-child { background-color: #393939;}
+
+.preview-container { margin: 40px; position: relative;}
+.preview-container::before { content: '祝福卡预览'; font-size: 32px; color: #333333; position: absolute; top: 22px; right: 30px;}
+.preview-container>img { width: 670px; height: 380px; margin-bottom: 30px;}
+.preview-container .form-item { padding: 30px; background-color: #ffffff; border: 1px solid #E9E9E9; font-size: 30px; color: #747474; line-height: 50px; margin-bottom: 30px; border-radius: 6px;}
+.preview-container .form-item span { color: #353535; margin-right: 40px;}
 </style>
 
 <template>
@@ -34,6 +40,7 @@ page { background-color: rgb(248, 248, 248)}
          <h3>订单编号 <span>{{orderInfo.order_num}}</span></h3>
          <h3>订单状态 <span>{{orderStatusStr}}</span></h3>
          <h3>创建时间 <span>{{timeStr}}</span></h3>
+         <h3 v-if="orderInfo.paid_time !== '0'">支付时间 <span>{{payTime}}</span></h3>
       </div>
    </div>
    <div class="address-frame">
@@ -54,21 +61,25 @@ page { background-color: rgb(248, 248, 248)}
          </li>
          <li>
             <span>运费</span>
-            <span>￥{{addressInfo.kd_fee / 100}}</span>
+            <span>￥{{orderInfo.spyf / 100}}</span>
          </li>
          <li v-if="giftCheck">
             <span>积分抵扣</span>
-            <span>-￥{{orderInfo.dk_amount}}</span>
+            <span>-￥{{orderInfo.dk_amount / 100}}</span>
+         </li>
+         <li v-if="giftCheck">
+            <span>抵扣积分数</span>
+            <span>{{orderInfo.dk_num}}</span>
          </li>
          <li>
             <span>可得积分</span>
-            <span>{{orderInfo.add_score}}</span>
+            <span>{{orderInfo.dqjf}}</span>
          </li>
       </ul>
-      <div>实际付款：<span>￥{{payPrice}}</span></div>
+      <div>实际付款：<span>￥{{orderInfo.order_amount / 100}}</span></div>
    </div>
 
-   <div class="details" v-if="orderInfo.fp_status !== ''">
+   <div class="details" v-if="orderInfo.fp_status !== '0'">
       <ul>
          <li style="margin-bottom: 40px;">
             <span style="color: #333333">发票信息</span>
@@ -92,6 +103,15 @@ page { background-color: rgb(248, 248, 248)}
       </ul>
    </div>
 
+   <div class="preview-container" v-if="orderInfo.gift_flag === '1'">
+      <img :src="imgSrc + orderInfo.wish_bg" />
+      <div class="form-item"><span>To:</span>{{orderInfo.to || ''}}</div>
+      <div class="form-item" style="padding-bottom: 60rpx;"><span>Message:</span>
+         {{orderInfo.message || ''}}
+      </div>
+      <div class="form-item"><span>From:</span>{{orderInfo.from || ''}}</div>
+   </div>
+
    <div class="foot-btns">
       <button v-if="orderInfo.status === '1'" @click.stop="doCancel">取 消</button>
       <button v-if="orderInfo.status === '1'" @click.stop="doPay">支 付</button>
@@ -110,6 +130,7 @@ export default {
    components: { cOrderItem },
    data () {
       return {
+         imgSrc: mpvue.imgSrc,
          tabsList: [
             { name: '全部', key: '0' },
             { name: '待付款', key: '1' },
@@ -123,22 +144,11 @@ export default {
          addressInfo: {},
          invoiceInfo: {},
          goodsList: [],
-         timeStr: ''
-      }
-   },
-   computed: {
-      payPrice () {
-         if (this.giftCheck) {
-            return (parseFloat(this.orderInfo.order_amount) / 100) - (parseFloat(this.addressInfo.dk_money) / 100)
-         } else {
-            return (parseFloat(this.orderInfo.order_amount) / 100)
-         }
+         timeStr: '',
+         payTime: ''
       }
    },
    methods: {
-      giftChange (e) {
-         this.giftCheck = e.mp.detail
-      },
       getData (id) {
          postAction('order_info', {
             id
@@ -148,9 +158,10 @@ export default {
                this.addressInfo = res.data.address
                this.goodsList = res.data.goods_list
                this.timeStr = formatTime(new Date(parseInt(res.data.order.order_time) * 1000))
+               this.payTime = formatTime(new Date(parseInt(res.data.order.paid_time) * 1000))
                const item = this.tabsList.find(i => i.key === this.orderInfo.status)
                this.orderStatusStr = item.name
-               this.giftCheck = this.orderInfo.userjf_flag === '1'
+               this.giftCheck = res.data.userjf_flag === '1'
             }
          })
       },

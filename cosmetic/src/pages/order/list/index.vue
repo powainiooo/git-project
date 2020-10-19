@@ -27,7 +27,7 @@ page { background-color: rgb(248, 248, 248)}
    </template>
 
    <template v-else>
-   <c-order-item v-for="i in orderList" :key="id" :itemData="i" @refresh="refresh"/>
+   <c-order-item v-for="i in orderList" :key="i.id" :itemData="i" @refresh="refresh"/>
    <div class="load-over" v-if="isLoadAll">- 没有更多订单了 -</div>
    </template>
 </div>
@@ -52,24 +52,29 @@ export default {
          page: 1,
          totals: 0,
          orderList: [],
-         isLoadAll: false
+         isLoadAll: false,
+         isAjax: false
       }
    },
 
    methods: {
       getData () {
+         if (this.isAjax) return false
+         this.isAjax = true
          postAction('get_order_list', {
             page: this.page,
             status: this.currentTab
          }).then(res => {
+            this.isAjax = false
             this.orderList = this.orderList.concat(res.data.list)
             this.totals = parseInt(res.data.nums)
             this.isLoadAll = this.totals === this.orderList.length
+            console.log('this.isLoadAll', this.isLoadAll)
          })
       },
       changeTab (key) {
          this.currentTab = key
-         this.page = 0
+         this.page = 1
          this.orderList = []
          this.getData()
       },

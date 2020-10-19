@@ -4,7 +4,7 @@ page { background-color: rgb(248, 248, 248)}
 .form-item { padding: 0 30px; height: 100px; display: flex; align-items: center; justify-content: space-between; position: relative;}
 .form-item:after { content: ''; width: 100%; height: 1px; background-color: #D2D2D2; position: absolute; bottom: 0; left: 0; transform: scaleY(.5);}
 .form-item p { font-size: 30px; color: #333333;}
-.form-item input { width: 550px; font-size: 30px; color: #333333; text-align: right; height: 80px; border: none; background-color: transparent;}
+.form-item input { width: 550px; font-size: 30px; color: #333333; height: 80px; border: none; background-color: transparent;}
 .form-item-addr { height: auto}
 .form-item-addr textarea { width: 100%; height: 100px; font-size: 30px; color: #333333; padding: 30px 0;}
 
@@ -50,7 +50,7 @@ page { background-color: rgb(248, 248, 248)}
       </div>
    </div>
 
-   <div class="btns"><a href="#" class="btn-round" @click="openAddr">地址测试</a> </div>
+<!--   <div class="btns"><button class="btn-round" @click="openAddr">地址测试</button> </div>-->
    <div class="btns"><a href="#" class="btn-round" @click="doSave">保 存</a> </div>
 </div>
 </template>
@@ -83,7 +83,9 @@ export default {
    },
    computed: {
       userLocation () {
-         return store.state.settings['scope.userLocation']
+         const userLocation = store.state.settings['scope.userLocation']
+         console.log('userLocation', userLocation)
+         return userLocation
       }
    },
    methods: {
@@ -115,12 +117,33 @@ export default {
          })
       },
       openAddr (e) {
-         wx.chooseLocation({
-            success: (res) => {
-               console.log(res)
-               this.formData.address = `${res.address}${res.name}`
-            }
-         })
+         if (this.userLocation === undefined || this.userLocation === true) {
+            mpvue.chooseLocation({
+               success: (res) => {
+                  console.log(res)
+                  this.formData.address = `${res.address}${res.name}`
+               }
+            })
+         }
+         if (this.userLocation === undefined) {
+            mpvue.authorize({
+               scope: 'scope.userLocation',
+               success: (res) => {
+                  mpvue.chooseLocation({
+                     success: (res) => {
+                        console.log(res)
+                        this.formData.address = `${res.address}${res.name}`
+                     }
+                  })
+               },
+               fail () {
+                  mpvue.showModal({
+                     title: '提示',
+                     content: '可以在右上角菜单中打开设置重新打开授权'
+                  })
+               }
+            })
+         }
       }
    },
 

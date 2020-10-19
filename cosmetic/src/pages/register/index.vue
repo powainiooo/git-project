@@ -34,7 +34,7 @@
       </picker>
       <div class="form-item">
          <div>推荐人</div>
-         <input type="text" placeholder="请输入推荐人微信号" v-model="formData.form_wx" class="input" placeholder-class="placeholder"/>
+         <input type="text" placeholder="请输入推荐人微信号" v-model="formData.from_wx" class="input" placeholder-class="placeholder"/>
       </div>
       <picker @change="sexChange" :range="sexList" range-key="name">
       <div class="form-item">
@@ -95,7 +95,7 @@ export default {
             wx_id: '',
             name: '',
             age: '',
-            form_wx: '',
+            from_wx: '',
             sex: '',
             agree: '0'
          },
@@ -155,6 +155,7 @@ export default {
          this.isAjax = true
          postAction('save_regnfo', this.formData).then(res => {
             if (res.ret === 0) {
+               this.getPersonData()
                mpvue.showToast({ title: '注册成功！' })
                if (this.source === 'buy') {
                   this.skip()
@@ -168,6 +169,14 @@ export default {
             } else {
                mpvue.showToast({ title: res.msg, icon: 'none' })
                this.isAjax = false
+            }
+         })
+      },
+      getPersonData () {
+         postAction('get_preson_info').then(res => {
+            if (res.ret === 0) {
+               // store.commit('SET_SAVEINFO', !Array.isArray(res.data.user_info))
+               store.commit('SET_PERSONINFO', res.data.user_info)
             }
          })
       },

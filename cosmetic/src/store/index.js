@@ -10,7 +10,7 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
    state: {
       [tokenKey]: '',
-      personalInfo: null,
+      personalInfo: {},
       settings: {},
       imgSrc: 'https://yghzp.vsapp.cn',
       hhqy: '',

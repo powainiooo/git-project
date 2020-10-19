@@ -6,7 +6,7 @@ import { doLogin, postAction } from '@/utils/api'
 const { tokenKey } = config
 const login = promisify(mpvue.login)
 const getSetting = promisify(mpvue.getSetting)
-const getUserInfo = promisify(mpvue.getUserInfo)
+// const getUserInfo = promisify(mpvue.getUserInfo)
 export default {
    created () {
       // 调用API从本地缓存中获取数据
@@ -65,11 +65,11 @@ export default {
          const resSetting = await getSetting()
          console.log('resSetting', resSetting)
          store.commit('SET_SETTING', resSetting.authSetting)
-         if (resSetting.authSetting['scope.userInfo']) {
-            const resUserInfo = await getUserInfo()
-            console.log('resUserInfo', resUserInfo)
-            store.commit('SET_PERSONINFO', resUserInfo.userInfo)
-         }
+         // if (resSetting.authSetting['scope.userInfo']) {
+         //    const resUserInfo = await getUserInfo()
+         //    console.log('resUserInfo', resUserInfo)
+         //    store.commit('SET_PERSONINFO', resUserInfo.userInfo)
+         // }
       },
       getPersonData () {
          postAction('get_preson_info').then(res => {

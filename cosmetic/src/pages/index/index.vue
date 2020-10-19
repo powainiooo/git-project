@@ -15,7 +15,7 @@ h3.title { font-size: 40px; color: #333333; font-weight: bold; text-align: cente
 </style>
 
 <template>
-<div >
+<div style="overflow: hidden;">
    <c-banner :list="bannerData"/>
 
    <h2 class="title">明星产品</h2>

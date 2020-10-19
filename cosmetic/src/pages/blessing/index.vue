@@ -2,19 +2,19 @@
 .form-item { height: 100px; padding: 0 30px; border-bottom: 1px solid #D2D2D2; display: flex; justify-content: space-between; align-items: center;}
 .form-item div { font-size: 30px; color: #333333;}
 .form-item div span { color: #FF0000; margin-right: 4px}
-.form-item .input { width: 400px; height: 80px; line-height: 80px; border: none; background-color: #ffffff; font-size: 30px; color: #333333; text-align: right;}
+.form-item .input { width: 540px; height: 80px; line-height: 80px; border: none; background-color: #ffffff; font-size: 30px; color: #333333;}
 .form-item .placeholder { color: #999999;}
 
 .hints { margin: 30px 30px 140px 30px;}
 .hints .content { font-size: 20px; color: #333333; line-height: 34px;}
 .hints .checkbox { transform: scale(.5)}
 
-.btns { margin: 100px 60px; display: flex; justify-content: space-between;}
+.btns { margin: 60px; display: flex; justify-content: space-between;}
 .btns button { width: 304px; height: 90px; font-size: 30px;}
 </style>
 
 <template>
-<div >
+<div style="overflow: hidden;">
    <img :src="imgSrc + banner" mode="widthFix" class="img_block" v-if="banner !== ''"/>
    <div class="form">
       <div class="form-item">

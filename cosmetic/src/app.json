@@ -1,6 +1,7 @@
 {
    "pages": [
       "pages/index/main",
+      "pages/blessing/main",
       "pages/address/edit/main",
       "pages/address/list/main",
       "pages/invoice/main",
@@ -14,7 +15,6 @@
       "pages/order/confirm/main",
       "pages/shoppingCart/main",
       "pages/personal/main",
-      "pages/blessing/main",
       "pages/ad/main",
       "pages/order/success/main",
       "pages/agreement/main",

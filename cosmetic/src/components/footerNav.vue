@@ -8,7 +8,7 @@
 
 <template>
 <div class="c-footer-nav">
-   <a :href="item.url" open-type="redirect" v-for="(item, index) in list" :key="index">
+   <a :href="item.url" open-type="reLaunch" v-for="(item, index) in list" :key="index">
       <img :src="item.src + (active === item.key ? '-active' : '') + '.png'" mode="aspectFit" class="c-footer-nav-img"/>
       <h3 class="c-footer-nav-name" :class="{'active': active === item.key}">{{item.name}}</h3>
    </a>

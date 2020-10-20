@@ -1,11 +1,11 @@
 {
    "pages": [
       "pages/index/main",
+      "pages/register/main",
       "pages/blessing/main",
       "pages/address/edit/main",
       "pages/address/list/main",
       "pages/invoice/main",
-      "pages/register/main",
       "pages/point/main",
       "pages/goods/main",
       "pages/order/list/main",

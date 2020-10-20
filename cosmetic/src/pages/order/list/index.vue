@@ -22,7 +22,7 @@ page { background-color: rgb(248, 248, 248)}
    <div class="hint-empty">
       <img src="/static/images/shoppingCart/empty.png" />
       <p>您还没有相关的订单哦~</p>
-      <a href="/pages/index/main" class="btn-round" @click="toIndex">去逛逛</a>
+      <a href="/pages/index/main" open-type="reLaunch" class="btn-round">去逛逛</a>
    </div>
    </template>
 

@@ -161,7 +161,7 @@ export default {
                this.payTime = formatTime(new Date(parseInt(res.data.order.paid_time) * 1000))
                const item = this.tabsList.find(i => i.key === this.orderInfo.status)
                this.orderStatusStr = item.name
-               this.giftCheck = res.data.userjf_flag === '1'
+               this.giftCheck = res.data.userjf_flag === 1
             }
          })
       },

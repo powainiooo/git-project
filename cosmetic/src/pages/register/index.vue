@@ -15,7 +15,7 @@
 </style>
 
 <template>
-<div >
+<div style="overflow: hidden;">
    <img :src="imgSrc + pageData.get_reg_bg.val" mode="widthFix" class="img_block"/>
    <div class="form">
       <div class="form-item">
@@ -39,7 +39,7 @@
       <picker @change="sexChange" :range="sexList" range-key="name">
       <div class="form-item">
          <div><span>*</span>性别</div>
-         <input type="text" placeholder="性别" v-model="sexName" class="input" placeholder-class="placeholder"/>
+         <input type="text" placeholder="性别" v-model="sexName" class="input" placeholder-class="placeholder" disabled/>
       </div>
       </picker>
    </div>

@@ -9,8 +9,8 @@
 .c-cart-item-price { font-size: 36px; color: #323232; font-weight: bold;}
 .c-cart-item-nums { font-size: 26px; color: #2A2A2A;}
 .btn1, .btn2 { width: 136px; height: 56px; margin: 0; padding: 0; line-height: 56px; border-radius: 4px; font-size: 24px;}
-.btn1 { border: 1px solid #636363; color: #636363; margin-right: 14px; background-color: #ffffff;}
-.btn2 { border: 1px solid #3A3A3A; background-color: #3A3A3A; color: #ffffff;}
+.btn1 { border: 2px solid #636363; color: #636363; margin-right: 14px; background-color: #ffffff;}
+.btn2 { border: 2px solid #3A3A3A; background-color: #3A3A3A; color: #ffffff;}
 .btn1:after, .btn2:after { border: none;}
 </style>
 

@@ -34,7 +34,7 @@ page { background-color: rgb(248, 248, 248)}
 <!--         <input disabled v-model="addr"/>-->
 <!--      </div>-->
       <div class="form-item form-item-addr" @click="openAddr">
-         <textarea placeholder="详细地址" :disabled="userLocation" v-model="formData.address"/>
+         <textarea placeholder="详细地址" :disabled="textDisabled" v-model="formData.address"/>
       </div>
       <div class="form-item">
          <p>门牌号</p>
@@ -58,6 +58,8 @@ page { background-color: rgb(248, 248, 248)}
 <script>
 import { postAction } from '@/utils/api'
 import store from '../../../store'
+import { promisify } from '@/utils'
+const getSetting = promisify(mpvue.getSetting)
 
 export default {
    data () {
@@ -82,6 +84,12 @@ export default {
       }
    },
    computed: {
+      textDisabled () {
+         if (this.userLocation === undefined || this.userLocation) {
+            return true
+         }
+         return false
+      },
       userLocation () {
          const userLocation = store.state.settings['scope.userLocation']
          console.log('userLocation', userLocation)
@@ -117,7 +125,7 @@ export default {
          })
       },
       openAddr (e) {
-         if (this.userLocation === undefined || this.userLocation === true) {
+         if (this.userLocation === true) {
             mpvue.chooseLocation({
                success: (res) => {
                   console.log(res)
@@ -140,6 +148,9 @@ export default {
                   mpvue.showModal({
                      title: '提示',
                      content: '可以在右上角菜单中打开设置重新打开授权'
+                  })
+                  getSetting().then(res => {
+                     store.commit('SET_SETTING', res.authSetting)
                   })
                }
             })

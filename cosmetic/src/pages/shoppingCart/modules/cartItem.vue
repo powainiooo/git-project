@@ -9,10 +9,10 @@
 .c-cart-item-bottom { display: flex; justify-content: space-between; margin-bottom: 10px;}
 .c-cart-item-price { font-size: 36px; color: #323232; font-weight: bold;}
 
-.c-cart-item-nums { width: 170px; height: 46px; border: 1px solid #D1D1D1; border-radius: 5px; display: flex; margin-right: 20px;}
+.c-cart-item-nums { width: 170px; height: 46px; border: 2px solid #D1D1D1; border-radius: 5px; display: flex; margin-right: 20px;}
 .c-cart-item-nums li { height: 100%; display: flex; justify-content: center; align-items: center; color: #D1D1D1}
 .c-cart-item-nums-btn { width: 50px; font-size: 40px;}
-.c-cart-item-nums-val { width: 70px; font-size: 28px; border-left: 1px solid #D1D1D1; border-right: 1px solid #D1D1D1;}
+.c-cart-item-nums-val { width: 70px; font-size: 28px; border-left: 2px solid #D1D1D1; border-right: 2px solid #D1D1D1;}
 </style>
 
 <template>
@@ -21,7 +21,7 @@
    <img :src="imgSrc + itemData.cover" mode="aspectFit" class="c-cart-item-img"/>
    <div class="c-cart-item-infos">
       <div>
-         <h3 class="c-cart-item-title">{{itemData.goods_name}}</h3>
+         <h3 class="c-cart-item-title">{{itemData.goods_name}}123</h3>
          <ul class="c-cart-item-tag">
             <li>{{itemData.attr_name}}</li>
          </ul>

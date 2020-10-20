@@ -52,8 +52,14 @@ export default {
 
    methods: {
       onChange (e) {
-         console.log(e)
          this.check = e.mp.detail
+         const data = this.listData.find(i => i.id === e.mp.detail)
+         data.default = '1'
+         postAction('edit_address', data).then(res => {
+            if (res.ret === 0) {
+               mpvue.showToast({ title: '修改默认地址成功！' })
+            }
+         })
       },
       getData () {
          postAction('get_address_list').then(res => {

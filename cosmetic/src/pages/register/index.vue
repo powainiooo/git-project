@@ -5,9 +5,11 @@
 .form-item .input { width: 400px; height: 80px; line-height: 80px; border: none; background-color: #ffffff; font-size: 30px; color: #333333; text-align: right;}
 .form-item .placeholder { color: #999999;}
 
-.hints { margin: 30px 30px 140px 30px;}
-.hints .content { font-size: 20px; color: #333333; line-height: 34px; margin-bottom: 10px; display: block;}
+.hints { margin: 0 0 140px 0;}
+.hints .content { font-size: 20px; color: #333333; line-height: 34px; padding: 0 30px; margin-bottom: 10px; display: block;}
+.hints .checkbox-content { padding-top: 30px;}
 .hints .checkbox { transform: scale(.5)}
+.hints .img_block { width: auto; margin: 0 30px;}
 
 .foot-btns { width: 100%; height: 100px; display: flex; position: fixed; left: 0; bottom: 0; z-index: 1000;}
 .foot-btns button { height: 100%; line-height: 100px; flex: 1; font-size: 30px; color: #ffffff; background-color: #5f5f5f; border-radius: 0; border: none}
@@ -45,19 +47,16 @@
    </div>
 
    <div class="hints">
-<!--      <van-checkbox :value="checked"-->
-<!--                    @change="onChange"-->
-<!--                    icon-size="20rpx"-->
-<!--                    class="content">本人已阅读并同意 <a href="/pages/agreement/main?page=sytk" style="display: inline;">使用条款</a> 和 <a href="/pages/agreement/main?page=yszc" style="display: inline;">隐私政策</a>，并且同意接受通过短信/微信/邮件信息等方式向我发送营销信息。</van-checkbox>-->
-      <div class="content">
+      <div class="content checkbox-content" @click="checked = !checked">
          <van-checkbox :value="checked"
                        @change="onChange"
                        icon-size="20rpx"
                        checked-color="#333333"
-                       class="content" style="display: inline-block; margin-right: 5px;"></van-checkbox>
-         <span @click="checked = !checked">本人已阅读并同意 <a href="/pages/agreement/main?page=sytk" style="display: inline; font-weight: bold;">使用条款</a> 和 <a href="/pages/agreement/main?page=yszc" style="display: inline; font-weight: bold;">隐私政策</a>，并且同意接受通过短信/微信/邮件信息等方式向我发送营销信息。</span>
+                       @click.stop="checked"
+                       style="display: inline-block; margin-right: 5px;"></van-checkbox>
+         <span>本人已阅读并同意 <a href="/pages/agreement/main?page=sytk" style="display: inline; font-weight: bold;">使用条款</a> 和 <a href="/pages/agreement/main?page=yszc" style="display: inline; font-weight: bold;">隐私政策</a>，并且同意接受通过短信/微信/邮件信息等方式向我发送营销信息。</span>
       </div>
-      <div class="content" style="color: #FF0000; margin: 0 0 14px 0" v-if="source === 'buy'">温馨提示：注册成功会员后，购物可获得积分，购物时积分可以直接抵扣使用</div>
+      <div class="content" style="color: #FF0000; margin: 0 0 14px 0" v-if="source !== 'buy'">温馨提示：注册成功会员后，购物可获得积分，购物时积分可以直接抵扣使用</div>
       <img :src="imgSrc + pageData.get_first_page_hyqy_image.val" mode="widthFix" class="img_block"/>
    </div>
 

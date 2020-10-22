@@ -22,12 +22,13 @@ h3.title { font-size: 40px; color: #333333; font-weight: bold; text-align: cente
    <c-goods-swiper :list="goodsListMX" />
 
    <h2 class="title">品牌介绍</h2>
-   <img :src="imgSrc + item.img"
-        mode="widthFix"
-        class="img_block"
-        v-for="item in ppjs"
-        :key="index"
-        @click="toDetail(item.link)"/>
+   <c-banner :list="ppjs" autoHeight/>
+<!--   <img :src="imgSrc + item.img"-->
+<!--        mode="widthFix"-->
+<!--        class="img_block"-->
+<!--        v-for="item in ppjs"-->
+<!--        :key="index"-->
+<!--        @click="toDetail(item.link)"/>-->
 
    <h2 class="title">购买获积分</h2>
    <h3 class="title">积分可抵扣消费</h3>

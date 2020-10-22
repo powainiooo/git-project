@@ -25,8 +25,8 @@ h3.title { font-size: 28px; color: #656565; text-align: center; margin: 40px 0 3
 .footer-operas h3 { color: #3A3A3A; font-size: 32px; margin-left: 50px;}
 .footer-operas h3 span { font-size: 36px;}
 .footer-operas div { margin-right: 20px; display: flex; position: relative;}
-.footer-operas div button { padding: 0; margin: 0; width: 200px; height: 84px; line-height: 84px; font-size: 32px; color: #ffffff; border-radius: 0; border: none; background-color: #3A3A3A}
-.footer-operas div button:first-child { width: 210px; background-color: #F4F4F4; color: #3A3A3A;}
+.footer-operas div button { padding: 0; margin: 0; width: 200px; height: 84px; line-height: 84px; font-size: 32px; color: #3A3A3A; border-radius: 0; border: none; background-color: #F4F4F4}
+.footer-operas div button:last-child { width: 210px; background-color: #3A3A3A; color: #ffffff;}
 .footer-operas div button:after { border-radius: 0; border: none;}
 .footer-operas div .auth-btns { width: 100%; height: 100%; position: absolute; top: 0; right: 0; opacity: 0;}
 </style>
@@ -59,7 +59,7 @@ h3.title { font-size: 28px; color: #656565; text-align: center; margin: 40px 0 3
       <c-cart-item v-for="i in cartsList" :key="id" :itemData="i" :buyNum.sync="i.buy_num" @select="singleSelect"/>
    </van-checkbox-group>
 
-   <div class="gift-hint">
+   <div class="gift-hint" v-if="showGiftBtn">
       <h3><van-switch :checked="giftCheck" @change="giftChange" size="28rpx" active-color="#333333" class="sw"/>此订单为礼品</h3>
       <p>这是一份礼品，您可以免费填写祝福语，我们会将祝福语印制在祝福卡上，并与所购商品及礼盒一起寄出。</p>
    </div>
@@ -76,7 +76,7 @@ h3.title { font-size: 28px; color: #656565; text-align: center; margin: 40px 0 3
    <div class="footer-operas">
       <h3>总价：<span>￥{{totalPrice}}</span></h3>
       <div>
-         <button @click="toCard">定制祝福卡</button>
+         <button @click="toCard" v-if="showGiftBtn">定制祝福卡</button>
          <button @click="doBuy">立即购买</button>
          <button class="auth-btns" open-type="getUserInfo" @getuserinfo="getuserinfo" v-if="!hasSaveInfo">在线客服</button>
       </div>
@@ -106,7 +106,8 @@ export default {
          goodsList: [],
          giftCheck: false,
          wishInfo: {},
-         isReg: ''
+         isReg: '',
+         showGiftBtn: false
       }
    },
    computed: {
@@ -180,6 +181,7 @@ export default {
                this.goodsList = res.data.xg_list
                this.wishInfo = res.data.wish_info
                this.isReg = res.data.is_reg
+               this.showGiftBtn = res.data.is_show_gift !== 0
             } else {
                mpvue.hideToast()
             }

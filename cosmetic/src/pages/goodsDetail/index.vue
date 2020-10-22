@@ -24,18 +24,19 @@ h3.title { font-size: 28px; color: #656565; text-align: center; margin: 40px 0 3
 /*.infos-list { margin: 40px 30px 60px 30px;}*/
 /*.infos-list li { font-size: 24px; color: #333333; line-height: 50px;}*/
 
-.footer-nav { width: 100%; height: 120px; display: flex; background-color: #ffffff; position: fixed; left: 0; bottom: 0; z-index: 1000; box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.15);}
+.footer-nav { width: 100%; height: 120px; display: flex; justify-content: space-between; background-color: #ffffff; position: fixed; left: 0; bottom: 0; z-index: 1000; box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.15);}
 .footer-nav button { border-radius: 0; border: none; background-color: transparent; padding: 0; margin: 0;}
 .footer-nav button:after { border: none;}
 .footer-nav .btn1 { width: 200px; display: flex; justify-content: space-around; align-items: center;}
 .footer-nav .btn1 button { width: 52px; height: 52px; overflow: visible;}
 .footer-nav .btn1 button img { width: 100%; height: 100%; display: block;}
 .footer-nav .btn1 button span { width: 24px; height: 24px; border-radius: 50%; font-size: 18px; color: #ffffff; background-color: #3A3A3A; display: flex; justify-content: center; align-items: center; position: absolute; top: -10px; right: -10px;}
-.footer-nav>button { line-height: 120px; font-size: 32px; color: #ffffff;}
+.footer-nav .btns>button { line-height: 120px; font-size: 32px; color: #ffffff;}
+.footer-nav .btns { display: flex; position: relative;}
 .footer-nav .btn2 { width: 160px; background-color: #F4F4F4; color: #3A3A3A;}
 .footer-nav .btn3 { width: 190px; background-color: #606060;}
 .footer-nav .btn4 { width: 210px; background-color: #3A3A3A;}
-.footer-nav .auth-btns { width: 560px; height: 100%; position: absolute; top: 0; right: 0; opacity: 0;}
+.footer-nav .auth-btns { width: 100%; height: 100%; position: absolute; top: 0; right: 0; opacity: 0;}
 </style>
 
 <template>
@@ -88,10 +89,12 @@ h3.title { font-size: 28px; color: #656565; text-align: center; margin: 40px 0 3
             <img src="/static/images/goods/icon-message.png" />
          </button>
       </div>
-      <button class="btn2" @click="toCard">祝福卡</button>
-      <button class="btn3" @click="addCart('add')">加入购物车</button>
-      <button class="btn4" @click="addCart('buy')">立即购买</button>
-      <button class="auth-btns" open-type="getUserInfo" @getuserinfo="getuserinfo" v-if="!hasSaveInfo">在线客服</button>
+      <div class="btns">
+         <button class="btn2" @click="toCard" v-if="showGiftBtn">祝福卡</button>
+         <button class="btn3" @click="addCart('add')">加入购物车</button>
+         <button class="btn4" @click="addCart('buy')">立即购买</button>
+         <button class="auth-btns" open-type="getUserInfo" @getuserinfo="getuserinfo" v-if="!hasSaveInfo">在线客服</button>
+      </div>
    </div>
 </div>
 </template>
@@ -117,7 +120,8 @@ export default {
          desc: '',
          cartNums: 0,
          jf: 0,
-         isAjax: false
+         isAjax: false,
+         showGiftBtn: false
       }
    },
    computed: {
@@ -151,6 +155,7 @@ export default {
             this.goodsList = res.data.xg_goods_list
             this.jf = res.data.jf
             this.cartNums = res.data.cart_nums
+            this.showGiftBtn = res.data.is_show_gift !== 0
          })
       },
       selectTypes (data) {

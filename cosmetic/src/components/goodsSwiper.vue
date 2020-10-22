@@ -3,7 +3,7 @@
 .c-goods-swiper-item { margin-right: 30px; border-radius: 10px; box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.05); background-color: #fff; overflow: hidden;}
 .c-goods-swiper-img { width: 100%; height: 412px; display: block; border-radius: 10px 10px 0 0;}
 .c-goods-swiper-title { font-size: 28px; color: #333333; line-height: 54px; font-weight: bold; text-align: center; margin-bottom: 18px; margin-top: 32px; padding: 0 10px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
-.c-goods-swiper-des { font-size: 16px; color: #666666; line-height: 32px; text-align: center; margin-bottom: 64px;}
+.c-goods-swiper-des { font-size: 24px; color: #666666; line-height: 32px; text-align: center; margin-bottom: 64px;}
 .c-goods-swiper-btn { width: 168px; height: 60px; background-color: #1B1B1B; display: flex; justify-content: center; align-items: center; margin: 0 auto 34px auto; font-size: 24px; color: #ffffff;}
 
 .c-goods-swiper-item-only { width: 400px; margin: 0 auto;}

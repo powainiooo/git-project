@@ -3,7 +3,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import config from '@/config'
-const { tokenKey } = config
+const { tokenKey, imgSrc } = config
 
 Vue.use(Vuex)
 
@@ -12,7 +12,7 @@ const store = new Vuex.Store({
       [tokenKey]: '',
       personalInfo: {},
       settings: {},
-      imgSrc: 'https://yghzp.vsapp.cn',
+      imgSrc,
       hhqy: '',
       thhzc: '',
       sytk: '',

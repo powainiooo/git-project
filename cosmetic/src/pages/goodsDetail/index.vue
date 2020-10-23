@@ -33,10 +33,10 @@ h3.title { font-size: 28px; color: #656565; text-align: center; margin: 40px 0 3
 .footer-nav .btn1 button span { width: 24px; height: 24px; border-radius: 50%; font-size: 18px; color: #ffffff; background-color: #3A3A3A; display: flex; justify-content: center; align-items: center; position: absolute; top: -10px; right: -10px;}
 .footer-nav .btns>button { line-height: 120px; font-size: 32px; color: #ffffff;}
 .footer-nav .btns { display: flex; position: relative;}
-.footer-nav .btn2 { width: 160px; background-color: #F4F4F4; color: #3A3A3A;}
-.footer-nav .btn3 { width: 190px; background-color: #606060;}
-.footer-nav .btn4 { width: 210px; background-color: #3A3A3A;}
-.footer-nav .auth-btns { width: 100%; height: 100%; position: absolute; top: 0; right: 0; opacity: 0;}
+.footer-nav .btns>.btn2 { width: 160px; background-color: #F4F4F4; color: #3A3A3A;}
+.footer-nav .btns>.btn3 { width: 190px; background-color: #606060;}
+.footer-nav .btns>.btn4 { width: 210px; background-color: #3A3A3A;}
+.footer-nav .btns>.auth-btns { width: 100%; height: 100%; position: absolute; top: 0; right: 0; opacity: 0;}
 </style>
 
 <template>

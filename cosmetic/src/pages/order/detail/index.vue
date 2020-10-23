@@ -50,6 +50,18 @@ page { background-color: rgb(248, 248, 248)}
          <p>{{addressInfo.rev_province}}{{addressInfo.rev_city}}{{addressInfo.rev_area}}{{addressInfo.rev_address}}</p>
       </div>
    </div>
+   <div class="details">
+      <ul style="margin-bottom: 0;">
+         <li>
+            <span>真实姓名</span>
+            <span>{{addressInfo.card_name}}</span>
+         </li>
+         <li>
+            <span>身份证号</span>
+            <span>{{addressInfo.card_num}}</span>
+         </li>
+      </ul>
+   </div>
 
    <c-order-item v-for="i in goodsList" :key="cart_id" :itemData="i" />
 

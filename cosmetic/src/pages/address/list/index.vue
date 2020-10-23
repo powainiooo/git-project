@@ -75,9 +75,10 @@ export default {
          })
       },
       doEdit (item) {
-         const {id, name, province, city, area, address, mobile, yzbm} = item
-         const data = {id, name, province, city, area, address, mobile, yzbm}
-         data.default = item.default
+         // const {id, name, province, city, area, address, mobile, yzbm, house_num, card_name, card_num} = item
+         // const data = {id, name, province, city, area, address, mobile, yzbm, house_num, card_name, card_num}
+         const data = {...item}
+         // data.default = item.default
          store.commit('SET_ADDRESS', data)
          mpvue.navigateTo({
             url: `/pages/address/edit/main?page=edit`

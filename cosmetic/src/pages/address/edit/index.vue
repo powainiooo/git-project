@@ -45,6 +45,14 @@ page { background-color: rgb(248, 248, 248)}
          <input  v-model="formData.yzbm"/>
       </div>
       <div class="form-item">
+         <p>身份证号</p>
+         <input  v-model="formData.card_num"/>
+      </div>
+      <div class="form-item">
+         <p>真实姓名</p>
+         <input  v-model="formData.card_name"/>
+      </div>
+      <div class="form-item">
          <p>设为默认地址</p>
          <van-switch :checked="check" @change="onChange" size="28rpx" active-color="#333333" class="sw"/>
       </div>
@@ -77,7 +85,9 @@ export default {
             house_num: '',
             address: '',
             yzbm: '',
-            default: ''
+            default: '',
+            card_num: '',
+            card_name: ''
          },
          listData: [],
          isAjax: false
@@ -166,6 +176,7 @@ export default {
       } else if (this.page === 'edit') {
          this.url = 'edit_address'
          this.formData = {...store.state.addressInfo}
+         console.log(this.formData)
          this.addr = `${this.formData.province}${this.formData.city}${this.formData.area}`
          this.check = this.formData.default === '1'
       }

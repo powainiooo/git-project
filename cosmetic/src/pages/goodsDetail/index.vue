@@ -6,6 +6,7 @@ h3.title { font-size: 28px; color: #656565; text-align: center; margin: 40px 0 3
 .line2 { display: flex; justify-content: space-between; align-items: center; margin: 0 40px 0 30px;}
 .line2 .price { font-size: 54px; color: #D1A158; font-weight: bold;}
 .line2 .price span { font-size: 40px;}
+.line2 .last-price { font-size: 32px; color: #333333; text-decoration: line-through;}
 .line2 .jifen { font-size: 32px; color: #333333;}
 .line2 .btn-share { position: relative;}
 .line2 .btn-share button { width: 100%; height: 100%; position: absolute; top: 0; left: 0; opacity: 0;}
@@ -47,6 +48,7 @@ h3.title { font-size: 28px; color: #656565; text-align: center; margin: 40px 0 3
 
    <div class="line2">
       <div class="price"><span>￥</span>{{showPrice}}</div>
+      <div class="last-price"><span>￥</span>{{showLastPrice}}</div>
       <div class="jifen">（购买可得{{jf}}积分）</div>
       <div class="btn-share">
          <img src="/static/images/goods/icon-share.png" />
@@ -113,6 +115,7 @@ export default {
          id: 0,
          attrId: 0,
          attrPrice: 0,
+         attrLastPrice: 0,
          bannerData: [],
          goodsInfo: {},
          ggList: {},
@@ -134,6 +137,13 @@ export default {
             }
          } else {
             return this.attrPrice
+         }
+      },
+      showLastPrice () {
+         if (this.attrId === 0) {
+            return parseFloat(this.goodsInfo.pre_price) / 100
+         } else {
+            return this.attrLastPrice
          }
       },
       hasSaveInfo () {
@@ -161,6 +171,7 @@ export default {
       selectTypes (data) {
          this.attrId = data.attr_id
          this.attrPrice = parseFloat(data.price) / 100
+         this.attrLastPrice = parseFloat(data.pre_price) / 100
       },
       toCard () {
          mpvue.navigateTo({

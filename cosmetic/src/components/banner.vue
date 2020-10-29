@@ -10,7 +10,7 @@
 <div style="position: relative;">
    <swiper class="c-banner" autoplay @change="bannerChange" :style="{'height': swiperHeight}">
       <swiper-item v-for="(item, index) in list" :key="index" @click="toDetail(item.link)">
-         <img :src="imgSrc + item.img" :id="'img'+index" class="c-banner-img" mode="widthFix" @load="imgLoad($event, index)"/>
+         <img :src="imgSrc + item.img" :id="imgKey+index" class="c-banner-img" mode="widthFix" @load="imgLoad($event, index)"/>
       </swiper-item>
    </swiper>
    <ul class="c-banner-dots">
@@ -35,13 +35,17 @@ export default {
 		return {
 		   activeIndex: 0,
          swiperHeight: 0,
-         heightArr: []
+         heightArr: [],
+         imgKey: 'img'
       }
 	},
    computed: {
       imgSrc () {
          return store.state.imgSrc
       }
+   },
+   mounted () {
+      this.imgKey = `img${this._uid}-`
    },
 	methods: {
       bannerChange (e) {
@@ -52,12 +56,13 @@ export default {
       },
       imgLoad (e, index) {
          const query = mpvue.createSelectorQuery()
-         const imgList = query.select(`#img${index}`).boundingClientRect()
+         const imgList = query.select(`#${this.imgKey}${index}`).boundingClientRect()
          imgList.exec(res => {
             this.heightArr[index] = res[0].height
             if (index === 0) {
                this.swiperHeight = res[0].height + 'px'
             }
+
          })
       },
       toDetail (id) {

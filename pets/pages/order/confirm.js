@@ -271,7 +271,7 @@ Page({
 			}
 			this.setData({
 				userAmount,
-				canUseAmount: parseFloat(userAmount) > parseFloat(this.data.proPackage.price),
+				canUseAmount: parseFloat(userAmount) >= parseFloat(this.data.proPackage.price),
 				hasAmount: !Array.isArray(res.data)
 			})
 		})

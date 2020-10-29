@@ -48,7 +48,7 @@ h3.title { font-size: 28px; color: #656565; text-align: center; margin: 40px 0 3
 
    <div class="line2">
       <div class="price"><span>￥</span>{{showPrice}}</div>
-      <div class="last-price"><span>￥</span>{{showLastPrice}}</div>
+      <div class="last-price" v-if="showLastPrice != 0"><span>￥</span>{{showLastPrice}}</div>
       <div class="jifen">（购买可得{{jf}}积分）</div>
       <div class="btn-share">
          <img src="/static/images/goods/icon-share.png" />

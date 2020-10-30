@@ -2,7 +2,7 @@
   <view class="nav-bar-item {{item.showDot ? 'nav-bar-item-dot' : ''}}"
         wx:for="{{list}}"
         wx:for-item="item"
-        wx:key="{{item.key}}"
+        wx:key="key"
         data-url="{{item.url}}"
         data-key="{{item.key}}"
         bindtap="jumpPage">

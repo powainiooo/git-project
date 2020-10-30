@@ -20,7 +20,7 @@
   <view class="works-list">
     <list-item wx:for="{{worksList}}"
                wx:for-item="item"
-               wx:key="{{item.userId}}"
+               wx:key="index"
                bindthumbup="thumbup"
                itemData="{{item}}"></list-item>
   </view>

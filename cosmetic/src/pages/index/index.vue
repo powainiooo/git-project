@@ -153,11 +153,16 @@ export default {
          })
       }
    },
-
    onLoad () {
       // let app = getApp()
       Object.assign(this.$data, this.$options.data())
       this.getData()
+   },
+   onShareAppMessage () {
+      return {
+         title: 'GT绅士堂高端男士护肤',
+         path: `/pages/index/main`
+      }
    }
 }
 </script>

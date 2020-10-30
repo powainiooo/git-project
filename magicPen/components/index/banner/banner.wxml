@@ -1,5 +1,5 @@
 <swiper autoplay style="height: 400rpx">
-  <block wx:for="{{listData}}" wx:for-item="item" wx:key="{{item.id}}">
+  <block wx:for="{{listData}}" wx:for-item="item" wx:key="id">
     <swiper-item data-src="{{item.url}}" bindtap="linkWeb">
       <image src="{{item.img}}" class="slide-image" mode="widthFix"/>
     </swiper-item>

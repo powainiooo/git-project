@@ -245,4 +245,10 @@ Page({
    onReachBottom: function () {
       this.pageNoAdd()
    },
+	onShareAppMessage () {
+		return {
+			title: '神笔画画',
+			path: `/pages/index/index`
+		}
+	}
 })

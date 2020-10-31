@@ -1,6 +1,6 @@
 <view class="generate-frame">
    <view class="camera-frame">
-      <camera class="camera-container" animation="{{cameraAni}}" device-position="{{postion}}" hidden="{{!showCamera}}">
+      <camera class="camera-container" animation="{{cameraAni}}" device-position="{{postion}}">
          <cover-view class="cover">
             <cover-image src="{{generateData.psdUrl}}" animation="{{coverImageAni}}"></cover-image>
          </cover-view>
@@ -11,7 +11,7 @@
       <image src="{{photos}}"
              class="photos"
              animation="{{moveImageAni}}"
-             wx:if="{{functType === 1}}">
+             wx:if="{{functType === 1 && !showCamera}}">
       </image>
       <video src="{{videos}}"
              class="photos"
@@ -20,7 +20,7 @@
              loop
              muted
              animation="{{moveImageAni}}"
-             wx:if="{{functType === 2}}">
+             wx:if="{{functType === 2 && !showCamera}}">
       </video>
       <image src="{{generateData.psdUrl}}"
              animation="{{moveCoverAni}}"

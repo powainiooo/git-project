@@ -61,7 +61,10 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-
+  onShareAppMessage () {
+	  return {
+		  title: '神笔画画',
+		  path: `/pages/index/index`
+	  }
   }
 })

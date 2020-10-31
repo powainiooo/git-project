@@ -8,5 +8,6 @@
     "location": "../../components/index/location/location",
     "nav-bar": "../../components/index/nav-bar/nav-bar"
   },
+   "navigationStyle": "custom",
   "navigationBarTitleText": "神笔画画"
 }

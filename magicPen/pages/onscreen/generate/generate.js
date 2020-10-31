@@ -54,18 +54,8 @@ Page({
     */
    onLoad: function (options) {
       const {generateData} = getApp().globalData
+	   console.log(generateData)
       this.setData({generateData})
-      // setTimeout(()=>{
-      //    this.coverAnimation()
-      // },1000)
-      // const self = this
-      // wx.chooseImage({
-      //    success(res){
-      //       self.setData({
-      //          photos: res.tempFilePaths[0]
-      //       })
-      //    }
-      // })
 	   wx.nextTick(()=>{
 		   this.initSize()
 	   })
@@ -92,8 +82,8 @@ Page({
       })
       const [caw, cah, cay, cax] = this.data.cameraSize
       const [cow, coh, coy, cox] = this.data.coverSize
-      camera.width(`${caw}rpx`).height(cah).top(`${cay}rpx`).left(`${cax}rpx`).opacity(1).step()
-      cover.width(`${cow}rpx`).height(`${coh}rpx`).top(`-${coy}rpx`).left(`-${cox}rpx`).opacity(1).step()
+      camera.width(`${caw}rpx`).height(cah).top(`${cay}rpx`).left(`-10000rpx`).opacity(1).step()
+      cover.width(`${cow}rpx`).height(`${coh}rpx`).top(`-${coy}rpx`).left(`-${cox}rpx`).step()
       this.setData({
          cameraAni: camera.export(),
          coverImageAni: cover.export(),
@@ -117,18 +107,18 @@ Page({
    coverAnimation() {
       const [caw, cah, cay, cax] = this.data.cameraSize
       const [cow, coh, coy, cox] = this.data.coverSize
-      //摄像机动画
+      //照片、视频动画
       const camera = wx.createAnimation({
          duration: 1000,
          timingFunction: 'ease',
       })
-      camera.width(`${caw}rpx`).height(cah).top(`${cay}rpx`).left(`${cax}rpx`).opacity(1).step()
+      camera.width(`${caw}rpx`).height(`${cah}rpx`).top(`${cay}rpx`).left(`${cax}rpx`).opacity(1).step()
       //遮罩图动画
       const cover = wx.createAnimation({
          duration: 1000,
          timingFunction: 'ease-out',
       })
-      cover.width(`${cow}rpx`).height(`${coh}rpx`).top(`-${coy}rpx`).left(`-${cox}rpx`).opacity(1).step()
+      cover.width(`${cow}rpx`).height(`${coh}rpx`).top(`-${coy}rpx`).left(`-${cox}rpx`).step()
 
       this.setData({
          moveImageAni: camera.export(),
@@ -140,13 +130,23 @@ Page({
    },
    coverAnimEnd () {
       console.log('coverAnimEnd')
+	   //摄像机动画
+	   const camera = wx.createAnimation({
+		   duration: 0,
+		   timingFunction: 'ease',
+	   })
+	   const [caw, cah, cay, cax] = this.data.cameraSize
       if (this.data.showCamera) { //缩小后
+	      camera.width(`${caw}rpx`).height(cah).top(`${cay}rpx`).left(`${cax}rpx`).step()
          this.setData({
-            showCamera: false,
+	         showCamera: false,
+	         cameraAni: camera.export(),
          })
       } else { //放大后
+	      camera.width(`${caw}rpx`).height(cah).top(`${cay}rpx`).left(`${cax}rpx`).step()
          this.setData({
-            showCamera: true,
+	         cameraAni: camera.export(),
+	         showCamera: true,
             showBottom: true,
          })
       }

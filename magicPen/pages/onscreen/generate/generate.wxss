@@ -1,14 +1,14 @@
 .generate-frame { width: 100%; height: 100vh; overflow: hidden; position: relative; z-index: 10; }
 .camera-frame { width: 100%; height: 100vh; overflow: hidden; position: absolute; top: 0; left: 0;}
 .camera-container { width: 233rpx; height: 233rpx; position: relative; top: -233rpx; left: -233rpx;}
-.camera-container .cover{ width: 750rpx; position: fixed; top: 0; left: 0; bottom: 320rpx; overflow: hidden;}
-.camera-container .cover cover-image{ width: 750rpx; height: 1333rpx; position: relative; left: -10000px;}
+.camera-container .cover{ width: 750rpx; position: fixed; top: 0; left: 0; bottom: 320rpx; overflow: hidden; display: none;}
+.camera-container .cover cover-image{ width: 750rpx; height: 1333rpx; position: relative; left: -10000px; opacity: 0.2}
 
 .btn-switch { width: 100rpx; height: 100rpx; position: fixed; bottom: 160rpx; left: 325rpx; z-index: 10;}
 
 .animation-frame { width: 100%; height: 100vh; overflow: hidden; position: relative;}
 .animation-frame .photos { position: absolute;}
-.animation-frame .cover { width: 750rpx; height: 1333rpx; position: absolute; top: 0; left: 0;}
+.animation-frame .cover { width: 750rpx; height: 1333rpx; position: absolute; top: 0; left: 0; opacity: 1}
 
 .btns-frame { width: 100%; height: 140rpx; background-color: #ffffff; display: flex; justify-content: space-around; align-items: center; position: fixed; left: 0; bottom: 0; transition: bottom 0.3s ease-out; z-index: 60;}
 .btns-frame .btn { width: 240rpx; height: 58rpx; border: 4rpx solid #999999; border-radius: 15rpx; font-size: 28rpx; color: #999999; display: flex; justify-content: center; align-items: center; letter-spacing: 8rpx;}

@@ -3,7 +3,7 @@ const {checkPsd, payPsdGoods, psdUpTv, fileUp, getUserAsset} = require('../../..
 import regeneratorRuntime from '../../../utils/runtime.js'
 const {promisify} = require('../../../utils/util.js')
 const getLocation = promisify(wx.getLocation)
-const downloadFile = promisify(wx.downloadFile)
+const downloadFile = promisify(wx.downloadFile, true)
 const app = getApp()
 const audio = wx.createInnerAudioContext()
 audio.obeyMuteSwitch = false
@@ -48,7 +48,13 @@ Page({
       playCount: 0,
       isIOS: app.globalData.isIOS,
    },
-
+	cameraErr (e) {
+		this.tryAnother()
+		app.refreshSetting()
+	},
+	cameraDone (e) {
+		app.refreshSetting()
+	},
    /**
     * 生命周期函数--监听页面加载
     */
@@ -405,9 +411,22 @@ Page({
                         duration: 2000
                      })
                      self.data.isSaving = false
-                  }
+                  },fail(err) {
+		               console.log('图片保存失败报错', err)
+		               wx.showToast({
+			               icon: 'none',
+			               title:'保存失败'
+		               });
+	               }
                })
-            }
+            },
+	         fail(err) {
+            	console.log('图片生成失败报错', err)
+		         wx.showToast({
+			         icon: 'none',
+			         title:'生成失败'
+		         });
+	         }
          })
       })
 

@@ -1,35 +1,37 @@
 const formatTime = date => {
-  const year = date.getFullYear()
-  const month = date.getMonth() + 1
-  const day = date.getDate()
-  const hour = date.getHours()
-  const minute = date.getMinutes()
-  const second = date.getSeconds()
+	const year = date.getFullYear()
+	const month = date.getMonth() + 1
+	const day = date.getDate()
+	const hour = date.getHours()
+	const minute = date.getMinutes()
+	const second = date.getSeconds()
 
-  return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+	return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
 }
 
 const formatNumber = n => {
-  n = n.toString()
-  return n[1] ? n : '0' + n
+	n = n.toString()
+	return n[1] ? n : '0' + n
 }
-
-const promisify = api => {
-  return (options, ...params) => {
-    return new Promise((resolve, reject) => {
-      const extras = {
-        success: resolve,
-        fail(err){
-           console.log(err)
-           reject(err)
-        }
-      }
-      api({...options, ...extras}, ...params)
-    })
-  }
+const promisify = (api, auth) => {
+	return (options, ...params) => {
+		return new Promise((resolve, reject) => {
+			const extras = {
+				success: resolve,
+				fail: reject,
+				complete () {
+					if (auth) {
+						const app = getApp()
+						app.refreshSetting()
+					}
+				}
+			}
+			api({...options, ...extras}, ...params)
+		})
+	}
 }
 
 module.exports = {
-  formatTime,
-  promisify
+	formatTime,
+	promisify
 }

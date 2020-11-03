@@ -23,9 +23,17 @@ Component({
    */
   methods: {
      gotoList () {
-        wx.navigateTo({
-           url: '/pages/onscreen/list/list'
-        })
+     	if (app.globalData.settingData['scope.userLocation'] === true) {
+	      wx.navigateTo({
+		      url: '/pages/onscreen/list/list'
+	      })
+      } else {
+	      wx.showModal({
+		      title: '警告',
+		      content: '请在菜单-设置中打开定位权限',
+		      showCancel: false
+	      })
+      }
      },
      gotoRecharge () {
         if (this.data.isIOS) {

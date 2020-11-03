@@ -5,9 +5,8 @@ const {getSlideList, getNearbyMerchant, getChoicenessWorks, getAnnoun, getMyDyn}
 const useGuide = wx.getStorageSync('useGuide')
 import regeneratorRuntime from '../../utils/runtime.js'
 const {promisify} = require('../../utils/util.js')
-const getLocation = promisify(wx.getLocation)
+const getLocation = promisify(wx.getLocation, true)
 const myDynData = wx.getStorageSync('myDynData')
-console.log(myDynData)
 const audio = wx.createInnerAudioContext()
 audio.obeyMuteSwitch = false
 audio.src = app.globalData.audioSrc.thumbup
@@ -88,6 +87,13 @@ Page({
    async getStore() {
       const {longitude, latitude} = await getLocation({
          type: 'gcj02',
+      }).catch(err => {
+      	console.log('index', err)
+	      wx.showModal({
+		      title: '警告',
+		      content: '取消定位功能会影响后续体验。请在菜单-设置中打开',
+		      showCancel: false
+	      })
       })
       console.log(longitude,latitude)
       const res = await getNearbyMerchant(`${longitude},${latitude}`)
@@ -161,8 +167,6 @@ Page({
       }
    },
    getWarnText (data) {
-      console.log('get text')
-      console.log(data)
       let arr = []
       if (data.couponDue === 1) {
          arr.push('你的优惠券快过期啦')

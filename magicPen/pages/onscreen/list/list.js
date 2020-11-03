@@ -3,6 +3,7 @@ const {getPsdList} = require('../../../utils/api.js')
 import regeneratorRuntime from '../../../utils/runtime.js'
 const {promisify} = require('../../../utils/util.js')
 const getLocation = promisify(wx.getLocation)
+const app = getApp()
 Page({
 
    /**
@@ -40,11 +41,18 @@ Page({
       })
    },
    gotoDetail () {
-      const app = getApp()
-      app.globalData.generateData = this.data.selectData
-      wx.navigateTo({
-         url: '/pages/onscreen/generate/generate'
-      })
+	   if (app.globalData.settingData['scope.camera'] === false) {
+		   wx.showModal({
+			   title: '警告',
+			   content: '如想体验，请在菜单-设置中打开摄像头权限',
+			   showCancel: false
+		   })
+	   } else {
+		   app.globalData.generateData = this.data.selectData
+		   wx.navigateTo({
+			   url: '/pages/onscreen/generate/generate'
+		   })
+	   }
    },
    gotoPerson(e){
       const userId = e.currentTarget.dataset.id
@@ -63,7 +71,7 @@ Page({
     * 生命周期函数--监听页面显示
     */
    onShow: function () {
-
+		app.refreshSetting()
    },
 
    /**

@@ -21,6 +21,8 @@ App({
    async doInit() {
       const {code} = await login()
       const getSettingData = await getSetting()
+	   console.log('getSettingData', getSettingData)
+	   this.globalData.settingData = getSettingData.authSetting
       if(getSettingData.authSetting['scope.userInfo']) {
          const userInfoData = await getUserInfo()
          const {encryptedData, iv, userInfo} = userInfoData
@@ -44,7 +46,13 @@ App({
          })
       }
    },
+	async refreshSetting () {
+		const getSettingData = await getSetting()
+		console.log('refreshSetting', getSettingData)
+		this.globalData.settingData = getSettingData.authSetting
+	},
    globalData: {
+   	settingData: {},
       ajaxSrc: 'https://xcx.newryun.com',
       audioSrc: {
          wheel: 'http://sbhh.newryun.com/xcxstatic/sound/s01.mp3',

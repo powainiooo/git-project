@@ -7,7 +7,7 @@
 
 .person { display: flex; justify-content: center; align-items: center; position: fixed; left: 140rpx; bottom: 40rpx;}
 .person .avatar { margin-right: 90rpx; transform: scale(2)}
-.person .info .btn { font-size: 24rpx; color: #ff306a; margin-bottom: 15rpx;}
+.person .info .btn { font-size: 28rpx; color: #ff306a; padding-bottom: 15rpx;}
 .person .info .nick { font-size: 32rpx; color: #353535; margin-bottom: 15rpx;}
 .person .info .fans { font-size: 28rpx; color: #8d9faa;}
 

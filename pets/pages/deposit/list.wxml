@@ -14,7 +14,7 @@
             hover-stay-time="10"
             data-item="{{item}}"
             bindtap="doSelect">
-         <view>{{item.invest_money}}<text>元 送 {{item.give_money}} 元</text></view>
+         <view>{{item.invest_money}}<text>元</text> <text wx:if="{{item.give_money !== '0'}}">送 {{item.give_money}} 元</text></view>
          <view class="icons icon-weixuan"></view>
          <view class="icons icon-xuanzhong"></view>
       </view>

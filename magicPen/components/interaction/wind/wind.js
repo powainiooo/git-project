@@ -76,7 +76,7 @@ Component({
            this.setData({
               showModal: true,
               modalType: 'cost',
-              modalContent: `是否${this.data.cost}来画豆发动特技？`,
+              modalContent: `用${this.data.cost}个来画豆发动特技？`,
            })
         }
      },

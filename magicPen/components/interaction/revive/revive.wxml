@@ -5,7 +5,7 @@
       <view class="dot"></view>
    </z-button>
 </view>
-<view class="call-desc"><text>选择您的一个作品，在场景中3D复活！</text></view>
+<view class="call-desc"><text>为你的涂画赋予生命，让他们在场景中3D复活！</text></view>
 <view class="coin-line">
    <view class="mine">
       我的

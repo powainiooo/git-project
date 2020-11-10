@@ -1,6 +1,6 @@
 .call-title { width: 370rpx; margin: 15rpx auto 30rpx auto;}
 .call-title .dot { width: 10rpx; height: 10rpx; border-radius: 50%; background-color: #ffffff; margin: 0 30rpx;}
-.call-desc { width: 100%; font-size: 26rpx; color: #279e88; text-align: center; margin-top: 20rpx; line-height: 1.8; letter-spacing: 4rpx;}
+.call-desc { width: 100%; font-size: 32rpx; color: #279e88; text-align: center; margin-top: 20rpx; line-height: 1.8; letter-spacing: 4rpx;}
 
 
 .photo-desc { width: 100%; font-size: 26rpx; color: #279e88; text-align: center; margin-top: 20rpx; line-height: 1.8; letter-spacing: 4rpx;}

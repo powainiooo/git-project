@@ -15,4 +15,8 @@
    </view>
 </view>
 
+<image src="../../../res/interaction/hint-arrow-left.png" class="hint-img hint-img-left"></image>
+<image src="../../../res/interaction/hint-arrow-right.png" class="hint-img hint-img-right"></image>
+
+
 <wxs src="./move.wxs" module="util"></wxs>

@@ -3,7 +3,7 @@
    <text>拍照上屏</text>
    <view class="dot"></view>
 </view>
-<view class="photo-desc"><text>拍摄您的靓照，上传至游玩场景中，\n 留下精彩回忆。</text></view>
+<view class="photo-desc"><text>游历在奇妙场景中，留下精彩回忆</text></view>
 <view class="coin-line">
    <view class="mine">
       我的
@@ -17,5 +17,5 @@
 </view>
 
 <view class="photo-btn">
-   <z-button bindtap="gotoList">开始游玩</z-button>
+   <z-button bindtap="gotoList">开始互动</z-button>
 </view>

@@ -200,7 +200,7 @@ Page({
    },
    doRevive (e) {
       const {tuzhiNu, freeFuhuoState} = e.detail
-      const msg = freeFuhuoState === 2 ? '第一次免费复活哟！': `是否${this.data.fuhuoIq}来画豆复活？`
+      const msg = freeFuhuoState === 2 ? '第一次免费复活哟！': `用${this.data.fuhuoIq}个来画豆复活？`
       this.setData({
          tuzhiNu,
          showModal: true,

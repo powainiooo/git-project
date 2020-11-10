@@ -94,7 +94,7 @@ Component({
                  modalContent: `发动3D复活特技`,
               })
            } else {
-              const msg = this.data.freeFuhuoState === 2 ? '第一次免费复活哟！': `是否${this.data.cost}来画豆复活？`
+              const msg = this.data.freeFuhuoState === 2 ? '第一次免费复活哟！': `用${this.data.cost}个来画豆复活？`
               this.setData({
                  showModal: true,
                  modalType: 'cost',

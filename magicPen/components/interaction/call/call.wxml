@@ -6,7 +6,7 @@
       <view class="dot"></view>
    </z-button>
 </view>
-<view class="call-desc"><text>召唤今天场景中您的作品，表演华丽特级！</text></view>
+<view class="call-desc"><text>召唤今天场景中您画的作品，为大家表演华丽特级吧！</text></view>
 <view class="coin-line">
    <view class="mine">
       我的

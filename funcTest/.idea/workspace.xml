@@ -3,8 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="7f3a3886-6cf3-4499-a59b-af9c22254e9b" name="默认的" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../pets/project.config.json" beforeDir="false" afterPath="$PROJECT_DIR$/../pets/project.config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../xiaofu/project.config.json" beforeDir="false" afterPath="$PROJECT_DIR$/../xiaofu/project.config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../magicPen/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/../magicPen/app.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -216,6 +215,7 @@
       <workItem from="1599115995315" duration="1075000" />
       <workItem from="1599640853731" duration="646000" />
       <workItem from="1602226213789" duration="1467000" />
+      <workItem from="1604477034065" duration="657000" />
     </task>
     <servers />
   </component>
@@ -248,6 +248,10 @@
     </state>
     <state width="1556" height="231" key="GridCell.Tab.0.right/0.0.1920.1040/-1600.0.1600.900@-1600.0.1600.900" timestamp="1602229307383" />
     <state width="1540" height="226" key="GridCell.Tab.0.right/0.0.1920.1040/-1600.0.1600.900@0.0.1920.1040" timestamp="1599038086147" />
+    <state x="732" y="373" key="git4idea.merge.GitPullDialog" timestamp="1604477063285">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="732" y="373" key="git4idea.merge.GitPullDialog/0.0.1920.1040/-1600.0.1600.900@0.0.1920.1040" timestamp="1604477063285" />
   </component>
   <component name="masterDetails">
     <states>

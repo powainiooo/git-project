@@ -22,16 +22,9 @@
 .roll-item:nth-child(7) { transform: translate(0, -600rpx) rotateZ(270deg);}
 .roll-item:nth-child(8) { transform: translate(0, -600rpx) rotateZ(315deg);}
 
-.hint-img { width: 120rpx; height: 60rpx; position: absolute; top: 380rpx; z-index: 100;}
-.hint-img-left { left: 150rpx; animation: hintLeft 1.5s infinite linear;}
-.hint-img-right { right: 150rpx; animation: hintRight 1.5s infinite linear;}
+.hint-img { width: 100rpx; position: absolute; top: 420rpx; left: 250rpx; z-index: 100; animation: hintLeft 1s 4 linear; animation-fill-mode: both;}
 @keyframes hintLeft {
    0% { transform: translate(0, 0); opacity: 1;}
-   60% { transform: translate(-30rpx, 10rpx); opacity: 1;}
-   80%,100% { transform: translate(-30rpx, 10rpx); opacity: 0;}
-}
-@keyframes hintRight {
-   0% { transform: translate(0, 0); opacity: 1;}
-   60% { transform: translate(30rpx, 10rpx); opacity: 1;}
-   80%,100% { transform: translate(30rpx, 10rpx); opacity: 0;}
+   60% { transform: translate(200rpx, 0); opacity: 1;}
+   80%,100% { transform: translate(200rpx, 0); opacity: 0;}
 }

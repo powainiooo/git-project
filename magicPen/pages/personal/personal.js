@@ -93,6 +93,11 @@ Page({
          wx.navigateTo({url})
       }
    },
+	webTo () {
+   	wx.navigateTo({
+		   url: '/pages/webview/webview?src='
+	   })
+	},
    setFansMove () {
       const dis = this.data.userFans - userFans
       if (dis > 0) {

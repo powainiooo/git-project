@@ -9,14 +9,13 @@
    <image src="../../../res/interaction/wheel.png" mode="widthFix" class="wheel"></image>
    <image src="../../../res/interaction/light3.png" mode="widthFix" class="light" wx:if="{{showActive}}"></image>
    <view class="roll-frame">
-      <view wx:for="{{list}}" wx:key="{{item.key}}" class="roll-item">
+      <view wx:for="{{list}}" wx:key="index" class="roll-item">
          <image src="{{item.icon}}" class="roll-img"></image>
       </view>
    </view>
 </view>
 
-<image src="../../../res/interaction/hint-arrow-left.png" class="hint-img hint-img-left"></image>
-<image src="../../../res/interaction/hint-arrow-right.png" class="hint-img hint-img-right"></image>
+<image src="../../../res/interaction/hand.png" mode="widthFix" class="hint-img"></image>
 
 
 <wxs src="./move.wxs" module="util"></wxs>

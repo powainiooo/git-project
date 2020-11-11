@@ -1,7 +1,8 @@
-<view class="location" wx:if="{{locationData.mchName}}" bindtap="openStore" style="top: {{statusBarHeight + 10}}px">
-  <text>{{locationData.mchName}}</text>
-<!--  <text>{{locationData.mchName}}\n 距您{{locationData.minKM}}KM</text>-->
-</view>
-<view class="location" wx:else bindtap="openStore" style="top: {{statusBarHeight}}px">
-  <text>附近暂无体验店</text>
-</view>
+<!--<view class="location" wx:if="{{locationData.mchName}}" bindtap="openStore" style="top: {{statusBarHeight + 10}}px">-->
+<!--  <text>{{locationData.mchName}}</text>-->
+<!--&lt;!&ndash;  <text>{{locationData.mchName}}\n 距您{{locationData.minKM}}KM</text>&ndash;&gt;-->
+<!--</view>-->
+<!--<view class="location" wx:else bindtap="openStore" style="top: {{statusBarHeight}}px">-->
+<!--  <text>附近暂无体验店</text>-->
+<!--</view>-->
+<image src="../../../res/index/title.png" class="location-img" style="top: {{statusBarHeight + 10}}px"></image>

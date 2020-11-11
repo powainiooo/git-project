@@ -1,3 +1,6 @@
-<view class="z-button">
-  <slot></slot>
+<view class="z-button z-button-disabled" catchtap="tap" wx:if="{{disabled}}">
+   <slot></slot>
+</view>
+<view class="z-button" wx:else>
+   <slot></slot>
 </view>

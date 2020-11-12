@@ -22,10 +22,24 @@ Component({
 	methods: {
 		linkWeb (e) {
 			const {src} = e.currentTarget.dataset
+			const url = 'appid:wxf5f0af8af285a2e6'
+			console.log(/appid:/.test(url))
 			if (src !== null) {
-				wx.navigateTo({
-					url: '/pages/webview/webview?src='+src
-				})
+				if (/url:/.test(src)) {
+					const url = src.replace('url:', '')
+					wx.navigateTo({
+						url: '/pages/webview/webview?src='+url
+					})
+				} else {
+					const appid = src.replace('appid:', '')
+					wx.navigateToMiniProgram({
+						appId,
+						success () {
+							console.log('to other wxapp success,', appid)
+						}
+					})
+				}
+
 			}
 		}
 	}

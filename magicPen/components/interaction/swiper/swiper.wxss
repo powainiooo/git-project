@@ -22,7 +22,7 @@
 .roll-item:nth-child(7) { transform: translate(0, -600rpx) rotateZ(270deg);}
 .roll-item:nth-child(8) { transform: translate(0, -600rpx) rotateZ(315deg);}
 
-.hint-img { width: 100rpx; position: absolute; top: 420rpx; left: 250rpx; z-index: 100; animation: hintLeft 1s 4 linear; animation-fill-mode: both;}
+.hint-img { width: 128rpx; position: absolute; top: 420rpx; left: 250rpx; z-index: 100; animation: hintLeft 1s 4 linear; animation-fill-mode: both;}
 @keyframes hintLeft {
    0% { transform: translate(0, 0); opacity: 1;}
    60% { transform: translate(200rpx, 0); opacity: 1;}

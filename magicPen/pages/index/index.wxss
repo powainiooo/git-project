@@ -1,5 +1,6 @@
 .title { height: 84rpx; background-color: #eff2f9; display: flex;  align-items: center; font-size: 34rpx; color: #3d99ad; padding-left: 90rpx; position: relative;}
 .title::before { content: ''; width: 5rpx; height: 38rpx; background-color: #37dbeb; position: absolute; left: 60rpx; top: 23rpx;}
+.btn-tougao { width: 110rpx; height: 60rpx; position: absolute; top: 10rpx; right: 50rpx;}
 
 .loading { text-align: center; margin-top: 100rpx; margin-bottom: 20rpx;}
 .loading .btn{ font-size: 20rpx; color: #cccccc;}

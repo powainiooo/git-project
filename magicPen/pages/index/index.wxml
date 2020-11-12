@@ -16,7 +16,10 @@
 
 
   <!--作品列表-->
-  <view class="title">精选作品</view>
+  <view class="title">
+     精选作品
+     <image src="../../res/index/tougao.png" class="btn-tougao"></image>
+  </view>
   <view class="works-list">
     <list-item wx:for="{{worksList}}"
                wx:for-item="item"

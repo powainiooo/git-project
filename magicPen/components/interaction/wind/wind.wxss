@@ -1,7 +1,7 @@
 .call-title { width: 370rpx; margin: 15rpx auto 30rpx auto;}
 .call-title .dot { width: 10rpx; height: 10rpx; border-radius: 50%; background-color: #ffffff; margin: 0 30rpx;}
 
-.photo-desc { width: 100%; font-size: 26rpx; color: #279e88; text-align: center; margin-top: 20rpx; line-height: 1.8; letter-spacing: 4rpx;}
+.photo-desc { width: 100%; font-size: 32rpx; color: #279e88; text-align: center; margin-top: 20rpx; line-height: 1.8; letter-spacing: 4rpx;}
 
 .coin-line { height: 80rpx; background-color: #eff2f9; padding: 0 60rpx; display: flex; align-items: center; justify-content: space-between; margin-top: 40rpx;}
 .coin-line .mine { font-size: 26rpx; color: #279e88; display: flex; align-items: center;}

@@ -30,7 +30,7 @@
 <!--吉祥物-->
 <view class="mascot-btn"
       bindtap="openScanModal"
-      style="right: {{showScan ? '0' : '-80rpx'}}">
+      style="right: {{showScan ? '0' : '-120rpx'}}">
   <image src="../../../res/index/mascot.png"
          class="mascot-icon"
          mode="widthFix"></image>

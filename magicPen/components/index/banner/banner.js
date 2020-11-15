@@ -33,7 +33,7 @@ Component({
 				} else {
 					const appid = src.replace('appid:', '')
 					wx.navigateToMiniProgram({
-						appId,
+						appId: appid,
 						success () {
 							console.log('to other wxapp success,', appid)
 						}

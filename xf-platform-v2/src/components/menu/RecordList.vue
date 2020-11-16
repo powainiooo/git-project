@@ -73,6 +73,7 @@
                             </ul>
                         </t-ques>
                     </td>
+                   <td v-if="item.status === 6">未提现</td>
                 </tr>
                 </tbody>
             </table>

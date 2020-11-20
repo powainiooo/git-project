@@ -30,7 +30,9 @@ Page({
       showNewsHint: false,
       myDynData: null,
       tWarn: 0,
-      warnMsgList: []
+      warnMsgList: [],
+	   tougouSrc: '',
+	   showTougao: false
    },
    onLoad: function () {
       if (app.globalData.userInfo) {
@@ -69,6 +71,9 @@ Page({
       //    this.getStore()
       //
       // }
+	   this.setData({
+		   tougouSrc: `${app.globalData.imgSrc}images/tougao.png?${Math.random()}`
+	   })
    },
    getUserInfo: function(e) {
       console.log(e)
@@ -226,6 +231,16 @@ Page({
    thumbup () {
       audio.play()
    },
+	openTougao () {
+   	this.setData({
+		   showTougao: true
+	   })
+	},
+	hideTougao () {
+   	this.setData({
+		   showTougao: false
+	   })
+	},
    /**
     * 生命周期函数--监听页面显示
     */

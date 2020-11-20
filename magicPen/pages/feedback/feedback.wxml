@@ -1,5 +1,5 @@
-
-<textarea class="txt" bindinput="inputChange" placeholder="将好的建议或不足之处进行反映，达到完善的目的。"></textarea>
+<image src="{{jmSrc}}" mode="widthFix" style="width: 100%;"></image>
+<textarea class="txt" bindinput="inputChange" placeholder="站点有限开放，速来！请在这里留言，并写下您的手机号码，我们的商务会尽快与您取得联系，并为您预留线下站点创建名额。从此我们的梦想和孩子一起成长。"></textarea>
 <view class="btns">
   <z-button bindtap="doSubmit">提交</z-button>
 </view>

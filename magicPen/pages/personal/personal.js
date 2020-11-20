@@ -93,10 +93,13 @@ Page({
          wx.navigateTo({url})
       }
    },
-	webTo () {
-   	wx.navigateTo({
-		   url: '/pages/webview/webview?src='
-	   })
+	wxappTo () {
+		wx.navigateToMiniProgram({
+			appId: 'wxf5f0af8af285a2e6',
+			success () {
+				console.log('to other wxapp success,', appid)
+			}
+		})
 	},
    setFansMove () {
       const dis = this.data.userFans - userFans

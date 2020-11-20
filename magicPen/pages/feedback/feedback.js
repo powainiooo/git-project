@@ -7,14 +7,18 @@ Page({
    * 页面的初始数据
    */
   data: {
-    txt:''
+    txt:'',
+	  jmSrc: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+  	const app = getApp()
+	  this.setData({
+		  jmSrc: `${app.globalData.imgSrc}images/jm.png?${Math.random()}`
+	  })
   },
   inputChange(e) {
     this.data.txt = e.detail.value

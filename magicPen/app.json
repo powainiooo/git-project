@@ -1,38 +1,39 @@
 {
-   "pages": [
-      "pages/index/index",
-      "pages/onscreen/detail/detail",
-      "pages/works/detail/detail",
-      "pages/interaction/interaction",
-      "pages/onscreen/generate/generate",
-      "pages/onscreen/list/list",
-      "pages/feedback/feedback",
-      "pages/coupon/coupon",
-      "pages/recharge/recharge",
-      "pages/medal/medal",
-      "pages/works/list/list",
-      "pages/personal/personal",
-      "pages/map/map",
-      "pages/aboutus/aboutus",
-      "pages/rule/rule",
-      "pages/auth/auth",
-      "pages/drawing/drawing",
-      "pages/webview/webview"
-   ],
-   "window": {
-      "backgroundTextStyle": "light",
-      "navigationBarBackgroundColor": "#fff",
-      "navigationBarTitleText": "神笔画画",
-      "navigationBarTextStyle": "black"
-   },
-   "usingComponents": {
-      "i-message": "components/iview/message/index",
-      "i-icon": "components/iview/icon/index"
-   },
-   "permission": {
-      "scope.userLocation": {
-         "desc": "你的位置信息将用于小程序获取门店位置"
-      }
-   },
-   "sitemapLocation": "sitemap.json"
+  "pages": [
+    "pages/index/index",
+    "pages/onscreen/generate/generate",
+    "pages/onscreen/list/list",
+    "pages/onscreen/detail/detail",
+    "pages/works/detail/detail",
+    "pages/interaction/interaction",
+    "pages/feedback/feedback",
+    "pages/coupon/coupon",
+    "pages/recharge/recharge",
+    "pages/medal/medal",
+    "pages/works/list/list",
+    "pages/personal/personal",
+    "pages/map/map",
+    "pages/aboutus/aboutus",
+    "pages/rule/rule",
+    "pages/auth/auth",
+    "pages/drawing/drawing",
+    "pages/webview/webview",
+    "pages/dreamBox/dreamBox"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "神笔画画",
+    "navigationBarTextStyle": "black"
+  },
+  "usingComponents": {
+    "i-message": "components/iview/message/index",
+    "i-icon": "components/iview/icon/index"
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序获取门店位置"
+    }
+  },
+  "sitemapLocation": "sitemap.json"
 }

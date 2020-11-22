@@ -1,5 +1,6 @@
 // pages/medal/medal.js
 const {getMedalList, getUserInterspaceInfo, takeState} = require('../../utils/api.js')
+const app = getApp()
 Page({
 
    /**
@@ -13,7 +14,8 @@ Page({
       selectData: {},
       isUser: true,
       hideState: 'close',
-      giftTime: ''
+      giftTime: '',
+	   medalImg: ''
    },
 
    /**
@@ -25,7 +27,18 @@ Page({
       this.setData({
          isUser: this.data.userId == 0
       })
+	   this.setData({
+		   medalImg: `${app.globalData.imgSrc}images/dinzhi2.png?${Math.random()}`
+	   })
    },
+	wxappTo () {
+		wx.navigateToMiniProgram({
+			appId: 'wxf5f0af8af285a2e6',
+			success () {
+				console.log('to other wxapp success,')
+			}
+		})
+	},
    getData() {
       getMedalList({userId: this.data.userId}).then(res => {
          this.setData({

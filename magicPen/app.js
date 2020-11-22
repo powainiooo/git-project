@@ -68,7 +68,7 @@ App({
       userInfo: {},
       sKey: null,
       myDyn: null,
-      generateData: {"psdId":1,"title":"海洋ufo小土逗","tinyUrl":"https://sbhh.newryun.com/back/psd/201900/ufo0101a.jpg","bigUrl":"https://sbhh.newryun.com/back/psd/201900/ufo0101b.jpg","psdUrl":"https://sbhh.newryun.com/back/psd/201900/ufo0101c.png","pricePhoto":"5","priceVideo":"8","pngCoordinate":"246,210,281,159","use":203,"psdType":1,"isTutorials":2,"scene":-1,"playUsers":[{"avatarUrl":"https://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83erLQFeiaXZSPHassiaiat1yyWcIJ57P9Bd91ibUFam7tlPW9HegjkORg2aQZRoQibo6a7rRgKy3esVfYog/132","nick":"王山而是个小马甲","userId":1174}]},
+      generateData: {"psdId":27,"title":"森林气球小小酥","tinyUrl":"https://sbhh.newryun.com/back/psd/201900/qiqiu0402a.jpg","bigUrl":"https://sbhh.newryun.com/back/psd/201900/qiqiu0402b.jpg","psdUrl":"https://sbhh.newryun.com/back/psd/201900/qiqiu0402c.png","pricePhoto":"5","priceVideo":"8","pngCoordinate":"268,537,219,219\t","use":62,"psdType":2,"isTutorials":2,"scene":-1,"playUsers":[{"avatarUrl":"https://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83erLQFeiaXZSPHassiaiat1yyWcIJ57P9Bd91ibUFam7tlPW9HegjkORg2aQZRoQibo6a7rRgKy3esVfYog/132","nick":"王山而是个小马甲","userId":1174},{"avatarUrl":"https://thirdwx.qlogo.cn/mmopen/vi_32/QibO121CdVHOHJ7xCxI0AlWtKTYNFBTYVticIibxbGG5sI4vUyL0eeTYIZGzYvqQ4e3wjPRiaUWBF3ABuM5icuTqxOw/132","nick":"剑锋","userId":1}]},
       locationData: null
    }
 })

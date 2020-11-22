@@ -60,21 +60,27 @@ Page({
     */
    onLoad: function (options) {
       const {generateData} = getApp().globalData
-	   console.log(generateData)
+	   console.log(JSON.stringify(generateData))
       this.setData({generateData})
 	   wx.nextTick(()=>{
 		   this.initSize()
 	   })
    },
    initSize () {
-      const [padding, moduleWidth, moduleHeight] = [20, 750, 1333]
+      const [padding, moduleWidth, moduleHeight] = [10, 750, 1333]
       const showWidth = 750 - padding*2
       const [x, y, w, h] = this.data.generateData.pngCoordinate.split(',')
+	   console.log('x',x,',y',y,',w',w,',h',h)
+	   console.log(this.data.generateData.pngCoordinate.split(','))
       const paddingTop = 50
       const scale = showWidth / w
       const cameraHeight = `${showWidth * h / w}rpx`
       this.data.cameraSize = [showWidth, cameraHeight, paddingTop, padding]
       this.data.coverSize = [moduleWidth * scale, moduleHeight * scale, y * scale - paddingTop, x * scale - padding]
+	   console.log('cameraSize', this.data.cameraSize)
+	   // console.log('coverSize', this.data.coverSize)
+	   // ["268", "537", "219", "219"] cameraSize (4) [730, "730rpx", 50, 10]  coverSize (4) [2500, 4443.333333333334, 1740, 883.3333333333334]
+	   // ["246", "215", "281", "159"] cameraSize (4) [730, "413.06049822064057rpx", 50, 10]  coverSize (4) [1948.3985765124553, 3462.9537366548043, 508.54092526690386, 629.0747330960854]
 
       //摄像机动画
       const camera = wx.createAnimation({
@@ -118,7 +124,7 @@ Page({
          duration: 1000,
          timingFunction: 'ease',
       })
-      camera.width(`${caw}rpx`).height(`${cah}rpx`).top(`${cay}rpx`).left(`${cax}rpx`).opacity(1).step()
+      camera.width(`${caw}rpx`).height(`${cah}`).top(`${cay}rpx`).left(`${cax}rpx`).opacity(1).step()
       //遮罩图动画
       const cover = wx.createAnimation({
          duration: 1000,
@@ -143,6 +149,7 @@ Page({
 	   })
 	   const [caw, cah, cay, cax] = this.data.cameraSize
       if (this.data.showCamera) { //缩小后
+      	console.log('showCamera', '缩小后')
 	      camera.width(`${caw}rpx`).height(cah).top(`${cay}rpx`).left(`${cax}rpx`).step()
          this.setData({
 	         showCamera: false,
@@ -166,7 +173,8 @@ Page({
             duration: 1000,
             timingFunction: 'ease',
          })
-         photo.width(`${w}rpx`).height(`${h}rpx`).top(`${y}rpx`).left(`${x}rpx`).step()
+	      const hStr = `${parseInt(h)}rpx`
+         photo.width(`${w}rpx`).height(hStr).top(`${y}rpx`).left(`${x}rpx`).step()
          //遮罩图动画
          const cover = wx.createAnimation({
             duration: 1000,
@@ -195,6 +203,13 @@ Page({
          showBottom: false,
       })
       const self = this
+	   // setTimeout(() => {
+		//    self.setData({
+		// 	   photos: 'https://sbhh.newryun.com/back/psd/201900/qiqiu0402a.jpg',
+		// 	   showBottom: false,
+		//    })
+		//    self.zoomBack()
+	   // }, 500)
       const ctx = wx.createCameraContext()
       ctx.takePhoto({
          quality: 'high',

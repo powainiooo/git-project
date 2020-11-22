@@ -8,7 +8,7 @@
       <view class="medal-item {{item.takeMedalState === 2 ? 'medal-item-dot' : ''}}"
             wx:for="{{medalList}}"
             wx:for-item="item"
-            wx:key="{{item.medalId}}"
+            wx:key="medalId"
             data-item="{{item}}"
             bindtap="selectMedal"
             bindlongpress="getGift">
@@ -19,7 +19,7 @@
       </view>
    </view>
 
-   <view class="hint">收集勋章可获得神秘奖品</view>
+   <image src="{{medalImg}}" mode="widthFix" class="medal-img" bindtap="wxappTo"></image>
 </view>
 
 <medal-hint wx:if="{{showHint}}"

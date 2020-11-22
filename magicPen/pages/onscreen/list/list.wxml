@@ -26,7 +26,7 @@
       <view class="list">
          <image wx:for="{{selectData.playUsers}}"
                 wx:for-item="item"
-                wx:key="{{item.nick}}"
+                wx:key="nick"
                 src="{{item.avatarUrl}}"
                 data-id="{{item.userId}}"
                 bindtap="gotoPerson"
@@ -45,7 +45,7 @@
             wx:for-item="item"
             wx:for-index="index"
             data-index="{{index}}"
-            wx:key="{{item.psdId}}"
+            wx:key="psdId"
             bindtap="changePsd">
          <image src="{{item.tinyUrl}}"></image>
          <view class="title">{{item.title}}</view>

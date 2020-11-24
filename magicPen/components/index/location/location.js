@@ -7,6 +7,15 @@ Component({
 		locationData: {
 			type: Object,
 			value: {}
+		},
+		scrollTop: {
+			type: Number,
+			value: 0,
+			observer (val) {
+				this.setData({
+					isTop: val < 50
+				})
+			}
 		}
 	},
 
@@ -14,7 +23,8 @@ Component({
 	 * 组件的初始数据
 	 */
 	data: {
-		statusBarHeight: 0
+		statusBarHeight: 0,
+		isTop: true
 	},
 	attached () {
 		wx.getSystemInfo({

@@ -32,7 +32,8 @@ Page({
       tWarn: 0,
       warnMsgList: [],
 	   tougouSrc: '',
-	   showTougao: false
+	   showTougao: false,
+	   scrollTop: 0
    },
    onLoad: function () {
       if (app.globalData.userInfo) {
@@ -240,6 +241,11 @@ Page({
    	this.setData({
 		   showTougao: false
 	   })
+	},
+	onPageScroll (e) {
+		this.setData({
+			scrollTop: e.scrollTop
+		})
 	},
    /**
     * 生命周期函数--监听页面显示

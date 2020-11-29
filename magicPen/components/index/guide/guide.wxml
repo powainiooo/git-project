@@ -91,7 +91,7 @@
 
 <!--领取活动-->
 <view class="gitf-modal" wx:if="{{showGiftModal}}" bindtap="closeGift">
-   <image src="{{giftImage}}" mode="widthFix"></image>
+   <image src="{{giftImage}}" mode="widthFix" class="gitf-modal-img"></image>
    <z-button class="btn-item" catchtap="getGift" style="width: {{(giftBtnText.length + 2) * 32}}rpx">{{giftBtnText}}</z-button>
 </view>
 

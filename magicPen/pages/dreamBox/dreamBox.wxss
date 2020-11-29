@@ -1,1 +1,8 @@
 .bg { width: 100%; display: block;}
+.header { background-color: #b56de2;}
+.btn-back { height: 65px; border-radius: 45px 45px 0 0; background-color: #ffffff; margin-top: -45px; position: relative; z-index: 2; display: flex; justify-content: center; align-items: center;}
+.btn-back image { width: 333rpx; height: 70rpx;}
+.btn-diy { height: 100px; background-color: #ffffff; display: flex; justify-content: center; align-items: center;}
+.btn-diy image { width: 411rpx; height: 88rpx;}
+
+.intro-frame { width: auto; min-height: 50vh; background-color: #999999; margin: 0 20rpx;}

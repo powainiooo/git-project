@@ -1,12 +1,13 @@
 {
   "pages": [
-    "pages/index/index",
+     "pages/index/index",
+     "pages/dreamBox/dreamBox",
+     "pages/feedback/feedback",
     "pages/onscreen/generate/generate",
     "pages/onscreen/list/list",
     "pages/onscreen/detail/detail",
     "pages/works/detail/detail",
     "pages/interaction/interaction",
-    "pages/feedback/feedback",
     "pages/coupon/coupon",
     "pages/recharge/recharge",
     "pages/medal/medal",
@@ -17,8 +18,7 @@
     "pages/rule/rule",
     "pages/auth/auth",
     "pages/drawing/drawing",
-    "pages/webview/webview",
-    "pages/dreamBox/dreamBox"
+    "pages/webview/webview"
   ],
   "window": {
     "backgroundTextStyle": "light",

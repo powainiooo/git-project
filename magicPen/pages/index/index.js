@@ -33,7 +33,7 @@ Page({
       warnMsgList: [],
 	   tougouSrc: '',
 	   showTougao: false,
-	   scrollTop: 0
+	   isTop: true
    },
    onLoad: function () {
       if (app.globalData.userInfo) {
@@ -244,7 +244,7 @@ Page({
 	},
 	onPageScroll (e) {
 		this.setData({
-			scrollTop: e.scrollTop
+			isTop: e.scrollTop < 60
 		})
 	},
    /**

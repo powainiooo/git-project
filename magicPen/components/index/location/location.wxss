@@ -1,5 +1,5 @@
 
-.location-frame { width: 100%; height: 170rpx; position: fixed; top: 0; left: 0; display: flex; align-items: center; z-index: 10000;}
+.location-frame { width: 100%; height: 170rpx; position: fixed; top: 0; left: 0; display: flex; align-items: center; z-index: 1000;}
 .location-frame-top { background-color: #ffffff;}
 .location { height: 40rpx; font-size: 22rpx; display: flex; align-items: flex-end; color: #ffffff; margin-top: 50rpx;}
 .location-frame-top .location { color: #000000;}

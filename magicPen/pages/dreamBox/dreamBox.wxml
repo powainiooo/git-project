@@ -1,1 +1,11 @@
-<image src="{{imgSrc}}" class="bg" mode="widthFix" bindtap="wxappTo"></image>
+<!--<image src="{{imgSrc}}" class="bg" mode="widthFix" bindtap="wxappTo"></image>-->
+<view class="header" style="height: {{statusBarHeight}}px"></view>
+<view class="btn-back">
+   <image src="../../res/personal/btn-back.png" bindtap="goBack"></image>
+</view>
+<scroll-view scroll-y class="intro-frame" style="height: calc(100vh - {{(statusBarHeight + 165 - 45)}}px)">
+   <image src="{{imgSrc}}" class="bg" mode="widthFix"></image>
+</scroll-view>
+<view class="btn-diy">
+   <image src="../../res/personal/btn-diy.png" bindtap="wxappTo"></image>
+</view>

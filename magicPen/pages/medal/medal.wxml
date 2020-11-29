@@ -19,8 +19,10 @@
       </view>
    </view>
 
-   <image src="{{medalImg}}" mode="widthFix" class="medal-img" bindtap="wxappTo"></image>
+   <view class="hint">收集勋章可获得神秘奖品</view>
 </view>
+
+<image src="{{medalImg}}" mode="widthFix" class="medal-img" bindtap="wxappTo"></image>
 
 <medal-hint wx:if="{{showHint}}"
             isUser="{{isUser}}"

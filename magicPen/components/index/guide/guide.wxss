@@ -57,7 +57,7 @@
 .modal-fail .btn-item { width: 240rpx; margin: 40rpx 0;}
 
 .gitf-modal { width: 100%; height: 100vh; position: fixed; top: 0; left: 0; z-index: 1000; background-color: rgba(0,0,0,0.7); display: flex; flex-direction: column; justify-content: center; align-items: center;}
-.gitf-modal image { width: 750rpx; margin-bottom: 30rpx;}
+.gitf-modal .gitf-modal-img { width: 750rpx; margin-bottom: 30rpx;}
 .gitf-modal .btn-item { width: 240rpx;}
 
 .gift-success { display: flex; flex-direction: column; justify-content: center; align-items: center;}

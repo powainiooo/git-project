@@ -8,15 +8,19 @@ Component({
 			type: Object,
 			value: {}
 		},
-		scrollTop: {
-			type: Number,
-			value: 0,
-			observer (val) {
-				this.setData({
-					isTop: val < 50
-				})
-			}
+		isTop: {
+			type: Boolean,
+			value: true
 		}
+		// scrollTop: {
+		// 	type: Number,
+		// 	value: 0,
+		// 	observer (val) {
+		// 		this.setData({
+		// 			isTop: val < 50
+		// 		})
+		// 	}
+		// }
 	},
 
 	/**
@@ -24,7 +28,7 @@ Component({
 	 */
 	data: {
 		statusBarHeight: 0,
-		isTop: true
+		// isTop: true
 	},
 	attached () {
 		wx.getSystemInfo({

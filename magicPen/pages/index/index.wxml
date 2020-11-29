@@ -7,7 +7,7 @@
    <z-message listData="{{msgList}}"></z-message>
 
   <!--定位-->
-  <location locationData="{{locationData}}" scrollTop="{{scrollTop}}"></location>
+  <location locationData="{{locationData}}" isTop="{{isTop}}"></location>
 
   <!--导航栏   style="z-index: {{guideStep === 1 ? 10 : 0}}; position: relative;"-->
   <view>

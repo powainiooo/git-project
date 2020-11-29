@@ -6,15 +6,23 @@ Page({
    * 页面的初始数据
    */
   data: {
-	  imgSrc: ''
+	  imgSrc: '',
+	  statusBarHeight: 0
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+	  wx.getSystemInfo({
+		  success: e => {
+			  this.setData({
+				  statusBarHeight: e.statusBarHeight + 100
+			  })
+		  }
+	  })
 	  this.setData({
-		  imgSrc: `${app.globalData.imgSrc}images/dinzhi.png?${Math.random()}`
+		  imgSrc: `${app.globalData.imgSrc}images/dinzhi.jpg?${Math.random()}`
 	  })
   },
 	wxappTo () {
@@ -24,6 +32,11 @@ Page({
 				console.log('to other wxapp success,')
 			}
 		})
+	},
+	goBack () {
+  	   wx.navigateBack({
+	      delta: -1
+      })
 	},
   /**
    * 生命周期函数--监听页面初次渲染完成

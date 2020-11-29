@@ -22,7 +22,7 @@ Page({
 		  }
 	  })
 	  this.setData({
-		  imgSrc: `${app.globalData.imgSrc}images/dinzhi.jpg?${Math.random()}`
+		  imgSrc: `${app.globalData.imgSrc}images/dinzhi.png?${Math.random()}`
 	  })
   },
 	wxappTo () {

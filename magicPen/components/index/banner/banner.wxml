@@ -1,4 +1,4 @@
-<swiper circular style="height: 550rpx">
+<swiper circular style="height: 600rpx">
   <block wx:for="{{listData}}" wx:for-item="item" wx:key="id">
     <swiper-item data-src="{{item.url}}" bindtap="linkWeb">
       <image src="{{item.img}}" class="slide-image" mode="aspectFill"/>

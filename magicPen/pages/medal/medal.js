@@ -32,11 +32,14 @@ Page({
 	   })
    },
 	wxappTo () {
-		wx.navigateToMiniProgram({
-			appId: 'wxf5f0af8af285a2e6',
-			success () {
-				console.log('to other wxapp success,')
-			}
+		// wx.navigateToMiniProgram({
+		// 	appId: 'wxf5f0af8af285a2e6',
+		// 	success () {
+		// 		console.log('to other wxapp success,')
+		// 	}
+		// })
+		wx.navigateTo({
+			url: '/pages/dreamBox/dreamBox'
 		})
 	},
    getData() {

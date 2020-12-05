@@ -34,7 +34,7 @@ Component({
 		wx.getSystemInfo({
 			success: e => {
 				this.setData({
-					statusBarHeight: e.statusBarHeight
+					statusBarHeight: e.statusBarHeight + 6
 				})
 			}
 		})

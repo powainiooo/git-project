@@ -22,15 +22,13 @@ Component({
 	methods: {
 		linkWeb (e) {
 			const {src} = e.currentTarget.dataset
-			const url = 'appid:wxf5f0af8af285a2e6'
-			console.log(/appid:/.test(url))
-			if (src !== null) {
+			if (src !== null || src !== '') {
 				if (/url:/.test(src)) {
 					const url = src.replace('url:', '')
 					wx.navigateTo({
 						url: '/pages/webview/webview?src='+url
 					})
-				} else {
+				} else if (/appid:/.test(src)) {
 					const appid = src.replace('appid:', '')
 					wx.navigateToMiniProgram({
 						appId: appid,
@@ -38,8 +36,11 @@ Component({
 							console.log('to other wxapp success,', appid)
 						}
 					})
+				} else {
+					wx.navigateTo({
+						url: src
+					})
 				}
-
 			}
 		}
 	}

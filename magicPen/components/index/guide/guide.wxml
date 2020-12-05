@@ -10,7 +10,7 @@
 </view>
 
 <!--引导-->
-<view class="guide" wx:if="{{!useGuide}}" catchtouchmove="tmove">
+<view class="guide" wx:if="{{false}}" catchtouchmove="tmove">
   <view class="cover"></view>
   <view class="step1" wx:if="{{step === 1}}" data-next="{{2}}" bindtap="changeStep">
     <image src="../../../res/index/mascot1.png" mode="widthFix" class="mascot1" animation="{{mascot1Ani}}"></image>
@@ -105,3 +105,7 @@
       <z-button class="btn-item" bindlongpress="closeGiftSuc" wx:if="{{giftSucData.surpriseType === 2}}">商家确认领取</z-button>
    </view>
 </z-modal>
+
+<view class="welcome" bindtap="hideWelcome" wx:if="{{showWelcome}}">
+   <image src="../../../res/index/welcome.png" mode="widthFix" class="welcome-img"></image>
+</view>

@@ -21,8 +21,12 @@ Component({
          type: Boolean,
          value: true,
          observer (val) {
-	         this.stepInit()
-	         this.stepMove()
+	         // this.stepInit()
+	         // this.stepMove()
+	         console.log('useGuide', val)
+	         this.setData({
+		         showWelcome: !val
+	         })
          }
       }
    },
@@ -32,6 +36,7 @@ Component({
     */
    data: {
       step: 1,
+	   showWelcome: false,
       showScan: false,
       showCamera: false,
       showNavBar: false,
@@ -66,6 +71,15 @@ Component({
     */
    methods: {
       tmove(){},
+	   hideWelcome () {
+		   this.setData({
+			   showWelcome: false
+		   })
+		   wx.setStorage({
+			   key:'useGuide',
+			   data: false
+		   })
+	   },
       stepInit () {
          const mascot1 = wx.createAnimation({
             duration: 0,

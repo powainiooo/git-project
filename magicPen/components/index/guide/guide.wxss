@@ -64,3 +64,6 @@
 .gift-success .icon { width: 170rpx; margin-top: 30rpx;}
 .gift-success .text { font-size: 32rpx; color: #3495aa; margin-top: 15rpx; text-align: center;}
 .gift-success .btn-item { width: 240rpx; margin: 40rpx 0;}
+
+.welcome { width: 100%; height: 100vh; position: fixed; top: 0; left: 0; z-index: 10000; display: flex; justify-content: center; align-items: center; background-color: #ffffff;}
+.welcome-img { width: 560rpx;}

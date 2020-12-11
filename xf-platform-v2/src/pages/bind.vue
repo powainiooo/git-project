@@ -72,7 +72,7 @@
                     <h3 class="title"><span>2</span>活动提款须知</h3>
                     <div class="hint" style="border-bottom: 1px solid #e5e5e5;">
                         <div>3<span>%</span></div>
-                        <p>小夫有票 会收取每场活动的总费用的<span>5</span>%作为手续费，提款时自动扣取。</p>
+                        <p>小夫有票 会收取每场活动的总费用的<span>3</span>%作为手续费，提款时自动扣取。</p>
                     </div>
                     <div class="hint">
                         <div>7<span style="font-size: 24px;">days</span></div>

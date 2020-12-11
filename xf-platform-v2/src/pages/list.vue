@@ -3,7 +3,7 @@
     .prolist-frame::-webkit-scrollbar{ width: 3px; background-color: rgba(0,0,0,0);}
     .prolist-frame::-webkit-scrollbar-thumb{ background-color: #ffffff;}
     .prolist-frame .company-name{ font-size: 157px; color: #fff; position: absolute; left:60px; top: 90px; font-family: 'Helve';}
-    .prolist-frame .list-content{  width: 1560px; display: flex; margin: 320px auto 100px auto; flex-wrap: wrap; position: relative; z-index: 900;}
+    .prolist-frame .list-content{  width: 1560px; display: flex; margin: 320px auto 0 auto; flex-wrap: wrap; position: relative; z-index: 900;}
     .prolist-frame .list-content>div{ margin:0 30px; transition: transform 0.15s ease-in-out; cursor: pointer;}
     .prolist-frame .list-content>div.touch{ transform: scale(0.96,0.96);}
 
@@ -14,6 +14,13 @@
     .prolist-frame .anim-detail2{ animation-duration: 0s; animation-timing-function: cubic-bezier(.25,.76,.36,.97)}
     .prolist-frame .btn-link{ width: 270px; position: fixed; top: 200px; right: 50px;}
     .prolist-frame .search{ position: fixed; top: 15px; right: 90px; z-index: 390;}
+
+    .prolist-frame .xf-page { color: #ffffff;}
+    .prolist-frame .xf-page .ivu-page-next, .xf-page .ivu-page-prev { background-color: transparent;}
+    .prolist-frame .xf-page .ivu-page-next a, .xf-page .ivu-page-prev a { color: #ffffff;}
+    .prolist-frame .xf-page .ivu-page-next:hover a, .xf-page .ivu-page-prev:hover a { color: #ffffff;}
+    .prolist-frame .xf-page .ivu-page-next a:hover, .xf-page .ivu-page-prev a:hover { color: #ffffff;}
+    .prolist-frame .xf-page.ivu-page-simple .ivu-page-simple-pager input { background-color: transparent; border-color: #ffffff; color: #ffffff;}
 </style>
 
 <template>
@@ -41,6 +48,9 @@
             </div>
         </div>
         </transition>
+       <div style="width: 1500px; margin: 0 auto" v-if="!showExample && !showDetail">
+          <Page :current="pageNo" :total="total" simple class-name="xf-page" @on-change="pageChange"/>
+       </div>
 
         <div class="detail-frame" v-show="!showExample && showDetail">
             <transition enter-active-class="animated fadeIn" leave-active-class="animated bounceOut">
@@ -77,7 +87,10 @@ export default {
          frameST: 0,
          fileurl: '',
          touchIndex: -1,
-         keyword: ''
+         keyword: '',
+         pageSize: 10,
+         pageNo: 1,
+         total: 0
       }
    },
    computed: {
@@ -137,7 +150,7 @@ export default {
                   duration: 0,
                   name: `notice${i.id}`,
                   render: h => {
-                     return h('span',{
+                     return h('span', {
                         style: {
                            cursor: 'pointer',
                            'line-height': 1.5
@@ -156,19 +169,27 @@ export default {
             }
          })
       },
+      pageChange (e) {
+         this.pageNo = e
+         this.getListData()
+      },
       getListData () {
          let self = this
          this.$ajax.get('/client/api/activity_list', {
             params: {
-               keyword: this.keyword
+               keyword: this.keyword,
+               pageNo: this.pageNo,
+               pageSize: this.pageSize
             }
          }).then(res => {
             let data = res.data
-            if (data.data.length === 0) {
+            const list = data.data.list
+            this.total = data.data.total
+            if (list.length === 0) {
                self.showExample = true
             } else {
                self.showExample = false
-               self.listData = data.data
+               self.listData = list
                self.fileurl = data.fileurl
             }
          })

@@ -77,7 +77,7 @@
                 </tr>
                 </tbody>
             </table>
-            <Page :total="allnums" @on-change="changePage" />
+            <Page :total="allnums" @on-change="changePage" simple class-name="xf-table-page" />
         </div>
         <crash-out v-if="showCrashOut" @toggle="hideOut" :data="cashobj"></crash-out>
     </div>

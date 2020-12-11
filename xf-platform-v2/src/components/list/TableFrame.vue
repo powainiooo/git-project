@@ -80,7 +80,7 @@
                 </tr>
                 </tbody>
             </table>
-            <Page :total="allnums" @on-change="changePage" />
+            <Page :total="allnums" @on-change="changePage" simple class-name="xf-table-page" />
         </div>
     </div>
 </template>

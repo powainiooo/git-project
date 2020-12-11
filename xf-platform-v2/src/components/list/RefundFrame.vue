@@ -74,7 +74,7 @@
          </tr>
          </tbody>
       </table>
-      <Page :total="allnums" @on-change="changePage" />
+      <Page :total="allnums" @on-change="changePage" simple class-name="xf-table-page" />
       <div class="title" style="margin-top: 80px;">
          <h3><span>2</span>退款原因</h3>
          <t-ques width="290"

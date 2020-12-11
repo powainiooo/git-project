@@ -75,4 +75,8 @@ body{ background: linear-gradient(165deg, #3052a7, #002aa6 54%,#003db9);}
 #app>.logo{ font-size: 32px; color: #ffffff; position: absolute; top: 60px; left: 60px; cursor: pointer; z-index: 1500;}
 
 .cropper-frame{ width: 100%; height: 100vh; position: fixed; top: 0; left: 0; z-index: 10000; background-color: #fff; padding: 100px;}
+
+.xf-table-page .ivu-page-next:hover a, .xf-table-page .ivu-page-prev:hover a { color: #002aac;}
+.xf-table-page .ivu-page-next a:hover, .xf-table-page .ivu-page-prev a:hover { color: #002aac;}
+.xf-table-page.ivu-page-simple .ivu-page-simple-pager input:hover { border-color: #002aac;}
 </style>

@@ -66,4 +66,4 @@
 .gift-success .btn-item { width: 240rpx; margin: 40rpx 0;}
 
 .welcome { width: 100%; height: 100vh; position: fixed; top: 0; left: 0; z-index: 10000; display: flex; justify-content: center; align-items: center; background-color: #ffffff;}
-.welcome-img { width: 560rpx;}
+.welcome-img { width: 100%;}

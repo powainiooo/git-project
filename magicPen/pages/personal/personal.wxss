@@ -2,6 +2,8 @@
 .personal-container .user .avatar { transform: scale(1.8); margin-right: 90rpx;}
 .personal-container .user text { width: 260rpx; font-size: 32rpx; color: #151515;}
 .personal-container .user .icon-qrcode { width: 70rpx; position: absolute; top: 66rpx; right: 140rpx;}
+.personal-container .user .icon-avatar { width: 140rpx;}
+.personal-container .user .btn-auth { margin: 0; font-size: 28rpx; margin-left: 90rpx;}
 
 .personal-container .accout { padding: 15rpx 0; display: flex;}
 .personal-container .accout view{ flex: 1; text-align: center; font-size: 32rpx; color: #151515; padding: 10rpx 0 20rpx 0;}

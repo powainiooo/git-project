@@ -74,6 +74,10 @@ Component({
          if (typeof myDynData !== 'string' && myDynData !== null) {
             this.setStorage(key)
          }
+	      if (key !== 'personal') {
+	      	const app = getApp()
+		      if (!app.checkAuth()) return
+	      }
          wx.navigateTo({
             url
          })

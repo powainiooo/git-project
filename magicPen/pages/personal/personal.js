@@ -19,6 +19,7 @@ Page({
       userFans: 0,
       userFansTxt: 0,
       fansDis: 0,
+	   hasUserInfo: app.globalData.userInfo !== null,
       showQrcodeFrame: false,
       qrcodeSize: 250,
       isIOS: app.globalData.isIOS,
@@ -34,6 +35,12 @@ Page({
          userIqTxt: userIq,
          userFansTxt: userFans,
       })
+	   app.sKeyReadyCallback = res => {
+		   this.getPersonInfo()
+		   this.setData({
+			   hasUserInfo: true
+		   })
+	   }
    },
    getPersonInfo() {
       getUserInterspaceInfo({userId: 0}).then(res => {
@@ -152,6 +159,13 @@ Page({
          showQrcodeFrame: false
       })
    },
+	onGotUserInfo () {
+		const app = getApp()
+		app.doInit()
+		wx.reLaunch({
+			url: '/pages/personal/personal'
+		})
+	},
    /**
     * 生命周期函数--监听页面初次渲染完成
     */
@@ -163,7 +177,9 @@ Page({
     * 生命周期函数--监听页面显示
     */
    onShow: function () {
-      this.getPersonInfo()
+   	if (this.data.hasUserInfo) {
+		   this.getPersonInfo()
+	   }
    },
 
    /**

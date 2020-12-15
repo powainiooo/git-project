@@ -18,6 +18,11 @@ const ajax = (opts, autoMsg = true) => {
                      type: 'warning'
                   });
                   wx.hideLoading()
+	               if (res.data.code === 992) {
+		               wx.reLaunch({
+			               url: '/pages/auth/auth'
+		               })
+	               }
                   reject(res.data)
                }else {
                   resolve(res.data)

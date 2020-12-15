@@ -1,11 +1,15 @@
 
 <view class="personal-container">
-   <view class="user">
+   <view class="user" wx:if="{{hasUserInfo}}">
       <z-avatar url="{{avatarUrl}}" grade="{{grade}}" class="avatar"></z-avatar>
       <text>{{nickName}}</text>
       <image src="../../res/personal/qrcode.png" mode="widthFix" class="icon-qrcode" bindtap="openQrcode"></image>
    </view>
-   <view class="accout">
+   <view class="user" wx:else>
+      <image src="../../res/personal/avatar.png" mode="widthFix" class="icon-avatar"></image>
+      <button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo" class="btn-auth">登录/注册</button>
+   </view>
+   <view class="accout" wx:if="{{hasUserInfo}}">
       <view class="fans">
          <text>{{userFansTxt}} \n 粉丝</text>
          <view class="fans-add" wx:if="{{fansDis > 0}}">+{{fansDis}}</view>

@@ -48,8 +48,8 @@
             </div>
         </div>
         </transition>
-       <div style="width: 1500px; margin: 0 auto" v-if="!showExample && !showDetail">
-          <Page :current="pageNo" :total="total" simple class-name="xf-page" @on-change="pageChange"/>
+       <div style="width: 1500px; margin: 0 auto 50px auto" v-if="!showExample && !showDetail && total !== 0">
+          <Page :current="pageNo" :total="total" :page-size="pageSize" simple class-name="xf-page" @on-change="pageChange"/>
        </div>
 
         <div class="detail-frame" v-show="!showExample && showDetail">
@@ -88,7 +88,7 @@ export default {
          fileurl: '',
          touchIndex: -1,
          keyword: '',
-         pageSize: 10,
+         pageSize: 8,
          pageNo: 1,
          total: 0
       }
@@ -178,13 +178,14 @@ export default {
          this.$ajax.get('/client/api/activity_list', {
             params: {
                keyword: this.keyword,
-               pageNo: this.pageNo,
-               pageSize: this.pageSize
+               pageNo: this.pageNo, // 页码
+               pageSize: this.pageSize // 每次取的条数
             }
          }).then(res => {
             let data = res.data
-            const list = data.data.list
-            this.total = data.data.total
+            // const list = data.data 原来列表存放位置
+            const list = data.data.list // 现在列表存放位置
+            this.total = parseInt(data.data.total) // 一共多少条
             if (list.length === 0) {
                self.showExample = true
             } else {

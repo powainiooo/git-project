@@ -9,13 +9,13 @@
    <view class="frame">
       <view class="title">
          <view>来画豆兑换</view>
-         <view>来画豆可用于游玩各种特色游戏</view>
+         <view>用于小程序与神笔画画线下站点大屏互动</view>
       </view>
       <view class="list">
          <view class="bean-item {{iqGoodsId === item.iqGoodsId ? 'bean-item-select' : ''}}"
                wx:for="{{iqGoodsVos}}"
                wx:for-item="item"
-               wx:key="{{item.iqGoodsId}}"
+               wx:key="iqGoodsId"
                data-id="{{item.iqGoodsId}}"
                data-price="{{item.price}}"
                data-peas="{{item.ruleIq}}"
@@ -36,7 +36,7 @@
    <i-panel title="">
       <i-checkbox wx:for="{{couponUserVos}}"
                   wx:for-item="item"
-                  wx:key="{{item.couponId}}"
+                  wx:key="couponId"
                   data-id="{{item.couponId}}"
                   data-price="{{item.fullMoney}}"
                   position="right"

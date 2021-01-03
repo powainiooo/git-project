@@ -1,5 +1,5 @@
 <view class="call-title">
-   <z-button bindtap="doCall" disabled>
+   <z-button disabled>
       <view class="dot"></view>
       <text>呼风唤雨</text>
       <view class="dot"></view>

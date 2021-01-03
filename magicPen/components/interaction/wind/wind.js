@@ -52,7 +52,7 @@ Component({
         if (this.data.isIOS) {
            wx.showModal({
               title: '提示',
-              content: '由于相关规范，请联系线下神笔画画站点获取。'
+              content: '由于苹果官方限制，请联系线下神笔画画站点获取。'
            })
         } else {
            wx.navigateTo({

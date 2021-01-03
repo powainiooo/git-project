@@ -106,6 +106,6 @@
    </view>
 </z-modal>
 
-<view class="welcome" bindtap="hideWelcome" wx:if="{{!showWelcome}}">
+<view class="welcome" bindtap="hideWelcome" wx:if="{{showWelcome}}">
    <image src="../../../res/index/welcome.png" mode="widthFix" class="welcome-img"></image>
 </view>

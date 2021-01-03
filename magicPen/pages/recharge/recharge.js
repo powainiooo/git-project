@@ -41,7 +41,7 @@ Page({
       const couponId = e.currentTarget.dataset.id
       const fullMoney = e.currentTarget.dataset.price
       this.setData({
-         couponId,
+         couponId: this.data.couponId === couponId ? '' : couponId,
          fullMoney
       })
    },

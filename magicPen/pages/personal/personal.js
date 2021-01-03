@@ -31,7 +31,10 @@ Page({
    onLoad: function (options) {
       userFans = wx.getStorageSync('userFans')
       userIq = wx.getStorageSync('userIq')
+	   const app = getApp()
       this.setData({
+	      hasUserInfo: app.globalData.userInfo !== null,
+	      isIOS: app.globalData.isIOS,
          userIqTxt: userIq,
          userFansTxt: userFans,
       })
@@ -91,7 +94,7 @@ Page({
          if (this.data.isIOS) {
             wx.showModal({
                title: '提示',
-               content: '由于相关规范，请联系线下神笔画画站点获取。'
+               content: '由于苹果官方限制，请联系线下神笔画画站点获取。'
             })
          }else {
             wx.navigateTo({url})

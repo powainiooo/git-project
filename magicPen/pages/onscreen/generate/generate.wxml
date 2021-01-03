@@ -1,6 +1,7 @@
 <view class="generate-frame">
    <view class="camera-frame">
       <camera class="camera-container"
+              flash="off"
               animation="{{cameraAni}}"
               device-position="{{postion}}"
               bindinitdone="cameraDone"
@@ -79,7 +80,7 @@
    <view class="modal-content">
       <view class="txt1">{{modalContent}}</view>
       <view class="btn">
-         <z-button catchtap="btnConfirm">确定</z-button>
+         <z-button catchtap="btnConfirm">去兑换</z-button>
       </view>
    </view>
 </z-modal>

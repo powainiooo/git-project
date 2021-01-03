@@ -1,5 +1,5 @@
 <view class="call-title">
-   <z-button bindtap="doCall" disabled>
+   <z-button disabled>
       <view class="dot"></view>
       <text wx:if="{{count === 0}}">华丽召唤</text>
       <text wx:if="{{count !== 0}}">{{count}}秒后发动召唤</text>

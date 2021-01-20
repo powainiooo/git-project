@@ -16,12 +16,8 @@ h3.title { font-size: 40px; color: #333333; font-weight: bold; text-align: cente
 
 <template>
 <div style="overflow: hidden;">
-   <c-banner :list="bannerData"/>
 
-   <h2 class="title">明星产品</h2>
-   <c-goods-swiper :list="goodsListMX" />
-
-   <h2 class="title">品牌介绍</h2>
+ <!--<h2 class="title" style="margin-top:0px;">品牌介绍</h2>-->
    <c-banner :list="ppjs" autoHeight/>
 <!--   <img :src="imgSrc + item.img"-->
 <!--        mode="widthFix"-->
@@ -30,15 +26,20 @@ h3.title { font-size: 40px; color: #333333; font-weight: bold; text-align: cente
 <!--        :key="index"-->
 <!--        @click="toDetail(item.link)"/>-->
 
-   <h2 class="title">购买获积分</h2>
+    <h2 class="title">购买获积分</h2>
    <h3 class="title">积分可抵扣消费</h3>
    <ul class="integral-list">
       <li>1、{{jfData.jfdk}}</li>
       <li>2、{{jfData.gmhd}}</li>
       <li>3、{{jfData.dksx}}</li>
    </ul>
-   <img v-if="bottomAd.val !== '0'" :src="imgSrc + bottomAd.val" mode="widthFix" class="img_block"/>
+ 
+   <c-banner :list="bannerData"/>
 
+   <h2 class="title">明星产品</h2>
+   <c-goods-swiper :list="goodsListMX" />
+
+  <img v-if="bottomAd.val !== '0'" :src="imgSrc + bottomAd.val" mode="widthFix" class="img_block"/>
    <h2 v-if="hyqy.val !== '0'" class="title">会员权益</h2>
 <!--   <h3 class="title">加入XXXX会员</h3>-->
    <img v-if="hyqy.val !== '0'" :src="imgSrc + hyqy.val" mode="widthFix" class="img_block"/>

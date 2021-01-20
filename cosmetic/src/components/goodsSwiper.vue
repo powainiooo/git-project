@@ -15,7 +15,7 @@
    <img :src="imgSrc + firstItem.cover" class="c-goods-swiper-img" mode="aspectFill" />
    <h3 class="c-goods-swiper-title">{{firstItem.goods_name}}</h3>
    <p class="c-goods-swiper-des" v-if="descKey === 'price'">价格：{{firstItem.min_price === firstItem.max_price ? (firstItem.min_price / 100) : (firstItem.min_price / 100) + '~' + (firstItem.max_price / 100)}}</p>
-   <p class="c-goods-swiper-price" v-if="firstItem.pre_price != 0">原价：{{firstItem.pre_price / 100}}</p>
+   <p class="c-goods-swiper-price" v-if="firstItem.pre_price != 0">指导价：{{firstItem.pre_price / 100}}</p>
    <a href="#" class="c-goods-swiper-btn" v-if="showBtns">立即购买</a>
 </div>
 <swiper class="c-goods-swiper" previous-margin="30rpx" next-margin="290rpx" :style="{height: height}" v-else>
@@ -24,7 +24,8 @@
          <img :src="imgSrc + item.cover" class="c-goods-swiper-img" mode="aspectFill" />
          <h3 class="c-goods-swiper-title">{{item.goods_name}}</h3>
          <p class="c-goods-swiper-des" v-if="descKey === 'price'">价格：{{item.min_price === item.max_price ? (item.min_price / 100) : (item.min_price / 100) + '~' + (item.max_price / 100)}}</p>
-         <p class="c-goods-swiper-price" v-if="firstItem.pre_price != 0">原价：{{item.pre_price / 100}}</p>
+         <p class="c-goods-swiper-des" v-if="firstItem.pre_price != 0">销量:{{item.sale_num}}</p>
+         <p class="c-goods-swiper-price" v-if="firstItem.pre_price != 0">指导价：{{item.pre_price / 100}}</p>
          <a href="#" class="c-goods-swiper-btn" v-if="showBtns">立即购买</a>
       </div>
    </swiper-item>

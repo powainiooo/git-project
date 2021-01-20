@@ -9,7 +9,7 @@
 <div class="c-goods-item" @click="toDetail">
    <img :src="imgSrc + itemData.cover" mode="aspectFill" class="c-goods-item-img"/>
    <h3 class="c-goods-item-name">{{itemData.goods_name}}</h3>
-   <div class="c-goods-item-price">￥{{itemData.min_price === itemData.max_price ? (itemData.min_price / 100) : (itemData.min_price / 100) + '~' + (itemData.max_price / 100)}}</div>
+   <div class="c-goods-item-price">￥{{itemData.min_price === itemData.max_price ? (itemData.min_price / 100) : (itemData.min_price / 100) + '~' + (itemData.max_price / 100)}}<span style="font-size: 12px;color: gray;">销量:{{itemData.sale_num}}</span></div>
 </div>
 </template>
 

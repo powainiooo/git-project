@@ -49,12 +49,15 @@ h3.title { font-size: 28px; color: #656565; text-align: center; margin: 40px 0 3
    <div class="line2">
       <div class="price"><span>￥</span>{{showPrice}}</div>
       <div class="last-price" v-if="showLastPrice != 0"><span>￥</span>{{showLastPrice}}</div>
-      <div class="jifen">（购买可得{{jf}}积分）</div>
+      <div class="jifen">（购买可得{{jf}}积分)</div>
       <div class="btn-share">
          <img src="/static/images/goods/icon-share.png" />
          <p>分享</p>
          <button open-type="share">分享</button>
       </div>
+   </div>
+   <div class="line2">
+      <p style="font-size: 12px;color: gray;margin-left: 2px;">销量:{{goodsInfo.sale_num}}</p>
    </div>
 
    <div class="type-list">

@@ -13,11 +13,20 @@ page { background-color: rgb(248, 248, 248)}
 .address-frame div p { font-size: 26px; color: #333333; line-height: 40px;}
 
 
-.gift-hint { margin: 30px 0; background-color: #ffffff; padding: 0 24px 0 30px; height: 108px; display: flex; justify-content: space-between; align-items: center;}
+.gift-hint { margin: 30px 0 1px 0; background-color: #ffffff; padding: 0 24px 0 30px; height: 108px; display: flex; justify-content: space-between; align-items: center;}
 .gift-hint h3 { font-size: 32px; line-height: 1; color: #333333; display: flex; align-items: center;}
 .gift-hint h3 .sw { margin-right: 20px; margin-top: 5px;}
 .gift-hint p { font-size: 24px; color: #747474; line-height: 40px; display: flex; align-items: center;}
 .gift-hint p img { width: 22px; height: 25px; margin-left: 10px;}
+
+.coupon-hint { margin: 0 0 30px 0; background-color: #ffffff; padding: 0 30px; height: 108px; display: flex; justify-content: space-between; align-items: center;}
+.coupon-hint h3 { font-size: 32px; line-height: 1; color: #333333; display: flex; align-items: center;}
+.coupon-hint h3 img { width: 54px; height: 40px; margin-right: 26px;}
+.coupon-hint p { font-size: 34px; color: #ED2828; display: flex; align-items: center;}
+.coupon-hint p img { width: 48px; height: 48px; margin-left: 14px;}
+.coupon-hint div { display: flex; align-items: center;}
+.coupon-hint div input { width: 190px; height: 30px; padding: 12px 20px; border: 1px solid #CCCCCC; background: #F8F8F8; font-size: 30px;}
+.coupon-hint div .btn-round { width: 180px; margin-left: 50px; }
 
 .details { background-color: #ffffff; margin: 30px 0; overflow: hidden; padding: 70px 0 50px 0;}
 .details ul { margin: 0 40px 60px 50px;}
@@ -28,6 +37,15 @@ page { background-color: rgb(248, 248, 248)}
 
 .footer-btn { width: 100%; position: fixed; left: 0; bottom: 0; z-index: 1000;}
 .footer-btn button { width: 100%; height: 120px; line-height: 120px; background-color: #3A3A3A; color: #ffffff; font-size: 40px; border-radius: 0; border: none;}
+
+.coupon-success { width: 100%; height: 100vh; position: fixed; top: 0; left: 0; z-index: 10000; background-color: rgba(0, 0, 0, .75); display: flex; justify-content: center; align-items: center;}
+.coupon-success .frame { width: 550px; height: 660px; background-color: #ffffff; border-radius: 8px; position: relative; display: flex; flex-direction: column; align-items: center;}
+.coupon-success .frame img { width: 404px;}
+.coupon-success .frame img.close { width: 44px; position: absolute; top: 10px; right: 14px;}
+.coupon-success .frame h3 { color: #333333; font-size: 48px; margin-bottom: 110px; }
+.coupon-success .frame div { width: 100%; box-sizing: border-box; padding: 0 30px; display: flex; justify-content: space-between;}
+.coupon-success .frame div button { width: 232px; }
+.coupon-success .frame div button:last-child { background: #F7F7F7; border: 2px solid #636363; color: #636363; }
 </style>
 
 <template>
@@ -64,6 +82,19 @@ page { background-color: rgb(248, 248, 248)}
       <p v-if="giftCheck">本次使用了{{pageData.use_score}}积分抵扣{{pageData.dk_money / 100}}元 <img src="/static/images/order/jifen@2x.png" /></p>
    </div>
 
+   <div class="coupon-hint">
+      <h3><img src="/static/images/order/icon-coupon.png" />优惠券</h3>
+      <p v-if="pageData.yhq_usable_count !== 0">
+         <span>{{pageData.yhq_usable_count}}张可用</span>
+         <img src="/static/images/order/gouxuan-hei@2x.png" v-if="couponCheck"/>
+         <img src="/static/images/order/gouxuan-hui@2x.png" v-else/>
+      </p>
+      <div v-else>
+         <input placeholder="输入兑换码" />
+         <button class="btn-round">点击领取</button>
+      </div>
+   </div>
+
    <div class="details">
       <ul>
          <li>
@@ -77,6 +108,10 @@ page { background-color: rgb(248, 248, 248)}
          <li v-if="giftCheck">
             <span>积分抵扣</span>
             <span>-￥{{pageData.dk_money / 100}}</span>
+         </li>
+         <li v-if="couponCheck">
+            <span>优惠券</span>
+            <span>-￥{{pageData.yhq_dk_money / 100}}</span>
          </li>
 <!--         <li>-->
 <!--            <span>总金额</span>-->
@@ -121,6 +156,19 @@ page { background-color: rgb(248, 248, 248)}
       <button v-if="hasAddress" @click="doPay">立即结算</button>
       <button v-else @click="selectAddr">请填写收货地址</button>
    </div>
+
+   <!-- 领取成功 -->
+   <div class="coupon-success" v-if="showCouponModal" @click="hideCoupon">
+      <div class="frame">
+         <img src="/static/images/order/coupon-success.png" mode="widthFix"/>
+         <img src="/static/images/order/guangbi@2x.png" mode="widthFix" class="close"/>
+         <h3>领取成功</h3>
+         <div>
+            <button class="btn-round">去使用</button>
+            <button class="btn-round">再看看</button>
+         </div>
+      </div>
+   </div>
 </div>
 </template>
 
@@ -134,6 +182,8 @@ export default {
    data () {
       return {
          giftCheck: false,
+         couponCheck: false,
+         showCouponModal: false,
          ids: '',
          flag: '',
          goodsList: [],
@@ -292,13 +342,16 @@ export default {
                })
             }
          })
+      },
+      hideCoupon () {
+         this.showCouponModal = false
       }
    },
 
    onLoad (options) {
       Object.assign(this.$data, this.$options.data())
       console.log(options)
-      this.ids = options.id || '487'
+      this.ids = options.id || '645'
       this.flag = options.flag || '0'
       this.getData()
       // let app = getApp()

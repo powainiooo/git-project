@@ -1,0 +1,139 @@
+<style>
+page { background-color: rgb(248, 248, 248)}
+
+.tabs { width: 100%; height: 94px; background-color: #ffffff; display: flex; justify-content: space-around;}
+.tabs li { height: 100%; position: relative; font-size: 30px; color: #333333; display: flex; align-items: center;}
+.tabs li.active:after { content: ''; width: 56px; height: 4px; background-color: #000000; border-radius: 2px; position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%);}
+
+.hint-empty { width: 100%; height: 750px; background-color: #ffffff; margin: 20px 0 30px 0; display: flex; flex-direction: column; justify-content: center; align-items: center;}
+.hint-empty img { width: 505px; height: 325px; margin-bottom: 30px;}
+.hint-empty p { font-size: 32px; color: #A5A5A5; line-height: 1; margin-bottom: 60px;}
+.hint-empty .btn-round { width: 344px; background-color: #000000;}
+
+.get-frame { width: 100%; min-height: calc(100vh - 94px); background-color: #000000; position: relative; overflow: hidden;}
+.get-frame .frame-bg { width: 610px; display: block; margin: 130px auto;}
+.get-frame .forms { position: absolute; top: 130px; left: 70px; right: 70px; display: flex; flex-direction: column; align-items: center;}
+.get-frame .forms div { margin-top: 130px; margin-bottom: 30px;}
+.get-frame .forms div p { font-size: 26px; color: #666666; text-align: center; line-height: 46px;}
+.get-frame .forms input { width: 420px; height: 90px; background-color: #ffffff; border-radius: 8px; text-align: center; font-size: 30px; color: #000000; margin-bottom: 46px;}
+.get-frame .forms .btn-round { width: 220px;}
+
+.coupon-success { width: 100%; height: 100vh; position: fixed; top: 0; left: 0; z-index: 10000; background-color: rgba(0, 0, 0, .75); display: flex; justify-content: center; align-items: center;}
+.coupon-success .frame { width: 550px; height: 660px; background-color: #ffffff; border-radius: 8px; position: relative; display: flex; flex-direction: column; align-items: center;}
+.coupon-success .frame img { width: 404px;}
+.coupon-success .frame h3 { color: #333333; font-size: 48px; margin-bottom: 110px; }
+.coupon-success .frame button { width: 286px; background-color: #1B1B1B; }
+</style>
+
+<template>
+<div>
+   <ul class="tabs">
+      <li v-for="item in tabsList"
+          :class="{active: currentTab === item.key}"
+          :key="item" @click="changeTab(item.key)">{{item.name}}</li>
+   </ul>
+   <div class="get-frame" v-if="currentTab === '0'">
+      <img src="/static/images/coupon/frame.png" mode="widthFix" class="frame-bg" />
+      <div class="forms">
+         <div class="hint">
+            <p>输入关键词</p>
+            <p>领取你的优惠券</p>
+         </div>
+         <input placeholder="输入兑换码"/>
+         <button class="btn-round">确定</button>
+      </div>
+   </div>
+   <div v-else>
+      <template v-if="orderList.length === 0">
+      <div class="hint-empty">
+         <img src="/static/images/shoppingCart/empty.png" />
+         <p>您还没有相关的优惠券哦~</p>
+      </div>
+      </template>
+      <template v-else>
+      <coupon-item v-for="i in orderList" :key="i.id" :itemData="i"/>
+      <div class="load-over" v-if="isLoadAll">- 没有更多优惠券了 -</div>
+      </template>
+   </div>
+
+   <!-- 领取成功 -->
+   <div class="coupon-success" v-if="showCouponModal" @click="hideCoupon">
+      <div class="frame">
+         <img src="/static/images/coupon/zhengque@2x.png" mode="widthFix"/>
+         <h3>领取成功</h3>
+         <button class="btn-round">去使用</button>
+      </div>
+   </div>
+</div>
+</template>
+
+<script>
+import couponItem from './couponItem'
+import { postAction } from '@/utils/api'
+
+export default {
+   components: { couponItem },
+   data () {
+      return {
+         currentTab: '0',
+         tabsList: [
+            { name: '可领取', key: '0' },
+            { name: '未使用', key: '1' },
+            { name: '已使用', key: '4' },
+            { name: '已过期', key: '5' }
+         ],
+         showCouponModal: false,
+         page: 1,
+         totals: 0,
+         orderList: [],
+         isLoadAll: false,
+         isAjax: false
+      }
+   },
+
+   methods: {
+      getData () {
+         if (this.isAjax) return false
+         this.isAjax = true
+         postAction('get_order_list', {
+            page: this.page,
+            status: this.currentTab
+         }).then(res => {
+            this.isAjax = false
+            this.orderList = this.orderList.concat(res.data.list)
+            this.totals = parseInt(res.data.nums)
+            this.isLoadAll = this.totals === this.orderList.length
+            console.log('this.isLoadAll', this.isLoadAll)
+         })
+      },
+      changeTab (key) {
+         this.currentTab = key
+         this.page = 1
+         this.orderList = []
+         this.getData()
+      },
+      refresh () {
+         this.page = 1
+         this.orderList = []
+         this.getData()
+      }
+   },
+   onShow () {
+      console.log('order list onshow')
+      this.refresh()
+   },
+   onLoad (options) {
+      // Object.assign(this.$data, this.$options.data())
+      console.log('order list onload')
+      this.currentTab = options.status || '0'
+      // let app = getApp()
+   },
+   onReachBottom () {
+      console.log('order list onReachBottom')
+      if (!this.isLoadAll) {
+         this.page += 1
+         this.getData()
+      }
+   }
+}
+</script>

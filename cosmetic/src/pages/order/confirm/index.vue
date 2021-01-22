@@ -42,7 +42,7 @@ page { background-color: rgb(248, 248, 248)}
 .coupon-success .frame { width: 550px; height: 660px; background-color: #ffffff; border-radius: 8px; position: relative; display: flex; flex-direction: column; align-items: center;}
 .coupon-success .frame img { width: 404px;}
 .coupon-success .frame img.close { width: 44px; position: absolute; top: 10px; right: 14px;}
-.coupon-success .frame h3 { color: #333333; font-size: 48px; margin-bottom: 110px; }
+.coupon-success .frame h3 { color: #333333; font-size: 48px; margin:0 20px 110px 20px; text-align: center;}
 .coupon-success .frame div { width: 100%; box-sizing: border-box; padding: 0 30px; display: flex; justify-content: space-between;}
 .coupon-success .frame div button { width: 232px; }
 .coupon-success .frame div button:last-child { background: #F7F7F7; border: 2px solid #636363; color: #636363; }
@@ -86,12 +86,12 @@ page { background-color: rgb(248, 248, 248)}
       <h3><img src="/static/images/order/icon-coupon.png" />优惠券</h3>
       <p v-if="pageData.yhq_usable_count !== 0">
          <span>{{pageData.yhq_usable_count}}张可用</span>
-         <img src="/static/images/order/gouxuan-hei@2x.png" v-if="couponCheck"/>
-         <img src="/static/images/order/gouxuan-hui@2x.png" v-else/>
+         <img src="/static/images/order/gouxuan-hei@2x.png" @click="couponCheck = false" v-if="couponCheck"/>
+         <img src="/static/images/order/gouxuan-hui@2x.png" @click="couponCheck = true" v-else/>
       </p>
       <div v-else>
-         <input placeholder="输入兑换码" />
-         <button class="btn-round">点击领取</button>
+         <input v-model="couponKey" placeholder="输入兑换码" />
+         <button class="btn-round" @click="getCoupon">点击领取</button>
       </div>
    </div>
 
@@ -160,7 +160,7 @@ page { background-color: rgb(248, 248, 248)}
    <!-- 领取成功 -->
    <div class="coupon-success" v-if="showCouponModal" @click="hideCoupon">
       <div class="frame">
-         <img src="/static/images/order/coupon-success.png" mode="widthFix"/>
+         <img src="/static/images/coupon/zhengque@2x.png" mode="widthFix"/>
          <img src="/static/images/order/guangbi@2x.png" mode="widthFix" class="close"/>
          <h3>领取成功</h3>
          <div>
@@ -190,7 +190,8 @@ export default {
          pageData: {},
          isAjax: false,
          orderId: '',
-         orderNum: ''
+         orderNum: '',
+         couponKey: ''
       }
    },
    computed: {
@@ -264,6 +265,7 @@ export default {
                params.fp_sh = this.invoiceInfo.fp_sh
                params.fp_email = this.invoiceInfo.fp_email
             }
+            params.yhq_user_id = this.couponCheck ? this.pageData.yhq_user_id : 0
             postAction('creat_order', params).then(res => {
                mpvue.hideLoading()
                if (res.ret === 0) {
@@ -345,6 +347,20 @@ export default {
       },
       hideCoupon () {
          this.showCouponModal = false
+      },
+      getCoupon () {
+         if (this.isAjax) return
+         this.isAjax = true
+         postAction('get_yhq_by_keyname', {
+            keyname: this.couponKey
+         }).then(res => {
+            this.isAjax = false
+            if (res.ret === 0) {
+               this.showCouponModal = true
+               this.couponKey = ''
+               this.getData()
+            }
+         })
       }
    },
 

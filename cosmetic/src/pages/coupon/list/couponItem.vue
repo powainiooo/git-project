@@ -12,22 +12,26 @@
 .c-coupon-item .infos .right div p:first-child { margin-bottom: 28px;}
 .c-coupon-item .infos .right div div { font-size: 28px; color: #333333; line-height: 1; margin-left: 0;}
 .c-coupon-item .infos .right .btn-round { width: 136px; height: 60px; font-size: 28px; padding: 0;}
+.c-coupon-item .infos .right .btn-round-disable { background-color: #CCCCCC; color: #666666;}
 </style>
 
 <template>
 <div class="c-coupon-item">
-   <img src="/static/images/coupon/youhuiquan@2x.png" class="bg" mode="widthFix"/>
+   <img src="/static/images/coupon/youhuiquan@2x.png" class="bg" mode="widthFix" v-if="type === '1'"/>
+   <img src="/static/images/coupon/youhuiquan-hui@2x.png" class="bg" mode="widthFix" v-else/>
    <div class="infos">
       <div class="left">
-         <h3>9<span>折</span></h3>
+         <h3>{{itemData.percentStr}}<span>折</span></h3>
       </div>
       <div class="right">
          <div>
-            <p>满99元可用</p>
+            <p>满{{itemData.conditionStr}}元可用</p>
             <p>有效期至：</p>
-            <div>2012.01.31  12:00</div>
+            <div>{{itemData.endTime}}</div>
          </div>
-         <button class="btn-round">去使用</button>
+         <button class="btn-round" v-if="type === '1'" @click="doUse">去使用</button>
+         <button class="btn-round btn-round-disable" v-else-if="type === '2'">已使用</button>
+         <button class="btn-round btn-round-disable" v-else-if="type === '3'">已过期</button>
       </div>
    </div>
 </div>
@@ -40,15 +44,20 @@ export default {
       itemData: {
          type: Object,
          default: () => {}
+      },
+      type: {
+         type: String,
+         default: '1'
       }
    },
    data () {
       return {
-         imgSrc: mpvue.imgSrc
       }
    },
    methods: {
-
+      doUse () {
+         this.$emit('handleUse', this.itemData)
+      }
    }
 }
 </script>

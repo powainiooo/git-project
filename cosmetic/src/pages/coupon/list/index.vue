@@ -5,6 +5,8 @@ page { background-color: rgb(248, 248, 248)}
 .tabs li { height: 100%; position: relative; font-size: 30px; color: #333333; display: flex; align-items: center;}
 .tabs li.active:after { content: ''; width: 56px; height: 4px; background-color: #000000; border-radius: 2px; position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%);}
 
+.list-container { margin-top: 50px;}
+
 .hint-empty { width: 100%; height: 750px; background-color: #ffffff; margin: 20px 0 30px 0; display: flex; flex-direction: column; justify-content: center; align-items: center;}
 .hint-empty img { width: 505px; height: 325px; margin-bottom: 30px;}
 .hint-empty p { font-size: 32px; color: #A5A5A5; line-height: 1; margin-bottom: 60px;}
@@ -44,15 +46,15 @@ page { background-color: rgb(248, 248, 248)}
       </div>
    </div>
    <div v-else>
-      <template v-if="orderList.length === 0">
+      <template v-if="couponList.length === 0">
       <div class="hint-empty">
          <img src="/static/images/shoppingCart/empty.png" />
-         <p>您还没有相关的优惠券哦~</p>
       </div>
       </template>
       <template v-else>
-      <coupon-item v-for="i in orderList" :key="i.id" :itemData="i"/>
-      <div class="load-over" v-if="isLoadAll">- 没有更多优惠券了 -</div>
+      <div class="list-container">
+         <coupon-item v-for="i in couponList" :key="i.id" :itemData="i" :type="currentTab" @handleUse="handleUse"/>
+      </div>
       </template>
    </div>
 
@@ -70,6 +72,8 @@ page { background-color: rgb(248, 248, 248)}
 <script>
 import couponItem from './couponItem'
 import { postAction } from '@/utils/api'
+import { formatDate } from '@/utils/index'
+import store from '../../../store'
 
 export default {
    components: { couponItem },
@@ -79,15 +83,15 @@ export default {
          tabsList: [
             { name: '可领取', key: '0' },
             { name: '未使用', key: '1' },
-            { name: '已使用', key: '4' },
-            { name: '已过期', key: '5' }
+            { name: '已使用', key: '2' },
+            { name: '已过期', key: '3' }
          ],
          showCouponModal: false,
          page: 1,
-         totals: 0,
-         orderList: [],
-         isLoadAll: false,
-         isAjax: false
+         couponList: [],
+         isAjax: false,
+         orderId: -1,
+         orderFlag: -1
       }
    },
 
@@ -95,27 +99,40 @@ export default {
       getData () {
          if (this.isAjax) return false
          this.isAjax = true
-         postAction('get_order_list', {
-            page: this.page,
-            status: this.currentTab
+         postAction('yhq_list', {
+            type: this.currentTab
          }).then(res => {
             this.isAjax = false
-            this.orderList = this.orderList.concat(res.data.list)
-            this.totals = parseInt(res.data.nums)
-            this.isLoadAll = this.totals === this.orderList.length
-            console.log('this.isLoadAll', this.isLoadAll)
+            this.couponList = res.data.list_1.map(i => {
+               i.percentStr = Number(i.percent)
+               i.conditionStr = Number(i.condition) / 100
+               i.endTime = formatDate(new Date(Number(i.yx_time) * 1000), 'yyyy.MM.dd HH:mm')
+               return i
+            })
          })
       },
       changeTab (key) {
          this.currentTab = key
-         this.page = 1
-         this.orderList = []
-         this.getData()
+         this.refresh()
       },
       refresh () {
-         this.page = 1
-         this.orderList = []
-         this.getData()
+         this.couponList = []
+         if (this.currentTab !== '0') {
+            this.getData()
+         }
+      },
+      handleUse (data) {
+         console.log('handleUse', data)
+         if (this.orderId === -1) {
+            mpvue.redirectTo({
+               url: '/pages/index/main'
+            })
+         } else {
+            store.commit('SET_COUPON', data)
+            mpvue.redirectTo({
+               url: `/pages/order/confirm/main?id=${this.orderId}&flag=${this.orderFlag}&couponId=${data.id}`
+            })
+         }
       }
    },
    onShow () {
@@ -125,7 +142,9 @@ export default {
    onLoad (options) {
       // Object.assign(this.$data, this.$options.data())
       console.log('order list onload')
-      this.currentTab = options.status || '0'
+      this.currentTab = options.type || '0'
+      this.orderId = options.id || -1
+      this.orderFlag = options.flag || -1
       // let app = getApp()
    },
    onReachBottom () {

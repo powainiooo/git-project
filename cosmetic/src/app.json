@@ -1,6 +1,7 @@
 {
    "pages": [
       "pages/coupon/list/main",
+      "pages/order/confirm/main",
       "pages/coupon/get/main",
       "pages/index/main",
       "pages/address/list/main",
@@ -13,7 +14,6 @@
       "pages/point/main",
       "pages/goods/main",
       "pages/order/detail/main",
-      "pages/order/confirm/main",
       "pages/goodsDetail/main",
       "pages/logistics/main",
       "pages/personal/main",

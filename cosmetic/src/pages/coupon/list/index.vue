@@ -6,6 +6,8 @@ page { background-color: rgb(248, 248, 248)}
 .tabs li.active:after { content: ''; width: 56px; height: 4px; background-color: #000000; border-radius: 2px; position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%);}
 
 .list-container { margin-top: 50px;}
+.list-container .hint { font-size: 24px; color: #999999; text-align: center; margin: 60px 0 30px 0;}
+.list-container .c-coupon-item { margin: 0 30px 24px 30px;}
 
 .hint-empty { width: 100%; height: 750px; background-color: #ffffff; margin: 20px 0 30px 0; display: flex; flex-direction: column; justify-content: center; align-items: center;}
 .hint-empty img { width: 505px; height: 325px; margin-bottom: 30px;}
@@ -41,8 +43,8 @@ page { background-color: rgb(248, 248, 248)}
             <p>输入关键词</p>
             <p>领取你的优惠券</p>
          </div>
-         <input placeholder="输入兑换码"/>
-         <button class="btn-round">确定</button>
+         <input v-model="keyword" placeholder="输入兑换码"/>
+         <button class="btn-round" @click="getCoupon">确定</button>
       </div>
    </div>
    <div v-else>
@@ -53,17 +55,21 @@ page { background-color: rgb(248, 248, 248)}
       </template>
       <template v-else>
       <div class="list-container">
-         <coupon-item v-for="i in couponList" :key="i.id" :itemData="i" :type="currentTab" @handleUse="handleUse"/>
+         <coupon-item v-for="i in couponList" :key="id" :itemData="i" :type="currentTab" @handleUse="handleUse"/>
+         <template v-if="couponList2.length > 0">
+         <div class="hint">以下此订单暂不可用</div>
+         <coupon-item v-for="i in couponList2" :key="id" :itemData="i" type="4" @handleUse="toIndex"/>
+         </template>
       </div>
       </template>
    </div>
 
    <!-- 领取成功 -->
-   <div class="coupon-success" v-if="showCouponModal" @click="hideCoupon">
+   <div class="coupon-success" v-if="showCouponModal" @click="showCouponModal = false">
       <div class="frame">
          <img src="/static/images/coupon/zhengque@2x.png" mode="widthFix"/>
          <h3>领取成功</h3>
-         <button class="btn-round">去使用</button>
+         <button class="btn-round" @click="toIndex">去使用</button>
       </div>
    </div>
 </div>
@@ -73,7 +79,6 @@ page { background-color: rgb(248, 248, 248)}
 import couponItem from './couponItem'
 import { postAction } from '@/utils/api'
 import { formatDate } from '@/utils/index'
-import store from '../../../store'
 
 export default {
    components: { couponItem },
@@ -89,9 +94,12 @@ export default {
          showCouponModal: false,
          page: 1,
          couponList: [],
+         couponList2: [],
          isAjax: false,
          orderId: -1,
-         orderFlag: -1
+         orderFlag: -1,
+         goodsMoney: -1,
+         keyword: ''
       }
    },
 
@@ -99,9 +107,13 @@ export default {
       getData () {
          if (this.isAjax) return false
          this.isAjax = true
-         postAction('yhq_list', {
+         const params = {
             type: this.currentTab
-         }).then(res => {
+         }
+         if (this.currentTab === '1' && this.goodsMoney !== -1) {
+            params.goods_money = this.goodsMoney
+         }
+         postAction('yhq_list', params).then(res => {
             this.isAjax = false
             this.couponList = res.data.list_1.map(i => {
                i.percentStr = Number(i.percent)
@@ -109,6 +121,14 @@ export default {
                i.endTime = formatDate(new Date(Number(i.yx_time) * 1000), 'yyyy.MM.dd HH:mm')
                return i
             })
+            if (res.data.list_2) {
+               this.couponList2 = res.data.list_2.map(i => {
+                  i.percentStr = Number(i.percent)
+                  i.conditionStr = Number(i.condition) / 100
+                  i.endTime = formatDate(new Date(Number(i.yx_time) * 1000), 'yyyy.MM.dd HH:mm')
+                  return i
+               })
+            }
          })
       },
       changeTab (key) {
@@ -122,17 +142,33 @@ export default {
          }
       },
       handleUse (data) {
-         console.log('handleUse', data)
          if (this.orderId === -1) {
             mpvue.redirectTo({
                url: '/pages/index/main'
             })
          } else {
-            store.commit('SET_COUPON', data)
             mpvue.redirectTo({
                url: `/pages/order/confirm/main?id=${this.orderId}&flag=${this.orderFlag}&couponId=${data.id}`
             })
          }
+      },
+      toIndex () {
+         mpvue.redirectTo({
+            url: '/pages/index/main'
+         })
+      },
+      getCoupon () {
+         if (this.isAjax) return
+         this.isAjax = true
+         postAction('get_yhq_by_keyname', {
+            keyname: this.keyword
+         }).then(res => {
+            this.isAjax = false
+            if (res.ret === 0) {
+               this.showCouponModal = true
+               this.couponKey = ''
+            }
+         })
       }
    },
    onShow () {
@@ -145,6 +181,7 @@ export default {
       this.currentTab = options.type || '0'
       this.orderId = options.id || -1
       this.orderFlag = options.flag || -1
+      this.goodsMoney = options.money || -1
       // let app = getApp()
    },
    onReachBottom () {

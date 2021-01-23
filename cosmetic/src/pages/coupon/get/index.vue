@@ -21,19 +21,19 @@ page { background-color: rgb(0, 0, 0)}
 <div>
    <img src="/static/images/coupon/frame.jpg" mode="widthFix" class="frame" />
    <div class="infos">
-      <div class="line1">9折</div>
-      <div class="line2">满99元可用</div>
+      <div class="line1">{{percent}}折</div>
+      <div class="line2">满{{condition}}元可用</div>
       <div class="line"><p>优惠券:</p>指定商品购满99元可使用，9折优惠，可与积分同时抵扣使用</div>
-      <div class="line"><p>使用时间:</p>2021.1.11-2021.1 .30</div>
+      <div class="line"><p>使用时间:</p>{{startTime}}-{{endTime}}</div>
       <div class="line">
          <p>详细信息:</p>
          <div>1、特价商品不参与此优惠</div>
-         <div>2、购买指定商品满99元才可使用此优惠券。</div>
+         <div>2、购买指定商品满{{condition}}元才可使用此优惠券。</div>
          <div>3、一券只能使用一次, -一次使用一张,过期作废。</div>
          <div>4、最终解释权axx所有。</div>
       </div>
       <div class="btn">
-         <button class="btn-round">点击领取</button>
+         <button class="btn-round" @click="doGet">点击领取</button>
       </div>
    </div>
 
@@ -48,12 +48,20 @@ page { background-color: rgb(0, 0, 0)}
 </template>
 
 <script>
-// import { postAction } from '@/utils/api'
+import { postAction } from '@/utils/api'
+import { formatDate } from '../../../utils'
 
 export default {
    data () {
       return {
-         show: false
+         show: false,
+         id: '',
+         isAjax: false,
+         percent: '--',
+         condition: '--',
+         startTime: '--',
+         endTime: '--',
+         couponId: ''
       }
    },
 
@@ -62,10 +70,37 @@ export default {
          mpvue.reLaunch({
             url: `/pages/index/main`
          })
+      },
+      getData () {
+         postAction('get_yhq_info', {
+            fxs_id: this.id
+         }).then(res => {
+            if (res.ret === 0) {
+               this.percent = Number(res.data.percent)
+               this.condition = Number(res.data.condition) / 100
+               this.startTime = formatDate(new Date(Number(res.data.ctime) * 1000), 'yyyy.MM.dd HH:mm')
+               this.endTime = formatDate(new Date(Number(res.data.yx_time) * 1000), 'yyyy.MM.dd HH:mm')
+               this.couponId = res.data.id
+            }
+         })
+      },
+      doGet () {
+         if (this.isAjax) return
+         this.isAjax = true
+         postAction('lq_yhq', {
+            id: this.couponId
+         }).then(res => {
+            if (res.ret === 0) {
+               this.show = true
+            }
+            this.isAjax = false
+         })
       }
    },
-   onLoad () {
+   onLoad (options) {
       Object.assign(this.$data, this.$options.data())
+      this.id = options.id || '4'
+      this.getData()
    }
 }
 </script>

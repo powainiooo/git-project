@@ -1,5 +1,5 @@
 <style>
-.c-coupon-item { margin: 0 30px 24px 30px; position: relative;}
+.c-coupon-item { position: relative;}
 .c-coupon-item .bg { width: 690px; height: 200px;}
 .c-coupon-item .infos { width: 100%; height: 100%; display: flex; position: absolute; top: 0; left: 0;}
 .c-coupon-item .infos .left { width: 220px; height: 200px; display: flex; justify-content: center; align-items: center;}
@@ -32,6 +32,7 @@
          <button class="btn-round" v-if="type === '1'" @click="doUse">去使用</button>
          <button class="btn-round btn-round-disable" v-else-if="type === '2'">已使用</button>
          <button class="btn-round btn-round-disable" v-else-if="type === '3'">已过期</button>
+         <button class="btn-round btn-round-disable" v-else-if="type === '4'" @click="doUse">去使用</button>
       </div>
    </div>
 </div>

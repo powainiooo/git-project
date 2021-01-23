@@ -85,7 +85,8 @@ page { background-color: rgb(248, 248, 248)}
    <div class="coupon-hint">
       <h3><img src="/static/images/order/icon-coupon.png" />优惠券</h3>
       <p v-if="pageData.yhq_usable_count !== 0">
-         <span>{{pageData.yhq_usable_count}}张可用</span>
+         <span @click="selectCoupon" v-if="pageData.yhq_user_id === 0">{{pageData.yhq_usable_count}}张可用</span>
+         <span v-else>{{pageData.yhq_dk_desc}}</span>
          <img src="/static/images/order/gouxuan-hei@2x.png" @click="couponCheck = false" v-if="couponCheck"/>
          <img src="/static/images/order/gouxuan-hui@2x.png" @click="couponCheck = true" v-else/>
       </p>
@@ -191,6 +192,7 @@ export default {
          isAjax: false,
          orderId: '',
          orderNum: '',
+         couponId: 0,
          couponKey: ''
       }
    },
@@ -228,7 +230,8 @@ export default {
       getData () {
          postAction('begin_buy', {
             id: this.ids,
-            gift_flag: this.flag
+            gift_flag: this.flag,
+            yhq_user_id: this.couponId
          }).then(res => {
             this.goodsList = res.data.goods_list
             this.pageData = res.data
@@ -245,6 +248,11 @@ export default {
       toInvoice () {
          mpvue.navigateTo({
             url: '/pages/invoice/main'
+         })
+      },
+      selectCoupon () {
+         mpvue.navigateTo({
+            url: `/pages/coupon/list/main?id=${this.ids}&flag=${this.flag}&type=1&money=${this.pageData.goods_money}`
          })
       },
       doPay () {
@@ -358,6 +366,7 @@ export default {
             if (res.ret === 0) {
                this.showCouponModal = true
                this.couponKey = ''
+               this.couponId = res.data.yhq_user_id
                this.getData()
             }
          })
@@ -369,6 +378,7 @@ export default {
       console.log(options)
       this.ids = options.id || '645'
       this.flag = options.flag || '0'
+      this.couponId = options.couponId || '0'
       this.getData()
       // let app = getApp()
    }

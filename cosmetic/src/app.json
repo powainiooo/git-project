@@ -1,11 +1,11 @@
 {
    "pages": [
+      "pages/register/main",
+      "pages/index/main",
+      "pages/coupon/get/main",
       "pages/coupon/list/main",
       "pages/order/confirm/main",
-      "pages/coupon/get/main",
-      "pages/index/main",
       "pages/address/list/main",
-      "pages/register/main",
       "pages/order/list/main",
       "pages/shoppingCart/main",
       "pages/invoice/main",

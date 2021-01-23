@@ -14,6 +14,14 @@
 .foot-btns { width: 100%; height: 100px; display: flex; position: fixed; left: 0; bottom: 0; z-index: 1000;}
 .foot-btns button { height: 100%; line-height: 100px; flex: 1; font-size: 30px; color: #ffffff; background-color: #5f5f5f; border-radius: 0; border: none}
 .foot-btns button:last-child { background-color: #393939;}
+
+.success-modal { width: 100%; height: 100vh; position: fixed; top: 0; left: 0; z-index: 10000; background-color: rgba(0, 0, 0, .75); display: flex; justify-content: center; align-items: center;}
+.success-modal .frame { width: 630px; height: 645px; background-color: #ffffff; border-radius: 16px; position: relative; display: flex; flex-direction: column; align-items: center;}
+.success-modal .frame .coupon { width: 590px; margin: 27px auto 55px auto; background-color: #E7E7E7;}
+.success-modal .frame .coupon .c-coupon-item { transform: scale(.8); transform-origin: 15% 50%;}
+.success-modal .frame .btns { width: 100%; display: flex; padding: 0 50px; box-sizing: border-box; justify-content: space-between;}
+.success-modal .frame .btns button { width: 240px;}
+.success-modal .frame .btns .btn2 { background-color: #ffffff; color: #3A3A3A; border: 1px solid #3A3A3A;}
 </style>
 
 <template>
@@ -64,14 +72,29 @@
       <button v-if="source === 'buy'" @click="skip">暂不注册直接购买</button>
       <button @click="doRegister">立即注册</button>
    </div>
+
+   <div class="success-modal" v-if="showCoupon">
+      <div class="frame">
+         <img src="/static/images/index/toubu@2x.png" mode="widthFix" />
+         <div class="coupon">
+            <coupon-item :itemData="couponData" type="1" @handleUse="skip" />
+         </div>
+         <div class="btns">
+            <button class="btn-round" @click="skip">立即使用</button>
+            <button class="btn-round btn2" @click="toList">查看详情</button>
+         </div>
+      </div>
+   </div>
 </div>
 </template>
 
 <script>
 import store from '../../store'
 import { getAction, postAction } from '@/utils/api'
+import couponItem from '../coupon/list/couponItem'
 
 export default {
+   components: {couponItem},
    data () {
       return {
          imgSrc: mpvue.imgSrc,
@@ -100,7 +123,9 @@ export default {
          },
          isAjax: false,
          ids: '',
-         flag: ''
+         flag: '',
+         showCoupon: false,
+         couponData: {}
       }
    },
    watch: {
@@ -111,7 +136,6 @@ export default {
    methods: {
       getData () {
          getAction('pre_reg').then(res => {
-            console.log(res)
             this.pageData = res.data
             store.commit('SET_SYTK', res.data.get_sm_1.content)
             store.commit('SET_YSZC', res.data.get_sm_2.content)
@@ -155,15 +179,11 @@ export default {
          postAction('save_regnfo', this.formData).then(res => {
             if (res.ret === 0) {
                this.getPersonData()
-               mpvue.showToast({ title: '注册成功！' })
-               if (this.source === 'buy') {
+               if (Array.isArray(res.data)) {
+                  mpvue.showToast({ title: '注册成功！' })
                   this.skip()
                } else {
-                  setTimeout(() => {
-                     mpvue.navigateBack({
-                        delta: 1
-                     })
-                  }, 1500)
+                  this.showCoupon = true
                }
             } else {
                mpvue.showToast({ title: res.msg, icon: 'none' })
@@ -180,8 +200,21 @@ export default {
          })
       },
       skip () {
+         if (this.source === 'buy') {
+            mpvue.redirectTo({
+               url: `/pages/order/confirm/main?id=${this.ids}&flag=${this.flag}`
+            })
+         } else {
+            setTimeout(() => {
+               mpvue.navigateBack({
+                  delta: 1
+               })
+            }, 1500)
+         }
+      },
+      toList () {
          mpvue.redirectTo({
-            url: `/pages/order/confirm/main?id=${this.ids}&flag=${this.flag}`
+            url: '/pages/coupon/list/main?type=1'
          })
       }
    },

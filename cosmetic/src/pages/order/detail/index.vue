@@ -83,6 +83,10 @@ page { background-color: rgb(248, 248, 248)}
             <span>抵扣积分数</span>
             <span>{{orderInfo.dk_num}}</span>
          </li>
+         <li v-if="orderInfo.yhq_user_id !== 0">
+            <span>优惠券</span>
+            <span>-￥{{orderInfo.yhq_dk_money / 100}}</span>
+         </li>
          <li>
             <span>可得积分</span>
             <span>{{orderInfo.dqjf}}</span>

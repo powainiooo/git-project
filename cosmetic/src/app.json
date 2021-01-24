@@ -1,7 +1,7 @@
 {
    "pages": [
-      "pages/register/main",
       "pages/index/main",
+      "pages/register/main",
       "pages/coupon/get/main",
       "pages/coupon/list/main",
       "pages/order/confirm/main",

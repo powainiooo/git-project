@@ -116,7 +116,7 @@ export default {
          postAction('yhq_list', params).then(res => {
             this.isAjax = false
             this.couponList = res.data.list_1.map(i => {
-               i.percentStr = Number(i.percent)
+               i.percentStr = Number(i.percent) / 10
                i.conditionStr = Number(i.condition) / 100
                i.endTime = formatDate(new Date(Number(i.yx_time) * 1000), 'yyyy.MM.dd HH:mm')
                return i

@@ -18,7 +18,7 @@
 .success-modal { width: 100%; height: 100vh; position: fixed; top: 0; left: 0; z-index: 10000; background-color: rgba(0, 0, 0, .75); display: flex; justify-content: center; align-items: center;}
 .success-modal .frame { width: 630px; height: 645px; background-color: #ffffff; border-radius: 16px; position: relative; display: flex; flex-direction: column; align-items: center;}
 .success-modal .frame .coupon { width: 590px; margin: 27px auto 55px auto; background-color: #E7E7E7;}
-.success-modal .frame .coupon .c-coupon-item { transform: scale(.8); transform-origin: 15% 50%;}
+.success-modal .frame .coupon .c-coupon-item { width: 690px; transform: scale(.8); transform-origin: 15% 50%;}
 .success-modal .frame .btns { width: 100%; display: flex; padding: 0 50px; box-sizing: border-box; justify-content: space-between;}
 .success-modal .frame .btns button { width: 240px;}
 .success-modal .frame .btns .btn2 { background-color: #ffffff; color: #3A3A3A; border: 1px solid #3A3A3A;}
@@ -92,6 +92,7 @@
 import store from '../../store'
 import { getAction, postAction } from '@/utils/api'
 import couponItem from '../coupon/list/couponItem'
+import { formatDate } from '@/utils'
 
 export default {
    components: {couponItem},
@@ -184,6 +185,10 @@ export default {
                   this.skip()
                } else {
                   this.showCoupon = true
+                  this.couponData = res.data
+                  this.couponData.percentStr = Number(this.couponData.percent) / 10
+                  this.couponData.conditionStr = Number(this.couponData.condition) / 100
+                  this.couponData.endTime = formatDate(new Date(Number(this.couponData.yx_time) * 1000), 'yyyy.MM.dd HH:mm')
                }
             } else {
                mpvue.showToast({ title: res.msg, icon: 'none' })

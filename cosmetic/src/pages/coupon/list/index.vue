@@ -5,7 +5,7 @@ page { background-color: rgb(248, 248, 248)}
 .tabs li { height: 100%; position: relative; font-size: 30px; color: #333333; display: flex; align-items: center;}
 .tabs li.active:after { content: ''; width: 56px; height: 4px; background-color: #000000; border-radius: 2px; position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%);}
 
-.list-container { margin-top: 50px;}
+.list-container { margin-top: 50px; padding-bottom: 140px;}
 .list-container .hint { font-size: 24px; color: #999999; text-align: center; margin: 60px 0 30px 0;}
 .list-container .c-coupon-item { margin: 0 30px 24px 30px;}
 
@@ -27,6 +27,10 @@ page { background-color: rgb(248, 248, 248)}
 .coupon-success .frame img { width: 404px;}
 .coupon-success .frame h3 { color: #333333; font-size: 48px; margin-bottom: 110px; }
 .coupon-success .frame button { width: 286px; background-color: #1B1B1B; }
+
+.footer-btn { width: 100%; position: fixed; left: 0; bottom: 0; z-index: 1000;}
+.footer-btn button { width: 100%; height: 120px; line-height: 120px; background-color: #3A3A3A; color: #ffffff; font-size: 40px; border-radius: 0; border: none;}
+
 </style>
 
 <template>
@@ -62,6 +66,10 @@ page { background-color: rgb(248, 248, 248)}
          </template>
       </div>
       </template>
+   </div>
+
+   <div class="footer-btn" v-if="currentTab === '1'">
+      <button @click="goBack">不使用优惠券直接购买</button>
    </div>
 
    <!-- 领取成功 -->
@@ -155,6 +163,11 @@ export default {
       toIndex () {
          mpvue.redirectTo({
             url: '/pages/index/main'
+         })
+      },
+      goBack () {
+         mpvue.redirectTo({
+            url: `/pages/order/confirm/main?id=${this.orderId}&flag=${this.orderFlag}&couponId=0`
          })
       },
       getCoupon () {

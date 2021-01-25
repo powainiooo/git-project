@@ -33,7 +33,7 @@ h3.title { font-size: 40px; color: #333333; font-weight: bold; text-align: cente
       <li>2、{{jfData.gmhd}}</li>
       <li>3、{{jfData.dksx}}</li>
    </ul>
- 
+
    <c-banner :list="bannerData"/>
 
    <h2 class="title">明星产品</h2>
@@ -154,9 +154,15 @@ export default {
          })
       }
    },
-   onLoad () {
+   onLoad (options) {
       // let app = getApp()
       Object.assign(this.$data, this.$options.data())
+      const fxsId = options.fxs_id
+      if (fxsId) {
+         mpvue.navigateTo({
+            url: `/pages/coupon/get/main?id=${fxsId}`
+         })
+      }
       this.getData()
    },
    onShareAppMessage () {

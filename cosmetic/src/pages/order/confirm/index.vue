@@ -19,10 +19,10 @@ page { background-color: rgb(248, 248, 248)}
 .gift-hint p { font-size: 24px; color: #747474; line-height: 40px; display: flex; align-items: center;}
 .gift-hint p img { width: 22px; height: 25px; margin-left: 10px;}
 
-.coupon-hint { margin: 0 0 30px 0; background-color: #ffffff; padding: 0 30px; height: 108px; display: flex; justify-content: space-between; align-items: center;}
+.coupon-hint { margin: 0 0 30px 0; background-color: #ffffff; padding: 0 30px; height: 108px; display: flex; justify-content: space-between; align-items: center; position: relative; }
 .coupon-hint h3 { font-size: 32px; line-height: 1; color: #333333; display: flex; align-items: center;}
 .coupon-hint h3 img { width: 54px; height: 40px; margin-right: 26px;}
-.coupon-hint p { font-size: 34px; color: #ED2828; display: flex; align-items: center;}
+.coupon-hint p { font-size: 34px; color: #ED2828; display: flex; align-items: center; padding-right: 20px;}
 .coupon-hint p img { width: 48px; height: 48px; margin-left: 14px;}
 .coupon-hint div { display: flex; align-items: center;}
 .coupon-hint div input { width: 190px; height: 30px; padding: 12px 20px; border: 1px solid #CCCCCC; background: #F8F8F8; font-size: 30px;}
@@ -82,13 +82,11 @@ page { background-color: rgb(248, 248, 248)}
       <p v-if="giftCheck">本次使用了{{pageData.use_score}}积分抵扣{{pageData.dk_money / 100}}元 <img src="/static/images/order/jifen@2x.png" /></p>
    </div>
 
-   <div class="coupon-hint">
+   <div class="coupon-hint link-arrow">
       <h3><img src="/static/images/order/icon-coupon.png" />优惠券</h3>
       <p v-if="pageData.yhq_usable_count !== 0">
          <span @click="selectCoupon" v-if="pageData.yhq_user_id === 0">{{pageData.yhq_usable_count}}张可用</span>
-         <span v-else>{{pageData.yhq_dk_desc}}</span>
-         <img src="/static/images/order/gouxuan-hei@2x.png" @click="couponCheck = false" v-if="couponCheck"/>
-         <img src="/static/images/order/gouxuan-hui@2x.png" @click="couponCheck = true" v-else/>
+         <span @click="selectCoupon" v-else>{{pageData.yhq_dk_desc}}</span>
       </p>
       <div v-else>
          <input v-model="couponKey" placeholder="输入兑换码" />
@@ -110,7 +108,7 @@ page { background-color: rgb(248, 248, 248)}
             <span>积分抵扣</span>
             <span>-￥{{pageData.dk_money / 100}}</span>
          </li>
-         <li v-if="couponCheck">
+         <li v-if="couponId != 0">
             <span>优惠券</span>
             <span>-￥{{pageData.yhq_dk_money / 100}}</span>
          </li>
@@ -240,6 +238,10 @@ export default {
             }
          })
       },
+      changeCoupon (status) {
+         this.couponCheck = status
+         this.getData()
+      },
       selectAddr () {
          mpvue.navigateTo({
             url: '/pages/address/list/main'
@@ -273,7 +275,7 @@ export default {
                params.fp_sh = this.invoiceInfo.fp_sh
                params.fp_email = this.invoiceInfo.fp_email
             }
-            params.yhq_user_id = this.couponCheck ? this.pageData.yhq_user_id : 0
+            params.yhq_user_id = this.pageData.yhq_user_id
             postAction('creat_order', params).then(res => {
                mpvue.hideLoading()
                if (res.ret === 0) {
@@ -376,9 +378,9 @@ export default {
    onLoad (options) {
       Object.assign(this.$data, this.$options.data())
       console.log(options)
-      this.ids = options.id || '645'
+      this.ids = options.id || '647'
       this.flag = options.flag || '0'
-      this.couponId = options.couponId || '0'
+      this.couponId = options.couponId || 0
       this.getData()
       // let app = getApp()
    }

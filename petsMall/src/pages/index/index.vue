@@ -1,0 +1,55 @@
+<style>
+.title { margin: 38px 45px;}
+.title p { font-size: 40px; color: #CBBB9B; margin-bottom: 10px; }
+.title div { font-size: 32px; color: #CBBB9B; font-family: Helve; }
+
+.goods-list { margin: 0 45px; }
+.goods-list .c-goods-item { margin-bottom: 60px; }
+
+.hr { margin: 120px 45px 50px 45px; height: 1px; background-color: #D1CECE; transform: scaleY(.5); }
+</style>
+
+<template>
+<div class="container">
+   <c-header />
+   <c-nav />
+   <div class="title">
+      <p>推荐猫盒</p>
+      <div>Recommend cat box</div>
+   </div>
+   <div class="goods-list">
+      <c-goods-item />
+      <c-goods-item />
+   </div>
+   <div class="hr"></div>
+   <div class="title">
+      <p>推荐产品</p>
+      <div>Recommend products</div>
+   </div>
+   <div class="goods-list">
+      <c-goods-item />
+      <c-goods-item />
+   </div>
+</div>
+</template>
+
+<script>
+import cHeader from '@/components/header'
+import cNav from './modules/nav'
+import cGoodsItem from './modules/goodsItem'
+
+export default {
+   components: {
+      cHeader,
+      cNav,
+      cGoodsItem
+   },
+   data () {
+      return {
+      }
+   },
+
+   methods: {
+   }
+}
+</script>

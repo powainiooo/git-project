@@ -49,6 +49,10 @@
    </div>
 
    <div class="list">
+      <div class="list-item link-arrow" @click="toLink('/pages/coupon/list/main')">
+         <img src="/static/images/personal/icon-coupon.png" />
+         <p>我的优惠券</p>
+      </div>
       <div class="list-item link-arrow" @click="toLink('/pages/order/list/main')">
          <img src="/static/images/personal/icon1.png" />
          <p>订单中心</p>

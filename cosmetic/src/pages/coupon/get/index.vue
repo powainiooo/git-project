@@ -33,7 +33,8 @@ page { background-color: rgb(0, 0, 0)}
          <div>4、最终解释权axx所有。</div>
       </div>
       <div class="btn">
-         <button class="btn-round" @click="doGet">点击领取</button>
+         <button class="btn-round"v-if="hasSaveInfo" @click="doGet">点击领取</button>
+         <button class="btn-round"v-else open-type="getUserInfo" @getuserinfo="getuserinfo">点击领取</button>
       </div>
    </div>
 
@@ -50,6 +51,7 @@ page { background-color: rgb(0, 0, 0)}
 <script>
 import { postAction } from '@/utils/api'
 import { formatDate } from '../../../utils'
+import store from '../../../store'
 
 export default {
    data () {
@@ -64,7 +66,16 @@ export default {
          couponId: ''
       }
    },
-
+   computed: {
+      hasSaveInfo () {
+         if (Array.isArray(store.state.personalInfo)) {
+            return false
+         } else {
+            console.log(store.state.personalInfo)
+            return store.state.personalInfo.is_reg === '1'
+         }
+      }
+   },
    methods: {
       toIndex () {
          mpvue.reLaunch({
@@ -94,6 +105,15 @@ export default {
                this.show = true
             }
             this.isAjax = false
+         })
+      },
+      getuserinfo (e) {
+         const userInfo = e.mp.detail.userInfo
+         postAction('save_userinfo', userInfo).then(res => {
+            if (res.ret === 0) {
+               store.commit('SET_PERSONINFO', userInfo)
+               this.doGet()
+            }
          })
       }
    },

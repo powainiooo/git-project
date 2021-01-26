@@ -22,7 +22,7 @@ page { background-color: rgb(248, 248, 248)}
 .coupon-hint { margin: 0 0 30px 0; background-color: #ffffff; padding: 0 30px; height: 108px; display: flex; justify-content: space-between; align-items: center; position: relative; }
 .coupon-hint h3 { font-size: 32px; line-height: 1; color: #333333; display: flex; align-items: center;}
 .coupon-hint h3 img { width: 54px; height: 40px; margin-right: 26px;}
-.coupon-hint p { font-size: 34px; color: #ED2828; display: flex; align-items: center; padding-right: 20px;}
+.coupon-hint p { font-size: 34px; color: #ED2828; display: flex; align-items: center; padding-right: 30px;}
 .coupon-hint p img { width: 48px; height: 48px; margin-left: 14px;}
 .coupon-hint div { display: flex; align-items: center;}
 .coupon-hint div input { width: 190px; height: 30px; padding: 12px 20px; border: 1px solid #CCCCCC; background: #F8F8F8; font-size: 30px;}
@@ -84,8 +84,8 @@ page { background-color: rgb(248, 248, 248)}
 
    <div class="coupon-hint link-arrow">
       <h3><img src="/static/images/order/icon-coupon.png" />优惠券</h3>
-      <p v-if="pageData.yhq_usable_count !== 0">
-         <span @click="selectCoupon" v-if="pageData.yhq_user_id === 0">{{pageData.yhq_usable_count}}张可用</span>
+      <p v-if="pageData.yhq_total_count !== 0">
+         <span @click="selectCoupon" v-if="pageData.yhq_user_id === 0">共{{pageData.yhq_total_count}}张，可以使用{{pageData.yhq_usable_count}}张</span>
          <span @click="selectCoupon" v-else>{{pageData.yhq_dk_desc}}</span>
       </p>
       <div v-else>
@@ -157,14 +157,14 @@ page { background-color: rgb(248, 248, 248)}
    </div>
 
    <!-- 领取成功 -->
-   <div class="coupon-success" v-if="showCouponModal" @click="hideCoupon">
+   <div class="coupon-success" v-if="showCouponModal">
       <div class="frame">
          <img src="/static/images/coupon/zhengque@2x.png" mode="widthFix"/>
          <img src="/static/images/order/guangbi@2x.png" mode="widthFix" class="close"/>
          <h3>领取成功</h3>
          <div>
-            <button class="btn-round">去使用</button>
-            <button class="btn-round">再看看</button>
+            <button class="btn-round" @click="selectCoupon">去使用</button>
+            <button class="btn-round" @click="hideCoupon">再看看</button>
          </div>
       </div>
    </div>
@@ -357,6 +357,7 @@ export default {
       },
       hideCoupon () {
          this.showCouponModal = false
+         this.getData()
       },
       getCoupon () {
          if (this.isAjax) return
@@ -368,8 +369,7 @@ export default {
             if (res.ret === 0) {
                this.showCouponModal = true
                this.couponKey = ''
-               this.couponId = res.data.yhq_user_id
-               this.getData()
+               // this.couponId = res.data.yhq_user_id
             }
          })
       }

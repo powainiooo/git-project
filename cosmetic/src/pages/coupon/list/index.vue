@@ -25,11 +25,11 @@ page { background-color: rgb(248, 248, 248)}
 .coupon-success { width: 100%; height: 100vh; position: fixed; top: 0; left: 0; z-index: 10000; background-color: rgba(0, 0, 0, .75); display: flex; justify-content: center; align-items: center;}
 .coupon-success .frame { width: 550px; height: 660px; background-color: #ffffff; border-radius: 8px; position: relative; display: flex; flex-direction: column; align-items: center;}
 .coupon-success .frame img { width: 404px;}
-.coupon-success .frame h3 { color: #333333; font-size: 48px; margin-bottom: 110px; }
+.coupon-success .frame h3 { color: #333333; font-size: 48px; margin-bottom: 110px; text-align: center; padding: 0 16px; }
 .coupon-success .frame button { width: 286px; background-color: #1B1B1B; }
 
-.footer-btn { width: 100%; position: fixed; left: 0; bottom: 0; z-index: 1000;}
-.footer-btn button { width: 100%; height: 120px; line-height: 120px; background-color: #3A3A3A; color: #ffffff; font-size: 40px; border-radius: 0; border: none;}
+.footer-btn { width: 100%; padding: 8px 0; background-color: #ffffff; position: fixed; left: 0; bottom: 0; z-index: 1000;}
+.footer-btn button { width: 60%;}
 
 </style>
 
@@ -47,12 +47,12 @@ page { background-color: rgb(248, 248, 248)}
             <p>输入关键词</p>
             <p>领取你的优惠券</p>
          </div>
-         <input v-model="keyword" placeholder="输入兑换码"/>
+         <input v-model="keyword" placeholder="输入兑换码" @focus="isFocus = true" @blur="isFocus = false"/>
          <button class="btn-round" @click="getCoupon">确定</button>
       </div>
    </div>
    <div v-else>
-      <template v-if="couponList.length === 0">
+      <template v-if="couponList.length === 0 && couponList2.length === 0">
       <div class="hint-empty">
          <img src="/static/images/shoppingCart/empty.png" />
       </div>
@@ -69,15 +69,18 @@ page { background-color: rgb(248, 248, 248)}
    </div>
 
    <div class="footer-btn" v-if="currentTab === '1'">
-      <button @click="goBack">不使用优惠券直接购买</button>
+      <button class="btn-round" @click="goBack">不使用优惠券直接购买</button>
    </div>
 
    <!-- 领取成功 -->
    <div class="coupon-success" v-if="showCouponModal" @click="showCouponModal = false">
       <div class="frame">
-         <img src="/static/images/coupon/zhengque@2x.png" mode="widthFix"/>
-         <h3>领取成功</h3>
-         <button class="btn-round" @click="toIndex">去使用</button>
+         <img src="/static/images/coupon/zhengque@2x.png" mode="widthFix" v-if="getResult"/>
+         <img src="/static/images/coupon/cuowu@2x.png" mode="widthFix" v-else/>
+         <h3 v-if="getResult">领取成功</h3>
+         <h3 v-else>{{failMsg}}</h3>
+         <button class="btn-round" @click="toIndex" v-if="getResult">去使用</button>
+         <button class="btn-round" @click.stop="showCouponModal = false" v-else>再试一次</button>
       </div>
    </div>
 </div>
@@ -104,10 +107,13 @@ export default {
          couponList: [],
          couponList2: [],
          isAjax: false,
+         isFocus: false,
          orderId: -1,
          orderFlag: -1,
          goodsMoney: -1,
-         keyword: ''
+         keyword: '',
+         getResult: true,
+         failMsg: ''
       }
    },
 
@@ -131,7 +137,7 @@ export default {
             })
             if (res.data.list_2) {
                this.couponList2 = res.data.list_2.map(i => {
-                  i.percentStr = Number(i.percent)
+                  i.percentStr = Number(i.percent) / 10
                   i.conditionStr = Number(i.condition) / 100
                   i.endTime = formatDate(new Date(Number(i.yx_time) * 1000), 'yyyy.MM.dd HH:mm')
                   return i
@@ -145,6 +151,7 @@ export default {
       },
       refresh () {
          this.couponList = []
+         this.couponList2 = []
          if (this.currentTab !== '0') {
             this.getData()
          }
@@ -171,15 +178,19 @@ export default {
          })
       },
       getCoupon () {
+         if (this.isFocus) return
          if (this.isAjax) return
          this.isAjax = true
          postAction('get_yhq_by_keyname', {
             keyname: this.keyword
-         }).then(res => {
+         }, false).then(res => {
             this.isAjax = false
+            this.getResult = res.ret === 0
+            this.showCouponModal = true
             if (res.ret === 0) {
-               this.showCouponModal = true
                this.couponKey = ''
+            } else {
+               this.failMsg = res.msg
             }
          })
       }

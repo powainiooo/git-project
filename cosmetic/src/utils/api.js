@@ -32,7 +32,9 @@ const ajax = (opts, autoMsg = true) => {
                // }
             } else {
                // console.log('res.data.ret')
-               mpvue.showToast({ title: res.data.msg, icon: 'none' })
+               if (autoMsg) {
+                  mpvue.showToast({ title: res.data.msg, icon: 'none' })
+               }
             }
             wx.hideNavigationBarLoading()
          },
@@ -57,12 +59,12 @@ export const getAction = (url, data = {}) => {
    })
 }
 // 通用post
-export const postAction = (url, data = {}) => {
+export const postAction = (url, data = {}, autoMsg = true) => {
    return ajax({
       method: 'POST',
       url,
       data
-   })
+   }, autoMsg)
 }
 
 // 登录

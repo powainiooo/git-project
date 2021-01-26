@@ -157,8 +157,9 @@ export default {
    onLoad (options) {
       // let app = getApp()
       Object.assign(this.$data, this.$options.data())
-      const fxsId = options.fxs_id
-      if (fxsId) {
+      const fxsId = decodeURIComponent(options.scene)
+      console.log('fxsId', fxsId)
+      if (fxsId !== 'undefined') {
          mpvue.navigateTo({
             url: `/pages/coupon/get/main?id=${fxsId}`
          })

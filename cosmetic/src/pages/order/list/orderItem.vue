@@ -24,10 +24,7 @@
             <ul class="c-cart-item-tag">
                <li>共{{itemData.total_nums}}件商品</li>
             </ul>
-            <div class="c-cart-item-nums" v-if="itemData.status === '1'">待付款</div>
-            <div class="c-cart-item-nums" v-else-if="itemData.status === '4'">待发货</div>
-            <div class="c-cart-item-nums" v-else-if="itemData.status === '5'">待收货</div>
-            <div class="c-cart-item-nums" v-else-if="itemData.status === '7'">已完成</div>
+            <div class="c-cart-item-nums">{{itemData.status_str}}</div>
          </div>
       </div>
       <div class="c-cart-item-bottom">

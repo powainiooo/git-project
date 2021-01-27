@@ -23,6 +23,12 @@ button:after { border: none;}
 
 .btn-round { width: 100%; height: 70px; line-height: 70px; border-radius: 35px; background-color: var(--mainColor); text-shadow: var(--textShadow); border: none; font-size: 20px; color: #ffffff;}
 .btn-round:after { border: none;}
+
+.borderB, .borderT, .borderR, .borderL { position: relative;}
+.borderT:after { content: ''; width: 100%; height: 1px; background-color: #D1CECE; position: absolute; left: 0; top: 0; transform: scaleY(.5); }
+.borderB:after { content: ''; width: 100%; height: 1px; background-color: #D1CECE; position: absolute; left: 0; bottom: 0; transform: scaleY(.5); }
+.borderR:after { content: ''; width: 1px; height: 100%; background-color: #D1CECE; position: absolute; right: 0; top: 0; transform: scaleY(.5); }
+.borderL:after { content: ''; width: 1px; height: 100%; background-color: #D1CECE; position: absolute; left: 0; top: 0; transform: scaleY(.5); }
 </style>
 
 <script>

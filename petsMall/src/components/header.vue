@@ -58,7 +58,7 @@
       </div>
    </div>
 
-   <div class="titles" v-if="title !== ''">{{titleArr[0]}}<span>| {{titleArr[1]}}</span></div>
+   <div class="titles" v-if="title !== ''" :style="{'background-color': titleColor}">{{titleArr[0]}}<span>| {{titleArr[1]}}</span></div>
 
    <div class="search-frame" :style="{top: showSearchFrame ? '180rpx' : '0'}">
       <input placeholder="输入搜索内容" />
@@ -111,6 +111,10 @@ export default {
       title: {
          type: String,
          default: ''
+      },
+      titleColor: {
+         type: String,
+         default: '#ffffff'
       }
    },
    data () {

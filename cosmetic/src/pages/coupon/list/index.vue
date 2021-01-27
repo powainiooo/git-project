@@ -68,7 +68,7 @@ page { background-color: rgb(248, 248, 248)}
       </template>
    </div>
 
-   <div class="footer-btn" v-if="currentTab === '1'">
+   <div class="footer-btn" v-if="currentTab === '1' && goodsMoney !== -1">
       <button class="btn-round" @click="goBack">不使用优惠券直接购买</button>
    </div>
 

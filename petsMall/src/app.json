@@ -1,5 +1,7 @@
 {
   "pages": [
+     "pages/catbox/list/main",
+    "pages/goods/detail/main",
     "pages/goods/list/main",
     "pages/index/main",
     "pages/logs/main"

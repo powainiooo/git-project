@@ -2,9 +2,10 @@
 .c-coupon-item { position: relative;}
 .c-coupon-item .bg { width: 690px; height: 200px;}
 .c-coupon-item .infos { width: 100%; height: 100%; display: flex; position: absolute; top: 0; left: 0;}
-.c-coupon-item .infos .left { width: 220px; height: 200px; display: flex; justify-content: center; align-items: center;}
+.c-coupon-item .infos .left { width: 220px; height: 200px; display: flex; flex-direction: column; justify-content: center; align-items: center;}
 .c-coupon-item .infos .left h3 { font-size: 86px; color: #ffffff; text-align: center; line-height: 1;}
 .c-coupon-item .infos .left h3 span { font-size: 32px;}
+.c-coupon-item .infos .left p { font-size: 24px; color: #F20000;}
 .c-coupon-item .infos .right { width: 470px; height: 200px; display: flex; align-items: center;}
 .c-coupon-item .infos .right div { margin-left: 40px;}
 .c-coupon-item .infos .right div p { font-size: 28px; color: #333333; line-height: 1; margin-bottom: 15px; position: relative;}
@@ -21,7 +22,9 @@
    <img src="/static/images/coupon/youhuiquan-hui@2x.png" class="bg" mode="widthFix" v-else/>
    <div class="infos">
       <div class="left">
-         <h3>{{itemData.percentStr}}<span>折</span></h3>
+         <h3 v-if="type === '1'">{{itemData.percentStr}}<span>折</span></h3>
+         <h3 v-else style="color:#666666 ">{{itemData.percentStr}}<span>折</span></h3>
+         <p v-if="type === '4'">再购{{itemData.diff / 100}}元可用</p>
       </div>
       <div class="right">
          <div>

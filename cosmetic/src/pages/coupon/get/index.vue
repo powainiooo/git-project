@@ -6,7 +6,7 @@ page { background-color: rgb(0, 0, 0)}
 .infos .line2 { font-size: 40px; color: #333333; text-align: center; line-height: 1; margin-bottom: 120px;}
 .infos .line { font-size: 28px; color: #666666; line-height: 48px; margin: 0 36px 20px 40px;}
 .infos .line p { color: #333333; font-weight: bold;}
-.infos .btn { text-align: center; margin-top: 40px;}
+.infos .btn { text-align: center; margin-top: 30px;}
 .infos .btn .btn-round { width: 450px; height: 90px; font-size: 34px; background-color: #1B1B1B;}
 
 .success-modal { width: 100%; height: 100vh; position: fixed; top: 0; left: 0; z-index: 10000; background-color: rgba(0, 0, 0, .75); display: flex; justify-content: center; align-items: center;}
@@ -23,14 +23,14 @@ page { background-color: rgb(0, 0, 0)}
    <div class="infos">
       <div class="line1">{{percent}}折</div>
       <div class="line2">满{{condition}}元可用</div>
-      <div class="line"><p>优惠券:</p>指定商品购满99元可使用，9折优惠，可与积分同时抵扣使用</div>
+      <div class="line"><p>优惠券:</p>{{couponData.desc1}}</div>
       <div class="line"><p>使用时间:</p>{{startTime}}-{{endTime}}</div>
       <div class="line">
          <p>详细信息:</p>
-         <div>1、特价商品不参与此优惠</div>
-         <div>2、购买指定商品满{{condition}}元才可使用此优惠券。</div>
-         <div>3、一券只能使用一次, -一次使用一张,过期作废。</div>
-         <div>4、最终解释权axx所有。</div>
+         <div>{{couponData.desc2}}</div>
+         <div>{{couponData.desc3}}</div>
+         <div>{{couponData.desc4}}</div>
+         <div>{{couponData.desc5}}</div>
       </div>
       <div class="btn">
          <button class="btn-round"v-if="hasSaveInfo" @click="doGet">点击领取</button>
@@ -63,7 +63,8 @@ export default {
          condition: '--',
          startTime: '--',
          endTime: '--',
-         couponId: ''
+         couponId: '',
+         couponData: {}
       }
    },
    computed: {
@@ -87,11 +88,18 @@ export default {
             fxs_id: this.id
          }).then(res => {
             if (res.ret === 0) {
-               this.percent = Number(res.data.percent)
+               this.percent = Number(res.data.percent) / 10
                this.condition = Number(res.data.condition) / 100
                this.startTime = formatDate(new Date(Number(res.data.ctime) * 1000), 'yyyy.MM.dd HH:mm')
                this.endTime = formatDate(new Date(Number(res.data.yx_time) * 1000), 'yyyy.MM.dd HH:mm')
                this.couponId = res.data.id
+               this.couponData = res.data
+            } else {
+               setTimeout(() => {
+                  mpvue.reLaunch({
+                     url: '/pages/index/main'
+                  })
+               }, 2000)
             }
          })
       },
@@ -119,7 +127,7 @@ export default {
    },
    onLoad (options) {
       Object.assign(this.$data, this.$options.data())
-      this.id = options.id || '4'
+      this.id = options.id || '17'
       this.getData()
    }
 }

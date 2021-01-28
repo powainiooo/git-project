@@ -160,8 +160,14 @@ export default {
       const fxsId = decodeURIComponent(options.scene)
       console.log('fxsId', fxsId)
       if (fxsId !== 'undefined') {
-         mpvue.navigateTo({
-            url: `/pages/coupon/get/main?id=${fxsId}`
+         postAction('get_yhq_info', {
+            fxs_id: fxsId
+         }).then(res => {
+            if (res.ret === 0) {
+               mpvue.navigateTo({
+                  url: `/pages/coupon/get/main?id=${fxsId}`
+               })
+            }
          })
       }
       this.getData()

@@ -12,7 +12,7 @@
 <template>
 <div class="container">
    <c-header />
-   <c-nav />
+   <c-nav :list="typeList" />
    <div class="title">
       <p>推荐猫盒</p>
       <div>Recommend cat box</div>
@@ -37,6 +37,7 @@
 import cHeader from '@/components/header'
 import cNav from './modules/nav'
 import cGoodsItem from './modules/goodsItem'
+import { getAction } from '../../utils/api'
 
 export default {
    components: {
@@ -46,9 +47,14 @@ export default {
    },
    data () {
       return {
+         typeList: []
       }
    },
-
+   created () {
+      getAction('type_list').then(res => {
+         this.typeList = res.data
+      })
+   },
    methods: {
    }
 }

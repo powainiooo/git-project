@@ -1,11 +1,11 @@
 <style>
 @font-face {
    font-family: 'Helve';
-   src: url('/static/fonts/HelveticaNeue_Medium.ttf') format('woff2');
+   src: url('http://catbox.pc-online.cc/static/fonts/HelveticaNeue_Medium.ttf') format('woff2');
 }
 @font-face {
    font-family: 'HelveThin';
-   src: url('/static/fonts/HelveticaNeueThin.ttf') format('woff2');
+   src: url('http://catbox.pc-online.cc/static/fonts/HelveticaNeueThin.ttf') format('woff2');
 }
 page {
    --mainColor: #DDC9A8;
@@ -14,7 +14,6 @@ page {
    --boxShadow: 0 20px 50px -20px rgba(0, 0, 0, 0.2);
    --textShadow: 0 0 5px rgba(0, 0, 0, 0.25);
    --textShadow2: 0 0 5px rgba(0, 0, 0, 0.33);
-   --headerHeight: 180;
    --titleHeight: 120
 }
 .container { padding-top: 180px;}
@@ -32,12 +31,35 @@ button:after { border: none;}
 </style>
 
 <script>
-// import { promisify } from '@/utils'
-// const login = promisify(mpvue.login)
-// const getSetting = promisify(mpvue.getSetting)
+import { promisify } from '@/utils'
+import { getAction } from '@/utils/api'
+import store from './store'
+
+const login = promisify(mpvue.login)
+const getSetting = promisify(mpvue.getSetting)
+const getUserInfo = promisify(mpvue.getUserInfo)
 export default {
    created () {
       console.log('app created')
+      this.getData()
+   },
+   methods: {
+      async getData () {
+         const loginRes = await login()
+         console.log('loginRes', loginRes)
+         const infoRes = await getAction('get_weixin', {
+            code: loginRes.code
+         })
+         console.log('infoRes', infoRes)
+         store.commit('SET_OPENID', infoRes.openid)
+         const settings = await getSetting()
+         console.log('settings', settings)
+         if (settings.authSetting['scope.userInfo']) {
+            const userInfo = await getUserInfo()
+            console.log('userInfo', userInfo)
+            store.commit('SET_PERSONINFO', userInfo.userInfo)
+         }
+      }
    }
 }
 </script>

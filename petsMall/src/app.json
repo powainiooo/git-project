@@ -1,15 +1,15 @@
 {
-  "pages": [
-     "pages/catbox/list/main",
-    "pages/goods/detail/main",
-    "pages/goods/list/main",
-    "pages/index/main",
-    "pages/logs/main"
-  ],
-  "window": {
-    "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#DDC9A8",
-    "navigationBarTitleText": "",
-    "navigationBarTextStyle": "black"
-  }
+   "pages": [
+      "pages/goods/detail/main",
+      "pages/goods/list/main",
+      "pages/index/main",
+      "pages/catbox/list/main",
+      "pages/logs/main"
+   ],
+   "window": {
+      "backgroundTextStyle": "light",
+      "navigationBarBackgroundColor": "#DDC9A8",
+      "navigationBarTitleText": "",
+      "navigationBarTextStyle": "black"
+   }
 }

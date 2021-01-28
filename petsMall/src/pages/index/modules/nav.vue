@@ -16,18 +16,15 @@
 <div class="c-nav">
    <img src="/static/images/index/bg.png" class="bg"/>
 
-   <a href="#" class="nav-box">
+   <a href="/pages/catbox/list/main" class="nav-box">
       <img src="/static/images/index/goods-catbox.png" />
       <p>订购猫盒<span>| Order cat box</span></p>
    </a>
 
    <div class="nav-list">
-      <a href="#"><img src="/static/images/index/sort-btn1.png" /></a>
-      <a href="#"><img src="/static/images/index/sort-btn2.png" /></a>
-      <a href="#"><img src="/static/images/index/sort-btn3.png" /></a>
-      <a href="#"><img src="/static/images/index/sort-btn4.png" /></a>
-      <a href="#"><img src="/static/images/index/sort-btn5.png" /></a>
-      <a href="#"><img src="/static/images/index/sort-btn6.png" /></a>
+      <a :href="'/pages/goods/list/main?type=' + item.id" v-for="item in list" :key="id">
+         <img :src="item.cover" />
+      </a>
    </div>
 </div>
 </template>
@@ -35,6 +32,9 @@
 <script type='es6'>
 export default {
   name: 'app',
+   props: {
+     list: Array
+   },
   data () {
     return {}
   },

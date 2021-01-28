@@ -9,20 +9,29 @@
 </style>
 
 <template>
-<div class="c-list-item">
-   <div class="imgs"><img src="/static/images/index/img0.png" /></div>
-   <div class="en">ZiwipeakZiwipeakZiwipeak® </div>
-   <div class="cn">滋益巅峰® 成猫粮成猫粮成猫粮成猫粮 </div>
-   <div class="price">180<span>元</span></div>
+<div class="c-list-item" @click="toDetail">
+   <div class="imgs"><img :src="itemData.cover" /></div>
+   <div class="en">{{itemData.english_name}}</div>
+   <div class="cn">{{itemData.china_name}}</div>
+   <div class="price">{{itemData.price}}<span>元</span></div>
 </div>
 </template>
 
 <script type='es6'>
 export default {
   name: 'app',
+   props: {
+     itemData: Object
+   },
   data () {
     return {}
   },
-  methods: {}
+  methods: {
+     toDetail () {
+        mpvue.navigateTo({
+           url: `/pages/goods/detail/main?id=${this.itemData.id}`
+        })
+     }
+  }
 }
 </script>

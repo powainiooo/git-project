@@ -18,7 +18,7 @@ page { background-color: #F3F2F1; }
 
 <template>
 <div class="container">
-   <c-header title="主粮|Staple food" searchBtn cartBtn />
+   <c-header title="主粮|Staple food" searchBtn cartBtn @search="querySearch" />
 
    <template v-if="!showResult">
    <div class="tabs tabs-dog" :class="{'tabs-active': tabs === 'dog'}">
@@ -30,11 +30,9 @@ page { background-color: #F3F2F1; }
       <img src="/static/images/goods/cat.png" v-else />
    </div>
    <div class="list-container">
-      <div class="grid"><list-item /></div>
-      <div class="grid"><list-item /></div>
-      <div class="grid"><list-item /></div>
-      <div class="grid"><list-item /></div>
-      <div class="grid"><list-item /></div>
+      <div class="grid" v-for="item in listData" :key="id">
+         <list-item :itemData="item" />
+      </div>
    </div>
    </template>
 
@@ -44,6 +42,7 @@ page { background-color: #F3F2F1; }
 <script>
 import cHeader from '@/components/header'
 import listItem from './modules/listItem'
+import { getAction } from '@/utils/api'
 
 export default {
    components: {
@@ -53,11 +52,42 @@ export default {
    data () {
       return {
          tabs: 'dog',
-         showResult: false
+         showResult: false,
+         typeKey: {
+            dog: 1,
+            cat: 2
+         },
+         listData: [],
+         total: 0,
+         typeId: '',
+         pageNo: 1,
+         keyword: ''
       }
    },
-
-   created () {
+   methods: {
+      getData () {
+         mpvue.showLoading()
+         getAction('product_list', {
+            word: this.keyword,
+            pageNo: this.pageNo,
+            type_id: this.typeId,
+            pet_id: this.typeKey[this.tabs]
+         }).then(res => {
+            mpvue.hideLoading()
+            this.total = res.data.nums
+            this.listData = res.data.list
+         })
+      },
+      querySearch (e) {
+         console.log('querySearch', e)
+         this.keyword = e
+         this.pageNo = 1
+         this.getData()
+      }
+   },
+   onLoad (options) {
+      this.typeId = options.type || 1
+      this.getData()
    }
 }
 </script>

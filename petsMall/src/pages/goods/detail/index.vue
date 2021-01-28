@@ -1,5 +1,5 @@
 <style>
-.container { padding-top: 300px;}
+.container { padding-top: 300px; padding-bottom: 200px;}
 .details { margin: 0 40px;}
 .infos { padding: 32px 26px; display: flex; justify-content: space-between; align-items: center; }
 .infos .name p { color: var(--textColor2); text-shadow: var(--textShadow); font-size: 30px; }
@@ -26,32 +26,32 @@
    <div class="details">
       <div class="infos borderB">
          <div class="name">
-            <p class="en">Ziwipeak® Cat food</p>
-            <p>滋益巅峰® 成猫粮</p>
+            <p class="en">{{detailData.english_name}}</p>
+            <p>{{detailData.china_name}}</p>
          </div>
-         <div class="price">180<span>元</span></div>
+         <div class="price">{{detailData.price}}<span>元</span></div>
       </div>
       <div class="catalog borderB">
          <h3>· 选择种类</h3>
          <ul>
-            <li class="active">鸡肉味</li>
-            <li>鸡肉味</li>
-            <li class="diabled">鸡肉味</li>
-         </ul>
-         <h3>· 选择规格</h3>
-         <ul>
-            <li class="active">鸡肉味</li>
-            <li>鸡肉味</li>
-            <li class="diabled">鸡肉味</li>
+<!--            <li class="active">鸡肉味</li>-->
+            <li
+               v-for="item in detailData.classes"
+               :key="id"
+               :class="{
+               'active': catalogId === item.id
+               }"
+               @click="catalogId = item.id">{{item.name}}</li>
+<!--            <li class="diabled">鸡肉味</li>-->
          </ul>
       </div>
       <div class="intros">
          <h3>适用对象:</h3>
-         <p>成猫</p>
+         <p>{{detailData.apply}}</p>
          <h3>营养成分:</h3>
-         <p>成猫</p>
+         <p>{{detailData.nutritional}}</p>
          <h3>主要成分:</h3>
-         <p>成猫</p>
+         <p>{{detailData.mainly}}</p>
       </div>
    </div>
 
@@ -63,6 +63,7 @@
 import cHeader from '@/components/header'
 import cFooter from '@/components/footer'
 import cBanner from './modules/banner'
+import { getAction } from '@/utils/api'
 
 export default {
    components: {
@@ -73,11 +74,24 @@ export default {
 
    data () {
       return {
-         bannerList: [{}, {}, {}]
+         bannerList: [],
+         detailData: {},
+         catalogId: ''
       }
    },
-
-   created () {
+   methods: {
+      getData () {
+         getAction('product_info', {
+            id: this.id
+         }).then(res => {
+            this.bannerList = [res.data.cover]
+            this.detailData = res.data
+         })
+      }
+   },
+   onLoad (options) {
+      this.id = options.id || 1
+      this.getData()
    }
 }
 </script>

@@ -18,6 +18,8 @@ page {
 }
 .container { padding-top: 180px;}
 
+.blur { filter: blur(2px); -webkit-filter: blur(2px);}
+
 button:after { border: none;}
 
 .btn-round { width: 100%; height: 70px; line-height: 70px; border-radius: 35px; background-color: var(--mainColor); text-shadow: var(--textShadow); border: none; font-size: 20px; color: #ffffff;}

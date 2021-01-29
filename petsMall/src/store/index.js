@@ -12,7 +12,8 @@ const store = new Vuex.Store({
       openid: '',
       personalInfo: {},
       settings: {},
-      imgSrc
+      imgSrc,
+      showCart: false
    },
    mutations: {
       SET_OPENID (state, data) {
@@ -23,6 +24,9 @@ const store = new Vuex.Store({
       },
       SET_SETTING (state, data) {
          state.settings = data
+      },
+      SET_CARTSTATUS (state, data) {
+         state.showCart = data
       }
    }
 })

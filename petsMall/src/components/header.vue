@@ -52,7 +52,7 @@
             <img src="/static/images/header/search.png" mode="widthFix" class="search" />
          </button>
          <div class="br" v-if="searchBtn && !showSearchFrame"></div>
-         <button v-if="cartBtn">
+         <button v-if="cartBtn" @click="openCart">
             <img src="/static/images/header/cart.png" mode="widthFix" class="cart" />
          </button>
       </div>
@@ -93,6 +93,7 @@
 </template>
 
 <script type='es6'>
+import store from '../store'
 export default {
    name: 'app',
    props: {
@@ -132,6 +133,9 @@ export default {
    methods: {
       handleSearch () {
          this.$emit('search', this.keyword)
+      },
+      openCart () {
+         store.commit('SET_CARTSTATUS', true)
       }
    }
 }

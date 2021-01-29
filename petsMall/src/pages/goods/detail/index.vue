@@ -20,58 +20,68 @@
 </style>
 
 <template>
-<div class="container">
-   <c-header title="主粮|Staple food" titleColor="#E8E6E4" cartBtn />
-   <c-banner :list="bannerList" />
-   <div class="details">
-      <div class="infos borderB">
-         <div class="name">
-            <p class="en">{{detailData.english_name}}</p>
-            <p>{{detailData.china_name}}</p>
+<div>
+   <div class="container" :class="{'blur': showCart}">
+      <c-header title="主粮|Staple food" titleColor="#E8E6E4" cartBtn />
+      <c-banner :list="bannerList" />
+      <div class="details">
+         <div class="infos borderB">
+            <div class="name">
+               <p class="en">{{detailData.english_name}}</p>
+               <p>{{detailData.china_name}}</p>
+            </div>
+            <div class="price">{{detailData.price}}<span>元</span></div>
          </div>
-         <div class="price">{{detailData.price}}<span>元</span></div>
-      </div>
-      <div class="catalog borderB">
-         <h3>· 选择种类</h3>
-         <ul>
-<!--            <li class="active">鸡肉味</li>-->
-            <li
-               v-for="item in detailData.classes"
-               :key="id"
-               :class="{
+         <div class="catalog borderB">
+            <h3>· 选择种类</h3>
+            <ul>
+               <!--            <li class="active">鸡肉味</li>-->
+               <li
+                  v-for="item in detailData.classes"
+                  :key="id"
+                  :class="{
                'active': catalogId === item.id
                }"
-               @click="catalogId = item.id">{{item.name}}</li>
-<!--            <li class="diabled">鸡肉味</li>-->
-         </ul>
+                  @click="catalogId = item.id">{{item.name}}</li>
+               <!--            <li class="diabled">鸡肉味</li>-->
+            </ul>
+         </div>
+         <div class="intros">
+            <h3>适用对象:</h3>
+            <p>{{detailData.apply}}</p>
+            <h3>营养成分:</h3>
+            <p>{{detailData.nutritional}}</p>
+            <h3>主要成分:</h3>
+            <p>{{detailData.mainly}}</p>
+         </div>
       </div>
-      <div class="intros">
-         <h3>适用对象:</h3>
-         <p>{{detailData.apply}}</p>
-         <h3>营养成分:</h3>
-         <p>{{detailData.nutritional}}</p>
-         <h3>主要成分:</h3>
-         <p>{{detailData.mainly}}</p>
-      </div>
-   </div>
 
-   <c-footer btnName="加入购物车|Add to cart" />
+      <c-footer btnName="加入购物车|Add to cart" />
+   </div>
+   <c-carts />
 </div>
 </template>
 
 <script>
 import cHeader from '@/components/header'
 import cFooter from '@/components/footer'
+import cCarts from '@/components/carts'
 import cBanner from './modules/banner'
 import { getAction } from '@/utils/api'
+import store from '../../../store'
 
 export default {
    components: {
       cHeader,
       cFooter,
+      cCarts,
       cBanner
    },
-
+   computed: {
+      showCart () {
+         return store.state.showCart
+      }
+   },
    data () {
       return {
          bannerList: [],

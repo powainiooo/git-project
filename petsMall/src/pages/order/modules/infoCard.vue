@@ -1,0 +1,38 @@
+<style>
+.c-info-card { margin: 42px 28px 32px 28px; padding: 30px 40px 40px 40px; box-shadow: 0 10px 20px 10px rgba(0, 0, 0, 0.05); border-radius: 15px; background-color: #ffffff; }
+.c-info-card h3 { font-size: 22px; color: #A6A5A5; line-height: 1; margin-bottom: 20px; }
+.c-info-card-items { margin-bottom: 40px; display: flex; }
+.c-info-card-items li { flex: 1; font-size: 36px; line-height: 42px; padding-bottom: 12px; padding-left: 6px; color: var(--textColor); text-shadow: var(--textShadow); position: relative; }
+.c-info-card-items li:before, .c-info-card-items li:after { content: ''; width: 10px; height: 10px; background-color: #D1CECE; border-radius: 50%; position: absolute; bottom: -5px;}
+.c-info-card-items li:before { left: -5px; }
+.c-info-card-items li:after { right: -5px; }
+.c-info-card-items li:last-child:before { width: 0; height: 0;}
+.c-info-card .btn-round { width: 138px; }
+</style>
+
+<template>
+<div class="c-info-card">
+   <h3>个人信息</h3>
+   <ul class="c-info-card-items borderB">
+      <li>何方</li>
+      <li>18023095011</li>
+   </ul>
+   <h3>收件地址</h3>
+   <ul class="c-info-card-items borderB">
+      <li>广东省深圳市宝安区众里创业社区309</li>
+   </ul>
+   <div style="text-align: center;">
+      <button class="btn-round">编辑地址</button>
+   </div>
+</div>
+</template>
+
+<script type='es6'>
+export default {
+  name: 'app',
+  data () {
+    return {}
+  },
+  methods: {}
+}
+</script>

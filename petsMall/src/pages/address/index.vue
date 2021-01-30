@@ -10,6 +10,7 @@
 .form .form-item .dots:before, .form .form-item .dots:after { content: ''; width: 10px; height: 10px; background-color: #D1CECE; border-radius: 50%; position: absolute; bottom: -5px;}
 .form .form-item .dots:before { left: -5px; }
 .form .form-item .dots:after { right: -5px; }
+.form .form-item-select:before { content: ''; width: 24px; height: 16px; background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAWBAMAAABEVRO+AAAAD1BMVEUAAABAMyE/MiJEMyI/MiH2ZW0jAAAABHRSTlMAc+stHXHGwQAAAFxJREFUGNNdysEJgEAQBMERE/BhBhqAmIEy+cckssc1O/1sSn4vtdbTln30e/u/E0MfeWLoph0M1QKGSmAouFEwFBwUDAVDO4aCoQ0PGjhp4aKJiyaGgqGBiyaGftsOJk6EIvXwAAAAAElFTkSuQmCC) no-repeat; background-size: 100%; position: absolute; bottom: 24px; left: 14px; }
 </style>
 
 <template>
@@ -24,10 +25,12 @@
          <input placeholder="手机号码" class="phone" placeholder-class="phone-holder" />
          <div class="dots"></div>
       </div>
-      <div class="form-item borderB">
-         <input placeholder="省 / 市 / 区" placeholder-class="holder" />
-         <div class="dots"></div>
-      </div>
+      <picker mode="region" @change="areaChange" v-model="areas">
+         <div class="form-item borderB form-item-select">
+            <input placeholder="省 / 市 / 区" placeholder-class="holder" />
+            <div class="dots"></div>
+         </div>
+      </picker>
       <div class="form-item borderB">
          <input placeholder="详细地址" placeholder-class="holder" />
          <div class="dots"></div>
@@ -48,10 +51,15 @@ export default {
    },
 
    data () {
-      return {}
+      return {
+         areas: []
+      }
    },
 
-   created () {
+   methods: {
+      areaChange (e) {
+         console.log('areaChange', e)
+      }
    }
 }
 </script>

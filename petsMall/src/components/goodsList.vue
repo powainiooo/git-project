@@ -11,7 +11,7 @@
 .c-goods-item .imgs img { width: 134px; height: 134px; position: absolute; left: 0; bottom: 0; }
 .c-goods-item .c-goods-item-infos { width: 380px; margin-left: 32px; }
 .c-goods-item .c-goods-item-infos p { font-size: 30px; color: var(--textColor); text-shadow: var(--textShadow); }
-.c-goods-item .c-goods-item-infos p.en { font-size: 34px; color: var(--textColor2); }
+.c-goods-item .c-goods-item-infos p.en { font-size: 34px; color: var(--textColor2); font-family: HelveThin; }
 .c-goods-item .c-goods-item-infos .tabs { display: flex; margin-top: 16px; }
 .c-goods-item .c-goods-item-infos .tabs li { border: 1px solid var(--mainColor); padding: 5px 8px; color: #A6A5A5; font-size: 20px; margin-right: 8px; line-height: 1; }
 .c-goods-item .nums { color: #A6A5A5; font-size: 20px; }
@@ -21,6 +21,7 @@
 .c-goods-price div p { font-size: 30px; color: var(--textColor); text-shadow: var(--textShadow); }
 .c-goods-price .values { font-size: 66px; font-family: HelveThin; color: var(--textColor); text-shadow: var(--textShadow); }
 .c-goods-price .values span { font-size: 22px; }
+
 </style>
 
 <template>
@@ -31,7 +32,7 @@
    </div>
    <ul class="c-goods-list-list borderB">
       <li class="c-goods-item borderB">
-         <div class="imgs"><img src="/static/images/img0.png" /></div>
+         <div class="imgs" @click="openDetail"><img src="/static/images/img0.png" /></div>
          <div class="c-goods-item-infos">
             <p class="en">Ziwipeak® Cat food</p>
             <p>滋益巅峰</p>
@@ -53,6 +54,7 @@
 </template>
 
 <script type='es6'>
+import store from "../store"
 export default {
    name: 'app',
    props: {
@@ -68,6 +70,10 @@ export default {
          shipPrice: 0
       }
    },
-   methods: {}
+   methods: {
+      openDetail () {
+         store.commit('SET_GOODSDETAILSTATUS', true)
+      }
+   }
 }
 </script>

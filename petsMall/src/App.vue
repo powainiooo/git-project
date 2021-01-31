@@ -22,7 +22,7 @@ page {
 
 button:after { border: none;}
 
-.btn-round { width: 100%; height: 70px; line-height: 70px; border-radius: 35px; background-color: var(--mainColor); text-shadow: var(--textShadow); border: none; font-size: 20px; color: #ffffff;}
+.btn-round { width: 100%; height: 70px; line-height: 70px; border-radius: 35px; background-color: var(--mainColor); text-shadow: var(--textShadow); border: none; font-size: 20px; color: #ffffff; margin: 0; }
 .btn-round:after { border: none;}
 
 .borderB, .borderT, .borderR, .borderL { position: relative;}

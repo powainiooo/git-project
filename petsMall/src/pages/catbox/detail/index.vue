@@ -24,6 +24,7 @@ page { background-color: #F3F2F1; }
    <div class="catbox-detail">
       <img src="/static/images/img1.jpg" mode="widthFix" style="width: 100%;" />
       <c-goods-list title="滋益巅峰® 猫盒套餐" titleEn="Ziwipeak® Cat box" titleIcon="cat" />
+      <c-goods-detail />
 
       <div class="order-type">
          <h3>订购类型</h3>
@@ -70,12 +71,14 @@ page { background-color: #F3F2F1; }
 import cHeader from '@/components/header'
 import cFooter from '@/components/footer'
 import cGoodsList from '@/components/goodsList'
+import cGoodsDetail from '@/components/goodsDetail'
 
 export default {
    components: {
       cHeader,
       cFooter,
-      cGoodsList
+      cGoodsList,
+      cGoodsDetail
    },
 
    data () {

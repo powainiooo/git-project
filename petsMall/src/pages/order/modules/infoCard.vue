@@ -7,7 +7,7 @@
 .c-info-card-items li:before { left: -5px; }
 .c-info-card-items li:after { right: -5px; }
 .c-info-card-items li:last-child:before { width: 0; height: 0;}
-.c-info-card .btn-round { width: 138px; }
+.c-info-card .btn-round { width: 138px; margin: 0 auto 40px auto; }
 </style>
 
 <template>
@@ -29,7 +29,7 @@
    <ul class="c-info-card-items borderB">
       <li>202101181745</li>
    </ul>
-   <div style="text-align: center;" v-if="edit">
+   <div v-if="edit">
       <button class="btn-round">编辑地址</button>
    </div>
 </div>

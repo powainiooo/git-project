@@ -19,9 +19,9 @@ const ajax = (opts, autoMsg = true) => {
          },
          fail (err) {
             console.log('接口报错', err)
-            wx.navigateTo({
-               url: '/pages/error/error'
-            })
+            // wx.navigateTo({
+            //    url: '/pages/error/error'
+            // })
             wx.hideNavigationBarLoading()
             reject(err)
          }

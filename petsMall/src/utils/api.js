@@ -14,14 +14,15 @@ const ajax = (opts, autoMsg = true) => {
             console.log('返回数据', res)
             resolve(res.data)
             if (res.data.status !== 0) {
-               wx.hideNavigationBarLoading()
+               mpvue.showToast({ title: res.data.msg })
             }
+            wx.hideNavigationBarLoading()
          },
          fail (err) {
             console.log('接口报错', err)
-            wx.navigateTo({
-               url: '/pages/error/error'
-            })
+            // wx.navigateTo({
+            //    url: '/pages/error/error'
+            // })
             wx.hideNavigationBarLoading()
             reject(err)
          }

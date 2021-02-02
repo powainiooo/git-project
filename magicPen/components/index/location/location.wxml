@@ -2,7 +2,7 @@
    <image src="../../../res/index/title.png" class="location-img" wx:if="{{isTop}}"></image>
    <image src="../../../res/index/title2.png" class="location-img" wx:else></image>
    <view class="location" wx:if="{{locationData.mchName}}" bindtap="openStore">
-      <image src="../../../res/index/icon-geo3.png" class="icon-loc"></image>
+      <image src="../../../res/index/icon-geo4.png" class="icon-loc"></image>
      <text>{{locationData.mchName}}</text>
    <!--  <text>{{locationData.mchName}}\n 距您{{locationData.minKM}}KM</text>-->
    </view>

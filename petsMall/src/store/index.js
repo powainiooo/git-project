@@ -9,6 +9,7 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
    state: {
+      token: '',
       openid: '',
       personalInfo: {},
       settings: {},
@@ -17,6 +18,9 @@ const store = new Vuex.Store({
       showGoodsDetail: false
    },
    mutations: {
+      SET_TOKEN (state, data) {
+         state.token = data
+      },
       SET_OPENID (state, data) {
          state.openid = data
       },

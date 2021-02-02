@@ -32,6 +32,11 @@ button:after { border: none;}
 .borderL:before { content: ''; width: 1px; height: 100%; background-color: #D1CECE; position: absolute; left: 0; top: 0; transform: scaleX(.5); }
 
 .hint-content { margin: 50px 55px; font-size: 30px; color: #9B9A9A; line-height: 45px; }
+
+.hint-result { margin: 120px 66px; }
+.hint-result img { margin-bottom: 38px; }
+.hint-result h3 { font-size: 60px; color: var(--textColor2); text-shadow: var(--textShadow); line-height: 1; margin-bottom: 30px; }
+.hint-result h3.en { font-size: 66px; font-family: HelveThin; }
 </style>
 
 <script>
@@ -55,8 +60,10 @@ export default {
             code: loginRes.code
          })
          console.log('infoRes', infoRes)
-         store.commit('SET_OPENID', infoRes.openid)
+         store.commit('SET_TOKEN', infoRes.data.token)
+         store.commit('SET_OPENID', infoRes.data.openid)
          const settings = await getSetting()
+         store.commit('SET_SETTING', settings.authSetting)
          console.log('settings', settings)
          if (settings.authSetting['scope.userInfo']) {
             const userInfo = await getUserInfo()

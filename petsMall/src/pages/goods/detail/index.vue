@@ -22,7 +22,7 @@
 <template>
 <div>
    <div class="container" :class="{'blur': showCart}">
-      <c-header title="主粮|Staple food" titleColor="#E8E6E4" cartBtn />
+      <c-header title="主粮|Staple food" titleColor="#E8E6E4" cartBtn :cartNums="cartList.length" />
       <c-banner :list="bannerList" />
       <div class="details">
          <div class="infos borderB">
@@ -30,20 +30,29 @@
                <p class="en">{{detailData.english_name}}</p>
                <p>{{detailData.china_name}}</p>
             </div>
-            <div class="price">{{detailData.price}}<span>元</span></div>
+            <div class="price">{{specItem.price}}<span>元</span></div>
          </div>
          <div class="catalog borderB">
             <h3>· 选择种类</h3>
             <ul>
-               <!--            <li class="active">鸡肉味</li>-->
                <li
-                  v-for="item in detailData.classes"
+                  v-for="item in catalogList"
                   :key="id"
                   :class="{
-               'active': catalogId === item.id
-               }"
-                  @click="catalogId = item.id">{{item.name}}</li>
-               <!--            <li class="diabled">鸡肉味</li>-->
+                     'active': catalogId === item.id
+                  }"
+                  @click="selectCatalog(item)">{{item.name}}</li>
+            </ul>
+            <h3>· 选择规格</h3>
+            <ul>
+               <li
+                  v-for="item in specsList"
+                  :key="id"
+                  :class="{
+                     'active': specsId === item.specs_id,
+                     'diabled': item.nums == 0
+                  }"
+                  @click="selectSpec(item)">{{item.specs}}</li>
             </ul>
          </div>
          <div class="intros">
@@ -56,9 +65,9 @@
          </div>
       </div>
 
-      <c-footer btnName="加入购物车|Add to cart" />
+      <c-footer btnName="加入购物车|Add to cart" @btnFunc="addCart" />
    </div>
-   <c-carts />
+   <c-carts :list="cartList" @refresh="getCart" />
 </div>
 </template>
 
@@ -80,13 +89,21 @@ export default {
    computed: {
       showCart () {
          return store.state.showCart
+      },
+      specItem () {
+         return this.specsList.find(i => i.specs_id === this.specsId)
       }
    },
    data () {
       return {
          bannerList: [],
          detailData: {},
-         catalogId: ''
+         catalogId: '',
+         catalogList: [],
+         specsId: '',
+         specsList: [],
+         isAjax: false,
+         cartList: []
       }
    },
    methods: {
@@ -94,14 +111,51 @@ export default {
          getAction('product_info', {
             id: this.id
          }).then(res => {
-            this.bannerList = [res.data.cover]
+            this.bannerList = res.data.img_list
             this.detailData = res.data
+            this.catalogList = res.data.classes
+            this.catalogId = res.data.classes[0].id
+            this.specsList = res.data.classes[0].child
+            this.specsId = res.data.classes[0].child[0].specs_id
+         })
+      },
+      selectCatalog (data) {
+         this.catalogId = data.id
+         this.specsList = data.child
+         this.specsId = data.child[0].specs_id
+      },
+      selectSpec (data) {
+         this.specsId = data.specs_id
+      },
+      addCart () {
+         console.log('addCart')
+         if (this.isAjax) return
+         this.isAjax = true
+         getAction('add_shopping_cart', {
+            token: store.state.token,
+            product_id: this.detailData.id,
+            type_id: this.catalogId,
+            goods_attr: this.specItem.specs,
+            buy_num: 1
+         }).then(res => {
+            this.isAjax = false
+            if (res.status === 0) {
+               this.getCart()
+            }
+         })
+      },
+      getCart () {
+         getAction('get_shopping_cart', {
+            token: store.state.token
+         }).then(res => {
+            this.cartList = res.data
          })
       }
    },
    onLoad (options) {
       this.id = options.id || 1
       this.getData()
+      this.getCart()
    }
 }
 </script>

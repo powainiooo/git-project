@@ -1,70 +1,69 @@
 {
-  "description": "项目配置文件",
-  "packOptions": {
-    "ignore": [
-      {
-        "type": "folder",
-        "value": ".idea"
+   "description": "项目配置文件",
+   "packOptions": {
+      "ignore": [
+         {
+            "type": "folder",
+            "value": ".idea"
+         }
+      ]
+   },
+   "setting": {
+      "urlCheck": false,
+      "es6": true,
+      "enhance": false,
+      "postcss": true,
+      "preloadBackgroundData": false,
+      "minified": true,
+      "newFeature": true,
+      "coverView": true,
+      "nodeModules": false,
+      "autoAudits": false,
+      "showShadowRootInWxmlPanel": true,
+      "scopeDataCheck": false,
+      "uglifyFileName": false,
+      "checkInvalidKey": true,
+      "checkSiteMap": true,
+      "uploadWithSourceMap": true,
+      "compileHotReLoad": false,
+      "useMultiFrameRuntime": true,
+      "useApiHook": true,
+      "babelSetting": {
+         "ignore": [],
+         "disablePlugins": [],
+         "outputPath": ""
+      },
+      "useIsolateContext": true,
+      "useCompilerModule": true,
+      "userConfirmedUseCompilerModuleSwitch": false,
+      "packNpmManually": false,
+      "packNpmRelationList": [],
+      "bundle": false,
+      "useApiHostProcess": true
+   },
+   "compileType": "miniprogram",
+   "libVersion": "2.6.5",
+   "appid": "wx55f0bb628b5d75d0",
+   "projectname": "magicPen",
+   "debugOptions": {
+      "hidedInDevtools": []
+   },
+   "isGameTourist": false,
+   "simulatorType": "wechat",
+   "simulatorPluginLibVersion": {},
+   "condition": {
+      "search": {
+         "list": []
+      },
+      "conversation": {
+         "list": []
+      },
+      "game": {
+         "currentL": -1,
+         "list": []
+      },
+      "miniprogram": {
+         "list": []
       }
-    ]
-  },
-  "setting": {
-    "urlCheck": false,
-    "es6": true,
-    "enhance": false,
-    "postcss": true,
-    "preloadBackgroundData": false,
-    "minified": true,
-    "newFeature": true,
-    "coverView": true,
-    "nodeModules": false,
-    "autoAudits": false,
-    "showShadowRootInWxmlPanel": true,
-    "scopeDataCheck": false,
-    "uglifyFileName": false,
-    "checkInvalidKey": true,
-    "checkSiteMap": true,
-    "uploadWithSourceMap": true,
-    "compileHotReLoad": false,
-    "useMultiFrameRuntime": false,
-    "useApiHook": true,
-    "babelSetting": {
-      "ignore": [],
-      "disablePlugins": [],
-      "outputPath": ""
-    },
-    "useIsolateContext": true,
-    "useCompilerModule": true,
-    "userConfirmedUseCompilerModuleSwitch": false,
-    "userConfirmedBundleSwitch": false,
-    "packNpmManually": false,
-    "packNpmRelationList": [],
-    "minifyWXSS": true,
-    "bundle": false
-  },
-  "compileType": "miniprogram",
-  "libVersion": "2.6.5",
-  "appid": "wx55f0bb628b5d75d0",
-  "projectname": "magicPen",
-  "debugOptions": {
-    "hidedInDevtools": []
-  },
-  "isGameTourist": false,
-  "simulatorType": "wechat",
-  "simulatorPluginLibVersion": {},
-  "condition": {
-    "search": {
-      "list": []
-    },
-    "conversation": {
-      "list": []
-    },
-    "game": {
-      "currentL": -1,
-      "list": []
-    },
-    "miniprogram": {
-      "list": []
-    }
-  }
+   }
 }

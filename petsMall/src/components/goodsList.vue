@@ -19,6 +19,10 @@
 
 .c-goods-price { height: 180px; padding: 0 38px; display: flex; justify-content: space-between; align-items: center; }
 .c-goods-price div p { font-size: 30px; color: var(--textColor); text-shadow: var(--textShadow); }
+.c-goods-price div div { font-size: 20px; color: var(--textColor2); text-shadow: var(--textShadow); }
+.c-goods-price div div.overline { color: #9C9A9B; position: relative; }
+.c-goods-price div div.overline:after { content: ''; width: 160px; height: 1px; background-color: var(--mainColor); position: absolute; top: 50%; left: 0; }
+.c-goods-price div div span { font-family: HelveThin; font-size: 66px; }
 .c-goods-price .values { font-size: 66px; font-family: HelveThin; color: var(--textColor); text-shadow: var(--textShadow); }
 .c-goods-price .values span { font-size: 22px; }
 
@@ -44,6 +48,37 @@
          <div class="nums">1份/月</div>
       </li>
    </ul>
+   <div class="c-goods-price">
+      <div>
+         <p>订购六个月</p>
+         <div class="overline"><span>1920</span>元</div>
+      </div>
+      <div class="values">1230<span>元</span></div>
+   </div>
+   <div class="c-goods-list-title" style="border-radius: 0;">
+      <p class="en">Recommend buy</p>
+      <p>推荐选购</p>
+   </div>
+   <ul class="c-goods-list-list borderB">
+      <li class="c-goods-item borderB">
+         <div class="imgs" @click="openDetail"><img src="/static/images/img0.png" /></div>
+         <div class="c-goods-item-infos">
+            <p>滋益巅峰</p>
+            <ul class="tabs">
+               <li>鸡肉味</li>
+               <li>鸡肉味</li>
+            </ul>
+         </div>
+         <div class="nums">1份/月</div>
+      </li>
+   </ul>
+   <div class="c-goods-price">
+      <div>
+         <p>订购六个月</p>
+         <div><span>1920</span>元</div>
+      </div>
+      <div class="values">1230<span>元</span></div>
+   </div>
    <div class="c-goods-price" v-if="shipPrice !== 0">
       <div>
          <p>运费</p>

@@ -1,5 +1,6 @@
 {
    "pages": [
+      "pages/index/main",
       "pages/order/detail/main",
       "pages/order/list/main",
       "pages/catbox/detail/main",
@@ -7,7 +8,6 @@
       "pages/address/main",
       "pages/goods/detail/main",
       "pages/goods/list/main",
-      "pages/index/main",
       "pages/catbox/list/main",
       "pages/logs/main"
    ],

@@ -18,8 +18,7 @@
       <div>Recommend cat box</div>
    </div>
    <div class="goods-list">
-      <c-goods-item />
-      <c-goods-item />
+      <c-goods-item v-for="item in catBoxList" :itemData="item" :key="id" />
    </div>
    <div class="hr"></div>
    <div class="title">
@@ -27,8 +26,7 @@
       <div>Recommend products</div>
    </div>
    <div class="goods-list">
-      <c-goods-item />
-      <c-goods-item />
+      <c-goods-item v-for="item in goodsList" :itemData="item" :key="id" />
    </div>
 </div>
 </template>
@@ -47,7 +45,9 @@ export default {
    },
    data () {
       return {
-         typeList: []
+         typeList: [],
+         catBoxList: [],
+         goodsList: []
       }
    },
    created () {
@@ -56,6 +56,14 @@ export default {
       })
    },
    methods: {
+      getCatBox () {
+         // getAction('')
+      },
+      getGoods () {
+         getAction('recommend_product').then(res => {
+            this.goodsList = res.data
+         })
+      }
    }
 }
 </script>

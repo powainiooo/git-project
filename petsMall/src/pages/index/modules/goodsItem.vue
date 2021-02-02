@@ -14,15 +14,15 @@
 <template>
 <div class="c-goods-item">
    <div class="img">
-      <img src="/static/images/index/img0.png"/>
+      <img :src="imgSrc + itemData.small_img"/>
    </div>
    <div class="info">
       <div class="name">
-         <p class="en">Ziwipeak® Cat box</p>
-         <p>滋益巅峰®猫盒套餐</p>
+         <p class="en">{{itemData.english_name}}</p>
+         <p>{{itemData.china_name}}</p>
       </div>
       <div class="bottom">
-         <div class="price">280<span>元 / 月</span></div>
+         <div class="price">{{itemData.pay_price}}<span>元 / 月</span></div>
          <button class="btn-round">立即订购</button>
       </div>
    </div>
@@ -30,11 +30,24 @@
 </template>
 
 <script type='es6'>
+import config from '@/config'
+const { imgSrc } = config
 export default {
   name: 'app',
+   props: {
+     itemData: Object
+   },
   data () {
-    return {}
+    return {
+       imgSrc
+    }
   },
-  methods: {}
+  methods: {
+     toDetail () {
+        mpvue.navigateTo({
+           url: `/pages/goods/detail/main?id=${this.itemData.id}`
+        })
+     }
+  }
 }
 </script>

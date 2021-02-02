@@ -9,7 +9,7 @@
 <template>
 <div class="c-footer">
    <div class="price" v-if="price !== ''">{{price}}<span>元</span></div>
-   <button>{{titleArr[0]}}| {{titleArr[1]}}</button>
+   <button @click="$emit('btnFunc')">{{titleArr[0]}}| {{titleArr[1]}}</button>
 </div>
 </template>
 

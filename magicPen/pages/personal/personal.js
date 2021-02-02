@@ -165,6 +165,9 @@ Page({
 	onGotUserInfo () {
 		const app = getApp()
 		app.doInit()
+	},
+	sKeyReadyCallback () {
+   	console.log('sKeyReadyCallback')
 		wx.reLaunch({
 			url: '/pages/personal/personal'
 		})

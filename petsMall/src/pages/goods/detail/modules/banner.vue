@@ -10,7 +10,7 @@
 <div style="position: relative;">
    <swiper class="c-banner" autoplay @change="bannerChange">
       <swiper-item v-for="(item, index) in list" :key="index">
-         <img :src="item" class="c-banner-img" />
+         <img :src="imgSrc + item" class="c-banner-img" />
       </swiper-item>
    </swiper>
    <ul class="c-banner-dots">
@@ -20,6 +20,8 @@
 </template>
 
 <script type='es6'>
+import config from '@/config'
+const { imgSrc } = config
 export default {
   name: 'app',
    props: {
@@ -27,6 +29,7 @@ export default {
    },
   data () {
     return {
+       imgSrc,
        activeIndex: 0
     }
   },

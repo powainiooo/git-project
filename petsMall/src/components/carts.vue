@@ -30,43 +30,67 @@
       <img src="/static/images/header/close.png" @click="hideCart" />
    </div>
    <div class="c-cart-list">
-      <div class="c-cart-item borderB" v-for="item in 6">
-         <div class="btn-del"><img src="/static/images/header/close2.png" /></div>
-         <div class="imgs"><img src="/static/images/img0.png" /></div>
+      <div class="c-cart-item borderB" v-for="item in list" :key="id">
+         <div class="btn-del" @click="handleDel(item.id)"><img src="/static/images/header/close2.png" /></div>
+         <div class="imgs"><img :src="item.small_img" /></div>
          <div class="c-cart-item-infos">
-            <p class="en">Ziwipeak® Cat food</p>
-            <p>滋益巅峰</p>
+            <p class="en">{{item.englist_name}}</p>
+            <p>{{item.china_name}}</p>
             <ul class="tabs">
-               <li>鸡肉味</li>
-               <li>鸡肉味</li>
+               <li>{{item.type_name}}</li>
             </ul>
          </div>
-         <div class="nums">9</div>
+         <div class="nums">{{item.buy_num}}</div>
       </div>
    </div>
-   <c-footer btnName="结算|Settlement" price="1740" />
+   <c-footer btnName="结算|Settlement" :price="allPrice" />
 </div>
 </template>
 
 <script type='es6'>
 import cFooter from '@/components/footer'
 import store from '../store'
+import { getAction } from '../utils/api'
+
 export default {
    name: 'app',
+   props: {
+      list: Array
+   },
    components: {
       cFooter
    },
    computed: {
       showCart () {
          return store.state.showCart
+      },
+      allPrice () {
+         return this.list.reduce((total, item) => {
+            return total += Number(item.price)
+         }, 0)
       }
    },
    data () {
-      return {}
+      return {
+         isAjax: false
+      }
    },
    methods: {
       hideCart () {
          store.commit('SET_CARTSTATUS', false)
+      },
+      handleDel (id) {
+         if (this.isAjax) return
+         this.isAjax = true
+         getAction('del_shopping_cart', {
+            token: store.state.token,
+            cart_id: id
+         }).then(res => {
+            this.isAjax = false
+            if (res.status === 0) {
+               this.$emit('refresh')
+            }
+         })
       }
    }
 }

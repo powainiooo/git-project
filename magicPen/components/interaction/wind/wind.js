@@ -66,19 +66,19 @@ Component({
         })
      },
      doCall () {
-        if (this.data.cost > this.data.peas) {
-           this.setData({
-              showModal: true,
-              modalType: 'recharge',
-              modalContent: `发动呼风唤雨特技`,
-           })
-        } else {
-           this.setData({
-              showModal: true,
-              modalType: 'cost',
-              modalContent: `用${this.data.cost}个来画豆发动特技？`,
-           })
-        }
+        // if (this.data.cost > this.data.peas) {
+        //    this.setData({
+        //       showModal: true,
+        //       modalType: 'recharge',
+        //       modalContent: `发动呼风唤雨特技`,
+        //    })
+        // } else {
+        //    this.setData({
+        //       showModal: true,
+        //       modalType: 'cost',
+        //       modalContent: `用${this.data.cost}个来画豆发动特技？`,
+        //    })
+        // }
      },
      closeSucModal () {
         this.setData({

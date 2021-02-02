@@ -2,13 +2,14 @@
 .c-header { width: 100%; height: 180px; position: fixed; top: 0; left: 0; z-index: 1000;}
 .c-header .navs { width: 100%; height: 100%; box-sizing: border-box; display: flex; justify-content: space-between; align-items: center; padding: 0 45px 0 66px; position: relative; z-index: 100; background-color: var(--mainColor); }
 .c-header .navs .logo { width: 75px; }
-.c-header .navs button { width: 68px; height: 68px; border: none; background-color: transparent; display: flex; justify-content: center; align-items: center; margin: 0; padding: 0;}
+.c-header .navs button { width: 68px; height: 68px; border: none; background-color: transparent; display: flex; justify-content: center; align-items: center; margin: 0; padding: 0; position: relative; }
 .c-header .navs button .menu { width: 68px;}
 .c-header .navs button .close { width: 57px;}
 .c-header .navs button .search { width: 60px;}
 .c-header .navs button .cart { width: 63px;}
 .c-header .navs .btns { width: 188px; display: flex; justify-content: flex-end; }
 .c-header .navs .btns .br { width: 1px; height: 80px; background-color: #ffffff; transform: scaleX(.5); margin: 0 24px; }
+.c-header .navs button .carts-num { width: 40px; height: 40px; font-size: 20px; color: #ffffff; font-family: Helve; display: flex; justify-content: center; align-items: center; border-radius: 50%; background-color: #000000; position: absolute; top: -20px; right: -20px; }
 
 .c-header .titles { width: 100%; height: 120px; background-color: #ffffff; display: flex; align-items: center; padding-left: 66px; font-size: 36px; color: var(--textColor); }
 .c-header .titles span { margin-left: 14px; font-size: 40px; font-family: HelveThin; }
@@ -54,6 +55,7 @@
          <div class="br" v-if="searchBtn && !showSearchFrame"></div>
          <button v-if="cartBtn" @click="openCart">
             <img src="/static/images/header/cart.png" mode="widthFix" class="cart" />
+            <span class="carts-num">{{cartNums}}</span>
          </button>
       </div>
    </div>
@@ -69,10 +71,14 @@
    </div>
 
    <div class="menus-frame" :style="{top: showMenu ? 0 : '-100vh'}">
-      <div class="line1">
+      <div class="line1" v-if="hasUserInfo">
+         <img :src="userInfo.avatarUrl" class="avatar" />
+         <p>{{userInfo.nickName}}</p>
+      </div>
+      <div class="line1" v-else>
          <img src="/static/images/header/avatar.png" class="avatar" />
          <p>请点击登录</p>
-         <button>获取用户信息</button>
+         <button open-type="getUserInfo" @getuserinfo="getuserinfo">获取用户信息</button>
       </div>
       <div class="line2">
          <a href="#" hover-class="none">
@@ -93,6 +99,7 @@
 </template>
 
 <script type='es6'>
+import { getAction } from '../utils/api'
 import store from '../store'
 export default {
    name: 'app',
@@ -116,6 +123,10 @@ export default {
       titleColor: {
          type: String,
          default: '#ffffff'
+      },
+      cartNums: {
+         type: Number,
+         default: 0
       }
    },
    data () {
@@ -128,6 +139,12 @@ export default {
    computed: {
       titleArr () {
          return this.title.split('|')
+      },
+      hasUserInfo () {
+         return store.state.settings['scope.userInfo']
+      },
+      userInfo () {
+         return store.state.personalInfo
       }
    },
    methods: {
@@ -136,6 +153,25 @@ export default {
       },
       openCart () {
          store.commit('SET_CARTSTATUS', true)
+      },
+      getuserinfo (e) {
+         getAction('wxuser_add', {
+            token: store.state.token,
+            country: e.detail.userInfo.country,
+            province: e.detail.userInfo.province,
+            city: e.detail.userInfo.city,
+            gender: e.detail.userInfo.gender,
+            nickName: e.detail.userInfo.nickName,
+            avatarUrl: e.detail.userInfo.avatarUrl
+         }).then(res => {
+            store.commit('SET_PERSONINFO', e.detail.userInfo)
+            mpvue.getSetting({
+               success (res2) {
+                  console.log('res2', res2)
+                  store.commit('SET_SETTING', res2.authSetting)
+               }
+            })
+         })
       }
    }
 }

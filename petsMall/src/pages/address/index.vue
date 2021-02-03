@@ -2,8 +2,8 @@
 .container { padding: 300px 0 200px 0;}
 .form { margin: 12px 66px;}
 .form .form-item { margin-bottom: 12px; height: 120px; display: flex; align-items: flex-end; }
-.form .form-item input { width: 100%; color: var(--textColor); text-shadow: var(--textShadow); font-size: 36px; text-align: right; padding: 16px 6px 16px 0; font-family: HelveThin; }
-.form .form-item input.phone { font-size: 100px; height: 100px; padding: 0 6px 0 0; line-height: 100px; }
+.form .form-item input { width: 100%; color: var(--textColor); text-shadow: var(--textShadow); font-size: 36px; text-align: right; padding: 16px 6px 16px 0; font-family: "HelveThin"; }
+.form .form-item input.phone { font-size: 96px; height: 100px; padding: 0 6px 0 0; line-height: 100px; }
 .form .form-item .holder { font-size: 36px; }
 .form .form-item .phone-holder { font-size: 36px; padding-top: 16px; }
 .form .form-item .dots { width: 100%; position: absolute; left: 0; bottom: 0; }
@@ -18,11 +18,11 @@
    <c-header title="填写收货地址|Add shipping address" titleColor="#E8E6E4" />
    <div class="form">
       <div class="form-item borderB">
-         <input v-model="name" placeholder="姓名" placeholder-class="holder" />
+         <input v-model="formData.name" placeholder="姓名" placeholder-class="holder" />
          <div class="dots"></div>
       </div>
       <div class="form-item borderB">
-         <input placeholder="手机号码" class="phone" placeholder-class="phone-holder" />
+         <input v-model="formData.mobile" placeholder="手机号码" class="phone" placeholder-class="phone-holder" style="font-family: HelveThin;" />
          <div class="dots"></div>
       </div>
       <picker mode="region" @change="areaChange">
@@ -32,7 +32,7 @@
          </div>
       </picker>
       <div class="form-item borderB">
-         <input placeholder="详细地址" placeholder-class="holder" />
+         <input v-model="formData.address" placeholder="详细地址" placeholder-class="holder" />
          <div class="dots"></div>
       </div>
    </div>
@@ -79,12 +79,23 @@ export default {
          mpvue.navigateTo({
             url: '/pages/order/confirm/main'
          })
+         mpvue.setStorage({
+            key: 'PETS_FORMDATA',
+            data: {
+               ...this.formData
+            }
+         })
       }
    },
    onLoad (options) {
       const status = options.status || 'new'
       if (status === 'edit') {
          this.formData = { ...store.state.formData }
+      } else {
+         const formData = mpvue.getStorageSync('PETS_FORMDATA')
+         if (formData !== undefined && formData !== '' && formData !== null) {
+            this.formData = formData
+         }
       }
    }
 }

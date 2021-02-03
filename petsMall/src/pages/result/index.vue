@@ -52,13 +52,6 @@ export default {
          } else {
             return '付款|Payment'
          }
-      },
-      btnFunc () {
-         if (this.status === 'suc') {
-            mpvue.redirectTo({
-               url: `/pages/order/detail/main?orderNum=${this.orderNum}`
-            })
-         }
       }
    },
    data () {
@@ -72,9 +65,17 @@ export default {
          mpvue.reLaunch({
             url: '/pages/index/main'
          })
+      },
+      btnFunc () {
+         if (this.status === 'suc') {
+            mpvue.redirectTo({
+               url: `/pages/order/detail/main?orderNum=${this.orderNum}`
+            })
+         }
       }
    },
    onLoad (options) {
+      console.log('order onLoad', options)
       this.status = options.status || 'suc'
       this.orderNum = options.orderNum || ''
    }

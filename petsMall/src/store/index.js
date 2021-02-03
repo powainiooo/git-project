@@ -21,6 +21,10 @@ const store = new Vuex.Store({
    mutations: {
       SET_TOKEN (state, data) {
          state.token = data
+         mpvue.setStorage({
+            key: 'PETS_TOKEN',
+            data
+         })
       },
       SET_OPENID (state, data) {
          state.openid = data
@@ -38,6 +42,7 @@ const store = new Vuex.Store({
          state.showGoodsDetail = data
       },
       SET_FORMDATA (state, data) {
+         console.log('SET_FORMDATA', data)
          state.formData = data
       }
    }

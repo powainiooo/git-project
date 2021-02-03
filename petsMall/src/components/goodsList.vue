@@ -47,6 +47,7 @@
          <div class="nums">{{item.buy_num}}份/月</div>
       </li>
    </ul>
+   <template v-if="recommendList.length > 0">
    <div class="c-goods-price">
       <div>
          <p>订购六个月</p>
@@ -54,7 +55,6 @@
       </div>
       <div class="values">1230<span>元</span></div>
    </div>
-   <template v-if="recommendList.length > 0">
    <div class="c-goods-list-title" style="border-radius: 0;">
       <p class="en">Recommend buy</p>
       <p>推荐选购</p>

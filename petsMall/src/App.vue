@@ -54,14 +54,19 @@ export default {
    },
    methods: {
       async getData () {
-         const loginRes = await login()
-         console.log('loginRes', loginRes)
-         const infoRes = await getAction('get_weixin', {
-            code: loginRes.code
-         })
-         console.log('infoRes', infoRes)
-         store.commit('SET_TOKEN', infoRes.data.token)
-         store.commit('SET_OPENID', infoRes.data.openid)
+         const token = mpvue.getStorageSync('PETS_TOKEN')
+         if (token !== '' && token !== null && token !== undefined) {
+            store.commit('SET_TOKEN', token)
+         } else {
+            const loginRes = await login()
+            console.log('loginRes', loginRes)
+            const infoRes = await getAction('get_weixin', {
+               code: loginRes.code
+            })
+            console.log('infoRes', infoRes)
+            store.commit('SET_TOKEN', infoRes.data.token)
+            store.commit('SET_OPENID', infoRes.data.openid)
+         }
          const settings = await getSetting()
          store.commit('SET_SETTING', settings.authSetting)
          console.log('settings', settings)

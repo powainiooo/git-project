@@ -8,7 +8,7 @@ page { background-color: #F3F2F1; }
    <c-header title="确认订单|Order confirmation" />
    <div class="">
       <info-card :itemData="formData" />
-      <goods-list :list="cartList" />
+      <goods-list :list="cartList" title="购物清单" titleEn="Shopping list" />
       <div class="hint-content">订单满138元免运费（偏远地区除外），不满138元则额外加收运费。</div>
       <div class="hint-content">所订购的猫盒套餐及推荐选购产品，每月将按以上产品清单及数量进行配送。</div>
    </div>
@@ -34,7 +34,7 @@ export default {
 
    data () {
       return {
-         formData: { ...store.state.formData },
+         formData: {},
          cartList: []
       }
    },
@@ -52,34 +52,36 @@ export default {
             mask: true
          })
          const params = { ...this.formData }
+         console.log('params', params)
          params.token = store.state.token
          getAction('create_order', params).then(res => {
             mpvue.hideLoading()
             const orderNum = res.data.order_num
-            if (res.data.pay_type === 1) {
-               const jsapi = res.data.jsapiparam
-               mpvue.requestPayment({
-                  'timeStamp': jsapi.timeStamp,
-                  'nonceStr': jsapi.nonceStr,
-                  'package': jsapi.package,
-                  'signType': jsapi.signType,
-                  'paySign': jsapi.paySign,
-                  'success': res => {
-                     wx.showToast({
-                        title: '支付成功'
-                     })
-                     this.doBuySuccess(orderNum)
-                  },
-                  'fail': err => {
-                     console.log('pay fail', err)
-                     mpvue.reLaunch({
-                        url: '/page/result/main?result=fail'
-                     })
-                  }
-               })
-            } else {
-               this.doBuySuccess(orderNum)
-            }
+            const jsapi = res.data.jsapiparam
+            mpvue.requestPayment({
+               'timeStamp': jsapi.timeStamp,
+               'nonceStr': jsapi.nonceStr,
+               'package': jsapi.package,
+               'signType': jsapi.signType,
+               'paySign': jsapi.paySign,
+               'success': res => {
+                  // wx.showToast({
+                  //    title: '支付成功'
+                  // })
+                  this.doBuySuccess(orderNum)
+               },
+               'fail': err => {
+                  console.log('pay fail', err)
+                  mpvue.reLaunch({
+                     url: '/pages/result/main?result=fail'
+                  })
+               }
+            })
+            // if (res.data.pay_type === 1) {
+            //
+            // } else {
+            //    this.doBuySuccess(orderNum)
+            // }
          })
       },
       doBuySuccess (orderNum) {
@@ -87,7 +89,7 @@ export default {
             order_num: orderNum
          }).then(res => {
             mpvue.reLaunch({
-               url: '/page/result/main?result=suc'
+               url: '/pages/result/main?result=suc&orderNum=' + orderNum
             })
          })
       },
@@ -114,6 +116,7 @@ export default {
       }
    },
    onLoad () {
+      this.formData = {...store.state.formData}
       this.getCart()
    }
 }

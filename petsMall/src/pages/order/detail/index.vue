@@ -16,15 +16,15 @@ page { background-color: #F3F2F1; }
    <c-header title="订单详情|Order details" titleColor="#E8E6E4" />
    <div class="details-container">
       <c-info-card :itemData="formData" />
-      <div class="status" v-if="false">
+      <div class="status" v-if="detailData.status === '7'">
          <img src="/static/images/order/success.png" class="success" />
          <span>已完成</span>
       </div>
-      <div class="status" v-if="false">
+      <div class="status" v-else-if="detailData.status === '7'">
          <img src="/static/images/order/box.png" class="box" />
-         <button class="btn-round">SF1103814950391</button>
+         <button class="btn-round">{{detailData.post_str}}</button>
       </div>
-      <div class="status">
+      <div class="status" v-else-if="detailData.status === '4'">
          <img src="/static/images/order/clock.png" class="clock" />
          <span>待发货</span>
       </div>
@@ -42,6 +42,7 @@ import cGoodsList from '@/components/goodsList'
 import cInfoCard from '../modules/infoCard'
 import { getAction } from '@/utils/api'
 import { formatDate } from '@/utils'
+import store from '@/store'
 
 export default {
    components: {
@@ -61,6 +62,7 @@ export default {
    methods: {
       getData () {
          getAction('order_desc', {
+            token: store.state.token,
             order_num: this.orderNum
          }).then(res => {
             this.detailData = res.data
@@ -79,7 +81,7 @@ export default {
       }
    },
    onLoad (options) {
-      this.orderNum = options.orderNum
+      this.orderNum = options.orderNum || 'T2021020321351020'
       this.getData()
    }
 }

@@ -43,7 +43,7 @@
          <div class="nums">{{item.buy_num}}</div>
       </div>
    </div>
-   <c-footer btnName="结算|Settlement" :price="allPrice" />
+   <c-footer btnName="结算|Settlement" :price="allPrice" @btnFunc="toPage" />
 </div>
 </template>
 
@@ -90,6 +90,11 @@ export default {
             if (res.status === 0) {
                this.$emit('refresh')
             }
+         })
+      },
+      toPage () {
+         mpvue.navigateTo({
+            url: '/pages/address/main'
          })
       }
    }

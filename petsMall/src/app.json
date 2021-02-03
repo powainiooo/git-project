@@ -1,13 +1,14 @@
 {
    "pages": [
+      "pages/order/list/main",
+      "pages/result/main",
+      "pages/address/main",
       "pages/index/main",
       "pages/goods/detail/main",
       "pages/order/catBoxConfirm/main",
       "pages/catbox/detail/main",
       "pages/order/detail/main",
-      "pages/order/list/main",
       "pages/order/confirm/main",
-      "pages/address/main",
       "pages/goods/list/main",
       "pages/catbox/list/main",
       "pages/logs/main"

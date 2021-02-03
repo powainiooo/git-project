@@ -15,7 +15,8 @@ const store = new Vuex.Store({
       settings: {},
       imgSrc,
       showCart: false,
-      showGoodsDetail: false
+      showGoodsDetail: false,
+      formData: {}
    },
    mutations: {
       SET_TOKEN (state, data) {
@@ -35,6 +36,9 @@ const store = new Vuex.Store({
       },
       SET_GOODSDETAILSTATUS (state, data) {
          state.showGoodsDetail = data
+      },
+      SET_FORMDATA (state, data) {
+         state.formData = data
       }
    }
 })

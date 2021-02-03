@@ -15,7 +15,7 @@ page { background-color: #F3F2F1; }
 <div class="container">
    <c-header title="订单详情|Order details" titleColor="#E8E6E4" />
    <div class="details-container">
-      <c-info-card />
+      <c-info-card :itemData="formData" />
       <div class="status" v-if="false">
          <img src="/static/images/order/success.png" class="success" />
          <span>已完成</span>
@@ -30,7 +30,7 @@ page { background-color: #F3F2F1; }
       </div>
       <div style="position: relative; margin-top: -42rpx;">
          <button class="btn-round btn-call">退款&联系</button>
-         <c-goods-list title="购物清单" titleEn="Shopping list" />
+         <c-goods-list title="购物清单" titleEn="Shopping list" :list="goodsList" />
       </div>
    </div>
 </div>
@@ -40,6 +40,8 @@ page { background-color: #F3F2F1; }
 import cHeader from '@/components/header'
 import cGoodsList from '@/components/goodsList'
 import cInfoCard from '../modules/infoCard'
+import { getAction } from '@/utils/api'
+import { formatDate } from '@/utils'
 
 export default {
    components: {
@@ -49,10 +51,36 @@ export default {
    },
 
    data () {
-      return {}
+      return {
+         orderNum: '',
+         detailData: {},
+         formData: {},
+         goodsList: []
+      }
    },
-
-   created () {
+   methods: {
+      getData () {
+         getAction('order_desc', {
+            order_num: this.orderNum
+         }).then(res => {
+            this.detailData = res.data
+            this.formData = {
+               name: res.data.name,
+               mobile: res.data.mobile,
+               province: res.data.province,
+               city: res.data.city,
+               area: res.data.area,
+               address: res.data.address,
+               orderNum: res.data.order_num,
+               orderTime: formatDate(new Date(res.data.order_time * 1000), 'yyyy/MM/dd HH:mm')
+            }
+            this.goodsList = res.data.desc_list
+         })
+      }
+   },
+   onLoad (options) {
+      this.orderNum = options.orderNum
+      this.getData()
    }
 }
 </script>

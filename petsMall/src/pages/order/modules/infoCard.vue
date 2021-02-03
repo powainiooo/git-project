@@ -14,21 +14,25 @@
 <div class="c-info-card">
    <h3>个人信息</h3>
    <ul class="c-info-card-items borderB">
-      <li>何方</li>
-      <li>18023095011</li>
+      <li>{{itemData.name}}</li>
+      <li>{{itemData.mobile}}</li>
    </ul>
    <h3>收件地址</h3>
    <ul class="c-info-card-items borderB">
-      <li>广东省深圳市宝安区众里创业社区309</li>
+      <li>{{itemData.province}}{{itemData.city}}{{itemData.area}}{{itemData.address}}</li>
    </ul>
+   <template v-if="itemData.orderTime">
    <h3>下单日期</h3>
    <ul class="c-info-card-items borderB">
-      <li>2021/01/18  17:45</li>
+      <li>{{itemData.orderTime}}</li>
    </ul>
+   </template>
+   <template v-if="itemData.orderNum">
    <h3>订单编号</h3>
    <ul class="c-info-card-items borderB">
-      <li>202101181745</li>
+      <li>{{itemData.orderNum}}</li>
    </ul>
+   </template>
    <div v-if="edit">
       <button class="btn-round">编辑地址</button>
    </div>
@@ -37,16 +41,17 @@
 
 <script type='es6'>
 export default {
-  name: 'app',
+   name: 'app',
    props: {
-     edit: {
-        type: Boolean,
-        default: false
-     }
+      edit: {
+         type: Boolean,
+         default: false
+      },
+      itemData: Object
    },
-  data () {
-    return {}
-  },
-  methods: {}
+   data () {
+      return {}
+   },
+   methods: {}
 }
 </script>

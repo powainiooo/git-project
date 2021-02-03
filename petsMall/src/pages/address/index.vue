@@ -18,16 +18,16 @@
    <c-header title="填写收货地址|Add shipping address" titleColor="#E8E6E4" />
    <div class="form">
       <div class="form-item borderB">
-         <input placeholder="姓名" placeholder-class="holder" />
+         <input v-model="name" placeholder="姓名" placeholder-class="holder" />
          <div class="dots"></div>
       </div>
       <div class="form-item borderB">
          <input placeholder="手机号码" class="phone" placeholder-class="phone-holder" />
          <div class="dots"></div>
       </div>
-      <picker mode="region" @change="areaChange" v-model="areas">
+      <picker mode="region" @change="areaChange">
          <div class="form-item borderB form-item-select">
-            <input placeholder="省 / 市 / 区" placeholder-class="holder" />
+            <input placeholder="省 / 市 / 区" placeholder-class="holder" v-model="address" disabled />
             <div class="dots"></div>
          </div>
       </picker>
@@ -36,29 +36,55 @@
          <div class="dots"></div>
       </div>
    </div>
-   <c-footer btnName="下一步|Next" />
+   <c-footer btnName="下一步|Next" @btnFunc="toPage" />
 </div>
 </template>
 
 <script>
 import cHeader from '@/components/header'
 import cFooter from '@/components/footer'
+import store from '../../store'
 
 export default {
    components: {
       cHeader,
       cFooter
    },
-
+   computed: {
+      address () {
+         return this.formData.province === '' ? '' : `${this.formData.province} / ${this.formData.city} / ${this.formData.area}`
+      }
+   },
    data () {
       return {
-         areas: []
+         formData: {
+            name: '',
+            mobile: '',
+            province: '',
+            city: '',
+            area: '',
+            address: ''
+         }
       }
    },
 
    methods: {
       areaChange (e) {
-         console.log('areaChange', e)
+         this.formData.province = e.mp.detail.value[0]
+         this.formData.city = e.mp.detail.value[1]
+         this.formData.area = e.mp.detail.value[2]
+      },
+      toPage () {
+         store.commit('SET_FORMDATA', this.formData)
+         mpvue.navigateTo({
+            url: '/pages/order/confirm/main'
+         })
+      }
+   },
+   onLoad (options) {
+      const status = options.status || 'new'
+      if (status === 'edit') {
+         this.formData = { ...store.state.formData }
       }
    }
 }

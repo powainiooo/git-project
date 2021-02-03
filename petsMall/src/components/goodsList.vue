@@ -35,17 +35,16 @@
       <p>{{title}}</p>
    </div>
    <ul class="c-goods-list-list borderB">
-      <li class="c-goods-item borderB">
-         <div class="imgs" @click="openDetail"><img src="/static/images/img0.png" /></div>
+      <li class="c-goods-item borderB" v-for="item in list" :key="id">
+         <div class="imgs" @click="openDetail"><img :src="item.small_img" /></div>
          <div class="c-goods-item-infos">
-            <p class="en">Ziwipeak® Cat food</p>
-            <p>滋益巅峰</p>
+            <p class="en">{{item.english_name}}</p>
+            <p>{{item.china_name}}</p>
             <ul class="tabs">
-               <li>鸡肉味</li>
-               <li>鸡肉味</li>
+               <li>{{item.type_name}}</li>
             </ul>
          </div>
-         <div class="nums">1份/月</div>
+         <div class="nums">{{item.buy_num}}份/月</div>
       </li>
    </ul>
    <div class="c-goods-price">
@@ -55,6 +54,7 @@
       </div>
       <div class="values">1230<span>元</span></div>
    </div>
+   <template v-if="recommendList.length > 0">
    <div class="c-goods-list-title" style="border-radius: 0;">
       <p class="en">Recommend buy</p>
       <p>推荐选购</p>
@@ -79,6 +79,8 @@
       </div>
       <div class="values">1230<span>元</span></div>
    </div>
+   </template>
+
    <div class="c-goods-price" v-if="shipPrice !== 0">
       <div>
          <p>运费</p>
@@ -98,6 +100,11 @@ export default {
       titleIcon: {
          type: String,
          default: 'claw'
+      },
+      list: Array,
+      recommendList: {
+         type: Array,
+         default: () => []
       }
    },
    data () {

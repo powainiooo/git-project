@@ -11,11 +11,11 @@
 
 <template>
 <div class="c-order-item">
-   <div class="c-order-item-frame">
-      <div class="date borderB">2021/12/16</div>
-      <h3 class="en">Ziwipeak® Cat food</h3>
-      <h3>滋益巅峰® 成猫粮 ...</h3>
-      <text class="nums">共\n6件</text>
+   <div class="c-order-item-frame" @click="toPage">
+      <div class="date borderB">{{date}}</div>
+      <h3 class="en">{{itemData.english_name}}</h3>
+      <h3>{{itemData.china_name}}</h3>
+      <text class="nums">共\n{{itemData.nums}}件</text>
       <div class="status">已完成</div>
    </div>
    <img src="/static/images/order/shadow.png" class="shadow" />
@@ -23,11 +23,27 @@
 </template>
 
 <script type='es6'>
+import { formatDate } from '@/utils'
+
 export default {
 	name: 'app',
+   props: {
+      itemData: Object
+   },
+   computed: {
+	   date () {
+	      return formatDate(new Date(this.itemData.order_time * 1000), 'yyyy/MM/dd')
+      }
+   },
 	data() {
 		return {}
 	},
-	methods: {}
+	methods: {
+      toPage () {
+         mpvue.navigateTo({
+            url: `/pages/order/detail/main?orderNum=${this.itemData.order_num}`
+         })
+      }
+   }
 }
 </script>

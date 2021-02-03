@@ -4,11 +4,14 @@
 .c-footer button span { font-size: 40px; font-family: Helve; }
 .c-footer .price { width: 280px; background-color: #ffffff; display: flex; justify-content: center; align-items: baseline; font-size: 80px; color: var(--textColor2); text-shadow: var(--textShadow); font-family: HelveThin; padding-top: 40px; line-height: 1; }
 .c-footer .price span { font-size: 22px; }
+.c-footer .close { width: 200px; height: 200px; background-color: var(--mainColor); display: flex; justify-content: center; padding-top: 60px; box-sizing: border-box; }
+.c-footer .close img { width: 54px; height: 54px; }
 </style>
 
 <template>
 <div class="c-footer">
    <div class="price" v-if="price !== ''">{{price}}<span>元</span></div>
+   <div class="close" v-if="showClose" @click="close"><img src="/static/images/header/close.png" /></div>
    <button @click="$emit('btnFunc')">{{titleArr[0]}}| {{titleArr[1]}}</button>
 </div>
 </template>
@@ -21,6 +24,10 @@ export default {
       price: {
          type: [String, Number],
          default: ''
+      },
+      showClose: {
+         type: Boolean,
+         default: false
       }
    },
    data () {

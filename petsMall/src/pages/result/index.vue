@@ -2,9 +2,7 @@
 .container { padding: 180px 0 200px 0;}
 .result-frame { height: calc(100vh - 380px); display: flex; flex-direction: column; }
 .result-frame .frame1 { flex: 1; background-color: #ffffff; }
-.result-frame .frame2 { height: 330px; background-color: #EFEDEC; padding: 0 20px 0 66px; }
-.result-frame .frame2 img { margin-top: 40px; margin-bottom: 10px; }
-.result-frame .frame2 p { font-size: 30px; line-height: 45px; color: #A6A5A5; text-shadow: var(--textShadow); }
+.result-frame .frame2 { height: 330px; background-color: #EFEDEC; display: flex; align-items: center; }
 </style>
 
 <template>
@@ -28,8 +26,10 @@
          <p>网络链接失败 或 用户量拥挤等原因，支付出错，请尝试重新支付。</p>
       </div>
       <div class="frame2" v-else>
-         <img src="/static/images/order/tips.png" mode="widthFix" style="width: 70rpx;" />
-         <p>我们将以公众号消息通知形式发送订单进度状态。 (取消关注的用户将无法收取订单进度，请手动 关注 黑耳宠物商城）</p>
+         <div class="tips-content">
+            <img src="/static/images/order/tips.png" mode="widthFix" />
+            <p>我们将以公众号消息通知形式发送订单进度状态。 (取消关注的用户将无法收取订单进度，请手动 关注 黑耳宠物商城）</p>
+         </div>
       </div>
    </div>
    <c-footer showClose :btnName="btnName" @close="handleClose" @btnFunc="btnFunc" />

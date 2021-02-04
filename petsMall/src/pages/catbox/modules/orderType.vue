@@ -1,5 +1,5 @@
 <style>
-.c-order-type-modal { width: 100%; height: 80vh; overflow-y: auto; background-color: #ffffff; border-radius: 15px 15px 0 0; position: fixed; left: 0; bottom: 0; z-index: 1000; padding-bottom: 200px; box-sizing: border-box; }
+.c-order-type-modal { width: 100%; height: 80vh; overflow-y: auto; background-color: #ffffff; border-radius: 15px 15px 0 0; position: fixed; left: 0; bottom: 0; z-index: 1000; padding-bottom: 200px; box-sizing: border-box; transition: bottom .5s cubic-bezier(.23,.78,.33,.97); }
 .c-order-type-modal-title { height: 170px; background-color: var(--mainColor); display: flex; flex-direction: column; justify-content: center; padding-left: 66px; border-radius: 15px 15px 0 0; position: relative; }
 .c-order-type-modal-title p { font-size: 36px; line-height: 50px; color: #ffffff; text-shadow: var(--textShadow); }
 .c-order-type-modal-title p.en { font-size: 40px; margin-bottom: 8px; font-family: HelveThin; }
@@ -23,7 +23,7 @@
 .c-order-type-modal-recommend>h3.en { font-size: 34px; font-family: Helve; line-height: 40px; margin-top: 8px; margin-bottom: 20px; }
 .c-order-type-modal-recommend>p { color: #9B9A9A; font-size: 30px; line-height: 45px; margin-bottom: 20px; }
 
-.c-recommend-list>li { display: flex; height: 278px; align-items: flex-end; margin-bottom: 62px; }
+.c-recommend-list>li { display: flex; height: 278px; align-items: flex-end; margin-bottom: 62px; position: relative; }
 .c-recommend-list li .imgs { width: 278px; height: 220px; border-radius: 28px; background-color: #ffffff; position: relative; margin-right: 32px; }
 .c-recommend-list li .imgs img { width: 278px; height: 278px; position: absolute; left: 0; bottom: 0; }
 .c-recommend-list li .infos h3 { font-size: 30px; color: var(--textColor2); text-shadow: var(--textShadow2); }
@@ -34,14 +34,23 @@
 .c-recommend-list .infos div span { font-size: 66px; }
 .c-recommend-list .infos div.overline { color: #9C9A9B; position: relative; }
 .c-recommend-list .infos div.overline:after { content: ''; width: 130px; height: 1px; background-color: var(--mainColor); position: absolute; top: 50%; left: 0; }
+
+.c-recommend-list .nums { width: 70px; height: 70px; border-radius: 35px; background-color: #ffffff; border: 1px solid #D1CECE; display: flex; align-items: center; box-sizing: border-box; position: absolute; bottom: 0; right: 0; transition: width .4s ease-out; }
+.c-recommend-list .nums span { display: block; width: 60px; font-size: 32px; font-family: Helve; color: var(--textColor2); text-align: center; }
+.c-recommend-list .nums div { width: 100px; height: 100px; position: absolute; top: -15px; right: -15px; transition: transform .4s ease-out; }
+.c-recommend-list .nums img { width: 100%; height: 100%; position: absolute; top: 0; right: 0; }
+.c-recommend-list .nums img:last-child { opacity: 0; transition: opacity .4s ease-out; }
+.c-recommend-list .nums-show { width: 138px; }
+.c-recommend-list .nums-show div { transform: rotateZ(360deg) }
+.c-recommend-list .nums-show img:last-child { opacity: 1; }
 </style>
 
 <template>
-<div class="c-order-type-modal">
+<div class="c-order-type-modal" :style="{bottom: showOrderType ? 0 : '-100vh'}">
    <div class="c-order-type-modal-title">
       <p class="en">Selection Order type</p>
       <p>选择订购类型</p>
-      <img src="/static/images/header/close.png" class="close" />
+      <img src="/static/images/header/close.png" class="close" @click="close" />
    </div>
    <ul class="c-order-type-modal-list">
       <li class="borderB">
@@ -72,6 +81,13 @@
                <div class="overline"><span>30</span>元 / 月</div>
                <div><span>30</span>元 / 月</div>
             </div>
+            <div class="nums" :class="{'nums-show': num > 0}">
+               <span>{{num}}</span>
+               <div @click="toggleNum">
+                  <img src="/static/images/catbox/icon-add.png" />
+                  <img src="/static/images/catbox/icon-reduce.png" />
+               </div>
+            </div>
          </li>
       </ul>
    </div>
@@ -79,11 +95,30 @@
 </template>
 
 <script type='es6'>
+import store from '@/store'
 export default {
-  name: 'app',
-  data () {
-    return {}
-  },
-  methods: {}
+   name: 'app',
+   data () {
+      return {
+         num: 0
+      }
+   },
+   computed: {
+      showOrderType () {
+         return store.state.showOrderType
+      }
+   },
+   methods: {
+      close () {
+         store.commit('SET_ORDERTYPESTATUS', false)
+      },
+      toggleNum () {
+         if (this.num > 0) {
+            this.num = 0
+         } else {
+            this.num = 6
+         }
+      }
+   }
 }
 </script>

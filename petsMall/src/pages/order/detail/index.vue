@@ -16,23 +16,29 @@ page { background-color: #F3F2F1; }
    <c-header title="订单详情|Order details" titleColor="#E8E6E4" />
    <div class="details-container">
       <c-info-card :itemData="formData" />
-      <div class="status" v-if="detailData.status === '7'">
-         <img src="/static/images/order/success.png" class="success" />
-         <span>已完成</span>
-      </div>
-      <div class="status" v-else-if="detailData.status === '7'">
-         <img src="/static/images/order/box.png" class="box" />
-         <button class="btn-round">{{detailData.post_str}}</button>
-      </div>
-      <div class="status" v-else-if="detailData.status === '4'">
-         <img src="/static/images/order/clock.png" class="clock" />
-         <span>待发货</span>
-      </div>
+      <date-mark/>
+      <template>
+         <div class="status" v-if="detailData.status === '7'">
+            <img src="/static/images/order/success.png" class="success" />
+            <span>已完成</span>
+         </div>
+         <div class="status" v-else-if="detailData.status === '7'">
+            <img src="/static/images/order/box.png" class="box" />
+            <button class="btn-round">{{detailData.post_str}}</button>
+         </div>
+         <div class="status" v-else-if="detailData.status === '4'">
+            <img src="/static/images/order/clock.png" class="clock" />
+            <span>待发货</span>
+         </div>
+      </template>
+
       <div style="position: relative; margin-top: -42rpx;">
-         <button class="btn-round btn-call">退款&联系</button>
+         <button class="btn-round btn-call" @click="$refs.refund.show = true">退款&联系</button>
          <c-goods-list title="购物清单" titleEn="Shopping list" :list="goodsList" />
       </div>
    </div>
+
+   <refund-tips ref="refund" />
 </div>
 </template>
 
@@ -40,6 +46,8 @@ page { background-color: #F3F2F1; }
 import cHeader from '@/components/header'
 import cGoodsList from '@/components/goodsList'
 import cInfoCard from '../modules/infoCard'
+import dateMark from '../modules/dateMark'
+import refundTips from '../modules/refundTips'
 import { getAction } from '@/utils/api'
 import { formatDate } from '@/utils'
 import store from '@/store'
@@ -48,7 +56,9 @@ export default {
    components: {
       cHeader,
       cInfoCard,
-      cGoodsList
+      cGoodsList,
+      dateMark,
+      refundTips
    },
 
    data () {

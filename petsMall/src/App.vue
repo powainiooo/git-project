@@ -37,6 +37,16 @@ button:after { border: none;}
 .hint-result img { margin-bottom: 38px; }
 .hint-result h3 { font-size: 60px; color: var(--textColor2); text-shadow: var(--textShadow); line-height: 1; margin-bottom: 30px; }
 .hint-result h3.en { font-size: 66px; font-family: HelveThin; }
+
+.tips-content { padding: 0 20px 0 66px; }
+.tips-content img { width: 70px; margin-bottom: 10px; }
+.tips-content p { font-size: 30px; line-height: 45px; color: #A6A5A5; text-shadow: var(--textShadow); }
+
+.modal-hints { height: 100vh; box-sizing: border-box; position: fixed; top: 0; left: 0; right: 0; z-index: 1000; display: flex; flex-direction: column; overflow-y: auto; transition: top .5s cubic-bezier(.23,.78,.33,.97); }
+.modal-hints .frame1 { flex: 1; background-color: rgba(255, 255, 255, .97); display: flex; align-items: center; }
+.modal-hints .frame2 { width: 100%; height: 200px; background-color: rgba(232, 230, 228, 0.97); display: flex; align-items: center; }
+.modal-hints .frame2 img {  width: 78px; margin-left: 68px; }
+.modal-hints .close { width: 56px; height: 56px; position: absolute; top: 68px; right: 66px; }
 </style>
 
 <script>

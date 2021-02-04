@@ -7,7 +7,7 @@ page { background-color: #F3F2F1; }
 
 <template>
 <div class="container">
-   <div>
+   <div :class="{'blur': showOrderType}">
       <c-header title="猫盒详情|Contents of the cat box" />
       <div class="catbox-detail">
          <img src="/static/images/img1.jpg" mode="widthFix" style="width: 100%;" />
@@ -16,7 +16,7 @@ page { background-color: #F3F2F1; }
          <c-order-type />
       </div>
    </div>
-   <c-footer btnName="我要订购|Order" />
+   <c-footer btnName="我要订购|Order" @btnFunc="openOrderType" />
 
    <c-order-type-modal />
 </div>
@@ -29,6 +29,7 @@ import cGoodsList from '@/components/goodsList'
 import cGoodsDetail from '@/components/goodsDetail'
 import cOrderType from './modules/orderType'
 import cOrderTypeModal from '../modules/orderType'
+import store from '@/store'
 
 export default {
    components: {
@@ -39,11 +40,19 @@ export default {
       cOrderType,
       cOrderTypeModal
    },
-
+   computed: {
+      showOrderType () {
+         return store.state.showOrderType
+      }
+   },
    data () {
       return {}
    },
-
+   methods: {
+      openOrderType () {
+         store.commit('SET_ORDERTYPESTATUS', true)
+      }
+   },
    created () {
    }
 }

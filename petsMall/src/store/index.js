@@ -17,7 +17,13 @@ const store = new Vuex.Store({
       showCart: false,
       showGoodsDetail: false,
       showOrderType: false,
-      formData: {}
+      goodsDetail: {},
+      formData: {},
+      catboxFormData: {
+         group_id: '2',
+         price_id: 1,
+         recom_str: '1-3'
+      }
    },
    mutations: {
       SET_TOKEN (state, data) {
@@ -42,12 +48,17 @@ const store = new Vuex.Store({
       SET_GOODSDETAILSTATUS (state, data) {
          state.showGoodsDetail = data
       },
+      SET_GOODSDETAIL (state, data) {
+         state.goodsDetail = data
+      },
       SET_ORDERTYPESTATUS (state, data) {
          state.showOrderType = data
       },
       SET_FORMDATA (state, data) {
-         console.log('SET_FORMDATA', data)
          state.formData = data
+      },
+      SET_CBFORMDATA (state, data) {
+         state.catboxFormData = data
       }
    }
 })

@@ -22,7 +22,7 @@
          <p>{{itemData.china_name}}</p>
       </div>
       <div class="bottom">
-         <div class="price">{{itemData.pay_price}}<span>元 / 月</span></div>
+         <div class="price">{{itemData.price}}<span>元 / 月</span></div>
          <button class="btn-round" @click="toDetail">立即订购</button>
       </div>
    </div>

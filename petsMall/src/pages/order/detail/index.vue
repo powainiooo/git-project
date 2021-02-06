@@ -15,26 +15,33 @@ page { background-color: #F3F2F1; }
 <div class="container">
    <c-header title="订单详情|Order details" titleColor="#E8E6E4" />
    <div class="details-container">
-      <c-info-card :itemData="formData" />
-      <date-mark/>
-      <template>
-         <div class="status" v-if="detailData.status === '7'">
-            <img src="/static/images/order/success.png" class="success" />
-            <span>已完成</span>
-         </div>
-         <div class="status" v-else-if="detailData.status === '7'">
-            <img src="/static/images/order/box.png" class="box" />
-            <button class="btn-round">{{detailData.post_str}}</button>
-         </div>
-         <div class="status" v-else-if="detailData.status === '4'">
-            <img src="/static/images/order/clock.png" class="clock" />
-            <span>待发货</span>
-         </div>
-      </template>
+      <c-info-card :itemData="formData" v-if="source === 'catbox'" />
+      <date-mark :list="dates"/>
+      <div class="status" v-if="detailData.status === '7'">
+         <img src="/static/images/order/success.png" class="success" />
+         <span>{{statusHash[detailData.status]}}</span>
+      </div>
+      <div class="status" v-else-if="detailData.status === '5'">
+         <img src="/static/images/order/box.png" class="box" />
+         <button class="btn-round">{{detailData.post_str}}</button>
+      </div>
+      <div class="status" v-else-if="detailData.status === '4'">
+         <img src="/static/images/order/clock.png" class="clock" />
+         <span>{{statusHash[detailData.status]}}</span>
+      </div>
+      <div class="status" v-else>
+         <span>{{statusHash[detailData.status]}}</span>
+      </div>
 
       <div style="position: relative; margin-top: -42rpx;">
          <button class="btn-round btn-call" @click="$refs.refund.show = true">退款&联系</button>
-         <c-goods-list title="购物清单" titleEn="Shopping list" :list="goodsList" />
+         <c-goods-list
+            :source="source"
+            :title="title"
+            :titleEn="titleEn"
+            :list="goodsList"
+            :recommendList="recList"
+            onlyList />
       </div>
    </div>
 
@@ -63,10 +70,23 @@ export default {
 
    data () {
       return {
+         source: '',
          orderNum: '',
+         title: '',
+         titleEn: '',
          detailData: {},
          formData: {},
-         goodsList: []
+         goodsList: [],
+         dates: [],
+         statusHash: {
+            '1': '待付款',
+            '2': '申请退款',
+            '3': '已退款',
+            '4': '已付款',
+            '5': '开始使用',
+            '6': '已取消',
+            '7': '已完成'
+         }
       }
    },
    methods: {
@@ -88,11 +108,42 @@ export default {
             }
             this.goodsList = res.data.desc_list
          })
+      },
+      getCatboxData () {
+         getAction('group_order_desc', {
+            token: store.state.token,
+            order_num: this.orderNum
+         }).then(res => {
+            this.detailData = res.data
+            this.formData = {
+               name: res.data.name,
+               mobile: res.data.mobile,
+               province: res.data.province,
+               city: res.data.city,
+               area: res.data.area,
+               address: res.data.address,
+               day: res.data.day,
+               orderNum: res.data.order_num,
+               orderTime: formatDate(new Date(res.data.order_time * 1000), 'yyyy/MM/dd HH:mm')
+            }
+            this.goodsList = res.data.product_list
+            this.recList = res.data.recom_list
+            this.dates = res.data.months
+            this.title = res.data.title
+            this.titleEn = res.data.english_name
+         })
       }
    },
    onLoad (options) {
-      this.orderNum = options.orderNum || 'T2021020321351020'
-      this.getData()
+      this.orderNum = options.orderNum || 'T2021020621401003'
+      this.source = options.source || 'catbox'
+      if (this.source === 'goods') {
+         this.title = '购物清单'
+         this.titleEn = 'Shopping list'
+         this.getData()
+      } else {
+         this.getCatboxData()
+      }
    }
 }
 </script>

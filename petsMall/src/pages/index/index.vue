@@ -59,12 +59,10 @@ export default {
       this.getGoods()
    },
    methods: {
-      getCatBox () {
-         // getAction('')
-      },
       getGoods () {
-         getAction('recommend_product').then(res => {
-            this.goodsList = res.data
+         getAction('index_recommend').then(res => {
+            this.goodsList = res.data.product_list
+            this.catBoxList = res.data.group_list
          })
       }
    }

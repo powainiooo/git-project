@@ -57,11 +57,11 @@
          </div>
          <div class="intros">
             <h3>适用对象:</h3>
-            <p>{{detailData.apply}}</p>
+            <p><text>{{detailData.apply}}</text></p>
             <h3>营养成分:</h3>
-            <p>{{detailData.nutritional}}</p>
+            <p><text>{{detailData.nutritional}}</text></p>
             <h3>主要成分:</h3>
-            <p>{{detailData.mainly}}</p>
+            <p><text>{{detailData.mainly}}</text></p>
          </div>
       </div>
 
@@ -141,6 +141,7 @@ export default {
             this.isAjax = false
             if (res.status === 0) {
                this.getCart()
+               mpvue.showToast({ title: res.msg })
             }
          })
       },

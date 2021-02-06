@@ -16,19 +16,17 @@
 <template>
 <div class="c-goods-detail" :style="{top: showGoodsDetail ? 0 : '100vh'}">
    <div class="c-goods-detail-infos">
-      <h3 class="en">Ziwipeak® </h3>
-      <h3>滋益巅峰® </h3>
+      <h3 class="en">{{detailData.english_name}} </h3>
+      <h3>{{detailData.china_name}} </h3>
       <div>种类 / 规格：</div>
-      <p>鸡肉味、400g</p>
+      <p>{{detailData.attr_name}}、{{detailData.specs}}</p>
       <div>适用对象：</div>
-      <p>全猫</p>
+      <p><text>{{detailData.apply}}</text></p>
       <div>营养成分：</div>
-      <p>粗蛋白≥36%   粗脂肪≤35%   粗纤维≥2%   水分≤14%   粗灰分≤8%</p>
+      <p><text>{{detailData.mainly}}</text></p>
       <div>主要成分：</div>
-      <p>鸡肉、鸡内脏（鸡肝、鸡心）、鸡骨、新西兰青口贝、菊粉、
-         矿物质、干海带、海盐、欧芹、维生素（维生素E补充剂、维生素B1
-         补充剂、维生素D3补充剂、叶酸）</p>
-      <img src="/static/images/img2.png" mode="widthFix" />
+      <p><text>{{detailData.nutritional}}</text></p>
+      <img :src="detailData.product_img" mode="widthFix" />
    </div>
    <div class="c-goods-detail-logo">
       <img src="/static/images/header/logo@2x.png" mode="widthFix" />
@@ -47,6 +45,9 @@ export default {
    computed: {
       showGoodsDetail () {
          return store.state.showGoodsDetail
+      },
+      detailData () {
+         return store.state.goodsDetail
       }
    },
    watch: {

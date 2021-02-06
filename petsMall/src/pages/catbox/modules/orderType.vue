@@ -1,5 +1,5 @@
 <style>
-.c-order-type-modal { width: 100%; height: 80vh; overflow-y: auto; background-color: #ffffff; border-radius: 15px 15px 0 0; position: fixed; left: 0; bottom: 0; z-index: 1000; padding-bottom: 200px; box-sizing: border-box; transition: bottom .5s cubic-bezier(.23,.78,.33,.97); }
+.c-order-type-modal { width: 100%; height: 80vh; overflow-y: auto; background-color: #ffffff; border-radius: 15px 15px 0 0; position: fixed; left: 0; bottom: 0; z-index: 1300; padding-bottom: 200px; box-sizing: border-box; transition: bottom .5s cubic-bezier(.23,.78,.33,.97); }
 .c-order-type-modal-title { height: 170px; background-color: var(--mainColor); display: flex; flex-direction: column; justify-content: center; padding-left: 66px; border-radius: 15px 15px 0 0; position: relative; }
 .c-order-type-modal-title p { font-size: 36px; line-height: 50px; color: #ffffff; text-shadow: var(--textShadow); }
 .c-order-type-modal-title p.en { font-size: 40px; margin-bottom: 8px; font-family: HelveThin; }
@@ -33,7 +33,7 @@
 .c-recommend-list .infos div { font-size: 20px; color: var(--textColor2); text-shadow: var(--textShadow2); line-height: 1; font-family: HelveThin; }
 .c-recommend-list .infos div span { font-size: 66px; }
 .c-recommend-list .infos div.overline { color: #9C9A9B; position: relative; }
-.c-recommend-list .infos div.overline:after { content: ''; width: 130px; height: 1px; background-color: var(--mainColor); position: absolute; top: 50%; left: 0; }
+.c-recommend-list .infos div.overline:after { content: ''; width: 130px; height: 2px; background-color: var(--mainColor); position: absolute; top: 50%; left: 0; }
 
 .c-recommend-list .nums { width: 70px; height: 70px; border-radius: 35px; background-color: #ffffff; border: 1px solid #D1CECE; display: flex; align-items: center; box-sizing: border-box; position: absolute; bottom: 0; right: 0; transition: width .4s ease-out; }
 .c-recommend-list .nums span { display: block; width: 60px; font-size: 32px; font-family: Helve; color: var(--textColor2); text-align: center; }
@@ -53,15 +53,16 @@
       <img src="/static/images/header/close.png" class="close" @click="close" />
    </div>
    <ul class="c-order-type-modal-list">
-      <li class="borderB">
+      <li class="borderB" v-for="(item, index) in list" :key="index">
          <div>
             <div>
-               <p>订购一个月</p>
-               <div><span>320</span>元</div>
+               <p>订购{{item.name}}</p>
+               <div><span>{{item.old_price}}</span>元</div>
             </div>
-            <p><span>280</span>元</p>
+            <p><span>{{item.pay_price}}</span>元</p>
          </div>
-         <img src="/static/images/catbox/radio.png" class="radio" />
+         <img src="/static/images/catbox/radio.png" class="radio" v-if="index !== priceId" @click="selectType(index, item.nums)" />
+         <img src="/static/images/catbox/radio-select.png" class="radio" v-else />
       </li>
    </ul>
    <div class="c-order-type-modal-recommend">
@@ -70,20 +71,20 @@
       <p><text>推荐选购产品将加入每月订购猫盒中，固定\n订购量为当前选中猫盒订购月数。</text></p>
 
       <ul class="c-recommend-list">
-         <li>
-            <div class="imgs"><img src="/static/images/img3.png" /></div>
+         <li v-for="(item, index) in recList" :key="id">
+            <div class="imgs"><img :src="item.small_img" /></div>
             <div class="infos">
-               <h3>鸡胸肉馅饺子 + 高汤</h3>
+               <h3>{{item.china_name}}</h3>
                <ul>
-                  <li>鸡肉味</li>
-                  <li>鸡肉味</li>
+                  <li>{{item.name}}</li>
+                  <li>{{item.specs}}</li>
                </ul>
-               <div class="overline"><span>30</span>元 / 月</div>
-               <div><span>30</span>元 / 月</div>
+               <div class="overline"><span>{{item.old_price}}</span>元 / 月</div>
+               <div><span>{{item.pay_price}}</span>元 / 月</div>
             </div>
-            <div class="nums" :class="{'nums-show': num > 0}">
-               <span>{{num}}</span>
-               <div @click="toggleNum">
+            <div class="nums" :class="{'nums-show': item.selected}">
+               <span>{{nums}}</span>
+               <div @click="item.selected = !item.selected">
                   <img src="/static/images/catbox/icon-add.png" />
                   <img src="/static/images/catbox/icon-reduce.png" />
                </div>
@@ -91,33 +92,72 @@
          </li>
       </ul>
    </div>
+   <c-footer btnName="下一步|Next" @btnFunc="stepNext" v-if="showOrderType" :price="totalPrice" />
 </div>
 </template>
 
 <script type='es6'>
 import store from '@/store'
+import { getAction } from '@/utils/api'
+import cFooter from '@/components/footer'
 export default {
    name: 'app',
+   components: {cFooter},
+   props: {
+      list: Array,
+      groupId: [String, Number]
+   },
    data () {
       return {
-         num: 0
+         nums: 0,
+         priceId: 0,
+         recList: []
       }
    },
    computed: {
       showOrderType () {
          return store.state.showOrderType
+      },
+      totalPrice () {
+         const typePrice = Number(this.list[this.priceId].pay_price)
+         const recPrice = this.recList.reduce((total, item) => {
+            return total += item.selected ? Number(item.pay_price) * this.nums : 0
+         }, 0)
+         return typePrice + recPrice
+      }
+   },
+   watch: {
+      showOrderType (val) {
+         if (val) {
+            this.getRecData()
+            this.nums = this.list[this.priceId].nums
+         }
       }
    },
    methods: {
+      getRecData () {
+         getAction('recommend_product').then(res => {
+            res.data.forEach(i => i.selected = false)
+            this.recList = res.data
+         })
+      },
       close () {
          store.commit('SET_ORDERTYPESTATUS', false)
       },
-      toggleNum () {
-         if (this.num > 0) {
-            this.num = 0
-         } else {
-            this.num = 6
+      selectType (id, nums) {
+         this.priceId = id
+         this.nums = parseInt(nums)
+      },
+      stepNext () {
+         const params = {
+            group_id: this.groupId,
+            price_id: this.priceId,
+            recom_str: this.recList.filter(i => i.selected).map(i => `${i.id}-${this.nums}`).join('|')
          }
+         store.commit('SET_CBFORMDATA', params)
+         mpvue.navigateTo({
+            url: '/pages/address/main?status=new&source=catbox'
+         })
       }
    }
 }

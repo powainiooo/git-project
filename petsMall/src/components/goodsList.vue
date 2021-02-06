@@ -36,52 +36,60 @@
    </div>
    <ul class="c-goods-list-list borderB">
       <li class="c-goods-item borderB" v-for="item in list" :key="id">
-         <div class="imgs" @click="openDetail"><img :src="item.small_img" /></div>
+         <div class="imgs" @click="openDetail(item)"><img :src="item.small_img" /></div>
          <div class="c-goods-item-infos">
             <p class="en">{{item.english_name}}</p>
             <p>{{item.china_name}}</p>
-            <ul class="tabs">
+            <ul class="tabs" v-if="source === 'goods'">
                <li>{{item.type_name}}</li>
             </ul>
+            <ul class="tabs" v-else-if="source === 'catbox'">
+               <li>{{item.attr_name}}</li>
+               <li>{{item.specs}}</li>
+            </ul>
          </div>
-         <div class="nums">{{item.buy_num}}份/月</div>
+         <div class="nums" v-if="source === 'goods'">{{item.buy_num}}份/月</div>
+         <div class="nums" v-else-if="source === 'catbox'">1份/月</div>
       </li>
    </ul>
-   <template v-if="recommendList.length > 0">
-   <div class="c-goods-price">
+   <template v-if="recommendList.length > 0 && source === 'catbox'">
+   <div class="c-goods-price" v-if="!onlyList">
       <div>
-         <p>订购六个月</p>
-         <div class="overline"><span>1920</span>元</div>
+         <p>订购{{orderType.name}}</p>
+         <div class="overline"><span>{{orderType.old_price}}</span>元</div>
       </div>
-      <div class="values">1230<span>元</span></div>
+      <div class="values">{{orderType.pay_price}}<span>元</span></div>
    </div>
    <div class="c-goods-list-title" style="border-radius: 0;">
       <p class="en">Recommend buy</p>
       <p>推荐选购</p>
    </div>
-   <ul class="c-goods-list-list borderB">
-      <li class="c-goods-item borderB">
-         <div class="imgs" @click="openDetail"><img src="/static/images/img0.png" /></div>
-         <div class="c-goods-item-infos">
-            <p>滋益巅峰</p>
-            <ul class="tabs">
-               <li>鸡肉味</li>
-               <li>鸡肉味</li>
-            </ul>
+   <div v-for="item in recommendList" :key="id">
+      <ul class="c-goods-list-list borderB">
+         <li class="c-goods-item borderB">
+            <div class="imgs"><img :src="item.small_img" /></div>
+            <div class="c-goods-item-infos">
+               <p>{{item.china_name}}</p>
+               <ul class="tabs">
+                  <li>{{item.name}}</li>
+                  <li>{{item.specs}}</li>
+               </ul>
+            </div>
+            <div class="nums">1份/月</div>
+         </li>
+      </ul>
+      <div class="c-goods-price" v-if="!onlyList">
+         <div>
+            <p>订购{{orderType.name}}</p>
+            <div><span>{{item.pay_price}}</span>元/月</div>
          </div>
-         <div class="nums">1份/月</div>
-      </li>
-   </ul>
-   <div class="c-goods-price">
-      <div>
-         <p>订购六个月</p>
-         <div><span>1920</span>元</div>
+         <div class="values">{{item.pay_price * orderType.nums}}<span>元</span></div>
       </div>
-      <div class="values">1230<span>元</span></div>
    </div>
+
    </template>
 
-   <div class="c-goods-price" v-if="shipPrice !== 0">
+   <div class="c-goods-price" v-if="shipPrice !== ''">
       <div>
          <p>运费</p>
       </div>
@@ -101,20 +109,42 @@ export default {
          type: String,
          default: 'claw'
       },
+      source: {
+         type: String,
+         default: 'goods'
+      },
       list: Array,
       recommendList: {
          type: Array,
          default: () => []
+      },
+      showDetail: {
+         type: Boolean,
+         default: false
+      },
+      onlyList: {
+         type: Boolean,
+         default: false
+      },
+      orderType: {
+         type: Object,
+         default: () => {}
+      },
+      shipPrice: {
+         type: [String, Number],
+         default: ''
       }
    },
    data () {
-      return {
-         shipPrice: 0
-      }
+      return {}
    },
    methods: {
-      openDetail () {
-         store.commit('SET_GOODSDETAILSTATUS', true)
+      openDetail (data) {
+         console.log('openDetail', this.showDetail)
+         if (this.showDetail) {
+            store.commit('SET_GOODSDETAILSTATUS', true)
+            store.commit('SET_GOODSDETAIL', data)
+         }
       }
    }
 }

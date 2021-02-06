@@ -73,7 +73,7 @@ export default {
          return this.formData.province === '' ? '' : `${this.formData.province} / ${this.formData.city} / ${this.formData.area}`
       },
       timeStr () {
-         return this.formData.time === '' ? '' : `每月${this.formData.time}号`
+         return this.formData.day === '' ? '' : `每月${this.formData.day}号`
       },
       btnName () {
          return this.status === 'new' ? '下一步|Next' : '保存|Save'
@@ -90,7 +90,7 @@ export default {
             city: '',
             area: '',
             address: '',
-            time: ''
+            day: ''
          },
          datesList: []
       }
@@ -107,7 +107,8 @@ export default {
          this.formData.area = e.mp.detail.value[2]
       },
       dateChange (e) {
-         this.formData.time = this.datesList[e.mp.detail.value]
+         this.formData.day = this.datesList[e.mp.detail.value]
+         console.log('this.formData.day', this.formData.day)
       },
       toPage () {
          store.commit('SET_FORMDATA', this.formData)
@@ -130,7 +131,7 @@ export default {
    },
    onLoad (options) {
       this.status = options.status || 'new'
-      this.source = options.status || 'catbox'
+      this.source = options.source || 'catbox'
       if (this.status === 'edit') {
          this.formData = { ...store.state.formData }
       } else {

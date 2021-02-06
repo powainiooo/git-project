@@ -6,19 +6,27 @@ page { background-color: #F3F2F1; }
 </style>
 
 <template>
-<div class="container">
-   <div :class="{'blur': showOrderType}">
+<div>
+   <div class="container" :class="{'blur': showOrderType}">
       <c-header title="猫盒详情|Contents of the cat box" />
       <div class="catbox-detail">
-         <img src="/static/images/img1.jpg" mode="widthFix" style="width: 100%;" />
-         <c-goods-list title="滋益巅峰® 猫盒套餐" titleEn="Ziwipeak® Cat box" titleIcon="cat" />
-         <c-goods-detail />
-         <c-order-type />
+         <img :src="detailData.cover" mode="widthFix" style="width: 100%;" />
+         <c-goods-list
+            showDetail
+            source="catbox"
+            :title="detailData.china_name"
+            titleEn="detailData.english_name"
+            titleIcon="cat"
+            :list="detailData.productlist"/>
+         <c-order-type :list="detailData.pricelist" />
       </div>
    </div>
+
+   <c-goods-detail />
+
    <c-footer btnName="我要订购|Order" @btnFunc="openOrderType" />
 
-   <c-order-type-modal />
+   <c-order-type-modal :list="detailData.pricelist" :groupId="detailData.id" />
 </div>
 </template>
 
@@ -30,6 +38,7 @@ import cGoodsDetail from '@/components/goodsDetail'
 import cOrderType from './modules/orderType'
 import cOrderTypeModal from '../modules/orderType'
 import store from '@/store'
+import { getAction } from '@/utils/api'
 
 export default {
    components: {
@@ -46,14 +55,28 @@ export default {
       }
    },
    data () {
-      return {}
+      return {
+         id: '',
+         detailData: {}
+      }
    },
    methods: {
       openOrderType () {
          store.commit('SET_ORDERTYPESTATUS', true)
+      },
+      getData () {
+         mpvue.showLoading()
+         getAction('group_info', {
+            id: this.id
+         }).then(res => {
+            mpvue.hideLoading()
+            this.detailData = res.data
+         })
       }
    },
-   created () {
+   onLoad (options) {
+      this.id = options.id || '2'
+      this.getData()
    }
 }
 </script>

@@ -21,6 +21,12 @@
    <ul class="c-info-card-items borderB">
       <li>{{itemData.province}}{{itemData.city}}{{itemData.area}}{{itemData.address}}</li>
    </ul>
+   <template v-if="itemData.day">
+   <h3>配送日期</h3>
+   <ul class="c-info-card-items borderB">
+      <li>每月{{itemData.day}}号</li>
+   </ul>
+   </template>
    <template v-if="itemData.orderTime">
    <h3>下单日期</h3>
    <ul class="c-info-card-items borderB">

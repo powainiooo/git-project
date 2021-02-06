@@ -9,16 +9,22 @@ page { background-color: #F3F2F1; }
 .footer-btn .arrow { width: 80px; height: 80px; margin-left: 110px; }
 .footer-btn div p { font-size: 30px; color: #372C1E; text-shadow: var(--textShadow); }
 .footer-btn div p.en { font-size: 34px; font-family: HelveThin; }
+
+.hint { font-size: 24px; color: #9B9A9A; text-align: center; margin: 50px; }
 </style>
 
 <template>
 <div class="container">
    <c-header title="选择猫盒|Selection cat box" />
    <div class="list-container">
-      <c-list-item />
-      <c-list-item />
-      <c-list-item />
-      <c-list-item />
+      <c-list-item v-for="item in listData" :key="id" :itemData="item" />
+   </div>
+   <div class="hint" v-if="loadOver">没有更多了</div>
+
+   <div class="hint-result" v-if="listData.length === 0">
+      <img src="/static/images/goods/warn.png" mode="widthFix" style="width: 71rpx;" />
+      <h3 class="en">No related content</h3>
+      <h3>无相关内容！</h3>
    </div>
 
    <a href="#" class="footer-btn">
@@ -35,18 +41,51 @@ page { background-color: #F3F2F1; }
 <script>
 import cHeader from '@/components/header'
 import cListItem from './modules/listItem'
+import { getAction } from '@/utils/api'
 
 export default {
    components: {
       cHeader,
       cListItem
    },
-
-   data () {
-      return {}
+   computed: {
+      loadOver () {
+         return this.total === this.listData.length
+      }
    },
-
-   created () {
+   data () {
+      return {
+         listData: [],
+         total: 0,
+         pageNo: 1
+      }
+   },
+   methods: {
+      getData () {
+         mpvue.showLoading()
+         getAction('group_list', {
+            word: '',
+            page: this.pageNo
+         }).then(res => {
+            mpvue.hideLoading()
+            this.total = parseInt(res.data.nums)
+            this.listData = this.listData.concat(res.data.list)
+            console.log('this.listData', this.listData)
+         })
+      },
+      reset () {
+         this.pageNo = 1
+         this.listData = []
+         this.getData()
+      }
+   },
+   onShow () {
+      this.reset()
+   },
+   onReachBottom () {
+      if (this.loadOver) return
+      this.page += 1
+      this.getData()
    }
 }
 </script>

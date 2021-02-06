@@ -14,9 +14,9 @@
    <div class="c-order-item-frame" @click="toPage">
       <div class="date borderB">{{date}}</div>
       <h3 class="en">{{itemData.english_name}}</h3>
-      <h3>{{itemData.china_name}}</h3>
+      <h3>{{itemData.title}}</h3>
       <text class="nums">共\n{{itemData.nums}}件</text>
-      <div class="status">已完成</div>
+      <div class="status" v-if="itemData.status === '7'">已完成</div>
    </div>
    <img src="/static/images/order/shadow.png" class="shadow" />
 </div>

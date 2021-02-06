@@ -19,8 +19,8 @@ page { background-color: #F3F2F1; }
    </div>
    <div class="hint" v-if="loadOver">没有更多了</div>
    <div class="footer-btn">
-      <button>已订购猫盒</button>
-      <button class="active">已订购产品</button>
+      <button :class="{'active': type === 'catbox'}" @click="toggle('catbox')">已订购猫盒</button>
+      <button :class="{'active': type === 'goods'}" @click="toggle('goods')">已订购产品</button>
    </div>
 </div>
 </template>
@@ -50,12 +50,14 @@ export default {
       return {
          pageNo: 1,
          total: 0,
+         type: 'goods',
          listData: []
       }
    },
    methods: {
       getData () {
-         getAction('user_order', {
+         const url = this.type === 'goods' ? 'user_order' : 'group_order_list'
+         getAction(url, {
             token: store.state.token,
             page: this.pageNo
          }).then(res => {
@@ -67,6 +69,10 @@ export default {
          this.pageNo = 1
          this.listData = []
          this.getData()
+      },
+      toggle (type) {
+         this.type = type
+         this.reset()
       }
    },
    onReachBottom () {

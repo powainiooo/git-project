@@ -1,5 +1,8 @@
 {
    "pages": [
+      "pages/catbox/mine/main",
+      "pages/catbox/select/main",
+      "pages/catbox/diy/main",
       "pages/index/main",
       "pages/order/list/main",
       "pages/order/detail/main",

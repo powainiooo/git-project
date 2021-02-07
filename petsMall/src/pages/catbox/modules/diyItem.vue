@@ -17,16 +17,16 @@
 
 <template>
 <div class="c-diy-item borderB" @click="$emit('click', itemData)">
-   <img src="/static/images/img4.png" class="img" />
+   <img :src="itemData.cover" class="img" />
    <div>
-      <h3 class="en">ACANA® Cat food</h3>
-      <h3>爱肯拿® 成猫粮</h3>
+      <h3 class="en">{{itemData.english_name}}</h3>
+      <h3>{{itemData.china_name}}</h3>
       <ul>
-         <li>鱼肉味</li>
-         <li>400g</li>
+         <li>{{itemData.name}}</li>
+         <li>{{itemData.specs}}</li>
       </ul>
-      <p v-if="source === 'diy'">主要成分：鸡肉、鸡内脏（鸡肝、鸡心）、</p>
-      <div><span>78</span>元</div>
+      <p v-if="source === 'diy'">主要成分：{{itemData.mainly}}</p>
+      <div><span>{{itemData.price}}</span>元</div>
    </div>
    <img src="/static/images/catbox/radio.png" class="radio" v-if="source === 'diy'" />
    <div class="title" v-if="title !== ''">

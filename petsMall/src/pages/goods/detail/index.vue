@@ -1,22 +1,12 @@
 <style>
 .container { padding-top: 300px; padding-bottom: 200px;}
-.details { margin: 0 40px;}
+.goods-details { margin: 0 40px;}
 .infos { padding: 32px 26px; display: flex; justify-content: space-between; align-items: center; }
 .infos .name p { color: var(--textColor2); text-shadow: var(--textShadow); font-size: 30px; }
 .infos .name p.en { font-size: 34px; font-family: HelveThin; }
 .infos .price { font-size: 66px; color: var(--textColor2); text-shadow: var(--textShadow); font-family: HelveThin; }
 .infos .price span { font-size: 22px; }
 
-.catalog { padding: 32px 26px 10px 26px;}
-.catalog h3 { font-size: 22px; color: #A6A5A5; margin-bottom: 10px; }
-.catalog ul { display: flex; flex-wrap: nowrap; }
-.catalog ul li { min-width: 110px; height: 70px; line-height: 70px; border-radius: 35px; border: 1px solid var(--mainColor); text-shadow: var(--textShadow); font-size: 20px; color: var(--textColor); padding: 0 10px; display: flex; justify-content: center; align-items: center; margin-right: 22px; margin-bottom: 22px;}
-.catalog ul li.active { background-color: var(--mainColor); color: #ffffff; }
-.catalog ul li.diabled { background-color: #E8E6E4; color: #A6A5A5; border-color: #E8E6E4; }
-
-.intros { padding: 32px 26px; }
-.intros h3 { font-size: 30px; color: var(--textColor); text-shadow: var(--textShadow); margin-bottom: 16px; }
-.intros p { font-size: 22px; color: #A6A5A5; line-height: 32px; margin-bottom: 38px; }
 </style>
 
 <template>
@@ -24,7 +14,7 @@
    <div class="container" :class="{'blur': showCart}">
       <c-header title="主粮|Staple food" titleColor="#E8E6E4" cartBtn :cartNums="cartList.length" />
       <c-banner :list="bannerList" />
-      <div class="details">
+      <div class="goods-details">
          <div class="infos borderB">
             <div class="name">
                <p class="en">{{detailData.english_name}}</p>

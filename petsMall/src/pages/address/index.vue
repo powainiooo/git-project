@@ -46,7 +46,7 @@
             </div>
          </picker>
       </div>
-      <div class="frame2" v-if="source === 'catbox'">
+      <div class="frame2" v-if="source === 'catbox' || source === 'diy'">
          <div class="tips-content">
             <img src="/static/images/order/tips.png" mode="widthFix" />
             <p><text>“每月配送日期”用于多期猫盒订购使用，\n猫盒第一盒48小时发货，剩余猫盒每月将按选定日期送达。</text></p>

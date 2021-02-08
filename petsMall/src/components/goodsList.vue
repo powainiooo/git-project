@@ -43,7 +43,7 @@
             <ul class="tabs" v-if="source === 'goods'">
                <li>{{item.type_name}}</li>
             </ul>
-            <ul class="tabs" v-else-if="source === 'catbox'">
+            <ul class="tabs" v-else-if="source === 'catbox' || source === 'diy'">
                <li>{{item.attr_name}}</li>
                <li>{{item.specs}}</li>
             </ul>
@@ -52,7 +52,7 @@
          <div class="nums" v-else-if="source === 'catbox'">1份/月</div>
       </li>
    </ul>
-   <template v-if="recommendList.length > 0 && source === 'catbox'">
+   <template v-if="recommendList.length > 0 && (source === 'catbox' || source === 'diy')">
    <div class="c-goods-price" v-if="!onlyList">
       <div>
          <p>订购{{orderType.name}}</p>

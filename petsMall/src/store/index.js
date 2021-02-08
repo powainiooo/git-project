@@ -23,7 +23,8 @@ const store = new Vuex.Store({
          group_id: '2',
          price_id: 1,
          recom_str: '1-3'
-      }
+      },
+      diyGoodsList: []
    },
    mutations: {
       SET_TOKEN (state, data) {
@@ -59,6 +60,9 @@ const store = new Vuex.Store({
       },
       SET_CBFORMDATA (state, data) {
          state.catboxFormData = data
+      },
+      SET_DIYGOODSLIST (state, data) {
+         state.diyGoodsList = data
       }
    }
 })

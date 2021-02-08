@@ -9,29 +9,69 @@
 <template>
 <div class="container">
    <c-header title="自定义猫盒套餐|Customized cat box" titleColor="#E8E6E4" />
-   <diy-step :step="step" />
-   <div class="list-frame">
-      <ul :style="{'transform': 'translateX(' + (-step * 100) + 'vw)'}">
-         <li>
-            <diy-item v-for="item in listData" :key="id" :itemData="item" />
-         </li>
-         <li>
-            <diy-item />
-         </li>
-         <li>
-            <diy-item />
-            <diy-item />
-         </li>
-         <li>
-            <diy-item />
-            <diy-item />
-         </li>
-      </ul>
+   <div>
+      <diy-step :step="step" />
+      <div class="list-frame">
+         <ul :style="{'transform': 'translateX(' + (-step * 100) + 'vw)'}">
+            <li>
+               <diy-item
+                  v-for="item in listData"
+                  :key="id"
+                  :itemData="item"
+                  :showArrow="selectedArr[0]"
+                  @click="openDetail" />
+            </li>
+            <li>
+               <diy-item
+                  v-for="item in listData"
+                  :key="id"
+                  :itemData="item"
+                  :showArrow="selectedArr[1]"
+                  @click="openDetail" />
+            </li>
+            <li>
+               <diy-item
+                  v-for="item in listData"
+                  :key="id"
+                  :itemData="item"
+                  :showArrow="selectedArr[2]"
+                  @click="openDetail" />
+            </li>
+            <li>
+               <div class="c-diy-item borderB" @click="needToy = 1">
+                  <img src="/static/images/catbox/toy-yes.png" class="img" />
+                  <div class="infos">
+                     <div>
+                        <h3 class="en">Hot toys</h3>
+                        <h3>当月精选玩具</h3>
+                     </div>
+                     <div><span>{{toyPrice}}</span>元</div>
+                  </div>
+                  <img src="/static/images/catbox/radio-select.png" class="radio-select" v-if="needToy === 1" />
+                  <img src="/static/images/catbox/radio.png" class="radio" v-else />
+               </div>
+               <div class="c-diy-item borderB" @click="needToy = 0">
+                  <img src="/static/images/catbox/toy-no.png" class="img" />
+                  <div class="infos">
+                     <div>
+                        <h3 class="en">Don't need toys</h3>
+                        <h3>不需要玩具</h3>
+                     </div>
+                     <div><span>0</span>元</div>
+                  </div>
+                  <img src="/static/images/catbox/radio-select.png" class="radio-select" v-if="needToy === 0" />
+                  <img src="/static/images/catbox/radio.png" class="radio" v-else />
+               </div>
+            </li>
+         </ul>
+      </div>
+      <div class="hint" v-if="loadOver">没有更多了</div>
    </div>
-   <div class="hint" v-if="loadOver">没有更多了</div>
-   <c-footer btnName="下一步|Next" :price="totalProce" @btnFunc="changeStep" />
+   <c-footer :btnName="btnName" :price="totalProce" @btnFunc="changeStep" />
 
-<!--   <c-order-type :list="detailData.pricelist" :groupId="detailData.id" />-->
+   <select-type ref="details" @selected="goodsSelect" @close="btnName = '下一步|Next'" />
+
+   <c-order-type :list="typeList" source="diy" :extraFd="formData" />
 </div>
 </template>
 
@@ -41,6 +81,7 @@ import cFooter from '@/components/footer'
 import diyStep from '../modules/diyStep'
 import diyItem from '../modules/diyItem'
 import cOrderType from '../modules/orderType'
+import selectType from '../modules/selectType'
 import { getAction } from '@/utils/api'
 
 export default {
@@ -49,14 +90,29 @@ export default {
       cFooter,
       diyStep,
       diyItem,
-      cOrderType
+      cOrderType,
+      selectType
    },
    computed: {
       loadOver () {
          return this.total === this.listData.length
       },
       totalProce () {
-         return 0
+         return this.priceArr.reduce((total, i) => total + Number(i), 0) + this.needToy === 1 ? this.toyPrice : 0
+      },
+      typeList () {
+         return [
+            { name: '一个月', nums: 1, pay_price: this.totalProce },
+            { name: '三个月', nums: 3, pay_price: this.totalProce },
+            { name: '六个月', nums: 6, pay_price: this.totalProce },
+            { name: '十二个月', nums: 12, pay_price: this.totalProce }
+         ]
+      },
+      formData () {
+         return {
+            pro_str: this.selectedArr.join('|'),
+            toy: this.needToy
+         }
       }
    },
    data () {
@@ -64,15 +120,26 @@ export default {
          step: 0,
          pageNo: 0,
          listData: [],
-         total: 0
+         total: 0,
+         selectedArr: [],
+         priceArr: [],
+         btnName: '下一步|Next',
+         toyPrice: 10,
+         needToy: 0,
+         tempRecord: {},
+         goodsList: []
       }
    },
    methods: {
       changeStep () {
          this.step += 1
+         this.pageNo = 1
+         this.listData = []
+         this.total = 0
+         this.getData(this.step + 1)
       },
       getData (id) {
-         mpvue.showLoading()
+         // mpvue.showLoading()
          getAction('product_list', {
             word: '',
             page: this.pageNo,
@@ -83,6 +150,36 @@ export default {
             this.total = res.data.nums
             this.listData = this.listData.concat(res.data.list)
          })
+      },
+      goodsSelect (data) {
+         this.selectedArr[this.step] = data.str
+         this.priceArr[this.step] = data.price
+         const ids = data.str.split('-')
+         const type = this.tempRecord.type_list.find(i => i.id === ids[2])
+         const record = {
+            small_img: type.small_img,
+            product_img: type.product_img,
+            english_name: this.tempRecord.english_name,
+            china_name: this.tempRecord.china_name,
+            apply: this.tempRecord.apply,
+            mainly: this.tempRecord.mainly,
+            nutritional: this.tempRecord.nutritional,
+            attr_name: type.name,
+            specs: ids[3]
+         }
+         this.goodsList[this.step] = record
+      },
+      openDetail (record) {
+         this.tempRecord = record
+         this.btnName = '确认|Confirm'
+         let catalogIndex = 0
+         let specsIndex = 0
+         if (this.selectedArr[this.step]) {
+            const arr = this.selectedArr[this.step].split('-')
+            catalogIndex = record.type_list.findIndex(i => i.id === arr[2])
+            specsIndex = record.type_list[catalogIndex].child.findIndex(i => i.specs === arr[3])
+         }
+         this.$refs.details.select(record, catalogIndex, specsIndex)
       }
    },
    onReachBottom () {

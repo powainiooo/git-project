@@ -57,7 +57,7 @@
          <div>
             <div>
                <p>订购{{item.name}}</p>
-               <div><span>{{item.old_price}}</span>元</div>
+               <div v-if="item.old_price"><span>{{item.old_price}}</span>元</div>
             </div>
             <p><span>{{item.pay_price}}</span>元</p>
          </div>
@@ -105,7 +105,18 @@ export default {
    components: {cFooter},
    props: {
       list: Array,
-      groupId: [String, Number]
+      groupId: {
+         type: [String, Number],
+         default: ''
+      },
+      source: {
+         type: String,
+         default: 'catbox'
+      },
+      extraFd: {
+         type: Object,
+         default: {}
+      }
    },
    data () {
       return {
@@ -150,13 +161,18 @@ export default {
       },
       stepNext () {
          const params = {
-            group_id: this.groupId,
-            price_id: this.priceId,
             recom_str: this.recList.filter(i => i.selected).map(i => `${i.id}-${this.nums}`).join('|')
          }
+         if (this.source === 'catbox') {
+            params.group_id = this.groupId
+            params.price_id = this.priceId
+         } else if (this.source === 'diy') {
+            Object.assign(params, this.extraFd)
+         }
+         console.log('SET_CBFORMDATA', params)
          store.commit('SET_CBFORMDATA', params)
          mpvue.navigateTo({
-            url: '/pages/address/main?status=new&source=catbox'
+            url: `/pages/address/main?status=new&source=${this.source}`
          })
       }
    }

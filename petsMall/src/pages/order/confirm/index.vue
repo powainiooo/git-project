@@ -84,7 +84,7 @@ export default {
       doSettle () {
          if (this.source === 'goods') {
             this.doPayGoods()
-         } else {
+         } else if (this.source === 'catbox') {
             if (this.btnName === '付款|Payment') {
                this.doPayCatbox()
             } else {

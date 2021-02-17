@@ -26,6 +26,8 @@
 import cHeader from '@/components/header'
 import cFooter from '@/components/footer'
 import diyItem from '../modules/diyItem'
+import { getAction } from '@/utils/api'
+import store from '@/store'
 
 export default {
    components: {
@@ -36,7 +38,9 @@ export default {
 
    data () {
       return {
-         price: 0
+         id: '',
+         price: 0,
+         detailData: {}
       }
    },
    methods: {
@@ -44,9 +48,20 @@ export default {
          mpvue.navigateTo({
             url: `/pages/catbox/select/main?source=${page}`
          })
+      },
+      getData () {
+         mpvue.showLoading()
+         getAction('my_group', {
+            token: store.state.token
+         }).then(res => {
+            mpvue.hideLoading()
+            this.detailData = res.data
+         })
       }
    },
-   created () {
+   onLoad (options) {
+      this.id = options.id || 4
+      this.getData()
    }
 }
 </script>

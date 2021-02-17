@@ -27,8 +27,8 @@
          <h3 class="en">{{itemData.english_name}}</h3>
          <h3>{{itemData.china_name}}</h3>
          <ul>
-            <li>{{itemData.type_list[0].name}}</li>
-            <li>{{itemData.type_list[0].child[0].specs}}</li>
+            <li>{{itemData.attrs_list[0].name}}</li>
+            <li>{{itemData.attrs_list[0].child[0].specs}}</li>
          </ul>
          <p v-if="source === 'diy'">主要成分：{{itemData.mainly}}</p>
       </div>

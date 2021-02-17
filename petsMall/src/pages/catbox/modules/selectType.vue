@@ -59,7 +59,8 @@ export default {
          catalogId: '',
          catalogList: [],
          specsId: '',
-         specsList: []
+         specsList: [],
+         specsRecord: {}
       }
    },
    computed: {
@@ -70,10 +71,11 @@ export default {
    methods: {
       select (record, catalogIndex, specsIndex) {
          this.detailData = record
-         this.catalogList = record.type_list
-         this.catalogId = record.type_list[catalogIndex].id
-         this.specsList = record.type_list[catalogIndex].child
-         this.specsId = record.type_list[catalogIndex].child[specsIndex].specs_id
+         this.catalogList = record.attrs_list
+         this.catalogId = record.attrs_list[catalogIndex].id
+         this.specsList = record.attrs_list[catalogIndex].child
+         this.specsId = record.attrs_list[catalogIndex].child[specsIndex].specs_id
+         this.specsRecord = record.attrs_list[catalogIndex].child[specsIndex]
          this.$nextTick(() => {
             this.show = true
          })
@@ -81,14 +83,20 @@ export default {
       selectCatalog (data) {
          this.catalogId = data.id
          this.specsList = data.child
-         this.specsId = data.child[0].specs_id
+         const specs = data.child[0]
+         this.specsId = specs.specs_id
+         this.specsRecord = specs
       },
       selectSpec (data) {
          this.specsId = data.specs_id
+         this.specsRecord = data
+      },
+      confirm () {
          this.$emit('selected', {
-            str: `2-${this.detailData.id}-${this.catalogId}-${data.specs}`,
-            price: data.price
+            str: `2-${this.detailData.id}-${this.catalogId}-${this.specsRecord.specs}`,
+            price: this.specsRecord.price
          })
+         this.close()
       },
       close () {
          this.show = false

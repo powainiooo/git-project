@@ -31,20 +31,26 @@ export default {
 </script>
 
 <style>
-.container {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  padding: 200rpx 0;
-  box-sizing: border-box;
-}
 /* this rule will be remove */
 * {
+  box-sizing: border-box;
   transition: width 2s;
   -moz-transition: width 2s;
   -webkit-transition: width 2s;
   -o-transition: width 2s;
+}
+@font-face {
+  font-family: 'HelveB';
+  src: url('http://catbox.pc-online.cc/static/fonts/HelveticaNeue_Medium.ttf') format('woff2');
+}
+@font-face {
+  font-family: 'HelveL';
+  src: url('http://catbox.pc-online.cc/static/fonts/HelveticaNeueThin.ttf') format('woff2');
+}
+page {
+  background-color: #EEEEEF;
+}
+button:after {
+  border: none;
 }
 </style>

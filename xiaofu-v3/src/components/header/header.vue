@@ -1,0 +1,69 @@
+<style scoped>
+.c-header { width: 100%; position: fixed; top: 0; left: 0; z-index: 1000; }
+.c-header-bar { width: 100%; height: 100px; background-color: #ffffff; display: flex; align-items: center; justify-content: space-between; position: relative; z-index: 10; }
+.c-header-bar-shadow { box-shadow: 0 5px 10px 0 rgba(0, 0, 0, .05); }
+.c-header .logo { width: 269px; height: 70px; margin-left: 38px; }
+.c-header .operates { margin-right: 26px; display: flex; align-items: center; }
+.c-header .c-cont-frame { height: 58px; background-color: #EEEEEF; border-radius: 16px; display: flex; align-items: center; }
+.c-header .c-skip { width: 32px; height: 32px; border: 4px solid #ffffff; border-radius: 50%; margin: 0 12px 0 10px; }
+.c-header .label { font-size: 20px; color: #9E9E9F; margin-right: 16px; }
+.c-header .dot { width: 24px; height: 29px; margin: 0 12px 0 14px; }
+.c-header .btn { width: 57px; height: 57px; margin-left: 12px; }
+</style>
+
+<template>
+<div class="c-header">
+  <div class="c-header-bar" :class="{'c-header-bar-shadow': showMenuBtn}">
+    <img src="/static/images/common/logo.png" class="logo" />
+    <div class="operates">
+      <!--   跳过   -->
+      <div class="c-cont-frame" v-if="showSkip">
+        <div class="c-skip"></div>
+        <span class="label">跳过</span>
+      </div>
+      <div class="c-cont-frame">
+        <img src="/static/images/common/dot.png" class="dot" />
+        <span class="label">全部</span>
+      </div>
+      <img src="/static/images/common/menu.png" class="btn" v-if="showMenuBtn" @click="openMenu" />
+      <img src="/static/images/common/close.png" class="btn" v-if="showCloseBtn" @click="handleClose" />
+    </div>
+  </div>
+  <c-menu :show="!showMenuBtn" />
+</div>
+</template>
+
+<script type='es6'>
+import cMenu from './menu'
+export default {
+  name: 'app',
+  components: {
+    cMenu
+  },
+  data () {
+    return {
+      showSkip: false,
+      showMenuBtn: true,
+      showCloseBtn: false,
+      pageStatus: ''
+    }
+  },
+  methods: {
+    setStatus (status) {
+      this.pageStatus = status
+    },
+    openMenu () {
+      this.showMenuBtn = false
+      this.showCloseBtn = true
+      this.setStatus('menu')
+    },
+    handleClose () {
+      if (this.pageStatus === 'menu') {
+        this.showMenuBtn = true
+        this.showCloseBtn = false
+        this.setStatus('')
+      }
+    }
+  }
+}
+</script>

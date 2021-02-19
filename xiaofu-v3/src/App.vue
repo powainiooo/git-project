@@ -50,7 +50,12 @@ export default {
 page {
   background-color: #EEEEEF;
 }
+button {
+  margin: 0;
+  padding: 0;
+}
 button:after {
   border: none;
 }
+.c-tag { height: 67px; line-height: 67px; display: inline-block; font-size: 24px; color: #ffffff; font-family: HelveB; padding: 0 32px; background: linear-gradient(330deg, #5B85E6 0%, #6D9AF4 100%); border-radius: 34px; }
 </style>

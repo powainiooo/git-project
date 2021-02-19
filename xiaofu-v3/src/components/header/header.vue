@@ -13,15 +13,15 @@
 
 <template>
 <div class="c-header">
-  <div class="c-header-bar" :class="{'c-header-bar-shadow': showMenuBtn}">
-    <img src="/static/images/common/logo.png" class="logo" />
+  <div class="c-header-bar" :class="{'c-header-bar-shadow': showMenuBtn}" :style="{'background-color': bgColor}">
+    <img :src="'/static/images/common/' + logo + '.png'" class="logo" />
     <div class="operates">
       <!--   跳过   -->
       <div class="c-cont-frame" v-if="showSkip">
         <div class="c-skip"></div>
         <span class="label">跳过</span>
       </div>
-      <div class="c-cont-frame">
+      <div class="c-cont-frame" v-if="showCity">
         <img src="/static/images/common/dot.png" class="dot" />
         <span class="label">全部</span>
       </div>
@@ -29,7 +29,7 @@
       <img src="/static/images/common/close.png" class="btn" v-if="showCloseBtn" @click="handleClose" />
     </div>
   </div>
-  <c-menu :show="!showMenuBtn" />
+  <c-menu :show="showMenus" />
 </div>
 </template>
 
@@ -37,30 +37,64 @@
 import cMenu from './menu'
 export default {
   name: 'app',
+  props: {
+    bgColor: {
+      type: String,
+      default: '#ffffff'
+    },
+    logo: {
+      type: String,
+      default: 'logo'
+    }
+  },
   components: {
     cMenu
   },
   data () {
     return {
       showSkip: false,
+      showCity: true,
       showMenuBtn: true,
       showCloseBtn: false,
+      showMenus: false,
       pageStatus: ''
     }
   },
   methods: {
     setStatus (status) {
       this.pageStatus = status
+      switch (status) {
+        case '':
+          this.showMenuBtn = true
+          this.showCloseBtn = false
+          this.showMenus = false
+          break
+        case 'menu':
+          this.showMenuBtn = false
+          this.showCloseBtn = true
+          this.showMenus = true
+          break
+        case 'search':
+          this.showMenuBtn = false
+          this.showCloseBtn = true
+          break
+        case 'calendar':
+          this.showMenuBtn = false
+          this.showCloseBtn = true
+          break
+        case 'onlyClose':
+          this.showCity = false
+          this.showMenuBtn = false
+          this.showCloseBtn = true
+          break
+      }
     },
     openMenu () {
-      this.showMenuBtn = false
-      this.showCloseBtn = true
       this.setStatus('menu')
     },
     handleClose () {
-      if (this.pageStatus === 'menu') {
-        this.showMenuBtn = true
-        this.showCloseBtn = false
+      this.$emit('close', this.pageStatus)
+      if (this.pageStatus !== 'onlyClose') {
         this.setStatus('')
       }
     }

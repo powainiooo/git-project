@@ -1,5 +1,7 @@
 {
   "pages": [
+    "pages/leesStar/main",
+    "pages/collection/main",
     "pages/index/main",
     "pages/logs/main"
   ],

@@ -6,6 +6,48 @@
   box-shadow: 0px 10px 15px 0px rgba(0, 0, 0, 0.15);
   border-radius: 18px;
   margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.c-list-item .left {
+  display: flex;
+  align-items: baseline;
+  margin-left: 20px;
+}
+.c-list-item .left span {
+  font-size: 100px;
+  font-family: HelveT;
+  margin-right: 10px;
+}
+.c-list-item .left h3 {
+  font-size: 20px;
+}
+.c-list-item .left h3 p.en {
+  font-size: 32px;
+  font-family: HelveB;
+}
+.c-list-item .right {
+  margin-right: 28px;
+}
+.c-list-item .right .stars {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+.c-list-item .right .stars li {
+  width: 44px;
+  height: 41px;
+  margin: 0 3px;
+}
+.c-list-item .right .stars li img {
+  width: 100%;
+  height: 100%;
+}
+.c-list-item .right p {
+  font-size: 48px;
+  font-family: HelveT;
+  text-align: center;
 }
 </style>
 

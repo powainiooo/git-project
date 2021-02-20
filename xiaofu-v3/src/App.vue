@@ -41,11 +41,15 @@ export default {
 }
 @font-face {
   font-family: 'HelveB';
-  src: url('http://catbox.pc-online.cc/static/fonts/HelveticaNeue_Medium.ttf') format('woff2');
+  src: url('/static/fonts/HelveticaNowDisplay-Bold.ttf') format('woff2');
 }
 @font-face {
   font-family: 'HelveL';
-  src: url('http://catbox.pc-online.cc/static/fonts/HelveticaNeueThin.ttf') format('woff2');
+  src: url('/static/fonts/HelveticaNowDisplay-Light.ttf') format('woff2');
+}
+@font-face {
+  font-family: 'HelveT';
+  src: url('https://github.com/powainiooo/git-project/blob/master/petsMall/static/fonts/HelveticaNeueThin.ttf?raw=true') format('woff2');
 }
 page {
   background-color: #EEEEEF;

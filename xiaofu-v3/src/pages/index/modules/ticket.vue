@@ -22,6 +22,9 @@
   position: relative;
   z-index: 5;
 }
+.organ-ticket .c-ticket-bar {
+  background-color: #EEEEEF;
+}
 .c-ticket-large .c-ticket-bar {
   height: 100px;
   padding-left: 22px;

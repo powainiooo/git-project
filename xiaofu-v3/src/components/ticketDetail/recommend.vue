@@ -1,0 +1,34 @@
+<style scoped>
+.recom-item {
+  width: 34px;
+  transform-origin: 0 0;
+  transform: scale(.882);
+}
+</style>
+
+<template>
+<div style="margin-bottom: 50rpx">
+  <div class="c-ticket-title"><span>Recommend</span>推荐</div>
+  <swiper previous-margin="25rpx" next-margin="416rpx">
+    <swiper-item v-for="i in 5" :key="i">
+      <div class="recom-item">
+        <c-ticket />
+      </div>
+    </swiper-item>
+  </swiper>
+</div>
+</template>
+
+<script type='es6'>
+import cTicket from '@/pages/index/modules/ticket'
+export default {
+  name: 'app',
+  components: {
+    cTicket
+  },
+  data () {
+    return {}
+  },
+  methods: {}
+}
+</script>

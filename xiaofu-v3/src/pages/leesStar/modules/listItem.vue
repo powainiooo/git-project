@@ -9,11 +9,24 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
+}
+.c-list-item .bg {
+  width: 225px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.c-list-item-first {
+  height: 200px;
+  background: linear-gradient(159deg, #0027AF 0%, #2154DA 53%, #003AC3 100%);
+  color: #ffffff;
 }
 .c-list-item .left {
   display: flex;
-  align-items: baseline;
   margin-left: 20px;
+  position: relative;
+  z-index: 5;
 }
 .c-list-item .left span {
   font-size: 100px;
@@ -22,6 +35,7 @@
 }
 .c-list-item .left h3 {
   font-size: 20px;
+  margin-top: 26px;
 }
 .c-list-item .left h3 p.en {
   font-size: 32px;
@@ -52,7 +66,9 @@
 </style>
 
 <template>
-<div class="c-list-item">
+<div class="c-list-item" :class="{'c-list-item-first': rank === 1}">
+  <img src="/static/images/leesStar/bg-star.png" mode="widthFix" class="bg" v-if="rank === 1">
+  <img src="/static/images/leesStar/bg-star2.png" mode="widthFix" class="bg" v-else>
   <div class="left">
     <span>{{rank}}</span>
     <h3>
@@ -63,7 +79,8 @@
   <div class="right">
     <ul class="stars">
       <li v-for="i in 4" :key="i">
-        <img src="/static/images/common/rank-star.png" />
+        <img src="/static/images/common/rank-star2.png" v-if="rank === 1" />
+        <img src="/static/images/common/rank-star.png" v-else />
       </li>
     </ul>
     <p>4.6</p>

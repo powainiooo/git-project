@@ -9,7 +9,7 @@
   font-size: 20px;
   font-family: HelveL;
   color: #ffffff;
-  line-height: 25px;
+  line-height: 28px;
   text-align: center;
   margin-right: 20px;
 }

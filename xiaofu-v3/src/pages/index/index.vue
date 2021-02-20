@@ -30,6 +30,8 @@
         <c-ticket />
       </div>
     </div>
+
+    <c-ticket-detail />
   </div>
 </template>
 
@@ -39,6 +41,7 @@ import cSearch from './modules/search'
 import cLeesStar from './modules/leesStar'
 import cCollection from './modules/collection'
 import cTicket from './modules/ticket'
+import cTicketDetail from '@/components/ticketDetail/ticketDetail'
 export default {
   data () {
     return {
@@ -52,7 +55,8 @@ export default {
     cSearch,
     cLeesStar,
     cCollection,
-    cTicket
+    cTicket,
+    cTicketDetail
   },
 
   methods: {

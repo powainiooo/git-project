@@ -14,7 +14,7 @@
 <template>
 <div class="c-index-goods-item">
    <div class="img">
-      <img :src="imgSrc + itemData.small_img"/>
+      <img :src="itemData.cover"/>
    </div>
    <div class="info">
       <div class="name">
@@ -30,8 +30,6 @@
 </template>
 
 <script type='es6'>
-import config from '@/config'
-const { imgSrc } = config
 export default {
   name: 'app',
    props: {
@@ -39,14 +37,19 @@ export default {
    },
   data () {
     return {
-       imgSrc
     }
   },
   methods: {
      toDetail () {
-        mpvue.navigateTo({
-           url: `/pages/goods/detail/main?id=${this.itemData.id}`
-        })
+        if (this.itemData.pricelist) {
+           mpvue.navigateTo({
+              url: `/pages/catbox/detail/main?id=${this.itemData.id}`
+           })
+        } else {
+           mpvue.navigateTo({
+              url: `/pages/goods/detail/main?id=${this.itemData.id}`
+           })
+        }
      }
   }
 }

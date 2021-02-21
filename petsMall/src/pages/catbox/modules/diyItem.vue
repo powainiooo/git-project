@@ -7,7 +7,7 @@
 .c-diy-item .infos h3.en { font-size: 34px; font-family: HelveThin; }
 .c-diy-item .infos ul { display: flex; margin-bottom: 32px; margin-top: 10px; }
 .c-diy-item .infos ul li { border: 1px solid var(--mainColor); padding: 5px 8px; color: #A6A5A5; font-size: 20px; margin-right: 8px; line-height: 1; }
-.c-diy-item .infos p { height: 56px; font-size: 18px; line-height: 26px; color: var(--textColor); text-shadow: var(--textShadow); margin-bottom: 28px; }
+.c-diy-item .infos p { width: 330px; height: 56px; font-size: 18px; line-height: 26px; color: var(--textColor); text-shadow: var(--textShadow); margin-bottom: 28px; }
 .c-diy-item .infos div { font-size: 20px; color: var(--textColor); text-shadow: var(--textShadow); }
 .c-diy-item .infos div span { font-size: 66px; font-family: HelveThin; }
 .c-diy-item .add { width: 92px; height: 92px; position: absolute; left: 620px; bottom: 42px; }
@@ -21,24 +21,30 @@
 
 <template>
 <div class="c-diy-item borderB" @click="$emit('click', itemData)">
-   <img :src="itemData.cover" class="img" />
+   <img :src="imgCover" class="img" />
    <div class="infos">
       <div>
          <h3 class="en">{{itemData.english_name}}</h3>
          <h3>{{itemData.china_name}}</h3>
          <ul>
-            <li>{{itemData.attrs_list[0].name}}</li>
-            <li>{{itemData.attrs_list[0].child[0].specs}}</li>
+            <li>{{attrName}}</li>
+            <li v-if="specsName">{{specsName}}</li>
          </ul>
          <p v-if="source === 'diy'">主要成分：{{itemData.mainly}}</p>
       </div>
       <div><span>{{itemData.price}}</span>元</div>
    </div>
+   <template v-if="!useSelect">
    <img src="/static/images/catbox/icon-add.png" class="add" v-if="!showArrow" />
+   <img src="/static/images/catbox/icon-arrow.png" class="arrow" v-if="showArrow" />
+   </template>
+   <template v-else>
+   <img src="/static/images/catbox/radio-select.png" class="radio-select" v-if="selectId === itemData.id" />
+   <img src="/static/images/catbox/radio.png" class="radio" v-else />
+   </template>
    <div class="title" v-if="title !== ''">
       <div>{{title}}</div>
    </div>
-   <img src="/static/images/catbox/icon-arrow.png" class="arrow" v-if="showArrow" />
 </div>
 </template>
 
@@ -58,6 +64,33 @@ export default {
       showArrow: {
          type: Boolean,
          default: false
+      },
+      useSelect: {
+         type: Boolean,
+         default: false
+      },
+      selectId: {
+         type: Number,
+         default: 0
+      }
+   },
+   computed: {
+      imgCover () {
+         return this.itemData.cover || this.itemData.product_img
+      },
+      attrName () {
+         if (this.itemData.attrs_list) {
+            return this.itemData.attrs_list[0].name
+         } else {
+            return this.itemData.attr_name
+         }
+      },
+      specsName () {
+         if (this.itemData.attrs_list) {
+            return this.itemData.attrs_list[0].child[0].specs
+         } else {
+            return this.itemData.specs
+         }
       }
    },
    data () {

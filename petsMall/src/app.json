@@ -1,9 +1,9 @@
 {
    "pages": [
+      "pages/index/main",
       "pages/catbox/mine/main",
       "pages/catbox/diy/main",
       "pages/catbox/select/main",
-      "pages/index/main",
       "pages/order/list/main",
       "pages/order/detail/main",
       "pages/address/main",

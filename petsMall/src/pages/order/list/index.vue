@@ -82,6 +82,9 @@ export default {
    },
    onShow () {
       this.reset()
+   },
+   onLoad (options) {
+      this.type = options.type || 'goods'
    }
 }
 </script>

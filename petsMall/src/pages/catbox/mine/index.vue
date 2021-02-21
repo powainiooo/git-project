@@ -7,10 +7,10 @@
 <div class="container">
    <c-header title="我的自定义猫盒|My cat box" titleColor="#E8E6E4" />
    <div class="">
-      <diy-item title="Staple food  主粮" source="mine" @click="toPage($event, 'food')" />
-      <diy-item title="Canned  罐头" source="mine" @click="toPage($event, 'canned')" />
-      <diy-item title="Snacks  零食" source="mine" @click="toPage($event, 'snacks')" />
-      <diy-item title="Toy  玩具" source="mine" @click="toPage($event, 'toy')" />
+      <diy-item title="Staple food  主粮" source="mine" showArrow :itemData="detailData.productlist[0]" @click="toPage($event, 'food')" />
+      <diy-item title="Canned  罐头" source="mine" showArrow :itemData="detailData.productlist[1]" @click="toPage($event, 'canned')" />
+      <diy-item title="Snacks  零食" source="mine" showArrow :itemData="detailData.productlist[2]" @click="toPage($event, 'snacks')" />
+      <diy-item title="Toy  玩具" source="mine" showArrow :itemData="toyData" @click="toPage($event, 'toy')" />
       <div class="tips-diy">
          <div class="tips-content">
             <img src="/static/images/order/tips.png" mode="widthFix" />
@@ -18,7 +18,9 @@
          </div>
       </div>
    </div>
-   <c-footer btnName="我要订购|Order" :price="price" />
+   <c-footer btnName="我要订购|Order" :price="price" @btnFunc="openOrderType" />
+
+   <c-order-type-modal :list="detailData.pricelist" :groupId="detailData.id" />
 </div>
 </template>
 
@@ -28,25 +30,59 @@ import cFooter from '@/components/footer'
 import diyItem from '../modules/diyItem'
 import { getAction } from '@/utils/api'
 import store from '@/store'
+import cOrderTypeModal from '../modules/orderType'
 
 export default {
    components: {
       cHeader,
       cFooter,
-      diyItem
+      diyItem,
+      cOrderTypeModal
    },
-
+   computed: {
+      toyData () {
+         if (this.detailData.toy === '1') {
+            return {
+               cover: '/static/images/catbox/toy-yes.png',
+               english_name: 'Hot toys',
+               china_name: '当月精选玩具',
+               attr_name: '随机',
+               price: 10
+            }
+         } else {
+            return {
+               cover: '/static/images/catbox/toy-no.png',
+               english_name: 'Don\'t need toys',
+               china_name: '不需要玩具',
+               attr_name: '随机',
+               price: 0
+            }
+         }
+      }
+   },
    data () {
       return {
          id: '',
          price: 0,
-         detailData: {}
+         detailData: {},
+         keys: {
+            food: 0,
+            canned: 1,
+            snacks: 2
+         }
       }
    },
    methods: {
       toPage (data, page) {
+         let selected = ''
+         let price = 0
+         if (page !== 'toy') {
+            console.log('toPage', data)
+            selected = `2-${data.product_id}-${data.attr_id}-${data.specs}`
+            price = data.price || 0
+         }
          mpvue.navigateTo({
-            url: `/pages/catbox/select/main?source=${page}`
+            url: `/pages/catbox/diy/main?source=${page}&toy=${this.detailData.toy}&selected=${selected}&price=${price}`
          })
       },
       getData () {
@@ -54,14 +90,43 @@ export default {
          getAction('my_group', {
             token: store.state.token
          }).then(res => {
-            mpvue.hideLoading()
-            this.detailData = res.data
+            const mineParams = store.state.mineParams
+            if (mineParams.source) {
+               const arr = res.data.productlist.map(i => `2-${i.product_id}-${i.attr_id}-${i.specs}`)
+               console.log('arr', arr)
+               const params = {
+                  token: store.state.token,
+                  pro_str: arr.join('|'),
+                  toy: this.needToy
+               }
+               if (mineParams.source === 'toy') {
+                  params.toy = mineParams.data
+               } else {
+                  arr[this.keys[mineParams.source]] = mineParams.data
+                  params.pro_str = arr.join('|')
+               }
+               getAction('diy_group', params).then(res => {
+                  if (res.status === 0) {
+                     store.commit('SET_MINEPARAMS', {})
+                     this.getData()
+                  }
+               })
+            } else {
+               this.detailData = res.data
+               this.price = res.data.pricelist[0].pay_price
+               mpvue.hideLoading()
+            }
          })
+      },
+      openOrderType () {
+         store.commit('SET_ORDERTYPESTATUS', true)
       }
+   },
+   onShow () {
+      this.getData()
    },
    onLoad (options) {
       this.id = options.id || 4
-      this.getData()
    }
 }
 </script>

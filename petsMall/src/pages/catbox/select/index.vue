@@ -28,9 +28,18 @@ export default {
    data () {
       return {
          hash: {
-            food: '更换主粮|Replacing staple food',
-            canned: '更换罐头|Replacing Canned',
-            snacks: '更换零食|Replacing Snacks',
+            food: {
+               name: '更换主粮|Replacing staple food',
+               id: 1
+            },
+            canned: {
+               name: '更换罐头|Replacing Canned',
+               id: 2
+            },
+            snacks: {
+               name: '更换零食|Replacing Snacks',
+               id: 3
+            },
             toy: '更换玩具|Replacing Toy'
          },
          title: '',

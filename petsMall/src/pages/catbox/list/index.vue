@@ -27,7 +27,7 @@ page { background-color: #F3F2F1; }
       <h3>无相关内容！</h3>
    </div>
 
-   <a href="#" class="footer-btn">
+   <a href="/pages/catbox/diy/main" class="footer-btn">
       <img src="/static/images/catbox/icon-menu.png" class="menu" />
       <div>
          <p class="en">Customized cat box</p>

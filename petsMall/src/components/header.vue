@@ -31,6 +31,7 @@
 .c-header .menus-frame .navs-list a:first-child:before { height: 0; }
 .c-header .menus-frame .navs-list a:last-child:after { height: 0; }
 .c-header .menus-frame .navs-list a span { margin-left: 14px; font-size: 40px; font-family: Helve;}
+.c-header .menus-frame .navs-list a button { width: 100%; height: 100%; position: absolute; top: 0; left: 0; opacity: 0; }
 
 .c-header .search-frame { width: 100%; height: 120px; background-color: #ffffff; display: flex; justify-content: space-between; align-items: center; padding: 0 45px 0 66px; position: absolute; top: 180px; left: 0; box-sizing: border-box; transition: top .5s cubic-bezier(.23,.78,.33,.97); }
 .c-header .search-frame input { width: 400px; height: 100%; font-size: 36px; color: var(--textColor); border: none; }
@@ -81,18 +82,18 @@
          <button open-type="getUserInfo" @getuserinfo="getuserinfo">获取用户信息</button>
       </div>
       <div class="line2">
-         <a href="#" hover-class="none">
+         <a href="/pages/order/list/main?type=catbox" hover-class="none">
             <p>已订购猫盒</p>
             <div>Booked cat box</div>
          </a>
-         <a href="#" hover-class="none">
+         <a href="/pages/order/list/main" hover-class="none">
             <p>已订购产品</p>
             <div>Booked products</div>
          </a>
       </div>
       <div class="navs-list">
-         <a href="#" hover-class="none">我的自定义猫盒<span>| My cat box</span></a>
-         <a href="#" hover-class="none">联系客服<span>| Question contact</span></a>
+         <a href="/pages/catbox/mine/main" hover-class="none">我的自定义猫盒<span>| My cat box</span></a>
+         <a href="#" hover-class="none">联系客服<span>| Question contact</span><button open-type="contact"></button></a>
       </div>
    </div>
 </div>

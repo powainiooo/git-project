@@ -1,5 +1,5 @@
 <style>
-.title { margin: 38px 45px;}
+.title { margin: 38px 45px 80px 45px;}
 .title p { font-size: 40px; color: #CBBB9B; margin-bottom: 10px; }
 .title div { font-size: 32px; color: #CBBB9B; font-family: Helve; }
 

@@ -8,13 +8,13 @@
 
 <template>
 <div class="container">
-   <c-header title="自定义猫盒套餐|Customized cat box" titleColor="#E8E6E4" />
+   <c-header :title="title" titleColor="#E8E6E4" />
    <div>
-      <diy-step :step="step" />
-      {{totalPrice}}
-      <div class="list-frame">
+      <diy-step :step="step" v-if="source === 'diy'" />
+      <div class="list-frame" :style="{'padding-top': source === 'diy' ? '150rpx' : 0}">
          <ul :style="{'transform': 'translateX(' + (-step * 100) + 'vw)'}">
             <li>
+               <!-- 主粮 -->
                <diy-item
                   v-for="item in listData"
                   :key="id"
@@ -23,6 +23,7 @@
                   @click="openDetail" />
             </li>
             <li>
+               <!-- 罐头 -->
                <diy-item
                   v-for="item in listData"
                   :key="id"
@@ -31,6 +32,7 @@
                   @click="openDetail" />
             </li>
             <li>
+               <!-- 零食 -->
                <diy-item
                   v-for="item in listData"
                   :key="id"
@@ -39,30 +41,14 @@
                   @click="openDetail" />
             </li>
             <li>
-               <div class="c-diy-item borderB" @click="needToy = 1">
-                  <img src="/static/images/catbox/toy-yes.png" class="img" />
-                  <div class="infos">
-                     <div>
-                        <h3 class="en">Hot toys</h3>
-                        <h3>当月精选玩具</h3>
-                     </div>
-                     <div><span>{{toyPrice}}</span>元</div>
-                  </div>
-                  <img src="/static/images/catbox/radio-select.png" class="radio-select" v-if="needToy === 1" />
-                  <img src="/static/images/catbox/radio.png" class="radio" v-else />
-               </div>
-               <div class="c-diy-item borderB" @click="needToy = 0">
-                  <img src="/static/images/catbox/toy-no.png" class="img" />
-                  <div class="infos">
-                     <div>
-                        <h3 class="en">Don't need toys</h3>
-                        <h3>不需要玩具</h3>
-                     </div>
-                     <div><span>0</span>元</div>
-                  </div>
-                  <img src="/static/images/catbox/radio-select.png" class="radio-select" v-if="needToy === 0" />
-                  <img src="/static/images/catbox/radio.png" class="radio" v-else />
-               </div>
+               <!-- 玩具 -->
+               <diy-item
+                  v-for="item in toyListData"
+                  :key="id"
+                  :itemData="item"
+                  useSelect
+                  :selectId="needToy"
+                  @click="toggleToy" />
             </li>
          </ul>
       </div>
@@ -70,7 +56,7 @@
    </div>
    <c-footer :btnName="btnName" :price="totalPrice" @btnFunc="changeStep" />
 
-   <select-type ref="details" @selected="goodsSelect" @close="btnName = '下一步|Next'" />
+   <select-type ref="details" @selected="goodsSelect" @close="typeClose" />
 
    <c-order-type :list="typeList" source="diy" :extraFd="formData" />
 </div>
@@ -120,31 +106,89 @@ export default {
    },
    data () {
       return {
+         source: 'diy',
          step: 0,
          page: 1,
          listData: [],
+         toyListData: [
+            {
+               cover: '/static/images/catbox/toy-yes.png',
+               english_name: 'Hot toys',
+               china_name: '当月精选玩具',
+               attr_name: '随机',
+               price: 10,
+               id: 1
+            },
+            {
+               cover: '/static/images/catbox/toy-no.png',
+               english_name: 'Don\'t need toys',
+               china_name: '不需要玩具',
+               attr_name: '随机',
+               price: 0,
+               id: 0
+            }
+         ],
          total: 0,
          selectedArr: [],
          priceArr: [],
          btnName: '下一步|Next',
          toyPrice: 10,
          needToy: 0,
-         tempRecord: {}
+         tempRecord: {},
+         hash: {
+            diy: {
+               name: '自定义猫盒套餐|Customized cat box',
+               id: 0
+            },
+            food: {
+               name: '更换主粮|Replacing staple food',
+               id: 0
+            },
+            canned: {
+               name: '更换罐头|Replacing Canned',
+               id: 1
+            },
+            snacks: {
+               name: '更换零食|Replacing Snacks',
+               id: 2
+            },
+            toy: {
+               name: '更换玩具|Replacing Toy',
+               id: 3
+            }
+         },
+         title: ''
       }
    },
    methods: {
       changeStep () {
          if (this.btnName === '确认|Confirm') {
             this.$refs.details.confirm()
-         } else if (this.btnName === '下一步|Next') {
-            if (this.step === 3) {
-               this.createCatbox()
+         } else {
+            if (this.source === 'diy') {
+               if (this.step === 3) {
+                  this.createCatbox()
+               } else {
+                  this.step += 1
+                  this.page = 1
+                  this.listData = []
+                  this.total = 0
+                  this.getData(this.step + 1)
+               }
             } else {
-               this.step += 1
-               this.page = 1
-               this.listData = []
-               this.total = 0
-               this.getData(this.step + 1)
+               console.log(this.selectedArr, this.step)
+               const params = {
+                  source: this.source
+               }
+               if (this.source === 'toy') {
+                  params.data = this.needToy
+               } else {
+                  params.data = this.selectedArr[this.step]
+               }
+               store.commit('SET_MINEPARAMS', params)
+               mpvue.navigateBack({
+                  delta: -1
+               })
             }
          }
       },
@@ -195,6 +239,9 @@ export default {
          }
          this.$refs.details.select(record, catalogIndex, specsIndex)
       },
+      toggleToy (record) {
+         this.needToy = record.id
+      },
       createCatbox () {
          const params = {
             token: store.state.token,
@@ -208,6 +255,13 @@ export default {
                })
             }
          })
+      },
+      typeClose () {
+         if (this.source === 'diy') {
+            this.btnName = '下一步|Next'
+         } else {
+            this.btnName = '保存|Save'
+         }
       }
    },
    onReachBottom () {
@@ -216,7 +270,25 @@ export default {
       this.getData()
    },
    onShow () {
-      this.getData(1)
+      if (this.source !== 'toy') {
+         this.getData(this.step + 1)
+      }
+   },
+   onLoad (options) {
+      Object.assign(this.$data, this.$options.data())
+      this.source = options.source || 'diy'
+      this.needToy = Number(options.toy) || 0
+      this.title = this.hash[this.source].name
+      this.step = this.hash[this.source].id
+      if (this.source === 'diy') {
+         this.btnName = '下一步|Next'
+      } else {
+         this.btnName = '保存|Save'
+         if (this.source !== 'toy') {
+            this.selectedArr[this.step] = options.selected
+            this.priceArr[this.step] = options.price || 0
+         }
+      }
    }
 }
 </script>

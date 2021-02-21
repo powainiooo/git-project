@@ -24,7 +24,7 @@ const store = new Vuex.Store({
          price_id: 1,
          recom_str: '1-3'
       },
-      diyGoodsList: []
+      mineParams: {}
    },
    mutations: {
       SET_TOKEN (state, data) {
@@ -61,8 +61,8 @@ const store = new Vuex.Store({
       SET_CBFORMDATA (state, data) {
          state.catboxFormData = data
       },
-      SET_DIYGOODSLIST (state, data) {
-         state.diyGoodsList = data
+      SET_MINEPARAMS (state, data) {
+         state.mineParams = data
       }
    }
 })

@@ -93,7 +93,7 @@ export default {
       },
       confirm () {
          this.$emit('selected', {
-            str: `2-${this.detailData.id}-${this.catalogId}-${this.specsRecord.specs}`,
+            str: `${this.detailData.type_id}-${this.detailData.id}-${this.catalogId}-${this.specsRecord.specs}`,
             price: this.specsRecord.price
          })
          this.close()

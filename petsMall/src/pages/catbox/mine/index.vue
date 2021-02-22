@@ -7,10 +7,16 @@
 <div class="container">
    <c-header title="我的自定义猫盒|My cat box" titleColor="#E8E6E4" />
    <div class="">
-      <diy-item title="Staple food  主粮" source="mine" showArrow :itemData="detailData.productlist[0]" @click="toPage($event, 'food')" />
-      <diy-item title="Canned  罐头" source="mine" showArrow :itemData="detailData.productlist[1]" @click="toPage($event, 'canned')" />
-      <diy-item title="Snacks  零食" source="mine" showArrow :itemData="detailData.productlist[2]" @click="toPage($event, 'snacks')" />
-      <diy-item title="Toy  玩具" source="mine" showArrow :itemData="toyData" @click="toPage($event, 'toy')" />
+      <diy-item
+         v-for="(item, index) in detailData.productlist"
+         :key="id"
+         :title="item.type_englishname + '  ' + item.type_name"
+         source="mine"
+         showArrow
+         :itemData="item"
+         @click="toPage(item, index)"
+      />
+      <diy-item title="Toy  玩具" source="mine" showArrow :itemData="toyData" @click="toPage($event, 3)" />
       <div class="tips-diy">
          <div class="tips-content">
             <img src="/static/images/order/tips.png" mode="widthFix" />
@@ -64,25 +70,24 @@ export default {
       return {
          id: '',
          price: 0,
-         detailData: {},
-         keys: {
-            food: 0,
-            canned: 1,
-            snacks: 2
-         }
+         detailData: {}
       }
    },
    methods: {
       toPage (data, page) {
          let selected = ''
          let price = 0
+         let toy = this.detailData.toy
+         const name = ['food', 'canned', 'snacks', 'toy']
+         page = name[page]
          if (page !== 'toy') {
             console.log('toPage', data)
-            selected = `2-${data.product_id}-${data.attr_id}-${data.specs}`
+            selected = `${data.type_id}-${data.product_id}-${data.attr_id}-${data.specs}`
             price = data.price || 0
+            toy = 0
          }
          mpvue.navigateTo({
-            url: `/pages/catbox/diy/main?source=${page}&toy=${this.detailData.toy}&selected=${selected}&price=${price}`
+            url: `/pages/catbox/diy/main?source=${page}&toy=${toy}&selected=${selected}&price=${price}`
          })
       },
       getData () {
@@ -92,7 +97,7 @@ export default {
          }).then(res => {
             const mineParams = store.state.mineParams
             if (mineParams.source) {
-               const arr = res.data.productlist.map(i => `2-${i.product_id}-${i.attr_id}-${i.specs}`)
+               const arr = res.data.productlist.map(i => `${i.type_id}-${i.product_id}-${i.attr_id}-${i.specs}`)
                console.log('arr', arr)
                const params = {
                   token: store.state.token,
@@ -102,7 +107,8 @@ export default {
                if (mineParams.source === 'toy') {
                   params.toy = mineParams.data
                } else {
-                  arr[this.keys[mineParams.source]] = mineParams.data
+                  const split = mineParams.data.split('-')
+                  arr[Number(split[0]) - 1] = mineParams.data
                   params.pro_str = arr.join('|')
                }
                getAction('diy_group', params).then(res => {

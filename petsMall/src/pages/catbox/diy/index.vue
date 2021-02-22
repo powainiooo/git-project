@@ -86,7 +86,7 @@ export default {
          return this.total === this.listData.length
       },
       totalPrice () {
-         const goodsPrice = this.priceArr.reduce((total, i) => total + Number(i), 0)
+         const goodsPrice = this.priceArr.reduce((total, i) => total + i ? Number(i) : 0, 0)
          return this.needToy === 1 ? this.toyPrice + goodsPrice : goodsPrice
       },
       typeList () {
@@ -169,11 +169,18 @@ export default {
                if (this.step === 3) {
                   this.createCatbox()
                } else {
-                  this.step += 1
-                  this.page = 1
-                  this.listData = []
-                  this.total = 0
-                  this.getData(this.step + 1)
+                  if (this.selectedArr[this.step]) {
+                     this.step += 1
+                     this.page = 1
+                     this.listData = []
+                     this.total = 0
+                     this.getData(this.step + 1)
+                  } else {
+                     mpvue.showToast({
+                        title: '请选择产品',
+                        icon: 'none'
+                     })
+                  }
                }
             } else {
                console.log(this.selectedArr, this.step)

@@ -4,7 +4,7 @@
 
 <template>
 <div>
-
+  <c-header onlyLogo />
 </div>
 </template>
 

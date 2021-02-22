@@ -1,5 +1,8 @@
 {
   "pages": [
+    "pages/order/list/main",
+    "pages/comment/main",
+    "pages/result/main",
     "pages/details/main",
     "pages/index/main",
     "pages/activity/main",

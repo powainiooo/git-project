@@ -14,10 +14,15 @@ page { background-color: #F3F2F1; }
 <template>
 <div class="container">
    <c-header title="已订购订单|Booked order" />
-   <div class="order-list">
+   <div class="order-list" v-if="listData.length > 0">
       <order-item v-for="item in listData" :key="id" :itemData="item" />
    </div>
-   <div class="hint" v-if="loadOver">没有更多了</div>
+   <div class="hint-result" v-else>
+      <img src="/static/images/goods/warn.png" mode="widthFix" style="width: 71rpx;" />
+      <h3 class="en">No related content</h3>
+      <h3>无相关内容！</h3>
+   </div>
+   <div class="hint" v-if="loadOver"></div>
    <div class="footer-btn">
       <button :class="{'active': type === 'catbox'}" @click="toggle('catbox')">已订购猫盒</button>
       <button :class="{'active': type === 'goods'}" @click="toggle('goods')">已订购产品</button>
@@ -61,8 +66,9 @@ export default {
             token: store.state.token,
             page: this.pageNo
          }).then(res => {
-            this.listData = this.listData.concat(res.data.list)
-            this.total = res.data.nums
+            // this.listData = this.listData.concat(res.data.list)
+            // this.total = res.data.nums
+            this.listData = res.data.list
          })
       },
       reset () {
@@ -76,9 +82,9 @@ export default {
       }
    },
    onReachBottom () {
-      if (this.loadOver) return
-      this.page += 1
-      this.getData()
+      // if (this.loadOver) return
+      // this.page += 1
+      // this.getData()
    },
    onShow () {
       this.reset()

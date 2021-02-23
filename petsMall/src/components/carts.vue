@@ -94,7 +94,7 @@ export default {
       },
       toPage () {
          mpvue.navigateTo({
-            url: '/pages/address/main'
+            url: '/pages/address/main?source=goods'
          })
       }
    }

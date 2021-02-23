@@ -110,22 +110,62 @@ export default {
          this.formData.day = this.datesList[e.mp.detail.value]
          console.log('this.formData.day', this.formData.day)
       },
+      validate () {
+         if (this.formData.name === '') {
+            mpvue.showToast({
+               title: '请输入姓名',
+               icon: 'none'
+            })
+            return false
+         }
+         if (this.formData.mobile === '') {
+            mpvue.showToast({
+               title: '请输入手机号',
+               icon: 'none'
+            })
+            return false
+         }
+         if (this.formData.province === '') {
+            mpvue.showToast({
+               title: '请选择城市',
+               icon: 'none'
+            })
+            return false
+         }
+         if (this.formData.address === '') {
+            mpvue.showToast({
+               title: '请输入详细地址',
+               icon: 'none'
+            })
+            return false
+         }
+         if (this.source === 'catbox' && this.formData.day === '') {
+            mpvue.showToast({
+               title: '请选择配送时间',
+               icon: 'none'
+            })
+            return false
+         }
+         return true
+      },
       toPage () {
-         store.commit('SET_FORMDATA', this.formData)
-         mpvue.setStorage({
-            key: 'PETS_FORMDATA',
-            data: {
-               ...this.formData
+         if (this.validate()) {
+            store.commit('SET_FORMDATA', this.formData)
+            mpvue.setStorage({
+               key: 'PETS_FORMDATA',
+               data: {
+                  ...this.formData
+               }
+            })
+            if (this.status === 'new') {
+               mpvue.navigateTo({
+                  url: `/pages/order/confirm/main?source=${this.source}`
+               })
+            } else {
+               mpvue.navigateBack({
+                  delta: -1
+               })
             }
-         })
-         if (this.status === 'new') {
-            mpvue.navigateTo({
-               url: `/pages/order/confirm/main?source=${this.source}`
-            })
-         } else {
-            mpvue.navigateBack({
-               delta: -1
-            })
          }
       }
    },

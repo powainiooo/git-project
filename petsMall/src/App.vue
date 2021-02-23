@@ -40,7 +40,7 @@ button:after { border: none;}
 
 .tips-content { padding: 0 20px 0 66px; }
 .tips-content img { width: 70px; margin-bottom: 10px; }
-.tips-content p { font-size: 30px; line-height: 45px; color: #A6A5A5; text-shadow: var(--textShadow); }
+.tips-content p { font-size: 30px; line-height: 1.8; color: #9e9c9d; }
 
 .modal-hints { height: 100vh; box-sizing: border-box; position: fixed; top: 0; left: 0; right: 0; z-index: 1000; display: flex; flex-direction: column; overflow-y: auto; transition: top .5s cubic-bezier(.23,.78,.33,.97); }
 .modal-hints .frame1 { flex: 1; background-color: rgba(255, 255, 255, .97); display: flex; align-items: center; }

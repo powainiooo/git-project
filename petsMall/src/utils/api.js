@@ -14,7 +14,10 @@ const ajax = (opts, autoMsg = true) => {
             console.log('返回数据', res)
             resolve(res.data)
             if (res.data.status !== 0) {
-               mpvue.showToast({ title: res.data.msg })
+               mpvue.showToast({
+                  title: res.data.msg,
+                  icon: 'none'
+               })
             }
             wx.hideNavigationBarLoading()
          },

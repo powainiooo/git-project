@@ -136,11 +136,13 @@ export default {
          })
       },
       getCart () {
-         getAction('get_shopping_cart', {
-            token: store.state.token
-         }).then(res => {
-            this.cartList = res.data
-         })
+         if (store.state.token !== '') {
+            getAction('get_shopping_cart', {
+               token: store.state.token
+            }).then(res => {
+               this.cartList = res.data
+            })
+         }
       }
    },
    onLoad (options) {

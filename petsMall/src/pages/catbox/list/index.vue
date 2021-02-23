@@ -19,7 +19,7 @@ page { background-color: #F3F2F1; }
    <div class="list-container">
       <c-list-item v-for="item in listData" :key="id" :itemData="item" />
    </div>
-   <div class="hint" v-if="loadOver">没有更多了</div>
+   <div class="hint" v-if="loadOver"></div>
 
    <div class="hint-result" v-if="listData.length === 0">
       <img src="/static/images/goods/warn.png" mode="widthFix" style="width: 71rpx;" />

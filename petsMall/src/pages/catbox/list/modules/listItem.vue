@@ -15,7 +15,7 @@
 
 <template>
 <div class="c-list-item" @click="toPage">
-   <img :src="itemData.cover" class="img" />
+   <img :src="itemData.cover" class="img" mode="aspectFill" />
    <div class="name">
       <p class="en">{{itemData.english_name}}</p>
       <p>{{itemData.china_name}}</p>

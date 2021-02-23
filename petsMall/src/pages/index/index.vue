@@ -7,10 +7,14 @@
 .goods-list .c-index-goods-item { margin-bottom: 60px; }
 
 .hr { margin: 120px 45px 50px 45px; height: 1px; background-color: #D1CECE; transform: scaleY(.5); }
+
+.index-container {
+   padding-bottom: 70px;
+}
 </style>
 
 <template>
-<div class="container">
+<div class="container index-container">
    <c-header menu />
    <c-nav :list="typeList" />
    <div class="title">

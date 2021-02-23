@@ -4,7 +4,7 @@
 .c-index-goods-item .img img { width: 278px; height: 278px; position: absolute; left: 0; bottom: 0;}
 .c-index-goods-item .info { width: 350px; display: flex; flex-direction: column; justify-content: space-between;}
 .c-index-goods-item .info .name { font-size: 30px; color: var(--textColor); text-shadow: var(--textShadow2);}
-.c-index-goods-item .info .name .en { font-size: 34px; color: var(--textColor2); }
+.c-index-goods-item .info .name .en { font-size: 34px; color: var(--textColor2); font-family: HelveThin; }
 .c-index-goods-item .info .bottom { display: flex; align-items: center; justify-content: space-between;}
 .c-index-goods-item .info .bottom .price { font-size: 66px; color: var(--textColor2); text-shadow: var(--textShadow2); font-family: HelveThin;}
 .c-index-goods-item .info .bottom .price span { font-size: 20px;}

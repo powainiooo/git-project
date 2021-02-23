@@ -7,13 +7,13 @@ page { background-color: #F3F2F1; }
 .tabs-dog { left: 96px;}
 .tabs-cat { right: 96px;}
 
-.list-container { background-color: #ffffff; display: flex; flex-wrap: wrap; position: relative; padding: 52px 45px 0 45px; box-shadow: 0 0 25px rgba(0, 0, 0, .1); }
-.list-container:after { content: ''; width: 1px; position: absolute; top: 52px; left: 50%; bottom: 0; background-color: #D1CECE; transform: scaleX(.5); }
+.list-container { min-height: calc(100vh - 420px); background-color: #ffffff; display: flex; flex-wrap: wrap; position: relative; padding: 52px 45px 0 45px; box-shadow: 0 0 25px rgba(0, 0, 0, .1); }
 .list-container .grid:nth-child(2n) { display: flex; justify-content: flex-end; }
-.list-container .grid { flex: 1; position: relative; }
-.list-container .grid:before { content: ''; width: 100%; height: 1px; position: absolute; top: 0; left: 0; background-color: #D1CECE; transform: scaleY(.5); }
+.list-container .grid { width: 50%; position: relative; padding-top: 20px; }
+.list-container .grid:before { content: ''; width: 100%; height: 2px; position: absolute; top: 0; left: 0; background-color: #D1CECE; transform: scaleY(.5); }
 .list-container .grid:first-child:before { height: 0; }
 .list-container .grid:nth-child(2):before { height: 0; }
+.list-container .grid:nth-child(2n-1):after { content: ''; width: 2px; position: absolute; top: 0; right: 0; bottom: 0; background-color: #D1CECE; transform: scaleX(.5); }
 
 .hint { font-size: 24px; color: #9B9A9A; text-align: center; margin: 50px; }
 </style>
@@ -32,24 +32,33 @@ page { background-color: #F3F2F1; }
       <img src="/static/images/goods/cat.png" v-else />
    </div>
    <div class="list-container">
+      <template v-if="listData.length > 0">
       <div class="grid" v-for="item in listData" :key="id">
          <list-item :itemData="item" />
+      </div>
+      </template>
+      <div class="hint-result" v-else>
+         <img src="/static/images/goods/warn.png" mode="widthFix" style="width: 71rpx;" />
+         <h3 class="en">No related content</h3>
+         <h3>无相关内容！</h3>
       </div>
    </div>
    </template>
-   <div class="list-container" v-else style="background-color: transparent;">
+   <div class="list-container" v-else style="background-color: transparent; box-shadow: none;">
+      <template v-if="listData.length > 0">
       <div class="grid" v-for="item in listData" :key="id">
          <list-item :itemData="item" />
       </div>
+      </template>
+      <div class="hint-result" v-else>
+         <img src="/static/images/goods/warn.png" mode="widthFix" style="width: 71rpx;" />
+         <h3 class="en">No related content</h3>
+         <h3>无相关内容！</h3>
+      </div>
    </div>
 
-   <div class="hint" v-if="loadOver && keyword === ''">没有更多了</div>
+   <div class="hint" v-if="loadOver && keyword === ''"></div>
 
-   <div class="hint-result" v-if="listData.length === 0 && keyword !== ''">
-      <img src="/static/images/goods/warn.png" mode="widthFix" style="width: 71rpx;" />
-      <h3 class="en">No related content</h3>
-      <h3>无相关内容！</h3>
-   </div>
 </div>
 </template>
 
@@ -96,8 +105,9 @@ export default {
             pet_id: this.typeKey[this.tabs]
          }).then(res => {
             mpvue.hideLoading()
-            this.total = res.data.nums
+            this.total = Number(res.data.nums)
             this.listData = this.listData.concat(res.data.list)
+            this.showResult = this.keyword !== ''
          })
       },
       querySearch (e) {

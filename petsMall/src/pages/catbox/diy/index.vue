@@ -52,7 +52,7 @@
             </li>
          </ul>
       </div>
-      <div class="hint" v-if="loadOver">没有更多了</div>
+      <div class="hint" v-if="loadOver"></div>
    </div>
    <c-footer :btnName="btnName" :price="totalPrice" @btnFunc="changeStep" />
 

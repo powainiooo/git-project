@@ -11,7 +11,9 @@
 
 <template>
 <div class="c-order-item">
-   <div class="c-order-item-frame" @click="toPage">
+   <div class="c-order-item-frame" @click="toPage"
+        hover-class="hscale"
+        hover-stay-time="10">
       <div class="date borderB">{{date}}</div>
       <h3 class="en">{{itemData.english_name}}</h3>
       <h3>{{itemData.title}}</h3>

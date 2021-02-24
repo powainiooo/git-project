@@ -90,6 +90,7 @@ export default {
       this.reset()
    },
    onLoad (options) {
+      Object.assign(this.$data, this.$options.data())
       this.type = options.type || 'goods'
    }
 }

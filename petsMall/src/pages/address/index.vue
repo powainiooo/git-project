@@ -170,6 +170,7 @@ export default {
       }
    },
    onLoad (options) {
+      Object.assign(this.$data, this.$options.data())
       this.status = options.status || 'new'
       this.source = options.source || 'catbox'
       if (this.status === 'edit') {

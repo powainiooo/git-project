@@ -75,6 +75,7 @@ export default {
       }
    },
    onLoad (options) {
+      Object.assign(this.$data, this.$options.data())
       console.log('order onLoad', options)
       this.status = options.status || 'suc'
       this.orderNum = options.orderNum || ''

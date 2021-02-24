@@ -16,13 +16,20 @@
 <div class="c-nav">
    <img src="/static/images/index/bg.png" class="bg"/>
 
-   <a href="/pages/catbox/list/main" class="nav-box">
+   <a href="/pages/catbox/list/main"
+      class="nav-box"
+      hover-class="hscale"
+      hover-stay-time="10">
       <img src="/static/images/index/goods-catbox.png" />
       <p>订购猫盒<span>| Order cat box</span></p>
    </a>
 
    <div class="nav-list">
-      <a :href="'/pages/goods/list/main?type=' + item.id" v-for="item in list" :key="id">
+      <a :href="'/pages/goods/list/main?type=' + item.id + '&title=' + item.china_name + '|' + item.english_name"
+         v-for="item in list"
+         :key="id"
+         hover-class="hscale"
+         hover-stay-time="10">
          <img :src="item.cover" />
       </a>
    </div>

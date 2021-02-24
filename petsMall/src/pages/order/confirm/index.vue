@@ -201,6 +201,7 @@ export default {
       }
    },
    onLoad (options) {
+      Object.assign(this.$data, this.$options.data())
       this.source = options.source || 'catbox'
       const fd = {...store.state.formData}
       if (this.source === 'goods') {

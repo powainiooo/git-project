@@ -7,9 +7,10 @@
 </style>
 
 <template>
-<div class="container">
-   <c-header :title="title" titleColor="#E8E6E4" />
-   <div>
+<div>
+   <div class="container" :class="{'blur': showDetail}">>
+      <c-header :title="title" titleColor="#E8E6E4" />
+      <div
       <diy-step :step="step" v-if="source === 'diy'" />
       <div class="list-frame" :style="{'padding-top': source === 'diy' ? '150rpx' : 0}">
          <ul :style="{'transform': 'translateX(' + (-step * 100) + 'vw)'}">
@@ -56,9 +57,9 @@
    </div>
    <c-footer :btnName="btnName" :price="totalPrice" @btnFunc="changeStep" />
 
-   <select-type ref="details" @selected="goodsSelect" @close="typeClose" />
+   <select-type ref="details" @selected="goodsSelect" @close="typeClose" @price="changeTempPrice" />
 
-   <c-order-type :list="typeList" source="diy" :extraFd="formData" />
+   <!--   <c-order-type :list="typeList" source="diy" :extraFd="formData" />-->
 </div>
 </template>
 
@@ -86,8 +87,12 @@ export default {
          return this.total === this.listData.length
       },
       totalPrice () {
-         const goodsPrice = this.priceArr.reduce((total, i) => total + i ? Number(i) : 0, 0)
-         return this.needToy === 1 ? this.toyPrice + goodsPrice : goodsPrice
+         if (this.showDetail) {
+            return this.tempPrice
+         } else {
+            const goodsPrice = this.priceArr.reduce((total, i) => total + (i ? Number(i) : 0), 0)
+            return this.needToy === 1 ? this.toyPrice + goodsPrice : goodsPrice
+         }
       },
       typeList () {
          return [
@@ -130,6 +135,7 @@ export default {
          ],
          total: 0,
          selectedArr: [],
+         tempPrice: 0,
          priceArr: [],
          btnName: '下一步|Next',
          toyPrice: 10,
@@ -157,7 +163,8 @@ export default {
                id: 3
             }
          },
-         title: ''
+         title: '',
+         showDetail: false
       }
    },
    methods: {
@@ -216,8 +223,9 @@ export default {
          console.log('goodsSelect', data)
          this.selectedArr[this.step] = data.str
          const priceArr = [...this.priceArr]
-         priceArr[this.step] = data.price
+         priceArr[this.step] = Number(data.price)
          this.priceArr = priceArr
+         this.showDetail = false
          // const ids = data.str.split('-')
          // const type = this.tempRecord.attrs_list.find(i => i.id === ids[2])
          // const record = {
@@ -235,6 +243,7 @@ export default {
       },
       openDetail (record) {
          console.log('openDetail', record)
+         this.showDetail = true
          this.tempRecord = record
          this.btnName = '确认|Confirm'
          let catalogIndex = 0
@@ -264,11 +273,16 @@ export default {
          })
       },
       typeClose () {
+         this.showDetail = false
          if (this.source === 'diy') {
             this.btnName = '下一步|Next'
          } else {
             this.btnName = '保存|Save'
          }
+      },
+      changeTempPrice (e) {
+         console.log('changeTempPrice', e)
+         this.tempPrice = e
       }
    },
    onReachBottom () {

@@ -54,13 +54,14 @@ export default {
          goodsList: []
       }
    },
-   created () {
+   onShow () {
+      this.getGoods()
+   },
+   onLoad () {
+      Object.assign(this.$data, this.$options.data())
       getAction('type_list').then(res => {
          this.typeList = res.data
       })
-   },
-   onShow () {
-      this.getGoods()
    },
    methods: {
       getGoods () {

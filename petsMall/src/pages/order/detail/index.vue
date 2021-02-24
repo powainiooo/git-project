@@ -23,7 +23,9 @@ page { background-color: #F3F2F1; }
       </div>
       <div class="status" v-else-if="detailData.status === '5'">
          <img src="/static/images/order/box.png" class="box" />
-         <button class="btn-round">{{detailData.post_str}}</button>
+         <button class="btn-round"
+                 hover-class="hscale"
+                 hover-stay-time="10">{{detailData.post_str}}</button>
       </div>
       <div class="status" v-else-if="detailData.status === '4'">
          <img src="/static/images/order/clock.png" class="clock" />
@@ -135,6 +137,7 @@ export default {
       }
    },
    onLoad (options) {
+      Object.assign(this.$data, this.$options.data())
       this.orderNum = options.orderNum || 'T2021020621401003'
       this.source = options.source || 'catbox'
       if (this.source === 'goods') {

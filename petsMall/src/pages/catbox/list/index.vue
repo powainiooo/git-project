@@ -82,6 +82,9 @@ export default {
    onShow () {
       this.reset()
    },
+   onLoad () {
+      Object.assign(this.$data, this.$options.data())
+   },
    onReachBottom () {
       if (this.loadOver) return
       this.page += 1

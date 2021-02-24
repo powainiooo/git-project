@@ -58,6 +58,8 @@ button:after { border: none;}
 .goods-details .intros { padding: 32px 26px; }
 .goods-details .intros h3 { font-size: 30px; color: var(--textColor); text-shadow: var(--textShadow); margin-bottom: 16px; }
 .goods-details .intros p { font-size: 22px; color: #A6A5A5; line-height: 32px; margin-bottom: 38px; }
+
+.hscale { transition: all 0.15s ease-out; transform: scale(0.95);}
 </style>
 
 <script>

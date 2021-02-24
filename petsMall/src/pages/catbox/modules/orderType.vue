@@ -53,7 +53,12 @@
       <img src="/static/images/header/close.png" class="close" @click="close" />
    </div>
    <ul class="c-order-type-modal-list">
-      <li class="borderB" v-for="(item, index) in list" :key="index">
+      <li class="borderB"
+          v-for="(item, index) in list"
+          :key="index"
+          hover-class="hscale"
+          hover-stay-time="10"
+          @click="selectType(index, item.nums)">
          <div>
             <div>
                <p>订购{{item.name}}</p>
@@ -61,7 +66,7 @@
             </div>
             <p><span>{{item.pay_price}}</span>元</p>
          </div>
-         <img src="/static/images/catbox/radio.png" class="radio" v-if="index !== priceId" @click="selectType(index, item.nums)" />
+         <img src="/static/images/catbox/radio.png" class="radio" v-if="index !== priceId" />
          <img src="/static/images/catbox/radio-select.png" class="radio" v-else />
       </li>
    </ul>

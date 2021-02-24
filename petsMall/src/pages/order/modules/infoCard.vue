@@ -40,7 +40,9 @@
    </ul>
    </template>
    <div v-if="edit">
-      <button class="btn-round">编辑地址</button>
+      <button class="btn-round"
+              hover-class="hscale"
+              hover-stay-time="10">编辑地址</button>
    </div>
 </div>
 </template>

@@ -23,7 +23,9 @@
                :class="{
                      'active': catalogId === item.id
                   }"
-               @click="selectCatalog(item)">{{item.name}}</li>
+               @click="selectCatalog(item)"
+               hover-class="hscale"
+               hover-stay-time="10">{{item.name}}</li>
          </ul>
          <h3>· 选择规格</h3>
          <ul>
@@ -34,7 +36,9 @@
                      'active': specsId === item.specs_id,
                      'diabled': item.nums == 0
                   }"
-               @click="selectSpec(item)">{{item.specs}}</li>
+               @click="selectSpec(item)"
+               :hover-class="item.nums == 0 ? '' : 'hscale'"
+               hover-stay-time="10">{{item.specs}}</li>
          </ul>
       </div>
       <div class="intros">
@@ -76,6 +80,7 @@ export default {
          this.specsList = record.attrs_list[catalogIndex].child
          this.specsId = record.attrs_list[catalogIndex].child[specsIndex].specs_id
          this.specsRecord = record.attrs_list[catalogIndex].child[specsIndex]
+         this.$emit('price', this.specsRecord.price)
          this.$nextTick(() => {
             this.show = true
          })
@@ -86,10 +91,12 @@ export default {
          const specs = data.child[0]
          this.specsId = specs.specs_id
          this.specsRecord = specs
+         this.$emit('price', this.specsRecord.price)
       },
       selectSpec (data) {
          this.specsId = data.specs_id
          this.specsRecord = data
+         this.$emit('price', this.specsRecord.price)
       },
       confirm () {
          this.$emit('selected', {

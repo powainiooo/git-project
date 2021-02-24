@@ -6,8 +6,8 @@
 .c-diy-item .infos h3 { font-size: 30px; color: var(--textColor2); text-shadow: var(--textShadow); }
 .c-diy-item .infos h3.en { font-size: 34px; font-family: HelveThin; }
 .c-diy-item .infos ul { display: flex; margin-bottom: 32px; margin-top: 10px; }
-.c-diy-item .infos ul li { border: 1px solid var(--mainColor); padding: 5px 8px; color: #A6A5A5; font-size: 20px; margin-right: 8px; line-height: 1; }
-.c-diy-item .infos p { width: 330px; height: 56px; font-size: 18px; line-height: 26px; color: var(--textColor); text-shadow: var(--textShadow); margin-bottom: 28px; }
+.c-diy-item .infos ul li { border: 1px solid var(--mainColor); padding: 5px 8px; color: #A6A5A5; font-size: 20px; margin-right: 8px; line-height: 1; border-radius: 4px; }
+.c-diy-item .infos p { width: 330px; height: 56px; font-size: 18px; line-height: 26px; color: var(--textColor); text-shadow: var(--textShadow); margin-bottom: 28px; text-overflow: ellipsis; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical; }
 .c-diy-item .infos div { font-size: 20px; color: var(--textColor); text-shadow: var(--textShadow); }
 .c-diy-item .infos div span { font-size: 66px; font-family: HelveThin; }
 .c-diy-item .add { width: 92px; height: 92px; position: absolute; left: 620px; bottom: 42px; }
@@ -20,7 +20,10 @@
 </style>
 
 <template>
-<div class="c-diy-item borderB" @click="$emit('click', itemData)">
+<div class="c-diy-item borderB"
+     @click="$emit('click', itemData)"
+     hover-class="hscale"
+     hover-stay-time="10">
    <img :src="imgCover" class="img" />
    <div class="infos">
       <div>
@@ -76,7 +79,7 @@ export default {
    },
    computed: {
       imgCover () {
-         return this.itemData.cover || this.itemData.product_img
+         return this.itemData.product_img || this.itemData.cover
       },
       attrName () {
          if (this.itemData.attrs_list) {

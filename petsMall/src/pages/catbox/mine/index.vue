@@ -6,7 +6,8 @@
 <template>
 <div class="container">
    <c-header title="我的自定义猫盒|My cat box" titleColor="#E8E6E4" />
-   <div class="">
+   <template v-if="hasData">
+   <div>
       <diy-item
          v-for="(item, index) in detailData.productlist"
          :key="id"
@@ -25,8 +26,17 @@
       </div>
    </div>
    <c-footer btnName="我要订购|Order" :price="price" @btnFunc="openOrderType" />
-
    <c-order-type-modal :list="detailData.pricelist" :groupId="detailData.id" />
+   </template>
+   <template v-else>
+   <div class="hint-result">
+      <img src="/static/images/goods/warn.png" mode="widthFix" style="width: 71rpx;" />
+      <h3 class="en">No related content</h3>
+      <h3>无相关内容！</h3>
+   </div>
+   <c-footer btnName="自定义|Customized" needAuth @btnFunc="toDiy" />
+   </template>
+
 </div>
 </template>
 
@@ -46,6 +56,9 @@ export default {
       cOrderTypeModal
    },
    computed: {
+      userInfoAuth () {
+         return store.state.settings['scope.userInfo']
+      },
       toyData () {
          if (this.detailData.toy === '1') {
             return {
@@ -70,7 +83,10 @@ export default {
       return {
          id: '',
          price: 0,
-         detailData: {}
+         detailData: {
+            pricelist: []
+         },
+         hasData: false
       }
    },
    methods: {
@@ -118,20 +134,33 @@ export default {
                   }
                })
             } else {
-               this.detailData = res.data
-               this.price = res.data.pricelist[0].pay_price
+               if (Array.isArray(res.data)) {
+                  this.hasData = false
+               } else {
+                  this.hasData = true
+                  this.detailData = res.data
+                  this.price = res.data.pricelist[0].pay_price
+               }
                mpvue.hideLoading()
             }
          })
       },
       openOrderType () {
          store.commit('SET_ORDERTYPESTATUS', true)
+      },
+      toDiy () {
+         mpvue.navigateTo({
+            url: '/pages/catbox/diy/main'
+         })
       }
    },
    onShow () {
-      this.getData()
+      if (this.userInfoAuth) {
+         this.getData()
+      }
    },
    onLoad (options) {
+      Object.assign(this.$data, this.$options.data())
       this.id = options.id || 4
    }
 }

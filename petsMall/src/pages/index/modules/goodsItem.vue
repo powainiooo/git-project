@@ -23,7 +23,10 @@
       </div>
       <div class="bottom">
          <div class="price">{{itemData.price}}<span>元 / 月</span></div>
-         <button class="btn-round" @click="toDetail">立即订购</button>
+         <button class="btn-round"
+                 @click="toDetail"
+                 hover-class="hscale"
+                 hover-stay-time="10">立即订购</button>
       </div>
    </div>
 </div>

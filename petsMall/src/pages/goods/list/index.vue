@@ -7,7 +7,7 @@ page { background-color: #F3F2F1; }
 .tabs-dog { left: 96px;}
 .tabs-cat { right: 96px;}
 
-.list-container { min-height: calc(100vh - 420px); background-color: #ffffff; display: flex; flex-wrap: wrap; position: relative; padding: 52px 45px 0 45px; box-shadow: 0 0 25px rgba(0, 0, 0, .1); }
+.list-container { min-height: calc(100vh - 420px); background-color: #ffffff; display: flex; align-items: baseline; flex-wrap: wrap; position: relative; padding: 52px 45px 0 45px; box-shadow: 0 0 25px rgba(0, 0, 0, .1); }
 .list-container .grid:nth-child(2n) { display: flex; justify-content: flex-end; }
 .list-container .grid { width: 50%; position: relative; padding-top: 20px; }
 .list-container .grid:before { content: ''; width: 100%; height: 2px; position: absolute; top: 0; left: 0; background-color: #D1CECE; transform: scaleY(.5); }
@@ -20,7 +20,7 @@ page { background-color: #F3F2F1; }
 
 <template>
 <div class="container">
-   <c-header title="主粮|Staple food" searchBtn cartBtn @search="querySearch" />
+   <c-header :title="title" searchBtn cartBtn @search="querySearch" />
 
    <template v-if="!showResult">
    <div class="tabs tabs-dog" :class="{'tabs-active': tabs === 'dog'}" @click="toggleTab('dog')">
@@ -74,6 +74,7 @@ export default {
    },
    data () {
       return {
+         title: '',
          tabs: 'dog',
          showResult: false,
          typeKey: {
@@ -133,7 +134,9 @@ export default {
       this.getData()
    },
    onLoad (options) {
+      Object.assign(this.$data, this.$options.data())
       this.typeId = options.type || 1
+      this.title = options.title || '主粮|Staple food'
       this.getData()
    }
 }

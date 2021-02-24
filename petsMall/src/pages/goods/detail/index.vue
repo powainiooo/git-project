@@ -31,7 +31,9 @@
                   :class="{
                      'active': catalogId === item.id
                   }"
-                  @click="selectCatalog(item)">{{item.name}}</li>
+                  @click="selectCatalog(item)"
+                  hover-class="hscale"
+                  hover-stay-time="10">{{item.name}}</li>
             </ul>
             <h3>· 选择规格</h3>
             <ul>
@@ -42,7 +44,9 @@
                      'active': specsId === item.specs_id,
                      'diabled': item.nums == 0
                   }"
-                  @click="selectSpec(item)">{{item.specs}}</li>
+                  @click="selectSpec(item)"
+                  :hover-class="item.nums == 0 ? '' : 'hscale'"
+                  hover-stay-time="10">{{item.specs}}</li>
             </ul>
          </div>
          <div class="intros">
@@ -55,7 +59,7 @@
          </div>
       </div>
 
-      <c-footer btnName="加入购物车|Add to cart" @btnFunc="addCart" />
+      <c-footer btnName="加入购物车|Add to cart" needAuth @btnFunc="addCart" />
    </div>
    <c-carts :list="cartList" @refresh="getCart" />
 </div>
@@ -146,6 +150,7 @@ export default {
       }
    },
    onLoad (options) {
+      Object.assign(this.$data, this.$options.data())
       this.id = options.id || 1
       this.getData()
       this.getCart()

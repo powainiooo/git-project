@@ -167,6 +167,7 @@ export default {
       },
       getuserinfo (e) {
          console.log('getuserinfo', e)
+         if (e.mp.detail.errMsg !== 'getUserInfo:ok') return
          getAction('wxuser_add', {
             openid: store.state.openid,
             country: e.mp.detail.userInfo.country,

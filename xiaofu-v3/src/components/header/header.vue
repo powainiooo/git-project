@@ -27,8 +27,8 @@
         <span class="label">全部</span>
       </div>
       <button class="btn" v-if="showMenuBtn" @click="openMenu"><img src="/static/images/common/menu.png" /></button>
-      <button class="btn" v-if="showCloseBtn" @click="handleClose"><img src="/static/images/common/close.png" /></button>
       <button class="btn" v-if="showStarBtn"><img src="/static/images/common/star-select.png" style="width: 42rpx; height: 40rpx;" /></button>
+      <button class="btn" v-if="showCloseBtn" @click="handleClose"><img src="/static/images/common/close.png" /></button>
       <button class="btn" v-if="showShareBtn"><img src="/static/images/common/share.png" /></button>
     </div>
   </div>
@@ -66,6 +66,7 @@ export default {
       showMenus: false,
       showShareBtn: false,
       showStarBtn: false,
+      originStatus: '',
       pageStatus: ''
     }
   },
@@ -104,8 +105,16 @@ export default {
         case 'ticketDetail':
           this.showCity = false
           this.showMenuBtn = false
+          this.showCloseBtn = false
           this.showStarBtn = true
           this.showShareBtn = true
+          break
+        case 'ticketBuy':
+          this.showCity = false
+          this.showMenuBtn = false
+          this.showStarBtn = true
+          this.showShareBtn = false
+          this.showCloseBtn = true
           break
       }
     },
@@ -115,7 +124,7 @@ export default {
     handleClose () {
       this.$emit('close', this.pageStatus)
       if (this.pageStatus !== 'onlyClose') {
-        this.setStatus('')
+        this.setStatus(this.originStatus)
       }
     }
   }

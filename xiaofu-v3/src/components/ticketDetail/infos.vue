@@ -2,6 +2,10 @@
 .c-ticket-infos .banner {
   width: 100%;
   height: 800px;
+  transition: height .5s cubic-bezier(.3,.79,.41,.91);
+}
+.c-ticket-infos .banner-hide {
+  height: 0;
 }
 .c-ticket-infos .line1 {
   height: 106px;
@@ -70,7 +74,7 @@
 
 <template>
 <div class="c-ticket-infos">
-  <img src="/static/images/img.jpg" class="banner" />
+  <img src="/static/images/img.jpg" class="banner" :class="{'banner-hide': page === 'buy'}" v-if="showBanner" />
   <div class="line1 bBorder">
     <tk-info />
     <img src="/static/images/logo.png" />
@@ -90,6 +94,13 @@
 import tkInfo from '@/components/tkInfo'
 export default {
   name: 'app',
+  props: {
+    page: String,
+    showBanner: {
+      type: Boolean,
+      default: true
+    }
+  },
   components: {
     tkInfo
   },

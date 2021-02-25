@@ -24,7 +24,8 @@ const store = new Vuex.Store({
          price_id: 1,
          recom_str: '1-3'
       },
-      mineParams: {}
+      mineParams: {},
+      showShare: false
    },
    mutations: {
       SET_TOKEN (state, data) {
@@ -63,6 +64,9 @@ const store = new Vuex.Store({
       },
       SET_MINEPARAMS (state, data) {
          state.mineParams = data
+      },
+      SET_SHOWSHARE (state, data) {
+         state.showShare = data
       }
    }
 })

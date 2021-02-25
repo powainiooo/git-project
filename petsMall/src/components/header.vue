@@ -53,7 +53,8 @@
          <button style="align-items: flex-end" v-if="searchBtn && !showSearchFrame" @click="showSearchFrame = true">
             <img src="/static/images/header/search.png" mode="widthFix" class="search" />
          </button>
-         <div class="br" v-if="searchBtn && !showSearchFrame"></div>
+         <button @click="showShare" class="share" v-if="shareBtn"><img src="/static/images/header/share.png" mode="widthFix" style="width: 54rpx" /></button>
+         <div class="br" v-if="(searchBtn && !showSearchFrame) || shareBtn"></div>
          <button v-if="cartBtn" @click="openCart">
             <img src="/static/images/header/cart.png" mode="widthFix" class="cart" />
             <span class="carts-num">{{cartNums > 99 ? '99+' : cartNums}}</span>
@@ -114,6 +115,10 @@ export default {
          default: false
       },
       cartBtn: {
+         type: Boolean,
+         default: false
+      },
+      shareBtn: {
          type: Boolean,
          default: false
       },
@@ -191,6 +196,10 @@ export default {
          mpvue.makePhoneCall({
             phoneNumber: '18026948388'
          })
+      },
+      showShare () {
+         console.log('showShare')
+         store.commit('SET_SHOWSHARE', true)
       }
    }
 }

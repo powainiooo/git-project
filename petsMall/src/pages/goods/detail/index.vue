@@ -11,8 +11,8 @@
 
 <template>
 <div>
-   <div class="container" :class="{'blur': showCart}">
-      <c-header title="主粮|Staple food" titleColor="#E8E6E4" cartBtn :cartNums="cartList.length" />
+   <div class="container" :class="{'blur': showCart || showShare}">
+      <c-header title="主粮|Staple food" titleColor="#E8E6E4" cartBtn shareBtn :cartNums="cartList.length" />
       <c-banner :list="bannerList" />
       <div class="goods-details">
          <div class="infos borderB">
@@ -62,6 +62,8 @@
       <c-footer btnName="加入购物车|Add to cart" needAuth @btnFunc="addCart" />
    </div>
    <c-carts :list="cartList" @refresh="getCart" />
+
+   <c-share />
 </div>
 </template>
 
@@ -69,6 +71,7 @@
 import cHeader from '@/components/header'
 import cFooter from '@/components/footer'
 import cCarts from '@/components/carts'
+import cShare from '@/components/share'
 import cBanner from './modules/banner'
 import { getAction } from '@/utils/api'
 import store from '../../../store'
@@ -78,11 +81,15 @@ export default {
       cHeader,
       cFooter,
       cCarts,
-      cBanner
+      cBanner,
+      cShare
    },
    computed: {
       showCart () {
          return store.state.showCart
+      },
+      showShare () {
+         return store.state.showShare
       },
       specItem () {
          return this.specsList.find(i => i.specs_id === this.specsId)
@@ -154,6 +161,12 @@ export default {
       this.id = options.id || 1
       this.getData()
       this.getCart()
+   },
+   onShareAppMessage: function () {
+      return {
+         title: this.detailData.china_name,
+         path: 'pages/goods/detail/main'
+      }
    }
 }
 </script>

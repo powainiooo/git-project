@@ -14,7 +14,7 @@
 <template>
 <div class="c-index-goods-item">
    <div class="img">
-      <img :src="itemData.cover"/>
+      <img :src="itemData.recom_img"/>
    </div>
    <div class="info">
       <div class="name">

@@ -1,0 +1,39 @@
+<!--pages/bargain/myBargain.wxml-->
+<view class='container'>
+  <view class='orderNav'>
+    <view class='orderNav_li {{navIndex == 0?"on":""}}' data-num='0' bindtap='bindnav'>全部</view>
+    <view class='orderNav_li {{navIndex == 1?"on":""}}' data-num='1' bindtap='bindnav'>砍价中</view>
+    <view class='orderNav_li {{navIndex == 2?"on":""}}' data-num='2' bindtap='bindnav'>待购买</view>
+    <view class='orderNav_li {{navIndex == 3?"on":""}}' data-num='3' bindtap='bindnav'>成功</view>
+    <view class='orderNav_li {{navIndex == 4?"on":""}}' data-num='4' bindtap='bindnav'>失败</view>
+  </view>
+  <view class='itemList' wx:for="{{my_kj_list}}" wx:key="index" bindtap='binItem' data-id="{{item.id}}">
+    <view class='img'>
+      <image mode='widthFix' src='{{imgUrl + item.cover}}'></image>
+      <view class='k_tip'>
+        <image mode='widthFix' src='../../images/k_tip.png'></image>
+        <text wx:if="{{item.status == 0}}">砍价中</text>
+        <text wx:if="{{item.status == 1}}">已成功</text>
+        <text wx:if="{{item.status == 2}}">已失效</text>
+        <text wx:if="{{item.status == 3}}">待购买</text>
+      </view>
+    </view>
+    <view class='content'>
+      <text class='title'>{{item.goods_name}}</text>
+      <text class='base_price'><text>当前价：</text>
+      <text class='money'>￥{{item.current/100}}</text></text>
+      <text class='price'></text>
+      <button class='btn'>砍价详情</button>
+    </view>
+  </view>
+  <view class='nav'>
+    <view class='nav_left' bindtap='myIndex'>
+      <image src='../../images/k_33.png'></image>
+      <text>砍价商品</text>
+    </view>
+    <view class='nav_right active'>
+      <image src='../../images/k_44.png'></image>
+      <text>我的砍价</text>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,66 @@
+<!--pages/myOrderDetail/index.wxml-->
+<view class='orderAddress'>
+  <view class='cont'>
+    <text class='name'>收货人：{{address.rev_name}}</text>
+    <text class='phone'>{{address.rev_mobile}}</text>
+  </view>
+  <view class='address'>
+    <image src='/images/icon_address.png' class='icon'></image>
+    <text class='txt'>{{address.rev_province}}{{address.rev_city}}{{address.rev_area}}{{address.rev_address}}</text>
+  </view>
+</view>
+<view class='hr16'></view>
+<view class='orderLi'>
+  <view class='hr16'></view>
+  <view class='orderLi_top'>
+    <text class='num'>商品明细</text>
+    <text class='status'>{{info.order_status}}</text>
+  </view>
+  <view class='orderLi_shop' wx:for='{{goods_list}}' wx:key='unquit'>
+    <image src='{{imgUrl + item.goods_cover}}' class='img'></image>
+    <view class='cont'>
+      <view class='tit'>{{item.goods_name}}</view>
+      <view class='style'>{{item.goods_attr}}</view>
+      <view class='numView'>
+        <text class='num'>x{{item.buy_num}}</text>
+        <view class=''>
+          <text class='money1'>￥</text>
+          <text class='money2'>{{item.goods_price/100}}</text>
+          <!-- <text class='money3'>.00</text> -->
+        </view>
+
+      </view>
+    </view>
+  </view>
+  <!-- <view class='orderLi_shop'>
+    <image src='/images/img1.jpg' class='img'></image>
+    <view class='cont'>
+      <view class='tit'>Swisse 成人钙片 钙加维生素D片 澳洲进口柠檬...</view>
+      <view class='style'>150片/盒</view>
+      <view class='numView'>
+        <text class='num'>x2</text>
+        <view class=''>
+          <text class='money1'>￥</text>
+          <text class='money2'>99</text>
+          <text class='money3'>.00</text>
+        </view>
+      </view>
+    </view>
+  </view> -->
+</view>
+<view class='hr16'></view>
+<view class='txtH100'>下单时间：{{info.order_time}}</view>
+<view class='txtH100'>订单编号：{{info.order_num}}</view>
+<view class='hr16'></view>
+<view class='txtH100'>商品合计：¥{{info.sphj/100}}</view>
+<view class='txtH100'>积分抵扣：¥{{info.dk_amount/100}}</view>
+<view class='txtH100'>运费：¥{{info.spyf}}</view>
+<view class='txtH100'>实付：¥{{info.order_amount/100}}</view>
+<view class='txtH100'>一级分销商：{{info.yj_name}}</view>
+<view class='txtH100'>一级分销商佣金：{{info.yj_yj == ''?'':'¥' + info.yj_yj/100}}</view>
+<view class='txtH100'>二级分销商：{{info.ej_name}}</view>
+<view class='txtH100'>二级分销商佣金：{{info.ej_yj == ''?'':'¥' + info.ej_yj/100}}</view>
+<view class='txtH100'>三级分销商：{{info.sj_name}}</view>
+<view class='txtH100'>三级分销商佣金：{{info.sj_yj == ''?'':'¥' + info.sj_yj/100}}</view>
+
+

@@ -1,0 +1,35 @@
+<!--pages/tixian/index.wxml-->
+<view wx:if='{{list.length>0}}'>
+  <view class='allMoney'>
+    <text class='tips'>累计提现:</text>
+    <text class='money'>￥{{txAll}}</text> 元
+  </view>
+  <view class='tixian_tips'>
+    <view class='line'></view>
+    <text class='cont'>提现明细</text>
+  </view>
+
+  <view class='table'>
+    <view class='tr th'>
+      <view class='td'>提现时间</view>
+      <view class='td'>提现金额</view>
+      <view class='td'>状态</view>
+    </view>
+    <view class='tr' wx:for='{{list}}' wx:key='unquit'>
+      <view class='td'>{{item.ctime}}</view>
+      <view class='td'>￥{{item.withdraw}}</view>
+      <view class='td red'>{{flagArr[item.flag]}}</view>
+    </view>
+    <!-- <view class='tr'>
+      <view class='td'>20180707</view>
+      <view class='td'>￥561</view>
+      <view class='td'>已通过</view>
+    </view> -->
+
+  </view>
+</view>
+
+<view class='none_mingxi' wx:else>
+  <image src='/images/none_mingxi.png' class='img'></image>
+  <text>这里空荡荡的~</text>
+</view>

@@ -1,5 +1,6 @@
 <style scoped>
-.c-share-frame { width: 100%; border-radius: 15px 15px 0 0; overflow: hidden; background-color: #ffffff; position: fixed; bottom: 0; left: 0; z-index: 1500; transition: bottom .5s cubic-bezier(.23,.78,.33,.97); }
+.c-share-frame { width: 100%; border-radius: 15px 15px 0 0; overflow: hidden; background-color: #ffffff; position: fixed; bottom: -550px; left: 0; z-index: 1500; transition: bottom .5s cubic-bezier(.23,.78,.33,.97); }
+.c-share-frame-show { bottom: 0 }
 .c-share-frame-title { background-color: var(--mainColor); height: 170px; border-radius: 15px 15px 0 0; display: flex; justify-content: space-between; align-items: center; padding: 0 66px; }
 .c-share-frame-title .title p { font-size: 36px; color: #ffffff; text-shadow: var(--textShadow); }
 .c-share-frame-title .title p.en { font-size: 40px; font-family: HelveThin; margin-bottom: 8px; }
@@ -8,11 +9,11 @@
 .c-share-btns button { height: 185px; margin: 0 42px; padding-left: 25px; display: flex; align-items: center; color: var(--textColor); text-shadow: var(--textShadow); font-size: 34px; background-color: transparent; }
 .c-share-btns .borderB { margin: 0 42px; }
 
-.canvas-frame { width: 750px; height: 760px; position: fixed; top: 10px; left: 0; }
+.canvas-frame { width: 750px; height: 760px; position: fixed; top: -10000px; left: -10000px; }
 </style>
 
 <template>
-<div class="c-share-frame" :style="{bottom: showShare ? 0 : '-550px'}">
+<div class="c-share-frame c-share-frame-show" :class="{'c-share-frame-show': showShare}">
    <div class="c-share-frame-title">
       <div class="title">
          <p class="en">Share</p>
@@ -44,28 +45,34 @@
 import store from '@/store'
 export default {
 	name: 'app',
+   props: {
+	   itemData: Object
+   },
 	data() {
-		return {}
+		return {
+		   loadIndex: 0
+      }
 	},
    computed: {
       showShare () {
          return store.state.showShare
       }
    },
-   mounted () {
-	   setTimeout(() => {
-	      this.drawPost()
-      }, 500)
-   },
 	methods: {
       hideShare () {
+         console.log('hideShare')
          store.commit('SET_SHOWSHARE', false)
       },
       drawPost () {
+         console.log('drawPost')
+         mpvue.showLoading({
+            title: '生成海报中'
+         })
          const query = wx.createSelectorQuery()
          query.select('#canvas')
             .fields({ node: true, size: true })
             .exec((res) => {
+               console.log('drawPost', res)
                this.initPoster(res)
             })
       },
@@ -75,10 +82,10 @@ export default {
          const ctx = canvas.getContext('2d')
          console.log('initPoster', ctx)
 
-         const dpr = wx.getSystemInfoSync().pixelRatio
-         canvas.width = res[0].width * dpr
-         canvas.height = res[0].height * dpr
-         ctx.scale(dpr, dpr)
+         // const dpr = wx.getSystemInfoSync().pixelRatio
+         // canvas.width = res[0].width * dpr
+         // canvas.height = res[0].height * dpr
+         // ctx.scale(dpr, dpr)
 
          // 背景色
          ctx.fillStyle = '#ffffff'
@@ -93,23 +100,23 @@ export default {
          // 英文名
          ctx.font = '34px HelveThin'
          ctx.fillStyle = '#3E311F'
-         ctx.fillText('Ziwipeak® Cat box', 368, 270)
+         ctx.fillText(this.itemData.titleEn, 368, 270)
 
          // 中文名
          ctx.font = '30px'
          ctx.fillStyle = '#3E311F'
-         ctx.fillText('滋益巅峰', 368, 320)
+         ctx.fillText(this.itemData.title, 368, 320)
 
          // 价格
          ctx.font = '66px HelveThin'
          ctx.fillStyle = '#3E311F'
-         ctx.fillText('280', 368, 480)
-         const metrics = ctx.measureText('280')
+         ctx.fillText(this.itemData.price, 368, 480)
+         const metrics = ctx.measureText(this.itemData.price)
 
          // 单位
          ctx.font = '20px HelveThin'
          ctx.fillStyle = '#3E311F'
-         ctx.fillText('元 / 月', 370 + metrics.width, 480)
+         ctx.fillText(this.itemData.unit, 370 + metrics.width, 480)
 
          // 分割线
          ctx.fillStyle = '#D1CECE'
@@ -127,18 +134,21 @@ export default {
          logo.src = '/static/images/header/logo@2x.png'
          logo.onload = () => {
             ctx.drawImage(logo, 68, 42, 74, 100)
+            this.loadOver()
          }
          // 产品图
          const img = canvas.createImage()
-         img.src = 'http://catbox.pc-online.cc/upload/11/2021/0223/1614063903245.png'
+         img.src = this.itemData.img
          img.onload = () => {
             ctx.drawImage(img, 58, 210, 278, 278)
+            this.loadOver()
          }
          // 二维码
          const qrcode = canvas.createImage()
-         qrcode.src = 'http://catbox.pc-online.cc/upload/code/code_2goods_1.jpg'
+         qrcode.src = this.itemData.qrcode
          qrcode.onload = () => {
             ctx.drawImage(qrcode, 58, 588, 130, 130)
+            this.loadOver()
          }
 
       },
@@ -179,6 +189,24 @@ export default {
          //右边线
          cxt.lineTo(width, height - radius);
          cxt.closePath();
+      },
+      loadOver () {
+         this.loadIndex += 1
+         if (this.loadIndex === 3) {
+            mpvue.canvasToTempFilePath({
+               canvasId: 'canvas',
+               success (res) {
+                  console.log('canvasToTempFilePath', res)
+                  mpvue.saveImageToPhotosAlbum({
+                     filePath: res.tempFilePath,
+                     success(res2) {
+                        console.log('saveImageToPhotosAlbum', res2)
+                        mpvue.hideLoading()
+                     }
+                  })
+               }
+            })
+         }
       }
    }
 }

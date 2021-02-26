@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "商城分类",
+  "usingComponents": {
+    "footer": "/Component/footer"
+  }
+}

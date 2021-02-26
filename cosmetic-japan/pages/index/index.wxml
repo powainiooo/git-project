@@ -1,0 +1,113 @@
+<view class='container f3'>
+   <view class="section">
+      <!-- 顶部栏  -->
+      <view class='searchBox indexSearch'>
+         <image class='logo' src='/images/logo.png' mode="widthFix"></image>
+         <view class='serch start' bindtap="SerchFocus">
+            <image class='ico_search' src='/images/ico_seach.png'></image>
+            <input type='text' placeholder-class='serchPlace' placeholder='搜索你喜欢的商品' disabled='true'></input>
+         </view>
+         <button class="btn-type"><image src='/images/ico-type.png' mode="widthFix"></image></button>
+      </view>
+      <!-- banner轮播图  -->
+      <view class='index-banner'>
+         <swiper indicator-dots="true" circular="true" autoplay="true" indicator-color="rgba(0, 0, 0, .3)" indicator-active-color="#FFFFFF">
+            <swiper-item>
+               <image src="/images/imgs/banner1.png" class="slide-image"></image>
+            </swiper-item>
+            <swiper-item>
+               <image src="/images/imgs/banner1.png" class="slide-image"></image>
+            </swiper-item>
+            <swiper-item>
+               <image src="/images/imgs/banner1.png" class="slide-image"></image>
+            </swiper-item>
+         </swiper>
+         <!-- <image class='bgStyle' src='/images/banbg.png'></image> -->
+      </view>
+      <!-- 商城入住 -->
+      <view class="brands indexList">
+         <view class='title'>
+            <view class='center'>
+               <image src='/images/ico_dd.png'></image>
+               <view class='text'>商城入驻品牌</view>
+               <image src='/images/ico_dd.png'></image>
+            </view>
+         </view>
+         <view class="brands-list">
+            <view>
+               <image src='/images/imgs/brand1.png'></image>
+            </view>
+            <view>
+               <image src='/images/imgs/brand1.png'></image>
+            </view>
+            <view>
+               <image src='/images/imgs/brand1.png'></image>
+            </view>
+            <view>
+               <image src='/images/imgs/brand1.png'></image>
+            </view>
+            <view>
+               <image src='/images/imgs/brand1.png'></image>
+            </view>
+            <view>
+               <image src='/images/imgs/brand1.png'></image>
+            </view>
+            <view>
+               <image src='/images/imgs/brand1.png'></image>
+            </view>
+            <view>
+               <image src='/images/imgs/brand1.png'></image>
+            </view>
+         </view>
+      </view>
+   </view>
+   <view class="section">
+      <!-- 今日优选 -->
+      <view class="indexList">
+         <view class='title'>
+            <view class='center'>
+               <image src='/images/ico_dd.png'></image>
+               <view class='text'>今日优选</view>
+               <image src='/images/ico_dd.png'></image>
+            </view>
+         </view>
+         <view class="goods-list">
+            <view class="goods-item">
+               <image src="/images/imgs/img1.png"></image>
+               <view>化妆品套装正品全套抗
+                  皱紧致补水护肤品水乳</view>
+            </view>
+            <view class="goods-item">
+               <image src="/images/imgs/img1.png"></image>
+               <view>化妆品套装正品全套抗
+                  皱紧致补水护肤品水乳</view>
+            </view>
+            <view class="goods-item">
+               <image src="/images/imgs/img1.png"></image>
+               <view>化妆品套装正品全套抗
+                  皱紧致补水护肤品水乳</view>
+            </view>
+         </view>
+      </view>
+   </view>
+   <view class="section">
+      <view class="index-type-list1">
+         <navigator><image src='/images/imgs/img1.png'></image></navigator>
+         <navigator><image src='/images/imgs/img1.png'></image></navigator>
+         <navigator><image src='/images/imgs/img1.png'></image></navigator>
+         <navigator><image src='/images/imgs/img1.png'></image></navigator>
+      </view>
+      <view class="index-type-list2 between">
+         <navigator><image src='/images/imgs/img1.png'></image></navigator>
+         <navigator><image src='/images/imgs/img1.png'></image></navigator>
+         <navigator><image src='/images/imgs/img1.png'></image></navigator>
+         <navigator><image src='/images/imgs/img1.png'></image></navigator>
+      </view>
+   </view>
+</view>
+
+<footer num="1" bindswitchlag="SwitchLag"></footer>
+<import src="../template/template.wxml" />
+<block wx:if="{{isShowGetUser}}">
+   <template is="getUserInfo"></template>
+</block>

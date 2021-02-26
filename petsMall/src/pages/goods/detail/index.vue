@@ -63,7 +63,7 @@
    </div>
    <c-carts :list="cartList" @refresh="getCart" />
 
-   <c-share />
+   <c-share :itemData="shareData" />
 </div>
 </template>
 
@@ -93,6 +93,18 @@ export default {
       },
       specItem () {
          return this.specsList.find(i => i.specs_id === this.specsId)
+      },
+      shareData () {
+         const specItem = this.specItem || {}
+         const classes = this.detailData.classes || [{}]
+         return {
+            title: this.detailData.china_name,
+            titleEn: this.detailData.english_name,
+            price: specItem.price,
+            img: classes[0].product_img,
+            qrcode: this.detailData.wxacode,
+            unit: '元'
+         }
       }
    },
    data () {

@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+     "footer": "/Component/footer"
+  },
+   "backgroundTextStyle": "light",
+   "navigationBarBackgroundColor": "#02a0e9",
+   "navigationBarTitleText": "日本化妆品小程序",
+   "navigationBarTextStyle": "white"
+}

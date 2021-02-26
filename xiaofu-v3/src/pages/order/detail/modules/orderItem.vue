@@ -12,10 +12,14 @@
   position: relative;
   z-index: 5;
 }
+.c-order-item-top-use {
+  background-color: transparent;
+}
 .c-order-item-top .line1 {
   width: 234px;
   height: 234px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   margin: 42px auto 6px auto;
@@ -24,9 +28,20 @@
   width: 100%;
   height: 100%;
 }
+.c-order-item-top .line1 p {
+  font-size: 24px;
+  color: #9E9E9F;
+}
+.c-order-item-top .line1 p.en {
+  font-size: 32px;
+  font-family: HelveB;
+}
 .c-order-item-top .line2 {
   font-size: 24px;
   text-align: center;
+}
+.c-order-item-top-use .line2 {
+  color: #9E9E9F;
 }
 
 .c-order-item-bottom {
@@ -101,6 +116,8 @@
   <div class="c-order-item-top">
     <div class="line1">
       <img src="/static/images/img.jpg" />
+<!--      <p class="en">Checked</p>-->
+<!--      <p>已使用</p>-->
     </div>
     <div class="line2">0016659884321</div>
   </div>

@@ -80,12 +80,12 @@ Page({
   onLoad: function (options) {
     console.log(55,options);
     if (options && options.id != ''){
-      let link = { method: 'cate_list', canshu: '&id=' + options.id + '&page=' + Number(this.data.page)};
+      let link = { method: 'cate_list', canshu: '&cid=' + options.id + '&page=' + Number(this.data.page)};
       let logic = (ret) => {
         this.setData({
           id: options.id,
-          list: ret.result,
-          isNoReturn: ret.result.length > 0 ? false : true,
+          list: ret.list,
+          isNoReturn: ret.list.length > 0 ? false : true,
           isCN: wx.getStorageSync('isCN')
         })
       }
@@ -97,35 +97,35 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+
   },
 
   /**

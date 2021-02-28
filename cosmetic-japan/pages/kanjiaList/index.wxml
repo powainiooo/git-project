@@ -1,7 +1,7 @@
 <!--pages/kanjiaList/index.wxml-->
 <view class='orderList'>
   <view class='orderLi'>
-    <navigator url='../kanjia/index?id={{item.id}}' hover-class='none' wx:for="{{list}}" wx:key="{{index}}" class='orderLi_shop bb10'>
+    <navigator url='../kanjia/index?id={{item.id}}' hover-class='none' wx:for="{{list}}" wx:key="index" class='orderLi_shop bb10'>
       <image src='/images/img1.jpg' class='img'></image>
       <view class='cont'>
         <view class='tit' style='font-size:30rpx;height: 80rpx;'>{{item.goods_name}}</view>

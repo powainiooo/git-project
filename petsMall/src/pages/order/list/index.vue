@@ -15,7 +15,7 @@ page { background-color: #F3F2F1; }
 <div class="container">
    <c-header title="已订购订单|Booked order" />
    <div class="order-list" v-if="listData.length > 0">
-      <order-item v-for="item in listData" :key="id" :itemData="item" />
+      <order-item v-for="item in listData" :key="id" :itemData="item" :type="type" />
    </div>
    <div class="hint-result" v-else>
       <img src="/static/images/goods/warn.png" mode="widthFix" style="width: 71rpx;" />

@@ -1,5 +1,5 @@
 <!--pages/my/index.wxml-->
-<view class='container f3'>  
+<view class='container f3'>
   <view class='MyHeader'>
     <image src='/images/bg.png' class='bg'></image>
     <view class='box' wx:if="{{hasLogin==1}}">
@@ -36,7 +36,7 @@
       <view class='r'><image src='/images/ico_jt.png'></image></view>
     </navigator>
     <view class="fff myPinduan" wx:if="{{spellList.length>0 && data.tg_status==1}}">
-      <view class="myPinduanItem" wx:for="{{spellList}}" wx:key="{{index}}" wx:if="{{!isShowAll?index<3:'true'}}">
+      <view class="myPinduanItem" wx:for="{{spellList}}" wx:key="index" wx:if="{{!isShowAll?index<3:'true'}}">
           <image class="pdImg" src='{{imgUrl}}{{item.goods_cover}}'></image>
           <span class="pdTitle">拼单仅剩<span class="pdTime">{{item.lastTime}}</span></span>
           <button class="inviteButton" open-type='share' data-url="{{imgUrl}}{{item.goods_cover}}" data-title="【仅剩{{item.remain_num}}个名额】{{item.goods_name}}" data-id="{{item.order_id}}" id='shareBtn'>邀请好友</button>
@@ -79,7 +79,7 @@
     </button>
   </view>
 
-  
+
   <!--弹窗-->
   <view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{couponDialog}}"></view>
   <view class="modal-dialog" wx:if="{{couponDialog}}">

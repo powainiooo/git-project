@@ -13,7 +13,7 @@
 .c-goods-item .c-goods-item-infos p { font-size: 30px; color: var(--textColor); text-shadow: var(--textShadow); }
 .c-goods-item .c-goods-item-infos p.en { font-size: 34px; color: var(--textColor2); font-family: HelveThin; }
 .c-goods-item .c-goods-item-infos .tabs { display: flex; margin-top: 16px; }
-.c-goods-item .c-goods-item-infos .tabs li { border: 1px solid var(--mainColor); padding: 5px 8px; color: #A6A5A5; font-size: 20px; margin-right: 8px; line-height: 1; }
+.c-goods-item .c-goods-item-infos .tabs li { border: 1px solid var(--mainColor); padding: 5px 8px; color: #A6A5A5; font-size: 20px; margin-right: 8px; line-height: 1; border-radius: 8px; }
 .c-goods-item .nums { color: #A6A5A5; font-size: 20px; }
 .c-goods-list-list .c-goods-item:last-child:after { height: 0;}
 

@@ -20,7 +20,7 @@
       </button>
     </view>
     <view class='productList fff'>
-      <view class='item between' wx:for="{{list}}" wx:key="{{index}}">
+      <view class='item between' wx:for="{{list}}" wx:key="index">
         <view class='l'><image src='{{imgUrl}}{{item.cover}}'></image></view>
         <view class='r'>
           <view class='name'>{{item.goods_name}}</view>
@@ -46,7 +46,7 @@
       </view>
       <!-- 砍价/秒杀/限时购情况下隐藏 -->
       <block wx:if="{{(data.activity_type == 0&&data.hd_id == 0)}}">
-  
+
       <view class='item between'>
         <view class='label' wx:if="{{jf_status==1}}">当前积分</view>
         <view class='right'>{{data.dqjf}}</view>
@@ -65,7 +65,7 @@
           <switch bindchange="switchChange"/>
         </view>
       </view>
-     
+
 
       <view wx:if="{{yhq_status==1}}" class='item between' bindtap='openyhqTap'>
         <view class='label'>使用优惠券</view>
@@ -115,7 +115,7 @@
           <view class='icoTB' wx:if="{{select==-1}}"><image src='/images/ico_y.png'></image></view>
           <view class='icoTB' wx:else><image src='/images/ico_noo.png'></image></view>
         </view>
-        <view class='item between' bindtap='selectYHQ' wx:for="{{data.u_yhq}}" wx:key="{{index}}" data-index='{{index}}'>
+        <view class='item between' bindtap='selectYHQ' wx:for="{{data.u_yhq}}" wx:key="index" data-index='{{index}}'>
           <span>满{{item.condition}}减{{item.miane}}</span>
           <view class='icoTB' wx:if="{{select==index}}"><image src='/images/ico_y.png'></image></view>
           <view class='icoTB' wx:else><image src='/images/ico_noo.png'></image></view>

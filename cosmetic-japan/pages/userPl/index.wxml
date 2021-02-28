@@ -4,10 +4,10 @@
     <view class='le start'>
       <span>评价</span>
       <view class='starbox'>
-        <block wx:for="{{starNum}}" wx:key="{{index}}">
+        <block wx:for="{{starNum}}" wx:key="index">
           <image src='/images/ico_star_y.png'></image>
         </block>
-        <block wx:for="{{5-starNum}}" wx:key="{{index}}">
+        <block wx:for="{{5-starNum}}" wx:key="index">
           <image src='/images/ico_star_n.png'></image>
         </block>
       </view>
@@ -16,12 +16,12 @@
     <view class='ri' wx:else>{{data.hp_percent}}好评</view>
   </view>
   <view class='plList'>
-    <view class='item fff' wx:for="{{list}}" wx:key="{{index}}">
+    <view class='item fff' wx:for="{{list}}" wx:key="index">
       <view class='top between'>
         <view class='l'><image src='{{item.headimg}}'></image>{{item.uname}}</view>
         <view class='r'>{{item.ctime}}</view>
       </view>
-      <block wx:for="{{item.detail}}" wx:for-item="its" wx:key="{{index}}">
+      <block wx:for="{{item.detail}}" wx:for-item="its" wx:key="index">
         <view class='plContent' wx:if="{{its.type==1}}">{{its.content}}</view>
         <view class='ContentBox' wx:else>
           <image class='top_jt' src='/images/ico_top_jt.png'></image>

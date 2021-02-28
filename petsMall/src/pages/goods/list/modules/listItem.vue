@@ -9,7 +9,10 @@
 </style>
 
 <template>
-<div class="c-list-item" @click="toDetail">
+<div class="c-list-item"
+     @click="toDetail"
+     hover-class="hscale"
+     hover-stay-time="10">
    <div class="imgs"><img :src="itemData.cover" /></div>
    <div class="en">{{itemData.english_name}}</div>
    <div class="cn">{{itemData.china_name}}</div>

@@ -8,7 +8,7 @@ page { background-color: #F3F2F1; }
 <template>
 <div>
    <div class="container" :class="{'blur': showOrderType}">
-      <c-header title="猫盒详情|Contents of the cat box" />
+      <c-header title="猫盒详情|Contents of the cat box" shareBtn />
       <div class="catbox-detail">
          <img :src="detailData.cover" mode="widthFix" style="width: 100%;" />
          <c-goods-list
@@ -26,13 +26,16 @@ page { background-color: #F3F2F1; }
 
    <c-footer btnName="我要订购|Order" @btnFunc="openOrderType" />
 
-   <c-order-type-modal :list="detailData.pricelist" :groupId="detailData.id" />
+   <c-order-type-modal :list="pricelist" :groupId="detailData.id" />
+
+   <c-share :itemData="shareData" />
 </div>
 </template>
 
 <script>
 import cHeader from '@/components/header'
 import cFooter from '@/components/footer'
+import cShare from '@/components/share'
 import cGoodsList from '@/components/goodsList'
 import cGoodsDetail from '@/components/goodsDetail'
 import cOrderType from './modules/orderType'
@@ -47,17 +50,30 @@ export default {
       cGoodsList,
       cGoodsDetail,
       cOrderType,
-      cOrderTypeModal
+      cOrderTypeModal,
+      cShare
    },
    computed: {
       showOrderType () {
          return store.state.showOrderType
+      },
+      shareData () {
+         const price = this.pricelist.length === 0 ? 0 : this.pricelist[0].pay_price
+         return {
+            title: this.detailData.china_name,
+            titleEn: this.detailData.english_name,
+            price,
+            img: this.detailData.recom_img,
+            qrcode: this.detailData.wxacode,
+            unit: '元/月'
+         }
       }
    },
    data () {
       return {
          id: '',
-         detailData: {}
+         detailData: {},
+         pricelist: []
       }
    },
    methods: {
@@ -71,11 +87,12 @@ export default {
          }).then(res => {
             mpvue.hideLoading()
             this.detailData = res.data
+            this.pricelist = res.data.pricelist
          })
       }
    },
    onLoad (options) {
-      Object.assign(this.$data, this.$options.data())
+      // Object.assign(this.$data, this.$options.data())
       this.id = options.id || '2'
       this.getData()
    }

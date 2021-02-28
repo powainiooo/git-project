@@ -6,7 +6,7 @@
         <image class="pdsImg" src="/images/pt/paycheck.png"/>拼单成功
       </view>
       <view class="personImgList1">
-        <view class="personItem1" wx:for="{{order_data.group_buy_user}}" wx:key="{{index}}">
+        <view class="personItem1" wx:for="{{order_data.group_buy_user}}" wx:key="index">
           <image class="personImg1" src="{{item.headimg}}"  wx:if="{{item.headimg}}"/>
           <image class="personImg1" src="/images/pt/noperson.png" wx:if="{{!item.headimg}}" />
           <image class="pinzu1" src="/images/pt/pinzu.png" wx:if="{{index == 0}}"/>
@@ -36,7 +36,7 @@
     </view>
     <view class="second fff" wx:if="{{!isToDeatil}}">
       <view class="personImgList">
-        <view class="personItem" wx:for="{{order_data.group_buy_user}}" wx:key="{{index}}">
+        <view class="personItem" wx:for="{{order_data.group_buy_user}}" wx:key="index">
           <image class="personImg" src="{{item.headimg}}"  wx:if="{{item.headimg}}"/>
           <image class="personImg" src="/images/pt/noperson.png" wx:if="{{!item.headimg}}" />
           <image class="pinzu" src="/images/pt/pinzu.png" wx:if="{{index == 0}}"/>
@@ -57,7 +57,7 @@
     </view>
     <view class="third youxuanBox indexList">
       <view class='itemBox between wrap'>
-        <navigator wx:for="{{group_buy_list}}" wx:key="{{index}}" url='../detail/index?id={{item.id}}&activity_type=4&hd_id={{item.id}}' hover-class='none' class='item'>
+        <navigator wx:for="{{group_buy_list}}" wx:key="index" url='../detail/index?id={{item.id}}&activity_type=4&hd_id={{item.id}}' hover-class='none' class='item'>
           <image src='{{imgUrl}}{{item.cover}}'></image>
           <view class='name'>{{item.goods_name}}</view>
           <view class='price'>￥<span>{{item.tg_price}}</span></view>
@@ -90,7 +90,7 @@
           <image class="pdsImg" src="/images/pt/paycheck.png"/>拼单成功
         </view>
         <view class="personImgList1">
-          <view class="personItem1" wx:for="{{order_data.group_buy_user}}" wx:key="{{index}}">
+          <view class="personItem1" wx:for="{{order_data.group_buy_user}}" wx:key="index">
             <image class="personImg1" src="{{item.headimg}}"  wx:if="{{item.headimg}}"/>
             <image class="personImg1" src="/images/pt/noperson.png" wx:if="{{!item.headimg}}" />
             <image class="pinzu1" src="/images/pt/pinzu.png" wx:if="{{index == 0}}"/>

@@ -135,6 +135,7 @@ export default {
          return store.state.showOrderType
       },
       totalPrice () {
+         if (this.list.length === 0) return 0
          const typePrice = Number(this.list[this.priceId].pay_price)
          const recPrice = this.recList.reduce((total, item) => {
             return total += item.selected ? Number(item.pay_price) * this.nums : 0

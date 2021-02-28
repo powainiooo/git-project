@@ -1,11 +1,11 @@
 const app = getApp();
-const www = getApp().globalData.www;
+const www = getApp().globalData.www + '/';
 
 // 总接口
 function post(that, link, data, logic = function () { }) {
   var login_key = app.getLoginKey();
   var isCN = 1;
-  var url = www + 'api/hwsc/' + link.method + '?login_key=' + login_key + '&mid=' + app.globalData.mid + '&isCN=' + isCN + link.canshu;
+  var url = www + 'api/index/' + link.method + '?login_key=' + login_key + '&mid=' + app.globalData.mid + '&isCN=' + isCN + link.canshu;
   wx.request({
     url: url,
     data: data,
@@ -54,7 +54,7 @@ function post(that, link, data, logic = function () { }) {
             })
           }, 2000)
         }else if (retData.ret == 0){
-          logic(retData);
+          logic(retData.data);
         } else{
           wx.showToast({
             title: retData.msg,
@@ -173,7 +173,7 @@ function reqUser(UserInfo, that,type){
         console.log(that);
         that.onLoad();
       }
-      
+
     }
   })
 }

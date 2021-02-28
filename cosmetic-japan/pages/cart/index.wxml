@@ -1,7 +1,7 @@
 <!--pages/cart/class.wxml-->
 <view class='container f3'>
   <view class='cartBox' hidden='{{isNoReturn}}'>
-    <view class='itemBox fff' wx:for="{{list}}" wx:key="{{index}}">
+    <view class='itemBox fff' wx:for="{{list}}" wx:key="index">
       <view class='item start' style="left:-{{item.txtStyle}}rpx" data-idx="{{index}}" bindtap='selectTap' bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE">
         <view class='Status center'>
           <image class='flexs' wx:if='{{item.status==0}}' src='/images/ico_n.png'></image>

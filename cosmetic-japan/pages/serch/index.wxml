@@ -1,44 +1,51 @@
 <!--pages/serch/index.wxml-->
 <view class='container'>
   <view class='serchRelated'>
-    <view class='searchBox center mySearch fff'>
+    <view class='searchBox center fff search-page'>
       <view class='serch mtb25 center'>
-        <image class='ico_search' src='/images/ico_search.png'></image>
+        <image class='ico_search' src='/images/ico_seach.png'></image>
         <input type='text' auto-focus='true' value='{{keyword}}' confirm-type="search" placeholder-class='serchPlace' placeholder='搜索你喜欢的商品' bindconfirm='searchTap' bindinput='inputTap'></input>
       </view>
+       <navigator url="#" style="font-size: 28rpx; margin-left: 28rpx">取消</navigator>
     </view>
     <view hidden='{{list.length > 0 && isNoReturn}}'>
-      <view class='noReturn fff NoSearch' hidden='{{isNoReturn}}'>
+      <view class='noReturn fff NoSearch' hidden='{{isNoReturn}}' style="border-bottom: 0;">
         <view class='img'><image src='/images/ico_no.png'></image></view>
-        <view class='text'>你搜索的是什么关键字嘛，根本没东西嘛！~</view>
+        <view class='text'><text>没搜索到相应商品\n换个搜索词试试看哦~</text></view>
       </view>
-      <view wx:if="{{keywords.length>0}}" class='block ls fff'>
+      <view wx:if="{{keywords.length>0}}" class='block hot fff' style="border-bottom: 0;">
         <view class='rowBox'>
           <view class='title'>
             <image src='/images/ico_4.png'></image>搜索历史
-            <view class='clear' bindtap='clearTap'>全部清除</view>
+             <view class='clear' bindtap='clearTap'><image src="/images/ico-del.png" mode="widthFix" style="width: 24rpx"></image></view>
           </view>
-          <view class='lsBox'>
-            <view wx:for="{{keywords}}" wx:key="{{index}}" class='item between' data-keyword="{{item}}" bindtap='keywordsTap'>
-              <view class='l start' ><image src='/images/ico_5.png'></image>{{item}}</view>
-              <view class='r start' data-index="{{index}}" bindtap="delTap"><image src='/images/ico_6.png'></image></view>
-            </view>
-          </view>
+<!--          <view class='lsBox'>-->
+<!--            <view wx:for="{{keywords}}" wx:key="index" class='item between' data-keyword="{{item}}" bindtap='keywordsTap'>-->
+<!--              <view class='l start' ><image src='/images/ico_5.png'></image>{{item}}</view>-->
+<!--              <view class='r start' data-index="{{index}}" catchtap="delTap"><image src='/images/ico_6.png'></image></view>-->
+<!--            </view>-->
+<!--          </view>-->
+           <view class="hotBox">
+              <span wx:for="{{keywords}}" wx:key="index" data-keyword="{{item}}" bindtap="keywordsTap">
+                 {{item}}
+                 <image src='/images/shanchu.png' class="del" data-index="{{index}}" catchtap="delTap"></image>
+              </span>
+           </view>
         </view>
       </view>
-      <view class='block hot fff' wx:if="{{rmss.length>0}}">
+      <view class='block hot fff' wx:if="{{rmss.length>0}}" style="border-bottom: 0;">
         <view class='rowBox'>
           <view class='title'><image src='/images/ico_3.png'></image>热门搜索</view>
           <view class='hotBox'>
-            <span wx:for="{{rmss}}" wx:key="{{index}}" data-keyword="{{item.name}}" bindtap="keywordsTap">{{item.name}}</span>
+            <span wx:for="{{rmss}}" wx:key="index" data-keyword="{{item.name}}" bindtap="keywordsTap">{{item.name}}</span>
           </view>
         </view>
       </view>
-      
+
     </view>
     <view class='prductList' wx:if='{{list.length > 0 && isNoReturn}}'>
       <view class='listBox between wrap'>
-        <navigator  wx:for="{{list}}" wx:key="{{index}}" url='../detail/index?id={{item.id}}' hover-class='none' class='item'>
+        <navigator  wx:for="{{list}}" wx:key="index" url='../detail/index?id={{item.id}}' hover-class='none' class='item'>
           <view class='row'>
           <image src='{{imgUrl}}{{item.cover}}'></image>
           <view class='name'>{{item.goods_name}}</view>

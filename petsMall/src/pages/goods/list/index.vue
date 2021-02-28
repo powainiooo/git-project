@@ -1,4 +1,4 @@
-<style>
+<style scoped>
 page { background-color: #F3F2F1; }
 .container { padding-top: 420px;}
 .tabs { width: 265px; position: absolute; top: 340px; background-color: #e7e6e4; border-radius: 20px 20px 0 0;}
@@ -20,7 +20,7 @@ page { background-color: #F3F2F1; }
 
 <template>
 <div class="container">
-   <c-header :title="title" searchBtn cartBtn @search="querySearch" />
+   <c-header :title="title" searchBtn cartBtn @search="querySearch" :cartNums="cartList.length" />
 
    <template v-if="!showResult">
    <div class="tabs tabs-dog" :class="{'tabs-active': tabs === 'dog'}" @click="toggleTab('dog')">
@@ -59,18 +59,23 @@ page { background-color: #F3F2F1; }
 
    <div class="hint" v-if="loadOver && keyword === ''"></div>
 
+   <c-carts :list="cartList" @refresh="getCart" />
+
 </div>
 </template>
 
 <script>
 import cHeader from '@/components/header'
+import cCarts from '@/components/carts'
 import listItem from './modules/listItem'
 import { getAction } from '@/utils/api'
+import store from '@/store'
 
 export default {
    components: {
       cHeader,
-      listItem
+      listItem,
+      cCarts
    },
    data () {
       return {
@@ -83,6 +88,7 @@ export default {
          },
          listData: [],
          total: 0,
+         cartList: [],
          typeId: '',
          pageNo: 1,
          keyword: ''
@@ -123,10 +129,20 @@ export default {
          this.pageNo = 1
          this.listData = []
          this.getData()
+      },
+      getCart () {
+         if (store.state.token !== '') {
+            getAction('get_shopping_cart', {
+               token: store.state.token
+            }).then(res => {
+               this.cartList = res.data
+            })
+         }
       }
    },
    onShow () {
       this.reset()
+      this.getCart()
    },
    onReachBottom () {
       if (this.loadOver) return

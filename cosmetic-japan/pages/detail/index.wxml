@@ -2,7 +2,7 @@
 <view class='container {{Canshu || Select || ScHb?"oh":""}}'>
   <view class='slide' hidden='{{slideBox}}'>
     <swiper autoplay="true" current="0" circular="true" bindchange="sourceChange">
-      <block wx:for="{{goods_info.banner}}" wx:key="{{index}}">
+      <block wx:for="{{goods_info.banner}}" wx:key="index">
         <swiper-item wx:if="{{item != ''}}">
           <image wx:if="{{item}}" src="{{imgUrl + item}}" data-src="{{imgUrl + item}}" class="slide-image" bindtap='bannerTap' />
         </swiper-item>
@@ -53,7 +53,7 @@
         </span>
         <span class="saleNum">
           已拼{{goods_info.groupbuy_user_num}}件
-        </span>      
+        </span>
       </view>
     </view>
     <view class='activity'>
@@ -94,7 +94,7 @@
     <navigator class='yhqList between bb10' url='../CouponList/index'>
       <view class='lInfo start'>
         <image src='/images/ico_yhq.png'></image>
-        <block wx:for="{{yhq}}" wx:key="{{index}}">
+        <block wx:for="{{yhq}}" wx:key="index">
           <span>满{{item.tj}}减{{item.miane}}</span>
         </block>
       </view>
@@ -219,12 +219,12 @@
     <swiper
       wx:if="{{spellList.length>0}}"
       circular="{{spellOption.circular}}"
-      vertical="{{spellOption.vertical}}" 
+      vertical="{{spellOption.vertical}}"
       duration="{{spellOption.duration}}"
-      interval="{{spellOption.interval}}" 
-      autoplay="{{spellOption.autoPlay}}" 
+      interval="{{spellOption.interval}}"
+      autoplay="{{spellOption.autoPlay}}"
       bindchange="changeCurrentIndex"
-      display-multiple-items="1" 
+      display-multiple-items="1"
       easing-function="default"
       style="height: {{ spellList.length >1 ? '360rpx' : '180rpx'}}">
       <block wx:for="{{spellListMove}}" wx:key="{{spellListMove[currentIndex].id}}">
@@ -274,7 +274,7 @@
     <navigator class='yhqList between bb10' url='../CouponList/index'>
       <!--<view class='lInfo start'>
         <image src='/images/ico_yhq.png'></image>
-        <block wx:for="{{yhq}}" wx:key="{{index}}">
+        <block wx:for="{{yhq}}" wx:key="index">
           <span>满{{item.tj}}减{{item.miane}}</span>
         </block>
       </view>-->
@@ -402,12 +402,12 @@
               <view class='productSelect'>已选{{yixuan}}</view>
             </view>
           </view>
-          <view class='select' wx:for="{{all_attrs}}" wx:key="{{index}}">
+          <view class='select' wx:for="{{all_attrs}}" wx:key="index">
             <view class='titleBox'>
               <view class='title'>{{item.name}}</view>
             </view>
             <view class='guige'>
-              <span class="{{ids[index] == idx?'active':''}} {{its.bool == 0?'nokucun':''}}" wx:for="{{item.sub}}" wx:key="{{index}}" wx:for-item="its" wx:for-index="idx" data-index="{{index}}" data-idx="{{idx}}" bindtap="selectGGTap" wx:if="{{its.bool>0}}">{{its.name}}</span>
+              <span class="{{ids[index] == idx?'active':''}} {{its.bool == 0?'nokucun':''}}" wx:for="{{item.sub}}" wx:key="index" wx:for-item="its" wx:for-index="idx" data-index="{{index}}" data-idx="{{idx}}" bindtap="selectGGTap" wx:if="{{its.bool>0}}">{{its.name}}</span>
             </view>
           </view>
           <view class='select'>
@@ -450,7 +450,7 @@
             <view class='lookCanshu'>
               <view class='title bb1'>产品参数</view>
               <view class='ItemBox'>
-                <view class='item' wx:for="{{goods_info.cs_val_arr}}" wx:key="{{index}}">
+                <view class='item' wx:for="{{goods_info.cs_val_arr}}" wx:key="index">
                   <span>{{goods_info.cs_name_arr[index]}}：</span>{{item}}</view>
               </view>
             </view>
@@ -472,7 +472,7 @@
       <image src="/images/pt/close.png" class="closeImg" data-status="close" bindtap='PtDialogTap'/>
       <view class="ptTitle">正在拼单</view>
       <scroll-view scroll-y style="height: 380px;">
-        <view wx:for="{{spellList}}" wx:key="{{index}}" wx:if="{{index<10}}">
+        <view wx:for="{{spellList}}" wx:key="index" wx:if="{{index<10}}">
           <view class="ptItem">
               <view class="ptL">
                 <image src="{{item.headimg}}" class="ptLImg"/>
@@ -502,7 +502,7 @@
           <image class="personImg" src="{{spellListMove[selectIndex].headimg}}"/>
           <image class="pinzu" src="/images/pt/pinzu.png"/>
         </view> -->
-        <view class="personItem" wx:for="{{joinUserList}}" wx:key="{{index}}">
+        <view class="personItem" wx:for="{{joinUserList}}" wx:key="index">
           <image class="pinzu" src="/images/pt/pinzu.png" wx:if="{{index == 0}}"/>
           <image class="personImg" src="{{item.headimg}}" wx:if="{{item.headimg}}"/>
           <image class="personImg" src="/images/pt/noperson.png" wx:if="{{!item.headimg}}"/>

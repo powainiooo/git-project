@@ -12,7 +12,7 @@
   </view>
   <view class='prductList'>
     <view class='listBox between wrap'>
-      <navigator  wx:for="{{list}}" wx:key="{{index}}" url='../detail/index?id={{item.id}}&activity_type=0&hd_id=0' hover-class='none' class='item'>
+      <navigator  wx:for="{{list}}" wx:key="index" url='../detail/index?id={{item.id}}&activity_type=0&hd_id=0' hover-class='none' class='item'>
         <view class='row'>
           <image src='{{imgUrl}}{{item.cover}}'></image>
           <view class='name'>{{item.goods_name}}</view>

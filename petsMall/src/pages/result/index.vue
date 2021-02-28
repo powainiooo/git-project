@@ -22,13 +22,15 @@
          </div>
       </div>
       <div class="frame2" v-if="status === 'suc'">
-         <img src="/static/images/order/tips.png" mode="widthFix" style="width: 70rpx;" />
-         <p>网络链接失败 或 用户量拥挤等原因，支付出错，请尝试重新支付。</p>
+         <div class="tips-content">
+            <img src="/static/images/order/tips.png" mode="widthFix" style="width: 70rpx;" />
+            <p>我们将以公众号消息通知形式发送订单进度状态。 (取消关注的用户将无法收取订单进度，请手动 关注 黑耳宠物商城）</p>
+         </div>
       </div>
       <div class="frame2" v-else>
          <div class="tips-content">
             <img src="/static/images/order/tips.png" mode="widthFix" />
-            <p>我们将以公众号消息通知形式发送订单进度状态。 (取消关注的用户将无法收取订单进度，请手动 关注 黑耳宠物商城）</p>
+            <p>网络链接失败 或 用户量拥挤等原因，支付出错，请尝试重新支付。</p>
          </div>
       </div>
    </div>

@@ -339,6 +339,9 @@ button:after { border: none; }
     margin-bottom: 25rpx;
 }
 
+.pt80 {
+    padding-top: 80rpx;
+}
 .pb80 {
     padding-bottom: 80rpx;
 }
@@ -357,6 +360,10 @@ button:after { border: none; }
 
 .mb120 {
     margin-bottom: 120rpx;
+}
+
+.ts {
+   transition: all .4s cubic-bezier(.28,.71,.25,.9);
 }
 
 .start {
@@ -423,15 +430,15 @@ button:after { border: none; }
 }
 
 .searchBox .serch .serchPlace {
-    font-size: 32rpx;
+    font-size: 26rpx;
     color: #c4c4c4;
 }
 
 .searchBox .serch input {
     width: 480rpx;
-    height: 20rpx;
-    margin: 6rpx 10rpx;
-    font-size: 32rpx;
+    height: 40rpx;
+    margin: 10rpx;
+    font-size: 26rpx;
 }
 
 .ClassList {
@@ -784,8 +791,8 @@ button:after { border: none; }
 }
 
 .noReturn .img image {
-    width: 325rpx;
-    height: 300rpx;
+    width: 134rpx;
+    height: 134rpx;
     display: inline-block;
 }
 
@@ -941,13 +948,21 @@ button:after { border: none; }
 }
 
 .hot .rowBox .hotBox span {
-    background-color: #f3f3f3;
-    font-size: 30rpx;
-    color: #666666;
-    padding: 14rpx 40rpx;
-    border-radius: 1.25rem;
+    background-color: #F2F2F2;
+    font-size: 24rpx;
+    color: #656565;
+    padding: 16rpx 22rpx;
+    border-radius: 16rpx;
     display: block;
     margin: 12rpx;
+   position: relative;
+}
+.hot .rowBox .hotBox span .del {
+   width: 22rpx;
+   height: 22rpx;
+   position: absolute;
+   top: 0;
+   right: 0;
 }
 
 .ls .lsBox .item {
@@ -2507,22 +2522,22 @@ button:after { border: none; }
 
 .cateList {
     width: 100%;
-    height: calc(100% - 124px);
+    height: calc(100% - 110px);
     position: fixed;
-    top: 130rpx;
+    top: 110rpx;
     background-color: #f8f8f8;
 }
 
 .cateList .leftMenu {
-    width: 220rpx;
+    width: 170rpx;
     height: 100%;
-    background-color: #eeeeee;
+    background-color: #ffffff;
     float: left;
     overflow-y: scroll;
 }
 
 .cateList .rightInfo {
-    width: 520rpx;
+    width: 570rpx;
     height: 100%;
     background-color: #fff;
     overflow-y: scroll;
@@ -2539,20 +2554,17 @@ button:after { border: none; }
 }
 
 .cateList .leftMenu .item {
-    padding: 36rpx 0;
-    text-align: center;
+    width: 140rpx;
+   height: 50rpx;
+   font-size: 24rpx;
+   color: #666666;
+   border-radius: 25rpx;
+   margin: 20rpx 15rpx 30rpx 15rpx;
 }
 
 .cateList .leftMenu .item.active {
-    background-color: #fff;
-}
-
-.cateList .leftMenu .item .text {
-    border-left: 10rpx solid #eeeeee;
-}
-
-.cateList .leftMenu .item.active .text {
-    border-left: 10rpx solid #de3031;
+    background-color: #de3031;
+   color: #ffffff;
 }
 
 .cateList .rightInfo .item {

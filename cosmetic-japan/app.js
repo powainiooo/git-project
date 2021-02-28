@@ -62,12 +62,12 @@ App({
           success: function (ret) {
             var data = ret.data;
             if (data.ret == 0) {
-              that.globalData.login_key = data.login_key;
-              wx.setStorageSync("key", data.login_key);
-              wx.setStorageSync("session_key", data.session_key);
+              that.globalData.login_key = data.data.login_key;
+              wx.setStorageSync("key", data.data.login_key);
+              wx.setStorageSync("session_key", data.data.session_key);
               callback();
               console.log('login success');
-              
+
             } else {
               wx.showToast({
                 title: '登录失败！',
@@ -95,13 +95,15 @@ App({
   },
 
   globalData: {
-    www: 'https://hwscdev.vsapp.cn/',
-    url: 'https://hwscdev.vsapp.cn/upload/',
+    // www: 'https://hwscdev.vsapp.cn/',
+    // url: 'https://hwscdev.vsapp.cn/upload/',
+    www: 'https://dgpt.vsapp.cn',
+    url: 'https://dgpt.vsapp.cn/upload',
     login_key:'',
     mid:7
   },
 
-  
+
   request(obj = {}, call = ()=>{}) {
     if (obj.url == undefined || obj.url.trim() == '' ) {
       wx.showToast({

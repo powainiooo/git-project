@@ -95,11 +95,6 @@ export default {
          datesList: []
       }
    },
-   created () {
-      for (let i = 1; i < 32; i++) {
-         this.datesList.push(i)
-      }
-   },
    methods: {
       areaChange (e) {
          this.formData.province = e.mp.detail.value[0]
@@ -180,6 +175,9 @@ export default {
          if (formData !== undefined && formData !== '' && formData !== null) {
             this.formData = formData
          }
+      }
+      for (let i = 1; i < 32; i++) {
+         this.datesList.push(i)
       }
    }
 }

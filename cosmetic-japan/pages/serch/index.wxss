@@ -1,1 +1,4 @@
-/* pages/serch/index.wxss */
+.search-page .serch {
+   width: 620rpx;
+   background-color: #F4F4F4;
+}

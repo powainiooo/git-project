@@ -41,7 +41,7 @@
     <view class='kjlist kjbox'>
       <view class='title'>砍价记录</view>
       <view class='listBox'>
-        <view class='row between' wx:for="{{kjInfo.kj_list}}" wx:key="{{index}}">
+        <view class='row between' wx:for="{{kjInfo.kj_list}}" wx:key="index">
           <view class='l start'><image src='{{item.headimg}}'></image>{{item.username}}</view>
           <view class='r'>砍掉<span>{{item.price/100}}元</span></view>
         </view>
@@ -62,12 +62,12 @@
               <view class='productSelect'>已选：{{yixuan && yixuan!=""?yixuan:"请选择"}}</view>
             </view>
           </view>
-          <view class='select' wx:for="{{kjInfo.gg_list}}" wx:key="{{index}}">
+          <view class='select' wx:for="{{kjInfo.gg_list}}" wx:key="index">
             <view class='titleBox'>
               <view class='title'>{{item.name}}</view>
             </view>
             <view class='guige'>
-              <span class="{{ids[index] == idx?'active':''}} {{its.bool == 0?'nokucun':''}}" wx:for="{{item.sub}}" wx:key="{{index}}" wx:for-item="its" wx:for-index="idx" data-index="{{index}}" data-idx="{{idx}}" bindtap="selectGGTap">{{its.name}}</span>
+              <span class="{{ids[index] == idx?'active':''}} {{its.bool == 0?'nokucun':''}}" wx:for="{{item.sub}}" wx:key="index" wx:for-item="its" wx:for-index="idx" data-index="{{index}}" data-idx="{{idx}}" bindtap="selectGGTap">{{its.name}}</span>
             </view>
           </view>
         </view>

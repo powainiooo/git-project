@@ -1,7 +1,7 @@
 <view class='container {{Canshu || Select || ScHb?"oh":""}}'>
   <view class='slide'>
     <swiper autoplay="true" current='0' circular="true" bindchange="sourceChange">
-      <block wx:key="{{index}}">
+      <block wx:key="index">
         <swiper-item >
           <image src="https://hwsc.vsapp.cn/upload/7/2018/0820/1534746643852.jpg" class="slide-image" />
         </swiper-item>
@@ -79,12 +79,12 @@
               <view class='productSelect'>已选：{{yixuan && yixuan!=""?yixuan:"请选择"}}</view>
             </view>
           </view>
-          <view class='select' wx:for="{{all_attrs}}" wx:key="{{index}}">
+          <view class='select' wx:for="{{all_attrs}}" wx:key="index">
             <view class='titleBox'>
               <view class='title'>{{item.name}}</view>
             </view>
             <view class='guige'>
-              <span class="{{ids[index] == idx?'active':''}} {{its.bool == 0?'nokucun':''}}" wx:for="{{item.sub}}" wx:key="{{index}}" wx:for-item="its" wx:for-index="idx" data-index="{{index}}" data-idx="{{idx}}" bindtap="selectGGTap">{{its.name}}</span>
+              <span class="{{ids[index] == idx?'active':''}} {{its.bool == 0?'nokucun':''}}" wx:for="{{item.sub}}" wx:key="index" wx:for-item="its" wx:for-index="idx" data-index="{{index}}" data-idx="{{idx}}" bindtap="selectGGTap">{{its.name}}</span>
             </view>
           </view>
           <view class='select'>
@@ -124,7 +124,7 @@
             <view class='lookCanshu'>
               <view class='title bb1'>产品参数</view>
               <view class='ItemBox'>
-                <view class='item' wx:for="{{goods_info.cs_val_arr}}" wx:key="{{index}}">
+                <view class='item' wx:for="{{goods_info.cs_val_arr}}" wx:key="index">
                   <span>{{goods_info.cs_name_arr[index]}}：</span>{{item}}</view>
               </view>
             </view>

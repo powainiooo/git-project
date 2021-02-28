@@ -138,7 +138,7 @@ export default {
    },
    onLoad (options) {
       Object.assign(this.$data, this.$options.data())
-      this.orderNum = options.orderNum || 'T2021020621401003'
+      this.orderNum = options.orderNum || '202102261001'
       this.source = options.source || 'catbox'
       if (this.source === 'goods') {
          this.title = '购物清单'

@@ -14,7 +14,7 @@
 <template>
 <div class="c-index-goods-item">
    <div class="img">
-      <img :src="itemData.recom_img"/>
+      <img :src="imgSrc"/>
    </div>
    <div class="info">
       <div class="name">
@@ -37,6 +37,11 @@ export default {
   name: 'app',
    props: {
      itemData: Object
+   },
+   computed: {
+     imgSrc () {
+        return this.itemData.recom_img || this.itemData.cover
+     }
    },
   data () {
     return {

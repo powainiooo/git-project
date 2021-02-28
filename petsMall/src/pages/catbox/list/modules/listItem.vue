@@ -14,7 +14,10 @@
 </style>
 
 <template>
-<div class="c-list-item" @click="toPage">
+<div class="c-list-item"
+     @click="toPage"
+     hover-class="hscale"
+     hover-stay-time="10">
    <img :src="itemData.cover" class="img" mode="aspectFill" />
    <div class="name">
       <p class="en">{{itemData.english_name}}</p>

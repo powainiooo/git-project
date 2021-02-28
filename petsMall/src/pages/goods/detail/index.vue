@@ -101,7 +101,7 @@ export default {
             title: this.detailData.china_name,
             titleEn: this.detailData.english_name,
             price: specItem.price,
-            img: classes[0].product_img,
+            img: classes[0].small_img,
             qrcode: this.detailData.wxacode,
             unit: '元'
          }

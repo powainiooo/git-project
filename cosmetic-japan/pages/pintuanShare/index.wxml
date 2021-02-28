@@ -8,7 +8,7 @@
       <navigator url='../index/index' hover-class='none' class="toIndex">前往商品首页</navigator>
       <navigator url='../spellList/index?isShare=true' hover-class='none' class="seeOther">看看其他拼团商品</navigator>
     </view>
-    
+
     <view class="first fff" wx:if="{{order_data.remain_time > 0}}">
       <view class='list-group'>
         <view class='content'>
@@ -33,7 +33,7 @@
         </view>
       </view>
       <view class="personImgList">
-        <view class="personItem" wx:for="{{order_data.group_buy_user}}" wx:key="{{index}}">
+        <view class="personItem" wx:for="{{order_data.group_buy_user}}" wx:key="index">
           <image class="personImg" src="{{item.headimg}}"  wx:if="{{item.headimg}}"/>
           <image class="personImg" src="/images/pt/noperson.png" wx:if="{{!item.headimg}}" />
           <image class="pinzu" src="/images/pt/pinzu.png" wx:if="{{index == 0}}"/>
@@ -53,7 +53,7 @@
     <!-- 拼团商品推荐 -->
     <view class="third youxuanBox indexList">
       <view class='itemBox between wrap'>
-        <navigator wx:for="{{group_buy_list}}" wx:key="{{index}}" url='../detail/index?id={{item.id}}&activity_type=4&hd_id={{item.id}}' hover-class='none' class='item'>
+        <navigator wx:for="{{group_buy_list}}" wx:key="index" url='../detail/index?id={{item.id}}&activity_type=4&hd_id={{item.id}}' hover-class='none' class='item'>
           <image src='{{imgUrl}}{{item.cover}}'></image>
           <view class='name'>{{item.goods_name}}</view>
           <view class='price'>￥<span>{{item.tg_price}}</span></view>
@@ -64,7 +64,7 @@
     <view class="bButton">
       <navigator url='../spellList/index?isShare=true' class="goodsList" hover-class='none'>看看其他拼团商品</navigator>
     </view>
-    
+
     <!-- 规则弹窗 -->
     <view class="mask ptMask" wx:if="{{isShowRule}}">
       <view class="fff">

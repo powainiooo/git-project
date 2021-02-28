@@ -2,12 +2,12 @@
 <view class='container f3'>
   <view class='shouhouBox fff' hidden='{{!isNoRutern}}'>
     <view class='productList fff'>
-      <view class='box' wx:for="{{list}}" wx:key="{{index}}">
+      <view class='box' wx:for="{{list}}" wx:key="index">
         <view class='orderLi_top'>
           <text class='num'>订单编号：{{item.order_num}}</text>
           <text class='status'>{{item.sh_order}}</text>
         </view>
-         <view class='item between' wx:for="{{item.child}}" wx:key="{{index}}" wx:for-item="idx">
+         <view class='item between' wx:for="{{item.child}}" wx:key="index" wx:for-item="idx">
           <view class='l'><image src='{{imgUrl}}{{idx.goods_cover}}'></image></view>
           <view class='r'>
             <view class='name'>{{idx.goods_name}}</view>

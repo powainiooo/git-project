@@ -1,12 +1,12 @@
 <style>
-@font-face {
-   font-family: 'Helve';
-   src: url('http://catbox.pc-online.cc/static/fonts/HelveticaNeue_Medium.ttf') format('woff2');
-}
-@font-face {
-   font-family: 'HelveThin';
-   src: url('http://catbox.pc-online.cc/static/fonts/HelveticaNeueThin.ttf') format('woff2');
-}
+/*@font-face {*/
+/*   font-family: 'Helve';*/
+/*   src: url('http://catbox.pc-online.cc/static/fonts/HelveticaNeue_Medium.ttf') format('woff2');*/
+/*}*/
+/*@font-face {*/
+/*   font-family: 'HelveThin';*/
+/*   src: url('http://catbox.pc-online.cc/static/fonts/HelveticaNeueThin.ttf') format('woff2');*/
+/*}*/
 page {
    --mainColor: #DDC9A8;
    --textColor: #3F3221;
@@ -74,16 +74,15 @@ export default {
    created () {
       console.log('app created')
       this.getData()
+      this.loadFont()
    },
    methods: {
       async getData () {
-         // const token = mpvue.getStorageSync('PETS_TOKEN')
-         // console.log('token is:', token)
-         // if (token !== '' && token !== null && token !== undefined) {
-         //    store.commit('SET_TOKEN', token)
-         // } else {
-         //
-         // }
+         const token = mpvue.getStorageSync('PETS_TOKEN')
+         console.log('token is:', token)
+         if (token !== '' && token !== null && token !== undefined) {
+            store.commit('SET_TOKEN', token)
+         }
          const loginRes = await login()
          console.log('loginRes', loginRes)
          const infoRes = await getAction('get_weixin', {
@@ -100,6 +99,24 @@ export default {
             console.log('userInfo', userInfo)
             store.commit('SET_PERSONINFO', userInfo.userInfo)
          }
+      },
+      loadFont () {
+         mpvue.loadFontFace({
+            global: true,
+            family: 'Helve',
+            source: 'url("http://catbox.pc-online.cc/static/fonts/HelveticaNeue_Medium.ttf")',
+            success: (res) => {
+               console.log('Helve load over', res)
+            }
+         })
+         mpvue.loadFontFace({
+            global: true,
+            family: 'HelveThin',
+            source: 'url("http://catbox.pc-online.cc/static/fonts/HelveticaNeueThin.ttf")',
+            success: (res) => {
+               console.log('HelveThin load over', res)
+            }
+         })
       }
    }
 }

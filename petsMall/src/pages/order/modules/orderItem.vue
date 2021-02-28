@@ -30,7 +30,8 @@ import { formatDate } from '@/utils'
 export default {
 	name: 'app',
    props: {
-      itemData: Object
+      itemData: Object,
+      type: String
    },
    computed: {
 	   date () {
@@ -43,7 +44,7 @@ export default {
 	methods: {
       toPage () {
          mpvue.navigateTo({
-            url: `/pages/order/detail/main?orderNum=${this.itemData.order_num}`
+            url: `/pages/order/detail/main?orderNum=${this.itemData.order_num}&source=${this.type}`
          })
       }
    }

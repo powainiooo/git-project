@@ -49,15 +49,15 @@
          <img src="/static/images/header/close.png" mode="widthFix" class="close" v-if="showMenu" />
          <img src="/static/images/header/menu.png" mode="widthFix" class="menu" v-else />
       </button>
-      <div class="btns" v-if="searchBtn || cartBtn">
+      <div class="btns" v-if="searchBtn || cartBtn || shareBtn">
          <button style="align-items: flex-end" v-if="searchBtn && !showSearchFrame" @click="showSearchFrame = true">
             <img src="/static/images/header/search.png" mode="widthFix" class="search" />
          </button>
          <button @click="showShare" class="share" v-if="shareBtn"><img src="/static/images/header/share.png" mode="widthFix" style="width: 54rpx" /></button>
-         <div class="br" v-if="(searchBtn && !showSearchFrame) || shareBtn"></div>
+         <div class="br" v-if="((searchBtn && !showSearchFrame) || shareBtn) && cartBtn"></div>
          <button v-if="cartBtn" @click="openCart">
             <img src="/static/images/header/cart.png" mode="widthFix" class="cart" />
-            <span class="carts-num">{{cartNums > 99 ? '99+' : cartNums}}</span>
+            <span class="carts-num" v-if="cartNums > 0">{{cartNums > 99 ? '99+' : cartNums}}</span>
          </button>
       </div>
    </div>
@@ -93,7 +93,7 @@
          </a>
       </div>
       <div class="navs-list">
-         <a href="/pages/catbox/mine/main" hover-class="none">我的自定义猫盒<span>| My cat box</span></a>
+         <a href="#" hover-class="none" @click="toMyBox">我的自定义猫盒<span>| My cat box</span></a>
          <a href="#" hover-class="none" @click="makePhone">联系客服<span>| Question contact</span></a>
       </div>
    </div>
@@ -200,6 +200,21 @@ export default {
       showShare () {
          console.log('showShare')
          store.commit('SET_SHOWSHARE', true)
+      },
+      toMyBox () {
+         getAction('my_group', {
+            token: store.state.token
+         }).then(res => {
+            if (Array.isArray(res.data)) {
+               mpvue.navigateTo({
+                  url: '/pages/catbox/diy/main'
+               })
+            } else {
+               mpvue.navigateTo({
+                  url: '/pages/catbox/mine/main'
+               })
+            }
+         })
       }
    }
 }

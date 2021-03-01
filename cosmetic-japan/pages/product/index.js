@@ -16,7 +16,16 @@ Page({
     isNoPage:false,
     idx:1,
     isNoReturn:false,
+    zx_gd:0,
     jg_gd:0,
+    xl_gd:0,
+	  brandList: [],
+	  brandId: 0,
+	  cateList: [],
+	  cateId: 0,
+	  minPrice: '',
+	  maxPrice: '',
+	  showFilter: false
   },
 
   // 语言切换
@@ -30,61 +39,118 @@ Page({
   //排序
   sortTap:function(e){
     var idx = e.currentTarget.dataset.idx;
-    if (idx == 1){
-      var data = {new:'new'};
-      this.paixu(data);
-    }
     if (idx == 2) {
-      var data = { xl: 'xl' };
-      this.paixu(data);
-    }
-    if (idx == 3) {
+	    if (this.data.xl_gd == 0){
+		    var xl_gd = 1;
+	    }
+	    if (this.data.xl_gd == 1) {
+		    var xl_gd = -1;
+	    }
+	    if (this.data.xl_gd == -1) {
+		    var xl_gd = 1;
+	    }
+	    this.setData({
+		    xl_gd
+	    })
+	    this.paixu(data);
+    }else if (idx == 3) {
       if (this.data.jg_gd == 0){
         var jg_gd = 1;
       }
       if (this.data.jg_gd == 1) {
-        var jg_gd = 2;
+        var jg_gd = -1;
       }
-      if (this.data.jg_gd == 2) {
+      if (this.data.jg_gd == -1) {
         var jg_gd = 1;
       }
-      var data = { jg: 'jg', jg_gd: jg_gd};
       this.setData({
-        jg_gd: jg_gd,
-        data: data
+        jg_gd: jg_gd
       })
-      this.paixu(data);
+	    this.paixu(data);
+    }else if (idx == 4) {
+	    this.setData({
+		    showFilter: true
+	    })
     }
     this.setData({
-      idx:idx,
-      type:data,
+	    zx_gd: idx == 1 ? 1 : 0,
+      idx:idx
     })
   },
 
   //排序方法
-  paixu:function(data){
+  paixu:function(){
     var id = this.data.id;
     let link = { method: 'cate_list', canshu: '&id=' + id + '&page=' + Number(this.data.page) };
+    const data = {
+	    new: this.data.zx_gd,
+	    xl: this.data.xl_gd,
+	    jg: this.data.jg_gd,
+	    min_price: this.data.minPrice,
+	    max_price: this.data.max_price,
+	    brand_id: this.data.brandId,
+	    cid: this.data.cateId,
+    }
     let logic = (ret) => {
       this.setData({
-        list: ret.result,
-        isNoReturn: ret.result.length > 0 ? false : true
+	      showFilter: false,
+        list: ret.list,
+	      brandList: ret.brand,
+	      cateList: ret.cate_list,
+        isNoReturn: ret.list.length > 0 ? false : true
       })
     }
     api.post(this, link, data, logic);
   },
 
+	// 充值
+	reset () {
+  	   this.setData({
+	      zx_gd:0,
+	      jg_gd:0,
+	      xl_gd:0,
+	      brandId: 0,
+	      cateId: 0,
+	      minPrice: '',
+	      maxPrice: ''
+      })
+		this.paixu()
+	},
+
+	// 选择品牌
+	selectBrand (e) {
+		this.setData({
+			brandId: e.target.dataset.id
+		})
+	},
+
+	// 选择分类
+	selectCate (e) {
+		this.setData({
+			cateId: e.target.dataset.id
+		})
+	},
+
+	// 输入价格
+	inputPrice (e) {
+		this.setData({
+			[e.target.dataset.key]: e.detail.value
+		})
+	},
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     console.log(55,options);
+	  options.id = 17
     if (options && options.id != ''){
-      let link = { method: 'cate_list', canshu: '&cid=' + options.id + '&page=' + Number(this.data.page)};
+      let link = { method: 'cate_list', canshu: '&id=' + options.id + '&page=' + Number(this.data.page)};
       let logic = (ret) => {
         this.setData({
           id: options.id,
           list: ret.list,
+	        brandList: ret.brand,
+	        cateList: ret.cate_list,
           isNoReturn: ret.list.length > 0 ? false : true,
           isCN: wx.getStorageSync('isCN')
         })
@@ -137,9 +203,9 @@ Page({
     let link = { method: 'cate_list', canshu: '&id=' + this.data.id + '&page=' + page };
     let data = this.data.data;
     let logic = (ret) => {
-      if (ret.result.length > 0){
+      if (ret.list.length > 0){
         var list = this.data.list;
-        list = list.concat(ret.result);
+        list = list.concat(ret.list);
         this.setData({
           list: list,
           isNoPage:false,

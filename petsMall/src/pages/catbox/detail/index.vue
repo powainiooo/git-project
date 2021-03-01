@@ -15,7 +15,7 @@ page { background-color: #F3F2F1; }
             showDetail
             source="catbox"
             :title="detailData.china_name"
-            titleEn="detailData.english_name"
+            :titleEn="detailData.english_name"
             titleIcon="cat"
             :list="detailData.productlist"/>
          <c-order-type :list="detailData.pricelist" />

@@ -27,7 +27,7 @@ page { background-color: #F3F2F1; }
       <h3>无相关内容！</h3>
    </div>
 
-   <a href="/pages/catbox/diy/main" class="footer-btn">
+   <a href="#" class="footer-btn" @click="toMyBox">
       <img src="/static/images/catbox/icon-menu.png" class="menu" />
       <div>
          <p class="en">Customized cat box</p>
@@ -42,6 +42,7 @@ page { background-color: #F3F2F1; }
 import cHeader from '@/components/header'
 import cListItem from './modules/listItem'
 import { getAction } from '@/utils/api'
+import store from '@/store'
 
 export default {
    components: {
@@ -77,6 +78,22 @@ export default {
          this.pageNo = 1
          this.listData = []
          this.getData()
+      },
+      toMyBox () {
+         getAction('my_group', {
+            token: store.state.token
+         }).then(res => {
+            if (Array.isArray(res.data)) {
+               mpvue.navigateTo({
+                  url: '/pages/catbox/diy/main'
+               })
+            } else {
+               mpvue.navigateTo({
+                  url: '/pages/catbox/mine/main'
+               })
+            }
+            this.showMenu = false
+         })
       }
    },
    onShow () {

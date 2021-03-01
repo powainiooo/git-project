@@ -1,6 +1,5 @@
 <style scoped>
-page { background-color: #F3F2F1; }
-.container { padding-top: 420px;}
+.container { padding-top: 420px; background-color: #F3F2F1;}
 .tabs { width: 265px; position: absolute; top: 340px; background-color: #e7e6e4; border-radius: 20px 20px 0 0;}
 .tabs-active { background-color: #ffffff; z-index: 10; }
 .tabs img { width: 265px; height: 80px; display: block; }
@@ -19,48 +18,50 @@ page { background-color: #F3F2F1; }
 </style>
 
 <template>
-<div class="container">
-   <c-header :title="title" searchBtn cartBtn @search="querySearch" :cartNums="cartList.length" />
+<div>
+   <div class="container" :class="{'blur': showCart}">
+      <c-header :title="title" searchBtn cartBtn @search="querySearch" :cartNums="cartNums" />
 
-   <template v-if="!showResult">
-   <div class="tabs tabs-dog" :class="{'tabs-active': tabs === 'dog'}" @click="toggleTab('dog')">
-      <img src="/static/images/goods/dog-active.png" v-if="tabs === 'dog'" />
-      <img src="/static/images/goods/dog.png" v-else />
-   </div>
-   <div class="tabs tabs-cat" :class="{'tabs-active': tabs === 'cat'}" @click="toggleTab('cat')">
-      <img src="/static/images/goods/cat-active.png" v-if="tabs === 'cat'" />
-      <img src="/static/images/goods/cat.png" v-else />
-   </div>
-   <div class="list-container">
-      <template v-if="listData.length > 0">
-      <div class="grid" v-for="item in listData" :key="id">
-         <list-item :itemData="item" />
+      <template v-if="!showResult">
+      <div class="tabs tabs-dog" :class="{'tabs-active': tabs === 'dog'}" @click="toggleTab('dog')">
+         <img src="/static/images/goods/dog-active.png" v-if="tabs === 'dog'" />
+         <img src="/static/images/goods/dog.png" v-else />
+      </div>
+      <div class="tabs tabs-cat" :class="{'tabs-active': tabs === 'cat'}" @click="toggleTab('cat')">
+         <img src="/static/images/goods/cat-active.png" v-if="tabs === 'cat'" />
+         <img src="/static/images/goods/cat.png" v-else />
+      </div>
+      <div class="list-container">
+         <template v-if="listData.length > 0">
+         <div class="grid" v-for="item in listData" :key="id">
+            <list-item :itemData="item" />
+         </div>
+         </template>
+         <div class="hint-result" v-else>
+            <img src="/static/images/goods/warn.png" mode="widthFix" style="width: 71rpx;" />
+            <h3 class="en">No related content</h3>
+            <h3>无相关内容！</h3>
+         </div>
       </div>
       </template>
-      <div class="hint-result" v-else>
-         <img src="/static/images/goods/warn.png" mode="widthFix" style="width: 71rpx;" />
-         <h3 class="en">No related content</h3>
-         <h3>无相关内容！</h3>
+      <div class="list-container" v-else style="background-color: transparent; box-shadow: none;">
+         <template v-if="listData.length > 0">
+         <div class="grid" v-for="item in listData" :key="id">
+            <list-item :itemData="item" />
+         </div>
+         </template>
+         <div class="hint-result" v-else>
+            <img src="/static/images/goods/warn.png" mode="widthFix" style="width: 71rpx;" />
+            <h3 class="en">No related content</h3>
+            <h3>无相关内容！</h3>
+         </div>
       </div>
-   </div>
-   </template>
-   <div class="list-container" v-else style="background-color: transparent; box-shadow: none;">
-      <template v-if="listData.length > 0">
-      <div class="grid" v-for="item in listData" :key="id">
-         <list-item :itemData="item" />
-      </div>
-      </template>
-      <div class="hint-result" v-else>
-         <img src="/static/images/goods/warn.png" mode="widthFix" style="width: 71rpx;" />
-         <h3 class="en">No related content</h3>
-         <h3>无相关内容！</h3>
-      </div>
-   </div>
 
-   <div class="hint" v-if="loadOver && keyword === ''"></div>
+      <div class="hint" v-if="loadOver && keyword === ''"></div>
+
+   </div>
 
    <c-carts :list="cartList" @refresh="getCart" />
-
 </div>
 </template>
 
@@ -100,6 +101,12 @@ export default {
       },
       noMoreHint () {
          return this.loadOver && this.keyword === ''
+      },
+      showCart () {
+         return store.state.showCart
+      },
+      cartNums () {
+         return this.cartList.reduce((total, i) => total + Number(i.buy_num), 0)
       }
    },
    methods: {

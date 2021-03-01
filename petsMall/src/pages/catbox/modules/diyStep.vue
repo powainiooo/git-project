@@ -26,7 +26,7 @@
          'current': index === step
       }"
          :key="index">
-         <div>
+         <div @click="changeStep(index)">
             <p class="en">{{item.titleEn}}</p>
             <p>{{item.title}}</p>
          </div>
@@ -51,6 +51,12 @@ export default {
        ]
     }
   },
-  methods: {}
+  methods: {
+     changeStep (index) {
+        if (index < this.step) {
+           this.$emit('change', index)
+        }
+     }
+  }
 }
 </script>

@@ -83,11 +83,11 @@
          <button open-type="getUserInfo" @getuserinfo="getuserinfo">获取用户信息</button>
       </div>
       <div class="line2">
-         <a href="/pages/order/list/main?type=catbox" hover-class="none">
+         <a href="/pages/order/list/main?type=catbox" hover-class="none" @click="showMenu = false">
             <p>已订购猫盒</p>
             <div>Booked cat box</div>
          </a>
-         <a href="/pages/order/list/main" hover-class="none">
+         <a href="/pages/order/list/main" hover-class="none" @click="showMenu = false">
             <p>已订购产品</p>
             <div>Booked products</div>
          </a>
@@ -158,6 +158,7 @@ export default {
          mpvue.reLaunch({
             url: '/pages/index/main'
          })
+         this.showMenu = false
       },
       closeSearch () {
          this.showSearchFrame = false
@@ -214,6 +215,7 @@ export default {
                   url: '/pages/catbox/mine/main'
                })
             }
+            this.showMenu = false
          })
       }
    }

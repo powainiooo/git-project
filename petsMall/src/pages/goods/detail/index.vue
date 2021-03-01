@@ -12,7 +12,7 @@
 <template>
 <div>
    <div class="container" :class="{'blur': showCart || showShare}">
-      <c-header title="主粮|Staple food" titleColor="#E8E6E4" cartBtn shareBtn :cartNums="cartList.length" />
+      <c-header title="主粮|Staple food" titleColor="#E8E6E4" cartBtn shareBtn :cartNums="cartNums" />
       <c-banner :list="bannerList" />
       <div class="goods-details">
          <div class="infos borderB">
@@ -63,7 +63,7 @@
    </div>
    <c-carts :list="cartList" @refresh="getCart" />
 
-   <c-share :itemData="shareData" />
+   <c-share ref="share" :itemData="shareData" @done="drawPosterDone" />
 </div>
 </template>
 
@@ -105,6 +105,9 @@ export default {
             qrcode: this.detailData.wxacode,
             unit: '元'
          }
+      },
+      cartNums () {
+         return this.cartList.reduce((total, i) => total + Number(i.buy_num), 0)
       }
    },
    data () {
@@ -116,7 +119,8 @@ export default {
          specsId: '',
          specsList: [],
          isAjax: false,
-         cartList: []
+         cartList: [],
+         posterSrc: ''
       }
    },
    methods: {
@@ -130,6 +134,9 @@ export default {
             this.catalogId = res.data.classes[0].id
             this.specsList = res.data.classes[0].child
             this.specsId = res.data.classes[0].child[0].specs_id
+            this.$nextTick(() => {
+               this.$refs.share.initPoster()
+            })
          })
       },
       selectCatalog (data) {
@@ -166,6 +173,10 @@ export default {
                this.cartList = res.data
             })
          }
+      },
+      drawPosterDone (e) {
+         console.log('drawPosterDone', e)
+         this.posterSrc = e
       }
    },
    onLoad (options) {
@@ -177,6 +188,7 @@ export default {
    onShareAppMessage: function () {
       return {
          title: this.detailData.china_name,
+         imageUrl: this.posterSrc,
          path: 'pages/goods/detail/main'
       }
    }

@@ -36,7 +36,12 @@
    </div>
    <ul class="c-goods-list-list borderB">
       <li class="c-goods-item borderB" v-for="item in list" :key="id">
-         <div class="imgs" @click="openDetail(item)"><img :src="item.small_img" /></div>
+         <div class="imgs"
+              @click="openDetail(item)"
+              hover-class="hscale"
+              hover-stay-time="10">
+            <img :src="item.small_img" />
+         </div>
          <div class="c-goods-item-infos">
             <p class="en">{{item.english_name}}</p>
             <p>{{item.china_name}}</p>
@@ -67,7 +72,9 @@
    <div v-for="item in recommendList" :key="id">
       <ul class="c-goods-list-list borderB">
          <li class="c-goods-item borderB">
-            <div class="imgs"><img :src="item.small_img" /></div>
+            <div class="imgs">
+               <img :src="item.small_img"/>
+            </div>
             <div class="c-goods-item-infos">
                <p>{{item.china_name}}</p>
                <ul class="tabs">

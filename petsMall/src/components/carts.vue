@@ -1,12 +1,12 @@
 <style>
-.c-cart { width: 100%; position: fixed; bottom: 0; left: 0; z-index: 1000; transition: bottom .5s cubic-bezier(.23,.78,.33,.97); }
+.c-cart { width: 100%; position: fixed; bottom: 0; left: 0; z-index: 1000; transition: bottom .5s cubic-bezier(.23,.78,.33,.97); background-color: #ffffff; }
 .c-cart .c-footer { position: static; width: 100%;}
 .c-cart-headers { background-color: var(--mainColor); height: 170px; border-radius: 15px 15px 0 0; display: flex; justify-content: space-between; align-items: center; padding: 0 66px; }
 .c-cart-headers .title p { font-size: 36px; color: #ffffff; text-shadow: var(--textShadow); }
 .c-cart-headers .title p.en { font-size: 40px; font-family: HelveThin; margin-bottom: 8px; }
 .c-cart-headers img { width: 56px; height: 56px; }
 
-.c-cart-list { width: 100%; height: 60vh; overflow-y: auto; background-color: #ffffff; }
+.c-cart-list { width: 100%; height: 60vh; overflow-y: auto; }
 .c-cart-item { margin: 0 42px; height: 184px; display: flex; align-items: center; }
 .c-cart-item .btn-del { width: 40px; height: 100%; display: flex; align-items: center; }
 .c-cart-item .btn-del img { width: 20px; height: 20px; }

@@ -13,7 +13,7 @@ page { background-color: #F3F2F1; }
 
 <template>
 <div class="container">
-   <c-header title="已订购订单|Booked order" />
+   <c-header title="已购订单|Booked order" />
    <div class="order-list" v-if="listData.length > 0">
       <order-item v-for="item in listData" :key="id" :itemData="item" :type="type" />
    </div>

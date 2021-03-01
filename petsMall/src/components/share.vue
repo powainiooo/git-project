@@ -51,7 +51,8 @@ export default {
    },
 	data() {
 		return {
-		   loadIndex: 0
+		   loadIndex: 0,
+         canvasPath: ''
       }
 	},
    computed: {
@@ -65,10 +66,9 @@ export default {
          store.commit('SET_SHOWSHARE', false)
       },
       initPoster () {
-         mpvue.showLoading({
-            title: '生成海报中'
-         })
-         console.log(this.itemData)
+         // mpvue.showLoading({
+         //    title: '生成海报中'
+         // })
          const ctx = wx.createCanvasContext('myCanvas')
          console.log('drawPost', ctx)
          // 背景色
@@ -122,6 +122,7 @@ export default {
          ctx.fillText('掃引符号購入', 210, 650)
          ctx.fillText('Scan the code to buy', 210, 680)
          ctx.draw(true)
+         console.log('drawPost2')
 
          // logo
          ctx.drawImage(logoData, 68, 42, 74, 100)
@@ -183,6 +184,7 @@ export default {
       },
       loadOver (ctx) {
          this.loadIndex += 1
+         const self = this
          if (this.loadIndex === 2) {
             ctx.draw(true, () => {
                console.log('draw over')
@@ -190,13 +192,8 @@ export default {
                   canvasId: 'myCanvas',
                   success (res) {
                      console.log('canvasToTempFilePath', res)
-                     mpvue.saveImageToPhotosAlbum({
-                        filePath: res.tempFilePath,
-                        success(res2) {
-                           console.log('saveImageToPhotosAlbum', res2)
-                           mpvue.hideLoading()
-                        }
-                     })
+                     self.canvasPath = res.tempFilePath
+                     self.$emit('done', res.tempFilePath)
                   },
                   fail (err) {
                      console.log('canvasToTempFilePath', err)
@@ -206,6 +203,22 @@ export default {
          } else {
             ctx.draw(true)
          }
+      },
+      downLoad () {
+         mpvue.showLoading({
+            title: '生成海报中'
+         })
+         mpvue.saveImageToPhotosAlbum({
+            filePath: this.canvasPath,
+            success(res2) {
+               console.log('saveImageToPhotosAlbum', res2)
+               mpvue.hideLoading()
+            },
+            fail (err) {
+               console.log('saveImageToPhotosAlbum', err)
+               mpvue.hideLoading()
+            }
+         })
       }
    }
 }

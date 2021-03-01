@@ -17,7 +17,8 @@
       <div class="date borderB">{{date}}</div>
       <h3 class="en">{{itemData.english_name}}</h3>
       <h3>{{itemData.title}}</h3>
-      <text class="nums">共\n{{itemData.nums}}件</text>
+      <text class="nums" v-if="type === 'goods'">共\n{{itemData.nums}}件</text>
+      <text class="nums" v-else-if="type === 'catbox'">订购\n{{month[itemData.nums]}}期</text>
       <div class="status" v-if="itemData.status === '7'">已完成</div>
    </div>
    <img src="/static/images/order/shadow.png" class="shadow" />
@@ -39,7 +40,14 @@ export default {
       }
    },
 	data() {
-		return {}
+		return {
+		   month: {
+		      '1': '一',
+		      '3': '三',
+		      '6': '六',
+		      '12': '十二',
+         }
+      }
 	},
 	methods: {
       toPage () {

@@ -73,9 +73,9 @@ export default {
             nickName: e.mp.detail.userInfo.nickName,
             avatarUrl: e.mp.detail.userInfo.avatarUrl
          }).then(res => {
-            this.$emit('btnFunc')
             store.commit('SET_PERSONINFO', e.mp.detail.userInfo)
             store.commit('SET_TOKEN', res.data)
+            this.$emit('btnFunc')
             mpvue.getSetting({
                success (res2) {
                   console.log('res2', res2)
@@ -84,6 +84,9 @@ export default {
             })
          })
       },
+      close () {
+         this.$emit('close')
+      }
    }
 }
 </script>

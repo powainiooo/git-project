@@ -8,10 +8,9 @@
 
 <template>
 <div>
-   <div class="container" :class="{'blur': showDetail}">>
+   <div class="container" :class="{'blur': showDetail}">
       <c-header :title="title" titleColor="#E8E6E4" />
-      <div
-      <diy-step :step="step" v-if="source === 'diy'" />
+      <diy-step :step="step" v-if="source === 'diy'" @change="changeStep" />
       <div class="list-frame" :style="{'padding-top': source === 'diy' ? '150rpx' : 0}">
          <ul :style="{'transform': 'translateX(' + (-step * 100) + 'vw)'}">
             <li>
@@ -20,7 +19,7 @@
                   v-for="item in listData"
                   :key="id"
                   :itemData="item"
-                  :showArrow="selectedArr[0]"
+                  :showArrow="ids[0] === item.id"
                   @click="openDetail" />
             </li>
             <li>
@@ -29,7 +28,7 @@
                   v-for="item in listData"
                   :key="id"
                   :itemData="item"
-                  :showArrow="selectedArr[1]"
+                  :showArrow="ids[1] === item.id"
                   @click="openDetail" />
             </li>
             <li>
@@ -38,7 +37,7 @@
                   v-for="item in listData"
                   :key="id"
                   :itemData="item"
-                  :showArrow="selectedArr[2]"
+                  :showArrow="ids[2] === item.id"
                   @click="openDetail" />
             </li>
             <li>
@@ -55,7 +54,7 @@
       </div>
       <div class="hint" v-if="loadOver"></div>
    </div>
-   <c-footer :btnName="btnName" :price="totalPrice" @btnFunc="changeStep" />
+   <c-footer :btnName="btnName" :price="totalPrice" @btnFunc="btnFunc" />
 
    <select-type ref="details" @selected="goodsSelect" @close="typeClose" @price="changeTempPrice" />
 
@@ -137,6 +136,7 @@ export default {
          selectedArr: [],
          tempPrice: 0,
          priceArr: [],
+         ids: [],
          btnName: '下一步|Next',
          toyPrice: 10,
          needToy: 0,
@@ -168,7 +168,18 @@ export default {
       }
    },
    methods: {
-      changeStep () {
+      changeStep (step) {
+         console.log('changeStep', step)
+         this.step = step
+         this.page = 1
+         this.listData = []
+         this.total = 0
+         this.getData(this.step + 1)
+         if (this.step === 3) {
+            this.btnName = '保存|Save'
+         }
+      },
+      btnFunc () {
          if (this.btnName === '确认|Confirm') {
             this.$refs.details.confirm()
          } else {
@@ -177,11 +188,7 @@ export default {
                   this.createCatbox()
                } else {
                   if (this.selectedArr[this.step]) {
-                     this.step += 1
-                     this.page = 1
-                     this.listData = []
-                     this.total = 0
-                     this.getData(this.step + 1)
+                     this.changeStep(this.step + 1)
                   } else {
                      mpvue.showToast({
                         title: '请选择产品',
@@ -215,7 +222,7 @@ export default {
             pet_id: 2
          }).then(res => {
             mpvue.hideLoading()
-            this.total = res.data.nums
+            this.total = Number(res.data.nums)
             this.listData = this.listData.concat(res.data.list)
          })
       },
@@ -225,6 +232,7 @@ export default {
          const priceArr = [...this.priceArr]
          priceArr[this.step] = Number(data.price)
          this.priceArr = priceArr
+         this.ids[this.step] = data.id
          this.showDetail = false
          // const ids = data.str.split('-')
          // const type = this.tempRecord.attrs_list.find(i => i.id === ids[2])
@@ -242,13 +250,13 @@ export default {
          // this.goodsList[this.step] = record
       },
       openDetail (record) {
-         console.log('openDetail', record)
+         console.log('openDetail', record, this.step)
          this.showDetail = true
          this.tempRecord = record
          this.btnName = '确认|Confirm'
          let catalogIndex = 0
          let specsIndex = 0
-         if (this.selectedArr[this.step]) {
+         if (this.selectedArr[this.step] && this.ids[this.step] === record.id) {
             const arr = this.selectedArr[this.step].split('-')
             catalogIndex = record.attrs_list.findIndex(i => i.id === arr[2])
             specsIndex = record.attrs_list[catalogIndex].child.findIndex(i => i.specs === arr[3])

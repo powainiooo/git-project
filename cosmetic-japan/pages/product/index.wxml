@@ -2,11 +2,20 @@
 <view class='container fff'>
   <view class='headTool center'>
     <view class='block {{idx==1?"active":""}}' data-idx='1' bindtap='sortTap'>最新<span></span></view>
-    <view class='block {{idx==2?"active":""}}' data-idx='2' bindtap='sortTap'>销量<span></span></view>
+    <view class='block {{idx==2?"active":""}}' data-idx='2' bindtap='sortTap'>销量
+       <image class='icojt' wx:if="{{xl_gd==0}}" src='/images/tb.png'></image>
+       <image class='icojt' wx:elif="{{xl_gd==1}}" src='/images/bot.png'></image>
+       <image class='icojt' wx:elif="{{xl_gd==-1}}" src='/images/top.png'></image>
+       <span></span>
+    </view>
     <view class='block {{idx==3?"active":""}}' data-idx='3' bindtap='sortTap'>价格
       <image class='icojt' wx:if="{{jg_gd==0}}" src='/images/tb.png'></image>
       <image class='icojt' wx:elif="{{jg_gd==1}}" src='/images/bot.png'></image>
-      <image class='icojt' wx:elif="{{jg_gd==2}}" src='/images/top.png'></image>
+      <image class='icojt' wx:elif="{{jg_gd==-1}}" src='/images/top.png'></image>
+      <span></span>
+    </view>
+    <view class='block {{idx==4?"active":""}}' data-idx='4' bindtap='sortTap'>筛选
+      <image class='icojt' src='/images/tb.png'></image>
       <span></span>
     </view>
   </view>
@@ -16,7 +25,6 @@
         <view class='row'>
           <image src='{{imgUrl}}{{item.cover}}'></image>
           <view class='name'>{{item.goods_name}}</view>
-          <view class='price'>￥<span>{{item.price}}</span></view>
         </view>
       </navigator>
     </view>
@@ -26,4 +34,34 @@
     <view class='text'>没有商品~~</view>
   </view>
   <view class='noText' hidden='{{!isNoPage}}'><span>————————</span>别扯了，没有更多了~<span>————————</span></view>
+</view>
+
+<view class="filter-container ts" style="left: {{showFilter ? 0 : '100vw'}}">
+   <view class="filter-frame">
+      <view class="filter-title">价格</view>
+      <view class="filter-price">
+         <input type='number' placeholder='最低价' class="item" value="{{minPrice}}" data-key="minPrice" bindinput='inputPrice'></input>
+         <span>—</span>
+         <input type='number' placeholder='最低价' class="item" value="{{maxPrice}}" data-key="maxPrice" bindinput='inputPrice'></input>
+      </view>
+      {{minPrice}}
+      <view class="filter-title">品牌<image src='/images/icon_btm2.png'></image></view>
+      <view class="filter-list">
+         <view wx:for="{{brandList}}"
+               wx:key="id"
+               data-id="{{item.id}}"
+               class="item {{item.id === brandId ? 'item-active' : ''}}" bindtap="selectBrand">{{item.name}}</view>
+      </view>
+      <view class="filter-title">已选分类<image src='/images/icon_btm2.png'></image></view>
+      <view class="filter-list">
+         <view wx:for="{{cateList}}"
+               wx:key="id"
+               data-id="{{item.id}}"
+               class="item {{item.id === cateId ? 'item-active' : ''}}" bindtap="selectCate">{{item.cname}}</view>
+      </view>
+   </view>
+   <view class="filter-btns">
+      <button bindtap="reset">重置</button>
+      <button bindtap="paixu">确定</button>
+   </view>
 </view>

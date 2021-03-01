@@ -16,9 +16,12 @@
 </style>
 
 <template>
-<div class="c-lees-star">
+<a href="/pages/leesStar/main"
+   class="c-lees-star"
+   hover-class="hscale"
+   hover-stay-time="10">
   <img src="/static/images/common/lees-star.png" />
-</div>
+</a>
 </template>
 
 <script type='es6'>

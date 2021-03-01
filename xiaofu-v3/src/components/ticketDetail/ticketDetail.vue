@@ -133,11 +133,11 @@
 
 <template>
 <div class="c-ticket-detail">
-  <infos ref="infos" :page="page"/>
+  <infos ref="infos" :page="page" :record="record"/>
   <template v-if="page === 'detail'">
-  <artist ref="artist" />
-  <notice ref="notice" />
-  <particulars ref="particulars" />
+  <artist ref="artist" :list="record.artist_list || []" />
+  <notice ref="notice" :list="record.notice_list || []" />
+  <particulars ref="particulars" :list="record.intro_list || []" />
   <organizers ref="organizers" />
   <recommend ref="recommend" />
   </template>
@@ -164,6 +164,12 @@ import information from './information'
 import cSelect from './select'
 export default {
   name: 'app',
+  props: {
+    record: {
+      type: Object,
+      default: () => {}
+    }
+  },
   components: {
     infos,
     artist,

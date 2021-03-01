@@ -36,10 +36,10 @@
 
 <template>
 <div class="c-collection">
-  <img src="/static/images/img.jpg" />
+  <img :src="record.image" />
   <h3>
-    <p class="en">Hip-hop all night</p>
-    <p>燃爆深圳嘻哈场</p>
+    <p class="en">{{record.name}}</p>
+    <p>{{record.intro}}</p>
   </h3>
 </div>
 </template>
@@ -47,6 +47,9 @@
 <script type='es6'>
 export default {
   name: 'app',
+  props: {
+    record: Object
+  },
   data () {
     return {}
   },

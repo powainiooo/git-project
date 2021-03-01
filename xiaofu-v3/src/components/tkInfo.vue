@@ -1,5 +1,5 @@
 <style scoped>
-.c-tk-info { display: flex; align-items: center; }
+.c-tk-info { width: 100%; display: flex; align-items: center; }
 .c-tk-date {
   width: 56px;
   height: 56px;
@@ -21,19 +21,20 @@
 }
 .c-tk-date:after { content: ''; height: 2px; background-color: #ffffff; transform: scaleY(.5); position: absolute; left: 11px; right: 11px; top: 50%; }
 .c-tk-date div { font-family: HelveB; }
-.c-tk-title p { font-size: 26px; font-family: HelveB; line-height: 30px; }
+.c-tk-title { flex: 1; overflow: hidden; }
+.c-tk-title p { font-size: 26px; font-family: HelveB; line-height: 30px; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; word-break: break-all; }
 .c-tk-title div { font-size: 20px; font-family: HelveL; color: #9E9E9F; line-height: 25px; }
 </style>
 
 <template>
-<div class="c-tk-info">
+<div class="c-tk-info" v-if="record">
   <div class="c-tk-date" :class="['c-tk-date-' + size]">
-    <p>12</p>
-    <div>8</div>
+    <p>{{record.month}}</p>
+    <div>{{record.day}}</div>
   </div>
   <div class="c-tk-title" v-if="showTitle">
-    <p>Nectar by Joji</p>
-    <div>MAOLivehouse</div>
+    <p>{{record.name}}</p>
+    <div>{{record.host}}</div>
   </div>
 </div>
 </template>
@@ -42,6 +43,10 @@
 export default {
   name: 'app',
   props: {
+    record: {
+      type: Object,
+      default: () => {}
+    },
     size: {
       type: String,
       default: 'normal'

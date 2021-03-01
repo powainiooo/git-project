@@ -72,7 +72,8 @@ export default {
       this.date = ''
       this.isSearch = true
       this.$emit('search', {
-        keyword: this.keyword
+        keyword: this.keyword,
+        date: this.date
       })
     },
     reset () {

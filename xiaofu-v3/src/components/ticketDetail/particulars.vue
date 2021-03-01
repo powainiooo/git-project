@@ -26,15 +26,10 @@
 <div>
   <div class="c-ticket-title"><span>Particulars</span>详情</div>
   <swiper previous-margin="58rpx" next-margin="35rpx" style="min-height: 640rpx;">
-    <swiper-item v-for="i in 3" :key="i">
+    <swiper-item v-for="(item, i) in list" :key="i">
       <div class="parti-item">
-        <img src="/static/images/img.jpg" class="pic" />
-        <div>生于日本大阪的Joji，是一位多才且远见卓识的歌手兼制作人，在网
-          络上他吸引了来自各地的追随者。Joji的音乐创作风格标新立异：将
-          缓慢的节奏，忧郁的情绪，动情的嗓音覆盖在简单粗粝的结构之上，
-          再混入trap、folk、 electronic、和R&B元素。被Pigeons & Planes网
-          站列入“2017年度最佳新人”的他，无疑是当下数字音乐时代最令人关
-          注的，有前景的艺术家之一。</div>
+        <img :src="item.image" class="pic" />
+        <div>{{item.content}}</div>
       </div>
     </swiper-item>
   </swiper>
@@ -45,6 +40,9 @@
 <script type='es6'>
 export default {
   name: 'app',
+  props: {
+    list: Array
+  },
   data () {
     return {}
   },

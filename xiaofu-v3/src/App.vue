@@ -1,27 +1,35 @@
 <script>
+import { promisify } from '@/utils'
+import { doLogin, postAction } from '@/utils/api'
+import store from '@/store'
+const getSetting = promisify(mpvue.getSetting)
+const getUserInfo = promisify(mpvue.getUserInfo)
 export default {
   created () {
-    // 调用API从本地缓存中获取数据
-    /*
-     * 平台 api 差异的处理方式:  api 方法统一挂载到 mpvue 名称空间, 平台判断通过 mpvuePlatform 特征字符串
-     * 微信：mpvue === wx, mpvuePlatform === 'wx'
-     * 头条：mpvue === tt, mpvuePlatform === 'tt'
-     * 百度：mpvue === swan, mpvuePlatform === 'swan'
-     * 支付宝(蚂蚁)：mpvue === my, mpvuePlatform === 'my'
-     */
-
-    let logs
-    if (mpvuePlatform === 'my') {
-      logs = mpvue.getStorageSync({key: 'logs'}).data || []
-      logs.unshift(Date.now())
-      mpvue.setStorageSync({
-        key: 'logs',
-        data: logs
+    this.getData()
+    this.getConfig()
+  },
+  methods: {
+    async getData () {
+      const token = mpvue.getStorageSync('XIAOFU_TOKEN')
+      if (typeof token === 'string' && token !== '') {
+        store.commit('SET_TOKEN', token)
+      } else {
+        const settings = await getSetting()
+        console.log('settings', settings)
+        if (settings.authSetting['scope.userInfo']) {
+          const userInfo = await getUserInfo()
+          doLogin(userInfo)
+        }
+      }
+    },
+    getConfig () {
+      postAction('/api/common/init').then(res => {
+        console.log('getConfig', res)
+        if (res.code === 1) {
+          store.commit('SET_CONFIGDATA', res.data)
+        }
       })
-    } else {
-      logs = mpvue.getStorageSync('logs') || []
-      logs.unshift(Date.now())
-      mpvue.setStorageSync('logs', logs)
     }
   },
   log () {
@@ -78,4 +86,6 @@ button:after {
   left: 0;
   bottom: 0;
 }
+
+.hscale { transition: all 0.15s ease-out; transform: scale(0.95);}
 </style>

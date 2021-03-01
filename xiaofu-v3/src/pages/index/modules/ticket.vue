@@ -92,18 +92,23 @@
 </style>
 
 <template>
-<div class="c-ticket" :class="tClass">
+<div v-if="record"
+  @click="toDetail"
+   class="c-ticket"
+   :class="tClass"
+   hover-class="hscale"
+   hover-stay-time="10">
   <img src="/static/images/common/ticket-shadow-small.png" class="ticket-shadow-small" v-if="size === 'small'" />
   <img src="/static/images/common/ticket-shadow-large.png" class="ticket-shadow-large" v-if="size === 'large'" />
   <div class="c-ticket-bar">
-    <tk-info />
-    <img src="/static/images/logo.png" class="logo" v-if="size === 'large'" />
+    <tk-info :record="infoData" />
+    <img :src="record.logo" class="logo" v-if="size === 'large'" />
   </div>
   <div class="c-ticket-imgs">
-    <img src="/static/images/img.jpg" />
+    <img :src="record.cover_image" />
   </div>
   <img src="/static/images/common/flip.png" class="c-ticket-flip" />
-  <img src="/static/images/common/star.png" class="c-ticket-star" />
+  <img src="/static/images/common/star.png" class="c-ticket-star" v-if="record.type === 'recTicket'" />
 </div>
 </template>
 
@@ -115,6 +120,10 @@ export default {
     tkInfo
   },
   props: {
+    record: {
+      type: Object,
+      default: () => {}
+    },
     size: {
       type: String,
       default: 'small'
@@ -127,11 +136,31 @@ export default {
   computed: {
     tClass () {
       return [`c-ticket-${this.size}`, this.extraClass]
+    },
+    infoData () {
+      let date = ['', '']
+      let name = ''
+      if (this.record) {
+        date = this.record.start_date.split('-')
+        name = this.record.name
+      }
+      return {
+        month: date[1],
+        day: date[2],
+        name,
+        host: ''
+      }
     }
   },
   data () {
     return {}
   },
-  methods: {}
+  methods: {
+    toDetail () {
+      mpvue.navigateTo({
+        url: '/pages/details/main?id=' + this.record.id
+      })
+    }
+  }
 }
 </script>

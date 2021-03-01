@@ -74,18 +74,18 @@
 
 <template>
 <div class="c-ticket-infos">
-  <img src="/static/images/img.jpg" class="banner" :class="{'banner-hide': page === 'buy'}" v-if="showBanner" />
+  <img :src="record.cover_image" class="banner" :class="{'banner-hide': page === 'buy'}" v-if="showBanner && record" />
   <div class="line1 bBorder">
-    <tk-info />
-    <img src="/static/images/logo.png" />
+    <tk-info :record="infoData" />
+    <img :src="record.logo" v-if="record" />
   </div>
   <div class="line2 bBorder">
     <ul class="times">
-      <li v-for="i in time" :key="i">{{i}}</li>
+      <li v-for="i in timeStr" :key="i">{{i}}</li>
     </ul>
     <span>open</span>
     <img src="/static/images/common/dot.png" />
-    <div class="addr"><span>L1深圳市福田区车公庙泰然大厦01层L1-11A</span></div>
+    <div class="addr"><span>{{record.address}}</span></div>
   </div>
 </div>
 </template>
@@ -95,6 +95,10 @@ import tkInfo from '@/components/tkInfo'
 export default {
   name: 'app',
   props: {
+    record: {
+      type: Object,
+      default: () => {}
+    },
     page: String,
     showBanner: {
       type: Boolean,
@@ -104,10 +108,28 @@ export default {
   components: {
     tkInfo
   },
-  data () {
-    return {
-      time: '21:30'
+  computed: {
+    infoData () {
+      let date = ['', '']
+      let name = ''
+      if (this.record) {
+        date = this.record.start_date.split('-')
+        name = this.record.name
+      }
+      return {
+        month: date[1],
+        day: date[2],
+        name,
+        host: ''
+      }
+    },
+    timeStr () {
+      const time = this.record ? this.record.start_date.split('-') : ['', '']
+      return `${time[1]}:${time[2]}`
     }
+  },
+  data () {
+    return {}
   },
   methods: {}
 }

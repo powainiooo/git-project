@@ -8,30 +8,36 @@
   <div>
     <c-header
       ref="header"
-      @close="handleClose" />
+      @close="handleClose"
+      @cityChange="cityChange" />
+
     <c-search
       ref="search"
       @change="changeStatus"
       @search="handleSearch" />
-    <div class="index-container">
+
+    <div class="index-container" v-if="isSearch">
+      <div v-for="item in listData"
+           :key="id"
+           class="item-large">
+        <c-ticket :record="item" size="large" />
+      </div>
+    </div>
+    <div class="index-container" v-else>
       <div class="item-small">
         <c-lees-star />
       </div>
-      <div class="item-small">
-        <c-collection />
-      </div>
-      <div class="item-large">
-        <c-ticket size="large" />
-      </div>
-      <div class="item-small">
-        <c-ticket />
-      </div>
-      <div class="item-small">
-        <c-ticket />
+      <div v-for="item in listData"
+           :key="id"
+           :class="{
+             'item-small': item.type === 'normalTicket',
+             'item-large': item.type === 'recTicket' || item.type === 'collection'
+           }">
+        <c-collection :record="item" v-if="item.type === 'collection'" />
+        <c-ticket :record="item" size="large" v-else-if="item.type === 'recTicket'" />
+        <c-ticket :record="item" v-else-if="item.type === 'normalTicket'" />
       </div>
     </div>
-
-    <c-ticket-detail />
   </div>
 </template>
 
@@ -41,24 +47,32 @@ import cSearch from './modules/search'
 import cLeesStar from './modules/leesStar'
 import cCollection from './modules/collection'
 import cTicket from './modules/ticket'
-import cTicketDetail from '@/components/ticketDetail/ticketDetail'
-export default {
-  data () {
-    return {
-      status: '',
-      keyword: ''
-    }
-  },
+import { postAction } from '@/utils/api'
 
+export default {
   components: {
     cHeader,
     cSearch,
     cLeesStar,
     cCollection,
-    cTicket,
-    cTicketDetail
+    cTicket
   },
-
+  data () {
+    return {
+      status: '',
+      date: '',
+      keyword: '',
+      page: 1,
+      cityId: '',
+      listData: [],
+      loadOver: false
+    }
+  },
+  computed: {
+    isSearch () {
+      return this.date !== '' || this.keyword !== ''
+    }
+  },
   methods: {
     changeStatus (e) {
       console.log('changeStatus', e)
@@ -67,16 +81,54 @@ export default {
     },
     handleSearch (e) {
       this.keyword = e.keyword
+      this.date = e.date
+      this.page = 1
+      this.listData = []
+      this.getData()
       this.changeStatus('search')
     },
     handleClose (e) {
       console.log('handleClose', e, this.status)
       this.$refs.search.reset()
+      this.keyword = ''
+      this.date = ''
+      this.page = 1
+      this.listData = []
+      this.getData()
+    },
+    getData () {
+      let url = '/api/ticket/index'
+      let params = {
+        page: this.page,
+        city_id: this.cityId
+      }
+      if (this.isSearch) {
+        url = '/api/ticket/lists'
+        params.date = this.date
+        params.keyword = this.keyword
+      }
+      postAction(url, params).then(res => {
+        this.loadOver = res.data.list.length === 0
+        if (!this.loadOver) {
+          this.listData = this.listData.concat(res.data.list)
+        }
+      })
+    },
+    cityChange (id) {
+      this.page = 1
+      this.cityId = id
+      this.listData = []
+      this.getData()
     }
   },
-
-  created () {
+  onReachBottom () {
+    if (this.loadOver) return
+    this.page += 1
+    this.getData()
+  },
+  onShow () {
     // let app = getApp()
+    this.getData()
   }
 }
 </script>

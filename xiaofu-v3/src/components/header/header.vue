@@ -22,10 +22,12 @@
         <div class="c-skip"></div>
         <span class="label">跳过</span>
       </div>
+      <picker @change="cityChange" :range="addrList" range-key="name">
       <div class="c-cont-frame" v-if="showCity">
         <img src="/static/images/common/dot.png" class="dot" />
-        <span class="label">全部</span>
+        <span class="label">{{cityName}}</span>
       </div>
+      </picker>
       <button class="btn" v-if="showMenuBtn" @click="openMenu"><img src="/static/images/common/menu.png" /></button>
       <button class="btn" v-if="showStarBtn"><img src="/static/images/common/star-select.png" style="width: 42rpx; height: 40rpx;" /></button>
       <button class="btn" v-if="showCloseBtn" @click="handleClose"><img src="/static/images/common/close.png" /></button>
@@ -38,6 +40,7 @@
 
 <script type='es6'>
 import cMenu from './menu'
+import store from '@/store'
 export default {
   name: 'app',
   props: {
@@ -54,6 +57,14 @@ export default {
       default: false
     }
   },
+  computed: {
+    addrList () {
+      const list = [
+        { id: '', name: '全部' }
+      ]
+      return list.concat(store.state.configData.citydata || [])
+    }
+  },
   components: {
     cMenu
   },
@@ -67,11 +78,14 @@ export default {
       showShareBtn: false,
       showStarBtn: false,
       originStatus: '',
-      pageStatus: ''
+      pageStatus: '',
+      cityName: '全部',
+      cityId: ''
     }
   },
   methods: {
     setStatus (status) {
+      console.log('setStatus', status)
       this.pageStatus = status
       switch (status) {
         case '':
@@ -126,6 +140,12 @@ export default {
       if (this.pageStatus !== 'onlyClose') {
         this.setStatus(this.originStatus)
       }
+    },
+    cityChange (e) {
+      const item = this.addrList[e.mp.detail.value]
+      console.log('cityChange', item)
+      this.cityName = item.name
+      this.$emit('cityChange', item.id)
     }
   }
 }

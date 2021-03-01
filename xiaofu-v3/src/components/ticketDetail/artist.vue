@@ -41,31 +41,10 @@
 <div>
   <div class="c-ticket-title"><span>Artist</span>表演者</div>
   <swiper previous-margin="25rpx" next-margin="416rpx">
-    <swiper-item>
+    <swiper-item v-for="(item, index) in list" :key="index">
       <div class="artist-item">
-        <img src="/static/images/img.jpg" class="pic" />
-        <div>Joji</div>
-        <img src="/static/images/common/flip.png" class="flip" />
-      </div>
-    </swiper-item>
-    <swiper-item>
-      <div class="artist-item">
-        <img src="/static/images/img.jpg" class="pic" />
-        <div>Joji</div>
-        <img src="/static/images/common/flip.png" class="flip" />
-      </div>
-    </swiper-item>
-    <swiper-item>
-      <div class="artist-item">
-        <img src="/static/images/img.jpg" class="pic" />
-        <div>Joji</div>
-        <img src="/static/images/common/flip.png" class="flip" />
-      </div>
-    </swiper-item>
-    <swiper-item>
-      <div class="artist-item">
-        <img src="/static/images/img.jpg" class="pic" />
-        <div>Joji</div>
+        <img :src="item.image" class="pic" />
+        <div>{{item.content}}</div>
         <img src="/static/images/common/flip.png" class="flip" />
       </div>
     </swiper-item>
@@ -77,6 +56,9 @@
 <script type='es6'>
 export default {
   name: 'app',
+  props: {
+    list: Array
+  },
   data () {
     return {}
   },

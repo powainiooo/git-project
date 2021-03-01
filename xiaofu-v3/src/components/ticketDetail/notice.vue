@@ -35,9 +35,9 @@
 <div>
   <div class="c-ticket-title"><span>Notice</span>须知</div>
   <ul class="notice-list">
-    <li v-for="i in 3" :key="i">
+    <li v-for="(item, i) in list" :key="i">
       <div class="rank"><img :src="'/static/images/number/' + (i + 1) + '.png'" mode="heightFix" /></div>
-      <div class="content">每张门票均含指定酒水一杯</div>
+      <div class="content">{{item}}</div>
     </li>
   </ul>
   <div class="notice-bBorder bBorder"></div>
@@ -47,6 +47,9 @@
 <script type='es6'>
 export default {
   name: 'app',
+  props: {
+    list: Array
+  },
   data () {
     return {}
   },

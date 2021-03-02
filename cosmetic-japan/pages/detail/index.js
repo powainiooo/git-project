@@ -27,8 +27,10 @@ Page({
         nums: 0,
         isShowPt: false, //是否显示拼团弹窗
         isShowToPt: false, //是否显示去拼单弹窗
+	    showContact: false, //是否显示联系客服弹窗
         selectIndex: '',//参与别人拼单的下标
         joinUserList:[],//参与者数组
+	    lxinfo:{},//客服信息
         options: {},
         slideBox: 0,
         videoBox: 1,
@@ -404,6 +406,19 @@ Page({
         })
     },
 
+	// 打开客服
+	openContact () {
+    	this.setData({
+	      showContact: true
+      })
+	},
+	// 关闭客服
+	closeContact () {
+    	this.setData({
+	      showContact: false
+      })
+	},
+
     /**
      * 生命周期函数--监听页面加载
      */
@@ -465,6 +480,7 @@ Page({
                     yixuan: yixuan,
                     attrid: attrid,
                     ids: ids,
+	                lxinfo: ret.lxinfo,
                     isCN: wx.getStorageSync('isCN'),
                     options: options,
                     fxs_id: ret.fxs_id,

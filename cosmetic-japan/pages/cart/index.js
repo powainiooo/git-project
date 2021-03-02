@@ -212,7 +212,7 @@ Page({
   delTap:function(e){
     var idx = e.currentTarget.dataset.idx;
     var list = this.data.list;
-    let link = { method: 'cart_del', canshu: '&cart_id=' + list[idx].id };
+    let link = { method: 'cart_del', canshu: '&id=' + list[idx].id };
     let logic = (ret) => {
       wx.showToast({
         title: '删除成功',
@@ -238,6 +238,20 @@ Page({
     }
     api.post(this, link, {}, logic);
   },
+	// 批量删除
+	delTapMutil () {
+  	   const ids = this.data.list.filter(i => i.status === 1).map(i => i.id)
+		let link = { method: 'cart_del', canshu: '&id=' + ids.join('|') };
+  	   const logic = ret => {
+	      wx.showToast({
+		      title: '删除成功',
+		      icon: 'none',
+		      duration:1000
+	      })
+	      this.getCartData()
+      }
+		api.post(this, link, {}, logic);
+	},
 
   //touchstart
   touchS: function (e) {
@@ -247,7 +261,7 @@ Page({
         list[i].txtStyle = 0
       }
       this.setData({
-        //设置触摸起始点水平方向位置  
+        //设置触摸起始点水平方向位置
         startX: e.touches[0].clientX,
         list: list
       });
@@ -258,26 +272,26 @@ Page({
   touchM: function (e) {
     var that = this;
     if (e.touches.length == 1) {
-      //手指移动时水平方向位置  
+      //手指移动时水平方向位置
       var moveX = e.touches[0].clientX;
-      //手指起始点位置与移动期间的差值  
+      //手指起始点位置与移动期间的差值
       var disX = this.data.startX - moveX;
       var delBtnWidth = this.data.delBtnWidth;
       var txtStyle = "";
-      if (disX == 0 || disX < 0) {//如果移动距离小于等于0，文本层位置不变  
+      if (disX == 0 || disX < 0) {//如果移动距离小于等于0，文本层位置不变
         txtStyle = 0;
-      } else if (disX > 0) {//移动距离大于0，文本层left值等于手指移动距离  
+      } else if (disX > 0) {//移动距离大于0，文本层left值等于手指移动距离
         txtStyle = disX;
         if (disX >= delBtnWidth) {
-          //控制手指移动距离最大值为删除按钮的宽度  
+          //控制手指移动距离最大值为删除按钮的宽度
           txtStyle = delBtnWidth;
         }
       }
-      //获取手指触摸的是哪一项  
+      //获取手指触摸的是哪一项
       var index = e.currentTarget.dataset.idx;
       var list = this.data.list;
       list[index].txtStyle = txtStyle;
-      //更新列表的状态  
+      //更新列表的状态
       this.setData({
         list: list
       });
@@ -287,14 +301,14 @@ Page({
   //touchend
   touchE: function (e) {
     if (e.changedTouches.length == 1) {
-      //手指移动结束后水平位置  
+      //手指移动结束后水平位置
       var endX = e.changedTouches[0].clientX;
-      //触摸开始与结束，手指移动的距离  
+      //触摸开始与结束，手指移动的距离
       var disX = this.data.startX - endX;
       var delBtnWidth = this.data.delBtnWidth;
-      //如果距离小于删除按钮的1/2，不显示删除按钮  
+      //如果距离小于删除按钮的1/2，不显示删除按钮
       var txtStyle = disX > delBtnWidth / 2 ? delBtnWidth : "0";
-      //获取手指触摸的是哪一项  
+      //获取手指触摸的是哪一项
       var index = e.currentTarget.dataset.idx;
       var list = this.data.list;
       list[index].txtStyle = txtStyle;
@@ -303,7 +317,7 @@ Page({
         list: list
       });
     }
-  }, 
+  },
 
   /**
    * 生命周期函数--监听页面加载
@@ -318,35 +332,37 @@ Page({
         isShowGetUser: false
       })
     }
-    let link = { method: 'cart_list', canshu: '&page=' + this.data.page };
-    let logic = (ret) => {
-      var list = ret.list;
-      if (list.length > 0){
-        for (var i = 0; i < list.length; i++) {
-          list[i].status = 0;
-          list[i].txtStyle = 0;
-        }
-        this.setData({
-          list: list,
-          isNoReturn: false
-        })
-      }else{
-        this.setData({
-          isNoReturn: true
-        })
-      }
-    }
+    this.getCartData()
     this.setData({
       isCN: wx.getStorageSync('isCN')
     })
-    api.post(this, link, {}, logic);
   },
-
+	getCartData () {
+		let link = { method: 'cart_list', canshu: '&page=' + this.data.page };
+		let logic = (ret) => {
+			var list = ret.list;
+			if (list.length > 0){
+				for (var i = 0; i < list.length; i++) {
+					list[i].status = 0;
+					list[i].txtStyle = 0;
+				}
+				this.setData({
+					list: list,
+					isNoReturn: false
+				})
+			}else{
+				this.setData({
+					isNoReturn: true
+				})
+			}
+		}
+		api.post(this, link, {}, logic);
+	},
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    
+
   },
 
   /**
@@ -378,7 +394,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+
   },
 
   /**
@@ -406,13 +422,13 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+
   },
 
   /**
  * 用户点击右上角分享
  */
   onShareAppMessage: function () {
-    
+
   }
 })

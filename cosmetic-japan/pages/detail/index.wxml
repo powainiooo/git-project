@@ -107,7 +107,7 @@
         <image src='/images/ico_8.png'></image>
         <span wx:if="{{nums != 0 || nums != ''}}">{{nums}}</span>
       </navigator>
-      <button open-type='contact' class='gow'>
+      <button class='gow' bindtap="openContact">
         <image src='/images/weixin1.png' mode="widthFix"></image>
       </button>
     </view>
@@ -195,51 +195,16 @@
       </view>
     </view>
   </view>
-  <!-- 拼单列表弹窗 -->
-  <view class="mask ptMask" wx:if="{{isShowPt}}">
-    <view class="fff ptDialog">
-      <image src="/images/pt/close.png" class="closeImg" data-status="close" bindtap='PtDialogTap'/>
-      <view class="ptTitle">正在拼单</view>
-      <scroll-view scroll-y style="height: 380px;">
-        <view wx:for="{{spellList}}" wx:key="index" wx:if="{{index<10}}">
-          <view class="ptItem">
-              <view class="ptL">
-                <image src="{{item.headimg}}" class="ptLImg"/>
-              </view>
-              <view class="ptC">
-                <view><span class="ptName">{{item.username}}</span><span class="ptNum">还差{{item.remain_num}}人</span></view>
-                <view class="ptTime">剩余{{item.lastTime.dd}}:{{item.lastTime.hh}}:{{item.lastTime.mm}}:{{item.lastTime.ss}}</view>
-              </view>
-              <view class="ptR">
-                <view class="toPt" data-index="{{index}}" bindtap='toPtDialogTap'>去拼单</view>
-              </view>
-          </view>
-          <view class="bLine"></view>
-        </view>
-      </scroll-view>
-      <view class="ptFooter">仅显示10个正在拼单的人</view>
-    </view>
-  </view>
-  <!-- 去拼单弹窗 -->
-  <view class="mask ptMask" wx:if="{{isShowToPt}}">
-    <view class="fff toPtDialog">
-      <image src="/images/pt/close.png" class="closeImg"  bindtap='closeToPtDialogTap'/>
-      <view class="joinPt">参加{{spellListMove[selectIndex].username}}的拼单</view>
-      <view class="joinTime">仅剩{{spellListMove[selectIndex].remain_num}}个名额，{{spellListMove[selectIndex].lastTime.dd}}:{{spellListMove[selectIndex].lastTime.hh}}:{{spellListMove[selectIndex].lastTime.mm}}:{{spellListMove[selectIndex].lastTime.ss}}后结束</view>
-      <view class="personImgList">
-        <!-- <view class="personItem">
-          <image class="personImg" src="{{spellListMove[selectIndex].headimg}}"/>
-          <image class="pinzu" src="/images/pt/pinzu.png"/>
-        </view> -->
-        <view class="personItem" wx:for="{{joinUserList}}" wx:key="index">
-          <image class="pinzu" src="/images/pt/pinzu.png" wx:if="{{index == 0}}"/>
-          <image class="personImg" src="{{item.headimg}}" wx:if="{{item.headimg}}"/>
-          <image class="personImg" src="/images/pt/noperson.png" wx:if="{{!item.headimg}}"/>
-        </view>
-      </view>
-      <view class="goPt" wx:if="{{tuanyuan_flag == 0}}" bindtap='SelcetTap' data-spell='true' >去拼单</view>
-    </view>
-  </view>
+</view>
+
+<view class="contact-container" wx:if="{{showContact}}" bindtap="closeContact">
+   <view class="contact-box">
+      <image src="/images/ico_10.png"></image>
+      <view class="title">如有任何疑问请联系客服</view>
+      <view class="infos">客服手机号：{{lxinfo.phone}}</view>
+      <view class="infos">客服微信好：{{lxinfo.wx_id}}</view>
+      <view class="infos">客服邮箱：{{lxinfo.email}}</view>
+   </view>
 </view>
 
 <import src="../template/template.wxml" />

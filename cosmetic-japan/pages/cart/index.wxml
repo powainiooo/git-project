@@ -1,5 +1,13 @@
 <!--pages/cart/class.wxml-->
 <view class='container f3'>
+   <view class="cart-header between">
+      <view class="start">
+         <image wx:if="{{!selectAll}}" src='/images/ico_n.png' bindtap='selectAllTap'></image>
+         <image wx:else src='/images/ico_y.png' bindtap='selectAllTap'></image>
+         全选
+      </view>
+      <button class="center" bindtap="delTapMutil">删除</button>
+   </view>
   <view class='cartBox' hidden='{{isNoReturn}}'>
     <view class='itemBox fff' wx:for="{{list}}" wx:key="index">
       <view class='item start' style="left:-{{item.txtStyle}}rpx" data-idx="{{index}}" bindtap='selectTap' bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE">
@@ -8,13 +16,19 @@
           <image class='flexs' wx:else src='/images/ico_y.png'></image>
         </view>
         <view class='products start'>
-          <image src='{{imgUrl}}{{item.cover}}'></image>
+          <image src='{{www}}{{item.cover}}'></image>
           <view class='info'>
-            <view class='title'>{{item.goods_name}}</view>
-            <view class='guige'>{{item.attr_name}}</view>
+             <view>
+                <view class='title'>{{item.goods_name}}</view>
+                <view class='guige'>{{item.attr_name}}</view>
+             </view>
             <view class='row between'>
-              <view class='amountBox start'><view class="less {{item.buy_num>1?'active':''}}" data-idx="{{index}}" catchtap="lessTap">-</view><view class='sl'>{{item.buy_num}}</view><view class='add active' data-idx="{{index}}" catchtap='addTap'>+</view></view>
-              <view class='price'>￥<span>{{item.price}}</span></view>
+               <view class='price'>￥<span>{{item.price}}</span></view>
+              <view class='amountBox start'>
+                 <view class="less {{item.buy_num>1?'active':''}}" data-idx="{{index}}" catchtap="lessTap">-</view>
+                 <view class='sl'>{{item.buy_num}}</view>
+                 <view class='add active' data-idx="{{index}}" catchtap='addTap'>+</view>
+              </view>
             </view>
           </view>
         </view>

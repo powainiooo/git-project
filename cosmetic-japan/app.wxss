@@ -626,17 +626,18 @@ button:after { border: none; }
 }
 
 .cartBox .itemBox .item .Status image {
-    width: 44rpx;
-    height: 44rpx;
+    width: 26rpx;
+    height: 26rpx;
     display: block;
-    padding: 0 18rpx 0 30rpx;
+    padding: 0 25rpx 0 44rpx;
 }
 
 .cartBox .itemBox .products image {
     width: 200rpx;
     height: 200rpx;
     flex-shrink: 0;
-    margin-right: 24rpx;
+    margin-right: 22rpx;
+   border-radius: 8px;
 }
 
 .cartBox .itemBox .products {
@@ -645,8 +646,8 @@ button:after { border: none; }
 
 .cartBox .itemBox .products .title {
     width: 100%;
-    font-size: 34rpx;
-    color: #333333;
+    font-size: 32rpx;
+    color: #272727;
     text-overflow: -o-ellipsis-lastline;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -656,9 +657,12 @@ button:after { border: none; }
 }
 
 .cartBox .itemBox .products .guige {
-    font-size: 28rpx;
-    color: #999999;
-    margin: 12rpx 0;
+    font-size: 22rpx;
+    color: #CBCBCB;
+   background: #F9F9F9;
+   padding: 10rpx 16rpx;
+   border-radius: 5rpx;
+   display: inline-block;
 }
 
 .cartBox .itemBox .info {
@@ -675,10 +679,10 @@ button:after { border: none; }
     width: 54rpx;
     height: 54rpx;
     line-height: 48rpx;
-    background-color: #f3f3f3;
     color: #cccccc;
     font-size: 40rpx;
     text-align: center;
+   border: 2rpx solid #D2D2D2;
 }
 
 .cartBox .itemBox .amountBox .less {
@@ -691,18 +695,16 @@ button:after { border: none; }
     border-bottom-right-radius: 8rpx;
 }
 
-.cartBox .itemBox .amountBox .active {
-    color: #de3031;
-}
-
 .cartBox .itemBox .amountBox .sl {
     width: 70rpx;
-    padding: 7rpx 0 8rpx;
-    text-align: center;
+   height: 57rpx;
+   display: flex;
+   align-items: center;
+   justify-content: center;
     color: #333333;
     font-size: 28rpx;
-    border-top: 1rpx solid #f3f3f3;
-    border-bottom: 1rpx solid #f3f3f3;
+    border-top: 2rpx solid #D2D2D2;
+    border-bottom: 2rpx solid #D2D2D2;
     box-sizing: border-box;
 }
 
@@ -711,14 +713,8 @@ button:after { border: none; }
 }
 
 .cartBox .itemBox .price {
-    color: #333333;
-    font-size: 28rpx;
-    margin-right: 30rpx;
-}
-
-.cartBox .itemBox .price span {
-    color: #de3031;
-    font-size: 34rpx;
+    color: #323232;
+    font-size: 36rpx;
 }
 
 .cartBox .itemBox .del {

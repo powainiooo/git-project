@@ -161,9 +161,15 @@
     font-size: 32rpx;
     text-align: left;
 }
+.info .btn-share {
+   width: 44rpx;
+}
+.info .btn-share image {
+   width: 100%;
+}
 
 
-/* 拼团 */
+   /* 拼团 */
 
 .numListSpell {
     height: 100rpx;

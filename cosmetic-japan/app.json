@@ -1,12 +1,12 @@
 {
    "pages": [
+      "pages/detail/index",
+      "pages/index/index",
       "pages/product/index",
       "pages/class/index",
-      "pages/index/index",
       "pages/cart/index",
       "pages/my/index",
       "pages/serch/index",
-      "pages/detail/index",
       "pages/orderAccount/index",
       "pages/wuliuDetail/index",
       "pages/sign/index",

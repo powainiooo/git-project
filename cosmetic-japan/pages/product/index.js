@@ -142,7 +142,6 @@ Page({
    */
   onLoad: function (options) {
     console.log(55,options);
-	  options.id = 17
     if (options && options.id != ''){
       let link = { method: 'cate_list', canshu: '&id=' + options.id + '&page=' + Number(this.data.page)};
       let logic = (ret) => {

@@ -52,7 +52,7 @@ App({
       success: function (res) {
         var code = res.code;
         wx.request({
-          url: that.globalData.www + 'wechat/main/login?code=' + code,
+          url: that.globalData.www + '/wechat/main/login?code=' + code,
           data: { mid: that.globalData.mid},
           dataType: 'json',
           method: 'POST',
@@ -163,3 +163,4 @@ App({
     })
   },
 })
+// 29-支付成功  30-个人中心 31-积分-已签到 48-分销商中心 53-收益明细 57-分销全部订单 优惠券

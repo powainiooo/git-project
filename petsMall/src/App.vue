@@ -104,7 +104,7 @@ export default {
          mpvue.loadFontFace({
             global: true,
             family: 'Helve',
-            source: 'url("http://catbox.pc-online.cc/static/fonts/HelveticaNeue_Medium.ttf")',
+            source: 'url("https://hair.designbyho.com/static/fonts/HelveticaNeue_Medium.ttf")',
             success: (res) => {
                console.log('Helve load over', res)
             }
@@ -112,7 +112,7 @@ export default {
          mpvue.loadFontFace({
             global: true,
             family: 'HelveThin',
-            source: 'url("http://catbox.pc-online.cc/static/fonts/HelveticaNeueThin.ttf")',
+            source: 'url("https://hair.designbyho.com/static/fonts/HelveticaNeueThin.ttf")',
             success: (res) => {
                console.log('HelveThin load over', res)
             }

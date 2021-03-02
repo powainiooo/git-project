@@ -104,14 +104,14 @@ Page({
             Canshu: false
         })
     },
-  
+
     //显示或关闭拼团列表弹窗
     PtDialogTap:function(e){
         this.setData({
           isShowPt: e.target.dataset.status == 'show'?true:false
         })
     },
-      
+
     //显示去拼单弹窗
     toPtDialogTap:function(e){
         //获取参与者列表
@@ -132,11 +132,11 @@ Page({
                   joinUserList: user_list,
                   tuanyuan_flag: tuanyuan_flag,
                 })
-            } 
+            }
         }
         api.postGroupBuy(this, link, {}, logic)
     },
-    
+
     //关闭去拼单弹窗
     closeToPtDialogTap:function(){
         this.setData({
@@ -248,7 +248,7 @@ Page({
         let attrid = this.data.attrid;
         let attr = attrid.join('|');
         let sl = this.data.sl;
-        let link = { method: 'cart_create', canshu: '' };
+        let link = { method: 'cart_add', canshu: '' };
         let data = { id: goods_info.id, attr_id: attr, buy_num: sl };
         let logic = (ret) => {
             wx.showToast({
@@ -298,15 +298,15 @@ Page({
             delete data.type
             delete data.id
             delete data.activity_type
-        } 
+        }
         //参与别人的拼单
-        if (this.data.selectIndex !== '') { 
-            link = { method: 'join_groupbuy', canshu: '' }; 
+        if (this.data.selectIndex !== '') {
+            link = { method: 'join_groupbuy', canshu: '' };
             data.gbc_id = this.data.spellListMove[this.data.selectIndex].gbc_id;
         }
         //通过分享进入参与别人的拼单
-        if (this.data.gbc_id !== '') { 
-            link = { method: 'join_groupbuy', canshu: '' }; 
+        if (this.data.gbc_id !== '') {
+            link = { method: 'join_groupbuy', canshu: '' };
             data.gbc_id = this.data.gbc_id;
         }
         api.post(this, link, data, logic);
@@ -414,7 +414,7 @@ Page({
             app.getLogin();
             return;
         }
-  
+	    options.id = '222'
         if (!!options && !!options.id) {
 
             if (options.activity_type) {
@@ -450,29 +450,9 @@ Page({
                 var ids = [];
                 var yixuan = [];
                 var attrid = [];
-                // if (wx.getStorageSync('isCN')) {
-                //   for (var i in ret.all_attrs) {
-                //     if (ret.all_attrs[i].bool == 1) {
-                //       ids[i] = 0;
-                //       attrid.push(ret.all_attrs[i].sub[0].id);
-                //       yixuan.push(ret.all_attrs[i].sub[0].name)
-                //     }
-                //   }
-                // }else{
-                //   for (var i in ret.all_attrs) {
-                //     if (ret.all_attrs[i].bool == 1){
-                //       ids[i] = 0;
-                //       attrid.push(ret.all_attrs[i].sub[0].id);
-                //       yixuan.push(ret.all_attrs[i].sub[0].name_en)
-                //     }
-                //   }
-                // }
                 var returnData = {};
                 returnData.price = goods_info.price;
-                returnData.price_dd = ret.kucun_info[0].price_dd;
                 returnData.price_kd = goods_info.price_kd;
-                returnData.price_shui = ret.kucun_info[0].price_shui;
-                returnData.num = ret.kucun_info[0].num;
                 returnData.cover = goods_info.cover;
                 returnData.ms_price = goods_info.hd_price
                 returnData.xsg_price = goods_info.hd_price
@@ -481,7 +461,6 @@ Page({
                     all_attrs: ret.all_attrs,
                     goods_info: goods_info,
                     goods_desc: newContent,
-                    kucun_info: ret.kucun_info,
                     yhq: ret.can_lqyhq,
                     yixuan: yixuan,
                     attrid: attrid,
@@ -526,7 +505,7 @@ Page({
                     }
                 }, 2000)
             }
-            
+
             //分享拼单，参与别人拼团进入
             if (options.type && options.type=="fromShare") {
                 this.setData({

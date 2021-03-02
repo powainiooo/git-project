@@ -1,5 +1,6 @@
 const app = getApp();
 const www = getApp().globalData.www + '/';
+console.log('www', www)
 
 // 总接口
 function post(that, link, data, logic = function () { }) {

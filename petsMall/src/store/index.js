@@ -25,7 +25,11 @@ const store = new Vuex.Store({
          recom_str: '1-3'
       },
       mineParams: {},
-      showShare: false
+      showShare: false,
+      payParams: {
+         jsapi: {},
+         orderNum: ''
+      }
    },
    mutations: {
       SET_TOKEN (state, data) {
@@ -67,6 +71,9 @@ const store = new Vuex.Store({
       },
       SET_SHOWSHARE (state, data) {
          state.showShare = data
+      },
+      SET_PAYPARAMS (state, data) {
+         state.payParams = data
       }
    }
 })

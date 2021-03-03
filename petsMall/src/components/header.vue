@@ -25,13 +25,13 @@
 .c-header .menus-frame .line2 a { flex: 1; display: flex; align-items: center; flex-direction: column; justify-content: center; font-size: 30px; color: var(--textColor); text-align: center; text-shadow: var(--textShadow); }
 .c-header .menus-frame .line2 a div { font-family: Helve;}
 
-.c-header .menus-frame .navs-list a { height: 174px; display: flex; align-items: center; padding-left: 24px; color: #ffffff; font-size: 36px; text-shadow: var(--textShadow); position: relative;}
-.c-header .menus-frame .navs-list a:after { content: ''; width: 100%; height: 2px; background-color: #CBBA9B; transform-origin: 50% 100%; transform: scaleY(.5); position: absolute; left: 0; bottom: 0;}
-.c-header .menus-frame .navs-list a:before { content: ''; width: 100%; height: 2px; background-color: #ffffff; transform-origin: 50% 0; transform: scaleY(.5); position: absolute; left: 0; top: 0;}
-.c-header .menus-frame .navs-list a:first-child:before { height: 0; }
-.c-header .menus-frame .navs-list a:last-child:after { height: 0; }
-.c-header .menus-frame .navs-list a span { margin-left: 14px; font-size: 40px; font-family: Helve;}
-.c-header .menus-frame .navs-list a button { width: 100%; height: 100%; position: absolute; top: 0; left: 0; opacity: 0; }
+.c-header .menus-frame .navs-list button { height: 174px; display: flex; align-items: center; padding-left: 24px; color: #ffffff; font-size: 36px; text-shadow: var(--textShadow); position: relative; background-color: transparent; }
+.c-header .menus-frame .navs-list button:after { content: ''; width: 100%; height: 2px; background-color: #CBBA9B; transform-origin: 50% 100%; transform: scaleY(.5); position: absolute; left: 0; bottom: 0;}
+.c-header .menus-frame .navs-list button:before { content: ''; width: 100%; height: 2px; background-color: #ffffff; transform-origin: 50% 0; transform: scaleY(.5); position: absolute; left: 0; top: 0;}
+.c-header .menus-frame .navs-list button:first-child:before { height: 0; }
+.c-header .menus-frame .navs-list button:last-child:after { height: 0; }
+.c-header .menus-frame .navs-list button span { margin-left: 14px; font-size: 40px; font-family: Helve;}
+.c-header .menus-frame .navs-list button button { width: 100%; height: 100%; position: absolute; top: 0; left: 0; opacity: 0; }
 
 .c-header .search-frame { width: 100%; height: 120px; background-color: #ffffff; display: flex; justify-content: space-between; align-items: center; padding: 0 45px 0 66px; position: absolute; top: 180px; left: 0; box-sizing: border-box; transition: top .5s cubic-bezier(.23,.78,.33,.97); }
 .c-header .search-frame input { width: 400px; height: 100%; font-size: 36px; color: var(--textColor); border: none; }
@@ -93,8 +93,14 @@
          </a>
       </div>
       <div class="navs-list">
-         <a href="#" hover-class="none" @click="toMyBox">我的自定义猫盒<span>| My cat box</span></a>
-         <a href="#" hover-class="none" @click="makePhone">联系客服<span>| Question contact</span></a>
+         <button hover-class="none"
+                 @click="toMyBox"
+                 v-if="hasUserInfo">我的自定义猫盒<span>| My cat box</span></button>
+         <button open-type="getUserInfo"
+                 hover-class="none"
+                 @getuserinfo="getuserinfo($event, 'catbox')"
+                 v-else>我的自定义猫盒<span>| My cat box</span></button>
+         <button hover-class="none" @click="makePhone">联系客服<span>| Question contact</span></button>
       </div>
    </div>
 </div>
@@ -171,7 +177,7 @@ export default {
       openCart () {
          store.commit('SET_CARTSTATUS', true)
       },
-      getuserinfo (e) {
+      getuserinfo (e, redirect) {
          console.log('getuserinfo', e)
          if (e.mp.detail.errMsg !== 'getUserInfo:ok') return
          getAction('wxuser_add', {
@@ -185,6 +191,9 @@ export default {
          }).then(res => {
             store.commit('SET_PERSONINFO', e.mp.detail.userInfo)
             store.commit('SET_TOKEN', res.data)
+            if (redirect) {
+               this.toMyBox()
+            }
             mpvue.getSetting({
                success (res2) {
                   console.log('res2', res2)

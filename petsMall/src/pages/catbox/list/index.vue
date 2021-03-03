@@ -9,6 +9,7 @@ page { background-color: #F3F2F1; }
 .footer-btn .arrow { width: 80px; height: 80px; margin-left: 110px; }
 .footer-btn div p { font-size: 30px; color: #372C1E; text-shadow: var(--textShadow); }
 .footer-btn div p.en { font-size: 34px; font-family: HelveThin; }
+.footer-btn button { width: 100%; height: 100%; position: absolute; top: 0; left: 0; opacity: 0; }
 
 .hint { font-size: 24px; color: #9B9A9A; text-align: center; margin: 50px; }
 </style>
@@ -20,20 +21,20 @@ page { background-color: #F3F2F1; }
       <c-list-item v-for="item in listData" :key="id" :itemData="item" />
    </div>
    <div class="hint" v-if="loadOver"></div>
-
    <div class="hint-result" v-if="listData.length === 0">
       <img src="/static/images/goods/warn.png" mode="widthFix" style="width: 71rpx;" />
       <h3 class="en">No related content</h3>
       <h3>无相关内容！</h3>
    </div>
 
-   <a href="#" class="footer-btn" @click="toMyBox">
+   <a class="footer-btn" @click="toMyBox">
       <img src="/static/images/catbox/icon-menu.png" class="menu" />
       <div>
          <p class="en">Customized cat box</p>
          <p>自定义猫盒套餐</p>
       </div>
       <img src="/static/images/catbox/icon-arrow.png" class="arrow" />
+      <button v-if="!hasUserInfo" class="footer-btn" open-type="getUserInfo" @getuserinfo="getuserinfo"></button>
    </a>
 </div>
 </template>
@@ -52,6 +53,9 @@ export default {
    computed: {
       loadOver () {
          return this.total === this.listData.length
+      },
+      hasUserInfo () {
+         return store.state.settings['scope.userInfo']
       }
    },
    data () {
@@ -80,6 +84,7 @@ export default {
          this.getData()
       },
       toMyBox () {
+         if (!this.hasUserInfo) return
          getAction('my_group', {
             token: store.state.token
          }).then(res => {
@@ -93,6 +98,31 @@ export default {
                })
             }
             this.showMenu = false
+         })
+      },
+      getuserinfo (e) {
+         console.log('getuserinfo', e)
+         if (e.mp.detail.errMsg !== 'getUserInfo:ok') return
+         getAction('wxuser_add', {
+            openid: store.state.openid,
+            country: e.mp.detail.userInfo.country,
+            province: e.mp.detail.userInfo.province,
+            city: e.mp.detail.userInfo.city,
+            gender: e.mp.detail.userInfo.gender,
+            nickName: e.mp.detail.userInfo.nickName,
+            avatarUrl: e.mp.detail.userInfo.avatarUrl
+         }).then(res => {
+            store.commit('SET_PERSONINFO', e.mp.detail.userInfo)
+            store.commit('SET_TOKEN', res.data)
+            mpvue.getSetting({
+               success: res2 => {
+                  console.log('res2', res2)
+                  store.commit('SET_SETTING', res2.authSetting)
+                  this.$nextTick(() => {
+                     this.toMyBox()
+                  })
+               }
+            })
          })
       }
    },

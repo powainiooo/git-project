@@ -189,7 +189,7 @@ export default {
       return {
          title: this.detailData.china_name,
          imageUrl: this.posterSrc,
-         path: 'pages/goods/detail/main'
+         path: `pages/goods/detail/main?id=${this.id}`
       }
    }
 }

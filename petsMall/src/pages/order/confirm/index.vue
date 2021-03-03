@@ -127,6 +127,10 @@ export default {
          })
       },
       pay (jsapi, orderNum) {
+         store.commit('SET_PAYPARAMS', {
+            jsapi,
+            orderNum
+         })
          mpvue.requestPayment({
             'timeStamp': jsapi.timeStamp,
             'nonceStr': jsapi.nonceStr,

@@ -24,11 +24,11 @@ page { background-color: #F3F2F1; }
 
    <c-goods-detail />
 
-   <c-footer btnName="我要订购|Order" @btnFunc="openOrderType" />
+   <c-footer btnName="我要订购|Order" needAuth @btnFunc="openOrderType" />
 
    <c-order-type-modal :list="pricelist" :groupId="detailData.id" />
 
-   <c-share :itemData="shareData" />
+   <c-share :itemData="shareData" @done="drawPosterDone" />
 </div>
 </template>
 
@@ -73,7 +73,8 @@ export default {
       return {
          id: '',
          detailData: {},
-         pricelist: []
+         pricelist: [],
+         posterSrc: ''
       }
    },
    methods: {
@@ -89,12 +90,23 @@ export default {
             this.detailData = res.data
             this.pricelist = res.data.pricelist
          })
+      },
+      drawPosterDone (e) {
+         console.log('drawPosterDone', e)
+         this.posterSrc = e
       }
    },
    onLoad (options) {
       // Object.assign(this.$data, this.$options.data())
       this.id = options.id || '2'
       this.getData()
+   },
+   onShareAppMessage: function () {
+      return {
+         title: this.detailData.china_name,
+         imageUrl: this.posterSrc,
+         path: `pages/catbox/detail/main?id=${this.id}`
+      }
    }
 }
 </script>

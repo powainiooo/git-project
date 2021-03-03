@@ -41,6 +41,8 @@
 <script>
 import cHeader from '@/components/header'
 import cFooter from '@/components/footer'
+import store from '@/store'
+import { getAction } from '@/utils/api'
 
 export default {
    components: {
@@ -73,13 +75,38 @@ export default {
             mpvue.redirectTo({
                url: `/pages/order/detail/main?orderNum=${this.orderNum}`
             })
+         } else {
+            this.pay()
          }
+      },
+      pay () {
+         const {jsapi, orderNum} = store.state.payParams
+         mpvue.requestPayment({
+            'timeStamp': jsapi.timeStamp,
+            'nonceStr': jsapi.nonceStr,
+            'package': jsapi.package,
+            'signType': jsapi.signType,
+            'paySign': jsapi.paySign,
+            'success': res => {
+               this.doBuySuccess(orderNum)
+            },
+            'fail': err => {
+               console.log('pay fail', err)
+            }
+         })
+      },
+      doBuySuccess (orderNum) {
+         getAction('buy_success', {
+            order_num: orderNum
+         }).then(res => {
+            this.status = 'suc'
+         })
       }
    },
    onLoad (options) {
       Object.assign(this.$data, this.$options.data())
       console.log('order onLoad', options)
-      this.status = options.status || 'suc'
+      this.status = options.result || 'suc'
       this.orderNum = options.orderNum || ''
    }
 }

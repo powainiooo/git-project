@@ -429,7 +429,7 @@ Page({
             app.getLogin();
             return;
         }
-	    options.id = '222'
+	    // options.id = '222'
         if (!!options && !!options.id) {
 
             if (options.activity_type) {
@@ -471,6 +471,7 @@ Page({
                 returnData.cover = goods_info.cover;
                 returnData.ms_price = goods_info.hd_price
                 returnData.xsg_price = goods_info.hd_price
+                returnData.price_shui = ret.default_gz.price_shui
                 this.setData({
                     returnData: returnData,
                     all_attrs: ret.all_attrs,
@@ -744,7 +745,7 @@ Page({
         }
         return {
           title: title,
-          imageUrl: imgUrl + this.data.goods_info.cover,
+          imageUrl: www + this.data.goods_info.cover,
           path: '/pages/detail/index?id=' + id + '&fxs_id=' + fxs_id + '&activity_type=' + activity_type + '&hd_id=' + hd_id
         }
     }

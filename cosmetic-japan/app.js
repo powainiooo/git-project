@@ -136,7 +136,7 @@ App({
       method: obj.method || 'POST',
       success: ret => {
         var data = ret.data;
-        if (data.ret == 1) {
+        if (data.ret == 0) {
           obj.success(ret)
         } else if (data.ret == -1) {
           wx.showToast({

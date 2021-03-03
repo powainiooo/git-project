@@ -1,13 +1,12 @@
 <!--pages/sign/index.wxml-->
 <view class='container'>
   <view class='signHeader'>
-    <image src='/images/bg1.png' mode="widthFix"></image>
+    <image src='/images/bg1.png' mode="aspectFill"></image>
     <view class='box'>
-      <view class='yBtn {{data.type==1?"active":""}}' bindtap='singTap'>{{data.type==1?"已签到":"签到"}}</view>
-      <view class='title'>你已连续签到{{data.day}}天</view>
-      <view class='text'>您共有{{data.score}}积分  可抵扣{{data.dk}}元</view>
+       <view class='text'>现有积分</view>
+      <view class='title'>￥{{data.score}}</view>
     </view>
-    <navigator url='../helpCenter/index' hover-class='none' class='help'>帮助说明</navigator>
+    <navigator url='../helpCenter/index' hover-class='none' class='help'>积分说明</navigator>
   </view>
   <view class="signList">
   	<view class="title center">
@@ -23,7 +22,7 @@
   					<view class="time">{{item.ctime}}</view>
   				</view>
   			</view>
-  			<view class="jf">{{item.score}}</view>
+  			<view class="jf">+{{item.score}}</view>
   		</view>
   	</view>
   </view>

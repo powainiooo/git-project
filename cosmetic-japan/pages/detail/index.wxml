@@ -123,7 +123,7 @@
         <view class='con'>
           <view class='pro bb1 start'>
             <view class='cover'>
-              <image wx:if="{{returnData.cover == ''?goods_info.cover:returnData.cover}}" src="{{imgUrl}}{{returnData.cover == ''?goods_info.cover:returnData.cover}}"></image>
+              <image wx:if="{{returnData.cover == ''?goods_info.cover:returnData.cover}}" src="{{www}}{{returnData.cover == ''?goods_info.cover:returnData.cover}}"></image>
             </view>
             <view class='info'>
               <view class='name'>{{goods_info.goods_name}}</view>
@@ -161,23 +161,25 @@
       <!--查看参数  -->
       <view class='lookLayer' catchtap="handleTap2" hidden='{{!Canshu}}'>
         <view class='SelectLayer'>
-          <!--view class='close end'>
+          <view class='close end'>
             <image src='/images/ico_xx.png' bindtap='isCloseTap'></image>
-          </view-->
+          </view>
           <view class='cont'>
-            <!--view class='pro bb1 between'>
-              <view class='cover'>
-                <image wx:if="{{goods_info.cover}}" src='{{imgUrl}}{{goods_info.cover}}'></image>
-              </view>
-              <view class='info'>
-                <view class='name'>{{goods_info.goods_name}}</view>
-                <view class='price'>￥
-                  <span>{{goods_info.price}}</span>
+             <view class='pro bb1 start'>
+                <view class='cover'>
+                   <image wx:if="{{returnData.cover == ''?goods_info.cover:returnData.cover}}" src="{{www}}{{returnData.cover == ''?goods_info.cover:returnData.cover}}"></image>
                 </view>
-              </view>
-            </view-->
+                <view class='info'>
+                   <view class='name'>{{goods_info.goods_name}}</view>
+                   <view class='price'>价格：￥
+                      <span>{{returnData.price}}</span>
+                   </view>
+                   <view class='code'>库存：{{returnData.num}}</view>
+                   <view class='productSelect'>已选{{yixuan}}</view>
+                </view>
+             </view>
             <view class='lookCanshu'>
-              <view class='title bb1'>产品参数</view>
+              <view class='title'>产品参数</view>
               <view class='ItemBox'>
                 <view class='item' wx:for="{{goods_info.cs_val_arr}}" wx:key="index">
                   <span>{{goods_info.cs_name_arr[index]}}：</span>{{item}}</view>

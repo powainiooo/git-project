@@ -10,11 +10,16 @@ Page({
    * 页面的初始数据
    */
   data: {
+	  www,
+	  imgUrl,
     data:{},
-    imgUrl:imgUrl,
     spellList:[],
     isShowAll:false,
-    couponDialog: false, // 优惠券弹窗
+	  showContact: false, // 是否显示联系客服弹窗
+	  showCompany: false, // 是否显示代购店铺弹窗
+	  lxinfo:{},//客服信息,
+	  companyList: [],
+	  lastCompanyList: [],
     code: '',
     phone: '',
     session_key: ''
@@ -84,21 +89,35 @@ Page({
   },
 
   /**
-   * 隐藏模态对话框
-   */
-  hideModal: function () {
-    this.setData({
-      couponDialog: false
-    });
-  },
-
-  /**
    * 弹出框蒙层截断touchmove事件
    */
   preventTouchMove: function () {
   },
 
-
+	// 打开客服
+	openContact () {
+		this.setData({
+			showContact: true
+		})
+	},
+	// 关闭客服
+	closeContact () {
+		this.setData({
+			showContact: false
+		})
+	},
+	// 打开代购店铺
+	openCompany () {
+		this.setData({
+			showCompany: true
+		})
+	},
+	// 关闭代购店铺
+	closeCompany () {
+		this.setData({
+			showCompany: false
+		})
+	},
   /**
    * 弹窗取消按钮点击事件
    */
@@ -138,22 +157,10 @@ Page({
     })
   },
 
-  openCouponDialog: function() {
-    this.setData({
-      couponDialog: true
-    })
-  },
-
   getPhoneNumber: function(e){
      //用户取消手机授权直接返回
     if (e.detail.iv == undefined && e.detail.encryptedData == undefined) {
       return;
-    }
-    if (this.data.data.phone) {
-      this.setData({
-        couponDialog: true
-      })
-      return
     }
     let session_key = wx.getStorageSync("session_key");
     e.detail.iv = e.detail.iv.replace(/\+/g,'%2B')
@@ -163,8 +170,7 @@ Page({
     let huidiao = (ret) => {
       if (ret.ret == 0) {
         this.setData({
-          phone: ret.phone,
-          couponDialog: true
+          phone: ret.phone
         })
       } else {
         wx.showToast({
@@ -174,7 +180,7 @@ Page({
         })
       }
     }
-    api.post(this,link, {} , huidiao)  
+    api.post(this,link, {} , huidiao)
   },
 
   /**
@@ -184,29 +190,28 @@ Page({
     let link = { method: 'my_index', canshu: '' };
     let logic = (ret) => {
       this.setData({
-        data: ret
+        data: ret,
+	      lxinfo: ret.lxinfo
       })
     }
     api.post(this, link, {}, logic);
-
-    //获取我参与的拼单
-    let pinduan = { method: 'join_activity_list', canshu: '' };
-    let logic1 = (ret) => {
-      if (ret) {
-        this.setData({
-          spellList: ret
-        })
-        this.setSpellTime('spellList');
-      }
-    }
-    api.postGroupBuy(this, pinduan, {}, logic1);
+    this.getCompany()
   },
-
+	getCompany () {
+		const link = { method: 'more_company', canshu:''};
+		api.post(this, link, {}, (res) => {
+			console.log('res', res)
+			this.setData({
+				companyList: res.all_mid,
+				lastCompanyList: res.last_mid
+			})
+		});
+	},
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+
   },
 
   /**
@@ -247,28 +252,28 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+
   },
 
   /**

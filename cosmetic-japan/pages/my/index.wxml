@@ -1,7 +1,7 @@
 <!--pages/my/index.wxml-->
 <view class='container f3'>
   <view class='MyHeader'>
-    <image src='/images/bg.png' class='bg'></image>
+    <image src='/images/bg4.png' class='my-bg'></image>
     <view class='box' wx:if="{{hasLogin==1}}">
       <view class='imgbg'>
         <open-data class="image" type="userAvatarUrl"></open-data>
@@ -10,90 +10,88 @@
     </view>
     <view class='box' wx:if="{{hasLogin==0}}" bindtap='loginTap' style='color:white'>立即登录</view>
   </view>
-  <view class='MyitemBox'>
-    <navigator url='../myOrder/index' hover-class='none' class='item'>
-      <view class='l'><image src='/images/n_1.png'></image>我的订单</view>
-      <view class='r'><image src='/images/ico_jt.png'></image></view>
-    </navigator>
-    <navigator url='../sign/index' wx:if="{{data.jf_status==1}}" hover-class='none' class='item'>
-      <view class='l'><image src='/images/n_2.png'></image>我的积分</view>
-      <view class='r'><image src='/images/ico_jt.png'></image></view>
-    </navigator>
-    <navigator url='../shouhouList/index' hover-class='none' class='item toMgt16'>
-      <view class='l'><image src='/images/n_3.png'></image>售后服务</view>
-      <view class='r'><image src='/images/ico_jt.png'></image></view>
-    </navigator>
-    <navigator url='../myCoupon/index' wx:if="{{data.yhq_status==1}}" hover-class='none' class='item'>
-      <view class='l'><image src='/images/n_8.png'></image>优惠券</view>
-      <view class='r'><image src='/images/ico_jt.png'></image></view>
-    </navigator>
-    <navigator url='../bargain/myBargain' wx:if="{{data.kj_status==1}}" hover-class='none' class='item'>
-      <view class='l'><image src='/images/n_9.png'></image>我的砍价</view>
-      <view class='r'><image src='/images/ico_jt.png'></image></view>
-    </navigator>
-    <navigator url='../myOrder/index?type=21' wx:if="{{data.tg_status==1}}" hover-class='none' class='item noborder'>
-      <view class='l'><image src='/images/pt/mypd.png'></image>我的拼单</view>
-      <view class='r'><image src='/images/ico_jt.png'></image></view>
-    </navigator>
-    <view class="fff myPinduan" wx:if="{{spellList.length>0 && data.tg_status==1}}">
-      <view class="myPinduanItem" wx:for="{{spellList}}" wx:key="index" wx:if="{{!isShowAll?index<3:'true'}}">
-          <image class="pdImg" src='{{imgUrl}}{{item.goods_cover}}'></image>
-          <span class="pdTitle">拼单仅剩<span class="pdTime">{{item.lastTime}}</span></span>
-          <button class="inviteButton" open-type='share' data-url="{{imgUrl}}{{item.goods_cover}}" data-title="【仅剩{{item.remain_num}}个名额】{{item.goods_name}}" data-id="{{item.order_id}}" id='shareBtn'>邀请好友</button>
+   <view class="fff">
+      <view class="my-nav around">
+         <navigator url='../sign/index' class="my-nav-item" hover-class='none'>
+            <image src='/images/my/ico-1.png' mode="aspectFit"></image>
+            <view>我的积分</view>
+         </navigator>
+         <navigator url='../myOrder/index' class="my-nav-item" hover-class='none'>
+            <image src='/images/my/ico-2.png' mode="aspectFit"></image>
+            <view>我的订单</view>
+         </navigator>
+         <navigator url='../myCoupon/index' class="my-nav-item" hover-class='none'>
+            <image src='/images/my/ico-3.png' mode="aspectFit"></image>
+            <view>我的优惠劵</view>
+         </navigator>
       </view>
-      <view class="showAll" wx:if="{{spellList.length>3}}" bindtap="showAll">
-          {{!isShowAll?'显示全部':'收起'}}
+
+      <view class='MyitemBox'>
+         <navigator url='../helpCenter/index' hover-class='none' class='item dt'>
+            <view class='l'><image src='/images/my/ico-4.png' mode="aspectFit"></image>帮助中心</view>
+            <view class='r'><image src='/images/ico_right.png'></image></view>
+         </navigator>
+         <button class='item' bindtap="openContact">
+            <view class='l'><image src='/images/my/ico-5.png' mode="aspectFit"></image>我的客服</view>
+            <view class='r'><image src='/images/ico_right.png'></image></view>
+         </button>
+         <navigator wx:if="{{data.fxs_status==1 && (data.status==1 || data.status==0)}}" url='../fenxiao/index?status={{data.status}}' hover-class='none' class='item toMgt16'>
+            <view class='l'><image src='/images/n_7.png'></image>申请成为分销商</view>
+            <view class='r'><image src='/images/ico_jt.png'></image></view>
+         </navigator>
+         <navigator wx:if="{{data.fxs_status==1 && data.status==2}}" url='../fenxiaoCenter/index' hover-class='none' class='item'>
+            <view class='l'><image src='/images/n_7.png'></image>分销商中心</view>
+            <view class='r'><image src='/images/ico_jt.png'></image></view>
+         </navigator>
+         <button class='item' bindtap="openCompany">
+            <view class='l'><image src='/images/my/ico-7.png' mode="aspectFit"></image>查看更多代购店铺</view>
+            <view class='r'><image src='/images/ico_right.png'></image></view>
+         </button>
       </view>
-      <view class="small"></view>
-    </view>
-    <navigator wx:if="{{data.fxs_status==1 && (data.status==1 || data.status==0)}}" url='../fenxiao/index?status={{data.status}}' hover-class='none' class='item toMgt16'>
-      <view class='l'><image src='/images/n_7.png'></image>申请分销商</view>
-      <view class='r'><image src='/images/ico_jt.png'></image></view>
-    </navigator>
-    <navigator wx:if="{{data.fxs_status==1 && data.status==2}}" url='../fenxiaoCenter/index' hover-class='none' class='item'>
-      <view class='l'><image src='/images/n_7.png'></image>分销商中心</view>
-      <view class='r'><image src='/images/ico_jt.png'></image></view>
-    </navigator>
 
-    <navigator url='../helpCenter/index' hover-class='none' class='item dt'>
-      <view class='l'><image src='/images/n_6.png'></image>帮助中心</view>
-      <view class='r'><image src='/images/ico_jt.png'></image></view>
-    </navigator>
+      <button open-type="contact" class="my-button">
+         <image src='/images/my/ico-6.png'></image>
+         <image src='/images/my/ico-8.png' mode="aspectFit"></image>
+      </button>
+      <button class="my-button" style="bottom: 130rpx">
+         <image src='/images/my/ico-6.png'></image>
+         <image src='/images/my/ico-9.png' mode="aspectFit"></image>
+      </button>
+   </view>
+</view>
 
-    <button open-type='contact' class='item'>
-      <view class='l'><image src='/images/n_5.png'></image>联系客服</view>
-       <view class='r'><image src='/images/ico_jt.png'></image></view>
-    </button>
+<!-- 客服弹窗 -->
+<view class="contact-container" wx:if="{{showContact}}" bindtap="closeContact">
+   <view class="contact-box">
+      <image src="/images/ico_10.png"></image>
+      <view class="title">如有任何疑问请联系客服</view>
+      <view class="infos">客服手机号：{{lxinfo.phone}}</view>
+      <view class="infos">客服微信好：{{lxinfo.wx_id}}</view>
+      <view class="infos">客服邮箱：{{lxinfo.email}}</view>
+   </view>
+</view>
 
-    <!--button class='item' bindtap='SwitchLag' data-lag="">
-      <view class='l'><image src='/images/m_5.png' class='langImg'></image>English</view>
-    </button-->
-
-    <button class='item' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" bindtap="getUser" wx:if="{{!data.phone}}">
-      <view class='l'><image src='/images/n_8.png'></image>添加优惠券</view>
-       <view class='r'><image src='/images/ico_jt.png'></image></view>
-    </button>
-    <button class='item' bindtap="openCouponDialog" wx:else>
-      <view class='l'><image src='/images/n_8.png'></image>添加优惠券</view>
-       <view class='r'><image src='/images/ico_jt.png'></image></view>
-    </button>
-  </view>
-
-
-  <!--弹窗-->
-  <view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{couponDialog}}"></view>
-  <view class="modal-dialog" wx:if="{{couponDialog}}">
-    <view class="modal-title">优惠券编号</view>
-    <view class="modal-content">
-      <view class="modal-input">
-        <input placeholder-class="input-holder" type="number" bindinput="inputChange" class="input" placeholder="请输入优惠券编号"></input>
+<!-- 代购店铺弹窗 -->
+<view class="store-container ts" style="left: {{showCompany ? 0 : '100vw'}}">
+   <view class="title">最新访问的代购商铺</view>
+   <view class="goods-list" wx:if="{{lastCompanyList.length > 0}}">
+      <view class="goods-item" wx:for="{{lastCompanyList}}" wx:key="index">
+         <navigator url="../index/index">
+            <image src="{{www}}{{item.hot_goodscover}}"></image>
+            <view>{{item.hot_goodsname}}</view>
+         </navigator>
       </view>
-    </view>
-    <view class="modal-footer">
-      <view class="btn-cancel" bindtap="onCancel" data-status="cancel">取消</view>
-      <view class="btn-confirm" bindtap="onConfirm" data-status="confirm" >确定</view>
-    </view>
-  </view>
+   </view>
+   <view wx:if="{{lastCompanyList.length === 0}}" style="margin: 140rpx 0; text-align: center; font-size: 32rpx; color: #666666;"><text>没有访问到代购商铺记录\n到下面逛逛吧~</text></view>
+   <view class="title">所有代购商铺</view>
+   <view class="goods-list">
+      <view class="goods-item" wx:for="{{companyList}}" wx:key="index">
+         <navigator url="../index/index">
+            <image src="{{www}}{{item.hot_goodscover}}"></image>
+            <view>{{item.hot_goodsname}}</view>
+         </navigator>
+      </view>
+   </view>
 </view>
 
 <footer num="4" bindswitchlag="SwitchLag"></footer>

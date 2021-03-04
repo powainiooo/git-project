@@ -8,7 +8,7 @@ page{background-color: #f3f3f3;}
 .tixian_tips .line{position: absolute;top:50%;left:30rpx;width: 690rpx;height:2rpx;background-color: #e5e5e5;}
 
 
-.table{background-color: #fff;}
+.table{background-color: #fff; margin-top: 18rpx;}
 .table .tr{line-height: 120rpx;border-bottom: 2rpx solid #f3f3f3;position: relative;overflow: hidden; display: flex;}
 .table .th .td{color: #333; }
 .table .td{color: #666;font-size: 34rpx;text-align: center; flex: 1;}

@@ -23,16 +23,16 @@ Page({
                         let obj = {headimg:''};
                         ret.group_buy_user.push(obj);
                     }
-                }  
+                }
                 this.setData({
                     order_data:ret,
                     id:options.id
-                }) 
-                this.setPayTime();     
+                })
+                this.setPayTime();
             }
-            api.postGroupBuy(this, link, {}, logic);  
+            api.postGroupBuy(this, link, {}, logic);
         }
-        this.getList(); 
+        this.getList();
     },
     //获取拼团商品
     getList() {
@@ -45,7 +45,7 @@ Page({
             this.setData({
                 group_buy_list:ret.list
             })
-          }     
+          }
         }
         api.postGroupBuy(this, link, {}, logic);
     },
@@ -65,6 +65,7 @@ Page({
      * 用户点击右上角分享
      */
     onShareAppMessage(res) {
+	    app.shareCallback()
         var id = 1;
         var fxs_id = 1;
         if (res.from === 'button') {

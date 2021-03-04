@@ -9,7 +9,7 @@
 .c-header .navs button .cart { width: 63px;}
 .c-header .navs .btns { width: 188px; display: flex; justify-content: flex-end; }
 .c-header .navs .btns .br { width: 1px; height: 80px; background-color: #ffffff; transform: scaleX(.5); margin: 0 24px; }
-.c-header .navs button .carts-num { width: 40px; height: 40px; font-size: 20px; color: #ffffff; font-family: Helve; display: flex; justify-content: center; align-items: center; border-radius: 50%; background-color: #000000; position: absolute; top: 0; right: -10px; }
+.c-header .navs button .carts-num { width: 40px; height: 40px; font-size: 20px; color: #ffffff; display: flex; justify-content: center; align-items: center; border-radius: 50%; background-color: #000000; position: absolute; top: 0; right: -10px; }
 
 .c-header .titles { width: 100%; height: 120px; background-color: #ffffff; display: flex; align-items: center; padding-left: 66px; font-size: 34px; color: var(--textColor); box-shadow: 0 5px 8px 0 rgba(82, 54, 54, .05); }
 .c-header .titles span { margin-left: 14px; font-family: HelveThin; }

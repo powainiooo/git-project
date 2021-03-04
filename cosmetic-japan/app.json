@@ -1,5 +1,6 @@
 {
    "pages": [
+      "pages/yingshou/index",
       "pages/fenxiaoCenter/index",
       "pages/index/index",
       "pages/sign/index",
@@ -41,7 +42,6 @@
       "pages/yongjin/index",
       "pages/tixian/index",
       "pages/tixianForm/index",
-      "pages/yingshou/index",
       "pages/pintuanShare/index",
       "pages/limitedTimeList/index",
       "pages/spellList/index",

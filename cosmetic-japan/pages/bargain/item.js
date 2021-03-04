@@ -19,7 +19,7 @@ Page({
     model: 0, //弹窗
     moneyNow: 50, //目前价格
     moneyAll: 100, //总价
-    moneyAverage: 80, //平均砍价 
+    moneyAverage: 80, //平均砍价
     cutType: 1, //状态  1正常自己砍价 2帮好友砍价 3砍至底价 4砍价失败 5砍价成功
     kj_info: '',
     help_kj: '',
@@ -225,13 +225,6 @@ Page({
       url: 'index',
     })
   },
-  // 去砍价
-  toBargain: function (e) {
-    console.log(e)
-    wx.navigateTo({
-      url: 'initiator?id=' + e.currentTarget.dataset.id,
-    })
-  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -280,6 +273,7 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
+	  app.shareCallback()
       var nickname = this.data.kj_info.help_kj_user[0].nickname
       var kj_user_id = this.data.options.kj_user_id
       var cover = this.data.imgUrl + this.data.kj_info.goods_info.cover

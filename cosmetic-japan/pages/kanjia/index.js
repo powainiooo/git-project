@@ -227,7 +227,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+
   },
 
   /**
@@ -249,28 +249,28 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+
   },
 
   onShare(){
@@ -291,6 +291,7 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function (res) {
+	  app.shareCallback()
     if(wx.getStorageSync('isCN')){
       var title = this.data.kjInfo.info.goods_name;
     }else{
@@ -303,7 +304,7 @@ Page({
       console.log('页面转发按钮');
       this.onShare();
     }
-    
+
     return {
       title: title,
       path: '/pages/kanjia/index?id=' + id + '&kj_uid=' + kj_uid,

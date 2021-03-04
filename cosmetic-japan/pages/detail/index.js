@@ -735,6 +735,7 @@ Page({
      * 用户点击右上角分享
      */
     onShareAppMessage: function() {
+	    app.shareCallback()
         var id = this.data.goods_info.id;
         var fxs_id = this.data.fxs_id;
         var title=this.data.goods_info.goods_name;

@@ -15,6 +15,7 @@
 
 <template>
 <div class="c-share-frame" :class="{'c-share-frame-show': showShare}">
+   <div class="mask-cover" @touchmove.stop="tmove" v-if="showShare" @click="hideShare"></div>
    <div class="c-share-frame-title">
       <div class="title">
          <p class="en">Share</p>
@@ -37,7 +38,6 @@
          style="width: 750px; height: 760px; transform-origin: 0 0; transform: scale(.5)"
       />
    </div>
-
 </div>
 </template>
 
@@ -60,6 +60,7 @@ export default {
       }
    },
 	methods: {
+      tmove () {},
       hideShare () {
          console.log('hideShare')
          store.commit('SET_SHOWSHARE', false)

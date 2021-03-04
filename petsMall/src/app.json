@@ -1,6 +1,7 @@
 {
    "pages": [
       "pages/index/main",
+      "pages/catbox/detail/main",
       "pages/catbox/diy/main",
       "pages/catbox/mine/main",
       "pages/order/detail/main",
@@ -10,7 +11,6 @@
       "pages/catbox/select/main",
       "pages/order/list/main",
       "pages/order/confirm/main",
-      "pages/catbox/detail/main",
       "pages/catbox/list/main",
       "pages/goods/list/main",
       "pages/logs/main"

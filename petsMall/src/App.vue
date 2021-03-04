@@ -60,6 +60,9 @@ button:after { border: none;}
 .goods-details .intros p { font-size: 22px; color: #A6A5A5; line-height: 32px; margin-bottom: 38px; }
 
 .hscale { transition: all 0.15s ease-out; transform: scale(0.95);}
+
+.mask-cover { width: 100%; height: 100vh; position: fixed; top: 0; left: 0; }
+.sroll {  height: calc(100% - 170rpx); overflow-y: auto; }
 </style>
 
 <script>

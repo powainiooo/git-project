@@ -472,6 +472,7 @@ Page({
      * 用户点击右上角分享
      */
     onShareAppMessage: function (res) {
+	    app.shareCallback()
         if (res.from === 'button') {
             //区分按钮分享
             if (res.target.id === "shareBtn") {

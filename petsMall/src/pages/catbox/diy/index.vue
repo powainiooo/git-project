@@ -89,7 +89,8 @@ export default {
          if (this.showDetail) {
             return this.tempPrice
          } else {
-            const goodsPrice = this.priceArr.reduce((total, i) => total + (i ? Number(i) : 0), 0)
+            let goodsPrice = this.priceArr.reduce((total, i) => total + (i ? Number(i) : 0), 0)
+            goodsPrice = Number(goodsPrice.toFixed(2))
             return this.needToy === 1 ? this.toyPrice + goodsPrice : goodsPrice
          }
       },

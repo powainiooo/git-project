@@ -1,11 +1,11 @@
 <style>
-.c-order-type-modal { width: 100%; height: 80vh; overflow-y: auto; background-color: #ffffff; border-radius: 15px 15px 0 0; position: fixed; left: 0; bottom: 0; z-index: 1300; padding-bottom: 200px; box-sizing: border-box; transition: bottom .5s cubic-bezier(.23,.78,.33,.97); }
-.c-order-type-modal-title { height: 170px; background-color: var(--mainColor); display: flex; flex-direction: column; justify-content: center; padding-left: 66px; border-radius: 15px 15px 0 0; position: relative; }
+.c-order-type-modal { width: 100%; height: 80vh; background-color: #ffffff; border-radius: 15px 15px 0 0; position: fixed; left: 0; bottom: 0; z-index: 1300; padding-bottom: 200px; box-sizing: border-box; transition: bottom .5s cubic-bezier(.23,.78,.33,.97); }
+.c-order-type-modal-title { height: 170px; background-color: var(--mainColor); display: flex; flex-direction: column; justify-content: center; padding-left: 66px; border-radius: 15px 15px 0 0; position: relative; z-index: 5; }
 .c-order-type-modal-title p { font-size: 36px; line-height: 50px; color: #ffffff; text-shadow: var(--textShadow); }
 .c-order-type-modal-title p.en { font-size: 40px; margin-bottom: 8px; font-family: HelveThin; }
 .c-order-type-modal-title .close { width: 55px; height: 55px; position: absolute; top: 54px; right: 66px; }
 
-.c-order-type-modal-list { margin: 0 42px; }
+.c-order-type-modal-list { padding: 0 42px; position: relative; z-index: 5; }
 .c-order-type-modal-list li { height: 185px; display: flex; justify-content: space-between; align-items: center; }
 .c-order-type-modal-list li>div { width: 530px; display: flex; justify-content: space-between; align-items: center; }
 .c-order-type-modal-list li>div>div { margin-left: 40px; }
@@ -18,7 +18,7 @@
 .c-order-type-modal-list li .radio { width: 71px; height: 71px; margin-right: 28px; }
 .c-order-type-modal-list li .radio-select { width: 74px; height: 71px; margin-right: 25px; }
 
-.c-order-type-modal-recommend { padding: 45px 40px 10px 45px; background-color: #F3F2F1; }
+.c-order-type-modal-recommend { padding: 45px 40px 10px 45px; background-color: #F3F2F1; position: relative; z-index: 5; }
 .c-order-type-modal-recommend>h3 { color: #CBBB9B; font-size: 40px; line-height: 40px; }
 .c-order-type-modal-recommend>h3.en { font-size: 34px; font-family: Helve; line-height: 40px; margin-top: 8px; margin-bottom: 20px; }
 .c-order-type-modal-recommend>p { color: #9B9A9A; font-size: 30px; line-height: 45px; margin-bottom: 20px; }
@@ -47,55 +47,58 @@
 
 <template>
 <div class="c-order-type-modal" :style="{bottom: showOrderType ? 0 : '-100vh'}">
+   <div class="mask-cover" @touchmove.stop="tmove" v-if="showOrderType" @click="close"></div>
    <div class="c-order-type-modal-title">
       <p class="en">Selection Order type</p>
       <p>选择订购类型</p>
       <img src="/static/images/header/close.png" class="close" @click="close" />
    </div>
-   <ul class="c-order-type-modal-list">
-      <li class="borderB"
-          v-for="(item, index) in list"
-          :key="index"
-          hover-class="hscale"
-          hover-stay-time="10"
-          @click="selectType(index, item.nums)">
-         <div>
+   <div class="sroll">
+      <ul class="c-order-type-modal-list">
+         <li class="borderB"
+             v-for="(item, index) in list"
+             :key="index"
+             hover-class="hscale"
+             hover-stay-time="10"
+             @click="selectType(index, item.nums)">
             <div>
-               <p>订购{{item.name}}</p>
-               <div v-if="item.old_price"><span>{{item.old_price}}</span>元</div>
-            </div>
-            <p><span>{{item.pay_price}}</span>元</p>
-         </div>
-         <img src="/static/images/catbox/radio.png" class="radio" v-if="index !== priceId" />
-         <img src="/static/images/catbox/radio-select.png" class="radio" v-else />
-      </li>
-   </ul>
-   <div class="c-order-type-modal-recommend">
-      <h3>推荐选购</h3>
-      <h3 class="en">Recommend buy</h3>
-      <p><text>推荐选购产品将加入每月订购猫盒中，固定\n订购量为当前选中猫盒订购月数。</text></p>
-
-      <ul class="c-recommend-list">
-         <li v-for="(item, index) in recList" :key="id">
-            <div class="imgs"><img :src="item.small_img" /></div>
-            <div class="infos">
-               <h3>{{item.china_name}}</h3>
-               <ul>
-                  <li>{{item.name}}</li>
-                  <li>{{item.specs}}</li>
-               </ul>
-               <div class="overline"><span>{{item.old_price}}</span>元 / 月</div>
-               <div><span>{{item.pay_price}}</span>元 / 月</div>
-            </div>
-            <div class="nums" :class="{'nums-show': item.selected}">
-               <span>{{nums}}</span>
-               <div @click="item.selected = !item.selected">
-                  <img src="/static/images/catbox/icon-add.png" />
-                  <img src="/static/images/catbox/icon-reduce.png" />
+               <div>
+                  <p>订购{{item.name}}</p>
+                  <div v-if="item.old_price"><span>{{item.old_price}}</span>元</div>
                </div>
+               <p><span>{{item.pay_price}}</span>元</p>
             </div>
+            <img src="/static/images/catbox/radio.png" class="radio" v-if="index !== priceId" />
+            <img src="/static/images/catbox/radio-select.png" class="radio" v-else />
          </li>
       </ul>
+      <div class="c-order-type-modal-recommend">
+         <h3>推荐选购</h3>
+         <h3 class="en">Recommend buy</h3>
+         <p><text>推荐选购产品将加入每月订购猫盒中，固定\n订购量为当前选中猫盒订购月数。</text></p>
+
+         <ul class="c-recommend-list">
+            <li v-for="(item, index) in recList" :key="id">
+               <div class="imgs"><img :src="item.small_img" /></div>
+               <div class="infos">
+                  <h3>{{item.china_name}}</h3>
+                  <ul>
+                     <li>{{item.name}}</li>
+                     <li>{{item.specs}}</li>
+                  </ul>
+                  <div class="overline"><span>{{item.old_price}}</span>元 / 月</div>
+                  <div><span>{{item.pay_price}}</span>元 / 月</div>
+               </div>
+               <div class="nums" :class="{'nums-show': item.selected}">
+                  <span>{{nums}}</span>
+                  <div @click="item.selected = !item.selected">
+                     <img src="/static/images/catbox/icon-add.png" />
+                     <img src="/static/images/catbox/icon-reduce.png" />
+                  </div>
+               </div>
+            </li>
+         </ul>
+      </div>
    </div>
    <c-footer btnName="下一步|Next" @btnFunc="stepNext" v-if="showOrderType" :price="totalPrice" />
 </div>
@@ -152,6 +155,7 @@ export default {
       }
    },
    methods: {
+      tmove () {},
       getRecData () {
          getAction('recommend_product').then(res => {
             res.data.forEach(i => i.selected = false)

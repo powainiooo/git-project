@@ -19,6 +19,7 @@ Page({
 	   brandList: [],
 	   companyList: [],
 	   lastCompanyList: [],
+	   logo: '',
 	   showCompany: false
    },
 
@@ -46,6 +47,7 @@ Page({
 				adList1: res.ads_list_zhong,
 				adList2: res.ads_list_min,
 				brandList: res.brand,
+				logo: res.logo,
 			})
 		});
 	},

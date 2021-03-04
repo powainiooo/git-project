@@ -162,5 +162,21 @@ App({
       },
     })
   },
+	shareCallback () { // 分享时候调用
+		var login_key = this.getLoginKey();
+		wx.request({
+			url: this.globalData.www + '/api/index/add_visit_log/2?login_key=' + login_key,
+			method: 'POST',
+			header: {
+				"content-type": "application/x-www-form-urlencoded"
+			},
+			success: function (ret) {
+				console.log('shareCallback suc', ret)
+			},
+			fail: function (res) {
+				console.log(res)
+			}
+		})
+	}
 })
 // 29-支付成功  30-个人中心 31-积分-已签到 48-分销商中心 53-收益明细 57-分销全部订单 优惠券

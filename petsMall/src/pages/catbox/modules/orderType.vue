@@ -19,8 +19,8 @@
 .c-order-type-modal-list li .radio-select { width: 74px; height: 71px; margin-right: 25px; }
 
 .c-order-type-modal-recommend { padding: 45px 40px 10px 45px; background-color: #F3F2F1; position: relative; z-index: 5; }
-.c-order-type-modal-recommend>h3 { color: #CBBB9B; font-size: 40px; line-height: 40px; }
-.c-order-type-modal-recommend>h3.en { font-size: 34px; font-family: Helve; line-height: 40px; margin-top: 8px; margin-bottom: 20px; }
+.c-order-type-modal-recommend>h3 { color: #CBBB9B; font-size: 40px; line-height: 40px; font-weight: bold; }
+.c-order-type-modal-recommend>h3.en { font-size: 34px; font-family: Helve; line-height: 40px; font-weight: normal; margin-top: 4px; margin-bottom: 20px; }
 .c-order-type-modal-recommend>p { color: #9B9A9A; font-size: 30px; line-height: 45px; margin-bottom: 20px; }
 
 .c-recommend-list>li { display: flex; height: 278px; align-items: flex-end; margin-bottom: 62px; position: relative; }

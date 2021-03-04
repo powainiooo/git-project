@@ -28,7 +28,7 @@ page { background-color: #F3F2F1; }
 
    <c-order-type-modal :list="pricelist" :groupId="detailData.id" />
 
-   <c-share :itemData="shareData" @done="drawPosterDone" />
+   <c-share ref="share" :itemData="shareData" @done="drawPosterDone" />
 </div>
 </template>
 
@@ -89,6 +89,9 @@ export default {
             mpvue.hideLoading()
             this.detailData = res.data
             this.pricelist = res.data.pricelist
+            this.$nextTick(() => {
+               this.$refs.share.initPoster()
+            })
          })
       },
       drawPosterDone (e) {

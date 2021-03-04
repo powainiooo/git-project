@@ -220,10 +220,17 @@ export default {
             success(res2) {
                console.log('saveImageToPhotosAlbum', res2)
                mpvue.hideLoading()
+               mpvue.showToast({
+                  title: '保存成功'
+               })
             },
             fail (err) {
                console.log('saveImageToPhotosAlbum', err)
                mpvue.hideLoading()
+               mpvue.showToast({
+                  title: '保存失败',
+                  icon: 'none'
+               })
             }
          })
       }

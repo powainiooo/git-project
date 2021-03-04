@@ -17,7 +17,7 @@ page { background-color: #F3F2F1; }
    <div class="order-list" v-if="listData.length > 0">
       <order-item v-for="item in listData" :key="id" :itemData="item" :type="type" />
    </div>
-   <div class="hint-result" v-else>
+   <div class="hint-result" v-if="listData.length === 0 && !isAjax">
       <img src="/static/images/goods/warn.png" mode="widthFix" style="width: 71rpx;" />
       <h3 class="en">No related content</h3>
       <h3>无相关内容！</h3>
@@ -56,11 +56,14 @@ export default {
          pageNo: 1,
          total: 0,
          type: 'goods',
+         isAjax: false,
          listData: []
       }
    },
    methods: {
       getData () {
+         if (this.isAjax) return
+         this.isAjax = true
          const url = this.type === 'goods' ? 'user_order' : 'group_order_list'
          getAction(url, {
             token: store.state.token,
@@ -68,6 +71,7 @@ export default {
          }).then(res => {
             // this.listData = this.listData.concat(res.data.list)
             // this.total = res.data.nums
+            this.isAjax = false
             this.listData = res.data.list
          })
       },

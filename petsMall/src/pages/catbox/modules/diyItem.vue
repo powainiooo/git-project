@@ -1,10 +1,10 @@
 <style>
 .c-diy-item { width: 100%; height: 385px; display: flex; align-items: center; }
 .c-diy-item .img { width: 265px; height: 385px;  }
-.c-diy-item .infos { height: 100%; }
-.c-diy-item .infos div:first-child { height: 274px; display: flex; flex-direction: column; justify-content: center; }
+.c-diy-item .infos { height: 90%; }
+.c-diy-item .infos div:first-child { height: 240px; display: flex; flex-direction: column; justify-content: center; }
 .c-diy-item .infos h3 { font-size: 30px; color: var(--textColor2); text-shadow: var(--textShadow); }
-.c-diy-item .infos h3.en { font-size: 34px; font-family: HelveThin; }
+.c-diy-item .infos h3.en { font-size: 34px; font-family: HelveThin; margin-top: 20px; }
 .c-diy-item .infos ul { display: flex; margin-bottom: 32px; margin-top: 10px; }
 .c-diy-item .infos ul li { text-shadow: none; border: 1px solid var(--mainColor); padding: 5px 8px; color: #A6A5A5; font-size: 20px; margin-right: 8px; line-height: 1; border-radius: 8px; }
 .c-diy-item .infos p { width: 330px; height: 56px; font-size: 18px; line-height: 26px; color: var(--textColor); text-shadow: var(--textShadow); margin-bottom: 28px; text-overflow: ellipsis; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical; }

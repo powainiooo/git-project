@@ -175,7 +175,14 @@ export default {
          this.$emit('search', this.keyword)
       },
       openCart () {
-         store.commit('SET_CARTSTATUS', true)
+         if (this.cartNums === 0) {
+            mpvue.showToast({
+               title: '暂无产品，请前往选购',
+               icon: 'none'
+            })
+         } else {
+            store.commit('SET_CARTSTATUS', true)
+         }
       },
       getuserinfo (e, redirect) {
          console.log('getuserinfo', e)

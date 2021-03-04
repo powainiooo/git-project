@@ -235,20 +235,22 @@ export default {
          this.priceArr = priceArr
          this.ids[this.step] = data.id
          this.showDetail = false
-         // const ids = data.str.split('-')
-         // const type = this.tempRecord.attrs_list.find(i => i.id === ids[2])
-         // const record = {
-         //    small_img: type.small_img,
-         //    product_img: type.product_img,
-         //    english_name: this.tempRecord.english_name,
-         //    china_name: this.tempRecord.china_name,
-         //    apply: this.tempRecord.apply,
-         //    mainly: this.tempRecord.mainly,
-         //    nutritional: this.tempRecord.nutritional,
-         //    attr_name: type.name,
-         //    specs: ids[3]
-         // }
-         // this.goodsList[this.step] = record
+         // 确认后返回
+         if (this.source !== 'diy') {
+            console.log(this.selectedArr, this.step)
+            const params = {
+               source: this.source
+            }
+            if (this.source === 'toy') {
+               params.data = this.needToy
+            } else {
+               params.data = this.selectedArr[this.step]
+            }
+            store.commit('SET_MINEPARAMS', params)
+            mpvue.navigateBack({
+               delta: -1
+            })
+         }
       },
       openDetail (record) {
          console.log('openDetail', record, this.step)
@@ -301,7 +303,9 @@ export default {
    },
    onShow () {
       if (this.source !== 'toy') {
-         this.getData(this.step + 1)
+         if (this.listData.length === 0) {
+            this.getData(this.step + 1)
+         }
       }
    },
    onLoad (options) {
@@ -317,6 +321,8 @@ export default {
          if (this.source !== 'toy') {
             this.selectedArr[this.step] = options.selected
             this.priceArr[this.step] = options.price || 0
+            const selects = options.selected.split('-')
+            this.ids[this.step] = selects[1]
          }
       }
    }

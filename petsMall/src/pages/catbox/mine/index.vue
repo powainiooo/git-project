@@ -102,6 +102,7 @@ export default {
             price = data.price || 0
             toy = 0
          }
+         // 1-1-2-400g|2-2-3-85g|3-3-4-40g
          mpvue.navigateTo({
             url: `/pages/catbox/diy/main?source=${page}&toy=${toy}&selected=${selected}&price=${price}`
          })
@@ -112,13 +113,14 @@ export default {
             token: store.state.token
          }).then(res => {
             const mineParams = store.state.mineParams
+            console.log('mineParams', mineParams, this.detailData)
             if (mineParams.source) {
                const arr = res.data.productlist.map(i => `${i.type_id}-${i.product_id}-${i.attr_id}-${i.specs}`)
                console.log('arr', arr)
                const params = {
                   token: store.state.token,
                   pro_str: arr.join('|'),
-                  toy: this.needToy
+                  toy: this.detailData.toy
                }
                if (mineParams.source === 'toy') {
                   params.toy = mineParams.data

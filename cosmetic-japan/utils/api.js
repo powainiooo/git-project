@@ -78,73 +78,6 @@ function post(that, link, data, logic = function () { }) {
   })
 }
 
-// 砍价活动调用
-function postHd(that, link, data, logic = function () { }) {
-  var login_key = app.getLoginKey();
-  var isCN = wx.getStorageSync('isCN') ? 1 : 0;
-  var url = www + 'api/hd/' + link.method + '?login_key=' + login_key + '&mid=' + app.globalData.mid + '&isCN=' + isCN + link.canshu;
-  wx.request({
-    url: url,
-    data: data,
-    header: { 'content-type': 'application/x-www-form-urlencoded' },
-    method: 'POST',
-    dataType: 'json',
-    success: function (res) {
-      var retData = res.data;
-      if (res) {
-        if (retData.ret == 1) {
-          if (retData.data) {
-            logic(retData.data);
-          } else {
-            retData.data = [];
-            logic(retData.data);
-          }
-        } else if (retData.ret == 101) {
-          wx.showToast({
-            title: retData.msg,
-            icon: 'none',
-            duration: 1500
-          })
-        } else if (retData.ret == 99) {
-          app.getLogin(function () {
-            that.onLoad();
-          });
-        } else if (retData.ret == 10011) {
-          that.setData({
-            isShowGetUser: true
-          })
-        } else if (retData.ret == 100) {
-          wx.showToast({
-            title: '支付成功',
-            icon: 'success',
-            duration: 1500
-          })
-          setTimeout(() => {
-            wx.redirectTo({
-              url: '../myOrder/index',
-            })
-          }, 2000)
-        } else {
-          wx.showToast({
-            title: retData.msg,
-            icon: 'none',
-            duration: 2000
-          })
-        }
-      } else {
-        //接口没有数据
-        wx.showToast({
-          title: '接口错误！',
-          icon: 'loading',
-          duration: 1200
-        })
-      }
-    },
-    fail: function (res) { console.log(res) },
-    complete: function (res) {/*console.log(res)*/ }
-  })
-}
-
 // 保存用户信息
 function reqUser(UserInfo, that,type){
   var login_key = app.getLoginKey();
@@ -279,78 +212,8 @@ function wxPay(data){
   })
 }
 
-// 拼团接口
-function postGroupBuy(that, link, data, logic = function () { }) {
-  var login_key = app.getLoginKey();
-  var isCN = wx.getStorageSync('isCN')?1:0;
-  var url = www + 'api/groupbuy/' + link.method + '?login_key=' + login_key + '&mid=' + app.globalData.mid + '&isCN=' + isCN + link.canshu;
-  wx.request({
-    url: url,
-    data: data,
-    header: { 'content-type': 'application/x-www-form-urlencoded'},
-    method: 'POST',
-    dataType: 'json',
-    success: function (res) {
-      console.log(res);
-      var retData = res.data;
-      if (res) {
-        if (retData.ret == 1) {
-          if (retData.data){
-            logic(retData.data);
-          }else{
-            retData.data = [];
-            logic(retData.data);
-          }
-        } else if (retData.ret == 101) {
-          wx.showToast({
-            title: retData.msg,
-            icon: 'none',
-            duration: 1500
-          })
-        } else if (retData.ret == 99) {
-          app.getLogin(function () {
-            that.onLoad();
-          });
-        } else if (retData.ret == 10011) {
-          that.setData({
-            isShowGetUser: true
-          })
-        } else if (retData.ret == 100){
-          wx.showToast({
-            title: '支付成功',
-            icon: 'success',
-            duration: 1500
-          })
-          setTimeout(() => {
-            wx.redirectTo({
-              url: '../myOrder/index',
-            })
-          }, 2000)
-        }else{
-          wx.showToast({
-            title: retData.msg,
-            icon: 'none',
-            duration: 2000
-          })
-        }
-      } else {
-        //接口没有数据
-        wx.showToast({
-          title: '接口错误！',
-          icon: 'loading',
-          duration: 1200
-        })
-      }
-    },
-    fail: function (res) {console.log(res)},
-    complete: function (res) {/*console.log(res)*/}
-  })
-}
-
 module.exports = {
   post: post,
-  postHd: postHd,
   getUser: getUser,
-  wxPay: wxPay,
-  postGroupBuy: postGroupBuy
+  wxPay: wxPay
 }

@@ -18,6 +18,7 @@ Page({
 	  showContact: false, // 是否显示联系客服弹窗
 	  showCompany: false, // 是否显示代购店铺弹窗
 	  lxinfo:{},//客服信息,
+	  setting:{},//客服信息,
 	  companyList: [],
 	  lastCompanyList: [],
     code: '',
@@ -194,7 +195,8 @@ Page({
     let logic = (ret) => {
       this.setData({
         data: ret,
-	      lxinfo: ret.lxinfo
+	      lxinfo: ret.lxinfo,
+	      setting: ret.setting
       })
     }
     api.post(this, link, {}, logic);
@@ -209,6 +211,11 @@ Page({
 				lastCompanyList: res.last_mid
 			})
 		});
+	},
+	phoneCall () {
+  	   wx.makePhoneCall({
+	      phoneNumber: this.data.setting.phone
+      })
 	},
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -277,31 +284,5 @@ Page({
    */
   onReachBottom: function () {
 
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function (res) {
-	  app.shareCallback()
-    var fxs_id = this.data.data.fxs_id;
-    if (res.from === 'button') {
-        //区分按钮分享
-        if (res.target.id === "shareBtn") {
-            return {
-                title: res.target.dataset.title,
-                imageUrl:res.target.dataset.url,
-                path: '/pages/pintuanShare/index?id='+res.target.dataset.id,
-                success: function (res) {
-                },
-                fail: function (res) {
-                }
-            }
-        }
-    }
-    return {
-      title: '分销商城',
-      path: '/pages/index/index?fxs_id=' + fxs_id
-    }
   }
 })

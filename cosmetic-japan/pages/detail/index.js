@@ -68,38 +68,6 @@ Page({
         api.getUser(that);
     },
 
-    // 拼单发起者列表
-    getJoinUser() {
-        let link = { method: 'create_list', canshu: '&id=' + this.data.goods_info.hd_id };
-        let logic = (ret) => {
-            if (ret && ret.length) {
-                this.setData({
-                        spellList: ret,
-                        spellListMove: ret
-                    })
-                    // 如果列表小于3则不滚动
-                if (ret.length < 3) {
-                    let spellOption = this.data.spellOption
-                    spellOption.autoPlay = false
-                    this.setData({
-                        spellOption: spellOption
-                    })
-                }
-                // 如果拼团列表是奇数则*2
-                if (this.data.spellListMove.length % 2 != 0 && ret.length > 2) {
-                    this.setData({
-                        spellListMove: this.data.spellListMove.concat(this.data.spellListMove)
-                    })
-                }
-                this.setUserSpellTime('spellListMove')
-                this.setUserSpellTime('spellList')
-            } else {
-
-            }
-        }
-        api.postGroupBuy(this, link, {}, logic)
-    },
-
     maskTap: function() {
         this.setData({
             Select: false,
@@ -112,31 +80,6 @@ Page({
         this.setData({
           isShowPt: e.target.dataset.status == 'show'?true:false
         })
-    },
-
-    //显示去拼单弹窗
-    toPtDialogTap:function(e){
-        //获取参与者列表
-        let link = { method: 'join_user_list', canshu: '&gbc_id=' + this.data.spellListMove[e.target.dataset.index].gbc_id };
-        let logic = (ret) => {
-            if (ret) {
-                //组装待参与人数 用于展示空头像
-                let user_list = ret.user_list;
-                let tuanyuan_flag = ret.tuanyuan_flag;
-                for(let i = 0;i < ret.remain_num; i++){
-                    let obj = {headimg:''};
-                    user_list.push(obj);
-                }
-                this.setData({
-                  selectIndex:e.target.dataset.index,
-                  isShowPt:false,
-                  isShowToPt: true,
-                  joinUserList: user_list,
-                  tuanyuan_flag: tuanyuan_flag,
-                })
-            }
-        }
-        api.postGroupBuy(this, link, {}, logic)
     },
 
     //关闭去拼单弹窗
@@ -503,7 +446,6 @@ Page({
                 }
                 if (options.activity_type == 4) {
                     // this.setCountDown() //拼单时间倒计时
-                    this.getJoinUser() // 拼单参与者列表
                     this.setSpellTime(this.data.goods_info.groupbuy_remain_time)
                 }
             }
@@ -747,7 +689,7 @@ Page({
         return {
           title: title,
           imageUrl: www + this.data.goods_info.cover,
-          path: '/pages/detail/index?id=' + id + '&fxs_id=' + fxs_id + '&activity_type=' + activity_type + '&hd_id=' + hd_id
+          path: '/pages/detail/index?id=' + id + '&fxs_id=' + fxs_id + '&activity_type=' + activity_type + '&hd_id=' + hd_id + '&mid=' + app.globalData.mid
         }
     }
 })

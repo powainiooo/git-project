@@ -467,21 +467,5 @@ Page({
             title: '正在加载',
         })
         this.ajaxList()
-    },
-    /**
-     * 用户点击右上角分享
-     */
-    onShareAppMessage: function (res) {
-	    app.shareCallback()
-        if (res.from === 'button') {
-            //区分按钮分享
-            if (res.target.id === "shareBtn") {
-                return {
-                    title: res.target.dataset.title,
-                    imageUrl:res.target.dataset.url,
-                    path: '/pages/pintuanShare/index?id=' + res.target.dataset.id,
-                }
-            }
-        }
     }
 })

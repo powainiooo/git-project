@@ -121,7 +121,7 @@ Page({
     var fxs_id = this.data.fxs_id;
     return {
       title: '分销商城',
-      path: '/pages/index/index?fxs_id=' + fxs_id
+      path: '/pages/index/index?fxs_id=' + fxs_id + '&mid=' + app.globalData.mid
     }
   }
 })

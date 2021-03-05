@@ -49,12 +49,12 @@
          </button>
       </view>
 
-      <button open-type="contact" class="my-button">
-         <image src='/images/my/ico-6.png'></image>
+      <button open-type="contact" class="my-button" wx:if="{{setting.wxkf_status == '1'}}">
+         <image src='/images/my/ico-10.png'></image>
          <image src='/images/my/ico-8.png' mode="aspectFit"></image>
       </button>
-      <button class="my-button" style="bottom: 130rpx">
-         <image src='/images/my/ico-6.png'></image>
+      <button class="my-button" style="bottom: 130rpx" bindtap="phoneCall" wx:if="{{setting.phone_status == '1'}}">
+         <image src='/images/my/ico-10.png'></image>
          <image src='/images/my/ico-9.png' mode="aspectFit"></image>
       </button>
    </view>

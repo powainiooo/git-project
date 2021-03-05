@@ -89,12 +89,6 @@
                "query": ""
             },
             {
-               "id": 4,
-               "name": "砍价详情",
-               "pathName": "pages/kanjia/index",
-               "query": "id=90"
-            },
-            {
                "id": 5,
                "name": "商品列表",
                "pathName": "pages/product/index",
@@ -131,12 +125,6 @@
                "query": ""
             },
             {
-               "id": 11,
-               "name": "用户评价",
-               "pathName": "pages/pingjia/index",
-               "query": ""
-            },
-            {
                "id": -1,
                "name": "我的积分",
                "pathName": "pages/sign/index",
@@ -155,12 +143,6 @@
                "query": ""
             },
             {
-               "id": 15,
-               "name": "砍价列表",
-               "pathName": "pages/kanjiaList/index",
-               "query": ""
-            },
-            {
                "id": -1,
                "name": "我的售后",
                "pathName": "pages/shouhouList/index",
@@ -168,45 +150,9 @@
             },
             {
                "id": -1,
-               "name": "秒杀",
-               "pathName": "pages/seckill/index",
-               "query": ""
-            },
-            {
-               "id": -1,
-               "name": "限时购",
-               "pathName": "pages/timeBuy/index",
-               "query": ""
-            },
-            {
-               "id": -1,
-               "name": "砍价",
-               "pathName": "pages/bargain/index",
-               "query": ""
-            },
-            {
-               "id": -1,
-               "name": "我的砍价",
-               "pathName": "pages/bargain/myBargain",
-               "query": ""
-            },
-            {
-               "id": 21,
-               "name": "发起砍价",
-               "pathName": "pages/bargain/initiator",
-               "query": "id=96"
-            },
-            {
-               "id": -1,
                "name": "编辑/添加收货地址",
                "pathName": "pages/site/index",
                "query": ""
-            },
-            {
-               "id": 23,
-               "name": "砍价详情",
-               "pathName": "pages/bargain/item",
-               "query": "kj_user_id=167&money="
             },
             {
                "id": -1,

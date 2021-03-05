@@ -16,7 +16,7 @@
           <image class='flexs' wx:else src='/images/ico_y.png'></image>
         </view>
         <view class='products start'>
-          <image src='{{www}}{{item.cover}}'></image>
+          <image src='{{imgUrl}}{{item.cover}}'></image>
           <view class='info'>
              <view>
                 <view class='title'>{{item.goods_name}}</view>

@@ -76,9 +76,10 @@
    <view class="title">最新访问的代购商铺</view>
    <view class="goods-list" wx:if="{{lastCompanyList.length > 0}}">
       <view class="goods-item" wx:for="{{lastCompanyList}}" wx:key="index">
-         <navigator url="../index/index">
-            <image src="{{www}}{{item.hot_goodscover}}"></image>
+         <navigator url="/" data-mid="{{item.mid}}" bindtap="changeStore">
+            <image src="{{imgUrl}}{{item.hot_goodscover}}"></image>
             <view>{{item.hot_goodsname}}</view>
+            <view>{{item.company}}</view>
          </navigator>
       </view>
    </view>
@@ -86,9 +87,10 @@
    <view class="title">所有代购商铺</view>
    <view class="goods-list">
       <view class="goods-item" wx:for="{{companyList}}" wx:key="index">
-         <navigator url="../index/index">
-            <image src="{{www}}{{item.hot_goodscover}}"></image>
+         <navigator url="/" data-mid="{{item.mid}}" bindtap="changeStore">
+            <image src="{{imgUrl}}{{item.hot_goodscover}}"></image>
             <view>{{item.hot_goodsname}}</view>
+            <view>{{item.company}}</view>
          </navigator>
       </view>
    </view>

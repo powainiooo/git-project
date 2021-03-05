@@ -1,24 +1,30 @@
-<!--pages/myCoupon/index.wxml-->
+<view class='orderNav'>
+   <view class='orderNav_li {{navIndex == 1?"on":""}}' data-num='1' bindtap='bindnav'>未使用 ({{unUseNum}})</view>
+   <view class='orderNav_li {{navIndex == 2?"on":""}}' data-num='2' bindtap='bindnav'>已过期</view>
+   <view class='orderNav_li {{navIndex == 3?"on":""}}' data-num='3' bindtap='bindnav'>已使用</view>
+</view>
 <view class='coupon_list'>
-  <view class='coupon_li' wx:for="{{list}}" wx:key="{{item.id}}">
-    <image src='/images/img_yhj.png' class='bg'></image>
-    <view class='cont dpt'>
-      <view class='dptc'>
-        <view>
-          <text class='money'>￥{{item.miane}}元</text>
-          <text class='txt'> 优惠券</text>
-        </view>
-        <view class='shiyongtiaojian'>订单满¥{{item.condition}}元（不含运费/税费/积分抵扣及不允许使用优惠券抵扣的商品费用）</view>
-        <view class='time'>
-          <text>有效时间至{{item.yx_time}}</text>
-        </view>
+   <view class='coupon_li' wx:for="{{list}}" wx:key="id">
+      <image src='{{imgUrl}}{{item.isValid ? item.yhq_bg : item.bg_expired }}' class='bg' wx:if="{{item.etime == '0'}}"></image>
+      <image src='{{imgUrl}}{{item.yhq_bg_used}}' class='bg' wx:else></image>
+      <view class='cont dpt'>
+         <view class='dptc'>
+            <view>
+               <text class='money'>￥{{item.miane}}</text>
+               <text class='txt'> 满{{item.condition}}可用</text>
+            </view>
+            <view class='time'>
+               <text>有效时间至{{item.yx_time}}</text>
+            </view>
+         </view>
       </view>
-    </view>
-    <image class='ylq' hidden="{{item.flag==0}}" src='/images/ico_ylq.png'></image>
-    <view class='lq_btn' bindtap='lingquTap' data-index="{{index}}">
-      <view class='tab'>
-        <text>{{item.flag==0?"马上领取":"使用"}}</text>
+      <view wx:if="{{item.isValid && item.etime == '0'}}"
+            class='lq_btn'
+            bindtap='lingquTap'
+            data-index="{{index}}"
+            style="border-color: {{item.bg_color}}; color: {{item.bg_color}};">
+         立即使用
       </view>
-    </view>
-  </view>
+      <image wx:if="{{!item.isValid}}" src="/images/expired.png" class="expired"></image>
+   </view>
 </view>

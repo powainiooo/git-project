@@ -58,7 +58,7 @@ Page({
       isYHQ: false
     })
   },
-  
+
   // 选择优惠券
   selectYHQ:function(e){
     var index = e.currentTarget.dataset.index;
@@ -70,12 +70,12 @@ Page({
         coupon_id: coupon_id
       })
     } else {
-      
+
       this.setData({
         select: index,
       })
     }
-    
+
   },
 
   // 使用积分
@@ -261,7 +261,7 @@ Page({
       let logic = (ret) => {
         console.log(66,ret)
 
-     
+
         var data = ret;
         console.log(7777, data.jf_status)
         var adds = {};
@@ -337,7 +337,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+
   },
 
   /**
@@ -351,27 +351,27 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    
-  },
+
+  }
 })

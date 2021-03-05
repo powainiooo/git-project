@@ -10,14 +10,18 @@ Page({
    */
   data: {
     id: 0,
+	  imgUrl,
+	  navIndex: '1',
+	  unUseNum: 0,
     page: 1,
     list: [],
   },
 
   ajaxList(){
-    var url = urlPath + 'api/hwsc/my_yhq'
+    var url = urlPath + '/api/index/my_yhq'
     var param = {
       id: this.data.id,
+	    type: this.data.navIndex,
       isCN: wx.getStorageSync('isCN')
     }
     appRequest({
@@ -25,16 +29,30 @@ Page({
       data: param,
       success: res => {
         var data = res.data.data;
-        for(var i in data){
-          data[i].yx_time = util.fTime(new Date(data[i].yx_time * 1000));
-        }
+	      const now = new Date().getTime()
+	      for(var i in data){
+		      const t = data[i].yx_time * 1000
+		      data[i].yx_time = util.fTime(new Date(t));
+		      data[i].isValid = t >= now
+	      }
         this.setData({
-          list: data
+          list: data,
+	        unUseNum: this.data.navIndex == '1' ? data.length : this.data.unUseNum
         })
       },
     })
   },
 
+	//导航切换
+	bindnav: function(e) {
+		console.log(e.currentTarget.dataset.num)
+		var num = e.currentTarget.dataset.num;
+		var listAll = this.data.listAll;
+		this.setData({
+			navIndex: num
+		})
+		this.ajaxList()
+	},
   // 领取优惠券
   lingquTap:function(e){
     wx.reLaunch({
@@ -56,48 +74,41 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
-  },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
   }
 })

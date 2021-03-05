@@ -16,7 +16,7 @@ Page({
   saveEwm: function(){
     console.log(urlPath + this.data.ewm)
     wx.downloadFile({
-      url: urlPath + this.data.ewm, 
+      url: urlPath + this.data.ewm,
       success: function (ress) {
         console.log('downloadFile',ress)
         // 只要服务器有响应数据，就会把响应内容写入文件并进入 success 回调，业务需要自行判断是否下载到了想要的内容
@@ -36,13 +36,13 @@ Page({
         }
       }
     })
-    
+
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    var url = urlPath + 'api/fxpt/my_ewm'
+    var url = urlPath + '/api/index/my_ewm'
     console.log(url)
     appRequest({
       url: url,
@@ -97,13 +97,6 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function() {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function() {
 
   }
 })

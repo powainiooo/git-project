@@ -9,7 +9,7 @@
             bindchange="sourceChange">
       <block wx:for="{{goods_info.banner}}" wx:key="index">
         <swiper-item wx:if="{{item != ''}}">
-          <image wx:if="{{item}}" src="{{www + item}}" data-src="{{imgUrl + item}}" class="slide-image" bindtap='bannerTap' />
+          <image wx:if="{{item}}" src="{{imgUrl + item}}" data-src="{{imgUrl + item}}" class="slide-image" bindtap='bannerTap' />
         </swiper-item>
       </block>
     </swiper>

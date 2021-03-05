@@ -4,7 +4,7 @@
       <navigator url='../detail/index?id={{item.id}}&hd_id={{item.id}}&activity_type=2' hover-class='none'>
         <view class='content'>
           <view class='list-left'>
-            <image src='https://hwsc.vsapp.cn/upload/{{item.cover}}' class='img' mode="widthFix"></image>
+            <image src='{{imgUrl}}{{item.cover}}' class='img' mode="widthFix"></image>
           </view>
           <view class='list-right'>
             <view class='title'>{{item.goods_name}}</view>

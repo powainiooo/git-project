@@ -60,7 +60,7 @@ Page({
     wx.showLoading({
       title: '正在加载',
     })
-    var url = urlPath + '/api/fxpt/sr_detail'
+    var url = urlPath + '/api/index/sr_detail'
     appRequest({
       url: url,
       data: {page: this.data.page},

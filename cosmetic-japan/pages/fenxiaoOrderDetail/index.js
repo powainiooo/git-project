@@ -13,9 +13,9 @@ Page({
     goods_list: [],
     info: {},
   },
-  
+
   ajaxData: function(){
-    var url = urlPath + 'api/fxpt/fxs_order_detail'
+    var url = urlPath + '/api/index/fxs_order_detail'
     appRequest({
       url: url,
       data: {
@@ -84,13 +84,6 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function() {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function() {
 
   }
 })

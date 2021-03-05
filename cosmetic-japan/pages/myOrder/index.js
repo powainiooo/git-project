@@ -89,7 +89,7 @@ Page({
             icon: 'none',
           })
         }*/
-        var url = urlPath + 'api/hwsc/order_list'
+        var url = urlPath + '/api/index/order_list'
         var page = this.data.page;
         var index = this.data.navIndex;
         var param = {
@@ -140,7 +140,7 @@ Page({
                     wx.showLoading({
                         title: '正在申请退款',
                     })
-                    var url = urlPath + 'api/hwsc/apply_tk'
+                    var url = urlPath + '/api/index/apply_tk'
                     appRequest({
                         url: url,
                         data: { id: id },
@@ -177,7 +177,7 @@ Page({
                     wx.showLoading({
                         title: '正在取消',
                     })
-                    var url = urlPath + 'api/hwsc/order_cancle'
+                    var url = urlPath + '/api/index/order_cancle'
                     appRequest({
                         url: url,
                         data: { id: id },
@@ -263,7 +263,7 @@ Page({
                 id: id,
                 type: e.currentTarget.dataset.type
             }
-            var url = urlPath + 'api/hwsc/again_pay'
+            var url = urlPath + '/api/index/again_pay'
             appRequest({
                 url: url,
                 data: { id: id },
@@ -282,7 +282,7 @@ Page({
     //自动取消订单
     autoCancel: function(e) {
         var id = e.detail.id;
-        var url = urlPath + 'api/hwsc/order_cancle'
+        var url = urlPath + '/api/index/order_cancle'
         appRequest({
             url: url,
             data: { id: id },
@@ -310,7 +310,7 @@ Page({
                     wx.showLoading({
                         title: '正在删除',
                     })
-                    var url = urlPath + 'api/hwsc/del_order'
+                    var url = urlPath + '/api/index/del_order'
                     appRequest({
                         url: url,
                         data: { id: id },
@@ -348,7 +348,7 @@ Page({
                     wx.showLoading({
                         title: '正在确认收货',
                     })
-                    var url = urlPath + 'api/hwsc/order_confirm'
+                    var url = urlPath + '/api/index/order_confirm'
                     appRequest({
                         url: url,
                         data: { id: id },

@@ -7,6 +7,8 @@ App({
       return false;
     }*/
 
+    this.globalData.mid = wx.getStorageSync('MID')
+
     const updateManager = wx.getUpdateManager();
     updateManager.onCheckForUpdate(function (res) {
       // 请求完新版本信息的回调
@@ -98,11 +100,14 @@ App({
     // www: 'https://hwscdev.vsapp.cn/',
     // url: 'https://hwscdev.vsapp.cn/upload/',
     www: 'https://dgpt.vsapp.cn',
-    url: 'https://dgpt.vsapp.cn/upload',
+    url: 'https://dgpt.vsapp.cn',
     login_key:'',
-    mid:7
+    mid:0
   },
-
+	setMid (mid) {
+  	   this.globalData.mid = mid
+		wx.setStorageSync("MID", mid);
+	},
 
   request(obj = {}, call = ()=>{}) {
     if (obj.url == undefined || obj.url.trim() == '' ) {

@@ -49,7 +49,7 @@ Page({
       })
       return false;
     }
-  
+
     let www = { method: 'pj_order', canshu: '' };
     var data = {id:id, pj_xx:pj_xx, content:content};
     let huidiao = (ret) => {
@@ -70,7 +70,7 @@ Page({
         img: options.img
       })
     }else{
-      wx:wx.navigateBack({
+      wx.navigateBack({
         delta: 1,
       })
     }
@@ -123,13 +123,6 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
 
   }
 })

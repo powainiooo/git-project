@@ -19,12 +19,6 @@
             <image src='/images/ico_4.png'></image>搜索历史
              <view class='clear' bindtap='clearTap'><image src="/images/ico-del.png" mode="widthFix" style="width: 24rpx"></image></view>
           </view>
-<!--          <view class='lsBox'>-->
-<!--            <view wx:for="{{keywords}}" wx:key="index" class='item between' data-keyword="{{item}}" bindtap='keywordsTap'>-->
-<!--              <view class='l start' ><image src='/images/ico_5.png'></image>{{item}}</view>-->
-<!--              <view class='r start' data-index="{{index}}" catchtap="delTap"><image src='/images/ico_6.png'></image></view>-->
-<!--            </view>-->
-<!--          </view>-->
            <view class="hotBox">
               <span wx:for="{{keywords}}" wx:key="index" data-keyword="{{item}}" bindtap="keywordsTap">
                  {{item}}

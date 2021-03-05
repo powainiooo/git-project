@@ -2,7 +2,7 @@
    <view class="section">
       <!-- 顶部栏  -->
       <view class='searchBox indexSearch'>
-         <image class='logo' src='{{www}}{{logo}}' mode="widthFix"></image>
+         <image class='logo' src='{{imgUrl}}{{logo}}' mode="widthFix"></image>
          <view class='serch start' bindtap="SerchFocus">
             <image class='ico_search' src='/images/ico_seach.png'></image>
             <input type='text' placeholder-class='serchPlace' placeholder='搜索你喜欢的商品' disabled='true'></input>
@@ -13,9 +13,9 @@
       <view class='index-banner'>
          <swiper indicator-dots="true" circular="true" autoplay="true" indicator-color="rgba(0, 0, 0, .3)" indicator-active-color="#FFFFFF">
             <swiper-item wx:for="{{bannerList}}" wx:key="index">
-               <image wx:if="{{item.linktype==1}}" src="{{www}}{{item.img}}" class="slide-image"/>
-               <navigator wx:elif="{{item.linktype==2}}" url='../detail/index?id={{item.link}}&activity_type=0&hd_id=0'><image src="{{www}}{{item.img}}" class="slide-image"/></navigator>
-               <navigator wx:elif="{{item.linktype==3}}" url='{{item.link}}'><image src="{{www}}{{item.img}}" class="slide-image"/></navigator>
+               <image wx:if="{{item.linktype==1}}" src="{{imgUrl}}{{item.img}}" class="slide-image"/>
+               <navigator wx:elif="{{item.linktype==2}}" url='../detail/index?id={{item.link}}&activity_type=0&hd_id=0'><image src="{{imgUrl}}{{item.img}}" class="slide-image"/></navigator>
+               <navigator wx:elif="{{item.linktype==3}}" url='{{item.link}}'><image src="{{imgUrl}}{{item.img}}" class="slide-image"/></navigator>
             </swiper-item>
          </swiper>
          <!-- <image class='bgStyle' src='/images/banbg.png'></image> -->
@@ -31,7 +31,7 @@
          </view>
          <view class="brands-list">
             <view wx:for="{{brandList}}" wx:key="index">
-               <image src="{{www}}{{item.cover}}"></image>
+               <image src="{{imgUrl}}{{item.cover}}"></image>
             </view>
          </view>
       </view>
@@ -49,7 +49,7 @@
          <view class="goods-list">
             <view class="goods-item" wx:for="{{yxGoodsList}}" wx:key="index">
                <navigator url='../detail/index?id={{item.id}}&activity_type=0&hd_id=0'>
-                  <image src="{{www}}{{item.cover}}"></image>
+                  <image src="{{imgUrl}}{{item.cover}}"></image>
                   <view>{{item.goods_name}}</view>
                </navigator>
             </view>
@@ -62,7 +62,7 @@
          <navigator wx:for="{{adList1}}"
                     wx:key="index"
                     url="../detail/index?id={{item.id}}&activity_type=0&hd_id=0">
-            <image src='{{www}}{{item.img}}'></image>
+            <image src='{{imgUrl}}{{item.img}}'></image>
          </navigator>
       </view>
       <!-- 小广告图信息 -->
@@ -70,7 +70,7 @@
          <navigator wx:for="{{adList2}}"
                     wx:key="index"
                     url="../detail/index?id={{item.id}}&activity_type=0&hd_id=0">
-            <image src='{{www}}{{item.img}}'></image>
+            <image src='{{imgUrl}}{{item.img}}'></image>
          </navigator>
       </view>
    </view>
@@ -80,9 +80,10 @@
    <view class="title">最新访问的代购商铺</view>
    <view class="goods-list" wx:if="{{lastCompanyList.length > 0}}">
       <view class="goods-item" wx:for="{{lastCompanyList}}" wx:key="index">
-         <navigator bindtap="closeCompany">
-            <image src="{{www}}{{item.hot_goodscover}}"></image>
+         <navigator url="/" data-mid="{{item.mid}}" bindtap="closeCompany">
+            <image src="{{imgUrl}}{{item.hot_goodscover}}"></image>
             <view>{{item.hot_goodsname}}</view>
+            <view>{{item.company}}</view>
          </navigator>
       </view>
    </view>
@@ -90,9 +91,10 @@
    <view class="title">所有代购商铺</view>
    <view class="goods-list">
       <view class="goods-item" wx:for="{{companyList}}" wx:key="index">
-         <navigator bindtap="closeCompany">
-            <image src="{{www}}{{item.hot_goodscover}}"></image>
+         <navigator url="/" data-mid="{{item.mid}}" bindtap="closeCompany">
+            <image src="{{imgUrl}}{{item.hot_goodscover}}"></image>
             <view>{{item.hot_goodsname}}</view>
+            <view>{{item.company}}</view>
          </navigator>
       </view>
    </view>

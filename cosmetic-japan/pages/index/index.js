@@ -35,20 +35,28 @@ Page({
 		   return;
 	   }
 	   this.getIndexData()
-	   this.getCompany()
    },
 	getIndexData () {
 		const link = { method: 'index', canshu:''};
 		api.post(this, link, {}, (res) => {
 			console.log('res', res)
-			this.setData({
-				yxGoodsList: res.yx_goods,
-				bannerList: res.ads_list_max,
-				adList1: res.ads_list_zhong,
-				adList2: res.ads_list_min,
-				brandList: res.brand,
-				logo: res.logo,
-			})
+			if (res.ret == '1002') {
+				this.setData({
+					companyList: res.data.all_mid,
+					lastCompanyList: res.data.last_mid,
+					showCompany: true
+				})
+			} else {
+				this.setData({
+					yxGoodsList: res.yx_goods,
+					bannerList: res.ads_list_max,
+					adList1: res.ads_list_zhong,
+					adList2: res.ads_list_min,
+					brandList: res.brand,
+					logo: res.logo,
+				})
+				this.getCompany()
+			}
 		});
 	},
 	getCompany () {
@@ -66,10 +74,16 @@ Page({
 		   showCompany: true
 	   })
 	},
-	closeCompany () {
-   	this.setData({
-		   showCompany: false
-	   })
+	closeCompany (e) {
+   	console.log('closeCompany', e)
+		const { mid } = e.currentTarget.dataset
+		app.setMid(mid)
+		wx.reLaunch({
+			url: '/pages/index/index'
+		})
+   	// this.setData({
+		//    showCompany: false
+	   // })
 	},
 	// 搜索获取焦点
 	SerchFocus: function(){

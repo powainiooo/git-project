@@ -30,7 +30,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    var url = urlPath + '/api/fxpt/my_yj'
+    var url = urlPath + '/api/index/my_yj'
     appRequest({
       url: url,
       success: res => {
@@ -70,13 +70,6 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
 
   }
 })

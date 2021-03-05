@@ -1,6 +1,5 @@
 const app = getApp();
 const www = getApp().globalData.www + '/';
-console.log('www', www)
 
 // 总接口
 function post(that, link, data, logic = function () { }) {
@@ -56,6 +55,8 @@ function post(that, link, data, logic = function () { }) {
           }, 2000)
         }else if (retData.ret == 0){
           logic(retData.data);
+        }else if (retData.ret == '1002'){
+          logic(retData);
         } else{
           wx.showToast({
             title: retData.msg,

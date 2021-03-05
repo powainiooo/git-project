@@ -43,7 +43,7 @@ Page({
         icon: 'none'
       })
       return false;
-    } 
+    }
     console.log(this.data.money < this.data.minMoney)
     // if(this.data.money < this.data.minMoney) {
     //   wx.showToast({
@@ -53,7 +53,7 @@ Page({
     //   return false;
     // }
 
-    var url = urlPath + 'api/fxpt/now_tx'
+    var url = urlPath + '/api/index/now_tx'
     wx.showLoading({
       title: '正在提交',
     })
@@ -75,7 +75,7 @@ Page({
         console.log(res)
       },
       complete: res => {
-        
+
       }
     })
   },
@@ -83,7 +83,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var url = urlPath + 'api/fxpt/tx_info'
+    var url = urlPath + '/api/index/tx_info'
     appRequest({
       url: url,
       success: res => {
@@ -100,48 +100,41 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
-  },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
   }
 })

@@ -71,7 +71,7 @@ Page({
             fukuanBool: false,
         }, () => {
             var id = e.currentTarget.dataset.oid;
-            var url = urlPath + 'api/hwsc/again_pay'
+            var url = urlPath + '/api/index/again_pay'
             var obj = {
                 id: id,
                 type: this.data.info.activity_type
@@ -95,11 +95,11 @@ Page({
     //自动取消订单
     autoCancel: function(e) {
       //console.log(122, e);
-     
+
         //var id = e.detail.id;
       var id = e.currentTarget.dataset.oid;
       //console.log(122, id);
-        var url = urlPath + 'api/hwsc/order_cancle'
+        var url = urlPath + '/api/index/order_cancle'
         //return false;
         appRequest({
             url: url,
@@ -120,7 +120,7 @@ Page({
                     wx.showLoading({
                         title: '正在申请退款',
                     })
-                    var url = urlPath + 'api/hwsc/apply_tk'
+                    var url = urlPath + '/api/index/apply_tk'
                     appRequest({
                         url: url,
                         data: { id: id },
@@ -151,7 +151,7 @@ Page({
                     wx.showLoading({
                         title: '正在取消',
                     })
-                    var url = urlPath + 'api/hwsc/order_cancle'
+                    var url = urlPath + '/api/index/order_cancle'
                     appRequest({
                         url: url,
                         data: {
@@ -185,7 +185,7 @@ Page({
                     wx.showLoading({
                         title: '正在删除',
                     })
-                    var url = urlPath + 'api/hwsc/del_order'
+                    var url = urlPath + '/api/index/del_order'
                     appRequest({
                         url: url,
                         data: {
@@ -218,7 +218,7 @@ Page({
                     wx.showLoading({
                         title: '正在确认收货',
                     })
-                    var url = urlPath + 'api/hwsc/order_confirm'
+                    var url = urlPath + '/api/index/order_confirm'
                     appRequest({
                         url: url,
                         data: {
@@ -242,7 +242,7 @@ Page({
 
     },
     ajaxData: function() {
-        var url = urlPath + 'api/hwsc/order_list_detail'
+        var url = urlPath + '/api/index/order_list_detail'
         appRequest({
             url: url,
             data: {
@@ -265,11 +265,11 @@ Page({
                         this.setData({
                             title:'拼单进行中'
                         })
-                        break; 
+                        break;
                     case '1':
                         this.setData({
                             title:'拼单成功'
-                        }) 
+                        })
                         break;
                 }
             },
@@ -328,13 +328,6 @@ Page({
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function() {
-
-    },
-
-    /**
-     * 用户点击右上角分享
-     */
-    onShareAppMessage: function() {
 
     }
 })

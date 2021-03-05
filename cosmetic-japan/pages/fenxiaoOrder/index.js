@@ -80,7 +80,7 @@ Page({
         icon: 'none',
       })
     }
-    var url = urlPath + 'api/fxpt/fx_order'
+    var url = urlPath + '/api/index/fx_order'
     console.log(url)
     var page = this.data.page;
     var index = this.data.navIndex;
@@ -94,7 +94,7 @@ Page({
       success: res => {
         wx.hideLoading()
         console.log(res)
-        
+
         var _list = res.data.data.list;
         var listAll = this.data.listAll;
         var bool = false;
@@ -130,7 +130,7 @@ Page({
           wx.showLoading({
             title: '正在取消',
           })
-          var url = urlPath + 'api/fxpt/order_cancle'
+          var url = urlPath + '/api/index/order_cancle'
           appRequest({
             url: url,
             data: { id: id },
@@ -161,14 +161,14 @@ Page({
         }
       }
     })
-    
-    
+
+
   },
   //自动取消订单
   autoCancel: function(e){
     console.log('autoCancel', e.detail.id)
     var id = e.detail.id;
-    var url = urlPath + 'api/fxpt/order_cancle'
+    var url = urlPath + '/api/index/order_cancle'
     appRequest({
       url: url,
       data: { id: id},
@@ -201,7 +201,7 @@ Page({
           wx.showLoading({
             title: '正在删除',
           })
-          var url = urlPath + 'api/fxpt/del_order'
+          var url = urlPath + '/api/index/del_order'
           appRequest({
             url: url,
             data: { id: id },
@@ -245,7 +245,7 @@ Page({
           wx.showLoading({
             title: '正在确认收货',
           })
-          var url = urlPath + 'api/fxpt/order_confirm'
+          var url = urlPath + '/api/index/order_confirm'
           appRequest({
             url: url,
             data: { id: id },
@@ -317,7 +317,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
-    
+
   },
 
   /**
@@ -329,12 +329,5 @@ Page({
     })
     this.ajaxList()
     console.log(this.data.page)
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function() {
-
   }
 })

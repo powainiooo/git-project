@@ -29,7 +29,7 @@ Page({
     wx.showLoading({
       title: '正在加载',
     })
-    var url = urlPath + 'api/fxpt/my_fxs'
+    var url = urlPath + '/api/index/my_fxs'
     console.log(url)
     var index = this.data.navIndex;
     appRequest({
@@ -66,7 +66,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    
+
     this.ajaxList()
   },
 
@@ -111,12 +111,5 @@ Page({
   onReachBottom: function() {
     if (this.data['bool' + this.data.navIndex]) return false;
     this.ajaxList()
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function() {
-
   }
 })

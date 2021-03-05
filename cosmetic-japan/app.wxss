@@ -64,7 +64,6 @@ button:after { border: none; }
     overflow: hidden;
     padding: 0 30rpx;
     line-height: 60rpx;
-    border-bottom: 2rpx solid #f3f3f3;
 }
 
 .orderLi_top .num {
@@ -135,8 +134,8 @@ button:after { border: none; }
 }
 
 .orderLi_shop .money3 {
-    color: #de3031;
-    font-size: 20rpx;
+    color: #2A2A2A;
+    font-size: 40rpx;
 }
 
 .orderLi_shop .numView {

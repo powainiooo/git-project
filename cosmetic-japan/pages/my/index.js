@@ -113,9 +113,12 @@ Page({
 		})
 	},
 	// 关闭代购店铺
-	closeCompany () {
-		this.setData({
-			showCompany: false
+	changeStore () {
+		console.log('closeCompany', e)
+		const { mid } = e.currentTarget.dataset
+		app.setMid(mid)
+		wx.redirectTo({
+			url: '/pages/index/index'
 		})
 	},
   /**

@@ -11,7 +11,6 @@ Page({
     www:www,
     imgUrl: imgUrl,
     isShowGetUser:false,
-    Time:{},
     isguige:true,
     guige:false, //规格选择
     yixuan: [],//选择的规格的名称

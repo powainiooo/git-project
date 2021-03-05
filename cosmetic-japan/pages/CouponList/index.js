@@ -10,12 +10,13 @@ Page({
    */
   data: {
     id: 0,
+	  imgUrl,
     page: 1,
     list: [],
   },
 
   ajaxList(){
-    var url = urlPath + 'api/hwsc/yhq_list'
+    var url = urlPath + '/api/index/yhq_list'
     var param = {
       id: this.data.id,
       isCN: wx.getStorageSync('isCN')
@@ -25,8 +26,11 @@ Page({
       data: param,
       success: res => {
         var data = res.data.data;
+        const now = new Date().getTime()
         for(var i in data){
-          data[i].yx_time = util.fTime(new Date(data[i].yx_time * 1000));
+        	const t = data[i].yx_time * 1000
+          data[i].yx_time = util.fTime(new Date(t));
+	        data[i].isValid = t >= now
         }
         this.setData({
           list: data
@@ -40,7 +44,7 @@ Page({
     var index = e.currentTarget.dataset.index;
     var list = this.data.list;
     if (list[index].flag == 0){
-      var url = urlPath + 'api/hwsc/lq_yhq'
+      var url = urlPath + '/api/index/lq_yhq'
       var param = {
         id: list[index].id,
         isCN: wx.getStorageSync('isCN')
@@ -82,48 +86,41 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
-  },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
   }
 })

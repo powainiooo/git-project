@@ -32,21 +32,6 @@
       </view>
     </view>
   </view>
-  <!-- <view class='orderLi_shop'>
-    <image src='/images/img1.jpg' class='img'></image>
-    <view class='cont'>
-      <view class='tit'>Swisse 成人钙片 钙加维生素D片 澳洲进口柠檬...</view>
-      <view class='style'>150片/盒</view>
-      <view class='numView'>
-        <text class='num'>x2</text>
-        <view class=''>
-          <text class='money1'>￥</text>
-          <text class='money2'>99</text>
-          <text class='money3'>.00</text>
-        </view>
-      </view>
-    </view>
-  </view> -->
 </view>
 <view class='hr16'></view>
 <view class='txtH100'>下单时间：{{info.order_time}}</view>

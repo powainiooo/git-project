@@ -1,5 +1,4 @@
 // pages/timeBuy/index.js
-const api = require('../../utils/api.js');
 //获取应用实例
 const app = getApp();
 var www = app.globalData.www;
@@ -32,7 +31,7 @@ Page({
       Canshu: false
     })
   },
-  
+
   // 选择规格
   SelcetTap: function () {
     this.setData({
@@ -85,13 +84,6 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
 
   }
 })

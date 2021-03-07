@@ -1,0 +1,167 @@
+@import "mixin.styl"
+
+*
+  margin 0
+  padding 0
+  box-sizing border-box
+body
+  background-color #000000
+
+.flex
+  display flex
+.center
+  center()
+.between
+  between()
+
+.ivu-input
+  border none
+  background-color #EEEEEF
+  height 40px
+  border-radius 10px
+  padding 4px 10px
+
+.ivu-btn
+  height 40px
+  line-height 40px
+  border-radius 10px
+  border none
+  bgG()
+  color #ffffff
+  box-shadow 0px 2px 5px 0px rgba(0, 0, 0, 0.15)
+  &[disabled]
+    background #C8C9CA
+    color  #ffffff
+  &[disabled]:hover
+    background #C8C9CA
+    color  #ffffff
+  &:hover
+    color #ffffff
+.ivu-input-group-append
+  background-color transparent
+  padding 0
+  border-radius 0 10px 10px 0
+  overflow hidden
+  border none
+  .ivu-btn
+    color #ffffff
+    font-size 10px
+
+
+
+.ivu-select-single
+  .ivu-select-selection
+    height 40px
+    border none
+    border-radius 10px
+    background-color #EEEEEF
+    .ivu-select-placeholder
+      height 40px
+      line-height 40px
+    .ivu-select-arrow
+      color #ffffff
+      z-index 5
+      right 14px
+    &:after
+      content ''
+      size(40px, 40px)
+      line-height 40px
+      abBR(0, 0)
+      bgG()
+      border-radius 0 10px 10px 0
+      color rgba(255, 255, 255, .5)
+.txt
+  font-size 10px
+  line-height 15px
+  color #9E9E9F
+  text-decoration none
+.txt2
+  font-size 10px
+  line-height 15px
+  color #C8C9CA
+  text-decoration none
+  span
+    color #000000
+.flip-box
+  size(300px)
+  border-radius 10px
+  overflow hidden
+  position relative
+  background-color #ffffff
+  &:after
+    content ''
+    size(57px, 57px)
+    abBR(0, 0)
+    background-image url('data:image/png;base64,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')
+    background-repeat no-repeat
+.bottom-box
+  background-color #ffffff
+  border-radius 10px 10px 0px 0px
+  overflow-y auto
+  position relative
+  &::-webkit-scrollbar
+    width 3px
+    background-color transparent
+  &::-webkit-scrollbar-thumb
+    background-color #5B85E6
+
+.form
+  margin 40px 25px 30px 25px
+  position relative
+  &-title
+    font-size 18px
+    line-height 1
+    margin-bottom 20px
+  .ivu-form-item
+    margin-bottom 10px
+  .txt
+    margin-left 10px
+.tab-bar
+  height 40px
+  display flex
+  border-radius 10px
+  overflow hidden
+  background-color #EEEEEF
+  &-item
+    flex 1
+    center()
+    cursor pointer
+    font-size 14px
+    color #9E9E9F
+  &-active
+    bgG()
+    color #ffffff
+.tab-bar-min
+  height 25px
+  border-radius 5px
+  .tab-bar-item
+    font-size 10px
+.hint-list
+  list-style none
+  margin 0 25px
+  li
+    center()
+    margin-bottom 18px
+    .index
+      width 25px
+      margin-right 5px
+      img
+        display block
+        height 100%
+    .txt2
+      flex 1
+.notice-list
+  li
+    padding 20px 0
+    position relative
+    margin-bottom 0
+    &:after
+      content ''
+      position absolute
+      bottom 0
+      left -25px
+      right -25px
+      height 1px
+      background-color #EEEEEF
+
+

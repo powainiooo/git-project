@@ -329,6 +329,7 @@ Page({
         let data = { id: this.data.goods_info.id, attr: attr };
         let logic = (ret) => {
             // console.log(ret)
+	        ret.price = Number(ret.price) / 100
             this.setData({
                 returnData: ret,
             })

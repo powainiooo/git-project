@@ -21,8 +21,9 @@ Page({
       url: url,
       data: { type: 3 },
       success: res => {
-        var _desc = res.data.data;
-        var _desc = _desc.replace(new RegExp('src="/upload/image', 'g'), 'src="' + urlPath + 'upload/image');
+      	console.log('res', res)
+        var _desc = res.data.data.content;
+        var _desc = _desc.replace(new RegExp('src="/upload/image', 'g'), 'src="' + urlPath + '/upload/image');
         WxParse.wxParse('desc', 'html', _desc, this, 0);
         // this.setData({
         //   cont: res.data.data.help.content

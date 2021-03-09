@@ -7,8 +7,8 @@ page { background-color: #F3F2F1; }
 .status .box { width: 58px; height: 59px; margin-right: 20px; }
 .status .clock { width: 70px; height: 70px; margin-right: 20px; }
 .status span { font-size: 100px; color: #D1CECE; }
-.status .btn-round { width: 345px; }
-.btn-call { width: 138px; background-color: #ffffff; color: var(--textColor2); position: absolute; top: 50px; right: 66px; }
+.status .btn-round { width: 345px; font-size: 24px; }
+.btn-call { width: 152px; background-color: #ffffff; color: var(--textColor2); position: absolute; top: 50px; right: 66px; }
 </style>
 
 <template>
@@ -25,7 +25,8 @@ page { background-color: #F3F2F1; }
          <img src="/static/images/order/box.png" class="box" />
          <button class="btn-round"
                  hover-class="hscale"
-                 hover-stay-time="10">{{detailData.post_str}}</button>
+                 hover-stay-time="10"
+                 @click="copyPost">{{detailData.post_str}}</button>
       </div>
       <div class="status" v-else-if="detailData.status === '4'">
          <img src="/static/images/order/clock.png" class="clock" />
@@ -133,6 +134,14 @@ export default {
             this.dates = res.data.months
             this.title = res.data.title
             this.titleEn = res.data.english_name
+         })
+      },
+      copyPost () {
+         mpvue.setClipboardData({
+            data: this.detailData.post_str,
+            success (res) {
+               console.log('setClipboardData', res)
+            }
          })
       }
    },

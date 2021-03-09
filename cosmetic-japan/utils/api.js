@@ -28,35 +28,20 @@ function post(that, link, data, logic = function () { }) {
             retData.data = [];
             logic(retData.data);
           }
-        } else if (retData.ret == 101) {
-          wx.showToast({
-            title: retData.msg,
-            icon: 'none',
-            duration: 1500
-          })
-        } else if (retData.ret == 99) {
+        } else if (retData.ret == 1001) {
+	        app.getLogin(function () {
+		        that.onLoad();
+	        });
+        } else if (retData.ret == 1002) {
           app.getLogin(function () {
             that.onLoad();
           });
-        } else if (retData.ret == 10011) {
-          that.setData({
-            isShowGetUser: true
-          })
-        } else if (retData.ret == 100){
-          wx.showToast({
-            title: '支付成功',
-            icon: 'success',
-            duration: 1500
-          })
-          setTimeout(() => {
-            wx.redirectTo({
-              url: '../myOrder/index',
-            })
-          }, 2000)
-        }else if (retData.ret == 0){
+        } else if (retData.ret == 1003) {
+	        app.getLogin(function () {
+		        that.onLoad();
+	        });
+        } else if (retData.ret == 0){
           logic(retData.data);
-        }else if (retData.ret == '1002'){
-          logic(retData);
         } else{
           wx.showToast({
             title: retData.msg,

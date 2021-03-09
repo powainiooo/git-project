@@ -1,4 +1,4 @@
-<style>
+<style scoped>
 .c-info-card { margin: 42px 28px 32px 28px; padding: 30px 40px 40px 40px; box-shadow: 0 10px 20px 10px rgba(0, 0, 0, 0.05); border-radius: 15px; background-color: #ffffff; }
 .c-info-card h3 { font-size: 22px; color: #A6A5A5; line-height: 1; margin-bottom: 20px; }
 .c-info-card-items { margin-bottom: 40px; display: flex; }
@@ -6,7 +6,6 @@
 .c-info-card-items li:before, .c-info-card-items li:after { content: ''; width: 10px; height: 10px; background-color: #D1CECE; border-radius: 50%; position: absolute; bottom: -5px;}
 .c-info-card-items li:before { left: -5px; }
 .c-info-card-items li:after { right: -5px; }
-.c-info-card-items li:last-child:before { width: 0; height: 0;}
 .c-info-card .btn-round { width: 138px; margin: 0 auto 40px auto; }
 </style>
 

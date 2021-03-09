@@ -35,7 +35,7 @@
    <div class="canvas-frame">
       <canvas
          canvas-id="myCanvas"
-         style="width: 750px; height: 760px; transform-origin: 0 0; transform: scale(.5)"
+         style="width: 750px; height: 770px; transform-origin: 0 0; transform: scale(.5)"
       />
    </div>
 </div>
@@ -88,13 +88,13 @@ export default {
          // 英文名
          ctx.font = '34px HelveThin'
          ctx.fillStyle = '#3E311F'
-         ctx.fillText(this.itemData.titleEn, 368, 270)
+         ctx.fillText(this.itemData.titleEn, 368, 305)
          ctx.draw(true)
 
          // 中文名
          ctx.font = '30px'
          ctx.fillStyle = '#3E311F'
-         ctx.fillText(this.itemData.title, 368, 320)
+         ctx.fillText(this.itemData.title, 368, 355)
          ctx.draw(true)
 
          // 价格
@@ -118,9 +118,9 @@ export default {
          // 说明文字
          ctx.font = '24px'
          ctx.fillStyle = '#9B9A9A'
-         ctx.fillText('扫码购买', 210, 620)
-         ctx.fillText('掃引符号購入', 210, 650)
-         ctx.fillText('Scan the code to buy', 210, 680)
+         ctx.fillText('扫码购买', 210, 640)
+         ctx.fillText('掃引符号購入', 210, 670)
+         ctx.fillText('Scan the code to buy', 210, 700)
          ctx.draw(true)
          console.log('drawPost2')
 
@@ -131,6 +131,7 @@ export default {
             src: 'https://hair.designbyho.com/static/images/logo.png',
             success: (res) => {
                ctx.drawImage(res.path, 68, 42, 74, 100)
+               console.log('drawImage logo')
                this.loadOver(ctx)
             }
          })
@@ -139,6 +140,7 @@ export default {
             src: this.itemData.img,
             success: (res) => {
                ctx.drawImage(res.path, 58, 210, 278, 278)
+               console.log('drawImage 产品图')
                this.loadOver(ctx)
             }
          })
@@ -146,7 +148,8 @@ export default {
          wx.getImageInfo({
             src: this.itemData.qrcode,
             success: (res) => {
-               ctx.drawImage(res.path, 58, 588, 130, 130)
+               ctx.drawImage(res.path, 58, 600, 130, 130)
+               console.log('drawImage 二维码')
                this.loadOver(ctx)
             }
          })
@@ -192,6 +195,7 @@ export default {
       loadOver (ctx) {
          this.loadIndex += 1
          const self = this
+         console.log('loadOver', this.loadIndex)
          if (this.loadIndex === 3) {
             ctx.draw(true, () => {
                console.log('draw over')

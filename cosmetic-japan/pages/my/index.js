@@ -114,8 +114,7 @@ Page({
 		})
 	},
 	// 关闭代购店铺
-	changeStore () {
-		console.log('closeCompany', e)
+	changeStore (e) {
 		const { mid } = e.currentTarget.dataset
 		app.setMid(mid)
 		wx.redirectTo({

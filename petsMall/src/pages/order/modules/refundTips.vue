@@ -1,9 +1,9 @@
 <style>
-.c-refund-tips .btn-round { width: 345px;  margin-top: 105px; margin-left: 66px; }
+.c-refund-tips .btn-round { width: 345px;  margin-top: 105px; margin-left: 66px; font-size: 24px; }
 </style>
 
 <template>
-<div class="c-refund-tips modal-hints" :style="{top: show ? 0 : '100vh'}">
+<div class="c-refund-tips modal-hints" :style="{top: show ? 0 : '100vh'}" @touchmove.stop="tmove">
    <div class="frame1">
       <div>
          <div class="tips-content">
@@ -30,6 +30,7 @@ export default {
     }
   },
   methods: {
+     tmove () {},
      closeDetail () {
         this.show = false
         this.$emit('close')

@@ -87,7 +87,7 @@ Page({
 			xl: this.data.xl_gd,
 			jg: this.data.jg_gd,
 			min_price: this.data.minPrice,
-			max_price: this.data.max_price,
+			max_price: this.data.maxPrice,
 			brand_id: this.data.brandId,
 			cid: this.data.id,
 			parent_id: this.data.cateId,

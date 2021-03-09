@@ -60,7 +60,7 @@
    flex-wrap: wrap;
 }
 .brands-list view {
-   width: 158rpx;
+   width: 157rpx;
    height: 80rpx;
    background: #FFFFFF;
    border: 1px solid #ECEEF0;

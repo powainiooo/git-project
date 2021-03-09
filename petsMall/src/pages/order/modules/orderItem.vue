@@ -1,6 +1,6 @@
 <style>
 .c-order-item { overflow: hidden; padding-top: 20px; position: relative; }
-.c-order-item-frame { width: 660px; margin: 0 auto; padding: 0 46px 16px 46px; box-sizing: border-box; background-color: #ffffff; box-shadow: 0 10px 20px 10px rgba(0, 0, 0, 0.05); border-radius: 15px 15px 0 0; position: relative; overflow: hidden; }
+.c-order-item-frame { width: 660px; margin: 0 auto; padding: 0 46px 16px 46px; box-sizing: border-box; background-color: #ffffff; box-shadow: 0 10px 20px 10px rgba(0, 0, 0, 0.05); border-radius: 15px 15px 0 0; position: relative; overflow: hidden; z-index: 10; }
 .c-order-item-frame .date { height: 110px; display: flex; align-items: center; font-size: 66px; color: var(--textColor2); text-shadow: var(--textShadow); font-family: HelveThin; margin-bottom: 16px; }
 .c-order-item-frame h3 { font-size: 30px; color: var(--textColor2); text-shadow: var(--textShadow); line-height: 45px; }
 .c-order-item-frame h3.en { font-size: 34px; line-height: 40px; margin-bottom: 8px; font-family: HelveThin; }

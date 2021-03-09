@@ -1,202 +1,188 @@
 <!--pages/detail/index.wxml-->
 <view class='container {{Canshu || Select || ScHb?"oh":""}}'>
-  <view class='slide' hidden='{{slideBox}}'>
-    <swiper autoplay="true"
-            indicator-dots
-            indicator-color="rgba(35, 36, 41, 0.5)"
-            current="0"
-            circular="true"
-            bindchange="sourceChange">
-      <block wx:for="{{goods_info.banner}}" wx:key="index">
-        <swiper-item wx:if="{{item != ''}}">
-          <image wx:if="{{item}}" src="{{imgUrl + item}}" data-src="{{imgUrl + item}}" class="slide-image" bindtap='bannerTap' />
-        </swiper-item>
-      </block>
-    </swiper>
-  </view>
-  <!-- 正常显示 -->
-  <view>
-    <view class='product bt1'>
-      <view class='name'>{{goods_info.goods_name}}</view>
-      <view class='LyText'>{{goods_info.title}}</view>
-      <view class='info between'>
-        <view class='price'>￥
-          <span>{{returnData.price}}</span>
-        </view>
-         <view class='yongjin' wx:if="{{!goods_info.price_kd || goods_info.price_kd==0}}">包邮</view>
-        <block wx:if="{{returnData.price_shui>0}}">
-          <view class='yongjin'>税费￥{{returnData.price_shui / 100}}</view>
-        </block>
-         <button class="btn-share" open-type="share"><image src='/images/fenxiang.png' mode="widthFix"></image></button>
+   <view class='slide' hidden='{{slideBox}}'>
+      <swiper autoplay="true"
+              indicator-dots
+              indicator-color="rgba(35, 36, 41, 0.5)"
+              current="0"
+              circular="true"
+              bindchange="sourceChange">
+         <block wx:for="{{goods_info.banner}}" wx:key="index">
+            <swiper-item wx:if="{{item != ''}}">
+               <image wx:if="{{item}}" src="{{imgUrl + item}}" data-src="{{imgUrl + item}}" class="slide-image" bindtap='bannerTap' />
+            </swiper-item>
+         </block>
+      </swiper>
+   </view>
+   <!-- 正常显示 -->
+   <view>
+      <view class='product bt1'>
+         <view class='name'>{{goods_info.goods_name}}</view>
+         <view class='LyText'>{{goods_info.title}}</view>
+         <view class='info between'>
+            <view class='price'>￥
+               <span>{{returnData.price}}</span>
+            </view>
+            <view class='yongjin' wx:if="{{!goods_info.price_kd || goods_info.price_kd==0}}">包邮</view>
+            <block wx:if="{{returnData.price_shui>0}}">
+               <view class='yongjin'>税费￥{{returnData.price_shui / 100}}</view>
+            </block>
+            <button class="btn-share" open-type="share"><image src='/images/fenxiang.png' mode="widthFix"></image></button>
+         </view>
       </view>
-    </view>
-    <navigator class='UserPl between' url='../userPl/index?id={{goods_info.id}}'>
-      <view class='lInfo'>用户评价</view>
-      <view class='rInfo'>
-        <span wx:if="{{goods_info.pj_nums>0}}">{{goods_info.pj_nums>1000?goods_info.pj_nums+'+':goods_info.pj_nums}}</span>
-        <image src='/images/ico_jt.png'></image>
-      </view>
-    </navigator>
-    <navigator class='yhqList between bb10' url='../CouponList/index'>
-      <view class='lInfo start'>
-        <image src='/images/ico_yhq.png'></image>
-        <block wx:for="{{yhq}}" wx:key="index">
-          <span>满{{item.tj}}减{{item.miane}}</span>
-        </block>
-      </view>
-      <view class='rInfo start'>
-        <image src='/images/ico_jt.png'></image>
-      </view>
-    </navigator>
-    <view class='otherInfo bb10'>
-      <view class='prd'>
-        <view class='item'>
-          <image src='/images/ico_yes.png'></image>海外直邮</view>
-        <view class='item'>
-          <image src='/images/ico_yes.png'></image>正品保障</view>
-      </view>
-      <view wx:if="{{yhq_status==1}}">
-      <view class='fzTj' wx:if="{{goods_info.coupon_discount==0}}">本商品不支持优惠券抵扣</view>
-      <view class='fzTj' wx:else>本商品支持优惠券抵扣</view>
-       </view>
-        <view wx:if="{{jf_status==1}}">
-      <view class='fzTj' wx:if="{{goods_info.score_discount==0}}">本商品不支持积分抵扣</view>
-      <view class='fzTj' wx:else>本商品支持积分抵扣</view>
-      </view>
-    </view>
-    <view class='canshu'>
-      <!--view class='item bb1' bindtap='SelcetTap'>
-        <view class='label'>
-          <span>已选</span>{{yixuan && yixuan!=""?yixuan:"选择规格"}}</view>
-        <image src='/images/ico_jt.png'></image>
-      </view-->
-         <view wx:if="{{jf_status==1}}">
-      <view class='item bb1'>
-        <view class='label'>
-          <span>赠送</span>{{goods_info.score_ys}}积分</view>
-      </view>
-       </view>
-    </view>
-    <view class='canshu'>
-       <navigator class='UserPl between' url='#' bindtap='CanshuTap'>
-          <view class='lInfo'>产品参数</view>
-          <view class='rInfo'>
-             <image src='/images/ico_jt.png'></image>
-          </view>
-       </navigator>
-       <navigator class='UserPl between' url='#' bindtap='shengchengTap'>
-          <view class='lInfo'>生成海报</view>
-          <view class='rInfo'>
-             <image src='/images/ico_jt.png'></image>
-          </view>
-       </navigator>
-    </view>
-
-  </view>
-
-  <view class='DetailContent pb120'>
-    <view style="font-size: 40rpx; color: #FF0000; text-align: center; margin: 60rpx 0;">产品详情介绍</view>
-    <rich-text nodes="{{goods_desc}}"></rich-text>
-  </view>
-  <view class='bottomTool between'>
-    <view class='l start'>
-      <navigator open-type='reLaunch' url="/pages/index/index" hover-class='none' class='gow'>
-        <image src='/images/ico_7.png'></image>
+      <navigator class='UserPl between' url='../userPl/index?score={{score}}&rate={{rate}}'>
+         <view class='lInfo'>用户评价</view>
+         <view class='rInfo'>
+            <span wx:if="{{goods_info.pj_nums>0}}">{{goods_info.pj_nums>1000?goods_info.pj_nums+'+':goods_info.pj_nums}}</span>
+            <image src='/images/ico_jt.png'></image>
+         </view>
       </navigator>
-      <navigator open-type='reLaunch' url="/pages/cart/index" hover-class='none' class='gow relative'>
-        <image src='/images/ico_8.png'></image>
-        <span wx:if="{{nums != 0 || nums != ''}}">{{nums}}</span>
+      <navigator class='yhqList between bb10' url='../CouponList/index'>
+         <view class='lInfo start'>
+            <image src='/images/ico_yhq.png'></image>
+            <block wx:for="{{yhq}}" wx:key="index">
+               <span>满{{item.tj}}减{{item.miane}}</span>
+            </block>
+         </view>
+         <view class='rInfo start'>
+            <image src='/images/ico_jt.png'></image>
+         </view>
       </navigator>
-      <button class='gow' bindtap="openContact">
-        <image src='/images/weixin1.png' mode="widthFix"></image>
-      </button>
-    </view>
-    <view class='r addCartBtn' bindtap='SelcetTap'>立刻购买</view>
-  </view>
-  <view class='mask' bindtap='maskTap' hidden='{{!Canshu && !Select && !ScHb}}'>
-    <view class='Popup fff'>
-      <!--选择规格  -->
-      <view class='SelectLayer' catchtap="handleTap2" hidden='{{!Select}}'>
-        <view class='close end'>
-          <image src='/images/ico_xx.png' bindtap='isCloseTap'></image>
-        </view>
-        <view class='con'>
-          <view class='pro bb1 start'>
-            <view class='cover'>
-              <image wx:if="{{returnData.cover == ''?goods_info.cover:returnData.cover}}" src="{{www}}{{returnData.cover == ''?goods_info.cover:returnData.cover}}"></image>
+      <view class='otherInfo bb10' wx:if="{{bgList.length > 0}}">
+         <view class='prd'>
+            <view class='item' wx:for="{{bgList}}">
+               <image src='/images/ico_yes.png'></image>{{item}}
             </view>
-            <view class='info'>
-              <view class='name'>{{goods_info.goods_name}}</view>
-              <view class='price'>价格：￥
-                <span>{{returnData.price}}</span>
-              </view>
-              <view class='code'>库存：{{returnData.num}}</view>
-              <view class='productSelect'>已选{{yixuan}}</view>
-            </view>
-          </view>
-          <view class='select' wx:for="{{all_attrs}}" wx:key="index">
-            <view class='titleBox'>
-              <view class='title'>{{item.name}}</view>
-            </view>
-            <view class='guige'>
-              <span class="{{ids[index] == idx?'active':''}} {{its.bool == 0?'nokucun':''}}" wx:for="{{item.sub}}" wx:key="index" wx:for-item="its" wx:for-index="idx" data-index="{{index}}" data-idx="{{idx}}" bindtap="selectGGTap" wx:if="{{its.bool>0}}">{{its.name}}</span>
-            </view>
-          </view>
-          <view class='select'>
-            <view class='titleBox between'>
-              <view class='title'>购买数量</view>
-              <view class='AETool center'>
-                <view class='an less' data-t="0" bindtap='slTap'>-</view>
-                <view class='num'>{{sl}}</view>
-                <view class='an add active' data-t="1" bindtap='slTap'>+</view>
-              </view>
-            </view>
-          </view>
-        </view>
-        <view class='btnBox between'>
-          <view class="toolBtn addCart" bindtap="addCartTap">加入购物车</view>
-          <view class='toolBtn ljShop' bindtap='ljShop'>确定</view>
-        </view>
+         </view>
       </view>
-      <!--查看参数  -->
-      <view class='lookLayer' catchtap="handleTap2" hidden='{{!Canshu}}'>
-        <view class='SelectLayer'>
-          <view class='close end'>
-            <image src='/images/ico_xx.png' bindtap='isCloseTap'></image>
-          </view>
-          <view class='cont'>
-             <view class='pro bb1 start'>
-                <view class='cover'>
-                   <image wx:if="{{returnData.cover == ''?goods_info.cover:returnData.cover}}" src="{{www}}{{returnData.cover == ''?goods_info.cover:returnData.cover}}"></image>
-                </view>
-                <view class='info'>
-                   <view class='name'>{{goods_info.goods_name}}</view>
-                   <view class='price'>价格：￥
-                      <span>{{returnData.price}}</span>
-                   </view>
-                   <view class='code'>库存：{{returnData.num}}</view>
-                   <view class='productSelect'>已选{{yixuan}}</view>
-                </view>
-             </view>
-            <view class='lookCanshu'>
-              <view class='title'>产品参数</view>
-              <view class='ItemBox'>
-                <view class='item' wx:for="{{goods_info.cs_val_arr}}" wx:key="index">
-                  <span>{{goods_info.cs_name_arr[index]}}：</span>{{item}}</view>
-              </view>
+      <view class='canshu'>
+         <navigator class='UserPl between' url='#' bindtap='CanshuTap'>
+            <view class='lInfo'>产品参数</view>
+            <view class='rInfo'>
+               <image src='/images/ico_jt.png'></image>
             </view>
-          </view>
-        </view>
+         </navigator>
+         <navigator class='UserPl between' url='#' bindtap='shengchengTap'>
+            <view class='lInfo'>生成海报</view>
+            <view class='rInfo'>
+               <image src='/images/ico_jt.png'></image>
+            </view>
+         </navigator>
       </view>
-      <!-- 生成海报 -->
-      <view class='ScHbBox' hidden='{{!ScHb}}'>
-        <image class='CoverHb' wx:if="{{hbImg}}" src='{{www}}{{hbImg}}'></image>
-        <view class='x' bindtap='ScHbXTap'>
-          <image src='/images/xx.png'></image>
-        </view>
+
+   </view>
+
+   <view class='DetailContent pb120'>
+      <view style="font-size: 40rpx; color: #FF0000; text-align: center; margin: 60rpx 0;">产品详情介绍</view>
+      <rich-text nodes="{{goods_desc}}"></rich-text>
+   </view>
+   <view class='bottomTool between'>
+      <view class='l start'>
+         <navigator open-type='reLaunch' url="/pages/index/index" hover-class='none' class='gow'>
+            <image src='/images/ico_7.png'></image>
+         </navigator>
+         <navigator open-type='reLaunch' url="/pages/cart/index" hover-class='none' class='gow relative'>
+            <image src='/images/ico_8.png'></image>
+            <span wx:if="{{nums != 0 || nums != ''}}">{{nums}}</span>
+         </navigator>
+         <button class='gow' bindtap="openContact">
+            <image src='/images/weixin1.png' mode="widthFix"></image>
+         </button>
       </view>
-    </view>
-  </view>
+      <view class='r addCartBtn' bindtap='SelcetTap'>立刻购买</view>
+   </view>
+   <view class='mask' bindtap='maskTap' hidden='{{!Canshu && !Select && !ScHb}}'>
+      <view class='Popup fff'>
+         <!--选择规格  -->
+         <view class='SelectLayer' catchtap="handleTap2" hidden='{{!Select}}'>
+            <view class='close end'>
+               <image src='/images/ico_xx.png' bindtap='isCloseTap'></image>
+            </view>
+            <view class='con'>
+               <view class='pro bb1 start'>
+                  <view class='cover'>
+                     <image wx:if="{{returnData.cover == ''?goods_info.cover:returnData.cover}}" src="{{www}}{{returnData.cover == ''?goods_info.cover:returnData.cover}}"></image>
+                  </view>
+                  <view class='info'>
+                     <view class='name'>{{goods_info.goods_name}}</view>
+                     <view class='price'>价格：￥
+                        <span>{{returnData.price}}</span>
+                     </view>
+                     <view class='code'>库存：{{returnData.num}}</view>
+                     <view class='productSelect'>已选：{{yixuan}}</view>
+                  </view>
+               </view>
+               <view class='select' wx:for="{{all_attrs}}" wx:key="index">
+                  <view class='titleBox'>
+                     <view class='title'>{{item.name}}</view>
+                  </view>
+                  <view class='guige'>
+              <span class="{{ids[index] == its.id?'active':''}} {{its.bool == 0?'nokucun':''}}"
+                    wx:for="{{item.sub}}"
+                    wx:key="index"
+                    wx:for-item="its"
+                    wx:for-index="idx"
+                    data-index="{{index}}"
+                    data-idx="{{idx}}"
+                    bindtap="selectGGTap"
+                    wx:if="{{its.bool>0}}">{{its.name}}</span>
+                  </view>
+               </view>
+               <view class='select'>
+                  <view class='titleBox between'>
+                     <view class='title'>购买数量</view>
+                     <view class='AETool center'>
+                        <view class='an less' data-t="0" bindtap='slTap'>-</view>
+                        <view class='num'>{{sl}}</view>
+                        <view class='an add active' data-t="1" bindtap='slTap'>+</view>
+                     </view>
+                  </view>
+               </view>
+            </view>
+            <view class='btnBox between'>
+               <view class="toolBtn addCart" bindtap="addCartTap">加入购物车</view>
+               <view class='toolBtn ljShop' bindtap='ljShop'>确定</view>
+            </view>
+         </view>
+         <!--查看参数  -->
+         <view class='lookLayer' catchtap="handleTap2" hidden='{{!Canshu}}'>
+            <view class='SelectLayer'>
+               <view class='close end'>
+                  <image src='/images/ico_xx.png' bindtap='isCloseTap'></image>
+               </view>
+               <view class='cont'>
+                  <view class='pro bb1 start'>
+                     <view class='cover'>
+                        <image wx:if="{{returnData.cover == ''?goods_info.cover:returnData.cover}}" src="{{www}}{{returnData.cover == ''?goods_info.cover:returnData.cover}}"></image>
+                     </view>
+                     <view class='info'>
+                        <view class='name'>{{goods_info.goods_name}}</view>
+                        <view class='price'>价格：￥
+                           <span>{{returnData.price}}</span>
+                        </view>
+                        <view class='code'>库存：{{returnData.num}}</view>
+                        <view class='productSelect'>已选：{{yixuan}}</view>
+                     </view>
+                  </view>
+                  <view class='lookCanshu'>
+                     <view class='title'>产品参数</view>
+                     <view class='ItemBox'>
+                        <view class='item' wx:for="{{goods_info.cs_val_arr}}" wx:key="index">
+                           <span>{{goods_info.cs_name_arr[index]}}：</span>{{item}}</view>
+                     </view>
+                  </view>
+               </view>
+            </view>
+         </view>
+         <!-- 生成海报 -->
+         <view class='ScHbBox' hidden='{{!ScHb}}'>
+            <image class='CoverHb' wx:if="{{hbImg}}" src='{{www}}{{hbImg}}'></image>
+            <view class='x' bindtap='ScHbXTap'>
+               <image src='/images/xx.png'></image>
+            </view>
+         </view>
+      </view>
+   </view>
 </view>
 
 <view class="contact-container" wx:if="{{showContact}}" bindtap="closeContact">
@@ -211,5 +197,5 @@
 
 <import src="../template/template.wxml" />
 <block wx:if="{{isShowGetUser}}">
-  <template is="getUserInfo"></template>
+   <template is="getUserInfo"></template>
 </block>

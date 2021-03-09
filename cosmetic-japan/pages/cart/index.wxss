@@ -26,3 +26,16 @@
    border-radius: 30rpx;
    margin-right: 34rpx;
 }
+.cart-noReturn {
+   margin-top: 20rpx;
+   padding: 106rpx 0 368rpx 0;
+}
+.cart-noReturn .img image {
+   width: 285rpx;
+   margin-bottom: 68rpx;
+}
+.cart-noReturn navigator {
+   color: #f04647;
+   font-size: 28rpx;
+   margin-top: 40rpx;
+}

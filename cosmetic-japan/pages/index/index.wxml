@@ -31,7 +31,9 @@
          </view>
          <view class="brands-list">
             <view wx:for="{{brandList}}" wx:key="index">
-               <image src="{{imgUrl}}{{item.cover}}"></image>
+               <navigator url="../product/index?brandId={{item.id}}">
+                  <image src="{{imgUrl}}{{item.cover}}"></image>
+               </navigator>
             </view>
          </view>
       </view>
@@ -59,19 +61,29 @@
    <view class="section">
       <!-- 中广告图信息 -->
       <view class="index-type-list1">
-         <navigator wx:for="{{adList1}}"
-                    wx:key="index"
-                    url="../detail/index?id={{item.id}}&activity_type=0&hd_id=0">
-            <image src='{{imgUrl}}{{item.img}}'></image>
-         </navigator>
+         <view wx:for="{{adList1}}"
+               wx:key="index">
+            <image wx:if="{{item.linktype==1}}" src='{{imgUrl}}{{item.img}}'></image>
+            <navigator wx:elif="{{item.linktype==2}}" url="../detail/index?id={{item.link}}&activity_type=0&hd_id=0">
+               <image src='{{imgUrl}}{{item.img}}'></image>
+            </navigator>
+            <navigator wx:elif="{{item.linktype==3}}" url="{{item.link}}">
+               <image src='{{imgUrl}}{{item.img}}'></image>
+            </navigator>
+         </view>
       </view>
       <!-- 小广告图信息 -->
       <view class="index-type-list2 between">
-         <navigator wx:for="{{adList2}}"
-                    wx:key="index"
-                    url="../detail/index?id={{item.id}}&activity_type=0&hd_id=0">
-            <image src='{{imgUrl}}{{item.img}}'></image>
-         </navigator>
+         <view wx:for="{{adList2}}"
+               wx:key="index">
+            <image wx:if="{{item.linktype==1}}" src='{{imgUrl}}{{item.img}}'></image>
+            <navigator wx:elif="{{item.linktype==2}}" url="../detail/index?id={{item.link}}&activity_type=0&hd_id=0">
+               <image src='{{imgUrl}}{{item.img}}'></image>
+            </navigator>
+            <navigator wx:elif="{{item.linktype==3}}" url="{{item.link}}">
+               <image src='{{imgUrl}}{{item.img}}'></image>
+            </navigator>
+         </view>
       </view>
    </view>
 </view>

@@ -11,51 +11,19 @@ Page({
   data: {
     page:1,
     noReturn: false,
-    isCN:wx.getStorageSync('isCN')
+    isCN:wx.getStorageSync('isCN'),
+	  score: 0,
+	  rate: 0
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    if (options && !!options.id){
-      var page = this.data.page;
-      let www = { method: 'pj_list', canshu: '&page=' + page};
-      let huidiao = (ret) => {
-        var list = ret.pj_list;
-        var starNum = ret.hp_percent;
-        if (ret.hp_percent == '暂无评价'){
-          var starNum = 0;
-        }else{
-          var starNum = starNum.slice(0, starNum.length - 1);
-          var starNum = parseInt(starNum / 20);
-        }
-        if(list.length > 0){
-          this.setData({
-            data:ret,
-            list: list,
-            id: options.id,
-            starNum: starNum,
-            noReturn: false,
-            isCN: wx.getStorageSync('isCN')
-          })
-        }else{
-          this.setData({
-            data: ret,
-            list: list,
-            id: options.id,
-            starNum: starNum,
-            noReturn: true,
-            isCN: wx.getStorageSync('isCN')
-          })
-        }
-      }
-      api.post(this, www, { id: options.id}, huidiao);
-    }else{
-      wx.navigateBack({
-        delta:1
-      })
-    }
+    this.setData({
+	    score: options.score ? Number(options.score) : 0,
+	    rate: options.rate ? Number(options.rate) : 0
+    })
   },
 
   /**
@@ -97,26 +65,5 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    var page = this.data.page + 1;
-    let www = { method: 'pj_list', canshu: '&page=' + page};
-    let huidiao = (ret) => {
-      console.log(ret);
-      var list = this.data.list;
-      if (ret.pj_list.length > 0){
-        list.concat(ret.pj_list);
-        this.setData({
-          data: ret,
-          list:list,
-          page: page + 1,
-          noReturn: false
-        })
-      }else{
-        this.setData({
-          list: list,
-          noReturn:true
-        })
-      }
-    }
-    api.post(this, www, { id: this.data.id }, huidiao);
   }
 })

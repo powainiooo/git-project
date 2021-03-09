@@ -1,6 +1,8 @@
 {
    "pages": [
+      "pages/orderAccount/index",
       "pages/index/index",
+      "pages/detail/index",
       "pages/myCoupon/index",
       "pages/CouponList/index",
       "pages/fenxiaoOrder/index",
@@ -9,12 +11,10 @@
       "pages/sign/index",
       "pages/paySuccess/index",
       "pages/my/index",
-      "pages/detail/index",
       "pages/cart/index",
       "pages/product/index",
       "pages/class/index",
       "pages/serch/index",
-      "pages/orderAccount/index",
       "pages/wuliuDetail/index",
       "pages/shouhouList/index",
       "pages/tuihuan/index",

@@ -3,7 +3,6 @@
   <view class='orderNav'>
     <view class='orderNav_li {{navIndex == 0?"on":""}}' data-num='0' bindtap='bindnav'>全部</view>
     <view class='orderNav_li {{navIndex == 1?"on":""}}' data-num='1' bindtap='bindnav'>待付款</view>
-    <view class='orderNav_li {{navIndex == 21?"on":""}}' data-num='21' bindtap='bindnav'>待分享</view>
     <view class='orderNav_li {{navIndex == 4?"on":""}}' data-num='4' bindtap='bindnav'>待发货</view>
     <view class='orderNav_li {{navIndex == 5?"on":""}}' data-num='5' bindtap='bindnav'>待收货</view>
     <view class='orderNav_li {{navIndex == 7?"on":""}}' data-num='7' bindtap='bindnav'>已完成</view>
@@ -45,11 +44,11 @@
         <navigator url='../wuliuDetail/index?id={{item.id}}' hover-class='none' class='btn1 btn' hidden='{{item.status != 5&&item.status != 7}}' data-id='{{item.id}}'>物流信息</navigator>
         <view class='btn2 btn' hidden='{{item.status != 5}}' data-id='{{item.id}}' bindtap='bindConfirm'>确认收货</view>
         <button class='btn2 btn' data-id='{{item.id}}' data-url="{{imgUrl}}{{item.child[0].goods_cover}}" data-title="【仅剩{{item.remain_nums}}个名额】{{item.child[0].goods_name}}" open-type='share' id='shareBtn' wx:if='{{item.status == 21 && item.group_buy_success == 0}}'>邀请好友拼单</button>
-        <navigator class='btn2 btn' url='../detail/index?id={{item.hd_id}}&hd_id={{item.hd_id}}&activity_type={{item.activity_type}}' hover-class='none' wx:if='{{item.status == 21 && item.group_buy_success == -1}}'>再次发起</navigator>  
+        <navigator class='btn2 btn' url='../detail/index?id={{item.hd_id}}&hd_id={{item.hd_id}}&activity_type={{item.activity_type}}' hover-class='none' wx:if='{{item.status == 21 && item.group_buy_success == -1}}'>再次发起</navigator>
         <view class='btn1 btn' hidden='{{item.status != 1 && (item.status != 21 || item.group_buy_success == -1)}}' data-id='{{item.id}}' bindtap='bindCancel'>取消订单</view>
         <navigator url='../tuihuan/index?id=0&oid={{item.id}}&type=1' hover-class='none' wx:if="{{item.status==4 || item.status==5}}" class='btn2 btn'>申请售后</navigator>
         <!--view class='btn1 btn' hidden='{{item.status != 4}}' data-id='{{item.id}}' bindtap='shenqingtuikuanTap'>申请退款</view-->
-        
+
         <view class='btn1 btn' hidden='{{item.status != 6&&item.status != 7&&(item.status != 21 || item.group_buy_success == 0)}}' data-id='{{item.id}}' bindtap='bindDel'>删除订单</view>
         <navigator class='btn2 btn' hidden='{{item.status != 7}}' url='../pingjia/index?id={{item.id}}&img={{item.child[0].goods_cover}}&content={{item.pj_info.content}}&pj_xx={{item.pj_info.pj_xx}}'>{{json.stringify(item.pj_info)!="[]"?"查看评价":"发布评价"}}</navigator>
         <view class="last-time" wx:if='{{item.status == 21 && item.group_buy_success>=0}}'>

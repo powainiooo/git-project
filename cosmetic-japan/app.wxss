@@ -809,7 +809,7 @@ button:after { border: none; }
 
 .MyHeader .box {
     position: absolute;
-    top: 30rpx;
+    top: 100rpx;
     left: 50%;
     transform: translate(-50%, 0);
     text-align: center;
@@ -2985,6 +2985,7 @@ button:after { border: none; }
    background-color: #ffffff;
    box-sizing: border-box;
    padding-top: 80rpx;
+   overflow-y: auto;
 }
 .store-container .title {
    margin-bottom: 40rpx;
@@ -3010,6 +3011,7 @@ button:after { border: none; }
    color: #ffffff;
    text-align: center;
    margin: 10rpx;
+   line-height: 1.2;
 }
 .store-container .goods-list .goods-item:nth-child(2n) {
    margin-left: 42rpx;

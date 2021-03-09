@@ -1,6 +1,6 @@
 <!--pages/cart/class.wxml-->
-<view class='container f3'>
-   <view class="cart-header between">
+<view class='container f3' style="overflow: hidden;">
+   <view class="cart-header between" hidden='{{isNoReturn}}'>
       <view class="start">
          <image wx:if="{{!selectAll}}" src='/images/ico_n.png' bindtap='selectAllTap'></image>
          <image wx:else src='/images/ico_y.png' bindtap='selectAllTap'></image>
@@ -46,9 +46,10 @@
       <view class='btn' bindtap='ljShopTap'>立即购买</view>
     </view>
   </view>
-  <view class='noReturn' style='padding-top: 35%;' hidden='{{!isNoReturn}}'>
-    <view class='img'><image src='/images/ico_cart.png'></image></view>
+  <view class='noReturn cart-noReturn fff' hidden='{{!isNoReturn}}'>
+    <view class='img'><image src='/images/ico_cart.png' mode="widthFix"></image></view>
     <view class='text'>看，购物车是空的，但是有圆圆方方的东西在飘~</view>
+     <navigator url="/pages/index/index" open-type="redirect">去逛逛~~</navigator>
   </view>
 </view>
 

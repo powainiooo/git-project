@@ -42,9 +42,8 @@
       <view class="filter-price">
          <input type='number' placeholder='最低价' class="item" value="{{minPrice}}" data-key="minPrice" bindinput='inputPrice'></input>
          <span>—</span>
-         <input type='number' placeholder='最低价' class="item" value="{{maxPrice}}" data-key="maxPrice" bindinput='inputPrice'></input>
+         <input type='number' placeholder='最高价' class="item" value="{{maxPrice}}" data-key="maxPrice" bindinput='inputPrice'></input>
       </view>
-      {{minPrice}}
       <view class="filter-title">品牌<image src='/images/icon_btm2.png'></image></view>
       <view class="filter-list">
          <view wx:for="{{brandList}}"

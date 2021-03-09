@@ -1,5 +1,5 @@
 <!--pages/my/index.wxml-->
-<view class='container f3'>
+<view class='container f3' style="height: auto">
   <view class='MyHeader'>
     <image src='/images/bg4.png' class='my-bg'></image>
     <view class='box' wx:if="{{hasLogin==1}}">

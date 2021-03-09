@@ -48,6 +48,7 @@
 .filter-price .item {
    width: 260rpx;
    line-height: 60rpx;
+   padding: 12rpx 0;
 }
 .filter-price span {
    width: 140rpx;

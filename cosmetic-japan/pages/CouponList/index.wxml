@@ -9,7 +9,7 @@
           <text class='txt'> 满{{item.condition}}可用</text>
         </view>
         <view class='time'>
-          <text>有效时间至{{item.yx_time}}</text>
+          <text>{{item.yx_time_str}}</text>
         </view>
       </view>
     </view>

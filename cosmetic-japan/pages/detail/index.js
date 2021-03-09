@@ -49,6 +49,9 @@ Page({
         _gbc_id:'',//对gbc_id做暂存
         jf_status:'0',
         yhq_status:'0',
+	    score:0,
+	    rate:0,
+	    bgList:[],
     },
 
     bannerTap: function(e) {
@@ -313,23 +316,13 @@ Page({
         ids[index] = idx;
         var yixuan = this.data.yixuan;
         var attrid = this.data.attrid;
-        if (wx.getStorageSync('isCN')) {
-            if (JSON.stringify(yixuan) == '[]') {
-                yixuan.push(all_attrs[index].sub[idx].name);
-                attrid.push(all_attrs[index].sub[idx].id);
-            } else {
-                yixuan[index] = all_attrs[index].sub[idx].name;
-                attrid[index] = all_attrs[index].sub[idx].id;
-            }
-        } else {
-            if (JSON.stringify(yixuan) == '[]') {
-                yixuan.push(all_attrs[index].sub[idx].name_en);
-                attrid.push(all_attrs[index].sub[idx].id);
-            } else {
-                yixuan[index] = all_attrs[index].sub[idx].name_en;
-                attrid[index] = all_attrs[index].sub[idx].id;
-            }
-        }
+	    if (JSON.stringify(yixuan) == '[]') {
+		    yixuan.push(all_attrs[index].sub[idx].name);
+		    attrid.push(all_attrs[index].sub[idx].id);
+	    } else {
+		    yixuan[index] = all_attrs[index].sub[idx].name;
+		    attrid[index] = all_attrs[index].sub[idx].id;
+	    }
         // 请求接口，返回选择规格参数
         var attr = '|' + attrid.join('|') + '|';
         let link = { method: 'get_kucun_info', canshu: '' };
@@ -372,7 +365,7 @@ Page({
             app.getLogin();
             return;
         }
-	    // options.id = '222'
+	    // options.id = '220'
         if (!!options && !!options.id) {
 
             if (options.activity_type) {
@@ -406,30 +399,33 @@ Page({
                 }, [])
                 goods_info.banner = banner;
                 var ids = [];
-                var yixuan = [];
-                var attrid = [];
+                let dfIds = ret.default_gz.attr
+	            dfIds = dfIds.substr(1, dfIds.length - 2)
+                var attrid = dfIds.split('|');
                 var returnData = {};
-                returnData.price = goods_info.price;
+                returnData.price = goods_info.price / 100;
                 returnData.price_kd = goods_info.price_kd;
                 returnData.cover = goods_info.cover;
                 returnData.ms_price = goods_info.hd_price
                 returnData.xsg_price = goods_info.hd_price
                 returnData.price_shui = ret.default_gz.price_shui
+	            returnData.num = ret.default_gz.num;
                 this.setData({
                     returnData: returnData,
                     all_attrs: ret.all_attrs,
                     goods_info: goods_info,
                     goods_desc: newContent,
                     yhq: ret.can_lqyhq,
-                    yixuan: yixuan,
+                    yixuan: ret.default_gz.attr_name.split('+'),
                     attrid: attrid,
-                    ids: ids,
+                    ids: attrid,
 	                lxinfo: ret.lxinfo,
                     isCN: wx.getStorageSync('isCN'),
                     options: options,
                     fxs_id: ret.fxs_id,
-                  jf_status: ret.jf_status,
-                  yhq_status:ret.yhq_status
+                  bgList: ret.goods_info.bg_list,
+	                score: ret.ave_pf,
+	                rate: ret.praise_rate
                 })
               console.log('详情', goods_desc);
                 if (options.activity_type == 2) {

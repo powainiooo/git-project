@@ -1,1 +1,35 @@
 /* pages/userPl/index.wxss */
+.user-comment {
+   margin: 34rpx 30rpx;
+}
+.user-comment .title {
+   font-size: 34rpx;
+   color: #333333;
+   margin-right: 38rpx;
+}
+.user-comment .star-list {
+   display: flex;
+}
+.user-comment .star-list image {
+   width: 39rpx;
+   height: 37rpx;
+   margin-right: 20rpx;
+}
+.user-comment .rate {
+   color: #DE3031;
+   font-size: 34rpx;
+}
+
+.comment-no {
+   flex-direction: column;
+   margin-top: 200rpx;
+}
+.comment-no image {
+   width: 285rpx;
+   height: 246rpx;
+}
+.comment-no view {
+   font-size: 28rpx;
+   color: #999999;
+   margin-top: 40rpx;
+}

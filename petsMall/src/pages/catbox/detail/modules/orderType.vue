@@ -1,7 +1,7 @@
 <style>
 .c-order-type { margin: 50px 42px 60px 42px; }
 .c-order-type h3 { color: #CBBB9B; font-size: 40px; line-height: 60px; font-weight: bold }
-.c-order-type h3.en { font-size: 34px; font-family: Helve; line-height: 40px; font-weight: normal; }
+.c-order-type h3.en { font-size: 34px; font-family: Helve; line-height: 40px; font-weight: normal; margin-bottom: 6px; }
 .c-order-type p { color: #9B9A9A; font-size: 30px; line-height: 45px; }
 .c-order-type ul { margin-top: 26px; display: flex; flex-wrap: wrap; }
 .c-order-type ul li { width: 50%; height: 126px; display: flex; align-items: center; padding-left: 20px; box-sizing: border-box; position: relative; }

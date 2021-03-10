@@ -102,6 +102,13 @@
       </div>
       <div class="values">{{shipPrice}}<span>元</span></div>
    </div>
+
+   <div class="c-goods-price" v-if="totalPrice !== ''">
+      <div>
+         <p>总价</p>
+      </div>
+      <div class="values">{{totalPrice}}<span>元</span></div>
+   </div>
 </div>
 </template>
 
@@ -138,6 +145,10 @@ export default {
          default: () => {}
       },
       shipPrice: {
+         type: [String, Number],
+         default: ''
+      },
+      totalPrice: {
          type: [String, Number],
          default: ''
       }

@@ -1,16 +1,16 @@
 <!--pages/cart/class.wxml-->
 <view class='container f3' style="overflow: hidden;">
    <view class="cart-header between" hidden='{{isNoReturn}}'>
-      <view class="start">
-         <image wx:if="{{!selectAll}}" src='/images/ico_n.png' bindtap='selectAllTap'></image>
-         <image wx:else src='/images/ico_y.png' bindtap='selectAllTap'></image>
+      <view class="start" bindtap='selectAllTap'>
+         <image wx:if="{{!selectAll}}" src='/images/ico_n.png'></image>
+         <image wx:else src='/images/ico_y.png'></image>
          全选
       </view>
       <button class="center" bindtap="delTapMutil">删除</button>
    </view>
   <view class='cartBox' hidden='{{isNoReturn}}'>
     <view class='itemBox fff' wx:for="{{list}}" wx:key="index">
-      <view class='item start' style="left:-{{item.txtStyle}}rpx" data-idx="{{index}}" bindtap='selectTap' bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE">
+      <view class='item start' style="left:-{{item.txtStyle}}rpx" data-idx="{{index}}" bindtap='selectTap'>
         <view class='Status center'>
           <image class='flexs' wx:if='{{item.status==0}}' src='/images/ico_n.png'></image>
           <image class='flexs' wx:else src='/images/ico_y.png'></image>
@@ -46,7 +46,7 @@
           </view>
         </view>
       </view>
-      <view class='del center' style="{{item.txtStyle>0?'width:140rpx;':'width:0;'}}" data-idx="{{index}}" bindtap="delTap"><image src='/images/ico_x.png'></image></view>
+<!--      <view class='del center' style="{{item.txtStyle>0?'width:140rpx;':'width:0;'}}" data-idx="{{index}}" bindtap="delTap"><image src='/images/ico_x.png'></image></view>-->
     </view>
     <view class='CartTool between'>
       <view class='box start'>

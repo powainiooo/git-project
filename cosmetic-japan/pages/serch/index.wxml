@@ -6,7 +6,7 @@
         <image class='ico_search' src='/images/ico_seach.png'></image>
         <input type='text' auto-focus='true' value='{{keyword}}' confirm-type="search" placeholder-class='serchPlace' placeholder='搜索你喜欢的商品' bindconfirm='searchTap' bindinput='inputTap'></input>
       </view>
-       <navigator url="#" style="font-size: 28rpx; margin-left: 28rpx">取消</navigator>
+       <navigator url="#" style="font-size: 28rpx; margin-left: 28rpx" bindtap="searchTap">搜索</navigator>
     </view>
     <view hidden='{{list.length > 0 && isNoReturn}}'>
       <view class='noReturn fff NoSearch' hidden='{{isNoReturn}}' style="border-bottom: 0;">

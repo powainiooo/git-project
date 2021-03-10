@@ -50,7 +50,8 @@
   <view class='noText' hidden='{{!isNoPage}}'><span>————————</span>别扯了，没有更多了~<span>————————</span></view>
 </view>
 
-<view class="filter-container ts" style="left: {{showFilter ? 0 : '100vw'}}">
+<view class="filter-mask" wx:if="{{showFilter}}" bindtap="closeFilter"></view>
+<view class="filter-container ts" style="right: {{showFilter ? 0 : '-100vw'}}">
    <view class="filter-frame">
       <view class="filter-title">价格</view>
       <view class="filter-price">
@@ -75,6 +76,6 @@
    </view>
    <view class="filter-btns">
       <button bindtap="reset">重置</button>
-      <button bindtap="paixu">确定</button>
+      <button bindtap="handleSearch">确定</button>
    </view>
 </view>

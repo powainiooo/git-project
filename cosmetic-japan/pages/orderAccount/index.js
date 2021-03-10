@@ -164,14 +164,14 @@ Page({
       })
       return false;
     }
-    if (real_name == "") {
+    if (real_name == "" && this.data.data.hw_flag != 2) {
       wx.showToast({
         title: '请输入真实姓名',
         icon: 'none'
       })
       return false;
     }
-    if (card_number.length != 18) {
+    if (card_number.length != 18 && this.data.data.hw_flag != 2) {
       wx.showToast({
         title: '请输入18位的身份证号',
         icon: 'none'

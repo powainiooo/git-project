@@ -110,7 +110,10 @@ Page({
 		}
 		api.post(this, link, data, logic);
 	},
-
+	handleSearch () {
+		this.data.list = []
+		this.paixu()
+	},
 	// 充值
 	reset () {
 		this.setData({
@@ -122,9 +125,13 @@ Page({
 			minPrice: '',
 			maxPrice: ''
 		})
-		this.paixu()
+		// this.paixu()
 	},
-
+	closeFilter () {
+		this.setData({
+			showFilter: false
+		})
+	},
 	// 选择品牌
 	selectBrand (e) {
 		this.setData({

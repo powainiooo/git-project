@@ -673,26 +673,18 @@ button:after { border: none; }
     flex-wrap: wrap;
     flex-shrink: 0;
 }
-
+.cartBox .itemBox .amountBox {
+   border: 2rpx solid #D2D2D2;
+   border-radius: 8rpx;
+}
 .cartBox .itemBox .amountBox .less,
 .cartBox .itemBox .amountBox .add {
     width: 54rpx;
     height: 54rpx;
     line-height: 48rpx;
     color: #cccccc;
-    font-size: 40rpx;
+    font-size: 60rpx;
     text-align: center;
-   border: 2rpx solid #D2D2D2;
-}
-
-.cartBox .itemBox .amountBox .less {
-    border-top-left-radius: 8rpx;
-    border-bottom-left-radius: 8rpx;
-}
-
-.cartBox .itemBox .amountBox .add {
-    border-top-right-radius: 8rpx;
-    border-bottom-right-radius: 8rpx;
 }
 
 .cartBox .itemBox .amountBox .sl {
@@ -701,10 +693,10 @@ button:after { border: none; }
    display: flex;
    align-items: center;
    justify-content: center;
-    color: #333333;
+    color: #D2D2D2;
     font-size: 28rpx;
-    border-top: 2rpx solid #D2D2D2;
-    border-bottom: 2rpx solid #D2D2D2;
+    border-left: 2rpx solid #D2D2D2;
+    border-right: 2rpx solid #D2D2D2;
     box-sizing: border-box;
 }
 

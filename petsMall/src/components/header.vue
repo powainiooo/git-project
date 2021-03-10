@@ -83,24 +83,34 @@
          <button open-type="getUserInfo" @getuserinfo="getuserinfo">获取用户信息</button>
       </div>
       <div class="line2">
-         <a href="/pages/order/list/main?type=catbox" hover-class="none" @click="showMenu = false">
+         <a href="/pages/order/list/main?type=catbox"
+            hover-class="hscale"
+            hover-stay-time="10"
+            @click="showMenu = false">
             <p>已订购猫盒</p>
             <div>Booked cat box</div>
          </a>
-         <a href="/pages/order/list/main" hover-class="none" @click="showMenu = false">
+         <a href="/pages/order/list/main"
+            hover-class="hscale"
+            hover-stay-time="10"
+            @click="showMenu = false">
             <p>已订购产品</p>
             <div>Booked products</div>
          </a>
       </div>
       <div class="navs-list">
-         <button hover-class="none"
+         <button
+            hover-class="hscale"
+            hover-stay-time="10"
                  @click="toMyBox"
                  v-if="hasUserInfo">我的自定义猫盒<span>| My cat box</span></button>
          <button open-type="getUserInfo"
                  hover-class="none"
                  @getuserinfo="getuserinfo($event, 'catbox')"
                  v-else>我的自定义猫盒<span>| My cat box</span></button>
-         <button hover-class="none" @click="makePhone">联系客服<span>| Question contact</span></button>
+         <button
+            hover-class="hscale"
+            hover-stay-time="10" @click="makePhone">联系客服<span>| Question contact</span></button>
       </div>
    </div>
 </div>

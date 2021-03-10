@@ -10,7 +10,10 @@
             <img src="/static/images/order/tips.png" mode="widthFix" />
             <p><text>如有特殊情况需退款，请拨打以下电话告知客服获取退款许可，其他疑问也可拨打以下电话或添加客服微信（手机同号）。</text></p>
          </div>
-         <button class="btn-round" @click="makePhone">{{phone}}</button>
+         <button class="btn-round"
+                 @click="makePhone"
+                 hover-class="hscale"
+                 hover-stay-time="10">{{phone}}</button>
       </div>
    </div>
    <div class="frame2">

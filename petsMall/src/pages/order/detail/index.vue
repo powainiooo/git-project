@@ -37,13 +37,16 @@ page { background-color: #F3F2F1; }
       </div>
 
       <div style="position: relative; margin-top: -42rpx;">
-         <button class="btn-round btn-call" @click="$refs.refund.show = true">退款&联系</button>
+         <button class="btn-round btn-call" @click="$refs.refund.show = true"
+                 hover-class="hscale"
+                 hover-stay-time="10">退款&联系</button>
          <c-goods-list
             :source="source"
             :title="title"
             :titleEn="titleEn"
             :list="goodsList"
             :recommendList="recList"
+            :totalPrice="totalPrice"
             onlyList />
       </div>
    </div>
@@ -81,6 +84,7 @@ export default {
          formData: {},
          goodsList: [],
          dates: [],
+         totalPrice: '',
          statusHash: {
             '1': '', // 待付款
             '2': '', // 申请退款
@@ -99,6 +103,7 @@ export default {
             order_num: this.orderNum
          }).then(res => {
             this.detailData = res.data
+            this.totalPrice = res.data.order_amount
             this.formData = {
                name: res.data.name,
                mobile: res.data.mobile,
@@ -118,6 +123,7 @@ export default {
             order_num: this.orderNum
          }).then(res => {
             this.detailData = res.data
+            this.totalPrice = res.data.order_amount
             this.formData = {
                name: res.data.name,
                mobile: res.data.mobile,

@@ -66,7 +66,7 @@
       <image src="/images/ico_10.png"></image>
       <view class="title">如有任何疑问请联系客服</view>
       <view class="infos">客服手机号：{{lxinfo.phone}}</view>
-      <view class="infos">客服微信好：{{lxinfo.wx_id}}</view>
+      <view class="infos">客服微信号：{{lxinfo.wx_id}}</view>
       <view class="infos">客服邮箱：{{lxinfo.email}}</view>
    </view>
 </view>

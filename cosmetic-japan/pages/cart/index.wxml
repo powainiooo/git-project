@@ -16,7 +16,20 @@
           <image class='flexs' wx:else src='/images/ico_y.png'></image>
         </view>
         <view class='products start'>
-          <image src='{{imgUrl}}{{item.cover}}'></image>
+<!--          <image src='{{imgUrl}}{{item.cover}}'></image>-->
+           <view class="cart-goods-item">
+              <view class="goods-item">
+                 <navigator url='#'>
+                    <image src="{{imgUrl}}{{item.cover}}" class="img"></image>
+                    <image src="/images/f3.png" class="frame"></image>
+                    <view class="hint">官方正品 假一赔十</view>
+                    <image src="/images/f1.png" class="price-bg" mode="widthFix"></image>
+                    <view class="price"><text>￥</text>{{item.price / 100}}</view>
+                    <image src="/images/f2.png" class="logo-bg" mode="widthFix" wx:if="{{item.logo}}"></image>
+                    <view class="logo" wx:if="{{item.logo}}">{{item.logo}}</view>
+                 </navigator>
+              </view>
+           </view>
           <view class='info'>
              <view>
                 <view class='title'>{{item.goods_name}}</view>

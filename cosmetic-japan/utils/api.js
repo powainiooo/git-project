@@ -33,13 +33,9 @@ function post(that, link, data, logic = function () { }) {
 		        that.onLoad();
 	        });
         } else if (retData.ret == 1002) {
-          app.getLogin(function () {
-            that.onLoad();
-          });
-        } else if (retData.ret == 1003) {
-	        app.getLogin(function () {
-		        that.onLoad();
-	        });
+	        logic(retData);
+        } else if (retData.ret == 1000) {
+	        getUser()
         } else if (retData.ret == 0){
           logic(retData.data);
         } else{

@@ -20,14 +20,28 @@
     </view>
   </view>
   <view class='prductList'>
-    <view class='listBox between wrap'>
-      <navigator  wx:for="{{list}}" wx:key="index" url='../detail/index?id={{item.id}}&activity_type=0&hd_id=0' hover-class='none' class='item'>
-        <view class='row'>
-          <image src='{{imgUrl}}{{item.cover}}'></image>
-          <view class='name'>{{item.goods_name}}</view>
+<!--    <view class='listBox between wrap'>-->
+<!--      <navigator  wx:for="{{list}}" wx:key="index" url='../detail/index?id={{item.id}}&activity_type=0&hd_id=0' hover-class='none' class='item'>-->
+<!--        <view class='row'>-->
+<!--          <image src='{{imgUrl}}{{item.cover}}'></image>-->
+<!--          <view class='name'>{{item.goods_name}}</view>-->
+<!--        </view>-->
+<!--      </navigator>-->
+<!--    </view>-->
+     <view class="goods-list">
+        <view class="goods-item" wx:for="{{list}}" wx:key="index">
+           <navigator url='../detail/index?id={{item.id}}&activity_type=0&hd_id=0'>
+              <image src="{{imgUrl}}{{item.cover}}" class="img"></image>
+              <image src="/images/f3.png" class="frame"></image>
+              <view class="hint">官方正品 假一赔十</view>
+              <image src="/images/f1.png" class="price-bg" mode="widthFix"></image>
+              <view class="price"><text>￥</text>{{item.price / 100}}</view>
+              <image src="/images/f2.png" class="logo-bg" mode="widthFix" wx:if="{{item.logo}}"></image>
+              <view class="logo" wx:if="{{item.logo}}">{{item.logo}}</view>
+              <view class="name">{{item.goods_name}}</view>
+           </navigator>
         </view>
-      </navigator>
-    </view>
+     </view>
   </view>
   <view class='noReturn fff' hidden='{{!isNoReturn}}'>
     <view class='img'><image src='/images/ico_no.png'></image></view>

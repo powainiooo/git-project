@@ -1,7 +1,7 @@
 {
    "pages": [
-      "pages/fenxiaoInfo/index",
       "pages/index/index",
+      "pages/fenxiaoInfo/index",
       "pages/orderAccount/index",
       "pages/detail/index",
       "pages/myCoupon/index",

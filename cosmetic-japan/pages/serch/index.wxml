@@ -37,16 +37,30 @@
       </view>
 
     </view>
-    <view class='prductList' wx:if='{{list.length > 0 && isNoReturn}}'>
-      <view class='listBox between wrap'>
-        <navigator  wx:for="{{list}}" wx:key="index" url='../detail/index?id={{item.id}}' hover-class='none' class='item'>
-          <view class='row'>
-          <image src='{{imgUrl}}{{item.cover}}'></image>
-          <view class='name'>{{item.goods_name}}</view>
-          <view class='price'>￥<span>{{item.price}}</span></view>
+<!--    <view class='prductList' wx:if='{{list.length > 0 && isNoReturn}}'>-->
+<!--      <view class='listBox between wrap'>-->
+<!--        <navigator  wx:for="{{list}}" wx:key="index" url='../detail/index?id={{item.id}}' hover-class='none' class='item'>-->
+<!--          <view class='row'>-->
+<!--          <image src='{{imgUrl}}{{item.cover}}'></image>-->
+<!--          <view class='name'>{{item.goods_name}}</view>-->
+<!--          <view class='price'>￥<span>{{item.price}}</span></view>-->
+<!--        </view>-->
+<!--        </navigator>-->
+<!--      </view>-->
+<!--    </view>-->
+     <view class="goods-list" wx:if='{{list.length > 0 && isNoReturn}}'>
+        <view class="goods-item" wx:for="{{list}}" wx:key="index">
+           <navigator url='../detail/index?id={{item.id}}&activity_type=0&hd_id=0'>
+              <image src="{{imgUrl}}{{item.cover}}" class="img"></image>
+              <image src="/images/f3.png" class="frame"></image>
+              <view class="hint">官方正品 假一赔十</view>
+              <image src="/images/f1.png" class="price-bg" mode="widthFix"></image>
+              <view class="price"><text>￥</text>{{item.price / 100}}</view>
+              <image src="/images/f2.png" class="logo-bg" mode="widthFix" wx:if="{{item.logo}}"></image>
+              <view class="logo" wx:if="{{item.logo}}">{{item.logo}}</view>
+              <view class="name">{{item.goods_name}}</view>
+           </navigator>
         </view>
-        </navigator>
-      </view>
-    </view>
+     </view>
   </view>
 </view>

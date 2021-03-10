@@ -39,3 +39,16 @@
    font-size: 28rpx;
    margin-top: 40rpx;
 }
+.cart-goods-item {
+   width: 200rpx;
+   height: 200rpx;
+   margin-right: 20rpx;
+}
+.cart-goods-item .goods-item {
+   height: 340rpx;
+   transform: scale(.588);
+   transform-origin: 0 0;
+}
+.cart-goods-item .goods-item .price {
+   color: #ffffff;
+}

@@ -3,7 +3,7 @@
   <view class='orderAccount'>
     <!-- 砍价情况下。不可修改地址 -->
       <view class='top fff' bindtap="{{selectAddsTap}}">
-      <block wx:if="{{getAddress && !isAddsNull}}">
+      <block wx:if="{{!isAddsNull}}">
         <view class='row between'>
             <view class='text'>收货人：{{adds.userName}}</view>
             <view class='text'>{{adds.telNumber}}</view>
@@ -13,11 +13,18 @@
           <view class='text'><image class='jt' src='/images/ico_jt.png'></image></view>
         </view>
       </block>
-      <button wx:else open-type="openSetting" class='openSetting'>
-        <view class='addsNone between'>请选择收货人信息
-          <view class='r start'><image class='jt' src='/images/ico_jt.png'></image></view>
-        </view>
-      </button>
+         <block wx:else>
+            <button wx:if="{{getAddress}}" class='openSetting'>
+               <view class='addsNone between'>请选择收货人信息
+                  <view class='r start'><image class='jt' src='/images/ico_jt.png'></image></view>
+               </view>
+            </button>
+            <button wx:else open-type="openSetting" class='openSetting'>
+               <view class='addsNone between'>请选择收货人信息
+                  <view class='r start'><image class='jt' src='/images/ico_jt.png'></image></view>
+               </view>
+            </button>
+         </block>
     </view>
     <view class='productList fff'>
       <view class='item between' wx:for="{{list}}" wx:key="index">

@@ -75,22 +75,48 @@ export default {
       selectId: {
          type: Number,
          default: 0
+      },
+      selectedData: {
+         type: String,
+         default: ''
       }
    },
    computed: {
+      selectedArr () {
+         return this.selectedData === '' ? [] : this.selectedData.split('-')
+      },
       imgCover () {
-         return this.itemData.product_img || this.itemData.cover
+         if (this.itemData.product_img) {
+            if (this.selectedArr.length === 0) {
+               return this.itemData.product_img
+            } else {
+               const item = this.itemData.attrs_list.find(i => i.id === this.selectedArr[2])
+               return item ? item.product_img : this.itemData.product_img
+            }
+         } else {
+            return this.itemData.cover
+         }
       },
       attrName () {
          if (this.itemData.attrs_list) {
-            return this.itemData.attrs_list[0].name
+            if (this.selectedArr.length === 0) {
+               return this.itemData.attrs_list[0].name
+            } else {
+               const item = this.itemData.attrs_list.find(i => i.id === this.selectedArr[2])
+               return item ? item.name : this.itemData.attrs_list[0].name
+            }
          } else {
             return this.itemData.attr_name
          }
       },
       specsName () {
          if (this.itemData.attrs_list) {
-            return this.itemData.attrs_list[0].child[0].specs
+            if (this.selectedArr.length === 0) {
+               return this.itemData.attrs_list[0].child[0].specs
+            } else {
+               const item = this.itemData.attrs_list.find(i => i.id === this.selectedArr[2])
+               return item ? this.selectedArr[3]: this.itemData.attrs_list[0].child[0].specs
+            }
          } else {
             return this.itemData.specs
          }

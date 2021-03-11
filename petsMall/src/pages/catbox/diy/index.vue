@@ -16,27 +16,30 @@
             <li>
                <!-- 主粮 -->
                <diy-item
-                  v-for="item in listData"
+                  v-for="item in listData[0]"
                   :key="id"
                   :itemData="item"
+                  :selectedData="selectedArr[0]"
                   :showArrow="ids[0] === item.id"
                   @click="openDetail" />
             </li>
             <li>
                <!-- 罐头 -->
                <diy-item
-                  v-for="item in listData"
+                  v-for="item in listData[1]"
                   :key="id"
                   :itemData="item"
+                  :selectedData="selectedArr[1]"
                   :showArrow="ids[1] === item.id"
                   @click="openDetail" />
             </li>
             <li>
                <!-- 零食 -->
                <diy-item
-                  v-for="item in listData"
+                  v-for="item in listData[2]"
                   :key="id"
                   :itemData="item"
+                  :selectedData="selectedArr[2]"
                   :showArrow="ids[2] === item.id"
                   @click="openDetail" />
             </li>
@@ -114,7 +117,11 @@ export default {
          source: 'diy',
          step: 0,
          page: 1,
-         listData: [],
+         listData: [
+            [],
+            [],
+            []
+         ],
          toyListData: [
             {
                cover: '/static/images/catbox/toy-yes.png',
@@ -134,7 +141,7 @@ export default {
             }
          ],
          total: 0,
-         selectedArr: [],
+         selectedArr: ['', '', ''],
          tempPrice: 0,
          priceArr: [],
          ids: [],
@@ -173,7 +180,7 @@ export default {
          console.log('changeStep', step)
          this.step = step
          this.page = 1
-         this.listData = []
+         this.listData[this.step] = []
          this.total = 0
          this.getData(this.step + 1)
          if (this.step === 3) {
@@ -189,6 +196,7 @@ export default {
                   this.createCatbox()
                } else {
                   if (this.selectedArr[this.step]) {
+                     console.log('this.selectedArr[this.step]', this.step, this.selectedArr[this.step])
                      this.changeStep(this.step + 1)
                   } else {
                      mpvue.showToast({
@@ -224,7 +232,8 @@ export default {
          }).then(res => {
             mpvue.hideLoading()
             this.total = Number(res.data.nums)
-            this.listData = this.listData.concat(res.data.list)
+            this.listData[this.step] = this.listData[this.step].concat(res.data.list)
+            console.log('this.listData', this.listData)
          })
       },
       goodsSelect (data) {
@@ -237,7 +246,6 @@ export default {
          this.showDetail = false
          // 确认后返回
          if (this.source !== 'diy') {
-            console.log(this.selectedArr, this.step)
             const params = {
                source: this.source
             }
@@ -303,7 +311,7 @@ export default {
    },
    onShow () {
       if (this.source !== 'toy') {
-         if (this.listData.length === 0) {
+         if (this.listData[this.step].length === 0) {
             this.getData(this.step + 1)
          }
       }

@@ -311,6 +311,7 @@ Page({
   getSetting:function(){
     wx.getSetting({
       success: (res) => {
+      	console.log('getSetting', res)
         if (res.authSetting['scope.address']) {
           this.setData({
             getAddress: true

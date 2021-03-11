@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import bgSlide from '../components/bgSilde'
+import bgSlide from '@/components/bgSilde'
 export default {
   name: 'Home',
   components: {

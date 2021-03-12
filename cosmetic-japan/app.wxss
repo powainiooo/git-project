@@ -2996,6 +2996,13 @@ button:after { border: none; }
    top: 285rpx;
    right: 10rpx;
 }
+.goods-item .price-name {
+   font-size: 12rpx;
+   color: #ffffff;
+   position: absolute;
+   top: 272rpx;
+   right: 10rpx;
+}
 .goods-item .price text {
    font-size: 18rpx;
 }

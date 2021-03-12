@@ -97,6 +97,9 @@ Page({
 
     // 生成海报
     shengchengTap: function() {
+    	wx.showLoading({
+	      title: '正在生成中'
+      })
         var attrid = this.data.attrid;
         var attr = '|' + attrid.join('|') + '|';
         console.log(attr);
@@ -107,7 +110,7 @@ Page({
                 hbImg: ret,
                 ScHb: true
             })
-
+				wx.hideLoading()
             wx.downloadFile({
                 url: www + ret, //仅为示例，并非真实的资源
                 success: function(res) {
@@ -408,7 +411,7 @@ Page({
 	            dfIds = dfIds.substr(1, dfIds.length - 2)
                 var attrid = dfIds.split('|');
                 var returnData = {};
-                returnData.price = goods_info.price / 100;
+                returnData.price = ret.default_gz.price / 100;
                 returnData.price_kd = goods_info.price_kd;
                 returnData.cover = goods_info.cover;
                 returnData.ms_price = goods_info.hd_price

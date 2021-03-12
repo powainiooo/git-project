@@ -21,7 +21,7 @@
          <view class='LyText'>{{goods_info.title}}</view>
          <view class='info between'>
             <view class='price'>￥
-               <span>{{returnData.price}}</span>
+               <span>{{goods_info.price / 100}}</span>
             </view>
             <view class='yongjin' wx:if="{{!goods_info.price_kd || goods_info.price_kd==0}}">包邮</view>
             <block wx:if="{{returnData.price_shui>0}}">
@@ -62,7 +62,7 @@
                <image src='/images/ico_jt.png'></image>
             </view>
          </navigator>
-         <navigator class='UserPl between' url='#' bindtap='shengchengTap'>
+         <navigator class='UserPl between' bindtap='shengchengTap'>
             <view class='lInfo'>生成海报</view>
             <view class='rInfo'>
                <image src='/images/ico_jt.png'></image>

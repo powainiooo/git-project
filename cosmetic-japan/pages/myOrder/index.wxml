@@ -46,7 +46,6 @@
         <button class='btn2 btn' data-id='{{item.id}}' data-url="{{imgUrl}}{{item.child[0].goods_cover}}" data-title="【仅剩{{item.remain_nums}}个名额】{{item.child[0].goods_name}}" open-type='share' id='shareBtn' wx:if='{{item.status == 21 && item.group_buy_success == 0}}'>邀请好友拼单</button>
         <navigator class='btn2 btn' url='../detail/index?id={{item.hd_id}}&hd_id={{item.hd_id}}&activity_type={{item.activity_type}}' hover-class='none' wx:if='{{item.status == 21 && item.group_buy_success == -1}}'>再次发起</navigator>
         <view class='btn1 btn' hidden='{{item.status != 1 && (item.status != 21 || item.group_buy_success == -1)}}' data-id='{{item.id}}' bindtap='bindCancel'>取消订单</view>
-        <navigator url='../tuihuan/index?id=0&oid={{item.id}}&type=1' hover-class='none' wx:if="{{item.status==4 || item.status==5}}" class='btn2 btn'>申请售后</navigator>
         <!--view class='btn1 btn' hidden='{{item.status != 4}}' data-id='{{item.id}}' bindtap='shenqingtuikuanTap'>申请退款</view-->
 
         <view class='btn1 btn' hidden='{{item.status != 6&&item.status != 7&&(item.status != 21 || item.group_buy_success == 0)}}' data-id='{{item.id}}' bindtap='bindDel'>删除订单</view>

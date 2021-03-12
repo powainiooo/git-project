@@ -135,7 +135,6 @@ export default {
                cover: '/static/images/catbox/toy-no.png',
                english_name: 'Don\'t need toys',
                china_name: '不需要玩具',
-               attr_name: '随机',
                price: 0,
                id: 0
             }

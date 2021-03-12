@@ -30,7 +30,7 @@
          <h3 class="en">{{itemData.english_name}}</h3>
          <h3>{{itemData.china_name}}</h3>
          <ul>
-            <li>{{attrName}}</li>
+            <li v-if="attrName">{{attrName}}</li>
             <li v-if="specsName">{{specsName}}</li>
          </ul>
          <p v-if="source === 'diy' && itemData.mainly">主要成分：{{itemData.mainly}}</p>

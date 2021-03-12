@@ -50,12 +50,12 @@
             </ul>
          </div>
          <div class="intros">
-            <h3>适用对象:</h3>
-            <p><text>{{detailData.apply}}</text></p>
-            <h3>营养成分:</h3>
-            <p><text>{{detailData.nutritional}}</text></p>
-            <h3>主要成分:</h3>
-            <p><text>{{detailData.mainly}}</text></p>
+            <h3 v-if="detailData.apply !== ''">适用对象:</h3>
+            <p v-if="detailData.apply !== ''"><text>{{detailData.apply}}</text></p>
+            <h3 v-if="detailData.nutritional !== ''">营养成分:</h3>
+            <p v-if="detailData.nutritional !== ''"><text>{{detailData.nutritional}}</text></p>
+            <h3 v-if="detailData.mainly !== ''">主要成分:</h3>
+            <p v-if="detailData.mainly !== ''"><text>{{detailData.mainly}}</text></p>
          </div>
       </div>
 

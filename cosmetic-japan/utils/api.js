@@ -152,19 +152,9 @@ function wxPay(data){
         duration: 1500
       })
       setTimeout(()=>{
-        if(data.id && data.activity_type == 4){
-          wx.redirectTo({
-            url: '../paySuccess/index?id='+data.id,
-          })
-        }else if (data.isKJ == 1){
-          wx.redirectTo({
-            url: '../bargain/myBargain',
-          })
-        }else{
-          wx.redirectTo({
-            url: '../myOrder/index',
-          })
-        }
+	      wx.redirectTo({
+		      url: '../paySuccess/index',
+	      })
       },2000)
     },
     'fail': (res) => {

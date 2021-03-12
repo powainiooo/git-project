@@ -40,6 +40,7 @@ Page({
 	//排序
 	sortTap:function(e){
 		var idx = e.currentTarget.dataset.idx;
+		console.log('idx', idx)
 		if (idx == 2) {
 			if (this.data.xl_gd == 0){
 				var xl_gd = 1;
@@ -53,7 +54,7 @@ Page({
 			this.setData({
 				xl_gd
 			})
-			this.paixu(data);
+			this.paixu();
 		}else if (idx == 3) {
 			if (this.data.jg_gd == 0){
 				var jg_gd = 1;
@@ -67,7 +68,7 @@ Page({
 			this.setData({
 				jg_gd: jg_gd
 			})
-			this.paixu(data);
+			this.paixu();
 		}else if (idx == 4) {
 			this.setData({
 				showFilter: true

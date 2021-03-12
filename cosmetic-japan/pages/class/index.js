@@ -54,6 +54,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+	  if (options.mid) {
+		  app.setMid(options.mid)
+	  }
     let link = { method: 'cate', canshu: '' };
     let logic = (ret) => {
       this.setData({
@@ -73,10 +76,7 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function (options) {
-	  if (options.mid) {
-		  app.setMid(options.mid)
-	  }
+  onShow: function () {
     if (wx.getStorageSync('userInfo') == '') {
       this.setData({
         isShowGetUser: false

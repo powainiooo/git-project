@@ -56,6 +56,7 @@
                   <view class="hint">官方正品 假一赔十</view>
                   <image src="/images/f1.png" class="price-bg" mode="widthFix"></image>
                   <view class="price"><text>￥</text>{{item.price / 100}}</view>
+                  <view class="price-name">活动预售价：</view>
                   <image src="/images/f2.png" class="logo-bg" mode="widthFix" wx:if="{{item.logo}}"></image>
                   <view class="logo" wx:if="{{item.logo}}">{{item.logo}}</view>
                   <view class="name">{{item.goods_name}}</view>

@@ -1,6 +1,7 @@
 {
    "pages": [
       "pages/index/index",
+      "pages/fenxiao/index",
       "pages/orderAccount/index",
       "pages/fenxiaoInfo/index",
       "pages/detail/index",
@@ -29,7 +30,6 @@
       "pages/site/index",
       "pages/fenxiaoOrderDetail/index",
       "pages/fenxiaoshang/index",
-      "pages/fenxiao/index",
       "pages/yongjin/index",
       "pages/tixian/index",
       "pages/tixianForm/index"

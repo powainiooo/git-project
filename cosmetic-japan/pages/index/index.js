@@ -27,6 +27,9 @@ Page({
     * 生命周期函数--监听页面加载
     */
    onLoad: function (options) {
+   	if (options.mid) {
+   		app.setMid(options.mid)
+	   }
 	   if (!app.getLoginKey()) {
 		   console.log('index page no login');
 		   app.getLogin(() => {

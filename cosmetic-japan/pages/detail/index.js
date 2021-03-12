@@ -52,6 +52,7 @@ Page({
 	    score:0,
 	    rate:0,
 	    bgList:[],
+	    fxs_id: ''
     },
 
     bannerTap: function(e) {
@@ -360,6 +361,9 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
+	    if (options.mid) {
+		    app.setMid(options.mid)
+	    }
         console.log(11, options)
         if (!app.getLoginKey()) {
             console.log('detail page no login');
@@ -657,19 +661,6 @@ Page({
     onReachBottom: function() {
 
     },
-
-    /**
-     * 用户点击右上角分享
-     */
-    /*onShareAppMessage: function() {
-        var id = this.data.goods_info.id;
-        var fxs_id = this.data.fxs_id;
-
-        return {
-            title: '分销商城',
-            path: '/pages/detail/index?id=' + id + '&fxs_id=' + fxs_id
-        }
-    }*/
     /**
      * 用户点击右上角分享
      */

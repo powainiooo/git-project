@@ -73,7 +73,10 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function (options) {
+	  if (options.mid) {
+		  app.setMid(options.mid)
+	  }
     if (wx.getStorageSync('userInfo') == '') {
       this.setData({
         isShowGetUser: false

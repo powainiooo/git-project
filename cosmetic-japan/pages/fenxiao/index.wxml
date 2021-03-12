@@ -7,7 +7,7 @@
   <view class='formBox' hidden='{{isFenxiao}}'>
     <view class='itemBox fff'>
       <view class='item start bb1'><view class='label'>姓名:</view><input type='text' bindinput='nameTap' placeholder='请输入您真实姓名，以保证您的权益' placeholder-class='place'></input></view>
-      <view class='item start'><view class='label'>电话:</view><input type='number' maxlength='11' bindinput='phoneTap' placeholder='请输入您真实姓名，以保证您的权益' placeholder-class='place'></input></view>
+      <view class='item start'><view class='label'>电话:</view><input type='number' maxlength='11' bindinput='phoneTap' placeholder='请输入您的电话号码，方便与您联系' placeholder-class='place'></input></view>
     </view>
     <view class='SubbtnBox'>
       <view class='subbtn' bindtap='shenqingTap'>立即入驻</view>

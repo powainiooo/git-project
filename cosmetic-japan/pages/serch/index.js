@@ -20,7 +20,7 @@ Page({
 
   // 搜索
   searchTap:function(e){
-    var keyword = e.detail.value;
+    var keyword = this.data.keyword;
     var keywords = wx.getStorageSync('keywords') || [];
     var isYes = false;
     if (keywords){
@@ -103,6 +103,7 @@ Page({
   //搜索输入
   inputTap:function(e){
     var keyword = e.detail.value;
+    this.data.keyword = keyword
     if (keyword == ''){
       this.setData({
         isNoReturn: true
@@ -112,7 +113,9 @@ Page({
 
   //搜索
   search: function (keyword){
-    let link = { method: 'search', canshu: '&search=' + keyword + '&page=' + this.data.page};
+  	const kw = this.data.keyword
+	  console.log('kw', kw)
+    let link = { method: 'search', canshu: '&search=' + kw + '&page=' + this.data.page};
     let logic = (ret) => {
       if (ret.result.length > 0){
         this.setData({
@@ -158,35 +161,35 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+
   },
 
   /**

@@ -36,11 +36,11 @@
             <view class='r'><image src='/images/ico_right.png'></image></view>
          </button>
          <navigator wx:if="{{data.fxs_status==1 && (data.status==1 || data.status==0)}}" url='../fenxiao/index?status={{data.status}}' hover-class='none' class='item toMgt16'>
-            <view class='l'><image src='/images/n_7.png'></image>申请成为分销商</view>
+            <view class='l'><image src='/images/my/ico-6.png'></image>申请成为分销商</view>
             <view class='r'><image src='/images/ico_jt.png'></image></view>
          </navigator>
          <navigator wx:if="{{data.fxs_status==1 && data.status==2}}" url='../fenxiaoCenter/index' hover-class='none' class='item'>
-            <view class='l'><image src='/images/n_7.png'></image>分销商中心</view>
+            <view class='l'><image src='/images/my/ico-6.png'></image>分销商中心</view>
             <view class='r'><image src='/images/ico_jt.png'></image></view>
          </navigator>
          <button class='item' bindtap="openCompany">

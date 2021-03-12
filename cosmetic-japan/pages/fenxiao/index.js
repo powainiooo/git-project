@@ -10,8 +10,8 @@ Page({
    */
   data: {
     isFenxiao:false,
-    name:null,
-    phone:null,
+    name:'',
+    phone:'',
   },
 
   nameTap:function(e){
@@ -29,14 +29,14 @@ Page({
   shenqingTap:function(){
     let name = this.data.name;
     let phone = this.data.phone;
-    if (!name && name != ''){
+    if (name == ''){
       wx.showToast({
         title: '请输入姓名',
         icon: 'none'
       })
       return false
     }
-    if (!phone && phone.length == 11) {
+    if (phone == '' || phone.length != 11) {
       wx.showToast({
         title: '请输入11位的手机号',
         icon: 'none'

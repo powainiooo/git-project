@@ -7,7 +7,7 @@
 .c-diy-item .infos h3.en { font-size: 34px; font-family: HelveThin; margin-top: 20px; }
 .c-diy-item .infos ul { display: flex; margin-bottom: 32px; margin-top: 10px; }
 .c-diy-item .infos ul li { text-shadow: none; border: 1px solid var(--mainColor); padding: 5px 8px; color: #A6A5A5; font-size: 20px; margin-right: 8px; line-height: 1; border-radius: 8px; }
-.c-diy-item .infos p { width: 330px; height: 66px; font-size: 18px; line-height: 26px; color: var(--textColor); text-shadow: var(--textShadow); margin-bottom: 28px; text-overflow: ellipsis; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical; }
+.c-diy-item .infos p { width: 330px; height: 70px; font-size: 18px; line-height: 26px; color: var(--textColor); text-shadow: var(--textShadow); margin-bottom: 20px; text-overflow: ellipsis; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical; }
 .c-diy-item .infos div { font-size: 20px; color: var(--textColor); text-shadow: var(--textShadow); }
 .c-diy-item .infos div span { font-size: 66px; font-family: HelveThin; }
 .c-diy-item .add { width: 92px; height: 92px; position: absolute; left: 620px; bottom: 42px; }
@@ -33,7 +33,7 @@
             <li>{{attrName}}</li>
             <li v-if="specsName">{{specsName}}</li>
          </ul>
-         <p v-if="source === 'diy'">主要成分：{{itemData.mainly}}</p>
+         <p v-if="source === 'diy' && itemData.mainly">主要成分：{{itemData.mainly}}</p>
       </div>
       <div><span>{{itemData.price}}</span>元</div>
    </div>

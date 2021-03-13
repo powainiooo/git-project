@@ -48,7 +48,8 @@ export default {
   data () {
     return {
       itemList: [],
-      dis: 0
+      dis: 0,
+      t: 0
     }
   },
   computed: {
@@ -67,12 +68,16 @@ export default {
   mounted () {
     this.move()
   },
+  destroyed () {
+    clearInterval(this.t)
+  },
   methods: {
     move () {
-      setInterval(() => {
+      this.t = setInterval(() => {
         this.dis += 0.5
         if (this.dis >= 287) {
           const list = this.$refs.list
+          if (!list) return
           if (this.direct === 'up') {
             const child = list.childNodes[0]
             list.removeChild(child)

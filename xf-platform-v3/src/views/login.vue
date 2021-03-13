@@ -17,6 +17,7 @@
   .logo
     text-align center
     margin-bottom 40px
+    font-size 0
 .moveIn
   animation moveIn 1s cubic-bezier(.23,.56,.24,.92) both
 @keyframes moveIn
@@ -68,11 +69,16 @@
       <info-form :page="page" />
     </section>
   </transition>
+  <transition enter-active-class="moveIn" leave-active-class="moveOut">
+    <section class="login-container" v-if="page === 'forget'">
+      <Forget />
+    </section>
+  </transition>
   <transition enter-active-class="fadeIn" leave-active-class="fadeOut">
     <Button class="ft-btn" v-if="page === 'login'" @click="page = 'register'">注册新用户</Button>
   </transition>
   <transition enter-active-class="fadeIn" leave-active-class="fadeOut">
-    <Button class="ft-btn" v-if="page === 'register'" @click="page = 'login'">已有账户</Button>
+    <Button class="ft-btn" v-if="page === 'register' || page === 'forget'" @click="page = 'login'">已有账户</Button>
   </transition>
   <copy-right />
 </div>
@@ -82,6 +88,7 @@
 import Login from '../components/login/Login'
 import Register from '../components/login/Register'
 import infoForm from '../components/login/infoForm'
+import Forget from '../components/login/Forget'
 import copyRight from '../components/copyRight'
 export default {
   name: 'app',
@@ -89,6 +96,7 @@ export default {
     Login,
     Register,
     infoForm,
+    Forget,
     copyRight
   },
   data () {
@@ -103,7 +111,7 @@ export default {
   },
   mounted () {
     setTimeout(() => {
-      this.page = 'login'
+      this.page = 'infos'
     }, 1000)
   },
   methods: {

@@ -15,10 +15,10 @@
         <Input type="password" v-model="formData.password" placeholder="密码" />
       </FormItem>
       <FormItem style="margin-top: -6px">
-        <a href="javascript:;" class="txt">忘记密码？</a>
+        <a href="javascript:;" class="txt" @click="changePage('forget')">忘记密码？</a>
       </FormItem>
       <div class="form-item" style="margin-top: 40px">
-        <Button disabled style="width: 90px">登录</Button>
+        <Button size="small" disabled style="width: 90px">登录</Button>
       </div>
     </Form>
   </div>
@@ -28,6 +28,7 @@
 <script type='es6'>
 export default {
   name: 'app',
+  inject: ['changePage'],
   data () {
     return {
       formData: {

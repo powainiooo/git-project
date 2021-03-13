@@ -9,28 +9,22 @@
     <Form class="form">
       <div class="form-title">注册</div>
       <FormItem>
-        <ul class="tab-bar">
-          <li v-for="i in tabList1"
-              :key="i.value"
-              class="tab-bar-item"
-              :class="{'tab-bar-active': i.value === tabKey1}"
-              @click="tabKey1 = i.value">{{i.name}}</li>
-        </ul>
+        <RadioGroup v-model="key1" type="button" button-style="solid" class="tab-bar">
+          <Radio label="1">企业</Radio>
+          <Radio label="2">个人</Radio>
+        </RadioGroup>
       </FormItem>
       <FormItem>
-        <ul class="tab-bar">
-          <li v-for="i in tabList2"
-              :key="i.value"
-              class="tab-bar-item"
-              :class="{'tab-bar-active': i.value === tabKey2}"
-              @click="tabKey2 = i.value">{{i.name}}</li>
-        </ul>
+        <RadioGroup v-model="key2" type="button" button-style="solid" class="tab-bar" v-if="key1 === '1'">
+          <Radio label="1">场地方</Radio>
+          <Radio label="2">活动方</Radio>
+        </RadioGroup>
       </FormItem>
       <FormItem>
         <div class="txt">我们将会校验您的真实性，所以请如实选择身份性质，如发现真实性存疑，我们有权锁定您的账户并采取对应措施。</div>
       </FormItem>
       <FormItem style="margin-top: 40px">
-        <Button style="width: 90px" @click="handleNext">下一步</Button>
+        <Button style="width: 90px" @click="handleNext" v-if="showBtn">下一步</Button>
       </FormItem>
     </Form>
   </div>
@@ -42,25 +36,15 @@ export default {
   name: 'app',
   data () {
     return {
-      formData: {
-        usename: '',
-        password: ''
-      },
-      tabList1: [
-        { name: '企业', value: 1 },
-        { name: '个人', value: 2 }
-      ],
-      tabKey1: 1,
-      tabList2: [
-        { name: '场地方', value: 1 },
-        { name: '活动方', value: 2 }
-      ],
-      tabKey2: 1
+      key1: '1',
+      key2: '1',
+      showBtn: true
     }
   },
   inject: ['changePage'],
   methods: {
     handleNext () {
+      this.showBtn = false
       this.changePage('form')
     }
   }

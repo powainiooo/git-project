@@ -9,7 +9,6 @@
   font-family: 'HelveThin';
   src: url('./assets/fonts/HelveticaNeueThin.ttf') format('woff2')
 }
-
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

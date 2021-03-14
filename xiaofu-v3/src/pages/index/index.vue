@@ -27,8 +27,8 @@
       <div class="item-small">
         <c-lees-star />
       </div>
-      <div v-for="item in listData"
-           :key="id"
+      <div v-for="(item, index) in listData"
+           :key="index"
            :class="{
              'item-small': item.type === 'normalTicket',
              'item-large': item.type === 'recTicket' || item.type === 'collection'

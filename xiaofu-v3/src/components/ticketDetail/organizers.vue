@@ -55,21 +55,21 @@
   <div class="organ-container">
     <div class="line1">
       <div>
-        <img src="/static/images/logo.png" />
-        <span>MAOLivehouse</span>
+        <img :src="record.logo" />
+        <span>{{record.name}}</span>
       </div>
-      <button class="btn">138-8888-8888</button>
+      <button class="btn">{{record.phone}}</button>
     </div>
     <div class="line2">
-      <div>
-        <c-ticket extraClass="organ-ticket" />
-      </div>
-      <div>
-        <c-ticket extraClass="organ-ticket" />
+      <div v-for="item in list" :key="id">
+        <c-ticket :record="item" extraClass="organ-ticket" />
       </div>
     </div>
     <div class="line3">
-      <button class="btn">全部</button>
+      <button class="btn"
+              @click="toDetail"
+              hover-class="hscale"
+              hover-stay-time="10">全部</button>
     </div>
   </div>
 </div>
@@ -79,12 +79,29 @@
 import cTicket from '@/pages/index/modules/ticket'
 export default {
   name: 'app',
+  props: {
+    record: {
+      type: Object,
+      default: () => {}
+    }
+  },
   components: {
     cTicket
+  },
+  computed: {
+    list () {
+      return this.record.organizer_ticket || []
+    }
   },
   data () {
     return {}
   },
-  methods: {}
+  methods: {
+    toDetail () {
+      mpvue.navigateTo({
+        url: `/pages/activity/main?id=${this.record.id}`
+      })
+    }
+  }
 }
 </script>

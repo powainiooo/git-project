@@ -12,18 +12,14 @@
     <c-header
       ref="header"
       @close="handleClose" />
-    <img src="/static/images/img.jpg" class="banner" />
+    <img :src="record.image" class="banner" />
     <div class="collection-page">
-      <div class="c-tag">Baby let’s Bounce</div>
+      <div class="c-tag">{{record.name}}</div>
       <div class="list-container">
-        <div class="item-large">
-          <c-ticket size="large" />
-        </div>
-        <div class="item-small">
-          <c-ticket />
-        </div>
-        <div class="item-small">
-          <c-ticket />
+        <div v-for="(item, index) in list"
+             :class="[index === 0 ? 'item-large' : 'item-small']">
+          <c-ticket :record="item" size="large" v-if="index === 0" />
+          <c-ticket :record="item" v-else />
         </div>
       </div>
     </div>
@@ -33,9 +29,14 @@
 <script>
 import cHeader from '@/components/header/header'
 import cTicket from '@/pages/index/modules/ticket'
+import { postAction } from '@/utils/api'
+
 export default {
   data () {
     return {
+      id: '',
+      record: {},
+      list: []
     }
   },
 
@@ -49,12 +50,24 @@ export default {
       mpvue.navigateBack({
         delta: -1
       })
+    },
+    getData () {
+      postAction('/api/collection/detail', {
+        id: this.id
+      }).then(res => {
+        if (res.code === 1) {
+          this.record = res.data
+          this.list = res.data.tickets
+        }
+      })
     }
   },
   mounted () {
     this.$refs.header.setStatus('onlyClose')
   },
-  onLoad () {
+  onLoad (options) {
+    this.id = options.id || 1
+    this.getData()
     // let app = getApp()
   }
 }

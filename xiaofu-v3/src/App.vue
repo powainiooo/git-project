@@ -12,15 +12,14 @@ export default {
   methods: {
     async getData () {
       const token = mpvue.getStorageSync('XIAOFU_TOKEN')
-      if (typeof token === 'string' && token !== '') {
-        store.commit('SET_TOKEN', token)
-      } else {
-        const settings = await getSetting()
-        console.log('settings', settings)
-        if (settings.authSetting['scope.userInfo']) {
-          const userInfo = await getUserInfo()
-          doLogin(userInfo)
-        }
+      console.log('XIAOFU_TOKEN', token)
+      store.commit('SET_TOKEN', token)
+      const settings = await getSetting()
+      console.log('settings', settings)
+      store.commit('SET_SETTING', settings.authSetting)
+      const userInfo = await getUserInfo()
+      if (settings.authSetting['scope.userInfo']) {
+        doLogin(userInfo)
       }
     },
     getConfig () {

@@ -26,9 +26,10 @@
 <div class="c-menu" :class="{'c-menu-show': show}">
   <div class="personal">
     <div class="avatar">
-      <img src="" />
+      <img :src="userInfo.avatarUrl" v-if="hasUserInfo"/>
     </div>
-    <button>点击登录</button>
+    <button v-if="hasUserInfo">{{userInfo.nickName}}</button>
+    <button open-type="getUserInfo" @getuserinfo="getuserinfo" v-else>点击登录</button>
   </div>
 
   <div class="ticket">
@@ -74,6 +75,9 @@
 
 <script type='es6'>
 import tkInfo from '@/components/tkInfo'
+import { doLogin } from '@/utils/api'
+import store from '@/store'
+
 export default {
   name: 'app',
   props: {
@@ -85,10 +89,22 @@ export default {
   components: {
     tkInfo
   },
+  computed: {
+    hasUserInfo () {
+      return store.state.settings['scope.userInfo']
+    },
+    userInfo () {
+      return store.state.personalInfo
+    }
+  },
   data () {
     return {
     }
   },
-  methods: {}
+  methods: {
+    getuserinfo (e) {
+      doLogin(e.mp.detail)
+    }
+  }
 }
 </script>

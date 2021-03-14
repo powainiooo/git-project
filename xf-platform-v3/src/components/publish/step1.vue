@@ -79,6 +79,9 @@ import cDateTime from '@/components/cDateTime'
 import uploadImg from '../uploadImg'
 export default {
   name: 'app',
+  props: {
+    step: [Number, String]
+  },
   components: {
     ticket,
     formBox,
@@ -87,7 +90,6 @@ export default {
   },
   data () {
     return {
-      step: 1,
       formData: {
         usename: '',
         date: 'date'

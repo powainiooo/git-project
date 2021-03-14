@@ -12,13 +12,13 @@
     <li>
       <div class="rank"><img :src="'/static/images/number/1.png'" mode="heightFix" /></div>
       <div class="content">
-        <input placeholder="姓名 Name" placeholder-style="color: #9E9E9F;" />
+        <input placeholder="姓名 Name" placeholder-style="color: #9E9E9F;" disabled />
       </div>
     </li>
-    <li>
-      <div class="rank"><img :src="'/static/images/number/2.png'" mode="heightFix" /></div>
+    <li v-for="(item, index) in list" :key="id">
+      <div class="rank"><img :src="'/static/images/number/'+ (index + 1) +'.png'" mode="heightFix" /></div>
       <div class="content active">
-        <input placeholder="身份证号码 ID number" placeholder-style="color: #9E9E9F;" v-model="formData.number" />
+        <input placeholder-style="color: #fff;" v-model="formData.number" />
         <picker :range="idTypeArr" @change="idChange">
           <button style="width: 134rpx">
             <img src="/static/images/common/select-img2.png" mode="heightFix" />
@@ -34,6 +34,12 @@
 <script type='es6'>
 export default {
   name: 'app',
+  props: {
+    list: {
+      type: Array,
+      default: () => []
+    }
+  },
   data () {
     return {
       formData: {

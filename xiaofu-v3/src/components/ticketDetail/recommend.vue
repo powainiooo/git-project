@@ -10,9 +10,9 @@
 <div style="margin-bottom: 50rpx">
   <div class="c-ticket-title"><span>Recommend</span>推荐</div>
   <swiper previous-margin="25rpx" next-margin="416rpx">
-    <swiper-item v-for="i in 5" :key="i">
+    <swiper-item v-for="item in list" :key="id">
       <div class="recom-item">
-        <c-ticket />
+        <c-ticket :record="item" />
       </div>
     </swiper-item>
   </swiper>
@@ -25,6 +25,12 @@ export default {
   name: 'app',
   components: {
     cTicket
+  },
+  props: {
+    list: {
+      type: Array,
+      default: () => []
+    }
   },
   data () {
     return {}

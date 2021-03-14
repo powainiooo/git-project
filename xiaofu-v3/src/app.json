@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/main",
+    "pages/collection/main",
     "pages/details/main",
     "pages/order/detail/main",
     "pages/order/list/main",
@@ -9,7 +10,6 @@
     "pages/activity/main",
     "pages/illustrate/main",
     "pages/leesStar/main",
-    "pages/collection/main",
     "pages/logs/main"
   ],
   "window": {

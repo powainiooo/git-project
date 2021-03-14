@@ -35,7 +35,10 @@
 </style>
 
 <template>
-<div class="c-collection">
+<div class="c-collection"
+     hover-class="hscale"
+     hover-stay-time="10"
+     @click="toDetail">
   <img :src="record.image" />
   <h3>
     <p class="en">{{record.name}}</p>
@@ -53,6 +56,12 @@ export default {
   data () {
     return {}
   },
-  methods: {}
+  methods: {
+    toDetail () {
+      mpvue.navigateTo({
+        url: `/pages/collection/main?id=${this.record.id}`
+      })
+    }
+  }
 }
 </script>

@@ -12,7 +12,7 @@
 <template>
 <div>
    <div class="container" :class="{'blur': showCart || showShare}">
-      <c-header title="主粮|Staple food" titleColor="#E8E6E4" cartBtn shareBtn :cartNums="cartNums" />
+      <c-header :title="title" titleColor="#E8E6E4" cartBtn shareBtn :cartNums="cartNums" />
       <c-banner :list="bannerList" />
       <div class="goods-details">
          <div class="infos borderB">
@@ -119,7 +119,9 @@ export default {
          specsId: '',
          specsList: [],
          isAjax: false,
+         typeList: [],
          cartList: [],
+         title: '',
          posterSrc: ''
       }
    },
@@ -137,6 +139,7 @@ export default {
             this.$nextTick(() => {
                this.$refs.share.initPoster()
             })
+            this.getTypeList()
          })
       },
       selectCatalog (data) {
@@ -177,6 +180,13 @@ export default {
       drawPosterDone (e) {
          console.log('drawPosterDone', e)
          this.posterSrc = e
+      },
+      getTypeList () {
+         getAction('type_list').then(res => {
+            this.typeList = res.data
+            const item = res.data.find(i => i.id === this.detailData.type_id)
+            this.title = `${item.china_name}|${item.english_name}`
+         })
       }
    },
    onLoad (options) {

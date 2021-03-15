@@ -57,6 +57,9 @@ Page({
 	  if (options.mid) {
 		  app.setMid(options.mid)
 	  }
+	  if (options.fxs_id) {
+		  app.setFxsId(options.fxs_id)
+	  }
     let link = { method: 'cate', canshu: '' };
     let logic = (ret) => {
       this.setData({
@@ -121,7 +124,7 @@ Page({
    */
   onShareAppMessage: function (res) {
 	  app.shareCallback()
-    var fxs_id = this.data.fxs_id;
+    var fxs_id = app.globalData.fxs_id;
     return {
       title: '分销商城',
       path: '/pages/index/index?fxs_id=' + fxs_id + '&mid=' + app.globalData.mid

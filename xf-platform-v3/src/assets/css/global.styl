@@ -4,7 +4,23 @@
   margin 0
   padding 0
   box-sizing border-box
-
+#app
+  .ivu-btn
+    height 40px
+    line-height 40px
+    border-radius 10px
+    border none
+    bgG()
+    color #ffffff
+    box-shadow 0px 2px 5px 0px rgba(0, 0, 0, 0.15)
+    &[disabled]
+      background #C8C9CA
+      color  #ffffff
+    &[disabled]:hover
+      background #C8C9CA
+      color  #ffffff
+    &:hover
+      color #ffffff
 .flex
   display flex
 .center
@@ -19,22 +35,6 @@
   border-radius 10px
   padding 4px 10px
 
-.ivu-btn
-  height 40px
-  line-height 40px
-  border-radius 10px
-  border none
-  bgG()
-  color #ffffff
-  box-shadow 0px 2px 5px 0px rgba(0, 0, 0, 0.15)
-  &[disabled]
-    background #C8C9CA
-    color  #ffffff
-  &[disabled]:hover
-    background #C8C9CA
-    color  #ffffff
-  &:hover
-    color #ffffff
 .ivu-btn-small
   height 30px
   line-height 30px
@@ -192,10 +192,6 @@
 .form-grid
   display flex
   height 100%
-  .col1
-    flex 1
-  .col2
-    flex 2
   .form-col
     flex 1
     position relative
@@ -207,6 +203,10 @@
       background-color #EEEEEF
     &:last-child:after
       width 0
+  .col1
+    flex 1
+  .col2
+    flex 2
   .form-cell
     padding 20px 25px
     margin 0 -25px

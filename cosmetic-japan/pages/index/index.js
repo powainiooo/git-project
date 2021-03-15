@@ -20,7 +20,8 @@ Page({
 	   companyList: [],
 	   lastCompanyList: [],
 	   logo: '',
-	   showCompany: false
+	   showCompany: false,
+	   fxs_id: ''
    },
 
    /**
@@ -29,6 +30,9 @@ Page({
    onLoad: function (options) {
    	if (options.mid) {
    		app.setMid(options.mid)
+	   }
+	   if (options.fxs_id) {
+		   app.setFxsId(options.fxs_id)
 	   }
 	   if (!app.getLoginKey()) {
 		   console.log('index page no login');
@@ -57,7 +61,9 @@ Page({
 					adList2: res.ads_list_min,
 					brandList: res.brand,
 					logo: res.logo,
+					fxs_id: res.fxs_id
 				})
+				app.setFxsId(res.fxs_id)
 				this.getCompany()
 			}
 		});
@@ -143,7 +149,7 @@ Page({
 	   app.shareCallback()
 	   return {
 		   title: '商城',
-		   path: '/pages/index/index?mid=' + app.globalData.mid
+		   path: `/pages/index/index?mid=${app.globalData.mid}&fxs_id=${this.data.fxs_id}`
 	   }
    }
 })

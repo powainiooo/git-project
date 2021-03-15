@@ -8,6 +8,8 @@ App({
     }*/
 
     this.globalData.mid = wx.getStorageSync('MID')
+    this.globalData.fxs_id = wx.getStorageSync('FXSID')
+	  console.log('this.globalData.fxs_id', this.globalData.fxs_id)
 
     const updateManager = wx.getUpdateManager();
     updateManager.onCheckForUpdate(function (res) {
@@ -102,11 +104,16 @@ App({
     www: 'https://dgpt.vsapp.cn',
     url: 'https://dgpt.vsapp.cn',
     login_key:'',
-    mid:0
+    mid:0,
+	  fxs_id: ''
   },
 	setMid (mid) {
   	   this.globalData.mid = mid
 		wx.setStorageSync("MID", mid);
+	},
+	setFxsId (id) {
+  	   this.globalData.fxs_id = id
+		wx.setStorageSync("FXSID", id);
 	},
 
   request(obj = {}, call = ()=>{}) {

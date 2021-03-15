@@ -1,6 +1,54 @@
-<style lang="stylus" type="text/stylus">
+<style lang="stylus" type="text/stylus" scoped>
 @import "../assets/css/global.styl"
 .c-ticket
+  &-operates
+    height 60px
+    between()
+    background-color #ffffff
+  &-status
+    size(120px, 60px)
+    background linear-gradient(165deg, #0027AF, #2154DA 54%,#003AC3)
+    center()
+    p
+      color #ffffff
+      margin-top -7px
+      margin-left 10px
+  &-nums
+    margin-left 15px
+    font-size 34px
+    color #C8C9CA
+    font-family HelveThin
+    span
+      font-size 34px
+      color #6D9BF5
+      font-weight bold
+  &-select
+    margin-right 10px
+  .operates2
+    .c-ticket-status
+      background linear-gradient(165deg, #717071,#B4B4B5)
+  .operates3
+    .c-ticket-status
+      background linear-gradient(165deg, #E95513, #F29600)
+  .operates4
+    .c-ticket-status
+      background linear-gradient(165deg, #3E3A39, #000000 54%, #3E3A39)
+  .operates5
+    background linear-gradient(165deg, #5B85E6, #6D9AF4)
+    .c-ticket-status
+      background none
+  .operates6
+    background linear-gradient(165deg, #EC1A63, #E3007F)
+    .c-ticket-status
+      background none
+  &-btn
+    size(90px, 30px)
+    border-radius 10px
+    border none
+    box-shadow 0px 2px 5px 0px rgba(0, 0, 0, 0.15)
+    center()
+    color #6D9BF5
+    margin-right 10px
   &-body
     size(420px, 280px)
     background-color #ffffff
@@ -50,6 +98,20 @@
 
 <template>
 <div class="c-ticket">
+  <!-- 销售中:operates1 停止:operates2 已售罄:operates3 已结束:operates4  审核中:operates5  审核失败:operates5  -->
+  <div class="c-ticket-operates operates6">
+    <div class="flex">
+      <div class="c-ticket-status">
+        <a href="javascript:;"><img src="@/assets/img/ico-close.png" /></a>
+        <p>销售中</p>
+      </div>
+      <div class="c-ticket-nums">
+        <span>8</span>/600
+      </div>
+    </div>
+<!--    <c-select class="c-ticket-select"/>-->
+    <button class="c-ticket-btn">查看并修改</button>
+  </div>
   <div class="c-ticket-body flip-box-min">
     <div class="c-ticket-header">
       <div class="flex">
@@ -72,8 +134,12 @@
 </template>
 
 <script type='es6'>
+import cSelect from "./cSelect"
 export default {
   name: 'app',
+  components: {
+    cSelect
+  },
   data () {
     return {}
   },

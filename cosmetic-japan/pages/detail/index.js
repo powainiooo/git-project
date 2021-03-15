@@ -367,6 +367,9 @@ Page({
 	    if (options.mid) {
 		    app.setMid(options.mid)
 	    }
+	    if (options.fxs_id) {
+		    app.setFxsId(options.fxs_id)
+	    }
         console.log(11, options)
         if (!app.getLoginKey()) {
             console.log('detail page no login');
@@ -435,6 +438,7 @@ Page({
 	                score: ret.ave_pf,
 	                rate: ret.praise_rate
                 })
+	            app.setFxsId(res.fxs_id)
               console.log('详情', goods_desc);
                 if (options.activity_type == 2) {
                     var start_time = this.timestampToTime(parseInt(goods_info.start_time))
@@ -454,20 +458,6 @@ Page({
                 }
             }
             api.post(this, link, {}, logic);
-
-            //分销
-            if (!!options.fxs_id) {
-                var setTime = setInterval(() => {
-                    if (wx.getStorageSync('userInfo') != '') {
-                        var fxs_id = options.fxs_id
-                        let www = { method: 'saomiao', canshu: '' };
-                        let hd = (ret) => {
-                            clearInterval(setTime);
-                        };
-                        api.post(this, www, { fxs_id: fxs_id }, hd);
-                    }
-                }, 2000)
-            }
 
             //分享拼单，参与别人拼团进入
             if (options.type && options.type=="fromShare") {

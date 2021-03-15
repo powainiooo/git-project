@@ -7,10 +7,13 @@ import {
   Form,
   FormItem,
   Select,
+  Option,
   Input,
   Icon,
   DatePicker,
   TimePicker,
+  Row,
+  Col,
   RadioGroup,
   Radio
 } from 'view-design'
@@ -20,12 +23,15 @@ Vue.component('Button', Button)
 Vue.component('Form', Form)
 Vue.component('FormItem', FormItem)
 Vue.component('Select', Select)
+Vue.component('Option', Option)
 Vue.component('Input', Input)
 Vue.component('RadioGroup', RadioGroup)
 Vue.component('Radio', Radio)
 Vue.component('Icon', Icon)
 Vue.component('DatePicker', DatePicker)
 Vue.component('TimePicker', TimePicker)
+Vue.component('Row', Row)
+Vue.component('Col', Col)
 Vue.config.productionTip = false
 
 new Vue({

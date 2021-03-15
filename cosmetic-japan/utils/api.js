@@ -5,7 +5,10 @@ const www = getApp().globalData.www + '/';
 function post(that, link, data, logic = function () { }) {
   var login_key = app.getLoginKey();
   var isCN = 1;
-  var url = www + 'api/index/' + link.method + '?login_key=' + login_key + '&mid=' + app.globalData.mid + '&isCN=' + isCN + link.canshu;
+  // var url = www + 'api/index/' + link.method + '?login_key=' + login_key + '&mid=' + app.globalData.mid + '&isCN=' + isCN + link.canshu;
+	const mid = app.globalData.mid
+	const fxsId = `&fxs_id_${mid}=${app.globalData.fxs_id}`
+  var url = `${www}api/index/${link.method}?login_key=${login_key}&mid=${mid}${fxsId}&isCN=${isCN}${link.canshu}`
   wx.request({
     url: url,
     data: data,

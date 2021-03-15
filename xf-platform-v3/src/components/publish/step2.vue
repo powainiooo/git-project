@@ -167,6 +167,7 @@ export default {
     }
   },
   methods: {
+    handleNext () {},
     getIndexSrc (index) {
       return require('@/assets/img/nums/' + (index + 1) + '.png')
     },

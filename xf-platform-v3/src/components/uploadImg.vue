@@ -23,8 +23,8 @@
 
 <template>
 <div class="c-upload">
-  <div class="c-upload-box">
-    <img src="@/assets/img/ico-add.png" class="add" />
+  <div class="c-upload-box" :style="{width: width + 'px'}">
+    <img src="@/assets/img/ico-add.png" class="add" width="20" />
   </div>
   <div class="c-upload-content">
     <div><slot name="title"></slot></div>
@@ -36,6 +36,12 @@
 <script type='es6'>
 export default {
   name: 'app',
+  props: {
+    width: {
+      type: [Number, String],
+      default: 90
+    }
+  },
   data () {
     return {}
   },

@@ -138,8 +138,8 @@
   <artist ref="artist" :list="record.artist_list || []" />
   <notice ref="notice" :list="record.notice_list || []" />
   <particulars ref="particulars" :list="record.intro_list || []" />
-<!--  <organizers ref="organizers" :record="record.organizer" />-->
-<!--  <recommend ref="recommend" :list="record.recommend_tickets" />-->
+  <organizers ref="organizers" :record="record.organizer" />
+  <recommend ref="recommend" :list="record.recommend_tickets" />
   </template>
   <template v-else-if="page === 'buy'">
   <information />
@@ -182,7 +182,7 @@ export default {
   },
   data () {
     return {
-      page: 'detail'
+      page: 'buy'
     }
   },
   methods: {

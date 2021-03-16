@@ -18,13 +18,13 @@
     <li>
       <div class="rank"><img :src="'/static/images/number/2.png'" mode="heightFix" /></div>
       <div class="content">
-        <input placeholder="电话 Phone" placeholder-style="color: #9E9E9F;" v-model="formData.phone" />
+        <input placeholder="电话 Phone" placeholder-style="color: #9E9E9F;" v-model="formData.mobile" />
       </div>
     </li>
     <li>
       <div class="rank"><img :src="'/static/images/number/3.png'" mode="heightFix" /></div>
       <div class="content">
-        <input placeholder="身份证号码 ID number" placeholder-style="color: #9E9E9F;" v-model="formData.number" />
+        <input :placeholder="placeholder" placeholder-style="color: #9E9E9F;" v-model="formData.id_card_no" />
         <picker :range="idTypeArr" @change="idChange">
           <button><img src="/static/images/common/select-img1.png" mode="heightFix" /></button>
         </picker>
@@ -42,11 +42,15 @@ export default {
     return {
       formData: {
         name: '',
-        phone: '',
-        number: '',
+        mobile: '',
+        id_card_no: '',
         type: ''
       },
-      idTypeArr: ['身份证 ID card', '护照 passport']
+      placeholder: '身份证 ID number',
+      idTypeArr: [
+        { name: '身份证 ID number', value: 1 },
+        { name: '护照 passport', value: 2 }
+      ]
     }
   },
   methods: {

@@ -89,32 +89,28 @@
     <div class="activity-page">
       <div class="line1">
         <div class="infos">
-          <div class="logo"><img src="/static/images/logo.png" /></div>
-          <p>MAOLivehouse</p>
+          <div class="logo"><img :src="record.logo" v-if="record.logo"/></div>
+          <p>{{record.organizer_name}}</p>
         </div>
         <div class="rank">
           <ul>
             <li v-for="i in 4" :key="i"><img src="/static/images/common/rank-star2.png" /></li>
           </ul>
-          <p>4.6</p>
+          <p>{{record.star}}</p>
         </div>
       </div>
       <div class="line2">
         <div class="address">
           <img src="/static/images/common/dot.png" />
-          <span>深圳市福田区车公庙泰然大厦</span>
+          <span>{{record.address}}</span>
         </div>
-        <button class="btn">查看评价</button>
+        <button class="btn" @click="toComment">查看评价</button>
       </div>
       <div class="list-container">
-        <div class="item-large">
-          <c-ticket size="large" />
-        </div>
-        <div class="item-small">
-          <c-ticket />
-        </div>
-        <div class="item-small">
-          <c-ticket />
+        <div v-for="(item, index) in list"
+             :class="[index === 0 ? 'item-large' : 'item-small']">
+          <c-ticket :record="item" size="large" v-if="index === 0" />
+          <c-ticket :record="item" v-else />
         </div>
       </div>
     </div>
@@ -124,9 +120,13 @@
 <script>
 import cHeader from '@/components/header/header'
 import cTicket from '@/pages/index/modules/ticket'
+import { postAction } from '@/utils/api'
 export default {
   data () {
     return {
+      id: '',
+      record: {},
+      list: []
     }
   },
 
@@ -140,13 +140,29 @@ export default {
       mpvue.navigateBack({
         delta: -1
       })
+    },
+    getData () {
+      postAction('/api/merchant/detail', {
+        id: this.id
+      }).then(res => {
+        if (res.code === 1) {
+          this.record = res.data
+          this.list = res.data.ticket_list
+        }
+      })
+    },
+    toComment () {
+      mpvue.navigateTo({
+        url: `/pages/comment/main?id=${this.record.id}`
+      })
     }
   },
   mounted () {
     this.$refs.header.setStatus('onlyShare')
   },
-  onLoad () {
-    // let app = getApp()
+  onLoad (options) {
+    this.id = options.id || 3
+    this.getData()
   }
 }
 </script>

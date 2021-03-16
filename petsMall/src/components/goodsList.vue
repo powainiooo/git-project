@@ -57,7 +57,6 @@
          <div class="nums" v-else-if="source === 'catbox'">1份/月</div>
       </li>
    </ul>
-   <template v-if="recommendList.length > 0 && (source === 'catbox' || source === 'diy')">
    <div class="c-goods-price" v-if="!onlyList">
       <div>
          <p>订购{{orderType.name}}</p>
@@ -65,6 +64,7 @@
       </div>
       <div class="values">{{orderType.pay_price}}<span>元</span></div>
    </div>
+   <template v-if="recommendList.length > 0 && (source === 'catbox' || source === 'diy')">
    <div class="c-goods-list-title" style="border-radius: 0;">
       <p class="en">Recommend buy</p>
       <p>推荐选购</p>
@@ -93,17 +93,16 @@
          <div class="values">{{item.pay_price * orderType.nums}}<span>元</span></div>
       </div>
    </div>
-
    </template>
 
-   <div class="c-goods-price" v-if="shipPrice !== ''">
+   <div class="c-goods-price borderT" v-if="shipPrice !== ''">
       <div>
          <p>运费</p>
       </div>
       <div class="values">{{shipPrice}}<span>元</span></div>
    </div>
 
-   <div class="c-goods-price" v-if="totalPrice !== ''">
+   <div class="c-goods-price borderT" v-if="totalPrice !== ''">
       <div>
          <p>总价</p>
       </div>

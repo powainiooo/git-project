@@ -90,7 +90,7 @@ export default {
   },
   computed: {
     list () {
-      return this.record.organizer_ticket || []
+      return this.record.organizer_tickets || []
     }
   },
   data () {

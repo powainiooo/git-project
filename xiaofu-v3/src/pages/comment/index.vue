@@ -81,19 +81,20 @@
   <c-header onlyLogo />
   <div class="comment-container">
     <div class="title bBorder"><span>User evaluation</span>用户评价</div>
-    <div class="comment-item bBorder">
+    <div class="comment-item bBorder" v-for="(item, idx) in list" :key="id">
       <div class="line1">
         <div class="infos">
-          <img src="/static/images/img.jpg" />
-          <p>Andrew</p>
+          <img :src="item.avatar" />
+          <p>{{item.nickName}}</p>
         </div>
         <ul class="stars">
           <li v-for="i in 5" :key="i">
-            <img src="/static/images/common/star-gray.png" mode="widthFix">
+            <img src="/static/images/common/star-select.png" mode="widthFix" v-if="i < item.star">
+            <img src="/static/images/common/star-gray.png" mode="widthFix" v-else>
           </li>
         </ul>
       </div>
-      <div class="content">非常让人难忘的经历，舞池氛围好到爆！非常让人难忘的经历，舞池氛围好到爆！非常让人难忘的经历，舞池氛围好到爆！非常让人难忘的经历，舞池氛围好到爆！</div>
+      <div class="content">{{item.content}}</div>
     </div>
   </div>
 </div>
@@ -101,9 +102,11 @@
 
 <script>
 import cHeader from '@/components/header/header'
+import { postAction } from '@/utils/api'
 export default {
   data () {
     return {
+      list: []
     }
   },
 
@@ -112,10 +115,24 @@ export default {
   },
 
   methods: {
+    getData () {
+      postAction('/api/comment/lists', {
+        merchant_id: this.id
+      }).then(res => {
+        if (res.code === 1) {
+          res.data.list.forEach(i => {
+            i.star = parseInt(i.star)
+          })
+          this.list = res.data.list
+          console.log('this.list', this.list)
+        }
+      })
+    }
   },
 
-  created () {
-    // let app = getApp()
+  onLoad (options) {
+    this.id = options.id || 3
+    this.getData()
   }
 }
 </script>

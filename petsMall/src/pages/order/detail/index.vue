@@ -153,8 +153,8 @@ export default {
    },
    onLoad (options) {
       Object.assign(this.$data, this.$options.data())
-      this.orderNum = options.orderNum || '202102261001'
-      this.source = options.source || 'catbox'
+      this.orderNum = options.orderNum
+      this.source = options.source
       if (this.source === 'goods') {
          this.title = '购物清单'
          this.titleEn = 'Shopping list'

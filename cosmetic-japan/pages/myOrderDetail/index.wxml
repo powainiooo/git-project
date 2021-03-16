@@ -51,7 +51,7 @@
     <span wx:if="{{info.group_buy_success == 0}}">拼单进行中</span>
     <span wx:if="{{info.group_buy_success == -1}}" class="spell-red">拼单失败</span>
     <view class="spell-right">
-      <image src='{{item.headimg}}' class="spell-image" wx:for="{{info.group_buy_user}}" wx:key  
+      <image src='{{item.headimg}}' class="spell-image" wx:for="{{info.group_buy_user}}" wx:key
     wx:if="{{(info.group_buy_success == 1 && index<4) || (info.group_buy_success != 1 && index<3)}}"></image>
       <image src='/images/pt/noperson.png' class="spell-image" wx:if="{{info.group_buy_success != 1}}"></image>
       <image src='/images/ico_jt.png' class="right-arrow"></image>
@@ -64,8 +64,8 @@
 <view class='txtH100' wx:if="{{info.fp_status!='0'}}">{{info.fp_name}}</view>
 <view class='hr16'></view>
 <view class="txtH100"><span class="lInfo">其他信息</span></view>
-<view class='txtH100'>真实姓名：{{info.real_name}}</view>
-<view class='txtH100'>身份证号：{{info.card_number}}</view>
+<view class='txtH100' wx:if="{{hw_flag == '1'}}">真实姓名：{{info.real_name}}</view>
+<view class='txtH100' wx:if="{{hw_flag == '1'}}">身份证号：{{info.card_number}}</view>
 <view class='txtH100'>备注:{{info.bz}}</view>
 <view class='footer_btn' hidden='{{info.status == 4}}'>
   <view class='foot_btn'>

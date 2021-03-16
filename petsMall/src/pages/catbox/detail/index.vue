@@ -101,6 +101,7 @@ export default {
    },
    onLoad (options) {
       // Object.assign(this.$data, this.$options.data())
+      store.commit('SET_GOODSDETAILSTATUS', false)
       this.id = options.id || options.scene
       this.getData()
    },

@@ -213,7 +213,13 @@ Page({
       }
       let link = { method: 'pay', canshu: '' };
       let logic = (ret) => {
-        api.wxPay(ret);
+      	if (ret.ret == 1003) {
+		      wx.redirectTo({
+			      url: '../paySuccess/index',
+		      })
+	      } else {
+		      api.wxPay(ret);
+	      }
       }
       api.post(this, link, data, logic);
     }

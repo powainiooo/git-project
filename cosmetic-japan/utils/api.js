@@ -37,6 +37,8 @@ function post(that, link, data, logic = function () { }) {
 	        });
         } else if (retData.ret == 1002) {
 	        logic(retData);
+        } else if (retData.ret == 1003) {
+	        logic(retData);
         } else if (retData.ret == 1000) {
 	        getUser()
         } else if (retData.ret == 0){

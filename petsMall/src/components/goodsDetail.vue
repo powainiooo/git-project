@@ -1,7 +1,7 @@
 <style>
 .c-goods-detail { width: 100%; height: 100vh; overflow-y: auto; position: fixed; top: 0; left: 0; z-index: 2000; transition: top .5s cubic-bezier(.23,.78,.33,.97); }
 .c-goods-detail-infos { width: 100%; min-height: calc(100vh - 200px); background-color: rgba(255, 255, 255, .97); padding: 68px 48px 40px 68px; box-sizing: border-box; }
-.c-goods-detail-infos h3 { color: var(--textColor2); text-shadow: var(--textShadow); font-size: 46px; line-height: 68px; margin-bottom: 62px; }
+.c-goods-detail-infos h3 { color: var(--textColor2); text-shadow: var(--textShadow); font-size: 46px; line-height: 68px; margin-bottom: 62px; margin-right: 90px; }
 .c-goods-detail-infos h3.en { line-height: 56px; margin-bottom: 0; }
 .c-goods-detail-infos div { color: var(--textColor); text-shadow: var(--textShadow); font-size: 30px; line-height: 46px; }
 .c-goods-detail-infos p { color: var(--textColor); text-shadow: var(--textShadow); font-size: 22px; line-height: 32px; margin-bottom: 40px; }
@@ -20,12 +20,12 @@
       <h3>{{detailData.china_name}} </h3>
       <div>种类 / 规格：</div>
       <p>{{detailData.attr_name}}、{{detailData.specs}}</p>
-      <div>适用对象：</div>
-      <p><text>{{detailData.apply}}</text></p>
-      <div>营养成分：</div>
-      <p><text>{{detailData.mainly}}</text></p>
-      <div>主要成分：</div>
-      <p><text>{{detailData.nutritional}}</text></p>
+      <div v-if="detailData.apply !== ''">适用对象：</div>
+      <p v-if="detailData.apply !== ''"><text>{{detailData.apply}}</text></p>
+      <div v-if="detailData.nutritional !== ''">营养成分：</div>
+      <p v-if="detailData.nutritional !== ''"><text>{{detailData.nutritional}}</text></p>
+      <div v-if="detailData.mainly !== ''">主要成分：</div>
+      <p v-if="detailData.mainly !== ''"><text>{{detailData.mainly}}</text></p>
       <img :src="detailData.product_img" mode="widthFix" />
    </div>
    <div class="c-goods-detail-logo">

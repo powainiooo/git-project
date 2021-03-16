@@ -61,6 +61,7 @@ export default {
    data () {
       return {
          status: '',
+         source: '',
          orderNum: ''
       }
    },
@@ -73,7 +74,7 @@ export default {
       btnFunc () {
          if (this.status === 'suc') {
             mpvue.redirectTo({
-               url: `/pages/order/detail/main?orderNum=${this.orderNum}`
+               url: `/pages/order/detail/main?orderNum=${this.orderNum}&source=${this.source}`
             })
          } else {
             this.pay()
@@ -108,6 +109,7 @@ export default {
       console.log('order onLoad', options)
       this.status = options.result || 'suc'
       this.orderNum = options.orderNum || ''
+      this.source = options.source
    }
 }
 </script>

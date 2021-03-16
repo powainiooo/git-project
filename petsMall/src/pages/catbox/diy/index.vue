@@ -301,6 +301,14 @@ export default {
       changeTempPrice (e) {
          console.log('changeTempPrice', e)
          this.tempPrice = e
+      },
+      getToyData () {
+         getAction('get_toy').then(res => {
+            console.log(res)
+            this.toyListData[0].english_name = res.data.toy.english_name
+            this.toyListData[0].china_name = res.data.toy.china_name
+            this.toyListData[0].price = res.data.toy.price
+         })
       }
    },
    onReachBottom () {
@@ -332,6 +340,7 @@ export default {
             this.ids[this.step] = selects[1]
          }
       }
+      this.getToyData()
    }
 }
 </script>

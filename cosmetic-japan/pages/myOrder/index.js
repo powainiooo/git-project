@@ -205,6 +205,7 @@ Page({
     // 支付
     pay: function(data,obj) {
         var that = this;
+        console.log('1',data.package);
         wx.requestPayment({
             'timeStamp': data.timeStamp,
             'nonceStr': data.nonceStr,

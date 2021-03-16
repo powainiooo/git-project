@@ -63,10 +63,10 @@ export default {
          if (this.detailData.toy === '1') {
             return {
                cover: '/static/images/catbox/toy-yes.png',
-               english_name: 'Hot toys',
-               china_name: '当月精选玩具',
+               english_name: this.toy.english_name,
+               china_name: this.toy.china_name,
                attr_name: '随机',
-               price: 10
+               price: this.toy.price
             }
          } else {
             return {
@@ -84,6 +84,11 @@ export default {
          price: 0,
          detailData: {
             pricelist: []
+         },
+         toy: {
+            english_name: '',
+            china_name: '',
+            price: ''
          },
          hasData: false
       }
@@ -153,6 +158,14 @@ export default {
          mpvue.navigateTo({
             url: '/pages/catbox/diy/main'
          })
+      },
+      getToyData () {
+         getAction('get_toy').then(res => {
+            console.log(res)
+            this.toy.english_name = res.data.toy.english_name
+            this.toy.china_name = res.data.toy.china_name
+            this.toy.price = res.data.toy.price
+         })
       }
    },
    onShow () {
@@ -163,6 +176,7 @@ export default {
    onLoad (options) {
       Object.assign(this.$data, this.$options.data())
       this.id = options.id || 4
+      this.getToyData()
    }
 }
 </script>

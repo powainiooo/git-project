@@ -157,10 +157,10 @@ export default {
       this.getData()
    },
    onLoad (options) {
+      store.commit('SET_CARTSTATUS', false)
       Object.assign(this.$data, this.$options.data())
       this.typeId = options.type || 1
       this.title = options.title || '主粮|Staple food'
-      this.getData()
    }
 }
 </script>

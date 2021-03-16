@@ -13,6 +13,10 @@
             </swiper-item>
          </block>
       </swiper>
+      <image wx:if="{{goods_info.video !=''}}" src="https://hwsc.vsapp.cn/static/images/play.png?v2" class="play-image" bindtap='playTap' />
+   </view>
+   <view hidden='{{videoBox}}' class="video-area">
+      <video src="{{goods_info.video?(imgUrl+goods_info.video):''}}" controls="true" id='goodsVideo' bindpause="videoPause" bindended="videoEnded"></video>
    </view>
    <!-- 正常显示 -->
    <view>
@@ -48,12 +52,16 @@
             <image src='/images/ico_jt.png'></image>
          </view>
       </navigator>
-      <view class='otherInfo bb10' wx:if="{{bgList.length > 0}}">
-         <view class='prd'>
+      <view class='otherInfo bb10'>
+         <view class='prd' wx:if="{{bgList.length > 0}}">
             <view class='item' wx:for="{{bgList}}">
                <image src='/images/ico_yes.png'></image>{{item}}
             </view>
          </view>
+         <view class='fzTj' wx:if="{{goods_info.coupon_discount==0}}">不支持优惠券抵扣</view>
+         <view class='fzTj' wx:else>支持优惠券抵扣</view>
+         <view class='fzTj' wx:if="{{goods_info.score_discount==0}}">不支持积分抵扣</view>
+         <view class='fzTj' wx:else>支持积分抵扣</view>
       </view>
       <view class='canshu'>
          <navigator class='UserPl between' url='#' bindtap='CanshuTap'>

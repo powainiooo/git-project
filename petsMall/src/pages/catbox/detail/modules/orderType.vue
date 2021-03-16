@@ -24,7 +24,7 @@
    <h3>订购类型</h3>
    <h3 class="en">Order type</h3>
    <p>一次性付款，定时配送，不再担心缺量断粮。</p>
-   <p>订单满138元免运费（偏远地区除外）</p>
+   <p>订单满{{price}}元免运费（偏远地区除外）</p>
    <ul>
       <li v-for="(item, index) in list" :key="index">
          <div class="left">
@@ -38,14 +38,23 @@
 </template>
 
 <script type='es6'>
+import { getAction } from "../../../../utils/api"
+
 export default {
   name: 'app',
    props: {
      list: Array
    },
   data () {
-    return {}
+    return {
+       price: 0
+    }
   },
+   mounted () {
+      getAction('get_free_post').then(res => {
+         this.price = res.data.amount
+      })
+   },
   methods: {}
 }
 </script>

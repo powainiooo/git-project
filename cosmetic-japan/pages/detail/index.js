@@ -364,6 +364,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
+        console.log(11,options);
 	    if (options.mid) {
 		    app.setMid(options.mid)
 	    }
@@ -373,12 +374,21 @@ Page({
         console.log(11, options)
         if (!app.getLoginKey()) {
             console.log('detail page no login');
-            app.getLogin();
+            app.getLogin(
+                () => {
+                    this.getdata(options)
+                }
+            );
             return;
+        }else{
+            this.getdata(options)
         }
+
+    },
+    getdata(options){
+        console.log('options',options);
 	    // options.id = '220'
         if (!!options && !!options.id) {
-
             if (options.activity_type) {
                 var activity_type = options.activity_type
                 var hd_id = options.hd_id
@@ -436,7 +446,8 @@ Page({
                     fxs_id: ret.fxs_id,
                   bgList: ret.goods_info.bg_list,
 	                score: ret.ave_pf,
-	                rate: ret.praise_rate
+	                rate: ret.praise_rate,
+	                nums: ret.cart_nums
                 })
 	            app.setFxsId(res.fxs_id)
               console.log('详情', goods_desc);
@@ -624,7 +635,7 @@ Page({
                 isCN: wx.getStorageSync('isCN')
             })
         }
-        api.post(this, www, {}, huidiao);
+        // api.post(this, www, {}, huidiao);
     },
 
     /**

@@ -15,7 +15,7 @@
     <view class='rightInfo' wx:for="{{list}}" wx:key="index" wx:if="{{isActive==index}}">
       <block wx:for="{{item.sub}}" wx:key="index" wx:for-item="its">
       <navigator url='/pages/product/index?id={{its.id}}' class='item'>
-        <image src='{{imgUrl}}{{its.cover}}'></image>
+        <image src='{{imgUrl}}{{its.cover}}' mode="aspectFit"></image>
         <text>{{its.cname}}</text>
       </navigator>
       </block>

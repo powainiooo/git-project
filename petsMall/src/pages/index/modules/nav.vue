@@ -1,5 +1,5 @@
 <style>
-.c-nav { overflow: hidden; height: 752px; position: relative;}
+.c-nav { overflow: hidden; height: 752px; position: relative; background-color: #ffffff; }
 .c-nav .bg { width: 100%; height: 100%; position: absolute; top: 0; left: 0; z-index: 1;}
 
 .c-nav .nav-box { height: 200px; margin: 60px 45px 40px 45px; background-color: #ffffff; border-radius: 10px; box-shadow: var(--boxShadow); display: flex; align-items: center; justify-content: space-between; box-sizing: border-box; padding: 0 28px 0 20px; position: relative; z-index: 5; }

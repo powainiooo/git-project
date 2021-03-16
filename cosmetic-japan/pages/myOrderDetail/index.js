@@ -15,7 +15,8 @@ Page({
         goods_list: [],
         info: {},
         fukuanBool: true,
-        title: '', // 页面标题
+        title: '', // 页面标题,
+	    hw_flag: ''
     },
     // 支付
     pay: function(data,obj) {
@@ -254,6 +255,7 @@ Page({
                     address: res.data.data.address,
                     goods_list: res.data.data.goods_list,
                     info: res.data.data.info,
+	                hw_flag: res.data.data.hw_flag,
                 })
                 switch (this.data.info.group_buy_success) {
                     case '-1':

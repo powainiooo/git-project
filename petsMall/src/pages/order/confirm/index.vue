@@ -9,6 +9,7 @@ page { background-color: #F3F2F1; }
    <div class="">
       <info-card :itemData="formData" />
       <goods-list
+         showDetail
          :source="source"
          :list="goodsList"
          :recommendList="recList"
@@ -23,6 +24,8 @@ page { background-color: #F3F2F1; }
    <catbox-tips ref="tips" @close="tipsClose" />
 
    <c-footer :price="totalPrice" :btnName="btnName" @btnFunc="doSettle" />
+
+   <c-goods-detail />
 </div>
 </template>
 
@@ -31,6 +34,7 @@ import cHeader from '@/components/header'
 import cFooter from '@/components/footer'
 import infoCard from '../modules/infoCard'
 import goodsList from '@/components/goodsList'
+import cGoodsDetail from '@/components/goodsDetail'
 import store from '../../../store'
 import { getAction } from '@/utils/api'
 import catboxTips from '../modules/catboxTips'
@@ -41,21 +45,31 @@ export default {
       cFooter,
       infoCard,
       goodsList,
-      catboxTips
+      catboxTips,
+      cGoodsDetail
    },
    computed: {
       catboxFormData () {
          return store.state.catboxFormData
       },
       totalPrice () {
-         const shipPrice = this.shipPrice || 0
+         let shipPrice = this.shipPrice || 0
          if (this.source === 'catbox') {
             const price1 = Number(this.orderType.pay_price) || 0
             const nums = this.orderType.nums || 0
             const price2 = this.recList.reduce((total, i) => total + i.pay_price * nums, 0)
-            return price1 + price2 + shipPrice
+            const total = price1 + price2
+            if (total > this.amount) {
+               shipPrice = 0
+               this.shipPrice = 0
+            }
+            return total + shipPrice
          } else if (this.source === 'goods') {
             const price = this.goodsList.reduce((total, i) => total + Number(i.price) * Number(i.buy_num), 0)
+            if (price > this.amount) {
+               shipPrice = 0
+               this.shipPrice = 0
+            }
             return price + shipPrice
          }
       }
@@ -70,7 +84,8 @@ export default {
          goodsList: [],
          recList: [],
          orderType: {},
-         shipPrice: ''
+         shipPrice: '',
+         amount: 0
       }
    },
    methods: {
@@ -139,9 +154,11 @@ export default {
             'paySign': jsapi.paySign,
             'success': res => {
                this.doBuySuccess(orderNum)
+               this.$refs.tips.show = false
             },
             'fail': err => {
                console.log('pay fail', err)
+               this.$refs.tips.show = false
                mpvue.reLaunch({
                   url: '/pages/result/main?result=fail'
                })
@@ -153,7 +170,7 @@ export default {
             order_num: orderNum
          }).then(res => {
             mpvue.reLaunch({
-               url: '/pages/result/main?result=suc&orderNum=' + orderNum
+               url: `/pages/result/main?result=suc&orderNum=${orderNum}&source=${this.source}`
             })
          })
       },
@@ -201,12 +218,16 @@ export default {
             province: this.formData.province
          }).then(res => {
             this.shipPrice = res.data.fee
+            getAction('get_free_post').then(res => {
+               this.amount = res.data.amount
+            })
          })
       }
    },
    onLoad (options) {
+      store.commit('SET_GOODSDETAILSTATUS', false)
       Object.assign(this.$data, this.$options.data())
-      this.source = options.source || 'catbox'
+      this.source = options.source
       const fd = {...store.state.formData}
       if (this.source === 'goods') {
          this.getCart()

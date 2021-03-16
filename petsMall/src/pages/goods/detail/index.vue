@@ -190,6 +190,7 @@ export default {
       }
    },
    onLoad (options) {
+      store.commit('SET_CARTSTATUS', false)
       Object.assign(this.$data, this.$options.data())
       this.id = options.id || options.scene
       this.getData()

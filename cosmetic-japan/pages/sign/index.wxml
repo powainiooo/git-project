@@ -22,7 +22,7 @@
   					<view class="time">{{item.ctime}}</view>
   				</view>
   			</view>
-  			<view class="jf">+{{item.score}}</view>
+  			<view class="jf">{{item.type_str == '抵扣' ? '-' : '+'}}{{item.score}}</view>
   		</view>
   	</view>
   </view>

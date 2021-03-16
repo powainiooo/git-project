@@ -41,6 +41,7 @@ Page({
 	sortTap:function(e){
 		var idx = e.currentTarget.dataset.idx;
 		console.log('idx', idx)
+		this.data.list = []
 		if (idx == 2) {
 			if (this.data.xl_gd == 0){
 				var xl_gd = 1;

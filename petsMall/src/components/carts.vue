@@ -27,7 +27,7 @@
                   @del="handleDel"
                   @change="numsChange" />
    </div>
-   <c-footer btnName="结算|Settlement" :price="allPrice" @btnFunc="toPage"  v-if="showCart" />
+   <c-footer btnName="结算|Settlement" needAuth :price="allPrice" @btnFunc="toPage"  v-if="showCart" />
 </div>
 </template>
 

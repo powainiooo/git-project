@@ -181,6 +181,7 @@ export default {
          }
          console.log('SET_CBFORMDATA', params)
          store.commit('SET_CBFORMDATA', params)
+         store.commit('SET_ORDERTYPESTATUS', false)
          mpvue.navigateTo({
             url: `/pages/address/main?status=new&source=${this.source}`
          })

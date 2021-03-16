@@ -1,21 +1,25 @@
 <!--pages/pingjia/index.wxml-->
-<view class='container f3'>
-  <view class='plList'>
-    <view class='item start fff'>
-      <view class='l'><image wx:if='{{img}}' src='{{imgUrl + img}}'></image></view>
-      <view class='r between wrap'>
-        <view class='title'>商品评分</view>
-        <view class='starBox'>
-          <block wx:for="{{5}}" wx:key="index">
-          <image wx:if="{{starNum >= index+1}}" data-num="{{index+1}}" src='/images/ico_star_y.png' bindtap='starTap'></image>
-          <image wx:else data-num="{{index+1}}" src='/images/ico_star_n.png' bindtap='starTap'></image>
-          </block>
-        </view>
+<view class="f3" style="height: 20rpx"></view>
+<view class='container pingjia-ct fff'>
+   <view class="goods">
+      <view class="goods-item">
+         <navigator url='#'>
+            <image src="{{imgUrl}}{{img}}" class="img"></image>
+            <image src="/images/f3.png" class="frame"></image>
+            <view class="hint">官方正品 假一赔十</view>
+            <image src="/images/f1.png" class="price-bg" mode="widthFix"></image>
+            <view class="price"><text>￥</text>{{price / 100}}</view>
+            <view class="price-name">活动预售价：</view>
+            <image src="/images/f2.png" class="logo-bg" mode="widthFix" wx:if="{{logo}}"></image>
+            <view class="logo" wx:if="{{logo}}">{{logo}}</view>
+         </navigator>
       </view>
-    </view>
-  </view>
-  <view class='comment fff'>
-    <view class='commentBox'><textarea placeholder-class="place" placeholder='请填写您的评价' bindinput='inputContent' value='{{content}}' disabled="{{!isNull?true:false}}"></textarea></view>
-  </view>
+   </view>
+   <view class='starBox'>
+      <block wx:for="{{5}}" wx:key="index">
+         <image wx:if="{{starNum >= index+1}}" data-num="{{index+1}}" src='/images/ico_star_y2.png' bindtap='starTap'></image>
+         <image wx:else data-num="{{index+1}}" src='/images/ico_star_n2.png' bindtap='starTap'></image>
+      </block>
+   </view>
   <view class='fabuPj' hidden='{{!isNull}}' bindtap='fabuTap'>发布评价</view>
 </view>

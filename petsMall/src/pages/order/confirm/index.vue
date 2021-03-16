@@ -17,13 +17,13 @@ page { background-color: #F3F2F1; }
          :shipPrice="shipPrice"
          :title="title"
          :titleEn="titleEn" />
-      <div class="hint-content" v-if="source === 'goods'">订单满138元免运费（偏远地区除外），不满138元则额外加收运费。</div>
+      <div class="hint-content" v-if="source === 'goods'">订单满{{amount}}元免运费（偏远地区除外），不满{{amount}}元则额外加收运费。</div>
       <div class="hint-content" v-else>所订购的猫盒套餐及推荐选购产品，每月将按以上产品清单及数量进行配送。</div>
    </div>
 
    <catbox-tips ref="tips" @close="tipsClose" />
 
-   <c-footer :price="totalPrice" :btnName="btnName" @btnFunc="doSettle" />
+   <c-footer :price="showTotalPrice" :btnName="btnName" @btnFunc="doSettle" />
 
    <c-goods-detail />
 </div>
@@ -53,25 +53,19 @@ export default {
          return store.state.catboxFormData
       },
       totalPrice () {
-         let shipPrice = this.shipPrice || 0
          if (this.source === 'catbox') {
             const price1 = Number(this.orderType.pay_price) || 0
             const nums = this.orderType.nums || 0
             const price2 = this.recList.reduce((total, i) => total + i.pay_price * nums, 0)
-            const total = price1 + price2
-            if (total > this.amount) {
-               shipPrice = 0
-               this.shipPrice = 0
-            }
-            return total + shipPrice
+            return price1 + price2
          } else if (this.source === 'goods') {
             const price = this.goodsList.reduce((total, i) => total + Number(i.price) * Number(i.buy_num), 0)
-            if (price > this.amount) {
-               shipPrice = 0
-               this.shipPrice = 0
-            }
-            return price + shipPrice
+            return parseFloat(price.toFixed(1))
          }
+      },
+      showTotalPrice () {
+         let shipPrice = this.shipPrice || 0
+         return this.totalPrice + shipPrice
       }
    },
    data () {
@@ -220,6 +214,9 @@ export default {
             this.shipPrice = res.data.fee
             getAction('get_free_post').then(res => {
                this.amount = res.data.amount
+               if (this.totalPrice > this.amount) {
+                  this.shipPrice = 0
+               }
             })
          })
       }

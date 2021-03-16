@@ -3,16 +3,23 @@
 
   <view class='table'>
     <view class='tr th'>
-      <view class='td'>订单编号</view>
+      <!-- <view class='td'>订单编号</view> -->
       <view class='td'>结算时间</view>
       <view class='td'>订单金额</view>
       <view class='td'>订单营收</view>
     </view>
+   
     <view class='tr' bindtap='bindopen' data-num='{{index}}' wx:for='{{list}}' wx:key='unquit'>
-      <view class='td'>{{item.order_num}}</view>
       <view class='td'>{{item.ctime}}</view>
       <view class='td'>￥{{item.order_amount}}</view>
-      <view class='td'>￥{{item.order_sr}}</view>
+      <view class='td' style="color:red">￥{{item.order_sr}}</view>
+      <image src='/images/icon_btm.png' hidden='{{!openArr[index]}}' class='icon'></image> 
+      <image src='/images/icon_order_back.png' hidden='{{openArr[index]}}' class='icon'></image>
+      <view class='ovh'></view>
+      <view class='cont' animation="{{animationArr[index].animationData}}" style='height:0rpx;'>
+        <text class='bh'> 订单编号：{{item.order_num}}</text>
+        <view class='hr16'></view>
+      </view>
     </view>
 
   </view>

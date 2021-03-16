@@ -10,6 +10,7 @@ Page({
   data: {
     allMoney: 12345,
     money:'',
+	  minMoney:'',
     btnBool: false,
   },
   bindAll: function(){

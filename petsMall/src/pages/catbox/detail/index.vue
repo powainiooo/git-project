@@ -13,6 +13,7 @@ page { background-color: #F3F2F1; }
          <img :src="detailData.cover" mode="widthFix" style="width: 100%;" />
          <c-goods-list
             showDetail
+            onlyList
             source="catbox"
             :title="detailData.china_name"
             :titleEn="detailData.english_name"

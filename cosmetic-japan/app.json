@@ -1,6 +1,8 @@
 {
    "pages": [
       "pages/index/index",
+      "pages/pingjia/index",
+      "pages/myOrderDetail/index",
       "pages/fenxiao/index",
       "pages/orderAccount/index",
       "pages/fenxiaoInfo/index",
@@ -24,9 +26,7 @@
       "pages/helpCenter/index",
       "pages/ewm/index",
       "pages/myOrder/index",
-      "pages/myOrderDetail/index",
       "pages/userPl/index",
-      "pages/pingjia/index",
       "pages/site/index",
       "pages/fenxiaoOrderDetail/index",
       "pages/fenxiaoshang/index",

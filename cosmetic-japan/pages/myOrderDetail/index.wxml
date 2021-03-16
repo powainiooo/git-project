@@ -1,14 +1,17 @@
 <!--pages/myOrderDetail/index.wxml-->
 <view class='container'>
 <view class='orderAddress'>
-  <view class='cont'>
-    <text class='name'>收货人：{{address.rev_name}}</text>
-    <text class='phone'>{{address.rev_mobile}}</text>
-  </view>
-  <view class='address'>
-    <image src='/images/icon_address.png' class='icon'></image>
-    <text class='txt'>{{address.rev_province}}{{address.rev_city}}{{address.rev_area}}{{address.rev_address}}</text>
-  </view>
+   <image src='/images/ico_adds.png' class='icon'></image>
+   <view style="width: 520rpx;">
+      <view class='cont'>
+         <text class='name'>{{address.rev_name}}</text>
+         <text class='phone'>{{address.rev_mobile}}</text>
+      </view>
+      <view class='address'>
+         <text class='txt'>{{address.rev_province}}{{address.rev_city}}{{address.rev_area}}{{address.rev_address}}</text>
+      </view>
+   </view>
+   <image src='/images/ico_right.png' class='icon-jt' mode="widthFix"></image>
 </view>
 <view class='hr16'></view>
 <view class='orderLi'>
@@ -19,17 +22,30 @@
     <text class='status' wx:if="{{info.group_buy_success == -1}}">已超时拼单失败</text>
   </view>
   <view class='orderLi_shop' wx:for='{{goods_list}}' wx:key='unquit'>
-    <image src='{{imgUrl}}{{item.goods_cover}}' class='img'></image>
+<!--    <image src='{{imgUrl}}{{item.goods_cover}}' class='img'></image>-->
+     <view class="goods">
+        <view class="goods-item">
+           <navigator url='#'>
+              <image src="{{imgUrl}}{{item.goods_cover}}" class="img"></image>
+              <image src="/images/f3.png" class="frame"></image>
+              <view class="hint">官方正品 假一赔十</view>
+              <image src="/images/f1.png" class="price-bg" mode="widthFix"></image>
+              <view class="price"><text>￥</text>{{item.goods_price / 100}}</view>
+              <view class="price-name">活动预售价：</view>
+              <image src="/images/f2.png" class="logo-bg" mode="widthFix" wx:if="{{item.logo}}"></image>
+              <view class="logo" wx:if="{{item.logo}}">{{item.logo}}</view>
+           </navigator>
+        </view>
+     </view>
     <view class='cont'>
       <view class='tit'>{{item.goods_name}}</view>
-      <view class='style'>{{item.goods_attr}}</view>
-      <view class='numView'>
-        <text class='num'>x{{item.buy_num}}</text>
-        <view class=''>
-          <text class='money1'>￥</text>
-          <text class='money2'>{{item.goods_price / 100}}</text>
-        </view>
-      </view>
+       <view class='numView'>
+          <view class='style'>已选规格：{{item.goods_attr}}</view>
+          <view class=''>
+             <text class='money1'>￥{{item.goods_price / 100}}</text>
+          </view>
+       </view>
+       <view class="end"><text class='num'>x{{item.buy_num}}</text></view>
     </view>
   </view>
 </view>

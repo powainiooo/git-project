@@ -8,10 +8,10 @@ page{background-color: #f3f3f3;}
 .tixian_tips .line{position: absolute;top:50%;left:30rpx;width: 690rpx;height:2rpx;background-color: #e5e5e5;}
 
 
-.table{background-color: #fff; margin-top: 18rpx;}
-.table .tr{line-height: 120rpx;border-bottom: 2rpx solid #f3f3f3;position: relative;overflow: hidden; display: flex;}
-.table .th .td{color: #333; }
-.table .td{color: #666;font-size: 34rpx;text-align: center; flex: 1;}
+.table{background-color: #fff;}
+.table .tr{line-height: 120rpx;border-bottom: 2rpx solid #f3f3f3;position: relative;overflow: hidden;}
+.table .th .td{color: #333;}
+.table .td{color: #666;font-size: 34rpx;float: left;text-align: center;width: 250rpx;}
 .table .td.red{color: #de3031;}
 .table .tr .icon{position: absolute;width: 40rpx;height: 40rpx;z-index: 3;right: 20rpx;top:40rpx;}
 .table .tr .cont{font-size: 26rpx;color: #999;border-top: 2rpx solid #f3f3f3;height: 0;}

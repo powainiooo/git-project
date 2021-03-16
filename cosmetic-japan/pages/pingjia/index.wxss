@@ -1,1 +1,36 @@
 /* pages/pingjia/index.wxss */
+.pingjia-ct .goods {
+   width: 240rpx;
+   height: 240rpx;
+   margin: 188rpx auto 40rpx auto;
+}
+.pingjia-ct .goods .goods-item {
+   height: 340rpx;
+   transform-origin: 0 0;
+   transform: scale(.7);
+}
+.pingjia-ct .starBox {
+   text-align: center;
+}
+.pingjia-ct .starBox image {
+   width: 50rpx;
+   height: 50rpx;
+   display: inline-block;
+   margin:0 12rpx;
+   vertical-align: middle;
+}
+
+.fabuPj {
+   width: 690rpx;
+   height: 90rpx;
+   border-radius: 45rpx;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   background-color: #de3031;
+   font-size: 36rpx;
+   color: #fff;
+   position: fixed;
+   left: 30rpx;
+   bottom: 240rpx;
+}

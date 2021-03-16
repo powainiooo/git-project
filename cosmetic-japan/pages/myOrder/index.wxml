@@ -18,19 +18,30 @@
           <text class='status' wx:if="{{item.group_buy_success == -1 && item.activity_type == 4}}">拼单失败</text>
         </view>
         <view class='orderLi_shop' wx:if='{{item.child.length == 1}}'>
-          <image src='{{imgUrl + item.child[0].goods_cover}}' class='img'></image>
-          <view class='cont'>
-            <view class='tit'>{{item.child[0].goods_name}}</view>
-            <view class='style'>{{item.child[0].goods_attr}}</view>
-            <view class='numView'>
-              <text class='num'>x{{item.child[0].buy_num}}</text>
-              <view class='asd'>
-                <text class='money1'>￥</text>
-                <text class='money2'>{{item.order_amount}}</text>
-                <!-- <text class='money3'>.00</text> -->
+           <view class="goods">
+              <view class="goods-item">
+                 <navigator url='#'>
+                    <image src="{{imgUrl}}{{item.child[0].goods_cover}}" class="img"></image>
+                    <image src="/images/f3.png" class="frame"></image>
+                    <view class="hint">官方正品 假一赔十</view>
+                    <image src="/images/f1.png" class="price-bg" mode="widthFix"></image>
+                    <view class="price"><text>￥</text>{{item.child[0].goods_price / 100}}</view>
+                    <view class="price-name">活动预售价：</view>
+                    <image src="/images/f2.png" class="logo-bg" mode="widthFix" wx:if="{{item.child[0].logo}}"></image>
+                    <view class="logo" wx:if="{{item.child[0].logo}}">{{item.child[0].logo}}</view>
+                 </navigator>
               </view>
-            </view>
-          </view>
+           </view>
+           <view class='cont'>
+              <view class='tit'>{{item.child[0].goods_name}}</view>
+              <view class='numView'>
+                 <view class='style'>已选规格：{{item.child[0].goods_attr}}</view>
+                 <view class=''>
+                    <text class='money1'>￥{{item.child[0].goods_price / 100}}</text>
+                 </view>
+              </view>
+              <view class="end"><text class='num'>x{{item.child[0].buy_num}}</text></view>
+           </view>
         </view>
         <view class='orderLi_shop_more' wx:else>
           <image src='{{imgUrl + itemName.goods_cover}}' class='img' wx:for='{{item.child}}' wx:key='unquit' wx:for-item="itemName" wx:for-index="idx" wx:if='{{idx<3}}'></image>
@@ -49,7 +60,11 @@
         <!--view class='btn1 btn' hidden='{{item.status != 4}}' data-id='{{item.id}}' bindtap='shenqingtuikuanTap'>申请退款</view-->
 
         <view class='btn1 btn' hidden='{{item.status != 6&&item.status != 7&&(item.status != 21 || item.group_buy_success == 0)}}' data-id='{{item.id}}' bindtap='bindDel'>删除订单</view>
-        <navigator class='btn2 btn' hidden='{{item.status != 7}}' url='../pingjia/index?id={{item.id}}&img={{item.child[0].goods_cover}}&content={{item.pj_info.content}}&pj_xx={{item.pj_info.pj_xx}}'>{{json.stringify(item.pj_info)!="[]"?"查看评价":"发布评价"}}</navigator>
+        <navigator class='btn2 btn'
+                   hidden='{{item.status != 7}}'
+                   url='../pingjia/index?id={{item.id}}&img={{item.child[0].goods_cover}}&price={{item.child[0].goods_price}}&logo={{item.child[0].logo}}&pj_xx={{item.pj_info.pj_xx}}'>
+           {{json.stringify(item.pj_info)!="[]"?"查看评价":"发布评价"}}
+        </navigator>
         <view class="last-time" wx:if='{{item.status == 21 && item.group_buy_success>=0}}'>
           <view wx:if='{{item.lastTime}}'>剩余:<text class="countdown"> {{item.lastTime}}</text></view>
           <view wx:else>剩余:<text class="countdown"> 00:00:00</text></view>

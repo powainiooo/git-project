@@ -28,7 +28,20 @@
     </view>
     <view class='productList fff'>
       <view class='item between' wx:for="{{list}}" wx:key="index">
-        <view class='l'><image src='{{imgUrl}}{{item.cover}}'></image></view>
+        <view class='l'>
+           <view class="goods-item">
+              <navigator url='#'>
+                 <image src="{{imgUrl}}{{item.goods_cover}}" class="img"></image>
+                 <image src="/images/f3.png" class="frame"></image>
+                 <view class="hint">官方正品 假一赔十</view>
+                 <image src="/images/f1.png" class="price-bg" mode="widthFix"></image>
+                 <view class="price"><text>￥</text>{{item.price / 100}}</view>
+                 <view class="price-name">活动预售价：</view>
+                 <image src="/images/f2.png" class="logo-bg" mode="widthFix" wx:if="{{item.logo}}"></image>
+                 <view class="logo" wx:if="{{item.logo}}">{{item.logo}}</view>
+              </navigator>
+           </view>
+        </view>
         <view class='r'>
           <view class='name'>{{item.goods_name}}</view>
           <view class='label between'>

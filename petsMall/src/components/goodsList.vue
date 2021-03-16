@@ -57,7 +57,7 @@
          <div class="nums" v-else-if="source === 'catbox'">1份/月</div>
       </li>
    </ul>
-   <div class="c-goods-price" v-if="!onlyList">
+   <div class="c-goods-price borderB" v-if="!onlyList && source === 'catbox'">
       <div>
          <p>订购{{orderType.name}}</p>
          <div class="overline"><span>{{orderType.old_price}}</span>元</div>
@@ -95,14 +95,14 @@
    </div>
    </template>
 
-   <div class="c-goods-price borderT" v-if="shipPrice !== ''">
+   <div class="c-goods-price borderB" v-if="shipPrice !== ''">
       <div>
          <p>运费</p>
       </div>
       <div class="values">{{shipPrice}}<span>元</span></div>
    </div>
 
-   <div class="c-goods-price borderT" v-if="totalPrice !== ''">
+   <div class="c-goods-price" v-if="totalPrice !== ''">
       <div>
          <p>总价</p>
       </div>

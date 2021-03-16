@@ -35,7 +35,7 @@
          </ul>
          <p v-if="source === 'diy' && itemData.mainly">主要成分：{{itemData.mainly}}</p>
       </div>
-      <div><span>{{itemData.price}}</span>元</div>
+      <div><span>{{specsPrice}}</span>元</div>
    </div>
    <template v-if="!useSelect">
    <img src="/static/images/catbox/icon-add.png" class="add" v-if="!showArrow" />
@@ -119,6 +119,18 @@ export default {
             }
          } else {
             return this.itemData.specs
+         }
+      },
+      specsPrice () {
+         if (this.itemData.attrs_list) {
+            if (this.selectedArr.length === 0) {
+               return this.itemData.attrs_list[0].child[0].price
+            } else {
+               const item = this.itemData.attrs_list.find(i => i.id === this.selectedArr[2])
+               return item ? item.price : this.itemData.attrs_list[0].child[0].price
+            }
+         } else {
+            return this.itemData.price
          }
       }
    },

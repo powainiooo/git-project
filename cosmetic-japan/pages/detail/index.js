@@ -444,7 +444,7 @@ Page({
                     isCN: wx.getStorageSync('isCN'),
                     options: options,
                     fxs_id: ret.fxs_id,
-                  bgList: ret.goods_info.bg_list,
+                  bgList: ret.goods_info.bq_list,
 	                score: ret.ave_pf,
 	                rate: ret.praise_rate,
 	                nums: ret.cart_nums

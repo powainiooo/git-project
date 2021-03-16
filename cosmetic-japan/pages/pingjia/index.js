@@ -15,6 +15,8 @@ Page({
     content:'',
     id:null,
     img:'',
+    price:'',
+    logo:null,
     isNull:true,
     isCN:wx.getStorageSync('isCN')
   },
@@ -41,17 +43,9 @@ Page({
   fabuTap:function(){
     var id = this.data.id;
     var pj_xx = this.data.starNum;
-    var content = this.data.content;
-    if (content == '' && content.length == 0){
-      wx.showToast({
-        title: '评价内容不能为空',
-        icon: 'none'
-      })
-      return false;
-    }
 
     let www = { method: 'pj_order', canshu: '' };
-    var data = {id:id, pj_xx:pj_xx, content:content};
+    var data = {id:id, pj_xx:pj_xx};
     let huidiao = (ret) => {
       wx.redirectTo({
         url: '../myOrder/index',
@@ -67,19 +61,15 @@ Page({
     if (options && !!options.id){
       this.setData({
         id: options.id,
-        img: options.img
+        img: options.img,
+	      price: options.price,
+	      logo: options.logo,
+	      starNum: options.pj_xx,
+	      isNull:false
       })
     }else{
       wx.navigateBack({
         delta: 1,
-      })
-    }
-    console.log(options.pj_xx);
-    if (options && !!options.content && !!options.pj_xx){
-      this.setData({
-        content: options.content,
-        starNum: options.pj_xx,
-        isNull:false
       })
     }
   },

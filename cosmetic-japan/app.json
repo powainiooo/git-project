@@ -1,11 +1,11 @@
 {
    "pages": [
       "pages/index/index",
+      "pages/fenxiaoInfo/index",
       "pages/pingjia/index",
       "pages/myOrderDetail/index",
       "pages/fenxiao/index",
       "pages/orderAccount/index",
-      "pages/fenxiaoInfo/index",
       "pages/detail/index",
       "pages/myCoupon/index",
       "pages/CouponList/index",

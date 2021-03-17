@@ -17,7 +17,20 @@
       </view>
       <view class='orderLi_shop' wx:if='{{item.child.length == 1}}'>
 
-        <image src='{{imgUrl + item.child[0].goods_cover}}' class='img'></image>
+         <view class="goods">
+            <view class="goods-item">
+               <navigator url='#'>
+                  <image src="{{imgUrl}}{{item.child[0].goods_cover}}" class="img"></image>
+                  <image src="/images/f3.png" class="frame"></image>
+                  <view class="hint">官方正品 假一赔十</view>
+                  <image src="/images/f1.png" class="price-bg" mode="widthFix"></image>
+                  <view class="price"><text>￥</text>{{item.child[0].goods_price / 100}}</view>
+                  <view class="price-name">活动预售价：</view>
+                  <image src="/images/f2.png" class="logo-bg" mode="widthFix" wx:if="{{item.child[0].logo}}"></image>
+                  <view class="logo" wx:if="{{item.child[0].logo}}">{{item.child[0].logo}}</view>
+               </navigator>
+            </view>
+         </view>
         <view class='cont'>
            <view class='style'>{{item.all_goods}}</view>
           <view class='style'>{{item.child[0].goods_name}}</view>

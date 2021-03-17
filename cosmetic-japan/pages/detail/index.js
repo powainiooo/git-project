@@ -398,6 +398,9 @@ Page({
                 options.activity_type = 0
                 options.hd_id = 0
             }
+            if(options.fxs_id){
+                app.setFxsId(options.fxs_id)
+            }
             let link = { method: 'goods_detail', canshu: '&id=' + options.id + '&activity_type=' + activity_type + '&hd_id=' + hd_id, };
             let logic = (ret) => {
 
@@ -449,7 +452,9 @@ Page({
 	                rate: ret.praise_rate,
 	                nums: ret.cart_nums
                 })
-	            app.setFxsId(res.fxs_id)
+
+                
+                
               console.log('详情', goods_desc);
                 if (options.activity_type == 2) {
                     var start_time = this.timestampToTime(parseInt(goods_info.start_time))

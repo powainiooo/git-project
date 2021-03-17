@@ -38,9 +38,10 @@ export default {
    computed: {
       numsList () {
          let arr = []
-         const buyNum = Number(this.record.buy_num)
+         const nums = Number(this.record.nums) || 20
+         const buyNum = nums > 20 ? 20 : nums
          for (let i = 0; i < buyNum; i++){
-            arr.push(buyNum - i)
+            arr.push(i + 1)
          }
          return arr
       }

@@ -9,20 +9,14 @@
 <div class="c-ticket-information" style="margin-bottom: 150rpx">
   <div class="c-ticket-title"><span>Select</span>选择票种、张数</div>
   <ul class="form-list">
-    <li>
-      <div class="rank"><img :src="'/static/images/number/1.png'" mode="heightFix" /></div>
-      <div class="content">
-        <input placeholder="姓名 Name" placeholder-style="color: #9E9E9F;" disabled />
-      </div>
-    </li>
     <li v-for="(item, index) in list" :key="id">
       <div class="rank"><img :src="'/static/images/number/'+ (index + 1) +'.png'" mode="heightFix" /></div>
-      <div class="content active">
-        <input placeholder-style="color: #fff;" v-model="formData.number" />
-        <picker :range="idTypeArr" @change="idChange">
+      <div class="content" :class="{'active': item.id === priceId}">
+        <input placeholder-style="color: #fff;" v-model="item.name" disabled @click="selectTicket(item)" />
+        <picker :range="numsArr" @change="numsChange" v-if="item.id === priceId">
           <button style="width: 134rpx">
             <img src="/static/images/common/select-img2.png" mode="heightFix" />
-            <div class="nums"><span>2</span>张</div>
+            <div class="nums"><span>{{nums}}</span>张</div>
           </button>
         </picker>
       </div>
@@ -40,21 +34,37 @@ export default {
       default: () => []
     }
   },
+  watch: {
+    list (val) {
+      console.log('list', val)
+    }
+  },
   data () {
     return {
-      formData: {
-        name: '',
-        phone: '',
-        number: '',
-        type: ''
-      },
-      idTypeArr: ['身份证 ID card', '护照 passport']
+      priceId: '',
+      numsArr: [],
+      nums: 0
     }
   },
   methods: {
-    idChange (e) {
-      console.log('idChange', e)
-      this.formData.type = this.idTypeArr[e.mp.detail.value]
+    selectTicket (record) {
+      this.priceId = record.id
+      this.setNumsArr(record.limit)
+      if (this.nums > record.limit) this.nums = record.limit
+    },
+    setNumsArr (limit) {
+      let nums = limit
+      if (!limit || limit === '' || limit === 0) {
+        nums = 20
+      }
+      const arr = []
+      for (let i = 0; i < nums; i++) {
+        arr.push(i + 1)
+      }
+      this.numsArr = arr
+    },
+    numsChange (e) {
+      this.nums = this.numsArr[e.mp.detail.value]
     }
   }
 }

@@ -1,180 +1,186 @@
 {
-   "description": "项目配置文件。",
-   "packOptions": {
-      "ignore": []
-   },
-   "setting": {
-      "urlCheck": false,
-      "es6": true,
-      "enhance": false,
-      "postcss": true,
-      "preloadBackgroundData": false,
-      "minified": true,
-      "newFeature": true,
-      "coverView": true,
-      "nodeModules": false,
-      "autoAudits": false,
-      "showShadowRootInWxmlPanel": true,
-      "scopeDataCheck": false,
-      "uglifyFileName": false,
-      "checkInvalidKey": true,
-      "checkSiteMap": true,
-      "uploadWithSourceMap": true,
-      "compileHotReLoad": false,
-      "useMultiFrameRuntime": true,
-      "useApiHook": true,
-      "useApiHostProcess": false,
-      "babelSetting": {
-         "ignore": [],
-         "disablePlugins": [],
-         "outputPath": ""
-      },
-      "bundle": false,
-      "useIsolateContext": true,
-      "useCompilerModule": true,
-      "userConfirmedUseCompilerModuleSwitch": false,
-      "userConfirmedBundleSwitch": false,
-      "packNpmManually": false,
-      "packNpmRelationList": [],
-      "minifyWXSS": true
-   },
-   "compileType": "miniprogram",
-   "libVersion": "2.2.3",
-   "appid": "wx654a6f041b744138",
-   "projectname": "haiwaiMall",
-   "isGameTourist": false,
-   "simulatorType": "wechat",
-   "simulatorPluginLibVersion": {},
-   "condition": {
-      "search": {
-         "list": []
-      },
-      "conversation": {
-         "list": []
-      },
-      "plugin": {
-         "list": []
-      },
-      "game": {
-         "currentL": -1,
-         "list": []
-      },
-      "gamePlugin": {
-         "list": []
-      },
-      "miniprogram": {
-         "list": [
-            {
-               "id": -1,
-               "name": "首页",
-               "pathName": "pages/index/index",
-               "query": ""
-            },
-            {
-               "id": -1,
-               "name": "分类",
-               "pathName": "pages/class/index",
-               "query": ""
-            },
-            {
-               "id": -1,
-               "name": "购物车",
-               "pathName": "pages/cart/index",
-               "query": ""
-            },
-            {
-               "id": -1,
-               "name": "个人中心",
-               "pathName": "pages/my/index",
-               "query": ""
-            },
-            {
-               "id": 5,
-               "name": "商品列表",
-               "pathName": "pages/product/index",
-               "query": ""
-            },
-            {
-               "id": -1,
-               "name": "搜索",
-               "pathName": "pages/serch/index",
-               "query": ""
-            },
-            {
-               "id": 7,
-               "name": "商品详情",
-               "pathName": "pages/detail/index",
-               "query": "id=3&activity_type=1&hd_id=3"
-            },
-            {
-               "id": 8,
-               "name": "用户评价",
-               "pathName": "pages/pingjia/index",
-               "query": "id=55"
-            },
-            {
-               "id": 9,
-               "name": "订单结算",
-               "pathName": "pages/orderAccount/index",
-               "query": "kj_uid=140"
-            },
-            {
-               "id": -1,
-               "name": "我的订单",
-               "pathName": "pages/myOrder/index",
-               "query": ""
-            },
-            {
-               "id": -1,
-               "name": "我的积分",
-               "pathName": "pages/sign/index",
-               "query": ""
-            },
-            {
-               "id": -1,
-               "name": "我的优惠券",
-               "pathName": "pages/myCoupon/index",
-               "query": ""
-            },
-            {
-               "id": -1,
-               "name": "优惠券列表",
-               "pathName": "pages/CouponList/index",
-               "query": ""
-            },
-            {
-               "id": -1,
-               "name": "我的售后",
-               "pathName": "pages/shouhouList/index",
-               "query": ""
-            },
-            {
-               "id": -1,
-               "name": "编辑/添加收货地址",
-               "pathName": "pages/site/index",
-               "query": ""
-            },
-            {
-               "id": -1,
-               "name": "普通购买详情页",
-               "pathName": "pages/detail/index",
-               "query": "",
-               "scene": null
-            },
-            {
-               "id": -1,
-               "name": "普通购买详情页",
-               "pathName": "pages/detail/index",
-               "query": "",
-               "scene": null
-            },
-            {
-               "id": -1,
-               "name": "pages/fenxiaoshang/index",
-               "pathName": "pages/fenxiaoshang/index",
-               "scene": null
-            }
-         ]
-      }
-   }
+  "description": "项目配置文件。",
+  "packOptions": {
+    "ignore": []
+  },
+  "setting": {
+    "urlCheck": false,
+    "es6": true,
+    "enhance": false,
+    "postcss": true,
+    "preloadBackgroundData": false,
+    "minified": true,
+    "newFeature": true,
+    "coverView": true,
+    "nodeModules": false,
+    "autoAudits": false,
+    "showShadowRootInWxmlPanel": true,
+    "scopeDataCheck": false,
+    "uglifyFileName": false,
+    "checkInvalidKey": true,
+    "checkSiteMap": true,
+    "uploadWithSourceMap": true,
+    "compileHotReLoad": false,
+    "useMultiFrameRuntime": true,
+    "useApiHook": true,
+    "useApiHostProcess": false,
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    },
+    "bundle": false,
+    "useIsolateContext": true,
+    "useCompilerModule": true,
+    "userConfirmedUseCompilerModuleSwitch": false,
+    "userConfirmedBundleSwitch": false,
+    "packNpmManually": false,
+    "packNpmRelationList": [],
+    "minifyWXSS": true
+  },
+  "compileType": "miniprogram",
+  "libVersion": "2.2.3",
+  "appid": "wx654a6f041b744138",
+  "projectname": "haiwaiMall",
+  "isGameTourist": false,
+  "simulatorType": "wechat",
+  "simulatorPluginLibVersion": {},
+  "condition": {
+    "plugin": {
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "gamePlugin": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "id": -1,
+          "name": "首页",
+          "pathName": "pages/index/index",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "分类",
+          "pathName": "pages/class/index",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "购物车",
+          "pathName": "pages/cart/index",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "个人中心",
+          "pathName": "pages/my/index",
+          "query": ""
+        },
+        {
+          "id": 5,
+          "name": "商品列表",
+          "pathName": "pages/product/index",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "搜索",
+          "pathName": "pages/serch/index",
+          "query": ""
+        },
+        {
+          "id": 7,
+          "name": "商品详情",
+          "pathName": "pages/detail/index",
+          "query": "id=3&activity_type=1&hd_id=3"
+        },
+        {
+          "id": 8,
+          "name": "用户评价",
+          "pathName": "pages/pingjia/index",
+          "query": "id=55"
+        },
+        {
+          "id": 9,
+          "name": "订单结算",
+          "pathName": "pages/orderAccount/index",
+          "query": "kj_uid=140"
+        },
+        {
+          "id": -1,
+          "name": "我的订单",
+          "pathName": "pages/myOrder/index",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "我的积分",
+          "pathName": "pages/sign/index",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "我的优惠券",
+          "pathName": "pages/myCoupon/index",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "优惠券列表",
+          "pathName": "pages/CouponList/index",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "我的售后",
+          "pathName": "pages/shouhouList/index",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "编辑/添加收货地址",
+          "pathName": "pages/site/index",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "普通购买详情页",
+          "pathName": "pages/detail/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "普通购买详情页",
+          "pathName": "pages/detail/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/fenxiaoshang/index",
+          "pathName": "pages/fenxiaoshang/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "分销商3789分享给我的",
+          "pathName": "pages/detail/index",
+          "query": "id=222&mid=7&fxs_id=3789",
+          "scene": null
+        },
+        {
+          "name": "首页分享给我的",
+          "pathName": "pages/index/index",
+          "query": "mid=7&fxs_id=3789",
+          "scene": null
+        }
+      ]
+    }
+  }
 }

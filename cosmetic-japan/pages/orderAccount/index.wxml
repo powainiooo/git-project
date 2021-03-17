@@ -31,7 +31,7 @@
         <view class='l'>
            <view class="goods-item">
               <navigator url='#'>
-                 <image src="{{imgUrl}}{{item.goods_cover}}" class="img"></image>
+                 <image src="{{imgUrl}}{{item.cover}}" class="img"></image>
                  <image src="/images/f3.png" class="frame"></image>
                  <view class="hint">官方正品 假一赔十</view>
                  <image src="/images/f1.png" class="price-bg" mode="widthFix"></image>

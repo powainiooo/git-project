@@ -1,3 +1,8 @@
 <!--pages/fenxiaoInfo/index.wxml-->
-<import src="../../wxParse/wxParse.wxml"/> 
-<template is="wxParse" data="{{wxParseData:desc.nodes}}"/>
+<view class="f3" style="height: 20rpx"></view>
+<view class="fenx-info">
+   <view class="fenx-info-title">分销规则说明</view>
+   <import src="../../wxParse/wxParse.wxml"/>
+   <template is="wxParse" data="{{wxParseData:desc.nodes}}"/>
+   <view class='fabuPj' bindtap='confirm'>确认了解</view>
+</view>

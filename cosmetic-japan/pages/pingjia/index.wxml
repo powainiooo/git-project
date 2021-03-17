@@ -10,8 +10,8 @@
             <image src="/images/f1.png" class="price-bg" mode="widthFix"></image>
             <view class="price"><text>￥</text>{{price / 100}}</view>
             <view class="price-name">活动预售价：</view>
-            <image src="/images/f2.png" class="logo-bg" mode="widthFix" wx:if="{{logo}}"></image>
-            <view class="logo" wx:if="{{logo}}">{{logo}}</view>
+            <image src="/images/f2.png" class="logo-bg" mode="widthFix" wx:if="{{logo != 'null'}}"></image>
+            <view class="logo" wx:if="{{logo != 'null'}}">{{logo}}</view>
          </navigator>
       </view>
    </view>
@@ -21,5 +21,5 @@
          <image wx:else data-num="{{index+1}}" src='/images/ico_star_n2.png' bindtap='starTap'></image>
       </block>
    </view>
-  <view class='fabuPj' hidden='{{!isNull}}' bindtap='fabuTap'>发布评价</view>
+  <view class='fabuPj' bindtap='fabuTap'>发布评价</view>
 </view>

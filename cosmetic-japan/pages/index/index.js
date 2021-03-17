@@ -28,10 +28,12 @@ Page({
     * 生命周期函数--监听页面加载
     */
    onLoad: function (options) {
+		 console.log(123,options);
    	if (options.mid) {
    		app.setMid(options.mid)
 	   }
 	   if (options.fxs_id) {
+			 console.log(22,options.fxs_id);
 		   app.setFxsId(options.fxs_id)
 	   }
 	   if (!app.getLoginKey()) {
@@ -63,7 +65,8 @@ Page({
 					logo: res.logo,
 					fxs_id: res.fxs_id
 				})
-				app.setFxsId(res.fxs_id)
+				// app.setFxsId(res.fxs_id)
+
 				this.getCompany()
 			}
 		});

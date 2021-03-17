@@ -1,1 +1,21 @@
 /* pages/fenxiaoInfo/index.wxss */
+.fenx-info {
+   padding: 50rpx 30rpx;
+}
+.fenx-info-title {
+   font-size: 36rpx;
+   color: #3F3F3F;
+   margin-bottom: 55rpx;
+}
+.fabuPj {
+   width: 690rpx;
+   height: 90rpx;
+   border-radius: 45rpx;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   background-color: #de3031;
+   font-size: 36rpx;
+   color: #fff;
+   margin: 50rpx 0;
+}

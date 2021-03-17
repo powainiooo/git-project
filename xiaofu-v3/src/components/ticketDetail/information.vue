@@ -25,7 +25,7 @@
       <div class="rank"><img :src="'/static/images/number/3.png'" mode="heightFix" /></div>
       <div class="content">
         <input :placeholder="placeholder" placeholder-style="color: #9E9E9F;" v-model="formData.id_card_no" />
-        <picker :range="idTypeArr" @change="idChange">
+        <picker :range="idTypeArr" @change="idChange" range-key="name">
           <button><img src="/static/images/common/select-img1.png" mode="heightFix" /></button>
         </picker>
       </div>
@@ -44,7 +44,7 @@ export default {
         name: '',
         mobile: '',
         id_card_no: '',
-        type: ''
+        identity_type: ''
       },
       placeholder: '身份证 ID number',
       idTypeArr: [
@@ -56,7 +56,9 @@ export default {
   methods: {
     idChange (e) {
       console.log('idChange', e)
-      this.formData.type = this.idTypeArr[e.mp.detail.value]
+      const item = this.idTypeArr[e.mp.detail.value]
+      this.formData.identity_type = item.value
+      this.placeholder = item.name
     }
   }
 }

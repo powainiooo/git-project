@@ -143,7 +143,7 @@
   </template>
   <template v-else-if="page === 'buy'">
   <information />
-  <c-select />
+  <c-select :list="record.price || []" />
   </template>
 
   <div class="c-ticket-operates" :class="{'c-ticket-operates-bottom': page === 'buy'}">

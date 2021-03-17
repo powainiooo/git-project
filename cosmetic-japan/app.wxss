@@ -2950,6 +2950,7 @@ button:after { border: none; }
    width: 340rpx;
    height: 340rpx;
    display: block;
+   border-radius: 12rpx 12rpx 0 0;
 }
 .goods-item .frame {
    width: 340rpx;
@@ -2957,6 +2958,7 @@ button:after { border: none; }
    position: absolute;
    top: 0;
    left: 0;
+   border-radius: 12rpx 12rpx 0 0;
 }
 .goods-item .price-bg {
    width: 130rpx;
@@ -2965,10 +2967,10 @@ button:after { border: none; }
    right: 0;
 }
 .goods-item .logo-bg {
-   width: 250rpx;
+   width: 280rpx;
    position: absolute;
-   top: -6rpx;
-   left: 45rpx;
+   top: 0rpx;
+   left: 30rpx;
 }
 .goods-item .hint {
    font-size: 24rpx;
@@ -2984,7 +2986,7 @@ button:after { border: none; }
    line-height: 40rpx;
    color: #ffffff;
    position: absolute;
-   top: 5rpx;
+   top: 0rpx;
    left: 80rpx;
    overflow: hidden;
    text-align: center;
@@ -2993,8 +2995,10 @@ button:after { border: none; }
    font-size: 34rpx;
    color: #ffffff;
    position: absolute;
-   top: 285rpx;
+   top: 288rpx;
    right: 10rpx;
+   text-shadow: 0px 5rpx 7rpx rgba(0, 0, 0, 0.47);
+   font-weight: 800;
 }
 .goods-item .price-name {
    font-size: 12rpx;

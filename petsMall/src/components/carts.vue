@@ -51,9 +51,10 @@ export default {
          return store.state.showCart
       },
       allPrice () {
-         return this.list.reduce((total, item) => {
-            return total += Number(item.price)
+         const total = this.list.reduce((total, item) => {
+            return total += Number(item.price) * Number(item.buy_num)
          }, 0)
+         return parseFloat(total.toFixed(1))
       }
    },
    data () {

@@ -1,0 +1,18 @@
+/*
+   尺寸
+*/
+.w { width: 1200px; margin: auto; }
+
+/*
+   颜色
+*/
+.b-fff { background-color: #ffffff }
+.c-red { color: #FE322B; }
+/*
+   全局组件
+*/
+.shortcut { height: 50px; }
+.shortcut p { line-height: 50px; }
+.shortcut .wel { width: 240px; }
+.shortcut ul { height: 20px; margin-top: 15px; }
+.shortcut ul li { height: 100%; float: left; line-height: 20px; padding: 0 20px; border-left: 1px solid #D5D5D5; }

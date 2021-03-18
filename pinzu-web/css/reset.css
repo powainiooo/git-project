@@ -24,6 +24,8 @@ input, select {
     vertical-align:middle;
 }
 
+.ovh { overflow: hidden; }
+
 /* 文字排版 */
 .f12{ font-size: 12px;}
 .f13{ font-size: 13px;}

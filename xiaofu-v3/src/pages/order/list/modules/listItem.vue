@@ -100,18 +100,18 @@
 
 <template>
 <div class="c-list-item">
-  <tk-info :showTitle="false" size="large"/>
+  <tk-info :showTitle="false" size="large" v-if="record.start_date"/>
   <div class="c-ticket-item" v-if="false">
     <div class="imgs">
       <img src="/static/images/img.jpg" />
     </div>
-    <div class="nums">1</div>
+    <div class="nums">{{record.num}}</div>
     <div class="cover"></div>
     <div class="c-ticket-item-title">
-      <p class="en">Nectar by Joji</p>
-      <p>MAOLivehouse</p>
+      <p class="en">{{record.ticket_name}}</p>
+      <p>{{record.organizer_name}}</p>
     </div>
-    <div class="c-ticket-item-onums">0016659884321</div>
+    <div class="c-ticket-item-onums">{{record.order_no}}</div>
   </div>
   <div class="c-ticket-item c-ticket-item-use">
     <div class="imgs"></div>
@@ -120,10 +120,10 @@
       <p>已使用</p>
     </div>
     <div class="c-ticket-item-title">
-      <p class="en">Nectar by Joji</p>
-      <p>MAOLivehouse</p>
+      <p class="en">{{record.ticket_name}}</p>
+      <p>{{record.organizer_name}}</p>
     </div>
-    <div class="c-ticket-item-onums">0016659884321</div>
+    <div class="c-ticket-item-onums">{{record.order_no}}</div>
   </div>
 </div>
 </template>
@@ -134,6 +134,28 @@ export default {
   name: 'app',
   components: {
     tkInfo
+  },
+  props: {
+    record: {
+      type: Object,
+      default: () => {}
+    }
+  },
+  computed: {
+    infos () {
+      if (this.record.start_date) {
+        const dates = this.record.start_date.split('-')
+        return {
+          month: dates[1],
+          day: dates[2]
+        }
+      } else {
+        return {
+          month: '',
+          day: ''
+        }
+      }
+    }
   },
   data () {
     return {}

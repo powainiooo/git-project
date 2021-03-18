@@ -10,7 +10,8 @@ const ajax = (opts, autoMsg = true) => {
     opts.url = `${baseUrl}${opts.url}`
     const extras = {
       header: {
-        'Content-Type': 'application/x-www-form-urlencoded'
+        'Content-Type': 'application/x-www-form-urlencoded',
+        token: store.state.token
       },
       success (res) {
         console.log('请求参数', opts)
@@ -58,6 +59,7 @@ export const doLogin = (userInfo = {}) => {
   console.log('userInfo', userInfo)
   store.commit('SET_PERSONINFO', userInfo.userInfo)
   login().then(loginRes => {
+    console.log('loginRes', loginRes)
     postAction('/api/wxapp/login', {
       code: loginRes.code,
       rawData: userInfo.rawData,

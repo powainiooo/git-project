@@ -67,6 +67,10 @@
   justify-content: center;
   align-items: center;
 }
+.c-ticket-operates button[disabled] {
+  background: #DBDCDC;
+  color: #ffffff;
+}
 
 .form-list li {
   display: flex;
@@ -142,13 +146,13 @@
   <recommend ref="recommend" :list="record.recommend_tickets" />
   </template>
   <template v-else-if="page === 'buy'">
-  <information />
-  <c-select :list="record.price || []" />
+  <information @change="getValue" />
+  <c-select :list="record.price || []" @change="getValue" />
   </template>
 
   <div class="c-ticket-operates" :class="{'c-ticket-operates-bottom': page === 'buy'}">
     <div>260<span>RMB</span></div>
-    <button @click="handleBuy">购买</button>
+    <button @click="handleBuy" :disabled="buyDisabled">购买</button>
   </div>
 </div>
 </template>
@@ -162,14 +166,10 @@ import organizers from './organizers'
 import recommend from './recommend'
 import information from './information'
 import cSelect from './select'
+import { postAction } from '@/utils/api'
+
 export default {
   name: 'app',
-  props: {
-    record: {
-      type: Object,
-      default: () => {}
-    }
-  },
   components: {
     infos,
     artist,
@@ -180,18 +180,85 @@ export default {
     information,
     cSelect
   },
+  props: {
+    record: {
+      type: Object,
+      default: () => {}
+    }
+  },
+  computed: {
+    buyDisabled () {
+      if (this.page === 'detail') {
+        return false
+      }
+      if (this.formData.name === '' || this.formData.mobile === '' || this.cardNo === '' || this.formData.price_id === '' || this.formData.num === 0) {
+        return true
+      }
+      return false
+    }
+  },
   data () {
     return {
-      page: 'buy'
+      page: 'detail',
+      formData: {
+        name: '',
+        mobile: '',
+        identity_type: 1,
+        price_id: '',
+        num: 0
+      },
+      cardNo: ''
     }
   },
   methods: {
     handleBuy () {
-      this.page = 'buy'
-      this.$emit('toggle', this.page)
+      if (this.page === 'detail') {
+        this.page = 'buy'
+        this.$emit('toggle', this.page)
+      } else if (this.page === 'buy') {
+        const params = {...this.formData}
+        if (params.identity_type === 1) {
+          params.id_card_no = this.cardNo
+        } else {
+          params.passport_no = this.cardNo
+        }
+        params.ticket_id = this.record.id
+        console.log('params', params)
+        postAction('/api/order/create', params).then(res => {
+          const jsapi = res.data
+          mpvue.requestPayment({
+            'timeStamp': jsapi.timeStamp,
+            'nonceStr': jsapi.nonceStr,
+            'package': jsapi.package,
+            'signType': jsapi.signType,
+            'paySign': jsapi.paySign,
+            'success': res => {
+              mpvue.reLaunch({
+                url: '/pages/result/main?result=success'
+              })
+            },
+            'fail': err => {
+              console.log('pay fail', err)
+              mpvue.reLaunch({
+                url: '/pages/result/main?result=fail'
+              })
+            }
+          })
+        })
+      }
     },
     backDetail () {
       this.page = 'detail'
+    },
+    getValue (data) {
+      if (data.key === 'cardNo') {
+        this.cardNo = data.value
+      } else {
+        this.formData[data.key] = data.value
+      }
+    },
+    handleConfirm () {
+
     }
   }
 }

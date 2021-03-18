@@ -34,11 +34,6 @@ export default {
       default: () => []
     }
   },
-  watch: {
-    list (val) {
-      console.log('list', val)
-    }
-  },
   data () {
     return {
       priceId: '',
@@ -51,6 +46,10 @@ export default {
       this.priceId = record.id
       this.setNumsArr(record.limit)
       if (this.nums > record.limit) this.nums = record.limit
+      this.$emit('change', {
+        key: 'price_id',
+        value: record.id
+      })
     },
     setNumsArr (limit) {
       let nums = limit
@@ -65,6 +64,10 @@ export default {
     },
     numsChange (e) {
       this.nums = this.numsArr[e.mp.detail.value]
+      this.$emit('change', {
+        key: 'num',
+        value: this.nums
+      })
     }
   }
 }

@@ -12,19 +12,31 @@
     <li>
       <div class="rank"><img :src="'/static/images/number/1.png'" mode="heightFix" /></div>
       <div class="content">
-        <input placeholder="姓名 Name" placeholder-style="color: #9E9E9F;" v-model="formData.name" />
+        <input placeholder="姓名 Name"
+               placeholder-style="color: #9E9E9F;"
+               v-model="name"
+               @blur="inputChange('name')"
+               @confirm="inputChange('name')" />
       </div>
     </li>
     <li>
       <div class="rank"><img :src="'/static/images/number/2.png'" mode="heightFix" /></div>
       <div class="content">
-        <input placeholder="电话 Phone" placeholder-style="color: #9E9E9F;" v-model="formData.mobile" />
+        <input placeholder="电话 Phone"
+               placeholder-style="color: #9E9E9F;"
+               v-model="mobile"
+               @blur="inputChange('mobile')"
+               @confirm="inputChange('mobile')" />
       </div>
     </li>
     <li>
       <div class="rank"><img :src="'/static/images/number/3.png'" mode="heightFix" /></div>
       <div class="content">
-        <input :placeholder="placeholder" placeholder-style="color: #9E9E9F;" v-model="formData.id_card_no" />
+        <input :placeholder="placeholder"
+               placeholder-style="color: #9E9E9F;"
+               v-model="cardNo"
+               @blur="inputChange('cardNo')"
+               @confirm="inputChange('cardNo')" />
         <picker :range="idTypeArr" @change="idChange" range-key="name">
           <button><img src="/static/images/common/select-img1.png" mode="heightFix" /></button>
         </picker>
@@ -40,12 +52,10 @@ export default {
   name: 'app',
   data () {
     return {
-      formData: {
-        name: '',
-        mobile: '',
-        id_card_no: '',
-        identity_type: ''
-      },
+      name: '',
+      mobile: '',
+      identity_type: 1,
+      cardNo: '',
       placeholder: '身份证 ID number',
       idTypeArr: [
         { name: '身份证 ID number', value: 1 },
@@ -55,10 +65,19 @@ export default {
   },
   methods: {
     idChange (e) {
-      console.log('idChange', e)
       const item = this.idTypeArr[e.mp.detail.value]
-      this.formData.identity_type = item.value
+      this.identity_type = item.value
       this.placeholder = item.name
+      this.$emit('change', {
+        key: 'identity_type',
+        value: item.value
+      })
+    },
+    inputChange (key) {
+      this.$emit('change', {
+        key,
+        value: this[key]
+      })
     }
   }
 }

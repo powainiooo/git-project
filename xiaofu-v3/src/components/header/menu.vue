@@ -32,7 +32,10 @@
     <button open-type="getUserInfo" @getuserinfo="getuserinfo" v-else>点击登录</button>
   </div>
 
-  <div class="ticket">
+  <div class="ticket"
+       hover-class="hscale"
+       hover-stay-time="10"
+       @click="toOrderList">
     <img src="/static/images/menu/frame.png" />
     <div class="ticket-info">
       <div class="ticket-info-left">
@@ -104,6 +107,11 @@ export default {
   methods: {
     getuserinfo (e) {
       doLogin(e.mp.detail)
+    },
+    toOrderList () {
+      mpvue.navigateTo({
+        url: '/pages/order/list/main'
+      })
     }
   }
 }

@@ -52,12 +52,10 @@
   <div class="order-container">
     <div class="title"><span>Order center</span>已购票务</div>
     <div class="order-list">
-      <div class="years">2021</div>
-      <c-list-item />
-      <c-list-item />
-      <div class="years">2021</div>
-      <c-list-item />
-      <c-list-item />
+      <template v-for="(key, i) in list">
+      <div class="years">{{i}}</div>
+      <c-list-item v-for="(item, i2) in key" :record="item" :key="i2" />
+      </template>
     </div>
   </div>
 </div>
@@ -66,9 +64,12 @@
 <script>
 import cHeader from '@/components/header/header'
 import cListItem from './modules/listItem'
+import { postAction } from '../../../utils/api'
+
 export default {
   data () {
     return {
+      list: {}
     }
   },
 
@@ -78,10 +79,26 @@ export default {
   },
 
   methods: {
+    getData () {
+      postAction('/api/order/lists').then(res => {
+        if (res.code === 1) {
+          const data = {}
+          for (let i of res.data) {
+            const dates = i.start_date.split('-')
+            if (!data[dates[0]]) {
+              data[dates[0]] = []
+            }
+            data[dates[0]].push(i)
+          }
+          this.list = data
+        }
+      })
+    }
   },
 
-  created () {
+  onLoad () {
     // let app = getApp()
+    this.getData()
   }
 }
 </script>

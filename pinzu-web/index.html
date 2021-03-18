@@ -18,13 +18,20 @@
          <li class="message">
             <a href="#">通知</a>
             <div class="c-pop c-pop-up">
-               <div class="tc mt20">
+               <!-- 没有消息 -->
+               <div class="tc mt20" style="display: none;">
                   <img src="img/icon-horn.png" />
                   <p class="c999">您还没有消息</p>
                </div>
+               <!-- 消息列表 -->
+               <div class="message-list">
+                  <div class="message-item">
+                     <a href="#">您有一笔退单申请</a>
+                     <p>发布于2小时前</p>
+                  </div>
+               </div>
                <div class="btns">
                   <a href="#">查看所有消息</a>
-                  <a href="#">设置为已读</a>
                </div>
             </div>
          </li>
@@ -43,7 +50,19 @@
          </li>
          <li><a href="#">服务热线：<span class="c-red">400-123-1234</span></a> </li>
       </ul>
-      <p class="fr">请<a href="#" class="c-red">登录</a>/<a href="#" class="c-red">注册</a> </p>
+      <!-- 未登录 -->
+      <div class="fr" style="display: none">请<a href="#" class="c-red">登录</a>/<a href="#" class="c-red">注册</a> </div>
+      <!-- 已登录 -->
+      <div class="fr pr p-menu">
+         <span>152****1997</span>
+         <img src="img/arrow4.png" />
+         <div class="c-pop c-pop-up">
+            <a href="#">用户中心</a>
+            <a href="#">我的订单</a>
+            <a href="#">店铺管理</a>
+            <a href="#">退出</a>
+         </div>
+      </div>
    </div>
 </div>
 <!-- 头部操作栏 -->

@@ -64,7 +64,7 @@
 }
 .c-ticket-item-onums {
   position: absolute;
-  left: 254px;
+  right: 160px;
   bottom: 8px;
   font-size: 14px;
   color: #ffffff;
@@ -100,8 +100,12 @@
 
 <template>
 <div class="c-list-item">
-  <tk-info :showTitle="false" size="large" v-if="record.start_date"/>
-  <div class="c-ticket-item" v-if="false">
+  <tk-info :showTitle="false" size="large" :record="infos" v-if="record.start_date"/>
+  <div class="c-ticket-item"
+       v-if="false"
+       hover-class="hscale"
+       hover-stay-time="10"
+       @click="toDetail">
     <div class="imgs">
       <img src="/static/images/img.jpg" />
     </div>
@@ -113,7 +117,10 @@
     </div>
     <div class="c-ticket-item-onums">{{record.order_no}}</div>
   </div>
-  <div class="c-ticket-item c-ticket-item-use">
+  <div class="c-ticket-item c-ticket-item-use"
+       hover-class="hscale"
+       hover-stay-time="10"
+       @click="toDetail">
     <div class="imgs"></div>
     <div class="status">
       <p class="en">Checked</p>
@@ -160,6 +167,12 @@ export default {
   data () {
     return {}
   },
-  methods: {}
+  methods: {
+    toDetail () {
+      mpvue.navigateTo({
+        url: `/pages/order/detail/main?id=${this.record}`
+      })
+    }
+  }
 }
 </script>

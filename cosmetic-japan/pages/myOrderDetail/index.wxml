@@ -1,7 +1,7 @@
 <!--pages/myOrderDetail/index.wxml-->
 <view class='container'>
 <view class='orderAddress'>
-   <image src='/images/ico_adds.png' class='icon'></image>
+   <image src='/images/ico_adds.png' class='icon' mode="widthFix"></image>
    <view style="width: 520rpx;">
       <view class='cont'>
          <text class='name'>{{address.rev_name}}</text>

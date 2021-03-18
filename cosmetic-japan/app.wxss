@@ -240,6 +240,7 @@ button:after { border: none; }
 
 .orderAddress .cont {
     display: flex;
+   align-items: center;
 }
 .orderAddress .name {
    margin-right: 30rpx;
@@ -256,7 +257,7 @@ button:after { border: none; }
 }
 
 .address {
-    padding-top: 24rpx;
+    padding-top: 18rpx;
 }
 
 .orderAddress .txt {
@@ -1591,6 +1592,7 @@ button:after { border: none; }
     flex-shrink: 0;
 }
 .productList .item .l .goods-item {
+   height: 340rpx;
    transform-origin: 0 0;
    transform: scale(.5);
 }
@@ -2912,7 +2914,7 @@ button:after { border: none; }
    border-radius: 14rpx;
    position: absolute;
    left: 18%;
-   bottom: 170rpx;
+   bottom: 20%;
 }
 .contact-box image {
    width: 425rpx;
@@ -2923,13 +2925,13 @@ button:after { border: none; }
    font-size: 28rpx;
    color: #333333;
    text-align: center;
-   margin-bottom: 42rpx;
+   margin-bottom: 30rpx;
 }
 .contact-box .infos {
    font-size: 22rpx;
    color: #333333;
-   margin-left: 96rpx;
-   line-height: 1.6;
+   margin-left: 100rpx;
+   line-height: 46rpx;
 }
 
 

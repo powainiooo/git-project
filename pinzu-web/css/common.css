@@ -16,14 +16,14 @@
 */
 .c-pop { width: 244px; background: #FFFFFF; box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.15); position: absolute; z-index: 100; }
 .c-pop-up { top: 100%; }
-.c-pop-up:before { content: ''; }
+.c-pop-up:before { content: ''; width: 14px; height: 7px; background: url("../img/arrow3.png") no-repeat; position: absolute; top: -7px; left: 50%; margin-left: -7px; }
 
 /*
    页面模块
 */
 /* 最底部导航栏 */
 .shortcut { height: 50px; }
-.shortcut .w>p { line-height: 50px; }
+.shortcut .w>p, .shortcut .w>div { line-height: 50px; }
 .shortcut .wel { width: 240px; }
 .shortcut ul { height: 50px; }
 .shortcut ul li { height: 100%; float: left; position: relative; }
@@ -31,13 +31,25 @@
 .shortcut li .c-pop { left: -80px; display: none; }
 .shortcut li:hover .c-pop { display: block; }
 .shortcut .message .btns { background-color: #F5F5F5; border: 1px solid #D5D5D5; height: 32px; overflow: hidden; margin-top: 10px; }
-.shortcut .message .btns a { width: 50%; float: left; height: 32px; line-height: 32px; text-align: center; font-size: 12px; color: #999999; }
+.shortcut .message .btns a { width: 100%; float: left; height: 32px; line-height: 32px; text-align: center; font-size: 12px; color: #999999; }
 .shortcut .message .btns a:first-child { border-right: 1px solid #D5D5D5; }
+.shortcut .message .message-list { height: 168px; overflow-y: auto; }
+.shortcut .message .message-list::-webkit-scrollbar { width: 6px; background-color: #F5F5F5; }
+.shortcut .message .message-list::-webkit-scrollbar-thumb { width: 6px; background-color: #D5D5D5; }
+.shortcut .message .message-list .message-item { padding-left: 28px; position: relative; border-bottom: 1px solid #E5E5E5; margin: 0 10px; overflow: hidden; }
+.shortcut .message .message-list .message-item:before { content: ''; width: 8px; height: 8px; border-radius: 50%; background-color: #FF000D; position: absolute; left: 0; top: 28px; }
+.shortcut .message .message-list .message-item a { display: block; line-height: 22px; margin-top: 10px; }
+.shortcut .message .message-list .message-item a:hover { color: #FE322B; }
+.shortcut .message .message-list .message-item p { font-size: 12px; color: #999999; line-height: 22px; margin-bottom: 10px; }
 .shortcut .download .c-pop { width: 220px; left: -60px }
 .shortcut .download-item { margin: 20px 0 20px 20px; float: left; width: 80px; }
 .shortcut .download-item div { width: 80px; height: 80px; background-color: #D8D8D8; }
 .shortcut .download-item div img { width: 100%; height: 100%; display: block; }
 .shortcut .download-item p { font-size: 12px; margin-top: 5px; }
+.shortcut .p-menu .c-pop { width: 120px; left: -10px; display: none; }
+.shortcut .p-menu:hover .c-pop { display: block; }
+.shortcut .p-menu .c-pop a { display: block; margin: 10px 0; text-align: center; line-height: 22px; }
+.shortcut .p-menu .c-pop a:hover { color: #FE322B; }
 
    /* 头部操作栏 */
 .header { height: 178px; }

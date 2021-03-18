@@ -111,9 +111,9 @@ App({
   	   this.globalData.mid = mid
 		wx.setStorageSync("MID", mid);
 	},
-	setFxsId (id) {
+	setFxsId (id,mid) {
   	   this.globalData.fxs_id = id
-		wx.setStorageSync("FXSID", id);
+		wx.setStorageSync("FXSID_"+mid, id);
 	},
 
   request(obj = {}, call = ()=>{}) {

@@ -32,9 +32,9 @@ Page({
    	if (options.mid) {
    		app.setMid(options.mid)
 	   }
-	   if (options.fxs_id) {
+	   if (options.fxs_id && options.mid) {
 			 console.log(22,options.fxs_id);
-		   app.setFxsId(options.fxs_id)
+		   app.setFxsId(options.fxs_id,options.mid)
 	   }
 	   if (!app.getLoginKey()) {
 		   console.log('index page no login');

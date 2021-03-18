@@ -4,7 +4,7 @@
       <view class='searchBox indexSearch'>
          <image class='logo' src='{{imgUrl}}{{logo}}' mode="widthFix"></image>
          <view class='serch start' bindtap="SerchFocus">
-            <image class='ico_search' src='/images/ico_seach.png'></image>
+            <image class='ico_search' src='/images/ico_seach.png' mode="widthFix"></image>
             <input type='text' placeholder-class='serchPlace' placeholder='搜索你喜欢的商品' disabled='true'></input>
          </view>
          <button class="btn-type" bindtap="openCompany"><image src='/images/ico-type.png' mode="widthFix"></image></button>

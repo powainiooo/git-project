@@ -7,7 +7,8 @@ function post(that, link, data, logic = function () { }) {
   var isCN = 1;
   // var url = www + 'api/index/' + link.method + '?login_key=' + login_key + '&mid=' + app.globalData.mid + '&isCN=' + isCN + link.canshu;
 	const mid = app.globalData.mid
-	const fxsId = `&fxs_id_${mid}=${app.globalData.fxs_id}`
+  // const fxsId = `&fxs_id_${mid}=${app.globalData.fxs_id}`
+  const fxsId = `&fxs_id_${mid}=${wx.getStorageSync('FXSID_'+mid)}`
   var url = `${www}api/index/${link.method}?login_key=${login_key}&mid=${mid}${fxsId}&isCN=${isCN}${link.canshu}`
   wx.request({
     url: url,

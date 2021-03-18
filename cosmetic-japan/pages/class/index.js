@@ -57,8 +57,8 @@ Page({
 	  if (options.mid) {
 		  app.setMid(options.mid)
 	  }
-	  if (options.fxs_id) {
-		  app.setFxsId(options.fxs_id)
+	  if (options.fxs_id && options.mid) {
+		  app.setFxsId(options.fxs_id,options.mid)
 	  }
     let link = { method: 'cate', canshu: '' };
     let logic = (ret) => {
@@ -118,16 +118,4 @@ Page({
   onReachBottom: function () {
 
   },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function (res) {
-	  app.shareCallback()
-    var fxs_id = app.globalData.fxs_id;
-    return {
-      title: '分销商城',
-      path: '/pages/index/index?fxs_id=' + fxs_id + '&mid=' + app.globalData.mid
-    }
-  }
 })

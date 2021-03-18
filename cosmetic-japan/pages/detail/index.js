@@ -368,8 +368,8 @@ Page({
 	    if (options.mid) {
 		    app.setMid(options.mid)
 	    }
-	    if (options.fxs_id) {
-		    app.setFxsId(options.fxs_id)
+	    if (options.fxs_id && options.mid) {
+		    app.setFxsId(options.fxs_id,options.mid)
 	    }
         console.log(11, options)
         if (!app.getLoginKey()) {
@@ -398,8 +398,8 @@ Page({
                 options.activity_type = 0
                 options.hd_id = 0
             }
-            if(options.fxs_id){
-                app.setFxsId(options.fxs_id)
+            if(options.fxs_id && options.mid){
+                app.setFxsId(options.fxs_id,options.mid)
             }
             let link = { method: 'goods_detail', canshu: '&id=' + options.id + '&activity_type=' + activity_type + '&hd_id=' + hd_id, };
             let logic = (ret) => {

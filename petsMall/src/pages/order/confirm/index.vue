@@ -88,6 +88,7 @@ export default {
             token: store.state.token
          }).then(res => {
             this.goodsList = res.data
+            this.getPostPrice()
          })
       },
       doSettle () {
@@ -199,6 +200,7 @@ export default {
             this.titleEn = res.data.english_name
             this.goodsList = res.data.productlist
             this.orderType = res.data.pricelist[this.catboxFormData.price_id]
+            this.getPostPrice()
          })
       },
       getRecData () {
@@ -208,15 +210,13 @@ export default {
          })
       },
       getPostPrice () {
-         getAction('get_post_fee', {
-            province: this.formData.province
-         }).then(res => {
-            this.shipPrice = res.data.fee
-            getAction('get_free_post').then(res => {
-               this.amount = res.data.amount
-               if (this.totalPrice > this.amount) {
-                  this.shipPrice = 0
-               }
+         getAction('get_free_post').then(res => {
+            this.amount = res.data.amount
+            // console.log('this.totalPrice', this.totalPrice)
+            getAction('get_post_fee', {
+               province: this.formData.province
+            }).then(res => {
+               this.shipPrice = this.totalPrice >= this.amount ? 0 : res.data.fee
             })
          })
       }
@@ -236,7 +236,6 @@ export default {
          this.getRecData()
       }
       this.formData = fd
-      this.getPostPrice()
    }
 }
 </script>

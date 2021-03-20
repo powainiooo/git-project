@@ -1543,9 +1543,10 @@ button:after { border: none; }
 }
 
 .orderAccount .top {
-    padding: 30rpx;
-    border-bottom: 6rpx solid #de3031;
-    margin-bottom: 16rpx;
+    margin-bottom: 20rpx;
+}
+.orderAccount .orderAddress {
+   border-top: none;
 }
 
 .orderAccount .top .row .text {
@@ -1575,8 +1576,9 @@ button:after { border: none; }
 }
 
 .addsNone {
-    font-size: 34rpx;
+    font-size: 28rpx;
     color: #333333;
+   font-family: '黑体';
 }
 
 .productList .item {

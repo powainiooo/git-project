@@ -149,7 +149,7 @@ Page({
     * 用户点击右上角分享
     */
    onShareAppMessage: function () {
-	   app.shareCallback()
+		 app.shareCallback()
 	   return {
 		   title: '商城',
 		   path: `/pages/index/index?mid=${app.globalData.mid}&fxs_id=${this.data.fxs_id}`

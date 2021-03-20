@@ -9,7 +9,7 @@ ul {
 }
 html{ height: 100%;}
 
-body { background-color: #F5F5F5; color: #333333; font-size: 14px; min-width: 1200px; }
+body { background-color: #F5F5F5; color: #333333; font-size: 14px; min-width: 1200px; font-family: Microsoft YaHei,tahoma,arial,Hiragino Sans GB,sans-serif; }
 
 blockquote:before, blockquote:after,
 q:before, q:after {
@@ -58,6 +58,7 @@ input, select {
 .pr{ position:relative;}
 .pa{ position:absolute;}
 .none{ display: none;}
+.block { display: block }
 
 
 /*边距*/

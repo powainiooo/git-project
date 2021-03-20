@@ -1,0 +1,8 @@
+.fliter-list { overflow: hidden; margin: 0 20px; border-bottom: 1px solid #D5D5D5; position: relative; }
+.fliter-list:last-child { border-bottom: none; }
+.fliter-list .title { width: 80px; line-height: 22px; color: #999999; margin-top: 20px; float: left; }
+.fliter-list ul { width: 1000px; float: left; margin-top: 20px; }
+.fliter-list ul li { margin: 0 40px 20px 0; float: left; }
+.fliter-list ul li a.active,.fliter-list ul li a:hover { color: #FE322B; }
+.fliter-list .mutilBtn { color: #999999; position: absolute; bottom: 20px; right: 0; }
+.fliter-list .mutilBtn .back { transform: rotateZ(180deg); -webkit-transform: rotateZ(180deg); -moz-transform: rotateZ(180deg); -ms-transform: rotateZ(180deg); }

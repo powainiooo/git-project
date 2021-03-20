@@ -11,6 +11,7 @@
 .c-main { color: #FE322B; }
 .c666 { color: #666666; }
 .c999 { color: #999999; }
+.cfff { color: #ffffff; }
 
 /*
    全局组件
@@ -22,12 +23,11 @@
 .c-pop-up:before { content: ''; width: 14px; height: 7px; background: url("../img/arrow3.png") no-repeat; position: absolute; top: -7px; left: 50%; margin-left: -7px; }
 
 /* 弹窗 */
-.c-modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 2000; }
-.c-modal-bg { width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); }
-.c-modal-container { position: absolute; top: 0; left: 0; right: 0; bottom: 0; overflow-y: auto; }
-.c-modal-container::-webkit-scrollbar { width: 2px; background-color: #F5F5F5; }
-.c-modal-container::-webkit-scrollbar-thumb { width: 2px; background-color: #D5D5D5; }
-.c-modal-body { background-color: #ffffff; border-radius: 4px; margin: 150px auto; overflow: hidden; position: relative; }
+.c-modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 2000; overflow-y: auto; background: rgba(0, 0, 0, 0.5); }
+.c-modal::-webkit-scrollbar { width: 2px; background-color: #F5F5F5; }
+.c-modal::-webkit-scrollbar-thumb { width: 2px; background-color: #D5D5D5; }
+.c-modal-bg { width: 100%; height: 100%; position: absolute; top: 0; left: 0; }
+.c-modal-body { background-color: #ffffff; border-radius: 4px; margin: 150px auto; overflow: hidden; position: relative; z-index: 10; }
 .c-modal-close { position: absolute; top: 20px; right: 20px; }
 
 /* 标签页 */
@@ -137,24 +137,44 @@
 .login-container .form-item .yzm { width: 78px; height: 38px; position: absolute; top: 0; right: 0; border-radius: 0 4px 4px 0; }
 .login-container .form-item .warn { font-size: 12px; color: #FE322B; position: absolute; top: 100%; left: 0; }
 .login-container .form-item .phone-pre { width: 70px; height: 100%; line-height: 38px; border-right: 1px solid #D5D5D5; padding-left: 12px; background: url("../img/arrow4.png") no-repeat 50px center; float: left; }
+.login-container .form-item-pass input { background: url('../img/icon-pass.png') no-repeat; background-position: calc(100% - 10px) center; background-position: -webkit-calc(100% - 10px) center; }
 .third-login h4 { text-align: center; display: table; white-space: nowrap; }
 .third-login h4 span { display: inline-block; font-size: 18px; padding: 0 20px; }
 .third-login h4:before,.third-login h4:after { content: ''; display: table-cell; position: relative; top: 50%; width: 50%; border-top: 1px solid #D5D5D5; transform: translateY(50%); }
 .third-login div { text-align: center; margin-top: 20px; }
 .third-login div a { margin: 0 45px; }
 
+/* 产品列表 */
+.goods-list { margin: 0 -10px; display: inline-block; }
+.goods-list:after{ content: ""; display: block; height: 0; clear: both; visibility: hidden; }
+.goods-list .goods-item { float: left; margin: 0 10px 20px 10px; }
+.goods-item { width: 224px; height: 329px; background-color: #ffffff; border-radius: 4px; position: relative; }
+.goods-item .imgs { width: 184px; height: 184px; margin: 20px; overflow: hidden; }
+.goods-item .imgs img { width: 100%; display: block; }
+.goods-item .title { margin: 0 20px 18px 20px; text-overflow: ellipsis; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical; }
+.goods-item .title .tag { height: 16px; line-height: 16px; font-size: 12px; color: #ffffff; padding: 0 4px; background-color: #FE322B; border-radius: 2px; margin-right: 5px; }
+.goods-item .price { margin: 0 20px; font-size: 12px; color: #FE322B; }
+.goods-item .price span { font-size: 18px; }
 
+/* 在线客服 */
+.btn-service { position: fixed; right: 60px; bottom: 60px; z-index: 2000; }
 
+/* 面包屑 */
+.c-bread-crumb { height: 46px; line-height: 46px; }
+.c-bread-crumb .c-bread-crumb-item { display: inline-block; padding-right: 17px; margin-right: 5px; font-size: 12px; background: url("../img/arrow1.png") no-repeat right center; background-size: 12px; }
+.c-bread-crumb .search-condition { display: inline-block; margin-left: 20px; }
+.c-bread-crumb .search-condition ul { display: inline-block; }
+.c-bread-crumb .search-condition ul li,.c-bread-crumb .search-condition>a { display: inline-block; height: 22px; background: #FFFFFF; border-radius: 2px; border: 1px solid #D5D5D5; padding: 0 30px 0 10px; line-height: 20px; font-size: 12px; margin-left: 5px; position: relative; }
+.c-bread-crumb .search-condition ul li a { width: 10px; height: 10px; background: url("../img/x.png") no-repeat; position: absolute; top: 5px; right: 10px; }
+.c-bread-crumb .search-condition>a { padding: 0 10px; margin-left: 15px; }
 
-
-
-
-
-
-
-
-
-
-
-
-
+/* 分页 */
+.c-pages { text-align: center; overflow: hidden; }
+.c-pages ul { display: inline-block; margin: 0 10px; overflow: hidden; }
+.c-pages ul li,.c-pages .box { width: 32px; height: 32px; border: 1px solid #D5D5D5; border-radius: 2px; line-height: 32px; text-align: center; float: left; margin: 0 5px; background-color: #ffffff; padding: 0 10px; }
+.c-pages .box { width: auto;}
+.c-pages ul li.prevBtn { background: url("../img/arrow5.png") no-repeat; background-position: center center; background-color: #ffffff; }
+.c-pages ul li.nextBtn { background: url("../img/arrow1.png") no-repeat; background-position: center center; background-color: #ffffff; }
+.c-pages .c-pages-elevator { display: inline-block; line-height: 32px; overflow: hidden; }
+.c-pages .c-pages-elevator span { float: left; margin: 0 5px; }
+.c-pages .c-pages-elevator input { width: 48px; }

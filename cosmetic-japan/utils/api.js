@@ -73,8 +73,10 @@ function reqUser(UserInfo, that,type){
     app.getLogin();
     return ;
   }
+  const mid = app.globalData.mid;
+  const fxsId = `&fxs_id_${mid}=${wx.getStorageSync('FXSID_'+mid)}`;
   wx.request({
-    url: www + 'wechat/main/getUserInfo?login_key=' + login_key+ '&mid=' + app.globalData.mid,
+    url: www + 'wechat/main/getUserInfo?login_key=' + login_key+ '&mid=' + app.globalData.mid+fxsId,
     data: UserInfo,
     method: 'POST',
     dataType: 'json',

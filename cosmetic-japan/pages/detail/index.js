@@ -52,7 +52,8 @@ Page({
 	    score:0,
 	    rate:0,
 	    bgList:[],
-	    fxs_id: ''
+        fxs_id: '',
+        can_submit:true
     },
 
     bannerTap: function(e) {
@@ -216,6 +217,8 @@ Page({
 
     // 立即购买
     ljShop: function() {
+       
+
         if (wx.getStorageSync('userInfo') == '') {
           this.setData({
             isShowGetUser: true,
@@ -230,6 +233,14 @@ Page({
             common.showToast('请选择产品规格!')
             return false
         }
+
+        if(this.data.can_submit==false){
+            return;
+        }
+        this.setData({
+            can_submit: false,
+          })
+
         let idx = this.data.idx;
         let goods_info = this.data.goods_info;
         let attrid = this.data.attrid;
@@ -640,6 +651,9 @@ Page({
                 isCN: wx.getStorageSync('isCN')
             })
         }
+        this.setData({
+            can_submit: true
+        })
         // api.post(this, www, {}, huidiao);
     },
 

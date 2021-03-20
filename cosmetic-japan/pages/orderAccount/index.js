@@ -29,6 +29,8 @@ Page({
     coupon_id: 0,
     jf_status:0,
     yhq_status:0,
+	  cardImg1: '',
+	  cardImg2: '',
   },
 
   // 打开优惠券弹窗
@@ -153,6 +155,35 @@ Page({
     })
   },
 
+	// 选择图片
+	selectImg (e) {
+  	   const _this = this
+  	   wx.chooseImage({
+	      count: 1,
+	      success: (res) => {
+	      	console.log('chooseImage', res)
+		      var login_key = app.getLoginKey()
+		      const mid = app.globalData.mid
+		      wx.showLoading({
+			      title: '正在上传'
+		      })
+		      wx.uploadFile({
+			      url: `${www}/api/index/uploadImage?login_key=${login_key}&mid=${mid}`, //仅为示例，非真实的接口地址
+			      filePath: res.tempFilePaths[0],
+			      name: 'file',
+			      success (res2){
+			      	wx.hideLoading()
+				      const data = JSON.parse(res2.data)
+				      const key = e.currentTarget.dataset.key
+				      _this.setData({
+					      [key]: data.data
+				      })
+			      }
+		      })
+	      }
+      })
+	},
+
   payTap:function(){
     let bz = this.data.bz;
     let real_name = this.data.real_name;
@@ -178,13 +209,32 @@ Page({
       })
       return false;
     }
+    if (this.data.cardImg1 == '' && this.data.data.hw_flag != 2) {
+      wx.showToast({
+        title: '请上传人像面图片',
+        icon: 'none'
+      })
+      return false;
+    }
+    if (this.data.cardImg2 == '' && this.data.data.hw_flag != 2) {
+      wx.showToast({
+        title: '请上传国徽面图片',
+        icon: 'none'
+      })
+      return false;
+    }
     if (this.data.isPayStatus){
       this.setData({
         isPayStatus:false
       })
       let fp_status = 0;
       let fp = this.data.fp;
+      console.log('fp',fp);
       let fp_name = '', fp_gs_name = '', fp_sh = '';
+      let fp_companyAddress='';
+      let fp_telephone='';
+      let fp_bankName='';
+      let fp_bankAccount='';
       if (JSON.stringify(fp) == '{}') {
         fp_status = 0;
         fp_name = '';
@@ -195,11 +245,19 @@ Page({
         fp_name = fp.title;
         fp_gs_name = fp.title;
         fp_sh = fp.taxNumber;
+        fp_companyAddress=fp.companyAddress;
+        fp_telephone=fp.telephone;
+        fp_bankName=fp.bankName;
+        fp_bankAccount=fp.bankAccount;
       } else if (fp.type == 1){
         fp_status = 1;
         fp_name = fp.title;
         fp_gs_name = fp.title;
         fp_sh = fp.taxNumber;
+        fp_companyAddress='';
+        fp_telephone='';
+        fp_bankName='';
+        fp_bankAccount='';
       }
       let flag = this.data.isjifen ? "1" : "0";
       let adds = this.data.adds;
@@ -209,7 +267,7 @@ Page({
       }else{
         // let coupon_id = JSON.stringify(this.data.data.u_yhq) == '[]' ? 0 : [this.data.select].coupon_id;//优惠券
         let coupon_id = this.data.coupon_id
-        var data = { province: adds.provinceName, city: adds.cityName, area: adds.countyName, address: adds.detailInfo, mobile: adds.telNumber, flag: flag, name: adds.userName, fp_status: fp_status, fp_name: fp_name, fp_gs_name: fp_gs_name, fp_sh: fp_sh, bz: bz, real_name: real_name, card_number: card_number, coupon_id: coupon_id, isKJ: 0};
+        var data = { province: adds.provinceName, city: adds.cityName, area: adds.countyName, address: adds.detailInfo, mobile: adds.telNumber, flag: flag, name: adds.userName, fp_status: fp_status, fp_name: fp_name, fp_gs_name: fp_gs_name, fp_sh: fp_sh, bz: bz, real_name: real_name, card_number: card_number, image_1: this.data.cardImg1, image_2: this.data.cardImg2, coupon_id: coupon_id, isKJ: 0,fp_companyAddress:fp_companyAddress,fp_telephone:fp_telephone,fp_bankName:fp_bankName,fp_bankAccount:fp_bankAccount};
       }
       let link = { method: 'pay', canshu: '' };
       let logic = (ret) => {

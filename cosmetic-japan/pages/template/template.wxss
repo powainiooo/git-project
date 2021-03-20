@@ -18,7 +18,7 @@
 }
 
 .getUserBox .qx {
-  padding: 30% 0; 
+  padding: 30% 0;
   overflow: hidden;
 }
 
@@ -50,17 +50,28 @@
   /*background-color: #32b16c;
   color: #fff;*/
   padding: 34rpx 0;
-  border-radius: 8rpx;
+  border-radius: 20rpx;
+   font-size: 28rpx;
+   color: #ffffff;
 }
 
 .getuserinfo{
   width:45%;
-  border-radius: 0;
   padding: 0;
   margin: 0;
   line-height: 28rpx;
   float:left;
+   background-color: #02a0e9;
 }
 .refuse {
   margin-left:10%;
+}
+.getUserBox .hint {
+   font-size: 24rpx;
+   text-align: center;
+   margin-bottom: 20rpx;
+}
+.getUserBox .hint navigator {
+   color: #00A7D7;
+   display: inline;
 }

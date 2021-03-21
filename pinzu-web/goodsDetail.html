@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   <title>产品详情</title><!-- CSS -->
+   <link href="css/reset.css" rel="stylesheet" />
+   <link href="css/common.css" rel="stylesheet" />
+</head>
+<body>
+<!-- 每页单独的资源 -->
+<link href="css/swiper.min.css" rel="stylesheet" />
+<script src="js/swiper.min.js"></script>
+<link href="css/goodsDetail.css" rel="stylesheet" />
+
+<!-- 中间区域  使用框架frame1 -->
+<div class="w">
+   <!-- 面包屑导航 -->
+   <div class="c-bread-crumb">
+      <a href="#" class="c-bread-crumb-item">首页</a>
+      <a href="#" class="c-bread-crumb-item">手机</a>
+      <p href="#" class="c-bread-crumb-item c-bread-crumb-current">苹果Apple iPhone 11…</p>
+   </div>
+   <div class="prodetail-main clearfix mb20">
+      <!-- 图片展示区 -->
+      <div class="zoombox">
+         <div class="tb-booth tb-pic tb-s310">
+            <a href="#">
+               <!-- src里是正常的图地址  rel里面是大图地址  -->
+               <img src="http://demo.lanrenzhijia.com/2015/jqzoom0225/images/01_mid.jpg" alt="美女" rel="http://demo.lanrenzhijia.com/2015/jqzoom0225/images/01.jpg" id="jqzoom" />
+            </a>
+         </div>
+         <div class="swiper-container min-pics-swiper" id="detailSwiper">
+            <div class="swiper-wrapper">
+               <!-- swiper-slide-selected 表示选中状态 -->
+               <div class="swiper-slide swiper-slide-selected">
+                  <a href="#">
+                     <!-- src里是小图地址  mid正常的图地址  rel里面是大图地址 -->
+                     <img src="http://demo.lanrenzhijia.com/2015/jqzoom0225/images/01_small.jpg" mid="http://demo.lanrenzhijia.com/2015/jqzoom0225/images/01_mid.jpg" big="http://demo.lanrenzhijia.com/2015/jqzoom0225/images/01.jpg">
+                  </a>
+               </div>
+               <div class="swiper-slide"><a href="#"><img  src="http://demo.lanrenzhijia.com/2015/jqzoom0225/images/02_small.jpg" mid="http://demo.lanrenzhijia.com/2015/jqzoom0225/images/02_mid.jpg" big="http://demo.lanrenzhijia.com/2015/jqzoom0225/images/02.jpg"></a></div>
+               <div class="swiper-slide"><a href="#"><img src="http://demo.lanrenzhijia.com/2015/jqzoom0225/images/03_small.jpg" mid="http://demo.lanrenzhijia.com/2015/jqzoom0225/images/03_mid.jpg" big="http://demo.lanrenzhijia.com/2015/jqzoom0225/images/03.jpg"></a></div>
+               <div class="swiper-slide"><a href="#"><img src="http://demo.lanrenzhijia.com/2015/jqzoom0225/images/04_small.jpg" mid="http://demo.lanrenzhijia.com/2015/jqzoom0225/images/04_mid.jpg" big="http://demo.lanrenzhijia.com/2015/jqzoom0225/images/04.jpg"></a></div>
+               <div class="swiper-slide"><a href="#"><img src="http://demo.lanrenzhijia.com/2015/jqzoom0225/images/05_small.jpg" mid="http://demo.lanrenzhijia.com/2015/jqzoom0225/images/05_mid.jpg" big="http://demo.lanrenzhijia.com/2015/jqzoom0225/images/05.jpg"></a></div>
+            </div>
+
+         </div>
+         <!-- Add Arrows -->
+         <div class="swiper-button-next"></div>
+         <div class="swiper-button-prev"></div>
+      </div>
+      <!-- 信息区 -->
+      <div class="prodetail-main-infos">
+         <h2 class="f18 mb20">【原装正品 99新】Apple iPhone 11 Pro Max 国行双卡双待 全网通 256G 多色可选</h2>
+         <div class="b-f5 pt10 pb10 pl20 mb20">
+            <div class="clearfix mb10">
+               <div class="l mt10">售价：</div>
+               <div class="r"><div class="price">￥<span>5699</span></div></div>
+            </div>
+            <div class="clearfix">
+               <div class="l">优惠券：</div>
+               <div class="r">
+                  <ul class="cp-list">
+                     <li class="c-tag-main">满100减10</li>
+                     <li class="c-tag-main">满100减10</li>
+                     <li class="c-tag-main">满100减10</li>
+                  </ul>
+                  <a href="#" class="link c999 lh150" onclick="showCoupon()">更多</a>
+               </div>
+            </div>
+         </div>
+         <div class="clearfix ml20 mb20">
+            <div class="l mt5">选择规格：</div>
+            <div class="r">
+               <ul class="c-tab-btns">
+                  <li><a href="#" class="active">全网通 256G/暗夜绿</a> </li>
+                  <li><a href="#">全网通 256G/经典黑</a> </li>
+                  <li><a href="#">全网通 256G/银色</a> </li>
+                  <li><a href="#">全网通 256G/金色</a> </li>
+               </ul>
+            </div>
+         </div>
+         <div class="clearfix ml20 mb40">
+            <div class="l mt5">数量：</div>
+            <div class="r">
+               <div class="c-nums fl numsBox">
+                  <div class="c-nums-btn numsReduce">-</div>
+                  <input value="1" />
+                  <div class="c-nums-btn numsAdd">+</div>
+               </div>
+               <div class="fl f12 ml5 c999" style="line-height: 32px">件</div>
+               <div class="fl f12 ml20 c999" style="line-height: 32px">库存：112</div>
+            </div>
+         </div>
+         <div class="btn-group">
+            <button class="btn-main">立即下单</button>
+            <button class="btn-border">加入购物车</button>
+            <a href="#" class="c-main bold">联系商家 <img src="img/icon-contact.png" class="vm" /></a>
+         </div>
+         <hr style="margin: 20px -40px 20px 0; border-top-color: #D5D5D5" />
+         <div class="ml20">
+            <span class="mr10">分享：</span>
+            <a href="#" class="mr5"><img src="img/wechat.png" width="16" class="vm" /></a>
+            <a href="#" class="mr5"><img src="img/icon-pyq.png" width="16" class="vm" /></a>
+            <a href="#" class="mr20"><img src="img/icon-sina.png" width="16" class="vm" /></a>
+            <!-- 未收藏 -->
+            <a href="#" class="c-main">收藏<img src="img/icon-heart.png" width="16" class="vm ml5" /></a>
+            <!-- 已收藏 -->
+            <a href="#" class="c-main">收藏<img src="img/icon-heart-full.png" width="16" class="vm ml5" /></a>
+         </div>
+      </div>
+   </div>
+   <!-- 推荐搭配 -->
+   <div class="b-fff pt20 pl40 pr40 pb20">
+      <div class="titles mb40">
+         <h3>推荐搭配</h3>
+      </div>
+      <div class="clearfix">
+         <div class="current-goods">
+            <div><img src="img/img/img2.png" /></div>
+            <p>iPhone11Pro国行双卡双待全网通256G</p>
+         </div>
+         <span class="icon-add">+</span>
+         <div class="rec-list">
+            <div class="swiper-container rec-swiper" id="recSwiper">
+               <div class="swiper-wrapper">
+                  <div class="swiper-slide">
+                     <div class="rec-item">
+                        <div class="clearfix">
+                           <div class="imgs"><img src="img/img/img2.png" /></div>
+                           <div class="forms">
+                              <h3 class="mb10">iPhone充电器</h3>
+                              <div class="cSelects">
+                                 <div class="cSelects-item selectValue">标准</div>
+                                 <select>
+                                    <option value="1">标准</option>
+                                    <option value="2">标准2</option>
+                                    <option value="3">标准3</option>
+                                 </select>
+                              </div>
+                              <div class="clearfix mt10">
+                                 <span class="fl" style="line-height: 24px">数量</span>
+                                 <div class="c-arrow-nums numsBox fr">
+                                    <input value="0" />
+                                    <div>
+                                       <div class="c-nums-prev numsAdd"></div>
+                                       <div class="c-nums-next numsReduce"></div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="price">
+                           <input type="checkbox" />
+                           <p>￥<span>199</span></p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="swiper-slide">
+                     <div class="rec-item">
+                        <div class="clearfix">
+                           <div class="imgs"><img src="img/img/img2.png" /></div>
+                           <div class="forms">
+                              <h3 class="mb10">iPhone充电器</h3>
+                              <div class="cSelects">
+                                 <div class="cSelects-item selectValue">标准</div>
+                                 <select>
+                                    <option value="1">标准</option>
+                                    <option value="2">标准2</option>
+                                    <option value="3">标准3</option>
+                                 </select>
+                              </div>
+                              <div class="clearfix mt10">
+                                 <span class="fl" style="line-height: 24px">数量</span>
+                                 <div class="c-arrow-nums numsBox fr">
+                                    <input value="0" />
+                                    <div>
+                                       <div class="c-nums-prev numsAdd"></div>
+                                       <div class="c-nums-next numsReduce"></div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="price">
+                           <input type="checkbox" />
+                           <p>￥<span>199</span></p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="swiper-slide">
+                     <div class="rec-item">
+                        <div class="clearfix">
+                           <div class="imgs"><img src="img/img/img2.png" /></div>
+                           <div class="forms">
+                              <h3 class="mb10">iPhone充电器</h3>
+                              <div class="cSelects">
+                                 <div class="cSelects-item selectValue">标准</div>
+                                 <select>
+                                    <option value="1">标准</option>
+                                    <option value="2">标准2</option>
+                                    <option value="3">标准3</option>
+                                 </select>
+                              </div>
+                              <div class="clearfix mt10">
+                                 <span class="fl" style="line-height: 24px">数量</span>
+                                 <div class="c-arrow-nums numsBox fr">
+                                    <input value="0" />
+                                    <div>
+                                       <div class="c-nums-prev numsAdd"></div>
+                                       <div class="c-nums-next numsReduce"></div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="price">
+                           <input type="checkbox" />
+                           <p>￥<span>199</span></p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="swiper-slide">
+                     <div class="rec-item">
+                        <div class="clearfix">
+                           <div class="imgs"><img src="img/img/img2.png" /></div>
+                           <div class="forms">
+                              <h3 class="mb10">iPhone充电器</h3>
+                              <div class="cSelects">
+                                 <div class="cSelects-item selectValue">标准</div>
+                                 <select>
+                                    <option value="1">标准</option>
+                                    <option value="2">标准2</option>
+                                    <option value="3">标准3</option>
+                                 </select>
+                              </div>
+                              <div class="clearfix mt10">
+                                 <span class="fl" style="line-height: 24px">数量</span>
+                                 <div class="c-arrow-nums numsBox fr">
+                                    <input value="0" />
+                                    <div>
+                                       <div class="c-nums-prev numsAdd"></div>
+                                       <div class="c-nums-next numsReduce"></div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="price">
+                           <input type="checkbox" />
+                           <p>￥<span>199</span></p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="swiper-slide">
+                     <div class="rec-item">
+                        <div class="clearfix">
+                           <div class="imgs"><img src="img/img/img2.png" /></div>
+                           <div class="forms">
+                              <h3 class="mb10">iPhone充电器</h3>
+                              <div class="cSelects">
+                                 <div class="cSelects-item selectValue">标准</div>
+                                 <select>
+                                    <option value="1">标准</option>
+                                    <option value="2">标准2</option>
+                                    <option value="3">标准3</option>
+                                 </select>
+                              </div>
+                              <div class="clearfix mt10">
+                                 <span class="fl" style="line-height: 24px">数量</span>
+                                 <div class="c-arrow-nums numsBox fr">
+                                    <input value="0" />
+                                    <div>
+                                       <div class="c-nums-prev numsAdd"></div>
+                                       <div class="c-nums-next numsReduce"></div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="price">
+                           <input type="checkbox" />
+                           <p>￥<span>199</span></p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="rec-next"></div>
+            <div class="rec-prev"></div>
+         </div>
+      </div>
+      <hr class="mt20 mb20"/>
+      <div class="rec-total">
+         <span>已选择1个配件，组合价：</span>
+         <p>￥<span>199</span></p>
+         <button class="btn-main">立即下单</button>
+      </div>
+   </div>
+
+   <div class="clearfix mt20">
+      <!-- 左边店铺区 -->
+      <div class="fl mr20">
+         <!-- 店铺信息 -->
+         <div class="content-box mb10">
+            <div class="content-title acenter">
+               <span class="c-tag-yel">个人</span>鹰视眼官方旗舰店
+            </div>
+            <div class="ml20 f12 c666 mb10 mt5">订单数：9999+  关注数：2210</div>
+            <div class="store-btns clearfix">
+               <a href="#" class="center fl"><img src="img/icon-store.png" />进店逛逛</a>
+               <a href="#" class="center fr"><img src="img/icon-star.png" />关注店铺</a>
+            </div>
+         </div>
+         <!-- 店铺推荐 -->
+         <div class="content-box">
+            <div class="content-title acenter">店铺其他推荐</div>
+            <a href="#" class="stor-rec-goods">
+               <div class="imgs"><img src="img/img/img2.png" /></div>
+               <div class="name">【9.5新】国行苹果 iPhoneXS iPhoneXS </div>
+               <div class="price">￥<span>19.8</span>/天</div>
+            </a>
+            <a href="#" class="stor-rec-goods">
+               <div class="imgs"><img src="img/img/img2.png" /></div>
+               <div class="name">【9.5新】国行苹果 iPhoneXS iPhoneXS </div>
+               <div class="price">￥<span>19.8</span>/天</div>
+            </a>
+            <a href="#" class="stor-rec-goods">
+               <div class="imgs"><img src="img/img/img2.png" /></div>
+               <div class="name">【9.5新】国行苹果 iPhoneXS iPhoneXS </div>
+               <div class="price">￥<span>19.8</span>/天</div>
+            </a>
+            <a href="#" class="stor-rec-goods">
+               <div class="imgs"><img src="img/img/img2.png" /></div>
+               <div class="name">【9.5新】国行苹果 iPhoneXS iPhoneXS </div>
+               <div class="price">￥<span>19.8</span>/天</div>
+            </a>
+         </div>
+      </div>
+      <!-- 右边产品信息区 -->
+      <div class="fl prodetail-intros">
+         <div class="content-box">
+            <ul class="c-tabs ml40">
+               <li class="active"><a href="javascript:;">商品参数</a> </li>
+               <li><a href="javascript:;">商品详情</a> </li>
+               <li><a href="javascript:;">商品评价（2.2万+）</a> </li>
+            </ul>
+            <hr style="margin-top: 0;" />
+            <h4 class="ml40 mb10 mt20">属性参数</h4>
+            <ul class="params-table mb20 ml40 mr40">
+               <li>
+                  <div class="th">品牌</div>
+                  <div class="td">品牌</div>
+               </li>
+               <li>
+                  <div class="th">品牌</div>
+                  <div class="td">品牌</div>
+               </li>
+               <li>
+                  <div class="th">品牌</div>
+                  <div class="td">品牌</div>
+               </li>
+               <li>
+                  <div class="th">品牌</div>
+                  <div class="td">品牌</div>
+               </li>
+            </ul>
+         </div>
+         <div class="content-box">
+            <div class="content-title">阶梯价格</div>
+            <ul class="price-table">
+               <li class="th between">
+                  <p>内存64G</p>
+                  <p>押金：￥200</p>
+                  <p>5天起租</p>
+               </li>
+               <li class="between">
+                  <p>第1-7天</p>
+                  <p>￥10.8/天</p>
+               </li>
+               <li class="between">
+                  <p>第1-7天</p>
+                  <p>￥10.8/天</p>
+               </li>
+               <li class="between">
+                  <p>第1-7天</p>
+                  <p>￥10.8/天</p>
+               </li>
+               <li class="th between">
+                  <p>内存64G</p>
+                  <p>押金：￥200</p>
+                  <p>5天起租</p>
+               </li>
+               <li class="between">
+                  <p>第1-7天</p>
+                  <p>￥10.8/天</p>
+               </li>
+               <li class="between">
+                  <p>第1-7天</p>
+                  <p>￥10.8/天</p>
+               </li>
+               <li class="between">
+                  <p>第1-7天</p>
+                  <p>￥10.8/天</p>
+               </li>
+               <li class="th between">
+                  <p>内存64G</p>
+                  <p>租金：￥10/天</p>
+                  <p>押金：￥200</p>
+                  <p>5天起租</p>
+               </li>
+            </ul>
+         </div>
+         <div class="content-box">
+            <div class="content-title">租赁事宜</div>
+            <div class="titles mb40 mt40">
+               <h3>租赁流程</h3>
+            </div>
+            <div class=" ml75 mr85">租赁流程</div>
+            <div class="titles mb40 mt80">
+               <h3>租赁示例</h3>
+            </div>
+            <div class="mb40 ml75 mr85">租赁示例</div>
+            <div class="mb40 ml75 mr85">产品详情</div>
+         </div>
+         <!-- 商品评价 -->
+         <div class="content-box">
+            <div class="content-title">商品评价</div>
+            <div class="clearfix">
+               <div class="comment-total">
+                  <p>好评度</p>
+                  <div><span>97</span>%</div>
+               </div>
+               <div class="comment-tags">
+                  <a href="#" class="c-tag">质量很好(34)</a>
+                  <a href="#" class="c-tag">质量很好(34)</a>
+                  <a href="#" class="c-tag">质量很好(34)</a>
+                  <a href="#" class="c-tag">质量很好(34)</a>
+                  <a href="#" class="c-tag">质量很好(34)</a>
+                  <a href="#" class="c-tag">质量很好(34)</a>
+                  <a href="#" class="c-tag">质量很好(34)</a>
+               </div>
+            </div>
+         </div>
+         <!-- 详细评价 -->
+         <div class="content-box">
+            <div class="content-title mb20">
+               <a href="#" class="active">全部评价(2.2万+)</a>
+               <a href="#">最新(500)</a>
+               <a href="#">有图(2660)</a>
+               <a href="#">有视频(660)</a>
+            </div>
+            <div class="comment-item clearfix">
+               <div class="person acenter">
+                  <img src="img/img/img1.png" />
+                  <span>哆啦A梦</span>
+               </div>
+               <div class="contents">
+                  <p class="c666 mb10">竟然还有这种神器，对我这样的人来说完全是救星哈。只要你拥有它，一切都省心了</p>
+                  <ul class="media-list">
+                     <!-- data-src里面放大图的地址 这里我暂时没找到合适的插件 这个后面再加 -->
+                     <li data-src="xxx"><img src="img/img/img2.png" /></li>
+                     <li data-src="xxx"><img src="img/img/img2.png" /></li>
+                     <li data-src="xxx"><img src="img/img/img2.png" /></li>
+                     <li data-src="xxx"><img src="img/img/img2.png" /></li>
+                     <li data-src="xxx"><img src="img/img/img2.png" /></li>
+                     <li data-src="xxx"><img src="img/img/img2.png" /></li>
+                  </ul>
+                  <div class="big-img"></div>
+                  <p class="f12 c999 mb10"><span class="mr20">黑色</span><span>型号：256G</span></p>
+                  <div class="between">
+                     <p class="f12 c999">2020-12-01 13:33</p>
+                     <div class="comment-btns center">
+                        <a href="#" class="center mr20">
+                           <img src="img/icon-thumb.png" />
+                           <span class="ml5">19</span>
+                        </a>
+                        <a href="#" class="center">
+                           <img src="img/icon-mes.png" />
+                           <span class="ml5">评论</span>
+                        </a>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="c-pages mt40 mb20 mr40" style="text-align: right;">
+               <ul>
+                  <li class="prevBtn"><a href="#"></a> </li>
+                  <li class="active"><a href="#">1</a> </li>
+                  <li><a href="#">2</a> </li>
+                  <li><a href="#">3</a> </li>
+                  <li><a href="#">4</a> </li>
+                  <li><a href="#">5</a> </li>
+                  <li class="nextBtn"><a href="#"></a> </li>
+               </ul>
+               <div class="c-pages-elevator">
+                  <div class="box">10条/页</div>
+                  <span>跳至</span>
+                  <input type="text" class="box" />
+                  <span>页</span>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <!-- 优惠券弹窗 -->
+   <div class="cp-container" id="couponContainer">
+      <div class="top between">
+         <p>优惠券</p>
+         <a href="javascript:;" onclick="hideCoupon()"><img src="img/x.png" /></a>
+      </div>
+      <div class="cp-titles center">
+         <div class="line"></div>
+         <p>可领取的券</p>
+         <div class="line"></div>
+      </div>
+      <div class="cp-item">
+         <p class="price mb10">￥<span>30</span></p>
+         <p class="mb5">满300减30元</p>
+         <p class="c999">领券后6小时内有效</p>
+         <a href="#">立即领取</a>
+      </div>
+      <div class="cp-item">
+         <p class="price mb10">￥<span>30</span></p>
+         <p class="mb5">满300减30元</p>
+         <p class="c999">领券后6小时内有效</p>
+         <a href="#">立即领取</a>
+      </div>
+      <div class="cp-suc">
+         <div>恭喜你，领取成功！</div>
+         <p>优惠券稍后将会发送您的品租账户中，请注意查收哦～</p>
+      </div>
+      <div class="cp-titles center">
+         <div class="line"></div>
+         <p>已领取的券</p>
+         <div class="line"></div>
+      </div>
+      <div class="cp-item">
+         <p class="price mb10">￥<span>30</span></p>
+         <p class="mb5">满300减30元</p>
+         <p class="c999">领券后6小时内有效</p>
+         <a href="#">立即使用</a>
+         <!-- 已领取图标 -->
+         <img src="img/ylq.png" class="icon" />
+      </div>
+   </div>
+</div>
+
+
+<script src="js/jquery-2.1.4.min.js"></script>
+<script src="js/common.js"></script>
+<script src="js/jquery.imagezoom.min.js"></script>
+<script>
+$(function(){
+	var swiper = new Swiper('#detailSwiper', {
+		slidesPerView: 4,
+		spaceBetween: 20,
+		simulateTouch : false,
+		navigation: {
+			nextEl: '.swiper-button-next',
+			prevEl: '.swiper-button-prev',
+		}
+	});
+	var swiper2 = new Swiper('#recSwiper', {
+		slidesPerView: 3,
+		spaceBetween: 20,
+		simulateTouch : false,
+		navigation: {
+			nextEl: '.rec-next',
+			prevEl: '.rec-prev',
+		}
+	});
+	var jqzoom = $("#jqzoom")
+	jqzoom.imagezoom();
+	$("#detailSwiper .swiper-slide").click(function(){
+		$(this).addClass("swiper-slide-selected").siblings().removeClass("swiper-slide-selected");
+		var img = $(this).find("img");
+		jqzoom.attr('src', img.attr("mid"));
+		jqzoom.attr('rel', img.attr("big"));
+	});
+});
+</script>
+</body>
+</html>

@@ -8,6 +8,7 @@
    颜色
 */
 .b-fff { background-color: #ffffff }
+.b-f5 { background-color: #F5F5F5 }
 .c-main { color: #FE322B; }
 .c666 { color: #666666; }
 .c999 { color: #999999; }
@@ -16,6 +17,10 @@
 /*
    全局组件
 */
+
+/* 复选框 */
+input[type=checkbox] { -webkit-appearance: none; width: 16px; height: 16px; background: url("../img/checkbox.png") no-repeat; }
+input[type=checkbox]:checked { background-position: -16px 0; }
 
 /* 气泡浮窗 */
 .c-pop { width: 244px; background: #FFFFFF; box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.15); position: absolute; z-index: 100; }
@@ -36,18 +41,45 @@
 .c-tabs li a { display: block; padding-bottom: 12px; font-size: 16px; border-bottom: 2px solid transparent; }
 .c-tabs li.active a, .c-tabs li:hover a { color: #FE322B; border-bottom: 2px solid #FE322B; }
 
-/* 按钮 */
+.c-tab-btns { overflow: hidden; }
+.c-tab-btns li { float: left; margin-right: 10px; margin-bottom: 10px; }
+.c-tab-btns li a { height: 32px; display: block; border: 1px solid #D5D5D5; border-radius: 2px; line-height: 30px; padding: 0 20px 0 10px; }
+.c-tab-btns li a.active { border-color: #FE322B; }
+
+   /* 按钮 */
 .btn { display: inline-block; height: 40px; border: 1px solid #D5D5D5; border-radius: 4px; text-align: center; font-size: 12px; line-height: 40px; }
 .btn-main { display: inline-block; height: 40px; background-color: #FE322B; color: #ffffff; border-radius: 4px; text-align: center; line-height: 40px; }
 .btn-border { display: inline-block; height: 40px; border: 1px solid #FE322B; background-color: #ffffff; color: #FE322B; border-radius: 4px; text-align: center; line-height: 40px; }
 
 /* 下拉框 */
 .cSelects { position: relative; }
+.cSelects .cSelects-item { height: 24px; border: 1px solid rgba(0, 0, 0, .1); line-height: 22px; padding: 0 22px 0 8px; font-size: 12px; background: url("../img/arrow4.png") no-repeat; background-position: 100px center; }
 .cSelects select { width: 100%; height: 100%; position: absolute; top: 0; left: 0; opacity: 0; }
 
-/*
-   页面模块
-*/
+/* tag */
+.c-tag { height: 24px; border: 1px solid #D5D5D5; display: inline-block; line-height: 22px; padding: 0 10px; color: #999999; background-color: #ffffff; }
+.c-tag-main { height: 24px; border: 1px solid #FE322B; display: inline-block; line-height: 22px; padding: 0 10px; color: #FE322B; background-color: rgba(254, 50, 43, 0.1); }
+.c-tag-yel { height: 22px; display: inline-block; line-height: 22px; padding: 0 8px; color: #ffffff; background-color: #FC7F1B; border-radius: 2px; }
+
+/* 箭头 */
+.link { padding-right: 16px; background: url("../img/arrow1.png") no-repeat; background-size: 12px; background-position: right center; }
+
+/* 数量加减 */
+.c-nums { width: 110px; height: 32px; border: 1px solid #D5D5D5; border-radius: 2px; overflow: hidden; }
+.c-nums .c-nums-btn { width: 30px; height: 30px; text-align: center; font-family: 黑体; font-size: 20px; line-height: 30px; background-color: #F5F5F5; float: left; cursor: pointer; }
+.c-nums input { width: 48px; height: 30px; background-color: #ffffff; border: none; border-left: 1px solid #D5D5D5; border-right: 1px solid #D5D5D5; text-align: center; line-height: 30px; float: left; }
+
+.c-arrow-nums { width: 65px; height: 24px; border-radius: 2px; border: 1px solid #D5D5D5; overflow: hidden; }
+.c-arrow-nums input { width: 43px; height: 22px; border-right: 1px solid #D5D5D5; line-height: 22px; padding-left: 10px; }
+.c-arrow-nums>div { width: 20px; float: right; }
+.c-arrow-nums .c-nums-prev, .c-arrow-nums .c-nums-next { width: 20px; height: 11px; background-position: center center; background-size: 9px; background-repeat: no-repeat; cursor: pointer; }
+.c-arrow-nums .c-nums-prev { background-image: url("../img/arrow7.png"); border-bottom: 1px solid #D5D5D5; }
+.c-arrow-nums .c-nums-next { background-image: url("../img/arrow6.png") }
+
+
+   /*
+      页面模块
+   */
 /* 最底部导航栏 */
 .shortcut { height: 50px; }
 .shortcut .w>p, .shortcut .w>div { line-height: 50px; }
@@ -162,6 +194,7 @@
 /* 面包屑 */
 .c-bread-crumb { height: 46px; line-height: 46px; }
 .c-bread-crumb .c-bread-crumb-item { display: inline-block; padding-right: 17px; margin-right: 5px; font-size: 12px; background: url("../img/arrow1.png") no-repeat right center; background-size: 12px; }
+.c-bread-crumb .c-bread-crumb-current { background: none; }
 .c-bread-crumb .search-condition { display: inline-block; margin-left: 20px; }
 .c-bread-crumb .search-condition ul { display: inline-block; }
 .c-bread-crumb .search-condition ul li,.c-bread-crumb .search-condition>a { display: inline-block; height: 22px; background: #FFFFFF; border-radius: 2px; border: 1px solid #D5D5D5; padding: 0 30px 0 10px; line-height: 20px; font-size: 12px; margin-left: 5px; position: relative; }
@@ -175,6 +208,8 @@
 .c-pages .box { width: auto;}
 .c-pages ul li.prevBtn { background: url("../img/arrow5.png") no-repeat; background-position: center center; background-color: #ffffff; }
 .c-pages ul li.nextBtn { background: url("../img/arrow1.png") no-repeat; background-position: center center; background-color: #ffffff; }
+.c-pages ul li.active { background-color: #FE322B; border-color: #FE322B; }
+.c-pages ul li.active a { color: #ffffff; }
 .c-pages .c-pages-elevator { display: inline-block; line-height: 32px; overflow: hidden; }
 .c-pages .c-pages-elevator span { float: left; margin: 0 5px; }
 .c-pages .c-pages-elevator input { width: 48px; }

@@ -13,6 +13,7 @@
 .c666 { color: #666666; }
 .c999 { color: #999999; }
 .cfff { color: #ffffff; }
+.c-link { color: #275C91; }
 
 /*
    全局组件
@@ -42,9 +43,10 @@ input[type=checkbox]:checked { background-position: -16px 0; }
 .c-tabs li.active a, .c-tabs li:hover a { color: #FE322B; border-bottom: 2px solid #FE322B; }
 
 .c-tab-btns { overflow: hidden; }
-.c-tab-btns li { float: left; margin-right: 10px; margin-bottom: 10px; }
-.c-tab-btns li a { height: 32px; display: block; border: 1px solid #D5D5D5; border-radius: 2px; line-height: 30px; padding: 0 20px 0 10px; }
+.c-tab-btns li { float: left; margin-right: 10px; margin-bottom: 10px; background-color: #ffffff; }
+.c-tab-btns li a { height: 32px; display: block; border: 1px solid #D5D5D5; border-radius: 2px; line-height: 30px; padding: 0 20px 0 10px; position: relative; }
 .c-tab-btns li a.active { border-color: #FE322B; }
+.c-tab-btns li a.active:after { content: ''; width: 18px; height: 15px; background: url("../img/icon-check.png") no-repeat; position: absolute; bottom: -1px; right: -1px; }
 
    /* 按钮 */
 .btn { display: inline-block; height: 40px; border: 1px solid #D5D5D5; border-radius: 4px; text-align: center; font-size: 12px; line-height: 40px; }
@@ -53,16 +55,19 @@ input[type=checkbox]:checked { background-position: -16px 0; }
 
 /* 下拉框 */
 .cSelects { position: relative; }
-.cSelects .cSelects-item { height: 24px; border: 1px solid rgba(0, 0, 0, .1); line-height: 22px; padding: 0 22px 0 8px; font-size: 12px; background: url("../img/arrow4.png") no-repeat; background-position: 100px center; }
+.cSelects .cSelects-item { height: 24px; border: 1px solid rgba(0, 0, 0, .1); line-height: 22px; padding: 0 22px 0 8px; font-size: 12px; background: url("../img/arrow4.png") no-repeat; background-position: calc(100% - 10px) center; background-position: -webkit-calc(100% - 10px) center; }
 .cSelects select { width: 100%; height: 100%; position: absolute; top: 0; left: 0; opacity: 0; }
 
 /* tag */
 .c-tag { height: 24px; border: 1px solid #D5D5D5; display: inline-block; line-height: 22px; padding: 0 10px; color: #999999; background-color: #ffffff; }
 .c-tag-main { height: 24px; border: 1px solid #FE322B; display: inline-block; line-height: 22px; padding: 0 10px; color: #FE322B; background-color: rgba(254, 50, 43, 0.1); }
-.c-tag-yel { height: 22px; display: inline-block; line-height: 22px; padding: 0 8px; color: #ffffff; background-color: #FC7F1B; border-radius: 2px; }
+.c-tag-yel { height: 22px; display: inline-block; line-height: 22px; font-size: 12px; padding: 0 8px; color: #ffffff; background-color: #FC7F1B; border-radius: 2px; }
 
 /* 箭头 */
 .link { padding-right: 16px; background: url("../img/arrow1.png") no-repeat; background-size: 12px; background-position: right center; }
+.link-main { padding-right: 16px; background: url("../img/arrow2.png") no-repeat; background-size: 12px; background-position: right center; }
+.a-down { padding-right: 16px; background: url("../img/arrow4.png") no-repeat; background-size: 12px; background-position: right center; }
+.a-up { padding-right: 16px; background: url("../img/arrow10.png") no-repeat; background-size: 12px; background-position: right center; }
 
 /* 数量加减 */
 .c-nums { width: 110px; height: 32px; border: 1px solid #D5D5D5; border-radius: 2px; overflow: hidden; }
@@ -75,6 +80,9 @@ input[type=checkbox]:checked { background-position: -16px 0; }
 .c-arrow-nums .c-nums-prev, .c-arrow-nums .c-nums-next { width: 20px; height: 11px; background-position: center center; background-size: 9px; background-repeat: no-repeat; cursor: pointer; }
 .c-arrow-nums .c-nums-prev { background-image: url("../img/arrow7.png"); border-bottom: 1px solid #D5D5D5; }
 .c-arrow-nums .c-nums-next { background-image: url("../img/arrow6.png") }
+
+/* 边框 */
+.box-frame { border: 1px solid #D5D5D5; padding: 20px; }
 
 
    /*

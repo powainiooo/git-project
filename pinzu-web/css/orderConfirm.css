@@ -1,0 +1,17 @@
+.order-title { font-size: 18px; font-weight: bold; margin-bottom: 20px; }
+
+.addr-item { height: 32px; line-height: 32px; }
+.addr-item .c-tab-btns { display: inline-block; vertical-align: middle; }
+.addr-item .c-tab-btns li { width: 120px; margin-bottom: 0; text-align: center; }
+.addr-item span { font-size: 12px; margin-right: 10px; }
+.addr-item span.c-tag-main { background-color: #FE322B; color: #ffffff; }
+
+.addr-list { margin-bottom: 20px; }
+.addr-list .addr-line { height: 33px; margin-bottom: 10px; overflow: hidden; }
+.addr-list .addr-line:last-child { margin-bottom: 0; }
+.addr-list .addr-line:hover { background-color: #FFF5EC; }
+.addr-list .addr-line .addr-item { float: left; }
+.addr-list .addr-line .btns { float: right; height: 32px; line-height: 32px; display: none; }
+.addr-list .addr-line:hover .btns { display: block; }
+.addr-list .addr-line .btns a { margin-right: 20px; color: #275C91; font-size: 12px; }
+.addr-list .addr-line .btns a:hover { color: #FE322B; }

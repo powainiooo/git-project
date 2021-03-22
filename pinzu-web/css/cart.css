@@ -1,0 +1,50 @@
+.cart-none { width: 252px; margin: 120px auto; }
+
+.cart-swiper-pagination { right: 0; top: 13px; }
+.cart-swiper-pagination .swiper-pagination-bullet { margin: 0 5px; background-color: #D5D5D5; }
+.cart-swiper-pagination .swiper-pagination-bullet-active { background-color: #999999 }
+
+.guess-swiper { height: 360px; padding-top: 8px; }
+.guess-list { margin: 0 -13px; }
+.guess-list .goods-item { float: left; margin: 0 13px; width: 280px; height: 345px; box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.08); }
+.guess-list .goods-item .imgs { width: 220px; height: 220px; margin: 30px; }
+.guess-list .goods-item .title {  -webkit-line-clamp: 1; line-clamp: 1; margin-bottom: 10px; }
+.guess-list .goods-item .btn-border { width: 84px; height: 25px; line-height: 23px; font-size: 12px; border-radius: 2px; }
+.guess-swiper .swiper-button-next, .guess-swiper .swiper-button-prev { width: 60px; height: 60px; margin-top: -30px; background-size: 100% 100%; display: none; }
+.guess-swiper:hover .swiper-button-next, .guess-swiper:hover .swiper-button-prev { display: block; }
+.guess-swiper .swiper-button-next {  background-image: url("../img/arrow9.png"); }
+.guess-swiper .swiper-button-prev { background-image: url("../img/arrow8.png"); }
+
+.cart-thead { height: 40px; background-color: #F5F5F5; overflow: hidden; margin-bottom: 20px; }
+.cart-thead .th { float: left; height: 100%; line-height: 40px; }
+.cart-thead .t-checkbox { margin-left: 20px; margin-right: 150px; }
+.cart-thead .t-goods { margin-right: 234px; }
+.cart-thead .t-price { margin-right: 176px; }
+.cart-thead .t-nums { margin-right: 150px; }
+.cart-thead .t-sum { margin-right: 118px; }
+
+.cart-body { margin-bottom: 20px; }
+.cart-body .cart-shop { height: 22px; line-height: 22px; margin-bottom: 10px; padding-left: 20px; }
+.cart-body .cart-shop img { vertical-align: middle; }
+.cart-body .cart-shop .company { background-color: #FE322B; }
+
+.cart-body .cart-list { border: 1px solid #D5D5D5; }
+.cart-body .cart-list .cart-item { border-bottom: 1px solid #D5D5D5; padding: 20px; overflow: hidden; }
+.cart-body .cart-list .cart-item-selected { background-color: #FFF5EC; }
+.cart-body .cart-list .cart-item:last-child { border-bottom: none; }
+.cart-body .cart-list .cart-item .cb { float: left; margin-right: 10px; margin-top: 32px; }
+.cart-body .cart-list .cart-item .imgs { float: left; width: 80px; height: 80px; border-radius: 4px; overflow: hidden; position: relative; }
+.cart-body .cart-list .cart-item .imgs img { width: 100%; }
+.cart-body .cart-list .cart-item .imgs .tag { width: 14px; position: absolute; top: 0; left: 0; }
+.cart-body .cart-list .cart-item .msgs { float: left; margin-left: 10px; width: 233px; margin-right: 120px; }
+.cart-body .cart-list .cart-item .msgs .cSelects { width: 180px; }
+.cart-body .cart-list .cart-item .txt { float: left; width: 190px; }
+.cart-body .cart-list .cart-item .txt p { font-size: 10px; }
+.cart-body .cart-list .cart-item .txt p span { font-size: 12px; }
+.cart-body .cart-list .cart-item .nums { float: left; margin-right: 110px; }
+.cart-body .cart-list .cart-item .nums p { font-size: 12px; color: #999999; margin-top: 5px; text-align: center; }
+
+.cart-footer { height: 57px; border: 1px solid #D5D5D5; position: relative; margin-bottom: 40px; }
+.cart-footer .msgs { margin-right: 194px; float: right; margin-top: 5px; }
+.cart-footer button { width: 154px; height: 57px; line-height: 57px; position: absolute; right: -1px; top: -1px; font-size: 18px; border-radius: 0; }
+

@@ -59,7 +59,8 @@ input, select {
 .pr{ position:relative;}
 .pa{ position:absolute;}
 .none{ display: none;}
-.block { display: block }
+.block { display: block; }
+.iblock { display: inline-block; }
 .bold { font-weight: bold; }
 
 /* flex */

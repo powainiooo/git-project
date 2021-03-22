@@ -1,5 +1,5 @@
 <!--pages/myOrderDetail/index.wxml-->
-<view class='orderAddress'>
+<!-- <view class='orderAddress'>
    <image src='/images/ico_adds.png' class='icon' mode="widthFix"></image>
    <view style="width: 520rpx;">
       <view class='cont'>
@@ -12,7 +12,7 @@
    </view>
    <image src='/images/ico_right.png' class='icon-jt' mode="widthFix"></image>
 </view>
-<view class='hr16'></view>
+<view class='hr16'></view> -->
 <view class='orderLi'>
   <view class='hr16'></view>
   <view class='orderLi_top'>

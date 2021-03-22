@@ -85,10 +85,13 @@ Page({
                     this.pay(data,obj)
                 },
                 fail: res => {
+                   
+                },
+                complete:res=>{
                     this.setData({
                         fukuanBool: true
                     })
-                },
+                }
             })
         })
 

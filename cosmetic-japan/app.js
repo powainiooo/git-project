@@ -136,6 +136,7 @@ App({
     } else {
       obj.url = urlArr[0] + '?login_key=' + wx.getStorageSync('key');
     }
+    console.log('url',obj.url);
     obj.data = obj.data || {}
     obj.data.mid = getApp().globalData.mid;
     wx.request({

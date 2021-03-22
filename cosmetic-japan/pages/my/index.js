@@ -243,7 +243,7 @@ Page({
         isCN: wx.getStorageSync('isCN')
       })
     }
-    api.post(this, www, {}, huidiao);
+    // api.post(this, www, {}, huidiao);
 
   },
   loginTap: function () {

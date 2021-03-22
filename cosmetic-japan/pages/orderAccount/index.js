@@ -364,7 +364,9 @@ Page({
           adds: adds,
           list: ret.list,
           isKJ:false,
-          selectAddsTap:'selectAddsTap'
+          selectAddsTap:'selectAddsTap',
+          cardImg1:data.image_1,
+          cardImg2:data.image_2,
         })
       }
       api.post(this, link, {}, logic);

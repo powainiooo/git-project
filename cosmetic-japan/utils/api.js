@@ -3,13 +3,16 @@ const www = getApp().globalData.www + '/';
 
 // 总接口
 function post(that, link, data, logic = function () { }) {
+  const link_method=link.method;
+  console.log('link_method',link_method);
   var login_key = app.getLoginKey();
   var isCN = 1;
   // var url = www + 'api/index/' + link.method + '?login_key=' + login_key + '&mid=' + app.globalData.mid + '&isCN=' + isCN + link.canshu;
-	const mid = app.globalData.mid
+  const mid = app.globalData.mid
   // const fxsId = `&fxs_id_${mid}=${app.globalData.fxs_id}`
   const fxsId = `&fxs_id_${mid}=${wx.getStorageSync('FXSID_'+mid)}`
   var url = `${www}api/index/${link.method}?login_key=${login_key}&mid=${mid}${fxsId}&isCN=${isCN}${link.canshu}`
+  
   wx.request({
     url: url,
     data: data,
@@ -17,7 +20,7 @@ function post(that, link, data, logic = function () { }) {
     method: 'POST',
     dataType: 'json',
     success: function (res) {
-      console.log(res);
+      console.log('res',res,link_method,url,data);
       var retData = res.data;
       if (res) {
         if (retData.ret == 1) {
@@ -45,6 +48,12 @@ function post(that, link, data, logic = function () { }) {
         } else if (retData.ret == 0){
           logic(retData.data);
         } else{
+          if(link_method=='pay'){
+            console.log(111);
+            that.setData({
+              isPayStatus:true
+            })
+          }
           wx.showToast({
             title: retData.msg,
             icon: 'none',

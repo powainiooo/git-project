@@ -217,7 +217,7 @@ Page({
 
     // 立即购买
     ljShop: function() {
-       
+
 
         if (wx.getStorageSync('userInfo') == '') {
           this.setData({
@@ -464,8 +464,8 @@ Page({
 	                nums: ret.cart_nums
                 })
 
-                
-                
+
+
               console.log('详情', goods_desc);
                 if (options.activity_type == 2) {
                     var start_time = this.timestampToTime(parseInt(goods_info.start_time))
@@ -635,15 +635,18 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function() {
-        if (wx.getStorageSync('userInfo') == '') {
-            this.setData({
-                isShowGetUser: false
-            })
-        } else {
-            this.setData({
-                isShowGetUser: false
-            })
-        }
+	    if (!this.data.isShowGetUser) {
+		    if (wx.getStorageSync('userInfo') == '') {
+			    this.setData({
+				    isShowGetUser: false
+			    })
+		    } else {
+			    this.setData({
+				    isShowGetUser: false
+			    })
+		    }
+	    }
+
         let www = { method: 'cart_nums', canshu: '' };
         let huidiao = (ret) => {
             this.setData({

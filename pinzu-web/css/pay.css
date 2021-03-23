@@ -1,0 +1,16 @@
+.pay-box { box-shadow: 0px 2px 8px 4px rgba(0, 0, 0, 0.05); border-radius: 4px; margin-bottom: 110px; overflow: hidden; }
+
+.qrcode { width: 350px; float: left; margin-left: 190px; margin-right: 124px; }
+.qrcode .img { width: 350px; height: 350px; margin-bottom: 20px; }
+.qrcode .hint-box { width: 350px; height: 70px; text-align: center; background-color: #FE322B; overflow: hidden; }
+.qrcode .hint-box img { float: left; margin-left: 88px; margin-top: 6px; margin-right: 20px; }
+.qrcode .hint-box div { float: left; margin-top: 10px; }
+.qrcode .hint-box div p { color: #ffffff; line-height: 22px; }
+.hint-img { float: left; }
+
+.pay-result { margin-bottom: 40px; }
+.pay-result .icon { width: 72px; display: block; margin: 0 auto 20px auto; }
+.pay-result h2 { font-size: 24px; margin-bottom: 10px; text-align: center; }
+.pay-result p { width: 620px; margin: 0 auto 20px auto; color: #999999; }
+.pay-result div { text-align: center; }
+.pay-result div a { width: 88px; margin: 0 3px; }

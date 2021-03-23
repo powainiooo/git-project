@@ -1,19 +1,5 @@
 .cart-none { width: 252px; margin: 120px auto; }
 
-.cart-swiper-pagination { right: 0; top: 13px; }
-.cart-swiper-pagination .swiper-pagination-bullet { margin: 0 5px; background-color: #D5D5D5; }
-.cart-swiper-pagination .swiper-pagination-bullet-active { background-color: #999999 }
-
-.guess-swiper { height: 360px; padding-top: 8px; }
-.guess-list { margin: 0 -13px; }
-.guess-list .goods-item { float: left; margin: 0 13px; width: 280px; height: 345px; box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.08); }
-.guess-list .goods-item .imgs { width: 220px; height: 220px; margin: 30px; }
-.guess-list .goods-item .title {  -webkit-line-clamp: 1; line-clamp: 1; margin-bottom: 10px; }
-.guess-list .goods-item .btn-border { width: 84px; height: 25px; line-height: 23px; font-size: 12px; border-radius: 2px; }
-.guess-swiper .swiper-button-next, .guess-swiper .swiper-button-prev { width: 60px; height: 60px; margin-top: -30px; background-size: 100% 100%; display: none; }
-.guess-swiper:hover .swiper-button-next, .guess-swiper:hover .swiper-button-prev { display: block; }
-.guess-swiper .swiper-button-next {  background-image: url("../img/arrow9.png"); }
-.guess-swiper .swiper-button-prev { background-image: url("../img/arrow8.png"); }
 
 .cart-thead { height: 40px; background-color: #F5F5F5; overflow: hidden; margin-bottom: 20px; }
 .cart-thead .th { float: left; height: 100%; line-height: 40px; }

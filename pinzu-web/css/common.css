@@ -35,8 +35,11 @@ input[type=checkbox]:checked { background-position: -16px 0; }
 .c-modal-bg { width: 100%; height: 100%; position: absolute; top: 0; left: 0; }
 .c-modal-body { background-color: #ffffff; border-radius: 4px; margin: 150px auto; overflow: hidden; position: relative; z-index: 10; }
 .c-modal-close { position: absolute; top: 20px; right: 20px; }
+.c-modal-header { padding: 0 20px; height: 48px; background-color: #F5F5F5; overflow: hidden; }
+.c-modal-header span { float: left; margin-top: 16px; }
+.c-modal-header a { float: right; margin-top: 16px; }
 
-/* 标签页 */
+   /* 标签页 */
 .c-tabs { overflow: hidden; }
 .c-tabs li { float: left; margin-right: 30px; }
 .c-tabs li a { display: block; padding-bottom: 12px; font-size: 16px; border-bottom: 2px solid transparent; }
@@ -48,14 +51,19 @@ input[type=checkbox]:checked { background-position: -16px 0; }
 .c-tab-btns li a.active { border-color: #FE322B; }
 .c-tab-btns li a.active:after { content: ''; width: 18px; height: 15px; background: url("../img/icon-check.png") no-repeat; position: absolute; bottom: -1px; right: -1px; }
 
-   /* 按钮 */
+/* 按钮 */
 .btn { display: inline-block; height: 40px; border: 1px solid #D5D5D5; border-radius: 4px; text-align: center; font-size: 12px; line-height: 40px; }
 .btn-main { display: inline-block; height: 40px; background-color: #FE322B; color: #ffffff; border-radius: 4px; text-align: center; line-height: 40px; }
 .btn-border { display: inline-block; height: 40px; border: 1px solid #FE322B; background-color: #ffffff; color: #FE322B; border-radius: 4px; text-align: center; line-height: 40px; }
+.btn-more { width: 152px; height: 32px; line-height: 30px; color: #333333; }
+
+/* 输入框 */
+.ip-text { height: 32px; border: 1px solid #D5D5D5; line-height: 30px; font-size: 12px; padding: 0 10px; background-color: #ffffff; }
+.ip-text::-webkit-input-placeholder { color: #999999; }
 
 /* 下拉框 */
 .cSelects { position: relative; }
-.cSelects .cSelects-item { height: 24px; border: 1px solid rgba(0, 0, 0, .1); line-height: 22px; padding: 0 22px 0 8px; font-size: 12px; background: url("../img/arrow4.png") no-repeat; background-position: calc(100% - 10px) center; background-position: -webkit-calc(100% - 10px) center; }
+.cSelects .cSelects-item { height: 24px; border: 1px solid rgba(0, 0, 0, .1); line-height: 22px; padding: 0 22px 0 8px; font-size: 12px; background: url("../img/arrow4.png") no-repeat; background-position: calc(100% - 10px) center; background-position: -webkit-calc(100% - 10px) center; background-color: #ffffff; }
 .cSelects select { width: 100%; height: 100%; position: absolute; top: 0; left: 0; opacity: 0; }
 
 /* tag */
@@ -68,6 +76,7 @@ input[type=checkbox]:checked { background-position: -16px 0; }
 .link-main { padding-right: 16px; background: url("../img/arrow2.png") no-repeat; background-size: 12px; background-position: right center; }
 .a-down { padding-right: 16px; background: url("../img/arrow4.png") no-repeat; background-size: 12px; background-position: right center; }
 .a-up { padding-right: 16px; background: url("../img/arrow10.png") no-repeat; background-size: 12px; background-position: right center; }
+.a-back { padding-left: 26px; background: url("../img/arrow11.png") no-repeat; background-size: 16px; background-position: left center; }
 
 /* 数量加减 */
 .c-nums { width: 110px; height: 32px; border: 1px solid #D5D5D5; border-radius: 2px; overflow: hidden; }
@@ -203,7 +212,7 @@ input[type=checkbox]:checked { background-position: -16px 0; }
 /* 面包屑 */
 .c-bread-crumb { height: 46px; line-height: 46px; }
 .c-bread-crumb .c-bread-crumb-item { display: inline-block; padding-right: 17px; margin-right: 5px; font-size: 12px; background: url("../img/arrow1.png") no-repeat right center; background-size: 12px; }
-.c-bread-crumb .c-bread-crumb-current { background: none; }
+.c-bread-crumb .c-bread-crumb-current { background: none; color: #999999; }
 .c-bread-crumb .search-condition { display: inline-block; margin-left: 20px; }
 .c-bread-crumb .search-condition ul { display: inline-block; }
 .c-bread-crumb .search-condition ul li,.c-bread-crumb .search-condition>a { display: inline-block; height: 22px; background: #FFFFFF; border-radius: 2px; border: 1px solid #D5D5D5; padding: 0 30px 0 10px; line-height: 20px; font-size: 12px; margin-left: 5px; position: relative; }
@@ -226,3 +235,31 @@ input[type=checkbox]:checked { background-position: -16px 0; }
 .c-pages .c-pages-elevator { display: inline-block; line-height: 32px; overflow: hidden; }
 .c-pages .c-pages-elevator span { float: left; margin: 0 5px; }
 .c-pages .c-pages-elevator input { width: 48px; }
+
+/* 猜你喜欢 */
+
+.guess-swiper-pagination { right: 0; top: 13px; }
+.guess-swiper-pagination .swiper-pagination-bullet { margin: 0 5px; background-color: #D5D5D5; }
+.guess-swiper-pagination .swiper-pagination-bullet-active { background-color: #999999 }
+
+.guess-swiper { height: 360px; padding-top: 8px; }
+.guess-list { margin: 0 -13px; }
+.guess-list .goods-item { float: left; margin: 0 13px; width: 280px; height: 345px; box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.08); }
+.guess-list .goods-item .imgs { width: 220px; height: 220px; margin: 30px; }
+.guess-list .goods-item .title {  -webkit-line-clamp: 1; line-clamp: 1; margin-bottom: 10px; }
+.guess-list .goods-item .btn-border { width: 84px; height: 25px; line-height: 23px; font-size: 12px; border-radius: 2px; }
+.guess-swiper .swiper-button-next, .guess-swiper .swiper-button-prev { width: 60px; height: 60px; margin-top: -30px; background-size: 100% 100%; display: none; }
+.guess-swiper:hover .swiper-button-next, .guess-swiper:hover .swiper-button-prev { display: block; }
+.guess-swiper .swiper-button-next {  background-image: url("../img/arrow9.png"); }
+.guess-swiper .swiper-button-prev { background-image: url("../img/arrow8.png"); }
+
+/* 个人导航框架 */
+.p-content { position: relative; }
+.p-menu { width: 200px; position: absolute; top: 0; left: 0; background-color: #ffffff; padding-bottom: 70px;; }
+.p-menu h3 { font-size: 16px; line-height: 22px; font-weight: bold; margin: 29px 0 19px 30px; }
+.p-menu ul li { padding-left: 30px; margin-bottom: 20px; border-left: 2px solid #ffffff; }
+.p-menu ul li:last-child { margin-bottom: 0; }
+.p-menu ul li a { color: #666666; }
+.p-menu ul li.active { border-left-color: #FE322B; }
+.p-menu ul li.active a { color: #FE322B; }
+.p-right { margin-left: 220px; }

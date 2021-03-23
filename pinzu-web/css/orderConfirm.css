@@ -1,4 +1,4 @@
-.order-title { font-size: 18px; font-weight: bold; margin-bottom: 20px; }
+.order-title { font-size: 18px; font-weight: bold; margin-bottom: 20px; margin-top: 20px; }
 
 .addr-item { height: 32px; line-height: 32px; }
 .addr-item .c-tab-btns { display: inline-block; vertical-align: middle; }
@@ -15,3 +15,48 @@
 .addr-list .addr-line:hover .btns { display: block; }
 .addr-list .addr-line .btns a { margin-right: 20px; color: #275C91; font-size: 12px; }
 .addr-list .addr-line .btns a:hover { color: #FE322B; }
+
+.payways li { min-width: 108px; text-align: center; }
+.payways li img { vertical-align: middle; margin-right: 5px; }
+
+.order-thead { height: 40px; background-color: #F5F5F5; overflow: hidden; padding-right: 40px; padding-left: 20px; }
+.order-thead .th { height: 40px; line-height: 40px; text-align: center; }
+.order-table .th { float: left; }
+.order-table .td { float: left; }
+.order-table .th-name { width: 250px; margin-right: 40px; }
+.order-table .th-spec { width: 105px; margin-right: 40px; }
+.order-table .th-rent { width: 105px; margin-right: 40px; }
+.order-table .th-price { width: 105px; margin-right: 40px; }
+.order-table .th-deposit { width: 105px; margin-right: 40px; }
+.order-table .th-nums { width: 105px; margin-right: 40px; }
+.order-table .th-sums { width: 105px; text-align: right; }
+
+.order-body { background-color: #FFF5EC; }
+.order-tr { padding: 20px; overflow: hidden; border-bottom: 1px solid #D5D5D5; }
+.order-body .order-tr:last-child { border-bottom: none; }
+.order-tr .imgs { width: 60px; height: 60px; float: left; background-color: #D8D8D8; border-radius: 4px; overflow: hidden; position: relative; margin-right: 10px; }
+.order-tr .t-name p { width: 180px; float: left; font-size: 12px; }
+.order-tr .imgs img { width: 100%; }
+.order-tr .imgs .tag { width: 14px; position: absolute; top: 0; left: 0; }
+.order-tr .td { text-align: center; font-size: 12px; min-height: 20px; }
+.order-tr .th-sums { color: #FE322B; text-align: right; }
+
+.order-extra { padding: 10px 20px; background-color: #FEF2E8; border-bottom: 1px solid #D5D5D5; }
+.order-extra:last-child { border-bottom: none; }
+.order-extra span { font-size: 12px; margin-right: 10px; }
+.order-extra input { width: 515px; margin-right: 40px; }
+.order-extra .cSelects { width: 435px; display: inline-block; }
+.order-extra .cSelects .cSelects-item { height: 32px; line-height: 30px; }
+
+.btn-new-addr { width: 116px; border-radius: 2px; height: 32px; line-height: 30px; border-color: #D5D5D5; }
+
+.addr-modal { width: 640px; }
+.addr-modal .form { margin-top: 20px; margin-right: 80px; }
+.addr-modal .form .form-item { margin-bottom: 20px; }
+.addr-modal .form .form-label { width: 120px; height: 40px; line-height: 40px; float: left; text-align: right; margin-right: 10px; }
+.addr-modal .form .form-label span { color: #FE322B; margin-right: 5px; }
+.addr-modal .form .form-item-content { width: 430px; float: left; position: relative; }
+.addr-modal .form .form-item-content .cSelects-item { height: 40px; line-height: 38px; }
+.addr-modal .form .form-item-content .ip-text { width: 100%; height: 40px; line-height: 38px; }
+.addr-modal .form .form-item-content .btn-main { width: 74px; }
+.addr-modal .form .form-item-content .form-item-warn { position: absolute; left: 11px; top: 100%; font-size: 12px; line-height: 20px; color: #FE322B; }

@@ -3,14 +3,15 @@
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-   <title>商品订单</title><!-- CSS -->
+   <title>支付结果</title><!-- CSS -->
    <link href="css/reset.css" rel="stylesheet" />
    <link href="css/common.css" rel="stylesheet" />
 </head>
 <body style="background-color: #ffffff;">
 <!-- 每页单独的资源 -->
-<link href="css/orderConfirm.css" rel="stylesheet" />
-<link href="plugins/city-picker/city-picker.css" rel="stylesheet" />
+<link href="plugins/swiper/swiper.min.css" rel="stylesheet" />
+<script src="plugins/swiper/swiper.min.js"></script>
+<link href="css/pay.css" rel="stylesheet" />
 
 <!-- 最顶部导航栏 -->
 <div class="shortcut">
@@ -173,199 +174,70 @@
 
 <!-- 中间区域 -->
 <div class="w">
-   <div class="order-title mt20">收货地址</div>
-   <!-- 有地址 -->
-   <div class="box-frame" style="display: none;">
-      <div class="clearfix mb20">
-         <div class="fl">收货人信息</div>
-         <a href="#" class="fr c-link">新增收货地址</a>
-      </div>
-      <!-- 默认选择地址 -->
-      <div class="addr-item mb20">
-         <ul class="c-tab-btns"><li><a href="javascript:;" class="active">郑丹凤</a> </li></ul>
-         <span>郑丹凤</span>
-         <span>广东 深圳市 宝安区 新桥街道 中心路沙利公馆1804</span>
-         <span>152******1997</span>
-         <span class="c-tag-main">默认地址</span>
-      </div>
-      <!-- 地址列表 -->
-      <div class="addr-list" style="display: none;">
-         <div class="addr-line">
-            <div class="addr-item">
-               <ul class="c-tab-btns"><li><a href="javascript:;" class="active">郑丹凤</a> </li></ul>
-               <span>郑丹凤</span>
-               <span>广东 深圳市 宝安区 新桥街道 中心路沙利公馆1804</span>
-               <span>152******1997</span>
-               <span class="c-tag-main">默认地址</span>
-            </div>
-            <div class="btns">
-               <a href="#">设为默认地址</a>
-               <a href="#">编辑</a>
-               <a href="#">删除</a>
-            </div>
-         </div>
-         <div class="addr-line">
-            <div class="addr-item">
-               <ul class="c-tab-btns"><li><a href="javascript:;" class="active">郑丹凤</a> </li></ul>
-               <span>郑丹凤</span>
-               <span>广东 深圳市 宝安区 新桥街道 中心路沙利公馆1804</span>
-               <span>152******1997</span>
-            </div>
-            <div class="btns">
-               <a href="#">设为默认地址</a>
-               <a href="#">编辑</a>
-               <a href="#">删除</a>
-            </div>
-         </div>
-         <div class="addr-line">
-            <div class="addr-item">
-               <ul class="c-tab-btns"><li><a href="javascript:;" class="active">郑丹凤</a> </li></ul>
-               <span>郑丹凤</span>
-               <span>广东 深圳市 宝安区 新桥街道 中心路沙利公馆1804</span>
-               <span>152******1997</span>
-            </div>
-            <div class="btns">
-               <a href="#">设为默认地址</a>
-               <a href="#">编辑</a>
-               <a href="#">删除</a>
-            </div>
-         </div>
-      </div>
-      <a href="javascript:;" class="a-down">更多地址</a>
-   </div>
-   <!-- 无地址 -->
-   <div class="box-frame">
-      <p class="tc mt20 mb20">您还没有收货地址，请添加</p>
-      <div class="tc mb20"><button class="btn-border btn-new-addr" onclick="openAddr()">新增收货地址</button></div>
-   </div>
-   <div class="order-title">支付方式</div>
-   <div class="box-frame">
-      <ul class="c-tab-btns payways">
-         <li><a href="#" class="active"><img src="img/icon-wechat.png" />微信</a> </li>
-         <li><a href="#"><img src="img/icon-alipay.png" />支付宝</a> </li>
-         <li><a href="#"><img src="img/icon-pay.png" />余额(￥18)</a> </li>
-      </ul>
-   </div>
-   <div class="order-title">确认订单信息</div>
-   <div class="order-table">
-      <div class="order-thead">
-         <div class="th th-name">商品信息</div>
-         <div class="th th-spec">规格</div>
-         <div class="th th-rent">租金</div>
-         <div class="th th-price">售价</div>
-         <div class="th th-deposit">押金</div>
-         <div class="th th-nums">数量</div>
-         <div class="th th-sums">小计（元）</div>
-      </div>
-      <div class="clearfix mt20 mb10">
-         <div class="fl acenter">
-            <span class="c-tag-yel mr5">个人</span>
-            <span class="bold mr10">鹰视眼官方旗舰店</span>
-         </div>
-         <a href="#" class="c-link f12 fr">返回购物车修改</a>
-      </div>
-      <div class="order-body">
-         <div class="order-tr">
-            <div class="td th-name">
-               <div class="imgs">
-                  <img src="img/img/img2.png" />
-                  <!-- 租 -->
-                  <img src="img/icon-rent.png" class="tag"/>
-                  <!-- 购 -->
-                  <!-- <img src="img/icon-buy.png" class="tag"/> -->
-               </div>
-               <p>Apple iiPhone 11 Pro Max 国行双卡双待 全网通 256G 多色可选</p>
-            </div>
-            <div class="td th-spec">黑色，256G</div>
-            <div class="td th-rent">￥10/天</div>
-            <div class="td th-price"></div>
-            <div class="td th-deposit">￥500</div>
-            <div class="td th-nums">x1</div>
-            <div class="td th-sums">￥510</div>
-         </div>
-         <div class="order-tr">
-            <div class="td th-name">
-               <div class="imgs">
-                  <img src="img/img/img2.png" />
-                  <!-- 租 -->
-                  <img src="img/icon-rent.png" class="tag"/>
-                  <!-- 购 -->
-                  <!-- <img src="img/icon-buy.png" class="tag"/> -->
-               </div>
-               <p>Apple iiPhone 11 Pro Max 国行双卡双待 全网通 256G 多色可选</p>
-            </div>
-            <div class="td th-spec">黑色，256G</div>
-            <div class="td th-rent"></div>
-            <div class="td th-price">￥10</div>
-            <div class="td th-deposit"></div>
-            <div class="td th-nums">x1</div>
-            <div class="td th-sums">￥510</div>
-         </div>
-      </div>
-      <div class="order-extra">
-         <span>留言：</span>
-         <input placeholder="建议留言前先与商家沟通确认" class="ip-text"/>
-         <span>运送方式：不包邮</span>
-      </div>
-      <div class="order-extra">
-         <span>留言：</span>
-         <div class="cSelects">
-            <div class="cSelects-item selectValue">满300减30</div>
-            <select>
-               <option>满300减30</option>
-               <option>满500减50</option>
-               <option>不使用优惠券</option>
-            </select>
-         </div>
-      </div>
-      <div class="mt20 tr mr40">
-         支付金额：
-         <p class="c-main f18 iblock">￥<span style="font-size: 30px;">522</span></p>
-      </div>
-      <div class="mt20 tr mr40 mb40">
-         <button class="btn-main" style="width: 136px;">提交订单</button>
+   <!-- 支付结果 -->
+   <div class="pay-result">
+      <img src="img/suc.png" class="icon" />
+      <h2>支付成功</h2>
+      <p>重要提示：请在签收快递后，及时对租赁物品的外观和功能进行仔细检查，如发现任何问题应在24小时内联系客服，否则将默认你收到的物品的外观和性能完好。</p>
+      <div>
+         <a href="#" class="btn-main">继续租</a>
+         <a href="#" class="btn-border">查看订单</a>
       </div>
    </div>
-</div>
 
-<!-- 地址编辑区 -->
-<div class="c-modal" id="addrFrame" style="display: none;">
-   <div class="c-modal-bg">
-      <div class="c-modal-body addr-modal">
-         <div class="c-modal-header">
-            <span>创建地址</span>
-            <a href="javascript:;" class="close" onclick="hideAddr()"><img src="img/x.png" /></a>
+   <!-- 猜你喜欢 -->
+   <div class="clearfix mb20 pr">
+      <ul class="c-tabs">
+         <li class="active"><a href="javascript:;">猜你喜欢</a> </li>
+      </ul>
+      <!-- 如果需要分页器 -->
+      <div class="swiper-pagination guess-swiper-pagination"></div>
+   </div>
+   <!-- 猜你喜欢轮播 -->
+   <div class="swiper-container guess-swiper" id="swiper">
+      <div class="swiper-wrapper">
+         <div class="swiper-slide">
+            <div class="guess-list">
+               <a href="#" class="goods-item">
+                  <div class="imgs"><img src="img/img/img2.png" /></div>
+                  <div class="title"><span class="tag">99新</span>霸王小子 家用4k高清电视游戏机 双人双卡</div>
+                  <div class="between mr20">
+                     <div class="price">￥<span>12.8</span>/天</div>
+                     <button class="btn-border">加入购物车</button>
+                  </div>
+               </a>
+               <a href="#" class="goods-item">
+                  <div class="imgs"><img src="img/img/img2.png" /></div>
+                  <div class="title"><span class="tag">99新</span>霸王小子 家用4k高清电视游戏机 双人双卡</div>
+                  <div class="between mr20">
+                     <div class="price">￥<span>12.8</span>/天</div>
+                     <button class="btn-border">加入购物车</button>
+                  </div>
+               </a>
+               <a href="#" class="goods-item">
+                  <div class="imgs"><img src="img/img/img2.png" /></div>
+                  <div class="title"><span class="tag">99新</span>霸王小子 家用4k高清电视游戏机 双人双卡</div>
+                  <div class="between mr20">
+                     <div class="price">￥<span>12.8</span>/天</div>
+                     <button class="btn-border">加入购物车</button>
+                  </div>
+               </a>
+               <a href="#" class="goods-item">
+                  <div class="imgs"><img src="img/img/img2.png" /></div>
+                  <div class="title"><span class="tag">99新</span>霸王小子 家用4k高清电视游戏机 双人双卡</div>
+                  <div class="between mr20">
+                     <div class="price">￥<span>12.8</span>/天</div>
+                     <button class="btn-border">加入购物车</button>
+                  </div>
+               </a>
+            </div>
          </div>
-         <div class="form">
-            <div class="form-item clearfix">
-               <div class="form-label"><span>*</span>所在地区：</div>
-               <div class="form-item-content">
-                  <input type="text" class="ip-text" readonly placeholder="请选择省/市/区" data-toggle="city-picker" />
-                  <div class="form-item-warn">错误提示</div>
-               </div>
-            </div>
-            <div class="form-item clearfix">
-               <div class="form-label"><span>*</span>详情地址：</div>
-               <div class="form-item-content"><input type="text" class="ip-text" placeholder="请输入详细地址信息" /></div>
-            </div>
-            <div class="form-item clearfix">
-               <div class="form-label"><span>*</span>收货人：</div>
-               <div class="form-item-content"><input type="text" class="ip-text" placeholder="收货人姓名" /></div>
-            </div>
-            <div class="form-item clearfix">
-               <div class="form-label"><span>*</span>手机号码：</div>
-               <div class="form-item-content"><input type="text" class="ip-text" placeholder="请输入手机号码" /></div>
-            </div>
-            <div class="form-item clearfix">
-               <div class="form-label"> </div>
-               <div class="form-item-content"><input type="checkbox" class="mr10" />设置为默认收货地址</div>
-            </div>
-            <div class="form-item clearfix">
-               <div class="form-label"> </div>
-               <div class="form-item-content"><button class="btn-main">保存</button></div>
-            </div>
-         </div>
+         <div class="swiper-slide">2</div>
+         <div class="swiper-slide">3</div>
       </div>
+      <!-- Add Arrows -->
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
    </div>
 </div>
 
@@ -422,18 +294,20 @@
 
 <script src="js/jquery-2.1.4.min.js"></script>
 <script src="js/common.js"></script>
-<script src="plugins/city-picker/city-picker.data.js"></script>
-<script src="plugins/city-picker/city-picker.js"></script>
 
 <script>
-// 打开地址框
-function openAddr() {
-   $("#addrFrame").show()
-}
-// 关闭地址框
-function hideAddr() {
-	$("#addrFrame").hide()
-}
+// 猜你喜欢
+var mySwiper = new Swiper ('#swiper', {
+	loop: true,
+	pagination: {
+		el: '.swiper-pagination'
+	},
+	simulateTouch : false,
+	navigation: {
+		nextEl: '.swiper-button-next',
+		prevEl: '.swiper-button-prev',
+	}
+})
 </script>
 </body>
 </html>

@@ -101,6 +101,35 @@ export default {
             order_num: orderNum
          }).then(res => {
             this.status = 'suc'
+            this.getMessageAuth(orderNum)
+         })
+      },
+      doSendMsg (orderNum) {
+         getAction('buy_send', {
+            order_num: orderNum
+         }).then(res => {
+            console.log('发送订阅消息成功', res)
+         })
+      },
+      getMessageAuth (orderNum) {
+         console.log('发起订阅消息')
+         const self = this
+         wx.requestSubscribeMessage({
+            tmplIds: [
+               'gUczF-SZ04idnWNOWJtBOE0vJ0lG10YHc5rKHtDMfMM',
+               'jLC6tRlLABE_ucZxioWLvNTa_0zBhZPWe6UqEv9HEC8'
+            ],
+            success (res) {
+               console.log('订阅消息成功')
+               console.log(res)
+               console.log('--------------------')
+               self.doSendMsg(orderNum)
+            },
+            fail (err) {
+               console.log('订阅消息失败')
+               console.log(err)
+               console.log('--------------------')
+            }
          })
       }
    },
@@ -110,6 +139,9 @@ export default {
       this.status = options.result || 'suc'
       this.orderNum = options.orderNum || ''
       this.source = options.source
+      if (this.status === 'suc') {
+         this.getMessageAuth(this.orderNum)
+      }
    }
 }
 </script>

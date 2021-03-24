@@ -161,41 +161,12 @@ export default {
          })
       },
       doBuySuccess (orderNum) {
-         this.getMessageAuth(orderNum)
          getAction('buy_success', {
             order_num: orderNum
          }).then(res => {
             mpvue.reLaunch({
                url: `/pages/result/main?result=suc&orderNum=${orderNum}&source=${this.source}`
             })
-         })
-      },
-      doSendMsg (orderNum) {
-         getAction('buy_send', {
-            order_num: orderNum
-         }).then(res => {
-            console.log('发送订阅消息成功', res)
-         })
-      },
-      getMessageAuth (orderNum) {
-         console.log('发起订阅消息')
-         const self = this
-         wx.requestSubscribeMessage({
-            tmplIds: [
-               'gUczF-SZ04idnWNOWJtBOE0vJ0lG10YHc5rKHtDMfMM',
-               'jLC6tRlLABE_ucZxioWLvNTa_0zBhZPWe6UqEv9HEC8'
-            ],
-            success (res) {
-               console.log('订阅消息成功')
-               console.log(res)
-               console.log('--------------------')
-               self.doSendMsg(orderNum)
-            },
-            fail (err) {
-               console.log('订阅消息失败')
-               console.log(err)
-               console.log('--------------------')
-            }
          })
       },
       getCatboxData () {

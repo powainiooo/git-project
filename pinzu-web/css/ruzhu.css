@@ -1,0 +1,21 @@
+/* 商家入驻-实名入驻-店铺 */
+.ruzhu-way { width: 660px; height: 440px; margin: 80px 120px 64px 120px; border: 1px dashed #D5D5D5; overflow: hidden; position: relative; }
+.ruzhu-way:after { content: ''; width: 1px; height: 178px; background-color: #D5D5D5; position: absolute; top: 80px; left: 50%; }
+.ruzhu-way .item { width: 210px; float: left; margin: 80px 0 0 80px; text-align: center; }
+.ruzhu-way .item img { display: block; margin: 0 auto 20px auto; }
+.ruzhu-way .item div { background-color: #F5F5F5; padding: 10px; font-size: 12px; line-height: 18px; margin-bottom: 30px; text-align: left; }
+.ruzhu-way .item .btn-main { width: 148px; }
+
+/* 商家入驻-实名入驻-个人 */
+.steps-frame { padding: 20px 40px; background-color: #ffffff; margin-bottom: 20px; }
+
+.check-result { text-align: center; margin: 40px 0 20px 0; }
+.check-result img { width: 73px; display: block; margin: 0 auto 20px auto; }
+.check-result h3 { font-size: 24px; line-height: 32px; margin-bottom: 10px; }
+.check-result div { color: #999999; margin-bottom: 20px; }
+.check-result .btn-main,.check-result .btn-border { width: 88px; }
+
+.fail-hint { border: 1px solid #D5D5D5; padding: 20px 40px; margin-bottom: 120px; }
+.fail-hint h3 { font-size: 14px; margin-bottom: 10px; }
+.fail-hint div { background: url("../img/x2.png") no-repeat; background-position: left center; padding-left: 24px; }
+.fail-hint div span { margin-right: 20px; }

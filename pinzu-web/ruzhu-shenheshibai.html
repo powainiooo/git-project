@@ -3,7 +3,7 @@
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-   <title>商家入驻-实名入驻-店铺</title><!-- CSS -->
+   <title>商家入驻-实名入驻-审核中</title><!-- CSS -->
    <link href="css/reset.css" rel="stylesheet" />
    <link href="css/common.css" rel="stylesheet" />
 </head>
@@ -45,20 +45,42 @@
          </ul>
       </div>
       <div class="p-right">
-         <div class="pa40">
-            <div class="t-l">实名认证</div>
-            <div class="ruzhu-way">
-               <div class="item">
-                  <img src="img/gerendian.png" />
-                  <h3>个人店认证</h3>
-                  <div>提供个人认证信息<br/>上传身份证、支付宝实人认证</div>
-                  <button class="btn-main">立即认证</button>
+         <h3>我要开店</h3>
+         <div class="steps-frame">
+            <div class="c-steps">
+               <div class="c-steps-item c-steps-item-pass">
+                  <div class="c-steps-circle"></div>
+                  <div class="c-steps-name">企业认证</div>
                </div>
-               <div class="item">
-                  <img src="img/qiyedian.png" />
-                  <h3>企业店认证</h3>
-                  <div>提供企业认证信息<br/>上传营业执照、填写企业信息</div>
-                  <button class="btn-main">立即认证</button>
+               <div class="c-steps-line"></div>
+               <div class="c-steps-item c-steps-item-current">
+                  <div class="c-steps-circle">2</div>
+                  <div class="c-steps-name">认证审核</div>
+               </div>
+               <div class="c-steps-line"></div>
+               <div class="c-steps-item">
+                  <div class="c-steps-circle">3</div>
+                  <div class="c-steps-name">填写店铺信息</div>
+               </div>
+               <div class="c-steps-line"></div>
+               <div class="c-steps-item">
+                  <div class="c-steps-circle">4</div>
+                  <div class="c-steps-name">成功入驻</div>
+               </div>
+            </div>
+         </div>
+         <div class="pa40">
+            <div class="check-result">
+               <img src="img/fail.png" />
+               <h3>审核失败</h3>
+               <div>请核对并修改以下信息后，再重新提交。</div>
+               <a class="btn-main">返回修改</a>
+            </div>
+            <div class="fail-hint">
+               <h3>您提交的内容有如下错误：</h3>
+               <div>
+                  <span>您的个人身份通过与公安网数据校验结果不一致，为保障个人身份真实性，请重新填写真实信息</span>
+                  <a href="#" class="c-link link">立即修改</a>
                </div>
             </div>
          </div>

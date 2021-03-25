@@ -1,4 +1,5 @@
 /* pages/fenxiaoInfo/index.wxss */
+@import "../../wxParse/wxParse.wxss"
 .fenx-info {
    padding: 50rpx 30rpx;
 }

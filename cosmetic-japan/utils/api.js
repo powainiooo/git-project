@@ -20,7 +20,7 @@ function post(that, link, data, logic = function () { }) {
     method: 'POST',
     dataType: 'json',
     success: function (res) {
-      console.log('res',res,link_method,url,data);
+      console.log('res',res,link_method,url);
       var retData = res.data;
       if (res) {
         if (retData.ret == 1) {

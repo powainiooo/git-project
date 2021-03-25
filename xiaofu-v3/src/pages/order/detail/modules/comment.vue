@@ -45,25 +45,46 @@
     </li>
   </ul>
   <div class="input-frame">
-    <textarea placeholder="为这场活动评分，并留下您的宝贵建议" />
+    <textarea placeholder="为这场活动评分，并留下您的宝贵建议" v-model="comment" />
     <div class="btns">
-      <button class="btn">提交</button>
+      <button class="btn" @click="submit">提交</button>
     </div>
   </div>
 </div>
 </template>
 
 <script type='es6'>
+import { postAction } from '@/utils/api'
+
 export default {
   name: 'app',
+  props: {
+    orderId: Number
+  },
   data () {
     return {
-      rank: 0
+      rank: 0,
+      comment: ''
     }
   },
   methods: {
     setRank (rank) {
       this.rank = rank
+    },
+    submit () {
+      postAction('/api/comment/add', {
+        order_id: this.orderId,
+        star: this.rank,
+        content: this.comment
+      }).then(res => {
+        if (res.code === 1) {
+          mpvue.showToast({
+            title: '添加成功'
+          })
+          this.rank = 0
+          this.comment = ''
+        }
+      })
     }
   }
 }

@@ -21,14 +21,14 @@
     "checkSiteMap": true,
     "uploadWithSourceMap": true,
     "compileHotReLoad": false,
-    "useMultiFrameRuntime": true,
+    "useMultiFrameRuntime": false,
     "useApiHook": true,
-    "useApiHostProcess": false,
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
       "outputPath": ""
     },
+    "enableEngineNative": false,
     "bundle": false,
     "useIsolateContext": true,
     "useCompilerModule": true,
@@ -94,10 +94,10 @@
           "query": ""
         },
         {
-          "id": 7,
           "name": "商品详情",
           "pathName": "pages/detail/index",
-          "query": "id=3&activity_type=1&hd_id=3"
+          "query": "id=223",
+          "scene": null
         },
         {
           "id": 8,

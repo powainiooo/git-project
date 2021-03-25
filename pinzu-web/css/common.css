@@ -305,6 +305,7 @@ input[type=checkbox]:checked { background-position: -16px 0; }
 .p-menu ul li.active a { color: #FE322B; }
 .p-right { margin-left: 220px; }
 .p-right .pa40 { padding: 40px; background-color: #ffffff; }
+.p-right .pa20 { padding: 20px; background-color: #ffffff; }
 .p-right h3 { font-size: 18px; margin-bottom: 20px; }
 .p-right h4 { font-size: 14px; margin-bottom: 20px; }
 .p-right .t-l { font-size: 18px; font-weight: bold; padding-bottom: 20px; border-bottom: 1px solid #D5D5D5; }

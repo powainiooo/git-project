@@ -102,7 +102,7 @@
 <div class="c-list-item">
   <tk-info :showTitle="false" size="large" :record="infos" v-if="record.start_date"/>
   <div class="c-ticket-item"
-       v-if="false"
+       v-if="item.state == 0"
        hover-class="hscale"
        hover-stay-time="10"
        @click="toDetail">
@@ -120,11 +120,16 @@
   <div class="c-ticket-item c-ticket-item-use"
        hover-class="hscale"
        hover-stay-time="10"
+       v-else
        @click="toDetail">
     <div class="imgs"></div>
-    <div class="status">
+    <div class="status" v-if="item.state == 1">
       <p class="en">Checked</p>
       <p>已使用</p>
+    </div>
+    <div class="status" v-else-if="item.state == null">
+      <p class="en">Waiting</p>
+      <p>未出票</p>
     </div>
     <div class="c-ticket-item-title">
       <p class="en">{{record.ticket_name}}</p>

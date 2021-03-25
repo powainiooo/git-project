@@ -415,14 +415,13 @@ Page({
             let link = { method: 'goods_detail', canshu: '&id=' + options.id + '&activity_type=' + activity_type + '&hd_id=' + hd_id, };
             let logic = (ret) => {
 
-              console.log('bbbbbb', ret);
+              console.log('bbbbbb');
                 //console.log(ret)
                 if (wx.getStorageSync('isCN')) {
                     var goods_desc = ret.goods_info.goods_desc;
                 } else {
                   var goods_desc = ret.goods_info.goods_desc;
                 }
-                console.log('详情1',goods_desc);
                 var newContent = goods_desc.replace(/<img [^>]*src=['"]([^'"]+)[^>]*>/gi, (match, capture) => {
                     var url = this.data.www;
                     var newStr = '<img src="' + url + capture + '" style="width:100%;height:auto"/>';
@@ -437,6 +436,7 @@ Page({
                 let dfIds = ret.default_gz.attr
 	            dfIds = dfIds.substr(1, dfIds.length - 2)
                 var attrid = dfIds.split('|');
+                console.log('ids',attrid);
                 var returnData = {};
                 returnData.price = ret.default_gz.price / 100;
                 returnData.price_kd = goods_info.price_kd;
@@ -463,10 +463,6 @@ Page({
 	                rate: ret.praise_rate,
 	                nums: ret.cart_nums
                 })
-
-
-
-              console.log('详情', goods_desc);
                 if (options.activity_type == 2) {
                     var start_time = this.timestampToTime(parseInt(goods_info.start_time))
                     var end_time = this.timestampToTime(parseInt(goods_info.end_time))

@@ -309,3 +309,4 @@ input[type=checkbox]:checked { background-position: -16px 0; }
 .p-right h3 { font-size: 18px; margin-bottom: 20px; }
 .p-right h4 { font-size: 14px; margin-bottom: 20px; }
 .p-right .t-l { font-size: 18px; font-weight: bold; padding-bottom: 20px; border-bottom: 1px solid #D5D5D5; }
+.p-right .t-l2 { font-weight: bold; padding: 20px; border-bottom: 1px solid #D5D5D5; }

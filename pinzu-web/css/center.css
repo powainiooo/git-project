@@ -1,0 +1,45 @@
+.person-top { height: 220px; background-color: #ffffff; position: relative; margin-bottom: 30px; }
+.person-info { width: 240px; height: 240px; background: linear-gradient(315deg, #FF7874 0%, #FE322B 100%); box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.16); position: absolute; top: -10px; left: 0; }
+.person-info .avatar { width: 80px; height: 80px; border-radius: 50%; overflow: hidden; margin: 40px auto 10px auto; }
+.person-info .avatar img { width: 100%; display: block; }
+.person-info p { color: #ffffff; text-align: center; margin-bottom: 10px; }
+
+.person-top .r { margin-left: 240px; }
+.person-top .r ul { margin: 0 0 0 80px; overflow: hidden; padding-top: 40px; }
+.person-top .r ul li { width: 165px; float: left; }
+.person-top .r ul li h3 { font-family: 黑体; font-size: 30px; line-height: 37px; margin-bottom: 20px; }
+
+.order-nav { height: 158px; background-color: #ffffff; overflow: hidden; border-bottom: 1px solid #D5D5D5; }
+.order-nav .item { width: 96px; margin: 40px 50px; float: left; position: relative; }
+.order-nav .item i { width: 48px; height: 48px; margin: 0 auto 10px auto; display: block; background-repeat: no-repeat; }
+.order-nav .item p { text-align: center; color: #333333; }
+.order-nav .item div { width: 16px; height: 16px; border-radius: 50%; background-color: #FE322B; color: #ffffff; font-size: 10px; text-align: center; line-height: 16px; position: absolute; top: 0; right: 14px; }
+.order-nav .item i.icon1 { background-image: url("../img/personal/icon1.png"); }
+.order-nav .item i.icon2 { background-image: url("../img/personal/icon2.png"); }
+.order-nav .item i.icon3 { background-image: url("../img/personal/icon3.png"); }
+.order-nav .item i.icon4 { background-image: url("../img/personal/icon4.png"); }
+.order-nav .item i.icon5 { background-image: url("../img/personal/icon5.png"); }
+.order-nav .item:hover i.icon1 { background-image: url("../img/personal/icon1-active.png"); }
+.order-nav .item:hover i.icon2 { background-image: url("../img/personal/icon2-active.png"); }
+.order-nav .item:hover i.icon3 { background-image: url("../img/personal/icon3-active.png"); }
+.order-nav .item:hover i.icon4 { background-image: url("../img/personal/icon4-active.png"); }
+.order-nav .item:hover i.icon5 { background-image: url("../img/personal/icon5-active.png"); }
+
+.order-list { padding: 0 20px; background-color: #ffffff; margin-bottom: 20px; }
+.order-list .item { padding: 20px 0; border-bottom: 1px solid #D5D5D5; }
+.order-list .item:last-child { border-bottom: none; }
+.order-list .item .info { float: left; }
+.order-list .item .info .imgs { width: 80px; height: 80px; border-radius: 4px; float: left; margin-right: 20px; }
+.order-list .item .info .imgs img { width: 100%; display: block; }
+.order-list .item .info .content { float: left; width: 480px; margin-top: 15px; }
+.order-list .item .info .content p { line-height: 20px; color: #666666; margin-bottom: 10px; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; }
+.order-list .item .info .content div span { color: #999999; padding-right: 10px; margin-right: 5px; }
+.order-list .item .info .content div span:first-child { border-right: 1px solid #999999; }
+.order-list .item .btns { float: right; margin-top: 30px; }
+.order-list .item .btns div { float: left; padding: 0 20px; }
+.order-list .item .btns div:first-child { border-right: 1px solid #666666; }
+
+.like-list { margin: 0 0 20px 5px; }
+.like-list .goods-item { width: 280px; height: 345px; box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.08); margin: 0 15px 20px 15px; }
+.like-list .goods-item .imgs { width: 220px; height: 220px; margin: 30px 30px 20px 30px; }
+.like-list .goods-item .title { -webkit-line-clamp: 1; line-clamp: 1; margin-bottom: 10px; }

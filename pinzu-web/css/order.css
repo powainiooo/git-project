@@ -1,0 +1,9 @@
+.order-table { margin: 20px 0; }
+.order-thead { height: 40px; background-color: #F5F5F5; margin-bottom: 20px; }
+.order-thead .th { float: left; text-align: center; height: 40px; line-height: 40px; font-weight: bold; }
+.order-table .t-infos { width: 265px; }
+.order-table .t-price { width: 120px; }
+.order-table .t-nums { width: 35px; }
+.order-table .t-btns { width: 120px; }
+.order-table .t-pay { width: 120px; }
+.order-table .t-state { width: 120px; }

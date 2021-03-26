@@ -277,6 +277,11 @@ input[type=checkbox]:checked { background-position: -16px 0; }
 .c-pages .c-pages-elevator span { float: left; margin: 0 5px; }
 .c-pages .c-pages-elevator input { width: 48px; }
 
+/* 搜索框 */
+.search-box2 { width: 262px; border: 1px solid #D5D5D5; height: 32px; overflow: hidden; border-radius: 2px; }
+.search-box2 input { width: 210px; height: 30px; line-height: 30px; padding: 0 10px; float: left; }
+.search-box2 button { width: 50px; height: 30px; float: left; border: none; border-left: 1px solid #D5D5D5; background: url("../img/icon-search.png") no-repeat; background-position: center center; background-color: #F5F5F5; }
+
 /* 猜你喜欢 */
 
 .guess-swiper-pagination { right: 0; top: 13px; }
@@ -310,3 +315,13 @@ input[type=checkbox]:checked { background-position: -16px 0; }
 .p-right h4 { font-size: 14px; margin-bottom: 20px; }
 .p-right .t-l { font-size: 18px; font-weight: bold; padding-bottom: 20px; border-bottom: 1px solid #D5D5D5; }
 .p-right .t-l2 { font-weight: bold; padding: 20px; border-bottom: 1px solid #D5D5D5; }
+
+/* 物流列表 */
+.express-list li {  }
+.express-list li .r { float: left; padding: 0 0 20px 23px; position: relative; }
+.express-list li .r:before { content: ''; width: 1px; position: absolute; top: 5px; bottom: -5px; left: 6px; background-color: #D5D5D5; }
+.express-list li:last-child .r:before { width: 0; }
+.express-list li .r:after { content: ''; width: 9px; height: 9px; background-color: #D5D5D5; border-radius: 50%; position: absolute; top: 5px; left: 2px; }
+.express-list li:first-child .r:after { width: 7px; height: 7px; border-radius: 50%; border: 3px solid rgba(248, 148, 147, 1); background-color: #FE322B; left: 0px; }
+.express-list li .r p { color: #999999; line-height: 18px; margin-bottom: 3px; }
+.express-list li .r div { color: #999999; font-size: 12px; line-height: 15px; }

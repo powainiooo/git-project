@@ -48,8 +48,8 @@ input[type=checkbox]:checked { background-position: -16px 0; }
 .c-tab-btns { overflow: hidden; }
 .c-tab-btns li { float: left; margin-right: 10px; margin-bottom: 10px; background-color: #ffffff; }
 .c-tab-btns li a { height: 32px; display: block; border: 1px solid #D5D5D5; border-radius: 2px; line-height: 30px; padding: 0 20px 0 10px; position: relative; }
-.c-tab-btns li a.active { border-color: #FE322B; }
-.c-tab-btns li a.active:after { content: ''; width: 18px; height: 15px; background: url("../img/icon-check.png") no-repeat; position: absolute; bottom: -1px; right: -1px; }
+.c-tab-btns li.active a { border-color: #FE322B; }
+.c-tab-btns li.active a:after { content: ''; width: 18px; height: 15px; background: url("../img/icon-check.png") no-repeat; position: absolute; bottom: -1px; right: -1px; }
 
 /* 按钮 */
 .btn { display: inline-block; height: 40px; border: 1px solid #D5D5D5; border-radius: 4px; text-align: center; font-size: 12px; line-height: 40px; }

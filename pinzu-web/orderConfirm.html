@@ -240,8 +240,8 @@
    </div>
    <div class="order-title">支付方式</div>
    <div class="box-frame">
-      <ul class="c-tab-btns payways">
-         <li><a href="#" class="active"><img src="img/icon-wechat.png" />微信</a> </li>
+      <ul class="c-tab-btns payways" id="payways">
+         <li class="active"><a href="#"><img src="img/icon-wechat.png" />微信</a> </li>
          <li><a href="#"><img src="img/icon-alipay.png" />支付宝</a> </li>
          <li><a href="#"><img src="img/icon-pay.png" />余额(￥18)</a> </li>
       </ul>
@@ -308,7 +308,7 @@
          <span>运送方式：不包邮</span>
       </div>
       <div class="order-extra">
-         <span>留言：</span>
+         <span>优惠券：</span>
          <div class="cSelects">
             <div class="cSelects-item selectValue">满300减30</div>
             <select>
@@ -434,6 +434,13 @@ function openAddr() {
 function hideAddr() {
 	$("#addrFrame").hide()
 }
+// 选择支付方式
+$("#payways li").on('click', function () {
+   $(this).addClass('active').siblings('li').removeClass('active')
+   var index = $(this).index()
+   // index: 0:微信 1:支付宝 2:余额
+   console.log(index)
+})
 </script>
 </body>
 </html>

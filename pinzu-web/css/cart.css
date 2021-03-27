@@ -4,7 +4,7 @@
 .cart-thead { height: 40px; background-color: #F5F5F5; overflow: hidden; margin-bottom: 20px; }
 .cart-thead .th { float: left; height: 100%; line-height: 40px; }
 .cart-thead .t-checkbox { margin-left: 20px; margin-right: 150px; }
-.cart-thead .t-goods { margin-right: 234px; }
+.cart-thead .t-goods { margin-right: 234px; margin-left: 224px; }
 .cart-thead .t-price { margin-right: 176px; }
 .cart-thead .t-nums { margin-right: 150px; }
 .cart-thead .t-sum { margin-right: 118px; }

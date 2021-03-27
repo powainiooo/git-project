@@ -56,6 +56,7 @@ input[type=checkbox]:checked { background-position: -16px 0; }
 .btn-main { display: inline-block; height: 40px; background-color: #FE322B; color: #ffffff; border-radius: 4px; text-align: center; line-height: 40px; }
 .btn-main:disabled { background: rgba(254, 50, 43, 0.5); }
 .btn-border { display: inline-block; height: 40px; border: 1px solid #FE322B; background-color: #ffffff; color: #FE322B; border-radius: 2px; text-align: center; line-height: 40px; }
+.btn-border-min { min-width: 80px; height: 24px; line-height: 22px; font-size: 12px; }
 .btn-more { width: 152px; height: 32px; line-height: 30px; color: #333333; }
 
 /* 输入框 */
@@ -73,6 +74,8 @@ input[type=checkbox]:checked { background-position: -16px 0; }
 .c-tag { height: 24px; border: 1px solid #D5D5D5; display: inline-block; line-height: 22px; padding: 0 10px; color: #999999; background-color: #ffffff; }
 .c-tag-main { height: 24px; border: 1px solid #FE322B; display: inline-block; line-height: 22px; padding: 0 10px; color: #FE322B; background-color: rgba(254, 50, 43, 0.1); }
 .c-tag-yel { height: 22px; display: inline-block; line-height: 22px; font-size: 12px; padding: 0 8px; color: #ffffff; background-color: #FC7F1B; border-radius: 2px; }
+.c-tag-red { height: 22px; display: inline-block; line-height: 22px; font-size: 12px; padding: 0 8px; color: #ffffff; background-color: #FE322B; border-radius: 2px; }
+.c-tag-gray { height: 22px; display: inline-block; line-height: 22px; font-size: 12px; padding: 0 8px; color: #ffffff; background: rgba(51, 51, 51, 0.5); border-radius: 2px; }
 
 /* 箭头 */
 .link { padding-right: 16px; background: url("../img/arrow1.png") no-repeat; background-size: 12px; background-position: right center; }
@@ -318,10 +321,12 @@ input[type=checkbox]:checked { background-position: -16px 0; }
 
 /* 物流列表 */
 .express-list li {  }
+.express-list li .l { width: 130px; float: left; font-size: 12px; margin-right: 27px; text-align: right; }
+.express-list li .l span { margin-right: 5px; min-height: 1px; }
 .express-list li .r { float: left; padding: 0 0 20px 23px; position: relative; }
-.express-list li .r:before { content: ''; width: 1px; position: absolute; top: 5px; bottom: -5px; left: 6px; background-color: #D5D5D5; }
+.express-list li .r:before { content: ''; width: 1px; position: absolute; top: 3px; bottom: -5px; left: 6px; background-color: #D5D5D5; }
 .express-list li:last-child .r:before { width: 0; }
-.express-list li .r:after { content: ''; width: 9px; height: 9px; background-color: #D5D5D5; border-radius: 50%; position: absolute; top: 5px; left: 2px; }
+.express-list li .r:after { content: ''; width: 9px; height: 9px; background-color: #D5D5D5; border-radius: 50%; position: absolute; top: 3px; left: 2px; }
 .express-list li:first-child .r:after { width: 7px; height: 7px; border-radius: 50%; border: 3px solid rgba(248, 148, 147, 1); background-color: #FE322B; left: 0px; }
 .express-list li .r p { color: #999999; line-height: 18px; margin-bottom: 3px; }
 .express-list li .r div { color: #999999; font-size: 12px; line-height: 15px; }

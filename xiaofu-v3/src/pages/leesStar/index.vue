@@ -11,11 +11,11 @@
       bgColor="#000018"
       logo="logo2"
       @close="handleClose" />
-    <img src="/static/images/img.jpg" class="banner" />
+    <img :src="configData.star_background_image" class="banner" />
     <div class="lees-page">
       <img src="/static/images/leesStar/lees-star.png" class="lees-star" />
       <div>
-        <c-list-item v-for="i in 5" :key="i" :rank="i" />
+        <c-list-item v-for="(item, i) in listData" :key="i" :record="item" />
       </div>
     </div>
   </div>
@@ -24,9 +24,15 @@
 <script>
 import cHeader from '@/components/header/header'
 import cListItem from './modules/listItem'
+import { postAction } from '@/utils/api'
+import store from '@/store'
+
 export default {
   data () {
     return {
+      page: 1,
+      listData: [],
+      loadOver: false
     }
   },
 
@@ -34,19 +40,42 @@ export default {
     cHeader,
     cListItem
   },
-
+  computed: {
+    configData () {
+      return store.state.configData
+    }
+  },
   methods: {
     handleClose () {
       mpvue.navigateBack({
         delta: -1
       })
+    },
+    getData () {
+      postAction('/api/merchant/index', {
+        page: this.page,
+        city_id: ''
+      }).then(res => {
+        this.loadOver = res.data.list.length === 0
+        if (!this.loadOver) {
+          this.listData = this.listData.concat(res.data.list)
+        }
+      })
     }
+  },
+  onReachBottom () {
+    if (this.loadOver) return
+    this.page += 1
+    this.getData()
+  },
+  onShow () {
+    // let app = getApp()
+    this.getData()
   },
   mounted () {
     this.$refs.header.setStatus('onlyClose')
   },
   onLoad () {
-    // let app = getApp()
   }
 }
 </script>

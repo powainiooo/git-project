@@ -100,9 +100,9 @@
 
 <template>
 <div class="c-list-item">
-  <tk-info :showTitle="false" size="large" :record="infos" v-if="record.start_date"/>
+  <tk-info :showTitle="false" size="large" :record="infos"/>
   <div class="c-ticket-item"
-       v-if="item.state == 0"
+       v-if="record.state == 1"
        hover-class="hscale"
        hover-stay-time="10"
        @click="toDetail">
@@ -127,9 +127,17 @@
       <p class="en">Checked</p>
       <p>已使用</p>
     </div>
-    <div class="status" v-else-if="item.state == null">
+    <div class="status" v-else-if="item.state == 0">
       <p class="en">Waiting</p>
       <p>未出票</p>
+    </div>
+    <div class="status" v-else-if="item.state == 2">
+      <p class="en"> </p>
+      <p>已过期</p>
+    </div>
+    <div class="status" v-else-if="item.state == 3">
+      <p class="en"> </p>
+      <p>已失效</p>
     </div>
     <div class="c-ticket-item-title">
       <p class="en">{{record.ticket_name}}</p>
@@ -175,7 +183,7 @@ export default {
   methods: {
     toDetail () {
       mpvue.navigateTo({
-        url: `/pages/order/detail/main?id=${this.record}`
+        url: `/pages/order/detail/main?id=${this.record.id}`
       })
     }
   }

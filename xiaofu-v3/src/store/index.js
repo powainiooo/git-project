@@ -10,7 +10,8 @@ const store = new Vuex.Store({
     token: '',
     personalInfo: {},
     settings: {},
-    configData: {}
+    configData: {},
+    showAd: true
   },
   mutations: {
     SET_TOKEN (state, data) {
@@ -28,6 +29,9 @@ const store = new Vuex.Store({
     },
     SET_CONFIGDATA (state, data) {
       state.configData = data
+    },
+    SET_ADSTATE (state, data) {
+      state.showAd = data
     }
   }
 })

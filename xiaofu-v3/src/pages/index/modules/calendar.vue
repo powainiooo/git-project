@@ -38,12 +38,15 @@
       :class="{
         'disabled': !item.activity,
         'active': item.date === selectedDate
-      }">{{item.day}}</li>
+      }"
+      @click="select(item)">{{item.day}}</li>
   </ul>
 </div>
 </template>
 
 <script type='es6'>
+import { postAction } from '@/utils/api'
+
 function is_leap(year) {  //判断是否为闰年
   return (year % 100 === 0 ? (year % 400 === 0 ? 1 : 0) : (year % 4 === 0 ? 1 : 0))
 }
@@ -103,7 +106,7 @@ export default {
       month += 1
       month = month < 10 ? `0${month}` : month
       day = day < 10 ? `0${day}` : day
-      return `${year}/${month}/${day}`
+      return `${year}-${month}-${day}`
     },
     initCalendar(year, month) { // 初始化日历
       const monthDays = [31, 28 + is_leap(year), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31] // 每个月有多少天
@@ -130,9 +133,10 @@ export default {
         })
       }
       for (let i = 0; i < thisMonthDay; i++) { // 当月 日期
+        const date = this.formatDate(year, month, i + 1)
         list.push({
-          activity: true,
-          date: this.formatDate(year, month, i + 1),
+          activity: this.activityList[date] === 1,
+          date,
           day: i + 1
         })
       }
@@ -146,6 +150,12 @@ export default {
       this.daysList = list
     },
     getActivityDays () {
+      postAction('/api/ticket/events_calendar', {
+        month: `${this.year}${this.month + 1}`
+      }).then(res => {
+        this.activityList = res.data
+        this.initCalendar(this.year, this.month)
+      })
       this.initCalendar(this.year, this.month)
     },
     prevMonth () { // 上一个月
@@ -171,6 +181,13 @@ export default {
       this.month = month
       this.getActivityDays()
     },
+    select (record) {
+      if (record.activity) {
+        this.selectedDate = record.date
+        this.$emit('confirm', record.date)
+        this.toggleShow(false)
+      }
+    }
   }
 }
 </script>

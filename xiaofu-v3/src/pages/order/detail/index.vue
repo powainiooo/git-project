@@ -59,18 +59,21 @@
       <li v-for="(i, index) in orderList" :key="i" :class="{'active': activeIndex === index}"></li>
     </ul>
     <swiper class="swiper" @change="swiperChange">
-      <swiper-item v-for="i in orderList" :key="i">
-        <order-item />
+      <swiper-item v-for="(item, i) in orderList" :key="i">
+        <order-item :record="item" />
       </swiper-item>
     </swiper>
     <div class="infos bBorder">
       <div>
-        <img src="/static/images/logo.png" />
-        <span>MAOLivehouse</span>
+        <img :src="record.logo" />
+        <span>{{record.organizer_name}}</span>
       </div>
-      <button class="btn">138-8888-8888</button>
+      <button class="btn"
+              hover-class="hscale"
+              hover-stay-time="10"
+              @click="doCall">{{record.phone}}</button>
     </div>
-    <comment />
+    <comment :orderId="record.id" />
   </div>
 </div>
 </template>
@@ -79,11 +82,14 @@
 import cHeader from '@/components/header/header'
 import orderItem from './modules/orderItem'
 import comment from './modules/comment'
+import { postAction } from '@/utils/api'
 export default {
   data () {
     return {
-      orderList: [{}, {}, {}],
-      activeIndex: 0
+      orderList: [],
+      activeIndex: 0,
+      id: '',
+      record: {}
     }
   },
 
@@ -97,6 +103,19 @@ export default {
     swiperChange (e) {
       console.log('swiperChange', e)
       this.activeIndex = e.mp.detail.current
+    },
+    getData () {
+      postAction('/api/order/detail', {
+        id: this.id
+      }).then(res => {
+        this.record = res.data
+        this.orderList = res.data.list
+      })
+    },
+    doCall () {
+      mpvue.makePhoneCall({
+        phoneNumber: this.record.phone
+      })
     }
   },
 
@@ -104,7 +123,9 @@ export default {
     this.$refs.header.setStatus('ticketBuy')
     this.$refs.header.originStatus = 'ticketBuy'
   },
-  created () {
+  onLoad (options) {
+    this.id = options.id
+    this.getData()
     // let app = getApp()
   }
 }

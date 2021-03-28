@@ -43,7 +43,7 @@
     </div>
   </div>
 
-  <c-calendar ref="calendar" />
+  <c-calendar ref="calendar" @confirm="searchBydate" />
 </div>
 </template>
 
@@ -74,6 +74,15 @@ export default {
       this.$emit('search', {
         keyword: this.keyword,
         date: this.date
+      })
+    },
+    searchBydate (date) {
+      this.keyword = ''
+      this.date = date
+      this.isSearch = true
+      this.$emit('search', {
+        keyword: this.keyword,
+        date
       })
     },
     reset () {

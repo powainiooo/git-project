@@ -8,6 +8,7 @@ export default {
   created () {
     this.getData()
     this.getConfig()
+    this.loadFont()
   },
   methods: {
     async getData () {
@@ -29,6 +30,33 @@ export default {
           store.commit('SET_CONFIGDATA', res.data)
         }
       })
+    },
+    loadFont () {
+      const baseUrl = 'https://leesticket.waiting8.com/assets/fonts/'
+      mpvue.loadFontFace({
+        global: true,
+        family: 'HelveB',
+        source: `url("${baseUrl}HelveticaNowDisplay-Bold.ttf")`,
+        success: (res) => {
+          console.log('Helve load over', res)
+        }
+      })
+      mpvue.loadFontFace({
+        global: true,
+        family: 'HelveL',
+        source: `url("${baseUrl}HelveticaNowDisplay-Light.ttf")`,
+        success: (res) => {
+          console.log('Helve load over', res)
+        }
+      })
+      mpvue.loadFontFace({
+        global: true,
+        family: 'HelveT',
+        source: `url("${baseUrl}HelveticaNeueThin.ttf")`,
+        success: (res) => {
+          console.log('HelveThin load over', res)
+        }
+      })
     }
   },
   log () {
@@ -45,18 +73,6 @@ export default {
   -moz-transition: width 2s;
   -webkit-transition: width 2s;
   -o-transition: width 2s;
-}
-@font-face {
-  font-family: 'HelveB';
-  src: url('https://github.com/powainiooo/git-project/blob/master/xiaofu-v3/static/fonts/HelveticaNowDisplay-Bold.ttf?raw=true') format('woff2');
-}
-@font-face {
-  font-family: 'HelveL';
-  src: url('https://github.com/powainiooo/git-project/blob/master/xiaofu-v3/static/fonts/HelveticaNowDisplay-Light.ttf?raw=true') format('woff2');
-}
-@font-face {
-  font-family: 'HelveT';
-  src: url('https://github.com/powainiooo/git-project/blob/master/xiaofu-v3/static/fonts/HelveticaNeueThin.ttf?raw=true') format('woff2');
 }
 page {
   background-color: #EEEEEF;

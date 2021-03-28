@@ -5,7 +5,7 @@
 .c-header .logo { width: 269px; height: 70px; margin-left: 38px; }
 .c-header .operates { margin-right: 26px; display: flex; align-items: center; }
 .c-header .c-cont-frame { height: 58px; background-color: #EEEEEF; border-radius: 16px; display: flex; align-items: center; }
-.c-header .c-skip { width: 32px; height: 32px; border: 4px solid #ffffff; border-radius: 50%; margin: 0 12px 0 10px; }
+.c-header .c-skip { width: 38px; height: 38px; margin: 0 12px 0 10px; }
 .c-header .label { font-size: 20px; color: #9E9E9F; margin-right: 16px; }
 .c-header .dot { width: 24px; height: 29px; margin: 0 12px 0 14px; }
 .c-header .btn { width: 57px; height: 57px; margin-left: 12px; background: transparent; }
@@ -18,8 +18,8 @@
     <img :src="'/static/images/common/' + logo + '.png'" class="logo" />
     <div class="operates" v-if="!onlyLogo">
       <!--   跳过   -->
-      <div class="c-cont-frame" v-if="showSkip">
-        <div class="c-skip"></div>
+      <div class="c-cont-frame" v-if="showSkip" @click="stopCount">
+        <canvas canvas-id="myCanvas" class="c-skip ignore" width="32" height="32" />
         <span class="label">跳过</span>
       </div>
       <picker @change="cityChange" :range="addrList" range-key="name">
@@ -80,7 +80,9 @@ export default {
       originStatus: '',
       pageStatus: '',
       cityName: '全部',
-      cityId: ''
+      cityId: '',
+      time: 3000,
+      t: 0
     }
   },
   methods: {
@@ -146,6 +148,44 @@ export default {
       console.log('cityChange', item)
       this.cityName = item.name
       this.$emit('cityChange', item.id)
+    },
+    count () {
+      this.showSkip = true
+      this.showCity = false
+      this.showMenuBtn = false
+      this.$nextTick(() => {
+        this.drawStep()
+      })
+    },
+    drawStep () {
+      const ctx = wx.createCanvasContext('myCanvas')
+      console.log('drawPost', ctx)
+      const step = 360 / (this.time / 16)
+      const per = Math.PI / 180
+      let current = 0
+      this.t = setInterval(() => {
+        current += step
+        ctx.scale(0.5, 0.5)
+        ctx.beginPath()
+        ctx.setLineWidth(3)
+        ctx.arc(19, 19, 16, 0, 2 * Math.PI)
+        ctx.setStrokeStyle('#ffffff')
+        ctx.stroke()
+        ctx.beginPath()
+        ctx.setLineWidth(3)
+        ctx.arc(19, 19, 16, -0.5 * Math.PI, -0.5 * Math.PI + current * per)
+        ctx.setStrokeStyle('#5F8AE9')
+        ctx.stroke()
+        ctx.draw()
+        if (current > 360) {
+          this.stopCount()
+        }
+      }, 16)
+    },
+    stopCount () {
+      console.log('over')
+      clearInterval(this.t)
+      this.$emit('skipDone')
     }
   }
 }

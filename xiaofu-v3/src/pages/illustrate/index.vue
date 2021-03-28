@@ -99,14 +99,14 @@
     <h3>票务合作<span>Ticketing cooperation</span></h3>
     <div>
       <img src="/static/images/common/icon-wechat.png" />
-      <button>Lee910123</button>
+      <button>{{wx1}}</button>
     </div>
   </div>
   <div class="contact">
     <h3>售后及服务<span>After sales & service</span></h3>
     <div>
       <img src="/static/images/common/icon-wechat.png" />
-      <button>leesticketaftersales</button>
+      <button>{{wx2}}</button>
     </div>
   </div>
   </template>
@@ -115,16 +115,23 @@
 
 <script>
 import cHeader from '@/components/header/header'
+import store from '@/store'
 export default {
   data () {
     return {
       source: '',
-      contents: ''
+      contents: '',
+      wx1: '',
+      wx2: ''
     }
   },
-
   components: {
     cHeader
+  },
+  computed: {
+    configData () {
+      return store.state.configData
+    }
   },
 
   methods: {
@@ -133,6 +140,15 @@ export default {
   onLoad (option) {
     // let app = getApp()
     this.source = option.source || 'contact'
+    if (this.source === 'member') {
+      this.contents = this.configData.belongs_to
+    } else if (this.source === 'aftersales') {
+      this.contents = this.configData.after_sales
+    } else if (this.source === 'contact') {
+      let contact = this.configData.contact.split('；')
+      this.wx1 = contact[0].split('：')[1]
+      this.wx2 = contact[2].split('：')[1]
+    }
   }
 }
 </script>

@@ -122,12 +122,12 @@
     <div class="line2">0016659884321</div>
   </div>
   <div class="c-order-item-bottom">
-    <infos :showBanner="false" />
+    <infos :record="record" :showBanner="false" />
     <div class="line1 bBorder">
-      <div>张三</div>
-      <p>18023195011</p>
+      <div>{{record.name}}</div>
+      <p>{{record.phone}}</p>
     </div>
-    <div class="ticket">早鸟票</div>
+    <div class="ticket">{{record.price_name}}</div>
   </div>
   <img src="/static/images/common/flip.png" class="c-order-item-flip" />
   <img src="/static/images/common/ticket-shadow-large.png" class="c-order-item-shadow" mode="widthFix" />
@@ -138,6 +138,9 @@
 import infos from '@/components/ticketDetail/infos'
 export default {
   name: 'app',
+  props: {
+    record: Object
+  },
   components: {
     infos
   },

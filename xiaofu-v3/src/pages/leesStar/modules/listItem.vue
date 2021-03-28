@@ -24,6 +24,7 @@
 }
 .c-list-item .left {
   display: flex;
+  align-items: center;
   margin-left: 20px;
   position: relative;
   z-index: 5;
@@ -35,7 +36,6 @@
 }
 .c-list-item .left h3 {
   font-size: 20px;
-  margin-top: 26px;
 }
 .c-list-item .left h3 p.en {
   font-size: 32px;
@@ -66,19 +66,23 @@
 </style>
 
 <template>
-<div class="c-list-item" :class="{'c-list-item-first': rank === 1}">
-  <img src="/static/images/leesStar/bg-star.png" mode="widthFix" class="bg" v-if="rank === 1">
+<div class="c-list-item"
+     :class="{'c-list-item-first': record.sort === 1}"
+     hover-class="hscale"
+     hover-stay-time="10"
+     @click="toDetail">
+  <img src="/static/images/leesStar/bg-star.png" mode="widthFix" class="bg" v-if="record.sort === 1">
   <img src="/static/images/leesStar/bg-star2.png" mode="widthFix" class="bg" v-else>
   <div class="left">
-    <span>{{rank}}</span>
+    <span>{{record.sort}}</span>
     <h3>
-      <p class="en">BLUE ICON house</p>
-      <p>顶级室内活动制造方</p>
+      <p class="en">{{record.name}}</p>
+      <p>{{record.organizer_name}}</p>
     </h3>
   </div>
-  <div class="right">
+  <div class="right" v-if="record.star">
     <ul class="stars">
-      <li v-for="i in 4" :key="i">
+      <li v-for="i in record.star" :key="i">
         <img src="/static/images/common/rank-star2.png" v-if="rank === 1" />
         <img src="/static/images/common/rank-star.png" v-else />
       </li>
@@ -92,11 +96,17 @@
 export default {
   name: 'app',
   props: {
-    rank: String
+    record: Object
   },
   data () {
     return {}
   },
-  methods: {}
+  methods: {
+    toDetail () {
+      mpvue.navigateTo({
+        url: `/pages/activity/main?id=${this.record.id}`
+      })
+    }
+  }
 }
 </script>

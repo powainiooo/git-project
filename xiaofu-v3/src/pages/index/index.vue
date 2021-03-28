@@ -9,12 +9,15 @@
     <c-header
       ref="header"
       @close="handleClose"
+      @skipDone="skipDone"
       @cityChange="cityChange" />
 
     <c-search
       ref="search"
       @change="changeStatus"
       @search="handleSearch" />
+
+    <c-ads :record="coverData" v-if="coverData && showAd" />
 
     <div class="index-container" v-if="isSearch">
       <div v-for="item in listData"
@@ -30,8 +33,8 @@
       <div v-for="(item, index) in listData"
            :key="index"
            :class="{
-             'item-small': item.type === 'normalTicket',
-             'item-large': item.type === 'recTicket' || item.type === 'collection'
+             'item-small': item.type === 'normalTicket' || (item.type === 'collection' && index === 0),
+             'item-large': item.type === 'recTicket' || (item.type === 'collection' && index !== 0)
            }">
         <c-collection :record="item" v-if="item.type === 'collection'" />
         <c-ticket :record="item" size="large" v-else-if="item.type === 'recTicket'" />
@@ -47,7 +50,9 @@ import cSearch from './modules/search'
 import cLeesStar from './modules/leesStar'
 import cCollection from './modules/collection'
 import cTicket from './modules/ticket'
+import cAds from './modules/ads'
 import { postAction } from '@/utils/api'
+import store from '@/store'
 
 export default {
   components: {
@@ -55,6 +60,7 @@ export default {
     cSearch,
     cLeesStar,
     cCollection,
+    cAds,
     cTicket
   },
   data () {
@@ -71,9 +77,29 @@ export default {
   computed: {
     isSearch () {
       return this.date !== '' || this.keyword !== ''
+    },
+    coverData () {
+      return store.state.configData.coverdata
+    },
+    showAd () {
+      return store.state.showAd
+    }
+  },
+  watch: {
+    coverData (val) {
+      console.log('coverData', val)
+      if (val.id) {
+        this.$refs.header.count()
+      }
     }
   },
   methods: {
+    skipDone () {
+      this.$refs.header.showSkip = false
+      this.$refs.header.showCity = true
+      this.$refs.header.showMenuBtn = true
+      store.commit('SET_ADSTATE', false)
+    },
     changeStatus (e) {
       console.log('changeStatus', e)
       this.status = e

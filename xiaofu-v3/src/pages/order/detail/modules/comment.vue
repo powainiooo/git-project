@@ -47,7 +47,10 @@
   <div class="input-frame">
     <textarea placeholder="为这场活动评分，并留下您的宝贵建议" v-model="comment" />
     <div class="btns">
-      <button class="btn" @click="submit">提交</button>
+      <button class="btn"
+              @click="submit"
+              hover-class="hscale"
+              hover-stay-time="10">提交</button>
     </div>
   </div>
 </div>

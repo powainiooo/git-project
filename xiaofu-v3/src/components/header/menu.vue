@@ -43,7 +43,7 @@
         <tk-info :record="infoData" />
       </div>
       <div class="ticket-info-img">
-        <img src="/static/images/menu/icon1.png" mode="aspectFill" />
+        <img :src="orderData.cover_image" mode="aspectFill" />
       </div>
     </div>
   </div>

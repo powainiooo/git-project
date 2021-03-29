@@ -44,4 +44,8 @@
 .order-item .order-tr .td .item .msgs p { font-size: 12px; text-align: left; color: #999999; }
 
 
+.cancel-modal { width: 580px; }
+.cancel-modal .cancel-tabs { margin: 20px 30px; }
+.cancel-modal .cancel-tabs li { width: 240px; text-align: center; margin: 0 10px 20px 10px; }
 
+.checkIn-modal { width: 438px; }

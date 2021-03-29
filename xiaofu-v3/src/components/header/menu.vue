@@ -35,14 +35,15 @@
   <div class="ticket"
        hover-class="hscale"
        hover-stay-time="10"
-       @click="toOrderList">
+       @click="toOrderList"
+       v-if="hasUserInfo && orderData.id">
     <img src="/static/images/menu/frame.png" />
     <div class="ticket-info">
       <div class="ticket-info-left">
-        <tk-info />
+        <tk-info :record="infoData" />
       </div>
       <div class="ticket-info-img">
-        <img src="/static/images/menu/icon1.png" />
+        <img src="/static/images/menu/icon1.png" mode="aspectFill" />
       </div>
     </div>
   </div>
@@ -85,7 +86,7 @@
 
 <script type='es6'>
 import tkInfo from '@/components/tkInfo'
-import { doLogin } from '@/utils/api'
+import { doLogin, postAction } from '@/utils/api'
 import store from '@/store'
 
 export default {
@@ -107,8 +108,18 @@ export default {
       return store.state.personalInfo
     }
   },
+  watch: {
+    show (val) {
+      console.log('menu show')
+      if (val && this.hasUserInfo) {
+        this.getOrder()
+      }
+    }
+  },
   data () {
     return {
+      orderData: {},
+      infoData: {}
     }
   },
   methods: {
@@ -118,6 +129,20 @@ export default {
     toOrderList () {
       mpvue.navigateTo({
         url: '/pages/order/list/main'
+      })
+    },
+    getOrder () {
+      postAction('/api/order/lists').then(res => {
+        if (res.code === 1) {
+          this.orderData = res.data[0]
+          let date = this.orderData.start_date.split('-')
+          this.infoData = {
+            month: date[1],
+            day: date[2],
+            name: this.orderData.ticket_name,
+            host: this.orderData.organizer_name
+          }
+        }
       })
     }
   }

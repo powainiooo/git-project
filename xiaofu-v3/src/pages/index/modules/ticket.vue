@@ -140,15 +140,17 @@ export default {
     infoData () {
       let date = ['', '']
       let name = ''
+      let host = ''
       if (this.record) {
         date = this.record.start_date.split('-')
         name = this.record.name
+        host = this.record.organizer_name
       }
       return {
         month: date[1],
         day: date[2],
         name,
-        host: ''
+        host
       }
     }
   },

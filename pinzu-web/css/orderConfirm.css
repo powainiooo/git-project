@@ -16,7 +16,7 @@
 .addr-list .addr-line .btns a { margin-right: 20px; color: #275C91; font-size: 12px; }
 .addr-list .addr-line .btns a:hover { color: #FE322B; }
 
-.payways li { min-width: 108px; text-align: center; }
+.payways li { min-width: 108px; text-align: center; margin-bottom: 0; }
 .payways li img { vertical-align: middle; margin-right: 5px; }
 
 .order-thead { height: 40px; background-color: #F5F5F5; overflow: hidden; padding-right: 40px; padding-left: 20px; }

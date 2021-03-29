@@ -36,8 +36,15 @@ input[type=checkbox]:checked { background-position: -16px 0; }
 .c-modal-body { background-color: #ffffff; border-radius: 4px; margin: 150px auto; overflow: hidden; position: relative; z-index: 10; }
 .c-modal-close { position: absolute; top: 20px; right: 20px; }
 .c-modal-header { padding: 0 20px; height: 48px; background-color: #F5F5F5; overflow: hidden; }
-.c-modal-header span { float: left; margin-top: 16px; }
+.c-modal-header h3 { float: left; margin-top: 16px; }
 .c-modal-header a { float: right; margin-top: 16px; }
+.c-modal-warn { min-height: 40px; padding: 8px 20px 8px 54px; background: url("../img/icon-warn.png") no-repeat; background-position: 20px center; background-color: #FEF2E8; font-size: 12px; line-height: 24px; color: #999999;  }
+.c-modal-btns { margin: 0 40px 20px 40px; text-align: right; }
+.c-modal-btns button, .c-modal-btns a { padding: 0 18px; margin-left: 5px; height: 32px; line-height: 30px; }
+.c-modal-btns button:disabled { border: 1px solid #D5D5D5; color: #D5D5D5; background-color: #ffffff; }
+.c-modal-content { margin: 20px 40px; padding: 4px 0; line-height: 20px; }
+.c-modal-content-suc { background: url("../img/modal-suc.png") no-repeat; padding-left: 48px; }
+.c-modal-content-warn { background: url("../img/modal-warn.png") no-repeat; padding-left: 48px; }
 
    /* 标签页 */
 .c-tabs { overflow: hidden; }
@@ -66,8 +73,8 @@ input[type=checkbox]:checked { background-position: -16px 0; }
 
 /* 下拉框 */
 .cSelects { position: relative; }
-.cSelects .cSelects-item { height: 24px; border: 1px solid rgba(0, 0, 0, .1); line-height: 22px; padding: 0 22px 0 8px; font-size: 12px; background: url("../img/arrow4.png") no-repeat; background-position: calc(100% - 10px) center; background-position: -webkit-calc(100% - 10px) center; background-color: #ffffff; }
-.cSelects .cSelects-item2 { height: 40px; border: 1px solid rgba(0, 0, 0, .1); line-height: 38px; padding: 0 22px 0 8px; font-size: 14px; background: url("../img/arrow4.png") no-repeat; background-position: calc(100% - 10px) center; background-position: -webkit-calc(100% - 10px) center; background-color: #ffffff; }
+.cSelects .cSelects-item { height: 24px; border: 1px solid #D5D5D5; line-height: 22px; padding: 0 22px 0 8px; font-size: 12px; background: url("../img/arrow4.png") no-repeat; background-position: calc(100% - 10px) center; background-position: -webkit-calc(100% - 10px) center; background-color: #ffffff; }
+.cSelects .cSelects-item2 { height: 40px; border: 1px solid #D5D5D5; line-height: 38px; padding: 0 22px 0 8px; font-size: 14px; background: url("../img/arrow4.png") no-repeat; background-position: calc(100% - 10px) center; background-position: -webkit-calc(100% - 10px) center; background-color: #ffffff; }
 .cSelects select { width: 100%; height: 100%; position: absolute; top: 0; left: 0; opacity: 0; }
 
 /* tag */
@@ -114,9 +121,12 @@ input[type=checkbox]:checked { background-position: -16px 0; }
 /* 表单 */
 .form .formItem { position: relative; margin-bottom: 20px; }
 .form .formItem:after { content: ".";display: block; height: 0; clear: both; visibility: hidden; }
-.form .formItem .formLabel { width: 120px; text-align: right; float: left; line-height: 20px; margin-top: 10px; margin-right: 10px; }
+.form .formItem .formLabel { width: 120px; min-height: 1px; text-align: right; float: left; line-height: 20px; margin-top: 10px; margin-right: 10px; }
+.form .formItem .formLabel span { color: #FE322B; vertical-align: middle; margin-right: 4px; }
 .form .formItem .formContent { float: left; line-height: 20px; position: relative; }
 .form .formItem .formWarn { position: absolute; top: 100%; left: 10px; line-height: 20px; font-size: 12px; color: #FE322B; }
+.form .formItem .textarea textarea { width: 100%; height: 160px; border: 1px solid #D5D5D5; padding: 10px; margin-bottom: 10px; font-size: 12px; }
+.form .formItem .textarea .nums { text-align: right; font-size: 12px; color: #999999; }
 
 /* 上传 */
 .c-upload-big { width: 260px; height: 180px; background: #F5F5F5; border-radius: 4px; position: relative; padding: 20px 30px; }
@@ -129,14 +139,29 @@ input[type=checkbox]:checked { background-position: -16px 0; }
 
 .c-upload {}
 .c-upload:after { content: ".";display: block; height: 0; clear: both; visibility: hidden; }
-.c-upload-imgs { float: left; }
+.c-upload-imgs { margin-bottom: 20px; overflow: hidden; }
 .c-upload-imgs li { width: 108px; height: 108px; background-color: #ffffff; border: 1px dashed #D5D5D5; border-radius: 2px; margin-right: 10px; float: left; overflow: hidden; position: relative; }
 .c-upload-imgs li img { width: 100%; display: block; }
 .c-upload-imgs li .close { width: 20px; height: 20px; background: url("../img/close.png") no-repeat; background-size: 20px; position: absolute; top: 5px; right: 5px; }
-.c-upload-frame { width: 108px; height: 108px; background-color: #F5F5F5; border: 1px dashed #D5D5D5; border-radius: 2px; position: relative; float: left; }
+.c-upload-frame { width: 108px; height: 108px; background-color: #F5F5F5; border: 1px dashed #D5D5D5; border-radius: 2px; position: relative; }
 .c-upload-frame p { font-size: 40px; line-height: 24px; text-align: center; color: #D5D5D5; margin-top: 24px; margin-bottom: 14px; }
 .c-upload-frame div { font-size: 12px; line-height: 18px; text-align: center; color: #999999; }
 .c-upload-frame input[type=file] { width: 100%; height: 100%; position: absolute; top: 0; left: 0; opacity: 0; cursor: pointer; }
+.c-upload-frame .nums { position: absolute; left: 118px; bottom: 0; }
+
+/* 图片区 */
+.imgs { position: relative; border-radius: 4px; background-color: #D8D8D8; }
+.imgs img:first-child { width: 100%; display: block; }
+.imgs .tag { position: absolute; top: 0; left: 0; }
+
+/* 评论星数 */
+.stars-list ul { overflow: hidden; }
+.stars-list ul li { width: 16px; float: left; margin-right: 5px; cursor: pointer; }
+.stars-list ul li img { width: 100%; display: block; }
+.stars-list ul li img.light { display: none; }
+.stars-list ul li.active img.light { display: block; }
+.stars-list ul li.active img.gray { display: none; }
+
 
    /*
       页面模块

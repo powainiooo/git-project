@@ -14,3 +14,8 @@
 .pay-result p { width: 620px; margin: 0 auto 20px auto; color: #999999; }
 .pay-result div { text-align: center; }
 .pay-result div a { width: 88px; margin: 0 3px; }
+
+.order-title { font-size: 18px; font-weight: bold; margin-bottom: 20px; margin-top: 20px; }
+
+.payways li { min-width: 108px; text-align: center; margin-bottom: 0; }
+.payways li img { vertical-align: middle; margin-right: 5px; }

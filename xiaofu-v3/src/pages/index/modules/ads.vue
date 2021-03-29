@@ -8,7 +8,7 @@
 </style>
 
 <template>
-<div class="ad-frame">
+<div class="ad-frame" @click="toDetail">
   <img :src="record.cover_image" mode="aspectFill" class="pic" />
   <div class="infos">
     <div class="name">
@@ -45,6 +45,12 @@ export default {
 	data() {
 		return {}
 	},
-	methods: {}
+	methods: {
+    toDetail () {
+      mpvue.navigateTo({
+        url: `/pages/details/main?id=${this.record.id}`
+      })
+    }
+  }
 }
 </script>

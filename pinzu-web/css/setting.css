@@ -1,0 +1,22 @@
+.avatar2 { width: 120px; height: 120px; border-radius: 4px; }
+
+.setting-list { margin-top: -20px; }
+.setting-list li { height: 60px; overflow: hidden; border-bottom: 1px solid #D5D5D5; }
+.setting-list li .line1 { width: 208px; height: 100%; float: left; position: relative; }
+.setting-list li .line1:after { content: ''; width: 1px; height: 20px; background-color: #D5D5D5; position: absolute; top: 20px; right: 0; }
+.setting-list li .line1 img { float: left; margin-top: 14px; margin-right: 40px; }
+.setting-list li .line1 span { font-weight: bold; float: left; margin-top: 20px; }
+.setting-list li .line2 { float: left; margin-left: 80px; margin-top: 20px; }
+.setting-list li .line2 p { color: #999999; }
+.setting-list li a { float: right; margin-top: 20px; margin-right: 40px; }
+
+.steps-frame { margin: 60px 110px 80px 110px; }
+
+.form { margin-left: 200px; margin-right: 200px; }
+
+.pay-result { margin-bottom: 40px; }
+.pay-result .icon { width: 72px; display: block; margin: 0 auto 20px auto; }
+.pay-result h2 { font-size: 24px; margin-bottom: 10px; text-align: center; }
+.pay-result p { width: 620px; margin: 0 auto 20px auto; color: #999999; text-align: center; }
+.pay-result div { text-align: center; }
+.pay-result div a { width: 88px; margin: 0 3px; }

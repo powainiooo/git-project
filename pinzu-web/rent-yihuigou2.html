@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   <title>租到的商品-已回购详情2</title><!-- CSS -->
+   <link href="css/reset.css" rel="stylesheet" />
+   <link href="css/common.css" rel="stylesheet" />
+</head>
+<body>
+<!-- 每页单独的资源 -->
+<link href="css/orderDetail.css" rel="stylesheet" />
+
+<!-- 中间区域  使用框架frame2 -->
+<div class="w">
+   <!-- 面包屑导航 -->
+   <div class="c-bread-crumb">
+      <a href="#" class="c-bread-crumb-item">用户中心</a>
+      <a href="#" class="c-bread-crumb-item c-bread-crumb-current">订单中心</a>
+   </div>
+   <div class="p-content">
+      <div class="p-menu">
+         <h3>订单中心</h3>
+         <ul>
+            <li><a href="#">我的订单</a> </li>
+            <li class="active"><a href="#">租到的物品</a> </li>
+            <li><a href="#">买到的物品</a> </li>
+         </ul>
+         <h3>资产中心</h3>
+         <ul>
+            <li><a href="#">余额</a> </li>
+            <li><a href="#">优惠券</a> </li>
+         </ul>
+         <h3>关注中心</h3>
+         <ul>
+            <li><a href="#">关注的店铺</a> </li>
+            <li><a href="#">收藏的内容</a> </li>
+         </ul>
+         <h3>设置</h3>
+         <ul>
+            <li><a href="#">个人信息</a> </li>
+            <li><a href="#">账户安全</a> </li>
+            <li><a href="#">实名认证</a> </li>
+            <li><a href="#">收货地址</a> </li>
+         </ul>
+      </div>
+      <div class="p-right">
+         <h3>已回购的物品</h3>
+         <h4>鹰视眼官方旗舰店</h4>
+         <div class="order-table order-table2 mb20">
+            <ul class="order-thead">
+               <li class="t-infos">商品</li>
+               <li class="t-rent2">租金</li>
+               <li class="t-rent2">售价</li>
+               <li class="t-rent2">押金</li>
+               <li class="t-rent2">数量</li>
+               <li class="t-rent2">交易状态</li>
+            </ul>
+            <div class="order-tbody">
+               <div class="order-tr clearfix">
+                  <div class="td t-infos">
+                     <div class="imgs">
+                        <img src="img/img/img2.png" />
+                     </div>
+                     <div class="msgs">
+                        <div>Apple iiPhone 11 Pro Max 国行双卡双待 全网通 256G 多色可选</div>
+                        <p>黑色，标准</p>
+                     </div>
+                  </div>
+                  <div class="td t-rent2">
+                     <p>￥10/天</p>
+                  </div>
+                  <div class="td t-rent2">
+                     <p>￥10</p>
+                  </div>
+                  <div class="td t-rent2">
+                     <p>x1</p>
+                  </div>
+                  <div class="td t-rent2">
+                     <p>租用中</p>
+                  </div>
+               </div>
+            </div>
+            <div class="order-btns">
+               <a href="#" class="btn btn-size1">原祖品信息</a>
+            </div>
+         </div>
+         <div class="pa20">
+            <div class="infos-table">
+               <div class="infos-thead">订单信息</div>
+               <ul>
+                  <li>
+                     <div>发起时间</div>
+                     <p>2020-10-11 14:23:35</p>
+                  </li>
+               </ul>
+            </div>
+         </div>
+
+         <div class="pa20 mt20">
+            <div class="t-l3">物品描述</div>
+            <p class="mt20 mb20">这个苹果手机还很新，都可以用，低价出售了。。。。</p>
+            <div class="ml20 mr20">
+               <img src="img/img/img2.png" style="width: 100%;" />
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+
+<script src="js/jquery-2.1.4.min.js"></script>
+<script src="js/common.js"></script>
+<script>
+$(function () {
+   // 选择订单分类
+   $("#statusList li").on('click', function () {
+      var text = $(this).html();
+      $("#currentStatus").html(text);
+      // 这个是订单的value值 目前是我随便设置的
+	   var value = $(this).data('value');
+   })
+})
+</script>
+</body>
+</html>

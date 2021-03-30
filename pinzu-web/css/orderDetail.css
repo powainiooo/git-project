@@ -31,6 +31,7 @@
 
 
 .order-table { background-color: #ffffff; padding-bottom: 40px; }
+.order-table2 { padding-bottom: 20px; }
 .order-thead { height: 40px; background-color: #f0f0f0; padding: 0 20px; overflow: hidden; }
 .order-thead li { height: 40px; line-height: 40px; font-weight: bold; text-align: center; float: left; }
 
@@ -40,8 +41,10 @@
 .order-table .t-deposit { width: 110px; }
 .order-table .t-nums { width: 110px; }
 .order-table .t-state { width: 110px; }
+.order-table .t-rent2 { width: 150px; }
 
 .order-tbody { border-bottom: 1px solid #D5D5D5; padding: 20px; }
+.order-table2 .order-tbody { border-bottom: none; padding: 20px 20px 0 20px; }
 .order-tbody .order-tr { border-bottom: 1px solid #D5D5D5; padding-bottom: 20px; margin-bottom: 20px; }
 .order-tbody .order-tr:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
 .order-tbody .order-tr .td { float: left; min-height: 1px; }
@@ -54,6 +57,8 @@
 .order-tbody .order-tr .td>p { font-size: 12px; text-align: center; margin-bottom: 10px; }
 .order-tbody .order-tr .td div.rent-btn { font-size: 12px; position: relative; }
 .order-tbody .order-tr .td div.rent-btn a { display: block; text-align: center; }
+.order-table .order-btns { margin: 20px 20px 0 20px; text-align: right; border-top: 1px solid #D5D5D5; padding-top: 20px; padding-right: 20px; }
+
 .rent-frame { width: 395px; height: 353px; background: #FFFFFF; box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.15); border-radius: 2px; display: none; position: absolute;  top: 0; right: 95%; z-index: 100; padding: 15px 20px; }
 .order-tbody .order-tr .td div.rent-btn:hover .rent-frame { display: block; }
 .rent-frame .rent-list {  height: 280px; overflow-y: auto; }
@@ -74,3 +79,13 @@
 .order-total li.last p { color: #FE322B; margin-top: 4px; }
 .order-total li.last div { font-size: 12px; color: #FE322B; }
 .order-total li.last div span { font-size: 18px; }
+
+.infos-table .infos-thead { height: 40px; line-height: 40px; background-color: #f0f0f0; font-weight: bold; padding-left: 20px; }
+.infos-table ul { border-left: 1px solid #D5D5D5; border-right: 1px solid #D5D5D5; margin-bottom: 10px; }
+.infos-table ul li { border-bottom: 1px solid #D5D5D5; height: 40px; color: #666666; }
+.infos-table ul li>div { width: 160px; border-right: 1px solid #D5D5D5; height: 40px; line-height: 40px; float: left; padding-left: 20px; }
+.infos-table ul li>div span { font-size: 10px; color: #999999; display: block; }
+.infos-table ul li>div p { line-height: 14px; margin-top: 5px; }
+.infos-table ul li>p { width: 160px; 40px; line-height: 40px; float: left; padding-left: 10px; }
+
+#applyModal .c-modal-body { width: 660px; }

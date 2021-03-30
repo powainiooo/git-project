@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   <title>资产中心-余额-提现</title><!-- CSS -->
+   <link href="css/reset.css" rel="stylesheet" />
+   <link href="css/common.css" rel="stylesheet" />
+</head>
+<body>
+<!-- 每页单独的资源 -->
+<link href="css/property.css" rel="stylesheet" />
+
+<!-- 中间区域  使用框架frame2 -->
+<div class="w">
+   <!-- 面包屑导航 -->
+   <div class="c-bread-crumb">
+      <a href="#" class="c-bread-crumb-item">用户中心</a>
+      <a href="#" class="c-bread-crumb-item c-bread-crumb-current">资产中心</a>
+   </div>
+   <div class="p-content">
+      <div class="p-menu">
+         <h3>订单中心</h3>
+         <ul>
+            <li><a href="#">我的订单</a> </li>
+            <li><a href="#">租到的物品</a> </li>
+            <li><a href="#">买到的物品</a> </li>
+         </ul>
+         <h3>资产中心</h3>
+         <ul>
+            <li class="active"><a href="#">余额</a> </li>
+            <li><a href="#">优惠券</a> </li>
+         </ul>
+         <h3>关注中心</h3>
+         <ul>
+            <li><a href="#">关注的店铺</a> </li>
+            <li><a href="#">收藏的内容</a> </li>
+         </ul>
+         <h3>设置</h3>
+         <ul>
+            <li><a href="#">个人信息</a> </li>
+            <li><a href="#">账户安全</a> </li>
+            <li><a href="#">实名认证</a> </li>
+            <li><a href="#">收货地址</a> </li>
+         </ul>
+      </div>
+      <div class="p-right">
+         <div class="pa40 mb20">
+            <h3 class="t-l mb20">提现<span class="f12 c999 ml10">（今日可提现<span class="c-main">2</span>次）</span></h3>
+            <div class="form">
+               <div class="formItem">
+                  <div class="formLabel"><span>*</span>提现金额：</div>
+                  <div class="formContent">
+                     <input type="text" class="ip-text2" placeholder="请输入" />
+                     <span class="ml5 f12">可提现金额￥13.5</span><br/>
+                     <a href="#" class="mt5 f12 c-main">全部提取</a>
+                  </div>
+               </div>
+               <div class="formItem">
+                  <div class="formLabel"><span>*</span>支付宝号：</div>
+                  <div class="formContent">
+                     <input type="text" class="ip-text2" placeholder="请输入支付宝账号" />
+                  </div>
+               </div>
+               <div class="formItem">
+                  <div class="formLabel"><span>*</span>真实姓名：</div>
+                  <div class="formContent">
+                     <input type="text" class="ip-text2" placeholder="请输入真实姓名" />
+                  </div>
+               </div>
+               <div class="formItem">
+                  <div class="formContent">
+                     <span class="f12 c999">提示：提现费率：0.8%，单次最小提现额：10元，单次最大提现额：1万</span>
+                  </div>
+               </div>
+               <div class="formItem">
+                  <div class="formLabel"></div>
+                  <div class="formContent">
+                     <button class="btn-main">提现</button>
+                  </div>
+               </div>
+            </div>
+         </div>
+
+         <div class="pa40">
+            <h3>收支明细</h3>
+
+            <ul class="c-tabs mb20">
+               <li class="active"><a href="#">近三个月的收支明细</a> </li>
+               <li><a href="#">三个月前收支明细 </a> </li>
+            </ul>
+
+            <div class="yue-table">
+               <table>
+                  <thead>
+                  <tr>
+                     <th>流水号</th>
+                     <th class="min">变化金额</th>
+                     <th class="min">账户余额</th>
+                     <th>交易时间</th>
+                     <th>备注</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                     <td>1234567890</td>
+                     <td class="min"><span class="c-main">+13.5</span></td>
+                     <td class="min">￥365.77</td>
+                     <td>2020-12-01 12:22:55</td>
+                     <td>【螺丝刀】租金收入</td>
+                  </tr>
+                  <tr>
+                     <td>1234567890</td>
+                     <td class="min">-3.5</td>
+                     <td class="min">￥365.77</td>
+                     <td>2020-12-01 12:22:55</td>
+                     <td>【螺丝刀】租金收入</td>
+                  </tr>
+                  </tbody>
+               </table>
+               <!-- 没有记录提示 -->
+               <div class="empty" style="display: none;">
+                  <img src="img/empty1.png" />
+                  <p>您还没有任何收支明细记录哦</p>
+               </div>
+               <div class="hint"> 提示：系统仅显示您一年之内的余额明细，更早的余额明细不再显示</div>
+            </div>
+         </div>
+      </div>
+   </div>
+
+</div>
+
+
+<script src="js/jquery-2.1.4.min.js"></script>
+<script src="js/common.js"></script>
+<script>
+</script>
+</body>
+</html>

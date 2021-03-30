@@ -10,6 +10,7 @@
 .b-fff { background-color: #ffffff }
 .b-f5 { background-color: #F5F5F5 }
 .c-main { color: #FE322B; }
+.c333 { color: #333333; }
 .c666 { color: #666666; }
 .c999 { color: #999999; }
 .cfff { color: #ffffff; }
@@ -59,17 +60,19 @@ input[type=checkbox]:checked { background-position: -16px 0; }
 .c-tab-btns li.active a:after { content: ''; width: 18px; height: 15px; background: url("../img/icon-check.png") no-repeat; position: absolute; bottom: -1px; right: -1px; }
 
 /* 按钮 */
-.btn { display: inline-block; height: 40px; border: 1px solid #D5D5D5; border-radius: 4px; text-align: center; font-size: 12px; line-height: 40px; }
-.btn-main { display: inline-block; height: 40px; background-color: #FE322B; color: #ffffff; border-radius: 4px; text-align: center; line-height: 40px; }
+.btn { display: inline-block; height: 40px; border: 1px solid #D5D5D5; border-radius: 4px; text-align: center; font-size: 12px; line-height: 40px; background-color: #ffffff; }
+.btn-main { width: 148px; display: inline-block; height: 40px; background-color: #FE322B; color: #ffffff; border-radius: 4px; text-align: center; line-height: 40px; }
 .btn-main:disabled { background: rgba(254, 50, 43, 0.5); }
 .btn-border { display: inline-block; height: 40px; border: 1px solid #FE322B; background-color: #ffffff; color: #FE322B; border-radius: 2px; text-align: center; line-height: 40px; }
 .btn-border-min { min-width: 80px; height: 24px; line-height: 22px; font-size: 12px; }
 .btn-more { width: 152px; height: 32px; line-height: 30px; color: #333333; }
+.btn-size1 { width: 88px; height: 32px; line-height: 30px; }
 
 /* 输入框 */
 .ip-text { height: 32px; border: 1px solid #D5D5D5; line-height: 30px; font-size: 12px; padding: 0 10px; background-color: #ffffff; }
 .ip-text::-webkit-input-placeholder { color: #999999; }
 .ip-text2 { min-width: 240px; height: 40px; border: 1px solid rgba(0, 0, 0, .15); line-height: 38px; font-size: 14px; padding: 0 10px; border-radius: 2px; background-color: #ffffff; }
+.ip-text2::-webkit-input-placeholder { color: #999999; }
 
 /* 下拉框 */
 .cSelects { position: relative; }
@@ -121,12 +124,14 @@ input[type=checkbox]:checked { background-position: -16px 0; }
 /* 表单 */
 .form .formItem { position: relative; margin-bottom: 20px; }
 .form .formItem:after { content: ".";display: block; height: 0; clear: both; visibility: hidden; }
-.form .formItem .formLabel { width: 120px; min-height: 1px; text-align: right; float: left; line-height: 20px; margin-top: 10px; margin-right: 10px; }
+.form .formItem .formLabel { width: 120px; min-height: 1px; text-align: right; float: left; line-height: 20px; margin-top: 10px; margin-right: 10px; font-weight: bold; }
 .form .formItem .formLabel span { color: #FE322B; vertical-align: middle; margin-right: 4px; }
 .form .formItem .formContent { float: left; line-height: 20px; position: relative; }
 .form .formItem .formWarn { position: absolute; top: 100%; left: 10px; line-height: 20px; font-size: 12px; color: #FE322B; }
-.form .formItem .textarea textarea { width: 100%; height: 160px; border: 1px solid #D5D5D5; padding: 10px; margin-bottom: 10px; font-size: 12px; }
-.form .formItem .textarea .nums { text-align: right; font-size: 12px; color: #999999; }
+.form .formItem .textarea { position: relative; }
+.form .formItem .textarea textarea { width: 100%; height: 160px; border: 1px solid #D5D5D5; padding: 10px; font-size: 12px; }
+.form .formItem .textarea .nums { text-align: right; font-size: 12px; color: #999999; margin-top: 10px; }
+.form .formItem .textarea .nums-fix { position: absolute; bottom: 10px; right: 10px; }
 
 /* 上传 */
 .c-upload-big { width: 260px; height: 180px; background: #F5F5F5; border-radius: 4px; position: relative; padding: 20px 30px; }
@@ -153,6 +158,10 @@ input[type=checkbox]:checked { background-position: -16px 0; }
 .imgs { position: relative; border-radius: 4px; background-color: #D8D8D8; }
 .imgs img:first-child { width: 100%; display: block; }
 .imgs .tag { position: absolute; top: 0; left: 0; }
+
+.avatar { border-radius: 50%; background-color: #D8D8D8; overflow: hidden; }
+.avatar img { width: 100%; display: block; }
+
 
 /* 评论星数 */
 .stars-list ul { overflow: hidden; }
@@ -343,6 +352,7 @@ input[type=checkbox]:checked { background-position: -16px 0; }
 .p-right h4 { font-size: 14px; margin-bottom: 20px; }
 .p-right .t-l { font-size: 18px; font-weight: bold; padding-bottom: 20px; border-bottom: 1px solid #D5D5D5; }
 .p-right .t-l2 { font-weight: bold; padding: 20px; border-bottom: 1px solid #D5D5D5; }
+.p-right .t-l3 { font-weight: bold; padding-bottom: 20px; border-bottom: 1px solid #D5D5D5; }
 
 /* 物流列表 */
 .express-list li {  }

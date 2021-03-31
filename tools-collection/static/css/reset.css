@@ -62,6 +62,25 @@ view { box-sizing: border-box; font-size: 24rpx; }
 
 hr { border-top: 1rpx solid #D5D5D5; }
 
+/* 宽 */
+.w18 { width: 18rpx; }
+.w20 { width: 20rpx; }
+.w22 { width: 22rpx; }
+.w24 { width: 24rpx; }
+.w26 { width: 26rpx; }
+.w28 { width: 28rpx; }
+.w30 { width: 30rpx; }
+.w32 { width: 32rpx; }
+.w34 { width: 34rpx; }
+.w36 { width: 36rpx; }
+.w38 { width: 38rpx; }
+.w40 { width: 40rpx; }
+.w42 { width: 42rpx; }
+.w44 { width: 44rpx; }
+.w46 { width: 46rpx; }
+.w48 { width: 48rpx; }
+.w50 { width: 50rpx; }
+
 /*边距*/
 .mt5{ margin-top: 5rpx;}
 .mt10{ margin-top: 10rpx;}

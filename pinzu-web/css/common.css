@@ -34,14 +34,14 @@ input[type=checkbox]:checked { background-position: -16px 0; }
 .c-modal::-webkit-scrollbar { width: 2px; background-color: #F5F5F5; }
 .c-modal::-webkit-scrollbar-thumb { width: 2px; background-color: #D5D5D5; }
 .c-modal-bg { width: 100%; height: 100%; position: absolute; top: 0; left: 0; }
-.c-modal-body { background-color: #ffffff; border-radius: 4px; margin: 150px auto; overflow: hidden; position: relative; z-index: 10; }
+.c-modal-body { width: 440px; background-color: #ffffff; border-radius: 4px; margin: 150px auto; overflow: hidden; position: relative; z-index: 10; }
 .c-modal-close { position: absolute; top: 20px; right: 20px; }
 .c-modal-header { padding: 0 20px; height: 48px; background-color: #F5F5F5; overflow: hidden; }
 .c-modal-header h3 { float: left; margin-top: 16px; }
 .c-modal-header a { float: right; margin-top: 16px; }
 .c-modal-warn { min-height: 40px; padding: 8px 20px 8px 54px; background: url("../img/icon-warn.png") no-repeat; background-position: 20px center; background-color: #FEF2E8; font-size: 12px; line-height: 24px; color: #999999;  }
 .c-modal-btns { margin: 0 40px 20px 40px; text-align: right; }
-.c-modal-btns button, .c-modal-btns a { padding: 0 18px; margin-left: 5px; height: 32px; line-height: 30px; }
+.c-modal-btns button, .c-modal-btns a { width: auto; padding: 0 18px; margin-left: 5px; height: 32px; line-height: 30px; }
 .c-modal-btns button:disabled { border: 1px solid #D5D5D5; color: #D5D5D5; background-color: #ffffff; }
 .c-modal-content { margin: 20px 40px; padding: 4px 0; line-height: 20px; }
 .c-modal-content-suc { background: url("../img/modal-suc.png") no-repeat; padding-left: 48px; }
@@ -67,6 +67,7 @@ input[type=checkbox]:checked { background-position: -16px 0; }
 .btn-border-min { min-width: 80px; height: 24px; line-height: 22px; font-size: 12px; }
 .btn-more { width: 152px; height: 32px; line-height: 30px; color: #333333; }
 .btn-size1 { width: 88px; height: 32px; line-height: 30px; }
+.btn-size2 { width: 108px; height: 32px; line-height: 30px; font-size: 12px; }
 
 /* 输入框 */
 .ip-text { height: 32px; border: 1px solid #D5D5D5; line-height: 30px; font-size: 12px; padding: 0 10px; background-color: #ffffff; }
@@ -80,6 +81,10 @@ input[type=checkbox]:checked { background-position: -16px 0; }
 .cSelects .cSelects-item { height: 24px; border: 1px solid #D5D5D5; line-height: 22px; padding: 0 22px 0 8px; font-size: 12px; background: url("../img/arrow4.png") no-repeat; background-position: calc(100% - 10px) center; background-position: -webkit-calc(100% - 10px) center; background-color: #ffffff; }
 .cSelects .cSelects-item2 { height: 40px; border: 1px solid #D5D5D5; line-height: 38px; padding: 0 22px 0 8px; font-size: 14px; background: url("../img/arrow4.png") no-repeat; background-position: calc(100% - 10px) center; background-position: -webkit-calc(100% - 10px) center; background-color: #ffffff; }
 .cSelects select { width: 100%; height: 100%; position: absolute; top: 0; left: 0; opacity: 0; }
+
+/* switch */
+.switch { width: 42px; height: 22px; background: url('../img/setting/switch.png') no-repeat; cursor: pointer; }
+.switch-check { background-image: url("../img/setting/switch-check.png") }
 
 /* tag */
 .c-tag { height: 24px; border: 1px solid #D5D5D5; display: inline-block; line-height: 22px; padding: 0 10px; color: #999999; background-color: #ffffff; }

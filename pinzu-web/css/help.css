@@ -1,0 +1,5 @@
+.p-menu { height: 400px; }
+
+.ques-list li { margin-bottom: 40px; }
+.ques-list li div { font-weight: bold; margin-bottom: 10px; line-height: 20px; }
+.ques-list li p { color: #999999; line-height: 20px; }

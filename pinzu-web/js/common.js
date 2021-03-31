@@ -130,3 +130,4 @@ $(".textarea textarea").on('input', function () {
 	var val = $(this).val()
 	$(this).parents('.textarea').find('.curLen').html(val.length)
 })
+

@@ -20,3 +20,30 @@
 .pay-result p { width: 620px; margin: 0 auto 20px auto; color: #999999; text-align: center; }
 .pay-result div { text-align: center; }
 .pay-result div a { width: 88px; margin: 0 3px; }
+
+
+.bind-frame .line1 { float: left; }
+.bind-frame .btn-border { width: 92px; height: 32px; line-height: 30px; }
+
+.bind-frame .line2 { float: right; margin-top: 20px; }
+.bind-frame .line2 .item { float: left; }
+.bind-frame .line2 .item .infos { overflow: hidden; }
+.bind-frame .line2 .item .infos .imgs { width: 60px; height: 60px; border-radius: 2px; margin-right: 10px; float: left; }
+.bind-frame .line2 .item .infos p { font-size: 12px; margin-bottom: 5px; }
+
+.addr-list { margin: 20px -10px -20px -10px;  }
+.addr-list .addr-item { float: left; margin: 0 10px 20px 10px; }
+.addr-item { width: 285px; height: 150px; padding: 10px; position: relative; border: 1px solid #D5D5D5; }
+.addr-item.active { border-color: #FE322B; background: url("../img/icon-check.png") no-repeat right bottom; }
+.addr-item:before { content: '默认地址'; width: 56px; height: 20px; line-height: 20px; text-align: center; background-color: rgba(254, 50, 43, 0.6); font-size: 12px; color: #ffffff; position: absolute; top: 10px; right: 10px; display: none; }
+.addr-item:hover:before { display: block; }
+.addr-item.active:before { background-color: #FE322B; display: block; }
+.addr-item .line { padding: 0 0 5px 26px; background-repeat: no-repeat; background-position: 0 2px; border-bottom: 1px solid #D5D5D5; margin-bottom: 5px; }
+.addr-item .icon1 { background-image: url("../img/setting/icon6.png") }
+.addr-item .icon2 { background-image: url("../img/setting/icon7.png") }
+.addr-item .icon3 { background-image: url("../img/setting/icon8.png"); border-bottom: none; }
+.addr-item .btns { padding-right: 24px; margin-top: 10px; text-align: right; }
+.addr-item .btns a,.addr-item .btns button { width: 48px; height: 24px; line-height: 23px; border-radius: 2px; }
+
+.form-addr { margin: 0; }
+.form-addr .ip-text2 { width: 240px; }

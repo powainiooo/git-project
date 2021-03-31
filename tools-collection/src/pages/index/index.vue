@@ -1,69 +1,91 @@
+<style scoped>
+.index-banner { width: 100%; height: 300px; }
+.index-banner img { width: 100%; height: 300px; }
+.title { margin: 32px 0 62px 0; font-size: 36px; font-weight: bold; }
+.title img { width: 34px; margin-left: 20px; }
+
+.tool-item2 { width: 212px; text-align: center; }
+.tool-item2 img { width: 212px; height: 294px; margin-bottom: 30px; }
+</style>
+
 <template>
-  <div @click="clickHandle">
+  <div class="container">
+    <swiper class="index-banner"
+            autoplay
+            indicator-dots
+            indicator-active-color="#ffffff">
+      <swiper-item>
+        <view class="swiper-item"><img src="/static/images/img/img1.png" mode="aspectFill" /></view>
+      </swiper-item>
+      <swiper-item>
+        <view class="swiper-item"><img src="/static/images/img/img1.png" mode="aspectFill" /></view>
+      </swiper-item>
+      <swiper-item>
+        <view class="swiper-item"><img src="/static/images/img/img1.png" mode="aspectFill" /></view>
+      </swiper-item>
+    </swiper>
 
-    <div class="userinfo" @click="bindViewTap">
-      <img class="userinfo-avatar" v-if="userInfo.avatarUrl" :src="userInfo.avatarUrl" background-size="cover" />
-      <img class="userinfo-avatar" src="/static/images/user.png" background-size="cover" />
+    <div class="ml30 mr30">
+      <div class="title acenter">
+        <span>今日推荐</span>
+        <img src="/static/images/tuijian.png" mode="widthFix" />
+      </div>
 
-      <div class="userinfo-nickname">
-        <card :text="userInfo.nickName"></card>
+      <div class="between mb40">
+        <a href="#" class="tool-item">
+          <img src="/static/images/img/icon1.png" mode="aspectFill" />
+          <div>汇率转换</div>
+        </a>
+        <a href="#" class="tool-item">
+          <img src="/static/images/img/icon1.png" mode="aspectFill" />
+          <div>汇率转换</div>
+        </a>
+        <a href="#" class="tool-item">
+          <img src="/static/images/img/icon1.png" mode="aspectFill" />
+          <div>汇率转换</div>
+        </a>
+        <a href="#" class="tool-item">
+          <img src="/static/images/img/icon1.png" mode="aspectFill" />
+          <div>汇率转换</div>
+        </a>
+        <a href="#" class="tool-item">
+          <img src="/static/images/img/icon1.png" mode="aspectFill" />
+          <div>汇率转换</div>
+        </a>
+      </div>
+
+      <div class="between">
+        <a href="#" class="tool-item2">
+          <img src="/static/images/img/img2.png" mode="aspectFill" />
+          <div>汇率转换</div>
+        </a>
+        <a href="#" class="tool-item2">
+          <img src="/static/images/img/img2.png" mode="aspectFill" />
+          <div>汇率转换</div>
+        </a>
+        <a href="#" class="tool-item2">
+          <img src="/static/images/img/img2.png" mode="aspectFill" />
+          <div>汇率转换</div>
+        </a>
       </div>
     </div>
 
-    <div class="usermotto">
-      <div class="user-motto">
-        <card :text="motto"></card>
-      </div>
-    </div>
-
-    <form class="form-container">
-      <input type="text" class="form-control" :value="motto" placeholder="v-model" />
-      <input type="text" class="form-control" v-model="motto" placeholder="v-model" />
-      <input type="text" class="form-control" v-model.lazy="motto" placeholder="v-model.lazy" />
-    </form>
-
-    <a href="/pages/counter/main" class="counter">去往Vuex示例页面</a>
-
-    <div class="all">
-        <div class="left">
-        </div>
-        <div class="right">
-        </div>
-    </div>
+    <c-footer />
   </div>
 </template>
 
 <script>
-import card from '@/components/card'
+import cFooter from '@/components/footer1'
 
 export default {
-  data () {
-    return {
-      motto: 'Hello miniprograme',
-      userInfo: {
-        nickName: 'mpvue',
-        avatarUrl: 'http://mpvue.com/assets/logo.png'
-      }
-    }
-  },
-
   components: {
-    card
+    cFooter
+  },
+  data () {
+    return {}
   },
 
   methods: {
-    bindViewTap () {
-      const url = '../logs/main'
-      if (mpvuePlatform === 'wx') {
-        mpvue.switchTab({ url })
-      } else {
-        mpvue.navigateTo({ url })
-      }
-    },
-    clickHandle (ev) {
-      console.log('clickHandle:', ev)
-      // throw {message: 'custom test'}
-    }
   },
 
   created () {
@@ -71,56 +93,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.userinfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
-  border-radius: 50%;
-}
-
-.userinfo-nickname {
-  color: #aaa;
-}
-
-.usermotto {
-  margin-top: 150px;
-}
-
-.form-control {
-  display: block;
-  padding: 0 12px;
-  margin-bottom: 5px;
-  border: 1px solid #ccc;
-}
-.all{
-  width:7.5rem;
-  height:1rem;
-  background-color:blue;
-}
-.all:after{
-  display:block;
-  content:'';
-  clear:both;
-}
-.left{
-  float:left;
-  width:3rem;
-  height:1rem;
-  background-color:red;
-}
-
-.right{
-  float:left;
-  width:4.5rem;
-  height:1rem;
-  background-color:green;
-}
-</style>

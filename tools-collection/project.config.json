@@ -82,6 +82,30 @@
           "name": "我的收藏",
           "pathName": "pages/collection/main",
           "query": ""
+        },
+        {
+          "id": -1,
+          "name": "我的足迹",
+          "pathName": "pages/footprint/main",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "打赏记录",
+          "pathName": "pages/reward/main",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "友情链接",
+          "pathName": "pages/links/main",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "建议反馈",
+          "pathName": "pages/feedback/main",
+          "query": ""
         }
       ]
     }

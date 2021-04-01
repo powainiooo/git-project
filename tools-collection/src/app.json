@@ -1,5 +1,9 @@
 {
   "pages": [
+    "pages/feedback/main",
+    "pages/links/main",
+    "pages/reward/main",
+    "pages/footprint/main",
     "pages/collection/main",
     "pages/mine/main",
     "pages/search/main",

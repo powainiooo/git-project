@@ -4,11 +4,11 @@
 
 <template>
   <div>
-    <div class="top-line"></div>
+    <div class="hr20"></div>
     <div class="tool-list mt70">
       <a href="#" class="tool-item">
         <img src="/static/images/img/icon1.png" mode="aspectFill" />
-        <div>汇率转换换</div>
+        <div>汇率转换换换换</div>
       </a>
       <a href="#" class="tool-item">
         <img src="/static/images/img/icon1.png" mode="aspectFill" />

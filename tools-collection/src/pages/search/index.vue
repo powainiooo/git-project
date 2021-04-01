@@ -8,7 +8,7 @@
 
 <template>
   <div class="container">
-    <div class="top-line"></div>
+    <div class="hr20"></div>
     <div class="mt20 mb80">
       <c-search />
     </div>

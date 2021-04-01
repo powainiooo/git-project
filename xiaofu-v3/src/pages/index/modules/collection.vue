@@ -39,7 +39,7 @@
      hover-class="hscale"
      hover-stay-time="10"
      @click="toDetail">
-  <img :src="record.image" />
+  <img :src="record.image" mode="aspectFill" />
   <h3>
     <p class="en">{{record.name}}</p>
     <p>{{record.intro}}</p>

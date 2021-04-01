@@ -52,7 +52,38 @@
       "list": []
     },
     "miniprogram": {
-      "list": []
+      "list": [
+        {
+          "id": -1,
+          "name": "首页",
+          "pathName": "pages/index/main",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "工具分类",
+          "pathName": "pages/class/main",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "搜索工具",
+          "pathName": "pages/search/main",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "个人中心",
+          "pathName": "pages/mine/main",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "我的收藏",
+          "pathName": "pages/collection/main",
+          "query": ""
+        }
+      ]
     }
   }
 }

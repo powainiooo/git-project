@@ -58,7 +58,10 @@
         <img :src="record.logo" />
         <span>{{record.name}}</span>
       </div>
-      <button class="btn">{{record.phone}}</button>
+      <button class="btn"
+              hover-class="hscale"
+              hover-stay-time="10"
+              @click="makePhone">{{record.phone}}</button>
     </div>
     <div class="line2">
       <div v-for="item in list" :key="id">
@@ -100,6 +103,11 @@ export default {
     toDetail () {
       mpvue.navigateTo({
         url: `/pages/activity/main?id=${this.record.id}`
+      })
+    },
+    makePhone () {
+      mpvue.makePhoneCall({
+        phoneNumber: this.record.phone
       })
     }
   }

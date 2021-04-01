@@ -15,7 +15,7 @@
 <template>
 <div class="c-header">
   <div class="c-header-bar" :class="{'c-header-bar-shadow': showMenuBtn}" :style="{'background-color': bgColor}">
-    <img :src="'/static/images/common/' + logo + '.png'" class="logo" />
+    <img :src="'/static/images/common/' + logo + '.png'" class="logo" @click="toIndex" />
     <div class="operates" v-if="!onlyLogo">
       <!--   跳过   -->
       <div class="c-cont-frame" v-if="showSkip" @click="stopCount">
@@ -29,7 +29,7 @@
       </div>
       </picker>
       <button class="btn" v-if="showMenuBtn" @click="openMenu"><img src="/static/images/common/menu.png" /></button>
-      <button class="btn" v-if="showStarBtn"><img src="/static/images/common/star-select.png" style="width: 42rpx; height: 40rpx;" /></button>
+      <button class="btn" v-if="showStarBtn" @click="toStar"><img src="/static/images/common/star-select.png" style="width: 42rpx; height: 40rpx;" /></button>
       <button class="btn" v-if="showCloseBtn" @click="handleClose"><img src="/static/images/common/close.png" /></button>
       <button class="btn" v-if="showShareBtn"><img src="/static/images/common/share.png" /></button>
     </div>
@@ -92,11 +92,13 @@ export default {
       switch (status) {
         case '':
           this.showMenuBtn = true
+          this.showCity = true
           this.showCloseBtn = false
           this.showMenus = false
           break
         case 'menu':
           this.showMenuBtn = false
+          this.showCity = false
           this.showCloseBtn = true
           this.showMenus = true
           break
@@ -186,6 +188,16 @@ export default {
       console.log('over')
       clearInterval(this.t)
       this.$emit('skipDone')
+    },
+    toIndex () {
+      mpvue.reLaunch({
+        url: '/pages/index/main'
+      })
+    },
+    toStar () {
+      mpvue.navigateTo({
+        url: '/pages/leesStar/main'
+      })
     }
   }
 }

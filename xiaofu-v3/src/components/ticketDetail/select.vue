@@ -6,7 +6,7 @@
 </style>
 
 <template>
-<div class="c-ticket-information" style="margin-bottom: 150rpx">
+<div class="c-ticket-information" style="margin-bottom: 200rpx">
   <div class="c-ticket-title"><span>Select</span>选择票种、张数</div>
   <ul class="form-list">
     <li v-for="(item, index) in list" :key="id">

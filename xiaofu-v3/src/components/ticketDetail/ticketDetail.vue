@@ -24,6 +24,7 @@
   width: 700px;
   height: 100px;
   display: flex;
+  justify-content: space-between;;
   position: fixed;
   top: 130px;
   left: 25px;
@@ -35,7 +36,7 @@
   transition: all .5s cubic-bezier(.3,.79,.41,.91);
 }
 .c-ticket-operates-bottom {
-  top: calc(100vh - 130px);
+  top: calc(100vh - 170px);
   background-color: #ffffff;
 }
 .c-ticket-operates div {

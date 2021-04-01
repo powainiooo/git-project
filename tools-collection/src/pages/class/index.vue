@@ -14,8 +14,6 @@
 
 .class-list { margin-left: 180px; width: 570px; }
 .class-list h3 { margin: 0 0 60px 38px; font-size: 28px; }
-.class-list .list { display: flex; flex-wrap: wrap; }
-.class-list .list .tool-item { width: 33.33%; margin-bottom: 80px; }
 </style>
 
 <template>
@@ -33,7 +31,7 @@
       </ul>
       <div class="class-list">
         <h3>常用分类</h3>
-        <div class="list">
+        <div class="tool-list">
           <a href="#" class="tool-item">
             <img src="/static/images/img/icon1.png" mode="aspectFill" />
             <div>汇率转换</div>

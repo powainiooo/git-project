@@ -99,14 +99,20 @@
     <h3>票务合作<span>Ticketing cooperation</span></h3>
     <div>
       <img src="/static/images/common/icon-wechat.png" />
-      <button>{{wx1}}</button>
+      <button
+        hover-class="hscale"
+        hover-stay-time="10"
+        @click="doCopy(wx1)">{{wx1}}</button>
     </div>
   </div>
   <div class="contact">
     <h3>售后及服务<span>After sales & service</span></h3>
     <div>
       <img src="/static/images/common/icon-wechat.png" />
-      <button>{{wx2}}</button>
+      <button
+        hover-class="hscale"
+        hover-stay-time="10"
+        @click="doCopy(wx2)">{{wx2}}</button>
     </div>
   </div>
   </template>
@@ -135,6 +141,16 @@ export default {
   },
 
   methods: {
+    doCopy (text) {
+      mpvue.setClipboardData({
+        data: text,
+        success (res) {
+          mpvue.showToast({
+            title: '复制成功'
+          })
+        }
+      })
+    }
   },
 
   onLoad (option) {

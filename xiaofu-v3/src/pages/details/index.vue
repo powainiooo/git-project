@@ -7,7 +7,6 @@
   <c-header
     ref="header"
     @close="handleClose" />
-  {{hasData}}
   <c-ticket-detail v-if="hasData"
                    ref="detail"
                    @toggle="detailChange"
@@ -63,6 +62,7 @@ export default {
     this.$refs.header.originStatus = 'ticketDetail'
   },
   onLoad (options) {
+    Object.assign(this.$data, this.$options.data())
     // let app = getApp()
     this.id = options.id || 15
     this.getData()

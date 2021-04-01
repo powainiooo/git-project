@@ -1,5 +1,5 @@
 <style scoped>
-.index-container { margin: 260px 25px 50px 25px; display: flex; flex-wrap: wrap; justify-content: space-between; }
+.index-container { margin: 260px 25px 50px 25px; display: flex; flex-wrap: wrap; justify-content: space-between; overflow: hidden; }
 .item-small { width: 340px; margin-bottom: 20px; }
 .item-large { width: 100%; margin-bottom: 20px; }
 </style>

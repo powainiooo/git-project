@@ -105,7 +105,7 @@
     <img :src="record.logo" class="logo" v-if="size === 'large'" />
   </div>
   <div class="c-ticket-imgs">
-    <img :src="record.cover_image" />
+    <img :src="record.cover_image" mode="aspectFill" />
   </div>
   <img src="/static/images/common/flip.png" class="c-ticket-flip" />
   <img src="/static/images/common/star.png" class="c-ticket-star" v-if="record.type === 'recTicket'" />

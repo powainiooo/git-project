@@ -3,7 +3,7 @@
 .enter-banner a h3 { font-size: 18px; line-height: 25px; margin-top: 10px; margin-bottom: 5px; background-image: url("../img/arrow12.png"); background-repeat: no-repeat; background-position: 156px 7px; }
 .enter-banner a p { font-size: 14px; line-height: 20px; }
 
-.progress { height: 163px; background-color: #FE6A5A; text-align: center; padding-top: 40px; margin-bottom: 60px; }
+.progress { height: 163px; background-color: #FE6A5A; text-align: center; margin-bottom: 60px; }
 
 .enter-titls { margin-bottom: 60px; text-align: center; }
 .enter-titls h2 { font-size: 30px; line-height: 42px; margin-bottom: 20px; }

@@ -1,5 +1,8 @@
 {
   "pages": [
+    "pages/collection/main",
+    "pages/mine/main",
+    "pages/search/main",
     "pages/class/main",
     "pages/index/main",
     "pages/logs/main"

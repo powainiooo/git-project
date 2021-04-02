@@ -1,5 +1,12 @@
 {
   "pages": [
+    "pages/trash/list/main",
+    "pages/trash/index/main",
+    "pages/uppercase/main",
+    "pages/qrcode/module/main",
+    "pages/qrcode/diy/main",
+    "pages/qrcode/index/main",
+    "pages/huilv/main",
     "pages/feedback/main",
     "pages/links/main",
     "pages/reward/main",

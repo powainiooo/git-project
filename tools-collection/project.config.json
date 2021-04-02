@@ -106,6 +106,48 @@
           "name": "建议反馈",
           "pathName": "pages/feedback/main",
           "query": ""
+        },
+        {
+          "id": -1,
+          "name": "汇率换算",
+          "pathName": "pages/huilv/main",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "生成二维码",
+          "pathName": "pages/qrcode/index/main",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "自定义二维码",
+          "pathName": "pages/qrcode/diy/main",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "模板制作二维码",
+          "pathName": "pages/qrcode/module/main",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "金额转大写",
+          "pathName": "pages/uppercase/main",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "垃圾分类",
+          "pathName": "pages/trash/index/main",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "可回收物",
+          "pathName": "pages/trash/list/main",
+          "query": ""
         }
       ]
     }

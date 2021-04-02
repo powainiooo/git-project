@@ -81,6 +81,8 @@ hr { border-top: 1rpx solid #D5D5D5; }
 .w48 { width: 48rpx; }
 .w50 { width: 50rpx; }
 
+.w100 { width: 100%; }
+
 /*边距*/
 .mt5{ margin-top: 5rpx;}
 .mt10{ margin-top: 10rpx;}

@@ -1,5 +1,13 @@
 {
   "pages": [
+    "pages/antonym/main",
+    "pages/idiom/main",
+    "pages/dictionary/main",
+    "pages/idQuery/main",
+    "pages/phoneQuery/main",
+    "pages/calendar/main",
+    "pages/weather/city/main",
+    "pages/weather/index/main",
     "pages/trash/list/main",
     "pages/trash/index/main",
     "pages/uppercase/main",

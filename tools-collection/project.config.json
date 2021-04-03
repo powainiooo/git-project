@@ -148,6 +148,54 @@
           "name": "可回收物",
           "pathName": "pages/trash/list/main",
           "query": ""
+        },
+        {
+          "id": -1,
+          "name": "天气预报",
+          "pathName": "pages/weather/index/main",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "选择城市",
+          "pathName": "pages/weather/city/main",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "万年历",
+          "pathName": "pages/calendar/main",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "手机号码查询",
+          "pathName": "pages/phoneQuery/main",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "身份证号码查询",
+          "pathName": "pages/idQuery/main",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "新华字典",
+          "pathName": "pages/dictionary/main",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "成语词典",
+          "pathName": "pages/idiom/main",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "近反义词查询",
+          "pathName": "pages/antonym/main",
+          "query": ""
         }
       ]
     }

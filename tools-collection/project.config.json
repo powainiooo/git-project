@@ -196,6 +196,132 @@
           "name": "近反义词查询",
           "pathName": "pages/antonym/main",
           "query": ""
+        },
+        {
+          "id": -1,
+          "name": "唐诗三百首",
+          "pathName": "pages/tangshi/list/main",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "精选宋词",
+          "pathName": "pages/songci/list/main",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "精选元曲",
+          "pathName": "pages/yuanqu/list/main",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "成语典故",
+          "pathName": "pages/allusion/main",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "脑筋急转弯",
+          "pathName": "pages/brainteasers/main",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "古籍名句",
+          "pathName": "pages/mingju/main",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "励志名言",
+          "pathName": "pages/mingyan/main",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "每日英语",
+          "pathName": "pages/english/main",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "谜语大全",
+          "pathName": "pages/riddle/main",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "故事大全",
+          "pathName": "pages/story/main",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "今日油价",
+          "pathName": "pages/oil/main",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "星座运势",
+          "pathName": "pages/constellation/main",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "星座配对",
+          "pathName": "pages/consPair/main",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "生肖配对",
+          "pathName": "pages/shengxiao/main",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "周公解梦",
+          "pathName": "pages/jiemeng/main",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "菜谱查询",
+          "pathName": "pages/caipu/main",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "药品说明书",
+          "pathName": "pages/yaopin/main",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "中药大全",
+          "pathName": "pages/zhongyao/main",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "宠物大全",
+          "pathName": "pages/pets/main",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "姓氏起源",
+          "pathName": "pages/names/main",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "生活小窍门",
+          "pathName": "pages/tips/main",
+          "query": ""
         }
       ]
     }

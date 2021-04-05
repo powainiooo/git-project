@@ -322,6 +322,12 @@
           "name": "生活小窍门",
           "pathName": "pages/tips/main",
           "query": ""
+        },
+        {
+          "id": -1,
+          "name": "BMI标准体重",
+          "pathName": "pages/BMI/main",
+          "query": ""
         }
       ]
     }

@@ -17,7 +17,7 @@
       @change="changeStatus"
       @search="handleSearch" />
 
-    <c-ads :record="coverData" v-if="coverData && showAd" />
+    <c-ads ref="ad" :record="coverData" v-if="coverData && showAd" />
 
     <div class="index-container" v-if="isSearch">
       <div v-for="item in listData"
@@ -98,7 +98,8 @@ export default {
       this.$refs.header.showSkip = false
       this.$refs.header.showCity = true
       this.$refs.header.showMenuBtn = true
-      store.commit('SET_ADSTATE', false)
+      // store.commit('SET_ADSTATE', false)
+      this.$refs.ad.hide()
     },
     changeStatus (e) {
       console.log('changeStatus', e)

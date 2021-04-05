@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/BMI/main",
     "pages/tips/main",
     "pages/names/main",
     "pages/pets/main",

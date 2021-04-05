@@ -11,7 +11,10 @@
   <ul class="form-list">
     <li v-for="(item, index) in list" :key="id">
       <div class="rank"><img :src="'/static/images/number/'+ (index + 1) +'.png'" mode="heightFix" /></div>
-      <div class="content" :class="{'active': item.id === priceId}">
+      <div class="content"
+           :class="{'active': item.id === priceId}"
+           hover-class="hscale"
+           hover-stay-time="10">
         <input placeholder-style="color: #fff;" v-model="item.name" disabled @click="selectTicket(item)" />
         <picker :range="numsArr" @change="numsChange" v-if="item.id === priceId">
           <button style="width: 134rpx">

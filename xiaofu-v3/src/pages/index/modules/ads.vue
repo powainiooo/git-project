@@ -1,5 +1,11 @@
 <style scoped>
 .ad-frame { width: 100%; position: fixed; top: 100px; bottom: 0; left: 0; z-index: 1000; }
+.ad-frame-hide { animation: fadeOut 1s linear both; }
+@keyframes fadeOut {
+  0% { opacity: 1; }
+  99% { opacity: 0; }
+  100% { opacity: 0; display: none; }
+}
 .ad-frame .pic { width: 100%; height: 100%; }
 .ad-frame .infos { width: 100%; height: 130px; background-color: rgba(0, 0, 0, 0.4); padding: 0 36px; display: flex; justify-content: space-between; align-items: center; position: absolute; top: 0; left: 0; }
 .ad-frame .infos .name h3 { font-size: 53px; font-family: HelveB; line-height: 64px; color: #ffffff; }
@@ -8,7 +14,10 @@
 </style>
 
 <template>
-<div class="ad-frame" @click="toDetail">
+<div class="ad-frame"
+     :class="{'ad-frame-hide': !show}"
+     @click="toDetail"
+     @animationend="animationend">
   <img :src="record.cover_image" mode="aspectFill" class="pic" />
   <div class="infos">
     <div class="name">
@@ -22,6 +31,7 @@
 
 <script type='es6'>
 import tkInfo from '@/components/tkInfo'
+import store from '@/store'
 export default {
 	name: 'app',
   props: {
@@ -43,13 +53,23 @@ export default {
     }
   },
 	data() {
-		return {}
+		return {
+		  show: true
+    }
 	},
 	methods: {
     toDetail () {
       mpvue.navigateTo({
         url: `/pages/details/main?id=${this.record.id}`
       })
+    },
+    hide () {
+      console.log('hide ad')
+      this.show = false
+    },
+    animationend () {
+      console.log('animationend')
+      store.commit('SET_ADSTATE', false)
     }
   }
 }

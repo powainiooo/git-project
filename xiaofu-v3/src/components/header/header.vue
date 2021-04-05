@@ -23,15 +23,18 @@
         <span class="label">跳过</span>
       </div>
       <picker @change="cityChange" :range="addrList" range-key="name">
-      <div class="c-cont-frame" v-if="showCity">
+      <div class="c-cont-frame"
+           v-if="showCity"
+           hover-class="hscale"
+           hover-stay-time="10">
         <img src="/static/images/common/dot.png" class="dot" />
         <span class="label">{{cityName}}</span>
       </div>
       </picker>
-      <button class="btn" v-if="showMenuBtn" @click="openMenu"><img src="/static/images/common/menu.png" /></button>
-      <button class="btn" v-if="showStarBtn" @click="toStar"><img src="/static/images/common/star-select.png" style="width: 42rpx; height: 40rpx;" /></button>
-      <button class="btn" v-if="showCloseBtn" @click="handleClose"><img src="/static/images/common/close.png" /></button>
-      <button class="btn" v-if="showShareBtn"><img src="/static/images/common/share.png" /></button>
+      <button class="btn" v-if="showMenuBtn" @click="openMenu" hover-class="hscale" hover-stay-time="10"><img src="/static/images/common/menu.png" /></button>
+      <button class="btn" v-if="showStarBtn" @click="toStar" hover-class="hscale" hover-stay-time="10"><img src="/static/images/common/star-select.png" style="width: 42rpx; height: 40rpx;" /></button>
+      <button class="btn" v-if="showCloseBtn" @click="handleClose" hover-class="hscale" hover-stay-time="10"><img src="/static/images/common/close.png" /></button>
+      <button class="btn" v-if="showShareBtn" hover-class="hscale" hover-stay-time="10"><img src="/static/images/common/share.png" /></button>
     </div>
   </div>
   <c-menu :show="showMenus" />
@@ -59,10 +62,7 @@ export default {
   },
   computed: {
     addrList () {
-      const list = [
-        { id: '', name: '全部' }
-      ]
-      return list.concat(store.state.configData.citydata || [])
+      return store.state.configData.citydata || []
     }
   },
   components: {
@@ -80,7 +80,7 @@ export default {
       originStatus: '',
       pageStatus: '',
       cityName: '全部',
-      cityId: '',
+      cityId: 1,
       time: 3000,
       t: 0
     }

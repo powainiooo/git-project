@@ -32,7 +32,7 @@
            @focus="showMask = true"
            @blur="showMask = false"
            @confirm="handleSearch"/>
-    <button @click="openCalendar"><img src="/static/images/common/date.png" /></button>
+    <button @click="openCalendar" hover-class="hscale" hover-stay-time="10"><img src="/static/images/common/date.png" /></button>
   </div>
   <div class="c-search-bar" v-if="isSearch">
     <div class="c-tag" v-if="keyword !== ''">{{keyword}}</div>

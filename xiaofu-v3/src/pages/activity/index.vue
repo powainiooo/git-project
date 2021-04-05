@@ -100,11 +100,16 @@
         </div>
       </div>
       <div class="line2">
-        <div class="address">
+        <div class="address"
+             hover-class="hscale"
+             hover-stay-time="10">
           <img src="/static/images/common/dot.png" />
           <span>{{record.address}}</span>
         </div>
-        <button class="btn" @click="toComment">查看评价</button>
+        <button class="btn"
+                @click="toComment"
+                hover-class="hscale"
+                hover-stay-time="10">查看评价</button>
       </div>
       <div class="list-container">
         <div v-for="(item, index) in list"

@@ -1,6 +1,6 @@
 <style scoped>
 .banner { width: 100%; height: 588px; margin-top: 100px; }
-.lees-page { margin: -488px 25px 150px 25px; position: relative; z-index: 5; }
+.lees-page { margin: -488px 25px 25px 25px; padding-bottom: 125px; position: relative; z-index: 5; }
 .lees-page .lees-star { width: 318px; height: 160px; margin-bottom: 76px; margin-left: 20px;  }
 </style>
 

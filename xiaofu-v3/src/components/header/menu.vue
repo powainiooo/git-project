@@ -74,7 +74,9 @@
       </div>
       <div>售后声明<span>After sales</span></div>
     </a>
-    <a href="/pages/illustrate/main?source=contact">
+    <a href="/pages/illustrate/main?source=contact"
+       hover-class="hscale"
+       hover-stay-time="10">
       <div class="icons">
         <img src="/static/images/menu/icon4.png" style="width: 44rpx;" mode="widthFix" />
       </div>

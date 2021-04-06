@@ -1,4 +1,0 @@
-/* pages/tuihuan/index.wxss */
-.rInfo {
-   max-width:500rpx;
-}

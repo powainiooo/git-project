@@ -1,6 +1,0 @@
-.rent-swiper { margin-bottom: 40px; margin-top: 40px; }
-.rent-swiper .swiper-pagination-bullet { background-color: #D5D5D5; opacity: 1; }
-.rent-swiper .index-bullet-active { background-color: #ffffff; }
-.rent-swiper .swiper-button-next, .rent-swiper .swiper-button-prev { width: 60px; height: 60px; margin-top: -30px; background-size: 100% 100%; }
-.rent-swiper .swiper-button-next {  background-image: url("../img/arrow9.png"); }
-.rent-swiper .swiper-button-prev { background-image: url("../img/arrow8.png"); }

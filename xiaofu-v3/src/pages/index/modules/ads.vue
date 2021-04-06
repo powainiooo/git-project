@@ -1,16 +1,24 @@
 <style scoped>
-.ad-frame { width: 100%; position: fixed; top: 100px; bottom: 0; left: 0; z-index: 1000; }
-.ad-frame-hide { animation: fadeOut 1s linear both; }
-@keyframes fadeOut {
-  0% { opacity: 1; }
-  99% { opacity: 0; }
-  100% { opacity: 0; display: none; }
-}
+.ad-frame { width: 100%; position: fixed; top: 100px; bottom: 0; left: 0; z-index: 1000; background-color: #ffffff; }
+.ad-frame .ad-container { width: 100%; height: 100%; }
 .ad-frame .pic { width: 100%; height: 100%; }
 .ad-frame .infos { width: 100%; height: 130px; background-color: rgba(0, 0, 0, 0.4); padding: 0 36px; display: flex; justify-content: space-between; align-items: center; position: absolute; top: 0; left: 0; }
 .ad-frame .infos .name h3 { font-size: 53px; font-family: HelveB; line-height: 64px; color: #ffffff; }
 .ad-frame .infos .name p { font-size: 20px; font-family: HelveL; line-height: 20px; color: #ffffff; }
 /deep/.ad-frame .infos .c-tk-info { width: auto; margin-right: 50px; }
+.ad-frame-hide { animation: fadeOut .5s linear 1s both; }
+@keyframes fadeOut {
+  0% { opacity: 1; }
+  99% { opacity: 0; }
+  100% { opacity: 0; display: none; }
+}
+.ad-frame-hide .ad-container { animation: fadeOut2 1s linear both }
+@keyframes fadeOut2 {
+  0% { opacity: 1; transform: scale(1) }
+  99% { opacity: 0; transform: scale(1.2) }
+  100% { opacity: 0; transform: scale(1.2); }
+}
+.ad-frame-hide .infos { display: none; }
 </style>
 
 <template>
@@ -18,13 +26,15 @@
      :class="{'ad-frame-hide': !show}"
      @click="toDetail"
      @animationend="animationend">
-  <img :src="record.cover_image" mode="aspectFill" class="pic" />
-  <div class="infos">
-    <div class="name">
-      <h3>{{record.name}}</h3>
-      <p>{{record.organizer_name}}</p>
+  <div class="ad-container">
+    <img :src="record.cover_image" mode="aspectFill" class="pic" />
+    <div class="infos">
+      <div class="name">
+        <h3>{{record.name}}</h3>
+        <p>{{record.organizer_name}}</p>
+      </div>
+      <tk-info :record="date" size="large" />
     </div>
-    <tk-info :record="date" size="large" />
   </div>
 </div>
 </template>
@@ -68,7 +78,6 @@ export default {
       this.show = false
     },
     animationend () {
-      console.log('animationend')
       store.commit('SET_ADSTATE', false)
     }
   }

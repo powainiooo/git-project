@@ -1,7 +1,15 @@
 <style scoped>
-.index-container { margin: 260px 25px 50px 25px; display: flex; flex-wrap: wrap; justify-content: space-between; overflow: hidden; }
+.index-container { margin: 260px 25px 50px 25px; display: flex; flex-wrap: wrap; justify-content: space-between; }
 .item-small { width: 340px; margin-bottom: 20px; }
 .item-large { width: 100%; margin-bottom: 20px; }
+.index-container .item { animation: scaleIn .4s cubic-bezier(.14,.66,.57,1.26) both; }
+.index-container .item:nth-child(1) { animation-delay: .3s; }
+.index-container .item:nth-child(2) { animation-delay: .4s; }
+.index-container .item:nth-child(3) { animation-delay: .5s; }
+.index-container .item:nth-child(4) { animation-delay: .6s; }
+.index-container .item:nth-child(5) { animation-delay: .7s; }
+.index-container .item:nth-child(6) { animation-delay: .8s; }
+.index-container .item:nth-child(7) { animation-delay: .9s; }
 </style>
 
 <template>
@@ -15,32 +23,36 @@
     <c-search
       ref="search"
       @change="changeStatus"
-      @search="handleSearch" />
+      @search="handleSearch" v-if="!showAd" />
 
     <c-ads ref="ad" :record="coverData" v-if="coverData && showAd" />
 
-    <div class="index-container" v-if="isSearch">
-      <div v-for="item in listData"
-           :key="id"
-           class="item-large">
-        <c-ticket :record="item" size="large" />
+    <template v-if="!showAd">
+      <div class="index-container" v-if="isSearch">
+        <div v-for="item in listData"
+             :key="id"
+             class="item-large">
+          <c-ticket :record="item" size="large" />
+        </div>
       </div>
-    </div>
-    <div class="index-container" v-else>
-      <div class="item-small">
-        <c-lees-star />
+      <div class="index-container" v-else>
+        <div class="item item-small">
+          <c-lees-star />
+        </div>
+        <div v-for="(item, index) in listData"
+             :key="index"
+             class="item"
+             :class="{
+               'item-small': item.type === 'normalTicket' || (item.type === 'collection' && index === 0),
+               'item-large': item.type === 'recTicket' || (item.type === 'collection' && index !== 0)
+             }">
+          <c-collection :record="item" v-if="item.type === 'collection'" />
+          <c-ticket :record="item" size="large" v-else-if="item.type === 'recTicket'" />
+          <c-ticket :record="item" v-else-if="item.type === 'normalTicket'" />
+        </div>
       </div>
-      <div v-for="(item, index) in listData"
-           :key="index"
-           :class="{
-             'item-small': item.type === 'normalTicket' || (item.type === 'collection' && index === 0),
-             'item-large': item.type === 'recTicket' || (item.type === 'collection' && index !== 0)
-           }">
-        <c-collection :record="item" v-if="item.type === 'collection'" />
-        <c-ticket :record="item" size="large" v-else-if="item.type === 'recTicket'" />
-        <c-ticket :record="item" v-else-if="item.type === 'normalTicket'" />
-      </div>
-    </div>
+    </template>
+
   </div>
 </template>
 

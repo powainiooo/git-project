@@ -1,5 +1,5 @@
 <style scoped>
-
+.container { margin-top: 100px; }
 </style>
 
 <template>
@@ -7,10 +7,12 @@
   <c-header
     ref="header"
     @close="handleClose" />
-  <c-ticket-detail v-if="hasData"
-                   ref="detail"
-                   @toggle="detailChange"
-                   :record="detailData" />
+  <div class="container">
+    <c-ticket-detail v-if="hasData"
+                     ref="detail"
+                     @toggle="detailChange"
+                     :record="detailData" />
+  </div>
 </div>
 </template>
 

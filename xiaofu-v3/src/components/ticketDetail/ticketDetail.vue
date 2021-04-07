@@ -2,12 +2,7 @@
 .c-ticket-detail {
   width: 100%;
   height: calc(100vh - 100px);
-  position: fixed;
-  top: 100px;
-  left: 0;
-  z-index: 800;
   background-color: #EEEEEF;
-  overflow-y: auto;
 }
 .c-ticket-detail .c-ticket-title {
   margin: 48px 0 28px 38px;
@@ -134,28 +129,40 @@
   font-family: HelveL;
   margin-right: 4px;
 }
+
+.buy-forms { width: 100%; height: 0; transition: height .4s ease-out; position: relative; overflow: hidden; }
+.buy-forms .buys-frame { width: 100%; position: absolute; left: 0; bottom: 0; }
 </style>
 
 <template>
-<div class="c-ticket-detail">
-  <infos ref="infos" :page="page" :record="record"/>
-  <template v-if="page === 'detail'">
+<scroll-view
+  scroll-y
+  scroll-with-animation
+  :scroll-top="scrollTop"
+  @touchend="ontend"
+  @scroll="onScroll"
+  class="c-ticket-detail">
+
+  <div class="buy-forms" :style="{height: (page === 'buy' ? buyHeight : 0) + 'px'}">
+    <div class="buys-frame" id="buyFrame">
+      <information @change="getValue" />
+      <c-select :list="record.price || []" @change="getValue" />
+    </div>
+  </div>
+
+  <infos ref="infos" :record="record"/>
+
   <artist ref="artist" :list="record.artist_list || []" />
   <notice ref="notice" :list="record.notice_list || []" />
   <particulars ref="particulars" :list="record.intro_list || []" />
   <organizers ref="organizers" :record="record.organizer" />
   <recommend ref="recommend" :list="record.recommend_tickets" />
-  </template>
-  <template v-else-if="page === 'buy'">
-  <information @change="getValue" />
-  <c-select :list="record.price || []" @change="getValue" />
-  </template>
 
   <div class="c-ticket-operates" :class="{'c-ticket-operates-bottom': page === 'buy'}">
     <div>260<span>RMB</span></div>
-    <button @click="handleBuy" :disabled="buyDisabled">购买</button>
+    <button @click="handleConfirm" :disabled="buyDisabled">购买</button>
   </div>
-</div>
+</scroll-view>
 </template>
 
 <script type='es6'>
@@ -168,7 +175,6 @@ import recommend from './recommend'
 import information from './information'
 import cSelect from './select'
 import { postAction } from '@/utils/api'
-
 export default {
   name: 'app',
   components: {
@@ -208,45 +214,65 @@ export default {
         price_id: '',
         num: 0
       },
-      cardNo: ''
+      scrollTop: '',
+      cardNo: '',
+      buyHeight: 0
     }
   },
   methods: {
-    handleBuy () {
+    handleConfirm () {
       if (this.page === 'detail') {
-        this.page = 'buy'
-        this.$emit('toggle', this.page)
-      } else if (this.page === 'buy') {
-        const params = {...this.formData}
-        if (params.identity_type === 1) {
-          params.id_card_no = this.cardNo
-        } else {
-          params.passport_no = this.cardNo
-        }
-        params.ticket_id = this.record.id
-        console.log('params', params)
-        postAction('/api/order/create', params).then(res => {
-          const jsapi = res.data
-          mpvue.requestPayment({
-            'timeStamp': jsapi.timeStamp,
-            'nonceStr': jsapi.nonceStr,
-            'package': jsapi.package,
-            'signType': jsapi.signType,
-            'paySign': jsapi.paySign,
-            'success': res => {
-              mpvue.reLaunch({
-                url: '/pages/result/main?result=success'
-              })
-            },
-            'fail': err => {
-              console.log('pay fail', err)
-              mpvue.reLaunch({
-                url: '/pages/result/main?result=fail'
-              })
-            }
+        if (this.buyHeight === 0) {
+          const query = wx.createSelectorQuery()
+          query.select('#buyFrame').boundingClientRect()
+          query.selectViewport().scrollOffset()
+          query.exec(res => {
+            console.log(res)
+            this.buyHeight = res[0].height
+            this.page = 'buy'
+            this.scrollTop = 0
+            this.$emit('toggle', this.page)
           })
-        })
+        } else {
+          this.page = 'buy'
+          this.scrollTop = 0
+          this.$emit('toggle', this.page)
+        }
+
+      } else if (this.page === 'buy') {
+        this.handleBuy()
       }
+    },
+    handleBuy () {
+      const params = {...this.formData}
+      if (params.identity_type === 1) {
+        params.id_card_no = this.cardNo
+      } else {
+        params.passport_no = this.cardNo
+      }
+      params.ticket_id = this.record.id
+      console.log('params', params)
+      postAction('/api/order/create', params).then(res => {
+        const jsapi = res.data
+        mpvue.requestPayment({
+          'timeStamp': jsapi.timeStamp,
+          'nonceStr': jsapi.nonceStr,
+          'package': jsapi.package,
+          'signType': jsapi.signType,
+          'paySign': jsapi.paySign,
+          'success': res => {
+            mpvue.reLaunch({
+              url: '/pages/result/main?result=success'
+            })
+          },
+          'fail': err => {
+            console.log('pay fail', err)
+            mpvue.reLaunch({
+              url: '/pages/result/main?result=fail'
+            })
+          }
+        })
+      })
     },
     backDetail () {
       this.page = 'detail'
@@ -258,8 +284,8 @@ export default {
         this.formData[data.key] = data.value
       }
     },
-    handleConfirm () {
-
+    onScroll (e) {
+      this.scrollTop = ''
     }
   }
 }

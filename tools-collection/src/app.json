@@ -1,5 +1,8 @@
 {
   "pages": [
+    "pages/tax/main",
+    "pages/unit/detail/main",
+    "pages/unit/list/main",
     "pages/BMI/main",
     "pages/tips/main",
     "pages/names/main",

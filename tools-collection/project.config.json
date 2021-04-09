@@ -340,6 +340,24 @@
                "name": "个人所得税查询",
                "pathName": "pages/tax/main",
                "query": ""
+            },
+            {
+               "id": -1,
+               "name": "房贷查询",
+               "pathName": "pages/loan/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "摇色子",
+               "pathName": "pages/dice/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "查找周边场所",
+               "pathName": "pages/search2/main",
+               "query": ""
             }
          ]
       }

@@ -1,5 +1,8 @@
 {
   "pages": [
+    "pages/search2/main",
+    "pages/dice/main",
+    "pages/loan/main",
     "pages/tax/main",
     "pages/unit/detail/main",
     "pages/unit/list/main",

@@ -17,6 +17,7 @@ export default {
 
 .c-39 { color: #393A3C; }
 .c-99 { color: #999999; }
+.c-3d { color: #3D7FC7; }
 .c-link { color: #446CB2; }
 
 .b-f8 { background-color: #F8F8F8; }

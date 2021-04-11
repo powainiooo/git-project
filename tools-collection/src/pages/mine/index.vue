@@ -16,39 +16,44 @@
   <div class="mh100 b-f8">
     <img src="/static/images/bg.png" mode="widthFix" class="bg" />
     <div class="top">
-      <img src="/static/images/avatar.png" class="avatar" />
-      <view class="name">用户名</view>
+      <template v-if="hasUserInfo">
+        <img src="/static/images/avatar.png" class="avatar" />
+        <view class="name">用户名</view>
+      </template>
+      <template v-else>
+      <button class="btn" open-type="getUserInfo" @getuserinfo="getuserinfo">点击登录</button>
+      </template>
     </div>
     <div class="list">
-      <a href="#">
+      <a href="/pages/collection/main">
         <div>
           <img src="/static/images/mine/icon1.png" mode="aspectFill" />
           <span>我的收藏</span>
         </div>
         <img src="/static/images/arrow1.png" class="arrow" mode="widthFix" />
       </a>
-      <a href="#">
+      <a href="/pages/footprint/main">
         <div>
           <img src="/static/images/mine/icon2.png" mode="aspectFill" />
           <span>我的足迹</span>
         </div>
         <img src="/static/images/arrow1.png" class="arrow" mode="widthFix" />
       </a>
-      <a href="#">
+      <a href="/pages/reward/main">
         <div>
           <img src="/static/images/mine/icon3.png" mode="aspectFill" />
           <span>打赏记录</span>
         </div>
         <img src="/static/images/arrow1.png" class="arrow" mode="widthFix" />
       </a>
-      <a href="#">
+      <a href="/pages/links/main">
         <div>
           <img src="/static/images/mine/icon4.png" mode="aspectFill" />
           <span>友情链接</span>
         </div>
         <img src="/static/images/arrow1.png" class="arrow" mode="widthFix" />
       </a>
-      <a href="#">
+      <a href="/pages/feedback/main">
         <div>
           <img src="/static/images/mine/icon5.png" mode="aspectFill" />
           <span>意见反馈</span>
@@ -64,18 +69,49 @@
 
 <script>
 import cFooter from '@/components/footer1'
-import cSearch from '@/components/search'
+import store from '@/store'
+import { postAction } from '@/utils/api'
 
 export default {
   components: {
-    cFooter,
-    cSearch
+    cFooter
   },
-
+  computed: {
+    hasUserInfo () {
+      return store.state.settings['scope.userInfo']
+    }
+  },
   data () {
-    return {}
+    return {
+      userInfo: {}
+    }
   },
-
-  created () {}
+  methods: {
+    getData () {
+      postAction('my_index').then(res => {
+        if (res.code === 1) {
+          this.userInfo = res.data.user_info
+        }
+      })
+    },
+    getuserinfo (e) {
+      console.log(e)
+      const userInfo = e.mp.detail.userInfo
+      postAction('getUserInfo', userInfo).then(res => {
+        if (res.ret === 0) {
+          store.commit('SET_PERSONINFO', userInfo)
+          this.getData()
+          mpvue.getSetting({
+            success: res => {
+              store.commit('SET_SETTING', res.authSetting)
+            }
+          })
+        }
+      })
+    }
+  },
+  onLoad () {
+    this.getData()
+  }
 }
 </script>

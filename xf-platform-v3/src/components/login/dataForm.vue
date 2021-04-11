@@ -51,39 +51,61 @@
       <Form class="flex">
         <div>
           <div class="form">
-            <div class="form-title">企业基本信息</div>
+            <div class="form-title">企业基本信息{{type}}</div>
+            <template v-if="type === '1'">
+
+            </template>
+            <template v-else>
             <FormItem>
-              <Input v-model="formData.usename" placeholder="场地方名称" />
+              <Input v-model="formData.organizer_name" placeholder="场地方名称" v-if="type === '3'" />
             </FormItem>
             <FormItem>
-              <Input v-model="formData.usename" placeholder="公司全称" />
+              <Input v-model="formData.organizer_name" placeholder="活动方名称" v-if="type === '2'" />
             </FormItem>
             <FormItem>
-              <Input v-model="formData.usename" placeholder="公司地址" />
+              <Input v-model="formData.name" placeholder="公司全称" />
             </FormItem>
             <FormItem>
-              <Input v-model="formData.usename" placeholder="负责人姓名" />
+              <Input v-model="formData.address" placeholder="公司地址" />
+            </FormItem>
+            </template>
+            <FormItem>
+              <Input v-model="formData.person" placeholder="负责人姓名" />
             </FormItem>
             <FormItem>
-              <Input v-model="formData.usename" placeholder="负责人身份证号" />
+              <Input v-model="formData.id_card_no" placeholder="负责人身份证号" />
             </FormItem>
             <FormItem>
-              <Input v-model="formData.usename" placeholder="负责人联系电话" />
+              <Input v-model="formData.phone" placeholder="负责人联系电话" />
             </FormItem>
             <FormItem>
-              <verification-code />
+              <Input v-model="vericode.code" placeholder="验证码">
+                <Button slot="append" :disabled="veriBtnDisabled" @click="getCode">{{vericode.btnName}}</Button>
+              </Input>
             </FormItem>
           </div>
         </div>
         <div>
           <div class="form">
             <div class="form-title">上传资料</div>
-            <FormItem>
-              <upload-img>
+            <template v-if="type === '1'">
+              <FormItem>
+                <upload-img v-model="formData.id_card_front_image">
+                  <span slot="title">身份证正面</span>
+                </upload-img>
+              </FormItem>
+              <FormItem>
+                <upload-img v-model="formData.id_card_back_image">
+                  <span slot="title">身份证背面</span>
+                </upload-img>
+              </FormItem>
+            </template>
+            <FormItem v-else>
+              <upload-img v-model="formData.license_image">
                 <span slot="title">企业营业执照</span>
               </upload-img>
             </FormItem>
-            <FormItem>
+            <FormItem v-model="formData.logo">
               <upload-img>
                 <span slot="title">LOGO</span>
               </upload-img>
@@ -100,15 +122,18 @@
               <div class="txt2">图片为白底黑图案形式<br/>LOGO 统一使用 R0 G0 B0 色值</div>
             </li>
           </ul>
-          <hr color="#EEEEEF"/>
-          <Form class="form">
-            <FormItem>
-              <upload-img>
-                <span slot="title">场地照片</span>
-                <span slot="hint">尺寸1125px*600px</span>
-              </upload-img>
-            </FormItem>
-          </Form>
+          <!-- 场地照片 -->
+          <template v-if="type === '3'">
+            <hr color="#EEEEEF"/>
+            <Form class="form">
+              <FormItem>
+                <upload-img>
+                  <span slot="title">场地照片</span>
+                  <span slot="hint">尺寸1125px*600px</span>
+                </upload-img>
+              </FormItem>
+            </Form>
+          </template>
         </div>
       </Form>
     </li>
@@ -118,24 +143,24 @@
         <Form class="form">
           <div class="form-title">银行账户信息</div>
           <FormItem>
-            <Input v-model="formData.usename" placeholder="个人开户名" />
+            <Input v-model="formData.account_name" placeholder="个人开户名" />
           </FormItem>
           <FormItem>
-            <Input v-model="formData.usename" placeholder="身份证号" />
+            <Input v-model="formData.account_id_card_no" placeholder="身份证号" />
           </FormItem>
           <FormItem>
-            <Input v-model="formData.usename" placeholder="预留手机号" />
+            <Input v-model="formData.account_mobile" placeholder="预留手机号" />
           </FormItem>
           <FormItem>
-            <Input v-model="formData.usename" placeholder="个人银行卡号" />
+            <Input v-model="formData.account_card_no" placeholder="个人银行卡号" />
           </FormItem>
           <FormItem>
-            <Select v-model="formData.usename" placeholder="选择银行">
+            <Select v-model="formData.account_bank_id" placeholder="选择银行">
               <Option value="1">银行1</Option>
             </Select>
           </FormItem>
           <FormItem>
-            <Input v-model="formData.usename" placeholder="开户支行" />
+            <Input v-model="formData.account_opening_banke" placeholder="开户支行" />
           </FormItem>
         </Form>
       </div>
@@ -230,15 +255,20 @@
 <script type='es6'>
 import uploadImg from '../uploadImg'
 import alert from './alert'
-import verificationCode from '@/components/verificationCode'
+import vericode from '@/mixin/vericode'
 import formBox from '@/components/formBox'
 export default {
   name: 'app',
+  mixins: [vericode],
   components: {
     uploadImg,
     alert,
-    verificationCode,
     formBox
+  },
+  computed: {
+    type () {
+      return this.$store.state.registerData.type.type
+    }
   },
   data () {
     return {
@@ -251,8 +281,22 @@ export default {
       step: 1,
       countIndex: 10,
       formData: {
-        usename: '',
-        password: ''
+        organizer_name: '',
+        name: '',
+        address: '',
+        person: '',
+        id_card_no: '',
+        phone: '',
+        id_card_front_image: '',
+        id_card_back_image: '',
+        license_image: '',
+        logo: '',
+        account_name: '',
+        account_id_card_no: '',
+        account_mobile: '',
+        account_card_no: '',
+        account_bank_id: '',
+        account_opening_banke: ''
       }
     }
   },

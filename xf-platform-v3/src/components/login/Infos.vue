@@ -44,6 +44,22 @@ export default {
   inject: ['changePage'],
   methods: {
     handleNext () {
+      let type = ''
+      if (this.key1 === '1') { // 企业
+        if (this.key2 === '1') { // 场地方
+          type = '3'
+        } else if (this.key2 === '2') { // 活动方
+          type = '2'
+        }
+      } else if (this.key1 === '2') { // 个人
+        type = '1'
+      }
+      this.$store.commit('SET_REGISTER', {
+        key: 'type',
+        data: {
+          type
+        }
+      })
       this.showBtn = false
       this.changePage('form')
     }

@@ -23,17 +23,17 @@
 
 <template>
 <div class="footer around">
-  <a href="#" :class="{'active': current === 1}">
+  <a href="/pages/index/main" open-type="redirect" :class="{'active': current === 1}">
     <img src="/static/images/footer/icon1.png" mode="aspectFill" class="img1" />
     <img src="/static/images/footer/icon1-active.png" mode="aspectFill" class="img2" />
     <div>首页</div>
   </a>
-  <a href="#" :class="{'active': current === 2}">
+  <a href="/pages/class/main" open-type="redirect" :class="{'active': current === 2}">
     <img src="/static/images/footer/icon2.png" mode="aspectFill" class="img1" />
     <img src="/static/images/footer/icon2-active.png" mode="aspectFill" class="img2" />
     <div>分类</div>
   </a>
-  <a href="#" :class="{'active': current === 3}">
+  <a href="/pages/mine/main" open-type="redirect" :class="{'active': current === 3}">
     <img src="/static/images/footer/icon3.png" mode="aspectFill" class="img1" />
     <img src="/static/images/footer/icon3-active.png" mode="aspectFill" class="img2" />
     <div>我的</div>

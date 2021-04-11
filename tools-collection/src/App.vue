@@ -1,6 +1,44 @@
 <script>
+import config from '@/config'
+import store from '@/store'
+import { promisify } from '@/utils'
+import { doLogin } from '@/utils/api'
+const { tokenKey } = config
+const login = promisify(mpvue.login)
+const getSetting = promisify(mpvue.getSetting)
 export default {
   created () {
+    mpvue.imgSrc = store.state.imgSrc
+    console.log('onlogin1')
+    this.onlogin()
+  },
+  methods: {
+    async onlogin () {
+      console.log('onlogin2')
+      let lastGetCityTime = mpvue.getStorageSync('lastGetCityTime')
+      if (lastGetCityTime === '' || lastGetCityTime === null) {
+        lastGetCityTime = 0
+      }
+      const now = new Date().getTime()
+      const loginKey = mpvue.getStorageSync(tokenKey)
+      if (loginKey === '' || loginKey === null || now > lastGetCityTime + 24 * 60 * 60 * 1000) {
+        const resLogin = await login()
+        console.log('resLogin', resLogin)
+        const resDoLogin = await doLogin({
+          code: resLogin.code
+        })
+        console.log('resDoLogin', resDoLogin)
+        if (resDoLogin.ret === 0) {
+          store.commit('SET_LOGIN_KEY', resDoLogin.data.login_key)
+          mpvue.setStorageSync('lastGetCityTime', now)
+        }
+      } else {
+        store.commit('SET_LOGIN_KEY', loginKey)
+      }
+      const resSetting = await getSetting()
+      console.log('resSetting', resSetting)
+      store.commit('SET_SETTING', resSetting.authSetting)
+    }
   }
 }
 </script>
@@ -87,4 +125,6 @@ button:after { border: none;}
 .blue-box div p { font-size: 18px; color: #666666; line-height: 35px; }
 
 .to-next { height: 90px; padding: 0 32px; display: flex; align-items: center; justify-content: flex-end; font-size: 22px; background-color: #FFFFFF }
+
+.empty { text-align: center; margin-top: 100px; font-size: 32px; }
 </style>

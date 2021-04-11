@@ -18,39 +18,27 @@
 
 <template>
   <div class="container">
-    <div class="s-box">
+    <div class="s-box" @click="toSearch">
       <div class="l"><img src="/static/images/sousuo.png" />工具名称</div>
       <div class="r">搜索</div>
       <img src="/static/images/yuyin.png" class="yuyin" mode="widthFix" />
     </div>
     <div class="class-frame">
       <ul class="class-nav">
-        <li class="active"><div>为你推荐</div></li>
-        <li><div>生活服</div></li>
-        <li><div>医疗健康</div></li>
+        <li v-for="item in typeList"
+            :key="id"
+            :class="{'active': item.id === typeId}"
+            @click="toggle(item.id)"><div>{{item.name}}</div></li>
       </ul>
       <div class="class-list">
         <h3>常用分类</h3>
         <div class="tool-list">
-          <a href="#" class="tool-item">
-            <img src="/static/images/img/icon1.png" mode="aspectFill" />
-            <div>汇率转换</div>
-          </a>
-          <a href="#" class="tool-item">
-            <img src="/static/images/img/icon1.png" mode="aspectFill" />
-            <div>汇率转换</div>
-          </a>
-          <a href="#" class="tool-item">
-            <img src="/static/images/img/icon1.png" mode="aspectFill" />
-            <div>汇率转换</div>
-          </a>
-          <a href="#" class="tool-item">
-            <img src="/static/images/img/icon1.png" mode="aspectFill" />
-            <div>汇率转换</div>
-          </a>
-          <a href="#" class="tool-item">
-            <img src="/static/images/img/icon1.png" mode="aspectFill" />
-            <div>汇率转换</div>
+          <a v-for="item in list"
+             :key="id"
+             href="#"
+             class="tool-item">
+            <img :src="imgSrc + item.imgpath" mode="aspectFill" />
+            <div>{{item.name}}</div>
           </a>
         </div>
       </div>
@@ -61,6 +49,9 @@
 
 <script>
 import cFooter from '@/components/footer1'
+import { postAction } from '@/utils/api'
+import config from '@/config'
+const { imgSrc } = config
 
 export default {
   components: {
@@ -68,9 +59,62 @@ export default {
   },
 
   data () {
-    return {}
+    return {
+      imgSrc,
+      typeId: '',
+      typeList: [],
+      list: [],
+      page: 1,
+      total: 0
+    }
   },
-
-  created () {}
+  computed: {
+    loadOver () {
+      return this.total === this.list.length
+    }
+  },
+  methods: {
+    getData () {
+      postAction('cate').then(res => {
+        if (res.code === 1) {
+          this.typeList = res.data.all_type
+          this.typeId = res.data.all_type[0].id
+          this.list = res.data.gj
+        }
+      })
+    },
+    toggle (id) {
+      this.typeId = id
+      this.page = 1
+      this.list = []
+      this.getOneData()
+    },
+    getOneData () {
+      postAction('sub_list', {
+        cid: this.typeId,
+        page: this.page
+      }).then(res => {
+        if (res.code === 1) {
+          this.list = this.list.concat(res.data.list)
+          this.total = Number(res.data.nums)
+        }
+      })
+    },
+    toSearch () {
+      mpvue.navigateTo({
+        url: '/pages/search/main'
+      })
+    }
+  },
+  onReachBottom () {
+    if (!this.loadOver) {
+      this.page += 1
+      this.getOneData()
+    }
+  },
+  onLoad () {
+    // let app = getApp()
+    this.getData()
+  }
 }
 </script>

@@ -18,7 +18,7 @@
         <a href="javascript:;" class="txt" @click="changePage('forget')">忘记密码？</a>
       </FormItem>
       <div class="form-item" style="margin-top: 40px">
-        <Button size="small" disabled style="width: 90px">登录</Button>
+        <Button size="small" disabled style="width: 90px;">登录</Button>
       </div>
     </Form>
   </div>
@@ -26,6 +26,7 @@
 </template>
 
 <script type='es6'>
+
 export default {
   name: 'app',
   inject: ['changePage'],
@@ -36,6 +37,8 @@ export default {
         password: ''
       }
     }
+  },
+  mounted () {
   },
   methods: {}
 }

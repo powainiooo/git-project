@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
+import Storage from 'vue-ls'
 import router from './router'
 import store from './store'
 import {
@@ -15,7 +16,10 @@ import {
   Row,
   Col,
   RadioGroup,
-  Radio
+  Radio,
+  Message,
+  Modal,
+  Upload
 } from 'view-design'
 import 'view-design/dist/styles/iview.css'
 
@@ -32,10 +36,16 @@ Vue.component('DatePicker', DatePicker)
 Vue.component('TimePicker', TimePicker)
 Vue.component('Row', Row)
 Vue.component('Col', Col)
+Vue.component('Upload', Upload)
 Vue.config.productionTip = false
+
+Vue.use(Storage)
+Vue.prototype.$Message = Message
+Vue.prototype.$Modal = Modal
 
 new Vue({
   router,
   store,
   render: h => h(App)
 }).$mount('#app')
+// a2ropq

@@ -10,71 +10,58 @@
   <div class="container">
     <div class="hr20"></div>
     <div class="mt20 mb80">
-      <c-search />
+      <c-search placeholder="工具名称" @search="handleSearch" />
     </div>
 
-    <div class="between mb60 ml50 mr60">
-      <div class="title acenter">
-        <img src="/static/images/clock.png" mode="widthFix" class="w32 mr15" />
-        <span>搜索历史</span>
+    <template v-if="resultList.length === 0">
+      <div class="between mb60 ml50 mr60">
+        <div class="title acenter">
+          <img src="/static/images/clock.png" mode="widthFix" class="w32 mr15" />
+          <span>搜索历史</span>
+        </div>
+        <img src="/static/images/trash.png" mode="widthFix" class="w24" />
       </div>
-      <img src="/static/images/trash.png" mode="widthFix" class="w24" />
-    </div>
 
-    <div class="tool-list">
-      <div class="pr">
-        <a href="#" class="tool-item">
-          <img src="/static/images/img/icon1.png" mode="aspectFill" />
-          <div>汇率转换</div>
-        </a>
-        <img src="/static/images/x.png" mode="widthFix" class="btn-close" />
+      <div class="tool-list">
+        <div v-for="item in history"
+             :key="id"
+             class="pr">
+          <a href="#"
+             class="tool-item">
+            <img :src="imgSrc + item.imgpath" mode="aspectFill" />
+            <div>{{item.name}}</div>
+          </a>
+          <img src="/static/images/x.png" mode="widthFix" class="btn-close" />
+        </div>
       </div>
-      <div class="pr">
-        <a href="#" class="tool-item">
-          <img src="/static/images/img/icon1.png" mode="aspectFill" />
-          <div>汇率转换</div>
-        </a>
-        <img src="/static/images/x.png" mode="widthFix" class="btn-close" />
-      </div>
-      <div class="pr">
-        <a href="#" class="tool-item">
-          <img src="/static/images/img/icon1.png" mode="aspectFill" />
-          <div>汇率转换</div>
-        </a>
-        <img src="/static/images/x.png" mode="widthFix" class="btn-close" />
-      </div>
-      <div class="pr">
-        <a href="#" class="tool-item">
-          <img src="/static/images/img/icon1.png" mode="aspectFill" />
-          <div>汇率转换</div>
-        </a>
-        <img src="/static/images/x.png" mode="widthFix" class="btn-close" />
-      </div>
-    </div>
 
-    <div class="title acenter mt90 mb60 ml50">
-      <img src="/static/images/remen.png" mode="widthFix" class="w28 mr20" />
-      <span>热门搜索</span>
-    </div>
+      <div class="title acenter mt90 mb60 ml50">
+        <img src="/static/images/remen.png" mode="widthFix" class="w28 mr20" />
+        <span>热门搜索</span>
+      </div>
 
-    <div class="tool-list">
-      <a href="#" class="tool-item">
-        <img src="/static/images/img/icon1.png" mode="aspectFill" />
-        <div>汇率转换</div>
-      </a>
-      <a href="#" class="tool-item">
-        <img src="/static/images/img/icon1.png" mode="aspectFill" />
-        <div>汇率转换</div>
-      </a>
-      <a href="#" class="tool-item">
-        <img src="/static/images/img/icon1.png" mode="aspectFill" />
-        <div>汇率转换</div>
-      </a>
-      <a href="#" class="tool-item">
-        <img src="/static/images/img/icon1.png" mode="aspectFill" />
-        <div>汇率转换</div>
+      <div class="tool-list">
+        <a v-for="item in hotList"
+           :key="id"
+           href="#"
+           class="tool-item">
+          <img :src="imgSrc + item.imgpath" mode="aspectFill" />
+          <div>{{item.name}}</div>
+        </a>
+      </div>
+    </template>
+
+    <template v-else>
+      <div class="tool-list">
+      <a v-for="item in resultList"
+         :key="id"
+         href="#"
+         class="tool-item">
+        <img :src="imgSrc + item.imgpath" mode="aspectFill" />
+        <div>{{item.name}}</div>
       </a>
     </div>
+    </template>
 
     <c-footer :current="2" />
   </div>
@@ -83,6 +70,9 @@
 <script>
 import cFooter from '@/components/footer1'
 import cSearch from '@/components/search'
+import { postAction } from '@/utils/api'
+import config from '@/config'
+const { imgSrc } = config
 
 export default {
   components: {
@@ -91,9 +81,34 @@ export default {
   },
 
   data () {
-    return {}
+    return {
+      imgSrc,
+      history: [],
+      hotList: [],
+      resultList: []
+    }
   },
-
-  created () {}
+  methods: {
+    getData () {
+      postAction('search_page').then(res => {
+        if (res.code === 1) {
+          this.history = res.data.history
+          this.hotList = res.data.rsb
+        }
+      })
+    },
+    handleSearch (e) {
+      postAction('search_go', {
+        word: e
+      }).then(res => {
+        if (res.code === 1) {
+          this.resultList = res.data.list
+        }
+      })
+    }
+  },
+  onShow () {
+    this.getData()
+  }
 }
 </script>

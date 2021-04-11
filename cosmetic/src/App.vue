@@ -65,11 +65,6 @@ export default {
          const resSetting = await getSetting()
          console.log('resSetting', resSetting)
          store.commit('SET_SETTING', resSetting.authSetting)
-         // if (resSetting.authSetting['scope.userInfo']) {
-         //    const resUserInfo = await getUserInfo()
-         //    console.log('resUserInfo', resUserInfo)
-         //    store.commit('SET_PERSONINFO', resUserInfo.userInfo)
-         // }
       },
       getPersonData () {
          postAction('get_preson_info').then(res => {

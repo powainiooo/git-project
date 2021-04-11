@@ -12,19 +12,31 @@
 <div class="c-search acenter">
   <div class="c-search-bar acenter">
     <img src="/static/images/sousuo2.png" mode="widthFix" class="c-search-icon" />
-    <input placeholder="工具名称" />
+    <input v-model="keyword" :placeholder="placeholder" />
     <button><img src="/static/images/yuyin.png" mode="widthFix" /></button>
   </div>
-  <button class="c-search-btn">搜索</button>
+  <button class="c-search-btn" @click="confirm">搜索</button>
 </div>
 </template>
 
 <script type='es6'>
 export default {
 	name: 'app',
+  props: {
+    placeholder: {
+      type: String,
+      default: ''
+    }
+  },
 	data() {
-		return {}
+		return {
+      keyword: ''
+    }
 	},
-	methods: {}
+	methods: {
+	  confirm () {
+	    this.$emit('search', this.keyword)
+    }
+  }
 }
 </script>

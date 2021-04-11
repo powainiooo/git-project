@@ -358,6 +358,60 @@
                "name": "查找周边场所",
                "pathName": "pages/search2/main",
                "query": ""
+            },
+            {
+               "id": -1,
+               "name": "抛硬币",
+               "pathName": "pages/coin/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "随机点名",
+               "pathName": "pages/rollCall/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "大转盘",
+               "pathName": "pages/turntable/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "血压参考表",
+               "pathName": "pages/bloodPressure/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "心率参考表",
+               "pathName": "pages/heartRate/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "公式大全",
+               "pathName": "pages/formula/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "乙肝五项对照表",
+               "pathName": "pages/hepatitisB/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "社交礼仪",
+               "pathName": "pages/etiquette/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "拍照识物",
+               "pathName": "pages/pictrue/main",
+               "query": ""
             }
          ]
       }

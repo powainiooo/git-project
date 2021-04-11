@@ -4,23 +4,22 @@
   margin 0
   padding 0
   box-sizing border-box
-#app
-  .ivu-btn
-    height 40px
-    line-height 40px
-    border-radius 10px
-    border none
-    bgG()
+.ivu-btn
+  height 40px
+  line-height 40px
+  border-radius 10px
+  border none
+  bgG()
+  color #ffffff
+  box-shadow 0px 2px 5px 0px rgba(0, 0, 0, 0.15)
+  &[disabled]
+    background #C8C9CA
+    color  #ffffff
+  &[disabled]:hover
+    background #C8C9CA
+    color  #ffffff
+  &:hover
     color #ffffff
-    box-shadow 0px 2px 5px 0px rgba(0, 0, 0, 0.15)
-    &[disabled]
-      background #C8C9CA
-      color  #ffffff
-    &[disabled]:hover
-      background #C8C9CA
-      color  #ffffff
-    &:hover
-      color #ffffff
 .flex
   display flex
 .center

@@ -46,14 +46,27 @@
 
 <script>
 import operates from '@/components/operates'
+import { postAction } from '@/utils/api'
 export default {
   components: {
     operates
   },
   data () {
-    return {}
+    return {
+      typeList: []
+    }
   },
-
-  created () {}
+  methods: {
+    getData () {
+      postAction('pre_hlzh').then(res => {
+        if (res.code === 1) {
+          this.typeList = res.data.list
+        }
+      })
+    }
+  },
+  onShow () {
+    this.getData()
+  }
 }
 </script>

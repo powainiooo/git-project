@@ -16,63 +16,57 @@
       <img src="/static/images/banner1.png" mode="widthFix" class="banner"/>
       <div class="top">
         <p>共发出</p>
-        <div>¥30.00</div>
-        <p>发出5个打赏</p>
+        <div>¥{{money}}</div>
+        <p>发出{{nums}}个打赏</p>
       </div>
     </div>
     <div class="list">
-      <div class="list-item">
+      <div v-for="item in list"
+           :key="id"
+           class="list-item">
         <div class="acenter">
           <a href="#" class="tool-item">
-            <img src="/static/images/img/icon1.png" mode="aspectFill" />
-            <div>汇率转换</div>
+            <img :src="imgSrc + item.imgpath" mode="aspectFill" />
+            <div>{{item.name}}</div>
           </a>
-          <p class="time">2018.04.02  18:46:16</p>
+          <p class="time">{{item.timeStr}}</p>
         </div>
-        <div class="point">+26</div>
-      </div>
-      <div class="list-item">
-        <div class="acenter">
-          <a href="#" class="tool-item">
-            <img src="/static/images/img/icon1.png" mode="aspectFill" />
-            <div>汇率转换</div>
-          </a>
-          <p class="time">2018.04.02  18:46:16</p>
-        </div>
-        <div class="point">+26</div>
-      </div>
-      <div class="list-item">
-        <div class="acenter">
-          <a href="#" class="tool-item">
-            <img src="/static/images/img/icon1.png" mode="aspectFill" />
-            <div>汇率转换</div>
-          </a>
-          <p class="time">2018.04.02  18:46:16</p>
-        </div>
-        <div class="point">+26</div>
-      </div>
-      <div class="list-item">
-        <div class="acenter">
-          <a href="#" class="tool-item">
-            <img src="/static/images/img/icon1.png" mode="aspectFill" />
-            <div>汇率转换</div>
-          </a>
-          <p class="time">2018.04.02  18:46:16</p>
-        </div>
-        <div class="point">+26</div>
+        <div class="point">+{{item.ds_money}}</div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { postAction } from '@/utils/api'
+import { formatDate } from '@/utils'
 
 export default {
 
   data () {
-    return {}
+    return {
+      imgSrc: mpvue.imgSrc,
+      money: 0,
+      nums: 0,
+      list: []
+    }
   },
-
-  created () {}
+  methods: {
+    getData () {
+      postAction('dsjl').then(res => {
+        if (res.code === 1) {
+          this.money = res.data.ds_total_money
+          this.nums = res.data.ds_total_num
+          res.data.dsjl.forEach(i => {
+            i.timeStr = formatDate(new Date(i.ctime * 1000), 'yyyy.MM.dd HH:mm:ss')
+          })
+          this.list = res.data.dsjl
+        }
+      })
+    }
+  },
+  onShow () {
+    this.getData()
+  }
 }
 </script>

@@ -12,33 +12,48 @@
 <template>
   <div class="container2 pt20">
     <div class="b-fff mb20">
-      <textarea class="txt" placeholder="请提出您的宝贵建议或遇到的问题"></textarea>
+      <textarea class="txt" placeholder="请提出您的宝贵建议或遇到的问题" v-model="content"></textarea>
     </div>
-    <div class="b-fff pt35">
-      <div class="between ml50 mr35 mb60">
-        <p class="f30">图片上传</p>
-        <p class="f28">0/4</p>
-      </div>
-      <div class="upload">
-        <div class="item">
-          <img src="/static/images/camera.png" mode="widthFix" class="icon" />
-        </div>
-      </div>
-    </div>
+<!--    <div class="b-fff pt35">-->
+<!--      <div class="between ml50 mr35 mb60">-->
+<!--        <p class="f30">图片上传</p>-->
+<!--        <p class="f28">0/4</p>-->
+<!--      </div>-->
+<!--      <div class="upload">-->
+<!--        <div class="item">-->
+<!--          <img src="/static/images/camera.png" mode="widthFix" class="icon" />-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
     <div class="mt100 ml75 mr75">
-      <button class="btn">提交反馈</button>
+      <button class="btn" @click="handleSubmit">提交反馈</button>
     </div>
   </div>
 </template>
 
 <script>
+import { postAction } from '@/utils/api'
 
 export default {
 
   data () {
-    return {}
+    return {
+      content: ''
+    }
   },
-
-  created () {}
+  methods: {
+    handleSubmit () {
+      postAction('jyfk', {
+        content: this.content
+      }).then(res => {
+        if (res.code === 1) {
+          mpvue.showToast({
+            title: '提交成功'
+          })
+          this.content = ''
+        }
+      })
+    }
+  }
 }
 </script>

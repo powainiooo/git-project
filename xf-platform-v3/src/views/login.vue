@@ -54,26 +54,31 @@
 
 <template>
 <div class="container">
+  <!-- 登录 -->
   <transition enter-active-class="moveIn" leave-active-class="moveOut">
   <section class="login-container" v-if="page === 'login'">
     <Login />
   </section>
   </transition>
+  <!-- 注册账号信息 -->
   <transition enter-active-class="moveIn" leave-active-class="moveOut">
     <section class="login-container" v-if="page === 'register'">
       <Register />
     </section>
   </transition>
+  <!-- 注册详细信息 -->
   <transition enter-active-class="moveIn" leave-active-class="moveOut">
     <section class="login-container" v-if="page === 'infos' || page === 'form'">
       <info-form :page="page" />
     </section>
   </transition>
+  <!-- 忘记密码 -->
   <transition enter-active-class="moveIn" leave-active-class="moveOut">
     <section class="login-container" v-if="page === 'forget'">
       <Forget />
     </section>
   </transition>
+  <!-- 底部按钮 -->
   <transition enter-active-class="fadeIn" leave-active-class="fadeOut">
     <Button class="ft-btn" v-if="page === 'login'" @click="page = 'register'">注册新用户</Button>
   </transition>

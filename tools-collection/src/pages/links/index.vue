@@ -42,13 +42,27 @@
 </template>
 
 <script>
+import { postAction } from '@/utils/api'
 
 export default {
 
   data () {
-    return {}
+    return {
+      imgSrc: mpvue.imgSrc,
+      list: []
+    }
   },
-
-  created () {}
+  methods: {
+    getData () {
+      postAction('dsjl').then(res => {
+        if (res.code === 1) {
+          this.list = res.data.dsjl
+        }
+      })
+    }
+  },
+  onShow () {
+    this.getData()
+  }
 }
 </script>

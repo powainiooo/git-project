@@ -33,7 +33,7 @@ export default {
   methods: {
     getData () {
       postAction('my_sc').then(res => {
-        if (res.code === 1) {
+        if (res.code === 0) {
           this.list = res.data.my_sc
         }
       })

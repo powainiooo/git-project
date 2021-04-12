@@ -116,7 +116,7 @@ export default {
   },
   mounted () {
     setTimeout(() => {
-      this.page = 'infos'
+      this.page = 'register'
     }, 1000)
   },
   methods: {

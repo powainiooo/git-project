@@ -20,23 +20,33 @@
 
       <div class="form-box">
         <div class="between mb50">
-          <div class="selects form-item">请选择<img src="/static/images/arrow2.png" mode="widthFix" /></div>
+          <picker :range="typeList" range-key="name" @change="selectChange($event, '1')">
+            <div class="selects form-item">
+              <span>{{name1 === '' ? '请选择' : name1}}</span>
+              <img src="/static/images/arrow2.png" mode="widthFix" />
+            </div>
+          </picker>
           <img src="/static/images/arrow3.png" mode="widthFix" class="w44" />
-          <div class="selects form-item">请选择<img src="/static/images/arrow2.png" mode="widthFix" /></div>
+          <picker :range="typeList" range-key="name" @change="selectChange($event, '2')">
+            <div class="selects form-item">
+              <span>{{name1 === '' ? '请选择' : name1}}</span>
+              <img src="/static/images/arrow2.png" mode="widthFix" />
+            </div>
+          </picker>
         </div>
         <div class="line1">
           <input type="text" class="form-item" placeholder="请输入换算金额" />
         </div>
         <div class="line1">
-          <button class="btn btn-min">立即换算</button>
+          <button class="btn btn-min" @click="handleCalc">立即换算</button>
         </div>
       </div>
 
-      <div class="result">
+      <div class="result" v-if="showResult">
         <img src="/static/images/bg2.png" class="w100" mode="widthFix" />
         <img src="/static/images/suc.png" class="icon" mode="widthFix" />
         <h3>换算成功</h3>
-        <div>换算结果¥ <span>360.00</span></div>
+        <div>换算结果¥ <span>{{result.currencyMoney}}</span></div>
       </div>
     </div>
 
@@ -53,14 +63,33 @@ export default {
   },
   data () {
     return {
-      typeList: []
+      typeList: [],
+      key1: '',
+      name1: '',
+      key2: '',
+      name2: '',
+      showResult: false,
+      result: {}
     }
   },
   methods: {
     getData () {
       postAction('pre_hlzh').then(res => {
-        if (res.code === 1) {
+        if (res.code === 0) {
           this.typeList = res.data.list
+        }
+      })
+    },
+    selectChange (e, key) {
+      const i = this.typeList[e.mp.detail.value]
+      this[`key${key}`] = i.code
+      this[`name${key}`] = i.name
+    },
+    handleCalc () {
+      postAction('hlzh').then(res => {
+        if (res.code === 0) {
+          this.result = res.data.result
+          this.showResult = true
         }
       })
     }

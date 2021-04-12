@@ -18,7 +18,7 @@ const ajax = (opts, autoMsg = true) => {
         console.log('请求参数', opts)
         console.log('返回数据', res)
         resolve(res.data)
-        if (res.data.code === 1) {
+        if (res.data.code === 0) {
         } else {
           if (autoMsg) {
             mpvue.showToast({ title: res.data.message, icon: 'none' })

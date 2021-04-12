@@ -7,9 +7,7 @@ export default new Vuex.Store({
   state: {
     registerData: {
       account: {},
-      type: {
-        type: '1'
-      },
+      type: '1',
       step1: {},
       step2: {}
     },
@@ -31,11 +29,15 @@ export default new Vuex.Store({
       { label: '北京银行', value: '1032' },
       { label: '宁波银行', value: '1056' },
       { label: '邮储银行', value: '1066' }
-    ]
+    ],
+    config: {}
   },
   mutations: {
     SET_REGISTER (state, data) {
       state.registerData[data.key] = data.data
+    },
+    SET_CONFIG (state, data) {
+      state.config = data
     }
   },
   actions: {

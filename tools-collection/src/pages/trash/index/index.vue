@@ -11,7 +11,7 @@
 
 <template>
   <div class="container3 ovh">
-    <input type="text" class="ipt" placeholder="请输入垃圾名称" />
+    <input type="text" class="ipt" placeholder="请输入垃圾名称" v-model="keyword" @confirm="queryData" />
 
     <div class="camera">
       <img src="/static/images/trash/camera.png" mode="widthFix" />
@@ -37,9 +37,17 @@ export default {
     operates
   },
   data () {
-    return {}
+    return {
+      keyword: ''
+    }
   },
-
+  methods: {
+    queryData () {
+      mpvue.navigateTo({
+        url: `/pages/trash/list/main?keyword=${this.keyword}`
+      })
+    }
+  },
   created () {
   }
 }

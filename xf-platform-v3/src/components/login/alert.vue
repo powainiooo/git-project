@@ -30,11 +30,12 @@
     <div class="flip-box" v-else-if="status === 'fail'">
       <img src="@/assets/img/ico-fail.png" />
       <h3>提交注册失败</h3>
-      <p>可能您的网络不太顺畅，请重新注册</p>
+<!--      <p>可能您的网络不太顺畅，请重新注册</p>-->
+      <p>{{msg}}</p>
     </div>
     <div class="center" style="margin-top: 60px">
-      <Button style="width: 135px" v-if="status === 'suc'">完成</Button>
-      <Button style="width: 135px" v-else-if="status === 'fail'">返回重试</Button>
+      <Button style="width: 135px" v-if="status === 'suc'" @click="onOk">完成</Button>
+      <Button style="width: 135px" v-else-if="status === 'fail'" @click="onRetry">返回重试</Button>
     </div>
   </div>
 </div>
@@ -46,13 +47,23 @@ export default {
   data () {
     return {
       status: 'suc',
+      msg: 'suc',
       visible: false
     }
   },
   methods: {
-    show (status) {
+    show (status, msg = '') {
       this.status = status
+      this.msg = msg
       this.visible = true
+    },
+    onOk () {
+      this.visible = false
+      this.$emit('onOk')
+    },
+    onRetry () {
+      this.visible = false
+      this.$emit('onRetry')
     }
   }
 }

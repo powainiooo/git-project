@@ -11,26 +11,14 @@
   <div class="container3">
     <div class="hr20"></div>
     <ul class="trash-list borderT">
-      <li>
+      <li v-for="item in list" :key="index">
         <div class="item borderB">
           <img src="/static/images/trash/icon.png" mode="widthFix" />
-          <span>键盘</span>
+          <span>{{item.name}}</span>
         </div>
         <div class="detail borderB">
-          <span>键盘 属于 可回收物</span>
-          <p>“针对于无线安装电池的键盘，需要将电池取出，单独丢在有害垃圾中。”</p>
-        </div>
-      </li>
-      <li>
-        <div class="item borderB">
-          <img src="/static/images/trash/icon.png" mode="widthFix" />
-          <span>键盘</span>
-        </div>
-      </li>
-      <li>
-        <div class="item borderB">
-          <img src="/static/images/trash/icon.png" mode="widthFix" />
-          <span>键盘</span>
+          <span>{{item.name}} 属于 {{type[item.type]}}</span>
+          <p>{{item.tip}}</p>
         </div>
       </li>
     </ul>
@@ -40,16 +28,46 @@
 
 <script>
 import operates from '@/components/operates'
+import { postAction } from '@/utils/api'
 
 export default {
   components: {
     operates
   },
   data () {
-    return {}
+    return {
+      page: 1,
+      keyword: '',
+      type: ['可回收', '有害', '厨余(湿)', '其他(干)'],
+      list: [],
+      loadOver: false
+    }
   },
-
-  created () {
+  methods: {
+    queryData () {
+      postAction('refuse_classification', {
+        word: this.keyword,
+        page: this.page
+      }).then(res => {
+        if (res.code === 0) {
+          this.list = this.list.concat(res.data)
+          if (res.data.length === 0) {
+            this.loadOver = true
+          }
+        }
+      })
+    }
+  },
+  onReachBottom () {
+    if (!this.loadOver) {
+      this.page += 1
+      this.queryData()
+    }
+  },
+  onLoad (options) {
+    this.keyword = options.keyword
+    this.loadOver = false
+    this.queryData()
   }
 }
 </script>

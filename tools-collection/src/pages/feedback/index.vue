@@ -46,7 +46,7 @@ export default {
       postAction('jyfk', {
         content: this.content
       }).then(res => {
-        if (res.code === 1) {
+        if (res.ret === 0) {
           mpvue.showToast({
             title: '提交成功'
           })

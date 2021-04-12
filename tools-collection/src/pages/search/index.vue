@@ -91,9 +91,9 @@ export default {
   methods: {
     getData () {
       postAction('search_page').then(res => {
-        if (res.code === 1) {
-          this.history = res.data.history
-          this.hotList = res.data.rsb
+        if (res.code === 0) {
+          this.history = res.data.list
+          this.hotList = res.data.rs_list
         }
       })
     },
@@ -101,7 +101,7 @@ export default {
       postAction('search_go', {
         word: e
       }).then(res => {
-        if (res.code === 1) {
+        if (res.code === 0) {
           this.resultList = res.data.list
         }
       })

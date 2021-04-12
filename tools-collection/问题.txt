@@ -1,7 +1,6 @@
 1./api/gj/sub_list 接口404
-2./api/gj/search_go 接口404
 3./api/gj/login 报错
 4./api/gj/getUserInfo 404
-5./api/gj/my_zj 加数据
-6./api/gj/jyfk 接口报错
-7./api/gj/pre_hlzh 404
+-----------------------------------
+1./api/gj/cate 接口报错
+2. 二维码 少了生成名片

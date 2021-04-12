@@ -89,7 +89,7 @@ export default {
   methods: {
     getData () {
       postAction('my_index').then(res => {
-        if (res.code === 1) {
+        if (res.code === 0) {
           this.userInfo = res.data.user_info
         }
       })

@@ -3,12 +3,17 @@
 .c-upload
   display flex
   align-items center
+  .ivu-upload-select
+    display block
   &-box
     center()
     overflow hidden
     size(90px, 90px)
     background-color #EEEEEF
     border-radius 10px
+    .picture
+      width 100%
+      display block
   &-progress
     size(60px, 6px)
     border-radius 3px
@@ -43,6 +48,7 @@
       <div class="c-upload-progress" v-if="isLoading">
         <div class="c-upload-bar" :style="{width: barWidth}"></div>
       </div>
+      <img :src="src" class="picture" v-if="src !== '' && !isLoading" />
     </div>
   </Upload>
   <div class="c-upload-content">
@@ -85,6 +91,9 @@ export default {
       isLoading: false
     }
   },
+  mounted () {
+    this.extraData.upyuntoken = this.$store.state.config.uploaddata.multipart.upyuntoken
+  },
   methods: {
     uploadBefore (e) {
       console.log('uploadBefore', e)
@@ -102,6 +111,8 @@ export default {
     uploadDone (e) {
       this.isLoading = false
       console.log('uploadDone', e)
+      this.src = e.data.fullurl
+      this.$emit('input', e.data.fullurl)
     },
     fileChange (e) {
       console.log('fileChange', e)

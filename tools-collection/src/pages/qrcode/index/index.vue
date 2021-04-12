@@ -35,13 +35,13 @@
 
     <template v-if="page === 'text'">
     <div class="b-fff mb140">
-      <textarea class="txt" placeholder="请输入文本内容"></textarea>
+      <textarea class="txt" placeholder="请输入文本内容" v-model="text1"></textarea>
     </div>
     </template>
 
     <template v-else-if="page === 'link'">
     <div class="b-fff mb140">
-      <textarea class="txt" placeholder="请输入网址"></textarea>
+      <textarea class="txt" placeholder="请输入网址" v-model="text2"></textarea>
     </div>
     </template>
 
@@ -80,7 +80,7 @@
 
     <div class="ml120 mr120">
       <button class="btn mb40">自定义制作</button>
-      <button class="btn btn-light">模板制作</button>
+      <button class="btn btn-light" @click="generate">模板制作</button>
     </div>
 
     <operates />
@@ -89,6 +89,7 @@
 
 <script>
 import operates from '@/components/operates'
+import { postAction } from '@/utils/api'
 
 export default {
   components: {
@@ -96,10 +97,24 @@ export default {
   },
   data () {
     return {
-      page: 'text'
+      page: 'text',
+      text1: '',
+      text2: ''
     }
   },
+  methods: {
+    generate () {
+      const params = {}
+      if (this.page === 'text') {
+        params.text = this.text1
+      } else if (this.page === 'link') {
+        params.text = this.text2
+      }
+      postAction('qrcode', params).then(res => {
 
+      })
+    }
+  },
   created () {}
 }
 </script>

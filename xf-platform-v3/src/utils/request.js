@@ -72,8 +72,11 @@ service.interceptors.request.use(config => {
 
 // response interceptor
 service.interceptors.response.use((response) => {
+  console.log(response)
   if (response.data.code !== 1) {
-    Message.warning(response.data.msg)
+    if (response.config.config.autoWarn) {
+      Message.warning(response.data.msg)
+    }
   }
   return response.data
 }, err)

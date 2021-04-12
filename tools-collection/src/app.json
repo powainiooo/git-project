@@ -1,14 +1,17 @@
 {
   "pages": [
+    "pages/trash/index/main",
+    "pages/uppercase/main",
+    "pages/qrcode/index/main",
     "pages/huilv/main",
     "pages/feedback/main",
-    "pages/links/main",
-    "pages/reward/main",
     "pages/footprint/main",
-    "pages/collection/main",
-    "pages/mine/main",
     "pages/search/main",
     "pages/class/main",
+    "pages/links/main",
+    "pages/reward/main",
+    "pages/collection/main",
+    "pages/mine/main",
     "pages/index/main",
     "pages/pictrue/main",
     "pages/etiquette/main",
@@ -60,11 +63,8 @@
     "pages/weather/city/main",
     "pages/weather/index/main",
     "pages/trash/list/main",
-    "pages/trash/index/main",
-    "pages/uppercase/main",
     "pages/qrcode/module/main",
     "pages/qrcode/diy/main",
-    "pages/qrcode/index/main",
     "pages/logs/main"
   ],
   "window": {

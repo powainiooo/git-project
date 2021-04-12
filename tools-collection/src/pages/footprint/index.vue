@@ -12,54 +12,15 @@ page { background-color: #F8F8F8; }
 <template>
   <div class="footPrint-container">
     <div class="line"></div>
-    <div class="footPrint-item">
-      <div class="time">2020年    1月19日</div>
+    <div class="footPrint-item" v-for="item in list" :key="index">
+      <div class="time">{{item.date}}</div>
       <div class="list">
-        <a href="#" class="tool-item">
-          <img src="/static/images/img/icon1.png" mode="aspectFill" />
-          <div>汇率转换</div>
-        </a>
-        <a href="#" class="tool-item">
-          <img src="/static/images/img/icon1.png" mode="aspectFill" />
-          <div>汇率转换</div>
-        </a>
-        <a href="#" class="tool-item">
-          <img src="/static/images/img/icon1.png" mode="aspectFill" />
-          <div>汇率转换</div>
-        </a>
-      </div>
-    </div>
-    <div class="footPrint-item">
-      <div class="time">2020年    1月19日</div>
-      <div class="list">
-        <a href="#" class="tool-item">
-          <img src="/static/images/img/icon1.png" mode="aspectFill" />
-          <div>汇率转换</div>
-        </a>
-        <a href="#" class="tool-item">
-          <img src="/static/images/img/icon1.png" mode="aspectFill" />
-          <div>汇率转换</div>
-        </a>
-        <a href="#" class="tool-item">
-          <img src="/static/images/img/icon1.png" mode="aspectFill" />
-          <div>汇率转换</div>
-        </a>
-      </div>
-    </div>
-    <div class="footPrint-item">
-      <div class="time">2020年    1月19日</div>
-      <div class="list">
-        <a href="#" class="tool-item">
-          <img src="/static/images/img/icon1.png" mode="aspectFill" />
-          <div>汇率转换</div>
-        </a>
-        <a href="#" class="tool-item">
-          <img src="/static/images/img/icon1.png" mode="aspectFill" />
-          <div>汇率转换</div>
-        </a>
-        <a href="#" class="tool-item">
-          <img src="/static/images/img/icon1.png" mode="aspectFill" />
-          <div>汇率转换</div>
+        <a v-for="(child, index2) in item.list"
+           :key="id"
+           href="#"
+           class="tool-item">
+          <img :src="imgSrc + child.imgpath" mode="aspectFill" />
+          <div>{{child.name}}</div>
         </a>
       </div>
     </div>
@@ -80,8 +41,21 @@ export default {
   methods: {
     getData () {
       postAction('my_zj').then(res => {
-        if (res.code === 1) {
-          this.list = res.data.list
+        if (res.code === 0) {
+          const list = res.data.list
+          const arr = []
+          for (let i in list) {
+            for (let j in list[i]) {
+              for (let k in list[i][j]) {
+                console.log(k)
+                arr.push({
+                  date: k,
+                  list: list[i][j][k]
+                })
+              }
+            }
+          }
+          this.list = arr
         }
       })
     }

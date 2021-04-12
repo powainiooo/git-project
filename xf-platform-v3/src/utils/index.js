@@ -2,9 +2,12 @@ import Vue from 'vue'
 import { axios } from './request'
 
 // post
-export function postAction (url, parameter) {
+export function postAction (url, parameter, autoWarn = true) {
   return axios({
     url: url,
+    config: {
+      autoWarn
+    },
     method: 'post',
     data: parameter
   })

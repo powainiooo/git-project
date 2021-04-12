@@ -65,7 +65,7 @@ export default {
   methods: {
     getData () {
       postAction('index').then(res => {
-        if (res.code === 1) {
+        if (res.code === 0) {
           this.banner = res.data.banner
           this.list1 = res.data.jrtj
           this.list2 = res.data.ggt_gj

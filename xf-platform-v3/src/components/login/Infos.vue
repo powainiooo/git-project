@@ -56,9 +56,7 @@ export default {
       }
       this.$store.commit('SET_REGISTER', {
         key: 'type',
-        data: {
-          type
-        }
+        data: type
       })
       this.showBtn = false
       this.changePage('form')

@@ -43,7 +43,8 @@
 <form-box class="c-data-form" :width="600" :height="376" :ids="70" :index="step">
   <template slot="button">
       <Button size="small" v-if="step !== 1">上一步</Button>
-      <Button size="small" @click="handleNext">下一步</Button>
+      <Button size="small" v-if="step !== 3" :disabled="nextBtnDisable" @click="handleNext">下一步</Button>
+      <Button size="small" v-if="step === 3" :disabled="confirm.index !== 0" @click="handleConfirm">{{confirm.btn}}</Button>
   </template>
   <ul class="step-box" :style="{'margin-left': (step - 1) * -600 + 'px'}">
     <!-- step1 -->
@@ -51,16 +52,21 @@
       <Form class="flex">
         <div>
           <div class="form">
-            <div class="form-title">企业基本信息{{type}}</div>
+            <div class="form-title" @click="console.log(formData)">企业基本信息</div>
             <template v-if="type === '1'">
-
+              <FormItem>
+                <Input v-model="formData.organizer_name" placeholder="活动方名称" />
+              </FormItem>
+              <FormItem>
+                <Input v-model="formData.address" placeholder="联系地址" />
+              </FormItem>
             </template>
             <template v-else>
-            <FormItem>
-              <Input v-model="formData.organizer_name" placeholder="场地方名称" v-if="type === '3'" />
+            <FormItem v-if="type === '3'">
+              <Input v-model="formData.organizer_name" placeholder="场地方名称" />
             </FormItem>
-            <FormItem>
-              <Input v-model="formData.organizer_name" placeholder="活动方名称" v-if="type === '2'" />
+            <FormItem v-if="type === '2'">
+              <Input v-model="formData.organizer_name" placeholder="活动方名称" />
             </FormItem>
             <FormItem>
               <Input v-model="formData.name" placeholder="公司全称" />
@@ -76,7 +82,7 @@
               <Input v-model="formData.id_card_no" placeholder="负责人身份证号" />
             </FormItem>
             <FormItem>
-              <Input v-model="formData.phone" placeholder="负责人联系电话" />
+              <Input v-model="vericode.mobile" placeholder="负责人联系电话" />
             </FormItem>
             <FormItem>
               <Input v-model="vericode.code" placeholder="验证码">
@@ -105,8 +111,8 @@
                 <span slot="title">企业营业执照</span>
               </upload-img>
             </FormItem>
-            <FormItem v-model="formData.logo">
-              <upload-img>
+            <FormItem>
+              <upload-img v-model="formData.logo">
                 <span slot="title">LOGO</span>
               </upload-img>
             </FormItem>
@@ -127,7 +133,7 @@
             <hr color="#EEEEEF"/>
             <Form class="form">
               <FormItem>
-                <upload-img>
+                <upload-img v-model="formData.space_image">
                   <span slot="title">场地照片</span>
                   <span slot="hint">尺寸1125px*600px</span>
                 </upload-img>
@@ -156,7 +162,7 @@
           </FormItem>
           <FormItem>
             <Select v-model="formData.account_bank_id" placeholder="选择银行">
-              <Option value="1">银行1</Option>
+              <Option v-for="item in bankList" :key="item.value" :value="item.value">{{item.label}}</Option>
             </Select>
           </FormItem>
           <FormItem>
@@ -248,7 +254,7 @@
       </div>
     </li>
   </ul>
-  <alert />
+  <alert ref="alert" @onRetry="handleConfirm" />
 </form-box>
 </template>
 
@@ -257,6 +263,7 @@ import uploadImg from '../uploadImg'
 import alert from './alert'
 import vericode from '@/mixin/vericode'
 import formBox from '@/components/formBox'
+import { postAction } from '@/utils'
 export default {
   name: 'app',
   mixins: [vericode],
@@ -266,8 +273,39 @@ export default {
     formBox
   },
   computed: {
+    account () {
+      return this.$store.state.registerData.account
+    },
     type () {
-      return this.$store.state.registerData.type.type
+      return this.$store.state.registerData.type
+    },
+    bankList () {
+      return this.$store.state.bankList
+    },
+    nextBtnDisable () {
+      if (this.step === 1) {
+        if (this.formData.organizer_name === '' || this.formData.address === '' || this.formData.person === '' || this.formData.id_card_no === '' || this.formData.phone === '' || this.formData.logo === '') {
+          return true
+        }
+        if (this.type === '1') { // 个人
+          if (this.formData.id_card_front_image === '' || this.formData.id_card_back_image === '') {
+            return true
+          }
+        } else if (this.type === '2') { // 活动方
+          if (this.formData.name === '' || this.formData.license_image === '') {
+            return true
+          }
+        } else if (this.type === '3') { // 场地方
+          if (this.formData.name === '' || this.formData.license_image === '' || this.formData.space_image === '') {
+            return true
+          }
+        }
+      } else if (this.step === 2) {
+        if (this.formData.account_name === '' || this.formData.account_id_card_no === '' || this.formData.account_mobile === '' || this.formData.account_card_no === '' || this.formData.account_bank_id === '' || this.formData.account_opening_banke === '') {
+          return true
+        }
+      }
+      return false
     }
   },
   data () {
@@ -277,6 +315,11 @@ export default {
         { name: '服务协议', value: 1 },
         { name: '隐私条款', value: 2 }
       ],
+      confirm: {
+        btn: '提交',
+        index: 20,
+        isAjax: false
+      },
       tabKey: 1,
       step: 1,
       countIndex: 10,
@@ -290,6 +333,7 @@ export default {
         id_card_front_image: '',
         id_card_back_image: '',
         license_image: '',
+        space_image: '',
         logo: '',
         account_name: '',
         account_id_card_no: '',
@@ -303,11 +347,18 @@ export default {
   mounted () {
     this.bh = window.innerHeight - (window.innerHeight - 376) / 2 - 76
   },
+  watch: {
+    'vericode.mobile' (val) {
+      this.formData.phone = val
+    }
+  },
   methods: {
     handleNext () {
       this.step += 1
       if (this.step === 2) {
         this.count()
+      } else if (this.step === 3) {
+        this.count2()
       }
     },
     count () {
@@ -318,6 +369,34 @@ export default {
           clearInterval(t)
         }
       }, 1000)
+    },
+    count2 () {
+      if (this.confirm.index === 0) return
+      this.confirm.btn = `${this.confirm.index}s`
+      const t = setInterval(() => {
+        this.confirm.index -= 1
+        if (this.confirm.index === 0) {
+          clearInterval(t)
+          this.confirm.btn = '提交'
+        } else {
+          this.confirm.btn = `${this.confirm.index}s`
+        }
+      }, 1000)
+    },
+    handleConfirm () {
+      if (this.confirm.isAjax) return
+      const params = { ...this.formData, ...this.account }
+      params.type = this.type
+      console.log(params)
+      this.confirm.isAjax = true
+      postAction('/editor/user/register', params, false).then(res => {
+        if (res.code === 1) {
+          this.$refs.alert.show('suc')
+        } else {
+          this.$refs.alert.show('fail', res.msg)
+        }
+        this.confirm.isAjax = false
+      })
     }
   }
 }

@@ -9,7 +9,7 @@
     <Form class="form">
       <div class="form-title">登陆</div>
       <FormItem>
-        <Input v-model="formData.usename" placeholder="邮箱 / 联系电话" />
+        <Input v-model="formData.account" placeholder="邮箱 / 联系电话" />
       </FormItem>
       <FormItem>
         <Input type="password" v-model="formData.password" placeholder="密码" />
@@ -18,7 +18,7 @@
         <a href="javascript:;" class="txt" @click="changePage('forget')">忘记密码？</a>
       </FormItem>
       <div class="form-item" style="margin-top: 40px">
-        <Button size="small" disabled style="width: 90px;">登录</Button>
+        <Button size="small" style="width: 90px;" @click="handleLogin">登录</Button>
       </div>
     </Form>
   </div>
@@ -26,20 +26,43 @@
 </template>
 
 <script type='es6'>
-
+import Vue from 'vue'
+import { ACCESS_TOKEN } from '@/config'
+import { postAction } from '@/utils'
 export default {
   name: 'app',
   inject: ['changePage'],
   data () {
     return {
       formData: {
-        usename: '',
+        account: '',
         password: ''
-      }
+      },
+      isAjax: true
     }
   },
   mounted () {
   },
-  methods: {}
+  methods: {
+    handleLogin () {
+      console.log('LoadingBar', LoadingBar)
+      LoadingBar.start()
+      setTimeout(() => {
+        LoadingBar.finish()
+      }, 1000)
+      if (this.isAjax) return
+      this.isAjax = true
+      postAction('/editor/user/login', {
+        ...this.formData
+      }).then(res => {
+        if (res.code === 1) {
+          Vue.ls.set(ACCESS_TOKEN, res.data.token, 7 * 24 * 60 * 60 * 1000)
+          this.$router.push({
+            name: 'Home'
+          })
+        }
+      })
+    }
+  }
 }
 </script>

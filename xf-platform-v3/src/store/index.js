@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import { postAction } from '@/utils'
+import { ACCESS_TOKEN } from '@/config'
 
 Vue.use(Vuex)
 
@@ -30,7 +32,9 @@ export default new Vuex.Store({
       { label: '宁波银行', value: '1056' },
       { label: '邮储银行', value: '1066' }
     ],
-    config: {}
+    config: {},
+    globalData: {},
+    hasGlobalData: false
   },
   mutations: {
     SET_REGISTER (state, data) {
@@ -38,9 +42,42 @@ export default new Vuex.Store({
     },
     SET_CONFIG (state, data) {
       state.config = data
+    },
+    SET_GLOBALDATA (state, data) {
+      state.globalData = data
+      state.hasGlobalData = data.id !== undefined
     }
   },
   actions: {
+    getUserData (context, isLogin) {
+      return new Promise((resolve, reject) => {
+        postAction('/editor/user/info').them(res => {
+          if (res.code === 1) {
+            context.commit('SET_GLOBALDATA', res.data)
+            resolve()
+          } else {
+            reject(res.msg)
+          }
+        }).catch(error => {
+          reject(error)
+        })
+      })
+    },
+    logout (context, isLogin) {
+      return new Promise((resolve, reject) => {
+        postAction('/editor/user/logout').them(res => {
+          if (res.code === 1) {
+            Vue.ls.remove(ACCESS_TOKEN)
+            context.commit('SET_GLOBALDATA', {})
+            resolve()
+          } else {
+            reject(res.msg)
+          }
+        }).catch(error => {
+          reject(error)
+        })
+      })
+    }
   },
   modules: {
   }

@@ -237,8 +237,8 @@
           <div class="form-title between">
             <span>服务条款</span>
             <RadioGroup v-model="tabKey" type="button" button-style="solid" class="tab-bar tab-bar-min">
-              <Radio label="1">服务协议</Radio>
-              <Radio label="2">隐私条款</Radio>
+              <Radio :label="1">服务协议</Radio>
+              <Radio :label="2">隐私条款</Radio>
             </RadioGroup>
           </div>
         </Form>
@@ -254,7 +254,7 @@
       </div>
     </li>
   </ul>
-  <alert ref="alert" @onRetry="handleConfirm" />
+  <alert ref="alert" @onRetry="handleConfirm" @onOk="onOk" />
 </form-box>
 </template>
 
@@ -352,6 +352,7 @@ export default {
       this.formData.phone = val
     }
   },
+  inject: ['changePage'],
   methods: {
     handleNext () {
       this.step += 1
@@ -397,6 +398,9 @@ export default {
         }
         this.confirm.isAjax = false
       })
+    },
+    onOk () {
+      this.changePage('login')
     }
   }
 }

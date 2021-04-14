@@ -38,18 +38,13 @@ export default {
         account: '',
         password: ''
       },
-      isAjax: true
+      isAjax: false
     }
   },
   mounted () {
   },
   methods: {
     handleLogin () {
-      console.log('LoadingBar', LoadingBar)
-      LoadingBar.start()
-      setTimeout(() => {
-        LoadingBar.finish()
-      }, 1000)
       if (this.isAjax) return
       this.isAjax = true
       postAction('/editor/user/login', {

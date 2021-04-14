@@ -78,7 +78,8 @@ button:after { border: none;}
 
 .cover { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, .7); z-index: 500; }
 
-.float-box { width: 100%; background-color: #FFFFFF; border-radius: 50px 50px 0 0; position: fixed; left: 0; bottom: 0; padding: 70px 30px; z-index: 1100; }
+.float-box { width: 100%; height: 60vh; overflow-y: auto; background-color: #FFFFFF; border-radius: 50px 50px 0 0; position: fixed; left: 0; bottom: -60vh; padding: 70px 30px; z-index: 1100; transition: bottom .4s cubic-bezier(.22,.61,.3,.99); }
+.float-box-show { bottom: 0; }
 .float-box h3 { color: #3D7FC7; font-size: 34px; margin-bottom: 60px; }
 .float-box li { margin-bottom: 20px; font-size: 22px; line-height: 40px; display: flex; }
 .float-box li div { width: 180px; }

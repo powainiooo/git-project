@@ -17,27 +17,27 @@
     <div class="box" style="margin-top: -220rpx">
       <div class="search-box">
         <img src="/static/images/sousuo3.png" mode="widthFix" />
-        <input type="text" placeholder="请输入身份证号码" />
+        <input type="text" placeholder="请输入身份证号码" v-model="keyword" />
       </div>
       <div class="ml50 mr50 mb95">
-        <button class="btn">马上查询</button>
+        <button class="btn" @click="getData">马上查询</button>
       </div>
     </div>
 
-    <div class="box">
+    <div class="box" v-if="showResult">
       <h3 class="tc mt50">【查询结果】</h3>
       <ul class="res-list">
         <li>
           <span>地　　区：</span>
-          <p>广东省</p>
+          <p>{{record.area}}</p>
         </li>
         <li>
           <span>性　　别：</span>
-          <p>女</p>
+          <p>{{record.sex}}</p>
         </li>
         <li>
           <span>出生日期：</span>
-          <p>2021年1月</p>
+          <p>{{record.birthday}}</p>
         </li>
       </ul>
     </div>
@@ -48,15 +48,39 @@
 
 <script>
 import operates from '@/components/operates'
+import {postAction} from '../../utils/api'
 
 export default {
   components: {
     operates
   },
   data () {
-    return {}
+    return {
+      keyword: '',
+      record: {},
+      showResult: false
+    }
   },
-
+  methods: {
+    getData () {
+      if (this.keyword === '') {
+        mpvue.showToast({
+          title: '请输入身份证号码',
+          icon: 'none'
+        })
+        return false
+      }
+      postAction('idcard', {
+        cardno: this.keyword
+      }).then(res => {
+        if (res.code === 0) {
+          this.record = res.data
+          this.record.phone = this.keyword
+          this.showResult = true
+        }
+      })
+    }
+  },
   created () {
   }
 }

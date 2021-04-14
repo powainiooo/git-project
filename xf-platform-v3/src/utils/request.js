@@ -25,36 +25,6 @@ const err = (error) => {
     const token = Vue.ls.get(ACCESS_TOKEN)
     console.log('------异常响应------', token)
     console.log('------异常响应------', error.response)
-    switch (error.response.status) {
-      case 403:
-        Message.error({ message: '系统提示', description: '拒绝访问', duration: 4 })
-        break
-      case 500:
-        break
-      case 404:
-        Message.error({ message: '系统提示', description: '很抱歉，资源未找到!', duration: 4 })
-        break
-      case 504:
-        Message.error({ message: '系统提示', description: '网络超时' })
-        break
-      case 401:
-        Message.error({ message: '系统提示', description: '未授权，请重新登录', duration: 4 })
-        if (token) {
-          store.dispatch('Logout').then(() => {
-            setTimeout(() => {
-              window.location.reload()
-            }, 1500)
-          })
-        }
-        break
-      default:
-        Message.error({
-          message: '系统提示',
-          description: data.message,
-          duration: 4
-        })
-        break
-    }
   }
   return Promise.reject(error)
 }

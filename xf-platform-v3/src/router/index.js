@@ -13,6 +13,10 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
+    redirect: '/index'
+  },
+  {
+    path: '/index',
     name: 'Home',
     component: Home
   },
@@ -33,33 +37,37 @@ const router = new VueRouter({
 })
 router.beforeEach((to, from, next) => {
   LoadingBar.start()
+  console.log('to', to)
   if (Vue.ls.get(ACCESS_TOKEN)) {
+    console.log('1')
     if (to.path === '/login') {
-      next('/')
+      console.log('2')
+      next('/index')
       LoadingBar.finish()
     } else {
       if (store.state.hasGlobalData) {
+        console.log('3')
         next()
       } else {
+        console.log('4')
         store.dispatch('getUserData').then(res => {
-          const redirect = decodeURIComponent(from.query.redirect || to.path)
-          if (to.path === redirect) {
-            // hack方法 确保addRoutes已完成 ,set the replace: true so the navigation will not leave a history record
-            next({ ...to, replace: true })
-          } else {
-            // 跳转到目的路由
-            next({ path: redirect })
-          }
+          console.log('5')
+          next()
         }).catch(err => {
           console.log('err', err)
           store.dispatch('logout').then(() => {
-            next({ path: '/login', query: { redirect: to.fullPath } })
+            next({ path: '/login' })
           })
         })
       }
     }
   } else {
-    next('/login')
+    console.log('8')
+    if (to.path === '/login') {
+      next()
+    } else {
+      next('/login')
+    }
     LoadingBar.finish()
   }
 })

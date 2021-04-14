@@ -8,8 +8,8 @@
 <template>
 <div class="c-search2">
   <img src="/static/images/bg3.png" mode="widthFix" class="c-search2-bg" />
-  <input type="text" :placeholder="placeholder" />
-  <img src="/static/images/sousuo4.png" mode="widthFix" class="c-search2-icon" />
+  <input type="text" :placeholder="placeholder" v-model="keyword" @confirm="confirm" />
+  <img src="/static/images/sousuo4.png" mode="widthFix" class="c-search2-icon" @click="confirm" />
 </div>
 </template>
 
@@ -23,8 +23,14 @@ export default {
     }
   },
 	data() {
-		return {}
+		return {
+      keyword: ''
+    }
 	},
-	methods: {}
+	methods: {
+    confirm () {
+      this.$emit('search', this.keyword)
+    }
+  }
 }
 </script>

@@ -9,26 +9,12 @@
   <div class="container1">
     <div class="hr20" style="background-color: #436CB3"></div>
     <div class="mt30 mb30">
-      <c-search placeholder="请输入您想要查询的成语" />
+      <c-search placeholder="请输入您想要查询的成语" @search="getDetail" />
     </div>
     <div class="hr10"></div>
 
     <ul class="idiom-list">
-      <li class="borderB">
-        <div>
-          <h3>【喷云吐雾】 pēn yún tǔ wù</h3>
-          <p>【成语解释】：喷吐出云雾来</p>
-          <p>【成语出自】：安正福《敌后插刀》：“炕上还斜躺着几个，正在喷云吐雾抽正在喷云吐雾抽。”</p>
-        </div>
-      </li>
-      <li class="borderB">
-        <div>
-          <h3>【喷云吐雾】 pēn yún tǔ wù</h3>
-          <p>【成语解释】：喷吐出云雾来</p>
-          <p>【成语出自】：安正福《敌后插刀》：“炕上还斜躺着几个，正在喷云吐雾抽正在喷云吐雾抽。”</p>
-        </div>
-      </li>
-      <li class="borderB">
+      <li class="borderB" @click="getDetail('亡羊补牢')">
         <div>
           <h3>【喷云吐雾】 pēn yún tǔ wù</h3>
           <p>【成语解释】：喷吐出云雾来</p>
@@ -37,35 +23,34 @@
       </li>
     </ul>
 
-    <div class="cover"></div>
-    <div class="float-box">
-      <h3 class="tc">【喷云吐雾】 pēn yún tǔ wù</h3>
-
-      <ul>
+    <div class="cover" v-if="showDetail" @click="showDetail = false"></div>
+    <div class="float-box" :class="{'float-box-show': showDetail}">
+      <h3 class="tc" v-if="showDetail">【{{record.chengyu}}】 {{record.pinyin}}</h3>
+      <ul v-if="showDetail">
         <li>
           <div>【成语解释】：</div>
-          <p>比喻情况万分危急。</p>
+          <p>{{record.chengyujs}}</p>
         </li>
         <li>
           <div>【成语出自】：</div>
-          <p>宋·程珌《程端明公洛水集·丙子轮对札子》第11卷：“肆我祖宗得请于上帝，假手鞑靼，连岁屏除，岌岌之千钧一发矣。”</p>
+          <p>{{record.from_}}</p>
         </li>
         <li>
           <div>【成语简拼】：</div>
-          <p>qjyf 读音查询</p>
+          <p>{{record.chengyu}}</p>
         </li>
         <li>
           <div>【成语字数】：</div>
-          <p>4个字</p>
+          <p>{{record.chengyu.length}}个字</p>
         </li>
         <li>
           <div>【成语语法】：</div>
-          <p>主谓式；作谓语、定语；用于人或事十分危急</p>
+          <p>{{record.yufa}}</p>
         </li>
       </ul>
 
       <div class="tc mt60">
-        <button class="btn btn-min">复 制</button>
+        <button class="btn btn-min" @click="copy(record.chengyu)">复 制</button>
       </div>
     </div>
 
@@ -76,6 +61,7 @@
 <script>
 import operates from '@/components/operates'
 import cSearch from '@/components/search2'
+import {postAction} from '../../utils/api'
 
 export default {
   components: {
@@ -83,9 +69,42 @@ export default {
     cSearch
   },
   data () {
-    return {}
+    return {
+      showDetail: false,
+      record: {}
+    }
   },
-
+  methods: {
+    getDetail (e) {
+      console.log('getDetail')
+      if (e === '') {
+        mpvue.showToast({
+          title: '请输入成语',
+          icon: 'none'
+        })
+        return false
+      }
+      postAction('chengyu', {
+        word: e
+      }).then(res => {
+        if (res.code === 0) {
+          this.record = res.data
+          this.record.chengyu = e
+          this.showDetail = true
+        }
+      })
+    },
+    copy (txt) {
+      wx.setClipboardData({
+        data: txt,
+        success (res) {
+          mpvue.showToast({
+            title: '复制成功'
+          })
+        }
+      })
+    }
+  },
   created () {
   }
 }

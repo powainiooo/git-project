@@ -51,7 +51,7 @@ export default new Vuex.Store({
   actions: {
     getUserData (context, isLogin) {
       return new Promise((resolve, reject) => {
-        postAction('/editor/user/info').them(res => {
+        postAction('/editor/user/info').then(res => {
           if (res.code === 1) {
             context.commit('SET_GLOBALDATA', res.data)
             resolve()
@@ -65,7 +65,7 @@ export default new Vuex.Store({
     },
     logout (context, isLogin) {
       return new Promise((resolve, reject) => {
-        postAction('/editor/user/logout').them(res => {
+        postAction('/editor/user/logout').then(res => {
           if (res.code === 1) {
             Vue.ls.remove(ACCESS_TOKEN)
             context.commit('SET_GLOBALDATA', {})

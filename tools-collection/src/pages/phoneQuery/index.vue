@@ -17,39 +17,39 @@
     <div class="box" style="margin-top: -220rpx">
       <div class="search-box">
         <img src="/static/images/sousuo3.png" mode="widthFix" />
-        <input type="text" placeholder="请输入手机号码" />
+        <input type="text" placeholder="请输入手机号码" v-model="keyword" />
       </div>
       <div class="ml50 mr50 mb95">
-        <button class="btn">马上查询</button>
+        <button class="btn" @click="getData">马上查询</button>
       </div>
     </div>
 
-    <div class="box">
+    <div class="box" v-if="showResult">
       <h3 class="tc mt50">【查询结果】</h3>
       <ul class="res-list">
         <li>
           <span>电话号码：</span>
-          <p>13723481071</p>
+          <p>{{record.phone}}</p>
         </li>
         <li>
           <span>省：</span>
-          <p>广东</p>
+          <p>{{record.province}}</p>
         </li>
         <li>
           <span>市：</span>
-          <p>深圳</p>
+          <p>{{record.city}}</p>
         </li>
         <li>
           <span>区号：</span>
-          <p>0755</p>
+          <p>{{record.areacode}}</p>
         </li>
         <li>
           <span>邮编：</span>
-          <p>4800</p>
+          <p>{{record.zip}}</p>
         </li>
         <li>
           <span>运营商：</span>
-          <p>移动</p>
+          <p>{{record.company}}</p>
         </li>
       </ul>
     </div>
@@ -60,15 +60,39 @@
 
 <script>
 import operates from '@/components/operates'
+import {postAction} from '../../utils/api'
 
 export default {
   components: {
     operates
   },
   data () {
-    return {}
+    return {
+      keyword: '',
+      record: {},
+      showResult: false
+    }
   },
-
+  methods: {
+    getData () {
+      if (this.keyword === '') {
+        mpvue.showToast({
+          title: '请输入手机号',
+          icon: 'none'
+        })
+        return false
+      }
+      postAction('phone_gsd', {
+        phone: this.keyword
+      }).then(res => {
+        if (res.code === 0) {
+          this.record = res.data
+          this.record.phone = this.keyword
+          this.showResult = true
+        }
+      })
+    }
+  },
   created () {
   }
 }

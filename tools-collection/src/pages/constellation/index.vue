@@ -21,7 +21,7 @@
 
     <div class="con-details">
       <div class="c-tag" style="background-color: #80BEE4;">今日运势</div>
-      <p>整体运势棒棒哒的节奏，运气的助攻下，你会拥有过更多行动的优势。你能通过对生活的用心感悟得到一些灵感，让你拥有更多的创意点子，利于为自己的计划方案加分。生活方面也会收获满满，不管精神还是物质都富足。</p>
+      <p>{{}}</p>
       <div class="c-tag" style="background-color: #7FBE58;">明日运势</div>
       <p>整体运势棒棒哒的节奏，运气的助攻下，你会拥有过更多行动的优势。你能通过对生活的用心感悟得到一些灵感，让你拥有更多的创意点子，利于为自己的计划方案加分。生活方面也会收获满满，不管精神还是物质都富足。</p>
       <div class="c-tag" style="background-color: #EA749E;">本周运势</div>
@@ -37,16 +37,28 @@
 
 <script>
 import operates from '@/components/operates'
+import {postAction} from '../../utils/api'
 
 export default {
   components: {
     operates
   },
   data () {
-    return {}
+    return {
+      record: {}
+    }
   },
-
-  created () {
+  methods: {
+    getData () {
+      postAction('constellation_query').then(res => {
+        if (res.ret === 0) {
+          this.record = res.data
+        }
+      })
+    }
+  },
+  onLoad () {
+    this.getData()
   }
 }
 </script>

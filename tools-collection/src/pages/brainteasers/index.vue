@@ -6,20 +6,12 @@
 </style>
 
 <template>
-  <div class="container1">
+  <div class="container">
     <div class="hr20"></div>
     <ul class="bt-list borderT">
-      <li class="borderB">
-        <div>【一】两对父子去买帽子，为什么只买了三顶？</div>
-        <p><span>【答案】</span>三代人</p>
-      </li>
-      <li class="borderB">
-        <div>【一】两对父子去买帽子，为什么只买了三顶？</div>
-        <p><span>【答案】</span>三代人</p>
-      </li>
-      <li class="borderB">
-        <div>【一】两对父子去买帽子，为什么只买了三顶？</div>
-        <p><span>【答案】</span>三代人</p>
+      <li class="borderB" v-for="(item, index) in list" :key="index">
+        <div>【{{index+1}}】{{item.quest}}</div>
+        <p><span>【答案】</span>{{item.result}}</p>
       </li>
     </ul>
     <operates />
@@ -28,16 +20,39 @@
 
 <script>
 import operates from '@/components/operates'
+import {postAction} from '@/utils/api'
 
 export default {
   components: {
     operates
   },
   data () {
-    return {}
+    return {
+      list: [],
+      page: 1,
+      loadOver: false
+    }
   },
-
-  created () {
+  methods: {
+    getList () {
+      postAction('brain_teaser', {
+        page: this.page
+      }).then(res => {
+        if (res.ret === 0) {
+          this.list = this.list.concat(res.data)
+          this.loadOver = res.data.length === 0
+        }
+      })
+    }
+  },
+  onReachBottom () {
+    if (!this.loadOver) {
+      this.page += 1
+      this.getList()
+    }
+  },
+  onLoad () {
+    this.getList()
   }
 }
 </script>

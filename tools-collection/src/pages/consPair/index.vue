@@ -3,7 +3,7 @@
 .pair-item .line1 { width: 100%; height: 50px; border-radius: 0 0 50px 50px; font-size: 30px; color: #FFFFFF; margin-bottom: 20px; background-color: #436CB3; }
 .pair-item .line1 img { width: 28px; margin-right: 10px; }
 .pair-item .selects { width: 160px; height: 42px; border: 2px solid #B6B6B6; border-radius: 4px; font-size: 24px; color: #B6B6B6; padding-left: 14px; margin: 0 auto; }
-.pair-item .selects img { width: 14px; margin-left: 12px; }
+.pair-item .selects img { width: 14px; margin-left: 12px; margin-right: 20px; }
 
 .btn-pair { width: 250px; border-radius: 35px; }
 </style>
@@ -17,30 +17,42 @@
         <div class="line1 center">
           <img src="/static/images/male.png" mode="widthFix" />男生
         </div>
-        <div class="selects acenter">
-          <span>选择星座</span>
-          <img src="/static/images/arrow8.png" mode="widthFix" />
-        </div>
+        <picker :range="list" @change="onChange($event, 'man')">
+          <div class="selects between">
+            <span>{{man === '' ? '选择星座' : man}}</span>
+            <img src="/static/images/arrow8.png" mode="widthFix" />
+          </div>
+        </picker>
       </div>
       <div class="pair-item">
         <div class="line1 center" style="background-color: #EA749E;">
           <img src="/static/images/female.png" mode="widthFix" />女生
         </div>
-        <div class="selects acenter">
-          <span>选择星座</span>
-          <img src="/static/images/arrow8.png" mode="widthFix" />
-        </div>
+        <picker :range="list" @change="onChange($event, 'woman')">
+          <div class="selects between">
+            <span>{{woman === '' ? '选择星座' : woman}}</span>
+            <img src="/static/images/arrow8.png" mode="widthFix" />
+          </div>
+        </picker>
       </div>
     </div>
 
     <div class="tc mb55">
-      <button class="btn btn-min btn-pair">立即配对</button>
+      <button class="btn btn-min btn-pair" @click="getData">立即配对</button>
     </div>
 
-    <div class="blue-box">
-      <h3>白羊座男配白羊座女</h3>
+    <div class="blue-box" style="min-height: calc(100vh - 440rpx)" v-if="showResult">
+      <h3>{{man}}座男配{{woman}}座女</h3>
       <div>
-        <p>配对指数：80</p>
+        <p>配对指数：{{record.zhishu}}</p>
+        <p>配对比重：{{record.bizhong}}</p>
+        <p>两情相悦指数：{{record.xiangyue}}</p>
+        <p>天长地久指数：{{record.tcdj}}</p>
+        <p>结果评述：{{record.jieguo}}</p>
+        <div class="c-tag" style="background-color: #EA749E;">恋爱建议</div>
+        <p>{{record.lianai}}</p>
+        <div class="c-tag" style="background-color: #EA749E;">注意事项</div>
+        <p>{{record.zhuyi}}</p>
       </div>
     </div>
     <operates />
@@ -49,16 +61,45 @@
 
 <script>
 import operates from '@/components/operates'
+import {postAction} from '../../utils/api'
 
 export default {
   components: {
     operates
   },
   data () {
-    return {}
+    return {
+      list: ['白羊', '金牛', '双子', '巨蟹', '狮子', '处女', '天秤', '天蝎', '射手', '摩羯', '水瓶', '双鱼'],
+      record: {},
+      man: '',
+      woman: '',
+      showResult: false
+    }
   },
-
-  created () {
+  methods: {
+    getData () {
+      if (this.man === '' || this.woman === '') {
+        mpvue.showToast({
+          title: '请选择星座',
+          icon: 'none'
+        })
+        return
+      }
+      postAction('constellation_match', {
+        man: this.man,
+        woman: this.woman
+      }).then(res => {
+        if (res.ret === 0) {
+          this.record = res.data
+          this.showResult = true
+        }
+      })
+    },
+    onChange (e, key) {
+      this[key] = this.list[e.mp.detail.value]
+    }
+  },
+  onLoad () {
   }
 }
 </script>

@@ -11,16 +11,15 @@
     <h1>《{{record.title}}》</h1>
     <div class="author">[唐] {{record.author}}</div>
     <div class="poetry">
-      <text>{{record.content}}</text>
+      <rich-text :nodes="record.content"></rich-text>
     </div>
-
     <ul class="tabs1">
-      <li class="active">注释</li>
-      <li>译文</li>
-      <li>赏析</li>
+      <li :class="{'active': tabKey === 0}" @click="toggle(0)">注释</li>
+      <li :class="{'active': tabKey === 1}" @click="toggle(1)">译文</li>
+      <li :class="{'active': tabKey === 2}" @click="toggle(2)">赏析</li>
     </ul>
 
-    <div class="content">注释注释注释注释注释注释</div>
+    <div class="content">{{details}}</div>
   </div>
 </template>
 
@@ -29,11 +28,28 @@ import store from '../../../store'
 
 export default {
   data () {
-    return {}
+    return {
+      tabKey: 0
+    }
   },
   computed: {
     record () {
       return store.state.poetryData
+    },
+    details () {
+      if (this.tabKey === 0) {
+        return this.record.zs
+      } else if (this.tabKey === 1) {
+        return this.record.fy
+      } else if (this.tabKey === 2) {
+        return this.record.sx
+      }
+    }
+  },
+  methods: {
+    toggle (key) {
+      this.tabKey = key
+      console.log('this.tabKey', this.tabKey)
     }
   },
   created () {

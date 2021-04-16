@@ -10,7 +10,7 @@
   <div class="container">
     <div class="hr20"></div>
     <div class="mt30 mb30">
-      <c-search placeholder="搜索唐诗" @search="getList"/>
+      <c-search placeholder="搜索唐诗" @search="onSearch"/>
     </div>
 
     <ul class="ts-list borderT">
@@ -20,7 +20,7 @@
         </div>
         <div class="r">
           <h3>《{{item.title}}》</h3>
-          <p><text>{{item.content}}</text></p>
+          <rich-text :nodes="item.content"></rich-text>
         </div>
       </li>
     </ul>
@@ -52,6 +52,7 @@ export default {
     onSearch (e) {
       this.keyword = e
       this.page = 1
+      this.list = []
       this.getList()
     },
     getList () {
@@ -59,7 +60,7 @@ export default {
         page: this.page,
         word: this.keyword
       }).then(res => {
-        if (res.code === 0) {
+        if (res.ret === 0) {
           this.list = this.list.concat(res.data)
           this.loadOver = res.data.length === 0
         }

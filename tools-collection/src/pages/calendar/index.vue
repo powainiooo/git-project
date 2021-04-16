@@ -144,7 +144,7 @@ export default {
       postAction('perpetual_calendar', {
         date: this.current
       }).then(res => {
-        if (res.code === 0) {
+        if (res.ret === 0) {
           this.record = res.data
         }
       })

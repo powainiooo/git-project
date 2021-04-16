@@ -8,19 +8,19 @@
   <div class="container">
     <div class="hr20"></div>
     <div class="mt30 mb60">
-      <c-search />
+      <c-search placeholder="搜索内容" @search="onSearch"/>
     </div>
 
     <ul class="tabs3 mb60">
-      <li class="active">成语</li>
-      <li>睡前</li>
-      <li>童话</li>
-      <li>预言</li>
+      <li :class="{'active': tabKey === 1}" @click="toggle(1)">成语</li>
+      <li :class="{'active': tabKey === 2}" @click="toggle(2)">睡前</li>
+      <li :class="{'active': tabKey === 3}" @click="toggle(3)">童话</li>
+      <li :class="{'active': tabKey === 4}" @click="toggle(4)">寓言</li>
     </ul>
 
-    <div class="story-content">
-      <h2>返老还童的故事</h2>
-      <div>返老还童的故事返老还童的故事返老还童的故事返老还童的故事返老还童的故事返老还童的故事</div>
+    <div class="story-content" v-for="item in list" :key="index">
+      <h2>{{item.title}}</h2>
+      <div><rich-text :nodes="item.content"></rich-text></div>
     </div>
 
     <operates />
@@ -30,6 +30,7 @@
 <script>
 import operates from '@/components/operates'
 import cSearch from '@/components/search'
+import {postAction} from '@/utils/api'
 
 export default {
   components: {
@@ -37,10 +38,49 @@ export default {
     cSearch
   },
   data () {
-    return {}
+    return {
+      tabKey: 1,
+      list: [],
+      keyword: '',
+      page: 1,
+      loadOver: false
+    }
   },
-
-  created () {
+  methods: {
+    toggle (key) {
+      this.tabKey = key
+      this.list = []
+      this.page = 1
+      this.getList()
+    },
+    onSearch (e) {
+      this.keyword = e
+      this.page = 1
+      this.list = []
+      this.getList()
+    },
+    getList () {
+      postAction('story', {
+        page: this.page,
+        type: this.tabKey,
+        num: 10,
+        word: this.keyword
+      }).then(res => {
+        if (res.ret === 0) {
+          this.list = this.list.concat(res.data)
+          this.loadOver = res.data.length === 0
+        }
+      })
+    }
+  },
+  onReachBottom () {
+    if (!this.loadOver) {
+      this.page += 1
+      this.getList()
+    }
+  },
+  onLoad () {
+    this.getList()
   }
 }
 </script>

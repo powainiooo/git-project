@@ -10,18 +10,30 @@
   <div class="container">
     <div class="hr20"></div>
     <div class="mt30 mb30">
-      <c-search />
+      <c-search placeholder="搜索成语" @search="getData"/>
     </div>
 
     <ul class="al-list borderT">
-      <li class="borderB">
+      <li class="borderB" v-for="item in list" :key="index">
         <div>
           <span class="sp1">【成语名称】：</span>
-          <span class="sp2">才占八斗</span>
+          <span class="sp2">{{item.chengyu}}</span>
         </div>
         <div>
-          <span class="sp1">【成语名称】：</span>
-          <span class="sp3">才占八斗才占八斗才占八斗才占八斗才占八斗</span>
+          <span class="sp1">【拼音音标】：</span>
+          <span class="sp3">{{item.pinyin}}</span>
+        </div>
+        <div>
+          <span class="sp1">【典故】：</span>
+          <span class="sp3">{{item.diangu}}</span>
+        </div>
+        <div>
+          <span class="sp1">【出处】：</span>
+          <span class="sp3">{{item.chuchu}}</span>
+        </div>
+        <div>
+          <span class="sp1">【范例】：</span>
+          <span class="sp3">{{item.fanli}}</span>
         </div>
       </li>
     </ul>
@@ -33,6 +45,7 @@
 <script>
 import operates from '@/components/operates'
 import cSearch from '@/components/search'
+import {postAction} from '../../utils/api'
 
 export default {
   components: {
@@ -40,9 +53,21 @@ export default {
     cSearch
   },
   data () {
-    return {}
+    return {
+      list: []
+    }
   },
-
+  methods: {
+    getData (e) {
+      postAction('allusion', {
+        word: e
+      }).then(res => {
+        if (res.ret === 0) {
+          this.list = res.data
+        }
+      })
+    }
+  },
   created () {
   }
 }

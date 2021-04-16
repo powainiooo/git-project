@@ -76,7 +76,7 @@ export default {
   methods: {
     getData () {
       postAction('cate').then(res => {
-        if (res.code === 0) {
+        if (res.ret === 0) {
           this.typeList = res.data.all_type
           this.typeId = res.data.all_type[0].id
           this.list = res.data.gj
@@ -94,7 +94,7 @@ export default {
         cid: this.typeId,
         page: this.page
       }).then(res => {
-        if (res.code === 0) {
+        if (res.ret === 0) {
           this.list = this.list.concat(res.data.list)
           this.total = Number(res.data.nums)
         }

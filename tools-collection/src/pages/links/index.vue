@@ -55,7 +55,7 @@ export default {
   methods: {
     getData () {
       postAction('dsjl').then(res => {
-        if (res.code === 0) {
+        if (res.ret === 0) {
           this.list = res.data.dsjl
         }
       })

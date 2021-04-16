@@ -49,7 +49,7 @@ export default {
         word: this.keyword,
         page: this.page
       }).then(res => {
-        if (res.code === 0) {
+        if (res.ret === 0) {
           this.list = this.list.concat(res.data)
           if (res.data.length === 0) {
             this.loadOver = true

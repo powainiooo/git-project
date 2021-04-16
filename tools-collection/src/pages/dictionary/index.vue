@@ -31,18 +31,18 @@
           <li><span>部 首</span> {{record.bushou}}</li>
           <li><span>笔 画</span> {{record.bihua}}</li>
           <li><span>五 笔</span> {{record.wubi}}</li>
-          <li><span>繁 体</span> {{record.zi}}</li>
+<!--          <li><span>繁 体</span> {{record.zi}}</li>-->
         </ul>
         <div class="grid center">{{record.zi}}</div>
       </div>
 
-      <ul class="word-list">
-        <li>妄 想</li>
-        <li>妄 想</li>
-        <li>妄 想</li>
-        <li>妄 想</li>
-        <li>妄 想</li>
-      </ul>
+<!--      <ul class="word-list">-->
+<!--        <li>妄 想</li>-->
+<!--        <li>妄 想</li>-->
+<!--        <li>妄 想</li>-->
+<!--        <li>妄 想</li>-->
+<!--        <li>妄 想</li>-->
+<!--      </ul>-->
 
       <div class="box-bg word-bg">
         <p v-for="item in record.xiangjie" :key="index">{{item}}</p>
@@ -82,7 +82,7 @@ export default {
       postAction('xinhua_query', {
         word: e
       }).then(res => {
-        if (res.code === 0) {
+        if (res.ret === 0) {
           this.record = res.data
           this.showResult = true
         }

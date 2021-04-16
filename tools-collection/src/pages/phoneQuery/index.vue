@@ -85,7 +85,7 @@ export default {
       postAction('phone_gsd', {
         phone: this.keyword
       }).then(res => {
-        if (res.code === 0) {
+        if (res.ret === 0) {
           this.record = res.data
           this.record.phone = this.keyword
           this.showResult = true

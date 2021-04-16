@@ -73,7 +73,7 @@ export default {
       postAction('idcard', {
         cardno: this.keyword
       }).then(res => {
-        if (res.code === 0) {
+        if (res.ret === 0) {
           this.record = res.data
           this.record.phone = this.keyword
           this.showResult = true

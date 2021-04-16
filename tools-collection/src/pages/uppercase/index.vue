@@ -43,7 +43,7 @@ export default {
       postAction('money_convert', {
         money: this.money
       }).then(res => {
-        if (res.code === 0) {
+        if (res.ret === 0) {
           this.moneyStr = res.data[0].cnresult
         }
       })

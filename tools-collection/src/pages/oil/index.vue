@@ -14,40 +14,39 @@
     <div class="hr20"></div>
 
     <div class="ml40 mr40">
-      <div class="o-title acenter mt30">深圳市<img src="/static/images/arrow7.png" mode="widthFix" /></div>
-
+      <template v-for="item in list">
+      <div class="o-title acenter mt30">{{item.city}}<img src="/static/images/arrow7.png" mode="widthFix" /></div>
       <ul class="oil-list">
         <li>
           <img src="/static/images/gas.png" mode="widthFix" />
           <div>
-            <h3>7.43元</h3>
+            <h3>{{item['95h']}}元</h3>
+            <p>95#</p>
+          </div>
+        </li>
+        <li>
+          <img src="/static/images/gas.png" mode="widthFix" />
+          <div>
+            <h3>{{item['92h']}}元</h3>
+            <p>92#</p>
+          </div>
+        </li>
+        <li>
+          <img src="/static/images/gas.png" mode="widthFix" />
+          <div>
+            <h3>{{item['98h']}}元</h3>
             <p>98#</p>
           </div>
         </li>
         <li>
           <img src="/static/images/gas.png" mode="widthFix" />
           <div>
-            <h3>7.43元</h3>
-            <p>98#</p>
-          </div>
-        </li>
-        <li>
-          <img src="/static/images/gas.png" mode="widthFix" />
-          <div>
-            <h3>7.43元</h3>
-            <p>98#</p>
-          </div>
-        </li>
-        <li>
-          <img src="/static/images/gas.png" mode="widthFix" />
-          <div>
-            <h3>7.43元</h3>
-            <p>98#</p>
+            <h3>{{item['0h']}}元</h3>
+            <p>0#</p>
           </div>
         </li>
       </ul>
-
-      <div class="o-title acenter mt30">深圳市<img src="/static/images/arrow7.png" mode="widthFix" /></div>
+      </template>
     </div>
 
     <operates />
@@ -56,16 +55,28 @@
 
 <script>
 import operates from '@/components/operates'
+import {postAction} from '../../utils/api'
 
 export default {
   components: {
     operates
   },
   data () {
-    return {}
+    return {
+      list: []
+    }
   },
-
-  created () {
+  methods: {
+    getData () {
+      postAction('oil').then(res => {
+        if (res.ret === 0) {
+          this.list = res.data
+        }
+      })
+    }
+  },
+  onLoad () {
+    this.getData()
   }
 }
 </script>

@@ -6,7 +6,7 @@
 </style>
 
 <template>
-  <div class="container1">
+  <div class="container">
     <div class="hr20" style="background-color: #436CB3"></div>
     <div class="mt30 mb30">
       <c-search placeholder="请输入您想要查询的成语" @search="getDetail" />
@@ -34,10 +34,6 @@
         <li>
           <div>【成语出自】：</div>
           <p>{{record.from_}}</p>
-        </li>
-        <li>
-          <div>【成语简拼】：</div>
-          <p>{{record.chengyu}}</p>
         </li>
         <li>
           <div>【成语字数】：</div>
@@ -87,7 +83,7 @@ export default {
       postAction('chengyu', {
         word: e
       }).then(res => {
-        if (res.code === 0) {
+        if (res.ret === 0) {
           this.record = res.data
           this.record.chengyu = e
           this.showDetail = true

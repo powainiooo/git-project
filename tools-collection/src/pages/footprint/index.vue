@@ -41,7 +41,7 @@ export default {
   methods: {
     getData () {
       postAction('my_zj').then(res => {
-        if (res.code === 0) {
+        if (res.ret === 0) {
           const list = res.data.list
           const arr = []
           for (let i in list) {

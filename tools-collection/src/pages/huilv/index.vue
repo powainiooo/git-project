@@ -75,7 +75,7 @@ export default {
   methods: {
     getData () {
       postAction('pre_hlzh').then(res => {
-        if (res.code === 0) {
+        if (res.ret === 0) {
           this.typeList = res.data.list
         }
       })
@@ -87,7 +87,7 @@ export default {
     },
     handleCalc () {
       postAction('hlzh').then(res => {
-        if (res.code === 0) {
+        if (res.ret === 0) {
           this.result = res.data.result
           this.showResult = true
         }

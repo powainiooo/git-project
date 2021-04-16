@@ -9,18 +9,18 @@
 </style>
 
 <template>
-<div class="container1">
+<div class="container">
   <div class="hr20"></div>
   <div class="mt30 mb30">
-    <c-search />
+    <c-search placeholder="搜索内容" @search="onSearch"/>
   </div>
 
   <ul class="mj-list borderT">
-    <li class="borderB">
-      <h2>【智者千虑，必有一失；愚者千虑，必有一得。】</h2>
-      <h3>——《史记·淮阴侯列传》</h3>
-      <div class="n1">聪明的人在上千次考虑中，总会有一次失误；愚蠢的人，在上千次考虑中，总会有一次收获。</div>
-      <div class="n2">骄傲是失败的另一个名字。</div>
+    <li class="borderB" v-for="item in list" :key="index">
+      <h2>【{{item.saying}}】</h2>
+      <h3>——《{{item.source}}》</h3>
+      <div class="n1">{{item.transl}}</div>
+      <div class="n2">xxx</div>
     </li>
   </ul>
 
@@ -31,6 +31,7 @@
 <script>
 import operates from '@/components/operates'
 import cSearch from '@/components/search'
+import {postAction} from '@/utils/api'
 
 export default {
   components: {
@@ -38,10 +39,41 @@ export default {
     cSearch
   },
   data () {
-    return {}
+    return {
+      list: [],
+      keyword: '',
+      page: 1,
+      loadOver: false
+    }
   },
-
-  created () {
+  methods: {
+    onSearch (e) {
+      this.keyword = e
+      this.page = 1
+      this.list = []
+      this.getList()
+    },
+    getList () {
+      postAction('memo', {
+        page: this.page,
+        num: 10,
+        word: this.keyword
+      }).then(res => {
+        if (res.ret === 0) {
+          this.list = this.list.concat(res.data)
+          this.loadOver = res.data.length === 0
+        }
+      })
+    }
+  },
+  onReachBottom () {
+    if (!this.loadOver) {
+      this.page += 1
+      this.getList()
+    }
+  },
+  onLoad () {
+    this.getList()
   }
 }
 </script>

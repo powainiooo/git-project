@@ -10,10 +10,10 @@
   <div class="container">
     <div class="hr20"></div>
 
-    <div class="riddle-item borderT borderB">
-      <h3>全国上下一起欢呼高兴</h3>
-      <h4>（打一四字成语）</h4>
-      <div><span>答案：</span></div>
+    <div class="riddle-item borderT borderB" v-for="item in list" :key="index">
+      <h3>{{item.quest}}</h3>
+<!--      <h4>（打一四字成语）</h4>-->
+      <div><span>答案：</span>{{item.answer}}</div>
     </div>
 
     <operates />
@@ -22,16 +22,28 @@
 
 <script>
 import operates from '@/components/operates'
+import {postAction} from '@/utils/api'
 
 export default {
   components: {
     operates
   },
   data () {
-    return {}
+    return {
+      list: []
+    }
   },
-
-  created () {
+  methods: {
+    getData () {
+      postAction('riddle').then(res => {
+        if (res.ret === 0) {
+          this.list = res.data
+        }
+      })
+    }
+  },
+  onLoad () {
+    this.getData()
   }
 }
 </script>

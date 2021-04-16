@@ -54,7 +54,7 @@ export default {
   methods: {
     getData () {
       postAction('dsjl').then(res => {
-        if (res.code === 0) {
+        if (res.ret === 0) {
           this.money = res.data.ds_total_money
           this.nums = res.data.ds_total_num
           res.data.dsjl.forEach(i => {

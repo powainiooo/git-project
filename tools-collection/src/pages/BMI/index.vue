@@ -22,27 +22,21 @@
     <div class="between inputs">
       <div class="acenter">
         <span>身高：</span>
-        <input type="text" placeholder="单位：CM" />
+        <input type="text" placeholder="单位：CM" v-model="height" />
       </div>
       <div class="acenter">
         <span>体重：</span>
-        <input type="text" placeholder="体重：KG" />
+        <input type="text" placeholder="体重：KG" v-model="weight" />
       </div>
     </div>
     <div class="center inputs">
-      <div class="acenter">
-        <input type="radio" />
-        <span>女</span>
-      </div>
-      <div class="acenter">
-        <input type="radio" />
-        <span>男</span>
-      </div>
+      <div class="radio" :class="{'radios-active': sex === 1}" @click="sex = 1">女</div>
+      <div class="radio" :class="{'radios-active': sex === 2}" @click="sex = 2">男</div>
     </div>
 
     <div class="tc"><button class="btn btn-min btn-test">开始测试</button></div>
 
-    <div class="table ml30 mr30">
+    <div class="table ml30 mr30" v-if="list.length > 0">
       <ul class="thead">
         <li>BMI分类</li>
         <li>WHO标准</li>
@@ -51,33 +45,12 @@
         <li><text>相关疾病\n发病的危险性</text></li>
       </ul>
       <div class="tbody">
-        <ul class="tr">
-          <li>体重过低</li>
-          <li> 18.5 </li>
-          <li> 18.5 </li>
-          <li> 18.5 </li>
-          <li>低（但其它疾病危险性增加）</li>
-        </ul>
-        <ul class="tr">
-          <li>体重过低</li>
-          <li> 18.5 </li>
-          <li> 18.5 </li>
-          <li> 18.5 </li>
-          <li>低（但其它疾病危险性增加）</li>
-        </ul>
-        <ul class="tr">
-          <li>体重过低</li>
-          <li> 18.5 </li>
-          <li> 18.5 </li>
-          <li> 18.5 </li>
-          <li>低（但其它疾病危险性增加）</li>
-        </ul>
-        <ul class="tr">
-          <li>体重过低</li>
-          <li> 18.5 </li>
-          <li> 18.5 </li>
-          <li> 18.5 </li>
-          <li>低（但其它疾病危险性增加）</li>
+        <ul class="tr" v-for="item in list" :key="index">
+          <li>{{item.cate}}</li>
+          <li>{{item.wto_bz}}</li>
+          <li>{{item.yz_bz}}</li>
+          <li>{{item.china_bz}}</li>
+          <li>{{item.tips}}</li>
         </ul>
       </div>
     </div>
@@ -88,15 +61,47 @@
 
 <script>
 import operates from '@/components/operates'
+import {postAction} from '../../utils/api'
 
 export default {
   components: {
     operates
   },
   data () {
-    return {}
+    return {
+      height: '',
+      weight: '',
+      sex: 1,
+      list: []
+    }
   },
-
+  methods: {
+    getData () {
+      if (this.height === '') {
+        mpvue.showToast({
+          title: '请输入身高',
+          icon: 'none'
+        })
+        return false
+      }
+      if (this.weight === '') {
+        mpvue.showToast({
+          title: '请输入体重',
+          icon: 'none'
+        })
+        return false
+      }
+      postAction('bmi_bz', {
+        height: this.height,
+        weight: this.weight,
+        sex: this.sex
+      }).then(res => {
+        if (res.ret === 0) {
+          this.list = res.data
+        }
+      })
+    }
+  },
   created () {
   }
 }

@@ -9,12 +9,11 @@
     <div class="hr20"></div>
 
     <div class="to-next">
-      <a href="javascript:;">右划显示下一条</a>
+      <a href="javascript:;" @click="getData">右划显示下一条</a>
     </div>
 
-    <div class="tips-content">
-      <h3>面试要这样“厚脸皮”才能成功！</h3>
-      <p>在如今竞争激烈的职场中，企业提供工作机会的速度远远赶不上人们跳槽找工作的速度。在如今竞争激烈的职场中，企业提供工作机会的速度远远赶不上人们跳槽找工作的速度。</p>
+    <div class="tips-content" v-for="item in list" :key="index">
+      <p><rich-text :nodes="item.content"></rich-text></p>
     </div>
 
     <operates />
@@ -23,16 +22,28 @@
 
 <script>
 import operates from '@/components/operates'
+import {postAction} from '../../utils/api'
 
 export default {
   components: {
     operates
   },
   data () {
-    return {}
+    return {
+      list: []
+    }
   },
-
-  created () {
+  methods: {
+    getData () {
+      postAction('life_tip').then(res => {
+        if (res.ret === 0) {
+          this.list = res.data
+        }
+      })
+    }
+  },
+  onLoad () {
+    this.getData()
   }
 }
 </script>

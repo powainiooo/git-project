@@ -1,6 +1,0 @@
-1./api/gj/sub_list 接口404
-3./api/gj/login 报错
-4./api/gj/getUserInfo 404
------------------------------------
-1./api/gj/cate 接口报错
-2. 二维码 少了生成名片

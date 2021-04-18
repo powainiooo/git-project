@@ -22,6 +22,7 @@ import {
   Upload
 } from 'view-design'
 import 'view-design/dist/styles/iview.css'
+import './assets/css/reset.css'
 
 Vue.component('Button', Button)
 Vue.component('Form', Form)

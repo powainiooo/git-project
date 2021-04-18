@@ -11,9 +11,9 @@
   <div class="hr20"></div>
 
   <ul class="unit-list">
-    <li class="borderB">
-      <div class="center">公里(kilometre)</div>
-      <input placeholder="请输入数字" />
+    <li class="borderB" v-for="(key, name) in units" :key="key">
+      <div class="center">{{key}}({{name}})</div>
+      <input type="number" placeholder="请输入数字" v-model="values[name]" @input="inputChange($event, name)" />
       <img src="/static/images/arrow6.png" mode="widthFix" />
     </li>
   </ul>
@@ -24,16 +24,50 @@
 
 <script>
 import operates from '@/components/operates'
+import {postAction} from '../../../utils/api'
 
 export default {
   components: {
     operates
   },
   data () {
-    return {}
+    return {
+      key: '',
+      units: {},
+      values: {}
+    }
   },
-
-  created () {
+  methods: {
+    getUnits () {
+      postAction(`pre_${this.key}_unit`).then(res => {
+        if (res.ret === 0) {
+          this.units = res.data
+          for (const key in res.data) {
+            this.$set(this.values, key, '')
+          }
+        }
+      })
+    },
+    inputChange (e, key) {
+      postAction(`${this.key}_unit`, {
+        from_unit: key,
+        num: e.target.value
+      }).then(res => {
+        if (res.ret === 0) {
+          const data = res.data.result
+          for (const key in data) {
+            if (this.values[key] !== undefined) {
+              this.values[key] = data[key]
+            }
+          }
+          console.log('this.values[key]', this.values)
+        }
+      })
+    }
+  },
+  onLoad (options) {
+    this.key = options.key || 'length'
+    this.getUnits()
   }
 }
 </script>

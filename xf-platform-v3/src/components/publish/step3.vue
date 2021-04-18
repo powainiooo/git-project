@@ -13,8 +13,8 @@
 <div class="center step-frame">
   <form-box :width="900" :height="280" :index="step">
     <template slot="button">
-    <Button size="small" v-if="step !== 1">上一步</Button>
-    <Button size="small" @click="handleNext">下一步</Button>
+    <Button size="small" v-if="step !== 1" @click="handlePrev">上一步</Button>
+    <Button size="small" @click="handleNext">完成并提交审核</Button>
     </template>
     <div class="form-grid">
       <div class="form-col">
@@ -24,9 +24,9 @@
                v-for="(item, index) in artistList"
                :key="index">
             <div style="margin-bottom: 10px;">
-              <Input v-model="item.name" placeholder="艺人姓名" />
+              <Input v-model="item.content" placeholder="艺人姓名" />
             </div>
-            <upload-img width="115">
+            <upload-img width="115" v-model="item.image">
               <span slot="title">艺人照片</span>
               <span slot="hint">尺寸为<br/>450*353px 的 JPG</span>
             </upload-img>
@@ -41,8 +41,8 @@
                v-for="(item, index) in activityList"
                :key="index">
             <img :src="getIndexSrc(index)" />
-            <Input type="textarea" class="txt" placeholder="填写详情（200字内）"/>
-            <upload-img width="170">
+            <Input type="textarea" class="txt" placeholder="填写详情（200字内）" v-model="item.content"/>
+            <upload-img width="170" v-model="item.image">
               <span slot="title">活动宣传图片</span>
               <span slot="hint">尺寸为<br/>950*500px 的 JPG</span>
             </upload-img>
@@ -60,6 +60,9 @@ import formBox from '@/components/formBox'
 import uploadImg from '../uploadImg'
 export default {
   name: 'app',
+  props: {
+    step: [Number, String]
+  },
   components: {
     formBox,
     uploadImg
@@ -68,33 +71,45 @@ export default {
     return {
       artistList: [
         {
-          name: '',
-          src: ''
+          content: '',
+          image: ''
         }
       ],
       activityList: [
         {
-          desc: '',
-          src: ''
+          content: '',
+          image: ''
         }
       ]
     }
   },
   methods: {
+    handlePrev () {
+      this.$emit('change', 'back')
+    },
+    handleNext () {
+      this.$emit('change', 'submit')
+    },
     addArtist () {
       this.artistList.push({
-        name: '',
-        src: ''
+        content: '',
+        image: ''
       })
     },
     addActivity () {
       this.activityList.push({
-        desc: '',
-        src: ''
+        content: '',
+        image: ''
       })
     },
     getIndexSrc (index) {
       return require('@/assets/img/nums/' + (index + 1) + '.png')
+    },
+    getParams () {
+      return {
+        artists: JSON.stringify(this.artistList),
+        intros: JSON.stringify(this.activityList)
+      }
     }
   }
 }

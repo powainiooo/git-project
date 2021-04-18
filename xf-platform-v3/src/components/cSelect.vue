@@ -44,6 +44,9 @@
 <script type='es6'>
 export default {
   name: 'app',
+  props: {
+    list: Array
+  },
   data () {
     return {
       value: ''

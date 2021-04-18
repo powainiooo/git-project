@@ -36,6 +36,19 @@ export default new Vuex.Store({
     globalData: {},
     hasGlobalData: false
   },
+  getters: {
+    musicType: state => {
+      const types = state.config.music_type
+      const arr = []
+      for (const key in types) {
+        arr.push({
+          name: types[key],
+          value: key
+        })
+      }
+      return arr
+    }
+  },
   mutations: {
     SET_REGISTER (state, data) {
       state.registerData[data.key] = data.data

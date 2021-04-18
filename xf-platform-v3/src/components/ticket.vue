@@ -24,23 +24,23 @@
       font-weight bold
   &-select
     margin-right 10px
-  .operates2
-    .c-ticket-status
-      background linear-gradient(165deg, #717071,#B4B4B5)
-  .operates3
-    .c-ticket-status
-      background linear-gradient(165deg, #E95513, #F29600)
-  .operates4
-    .c-ticket-status
-      background linear-gradient(165deg, #3E3A39, #000000 54%, #3E3A39)
-  .operates5
-    background linear-gradient(165deg, #5B85E6, #6D9AF4)
-    .c-ticket-status
-      background none
-  .operates6
+  .operates0
     background linear-gradient(165deg, #EC1A63, #E3007F)
     .c-ticket-status
       background none
+  .operates1
+    background linear-gradient(165deg, #EC1A63, #E3007F)
+    .c-ticket-status
+      background none
+  .operates3
+    .c-ticket-status
+      background linear-gradient(165deg, #717071,#B4B4B5)
+  .operates4
+    .c-ticket-status
+      background linear-gradient(165deg, #E95513, #F29600)
+  .operates5
+    .c-ticket-status
+      background linear-gradient(165deg, #3E3A39, #000000 54%, #3E3A39)
   &-btn
     size(90px, 30px)
     border-radius 10px
@@ -82,6 +82,7 @@
     &-titles
       margin-left 12px
       p
+        height 18px
         font-size 16px
         line-height 18px
         color #000000
@@ -94,12 +95,15 @@
   &-imgs
     size(100%, 220px)
     background-color #EEEEEF
+    img
+      width 100%
+      display block
 </style>
 
 <template>
 <div class="c-ticket">
-  <!-- 销售中:operates1 停止:operates2 已售罄:operates3 已结束:operates4  审核中:operates5  审核失败:operates5  -->
-  <div class="c-ticket-operates operates6">
+  <!-- 销售中:2 停止:3 已售罄:4 已结束:5  审核中:0  审核失败:1  -->
+  <div class="c-ticket-operates operates6" v-if="operates">
     <div class="flex">
       <div class="c-ticket-status">
         <a href="javascript:;"><img src="@/assets/img/ico-close.png" /></a>
@@ -116,29 +120,52 @@
     <div class="c-ticket-header">
       <div class="flex">
         <div class="c-ticket-header-dates">
-          <p>12</p>
-          <div>8</div>
+          <p>{{dates.month}}</p>
+          <div>{{dates.day}}</div>
         </div>
         <div class="c-ticket-header-titles">
-          <p>活动名称</p>
-          <div>MAOLivehouse</div>
+          <p>{{record.name}}</p>
+          <div>{{record.organizer_name}}</div>
         </div>
       </div>
-      <img src="@/assets/img/logo (2).png" class="logo" />
+      <img :src="record.logo" class="logo" />
     </div>
     <div class="c-ticket-imgs">
-      <img />
+      <img :src="record.cover_image" v-if="record.cover_image !== ''" />
     </div>
   </div>
 </div>
 </template>
 
 <script type='es6'>
-import cSelect from "./cSelect"
+import cSelect from './cSelect'
 export default {
   name: 'app',
+  props: {
+    record: Object,
+    operates: {
+      type: Boolean,
+      default: false
+    }
+  },
   components: {
     cSelect
+  },
+  computed: {
+    dates () {
+      if (this.record.start_date === '') {
+        return {
+          month: '',
+          day: ''
+        }
+      } else {
+        const split = this.record.start_date.split('-')
+        return {
+          month: split[1],
+          day: split[2]
+        }
+      }
+    }
   },
   data () {
     return {}

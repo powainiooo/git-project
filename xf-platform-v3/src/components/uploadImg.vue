@@ -92,11 +92,11 @@ export default {
     }
   },
   mounted () {
-    this.extraData.upyuntoken = this.$store.state.config.uploaddata.multipart.upyuntoken
   },
   methods: {
     uploadBefore (e) {
       console.log('uploadBefore', e)
+      this.extraData.upyuntoken = this.$store.state.config.uploaddata.multipart.upyuntoken
       // return false
     },
     preview (e) {

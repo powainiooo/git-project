@@ -33,6 +33,8 @@
 import operates from '@/components/operates'
 import cSearch from '@/components/search'
 
+// 路线规划appid：wx50b5593e81dd937a
+// https://mp.weixin.qq.com/wxopen/plugindevdoc?appid=wx50b5593e81dd937a&token=823746304&lang=zh_CN
 export default {
   components: {
     operates,

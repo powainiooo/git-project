@@ -35,8 +35,9 @@
     <p :class="{'placeholder': value === ''}">{{value === '' ? placeholder : value}}</p>
     <div><Icon type="ios-arrow-down" /></div>
   </div>
-  <DatePicker type="date" v-if="type === 'date'" class="c-date-time-float"></DatePicker>
-  <TimePicker type="time" v-else-if="type === 'time'" class="c-date-time-float"></TimePicker>
+  <DatePicker type="date" :disabled="disabled" v-if="type === 'date'" class="c-date-time-float" @on-change="onChange"></DatePicker>
+  <DatePicker type="daterange" :disabled="disabled" v-else-if="type === 'daterange'" class="c-date-time-float" @on-change="onChange"></DatePicker>
+  <TimePicker type="time" :disabled="disabled" v-else-if="type === 'time'" class="c-date-time-float" @on-change="onChange"></TimePicker>
 </div>
 </template>
 
@@ -51,6 +52,10 @@ export default {
     type: {
       type: String,
       default: 'date'
+    },
+    disabled: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
@@ -58,6 +63,19 @@ export default {
       value: ''
     }
   },
-  methods: {}
+  methods: {
+    onChange (e) {
+      if (this.type === 'daterange') {
+        this.value = e.join(' ~ ')
+      } else {
+        this.value = e
+      }
+      this.$emit('input', e)
+      this.$emit('change', e)
+    },
+    reset () {
+      this.value = ''
+    }
+  }
 }
 </script>

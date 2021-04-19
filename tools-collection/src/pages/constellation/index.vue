@@ -12,24 +12,23 @@
   <div class="container">
     <div class="hr20"></div>
     <ul class="con-nav">
-      <li class="active">双鱼座</li>
-      <li>双鱼座</li>
-      <li>双鱼座</li>
-      <li>双鱼座</li>
-      <li>双鱼座</li>
+      <li v-for="item in list"
+          :key="index"
+          :class="{'active': item === name}"
+          @click="toggle(item)">{{item}}</li>
     </ul>
 
     <div class="con-details">
       <div class="c-tag" style="background-color: #80BEE4;">今日运势</div>
-      <p>{{}}</p>
+      <p>{{today.summary}}</p>
       <div class="c-tag" style="background-color: #7FBE58;">明日运势</div>
-      <p>整体运势棒棒哒的节奏，运气的助攻下，你会拥有过更多行动的优势。你能通过对生活的用心感悟得到一些灵感，让你拥有更多的创意点子，利于为自己的计划方案加分。生活方面也会收获满满，不管精神还是物质都富足。</p>
+      <p>{{tomorrow.summary}}</p>
       <div class="c-tag" style="background-color: #EA749E;">本周运势</div>
-      <p>整体运势棒棒哒的节奏，运气的助攻下，你会拥有过更多行动的优势。你能通过对生活的用心感悟得到一些灵感，让你拥有更多的创意点子，利于为自己的计划方案加分。生活方面也会收获满满，不管精神还是物质都富足。</p>
+      <p>{{week.summary}}</p>
       <div class="c-tag" style="background-color: #AB92DC;">本月运势</div>
-      <p>整体运势棒棒哒的节奏，运气的助攻下，你会拥有过更多行动的优势。你能通过对生活的用心感悟得到一些灵感，让你拥有更多的创意点子，利于为自己的计划方案加分。生活方面也会收获满满，不管精神还是物质都富足。</p>
+      <p>{{month.summary}}</p>
       <div class="c-tag" style="background-color: #F39F5B;">今年运势</div>
-      <p>整体运势棒棒哒的节奏，运气的助攻下，你会拥有过更多行动的优势。你能通过对生活的用心感悟得到一些灵感，让你拥有更多的创意点子，利于为自己的计划方案加分。生活方面也会收获满满，不管精神还是物质都富足。</p>
+      <p>{{year.summary}}</p>
     </div>
     <operates />
   </div>
@@ -45,14 +44,30 @@ export default {
   },
   data () {
     return {
-      record: {}
+      list: ['白羊', '金牛', '双子', '巨蟹', '狮子', '处女', '天秤', '天蝎', '射手', '摩羯', '水瓶', '双鱼'],
+      name: '白羊',
+      today: {},
+      tomorrow: {},
+      week: {},
+      month: {},
+      year: {}
     }
   },
   methods: {
+    toggle (name) {
+      this.name = name
+      this.getData()
+    },
     getData () {
-      postAction('constellation_query').then(res => {
+      postAction('constellation_query', {
+        consName: this.name
+      }).then(res => {
         if (res.ret === 0) {
-          this.record = res.data
+          this.today = res.data.today
+          this.tomorrow = res.data.tomorrow
+          this.week = res.data.week
+          this.month = res.data.month
+          this.year = res.data.year
         }
       })
     }

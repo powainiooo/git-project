@@ -1,6 +1,10 @@
 <style lang="stylus" type="text/stylus" scoped>
 @import "../assets/css/global.styl"
 .c-ticket
+  transition transform 0.15s ease-in-out
+  cursor pointer
+  &-touch
+    transform scale(.96)
   &-operates
     height 60px
     between()
@@ -103,18 +107,21 @@
 <template>
 <div class="c-ticket">
   <!-- 销售中:2 停止:3 已售罄:4 已结束:5  审核中:0  审核失败:1  -->
-  <div class="c-ticket-operates operates6" v-if="operates">
+  <div class="c-ticket-operates" :class="['operates' + record.sub_state]" v-if="operates">
     <div class="flex">
       <div class="c-ticket-status">
         <a href="javascript:;"><img src="@/assets/img/ico-close.png" /></a>
-        <p>销售中</p>
+        <p>{{stateTxt[record.sub_state]}}</p>
       </div>
-      <div class="c-ticket-nums">
-        <span>8</span>/600
+      <div class="c-ticket-nums" v-if="showNums">
+        <span>{{soldNums}}</span>/{{totalNums}}
       </div>
     </div>
-<!--    <c-select class="c-ticket-select"/>-->
-    <button class="c-ticket-btn">查看并修改</button>
+    <button class="c-ticket-btn" v-if="record.sub_state === 1">查看并修改</button>
+    <c-select v-else
+              class="c-ticket-select"
+              :list="record.stocks"
+              @change="tChange"/>
   </div>
   <div class="c-ticket-body flip-box-min">
     <div class="c-ticket-header">
@@ -165,11 +172,41 @@ export default {
           day: split[2]
         }
       }
+    },
+    showNums () {
+      const s = this.record.sub_state
+      if (s === 0 || s === 1) {
+        return false
+      }
+      return true
+    },
+    soldNums () {
+      if (this.selectData.id === -1) {
+        return this.record.total_sold_num
+      } else {
+        return this.selectData.sold_num
+      }
+    },
+    totalNums () {
+      if (this.selectData.id === -1) {
+        return this.record.total_stock_num
+      } else {
+        return this.selectData.num
+      }
     }
   },
   data () {
-    return {}
+    return {
+      stateTxt: ['审核中', '审核失败', '销售中', '停止', '已售罄', '已结束'],
+      selectData: {
+        id: -1
+      }
+    }
   },
-  methods: {}
+  methods: {
+    tChange (data) {
+      this.selectData = data
+    }
+  }
 }
 </script>

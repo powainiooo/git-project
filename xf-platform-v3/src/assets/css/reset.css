@@ -25,6 +25,7 @@ input, select {
     vertical-align:middle;
 }
 input[type=text]::-webkit-input-placeholder { color: #999999; }
+input[type=password]::-webkit-input-placeholder { color: #999999; }
 textarea::-webkit-input-placeholder { color: #999999; }
 textarea { font-family: Microsoft YaHei,tahoma,arial,Hiragino Sans GB,sans-serif; }
 

@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import axios from 'axios'
-import store from '@/store'
+import router from '@/router'
 import { VueAxios } from './axios'
 import { Message } from 'view-design'
 import { ACCESS_TOKEN } from '@/config'
@@ -23,6 +23,10 @@ const err = (error) => {
   if (error.response) {
     const data = error.response.data
     const token = Vue.ls.get(ACCESS_TOKEN)
+    if (data.code === 401) {
+      Vue.ls.remove(ACCESS_TOKEN)
+      router.push('/login')
+    }
     console.log('------异常响应------', token)
     console.log('------异常响应------', error.response)
   }

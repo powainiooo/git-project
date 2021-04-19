@@ -8,9 +8,23 @@
   z-index 500
 .list-container
   width 1340px
-  margin 140px auto
+  margin 130px auto 0 auto
   .c-ticket
     margin-bottom 40px
+  .xf-page
+    color #ffffff
+    .ivu-page-next
+      background-color transparent
+      a
+        color #ffffff
+        &:hover
+          color #ffffff
+    .ivu-page-prev
+      background-color transparent
+      a
+        color #ffffff
+        &:hover
+          color #ffffff
 </style>
 <template>
   <div class="home">
@@ -23,12 +37,28 @@
       <Button class="btn-publish">发布新活动</Button>
       <div class="list-container">
         <Row :gutter="40">
-          <Col span="8" v-for="item in list" :key="item.id"><ticket :record="item" /></Col>
+          <Col span="8" v-for="(item, index) in list" :key="item.id">
+            <div @mousedown="mDown(index)" @mouseup="gotoDetail(index)">
+              <ticket :record="item"
+                      operates
+                      :class="{'c-ticket-touch': index === touchIndex}"
+              />
+            </div>
+          </Col>
         </Row>
+        <div v-if="!showWelcome && !showDetail && total !== 0">
+          <Page :current="pageNo"
+                :total="total"
+                :page-size="pageSize"
+                simple
+                class-name="xf-page" @on-change="pageChange"/>
+        </div>
       </div>
     </template>
 
-    <c-details />
+    <div class="detail-frame" v-if="showDetail">
+      <c-details ref="details" />
+    </div>
   </div>
 </template>
 
@@ -52,9 +82,12 @@ export default {
   data () {
     return {
       showWelcome: false,
+      showDetail: false,
       list: [],
+      total: 0,
       pageNo: 1,
-      pageSize: 9
+      pageSize: 9,
+      touchIndex: -1
     }
   },
   created () {
@@ -67,10 +100,22 @@ export default {
         limit: this.pageSize
       }).then(res => {
         if (res.code === 1) {
+          this.total = res.data.total
           this.list = res.data.list
           this.showWelcome = this.list.length === 0
         }
       })
+    },
+    pageChange (e) {},
+    mDown (index) {
+      console.log('mDown', index)
+      const data = this.list[index]
+      if (data.sub_state !== 1) {
+        this.touchIndex = index
+      }
+    },
+    gotoDetail (index) {
+      this.touchIndex = -1
     }
   }
 }

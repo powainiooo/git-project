@@ -82,7 +82,7 @@ export default {
   },
   methods: {
     getData () {
-      postAction('life_tip', this.taxData).then(res => {
+      postAction('tax', this.taxData).then(res => {
         if (res.ret === 0) {
           this.record = res.data
         }

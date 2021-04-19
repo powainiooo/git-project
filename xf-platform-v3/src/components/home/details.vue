@@ -41,7 +41,9 @@ export default {
     infos
   },
   data () {
-    return {}
+    return {
+      visible: false
+    }
   },
   methods: {}
 }

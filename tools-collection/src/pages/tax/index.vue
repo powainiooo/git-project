@@ -1,8 +1,8 @@
 <style scoped>
 .tax-form { margin: 0 30px 30px 30px; }
 .tax-form-item { display: flex; align-items: center; margin-bottom: 40px; }
-.tax-form-item .l { font-size: 34px; width: 200px; text-align: right; }
-.tax-form-item .r { font-size: 34px; width: 490px; padding-left: 35px; display: flex; align-items: center; }
+.tax-form-item .l { font-size: 32px; width: 200px; text-align: right; }
+.tax-form-item .r { font-size: 32px; width: 490px; padding-left: 35px; display: flex; align-items: center; }
 .tax-form-item .r input { width: 376px; height: 60px; border: 2px solid #3366CC; font-size: 26px; color: #666666; padding: 0 20px; margin-right: 14px; box-sizing: border-box; }
 .tax-form-item .r span { font-size: 26px; color: #666666; }
 .tax-form-item .btn { width: 180px; margin-right: 16px; margin-left: 0; }
@@ -17,7 +17,7 @@
       <div class="tax-form-item">
         <div class="l">收入类型</div>
         <div class="r">
-          <input value="工资、薪金所得（月薪）" readonly />
+          <input value="工资、薪金所得（月薪）" disabled />
         </div>
       </div>
       <div class="tax-form-item">
@@ -35,7 +35,7 @@
       <div class="tax-form-item">
         <div class="l">累计</div>
         <div class="r">
-          <input readonly v-model="totalIncome" />元
+          <input disabled v-model="totalIncome" />元
         </div>
       </div>
       <div class="tax-form-item">
@@ -47,7 +47,7 @@
       <div class="tax-form-item">
         <div class="l">累计</div>
         <div class="r">
-          <input readonly v-model="totalInsure" />元
+          <input disabled v-model="totalInsure" />元
         </div>
       </div>
       <div class="tax-form-item">
@@ -59,7 +59,7 @@
       <div class="tax-form-item">
         <div class="l">累计</div>
         <div class="r">
-          <input readonly v-model="totalZX" />元
+          <input disabled v-model="totalZX" />元
         </div>
       </div>
       <div class="tax-form-item">
@@ -131,6 +131,9 @@ export default {
   methods: {
     doCalc () {
       store.commit('SET_TAX', this.formData)
+      mpvue.navigateTo({
+        url: '/pages/taxResult/main'
+      })
     },
     reset () {
       this.formData = {

@@ -2,9 +2,8 @@
 .loan-form { margin-bottom: 70px; }
 .loan-form-item { display: flex; align-items: center; margin-bottom: 18px; }
 .loan-form-item .l { width: 180px; font-size: 24px; margin-right: 14px; text-align: right; }
-.loan-form-item .r { width: 500px; font-size: 24px; position: relative; }
+.loan-form-item .r { width: 506px; font-size: 24px; position: relative; }
 .loan-form-item .r .ip { width: 100%; height: 46px; border: 2px solid #EEEEEE; font-size: 20px; color: #666666; padding: 0 12px; }
-.loan-form-item .r .radio { width: 26px; height: 26px; }
 .loan-form-item .r .unit { font-size: 20px; color: #666666; position: absolute; top: 12px; right: 12px; }
 .loan-form-item .r p { font-size: 16px; color: #B8ABAB; margin-top: 15px; }
 .loan-form-item .r button { width: 200px; margin-right: 20px; margin-left: 0; }
@@ -44,7 +43,7 @@
     <div class="loan-form">
       <div class="loan-form-item">
         <div class="l">计算方式</div>
-        <div class="r">
+        <div class="r acenter">
           <div class="radio mr20" :class="{'radio-active': formData.type1 === 0}" @click="formData.type1 = 0">按房屋总价计算</div>
           <div class="radio mr20" :class="{'radio-active': formData.type1 === 1}" @click="formData.type1 = 1">按单价与面积计算</div>
         </div>

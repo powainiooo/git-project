@@ -19,10 +19,13 @@ import {
   Radio,
   Message,
   Modal,
+  Page,
   Upload
 } from 'view-design'
 import 'view-design/dist/styles/iview.css'
 import './assets/css/reset.css'
+import './assets/css/animate.min.css'
+import './assets/css/global.styl'
 
 Vue.component('Button', Button)
 Vue.component('Form', Form)
@@ -38,6 +41,7 @@ Vue.component('TimePicker', TimePicker)
 Vue.component('Row', Row)
 Vue.component('Col', Col)
 Vue.component('Upload', Upload)
+Vue.component('Page', Page)
 Vue.config.productionTip = false
 
 Vue.use(Storage)

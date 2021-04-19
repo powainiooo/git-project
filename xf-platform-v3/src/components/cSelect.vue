@@ -32,11 +32,14 @@
 <template>
 <div class="c-select">
   <div class="c-select-line">
-    <span>全部</span>
+    <span>{{name}}</span>
     <Icon type="ios-arrow-down" />
   </div>
-  <Select v-model="value" class="c-select-select">
-    <Option value="1">银行1</Option>
+  <Select v-model="value" class="c-select-select" @on-change="onChange">
+    <Option :value="-1">全部</Option>
+    <Option v-for="item in list"
+            :key="item.id"
+            :value="item.id">{{item.name}}</Option>
   </Select>
 </div>
 </template>
@@ -49,9 +52,22 @@ export default {
   },
   data () {
     return {
-      value: ''
+      value: '',
+      name: '全部'
     }
   },
-  methods: {}
+  methods: {
+    onChange (e) {
+      let record = this.list.find(i => i.id === e)
+      if (record === undefined) {
+        record = {
+          id: -1,
+          name: '全部'
+        }
+      }
+      this.name = record.name
+      this.$emit('change', record)
+    }
+  }
 }
 </script>

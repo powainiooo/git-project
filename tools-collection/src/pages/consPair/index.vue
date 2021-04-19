@@ -49,9 +49,9 @@
         <p>两情相悦指数：{{record.xiangyue}}</p>
         <p>天长地久指数：{{record.tcdj}}</p>
         <p>结果评述：{{record.jieguo}}</p>
-        <div class="c-tag" style="background-color: #EA749E;">恋爱建议</div>
+        <div class="c-tag" style="background-color: #EA749E; margin-left: 0;">恋爱建议</div>
         <p>{{record.lianai}}</p>
-        <div class="c-tag" style="background-color: #EA749E;">注意事项</div>
+        <div class="c-tag" style="background-color: #F39F5B; margin-left: 0;">注意事项</div>
         <p>{{record.zhuyi}}</p>
       </div>
     </div>

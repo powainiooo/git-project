@@ -29,14 +29,13 @@ export default {
   data () {
     return {
       list: [],
-      page: 1,
       loadOver: false
     }
   },
   methods: {
     getList () {
       postAction('brain_teaser', {
-        page: this.page
+        num: 10
       }).then(res => {
         if (res.ret === 0) {
           this.list = this.list.concat(res.data)

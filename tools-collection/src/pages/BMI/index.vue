@@ -22,19 +22,19 @@
     <div class="between inputs">
       <div class="acenter">
         <span>身高：</span>
-        <input type="text" placeholder="单位：CM" v-model="height" />
+        <input type="number" placeholder="单位：CM" v-model="height" />
       </div>
       <div class="acenter">
         <span>体重：</span>
-        <input type="text" placeholder="体重：KG" v-model="weight" />
+        <input type="number" placeholder="体重：KG" v-model="weight" />
       </div>
     </div>
     <div class="center inputs">
-      <div class="radio" :class="{'radios-active': sex === 1}" @click="sex = 1">女</div>
-      <div class="radio" :class="{'radios-active': sex === 2}" @click="sex = 2">男</div>
+      <div class="radio mr20" :class="{'radio-active': sex === 1}" @click="sex = 1">女</div>
+      <div class="radio" :class="{'radio-active': sex === 0}" @click="sex = 0">男</div>
     </div>
 
-    <div class="tc"><button class="btn btn-min btn-test">开始测试</button></div>
+    <div class="tc"><button class="btn btn-min btn-test" @click="getData">开始测试</button></div>
 
     <div class="table ml30 mr30" v-if="list.length > 0">
       <ul class="thead">

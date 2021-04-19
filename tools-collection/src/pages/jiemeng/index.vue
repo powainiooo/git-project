@@ -6,13 +6,13 @@
   <div class="container">
     <div class="hr20"></div>
     <div class="mt30 mb30">
-      <c-search placeholder="输入内容" @search="onSearch"/>
+      <c-search placeholder="输入内容" @search="getList"/>
     </div>
 
-    <div class="blue-box">
-      <h3>梦到桃子</h3>
+    <div class="blue-box" style="min-height: calc(100vh - 250rpx)" v-if="showResult">
+      <h3>梦到{{keyword}}</h3>
       <div>
-        <p>配对指数：80</p>
+        <p v-for="item in record.list" :key="index">{{item}}</p>
       </div>
     </div>
     <operates />
@@ -31,39 +31,25 @@ export default {
   },
   data () {
     return {
-      list: [],
+      record: {},
       keyword: '',
-      page: 1,
-      loadOver: false
+      showResult: false
     }
   },
   methods: {
-    onSearch (e) {
-      this.keyword = e
-      this.page = 1
-      this.list = []
-      this.getList()
-    },
-    getList () {
-      postAction('song', {
-        page: this.page,
-        word: this.keyword
+    getList (e) {
+      postAction('dream_query', {
+        q: e
       }).then(res => {
         if (res.ret === 0) {
-          this.list = this.list.concat(res.data)
-          this.loadOver = res.data.length === 0
+          this.record = res.data
+          this.keyword = e
+          this.showResult = true
         }
       })
     }
   },
-  onReachBottom () {
-    if (!this.loadOver) {
-      this.page += 1
-      this.getList()
-    }
-  },
   onLoad () {
-    this.getList()
   }
 }
 </script>

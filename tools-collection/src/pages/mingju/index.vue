@@ -19,8 +19,8 @@
     <li class="borderB" v-for="item in list" :key="index">
       <h2>【{{item.content}}】</h2>
       <h3>——《{{item.source}}》</h3>
-      <div class="n1">xxx</div>
-      <div class="n2">xxx</div>
+<!--      <div class="n1">xxx</div>-->
+<!--      <div class="n2">xxx</div>-->
     </li>
   </ul>
 

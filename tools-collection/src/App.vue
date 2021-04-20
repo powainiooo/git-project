@@ -75,7 +75,7 @@ button:after { border: none;}
 .borderB { position: relative; }
 .borderB:after { content: ''; width: 100%; height: 2px; background-color: #E5E5E5; transform: scaleY(.5); position: absolute; bottom: 0; left: 0; }
 
-.btn { width: 100%; height: 86px; border-radius: 4px; background-color: #436CB3; font-size: 36px; color: #FFFFFF; font-weight: bold; }
+.btn { width: 100%; height: 86px; line-height: 86px; border-radius: 4px; background-color: #436CB3; font-size: 36px; color: #FFFFFF; }
 .btn-min { height: 65px; line-height: 65px; font-size: 30px; font-weight: normal; }
 .btn-light { background-color: #83ABEF; }
 
@@ -133,4 +133,13 @@ button:after { border: none;}
 .to-next { height: 90px; padding: 0 32px; display: flex; align-items: center; justify-content: flex-end; font-size: 22px; background-color: #FFFFFF }
 
 .empty { text-align: center; margin-top: 100px; font-size: 32px; }
+
+.consult-frame { margin: 30px; }
+.consult-frame .blue-frame { background: linear-gradient(45deg, #3366CC, #3DB6FF); border-radius: 3px; color: #FFFFFF; padding: 26px 20px; font-size: 24px; line-height: 40px; }
+.consult-frame .title1 { font-size: 24px; color: #3366CC; margin-left: 40px; margin-bottom: 20px; }
+.consult-table { background-color: #F9F9F9; padding: 20px 15px; }
+.consult-table ul { display: flex; margin-bottom: 20px; }
+.consult-table ul li { flex: 1; font-size: 22px; color: #666666; }
+.consult-table ul.thead li { flex: 1; font-size: 22px; color: #333333; }
+.consult-frame .hint1 { font-size: 18px; color: #3366CC; margin-left: 40px; margin-top: 25px; }
 </style>

@@ -6,24 +6,19 @@
   <div class="container3">
     <div class="hr20"></div>
     <div class="consult-frame">
-      <div class="blue-frame mb30">
-        <h3>正常血压</h3>
+      <div class="blue-frame mb60">
+        <h3>血糖正常值</h3>
         <p>{{record.normal}}</p>
       </div>
-      <div class="blue-frame mb60">
-        <h3>异常血压</h3>
-        <p>（1）高血压：{{record.high}}</p>
-        <p>（2）低血压：{{record.low}}</p>
-      </div>
 
-      <div class="title1">中国人的平均正常血压参考值：</div>
+      <div class="title1">血糖值对照表（血糖浓度单位：mmol/l）</div>
       <div class="consult-table" v-if="record.list">
         <ul class="thead">
-          <li>年龄</li>
-          <li>收缩压（男）</li>
-          <li>舒张压（男）</li>
-          <li>收缩压（女）</li>
-          <li>舒张压（女）</li>
+          <li>诊断</li>
+          <li>条件</li>
+          <li>静脉（全血）</li>
+          <li>毛细血管</li>
+          <li>静脉（血浆）</li>
         </ul>
         <ul class="tr" v-for="item in record.list" :key="index">
           <li>{{item.age}}</li>
@@ -54,14 +49,15 @@ export default {
   },
   methods: {
     getData () {
-      postAction('turntable').then(res => {
+      postAction('blood_suger').then(res => {
         if (res.ret === 0) {
           this.record = res.data
         }
       })
     }
   },
-  created () {
+  onLoad () {
+    this.getData()
   }
 }
 </script>

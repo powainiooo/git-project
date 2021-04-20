@@ -3,25 +3,47 @@
 </style>
 
 <template>
-  <div class="container3">
+<div class="container3">
+  <div class="hr20"></div>
+  <div class="consult-frame">
+    <div class="blue-frame mb60">
+      <h3>心率正常值</h3>
+      <p>{{record.normal}}</p>
+    </div>
 
-
-    <operates />
+    <div class="title1">常规检查</div>
+    <div class="consult-table">
+      <rich-text :nodes="record"></rich-text>
+    </div>
   </div>
+  <operates />
+</div>
 </template>
 
 <script>
 import operates from '@/components/operates'
+import {postAction} from '../../utils/api'
 
 export default {
   components: {
     operates
   },
   data () {
-    return {}
+    return {
+      record: {}
+    }
   },
-
-  created () {
+  methods: {
+    getData () {
+      postAction('heart_rate').then(res => {
+        if (res.ret === 0) {
+          this.record = res.data
+        }
+      })
+    }
+  },
+  onLoad () {
+    this.getData()
   }
 }
 </script>

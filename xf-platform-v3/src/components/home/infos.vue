@@ -88,20 +88,20 @@
     <tag-line>
       <span slot="title">开票时间</span>
       <div class="between" style="color: #C8C9CA">
-        <span>2020/10/20</span>
-        <span>16:30</span>
+        <span>{{sDate}}</span>
+        <span>{{sTime}}</span>
       </div>
     </tag-line>
     <tag-line>
       <span slot="title">停票时间</span>
       <div class="between" style="color: #C8C9CA">
-        <span>2020/10/20</span>
-        <span>16:30</span>
+        <span>{{eDate}}</span>
+        <span>{{eTime}}</span>
       </div>
     </tag-line>
     <tag-line class="mt10">
       <span slot="title">音乐类型</span>
-      <div class="between" style="color: #C8C9CA">Trap</div>
+      <div class="between" style="color: #C8C9CA">{{record.music_type_text}}</div>
     </tag-line>
   </div>
 
@@ -120,41 +120,15 @@
       <li>已售（张）</li>
       <li>销售状态</li>
     </ul>
-    <div class="tr">
+    <div class="tr" v-for="item in record.price" :key="item.id">
       <div class="names">
-        <h3>早鸟票</h3>
+        <h3>{{item.name}}</h3>
         <div class="between">
-          <span>300</span>张
+          <span>{{item.num}}</span>张
         </div>
       </div>
       <div class="nums">100</div>
-      <t-switch true-value="1" false-value="0">
-        <span slot="open">已售罄</span>
-        <span slot="close">销售中</span>
-      </t-switch>
-    </div>
-    <div class="tr">
-      <div class="names">
-        <h3>早鸟票</h3>
-        <div class="between">
-          <span>300</span>张
-        </div>
-      </div>
-      <div class="nums">68</div>
-      <t-switch true-value="1" false-value="0">
-        <span slot="open">已售罄</span>
-        <span slot="close">销售中</span>
-      </t-switch>
-    </div>
-    <div class="tr">
-      <div class="names">
-        <h3>早鸟票</h3>
-        <div class="between">
-          <span>300</span>张
-        </div>
-      </div>
-      <div class="nums">0</div>
-      <t-switch true-value="1" false-value="0">
+      <t-switch v-model="item.sold_out_flag" :true-value="1" :false-value="0">
         <span slot="open">已售罄</span>
         <span slot="close">销售中</span>
       </t-switch>
@@ -189,11 +163,47 @@
 <script type='es6'>
 import tagLine from '@/components/tagLine'
 import TSwitch from '@/components/TSwitch'
+import { formatDate } from '@/utils/tools'
 export default {
   name: 'app',
   components: {
     tagLine,
     TSwitch
+  },
+  props: {
+    record: Object,
+    default: () => {}
+  },
+  watch: {
+    record (val) {
+      console.log('record', val)
+    }
+  },
+  computed: {
+    sDate () {
+      if (this.record.sale_start_time) {
+        return formatDate(new Date(this.record.sale_start_time * 1000), 'yyyy/MM/dd')
+      }
+      return '--'
+    },
+    sTime () {
+      if (this.record.sale_start_time) {
+        return formatDate(new Date(this.record.sale_start_time * 1000), 'HH:mm')
+      }
+      return '--'
+    },
+    eDate () {
+      if (this.record.sale_end_time) {
+        return formatDate(new Date(this.record.sale_end_time * 1000), 'yyyy/MM/dd')
+      }
+      return '--'
+    },
+    eTime () {
+      if (this.record.sale_end_time) {
+        return formatDate(new Date(this.record.sale_end_time * 1000), 'HH:mm')
+      }
+      return '--'
+    }
   },
   data () {
     return {}

@@ -25,6 +25,18 @@
         color #ffffff
         &:hover
           color #ffffff
+.detail-frame
+  size(100%, 100%)
+  acenter()
+  justify-content flex-end
+  abTL(0, 0)
+  overflow hidden
+  z-index 1200
+  .anim-detail
+    animation-duration .5s
+    animation-timing-function cubic-bezier(.25,.76,.36,.97)
+  .c-ticket
+    margin-right: 60px;
 </style>
 <template>
   <div class="home">
@@ -35,7 +47,7 @@
     <template v-else>
       <z-header />
       <Button class="btn-publish">发布新活动</Button>
-      <div class="list-container">
+      <div class="list-container" v-if="!showDetail">
         <Row :gutter="40">
           <Col span="8" v-for="(item, index) in list" :key="item.id">
             <div @mousedown="mDown(index)" @mouseup="gotoDetail(index)">
@@ -56,8 +68,18 @@
       </div>
     </template>
 
-    <div class="detail-frame" v-if="showDetail">
-      <c-details ref="details" />
+    <div class="detail-frame" v-show="showDetail">
+      <transition enter-active-class="animated fadeIn" leave-active-class="animated bounceOut">
+      <ticket :record="selectRecord"
+              operates
+              v-if="showDetail" />
+      </transition>
+      <transition enter-active-class="animated anim-detail slideInRight" leave-active-class="animated anim-detail slideOutRight">
+      <c-details ref="details"
+                 :record="detailRecord"
+                 @close="closeDetail"
+                 v-if="showDetail" />
+      </transition>
     </div>
   </div>
 </template>
@@ -84,6 +106,8 @@ export default {
       showWelcome: false,
       showDetail: false,
       list: [],
+      selectRecord: {},
+      detailRecord: {},
       total: 0,
       pageNo: 1,
       pageSize: 9,
@@ -116,6 +140,21 @@ export default {
     },
     gotoDetail (index) {
       this.touchIndex = -1
+      this.selectRecord = this.list[index]
+      postAction('/editor/ticket/detail', {
+        id: this.selectRecord.id
+      }).then(res => {
+        if (res.code === 1) {
+          this.detailRecord = res.data
+          this.$nextTick(() => {
+            this.showDetail = true
+          })
+        }
+      })
+    },
+    closeDetail () {
+      this.showDetail = false
+      this.getData()
     }
   }
 }

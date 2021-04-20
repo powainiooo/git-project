@@ -9,6 +9,9 @@
     height 60px
     between()
     background-color #ffffff
+    -webkit-mask-image url('../assets/img/mask4.png')
+    -webkit-mask-repeat no-repeat
+    -webkit-mask-size 420px 60px
   &-status
     size(120px, 60px)
     background linear-gradient(165deg, #0027AF, #2154DA 54%,#003AC3)
@@ -53,6 +56,10 @@
     center()
     color #6D9BF5
     margin-right 10px
+  .operates-body
+    -webkit-mask-image url('../assets/img/mask5.png')
+    -webkit-mask-repeat no-repeat
+    -webkit-mask-size 420px 280px
   &-body
     size(420px, 280px)
     background-color #ffffff
@@ -123,7 +130,7 @@
               :list="record.stocks"
               @change="tChange"/>
   </div>
-  <div class="c-ticket-body flip-box-min">
+  <div class="c-ticket-body operates-body flip-box-min">
     <div class="c-ticket-header">
       <div class="flex">
         <div class="c-ticket-header-dates">

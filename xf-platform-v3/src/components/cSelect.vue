@@ -30,7 +30,7 @@
 </style>
 
 <template>
-<div class="c-select">
+<div class="c-select" @mousedown.stop="sm" @mouseup.stop="sm">
   <div class="c-select-line">
     <span>{{name}}</span>
     <Icon type="ios-arrow-down" />
@@ -57,6 +57,9 @@ export default {
     }
   },
   methods: {
+    sm (e) {
+      e.preventDefault()
+    },
     onChange (e) {
       let record = this.list.find(i => i.id === e)
       if (record === undefined) {

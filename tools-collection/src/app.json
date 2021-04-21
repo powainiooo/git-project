@@ -1,13 +1,13 @@
 {
   "pages": [
+    "pages/bloodPressure/main",
+    "pages/hepatitisB/main",
     "pages/pictrue/main",
     "pages/etiquetteDetail/main",
     "pages/etiquette/main",
-    "pages/hepatitisB/main",
     "pages/formula/main",
     "pages/heartRate/main",
     "pages/bloodSugar/main",
-    "pages/bloodPressure/main",
     "pages/rollCall/main",
     "pages/search2/main",
     "pages/loan/main",

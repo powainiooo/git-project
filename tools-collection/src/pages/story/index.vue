@@ -5,9 +5,9 @@
 </style>
 
 <template>
-  <div class="container">
+  <div class="container" @touchstart="tstart" @touchmove="tmove" @touchend="tend">
     <div class="hr20"></div>
-    <div class="mt30 mb60">
+    <div class="mt30 mb30">
       <c-search placeholder="搜索内容" @search="onSearch"/>
     </div>
 
@@ -43,7 +43,9 @@ export default {
       list: [],
       keyword: '',
       page: 1,
-      loadOver: false
+      loadOver: false,
+      sx: 0,
+      ex: 0
     }
   },
   methods: {
@@ -71,6 +73,17 @@ export default {
           this.loadOver = res.data.length === 0
         }
       })
+    },
+    tstart (e) {
+      this.sx = e.clientX
+    },
+    tmove (e) {
+      this.ex = e.clientX
+    },
+    tend (e) {
+      if (this.sx > this.ex) {
+        this.getList()
+      }
     }
   },
   onReachBottom () {

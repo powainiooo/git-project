@@ -1,5 +1,5 @@
 <style scoped>
-.banner { width: 100%; position: absolute; top: 0; left: 0; z-index: 0; }
+.banner { width: 100%; position: absolute; top: -50px; left: 0; z-index: 0; }
 .form-box { margin: 60px 30px 38px 30px; background-color: #FFFFFF; border-radius: 10px; padding: 50px 60px 0 60px; overflow: hidden; }
 .form-item { height: 65px; border-radius: 6px; border: 2px solid #666666; padding:0 20px; font-size: 30px; color: #666666; display: flex; align-items: center; }
 .selects { width: 212px;  justify-content: space-between; }

@@ -48,7 +48,7 @@ export default {
 /*
   common
 */
-.container { padding-bottom: 100px; }
+.container { padding-bottom: 100px; min-height: 100vh; }
 .container2 { min-height: 100vh; background-color: #F8F8F8; }
 .container3 { min-height: 100vh; background-color: #F8F8F8; padding-bottom: 100px; }
 .mh100 { min-height: 100vh; }
@@ -140,6 +140,9 @@ button:after { border: none;}
 .consult-table { background-color: #F9F9F9; padding: 20px 15px; }
 .consult-table ul { display: flex; margin-bottom: 20px; }
 .consult-table ul li { flex: 1; font-size: 22px; color: #666666; }
-.consult-table ul.thead li { flex: 1; font-size: 22px; color: #333333; }
+.consult-table ul.thead li { flex: 1; font-size: 22px; color: #333333; text-align: center; }
+.consult-table ul.thead li:first-child { text-align: left; }
+.consult-table ul.tr li { text-align: center }
+.consult-table ul.tr li:first-child { text-align: left }
 .consult-frame .hint1 { font-size: 18px; color: #3366CC; margin-left: 40px; margin-top: 25px; }
 </style>

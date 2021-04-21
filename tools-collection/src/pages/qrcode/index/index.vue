@@ -111,7 +111,11 @@ export default {
         params.text = this.text2
       }
       postAction('qrcode', params).then(res => {
-
+        if (res.ret === 0) {
+          mpvue.previewImage({
+            urls: [res.data.base64_image]
+          })
+        }
       })
     }
   },

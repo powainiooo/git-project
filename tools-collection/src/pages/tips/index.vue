@@ -5,7 +5,7 @@
 </style>
 
 <template>
-  <div class="container3">
+  <div class="container3" @touchstart="tstart" @touchmove="tmove" @touchend="tend">
     <div class="hr20"></div>
 
     <div class="to-next">
@@ -30,7 +30,9 @@ export default {
   },
   data () {
     return {
-      list: []
+      list: [],
+      sx: 0,
+      ex: 0
     }
   },
   methods: {
@@ -40,6 +42,17 @@ export default {
           this.list = res.data
         }
       })
+    },
+    tstart (e) {
+      this.sx = e.clientX
+    },
+    tmove (e) {
+      this.ex = e.clientX
+    },
+    tend (e) {
+      if (this.sx > this.ex) {
+        this.getData()
+      }
     }
   },
   onLoad () {

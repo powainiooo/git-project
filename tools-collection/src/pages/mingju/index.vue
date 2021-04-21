@@ -9,10 +9,15 @@
 </style>
 
 <template>
-<div class="container">
+<div class="container" @touchstart="tstart" @touchmove="tmove" @touchend="tend">
   <div class="hr20"></div>
+
   <div class="mt30 mb30">
     <c-search placeholder="搜索内容" @search="onSearch"/>
+  </div>
+
+  <div class="to-next">
+    <a href="javascript:;" @click="getData">右划显示下一条</a>
   </div>
 
   <ul class="mj-list borderT">
@@ -43,7 +48,9 @@ export default {
       list: [],
       keyword: '',
       page: 1,
-      loadOver: false
+      loadOver: false,
+      sx: 0,
+      ex: 0
     }
   },
   methods: {
@@ -55,15 +62,23 @@ export default {
     },
     getList () {
       postAction('quote', {
-        page: this.page,
-        num: 10,
         word: this.keyword
       }).then(res => {
         if (res.ret === 0) {
-          this.list = this.list.concat(res.data)
-          this.loadOver = res.data.length === 0
+          this.list = res.data
         }
       })
+    },
+    tstart (e) {
+      this.sx = e.clientX
+    },
+    tmove (e) {
+      this.ex = e.clientX
+    },
+    tend (e) {
+      if (this.sx > this.ex) {
+        this.getList()
+      }
     }
   },
   onReachBottom () {

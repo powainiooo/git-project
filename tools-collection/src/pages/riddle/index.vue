@@ -7,9 +7,11 @@
 </style>
 
 <template>
-  <div class="container">
+  <div class="container" @touchstart="tstart" @touchmove="tmove" @touchend="tend">
     <div class="hr20"></div>
-
+    <div class="to-next">
+      <a href="javascript:;" @click="getData">右划显示下一条</a>
+    </div>
     <div class="riddle-item borderT borderB" v-for="item in list" :key="index">
       <h3>{{item.quest}}</h3>
 <!--      <h4>（打一四字成语）</h4>-->
@@ -30,7 +32,9 @@ export default {
   },
   data () {
     return {
-      list: []
+      list: [],
+      sx: 0,
+      ex: 0
     }
   },
   methods: {
@@ -40,6 +44,17 @@ export default {
           this.list = res.data
         }
       })
+    },
+    tstart (e) {
+      this.sx = e.clientX
+    },
+    tmove (e) {
+      this.ex = e.clientX
+    },
+    tend (e) {
+      if (this.sx > this.ex) {
+        this.getData()
+      }
     }
   },
   onLoad () {

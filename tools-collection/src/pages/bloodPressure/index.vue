@@ -3,7 +3,7 @@
 </style>
 
 <template>
-  <div class="container3">
+  <div class="container">
     <div class="hr20"></div>
     <div class="consult-frame">
       <div class="blue-frame mb30">
@@ -54,14 +54,15 @@ export default {
   },
   methods: {
     getData () {
-      postAction('turntable').then(res => {
+      postAction('blood_pressure').then(res => {
         if (res.ret === 0) {
           this.record = res.data
         }
       })
     }
   },
-  created () {
+  onLoad () {
+    this.getData()
   }
 }
 </script>

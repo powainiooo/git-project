@@ -1,9 +1,14 @@
 <style scoped>
-
+.consult-table2 ul li { flex: auto; }
+.consult-table2 .td-w1 { width: 100px; text-align: left; }
+.consult-table2 .td-w2 { width: 150px; text-align: center; }
+.consult-table2 .tr { align-items: center; }
+.consult-table2 .tr div { width: 550px }
+.consult-table2 .tr .td-w1 { padding-right: 10px; }
 </style>
 
 <template>
-  <div class="container3">
+  <div class="container">
     <div class="hr20"></div>
     <div class="consult-frame">
       <div class="blue-frame mb60">
@@ -12,23 +17,26 @@
       </div>
 
       <div class="title1">血糖值对照表（血糖浓度单位：mmol/l）</div>
-      <div class="consult-table" v-if="record.list">
+      <div class="consult-table consult-table2" v-if="record.list">
         <ul class="thead">
-          <li>诊断</li>
-          <li>条件</li>
-          <li>静脉（全血）</li>
-          <li>毛细血管</li>
-          <li>静脉（血浆）</li>
+          <li class="td-w1">诊断</li>
+          <li class="td-w1">条件</li>
+          <li class="td-w2">静脉（全血）</li>
+          <li class="td-w2">毛细血管</li>
+          <li class="td-w2">静脉（血浆）</li>
         </ul>
         <ul class="tr" v-for="item in record.list" :key="index">
-          <li>{{item.age}}</li>
-          <li>{{item.nan_ss}}</li>
-          <li>{{item.nan_sz}}</li>
-          <li>{{item.nv_ss}}</li>
-          <li>{{item.nv_sz}}</li>
+          <li class="td-w1">{{item.result}}</li>
+          <div>
+            <ul class="td flex" v-for="(item2, index2) in item.sub" :key="index2">
+              <li class="td-w1">{{item2.condition}}</li>
+              <li class="td-w2">{{item2.jm}}</li>
+              <li class="td-w2">{{item2.xg}}</li>
+              <li class="td-w2">{{item2.xj}}</li>
+            </ul>
+          </div>
         </ul>
       </div>
-      <div class="hint1">注：以上统计为1998年完成的，如今人的平均血压有所增加。</div>
     </div>
     <operates />
   </div>

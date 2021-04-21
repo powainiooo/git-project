@@ -3,17 +3,17 @@
 </style>
 
 <template>
-<div class="container3">
+<div class="container">
   <div class="hr20"></div>
   <div class="consult-frame">
     <div class="blue-frame mb60">
       <h3>心率正常值</h3>
-      <p>{{record.normal}}</p>
+      <p>{{record.sm}}</p>
     </div>
 
     <div class="title1">常规检查</div>
     <div class="consult-table">
-      <rich-text :nodes="record"></rich-text>
+      <rich-text :nodes="record.desc"></rich-text>
     </div>
   </div>
   <operates />

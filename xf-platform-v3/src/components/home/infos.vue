@@ -2,24 +2,6 @@
 @import "../../assets/css/global.styl"
 .c-infos
   padding 128px 20px 80px 20px
-.c-infos-titles
-  between()
-  border-bottom 1px solid #EEEEEF
-  padding-bottom 20px
-  .l
-    height 26px
-    font-size 18px
-    line-height 26px
-    position relative
-    padding-left 38px
-    color #000000
-    img
-      width auto
-      height 26px
-      abTL(0, 10px)
-  .ivu-btn
-    width 90px
-    margin-right 20px
 .c-infos-line1
   margin 20px 25px 60px 25px
   display flex
@@ -85,22 +67,19 @@
     </div>
   </div>
   <div class="c-infos-line1">
-    <tag-line>
-      <span slot="title">开票时间</span>
+    <tag-line title="开票时间">
       <div class="between" style="color: #C8C9CA">
         <span>{{sDate}}</span>
         <span>{{sTime}}</span>
       </div>
     </tag-line>
-    <tag-line>
-      <span slot="title">停票时间</span>
+    <tag-line title="停票时间">
       <div class="between" style="color: #C8C9CA">
         <span>{{eDate}}</span>
         <span>{{eTime}}</span>
       </div>
     </tag-line>
-    <tag-line class="mt10">
-      <span slot="title">音乐类型</span>
+    <tag-line title="音乐类型" class="mt10">
       <div class="between" style="color: #C8C9CA">{{record.music_type_text}}</div>
     </tag-line>
   </div>
@@ -110,7 +89,7 @@
       <img :src="getIndexSrc(2)" />
       <span>票务基本信息</span>
     </div>
-    <Button size="small">订单详情</Button>
+    <Button size="small" @click="$emit('toggle', 'table')">订单详情</Button>
   </div>
 
   <div class="c-infos-ticket">

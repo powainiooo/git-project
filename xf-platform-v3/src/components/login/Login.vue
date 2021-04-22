@@ -6,7 +6,7 @@
 <div>
   <div class="logo"><img src="@/assets/img/logo.png" /></div>
   <div class="flip-box">
-    <Form class="form">
+    <Form class="form" @keyup.enter.native="handleLogin">
       <div class="form-title">登陆</div>
       <FormItem>
         <Input v-model="formData.account" placeholder="邮箱 / 联系电话" />

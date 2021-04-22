@@ -32,6 +32,7 @@ export default new Vuex.Store({
       { label: '宁波银行', value: '1056' },
       { label: '邮储银行', value: '1066' }
     ],
+    copyright: 'Copyright ©right; 2018HO.AllRights reserved.粤ICP備16121686号-1',
     config: {},
     globalData: {},
     hasGlobalData: false

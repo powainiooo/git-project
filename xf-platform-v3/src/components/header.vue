@@ -5,7 +5,7 @@
   top 20px
   right 30px
   left 30px
-  z-index 500
+  z-index 2500
   between()
   &-right
     display flex
@@ -30,12 +30,18 @@
     <input />
     <a href="javascript:;"><img src="@/assets/img/ico-menu.png" /></a>
   </div>
+
+  <menus />
 </header>
 </template>
 
 <script type='es6'>
+import menus from './menu/menus'
 export default {
   name: 'app',
+  components: {
+    menus
+  },
   data () {
     return {}
   },

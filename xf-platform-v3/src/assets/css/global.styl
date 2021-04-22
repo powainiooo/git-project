@@ -57,6 +57,11 @@ body
     font-size 10px
 
 
+.ivu-btn-normal
+  background #ffffff
+  color #6D9BF5
+  &:hover
+    color #6D9BF5
 
 .ivu-select-single
   .ivu-select-selection
@@ -67,6 +72,8 @@ body
     .ivu-select-placeholder
       height 40px
       line-height 40px
+      color #9E9E9F
+      padding-left 10px
     .ivu-select-arrow
       color #ffffff
       z-index 5
@@ -222,3 +229,80 @@ body
     padding 20px 25px
     margin 0 -25px
     border-bottom 1px solid #EEEEEF
+
+.c-tables
+  margin 0 20px
+  position relative
+  border-top 1px solid #EEEEEF
+  border-bottom 1px solid #EEEEEF
+  table
+    width 100%
+    thead
+      th
+        height 50px
+        vertical-align middle
+        color #C8C9CA
+        font-weight normal
+        font-size 14px
+        text-align left
+        &:first-child
+          padding-left 30px
+    tbody
+      .style1
+        font-size 18px
+        color #6D9BF5
+        font-family HelveB
+      .style2
+        bgG()
+        color #ffffff
+      tr
+        td
+          vertical-align top
+          &>div
+            min-height 85px
+            padding-top 20px
+            padding-right 20px
+            font-size 14px
+            color #9E9E9F
+          &:first-child
+            border-radius 10px 0 0 10px
+            padding-left 30px
+          &:last-child
+            border-radius 0 10px 10px 0
+        .status
+          width 70px
+          text-align center
+      tr:nth-child(2n-1)
+        td
+          background-color #EEEEEF
+
+.xf-page
+  .ivu-page-item,.ivu-page-prev,.ivu-page-next
+    border-radius 10px
+  .ivu-page-item
+    a
+      color #C8C9CA
+    &:hover
+      border-color #5B85E6
+      a
+        color #5B85E6
+  .ivu-page-item-active
+    border-color transparent
+    bgG()
+    a
+      color #ffffff
+
+
+
+.xf-radios
+  .ivu-radio-wrapper
+    margin-right 38px
+    color #C8C9CA
+  .ivu-radio-inner
+    size(20px, 20px)
+    border-color #6D9BF5
+    &:after
+      size(10px, 10px)
+      top 4px
+      left 4px
+      bgG()

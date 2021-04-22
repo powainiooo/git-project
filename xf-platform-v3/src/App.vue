@@ -32,4 +32,6 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.helveT { font-family: HelveThin; }
+.helveB { font-family: HelveB; }
 </style>

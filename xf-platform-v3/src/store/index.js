@@ -35,7 +35,8 @@ export default new Vuex.Store({
     copyright: 'Copyright ©right; 2018HO.AllRights reserved.粤ICP備16121686号-1',
     config: {},
     globalData: {},
-    hasGlobalData: false
+    hasGlobalData: false,
+    showMenu: false
   },
   getters: {
     musicType: state => {
@@ -60,6 +61,9 @@ export default new Vuex.Store({
     SET_GLOBALDATA (state, data) {
       state.globalData = data
       state.hasGlobalData = data.id !== undefined
+    },
+    SET_MENU (state, data) {
+      state.showMenu = data
     }
   },
   actions: {

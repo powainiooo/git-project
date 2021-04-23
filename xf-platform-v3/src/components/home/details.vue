@@ -48,14 +48,14 @@
 <template>
 <div class="details-frame" :style="{width: page === 'info' ? '650px' : '1300px'}">
   <div class="details-btns">
-    <a href="javascript:;" class="fl" v-show="page === 'charts' || page === 'table'" @click="page = 'info'"><img src="@/assets/img/ico-back.png" width="28" /></a>
+    <a href="javascript:;" class="fl" v-show="page === 'charts' || page === 'orders'" @click="page = 'info'"><img src="@/assets/img/ico-back.png" width="28" /></a>
     <a href="javascript:;" class="fr" @click="$emit('close')"><img src="@/assets/img/ico-close2.png" width="28" /></a>
   </div>
 
-  <div class="details-tabs" v-if="page === 'charts' || page === 'table'">
+  <div class="details-tabs" v-if="page === 'charts' || page === 'orders'">
     <RadioGroup v-model="page" type="button" button-style="solid" class="tab-bar">
       <Radio label="charts">销售数量</Radio>
-      <Radio label="table">订单列表</Radio>
+      <Radio label="orders">订单列表</Radio>
     </RadioGroup>
   </div>
 
@@ -86,7 +86,7 @@ export default {
   data () {
     return {
       visible: false,
-      page: 'refunds'
+      page: 'info'
     }
   },
   methods: {

@@ -89,7 +89,7 @@
       <img :src="getIndexSrc(2)" />
       <span>票务基本信息</span>
     </div>
-    <Button size="small" @click="$emit('toggle', 'table')">订单详情</Button>
+    <Button size="small" @click="$emit('toggle', 'orders')">订单详情</Button>
   </div>
 
   <div class="c-infos-ticket">

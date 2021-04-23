@@ -8,11 +8,11 @@
 <template>
 <div class="c-navs">
   <ul class="menu-nav">
-    <li @click="$emit('toggle','baseinfo')"><span><img :src="getIndexSrc(1)" /></span>基本资料</li>
-    <li @click="$emit('toggle','bankinfo')"><span><img :src="getIndexSrc(2)" /></span>银行卡管理</li>
-    <li @click="$emit('toggle','recordlist')"><span><img :src="getIndexSrc(3)" /></span>流水管理</li>
+    <li @click="$emit('toggle','infos')"><span><img :src="getIndexSrc(1)" /></span>基本资料</li>
+    <li @click="$emit('toggle','banks')"><span><img :src="getIndexSrc(2)" /></span>银行卡管理</li>
+    <li @click="$emit('toggle','records')"><span><img :src="getIndexSrc(3)" /></span>流水管理</li>
     <li @click="$emit('toggle','laws')"><span><img :src="getIndexSrc(4)" /></span>条例</li>
-    <li @click="$emit('toggle','contact')"><span><img :src="getIndexSrc(5)" /></span>联系</li>
+    <li @click="$emit('toggle','contacts')"><span><img :src="getIndexSrc(5)" /></span>联系</li>
   </ul>
 </div>
 </template>

@@ -31,10 +31,7 @@
   justify-content flex-end
   abTL(0, 0)
   overflow hidden
-  z-index 1200
-  .anim-detail
-    animation-duration .5s
-    animation-timing-function cubic-bezier(.25,.76,.36,.97)
+  z-index 2600
   .c-ticket
     margin-right: 60px;
 </style>

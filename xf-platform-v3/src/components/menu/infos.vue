@@ -11,7 +11,7 @@
     <tag-line class="mb10" title="类型">{{globalData.type === 1 ? '个人': '公司'}}</tag-line>
     <tag-line class="mb10" title="名称">{{globalData.organizer_name}}</tag-line>
     <tag-line class="mb10" title="所属公司">{{globalData.company}}</tag-line>
-    <tag-line class="mb10" title="负责人">{{globalData.name}}</tag-line>
+    <tag-line class="mb10" title="负责人">{{globalData.person}}</tag-line>
     <tag-line class="mb10" title="身份证">{{globalData.id_card_no}}</tag-line>
     <tag-line class="mb10" title="联系电话">{{globalData.mobile}}</tag-line>
     <tag-line class="mb10" title="地址" :width="340">{{globalData.address}}</tag-line>

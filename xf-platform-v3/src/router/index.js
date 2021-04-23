@@ -70,6 +70,7 @@ router.beforeEach((to, from, next) => {
     }
     LoadingBar.finish()
   }
+  store.commit('SET_MENU', false)
 })
 router.afterEach(() => {
   LoadingBar.finish()

@@ -7,11 +7,11 @@
 <template>
 <div>
   <div class="c-infos-top">
-    <tag-line class="mb10" title="个人开户名" :lWidth="80">{{globalData.type}}</tag-line>
-    <tag-line class="mb10" title="预留手机" :lWidth="80">{{globalData.organizer_name}}</tag-line>
-    <tag-line class="mb10" title="身份证" :lWidth="80">{{globalData.company}}</tag-line>
-    <tag-line class="mb10" title="个人银行卡号" :lWidth="80">{{globalData.name}}</tag-line>
-    <tag-line class="mb10" title="开户支行" :lWidth="80">{{globalData.id_card_no}}</tag-line>
+    <tag-line class="mb10" title="个人开户名" :lWidth="80">{{globalData.account_name}}</tag-line>
+    <tag-line class="mb10" title="预留手机" :lWidth="80">{{globalData.account_mobile}}</tag-line>
+    <tag-line class="mb10" title="身份证" :lWidth="80">{{globalData.account_id_card_no}}</tag-line>
+    <tag-line class="mb10" title="个人银行卡号" :lWidth="80">{{globalData.account_card_no}}</tag-line>
+    <tag-line class="mb10" title="开户支行" :lWidth="80">{{globalData.account_opening_banke}}</tag-line>
   </div>
   <div class="c-infos-bottom">
     <Button size="small" @click="$emit('toggle', 'bankEdit')">更改账号</Button>

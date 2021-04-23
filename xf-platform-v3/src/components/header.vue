@@ -28,7 +28,7 @@
   <img src="@/assets/img/logo.png" />
   <div class="c-header-right">
     <input />
-    <a href="javascript:;"><img src="@/assets/img/ico-menu.png" /></a>
+    <a href="javascript:;" @click="openMenu"><img src="@/assets/img/ico-menu.png" /></a>
   </div>
 
   <menus />
@@ -45,6 +45,10 @@ export default {
   data () {
     return {}
   },
-  methods: {}
+  methods: {
+    openMenu () {
+      this.$store.commit('SET_MENU', true)
+    }
+  }
 }
 </script>

@@ -36,14 +36,23 @@
 </style>
 
 <template>
-<div class="c-menus">
+<div class="c-menus" :style="{
+  width: page !== 'records' ? '600px' : '1300px',
+  right: showMenu ? '0px' : '-600px'
+}">
   <div class="c-menus-btns">
-    <a href="javascript:;" class="fr"><img src="@/assets/img/ico-close2.png" width="28" /></a>
+    <a href="javascript:;" class="fl" v-show="page !== 'navs'" @click="page = 'navs'"><img src="@/assets/img/ico-back.png" width="28" /></a>
+    <a href="javascript:;" class="fr" @click="hideMenu"><img src="@/assets/img/ico-close2.png" width="28" /></a>
   </div>
+  <transition enter-active-class="animated anim-detail slideInRight">
   <navs v-if="page === 'navs'" @toggle="toggle" />
   <infos v-if="page === 'infos'" />
   <banks v-if="page === 'banks'" @toggle="toggle" />
   <bank-edit v-if="page === 'bankEdit'" />
+  <records v-if="page === 'records'" />
+  <cash-out v-if="page === 'cashOut'" :record="recordData" />
+  <contacts v-if="page === 'contacts'" />
+  </transition>
   <div class="copyright">{{copyright}}</div>
 </div>
 </template>
@@ -53,27 +62,46 @@ import navs from './navs'
 import infos from './infos'
 import banks from './banks'
 import bankEdit from './bankEdit'
+import records from './records'
+import cashOut from './cashOut'
+import contacts from './contacts'
 export default {
   name: 'app',
   components: {
     navs,
     infos,
     banks,
-    bankEdit
+    bankEdit,
+    records,
+    cashOut,
+    contacts
   },
   computed: {
     copyright () {
       return this.$store.state.copyright
+    },
+    showMenu () {
+      return this.$store.state.showMenu
     }
   },
   data () {
     return {
-      page: 'banks'
+      page: 'cashOut',
+      recordData: {}
     }
   },
   methods: {
-    toggle (page) {
-      this.page = page
+    toggle (data) {
+      if (typeof data === 'string') {
+        this.page = data
+      } else {
+        this.page = data.page
+        this.recordData = data.data
+      }
+    },
+    hideMenu () {
+      this.$store.commit('SET_MENU', false)
+      this.toggle('navs')
     }
   }
 }

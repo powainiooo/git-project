@@ -44,6 +44,7 @@ body
   padding 4px 10px
 
 .ivu-btn-small
+  min-width 90px
   height 30px
   line-height 30px
 .ivu-input-group-append
@@ -62,6 +63,8 @@ body
   color #6D9BF5
   &:hover
     color #6D9BF5
+.ivu-btn-error
+  background linear-gradient(342deg, #E63828 0%, #E85412 100%)
 
 .ivu-select-single
   .ivu-select-selection
@@ -230,6 +233,20 @@ body
     margin 0 -25px
     border-bottom 1px solid #EEEEEF
 
+.c-search
+  size(250px, 30px)
+  border-radius 10px
+  background-color #EEEEEF
+  acenter()
+  input
+    size(160px, 30px)
+    line-height 30px
+    border none
+    background-color transparent
+    padding 0 10px
+  button
+    width 90px
+
 .c-tables
   margin 0 20px
   position relative
@@ -255,6 +272,9 @@ body
       .style2
         bgG()
         color #ffffff
+      .style3
+        font-size 18px
+        font-family HelveB
       tr
         td
           vertical-align top
@@ -269,6 +289,8 @@ body
             padding-left 30px
           &:last-child
             border-radius 0 10px 10px 0
+            &>div
+              border-radius 0 10px 10px 0
         .status
           width 70px
           text-align center
@@ -306,3 +328,6 @@ body
       top 4px
       left 4px
       bgG()
+.anim-detail
+  animation-duration .5s
+  animation-timing-function cubic-bezier(.25,.76,.36,.97)

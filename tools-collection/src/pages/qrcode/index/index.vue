@@ -97,6 +97,7 @@ export default {
   },
   data () {
     return {
+      imgSrc: mpvue.imgSrc,
       page: 'text',
       text1: '',
       text2: ''
@@ -113,7 +114,7 @@ export default {
       postAction('qrcode', params).then(res => {
         if (res.ret === 0) {
           mpvue.previewImage({
-            urls: [res.data.base64_image]
+            urls: [this.imgSrc + res.path]
           })
         }
       })

@@ -1,5 +1,7 @@
 {
   "pages": [
+    "pages/search2/main",
+    "pages/map/main",
     "pages/bloodPressure/main",
     "pages/hepatitisB/main",
     "pages/pictrue/main",
@@ -9,7 +11,6 @@
     "pages/heartRate/main",
     "pages/bloodSugar/main",
     "pages/rollCall/main",
-    "pages/search2/main",
     "pages/loan/main",
     "pages/taxResult/main",
     "pages/tax/main",
@@ -75,5 +76,10 @@
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle": "black"
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "获取当前用户所在位置，以便查找周围场所。"
+    }
   }
 }

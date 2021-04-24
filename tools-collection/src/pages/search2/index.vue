@@ -9,7 +9,7 @@
   <div class="container">
     <div class="hr20"></div>
     <div class="mt120">
-      <c-search />
+      <c-search ref="search" placeholder="请输入关键词搜索例如：银行、超市" @search="onSearch" />
     </div>
 
     <div class="title acenter mt90 mb60 ml50">
@@ -17,12 +17,7 @@
       <span>热门搜索</span>
     </div>
     <ul class="pos-list">
-      <li>银 行</li>
-      <li>银 行</li>
-      <li>银 行</li>
-      <li>银 行</li>
-      <li>银 行</li>
-      <li>银 行</li>
+      <li v-for="i in list" :key="index" @click="select(i)">{{i}}</li>
     </ul>
 
     <operates />
@@ -32,9 +27,12 @@
 <script>
 import operates from '@/components/operates'
 import cSearch from '@/components/search'
-
-// 路线规划appid：wx50b5593e81dd937a
-// https://mp.weixin.qq.com/wxopen/plugindevdoc?appid=wx50b5593e81dd937a&token=823746304&lang=zh_CN
+import {postAction} from '../../utils/api'
+import QQMapWX from '../../utils/qqmap-wx-jssdk.min.js'
+import store from '../../store'
+const qMap = new QQMapWX({
+  key: 'AH7BZ-VV736-WNUSA-EP35M-3TCOZ-DTBXG'
+})
 export default {
   components: {
     operates,
@@ -42,9 +40,44 @@ export default {
   },
 
   data () {
-    return {}
+    return {
+      list: []
+    }
   },
-
-  created () {}
+  methods: {
+    getData () {
+      postAction('find_surroundings').then(res => {
+        if (res.ret === 0) {
+          this.list = res.data
+        }
+      })
+    },
+    onSearch (e) {
+      console.log('e', e)
+      mpvue.getLocation({
+        success (res) {
+          console.log(res)
+          qMap.search({
+            keyword: e,
+            location: `${res.latitude},${res.longitude}`,
+            success (res2) {
+              console.log('res2', res2)
+              store.commit('SET_MAP', res2.data)
+              mpvue.navigateTo({
+                url: '/pages/map/main'
+              })
+            }
+          })
+        }
+      })
+    },
+    select (keyword) {
+      this.$refs.search.keyword = keyword
+      this.onSearch(keyword)
+    }
+  },
+  onLoad () {
+    this.getData()
+  }
 }
 </script>

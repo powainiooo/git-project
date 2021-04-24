@@ -3,8 +3,8 @@
 .ad img { width: 100%; display: block; }
 
 .inputs { margin: 0 30px 56px 30px; }
-.inputs span { display: block; margin-right: 40px; font-size: 28px; color: #000000; }
-.inputs input[type=text] { width: 200px; height: 60px; border-radius: 4px; background-color: #F4F4F4; padding: 0 24px; font-size: 28px; color: #000000; }
+.inputs span { width: 100px; display: block; margin-left: 30px; font-size: 28px; color: #000000; }
+.inputs input[type=number] { width: 200px; height: 60px; border-radius: 4px; background-color: #F4F4F4; padding: 0 24px; font-size: 28px; color: #000000; }
 
 .btn-test { width: 290px; border-radius: 10px; margin-bottom: 52px; }
 
@@ -13,6 +13,9 @@
 .table .tbody .tr { width: 100%; height: 100px; border-radius: 10px; background-color: #F4F4F4; display: flex; }
 .table .tbody .tr:nth-child(2n) { background-color: #FFFFFF; }
 .table .tbody .tr li { flex: 1; display: flex; justify-content: center; align-items: center; font-size: 20px; color: #000000; text-align: center; padding: 0 15px; }
+
+.bmi-result { margin: 30px 38px; }
+.bmi-result p { font-size: 22px; color: #720BE1; line-height: 1.6; }
 </style>
 
 <template>
@@ -35,6 +38,13 @@
     </div>
 
     <div class="tc"><button class="btn btn-min btn-test" @click="getData">开始测试</button></div>
+
+    <div class="bmi-result" v-if="list.length > 0">
+      <p>中国标准</p>
+      <p>结果值：{{record.bmi}}</p>
+      <p>结果描述：{{record.healthy}}</p>
+      <p>建议：{{record.tip}}</p>
+    </div>
 
     <div class="table ml30 mr30" v-if="list.length > 0">
       <ul class="thead">
@@ -72,7 +82,8 @@ export default {
       height: '',
       weight: '',
       sex: 1,
-      list: []
+      list: [],
+      record: {}
     }
   },
   methods: {
@@ -91,11 +102,16 @@ export default {
         })
         return false
       }
-      postAction('bmi_bz', {
+      postAction('bmi', {
         height: this.height,
         weight: this.weight,
         sex: this.sex
       }).then(res => {
+        if (res.ret === 0) {
+          this.record = res.data[0]
+        }
+      })
+      postAction('bmi_bz').then(res => {
         if (res.ret === 0) {
           this.list = res.data
         }

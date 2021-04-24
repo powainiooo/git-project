@@ -67,7 +67,7 @@
       <span class="center" style="background-color: #DB3D3D;">忌</span>
       <p>{{record.suit}}</p>
     </div>
-    <a href="#" class="f30 c-link ml45 mt20 bold mb45">查看今天的行程</a>
+<!--    <a href="#" class="f30 c-link ml45 mt20 bold mb45">查看今天的行程</a>-->
     <operates />
   </div>
 </template>

@@ -29,13 +29,13 @@
           <img src="/static/images/arrow3.png" mode="widthFix" class="w44" />
           <picker :range="typeList" range-key="name" @change="selectChange($event, '2')">
             <div class="selects form-item">
-              <span>{{name1 === '' ? '请选择' : name1}}</span>
+              <span>{{name2 === '' ? '请选择' : name2}}</span>
               <img src="/static/images/arrow2.png" mode="widthFix" />
             </div>
           </picker>
         </div>
         <div class="line1">
-          <input type="text" class="form-item" placeholder="请输入换算金额" />
+          <input type="number" class="form-item" placeholder="请输入换算金额" v-model="money" />
         </div>
         <div class="line1">
           <button class="btn btn-min" @click="handleCalc">立即换算</button>
@@ -68,6 +68,7 @@ export default {
       name1: '',
       key2: '',
       name2: '',
+      money: '',
       showResult: false,
       result: {}
     }
@@ -86,7 +87,25 @@ export default {
       this[`name${key}`] = i.name
     },
     handleCalc () {
-      postAction('hlzh').then(res => {
+      if (this.key1 === '' || this.key2 === '') {
+        mpvue.showToast({
+          title: '请选择币种',
+          icon: 'none'
+        })
+        return
+      }
+      if (this.money === '') {
+        mpvue.showToast({
+          title: '请输入金额',
+          icon: 'none'
+        })
+        return
+      }
+      postAction('hlzh', {
+        from: this.key1,
+        to: this.key2,
+        money: this.money
+      }).then(res => {
         if (res.ret === 0) {
           this.result = res.data.result
           this.showResult = true

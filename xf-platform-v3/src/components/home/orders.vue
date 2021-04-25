@@ -161,7 +161,7 @@ export default {
       })
     },
     doNotify () {
-      this.$Modal.confirm({
+      this.$tModal.confirm({
         title: '是否确认使用一次性通知？',
         content: '一次性通知仅可使用一次，由于微信消息通知限制，只可在用户已购票后的7日内发送消息。<br>超过7日的用户则无法收取该消息，请谨慎使用！<br>可用于活动场地变更、活动改期、活动取消等紧急情况时，作为通知已购票用户功能。',
         onOk: () => {
@@ -174,7 +174,7 @@ export default {
       this.$emit('toggle', 'refunds')
     },
     doRefund (id) {
-      this.$Modal.confirm({
+      this.$tModal.confirm({
         title: '是否确认退款?',
         content: '确认退款之后款项将原路返回到该用户账上，请谨慎操作。',
         onOk: () => {

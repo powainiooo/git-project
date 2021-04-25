@@ -32,6 +32,36 @@
       font-size 14px
       color #9E9E9F
       line-height 1.3
+  &-cropper
+    size(100vw, 100vh)
+    background: rgba(0, 0, 0, 0.8);
+    position fixed
+    top 0
+    left 0
+    z-index 2000
+    center()
+    &-title
+      margin 40px 36px 0 36px
+      font-size 18px
+      color #000000
+      between()
+    &-subTitle
+      margin 0 36px 40px 36px
+      font-size 12px
+      color #C8C9CA
+    &-area
+      size(366px, 386px)
+      margin 0 auto
+      border 3px solid #6D9AF4
+      .vue-cropper
+        background url("../assets/img/bg.png") rgb(200, 201, 202)
+        background-size 360px
+    &-container
+      size(600px, 600px)
+      background-color #ffffff
+      border-radius 10px
+      position relative
+
 </style>
 
 <template>
@@ -55,18 +85,59 @@
     <div><slot name="title"></slot></div>
     <p><slot name="hint"></slot></p>
   </div>
+
+  <div class="c-upload-cropper" v-if="showCropper">
+    <div class="c-upload-cropper-container">
+      <div class="c-upload-cropper-title">
+        <span>{{title}}</span>
+        <Button size="small">选择图片</Button>
+      </div>
+      <div class="c-upload-cropper-subTitle">
+        <span>海报尺寸为{{fixedNumber[0]}}px*{{fixedNumber[1]}}px</span>
+      </div>
+      <div class="c-upload-cropper-area">
+        <vueCropper
+          ref="cropper"
+          :img="cropperUrl"
+          :outputSize="1"
+          autoCrop
+          fixed
+          full
+          :info="false"
+          :fixedNumber="fixedNumber"
+          style="width: 360px; height: 380px;"
+        ></vueCropper>
+      </div>
+    </div>
+  </div>
 </div>
 </template>
 
 <script type='es6'>
+import { VueCropper } from 'vue-cropper'
 export default {
   name: 'app',
+  components: {
+    VueCropper
+  },
   props: {
     width: {
       type: [Number, String],
       default: 90
     },
     value: {
+      type: String,
+      default: ''
+    },
+    cropper: {
+      type: Boolean,
+      default: false
+    },
+    fixedNumber: {
+      type: Array,
+      default: () => [1, 1]
+    },
+    title: {
       type: String,
       default: ''
     }
@@ -88,15 +159,20 @@ export default {
       loaded: 0,
       total: 0,
       src: '',
-      isLoading: false
+      isLoading: false,
+      cropperUrl: this.value,
+      showCropper: false
     }
   },
   mounted () {
   },
   methods: {
-    uploadBefore (e) {
-      console.log('uploadBefore', e)
+    uploadBefore (file) {
       this.extraData.upyuntoken = this.$store.state.config.uploaddata.multipart.upyuntoken
+      if (this.cropper) {
+        this.showCropper = true
+        return false
+      }
       // return false
     },
     preview (e) {
@@ -116,6 +192,7 @@ export default {
     },
     fileChange (e) {
       console.log('fileChange', e)
+      e.stopPropagation()
       // this.$emit('input', '123')
     }
   }

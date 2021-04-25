@@ -43,7 +43,7 @@
     </template>
     <template v-else>
       <z-header />
-      <Button class="btn-publish">发布新活动</Button>
+      <Button class="btn-publish" @click="$router.push('/publish')">发布新活动</Button>
       <div class="list-container" v-if="!showDetail">
         <Row :gutter="40">
           <Col span="8" v-for="(item, index) in list" :key="item.id">

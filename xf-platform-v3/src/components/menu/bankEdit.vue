@@ -90,7 +90,7 @@ export default {
   },
   methods: {
     handleSubmit () {
-      this.$Modal.confirm({
+      this.$tModal.confirm({
         title: '是否确认修改银行卡信息？',
         content: '请仔细核查银行卡信息，确认修改绑定后所有活动结款都将打款到新修改的银行卡。<br>若是您填写有误所造成的损失，小夫有票一概不负责任。',
         onOk: () => {
@@ -98,7 +98,7 @@ export default {
           this.isAjax = true
           postAction('aa', this.formData).then(res => {
             if (res.code === 1) {
-              this.$Modal.warning({
+              this.$tModal.warning({
                 title: '修改成功！',
                 content: '银行卡信息修改成功，绑定的银行卡已更新。<br>若是您填写有误所造成的损失，小夫有票一概不负责任。',
                 onOk: () => {

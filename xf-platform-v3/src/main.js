@@ -3,6 +3,7 @@ import App from './App.vue'
 import Storage from 'vue-ls'
 import router from './router'
 import store from './store'
+import tModal from './components/modal'
 import {
   Button,
   Form,
@@ -45,6 +46,7 @@ Vue.component('Page', Page)
 Vue.config.productionTip = false
 
 Vue.use(Storage)
+Vue.use(tModal)
 Vue.prototype.$Message = Message
 Vue.prototype.$Modal = Modal
 

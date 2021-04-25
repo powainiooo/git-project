@@ -108,7 +108,7 @@ export default {
   },
   methods: {
     handleSubmit () {
-      this.$Modal.confirm({
+      this.$tModal.confirm({
         title: '是否确认提交申请？',
         content: '请仔细核查活动信息，确认提交申请之后操作不可返回。<br>若是您填写的发票信息有误，小夫有票将不再重复开票。',
         onOk: () => {
@@ -125,7 +125,7 @@ export default {
           }
           postAction('aa', params).then(res => {
             if (res.code === 1) {
-              this.$Modal.warning({
+              this.$tModal.warning({
                 title: '提交成功！',
                 content: '后台将在5个工作日内完成提现审核，结款将<br>若是您填写的发票信息有误，小夫有票将不再重复开票。',
                 onOk: () => {

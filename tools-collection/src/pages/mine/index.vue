@@ -17,8 +17,8 @@
     <img src="/static/images/bg.png" mode="widthFix" class="bg" />
     <div class="top">
       <template v-if="hasUserInfo">
-        <img src="/static/images/avatar.png" class="avatar" />
-        <view class="name">用户名</view>
+        <img :src="userInfo.headimg" class="avatar" />
+        <view class="name">{{userInfo.nickName}}</view>
       </template>
       <template v-else>
       <button class="btn" open-type="getUserInfo" @getuserinfo="getuserinfo">点击登录</button>

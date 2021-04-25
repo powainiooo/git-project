@@ -25,15 +25,15 @@
         <img src="/static/images/tuijian.png" mode="widthFix" />
       </div>
 
-      <div class="between mb40">
+      <div class="tool-list mb40">
         <a href="#" class="tool-item" v-for="item in list1" :key="id">
           <img :src="imgSrc + item.imgpath" mode="aspectFill" />
           <div>{{item.name}}</div>
         </a>
       </div>
 
-      <div class="between">
-        <a href="#" class="tool-item" v-for="item in list2" :key="id">
+      <div class="between" style="flex-wrap: wrap;">
+        <a href="#" class="tool-item2" v-for="item in list2" :key="id">
           <img :src="imgSrc + item.ad_image" mode="aspectFill" />
           <div>{{item.name}}</div>
         </a>
@@ -67,8 +67,8 @@ export default {
       postAction('index').then(res => {
         if (res.ret === 0) {
           this.banner = res.data.banner
-          this.list1 = res.data.jrtj
-          this.list2 = res.data.ggt_gj
+          this.list1 = res.data.tj_list
+          this.list2 = res.data.list
         }
       })
     }

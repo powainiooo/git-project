@@ -1,5 +1,7 @@
 {
   "pages": [
+    "pages/loan/main",
+    "pages/index/main",
     "pages/search2/main",
     "pages/map/main",
     "pages/bloodPressure/main",
@@ -11,7 +13,6 @@
     "pages/heartRate/main",
     "pages/bloodSugar/main",
     "pages/rollCall/main",
-    "pages/loan/main",
     "pages/taxResult/main",
     "pages/tax/main",
     "pages/unit/list/main",
@@ -57,7 +58,6 @@
     "pages/reward/main",
     "pages/collection/main",
     "pages/mine/main",
-    "pages/index/main",
     "pages/turntable/main",
     "pages/coin/main",
     "pages/dice/main",
@@ -74,7 +74,7 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
+    "navigationBarTitleText": "工具大全",
     "navigationBarTextStyle": "black"
   },
   "permission": {

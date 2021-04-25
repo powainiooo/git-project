@@ -3,10 +3,10 @@
 .loan-form-item { display: flex; align-items: center; margin-bottom: 18px; }
 .loan-form-item .l { width: 180px; font-size: 24px; margin-right: 14px; text-align: right; }
 .loan-form-item .r { width: 506px; font-size: 24px; position: relative; }
-.loan-form-item .r .ip { width: 100%; height: 46px; border: 2px solid #EEEEEE; font-size: 20px; color: #666666; padding: 0 12px; }
+.loan-form-item .r .ip { width: 100%; height: 56px; border: 2px solid #EEEEEE; font-size: 20px; color: #666666; padding: 0 12px; }
 .loan-form-item .r .unit { font-size: 20px; color: #666666; position: absolute; top: 12px; right: 12px; }
-.loan-form-item .r p { font-size: 16px; color: #B8ABAB; margin-top: 15px; }
 .loan-form-item .r button { width: 200px; margin-right: 20px; margin-left: 0; }
+.loan-form p.hint { font-size: 16px; color: #B8ABAB; margin-top: 15px; margin-bottom: 18px; margin-left: 180px; }
 
 .loan-title { font-size: 28px; color: #000000; margin-bottom: 20px; }
 
@@ -40,7 +40,7 @@
       <li :class="{'active': tabKey === 2}" @click="tabKey = 2">组合贷款</li>
     </ul>
 
-    <div class="loan-form">
+    <div class="loan-form" v-if="tabKey === 0">
       <div class="loan-form-item">
         <div class="l">计算方式</div>
         <div class="r acenter">
@@ -48,17 +48,40 @@
           <div class="radio mr20" :class="{'radio-active': formData.type1 === 1}" @click="formData.type1 = 1">按单价与面积计算</div>
         </div>
       </div>
-      <div class="loan-form-item">
+      <div class="loan-form-item" v-if="formData.type1 === 0">
         <div class="l">房屋总价</div>
         <div class="r">
           <input type="number" class="ip" v-model="formData.housePrice1" />
           <span class="unit">万元</span>
         </div>
       </div>
+      <template v-else>
+      <div class="loan-form-item">
+        <div class="l">单价</div>
+        <div class="r">
+          <input type="number" class="ip" v-model="formData.price" />
+          <span class="unit">元 / ㎡</span>
+        </div>
+      </div>
+      <div class="loan-form-item">
+        <div class="l">面积</div>
+        <div class="r">
+          <input type="number" class="ip" v-model="formData.area" />
+          <span class="unit">㎡</span>
+        </div>
+      </div>
+      <div class="loan-form-item">
+        <div class="l">房屋总价</div>
+        <div class="r">
+          <input type="number" class="ip" v-model="houseTotal" disabled />
+          <span class="unit">万元</span>
+        </div>
+      </div>
+      </template>
       <div class="loan-form-item">
         <div class="l">贷款成数</div>
         <div class="r">
-          <input type="number" class="ip" v-model="formData.percentage" />
+          <c-select :list="percentList" v-model="formData.percentage" />
         </div>
       </div>
       <div class="loan-form-item">
@@ -71,7 +94,7 @@
       <div class="loan-form-item">
         <div class="l">贷款年限</div>
         <div class="r">
-          <input type="number" class="ip" v-model="formData.years" />
+          <c-select :list="yearsList" v-model="formData.years" />
         </div>
       </div>
       <div class="loan-form-item">
@@ -81,27 +104,225 @@
           <div class="radio mr20" :class="{'radio-active': formData.type2 === 1}" @click="formData.type2 = 1">LPR基础利率</div>
         </div>
       </div>
+
+
+      <div class="loan-form-item" v-if="formData.type2 === 0">
+        <div class="l">商贷利率</div>
+        <div class="r">
+          <div class="acenter">
+            <div style="width: 80%">
+              <c-select :list="lilvList" v-model="formData.lilv" />
+            </div>
+            <span>= {{formData.lilv}}%</span>
+          </div>
+        </div>
+      </div>
+      <template v-else-if="formData.type2 === 1">
+      <div class="loan-form-item">
+        <div class="l">LPR</div>
+        <div class="r" style="width: 40%">
+          <input type="number" class="ip" v-model="formData.lpr" />
+          <span class="unit">%</span>
+        </div>
+      </div>
+      <div class="loan-form-item">
+        <div class="l">基点</div>
+        <div class="r" style="width: 40%">
+          <input type="number" class="ip" v-model="formData.base" />
+          <span class="unit">%oo</span>
+        </div>
+      </div>
       <div class="loan-form-item">
         <div class="l">商贷利率</div>
         <div class="r">
-          <input type="number" class="ip" v-model="formData.lilv" />
-          <p>注：此计算结果仅为参考，实际缴费应以当地为准</p>
+          <input type="number" class="ip" v-model="lilv" disabled />
+          <span class="unit">%</span>
         </div>
       </div>
+      </template>
+
+      <p class="hint">注：此计算结果仅为参考，实际缴费应以当地为准</p>
       <div class="loan-form-item">
         <div class="l">　</div>
         <div class="r acenter">
-          <button class="btn btn-min">重 置</button>
-          <button class="btn btn-min btn-light">计 算</button>
+          <button class="btn btn-min" @click="reset">重 置</button>
+          <button class="btn btn-min btn-light" @click="submit">计 算</button>
         </div>
       </div>
     </div>
+
+    <div class="loan-form" v-if="tabKey === 1">
+      <div class="loan-form-item">
+        <div class="l">计算方式</div>
+        <div class="r acenter">
+          <div class="radio mr20" :class="{'radio-active': formData1.type1 === 0}" @click="formData1.type1 = 0">按房屋总价计算</div>
+          <div class="radio mr20" :class="{'radio-active': formData1.type1 === 1}" @click="formData1.type1 = 1">按单价与面积计算</div>
+        </div>
+      </div>
+      <div class="loan-form-item" v-if="formData1.type1 === 0">
+        <div class="l">房屋总价</div>
+        <div class="r">
+          <input type="number" class="ip" v-model="formData1.housePrice1" />
+          <span class="unit">万元</span>
+        </div>
+      </div>
+      <template v-else>
+      <div class="loan-form-item">
+        <div class="l">单价</div>
+        <div class="r">
+          <input type="number" class="ip" v-model="formData1.price" />
+          <span class="unit">元 / ㎡</span>
+        </div>
+      </div>
+      <div class="loan-form-item">
+        <div class="l">面积</div>
+        <div class="r">
+          <input type="number" class="ip" v-model="formData1.area" />
+          <span class="unit">㎡</span>
+        </div>
+      </div>
+      <div class="loan-form-item">
+        <div class="l">房屋总价</div>
+        <div class="r">
+          <input type="number" class="ip" v-model="houseTotal2" disabled />
+          <span class="unit">万元</span>
+        </div>
+      </div>
+      </template>
+      <div class="loan-form-item">
+        <div class="l">贷款成数</div>
+        <div class="r">
+          <c-select :list="percentList" v-model="formData1.percentage" />
+        </div>
+      </div>
+      <div class="loan-form-item">
+        <div class="l">贷款金额</div>
+        <div class="r">
+          <input type="number" class="ip" v-model="formData1.daikuan_total000" />
+          <span class="unit">万元</span>
+        </div>
+      </div>
+      <div class="loan-form-item">
+        <div class="l">贷款年限</div>
+        <div class="r">
+          <c-select :list="yearsList" v-model="formData1.years" />
+        </div>
+      </div>
+
+      <div class="loan-form-item">
+        <div class="l">公积金利率</div>
+        <div class="r">
+          <div class="acenter">
+            <div style="width: 80%">
+              <c-select :list="lilvList2" v-model="formData1.lilv" />
+            </div>
+            <span>= {{formData1.lilv}}%</span>
+          </div>
+        </div>
+      </div>
+
+      <p class="hint">注：此计算结果仅为参考，实际缴费应以当地为准</p>
+      <div class="loan-form-item">
+        <div class="l">　</div>
+        <div class="r acenter">
+          <button class="btn btn-min" @click="reset">重 置</button>
+          <button class="btn btn-min btn-light" @click="submit">计 算</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="loan-form" v-if="tabKey === 2">
+      <div class="loan-form-item">
+        <div class="l">公积金贷款金额</div>
+        <div class="r">
+          <input type="number" class="ip" v-model="formData2.sd_Amount" />
+          <span class="unit">万元</span>
+        </div>
+      </div>
+      <div class="loan-form-item">
+        <div class="l">商业贷款金额</div>
+        <div class="r">
+          <input type="number" class="ip" v-model="formData2.gjj_Amount1" />
+          <span class="unit">万元</span>
+        </div>
+      </div>
+      <div class="loan-form-item">
+        <div class="l">贷款年限</div>
+        <div class="r">
+          <c-select :list="yearsList" v-model="formData2.years" />
+        </div>
+      </div>
+      <div class="loan-form-item">
+        <div class="l">公积金利率</div>
+        <div class="r">
+          <div class="acenter">
+            <div style="width: 80%">
+              <c-select :list="lilvList2" v-model="formData2.gjj_APR" />
+            </div>
+            <span>= {{formData2.gjj_APR}}%</span>
+          </div>
+        </div>
+      </div>
+      <div class="loan-form-item">
+        <div class="l">商贷利率方式</div>
+        <div class="r">
+          <div class="radio mr20" :class="{'radio-active': formData2.type2 === 0}" @click="formData2.type2 = 0">基准利率</div>
+          <div class="radio mr20" :class="{'radio-active': formData2.type2 === 1}" @click="formData2.type2 = 1">LPR基础利率</div>
+        </div>
+      </div>
+
+
+      <div class="loan-form-item" v-if="formData2.type2 === 0">
+        <div class="l">商贷利率</div>
+        <div class="r">
+          <div class="acenter">
+            <div style="width: 80%">
+              <c-select :list="lilvList" v-model="formData2.sd_APR" />
+            </div>
+            <span>= {{formData2.sd_APR}}%</span>
+          </div>
+        </div>
+      </div>
+      <template v-else-if="formData2.type2 === 1">
+      <div class="loan-form-item">
+        <div class="l">LPR</div>
+        <div class="r" style="width: 40%">
+          <input type="number" class="ip" v-model="formData2.lpr" />
+          <span class="unit">%</span>
+        </div>
+      </div>
+      <div class="loan-form-item">
+        <div class="l">基点</div>
+        <div class="r" style="width: 40%">
+          <input type="number" class="ip" v-model="formData2.base" />
+          <span class="unit">%oo</span>
+        </div>
+      </div>
+      <div class="loan-form-item">
+        <div class="l">商贷利率</div>
+        <div class="r">
+          <input type="number" class="ip" v-model="lilv2" disabled />
+          <span class="unit">%</span>
+        </div>
+      </div>
+      </template>
+
+      <p class="hint">注：此计算结果仅为参考，实际缴费应以当地为准</p>
+      <div class="loan-form-item">
+        <div class="l">　</div>
+        <div class="r acenter">
+          <button class="btn btn-min" @click="reset">重 置</button>
+          <button class="btn btn-min btn-light" @click="submit">计 算</button>
+        </div>
+      </div>
+    </div>
+
 
     <template v-if="showResult">
     <div class="loan-title">计算结果</div>
 
     <div class="ml60 mb20">首付：<span class="f28" style="color: #F46C42;">{{record.sf}}万元</span></div>
-    <div class="ml60 mb20">商业贷款利率：xxx%</div>
+    <div class="ml60 mb20">商业贷款利率：{{record.lilv}}%</div>
 
     <div class="loan-table">
       <div class="loan-head">等额本息，每期等额还款</div>
@@ -143,11 +364,13 @@
 
 <script>
 import operates from '@/components/operates'
+import cSelect from './modules/cSelect'
 import {postAction} from '../../utils/api'
 
 export default {
   components: {
-    operates
+    operates,
+    cSelect
   },
   data () {
     return {
@@ -158,16 +381,170 @@ export default {
         percentage: '',
         daikuan_total000: '',
         years: '',
-        lilv: '',
-        type2: 0
+        lilv: '4.9',
+        lilv2: '3.25',
+        type2: 0,
+        lpr: 4.65,
+        base: 0,
+        price: '',
+        area: ''
+      },
+      formData1: {
+        type1: 0,
+        housePrice1: '',
+        percentage: '',
+        daikuan_total000: '',
+        years: '',
+        lilv: '3.25',
+        price: '',
+        area: ''
+      },
+      formData2: {
+        sd_Amount: '',
+        gjj_Amount1: '',
+        years: '',
+        sd_APR: '4.9',
+        gjj_APR: '3.25',
+        type2: 0,
+        lpr: 4.65,
+        base: 0
       },
       showResult: false,
-      record: {}
+      record: {},
+      percentList: [
+        { name: '9成', value: 0.9 },
+        { name: '8成', value: 0.8 },
+        { name: '7成', value: 0.7 },
+        { name: '6成', value: 0.6 },
+        { name: '5成', value: 0.5 },
+        { name: '4成', value: 0.4 },
+        { name: '3成', value: 0.3 },
+        { name: '2成', value: 0.2 }
+      ],
+      yearsList: [],
+      lilvList: [
+        { name: '基准利率7折', value: '3.43' },
+        { name: '基准利率75折', value: '3.68' },
+        { name: '基准利率8折', value: '3.92' },
+        { name: '基准利率85折', value: '4.17' },
+        { name: '基准利率9折', value: '4.41' },
+        { name: '基准利率95折', value: '4.66' },
+        { name: '基准利率（4.9%）', value: '4.9' },
+        { name: '基准利率1.05倍', value: '5.15' },
+        { name: '基准利率1.1倍', value: '5.39' },
+        { name: '基准利率1.15倍', value: '5.63' },
+        { name: '基准利率1.2倍', value: '5.88' },
+        { name: '基准利率1.25倍', value: '6.13' },
+        { name: '基准利率1.3倍', value: '6.37' }
+      ],
+      lilvList2: [
+        { name: '基准利率7折', value: '2.27' },
+        { name: '基准利率75折', value: '2.44' },
+        { name: '基准利率8折', value: '2.6' },
+        { name: '基准利率85折', value: '2.76' },
+        { name: '基准利率9折', value: '2.93' },
+        { name: '基准利率95折', value: '3.09' },
+        { name: '基准利率（3.25%）', value: '3.25' },
+        { name: '基准利率1.05倍', value: '3.41' },
+        { name: '基准利率1.1倍', value: '3.58' },
+        { name: '基准利率1.15倍', value: '3.74' },
+        { name: '基准利率1.2倍', value: '3.9' },
+        { name: '基准利率1.25倍', value: '4.06' },
+        { name: '基准利率1.3倍', value: '4.23' }
+      ]
+    }
+  },
+  computed: {
+    lilv () {
+      return Number(this.formData.lpr) + Number(this.formData.base)
+    },
+    lilv2 () {
+      return Number(this.formData2.lpr) + Number(this.formData2.base)
+    },
+    houseTotal () {
+      if (this.formData.price === '' && this.formData.area === '') {
+        return ''
+      } else if (this.formData.price !== '' && this.formData.area !== '') {
+        return (Number(this.formData.price) * Number(this.formData.area)) / 10000
+      } else {
+        return 0
+      }
+    },
+    houseTotal2 () {
+      if (this.formData1.price === '' && this.formData1.area === '') {
+        return ''
+      } else if (this.formData1.price !== '' && this.formData1.area !== '') {
+        return (Number(this.formData1.price) * Number(this.formData1.area)) / 10000
+      } else {
+        return 0
+      }
     }
   },
   methods: {
+    submit () {
+      if (this.tabKey === 0) {
+        this.getData()
+      } else if (this.tabKey === 1) {
+        this.getData1()
+      } else if (this.tabKey === 2) {
+        this.getData2()
+      }
+    },
     getData () {
-      postAction('mortgage', this.formData).then(res => {
+      const params = {
+        percentage: this.formData.percentage,
+        daikuan_total000: this.formData.daikuan_total000,
+        years: this.formData.years
+      }
+      if (this.formData.type1 === 0) {
+        params.housePrice1 = this.formData.housePrice1
+      } else {
+        params.housePrice1 = this.houseTotal
+      }
+      if (this.formData.type2 === 0) {
+        params.lilv = this.formData.lilv
+      } else {
+        params.lilv = this.lilv
+      }
+      postAction('mortgage', params).then(res => {
+        if (res.ret === 0) {
+          this.record = res.data
+          this.showResult = true
+        }
+      })
+    },
+    getData1 () {
+      const params = {
+        percentage: this.formData1.percentage,
+        daikuan_total000: this.formData1.daikuan_total000,
+        years: this.formData1.years,
+        lilv: this.formData1.lilv
+      }
+      if (this.formData1.type1 === 0) {
+        params.housePrice1 = this.formData1.housePrice1
+      } else {
+        params.housePrice1 = this.houseTotal2
+      }
+      postAction('mortgage', params).then(res => {
+        if (res.ret === 0) {
+          this.record = res.data
+          this.showResult = true
+        }
+      })
+    },
+    getData2 () {
+      const params = {
+        sd_Amount: this.formData2.sd_Amount,
+        gjj_Amount1: this.formData2.gjj_Amount1,
+        years: this.formData2.years,
+        gjj_APR: this.formData2.gjj_APR
+      }
+      if (this.formData2.type2 === 0) {
+        params.sd_APR = this.formData2.sd_APR
+      } else {
+        params.sd_APR = this.lilv2
+      }
+      postAction('zh_mortgage', params).then(res => {
         if (res.ret === 0) {
           this.record = res.data
           this.showResult = true
@@ -181,12 +558,45 @@ export default {
         percentage: '',
         daikuan_total000: '',
         years: '',
-        lilv: '',
-        type2: 0
+        lilv: '4.9',
+        lilv2: '3.25',
+        type2: 0,
+        lpr: 4.65,
+        base: 0,
+        price: '',
+        area: ''
+      }
+      this.formData1 = {
+        type1: 0,
+        housePrice1: '',
+        percentage: '',
+        daikuan_total000: '',
+        years: '',
+        lilv: '3.25',
+        price: '',
+        area: ''
+      }
+      this.formData2 = {
+        sd_Amount: '',
+        gjj_Amount1: '',
+        years: '',
+        sd_APR: '4.9',
+        gjj_APR: '3.25',
+        type2: 0,
+        lpr: 4.65,
+        base: 0
       }
     }
   },
-  created () {
+  onLoad () {
+    const years = []
+    for (let i = 1; i <= 30; i++) {
+      years.push({
+        name: `${i}年`,
+        value: i
+      })
+    }
+    this.yearsList = years
   }
 }
 </script>

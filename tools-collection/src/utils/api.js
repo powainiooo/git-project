@@ -8,6 +8,7 @@ const ajax = (opts, autoMsg = true) => {
     wx.showNavigationBarLoading()
     token = store.state[tokenKey]
     opts.url = `${baseUrl}${opts.url}`
+    opts.data[tokenKey] = token
     const extras = {
       header: {
         [tokenKey]: token,

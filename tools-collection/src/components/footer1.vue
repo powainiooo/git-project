@@ -1,6 +1,6 @@
 <style scoped>
 .footer { width: 100%;
-  height: 98px;
+  height: 100px;
   background: #FFFFFF;
   border: 1px solid #E5E5E5;
   box-shadow: 0px 0px 8px 0px rgba(42, 72, 124, 0.19);
@@ -14,7 +14,7 @@
   text-align: center;
   font-size: 20px;
 }
-.footer a img { width: 42px; height: 42px; margin-bottom: 8px; }
+.footer a img { width: 42px; height: 42px; }
 .footer a .img2 { display: none; }
 .footer a.active { color: #436CB3; }
 .footer a.active .img1 { display: none }

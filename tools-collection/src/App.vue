@@ -9,18 +9,17 @@ const getSetting = promisify(mpvue.getSetting)
 export default {
   created () {
     mpvue.imgSrc = store.state.imgSrc
-    console.log('onlogin1')
     this.onlogin()
   },
   methods: {
     async onlogin () {
-      console.log('onlogin2')
       let lastGetCityTime = mpvue.getStorageSync('lastGetCityTime')
       if (lastGetCityTime === '' || lastGetCityTime === null) {
         lastGetCityTime = 0
       }
       const now = new Date().getTime()
       const loginKey = mpvue.getStorageSync(tokenKey)
+      console.log('loginKey', loginKey)
       if (loginKey === '' || loginKey === null || now > lastGetCityTime + 24 * 60 * 60 * 1000) {
         const resLogin = await login()
         console.log('resLogin', resLogin)
@@ -29,7 +28,7 @@ export default {
         })
         console.log('resDoLogin', resDoLogin)
         if (resDoLogin.ret === 0) {
-          store.commit('SET_LOGIN_KEY', resDoLogin.data.login_key)
+          store.commit('SET_LOGIN_KEY', resDoLogin.data)
           mpvue.setStorageSync('lastGetCityTime', now)
         }
       } else {

@@ -14,7 +14,7 @@
         <p><span>【答案】</span>{{item.result}}</p>
       </li>
     </ul>
-    <operates />
+    <operates :id="id" />
   </div>
 </template>
 
@@ -28,6 +28,7 @@ export default {
   },
   data () {
     return {
+      id: '',
       list: [],
       loadOver: false
     }
@@ -50,7 +51,8 @@ export default {
       this.getList()
     }
   },
-  onLoad () {
+  onLoad (options) {
+    this.id = options.id
     this.getList()
   }
 }

@@ -35,7 +35,7 @@
         <div class="tool-list">
           <a v-for="item in list"
              :key="id"
-             href="#"
+             :href="'/' + item.mini_page + '?id=' + item.id"
              class="tool-item">
             <img :src="imgSrc + item.imgpath" mode="aspectFill" />
             <div>{{item.name}}</div>

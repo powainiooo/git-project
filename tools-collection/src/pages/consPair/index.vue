@@ -55,7 +55,7 @@
         <p>{{record.zhuyi}}</p>
       </div>
     </div>
-    <operates />
+    <operates :id="id" />
   </div>
 </template>
 
@@ -69,6 +69,7 @@ export default {
   },
   data () {
     return {
+      id: '',
       list: ['白羊', '金牛', '双子', '巨蟹', '狮子', '处女', '天秤', '天蝎', '射手', '摩羯', '水瓶', '双鱼'],
       record: {},
       man: '',
@@ -99,7 +100,8 @@ export default {
       this[key] = this.list[e.mp.detail.value]
     }
   },
-  onLoad () {
+  onLoad (options) {
+    this.id = options.id
   }
 }
 </script>

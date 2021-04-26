@@ -83,7 +83,7 @@
       <button class="btn btn-light" @click="generate">模板制作</button>
     </div>
 
-    <operates />
+    <operates :id="id" />
   </div>
 </template>
 
@@ -97,6 +97,7 @@ export default {
   },
   data () {
     return {
+      id: '',
       imgSrc: mpvue.imgSrc,
       page: 'text',
       text1: '',
@@ -120,6 +121,8 @@ export default {
       })
     }
   },
-  created () {}
+  onLoad (options) {
+    this.id = options.id
+  }
 }
 </script>

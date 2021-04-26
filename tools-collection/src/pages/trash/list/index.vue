@@ -22,7 +22,7 @@
         </div>
       </li>
     </ul>
-    <operates />
+    <operates :id="id" />
   </div>
 </template>
 

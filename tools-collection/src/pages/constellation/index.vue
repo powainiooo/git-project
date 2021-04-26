@@ -20,17 +20,17 @@
 
     <div class="con-details">
       <div class="c-tag" style="background-color: #80BEE4;">今日运势</div>
-      <p>{{today.summary}}</p>
+      <p>{{today}}</p>
       <div class="c-tag" style="background-color: #7FBE58;">明日运势</div>
-      <p>{{tomorrow.summary}}</p>
+      <p>{{tomorrow}}</p>
       <div class="c-tag" style="background-color: #EA749E;">本周运势</div>
-      <p>{{week.summary}}</p>
+      <p>{{week}}</p>
       <div class="c-tag" style="background-color: #AB92DC;">本月运势</div>
-      <p>{{month.summary}}</p>
+      <p>{{month}}</p>
       <div class="c-tag" style="background-color: #F39F5B;">今年运势</div>
-      <p>{{year.summary}}</p>
+      <p>{{year}}</p>
     </div>
-    <operates />
+    <operates :id="id" />
   </div>
 </template>
 
@@ -44,13 +44,14 @@ export default {
   },
   data () {
     return {
-      list: ['白羊', '金牛', '双子', '巨蟹', '狮子', '处女', '天秤', '天蝎', '射手', '摩羯', '水瓶', '双鱼'],
-      name: '白羊',
-      today: {},
-      tomorrow: {},
-      week: {},
-      month: {},
-      year: {}
+      id: '',
+      list: ['白羊座', '金牛座', '双子座', '巨蟹座', '狮子座', '处女座', '天秤座', '天蝎座', '射手座', '摩羯座', '水瓶座', '双鱼座'],
+      name: '白羊座',
+      today: '',
+      tomorrow: '',
+      week: '',
+      month: '',
+      year: ''
     }
   },
   methods: {
@@ -72,8 +73,8 @@ export default {
       })
     }
   },
-  onLoad () {
-    this.getData()
+  onLoad (options) {
+    this.id = options.id
   }
 }
 </script>

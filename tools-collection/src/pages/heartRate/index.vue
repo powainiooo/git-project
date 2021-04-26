@@ -16,7 +16,7 @@
       <rich-text :nodes="record.desc"></rich-text>
     </div>
   </div>
-  <operates />
+  <operates :id="id" />
 </div>
 </template>
 
@@ -30,6 +30,7 @@ export default {
   },
   data () {
     return {
+      id: '',
       record: {}
     }
   },
@@ -42,7 +43,8 @@ export default {
       })
     }
   },
-  onLoad () {
+  onLoad (options) {
+    this.id = options.id
     this.getData()
   }
 }

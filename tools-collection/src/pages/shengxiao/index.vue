@@ -47,7 +47,7 @@
         <p>{{record.data}}</p>
       </div>
     </div>
-    <operates />
+    <operates :id="id" />
   </div>
 </template>
 
@@ -61,6 +61,7 @@ export default {
   },
   data () {
     return {
+      id: '',
       list: ['鼠', '牛', '虎', '兔', '龙', '蛇', '马', '羊', '猴', '鸡', '狗', '猪'],
       record: {},
       man: '',
@@ -91,7 +92,8 @@ export default {
       this[key] = this.list[e.mp.detail.value]
     }
   },
-  created () {
+  onLoad (options) {
+    this.id = options.id
   }
 }
 </script>

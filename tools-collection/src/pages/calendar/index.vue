@@ -68,7 +68,7 @@
       <p>{{record.suit}}</p>
     </div>
 <!--    <a href="#" class="f30 c-link ml45 mt20 bold mb45">查看今天的行程</a>-->
-    <operates />
+    <operates :id="id" />
   </div>
 </template>
 
@@ -83,6 +83,7 @@ export default {
   },
   data () {
     return {
+      id: '',
       week: ['日', '一', '二', '三', '四', '五', '六'],
       current: '',
       year: '',
@@ -172,7 +173,8 @@ export default {
       this.initCalendar(this.year, this.month)
     }
   },
-  onLoad () {
+  onLoad (options) {
+    this.id = options.id
     const date = new Date()
     this.year = date.getFullYear()
     this.month = date.getMonth()

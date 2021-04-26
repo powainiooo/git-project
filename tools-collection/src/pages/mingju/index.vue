@@ -29,7 +29,7 @@
     </li>
   </ul>
 
-  <operates />
+  <operates :id="id" />
 </div>
 </template>
 
@@ -45,6 +45,7 @@ export default {
   },
   data () {
     return {
+      id: '',
       list: [],
       keyword: '',
       page: 1,
@@ -87,7 +88,8 @@ export default {
       this.getList()
     }
   },
-  onLoad () {
+  onLoad (options) {
+    this.id = options.id
     this.getList()
   }
 }

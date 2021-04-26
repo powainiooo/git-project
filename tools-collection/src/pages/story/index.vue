@@ -23,7 +23,7 @@
       <div><rich-text :nodes="item.content"></rich-text></div>
     </div>
 
-    <operates />
+    <operates :id="id" />
   </div>
 </template>
 
@@ -39,6 +39,7 @@ export default {
   },
   data () {
     return {
+      id: '',
       tabKey: 1,
       list: [],
       keyword: '',
@@ -92,7 +93,8 @@ export default {
       this.getList()
     }
   },
-  onLoad () {
+  onLoad (options) {
+    this.id = options.id
     this.getList()
   }
 }

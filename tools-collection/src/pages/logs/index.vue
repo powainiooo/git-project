@@ -6,7 +6,7 @@
   <div class="container3">
 
 
-    <operates />
+    <operates :id="id" />
   </div>
 </template>
 

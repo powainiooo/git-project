@@ -57,19 +57,14 @@
         </div>
       </div>
     </div>
-    <operates />
   </div>
 </template>
 
 <script>
-import operates from '@/components/operates'
 import store from '../../store'
 import {postAction} from '../../utils/api'
 
 export default {
-  components: {
-    operates
-  },
   computed: {
     taxData () {
       return store.state.taxData

@@ -35,7 +35,7 @@
       </div>
       <div class="hint1">注：以上统计为1998年完成的，如今人的平均血压有所增加。</div>
     </div>
-    <operates />
+    <operates :id="id" />
   </div>
 </template>
 
@@ -49,6 +49,7 @@ export default {
   },
   data () {
     return {
+      id: '',
       record: {}
     }
   },
@@ -61,7 +62,8 @@ export default {
       })
     }
   },
-  onLoad () {
+  onLoad (options) {
+    this.id = options.id
     this.getData()
   }
 }

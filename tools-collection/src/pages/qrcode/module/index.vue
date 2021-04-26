@@ -45,7 +45,7 @@
       <button class="btn mb40">生成二维码</button>
     </div>
 
-    <operates />
+    <operates :id="id" />
   </div>
 </template>
 

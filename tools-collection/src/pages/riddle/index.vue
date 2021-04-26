@@ -18,7 +18,7 @@
       <div><span>答案：</span>{{item.answer}}</div>
     </div>
 
-    <operates />
+    <operates :id="id" />
   </div>
 </template>
 
@@ -32,6 +32,7 @@ export default {
   },
   data () {
     return {
+      id: '',
       list: [],
       sx: 0,
       ex: 0
@@ -57,7 +58,8 @@ export default {
       }
     }
   },
-  onLoad () {
+  onLoad (options) {
+    this.id = options.id
     this.getData()
   }
 }

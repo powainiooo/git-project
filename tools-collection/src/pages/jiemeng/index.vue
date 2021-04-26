@@ -15,7 +15,7 @@
         <p v-for="item in record.list" :key="index">{{item}}</p>
       </div>
     </div>
-    <operates />
+    <operates :id="id" />
   </div>
 </template>
 
@@ -31,6 +31,7 @@ export default {
   },
   data () {
     return {
+      id: '',
       record: {},
       keyword: '',
       showResult: false
@@ -49,7 +50,8 @@ export default {
       })
     }
   },
-  onLoad () {
+  onLoad (options) {
+    this.id = options.id
   }
 }
 </script>

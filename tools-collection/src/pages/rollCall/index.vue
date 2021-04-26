@@ -10,7 +10,7 @@
     <textarea class="txt" :rows="6" placeholder="请输入所有点名的姓名，以 | 分隔" v-model="names"></textarea>
     <div class="line1"><button class="btn" @click="doCall">立即点名</button></div>
     <div class="line2" v-if="current !== ''">{{current}}</div>
-    <operates />
+    <operates :id="id" />
   </div>
 </template>
 
@@ -23,6 +23,7 @@ export default {
   },
   data () {
     return {
+      id: '',
       names: '', // 张三|赵四|王五|周六
       current: '',
       index: 0,
@@ -55,7 +56,8 @@ export default {
       }
     }
   },
-  created () {
+  onLoad (options) {
+    this.id = options.id
   }
 }
 </script>

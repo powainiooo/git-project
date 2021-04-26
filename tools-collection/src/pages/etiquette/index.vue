@@ -10,11 +10,11 @@
 
     <ul class="unit-list">
       <li class="borderB" v-for="item in list" :key="index">
-        <a :href="'/pages/etiquetteDetail/main?id=' + item.id">{{item.name}} <img src="/static/images/arrow6.png" mode="widthFix" /></a>
+        <a :href="'/pages/etiquetteDetail/main?id=' + item.id + '&id2=' + id">{{item.name}} <img src="/static/images/arrow6.png" mode="widthFix" /></a>
       </li>
     </ul>
 
-    <operates />
+    <operates :id="id" />
   </div>
 </template>
 
@@ -28,6 +28,7 @@ export default {
   },
   data () {
     return {
+      id: '',
       list: []
     }
   },
@@ -40,7 +41,8 @@ export default {
       })
     }
   },
-  onLoad () {
+  onLoad (options) {
+    this.id = options.id
     this.getData()
   }
 }

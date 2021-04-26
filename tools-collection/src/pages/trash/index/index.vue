@@ -25,7 +25,7 @@
       <a href="#"><img src="/static/images/trash/fl4.png" mode="widthFix" /></a>
     </div>
 
-    <operates />
+    <operates :id="id" />
   </div>
 </template>
 
@@ -38,6 +38,7 @@ export default {
   },
   data () {
     return {
+      id: '',
       keyword: ''
     }
   },
@@ -48,7 +49,8 @@ export default {
       })
     }
   },
-  created () {
+  onLoad (options) {
+    this.id = options.id
   }
 }
 </script>

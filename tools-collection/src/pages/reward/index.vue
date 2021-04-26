@@ -45,6 +45,7 @@ export default {
 
   data () {
     return {
+      id: '',
       imgSrc: mpvue.imgSrc,
       money: 0,
       nums: 0,
@@ -67,6 +68,9 @@ export default {
   },
   onShow () {
     this.getData()
+  },
+  onLoad (options) {
+    this.id = options.id
   }
 }
 </script>

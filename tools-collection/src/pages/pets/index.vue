@@ -15,7 +15,7 @@
       <p><rich-text :nodes="item.feature"></rich-text></p>
     </div>
   </div>
-  <operates />
+  <operates :id="id" />
 </div>
 </template>
 
@@ -31,6 +31,7 @@ export default {
   },
   data () {
     return {
+      id: '',
       list: [],
       keyword: '',
       page: 1,
@@ -64,7 +65,8 @@ export default {
       this.getList()
     }
   },
-  created () {
+  onLoad (options) {
+    this.id = options.id
   }
 }
 </script>

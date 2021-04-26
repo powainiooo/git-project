@@ -26,7 +26,7 @@
         <div v-for="item in history"
              :key="id"
              class="pr">
-          <a href="#"
+          <a :href="'/' + item.mini_page + '?id=' + item.id"
              class="tool-item">
             <img :src="imgSrc + item.imgpath" mode="aspectFill" />
             <div>{{item.name}}</div>
@@ -43,7 +43,7 @@
       <div class="tool-list">
         <a v-for="item in hotList"
            :key="id"
-           href="#"
+           :href="'/' + item.mini_page + '?id=' + item.id"
            class="tool-item">
           <img :src="imgSrc + item.imgpath" mode="aspectFill" />
           <div>{{item.name}}</div>
@@ -55,7 +55,7 @@
       <div class="tool-list">
       <a v-for="item in resultList"
          :key="id"
-         href="#"
+         :href="'/' + item.mini_page + '?id=' + item.id"
          class="tool-item">
         <img :src="imgSrc + item.imgpath" mode="aspectFill" />
         <div>{{item.name}}</div>

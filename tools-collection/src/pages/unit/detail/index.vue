@@ -18,7 +18,7 @@
     </li>
   </ul>
 
-  <operates />
+  <operates :id="id" />
 </div>
 </template>
 
@@ -32,6 +32,7 @@ export default {
   },
   data () {
     return {
+      id: '',
       key: '',
       units: {},
       values: {}
@@ -67,6 +68,7 @@ export default {
   },
   onLoad (options) {
     this.key = options.key || 'length'
+    this.id = options.id
     this.getUnits()
   }
 }

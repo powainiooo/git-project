@@ -14,49 +14,78 @@
 
 <template>
   <div class="container3">
-    <img src="/static/images/weather/bg1.png" class="bg" mode="aspectFill" />
-    <img src="/static/images/weather/ad.png" class="w100" mode="widthFix" />
-    <div class="line1"><text>深圳南山区\n4月28日，周日</text></div>
+    <img :src="imgSrc + record.wid_img" class="bg" mode="aspectFill" />
+    <img :src="imgSrc + record.gg_image" class="w100" mode="widthFix" v-if="record.gg_image !== ''" />
+    <div class="line1"><text>{{city}}\n{{date}}，{{week}}</text></div>
     <div class="line2 center">
-      <img src="/static/images/weather/icon-big1.png" mode="widthFix" />
+      <img :src="imgSrc + record.wid_img" mode="widthFix" />
       <div>
-        <h3>21°</h3>
+        <h3>{{record.temperature}}°</h3>
         <p>21° - 32°</p>
       </div>
     </div>
     <ul class="wet-list">
-      <li>
-        <div><span>今天</span>4/28</div>
-        <div><img src="/static/images/weather/icon1.png" mode="widthFix" />晴</div>
-        <div><span>27°</span>18°</div>
-      </li>
-      <li>
-        <div><span>今天</span>4/28</div>
-        <div><img src="/static/images/weather/icon1.png" mode="widthFix" />晴</div>
-        <div><span>27°</span>18°</div>
-      </li>
-      <li>
-        <div><span>今天</span>4/28</div>
-        <div><img src="/static/images/weather/icon1.png" mode="widthFix" />晴</div>
-        <div><span>27°</span>18°</div>
+      <li v-for="item in list" :key="index">
+        <div><span>今天</span>{{item.record}}</div>
+        <div><img :src="imgSrc + item.img" mode="widthFix" />{{item.weather}}</div>
+        <div><span>{{item.high}}℃</span>{{item.low}}℃</div>
       </li>
     </ul>
-    <operates />
+    <operates :id="id" />
   </div>
 </template>
 
 <script>
 import operates from '@/components/operates'
+import {postAction} from '../../../utils/api'
+import {formatDate} from '../../../utils'
 
 export default {
   components: {
     operates
   },
   data () {
-    return {}
+    return {
+      id: '',
+      imgSrc: mpvue.imgSrc,
+      city: '深圳',
+      date: '',
+      weeks: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
+      week: '',
+      record: {},
+      list: []
+    }
   },
-
-  created () {
+  methods: {
+    getData () {
+      postAction('weather', {
+        city: this.city
+      }).then(res => {
+        if (res.ret === 0) {
+          this.record = res.data
+          const arr = []
+          for (const i of res.data.future) {
+            const date = formatDate(new Date(i.date), 'MM/dd')
+            const temp = i.temperature.replace('℃', '').split('/')
+            arr.push({
+              date,
+              low: temp[0],
+              high: temp[1],
+              weather: i.weather,
+              img: i.wid_img
+            })
+          }
+          this.list = arr
+        }
+      })
+    }
+  },
+  onLoad (options) {
+    this.id = options.id
+    const now = new Date()
+    this.date = formatDate(now, 'MM月dd日')
+    this.week = this.weeks[now.getDay()]
+    this.getData()
   }
 }
 </script>

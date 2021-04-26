@@ -45,7 +45,7 @@
       <button class="btn btn-light">清除设置</button>
     </div>
 
-    <operates />
+    <operates :id="id" />
   </div>
 </template>
 

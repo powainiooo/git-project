@@ -6,7 +6,7 @@
   <div class="container3">
 
 
-    <operates />
+    <operates :id="id" />
   </div>
 </template>
 
@@ -18,10 +18,13 @@ export default {
     operates
   },
   data () {
-    return {}
+    return {
+      id: ''
+    }
   },
 
-  created () {
+  onLoad (options) {
+    this.id = options.id
   }
 }
 </script>

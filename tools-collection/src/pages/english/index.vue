@@ -38,7 +38,7 @@
       <img :src="record.imgurl" mode="widthFix" class="w100 mb40">
     </div>
 
-    <operates />
+    <operates :id="id" />
   </div>
 </template>
 
@@ -54,6 +54,7 @@ export default {
   },
   data () {
     return {
+      id: '',
       record: {},
       tabKey: 0,
       type: ''
@@ -90,7 +91,8 @@ export default {
       this.getData()
     }
   },
-  onLoad () {
+  onLoad (options) {
+    this.id = options.id
     this.getData()
   }
 }

@@ -49,7 +49,7 @@
       </template>
     </div>
 
-    <operates />
+    <operates :id="id" />
   </div>
 </template>
 
@@ -63,6 +63,7 @@ export default {
   },
   data () {
     return {
+      id: '',
       list: []
     }
   },
@@ -75,7 +76,8 @@ export default {
       })
     }
   },
-  onLoad () {
+  onLoad (options) {
+    this.id = options.id
     this.getData()
   }
 }

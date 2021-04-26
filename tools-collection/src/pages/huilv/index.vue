@@ -50,7 +50,7 @@
       </div>
     </div>
 
-    <operates />
+    <operates :id="id" />
   </div>
 </template>
 
@@ -63,6 +63,7 @@ export default {
   },
   data () {
     return {
+      id: '',
       typeList: [],
       key1: '',
       name1: '',
@@ -115,6 +116,9 @@ export default {
   },
   onShow () {
     this.getData()
+  },
+  onLoad (options) {
+    this.id = options.id || '2'
   }
 }
 </script>

@@ -20,6 +20,7 @@ import store from '../../store'
 export default {
   data () {
     return {
+      id: '',
       showMap: false,
       markers: [],
       longitude: '',
@@ -51,7 +52,8 @@ export default {
       })
     }
   },
-  onLoad () {
+  onLoad (options) {
+    this.id = options.id
     const markers = store.state.mapData
     const arr = []
     for (let m of markers) {

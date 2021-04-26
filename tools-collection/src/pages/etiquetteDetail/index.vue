@@ -17,7 +17,7 @@
         <rich-text :nodes="record.desc"></rich-text>
       </div>
     </template>
-    <operates />
+    <operates :id="id2" />
   </div>
 </template>
 
@@ -34,6 +34,7 @@ export default {
   data () {
     return {
       id: '',
+      id2: '',
       imgSrc: mpvue.imgSrc,
       record: {}
     }
@@ -51,6 +52,7 @@ export default {
   },
   onLoad (options) {
     this.id = options.id
+    this.id2 = options.id2
     this.getData()
   }
 }

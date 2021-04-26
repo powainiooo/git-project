@@ -70,7 +70,7 @@
         </div>
       </div>
     </div>
-    <operates />
+    <operates :id="id" />
   </div>
 </template>
 
@@ -119,6 +119,7 @@ export default {
   },
   data () {
     return {
+      id: '',
       formData: {
         type: 1,
         taxPeriod: 0,
@@ -145,7 +146,8 @@ export default {
       }
     }
   },
-  created () {
+  onLoad (options) {
+    this.id = options.id
   }
 }
 </script>

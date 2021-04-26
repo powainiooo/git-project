@@ -1,7 +1,8 @@
 {
   "pages": [
-    "pages/loan/main",
+    "pages/huilv/main",
     "pages/index/main",
+    "pages/loan/main",
     "pages/search2/main",
     "pages/map/main",
     "pages/bloodPressure/main",
@@ -49,7 +50,6 @@
     "pages/trash/index/main",
     "pages/uppercase/main",
     "pages/qrcode/index/main",
-    "pages/huilv/main",
     "pages/feedback/main",
     "pages/footprint/main",
     "pages/search/main",

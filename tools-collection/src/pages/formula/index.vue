@@ -21,7 +21,7 @@
       <h3>{{current.name}}</h3>
       <rich-text :nodes="current.desc"></rich-text>
     </div>
-    <operates />
+    <operates :id="id" />
   </div>
 </template>
 
@@ -35,6 +35,7 @@ export default {
   },
   data () {
     return {
+      id: '',
       current: {},
       list: []
     }
@@ -52,7 +53,8 @@ export default {
       this.current = data
     }
   },
-  onLoad () {
+  onLoad (options) {
+    this.id = options.id
     this.getData()
   }
 }

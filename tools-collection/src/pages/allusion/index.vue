@@ -38,7 +38,7 @@
       </li>
     </ul>
 
-    <operates />
+    <operates :id="id" />
   </div>
 </template>
 
@@ -54,6 +54,7 @@ export default {
   },
   data () {
     return {
+      id: '',
       list: []
     }
   },
@@ -68,7 +69,8 @@ export default {
       })
     }
   },
-  created () {
+  onLoad (options) {
+    this.id = options.id
   }
 }
 </script>

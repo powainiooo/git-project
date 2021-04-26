@@ -10,11 +10,11 @@
 
     <ul class="unit-list">
       <li class="borderB" v-for="item in list" :key="index">
-        <a :href="'/pages/unit/detail/main?key=' + item.value">{{item.name}} <img src="/static/images/arrow6.png" mode="widthFix" /></a>
+        <a :href="'/pages/unit/detail/main?key=' + item.value + '&id=' + id">{{item.name}} <img src="/static/images/arrow6.png" mode="widthFix" /></a>
       </li>
     </ul>
 
-    <operates />
+    <operates :id="id" />
   </div>
 </template>
 
@@ -27,6 +27,7 @@ export default {
   },
   data () {
     return {
+      id: '',
       list: [
         { name: '长度换算', value: 'length' },
         { name: '面积换算', value: 'area' },
@@ -45,7 +46,8 @@ export default {
     }
   },
 
-  created () {
+  onLoad (options) {
+    this.id = options.id
   }
 }
 </script>

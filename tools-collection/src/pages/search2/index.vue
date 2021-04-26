@@ -20,7 +20,7 @@
       <li v-for="i in list" :key="index" @click="select(i)">{{i}}</li>
     </ul>
 
-    <operates />
+    <operates :id="id" />
   </div>
 </template>
 
@@ -41,6 +41,7 @@ export default {
 
   data () {
     return {
+      id: '',
       list: []
     }
   },
@@ -76,7 +77,8 @@ export default {
       this.onSearch(keyword)
     }
   },
-  onLoad () {
+  onLoad (options) {
+    this.id = options.id
     this.getData()
   }
 }

@@ -26,14 +26,14 @@
       </div>
 
       <div class="tool-list mb40">
-        <a href="#" class="tool-item" v-for="item in list1" :key="id">
+        <a :href="'/' + item.mini_page + '?id=' + item.id" class="tool-item" v-for="item in list1" :key="id">
           <img :src="imgSrc + item.imgpath" mode="aspectFill" />
           <div>{{item.name}}</div>
         </a>
       </div>
 
       <div class="between" style="flex-wrap: wrap;">
-        <a href="#" class="tool-item2" v-for="item in list2" :key="id">
+        <a :href="'/' + item.mini_page + '?id=' + item.id" class="tool-item2" v-for="item in list2" :key="id">
           <img :src="imgSrc + item.ad_image" mode="aspectFill" />
           <div>{{item.name}}</div>
         </a>

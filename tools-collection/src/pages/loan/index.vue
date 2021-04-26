@@ -358,7 +358,7 @@
     </div>
     </template>
 
-    <operates />
+    <operates :id="id" />
   </div>
 </template>
 
@@ -374,6 +374,7 @@ export default {
   },
   data () {
     return {
+      id: '',
       tabKey: 0,
       formData: {
         type1: 0,
@@ -588,7 +589,8 @@ export default {
       }
     }
   },
-  onLoad () {
+  onLoad (options) {
+    this.id = options.id
     const years = []
     for (let i = 1; i <= 30; i++) {
       years.push({

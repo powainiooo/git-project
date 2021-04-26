@@ -9,6 +9,11 @@ const getSetting = promisify(mpvue.getSetting)
 export default {
   created () {
     mpvue.imgSrc = store.state.imgSrc
+    mpvue.toPage = function (url) {
+      mpvue.navigateTo({
+        url
+      })
+    }
     this.onlogin()
   },
   methods: {

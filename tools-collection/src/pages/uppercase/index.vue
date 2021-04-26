@@ -20,7 +20,7 @@
       </div>
     </div>
 
-    <operates />
+    <operates :id="id" />
   </div>
 </template>
 
@@ -34,6 +34,7 @@ export default {
   },
   data () {
     return {
+      id: '',
       money: '',
       moneyStr: ''
     }
@@ -49,7 +50,8 @@ export default {
       })
     }
   },
-  created () {
+  onLoad (options) {
+    this.id = options.id
   }
 }
 </script>

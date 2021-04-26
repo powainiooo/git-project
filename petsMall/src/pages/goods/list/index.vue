@@ -6,9 +6,9 @@
 .tabs-dog { left: 96px;}
 .tabs-cat { right: 96px;}
 
-.list-container { min-height: calc(100vh - 420px); background-color: #ffffff; display: flex; align-items: baseline; flex-wrap: wrap; position: relative; padding: 52px 45px 0 45px; box-shadow: 0 0 25px rgba(0, 0, 0, .1); }
+.list-container { min-height: calc(100vh - 420px); background-color: #ffffff; display: flex; flex-wrap: wrap; position: relative; padding: 52px 45px 0 45px; box-shadow: 0 0 25px rgba(0, 0, 0, .1); }
 .list-container .grid:nth-child(2n) { display: flex; justify-content: flex-end; }
-.list-container .grid { width: 50%; position: relative; padding-top: 20px; }
+.list-container .grid { width: 50%; position: relative; }
 .list-container .grid:before { content: ''; width: 100%; height: 2px; position: absolute; top: 0; left: 0; background-color: #D1CECE; transform: scaleY(.5); }
 .list-container .grid:first-child:before { height: 0; }
 .list-container .grid:nth-child(2):before { height: 0; }

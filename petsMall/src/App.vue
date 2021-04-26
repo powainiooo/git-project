@@ -50,7 +50,7 @@ button:after { border: none;}
 
 .goods-details .catalog { padding: 32px 26px 10px 26px;}
 .goods-details .catalog h3 { font-size: 22px; color: #A6A5A5; margin-bottom: 10px; }
-.goods-details .catalog ul { display: flex; flex-wrap: nowrap; }
+.goods-details .catalog ul { display: flex; flex-wrap: wrap; }
 .goods-details .catalog ul li { min-width: 110px; height: 70px; line-height: 70px; border-radius: 35px; border: 1px solid var(--mainColor); text-shadow: var(--textShadow); font-size: 20px; color: var(--textColor); padding: 0 10px; display: flex; justify-content: center; align-items: center; margin-right: 22px; margin-bottom: 22px;}
 .goods-details .catalog ul li.active { background-color: var(--mainColor); color: #ffffff; }
 .goods-details .catalog ul li.diabled { background-color: #E8E6E4; color: #A6A5A5; border-color: #E8E6E4; }

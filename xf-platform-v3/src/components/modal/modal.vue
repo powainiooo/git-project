@@ -51,7 +51,7 @@ export default {
     }
   },
   methods: {
-    warn (opts) {
+    warning (opts) {
       this.isShow = true
       this.isWarn = true
       this.content = opts.content

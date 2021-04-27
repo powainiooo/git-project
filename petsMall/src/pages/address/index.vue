@@ -108,7 +108,7 @@ export default {
                   this.formData.area = e.mp.detail.value[2]
                } else {
                   mpvue.showToast({
-                     title: '不提供该地区供货',
+                     title: '该地区暂不供货，感谢您的支持',
                      icon: 'none'
                   })
                   this.formData.province = ''

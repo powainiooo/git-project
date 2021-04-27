@@ -48,9 +48,9 @@
   <navs v-if="page === 'navs'" @toggle="toggle" />
   <infos v-if="page === 'infos'" />
   <banks v-if="page === 'banks'" @toggle="toggle" />
-  <bank-edit v-if="page === 'bankEdit'" />
-  <records v-if="page === 'records'" />
-  <cash-out v-if="page === 'cashOut'" :record="recordData" />
+  <bank-edit v-if="page === 'bankEdit'" @toggle="toggle" />
+  <records v-if="page === 'records'" @toggle="toggle" />
+  <cash-out v-if="page === 'cashOut'" :record="recordData" @toggle="toggle" />
   <contacts v-if="page === 'contacts'" />
   </transition>
   <div class="copyright">{{copyright}}</div>
@@ -86,7 +86,7 @@ export default {
   },
   data () {
     return {
-      page: 'cashOut',
+      page: 'navs',
       recordData: {}
     }
   },

@@ -9,9 +9,9 @@
 .list-container { min-height: calc(100vh - 420px); background-color: #ffffff; display: flex; flex-wrap: wrap; position: relative; padding: 52px 45px 0 45px; box-shadow: 0 0 25px rgba(0, 0, 0, .1); }
 .list-container .grid:nth-child(2n) { display: flex; justify-content: flex-end; }
 .list-container .grid { width: 50%; position: relative; }
-.list-container .grid:before { content: ''; width: 100%; height: 2px; position: absolute; top: 0; left: 0; background-color: #D1CECE; transform: scaleY(.5); }
-.list-container .grid:first-child:before { height: 0; }
-.list-container .grid:nth-child(2):before { height: 0; }
+.list-container .grid:before { content: ''; width: 100%; height: 2px; position: absolute; bottom: 0; left: 0; background-color: #D1CECE; transform: scaleY(.5); }
+.list-container .grid:last-child:before { height: 0; }
+.list-container .grid:nth-last-child(2):before { height: 0; }
 .list-container .grid:nth-child(2n-1):after { content: ''; width: 2px; position: absolute; top: 0; right: 0; bottom: 0; background-color: #D1CECE; transform: scaleX(.5); }
 
 .hint { font-size: 24px; color: #9B9A9A; text-align: center; margin: 50px; }
@@ -36,6 +36,7 @@
          <div class="grid" v-for="item in listData" :key="id">
             <list-item :itemData="item" />
          </div>
+         <div class="grid" v-if="listData.length % 2 !== 0"></div>
          </template>
          <div class="hint-result" v-else>
             <img src="/static/images/goods/warn.png" mode="widthFix" style="width: 71rpx;" />
@@ -49,6 +50,7 @@
          <div class="grid" v-for="item in listData" :key="id">
             <list-item :itemData="item" />
          </div>
+         <div class="grid" v-if="listData.length % 2 !== 0"></div>
          </template>
          <div class="hint-result" v-else>
             <img src="/static/images/goods/warn.png" mode="widthFix" style="width: 71rpx;" />

@@ -67,7 +67,7 @@ export default {
       return false
     },
     globalData () {
-      return this.$store.state.globalData
+      return this.$store.state.globalData.merchant
     }
   },
   mounted () {
@@ -75,7 +75,7 @@ export default {
   },
   data () {
     return {
-      vericodeEvent: 'register',
+      vericodeEvent: 'cardedit',
       formData: {
         password: '',
         account_name: '',

@@ -1,48 +1,58 @@
 <style scoped>
-.unit-list li { height: 100px; }
-.unit-list li a { display: flex; height: 100%; align-items: center; padding-left: 32px; font-size: 30px; position: relative; }
-.unit-list li a img { width: 12px; position: absolute; top: 39px; right: 30px; }
+.video { width: 100%; height: 430px; }
+.et-title { margin: 70px 0 60px 0; text-align: center; font-size: 40px; color: #436CB3; padding-bottom: 30px; position: relative; }
+.et-title:after { content: ''; width: 56px; height: 4px; background-color: #436CB3; position: absolute; left: 50%; bottom: 0; transform: translateX(-50%); }
 </style>
 
 <template>
   <div class="container">
     <div class="hr20"></div>
+    <template v-if="record.id">
+      <video :src="imgSrc + record.mp4_path" controls :poster="imgSrc + record.imgpath" class="video"></video>
 
-    <ul class="unit-list">
-      <li class="borderB" v-for="item in list" :key="index">
-        <a :href="'/pages/etiquetteDetail/main?id=' + item.id + '&id2=' + id">{{item.name}} <img src="/static/images/arrow6.png" mode="widthFix" /></a>
-      </li>
-    </ul>
+      <c-audio :src="record.mp3_path" :title="record.name" v-if="record.mp3_path !== ''" />
 
-    <operates :id="id" />
+      <div class="et-title">{{record.name}}</div>
+      <div class="ml30 mr30 mb30">
+        <rich-text :nodes="record.desc"></rich-text>
+      </div>
+    </template>
+    <operates :id="id2" />
   </div>
 </template>
 
 <script>
 import operates from '@/components/operates'
+import cAudio from '@/components/audio'
 import {postAction} from '../../utils/api'
 
 export default {
   components: {
-    operates
+    operates,
+    cAudio
   },
   data () {
     return {
       id: '',
-      list: []
+      id2: '',
+      imgSrc: mpvue.imgSrc,
+      record: {}
     }
   },
   methods: {
     getData () {
-      postAction('rite').then(res => {
+      postAction('rite_info', {
+        id: this.id
+      }).then(res => {
         if (res.ret === 0) {
-          this.list = res.data
+          this.record = res.data
         }
       })
     }
   },
   onLoad (options) {
     this.id = options.id
+    this.id2 = options.id2
     this.getData()
   }
 }

@@ -12,7 +12,7 @@
 <div class="c-footer">
    <div class="price" v-if="price !== ''">{{price}}<span>元</span></div>
    <div class="close" v-if="showClose" @click="close"><img src="/static/images/header/close.png" /></div>
-   <button @click="btnFunc" :open-type="openType" @getuserinfo="getuserinfo">{{titleArr[0]}}| {{titleArr[1]}}</button>
+   <button @click="btnFunc">{{titleArr[0]}}| {{titleArr[1]}}</button>
 </div>
 </template>
 
@@ -44,44 +44,33 @@ export default {
       titleArr () {
          return this.btnName.split('|')
       },
-      openType () {
-         if (this.needAuth && !this.userInfoAuth) {
-            return 'getUserInfo'
-         } else {
-            return  ''
-         }
-      },
       userInfoAuth () {
-         return store.state.settings['scope.userInfo']
+         return store.state.token !== ''
       }
    },
    methods: {
       btnFunc () {
          if (this.userInfoAuth) {
             this.$emit('btnFunc')
+         } else {
+            if (this.needAuth) {
+               mpvue.getUserProfile({
+                  desc: '用于完善会员资料',
+                  success: res => {
+                     console.log(res)
+                     this.addUser(res.userInfo)
+                  }
+               })
+            }
          }
       },
-      getuserinfo (e) {
-         console.log('getuserinfo', e)
-         if (e.mp.detail.errMsg !== 'getUserInfo:ok') return
+      addUser (userInfo) {
          getAction('wxuser_add', {
             openid: store.state.openid,
-            country: e.mp.detail.userInfo.country,
-            province: e.mp.detail.userInfo.province,
-            city: e.mp.detail.userInfo.city,
-            gender: e.mp.detail.userInfo.gender,
-            nickName: e.mp.detail.userInfo.nickName,
-            avatarUrl: e.mp.detail.userInfo.avatarUrl
+            ...userInfo
          }).then(res => {
-            store.commit('SET_PERSONINFO', e.mp.detail.userInfo)
             store.commit('SET_TOKEN', res.data)
             this.$emit('btnFunc')
-            mpvue.getSetting({
-               success (res2) {
-                  console.log('res2', res2)
-                  store.commit('SET_SETTING', res2.authSetting)
-               }
-            })
          })
       },
       close () {

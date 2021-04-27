@@ -44,28 +44,17 @@
       <tbody>
       <tr v-for="item in list" :key="item.id">
         <td><div>{{item.price_name}}</div></td>
-        <td class="helveB"><div>{{item.price_name}}</div></td>
+        <td class="helveB"><div>{{item.createtime}}</div></td>
         <td><div>{{item.name}}</div></td>
         <td class="helveB"><div>{{item.mobile}}</div></td>
         <td><div>{{item.address}}</div></td>
         <td class="helveB"><div>{{item.id_card_no}}</div></td>
         <td class="helveB"><div>{{item.order_no}}</div></td>
         <td class="helveB"><div>{{item.price}}</div></td>
-        <td><div class="style1">{{item.price_name}}</div></td>
-        <td><div class="status">{{item.price_name}}</div></td>
-        <td><div></div></td>
-      </tr>
-      <tr>
-        <td><div>普通票</div></td>
-        <td class="helveB"><div>2019-05-10</div></td>
-        <td><div>冯</div></td>
-        <td class="helveB"><div>13760418980</div></td>
-        <td><div>深圳市宝安区新安六路众里创业社区309</div></td>
-        <td class="helveB"><div>44030199028391029</div></td>
-        <td class="helveB"><div>190510221059331637</div></td>
-        <td class="helveB"><div>130</div></td>
-        <td><div class="style1">1</div></td>
-        <td><div class="status style2">未验票</div></td>
+        <td><div class="style1">{{item.num}}</div></td>
+        <td>
+          <div class="status">{{stateList[item.state]}}</div>
+        </td>
         <td><div></div></td>
       </tr>
       </tbody>
@@ -104,6 +93,7 @@ export default {
   data () {
     return {
       showRefundHint: false,
+      stateList: ['未付款', '已支付', '退款申请中', '全额退款', '部分退款'],
       columns: [ // 1260
         { name: '票种', width: 100 },
         { name: '下单时间', width: 130 },
@@ -134,9 +124,9 @@ export default {
   methods: {
     getData () {
       postAction('/editor/order/lists', {
-        id: this.record.id,
+        order_id: this.record.id,
         keyword: this.keyword,
-        type: this.type,
+        price_name: this.type,
         page: this.pageNo,
         limit: this.pageSize
       }).then(res => {

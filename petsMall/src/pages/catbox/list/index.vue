@@ -34,7 +34,6 @@ page { background-color: #F3F2F1; }
          <p>自定义猫盒套餐</p>
       </div>
       <img src="/static/images/catbox/icon-arrow.png" class="arrow" />
-      <button v-if="!hasUserInfo" class="footer-btn" open-type="getUserInfo" @getuserinfo="getuserinfo"></button>
    </a>
 </div>
 </template>
@@ -55,7 +54,7 @@ export default {
          return this.total === this.listData.length
       },
       hasUserInfo () {
-         return store.state.settings['scope.userInfo']
+         return store.state.token !== ''
       }
    },
    data () {
@@ -84,44 +83,39 @@ export default {
          this.getData()
       },
       toMyBox () {
-         if (!this.hasUserInfo) return
-         getAction('my_group', {
-            token: store.state.token
-         }).then(res => {
-            if (Array.isArray(res.data)) {
-               mpvue.navigateTo({
-                  url: '/pages/catbox/diy/main'
-               })
-            } else {
-               mpvue.navigateTo({
-                  url: '/pages/catbox/mine/main'
-               })
-            }
-            this.showMenu = false
-         })
-      },
-      getuserinfo (e) {
-         console.log('getuserinfo', e)
-         if (e.mp.detail.errMsg !== 'getUserInfo:ok') return
-         getAction('wxuser_add', {
-            openid: store.state.openid,
-            country: e.mp.detail.userInfo.country,
-            province: e.mp.detail.userInfo.province,
-            city: e.mp.detail.userInfo.city,
-            gender: e.mp.detail.userInfo.gender,
-            nickName: e.mp.detail.userInfo.nickName,
-            avatarUrl: e.mp.detail.userInfo.avatarUrl
-         }).then(res => {
-            store.commit('SET_PERSONINFO', e.mp.detail.userInfo)
-            store.commit('SET_TOKEN', res.data)
-            mpvue.getSetting({
-               success: res2 => {
-                  console.log('res2', res2)
-                  store.commit('SET_SETTING', res2.authSetting)
-                  this.$nextTick(() => {
-                     this.toMyBox()
+         if (this.hasUserInfo) {
+            getAction('my_group', {
+               token: store.state.token
+            }).then(res => {
+               if (Array.isArray(res.data)) {
+                  mpvue.navigateTo({
+                     url: '/pages/catbox/diy/main'
+                  })
+               } else {
+                  mpvue.navigateTo({
+                     url: '/pages/catbox/mine/main'
                   })
                }
+               this.showMenu = false
+            })
+         } else {
+            mpvue.getUserProfile({
+               desc: '用于完善会员资料',
+               success: res => {
+                  console.log(res)
+                  this.addUser(res.userInfo)
+               }
+            })
+         }
+      },
+      addUser (userInfo) {
+         getAction('wxuser_add', {
+            openid: store.state.openid,
+            ...userInfo
+         }).then(res => {
+            store.commit('SET_TOKEN', res.data)
+            this.$nextTick(() => {
+               this.toMyBox()
             })
          })
       }

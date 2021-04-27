@@ -3,7 +3,7 @@
   position: relative;
 }
 .c-select-line {
-  width: 90px;
+  min-width: 90px;
   height: 30px;
   background: linear-gradient(330deg, #5B85E6 0%, #6D9AF4 100%);
   box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.15);

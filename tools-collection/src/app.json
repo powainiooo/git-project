@@ -1,16 +1,14 @@
 {
   "pages": [
-    "pages/pictrue/main",
-    "pages/pictrueDetail/main",
     "pages/index/main",
+    "pages/etiquette/main",
+    "pages/pictrue/main",
     "pages/huilv/main",
     "pages/loan/main",
     "pages/search2/main",
     "pages/map/main",
     "pages/bloodPressure/main",
     "pages/hepatitisB/main",
-    "pages/etiquetteDetail/main",
-    "pages/etiquette/main",
     "pages/formula/main",
     "pages/heartRate/main",
     "pages/bloodSugar/main",

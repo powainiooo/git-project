@@ -33,7 +33,7 @@ export default {
   },
   computed: {
     globalData () {
-      return this.$store.state.globalData
+      return this.$store.state.globalData.merchant
     }
   },
   data () {

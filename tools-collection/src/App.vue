@@ -35,6 +35,9 @@ export default {
         if (resDoLogin.ret === 0) {
           store.commit('SET_LOGIN_KEY', resDoLogin.data)
           mpvue.setStorageSync('lastGetCityTime', now)
+          if (typeof this.$mp.app.loginCallback === 'function') {
+            this.$mp.app.loginCallback()
+          }
         }
       } else {
         store.commit('SET_LOGIN_KEY', loginKey)

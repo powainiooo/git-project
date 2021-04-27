@@ -48,7 +48,8 @@
 import cFooter from '@/components/footer1'
 import { postAction } from '@/utils/api'
 import config from '@/config'
-const { imgSrc } = config
+import store from '@/store'
+const { imgSrc, tokenKey } = config
 
 export default {
   components: {
@@ -76,7 +77,14 @@ export default {
 
   onLoad () {
     // let app = getApp()
-    this.getData()
+    if (store.state[tokenKey] === '') {
+      const app = getApp()
+      app.loginCallback = () => {
+        this.getData()
+      }
+    } else {
+      this.getData()
+    }
   }
 }
 </script>

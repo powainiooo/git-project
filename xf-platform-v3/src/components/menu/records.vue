@@ -7,7 +7,7 @@
 <div class="c-records">
   <div class="clearfix mt85 mb20">
     <div class="fr flex mr40">
-      <c-select class="mr10"/>
+      <c-select :list="stateList" class="mr10" @change="state = $event.id"/>
       <div class="c-search">
         <input placeholder="输入活动名称" v-model="keyword" />
         <Button size="small" @click="getData">查询</Button>
@@ -53,7 +53,7 @@
           <div v-else>
             <Button size="small" v-if="item.state === 2" @click="toForm(item)">申请提现</Button>
             <Button size="small" type="error" v-else-if="item.state === 5">重新申请</Button>
-            <span v-else>{{stateList[item.state]}}</span>
+            <span v-else>{{getState(item.state)}}</span>
           </div>
         </td>
       </tr>
@@ -87,9 +87,16 @@ export default {
         { name: '可提金额', width: 130 },
         { name: '操作', width: 100 }
       ],
-      stateList: ['', '不可提现', '可申请提现', '审核中', '已提现', '提现被拒绝'],
+      stateList: [
+        { id: 1, name: '不可提现' },
+        { id: 2, name: '可申请提现' },
+        { id: 3, name: '审核中' },
+        { id: 4, name: '已提现' },
+        { id: 5, name: '提现被拒绝' }
+      ],
       list: [],
       keyword: '',
+      state: '',
       pageNo: 1,
       pageSize: 10,
       total: 0
@@ -101,6 +108,8 @@ export default {
   methods: {
     getData () {
       postAction('/editor/finance/lists', {
+        keyword: this.keyword,
+        state: this.state,
         page: this.pageNo,
         limit: this.pageSize
       }).then(res => {
@@ -115,6 +124,10 @@ export default {
         page: 'cashOut',
         data: record
       })
+    },
+    getState (id) {
+      const i = this.stateList.find(i => i.id === id)
+      return i.name
     }
   }
 }

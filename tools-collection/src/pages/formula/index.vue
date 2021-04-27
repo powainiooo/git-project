@@ -11,12 +11,12 @@
 <template>
   <div class="container">
     <div class="hr20"></div>
-    <ul class="formula-tabs">
-      <li v-for="item in list"
-          :key="index"
-          :class="{'active': current.id === item.id}"
-          @click="toggle(item)">{{item.name}}</li>
-    </ul>
+<!--    <ul class="formula-tabs">-->
+<!--      <li v-for="item in list"-->
+<!--          :key="index"-->
+<!--          :class="{'active': current.id === item.id}"-->
+<!--          @click="toggle(item)">{{item.name}}</li>-->
+<!--    </ul>-->
     <div class="formula-content">
       <h3>{{current.name}}</h3>
       <rich-text :nodes="current.desc"></rich-text>
@@ -42,10 +42,11 @@ export default {
   },
   methods: {
     getData () {
-      postAction('formula').then(res => {
+      postAction('formula', {
+        id: this.id
+      }).then(res => {
         if (res.ret === 0) {
-          this.list = res.data
-          this.current = res.data[0]
+          this.current = res.data
         }
       })
     },

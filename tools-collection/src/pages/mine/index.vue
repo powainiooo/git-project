@@ -18,7 +18,7 @@
     <div class="top">
       <template v-if="hasUserInfo">
         <img :src="userInfo.headimg" class="avatar" />
-        <view class="name">{{userInfo.nickName}}</view>
+        <view class="name">{{userInfo.nickname}}</view>
       </template>
       <template v-else>
       <button class="btn" @click="getUserData">点击登录</button>
@@ -87,7 +87,7 @@ export default {
       postAction('my_index').then(res => {
         if (res.ret === 0) {
           this.userInfo = res.data.user_info
-          this.hasUserInfo = !Array.isArray(res.data.user_info)
+          this.hasUserInfo = !Array.isArray(res.data.user_info) && res.data.user_info.nickname !== ''
         }
       })
     },

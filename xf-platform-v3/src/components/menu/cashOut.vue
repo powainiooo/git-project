@@ -9,7 +9,7 @@
     <tag-line title="提款额" class="mb50">{{record.avaliable_withdraw_amt}}元</tag-line>
     <FormItem>
       <RadioGroup class="xf-radios" v-model="formData.invoice">
-        <Radio label="2">不需要发票</Radio>
+        <Radio label="0">不需要发票</Radio>
         <Radio label="1">需要发票</Radio>
       </RadioGroup>
     </FormItem>
@@ -24,7 +24,7 @@
     <FormItem>
       <Input type="password" v-model="formData.password" placeholder="密码" />
     </FormItem>
-    <FormItem class="mt90" v-if="formData.invoice === '2'">
+    <FormItem class="mt90" v-if="formData.invoice === '0'">
       <Button size="small" :loading="isAjax" :disabled="nextDisabled" @click="handleSubmit">提交申请</Button>
     </FormItem>
   </Form>
@@ -33,22 +33,22 @@
     <div class="form-title">新银行卡信息</div>
     <tag-line title="发票名称" :width="300" class="mb10">票务代售服务费</tag-line>
     <FormItem>
-      <Input v-model="formData.xxx1" placeholder="公司全称" />
+      <Input v-model="formData.company" placeholder="公司全称" />
     </FormItem>
     <FormItem>
-      <Input v-model="formData.xxx2" placeholder="纳税人识别号" />
+      <Input v-model="formData.tax_number" placeholder="纳税人识别号" />
     </FormItem>
     <FormItem>
-      <Input v-model="formData.xxx3" placeholder="公司地址" />
+      <Input v-model="formData.address" placeholder="公司地址" />
     </FormItem>
     <FormItem>
-      <Input v-model="formData.xxx4" placeholder="电话" />
+      <Input v-model="formData.telphone" placeholder="电话" />
     </FormItem>
     <FormItem>
-      <Input v-model="formData.xxx5" placeholder="开户行" />
+      <Input v-model="formData.account_bank" placeholder="开户行" />
     </FormItem>
     <FormItem>
-      <Input v-model="formData.xxx6" placeholder="银行账号" />
+      <Input v-model="formData.card_no" placeholder="银行账号" />
     </FormItem>
     <FormItem class="mt90">
       <Button size="small" :loading="isAjax" :disabled="nextDisabled" @click="handleSubmit">提交申请</Button>
@@ -72,7 +72,7 @@ export default {
   },
   computed: {
     nextDisabled () {
-      if (this.vericode.code === '' || this.formData.password) {
+      if (this.vericode.code === '' || this.formData.password === '') {
         return true
       }
       if (this.formData.invoice === '1') {
@@ -85,7 +85,7 @@ export default {
       return false
     },
     globalData () {
-      return this.$store.state.globalData
+      return this.$store.state.globalData.merchant
     }
   },
   mounted () {
@@ -93,15 +93,16 @@ export default {
   },
   data () {
     return {
+      vericodeEvent: 'withdraw',
       formData: {
-        invoice: '2',
+        invoice: '0',
         password: '',
-        xxx1: '',
-        xxx2: '',
-        xxx3: '',
-        xxx4: '',
-        xxx5: '',
-        xxx6: ''
+        company: '',
+        tax_number: '',
+        address: '',
+        telphone: '',
+        account_bank: '',
+        card_no: ''
       },
       isAjax: false
     }
@@ -115,15 +116,17 @@ export default {
           if (this.isAjax) return false
           this.isAjax = true
           let params = {
-            phone: this.vericode.mobile,
+            ticket_id: this.record.id,
+            mobile: this.vericode.mobile,
             code: this.vericode.code,
             password: this.formData.password,
-            invoice: this.formData.invoice
+            invoice_flag: this.formData.invoice
           }
           if (this.formData.invoice === '1') {
             params = Object.assign(params, this.formData)
           }
-          postAction('aa', params).then(res => {
+          postAction('/editor/finance/withdraw_apply', params).then(res => {
+            this.isAjax = false
             if (res.code === 1) {
               this.$tModal.warning({
                 title: '提交成功！',

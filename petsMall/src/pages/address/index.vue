@@ -62,6 +62,7 @@
 import cHeader from '@/components/header'
 import cFooter from '@/components/footer'
 import store from '../../store'
+import {postAction} from '../../utils/api'
 
 export default {
    components: {
@@ -97,9 +98,25 @@ export default {
    },
    methods: {
       areaChange (e) {
-         this.formData.province = e.mp.detail.value[0]
-         this.formData.city = e.mp.detail.value[1]
-         this.formData.area = e.mp.detail.value[2]
+         postAction('is_no_post', {
+            province: e.mp.detail.value[0]
+         }).then(res => {
+            if (res.status === 0) {
+               if (res.data.no_post === 0) {
+                  this.formData.province = e.mp.detail.value[0]
+                  this.formData.city = e.mp.detail.value[1]
+                  this.formData.area = e.mp.detail.value[2]
+               } else {
+                  mpvue.showToast({
+                     title: '不提供该地区供货',
+                     icon: 'none'
+                  })
+                  this.formData.province = ''
+                  this.formData.city = ''
+                  this.formData.area = ''
+               }
+            }
+         })
       },
       dateChange (e) {
          this.formData.day = this.datesList[e.mp.detail.value]

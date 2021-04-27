@@ -21,7 +21,7 @@
         <view class="name">{{userInfo.nickName}}</view>
       </template>
       <template v-else>
-      <button class="btn" open-type="getUserInfo" @getuserinfo="getuserinfo">点击登录</button>
+      <button class="btn" @click="getUserData">点击登录</button>
       </template>
     </div>
     <div class="list">
@@ -76,14 +76,10 @@ export default {
   components: {
     cFooter
   },
-  computed: {
-    hasUserInfo () {
-      return store.state.settings['scope.userInfo']
-    }
-  },
   data () {
     return {
-      userInfo: {}
+      userInfo: {},
+      hasUserInfo: false
     }
   },
   methods: {
@@ -91,19 +87,19 @@ export default {
       postAction('my_index').then(res => {
         if (res.ret === 0) {
           this.userInfo = res.data.user_info
+          this.hasUserInfo = !Array.isArray(res.data.user_info)
         }
       })
     },
-    getuserinfo (e) {
-      console.log(e)
-      const userInfo = e.mp.detail.userInfo
-      postAction('getUserInfo', userInfo).then(res => {
-        if (res.ret === 0) {
-          store.commit('SET_PERSONINFO', userInfo)
-          this.getData()
-          mpvue.getSetting({
-            success: res => {
-              store.commit('SET_SETTING', res.authSetting)
+    getUserData () {
+      mpvue.getUserProfile({
+        desc: '用于完善会员资料',
+        success: res => {
+          console.log(res)
+          postAction('getUserInfo', res.userInfo).then(res => {
+            if (res.ret === 0) {
+              store.commit('SET_PERSONINFO', res.userInfo)
+              this.getData()
             }
           })
         }

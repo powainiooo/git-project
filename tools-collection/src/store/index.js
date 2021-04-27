@@ -15,7 +15,8 @@ const store = new Vuex.Store({
     imgSrc,
     poetryData: {},
     taxData: {},
-    mapData: []
+    mapData: [],
+    picData: []
   },
   mutations: {
     SET_LOGIN_KEY (state, data) {
@@ -36,6 +37,9 @@ const store = new Vuex.Store({
     },
     SET_MAP (state, data) {
       state.mapData = data
+    },
+    SET_PIC (state, data) {
+      state.picData = data
     }
   }
 })

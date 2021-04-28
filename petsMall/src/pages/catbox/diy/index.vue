@@ -86,7 +86,7 @@ export default {
    },
    computed: {
       loadOver () {
-         return this.total === this.listData.length
+         return this.total === this.listData[this.step].length
       },
       totalPrice () {
          if (this.showDetail) {
@@ -187,6 +187,7 @@ export default {
          }
       },
       btnFunc () {
+         console.log('btnFunc')
          if (this.btnName === '确认|Confirm') {
             this.$refs.details.confirm()
          } else {
@@ -314,7 +315,7 @@ export default {
    onReachBottom () {
       if (this.loadOver) return
       this.page += 1
-      this.getData()
+      this.getData(this.step + 1)
    },
    onShow () {
       if (this.source !== 'toy') {

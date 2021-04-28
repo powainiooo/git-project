@@ -26,10 +26,11 @@
 <div class="c-menu" :class="{'c-menu-show': show}">
   <div class="personal">
     <div class="avatar">
-      <img :src="userInfo.avatarUrl" v-if="hasUserInfo"/>
+<!--      <img :src="userInfo.avatarUrl" v-if="hasUserInfo"/>-->
+      <open-data type="userAvatarUrl" v-if="hasUserInfo"></open-data>
     </div>
-    <button v-if="hasUserInfo">{{userInfo.nickName}}</button>
-    <button open-type="getUserInfo" @getuserinfo="getuserinfo" v-else>点击登录</button>
+    <button v-if="hasUserInfo"><open-data type="userNickName"></open-data></button>
+    <button @click="handleLogin" v-else>点击登录</button>
   </div>
 
   <div class="ticket"
@@ -104,10 +105,7 @@ export default {
   },
   computed: {
     hasUserInfo () {
-      return store.state.settings['scope.userInfo']
-    },
-    userInfo () {
-      return store.state.personalInfo
+      return store.state.token !== null
     }
   },
   watch: {
@@ -125,8 +123,14 @@ export default {
     }
   },
   methods: {
-    getuserinfo (e) {
-      doLogin(e.mp.detail)
+    handleLogin () {
+      mpvue.getUserProfile({
+        desc: '用于完善会员资料',
+        success: res => {
+          console.log(res)
+          doLogin(res)
+        }
+      })
     },
     toOrderList () {
       mpvue.navigateTo({

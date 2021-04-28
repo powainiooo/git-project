@@ -82,12 +82,12 @@
   </div>
   <div class="right" v-if="record.star">
     <ul class="stars">
-      <li v-for="i in record.star" :key="i">
+      <li v-for="i in starNum" :key="i">
         <img src="/static/images/common/rank-star2.png" v-if="rank === 1" />
         <img src="/static/images/common/rank-star.png" v-else />
       </li>
     </ul>
-    <p>4.6</p>
+    <p>{{record.star}}</p>
   </div>
 </div>
 </template>
@@ -100,6 +100,11 @@ export default {
   },
   data () {
     return {}
+  },
+  computed: {
+    starNum () {
+      return parseInt(this.record.star)
+    }
   },
   methods: {
     toDetail () {

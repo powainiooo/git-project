@@ -25,9 +25,9 @@
       @change="changeStatus"
       @search="handleSearch" v-if="!showAd" />
 
-<!--    <c-ads ref="ad" :record="coverData" v-if="coverData && showAd" />-->
+    <c-ads ref="ad" :record="coverData" v-if="coverData && showAd" />
 
-    <template v-if="showAd">
+    <template v-if="!showAd">
       <div class="index-container" v-if="isSearch">
         <div v-for="item in listData"
              :key="id"
@@ -36,7 +36,7 @@
         </div>
       </div>
       <div class="index-container" v-else>
-        <div class="item item-small" @click="openDetail">
+        <div class="item item-small">
           <c-lees-star />
         </div>
         <div v-for="(item, index) in listData"
@@ -53,7 +53,6 @@
       </div>
     </template>
 
-    <c-detail ref="detail" />
   </div>
 </template>
 
@@ -64,7 +63,6 @@ import cLeesStar from './modules/leesStar'
 import cCollection from './modules/collection'
 import cTicket from './modules/ticket'
 import cAds from './modules/ads'
-import cDetail from './modules/detail'
 import { postAction } from '@/utils/api'
 import store from '@/store'
 
@@ -75,7 +73,6 @@ export default {
     cLeesStar,
     cCollection,
     cAds,
-    cDetail,
     cTicket
   },
   data () {
@@ -161,10 +158,6 @@ export default {
       this.cityId = id
       this.listData = []
       this.getData()
-    },
-    openDetail () {
-      console.log('openDetail')
-      this.$refs.detail.show()
     }
   },
   onReachBottom () {

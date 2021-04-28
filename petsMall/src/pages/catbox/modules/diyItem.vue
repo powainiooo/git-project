@@ -127,8 +127,12 @@ export default {
                return this.itemData.attrs_list[0].child[0].price
             } else {
                const item = this.itemData.attrs_list.find(i => i.id === this.selectedArr[2])
-               const spItem = item.child.find(i => i.specs === this.selectedArr[3])
-               return spItem ? spItem.price : this.itemData.attrs_list[0].child[0].price
+               if (item) {
+                  const spItem = item.child.find(i => i.specs === this.selectedArr[3])
+                  return spItem ? spItem.price : this.itemData.attrs_list[0].child[0].price
+               } else {
+                  return this.itemData.price
+               }
             }
          } else {
             return this.itemData.price

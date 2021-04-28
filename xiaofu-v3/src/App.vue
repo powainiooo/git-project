@@ -1,9 +1,6 @@
 <script>
-import { promisify } from '@/utils'
-import { doLogin, postAction } from '@/utils/api'
+import { getTokenData, postAction } from '@/utils/api'
 import store from '@/store'
-const getSetting = promisify(mpvue.getSetting)
-const getUserInfo = promisify(mpvue.getUserInfo)
 export default {
   created () {
     this.getData()
@@ -15,13 +12,7 @@ export default {
       const token = mpvue.getStorageSync('XIAOFU_TOKEN')
       console.log('XIAOFU_TOKEN', token)
       store.commit('SET_TOKEN', token)
-      const settings = await getSetting()
-      console.log('settings', settings)
-      store.commit('SET_SETTING', settings.authSetting)
-      const userInfo = await getUserInfo()
-      if (settings.authSetting['scope.userInfo']) {
-        doLogin(userInfo)
-      }
+      getTokenData()
     },
     getConfig () {
       postAction('/api/common/init').then(res => {

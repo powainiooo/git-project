@@ -2,6 +2,17 @@
 .banner { width: 100%; height: 588px; margin-top: 100px; }
 .lees-page { margin: -488px 25px 25px 25px; padding-bottom: 125px; position: relative; z-index: 5; }
 .lees-page .lees-star { width: 318px; height: 160px; margin-bottom: 76px; margin-left: 20px;  }
+
+@keyframes moveUp {
+  0% { transform: translateY(140px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+.less-list .less-item { animation: moveUp .7s cubic-bezier(.3,.79,.41,.91) both; }
+.less-list .less-item:nth-child(5n+1) { animation-delay: 0.5s }
+.less-list .less-item:nth-child(5n+2) { animation-delay: 0.7s }
+.less-list .less-item:nth-child(5n+3) { animation-delay: 0.9s }
+.less-list .less-item:nth-child(5n+4) { animation-delay: 1.1s }
+.less-list .less-item:nth-child(5n+5) { animation-delay: 1.3s }
 </style>
 
 <template>
@@ -14,8 +25,10 @@
     <img :src="configData.star_background_image" class="banner" />
     <div class="lees-page">
       <img src="/static/images/leesStar/lees-star.png" class="lees-star" />
-      <div>
-        <c-list-item v-for="(item, i) in listData" :key="i" :record="item" />
+      <div class="less-list">
+        <div class="less-item" v-for="(item, i) in listData" :key="i">
+          <c-list-item :record="item" />
+        </div>
       </div>
     </div>
   </div>

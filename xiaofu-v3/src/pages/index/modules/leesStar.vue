@@ -16,7 +16,7 @@
 </style>
 
 <template>
-<a href="#"
+<a href="/pages/leesStar/main"
    class="c-lees-star"
    hover-class="hscale"
    hover-stay-time="10">

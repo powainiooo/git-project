@@ -29,6 +29,7 @@
   border-radius: 20px;
   overflow: hidden;
   transition: all .5s cubic-bezier(.3,.79,.41,.91);
+  animation: moveUp .7s cubic-bezier(.3,.79,.41,.91) .2s both;
 }
 .c-ticket-operates-bottom {
   top: calc(100vh - 170px);
@@ -130,8 +131,13 @@
   margin-right: 4px;
 }
 
-.buy-forms { width: 100%; height: 0; transition: height .4s ease-out; position: relative; overflow: hidden; }
+.buy-forms { width: 100%; height: 0; min-height: calc(100vh - 100px); transition: height .4s cubic-bezier(.3,.79,.41,.91); position: relative; overflow: hidden; }
 .buy-forms .buys-frame { width: 100%; position: absolute; left: 0; bottom: 0; }
+
+@keyframes moveUp {
+  0% { transform: translateY(140px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
 </style>
 
 <template>
@@ -143,13 +149,18 @@
   @scroll="onScroll"
   class="c-ticket-detail">
 
-  <div class="buy-forms" :style="{height: (page === 'buy' ? buyHeight : 0) + 'px'}">
+  <div class="buy-forms"
+       :style="{
+        height: (page === 'buy' ? buyHeight : 0) + 'px',
+        'min-height': (showInfos ? 'auto' : 'calc(100vh - 100px)')
+       }">
     <div class="buys-frame" id="buyFrame">
       <information @change="getValue" />
       <c-select :list="record.price || []" @change="getValue" />
     </div>
   </div>
 
+  <div v-show="showInfos">
   <infos ref="infos" :record="record"/>
 
   <artist ref="artist" :list="record.artist_list || []" />
@@ -157,6 +168,7 @@
   <particulars ref="particulars" :list="record.intro_list || []" />
   <organizers ref="organizers" :record="record.organizer" />
   <recommend ref="recommend" :list="record.recommend_tickets" />
+  </div>
 
   <div class="c-ticket-operates" :class="{'c-ticket-operates-bottom': page === 'buy'}">
     <div>260<span>RMB</span></div>
@@ -216,7 +228,8 @@ export default {
       },
       scrollTop: '',
       cardNo: '',
-      buyHeight: 0
+      buyHeight: 0,
+      showInfos: true
     }
   },
   methods: {
@@ -238,7 +251,9 @@ export default {
           this.scrollTop = 0
           this.$emit('toggle', this.page)
         }
-
+        setTimeout(() => {
+          this.showInfos = false
+        }, 400)
       } else if (this.page === 'buy') {
         this.handleBuy()
       }
@@ -275,6 +290,7 @@ export default {
       })
     },
     backDetail () {
+      this.showInfos = true
       this.page = 'detail'
     },
     getValue (data) {

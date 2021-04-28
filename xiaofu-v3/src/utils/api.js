@@ -17,7 +17,7 @@ const ajax = (opts, autoMsg = true) => {
         console.log('请求参数', opts)
         console.log('返回数据', res.data)
         resolve(res.data)
-        if (res.data.code !== 1) {
+        if (res.data.code !== 1 && autoMsg) {
           mpvue.showToast({
             title: res.data.msg,
             icon: 'none'
@@ -46,12 +46,12 @@ export const getAction = (url, data = {}) => {
   })
 }
 // 通用post
-export const postAction = (url, data = {}) => {
+export const postAction = (url, data = {}, autoMsg = true) => {
   return ajax({
     method: 'POST',
     url,
     data
-  })
+  }, autoMsg)
 }
 
 // 登录
@@ -66,6 +66,22 @@ export const doLogin = (userInfo = {}) => {
       token: ''
     }).then(res => {
       store.commit('SET_TOKEN', res.data.userInfo.token)
+    })
+  })
+}
+
+// 获取token
+export const getTokenData = () => {
+  login().then(loginRes => {
+    postAction('/api/wxapp/common_login', {
+      code: loginRes.code
+    }, false).then(res => {
+      console.log('common_login', res)
+      if (res.data !== null) {
+        store.commit('SET_TOKEN', res.data.userInfo.token)
+      } else {
+        store.commit('SET_TOKEN', res.data)
+      }
     })
   })
 }

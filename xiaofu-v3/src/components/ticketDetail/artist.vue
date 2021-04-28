@@ -1,4 +1,7 @@
 <style scoped>
+.artist-frame {
+  animation: moveUp .7s cubic-bezier(.3,.79,.41,.91) .6s both;
+}
 .artist-item {
   width: 300px;
   height: 236px;
@@ -38,7 +41,7 @@
 </style>
 
 <template>
-<div>
+<div class="artist-frame">
   <div class="c-ticket-title"><span>Artist</span>表演者</div>
   <swiper previous-margin="25rpx" next-margin="416rpx" duration="100">
     <swiper-item v-for="(item, index) in list" :key="index">

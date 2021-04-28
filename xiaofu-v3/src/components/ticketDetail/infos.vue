@@ -3,6 +3,7 @@
   width: 100%;
   height: 800px;
   transition: height .5s cubic-bezier(.3,.79,.41,.91);
+  animation: moveUp .7s cubic-bezier(.3,.79,.41,.91) both;
 }
 .c-ticket-infos .banner-hide {
   height: 0;
@@ -13,6 +14,7 @@
   justify-content: space-between;
   align-items: center;
   margin: 0 25px;
+  animation: moveUp .7s cubic-bezier(.3,.79,.41,.91) .2s both;
 }
 .c-ticket-infos .line1 img {
   width: 80px;
@@ -23,6 +25,7 @@
   align-items: center;
   height: 80px;
   margin: 0 25px;
+  animation: moveUp .7s cubic-bezier(.3,.79,.41,.91) .4s both;
 }
 .c-ticket-infos .line2:before {
   content: '';

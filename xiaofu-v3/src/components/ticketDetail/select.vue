@@ -3,6 +3,9 @@
   height: 1px;
   margin: 76px 25px 0 25px;
 }
+.c-ticket-information {
+  margin-bottom: 200px;
+}
 </style>
 
 <template>

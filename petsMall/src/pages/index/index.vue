@@ -61,6 +61,11 @@ export default {
    onShow () {
       this.getGoods()
    },
+   onHide () {
+      console.log('onHide list')
+      this.catBoxList = []
+      this.goodsList = []
+   },
    onLoad () {
       Object.assign(this.$data, this.$options.data())
       getAction('type_list').then(res => {

@@ -1,8 +1,9 @@
 {
   "pages": [
     "pages/index/main",
-    "pages/etiquette/main",
+    "pages/turntable/main",
     "pages/pictrue/main",
+    "pages/etiquette/main",
     "pages/huilv/main",
     "pages/loan/main",
     "pages/search2/main",
@@ -57,7 +58,6 @@
     "pages/reward/main",
     "pages/collection/main",
     "pages/mine/main",
-    "pages/turntable/main",
     "pages/coin/main",
     "pages/dice/main",
     "pages/yuanqu/detail/main",

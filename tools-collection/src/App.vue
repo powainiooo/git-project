@@ -4,7 +4,6 @@ import store from '@/store'
 import { promisify } from '@/utils'
 import { doLogin } from '@/utils/api'
 const { tokenKey } = config
-const login = promisify(mpvue.login)
 const getSetting = promisify(mpvue.getSetting)
 export default {
   created () {
@@ -26,14 +25,9 @@ export default {
       const loginKey = mpvue.getStorageSync(tokenKey)
       console.log('loginKey', loginKey)
       if (loginKey === '' || loginKey === null || now > lastGetCityTime + 24 * 60 * 60 * 1000) {
-        const resLogin = await login()
-        console.log('resLogin', resLogin)
-        const resDoLogin = await doLogin({
-          code: resLogin.code
-        })
+        const resDoLogin = await doLogin()
         console.log('resDoLogin', resDoLogin)
         if (resDoLogin.ret === 0) {
-          store.commit('SET_LOGIN_KEY', resDoLogin.data)
           mpvue.setStorageSync('lastGetCityTime', now)
           if (typeof this.$mp.app.loginCallback === 'function') {
             this.$mp.app.loginCallback()
@@ -55,9 +49,9 @@ export default {
 /*
   common
 */
-.container { padding-bottom: 100px; min-height: 100vh; }
+.container { padding-bottom: 120px; min-height: 100vh; }
 .container2 { min-height: 100vh; background-color: #F8F8F8; }
-.container3 { min-height: 100vh; background-color: #F8F8F8; padding-bottom: 100px; }
+.container3 { min-height: 100vh; background-color: #F8F8F8; padding-bottom: 120px; }
 .mh100 { min-height: 100vh; }
 
 .c-39 { color: #393A3C; }

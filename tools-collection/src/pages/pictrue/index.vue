@@ -8,6 +8,10 @@
 .pic-list li:nth-child(2n-1):after { content: ''; width: 2px; position: absolute; top: 8px; bottom: 8px; right: 0; background-color: #436CB3; }
 .pic-list li p { font-size: 38px; color: #333333; line-height: 38px; margin-bottom: 38px; }
 .pic-list li div { font-size: 28px; color: #436CB3; line-height: 38px; }
+
+.pic-content { margin: 30px; }
+.pic-content h3 { font-size: 38px; color: #333333; line-height: 38px; margin-bottom: 38px; text-align: center; }
+.pic-content p { font-size: 28px; color: #436CB3; line-height: 38px; }
 </style>
 
 <template>
@@ -22,12 +26,16 @@
   </div>
   <div class="container" v-if="showResult">
     <img :src="imgSrc + url" mode="widthFix" class="w100" />
-    <ul class="pic-list">
+    <ul class="pic-list" v-if="showList">
       <li v-for="item in list" :key="index">
         <p>{{item.name}}</p>
-        <div>{{item.score}}%</div>
+        <div>{{item.score}}</div>
       </li>
     </ul>
+    <div class="pic-content" v-if="!showList">
+      <h3>{{record.wineNameCn}}</h3>
+      <p v-if="record.description">{{record.description}}</p>
+    </div>
     <div class="ml120 mr120">
       <button class="btn" @click="choose">重新拍照</button>
     </div>
@@ -57,11 +65,21 @@ export default {
         plant: 'sb_zw',
         animal: 'sb_animal',
         car: 'sb_car',
-        redwine: 'sb_redwine'
+        redwine: 'sb_redwine',
+        damaged: 'car_damaged'
       },
       url: '',
       list: [],
+      record: {},
       showResult: false
+    }
+  },
+  computed: {
+    showList () {
+      if (this.type === 'plant' || this.type === 'animal' || this.type === 'car' || this.type === 'damaged') {
+        return true
+      }
+      return false
     }
   },
   methods: {
@@ -100,16 +118,25 @@ export default {
       }).then(res => {
         if (res.ret === 0) {
           mpvue.hideLoading()
-          const list = []
-          for (const i of res.data) {
-            list.push({
-              name: i.name,
-              score: parseInt(i.score * 100)
-            })
-          }
           this.url = url
-          this.list = list
-          console.log('this.list', this.list)
+          if (this.showList) {
+            const list = []
+            for (const i of res.data) {
+              let name = i.name
+              let score = parseInt(i.score * 100) + '%'
+              if (this.type === 'damaged') {
+                name = i.parts
+                score = i.type
+              }
+              list.push({
+                name,
+                score
+              })
+            }
+            this.list = list
+          } else {
+            this.record = res.data
+          }
           this.showResult = true
         }
       })
@@ -117,7 +144,7 @@ export default {
   },
   onLoad (options) {
     this.id = options.id || '61'
-    this.type = options.type || 'car'
+    this.type = options.type || 'damaged'
   }
 }
 </script>

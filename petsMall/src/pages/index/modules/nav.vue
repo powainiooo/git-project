@@ -20,7 +20,7 @@
       class="nav-box"
       hover-class="hscale"
       hover-stay-time="10">
-      <img src="/static/images/index/goods-catbox.png" />
+      <img :src="url" />
       <p>订购猫盒<span>| Order cat box</span></p>
    </a>
 
@@ -43,7 +43,9 @@ export default {
      list: Array
    },
   data () {
-    return {}
+    return {
+       url: 'https://hair.designbyho.com/static/images/product.png'
+    }
   },
   methods: {}
 }

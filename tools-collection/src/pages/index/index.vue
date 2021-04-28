@@ -25,15 +25,15 @@
         <img src="/static/images/tuijian.png" mode="widthFix" />
       </div>
 
-      <div class="tool-list mb40">
-        <a :href="'/' + item.mini_page + '?id=' + item.id" class="tool-item" v-for="item in list1" :key="id">
+      <div class="tool-list mb40" style="margin: 0 -10px;">
+        <a :href="item.href" class="tool-item" v-for="item in list1" :key="id">
           <img :src="imgSrc + item.imgpath" mode="aspectFill" />
           <div>{{item.name}}</div>
         </a>
       </div>
 
       <div class="between" style="flex-wrap: wrap;">
-        <a :href="'/' + item.mini_page + '?id=' + item.id" class="tool-item2" v-for="item in list2" :key="id">
+        <a :href="item.href" class="tool-item2" v-for="item in list2" :key="id">
           <img :src="imgSrc + item.ad_image" mode="aspectFill" />
           <div>{{item.name}}</div>
         </a>
@@ -47,6 +47,7 @@
 <script>
 import cFooter from '@/components/footer1'
 import { postAction } from '@/utils/api'
+import { formatUrl } from '@/utils'
 import config from '@/config'
 import store from '@/store'
 const { imgSrc, tokenKey } = config
@@ -68,8 +69,8 @@ export default {
       postAction('index').then(res => {
         if (res.ret === 0) {
           this.banner = res.data.banner
-          this.list1 = res.data.tj_list
-          this.list2 = res.data.list
+          this.list1 = formatUrl(res.data.tj_list)
+          this.list2 = formatUrl(res.data.list)
         }
       })
     }

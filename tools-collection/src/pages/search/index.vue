@@ -71,6 +71,7 @@
 import cFooter from '@/components/footer1'
 import cSearch from '@/components/search'
 import { postAction } from '@/utils/api'
+import { formatUrl } from '@/utils'
 import config from '@/config'
 const { imgSrc } = config
 
@@ -92,8 +93,8 @@ export default {
     getData () {
       postAction('search_page').then(res => {
         if (res.ret === 0) {
-          this.history = res.data.list
-          this.hotList = res.data.rs_list
+          this.history = formatUrl(res.data.list)
+          this.hotList = formatUrl(res.data.rs_list)
         }
       })
     },
@@ -102,7 +103,7 @@ export default {
         word: e
       }).then(res => {
         if (res.ret === 0) {
-          this.resultList = res.data.list
+          this.resultList = formatUrl(res.data.list)
         }
       })
     }

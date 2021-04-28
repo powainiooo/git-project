@@ -56,8 +56,22 @@ function padLeftZero (str) {
   return ('00' + str).substr(str.length)
 }
 
+export function formatUrl (list) {
+  let arr = []
+  for (let i of list) {
+    if (/\?/.test(i.mini_page)) {
+      i.href = `/${i.mini_page}&id=${i.id}`
+    } else {
+      i.href = `/${i.mini_page}?id=${i.id}`
+    }
+    arr.push(i)
+  }
+  return arr
+}
+
 export default {
   formatNumber,
   formatDate,
+  formatUrl,
   formatTime
 }

@@ -35,7 +35,7 @@
         <div class="tool-list">
           <a v-for="item in list"
              :key="id"
-             :href="'/' + item.mini_page + '?id=' + item.id"
+             :href="item.href"
              class="tool-item">
             <img :src="imgSrc + item.imgpath" mode="aspectFill" />
             <div>{{item.name}}</div>
@@ -50,6 +50,7 @@
 <script>
 import cFooter from '@/components/footer1'
 import { postAction } from '@/utils/api'
+import { formatUrl } from '@/utils'
 import config from '@/config'
 const { imgSrc } = config
 
@@ -79,7 +80,7 @@ export default {
         if (res.ret === 0) {
           this.typeList = res.data.all_type
           this.typeId = res.data.all_type[0].id
-          this.list = res.data.gj
+          this.list = formatUrl(res.data.gj)
         }
       })
     },
@@ -95,7 +96,7 @@ export default {
         page: this.page
       }).then(res => {
         if (res.ret === 0) {
-          this.list = this.list.concat(res.data.list)
+          this.list = this.list.concat(formatUrl(res.data.list))
           this.total = Number(res.data.nums)
         }
       })

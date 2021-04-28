@@ -1,5 +1,7 @@
 import store from '@/store'
 import config from '@/config'
+import { promisify } from '@/utils'
+const login = promisify(mpvue.login)
 const { tokenKey, baseUrl } = config
 
 let token = mpvue.getStorageSync(tokenKey)
@@ -20,9 +22,15 @@ const ajax = (opts, autoMsg = true) => {
         console.log('返回数据', res)
         resolve(res.data)
         if (res.data.ret === 0) {
+        } else if (res.data.ret === 99) {
+          doLogin().then(res => {
+            mpvue.reLaunch({
+              url: '/pages/index/main'
+            })
+          })
         } else {
           if (autoMsg) {
-            mpvue.showToast({ title: res.data.message, icon: 'none' })
+            mpvue.showToast({ title: res.data.msg, icon: 'none' })
           }
         }
         wx.hideNavigationBarLoading()
@@ -57,10 +65,25 @@ export const postAction = (url, data = {}, autoMsg = true) => {
 }
 
 // 登录
-export const doLogin = (data = {}) => {
-  return ajax({
-    method: 'POST',
-    url: `login`,
-    data
+export const doLogin = () => {
+  return new Promise((resolve, reject) => {
+    login().then(resLogin => {
+      console.log('resLogin', resLogin)
+      ajax({
+        method: 'POST',
+        url: `login`,
+        data: {
+          code: resLogin.code
+        }
+      }).then(res => {
+        console.log('resDoLogin', res)
+        if (res.ret === 0) {
+          store.commit('SET_LOGIN_KEY', res.data)
+          resolve(res)
+        } else {
+          reject(res.msg)
+        }
+      })
+    })
   })
 }

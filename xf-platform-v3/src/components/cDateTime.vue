@@ -21,7 +21,7 @@
       line-height 40px
       padding-left 8px
     .placeholder
-      color #c5c8ce
+      color #9E9E9F
   &-float
     size(100%, 100%)
     abTL(0, 0)
@@ -35,9 +35,9 @@
     <p :class="{'placeholder': value === ''}">{{value === '' ? placeholder : value}}</p>
     <div><Icon type="ios-arrow-down" /></div>
   </div>
-  <DatePicker type="date" :disabled="disabled" v-if="type === 'date'" class="c-date-time-float" @on-change="onChange"></DatePicker>
-  <DatePicker type="daterange" :disabled="disabled" v-else-if="type === 'daterange'" class="c-date-time-float" @on-change="onChange"></DatePicker>
-  <TimePicker type="time" :disabled="disabled" v-else-if="type === 'time'" class="c-date-time-float" @on-change="onChange"></TimePicker>
+  <DatePicker :value="value" type="date" :disabled="disabled" v-if="type === 'date'" class="c-date-time-float" @on-change="onChange"></DatePicker>
+  <DatePicker :value="value2" type="daterange" :disabled="disabled" v-else-if="type === 'daterange'" class="c-date-time-float" @on-change="onChange"></DatePicker>
+  <TimePicker :value="value" type="time" :disabled="disabled" v-else-if="type === 'time'" class="c-date-time-float" @on-change="onChange"></TimePicker>
 </div>
 </template>
 
@@ -60,7 +60,8 @@ export default {
   },
   data () {
     return {
-      value: ''
+      value: '',
+      value2: []
     }
   },
   methods: {
@@ -75,6 +76,14 @@ export default {
     },
     reset () {
       this.value = ''
+    },
+    setDefault (val) {
+      if (this.type === 'daterange') {
+        this.value2 = val
+        this.value = val.join(' ~ ')
+      } else {
+        this.value = val
+      }
     }
   }
 }

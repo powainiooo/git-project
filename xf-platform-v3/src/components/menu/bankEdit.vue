@@ -21,24 +21,24 @@
   <Form ref="form" :model="formData" class="form" style="margin-top: 45px">
     <div class="form-title">新银行卡信息</div>
     <FormItem>
-      <Input v-model="formData.account_name" placeholder="个人开户名" />
+      <Input v-model="formData.name" placeholder="个人开户名" />
     </FormItem>
     <FormItem>
-      <Input v-model="formData.account_id_card_no" placeholder="身份证号" />
+      <Input v-model="formData.id_card_no" placeholder="身份证号" />
     </FormItem>
     <FormItem>
-      <Input v-model="formData.account_mobile" placeholder="预留手机号" />
+      <Input v-model="formData.mobile" placeholder="预留手机号" />
     </FormItem>
     <FormItem>
-      <Input v-model="formData.account_card_no" placeholder="个人银行卡号" />
+      <Input v-model="formData.card_no" placeholder="个人银行卡号" />
     </FormItem>
     <FormItem>
-      <Select v-model="formData.account_bank_id" placeholder="选择银行">
+      <Select v-model="formData.bank_id" placeholder="选择银行">
         <Option v-for="item in bankList" :key="item.value" :value="item.value">{{item.label}}</Option>
       </Select>
     </FormItem>
     <FormItem>
-      <Input v-model="formData.account_opening_banke" placeholder="开户支行" />
+      <Input v-model="formData.opening_banke" placeholder="开户支行" />
     </FormItem>
     <FormItem style="margin-top: 40px">
       <Button size="small" :loading="isAjax" :disabled="nextDisabled" @click="handleSubmit">确定修改</Button>
@@ -78,12 +78,12 @@ export default {
       vericodeEvent: 'cardedit',
       formData: {
         password: '',
-        account_name: '',
-        account_id_card_no: '',
-        account_mobile: '',
-        account_card_no: '',
-        account_bank_id: '',
-        account_opening_banke: ''
+        name: '',
+        id_card_no: '',
+        mobile: '',
+        card_no: '',
+        bank_id: '',
+        opening_banke: ''
       },
       isAjax: false
     }
@@ -96,7 +96,7 @@ export default {
         onOk: () => {
           if (this.isAjax) return false
           this.isAjax = true
-          postAction('aa', this.formData).then(res => {
+          postAction('/editor/bank_card/edit', this.formData).then(res => {
             if (res.code === 1) {
               this.$tModal.warning({
                 title: '修改成功！',

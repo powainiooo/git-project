@@ -29,6 +29,7 @@
   between()
   border-bottom 1px solid #EEEEEF
   padding-bottom 20px
+  position relative
   .l
     height 26px
     font-size 18px
@@ -40,6 +41,9 @@
       width auto
       height 26px
       abTL(0, 10px)
+  .warnTxt
+    top 2px
+    left 150px
   .ivu-btn
     width 90px
     margin-right 20px
@@ -62,7 +66,7 @@
   <infos v-if="page === 'info'" :record="record" @toggle="toggle" />
   <charts v-if="page === 'charts'" :record="record" />
   <orders v-if="page === 'orders'" :record="record" @toggle="toggle" />
-  <refunds v-if="page === 'refunds'" @toggle="toggle" />
+  <refunds v-if="page === 'refunds'" :record="record" @toggle="toggle" />
 </div>
 </template>
 

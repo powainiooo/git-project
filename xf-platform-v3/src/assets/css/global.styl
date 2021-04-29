@@ -42,6 +42,8 @@ body
   color #000000
   border-radius 10px
   padding 4px 10px
+  &::-webkit-input-placeholder
+    color: #9E9E9F
 
 .ivu-btn-small
   min-width 90px
@@ -334,3 +336,26 @@ body
 .anim-detail
   animation-duration .5s
   animation-timing-function cubic-bezier(.25,.76,.36,.97)
+
+.warnTxt
+  height 22px
+  line-height 22px
+  padding 0 8px
+  background #C8C9CA linear-gradient(349deg, #E63828 0%, #E85412 100%)
+  box-shadow 0px 2px 5px 0px rgba(0, 0, 0, 0.15)
+  font-size 8px
+  border-radius 4px
+  color #ffffff
+  position absolute
+  &:before
+    content ''
+    size(0, 0)
+    border 4px solid rgba(0, 0, 0, 0)
+    abTL(8px, -8px)
+    border-right-color #E63828
+.warnTxt-right
+  &:before
+    left auto
+    right -8px
+    border-right-color rgba(0, 0, 0, 0)
+    border-left-color #E63828

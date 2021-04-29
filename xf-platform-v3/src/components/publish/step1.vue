@@ -59,7 +59,7 @@
             <FormItem>
               <upload-img v-model="formData.cover_image"
                           cropper
-                          :fixedNumber="[750,650]"
+                          :fixedNumber="[750,800]"
                           title="宣传海报">
                 <span slot="title">宣传海报</span>
               </upload-img>

@@ -103,7 +103,7 @@ export default {
     func (type) {
       if (this.isAjax) return
       this.isAjax = true
-      postAction('gj_count_num', {
+      postAction('tj', {
         id: this.id,
         type
       }).then(res => {

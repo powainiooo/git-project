@@ -8,7 +8,7 @@
   <div class="container" @touchstart="tstart" @touchmove="tmove" @touchend="tend">
     <div class="hr20"></div>
     <div class="mt30 mb30">
-      <c-search placeholder="搜索内容" @search="onSearch"/>
+      <c-search ref="search" placeholder="搜索内容" @search="onSearch"/>
     </div>
 
     <ul class="tabs3 mb60">
@@ -54,6 +54,7 @@ export default {
       this.tabKey = key
       this.list = []
       this.page = 1
+      this.keyword = this.$refs.search.keyword
       this.getList()
     },
     onSearch (e) {
@@ -72,6 +73,12 @@ export default {
         if (res.ret === 0) {
           this.list = this.list.concat(res.data)
           this.loadOver = res.data.length === 0
+          if (res.data.length === 0 && this.page === 1) {
+            mpvue.showToast({
+              title: '未查询到数据',
+              icon: 'none'
+            })
+          }
         }
       })
     },
@@ -82,9 +89,10 @@ export default {
       this.ex = e.clientX
     },
     tend (e) {
-      if (this.sx > this.ex) {
+      if (this.sx > this.ex && this.ex !== 0) {
         this.getList()
       }
+      this.ex = 0
     }
   },
   onReachBottom () {
@@ -92,6 +100,11 @@ export default {
       this.page += 1
       this.getList()
     }
+  },
+  onShow () {
+    this.keyword = ''
+    this.page = 1
+    this.list = []
   },
   onLoad (options) {
     this.id = options.id

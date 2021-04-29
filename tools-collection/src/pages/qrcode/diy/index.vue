@@ -21,11 +21,11 @@
       </div>
       <div class="formLine">
         <div class="formLabel">尺寸大小</div>
-        <div class="formContent"><input type="number" placeholder="请输入尺寸大小" /></div>
+        <div class="formContent"><input type="digit" placeholder="请输入尺寸大小" /></div>
       </div>
       <div class="formLine">
         <div class="formLabel">边距</div>
-        <div class="formContent"><input type="number" placeholder="请输入边距" /></div>
+        <div class="formContent"><input type="digit" placeholder="请输入边距" /></div>
       </div>
       <div class="formLine">
         <div class="formLabel">LOGO图片</div>
@@ -35,7 +35,7 @@
       </div>
       <div class="formLine">
         <div class="formLabel">LOGO宽度</div>
-        <div class="formContent"><input type="number" placeholder="请输入LOGO宽度" /></div>
+        <div class="formContent"><input type="digit" placeholder="请输入LOGO宽度" /></div>
       </div>
     </div>
 

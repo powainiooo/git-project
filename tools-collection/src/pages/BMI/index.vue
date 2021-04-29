@@ -4,7 +4,7 @@
 
 .inputs { margin: 0 30px 56px 30px; }
 .inputs span { width: 100px; display: block; margin-left: 30px; font-size: 28px; color: #000000; }
-.inputs input[type=number] { width: 200px; height: 60px; border-radius: 4px; background-color: #F4F4F4; padding: 0 24px; font-size: 28px; color: #000000; }
+.inputs input[type=digit] { width: 200px; height: 60px; border-radius: 4px; background-color: #F4F4F4; padding: 0 24px; font-size: 28px; color: #000000; }
 
 .btn-test { width: 290px; border-radius: 10px; margin-bottom: 52px; }
 
@@ -25,11 +25,11 @@
     <div class="between inputs">
       <div class="acenter">
         <span>身高：</span>
-        <input type="number" placeholder="单位：CM" v-model="height" />
+        <input type="digit" placeholder="单位：CM" v-model="height" />
       </div>
       <div class="acenter">
         <span>体重：</span>
-        <input type="number" placeholder="体重：KG" v-model="weight" />
+        <input type="digit" placeholder="体重：KG" v-model="weight" />
       </div>
     </div>
     <div class="center inputs">
@@ -39,7 +39,7 @@
 
     <div class="tc"><button class="btn btn-min btn-test" @click="getData">开始测试</button></div>
 
-    <div class="bmi-result" v-if="list.length > 0">
+    <div class="bmi-result" v-if="showResult">
       <p>中国标准</p>
       <p>结果值：{{record.bmi}}</p>
       <p>结果描述：{{record.healthy}}</p>
@@ -84,7 +84,8 @@ export default {
       weight: '',
       sex: 1,
       list: [],
-      record: {}
+      record: {},
+      showResult: false
     }
   },
   methods: {
@@ -110,17 +111,18 @@ export default {
       }).then(res => {
         if (res.ret === 0) {
           this.record = res.data[0]
-        }
-      })
-      postAction('bmi_bz').then(res => {
-        if (res.ret === 0) {
-          this.list = res.data
+          this.showResult = true
         }
       })
     }
   },
   onLoad (options) {
     this.id = options.id
+    postAction('bmi_bz').then(res => {
+      if (res.ret === 0) {
+        this.list = res.data
+      }
+    })
   }
 }
 </script>

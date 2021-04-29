@@ -13,7 +13,6 @@
   <div class="c-search-bar acenter">
     <img src="/static/images/sousuo2.png" mode="widthFix" class="c-search-icon" />
     <input v-model="keyword" :placeholder="placeholder" @confirm="confirm" />
-    <button><img src="/static/images/yuyin.png" mode="widthFix" /></button>
   </div>
   <button class="c-search-btn" @click="confirm">搜索</button>
 </div>

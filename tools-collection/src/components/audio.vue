@@ -8,6 +8,11 @@
 .timer span { color: #666666; font-size: 18px; }
 
 .audio-box .play { width: 80px; }
+.audio-box .playing { animation: breath 2s linear infinite; }
+@keyframes breath {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .2; }
+}
 </style>
 
 <template>
@@ -24,7 +29,7 @@
           <span>{{ttStr}}</span>
         </div>
       </div>
-      <img src="/static/images/pause.png" mode="widthFix" class="play" @click="pause" v-if="playing">
+      <img src="/static/images/pause.png" mode="widthFix" class="play playing" @click="pause" v-if="playing">
       <img src="/static/images/play.png" mode="widthFix" class="play" @click="play" v-else>
     </div>
   </div>
@@ -75,6 +80,7 @@ export default {
     ended (e) {
       console.log('onplay', e)
       this.currentTime = 0
+      this.playing = false
       clearInterval(this.t)
     },
     doPlay () {

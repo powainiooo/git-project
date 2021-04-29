@@ -104,6 +104,12 @@ export default {
       }).then(res => {
         if (res.ret === 0) {
           this.resultList = formatUrl(res.data.list)
+          if (res.data.list.length === 0) {
+            mpvue.showToast({
+              title: '未查询到工具',
+              icon: 'none'
+            })
+          }
         }
       })
     }

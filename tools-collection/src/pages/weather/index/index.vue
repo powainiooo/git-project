@@ -14,7 +14,7 @@
 
 <template>
   <div class="container3">
-    <img :src="imgSrc + record.wid_img" class="bg" mode="aspectFill" />
+    <img :src="imgSrc + record.bg" class="bg" mode="aspectFill" />
     <img :src="imgSrc + record.gg_image" class="w100" mode="widthFix" v-if="record.gg_image !== ''" />
     <div class="line1"><text>{{city}}\n{{date}}，{{week}}</text></div>
     <div class="line2 center">
@@ -26,7 +26,11 @@
     </div>
     <ul class="wet-list">
       <li v-for="item in list" :key="index">
-        <div><span>今天</span>{{item.record}}</div>
+        <div>
+          <span v-if="index === 0">今天</span>
+          <span v-else-if="index === 1">明天</span>
+          <span v-else>{{weeks[item.day]}}</span>
+          {{item.date}}</div>
         <div><img :src="imgSrc + item.img" mode="widthFix" />{{item.weather}}</div>
         <div><span>{{item.high}}℃</span>{{item.low}}℃</div>
       </li>
@@ -66,9 +70,11 @@ export default {
           const arr = []
           for (const i of res.data.future) {
             const date = formatDate(new Date(i.date), 'MM/dd')
+            const day = new Date(i.date).getDay()
             const temp = i.temperature.replace('℃', '').split('/')
             arr.push({
               date,
+              day,
               low: temp[0],
               high: temp[1],
               weather: i.weather,

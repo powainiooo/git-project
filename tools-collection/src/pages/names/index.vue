@@ -12,7 +12,7 @@
     <div class="blue-box" v-for="item in list" :key="index">
       <h3>{{item.xing}}姓</h3>
       <div>
-        <p><rich-text :nodes="item.content"></rich-text></p>
+        <rich-text :nodes="item.content"></rich-text>
       </div>
     </div>
     <operates :id="id" />
@@ -55,18 +55,19 @@ export default {
           this.list = this.list.concat(res.data)
           this.loadOver = res.data.length === 0
           this.showResult = true
+          if (res.data.length === 0) {
+            mpvue.showToast({
+              title: '未查询到数据',
+              icon: 'none'
+            })
+          }
         }
       })
     }
   },
-  onReachBottom () {
-    if (!this.loadOver) {
-      this.page += 1
-      this.getList()
-    }
-  },
   onLoad (options) {
     this.id = options.id
+    this.getList()
   }
 }
 </script>

@@ -27,6 +27,13 @@ export default {
       name: ''
     }
   },
+  watch: {
+    value (val) {
+      if (val === '') {
+        this.name = ''
+      }
+    }
+  },
   computed: {
     index () {
       if (this.value === '') {
@@ -40,6 +47,7 @@ export default {
   },
   methods: {
     onChange (e) {
+      console.log('onChange', e)
       const record = this.list[e.mp.detail.value]
       this.name = record.name
       this.$emit('input', record.value)

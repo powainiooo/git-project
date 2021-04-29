@@ -57,7 +57,8 @@ export default {
       id: '',
       record: {},
       tabKey: 0,
-      type: ''
+      type: '',
+      date: ''
     }
   },
   computed: {
@@ -72,6 +73,7 @@ export default {
   methods: {
     getData () {
       postAction('english_day', {
+        date: this.date,
         type: this.type
       }).then(res => {
         if (res.ret === 0) {
@@ -83,6 +85,7 @@ export default {
           } else {
             this.record = res.data[0]
           }
+          this.date = res.date
         }
       })
     },

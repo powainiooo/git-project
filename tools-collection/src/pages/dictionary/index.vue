@@ -84,8 +84,15 @@ export default {
         word: e
       }).then(res => {
         if (res.ret === 0) {
-          this.record = res.data
-          this.showResult = true
+          if (res.data.error_code) {
+            mpvue.showToast({
+              title: res.data.reason,
+              icon: 'none'
+            })
+          } else {
+            this.record = res.data
+            this.showResult = true
+          }
         }
       })
     }

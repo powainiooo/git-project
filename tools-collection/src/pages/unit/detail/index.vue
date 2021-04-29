@@ -13,7 +13,7 @@
   <ul class="unit-list">
     <li class="borderB" v-for="(key, name) in units" :key="key">
       <div class="center">{{key}}({{name}})</div>
-      <input type="number" placeholder="请输入数字" v-model="values[name]" @input="inputChange($event, name)" />
+      <input type="digit" placeholder="请输入数字" v-model="values[name]" @input="inputChange($event, name)" />
       <img src="/static/images/arrow6.png" mode="widthFix" />
     </li>
   </ul>
@@ -50,6 +50,14 @@ export default {
       })
     },
     inputChange (e, key) {
+      if (e.target.value === '') {
+        for (const key in this.units) {
+          if (this.values[key] !== undefined) {
+            this.values[key] = ''
+          }
+        }
+        return
+      }
       postAction(`${this.key}_unit`, {
         from_unit: key,
         num: e.target.value
@@ -57,6 +65,7 @@ export default {
         if (res.ret === 0) {
           const data = res.data.result
           for (const key in data) {
+            console.log(this.values[key], data[key])
             if (this.values[key] !== undefined) {
               this.values[key] = data[key]
             }

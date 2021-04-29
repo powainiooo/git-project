@@ -35,7 +35,7 @@
           </picker>
         </div>
         <div class="line1">
-          <input type="number" class="form-item" placeholder="请输入换算金额" v-model="money" />
+          <input type="digit" class="form-item" placeholder="请输入换算金额" v-model="money" />
         </div>
         <div class="line1">
           <button class="btn btn-min" @click="handleCalc">立即换算</button>

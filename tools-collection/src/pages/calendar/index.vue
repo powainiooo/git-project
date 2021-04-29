@@ -46,7 +46,7 @@
 
     <ul class="tbody">
       <li v-for="i in daysList" :key="index" :class="{'active': i.date === current}">
-        <div class="box">
+        <div class="box" @click="toggle(i.day)">
           <div>{{i.day}}</div>
           <p>{{i.lunar}}</p>
         </div>
@@ -171,6 +171,11 @@ export default {
       this.year = year
       this.month = month
       this.initCalendar(this.year, this.month)
+    },
+    toggle (day) {
+      this.day = day
+      this.current = this.formatDate(this.year, this.month, day)
+      this.getData()
     }
   },
   onLoad (options) {

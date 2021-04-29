@@ -65,6 +65,7 @@ export default {
   },
   methods: {
     getList (e) {
+      console.log('units')
       if (e === '') {
         mpvue.showToast({
           title: '请输入查询的字',
@@ -79,6 +80,12 @@ export default {
         if (res.ret === 0) {
           this.keyword = e
           this.list = res.data.words
+          if (res.data.words === null || res.data.words.length === 0) {
+            mpvue.showToast({
+              title: '未查询到数据',
+              icon: 'none'
+            })
+          }
         }
       })
     },

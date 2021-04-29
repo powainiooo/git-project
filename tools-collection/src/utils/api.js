@@ -28,6 +28,12 @@ const ajax = (opts, autoMsg = true) => {
               url: '/pages/index/main'
             })
           })
+        } else if (res.data.ret === 1001) {
+          doLogin().then(res => {
+            mpvue.reLaunch({
+              url: '/pages/index/main'
+            })
+          })
         } else {
           if (autoMsg) {
             mpvue.showToast({ title: res.data.msg, icon: 'none' })

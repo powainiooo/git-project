@@ -64,6 +64,12 @@ export default {
         if (res.ret === 0) {
           this.list = this.list.concat(res.data)
           this.loadOver = res.data.length === 0
+          if (res.data.length === 0 && this.page === 1) {
+            mpvue.showToast({
+              title: '未查询到数据',
+              icon: 'none'
+            })
+          }
         }
       })
     },
@@ -79,6 +85,11 @@ export default {
       this.page += 1
       this.getList()
     }
+  },
+  onShow () {
+    this.keyword = ''
+    this.page = 1
+    this.list = []
   },
   onLoad (options) {
     this.id = options.id

@@ -66,7 +66,13 @@ export default {
         if (res.ret === 0) {
           this.list = this.list.concat(res.data)
           this.loadOver = res.data.length === 0
-          this.showResult = true
+          this.showResult = res.data.length !== 0
+          if (res.data.length === 0) {
+            mpvue.showToast({
+              title: '未查询到菜谱',
+              icon: 'none'
+            })
+          }
         }
       })
     }

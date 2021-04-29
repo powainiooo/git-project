@@ -51,6 +51,9 @@ export default {
       this.getList()
     }
   },
+  onShow () {
+    this.list = []
+  },
   onLoad (options) {
     this.id = options.id
     this.getList()

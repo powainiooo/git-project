@@ -65,6 +65,12 @@ export default {
       }).then(res => {
         if (res.ret === 0) {
           this.list = res.data
+          if (res.data.length === 0) {
+            mpvue.showToast({
+              title: '未查询到数据',
+              icon: 'none'
+            })
+          }
         }
       })
     }

@@ -21,7 +21,6 @@
     <div class="s-box" @click="toSearch">
       <div class="l"><img src="/static/images/sousuo.png" />工具名称</div>
       <div class="r">搜索</div>
-      <img src="/static/images/yuyin.png" class="yuyin" mode="widthFix" />
     </div>
     <div class="class-frame">
       <ul class="class-nav">

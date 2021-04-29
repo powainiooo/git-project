@@ -75,6 +75,7 @@ export default {
   },
   onLoad (options) {
     this.id = options.id
+    this.getData()
   }
 }
 </script>

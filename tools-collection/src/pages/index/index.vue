@@ -6,6 +6,10 @@
 
 .tool-item2 { width: 212px; text-align: center; }
 .tool-item2 img { width: 212px; height: 294px; margin-bottom: 30px; }
+
+.rec-list { margin: 0 -20px 40px -20px; overflow-x: auto; }
+.rec-list .tool-item { margin-left: 20px; margin-right: 20px; }
+.rec-frame { display: flex; }
 </style>
 
 <template>
@@ -25,11 +29,13 @@
         <img src="/static/images/tuijian.png" mode="widthFix" />
       </div>
 
-      <div class="tool-list mb40" style="margin: 0 -10px;">
-        <a :href="item.href" class="tool-item" v-for="item in list1" :key="id">
-          <img :src="imgSrc + item.imgpath" mode="aspectFill" />
-          <div>{{item.name}}</div>
-        </a>
+      <div class="tool-list rec-list">
+        <div class="rec-frame" :style="{width: (list1.length * 180) + 'rpx'}">
+          <a :href="item.href" class="tool-item" v-for="item in list1" :key="id">
+            <img :src="imgSrc + item.imgpath" mode="aspectFill" />
+            <div>{{item.name}}</div>
+          </a>
+        </div>
       </div>
 
       <div class="between" style="flex-wrap: wrap;">
@@ -68,6 +74,7 @@ export default {
     getData () {
       postAction('index').then(res => {
         if (res.ret === 0) {
+          console.log(res.data)
           this.banner = res.data.banner
           this.list1 = formatUrl(res.data.tj_list)
           this.list2 = formatUrl(res.data.list)

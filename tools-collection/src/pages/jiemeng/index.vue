@@ -43,9 +43,16 @@ export default {
         q: e
       }).then(res => {
         if (res.ret === 0) {
-          this.record = res.data
-          this.keyword = e
-          this.showResult = true
+          if (res.data === null) {
+            mpvue.showToast({
+              title: '未查询到数据',
+              icon: 'none'
+            })
+          } else {
+            this.record = res.data
+            this.keyword = e
+            this.showResult = true
+          }
         }
       })
     }

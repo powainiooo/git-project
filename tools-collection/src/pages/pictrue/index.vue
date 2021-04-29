@@ -12,6 +12,8 @@
 .pic-content { margin: 30px; }
 .pic-content h3 { font-size: 38px; color: #333333; line-height: 38px; margin-bottom: 38px; text-align: center; }
 .pic-content p { font-size: 28px; color: #436CB3; line-height: 38px; }
+
+.picture { width: 100%; max-height: 60vh; overflow: hidden; }
 </style>
 
 <template>
@@ -25,7 +27,9 @@
     </div>
   </div>
   <div class="container" v-if="showResult">
-    <img :src="imgSrc + url" mode="widthFix" class="w100" />
+    <div class="picture">
+      <img :src="imgSrc + url" mode="widthFix" class="w100" />
+    </div>
     <ul class="pic-list" v-if="showList">
       <li v-for="item in list" :key="index">
         <p>{{item.name}}</p>

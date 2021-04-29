@@ -53,9 +53,10 @@ export default {
       this.ex = e.clientX
     },
     tend (e) {
-      if (this.sx > this.ex) {
+      if (this.sx > this.ex && this.ex !== 0) {
         this.getData()
       }
+      this.ex = 0
     }
   },
   onLoad (options) {

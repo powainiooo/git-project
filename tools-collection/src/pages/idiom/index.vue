@@ -9,23 +9,23 @@
   <div class="container">
     <div class="hr20" style="background-color: #436CB3"></div>
     <div class="mt30 mb30">
-      <c-search placeholder="请输入您想要查询的成语" @search="getDetail" />
+      <c-search placeholder="请输入您想要查询的成语" @search="getList" />
     </div>
     <div class="hr10"></div>
 
     <ul class="idiom-list">
-      <li class="borderB" @click="getDetail('亡羊补牢')">
+      <li class="borderB" v-for="item in list" :key="index" @click="getDetail(item.chengyu)">
         <div>
-          <h3>【喷云吐雾】 pēn yún tǔ wù</h3>
-          <p>【成语解释】：喷吐出云雾来</p>
-          <p>【成语出自】：安正福《敌后插刀》：“炕上还斜躺着几个，正在喷云吐雾抽正在喷云吐雾抽。”</p>
+          <h3>【{{item.chengyu}}】 {{item.pinyin}}</h3>
+          <p>【成语解释】：{{item.diangu}}</p>
+          <p>【成语出自】：{{item.chuchu}}</p>
         </div>
       </li>
     </ul>
 
     <div class="cover" v-if="showDetail" @click="showDetail = false"></div>
     <div class="float-box" :class="{'float-box-show': showDetail}">
-      <h3 class="tc" v-if="showDetail">【{{record.chengyu}}】 {{record.pinyin}}</h3>
+      <h3 class="tc" v-if="showDetail">【{{keyword}}】 {{record.pinyin}}</h3>
       <ul v-if="showDetail">
         <li>
           <div>【成语解释】：</div>
@@ -68,26 +68,43 @@ export default {
     return {
       id: '',
       showDetail: false,
-      record: {}
+      keyword: '',
+      record: {},
+      list: []
     }
   },
   methods: {
+    getList (e) {
+      postAction('pre_chengyu', {
+        word: e
+      }).then(res => {
+        if (res.ret === 0) {
+          this.list = res.data
+          if (res.data.length === 0) {
+            mpvue.showToast({
+              title: '未查询到成语',
+              icon: 'none'
+            })
+          }
+        }
+      })
+    },
     getDetail (e) {
-      console.log('getDetail')
-      if (e === '') {
-        mpvue.showToast({
-          title: '请输入成语',
-          icon: 'none'
-        })
-        return false
-      }
       postAction('chengyu', {
         word: e
       }).then(res => {
         if (res.ret === 0) {
-          this.record = res.data
-          this.record.chengyu = e
-          this.showDetail = true
+          if (res.data.error_code) {
+            mpvue.showToast({
+              title: res.data.reason,
+              icon: 'none'
+            })
+          } else {
+            this.record = res.data
+            this.record.chengyu = e
+            this.showDetail = true
+            this.keyword = e
+          }
         }
       })
     },
@@ -104,6 +121,7 @@ export default {
   },
   onLoad (options) {
     this.id = options.id
+    this.getList('')
   }
 }
 </script>

@@ -23,13 +23,13 @@
       <div class="tax-form-item">
         <div class="l">纳税期数</div>
         <div class="r">
-          <input type="number" v-model="formData.taxPeriod" />
+          <input type="digit" v-model="formData.taxPeriod" />
         </div>
       </div>
       <div class="tax-form-item">
         <div class="l">本月工资</div>
         <div class="r">
-          <input type="number" v-model="formData.txtIncome" />元
+          <input type="digit" v-model="formData.txtIncome" />元
         </div>
       </div>
       <div class="tax-form-item">
@@ -41,7 +41,7 @@
       <div class="tax-form-item">
         <div class="l">社会保险费</div>
         <div class="r">
-          <input type="number" v-model="formData.insure" />元
+          <input type="digit" v-model="formData.insure" />元
         </div>
       </div>
       <div class="tax-form-item">
@@ -53,7 +53,7 @@
       <div class="tax-form-item">
         <div class="l">专项附加扣除</div>
         <div class="r">
-          <input type="number" v-model="formData.txtZXFJ" />元
+          <input type="digit" v-model="formData.txtZXFJ" />元
         </div>
       </div>
       <div class="tax-form-item">

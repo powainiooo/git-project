@@ -75,9 +75,16 @@ export default {
       })
     }
   },
+  onShow () {
+    this.units = {}
+    this.values = {}
+  },
   onLoad (options) {
     this.key = options.key || 'length'
     this.id = options.id
+    mpvue.setNavigationBarTitle({
+      title: options.name
+    })
     this.getUnits()
   }
 }

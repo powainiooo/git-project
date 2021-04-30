@@ -4,7 +4,7 @@
 
 .oil-list { margin: 0 -25px; display: flex; flex-wrap: wrap;  }
 .oil-list li { width: 305px; height: 166px; background: #FFFFFF; border: 1px solid #E1E1E1; box-shadow: 0px 0px 6px 0px rgba(172, 172, 172, 0.29); border-radius: 10px; margin: 0 25px 40px 25px; display: flex; align-items: center;}
-.oil-list li img { width: 84px; margin-left: 30px; margin-right: 60px; }
+.oil-list li img { width: 84px; height: 84px; margin-left: 30px; margin-right: 60px; }
 .oil-list li h3 { font-size: 36px; color: #070707; margin-bottom: 30px; }
 .oil-list li p { font-size: 36px; color: #2490FD; }
 </style>
@@ -18,7 +18,7 @@
       <div class="o-title acenter mt30">{{item.city}}<img src="/static/images/arrow7.png" mode="widthFix" /></div>
       <ul class="oil-list">
         <li>
-          <img src="/static/images/gas.png" mode="widthFix" />
+          <img src="/static/images/gas.png" />
           <div>
             <h3>{{item['95h']}}元</h3>
             <p>95#</p>

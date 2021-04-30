@@ -10,7 +10,7 @@
   <div class="container">
     <div class="hr20" style="background-color: #436CB3"></div>
     <div class="mt30 mb30">
-      <c-search placeholder="请输入您想要查询的字" @search="getList" />
+      <c-search placeholder="请输入您想要查询的词语" @search="getList" />
     </div>
     <div class="hr10"></div>
     <div class="radio-line acenter">

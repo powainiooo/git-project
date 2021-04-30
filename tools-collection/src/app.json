@@ -63,7 +63,6 @@
     "pages/yuanqu/detail/main",
     "pages/songci/detail/main",
     "pages/tangshi/detail/main",
-    "pages/weather/city/main",
     "pages/weather/index/main",
     "pages/trash/list/main",
     "pages/qrcode/module/main",
@@ -79,6 +78,12 @@
   "permission": {
     "scope.userLocation": {
       "desc": "获取当前用户所在位置，以便查找周围场所。"
+    }
+  },
+  "plugins": {
+    "citySelector": {
+      "version": "1.0.0",
+      "provider": "wx63ffb7b7894e99ae"
     }
   }
 }

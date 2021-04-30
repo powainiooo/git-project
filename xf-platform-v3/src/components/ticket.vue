@@ -50,6 +50,7 @@
       background linear-gradient(165deg, #3E3A39, #000000 54%, #3E3A39)
   &-btn
     size(90px, 30px)
+    background-color #ffffff
     border-radius 10px
     border none
     box-shadow 0px 2px 5px 0px rgba(0, 0, 0, 0.15)
@@ -124,7 +125,7 @@
         <span>{{soldNums}}</span>/{{totalNums}}
       </div>
     </div>
-    <button class="c-ticket-btn" v-if="record.sub_state === 1">查看并修改</button>
+    <button class="c-ticket-btn" v-if="record.sub_state === 0">查看并修改</button>
     <c-select v-else
               class="c-ticket-select"
               :list="record.stocks"

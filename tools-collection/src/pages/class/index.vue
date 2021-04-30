@@ -65,7 +65,8 @@ export default {
       typeList: [],
       list: [],
       page: 1,
-      total: 0
+      total: 0,
+      isAjax: false
     }
   },
   computed: {
@@ -75,21 +76,25 @@ export default {
   },
   methods: {
     getData () {
+      this.isAjax = true
       postAction('cate').then(res => {
         if (res.ret === 0) {
           this.typeList = res.data.all_type
           this.typeId = res.data.all_type[0].id
           this.list = formatUrl(res.data.gj)
         }
+        this.isAjax = false
       })
     },
     toggle (id) {
+      if (this.isAjax) return
       this.typeId = id
       this.page = 1
       this.list = []
       this.getOneData()
     },
     getOneData () {
+      this.isAjax = true
       postAction('sub_list', {
         cid: this.typeId,
         page: this.page
@@ -98,6 +103,7 @@ export default {
           this.list = this.list.concat(formatUrl(res.data.list))
           this.total = Number(res.data.nums)
         }
+        this.isAjax = false
       })
     },
     toSearch () {

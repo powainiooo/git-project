@@ -338,15 +338,18 @@ body
   animation-timing-function cubic-bezier(.25,.76,.36,.97)
 
 .warnTxt
-  height 22px
-  line-height 22px
-  padding 0 8px
-  background #C8C9CA linear-gradient(349deg, #E63828 0%, #E85412 100%)
-  box-shadow 0px 2px 5px 0px rgba(0, 0, 0, 0.15)
-  font-size 8px
-  border-radius 4px
-  color #ffffff
   position absolute
+  span
+    display inline-block
+    max-width 200px
+    height 22px
+    line-height 22px
+    padding 0 8px
+    background #C8C9CA linear-gradient(349deg, #E63828 0%, #E85412 100%)
+    box-shadow 0px 2px 5px 0px rgba(0, 0, 0, 0.15)
+    font-size 8px
+    border-radius 4px
+    color #ffffff
   &:before
     content ''
     size(0, 0)
@@ -354,6 +357,7 @@ body
     abTL(8px, -8px)
     border-right-color #E63828
 .warnTxt-right
+  text-align right
   &:before
     left auto
     right -8px

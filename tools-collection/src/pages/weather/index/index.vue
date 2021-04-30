@@ -16,7 +16,7 @@
   <div class="container3">
     <img :src="imgSrc + record.bg" class="bg" mode="aspectFill" />
     <img :src="imgSrc + record.gg_image" class="w100" mode="widthFix" v-if="record.gg_image !== ''" />
-    <div class="line1"><text>{{city}}\n{{date}}，{{week}}</text></div>
+    <div class="line1" @click="toCity"><text>{{city}}\n{{date}}，{{week}}</text></div>
     <div class="line2 center">
       <img :src="imgSrc + record.wid_img" mode="widthFix" />
       <div>
@@ -43,6 +43,13 @@
 import operates from '@/components/operates'
 import {postAction} from '../../../utils/api'
 import {formatDate} from '../../../utils'
+import config from '@/config'
+import QQMapWX from '@/utils/qqmap-wx-jssdk.min.js'
+const { mapKey } = config
+const qMap = new QQMapWX({
+  key: mapKey
+})
+const citySelector = requirePlugin('citySelector')
 
 export default {
   components: {
@@ -52,7 +59,7 @@ export default {
     return {
       id: '',
       imgSrc: mpvue.imgSrc,
-      city: '深圳',
+      city: '',
       date: '',
       weeks: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
       week: '',
@@ -84,6 +91,48 @@ export default {
           this.list = arr
         }
       })
+    },
+    toCity () {
+      const referer = '工具大区'
+      wx.navigateTo({
+        url: `plugin://citySelector/index?key=${mapKey}&referer=${referer}`
+      })
+    },
+    initCity () {
+      const city = mpvue.getStorageSync('toolCity')
+      if (city) {
+        this.city = city
+      } else {
+        const _this = this
+        mpvue.getLocation({
+          success (res) {
+            console.log(res)
+            qMap.reverseGeocoder({
+              location: {
+                latitude: res.latitude,
+                longitude: res.longitude
+              },
+              success (res2) {
+                console.log(res2)
+                _this.city = res2.result.ad_info.city.replace('市', '')
+                mpvue.setStorageSync('toolCity', _this.city)
+                _this.getData()
+              }
+            })
+          }
+        })
+      }
+    }
+  },
+  onShow () {
+    const selectedCity = citySelector.getCity()
+    console.log('selectedCity', selectedCity)
+    if (selectedCity) {
+      this.city = selectedCity.name
+      mpvue.setStorageSync('toolCity', this.city)
+    }
+    if (this.city !== '') {
+      this.getData()
     }
   },
   onLoad (options) {
@@ -91,7 +140,7 @@ export default {
     const now = new Date()
     this.date = formatDate(now, 'MM月dd日')
     this.week = this.weeks[now.getDay()]
-    this.getData()
+    this.initCity()
   }
 }
 </script>

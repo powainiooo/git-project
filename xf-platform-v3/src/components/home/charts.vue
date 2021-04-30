@@ -12,31 +12,29 @@
     <div id="proChart1"></div>
     <div class="proChart2">
       <div class="opera">
-        <RadioGroup class="xf-radios" v-model="chart2Type" @on-change="dateChange">
-          <Radio label="1">
-            <span style="font-size: 16px;">点击量(次)</span>
-          </Radio>
-          <Radio label="2">
-            <span style="font-size: 16px;">销售量</span>
-          </Radio>
+        <RadioGroup class="xf-radios" v-model="chart2Type" @on-change="getChart2">
+          <Radio label="2">点击量(次)</Radio>
+          <Radio label="3">销售量</Radio>
         </RadioGroup>
-        <c-date-time ref="date1" type="daterange" style="width: 250px;" v-model="dateArr" />
+        <c-date-time ref="date1" type="daterange" style="width: 250px;" v-model="dateArr" @change="getChart2" />
       </div>
       <div id="proChart2" style="height: 310px;"></div>
     </div>
   </div>
   <div class="pr">
-    <c-date-time ref="date2" style="width: 200px; position: absolute; top: 20px; right: 20px; z-index: 10;" v-model="date" />
+    <c-date-time ref="date2" style="width: 200px; position: absolute; top: 20px; right: 20px; z-index: 10;" v-model="date" @change="getChart3" />
     <div id="proChart3" style="height:460px;"></div>
   </div>
 </div>
 </template>
 
 <script type='es6'>
-import echarts from 'echarts'
+import * as echarts from 'echarts'
 import { formatDate } from '@/utils/tools'
 import { postAction } from '@/utils'
 import cDateTime from '../cDateTime'
+import chartData from './chartData'
+console.log('echarts', echarts)
 export default {
   name: 'app',
   components: {
@@ -44,7 +42,7 @@ export default {
   },
   data () {
     return {
-      chart2Type: '1',
+      chart2Type: '2',
       dateArr: [],
       date: ''
     }
@@ -53,67 +51,96 @@ export default {
     record: Object
   },
   mounted () {
-    this.date = formatDate(new Date(), 'yyyy/MM/dd')
-    this.dateArr[0] = formatDate(new Date(new Date().getTime() - 7 * 24 * 60 * 60 * 1000), 'yyyy/MM/dd')
-    this.dateArr[1] = formatDate(new Date(), 'yyyy/MM/dd')
+    this.date = formatDate(new Date(), 'yyyy-MM-dd')
+    this.dateArr[0] = formatDate(new Date(new Date().getTime() - 7 * 24 * 60 * 60 * 1000), 'yyyy-MM-dd')
+    this.dateArr[1] = formatDate(new Date(), 'yyyy-MM-dd')
     this.$refs.date1.setDefault(this.dateArr)
     this.$refs.date2.setDefault(this.date)
     setTimeout(() => {
-      this.getChartData()
+      this.getDatas()
     }, 200)
   },
   methods: {
-    getChartData () {
-      postAction('/editor/ticket/stats', {
+    ajax (params) {
+      return postAction('/editor/ticket/stats', params)
+    },
+    getDatas () {
+      this.getChart1()
+      this.getChart2()
+      this.getChart3()
+    },
+    getChart1 () { // 已购票用户地区
+      this.ajax({
+        id: this.record.id,
+        type: '1'
+      }).then(res => {
+        if (res.code === 1) {
+          // const data = res.data.area_data
+          const data = chartData.data.area_data
+          const userData = []
+          for (const item of data) {
+            userData.push({
+              value: item.num,
+              name: item.city
+            })
+          }
+          this.drawChart1(userData)
+        }
+      })
+    },
+    getChart2 () {
+      this.ajax({
         id: this.record.id,
         type: this.chart2Type,
         start_date: this.dateArr[0],
-        end_date: this.dateArr[1],
-        date: this.date
+        end_date: this.dateArr[1]
       }).then(res => {
         if (res.code === 1) {
-          const click = res.data.data.click
+          // const data = this.chart2Type === '1' ? res.data.day_click_data : res.data.day_sales_data
+          const data = this.chart2Type === '1' ? chartData.data.day_click_data : chartData.data.day_sales_data
           const clickData = {
             x: [],
             y: []
           }
-          for (const item in click) {
-            clickData.x.push(item)
-            clickData.y.push(click[item])
+          for (const item of data) {
+            clickData.x.push(item.date)
+            clickData.y.push(this.chart2Type === '1' ? item.click_num : item.num)
           }
-          const hoursale = res.data.data.hoursale
-          const hoursaleData = []; let index = 0
-          for (const item in hoursale) {
-            hoursaleData[index] = {
-              name: item,
-              x: [],
-              y: []
-            }
-            for (const child in hoursale[item]) {
-              hoursaleData[index].x.push(child)
-              hoursaleData[index].y.push(hoursale[item][child])
-            }
-            index++
-          }
-          const user = res.data.data.user
-          const userData = []
-          for (const item in user) {
-            userData.push({
-              value: user[item],
-              name: item
-            })
-          }
-          this.drawChart1(userData)
           this.drawChart2(clickData)
-          this.drawChart3(hoursaleData)
         }
       })
     },
-    dateChange (date) {
-      this.getChartData()
+    getChart3 () {
+      this.ajax({
+        id: this.record.id,
+        type: '4',
+        date: this.date
+      }).then(res => {
+        if (res.code === 1) {
+          // const data = res.data.hour_sales_data
+          const data = chartData.data.hour_sales_data
+          const list = []
+          let index = 0
+          const map = {}
+          for (const item of data) {
+            if (map[item.price_name] === undefined) {
+              map[item.price_name] = index
+              list[map[item.price_name]] = {
+                name: item.price_name,
+                x: [],
+                y: []
+              }
+              index += 1
+            }
+            list[map[item.price_name]].x.push(item.hour + ':00')
+            list[map[item.price_name]].y.push(item.num)
+          }
+          this.drawChart3(list)
+        }
+      })
     },
     drawChart1 (data) {
-      let myChart = echarts.init(document.getElementById('proChart1'))
+      const myChart = echarts.init(document.getElementById('proChart1'))
       myChart.setOption({
         title: { text: '已购票用户地区', textStyle: { color: '#000', fontSize: 18 } },
         series: [
@@ -121,30 +148,24 @@ export default {
             name: '访问来源',
             type: 'pie',
             radius: '65%',
-            color: ['#002aac', '#1243af', '#3355bd', '#667fcd', '#98a9dc', '#acbde5'],
+            color: ['#003AC3', 'rgba(33, 84, 218, 0.8)', 'rgba(33, 84, 218, 0.6)', 'rgba(33, 84, 218, 0.4)'],
             labelLine: { length: 30 },
             label: {
               normal: {
-                show: false
-              },
-              emphasis: {
                 show: true,
-                // formatter: '{b}\n{c}人',
                 formatter: [
                   '{a|{b}\n}',
                   '{b|{c}}',
                   '{a| 人}'
                 ].join(''),
                 rich: {
-                  a: { fontSize: 14 },
-                  b: { fontSize: 20 }
+                  a: { fontSize: 14, color: '#C8C9CA' },
+                  b: { fontSize: 20, color: '#C8C9CA' }
                 }
+              },
+              emphasis: {
+                show: true
               }
-            },
-            itemStyle: {
-              shadowOffsetY: 3,
-              shadowBlur: 8,
-              shadowColor: 'rgba(0, 0, 0, 0.2)'
             },
             data: data
           }
@@ -152,13 +173,15 @@ export default {
       })
     },
     drawChart2 (data) {
-      let myChart = echarts.init(document.getElementById('proChart2'))
+      const myChart = echarts.init(document.getElementById('proChart2'))
       myChart.setOption({
         tooltip: {
           trigger: 'axis',
-          formatter: '{c}',
-          padding: [8, 20],
-          backgroundColor: 'rgba(13,41,164,1)'
+          formatter: '{b}:{c}',
+          padding: [2, 20],
+          backgroundColor: '#5B85E6',
+          borderColor: '#5B85E6',
+          textStyle: { color: '#fff' }
         },
         grid: {
           top: '3%',
@@ -184,10 +207,10 @@ export default {
             name: '联盟广告',
             type: 'line',
             stack: '总量',
-            areaStyle: { normal: { color: '#0029a9', opacity: '0.3' } },
+            areaStyle: { normal: { color: 'rgba(109, 154, 244, 0.4)', opacity: '0.3' } },
             itemStyle: {
-              normal: { color: '#0029a9', borderColor: '#0029a9', borderWidth: 4 },
-              emphasis: { color: '#0029a9', borderColor: '#0029a9', borderWidth: 4 }
+              normal: { color: '#5B85E6', borderColor: '#5B85E6', borderWidth: 4 },
+              emphasis: { color: '#5B85E6', borderColor: '#5B85E6', borderWidth: 4 }
             },
             lineStyle: { opacity: 0 },
             data: data.y
@@ -196,27 +219,27 @@ export default {
       })
     },
     drawChart3 (data) {
-      let all = []
+      const all = []
       for (let i = 0; i < data[0].x.length; i++) {
         all[i] = 0
-        for (let item of data) {
+        for (const item of data) {
           all[i] += parseInt(item.y[i])
         }
       }
-      let series = [{
+      const series = [{
         name: '总数',
         type: 'line',
         stack: '总量',
         areaStyle: { normal: { color: '#0029a9', opacity: '0.3' } },
         itemStyle: {
-          normal: { color: '#0029a9', borderColor: '#0029a9', borderWidth: 4 },
-          emphasis: { color: '#0029a9', borderColor: '#0029a9', borderWidth: 4 }
+          normal: { color: '#5B85E6', borderColor: '#5B85E6', borderWidth: 4 },
+          emphasis: { color: '#5B85E6', borderColor: '#5B85E6', borderWidth: 4 }
         },
         lineStyle: { opacity: 0 },
         data: all
       }]
       let index = 1; let formatter = ''
-      for (let item of data) {
+      for (const item of data) {
         series.push({
           name: item.name,
           type: 'line',
@@ -229,7 +252,7 @@ export default {
         formatter += `{a${index}}: {c${index}}<br />`
         index += 1
       }
-      let myChart = echarts.init(document.getElementById('proChart3'))
+      const myChart = echarts.init(document.getElementById('proChart3'))
       myChart.setOption({
         title: {
           text: '24小时销售量',
@@ -242,9 +265,11 @@ export default {
         },
         tooltip: {
           trigger: 'axis',
-          padding: [8, 20],
           formatter: formatter,
-          backgroundColor: 'rgba(13,41,164,1)'
+          padding: [2, 20],
+          backgroundColor: '#5B85E6',
+          borderColor: '#5B85E6',
+          textStyle: { color: '#fff' }
         },
         grid: {
           top: '20%',

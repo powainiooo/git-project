@@ -34,7 +34,7 @@ export default {
     getData () {
       postAction('my_sc').then(res => {
         if (res.ret === 0) {
-          this.list = res.data.my_sc
+          this.list = res.data.list
         }
       })
     }

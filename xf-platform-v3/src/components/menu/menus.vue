@@ -37,7 +37,7 @@
 
 <template>
 <div class="c-menus" :style="{
-  width: page !== 'records' ? '600px' : '1300px',
+  width: (page !== 'records' && page !== 'rules') ? '600px' : '1300px',
   right: showMenu ? '0px' : '-600px'
 }">
   <div class="c-menus-btns">
@@ -52,8 +52,9 @@
   <records v-if="page === 'records'" @toggle="toggle" />
   <cash-out v-if="page === 'cashOut'" :record="recordData" @toggle="toggle" />
   <contacts v-if="page === 'contacts'" />
+  <rules v-if="page === 'rules'" />
   </transition>
-  <div class="copyright">{{copyright}}</div>
+  <div class="copyright" v-if="page !== 'rules'">{{copyright}}</div>
 </div>
 </template>
 
@@ -65,6 +66,7 @@ import bankEdit from './bankEdit'
 import records from './records'
 import cashOut from './cashOut'
 import contacts from './contacts'
+import rules from './rules'
 export default {
   name: 'app',
   components: {
@@ -74,7 +76,8 @@ export default {
     bankEdit,
     records,
     cashOut,
-    contacts
+    contacts,
+    rules
   },
   computed: {
     copyright () {

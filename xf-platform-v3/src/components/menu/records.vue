@@ -1,6 +1,7 @@
 <style scoped>
 .c-tables-records th:last-child { padding-left: 18px; }
 .c-tables-records td:last-child div { padding-left: 18px; }
+.c-tables-records .warnTxt { width: 100%; top: 24px; right: 120px; }
 </style>
 
 <template>
@@ -27,7 +28,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr v-for="item in list" :key="item.id">
+      <tr v-for="item in list" :key="item.id" class="pr">
         <td><div>{{item.name}}</div></td>
         <td><div class="helveB">{{item.end_date}}</div></td>
         <td><div class="style3">{{item.total_sold_num}}</div></td>
@@ -50,10 +51,12 @@
         <td><div class="style1">{{item.avaliable_withdraw_amt}}</div></td>
         <td>
           <div class="style2" v-if="item.state === 4">已提现</div>
-          <div v-else>
+          <div v-else class="pr">
             <Button size="small" v-if="item.state === 2" @click="toForm(item)">申请提现</Button>
             <Button size="small" type="error" v-else-if="item.state === 5">重新申请</Button>
             <span v-else>{{getState(item.state)}}</span>
+
+            <div class="warnTxt warnTxt-right" v-if="item.state === 5"><span>{{item.reason}}</span></div>
           </div>
         </td>
       </tr>

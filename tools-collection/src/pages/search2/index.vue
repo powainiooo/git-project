@@ -31,7 +31,7 @@ import {postAction} from '../../utils/api'
 import QQMapWX from '../../utils/qqmap-wx-jssdk.min.js'
 import store from '../../store'
 const qMap = new QQMapWX({
-  key: 'AH7BZ-VV736-WNUSA-EP35M-3TCOZ-DTBXG'
+  key: 'H2MBZ-JZRKF-OZMJ2-NYEC7-CFOCQ-QOBLS'
 })
 export default {
   components: {

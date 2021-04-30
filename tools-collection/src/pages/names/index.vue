@@ -65,6 +65,11 @@ export default {
       })
     }
   },
+  onShow () {
+    this.list = []
+    this.page = 1
+    this.keyword = ''
+  },
   onLoad (options) {
     this.id = options.id
     this.getList()

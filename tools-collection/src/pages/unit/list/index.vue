@@ -10,7 +10,7 @@
 
     <ul class="unit-list">
       <li class="borderB" v-for="item in list" :key="index">
-        <a :href="'/pages/unit/detail/main?key=' + item.value + '&id=' + id">{{item.name}} <img src="/static/images/arrow6.png" mode="widthFix" /></a>
+        <a :href="'/pages/unit/detail/main?key=' + item.value + '&id=' + id + '&name=' + item.name">{{item.name}} <img src="/static/images/arrow6.png" mode="widthFix" /></a>
       </li>
     </ul>
 
@@ -37,7 +37,7 @@ export default {
         { name: '压力换算', value: 'pressure' },
         { name: '功率换算', value: 'power' },
         { name: '功率热', value: 'power' },
-        { name: '时间换算', value: 'calories' },
+        { name: '功能热', value: 'calories' },
         { name: '密度换算', value: 'density' },
         { name: '力的换算', value: 'force' },
         { name: '速度换算', value: 'speed' },

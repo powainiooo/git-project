@@ -20,7 +20,7 @@
 
 <template>
   <div class="container">
-    <a href="#" class="ad"><img src="/static/images/img/ad.png" mode="widthFix" /></a>
+    <a href="#" class="ad" v-if="ad !== ''"><img :src="imgSrc + ad" mode="widthFix" /></a>
 
     <div class="between inputs">
       <div class="acenter">
@@ -79,6 +79,8 @@ export default {
   },
   data () {
     return {
+      imgSrc: mpvue.imgSrc,
+      ad: '',
       id: '',
       height: '',
       weight: '',
@@ -120,7 +122,8 @@ export default {
     this.id = options.id
     postAction('bmi_bz').then(res => {
       if (res.ret === 0) {
-        this.list = res.data
+        this.list = res.data.list
+        this.ad = res.data.bmi_gg
       }
     })
   }

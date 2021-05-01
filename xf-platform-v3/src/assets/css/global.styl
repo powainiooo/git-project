@@ -44,6 +44,10 @@ body
   padding 4px 10px
   &::-webkit-input-placeholder
     color: #9E9E9F
+.err-inp
+  .ivu-input
+    background-color #ffffff
+    border 1px solid #E85412
 
 .ivu-btn-small
   min-width 90px
@@ -71,6 +75,13 @@ body
   &:hover
     background #C8C9CA
 
+.ivu-picker-confirm
+  .ivu-btn
+    size(auto, auto)
+    background transparent
+    box-shadow none
+    color #333333
+    min-width auto
 .ivu-select-single
   .ivu-select-selection
     height 40px
@@ -227,6 +238,7 @@ body
       height 100%
       abTL(0, 100%)
       background-color #EEEEEF
+      z-index -1
     &:last-child:after
       width 0
   .col1
@@ -339,6 +351,7 @@ body
 
 .warnTxt
   position absolute
+  width 160px
   span
     display inline-block
     max-width 200px
@@ -354,7 +367,8 @@ body
     content ''
     size(0, 0)
     border 4px solid rgba(0, 0, 0, 0)
-    abTL(8px, -8px)
+    abTL(50%, -8px)
+    margin-top -4px
     border-right-color #E63828
 .warnTxt-right
   text-align right

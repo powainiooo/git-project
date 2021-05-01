@@ -5,6 +5,10 @@
   abTL(0, 0)
 .stepIn
   animation stepIn 1s cubic-bezier(.23,.56,.24,.92) .5s both
+.form
+  .warnTxt
+   top 4px
+   left 104%
 @keyframes stepIn
   0%
     transform translateX(100px)
@@ -26,13 +30,13 @@
 <template>
 <div class="publish-container">
   <transition enter-active-class="stepIn" leave-active-class="stepOut">
-    <step1 ref="step1" :step="step" @change="pageFunc" v-show="step === 1"/>
+    <step1 ref="step1" :step="step" :type="type" @change="pageFunc" v-show="step === 1"/>
   </transition>
   <transition enter-active-class="stepIn" leave-active-class="stepOut">
-    <step2 ref="step2" :step="step" @change="pageFunc" v-show="step === 2"/>
+    <step2 ref="step2" :step="step" :type="type" @change="pageFunc" v-show="step === 2"/>
   </transition>
   <transition enter-active-class="stepIn" leave-active-class="stepOut">
-    <step3 ref="step3" :step="step" @change="pageFunc" v-show="step === 3"/>
+    <step3 ref="step3" :step="step" :type="type" @change="pageFunc" v-show="step === 3"/>
   </transition>
   <alert ref="alert" @onRetry="handleSubmit" @onOk="onOk" />
 </div>
@@ -55,7 +59,17 @@ export default {
   data () {
     return {
       step: 1,
-      isAjax: false
+      isAjax: false,
+      id: '',
+      type: 'new',
+      detailRecord: {}
+    }
+  },
+  mounted () {
+    this.id = this.$route.query.id
+    this.type = this.$route.query.type
+    if (this.id) {
+      this.getErrorData()
     }
   },
   beforeRouteEnter (to, from, next) {
@@ -83,23 +97,56 @@ export default {
     },
     handleSubmit () {
       if (this.isAjax) return
-      const params1 = this.$refs.step1.getParams()
-      const params2 = this.$refs.step2.getParams()
-      const params3 = this.$refs.step3.getParams()
-      const params = Object.assign({}, params1, params2, params3)
-      console.log('params', params)
-      this.isAjax = true
-      postAction('/editor/ticket/add', params).then(res => {
-        if (res.code === 1) {
-          this.$refs.alert.show('suc')
-        } else {
-          this.$refs.alert.show('fail', res.msg)
+      this.$tModal.confirm({
+        title: '是否确认信息无误并提交？',
+        content: '请仔细核查所填写的信息，确认提交之后信息无法修改。<br>若是您填写有误所造成的损失，小夫有票一概不负责任。<br><span style="color:#002aac;">注：当多人抢票时，平台会存在爆库存导致多卖票的情况。如本场活动热门，建议减少首发票量，后续可手动增加票量。</span>',
+        onOk: () => {
+          const params1 = this.$refs.step1.getParams()
+          const params2 = this.$refs.step2.getParams()
+          const params3 = this.$refs.step3.getParams()
+          const params = Object.assign({}, params1, params2, params3)
+          let url = '/editor/ticket/add'
+          if (this.id !== '' && this.type === 'modify') {
+            url = '/editor/ticket/edit'
+            params.id = this.id
+          }
+          console.log('params', params)
+          this.isAjax = true
+          postAction(url, params).then(res => {
+            if (res.code === 1) {
+              this.$refs.alert.show('suc')
+            } else {
+              this.$refs.alert.show('fail', res.msg)
+            }
+            this.isAjax = false
+          })
         }
-        this.isAjax = false
       })
     },
     onOk () {
       this.$router.push('/index')
+    },
+    getDetailData () {
+      postAction('/editor/ticket/detail', {
+        id: this.id
+      }).then(res => {
+        if (res.code === 1) {
+          this.detailRecord = res.data
+          this.$refs.step1.setData(res.data)
+          this.$refs.step2.setData(res.data)
+          this.$refs.step3.setData(res.data)
+        }
+      })
+    },
+    getErrorData () {
+      postAction('/editor/ticket/audit_result', {
+        id: this.id
+      }).then(res => {
+        if (res.code === 1) {
+          this.$store.commit('SET_ERRORDATA', res.data)
+          this.getDetailData()
+        }
+      })
     }
   }
 }

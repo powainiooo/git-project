@@ -28,26 +28,34 @@
             </div>
             <upload-img width="115" v-model="item.image">
               <span slot="title">艺人照片</span>
-              <span slot="hint">尺寸为<br/>450*353px 的 JPG</span>
+              <span slot="hint">尺寸为<br/>300*236 的 JPG</span>
             </upload-img>
           </div>
-          <a href="javascript:;" class="btn-add" @click="addArtist"><img src="@/assets/img/ico-add.png" /></a>
+          <a href="javascript:;" class="btn-add" @click="addArtist" v-if="!isEditor"><img src="@/assets/img/ico-add.png" /></a>
         </Form>
       </div>
       <div class="form-col col2">
         <Form class="form">
           <div class="form-title" style="margin-bottom: 0;">活动详情（选填）</div>
-          <div class="form-cell center acti-item"
+          <div class="form-cell center acti-item pr"
                v-for="(item, index) in activityList"
                :key="index">
             <img :src="getIndexSrc(index)" />
-            <Input type="textarea" class="txt" placeholder="填写详情（200字内）" v-model="item.content"/>
-            <upload-img width="170" v-model="item.image">
+            <Input type="textarea"
+                   class="txt"
+                   placeholder="填写详情（200字内）"
+                   v-model="item.content"
+                   :readonly="isEditor && errorData.intro_content  && errorData.intro_content[index] === ''"
+                   :class="{'err-inp': isEditor && errorData.intro_content && errorData.intro_content[index] !== ''}"/>
+            <upload-img width="170"
+                        v-model="item.image"
+                        :error="isEditor && errorData.intro_image && errorData.intro_image[index] !== ''">
               <span slot="title">活动宣传图片</span>
-              <span slot="hint">尺寸为<br/>950*500px 的 JPG</span>
+              <span slot="hint">尺寸为<br/>634*334px 的 JPG</span>
             </upload-img>
+             <div class="warnTxt" style="left: 78%; top: 18px;" v-if="isEditor && errorData.intro_image && errorData.intro_image[index] !== ''"><span>{{errorData.intro_image[index]}}</span></div>
           </div>
-          <a href="javascript:;" class="btn-add" @click="addActivity"><img src="@/assets/img/ico-add.png" /></a>
+          <a href="javascript:;" class="btn-add" @click="addActivity" v-if="!isEditor"><img src="@/assets/img/ico-add.png" /></a>
         </Form>
       </div>
     </div>
@@ -61,7 +69,8 @@ import uploadImg from '../uploadImg'
 export default {
   name: 'app',
   props: {
-    step: [Number, String]
+    step: [Number, String],
+    type: String
   },
   components: {
     formBox,
@@ -81,6 +90,17 @@ export default {
           image: ''
         }
       ]
+    }
+  },
+  computed: {
+    errorData () {
+      return this.$store.state.errorData
+    },
+    cdnurl () {
+      return this.$store.state.config.uploaddata.cdnurl
+    },
+    isEditor () {
+      return this.type === 'modify'
     }
   },
   methods: {
@@ -106,10 +126,42 @@ export default {
       return require('@/assets/img/nums/' + (index + 1) + '.png')
     },
     getParams () {
-      return {
-        artists: JSON.stringify(this.artistList),
-        intros: JSON.stringify(this.activityList)
+      const art = []
+      for (const item of this.artistList) {
+        art.push({
+          content: item.content,
+          image: item.image.replace(this.cdnurl, '')
+        })
       }
+      const ac = []
+      for (const item of this.activityList) {
+        art.push({
+          content: item.content,
+          image: item.image.replace(this.cdnurl, '')
+        })
+      }
+      return {
+        artists: JSON.stringify(art),
+        intros: JSON.stringify(ac)
+      }
+    },
+    setData (record) {
+      const arts = []
+      for (const i of record.artist_list) {
+        arts.push({
+          content: i.content,
+          image: `${this.cdnurl}${i.image}`
+        })
+      }
+      this.artistList = arts
+      const activity = []
+      for (const i of record.intro_list) {
+        activity.push({
+          content: i.content,
+          image: `${this.cdnurl}${i.image}`
+        })
+      }
+      this.activityList = activity
     }
   }
 }

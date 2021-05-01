@@ -18,7 +18,6 @@
     center()
     p
       color #ffffff
-      margin-top -7px
       margin-left 10px
   &-nums
     margin-left 15px
@@ -32,7 +31,7 @@
   &-select
     margin-right 10px
   .operates0
-    background linear-gradient(165deg, #EC1A63, #E3007F)
+    background linear-gradient(165deg, #5B85E6, #6D9AF4)
     .c-ticket-status
       background none
   .operates1
@@ -118,20 +117,20 @@
   <div class="c-ticket-operates" :class="['operates' + record.sub_state]" v-if="operates">
     <div class="flex">
       <div class="c-ticket-status">
-        <a href="javascript:;"><img src="@/assets/img/ico-close.png" /></a>
+        <a href="javascript:;" v-if="showOffline"><img src="@/assets/img/ico-close.png" /></a>
         <p>{{stateTxt[record.sub_state]}}</p>
       </div>
       <div class="c-ticket-nums" v-if="showNums">
         <span>{{soldNums}}</span>/{{totalNums}}
       </div>
     </div>
-    <button class="c-ticket-btn" v-if="record.sub_state === 0">查看并修改</button>
+    <button class="c-ticket-btn" v-if="record.sub_state === 1" @click="toEditor">查看并修改</button>
     <c-select v-else
               class="c-ticket-select"
               :list="record.stocks"
               @change="tChange"/>
   </div>
-  <div class="c-ticket-body operates-body flip-box-min">
+  <div class="c-ticket-body flip-box-min" :class="{'operates-body': operates}">
     <div class="c-ticket-header">
       <div class="flex">
         <div class="c-ticket-header-dates">
@@ -201,6 +200,12 @@ export default {
       } else {
         return this.selectData.num
       }
+    },
+    showOffline () {
+      if (this.record.sub_state === 2 || this.record.sub_state === 3) {
+        return true
+      }
+      return false
     }
   },
   data () {
@@ -214,6 +219,15 @@ export default {
   methods: {
     tChange (data) {
       this.selectData = data
+    },
+    toEditor () {
+      this.$router.push({
+        name: 'Publish',
+        query: {
+          type: 'modify',
+          id: this.record.id
+        }
+      })
     }
   }
 }

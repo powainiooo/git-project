@@ -12,44 +12,69 @@
       <Button size="small" :disabled="nextDisabled" @click="handleNext">下一步</Button>
       </template>
       <div class="form-grid">
-        <div class="form-col col1">
+        <div class="form-col col1" style="position: relative; z-index: 100;">
           <Form class="form">
             <div class="form-title">活动基本信息</div>
             <FormItem>
-              <Input v-model="formData.name" placeholder="活动名称" />
+              <Input v-model="formData.name"
+                     placeholder="活动名称"
+                     :readonly="isEditor && errorData.name === ''"
+                     :class="{'err-inp': isEditor && errorData.name !== ''}" />
+              <div class="warnTxt" v-if="isEditor && errorData.name !== ''"><span>{{errorData.name}}</span></div>
             </FormItem>
             <FormItem>
-              <Select v-model="formData.music_type" placeholder="音乐类型">
+              <tag-line title="音乐类型" v-if="isEditor">{{musicTypeText}}</tag-line>
+              <Select v-model="formData.music_type" placeholder="音乐类型" v-else>
                 <Option v-for="item in musicType" :key="item.value" :value="item.value">{{item.name}}</Option>
               </Select>
             </FormItem>
             <FormItem>
-              <Select v-model="formData.city_id" placeholder="选择城市">
+              <tag-line title="选择城市" v-if="isEditor">{{cityTxt}}</tag-line>
+              <Select v-model="formData.city_id" placeholder="选择城市" v-else>
                 <Option v-for="item in cityData" :key="item.id" :value="item.id">{{item.name}}</Option>
               </Select>
             </FormItem>
             <FormItem>
-              <Select v-model="formData.type" placeholder="活动类型" @on-change="typeChange">
-                <Option :value="1">单日</Option>
-                <Option :value="2">多日</Option>
-                <Option :value="3">跨月多日</Option>
+              <tag-line title="活动类型" v-if="isEditor">{{typeTxt}}</tag-line>
+              <Select v-model="formData.type" placeholder="活动类型" @on-change="typeChange" v-else>
+                <Option v-for="i in typeList" :key="i.value" :value="i.value">{{i.name}}</Option>
               </Select>
             </FormItem>
             <FormItem>
-              <c-date-time ref="date"
+              <tag-line title="活动日期" v-if="isEditor">{{dateTxt}}</tag-line>
+              <template v-else>
+              <c-date-time v-if="formData.type === 1"
                            :disabled="formData.type === ''"
-                           :type="formData.type === 1 ? 'date' : 'daterange'"
+                           type="date"
                            placeholder="活动日期"
+                           v-model="date"
+                           :clearable="false"
                            @change="dateChange" />
+              <c-date-time v-else
+                           :disabled="formData.type === ''"
+                           type="daterange"
+                           placeholder="活动日期"
+                           v-model="dates"
+                           :clearable="false"
+                           @change="dateChange" />
+              </template>
             </FormItem>
             <FormItem>
-              <c-date-time placeholder="开始时间" type="time" v-model="formData.start_time" />
+              <tag-line title="开始时间" v-if="isEditor">{{formData.start_time}}</tag-line>
+              <c-date-time placeholder="开始时间" type="time" v-model="formData.start_time" :clearable="false" v-else />
             </FormItem>
             <FormItem>
-              <Input v-model="formData.telephone" placeholder="活动联系电话" />
+              <tag-line title="开始时间" v-if="isEditor">{{formData.telephone}}</tag-line>
+              <Input v-model="formData.telephone" placeholder="活动联系电话" v-else />
             </FormItem>
             <FormItem>
-              <Input type="textarea" :rows="4" v-model="formData.address" placeholder="活动地址" />
+              <Input type="textarea"
+                     :rows="4"
+                     v-model="formData.address"
+                     placeholder="活动地址"
+                     :readonly="isEditor && errorData.address === ''"
+                     :class="{'err-inp': isEditor && errorData.address !== ''}" />
+              <div class="warnTxt" v-if="isEditor && errorData.address !== ''"><span>{{errorData.address}}</span></div>
             </FormItem>
           </Form>
         </div>
@@ -58,11 +83,13 @@
             <div class="form-title">上传海报</div>
             <FormItem>
               <upload-img v-model="formData.cover_image"
+                          :error="isEditor && errorData.cover_image !== ''"
                           cropper
                           :fixedNumber="[750,800]"
                           title="宣传海报">
                 <span slot="title">宣传海报</span>
               </upload-img>
+              <div class="warnTxt" style="left: 40%;" v-if="isEditor && errorData.cover_image !== ''"><span>{{errorData.cover_image}}</span></div>
             </FormItem>
             <div class="txt2">为了达到最佳的显示效果，请尽量按照以下建议进行海报排版设计。</div>
           </Form>
@@ -89,20 +116,29 @@ import ticket from '@/components/ticket'
 import formBox from '@/components/formBox'
 import cDateTime from '@/components/cDateTime'
 import uploadImg from '../uploadImg'
+import tagLine from '../tagLine'
 export default {
   name: 'app',
   props: {
-    step: [Number, String]
+    step: [Number, String],
+    type: String
   },
   components: {
     ticket,
     formBox,
     cDateTime,
-    uploadImg
+    uploadImg,
+    tagLine
   },
   computed: {
     globalData () {
       return this.$store.state.globalData
+    },
+    cdnurl () {
+      return this.$store.state.config.uploaddata.cdnurl
+    },
+    errorData () {
+      return this.$store.state.errorData
     },
     musicType () {
       return this.$store.getters.musicType
@@ -110,11 +146,30 @@ export default {
     cityData () {
       return this.$store.state.config.citydata
     },
+    cityTxt () {
+      const city = this.cityData.find(i => i.id === this.formData.city_id)
+      return city ? city.name : ''
+    },
+    typeTxt () {
+      const item = this.typeList.find(i => i.value === this.formData.type)
+      return item ? item.name : ''
+    },
+    dateTxt () {
+      if (this.formData.type === '') {
+        return ''
+      } else if (this.formData.type === 1) {
+        return this.date
+      } else {
+        return `${this.dates[0]}~${this.dates[1]}`
+      }
+    },
     ticketData () {
+      const ci = this.formData.cover_image
+      const url = new RegExp(this.cdnurl).test(ci) ? ci : `${this.cdnurl}${ci}`
       return {
         start_date: this.formData.start_date,
         name: this.formData.name,
-        cover_image: this.formData.cover_image,
+        cover_image: url,
         organizer_name: this.globalData.organizer_name,
         logo: this.globalData.logo
       }
@@ -131,10 +186,21 @@ export default {
         }
       }
       return false
+    },
+    isEditor () {
+      return this.type === 'modify'
     }
   },
   data () {
     return {
+      typeList: [
+        { value: 1, name: '单日' },
+        { value: 2, name: '多日' },
+        { value: 3, name: '跨月多日' }
+      ],
+      date: '',
+      dates: [],
+      musicTypeText: '',
       formData: {
         name: '',
         music_type: '',
@@ -154,7 +220,6 @@ export default {
       this.$emit('change', 'next')
     },
     dateChange (e) {
-      console.log('dateChange', e)
       if (this.formData.type === 1) {
         this.formData.start_date = e
       } else {
@@ -163,7 +228,8 @@ export default {
       }
     },
     typeChange () {
-      this.$refs.date.reset()
+      this.date = ''
+      this.dates = []
     },
     getParams () {
       const params = { ...this.formData }
@@ -171,6 +237,16 @@ export default {
         delete params.end_date
       }
       return params
+    },
+    setData (record) {
+      for (const key in this.formData) {
+        this.formData[key] = record[key]
+      }
+      this.$nextTick(() => {
+        this.date = record.start_date
+        this.dates = [record.start_date, record.end_date]
+        this.musicTypeText = record.music_type_text
+      })
     }
   }
 }

@@ -36,7 +36,8 @@ export default new Vuex.Store({
     config: {},
     globalData: {},
     hasGlobalData: false,
-    showMenu: false
+    showMenu: false,
+    errorData: {}
   },
   getters: {
     musicType: state => {
@@ -45,7 +46,7 @@ export default new Vuex.Store({
       for (const key in types) {
         arr.push({
           name: types[key],
-          value: key
+          value: Number(key)
         })
       }
       return arr
@@ -64,6 +65,9 @@ export default new Vuex.Store({
     },
     SET_MENU (state, data) {
       state.showMenu = data
+    },
+    SET_ERRORDATA (state, data) {
+      state.errorData = data
     }
   },
   actions: {

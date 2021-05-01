@@ -28,7 +28,13 @@ module.exports = {
   productionSourceMap: false,
   // 这里写你调用接口的基础路径，来解决跨域，如果设置了代理，那你本地开发环境的axios的baseUrl要写为 '' ，即空字符串
   devServer: {
-    proxy: 'https://leesticket.waiting8.com'
+    proxy: 'https://leesticket_dev.waiting8.com'
     // proxy: 'https://editor.leesticket.com'
   }
 }
+/*
+*
+* http://leesticket_dev.waiting8.com/NVcfRhyJlY.php
+帐号：leesticket
+密码：nihao123
+* */

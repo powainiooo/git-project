@@ -27,6 +27,10 @@
       transform translate(-50%, -50%)
   &-done
     border 2px solid #6D9AF4
+  &-error
+    border 2px solid #E85412
+    button
+      background #E85412
   &-progress
     size(60px, 6px)
     border-radius 3px
@@ -91,12 +95,18 @@
           :on-progress="progress"
           :on-success="uploadDone"
           :show-upload-list="false">
-    <div class="c-upload-box" :class="{'c-upload-done': (src !== '' && !isLoading)}" :style="{width: width + 'px'}" @click="openCropper">
+    <div class="c-upload-box"
+         :class="{
+            'c-upload-done': (src !== '' && !isLoading),
+            'c-upload-error': error
+          }"
+         :style="{width: width + 'px'}"
+         @click="openCropper">
       <img src="@/assets/img/ico-add.png" class="add" width="20" v-if="src === '' && !isLoading" />
       <div class="c-upload-progress" v-if="isLoading">
         <div class="c-upload-bar" :style="{width: barWidth}"></div>
       </div>
-      <img :src="src" class="picture" v-if="src !== '' && !isLoading" />
+      <img :src="cdnurl + src" class="picture" v-if="src !== '' && !isLoading" />
       <button v-if="src !== '' && !isLoading">重新上传</button>
     </div>
   </Upload>
@@ -155,6 +165,10 @@ export default {
       type: String,
       default: ''
     },
+    error: {
+      type: Boolean,
+      default: false
+    },
     cropper: {
       type: Boolean,
       default: false
@@ -168,6 +182,11 @@ export default {
       default: ''
     }
   },
+  watch: {
+    value (val) {
+      this.src = val.replace(this.cdnurl, '')
+    }
+  },
   computed: {
     barWidth () {
       if (this.isLoading) {
@@ -175,6 +194,9 @@ export default {
       } else {
         return 0
       }
+    },
+    cdnurl () {
+      return this.$store.state.config.uploaddata.cdnurl
     }
   },
   data () {
@@ -211,9 +233,8 @@ export default {
     },
     uploadDone (e) {
       this.isLoading = false
-      console.log('uploadDone', e)
-      this.src = e.data.fullurl
-      this.$emit('input', e.data.fullurl)
+      this.src = this.cdnurl + e.data.url
+      this.$emit('input', e.data.url)
     },
     openCropper (e) {
       if (this.cropper) {
@@ -225,14 +246,12 @@ export default {
       const fr = new FileReader()
       fr.onload = (result) => {
         this.cropperUrl = result.currentTarget.result
-        console.log('this.cropperUrl', this.cropperUrl)
       }
       fr.readAsDataURL(file)
       return false
     },
     doCropper () {
       this.$refs.cropper.getCropData((data) => {
-        console.log(data)
         this.isLoading = true
         postAction('/editor/common/upload', {
           file: data
@@ -240,8 +259,8 @@ export default {
           this.isLoading = false
           this.showCropper = false
           if (res.code === 1) {
-            this.src = res.data.fullurl
-            this.$emit('input', res.data.fullurl)
+            this.src = this.cdnurl + res.data.url
+            this.$emit('input', res.data.url)
           }
         })
       })

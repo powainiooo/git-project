@@ -43,7 +43,7 @@
             <FormItem>
               <tag-line title="活动日期" v-if="isEditor">{{dateTxt}}</tag-line>
               <template v-else>
-              <c-date-time v-if="formData.type === 1"
+              <c-date-time v-if="formData.type === 1 || formData.type === ''"
                            :disabled="formData.type === ''"
                            type="date"
                            placeholder="活动日期"
@@ -135,7 +135,11 @@ export default {
       return this.$store.state.globalData
     },
     cdnurl () {
-      return this.$store.state.config.uploaddata.cdnurl
+      try {
+        return this.$store.state.config.uploaddata.cdnurl
+      } catch (e) {
+        return ''
+      }
     },
     errorData () {
       return this.$store.state.errorData
@@ -165,7 +169,10 @@ export default {
     },
     ticketData () {
       const ci = this.formData.cover_image
-      const url = new RegExp(this.cdnurl).test(ci) ? ci : `${this.cdnurl}${ci}`
+      let url = new RegExp(this.cdnurl).test(ci) ? ci : `${this.cdnurl}${ci}`
+      if (ci === '') {
+        url = ''
+      }
       return {
         start_date: this.formData.start_date,
         name: this.formData.name,
@@ -242,6 +249,7 @@ export default {
       for (const key in this.formData) {
         this.formData[key] = record[key]
       }
+      this.formData.cover_image = record.cover_image.replace(this.cdnurl, '')
       this.$nextTick(() => {
         this.date = record.start_date
         this.dates = [record.start_date, record.end_date]

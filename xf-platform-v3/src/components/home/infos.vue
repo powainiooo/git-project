@@ -106,7 +106,7 @@
           <span>{{item.num}}</span>张
         </div>
       </div>
-      <div class="nums">100</div>
+      <div class="nums">{{item.sold_num}}</div>
       <t-switch v-model="item.sold_out_flag" :true-value="1" :false-value="0">
         <span slot="open">已售罄</span>
         <span slot="close">销售中</span>
@@ -125,15 +125,15 @@
   <div class="c-infos-qrcode">
     <div class="item">
       <div class="imgs wxcode">
-        <img src="@/assets/img/qrcode.png" width="128" />
+        <img :src="record.miniapp_code_image" width="128" />
       </div>
       <Button size="small">下载链接码</Button>
     </div>
     <div class="item">
       <div class="imgs">
-        <img src="@/assets/img/qrcode.png" width="128" />
+        <img :src="record.check_code_image" width="128" />
       </div>
-      <Button size="small">下载链接码</Button>
+      <Button size="small">下载验票码</Button>
     </div>
   </div>
 </div>

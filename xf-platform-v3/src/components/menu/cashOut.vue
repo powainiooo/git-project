@@ -6,9 +6,9 @@
 <div>
   <Form ref="form" :model="formData" class="form" style="margin-top: 130px">
     <tag-line title="活动名称" :width="300" class="mb10">{{record.name}}</tag-line>
-    <tag-line title="提款额" class="mb50">{{record.avaliable_withdraw_amt}}元</tag-line>
+    <tag-line title="提款额" class="mb50">{{showPirce}}元</tag-line>
     <FormItem>
-      <RadioGroup class="xf-radios" v-model="formData.invoice">
+      <RadioGroup class="xf-radios" v-model="formData.invoice" @on-change="invoiceChange">
         <Radio label="0">不需要发票</Radio>
         <Radio label="1">需要发票</Radio>
       </RadioGroup>
@@ -90,10 +90,12 @@ export default {
   },
   mounted () {
     this.vericode.mobile = this.globalData.mobile
+    this.showPirce = this.record.avaliable_withdraw_amt
   },
   data () {
     return {
       vericodeEvent: 'withdraw',
+      showPirce: '',
       formData: {
         invoice: '0',
         password: '',
@@ -108,6 +110,16 @@ export default {
     }
   },
   methods: {
+    invoiceChange () {
+      postAction('/editor/finance/avaliable_withdraw_amount', {
+        ticket_id: this.record.id,
+        invoice_flag: this.formData.invoice
+      }).then(res => {
+        if (res.code === 1) {
+          this.showPirce = res.data
+        }
+      })
+    },
     handleSubmit () {
       this.$tModal.confirm({
         title: '是否确认提交申请？',

@@ -5,7 +5,7 @@
   top 20px
   right 30px
   left 30px
-  z-index 2500
+  z-index 500
   between()
   &-right
     display flex

@@ -1,6 +1,5 @@
 <style scoped>
 .orders .btns { margin: 20px 40px 20px 56px; }
-.orders .btns button { width: 90px; }
 .c-tables-orders th:nth-last-child(2) { text-align: center; }
 .c-tables-orders th:nth-last-child(3) { text-align: center; }
 .c-tables-orders td:nth-last-child(2)>div { text-align: center; padding-right: 0; margin: 0 auto; }
@@ -11,6 +10,7 @@
 .refund-hint>div h3 { color: #ffffff; margin-bottom: 20px; font-size: 18px; }
 .refund-hint>div p { color: #ffffff; margin-bottom: 50px; font-size: 16px; line-height: 24px; }
 .refund-hint>div button { width: 90px; margin-right: 20px; }
+.btn-err { width: 35px; height: 20px; display: inline-block; background: linear-gradient(342deg, #E63828 0%, #E85412 100%); border-radius: 3px; font-size: 10px; color: #ffffff; line-height: 20px; text-align: center; }
 </style>
 
 <template>
@@ -18,8 +18,10 @@
   <div class="between btns">
     <div>
       <Button size="small" class="mr10" :loading="isExport" @click="doExport">导出表格</Button>
-      <Button size="small" class="mr10" @click="doNotify">一次性通知</Button>
-      <Button size="small" @click="showRefundHint = true">退款申请</Button>
+      <Button size="small" class="mr10" @click="doNotify" v-if="showNotify">一次性通知</Button>
+      <Button size="small" @click="showRefundHint = true" v-if="refundState === 0">退款申请</Button>
+      <Button size="small" style="cursor: default;" v-else-if="refundState === 1">退款申请 审核中</Button>
+      <Button size="small" type="error" v-else-if="refundState === 3" @click="toRefundDetail">退款申请 审核不通过</Button>
     </div>
     <div class="flex">
       <c-select class="mr10" :list="record.price" @change="ticketChange"/>
@@ -32,13 +34,13 @@
 
   <div class="c-tables c-tables-orders">
     <table>
+      <col v-for="(item, index) in columns"
+           :key="index"
+           :width="item.width" />
       <thead>
       <tr>
         <th v-for="(item, index) in columns"
-            :key="index"
-            :style="{
-              width: item.width + 'px' || 'auto'
-            }">{{item.name}}</th>
+            :key="index">{{item.name}}</th>
       </tr>
       </thead>
       <tbody>
@@ -53,9 +55,17 @@
         <td class="helveB"><div>{{item.price}}</div></td>
         <td><div class="style1">{{item.num}}</div></td>
         <td>
-          <div class="status">{{stateList[item.state]}}</div>
+          <div class="status" v-if="item.state === 3 || item.state === 4">{{stateList[item.state]}}</div>
+          <div class="status" v-else>{{item.ticket_code_state === 2 ? '已验票' : '未验票'}}</div>
         </td>
-        <td><div></div></td>
+        <td>
+          <div>
+            <a href="javascript:;"
+               class="btn-err"
+               v-if="item.refund_state === 2 && item.price != 0 && item.ticket_code_state === 1"
+               @click="doRefund(item.order_no)">退款</a>
+          </div>
+        </td>
       </tr>
       </tbody>
     </table>
@@ -81,7 +91,7 @@
 
 <script type='es6'>
 import cSelect from '../cSelect'
-import { postAction } from '../../utils'
+import { postAction, downFile } from '../../utils'
 export default {
   name: 'app',
   props: {
@@ -95,7 +105,7 @@ export default {
       showRefundHint: false,
       stateList: ['未付款', '已支付', '退款申请中', '全额退款', '部分退款'],
       columns: [ // 1260
-        { name: '票种', width: 100 },
+        { name: '票种', width: 104 },
         { name: '下单时间', width: 130 },
         { name: '买家', width: 70 },
         { name: '电话', width: 130 },
@@ -114,7 +124,8 @@ export default {
       type: '',
       keyword: '',
       isExport: false,
-      showNotify: false
+      showNotify: false,
+      refundState: 0
     }
   },
   mounted () {
@@ -124,7 +135,7 @@ export default {
   methods: {
     getData () {
       postAction('/editor/order/lists', {
-        order_id: this.record.id,
+        ticket_id: this.record.id,
         keyword: this.keyword,
         price_name: this.type,
         page: this.pageNo,
@@ -133,6 +144,8 @@ export default {
         if (res.code === 1) {
           this.list = res.data.list
           this.total = res.data.total
+          this.showNotify = res.data.one_time_notify_flag === 0
+          this.refundState = res.data.refund_flag
         }
       })
     },
@@ -140,36 +153,70 @@ export default {
       this.type = e.id
     },
     doExport () {
+      if (this.isExport) return
       this.isExport = true
-      postAction('aa', {
+      downFile('/editor/order/export', {
         id: this.record.id
       }).then(res => {
         this.isExport = false
-        if (res.code === 1) {
-          window.location = res.data.url
-        }
+        const blob = new Blob([res.data], {
+          type: 'application/vnd.ms-excel'
+        })
+        const url = window.URL.createObjectURL(blob)
+        const a = document.createElement('a')
+        a.href = url
+        a.download = '导出表格.xlsx'
+        a.click()
+        window.URL.revokeObjectURL(url)
       })
     },
     doNotify () {
+      console.log('doNotify', this.$tModal)
       this.$tModal.confirm({
         title: '是否确认使用一次性通知？',
         content: '一次性通知仅可使用一次，由于微信消息通知限制，只可在用户已购票后的7日内发送消息。<br>超过7日的用户则无法收取该消息，请谨慎使用！<br>可用于活动场地变更、活动改期、活动取消等紧急情况时，作为通知已购票用户功能。',
         onOk: () => {
-          this.showNotify = true
+          this.$tModal.confirm({
+            type: 'textarea',
+            onOk: txt => {
+              postAction('/editor/notice/subscribe_message_send', {
+                ticket_id: this.record.id,
+                content: txt
+              }).then(res => {
+                if (res.code === 1) {
+                  this.$Message.success(res.msg)
+                  this.showNotify = false
+                } else {
+                  this.$Message.warning(res.msg)
+                }
+              })
+            }
+          })
         }
       })
     },
     gotoRefund () {
       this.showRefundHint = false
+      this.$store.commit('SET_REFUNDERRORDATA', {})
       this.$emit('toggle', 'refunds')
     },
-    doRefund (id) {
+    toRefundDetail () {
+      postAction('/editor/order/refund_audit_result', {
+        ticket_id: this.record.id
+      }).then(res => {
+        if (res.code === 1) {
+          this.$store.commit('SET_REFUNDERRORDATA', res.data)
+          this.$emit('toggle', 'refunds')
+        }
+      })
+    },
+    doRefund (orderNo) {
       this.$tModal.confirm({
         title: '是否确认退款?',
         content: '确认退款之后款项将原路返回到该用户账上，请谨慎操作。',
         onOk: () => {
-          postAction('aa', {
-            id
+          postAction('/editor/order/refund', {
+            order_no: orderNo
           }).then(res => {
             if (res.code === 1) {
               this.$Message.success('退款成功')

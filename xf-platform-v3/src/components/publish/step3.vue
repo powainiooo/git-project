@@ -20,16 +20,22 @@
       <div class="form-col">
         <Form class="form">
           <div class="form-title" style="margin-bottom: 0;">上传艺人图片（选填）</div>
-          <div class="form-cell"
+          <div class="form-cell pr"
                v-for="(item, index) in artistList"
                :key="index">
             <div style="margin-bottom: 10px;">
-              <Input v-model="item.content" placeholder="艺人姓名" />
+              <Input placeholder="艺人姓名"
+                     v-model="item.content"
+                     :readonly="isEditor && errorData.artist_content  && errorData.artist_content[index] === ''"
+                     :class="{'err-inp': isEditor && errorData.artist_content && errorData.artist_content[index] !== ''}" />
             </div>
-            <upload-img width="115" v-model="item.image">
+            <upload-img width="115"
+                        v-model="item.image"
+                        :error="isEditor && errorData.artist_image && errorData.artist_image[index] !== ''">
               <span slot="title">艺人照片</span>
               <span slot="hint">尺寸为<br/>300*236 的 JPG</span>
             </upload-img>
+            <div class="warnTxt" style="left: 50%; top: 68px;" v-if="isEditor && errorData.artist_image && errorData.artist_image[index] !== ''"><span>{{errorData.artist_image[index]}}</span></div>
           </div>
           <a href="javascript:;" class="btn-add" @click="addArtist" v-if="!isEditor"><img src="@/assets/img/ico-add.png" /></a>
         </Form>
@@ -135,7 +141,7 @@ export default {
       }
       const ac = []
       for (const item of this.activityList) {
-        art.push({
+        ac.push({
           content: item.content,
           image: item.image.replace(this.cdnurl, '')
         })
@@ -146,22 +152,8 @@ export default {
       }
     },
     setData (record) {
-      const arts = []
-      for (const i of record.artist_list) {
-        arts.push({
-          content: i.content,
-          image: `${this.cdnurl}${i.image}`
-        })
-      }
-      this.artistList = arts
-      const activity = []
-      for (const i of record.intro_list) {
-        activity.push({
-          content: i.content,
-          image: `${this.cdnurl}${i.image}`
-        })
-      }
-      this.activityList = activity
+      this.artistList = record.artist_list
+      this.activityList = record.intro_list
     }
   }
 }

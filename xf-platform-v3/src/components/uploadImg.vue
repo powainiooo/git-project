@@ -97,17 +97,17 @@
           :show-upload-list="false">
     <div class="c-upload-box"
          :class="{
-            'c-upload-done': (src !== '' && !isLoading),
+            'c-upload-done': (value !== '' && !isLoading),
             'c-upload-error': error
           }"
          :style="{width: width + 'px'}"
          @click="openCropper">
-      <img src="@/assets/img/ico-add.png" class="add" width="20" v-if="src === '' && !isLoading" />
+      <img src="@/assets/img/ico-add.png" class="add" width="20" v-if="value === '' && !isLoading" />
       <div class="c-upload-progress" v-if="isLoading">
         <div class="c-upload-bar" :style="{width: barWidth}"></div>
       </div>
-      <img :src="cdnurl + src" class="picture" v-if="src !== '' && !isLoading" />
-      <button v-if="src !== '' && !isLoading">重新上传</button>
+      <img :src="cdnurl + value" class="picture" v-if="value !== '' && !isLoading" />
+      <button v-if="value !== '' && !isLoading">重新上传</button>
     </div>
   </Upload>
   <div class="c-upload-content">
@@ -182,11 +182,6 @@ export default {
       default: ''
     }
   },
-  watch: {
-    value (val) {
-      this.src = val.replace(this.cdnurl, '')
-    }
-  },
   computed: {
     barWidth () {
       if (this.isLoading) {
@@ -206,7 +201,6 @@ export default {
       },
       loaded: 0,
       total: 0,
-      src: '',
       isLoading: false,
       cropperUrl: this.value,
       showCropper: false
@@ -233,7 +227,6 @@ export default {
     },
     uploadDone (e) {
       this.isLoading = false
-      this.src = this.cdnurl + e.data.url
       this.$emit('input', e.data.url)
     },
     openCropper (e) {
@@ -259,7 +252,6 @@ export default {
           this.isLoading = false
           this.showCropper = false
           if (res.code === 1) {
-            this.src = this.cdnurl + res.data.url
             this.$emit('input', res.data.url)
           }
         })

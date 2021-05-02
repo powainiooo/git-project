@@ -79,7 +79,7 @@ export default {
   methods: {
     toDetail () {
       mpvue.redirectTo({
-        url: '/pages/index/main'
+        url: '/pages/order/list/main'
       })
     },
     toIndex () {

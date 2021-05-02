@@ -37,6 +37,7 @@
 
 <script type='es6'>
 import slideItem from './slideItem'
+import { postAction } from '../../utils'
 export default {
   name: 'app',
   components: {
@@ -51,19 +52,16 @@ export default {
   mounted () {
     const ww = window.innerWidth > 1920 ? window.innerWidth : 1920
     this.nums = Math.ceil(ww / 360)
-    setTimeout(() => {
-      this.list = [
-        { name: '1' },
-        { name: '2' },
-        { name: '3' },
-        { name: '4' },
-        { name: '5' },
-        { name: '6' },
-        { name: '7' },
-        { name: '8' }
-      ]
-    }, 300)
+    this.getData()
   },
-  methods: {}
+  methods: {
+    getData () {
+      postAction('/editor/ticket/random').then(res => {
+        if (res.code === 1) {
+          this.list = res.data.list
+        }
+      })
+    }
+  }
 }
 </script>

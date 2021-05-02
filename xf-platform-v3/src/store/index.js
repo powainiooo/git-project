@@ -37,7 +37,8 @@ export default new Vuex.Store({
     globalData: {},
     hasGlobalData: false,
     showMenu: false,
-    errorData: {}
+    errorData: {},
+    refundErrorData: {}
   },
   getters: {
     musicType: state => {
@@ -68,6 +69,9 @@ export default new Vuex.Store({
     },
     SET_ERRORDATA (state, data) {
       state.errorData = data
+    },
+    SET_REFUNDERRORDATA (state, data) {
+      state.refundErrorData = data
     }
   },
   actions: {

@@ -171,7 +171,7 @@
   </div>
 
   <div class="c-ticket-operates" :class="{'c-ticket-operates-bottom': page === 'buy'}">
-    <div>260<span>RMB</span></div>
+    <div>{{price}}<span>RMB</span></div>
     <button @click="handleConfirm" :disabled="buyDisabled">购买</button>
   </div>
 </scroll-view>
@@ -214,6 +214,14 @@ export default {
         return true
       }
       return false
+    },
+    price () {
+      if (this.formData.price_id === '' && this.formData.num === 0) {
+        return this.record.price[0].price
+      } else {
+        const item = this.record.price.find(i => i.id === this.formData.price_id)
+        return Number(item.price) * this.formData.num
+      }
     }
   },
   data () {
@@ -276,6 +284,9 @@ export default {
           'signType': jsapi.signType,
           'paySign': jsapi.paySign,
           'success': res => {
+            mpvue.setStorageSync('nameVal', params.name)
+            mpvue.setStorageSync('phoneVal', params.mobile)
+            mpvue.setStorageSync('idnum', params.id_card_no)
             mpvue.reLaunch({
               url: '/pages/result/main?result=success'
             })

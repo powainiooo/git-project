@@ -54,7 +54,7 @@
   <contacts v-if="page === 'contacts'" />
   <rules v-if="page === 'rules'" />
   </transition>
-  <div class="copyright" v-if="page !== 'rules'">{{copyright}}</div>
+  <div class="copyright" v-if="page !== 'rules' && page !== 'cashOut'">{{copyright}}</div>
 </div>
 </template>
 

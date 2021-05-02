@@ -5,7 +5,7 @@
   position fixed
   top 84px
   right 40px
-  z-index 500
+  z-index 400
 .list-container
   width 1340px
   margin 130px auto 0 auto
@@ -31,7 +31,7 @@
   justify-content flex-end
   abTL(0, 0)
   overflow hidden
-  z-index 2600
+  z-index 600
   .c-ticket
     margin-right: 60px;
 </style>

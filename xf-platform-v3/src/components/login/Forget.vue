@@ -9,19 +9,21 @@
     <Form class="form">
       <div class="form-title">忘记密码</div>
       <FormItem>
-        <Input v-model="formData.usename" placeholder="联系电话" />
+        <Input v-model="vericode.mobile" placeholder="联系电话" />
       </FormItem>
       <FormItem>
-        <verification-code />
+        <Input v-model="vericode.code" placeholder="验证码">
+          <Button slot="append" :disabled="veriBtnDisabled" @click="getCode">{{vericode.btnName}}</Button>
+        </Input>
       </FormItem>
       <FormItem>
-        <Input type="password" v-model="formData.usename" placeholder="新密码" />
+        <Input type="password" v-model="formData.newpassword" placeholder="新密码" />
       </FormItem>
       <FormItem>
-        <Input type="password" v-model="formData.usename" placeholder="确认新密码" />
+        <Input type="password" v-model="formData.newpassword2" placeholder="确认新密码" />
       </FormItem>
       <FormItem style="margin-top: 40px">
-        <Button size="small" style="width: 90px" @click="handleNext">确认修改</Button>
+        <Button size="small" style="width: 90px" @click="handleSubmit" :loading="isAjax">确认修改</Button>
       </FormItem>
     </Form>
   </div>
@@ -29,24 +31,39 @@
 </template>
 
 <script type='es6'>
-import verificationCode from '@/components/verificationCode'
+import vericode from '@/mixin/vericode'
+import { postAction } from '../../utils'
 export default {
   name: 'app',
-  components: {
-    verificationCode
-  },
+  mixins: [vericode],
   data () {
     return {
+      vericodeEvent: 'resetpwd',
       formData: {
-        usename: '',
-        password: ''
-      }
+        newpassword: '',
+        newpassword2: ''
+      },
+      isAjax: false
     }
   },
   inject: ['changePage'],
   methods: {
-    handleNext () {
-      this.changePage('infos')
+    handleSubmit () {
+      if (this.isAjax) return
+      this.isAjax = true
+      postAction('/editor/user/resetpwd', {
+        mobile: this.vericode.mobile,
+        code: this.vericode.code,
+        newpassword: this.formData.newpassword,
+        newpassword2: this.formData.newpassword2
+      }).then(res => {
+        if (res.code === 1) {
+          this.$Message.success('修改成功')
+          this.changePage('infos')
+        } else {
+          this.$Message.warning(res.msg)
+        }
+      })
     }
   }
 }

@@ -114,7 +114,7 @@ export default {
           this.isAjax = true
           postAction(url, params).then(res => {
             if (res.code === 1) {
-              this.$refs.alert.show('suc')
+              this.$refs.alert.show('suc', '后台将在3个工作日内完成活动审核，<br>活动票务是否通过审核，请自行登录查询结果。')
             } else {
               this.$refs.alert.show('fail', res.msg)
             }

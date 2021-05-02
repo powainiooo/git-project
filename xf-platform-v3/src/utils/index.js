@@ -55,9 +55,12 @@ export function deleteAction (url, parameter) {
  * @param parameter
  * @returns {*}
  */
-export function downFile (url, parameter) {
+export function downFile (url, parameter, autoWarn = false) {
   return axios({
     url: url,
+    config: {
+      autoWarn
+    },
     params: parameter,
     method: 'get',
     responseType: 'blob'

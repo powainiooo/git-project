@@ -96,7 +96,10 @@ export default {
         onOk: () => {
           if (this.isAjax) return false
           this.isAjax = true
-          postAction('/editor/bank_card/edit', this.formData).then(res => {
+          const params = { ...this.formData }
+          params.phone = this.vericode.mobile
+          params.code = this.vericode.code
+          postAction('/editor/bank_card/edit', params).then(res => {
             if (res.code === 1) {
               this.$tModal.warning({
                 title: '修改成功！',
@@ -104,6 +107,7 @@ export default {
                 onOk: () => {
                   this.$store.commit('SET_MENU', false)
                   this.$store.dispatch('getUserData')
+                  this.$emit('toggle', 'infos')
                 }
               })
             }

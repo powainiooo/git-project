@@ -24,14 +24,14 @@
     <div class="logo"><img src="@/assets/img/logo.png" /></div>
     <div class="flip-box" v-if="status === 'suc'">
       <img src="@/assets/img/ico-suc.png" />
-      <h3>提交注册成功</h3>
-      <p>通过审核后我们将会以短信的形式通知</p>
+      <h3>提交成功</h3>
+      <p v-html="msg"></p>
     </div>
     <div class="flip-box" v-else-if="status === 'fail'">
       <img src="@/assets/img/ico-fail.png" />
-      <h3>提交注册失败</h3>
+      <h3>提交失败</h3>
 <!--      <p>可能您的网络不太顺畅，请重新注册</p>-->
-      <p>{{msg}}</p>
+      <p v-html="msg"></p>
     </div>
     <div class="center" style="margin-top: 60px">
       <Button style="width: 135px" v-if="status === 'suc'" @click="onOk">完成</Button>

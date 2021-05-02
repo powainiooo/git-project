@@ -63,6 +63,11 @@
   &-body
     size(420px, 280px)
     background-color #ffffff
+  .c-ticket-body-min
+    size(340px, 267px)
+    -webkit-mask-image url('../assets/img/mask2.png')
+    -webkit-mask-repeat no-repeat
+    -webkit-mask-size 340px 267px
   &-header
     height 60px
     between()
@@ -130,7 +135,11 @@
               :list="record.stocks"
               @change="tChange"/>
   </div>
-  <div class="c-ticket-body flip-box-min" :class="{'operates-body': operates}">
+  <div class="c-ticket-body flip-box-min"
+       :class="{
+        'operates-body': operates,
+        'c-ticket-body-min': size === 'min'
+      }">
     <div class="c-ticket-header">
       <div class="flex">
         <div class="c-ticket-header-dates">
@@ -160,6 +169,10 @@ export default {
     operates: {
       type: Boolean,
       default: false
+    },
+    size: {
+      type: String,
+      default: 'normal'
     }
   },
   components: {

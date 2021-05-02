@@ -63,6 +63,16 @@ export default {
       ]
     }
   },
+  mounted () {
+    const nameVal = mpvue.getStorageSync('nameVal')
+    const phoneVal = mpvue.getStorageSync('phoneVal')
+    const addressVal = mpvue.getStorageSync('addressVal')
+    const emailVal = mpvue.getStorageSync('emailVal')
+    const idnum = mpvue.getStorageSync('idnum')
+    this.name = nameVal
+    this.mobile = phoneVal
+    this.cardNo = idnum
+  },
   methods: {
     idChange (e) {
       const item = this.idTypeArr[e.mp.detail.value]

@@ -1,5 +1,5 @@
 <style scoped>
-.ad-frame { width: 100%; position: fixed; top: 100px; bottom: 0; left: 0; z-index: 1000; background-color: #ffffff; }
+.ad-frame { width: 100%; position: fixed; top: 100px; bottom: 0; left: 0; z-index: 500; background-color: #ffffff; }
 .ad-frame .ad-container { width: 100%; height: 100%; }
 .ad-frame .pic { width: 100%; height: 100%; }
 .ad-frame .infos { width: 100%; height: 130px; background-color: rgba(0, 0, 0, 0.4); padding: 0 36px; display: flex; justify-content: space-between; align-items: center; position: absolute; top: 0; left: 0; }

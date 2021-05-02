@@ -12,6 +12,7 @@
 .login-container
   size(100%, 100%)
   abTL(0, 0)
+  z-index 10
   overflow hidden
   center()
   .logo
@@ -54,6 +55,7 @@
 
 <template>
 <div class="container">
+  <bg-slide />
   <!-- 登录 -->
   <transition enter-active-class="moveIn" leave-active-class="moveOut">
   <section class="login-container" v-if="page === 'login'">
@@ -90,6 +92,7 @@
 </template>
 
 <script type='es6'>
+import bgSlide from '@/components/bgSilde'
 import Login from '../components/login/Login'
 import Register from '../components/login/Register'
 import infoForm from '../components/login/infoForm'
@@ -102,7 +105,8 @@ export default {
     Register,
     infoForm,
     Forget,
-    copyRight
+    copyRight,
+    bgSlide
   },
   data () {
     return {

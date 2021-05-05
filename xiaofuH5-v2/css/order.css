@@ -1,0 +1,170 @@
+.order-container {
+   padding-top: 1rem;
+}
+.order-container .title {
+   height: 1.08rem;
+   display: flex;
+   align-items: center;
+   padding-left: 0.38rem;
+   font-size: 0.24rem;
+   font-weight: bold;
+}
+.order-container .title span {
+   margin-right: 0.18rem;
+   font-family: HelveB;
+   font-size: 0.26rem;
+}
+.order-list {
+   margin: 0 0.55rem;
+   position: relative;
+   overflow: hidden;
+}
+.order-list:before {
+   content: '';
+   width: 1px;
+   height: 100%;
+   position: absolute;
+   top: 0;
+   left: 1rem;
+   background-color: #DBDCDC;
+}
+.order-list .years {
+   width: 0.54rem;
+   height: 0.28rem;
+   border-radius: 0.14rem;
+   background-color: #D8D8D8;
+   margin-left: 0.74rem;
+   position: relative;
+   z-index: 5;
+   font-size: 0.18rem;
+   color: #ffffff;
+   font-family: HelveL;
+   margin-bottom: 0.34rem;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.c-list-item {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   margin-bottom: 0.34rem;
+}
+.c-ticket-item {
+   width: 5.06rem;
+   height: 1.34rem;
+   background: linear-gradient(330deg, #5B85E6 0%, #6D9AF4 100%);
+   -webkit-mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfsAAACGCAMAAADtntNLAAAAQlBMVEX///////////////////////////////////////////////////////////////////////////////////////8Alm/HAAAAFXRSTlPycAITDK4XEFUz4Ox/v6MhQcqRimKwFqm4AAAC9ElEQVR42uzYUZKbMBAA0TGEigwYDGTuf9W4Upvatdf8LeKj+12hS9JoonnSlvXW96EfV5pdUcHQL9Pl2jx5al9uqYNcmj1tVtOP7fv2pU8dZm323LOi2Nrv7WfP/KGWZs+YVQ3ltX2J1KHmZseSlW3P7f+kDrbtpL9mdd3X9iV1tNg5+Lesr/tsf08db2reKXmG7X/71gG/isu7Gz/yFOWj/ZSqojSv5j7PMbSP9t74FY2vX/shz7L+a+/Hvp7btfnUrnmemB/tr6mKutJ+vPRb5JnGR/s1VdfSTd0y5Mn6R3uHfKhrzCmmMVzpUXUxppiWcLFDNdgeK6JLQdmey/ZctueyPZftuWzPZXsu23PZnsv2XLbnsj2X7blsz2V7Lttz2Z7L9ly257I9l+25bM9ley7bc9mey/ZctueyPZftuWzPZXsu23PZnsv2XLbnsj2X7blsz2V7Lttz2Z7L9ly257I9l+25bM9ley7bc9mey/ZctueyPZftuWzPZXsu23PZnsv2XLbnsj2X7blsz2V7Lttz2Z7L9ly257I9l+25bM9ley7bc9mey/ZctueyPZftuWzPZXsu23PZnsv2XLbnsj2X7blsz2V7Lttz2Z7L9ly257I9l+25YkoxDbGmmPq4pJhucU8xrfE7UkglfjnoQ/1tx85yIwZhAAxPZI8NISxV4/tftdkI0Uh9K6YP/k6A+MVKL3RiNMXF+ezLlIIM9cYXwixGTfJU5WVofbe1x0WMkrnQU37LMJH39mQLX0nM9GGRUcrRnu3E1xGJ6L/ET4x7e2T729MwezrAiU5JRpiptocopjv3CN/65yD6gufanulLTGexlX8YsuuHAq09kP3w9OYImoYoiLLZAzCe7ZEBwF56fQWCXyTRFff0rf0ev9i+39MbLnyD0yqawgQbxtoeGXbO6vez3OHxUut70ROWDBt+tmc4+G/L38l0pcdLq0+iZE71zsF4t2/xici7dTJ/zn+Wb/M+aVhLvh8a1zh+AN7BNlrzzlSHAAAAAElFTkSuQmCC);
+   -webkit-mask-size: 100% 100%;
+   display: flex;
+   position: relative;
+   box-shadow: 0 0.10rem 0.15rem 0 rgba(0, 0, 0, .1);
+}
+.c-ticket-item .imgs {
+   width: 3.74rem;
+   height: 100%;
+}
+.c-ticket-item .imgs img {
+   width: 100%;
+   height: 100%;
+}
+.c-ticket-item .nums {
+   width: 1.34rem;
+   height: 100%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   font-size: 0.72rem;
+   font-family: HelveT;
+   color: #ffffff;
+}
+.c-ticket-item .cover {
+   width: 3.74rem;
+   height: 100%;
+   background-color: rgba(0, 0, 0, .4);
+   position: absolute;
+   top: 0;
+   left: 0;
+}
+.c-ticket-item-title {
+   width: 3.74rem;
+   height: 100%;
+   position: absolute;
+   top: 0;
+   left: 0;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   padding-left: 0.28rem;
+   font-size: 0.20rem;
+   color: #ffffff;
+   font-family: HelveL;
+   line-height: 0.26rem;
+}
+.c-ticket-item-title p.en {
+   font-size: 0.26rem;
+   line-height: 0.32rem;
+   color: #ffffff;
+   font-family: HelveB;
+}
+.c-ticket-item-onums {
+   position: absolute;
+   right: 1.60rem;
+   bottom: 0.08rem;
+   font-size: 0.14rem;
+   color: #ffffff;
+}
+.c-ticket-item-use {
+   background: #ffffff;
+   box-shadow: none;
+}
+.c-ticket-item-use .c-ticket-item-title {
+   color: #9E9E9F;
+}
+.c-ticket-item-use .c-ticket-item-title p.en {
+   color: #000000;
+}
+.c-ticket-item-use .c-ticket-item-onums {
+   color: #9E9E9F;
+}
+.c-ticket-item .status {
+   width: 1.34rem;
+   height: 100%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
+   font-size: 0.20rem;
+   color: #9E9E9F;
+   background-color: #EEEEEF;
+}
+.c-ticket-item .status p.en {
+   font-family: HelveB;
+}
+
+.c-tk-info { width: 100%; display: flex; align-items: center; }
+.c-tk-date {
+   width: 0.56rem;
+   height: 0.56rem;
+   background: linear-gradient(330deg, #5B85E6 0%, #6D9AF4 100%);
+   border-radius: 0.07rem;
+   position: relative;
+   font-size: 0.20rem;
+   font-family: HelveL;
+   color: #ffffff;
+   line-height: 0.28rem;
+   text-align: center;
+   margin-right: 0.20rem;
+}
+.c-tk-date-large {
+   width: 0.66rem;
+   height: 0.66rem;
+   font-size: 0.24rem;
+   line-height: 0.33rem;
+}
+.c-tk-date:after { content: ''; height: 1px; background-color: #ffffff; transform: scaleY(.5); position: absolute; left: 0.11rem; right: 0.11rem; top: 50%; }
+.c-tk-date div { font-family: HelveB; }
+.c-tk-title { flex: 1; overflow: hidden; }
+.c-tk-title p { font-size: 0.26rem; font-family: HelveB; line-height: 0.30rem; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; word-break: break-all; }
+.c-tk-title div { font-size: 0.20rem; font-family: HelveL; color: #9E9E9F; line-height: 0.25rem; }

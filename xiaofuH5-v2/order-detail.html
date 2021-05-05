@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <title>Title</title>
+   <link href="css/reset.css" rel="stylesheet" />
+   <link href="css/layout.css" rel="stylesheet" />
+   <script src="js/jquery-2.1.1.min.js"></script>
+   <script src="js/common.js"></script>
+</head>
+<body>
+<div class="header">
+   <img src="img/logo.png" />
+</div>
+<div class="container">
+   <div class="swiper-container" id="index-swiper">
+      <div class="swiper-wrapper">
+         <div class="swiper-slide">
+            <div class="c-order-item">
+               <div class="c-order-item-top">
+                  <div class="line1">
+                                 <img src="img/code.jpg" />
+<!--                     <button>确认授权</button>-->
+                     <!--      <p class="en">Checked</p>-->
+                     <!--      <p>已使用</p>-->
+                  </div>
+                  <div class="line2">0016659884321</div>
+               </div>
+               <div class="c-order-item-bottom">
+                  <div class="c-ticket-infos">
+                     <div class="line1 bBorder">
+                        <div class="c-tk-info">
+                           <div class="c-tk-date">
+                              <p>12</p>
+                              <div>25</div>
+                           </div>
+                           <div class="c-tk-title">
+                              <p>Nectar by Joji</p>
+                              <div>MAOLivehouse</div>
+                           </div>
+                        </div>
+                        <img src="img/logo-t.png" />
+                     </div>
+                     <div class="line2 bBorder">
+                        <ul class="times">
+                           <li>2</li>
+                           <li>2</li>
+                           <li>:</li>
+                           <li>2</li>
+                           <li>2</li>
+                        </ul>
+                        <span>open</span>
+                        <img src="img/dot.png" />
+                        <div class="addr"><span>深圳市福田区车公庙泰然大厦01层L1-11A</span></div>
+                     </div>
+                  </div>
+                  <div class="line1 line3 bBorder">
+                     <div class="name">张三</div>
+                     <p class="phone">18023195011</p>
+                  </div>
+                  <div class="ticket">早鸟票</div>
+               </div>
+               <img src="img/flip.png" class="c-order-item-flip" />
+               <img src="img/ticket-shadow-large.png" class="c-order-item-shadow" mode="widthFix" />
+            </div>
+         </div>
+         <div class="swiper-slide">
+            <div class="c-order-item">
+               <div class="c-order-item-top c-order-item-top-use">
+                  <div class="line1">
+                     <p class="en">Checked</p>
+                     <p>已使用</p>
+                  </div>
+                  <div class="line2">0016659884321</div>
+               </div>
+               <div class="c-order-item-bottom">
+                  <div class="c-ticket-infos">
+                     <div class="line1 bBorder">
+                        <div class="c-tk-info">
+                           <div class="c-tk-date">
+                              <p>12</p>
+                              <div>25</div>
+                           </div>
+                           <div class="c-tk-title">
+                              <p>Nectar by Joji</p>
+                              <div>MAOLivehouse</div>
+                           </div>
+                        </div>
+                        <img src="img/logo-t.png" />
+                     </div>
+                     <div class="line2 bBorder">
+                        <ul class="times">
+                           <li>2</li>
+                           <li>2</li>
+                           <li>:</li>
+                           <li>2</li>
+                           <li>2</li>
+                        </ul>
+                        <span>open</span>
+                        <img src="img/dot.png" />
+                        <div class="addr"><span>深圳市福田区车公庙泰然大厦01层L1-11A</span></div>
+                     </div>
+                  </div>
+                  <div class="line1 line3 bBorder">
+                     <div class="name">张三</div>
+                     <p class="phone">18023195011</p>
+                  </div>
+                  <div class="ticket">早鸟票</div>
+               </div>
+               <img src="img/flip.png" class="c-order-item-flip" />
+               <img src="img/ticket-shadow-large.png" class="c-order-item-shadow" mode="widthFix" />
+            </div>
+         </div>
+      </div>
+      <!-- 如果需要分页器 -->
+      <div class="swiper-pagination"></div>
+   </div>
+   <div class="detail-line2">
+      <div class="l">
+         <div class="logo"><img src="img/logo-t.png" /></div>
+         <span>MAOLivehouse</span>
+      </div>
+      <a href="tel:13888888888">13888888888</a>
+   </div>
+</div>
+
+<link href="swiper/swiper.min.css" rel="stylesheet" />
+<script src="swiper/swiper.min.js"></script>
+<script>
+var mySwiper = new Swiper ('#index-swiper', {
+	loop: true,
+	pagination: {
+		el: '.swiper-pagination',
+		bulletActiveClass: 'index-bullet-active',
+	}
+})
+</script>
+</body>
+</html>

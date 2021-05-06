@@ -1,4 +1,4 @@
-import { getAction } from '@/utils'
+import { postAction } from '@/utils'
 
 export default {
   data () {
@@ -22,7 +22,7 @@ export default {
   },
   methods: {
     getCode () {
-      getAction('/editor/sms/send', {
+      postAction('/editor/sms/send', {
         mobile: this.vericode.mobile,
         event: this.vericodeEvent
       }).then(res => {

@@ -61,12 +61,18 @@ export default {
           trigger: 'blur',
           validator: psw2Valid
         }]
-      }
+      },
+      emailPass: true,
+      emailMsg: ''
     }
   },
   computed: {
+    emailReg () {
+      const reg = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/
+      return reg.test(this.formData.email)
+    },
     nextDisabled () {
-      if (this.formData.email === '' || this.vericode.mobile === '' || this.vericode.code === '' || this.formData.password === '' || this.formData.password2 === '') {
+      if (!this.emailReg || this.phoneDisabled || this.vericode.code === '' || this.formData.password === '' || this.formData.password2 === '') {
         return true
       }
       return false
@@ -77,6 +83,10 @@ export default {
     handleNext () {
       this.$refs.form.validate((valid) => {
         if (valid) {
+          if (!this.emailPass) {
+            this.$Message.warning(this.emailMsg)
+            return false
+          }
           this.formData.mobile = this.vericode.mobile
           this.formData.code = this.vericode.code
           this.$store.commit('SET_REGISTER', {
@@ -88,11 +98,13 @@ export default {
       })
     },
     emailCheck (e) {
-      console.log('emailCheck', e)
       postAction('/editor/validate/check_email_available', {
         email: this.formData.email
       }).then(res => {
-
+        if (res.code === 0) {
+          this.emailPass = false
+          this.emailMsg = res.msg
+        }
       })
     }
   }

@@ -9,13 +9,13 @@
     <Form class="form">
       <div class="form-title">注册</div>
       <FormItem>
-        <RadioGroup v-model="key1" type="button" button-style="solid" class="tab-bar">
+        <RadioGroup v-model="key1" type="button" button-style="solid" class="tab-bar" @on-change="handleNext">
           <Radio label="1">企业</Radio>
           <Radio label="2">个人</Radio>
         </RadioGroup>
       </FormItem>
       <FormItem>
-        <RadioGroup v-model="key2" type="button" button-style="solid" class="tab-bar" v-if="key1 === '1'">
+        <RadioGroup v-model="key2" type="button" button-style="solid" class="tab-bar" v-if="key1 === '1'" @on-change="handleNext">
           <Radio label="1">场地方</Radio>
           <Radio label="2">活动方</Radio>
         </RadioGroup>

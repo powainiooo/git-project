@@ -19,7 +19,7 @@
       padding 0 6px
       border-radius 3px
       bgG()
-      font-size 8px
+      font-size 12px
       color #ffffff
       height 22px
       line-height 22px

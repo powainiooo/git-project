@@ -7,10 +7,13 @@
     display flex
     list-style none
     transition all .4s cubic-bezier(.23,.56,.24,.92)
+    height 100%
     &>li
       display flex
       width 600px
       position relative
+      height 100%
+      overflow hidden
       .counter
         size(300px, 100%)
         abTL(0, 0)
@@ -32,6 +35,14 @@
         height 100%
         abTL(0, 50%)
         background-color #EEEEEF
+      &.current
+        height auto
+        overflow auto
+        &::-webkit-scrollbar
+          width 2px
+          background-color transparent
+        &::-webkit-scrollbar-thumb
+          background-color #5B85E6
       &>div
         flex 1
       &>.flex
@@ -42,13 +53,13 @@
 <template>
 <form-box class="c-data-form" :width="600" :height="376" :ids="70" :index="step">
   <template slot="button">
-      <Button size="small" v-if="step !== 1">上一步</Button>
+      <Button size="small" v-if="step !== 1" @click="step -= 1">上一步</Button>
       <Button size="small" v-if="step !== 3" :disabled="nextBtnDisable" @click="handleNext">下一步</Button>
       <Button size="small" v-if="step === 3" :disabled="confirm.index !== 0" @click="handleConfirm">{{confirm.btn}}</Button>
   </template>
   <ul class="step-box" :style="{'margin-left': (step - 1) * -600 + 'px'}">
     <!-- step1 -->
-    <li>
+    <li :class="{'current': step === 1}">
       <Form class="flex">
         <div>
           <div class="form">
@@ -144,7 +155,7 @@
       </Form>
     </li>
     <!-- step2 -->
-    <li>
+    <li :class="{'current': step === 2}">
       <div>
         <Form class="form">
           <div class="form-title">银行账户信息</div>
@@ -195,7 +206,7 @@
       </div>
     </li>
     <!-- step3 -->
-    <li>
+    <li :class="{'current': step === 3}">
       <div>
         <Form class="form">
           <div class="form-title">您要了解清楚的</div>
@@ -254,7 +265,7 @@
       </div>
     </li>
   </ul>
-  <alert ref="alert" @onRetry="handleConfirm" @onOk="onOk" />
+  <alert ref="alert" @onOk="onOk" />
 </form-box>
 </template>
 
@@ -282,9 +293,21 @@ export default {
     bankList () {
       return this.$store.state.bankList
     },
+    idCardReg () {
+      const reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/
+      return reg.test(this.formData.id_card_no)
+    },
+    accountIdCardReg () {
+      const reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/
+      return reg.test(this.formData.account_id_card_no)
+    },
+    accountMobile () {
+      const reg = /^[1][3,4,5,6,7,8][0-9]{9}$/
+      return reg.test(this.formData.account_mobile)
+    },
     nextBtnDisable () {
       if (this.step === 1) {
-        if (this.formData.organizer_name === '' || this.formData.address === '' || this.formData.person === '' || this.formData.id_card_no === '' || this.formData.phone === '' || this.formData.logo === '') {
+        if (this.formData.organizer_name === '' || this.formData.address === '' || this.formData.person === '' || !this.idCardReg || this.phoneDisabled || this.formData.logo === '') {
           return true
         }
         if (this.type === '1') { // 个人
@@ -301,7 +324,7 @@ export default {
           }
         }
       } else if (this.step === 2) {
-        if (this.formData.account_name === '' || this.formData.account_id_card_no === '' || this.formData.account_mobile === '' || this.formData.account_card_no === '' || this.formData.account_bank_id === '' || this.formData.account_opening_banke === '') {
+        if (this.formData.account_name === '' || !this.accountIdCardReg || !this.accountMobile || this.formData.account_card_no === '' || this.formData.account_bank_id === '' || this.formData.account_opening_banke === '') {
           return true
         }
       }
@@ -310,6 +333,7 @@ export default {
   },
   data () {
     return {
+      vericodeEvent: 'placeverify',
       bh: 0,
       tabList: [
         { name: '服务协议', value: 1 },
@@ -318,11 +342,13 @@ export default {
       confirm: {
         btn: '提交',
         index: 20,
-        isAjax: false
+        isAjax: false,
+        t: -1
       },
       tabKey: 1,
       step: 1,
       countIndex: 10,
+      countT: -1,
       formData: {
         organizer_name: '',
         name: '',
@@ -364,21 +390,25 @@ export default {
     },
     count () {
       if (this.countIndex === 0) return
-      const t = setInterval(() => {
+      if (this.countT !== -1) return
+      this.countT = setInterval(() => {
         this.countIndex -= 1
         if (this.countIndex === 0) {
-          clearInterval(t)
+          clearInterval(this.countT)
+          this.countT = -1
         }
       }, 1000)
     },
     count2 () {
       if (this.confirm.index === 0) return
+      if (this.confirm.t !== -1) return
       this.confirm.btn = `${this.confirm.index}s`
-      const t = setInterval(() => {
+      this.confirm.t = setInterval(() => {
         this.confirm.index -= 1
         if (this.confirm.index === 0) {
-          clearInterval(t)
+          clearInterval(this.confirm.t)
           this.confirm.btn = '提交'
+          this.confirm.t = -1
         } else {
           this.confirm.btn = `${this.confirm.index}s`
         }

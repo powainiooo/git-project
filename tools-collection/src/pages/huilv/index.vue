@@ -46,7 +46,7 @@
         <img src="/static/images/bg2.png" class="w100" mode="widthFix" />
         <img src="/static/images/suc.png" class="icon" mode="widthFix" />
         <h3>换算成功</h3>
-        <div>换算结果¥ <span>{{result.currencyMoney}}</span></div>
+        <div>换算结果{{key2}} <span>{{result.currencyMoney}}</span></div>
       </div>
     </div>
 
@@ -116,6 +116,14 @@ export default {
   },
   onShow () {
     this.getData()
+  },
+  onShareAppMessage () {
+    const pages = getCurrentPages()
+    const view = pages[pages.length - 1]
+    return {
+      title: '汇率换算',
+      path: `/${view.route}?id=${this.id}`
+    }
   },
   onLoad (options) {
     this.id = options.id || '2'

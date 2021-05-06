@@ -45,6 +45,14 @@ export default {
       })
     }
   },
+  onShareAppMessage () {
+    const pages = getCurrentPages()
+    const view = pages[pages.length - 1]
+    return {
+      title: '脑筋急转弯',
+      path: `/${view.route}?id=${this.id}`
+    }
+  },
   onReachBottom () {
     if (!this.loadOver) {
       this.page += 1

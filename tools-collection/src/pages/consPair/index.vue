@@ -100,6 +100,14 @@ export default {
       this[key] = this.list[e.mp.detail.value]
     }
   },
+  onShareAppMessage () {
+    const pages = getCurrentPages()
+    const view = pages[pages.length - 1]
+    return {
+      title: '星座配对',
+      path: `/${view.route}?id=${this.id}`
+    }
+  },
   onLoad (options) {
     this.id = options.id
   }

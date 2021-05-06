@@ -135,6 +135,14 @@ export default {
       this.getData()
     }
   },
+  onShareAppMessage () {
+    const pages = getCurrentPages()
+    const view = pages[pages.length - 1]
+    return {
+      title: '天气预报',
+      path: `/${view.route}?id=${this.id}`
+    }
+  },
   onLoad (options) {
     this.id = options.id
     const now = new Date()

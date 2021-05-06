@@ -56,6 +56,12 @@
 <script>
 import operates from '@/components/operates'
 import {postAction} from '../../utils/api'
+import config from '@/config'
+import QQMapWX from '@/utils/qqmap-wx-jssdk.min.js'
+const { mapKey } = config
+const qMap = new QQMapWX({
+  key: mapKey
+})
 
 export default {
   components: {
@@ -64,6 +70,7 @@ export default {
   data () {
     return {
       id: '',
+      province: '',
       list: []
     }
   },
@@ -71,14 +78,49 @@ export default {
     getData () {
       postAction('oil').then(res => {
         if (res.ret === 0) {
-          this.list = res.data
+          // this.list = res.data
+          const list1 = []
+          const list2 = []
+          for (let i of res.data) {
+            if (new RegExp(i.city).test(this.province)) {
+              list1.push(i)
+            } else {
+              list2.push(i)
+            }
+          }
+          this.list = [...list1, ...list2]
+        }
+      })
+    },
+    getCity () {
+      const _this = this
+      mpvue.getLocation({
+        success (res) {
+          qMap.reverseGeocoder({
+            location: {
+              latitude: res.latitude,
+              longitude: res.longitude
+            },
+            success (res2) {
+              _this.province = res2.result.address_component.province
+              _this.getData()
+            }
+          })
         }
       })
     }
   },
+  onShareAppMessage () {
+    const pages = getCurrentPages()
+    const view = pages[pages.length - 1]
+    return {
+      title: '今日油价',
+      path: `/${view.route}?id=${this.id}`
+    }
+  },
   onLoad (options) {
     this.id = options.id
-    this.getData()
+    this.getCity()
   }
 }
 </script>

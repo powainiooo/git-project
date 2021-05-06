@@ -9,6 +9,7 @@
     fxBR(0, 50%)
     border-radius 10px 10px 0 0
     transform translateX(50%)
+    z-index 20
 .login-container
   size(100%, 100%)
   abTL(0, 0)
@@ -19,6 +20,8 @@
     text-align center
     margin-bottom 40px
     font-size 0
+    img
+      width 161px
 .moveIn
   animation moveIn 1s cubic-bezier(.23,.56,.24,.92) both
 @keyframes moveIn

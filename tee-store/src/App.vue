@@ -1,4 +1,5 @@
 <script>
+import store from './store'
 export default {
   created () {
     // 调用API从本地缓存中获取数据
@@ -9,42 +10,22 @@ export default {
      * 百度：mpvue === swan, mpvuePlatform === 'swan'
      * 支付宝(蚂蚁)：mpvue === my, mpvuePlatform === 'my'
      */
-
-    let logs
-    if (mpvuePlatform === 'my') {
-      logs = mpvue.getStorageSync({key: 'logs'}).data || []
-      logs.unshift(Date.now())
-      mpvue.setStorageSync({
-        key: 'logs',
-        data: logs
-      })
-    } else {
-      logs = mpvue.getStorageSync('logs') || []
-      logs.unshift(Date.now())
-      mpvue.setStorageSync('logs', logs)
-    }
-  },
-  log () {
-    console.log(`log at:${Date.now()}`)
+    // 获取系统信息
+    mpvue.getSystemInfo({
+      success (res) {
+        console.log(res)
+        store.commit('SET_SYSINFO', res)
+      }
+    })
+    // 获取胶囊按钮信息
+    const menuInfo = mpvue.getMenuButtonBoundingClientRect()
+    store.commit('SET_MENUINFO', menuInfo)
+    console.log('menuInfo', menuInfo)
   }
 }
 </script>
 
 <style>
-.container {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  padding: 200rpx 0;
-  box-sizing: border-box;
-}
-/* this rule will be remove */
-* {
-  transition: width 2s;
-  -moz-transition: width 2s;
-  -webkit-transition: width 2s;
-  -o-transition: width 2s;
-}
+@import "../static/css/reset.css";
+.container { background: linear-gradient(0deg, #FFFFFF 0%, #EADED0 100%); min-height: 100vh; }
 </style>

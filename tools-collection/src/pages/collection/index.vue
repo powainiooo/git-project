@@ -8,7 +8,7 @@
     <div class="tool-list mt70" v-if="list.length > 0">
       <a v-for="item in list"
          :key="id"
-         href="#"
+         :href="item.href"
          class="tool-item">
         <img :src="imgSrc + item.imgpath" mode="aspectFill" />
         <div>{{item.name}}</div>
@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import { formatUrl } from '@/utils'
 import { postAction } from '@/utils/api'
 export default {
 
@@ -34,7 +35,7 @@ export default {
     getData () {
       postAction('my_sc').then(res => {
         if (res.ret === 0) {
-          this.list = res.data.list
+          this.list = formatUrl(res.data.list)
         }
       })
     }

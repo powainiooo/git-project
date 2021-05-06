@@ -51,10 +51,18 @@ export default {
       this.ex = e.clientX
     },
     tend (e) {
-      if (this.sx > this.ex && this.ex !== 0) {
+      if (this.sx > this.ex + 100 && this.ex !== 0) {
         this.getData()
       }
       this.ex = 0
+    }
+  },
+  onShareAppMessage () {
+    const pages = getCurrentPages()
+    const view = pages[pages.length - 1]
+    return {
+      title: '生活小窍门',
+      path: `/${view.route}?id=${this.id}`
     }
   },
   onLoad (options) {

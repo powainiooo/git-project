@@ -54,6 +54,7 @@ export default {
       const list = [...val]
       list.sort(() => Math.random() - 0.5)
       this.itemList = list
+      this.move()
     }
   },
   data () {
@@ -77,7 +78,6 @@ export default {
     }
   },
   mounted () {
-    this.move()
   },
   destroyed () {
     clearInterval(this.t)

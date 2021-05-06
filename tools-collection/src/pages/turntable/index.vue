@@ -136,6 +136,14 @@ export default {
       mpvue.setStorageSync('turntable', this.list)
     }
   },
+  onShareAppMessage () {
+    const pages = getCurrentPages()
+    const view = pages[pages.length - 1]
+    return {
+      title: '大转盘',
+      path: `/${view.route}?id=${this.id}`
+    }
+  },
   onLoad (options) {
     this.id = options.id
     const list = mpvue.getStorageSync('turntable')

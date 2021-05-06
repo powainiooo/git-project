@@ -43,6 +43,14 @@ export default {
       })
     }
   },
+  onShareAppMessage () {
+    const pages = getCurrentPages()
+    const view = pages[pages.length - 1]
+    return {
+      title: '心率参考表',
+      path: `/${view.route}?id=${this.id}`
+    }
+  },
   onLoad (options) {
     this.id = options.id
     this.getData()

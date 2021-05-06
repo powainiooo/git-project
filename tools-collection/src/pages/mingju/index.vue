@@ -83,16 +83,18 @@ export default {
       this.ex = e.clientX
     },
     tend (e) {
-      if (this.sx > this.ex && this.ex !== 0) {
+      if (this.sx > this.ex + 100 && this.ex !== 0) {
         this.getList()
       }
       this.ex = 0
     }
   },
-  onReachBottom () {
-    if (!this.loadOver) {
-      this.page += 1
-      this.getList()
+  onShareAppMessage () {
+    const pages = getCurrentPages()
+    const view = pages[pages.length - 1]
+    return {
+      title: '古籍名句',
+      path: `/${view.route}?id=${this.id}`
     }
   },
   onLoad (options) {

@@ -35,7 +35,6 @@ export default {
         { name: '时间换算', value: 'time' },
         { name: '人民币换算', value: 'money' },
         { name: '压力换算', value: 'pressure' },
-        { name: '功率换算', value: 'power' },
         { name: '功率热', value: 'power' },
         { name: '功能热', value: 'calories' },
         { name: '密度换算', value: 'density' },
@@ -46,6 +45,14 @@ export default {
     }
   },
 
+  onShareAppMessage () {
+    const pages = getCurrentPages()
+    const view = pages[pages.length - 1]
+    return {
+      title: '单位换算',
+      path: `/${view.route}?id=${this.id}`
+    }
+  },
   onLoad (options) {
     this.id = options.id
   }

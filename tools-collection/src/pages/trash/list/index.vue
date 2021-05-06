@@ -64,6 +64,14 @@ export default {
       this.queryData()
     }
   },
+  onShareAppMessage () {
+    const pages = getCurrentPages()
+    const view = pages[pages.length - 1]
+    return {
+      title: '可回收物',
+      path: `/${view.route}?id=${this.id}`
+    }
+  },
   onLoad (options) {
     this.keyword = options.keyword
     this.loadOver = false

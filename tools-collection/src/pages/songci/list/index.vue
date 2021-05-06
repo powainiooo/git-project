@@ -88,6 +88,14 @@ export default {
     this.page = 1
     this.list = []
   },
+  onShareAppMessage () {
+    const pages = getCurrentPages()
+    const view = pages[pages.length - 1]
+    return {
+      title: '精选宋词',
+      path: `/${view.route}?id=${this.id}`
+    }
+  },
   onLoad (options) {
     this.id = options.id
     this.getList()

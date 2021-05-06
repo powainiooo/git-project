@@ -1,7 +1,7 @@
 <style scoped>
 .story-content { margin: 30px; }
 .story-content h2 { font-size: 40px; color: #000000; margin-bottom: 20px; text-align: center; }
-.story-content div { font-size: 22px; line-height: 50px; }
+.story-content div { font-size: 28px; line-height: 50px; }
 </style>
 
 <template>
@@ -89,7 +89,7 @@ export default {
       this.ex = e.clientX
     },
     tend (e) {
-      if (this.sx > this.ex && this.ex !== 0) {
+      if (this.sx > this.ex + 100 && this.ex !== 0) {
         this.getList()
       }
       this.ex = 0
@@ -105,6 +105,14 @@ export default {
     this.keyword = ''
     this.page = 1
     this.list = []
+  },
+  onShareAppMessage () {
+    const pages = getCurrentPages()
+    const view = pages[pages.length - 1]
+    return {
+      title: '故事大全',
+      path: `/${view.route}?id=${this.id}`
+    }
   },
   onLoad (options) {
     this.id = options.id

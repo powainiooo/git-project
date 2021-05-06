@@ -83,6 +83,12 @@ export default {
     }
   },
 
+  onShareAppMessage () {
+    return {
+      title: '工具大全',
+      path: '/pages/index/main'
+    }
+  },
   onLoad () {
     // let app = getApp()
     if (store.state[tokenKey] === '') {

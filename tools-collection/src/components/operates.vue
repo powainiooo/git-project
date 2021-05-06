@@ -112,11 +112,11 @@ export default {
           this.getData()
           if (type === 1) {
             mpvue.showToast({
-              title: '点赞成功'
+              title: res.data === 1 ? '点赞成功' : '取消成功'
             })
           } else {
             mpvue.showToast({
-              title: '收藏成功'
+              title: res.data === 1 ? '收藏成功' : '取消成功'
             })
           }
         }

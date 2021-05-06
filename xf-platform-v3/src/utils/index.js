@@ -32,9 +32,12 @@ export function putAction (url, parameter) {
 }
 
 // get
-export function getAction (url, parameter) {
+export function getAction (url, parameter, autoWarn = true) {
   return axios({
     url: url,
+    config: {
+      autoWarn
+    },
     method: 'get',
     params: parameter
   })

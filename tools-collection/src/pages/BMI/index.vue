@@ -42,7 +42,7 @@
     <div class="bmi-result" v-if="showResult">
       <p>中国标准</p>
       <p>结果值：{{record.bmi}}</p>
-      <p>结果描述：{{record.healthy}}</p>
+      <p>疾病风险：{{record.healthy}}</p>
       <p>建议：{{record.tip}}</p>
     </div>
 
@@ -116,6 +116,14 @@ export default {
           this.showResult = true
         }
       })
+    }
+  },
+  onShareAppMessage () {
+    const pages = getCurrentPages()
+    const view = pages[pages.length - 1]
+    return {
+      title: 'BMI标准体重',
+      path: `/${view.route}?id=${this.id}`
     }
   },
   onLoad (options) {

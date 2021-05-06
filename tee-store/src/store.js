@@ -7,16 +7,20 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
-    count: 0
+    sysInfo: {},
+    menuInfo: 0
+  },
+  getters: {
+    barHeight (state) {
+      return state.menuInfo.bottom
+    }
   },
   mutations: {
-    increment: (state) => {
-      const obj = state
-      obj.count += 1
+    SET_SYSINFO (state, data) {
+      state.sysInfo = data
     },
-    decrement: (state) => {
-      const obj = state
-      obj.count -= 1
+    SET_MENUINFO (state, data) {
+      state.menuInfo = data
     }
   }
 })

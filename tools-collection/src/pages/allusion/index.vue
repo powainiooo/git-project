@@ -1,9 +1,9 @@
 <style scoped>
 .al-list li { padding: 40px 30px 10px 30px; }
 .al-list li div { margin-bottom: 30px; }
-.al-list li div .sp1 { font-size: 26px; color: #282828; }
-.al-list li div .sp2 { font-size: 26px; color: #3D7FC7; margin-left: 30px; }
-.al-list li div .sp3 { font-size: 20px; line-height: 40px; color: #282828; }
+.al-list li div .sp1 { font-size: 28px; color: #282828; }
+.al-list li div .sp2 { font-size: 28px; color: #3D7FC7; margin-left: 30px; }
+.al-list li div .sp3 { font-size: 28px; line-height: 40px; color: #282828; }
 </style>
 
 <template>
@@ -73,6 +73,14 @@ export default {
           }
         }
       })
+    }
+  },
+  onShareAppMessage () {
+    const pages = getCurrentPages()
+    const view = pages[pages.length - 1]
+    return {
+      title: '成语典故',
+      path: `/${view.route}?id=${this.id}`
     }
   },
   onLoad (options) {

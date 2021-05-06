@@ -53,6 +53,8 @@
   display block
   width 30px
   margin 24px auto
+  img
+    width 100%
 </style>
 
 <template>

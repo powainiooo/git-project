@@ -88,7 +88,7 @@
 
 <template>
 <div class="c-upload">
-  <Upload action="/addons/upyun/index/upload.html"
+  <Upload :action="url"
           :data="extraData"
           :before-upload="uploadBefore"
           :on-preview="preview"
@@ -192,6 +192,9 @@ export default {
     },
     cdnurl () {
       return this.$store.state.config.uploaddata.cdnurl
+    },
+    url () {
+      return `${window.baseUrl === '/' ? '' : window.baseUrl}/addons/upyun/index/upload.html`
     }
   },
   data () {

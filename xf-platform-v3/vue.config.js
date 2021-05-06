@@ -34,7 +34,9 @@ module.exports = {
 }
 /*
 *
-* http://leesticket_dev.waiting8.com/NVcfRhyJlY.php
+* http://leesticket_dev.waiting8.com/NVcfRhyJlY.php  http://editor.leesticket.waiting8.com/#/login
 帐号：leesticket
 密码：nihao123
+*ftp://159.75.70.218:21 editor FBYjKE2dHkD8YPiE http://leesticket.waiting8.com
+*
 * */

@@ -61,7 +61,7 @@
             </FormItem>
             <FormItem>
               <tag-line title="开始时间" v-if="isEditor">{{formData.start_time}}</tag-line>
-              <c-date-time placeholder="开始时间" type="time" v-model="formData.start_time" :clearable="false" v-else />
+              <c-date-time placeholder="开始时间" type="time" format="HH:mm" v-model="formData.start_time" :clearable="false" v-else />
             </FormItem>
             <FormItem>
               <tag-line title="开始时间" v-if="isEditor">{{formData.telephone}}</tag-line>
@@ -181,6 +181,10 @@ export default {
         logo: this.globalData.logo
       }
     },
+    phoneDisabled () {
+      const reg = /^[1][3,4,5,6,7,8][0-9]{9}$/
+      return reg.test(this.formData.telephone)
+    },
     nextDisabled () {
       const d = this.formData
       for (const key in d) {
@@ -192,6 +196,7 @@ export default {
           }
         }
       }
+      if (!this.phoneDisabled) return true
       return false
     },
     isEditor () {

@@ -24,7 +24,7 @@
   <img src="@/assets/img/welcome.png" class="c-welcome-img1" />
   <div>
     <img src="@/assets/img/f1.png" class="c-welcome-img2" />
-    <Button to="/publish">发布你的第一场活动</Button>
+    <Button to="/publish" style="width: 250px;">发布你的第一场活动</Button>
   </div>
 </div>
 </template>

@@ -28,7 +28,7 @@
   <swiper previous-margin="58rpx" next-margin="35rpx" duration="200" style="min-height: 640rpx;">
     <swiper-item v-for="(item, i) in list" :key="i">
       <div class="parti-item">
-        <img :src="item.image" class="pic" />
+        <img :src="item.image_full_url" class="pic" />
         <div>{{item.content}}</div>
       </div>
     </swiper-item>

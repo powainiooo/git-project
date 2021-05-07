@@ -55,7 +55,7 @@
             </div>
           </Col>
         </Row>
-        <div v-if="!showWelcome && !showDetail && total !== 0">
+        <div v-if="!showWelcome && !showDetail && total !== 0 && total > pageSize">
           <Page :current="pageNo"
                 :total="total"
                 :page-size="pageSize"

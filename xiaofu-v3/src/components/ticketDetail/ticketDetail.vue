@@ -210,7 +210,7 @@ export default {
       if (this.page === 'detail') {
         return false
       }
-      if (this.formData.name === '' || this.formData.mobile === '' || this.cardNo === '' || this.formData.price_id === '' || this.formData.num === 0) {
+      if (this.formData.name === '' || this.formData.mobile === '' || this.cardNo === '' || this.formData.price_id === '') {
         return true
       }
       return false

@@ -50,7 +50,6 @@
       size(130px, 130px)
       border-radius 8px
       center()
-      background #D8D8D8 linear-gradient(150deg, #FFFFFF 0%, #F2F2F2 100%)
       margin-bottom 30px
     .wxcode
       size(150px, 150px)
@@ -103,7 +102,7 @@
       <div class="names">
         <h3>{{item.name}}</h3>
         <div class="between">
-          <span>{{item.num}}</span>张
+          <span>{{item.num}}</span>1张
         </div>
       </div>
       <div class="nums">{{item.sold_num}}</div>

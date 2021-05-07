@@ -44,7 +44,7 @@ export default {
     return {
       priceId: '',
       numsArr: [],
-      nums: 0
+      nums: 1
     }
   },
   methods: {

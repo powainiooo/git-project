@@ -53,7 +53,7 @@
     <a href="/pages/leesStar/main"
        class="active"
        hover-class="hscale"
-       hover-stay-time="10">
+       hover-stay-time="10" @click="navJump">
       <div class="icons">
         <img src="/static/images/menu/icon1.png" style="width: 52rpx;" mode="widthFix" />
       </div>
@@ -61,7 +61,7 @@
     </a>
     <a href="/pages/illustrate/main?source=member"
        hover-class="hscale"
-       hover-stay-time="10">
+       hover-stay-time="10" @click="navJump">
       <div class="icons">
         <img src="/static/images/menu/icon2.png" style="width: 55rpx;" mode="widthFix" />
       </div>
@@ -69,7 +69,7 @@
     </a>
     <a href="/pages/illustrate/main?source=aftersales"
        hover-class="hscale"
-       hover-stay-time="10">
+       hover-stay-time="10" @click="navJump">
       <div class="icons">
         <img src="/static/images/menu/icon3.png" style="width: 38rpx;" mode="widthFix" />
       </div>
@@ -77,7 +77,7 @@
     </a>
     <a href="/pages/illustrate/main?source=contact"
        hover-class="hscale"
-       hover-stay-time="10">
+       hover-stay-time="10" @click="navJump">
       <div class="icons">
         <img src="/static/images/menu/icon4.png" style="width: 44rpx;" mode="widthFix" />
       </div>
@@ -110,7 +110,6 @@ export default {
   },
   watch: {
     show (val) {
-      console.log('menu show')
       if (val && this.hasUserInfo) {
         this.getOrder()
       }
@@ -133,6 +132,7 @@ export default {
       })
     },
     toOrderList () {
+      this.navJump()
       mpvue.navigateTo({
         url: '/pages/order/list/main'
       })
@@ -140,7 +140,8 @@ export default {
     getOrder () {
       postAction('/api/order/lists').then(res => {
         if (res.code === 1) {
-          this.orderData = res.data[0]
+          if (res.data.list.length === 0) return
+          this.orderData = res.data.list[0]
           let date = this.orderData.start_date.split('-')
           this.infoData = {
             month: date[1],
@@ -150,6 +151,9 @@ export default {
           }
         }
       })
+    },
+    navJump () {
+      this.$emit('close')
     }
   }
 }

@@ -30,6 +30,8 @@
                      :class="{'err-inp': isEditor && errorData.artist_content && errorData.artist_content[index] !== ''}" />
             </div>
             <upload-img width="115"
+                        cropper
+                        :fixedNumber="[300,235]"
                         v-model="item.image"
                         :error="isEditor && errorData.artist_image && errorData.artist_image[index] !== ''">
               <span slot="title">艺人照片</span>
@@ -54,6 +56,8 @@
                    :readonly="isEditor && errorData.intro_content  && errorData.intro_content[index] === ''"
                    :class="{'err-inp': isEditor && errorData.intro_content && errorData.intro_content[index] !== ''}"/>
             <upload-img width="170"
+                        cropper
+                        :fixedNumber="[634,334]"
                         v-model="item.image"
                         :error="isEditor && errorData.intro_image && errorData.intro_image[index] !== ''">
               <span slot="title">活动宣传图片</span>

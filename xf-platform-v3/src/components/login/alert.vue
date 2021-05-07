@@ -21,7 +21,7 @@
 <template>
 <div class="c-alert center" v-if="visible" @click="visible = false">
   <div>
-    <div class="logo"><img src="@/assets/img/logo.png" /></div>
+    <div class="logo"><img src="@/assets/img/logo.png" width="161" /></div>
     <div class="flip-box" v-if="status === 'suc'">
       <img src="@/assets/img/ico-suc.png" />
       <h3>提交成功</h3>

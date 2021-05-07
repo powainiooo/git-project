@@ -107,7 +107,7 @@
        hover-stay-time="10"
        @click="toDetail">
     <div class="imgs">
-      <img src="/static/images/img.jpg" />
+      <img :src="record.cover_image" />
     </div>
     <div class="nums">{{record.num}}</div>
     <div class="cover"></div>

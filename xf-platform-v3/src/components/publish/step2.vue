@@ -67,7 +67,7 @@
     <div class="form-grid">
       <div class="form-col">
         <Form class="form">
-          <div class="form-title" style="margin-bottom: 0;">票务信息{{isEditor}}</div>
+          <div class="form-title" style="margin-bottom: 0;">票务信息</div>
           <!-- 审核显示 -->
           <template v-if="isEditor">
             <div class="form-cell"
@@ -133,15 +133,15 @@
           </div>
           <FormItem>
             <tag-line title="显示时间" v-if="isEditor">{{showTime}}</tag-line>
-            <c-date-time placeholder="显示时间" format="yyyy-MM-dd HH:mm" type="datetime" v-model="formData.show_time" v-else />
+            <c-date-time placeholder="显示时间" format="yyyy-MM-dd HH:mm" type="datetime" :clearable="false" v-model="formData.show_time" v-else />
           </FormItem>
           <FormItem>
             <tag-line title="开票时间" v-if="isEditor">{{saleStartTime}}</tag-line>
-            <c-date-time placeholder="开票时间" format="yyyy-MM-dd HH:mm" type="datetime" v-model="formData.sale_start_time" v-else />
+            <c-date-time placeholder="开票时间" format="yyyy-MM-dd HH:mm" type="datetime" :clearable="false" v-model="formData.sale_start_time" v-else />
           </FormItem>
           <FormItem>
             <tag-line title="停票时间" v-if="isEditor">{{saleEndTime}}</tag-line>
-            <c-date-time placeholder="停票时间" format="yyyy-MM-dd HH:mm" type="datetime" v-model="formData.sale_end_time" v-else />
+            <c-date-time placeholder="停票时间" format="yyyy-MM-dd HH:mm" type="datetime" :clearable="false" v-model="formData.sale_end_time" v-else />
           </FormItem>
         </Form>
       </div>
@@ -190,8 +190,18 @@ export default {
         }
       }
       for (const i of this.ticketList) {
-        if (i.name === '' || i.price === '' || i.num === '' || i.limit === '') {
-          return true
+        if (i.type === 'default') {
+          if (i.check) {
+            if (i.name === '' || i.price === '' || i.num === '') {
+              return true
+            }
+          } else {
+            continue
+          }
+        } else {
+          if (i.name === '' || i.price === '' || i.num === '') {
+            return true
+          }
         }
       }
       for (const i of this.noticeList) {

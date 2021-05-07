@@ -155,6 +155,7 @@
     </div>
     <div class="c-ticket-imgs">
       <img :src="record.cover_image" v-if="record.cover_image !== ''" />
+      <img src="@/assets/img/default.png" width="420" v-else />
     </div>
   </div>
 </div>

@@ -46,7 +46,7 @@
   <swiper previous-margin="25rpx" next-margin="416rpx" duration="100">
     <swiper-item v-for="(item, index) in list" :key="index">
       <div class="artist-item">
-        <img :src="item.image" class="pic" />
+        <img :src="item.image_full_url" class="pic" />
         <div>{{item.content}}</div>
         <img src="/static/images/common/flip.png" class="flip" />
       </div>

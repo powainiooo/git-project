@@ -82,8 +82,9 @@ export default {
     getData () {
       postAction('/api/order/lists').then(res => {
         if (res.code === 1) {
+          if (res.data.list.length === 0) return
           const data = {}
-          for (let i of res.data) {
+          for (let i of res.data.list) {
             const dates = i.start_date.split('-')
             if (!data[dates[0]]) {
               data[dates[0]] = []

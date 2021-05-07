@@ -213,7 +213,7 @@ export default {
   },
   methods: {
     uploadBefore (file) {
-      this.extraData.upyuntoken = this.$store.state.config.uploaddata.multipart.upyuntoken
+      this.extraData.upyuntoken = this.$store.state.config.uploaddata.upyuntoken
       if (this.cropper) {
         return false
       }

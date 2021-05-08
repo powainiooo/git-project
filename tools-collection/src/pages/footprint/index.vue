@@ -17,7 +17,7 @@ page { background-color: #F8F8F8; }
       <div class="list">
         <a v-for="(child, index2) in item.list"
            :key="id"
-           :href="child.href"
+           :href="child.jiathref"
            class="tool-item">
           <img :src="imgSrc + child.imgpath" mode="aspectFill" />
           <div>{{child.name}}</div>

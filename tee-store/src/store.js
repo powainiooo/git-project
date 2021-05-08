@@ -10,17 +10,9 @@ const store = new Vuex.Store({
     sysInfo: {},
     menuInfo: 0
   },
-  getters: {
-    barHeight (state) {
-      return state.menuInfo.bottom
-    }
-  },
   mutations: {
     SET_SYSINFO (state, data) {
       state.sysInfo = data
-    },
-    SET_MENUINFO (state, data) {
-      state.menuInfo = data
     }
   }
 })

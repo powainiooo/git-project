@@ -1,5 +1,4 @@
 <script>
-import store from './store'
 export default {
   created () {
     // 调用API从本地缓存中获取数据
@@ -10,17 +9,6 @@ export default {
      * 百度：mpvue === swan, mpvuePlatform === 'swan'
      * 支付宝(蚂蚁)：mpvue === my, mpvuePlatform === 'my'
      */
-    // 获取系统信息
-    mpvue.getSystemInfo({
-      success (res) {
-        console.log(res)
-        store.commit('SET_SYSINFO', res)
-      }
-    })
-    // 获取胶囊按钮信息
-    const menuInfo = mpvue.getMenuButtonBoundingClientRect()
-    store.commit('SET_MENUINFO', menuInfo)
-    console.log('menuInfo', menuInfo)
   }
 }
 </script>

@@ -139,6 +139,9 @@
             :info="false"
             :fixedNumber="fixedNumber"
             style="width: 360px; height: 380px;"
+            :style="{
+              'background-image': bgSrc
+            }"
           ></vueCropper>
         </div>
         <div class="tc"><Button size="small" @click="doCropper" :loading="isLoading">保存</Button></div>
@@ -195,6 +198,9 @@ export default {
     },
     url () {
       return `${window.baseUrl === '/' ? '' : window.baseUrl}/addons/upyun/index/upload.html`
+    },
+    bgSrc () {
+      return `url(${require('@/assets/img/bg.png')})`
     }
   },
   data () {

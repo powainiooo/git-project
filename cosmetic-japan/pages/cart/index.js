@@ -4,6 +4,7 @@ const api = require('../../utils/api.js');
 const app = getApp();
 var www = app.globalData.www;
 var imgUrl = app.globalData.url;
+var canIUseGetUserProfile=app.globalData.canIUseGetUserProfile;
 Page({
 
   /**
@@ -18,7 +19,8 @@ Page({
     yx:0,
     total:0.00,
     selectAll:false,
-    list:{}
+    list:{},
+    canIUseGetUserProfile:canIUseGetUserProfile
   },
 
   // 语言切换
@@ -32,6 +34,25 @@ Page({
   getUserTap: function (e) {
     var that = this;
     api.getUser(that);
+  },
+  getUserProfile:function(e){
+    console.log(1);
+    var that = this;
+    wx.getUserProfile({
+      desc: '用于完善会员资料', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
+      success: (res) => {
+        console.log(res);
+        var UserInfo = res.userInfo;
+        
+        that.saveuserinfo(UserInfo)
+      }
+    })
+  },
+  saveuserinfo:function(UserInfo){
+    console.log(123,UserInfo);
+    var that = this;
+    //api.getUser(that);
+    api.reqUser(UserInfo, that,1);
   },
 
   // 选中

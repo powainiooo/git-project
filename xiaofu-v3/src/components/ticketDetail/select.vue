@@ -51,10 +51,10 @@ export default {
     selectTicket (record) {
       this.priceId = record.id
       this.setNumsArr(record.limit)
-      if (this.nums > record.limit) this.nums = record.limit
+      if (this.nums > record.limit && record.limit !== 0) this.nums = record.limit
       this.$emit('change', {
-        key: 'price_id',
-        value: record.id
+        price_id: record.id,
+        num: this.nums
       })
     },
     setNumsArr (limit) {
@@ -71,8 +71,8 @@ export default {
     numsChange (e) {
       this.nums = this.numsArr[e.mp.detail.value]
       this.$emit('change', {
-        key: 'num',
-        value: this.nums
+        price_id: this.priceId,
+        num: this.nums
       })
     }
   }

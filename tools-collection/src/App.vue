@@ -85,7 +85,7 @@ button:after { border: none;}
 .float-box { width: 100%; height: 60vh; overflow-y: auto; background-color: #FFFFFF; border-radius: 50px 50px 0 0; position: fixed; left: 0; bottom: -60vh; padding: 70px 30px; z-index: 1100; transition: bottom .4s cubic-bezier(.22,.61,.3,.99); }
 .float-box-show { bottom: 0; }
 .float-box h3 { color: #3D7FC7; font-size: 34px; margin-bottom: 60px; }
-.float-box li { margin-bottom: 20px; font-size: 22px; line-height: 40px; display: flex; }
+.float-box li { margin-bottom: 20px; font-size: 26px; line-height: 40px; display: flex; }
 .float-box li div { width: 180px; }
 .float-box li p { width: 540px; }
 .float-box .btn { width: 340px; }
@@ -118,26 +118,26 @@ button:after { border: none;}
 .tabs2 li.active { border-bottom: 6px solid #436CB3; }
 
 .tabs3 { display: flex; justify-content: space-around; }
-.tabs3 li { font-size: 26px; color: #999999; padding-bottom: 14px; position: relative; }
-.tabs3 li.active { font-size: 30px; color: #333333; }
+.tabs3 li { font-size: 30px; color: #999999; padding-bottom: 14px; position: relative; }
+.tabs3 li.active { font-size: 34px; color: #333333; }
 .tabs3 li.active:after { content: ''; width: 38px; height: 4px; background-color: #3366CC; position: absolute; bottom: 0; left: 50%; margin-left: -19px; }
 
-.c-tag { font-size: 18px; color: #FFFFFF; border-radius: 4px; height: 34px; line-height: 30px; margin-bottom: 15px; display: inline-block; padding: 0 10px; }
+.c-tag { font-size: 26px; color: #FFFFFF; border-radius: 4px; height: 34px; line-height: 30px; margin-bottom: 15px; display: inline-block; padding: 0 10px; }
 
 .blue-box { border: 12px solid #436CB3; border-bottom: none; overflow: hidden; }
 .blue-box h3 { font-size: 36px; color: #FFFFFF; background-color: #436CB3; text-align: center; padding: 20px 0; }
 .blue-box h4 { font-size: 36px; color: #436CB3; margin: 40px 0; }
 .blue-box h5 { font-size: 28px; color: #436CB3; margin: 20px 0; }
 .blue-box div { margin: 40px 36px; }
-.blue-box div p { font-size: 18px; color: #666666; line-height: 35px; }
+.blue-box div p { font-size: 30px; color: #666666; line-height: 35px; }
 
-.to-next { height: 90px; padding: 0 32px; display: flex; align-items: center; justify-content: flex-end; font-size: 22px; background-color: #FFFFFF }
+.to-next { height: 90px; padding: 0 32px; display: flex; align-items: center; justify-content: flex-end; font-size: 26px; background-color: #FFFFFF }
 
 .empty { text-align: center; margin-top: 100px; font-size: 32px; }
 
 .consult-frame { margin: 30px; }
-.consult-frame .blue-frame { background: linear-gradient(45deg, #3366CC, #3DB6FF); border-radius: 3px; color: #FFFFFF; padding: 26px 20px; font-size: 24px; line-height: 40px; }
-.consult-frame .title1 { font-size: 24px; color: #3366CC; margin-left: 40px; margin-bottom: 20px; }
+.consult-frame .blue-frame { background: linear-gradient(45deg, #3366CC, #3DB6FF); border-radius: 3px; color: #FFFFFF; padding: 26px 20px; font-size: 26px; line-height: 40px; }
+.consult-frame .title1 { font-size: 26px; color: #3366CC; margin-left: 40px; margin-bottom: 20px; }
 .consult-table { background-color: #F9F9F9; padding: 20px 15px; }
 .consult-table ul { display: flex; margin-bottom: 20px; }
 .consult-table ul li { flex: 1; font-size: 22px; color: #666666; }
@@ -145,5 +145,5 @@ button:after { border: none;}
 .consult-table ul.thead li:first-child { text-align: left; }
 .consult-table ul.tr li { text-align: center }
 .consult-table ul.tr li:first-child { text-align: left }
-.consult-frame .hint1 { font-size: 18px; color: #3366CC; margin-left: 40px; margin-top: 25px; }
+.consult-frame .hint1 { font-size: 20px; color: #3366CC; margin-left: 40px; margin-top: 25px; }
 </style>

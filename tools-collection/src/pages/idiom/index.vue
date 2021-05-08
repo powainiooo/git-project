@@ -1,8 +1,8 @@
 <style scoped>
 .idiom-list li { height: 200px; display: flex; align-items: center; padding: 0 14px 0 32px;  }
 .idiom-list li div { width: 100%; background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAARCAQAAABOKvVuAAAAqUlEQVQY023OsQqCUBjF8U8E3yMMCozynnP3IhqbfbEeoDICs1lbcmmxvQfJwRu0tZhdqzv++H+HK1gxQxR4Yj9mrHnFXFwL1ULtUbNUU5td+tzSsNSzTk0fMc3PCPqI/9bc0HxvC32scecFy873xj0e+OTNNkePkPPBwibFjBUSwiLkNDxy2FIY6lNDTkvoUuA1h6kevCtBxAI108+WiGDHCueJaisReQHoeT0ANoIA7QAAAABJRU5ErkJggg==") no-repeat; background-size: 10px auto; background-position: 96% center; }
-.idiom-list li h3 { font-size: 26px; color: #3D7FC7; }
-.idiom-list li p { font-size: 20px; margin-top: 20px; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; }
+.idiom-list li h3 { font-size: 30px; color: #3D7FC7; }
+.idiom-list li p { font-size: 26px; margin-top: 20px; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; }
 </style>
 
 <template>

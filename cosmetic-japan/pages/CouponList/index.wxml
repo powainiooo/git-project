@@ -21,4 +21,8 @@
        {{item.flag==0?"马上领取":"立即使用"}}
     </view>
   </view>
+  <view class='orderNone' wx:if='{{list.length==0}}'>
+    <image src='/images/none_order.png' class='img'></image>
+    <text class='txt'>暂无可以领取的优惠券!</text>
+  </view>
 </view>

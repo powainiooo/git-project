@@ -83,7 +83,7 @@
   <div class="right" v-if="record.star">
     <ul class="stars">
       <li v-for="i in starNum" :key="i">
-        <img src="/static/images/common/rank-star2.png" v-if="rank === 1" />
+        <img src="/static/images/common/rank-star2.png" v-if="rank === 0" />
         <img src="/static/images/common/rank-star.png" v-else />
       </li>
     </ul>
@@ -96,7 +96,8 @@
 export default {
   name: 'app',
   props: {
-    record: Object
+    record: Object,
+    rank: Number
   },
   data () {
     return {}

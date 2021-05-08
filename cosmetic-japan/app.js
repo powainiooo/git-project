@@ -6,6 +6,10 @@ App({
       this.getLogin();
       return false;
     }*/
+    if (wx.getUserProfile) {
+      console.log("可以使用")
+      this.globalData.canIUseGetUserProfile =true;
+    }
 
     this.globalData.mid = wx.getStorageSync('MID')
     this.globalData.fxs_id = wx.getStorageSync('FXSID')
@@ -105,7 +109,8 @@ App({
     url: 'https://dgpt.vsapp.cn',
     login_key:'',
     mid:0,
-	  fxs_id: ''
+    fxs_id: '',
+    canIUseGetUserProfile:false
   },
 	setMid (mid) {
   	   this.globalData.mid = mid

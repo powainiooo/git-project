@@ -12,7 +12,7 @@
     <div class="blue-box" style="min-height: calc(100vh - 250rpx)" v-if="showResult">
       <h3>梦到{{keyword}}</h3>
       <div>
-        <p v-for="item in record.list" :key="index">{{item}}</p>
+        <p v-for="item in record.list" :key="index" class="f30">{{item}}</p>
       </div>
     </div>
     <operates :id="id" />

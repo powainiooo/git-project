@@ -16,7 +16,8 @@ Page({
         info: {},
         fukuanBool: true,
         title: '', // 页面标题,
-	    hw_flag: ''
+        hw_flag: '',
+        isTip:false
     },
     // 支付
     pay: function(data,obj) {
@@ -24,7 +25,7 @@ Page({
         wx.requestPayment({
             'timeStamp': data.timeStamp,
             'nonceStr': data.nonceStr,
-            'package': data.package,
+            'package': 'prepay_id='+data.prepay_id,
             'signType': data.signType,
             'paySign': data.paySign,
             'success': (res) => {
@@ -65,6 +66,11 @@ Page({
             }
         })
     },
+    tipTap: function () {
+        this.setData({
+          isTip: !this.data.isTip
+        })
+      },
     //付款
     fukuan: function(e) {
         if (!this.data.fukuanBool) return false;
@@ -246,6 +252,7 @@ Page({
 
     },
     ajaxData: function() {
+        console.log('重新加载数据');
         var url = urlPath + '/api/index/order_list_detail'
         appRequest({
             url: url,

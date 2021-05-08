@@ -1,5 +1,5 @@
 <style scoped>
-.c-select { width: 100%; height: 56px; line-height: 52px; border: 2px solid #EEEEEE; font-size: 20px; color: #666666; padding: 0 12px; position: relative; }
+.c-select { width: 100%; height: 56px; line-height: 52px; border: 2px solid #EEEEEE; font-size: 26px; color: #666666; padding: 0 12px; position: relative; }
 .c-select-arrow { position: absolute; top: 50%; right: 12px; width: 14px; height: 10px; margin-top: -5px; }
 </style>
 

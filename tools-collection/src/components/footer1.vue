@@ -19,6 +19,9 @@
 .footer a.active { color: #436CB3; }
 .footer a.active .img1 { display: none }
 .footer a.active .img2 { display: block; }
+view, input {
+    font-size: 30rpx;
+}
 </style>
 
 <template>

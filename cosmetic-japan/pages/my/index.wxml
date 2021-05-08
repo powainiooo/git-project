@@ -99,5 +99,5 @@
 <footer num="4" bindswitchlag="SwitchLag"></footer>
 <import src="../template/template.wxml" />
 <block wx:if="{{isShowGetUser}}">
-  <template is="getUserInfo"></template>
+  <template is="getUserInfo" data="{{canIUseGetUserProfile}}"></template>
 </block>

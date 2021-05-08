@@ -7,8 +7,8 @@
   <div class="hr20"></div>
   <div class="consult-frame">
     <div class="blue-frame mb60">
-      <h3>心率正常值</h3>
-      <p>{{record.sm}}</p>
+      <h3 class="f30">心率正常值</h3>
+      <p class="f30">{{record.sm}}</p>
     </div>
 
     <div class="title1">常规检查</div>

@@ -27,7 +27,7 @@
       <img src="/static/images/leesStar/lees-star.png" class="lees-star" />
       <div class="less-list">
         <div class="less-item" v-for="(item, i) in listData" :key="i">
-          <c-list-item :record="item" />
+          <c-list-item :record="item" :rank="i" />
         </div>
       </div>
     </div>

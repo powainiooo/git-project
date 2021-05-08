@@ -12,7 +12,7 @@
   <div class="blue-box" v-for="item in list" :key="index">
     <h3>{{item.name}}</h3>
     <div>
-      <p><rich-text :nodes="item.feature"></rich-text></p>
+      <p><rich-text :nodes="item.feature" class="f30"></rich-text></p>
     </div>
   </div>
   <operates :id="id" />

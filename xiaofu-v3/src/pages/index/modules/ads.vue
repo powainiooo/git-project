@@ -27,7 +27,7 @@
      @click="toDetail"
      @animationend="animationend">
   <div class="ad-container">
-    <img :src="record.cover_image" mode="aspectFill" class="pic" />
+    <img :src="record.cover_image" mode="aspectFill" class="pic" @load="loadOver" @error="loadErr" />
     <div class="infos">
       <div class="name">
         <h3>{{record.name}}</h3>
@@ -78,6 +78,12 @@ export default {
       this.show = false
     },
     animationend () {
+      store.commit('SET_ADSTATE', false)
+    },
+    loadOver (e) {
+      this.$emit('load')
+    },
+    loadErr () {
       store.commit('SET_ADSTATE', false)
     }
   }

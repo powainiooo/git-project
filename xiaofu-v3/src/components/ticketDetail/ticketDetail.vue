@@ -131,8 +131,8 @@
   margin-right: 4px;
 }
 
-.buy-forms { width: 100%; height: 0; min-height: calc(100vh - 100px); transition: height .4s cubic-bezier(.3,.79,.41,.91); position: relative; overflow: hidden; }
-.buy-forms .buys-frame { width: 100%; position: absolute; left: 0; bottom: 0; }
+.buy-forms { width: 100%; height: 100vh; background-color: #EEEEEF; transition: top .5s cubic-bezier(.3,.79,.41,.91); position: fixed; top: 0; left: 0; z-index: 10; padding-top: 100px; box-sizing: border-box; }
+/*.buy-forms .buys-frame { width: 100%; position: absolute; left: 0; bottom: 0; }*/
 
 @keyframes moveUp {
   0% { transform: translateY(140px); opacity: 0; }
@@ -141,26 +141,24 @@
 </style>
 
 <template>
-<scroll-view
-  scroll-y
-  scroll-with-animation
-  :scroll-top="scrollTop"
-  @touchend="ontend"
-  @scroll="onScroll"
+<!--scroll-y-->
+<!--scroll-with-animation-->
+<!--:scroll-top="scrollTop"-->
+<!--@touchend="ontend"-->
+<!--@scroll="onScroll"-->
+<!--:style="{-->
+<!--height: (page === 'buy' ? buyHeight : 0) + 'px',-->
+<!--'min-height': (showInfos ? 'auto' : 'calc(100vh - 100px)')-->
+<!--}"-->
+<div
   class="c-ticket-detail">
 
-  <div class="buy-forms"
-       :style="{
-        height: (page === 'buy' ? buyHeight : 0) + 'px',
-        'min-height': (showInfos ? 'auto' : 'calc(100vh - 100px)')
-       }">
-    <div class="buys-frame" id="buyFrame">
-      <information @change="getValue" />
-      <c-select :list="record.price || []" @change="getValue" />
-    </div>
+  <div class="buy-forms" :style="{top: showInfos ? '-100vh' : 0}" @touchmove.stop="tmove">
+    <information @change="getValue" />
+    <c-select :list="record.price || []" @change="getValue" />
   </div>
 
-  <div v-show="showInfos">
+  <div>
   <infos ref="infos" :record="record"/>
 
   <artist ref="artist" :list="record.artist_list || []" />
@@ -174,7 +172,7 @@
     <div>{{price}}<span>RMB</span></div>
     <button @click="handleConfirm" :disabled="buyDisabled">购买</button>
   </div>
-</scroll-view>
+</div>
 </template>
 
 <script type='es6'>
@@ -241,27 +239,15 @@ export default {
     }
   },
   methods: {
+    tmove (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    },
     handleConfirm () {
       if (this.page === 'detail') {
-        if (this.buyHeight === 0) {
-          const query = wx.createSelectorQuery()
-          query.select('#buyFrame').boundingClientRect()
-          query.selectViewport().scrollOffset()
-          query.exec(res => {
-            console.log(res)
-            this.buyHeight = res[0].height
-            this.page = 'buy'
-            this.scrollTop = 0
-            this.$emit('toggle', this.page)
-          })
-        } else {
-          this.page = 'buy'
-          this.scrollTop = 0
-          this.$emit('toggle', this.page)
-        }
-        setTimeout(() => {
-          this.showInfos = false
-        }, 400)
+        this.page = 'buy'
+        this.$emit('toggle', this.page)
+        this.showInfos = false
       } else if (this.page === 'buy') {
         this.handleBuy()
       }
@@ -305,10 +291,12 @@ export default {
       this.page = 'detail'
     },
     getValue (data) {
-      if (data.key === 'cardNo') {
-        this.cardNo = data.value
-      } else {
-        this.formData[data.key] = data.value
+      for (const key in data) {
+        if (key === 'cardNo') {
+          this.cardNo = data[key]
+        } else {
+          this.formData[key] = data[key]
+        }
       }
     },
     onScroll (e) {

@@ -55,7 +55,7 @@
 <view class='hr16'></view>
 <view class="txtH100"><span class="lInfo">费用信息</span></view>
 <view class='txtH100'>商品合计：¥{{info.sphj / 100}}</view>
-<view class='txtH100'>运费：¥{{info.spyf}}</view>
+<view class='txtH100'>运费：¥{{info.spyf}}<image src='/images/ico_wh.png' bindtap='tipTap' class="kdfee_sm"></image></view>
 <view class='txtH100'>税费：¥{{info.shui_fei / 100}}</view>
 <view class='txtH100'>积分抵扣：¥{{info.dk_amount}}</view>
 <view class='txtH100'>实付：¥{{info.order_amount / 100}}</view>
@@ -93,4 +93,16 @@
     <view class='btn' hidden='{{info.status != 6&&info.status != 7}}' data-id='{{info.id}}' bindtap='bindDel'>删除订单</view>
   </view>
 </view>
+</view>
+
+<!-- 提示弹出层 -->
+<view class='TipMask' hidden='{{!isTip}}'>
+  <view class='tipBox'>
+    <view class='title'>提示</view>
+    <view style="font-size: 28rpx;color: #7b7b7b;margin: 30rpx 0 0;">收费规则:</view>
+    <text>{{info.kdfee_desc}}
+    </text>
+    <view style="font-size: 28rpx;color: #7b7b7b;margin: 0 0 20rpx;">{{info.kdfee_desc_2}}</view>
+    <view class='textBtn' bindtap='tipTap'>知道了</view>
+  </view>
 </view>

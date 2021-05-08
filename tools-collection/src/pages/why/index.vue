@@ -1,7 +1,7 @@
 <style scoped>
 .why-list li { padding: 40px 30px;  }
-.why-list li h3 { font-size: 26px; color: #3D7FC7; margin-bottom: 30px; }
-.why-list li div { font-size: 20px; color: #282828; line-height: 44px; }
+.why-list li h3 { font-size: 30px; color: #3D7FC7; margin-bottom: 30px; }
+.why-list li div { font-size: 26px; color: #282828; line-height: 44px; }
 .why-list li div span { color: #FF3600; }
 </style>
 

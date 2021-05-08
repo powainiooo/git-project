@@ -1,12 +1,12 @@
 <style scoped>
-.box1 { border: 2px solid #D4D4D4; border-radius: 4px; padding: 30px 20px; min-height: 294px; font-size: 24px; color: #666666; line-height: 40px; margin-bottom: 40px; }
+.box1 { border: 2px solid #D4D4D4; border-radius: 4px; padding: 30px 20px; min-height: 294px; font-size: 30px; color: #666666; line-height: 40px; margin-bottom: 40px; }
 .englist-tab { justify-content: flex-start; }
-.englist-tab li { width: 60px; font-size: 24px; margin-right: 50px; }
+.englist-tab li { width: 60px; font-size: 30px; margin-right: 50px; }
 .englist-tab li.active { color: #3366CC; border-bottom-color: #3366CC; }
 
-.box2 { min-height: 216px; background-color: #F9F9F9; border-radius: 4px; padding: 30px 20px; font-size: 24px; color: #666666; line-height: 40px; }
+.box2 { min-height: 216px; background-color: #F9F9F9; border-radius: 4px; padding: 30px 20px; font-size: 30px; color: #666666; line-height: 40px; }
 
-.e-title { height: 70px; padding-left: 38px; font-size: 24px; color: #3366CC; }
+.e-title { height: 70px; padding-left: 38px; font-size: 30px; color: #3366CC; }
 
 </style>
 
@@ -17,8 +17,8 @@
     <div class="ml30 mr30">
 
       <div class="between mt40 mb20">
-        <div class="f24 c-99" @click="toDay('pre')">前一天</div>
-        <div class="f24 c-99" @click="toDay('next')">后一天</div>
+        <div class="f30 c-99" @click="toDay('pre')">前一天</div>
+        <div class="f30 c-99" @click="toDay('next')">后一天</div>
       </div>
 
       <div class="box1">{{record.content}}</div>

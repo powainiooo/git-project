@@ -5,7 +5,7 @@
 .con-nav li.active:before { content: ''; width: 2px; height: 36px; border-radius: 0 10px 10px 0; background-color: #5FBD80; position: absolute; top: 35px; left: 0; }
 
 .con-details { margin: 15px 30px 30px 240px }
-.con-details p { font-size: 18px; color: #666666; line-height: 35px; margin-bottom: 30px; }
+.con-details p { font-size: 24px; color: #666666; line-height: 35px; margin-bottom: 30px; }
 </style>
 
 <template>

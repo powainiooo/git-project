@@ -66,6 +66,7 @@
             <FormItem>
               <tag-line title="开始时间" v-if="isEditor">{{formData.telephone}}</tag-line>
               <Input v-model="formData.telephone" placeholder="活动联系电话" v-else />
+              <div class="warnTxt" style="top: 4px; left: 106%" v-if="!phoneDisabled && formData.telephone !== ''"><span>请输入正确的电话！</span></div>
             </FormItem>
             <FormItem>
               <Input type="textarea"
@@ -177,8 +178,8 @@ export default {
         start_date: this.formData.start_date,
         name: this.formData.name,
         cover_image: url,
-        organizer_name: this.globalData.organizer_name,
-        logo: this.globalData.logo
+        organizer_name: this.globalData.merchant.organizer_name,
+        logo: this.globalData.merchant.logo
       }
     },
     phoneDisabled () {

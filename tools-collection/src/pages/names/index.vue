@@ -12,7 +12,7 @@
     <div class="blue-box" v-for="item in list" :key="index">
       <h3>{{item.xing}}姓</h3>
       <div>
-        <rich-text :nodes="item.content"></rich-text>
+        <rich-text :nodes="item.content" class="f30"></rich-text>
       </div>
     </div>
     <operates :id="id" />

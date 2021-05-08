@@ -13,7 +13,7 @@
     </div>
 
     <div class="tips-content" v-for="item in list" :key="index">
-      <p><rich-text :nodes="item.content"></rich-text></p>
+      <p><rich-text :nodes="item.content" class="f30"></rich-text></p>
     </div>
 
     <operates :id="id" />

@@ -2,10 +2,10 @@
 .c-search { margin-left: 30px; }
 .c-search-bar { width: 620px; height: 60px; border-radius: 30px; background-color: #F4F4F4; }
 .c-search-icon { width: 28px; margin-left: 20px; margin-right: 15px; }
-.c-search-bar input { width: 430px; height: 60px; line-height: 60px; font-size: 26px; margin-right: 40px; }
+.c-search-bar input { width: 430px; height: 60px; line-height: 60px; font-size: 30px; margin-right: 40px; }
 .c-search-bar button { border: none; background-color: transparent; width: 28px; height: 40px; line-height: 40px; }
 .c-search-bar button img { width: 100%; }
-.c-search-btn { font-size: 28px; color: #000000; background-color: transparent; }
+.c-search-btn { font-size: 30px; color: #000000; background-color: transparent; }
 </style>
 
 <template>

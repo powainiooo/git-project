@@ -25,7 +25,7 @@
 
 <template>
 <header class="c-header">
-  <img src="@/assets/img/logo.png" />
+  <img src="@/assets/img/logo.png" width="161" />
   <div class="c-header-right">
     <input />
     <a href="javascript:;" @click="openMenu"><img src="@/assets/img/ico-menu.png" /></a>

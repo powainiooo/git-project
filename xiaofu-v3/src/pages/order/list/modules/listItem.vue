@@ -22,6 +22,7 @@
 .c-ticket-item .imgs img {
   width: 100%;
   height: 100%;
+  filter: blur(3px);
 }
 .c-ticket-item .nums {
   width: 134px;
@@ -107,7 +108,7 @@
        hover-stay-time="10"
        @click="toDetail">
     <div class="imgs">
-      <img :src="record.cover_image" />
+      <img :src="record.cover_image" mode="aspectFill" />
     </div>
     <div class="nums">{{record.num}}</div>
     <div class="cover"></div>

@@ -9,7 +9,7 @@
 .result {  margin: 0 30px; position: relative; }
 .result .icon { width: 100px; position: absolute; top: 30px; left: 298px; }
 .result h3 { width: 100%; position: absolute; top: 160px; left: 0; font-size: 32px; color: #FFFFFF; text-align: center; }
-.result div { width: 100%; color: #FFFFFF; text-align: center; position: absolute; top: 236px; left: 0; font-size: 28px; }
+.result div { width: 100%; color: #FFFFFF; text-align: center; position: absolute; top: 236px; left: 0; font-size: 30px; }
 .result div span { font-size: 50px; }
 </style>
 
@@ -98,6 +98,13 @@ export default {
       if (this.money === '') {
         mpvue.showToast({
           title: '请输入金额',
+          icon: 'none'
+        })
+        return
+      }
+      if (this.key1 === this.key2) {
+        mpvue.showToast({
+          title: '同种币种无须转换',
           icon: 'none'
         })
         return

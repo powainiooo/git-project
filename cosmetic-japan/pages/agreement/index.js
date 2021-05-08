@@ -16,6 +16,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log('onload');
+    wx.showLoading({
+      title: '加载中',
+    })
 	  var url = urlPath + '/api/index/sm'
 	  appRequest({
 		  url: url,
@@ -27,8 +31,10 @@ Page({
 			  WxParse.wxParse('desc', 'html', _desc, this, 0);
 			  // this.setData({
 			  //   cont: res.data.data.help.content
-			  // })
-			  console.log('_desc',_desc)
+        // })
+        setTimeout(function () {
+          wx.hideLoading()
+        }, 2000)
 		  },
 	  })
   },
@@ -42,14 +48,14 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    console.log('onReady');
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    console.log('onShow');
   },
 
   /**

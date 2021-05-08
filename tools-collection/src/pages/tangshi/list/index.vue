@@ -2,7 +2,7 @@
 .ts-list li { padding: 28px 0 44px 0; display: flex; }
 .ts-list li .l { width: 150px; font-size: 26px; color: #666666; line-height: 40px; text-align: center; padding-top: 10px; }
 .ts-list li .r { width: 550px; margin-left: 50px; }
-.ts-list li .r h3 { font-size: 28px; color: #3D7FC7; margin-bottom: 12px; }
+.ts-list li .r h3 { font-size: 32px; color: #3D7FC7; margin-bottom: 12px; }
 .ts-list li .r p { font-size: 26px; line-height: 45px; }
 </style>
 
@@ -20,7 +20,7 @@
         </div>
         <div class="r">
           <h3>《{{item.title}}》</h3>
-          <rich-text :nodes="item.content"></rich-text>
+          <rich-text :nodes="item.content" class="f26"></rich-text>
         </div>
       </li>
     </ul>

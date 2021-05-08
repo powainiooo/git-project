@@ -1,7 +1,7 @@
 <style scoped>
 .story-content { margin: 30px; }
 .story-content h2 { font-size: 40px; color: #000000; margin-bottom: 20px; text-align: center; }
-.story-content div { font-size: 28px; line-height: 50px; }
+.story-content div { font-size: 30px; line-height: 50px; }
 </style>
 
 <template>

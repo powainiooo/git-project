@@ -72,21 +72,21 @@ export default {
     this.name = nameVal
     this.mobile = phoneVal
     this.cardNo = idnum
+    this.inputChange()
   },
   methods: {
     idChange (e) {
       const item = this.idTypeArr[e.mp.detail.value]
       this.identity_type = item.value
       this.placeholder = item.name
-      this.$emit('change', {
-        key: 'identity_type',
-        value: item.value
-      })
+      this.inputChange()
     },
-    inputChange (key) {
+    inputChange () {
       this.$emit('change', {
-        key,
-        value: this[key]
+        name: this.name,
+        mobile: this.mobile,
+        cardNo: this.cardNo,
+        identity_type: this.identity_type
       })
     }
   }

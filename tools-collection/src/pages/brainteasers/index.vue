@@ -1,7 +1,7 @@
 <style scoped>
 .bt-list li { padding: 30px 40px; }
-.bt-list li div { font-size: 26px; line-height: 42px; color: #282828; margin-bottom: 20px; }
-.bt-list li p { text-align: right; font-size: 24px; color: #282828; }
+.bt-list li div { font-size: 30px; line-height: 42px; color: #282828; margin-bottom: 20px; }
+.bt-list li p { text-align: right; font-size: 26px; color: #282828; }
 .bt-list li p span { color: #436CB3; }
 </style>
 

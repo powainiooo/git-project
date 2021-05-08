@@ -19,7 +19,7 @@
 <!--    </ul>-->
     <div class="formula-content">
       <h3>{{current.name}}</h3>
-      <rich-text :nodes="current.desc"></rich-text>
+      <rich-text :nodes="current.desc" class="f26"></rich-text>
     </div>
     <operates :id="id" />
   </div>

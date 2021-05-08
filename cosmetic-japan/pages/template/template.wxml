@@ -3,11 +3,13 @@
   <view class='getUserBox'>
     <view class='getUserInfo'>
       <view style='text-align:center;padding-top:20rpx;height:500rpx;'>
-        <view>你还未登录</view>
+        <view>您还未登录</view>
         <image src='/images/ico_tx.png' style='width:200rpx;height:200rpx;margin-top:20rpx;'></image>
       </view>
-       <view class="hint">授权登录即将代表同意"<navigator url="../agreement/index">服务协议</navigator>"和"<navigator url="../privacy/index">隐私协议</navigator>"</view>
-      <button class="getuserinfo" size='default' open-type="getUserInfo" bindgetuserinfo="getUserTap">立即登录</button>
+       <view class="hint">授权登录即将代表同意"<navigator url="../agreement/index" style="text-decoration:underline">服务协议</navigator>"和"<navigator url="../privacy/index" style="text-decoration:underline">隐私协议</navigator>"</view>
+      <!-- <button class="getuserinfo" size='default' open-type="getUserInfo" bindgetuserinfo="getUserTap">立即登录</button> -->
+      <button wx:if="1" class="getuserinfo" size='default'  bindtap="getUserProfile">立即登录</button>
+      <button wx:else class="getuserinfo" size='default'   open-type="getUserInfo" bindgetuserinfo="getUserTap">立即登录</button>
       <navigator url="/pages/index/index" hover-class="navigator-hover">
         <button type='warn' class="getuserinfo refuse" size='default'>暂不登录</button>
       </navigator>

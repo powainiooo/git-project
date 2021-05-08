@@ -1,8 +1,8 @@
 <style scoped>
 .mj-list li { padding: 40px 30px; }
-.mj-list li h2 { font-size: 26px; color: #3D7FC7; margin-bottom: 30px; text-align: center; }
-.mj-list li h3 { font-size: 20px; color: #FF3600; margin-bottom: 30px; text-align: right; margin-right: 65px; }
-.mj-list li div { font-size: 20px; color: #000000; line-height: 40px; padding-left: 80px; position: relative; }
+.mj-list li h2 { font-size: 30px; color: #3D7FC7; margin-bottom: 30px; text-align: center; }
+.mj-list li h3 { font-size: 26px; color: #FF3600; margin-bottom: 30px; text-align: right; margin-right: 65px; }
+.mj-list li div { font-size: 26px; color: #000000; line-height: 40px; padding-left: 90px; position: relative; }
 .mj-list li div:before { color: #FF3600; position: absolute; top: 0; left: 0; }
 .mj-list li div.n1:before { content: '【释义】'; }
 .mj-list li div.n2:before { content: '【延伸】'; }

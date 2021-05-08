@@ -1,8 +1,8 @@
 <style scoped>
 .ts-list li { padding: 28px 0 44px 0; display: flex; }
 .ts-list li .r { margin-left: 50px; }
-.ts-list li .r h3 { font-size: 28px; color: #3D7FC7; margin-bottom: 12px; }
-.ts-list li .r h3 span { font-size: 22px; color: #666666; margin-left: 50px; }
+.ts-list li .r h3 { font-size: 32px; color: #3D7FC7; margin-bottom: 12px; }
+.ts-list li .r h3 span { font-size: 26px; color: #666666; margin-left: 50px; }
 .ts-list li .r p { font-size: 26px; line-height: 45px; }
 </style>
 

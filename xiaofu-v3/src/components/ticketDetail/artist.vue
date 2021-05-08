@@ -43,7 +43,7 @@
 <template>
 <div class="artist-frame">
   <div class="c-ticket-title"><span>Artist</span>表演者</div>
-  <swiper previous-margin="25rpx" next-margin="416rpx" duration="100">
+  <swiper previous-margin="25rpx" next-margin="416rpx" duration="200" easing-function="easeOutCubic">
     <swiper-item v-for="(item, index) in list" :key="index">
       <div class="artist-item">
         <img :src="item.image_full_url" class="pic" />

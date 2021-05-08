@@ -5,6 +5,6 @@ page{background-color: #404040;}
 .ewm_top{padding: 38rpx 70rpx;font-size: 34rpx;color: #000;line-height: 100rpx;}
 .headImg{width: 86rpx;height: 86rpx;border-radius: 50%;border: 6rpx solid #f2f2f2;float: left;margin-right: 20rpx;}
 .ewm-cont{padding: 30rpx 70rpx;}
-.ewm-cont .img{width: 428rpx;height: 487rpx;padding:0 16rpx;}
+.ewm-cont .img{width: 428rpx;height: 428rpx;padding:0 16rpx;}
 .ewm-cont .txt{font-size: 24rpx;color: #666;text-align: center;}
 .ewm .btn1{background-color: #f04647;font-size: 36rpx;color: #fff;text-align: center;margin:0 70rpx 20rpx;line-height: 90rpx;border-radius: 8rpx;}

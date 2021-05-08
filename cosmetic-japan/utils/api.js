@@ -113,6 +113,7 @@ function reqUser(UserInfo, that,type){
 
 // 用户授权获取信息
 function getUser(that,type) {
+  console.log(789);
   wx.getSetting({
     success: (res) => {
       if (res.authSetting['scope.userInfo']) {
@@ -155,14 +156,15 @@ function getUser(that,type) {
 
 // 微信支付
 function wxPay(data){
+  console.log('支付参数',data.paySign);
   wx.requestPayment({
     'timeStamp': data.timeStamp,
     'nonceStr': data.nonceStr,
-    'package': data.package,
+    'package': 'prepay_id='+data.prepay_id,
     'signType': data.signType,
     'paySign': data.paySign,
     'success':  (res) => {
-
+      console.log('res',res);
       wx.showToast({
         title: '支付成功',
         icon: 'success',
@@ -175,6 +177,7 @@ function wxPay(data){
       },2000)
     },
     'fail': (res) => {
+      console.log('res',res);
       wx.showModal({
         title: '提示',
         content: '支付失败，是否重新发起支付？',
@@ -203,5 +206,6 @@ function wxPay(data){
 module.exports = {
   post: post,
   getUser: getUser,
+  reqUser:reqUser,
   wxPay: wxPay
 }

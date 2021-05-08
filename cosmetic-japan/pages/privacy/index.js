@@ -16,6 +16,9 @@ Page({
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: function (options) {
+		wx.showLoading({
+      title: '加载中',
+    })
 		var url = urlPath + '/api/index/sm'
 		appRequest({
 			url: url,
@@ -28,7 +31,9 @@ Page({
 				// this.setData({
 				//   cont: res.data.data.help.content
 				// })
-				console.log('_desc',_desc)
+				setTimeout(function () {
+          wx.hideLoading()
+        }, 2000)
 			},
 		})
 	},

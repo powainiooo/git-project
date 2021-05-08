@@ -30,7 +30,8 @@ Page({
     jf_status:0,
     yhq_status:0,
 	  cardImg1: '',
-	  cardImg2: '',
+    cardImg2: '',
+    isTip:''
   },
 
   // 打开优惠券弹窗
@@ -41,7 +42,11 @@ Page({
       })
     }
   },
-
+  tipTap: function () {
+    this.setData({
+      isTip: !this.data.isTip
+    })
+  },
   // 关闭优惠券
   isCloseTap:function(){
     var index = this.data.select;

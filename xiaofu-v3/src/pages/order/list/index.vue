@@ -52,10 +52,10 @@
   <div class="order-container">
     <div class="title"><span>Order center</span>已购票务</div>
     <div class="order-list">
-      <template v-for="(key, i) in list">
+      <div v-for="(key, i) in list" :key="i">
       <div class="years">{{i}}</div>
       <c-list-item v-for="(item, i2) in key" :record="item" :key="i2" />
-      </template>
+      </div>
     </div>
   </div>
 </div>

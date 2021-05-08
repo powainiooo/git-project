@@ -21,8 +21,9 @@
     "checkSiteMap": true,
     "uploadWithSourceMap": true,
     "compileHotReLoad": false,
-    "useMultiFrameRuntime": false,
+    "useMultiFrameRuntime": true,
     "useApiHook": true,
+    "useApiHostProcess": true,
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
@@ -39,8 +40,8 @@
     "minifyWXSS": true
   },
   "compileType": "miniprogram",
-  "libVersion": "2.2.3",
-  "appid": "wx654a6f041b744138",
+  "libVersion": "2.16.0",
+  "appid": "wx5dea44a99897f9ea",
   "projectname": "haiwaiMall",
   "isGameTourist": false,
   "simulatorType": "wechat",
@@ -106,10 +107,10 @@
           "query": "id=55"
         },
         {
-          "id": 9,
           "name": "订单结算",
           "pathName": "pages/orderAccount/index",
-          "query": "kj_uid=140"
+          "query": "",
+          "scene": null
         },
         {
           "id": -1,
@@ -178,6 +179,12 @@
           "name": "首页分享给我的",
           "pathName": "pages/index/index",
           "query": "mid=7&fxs_id=3896",
+          "scene": null
+        },
+        {
+          "name": "订单详情",
+          "pathName": "pages/myOrderDetail/index",
+          "query": "id=59256",
           "scene": null
         }
       ]

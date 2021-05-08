@@ -10,6 +10,9 @@
 .rec-list { margin: 0 -20px 40px -20px; overflow-x: auto; }
 .rec-list .tool-item { margin-left: 20px; margin-right: 20px; }
 .rec-frame { display: flex; }
+view, input {
+    font-size: 30rpx;
+}
 </style>
 
 <template>

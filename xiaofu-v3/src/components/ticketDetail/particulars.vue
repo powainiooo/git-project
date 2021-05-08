@@ -25,7 +25,7 @@
 <template>
 <div>
   <div class="c-ticket-title"><span>Particulars</span>详情</div>
-  <swiper previous-margin="58rpx" next-margin="35rpx" duration="200" style="min-height: 640rpx;">
+  <swiper previous-margin="58rpx" next-margin="35rpx" duration="300" easing-function="easeOutCubic" style="min-height: 640rpx;">
     <swiper-item v-for="(item, i) in list" :key="i">
       <div class="parti-item">
         <img :src="item.image_full_url" class="pic" />

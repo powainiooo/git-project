@@ -14,7 +14,7 @@
 
       <div class="et-title">{{record.name}}</div>
       <div class="ml30 mr30 mb30">
-        <rich-text :nodes="record.desc"></rich-text>
+        <rich-text :nodes="record.desc" class="f30"></rich-text>
       </div>
     </template>
     <operates :id="id2" />

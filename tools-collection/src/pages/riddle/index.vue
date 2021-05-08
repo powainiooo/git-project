@@ -2,7 +2,7 @@
 .riddle-item { padding: 40px 60px; }
 .riddle-item h3 { font-size: 30px; color: #3D7FC7; margin-bottom: 20px; text-align: center; }
 .riddle-item h4 { font-size: 26px; color: #666666; margin-bottom: 50px; text-align: center; }
-.riddle-item div { font-size: 26px; line-height: 40px; }
+.riddle-item div { font-size: 30px; line-height: 40px; }
 .riddle-item div span { color: #3D7FC7; }
 </style>
 

@@ -15,15 +15,15 @@
         <div class="menu-item">
           <h4>{{item.cp_name}}</h4>
           <h5>【做法】</h5>
-          <p><rich-text :nodes="item.zuofa"></rich-text></p>
+          <p><rich-text :nodes="item.zuofa" class="f26"></rich-text></p>
           <h5>【特性】</h5>
-          <p><rich-text :nodes="item.texing"></rich-text></p>
+          <p><rich-text :nodes="item.texing" class="f26"></rich-text></p>
           <h5>【提示】</h5>
-          <p><rich-text :nodes="item.tishi"></rich-text></p>
+          <p><rich-text :nodes="item.tishi" class="f26"></rich-text></p>
           <h5>【调料】</h5>
-          <p><rich-text :nodes="item.tiaoliao"></rich-text></p>
+          <p><rich-text :nodes="item.tiaoliao" class="f26"></rich-text></p>
           <h5>【原料】</h5>
-          <p><rich-text :nodes="item.yuanliao"></rich-text></p>
+          <p><rich-text :nodes="item.yuanliao" class="f26"></rich-text></p>
         </div>
       </template>
     </div>

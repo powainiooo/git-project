@@ -1,14 +1,14 @@
 <style scoped>
 .loan-form { margin-bottom: 70px; }
 .loan-form-item { display: flex; align-items: center; margin-bottom: 18px; }
-.loan-form-item .l { width: 180px; font-size: 24px; margin-right: 14px; text-align: right; }
-.loan-form-item .r { width: 506px; font-size: 24px; position: relative; }
-.loan-form-item .r .ip { width: 100%; height: 56px; border: 2px solid #EEEEEE; font-size: 20px; color: #666666; padding: 0 12px; }
-.loan-form-item .r .unit { font-size: 20px; color: #666666; position: absolute; top: 12px; right: 12px; }
+.loan-form-item .l { width: 180px; font-size: 30px; margin-right: 14px; text-align: right; }
+.loan-form-item .r { width: 506px; font-size: 30px; position: relative; }
+.loan-form-item .r .ip { width: 100%; height: 56px; border: 2px solid #EEEEEE; font-size: 26px; color: #666666; padding: 0 12px; }
+.loan-form-item .r .unit { font-size: 26px; color: #666666; position: absolute; top: 12px; right: 12px; }
 .loan-form-item .r button { width: 200px; margin-right: 20px; margin-left: 0; }
 .loan-form p.hint { font-size: 16px; color: #B8ABAB; margin-top: 15px; margin-bottom: 18px; margin-left: 180px; }
 
-.loan-title { font-size: 28px; color: #000000; margin-bottom: 20px; }
+.loan-title { font-size: 30px; color: #000000; margin-bottom: 20px; }
 
 .loan-table { margin: 0 60px 20px 60px; }
 .loan-head { height: 56px; background-color: #FFA801; font-size: 22px; color: #FFFFFF; padding: 0 22px; display: flex; align-items: center; }
@@ -16,18 +16,18 @@
 .loan-list:after { content: ''; width: 200%; height: 200%; border: 2px solid #E8E8E8; transform-origin: 0 0; transform: scale(.5); position: absolute; top: 0; left: 0; }
 .loan-list1 { height: 128px; display: flex; align-items: center; }
 .loan-list1 li { flex: 1; }
-.loan-list1 li p { font-size: 22px; margin-bottom: 20px; text-align: center; }
-.loan-list1 li p span { font-size: 24px; color: #000000; }
-.loan-list1 li div { font-size: 22px; color: #000000; text-align: center; }
+.loan-list1 li p { font-size: 24px; margin-bottom: 20px; text-align: center; }
+.loan-list1 li p span { font-size: 26px; color: #000000; }
+.loan-list1 li div { font-size: 24px; color: #000000; text-align: center; }
 
 .loan-list2 { display: flex; }
 .loan-list2 .l { width: 44%; position: relative; padding: 30px; }
 .loan-list2 .l:after { content: ''; width: 2px; height: 100%; position: absolute; top: 0; right: 0; background-color: #E8E8E8; transform: scaleX(.5); }
-.loan-list2 .l div { font-size: 22px; margin-bottom: 20px; }
+.loan-list2 .l div { font-size: 24px; margin-bottom: 20px; }
 .loan-list2 .l div span { color: #878787; margin-left: 15px; }
-.loan-list2 .l p { font-size: 22px; margin-bottom: 20px; color: #3D7FC7; }
+.loan-list2 .l p { font-size: 24px; margin-bottom: 20px; color: #3D7FC7; }
 .loan-list2 .r { width: 56%; position: relative; padding: 24px 0 24px 50px; }
-.loan-list2 .r div { font-size: 20px; margin-bottom: 20px; }
+.loan-list2 .r div { font-size: 24px; margin-bottom: 20px; }
 .loan-list2 .r div span { margin-left: 60px; }
 </style>
 

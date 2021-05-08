@@ -31,3 +31,53 @@ page{background-color: #f3f3f3;}
 .spell-red {
   color: #E60012;
 }
+
+.kdfee_sm {
+  width: 32rpx;
+  height: 32rpx;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 10rpx;
+}
+
+.TipMask{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 999999999;
+  overflow: hidden;
+}
+
+.TipMask .tipBox{
+  width: 56%;
+  background-color: #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  padding: 50rpx 60rpx 40rpx;
+  border-radius: 6rpx;
+}
+
+.TipMask .tipBox .title {
+  font-size: 36rpx;
+  color: #373737;
+  font-weight: 400;
+}
+
+
+.TipMask .tipBox text{
+  font-size: 28rpx;
+  color: #7b7b7b;
+  margin: 0 0 15rpx;
+  display: block;
+}
+
+.TipMask .tipBox .textBtn{
+  font-size: 28rpx;
+  color: #4db53c;
+  text-align: right;
+}

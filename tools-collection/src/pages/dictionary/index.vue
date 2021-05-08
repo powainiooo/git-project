@@ -12,7 +12,7 @@
 .word-list { display: flex; flex-wrap: wrap; margin: 30px -15px; }
 .word-list li { background-color: #F7F7F7; height: 54px; line-height: 54px; padding: 0 26px; border-radius: 10px; font-size: 24px; color: #656565; margin: 0 15px 30px 15px; }
 
-.word-bg { font-size: 18px; color: #656565; padding: 35px 25px; line-height: 50px; }
+.word-bg { font-size: 26px; color: #656565; padding: 35px 25px; line-height: 50px; }
 </style>
 
 <template>

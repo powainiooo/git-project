@@ -4,11 +4,11 @@
 .line2 { width: 100%; position: absolute; top: 224px; left: 0; }
 .line2 img { width: 320px; margin-right: 32px; }
 .line2 h3 { font-size: 130px; line-height: 130px; margin-bottom: 16px; color: #FFFFFF; }
-.line2 p { font-size: 22px; line-height: 22px; color: #FFFFFF; margin-left: 20px; }
+.line2 p { font-size: 28px; line-height: 22px; color: #FFFFFF; margin-left: 20px; }
 .wet-list { margin: 40px 30px; }
 .wet-list li { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
-.wet-list li div { display: flex; align-items: center; font-size: 24px; color: #999999; }
-.wet-list li div span { color: #333333; margin-right: 20px; }
+.wet-list li div { display: flex; align-items: center; font-size: 30px; color: #999999; }
+.wet-list li div span { color: #333333; margin-right: 26px; }
 .wet-list li div img { width: 44px; margin-right: 10px; }
 </style>
 
@@ -21,7 +21,7 @@
       <img :src="imgSrc + record.wid_img" mode="widthFix" />
       <div>
         <h3>{{record.temperature}}°</h3>
-        <p>21° - 32°</p>
+        <p>{{record.low}}° - {{record.height}}°</p>
       </div>
     </div>
     <ul class="wet-list">

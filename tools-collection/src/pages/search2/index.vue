@@ -2,14 +2,14 @@
 .title { font-size: 32px; color: #2C2C2C; }
 
 .pos-list { display: flex; flex-wrap: wrap; margin: 0 50px; }
-.pos-list li { border-radius: 16px; background-color: #F2F2F2; margin: 0 20px 20px 0; font-size: 24px; color: #656565; padding: 0 24px; height: 54px; display: flex; align-items: center; }
+.pos-list li { border-radius: 16px; background-color: #F2F2F2; margin: 0 20px 20px 0; font-size: 30px; color: #656565; padding: 0 24px; height: 54px; display: flex; align-items: center; }
 </style>
 
 <template>
   <div class="container">
     <div class="hr20"></div>
     <div class="mt120">
-      <c-search ref="search" placeholder="请输入关键词搜索例如：银行、超市" @search="onSearch" />
+      <c-search ref="search" placeholder="关键词搜索例如：银行、超市" @search="onSearch" />
     </div>
 
     <div class="title acenter mt90 mb60 ml50">

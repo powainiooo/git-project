@@ -209,7 +209,7 @@ Page({
         wx.requestPayment({
             'timeStamp': data.timeStamp,
             'nonceStr': data.nonceStr,
-            'package': data.package,
+            'package': 'prepay_id='+data.prepay_id,
             'signType': data.signType,
             'paySign': data.paySign,
             'success': (res) => {
@@ -225,11 +225,15 @@ Page({
                     ajaxBool: false,
                     fukuanBool: true
                 })
-                if(obj.id && obj.type == 4){
-                    wx.redirectTo({
-                      url: '../paySuccess/index?id='+obj.id,
+                if(obj.id){
+                    var num = 4;
+                    var listAll = this.data.listAll;
+                    this.setData({
+                        navIndex: num,
+                        list: [],
+                        page: 1,
+                        ajaxBool: false
                     })
-                    return
                 }
                 this.ajaxList()
                 console.log('支付成功', this.data.fukuanBool)
@@ -264,6 +268,7 @@ Page({
                 id: id,
                 type: e.currentTarget.dataset.type
             }
+            console.log('obj',obj);
             var url = urlPath + '/api/index/again_pay'
             appRequest({
                 url: url,
@@ -420,12 +425,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
-        if (options.type == 21){
-            this.setData({
-                navIndex: 21
-            })
-        }
-        this.ajaxList()
+        
     },
 
     /**
@@ -439,7 +439,14 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function() {
-
+        var listAll = this.data.listAll;
+        this.setData({
+            list: [],
+            page: 1,
+            ajaxBool: false
+        })
+        console.log('onshow重新加载');
+        this.ajaxList()
     },
 
     /**

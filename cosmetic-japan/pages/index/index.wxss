@@ -14,8 +14,9 @@
    margin-top: 10rpx;
 }
 .indexSearch .logo {
-   width: 100rpx;
-   margin-top: 20rpx;
+   width: 119rpx;
+   height: 33rpx;
+   margin-top: 27rpx;
    margin-right: 20rpx;
 }
 .indexSearch .btn-type {

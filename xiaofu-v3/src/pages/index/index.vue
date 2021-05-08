@@ -13,7 +13,7 @@
 </style>
 
 <template>
-  <div>
+  <div v-if="showPage">
     <c-header
       ref="header"
       @close="handleClose"
@@ -25,7 +25,7 @@
       @change="changeStatus"
       @search="handleSearch" v-if="!showAd" />
 
-    <c-ads ref="ad" :record="coverData" v-if="coverData && showAd" />
+    <c-ads ref="ad" :record="coverData" @load="doCount" v-if="coverData && showAd" />
 
     <template v-if="!showAd">
       <div class="index-container" v-if="isSearch">
@@ -77,6 +77,7 @@ export default {
   },
   data () {
     return {
+      showPage: true,
       status: '',
       date: '',
       keyword: '',
@@ -97,15 +98,10 @@ export default {
       return store.state.showAd
     }
   },
-  watch: {
-    coverData (val) {
-      console.log('coverData', val)
-      if (val.id) {
-        this.$refs.header.count()
-      }
-    }
-  },
   methods: {
+    doCount () {
+      this.$refs.header.count()
+    },
     skipDone () {
       this.$refs.header.showSkip = false
       this.$refs.header.showCity = true
@@ -127,7 +123,6 @@ export default {
       this.changeStatus('search')
     },
     handleClose (e) {
-      console.log('handleClose', e, this.status)
       this.$refs.search.reset()
       this.keyword = ''
       this.date = ''
@@ -168,6 +163,10 @@ export default {
   onShow () {
     // let app = getApp()
     this.getData()
+    this.showPage = false
+    this.$nextTick(() => {
+      this.showPage = true
+    })
   }
 }
 </script>

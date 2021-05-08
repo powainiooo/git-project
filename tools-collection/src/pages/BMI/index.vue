@@ -3,8 +3,8 @@
 .ad img { width: 100%; display: block; }
 
 .inputs { margin: 0 30px 56px 30px; }
-.inputs span { width: 100px; display: block; margin-left: 30px; font-size: 28px; color: #000000; }
-.inputs input[type=digit] { width: 200px; height: 60px; border-radius: 4px; background-color: #F4F4F4; padding: 0 24px; font-size: 28px; color: #000000; }
+.inputs span { width: 100px; display: block; margin-left: 30px; font-size: 30px; color: #000000; }
+.inputs input[type=digit] { width: 200px; height: 60px; border-radius: 4px; background-color: #F4F4F4; padding: 0 24px; font-size: 30px; color: #000000; }
 
 .btn-test { width: 290px; border-radius: 10px; margin-bottom: 52px; }
 
@@ -15,7 +15,7 @@
 .table .tbody .tr li { flex: 1; display: flex; justify-content: center; align-items: center; font-size: 20px; color: #000000; text-align: center; padding: 0 15px; }
 
 .bmi-result { margin: 30px 38px; }
-.bmi-result p { font-size: 22px; color: #720BE1; line-height: 1.6; }
+.bmi-result p { font-size: 30px; color: #720BE1; line-height: 1.6; }
 </style>
 
 <template>

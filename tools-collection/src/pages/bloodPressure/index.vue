@@ -7,13 +7,13 @@
     <div class="hr20"></div>
     <div class="consult-frame">
       <div class="blue-frame mb30">
-        <h3>正常血压</h3>
-        <p>{{record.normal}}</p>
+        <h3 class="f30">正常血压</h3>
+        <p class="f30">{{record.normal}}</p>
       </div>
       <div class="blue-frame mb60">
-        <h3>异常血压</h3>
-        <p>（1）高血压：{{record.high}}</p>
-        <p>（2）低血压：{{record.low}}</p>
+        <h3 class="f30">异常血压</h3>
+        <p class="f30">（1）高血压：{{record.high}}</p>
+        <p class="f30">（2）低血压：{{record.low}}</p>
       </div>
 
       <div class="title1">中国人的平均正常血压参考值：</div>

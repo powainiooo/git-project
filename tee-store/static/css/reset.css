@@ -1,5 +1,8 @@
-page { color: #333333; font-size: 24rpx; font-family: Microsoft YaHei,tahoma,arial,Hiragino Sans GB,sans-serif; box-sizing: border-box; }
-view,input { box-sizing: border-box; font-size: 24rpx; }
+page { color: #41372D; font-size: 24rpx; font-family: Microsoft YaHei,tahoma,arial,Hiragino Sans GB,sans-serif; box-sizing: border-box; }
+view,input { box-sizing: border-box; }
+
+button { margin: 0; padding: 0; background-color: transparent; border: none; }
+button:after { border: none; }
 
 .ovh { overflow: hidden; }
 

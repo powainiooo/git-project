@@ -1,5 +1,6 @@
 //index.js
 const api = require('../../utils/api.js');
+import {getParams} from '../../utils/util'
 //获取应用实例
 const app = getApp();
 var www = app.globalData.www;
@@ -28,7 +29,13 @@ Page({
     * 生命周期函数--监听页面加载
     */
    onLoad: function (options) {
-		 console.log(123,options);
+		 console.log(1234,options);
+		 if (options.scene) {
+		 	const scene = decodeURIComponent(options.scene)
+			 console.log('scene', scene)
+			 const params = getParams(scene)
+			 app.setMid(params.mid)
+		 }
    	if (options.mid) {
    		app.setMid(options.mid)
 	   }

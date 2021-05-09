@@ -26,7 +26,18 @@ const formatNumber = n => {
   return n[1] ? n : '0' + n
 }
 
+const getParams = str => {
+	const list = str.split('&')
+	const obj = {}
+	for (let i of list) {
+		const q = i.split('=')
+		obj[q[0]] = q[1]
+	}
+	return obj
+}
+
 module.exports = {
   formatTime: formatTime,
-  fTime: fTime
+  fTime: fTime,
+	getParams
 }

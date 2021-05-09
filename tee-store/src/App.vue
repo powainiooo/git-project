@@ -15,5 +15,6 @@ export default {
 
 <style>
 @import "../static/css/reset.css";
-.container { background: linear-gradient(0deg, #FFFFFF 0%, #EADED0 100%); min-height: 100vh; }
+</style>
+<style src="../static/css/common.css">
 </style>

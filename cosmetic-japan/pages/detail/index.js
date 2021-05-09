@@ -1,6 +1,7 @@
 // pages/detail/index.js
 const api = require('../../utils/api.js');
 import common from '../../utils/common'
+import {getParams} from '../../utils/util'
 //获取应用实例
 const app = getApp();
 var www = app.globalData.www;
@@ -82,7 +83,7 @@ Page({
           success: (res) => {
             console.log(res);
             var UserInfo = res.userInfo;
-            
+
             that.saveuserinfo(UserInfo)
           }
         })
@@ -397,6 +398,13 @@ Page({
      */
     onLoad: function(options) {
         console.log(11,options);
+	    if (options.scene) {
+		    const scene = decodeURIComponent(options.scene)
+		    console.log('scene', scene)
+		    const params = getParams(scene)
+		    app.setMid(params.mid)
+		    app.setFxsId(params.fxs_id,params.mid)
+	    }
 	    if (options.mid) {
 		    app.setMid(options.mid)
 	    }

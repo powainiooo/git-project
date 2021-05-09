@@ -102,7 +102,7 @@
       <div class="names">
         <h3>{{item.name}}</h3>
         <div class="between">
-          <span>{{item.num}}</span>1张
+          <span>{{item.num}}</span>张
         </div>
       </div>
       <div class="nums">{{item.sold_num}}</div>

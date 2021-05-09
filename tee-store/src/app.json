@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/stores/main",
     "pages/index/main",
     "pages/logs/main"
   ],
@@ -8,5 +9,10 @@
     "navigationBarBackgroundColor": "#EADED0",
     "navigationBarTitleText": "",
     "navigationBarTextStyle": "black"
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "获取当前用户所在位置，以便定位。"
+    }
   }
 }

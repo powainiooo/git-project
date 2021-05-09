@@ -147,7 +147,7 @@
           <div>{{dates.day}}</div>
         </div>
         <div class="c-ticket-header-titles">
-          <p>{{record.name}}</p>
+          <p>{{record.name === '' ? '活动名称' : record.name}}</p>
           <div>{{record.organizer_name}}</div>
         </div>
       </div>

@@ -10,6 +10,7 @@ var glob = require('glob')
 var CopyWebpackPlugin = require('copy-webpack-plugin')
 var relative = require('relative')
 
+
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }

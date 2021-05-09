@@ -93,7 +93,7 @@ button:after {
   bottom: 0;
 }
 
-.hscale { transition: all 0.15s ease-out; transform: scale(0.95);}
+.hscale { transition: all 0.15s ease-out; transform: scale(0.95); }
 
 @keyframes slideUp {
   0% { transform: translateY(100px); opacity: 0; }

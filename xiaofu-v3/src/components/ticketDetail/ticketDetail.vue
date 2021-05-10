@@ -154,7 +154,7 @@
   class="c-ticket-detail">
 
   <div class="buy-forms" :style="{top: showInfos ? '-100vh' : 0}" @touchmove.stop="tmove">
-    <information @change="getValue" />
+    <information :needIDcard="record.id_card_flag === 1" @change="getValue" />
     <c-select :list="record.price || []" @change="getValue" />
   </div>
 
@@ -204,11 +204,22 @@ export default {
     }
   },
   computed: {
+    idCardReg () {
+      const reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/
+      return reg.test(this.cardNo)
+    },
+    mobileReg () {
+      const reg = /^[1][3,4,5,6,7,8][0-9]{9}$/
+      return reg.test(this.formData.mobile)
+    },
     buyDisabled () {
       if (this.page === 'detail') {
         return false
       }
-      if (this.formData.name === '' || this.formData.mobile === '' || this.cardNo === '' || this.formData.price_id === '') {
+      if (this.formData.name === '' || !this.mobileReg || this.formData.price_id === '') {
+        return true
+      }
+      if (this.record.id_card_flag === 1 && !this.idCardReg) {
         return true
       }
       return false
@@ -273,9 +284,7 @@ export default {
             mpvue.setStorageSync('nameVal', params.name)
             mpvue.setStorageSync('phoneVal', params.mobile)
             mpvue.setStorageSync('idnum', params.id_card_no)
-            mpvue.reLaunch({
-              url: '/pages/result/main?result=success'
-            })
+            this.getMessageAuth()
           },
           'fail': err => {
             console.log('pay fail', err)
@@ -301,6 +310,32 @@ export default {
     },
     onScroll (e) {
       this.scrollTop = ''
+    },
+    getMessageAuth () {
+      console.log('发起订阅消息')
+      wx.requestSubscribeMessage({
+        tmplIds: [
+          'WRge3txz54ZhpQ4md9mG0RHSdLSaMlcuW5TPTWUi_Xk',
+          'Qr4BpwVZGPkOYqBHpPDryPuDZkmYoEEDPY-VMBpOGR8',
+          'BCUfqqnuvWiwzYjvcQDKEUumjXsMioiEBKzl3chuE_w'
+        ],
+        success (res) {
+          console.log('订阅消息成功')
+          console.log(res)
+          console.log('--------------------')
+          mpvue.reLaunch({
+            url: `/pages/result/main?result=success`
+          })
+        },
+        fail (err) {
+          console.log('订阅消息失败')
+          console.log(err)
+          console.log('--------------------')
+          mpvue.reLaunch({
+            url: `/pages/result/main?result=success`
+          })
+        }
+      })
     }
   }
 }

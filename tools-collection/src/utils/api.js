@@ -36,7 +36,7 @@ const ajax = (opts, autoMsg = true) => {
           })
         } else {
           if (autoMsg) {
-            mpvue.showToast({ title: res.data.msg, icon: 'none' })
+            mpvue.showToast({ title: res.data.message, icon: 'none' })
           }
         }
         wx.hideNavigationBarLoading()

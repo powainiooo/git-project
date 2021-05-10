@@ -9,7 +9,7 @@
     <c-search placeholder="输入宠物品种名称" @search="onSearch"/>
   </div>
 
-  <div class="blue-box" v-for="item in list" :key="index">
+  <div class="blue-box" v-for="item in list" :key="index" v-if="list.length > 0">
     <h3>{{item.name}}</h3>
     <div>
       <p><rich-text :nodes="item.feature" class="f30"></rich-text></p>
@@ -55,8 +55,8 @@ export default {
           this.list = this.list.concat(res.data)
           this.loadOver = res.data.length === 0
           this.showResult = true
-
           if (res.data.length === 0 && this.page === 1) {
+            this.list = []
             mpvue.showToast({
               title: '未查询到数据',
               icon: 'none'

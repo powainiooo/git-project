@@ -29,7 +29,7 @@
                @confirm="inputChange('mobile')" />
       </div>
     </li>
-    <li>
+    <li v-if="needIDcard">
       <div class="rank"><img :src="'/static/images/number/3.png'" mode="heightFix" /></div>
       <div class="content">
         <input :placeholder="placeholder"
@@ -50,6 +50,12 @@
 <script type='es6'>
 export default {
   name: 'app',
+  props: {
+    needIDcard: {
+      type: Boolean,
+      default: true
+    }
+  },
   data () {
     return {
       name: '',

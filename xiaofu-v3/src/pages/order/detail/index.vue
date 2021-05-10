@@ -53,14 +53,14 @@
 
 <template>
 <div>
-  <c-header ref="header" />
+  <c-header ref="header" @close="handleClose" />
   <div class="order-detail">
     <ul class="navs-dot">
       <li v-for="(i, index) in orderList" :key="i" :class="{'active': activeIndex === index}"></li>
     </ul>
     <swiper class="swiper" @change="swiperChange">
       <swiper-item v-for="(item, i) in orderList" :key="i">
-        <order-item :record="item" />
+        <order-item :record="item" :ticketName="record.ticket_name" />
       </swiper-item>
     </swiper>
     <div class="infos bBorder">
@@ -100,6 +100,11 @@ export default {
   },
 
   methods: {
+    handleClose () {
+      mpvue.navigateBack({
+        delta: -1
+      })
+    },
     swiperChange (e) {
       console.log('swiperChange', e)
       this.activeIndex = e.mp.detail.current

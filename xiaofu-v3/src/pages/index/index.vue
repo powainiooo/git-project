@@ -1,5 +1,5 @@
 <style scoped>
-.index-container { margin: 260px 25px 50px 25px; display: flex; flex-wrap: wrap; justify-content: space-between; overflow-x: hidden; }
+.index-container { margin: 260px 25px 50px 25px; display: flex; flex-wrap: wrap; justify-content: space-between; }
 .item-small { width: 340px; margin-bottom: 20px; }
 .item-large { width: 100%; margin-bottom: 20px; }
 .index-container .item { animation: scaleIn .4s cubic-bezier(.14,.66,.57,1.26) both; }
@@ -13,7 +13,7 @@
 </style>
 
 <template>
-  <div v-if="showPage">
+  <div v-if="showPage" style=" overflow-x: hidden;">
     <c-header
       ref="header"
       @close="handleClose"

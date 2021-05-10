@@ -111,6 +111,7 @@ export default {
             params.id = this.id
           }
           console.log('params', params)
+          // return false
           this.isAjax = true
           postAction(url, params).then(res => {
             if (res.code === 1) {

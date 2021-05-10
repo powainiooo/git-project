@@ -80,7 +80,7 @@
   <img :src="record.cover_image" class="banner" :class="{'banner-hide': page === 'buy'}" v-if="showBanner && record" />
   <div class="line1 bBorder">
     <tk-info :record="infoData" />
-    <img :src="record.logo" v-if="record" />
+    <img :src="record.logo" mode="aspectFill" v-if="record" />
   </div>
   <div class="line2 bBorder">
     <ul class="times">
@@ -103,6 +103,10 @@ export default {
       default: () => {}
     },
     page: String,
+    nameKey: {
+      type: String,
+      default: 'name'
+    },
     showBanner: {
       type: Boolean,
       default: true
@@ -118,7 +122,7 @@ export default {
       let host = ''
       if (this.record) {
         date = this.record.start_date.split('-')
-        name = this.record.name
+        name = this.record[this.nameKey]
         host = this.record.organizer_name
       }
       return {

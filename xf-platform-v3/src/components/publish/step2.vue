@@ -294,6 +294,7 @@ export default {
     addTicket () {
       this.ticketList.push({
         type: 'diy',
+        check: true,
         name: '',
         price: '',
         num: '',
@@ -311,9 +312,11 @@ export default {
     getParams () {
       const ts = []
       for (const t of this.ticketList) {
-        delete t.type
-        delete t.check
-        ts.push(t)
+        if (t.check) {
+          delete t.type
+          delete t.check
+          ts.push(t)
+        }
       }
       const params = { ...this.formData }
       params.ticket_prices = JSON.stringify(ts)

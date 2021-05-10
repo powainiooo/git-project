@@ -115,14 +115,20 @@
 <div class="c-order-item">
   <div class="c-order-item-top">
     <div class="line1">
-      <img src="/static/images/img.jpg" />
-<!--      <p class="en">Checked</p>-->
-<!--      <p>已使用</p>-->
+      <img :src="record.qrcode_url" v-if="record.state === 0" />
+      <template v-else-if="record.state === 1">
+      <p class="en">Checked</p>
+      <p>已使用</p>
+      </template>
+      <template v-else-if="record.state === 2">
+      <p class="en">Expired</p>
+      <p>已过期</p>
+      </template>
     </div>
-    <div class="line2">0016659884321</div>
+    <div class="line2">{{record.code}}</div>
   </div>
   <div class="c-order-item-bottom">
-    <infos :record="record" :showBanner="false" />
+    <infos :record="infoData" nameKey="ticketName" :showBanner="false" />
     <div class="line1 bBorder">
       <div>{{record.name}}</div>
       <p>{{record.phone}}</p>
@@ -139,10 +145,19 @@ import infos from '@/components/ticketDetail/infos'
 export default {
   name: 'app',
   props: {
-    record: Object
+    record: Object,
+    ticketName: String,
   },
   components: {
     infos
+  },
+  computed: {
+    infoData () {
+      return {
+        ticketName: this.ticketName,
+        ...this.record
+      }
+    }
   },
   data () {
     return {}

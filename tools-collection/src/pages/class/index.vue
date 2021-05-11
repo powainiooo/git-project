@@ -1,5 +1,5 @@
 <style scoped>
-.s-box { margin: 14px 40px 36px 40px; border: 2px solid #436CB3; display: flex; border-radius: 30px; height: 60px; position: relative; }
+.s-box { background-color: #FFFFFF; border: 2px solid #436CB3; display: flex; border-radius: 30px; height: 60px; position: fixed; top: 14px; right: 40px; left: 40px; }
 .s-box .l { width: 540px; height: 100%; padding-left: 24px; display: flex; align-items: center; font-size: 28px; color: #436CB3; border-right: 2px solid #436CB3; }
 .s-box .l img { width: 28px; height: 28px; margin-right: 14px; }
 .s-box .r { flex: 1; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 28px; color: #436CB3; }
@@ -12,7 +12,7 @@
 .class-nav li.active { border-left-color: #436CB3; }
 .class-nav li.active div { background-color: #436CB3; color: #FFFFFF; }
 
-.class-list { margin-left: 180px; width: 570px; }
+.class-list { margin-left: 180px; width: 570px; margin-top: 110px; }
 .class-list h3 { margin: 0 0 60px 38px; font-size: 28px; }
 </style>
 

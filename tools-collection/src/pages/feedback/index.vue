@@ -38,12 +38,14 @@ export default {
 
   data () {
     return {
+      id: '',
       content: ''
     }
   },
   methods: {
     handleSubmit () {
       postAction('jyfk', {
+        id: this.id,
         content: this.content
       }).then(res => {
         if (res.ret === 0) {
@@ -54,6 +56,9 @@ export default {
         }
       })
     }
+  },
+  onLoad (options) {
+    this.id = options.id
   }
 }
 </script>

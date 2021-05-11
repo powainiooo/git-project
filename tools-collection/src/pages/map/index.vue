@@ -34,6 +34,7 @@ export default {
       console.log('id', id)
       const record = this.markers.find(i => i.id === id)
       console.log('record', record)
+      if (record === undefined) return
       mpvue.showModal({
         title: record.title,
         content: `${record.address}（电话：${record.tel}，分类：${record.category}，与您距离：${record._distance}米）`,
@@ -77,6 +78,13 @@ export default {
         this.latitude = res.latitude
         this.longitude = res.longitude
         this.showMap = true
+        this.markers.push({
+          latitude: res.latitude,
+          longitude: res.longitude,
+          iconPath: '/static/images/dot2.png',
+          width: 58,
+          height: 58
+        })
       }
     })
   }

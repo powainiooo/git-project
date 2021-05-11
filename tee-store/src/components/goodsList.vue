@@ -8,23 +8,23 @@
 .c-goods-col:nth-child(1):after { height: 0; }
 .c-goods-col:nth-child(2):after { height: 0; }
 .c-goods-col:nth-child(2n) { justify-content: flex-end; }
-.c-goods-grid .c-goods-item { width: 275px; }
-.c-goods-grid .c-goods-item .imgs { width: 100%; height: 220px; border-radius: 35px; background-color: #D8D8D8; overflow: hidden; margin-bottom: 20px; }
-.c-goods-grid .c-goods-item .imgs img { width: 100%; height: 100%; }
-.c-goods-grid .c-goods-item .titles { font-size: 24px; margin-left: 4px; overflow: hidden; text-overflow: ellipsis; margin-bottom: 6px; }
-.c-goods-grid .c-goods-item .price1 { display: inline-block; padding: 0 4px; margin: 0 4px; font-size: 26px; line-height: 32px; color: #C9C9C9; position: relative; }
-.c-goods-grid .c-goods-item .price1:after { content: ''; width: 100%; height: 2px; position: absolute; left: 0; right: 0; bottom: 50%; background-color: #F0916C; transform: scaleY(.5); }
-.c-goods-grid .c-goods-item .icon { width: 75px; margin-right: 5px; }
-.c-goods-grid .c-goods-item .price2 { font-size: 20px; color: #F0916C; }
-.c-goods-grid .c-goods-item .price2 span { font-size: 54px; line-height: 65px; }
-.c-goods-grid .c-goods-item .arrow { width: 46px; height: 46px; border-radius: 50%; background-color: #F0916C; box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.15); }
-.c-goods-grid .c-goods-item .arrow img { width: 12px; }
+.c-goods-grid .goods-item { width: 275px; }
+.c-goods-grid .goods-item .imgs { width: 100%; height: 220px; border-radius: 35px; background-color: #D8D8D8; overflow: hidden; margin-bottom: 20px; }
+.c-goods-grid .goods-item .imgs img { width: 100%; height: 100%; }
+.c-goods-grid .goods-item .titles { font-size: 24px; margin-left: 4px; overflow: hidden; text-overflow: ellipsis; margin-bottom: 6px; }
+.c-goods-grid .goods-item .price1 { display: inline-block; padding: 0 4px; margin: 0 4px; font-size: 26px; line-height: 32px; color: #C9C9C9; position: relative; }
+.c-goods-grid .goods-item .price1:after { content: ''; width: 100%; height: 2px; position: absolute; left: 0; right: 0; bottom: 50%; background-color: #F0916C; transform: scaleY(.5); }
+.c-goods-grid .goods-item .icon { width: 75px; margin-right: 5px; }
+.c-goods-grid .goods-item .price2 { font-size: 20px; color: #F0916C; }
+.c-goods-grid .goods-item .price2 span { font-size: 54px; line-height: 65px; }
+.c-goods-grid .goods-item .arrow { width: 46px; height: 46px; border-radius: 50%; background-color: #F0916C; box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.15); }
+.c-goods-grid .goods-item .arrow img { width: 12px; }
 </style>
 
 <template>
 <div class="c-goods-grid">
   <div class="c-goods-col" v-for="item in list" :key="id">
-    <div class="c-goods-item"
+    <div class="goods-item"
          hover-class="hscale"
          hover-stay-time="10">
       <div class="imgs"><img src="/static/images/img.jpg" mode="aspectFill" /></div>

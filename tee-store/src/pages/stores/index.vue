@@ -1,6 +1,10 @@
 <style scoped>
 .store-list { margin: 0 25px; }
 .store-col { margin-bottom: 40px; }
+.store-col:nth-child(2) { animation-delay: .2s; }
+.store-col:nth-child(3) { animation-delay: .4s; }
+.store-col:nth-child(4) { animation-delay: .6s; }
+.store-col:nth-child(5) { animation-delay: .8s; }
 </style>
 
 <template>
@@ -17,7 +21,7 @@
     </div>
 
     <div class="store-list">
-      <div class="store-col" v-for="i in list">
+      <div class="store-col slideUp" v-for="i in list">
         <item />
       </div>
     </div>
@@ -45,7 +49,7 @@ export default {
   data () {
     return {
       city: '',
-      list: [{}, {}, {}, {}]
+      list: []
     }
   },
 
@@ -55,6 +59,7 @@ export default {
       console.log('initCity', city)
       if (city) {
         this.city = city
+        this.getData()
       } else {
         const _this = this
         mpvue.getLocation({
@@ -74,6 +79,11 @@ export default {
           }
         })
       }
+    },
+    getData () {
+      setTimeout(() => {
+        this.list = [{}, {}, {}, {}]
+      }, 400)
     }
   },
 

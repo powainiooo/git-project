@@ -9,6 +9,28 @@ export default {
      * 百度：mpvue === swan, mpvuePlatform === 'swan'
      * 支付宝(蚂蚁)：mpvue === my, mpvuePlatform === 'my'
      */
+    this.loadFont()
+  },
+  methods: {
+    loadFont () {
+      const baseUrl = 'http://file.dev.sysds.cn/static/font/'
+      mpvue.loadFontFace({
+        global: true,
+        family: 'DinB',
+        source: `url("${baseUrl}DIN_Alternate_Bold.ttf")`,
+        success: (res) => {
+          console.log('Helve load over', res)
+        }
+      })
+      mpvue.loadFontFace({
+        global: true,
+        family: 'DinL',
+        source: `url("${baseUrl}DIN-Light.otf")`,
+        success: (res) => {
+          console.log('Helve load over', res)
+        }
+      })
+    }
   }
 }
 </script>

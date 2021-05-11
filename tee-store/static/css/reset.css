@@ -66,6 +66,10 @@ button:after { border: none; }
 hr { border-top: 1rpx solid #D5D5D5; }
 
 /* 宽 */
+.w10 { width: 10rpx; }
+.w12 { width: 12rpx; }
+.w14 { width: 14rpx; }
+.w15 { width: 16rpx; }
 .w18 { width: 18rpx; }
 .w20 { width: 20rpx; }
 .w22 { width: 22rpx; }

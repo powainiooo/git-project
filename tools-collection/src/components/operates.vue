@@ -35,7 +35,7 @@
       <img src="/static/images/footer/icon5-active.png" mode="aspectFit" v-if="record.sc_bool == '1'" />
       <span>收藏({{record.sc_num}})</span>
    </div>
-   <div class="item" @click="toPage('/pages/feedback/main')">
+   <div class="item" @click="toPage('/pages/feedback/main?id=' + id)">
       <img src="/static/images/footer/icon6.png" mode="aspectFit" />
       <span>建议({{record.fk_num}})</span>
    </div>
@@ -86,6 +86,11 @@ export default {
       price: '',
       list: [],
       showReward: false
+    }
+  },
+  watch: {
+    id (val) {
+      this.getData()
     }
   },
   created () {

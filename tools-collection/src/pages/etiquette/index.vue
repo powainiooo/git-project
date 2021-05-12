@@ -8,13 +8,14 @@
   <div class="container">
     <div class="hr20"></div>
     <template v-if="record.id">
-      <video :src="imgSrc + record.mp4_path" controls :poster="imgSrc + record.imgpath" class="video"></video>
+      <video :src="imgSrc + record.mp4_path" controls :poster="imgSrc + record.imgpath" class="video" v-if="record.mp4_path !== ''"></video>
+      <img :src="imgSrc + record.imgpath" mode="widthFix" class="w100" v-else />
 
       <c-audio :src="record.mp3_path" :title="record.name" v-if="record.mp3_path !== ''" />
 
       <div class="et-title">{{record.name}}</div>
       <div class="ml30 mr30 mb30">
-        <rich-text :nodes="record.desc" class="f30"></rich-text>
+        <rich-text :nodes="record.desc" class="f30" @click="check"></rich-text>
       </div>
     </template>
     <operates :id="id" />
@@ -47,6 +48,9 @@ export default {
           this.record = res.data
         }
       })
+    },
+    check (e) {
+      console.log(e)
     }
   },
   onShareAppMessage () {

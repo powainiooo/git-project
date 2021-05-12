@@ -3,7 +3,10 @@
 
 .list { display: flex; margin: 0 -27px; flex-wrap: wrap; }
 .list .tool-item { width: 110px; margin: 0 30px 40px 30px; }
-.btn-close { width: 20px; position: absolute; top: -8px; right: 40px; }
+.btn-close { width: 20px; position: absolute; top: -8px; right: -8px; }
+
+.history-list { margin: 0 40px; display: flex; }
+.history-item { font-size: 26px; margin-right: 24px; margin-bottom: 20px; }
 </style>
 
 <template>
@@ -14,24 +17,20 @@
     </div>
 
     <template v-if="resultList.length === 0">
-      <div class="between mb60 ml50 mr60">
+      <div class="between mb60 ml50 mr60" v-if="history.length > 0">
         <div class="title acenter">
           <img src="/static/images/clock.png" mode="widthFix" class="w32 mr15" />
           <span>搜索历史</span>
         </div>
-        <img src="/static/images/trash.png" mode="widthFix" class="w24" />
+        <img src="/static/images/trash.png" mode="widthFix" class="w24" @click="delAll" />
       </div>
 
-      <div class="tool-list">
+      <div class="history-list" v-if="history.length > 0">
         <div v-for="item in history"
              :key="id"
-             class="pr">
-          <a :href="'/' + item.mini_page + '?id=' + item.id"
-             class="tool-item">
-            <img :src="imgSrc + item.imgpath" mode="aspectFill" />
-            <div>{{item.name}}</div>
-          </a>
-          <img src="/static/images/x.png" mode="widthFix" class="btn-close" />
+             class="pr history-item">
+          <div>{{item.word}}</div>
+          <img src="/static/images/x.png" mode="widthFix" class="btn-close" @click="delById(item.id)" />
         </div>
       </div>
 
@@ -99,6 +98,13 @@ export default {
       })
     },
     handleSearch (e) {
+      if (e === '') {
+        mpvue.showToast({
+          title: '请输入关键字',
+          icon: 'none'
+        })
+        return false
+      }
       postAction('search_go', {
         word: e
       }).then(res => {
@@ -110,6 +116,28 @@ export default {
               icon: 'none'
             })
           }
+        }
+      })
+    },
+    delById (id) {
+      this.del(id)
+    },
+    delAll () {
+      const arr = []
+      this.history.forEach(i => {
+        arr.push(i.id)
+      })
+      this.del(arr.join('|'))
+    },
+    del (id) {
+      postAction('del_history ', {
+        id
+      }).then(res => {
+        if (res.ret === 0) {
+          mpvue.showToast({
+            title: '删除成功'
+          })
+          this.getData()
         }
       })
     }

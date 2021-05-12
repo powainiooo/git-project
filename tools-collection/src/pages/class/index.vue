@@ -1,5 +1,6 @@
 <style scoped>
-.s-box { background-color: #FFFFFF; border: 2px solid #436CB3; display: flex; border-radius: 30px; height: 60px; position: fixed; top: 14px; right: 40px; left: 40px; }
+.s-box-c { width: 100%; position: fixed; top: 0; left: 0; background-color: #FFFFFF; }
+.s-box { border: 2px solid #436CB3; display: flex; border-radius: 30px; height: 60px; margin: 14px 40px; }
 .s-box .l { width: 540px; height: 100%; padding-left: 24px; display: flex; align-items: center; font-size: 28px; color: #436CB3; border-right: 2px solid #436CB3; }
 .s-box .l img { width: 28px; height: 28px; margin-right: 14px; }
 .s-box .r { flex: 1; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 28px; color: #436CB3; }
@@ -21,9 +22,11 @@ view, input {
 
 <template>
   <div class="container">
-    <div class="s-box" @click="toSearch">
-      <div class="l"><img src="/static/images/sousuo.png" />工具名称</div>
-      <div class="r">搜索</div>
+    <div class="s-box-c">
+      <div class="s-box" @click="toSearch">
+        <div class="l"><img src="/static/images/sousuo.png" />工具名称</div>
+        <div class="r">搜索</div>
+      </div>
     </div>
     <div class="class-frame">
       <ul class="class-nav">

@@ -497,6 +497,7 @@ export default {
         person: '',
         id_card_no: '',
         phone: '',
+        space_verify_code: '',
         id_card_front_image: '',
         id_card_back_image: '',
         license_image: '',
@@ -517,6 +518,9 @@ export default {
   watch: {
     'vericode.mobile' (val) {
       this.formData.phone = val
+    },
+    'vericode.code' (val) {
+      this.formData.space_verify_code = val
     }
   },
   inject: ['changePage'],

@@ -114,6 +114,11 @@ export default {
   created () {
     this.getData()
   },
+  provide () {
+    return {
+      getDetails: this.getDetails
+    }
+  },
   methods: {
     getData () {
       postAction('/editor/ticket/lists', {
@@ -146,6 +151,15 @@ export default {
           this.$nextTick(() => {
             this.showDetail = true
           })
+        }
+      })
+    },
+    getDetails (id) {
+      postAction('/editor/ticket/detail', {
+        id
+      }).then(res => {
+        if (res.code === 1) {
+          this.detailRecord = res.data
         }
       })
     },

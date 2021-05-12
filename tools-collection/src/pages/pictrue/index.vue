@@ -155,6 +155,7 @@ export default {
     }
   },
   onLoad (options) {
+    Object.assign(this.$data, this.$options.data())
     this.id = options.id || '61'
     this.type = options.type || 'damaged'
   }

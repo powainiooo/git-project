@@ -5,29 +5,29 @@
 <template>
   <div class="container">
     <div class="hr20"></div>
-    <div class="mt30 mb30">
-      <c-search placeholder="输入菜谱或食材" @search="onSearch"/>
-    </div>
+<!--    <div class="mt30 mb30">-->
+<!--      <c-search placeholder="输入菜谱或食材" @search="onSearch"/>-->
+<!--    </div>-->
 
-    <div class="blue-box" v-if="showResult">
-      <h3></h3>
-      <template v-for="item in list">
-        <div class="menu-item">
-          <h4>{{item.cp_name}}</h4>
-          <h5>【做法】</h5>
-          <p><rich-text :nodes="item.zuofa" class="f26"></rich-text></p>
-          <h5>【特性】</h5>
-          <p><rich-text :nodes="item.texing" class="f26"></rich-text></p>
-          <h5>【提示】</h5>
-          <p><rich-text :nodes="item.tishi" class="f26"></rich-text></p>
-          <h5>【调料】</h5>
-          <p><rich-text :nodes="item.tiaoliao" class="f26"></rich-text></p>
-          <h5>【原料】</h5>
-          <p><rich-text :nodes="item.yuanliao" class="f26"></rich-text></p>
-        </div>
-      </template>
-    </div>
-    <operates :id="id" />
+<!--    <div class="blue-box" v-if="showResult">-->
+<!--      <h3></h3>-->
+<!--      <template v-for="item in list">-->
+<!--        <div class="menu-item">-->
+<!--          <h4>{{item.cp_name}}</h4>-->
+<!--          <h5>【做法】</h5>-->
+<!--          <p><rich-text :nodes="item.zuofa" class="f26"></rich-text></p>-->
+<!--          <h5>【特性】</h5>-->
+<!--          <p><rich-text :nodes="item.texing" class="f26"></rich-text></p>-->
+<!--          <h5>【提示】</h5>-->
+<!--          <p><rich-text :nodes="item.tishi" class="f26"></rich-text></p>-->
+<!--          <h5>【调料】</h5>-->
+<!--          <p><rich-text :nodes="item.tiaoliao" class="f26"></rich-text></p>-->
+<!--          <h5>【原料】</h5>-->
+<!--          <p><rich-text :nodes="item.yuanliao" class="f26"></rich-text></p>-->
+<!--        </div>-->
+<!--      </template>-->
+<!--    </div>-->
+<!--    <operates :id="id" />-->
   </div>
 </template>
 
@@ -93,6 +93,10 @@ export default {
   },
   onLoad (options) {
     this.id = options.id
+    mpvue.navigateToMiniProgram({
+      appId: 'wx9ba12e2197a05d5c',
+      path: 'pages/caipu/caipu'
+    })
   }
 }
 </script>

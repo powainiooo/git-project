@@ -102,7 +102,8 @@
       <div class="line2">
         <div class="address"
              hover-class="hscale"
-             hover-stay-time="10">
+             hover-stay-time="10"
+             @click="openAddr">
           <img src="/static/images/common/dot.png" />
           <span>{{record.address}}</span>
         </div>
@@ -159,6 +160,13 @@ export default {
     toComment () {
       mpvue.navigateTo({
         url: `/pages/comment/main?id=${this.record.id}`
+      })
+    },
+    openAddr () {
+      mpvue.openLocation({
+        latitude: Number(this.record.latitude),
+        longitude: Number(this.record.longitude),
+        scale: 15
       })
     }
   },

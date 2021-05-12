@@ -28,6 +28,10 @@
         border-radius 6px
         padding 0 5px
         color #9E9E9F
+        input
+          size(34px, 100%)
+          border none
+          color #C8C9CA
         span
           color #C8C9CA
       h3
@@ -102,11 +106,12 @@
       <div class="names">
         <h3>{{item.name}}</h3>
         <div class="between">
-          <span>{{item.num}}</span>张
+<!--          <span>{{item.num}}</span>-->
+          <input v-model="item.num" @keyup.enter="changeNums($event, item.id)" />张
         </div>
       </div>
       <div class="nums">{{item.sold_num}}</div>
-      <t-switch v-model="item.sold_out_flag" :true-value="1" :false-value="0">
+      <t-switch v-model="item.sold_out_flag" :true-value="1" :false-value="0" @on-change="statusChange($event, item.id)">
         <span slot="open">已售罄</span>
         <span slot="close">销售中</span>
       </t-switch>
@@ -142,6 +147,7 @@
 import tagLine from '@/components/tagLine'
 import TSwitch from '@/components/TSwitch'
 import { formatDate } from '@/utils/tools'
+import { postAction } from '../../utils'
 export default {
   name: 'app',
   components: {
@@ -186,9 +192,34 @@ export default {
   data () {
     return {}
   },
+  inject: ['getDetails'],
   methods: {
     getIndexSrc (index) {
       return require('@/assets/img/nums/' + index + '.png')
+    },
+    changeNums (e, id) {
+      console.log('changeNums', e)
+      const params = {
+        ticket_price_id: id,
+        num: e.target.value
+      }
+      this.changeTicketInfo(params)
+    },
+    statusChange (e, id) {
+      console.log('statusChange', e)
+      const params = {
+        ticket_price_id: id,
+        sold_out_flag: e
+      }
+      this.changeTicketInfo(params)
+    },
+    changeTicketInfo (params) {
+      postAction('/editor/ticket/ticket_price_edit', params).then(res => {
+        if (res.code === 1) {
+          this.$Message.success('修改成功！')
+          this.getDetails(this.record.id)
+        }
+      })
     }
   }
 }

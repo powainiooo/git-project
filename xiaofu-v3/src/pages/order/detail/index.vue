@@ -125,8 +125,8 @@ export default {
   },
 
   mounted () {
-    this.$refs.header.setStatus('ticketBuy')
-    this.$refs.header.originStatus = 'ticketBuy'
+    this.$refs.header.setStatus('orderDetail')
+    this.$refs.header.originStatus = 'orderDetail'
   },
   onLoad (options) {
     this.id = options.id

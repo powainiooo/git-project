@@ -134,6 +134,13 @@ export default {
           this.showShareBtn = false
           this.showCloseBtn = true
           break
+        case 'orderDetail':
+          this.showCity = false
+          this.showMenuBtn = false
+          this.showStarBtn = true
+          this.showShareBtn = false
+          this.showCloseBtn = false
+          break
       }
     },
     openMenu () {

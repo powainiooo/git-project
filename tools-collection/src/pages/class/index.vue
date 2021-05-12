@@ -13,7 +13,10 @@
 .class-nav li.active div { background-color: #436CB3; color: #FFFFFF; }
 
 .class-list { margin-left: 180px; width: 570px; margin-top: 110px; }
-.class-list h3 { margin: 0 0 60px 38px; font-size: 28px; }
+.class-list h3 { margin: 0 0 60px 38px; font-size: 30px; }
+view, input {
+    font-size: 30rpx;
+}
 </style>
 
 <template>
@@ -30,7 +33,7 @@
             @click="toggle(item.id)"><div>{{item.name}}</div></li>
       </ul>
       <div class="class-list">
-        <h3>常用分类</h3>
+
         <div class="tool-list">
           <a v-for="item in list"
              :key="id"

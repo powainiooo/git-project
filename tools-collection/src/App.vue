@@ -93,10 +93,10 @@ button:after { border: none;}
 .box-bg { border-radius: 10px; background-color: #F7F7F7; }
 
 .tool-list { margin-left: 15px; margin-right: 15px; display: flex; flex-wrap: wrap; }
-.tool-list .tool-item { margin: 0 30px 70px 30px;}
-.tool-item { width: 120px; height: 130px; display: flex; justify-content: space-between; align-items: center; flex-direction: column; }
-.tool-item img { width: 64px; height: 58px; }
-.tool-item div { text-align: center; }
+.tool-list .tool-item { margin: 0 10px 70px 10px;}
+.tool-item { width: 160px; height: 130px; display: flex; justify-content: space-between; align-items: center; flex-direction: column; }
+.tool-item img { width: 75px; height: 75px; }
+.tool-item div { text-align: center; font-size: 26px; }
 
 .form { background-color: #FFFFFF; position: relative; }
 .form:before { content: ''; width: 100%; height: 2px; background-color: #E5E5E5; transform: scaleY(.5); position: absolute; top: 0; left: 0; }

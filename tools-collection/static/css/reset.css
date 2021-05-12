@@ -1,5 +1,5 @@
 page { color: #333333; font-size: 24rpx; font-family: Microsoft YaHei,tahoma,arial,Hiragino Sans GB,sans-serif; box-sizing: border-box; }
-view,input { box-sizing: border-box; font-size: 24rpx; }
+view,input { box-sizing: border-box; font-size: 30rpx; }
 
 .ovh { overflow: hidden; }
 

@@ -11,9 +11,7 @@
 <template>
 <div class="container" @touchstart="tstart" @touchmove="tmove" @touchend="tend">
   <div class="hr20"></div>
-  <div class="mt30 mb30">
-    <c-search placeholder="搜索内容" @search="onSearch"/>
-  </div>
+
 
   <div class="to-next">
     <a href="javascript:;" @click="getData">右划显示下一条</a>

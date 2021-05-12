@@ -28,12 +28,10 @@
 import operates from '@/components/operates'
 import cSearch from '@/components/search'
 import {postAction} from '../../utils/api'
-import store from '../../store'
 import QQMapWX from '../../utils/qqmap-wx-jssdk.min.js'
-import config from '@/config'
-const { mapKey } = config
+import store from '../../store'
 const qMap = new QQMapWX({
-  key: mapKey
+  key: 'H2MBZ-JZRKF-OZMJ2-NYEC7-CFOCQ-QOBLS'
 })
 export default {
   components: {

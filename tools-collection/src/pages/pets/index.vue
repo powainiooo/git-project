@@ -12,6 +12,7 @@
   <div class="blue-box" v-for="item in list" :key="index" v-if="list.length > 0">
     <h3>{{item.name}}</h3>
     <div>
+    <img :src="item.coverURL"  />
       <p><rich-text :nodes="item.feature" class="f30"></rich-text></p>
     </div>
   </div>
@@ -67,10 +68,7 @@ export default {
     }
   },
   onReachBottom () {
-    if (!this.loadOver) {
-      this.page += 1
-      this.getList()
-    }
+
   },
   onShareAppMessage () {
     const pages = getCurrentPages()

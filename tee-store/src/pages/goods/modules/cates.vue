@@ -12,14 +12,15 @@
 <div class="c-cates">
   <ul class="c-cates-list borderT">
     <li class="borderB center"
-        :class="{'active': index === current}"
+        :class="{'active': i.id === current}"
         v-for="i in list"
-        :key="index">{{i}}</li>
+        :key="index"
+        @click="$emit('toggle', i.id)">{{i.name}}</li>
   </ul>
   <img src="/static/images/arrow2.png"
        mode="widthFix"
        class="c-cates-arrow"
-       :style="{top: index * 100 + 'rpx'}" />
+       :style="{top: top}" />
 </div>
 </template>
 
@@ -29,8 +30,17 @@ export default {
   props: {
     list: Array,
     current: {
-      type: Number,
+      type: [Number, String],
       default: 0
+    }
+  },
+  computed: {
+    top () {
+      let index = this.list.findIndex(i => i.id === this.current)
+      if (index === -1) {
+        index = 0
+      }
+      return `${index * 100}rpx`
     }
   },
   data () {

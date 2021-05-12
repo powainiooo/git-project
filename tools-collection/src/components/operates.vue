@@ -25,46 +25,46 @@
 
 <template>
 <div class="c-operates">
-  <div class="item" @click="func(1)">
-    <img src="/static/images/footer/icon4.png" mode="aspectFit" v-if="record.dj_bool == '0'" />
-    <img src="/static/images/footer/icon4-active.png" mode="aspectFit" v-if="record.dj_bool == '1'" />
-    <span>点赞({{record.dj_num}})</span>
-  </div>
-  <div class="item" @click="func(3)">
-    <img src="/static/images/footer/icon5.png" mode="aspectFit" v-if="record.sc_bool == '0'" />
-    <img src="/static/images/footer/icon5-active.png" mode="aspectFit" v-if="record.sc_bool == '1'" />
-    <span>收藏({{record.sc_num}})</span>
-  </div>
-  <div class="item" @click="toPage('/pages/feedback/main?id=' + id)">
-    <img src="/static/images/footer/icon6.png" mode="aspectFit" />
-    <span>建议({{record.fk_num}})</span>
-  </div>
-  <div class="item" @click="openReward">
-    <img src="/static/images/footer/icon7.png" mode="aspectFit" />
-    <span>打赏({{record.ds_num}})</span>
-  </div>
+   <div class="item" @click="func(1)">
+      <img src="/static/images/footer/icon4.png" mode="aspectFit" v-if="record.dj_bool == '0'" />
+      <img src="/static/images/footer/icon4-active.png" mode="aspectFit" v-if="record.dj_bool == '1'" />
+      <span>点赞({{record.dj_num}})</span>
+   </div>
+   <div class="item" @click="func(3)">
+      <img src="/static/images/footer/icon5.png" mode="aspectFit" v-if="record.sc_bool == '0'" />
+      <img src="/static/images/footer/icon5-active.png" mode="aspectFit" v-if="record.sc_bool == '1'" />
+      <span>收藏({{record.sc_num}})</span>
+   </div>
+   <div class="item" @click="toPage('/pages/feedback/main')">
+      <img src="/static/images/footer/icon6.png" mode="aspectFit" />
+      <span>建议({{record.fk_num}})</span>
+   </div>
+   <div class="item" @click="openReward">
+      <img src="/static/images/footer/icon7.png" mode="aspectFit" />
+      <span>打赏({{record.ds_num}})</span>
+   </div>
 
-  <div class="c-coin" v-if="showReward" @click="showReward = false">
-    <div class="pr" @click.stop="c">
-      <img src="/static/images/bg4.png" mode="widthFix" class="bg" />
-      <div class="c-coin-frame">
-        <ul class="list">
-          <li v-for="i in list"
-              :key="index"
-              :class="{'active': i == price}"
-              @click="price = i">
-            <img src="/static/images/coin.png" />
-            <p>{{i}}</p>
-            <div>YUAN</div>
-          </li>
-        </ul>
-        <div class="ip">
-          <input placeholder="其它金额" placeholder-style="color: #ffffff;" v-model="price" />
-        </div>
-        <button class="bt" @click="doPay">感谢并打赏</button>
+   <div class="c-coin" v-if="showReward" @click="showReward = false">
+      <div class="pr" @click.stop="c">
+         <img src="/static/images/bg4.png" mode="widthFix" class="bg" />
+         <div class="c-coin-frame">
+            <ul class="list">
+               <li v-for="i in list"
+                   :key="index"
+                   :class="{'active': i == price}"
+                   @click="price = i">
+                  <img src="/static/images/coin.png" />
+                  <p>{{i}}</p>
+                  <div>YUAN</div>
+               </li>
+            </ul>
+            <div class="ip">
+               <input placeholder="其它金额" placeholder-style="color: #ffffff;" v-model="price" />
+            </div>
+            <button class="bt" @click="doPay">感谢并打赏</button>
+         </div>
       </div>
-    </div>
-  </div>
+   </div>
 </div>
 </template>
 
@@ -72,16 +72,13 @@
 import {postAction} from '../utils/api'
 
 export default {
-	name: 'app',
+  name: 'app',
   props: {
-	  id: {
-	    type: String,
-      default: ''
-    }
+    id: String
   },
-	data() {
-		return {
-		  record: {
+  data() {
+    return {
+      record: {
         dj_bool: '0',
         sc_bool: '0'
       },
@@ -90,17 +87,11 @@ export default {
       list: [],
       showReward: false
     }
-	},
-  watch: {
-    id (val) {
-      console.log('id', val)
-      this.getData()
-    }
   },
   created () {
     this.getData()
   },
-	methods: {
+  methods: {
     toPage: mpvue.toPage,
     c () {},
     getData () {

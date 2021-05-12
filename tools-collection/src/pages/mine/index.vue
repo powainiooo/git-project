@@ -7,9 +7,12 @@
 .list { background-color: #FFFFFF; padding-left: 34px; padding-right: 48px; padding-top: 40px; }
 .list a { height: 100px; display: flex; align-items: center; justify-content: space-between; position: relative; }
 .list a:after { content: ''; height: 2px; position: absolute; left: 8px; right: 0; bottom: 0; background-color: #E9E9E9; transform: scaleY(.5); }
-.list a div { font-size: 26px; display: flex; align-items: center; }
+.list a div { font-size: 30px; display: flex; align-items: center; }
 .list a div img { width: 46px; height: 46px; margin-right: 28px; }
 .list a .arrow { width: 12px; }
+view, input {
+    font-size: 30rpx;
+}
 </style>
 
 <template>

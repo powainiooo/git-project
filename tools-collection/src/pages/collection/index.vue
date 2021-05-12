@@ -1,5 +1,8 @@
 <style scoped>
 .list {}
+view, input {
+    font-size: 30rpx;
+}
 </style>
 
 <template>

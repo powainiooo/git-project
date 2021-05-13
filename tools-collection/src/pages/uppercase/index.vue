@@ -19,6 +19,9 @@
         </div>
       </div>
     </div>
+    <div class="tc mt60">
+      <button class="btn btn-min" style="width: 160px;" @click="copy(moneyStr)">复 制</button>
+    </div>
 
     <operates :id="id" />
   </div>
@@ -52,6 +55,16 @@ export default {
           }
         })
       }, 500)
+    },
+    copy (txt) {
+      wx.setClipboardData({
+        data: txt,
+        success (res) {
+          mpvue.showToast({
+            title: '复制成功'
+          })
+        }
+      })
     }
   },
   onShareAppMessage () {

@@ -3,11 +3,25 @@
 .c-float-box
   size(100%, 100vh)
   display flex; align-items flex-end; justify-content center;
+  &-title
+    size(100%, 80px); abTL(0, 0); background-color #ffffff; border-radius 50px 50px 0 0; between(); padding 0 30px; position relative;
+    &:after
+      content ''; abTL(100%, 0); size(100%, 34px); background url("../../assets/img/sd1.png") no-repeat;
+  &-body
+    size(100%, 100%); overflow-y auto; position relative;
 </style>
 
 <template>
 <div class="c-float-box">
-  <div class="box" :style="styles"></div>
+  <div class="box pr" :style="styles">
+    <div class="c-float-box-title" v-if="$slots.btns && title !== ''">
+      <h3>{{title}}</h3>
+      <slot name="btns"></slot>
+    </div>
+    <div class="c-float-box-body scrollBar">
+      <slot></slot>
+    </div>
+  </div>
 </div>
 </template>
 
@@ -22,6 +36,10 @@ export default {
     height: {
       type: [Number, String], // 70 76
       default: 70
+    },
+    title: {
+      type: String,
+      default: ''
     }
   },
   computed: {

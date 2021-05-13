@@ -6,7 +6,7 @@ page { background-color: #F8F8F8; }
 .footPrint-item .time { margin-left: 75px; position: relative; margin-bottom: 40px; }
 .footPrint-item .time:before { content: ''; width: 20px; height: 20px; border-radius: 50%; border: 4px solid #F1380D; background-color: #F8F8F8; box-sizing: border-box; position: absolute; top: 8px; left: -36px; }
 .footPrint-item .list { width: 610px; padding: 40px 20px 0 20px; display: flex; flex-wrap: wrap; border-radius: 6px; background-color: #FFFFFF; margin-left: 90px; }
-.footPrint-item .list .tool-item { margin: 0 34px 40px 34px; }
+.footPrint-item .list .tool-item { margin: 0 10px 40px 10px; }
 view, input {
     font-size: 30rpx;
 }

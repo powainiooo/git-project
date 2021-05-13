@@ -1,12 +1,18 @@
 @import "mixin.styl"
 
+// 变量
+mainColor = #F0916C
+
 body
   background linear-gradient(349deg, #F9F6F2 0%, #F0E7DD 50%, #EADED0 100%)
+
+.scrollBar
   &::-webkit-scrollbar
     width 2px
     background-color transparent
   &::-webkit-scrollbar-thumb
-    background-color #5B85E6
+    background-color mainColor
+
 .acenter
   acenter()
 .center
@@ -19,3 +25,18 @@ body
 // 盒子样式
 .box
   background: #F9F9F9; box-shadow: 0px 3px 20px 0px rgba(0, 0, 0, 0.08); border-radius: 50px 50px 0px 0px; position relative;
+
+// 表单
+.c-form
+  width 250px; margin-left auto; margin-right auto;
+  .ivu-form-item
+    margin-bottom 20px
+
+.ivu-input
+  border none; background-color #FFFFFF; height 40px; color #41372D; border-radius 20px; padding 4px 15px;
+  &::-webkit-input-placeholder
+    color: #C8C9CA
+.ivu-btn
+  min-width 100px; height 40px; background-color mainColor; color #FAFAFA; border-radius 20px; border-color mainColor;
+  &:hover
+    background-color mainColor; color #FAFAFA; border-color mainColor; box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.15);

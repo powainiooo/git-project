@@ -139,8 +139,8 @@ button:after { border: none;}
 .consult-frame .blue-frame { background: linear-gradient(45deg, #3366CC, #3DB6FF); border-radius: 3px; color: #FFFFFF; padding: 26px 20px; font-size: 26px; line-height: 40px; }
 .consult-frame .title1 { font-size: 26px; color: #3366CC; margin-left: 40px; margin-bottom: 20px; }
 .consult-table { background-color: #F9F9F9; padding: 20px 15px; }
-.consult-table ul { display: flex; margin-bottom: 20px; }
-.consult-table ul li { flex: 1; font-size: 22px; color: #666666; }
+.consult-table ul { display: flex; margin-bottom: 10px; }
+.consult-table ul li { flex: 1; font-size: 22px; line-height: 24px; color: #666666; }
 .consult-table ul.thead li { flex: 1; font-size: 22px; color: #333333; text-align: center; }
 .consult-table ul.thead li:first-child { text-align: left; }
 .consult-table ul.tr li { text-align: center }

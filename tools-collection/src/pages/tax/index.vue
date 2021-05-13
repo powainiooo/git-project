@@ -17,13 +17,15 @@
       <div class="tax-form-item">
         <div class="l">收入类型</div>
         <div class="r">
-          <input value="工资、薪金所得（月薪）" disabled />
+          <input value="工资、薪金所得（月薪）" disabled style="background-color: #eee;"/>
         </div>
       </div>
       <div class="tax-form-item">
         <div class="l">纳税期数</div>
         <div class="r">
-          <input type="digit" v-model="formData.taxPeriod" />
+          <picker :range="list" @change="pChange">
+            <input type="digit" v-model="formData.taxPeriod" disabled />
+          </picker>
         </div>
       </div>
       <div class="tax-form-item">
@@ -126,7 +128,8 @@ export default {
         txtIncome: 0,
         insure: 0,
         txtZXFJ: 0
-      }
+      },
+      list: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
     }
   },
   methods: {
@@ -144,6 +147,9 @@ export default {
         insure: 0,
         txtZXFJ: 0
       }
+    },
+    pChange (e) {
+      this.formData.taxPeriod = Number(e.mp.detail.value) + 1
     }
   },
   onShareAppMessage () {

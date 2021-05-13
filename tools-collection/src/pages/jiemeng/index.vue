@@ -6,7 +6,7 @@
   <div class="container">
     <div class="hr20"></div>
     <div class="mt30 mb30">
-      <c-search placeholder="输入内容" @search="getList"/>
+      <c-search placeholder="输入梦境关键字 例如逃跑" @search="getList"/>
     </div>
 
     <div class="blue-box" style="min-height: calc(100vh - 250rpx)" v-if="showResult">
@@ -50,7 +50,7 @@ export default {
             })
           } else {
             this.record = res.data
-            this.keyword = e
+            this.keyword = res.data.keyword
             this.showResult = true
           }
         }

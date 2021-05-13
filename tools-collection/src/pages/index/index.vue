@@ -40,9 +40,14 @@ view, input {
           </a>
         </div>
       </div>
-
-      <div class="between" style="flex-wrap: wrap;">
-        <a :href="item.href" class="tool-item2" v-for="item in list2" :key="id">
+    </div>
+    <div v-for="i in list2" :key="index">
+      <div class="hr20 mb20"></div>
+      <div class="title acenter" style="margin-left: 30rpx;">
+        <span>{{i.cname}}</span>
+      </div>
+      <div class="tool-list" style="flex-wrap: wrap;">
+        <a :href="item.href" class="tool-item" v-for="(item, i2) in i.list" :key="id">
           <img :src="imgSrc + item.ad_image" mode="aspectFill" />
           <div>{{item.name}}</div>
         </a>
@@ -80,7 +85,11 @@ export default {
           console.log(res.data)
           this.banner = res.data.banner
           this.list1 = formatUrl(res.data.tj_list)
-          this.list2 = formatUrl(res.data.list)
+          // this.list2 = formatUrl(res.data.list)
+          res.data.cate_list.forEach(i => {
+            i.list = formatUrl(i.sub)
+          })
+          this.list2 = res.data.cate_list
         }
       })
     }

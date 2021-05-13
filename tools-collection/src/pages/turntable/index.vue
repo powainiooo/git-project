@@ -43,7 +43,7 @@
       <img src="/static/images/btn1.png" mode="widthFix" class="wheel-btn" @click="play" />
     </div>
 
-    <div class="hint1 tc mt50">自定义内容请双击修改</div>
+    <div class="hint1 tc mt50">双击转盘内容修改文字</div>
 
     <div class="edit-modal" v-if="showEdit">
       <div class="edit-box">

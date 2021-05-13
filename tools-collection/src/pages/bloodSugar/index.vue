@@ -1,6 +1,6 @@
 <style scoped>
 .consult-table2 ul li { flex: auto; }
-.consult-table2 .td-w1 { width: 100px; text-align: left; }
+.consult-table2 .td-w1 { width: 100px; text-align: left; padding-right: 36px; }
 .consult-table2 .td-w2 { width: 150px; text-align: center; }
 .consult-table2 .tr { align-items: center; }
 .consult-table2 .tr div { width: 550px }

@@ -22,9 +22,9 @@
   <img src="@/assets/img/bubbles/bubble1.png" class="b1" />
   <img src="@/assets/img/bubbles/bubble2.png" class="b2" />
   <img src="@/assets/img/bubbles/bubble3.png" class="b3" />
+  <img src="@/assets/img/bubbles/bubble6.png" class="b6" />
   <img src="@/assets/img/bubbles/bubble4.png" class="b4" />
   <img src="@/assets/img/bubbles/bubble5.png" class="b5" />
-  <img src="@/assets/img/bubbles/bubble6.png" class="b6" />
 </div>
 </template>
 

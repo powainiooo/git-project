@@ -28,9 +28,9 @@
 import operates from '@/components/operates'
 import cSearch from '@/components/search'
 import {postAction} from '../../utils/api'
-import QQMapWX from '../../utils/qqmap-wx-jssdk.min.js'
 import store from '../../store'
 import config from '@/config'
+import QQMapWX from '@/utils/qqmap-wx-jssdk.min.js'
 const { mapKey } = config
 const qMap = new QQMapWX({
   key: mapKey

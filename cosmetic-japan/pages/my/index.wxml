@@ -73,22 +73,26 @@
 
 <!-- 代购店铺弹窗 -->
 <view class="store-container ts" style="left: {{showCompany ? 0 : '100vw'}}">
+   <view class="hr16"></view>
    <view class="title">最新访问的代购商铺</view>
    <view class="goods-list" wx:if="{{lastCompanyList.length > 0}}">
       <view class="goods-item" wx:for="{{lastCompanyList}}" wx:key="index">
          <navigator url="/" data-mid="{{item.mid}}" bindtap="changeStore">
             <image src="{{imgUrl}}{{item.hot_goodscover}}"></image>
+            <image src="/images/f3.png" class="cover-img"></image>
             <view>{{item.hot_goodsname}}</view>
             <view>{{item.company}}</view>
          </navigator>
       </view>
    </view>
+   <view class="hr16" style="margin-top: 140rpx;"></view>
    <view wx:if="{{lastCompanyList.length === 0}}" style="margin: 140rpx 0; text-align: center; font-size: 32rpx; color: #666666;"><text>没有访问到代购商铺记录\n到下面逛逛吧~</text></view>
    <view class="title">所有代购商铺</view>
    <view class="goods-list">
       <view class="goods-item" wx:for="{{companyList}}" wx:key="index">
          <navigator url="/" data-mid="{{item.mid}}" bindtap="changeStore">
             <image src="{{imgUrl}}{{item.hot_goodscover}}"></image>
+            <image src="/images/f3.png" class="cover-img"></image>
             <view>{{item.hot_goodsname}}</view>
             <view>{{item.company}}</view>
          </navigator>

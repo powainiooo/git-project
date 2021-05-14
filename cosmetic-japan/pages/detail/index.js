@@ -58,7 +58,9 @@ Page({
         can_submit:true,
         canIUseGetUserProfile:canIUseGetUserProfile
     },
-
+	test (e) {
+    	console.log('test', e)
+	},
     bannerTap: function(e) {
         var curImg = e.currentTarget.dataset.src;
         var banner = [];

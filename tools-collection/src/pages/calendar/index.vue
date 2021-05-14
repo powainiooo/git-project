@@ -9,7 +9,7 @@
 .thead li { width: 100px; font-size: 24px; color: #FFFFFF; text-align: center; }
 
 .tbody { width: 700px; display: flex; flex-wrap: wrap; margin: 0 auto 80px auto; }
-.tbody li { width: 100px; margin-bottom: 40px; text-align: center; }
+.tbody li { width: 100px; margin-bottom: 40px; text-align: center; position: relative; }
 .tbody li .box { width: 80px; height: 80px; border-radius: 10px; margin: 0 10px; display: flex; justify-content: center; align-items: center; flex-direction: column; }
 .tbody li.active .box { background-color: #446CB2; }
 .tbody li .box div { font-size: 32px; line-height: 32px; margin-bottom: 10px; }
@@ -18,6 +18,8 @@
 .tbody li:nth-child(7n + 1) div { color: #999999; }
 .tbody li .box p { font-size: 22px; line-height: 22px; color: #999999; }
 .tbody li.active .box p { color: #FFFFFF; }
+.tbody li .box .tag { width: 34px; height: 34px; line-height: 22px; border-radius: 50%; background-color: #E15244; color: #FFFFFF; font-size: 20px; position: absolute; top: -10px; right: -6px; }
+.tbody li .box .tag2 { background-color: #436CB3; }
 
 .line2 { margin-left: 46px; margin-bottom: 26px; display: flex; align-items: baseline; }
 .line2 h3 { font-size: 60px; color: #446CB2; margin-right: 20px; }
@@ -39,7 +41,6 @@
       <button @click="nextMonth"><img src="/static/images/arrow5.png" /></button>
       <p>选择日期</p>
     </div>
-
     <ul class="thead">
       <li v-for="i in week" :key="index">{{i}}</li>
     </ul>
@@ -49,6 +50,8 @@
         <div class="box" @click="toggle(i.day)">
           <div>{{i.day}}</div>
           <p>{{i.lunar}}</p>
+          <span class="center tag" v-if="i.type === 2">休</span>
+          <span class="center tag tag2" v-else-if="i.type === 3">班</span>
         </div>
       </li>
     </ul>
@@ -98,6 +101,7 @@ export default {
       if (month === -1) month = 11
       if (month === 12) month = 0
       month += 1
+      if (month < 10) month = `0${month}`
       return `${year}-${month}-${day}`
     },
     initCalendar (year, month) { // 初始化日历
@@ -142,12 +146,39 @@ export default {
       this.daysList = list
     },
     getData () {
+      mpvue.showLoading({
+        title: '加载中'
+      })
       postAction('perpetual_calendar', {
         date: this.current
       }).then(res => {
         if (res.ret === 0) {
           this.record = res.data
+          let before = -1
+          const h = res.holiday
+          const list = []
+          for (const key in h) {
+            if (before === -1) {
+              before = h[key].week
+              for (let i = 0; i < before; i++) {
+                list.push({
+                  date: '',
+                  lunar: '',
+                  day: ''
+                })
+              }
+            }
+            const dates = key.split('-')
+            list.push({
+              date: key,
+              lunar: h[key].name,
+              day: parseInt(dates[2]),
+              type: h[key].type
+            })
+          }
+          this.daysList = list
         }
+        mpvue.hideLoading()
       })
     },
     nextMonth () { // 下一个月
@@ -159,7 +190,7 @@ export default {
       }
       this.year = year
       this.month = month
-      this.initCalendar(this.year, this.month)
+      this.setCurrent()
     },
     prevMonth () { // 上一个月
       let month = this.month - 1
@@ -170,7 +201,15 @@ export default {
       }
       this.year = year
       this.month = month
-      this.initCalendar(this.year, this.month)
+      this.setCurrent()
+    },
+    setCurrent () {
+      const monthDays = [31, 28 + isLeap(this.year), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31] // 每个月有多少天
+      if (this.day > monthDays[this.month]) {
+        this.day = 1
+      }
+      this.current = this.formatDate(this.year, this.month, this.day)
+      this.getData()
     },
     toggle (day) {
       this.day = day
@@ -192,7 +231,7 @@ export default {
     this.year = date.getFullYear()
     this.month = date.getMonth()
     this.day = date.getDate()
-    this.initCalendar(this.year, this.month)
+    // this.initCalendar(this.year, this.month)
     this.current = this.formatDate(this.year, this.month, this.day)
     this.getData()
   }

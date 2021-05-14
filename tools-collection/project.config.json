@@ -1,426 +1,426 @@
 {
-  "description": "项目配置文件。",
-  "setting": {
-    "urlCheck": false,
-    "es6": false,
-    "enhance": false,
-    "postcss": true,
-    "preloadBackgroundData": false,
-    "minified": true,
-    "newFeature": true,
-    "coverView": true,
-    "nodeModules": false,
-    "autoAudits": false,
-    "showShadowRootInWxmlPanel": true,
-    "scopeDataCheck": false,
-    "uglifyFileName": false,
-    "checkInvalidKey": true,
-    "checkSiteMap": true,
-    "uploadWithSourceMap": true,
-    "compileHotReLoad": false,
-    "useMultiFrameRuntime": true,
-    "useApiHook": true,
-    "useApiHostProcess": false,
-    "babelSetting": {
-      "ignore": [],
-      "disablePlugins": [],
-      "outputPath": ""
-    },
-    "enableEngineNative": false,
-    "bundle": false,
-    "useIsolateContext": true,
-    "useCompilerModule": true,
-    "userConfirmedUseCompilerModuleSwitch": false,
-    "userConfirmedBundleSwitch": false,
-    "packNpmManually": false,
-    "packNpmRelationList": [],
-    "minifyWXSS": true
-  },
-  "miniprogramRoot": "dist/wx/",
-  "compileType": "miniprogram",
-  "appid": "wxea5c9ffcb7003968",
-  "projectname": "tools-collection",
-  "libVersion": "2.16.1",
-  "condition": {
-    "search": {
-      "list": []
-    },
-    "conversation": {
-      "list": []
-    },
-    "game": {
-      "currentL": -1,
-      "list": []
-    },
-    "miniprogram": {
-      "list": [
-        {
-          "id": -1,
-          "name": "首页",
-          "pathName": "pages/index/main",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "工具分类",
-          "pathName": "pages/class/main",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "搜索工具",
-          "pathName": "pages/search/main",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "个人中心",
-          "pathName": "pages/mine/main",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "我的收藏",
-          "pathName": "pages/collection/main",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "我的足迹",
-          "pathName": "pages/footprint/main",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "打赏记录",
-          "pathName": "pages/reward/main",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "友情链接",
-          "pathName": "pages/links/main",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "建议反馈",
-          "pathName": "pages/feedback/main",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "汇率换算",
-          "pathName": "pages/huilv/main",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "生成二维码",
-          "pathName": "pages/qrcode/index/main",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "自定义二维码",
-          "pathName": "pages/qrcode/diy/main",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "模板制作二维码",
-          "pathName": "pages/qrcode/module/main",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "金额转大写",
-          "pathName": "pages/uppercase/main",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "垃圾分类",
-          "pathName": "pages/trash/index/main",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "可回收物",
-          "pathName": "pages/trash/list/main",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "天气预报",
-          "pathName": "pages/weather/index/main",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "选择城市",
-          "pathName": "pages/weather/city/main",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "万年历",
-          "pathName": "pages/calendar/main",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "手机号码查询",
-          "pathName": "pages/phoneQuery/main",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "身份证号码查询",
-          "pathName": "pages/idQuery/main",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "新华字典",
-          "pathName": "pages/dictionary/main",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "成语词典",
-          "pathName": "pages/idiom/main",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "近反义词查询",
-          "pathName": "pages/antonym/main",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "唐诗三百首",
-          "pathName": "pages/tangshi/list/main",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "精选宋词",
-          "pathName": "pages/songci/list/main",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "精选元曲",
-          "pathName": "pages/yuanqu/list/main",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "成语典故",
-          "pathName": "pages/allusion/main",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "脑筋急转弯",
-          "pathName": "pages/brainteasers/main",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "十万个为什么",
-          "pathName": "pages/why/main",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "古籍名句",
-          "pathName": "pages/mingju/main",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "励志名言",
-          "pathName": "pages/mingyan/main",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "每日英语",
-          "pathName": "pages/english/main",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "谜语大全",
-          "pathName": "pages/riddle/main",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "故事大全",
-          "pathName": "pages/story/main",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "今日油价",
-          "pathName": "pages/oil/main",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "星座运势",
-          "pathName": "pages/constellation/main",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "星座配对",
-          "pathName": "pages/consPair/main",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "生肖配对",
-          "pathName": "pages/shengxiao/main",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "周公解梦",
-          "pathName": "pages/jiemeng/main",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "菜谱查询",
-          "pathName": "pages/caipu/main",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "药品说明书",
-          "pathName": "pages/yaopin/main",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "中药大全",
-          "pathName": "pages/zhongyao/main",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "宠物大全",
-          "pathName": "pages/pets/main",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "姓氏起源",
-          "pathName": "pages/names/main",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "生活小窍门",
-          "pathName": "pages/tips/main",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "BMI标准体重",
-          "pathName": "pages/BMI/main",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "单位换算",
-          "pathName": "pages/unit/list/main",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "个人所得税查询",
-          "pathName": "pages/tax/main",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "房贷查询",
-          "pathName": "pages/loan/main",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "摇色子",
-          "pathName": "pages/dice/main",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "查找周边场所",
-          "pathName": "pages/search2/main",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "抛硬币",
-          "pathName": "pages/coin/main",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "随机点名",
-          "pathName": "pages/rollCall/main",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "大转盘",
-          "pathName": "pages/turntable/main",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "血压参考表",
-          "pathName": "pages/bloodPressure/main",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "心率参考表",
-          "pathName": "pages/heartRate/main",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "公式大全",
-          "pathName": "pages/formula/main",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "乙肝五项对照表",
-          "pathName": "pages/hepatitisB/main",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "社交礼仪",
-          "pathName": "pages/etiquette/main",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "拍照识物",
-          "pathName": "pages/pictrue/main",
-          "query": ""
-        }
-      ]
-    }
-  }
+   "description": "项目配置文件。",
+   "setting": {
+      "urlCheck": false,
+      "es6": false,
+      "enhance": false,
+      "postcss": true,
+      "preloadBackgroundData": false,
+      "minified": true,
+      "newFeature": true,
+      "coverView": true,
+      "nodeModules": false,
+      "autoAudits": false,
+      "showShadowRootInWxmlPanel": true,
+      "scopeDataCheck": false,
+      "uglifyFileName": false,
+      "checkInvalidKey": true,
+      "checkSiteMap": true,
+      "uploadWithSourceMap": true,
+      "compileHotReLoad": false,
+      "useMultiFrameRuntime": true,
+      "useApiHook": true,
+      "useApiHostProcess": true,
+      "babelSetting": {
+         "ignore": [],
+         "disablePlugins": [],
+         "outputPath": ""
+      },
+      "enableEngineNative": false,
+      "bundle": false,
+      "useIsolateContext": true,
+      "useCompilerModule": true,
+      "userConfirmedUseCompilerModuleSwitch": false,
+      "userConfirmedBundleSwitch": false,
+      "packNpmManually": false,
+      "packNpmRelationList": [],
+      "minifyWXSS": true
+   },
+   "miniprogramRoot": "dist/wx/",
+   "compileType": "miniprogram",
+   "appid": "wxea5c9ffcb7003968",
+   "projectname": "tools-collection",
+   "libVersion": "2.16.1",
+   "condition": {
+      "search": {
+         "list": []
+      },
+      "conversation": {
+         "list": []
+      },
+      "game": {
+         "currentL": -1,
+         "list": []
+      },
+      "miniprogram": {
+         "list": [
+            {
+               "id": -1,
+               "name": "首页",
+               "pathName": "pages/index/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "工具分类",
+               "pathName": "pages/class/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "搜索工具",
+               "pathName": "pages/search/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "个人中心",
+               "pathName": "pages/mine/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "我的收藏",
+               "pathName": "pages/collection/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "我的足迹",
+               "pathName": "pages/footprint/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "打赏记录",
+               "pathName": "pages/reward/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "友情链接",
+               "pathName": "pages/links/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "建议反馈",
+               "pathName": "pages/feedback/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "汇率换算",
+               "pathName": "pages/huilv/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "生成二维码",
+               "pathName": "pages/qrcode/index/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "自定义二维码",
+               "pathName": "pages/qrcode/diy/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "模板制作二维码",
+               "pathName": "pages/qrcode/module/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "金额转大写",
+               "pathName": "pages/uppercase/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "垃圾分类",
+               "pathName": "pages/trash/index/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "可回收物",
+               "pathName": "pages/trash/list/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "天气预报",
+               "pathName": "pages/weather/index/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "选择城市",
+               "pathName": "pages/weather/city/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "万年历",
+               "pathName": "pages/calendar/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "手机号码查询",
+               "pathName": "pages/phoneQuery/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "身份证号码查询",
+               "pathName": "pages/idQuery/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "新华字典",
+               "pathName": "pages/dictionary/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "成语词典",
+               "pathName": "pages/idiom/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "近反义词查询",
+               "pathName": "pages/antonym/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "唐诗三百首",
+               "pathName": "pages/tangshi/list/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "精选宋词",
+               "pathName": "pages/songci/list/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "精选元曲",
+               "pathName": "pages/yuanqu/list/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "成语典故",
+               "pathName": "pages/allusion/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "脑筋急转弯",
+               "pathName": "pages/brainteasers/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "十万个为什么",
+               "pathName": "pages/why/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "古籍名句",
+               "pathName": "pages/mingju/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "励志名言",
+               "pathName": "pages/mingyan/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "每日英语",
+               "pathName": "pages/english/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "谜语大全",
+               "pathName": "pages/riddle/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "故事大全",
+               "pathName": "pages/story/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "今日油价",
+               "pathName": "pages/oil/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "星座运势",
+               "pathName": "pages/constellation/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "星座配对",
+               "pathName": "pages/consPair/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "生肖配对",
+               "pathName": "pages/shengxiao/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "周公解梦",
+               "pathName": "pages/jiemeng/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "菜谱查询",
+               "pathName": "pages/caipu/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "药品说明书",
+               "pathName": "pages/yaopin/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "中药大全",
+               "pathName": "pages/zhongyao/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "宠物大全",
+               "pathName": "pages/pets/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "姓氏起源",
+               "pathName": "pages/names/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "生活小窍门",
+               "pathName": "pages/tips/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "BMI标准体重",
+               "pathName": "pages/BMI/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "单位换算",
+               "pathName": "pages/unit/list/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "个人所得税查询",
+               "pathName": "pages/tax/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "房贷查询",
+               "pathName": "pages/loan/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "摇色子",
+               "pathName": "pages/dice/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "查找周边场所",
+               "pathName": "pages/search2/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "抛硬币",
+               "pathName": "pages/coin/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "随机点名",
+               "pathName": "pages/rollCall/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "大转盘",
+               "pathName": "pages/turntable/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "血压参考表",
+               "pathName": "pages/bloodPressure/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "心率参考表",
+               "pathName": "pages/heartRate/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "公式大全",
+               "pathName": "pages/formula/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "乙肝五项对照表",
+               "pathName": "pages/hepatitisB/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "社交礼仪",
+               "pathName": "pages/etiquette/main",
+               "query": ""
+            },
+            {
+               "id": -1,
+               "name": "拍照识物",
+               "pathName": "pages/pictrue/main",
+               "query": ""
+            }
+         ]
+      }
+   }
 }

@@ -3042,35 +3042,37 @@ button:after { border: none; }
    z-index: 1000;
    background-color: #ffffff;
    box-sizing: border-box;
-   padding-top: 80rpx;
    overflow-y: auto;
 }
 .store-container .title {
-   margin-bottom: 40rpx;
+   margin-top: 40rpx;
+   margin-bottom: 20rpx;
    text-align: center;
    font-size: 32rpx;
    color: #333333;
 }
 .store-container .goods-list {
-   margin: 0 100rpx;
+   margin: 0 30rpx;
 }
 .store-container .goods-item {
-   width: 254rpx;
-   height: 374rpx;
-   background: rgba(0, 0, 0, .55);
+   width: 190rpx;
+   height: 280rpx;
+   background: #02A0E9;
    border-radius: 10rpx;
+   position: relative;
+   margin: 0 20rpx 20rpx 20rpx;
 }
 .store-container .goods-item image {
-   width: 254rpx;
-   height: 254rpx;
+   width: 190rpx;
+   height: 190rpx;
+}
+.store-container .goods-item image.cover-img {
+   position: absolute; top: 0; left: 0;
 }
 .store-container .goods-item view  {
-   font-size: 28rpx;
+   font-size: 20rpx;
    color: #ffffff;
    text-align: center;
    margin: 10rpx;
    line-height: 1.2;
-}
-.store-container .goods-list .goods-item:nth-child(2n) {
-   margin-left: 42rpx;
 }

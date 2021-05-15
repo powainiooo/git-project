@@ -18,15 +18,14 @@ q:before, q:after {
 }
 table { border-collapse:collapse;border-spacing:0;}
 a{ text-decoration: none; color: #333333; cursor: pointer; }
-a:hover { color: #FE322B; }
 hr {display:block;height:1px;border-top:1px solid #cccccc;margin:1em 0;}
 
 input, select {
     vertical-align:middle;
 }
-input[type=text]::-webkit-input-placeholder { color: #999999; }
-input[type=password]::-webkit-input-placeholder { color: #999999; }
-textarea::-webkit-input-placeholder { color: #999999; }
+input[type=text]::-webkit-input-placeholder { color: #C8C9CA; }
+input[type=password]::-webkit-input-placeholder { color: #C8C9CA; }
+textarea::-webkit-input-placeholder { color: #C8C9CA; }
 textarea { font-family: Microsoft YaHei,tahoma,arial,Hiragino Sans GB,sans-serif; }
 
 .ovh { overflow: hidden; }

@@ -18,7 +18,7 @@
   <div class="between btns">
     <div>
       <Button size="small" class="mr10" :loading="isExport" @click="doExport">导出表格</Button>
-      <Button size="small" class="mr10" @click="doNotify" v-if="showNotify">一次性通知</Button>
+<!--      <Button size="small" class="mr10" @click="doNotify" v-if="showNotify">一次性通知</Button>-->
       <Button size="small" @click="showRefundHint = true" v-if="refundState === 0">退款申请</Button>
       <Button size="small" style="cursor: default;" v-else-if="refundState === 1">退款申请 审核中</Button>
       <Button size="small" type="error" v-else-if="refundState === 3" @click="toRefundDetail">退款申请 审核不通过</Button>

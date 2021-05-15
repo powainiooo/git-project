@@ -55,6 +55,15 @@
   margin 24px auto
   img
     width 100%
+.notice-list.borderL
+  position relative
+  &:after
+    content ''
+    width 1px
+    height 100%
+    abTL(0, -25px)
+    background-color #EEEEEF
+    z-index 0
 </style>
 
 <template>
@@ -123,6 +132,13 @@
                 <Option :value="2">纸质票</Option>
               </Select>
             </FormItem>
+            <FormItem>
+              <tag-line title="门票类型" v-if="isEditor">{{formData.address2}}</tag-line>
+              <Select placeholder="门票类型" v-model="formData.address2" v-else>
+                <Option :value="1">电子票</Option>
+                <Option :value="2">纸质票</Option>
+              </Select>
+            </FormItem>
             <FormItem style="margin-bottom: 0">
               <tag-line title="证件类型" v-if="isEditor">身份证</tag-line>
               <Select placeholder="是否需要身份证" v-model="formData.id_card_flag" v-else>
@@ -146,12 +162,19 @@
         </Form>
       </div>
       <div class="form-col">
-        <Form class="form">
+        <Form class="form notice-list borderL">
           <div class="form-title" style="margin-bottom: 0;">活动须知（点击修改）</div>
-          <div class="form-cell pr"
+          <div class="form-cell pr "
                v-for="(item, index) in noticeList"
                :key="index">
             <img :src="getIndexSrc(index)" style="display: block; margin-bottom: 10px; margin-left: 10px; "/>
+            <a href="javascript:;"
+               class="btn-close"
+               v-if="index > 0"
+               @click="delNotice(index)"
+               style="position: absolute; top: 60px; right: 26px;">
+              <img src="@/assets/img/ico-del.png" width="20" />
+            </a>
             <Input type="textarea" :rows="4" placeholder="填写须知(30字内)" v-model="item.notice" />
             <div class="warnTxt"
                  style="left: 24%; top: 20px;"
@@ -308,6 +331,9 @@ export default {
       this.noticeList.push({
         notice: ''
       })
+    },
+    delNotice (index) {
+      this.noticeList.splice(index, 1)
     },
     getParams () {
       const ts = []

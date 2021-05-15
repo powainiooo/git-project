@@ -74,6 +74,14 @@ export default {
           this.listData = this.listData.concat(res.data.list)
         }
       })
+    },
+    footPrint () {
+      postAction('/api/statistics/record', {
+        type: 1,
+        element: 2
+      }).then(res => {
+        console.log(res)
+      })
     }
   },
   onReachBottom () {
@@ -84,6 +92,7 @@ export default {
   onShow () {
     // let app = getApp()
     this.getData()
+    this.footPrint()
   },
   mounted () {
     this.$refs.header.setStatus('onlyClose')

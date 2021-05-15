@@ -111,6 +111,8 @@
   &-imgs
     size(100%, 220px)
     background-color #EEEEEF
+    center()
+    overflow hidden
     img
       width 100%
       display block

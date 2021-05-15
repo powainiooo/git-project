@@ -65,8 +65,8 @@
             </FormItem>
             <FormItem>
               <tag-line title="开始时间" v-if="isEditor">{{formData.telephone}}</tag-line>
-              <Input v-model="formData.telephone" placeholder="活动联系电话" v-else />
-              <div class="warnTxt" style="top: 4px; left: 106%" v-if="!phoneDisabled && formData.telephone !== ''"><span>请输入正确的电话！</span></div>
+              <Input v-model="formData.telephone" placeholder="活动联系电话" v-else @on-focus="isPhoneFocus = true" @on-blur="isPhoneFocus = false" />
+              <div class="warnTxt" style="top: 4px; left: 106%" v-if="!phoneDisabled && !isPhoneFocus && formData.telephone !== ''"><span>请输入正确的电话！</span></div>
             </FormItem>
             <FormItem>
               <Input type="textarea"
@@ -225,7 +225,8 @@ export default {
         telephone: '',
         address: '',
         cover_image: ''
-      }
+      },
+      isPhoneFocus: false
     }
   },
   methods: {

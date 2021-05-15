@@ -25,6 +25,8 @@
   100%
     transform translateX(-100px)
     opacity 0
+.logo-top
+  abTL(20px, 30px)
 </style>
 
 <template>
@@ -39,6 +41,9 @@
     <step3 ref="step3" :step="step" :type="type" @change="pageFunc" v-show="step === 3"/>
   </transition>
   <alert ref="alert" @onRetry="handleSubmit" @onOk="onOk" />
+  <div class="logo-top">
+    <router-link to="/"><img src="@/assets/img/logo.png" width="161" /></router-link>
+  </div>
 </div>
 </template>
 

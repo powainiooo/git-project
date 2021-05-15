@@ -15,8 +15,11 @@
     <li v-for="(item, index) in list" :key="id">
       <div class="rank"><img :src="'/static/images/number/'+ (index + 1) +'.png'" mode="heightFix" /></div>
       <div class="content"
-           :class="{'active': item.id === priceId}"
-           hover-class="hscale"
+           :class="{
+           'active': item.id === priceId,
+           'disabled': item.sold_out_flag === 1
+           }"
+           :hover-class="item.sold_out_flag === 0 ? 'hscale' : ''"
            hover-stay-time="10">
         <input placeholder-style="color: #fff;" v-model="item.name" disabled @click="selectTicket(item)" />
         <picker :range="numsArr" @change="numsChange" v-if="item.id === priceId">
@@ -47,8 +50,26 @@ export default {
       nums: 1
     }
   },
+  mounted () {
+    console.log('select', this.list)
+    let min = 100000
+    let item = {}
+    this.list.forEach(i => {
+      if (i.sold_out_flag === 0) {
+        if (Number(i.price) < min) {
+          min = Number(i.price)
+          this.priceId = i.id
+          item = i
+        }
+      }
+    })
+    this.$nextTick(() => {
+      this.selectTicket(item)
+    })
+  },
   methods: {
     selectTicket (record) {
+      if (record.sold_out_flag === 1) return
       this.priceId = record.id
       this.setNumsArr(record.limit)
       if (this.nums > record.limit && record.limit !== 0) this.nums = record.limit

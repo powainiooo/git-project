@@ -1,5 +1,6 @@
 <style lang="stylus" type="text/stylus">
-@import "../assets/css/global.styl"
+@import "../../assets/css/mixin.styl"
+@import "../../assets/css/global.styl"
 .c-upload
   display flex
   align-items center
@@ -9,22 +10,23 @@
     center()
     overflow hidden
     size(90px, 90px)
-    background-color #EEEEEF
-    border-radius 10px
+    background-color #ffffff
+    border-radius 20px
     position relative
+    .add
+      size(20px, 20px); box-shadow 0px 0px 3px 0px rgba(0, 0, 0, 0.15); background-color mainColor; center(); border-radius 50%;
     .picture
       width 100%
       display block
-    button
-      padding 0 6px
-      border-radius 3px
-      bgG()
-      font-size 12px
-      color #ffffff
-      height 22px
-      line-height 22px
-      abTL(50%, 50%)
-      transform translate(-50%, -50%)
+  button
+    padding 0 10px
+    border-radius 13px
+    background-color mainColor
+    font-size 12px
+    color #ffffff
+    height 25px
+    line-height 25px
+    box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.15);
   &-done
     border 2px solid #6D9AF4
   &-error
@@ -35,7 +37,7 @@
     size(60px, 6px)
     border-radius 3px
     overflow hidden
-    background-color #ffffff
+    background-color mainColor
   &-bar
     size(50%, 100%)
     bgG()
@@ -76,7 +78,7 @@
       border 3px solid #6D9AF4
       margin-bottom 20px
       .vue-cropper
-        background url("../assets/img/bg.png") rgb(200, 201, 202)
+        background url("../../assets/img/bg.png") rgb(200, 201, 202)
         background-size 360px
     &-container
       size(600px, 600px)
@@ -102,15 +104,17 @@
           }"
          :style="{width: width + 'px'}"
          @click="openCropper">
-      <img src="@/assets/img/ico-add.png" class="add" width="20" v-if="value === '' && !isLoading" />
+      <a href="javascript:;" class="add" v-if="value === '' && !isLoading">
+        <img src="@/assets/img/add.png" width="8" />
+      </a>
       <div class="c-upload-progress" v-if="isLoading">
         <div class="c-upload-bar" :style="{width: barWidth}"></div>
       </div>
       <img :src="cdnurl + value" class="picture" v-if="value !== '' && !isLoading" />
-      <button v-if="value !== '' && !isLoading">重传</button>
     </div>
   </Upload>
   <div class="c-upload-content">
+    <button v-if="value !== '' && !isLoading">重传</button>
     <div><slot name="title"></slot></div>
     <p><slot name="hint"></slot></p>
   </div>
@@ -153,7 +157,7 @@
 
 <script type='es6'>
 import { VueCropper } from 'vue-cropper'
-import { postAction } from '../utils'
+import { postAction } from '@/utils'
 export default {
   name: 'app',
   components: {

@@ -1,6 +1,20 @@
 <style lang="stylus" type="text/stylus">
 @import "../../assets/css/global.styl"
+.borderR
+  position relative
+  &:after
+    content ''
+    width 1px
+    height 100%
+    abTL(0, auto)
+    right -26px
+    background-color #EEEEEF
+    z-index 0
 .acti-item
+  .index
+    height 25px;
+  .btn-close
+    abTL(20px, 35px)
   .txt
     margin-right 10px
     margin-left 15px
@@ -18,11 +32,19 @@
     </template>
     <div class="form-grid">
       <div class="form-col">
-        <Form class="form">
+        <Form class="form borderR">
           <div class="form-title" style="margin-bottom: 0;">上传艺人图片（选填）</div>
           <div class="form-cell pr"
                v-for="(item, index) in artistList"
                :key="index">
+            <div>
+              <a href="javascript:;"
+                 class="btn-close"
+                 v-if="index > 0"
+                 @click="delArtist(index)">
+                <img src="@/assets/img/ico-del.png" width="20" />
+              </a>
+            </div>
             <div style="margin-bottom: 10px;">
               <Input placeholder="艺人姓名"
                      v-model="item.content"
@@ -48,7 +70,13 @@
           <div class="form-cell center acti-item pr"
                v-for="(item, index) in activityList"
                :key="index">
-            <img :src="getIndexSrc(index)" />
+            <img :src="getIndexSrc(index)" class="index" />
+            <a href="javascript:;"
+               class="btn-close"
+               v-if="index > 0"
+               @click="delActi(index)">
+              <img src="@/assets/img/ico-del.png" width="20" />
+            </a>
             <Input type="textarea"
                    class="txt"
                    placeholder="填写详情（200字内）"
@@ -158,6 +186,12 @@ export default {
     setData (record) {
       this.artistList = record.artist_list
       this.activityList = record.intro_list
+    },
+    delArtist (index) {
+      this.artistList.splice(index, 1)
+    },
+    delActi (index) {
+      this.activityList.splice(index, 1)
     }
   }
 }

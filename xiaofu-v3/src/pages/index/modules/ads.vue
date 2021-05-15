@@ -12,7 +12,7 @@
   99% { opacity: 0; }
   100% { opacity: 0; display: none; }
 }
-.ad-frame-hide .ad-container { animation: fadeOut2 1s linear both }
+.ad-frame-hide .ad-container { animation: fadeOut2 0.6s linear both }
 @keyframes fadeOut2 {
   0% { opacity: 1; transform: scale(1) }
   99% { opacity: 0; transform: scale(1.2) }
@@ -26,7 +26,7 @@
      :class="{'ad-frame-hide': !show}"
      @click="toDetail"
      @animationend="animationend">
-  <div class="ad-container">
+  <div class="ad-container" @click="toDetail">
     <img :src="record.cover_image" mode="aspectFill" class="pic" @load="loadOver" @error="loadErr" />
     <div class="infos">
       <div class="name">
@@ -70,8 +70,9 @@ export default {
 	methods: {
     toDetail () {
       mpvue.navigateTo({
-        url: `/pages/details/main?id=${this.record.id}`
+        url: `/pages/details/main?id=${this.record.id}&source=ad`
       })
+      this.hide()
     },
     hide () {
       console.log('hide ad')

@@ -48,6 +48,15 @@
       &>.flex
         &>div
           flex 1
+
+  .borderL
+    position relative
+    &:before
+      content ''
+      width 1px
+      height 100%
+      abTL(0, -24px)
+      background-color #EEEEEF
 </style>
 
 <template>
@@ -244,7 +253,7 @@
         </ul>
       </div>
       <div>
-        <Form class="form">
+        <Form class="form" style="margin-top: 36px">
           <div class="form-title between">
             <span>服务条款</span>
             <RadioGroup v-model="tabKey" type="button" button-style="solid" class="tab-bar tab-bar-min">
@@ -253,8 +262,8 @@
             </RadioGroup>
           </div>
         </Form>
-        <hr color="#EEEEEF" size="1" style="margin-top: -12px"/>
-        <div class="txt2" style="margin: 18px 24px" v-if="tabKey === 1">
+        <hr color="#EEEEEF" size="1" style="margin-top: -15px"/>
+        <div class="txt2 borderL" style="margin: 18px 24px" v-if="tabKey === 1">
           <h3 style="font-size: 16px; line-height: 28px;">小夫有票活动方服务协议</h3>
           <p>欢迎您访问何方（深圳）设计事务所有限公司及其关联公司所经营的小夫有票editor（域名为editor.leesticket.com下同）。在您使用小夫有票各项服务之前，请您认真阅读并理解《小夫有票editor活动方服务协议》（以下简称 “本协议”）。请您重点关注关于会员个人信息保护、责任范围及免责、法律适用及管辖等内容的条款，该类条款会以下划线方式标注。</p>
           <p>一、本协议的确认和接受</p>
@@ -321,7 +330,7 @@
           <p>1、本协议的条款是可分割的，如本协议任何条款被裁定为无效或不可执行，该条款可被删除而其余条款应予以执行。</p>
           <p>2、法律管辖和适用本协议的订立、执行和解释及争议的解决均应适用中国法律。如双方就本协议内容或其执行发生任何争议，双方应尽力友好协商解决；协商不成时，任何一方均可向何方（深圳）设计事务所有限公司所在地区人民法院提起诉讼。</p>
         </div>
-        <div class="txt2" style="margin: 18px 24px" v-else-if="tabKey === 2">
+        <div class="txt2 borderL" style="margin: 18px 24px" v-else-if="tabKey === 2">
           <h3 style="font-size: 16px; line-height: 28px;">小夫有票活动方隐私条款</h3>
           <p>一、我们如何收集您的信息</p>
           <p>个人信息是指以电子或者其他方式记录的能够单独或者与其他信息结合识别特定自然人身份或者反映特定自然人活动情况的各种信息。</p>
@@ -487,7 +496,7 @@ export default {
         t: -1
       },
       tabKey: 1,
-      step: 1,
+      step: 3,
       countIndex: 10,
       countT: -1,
       formData: {

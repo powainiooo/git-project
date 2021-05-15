@@ -98,6 +98,9 @@
 .form-list li .active {
   background: linear-gradient(172deg, #0027AF 0%, #2154DA 57%, #003AC3 100%);
 }
+.form-list li .disabled {
+  background: #DBDCDC;
+}
 .form-list li .content input {
   flex: 1;
   height: 100%;
@@ -161,9 +164,9 @@
   <div>
   <infos ref="infos" :record="record"/>
 
-  <artist ref="artist" :list="record.artist_list || []" />
-  <notice ref="notice" :list="record.notice_list || []" />
-  <particulars ref="particulars" :list="record.intro_list || []" />
+  <artist ref="artist" :list="record.artist_list || []" v-if="record.artist_list.length > 0" />
+  <notice ref="notice" :list="record.notice_list || []" v-if="record.notice_list.length > 0" />
+  <particulars ref="particulars" :list="record.intro_list || []" v-if="record.intro_list.length > 0" />
   <organizers ref="organizers" :record="record.organizer" />
   <recommend ref="recommend" :list="record.recommend_tickets" />
   </div>
@@ -300,6 +303,7 @@ export default {
       this.page = 'detail'
     },
     getValue (data) {
+      console.log('price_id', data)
       for (const key in data) {
         if (key === 'cardNo') {
           this.cardNo = data[key]

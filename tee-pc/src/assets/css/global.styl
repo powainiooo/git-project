@@ -22,6 +22,10 @@ body
 .around
   around()
 
+// 动效
+.ts1
+  transition all .4s cubic-bezier(.23,.78,.33,.97)
+
 // 盒子样式
 .box
   background: #F9F9F9; box-shadow: 0px 3px 20px 0px rgba(0, 0, 0, 0.08); border-radius: 50px 50px 0px 0px; position relative;
@@ -31,12 +35,48 @@ body
   width 250px; margin-left auto; margin-right auto;
   .ivu-form-item
     margin-bottom 20px
+  .ivu-form-item-error-tip
+    font-size 12px; left 16px; margin-top -2px;
+  .form-hint
+    font-size 12px; color #C8C9CA; margin-left 15px; margin-right 15px; line-height 15px; margin-top 4px;
 
 .ivu-input
   border none; background-color #FFFFFF; height 40px; color #41372D; border-radius 20px; padding 4px 15px;
-  &::-webkit-input-placeholder
-    color: #C8C9CA
+.ivu-input-group-append
+  background-color #ffffff; border none; border-radius 0 20px 20px 0; font-size 12px; color #C8C9CA; padding-right 15px;
 .ivu-btn
   min-width 100px; height 40px; background-color mainColor; color #FAFAFA; border-radius 20px; border-color mainColor;
   &:hover
     background-color mainColor; color #FAFAFA; border-color mainColor; box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.15);
+  &[disabled]
+    border none
+    background #EDECEB
+    color  #B9BABB
+  &[disabled]:hover
+    background #EDECEB
+    color  #B9BABB
+.ivu-select-single
+  .ivu-select-selection
+    height 40px
+    border none
+    border-radius 20px
+    .ivu-select-placeholder
+      height 40px
+      line-height 40px
+      color #C8C9CA
+      padding-left 15px
+    .ivu-select-arrow
+      color #ffffff
+      z-index 5
+      right 14px
+    .ivu-select-selected-value
+      height 40px
+      line-height 40px
+    &:after
+      content ''
+      size(40px, 40px)
+      line-height 40px
+      abBR(0, 0)
+      background-color mainColor
+      border-radius 0 20px 20px 0
+      color rgba(255, 255, 255, .5)

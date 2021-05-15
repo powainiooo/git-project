@@ -4,17 +4,15 @@
   size(100%, 100vh)
   display flex; align-items flex-end; justify-content center;
   &-title
-    size(100%, 80px); abTL(0, 0); background-color #ffffff; border-radius 50px 50px 0 0; between(); padding 0 30px; position relative;
-    &:after
-      content ''; abTL(100%, 0); size(100%, 34px); background url("../../assets/img/sd1.png") no-repeat;
+    size(100%, 80px); abTL(0, 0); background-color #ffffff; border-radius 50px 50px 0 0; between(); padding 0 30px; position relative; box-shadow 0 2px 13px 0 rgba(0, 0, 0, .08)
   &-body
-    size(100%, 100%); overflow-y auto; position relative;
+    size(100%, calc(100% - 80px)); overflow-y auto; position relative;
 </style>
 
 <template>
 <div class="c-float-box">
   <div class="box pr" :style="styles">
-    <div class="c-float-box-title" v-if="$slots.btns && title !== ''">
+    <div class="c-float-box-title" v-if="$slots.btns || title !== ''">
       <h3>{{title}}</h3>
       <slot name="btns"></slot>
     </div>

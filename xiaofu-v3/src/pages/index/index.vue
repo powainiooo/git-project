@@ -163,10 +163,10 @@ export default {
   onShow () {
     // let app = getApp()
     this.getData()
-    this.showPage = false
-    this.$nextTick(() => {
-      this.showPage = true
-    })
+    // this.showPage = false
+    // this.$nextTick(() => {
+    //   this.showPage = true
+    // })
   }
 }
 </script>

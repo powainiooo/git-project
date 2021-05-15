@@ -26,7 +26,8 @@ export default {
     return {
       id: '',
       hasData: false,
-      detailData: {}
+      detailData: {},
+      source: ''
     }
   },
 
@@ -54,8 +55,23 @@ export default {
           this.detailData = res.data
           this.$nextTick(() => {
             this.hasData = true
+            this.footPrint()
           })
         }
+      })
+    },
+    footPrint () {
+      let type = 2
+      let element = this.detailData.music_type
+      if (this.source === 'ad') {
+        type = 1
+        element = 1
+      }
+      postAction('/api/statistics/record', {
+        type,
+        element
+      }).then(res => {
+        console.log(res)
       })
     }
   },
@@ -67,6 +83,7 @@ export default {
     Object.assign(this.$data, this.$options.data())
     // let app = getApp()
     this.id = options.id || 15
+    this.source = options.source || 'ticket'
     this.getData()
   }
 }

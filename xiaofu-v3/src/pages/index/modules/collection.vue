@@ -9,7 +9,17 @@
 }
 .c-collection img {
   width: 100%;
-  height: 100%;
+  height: 267px;
+}
+.c-collection .blur-img {
+  width: 100%;
+  height: 80px;
+  overflow: hidden;
+  background-color: #ffffff;
+  position: absolute;
+  top: 0;
+  left: 0;
+  filter: blur(4px);
 }
 .c-collection h3 {
   width: 100%;
@@ -40,6 +50,9 @@
      hover-stay-time="10"
      @click="toDetail">
   <img :src="record.image" mode="aspectFill" />
+  <div class="blur-img">
+    <img :src="record.image" mode="aspectFill" />
+  </div>
   <h3>
     <p class="en">{{record.name}}</p>
     <p>{{record.intro}}</p>

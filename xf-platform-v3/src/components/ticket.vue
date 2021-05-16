@@ -124,7 +124,7 @@
   <div class="c-ticket-operates" :class="['operates' + record.sub_state]" v-if="operates">
     <div class="flex">
       <div class="c-ticket-status">
-        <a href="javascript:;" v-if="showOffline"><img src="@/assets/img/ico-close.png" /></a>
+        <a href="javascript:;" v-if="showOffline" @click="handleOff" @mousedown.stop="sm" @mouseup.stop="sm"><img src="@/assets/img/ico-close.png" /></a>
         <p>{{stateTxt[record.sub_state]}}</p>
       </div>
       <div class="c-ticket-nums" v-if="showNums">
@@ -244,7 +244,11 @@ export default {
           id: this.record.id
         }
       })
-    }
+    },
+    handleOff () {
+      this.$emit('offline', this.record.id)
+    },
+    sm () {}
   }
 }
 </script>

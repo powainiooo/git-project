@@ -78,6 +78,16 @@
                 <Input v-model="formData.organizer_name" placeholder="活动方名称" />
               </FormItem>
               <FormItem>
+                <Select placeholder="选择省份" @on-change="getCityData">
+                  <Option v-for="i in provinceList" :key="i.value" :value="i.value">{{i.name}}</Option>
+                </Select>
+              </FormItem>
+              <FormItem>
+                <Select v-model="formData.city_id" placeholder="选择城市">
+                  <Option v-for="i in cityList" :key="i.value" :value="i.value">{{i.name}}</Option>
+                </Select>
+              </FormItem>
+              <FormItem>
                 <Input v-model="formData.address" placeholder="联系地址" />
               </FormItem>
             </template>
@@ -90,6 +100,16 @@
             </FormItem>
             <FormItem>
               <Input v-model="formData.name" placeholder="公司全称" />
+            </FormItem>
+            <FormItem>
+              <Select placeholder="选择省份" @on-change="getCityData">
+                <Option v-for="i in provinceList" :key="i.value" :value="i.value">{{i.name}}</Option>
+              </Select>
+            </FormItem>
+            <FormItem>
+              <Select v-model="formData.city_id" placeholder="选择城市">
+                <Option v-for="i in cityList" :key="i.value" :value="i.value">{{i.name}}</Option>
+              </Select>
             </FormItem>
             <FormItem>
               <Input v-model="formData.address" placeholder="公司地址" />
@@ -108,6 +128,9 @@
               <Input v-model="vericode.code" placeholder="验证码">
                 <Button slot="append" :disabled="veriBtnDisabled" @click="getCode">{{vericode.btnName}}</Button>
               </Input>
+            </FormItem>
+            <FormItem>
+              <Input type="textarea" :rows="4" v-model="formData.intro" placeholder="商家简介" />
             </FormItem>
           </div>
         </div>
@@ -149,12 +172,13 @@
             </li>
           </ul>
           <!-- 场地照片 -->
-          <template v-if="type === '3'">
+          <template>
             <hr color="#EEEEEF"/>
             <Form class="form">
               <FormItem>
                 <upload-img v-model="formData.space_image">
-                  <span slot="title">场地照片</span>
+                  <span slot="title" v-if="type === '3'">场地照片</span>
+                  <span slot="title" v-else>背景图片</span>
                   <span slot="hint">尺寸1125px*600px</span>
                 </upload-img>
               </FormItem>
@@ -457,7 +481,7 @@ export default {
     },
     nextBtnDisable () {
       if (this.step === 1) {
-        if (this.formData.organizer_name === '' || this.formData.address === '' || this.formData.person === '' || !this.idCardReg || this.phoneDisabled || this.formData.logo === '') {
+        if (this.formData.organizer_name === '' || this.formData.address === '' || this.formData.person === '' || !this.idCardReg || this.phoneDisabled || this.formData.logo === '' || this.formData.city_id === '') {
           return true
         }
         if (this.type === '1') { // 个人
@@ -483,7 +507,7 @@ export default {
   },
   data () {
     return {
-      vericodeEvent: 'placeverify',
+      vericodeEvent: 'placeverify', // C3PBZ-YFFH2-7HGUG-CQUZV-64ADF-WHBR6
       bh: 0,
       tabList: [
         { name: '服务协议', value: 1 },
@@ -496,9 +520,11 @@ export default {
         t: -1
       },
       tabKey: 1,
-      step: 3,
+      step: 1,
       countIndex: 10,
       countT: -1,
+      provinceList: [],
+      cityList: [],
       formData: {
         organizer_name: '',
         name: '',
@@ -517,12 +543,17 @@ export default {
         account_mobile: '',
         account_card_no: '',
         account_bank_id: '',
-        account_opening_banke: ''
+        account_opening_banke: '',
+        longitude: '114.058938',
+        latitude: '22.553148',
+        intro: '',
+        city_id: ''
       }
     }
   },
   mounted () {
     this.bh = window.innerHeight - (window.innerHeight - 376) / 2 - 76
+    this.getCityData()
   },
   watch: {
     'vericode.mobile' (val) {
@@ -585,6 +616,19 @@ export default {
     },
     onOk () {
       this.changePage('login')
+    },
+    getCityData (id = '') {
+      postAction('/api/common/area', {
+        province: id
+      }).then(res => {
+        if (res.code === 1) {
+          if (id === '') {
+            this.provinceList = res.data
+          } else {
+            this.cityList = res.data
+          }
+        }
+      })
     }
   }
 }

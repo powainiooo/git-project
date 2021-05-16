@@ -51,6 +51,7 @@
               <ticket :record="item"
                       operates
                       :class="{'c-ticket-touch': index === touchIndex}"
+                      @offline="handleOff"
               />
             </div>
           </Col>
@@ -108,7 +109,8 @@ export default {
       total: 0,
       pageNo: 1,
       pageSize: 9,
-      touchIndex: -1
+      touchIndex: -1,
+      isAjax: false
     }
   },
   created () {
@@ -166,6 +168,18 @@ export default {
     closeDetail () {
       this.showDetail = false
       this.getData()
+    },
+    handleOff (id) {
+      if (this.isAjax) return
+      this.isAjax = true
+      postAction('/editor/ticket/set_sale_state', {
+        id,
+        sub_state: 3
+      }).then(res => {
+        if (res.code === 1) {
+          this.getData()
+        }
+      })
     }
   }
 }

@@ -59,7 +59,10 @@
 </template>
 
 <script type='es6'>
+import Vue from 'vue'
 import floatBox from '@/components/common/floatBox'
+import { postAction } from '../utils'
+import { ACCESS_TOKEN } from '@/config'
 export default {
   name: 'app',
   components: {
@@ -86,7 +89,18 @@ export default {
     handleLogin () {
       this.$refs.form.validate((valid) => {
         if (valid) {
-          this.$router.push('/account')
+          //
+          postAction('/shopapi/login', {
+            account: this.formData.username,
+            password: this.formData.password
+          }).then(res => {
+            if (res.code === 0) {
+              Vue.ls.set(ACCESS_TOKEN, res.data.api_token, 7 * 24 * 60 * 60 * 1000)
+              this.$router.push({
+                name: 'Home'
+              })
+            }
+          })
         }
       })
     }

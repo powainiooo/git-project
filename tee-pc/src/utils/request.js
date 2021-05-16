@@ -34,9 +34,10 @@ const err = (error) => {
 
 // request interceptor
 service.interceptors.request.use(config => {
+  console.log('config', config)
   const token = Vue.ls.get(ACCESS_TOKEN)
   if (token) {
-    config.headers['token'] = token
+    config.url = config.url + '?api_token=' + token
   }
   return config
 }, (error) => {
@@ -46,7 +47,7 @@ service.interceptors.request.use(config => {
 // response interceptor
 service.interceptors.response.use((response) => {
   console.log(response)
-  if (response.data.code !== 1) {
+  if (response.data.code !== 0) {
     if (response.config.config.autoWarn) {
       Message.warning(response.data.msg)
     }

@@ -80,7 +80,7 @@ export default new Vuex.Store({
         postAction('/editor/user/info').then(res => {
           if (res.code === 1) {
             context.commit('SET_GLOBALDATA', res.data)
-            resolve()
+            resolve(res.data)
           } else {
             reject(res.msg)
           }

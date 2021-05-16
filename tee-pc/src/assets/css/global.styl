@@ -29,6 +29,27 @@ body
 // 盒子样式
 .box
   background: #F9F9F9; box-shadow: 0px 3px 20px 0px rgba(0, 0, 0, 0.08); border-radius: 50px 50px 0px 0px; position relative;
+.box2
+  background: #ffffff; box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.08); border-radius: 50px; position relative;
+  &:before
+    content ''; size(100%, 70px); background-color #F4F3F3; abTL(0, 0); z-index 0; border-radius: 50px 50px 0px 0px;
+  &-title
+    font-size 18px; height 70px; padding-top 22px; padding-left 30px; position relative;
+  &-body
+    height calc(100% - 120px); overflow-y auto;
+
+// 标签页
+.tee-tabs
+  &.ivu-tabs-card>.ivu-tabs-bar
+    border-bottom none; margin-bottom 0;
+    .ivu-tabs-nav-container
+      height 57px; padding-top 7px;
+    .ivu-tabs-tab
+      size(160px, 50px); padding 0; margin-right 20px; text-align center; line-height 50px; border-radius 25px 25px 0 0; border none; background-color #EDECEB; font-size 18px; color #B9BABB;
+    .ivu-tabs-tab-active
+      background-color #ffffff; color mainColor; box-shadow 0px 0px 7px 0px rgba(0, 0, 0, 0.08);
+  .ivu-tabs-nav-scroll
+    margin-left 20px; overflow visible;
 
 // 表单
 .c-form
@@ -80,3 +101,33 @@ body
       background-color mainColor
       border-radius 0 20px 20px 0
       color rgba(255, 255, 255, .5)
+.tee-tables
+  position relative;
+  table
+    width 100%
+    thead
+      th
+        height 30px; color #C8C9CA; font-weight normal; font-size 14px; text-align left;
+        &:first-child
+          padding-left 30px
+    tbody
+      tr
+        td
+          vertical-align top
+          &>div
+            min-height 85px
+            padding-top 20px
+            padding-right 20px
+            font-size 14px
+            color #9E9E9F
+            word-break break-all
+          &:first-child
+            border-radius 20px 0 0 20px
+            padding-left 30px
+          &:last-child
+            border-radius 0 20px 20px 0
+            &>div
+              border-radius 0 20px 20px 0
+      tr:nth-child(2n-1)
+        td
+          background-color #F4F3F3

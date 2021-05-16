@@ -21,6 +21,8 @@ import {
   Col,
   Upload,
   Page,
+  Tabs,
+  TabPane,
   Message,
   Modal
 } from 'view-design'
@@ -38,6 +40,8 @@ Vue.component('Row', Row)
 Vue.component('Col', Col)
 Vue.component('Upload', Upload)
 Vue.component('Page', Page)
+Vue.component('Tabs', Tabs)
+Vue.component('TabPane', TabPane)
 
 Vue.use(Storage)
 Vue.prototype.$Message = Message

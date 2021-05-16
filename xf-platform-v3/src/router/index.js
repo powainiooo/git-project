@@ -29,6 +29,11 @@ const routes = [
     path: '/publish',
     name: 'Publish',
     component: () => import('../views/publish.vue')
+  },
+  {
+    path: '/result',
+    name: 'Result',
+    component: () => import('../views/result.vue')
   }
 ]
 
@@ -51,8 +56,14 @@ router.beforeEach((to, from, next) => {
       } else {
         console.log('4')
         store.dispatch('getUserData').then(res => {
-          console.log('5')
-          next()
+          console.log('5', res)
+          if (res.merchant.status === 1) {
+            next()
+          } else {
+            next({
+              name: 'Result'
+            })
+          }
         }).catch(err => {
           console.log('err', err)
           store.dispatch('logout').then(() => {

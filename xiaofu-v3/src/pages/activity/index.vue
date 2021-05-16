@@ -85,7 +85,7 @@
     <c-header
       ref="header"
       @close="handleClose" />
-    <img src="/static/images/img.jpg" class="banner" />
+    <img :src="record.space_image" class="banner" />
     <div class="activity-page">
       <div class="line1">
         <div class="infos">
@@ -103,9 +103,14 @@
         <div class="address"
              hover-class="hscale"
              hover-stay-time="10"
-             @click="openAddr">
+             @click="openAddr"
+             v-if="record.type === 3">
           <img src="/static/images/common/dot.png" />
           <span>{{record.address}}</span>
+        </div>
+        <div class="address"
+             v-else>
+          <span>{{record.phone}}</span>
         </div>
         <button class="btn"
                 @click="toComment"

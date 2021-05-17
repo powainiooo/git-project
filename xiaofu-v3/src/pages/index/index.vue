@@ -162,6 +162,8 @@ export default {
   },
   onShow () {
     // let app = getApp()
+    this.page = 1
+    this.listData = []
     this.getData()
     // this.showPage = false
     // this.$nextTick(() => {

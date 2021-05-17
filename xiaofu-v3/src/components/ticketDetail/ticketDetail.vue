@@ -244,6 +244,7 @@ export default {
         mobile: '',
         identity_type: 1,
         price_id: '',
+        address: '',
         num: 0
       },
       scrollTop: '',

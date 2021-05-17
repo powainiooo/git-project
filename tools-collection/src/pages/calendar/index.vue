@@ -102,6 +102,7 @@ export default {
       if (month === 12) month = 0
       month += 1
       if (month < 10) month = `0${month}`
+      if (day < 10) day = `0${day}`
       return `${year}-${month}-${day}`
     },
     initCalendar (year, month) { // 初始化日历
@@ -209,6 +210,7 @@ export default {
         this.day = 1
       }
       this.current = this.formatDate(this.year, this.month, this.day)
+      console.log('this.current', this.current)
       this.getData()
     },
     toggle (day) {

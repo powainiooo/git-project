@@ -43,6 +43,7 @@ Vue.component('Row', Row)
 Vue.component('Col', Col)
 Vue.component('Upload', Upload)
 Vue.component('Page', Page)
+Vue.component('Modal', Modal)
 Vue.config.productionTip = false
 
 Vue.use(Storage)

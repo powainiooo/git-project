@@ -169,15 +169,31 @@ export default {
       this.showDetail = false
       this.getData()
     },
-    handleOff (id) {
+    handleOff (record) {
       if (this.isAjax) return
-      this.isAjax = true
-      postAction('/editor/ticket/set_sale_state', {
-        id,
-        sub_state: 3
-      }).then(res => {
-        if (res.code === 1) {
-          this.getData()
+      let subState = 3
+      let title = '是否确认下架该票务？'
+      let content = '确认下架后，在小夫有票售票平台将隐藏该票务，用户无法获取该票务信息。'
+      console.log('record', record)
+      if (record.sub_state === 3) {
+        subState = 2
+        title = '是否确认上架该票务？'
+        content = '确认上架后，在小夫有票售票平台将显示该票务，用户可获取该票务信息并进行购买操作。'
+      }
+      this.$tModal.confirm({
+        title,
+        content,
+        onOk: () => {
+          this.isAjax = true
+          postAction('/editor/ticket/set_sale_state', {
+            id: record.id,
+            sub_state: subState
+          }).then(res => {
+            if (res.code === 1) {
+              this.getData()
+            }
+            this.isAjax = false
+          })
         }
       })
     }

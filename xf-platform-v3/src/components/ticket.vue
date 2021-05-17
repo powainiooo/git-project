@@ -3,15 +3,16 @@
 .c-ticket
   transition transform 0.15s ease-in-out
   cursor pointer
+  &.operates-ticket
+    -webkit-mask-image url('../assets/img/mask5.png')
+    -webkit-mask-repeat no-repeat
+    -webkit-mask-size 420px 340px
   &-touch
     transform scale(.96)
   &-operates
     height 60px
     between()
     background-color #ffffff
-    -webkit-mask-image url('../assets/img/mask4.png')
-    -webkit-mask-repeat no-repeat
-    -webkit-mask-size 420px 60px
   &-status
     size(120px, 60px)
     background linear-gradient(165deg, #0027AF, #2154DA 54%,#003AC3)
@@ -57,9 +58,7 @@
     color #6D9BF5
     margin-right 10px
   .operates-body
-    -webkit-mask-image url('../assets/img/mask5.png')
-    -webkit-mask-repeat no-repeat
-    -webkit-mask-size 420px 280px
+    -webkit-mask-image none
   &-body
     size(420px, 280px)
     background-color #ffffff
@@ -119,7 +118,7 @@
 </style>
 
 <template>
-<div class="c-ticket">
+<div class="c-ticket" :class="{'operates-ticket': operates,}">
   <!-- 销售中:2 停止:3 已售罄:4 已结束:5  审核中:0  审核失败:1  -->
   <div class="c-ticket-operates" :class="['operates' + record.sub_state]" v-if="operates">
     <div class="flex">
@@ -246,7 +245,7 @@ export default {
       })
     },
     handleOff () {
-      this.$emit('offline', this.record.id)
+      this.$emit('offline', this.record)
     },
     sm () {}
   }

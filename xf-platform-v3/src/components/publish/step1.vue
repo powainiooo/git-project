@@ -75,6 +75,7 @@
                      placeholder="活动地址"
                      :readonly="isEditor && errorData.address === ''"
                      :class="{'err-inp': isEditor && errorData.address !== ''}" />
+              <button class="btn-geo" @click="openGeo">定位</button>
               <div class="warnTxt" v-if="isEditor && errorData.address !== ''"><span>{{errorData.address}}</span></div>
             </FormItem>
           </Form>
@@ -109,6 +110,7 @@
       </div>
     </form-box>
   </div>
+  <addr-picker ref="addrPicker" @confirm="getAddrData" />
 </div>
 </template>
 
@@ -118,6 +120,7 @@ import formBox from '@/components/formBox'
 import cDateTime from '@/components/cDateTime'
 import uploadImg from '../uploadImg'
 import tagLine from '../tagLine'
+import addrPicker from '@/components/addrPicker'
 export default {
   name: 'app',
   props: {
@@ -129,7 +132,8 @@ export default {
     formBox,
     cDateTime,
     uploadImg,
-    tagLine
+    tagLine,
+    addrPicker
   },
   computed: {
     globalData () {
@@ -224,7 +228,9 @@ export default {
         start_time: '',
         telephone: '',
         address: '',
-        cover_image: ''
+        cover_image: '',
+        longitude: '',
+        latitude: ''
       },
       isPhoneFocus: false
     }
@@ -262,6 +268,16 @@ export default {
         this.dates = [record.start_date, record.end_date]
         this.musicTypeText = record.music_type_text
       })
+    },
+    openGeo () {
+      this.$refs.addrPicker.show()
+    },
+    getAddrData (data) {
+      console.log('getAddrData', data)
+      this.formData.address = data.address
+      this.formData.latitude = data.location.lat
+      this.formData.longitude = data.location.lng
+      console.log(this.formData)
     }
   }
 }

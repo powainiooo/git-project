@@ -132,13 +132,6 @@
                 <Option :value="2">纸质票</Option>
               </Select>
             </FormItem>
-            <FormItem>
-              <tag-line title="门票类型" v-if="isEditor">{{formData.address2}}</tag-line>
-              <Select placeholder="门票类型" v-model="formData.address2" v-else>
-                <Option :value="1">电子票</Option>
-                <Option :value="2">纸质票</Option>
-              </Select>
-            </FormItem>
             <FormItem style="margin-bottom: 0">
               <tag-line title="证件类型" v-if="isEditor">身份证</tag-line>
               <Select placeholder="是否需要身份证" v-model="formData.id_card_flag" v-else>

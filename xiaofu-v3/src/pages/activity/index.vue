@@ -108,10 +108,11 @@
           <img src="/static/images/common/dot.png" />
           <span>{{record.address}}</span>
         </div>
-        <div class="address"
-             v-else>
-          <span>{{record.phone}}</span>
-        </div>
+        <button class="btn"
+                @click="makePhone"
+                hover-class="hscale"
+                hover-stay-time="10"
+                v-else>{{record.phone}}</button>
         <button class="btn"
                 @click="toComment"
                 hover-class="hscale"
@@ -172,6 +173,11 @@ export default {
         latitude: Number(this.record.latitude),
         longitude: Number(this.record.longitude),
         scale: 15
+      })
+    },
+    makePhone () {
+      mpvue.makePhoneCall({
+        phoneNumber: this.record.phone
       })
     }
   },

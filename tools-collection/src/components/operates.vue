@@ -10,7 +10,7 @@
 
 .c-coin { width: 100%; height: 100vh; background-color: rgba(18, 18, 18, .4); position: fixed; top: 0; left: 0; z-index: 1000; display: flex; justify-content: center; align-items: center; }
 .c-coin-frame { width: 645px; background-color: #FFFFFF; border-radius: 10px; overflow: hidden; }
-.c-coin-frame .list { margin: 80px 10px 0 10px; display: flex; flex-wrap: wrap; }
+.c-coin-frame .list { width: 470px; margin: 80px auto 0 auto; display: flex; flex-wrap: wrap; }
 .c-coin-frame .list li { width: 138px; height: 70px; border: 1px solid #E15244; font-size: 28px; color: #E15244;  margin: 0 10px 30px 10px; }
 .c-coin-frame .list li.active { background-color: #E15244; color: #FFFFFF; }
 .c-coin-frame .list li p { font-size: 28px; color: #FEE51F; text-align: center; margin-top: -16px; line-height: 30px; }

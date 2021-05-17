@@ -64,7 +64,7 @@
   <template slot="button">
       <Button size="small" v-if="step !== 1" @click="step -= 1">上一步</Button>
       <Button size="small" v-if="step !== 3" :disabled="nextBtnDisable" @click="handleNext">下一步</Button>
-      <Button size="small" v-if="step === 3" :disabled="confirm.index !== 0" @click="handleConfirm">{{confirm.btn}}</Button>
+      <Button size="small" v-if="step === 3" :loading="confirm.isAjax" :disabled="confirm.index !== 0" @click="handleConfirm">{{confirm.btn}}</Button>
   </template>
   <ul class="step-box" :style="{'margin-left': (step - 1) * -600 + 'px'}">
     <!-- step1 -->
@@ -73,48 +73,16 @@
         <div>
           <div class="form">
             <div class="form-title" @click="console.log(formData)">企业基本信息</div>
-            <template v-if="type === '1'">
-              <FormItem>
-                <Input v-model="formData.organizer_name" placeholder="活动方名称" />
-              </FormItem>
-              <FormItem>
-                <Select placeholder="选择省份" @on-change="getCityData">
-                  <Option v-for="i in provinceList" :key="i.value" :value="i.value">{{i.name}}</Option>
-                </Select>
-              </FormItem>
-              <FormItem>
-                <Select v-model="formData.city_id" placeholder="选择城市">
-                  <Option v-for="i in cityList" :key="i.value" :value="i.value">{{i.name}}</Option>
-                </Select>
-              </FormItem>
-              <FormItem>
-                <Input v-model="formData.address" placeholder="联系地址" />
-              </FormItem>
-            </template>
-            <template v-else>
-            <FormItem v-if="type === '3'">
-              <Input v-model="formData.organizer_name" placeholder="场地方名称" />
-            </FormItem>
-            <FormItem v-if="type === '2'">
-              <Input v-model="formData.organizer_name" placeholder="活动方名称" />
-            </FormItem>
             <FormItem>
+              <Input v-model="formData.organizer_name" :placeholder="type === '3' ? '场地方名称' : '活动方名称'" />
+            </FormItem>
+            <FormItem v-if="type !== '1'">
               <Input v-model="formData.name" placeholder="公司全称" />
             </FormItem>
             <FormItem>
-              <Select placeholder="选择省份" @on-change="getCityData">
-                <Option v-for="i in provinceList" :key="i.value" :value="i.value">{{i.name}}</Option>
-              </Select>
+              <Input type="textarea" v-model="formData.address" :rows="4" :placeholder="type === '1' ? '联系地址' : '公司地址'" />
+              <button class="btn-geo" @click="openGeo">定位</button>
             </FormItem>
-            <FormItem>
-              <Select v-model="formData.city_id" placeholder="选择城市">
-                <Option v-for="i in cityList" :key="i.value" :value="i.value">{{i.name}}</Option>
-              </Select>
-            </FormItem>
-            <FormItem>
-              <Input v-model="formData.address" placeholder="公司地址" />
-            </FormItem>
-            </template>
             <FormItem>
               <Input v-model="formData.person" placeholder="负责人姓名" />
             </FormItem>
@@ -128,9 +96,6 @@
               <Input v-model="vericode.code" placeholder="验证码">
                 <Button slot="append" :disabled="veriBtnDisabled" @click="getCode">{{vericode.btnName}}</Button>
               </Input>
-            </FormItem>
-            <FormItem>
-              <Input type="textarea" :rows="4" v-model="formData.intro" placeholder="商家简介" />
             </FormItem>
           </div>
         </div>
@@ -440,6 +405,7 @@
     </li>
   </ul>
   <alert ref="alert" @onOk="onOk" />
+  <addr-picker ref="addrPicker" @confirm="getAddrData" />
 </form-box>
 </template>
 
@@ -449,13 +415,15 @@ import alert from './alert'
 import vericode from '@/mixin/vericode'
 import formBox from '@/components/formBox'
 import { postAction } from '@/utils'
+import addrPicker from '@/components/addrPicker'
 export default {
   name: 'app',
   mixins: [vericode],
   components: {
     uploadImg,
     alert,
-    formBox
+    formBox,
+    addrPicker
   },
   computed: {
     account () {
@@ -544,10 +512,9 @@ export default {
         account_card_no: '',
         account_bank_id: '',
         account_opening_banke: '',
-        longitude: '114.058938',
-        latitude: '22.553148',
-        intro: '',
-        city_id: ''
+        longitude: '',
+        latitude: '',
+        city_name: ''
       }
     }
   },
@@ -629,6 +596,17 @@ export default {
           }
         }
       })
+    },
+    openGeo () {
+      this.$refs.addrPicker.show()
+    },
+    getAddrData (data) {
+      console.log('getAddrData', data)
+      this.formData.address = data.address
+      this.formData.latitude = data.location.lat
+      this.formData.longitude = data.location.lng
+      this.formData.city_name = data.addressComponents.city
+      console.log(this.formData)
     }
   }
 }

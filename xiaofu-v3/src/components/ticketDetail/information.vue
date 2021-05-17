@@ -42,6 +42,19 @@
         </picker>
       </div>
     </li>
+    <li v-if="record.ticket_type === 2">
+      <div class="rank">
+        <img :src="'/static/images/number/4.png'" mode="heightFix" v-if="needIDcard" />
+        <img :src="'/static/images/number/3.png'" mode="heightFix" v-else />
+      </div>
+      <div class="content">
+        <input placeholder="收件地址"
+               placeholder-style="color: #9E9E9F;"
+               v-model="address"
+               @blur="inputChange('address')"
+               @confirm="inputChange('address')" />
+      </div>
+    </li>
   </ul>
   <div class="notice-bBorder bBorder"></div>
 </div>
@@ -60,6 +73,7 @@ export default {
     return {
       name: '',
       mobile: '',
+      address: '',
       identity_type: 1,
       cardNo: '',
       placeholder: '身份证 ID number',

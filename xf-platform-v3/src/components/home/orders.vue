@@ -103,7 +103,7 @@ export default {
   data () {
     return {
       showRefundHint: false,
-      stateList: ['未付款', '已支付', '退款申请中', '全额退款', '部分退款'],
+      stateList: ['未付款', '已支付', '退款申请中', '已退款', '已退款'],
       columns: [ // 1260
         { name: '票种', width: 104 },
         { name: '下单时间', width: 130 },

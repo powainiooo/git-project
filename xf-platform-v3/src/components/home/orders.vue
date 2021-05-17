@@ -49,7 +49,7 @@
         <td class="helveB"><div>{{item.createtime}}</div></td>
         <td><div>{{item.name}}</div></td>
         <td class="helveB"><div>{{item.mobile}}</div></td>
-        <td><div>{{item.address}}</div></td>
+        <td v-if="record.ticket_type === 2"><div>{{item.address}}</div></td>
         <td class="helveB"><div>{{item.id_card_no}}</div></td>
         <td class="helveB"><div>{{item.order_no}}</div></td>
         <td class="helveB"><div>{{item.price}}</div></td>
@@ -90,8 +90,10 @@
 </template>
 
 <script type='es6'>
+import Vue from 'vue'
 import cSelect from '../cSelect'
-import { postAction, downFile } from '../../utils'
+import { postAction } from '../../utils'
+import { ACCESS_TOKEN } from '@/config'
 export default {
   name: 'app',
   props: {
@@ -100,16 +102,33 @@ export default {
   components: {
     cSelect
   },
+  computed: {
+    columns () {
+      return this.record.ticket_type === 2 ? this.columns1 : this.columns2
+    }
+  },
   data () {
     return {
       showRefundHint: false,
       stateList: ['未付款', '已支付', '退款申请中', '已退款', '已退款'],
-      columns: [ // 1260
+      columns1: [ // 1260
         { name: '票种', width: 104 },
         { name: '下单时间', width: 130 },
         { name: '买家', width: 70 },
         { name: '电话', width: 130 },
         { name: '邮寄地址', width: 190 },
+        { name: '身份证', width: 170 },
+        { name: '单号', width: 170 },
+        { name: '单价', width: 60 },
+        { name: '票数', width: 60 },
+        { name: '状态', width: 100 },
+        { name: '操作', width: 80 }
+      ],
+      columns2: [ // 1260
+        { name: '票种', width: 104 },
+        { name: '下单时间', width: 130 },
+        { name: '买家', width: 70 },
+        { name: '电话', width: 130 },
         { name: '身份证', width: 170 },
         { name: '单号', width: 170 },
         { name: '单价', width: 60 },
@@ -153,22 +172,23 @@ export default {
       this.type = e.id
     },
     doExport () {
-      if (this.isExport) return
-      this.isExport = true
-      downFile('/editor/order/export', {
-        id: this.record.id
-      }).then(res => {
-        this.isExport = false
-        const blob = new Blob([res.data], {
-          type: 'application/vnd.ms-excel'
-        })
-        const url = window.URL.createObjectURL(blob)
-        const a = document.createElement('a')
-        a.href = url
-        a.download = '导出表格.xlsx'
-        a.click()
-        window.URL.revokeObjectURL(url)
-      })
+      // if (this.isExport) return
+      // this.isExport = true
+      // downFile('/editor/order/export', {
+      //   id: this.record.id
+      // }).then(res => {
+      //   this.isExport = false
+      //   const blob = new Blob([res.data], {
+      //     type: 'application/vnd.ms-excel'
+      //   })
+      //   const url = window.URL.createObjectURL(blob)
+      //   const a = document.createElement('a')
+      //   a.href = url
+      //   a.download = '导出表格.xls'
+      //   a.click()
+      //   window.URL.revokeObjectURL(url)
+      // })
+      window.open(`${window.baseUrl}/editor/order/export?id=${this.record.id}&token=${Vue.ls.get(ACCESS_TOKEN)}`)
     },
     doNotify () {
       console.log('doNotify', this.$tModal)

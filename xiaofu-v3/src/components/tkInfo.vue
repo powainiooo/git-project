@@ -21,6 +21,7 @@
 }
 .c-tk-date:after { content: ''; height: 2px; background-color: #ffffff; transform: scaleY(.5); position: absolute; left: 11px; right: 11px; top: 50%; }
 .c-tk-date div { font-family: HelveB; }
+.c-end-date:before {  content: ''; width: 10px; height: 2px; background-color: #C8C9CA; transform: scaleY(.5); position: absolute; left: -15px; top: 50%; }
 .c-tk-title { flex: 1; overflow: hidden; }
 .c-tk-title p { font-size: 26px; font-family: HelveB; line-height: 30px; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; word-break: break-all; }
 .c-tk-title div { font-size: 20px; font-family: HelveL; color: #9E9E9F; line-height: 25px; }
@@ -31,6 +32,10 @@
   <div class="c-tk-date" :class="['c-tk-date-' + size]">
     <p>{{record.month}}</p>
     <div>{{record.day}}</div>
+  </div>
+  <div class="c-tk-date c-end-date" :class="['c-tk-date-' + size]" v-if="showEndDate">
+    <p>{{endDate.month}}</p>
+    <div>{{endDate.day}}</div>
   </div>
   <div class="c-tk-title" v-if="showTitle">
     <p>{{record.name}}</p>
@@ -54,6 +59,14 @@ export default {
     showTitle: {
       type: Boolean,
       default: true
+    },
+    showEndDate: {
+      type: Boolean,
+      default: false
+    },
+    endDate: {
+      type: Object,
+      default: () => {}
     }
   },
   data () {

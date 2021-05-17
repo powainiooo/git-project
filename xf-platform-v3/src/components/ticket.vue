@@ -94,6 +94,15 @@
       div
         line-height 17px
         font-weight bold
+    .end-dates
+      margin-left 12px;
+      &:before
+        content ''
+        size(6px, 1px)
+        background-color #C8C9CA
+        position absolute
+        top 16px
+        left -9px
     &-titles
       margin-left 12px
       p
@@ -147,6 +156,10 @@
           <p>{{dates.month}}</p>
           <div>{{dates.day}}</div>
         </div>
+        <div class="c-ticket-header-dates end-dates" v-if="record.type === 2 || record.type === 3">
+          <p>{{endDates.month}}</p>
+          <div>{{endDates.day}}</div>
+        </div>
         <div class="c-ticket-header-titles">
           <p>{{record.name === '' ? '活动名称' : record.name}}</p>
           <div>{{record.organizer_name}}</div>
@@ -189,6 +202,20 @@ export default {
         }
       } else {
         const split = this.record.start_date.split('-')
+        return {
+          month: split[1],
+          day: split[2]
+        }
+      }
+    },
+    endDates () {
+      if (this.record.end_date === '') {
+        return {
+          month: '',
+          day: ''
+        }
+      } else {
+        const split = this.record.end_date.split('-')
         return {
           month: split[1],
           day: split[2]

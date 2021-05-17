@@ -180,6 +180,8 @@ export default {
       }
       return {
         start_date: this.formData.start_date,
+        end_date: this.formData.end_date,
+        type: this.formData.type,
         name: this.formData.name,
         cover_image: url,
         organizer_name: this.globalData.merchant.organizer_name,
@@ -249,6 +251,8 @@ export default {
     },
     typeChange () {
       this.date = ''
+      this.formData.start_date = ''
+      this.formData.end_date = ''
       this.dates = []
     },
     getParams () {

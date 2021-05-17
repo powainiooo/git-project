@@ -79,7 +79,7 @@
 <div class="c-ticket-infos">
   <img :src="record.cover_image" class="banner" :class="{'banner-hide': page === 'buy'}" v-if="showBanner && record" />
   <div class="line1 bBorder">
-    <tk-info :record="infoData" />
+    <tk-info :record="infoData" :endDate="infoData2" :showEndDate="showEndDate" />
     <img :src="record.logo" mode="aspectFill" v-if="record" />
   </div>
   <div class="line2 bBorder">
@@ -130,6 +130,19 @@ export default {
         day: date[2],
         name,
         host
+      }
+    },
+    showEndDate () {
+      return this.record.start_date !== this.record.end_date
+    },
+    infoData2 () {
+      let date = ['', '']
+      if (this.record && this.showEndDate) {
+        date = this.record.end_date.split('-')
+      }
+      return {
+        month: date[1],
+        day: date[2]
       }
     },
     timeStr () {

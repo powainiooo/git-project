@@ -55,15 +55,6 @@
   margin 24px auto
   img
     width 100%
-.notice-list.borderL
-  position relative
-  &:after
-    content ''
-    width 1px
-    height 100%
-    abTL(0, -25px)
-    background-color #EEEEEF
-    z-index 0
 </style>
 
 <template>
@@ -122,7 +113,7 @@
         </Form>
       </div>
       <div class="form-col">
-        <Form class="form">
+        <Form class="form borderR">
           <div class="form-title" style="margin-bottom: 0;">票务信息</div>
           <div class="form-cell" style="margin-bottom: 20px">
             <FormItem>
@@ -134,9 +125,10 @@
             </FormItem>
             <FormItem style="margin-bottom: 0">
               <tag-line title="证件类型" v-if="isEditor">身份证</tag-line>
-              <Select placeholder="是否需要身份证" v-model="formData.id_card_flag" v-else>
-                <Option :value="1">是</Option>
-                <Option :value="0">否</Option>
+              <Select placeholder="是否需要证件" v-model="formData.id_card_flag" v-else>
+                <Option :value="1">否</Option>
+                <Option :value="2">身份证</Option>
+                <Option :value="3">护照</Option>
               </Select>
             </FormItem>
           </div>

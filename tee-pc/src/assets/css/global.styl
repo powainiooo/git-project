@@ -63,6 +63,12 @@ body
 
 .ivu-input
   border none; background-color #FFFFFF; height 40px; color #41372D; border-radius 20px; padding 4px 15px;
+.c-input
+  size(250px, 40px); acenter(); border-radius 20px; background-color #ffffff; border: 1px solid #F2F2F2;
+  &-search
+    margin 0 10px;
+  input[type=text]
+    flex 1; border none; height 100%; font-size 12px; color #3E311F;
 .ivu-input-group-append
   background-color #ffffff; border none; border-radius 0 20px 20px 0; font-size 12px; color #C8C9CA; padding-right 15px;
 .ivu-btn
@@ -70,37 +76,32 @@ body
   &:hover
     background-color mainColor; color #FAFAFA; border-color mainColor; box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.15);
   &[disabled]
-    border none
-    background #EDECEB
-    color  #B9BABB
+    border none; background #EDECEB; color #B9BABB
   &[disabled]:hover
-    background #EDECEB
-    color  #B9BABB
+    background #EDECEB; color  #B9BABB
+.ivu-btn-min
+  min-width auto; height 25px; line-height 25px; background-color #ffffff; box-shadow 0px 0px 3px 0px rgba(0, 0, 0, 0.15); border-color #ffffff; color #9E9E9F; font-size 12px; padding 0 9px;
+
 .ivu-select-single
   .ivu-select-selection
-    height 40px
-    border none
-    border-radius 20px
+    height 40px; border none; border-radius 20px
     .ivu-select-placeholder
-      height 40px
-      line-height 40px
-      color #C8C9CA
-      padding-left 15px
+      height 40px; line-height 40px; color #C8C9CA; padding-left 15px
     .ivu-select-arrow
-      color #ffffff
-      z-index 5
-      right 14px
+      color #ffffff; z-index 5; right 14px
     .ivu-select-selected-value
-      height 40px
-      line-height 40px
+      height 40px; line-height 40px; color #3E311F; padding-left 15px
     &:after
-      content ''
-      size(40px, 40px)
-      line-height 40px
-      abBR(0, 0)
-      background-color mainColor
-      border-radius 0 20px 20px 0
-      color rgba(255, 255, 255, .5)
+      content ''; size(40px, 40px); line-height 40px; abBR(0, 0); background-color mainColor; border-radius 0 20px 20px 0; color rgba(255, 255, 255, .5)
+.c-select
+  .ivu-select-selection
+    background-color #A96854
+    .ivu-select-placeholder
+      color #ffffff
+    .ivu-select-selected-value
+      color #ffffff
+    &:after
+      background-color transparent
 .tee-tables
   position relative;
   table
@@ -131,3 +132,16 @@ body
       tr:nth-child(2n-1)
         td
           background-color #F4F3F3
+
+
+// 布局
+.operates-line
+  padding 0 45px 20px 45px; border-bottom 1px solid #E2E2E2;
+.img-box
+  size(60px, 60px); border-radius 12px; overflow hidden;
+  img
+    width 100%; display block;
+
+// 标签
+.c-tag
+  height 25px; line-height 25px; border-radius 13px; font-size 12px; color #ffffff; padding 0 10px; background-color #F24C25; box-shadow 0px 0px 3px 0px rgba(0, 0, 0, 0.15);

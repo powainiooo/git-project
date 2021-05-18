@@ -8,7 +8,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     globalData: {},
-    hasGlobalData: false,
+    hasGlobalData: false
   },
   mutations: {
     SET_GLOBALDATA (state, data) {

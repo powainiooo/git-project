@@ -15,7 +15,8 @@
 
       <div class="et-title">{{record.name}}</div>
       <div class="ml30 mr30 mb30">
-        <rich-text :nodes="record.desc" class="f30" @click="check"></rich-text>
+<!--        <rich-text :nodes="record.desc" class="f30" @click="check"></rich-text>-->
+        <wxParse :content="record.desc"></wxParse>
       </div>
     </template>
     <operates :id="id" />
@@ -26,11 +27,13 @@
 import operates from '@/components/operates'
 import cAudio from '@/components/audio'
 import {postAction} from '../../utils/api'
+import wxParse from 'mpvue-wxparse'
 
 export default {
   components: {
     operates,
-    cAudio
+    cAudio,
+    wxParse
   },
   data () {
     return {

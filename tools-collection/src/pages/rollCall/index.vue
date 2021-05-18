@@ -7,7 +7,7 @@
 <template>
   <div class="container">
     <div class="hr20"></div>
-    <textarea class="txt" :rows="6" placeholder="请输入所有点名的姓名，以 | 分隔" v-model="names"></textarea>
+    <textarea class="txt" :rows="6" placeholder="请输入所有点名的姓名，一行一个名字" v-model="names"></textarea>
     <div class="line1"><button class="btn" @click="doCall">立即点名</button></div>
     <div class="line2" v-if="current !== ''">{{current}}</div>
     <operates :id="id" />
@@ -33,27 +33,15 @@ export default {
   methods: {
     doCall () {
       console.log('doCall')
-      if (this.list.length === 0) {
-        if (this.names === '') {
-          mpvue.showToast({
-            title: '请输入姓名',
-            icon: 'none'
-          })
-          return false
-        }
-        const arr = this.names.split('|').filter(i => i.trim() !== '').sort((a, b) => Math.random() - 0.5)
-        console.log('arr', arr)
-        this.list = arr
-        this.doCall()
-      } else {
-        this.current = this.list[this.index]
-        this.index += 1
-        if (this.index === this.list.length) {
-          mpvue.showToast({
-            title: '已经全部完成'
-          })
-        }
+      if (this.names === '') {
+        mpvue.showToast({
+          title: '请输入姓名',
+          icon: 'none'
+        })
+        return false
       }
+      const arr = this.names.split('\n').filter(i => i.trim() !== '').sort((a, b) => Math.random() - 0.5)
+      this.current = arr[0]
     }
   },
   onShareAppMessage () {

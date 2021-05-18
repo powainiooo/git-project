@@ -1,8 +1,10 @@
 <style lang="stylus">
 @import "../../assets/css/mixin.styl"
 .c-float-box
-  size(100%, 100vh)
+  size(100%, 100vh); fxTL(0, 0); z-index 200;
   display flex; align-items flex-end; justify-content center;
+  &>.box
+    flex 1;
   &-title
     size(100%, 80px); abTL(0, 0); background-color #ffffff; border-radius 50px 50px 0 0; between(); padding 0 30px; position relative; box-shadow 0 2px 13px 0 rgba(0, 0, 0, .08)
   &-body
@@ -37,6 +39,14 @@ export default {
       type: [Number, String], // 70 76
       default: 70
     },
+    left: {
+      type: [Number, String],
+      default: 0
+    },
+    right: {
+      type: [Number, String],
+      default: 0
+    },
     title: {
       type: String,
       default: ''
@@ -46,7 +56,9 @@ export default {
     styles () {
       return {
         width: this.width === 'auto' ? this.width : `${this.width}px`,
-        height: `${this.height}vh`
+        height: `${this.height}vh`,
+        'margin-left': this.left + 'px',
+        'margin-right': this.right + 'px'
       }
     },
     hasTitle () {

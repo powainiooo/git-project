@@ -13,7 +13,13 @@
       .icon-active
         display none
   &-active
-    background-color #ffffff; box-shadow 0px 10px 20px 0px rgba(0, 0, 0, 0.08);
+    background-color #ffffff; box-shadow 0px 10px 20px 0px rgba(0, 0, 0, 0.08); color #3E311F;
+    .icons
+      .icon
+        display none
+      .icon-active
+        display inline-block
+
 </style>
 
 <template>
@@ -47,9 +53,11 @@ export default {
       ]
     }
   },
+  mounted () {
+    this.current = this.$route.path
+  },
   watch: {
     '$route' (val) {
-      console.log(val)
       this.current = val.path
     }
   },

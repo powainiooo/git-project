@@ -85,7 +85,7 @@
     <c-header
       ref="header"
       @close="handleClose" />
-    <img :src="record.space_image" class="banner" />
+    <img :src="cdnUrl + record.space_image" mode="aspectFill" class="banner" />
     <div class="activity-page">
       <div class="line1">
         <div class="infos">
@@ -133,6 +133,7 @@
 import cHeader from '@/components/header/header'
 import cTicket from '@/pages/index/modules/ticket'
 import { postAction } from '@/utils/api'
+import store from '../../store'
 export default {
   data () {
     return {
@@ -141,7 +142,11 @@ export default {
       list: []
     }
   },
-
+  computed: {
+    cdnUrl () {
+      return store.state.configData.uploaddata.cdnurl
+    }
+  },
   components: {
     cHeader,
     cTicket

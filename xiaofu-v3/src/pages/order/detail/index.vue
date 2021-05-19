@@ -115,6 +115,7 @@ export default {
       }).then(res => {
         this.record = res.data
         this.orderList = res.data.list
+        this.$refs.header.showStarBtn = res.data.star_flag === 1
       })
     },
     doCall () {

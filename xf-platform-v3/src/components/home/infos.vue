@@ -8,6 +8,9 @@
   justify-content space-between
   flex-wrap wrap
 .c-infos-ticket
+  position relative;
+  .hint
+    font-size 12px; color #E63828; abTL(30px, 30px); animation-timing-function ease-out
   .thead
     between()
     margin 12px 36px 30px 30px
@@ -102,12 +105,18 @@
       <li>已售（张）</li>
       <li>销售状态</li>
     </ul>
+    <transition enter-active-class="animated bounceIn" leave-active-class="animated bounceOut" duration="400">
+      <div class="hint" v-if="showHint">请按键盘“回车键”保存修改。</div>
+    </transition>
     <div class="tr" v-for="item in record.price" :key="item.id">
       <div class="names">
         <h3>{{item.name}}</h3>
         <div class="between">
 <!--          <span>{{item.num}}</span>-->
-          <input v-model="item.num" @keyup.enter="changeNums($event, item.id)" />张
+          <input v-model="item.num"
+                 @focus="showHint = true"
+                 @blur="showHint = false"
+                 @keyup.enter="changeNums($event, item.id)" />张
         </div>
       </div>
       <div class="nums">{{item.sold_num}}</div>
@@ -190,7 +199,9 @@ export default {
     }
   },
   data () {
-    return {}
+    return {
+      showHint: false
+    }
   },
   inject: ['getDetails'],
   methods: {
@@ -220,6 +231,9 @@ export default {
           this.getDetails(this.record.id)
         }
       })
+    },
+    onfocus () {
+      console.log('onfocus')
     }
   }
 }

@@ -80,7 +80,7 @@
               <Input v-model="formData.name" placeholder="公司全称" />
             </FormItem>
             <FormItem>
-              <Input type="textarea" v-model="formData.address" :rows="4" :placeholder="type === '1' ? '联系地址' : '公司地址'" />
+              <Input ref="address" type="textarea" v-model="formData.address" :rows="4" :placeholder="type === '1' ? '联系地址' : '公司地址'" />
               <button class="btn-geo" @click="openGeo">定位</button>
             </FormItem>
             <FormItem>
@@ -607,6 +607,7 @@ export default {
       this.formData.longitude = data.location.lng
       this.formData.city_name = data.addressComponents.city
       console.log(this.formData)
+      this.$refs.address.focus()
     }
   }
 }

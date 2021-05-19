@@ -124,7 +124,6 @@ export default {
           this.showCity = false
           this.showMenuBtn = false
           this.showCloseBtn = false
-          this.showStarBtn = true
           this.showShareBtn = true
           break
         case 'ticketBuy':

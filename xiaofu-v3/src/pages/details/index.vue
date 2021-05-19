@@ -56,6 +56,7 @@ export default {
           this.$nextTick(() => {
             this.hasData = true
             this.footPrint()
+            this.$refs.header.showStarBtn = res.data.star_flag === 1
           })
         }
       })

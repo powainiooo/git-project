@@ -157,7 +157,7 @@
   class="c-ticket-detail">
 
   <div class="buy-forms" :style="{top: showInfos ? '-100vh' : 0}" @touchmove.stop="tmove">
-    <information :needIDcard="record.id_card_flag !== 1" @change="getValue" />
+    <information :needIDcard="record.id_card_flag !== 1" :needAddress="record.ticket_type === 2" @change="getValue" />
     <c-select :list="record.price || []" @change="getValue" />
   </div>
 

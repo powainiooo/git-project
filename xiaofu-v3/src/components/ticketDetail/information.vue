@@ -42,7 +42,7 @@
         </picker>
       </div>
     </li>
-    <li v-if="record.ticket_type === 2">
+    <li v-if="needAddress">
       <div class="rank">
         <img :src="'/static/images/number/4.png'" mode="heightFix" v-if="needIDcard" />
         <img :src="'/static/images/number/3.png'" mode="heightFix" v-else />
@@ -67,6 +67,10 @@ export default {
     needIDcard: {
       type: Boolean,
       default: true
+    },
+    needAddress: {
+      type: Boolean,
+      default: false
     }
   },
   data () {

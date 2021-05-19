@@ -11,7 +11,8 @@
   <div>
     <c-header
       ref="header"
-      @close="handleClose" />
+      @close="handleClose"
+      @cityChange="cityChange" />
     <img :src="record.image" class="banner" />
     <div class="collection-page">
       <div class="c-tag">{{record.name}}</div>
@@ -36,7 +37,8 @@ export default {
     return {
       id: '',
       record: {},
-      list: []
+      list: [],
+      cityId: ''
     }
   },
 
@@ -53,17 +55,25 @@ export default {
     },
     getData () {
       postAction('/api/collection/detail', {
-        id: this.id
+        id: this.id,
+        city_id: this.cityId
       }).then(res => {
         if (res.code === 1) {
           this.record = res.data
           this.list = res.data.tickets
         }
       })
+    },
+    cityChange (id) {
+      this.page = 1
+      this.cityId = id
+      this.listData = []
+      this.getData()
     }
   },
   mounted () {
     this.$refs.header.setStatus('onlyClose')
+    this.$refs.header.showCity = true
   },
   onLoad (options) {
     this.id = options.id || 1

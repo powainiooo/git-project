@@ -70,6 +70,7 @@
             </FormItem>
             <FormItem>
               <Input type="textarea"
+                     ref="address"
                      :rows="4"
                      v-model="formData.address"
                      placeholder="活动地址"
@@ -282,6 +283,7 @@ export default {
       this.formData.latitude = data.location.lat
       this.formData.longitude = data.location.lng
       console.log(this.formData)
+      this.$refs.address.focus()
     }
   }
 }

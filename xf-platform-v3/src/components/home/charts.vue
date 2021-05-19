@@ -16,13 +16,15 @@
           <Radio label="2">点击量(次)</Radio>
           <Radio label="3">销售量</Radio>
         </RadioGroup>
-        <c-date-time ref="date1" type="daterange" style="width: 250px;" v-model="dateArr" @change="getChart2" />
+        <DatePicker v-model="dateArr" type="daterange" style="display: none;"></DatePicker>
+
+        <c-date-time type="daterange" style="width: 250px;" v-model="dateArr" :clearable="false" @change="getChart2" />
       </div>
       <div id="proChart2" style="height: 310px;"></div>
     </div>
   </div>
   <div class="pr">
-    <c-date-time ref="date2" style="width: 200px; position: absolute; top: 20px; right: 20px; z-index: 10;" v-model="date" @change="getChart3" />
+    <c-date-time ref="date2" style="width: 200px; position: absolute; top: 20px; right: 20px; z-index: 10;" v-model="date" :clearable="false" @change="getChart3" />
     <div id="proChart3" style="height:460px;"></div>
   </div>
 </div>
@@ -52,10 +54,8 @@ export default {
   },
   mounted () {
     this.date = formatDate(new Date(), 'yyyy-MM-dd')
-    this.dateArr[0] = formatDate(new Date(new Date().getTime() - 7 * 24 * 60 * 60 * 1000), 'yyyy-MM-dd')
-    this.dateArr[1] = formatDate(new Date(), 'yyyy-MM-dd')
-    this.$refs.date1.setDefault(this.dateArr)
-    this.$refs.date2.setDefault(this.date)
+    this.dateArr[0] = new Date(new Date().getTime() - 7 * 24 * 60 * 60 * 1000)
+    this.dateArr[1] = new Date()
     setTimeout(() => {
       this.getDatas()
     }, 200)

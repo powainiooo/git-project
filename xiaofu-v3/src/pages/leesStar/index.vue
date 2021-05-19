@@ -21,7 +21,8 @@
       ref="header"
       bgColor="#000018"
       logo="logo2"
-      @close="handleClose" />
+      @close="handleClose"
+      @cityChange="cityChange" />
     <img :src="configData.star_background_image" class="banner" />
     <div class="lees-page">
       <img src="/static/images/leesStar/lees-star.png" class="lees-star" />
@@ -45,7 +46,8 @@ export default {
     return {
       page: 1,
       listData: [],
-      loadOver: false
+      loadOver: false,
+      cityId: ''
     }
   },
 
@@ -67,7 +69,7 @@ export default {
     getData () {
       postAction('/api/merchant/index', {
         page: this.page,
-        city_id: ''
+        city_id: this.cityId
       }).then(res => {
         this.loadOver = res.data.list.length === 0
         if (!this.loadOver) {
@@ -82,6 +84,12 @@ export default {
       }).then(res => {
         console.log(res)
       })
+    },
+    cityChange (id) {
+      this.page = 1
+      this.cityId = id
+      this.listData = []
+      this.getData()
     }
   },
   onReachBottom () {
@@ -96,6 +104,7 @@ export default {
   },
   mounted () {
     this.$refs.header.setStatus('onlyClose')
+    this.$refs.header.showCity = true
   },
   onLoad () {
     Object.assign(this.$data, this.$options.data())

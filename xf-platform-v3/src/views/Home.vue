@@ -134,7 +134,10 @@ export default {
         }
       })
     },
-    pageChange (e) {},
+    pageChange (e) {
+      this.pageNo = e
+      this.getData()
+    },
     mDown (index) {
       console.log('mDown', index)
       const data = this.list[index]

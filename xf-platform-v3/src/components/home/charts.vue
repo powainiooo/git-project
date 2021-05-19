@@ -35,7 +35,6 @@ import * as echarts from 'echarts'
 import { formatDate } from '@/utils/tools'
 import { postAction } from '@/utils'
 import cDateTime from '../cDateTime'
-import chartData from './chartData'
 console.log('echarts', echarts)
 export default {
   name: 'app',
@@ -75,8 +74,7 @@ export default {
         type: '1'
       }).then(res => {
         if (res.code === 1) {
-          // const data = res.data.area_data
-          const data = chartData.data.area_data
+          const data = res.data.area_data
           const userData = []
           for (const item of data) {
             userData.push({
@@ -96,8 +94,7 @@ export default {
         end_date: this.dateArr[1]
       }).then(res => {
         if (res.code === 1) {
-          // const data = this.chart2Type === '1' ? res.data.day_click_data : res.data.day_sales_data
-          const data = this.chart2Type === '1' ? chartData.data.day_click_data : chartData.data.day_sales_data
+          const data = this.chart2Type === '1' ? res.data.day_click_data : res.data.day_sales_data
           const clickData = {
             x: [],
             y: []
@@ -117,8 +114,7 @@ export default {
         date: this.date
       }).then(res => {
         if (res.code === 1) {
-          // const data = res.data.hour_sales_data
-          const data = chartData.data.hour_sales_data
+          const data = res.data.hour_sales_data
           const list = []
           let index = 0
           const map = {}

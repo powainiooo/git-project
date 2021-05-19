@@ -1,5 +1,7 @@
 <style scoped>
-.banner { width: 100%; height: 400px; margin-top: 100px; }
+.banner { width: 100%; height: 400px; margin-top: 100px; position: relative; }
+.banner:after { content: ''; width: 100%; height: 100%; position: absolute; top: 0; left: 0; background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%); }
+.banner img { width: 100%; height: 100%; display: block; }
 .activity-page { margin: -400px 25px 50px 25px; position: relative; z-index: 5; }
 .list-container { display: flex; flex-wrap: wrap; justify-content: space-between; }
 .item-small { width: 340px; margin-bottom: 20px; }
@@ -32,6 +34,8 @@
   margin-left: 12px;
 }
 .activity-page .rank ul {
+  min-width: 200px;
+  height: 41px;
   display: flex;
   justify-content: center;
   margin-bottom: 10px;
@@ -85,7 +89,9 @@
     <c-header
       ref="header"
       @close="handleClose" />
-    <img :src="cdnUrl + record.space_image" mode="aspectFill" class="banner" />
+    <div class="banner">
+      <img :src="cdnUrl + record.space_image" mode="aspectFill" />
+    </div>
     <div class="activity-page">
       <div class="line1">
         <div class="infos">
@@ -94,7 +100,7 @@
         </div>
         <div class="rank">
           <ul>
-            <li v-for="i in 4" :key="i"><img src="/static/images/common/rank-star2.png" /></li>
+            <li v-for="i in record.star" :key="i"><img src="/static/images/common/rank-star2.png" /></li>
           </ul>
           <p>{{record.star}}</p>
         </div>

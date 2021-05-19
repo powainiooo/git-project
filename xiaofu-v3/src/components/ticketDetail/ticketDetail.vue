@@ -222,7 +222,10 @@ export default {
       if (this.formData.name === '' || !this.mobileReg || this.formData.price_id === '') {
         return true
       }
-      if (this.record.id_card_flag === 1 && !this.idCardReg) {
+      if (this.record.id_card_flag !== 1 && !this.idCardReg) {
+        return true
+      }
+      if (this.record.ticket_type === 2 && this.formData.address === '') {
         return true
       }
       return false

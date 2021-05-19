@@ -74,6 +74,7 @@ export default {
   mounted () {
     this.$refs.header.setStatus('onlyClose')
     this.$refs.header.showCity = true
+    this.$refs.header.showCloseBtn = false
   },
   onLoad (options) {
     this.id = options.id || 1

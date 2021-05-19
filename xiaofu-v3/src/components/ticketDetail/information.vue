@@ -109,6 +109,7 @@ export default {
       this.$emit('change', {
         name: this.name,
         mobile: this.mobile,
+        address: this.address,
         cardNo: this.cardNo,
         identity_type: this.identity_type
       })

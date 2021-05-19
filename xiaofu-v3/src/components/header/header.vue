@@ -37,7 +37,7 @@
       <button class="btn" open-type="share" v-if="showShareBtn" hover-class="hscale" hover-stay-time="10"><img src="/static/images/common/share.png" /></button>
     </div>
   </div>
-  <c-menu :show="showMenus" @close="showMenus = false" />
+  <c-menu :show="showMenus" @close="handleClose" />
 </div>
 </template>
 

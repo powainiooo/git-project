@@ -19,7 +19,7 @@
     </div>
     <div class="flex">
       <Button style="width: 140px;" icon="md-add" class="mr20">添加产品分类</Button>
-      <Button style="width: 140px;" icon="md-add">添加产品</Button>
+      <Button style="width: 140px;" icon="md-add" @click="openModal">添加产品</Button>
     </div>
   </div>
 
@@ -88,7 +88,7 @@
     </table>
   </div>
 
-  <modal-form />
+  <modal-form ref="modalForm" />
 </div>
 </template>
 
@@ -104,6 +104,10 @@ export default {
       list: [{}, {}, {}, {}, {}, {}]
     }
   },
-  methods: {}
+  methods: {
+    openModal () {
+      this.$refs.modalForm.show()
+    }
+  }
 }
 </script>

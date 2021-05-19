@@ -65,7 +65,11 @@ export default {
   },
   computed: {
     addrList () {
-      return store.state.configData.citydata || []
+      const cities = store.state.configData.citydata || []
+      return [
+        { id: '', name: '全部' },
+        ...cities
+      ]
     }
   },
   data () {

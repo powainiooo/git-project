@@ -77,7 +77,7 @@
     <span>{{record.sort}}</span>
     <h3>
       <p class="en">{{record.name}}</p>
-      <p>{{record.organizer_name}}</p>
+      <p>{{record.intro}}</p>
     </h3>
   </div>
   <div class="right" v-if="record.star">

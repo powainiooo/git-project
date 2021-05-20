@@ -18,7 +18,7 @@
       </div>
     </div>
     <div class="flex">
-      <Button style="width: 140px;" icon="md-add" class="mr20">添加产品分类</Button>
+      <Button style="width: 140px;" icon="md-add" class="mr20" @click="openCate">添加产品分类</Button>
       <Button style="width: 140px;" icon="md-add" @click="openModal">添加产品</Button>
     </div>
   </div>
@@ -89,15 +89,18 @@
   </div>
 
   <modal-form ref="modalForm" />
+  <cate-form ref="cateForm" />
 </div>
 </template>
 
 <script type='es6'>
 import modalForm from './goods/modalForm'
+import cateForm from './goods/cateForm'
 export default {
   name: 'app',
   components: {
-    modalForm
+    modalForm,
+    cateForm
   },
   data () {
     return {
@@ -107,6 +110,10 @@ export default {
   methods: {
     openModal () {
       this.$refs.modalForm.show()
+    },
+    openCate () {
+      console.log('openCate')
+      this.$refs.cateForm.show()
     }
   }
 }

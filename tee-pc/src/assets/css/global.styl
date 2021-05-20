@@ -69,6 +69,11 @@ body
     margin 0 10px;
   input[type=text]
     flex 1; border none; height 100%; font-size 12px; color #3E311F;
+.min-txt
+  .ivu-input-word-count
+    border-radius 0 5px 5px 0;
+  .ivu-input
+    height 35px; border 1px solid #E2E2E2;
 .ivu-input-group-append
   background-color #ffffff; border none; border-radius 0 20px 20px 0; font-size 12px; color #C8C9CA; padding-right 15px;
 .ivu-btn
@@ -83,12 +88,24 @@ body
   .ivu-input-word-count
     color #C8C9CA; right 10px;
 .ivu-btn-min
-  min-width auto; height 25px; line-height 22px; background-color #ffffff; box-shadow 0px 0px 3px 0px rgba(0, 0, 0, 0.15); border-color #ffffff; color #9E9E9F; font-size 12px; padding 0 9px;
+  min-width auto; height 26px; line-height 22px; background-color #ffffff; box-shadow 0px 0px 3px 0px rgba(0, 0, 0, 0.15); border-color #ffffff; color #9E9E9F; font-size 12px; padding 0 9px;
+  &.bg-main
+    background-color mainColor; color #ffffff; border-color mainColor;
+  &.bg-gray
+    background-color #A96854; color #ffffff; border-color #A96854;
 
 .btn-close
   size(40px, 40px); background-color #EDECEB; box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.15); border-radius 50%; center();
   img
     width 35%; display block;
+
+.btn-circle
+  size(25px, 25px); background-color #ffffff; box-shadow 0px 0px 3px 0px rgba(0, 0, 0, 0.15); border-radius 50%; center();
+  img
+    display block
+
+.bg-main
+  background-color mainColor
 
 .ivu-select-single
   .ivu-select-selection
@@ -140,7 +157,19 @@ body
       tr:nth-child(2n-1)
         td
           background-color #F4F3F3
-
+.tee-tables-min
+  table
+    tbody
+      tr
+        td
+          &>div
+            min-height 50px; padding-top 0; acenter()
+          &:first-child
+            border-radius 12px 0 0 12px
+          &:last-child
+            border-radius 0 12px 12px 0
+            &>div
+              border-radius 0 12px 12px 0
 
 // 布局
 .operates-line

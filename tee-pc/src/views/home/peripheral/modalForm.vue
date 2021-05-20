@@ -43,36 +43,15 @@
       <Row>
         <Col span="6" style="border-right: 1px solid #F2F2F2;">
           <div class="c-form mt30">
-            <div class="c-c8 mb20 ml10">产品基本信息</div>
+            <div class="c-c8 mb20 ml15">产品基本信息</div>
             <FormItem>
-              <Select placeholder="产品分类" v-model="formData.xxx3"></Select>
-            </FormItem>
-            <FormItem>
-              <Input placeholder="产品名称" v-model="formData.xxx1" />
-            </FormItem>
-            <FormItem>
-              <Input type="textarea" :rows="4" placeholder="产品介绍" v-model="formData.xxx1" />
-            </FormItem>
-            <FormItem>
-              <c-date-time type="timerange" placeholder="售卖时间段" v-model="formData.xxx2" />
-            </FormItem>
-            <FormItem>
-              <Input placeholder="价格" v-model="formData.xxx6"><span slot="append">元</span></Input>
-            </FormItem>
-            <FormItem>
-              <Input placeholder="库存" v-model="formData.xxx6" />
-            </FormItem>
-            <FormItem>
-              <Input placeholder="制作时间" v-model="formData.xxx6"><span slot="append">分钟</span></Input>
+              <p class="c-c8 f12 ml15 mb5" style="line-height: 1;">产品名称</p>
+              <Input placeholder="产品名称" v-model="formData.xxx1" disabled />
             </FormItem>
             <FormItem>
               <upload-img v-model="formData.xxx5">
                 <span slot="title">产品图</span>
-                <span slot="hint">尺寸1050px*500px</span>
               </upload-img>
-            </FormItem>
-            <FormItem>
-              <Button size="min" class="btn1">添加详情图</Button>
             </FormItem>
           </div>
         </Col>

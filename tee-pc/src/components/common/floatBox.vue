@@ -3,6 +3,8 @@
 .c-float-box
   size(100%, 100vh); fxTL(0, 0); z-index 200;
   display flex; align-items flex-end; justify-content center;
+  &-cover
+    size(100%, 100%); background-color rgba(122, 115, 108, 0.5); abTL(0, 0); z-index 0; animation-duration .4s
   &>.box
     flex 1; animation-duration .4s
   &-title
@@ -15,6 +17,9 @@
 
 <template>
 <div class="c-float-box" v-if="showFrame">
+  <transition enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
+  <div class="c-float-box-cover" v-if="showChild && mask"></div>
+  </transition>
   <transition enter-active-class="animated fadeInUp" leave-active-class="animated slideOutDown" @after-leave="afterLeave">
     <div class="box pr" :style="styles" v-if="showChild">
       <div class="c-float-box-title" v-if="hasTitle">
@@ -36,6 +41,10 @@ export default {
     value: {
       type: Boolean,
       default: false
+    },
+    mask: {
+      type: Boolean,
+      default: true
     },
     width: {
       type: [Number, String],

@@ -126,9 +126,8 @@
             <FormItem style="margin-bottom: 0">
               <tag-line title="证件类型" v-if="isEditor">身份证</tag-line>
               <Select placeholder="是否需要证件" v-model="formData.id_card_flag" v-else>
-                <Option :value="1">否</Option>
-                <Option :value="2">身份证</Option>
-                <Option :value="3">护照</Option>
+                <Option :value="0">否</Option>
+                <Option :value="1">是</Option>
               </Select>
             </FormItem>
           </div>

@@ -117,6 +117,14 @@
                  @focus="showHint = true"
                  @blur="showHint = false"
                  @keyup.enter="changeNums($event, item.id)" />张
+<!--          <InputNumber-->
+<!--            @on-focus="showHint = true"-->
+<!--            @on-blur="showHint = false"-->
+<!--            @on-keyup="changeNums($event, item.id)"-->
+<!--            :min="item.num"-->
+<!--            :value="item.num"-->
+<!--            :formatter="value => `${value} 张`"-->
+<!--            :parser="value => value.replace(' 张', '')"></InputNumber>-->
         </div>
       </div>
       <div class="nums">{{item.sold_num}}</div>

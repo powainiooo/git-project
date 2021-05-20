@@ -123,8 +123,8 @@ export default {
       this.changeStatus('search')
     },
     handleClose (e) {
+      this.$refs.search.reset()
       if (this.keyword !== '' || this.date !== '') {
-        this.$refs.search.reset()
         this.keyword = ''
         this.date = ''
         this.page = 1

@@ -21,7 +21,8 @@ import {
   Message,
   Modal,
   Page,
-  Upload
+  Upload,
+  InputNumber
 } from 'view-design'
 import 'view-design/dist/styles/iview.css'
 import './assets/css/reset.css'
@@ -43,6 +44,7 @@ Vue.component('Row', Row)
 Vue.component('Col', Col)
 Vue.component('Upload', Upload)
 Vue.component('Page', Page)
+Vue.component('InputNumber', InputNumber)
 Vue.component('Modal', Modal)
 Vue.config.productionTip = false
 

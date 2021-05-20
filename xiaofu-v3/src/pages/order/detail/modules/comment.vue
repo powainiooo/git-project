@@ -67,7 +67,8 @@ export default {
   data () {
     return {
       rank: 0,
-      comment: ''
+      comment: '',
+      isAjax: false
     }
   },
   methods: {
@@ -75,11 +76,14 @@ export default {
       this.rank = rank
     },
     submit () {
+      if (this.isAjax) return
+      this.isAjax = true
       postAction('/api/comment/add', {
         order_id: this.orderId,
         star: this.rank,
         content: this.comment
       }).then(res => {
+        this.isAjax = false
         if (res.code === 1) {
           mpvue.showToast({
             title: '添加成功'

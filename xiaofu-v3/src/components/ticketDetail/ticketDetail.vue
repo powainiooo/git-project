@@ -157,7 +157,7 @@
   class="c-ticket-detail">
 
   <div class="buy-forms" :style="{top: showInfos ? '-100vh' : 0}" @touchmove.stop="tmove">
-    <information :needIDcard="record.id_card_flag !== 1" :needAddress="record.ticket_type === 2" @change="getValue" />
+    <information :needIDcard="record.id_card_flag === 1" :needAddress="record.ticket_type === 2" @change="getValue" />
     <c-select :list="record.price || []" @change="getValue" />
   </div>
 
@@ -222,7 +222,7 @@ export default {
       if (this.formData.name === '' || !this.mobileReg || this.formData.price_id === '') {
         return true
       }
-      if (this.record.id_card_flag !== 1 && !this.idCardReg) {
+      if (this.record.id_card_flag === 1 && !this.idCardReg) {
         return true
       }
       if (this.record.ticket_type === 2 && this.formData.address === '') {
@@ -278,6 +278,14 @@ export default {
         params.passport_no = this.cardNo
       }
       params.ticket_id = this.record.id
+      if (this.record.id_card_flag === 0) {
+        delete params.id_card_no
+        delete params.passport_no
+        delete params.identity_type
+      }
+      if (this.record.ticket_type === 1) {
+        delete params.address
+      }
       console.log('params', params)
       postAction('/api/order/create', params).then(res => {
         const jsapi = res.data

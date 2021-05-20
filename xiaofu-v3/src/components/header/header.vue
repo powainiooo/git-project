@@ -133,7 +133,6 @@ export default {
         case 'ticketBuy':
           this.showCity = false
           this.showMenuBtn = false
-          this.showStarBtn = true
           this.showShareBtn = false
           this.showCloseBtn = true
           break

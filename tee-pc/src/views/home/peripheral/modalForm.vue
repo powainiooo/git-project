@@ -7,29 +7,26 @@
       background-color #E8D1B9;
   .specs-scroll
     margin 0 60px; overflow-x auto; padding-bottom 20px;
-  .specs-box
-    width 730px; background-color #F4F3F3; border-radius 20px; display flex; align-items flex-start;
-    &-col1
-      width 295px; border-right 1px solid #E6E6E6;
-    &-col2
-      size(140px, 64px); border-bottom 1px solid #E6E6E6; center();
-    .specs-name
-      padding 15px; border-bottom 1px solid #E6E6E6; between();
+  .specs2-box
+    width 730px; background-color #ffffff; border-radius 20px; display flex; align-items flex-start;
+  .specs2-item
+    width 275px; border-right 1px solid #F2F2F2;
+    &:last-child
+      border-right none;
+    &-col
+      padding 14px 0; border-bottom 1px solid #F2F2F2; margin-bottom 14px;
+      .cb
+        margin-left 15px; margin-right 10px;
       .min-txt
-        width 235px;
-      .btn-close
-        size(16px, 16px)
-    .specs-list
-      margin 15px; border-bottom 1px solid #E6E6E6;
-      li
-        between(); margin-bottom 15px; position relative;
-        .unit
-          font-size 12px; color #c8c9ca; abTR(8px, 10px);
-        .min-txt
-          width 160px;
-        .btn-close
-          size(16px, 16px)
-
+        width 160px;
+    &-col2
+      margin-bottom 15px; acenter(); position relative;
+      .cb
+        margin-left 15px; margin-right 10px;
+      .min-txt
+        width 140px; margin-right 15px;
+      .unit
+        font-size 12px; color #C8C9CA; abTR(8px, 25px)
 </style>
 
 <template>
@@ -56,26 +53,28 @@
           </div>
         </Col>
         <Col span="18">
-          <div class="c-c8 mb20 mt30 ml75">设置规格</div>
+          <div class="c-c8 mb20 mt30 ml75">选择规格</div>
           <div class="specs-scroll">
-            <div class="specs-box" :style="{width: boxWidth}">
-              <div class="specs-box-col1" v-for="(specs, index) in specsList" :key="index">
-                <div class="specs-name">
-                  <a href="javascript:;" class="btn-close"><img src="@/assets/img/close.png" /></a>
-                  <Input maxlength="8" show-word-limit class="min-txt" />
+            <div class="specs2-box" :style="{width: boxWidth}">
+              <div class="specs2-item" v-for="(specs, index) in specsList" :key="index">
+
+                <div class="specs2-item-col">
+                  <p class="f12 c-c8 ml60 mb5">规格选项</p>
+                  <div class="acenter">
+                    <input type="checkbox" class="cb" />
+                    <Input class="min-txt" disabled />
+                  </div>
                 </div>
-                <ul class="specs-list">
-                  <li>
-                    <a href="javascript:;" class="btn-close"><img src="@/assets/img/close.png" /></a>
-                    <Input maxlength="8" show-word-limit class="min-txt" />
-                    <Input placeholder="0" class="min-txt" style="width: 60px;" />
-                    <span class="unit">元</span>
-                  </li>
-                </ul>
-                <div class="tc mb15"><Button size="min" class="btn1">添加规格选项</Button></div>
-              </div>
-              <div class="specs-box-col2">
-                <Button size="min" class="btn1">添加规格分类</Button>
+                <div class="flex mb5">
+                  <p class="f12 c-c8 ml60">规格选项</p>
+                  <p class="f12 c-c8 ml110">库存</p>
+                </div>
+                <div class="specs2-item-col2">
+                  <input type="checkbox" class="cb" />
+                  <Input class="min-txt" disabled />
+                  <Input class="min-txt" style="width: 60px;" />
+                  <span class="unit">元</span>
+                </div>
               </div>
             </div>
           </div>
@@ -88,13 +87,11 @@
 
 <script type='es6'>
 import floatBox from '@/components/common/floatBox'
-import cDateTime from '@/components/common/cDateTime'
 import uploadImg from '@/components/common/uploadImg'
 export default {
   name: 'app',
   components: {
     floatBox,
-    cDateTime,
     uploadImg
   },
   computed: {
@@ -102,7 +99,7 @@ export default {
       return false
     },
     boxWidth () {
-      return (this.specsList.length * 295 + 140) + 'px'
+      return (this.specsList.length * 275) + 'px'
     }
   },
   data () {

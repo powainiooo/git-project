@@ -60,7 +60,7 @@ body
     font-size 12px; left 16px; margin-top -2px;
   .form-hint
     font-size 12px; color #C8C9CA; margin-left 15px; margin-right 15px; line-height 15px; margin-top 4px;
-
+// 输入框
 .ivu-input
   border none; background-color #FFFFFF; height 40px; color #41372D; border-radius 20px; padding 4px 15px;
 .c-input
@@ -74,19 +74,23 @@ body
     border-radius 0 5px 5px 0;
   .ivu-input
     height 35px; border 1px solid #E2E2E2;
+    &[disabled]
+      border none
 .ivu-input-group-append
   background-color #ffffff; border none; border-radius 0 20px 20px 0; font-size 12px; color #C8C9CA; padding-right 15px;
+.ivu-input-wrapper
+  .ivu-input-word-count
+    color #C8C9CA; right 10px;
+
+// 按钮
 .ivu-btn
   min-width 100px; height 40px; background-color mainColor; color #FAFAFA; border-radius 20px; border-color mainColor;
   &:hover
     background-color mainColor; color #FAFAFA; border-color mainColor; box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.15);
   &[disabled]
-    border none; background #EDECEB; color #B9BABB
+    border none; background #EDECEB; color #B9BABB;
   &[disabled]:hover
-    background #EDECEB; color  #B9BABB
-.ivu-input-wrapper
-  .ivu-input-word-count
-    color #C8C9CA; right 10px;
+    background #EDECEB; color  #B9BABB;
 .ivu-btn-min
   min-width auto; height 26px; line-height 22px; background-color #ffffff; box-shadow 0px 0px 3px 0px rgba(0, 0, 0, 0.15); border-color #ffffff; color #9E9E9F; font-size 12px; padding 0 9px;
   &.bg-main
@@ -107,6 +111,7 @@ body
 .bg-main
   background-color mainColor
 
+// 下拉框
 .ivu-select-single
   .ivu-select-selection
     height 40px; border none; border-radius 20px
@@ -127,6 +132,14 @@ body
       color #ffffff
     &:after
       background-color transparent
+
+// 单选框
+.cb
+  -webkit-appearance none; size(16px, 16px); background url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAeCAYAAABNChwpAAADNUlEQVRYR82XTWwUZRjH///ZLz66u6MlpCABDQkXolblQCskisSbsZG4Rg8elcrObP0IhsRAGwJBKdrODCHFg6d6MJED9QBBj1oTPwjiRRITiPE7xt1tsd1lZ/5kFrYppWRL2s0413ne5/m9z/u+z/N/iAV+Ze+NTVC1R+ITgtZRXAMiLegPAr8B/MkAxtrM1Fm+PHh1gW7BZoZlN98TBBwA9FAz2/A/iWnJGE0mYwdW9H7wa7M1dwSY8F7fHAS1k5K6bzr+B+CYQeMzwrgUJI3f05XqxLSR7LjmX7sPQLeoHghdggyAUwQHM2u2DTCX8+8EMi9A2bGeCYRRQGmCf4oYyD7Y/iGf7K8121HRsTYSOAzoeQkE+TniK3Pma0f+nW/tbQDFYfsVQifCXZAczcTad3NP/2SzwHP/lx1ru6BPJHSQuGQklm1P9w7+NdfuFoBJz37K93VGUBwG9pmWd+RuA8+2/8+x1lWlMQCdJL/MdLTvYK6/OttmBmDKe3NDJaich3APDRzKWt47iwneWDtx4q3VfrXyDaD1AE6aBe/VeQFKw/lRAS+ROJ2x3B6SWgqA0Mfk8b5O36+NA0jFjfiWlfmh7xu+6xm46vU9Wgtq3wKoJGLJTSv2vP/LUgVv+CkO2+8CwV6AX5gFd+ctACXH+ljSi4Dxnllw3l7q4KE/fdRnlsv+z4LuTcTijzWyQI2MJEqVi39DyKaS8QeW9w5dbgVA6LPkWK6kPGEczBac/fX6UnSspyGdBXnBtN3OVgUP/RYdayekcyAumrZXr6wsDtv7gOAwyKOm7e5tJUCY7fL0j5OgEpmOVcvCJ8mZtJBW1na9VgLcyEL+MoQNqVjq/uX5Y1fCI/gU0nMxclfadk+1GqDk5L+S0GXE4t2Z/NB4BADWuKStJLuytvv1/+AIor6EkTxD8Aez4D5cf4aRF6KbFSq6UlxvRo71SA36LrJmVM9ClO04BJgaKayvTgfnw27VKkFikCMZ2909ryCpC4coJdks4RCdKG1ALIEsPwQoF8pyAueUaHthwbJ8RkzezWACfy384HFBz9YHlMUOJrMvSWSj2dy2fNtwCqwF2LbY4fQ6BbkHPfi5s/IAAAAASUVORK5CYII=') no-repeat; background-size 100% 100%;
+  &:checked
+    background-image url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAADxUlEQVRYR8WXXWgcZRSG3/NNNpuY7M6iuVErBqEgtT9QqUYQCf6gaC5ELdRKi1JK03RntkoL/tzkRlMittmZkRAxlkYvNFSoFES9UaleiHqhVEgj0tJCErSpmdkmcZOd78hMknG3+zvJBudy55z3ffbM+Q7fIfzPD4Xx55O9TZnM9A4GNhBwGxO3MtOUACYgIhfiyePjYfS82KoAPDqqOH9+t5Ml7wTjcYBbypkQYZxZnBER+iDek75QC0xFAMdKdbF0jzHjnlrEVmIIlCPCsFCaelsPvT1VKbckgFdqx7k6zMDuMMZFsQSbWOxSU8YXZat244vZocO35rLuGWa+b03my8lEcEE4qmrWiVJ6BRXgkSMt9kz2ezBvq4d5gQZRd0I3h27UDQCYmWxTPw3mZ+pu7nU7YVGAHovp5rf5+gGAYyb3SYn318M8aE7CRDzatpEO9M7917AAePTlZnty8XcAt68ngK9N9EZCN98qAHAM7ahk7l938yUAR40pd9JLAzPBIJpJa78AvLWeAMqGjZDTk+D56yVOp9irpowPfYD5wcPt2YXcxXqaNz34NKLbH8HC2I+Y/2qklPSniZT1nA8wY+rdkHKwXgAr5uzmMHd2CLnLY8XShOsJ3Yr5AE5a75OQr9YDoMD882HkLp4vKyuUWFs82TdNtqGdYua9awUIY+55KY1iS+ygcZ7sdPIsA11rAQhr7gMQdXpDyavASWZ+sRJA4/aHEd3WibkvT8Gd+KMgdDXmPoAS2RxLnviNHEN7UzK/XgkguuMJND3wFHgxi9nPBgOI1Zr7XpHWmxM9x/72APZL5vcqfwJC86O70bipI4CI3LXFP2p+t1dpuBKDwE7oVsI/BXPvvnLHQm7hcvUeyIOQEiTE6sz9YUifqLq5K38S/gTwvaEgVvPPlw1IEc+rSePjAMA29RRLOVAdYCklsqkD8tok3KlLtaXkRRHoWry1uZ329WcCADa0qM0YA7g9tGLIBEF0JK6b76ykBfcB29BeYOaPQuqFDKdLKuFu0s1sEYD3g21oI8y8J6RqTeFE+AdC6VST6R/yEwrvhIYWdYBvmLmjJtUQQSSwR9WsogoXXcsd67VbpMycBqMzhH7ZUO8uSCx64imj5HWv9F7wdW+D8+tVk4HutUAQ0V8EPBvXzXPldCpuRhkr9ZB03X4G7g8D4n1vBploaOnzxm2l3Kq7od+clv4klnbDLga3lRIkAgP42dsNGxsaRm46dPxKLdA1AawIeYvq7NS5zW7edozl7VhElfGWAwOTtZjmx/wLrVGmMBtTi7EAAAAASUVORK5CYII=')
+
+// 表格
 .tee-tables
   position relative;
   table

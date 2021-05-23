@@ -19,7 +19,7 @@
     <div>
       <Button size="small" class="mr10" :loading="isExport" @click="doExport">导出表格</Button>
 <!--      <Button size="small" class="mr10" @click="doNotify" v-if="showNotify">一次性通知</Button>-->
-      <Button size="small" @click="showRefundHint = true" v-if="refundState === 0">退款申请</Button>
+      <Button size="small" @click="showRefundHint = true" v-if="refundState === 0 || refundState === 2">退款申请</Button>
       <Button size="small" style="cursor: default;" v-else-if="refundState === 1">退款申请 审核中</Button>
       <Button size="small" type="error" v-else-if="refundState === 3" @click="toRefundDetail">退款申请 审核不通过</Button>
     </div>
@@ -34,13 +34,30 @@
 
   <div class="c-tables c-tables-orders">
     <table>
-      <col v-for="(item, index) in columns"
-           :key="index"
-           :width="item.width" />
+      <col width="104" />
+      <col width="130" />
+      <col width="70" />
+      <col width="130" />
+      <col width="190" v-if="record.ticket_type === 2" />
+      <col width="170" v-if="record.id_card_flag === 1" />
+      <col width="170" />
+      <col width="60" />
+      <col width="60" />
+      <col width="100" />
+      <col width="80" />
       <thead>
       <tr>
-        <th v-for="(item, index) in columns"
-            :key="index">{{item.name}}</th>
+        <th>票种</th>
+        <th>下单时间</th>
+        <th>买家</th>
+        <th>电话</th>
+        <th v-if="record.ticket_type === 2">邮寄地址</th>
+        <th v-if="record.id_card_flag === 1">身份证</th>
+        <th>单号</th>
+        <th>单价</th>
+        <th>票数</th>
+        <th>状态</th>
+        <th>操作</th>
       </tr>
       </thead>
       <tbody>
@@ -50,7 +67,7 @@
         <td><div>{{item.name}}</div></td>
         <td class="helveB"><div>{{item.mobile}}</div></td>
         <td v-if="record.ticket_type === 2"><div>{{item.address}}</div></td>
-        <td class="helveB"><div>{{item.id_card_no}}</div></td>
+        <td class="helveB" v-if="record.id_card_flag === 1"><div>{{item.id_card_no}}</div></td>
         <td class="helveB"><div>{{item.order_no}}</div></td>
         <td class="helveB"><div>{{item.price}}</div></td>
         <td><div class="style1">{{item.num}}</div></td>
@@ -102,40 +119,10 @@ export default {
   components: {
     cSelect
   },
-  computed: {
-    columns () {
-      return this.record.ticket_type === 2 ? this.columns1 : this.columns2
-    }
-  },
   data () {
     return {
       showRefundHint: false,
       stateList: ['未付款', '已支付', '退款申请中', '已退款', '已退款'],
-      columns1: [ // 1260
-        { name: '票种', width: 104 },
-        { name: '下单时间', width: 130 },
-        { name: '买家', width: 70 },
-        { name: '电话', width: 130 },
-        { name: '邮寄地址', width: 190 },
-        { name: '身份证', width: 170 },
-        { name: '单号', width: 170 },
-        { name: '单价', width: 60 },
-        { name: '票数', width: 60 },
-        { name: '状态', width: 100 },
-        { name: '操作', width: 80 }
-      ],
-      columns2: [ // 1260
-        { name: '票种', width: 104 },
-        { name: '下单时间', width: 130 },
-        { name: '买家', width: 70 },
-        { name: '电话', width: 130 },
-        { name: '身份证', width: 170 },
-        { name: '单号', width: 170 },
-        { name: '单价', width: 60 },
-        { name: '票数', width: 60 },
-        { name: '状态', width: 100 },
-        { name: '操作', width: 80 }
-      ],
       total: 0,
       pageNo: 1,
       pageSize: 10,

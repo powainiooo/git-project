@@ -6,15 +6,15 @@
 <div class="pa60">
   <div class="between operates-line">
     <div class="flex">
-      <Select class="c-select mr20" placeholder="产品分类" style="width: 130px;">
-        <Option>123</Option>
+      <Select class="c-select mr20" placeholder="产品分类" style="width: 130px;" v-model="cate">
+        <Option v-for="item in cateList" :key="item.cid" :value="item.cid">{{item.cname}}</Option>
       </Select>
-      <Select class="c-select mr20" placeholder="状态" style="width: 130px;">
-        <Option>123</Option>
+      <Select class="c-select mr20" placeholder="状态" style="width: 130px;" v-model="status">
+        <Option v-for="item in statusList" :key="item.id" :value="item.id">{{item.name}}</Option>
       </Select>
       <div class="c-input">
         <img src="@/assets/img/search.png" class="c-input-search" width="23" />
-        <input type="text" placeholder="输入搜索内容" />
+        <input type="text" placeholder="输入搜索内容" v-model="word" />
       </div>
     </div>
     <div class="flex">
@@ -52,60 +52,90 @@
       </tr>
       </thead>
       <tbody>
-      <tr>
-        <td><div>新品推荐</div></td>
-        <td><div>乌龙茶</div></td>
-        <td><div class="img-box"><img src="@/assets/img/img2.png" /></div></td>
-        <td><div>优选新鲜柠檬、红茶。整颗新鲜柠檬加入其中，柠檬的清香与红茶的醇..</div></td>
-        <td><div>2021/03 - 04/01</div></td>
-        <td><div>20</div></td>
-        <td><div>1000</div></td>
-        <td><div>3分钟</div></td>
-        <td><div>在售</div></td>
+      <tr v-for="item in list" :key="item.id">
+        <td><div>{{item.cname}}</div></td>
+        <td><div>{{item.title}}</div></td>
         <td>
-          <div class="">
-            <Button size="min">下架</Button>
-            <Button size="min" class="ml10">编辑</Button>
-            <Button size="min" class="ml10">删除</Button>
+          <div>
+            <div class="img-box"><img :src="imgSrc + item.cover" /></div>
           </div>
         </td>
-      </tr>
-      <tr>
-        <td><div>新品推荐</div></td>
-        <td><div>乌龙茶</div></td>
-        <td><div class="img-box"><img src="@/assets/img/img2.png" /></div></td>
-        <td><div>优选新鲜柠檬、红茶。整颗新鲜柠檬加入其中，柠檬的清香与红茶的醇..</div></td>
-        <td><div>2021/03 - 04/01</div></td>
-        <td><div>20</div></td>
-        <td><div>1000</div></td>
-        <td><div>3分钟</div></td>
-        <td><div>在售</div></td>
+        <td><div>{{item.content}}</div></td>
+        <td><div>{{item.date_start || '--'}} - {{item.date_end || '--'}}</div></td>
+        <td><div>{{item.price}}</div></td>
+        <td><div>{{item.store_nums}}</div></td>
+        <td><div>{{item.make_time}}分钟</div></td>
+        <td><div>{{item.status_name}}</div></td>
         <td>
-          <div class=""><div class="c-tag">审核不过,重新修改后提交</div></div>
+          <div class="">
+            <div v-if="item.check_status === 1">
+              <Poptip title="确认上架？" confirm @on-ok="changeStatus(item.id, 1)">
+                <Button size="small" v-if="item.status === 2">下架</Button>
+              </Poptip>
+              <Poptip title="确认下架？" confirm @on-ok="changeStatus(item.id, 2)">
+                <Button size="small" v-if="item.status === 1">上架</Button>
+              </Poptip>
+              <Button size="small" class="ml10">编辑</Button>
+              <Poptip title="确认删除？" confirm @on-ok="handleDel(item.id)">
+                <Button size="small" class="ml10 bg-gray">删除</Button>
+              </Poptip>
+            </div>
+            <p class="tc" v-else-if="item.check_status === 0">审核中</p>
+            <div class="c-tag" v-else-if="item.check_status === 2">审核不过,重新修改后提交</div>
+          </div>
         </td>
       </tr>
       </tbody>
     </table>
   </div>
-
-  <modal-form ref="modalForm" />
-  <cate-form ref="cateForm" />
+  <div class="ml50 mt10">
+    <Page :current="page" :total="total" simple class-name="tee-page" />
+  </div>
+  <modal-form ref="modalForm" @ok="refresh" />
+  <cate-form ref="cateForm" @close="getCateData" />
 </div>
 </template>
 
 <script type='es6'>
 import modalForm from './goods/modalForm'
 import cateForm from './goods/cateForm'
+import { getAction, postAction } from '@/utils'
+
 export default {
   name: 'app',
   components: {
     modalForm,
     cateForm
   },
+  computed: {
+    imgSrc () {
+      return this.$store.state.imgSrc
+    }
+  },
   data () {
     return {
-      list: [{}, {}, {}, {}, {}, {}]
+      cateList: [],
+      statusList: [
+        { id: '0', name: '全部' },
+        { id: '1', name: '下架' },
+        { id: '2', name: '上架' },
+        { id: '10', name: '待审核' },
+        { id: '11', name: '审核通过' },
+        { id: '-1', name: '审核不通过' }
+      ],
+      cate: '',
+      status: '',
+      word: '',
+      total: 0,
+      page: 1,
+      limit: 10,
+      list: [],
+      isAjax: false
     }
+  },
+  mounted () {
+    this.getCateData()
+    this.getListData()
   },
   methods: {
     openModal () {
@@ -114,6 +144,61 @@ export default {
     openCate () {
       console.log('openCate')
       this.$refs.cateForm.show()
+    },
+    getCateData () {
+      getAction('/shopapi/goods/cate/index/data').then(res => {
+        if (res.code === 0) {
+          this.cateList = res.data
+        }
+      })
+    },
+    getListData () {
+      getAction('/shopapi/goods/index/data', {
+        word: this.word,
+        cid: this.cate,
+        status: this.status === '' ? '0' : this.status,
+        page: this.page,
+        limit: this.limit
+      }).then(res => {
+        if (res.code === 0) {
+          this.list = res.data
+          this.total = res.count
+        }
+      })
+    },
+    refresh () {
+      this.cate = ''
+      this.status = ''
+      this.word = ''
+      this.page = 1
+      this.getListData()
+    },
+    handleDel (id) {
+      if (this.isAjax) return
+      this.isAjax = true
+      postAction('/shopapi/goods/destroy', {
+        id
+      }).then(res => {
+        this.isAjax = false
+        if (res.code === 0) {
+          this.$Message.success(res.msg)
+          this.getListData()
+        }
+      })
+    },
+    changeStatus (id, status) {
+      if (this.isAjax) return
+      this.isAjax = true
+      postAction('/shopapi/goods/status', {
+        id,
+        status
+      }).then(res => {
+        this.isAjax = false
+        if (res.code === 0) {
+          this.$Message.success(res.msg)
+          this.getListData()
+        }
+      })
     }
   }
 }

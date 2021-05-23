@@ -76,7 +76,7 @@
                      placeholder="活动地址"
                      :readonly="isEditor && errorData.address === ''"
                      :class="{'err-inp': isEditor && errorData.address !== ''}" />
-              <button class="btn-geo" @click="openGeo">定位</button>
+              <a href="javascript:;" class="btn-geo" @click="openGeo">定位</a>
               <div class="warnTxt" v-if="isEditor && errorData.address !== ''"><span>{{errorData.address}}</span></div>
             </FormItem>
           </Form>

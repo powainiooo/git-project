@@ -25,10 +25,10 @@
       <li v-for="(item, index) in list" :key="index">
         <div class="flex">
           <div class="index">{{index + 1}}</div>
-          <div class="imgs"><img src="@/assets/img/img2.png" /></div>
-          <div class="name">乌龙茶</div>
+          <div class="imgs"><img :src="imgSrc + item.goods_cover" /></div>
+          <div class="name">{{item.goods_name}}</div>
         </div>
-        <p class="nums">291</p>
+        <p class="nums">{{item.buy_nums}}</p>
       </li>
     </ul>
   </div>
@@ -36,13 +36,37 @@
 </template>
 
 <script type='es6'>
+import { getAction } from '@/utils'
+import { formatDate } from '@/utils/tools'
+
 export default {
   name: 'app',
-  data () {
-    return {
-      list: [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}]
+  computed: {
+    imgSrc () {
+      return this.$store.state.imgSrc
     }
   },
-  methods: {}
+  data () {
+    return {
+      list: []
+    }
+  },
+  mounted () {
+    this.getData()
+  },
+  methods: {
+    getData () {
+      const date = formatDate(new Date(), 'yyyy-MM-dd')
+      getAction('/shopapi/count/sell/rank', {
+        date,
+        type: 1,
+        limit: 10
+      }).then(res => {
+        if (res.code === 0) {
+          this.list = res.data
+        }
+      })
+    }
+  }
 }
 </script>

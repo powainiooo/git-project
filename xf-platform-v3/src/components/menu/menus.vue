@@ -11,6 +11,8 @@
   right 0
   transition all 0.5s cubic-bezier(.25,.76,.36,.97)
   z-index 2000
+  &-cover
+    size(100vw, 100vh); fxTL(0, 0); z-index -1;
   &::-webkit-scrollbar
     width 2px
     background-color transparent
@@ -40,6 +42,7 @@
   width: (page !== 'records' && page !== 'rules') ? '600px' : '1300px',
   right: showMenu ? '0px' : '-600px'
 }">
+  <div class="c-menus-cover" v-if="showMenu"></div>
   <div class="c-menus-btns">
     <a href="javascript:;" class="fl" v-show="page !== 'navs'" @click="page = 'navs'"><img src="@/assets/img/ico-back.png" width="28" /></a>
     <a href="javascript:;" class="fr" @click="hideMenu"><img src="@/assets/img/ico-close2.png" width="28" /></a>

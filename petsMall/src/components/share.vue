@@ -66,6 +66,7 @@ export default {
          store.commit('SET_SHOWSHARE', false)
       },
       initPoster () {
+         this.loadIndex = 0
          // mpvue.showLoading({
          //    title: '生成海报中'
          // })

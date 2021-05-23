@@ -71,6 +71,7 @@ export default {
     styles () {
       return {
         width: this.width === 'auto' ? this.width : `${this.width}px`,
+        flex: this.width === 'auto' ? 1 : 'none',
         height: `${this.height}vh`,
         'margin-left': this.left + 'px',
         'margin-right': this.right + 'px'
@@ -90,6 +91,14 @@ export default {
       } else {
         this.showChild = false
       }
+    }
+  },
+  mounted () {
+    if (this.value) {
+      this.showFrame = true
+      this.$nextTick(() => {
+        this.showChild = true
+      })
     }
   },
   data () {

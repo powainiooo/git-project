@@ -23,7 +23,7 @@
 </style>
 
 <template>
-<float-box :width="400">
+<float-box v-model="visible" :mask="false" :width="400">
   <div class="login-box">
     <!-- 登录表单 -->
     <Form class="c-form mt120" ref="form" :model="formData" :rules="ruleValidate">
@@ -70,6 +70,7 @@ export default {
   },
   data () {
     return {
+      visible: false,
       showHint: false,
       formData: {
         username: '',
@@ -84,6 +85,11 @@ export default {
         ]
       }
     }
+  },
+  mounted () {
+    setTimeout(() => {
+      this.visible = true
+    }, 1000)
   },
   methods: {
     handleLogin () {

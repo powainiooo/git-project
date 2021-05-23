@@ -28,7 +28,7 @@
     line-height 25px
     box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.15);
   &-done
-    border 2px solid #6D9AF4
+    border 2px solid mainColor
   &-error
     border 2px solid #E85412
     button
@@ -37,10 +37,10 @@
     size(60px, 6px)
     border-radius 3px
     overflow hidden
-    background-color mainColor
+    background-color #f4f3f3
   &-bar
     size(50%, 100%)
-    bgG()
+    background-color mainColor
   &-content
     margin-left 10px
     p
@@ -91,7 +91,6 @@
 <template>
 <div class="c-upload">
   <Upload :action="url"
-          :data="extraData"
           :before-upload="uploadBefore"
           :on-preview="preview"
           :on-progress="progress"
@@ -156,6 +155,8 @@
 </template>
 
 <script type='es6'>
+import Vue from 'vue'
+import { ACCESS_TOKEN } from '@/config'
 import { VueCropper } from 'vue-cropper'
 import { postAction } from '@/utils'
 export default {
@@ -198,10 +199,11 @@ export default {
       }
     },
     cdnurl () {
-      return this.$store.state.config.uploaddata.cdnurl
+      return this.$store.state.imgSrc
     },
     url () {
-      return `${window.baseUrl === '/' ? '' : window.baseUrl}/addons/upyun/index/upload.html`
+      const token = Vue.ls.get(ACCESS_TOKEN)
+      return `${window.baseUrl === '' ? '' : window.baseUrl}/shopapi/upload/image?api_token=${token}`
     },
     bgSrc () {
       return `url(${require('@/assets/img/bg.png')})`
@@ -209,9 +211,6 @@ export default {
   },
   data () {
     return {
-      extraData: {
-        upyuntoken: ''
-      },
       loaded: 0,
       total: 0,
       isLoading: false,
@@ -223,7 +222,7 @@ export default {
   },
   methods: {
     uploadBefore (file) {
-      this.extraData.upyuntoken = this.$store.state.config.uploaddata.upyuntoken
+      console.log('uploadBefore', file)
       if (this.cropper) {
         return false
       }
@@ -239,8 +238,13 @@ export default {
       this.total = e.total
     },
     uploadDone (e) {
+      console.log('uploadDone', e)
       this.isLoading = false
-      this.$emit('input', e.data.url)
+      if (e.code === 0) {
+        this.$emit('input', e.data.url)
+      } else {
+        this.$Message.warning(e.msg)
+      }
     },
     openCropper (e) {
       if (this.cropper) {

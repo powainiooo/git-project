@@ -21,6 +21,8 @@ body
   between()
 .around
   around()
+.end
+  end()
 
 // 动效
 .ts1
@@ -91,8 +93,10 @@ body
     border none; background #EDECEB; color #B9BABB;
   &[disabled]:hover
     background #EDECEB; color  #B9BABB;
-.ivu-btn-min
+.ivu-btn-small
   min-width auto; height 26px; line-height 22px; background-color #ffffff; box-shadow 0px 0px 3px 0px rgba(0, 0, 0, 0.15); border-color #ffffff; color #9E9E9F; font-size 12px; padding 0 9px;
+  &:hover
+    background-color #ffffff; color #9E9E9F; border-color #ffffff;
   &.bg-main
     background-color mainColor; color #ffffff; border-color mainColor;
   &.bg-gray
@@ -132,6 +136,12 @@ body
       color #ffffff
     &:after
       background-color transparent
+
+.ivu-cascader-rel
+  .ivu-cascader-arrow
+    z-index 10; color #ffffff; right 14px;
+  &:after
+    content ''; size(40px, 40px); line-height 40px; abBR(0, 0); background-color mainColor; border-radius 0 20px 20px 0; color rgba(255, 255, 255, .5)
 
 // 单选框
 .cb
@@ -195,3 +205,8 @@ body
 // 标签
 .c-tag
   height 25px; line-height 25px; border-radius 13px; font-size 12px; color #ffffff; padding 0 10px; background-color #F24C25; box-shadow 0px 0px 3px 0px rgba(0, 0, 0, 0.15);
+
+// 分页
+.tee-page
+  .ivu-page-next, .ivu-page-prev
+    background-color transparent

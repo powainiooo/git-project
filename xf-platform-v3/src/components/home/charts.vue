@@ -94,14 +94,14 @@ export default {
         end_date: this.dateArr[1]
       }).then(res => {
         if (res.code === 1) {
-          const data = this.chart2Type === '1' ? res.data.day_click_data : res.data.day_sales_data
+          const data = this.chart2Type === '2' ? res.data.day_click_data : res.data.day_sales_data
           const clickData = {
             x: [],
             y: []
           }
           for (const item of data) {
             clickData.x.push(item.date)
-            clickData.y.push(this.chart2Type === '1' ? item.click_num : item.num)
+            clickData.y.push(this.chart2Type === '2' ? item.click_num : item.num)
           }
           this.drawChart2(clickData)
         }

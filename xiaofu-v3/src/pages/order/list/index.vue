@@ -18,6 +18,7 @@
   margin: 0 55px;
   position: relative;
   overflow: hidden;
+  min-height: calc(100vh - 208px);
 }
 .order-list:before {
   content: '';

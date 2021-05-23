@@ -4,7 +4,7 @@
 
 <template>
 <div>
-  <account-form />
+  <account-form ref="account" />
 </div>
 </template>
 
@@ -17,6 +17,9 @@ export default {
   },
   data () {
     return {}
+  },
+  mounted () {
+    this.$refs.account.show()
   },
   methods: {}
 }

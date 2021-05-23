@@ -148,13 +148,13 @@
       <div class="imgs wxcode">
         <img :src="record.miniapp_code_image" width="128" />
       </div>
-      <Button size="small">下载链接码</Button>
+      <Button size="small" @click="downloadImg(record.miniapp_code_image, '链接码')">下载链接码</Button>
     </div>
     <div class="item">
       <div class="imgs">
         <img :src="record.check_code_image" width="128" />
       </div>
-      <Button size="small">下载验票码</Button>
+      <Button size="small" @click="downloadImg(record.check_code_image, '验票码')">下载验票码</Button>
     </div>
   </div>
 </div>
@@ -242,6 +242,9 @@ export default {
     },
     onfocus () {
       console.log('onfocus')
+    },
+    downloadImg (src, name) {
+      window.open(src)
     }
   }
 }

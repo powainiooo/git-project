@@ -17,11 +17,31 @@
 
 <script type='es6'>
 import * as echarts from 'echarts'
+import { getAction } from '@/utils'
+import { formatDate } from '@/utils/tools'
 export default {
   name: 'app',
   data () {
-    return {}
+    return {
+      list1: [],
+      list2: []
+    }
   },
-  methods: {}
+  mounted () {
+    this.getData()
+  },
+  methods: {
+    getData () {
+      const date = formatDate(new Date(), 'yyyy-MM-dd')
+      getAction('/shopapi/count/sell/rank', {
+        date,
+        type: 1
+      }).then(res => {
+        if (res.code === 0) {
+          this.list1 = res.data
+        }
+      })
+    }
+  }
 }
 </script>

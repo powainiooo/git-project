@@ -24,7 +24,9 @@ import {
   Tabs,
   TabPane,
   Message,
-  Modal
+  Modal,
+  Cascader,
+  Poptip
 } from 'view-design'
 
 Vue.component('Button', Button)
@@ -42,6 +44,8 @@ Vue.component('Upload', Upload)
 Vue.component('Page', Page)
 Vue.component('Tabs', Tabs)
 Vue.component('TabPane', TabPane)
+Vue.component('Cascader', Cascader)
+Vue.component('Poptip', Poptip)
 
 Vue.use(Storage)
 Vue.prototype.$Message = Message

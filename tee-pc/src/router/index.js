@@ -60,7 +60,20 @@ router.beforeEach((to, from, next) => {
         console.log('4')
         store.dispatch('getUserData').then(res => {
           console.log('5')
-          next()
+          if (res.shop && res.shop.address === null) {
+            if (to.name === 'Account') {
+              next({ name: 'Home' })
+            } else {
+              next()
+            }
+          } else {
+            if (to.name === 'Account') {
+              next()
+            } else {
+              next({ name: 'Account' })
+            }
+            // next({path: '/account'})
+          }
         }).catch(err => {
           console.log('err', err)
           store.dispatch('logout').then(() => {

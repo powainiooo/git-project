@@ -18,7 +18,6 @@ q:before, q:after {
 }
 table { border-collapse:collapse;border-spacing:0;}
 a{ text-decoration: none; color: #333333; cursor: pointer; }
-a:hover { color: #FE322B; }
 hr {display:block;height:1px;border-top:1px solid #cccccc;margin:1em 0;}
 
 input, select {

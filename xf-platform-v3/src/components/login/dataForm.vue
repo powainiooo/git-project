@@ -81,7 +81,7 @@
             </FormItem>
             <FormItem>
               <Input ref="address" type="textarea" v-model="formData.address" :rows="4" :placeholder="type === '1' ? '联系地址' : '公司地址'" />
-              <button class="btn-geo" @click="openGeo">定位</button>
+              <a href="javascript:;" class="btn-geo" @click="openGeo">定位</a>
             </FormItem>
             <FormItem>
               <Input v-model="formData.person" placeholder="负责人姓名" />

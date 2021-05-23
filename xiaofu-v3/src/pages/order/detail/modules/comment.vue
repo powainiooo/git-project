@@ -45,12 +45,15 @@
     </li>
   </ul>
   <div class="input-frame">
-    <textarea placeholder="为这场活动评分，并留下您的宝贵建议" v-model="comment" />
-    <div class="btns">
-      <button class="btn"
-              @click="submit"
-              hover-class="hscale"
-              hover-stay-time="10">提交</button>
+    <form @submit="submit">
+      <textarea placeholder="为这场活动评分，并留下您的宝贵建议" name="textarea" :value="comment" />
+      <div class="btns">
+        <button class="btn"
+                form-type="submit"
+                hover-class="hscale"
+                hover-stay-time="10">提交</button>
+      </div>
+    </form>
     </div>
   </div>
 </div>
@@ -75,13 +78,14 @@ export default {
     setRank (rank) {
       this.rank = rank
     },
-    submit () {
+    submit (e) {
+      console.log('submit', e)
       if (this.isAjax) return
       this.isAjax = true
       postAction('/api/comment/add', {
         order_id: this.orderId,
         star: this.rank,
-        content: this.comment
+        content: e.mp.detail.value.textarea
       }).then(res => {
         this.isAjax = false
         if (res.code === 1) {

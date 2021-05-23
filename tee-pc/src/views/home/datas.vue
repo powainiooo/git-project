@@ -19,15 +19,15 @@
   <ul class="nums-list">
     <li>
       <span>今日收益</span>
-      <div>8271</div>
+      <div>{{amount}}</div>
     </li>
     <li>
       <span>今日杯数</span>
-      <div>8271</div>
+      <div>{{cups}}</div>
     </li>
     <li>
       <span>今日订单</span>
-      <div>8271</div>
+      <div>{{nums}}</div>
     </li>
   </ul>
   <div class="between ml25 mr25 mt30">
@@ -44,6 +44,8 @@
 import charts from './datas/charts'
 import hots from './datas/hots'
 import orders from './datas/orders'
+import { getAction } from '@/utils'
+import { formatDate } from '@/utils/tools'
 export default {
   name: 'app',
   components: {
@@ -52,8 +54,29 @@ export default {
     orders
   },
   data () {
-    return {}
+    return {
+      amount: '--',
+      cups: '--',
+      nums: '--'
+    }
   },
-  methods: {}
+  mounted () {
+    this.getData()
+  },
+  methods: {
+    getData () {
+      const date = formatDate(new Date(), 'yyyy-MM-dd')
+      getAction('/shopapi/count/order/count', {
+        date,
+        type: 1
+      }).then(res => {
+        if (res.code === 0) {
+          this.amount = res.data.order_amount
+          // this.cups = res.data.order_amount
+          this.nums = res.data.order_nums
+        }
+      })
+    }
+  }
 }
 </script>

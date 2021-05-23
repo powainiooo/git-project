@@ -99,7 +99,6 @@ export default {
   },
   onShow () {
     // let app = getApp()
-    this.getData()
     this.footPrint()
   },
   mounted () {
@@ -108,6 +107,7 @@ export default {
   },
   onLoad () {
     Object.assign(this.$data, this.$options.data())
+    this.getData()
   }
 }
 </script>

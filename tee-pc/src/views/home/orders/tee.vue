@@ -9,12 +9,12 @@
       <Select class="c-select mr20" placeholder="下单日期" style="width: 130px;">
         <Option>123</Option>
       </Select>
-      <Select class="c-select mr20" placeholder="状态" style="width: 130px;">
-        <Option>123</Option>
+      <Select class="c-select mr20" placeholder="状态" style="width: 130px;" v-model="status">
+        <Option v-for="item in statusList" :key="item.id" :value="item.id">{{item.name}}</Option>
       </Select>
       <div class="c-input">
         <img src="@/assets/img/search.png" class="c-input-search" width="23" />
-        <input type="text" placeholder="输入搜索内容" />
+        <input type="text" placeholder="输入搜索内容" v-model="word" />
       </div>
     </div>
   </div>
@@ -52,112 +52,146 @@
       </tr>
       </thead>
       <tbody>
-      <tr>
-        <td><div>2021/03/04<br/>13:01:12</div></td>
-        <td><div>4010</div></td>
+      <tr v-for="item in list" :key="item.id">
+        <td><div>{{item.created_at}}</div></td>
+        <td><div>{{item.fetch_code}}</div></td>
+        <td><div>{{item.order_no}}</div></td>
         <td>
           <div>
-            0016659884321
+            <p v-for="(item, index) in item.goods" :key="index">{{item.goods_name}}</p>
           </div>
         </td>
         <td>
           <div>
-            <p>柠檬茶</p>
-            <p>柠檬茶</p>
+            <p v-for="(item, index) in item.goods" :key="index">{{item.goods_attr}}</p>
           </div>
         </td>
         <td>
           <div>
-            <p>冰、去冰、正常糖</p>
-            <p>冰、去冰、正常糖</p>
+            <p v-for="(item, index) in item.goods" :key="index">{{item.buy_nums}}件</p>
           </div>
         </td>
         <td>
-          <div>2杯</div>
+          <div>
+            <p v-for="(item, index) in item.goods" :key="index">{{item.goods_price}}元</p>
+          </div>
         </td>
         <td>
-          <div>20元</div>
+          <div>{{item.pay_amount}}元</div>
         </td>
         <td>
-          <div>40元</div>
+          <div>{{item.user_remark || '--'}}</div>
         </td>
         <td>
-          <div>自带杯子，冰块分装</div>
+          <div>{{item.phone || '--'}}</div>
         </td>
         <td>
-          <div>13729391920</div>
-        </td>
-        <td>
-          <div>已下单</div>
+          <div>{{item.status_name}}</div>
         </td>
         <td>
           <div class="">
-            <Button size="min">退款</Button>
-            <Button size="min" class="bg-main ml10">开始制作</Button>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td><div>2021/03/04<br/>13:01:12</div></td>
-        <td><div>4010</div></td>
-        <td>
-          <div>
-            0016659884321
-          </div>
-        </td>
-        <td>
-          <div>
-            <p>柠檬茶</p>
-            <p>柠檬茶</p>
-          </div>
-        </td>
-        <td>
-          <div>
-            <p>冰、去冰、正常糖</p>
-            <p>冰、去冰、正常糖</p>
-          </div>
-        </td>
-        <td>
-          <div>2杯</div>
-        </td>
-        <td>
-          <div>20元</div>
-        </td>
-        <td>
-          <div>40元</div>
-        </td>
-        <td>
-          <div>自带杯子，冰块分装</div>
-        </td>
-        <td>
-          <div>13729391920</div>
-        </td>
-        <td>
-          <div>已下单</div>
-        </td>
-        <td>
-          <div class="">
-            <Button size="min">退款</Button>
-            <Button size="min" class="bg-main ml10">开始制作</Button>
+            <Poptip title="确认退款？" confirm @on-ok="handleRefund(item.id)">
+              <Button size="small">退款</Button>
+            </Poptip>
+            <Poptip title="确认制作？" confirm @on-ok="startMake(item.id)" v-if="item.status === 2">
+              <Button size="small" class="bg-main ml10">开始制作</Button>
+            </Poptip>
+            <span v-else-if="item.status === 3">05:52</span>
+            <Poptip title="确认完成？" confirm @on-ok="orderDone(item.id)" v-else-if="item.status === 4">
+              <Button size="small" class="bg-main ml10">完成订单</Button>
+            </Poptip>
           </div>
         </td>
       </tr>
       </tbody>
     </table>
   </div>
-
+  <div class="ml50 mt10" v-if="list.length > 0">
+    <Page :current="page" :total="total" simple class-name="tee-page" />
+  </div>
 </div>
 </template>
 
 <script type='es6'>
+import { getAction, postAction } from '@/utils'
 export default {
   name: 'app',
   data () {
     return {
-      list: [{}, {}, {}, {}, {}, {}]
+      statusList: [
+        { id: '0', name: '全部' },
+        { id: '1', name: '待付款' },
+        { id: '2', name: '已下单' },
+        { id: '3', name: '制作中' },
+        { id: '4', name: '待取餐' },
+        { id: '7', name: '已完成' },
+        { id: '-9', name: '已退款' }
+      ],
+      date: '',
+      status: '',
+      word: '',
+      total: 0,
+      page: 1,
+      limit: 10,
+      list: [],
+      isAjax: false
     }
   },
   methods: {
+    getListData () {
+      getAction('/shopapi/order/index/data', {
+        type: 1,
+        word: this.word,
+        date: this.date,
+        status: this.status === '' ? '0' : this.status,
+        page: this.page,
+        limit: this.limit
+      }).then(res => {
+        if (res.code === 0) {
+          this.list = res.data
+          this.total = res.count
+        }
+      })
+    },
+    startMake (id) {
+      if (this.isAjax) return
+      this.isAjax = true
+      postAction('/shopapi/order/start/make', {
+        id
+      }).then(res => {
+        this.isAjax = false
+        if (res.code === 0) {
+          this.$Message.success(res.msg)
+          this.getListData()
+        }
+      })
+    },
+    orderDone (id) {
+      if (this.isAjax) return
+      this.isAjax = true
+      postAction('/shopapi/order/done', {
+        id
+      }).then(res => {
+        this.isAjax = false
+        if (res.code === 0) {
+          this.$Message.success(res.msg)
+          this.getListData()
+        }
+      })
+    },
+    handleRefund (id) {
+      if (this.isAjax) return
+      this.isAjax = true
+      postAction('/shopapi/order/refund', {
+        id
+      }).then(res => {
+        this.isAjax = false
+        if (res.code === 0) {
+          this.$Message.success(res.msg)
+          this.getListData()
+        }
+      })
+    }
   }
 }
 </script>

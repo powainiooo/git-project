@@ -9,12 +9,12 @@
 <template>
 <div class="orders-container">
   <div class="pr">
-    <Tabs type="card" class="tee-tabs">
-      <TabPane label="茶饮订单">
-        <tee />
+    <Tabs type="card" class="tee-tabs" @on-click="tabChange">
+      <TabPane name="tee" label="茶饮订单">
+        <tee ref="tee" />
       </TabPane>
-      <TabPane label="周边订单">
-        <peripheral />
+      <TabPane name="peri" label="周边订单">
+        <peripheral ref="peri" />
       </TabPane>
     </Tabs>
   </div>
@@ -33,6 +33,13 @@ export default {
   data () {
     return {}
   },
-  methods: {}
+  mounted () {
+    this.$refs.tee.getListData()
+  },
+  methods: {
+    tabChange (name) {
+      this.$refs[name].getListData()
+    }
+  }
 }
 </script>

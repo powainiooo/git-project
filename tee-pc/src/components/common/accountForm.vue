@@ -10,9 +10,9 @@
 </style>
 
 <template>
-<float-box v-model="visible" :width="800">
+<float-box v-model="visible" :mask="false" :width="800">
   <div class="acenter" slot="btns">
-    <Button :disabled="btnDisabled" @click="handleSave">确认保存</Button>
+    <Button :disabled="btnDisabled" :loading="isAjax" @click="handleSave">确认保存</Button>
   </div>
   <div class="account-box">
     <!-- 登录表单 -->
@@ -25,7 +25,7 @@
               <Input placeholder="门店名称" v-model="formData.shop_name" />
             </FormItem>
             <FormItem>
-              <c-date-time type="timerange" placeholder="营业时间" v-model="times" @change="timeChange" />
+              <c-date-time type="timerange" format="HH:mm" placeholder="营业时间" v-model="times" @change="timeChange" />
             </FormItem>
             <FormItem>
               <Cascader :data="cityData" v-model="cities" @on-change="cityChange"></Cascader>
@@ -52,10 +52,10 @@
             <FormItem>
               <Input placeholder="开户名" v-model="formData.name" />
             </FormItem>
-            <FormItem prop="xxx8">
+            <FormItem prop="idno">
               <Input placeholder="身份证号" v-model="formData.idno" />
             </FormItem>
-            <FormItem prop="xxx9">
+            <FormItem prop="phone">
               <Input placeholder="预留手机号" v-model="formData.phone" />
             </FormItem>
             <FormItem>
@@ -66,7 +66,7 @@
             </FormItem>
             <FormItem>
               <Select placeholder="选择银行" v-model="formData.bank_name">
-                <Option v-for="i in bankList" :key="i.value" :value="i.value">{{i.label}}</Option>
+                <Option v-for="i in bankList" :key="i.id" :value="i.id">{{i.bank_name}}</Option>
               </Select>
             </FormItem>
             <FormItem>
@@ -88,7 +88,7 @@ import floatBox from './floatBox'
 import cDateTime from './cDateTime'
 import uploadImg from './uploadImg'
 import cityData from '@/utils/cityData.json'
-import { postAction } from '@/utils'
+import { getAction, postAction } from '@/utils'
 
 export default {
   name: 'app',
@@ -142,17 +142,28 @@ export default {
         bank_number: ''
       },
       ruleValidate: {
-        xxx8: [
+        idno: [
           { required: true, trigger: 'blur', validator: this.idsValidator }
         ],
-        xxx9: [
+        phone: [
           { required: true, trigger: 'blur', validator: this.phoneValidator }
         ]
       },
-      verifyIndex: 0
+      verifyIndex: 0,
+      isAjax: false
     }
   },
+  mounted () {
+    this.getBankList()
+  },
   methods: {
+    getBankList () {
+      getAction('/shopapi/shop/banks').then(res => {
+        if (res.code === 0) {
+          this.bankList = res.data
+        }
+      })
+    },
     show () {
       this.visible = true
       this.formData.shop_name = this.$store.state.globalData.shop.shop_name
@@ -178,7 +189,7 @@ export default {
       }
     },
     getCode () {
-      this.$refs.form.validateField('xxx9', (valid) => {
+      this.$refs.form.validateField('phone', (valid) => {
         if (valid === '') {
           this.verifyIndex = 60
           const t = setInterval(() => {
@@ -193,8 +204,11 @@ export default {
     handleSave () {
       this.$refs.form.validate((valid) => {
         if (valid) {
+          if (this.isAjax) return
+          this.isAjax = true
           const params = { ...this.formData }
           postAction('/shopapi/shop/update', params).then(res => {
+            this.isAjax = false
             if (res.code === 0) {
               this.$Message.success(res.msg)
               this.$router.push('/index')

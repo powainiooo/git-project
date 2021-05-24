@@ -9,8 +9,8 @@
     <a href="javascript:;" class="btn-close ml20" @click="handleCancel"><img src="@/assets/img/close.png" /></a>
   </div>
   <div class="operates-line ml25 mr25 mt30">
-    <Select class="c-select mr20" placeholder="产品分类" style="width: 130px; margin-left: -20px;">
-      <Option>123</Option>
+    <Select class="c-select mr20" placeholder="产品分类" style="width: 130px;" v-model="cate">
+      <Option v-for="item in cateList" :key="item.cid" :value="item.cid">{{item.cname}}</Option>
     </Select>
   </div>
   <div class="tee-tables mt30 ml25 mr25">
@@ -32,54 +32,89 @@
       </tr>
       </thead>
       <tbody>
-      <tr>
-        <td><div>新品推荐</div></td>
-        <td><div>乌龙茶</div></td>
+      <tr v-for="item in list" :key="item.id">
+        <td><div>{{item.cname}}</div></td>
+        <td><div>{{item.title}}</div></td>
         <td>
           <div style="margin-top: -8px;">
-            <div class="img-box"><img src="@/assets/img/img2.png" /></div>
+            <div class="img-box"><img :src="imgSrc + item.cover" /></div>
           </div>
         </td>
         <td>
           <div>
-            <p>黄色-数字7黄色-数字7</p>
+            {{item.skus.map(i => i.attr_names).join('、')}}
           </div>
         </td>
         <td>
           <div class="">
-            <Button size="min" class="ml10 bg-main" @click="openDetail">添加</Button>
+            <Button size="small" class="ml10 bg-main" @click="openDetail(item.id)">添加</Button>
           </div>
         </td>
       </tr>
       </tbody>
     </table>
   </div>
+  <div class="ml50 mt10" v-if="list.length > 0">
+    <Page :current="page" :total="total" simple class-name="tee-page" />
+  </div>
 </float-box>
 </template>
 
 <script type='es6'>
 import floatBox from '@/components/common/floatBox'
+import { getAction } from '@/utils'
 export default {
   name: 'app',
   components: {
     floatBox
   },
+  computed: {
+    imgSrc () {
+      return this.$store.state.imgSrc
+    }
+  },
   data () {
     return {
       title: '添加产品',
       visible: false,
-      specsList: [{}]
+      cate: '',
+      total: 0,
+      page: 1,
+      limit: 10,
+      cateList: [],
+      list: []
     }
   },
   methods: {
+    getCateData () {
+      getAction('/shopapi/nearby/cates').then(res => {
+        if (res.code === 0) {
+          this.cateList = res.data
+        }
+      })
+    },
+    getListData () {
+      getAction('/shopapi/nearby/index/data', {
+        cid: this.cate,
+        page: this.page,
+        limit: this.limit
+      }).then(res => {
+        if (res.code === 0) {
+          this.list = res.data
+          this.total = res.count
+        }
+      })
+    },
     show () {
       this.visible = true
+      this.getCateData()
+      this.getListData()
     },
     handleCancel () {
       this.visible = false
     },
-    openDetail () {
-      this.$emit('detail')
+    openDetail (id) {
+      this.$emit('detail', id)
     }
   }
 }

@@ -69,13 +69,13 @@
         <td>
           <div class="">
             <div v-if="item.check_status === 1">
-              <Poptip title="确认上架？" confirm @on-ok="changeStatus(item.id, 1)">
+              <Poptip title="确认下架？" confirm @on-ok="changeStatus(item.id, 1)">
                 <Button size="small" v-if="item.status === 2">下架</Button>
               </Poptip>
-              <Poptip title="确认下架？" confirm @on-ok="changeStatus(item.id, 2)">
+              <Poptip title="确认上架？" confirm @on-ok="changeStatus(item.id, 2)">
                 <Button size="small" v-if="item.status === 1">上架</Button>
               </Poptip>
-              <Button size="small" class="ml10">编辑</Button>
+              <Button size="small" class="ml10" @click="handleEdit(item.id)">编辑</Button>
               <Poptip title="确认删除？" confirm @on-ok="handleDel(item.id)">
                 <Button size="small" class="ml10 bg-gray">删除</Button>
               </Poptip>
@@ -88,7 +88,7 @@
       </tbody>
     </table>
   </div>
-  <div class="ml50 mt10">
+  <div class="ml50 mt10" v-if="list.length > 0">
     <Page :current="page" :total="total" simple class-name="tee-page" />
   </div>
   <modal-form ref="modalForm" @ok="refresh" />
@@ -199,6 +199,9 @@ export default {
           this.getListData()
         }
       })
+    },
+    handleEdit (id) {
+      this.$refs.modalForm.edit(id)
     }
   }
 }

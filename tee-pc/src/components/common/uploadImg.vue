@@ -18,15 +18,16 @@
     .picture
       width 100%
       display block
-  button
-    padding 0 10px
-    border-radius 13px
-    background-color mainColor
-    font-size 12px
-    color #ffffff
-    height 25px
-    line-height 25px
-    box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.15);
+    button
+      padding 0 6px
+      border-radius 3px
+      background-color mainColor
+      font-size 12px
+      color #ffffff
+      height 22px
+      line-height 22px
+      abTL(50%, 50%)
+      transform translate(-50%, -50%)
   &-done
     border 2px solid mainColor
   &-error
@@ -110,10 +111,10 @@
         <div class="c-upload-bar" :style="{width: barWidth}"></div>
       </div>
       <img :src="cdnurl + value" class="picture" v-if="value !== '' && !isLoading" />
+      <button v-if="value !== '' && !isLoading">重传</button>
     </div>
   </Upload>
   <div class="c-upload-content">
-    <button v-if="value !== '' && !isLoading">重传</button>
     <div><slot name="title"></slot></div>
     <p><slot name="hint"></slot></p>
   </div>

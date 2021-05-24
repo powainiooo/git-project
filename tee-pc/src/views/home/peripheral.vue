@@ -6,15 +6,15 @@
 <div class="pa60">
   <div class="between operates-line">
     <div class="flex">
-      <Select class="c-select mr20" placeholder="产品分类" style="width: 130px;">
-        <Option>123</Option>
+      <Select class="c-select mr20" placeholder="产品分类" style="width: 130px;" v-model="cate">
+        <Option v-for="item in cateList" :key="item.cid" :value="item.cid">{{item.cname}}</Option>
       </Select>
-      <Select class="c-select mr20" placeholder="状态" style="width: 130px;">
-        <Option>123</Option>
+      <Select class="c-select mr20" placeholder="状态" style="width: 130px;" v-model="status">
+        <Option v-for="item in statusList" :key="item.id" :value="item.id">{{item.name}}</Option>
       </Select>
       <div class="c-input">
         <img src="@/assets/img/search.png" class="c-input-search" width="23" />
-        <input type="text" placeholder="输入搜索内容" />
+        <input type="text" placeholder="输入搜索内容" v-model="word" />
       </div>
     </div>
     <div class="flex">
@@ -45,69 +45,151 @@
       </tr>
       </thead>
       <tbody>
-      <tr>
-        <td><div>新品推荐</div></td>
-        <td><div>乌龙茶</div></td>
+      <tr v-for="item in list" :key="item.id">
+        <td><div>{{item.cname}}</div></td>
+        <td><div>{{item.title}}</div></td>
         <td>
           <div style="margin-top: -8px;">
-            <div class="img-box"><img src="@/assets/img/img2.png" /></div>
+            <div class="img-box"><img :src="imgSrc + item.cover" /></div>
           </div>
         </td>
         <td>
           <div>
-            <p>黄色-数字7</p>
-            <p>黄色-数字7</p>
+            <p v-for="(item, index) in item.goods" :key="index">{{item.buy_nums}}</p>
           </div>
         </td>
         <td>
           <div>
-            <p>100</p>
-            <p>100</p>
+            <p v-for="(item, index) in item.goods" :key="index">{{item.buy_nums}}</p>
           </div>
         </td>
         <td>
           <div>
-            <p>在售</p>
-            <p>在售</p>
+            <p v-for="(item, index) in item.goods" :key="index">{{item.buy_nums}}</p>
           </div>
         </td>
         <td>
           <div class="">
-            <Button size="min">下架</Button>
-            <Button size="min" class="ml10">编辑</Button>
-            <Button size="min" class="ml10 bg-gray">删除</Button>
+            <Poptip title="确认下架？" confirm @on-ok="changeStatus(item.id, 1)">
+              <Button size="small" v-if="item.status === 2">下架</Button>
+            </Poptip>
+            <Poptip title="确认上架？" confirm @on-ok="changeStatus(item.id, 2)">
+              <Button size="small" v-if="item.status === 1">上架</Button>
+            </Poptip>
+            <Button size="small" class="ml10" @click="handleEdit(item.id)">编辑</Button>
+            <Poptip title="确认删除？" confirm @on-ok="handleDel(item.id)">
+              <Button size="small" class="ml10 bg-gray">删除</Button>
+            </Poptip>
           </div>
         </td>
       </tr>
       </tbody>
     </table>
   </div>
+  <div class="ml50 mt10" v-if="list.length > 0">
+    <Page :current="page" :total="total" simple class-name="tee-page" />
+  </div>
 
   <modal-list ref="modalList" @detail="openModal" />
-  <modal-form ref="modalForm" />
+  <modal-form ref="modalForm" @ok="getListData" />
 </div>
 </template>
 
 <script type='es6'>
 import modalForm from './peripheral/modalForm'
 import modalList from './peripheral/modalList'
+import { getAction, postAction } from '@/utils'
 export default {
   name: 'app',
   components: {
     modalForm,
     modalList
   },
+  computed: {
+    imgSrc () {
+      return this.$store.state.imgSrc
+    }
+  },
   data () {
     return {
-      list: [{}, {}, {}, {}, {}, {}]
+      cateList: [],
+      statusList: [
+        { id: '0', name: '全部' },
+        { id: '1', name: '下架' },
+        { id: '2', name: '上架' }
+      ],
+      cate: '',
+      status: '',
+      word: '',
+      total: 0,
+      page: 1,
+      limit: 10,
+      list: [],
+      isAjax: false
     }
+  },
+  mounted () {
+    this.getCateData()
+    this.getListData()
   },
   methods: {
     openModalList () {
       this.$refs.modalList.show()
     },
-    openModal () {
-      this.$refs.modalForm.show()
+    openModal (id) {
+      this.$refs.modalForm.show(id)
+    },
+    getCateData () {
+      getAction('/shopapi/nearby/cates').then(res => {
+        if (res.code === 0) {
+          this.cateList = res.data
+        }
+      })
+    },
+    getListData () {
+      this.$refs.modalList.handleCancel()
+      getAction('/shopapi/shop/nearby/index/data', {
+        word: this.word,
+        cid: this.cate,
+        status: this.status === '' ? '0' : this.status,
+        page: this.page,
+        limit: this.limit
+      }).then(res => {
+        if (res.code === 0) {
+          this.list = res.data
+          this.total = res.count
+        }
+      })
+    },
+    handleDel (id) {
+      if (this.isAjax) return
+      this.isAjax = true
+      postAction('/shopapi/shop/nearby/destroy', {
+        nearby_id: id
+      }).then(res => {
+        this.isAjax = false
+        if (res.code === 0) {
+          this.$Message.success(res.msg)
+          this.getListData()
+        }
+      })
+    },
+    changeStatus (id, status) {
+      if (this.isAjax) return
+      this.isAjax = true
+      postAction('/shopapi/shop/nearby/status', {
+        id,
+        status
+      }).then(res => {
+        this.isAjax = false
+        if (res.code === 0) {
+          this.$Message.success(res.msg)
+          this.getListData()
+        }
+      })
+    },
+    handleEdit (id) {
+      this.$refs.modalForm.show(id)
     }
   }
 }

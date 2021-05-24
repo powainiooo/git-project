@@ -32,21 +32,21 @@
 <template>
 <float-box v-model="visible" :title="title" :height="75" :left="380" :right="90">
   <div class="acenter" slot="btns">
-    <Button :disabled="btnDisabled" @click="handleSave">确认保存</Button>
+    <Button :disabled="btnDisabled" :loading="isAjax" @click="handleSave">确认保存</Button>
     <a href="javascript:;" class="btn-close ml20" @click="handleCancel"><img src="@/assets/img/close.png" /></a>
   </div>
   <div class="goods-box">
-    <Form ref="form" :model="formData" :rules="ruleValidate">
+    <Form ref="form" :model="formData">
       <Row>
         <Col span="6" style="border-right: 1px solid #F2F2F2;">
           <div class="c-form mt30">
             <div class="c-c8 mb20 ml15">产品基本信息</div>
             <FormItem>
               <p class="c-c8 f12 ml15 mb5" style="line-height: 1;">产品名称</p>
-              <Input placeholder="产品名称" v-model="formData.xxx1" disabled />
+              <Input placeholder="产品名称" v-model="formData.title" disabled />
             </FormItem>
             <FormItem>
-              <upload-img v-model="formData.xxx5">
+              <upload-img v-model="formData.cover">
                 <span slot="title">产品图</span>
               </upload-img>
             </FormItem>
@@ -56,24 +56,24 @@
           <div class="c-c8 mb20 mt30 ml75">选择规格</div>
           <div class="specs-scroll">
             <div class="specs2-box" :style="{width: boxWidth}">
-              <div class="specs2-item" v-for="(specs, index) in specsList" :key="index">
+              <div class="specs2-item">
 
-                <div class="specs2-item-col">
-                  <p class="f12 c-c8 ml60 mb5">规格选项</p>
-                  <div class="acenter">
-                    <input type="checkbox" class="cb" />
-                    <Input class="min-txt" disabled />
-                  </div>
-                </div>
-                <div class="flex mb5">
+<!--                <div class="specs2-item-col">-->
+<!--                  <p class="f12 c-c8 ml60 mb5">规格选项</p>-->
+<!--                  <div class="acenter">-->
+<!--                    <input type="checkbox" class="cb" />-->
+<!--                    <Input class="min-txt" disabled />-->
+<!--                  </div>-->
+<!--                </div>-->
+                <div class="flex mb5 mt10">
                   <p class="f12 c-c8 ml60">规格选项</p>
                   <p class="f12 c-c8 ml110">库存</p>
                 </div>
-                <div class="specs2-item-col2">
-                  <input type="checkbox" class="cb" />
-                  <Input class="min-txt" disabled />
-                  <Input class="min-txt" style="width: 60px;" />
-                  <span class="unit">元</span>
+                <div class="specs2-item-col2" v-for="item in specsList" :key="item.attr_ids">
+                  <input type="checkbox" class="cb" v-model="item.checked" />
+                  <Input class="min-txt" disabled v-model="item.attr_name" />
+                  <Input class="min-txt" style="width: 60px;" v-model="item.store_nums" v-if="item.checked" />
+                  <span class="unit" v-if="item.checked">个</span>
                 </div>
               </div>
             </div>
@@ -88,6 +88,7 @@
 <script type='es6'>
 import floatBox from '@/components/common/floatBox'
 import uploadImg from '@/components/common/uploadImg'
+import { getAction, postAction } from '@/utils'
 export default {
   name: 'app',
   components: {
@@ -99,47 +100,69 @@ export default {
       return false
     },
     boxWidth () {
-      return (this.specsList.length * 275) + 'px'
+      return (1 * 275) + 'px'
     }
   },
   data () {
     return {
       title: '添加产品',
       visible: false,
-      formData: {
-        xxx1: '',
-        xxx2: [],
-        xxx3: '',
-        xxx4: '',
-        xxx5: '',
-        xxx6: '',
-        xxx7: '',
-        xxx8: '',
-        xxx9: '',
-        xxx10: '',
-        xxx11: '',
-        xxx12: '',
-        xxx13: ''
-      },
-      ruleValidate: {
-        xxx8: [
-          { required: true, trigger: 'blur', validator: this.idsValidator }
-        ],
-        xxx9: [
-          { required: true, trigger: 'blur', validator: this.phoneValidator }
-        ]
-      },
-      specsList: [{}]
+      formData: {},
+      specsList: [],
+      id: '',
+      isAjax: false
     }
   },
   methods: {
-    show () {
+    getDetailData (id) {
+      this.id = id
+      getAction('/shopapi/shop/nearby/show', {
+        nearby_id: id
+      }).then(res => {
+        if (res.code === 0) {
+          this.formData = res.data.nearby
+          const attrs = res.data.attrs
+          const list = []
+          for (const i in res.data.attrs) {
+            list.push({
+              attr_ids: i,
+              attr_name: attrs[i].attr_name,
+              checked: attrs[i].checked === 1,
+              store_nums: attrs[i].store_nums
+            })
+          }
+          this.specsList = list
+        }
+      })
+    },
+    show (id) {
       this.visible = true
+      this.getDetailData(id)
     },
     handleCancel () {
       this.visible = false
     },
-    handleSave () {}
+    handleSave () {
+      if (this.isAjax) return
+      const params = {
+        nearby_id: this.id
+      }
+      for (const i of this.specsList) {
+        params[i.attr_ids] = {
+          checked: i.checked ? 1 : 0,
+          store_nums: i.store_nums
+        }
+      }
+      this.isAjax = true
+      postAction('/shopapi/shop/nearby/save', params).then(res => {
+        this.isAjax = false
+        if (res.code === 0) {
+          this.$Message.success(res.msg)
+          this.$emit('ok')
+          this.visible = false
+        }
+      })
+    }
   }
 }
 </script>

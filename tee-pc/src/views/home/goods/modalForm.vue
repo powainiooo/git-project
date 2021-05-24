@@ -39,7 +39,7 @@
     <a href="javascript:;" class="btn-close ml20" @click="handleCancel"><img src="@/assets/img/close.png" /></a>
   </div>
   <div class="goods-box">
-    <Form ref="form" :model="formData" :rules="ruleValidate">
+    <Form ref="form" :model="formData">
       <Row>
         <Col span="6" style="border-right: 1px solid #F2F2F2;">
           <div class="c-form mt30">
@@ -85,12 +85,12 @@
               <div class="specs-box-col1" v-for="(specs, i) in specsList" :key="i">
                 <div class="specs-name">
                   <a href="javascript:;" class="btn-close" @click="delSpecs(i)"><img src="@/assets/img/close.png" /></a>
-                  <Input maxlength="8" show-word-limit class="min-txt" v-model="specs.name" />
+                  <Input maxlength="8" show-word-limit class="min-txt" v-model="specs.attr_name" />
                 </div>
                 <ul class="specs-list">
                   <li v-for="(child, j) in specs.children" :key="j">
                     <a href="javascript:;" class="btn-close" @click="delSpecsItem(i, j)"><img src="@/assets/img/close.png" /></a>
-                    <Input maxlength="8" show-word-limit class="min-txt" v-model="child.name" />
+                    <Input maxlength="8" show-word-limit class="min-txt" v-model="child.attr_name" />
                     <Input placeholder="0" class="min-txt" style="width: 60px;" v-model="child.price" />
                     <span class="unit">元</span>
                   </li>
@@ -133,6 +133,7 @@ export default {
   data () {
     return {
       title: '添加产品',
+      isEdit: false,
       visible: false,
       cateList: [],
       dates: [],
@@ -148,20 +149,13 @@ export default {
         date_start: '',
         date_end: ''
       },
-      ruleValidate: {
-        xxx8: [
-          { required: true, trigger: 'blur', validator: this.idsValidator }
-        ],
-        xxx9: [
-          { required: true, trigger: 'blur', validator: this.phoneValidator }
-        ]
-      },
       specsList: [{
-        name: '',
+        attr_name: '',
         children: [
-          { name: '', price: '' }
+          { attr_name: '', price: '' }
         ]
       }],
+      id: '',
       isAjax: false
     }
   },
@@ -175,16 +169,36 @@ export default {
     },
     show () {
       this.visible = true
+      this.isEdit = false
       this.getCateData()
+    },
+    edit (id) {
+      this.id = id
+      this.getCateData()
+      getAction('/shopapi/goods/show', {
+        id
+      }).then(res => {
+        if (res.code === 0) {
+          this.visible = true
+          this.isEdit = true
+          const data = res.data
+          for (const key in this.formData) {
+            this.formData[key] = data.goods[key]
+          }
+          this.dates = [data.goods.date_start, data.goods.date_end]
+          this.images = data.goods.images
+          this.specsList = data.attrs
+        }
+      })
     },
     handleCancel () {
       this.visible = false
     },
     newSpecs () {
       this.specsList.push({
-        name: '',
+        attr_name: '',
         children: [
-          { name: '', price: '' }
+          { attr_name: '', price: '' }
         ]
       })
     },
@@ -193,7 +207,7 @@ export default {
     },
     newSpecsItem (i) {
       this.specsList[i].children.push({
-        name: '',
+        attr_name: '',
         price: ''
       })
     },
@@ -210,36 +224,17 @@ export default {
     handleSave () {
       if (this.isAjax) return
       const params = { ...this.formData }
-      // for (let i = 0; i < this.images.length; i++) {
-      //   params[`images[${i}]`] = this.images[i]
-      // }
       params.images = this.images
-      const sp = this.specsList
-      // for (let i = 0; i < sp.length; i++) {
-      //   params[`attrs[${i}][attr_name]`] = sp[i].name
-      //   for (let j = 0; j < sp[i].children.length; j++) {
-      //     params[`attrs[${i}][children][${j}][attr_name]`] = sp[i].children[j].name
-      //     params[`attrs[${i}][children][${j}][price]`] = sp[i].children[j].price
-      //   }
-      // }
-      params.attrs = []
-      for (const i of this.specsList) {
-        const list = []
-        for (const j of i.children) {
-          list.push({
-            attr_name: j.name,
-            price: j.price
-          })
-        }
-        params.attrs.push({
-          attr_name: i.name,
-          children: list
-        })
-      }
+      params.attrs = [...this.specsList]
       params.cover = this.images[0]
       console.log(params)
       this.isAjax = true
-      postAction('/shopapi/goods/store', params).then(res => {
+      let url = '/shopapi/goods/store'
+      if (this.isEdit) {
+        url = '/shopapi/goods/update'
+        params.id = this.id
+      }
+      postAction(url, params).then(res => {
         this.isAjax = false
         if (res.code === 0) {
           this.$Message.success(res.msg)

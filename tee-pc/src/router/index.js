@@ -60,7 +60,7 @@ router.beforeEach((to, from, next) => {
         console.log('4')
         store.dispatch('getUserData').then(res => {
           console.log('5')
-          if (res.shop && res.shop.address === null) {
+          if (res.shop && res.shop.address !== null) {
             if (to.name === 'Account') {
               next({ name: 'Home' })
             } else {

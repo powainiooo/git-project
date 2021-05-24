@@ -18,15 +18,19 @@
   <!-- 统计数量 -->
   <ul class="nums-list">
     <li>
-      <span>今日收益</span>
+      <span>今日茶饮收益</span>
       <div>{{amount}}</div>
     </li>
     <li>
-      <span>今日杯数</span>
+      <span>今日周边收益</span>
+      <div>{{amount}}</div>
+    </li>
+    <li>
+      <span>今日茶饮订单</span>
       <div>{{cups}}</div>
     </li>
     <li>
-      <span>今日订单</span>
+      <span>今日周边订单</span>
       <div>{{nums}}</div>
     </li>
   </ul>

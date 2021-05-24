@@ -145,10 +145,11 @@ export default {
     handleSave () {
       if (this.isAjax) return
       const params = {
-        nearby_id: this.id
+        nearby_id: this.id,
+        attrs: {}
       }
       for (const i of this.specsList) {
-        params[i.attr_ids] = {
+        params.attrs[i.attr_ids] = {
           checked: i.checked ? 1 : 0,
           store_nums: i.store_nums
         }

@@ -6,9 +6,7 @@
 <div class="pa60">
   <div class="between operates-line">
     <div class="flex">
-      <Select class="c-select mr20" placeholder="下单日期" style="width: 130px;">
-        <Option>123</Option>
-      </Select>
+      <c-date-time type="date" placeholder="下单日期" class="tee-date mr20" v-model="date" />
       <Select class="c-select mr20" placeholder="状态" style="width: 130px;" v-model="status">
         <Option v-for="item in statusList" :key="item.id" :value="item.id">{{item.name}}</Option>
       </Select>
@@ -96,7 +94,7 @@
             <Poptip title="确认制作？" confirm @on-ok="startMake(item.id)" v-if="item.status === 2">
               <Button size="small" class="bg-main ml10">开始制作</Button>
             </Poptip>
-            <span v-else-if="item.status === 3">05:52</span>
+            <counter v-else-if="item.status === 3" :timer="item.remain_make_time" @done="getListData" />
             <Poptip title="确认完成？" confirm @on-ok="orderDone(item.id)" v-else-if="item.status === 4">
               <Button size="small" class="bg-main ml10">完成订单</Button>
             </Poptip>
@@ -114,8 +112,14 @@
 
 <script type='es6'>
 import { getAction, postAction } from '@/utils'
+import counter from '@/components/common/counter'
+import cDateTime from '@/components/common/cDateTime'
 export default {
   name: 'app',
+  components: {
+    counter,
+    cDateTime
+  },
   data () {
     return {
       statusList: [

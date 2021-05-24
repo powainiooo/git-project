@@ -6,9 +6,7 @@
 <div class="pa60">
   <div class="between operates-line">
     <div class="flex">
-      <Select class="c-select mr20" placeholder="下单日期" style="width: 130px;">
-        <Option>123</Option>
-      </Select>
+      <c-date-time type="date" placeholder="下单日期" class="tee-date mr20" v-model="date" />
       <Select class="c-select mr20" placeholder="状态" style="width: 130px;" v-model="status">
         <Option v-for="item in statusList" :key="item.id" :value="item.id">{{item.name}}</Option>
       </Select>

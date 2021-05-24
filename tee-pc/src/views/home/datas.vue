@@ -19,19 +19,19 @@
   <ul class="nums-list">
     <li>
       <span>今日茶饮收益</span>
-      <div>{{amount}}</div>
+      <div>{{amount1}}</div>
     </li>
     <li>
       <span>今日周边收益</span>
-      <div>{{amount}}</div>
+      <div>{{amount2}}</div>
     </li>
     <li>
       <span>今日茶饮订单</span>
-      <div>{{cups}}</div>
+      <div>{{nums1}}</div>
     </li>
     <li>
       <span>今日周边订单</span>
-      <div>{{nums}}</div>
+      <div>{{nums2}}</div>
     </li>
   </ul>
   <div class="between ml25 mr25 mt30">
@@ -59,9 +59,10 @@ export default {
   },
   data () {
     return {
-      amount: '--',
-      cups: '--',
-      nums: '--'
+      amount1: '--',
+      amount2: '--',
+      nums1: '--',
+      nums2: '--'
     }
   },
   mounted () {
@@ -75,9 +76,19 @@ export default {
         type: 1
       }).then(res => {
         if (res.code === 0) {
-          this.amount = res.data.order_amount
+          this.amount1 = res.data.order_amount
           // this.cups = res.data.order_amount
-          this.nums = res.data.order_nums
+          this.nums1 = res.data.order_nums
+        }
+      })
+      getAction('/shopapi/count/order/count', {
+        date,
+        type: 2
+      }).then(res => {
+        if (res.code === 0) {
+          this.amount2 = res.data.order_amount
+          // this.cups = res.data.order_amount
+          this.nums2 = res.data.order_nums
         }
       })
     }

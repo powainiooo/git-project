@@ -10,9 +10,10 @@
 </style>
 
 <template>
-<float-box v-model="visible" :mask="false" :width="800">
+<float-box v-model="visible" :mask="status !== 'new'" :width="800">
   <div class="acenter" slot="btns">
     <Button :disabled="btnDisabled" :loading="isAjax" @click="handleSave">确认保存</Button>
+     <a href="javascript:;" class="btn-close ml20" @click="handleCancel"><img src="@/assets/img/close.png" /></a>
   </div>
   <div class="account-box">
     <!-- 登录表单 -->
@@ -115,6 +116,9 @@ export default {
       } else {
         return `${this.verifyIndex}秒后重试`
       }
+    },
+    globalData () {
+      return this.$store.state.globalData
     }
   },
   data () {
@@ -150,11 +154,11 @@ export default {
         ]
       },
       verifyIndex: 0,
-      isAjax: false
+      isAjax: false,
+      status: 'new'
     }
   },
   mounted () {
-    this.getBankList()
   },
   methods: {
     getBankList () {
@@ -166,11 +170,34 @@ export default {
     },
     show () {
       this.visible = true
-      this.formData.shop_name = this.$store.state.globalData.shop.shop_name
-      this.getBankData()
+      this.formData.shop_name = this.globalData.shop.shop_name
+      this.status = 'new'
+      this.getBankList()
     },
-    getBankData () {
-      this.bankList = this.$store.state.bankList
+    view () {
+      this.visible = true
+      this.status = 'view'
+      this.formData = {
+        shop_name: this.globalData.shop.shop_name,
+        word_time_start: this.globalData.shop.word_time_start,
+        word_time_end: this.globalData.shop.word_time_end,
+        province: this.globalData.shop.province,
+        city: this.globalData.shop.city,
+        address: this.globalData.shop.address,
+        shop_logo: this.globalData.shop.shop_logo,
+        score_use_top: this.globalData.shop.score_use_top,
+        name: this.globalData.bank.name,
+        idno: this.globalData.bank.idno,
+        phone: this.globalData.bank.phone,
+        bank_name: Number(this.globalData.bank.bank_name),
+        bank_subname: this.globalData.bank.bank_subname,
+        bank_number: this.globalData.bank.bank_number
+      }
+      this.cities = [this.globalData.shop.province, this.globalData.shop.city]
+      this.times = [this.globalData.shop.word_time_start, this.globalData.shop.word_time_end]
+    },
+    handleCancel () {
+      this.visible = false
     },
     idsValidator (rule, value, callback) {
       const reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/
@@ -211,7 +238,12 @@ export default {
             this.isAjax = false
             if (res.code === 0) {
               this.$Message.success(res.msg)
-              this.$router.push('/index')
+              if (this.status === 'new') {
+                this.$router.push('/index')
+              } else {
+                this.visible = false
+              }
+              this.$store.dispatch('getUserData')
             }
           })
         }

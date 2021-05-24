@@ -13,6 +13,14 @@
     z-index 10
   &-float
     size(100%, 100%)
+.tee-date
+  width 130px;
+  .ivu-input
+    background-color #A96854; color #ffffff;
+    &::-webkit-input-placeholder
+      color #ffffff;
+  .c-date-time-arrow
+    background-color transparent
 </style>
 
 <template>

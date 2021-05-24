@@ -14,7 +14,7 @@
       </Select>
       <div class="c-input">
         <img src="@/assets/img/search.png" class="c-input-search" width="23" />
-        <input type="text" placeholder="输入搜索内容" v-model="word" />
+        <input type="text" placeholder="输入搜索内容" v-model="word" @keyup.enter="getListData" />
       </div>
     </div>
     <div class="flex">
@@ -40,7 +40,7 @@
         <th>产品图</th>
         <th>规格</th>
         <th>库存</th>
-        <th>价格</th>
+        <th>状态</th>
         <th style="text-align: center;"><div class="pr20">操作</div></th>
       </tr>
       </thead>
@@ -55,18 +55,19 @@
         </td>
         <td>
           <div>
-            <p v-for="(item, index) in item.goods" :key="index">{{item.buy_nums}}</p>
+            <p v-for="(item, index) in item.skus" :key="index">{{item.attr_names}}</p>
           </div>
         </td>
         <td>
           <div>
-            <p v-for="(item, index) in item.goods" :key="index">{{item.buy_nums}}</p>
+            <p v-for="(item, index) in item.skus" :key="index">{{item.store_nums}}</p>
           </div>
         </td>
         <td>
-          <div>
-            <p v-for="(item, index) in item.goods" :key="index">{{item.buy_nums}}</p>
+          <div v-if="item.status === 1">
+            <p v-for="(item, index) in item.skus" :key="index">{{item.store_nums > 0 ? '在售' : '售罄'}}</p>
           </div>
+          <div v-if="item.status === 2"><p>下架</p></div>
         </td>
         <td>
           <div class="">
@@ -76,7 +77,7 @@
             <Poptip title="确认上架？" confirm @on-ok="changeStatus(item.id, 2)">
               <Button size="small" v-if="item.status === 1">上架</Button>
             </Poptip>
-            <Button size="small" class="ml10" @click="handleEdit(item.id)">编辑</Button>
+            <Button size="small" class="ml10" @click="handleEdit(item.nearby_id)">编辑</Button>
             <Poptip title="确认删除？" confirm @on-ok="handleDel(item.id)">
               <Button size="small" class="ml10 bg-gray">删除</Button>
             </Poptip>

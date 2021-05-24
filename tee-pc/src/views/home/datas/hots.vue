@@ -19,7 +19,7 @@
 
 <template>
 <div class="box2 hots-container">
-  <div class="box2-title">今日热卖产品</div>
+  <div class="box2-title">今日热卖茶饮</div>
   <div class="box2-body scrollBar">
     <ul class="mt20">
       <li v-for="(item, index) in list" :key="index">

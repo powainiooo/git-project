@@ -29,16 +29,16 @@
         <th>状态</th>
         <th>提交时间</th>
         <th>完成时间</th>
-        <th style="text-align: center;">操作</th>
+        <th style="text-align: center; padding-right: 20px;">操作</th>
       </tr>
       </thead>
       <tbody>
       <tr v-for="item in list" :key="item.id">
-        <td><div>{{item.created_at}}</div></td>
+        <td><div>{{item.date}}</div></td>
         <td><div>{{item.fetch_code}}</div></td>
-        <td><div>{{item.status_name}}</div></td>
-        <td><div>{{item.status_name}}</div></td>
-        <td><div>{{item.status_name}}</div></td>
+        <td><div>{{item.status_name || '--'}}</div></td>
+        <td><div>{{item.updated_at || '--'}}</div></td>
+        <td><div>{{item.apply_at || '--'}}</div></td>
         <td>
           <div class="">
             <Poptip title="确认提现？" confirm @on-ok="handleWithdraw(item.id)">

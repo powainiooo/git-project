@@ -8,7 +8,7 @@
 // 需要将它改为'/my-app/'
 // iview-admin线上演示打包路径： https://file.iviewui.com/admin-dist/
 const BASE_URL = process.env.NODE_ENV === 'production'
-  ? './static'
+  ? ''
   : '/'
 
 module.exports = {
@@ -28,7 +28,8 @@ module.exports = {
   productionSourceMap: false,
   // 这里写你调用接口的基础路径，来解决跨域，如果设置了代理，那你本地开发环境的axios的baseUrl要写为 '' ，即空字符串
   devServer: {
-    proxy: 'http://api.dev.sysds.cn'
+    // proxy: 'http://api.dev.sysds.cn'
+    proxy: ''
   }
 }
 // laowang 123456    tea  123456
@@ -36,4 +37,5 @@ module.exports = {
 * http://admin.dev.sysds.cn/
 admin
 123456
+* http://shop.dev.wsgb.club/ http://shop.wsgb.club/
 * */

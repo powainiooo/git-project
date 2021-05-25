@@ -2,90 +2,47 @@
 @import "../../assets/css/mixin.styl"
 @import "../../assets/css/global.styl"
 .c-upload
-  display flex
-  align-items center
+  display flex; align-items center
   .ivu-upload-select
     display block
   &-box
-    center()
-    overflow hidden
-    size(90px, 90px)
-    background-color #ffffff
-    border-radius 20px
-    position relative
+    center(); overflow hidden; size(90px, 90px); background-color #ffffff; border-radius 20px; position relative
     .add
       size(20px, 20px); box-shadow 0px 0px 3px 0px rgba(0, 0, 0, 0.15); background-color mainColor; center(); border-radius 50%;
     .picture
-      width 100%
-      display block
+      width 100%; display block
     button
-      padding 0 6px
-      border-radius 3px
-      background-color mainColor
-      font-size 12px
-      color #ffffff
-      height 22px
-      line-height 22px
-      abTL(50%, 50%)
-      transform translate(-50%, -50%)
-  &-done
-    border 2px solid mainColor
+      padding 0 6px; border-radius 3px; background-color mainColor; font-size 12px; color #ffffff; height 22px; line-height 22px; abTL(50%, 50%); transform translate(-50%, -50%)
   &-error
     border 2px solid #E85412
     button
       background #E85412
+  &-disabled
+    background-color #F4F3F3
   &-progress
-    size(60px, 6px)
-    border-radius 3px
-    overflow hidden
-    background-color #f4f3f3
+    size(60px, 6px); border-radius 3px; overflow hidden; background-color #f4f3f3
   &-bar
-    size(50%, 100%)
-    background-color mainColor
+    size(50%, 100%); background-color mainColor
   &-content
     margin-left 10px
     p
-      font-size 10px
-      color #C8C9CA
-      line-height 1.3
+      font-size 10px; color #C8C9CA; line-height 1.3
     div
-      font-size 14px
-      color #9E9E9F
-      line-height 1.3
+      font-size 14px; color #9E9E9F; line-height 1.3
   &-cropper
-    size(100vw, 100vh)
-    background: rgba(0, 0, 0, 0.8);
-    position fixed
-    top 0
-    left 0
-    z-index 2000
-    center()
+    size(100vw, 100vh); background: rgba(0, 0, 0, 0.8); position fixed; top 0; left 0; z-index 2000; center()
     &-close
-      position absolute
-      top 10px
-      right 10px
+      position absolute; top 10px; right 10px
     &-title
-      margin 40px 36px 0 36px
-      font-size 18px
-      color #000000
-      between()
+      margin 40px 36px 0 36px; font-size 18px; color #000000; between()
     &-subTitle
-      margin 0 36px 20px 36px
-      font-size 12px
-      color #C8C9CA
+      margin 0 36px 20px 36px; font-size 12px; color #C8C9CA
     &-area
-      size(366px, 386px)
-      margin 0 auto
-      border 3px solid #6D9AF4
-      margin-bottom 20px
+      size(366px, 386px); margin 0 auto; border 3px solid #6D9AF4; margin-bottom 20px
       .vue-cropper
-        background url("../../assets/img/bg.png") rgb(200, 201, 202)
-        background-size 360px
+        background url("../../assets/img/bg.png") rgb(200, 201, 202); background-size 360px
     &-container
-      size(600px, 600px)
-      background-color #ffffff
-      border-radius 10px
-      position relative
+      size(600px, 600px); background-color #ffffff; border-radius 10px; position relative
 
 </style>
 
@@ -100,7 +57,8 @@
     <div class="c-upload-box"
          :class="{
             'c-upload-done': (value !== '' && !isLoading),
-            'c-upload-error': error
+            'c-upload-error': error,
+            'c-upload-disabled': disabled
           }"
          :style="{width: width + 'px'}"
          @click="openCropper">
@@ -111,7 +69,7 @@
         <div class="c-upload-bar" :style="{width: barWidth}"></div>
       </div>
       <img :src="cdnurl + value" class="picture" v-if="value !== '' && !isLoading" />
-      <button v-if="value !== '' && !isLoading">重传</button>
+      <button v-if="value !== '' && !isLoading && !disabled">重传</button>
     </div>
   </Upload>
   <div class="c-upload-content">
@@ -182,6 +140,10 @@ export default {
       type: Boolean,
       default: false
     },
+    disabled: {
+      type: Boolean,
+      default: false
+    },
     fixedNumber: {
       type: Array,
       default: () => [1, 1]
@@ -224,7 +186,7 @@ export default {
   methods: {
     uploadBefore (file) {
       console.log('uploadBefore', file)
-      if (this.cropper) {
+      if (this.cropper || this.disabled) {
         return false
       }
       // return false

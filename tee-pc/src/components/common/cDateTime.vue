@@ -3,14 +3,12 @@
 @import "../../assets/css/global.styl"
 .c-date-time
   position relative
+  .ivu-input-suffix
+    display none
   &-arrow
-    size(40px, 40px)
-    abBR(0, 0)
-    background-color mainColor
-    center()
-    color #ffffff
-    border-radius 0 20px 20px 0
-    z-index 10
+    size(20px, 20px); abBR(10px, 11px); background-color mainColor; center(); color #ffffff; border-radius 20px; z-index 10; transition all .2s ease-in-out;
+    &.rotate
+      transform rotateZ(180deg)
   &-float
     size(100%, 100%)
 .tee-date
@@ -25,9 +23,9 @@
 
 <template>
 <div class="c-date-time">
-  <TimePicker :value="value" :type="type" v-bind="$attrs" v-if="type === 'time' || type === 'timerange'" class="c-date-time-float" @on-change="onChange"></TimePicker>
-  <DatePicker :value="value" :type="type" v-bind="$attrs" v-else class="c-date-time-float" @on-change="onChange"></DatePicker>
-  <div class="c-date-time-arrow"><Icon type="ios-arrow-down" /></div>
+  <TimePicker :value="value" :type="type" v-bind="$attrs" v-if="type === 'time' || type === 'timerange'" class="c-date-time-float" @on-change="onChange" @on-open-change="openChange"></TimePicker>
+  <DatePicker :value="value" :type="type" v-bind="$attrs" v-else class="c-date-time-float" @on-change="onChange" @on-open-change="openChange"></DatePicker>
+  <div class="c-date-time-arrow" :class="{'rotate': rotate}"><Icon type="ios-arrow-down" /></div>
 </div>
 </template>
 
@@ -46,12 +44,16 @@ export default {
   },
   data () {
     return {
+      rotate: false
     }
   },
   methods: {
     onChange (e) {
       this.$emit('input', e)
       this.$emit('change', e)
+    },
+    openChange (e) {
+      this.rotate = e
     }
   }
 }

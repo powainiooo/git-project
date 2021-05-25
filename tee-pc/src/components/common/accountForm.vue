@@ -12,7 +12,8 @@
 <template>
 <float-box v-model="visible" :mask="status !== 'new'" :width="800">
   <div class="acenter" slot="btns">
-    <Button :disabled="btnDisabled" :loading="isAjax" @click="handleSave">确认保存</Button>
+    <Button :disabled="btnDisabled" :loading="isAjax" @click="handleSave" v-if="status !== 'view'">确认保存</Button>
+    <Button @click="status = 'edit'" v-else>编辑信息</Button>
      <a href="javascript:;" class="btn-close ml20" @click="handleCancel"><img src="@/assets/img/close.png" /></a>
   </div>
   <div class="account-box">
@@ -23,26 +24,42 @@
           <div class="c-form mt50">
             <h3 class="f18 mb30 ml10">基本信息</h3>
             <FormItem>
-              <Input placeholder="门店名称" v-model="formData.shop_name" />
+              <Input placeholder="门店名称" v-model="formData.shop_name" :disabled="notNew">
+                <span slot="prepend">门店名称</span>
+              </Input>
             </FormItem>
             <FormItem>
-              <c-date-time type="timerange" format="HH:mm" placeholder="营业时间" v-model="times" @change="timeChange" />
+              <Input :value="times[0] + ' ~ ' + times[1]" :disabled="notNew" v-if="status === 'view'">
+                <span slot="prepend">营业时间</span>
+              </Input>
+              <c-date-time type="timerange" format="HH:mm" placeholder="营业时间" v-model="times" @change="timeChange" v-else />
             </FormItem>
             <FormItem>
-              <Cascader :data="cityData" v-model="cities" @on-change="cityChange"></Cascader>
+              <Input :value="cities[0] + ' / ' + cities[1]" :disabled="notNew" v-if="notNew">
+                <span slot="prepend">门店地址</span>
+              </Input>
+              <Cascader :data="cityData" v-model="cities" @on-change="cityChange" v-else></Cascader>
             </FormItem>
             <FormItem>
-              <Input type="textarea" :rows="4" placeholder="门店地址" v-model="formData.address" />
+              <Input type="textarea" :rows="4" placeholder="门店地址" v-model="formData.address" :disabled="notNew" />
             </FormItem>
             <FormItem>
-              <upload-img v-model="formData.shop_logo">
+              <upload-img v-model="formData.shop_logo" :disabled="notNew">
                 <span slot="title">门店logo</span>
                 <span slot="hint">尺寸210px*80px</span>
               </upload-img>
             </FormItem>
             <h3 class="f18 mb30 ml10">积分使用设置</h3>
             <FormItem>
-              <Input placeholder="单笔使用上限" v-model="formData.score_use_top"><span slot="append">积分</span></Input>
+              <Input v-model="formData.score_use_top" :disabled="notNew" v-if="status === 'view'">
+                <span slot="prepend">积分上限</span>
+                <span slot="append">积分1</span>
+              </Input>
+              <div v-else>
+                <Input placeholder="单笔使用上限" v-model="formData.score_use_top">
+                  <span slot="append">积分2</span>
+                </Input>
+              </div>
               <p class="form-hint mb75">100积分 = 1元，单笔最高可用积分即最高优惠额度。</p>
             </FormItem>
           </div>
@@ -50,32 +67,66 @@
         <Col span="12">
           <div class="c-form mt50">
             <h3 class="f18 mb30 ml10">银行账户信息</h3>
-            <FormItem>
-              <Input placeholder="开户名" v-model="formData.name" />
-            </FormItem>
-            <FormItem prop="idno">
-              <Input placeholder="身份证号" v-model="formData.idno" />
-            </FormItem>
-            <FormItem prop="phone">
-              <Input placeholder="预留手机号" v-model="formData.phone" />
-            </FormItem>
-            <FormItem>
-              <div class="between">
-                <Input placeholder="验证码" v-model="formData.code" style="width: 158px;" />
-                <Button class="btn-code" @click="getCode" :disabled="verifyIndex !== 0">{{verifyBtn}}</Button>
-              </div>
-            </FormItem>
-            <FormItem>
-              <Select placeholder="选择银行" v-model="formData.bank_name">
-                <Option v-for="i in bankList" :key="i.id" :value="i.id">{{i.bank_name}}</Option>
-              </Select>
-            </FormItem>
-            <FormItem>
-              <Input placeholder="卡户支行" v-model="formData.bank_subname" />
-            </FormItem>
-            <FormItem>
-              <Input placeholder="银行卡号" v-model="formData.bank_number" />
-            </FormItem>
+            <template v-if="status === 'view'">
+              <FormItem>
+                <Input v-model="formData.name" disabled>
+                  <span slot="prepend">开户名</span>
+                </Input>
+              </FormItem>
+              <FormItem prop="idno">
+                <Input v-model="formData.idno" disabled>
+                  <span slot="prepend">身份证号</span>
+                </Input>
+              </FormItem>
+              <FormItem prop="phone">
+                <Input v-model="formData.phone" disabled>
+                  <span slot="prepend">预留手机号</span>
+                </Input>
+              </FormItem>
+              <FormItem>
+                <Input v-model="bankName" disabled>
+                  <span slot="prepend">选择银行</span>
+                </Input>
+              </FormItem>
+              <FormItem>
+                <Input v-model="formData.bank_subname" disabled>
+                  <span slot="prepend">卡户支行</span>
+                </Input>
+              </FormItem>
+              <FormItem>
+                <Input v-model="formData.bank_number" disabled>
+                  <span slot="prepend">银行卡号</span>
+                </Input>
+              </FormItem>
+            </template>
+            <div v-else>
+              <FormItem>
+                <Input placeholder="开户名" v-model="formData.name" />
+              </FormItem>
+              <FormItem prop="idno">
+                <Input placeholder="身份证号" v-model="formData.idno" />
+              </FormItem>
+              <FormItem prop="phone">
+                <Input placeholder="预留手机号" v-model="formData.phone" />
+              </FormItem>
+              <FormItem>
+                <div class="between">
+                  <Input placeholder="验证码" v-model="formData.code" style="width: 158px;" />
+                  <Button class="btn-code" @click="getCode" :disabled="verifyIndex !== 0">{{verifyBtn}}</Button>
+                </div>
+              </FormItem>
+              <FormItem>
+                <Select placeholder="选择银行" v-model="formData.bank_name">
+                  <Option v-for="i in bankList" :key="i.id" :value="i.id">{{i.bank_name}}</Option>
+                </Select>
+              </FormItem>
+              <FormItem>
+                <Input placeholder="卡户支行" v-model="formData.bank_subname" />
+              </FormItem>
+              <FormItem>
+                <Input placeholder="银行卡号" v-model="formData.bank_number" />
+              </FormItem>
+            </div>
           </div>
         </Col>
       </Row>
@@ -119,6 +170,15 @@ export default {
     },
     globalData () {
       return this.$store.state.globalData
+    },
+    notNew () {
+      return this.status !== 'new'
+    },
+    bankName () {
+      console.log('this.formData.bank_name', this.formData.bank_name)
+      const item = this.bankList.find(i => i.id == this.formData.bank_name)
+      console.log(item)
+      return item ? item.bank_name : '--'
     }
   },
   data () {
@@ -195,6 +255,7 @@ export default {
       }
       this.cities = [this.globalData.shop.province, this.globalData.shop.city]
       this.times = [this.globalData.shop.word_time_start, this.globalData.shop.word_time_end]
+      this.getBankList()
     },
     handleCancel () {
       this.visible = false

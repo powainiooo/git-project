@@ -79,16 +79,21 @@ body
     &[disabled]
       border none
 .ivu-input-group-append
-  background-color #ffffff; border none; border-radius 0 20px 20px 0; font-size 12px; color #C8C9CA; padding-right 15px;
+  background-color #FFFFFF; border none; border-radius 0 20px 20px 0; font-size 12px; color #C8C9CA; padding-right 15px;
+.ivu-input-group-prepend
+  width 65px; background-color #E8D1B9; border-radius 20px 0 0 20px; border none; padding 0; text-align center; font-size 12px; color #FFFFFF;
 .ivu-input-wrapper
   .ivu-input-word-count
     color #C8C9CA; right 10px;
 
+.ivu-input-wrapper-disabled
+  .ivu-input-group-append
+    background-color #f3f3f3
 // 按钮
 .ivu-btn
-  min-width 100px; height 40px; background-color mainColor; color #FAFAFA; border-radius 20px; border-color mainColor;
+  min-width 100px; height 40px; background-color mainColor; color #FAFAFA; border-radius 20px; border-color mainColor; transition all .2s ease-in-out;
   &:hover
-    background-color mainColor; color #FAFAFA; border-color mainColor; box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.15);
+    background-color #FFBA9F; color #FAFAFA; border-color mainColor; box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.15);
   &[disabled]
     border none; background #EDECEB; color #B9BABB;
   &[disabled]:hover
@@ -126,7 +131,7 @@ body
     .ivu-select-selected-value
       height 40px; line-height 40px; color #3E311F; padding-left 15px
     &:after
-      content ''; size(40px, 40px); line-height 40px; abBR(0, 0); background-color mainColor; border-radius 0 20px 20px 0; color rgba(255, 255, 255, .5)
+      content ''; size(20px, 20px); line-height 40px; abBR(10px, 11px); background-color mainColor; border-radius 20px; color rgba(255, 255, 255, .5)
 .c-select
   .ivu-select-selection
     background-color #A96854

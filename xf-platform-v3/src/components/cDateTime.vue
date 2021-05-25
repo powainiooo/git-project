@@ -9,15 +9,18 @@
     center()
     color #ffffff
     border-radius 0 10px 10px 0
+    transition all .2s ease-in-out;
+    &.rotate
+      transform rotateZ(180deg)
   &-float
     size(100%, 100%)
 </style>
 
 <template>
 <div class="c-date-time">
-  <TimePicker :value="value" v-bind="$attrs" v-if="type === 'time'" class="c-date-time-float" @on-change="onChange"></TimePicker>
-  <DatePicker :value="value" :type="type" v-bind="$attrs" v-else class="c-date-time-float" @on-change="onChange"></DatePicker>
-  <div class="c-date-time-arrow"><Icon type="ios-arrow-down" /></div>
+  <TimePicker :value="value" v-bind="$attrs" v-if="type === 'time'" class="c-date-time-float" @on-change="onChange" @on-open-change="openChange"></TimePicker>
+  <DatePicker :value="value" :type="type" v-bind="$attrs" v-else class="c-date-time-float" @on-change="onChange" @on-open-change="openChange"></DatePicker>
+  <div class="c-date-time-arrow" :class="{'rotate': rotate}"><Icon type="ios-arrow-down" /></div>
 </div>
 </template>
 
@@ -36,12 +39,16 @@ export default {
   },
   data () {
     return {
+      rotate: false
     }
   },
   methods: {
     onChange (e) {
       this.$emit('input', e)
       this.$emit('change', e)
+    },
+    openChange (e) {
+      this.rotate = e
     }
   }
 }

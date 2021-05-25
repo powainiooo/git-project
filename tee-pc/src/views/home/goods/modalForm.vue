@@ -50,7 +50,9 @@
               </Select>
             </FormItem>
             <FormItem>
-              <Input placeholder="产品名称" v-model="formData.title" />
+              <Input placeholder="产品名称" v-model="formData.title">
+                <span slot="prepend" v-if="isEdit">产品名称</span>
+              </Input>
             </FormItem>
             <FormItem>
               <Input type="textarea" :rows="4" placeholder="产品介绍" v-model="formData.content" />
@@ -59,13 +61,21 @@
               <c-date-time type="daterange" placeholder="售卖时间段" v-model="dates" @change="dateChange" />
             </FormItem>
             <FormItem>
-              <Input placeholder="价格" v-model="formData.price"><span slot="append">元</span></Input>
+              <Input placeholder="价格" v-model="formData.price">
+                <span slot="prepend" v-if="isEdit">价格</span>
+                <span slot="append">元</span>
+              </Input>
             </FormItem>
             <FormItem>
-              <Input placeholder="库存" v-model="formData.store_nums" />
+              <Input placeholder="库存" v-model="formData.store_nums">
+                <span slot="prepend" v-if="isEdit">库存</span>
+              </Input>
             </FormItem>
             <FormItem>
-              <Input placeholder="制作时间" v-model="formData.make_time"><span slot="append">分钟</span></Input>
+              <Input placeholder="制作时间" v-model="formData.make_time">
+                <span slot="prepend" v-if="isEdit">制作时间</span>
+                <span slot="append">分钟</span>
+              </Input>
             </FormItem>
             <FormItem v-for="(item, index) in images" :key="index">
               <upload-img v-model="images[index]">
@@ -124,15 +134,37 @@ export default {
   },
   computed: {
     btnDisabled () {
+      for (const key in this.formData) {
+        if (key !== 'cover' && this.formData[key] === '') {
+          return true
+        }
+      }
+      for (const i of this.images) {
+        if (i === '') {
+          return true
+        }
+      }
+      for (const i of this.specsList) {
+        if (i.attr_name === '') {
+          return true
+        }
+        for (const j of i.children) {
+          if (j.attr_name === '' || j.price === '') {
+            return true
+          }
+        }
+      }
       return false
     },
     boxWidth () {
       return (this.specsList.length * 295 + 140) + 'px'
+    },
+    title () {
+      return this.isEdit ? '修改产品' : '添加产品'
     }
   },
   data () {
     return {
-      title: '添加产品',
       isEdit: false,
       visible: false,
       cateList: [],
@@ -170,6 +202,7 @@ export default {
     show () {
       this.visible = true
       this.isEdit = false
+      this.reset()
       this.getCateData()
     },
     edit (id) {

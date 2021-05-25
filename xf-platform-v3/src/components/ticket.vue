@@ -56,7 +56,10 @@
     box-shadow 0px 2px 5px 0px rgba(0, 0, 0, 0.15)
     center()
     color #6D9BF5
-    margin-right 10px
+    margin-right 10px;
+    transition all .2s ease-in-out;
+    &:active
+      transform scale(.95)
   .operates-body
     -webkit-mask-image none
   &-body

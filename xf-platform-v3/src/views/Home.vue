@@ -9,6 +9,35 @@
 .list-container
   width 1340px
   margin 130px auto 0 auto
+  .list-item
+    animation: scaleIn .4s cubic-bezier(.14,.66,.57,1.26) both;
+  .ivu-col:nth-child(1)
+    .list-item
+      animation-delay .3s
+  .ivu-col:nth-child(2)
+    .list-item
+      animation-delay .4s
+  .ivu-col:nth-child(3)
+    .list-item
+      animation-delay .5s
+  .ivu-col:nth-child(4)
+    .list-item
+      animation-delay .6s
+  .ivu-col:nth-child(5)
+    .list-item
+      animation-delay .7s
+  .ivu-col:nth-child(6)
+    .list-item
+      animation-delay .8s
+  .ivu-col:nth-child(7)
+    .list-item
+      animation-delay .9s
+  .ivu-col:nth-child(8)
+    .list-item
+      animation-delay 1s
+  .ivu-col:nth-child(9)
+    .list-item
+      animation-delay 1.1s
   .c-ticket
     margin-bottom 40px
   .xf-page
@@ -34,6 +63,10 @@
   z-index 600
   .c-ticket
     margin-right: 60px;
+@keyframes scaleIn {
+  0% { transform: scale(0); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
 </style>
 <template>
   <div class="home">
@@ -47,7 +80,7 @@
       <div class="list-container" v-if="!showDetail">
         <Row :gutter="40">
           <Col span="8" v-for="(item, index) in list" :key="item.id">
-            <div @mousedown="mDown(index)" @mouseup="gotoDetail(index)">
+            <div @mousedown="mDown(index)" @mouseup="gotoDetail(index)" class="list-item">
               <ticket :record="item"
                       operates
                       :class="{'c-ticket-touch': index === touchIndex}"

@@ -50,6 +50,7 @@ export default {
       postAction('/editor/user/login', {
         ...this.formData
       }).then(res => {
+        this.isAjax = false
         if (res.code === 1) {
           Vue.ls.set(ACCESS_TOKEN, res.data.token, 7 * 24 * 60 * 60 * 1000)
           this.$router.push({

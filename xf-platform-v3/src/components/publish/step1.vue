@@ -1,12 +1,21 @@
 <style lang="stylus" type="text/stylus">
-
+.step-frame1
+  .l
+    animation moveUp .7s cubic-bezier(.23,.56,.24,.92) .5s both
+  .r
+    animation moveUp .7s cubic-bezier(.23,.56,.24,.92) .7s both
+@keyframes moveUp
+  0%
+    transform translateY(200px); opacity 0;
+  100%
+    transform translateY(0); opacity 1;
 </style>
 
 <template>
-<div class="center step-frame">
+<div class="center step-frame" :class="{'step-frame1': isMove}">
   <div class="flex">
-    <ticket :record="ticketData" />
-    <form-box :width="600" :height="280" :index="step" style="margin-left: 30px">
+    <ticket :record="ticketData" class="l" />
+    <form-box class="r" :width="600" :height="280" :index="step" style="margin-left: 30px">
       <template slot="button">
       <Button size="small" v-if="step !== 1">上一步</Button>
       <Button size="small" :disabled="nextDisabled" @click="handleNext">下一步</Button>
@@ -136,6 +145,11 @@ export default {
     tagLine,
     addrPicker
   },
+  mounted () {
+    setTimeout(() => {
+      this.isMove = false
+    }, 2000)
+  },
   computed: {
     globalData () {
       return this.$store.state.globalData
@@ -213,6 +227,7 @@ export default {
   },
   data () {
     return {
+      isMove: true,
       typeList: [
         { value: 1, name: '单日' },
         { value: 2, name: '多日' },

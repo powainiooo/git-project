@@ -1,5 +1,7 @@
 <style lang="stylus" type="text/stylus">
 @import "../assets/css/global.styl"
+.publish-container
+  size(100%, 100vh); position relative; overflow hidden;
 .step-frame
   size(100%, 100vh)
   abTL(0, 0)

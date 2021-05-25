@@ -50,34 +50,34 @@
   </div>
 
   <nav class="navs">
-    <a href="/pages/leesStar/main"
+    <a href="#"
        class="active"
        hover-class="hscale"
-       hover-stay-time="10" @click="navJump">
+       hover-stay-time="10" @click="navJump('/pages/leesStar/main')">
       <div class="icons">
         <img src="/static/images/menu/icon1.png" style="width: 52rpx;" mode="widthFix" />
       </div>
       <div>小夫星選<span>Lee's Star</span></div>
     </a>
-    <a href="/pages/illustrate/main?source=member"
+    <a href="#"
        hover-class="hscale"
-       hover-stay-time="10" @click="navJump">
+       hover-stay-time="10" @click="navJump('/pages/illustrate/main?source=member')">
       <div class="icons">
         <img src="/static/images/menu/icon2.png" style="width: 55rpx;" mode="widthFix" />
       </div>
       <div>隶属于<span>Member of HO</span></div>
     </a>
-    <a href="/pages/illustrate/main?source=aftersales"
+    <a href="#"
        hover-class="hscale"
-       hover-stay-time="10" @click="navJump">
+       hover-stay-time="10" @click="navJump('/pages/illustrate/main?source=aftersales')">
       <div class="icons">
         <img src="/static/images/menu/icon3.png" style="width: 38rpx;" mode="widthFix" />
       </div>
       <div>售后声明<span>After sales</span></div>
     </a>
-    <a href="/pages/illustrate/main?source=contact"
+    <a href="#"
        hover-class="hscale"
-       hover-stay-time="10" @click="navJump">
+       hover-stay-time="10" @click="navJump('/pages/illustrate/main?source=contact')">
       <div class="icons">
         <img src="/static/images/menu/icon4.png" style="width: 44rpx;" mode="widthFix" />
       </div>
@@ -152,8 +152,11 @@ export default {
         }
       })
     },
-    navJump () {
+    navJump (url) {
       this.$emit('close')
+      mpvue.navigateTo({
+        url
+      })
     }
   }
 }

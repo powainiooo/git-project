@@ -9,9 +9,11 @@
     center()
     color #ffffff
     border-radius 0 10px 10px 0
-    transition all .2s ease-in-out;
+    .ivu-icon
+      transition all .2s ease-in-out;
     &.rotate
-      transform rotateZ(180deg)
+      .ivu-icon
+        transform rotateZ(180deg)
   &-float
     size(100%, 100%)
 </style>

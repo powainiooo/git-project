@@ -17,22 +17,7 @@
   <c-header storeLogo="/static/images/logo2.png" />
   <div class="container" style="padding-bottom: 0;">
     <!-- 地址信息 -->
-    <div class="addr-info">
-      <div class="between">
-        <button class="btn">
-          <span>喜茶·深圳宝安大仟里店</span>
-          <img src="/static/images/arrow1.png" mode="widthFix" class="w10 ml20" />
-        </button>
-        <div class="acenter">
-          <button class="btn-circle btn-cart">
-            <img src="/static/images/icon-cart.png" mode="widthFix" class="w32" />
-            <span class="nums">10</span>
-          </button>
-          <button class="btn-circle ml20" open-type="share"><img src="/static/images/icon-share.png" mode="widthFix" class="w28" /></button>
-        </div>
-      </div>
-      <div class="dis">距离你1km</div>
-    </div>
+    <addr-info showCart showShare />
 
     <!-- 产品信息 -->
     <div class="pr">
@@ -45,7 +30,7 @@
         scroll-y>
         <div class="list">
           <div class="slideUp" v-for="i in goodsList" :key="id" :id="i.aid">
-            <item :record="i" :disabled="!closeModalVisible && !closeHintVisible" />
+            <item :record="i" :disabled="!closeModalVisible && !closeHintVisible" @detail="openDetail" />
           </div>
         </div>
       </scroll-view>
@@ -97,6 +82,9 @@
     </div>
   </div>
 
+  <!-- 详情 -->
+  <c-details ref="detail" />
+
   <c-footer current="order" />
 </div>
 </template>
@@ -104,16 +92,20 @@
 <script>
 import cHeader from '@/components/header'
 import cFooter from '@/components/footer'
+import addrInfo from '@/components/addrInfo'
 import cates from './modules/cates'
 import item from './modules/item'
+import cDetails from './modules/details'
 import {types, goods} from './modules/datas'
 import store from '../../store'
 export default {
   components: {
     cHeader,
     cFooter,
+    addrInfo,
     cates,
-    item
+    item,
+    cDetails
   },
   data () {
     return {
@@ -168,6 +160,9 @@ export default {
     },
     doUse () {
       this.freeModalVisible = false
+    },
+    openDetail () {
+      this.$refs.detail.show()
     }
   },
   onShareAppMessage () {

@@ -3,7 +3,7 @@
 </style>
 
 <template>
-<div class="c-goods-item">
+<div class="c-goods-item" @click="$emit('detail')">
   <div class="imgs"><img src="/static/images/img2.png" mode="aspectFill" /></div>
   <div class="infos">
     <h3 class="title">{{record.name}}</h3>

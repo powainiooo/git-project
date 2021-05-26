@@ -1,4 +1,4 @@
-
+/* 框架 */
 .page { background: linear-gradient(0deg, #FFFFFF 0%, #EADED0 100%); min-height: 100vh; overflow-x: hidden; }
 .container { margin-top: 104px; padding-bottom: 170px; }
 .container2 { margin-top: 104px; margin-left: 25px; margin-right: 25px; padding-bottom: 170px; background-color: #F9F9F9; border-radius: 70px 70px 0 0; box-shadow: 0px 3px 20px 0px rgba(0, 0, 0, 0.08); }
@@ -31,6 +31,8 @@
   100% { transform: translateY(0); opacity: 1; }
 }
 
+/* 分割线 */
+
 /* 地址信息 */
 .addr-info { margin: 0 25px 30px 25px; padding-top: 22px; }
 .addr-info .btn { padding: 0 20px 0 25px; }
@@ -50,6 +52,7 @@
 .c-goods-item .infos .price span { font-size: 54px; line-height: 65px; font-family: DinL; }
 .c-goods-item .infos .tagC { width: 46px; height: 46px; border-radius: 50%; background-color: #F0916C; box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.15); display: flex; align-items: center; justify-content: center; }
 .c-goods-item .infos .btn-add { position: absolute; right: 0; bottom: 10px; }
+.c-goods-item .infos .nums { font-size: 22px; line-height: 22px; color: #FFFFFF; font-family: DinB; position: absolute; top: 60px; right: 0; }
 
 /* 弹窗 */
 .c-modal { width: 100%; height: 100vh; position: absolute; top: 0; left: 0; z-index: 200; background-color: rgba(122, 115, 108, 0.5); display: flex; justify-content: center; align-items: center; }
@@ -62,3 +65,13 @@
 .c-modal-box .desc { width: 390px; height: 150px; font-size: 20px; line-height: 26px; color: #C9C9C9; margin: 0 auto 20px auto; }
 .c-modal-box .btn { width: 175px; margin: 0 12px; }
 .c-modal-box .close { width: 46px; height: 46px; background-color: #EDECEB; box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.15); position: absolute; top: 34px; right: 34px; border-radius: 50%; }
+
+/* 抽屉 */
+.c-drawer { width: 100%; height: 100vh; position: fixed; top: 0; left: 0; z-index: 1000; }
+.c-drawer-cover { width: 100%; height: 100%; position: fixed; top: 0; left: 0; z-index: 0; background-color: rgba(122, 115, 108, 0.5); transition: all .4s cubic-bezier(.23,.78,.33,.97); opacity: 0; }
+.c-drawer-cover-show { opacity: 1; }
+.c-drawer-box { position: absolute; left: 25px; right: 25px; bottom: 0; max-height: 82vh; padding-bottom: 170px; background-color: #F9F9F9; border-radius: 70px 70px 0 0; box-shadow: 0px 3px 20px 0px rgba(0, 0, 0, 0.08); transition: all .4s cubic-bezier(.23,.78,.33,.97); transform: translateY(100%); }
+.c-drawer-show { transform: translateY(0); }
+.c-drawer-close { width: 46px; height: 46px; position: absolute; top: 32px; right: 32px; background-color: #EDECEB; }
+.c-drawer-close img { width: 18px; height: 18px; }
+.c-drawer-title { width: 100%; height: 120px; background-color: #FFFFFF; border-radius: 70px 70px 0 0; display: flex; align-items: center; padding-left: 40px; font-size: 24px; box-shadow: 0px 3px 20px 0px rgba(0, 0, 0, 0.08); }

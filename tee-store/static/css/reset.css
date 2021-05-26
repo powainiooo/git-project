@@ -6,6 +6,8 @@ button:after { border: none; }
 
 .ovh { overflow: hidden; }
 
+.bg-fff { background-color: #FFFFFF; }
+
 /* 文字排版 */
 .f12{ font-size: 12rpx;}
 .f13{ font-size: 13rpx;}

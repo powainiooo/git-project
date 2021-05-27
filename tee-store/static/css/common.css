@@ -6,6 +6,7 @@
 .hscale { transition: all 0.15s ease-out; transform: scale(0.95); }
 
 /* 边框 */
+.hr { height: 1px; }
 .borderL { position: relative; }
 .borderL:before { content: ''; width: 2px; height: 100%; position: absolute; top: 0; left: 0; background-color: #E2E2E2; transform: translateX(.5); }
 .borderT { position: relative; }
@@ -34,12 +35,15 @@
 /* 分割线 */
 
 /* 底部按钮 */
-.footer-btns { width: 100%; height: 145px; box-shadow: 0px 4px 15px 0px rgba(0, 0, 0, 0.2); background-color: #FFFFFF; position: fixed; bottom: 0; left: 0; z-index: 1000; display: flex; }
+.footer-btns { height: 145px; box-shadow: 0px 4px 15px 0px rgba(0, 0, 0, 0.2); background-color: #FFFFFF; position: fixed; bottom: 0; left: 0; right: 0; z-index: 1000; display: flex; }
 .footer-btns .l { width: 195px; }
 .footer-btns .l .price { font-size: 20px; }
 .footer-btns .l .price span { font-size: 54px; line-height: 65px; font-family: DinB; margin-right: 4px; }
+.footer-btns .l .nums { font-size: 24px; }
+.footer-btns .l .nums span { font-size: 34px; line-height: 40px; font-family: DinB; margin-right: 20px; }
 .footer-btns .r { flex: 1; }
 .footer-btns .r button { width: 100%; height: 100%; line-height: 140px; background-color: #E8D1B9; border: none; border-radius: 0; font-size: 30px; color: #FFFFFF; }
+.footer-btns .r button.style1 { color: #41372D; background-color: #FFFFFF; }
 
 /* 地址信息 */
 .addr-info { margin: 0 25px 30px 25px; padding-top: 22px; }
@@ -79,7 +83,8 @@
 .c-drawer { width: 100%; height: 100vh; position: fixed; top: 0; left: 0; z-index: 1000; }
 .c-drawer-cover { width: 100%; height: 100%; position: fixed; top: 0; left: 0; z-index: 0; background-color: rgba(122, 115, 108, 0.5); transition: all .4s cubic-bezier(.23,.78,.33,.97); opacity: 0; }
 .c-drawer-cover-show { opacity: 1; }
-.c-drawer-box { position: absolute; left: 25px; right: 25px; bottom: 0; max-height: 82vh; padding-bottom: 170px; background-color: #F9F9F9; border-radius: 70px 70px 0 0; box-shadow: 0px 3px 20px 0px rgba(0, 0, 0, 0.08); transition: all .4s cubic-bezier(.23,.78,.33,.97); transform: translateY(100%); }
+.c-drawer-box { position: absolute; left: 25px; right: 25px; bottom: 0; max-height: 82vh; background-color: #F9F9F9; box-shadow: 0px 3px 20px 0px rgba(0, 0, 0, 0.08); transition: all .4s cubic-bezier(.23,.78,.33,.97); transform: translateY(100%); border-radius: 70px 70px 0 0; }
+.c-drawer-scroll { width: 100%; max-height: 82vh; padding-bottom: 170px; overflow-y: auto; border-radius: 70px 70px 0 0; }
 .c-drawer-show { transform: translateY(0); }
 .c-drawer-close { width: 46px; height: 46px; position: absolute; top: 32px; right: 32px; background-color: #EDECEB; }
 .c-drawer-close img { width: 18px; height: 18px; }
@@ -93,5 +98,16 @@
 .form-line .form-item:after { content: ''; width: 10px; height: 10px; border-radius: 50%; position: absolute; bottom: -5px; right: -5px; background-color: #E2E2E2; }
 .form-line .form-item input { width: 100%; height: 100%; background-color: transparent; border: none; font-size: 20px; padding-left: 10px; color: #41372D; }
 
-/* 颜色 */
+/* 周边产品详情页 */
+.nearby-goods-detail .bg { width: 100%; height: 334px; margin-bottom: 25px; box-shadow: 0px 3px 20px 0px rgba(0, 0, 0, 0.08); border-radius: 70px 70px 0 0; }
+.nearby-goods-detail .between { margin: 0 34px; }
+.nearby-goods-detail .title { width: 270px; font-size: 30px; line-height: 40px; }
+.nearby-goods-detail .prices p { display: inline-block; position: relative; font-size: 26px; color: #C9C9C9; }
+.nearby-goods-detail .prices p:after { content: ''; height: 2px; transform: translateY(.5); background-color: #F0916C; position: absolute; left: -4px; right: -4px; top: 50%; }
+.nearby-goods-detail .prices img { width: 75px; }
+.nearby-goods-detail .prices div div { font-size: 20px; color: #F0916C; }
+.nearby-goods-detail .prices div div span { font-size: 54px; font-family: DinL; }
+.nearby-goods-detail .tags { width: 130px; height: 30px; line-height: 30px; border-radius: 15px; font-size: 20px; color: #FFFFFF; text-align: center; background-color: #C8B69C; margin: 0 20px 20px 0; }
+
+  /* 颜色 */
 .c-c9 { color: #C9C9C9; }

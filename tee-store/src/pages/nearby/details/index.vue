@@ -1,5 +1,6 @@
 <style scoped>
 .nearby-container { min-height: calc(100vh - 260px); margin-top: 0; overflow: hidden; }
+.details-content { margin: 20px 34px; }
 </style>
 
 <template>
@@ -21,22 +22,40 @@
             </div>
           </div>
         </div>
+        <div class="flex mt30 ml35">
+          <div class="tags">满400包邮</div>
+          <div class="tags">预计3天发货</div>
+        </div>
+      </div>
+      <div class="details-content">
+        <div class="borderB mb40 hr"></div>
+        <div>详情</div>
       </div>
     </div>
+
+    <div class="footer-btns">
+      <div class="r">
+        <button class="style1" @click="openDetail">立即购买</button>
+      </div>
+      <div class="r">
+        <button>加入购物车</button>
+      </div>
+    </div>
+
+    <c-details ref="details" />
   </div>
-  <c-footer current="order" />
 </div>
 </template>
 
 <script>
 import cHeader from '@/components/header'
-import cFooter from '@/components/footer'
 import addrInfo from '@/components/addrInfo'
+import cDetails from './modules/details'
 export default {
   components: {
     cHeader,
-    cFooter,
-    addrInfo
+    addrInfo,
+    cDetails
   },
   data () {
     return {
@@ -44,6 +63,9 @@ export default {
   },
 
   methods: {
+    openDetail () {
+      this.$refs.details.show()
+    }
   },
 
   created () {

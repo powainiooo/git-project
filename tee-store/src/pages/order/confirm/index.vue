@@ -81,21 +81,31 @@
           <div class="price"><span>-5</span>元</div>
         </div>
       </div>
+
+      <c-textarea />
+    </div>
+
+    <div class="footer-btns">
+      <div class="l center">
+        <div class="price"><span>50</span>元</div>
+      </div>
+      <div class="r">
+        <button>支付</button>
+      </div>
     </div>
   </div>
-  <c-footer current="order" />
 </div>
 </template>
 
 <script>
 import cHeader from '@/components/header'
-import cFooter from '@/components/footer'
 import addrInfo from '@/components/addrInfo'
+import cTextarea from '@/components/cTextarea'
 export default {
   components: {
     cHeader,
-    cFooter,
-    addrInfo
+    addrInfo,
+    cTextarea
   },
   data () {
     return {

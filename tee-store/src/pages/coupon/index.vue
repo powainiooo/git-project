@@ -81,6 +81,7 @@ export default {
       }
     },
     getData () {
+      console.log('getData')
       setTimeout(() => {
         this.list = [{}, {}, {}, {}]
       }, 400)

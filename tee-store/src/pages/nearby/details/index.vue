@@ -23,8 +23,8 @@
           </div>
         </div>
         <div class="flex mt30 ml35">
-          <div class="tags">满400包邮</div>
-          <div class="tags">预计3天发货</div>
+          <div class="c-tag">满400包邮</div>
+          <div class="c-tag">预计3天发货</div>
         </div>
       </div>
       <div class="details-content">

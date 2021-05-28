@@ -1,16 +1,5 @@
 <style scoped>
-.order-confirm .form-title { font-size: 20px; line-height: 20px; color: #9E9E9F; margin-bottom: 10px; }
-.order-confirm .top-line { padding: 34px; box-shadow: 0px 3px 20px 0px rgba(0, 0, 0, 0.08); }
-.order-confirm .top-line .form-line .form-item input { height: 65px; font-size: 54px; line-height: 65px; margin-bottom: 20px; font-family: DinL; }
-.order-confirm .top-line .btn { width: 110px; margin-left: 50px; margin-top: 50px; }
 
-.order-confirm .frame { margin: 44px 34px; }
-
-.reduce-item { position: relative; box-shadow: 0px 3px 20px 0px rgba(0, 0, 0, 0.1); }
-.reduce-item .bg { width: 100%; display: block; }
-.reduce-item-box { width: 100%; height: 100%; position: absolute; top: 0; left: 0;  }
-.reduce-item-box .price { color: #F0916C; font-size: 20px; margin-right: 60px; }
-.reduce-item-box .price span { font-size: 54px; line-height: 66px; }
 </style>
 
 <template>
@@ -26,7 +15,7 @@
           <p class="form-title ml15">联系电话</p>
           <div class="form-line">
             <div class="form-item">
-              <input value="19893998969" />
+              <input value="19893998969" class="large" />
             </div>
           </div>
         </div>
@@ -82,6 +71,7 @@
         </div>
       </div>
 
+      <div class="ml30 mb10">备注</div>
       <c-textarea />
     </div>
 

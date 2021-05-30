@@ -13,6 +13,7 @@
   text-align: center;
   margin-right: 20px;
 }
+.c-tk-date p { padding-top: 2px; }
 .c-tk-date-large {
   width: 66px;
   height: 66px;

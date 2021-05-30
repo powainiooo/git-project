@@ -3,7 +3,7 @@
 </style>
 
 <template>
-<div>
+<div style="margin-top: -70px;">
   <div class="logo"><img src="@/assets/img/logo.png" /></div>
   <div class="flip-box">
     <Form class="form">

@@ -73,7 +73,7 @@
               hover-stay-time="10"
               @click="doCall">{{record.phone}}</button>
     </div>
-    <comment :orderId="record.id" />
+    <comment :orderId="record.id" v-if="showComment" />
   </div>
 </div>
 </template>
@@ -84,6 +84,11 @@ import orderItem from './modules/orderItem'
 import comment from './modules/comment'
 import { postAction } from '@/utils/api'
 export default {
+  computed: {
+    showComment () {
+      return this.record.comment_flag === 0 && this.record.ticket_code_state === 2
+    }
+  },
   data () {
     return {
       orderList: [],

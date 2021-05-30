@@ -69,14 +69,20 @@ export default {
   },
   methods: {
     selectTicket (record) {
-      if (record.sold_out_flag === 1) return
-      this.priceId = record.id
-      this.setNumsArr(record.limit)
-      if (this.nums > record.limit && record.limit !== 0) this.nums = record.limit
-      this.$emit('change', {
-        price_id: record.id,
-        num: this.nums
-      })
+      if (record.sold_out_flag === 1) {
+        this.priceId = record.id
+        this.setNumsArr(record.limit)
+        if (this.nums > record.limit && record.limit !== 0) this.nums = record.limit
+        this.$emit('change', {
+          price_id: record.id,
+          num: this.nums
+        })
+      } else {
+        this.$emit('change', {
+          price_id: '',
+          num: 0
+        })
+      }
     },
     setNumsArr (limit) {
       let nums = limit

@@ -95,6 +95,10 @@ button:after {
 
 .hscale { transition: all 0.15s ease-out; transform: scale(0.95); }
 
+.empty-hint { margin-left: 50px; }
+.empty-hint p { font-size: 48px; line-height: 58px; margin-bottom: 10px; font-family: HelveB; }
+.empty-hint div { font-size: 48px; line-height: 58px; }
+
 @keyframes slideUp {
   0% { transform: translateY(100px); opacity: 0; }
   100% { transform: translateY(0); opacity: 1; }

@@ -3,6 +3,8 @@
 .lees-page { margin: -488px 25px 25px 25px; padding-bottom: 125px; position: relative; z-index: 5; }
 .lees-page .lees-star { width: 318px; height: 160px; margin-bottom: 76px; margin-left: 20px;  }
 
+.lees-page .empty-hint { margin-top: 300px; }
+
 @keyframes moveUp {
   0% { transform: translateY(140px); opacity: 0; }
   100% { transform: translateY(0); opacity: 1; }
@@ -26,10 +28,14 @@
     <img :src="configData.star_background_image" class="banner" />
     <div class="lees-page">
       <img src="/static/images/leesStar/lees-star.png" class="lees-star" />
-      <div class="less-list">
+      <div class="less-list" v-if="listData.length > 0">
         <div class="less-item" v-for="(item, i) in listData" :key="i">
           <c-list-item :record="item" :rank="i" />
         </div>
+      </div>
+      <div class="empty-hint">
+        <p>Irrelevant Content</p>
+        <div>无相关内容</div>
       </div>
     </div>
   </div>

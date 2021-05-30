@@ -1,5 +1,11 @@
 {
   "pages": [
+    "pages/personal/aboutus/main",
+    "pages/personal/address/main",
+    "pages/personal/coupon/main",
+    "pages/personal/points/main",
+    "pages/personal/mine/main",
+    "pages/order/detail/nearby/main",
     "pages/order/detail/tee/main",
     "pages/order/list/main",
     "pages/coupon/main",

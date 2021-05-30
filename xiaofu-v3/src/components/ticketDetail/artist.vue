@@ -16,7 +16,7 @@
   width: 100%;
   height: 100%;
 }
-.artist-item div {
+.artist-item .content {
   width: 100%;
   height: 60px;
   background: rgba(0, 0, 0, 0.4);
@@ -41,21 +41,29 @@
   height: 1px;
   margin: 66px 25px 0 25px;
 }
+.artist-item .blur-img {
+  width: 100%;
+  height: 60px;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  filter: blur(4px);
+}
+.artist-item .blur-img img { width: 100%; height: 236px; }
 </style>
 
 <template>
 <div class="artist-frame">
   <div class="c-ticket-title"><span>Artist</span>表演者</div>
-<!--  <swiper previous-margin="25rpx" next-margin="416rpx" duration="200" easing-function="linear">-->
-<!--    <swiper-item v-for="(item, index) in list" :key="index">-->
-<!--      -->
-<!--    </swiper-item>-->
-<!--  </swiper>-->
   <scroll-view scroll-x class="scroll-frame">
     <div class="scroll-list" :style="{width: (325 * list.length + 25) + 'rpx'}">
       <div class="artist-item" v-for="(item, index) in list" :key="index">
-        <img :src="item.image_full_url" class="pic" />
-        <div>{{item.content}}</div>
+        <img :src="item.image_full_url" class="pic" mode="aspectFill" />
+        <div class="blur-img">
+          <img :src="item.image_full_url" mode="aspectFill" />
+        </div>
+        <div class="content">{{item.content}}</div>
         <img src="/static/images/common/flip.png" class="flip" />
       </div>
     </div>

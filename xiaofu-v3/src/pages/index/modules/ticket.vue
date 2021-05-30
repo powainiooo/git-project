@@ -102,7 +102,7 @@
   <img src="/static/images/common/ticket-shadow-large.png" class="ticket-shadow-large" v-if="size === 'large'" />
   <div class="c-ticket-bar">
     <tk-info :record="infoData" />
-    <img :src="record.logo" class="logo" v-if="size === 'large'" />
+    <img :src="record.logo" class="logo" mode="aspectFill" v-if="size === 'large'" />
   </div>
   <div class="c-ticket-imgs">
     <img :src="record.cover_image" mode="aspectFill" />

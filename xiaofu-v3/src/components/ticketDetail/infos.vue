@@ -72,6 +72,7 @@
 }
 .c-ticket-infos .line2 div.addr {
   width: 400px;
+  line-height: 26px;
 }
 </style>
 

@@ -55,7 +55,7 @@
   <div class="organ-container">
     <div class="line1">
       <div>
-        <img :src="record.logo" />
+        <img :src="record.logo" mode="aspectFill" />
         <span>{{record.name}}</span>
       </div>
       <button class="btn"

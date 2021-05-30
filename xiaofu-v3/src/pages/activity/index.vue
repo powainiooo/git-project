@@ -90,15 +90,15 @@
       ref="header"
       @close="handleClose" />
     <div class="banner">
-      <img :src="cdnUrl + record.space_image" mode="aspectFill" />
+      <img :src="cdnUrl + record.space_image" mode="aspectFill" v-if="record.space_image !== ''" />
     </div>
     <div class="activity-page">
       <div class="line1">
         <div class="infos">
-          <div class="logo"><img :src="record.logo" v-if="record.logo"/></div>
+          <div class="logo"><img :src="record.logo" v-if="record.logo" mode="aspectFill"/></div>
           <p>{{record.organizer_name}}</p>
         </div>
-        <div class="rank">
+        <div class="rank" v-if="record.comment_flag !== 0">
           <ul>
             <li v-for="i in record.star" :key="i"><img src="/static/images/common/rank-star2.png" /></li>
           </ul>
@@ -122,7 +122,8 @@
         <button class="btn"
                 @click="toComment"
                 hover-class="hscale"
-                hover-stay-time="10">查看评价</button>
+                hover-stay-time="10"
+                v-if="record.comment_flag !== 0">查看评价</button>
       </div>
       <div class="list-container">
         <div v-for="(item, index) in list"
@@ -168,6 +169,7 @@ export default {
       postAction('/api/merchant/detail', {
         id: this.id
       }).then(res => {
+        console.log('res', res)
         if (res.code === 1) {
           this.record = res.data
           this.list = res.data.ticket_list
@@ -196,7 +198,7 @@ export default {
     this.$refs.header.setStatus('onlyShare')
   },
   onLoad (options) {
-    this.id = options.id || 3
+    this.id = options.id || 13
     this.getData()
   }
 }

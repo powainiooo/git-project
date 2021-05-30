@@ -19,7 +19,8 @@
   width: 700px;
   height: 100px;
   display: flex;
-  justify-content: space-between;;
+  justify-content: space-between;
+  align-items: center;
   position: fixed;
   top: 130px;
   left: 25px;
@@ -35,7 +36,7 @@
   top: calc(100vh - 170px);
   background-color: #ffffff;
 }
-.c-ticket-operates div {
+.c-ticket-operates .price {
   width: 565px;
   display: flex;
   align-items: center;
@@ -45,10 +46,10 @@
   font-size: 48px;
   font-family: HelveB;
 }
-.c-ticket-operates-bottom div {
+.c-ticket-operates-bottom .price {
   color: #000000;
 }
-.c-ticket-operates div span {
+.c-ticket-operates .price span {
   font-size: 20px;
   font-family: HelveL;
   margin: 18px 0 0 5px;
@@ -68,6 +69,11 @@
   background: #DBDCDC;
   color: #ffffff;
 }
+.c-ticket-operates .hint {
+  padding-left: 52px; color: #ffffff; font-size: 26px;
+}
+.c-ticket-operates .hint div { font-size: 20px; }
+.c-ticket-operates .hint div span { font-family: HelveB; }
 
 .form-list li {
   display: flex;
@@ -108,6 +114,7 @@
   font-size: 24px;
   padding-left: 20px;
   box-sizing: border-box;
+  border: none;
 }
 .form-list li .active input {
   color: #ffffff;
@@ -168,12 +175,16 @@
   <notice ref="notice" :list="record.notice_list || []" v-if="record.notice_list.length > 0" />
   <particulars ref="particulars" :list="record.intro_list || []" v-if="record.intro_list.length > 0" />
   <organizers ref="organizers" :record="record.organizer" />
-  <recommend ref="recommend" :list="record.recommend_tickets" />
+  <recommend ref="recommend" :list="record.recommend_tickets" v-if="record.recommend_tickets.length > 0" />
   </div>
 
   <div class="c-ticket-operates" :class="{'c-ticket-operates-bottom': page === 'buy'}">
-    <div>{{price}}<span>RMB</span></div>
-    <button @click="handleConfirm" :disabled="buyDisabled">购买</button>
+    <div class="price">{{price}}<span>RMB</span></div>
+    <div class="hint" v-if="false">
+      <p>未开售</p>
+      <div>开票时间: <span>2021/06/01  20:00</span></div>
+    </div>
+    <button @click="handleConfirm" :disabled="buyDisabled">{{btnName}}</button>
   </div>
 </div>
 </template>
@@ -215,9 +226,13 @@ export default {
       const reg = /^[1][3,4,5,6,7,8][0-9]{9}$/
       return reg.test(this.formData.mobile)
     },
+    btnName () {
+      const arr = ['审核中', '审核失败', '购买', '已停止', '已售罄', '已结束']
+      return arr[this.record.sub_state]
+    },
     buyDisabled () {
       if (this.page === 'detail') {
-        return false
+        return this.record.sub_state !== 2
       }
       if (this.formData.name === '' || !this.mobileReg || this.formData.price_id === '') {
         return true
@@ -231,10 +246,12 @@ export default {
       return false
     },
     price () {
+      console.log('this.formData.price_id', this.formData.price_id ,this.formData.num)
       if (this.formData.price_id === '' && this.formData.num === 0) {
         return this.record.price[0].price
       } else {
         const item = this.record.price.find(i => i.id === this.formData.price_id)
+        console.log('item', item)
         return Number(item.price) * this.formData.num
       }
     }

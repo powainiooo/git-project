@@ -118,7 +118,9 @@
         line-height 15px
         color #9E9E9F
     .logo
-      size(48px, 48px)
+      size(48px, 48px); border-radius 50%; overflow hidden; center()
+      img
+        width 100%;
   &-imgs
     size(100%, 220px)
     background-color #EEEEEF
@@ -168,7 +170,9 @@
           <div>{{record.organizer_name}}</div>
         </div>
       </div>
-      <img :src="record.logo" class="logo" />
+      <div class="logo">
+        <img :src="record.logo" />
+      </div>
     </div>
     <div class="c-ticket-imgs">
       <img :src="record.cover_image" v-if="record.cover_image !== ''" />

@@ -25,7 +25,7 @@
       border-radius 10px
       padding 0 5px 0 10px
       between()
-      div
+      div.between
         size(65px, 30px)
         background-color #ffffff
         border-radius 6px
@@ -95,7 +95,7 @@
       <img :src="getIndexSrc(2)" />
       <span>票务基本信息</span>
     </div>
-    <Button size="small" @click="$emit('toggle', 'orders')">订单详情</Button>
+    <Button size="small" @click="$emit('toggle', 'orders')" v-if="record.sub_state !== 0">订单详情</Button>
   </div>
 
   <div class="c-infos-ticket">
@@ -108,24 +108,17 @@
     <transition enter-active-class="animated bounceIn" leave-active-class="animated bounceOut" duration="400">
       <div class="hint" v-if="showHint">请按键盘“回车键”保存修改。</div>
     </transition>
-    <div class="tr" v-for="item in record.price" :key="item.id">
-      <div class="names">
-        <h3>{{item.name}}</h3>
+    <div class="tr" v-for="item in prices" :key="item.id">
+      <div class="names pr">
+        <h3>{{item.name}}-{{item.min}}</h3>
         <div class="between">
 <!--          <span>{{item.num}}</span>-->
           <input v-model="item.num"
                  @focus="showHint = true"
                  @blur="showHint = false"
-                 @keyup.enter="changeNums($event, item.id)" />张
-<!--          <InputNumber-->
-<!--            @on-focus="showHint = true"-->
-<!--            @on-blur="showHint = false"-->
-<!--            @on-keyup="changeNums($event, item.id)"-->
-<!--            :min="item.num"-->
-<!--            :value="item.num"-->
-<!--            :formatter="value => `${value} 张`"-->
-<!--            :parser="value => value.replace(' 张', '')"></InputNumber>-->
+                 @keyup.enter="changeNums($event, item)" />张
         </div>
+        <div class="warnTxt" v-if="Number(item.num) < item.min" style=" left: 105%; top: 10px;"><span>票数不能减少！</span></div>
       </div>
       <div class="nums">{{item.sold_num}}</div>
       <t-switch v-model="item.sold_out_flag" :true-value="1" :false-value="0" @on-change="statusChange($event, item.id)">
@@ -135,7 +128,7 @@
     </div>
   </div>
 
-  <div class="c-infos-titles">
+  <div class="c-infos-titles" v-if="record.sub_state !== 0">
     <div class="l">
       <img :src="getIndexSrc(3)" />
       <span>链接码 及 验票码</span>
@@ -143,7 +136,7 @@
     <Button size="small">验票流程</Button>
   </div>
 
-  <div class="c-infos-qrcode">
+  <div class="c-infos-qrcode" v-if="record.sub_state !== 0">
     <div class="item">
       <div class="imgs wxcode">
         <img :src="record.miniapp_code_image" width="128" />
@@ -151,10 +144,10 @@
       <Button size="small" @click="downloadImg(record.miniapp_code_image, '链接码')">下载链接码</Button>
     </div>
     <div class="item">
-      <div class="imgs">
+      <div class="imgs wxcode">
         <img :src="record.check_code_image" width="128" />
       </div>
-      <Button size="small" @click="downloadImg(record.check_code_image, '验票码')">下载验票码</Button>
+      <Button size="small" @click="downloadImg2(record.check_code_image, '验票码')">下载验票码</Button>
     </div>
   </div>
 </div>
@@ -176,8 +169,19 @@ export default {
     default: () => {}
   },
   watch: {
-    record (val) {
-      console.log('record', val)
+    record: {
+      handler (val) {
+        const prices = []
+        val.price.forEach(i => {
+          prices.push({
+            ...i,
+            min: i.num
+          })
+        })
+        this.prices = prices
+      },
+      deep: true,
+      immediate: true
     }
   },
   computed: {
@@ -208,7 +212,8 @@ export default {
   },
   data () {
     return {
-      showHint: false
+      showHint: false,
+      prices: []
     }
   },
   inject: ['getDetails'],
@@ -216,10 +221,11 @@ export default {
     getIndexSrc (index) {
       return require('@/assets/img/nums/' + index + '.png')
     },
-    changeNums (e, id) {
+    changeNums (e, record) {
       console.log('changeNums', e)
+      if (Number(e.target.value) < record.min) return
       const params = {
-        ticket_price_id: id,
+        ticket_price_id: record.id,
         num: e.target.value
       }
       this.changeTicketInfo(params)
@@ -243,24 +249,37 @@ export default {
     onfocus () {
       console.log('onfocus')
     },
-    downloadImg (src, name) {
-      const image = new Image()
-      // 解决跨域 Canvas 污染问题
-      image.setAttribute('crossOrigin', 'Anonymous')
-      image.onload = function () {
-        const canvas = document.createElement('canvas')
-        canvas.width = image.width
-        canvas.height = image.height
-        const context = canvas.getContext('2d')
-        context.drawImage(image, 0, 0, image.width, image.height)
-        const url = canvas.toDataURL('image/png') // 得到图片的base64编码数据
-        const a = document.createElement('a') // 生成一个a元素
-        const event = new MouseEvent('click') // 创建一个单击事件
-        a.download = name || 'photo' // 设置图片名称
-        a.href = url // 将生成的URL设置为a.href属性
-        a.dispatchEvent(event) // 触发a的单击事件
+    downloadImg (url, fileName) {
+      var x = new XMLHttpRequest()
+      x.open('GET', url, true)
+      x.responseType = 'blob'
+      x.onload = function (e) {
+        var url = window.URL.createObjectURL(x.response)
+        var a = document.createElement('a')
+        a.href = url
+        a.download = fileName
+        a.click()
       }
-      image.src = src
+      x.send()
+    },
+    downloadImg2 (url, fileName) {
+      var canvas = document.createElement('canvas')
+      var img = document.createElement('img')
+      img.onload = function (e) {
+        canvas.width = img.width
+        canvas.height = img.height
+        var context = canvas.getContext('2d')
+        context.drawImage(img, 0, 0, img.width, img.height)
+        canvas.getContext('2d').drawImage(img, 0, 0, img.width, img.height)
+        canvas.toBlob((blob) => {
+          const link = document.createElement('a')
+          link.href = window.URL.createObjectURL(blob)
+          link.download = fileName
+          link.click()
+        }, 'image/png')
+      }
+      img.setAttribute('crossOrigin', 'Anonymous')
+      img.src = url
     }
   }
 }

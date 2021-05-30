@@ -21,6 +21,8 @@
     a
       margin-left 10px
       font-size 0
+      &:hover
+        opacity .5
 </style>
 
 <template>

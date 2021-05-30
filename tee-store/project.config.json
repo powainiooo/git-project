@@ -40,6 +40,7 @@
   "compileType": "miniprogram",
   "appid": "wx19ea3b02b77e36f6",
   "projectname": "tee-store",
+  "libVersion": "2.17.0",
   "condition": {
     "search": {
       "list": []

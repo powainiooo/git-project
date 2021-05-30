@@ -72,7 +72,8 @@
     </h3>
   </div>
   <div class="content">
-    <rich-text :nodes="contents"></rich-text>
+<!--    <rich-text :nodes="contents"></rich-text>-->
+    <text>{{contents}}</text>
   </div>
   </template>
   <template v-else-if="source === 'member'">
@@ -84,7 +85,8 @@
     </h3>
   </div>
   <div class="content">
-    <rich-text :nodes="contents"></rich-text>
+<!--    <rich-text :nodes="contents"></rich-text>-->
+    <text>{{contents}}</text>
   </div>
   </template>
   <template v-else-if="source === 'contact'">

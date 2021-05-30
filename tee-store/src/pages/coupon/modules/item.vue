@@ -1,9 +1,10 @@
 <style scoped>
 .coupon-item { display: flex; height: 200px; }
 .coupon-item-l { width: 534px; height: 100%; position: relative; padding: 0 34px; }
-.coupon-item-l .bg { width: 100%; height: 100%; position: absolute; top: 0; left: 0; z-index: -1; }
+.coupon-item-l .bg { width: 100%; height: 100%; position: absolute; top: 0; left: 0; z-index: 0; }
 .coupon-item-r { width: 166px; height: 100%; position: relative; }
-.coupon-item-r .bg { width: 100%; height: 100%; position: absolute; top: 0; left: 0; z-index: -1; }
+.coupon-item-r>div { position: relative; }
+.coupon-item-r .bg { width: 100%; height: 100%; position: absolute; top: 0; left: 0; z-index: 0; }
 .coupon-item-l .line1 { padding: 10px 0 12px 0; align-items: baseline; }
 .coupon-item-l .line1 .price { color: #F0916C; font-size: 20px; }
 .coupon-item-l .line1 .price span { font-size: 54px; }
@@ -13,12 +14,17 @@
 .coupon-item-r .center { width: 100%; height: 100%; font-size: 24px; color: #FFFFFF; }
 .coupon-item2 .coupon-item-r .bg { display: none; }
 .coupon-item2 .coupon-item-r .center { color: #B9BABB; }
+
+.coupon-item-min { height: 180px; }
+.coupon-item-min .coupon-item-l { width: 484px; }
+.coupon-item-min .coupon-item-r { width: 150px; }
 </style>
 
 <template>
-<div class="coupon-item">
+<div class="coupon-item" :class="[extraClass]">
   <div class="coupon-item-l">
-    <img src="/static/images/mask1.png" mode="widthFix" class="bg" />
+    <img src="/static/images/mask1.png" mode="widthFix" class="bg" v-if="extraClass === ''" />
+    <img src="/static/images/mask3.png" mode="widthFix" class="bg" v-else />
     <div class="borderB line1 flex">
       <div class="price"><span>5</span>元</div>
       <p> · 代金券</p>
@@ -38,6 +44,12 @@
 <script type='es6'>
 export default {
 	name: 'app',
+  props: {
+	  extraClass: {
+	    type: String,
+      default: ''
+    }
+  },
 	data() {
 		return {}
 	},

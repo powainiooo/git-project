@@ -29,6 +29,7 @@
   <div class="c-search-bar" v-if="!isSearch">
     <input v-model="keyword"
            :class="{'holder': keyword === ''}"
+           @click="showMask = true"
            @focus="showMask = true"
            @blur="showMask = false"
            @confirm="handleSearch"/>

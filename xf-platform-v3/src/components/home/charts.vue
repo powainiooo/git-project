@@ -173,7 +173,7 @@ export default {
       myChart.setOption({
         tooltip: {
           trigger: 'axis',
-          formatter: '{b}:{c}',
+          formatter: '{c}',
           padding: [2, 20],
           backgroundColor: '#5B85E6',
           borderColor: '#5B85E6',

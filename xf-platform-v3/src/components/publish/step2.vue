@@ -6,6 +6,7 @@
   border-radius 10px
   between()
   margin-bottom 10px
+  position relative
   div
     display flex
     align-items center
@@ -27,7 +28,7 @@
     size(120px, 30px)
     background-color #ffffff
     border-radius 6px
-    padding 0 10px
+    padding 0 25px 0 10px
     margin-right 5px
     border none
     -webkit-tap-highlight-color transparent
@@ -53,8 +54,17 @@
   display block
   width 30px
   margin 24px auto
+  &:hover
+    opacity .5
   img
     width 100%
+.btn-close:hover
+  opacity: .5;
+.t-unit
+  position absolute; top 10px; right 10px;
+.unit-input
+  .ivu-input
+    padding-right 30px
 </style>
 
 <template>
@@ -95,14 +105,21 @@
                   <p>{{item.name}}</p>
                 </div>
                 <input v-model="item.price" placeholder="价格（元）" />
+                <span class="t-unit" v-if="item.price !== ''">元</span>
               </div>
               <div class="ticket-name-diy" v-else-if="item.type === 'diy'">
                 <Input v-model="item.name" placeholder="票种名称" style=" margin-right: 10px;" />
                 <a href="javascript:;" @click="delTicket(index)"><img src="@/assets/img/ico-del.png" /></a>
               </div>
               <div class="between">
-                <Input v-model="item.num" placeholder="张数" style="width: 120px" />
-                <Input v-model="item.limit" placeholder="限购张数" style="width: 120px" />
+                <div class="pr">
+                  <Input v-model="item.num" placeholder="张数" style="width: 120px" class="unit-input" />
+                  <span class="t-unit" v-if="item.num !== ''">张</span>
+                </div>
+                <div class="pr">
+                  <Input v-model="item.limit" placeholder="限购张数" style="width: 120px" class="unit-input" />
+                  <span class="t-unit" v-if="item.limit !== ''">张</span>
+                </div>
               </div>
               <div style="margin-top: 10px;" v-if="item.type === 'diy'">
                 <Input v-model="item.price" placeholder="价格（元）" />

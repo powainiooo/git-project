@@ -98,6 +98,7 @@ hr { border-top: 1rpx solid #D5D5D5; }
 .w100 { width: 100%; display: block; }
 
 /*边距*/
+.auto { margin-left: auto; margin-right: auto; }
 .mt5{ margin-top: 5rpx;}
 .mt10{ margin-top: 10rpx;}
 .mt15{ margin-top: 15rpx;}

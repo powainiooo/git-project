@@ -27,7 +27,10 @@ export default {
         family: 'DinB',
         source: `url("${baseUrl}DIN_Alternate_Bold.ttf")`,
         success: (res) => {
-          console.log('Helve load over', res)
+          console.log('DIN_Alternate_Bold load over', res)
+        },
+        fail (err) {
+          console.log('DIN_Alternate_Bold load fail', err)
         }
       })
       mpvue.loadFontFace({
@@ -35,7 +38,10 @@ export default {
         family: 'DinL',
         source: `url("${baseUrl}DIN-Light.otf")`,
         success: (res) => {
-          console.log('Helve load over', res)
+          console.log('DIN-Light load over', res)
+        },
+        fail (err) {
+          console.log('DIN-Light load fail', err)
         }
       })
     }

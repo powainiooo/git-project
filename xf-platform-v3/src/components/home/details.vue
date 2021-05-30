@@ -18,6 +18,8 @@
     top 30px
     left 30px
     right 30px
+    a:hover
+      opacity .5
   .details-tabs
     margin-top 84px
     margin-right 40px

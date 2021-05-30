@@ -34,6 +34,10 @@
              class="item-large">
           <c-ticket :record="item" size="large" />
         </div>
+        <div class="empty-hint" v-if="listData.length === 0" style="margin-left: 30rpx; margin-top: 50rpx;">
+          <p>Irrelevant Content</p>
+          <div>无相关内容</div>
+        </div>
       </div>
       <div class="index-container" v-else>
         <div class="item item-small">

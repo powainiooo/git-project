@@ -19,7 +19,7 @@
           </div>
           <div class="form-line mb30">
             <div class="form-item">
-              <input placeholder="选择 省份 / 市级 / 区" readonly />
+              <input placeholder="选择 省份 / 市级 / 区" disabled />
               <img src="/static/images/arrow3.png" class="arrow3" mode="widthFix" />
             </div>
           </div>

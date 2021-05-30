@@ -23,6 +23,8 @@
     top 30px
     left 30px
     right 30px
+    a:hover
+      opacity .5
   .form
     width 250px
     margin-left 60px
@@ -47,8 +49,10 @@
     <a href="javascript:;" class="fl" v-show="page !== 'navs'" @click="page = 'navs'"><img src="@/assets/img/ico-back.png" width="28" /></a>
     <a href="javascript:;" class="fr" @click="hideMenu"><img src="@/assets/img/ico-close2.png" width="28" /></a>
   </div>
-  <transition enter-active-class="animated anim-detail slideInRight">
+  <transition enter-active-class="animated anim-detail slideInLeft">
   <navs v-if="page === 'navs'" @toggle="toggle" />
+  </transition>
+  <transition enter-active-class="animated anim-detail slideInRight">
   <infos v-if="page === 'infos'" />
   <banks v-if="page === 'banks'" @toggle="toggle" />
   <bank-edit v-if="page === 'bankEdit'" @toggle="toggle" />

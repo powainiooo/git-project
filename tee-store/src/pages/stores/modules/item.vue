@@ -36,7 +36,7 @@
     <img src="/static/images/icon-geo2.png" mode="widthFix" class="w18" />
     <div>{{record.province}}{{record.city}}{{record.area}}{{record.address}}</div>
   </div>
-  <button class="btn center" @click="handleGuide">
+  <button class="btn center" @click.stop="handleGuide">
     <img src="/static/images/icon-guide.png" mode="widthFix" class="w26 mr10" />
     <span>导航</span>
   </button>
@@ -58,10 +58,12 @@ export default {
   },
   methods: {
     handleGuide (e) {
+      console.log('getTokenData')
+      e.preventDefault()
       e.stopPropagation()
       mpvue.openLocation({
-        latitude: this.record.lat,
-        longitude: this.record.lng,
+        latitude: Number(this.record.lat),
+        longitude: Number(this.record.lng),
         success (res) {
           console.log('openLocation success', res)
         },

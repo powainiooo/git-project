@@ -1,6 +1,8 @@
 import store from '@/store'
 import config from '@/config'
+import { promisify } from '@/utils'
 const { tokenKey, baseUrl } = config
+const login = promisify(mpvue.login)
 
 let token = mpvue.getStorageSync(tokenKey)
 const ajax = (opts, autoMsg = true) => {
@@ -64,5 +66,21 @@ export const doLogin = (data = {}) => {
     method: 'POST',
     url: `xcx_login`,
     data
+  })
+}
+
+// 获取token
+export const getTokenData = () => {
+  login().then(loginRes => {
+    postAction('/userapi/wechat/login', {
+      code: loginRes.code
+    }, false).then(res => {
+      console.log('common_login', res)
+      if (res.data !== null) {
+        store.commit('SET_TOKEN', res.data.userInfo.token)
+      } else {
+        store.commit('SET_TOKEN', res.data)
+      }
+    })
   })
 }

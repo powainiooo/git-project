@@ -1,4 +1,5 @@
 <script>
+import { getTokenData } from '@/utils/api'
 import config from '@/config'
 import store from './store'
 const { imgSrc } = config
@@ -19,6 +20,7 @@ export default {
         store.commit('SET_SYSINFO', res)
       }
     })
+    getTokenData()
     this.loadFont()
     mpvue.imgSrc = imgSrc
   },

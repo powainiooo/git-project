@@ -6,7 +6,7 @@
 <div class="addr-info">
   <div class="between">
     <button class="btn">
-      <span>喜茶·深圳宝安大仟里店</span>
+      <span>{{record.name}}</span>
       <img src="/static/images/arrow1.png" mode="widthFix" class="w10 ml20" />
     </button>
     <div class="acenter">
@@ -19,7 +19,7 @@
       </button>
     </div>
   </div>
-  <div class="dis">距离你1km</div>
+  <div class="dis">距离你{{record.dis}}km</div>
   <!-- 购物车 -->
   <carts ref="cart" />
 </div>
@@ -37,6 +37,10 @@ export default {
 	  showShare: {
 	    type: Boolean,
       default: false
+    },
+    record: {
+	    type: Object,
+      default: () => {}
     }
   },
   components: {

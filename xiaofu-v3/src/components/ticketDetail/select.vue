@@ -69,7 +69,7 @@ export default {
   },
   methods: {
     selectTicket (record) {
-      if (record.sold_out_flag === 1) {
+      if (record.sold_out_flag === 0) {
         this.priceId = record.id
         this.setNumsArr(record.limit)
         if (this.nums > record.limit && record.limit !== 0) this.nums = record.limit

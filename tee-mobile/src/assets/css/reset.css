@@ -9,7 +9,7 @@ ul {
 }
 html{ height: 100%;}
 
-body { background-color: #F5F5F5; color: #333333; font-size: 14px; min-width: 1200px; font-family: Microsoft YaHei,tahoma,arial,Hiragino Sans GB,sans-serif; }
+body { font-family: Microsoft YaHei,tahoma,arial,Hiragino Sans GB,sans-serif; }
 
 blockquote:before, blockquote:after,
 q:before, q:after {

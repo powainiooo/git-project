@@ -17,7 +17,7 @@
   <c-header storeLogo="/static/images/logo2.png" />
   <div class="container" style="padding-bottom: 0;">
     <!-- 地址信息 -->
-    <addr-info showCart showShare />
+    <addr-info showCart showShare :record="addrData" />
 
     <!-- 产品信息 -->
     <div class="pr">
@@ -96,8 +96,8 @@ import addrInfo from '@/components/addrInfo'
 import cates from './modules/cates'
 import item from './modules/item'
 import cDetails from './modules/details'
-import {types, goods} from './modules/datas'
 import store from '../../store'
+import {getAction} from '../../utils/api'
 export default {
   components: {
     cHeader,
@@ -109,6 +109,7 @@ export default {
   },
   data () {
     return {
+      shopId: '',
       current: 0,
       scrollKey: '',
       cateList: [],
@@ -122,24 +123,46 @@ export default {
     iH () { // 单个商品高度
       const ww = store.state.sysInfo.windowWidth || 375
       return parseInt(ww * 0.2933)
+    },
+    addrData () {
+      return {
+        name: this.storeData.shop_name,
+        dis: this.storeData.distance
+      }
+    },
+    storeData () {
+      return store.state.storeInfo
     }
   },
   methods: {
     getData () {
-      setTimeout(() => {
-        this.cateList = types
-        this.goodsList = goods
-        let id = ''
-        this.goodsList.forEach(i => {
-          if (id !== i.typeId) {
-            id = i.typeId
-            i.aid = `g${i.typeId}`
-          } else {
-            i.aid = ''
+      getAction('/userapi/goods/index/data', {
+        shop_id: this.shopId
+      }).then(res => {
+        if (res.code === 0) {
+          const types = []
+          const goods = []
+          for (const item of res.data) {
+            types.push({
+              id: item.cid,
+              name: item.cname
+            })
+            goods.push(...item.goods)
           }
-        })
-        this.current = this.goodsList[0].typeId
-      }, 500)
+          let id = ''
+          goods.forEach(i => {
+            if (id !== i.cid) {
+              id = i.cid
+              i.aid = `g${i.cid}`
+            } else {
+              i.aid = ''
+            }
+          })
+          this.current = goods[0].cid
+          this.cateList = types
+          this.goodsList = goods
+        }
+      })
     },
     toggleCate (id) {
       this.current = id
@@ -147,7 +170,7 @@ export default {
     },
     onScroll (e) {
       const index = parseInt(e.mp.detail.scrollTop / this.iH)
-      this.current = this.goodsList[index].typeId
+      this.current = this.goodsList[index].cid
     },
     goBack () {
       mpvue.navigateBack({
@@ -161,8 +184,8 @@ export default {
     doUse () {
       this.freeModalVisible = false
     },
-    openDetail () {
-      this.$refs.detail.show()
+    openDetail (id) {
+      this.$refs.detail.show(id)
     }
   },
   onShareAppMessage () {
@@ -171,7 +194,8 @@ export default {
       path: `/pages/goods/main`
     }
   },
-  onLoad () {
+  onLoad (id) {
+    this.shopId = this.id
     this.getData()
   }
 }

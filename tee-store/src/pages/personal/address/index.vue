@@ -12,13 +12,15 @@
       <button class="btn-circle btn-style1" @click="openForm"><img src="/static/images/add.png" mode="widthFix" class="w22" /></button>
     </div>
     <div class="mt40">
-      <item />
-      <item />
-      <item />
+      <item v-for="item in list"
+            :key="id"
+            :record="item"
+            @edit="handleEdit"
+            @ok="refresh" />
     </div>
   </div>
 
-  <modal-form ref="modalForm" />
+  <modal-form ref="modalForm" @ok="refresh" />
 </div>
 </template>
 
@@ -26,6 +28,8 @@
 import cHeader from '@/components/header'
 import item from './modules/item'
 import modalForm from './modules/modalForm'
+import { getAction } from '@/utils/api'
+
 export default {
   components: {
     cHeader,
@@ -34,16 +38,44 @@ export default {
   },
   data () {
     return {
+      page: 1,
+      total: 0,
+      list: []
     }
   },
 
   methods: {
     openForm () {
       this.$refs.modalForm.show()
+    },
+    handleEdit (id) {
+      this.$refs.modalForm.edit(id)
+    },
+    getData () {
+      getAction('/userapi/user/address/index/data', {
+        page: this.page,
+        limit: 10
+      }).then(res => {
+        if (res.code === 0) {
+          this.list = this.list.concat(res.data.list)
+          this.total = res.data.pageSize
+        }
+      })
+    },
+    refresh () {
+      this.list = []
+      this.page = 1
+      this.getData()
     }
   },
-
-  created () {
+  onReachBottom () {
+    if (this.total > this.list.length) {
+      this.page += 1
+      this.getData()
+    }
+  },
+  onLoad () {
+    this.getData()
   }
 }
 </script>

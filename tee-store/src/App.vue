@@ -1,5 +1,7 @@
 <script>
+import config from '@/config'
 import store from './store'
+const { imgSrc } = config
 
 export default {
   created () {
@@ -18,6 +20,7 @@ export default {
       }
     })
     this.loadFont()
+    mpvue.imgSrc = imgSrc
   },
   methods: {
     loadFont () {

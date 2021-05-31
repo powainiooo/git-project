@@ -1,7 +1,8 @@
 {
   "pages": [
-    "pages/personal/aboutus/main",
+    "pages/stores/main",
     "pages/personal/address/main",
+    "pages/personal/aboutus/main",
     "pages/personal/coupon/main",
     "pages/personal/points/main",
     "pages/personal/mine/main",
@@ -15,7 +16,6 @@
     "pages/result/main",
     "pages/order/confirm/main",
     "pages/goods/main",
-    "pages/stores/main",
     "pages/index/main",
     "pages/logs/main"
   ],

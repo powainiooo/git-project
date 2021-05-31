@@ -6,8 +6,9 @@ let token = mpvue.getStorageSync(tokenKey)
 const ajax = (opts, autoMsg = true) => {
   return new Promise((resolve, reject) => {
     wx.showNavigationBarLoading()
-    token = store.state[tokenKey]
-    opts.url = `${baseUrl}?path=${opts.url}&${tokenKey}=${token}`
+    token = store.state.token
+    console.log('token', store, token)
+    opts.url = `${baseUrl}${opts.url}?${tokenKey}=${token}`
     const extras = {
       header: {
         [tokenKey]: token,
@@ -18,18 +19,8 @@ const ajax = (opts, autoMsg = true) => {
         console.log('请求参数', opts)
         console.log('返回数据', res)
         resolve(res.data)
-        if (res.data.ret === 1001 || res.data.ret === 1000) {
+        if (res.data.code !== 0) {
           mpvue.showToast({ title: res.data.msg, icon: 'none' })
-          // setTimeout(() => {
-          //    mpvue.reLaunch({
-          //       url: '/pages/personal/main'
-          //    })
-          // }, 1500)
-        } else if (res.data.ret === 0) {
-          // mpvue.showToast({ title: res.data.msg })
-          // if (opts.url === 'https://yghzp.vsapp.cn/mobile/kservice?path=pay&login_key=ef83e08e4000540ceb2636b29fa12a7f') {
-          //    mpvue.showToast({ title: res.data.msg })
-          // }
         } else {
           // console.log('res.data.ret')
           if (autoMsg) {

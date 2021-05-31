@@ -13,30 +13,30 @@
 </style>
 
 <template>
-<div class="c-store-item">
+<div class="c-store-item" hover-class="hscale" hover-stay-time="10" @click="toDetail">
   <div class="line1 between">
     <div class="l">
-      <img src="/static/images/logo@2x.png" mode="widthFix" class="logo" />
+      <img :src="imgSrc + record.shop_logo" mode="widthFix" class="logo" />
     </div>
     <div class="r center">
       <img src="/static/images/icon-cup.png" mode="widthFix" class="w24 mr5" />
       <span>去点餐</span>
     </div>
   </div>
-  <div class="line2">喜茶·深圳大仟里店</div>
+  <div class="line2">{{record.shop_name}}</div>
   <div class="line3">
     <img src="/static/images/icon-clock.png" mode="widthFix" class="w20" />
     <div class="acenter">
-      <span>10:00 ~ 22:00</span>
+      <span>{{record.word_time_start}} ~ {{record.word_time_end}}</span>
       <div class="borderL"></div>
-      <span>距离你1km</span>
+      <span>距离你{{record.distance}}km</span>
     </div>
   </div>
   <div class="line3">
     <img src="/static/images/icon-geo2.png" mode="widthFix" class="w18" />
-    <div>广东省深圳市宝安区西乡街道宝安大仟里购物中心一楼L135号</div>
+    <div>{{record.province}}{{record.city}}{{record.area}}{{record.address}}</div>
   </div>
-  <button class="btn center">
+  <button class="btn center" @click="handleGuide">
     <img src="/static/images/icon-guide.png" mode="widthFix" class="w26 mr10" />
     <span>导航</span>
   </button>
@@ -44,11 +44,38 @@
 </template>
 
 <script type='es6'>
+import store from '@/store'
+
 export default {
   name: 'app',
-  data () {
-    return {}
+  props: {
+    record: Object
   },
-  methods: {}
+  data () {
+    return {
+      imgSrc: mpvue.imgSrc
+    }
+  },
+  methods: {
+    handleGuide (e) {
+      e.stopPropagation()
+      mpvue.openLocation({
+        latitude: this.record.lat,
+        longitude: this.record.lng,
+        success (res) {
+          console.log('openLocation success', res)
+        },
+        fail (res) {
+          console.log('openLocation fail', res)
+        }
+      })
+    },
+    toDetail () {
+      store.commit('SET_STOREINFO', this.record)
+      mpvue.navigateTo({
+        url: '/pages/goods/main?id=' + this.record.shop_id
+      })
+    }
+  }
 }
 </script>

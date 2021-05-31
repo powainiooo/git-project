@@ -22,7 +22,7 @@
 
     <div class="store-list">
       <div class="store-col slideUp" v-for="i in list" :key="index">
-        <item />
+        <item :key="id" :record="i" />
       </div>
     </div>
   </div>
@@ -36,6 +36,7 @@ import cFooter from '@/components/footer'
 import item from './modules/item'
 import config from '@/config'
 import QQMapWX from '@/utils/qqmap-wx-jssdk.min.js'
+import { getAction } from '@/utils/api'
 const { mapKey } = config
 const qMap = new QQMapWX({
   key: mapKey
@@ -49,44 +50,57 @@ export default {
   data () {
     return {
       city: '',
-      list: []
+      latitude: '',
+      longitude: '',
+      list: [],
+      page: 1,
+      total: 0
     }
   },
 
   methods: {
     initCity () {
-      const city = mpvue.getStorageSync('toolCity')
-      console.log('initCity', city)
-      if (city) {
-        this.city = city
-        this.getData()
-      } else {
-        const _this = this
-        mpvue.getLocation({
-          success (res) {
-            console.log(res)
-            qMap.reverseGeocoder({
-              location: {
-                latitude: res.latitude,
-                longitude: res.longitude
-              },
-              success (res2) {
-                console.log(res2)
-                _this.city = res2.result.ad_info.city.replace('市', '')
-                mpvue.setStorageSync('toolCity', _this.city)
-              }
-            })
-          }
-        })
-      }
+      const _this = this
+      mpvue.getLocation({
+        success (res) {
+          console.log('getLocation', res)
+          qMap.reverseGeocoder({
+            location: {
+              latitude: res.latitude,
+              longitude: res.longitude
+            },
+            success (res2) {
+              console.log('reverseGeocoder', res2)
+              _this.city = res2.result.ad_info.city.replace('市', '')
+              _this.latitude = res.latitude
+              _this.longitude = res.longitude
+              _this.getData()
+            }
+          })
+        }
+      })
     },
     getData () {
-      setTimeout(() => {
-        this.list = [{}, {}, {}, {}]
-      }, 400)
+      getAction('/userapi/shop/index/data', {
+        city: this.city,
+        lat: this.latitude,
+        lng: this.longitude,
+        page: this.page,
+        limit: 20
+      }).then(res => {
+        if (res.code === 0) {
+          this.list = this.list.concat(res.data)
+          this.total = res.count
+        }
+      })
     }
   },
-
+  onReachBottom () {
+    if (this.total > this.list.length) {
+      this.page += 1
+      this.getData()
+    }
+  },
   onLoad () {
     this.initCity()
   }

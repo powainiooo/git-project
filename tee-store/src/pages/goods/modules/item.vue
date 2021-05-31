@@ -3,12 +3,12 @@
 </style>
 
 <template>
-<div class="c-goods-item" @click="$emit('detail')">
-  <div class="imgs"><img src="/static/images/img2.png" mode="aspectFill" /></div>
+<div class="c-goods-item" hover-class="hscale" hover-stay-time="10" @click="openDetail">
+  <div class="imgs"><img :src="imgSrc + record.cover" mode="aspectFill" /></div>
   <div class="infos">
     <h3 class="title">{{record.name}}</h3>
-    <div class="intro">优选新鲜柠檬、红茶。整颗新鲜柠檬加入其中，柠檬的清香与红茶的醇，柠檬的清香与红茶的醇</div>
-    <div class="price"><span>25</span>元</div>
+    <div class="intro">{{record.content}}</div>
+    <div class="price"><span>{{record.price}}</span>元</div>
     <div class="tagC btn-add" v-if="!disabled"><img src="/static/images/add.png" mode="widthFix" class="w22" /></div>
   </div>
 </div>
@@ -25,8 +25,16 @@ export default {
     }
   },
   data () {
-    return {}
+    return {
+      imgSrc: mpvue.imgSrc
+    }
   },
-  methods: {}
+  methods: {
+    openDetail () {
+      if (!this.disabled) {
+        this.$emit('detail', this.record.id)
+      }
+    }
+  }
 }
 </script>

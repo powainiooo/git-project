@@ -9,6 +9,8 @@
 .c-details .cates h3 { font-size: 24px; margin: 0 0 25px 12px; }
 .c-details .cates ul { display: flex; flex-wrap: wrap; }
 .c-details .cates ul li { min-width: 110px; margin: 0 15px 15px 0; text-align: center; }
+
+.c-details .footer-btns { left: -25px; right: -25px; }
 </style>
 
 <template>
@@ -16,49 +18,75 @@
   <div class="c-drawer-cover" :class="{'c-drawer-cover-show': showItem}" @animationend="anEnd"></div>
   <div class="c-drawer-box c-details" :class="{'c-drawer-show': showItem}">
     <div class="btn-circle c-drawer-close" @click="hide"><img src="/static/images/x2.png" /></div>
-    <img src="/static/images/img.jpg" mode="aspectFill" class="bg" />
+    <img :src="imgSrc + goods.cover" mode="aspectFill" class="bg" />
     <div class="infos">
       <div class="between">
-        <div class="name">夏日特饮</div>
-        <div class="price"><span>25</span>元</div>
+        <div class="name">{{goods.title}}</div>
+        <div class="price"><span>{{goods.price}}</span>元</div>
       </div>
-      <div class="intro">优选新鲜柠檬、红茶。整颗新鲜柠檬加入其中，柠檬的清香与红茶的醇香，为夏日带来清爽的口感。优选新鲜柠檬、红茶。整颗新鲜柠檬加入其中，柠檬的清香与红茶的醇香，为夏日带来清爽的口感。</div>
+      <div class="intro">{{goods.content}}</div>
     </div>
 
-    <div class="cates">
-      <h3>温度</h3>
+    <div class="cates" v-for="(cate, i1) in cates" :key="id">
+      <h3>{{cate.attr_name}}</h3>
       <ul>
-        <li class="btn btn-style1">冰</li>
-        <li class="btn btn-style2">温</li>
-        <li class="btn btn-style2">烫</li>
+        <li v-for="(child, i2) in cate.children"
+            :key="id"
+            class="btn "
+            :class="{
+              'btn-style1': child.id === cateIds[i1],
+              'btn-style2': child.id !== cateIds[i1]
+            }" @click="cateIds[i1] = child.id">{{child.attr_name}}</li>
       </ul>
     </div>
-    <div class="cates">
-      <h3>温度</h3>
-      <ul>
-        <li class="btn btn-style1">冰</li>
-        <li class="btn btn-style2">温</li>
-        <li class="btn btn-style2">烫</li>
-      </ul>
+
+    <div class="footer-btns">
+      <div class="l center">
+        <div class="nums"><span>1</span>杯</div>
+      </div>
+      <div class="r">
+        <button>确定</button>
+      </div>
     </div>
   </div>
 </div>
 </template>
 
 <script type='es6'>
+import { getAction } from '@/utils/api'
+
 export default {
 	name: 'app',
 	data() {
 		return {
+		  imgSrc: mpvue.imgSrc,
 		  visible: false,
-      showItem: false
+      showItem: false,
+      goods: {},
+      cates: [],
+      cateIds: []
     }
 	},
 	methods: {
-	  show () {
-	    this.visible = true
-      this.$nextTick(() => {
-        this.showItem = true
+	  show (id) {
+	    getAction('/userapi/goods/show', {
+	      id
+      }).then(res => {
+        if (res.code === 0) {
+          this.goods = res.data.goods
+          this.cates = res.data.attrs
+
+          const ids = []
+          for (const i of res.data.attrs) {
+            ids.push(i.children[0].id)
+          }
+          this.cateIds = ids
+
+          this.visible = true
+          this.$nextTick(() => {
+            this.showItem = true
+          })
+        }
       })
     },
     hide () {

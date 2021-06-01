@@ -1,10 +1,12 @@
 <style scoped>
+.c-carts { padding-bottom: 150px; }
 .c-carts .list { margin: 40px 30px; }
 .c-carts .list .list-item { display: flex; align-items: center; margin-bottom: 60px; }
 .c-carts .list .list-item .del { width: 30px; height: 30px; margin-right: 20px; }
 .c-carts .list .list-item .del img { width: 100%; }
 .c-carts .list .list-item .c-goods-item { flex: 1; }
 .c-carts .list .list-item .c-goods-item .infos .intro { width: 320px; }
+.c-carts .footer-btns { left: -25px; right: -25px; }
 </style>
 
 <template>
@@ -17,19 +19,28 @@
       <span>购物车</span>
     </div>
     <div class="list">
-      <div class="list-item" v-for="i in 3">
-        <div class="del center">
+      <div class="list-item" v-for="item in list" :key="id">
+        <div class="del center" @click="del(item.id)">
           <img src="/static/images/reduce.png" mode="widthFix" />
         </div>
         <div class="c-goods-item" @click="$emit('detail')">
-          <div class="imgs"><img src="/static/images/img2.png" mode="aspectFill" /></div>
+          <div class="imgs"><img :src="imgSrc + item.cover" mode="aspectFill" /></div>
           <div class="infos">
-            <h3 class="title">[免费] 夏日特饮</h3>
-            <div class="intro">优选新鲜柠檬、红茶。整颗新鲜柠檬加入其中，柠檬的清香与红茶的醇，柠檬的清香与红茶的醇</div>
-            <div class="price"><span>25</span>元</div>
-            <div class="tagC nums">1</div>
+            <h3 class="title">{{item.title}}</h3>
+            <div class="intro">{{item.attrs}}</div>
+            <div class="price"><span>{{item.price}}</span>元</div>
+            <div class="tagC nums">{{item.buy_nums}}</div>
           </div>
         </div>
+      </div>
+    </div>
+
+    <div class="footer-btns">
+      <div class="l center">
+        <div class="price"><span>50</span>元</div>
+      </div>
+      <div class="r">
+        <button @click="addCart">确定</button>
       </div>
     </div>
   </div>
@@ -37,19 +48,41 @@
 </template>
 
 <script type='es6'>
+import { getAction, postAction } from '../utils/api'
+
 export default {
   name: 'app',
   data() {
     return {
       visible: false,
-      showItem: false
+      showItem: false,
+      imgSrc: mpvue.imgSrc,
+      shopId: '',
+      type: '',
+      list: []
     }
   },
   methods: {
-    show () {
-      this.visible = true
-      this.$nextTick(() => {
-        this.showItem = true
+    show ({shopId, type}) {
+      this.shopId = shopId
+      this.type = type
+      this.getData()
+    },
+    getData () {
+      getAction('/userapi/shopping/card/index/data', {
+        shop_id: this.shopId,
+        type: this.type
+      }).then(res => {
+        if (res.code === 0) {
+          res.data.forEach(i => {
+            i.attrs = i.attr_names.join('-')
+          })
+          this.list = res.data
+          this.visible = true
+          this.$nextTick(() => {
+            this.showItem = true
+          })
+        }
       })
     },
     hide () {
@@ -57,6 +90,15 @@ export default {
     },
     animationend () {
       this.visible = false
+    },
+    del (id) {
+      postAction('/userapi/shopping/card/destroy', {
+        id
+      }).then(res => {
+        if (res.code === 0) {
+          this.getData()
+        }
+      })
     }
   }
 }

@@ -1,4 +1,5 @@
 <style scoped>
+.c-details { padding-bottom: 150px; }
 .c-details .bg { width: 100%; height: 334px; border-radius: 70px 70px 0 0; }
 .c-details .infos { margin: 20px 34px 36px 34px; padding: 0 10px 50px 10px; }
 .c-details .infos .name { font-size: 30px; }
@@ -34,18 +35,20 @@
             :key="id"
             class="btn "
             :class="{
-              'btn-style1': child.id === cateIds[i1],
-              'btn-style2': child.id !== cateIds[i1]
-            }" @click="cateIds[i1] = child.id">{{child.attr_name}}</li>
+              'btn-style1': child.id === cateIds['c'+cate.id],
+              'btn-style2': child.id !== cateIds['c'+cate.id]
+            }" @click="selectCate('c'+cate.id, child.id)">{{child.attr_name}}</li>
       </ul>
     </div>
 
     <div class="footer-btns">
       <div class="l center">
-        <div class="nums"><span>1</span>杯</div>
+        <picker :range="nums" @change="numChange">
+          <div class="nums"><span>{{num}}</span>杯</div>
+        </picker>
       </div>
       <div class="r">
-        <button>确定</button>
+        <button @click="addCart">确定</button>
       </div>
     </div>
   </div>
@@ -64,7 +67,10 @@ export default {
       showItem: false,
       goods: {},
       cates: [],
-      cateIds: []
+      cateIds: {},
+      nums: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+      num: 1,
+      isAjax: false
     }
 	},
 	methods: {
@@ -76,11 +82,12 @@ export default {
           this.goods = res.data.goods
           this.cates = res.data.attrs
 
-          const ids = []
+          const ids = {}
           for (const i of res.data.attrs) {
-            ids.push(i.children[0].id)
+            ids[`c${i.id}`] = i.children[0].id
           }
           this.cateIds = ids
+          console.log('this.cateIds', this.cateIds)
 
           this.visible = true
           this.$nextTick(() => {
@@ -91,9 +98,31 @@ export default {
     },
     hide () {
 	    this.showItem = false
+	    this.isAjax = false
       setTimeout(() => {
         this.visible = false
       }, 500)
+    },
+    selectCate (key, id) {
+	    this.cateIds[key] = id
+    },
+    numChange (e) {
+	    console.log('numChange', e)
+      this.num = this.nums[e.mp.detail.value]
+    },
+    addCart () {
+	    if (this.isAjax) return
+	    const ids = []
+      for (const key in this.cateIds) {
+        ids.push(this.cateIds[key])
+      }
+	    const goods = {
+        goods_id: this.goods.id,
+        buy_nums: this.num,
+        attrs: ids
+      }
+      this.isAjax = true
+      this.$emit('confirm', goods)
     }
   }
 }

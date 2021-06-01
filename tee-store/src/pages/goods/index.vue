@@ -30,7 +30,7 @@
         scroll-y>
         <div class="list">
           <div class="slideUp" v-for="i in goodsList" :key="id" :id="i.aid">
-            <item :record="i" :disabled="!closeModalVisible && !closeHintVisible" @detail="openDetail" />
+            <item :record="i" @detail="openDetail" />
           </div>
         </div>
       </scroll-view>
@@ -83,7 +83,7 @@
   </div>
 
   <!-- 详情 -->
-  <c-details ref="detail" />
+  <c-details ref="detail" @confirm="addCart" />
 
   <c-footer current="order" />
 </div>
@@ -97,7 +97,7 @@ import cates from './modules/cates'
 import item from './modules/item'
 import cDetails from './modules/details'
 import store from '../../store'
-import {getAction} from '../../utils/api'
+import {getAction, postAction} from '@/utils/api'
 export default {
   components: {
     cHeader,
@@ -116,7 +116,8 @@ export default {
       goodsList: [],
       closeModalVisible: false,
       closeHintVisible: false,
-      freeModalVisible: false
+      freeModalVisible: false,
+      cartNum: 0
     }
   },
   computed: {
@@ -127,7 +128,10 @@ export default {
     addrData () {
       return {
         name: this.storeData.shop_name,
-        dis: this.storeData.distance
+        dis: this.storeData.distance,
+        cartNum: this.cartNum,
+        cartType: 1,
+        shopId: this.shopId
       }
     },
     storeData () {
@@ -186,6 +190,32 @@ export default {
     },
     openDetail (id) {
       this.$refs.detail.show(id)
+    },
+    getCart () {
+      getAction('/userapi/shopping/card/count', {
+        shop_id: this.shopId,
+        type: 1
+      }).then(res => {
+        if (res.code === 0) {
+          this.cartNum = res.data.count
+        }
+      })
+    },
+    addCart (goods) {
+      console.log('addCart goods', goods)
+      postAction('/userapi/shopping/card/store', {
+        shop_id: this.shopId,
+        type: 1,
+        goods
+      }).then(res => {
+        if (res.code === 0) {
+          mpvue.showToast({
+            title: '添加成功'
+          })
+          this.getCart()
+          this.$refs.detail.hide()
+        }
+      })
     }
   },
   onShareAppMessage () {
@@ -194,9 +224,10 @@ export default {
       path: `/pages/goods/main`
     }
   },
-  onLoad (id) {
-    this.shopId = this.id
+  onLoad (options) {
+    this.shopId = options.id || 1
     this.getData()
+    this.getCart()
   }
 }
 </script>

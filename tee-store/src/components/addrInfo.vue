@@ -12,7 +12,7 @@
     <div class="acenter">
       <button class="btn-circle btn-cart" v-if="showCart" @click="openCarts">
         <img src="/static/images/icon-cart.png" mode="widthFix" class="w32" />
-        <span class="nums">10</span>
+        <span class="nums" v-if="record.cartNum > 0">{{record.cartNum}}</span>
       </button>
       <button class="btn-circle ml20" open-type="share" v-if="showShare">
         <img src="/static/images/icon-share.png" mode="widthFix" class="w28" />
@@ -51,7 +51,10 @@ export default {
 	},
 	methods: {
     openCarts () {
-      this.$refs.cart.show()
+      this.$refs.cart.show({
+        shopId: this.record.shopId,
+        type: this.record.cartType
+      })
     }
   }
 }

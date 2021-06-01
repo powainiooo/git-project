@@ -13,16 +13,15 @@ const ajax = (opts, autoMsg = true) => {
     opts.url = `${baseUrl}${opts.url}?${tokenKey}=${token}`
     const extras = {
       header: {
-        [tokenKey]: token,
-        'Content-Type': 'application/x-www-form-urlencoded'
+        [tokenKey]: token
+        // 'Content-Type': 'application/x-www-form-urlencoded'
       },
       success (res) {
         console.log('token:', token)
         console.log('请求参数', opts)
         console.log('返回数据', res)
         resolve(res.data)
-        if (res.data.code !== 0) {
-          mpvue.showToast({ title: res.data.msg, icon: 'none' })
+        if (res.data.code === 0) {
         } else {
           // console.log('res.data.ret')
           if (autoMsg) {

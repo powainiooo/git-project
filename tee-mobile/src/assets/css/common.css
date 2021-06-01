@@ -1,7 +1,8 @@
 /* 框架 */
-body { background: linear-gradient(0deg, #FFFFFF 0%, #EADED0 100%); overflow-x: hidden; }
-.container { margin-top: 104px; padding-bottom: 170px; }
-.container2 { margin-top: 104px; margin-left: 25px; margin-right: 25px; background-color: #F9F9F9; border-radius: 70px 70px 0 0; box-shadow: 0px 3px 20px 0px rgba(0, 0, 0, 0.08); position: relative; }
+body { background: linear-gradient(0deg, #FFFFFF 0%, #EADED0 100%); background-attachment: fixed; overflow-x: hidden; color: #41372D; }
+.container { margin-top: 104px; }
+.container2 { margin-left: 25px; margin-right: 25px; background-color: #F9F9F9; border-radius: 70px 70px 0 0; box-shadow: 0px 3px 20px 0px rgba(0, 0, 0, 0.08); position: relative; padding-top: 20px; }
+.container3 { min-height: calc(100vh - 250px); }
 
 .hscale { transition: all 0.15s ease-out; transform: scale(0.95); }
 
@@ -23,6 +24,7 @@ body { background: linear-gradient(0deg, #FFFFFF 0%, #EADED0 100%); overflow-x: 
 .btn-style1 { background-color: #F0916C; }
 .btn-style2 { background-color: #EDECEB; color: #B9BABB; }
 .btn-style3 { background-color: #C8B69C; }
+.btn-style4 { background-color: #ffffff; color: #C9C9C9; box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.15); }
 
 /* 图片 */
 .imgs { width: 160px; height: 160px; border-radius: 35px; overflow: hidden; }
@@ -163,13 +165,16 @@ body { background: linear-gradient(0deg, #FFFFFF 0%, #EADED0 100%); overflow-x: 
 .steps li.active .img2 { display: inline-block; }
 
 /* 订单详情 */
+.order-detail { padding-bottom: 100px; }
 .order-detail .header { height: 120px; padding: 0 40px 0 44px; box-shadow: 0px 3px 20px 0px rgba(0, 0, 0, 0.15); position: relative; z-index: 5; }
-.order-detail .header .btn { width: 110px; }
 .order-detail .status-frame { height: 290px; background-color: #ffffff; position: relative; overflow: hidden; box-shadow: 0px 3px 20px 0px rgba(0, 0, 0, 0.15); margin-bottom: 50px; }
 .order-detail .status-frame .steps { margin-left: auto; margin-right: auto; }
 .order-detail .status-frame .form { margin: 20px 34px; }
 .order-detail .status-frame .order-num { width: 100%; position: absolute; left: 0; bottom: 20px; font-size: 24px; text-align: center; }
 .order-detail .body { margin: 0 34px; }
+
+/* 顶部信息栏 */
+.infos-line { display: flex; justify-content: space-between; align-items: center; margin: 30px 25px 60px 25px; }
 
   /* 字体 */
 .DinB { font-family: DinB }

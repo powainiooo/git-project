@@ -54,7 +54,7 @@ export default {
   },
 
   onLoad (option) {
-    this.status = option.status
+    this.status = option.result
   }
 }
 </script>

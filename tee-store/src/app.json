@@ -1,9 +1,9 @@
 {
   "pages": [
+    "pages/stores/main",
     "pages/scan/main",
     "pages/index/main",
     "pages/order/confirm/main",
-    "pages/stores/main",
     "pages/personal/address/main",
     "pages/personal/aboutus/main",
     "pages/personal/gift/main",

@@ -40,7 +40,7 @@
         <div class="price"><span>{{price}}</span>元</div>
       </div>
       <div class="r">
-        <button @click="addCart">确定</button>
+        <button @click="confirm">确定</button>
       </div>
     </div>
   </div>
@@ -78,7 +78,7 @@ export default {
           let price = 0
           res.data.forEach(i => {
             i.attrs = i.attr_names.join('-')
-            price += Number(item.price) * Number(item.buy_nums)
+            price += Number(i.price) * Number(i.buy_nums)
           })
           this.price = price
           this.list = res.data
@@ -102,6 +102,11 @@ export default {
         if (res.code === 0) {
           this.getData()
         }
+      })
+    },
+    confirm () {
+      mpvue.navigateTo({
+        url: '/pages/order/confirm/main'
       })
     }
   }

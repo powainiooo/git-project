@@ -88,7 +88,7 @@
 import cHeader from '@/components/header'
 import addrInfo from '@/components/addrInfo'
 import cTextarea from '@/components/cTextarea'
-import { getAction, postAction, payment } from '@/utils/api'
+import { postAction, payment } from '@/utils/api'
 import store from '@/store'
 
 export default {
@@ -134,7 +134,7 @@ export default {
       this.formData.pack = this.formData.pack === 0 ? 1 : 0
     },
     getData () {
-      getAction('/userapi/goods/order/confirm/page/data', {
+      postAction('/userapi/goods/order/confirm/page/data', {
         shop_id: this.storeInfo.shop_id,
         coupon_id: this.formData.couponId,
         score: this.formData.score,
@@ -155,6 +155,9 @@ export default {
       })
     },
     handlePay () {
+      mpvue.showLoading({
+        title: '支付中'
+      })
       postAction('/userapi/goods/order/create', {
         shop_id: this.storeInfo.shop_id,
         coupon_id: this.formData.couponId,
@@ -164,8 +167,8 @@ export default {
         user_remark: this.formData.user_remark
       }).then(res => {
         if (res.code === 0) {
-          const orderId = res.data.order_id
-          payment(orderId)
+          const orderNo = res.data.order_no
+          payment(orderNo)
         }
       })
     }

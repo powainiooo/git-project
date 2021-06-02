@@ -95,24 +95,33 @@ export const getTokenData = () => {
 }
 
 // 支付
-export const payment = jsapi => {
-  mpvue.requestPayment({
-    'timeStamp': jsapi.timeStamp,
-    'nonceStr': jsapi.nonceStr,
-    'package': jsapi.package,
-    'signType': jsapi.signType,
-    'paySign': jsapi.paySign,
-    'success': res => {
-      // this.getMessageAuth()
-      console.log('pay success', res)
-      mpvue.reLaunch({
-        url: '/pages/result/main?result=suc'
-      })
-    },
-    'fail': err => {
-      console.log('pay fail', err)
-      mpvue.reLaunch({
-        url: '/pages/result/main?result=fail'
+export const payment = orderNo => {
+  postAction('/userapi/goods/order/create/pay', {
+    order_no: orderNo
+  }).then(res => {
+    if (res.code === 0) {
+      const jsapi = res.data
+      mpvue.requestPayment({
+        'timeStamp': jsapi.timeStamp,
+        'nonceStr': jsapi.nonceStr,
+        'package': jsapi.package,
+        'signType': jsapi.signType,
+        'paySign': jsapi.paySign,
+        'success': res => {
+          // this.getMessageAuth()
+          console.log('pay success', res)
+          mpvue.reLaunch({
+            url: '/pages/result/main?result=suc'
+          })
+          mpvue.hideLoading()
+        },
+        'fail': err => {
+          console.log('pay fail', err)
+          mpvue.reLaunch({
+            url: '/pages/result/main?result=fail'
+          })
+          mpvue.hideLoading()
+        }
       })
     }
   })

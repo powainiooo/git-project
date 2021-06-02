@@ -19,7 +19,6 @@
         </button>
       </div>
     </div>
-
     <div class="store-list">
       <div class="store-col slideUp" v-for="i in list" :key="index">
         <item :key="id" :record="i" />

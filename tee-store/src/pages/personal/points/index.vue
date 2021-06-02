@@ -19,7 +19,7 @@
     <div class="line1 between">
       <div class="l">
         <img src="/static/images/index/tag1.png" mode="widthFix" />
-        <p>5209</p>
+        <p>{{score}}</p>
       </div>
       <div class="r acenter">
         <button class="btn-circle mr15"><img src="/static/images/index/scan.png" mode="widthFix" class="w26" /></button>
@@ -32,47 +32,12 @@
   </div>
   <div class="container2 points-list">
     <ul>
-      <li class="borderB between">
+      <li class="borderB between" v-for="item in list" :key="id">
         <div>
-          <div class="f24">扫码获得</div>
-          <div class="f20 c-c9">2021/04/01 13:10:30</div>
+          <div class="f24">{{item.title}}</div>
+          <div class="f20 c-c9">{{item.created_at}}</div>
         </div>
-        <div class="price c-main"><span>+10</span>积分</div>
-      </li>
-      <li class="borderB between">
-        <div>
-          <div class="f24">扫码获得</div>
-          <div class="f20 c-c9">2021/04/01 13:10:30</div>
-        </div>
-        <div class="price c-main"><span>+10</span>积分</div>
-      </li>
-      <li class="borderB between">
-        <div>
-          <div class="f24">扫码获得</div>
-          <div class="f20 c-c9">2021/04/01 13:10:30</div>
-        </div>
-        <div class="price c-main"><span>+10</span>积分</div>
-      </li>
-      <li class="borderB between">
-        <div>
-          <div class="f24">扫码获得</div>
-          <div class="f20 c-c9">2021/04/01 13:10:30</div>
-        </div>
-        <div class="price c-main"><span>+10</span>积分</div>
-      </li>
-      <li class="borderB between">
-        <div>
-          <div class="f24">扫码获得</div>
-          <div class="f20 c-c9">2021/04/01 13:10:30</div>
-        </div>
-        <div class="price c-main"><span>+10</span>积分</div>
-      </li>
-      <li class="borderB between">
-        <div>
-          <div class="f24">扫码获得</div>
-          <div class="f20 c-c9">2021/04/01 13:10:30</div>
-        </div>
-        <div class="price c-main"><span>+10</span>积分</div>
+        <div class="price c-main"><span>{{item.score > 0 ? '+' + item.score : item.score}}</span>积分</div>
       </li>
     </ul>
   </div>
@@ -84,6 +49,7 @@
 <script>
 import cHeader from '@/components/header'
 import records from './modules/records'
+import { getAction } from '@/utils/api'
 export default {
   components: {
     cHeader,
@@ -91,16 +57,45 @@ export default {
   },
   data () {
     return {
+      score: 0,
+      page: 1,
+      total: 0,
+      list: []
     }
   },
 
   methods: {
     openRecord () {
       this.$refs.records.show()
+    },
+    getScore () {
+      getAction('/userapi/user/show').then(res => {
+        if (res.code === 0) {
+          this.score = res.data.score
+        }
+      })
+    },
+    getList () {
+      getAction('/userapi/user/score/index/data1', {
+        page: this.page,
+        limit: 20
+      }).then(res => {
+        if (res.code === 0) {
+          this.list = this.list.concat(res.data)
+          this.total = res.count
+        }
+      })
     }
   },
-
-  created () {
+  onReachBottom () {
+    if (this.total > this.list.length) {
+      this.page += 1
+      this.getList()
+    }
+  },
+  onLoad () {
+    this.getScore()
+    this.getList()
   }
 }
 </script>

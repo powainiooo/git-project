@@ -23,6 +23,11 @@ export default {
     getTokenData()
     this.loadFont()
     mpvue.imgSrc = imgSrc
+    mpvue.toPage = function (url) {
+      mpvue.navigateTo({
+        url
+      })
+    }
   },
   methods: {
     loadFont () {

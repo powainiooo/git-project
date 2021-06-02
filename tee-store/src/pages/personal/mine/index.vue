@@ -24,7 +24,7 @@
     <div class="line1 acenter">
       <open-data type="userAvatarUrl" class="avatar"></open-data>
       <open-data type="userNickName" class="name"></open-data>
-      <button class="btn btn-style1">点击登录</button>
+      <button class="btn btn-style1" @click="handleLogin">点击登录</button>
     </div>
 
     <div class="line2">
@@ -59,6 +59,8 @@
 
 <script>
 import cHeader from '@/components/header'
+import { doLogin } from '@/utils/api'
+
 export default {
   components: {
     cHeader
@@ -69,6 +71,15 @@ export default {
   },
 
   methods: {
+    handleLogin () {
+      mpvue.getUserProfile({
+        desc: '用于完善会员资料',
+        success: res => {
+          console.log(res)
+          doLogin(res.userInfo)
+        }
+      })
+    }
   },
 
   created () {

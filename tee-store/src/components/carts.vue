@@ -37,7 +37,7 @@
 
     <div class="footer-btns">
       <div class="l center">
-        <div class="price"><span>50</span>元</div>
+        <div class="price"><span>{{price}}</span>元</div>
       </div>
       <div class="r">
         <button @click="addCart">确定</button>
@@ -59,7 +59,8 @@ export default {
       imgSrc: mpvue.imgSrc,
       shopId: '',
       type: '',
-      list: []
+      list: [],
+      price: 0
     }
   },
   methods: {
@@ -74,9 +75,12 @@ export default {
         type: this.type
       }).then(res => {
         if (res.code === 0) {
+          let price = 0
           res.data.forEach(i => {
             i.attrs = i.attr_names.join('-')
+            price += Number(item.price) * Number(item.buy_nums)
           })
+          this.price = price
           this.list = res.data
           this.visible = true
           this.$nextTick(() => {

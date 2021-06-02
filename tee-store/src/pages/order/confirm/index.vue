@@ -6,7 +6,7 @@
 <div class="page">
   <c-header />
   <div class="mt100">
-    <addr-info />
+    <addr-info :record="addrData" />
   </div>
   <div class="container2 ovh order-confirm" style="margin-top: 0;">
     <div class="bg-fff top-line">
@@ -15,31 +15,22 @@
           <p class="form-title ml15">联系电话</p>
           <div class="form-line">
             <div class="form-item">
-              <input value="19893998969" class="large" />
+              <input v-model="formData.phone" class="large" />
             </div>
           </div>
         </div>
-        <button class="btn btn-style1">自动填写</button>
+        <button class="btn btn-style1" open-type="getPhoneNumber" @getphonenumber="getPhoneNumber">自动填写</button>
       </div>
     </div>
 
     <div class="frame">
-      <div class="c-goods-item mb60">
-        <div class="imgs"><img src="/static/images/img2.png" mode="aspectFill" /></div>
+      <div class="c-goods-item mb60" v-for="item in goods" :key="goods_id">
+        <div class="imgs"><img :src="imgSrc + item.goods_cover" mode="aspectFill" /></div>
         <div class="infos">
-          <h3 class="title">[免费] 夏日特饮</h3>
-          <div class="intro">温、少冰、五分糖</div>
-          <div class="price"><span>25</span>元</div>
-          <div class="nums2">×1</div>
-        </div>
-      </div>
-      <div class="c-goods-item mb60">
-        <div class="imgs"><img src="/static/images/img2.png" mode="aspectFill" /></div>
-        <div class="infos">
-          <h3 class="title">[免费] 夏日特饮</h3>
-          <div class="intro">温、少冰、五分糖</div>
-          <div class="price"><span>25</span>元</div>
-          <div class="nums2">×1</div>
+          <h3 class="title">{{item.goods_name}}</h3>
+          <div class="intro">{{item.attrs}}</div>
+          <div class="price"><span>{{item.goods_price}}</span>元</div>
+          <div class="nums2">×{{item.buy_nums}}</div>
         </div>
       </div>
 
@@ -49,6 +40,10 @@
         <p class="f24 ml30">打包带走</p>
         <div class="acenter">
           <p class="c-c9 f20">将提前为您打包好</p>
+          <button class="btn-radio" @click="togglePack">
+            <img src="/static/images/radio.png" mode="widthFix" class="w30" v-if="formData.pack === 0" />
+            <img src="/static/images/radio.png" mode="widthFix" class="w30" v-else />
+          </button>
         </div>
       </div>
 
@@ -56,8 +51,9 @@
         <img src="/static/images/bg2.png" mode="widthFix" class="bg" />
         <div class="between reduce-item-box">
           <p class="f24 ml30">优惠券</p>
-          <div class="price"><span>-5</span>元</div>
+          <div class="price" v-if="formData.couponId !== 0"><span>-{{record.coupon_fee}}</span>元</div>
         </div>
+        <img src="/static/images/arrow4.png" mode="widthFix" class="ar" />
       </div>
 
       <div class="reduce-item mb30">
@@ -65,22 +61,23 @@
         <div class="between reduce-item-box">
           <div class="ml30">
             <p class="f24">使用积分</p>
-            <p class="f20 c-c9">100积分=1元，单次最多可用500积分</p>
+            <p class="f20 c-c9">{{record.score_rate}}积分=1元，单次最多可用{{record.score_use_top}}积分</p>
           </div>
-          <div class="price"><span>-5</span>元</div>
+          <div class="price" v-if="formData.score !== ''"><span>-{{record.score_fee}}</span>元</div>
         </div>
+        <img src="/static/images/arrow4.png" mode="widthFix" class="ar" />
       </div>
 
       <div class="ml30 mb10">备注</div>
-      <c-textarea />
+      <c-textarea v-model="formData.user_remark" />
     </div>
 
     <div class="footer-btns">
       <div class="l center">
-        <div class="price"><span>50</span>元</div>
+        <div class="price"><span>{{record.pay_amount}}</span>元</div>
       </div>
       <div class="r">
-        <button>支付</button>
+        <button @click="handlePay">支付</button>
       </div>
     </div>
   </div>
@@ -91,21 +88,91 @@
 import cHeader from '@/components/header'
 import addrInfo from '@/components/addrInfo'
 import cTextarea from '@/components/cTextarea'
+import { getAction, postAction, payment } from '@/utils/api'
+import store from '@/store'
+
 export default {
   components: {
     cHeader,
     addrInfo,
     cTextarea
   },
+  computed: {
+    storeInfo () {
+      return store.state.storeInfo
+    },
+    addrData () {
+      return {
+        name: this.shopData.shop_name,
+        dis: this.shopData.distance
+      }
+    }
+  },
   data () {
     return {
+      imgSrc: mpvue.imgSrc,
+      formData: {
+        couponId: 0,
+        score: '',
+        phone: '',
+        pack: 0,
+        user_remark: ''
+      },
+      goods: [],
+      shopData: {},
+      coupons: [],
+      scores: [],
+      record: {}
     }
   },
 
   methods: {
+    getPhoneNumber (e) {
+      console.log('getPhoneNumber', e)
+    },
+    togglePack () {
+      this.formData.pack = this.formData.pack === 0 ? 1 : 0
+    },
+    getData () {
+      getAction('/userapi/goods/order/confirm/page/data', {
+        shop_id: this.storeInfo.shop_id,
+        coupon_id: this.formData.couponId,
+        score: this.formData.score,
+        lng: this.storeInfo.lng,
+        lat: this.storeInfo.lat
+      }).then(res => {
+        if (res.code === 0) {
+          this.record = res.data
+          res.data.goods.forEach(i => {
+            i.attrs = i.attr_names.join('、')
+          })
+          this.goods = res.data.goods
+          this.shopData = res.data.shop
+          this.scores = res.data.score_list
+          this.coupons = res.data.coupon_list
+          store.commit('SET_COUPON', res.data.coupon_list)
+        }
+      })
+    },
+    handlePay () {
+      postAction('/userapi/goods/order/create', {
+        shop_id: this.storeInfo.shop_id,
+        coupon_id: this.formData.couponId,
+        score: this.formData.score,
+        phone: this.formData.phone,
+        pack: this.formData.pack,
+        user_remark: this.formData.user_remark
+      }).then(res => {
+        if (res.code === 0) {
+          const orderId = res.data.order_id
+          payment(orderId)
+        }
+      })
+    }
   },
 
-  created () {
+  onLoad () {
+    this.getData()
   }
 }
 </script>

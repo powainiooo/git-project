@@ -10,20 +10,20 @@
   <c-header />
   <div class="container2 pt20 pr" style="padding-bottom: 0;">
     <div class="coupon-bg center"><img src="/static/images/index/coupon.png" mode="widthFix" class="coupon-img" /></div>
-    <tabs>
-      <tab-pane name="tee" title="未使用">
-        <div class="list-container">
-          <div class="item" v-for="i in 5">
-            <item extraClass="coupon-item-min" />
+    <tabs @change="tabChange">
+      <tab-pane :name="1" title="未使用">
+        <scroll-view scroll-y class="list-container" @scrolltolower="reachBottom">
+          <div class="item" v-for="i in page1.list" :key="id">
+            <item :record="item" extraClass="coupon-item-min" />
           </div>
-        </div>
+        </scroll-view>
       </tab-pane>
-      <tab-pane name="nearby" title="已使用">
-        <div class="list-container">
-          <div class="item" v-for="i in 5">
-            <item extraClass="coupon-item-min" />
+      <tab-pane :name="2" title="已使用">
+        <scroll-view scroll-y class="list-container" @scrolltolower="reachBottom">
+          <div class="item" v-for="i in page2.list" :key="id">
+            <item :record="item" extraClass="coupon-item-min" />
           </div>
-        </div>
+        </scroll-view>
       </tab-pane>
     </tabs>
   </div>
@@ -36,6 +36,8 @@ import cFooter from '@/components/footer'
 import tabs from '@/components/Tabs/tabs'
 import tabPane from '@/components/Tabs/tabPane'
 import item from '@/pages/coupon/modules/item'
+import { getAction } from '@/utils/api'
+
 export default {
   components: {
     cHeader,
@@ -46,13 +48,64 @@ export default {
   },
   data () {
     return {
+      status: 1,
+      page1: {
+        page: 1,
+        total: 0,
+        list: []
+      },
+      page2: {
+        page: 1,
+        total: 0,
+        list: []
+      }
     }
   },
 
   methods: {
+    reachBottom () {
+      console.log('123')
+      if (this.status === 1) {
+        if (this.page1.total > this.page1.list.length) {
+          this.getData1()
+        }
+      } else if (this.status === 2) {
+        if (this.page2.total > this.page2.list.length) {
+          this.getData2()
+        }
+      }
+    },
+    tabChange (e) {
+      this.status = e
+    },
+    getData1 () {
+      getAction('/userapi/user/coupon/index/data', {
+        page: this.page1.page,
+        limit: 20,
+        status: 1
+      }).then(res => {
+        if (res.code === 0) {
+          this.page1.list = this.page1.list.concat(this.page1.list)
+          this.page1.total = res.count
+        }
+      })
+    },
+    getData2 () {
+      getAction('/userapi/user/coupon/index/data', {
+        page: this.page2.page,
+        limit: 20,
+        status: 2
+      }).then(res => {
+        if (res.code === 0) {
+          this.page2.list = this.page2.list.concat(this.page2.list)
+          this.page2.total = res.count
+        }
+      })
+    }
   },
-
-  created () {
+  onLoad () {
+    this.getData1()
+    this.getData2()
   }
 }
 </script>

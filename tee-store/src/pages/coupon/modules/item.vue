@@ -26,12 +26,12 @@
     <img src="/static/images/mask1.png" mode="widthFix" class="bg" v-if="extraClass === ''" />
     <img src="/static/images/mask3.png" mode="widthFix" class="bg" v-else />
     <div class="borderB line1 flex">
-      <div class="price"><span>5</span>元</div>
+      <div class="price"><span>{{record.money}}</span>元</div>
       <p> · 代金券</p>
     </div>
     <div class="line2">
-      <p>仅可用于周边商品，满200元可用。</p>
-      <p>有效期： 2021/04/01 - 2021/05/01</p>
+      <p>仅可用于周边商品，满{{record.condition}}元可用。</p>
+      <p>有效期： {{record.expired}}</p>
     </div>
   </div>
   <div class="coupon-item-r">
@@ -45,6 +45,7 @@
 export default {
 	name: 'app',
   props: {
+	  record: Object,
 	  extraClass: {
 	    type: String,
       default: ''

@@ -60,11 +60,20 @@ export const postAction = (url, data = {}, autoMsg = true) => {
 }
 
 // 登录
-export const doLogin = (data = {}) => {
-  return ajax({
-    method: 'POST',
-    url: `xcx_login`,
-    data
+export const doLogin = (userInfo = {}) => {
+  console.log('userInfo', userInfo)
+  store.commit('SET_PERSONINFO', userInfo)
+  postAction('/userapi/user/update', {
+    nickName: userInfo.nickName,
+    sex: userInfo.sex,
+    province: userInfo.province,
+    city: userInfo.city,
+    country: userInfo.country,
+    headimgurl: userInfo.avatar
+  }).then(res => {
+    if (res.code === 0) {
+      store.commit('SET_LOGIN', true)
+    }
   })
 }
 
@@ -76,10 +85,35 @@ export const getTokenData = () => {
     }, false).then(res => {
       console.log('common_login', res)
       if (res.data !== null) {
-        store.commit('SET_TOKEN', res.data.userInfo.token)
+        store.commit('SET_TOKEN', res.data.api_token)
+        store.commit('SET_LOGIN', res.data.nickName !== null)
       } else {
         store.commit('SET_TOKEN', res.data)
       }
     })
+  })
+}
+
+// 支付
+export const payment = jsapi => {
+  mpvue.requestPayment({
+    'timeStamp': jsapi.timeStamp,
+    'nonceStr': jsapi.nonceStr,
+    'package': jsapi.package,
+    'signType': jsapi.signType,
+    'paySign': jsapi.paySign,
+    'success': res => {
+      // this.getMessageAuth()
+      console.log('pay success', res)
+      mpvue.reLaunch({
+        url: '/pages/result/main?result=suc'
+      })
+    },
+    'fail': err => {
+      console.log('pay fail', err)
+      mpvue.reLaunch({
+        url: '/pages/result/main?result=fail'
+      })
+    }
   })
 }

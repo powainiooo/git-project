@@ -14,15 +14,21 @@
 <script type='es6'>
 export default {
 	name: 'app',
+  props: {
+	  value: {
+	    type: String,
+      default: ''
+    }
+  },
 	data() {
 		return {
-		  value: '',
       maxlength: 50
     }
 	},
 	methods: {
     inputChange (e) {
-      this.value = e.mp.detail.value
+      // this.value = e.mp.detail.value
+      this.$emit('input', e.mp.detail.value)
     }
   }
 }

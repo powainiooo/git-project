@@ -202,7 +202,6 @@ export default {
       })
     },
     addCart (goods) {
-      console.log('addCart goods', goods)
       postAction('/userapi/shopping/card/store', {
         shop_id: this.shopId,
         type: 1,

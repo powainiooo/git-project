@@ -17,7 +17,7 @@ export default {
       default: ''
     },
 	  name: {
-	    type: String,
+	    type: [String, Number],
       default: ''
     }
   },

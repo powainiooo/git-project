@@ -11,8 +11,10 @@ const store = new Vuex.Store({
   state: {
     token: '25b31bd1974ffe80418007f37e45955a1',
     personalInfo: {},
+    isLogin: false,
     sysInfo: {},
     storeInfo: {},
+    counponList: [],
     menuInfo: 0
   },
   mutations: {
@@ -31,6 +33,12 @@ const store = new Vuex.Store({
     },
     SET_STOREINFO (state, data) {
       state.storeInfo = data
+    },
+    SET_COUPON (state, data) {
+      state.counponList = data
+    },
+    SET_LOGIN (state, data) {
+      state.isLogin = data
     }
   }
 })

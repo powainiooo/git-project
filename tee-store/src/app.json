@@ -1,8 +1,12 @@
 {
   "pages": [
+    "pages/scan/main",
+    "pages/index/main",
+    "pages/order/confirm/main",
     "pages/stores/main",
     "pages/personal/address/main",
     "pages/personal/aboutus/main",
+    "pages/personal/gift/main",
     "pages/personal/coupon/main",
     "pages/personal/points/main",
     "pages/personal/mine/main",
@@ -14,9 +18,7 @@
     "pages/nearby/details/main",
     "pages/nearby/list/main",
     "pages/result/main",
-    "pages/order/confirm/main",
     "pages/goods/main",
-    "pages/index/main",
     "pages/logs/main"
   ],
   "window": {

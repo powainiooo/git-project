@@ -5,10 +5,20 @@
 <template>
 <div class="addr-info">
   <div class="between">
-    <button class="btn">
+    <button class="btn" v-if="showBtn">
       <span>{{record.name}}</span>
       <img src="/static/images/arrow1.png" mode="widthFix" class="w10 ml20" />
     </button>
+    <button class="btn" v-if="showService">
+      <img src="/static/images/arrow1.png" mode="widthFix" class="w26 mr20" />
+      <span>客服</span>
+    </button>
+    <picker :range="cList" range-key="cname" @change="typeChange">
+      <button class="btn" v-if="showTypes">
+        <span>{{cname === '' ? '选择产品分类' : cname}}</span>
+        <img src="/static/images/arrow1.png" mode="widthFix" class="w10 ml20" />
+      </button>
+    </picker>
     <div class="acenter">
       <button class="btn-circle btn-cart" v-if="showCart" @click="openCarts">
         <img src="/static/images/icon-cart.png" mode="widthFix" class="w32" />
@@ -19,7 +29,7 @@
       </button>
     </div>
   </div>
-  <div class="dis">距离你{{record.dis}}km</div>
+  <div class="dis" v-if="record.dis">距离你{{record.dis}}km</div>
   <!-- 购物车 -->
   <carts ref="cart" />
 </div>
@@ -27,9 +37,23 @@
 
 <script type='es6'>
 import carts from './carts'
+import { getAction } from '@/utils/api'
+
 export default {
 	name: 'app',
   props: {
+	  showBtn: {
+	    type: Boolean,
+      default: true
+    },
+    showTypes: {
+	    type: Boolean,
+      default: false
+    },
+    showService: {
+	    type: Boolean,
+      default: false
+    },
 	  showCart: {
 	    type: Boolean,
       default: false
@@ -47,14 +71,32 @@ export default {
     carts
   },
 	data() {
-		return {}
+		return {
+		  cname: '',
+      cList: []
+    }
 	},
+  mounted () {
+	  if (this.showTypes) {
+	    console.log('showTypes')
+      getAction('/userapi/nearby/cate/all').then(res => {
+        if (res.code === 0) {
+          this.cList = res.data
+        }
+      })
+    }
+  },
 	methods: {
     openCarts () {
       this.$refs.cart.show({
         shopId: this.record.shopId,
         type: this.record.cartType
       })
+    },
+    typeChange (e) {
+      const item = this.cList[e.mp.detail.value]
+      this.cname = item.cname
+      this.$emit('change', item.cid)
     }
   }
 }

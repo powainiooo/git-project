@@ -26,7 +26,8 @@
   <div class="c-goods-col" v-for="item in list" :key="id">
     <div class="goods-item"
          hover-class="hscale"
-         hover-stay-time="10">
+         hover-stay-time="10"
+         @click="toDetail(item)">
       <div class="imgs"><img src="/static/images/img.jpg" mode="aspectFill" /></div>
       <div class="titles">春樱系列吸管杯</div>
       <div class="price1">100元</div>
@@ -45,18 +46,22 @@
 <script type='es6'>
 export default {
   name: 'app',
-  data () {
-    return {
-      list: [
-        {id: '1'},
-        {id: '2'},
-        {id: '3'},
-        {id: '4'},
-        {id: '5'},
-        {id: '6'},
-      ]
+  props: {
+    list: {
+      type: Array,
+      default: () => []
     }
   },
-  methods: {}
+  data () {
+    return {
+    }
+  },
+  methods: {
+    toDetail (record) {
+      mpvue.navigateTo({
+        url: '/pages/nearby/details/main?id=' + record.id
+      })
+    }
+  }
 }
 </script>

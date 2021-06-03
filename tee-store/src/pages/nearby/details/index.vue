@@ -8,7 +8,8 @@
   <c-header />
   <div class="container" style="padding-bottom: 0;">
     <!-- 地址信息 -->
-    <addr-info showCart showShare />
+    <addr-info showCart showShare showService :record="addrData"  />
+
     <div class="container2 nearby-container">
       <div class="nearby-goods-detail">
         <img src="/static/images/img.jpg" mode="aspectFill" class="bg" />
@@ -38,11 +39,11 @@
         <button class="style1" @click="openDetail">立即购买</button>
       </div>
       <div class="r">
-        <button>加入购物车</button>
+        <button @click="openDetail">加入购物车</button>
       </div>
     </div>
 
-    <c-details ref="details" />
+    <c-details ref="details" :record="record" />
   </div>
 </div>
 </template>
@@ -51,24 +52,57 @@
 import cHeader from '@/components/header'
 import addrInfo from '@/components/addrInfo'
 import cDetails from './modules/details'
+import { getAction } from '@/utils/api'
 export default {
   components: {
     cHeader,
     addrInfo,
     cDetails
   },
+  computed: {
+    addrData () {
+      return {
+        cartNum: this.cartNum,
+        cartType: 2
+      }
+    }
+  },
   data () {
     return {
+      imgSrc: mpvue.imgSrc,
+      id: '',
+      record: {},
+      cartNum: 0
     }
   },
 
   methods: {
     openDetail () {
       this.$refs.details.show()
+    },
+    getData () {
+      getAction('xxxx', {
+        id: this.id
+      }).then(res => {
+        if (res.code === 0) {
+          this.record = res.data
+        }
+      })
+    },
+    getCart () {
+      getAction('/userapi/shopping/card/count', {
+        type: 2
+      }).then(res => {
+        if (res.code === 0) {
+          this.cartNum = res.data.count
+        }
+      })
     }
   },
 
-  created () {
+  onLoad (options) {
+    this.id = options.id
+    this.getData()
   }
 }
 </script>

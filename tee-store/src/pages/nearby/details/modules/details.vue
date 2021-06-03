@@ -51,7 +51,9 @@
 
     <div class="footer-btns">
       <div class="l center">
-        <div class="nums"><span>50</span>杯</div>
+        <picker :range="nums" @change="numChange">
+          <div class="nums"><span>{{num}}</span>杯</div>
+        </picker>
       </div>
       <div class="r">
         <button>确定</button>
@@ -64,10 +66,30 @@
 <script type='es6'>
 export default {
   name: 'app',
+  props: {
+    record: Object
+  },
   data() {
     return {
       visible: false,
-      showItem: false
+      showItem: false,
+      cates: [],
+      cateIds: {},
+      nums: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+      num: 1,
+      isAjax: false
+    }
+  },
+  watch: {
+    record: {
+      handle (data) {
+        const ids = {}
+        for (const i of data.attrs) {
+          ids[`c${i.id}`] = i.children[0].id
+        }
+        this.cateIds = ids
+      },
+      deep: true
     }
   },
   methods: {
@@ -82,6 +104,23 @@ export default {
       setTimeout(() => {
         this.visible = false
       }, 500)
+    },
+    numChange (e) {
+      this.num = this.nums[e.mp.detail.value]
+    },
+    addCart () {
+      if (this.isAjax) return
+      const ids = []
+      for (const key in this.cateIds) {
+        ids.push(this.cateIds[key])
+      }
+      const goods = {
+        nearby_id: this.record.id,
+        buy_nums: this.num,
+        attrs: ids
+      }
+      this.isAjax = true
+      this.$emit('confirm', goods)
     }
   }
 }

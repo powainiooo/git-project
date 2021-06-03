@@ -21,36 +21,28 @@
 <div class="order-item">
   <div class="order-box">
     <div class="header between">
-      <span class="nums">1232</span>
+      <span class="nums">{{record.fetch_code || '--'}}</span>
       <div class="acenter">
-        <button class="btn btn-style4 mr20">退款</button>
-        <button class="btn btn-style1">13728392919</button>
+        <button class="btn btn-style4 mr20" @click="handleRefund">退款</button>
+        <button class="btn btn-style1">{{record.phone}}</button>
       </div>
     </div>
     <div class="body">
-      <div class="c-goods-item borderB mb20">
+      <div class="c-goods-item borderB mb20" v-for="(item, index) in record.goods" :key="index">
         <div class="imgs"><img src="@/assets/img/img2.png" mode="aspectFill" /></div>
         <div class="infos">
-          <h3 class="title">[免费] 夏日特饮</h3>
-          <div class="intro">温、少冰、五分糖</div>
-          <div class="nums2">×1</div>
-        </div>
-      </div>
-      <div class="c-goods-item borderB mb20">
-        <div class="imgs"><img src="@/assets/img/img2.png" mode="aspectFill" /></div>
-        <div class="infos">
-          <h3 class="title">[免费] 夏日特饮</h3>
-          <div class="intro">温、少冰、五分糖</div>
-          <div class="nums2">×1</div>
+          <h3 class="title">{{item.goods_name}}</h3>
+          <div class="intro">{{item.goods_attr.join('、')}}</div>
+          <div class="nums2">×{{item.buy_nums}}</div>
         </div>
       </div>
       <div class="line1">
         <h3 class="c-main">备注</h3>
-        <p>冰、自带杯子，冰块单独打包、正常糖</p>
+        <p>{{record.user_remark || '--'}}</p>
       </div>
     </div>
-    <div class="footer center borderT">
-      <button class="btn btn-style1">确认提货</button>
+    <div class="footer center borderT" v-if="record.status === 4">
+      <button class="btn btn-style1" @click="handleDone">确认提货</button>
     </div>
   </div>
   <img src="@/assets/img/sd1.png" class="sd" />
@@ -58,11 +50,52 @@
 </template>
 
 <script type='es6'>
+import { postAction } from '@/utils'
 export default {
   name: 'app',
+  props: {
+    record: Object
+  },
   data () {
     return {}
   },
-  methods: {}
+  methods: {
+    handleRefund () {
+      this.$Dialog.confirm({
+        message: '是否确认退款？'
+      }).then(() => {
+        postAction('/shopapi/order/refund', {
+          id: this.record.id
+        }).then(res => {
+          if (res.code === 0) {
+            this.$Toast.success(res.msg)
+            this.record.status = 3
+          }
+        })
+      })
+    },
+    handleDone () {
+      this.$Dialog.confirm({
+        message: '是否确认完成订单？'
+      }).then(() => {
+        postAction('/shopapi/order/done', {
+          id: this.record.id
+        }).then(res => {
+          if (res.code === 0) {
+            this.$Toast.success(res.msg)
+            this.record.status = 7
+          }
+        })
+      })
+    },
+    toDetail () {
+      this.$router.push({
+        name: 'Order-detail2',
+        query: {
+          id: this.record.id
+        }
+      })
+    }
+  }
 }
 </script>

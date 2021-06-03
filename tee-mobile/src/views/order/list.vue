@@ -11,10 +11,10 @@
   <div class="container2 container3 list-container">
     <tabs>
       <tab-pane name="tee" title="茶饮订单">
-        <item />
+        <tee />
       </tab-pane>
       <tab-pane name="nearby" title="周边订单">
-        <item2 />
+        <nearby />
       </tab-pane>
     </tabs>
   </div>
@@ -24,15 +24,15 @@
 <script type='es6'>
 import tabs from '@/components/Tabs/tabs'
 import tabPane from '@/components/Tabs/tabPane'
-import item from './modules/item'
-import item2 from './modules/item2'
+import tee from './modules/tee'
+import nearby from './modules/nearby'
 export default {
   name: 'app',
   components: {
     tabs,
     tabPane,
-    item,
-    item2
+    tee,
+    nearby
   },
   data () {
     return {}

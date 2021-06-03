@@ -7,7 +7,8 @@
   <c-header />
   <div class="container" style="padding-bottom: 0;">
     <!-- 地址信息 -->
-    <addr-info showCart showShare />
+    <addr-info showTypes showCart showShare @change="typeChange" />
+
     <div class="container2 nearby-container">
       <div class="mt25">
         <goods-list />
@@ -24,6 +25,8 @@ import cHeader from '@/components/header'
 import cFooter from '@/components/footer'
 import addrInfo from '@/components/addrInfo'
 import goodsList from '@/components/goodsList'
+import { getAction } from '@/utils/api'
+
 export default {
   components: {
     cHeader,
@@ -31,15 +34,64 @@ export default {
     addrInfo,
     goodsList
   },
+  computed: {
+    addrData () {
+      return {
+        cartNum: this.cartNum,
+        cartType: 2
+      }
+    }
+  },
   data () {
     return {
+      cartNum: 0,
+      cid: 0,
+      page: 1,
+      list: [],
+      total: 0
     }
   },
 
   methods: {
+    getData () {
+      getAction('/userapi/nearby/index/data', {
+        cid: this.cid,
+        recommend: 0,
+        page: this.page,
+        limit: 20
+      }).then(res => {
+        if (res.code === 0) {
+          this.list = this.list.concat(res.data)
+          this.total = res.count
+        }
+      })
+    },
+    getCart () {
+      getAction('/userapi/shopping/card/count', {
+        shop_id: this.shopId,
+        type: 1
+      }).then(res => {
+        if (res.code === 0) {
+          this.cartNum = res.data.count
+        }
+      })
+    },
+    typeChange (e) {
+      this.cid = e
+      this.page = 1
+      this.list = []
+      this.getData()
+    }
   },
-
-  created () {
+  onReachBottom () {
+    if (this.total > this.list.length) {
+      this.page += 1
+      this.getData()
+    }
+  },
+  onLoad (options) {
+    this.getData()
+    this.getCart()
   }
 }
 </script>

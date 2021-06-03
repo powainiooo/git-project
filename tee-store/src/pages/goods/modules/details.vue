@@ -87,7 +87,6 @@ export default {
             ids[`c${i.id}`] = i.children[0].id
           }
           this.cateIds = ids
-          console.log('this.cateIds', this.cateIds)
 
           this.visible = true
           this.$nextTick(() => {

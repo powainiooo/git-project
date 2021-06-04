@@ -106,6 +106,8 @@ body
     background-color mainColor; color #ffffff; border-color mainColor;
   &.bg-gray
     background-color #A96854; color #ffffff; border-color #A96854;
+  &.bg-error
+    background-color #F24C25; color #ffffff; border-color #F24C25;
 
 .btn-close
   size(40px, 40px); background-color #EDECEB; box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.15); border-radius 50%; center();
@@ -116,9 +118,20 @@ body
   size(25px, 25px); background-color #ffffff; box-shadow 0px 0px 3px 0px rgba(0, 0, 0, 0.15); border-radius 50%; center();
   img
     display block
+.btn-warn
+  size(16px, 16px); background-color #F24C25; box-shadow 0px 0px 3px 0px rgba(0, 0, 0, 0.15); border-radius 50%; center(); font-size 12px; color #ffffff; line-height 12px;
 
 .bg-main
   background-color mainColor
+.warn-pop
+  .ivu-poptip-popper[x-placement^=right] .ivu-poptip-arrow:after
+    border-right-color #F24C25
+  .ivu-poptip-inner
+    background-color #F24C25
+  .ivu-poptip-body
+    padding 2px 6px;
+  .ivu-poptip-body-content-inner
+    color #ffffff; font-size 12px;
 
 // 下拉框
 .ivu-select-single
@@ -216,3 +229,11 @@ body
 .tee-page
   .ivu-page-next, .ivu-page-prev
     background-color transparent
+
+// 空提示
+.empty
+  text-align center; font-size 0;
+  p
+    font-size 24px; margin-top 20px; line-height 28px; color #CECBC6; margin-bottom 4px;
+  div
+    font-size 36px; line-height 36px; color #CECBC6;

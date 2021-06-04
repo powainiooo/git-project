@@ -21,7 +21,7 @@
 </style>
 
 <template>
-<div class="coupon-item" :class="[extraClass]">
+<div class="coupon-item" hover-class="hscale" hover-stay-time="10" @click="$emit('tap', record.id)" :class="[extraClass]">
   <div class="coupon-item-l">
     <img src="/static/images/mask1.png" mode="widthFix" class="bg" v-if="extraClass === ''" />
     <img src="/static/images/mask3.png" mode="widthFix" class="bg" v-else />

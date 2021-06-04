@@ -36,13 +36,13 @@
       <tr v-for="item in list" :key="item.id">
         <td><div>{{item.date}}</div></td>
         <td><div>{{item.fetch_code}}</div></td>
-        <td><div>{{item.status_name || '--'}}</div></td>
+        <td><div>{{getStatusName(item.status)}}</div></td>
         <td><div>{{item.updated_at || '--'}}</div></td>
         <td><div>{{item.apply_at || '--'}}</div></td>
         <td>
           <div class="">
             <Poptip title="确认提现？" confirm @on-ok="handleWithdraw(item.id)">
-              <Button size="small">提现申请</Button>
+              <Button size="small" class="bg-main">提现申请</Button>
             </Poptip>
           </div>
         </td>
@@ -63,10 +63,10 @@ export default {
   data () {
     return {
       statusList: [
-        { id: '0', name: '全部' },
-        { id: '1', name: '待提现' },
-        { id: '2', name: '提现中' },
-        { id: '3', name: '已提现' }
+        { id: 0, name: '全部' },
+        { id: 1, name: '待提现' },
+        { id: 2, name: '提现中' },
+        { id: 3, name: '已提现' }
       ],
       status: '',
       total: 0,
@@ -102,6 +102,10 @@ export default {
           this.getListData()
         }
       })
+    },
+    getStatusName (status) {
+      const item = this.statusList.find(i => i.id === status)
+      return item ? item.name : '--'
     }
   }
 }

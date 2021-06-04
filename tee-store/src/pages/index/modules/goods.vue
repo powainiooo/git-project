@@ -6,7 +6,7 @@
 .index-goods .arrows .a2 { width: 16px; transition: transform 0.4s cubic-bezier(.23,.78,.33,.97); }
 .index-goods-show .arrows .a2 { width: 16px; transform: rotateZ(180deg); }
 
-.index-scrolls { width: 100%; height: 100%; overflow-y: auto; }
+.index-scrolls { width: 100%; height: 100%; }
 </style>
 
 <template>
@@ -15,18 +15,20 @@
     <img src="/static/images/index/arrow1.png" mode="widthFix" class="a1" />
     <img src="/static/images/index/arrow2.png" mode="widthFix" class="a2" />
   </div>
-  <div class="index-scrolls">
+  <scroll-view scroll-y class="index-scrolls" @scrolltolower="reachBottom">
     <div class="acenter mt50 ml50">
       <img src="/static/images/index/icon1.png" mode="widthFix" class="w28 mr15" />
       <span class="f30">兑换好礼</span>
     </div>
-    <goods-list v-if="visible" />
-  </div>
+    <goods-list v-if="visible" :list="list" />
+  </scroll-view>
 </div>
 </template>
 
 <script type='es6'>
 import goodsList from '@/components/goodsList'
+import { getAction } from '@/utils/api'
+
 export default {
   name: 'app',
   components: {
@@ -34,12 +36,37 @@ export default {
   },
   data () {
     return {
-      visible: false
+      visible: false,
+      page: 1,
+      total: 0,
+      list: []
     }
+  },
+  mounted () {
+    this.getData()
   },
   methods: {
     toggle () {
       this.visible = !this.visible
+    },
+    reachBottom () {
+      if (this.total > this.list.length) {
+        this.page += 1
+        this.getData()
+      }
+    },
+    getData () {
+      getAction('/userapi/nearby/index/data', {
+        cid: 0,
+        recommend: 1,
+        page: this.page,
+        limit: 20
+      }).then(res => {
+        if (res.code === 0) {
+          this.list = this.list.concat(res.data)
+          this.total = res.count
+        }
+      })
     }
   }
 }

@@ -21,7 +21,7 @@
 <div class="box2 hots-container">
   <div class="box2-title">今日热卖茶饮</div>
   <div class="box2-body scrollBar">
-    <ul class="mt20">
+    <ul class="mt20" v-if="list.length > 0">
       <li v-for="(item, index) in list" :key="index">
         <div class="flex">
           <div class="index">{{index + 1}}</div>
@@ -31,6 +31,11 @@
         <p class="nums">{{item.buy_nums}}</p>
       </li>
     </ul>
+    <div class="empty" v-else style="margin-top: 200px;">
+      <img src="@/assets/img/empty.png" width="68" />
+      <p>Payment failure</p>
+      <div>暂无数据</div>
+    </div>
   </div>
 </div>
 </template>

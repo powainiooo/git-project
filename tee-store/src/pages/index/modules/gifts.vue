@@ -18,7 +18,7 @@
     <div class="gift"
          hover-class="hscale"
          hover-stay-time="10"
-         @click="toPage('/pages/personal/coupon/main')">
+         @click="toPage('/pages/personal/gift/main')">
       <img src="/static/images/index/gift.png"
            mode="heightFix"
            class="img" />

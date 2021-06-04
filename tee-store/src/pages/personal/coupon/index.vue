@@ -64,7 +64,6 @@ export default {
 
   methods: {
     reachBottom () {
-      console.log('123')
       if (this.status === 1) {
         if (this.page1.total > this.page1.list.length) {
           this.getData1()

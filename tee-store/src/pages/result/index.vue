@@ -29,9 +29,9 @@
       <p class="info" v-if="status === 'suc'">请耐心等候产品出餐，注意查看店内取餐码。或关注小程序消息通知。</p>
       <p class="info" v-else-if="status === 'fail'">网络拥堵 或 网络异常，请点击“重新支付”，以完成订单支付。</p>
       <div class="center">
-        <button class="btn btn-style1 mr25" v-if="status === 'suc'">查看订单详情</button>
+        <button class="btn btn-style1 mr25" v-if="status === 'suc'" @click="toOrder">查看订单详情</button>
         <button class="btn btn-style1 mr25" v-else-if="status === 'fail'">重新支付</button>
-        <button class="btn btn-style2">返回首页</button>
+        <button class="btn btn-style2" @click="backIndex">返回首页</button>
       </div>
     </div>
   </div>
@@ -51,6 +51,16 @@ export default {
   },
 
   methods: {
+    toOrder () {
+      mpvue.navigateTo({
+        url: '/pages/order/list/main'
+      })
+    },
+    backIndex () {
+      mpvue.reLaunch({
+        url: '/pages/index/main'
+      })
+    }
   },
 
   onLoad (option) {

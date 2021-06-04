@@ -55,7 +55,7 @@
         <td><div>{{item.fetch_code}}</div></td>
         <td><div>{{item.order_no}}</div></td>
         <td><div>{{item.goods_name}}</div></td>
-        <td><div>{{item.goods_attr}}</div></td>
+        <td><div>{{item.goods_attr.join('、')}}</div></td>
         <td><div>{{item.buy_nums}}件</div></td>
         <td><div>{{item.goods_price}}元</div></td>
         <td>
@@ -93,8 +93,12 @@
 
 <script type='es6'>
 import { getAction, postAction } from '@/utils'
+import cDateTime from '@/components/common/cDateTime'
 export default {
   name: 'app',
+  components: {
+    cDateTime
+  },
   data () {
     return {
       statusList: [

@@ -31,7 +31,7 @@
         <col width="150" />
         <col width="110" />
         <col />
-        <col width="150" />
+        <col width="170" />
       </colgroup>
       <thead>
       <tr>
@@ -61,7 +61,7 @@
         </td>
         <td>
           <div>
-            <p v-for="(item, index) in item.goods" :key="index">{{item.goods_attr}}</p>
+            <p v-for="(item, index) in item.goods" :key="index">{{item.goods_attr.join('、')}}</p>
           </div>
         </td>
         <td>
@@ -87,7 +87,13 @@
           <div>{{item.status_name}}</div>
         </td>
         <td>
-          <div class="">
+          <div class="tr">
+            <Poptip title="确认补打标签？" confirm @on-ok="handleTag(item.id)" v-if="item.status === 4">
+              <Button size="small" class="mb10">补打标签</Button>
+            </Poptip>
+            <Poptip title="确认通知取餐？" confirm @on-ok="handleGet(item.id)" v-if="item.status === 4">
+              <Button size="small" class="bg-main ml10 mb10">通知取餐</Button> <br/>
+            </Poptip>
             <Poptip title="确认退款？" confirm @on-ok="handleRefund(item.id)">
               <Button size="small">退款</Button>
             </Poptip>
@@ -184,6 +190,32 @@ export default {
       })
     },
     handleRefund (id) {
+      if (this.isAjax) return
+      this.isAjax = true
+      postAction('/shopapi/order/refund', {
+        id
+      }).then(res => {
+        this.isAjax = false
+        if (res.code === 0) {
+          this.$Message.success(res.msg)
+          this.getListData()
+        }
+      })
+    },
+    handleGet (id) {
+      if (this.isAjax) return
+      this.isAjax = true
+      postAction('/shopapi/order/refund', {
+        id
+      }).then(res => {
+        this.isAjax = false
+        if (res.code === 0) {
+          this.$Message.success(res.msg)
+          this.getListData()
+        }
+      })
+    },
+    handleTag (id) {
       if (this.isAjax) return
       this.isAjax = true
       postAction('/shopapi/order/refund', {

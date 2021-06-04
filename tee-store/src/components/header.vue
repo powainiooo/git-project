@@ -17,7 +17,7 @@
       <img src="/static/images/x.png" mode="widthFix" class="x" />
       <img :src="storeLogo" mode="aspectFill" class="logo2" />
     </div>
-    <button v-if="menus"><img src="/static/images/menu.png" mode="widthFix" class="menu" /></button>
+    <button v-if="menus" @click="toPage('/pages/personal/mine/main')"><img src="/static/images/menu.png" mode="widthFix" class="menu" /></button>
   </div>
 </div>
 </template>
@@ -38,6 +38,8 @@ export default {
   data () {
     return {}
   },
-  methods: {}
+  methods: {
+    toPage: mpvue.toPage
+  }
 }
 </script>

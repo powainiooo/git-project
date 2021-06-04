@@ -30,6 +30,9 @@
         .btn-close
           size(16px, 16px)
 
+  .c-form
+    .warn-hint
+      abTR(6px, -30px)
 </style>
 
 <template>
@@ -48,6 +51,11 @@
               <Select placeholder="产品分类" v-model="formData.cid">
                 <Option v-for="item in cateList" :key="item.cid" :value="item.cid">{{item.cname}}</Option>
               </Select>
+              <div class="warn-hint" v-if="false">
+                <Poptip trigger="hover" placement="right" content="不合格" class="warn-pop">
+                  <button class="btn-warn">!</button>
+                </Poptip>
+              </div>
             </FormItem>
             <FormItem>
               <Input placeholder="产品名称" v-model="formData.title">
@@ -187,6 +195,7 @@ export default {
           { attr_name: '', price: '' }
         ]
       }],
+      errData: {},
       id: '',
       isAjax: false
     }
@@ -223,6 +232,9 @@ export default {
           this.specsList = data.attrs
         }
       })
+    },
+    modify (id) {
+      this.edit(id)
     },
     handleCancel () {
       this.visible = false

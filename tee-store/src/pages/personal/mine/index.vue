@@ -22,34 +22,36 @@
   <c-header />
   <div class="container2 ovh mine-container">
     <div class="line1 acenter">
+      <template v-if="isLogin">
       <open-data type="userAvatarUrl" class="avatar"></open-data>
       <open-data type="userNickName" class="name"></open-data>
-      <button class="btn btn-style1" @click="handleLogin">点击登录</button>
+      </template>
+      <button class="btn btn-style1" @click="handleLogin" v-else>点击登录</button>
     </div>
 
     <div class="line2">
       <ul>
         <li class="borderR">
           <p>总积分</p>
-          <div>5209</div>
+          <div @click="toPage('/pages/personal/points/main')">{{score}}</div>
         </li>
         <li class="borderR">
           <p>优惠券</p>
-          <div>10</div>
+          <div @click="toPage('/pages/personal/coupon/main')">{{coupon}}</div>
         </li>
         <li>
           <p>奖品</p>
-          <div>10</div>
+          <div @click="toPage('/pages/personal/gift/main')">{{prize}}</div>
         </li>
       </ul>
       <img src="/static/images/sd1.png" mode="widthFix" class="sd" />
     </div>
 
-    <a href="#" class="line3 between">
+    <a href="/pages/personal/address/main" class="line3 between">
       <span>收货地址</span>
       <img src="/static/images/arrow4.png" mode="widthFix" />
     </a>
-    <a href="#" class="line3 between">
+    <a href="/pages/personal/aboutus/main" class="line3 between">
       <span>关于无事干杯</span>
       <img src="/static/images/arrow4.png" mode="widthFix" />
     </a>
@@ -59,18 +61,28 @@
 
 <script>
 import cHeader from '@/components/header'
-import { doLogin } from '@/utils/api'
+import store from '@/store'
+import { doLogin, getAction } from '@/utils/api'
 
 export default {
   components: {
     cHeader
   },
+  computed: {
+    isLogin () {
+      return store.state.isLogin
+    }
+  },
   data () {
     return {
+      score: 0,
+      coupon: 0,
+      prize: 0
     }
   },
 
   methods: {
+    toPage: mpvue.toPage,
     handleLogin () {
       mpvue.getUserProfile({
         desc: '用于完善会员资料',
@@ -79,10 +91,20 @@ export default {
           doLogin(res.userInfo)
         }
       })
+    },
+    getData () {
+      getAction('/userapi/user/show').then(res => {
+        if (res.code === 0) {
+          this.score = res.data.score
+          this.coupon = res.data.coupon_nums
+          this.prize = res.data.prize_nums
+        }
+      })
     }
   },
 
-  created () {
+  onLoad () {
+    this.getData()
   }
 }
 </script>

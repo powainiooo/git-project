@@ -8,7 +8,7 @@
   <div class="pr">
     <Tabs type="card" class="tee-tabs" style="margin-top: 13px;" @on-click="tabChange">
       <TabPane name="1" label="今日茶饮订单">
-        <div class="tee-tables mt30 ml50 mr50">
+        <div class="tee-tables mt30 ml50 mr50" v-if="list1.length > 0">
           <table>
             <col width="130" />
             <col width="70" />
@@ -48,7 +48,7 @@
               </td>
               <td>
                 <div>
-                  <p v-for="(item, index) in item.goods" :key="index">{{item.goods_attr}}</p>
+                  <p v-for="(item, index) in item.goods" :key="index">{{item.goods_attr.join('、')}}</p>
                 </div>
               </td>
               <td>
@@ -69,9 +69,14 @@
             </tbody>
           </table>
         </div>
+        <div class="empty" v-else style="margin-top: 200px;">
+          <img src="@/assets/img/empty.png" width="68" />
+          <p>Payment failure</p>
+          <div>暂无数据</div>
+        </div>
       </TabPane>
       <TabPane name="2" label="今日周边订单">
-        <div class="tee-tables mt30 ml50 mr50">
+        <div class="tee-tables mt30 ml50 mr50" v-if="list2.length > 0">
           <table>
             <col width="130" />
             <col width="70" />
@@ -111,7 +116,7 @@
               </td>
               <td>
                 <div>
-                  <p v-for="(item, index) in item.goods" :key="index">{{item.goods_attr}}</p>
+                  <p v-for="(item, index) in item.goods" :key="index">{{item.goods_attr.join('、')}}</p>
                 </div>
               </td>
               <td>
@@ -131,6 +136,11 @@
             </tr>
             </tbody>
           </table>
+        </div>
+        <div class="empty" v-else style="margin-top: 200px;">
+          <img src="@/assets/img/empty.png" width="68" />
+          <p>Payment failure</p>
+          <div>暂无数据</div>
         </div>
       </TabPane>
     </Tabs>

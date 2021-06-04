@@ -47,7 +47,7 @@
         </div>
       </div>
 
-      <div class="reduce-item mb30">
+      <div class="reduce-item mb30" v-if="coupons.length > 0" @click="selectCoupon">
         <img src="/static/images/bg2.png" mode="widthFix" class="bg" />
         <div class="between reduce-item-box">
           <p class="f24 ml30">优惠券</p>
@@ -56,17 +56,20 @@
         <img src="/static/images/arrow4.png" mode="widthFix" class="ar" />
       </div>
 
-      <div class="reduce-item mb30">
-        <img src="/static/images/bg2.png" mode="widthFix" class="bg" />
-        <div class="between reduce-item-box">
-          <div class="ml30">
-            <p class="f24">使用积分</p>
-            <p class="f20 c-c9">{{record.score_rate}}积分=1元，单次最多可用{{record.score_use_top}}积分</p>
+      <picker :range="scores" @change="scoreChange">
+        <div class="reduce-item mb30" v-if="scores.length > 0" >
+          <img src="/static/images/bg2.png" mode="widthFix" class="bg" />
+          <div class="between reduce-item-box">
+            <div class="ml30">
+              <p class="f24">使用积分</p>
+              <p class="f20 c-c9">{{record.score_rate}}积分=1元，单次最多可用{{record.score_use_top}}积分</p>
+            </div>
+            <div class="price" v-if="formData.score !== ''"><span>-{{record.score_fee}}</span>元</div>
           </div>
-          <div class="price" v-if="formData.score !== ''"><span>-{{record.score_fee}}</span>元</div>
+          <img src="/static/images/arrow4.png" mode="widthFix" class="ar" />
         </div>
-        <img src="/static/images/arrow4.png" mode="widthFix" class="ar" />
-      </div>
+      </picker>
+
 
       <div class="ml30 mb10">备注</div>
       <c-textarea v-model="formData.user_remark" />
@@ -171,11 +174,28 @@ export default {
           payment(orderNo)
         }
       })
+    },
+    selectCoupon () {
+      mpvue.navigateTo({
+        url: '/pages/coupon/main'
+      })
+    },
+    scoreChange (e) {
+      this.formData.score = this.scores[e.mp.detail.value]
+      this.getData()
     }
   },
 
-  onLoad () {
+  onShow () {
+    console.log('order onShow')
+    const pages = getCurrentPages()
+    console.log('getCurrentPages', pages)
+    this.formData.couponId = store.state.couponId
     this.getData()
+  },
+  onLoad () {
+    console.log('order onLoad')
+    store.commit('SET_COUPONID', 0)
   }
 }
 </script>

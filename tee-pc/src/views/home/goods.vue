@@ -81,7 +81,7 @@
               </Poptip>
             </div>
             <p class="tc" v-else-if="item.check_status === 0">审核中</p>
-            <div class="c-tag" v-else-if="item.check_status === 2">审核不过,重新修改后提交</div>
+            <Button size="small" class="ml10 bg-error" v-else-if="item.check_status === -1" @click="handleModify(item.id)">审核不过,重新修改后提交</Button>
           </div>
         </td>
       </tr>
@@ -142,7 +142,6 @@ export default {
       this.$refs.modalForm.show()
     },
     openCate () {
-      console.log('openCate')
       this.$refs.cateForm.show()
     },
     getCateData () {
@@ -202,6 +201,9 @@ export default {
     },
     handleEdit (id) {
       this.$refs.modalForm.edit(id)
+    },
+    handleModify (id) {
+      this.$refs.modalForm.modify(id)
     }
   }
 }

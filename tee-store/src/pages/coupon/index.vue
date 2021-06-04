@@ -22,7 +22,7 @@
 
     <div class="store-list">
       <div class="store-col slideUp" v-for="i in list" :key="index">
-        <item />
+        <item :record="i" @tap="handleSelect" />
       </div>
     </div>
   </div>
@@ -36,6 +36,7 @@ import cFooter from '@/components/footer'
 import item from './modules/item'
 import config from '@/config'
 import QQMapWX from '@/utils/qqmap-wx-jssdk.min.js'
+import store from '@/store'
 const { mapKey } = config
 const qMap = new QQMapWX({
   key: mapKey
@@ -82,9 +83,13 @@ export default {
     },
     getData () {
       console.log('getData')
-      setTimeout(() => {
-        this.list = [{}, {}, {}, {}]
-      }, 400)
+      this.list = store.state.counponList
+    },
+    handleSelect (id) {
+      store.commit('SET_COUPONID', id)
+      mpvue.navigateBack({
+        delta: -1
+      })
     }
   },
 

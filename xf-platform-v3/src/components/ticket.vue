@@ -109,10 +109,15 @@
     &-titles
       margin-left 12px
       p
+        width 310px
         height 18px
         font-size 16px
         line-height 18px
         color #000000
+        text-overflow ellipsis
+        white-space nowrap
+        word-break break-all
+        overflow hidden
       div
         font-size 12px
         line-height 15px

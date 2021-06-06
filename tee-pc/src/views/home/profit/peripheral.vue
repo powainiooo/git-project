@@ -93,7 +93,7 @@ export default {
     handleWithdraw (id) {
       if (this.isAjax) return
       this.isAjax = true
-      postAction('/shopapi/order/refund', {
+      postAction('/shopapi/withdraw/update', {
         id
       }).then(res => {
         this.isAjax = false

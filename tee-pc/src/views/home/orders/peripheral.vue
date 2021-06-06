@@ -29,7 +29,7 @@
         <col width="80" />
         <col width="80" />
         <col width="150" />
-        <col width="110" />
+        <col width="120" />
         <col />
         <col width="150" />
       </colgroup>
@@ -54,12 +54,28 @@
         <td><div>{{item.created_at}}</div></td>
         <td><div>{{item.fetch_code}}</div></td>
         <td><div>{{item.order_no}}</div></td>
-        <td><div>{{item.goods_name}}</div></td>
-        <td><div>{{item.goods_attr.join('、')}}</div></td>
-        <td><div>{{item.buy_nums}}件</div></td>
-        <td><div>{{item.goods_price}}元</div></td>
         <td>
-          <div>{{item.pay_amount}</div>
+          <div>
+            <p v-for="(item, index) in item.goods" :key="index">{{item.goods_name}}</p>
+          </div>
+        </td>
+        <td>
+          <div>
+            <p v-for="(item, index) in item.goods" :key="index">{{item.goods_attr.join('、')}}</p>
+          </div>
+        </td>
+        <td>
+          <div>
+            <p v-for="(item, index) in item.goods" :key="index">{{item.buy_nums}}件</p>
+          </div>
+        </td>
+        <td>
+          <div>
+            <p v-for="(item, index) in item.goods" :key="index">{{item.goods_price}}元</p>
+          </div>
+        </td>
+        <td>
+          <div>{{item.pay_amount}}元</div>
         </td>
         <td>
           <div>{{item.user_remark || '--'}}</div>
@@ -72,11 +88,11 @@
         </td>
         <td>
           <div class="">
-            <Poptip title="确认退款？" confirm @on-ok="handleRefund(item.id)">
-              <Button size="min">退款</Button>
+            <Poptip title="确认退款？" confirm @on-ok="handleRefund(item.id)" v-if="item.status !== 1 && item.status !== -9">
+              <Button size="small">退款</Button>
             </Poptip>
             <Poptip title="确认提货？" confirm @on-ok="orderDone(item.id)">
-              <Button size="min" class="bg-main ml10">确认提货</Button>
+              <Button size="small" class="bg-main ml10">确认提货</Button>
             </Poptip>
           </div>
         </td>

@@ -89,6 +89,7 @@ export default {
   },
 
   onLoad (options) {
+    Object.assign(this.$data, this.$options.data())
     this.key = options.key || 'score'
     this.current = this.hash[this.key]
     this.getData()

@@ -28,7 +28,7 @@
   <div class="c-search-cover" v-if="showMask" @touchmove.stop="tmove"></div>
   <div class="c-search-bar" v-if="!isSearch">
     <input v-model="keyword"
-           :class="{'holder': keyword === ''}"
+           :class="{'holder': !showMask}"
            @click="showMask = true"
            @focus="showMask = true"
            @blur="showMask = false"

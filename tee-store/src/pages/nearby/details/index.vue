@@ -8,24 +8,23 @@
   <c-header />
   <div class="container" style="padding-bottom: 0;">
     <!-- 地址信息 -->
-    <addr-info showCart showShare showService :record="addrData"  />
+    <addr-info :showBtn="false" showCart showShare showService :record="addrData"  />
 
     <div class="container2 nearby-container">
       <div class="nearby-goods-detail">
-        <img src="/static/images/img.jpg" mode="aspectFill" class="bg" />
+        <img :src="imgSrc + goods.cover" mode="aspectFill" class="bg" />
         <div class="between">
-          <div class="title">时空穿越小熊飞碟款 双层玻璃杯盘组</div>
+          <div class="title">{{goods.title}}</div>
           <div class="prices">
-            <p>100元</p>
+            <p>{{goods.price}}元</p>
             <div class="acenter">
               <img src="/static/images/jfh.png" mode="widthFix" />
-              <div><span>90</span>元</div>
+              <div><span>{{goods.sell_price}}</span>元</div>
             </div>
           </div>
         </div>
         <div class="flex mt30 ml35">
-          <div class="c-tag">满400包邮</div>
-          <div class="c-tag">预计3天发货</div>
+          <div class="c-tag" v-for="item in tags" :key="index">{{item}}</div>
         </div>
       </div>
       <div class="details-content">
@@ -36,14 +35,14 @@
 
     <div class="footer-btns">
       <div class="r">
-        <button class="style1" @click="openDetail">立即购买</button>
+        <button class="style1" @click="openDetail('buy')">立即购买</button>
       </div>
       <div class="r">
-        <button @click="openDetail">加入购物车</button>
+        <button @click="openDetail('cart')">加入购物车</button>
       </div>
     </div>
 
-    <c-details ref="details" :record="record" />
+    <c-details ref="details" :record="record" @confirm="handleConfirm" />
   </div>
 </div>
 </template>
@@ -52,7 +51,8 @@
 import cHeader from '@/components/header'
 import addrInfo from '@/components/addrInfo'
 import cDetails from './modules/details'
-import { getAction } from '@/utils/api'
+import { getAction, postAction } from '@/utils/api'
+import store from '../../../store'
 export default {
   components: {
     cHeader,
@@ -63,7 +63,8 @@ export default {
     addrData () {
       return {
         cartNum: this.cartNum,
-        cartType: 2
+        cartType: 2,
+        shopId: 0
       }
     }
   },
@@ -72,37 +73,77 @@ export default {
       imgSrc: mpvue.imgSrc,
       id: '',
       record: {},
-      cartNum: 0
+      goods: {},
+      attrs: [],
+      tags: [],
+      cartNum: 0,
+      btnType: '',
+      isAjax: false
     }
   },
 
   methods: {
-    openDetail () {
+    openDetail (type) {
+      this.btnType = type
       this.$refs.details.show()
     },
     getData () {
-      getAction('xxxx', {
+      getAction('/userapi/nearby/show', {
         id: this.id
       }).then(res => {
         if (res.code === 0) {
           this.record = res.data
+          this.goods = res.data.goods
+          this.attrs = res.data.attrs
+          this.tags = res.data.detail.tags
         }
       })
     },
+    handleConfirm (goods) {
+      if (this.btnType === 'buy') {
+        store.commit('SET_NEARBYGOODS', goods)
+        this.$refs.details.hide()
+        mpvue.navigateTo({
+          url: '/pages/order/confirm2/main?type=buy'
+        })
+      } else if (this.btnType === 'cart') {
+        this.addCart(goods)
+      }
+    },
     getCart () {
       getAction('/userapi/shopping/card/count', {
-        type: 2
+        type: 2,
+        shop_id: 0
       }).then(res => {
         if (res.code === 0) {
           this.cartNum = res.data.count
+        }
+      })
+    },
+    addCart (goods) {
+      if (this.isAjax) return
+      this.isAjax = true
+      postAction('/userapi/shopping/card/store', {
+        type: 2,
+        goods
+      }).then(res => {
+        this.isAjax = false
+        if (res.code === 0) {
+          mpvue.showToast({
+            title: '添加成功'
+          })
+          this.getCart()
+          this.$refs.details.hide()
         }
       })
     }
   },
 
   onLoad (options) {
+    Object.assign(this.$data, this.$options.data())
     this.id = options.id
     this.getData()
+    this.getCart()
   }
 }
 </script>

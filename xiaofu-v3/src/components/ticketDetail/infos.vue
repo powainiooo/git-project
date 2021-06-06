@@ -16,9 +16,13 @@
   margin: 0 25px;
   animation: moveUp .7s cubic-bezier(.3,.79,.41,.91) .2s both;
 }
+.c-ticket-infos .line1 .l {
+  width: 590px;
+}
 .c-ticket-infos .line1 img {
   width: 80px;
   height: 80px;
+  border-radius: 50%;
 }
 .c-ticket-infos .line2 {
   display: flex;
@@ -80,7 +84,9 @@
 <div class="c-ticket-infos">
   <img :src="record.cover_image" class="banner" :class="{'banner-hide': page === 'buy'}" v-if="showBanner && record" />
   <div class="line1 bBorder">
-    <tk-info :record="infoData" :endDate="infoData2" :showEndDate="showEndDate" />
+    <div class="l">
+      <tk-info :record="infoData" :endDate="infoData2" :showEndDate="showEndDate" :ellipsis="false" />
+    </div>
     <img :src="record.logo" mode="aspectFill" v-if="record" />
   </div>
   <div class="line2 bBorder">

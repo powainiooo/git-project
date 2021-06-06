@@ -22,6 +22,7 @@
   width: 80px;
   height: 80px;
   margin-right: 20px;
+  border-radius: 50%;
 }
 .organ-container .line1 .btn {
   width: 174px;

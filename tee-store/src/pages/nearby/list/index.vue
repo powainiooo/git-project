@@ -7,11 +7,11 @@
   <c-header />
   <div class="container" style="padding-bottom: 0;">
     <!-- 地址信息 -->
-    <addr-info showTypes showCart showShare @change="typeChange" />
+    <addr-info :showBtn="false" showTypes showCart showShare :record="addrData" @change="typeChange" />
 
     <div class="container2 nearby-container">
       <div class="mt25">
-        <goods-list />
+        <goods-list :list="list" />
       </div>
     </div>
 
@@ -38,7 +38,8 @@ export default {
     addrData () {
       return {
         cartNum: this.cartNum,
-        cartType: 2
+        cartType: 2,
+        shopId: 0
       }
     }
   },
@@ -68,8 +69,8 @@ export default {
     },
     getCart () {
       getAction('/userapi/shopping/card/count', {
-        shop_id: this.shopId,
-        type: 1
+        shop_id: 0,
+        type: 2
       }).then(res => {
         if (res.code === 0) {
           this.cartNum = res.data.count
@@ -90,6 +91,7 @@ export default {
     }
   },
   onLoad (options) {
+    Object.assign(this.$data, this.$options.data())
     this.getData()
     this.getCart()
   }

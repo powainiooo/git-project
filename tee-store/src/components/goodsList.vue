@@ -28,13 +28,13 @@
          hover-class="hscale"
          hover-stay-time="10"
          @click="toDetail(item)">
-      <div class="imgs"><img src="/static/images/img.jpg" mode="aspectFill" /></div>
-      <div class="titles">春樱系列吸管杯</div>
-      <div class="price1">100元</div>
+      <div class="imgs"><img :src="imgSrc + item.cover" mode="aspectFill" /></div>
+      <div class="titles">{{item.title}}</div>
+      <div class="price1">{{item.price}}元</div>
       <div class="between">
         <div class="acenter">
           <img src="/static/images/jfh.png" mode="widthFix" class="icon" />
-          <div class="price2"><span>80</span>元</div>
+          <div class="price2"><span>{{item.sell_price}}</span>元</div>
         </div>
         <div class="arrow center"><img src="/static/images/arrow1.png" mode="widthFix" /></div>
       </div>
@@ -54,6 +54,7 @@ export default {
   },
   data () {
     return {
+      imgSrc: mpvue.imgSrc
     }
   },
   methods: {

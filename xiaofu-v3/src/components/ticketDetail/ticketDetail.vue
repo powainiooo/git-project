@@ -96,7 +96,7 @@
   height: 100px;
   box-sizing: border-box;
   background: #FFFFFF;
-  border-radius: 18px;
+  border-radius: 22px;
   overflow: hidden;
   display: flex;
   position: relative;
@@ -123,6 +123,7 @@
   width: 100px;
   height: 100px;
   border-radius: 0;
+  background-color: transparent;
 }
 .form-list li .content button img {
   width: 100%;
@@ -179,10 +180,10 @@
   </div>
 
   <div class="c-ticket-operates" :class="{'c-ticket-operates-bottom': page === 'buy'}">
-    <div class="price">{{price}}<span>RMB</span></div>
-    <div class="hint" v-if="false">
+    <div class="price" v-if="record.sub_state != 6">{{price}}<span>RMB</span></div>
+    <div class="hint" v-else>
       <p>未开售</p>
-      <div>开票时间: <span>2021/06/01  20:00</span></div>
+      <div>开票时间: <span>{{record.start_date}}  {{record.start_time}}</span></div>
     </div>
     <button @click="handleConfirm" :disabled="buyDisabled">{{btnName}}</button>
   </div>
@@ -227,7 +228,7 @@ export default {
       return reg.test(this.formData.mobile)
     },
     btnName () {
-      const arr = ['审核中', '审核失败', '购买', '已停止', '已售罄', '已结束']
+      const arr = ['审核中', '审核失败', '购买', '已停止', '已售罄', '已结束', '购买']
       return arr[this.record.sub_state]
     },
     buyDisabled () {

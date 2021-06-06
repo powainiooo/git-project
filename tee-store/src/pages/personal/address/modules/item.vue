@@ -58,7 +58,7 @@ export default {
   },
   methods: {
     handleDel () {
-      mpvue.showToast({
+      mpvue.showModal({
         title: '警告？',
         content: '是否确认删除本条记录？',
         success: res => {
@@ -70,6 +70,7 @@ export default {
                 mpvue.showToast({
                   title: res.msg
                 })
+                this.$emit('ok')
               }
             })
           }

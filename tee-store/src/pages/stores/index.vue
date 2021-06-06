@@ -21,7 +21,7 @@
     </div>
     <div class="store-list">
       <div class="store-col slideUp" v-for="i in list" :key="index">
-        <item :key="id" :record="i" />
+        <item :key="id" :record="i" @tap="toDetail" />
       </div>
     </div>
   </div>
@@ -35,7 +35,8 @@ import cFooter from '@/components/footer'
 import item from './modules/item'
 import config from '@/config'
 import QQMapWX from '@/utils/qqmap-wx-jssdk.min.js'
-import { getAction } from '@/utils/api'
+import { getAction, postAction } from '@/utils/api'
+import store from '@/store'
 const { mapKey } = config
 const qMap = new QQMapWX({
   key: mapKey
@@ -53,7 +54,8 @@ export default {
       longitude: '',
       list: [],
       page: 1,
-      total: 0
+      total: 0,
+      from: ''
     }
   },
 
@@ -80,18 +82,47 @@ export default {
       })
     },
     getData () {
-      getAction('/userapi/shop/index/data', {
-        city: this.city,
+      let url
+      const params = {
         lat: this.latitude,
         lng: this.longitude,
         page: this.page,
         limit: 20
-      }).then(res => {
-        if (res.code === 0) {
-          this.list = this.list.concat(res.data)
-          this.total = res.count
+      }
+      if (this.from === 'tee') {
+        url = '/userapi/shop/index/data'
+        params.city = this.city
+        getAction(url, params).then(res => {
+          if (res.code === 0) {
+            this.list = this.list.concat(res.data)
+            this.total = res.count
+          }
+        })
+      } else {
+        url = '/userapi/shop/valid/list'
+        params.from = Number(this.from)
+        if (params.from === 1) {
+          params.goods = store.state.nearbyGoods
         }
-      })
+        postAction(url, params).then(res => {
+          if (res.code === 0) {
+            this.list = this.list.concat(res.data)
+            this.total = res.count
+          }
+        })
+      }
+    },
+    toDetail (record) {
+      store.commit('SET_STOREINFO', record)
+      if (this.from === 'tee') {
+        mpvue.navigateTo({
+          url: '/pages/goods/main?id=' + record.shop_id
+        })
+      } else {
+        mpvue.navigateBack({
+          delta: -1
+        })
+      }
     }
   },
   onReachBottom () {
@@ -100,7 +131,9 @@ export default {
       this.getData()
     }
   },
-  onLoad () {
+  onLoad (options) {
+    Object.assign(this.$data, this.$options.data())
+    this.from = options.from || 'tee'
     this.initCity()
   }
 }

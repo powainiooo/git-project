@@ -9,8 +9,8 @@
       <span>{{record.name}}</span>
       <img src="/static/images/arrow1.png" mode="widthFix" class="w10 ml20" />
     </button>
-    <button class="btn" v-if="showService">
-      <img src="/static/images/arrow1.png" mode="widthFix" class="w26 mr20" />
+    <button class="btn acenter" v-if="showService">
+      <img src="/static/images/service.png" mode="widthFix" class="w26 mr20" />
       <span>客服</span>
     </button>
     <picker :range="cList" range-key="cname" @change="typeChange">
@@ -78,7 +78,6 @@ export default {
 	},
   mounted () {
 	  if (this.showTypes) {
-	    console.log('showTypes')
       getAction('/userapi/nearby/cate/all').then(res => {
         if (res.code === 0) {
           this.cList = res.data

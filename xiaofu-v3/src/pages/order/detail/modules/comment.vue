@@ -37,7 +37,7 @@
 </style>
 
 <template>
-<div class="c-comment">
+<div class="c-comment" v-if="showComment">
   <ul class="stars">
     <li v-for="i in 5" :key="i" @click="setRank(i)">
       <img src="/static/images/common/star-select.png" v-if="(i + 1) <= rank"/>
@@ -71,7 +71,8 @@ export default {
     return {
       rank: 0,
       comment: '',
-      isAjax: false
+      isAjax: false,
+      showComment: true
     }
   },
   methods: {
@@ -94,6 +95,7 @@ export default {
           })
           this.rank = 0
           this.comment = ''
+          this.showComment = false
         }
       })
     }

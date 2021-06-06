@@ -224,6 +224,7 @@ export default {
     }
   },
   onLoad (options) {
+    Object.assign(this.$data, this.$options.data())
     this.shopId = options.id || 1
     this.getData()
     this.getCart()

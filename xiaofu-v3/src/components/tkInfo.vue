@@ -24,7 +24,8 @@
 .c-tk-date div { font-family: HelveB; }
 .c-end-date:before {  content: ''; width: 10px; height: 2px; background-color: #C8C9CA; transform: scaleY(.5); position: absolute; left: -15px; top: 50%; }
 .c-tk-title { flex: 1; overflow: hidden; }
-.c-tk-title p { font-size: 26px; font-family: HelveB; line-height: 30px; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; word-break: break-all; }
+.c-tk-title p { font-size: 26px; font-family: HelveB; line-height: 30px; }
+.c-tk-title p.ellipsis { text-overflow: ellipsis; overflow: hidden; white-space: nowrap; word-break: break-all; }
 .c-tk-title div { font-size: 20px; font-family: HelveL; color: #9E9E9F; line-height: 25px; }
 </style>
 
@@ -39,7 +40,7 @@
     <div>{{endDate.day}}</div>
   </div>
   <div class="c-tk-title" v-if="showTitle">
-    <p>{{record.name}}</p>
+    <p :class="{'ellipsis': ellipsis}">{{record.name}}</p>
     <div>{{record.host}}</div>
   </div>
 </div>
@@ -64,6 +65,10 @@ export default {
     showEndDate: {
       type: Boolean,
       default: false
+    },
+    ellipsis: {
+      type: Boolean,
+      default: true
     },
     endDate: {
       type: Object,

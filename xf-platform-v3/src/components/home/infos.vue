@@ -110,7 +110,7 @@
     </transition>
     <div class="tr" v-for="item in prices" :key="item.id">
       <div class="names pr">
-        <h3>{{item.name}}-{{item.min}}</h3>
+        <h3>{{item.name}}</h3>
         <div class="between">
 <!--          <span>{{item.num}}</span>-->
           <input v-model="item.num"
@@ -141,13 +141,13 @@
       <div class="imgs wxcode">
         <img :src="record.miniapp_code_image" width="128" />
       </div>
-      <Button size="small" @click="downloadImg(record.miniapp_code_image, '链接码')">下载链接码</Button>
+      <Button size="small" @click="downloadImg(record.miniapp_code_image)">下载链接码</Button>
     </div>
     <div class="item">
       <div class="imgs wxcode">
         <img :src="record.check_code_image" width="128" />
       </div>
-      <Button size="small" @click="downloadImg2(record.check_code_image, '验票码')">下载验票码</Button>
+      <Button size="small" @click="downloadImg(record.check_code_image)">下载验票码</Button>
     </div>
   </div>
 </div>
@@ -249,37 +249,8 @@ export default {
     onfocus () {
       console.log('onfocus')
     },
-    downloadImg (url, fileName) {
-      var x = new XMLHttpRequest()
-      x.open('GET', url, true)
-      x.responseType = 'blob'
-      x.onload = function (e) {
-        var url = window.URL.createObjectURL(x.response)
-        var a = document.createElement('a')
-        a.href = url
-        a.download = fileName
-        a.click()
-      }
-      x.send()
-    },
-    downloadImg2 (url, fileName) {
-      var canvas = document.createElement('canvas')
-      var img = document.createElement('img')
-      img.onload = function (e) {
-        canvas.width = img.width
-        canvas.height = img.height
-        var context = canvas.getContext('2d')
-        context.drawImage(img, 0, 0, img.width, img.height)
-        canvas.getContext('2d').drawImage(img, 0, 0, img.width, img.height)
-        canvas.toBlob((blob) => {
-          const link = document.createElement('a')
-          link.href = window.URL.createObjectURL(blob)
-          link.download = fileName
-          link.click()
-        }, 'image/png')
-      }
-      img.setAttribute('crossOrigin', 'Anonymous')
-      img.src = url
+    downloadImg (url) {
+      window.open(`${window.baseUrl}/api/common/down_image?path=${url}`)
     }
   }
 }

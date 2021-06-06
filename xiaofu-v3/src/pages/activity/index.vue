@@ -22,6 +22,7 @@
   height: 80px;
   border-radius: 50%;
   background-color: #ffffff;
+  overflow: hidden;
 }
 .activity-page .line1 .infos .logo img {
   width: 100%;

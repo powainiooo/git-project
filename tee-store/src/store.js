@@ -16,7 +16,8 @@ const store = new Vuex.Store({
     storeInfo: {},
     counponList: [],
     couponId: 0,
-    menuInfo: 0
+    menuInfo: 0,
+    nearbyGoods: {}
   },
   mutations: {
     SET_TOKEN (state, data) {
@@ -40,6 +41,9 @@ const store = new Vuex.Store({
     },
     SET_COUPONID (state, data) {
       state.couponId = data
+    },
+    SET_NEARBYGOODS (state, data) {
+      state.nearbyGoods = data
     },
     SET_LOGIN (state, data) {
       state.isLogin = data

@@ -121,8 +121,9 @@
                   <span class="t-unit" v-if="item.limit !== ''">张</span>
                 </div>
               </div>
-              <div style="margin-top: 10px;" v-if="item.type === 'diy'">
+              <div class="pr" style="margin-top: 10px;" v-if="item.type === 'diy'">
                 <Input v-model="item.price" placeholder="价格（元）" />
+                <span class="t-unit" v-if="item.price !== ''">元</span>
               </div>
             </div>
             <a href="javascript:;" class="btn-add" @click="addTicket"><img src="@/assets/img/ico-add.png" /></a>

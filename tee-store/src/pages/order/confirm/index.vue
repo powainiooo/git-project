@@ -194,6 +194,7 @@ export default {
     this.getData()
   },
   onLoad () {
+    Object.assign(this.$data, this.$options.data())
     console.log('order onLoad')
     store.commit('SET_COUPONID', 0)
   }

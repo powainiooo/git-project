@@ -3,6 +3,8 @@
 .c-store-item .line1 { height: 80px; background-color: #EDECEB; }
 .c-store-item .line1 .l { margin-left: 35px; }
 .c-store-item .line1 .logo { width: 175px; }
+.c-store-item .line1 .x { width: 15px; margin: 0 10px; }
+.c-store-item .line1 .logo2 { height: 40px; }
 .c-store-item .line1 .r { width: 168px; height: 100%; background-color: #F0916C; font-size: 24px; color: #FFFFFF; }
 .c-store-item .line2 { margin: 22px 35px; font-size: 24px; }
 .c-store-item .line3 { display: flex; align-items: baseline; margin-bottom: 10px; margin-left: 35px; }
@@ -15,8 +17,11 @@
 <template>
 <div class="c-store-item" hover-class="hscale" hover-stay-time="10" @click="toDetail">
   <div class="line1 between">
-    <div class="l">
-      <img :src="imgSrc + record.shop_logo" mode="widthFix" class="logo" />
+    <div class="l acenter">
+<!--      <img :src="imgSrc + record.shop_logo" mode="widthFix" class="logo" />-->
+      <img src="/static/images/logo@2x.png" mode="widthFix" class="logo" />
+      <img src="/static/images/x.png" mode="widthFix" class="x" />
+      <img :src="imgSrc + record.shop_logo" mode="heightFix" class="logo2" />
     </div>
     <div class="r center">
       <img src="/static/images/icon-cup.png" mode="widthFix" class="w24 mr5" />
@@ -73,10 +78,7 @@ export default {
       })
     },
     toDetail () {
-      store.commit('SET_STOREINFO', this.record)
-      mpvue.navigateTo({
-        url: '/pages/goods/main?id=' + this.record.shop_id
-      })
+      this.$emit('tap', this.record)
     }
   }
 }

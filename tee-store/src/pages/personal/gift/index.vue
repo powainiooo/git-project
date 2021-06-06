@@ -52,7 +52,8 @@ export default {
   methods: {
   },
 
-  created () {
+  onLoad () {
+    Object.assign(this.$data, this.$options.data())
   }
 }
 </script>

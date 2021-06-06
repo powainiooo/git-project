@@ -44,11 +44,11 @@ const ajax = (opts, autoMsg = true) => {
 }
 
 // 通用get
-export const getAction = (url, data = {}) => {
+export const getAction = (url, data = {}, autoMsg = true) => {
   return ajax({
     url,
     data
-  })
+  }, autoMsg)
 }
 // 通用post
 export const postAction = (url, data = {}, autoMsg = true) => {

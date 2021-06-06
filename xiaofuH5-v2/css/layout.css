@@ -167,6 +167,7 @@
 .c-ticket-infos .line1 img {
    width: 0.8rem;
    height: 0.8rem;
+   border-radius: 50%;
 }
 .c-ticket-infos .line2 {
    display: flex;

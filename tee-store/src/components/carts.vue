@@ -6,12 +6,12 @@
 .c-carts .list .list-item .del img { width: 100%; }
 .c-carts .list .list-item .c-goods-item { flex: 1; }
 .c-carts .list .list-item .c-goods-item .infos .intro { width: 320px; }
-.c-carts .footer-btns { left: -25px; right: -25px; }
+.c-carts .footer-btns { left: -25px; right: -25px; z-index: 1100 }
 </style>
 
 <template>
-<div class="c-drawer" v-if="visible">
-  <div class="c-drawer-cover" :class="{'c-drawer-cover-show': showItem}" @animationend="animationend"></div>
+<div class="c-drawer" v-if="visible" style="z-index: 1500">
+  <div class="c-drawer-cover" :class="{'c-drawer-cover-show': showItem}"></div>
   <div class="c-drawer-box c-carts" :class="{'c-drawer-show': showItem}">
     <div class="btn-circle c-drawer-close" @click="hide"><img src="/static/images/x2.png" /></div>
     <div class="c-drawer-title">
@@ -27,7 +27,10 @@
           <div class="imgs"><img :src="imgSrc + item.cover" mode="aspectFill" /></div>
           <div class="infos">
             <h3 class="title">{{item.title}}</h3>
-            <div class="intro">{{item.attrs}}</div>
+            <div class="intro" v-if="type === 1">{{item.attrs}}</div>
+            <div class="intro" v-else>
+              <span class="c-tag" v-for="(attr, i2) in item.attr_names" :key="i2">{{attr}}</span>
+            </div>
             <div class="price"><span>{{item.price}}</span>元</div>
             <div class="tagC nums">{{item.buy_nums}}</div>
           </div>
@@ -77,7 +80,7 @@ export default {
         if (res.code === 0) {
           let price = 0
           res.data.forEach(i => {
-            i.attrs = i.attr_names.join('-')
+            i.attrs = i.attr_names.join('、')
             price += Number(i.price) * Number(i.buy_nums)
           })
           this.price = price
@@ -91,8 +94,12 @@ export default {
     },
     hide () {
       this.showItem = false
+      setTimeout(() => {
+        this.visible = false
+      }, 500)
     },
     animationend () {
+      console.log('animationend')
       this.visible = false
     },
     del (id) {
@@ -105,9 +112,15 @@ export default {
       })
     },
     confirm () {
-      mpvue.navigateTo({
-        url: '/pages/order/confirm/main'
-      })
+      if (this.type === 1) {
+        mpvue.navigateTo({
+          url: '/pages/order/confirm/main'
+        })
+      } else if (this.type === 2) {
+        mpvue.navigateTo({
+          url: '/pages/order/confirm2/main?type=cart'
+        })
+      }
     }
   }
 }

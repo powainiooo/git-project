@@ -33,7 +33,40 @@ export const promisify = api => {
   }
 }
 
+export const checkAddr = obj => {
+  if (obj.name === '') {
+    mpvue.showToast({
+      icon: 'none',
+      title: '请输入收件姓名'
+    })
+    return false
+  }
+  if (obj.phone === '') {
+    mpvue.showToast({
+      icon: 'none',
+      title: '请输入联系电话'
+    })
+    return false
+  }
+  if (obj.province === '') {
+    mpvue.showToast({
+      icon: 'none',
+      title: '请选择省市区'
+    })
+    return false
+  }
+  if (obj.address === '') {
+    mpvue.showToast({
+      icon: 'none',
+      title: '请输入详细地址'
+    })
+    return false
+  }
+  return true
+}
+
 export default {
   formatNumber,
-  formatTime
+  formatTime,
+  checkAddr
 }

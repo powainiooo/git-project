@@ -13,38 +13,33 @@
     <div class="btn-circle c-drawer-close" @click="hide"><img src="/static/images/x2.png" /></div>
     <div class="c-drawer-scroll">
       <div class="nearby-goods-detail">
-        <img src="/static/images/img.jpg" mode="aspectFill" class="bg" />
+        <img :src="imgSrc + record.goods.cover" mode="aspectFill" class="bg" />
         <div class="between">
-          <div class="title">时空穿越小熊飞碟款 双层玻璃杯盘组</div>
+          <div class="title">{{record.goods.title}}</div>
           <div class="prices">
-            <p>100元</p>
+            <p>{{record.goods.price}}元</p>
             <div class="acenter">
               <img src="/static/images/jfh.png" mode="widthFix" />
-              <div><span>90</span>元</div>
+              <div><span>{{record.goods.sell_price}}</span>元</div>
             </div>
           </div>
         </div>
         <div class="flex mt30 ml35">
-          <div class="c-tag">满400包邮</div>
-          <div class="c-tag">预计3天发货</div>
+          <div class="c-tag" v-for="item in tags" :key="index">{{item}}</div>
         </div>
       </div>
       <div class="borderB mb40 mt20 ml35 mr35 hr"></div>
 
-      <div class="cates">
-        <h3>温度</h3>
+      <div class="cates" v-for="(cate, i1) in record.attrs" :key="id">
+        <h3>{{cate.attr_name}}</h3>
         <ul>
-          <li class="btn btn-style1">冰</li>
-          <li class="btn btn-style2">温</li>
-          <li class="btn btn-style2">烫</li>
-        </ul>
-      </div>
-      <div class="cates">
-        <h3>温度</h3>
-        <ul>
-          <li class="btn btn-style1">冰</li>
-          <li class="btn btn-style2">温</li>
-          <li class="btn btn-style2">烫</li>
+          <li v-for="(child, i2) in cate.children"
+              :key="id"
+              class="btn "
+              :class="{
+              'btn-style1': child.id === cateIds['c'+cate.id],
+              'btn-style2': child.id !== cateIds['c'+cate.id]
+            }" @click="selectCate('c'+cate.id, child.id)">{{child.attr_name}}</li>
         </ul>
       </div>
     </div>
@@ -56,7 +51,7 @@
         </picker>
       </div>
       <div class="r">
-        <button>确定</button>
+        <button @click="handleConfirm">确定</button>
       </div>
     </div>
   </div>
@@ -71,8 +66,10 @@ export default {
   },
   data() {
     return {
+      imgSrc: mpvue.imgSrc,
       visible: false,
       showItem: false,
+      tags: [],
       cates: [],
       cateIds: {},
       nums: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
@@ -80,23 +77,20 @@ export default {
       isAjax: false
     }
   },
-  watch: {
-    record: {
-      handle (data) {
-        const ids = {}
-        for (const i of data.attrs) {
-          ids[`c${i.id}`] = i.children[0].id
-        }
-        this.cateIds = ids
-      },
-      deep: true
-    }
-  },
   methods: {
     show () {
       this.visible = true
       this.$nextTick(() => {
-        this.showItem = true
+        setTimeout(() => {
+          this.showItem = true
+        }, 50)
+
+        const ids = {}
+        for (const i of this.record.attrs) {
+          ids[`c${i.id}`] = i.children[0].id
+        }
+        this.cateIds = ids
+        this.tags = this.record.detail.tags
       })
     },
     hide () {
@@ -105,21 +99,22 @@ export default {
         this.visible = false
       }, 500)
     },
+    selectCate (key, id) {
+      this.cateIds[key] = id
+    },
     numChange (e) {
       this.num = this.nums[e.mp.detail.value]
     },
-    addCart () {
-      if (this.isAjax) return
+    handleConfirm () {
       const ids = []
       for (const key in this.cateIds) {
         ids.push(this.cateIds[key])
       }
       const goods = {
-        nearby_id: this.record.id,
+        nearby_id: this.record.goods.id,
         buy_nums: this.num,
         attrs: ids
       }
-      this.isAjax = true
       this.$emit('confirm', goods)
     }
   }

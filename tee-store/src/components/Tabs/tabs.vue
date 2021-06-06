@@ -1,10 +1,5 @@
 <style scoped>
-.c-tabs-btns { display: flex; justify-content: center; }
-.c-tabs-btns li { width: 320px; height: 100px; display: flex; justify-content: center; align-items: center; font-size: 30px; color: #B9BABB; border-radius: 50px 50px 0 0; background-color: #EDECEB; margin-right: 20px; transition: all .3s cubic-bezier(.23,.78,.33,.97); }
-.c-tabs-btns li.active { background-color: #FFFFFF; color: #F0916C; box-shadow: 0px 3px 20px 0px rgba(0, 0, 0, 0.08); }
-.c-tabs-btns li:last-child { margin-right: 0; }
-.c-tabs-frame { width: 100%; overflow: hidden; position: relative; z-index: 5; }
-.c-tabs-content { overflow: hidden; display: flex; transition: all .4s cubic-bezier(.23,.78,.33,.97); }
+
 </style>
 
 <template>

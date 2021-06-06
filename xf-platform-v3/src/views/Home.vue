@@ -179,6 +179,8 @@ export default {
       }
     },
     gotoDetail (index) {
+      const data = this.list[index]
+      if (data.sub_state === 1) return
       this.touchIndex = -1
       this.selectRecord = this.list[index]
       postAction('/editor/ticket/detail', {

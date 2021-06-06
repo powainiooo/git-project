@@ -1,5 +1,5 @@
 <style scoped>
-.c-tab-pane { flex: 1; }
+
 </style>
 
 <template>

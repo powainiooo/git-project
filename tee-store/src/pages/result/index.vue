@@ -46,15 +46,23 @@ export default {
   },
   data () {
     return {
-      status: 'suc'
+      status: 'suc',
+      orderId: '',
+      from: ''
     }
   },
 
   methods: {
     toOrder () {
-      mpvue.navigateTo({
-        url: '/pages/order/list/main'
-      })
+      if (this.from === 'tee') {
+        mpvue.navigateTo({
+          url: `/pages/order/detail/tee/main?id=${this.orderId}`
+        })
+      } else {
+        mpvue.navigateTo({
+          url: `/pages/order/detail/nearby/main?id=${this.orderId}`
+        })
+      }
     },
     backIndex () {
       mpvue.reLaunch({
@@ -65,6 +73,8 @@ export default {
 
   onLoad (option) {
     this.status = option.result
+    this.orderId = option.id
+    this.from = option.from
   }
 }
 </script>

@@ -7,17 +7,23 @@
   <c-header />
   <div class="container2 ovh order-detail">
     <div class="header between">
-      <div class="f30">{{order.express_type === 0 ? '自提' : '邮寄'}}</div>
+      <div class="f30">{{order.express_type === 0 ? '门店自提' : '邮寄'}}</div>
       <div class="flex">
-        <button class="btn btn-style3 mr20" v-if="order.status === 4">待发货</button>
-        <button class="btn-circle btn-style1 mr20" @click="makephone"><img src="/static/images/phone.png" mode="widthFix" class="w26"></button>
-        <button class="btn-circle btn-style1" @click="btnGuide"><img src="/static/images/icon-guide.png" mode="widthFix" class="w26"></button>
+        <button class="btn btn-style3 mr20" v-if="order.express_type === 1 && order.status === 4">待发货</button>
+        <button class="btn-circle btn-style1 mr20" @click="makephone" v-if="order.express_type === 0">
+          <img src="/static/images/phone.png" mode="widthFix" class="w26">
+        </button>
+        <button class="btn-circle btn-style1" @click="btnGuide" v-if="order.express_type === 0">
+          <img src="/static/images/icon-guide.png" mode="widthFix" class="w26">
+        </button>
         <button class="btn-circle btn-style1" @click="openPost" v-if="false"><img src="/static/images/post.png" mode="widthFix" class="w34"></button>
-        <button open-type="contact" class="btn-circle btn-style1"><img src="/static/images/service.png" mode="widthFix" class="w26"></button>
+        <button open-type="contact" class="btn-circle btn-style1" v-if="order.express_type === 1">
+          <img src="/static/images/service.png" mode="widthFix" class="w26">
+        </button>
       </div>
     </div>
     <div class="status-frame">
-      <div class="mt20" v-if="order.status === 4">
+      <div class="mt20" v-if="order.express_type === 1 && order.status === 4">
         <c-codes :code="order.fetch_code" />
       </div>
       <div class="mt60" v-if="order.status === 7">
@@ -93,8 +99,10 @@ export default {
     cCodes,
     cPost
   },
-  addrStr () {
-    return `${this.address.province} / ${this.address.city} / ${this.address.area}`
+  computed: {
+    addrStr () {
+      return `${this.address.province} / ${this.address.city} / ${this.address.area}`
+    }
   },
   data () {
     return {
@@ -147,7 +155,7 @@ export default {
 
   onLoad (options) {
     Object.assign(this.$data, this.$options.data())
-    this.id = options.id
+    this.id = options.id || 38
     this.getData()
   }
 }

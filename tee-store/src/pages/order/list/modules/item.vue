@@ -15,17 +15,15 @@
 
     <div class="body between">
       <div class="l">
-        <h3 class="f24">{{record.goods[0].goods_name}}</h3>
+        <h3 class="f24">{{record.shop.shop_name}}</h3>
         <p class="f20 c-9e">{{record.created_at}}</p>
         <div class="flex mt20">
-          <div class="imgs mr15"><img src="/static/images/img2.png" mode="aspectFill" /></div>
-          <div class="imgs mr15"><img src="/static/images/img2.png" mode="aspectFill" /></div>
-          <div class="imgs mr15"><img src="/static/images/img2.png" mode="aspectFill" /></div>
+          <div class="imgs mr15" v-for="good in record.goods" :key="index"><img :src="imgSrc + good.goods_cover" mode="aspectFill" /></div>
         </div>
       </div>
       <div class="r">
         <div class="price"><span>{{record.pay_amount}}</span>元</div>
-        <p class="tr f20 c-c9">共{{record.goods.length}}件</p>
+        <p class="tr f20 c-c9">共{{goodsNum}}件</p>
       </div>
     </div>
 
@@ -58,6 +56,7 @@
     </div>
     <div class="cover" v-if="record.status === 7"><span>已完成</span></div>
   </div>
+  <img src="/static/images/sd1.png" class="sd" mode="widthFix" />
 </div>
 </template>
 
@@ -77,6 +76,9 @@ export default {
         return true
       }
       return false
+    },
+    goodsNum () {
+      return this.record.goods.reduce((total, i) => total + i.buy_nums, 0)
     }
   },
 	data() {

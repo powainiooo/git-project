@@ -155,6 +155,7 @@
 .order-item-box .footer .r div { font-size: 54px; line-height: 65px; font-family: DinL; }
 .order-item-box .cover { width: 100%; height: 100%; background-color: rgba(255, 255, 255, 0.85); position: absolute; top: 0; left: 0; display: flex; justify-content: flex-end; }
 .order-item-box .cover span { width: 220px; height: 220px; display: block; background-color: #E8D1B9; border-radius: 0 0 0 50%; position: absolute; top: -110px; right: -110px; font-size: 20px; color: #ffffff; padding-top: 140px; padding-left: 26px; }
+.order-item .sd { width: 100%; position: absolute; left: 0; bottom: 0; }
 
 .steps { width: 320px; display: flex; justify-content: space-between; }
 .steps li { width: 60px; position: relative; text-align: center; margin-right: 70px; }

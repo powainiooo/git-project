@@ -343,7 +343,8 @@ export default {
       postAction('/userapi/nearby/order/create', params).then(res => {
         if (res.code === 0) {
           const orderNo = res.data.order_no
-          payment(orderNo)
+          const orderId = res.data.id
+          payment(orderNo, orderId, 'nearby')
         }
       })
     }

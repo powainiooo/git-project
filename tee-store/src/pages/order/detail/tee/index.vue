@@ -17,7 +17,7 @@
       </div>
     </div>
     <div class="status-frame">
-      <ul class="steps mt20" v-if="false">
+      <ul class="steps mt20" v-if="showSteps" :class="{'mt80': order.status === 2}">
         <li :class="{'active': order.status === 2}">
           <p>已下单</p>
           <img src="/static/images/order/icon1.png" mode="aspectFit" class="img1" />
@@ -80,6 +80,14 @@ export default {
     cFooter,
     cTimer,
     cCodes
+  },
+  computed: {
+    showSteps () {
+      if (this.order.status === 2 || this.order.status === 3 || this.order.status === 4) {
+        return true
+      }
+      return false
+    }
   },
   data () {
     return {

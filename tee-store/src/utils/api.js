@@ -95,7 +95,7 @@ export const getTokenData = () => {
 }
 
 // 支付
-export const payment = orderNo => {
+export const payment = (orderNo, orderId, from) => {
   postAction('/userapi/goods/order/create/pay', {
     order_no: orderNo
   }).then(res => {
@@ -111,7 +111,7 @@ export const payment = orderNo => {
           // this.getMessageAuth()
           console.log('pay success', res)
           mpvue.reLaunch({
-            url: '/pages/result/main?result=suc'
+            url: `/pages/result/main?result=suc&id=${orderId}&from=${from}`
           })
           mpvue.hideLoading()
         },

@@ -42,7 +42,7 @@
           <p class="c-c9 f20">将提前为您打包好</p>
           <button class="btn-radio" @click="togglePack">
             <img src="/static/images/radio.png" mode="widthFix" class="w30" v-if="formData.pack === 0" />
-            <img src="/static/images/radio.png" mode="widthFix" class="w30" v-else />
+            <img src="/static/images/radio-checked.png" mode="widthFix" class="w30" v-else />
           </button>
         </div>
       </div>
@@ -135,6 +135,7 @@ export default {
     },
     togglePack () {
       this.formData.pack = this.formData.pack === 0 ? 1 : 0
+      this.getData()
     },
     getData () {
       postAction('/userapi/goods/order/confirm/page/data', {
@@ -171,7 +172,8 @@ export default {
       }).then(res => {
         if (res.code === 0) {
           const orderNo = res.data.order_no
-          payment(orderNo)
+          const orderId = res.data.id
+          payment(orderNo, orderId, 'tee')
         }
       })
     },

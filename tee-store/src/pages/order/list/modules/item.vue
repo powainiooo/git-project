@@ -4,7 +4,7 @@
 
 <template>
 <div class="order-item">
-  <div class="order-item-box">
+  <div class="order-item-box" hover-class="hscale" hover-stay-time="10" @click="toDetail">
     <div class="header between">
       <div class="logos acenter">
         <img src="/static/images/logo@2x.png" mode="widthFix" class="logo1" />
@@ -15,8 +15,8 @@
 
     <div class="body between">
       <div class="l">
-        <h3 class="f24">喜茶·深圳大仟里店</h3>
-        <p class="f20 c-9e">2021/04/01 13:10:30</p>
+        <h3 class="f24">{{record.goods[0].goods_name}}</h3>
+        <p class="f20 c-9e">{{record.created_at}}</p>
         <div class="flex mt20">
           <div class="imgs mr15"><img src="/static/images/img2.png" mode="aspectFill" /></div>
           <div class="imgs mr15"><img src="/static/images/img2.png" mode="aspectFill" /></div>
@@ -24,44 +24,72 @@
         </div>
       </div>
       <div class="r">
-        <div class="price"><span>45</span>元</div>
-        <p class="tr f20 c-c9">共3件</p>
+        <div class="price"><span>{{record.pay_amount}}</span>元</div>
+        <p class="tr f20 c-c9">共{{record.goods.length}}件</p>
       </div>
     </div>
 
-    <div class="footer between">
+    <div class="footer between" v-if="showFooter">
       <ul class="steps">
-        <li class="active">
+        <li :class="{'active': record.status === 2}">
           <p>已下单</p>
           <img src="/static/images/order/icon1.png" mode="aspectFit" class="img1" />
           <img src="/static/images/order/icon1-active.png" mode="aspectFit" class="img2" />
         </li>
-        <li>
+        <li :class="{'active': record.status === 3}">
           <p>制作中</p>
           <img src="/static/images/order/icon2.png" mode="aspectFit" class="img1" />
           <img src="/static/images/order/icon2-active.png" mode="aspectFit" class="img2" />
         </li>
-        <li>
+        <li :class="{'active': record.status === 4}">
           <p>待取餐</p>
           <img src="/static/images/order/icon3.png" mode="aspectFit" class="img1" />
           <img src="/static/images/order/icon3-active.png" mode="aspectFit" class="img2" />
         </li>
       </ul>
-      <div class="r">
+      <div class="r" v-if="record.status === 3">
         <p>制作时间</p>
-        <div>05:52</div>
+        <div><counter :timer="record.remain_make_time" /></div>
+      </div>
+      <div class="r" v-if="record.status === 4">
+        <p>取餐码</p>
+        <div>{{record.fetch_code}}</div>
       </div>
     </div>
+    <div class="cover" v-if="record.status === 7"><span>已完成</span></div>
   </div>
 </div>
 </template>
 
 <script type='es6'>
+import counter from '@/components/counter'
 export default {
 	name: 'app',
+  components: {
+    counter
+  },
+  props: {
+	  record: Object
+  },
+  computed: {
+    showFooter () {
+      if (this.record.status === 2 || this.record.status === 3 || this.record.status === 4) {
+        return true
+      }
+      return false
+    }
+  },
 	data() {
-		return {}
+		return {
+		  imgSrc: mpvue.imgSrc
+    }
 	},
-	methods: {}
+	methods: {
+    toDetail () {
+      mpvue.navigateTo({
+        url: `/pages/order/detail/tee/main?id=${this.record.id}`
+      })
+    }
+  }
 }
 </script>

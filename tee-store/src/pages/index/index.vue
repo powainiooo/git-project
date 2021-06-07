@@ -1,4 +1,5 @@
 <style>
+.index-page { height: 100vh; overflow: hidden; position: relative; }
 .index-swiper { width: 100%; height: calc(100vh - 104px - 272px); }
 .swiper-sec { height: 100%; }
 .swiper-sec .line1 { padding: 22px 25px 0 32px; }
@@ -14,7 +15,7 @@
 </style>
 
 <template>
-  <div class="page">
+  <div class="page index-page">
     <c-header menus />
     <bubble />
     <div class="container">

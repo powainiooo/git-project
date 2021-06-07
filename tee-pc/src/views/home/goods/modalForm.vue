@@ -48,50 +48,91 @@
           <div class="c-form mt30">
             <div class="c-c8 mb20 ml10">产品基本信息</div>
             <FormItem>
-              <Select placeholder="产品分类" v-model="formData.cid">
+              <Select placeholder="产品分类" v-model="formData.cid" :disabled="isModify && !errData.cid">
                 <Option v-for="item in cateList" :key="item.cid" :value="item.cid">{{item.cname}}</Option>
               </Select>
-              <div class="warn-hint" v-if="false">
-                <Poptip trigger="hover" placement="right" content="不合格" class="warn-pop">
+              <div class="warn-hint" v-if="isModify && errData.cid">
+                <Poptip trigger="hover" placement="right" :content="errData.cid" class="warn-pop">
                   <button class="btn-warn">!</button>
                 </Poptip>
               </div>
             </FormItem>
             <FormItem>
-              <Input placeholder="产品名称" v-model="formData.title">
+              <Input placeholder="产品名称" v-model="formData.title" :disabled="isModify && !errData.title">
                 <span slot="prepend" v-if="isEdit">产品名称</span>
               </Input>
+              <div class="warn-hint" v-if="isModify && errData.title">
+                <Poptip trigger="hover" placement="right" :content="errData.title" class="warn-pop">
+                  <button class="btn-warn">!</button>
+                </Poptip>
+              </div>
             </FormItem>
             <FormItem>
-              <Input type="textarea" :rows="4" placeholder="产品介绍" v-model="formData.content" />
+              <Input type="textarea" :rows="4" placeholder="产品介绍" v-model="formData.content" :disabled="isModify && !errData.content" />
+              <div class="warn-hint" v-if="isModify && errData.content">
+                <Poptip trigger="hover" placement="right" :content="errData.content" class="warn-pop">
+                  <button class="btn-warn">!</button>
+                </Poptip>
+              </div>
             </FormItem>
             <FormItem>
-              <c-date-time type="daterange" placeholder="售卖时间段" v-model="dates" @change="dateChange" />
+              <c-date-time type="daterange"
+                           placeholder="售卖时间段"
+                           v-model="dates"
+                           @change="dateChange"
+                           :disabled="isModify && !errData.date_start" />
+              <div class="warn-hint" v-if="isModify && errData.date_start">
+                <Poptip trigger="hover" placement="right" :content="errData.date_start" class="warn-pop">
+                  <button class="btn-warn">!</button>
+                </Poptip>
+              </div>
             </FormItem>
             <FormItem>
-              <Input placeholder="价格" v-model="formData.price">
+              <Input placeholder="价格" v-model="formData.price" :disabled="isModify && !errData.price">
                 <span slot="prepend" v-if="isEdit">价格</span>
                 <span slot="append">元</span>
               </Input>
+              <div class="warn-hint" v-if="isModify && errData.price">
+                <Poptip trigger="hover" placement="right" :content="errData.price" class="warn-pop">
+                  <button class="btn-warn">!</button>
+                </Poptip>
+              </div>
             </FormItem>
             <FormItem>
-              <Input placeholder="库存" v-model="formData.store_nums">
+              <Input placeholder="库存" v-model="formData.store_nums" :disabled="isModify && !errData.store_nums">
                 <span slot="prepend" v-if="isEdit">库存</span>
               </Input>
+              <div class="warn-hint" v-if="isModify && errData.store_nums">
+                <Poptip trigger="hover" placement="right" :content="errData.store_nums" class="warn-pop">
+                  <button class="btn-warn">!</button>
+                </Poptip>
+              </div>
             </FormItem>
             <FormItem>
-              <Input placeholder="制作时间" v-model="formData.make_time">
+              <Input placeholder="制作时间" v-model="formData.make_time" :disabled="isModify && !errData.make_time">
                 <span slot="prepend" v-if="isEdit">制作时间</span>
                 <span slot="append">分钟</span>
               </Input>
+              <div class="warn-hint" v-if="isModify && errData.make_time">
+                <Poptip trigger="hover" placement="right" :content="errData.make_time" class="warn-pop">
+                  <button class="btn-warn">!</button>
+                </Poptip>
+              </div>
             </FormItem>
-            <FormItem v-for="(item, index) in images" :key="index">
-              <upload-img v-model="images[index]">
-                <span slot="title">产品图</span>
-                <span slot="hint">尺寸1050px*500px</span>
-              </upload-img>
-            </FormItem>
-            <FormItem>
+            <div class="pr">
+              <FormItem v-for="(item, index) in images" :key="index">
+                <upload-img v-model="images[index]">
+                  <span slot="title">产品图</span>
+                  <span slot="hint">尺寸1050px*500px</span>
+                </upload-img>
+              </FormItem>
+              <div class="warn-hint" v-if="isModify && errData.images">
+                <Poptip trigger="hover" placement="right" :content="errData.images" class="warn-pop">
+                  <button class="btn-warn">!</button>
+                </Poptip>
+              </div>
+            </div>
+            <FormItem v-if="!isModify">
               <Button size="small" class="btn1" @click="newImgs">添加详情图</Button>
             </FormItem>
           </div>
@@ -196,6 +237,7 @@ export default {
         ]
       }],
       errData: {},
+      isModify: false,
       id: '',
       isAjax: false
     }
@@ -211,10 +253,12 @@ export default {
     show () {
       this.visible = true
       this.isEdit = false
+      this.isModify = false
       this.reset()
       this.getCateData()
     },
     edit (id) {
+      this.isModify = false
       this.id = id
       this.getCateData()
       getAction('/shopapi/goods/show', {
@@ -230,11 +274,17 @@ export default {
           this.dates = [data.goods.date_start, data.goods.date_end]
           this.images = data.goods.images
           this.specsList = data.attrs
+          const err = {}
+          for (const item of data.refuse) {
+            err[item.field] = item.content
+          }
+          this.errData = err
         }
       })
     },
     modify (id) {
       this.edit(id)
+      this.isModify = true
     },
     handleCancel () {
       this.visible = false
@@ -309,6 +359,7 @@ export default {
           { name: '', price: '' }
         ]
       }]
+      this.errData = {}
     }
   }
 }

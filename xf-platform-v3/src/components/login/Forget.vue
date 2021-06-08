@@ -57,9 +57,10 @@ export default {
         newpassword: this.formData.newpassword,
         newpassword2: this.formData.newpassword2
       }).then(res => {
+        this.isAjax = false
         if (res.code === 1) {
           this.$Message.success('修改成功')
-          this.changePage('infos')
+          this.changePage('login')
         } else {
           this.$Message.warning(res.msg)
         }

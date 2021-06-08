@@ -6,7 +6,7 @@
   &-cover
     size(100%, 100%); background-color rgba(122, 115, 108, 0.5); abTL(0, 0); z-index 0; animation-duration .4s
   &>.box
-    flex 1; animation-duration .4s
+    flex 1; animation-duration .4s; transition all .2s ease-out
   &-title
     size(100%, 80px); abTL(0, 0); background-color #ffffff; border-radius 50px 50px 0 0; between(); padding 0 30px; position relative; box-shadow 0 2px 13px 0 rgba(0, 0, 0, .08)
   &-body

@@ -74,9 +74,9 @@ router.beforeEach((to, from, next) => {
           }
         }).catch(err => {
           console.log('err', err)
-          store.dispatch('logout').then(() => {
-            next({ path: '/login' })
-          })
+          // store.dispatch('logout').then(() => {
+          //   next({ path: '/login' })
+          // })
         })
       }
     }

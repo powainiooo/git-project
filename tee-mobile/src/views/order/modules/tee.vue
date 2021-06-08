@@ -10,7 +10,7 @@
   @load="onLoad"
   style="background-color: #ffffff;"
 >
-  <item v-for="item in list" :key="item.id" :record="item" />
+  <item v-for="(item, index) in list" :key="item.id" :record="item" @refresh="handleRefresh(index)" />
 </van-list>
 </template>
 
@@ -23,6 +23,11 @@ export default {
   components: {
     item
   },
+  computed: {
+    currentDate () {
+      return this.$store.state.currentDate
+    }
+  },
   data () {
     return {
       list: [],
@@ -33,18 +38,33 @@ export default {
     }
   },
   methods: {
-    onLoad () {
-      getAction('/shopapi/order/index/data', {
+    getParams () {
+      return {
         type: 1,
         word: this.word,
-        date: '',
+        date: this.currentDate,
+        // date: '',
         status: '0',
         page: this.page,
         limit: this.limit
-      }).then(res => {
+      }
+    },
+    onLoad () {
+      this.page += 1
+      getAction('/shopapi/order/index/data', this.getParams()).then(res => {
         if (res.code === 0) {
           this.list = this.list.concat(res.data)
-          this.finished = this.list.length === res.count
+          this.finished = this.list.length === res.count || res.data.length === 0
+          this.loading = false
+        }
+      })
+    },
+    handleRefresh (index) {
+      getAction('/shopapi/order/index/data', this.getParams()).then(res => {
+        if (res.code === 0) {
+          const id = this.list[index].id
+          const item = this.list.find(i => i.id === id)
+          this.list[index] = item
         }
       })
     }

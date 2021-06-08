@@ -25,7 +25,7 @@
       <thead>
       <tr>
         <th>下单时间</th>
-        <th>取茶号</th>
+        <th>收益金额</th>
         <th>状态</th>
         <th>提交时间</th>
         <th>完成时间</th>
@@ -35,7 +35,7 @@
       <tbody>
       <tr v-for="item in list" :key="item.id">
         <td><div>{{item.date}}</div></td>
-        <td><div>{{item.fetch_code}}</div></td>
+        <td><div>{{item.money === 0 ? '' : item.money}}</div></td>
         <td><div>{{getStatusName(item.status)}}</div></td>
         <td><div>{{item.updated_at || '--'}}</div></td>
         <td><div>{{item.apply_at || '--'}}</div></td>

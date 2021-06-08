@@ -3,7 +3,7 @@
 .c-header-line { width: 100%; height: 104px; display: flex; justify-content: space-between; align-items: center; padding: 0 30px; }
 .c-header-line .logos { height: 100%; display: flex; align-items: center; }
 .c-header-line .logo { width: 175px; }
-.c-header-line .x { width: 15px; margin-left: 18px; }
+.c-header-line .x { width: 15px; margin: 0 18px; }
 .c-header-line .logo2 { width: 210px; height: 80px; }
 .c-header-line button { width: 60px; height: 56px; background-color: transparent; display: flex; justify-content: center; align-items: center; }
 .c-header-line button .menu { width: 34px; }
@@ -14,8 +14,8 @@
   <div class="c-header-line">
     <div class="logos">
       <img src="@/assets/img/logo@2x.png" mode="widthFix" class="logo" />
-      <img src="@/assets/img/x.png" mode="widthFix" class="x" />
-      <img :src="storeLogo" mode="aspectFill" class="logo2" />
+      <img src="@/assets/img/x.png" mode="widthFix" class="x" v-if="shopData" />
+      <img :src="imgSrc + shopData.shop_logo" mode="aspectFill" class="logo2" v-if="shopData" />
     </div>
     <button v-if="menus"><img src="/static/images/menu.png" mode="widthFix" class="menu" /></button>
   </div>
@@ -29,10 +29,14 @@ export default {
     menus: {
       type: Boolean,
       default: false
+    }
+  },
+  computed: {
+    shopData () {
+      return this.$store.state.globalData.shop
     },
-    storeLogo: {
-      type: String,
-      default: ''
+    imgSrc () {
+      return this.$store.state.imgSrc
     }
   },
   data () {

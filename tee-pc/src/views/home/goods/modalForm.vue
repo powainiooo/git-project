@@ -352,7 +352,7 @@ export default {
         date_end: ''
       }
       this.dates = []
-      this.images = []
+      this.images = ['']
       this.specsList = [{
         name: '',
         children: [

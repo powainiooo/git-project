@@ -1,6 +1,5 @@
 <style scoped>
 .c-calendar { width: 100%; overflow: hidden; }
-.c-calendar-show { top: 100px; }
 .c-calendar .btn1 { padding: 0 38px; }
 
 .c-calendar .operates { display: flex; align-items: center; justify-content: center; }
@@ -19,9 +18,9 @@
 </style>
 
 <template>
-<div class="c-calendar" :class="{'c-calendar-show': show}">
+<div class="c-calendar">
   <div class="ml25 mt20 mb75">
-    <button class="btn btn1">喜茶·深圳宝安大仟里店</button>
+    <button class="btn btn1">{{shopData.shop_name}}</button>
   </div>
   <div class="operates">
     <button @click="prevMonth" :class="{'disabled': prevBtnDisable}"><img src="@/assets/img/arrow-left.png" /></button>
@@ -45,7 +44,8 @@
 </template>
 
 <script type='es6'>
-// import { postAction } from '@/utils/api'
+import { getAction } from '@/utils'
+import { formatDate } from '@/utils/tools'
 
 function isLeap (year) { // 判断是否为闰年
   return (year % 100 === 0 ? (year % 400 === 0 ? 1 : 0) : (year % 4 === 0 ? 1 : 0))
@@ -55,11 +55,13 @@ export default {
   computed: {
     dateStr () {
       return `${this.year}/${this.month + 1 < 10 ? '0' + (this.month + 1) : this.month + 1}`
+    },
+    shopData () {
+      return this.$store.state.globalData.shop
     }
   },
   data () {
     return {
-      show: false,
       week: ['日', '一', '二', '三', '四', '五', '六'],
       year: '',
       month: '',
@@ -68,7 +70,7 @@ export default {
       selectedDate: '',
       daysList: [],
       activityList: [],
-      prevBtnDisable: true
+      prevBtnDisable: false
     }
   },
   created () {
@@ -86,26 +88,24 @@ export default {
     }
     this.year = year
     this.month = month
+    console.log('this.month', this.year, this.month)
     this.getActivityDays()
   },
   watch: {
     'month' (year, month) {
-      let disable = true
-      if (this.year < this.nowYear) {
-        disable = true
-      } else if (this.year === this.nowYear) {
-        disable = this.month <= this.nowMonth
-      } else {
-        disable = false
-      }
-      this.prevBtnDisable = disable
+      // let disable = true
+      // if (this.year < this.nowYear) {
+      //   disable = true
+      // } else if (this.year === this.nowYear) {
+      //   disable = this.month <= this.nowMonth
+      // } else {
+      //   disable = false
+      // }
+      // this.prevBtnDisable = disable
     }
   },
   methods: {
-    toggleShow (status) {
-      this.show = status
-    },
-    formatDate (year, month, day) {
+    formatDate2 (year, month, day) {
       if (month === -1) month = 11
       if (month === 12) month = 0
       month += 1
@@ -133,35 +133,33 @@ export default {
       for (let i = beforeDays - 1; i >= 0; i--) { // 前一个月 日期
         list.push({
           activity: false,
-          date: this.formatDate(year, month - 1, lastMonthDay - i),
+          date: this.formatDate2(year, month - 1, lastMonthDay - i),
           day: lastMonthDay - i
         })
       }
       for (let i = 0; i < thisMonthDay; i++) { // 当月 日期
-        const date = this.formatDate(year, month, i + 1)
         list.push({
-          activity: this.activityList[date] === 1,
-          date,
+          activity: this.activityList[i].valid === 1,
+          date: this.activityList[i].date,
           day: i + 1
         })
       }
       for (let i = 0; i < afterDays; i++) { // 下一个月 日期
         list.push({
           activity: false,
-          date: this.formatDate(year, month + 1, i + 1),
+          date: this.formatDate2(year, month + 1, i + 1),
           day: i + 1
         })
       }
       this.daysList = list
     },
     getActivityDays () {
-      // postAction('/api/ticket/events_calendar', {
-      //   month: `${this.year}${this.month + 1}`
-      // }).then(res => {
-      //   this.activityList = res.data
-      //   this.initCalendar(this.year, this.month)
-      // })
-      this.initCalendar(this.year, this.month)
+      getAction('/shopapi/order/shop/date/nums', {
+        ym: formatDate(new Date(`${this.year}-${this.month + 1}`), 'yyyy-MM')
+      }).then(res => {
+        this.activityList = res.data
+        this.initCalendar(this.year, this.month)
+      })
     },
     prevMonth () { // 上一个月
       if (this.prevBtnDisable) return
@@ -190,7 +188,12 @@ export default {
       if (record.activity) {
         this.selectedDate = record.date
         this.$emit('confirm', record.date)
-        this.toggleShow(false)
+        this.$store.commit('SET_DATE', record.date)
+        setTimeout(() => {
+          this.$router.push({
+            name: 'Order-list'
+          })
+        }, 1000)
       }
     }
   }

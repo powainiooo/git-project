@@ -19,12 +19,12 @@
 
 <template>
 <div class="order-item">
-  <div class="order-box">
+  <div class="order-box" @click="toDetail">
     <div class="header between">
       <span class="nums">{{record.fetch_code || '--'}}</span>
       <div class="acenter">
-        <button class="btn btn-style4 mr20" @click="handleRefund">退款</button>
-        <button class="btn btn-style1">{{record.phone}}</button>
+        <button class="btn btn-style4 mr20" @click.stop="handleRefund" v-if="record.status !== -9 && record.status !== -1 && record.status !== 1">退款</button>
+        <button class="btn btn-style1" @click.stop="makePhone">{{record.phone}}</button>
       </div>
     </div>
     <div class="body">
@@ -42,7 +42,7 @@
       </div>
     </div>
     <div class="footer center borderT" v-if="record.status === 4">
-      <button class="btn btn-style1" @click="handleDone">确认提货</button>
+      <button class="btn btn-style1" @click.stop="handleDone">确认提货</button>
     </div>
   </div>
   <img src="@/assets/img/sd1.png" class="sd" />
@@ -69,7 +69,7 @@ export default {
         }).then(res => {
           if (res.code === 0) {
             this.$Toast.success(res.msg)
-            this.record.status = 3
+            this.$emit('refresh')
           }
         })
       })
@@ -83,7 +83,7 @@ export default {
         }).then(res => {
           if (res.code === 0) {
             this.$Toast.success(res.msg)
-            this.record.status = 7
+            this.$emit('refresh')
           }
         })
       })
@@ -94,6 +94,13 @@ export default {
         query: {
           id: this.record.id
         }
+      })
+    },
+    makePhone () {
+      this.$Dialog.confirm({
+        message: `是否确认拨打${this.record.phone}？`
+      }).then(() => {
+        window.open(`tel:${this.record.phone}`)
       })
     }
   }

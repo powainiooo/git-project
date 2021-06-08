@@ -20,8 +20,8 @@
     <div class="header between">
       <span class="nums">{{record.fetch_code || '--'}}</span>
       <div class="acenter">
-        <button class="btn btn-style4 mr20" @click="handleRefund">退款</button>
-        <button class="btn btn-style1">{{record.phone}}</button>
+        <button class="btn btn-style4 mr20" @click.stop="handleRefund" v-if="record.status !== -9 && record.status !== -1 && record.status !== 1">退款</button>
+        <button class="btn btn-style1" @click.stop="makePhone">{{record.phone}}</button>
       </div>
     </div>
     <div class="body">
@@ -36,16 +36,16 @@
         <h3 class="c-main">备注</h3>
         <p>{{record.user_remark || '--'}}</p>
       </div>
-      <div class="line1">
+      <div class="line1" v-if="record.pack === 1">
         <h3 class="c-main">需提前打包</h3>
       </div>
     </div>
     <div class="footer center borderT" v-if="showFooter">
-      <button class="btn btn-style1" v-if="record.status === 2" @click="handleMake">开始制作</button>
+      <button class="btn btn-style1" v-if="record.status === 2" @click.stop="handleMake">开始制作</button>
       <template v-if="record.status === 4">
-      <button class="btn btn-style4 mr30" @click="handleTag">补打标签</button>
-      <button class="btn btn-style1 mr30" @click="handleGet">通知取餐</button>
-      <button class="btn btn-style1" @click="handleDone">完成订单</button>
+      <button class="btn btn-style4 mr30" @click.stop="handleTag">补打标签</button>
+      <button class="btn btn-style1 mr30" @click.stop="handleGet">通知取餐</button>
+      <button class="btn btn-style1" @click.stop="handleDone">完成订单</button>
       </template>
       <div class="time" v-if="record.status === 3">
         <timer ref="timer" size="small" />
@@ -79,7 +79,8 @@ export default {
     }
   },
   data () {
-    return {}
+    return {
+    }
   },
   mounted () {
     if (this.record.status === 3) {
@@ -96,7 +97,7 @@ export default {
         }).then(res => {
           if (res.code === 0) {
             this.$Toast.success(res.msg)
-            this.record.status = 3
+            this.$emit('refresh')
           }
         })
       })
@@ -110,23 +111,37 @@ export default {
         }).then(res => {
           if (res.code === 0) {
             this.$Toast.success(res.msg)
-            this.record.status = 3
+            this.$emit('refresh')
           }
         })
       })
     },
     handleTag () {
       this.$Dialog.confirm({
-        message: '还没接口'
+        message: '是否补打标签？'
       }).then(() => {
-
+        postAction('/shopapi/order/print', {
+          id: this.record.id
+        }).then(res => {
+          if (res.code === 0) {
+            this.$Toast.success(res.msg)
+            this.$emit('refresh')
+          }
+        })
       })
     },
     handleGet () {
       this.$Dialog.confirm({
-        message: '还没接口'
+        message: '是否通知取餐？'
       }).then(() => {
-
+        postAction('/shopapi/order/notice/fetch', {
+          id: this.record.id
+        }).then(res => {
+          if (res.code === 0) {
+            this.$Toast.success(res.msg)
+            this.$emit('refresh')
+          }
+        })
       })
     },
     handleDone () {
@@ -138,9 +153,16 @@ export default {
         }).then(res => {
           if (res.code === 0) {
             this.$Toast.success(res.msg)
-            this.record.status = 7
+            this.$emit('refresh')
           }
         })
+      })
+    },
+    makePhone () {
+      this.$Dialog.confirm({
+        message: `是否确认拨打${this.record.phone}？`
+      }).then(() => {
+        window.open(`tel:${this.record.phone}`)
       })
     },
     toDetail () {

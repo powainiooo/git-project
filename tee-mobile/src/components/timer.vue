@@ -107,10 +107,14 @@ export default {
   methods: {
     count (timer) {
       this.timer = timer
+      if (timer === 0) {
+        this.$emit('done')
+        return false
+      }
       this.init(timer)
       const t = setInterval(() => {
         this.timer -= 1
-        if (this.timer === 0) {
+        if (this.timer <= 0) {
           clearInterval(t)
           this.$emit('done')
         }

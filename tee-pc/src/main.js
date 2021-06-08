@@ -26,7 +26,8 @@ import {
   Message,
   Modal,
   Cascader,
-  Poptip
+  Poptip,
+  Tooltip
 } from 'view-design'
 
 Vue.component('Button', Button)
@@ -46,6 +47,7 @@ Vue.component('Tabs', Tabs)
 Vue.component('TabPane', TabPane)
 Vue.component('Cascader', Cascader)
 Vue.component('Poptip', Poptip)
+Vue.component('Tooltip', Tooltip)
 
 Vue.use(Storage)
 Vue.prototype.$Message = Message

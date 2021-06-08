@@ -6,7 +6,7 @@
 <div class="container ovh">
   <div class="infos-line">
     <button class="btn">{{storeData.shop_name}}</button>
-    <button class="btn-circle"><img src="@/assets/img/home.png" class="w28" /></button>
+    <button class="btn-circle" @click="backIndex"><img src="@/assets/img/home.png" class="w28" /></button>
   </div>
   <div class="container2 container3 ovh order-detail" style="padding-top: 0;">
     <div class="header between">
@@ -15,8 +15,8 @@
         <div class="f20 c-9e">{{record.created_at}}</div>
       </div>
       <div class="flex">
-        <button class="btn btn-style4 mr20" @click="handleRefund">退款</button>
-        <button class="btn btn-style1">{{record.phone}}</button>
+        <button class="btn btn-style4 mr20" @click="handleRefund" v-if="record.status !== -9 && record.status !== -1 && record.status !== 1">退款</button>
+        <button class="btn btn-style1" @click.stop="makePhone">{{record.phone}}</button>
       </div>
     </div>
     <div class="status-frame">
@@ -100,6 +100,13 @@ export default {
         })
       })
     },
+    makePhone () {
+      this.$Dialog.confirm({
+        message: `是否确认拨打${this.record.phone}？`
+      }).then(() => {
+        window.open(`tel:${this.record.phone}`)
+      })
+    },
     getData () {
       getAction('xxxx', {
         id: this.id
@@ -110,6 +117,11 @@ export default {
             this.$refs.timer.count(this.record.remain_make_time)
           }
         }
+      })
+    },
+    backIndex () {
+      this.$router.push({
+        name: 'Home'
       })
     }
   }

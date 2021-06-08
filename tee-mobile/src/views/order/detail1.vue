@@ -6,7 +6,7 @@
 <div class="container ovh">
   <div class="infos-line">
     <button class="btn">{{storeData.shop_name}}</button>
-    <button class="btn-circle"><img src="@/assets/img/home.png" class="w28" /></button>
+    <button class="btn-circle" @click="backIndex"><img src="@/assets/img/home.png" class="w28" /></button>
   </div>
   <div class="container2 container3 ovh order-detail" style="padding-top: 0;">
     <div class="header between">
@@ -15,8 +15,8 @@
         <div class="f20 c-9e">{{record.created_at}}</div>
       </div>
       <div class="flex">
-        <button class="btn btn-style4 mr20" @click="handleRefund">退款</button>
-        <button class="btn btn-style1">{{record.phone}}</button>
+        <button class="btn btn-style4 mr20" @click="handleRefund" v-if="record.status !== -9 && record.status !== -1 && record.status !== 1">退款</button>
+        <button class="btn btn-style1" @click.stop="makePhone">{{record.phone}}</button>
       </div>
     </div>
     <div class="status-frame">
@@ -37,11 +37,16 @@
           <img src="@/assets/img/order/icon3-active.png" mode="aspectFit" class="img2" />
         </li>
       </ul>
+      <div class="mt20 auto" style="width: 400px;" v-if="record.status === 2">
+        <button class="btn btn-style4 mr20" @click.stop="handleMake">开始制作</button>
+      </div>
       <div class="mt20 auto" style="width: 400px;" v-if="record.status === 3">
         <c-timer ref="timer" />
       </div>
       <div class="mt20" v-if="record.status === 4">
-        <c-codes :code="record.fetch_code" />
+        <button class="btn btn-style4 mr30" @click.stop="handleTag">补打标签</button>
+        <button class="btn btn-style1 mr30" @click.stop="handleGet">通知取餐</button>
+        <button class="btn btn-style1" @click.stop="handleDone">完成订单</button>
       </div>
       <div class="mt60" v-if="record.status === 7">
         <p class="f52 DinB tc">Finish</p>
@@ -74,14 +79,12 @@
 
 <script type='es6'>
 import cTimer from '@/components/timer'
-import cCodes from '@/components/codes'
 import { getAction, postAction } from '@/utils'
 
 export default {
   name: 'app',
   components: {
-    cTimer,
-    cCodes
+    cTimer
   },
   computed: {
     storeData () {
@@ -119,6 +122,69 @@ export default {
         })
       })
     },
+    handleMake () {
+      this.$Dialog.confirm({
+        message: '是否确认开始制作？'
+      }).then(() => {
+        postAction('/shopapi/order/start/make', {
+          id: this.record.id
+        }).then(res => {
+          if (res.code === 0) {
+            this.$Toast.success(res.msg)
+            this.getData()
+          }
+        })
+      })
+    },
+    handleTag () {
+      this.$Dialog.confirm({
+        message: '是否补打标签？'
+      }).then(() => {
+        postAction('/shopapi/order/print', {
+          id: this.record.id
+        }).then(res => {
+          if (res.code === 0) {
+            this.$Toast.success(res.msg)
+            this.getData()
+          }
+        })
+      })
+    },
+    handleGet () {
+      this.$Dialog.confirm({
+        message: '是否通知取餐？'
+      }).then(() => {
+        postAction('/shopapi/order/notice/fetch', {
+          id: this.record.id
+        }).then(res => {
+          if (res.code === 0) {
+            this.$Toast.success(res.msg)
+            this.getData()
+          }
+        })
+      })
+    },
+    handleDone () {
+      this.$Dialog.confirm({
+        message: '是否确认完成订单？'
+      }).then(() => {
+        postAction('/shopapi/order/done', {
+          id: this.record.id
+        }).then(res => {
+          if (res.code === 0) {
+            this.$Toast.success(res.msg)
+            this.getData()
+          }
+        })
+      })
+    },
+    makePhone () {
+      this.$Dialog.confirm({
+        message: `是否确认拨打${this.record.phone}？`
+      }).then(() => {
+        window.open(`tel:${this.record.phone}`)
+      })
+    },
     getData () {
       getAction('xxxx', {
         id: this.id
@@ -129,6 +195,11 @@ export default {
             this.$refs.timer.count(this.record.remain_make_time)
           }
         }
+      })
+    },
+    backIndex () {
+      this.$router.push({
+        name: 'Home'
       })
     }
   }

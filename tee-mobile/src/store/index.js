@@ -7,12 +7,17 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     globalData: {},
-    hasGlobalData: false
+    imgSrc: 'http://file.dev.sysds.cn/',
+    hasGlobalData: false,
+    currentDate: ''
   },
   mutations: {
     SET_GLOBALDATA (state, data) {
       state.globalData = data
       state.hasGlobalData = data.id !== undefined
+    },
+    SET_DATE (state, data) {
+      state.currentDate = data
     }
   },
   actions: {

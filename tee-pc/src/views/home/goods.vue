@@ -60,7 +60,13 @@
             <div class="img-box"><img :src="imgSrc + item.cover" /></div>
           </div>
         </td>
-        <td><div>{{item.content}}</div></td>
+        <td>
+          <div>
+            <Tooltip :content="item.content" :max-width="300" placement="right">
+              <div class="content">{{item.content}}</div>
+            </Tooltip>
+          </div>
+        </td>
         <td><div>{{item.date_start || '--'}} - {{item.date_end || '--'}}</div></td>
         <td><div>{{item.price}}</div></td>
         <td><div>{{item.store_nums}}</div></td>

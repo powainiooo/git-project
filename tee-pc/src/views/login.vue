@@ -26,7 +26,7 @@
 <float-box v-model="visible" :mask="false" :width="400">
   <div class="login-box">
     <!-- 登录表单 -->
-    <Form class="c-form mt120" ref="form" :model="formData" :rules="ruleValidate">
+    <Form class="c-form mt120" ref="form" :model="formData" :rules="ruleValidate" @keyup.enter.native="handleLogin">
       <h3 class="f18 mb30 ml10">登陆</h3>
       <FormItem prop="username">
         <Input placeholder="账号" v-model="formData.username" />

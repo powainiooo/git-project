@@ -6,7 +6,7 @@
 <div class="container ovh">
   <div class="infos-line">
     <button class="btn">喜茶·深圳宝安大仟里店</button>
-    <button class="btn-circle"><img src="@/assets/img/home.png" class="w28" /></button>
+    <button class="btn-circle" @click="backIndex"><img src="@/assets/img/home.png" class="w28" /></button>
   </div>
   <div class="container2 container3 list-container">
     <tabs>
@@ -37,6 +37,12 @@ export default {
   data () {
     return {}
   },
-  methods: {}
+  methods: {
+    backIndex () {
+      this.$router.push({
+        name: 'Home'
+      })
+    }
+  }
 }
 </script>

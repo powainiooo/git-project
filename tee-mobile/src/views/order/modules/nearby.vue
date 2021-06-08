@@ -33,7 +33,7 @@ export default {
       list: [],
       loading: false,
       finished: false,
-      page: 1,
+      page: 0,
       limit: 10
     }
   },

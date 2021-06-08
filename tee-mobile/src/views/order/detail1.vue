@@ -5,7 +5,7 @@
 <template>
 <div class="container ovh">
   <div class="infos-line">
-    <button class="btn">{{storeData.shop_name}}</button>
+    <button class="btn">{{shop.shop_name}}</button>
     <button class="btn-circle" @click="backIndex"><img src="@/assets/img/home.png" class="w28" /></button>
   </div>
   <div class="container2 container3 ovh order-detail" style="padding-top: 0;">
@@ -16,7 +16,7 @@
       </div>
       <div class="flex">
         <button class="btn btn-style4 mr20" @click="handleRefund" v-if="record.status !== -9 && record.status !== -1 && record.status !== 1">退款</button>
-        <button class="btn btn-style1" @click.stop="makePhone">{{record.phone}}</button>
+        <button class="btn btn-style1" @click.stop="makePhone">{{shop.phone}}</button>
       </div>
     </div>
     <div class="status-frame">
@@ -52,11 +52,11 @@
         <p class="f52 DinB tc">Finish</p>
         <p class="f52 tc">已完成</p>
       </div>
-      <div class="order-num">0016659884321</div>
+      <div class="order-num">{{record.order_no}}</div>
     </div>
     <div class="body">
-      <div class="c-goods-item mb60" v-for="(item, index) in record.goods" :key="index">
-        <div class="imgs"><img src="@/assets/img/img2.png" mode="aspectFill" /></div>
+      <div class="c-goods-item mb60" v-for="(item, index) in goods" :key="index">
+        <div class="imgs"><img :src="imgSrc + item.goods_cover" mode="aspectFill" /></div>
         <div class="infos">
           <h3 class="title">{{item.goods_name}}</h3>
           <div class="intro">{{item.goods_attr.join('、')}}</div>
@@ -71,7 +71,7 @@
       </div>
       <div class="borderB mb10 hr mt30"></div>
       <div class="price tr mr10"><span>{{record.pay_amount}}</span>元</div>
-      <div class="f20 c-c9 mr10 tr">共{{record.goods.length}}件</div>
+      <div class="f20 c-c9 mr10 tr">共{{goodsNums}}件</div>
     </div>
   </div>
 </div>
@@ -87,8 +87,8 @@ export default {
     cTimer
   },
   computed: {
-    storeData () {
-      return this.$store.state.globalData.store
+    imgSrc () {
+      return this.$store.state.imgSrc
     },
     showSteps () {
       if (this.record.status === 2 || this.record.status === 3 || this.record.status === 4) {
@@ -100,7 +100,10 @@ export default {
   data () {
     return {
       id: '',
-      record: {}
+      record: {},
+      shop: {},
+      goods: [],
+      goodsNums: 0
     }
   },
   mounted () {
@@ -186,11 +189,14 @@ export default {
       })
     },
     getData () {
-      getAction('xxxx', {
+      getAction('/shopapi/order/show', {
         id: this.id
       }).then(res => {
         if (res.code === 0) {
-          this.record = res.data
+          this.record = res.data.order
+          this.shop = res.data.shop
+          this.goods = res.data.goods
+          this.goodsNums = res.data.goods_nums
           if (this.record.status === 3) {
             this.$refs.timer.count(this.record.remain_make_time)
           }

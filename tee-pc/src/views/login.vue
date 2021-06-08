@@ -44,7 +44,7 @@
         <img src="@/assets/img/ar1.png" class="ar1" />
         <img src="@/assets/img/ar2.png" class="ar2 ts1" :class="{'rotate': showHint}" />
       </a>
-      <h3 class="acenter">如何获取账</h3>
+      <h3 class="acenter" @click="showHint = !showHint">如何获取账</h3>
       <p>“无事干杯”提供预订点餐、在线点餐等服务于一体的智能餐饮服务平台。 了解详情 全美食商家管理平台 最大化的帮助商户实现规范工作流程,提高运营效率;降低运营成本,提高经营效益;提升企业形象。</p>
       <p>与“无事干杯”达成商务合作，由“无事干杯”发放合作账号。具体合作方式详情请致“无事干杯”。</p>
       <div class="acenter mt70">

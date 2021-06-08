@@ -144,12 +144,12 @@
               <div class="specs-box-col1" v-for="(specs, i) in specsList" :key="i">
                 <div class="specs-name">
                   <a href="javascript:;" class="btn-close" @click="delSpecs(i)"><img src="@/assets/img/close.png" /></a>
-                  <Input maxlength="8" show-word-limit class="min-txt" v-model="specs.attr_name" />
+                  <Input placeholder="填写规格分类名称" maxlength="8" show-word-limit class="min-txt" v-model="specs.attr_name" />
                 </div>
                 <ul class="specs-list">
                   <li v-for="(child, j) in specs.children" :key="j">
                     <a href="javascript:;" class="btn-close" @click="delSpecsItem(i, j)"><img src="@/assets/img/close.png" /></a>
-                    <Input maxlength="8" show-word-limit class="min-txt" v-model="child.attr_name" />
+                    <Input placeholder="填写规格选项" maxlength="8" show-word-limit class="min-txt" v-model="child.attr_name" />
                     <Input placeholder="0" class="min-txt" style="width: 60px;" v-model="child.price" />
                     <span class="unit">元</span>
                   </li>

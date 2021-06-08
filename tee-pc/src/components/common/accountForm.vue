@@ -15,11 +15,11 @@
 </style>
 
 <template>
-<float-box v-model="visible" :mask="status !== 'new'" :width="status === 'view' ? 1040 : 800">
+<float-box v-model="visible" :title="title" :mask="status !== 'new'" :width="status === 'view' ? 1040 : 800">
   <div class="acenter" slot="btns">
     <Button :disabled="btnDisabled" :loading="isAjax" @click="handleSave" v-if="status !== 'view'">确认保存</Button>
     <Button @click="status = 'edit'" v-else>编辑信息</Button>
-     <a href="javascript:;" class="btn-close ml20" @click="handleCancel"><img src="@/assets/img/close.png" /></a>
+     <a href="javascript:;" class="btn-close ml20" @click="handleCancel" v-if="status !== 'new'"><img src="@/assets/img/close.png" /></a>
   </div>
   <div class="account-box">
     <div class="flex">
@@ -90,6 +90,11 @@
                 </Input>
               </FormItem>
               <FormItem>
+                <Input v-model="formData.bank_number" disabled>
+                  <span slot="prepend">银行卡号</span>
+                </Input>
+              </FormItem>
+              <FormItem>
                 <Input v-model="bankName" disabled>
                   <span slot="prepend">选择银行</span>
                 </Input>
@@ -97,11 +102,6 @@
               <FormItem>
                 <Input v-model="formData.bank_subname" disabled>
                   <span slot="prepend">卡户支行</span>
-                </Input>
-              </FormItem>
-              <FormItem>
-                <Input v-model="formData.bank_number" disabled>
-                  <span slot="prepend">银行卡号</span>
                 </Input>
               </FormItem>
               </template>
@@ -122,15 +122,15 @@
                   </div>
                 </FormItem>
                 <FormItem>
+                  <Input placeholder="银行卡号" v-model="formData.bank_number" />
+                </FormItem>
+                <FormItem>
                   <Select placeholder="选择银行" v-model="formData.bank_name">
                     <Option v-for="i in bankList" :key="i.id" :value="i.id">{{i.bank_name}}</Option>
                   </Select>
                 </FormItem>
                 <FormItem>
                   <Input placeholder="卡户支行" v-model="formData.bank_subname" />
-                </FormItem>
-                <FormItem>
-                  <Input placeholder="银行卡号" v-model="formData.bank_number" />
                 </FormItem>
               </div>
               <h3 class="f18 mb30 ml10">打印设备信息</h3>
@@ -215,6 +215,15 @@ export default {
     bankName () {
       const item = this.bankList.find(i => i.id == this.formData.bank_name)
       return item ? item.bank_name : '--'
+    },
+    title () {
+      if (this.status === 'new') {
+        return '完善账号信息'
+      } else if (this.status === 'view') {
+        return '账号信息'
+      } else {
+        return '编辑账号信息'
+      }
     }
   },
   data () {

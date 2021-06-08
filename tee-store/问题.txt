@@ -1,5 +1,8 @@
+发货提醒
+yVssW3D0_5NerH2vZnkhDgz5G_ZpOm5Oq3u6dH2ylAw
 
+下单成功
+vv3tLHo6Ig1p0Rj0MlfESFu69Vv2ETau7tNO-rG0tFw
 
-2.店铺列表 缺少字段判断是否休息
-
-3.优惠券要有类型 用来判断跳转到哪里 （流程图里标注）
+取餐提醒
+tn5jGLoQ2dnK85A0fqG-3p3Q17sk0h1bj8LdkVGwgrI

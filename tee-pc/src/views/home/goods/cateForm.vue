@@ -33,7 +33,7 @@
         </thead>
         <tbody>
         <tr v-for="(item, index) in cateList" :key="item.cid">
-          <td><div>1</div></td>
+          <td><div>{{index + 1}}</div></td>
           <td><div>{{item.cname}}</div></td>
           <td>
             <div class="end">
@@ -51,7 +51,7 @@
     </div>
     <div class="new-line">
       <div class="acenter">
-        <div class="rank">1</div>
+        <div class="rank">{{cateList.length + 1}}</div>
         <Input placeholder="填写分类名称" class="min-txt" v-model="keyword" />
       </div>
       <div class="pr30">

@@ -74,13 +74,14 @@ export default {
     }
 	},
 	methods: {
-	  show (id) {
+	  show (data) {
 	    getAction('/userapi/goods/show', {
-	      id
+	      id: data.id
       }).then(res => {
         if (res.code === 0) {
           this.goods = res.data.goods
           this.cates = res.data.attrs
+          this.num = data.num
 
           const ids = {}
           for (const i of res.data.attrs) {

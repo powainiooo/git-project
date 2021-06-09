@@ -16,21 +16,21 @@
 
 <template>
 <div class="c-footer">
-  <a href="/pages/stores/main" open-type="redirect" :class="{'active': current === 'order'}">
+  <a href="/pages/stores/main" open-type="reLaunch" :class="{'active': current === 'order'}">
     <div class="icon icon1">
       <img src="/static/images/footer/icon1.png" mode="widthFix" class="img1" />
       <img src="/static/images/footer/icon1-active.png" mode="widthFix" class="img2" />
     </div>
     <p>点餐</p>
   </a>
-  <a href="/pages/nearby/list/main" open-type="redirect" :class="{'active': current === 'store'}">
+  <a href="/pages/nearby/list/main" open-type="reLaunch" :class="{'active': current === 'store'}">
     <div class="icon icon2">
       <img src="/static/images/footer/icon2.png" mode="widthFix" class="img1" />
       <img src="/static/images/footer/icon2-active.png" mode="widthFix" class="img2" />
     </div>
     <p>周边商城</p>
   </a>
-  <a href="/pages/order/list/main" open-type="redirect" :class="{'active': current === 'list'}">
+  <a href="/pages/order/list/main" open-type="reLaunch" :class="{'active': current === 'list'}">
     <div class="icon icon1">
       <img src="/static/images/footer/icon3.png" mode="widthFix" class="img1" />
       <img src="/static/images/footer/icon3-active.png" mode="widthFix" class="img2" />

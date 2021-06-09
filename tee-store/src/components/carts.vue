@@ -93,6 +93,7 @@ export default {
       })
     },
     hide () {
+      console.log('onHide 3')
       this.showItem = false
       setTimeout(() => {
         this.visible = false

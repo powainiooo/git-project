@@ -7,7 +7,7 @@
   <div class="between">
     <button class="btn" v-if="showBtn">
       <span>{{record.name}}</span>
-      <img src="/static/images/arrow1.png" mode="widthFix" class="w10 ml20" />
+      <img src="/static/images/arrow1.png" mode="widthFix" class="w10 ml20" v-if="!record.onlyName" />
     </button>
     <button open-type="contact" class="btn acenter" v-if="showService">
       <img src="/static/images/service.png" mode="widthFix" class="w26 mr20" />
@@ -91,6 +91,9 @@ export default {
         shopId: this.record.shopId,
         type: this.record.cartType
       })
+    },
+    hideCarts () {
+      this.$refs.cart.hide()
     },
     typeChange (e) {
       const item = this.cList[e.mp.detail.value]

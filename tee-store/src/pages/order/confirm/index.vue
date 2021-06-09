@@ -106,8 +106,9 @@ export default {
     },
     addrData () {
       return {
-        name: this.shopData.shop_name,
-        dis: this.shopData.distance
+        name: this.storeInfo.shop_name,
+        onlyName: true,
+        dis: this.storeInfo.distance
       }
     }
   },

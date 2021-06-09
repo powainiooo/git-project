@@ -7,7 +7,7 @@
   <c-header />
   <div class="container" style="padding-bottom: 0;">
     <!-- 地址信息 -->
-    <addr-info :showBtn="false" showTypes showCart showShare :record="addrData" @change="typeChange" />
+    <addr-info ref="top" :showBtn="false" showTypes showCart showShare :record="addrData" @change="typeChange" />
 
     <div class="container2 nearby-container">
       <div class="mt25">
@@ -89,6 +89,9 @@ export default {
       this.page += 1
       this.getData()
     }
+  },
+  onShow () {
+    this.$refs.top.hideCarts()
   },
   onLoad (options) {
     Object.assign(this.$data, this.$options.data())

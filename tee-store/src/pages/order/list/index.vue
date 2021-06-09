@@ -100,6 +100,7 @@ export default {
       }).then(res => {
         if (res.code === 0) {
           this[key].list = this[key].list.concat(res.data)
+          this[key].total = res.count
         }
       })
     }

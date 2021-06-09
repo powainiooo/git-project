@@ -12,13 +12,13 @@
     <div class="coupon-bg center"><img src="/static/images/index/coupon.png" mode="widthFix" class="coupon-img" /></div>
     <tabs :current="current" @change="tabChange">
       <tab-pane :name="1" title="未使用">
-        <div class="empty-hint">
-          <p>Irrelevant content</p>
-          <div>无相关内容</div>
-        </div>
         <scroll-view scroll-y class="list-container" @scrolltolower="reachBottom">
           <div class="item" v-for="i in page1.list" :key="id">
             <item :record="item" extraClass="coupon-item-min" />
+          </div>
+          <div class="empty-hint" v-if="page1.list.length === 0">
+            <p>Irrelevant content</p>
+            <div>无相关内容</div>
           </div>
         </scroll-view>
       </tab-pane>
@@ -26,6 +26,10 @@
         <scroll-view scroll-y class="list-container" @scrolltolower="reachBottom">
           <div class="item" v-for="i in page2.list" :key="id">
             <item :record="item" extraClass="coupon-item-min" />
+          </div>
+          <div class="empty-hint" v-if="page2.list.length === 0">
+            <p>Irrelevant content</p>
+            <div>无相关内容</div>
           </div>
         </scroll-view>
       </tab-pane>
@@ -54,6 +58,7 @@ export default {
     return {
       current: 0,
       status: 1,
+      list1: [],
       page1: {
         page: 1,
         total: 0,
@@ -89,7 +94,8 @@ export default {
         status: 1
       }).then(res => {
         if (res.code === 0) {
-          this.page1.list = this.page1.list.concat(this.page1.list)
+          this.page1.list = this.page1.list.concat(res.data)
+          console.log('this.page1.list', this.page1.list, this.page1.list.length)
           this.page1.total = res.count
         }
       })
@@ -101,7 +107,7 @@ export default {
         status: 2
       }).then(res => {
         if (res.code === 0) {
-          this.page2.list = this.page2.list.concat(this.page2.list)
+          this.page2.list = this.page2.list.concat(res.data)
           this.page2.total = res.count
         }
       })

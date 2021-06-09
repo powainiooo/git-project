@@ -17,7 +17,7 @@
   <c-header storeLogo="/static/images/logo2.png" />
   <div class="container" style="padding-bottom: 0;">
     <!-- 地址信息 -->
-    <addr-info showCart showShare :record="addrData" />
+    <addr-info ref="top" showCart showShare :record="addrData" />
 
     <!-- 产品信息 -->
     <div class="pr">
@@ -30,7 +30,7 @@
         scroll-y>
         <div class="list">
           <div class="slideUp" v-for="i in goodsList" :key="id" :id="i.aid">
-            <item :record="i" @detail="openDetail" />
+            <item :record="i" @detail="openDetail" :cartList="cartsList" />
           </div>
         </div>
       </scroll-view>
@@ -114,6 +114,7 @@ export default {
       scrollKey: '',
       cateList: [],
       goodsList: [],
+      cartsList: [],
       closeModalVisible: false,
       closeHintVisible: false,
       freeModalVisible: false,
@@ -188,16 +189,17 @@ export default {
     doUse () {
       this.freeModalVisible = false
     },
-    openDetail (id) {
-      this.$refs.detail.show(id)
+    openDetail (data) {
+      this.$refs.detail.show(data)
     },
     getCart () {
-      getAction('/userapi/shopping/card/count', {
+      getAction('/userapi/shopping/card/index/data', {
         shop_id: this.shopId,
         type: 1
       }).then(res => {
         if (res.code === 0) {
-          this.cartNum = res.data.count
+          this.cartsList = res.data
+          this.cartNum = res.data.length
         }
       })
     },
@@ -223,7 +225,11 @@ export default {
       path: `/pages/goods/main`
     }
   },
+  onShow () {
+    this.$refs.top.hideCarts()
+  },
   onLoad (options) {
+    console.log('onLoad')
     Object.assign(this.$data, this.$options.data())
     this.shopId = options.id || 1
     this.getData()

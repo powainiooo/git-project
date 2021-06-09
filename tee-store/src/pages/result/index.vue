@@ -71,6 +71,26 @@ export default {
       mpvue.reLaunch({
         url: '/pages/index/main'
       })
+    },
+    getMessageAuth () {
+      console.log('发起订阅消息')
+      wx.requestSubscribeMessage({
+        tmplIds: [
+          'yVssW3D0_5NerH2vZnkhDgz5G_ZpOm5Oq3u6dH2ylAw',
+          'vv3tLHo6Ig1p0Rj0MlfESFu69Vv2ETau7tNO-rG0tFw',
+          'tn5jGLoQ2dnK85A0fqG-3p3Q17sk0h1bj8LdkVGwgrI'
+        ],
+        success (res) {
+          console.log('订阅消息成功')
+          console.log(res)
+          console.log('--------------------')
+        },
+        fail (err) {
+          console.log('订阅消息失败')
+          console.log(err)
+          console.log('--------------------')
+        }
+      })
     }
   },
 
@@ -78,6 +98,9 @@ export default {
     this.status = option.result
     this.orderId = option.id
     this.from = option.from
+    if (this.status === 'suc') {
+      this.getMessageAuth()
+    }
   }
 }
 </script>

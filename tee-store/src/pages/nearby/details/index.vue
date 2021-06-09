@@ -8,7 +8,7 @@
   <c-header />
   <div class="container" style="padding-bottom: 0;">
     <!-- 地址信息 -->
-    <addr-info :showBtn="false" showCart showShare showService :record="addrData"  />
+    <addr-info ref="top" :showBtn="false" showCart showShare showService :record="addrData"  />
 
     <div class="container2 nearby-container">
       <div class="nearby-goods-detail">
@@ -138,7 +138,9 @@ export default {
       })
     }
   },
-
+  onShow () {
+    this.$refs.top.hideCarts()
+  },
   onLoad (options) {
     Object.assign(this.$data, this.$options.data())
     this.id = options.id

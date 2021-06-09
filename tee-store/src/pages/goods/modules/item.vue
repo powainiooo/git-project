@@ -9,7 +9,7 @@
     <h3 class="title">{{record.title}}</h3>
     <div class="intro">{{record.content}}</div>
     <div class="price"><span>{{record.price}}</span>元</div>
-    <div class="tagC btn-add" v-if="!disabled"><img src="/static/images/add.png" mode="widthFix" class="w22" /></div>
+    <div class="tagC btn-add" v-if="!disabled">选规格<span v-if="nums > 0">{{nums}}</span></div>
   </div>
 </div>
 </template>
@@ -19,9 +19,16 @@ export default {
   name: 'app',
   props: {
     record: Object,
+    cartList: Array,
     disabled: {
       type: Boolean,
       default: false
+    }
+  },
+  computed: {
+    nums () {
+      const item = this.cartList.find(i => i.goods_id === this.record.id)
+      return item === undefined ? 0 : item.buy_nums
     }
   },
   data () {
@@ -32,7 +39,10 @@ export default {
   methods: {
     openDetail () {
       if (!this.disabled) {
-        this.$emit('detail', this.record.id)
+        this.$emit('detail', {
+          id: this.record.id,
+          num: this.nums
+        })
       }
     }
   }

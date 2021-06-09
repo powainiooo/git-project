@@ -59,7 +59,7 @@
         <div class="f24">备注</div>
         <div class="f20 lh150 c-c9">{{order.user_remark || '--'}}</div>
       </div>
-      <div class="borderB mb10 hr mt30"></div>
+      <div class="borderB mb10 hr mt30" v-if="order.user_remark && order.user_remark !== ''"></div>
       <div class="price tr mr10"><span>{{order.pay_amount}}</span>元</div>
       <div class="f20 c-c9 mr10 tr">共{{goodsNum}}件</div>
     </div>

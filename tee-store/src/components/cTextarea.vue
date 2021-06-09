@@ -6,7 +6,7 @@
 
 <template>
 <div class="c-textarea">
-  <textarea @input="inputChange" placeholder="自带杯子，冰单独打包" :maxlength="maxlength" />
+  <textarea @input="inputChange" placeholder="请输入备注信息" :maxlength="maxlength" />
   <div>{{value.length}}/{{maxlength}}</div>
 </div>
 </template>

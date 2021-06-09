@@ -47,7 +47,8 @@
                 <Cascader :data="cityData" v-model="cities" @on-change="cityChange" v-else></Cascader>
               </FormItem>
               <FormItem>
-                <Input type="textarea" :rows="4" placeholder="门店地址" v-model="formData.address" :disabled="notNew" />
+                <Input ref="address" type="textarea" :rows="4" placeholder="门店地址" v-model="formData.address" :disabled="notNew" />
+                <a href="javascript:;" class="btn-geo" @click="openGeo">定位</a>
               </FormItem>
               <FormItem>
                 <upload-img v-model="formData.shop_logo" :disabled="notNew">
@@ -59,11 +60,11 @@
               <FormItem>
                 <Input v-model="formData.score_use_top" :disabled="notNew" v-if="status === 'view'">
                   <span slot="prepend">积分上限</span>
-                  <span slot="append">积分1</span>
+                  <span slot="append">积分</span>
                 </Input>
                 <div v-else>
                   <Input placeholder="单笔使用上限" v-model="formData.score_use_top">
-                    <span slot="append">积分2</span>
+                    <span slot="append">积分</span>
                   </Input>
                 </div>
                 <p class="form-hint mb75">100积分 = 1元，单笔最高可用积分即最高优惠额度。</p>
@@ -169,6 +170,8 @@
         </div>
       </div>
     </div>
+    <!-- 地址选择 -->
+    <addr-picker ref="addrPicker" @confirm="getAddrData" />
   </div>
 </float-box>
 </template>
@@ -179,13 +182,15 @@ import cDateTime from './cDateTime'
 import uploadImg from './uploadImg'
 import cityData from '@/utils/cityData.json'
 import { getAction, postAction } from '@/utils'
+import addrPicker from './addrPicker'
 
 export default {
   name: 'app',
   components: {
     floatBox,
     cDateTime,
-    uploadImg
+    uploadImg,
+    addrPicker
   },
   computed: {
     btnDisabled () {
@@ -240,6 +245,8 @@ export default {
         province: '',
         city: '',
         address: '',
+        lat: '',
+        lng: '',
         shop_logo: '',
         score_use_top: '',
         name: '',
@@ -373,6 +380,16 @@ export default {
     cityChange (e) {
       this.formData.province = e[0]
       this.formData.city = e[1]
+    },
+    openGeo () {
+      this.$refs.addrPicker.show()
+    },
+    getAddrData (data) {
+      console.log('getAddrData', data)
+      this.formData.address = data.address
+      this.formData.lat = data.location.lat
+      this.formData.lng = data.location.lng
+      this.$refs.address.focus()
     }
   }
 }

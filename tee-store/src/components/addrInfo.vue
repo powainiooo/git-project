@@ -9,7 +9,7 @@
       <span>{{record.name}}</span>
       <img src="/static/images/arrow1.png" mode="widthFix" class="w10 ml20" />
     </button>
-    <button class="btn acenter" v-if="showService">
+    <button open-type="contact" class="btn acenter" v-if="showService">
       <img src="/static/images/service.png" mode="widthFix" class="w26 mr20" />
       <span>客服</span>
     </button>
@@ -20,7 +20,7 @@
       </button>
     </picker>
     <div class="acenter">
-      <button class="btn-circle btn-cart" v-if="showCart" @click="openCarts">
+      <button class="btn-circle btn-cart" v-if="showCart && record.cartNum > 0" @click="openCarts">
         <img src="/static/images/icon-cart.png" mode="widthFix" class="w32" />
         <span class="nums" v-if="record.cartNum > 0">{{record.cartNum}}</span>
       </button>

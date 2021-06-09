@@ -34,14 +34,25 @@
         <tbody>
         <tr v-for="(item, index) in cateList" :key="item.cid">
           <td><div>{{index + 1}}</div></td>
-          <td><div>{{item.cname}}</div></td>
           <td>
-            <div class="end">
+            <div>
+              <span v-if="item.cid !== eidtId">{{item.cname}}</span>
+              <Input placeholder="填写分类名称" class="min-txt" v-model="keyword2" v-else style="width: 200px;" />
+            </div>
+          </td>
+          <td>
+            <div class="end" v-if="item.cid !== eidtId">
               <a href="javascript:;" class="btn-circle" v-if="index !== 0" @click="handleRank(item.cid, 'up')"><img src="@/assets/img/up.png" width="9" /></a>
               <a href="javascript:;" class="btn-circle ml10" v-if="index !== cateList.length - 1" @click="handleRank(item.cid, 'down')"><img src="@/assets/img/down.png" width="9" /></a>
               <Button size="small" class="ml10" @click="handleEdit(item)">编辑</Button>
               <Poptip title="确认删除？" confirm @on-ok="handleDel(item.cid)">
                 <Button size="small" class="ml10 bg-gray">删除</Button>
+              </Poptip>
+            </div>
+            <div class="end" v-else>
+              <Button size="small" class="ml10" @click="eidtId = ''">取消</Button>
+              <Poptip title="确认保存？" confirm @on-ok="handleSave(item.cid)">
+                <Button size="small" class="ml10 bg-main">保存</Button>
               </Poptip>
             </div>
           </td>
@@ -77,6 +88,7 @@ export default {
       cateList: [],
       isEdit: false,
       keyword: '',
+      keyword2: '',
       eidtId: '',
       isAjax: false
     }
@@ -134,9 +146,24 @@ export default {
       })
     },
     handleEdit (record) {
-      this.keyword = record.cname
+      this.keyword2 = record.cname
       this.eidtId = record.cid
-      this.isEdit = true
+      // this.isEdit = true
+    },
+    handleSave (cid) {
+      if (this.isAjax) return
+      this.isAjax = true
+      postAction('/shopapi/goods/cate/update', {
+        cid,
+        cname: this.keyword2
+      }).then(res => {
+        this.isAjax = false
+        if (res.code === 0) {
+          this.$Message.success(res.msg)
+          this.eidtId = ''
+          this.getCateData()
+        }
+      })
     },
     handleDel (cid) {
       if (this.isAjax) return

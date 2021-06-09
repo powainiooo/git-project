@@ -11,7 +11,7 @@
     </div>
     <div class="r acenter">
       <button class="btn-circle mr15"><img src="/static/images/index/scan.png" mode="widthFix" class="w26" /></button>
-      <button class="btn" @click="toPage('/pages/personal/points/main')">使用记录</button>
+      <button class="btn" @click="toPage('/pages/personal/points/main?page=detail')" v-if="nums > 0">使用记录</button>
     </div>
   </div>
   <div class="icons">

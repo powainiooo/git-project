@@ -26,7 +26,10 @@
         <p class="en">Payment failure</p>
         <p>支付失败</p>
       </div>
-      <p class="info" v-if="status === 'suc'">请耐心等候产品出餐，注意查看店内取餐码。或关注小程序消息通知。</p>
+      <p class="info" v-if="status === 'suc'">
+        <span v-if="from === 'tee'">请耐心等候产品出餐，注意查看店内取餐码。或关注小程序消息通知。</span>
+        <span v-else>若选择邮寄，请耐心等待发货，注意查看物流信息。选择自提，请尽快前往相应门店领取周边商品。</span>
+      </p>
       <p class="info" v-else-if="status === 'fail'">网络拥堵 或 网络异常，请点击“重新支付”，以完成订单支付。</p>
       <div class="center">
         <button class="btn btn-style1 mr25" v-if="status === 'suc'" @click="toOrder">查看订单详情</button>

@@ -93,10 +93,15 @@ export default {
       this.getList()
     }
   },
-  onLoad () {
+  onLoad (options) {
     Object.assign(this.$data, this.$options.data())
     this.getScore()
     this.getList()
+    if (options.page === 'detail') {
+      setTimeout(() => {
+        this.openRecord()
+      }, 100)
+    }
   }
 }
 </script>

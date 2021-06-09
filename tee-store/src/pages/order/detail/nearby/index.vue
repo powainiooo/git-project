@@ -9,7 +9,7 @@
     <div class="header between">
       <div class="f30">{{order.express_type === 0 ? '门店自提' : '邮寄'}}</div>
       <div class="flex">
-        <button class="btn btn-style3 mr20" v-if="order.express_type === 1 && order.status === 4">待发货</button>
+        <button class="btn btn-style3 mr20" v-if="order.express_type === 1 && order.status === 2">待发货</button>
         <button class="btn-circle btn-style1 mr20" @click="makephone" v-if="order.express_type === 0">
           <img src="/static/images/phone.png" mode="widthFix" class="w26">
         </button>
@@ -33,20 +33,20 @@
       <div class="form" v-if="order.express_type === 1">
         <div class="form-line mb30">
           <div class="form-item">
-            <input :value="address.name" disabled />
+            <input :value="address.name" disabled placeholder-style="font-size: 20rpx;" style="font-size: 30rpx;" />
           </div>
           <div class="form-item">
-            <input :value="address.phone" disabled />
+            <input :value="address.phone" disabled placeholder-style="font-size: 20rpx;" style="font-size: 36rpx;" />
           </div>
         </div>
         <div class="form-line mb30">
           <div class="form-item">
-            <input :value="addrStr" disabled />
+            <input :value="addrStr" disabled placeholder-style="font-size: 20rpx;" style="font-size: 24rpx;" />
           </div>
         </div>
         <div class="form-line">
           <div class="form-item">
-            <input :value="address.address" disabled />
+            <input :value="address.address" disabled placeholder-style="font-size: 20rpx;" style="font-size: 24rpx;" />
           </div>
         </div>
       </div>
@@ -70,7 +70,7 @@
         <div class="price mr10"><span>{{order.post_fee}}</span>元</div>
       </div>
       <div class="borderB mb30 hr mt20"></div>
-      <div class="ml10 mr10">
+      <div class="ml10 mr10" v-if="order.user_remark && order.user_remark !== ''">
         <div class="f24">备注</div>
         <div class="f20 lh150 c-c9">{{order.user_remark || '--'}}</div>
       </div>

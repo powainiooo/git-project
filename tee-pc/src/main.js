@@ -48,6 +48,7 @@ Vue.component('TabPane', TabPane)
 Vue.component('Cascader', Cascader)
 Vue.component('Poptip', Poptip)
 Vue.component('Tooltip', Tooltip)
+Vue.component('Modal', Modal)
 
 Vue.use(Storage)
 Vue.prototype.$Message = Message

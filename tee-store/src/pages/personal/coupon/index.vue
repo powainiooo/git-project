@@ -10,8 +10,12 @@
   <c-header />
   <div class="container2 pt20 pr" style="padding-bottom: 0;">
     <div class="coupon-bg center"><img src="/static/images/index/coupon.png" mode="widthFix" class="coupon-img" /></div>
-    <tabs @change="tabChange">
+    <tabs :current="current" @change="tabChange">
       <tab-pane :name="1" title="未使用">
+        <div class="empty-hint">
+          <p>Irrelevant content</p>
+          <div>无相关内容</div>
+        </div>
         <scroll-view scroll-y class="list-container" @scrolltolower="reachBottom">
           <div class="item" v-for="i in page1.list" :key="id">
             <item :record="item" extraClass="coupon-item-min" />
@@ -48,6 +52,7 @@ export default {
   },
   data () {
     return {
+      current: 0,
       status: 1,
       page1: {
         page: 1,
@@ -102,10 +107,13 @@ export default {
       })
     }
   },
-  onLoad () {
+  onLoad (options) {
     Object.assign(this.$data, this.$options.data())
     this.getData1()
     this.getData2()
+    if (options.status === 'used') {
+      this.current = 1
+    }
   }
 }
 </script>

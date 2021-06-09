@@ -3,17 +3,23 @@
 .c-menu
   width 320px; margin-top 80px;
   &-item
-    size(270px, 80px); border-radius 0 40px 40px 0; margin-bottom 20px; display flex; align-items center; font-size 18px; color #B2A89E; transition-duration .3s
+    size(270px, 80px); margin-bottom 20px; display flex; align-items center; font-size 18px; color #B2A89E; position relative;
     &:hover
       color #3E311F
     .icons
-      size(26px, 28px); center(); margin-left 68px; margin-right 16px;
+      size(26px, 28px); center(); margin-left 68px; margin-right 16px; position relative;
       img
-        height 100%
+        height 100%;
       .icon-active
         display none
+    span
+      position relative
+    &:before
+      content ''; size(100%, 100%); background-color #ffffff; box-shadow 0px 10px 20px 0px rgba(0, 0, 0, 0.08); transition-duration .3s; border-radius 0 40px 40px 0; abTL(0, -100%); z-index 0;
   &-active
-    background-color #ffffff; box-shadow 0px 10px 20px 0px rgba(0, 0, 0, 0.08); color #3E311F;
+    color #3E311F;
+    &:before
+      left 0
     .icons
       .icon
         display none

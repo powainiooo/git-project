@@ -25,6 +25,12 @@
 <script type='es6'>
 export default {
 	name: 'app',
+  props: {
+	  current: {
+	    type: Number,
+      default: 0
+    }
+  },
 	data() {
 		return {
 		  tabs: [],
@@ -44,9 +50,10 @@ export default {
         })
       }
     }
-    this.currentKey = tabs[0].key
+    this.currentKey = tabs[this.current].key
     // console.log('tabs', tabs)
     this.tabs = tabs
+    this.index = this.current
   },
 	methods: {
     tabChange (record, index) {

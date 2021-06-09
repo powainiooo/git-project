@@ -55,7 +55,7 @@
         </div>
       </div>
       <div class="borderB mb30 hr" style="margin-top: -20rpx; height: 1px;"></div>
-      <div class="ml10 mr10">
+      <div class="ml10 mr10" v-if="order.user_remark && order.user_remark !== ''">
         <div class="f24">备注</div>
         <div class="f20 lh150 c-c9">{{order.user_remark || '--'}}</div>
       </div>

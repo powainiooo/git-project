@@ -14,8 +14,8 @@
   <div class="c-header-line">
     <div class="logos">
       <img src="/static/images/logo@2x.png" mode="widthFix" class="logo" />
-      <img src="/static/images/x.png" mode="widthFix" class="x" />
-      <img :src="storeLogo" mode="aspectFill" class="logo2" />
+      <img src="/static/images/x.png" mode="widthFix" class="x" v-if="storeLogo !== ''" />
+      <img :src="imgSrc + storeLogo" mode="heightFix" class="logo2" v-if="storeLogo !== ''" />
     </div>
     <button v-if="menus" @click="toPage('/pages/personal/mine/main')"><img src="/static/images/menu.png" mode="widthFix" class="menu" /></button>
   </div>
@@ -36,7 +36,9 @@ export default {
     }
   },
   data () {
-    return {}
+    return {
+      imgSrc: mpvue.imgSrc
+    }
   },
   methods: {
     toPage: mpvue.toPage

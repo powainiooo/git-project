@@ -41,6 +41,15 @@
   position: relative;
   z-index: 5;
 }
+.c-ticket-imgs .sold-out {
+  width: 100%; height: 100%; position: absolute; top: 0; left: 0; background-color: rgba(0, 0, 0, 0.4); display: flex; flex-direction: column; justify-content: flex-end; font-size: 26px; color: #ffffff; padding-left: 12px;
+}
+.c-ticket-imgs .sold-out p { font-family: HelveB; }
+.c-ticket-imgs .sold-out div { margin-bottom: 30px; }
+.c-ticket-large .c-ticket-imgs .sold-out {
+  padding-left: 22px; font-size: 38px;
+}
+.c-ticket-large .c-ticket-imgs .sold-out div { margin-bottom: 40px; }
 .c-ticket-large .c-ticket-imgs {
   height: 367px;
   -webkit-mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAArwAAAFvCAMAAACfJuhtAAAAYFBMVEUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD6T+iNAAAAH3RSTlMA7eXiIyUhKNwISLqngfeJFw786c/KmHJqVAXTm3RayHjY0wAABMlJREFUeNrs0gENAAAMw6A7uX+X09EENHAPUfKSJS9Z8pIlL1nykiUvWfKSJS9Z8pIlL1nykiUvWfKSJS9Z8pIlL1nykiUvWfKSJS9Z8pIlL1nykiUvWfKSJS9Z8pIlL1nykiUvWfKSJS9Z8pIlL1nykiUvWfKSJS9Z8pIlL1nykiUvWfKSJS9Z8pIlL1nykiUvWfKSJS9Z8pIlL1nykiUvWfKSJS9Z8pIlL1nykiUvWfKSJS9Z8pIlL1nykiUvWfKSJS9Z8pIlL1nykiUvWfKSJS9Z8pIlL1nykiUvWfKSJS9Z8pIlL1nykiUvWfKSJS9ZY5cOSAAAAAAE/X/djkA3KC9b8rIlL1vysiUvW/KyJS9b8rIlL1vysiUvW/KyJS9b8rIlL1vysiUvW/KyJS9b8rIlL1vysiUvW/KyJS9b8rIlL1vysiUvW/KyJS9b8rIlL1vysiUvW/KyJS9b8rIlL1vysiUvW/KyJS9b8rIlL1vysiUvW/KyJS9b8rIlL1vysiUvW/KyJS9b8rIlL1vysiUvW/KyJS9b8rIlL1vysiUvW/KyJS9b8rIlL1vysiUvW/KyJS9b8rIlL1vysiUvW/KyJS9b8rIlL1vysiUvW/KyJS9b8rIlL1uxSwckAAAAAIL+v25HoBuUly152ZKXLXnZkpctedmSly152ZKXLXnZkpctedmSly152ZKXLXnZkpctedmSly152ZKXLXnZkpctedmSly152ZKXLXnZkpctedmSly152ZKXLXnZkpctedmSly152ZKXLXnZkpctedmSly152ZKXLXnZkpctedmSly152ZKXLXnZkpctedmSly152ZKXLXnZkpctedmSly152ZKXLXnZkpctedmSly152ZKXLXnZkpctedmSly152ZKXLXnZkpctedmSly152ZKXLXnZkpctedmSly152ZKXrdill5Q4oACKgi9qQneExA8qTnT/u/SuwYkcqFpDyUuWvGTJS5a8ZMlLlrxkyUuWvGTJS5a8ZMlLlrxkyUuWvGTJS5a8ZMlLlrxkyUuWvGTJS5a8ZMlLlrxkyUuWvGTJS9Uveam6yEvVvbxU/ZeXqnd5iXp6lJeo+yMvUR/yEvV8lZeotyMvTZervET9PfLS9HrkpenlKi9Nl4cjL0m3f468JO2uvCTtrrwk7a68JO2uvCTtrrwk7a68JO2uvCTtrrwk7a68JO2uvCTtrrwk3d4deUnaXXlJ2l15SdpdeUnaXXlJ2l15SdpdeUnaXXlJ2l15SdpdeUnaXXlJ2l15SdpdeUnaXXlJ2l15SdpdeUnaXXlJurk78pK0u/KStLvyknTz+8hL0u7KS9LuykvS7spL0u7KS9LuykvS7spL0u7KS9LuykvS7spL0u7KS9LuykvSd+6ef5/w477as5ckBIEgCKIlaPBXUFREjb7/LT2CAzEMvch3hlx0dK1qVzcDFnLSrkYDlvHSrloDFnHTrp4GLOGnXRUG7CkrtFppQDBX7aozIJSvdtXz6UUoZ+1KFwOCuGtXQ2ZAAH/tSrUB/3lsl8MBIXy2y8yGHZQnRTFTLxIbe8XSXQ1I51Mpnjo3IJGyVlRVdzAggWyqFNvwfRuwrXPzmrWJ4/RoyuwAbCC/t11dKZofZkb8nXDIq74AAAAASUVORK5CYII=);
@@ -106,6 +115,10 @@
   </div>
   <div class="c-ticket-imgs">
     <img :src="record.cover_image" mode="aspectFill" />
+    <div class="sold-out" v-if="record.sub_state === 4">
+      <p>Sold Out</p>
+      <div>已售罄</div>
+    </div>
   </div>
   <img src="/static/images/common/flip.png" class="c-ticket-flip" />
   <img src="/static/images/common/star.png" class="c-ticket-star" v-if="record.star_flag === 1" />

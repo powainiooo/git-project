@@ -13,7 +13,7 @@
     .rotate
       transform rotateZ(180deg)
   h3
-    font-weight normal; height 70px; margin-bottom 5px; padding-left 30px; font-size 18px;
+    font-weight normal; height 70px; margin-bottom 5px; padding-left 30px; font-size 18px; cursor pointer
   p
     line-height 18px; margin 0 30px 15px 30px;
   div

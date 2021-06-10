@@ -1,6 +1,8 @@
 <style scoped>
 .c-footer { width: 100%; height: 146px; background-color: #F2F0ED; box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.2); position: fixed; left: 0; bottom: 0; z-index: 500; display: flex; justify-content: space-between; padding: 0 46px; }
-.c-footer a { width: 100%; display: flex; flex-direction: column; align-items: center; }
+.c-footer a { width: 100%; display: flex; flex-direction: column; align-items: center; -webkit-tap-highlight-color: transparent; }
+.c-footer a:hover { background-color: transparent; -webkit-tap-highlight-color: transparent; }
+.c-footer a:active { background-color: transparent; -webkit-tap-highlight-color: transparent; }
 .c-footer a .icon { width: 100%; height: 60px; display: flex; justify-content: center; align-items: flex-end; margin-bottom: 10px; }
 .c-footer a .icon .img1 { display: block; }
 .c-footer a .icon .img2 { display: none; }

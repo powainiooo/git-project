@@ -63,9 +63,6 @@ export default {
   },
   methods: {
     handleGuide (e) {
-      console.log('getTokenData')
-      e.preventDefault()
-      e.stopPropagation()
       mpvue.openLocation({
         latitude: Number(this.record.lat),
         longitude: Number(this.record.lng),

@@ -33,9 +33,9 @@
               <div class="form-line mb30">
                 <div class="form-item">
                   <picker mode="region" @change="addrChange">
-                    <input placeholder="选择 省份 / 市级 / 区" disabled v-model="addrStr" />
+                    <input placeholder="选择 省份 / 市级 / 区" disabled v-model="addrStr" placeholder-style="font-size: 20rpx;" style="font-size: 24rpx;" />
                   </picker>
-                  <img src="/static/images/arrow3.png" class="arrow3" mode="widthFix" />
+                  <img src="/static/images/arrow3.png" class="arrow3" mode="widthFix" placeholder-style="font-size: 20rpx;" style="font-size: 24rpx;" />
                 </div>
               </div>
               <div class="form-line">

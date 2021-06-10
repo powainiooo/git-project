@@ -19,27 +19,30 @@
   <div class="c-drawer-cover" :class="{'c-drawer-cover-show': showItem}" @animationend="anEnd"></div>
   <div class="c-drawer-box c-details" :class="{'c-drawer-show': showItem}">
     <div class="btn-circle c-drawer-close" @click="hide"><img src="/static/images/x2.png" /></div>
-    <img :src="imgSrc + goods.cover" mode="aspectFill" class="bg" />
-    <div class="infos">
-      <div class="between">
-        <div class="name">{{goods.title}}</div>
-        <div class="price"><span>{{goods.price}}</span>元</div>
+    <div class="c-drawer-scroll">
+      <img :src="imgSrc + goods.cover" mode="aspectFill" class="bg" />
+      <div class="infos">
+        <div class="between">
+          <div class="name">{{goods.title}}</div>
+          <div class="price"><span>{{goods.price}}</span>元</div>
+        </div>
+        <div class="intro">{{goods.content}}</div>
       </div>
-      <div class="intro">{{goods.content}}</div>
-    </div>
 
-    <div class="cates" v-for="(cate, i1) in cates" :key="id">
-      <h3>{{cate.attr_name}}</h3>
-      <ul>
-        <li v-for="(child, i2) in cate.children"
-            :key="id"
-            class="btn "
-            :class="{
+      <div class="cates" v-for="(cate, i1) in cates" :key="id">
+        <h3>{{cate.attr_name}}</h3>
+        <ul>
+          <li v-for="(child, i2) in cate.children"
+              :key="id"
+              class="btn "
+              :class="{
               'btn-style1': child.id === cateIds['c'+cate.id],
               'btn-style2': child.id !== cateIds['c'+cate.id]
             }" @click="selectCate('c'+cate.id, child.id)">{{child.attr_name}}</li>
-      </ul>
+        </ul>
+      </div>
     </div>
+
 
     <div class="footer-btns">
       <div class="l center">

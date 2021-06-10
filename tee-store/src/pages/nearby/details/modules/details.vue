@@ -1,4 +1,5 @@
 <style scoped>
+.c-details2 { max-height: 100vh; height: calc(100vh - 210px);  }
 .c-details .cates { margin: 0 40px 35px 40px; }
 .c-details .cates h3 { font-size: 24px; margin: 0 0 25px 12px; }
 .c-details .cates ul { display: flex; flex-wrap: wrap; }
@@ -9,7 +10,7 @@
 <template>
 <div class="c-drawer" v-if="visible">
   <div class="c-drawer-cover" :class="{'c-drawer-cover-show': showItem}" @animationend="anEnd"></div>
-  <div class="c-drawer-box c-details" :class="{'c-drawer-show': showItem}">
+  <div class="c-drawer-box c-details c-details2" :class="{'c-drawer-show': showItem}">
     <div class="btn-circle c-drawer-close" @click="hide"><img src="/static/images/x2.png" /></div>
     <div class="c-drawer-scroll">
       <div class="nearby-goods-detail">

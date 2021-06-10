@@ -14,10 +14,10 @@
 
 <template>
 <div class="page">
-  <c-header menus storeLogo="/static/images/logo2.png" />
+  <c-header menus :storeLogo="storeData.shop_logo" />
   <div class="container" style="padding-bottom: 0;">
     <!-- 地址信息 -->
-    <addr-info ref="top" showCart showShare :record="addrData" @refresh="getCart" />
+    <addr-info ref="top" showCart showShare :record="addrData" @refresh="getCart" @tap="toStores" />
 
     <!-- 产品信息 -->
     <div class="pr">
@@ -222,6 +222,11 @@ export default {
           this.$refs.detail.hide()
         }
         this.isAjax = false
+      })
+    },
+    toStores () {
+      mpvue.navigateBack({
+        delta: -1
       })
     }
   },

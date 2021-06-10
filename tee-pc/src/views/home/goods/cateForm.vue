@@ -83,7 +83,7 @@ export default {
   },
   data () {
     return {
-      title: '添加产品',
+      title: '添加产品分类',
       visible: false,
       cateList: [],
       isEdit: false,

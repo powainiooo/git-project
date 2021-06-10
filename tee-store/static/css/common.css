@@ -121,7 +121,7 @@
 .nearby-goods-detail .prices img { width: 75px; }
 .nearby-goods-detail .prices div div { font-size: 20px; color: #F0916C; }
 .nearby-goods-detail .prices div div span { font-size: 54px; font-family: DinL; }
-.nearby-goods-detail .c-tag { width: 130px; margin: 0 20px 20px 0; }
+.nearby-goods-detail .c-tag { margin: 0 20px 20px 0; }
 
 /* 订单确认页 */
 .order-confirm .form-title { font-size: 20px; line-height: 20px; color: #9E9E9F; margin-bottom: 10px; }

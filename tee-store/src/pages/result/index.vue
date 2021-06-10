@@ -33,7 +33,7 @@
       <p class="info" v-else-if="status === 'fail'">网络拥堵 或 网络异常，请点击“重新支付”，以完成订单支付。</p>
       <div class="center">
         <button class="btn btn-style1 mr25" v-if="status === 'suc'" @click="toOrder">查看订单详情</button>
-        <button class="btn btn-style1 mr25" v-else-if="status === 'fail'" @clicl="repay">重新支付</button>
+        <button class="btn btn-style1 mr25" v-else-if="status === 'fail'" @click="repay">重新支付</button>
         <button class="btn btn-style2" @click="backIndex">返回首页</button>
       </div>
     </div>

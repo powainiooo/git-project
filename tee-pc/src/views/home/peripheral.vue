@@ -116,8 +116,9 @@ export default {
       cateList: [],
       statusList: [
         { id: '0', name: '全部' },
-        { id: '1', name: '下架' },
-        { id: '2', name: '上架' }
+        { id: 2, name: '在售' },
+        { id: 1, name: '下架' },
+        { id: -1, name: '售罄' }
       ],
       cate: '',
       status: '',

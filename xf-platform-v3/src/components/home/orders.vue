@@ -5,7 +5,7 @@
 .c-tables-orders td:nth-last-child(2)>div { text-align: center; padding-right: 0; margin: 0 auto; }
 .c-tables-orders td:nth-last-child(3)>div { text-align: center; padding-right: 0; }
 
-.refund-hint { position: absolute; top: 0; right: 0; bottom: 0; left: 0; background-color: rgba(11, 11, 13, 0.9); display: flex; align-items: center; }
+.refund-hint { position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 10; background-color: rgba(11, 11, 13, 0.9); display: flex; align-items: center; }
 .refund-hint>div { margin-left: 250px; }
 .refund-hint>div h3 { color: #ffffff; margin-bottom: 20px; font-size: 18px; }
 .refund-hint>div p { color: #ffffff; margin-bottom: 50px; font-size: 16px; line-height: 24px; }

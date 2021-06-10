@@ -106,7 +106,7 @@
       <li>销售状态</li>
     </ul>
     <transition enter-active-class="animated bounceIn" leave-active-class="animated bounceOut" duration="400">
-      <div class="hint" v-if="showHint">请按键盘“回车键”保存修改。</div>
+<!--      <div class="hint" v-if="showHint">请按键盘“回车键”保存修改。</div>-->
     </transition>
     <div class="tr" v-for="item in prices" :key="item.id">
       <div class="names pr">
@@ -116,9 +116,9 @@
           <input v-model="item.num"
                  @focus="showHint = true"
                  @blur="showHint = false"
-                 @keyup.enter="changeNums($event, item)" />张
+                 @keyup="changeNums($event, item)" />张
         </div>
-        <div class="warnTxt" v-if="Number(item.num) < item.min" style=" left: 105%; top: 10px;"><span>票数不能减少！</span></div>
+        <div class="warnTxt" v-if="true" style=" left: 105%; top: 10px;"><span>请按键盘“回车键”保存修改。</span></div>
       </div>
       <div class="nums">{{item.sold_num}}</div>
       <t-switch v-model="item.sold_out_flag" :true-value="1" :false-value="0" @on-change="statusChange($event, item.id)">
@@ -133,7 +133,7 @@
       <img :src="getIndexSrc(3)" />
       <span>链接码 及 验票码</span>
     </div>
-    <Button size="small">验票流程</Button>
+    <Button size="small" @click="downloadImg(moduleSrc)">验票流程</Button>
   </div>
 
   <div class="c-infos-qrcode" v-if="record.sub_state !== 0">
@@ -213,7 +213,8 @@ export default {
   data () {
     return {
       showHint: false,
-      prices: []
+      prices: [],
+      moduleSrc: 'https://image.leesticket.com//uploads/20210610/26706d8b5a89a5853470767ffc83dbdd.jpg'
     }
   },
   inject: ['getDetails'],
@@ -223,12 +224,21 @@ export default {
     },
     changeNums (e, record) {
       console.log('changeNums', e)
-      if (Number(e.target.value) < record.min) return
-      const params = {
-        ticket_price_id: record.id,
-        num: e.target.value
+      if (Number(e.target.value) < record.min) {
+        record.num = record.min
+        return
       }
-      this.changeTicketInfo(params)
+      if (!/^[\d|\.]*$/.test(record.num)) {
+        record.num = record.min
+        return
+      }
+      if (e.key === 'Enter') {
+        const params = {
+          ticket_price_id: record.id,
+          num: e.target.value
+        }
+        this.changeTicketInfo(params)
+      }
     },
     statusChange (e, id) {
       console.log('statusChange', e)

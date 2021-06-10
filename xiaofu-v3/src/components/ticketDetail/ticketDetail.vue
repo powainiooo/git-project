@@ -183,7 +183,7 @@
     <div class="price" v-if="record.sub_state != 6">{{price}}<span>RMB</span></div>
     <div class="hint" v-else>
       <p>未开售</p>
-      <div>开票时间: <span>{{record.start_date}}  {{record.start_time}}</span></div>
+      <div>开票时间: <span>{{saleTime}}</span></div>
     </div>
     <button @click="handleConfirm" :disabled="buyDisabled">{{btnName}}</button>
   </div>
@@ -200,6 +200,8 @@ import recommend from './recommend'
 import information from './information'
 import cSelect from './select'
 import { postAction } from '@/utils/api'
+import { formatDate } from '@/utils'
+
 export default {
   name: 'app',
   components: {
@@ -255,6 +257,10 @@ export default {
         console.log('item', item)
         return Number(item.price) * this.formData.num
       }
+    },
+    saleTime () {
+      const st = this.record.sale_start_time
+      return st ? formatDate(new Date(st * 1000), 'yyyy-MM-dd HH:mm') : ''
     }
   },
   data () {

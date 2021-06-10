@@ -577,8 +577,8 @@ export default {
           this.$refs.alert.show('suc')
         } else {
           this.$refs.alert.show('fail', res.msg)
+          this.confirm.isAjax = false
         }
-        this.confirm.isAjax = false
       })
     },
     onOk () {

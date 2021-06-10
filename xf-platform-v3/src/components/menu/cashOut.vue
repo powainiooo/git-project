@@ -30,8 +30,8 @@
   </Form>
   <hr v-if="formData.invoice === '1'"/>
   <Form ref="form" :model="formData" class="form" style="margin-top: 45px" v-if="formData.invoice === '1'">
-    <div class="form-title">小夫有票代售服务费发票（电子档）</div>
-    <tag-line title="发票名称" :width="300" class="mb10">票务代售服务费</tag-line>
+    <div class="form-title" style="width: 300px">小夫有票代售服务费发票（电子档）</div>
+    <tag-line title="发票名称" class="mb10">票务代售服务费</tag-line>
     <FormItem>
       <Input v-model="formData.company" placeholder="公司全称" />
     </FormItem>

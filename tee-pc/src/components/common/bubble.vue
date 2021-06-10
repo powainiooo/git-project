@@ -3,10 +3,10 @@
 .c-bubble>img { position: absolute; }
 .c-bubble .b1 { width: 3.9vw; top: 16.7vh; left: 88.5%; animation: bubble 2s ease infinite alternate; }
 .c-bubble .b2 { width: 30.9vw; top: -40.4vh; left: -40px; animation: bubble2 8s ease infinite alternate; }
-.c-bubble .b3 { width: 15vw; top: -3.5vh; left: 0; animation: bubble 5s ease infinite alternate; }
-.c-bubble .b4 { width: 12.65vw; top: 81.76vh; left: 85.7%; animation: bubble 4s ease infinite alternate; }
-.c-bubble .b5 { width: 20.8vw; top: 33.33vh; left: 22.19%; animation: bubble 7s ease infinite alternate; }
-.c-bubble .b6 { width: 29.5vw; top: 70vh; left: 64.69%; animation: bubble2 7s ease infinite alternate; }
+.c-bubble .b3 { width: 10.8vw; top: -3.5vh; left: 0; animation: bubble 5s ease infinite alternate; }
+.c-bubble .b4 { width: 9.2vw; top: 81.76vh; left: 85.7%; animation: bubble 4s ease infinite alternate; }
+.c-bubble .b5 { width: 20.5vw; top: 33.33vh; left: 22.19%; animation: bubble 7s ease infinite alternate; }
+.c-bubble .b6 { width: 20.5vw; top: 70vh; left: 64.69%; animation: bubble2 7s ease infinite alternate; }
 @keyframes bubble {
   0% { transform: translateY(100%); }
   100% { transform: translateY(0); }

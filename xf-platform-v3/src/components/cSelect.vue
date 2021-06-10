@@ -1,6 +1,10 @@
 <style>
 .c-select {
   position: relative;
+  transition: all .2s ease-in-out;
+}
+.c-select:active {
+  transform: scale(.95)
 }
 .c-select-line {
   min-width: 90px;

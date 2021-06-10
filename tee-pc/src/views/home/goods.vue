@@ -57,7 +57,7 @@
         <td><div>{{item.title}}</div></td>
         <td>
           <div>
-            <div class="img-box"><img :src="imgSrc + item.cover" /></div>
+            <div class="img-box img-box-height"><img :src="imgSrc + item.cover" /></div>
           </div>
         </td>
         <td>

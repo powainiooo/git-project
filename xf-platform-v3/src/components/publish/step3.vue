@@ -40,7 +40,7 @@
             <div>
               <a href="javascript:;"
                  class="btn-close"
-                 v-if="index > 0"
+                 v-if="index > 0 && !isEditor"
                  @click="delArtist(index)">
                 <img src="@/assets/img/ico-del.png" width="20" />
               </a>
@@ -73,7 +73,7 @@
             <img :src="getIndexSrc(index)" class="index" />
             <a href="javascript:;"
                class="btn-close"
-               v-if="index > 0"
+               v-if="index > 0 && !isEditor"
                @click="delActi(index)">
               <img src="@/assets/img/ico-del.png" width="20" />
             </a>

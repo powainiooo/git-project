@@ -19,10 +19,9 @@
       border-radius 15px
       background url("../assets/img/ico-search.png") no-repeat 10px center #ffffff
     a
-      margin-left 10px
-      font-size 0
+      display block; size(28px, 28px); background url("../assets/img/ico-menu.png") no-repeat; background-size 100% 100%; margin-left 10px;
       &:hover
-        opacity .5
+        background-image url("../assets/img/ico-menu2.png")
 </style>
 
 <template>
@@ -30,7 +29,7 @@
   <img src="@/assets/img/logo.png" width="161" />
   <div class="c-header-right">
     <input />
-    <a href="javascript:;" @click="openMenu"><img src="@/assets/img/ico-menu.png" /></a>
+    <a href="javascript:;" @click="openMenu"></a>
   </div>
 
   <menus />

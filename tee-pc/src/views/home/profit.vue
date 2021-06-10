@@ -4,6 +4,8 @@
   background-color #ffffff; min-height 100%; position relative; overflow hidden; padding-top 11px;
   &:before
     content ''; size(100%, 68px); background-color #F9F9F9; abTL(0, 0); z-index 0;
+.table-scroll
+  height calc(100vh - 188px); overflow-y auto
 </style>
 
 <template>
@@ -11,10 +13,14 @@
   <div class="pr">
     <Tabs type="card" class="tee-tabs" @on-click="tabChange">
       <TabPane name="tee" label="茶饮订单">
-        <tee ref="tee" />
+        <div class="table-scroll scrollBar">
+          <tee ref="tee" />
+        </div>
       </TabPane>
       <TabPane name="peri" label="周边订单">
-        <peripheral ref="peri" />
+        <div class="table-scroll scrollBar">
+          <peripheral ref="peri" />
+        </div>
       </TabPane>
     </Tabs>
   </div>

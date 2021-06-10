@@ -33,7 +33,7 @@
       <p class="info" v-else-if="status === 'fail'">网络拥堵 或 网络异常，请点击“重新支付”，以完成订单支付。</p>
       <div class="center">
         <button class="btn btn-style1 mr25" v-if="status === 'suc'" @click="toOrder">查看订单详情</button>
-        <button class="btn btn-style1 mr25" v-else-if="status === 'fail'">重新支付</button>
+        <button class="btn btn-style1 mr25" v-else-if="status === 'fail'" @clicl="repay">重新支付</button>
         <button class="btn btn-style2" @click="backIndex">返回首页</button>
       </div>
     </div>
@@ -43,6 +43,7 @@
 
 <script>
 import cHeader from '@/components/header'
+import store from '@/store'
 export default {
   components: {
     cHeader
@@ -89,6 +90,31 @@ export default {
           console.log('订阅消息失败')
           console.log(err)
           console.log('--------------------')
+        }
+      })
+    },
+    repay () {
+      mpvue.showLoading({
+        title: '支付中'
+      })
+      const jsapi = store.state.pay
+      mpvue.requestPayment({
+        'timeStamp': jsapi.timeStamp,
+        'nonceStr': jsapi.nonceStr,
+        'package': jsapi.package,
+        'signType': jsapi.signType,
+        'paySign': jsapi.paySign,
+        'success': res => {
+          // this.getMessageAuth()
+          console.log('pay success', res)
+          this.status = 'suc'
+          this.getMessageAuth()
+          mpvue.hideLoading()
+        },
+        'fail': err => {
+          console.log('pay fail', err)
+          this.status = 'fail'
+          mpvue.hideLoading()
         }
       })
     }

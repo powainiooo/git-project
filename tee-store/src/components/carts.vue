@@ -88,6 +88,9 @@ export default {
           this.visible = true
           this.$nextTick(() => {
             this.showItem = true
+            if (res.data.length === 0) {
+              this.hide()
+            }
           })
         }
       })
@@ -109,6 +112,7 @@ export default {
       }).then(res => {
         if (res.code === 0) {
           this.getData()
+          this.$emit('refresh')
         }
       })
     },

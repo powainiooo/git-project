@@ -5,7 +5,7 @@
 
 <template>
 <div class="page">
-  <c-header />
+  <c-header menus />
   <div class="container2 pt20" style="padding-bottom: 0;">
     <div class="c-tabs">
       <ul class="c-tabs-btns">

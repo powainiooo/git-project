@@ -6,7 +6,7 @@
 
 <template>
 <div class="c-textarea">
-  <textarea @input="inputChange" placeholder="请输入备注信息" :maxlength="maxlength" />
+  <textarea placeholder="请输入备注信息" :maxlength="maxlength" @blur="inputChange" @confirm="inputChange"></textarea>
   <div>{{value.length}}/{{maxlength}}</div>
 </div>
 </template>
@@ -14,21 +14,16 @@
 <script type='es6'>
 export default {
 	name: 'app',
-  props: {
-	  value: {
-	    type: String,
-      default: ''
-    }
-  },
 	data() {
 		return {
-      maxlength: 50
+      maxlength: 50,
+      value: ''
     }
 	},
 	methods: {
     inputChange (e) {
-      // this.value = e.mp.detail.value
-      this.$emit('input', e.mp.detail.value)
+      this.value = e.mp.detail.value
+      this.$emit('change', e.mp.detail.value)
     }
   }
 }

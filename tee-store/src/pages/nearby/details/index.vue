@@ -8,7 +8,7 @@
   <c-header />
   <div class="container" style="padding-bottom: 0;">
     <!-- 地址信息 -->
-    <addr-info ref="top" :showBtn="false" showCart showShare showService :record="addrData"  />
+    <addr-info ref="top" :showBtn="false" showCart showShare showService :record="addrData" @refresh="getCart" />
 
     <div class="container2 nearby-container">
       <div class="nearby-goods-detail">

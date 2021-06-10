@@ -48,6 +48,7 @@
       <div class="l center">
         <picker :range="nums" @change="numChange">
           <div class="nums"><span>{{num}}</span>杯</div>
+          <img src="/static/images/arrow5.png" mode="widthFix" class="ar" />
         </picker>
       </div>
       <div class="r">

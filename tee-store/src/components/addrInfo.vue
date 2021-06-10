@@ -5,7 +5,11 @@
 <template>
 <div class="addr-info">
   <div class="between">
-    <button class="btn" v-if="showBtn">
+    <button class="btn"
+            v-if="showBtn"
+            :hover-class="record.onlyName ? '' : 'hscale'"
+            hover-stay-time="10"
+            @click="btntap">
       <span>{{record.name}}</span>
       <img src="/static/images/arrow1.png" mode="widthFix" class="w10 ml20" v-if="!record.onlyName" />
     </button>
@@ -31,7 +35,7 @@
   </div>
   <div class="dis" v-if="record.dis">距离你{{record.dis}}km</div>
   <!-- 购物车 -->
-  <carts ref="cart" />
+  <carts ref="cart" @refresh="handleRefresh" />
 </div>
 </template>
 
@@ -86,6 +90,12 @@ export default {
     }
   },
 	methods: {
+    handleRefresh () {
+      this.$emit('refresh')
+    },
+    btntap () {
+      this.$emit('tap')
+    },
     openCarts () {
       this.$refs.cart.show({
         shopId: this.record.shopId,

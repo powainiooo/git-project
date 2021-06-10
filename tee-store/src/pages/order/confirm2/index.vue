@@ -5,7 +5,7 @@
 <template>
 <div class="page">
   <c-header />
-  <div class="container2 pt20 order-confirm">
+  <div class="container2 ovh pt20 order-confirm">
 
     <div class="c-tabs">
       <ul class="c-tabs-btns">
@@ -124,7 +124,7 @@
       </picker>
 
       <div class="ml30 mb10">备注</div>
-      <c-textarea v-model="formData.user_remark" />
+      <c-textarea @change="remarkChange" />
     </div>
 
     <div class="footer-btns">
@@ -209,6 +209,9 @@ export default {
   },
 
   methods: {
+    remarkChange (e) {
+      this.formData.user_remark = e
+    },
     tabChange (key, index) {
       if (key === 'store') {
         if (this.formData.shop_id === 0) {

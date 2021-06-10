@@ -4,10 +4,10 @@
 
 <template>
 <div class="page">
-  <c-header />
+  <c-header menus />
   <div class="container" style="padding-bottom: 0;">
     <!-- 地址信息 -->
-    <addr-info ref="top" :showBtn="false" showTypes showCart showShare :record="addrData" @change="typeChange" />
+    <addr-info ref="top" :showBtn="false" showTypes showCart showShare :record="addrData" @change="typeChange" @refresh="getCart" />
 
     <div class="container2 nearby-container">
       <div class="mt25">

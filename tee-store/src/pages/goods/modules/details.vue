@@ -45,6 +45,7 @@
       <div class="l center">
         <picker :range="nums" @change="numChange">
           <div class="nums"><span>{{num}}</span>杯</div>
+          <img src="/static/images/arrow5.png" mode="widthFix" class="ar" />
         </picker>
       </div>
       <div class="r">
@@ -81,7 +82,6 @@ export default {
         if (res.code === 0) {
           this.goods = res.data.goods
           this.cates = res.data.attrs
-          this.num = data.num
 
           const ids = {}
           for (const i of res.data.attrs) {
@@ -111,7 +111,6 @@ export default {
       this.num = this.nums[e.mp.detail.value]
     },
     addCart () {
-	    if (this.isAjax) return
 	    const ids = []
       for (const key in this.cateIds) {
         ids.push(this.cateIds[key])
@@ -121,7 +120,6 @@ export default {
         buy_nums: this.num,
         attrs: ids
       }
-      this.isAjax = true
       this.$emit('confirm', goods)
     }
   }

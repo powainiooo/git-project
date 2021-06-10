@@ -15,7 +15,7 @@
           <p class="form-title ml15">联系电话</p>
           <div class="form-line">
             <div class="form-item">
-              <input v-model="formData.phone" class="large" />
+              <input type="number" v-model="formData.phone" class="large" />
             </div>
           </div>
         </div>
@@ -70,9 +70,8 @@
         </div>
       </picker>
 
-
       <div class="ml30 mb10">备注</div>
-      <c-textarea v-model="formData.user_remark" />
+      <c-textarea @change="remarkChange" />
     </div>
 
     <div class="footer-btns">
@@ -131,6 +130,9 @@ export default {
   },
 
   methods: {
+    remarkChange (e) {
+      this.formData.user_remark = e
+    },
     getPhoneNumber (e) {
       console.log('getPhoneNumber', e)
     },

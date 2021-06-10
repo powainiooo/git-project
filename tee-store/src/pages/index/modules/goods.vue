@@ -6,7 +6,7 @@
 .index-goods .arrows .a2 { width: 16px; transition: transform 0.4s cubic-bezier(.23,.78,.33,.97); }
 .index-goods-show .arrows .a2 { width: 16px; transform: rotateZ(180deg); }
 
-.index-scrolls { width: 100%; height: 100%; }
+.index-scrolls { width: 100%; height: calc(100% - 100px); }
 </style>
 
 <template>
@@ -15,11 +15,11 @@
     <img src="/static/images/index/arrow1.png" mode="widthFix" class="a1" />
     <img src="/static/images/index/arrow2.png" mode="widthFix" class="a2" />
   </div>
+  <div class="acenter mt50 ml50">
+    <img src="/static/images/index/icon1.png" mode="widthFix" class="w28 mr15" />
+    <span class="f30">兑换好礼</span>
+  </div>
   <scroll-view scroll-y class="index-scrolls" @scrolltolower="reachBottom">
-    <div class="acenter mt50 ml50">
-      <img src="/static/images/index/icon1.png" mode="widthFix" class="w28 mr15" />
-      <span class="f30">兑换好礼</span>
-    </div>
     <goods-list v-if="visible" :list="list" />
   </scroll-view>
 </div>

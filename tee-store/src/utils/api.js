@@ -117,8 +117,9 @@ export const payment = (orderNo, orderId, from) => {
         },
         'fail': err => {
           console.log('pay fail', err)
+          store.commit('SET_PAY', jsapi)
           mpvue.reLaunch({
-            url: '/pages/result/main?result=fail'
+            url: `/pages/result/main?result=fail&id=${orderId}&from=${from}`
           })
           mpvue.hideLoading()
         }

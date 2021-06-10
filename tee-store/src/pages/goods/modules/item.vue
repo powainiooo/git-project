@@ -27,8 +27,13 @@ export default {
   },
   computed: {
     nums () {
-      const item = this.cartList.find(i => i.goods_id === this.record.id)
-      return item === undefined ? 0 : item.buy_nums
+      let num = 0
+      this.cartList.forEach(i => {
+        if (i.goods_id === this.record.id) {
+          num += i.buy_nums
+        }
+      })
+      return num
     }
   },
   data () {

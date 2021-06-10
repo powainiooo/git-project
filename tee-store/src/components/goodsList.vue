@@ -1,5 +1,5 @@
 <style scoped>
-.c-goods-grid { margin: 32px; min-height: 100%; position: relative; display: flex; align-items: baseline; flex-wrap: wrap; padding-top: 10px; }
+.c-goods-grid { padding: 32px; min-height: 100%; position: relative; display: flex; align-items: baseline; flex-wrap: wrap; padding-top: 10px; }
 .c-goods-grid:before { content: ''; width: 2px; position: absolute; left: 50%; top: 0; bottom: 0; background-color: #E2E2E2; transform: scaleX(.5); }
 .c-goods-col { width: 50%; display: flex; position: relative; padding-bottom: 15px; padding-top: 44px; }
 .c-goods-col:after { content: ''; height: 2px; position: absolute; left: 0; right: 0; top: 0; background-color: #E2E2E2; transform: scaleY(.5); }

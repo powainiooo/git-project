@@ -14,10 +14,10 @@
 
 <template>
 <div class="page">
-  <c-header storeLogo="/static/images/logo2.png" />
+  <c-header menus storeLogo="/static/images/logo2.png" />
   <div class="container" style="padding-bottom: 0;">
     <!-- 地址信息 -->
-    <addr-info ref="top" showCart showShare :record="addrData" />
+    <addr-info ref="top" showCart showShare :record="addrData" @refresh="getCart" />
 
     <!-- 产品信息 -->
     <div class="pr">
@@ -118,7 +118,8 @@ export default {
       closeModalVisible: false,
       closeHintVisible: false,
       freeModalVisible: false,
-      cartNum: 0
+      cartNum: 0,
+      isAjax: false
     }
   },
   computed: {
@@ -148,11 +149,13 @@ export default {
           const types = []
           const goods = []
           for (const item of res.data) {
-            types.push({
-              id: item.cid,
-              name: item.cname
-            })
-            goods.push(...item.goods)
+            if (item.goods.length > 0) {
+              types.push({
+                id: item.cid,
+                name: item.cname
+              })
+              goods.push(...item.goods)
+            }
           }
           let id = ''
           goods.forEach(i => {
@@ -204,6 +207,8 @@ export default {
       })
     },
     addCart (goods) {
+      if (this.isAjax) return
+      this.isAjax = true
       postAction('/userapi/shopping/card/store', {
         shop_id: this.shopId,
         type: 1,
@@ -216,6 +221,7 @@ export default {
           this.getCart()
           this.$refs.detail.hide()
         }
+        this.isAjax = false
       })
     }
   },

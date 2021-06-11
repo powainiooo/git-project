@@ -106,19 +106,18 @@
       <li>销售状态</li>
     </ul>
     <transition enter-active-class="animated bounceIn" leave-active-class="animated bounceOut" duration="400">
-<!--      <div class="hint" v-if="showHint">请按键盘“回车键”保存修改。</div>-->
     </transition>
-    <div class="tr" v-for="item in prices" :key="item.id">
+    <div class="tr" v-for="(item, index) in prices" :key="item.id">
       <div class="names pr">
         <h3>{{item.name}}</h3>
         <div class="between">
 <!--          <span>{{item.num}}</span>-->
           <input v-model="item.num"
-                 @focus="showHint = true"
-                 @blur="showHint = false"
+                 @focus="showHintIndex = index"
+                 @blur="showHintIndex = -1"
                  @keyup="changeNums($event, item)" />张
         </div>
-        <div class="warnTxt" v-if="true" style=" left: 105%; top: 10px;"><span>请按键盘“回车键”保存修改。</span></div>
+        <div class="warnTxt" v-if="showHintIndex === index" style=" left: 105%; top: 10px;"><span>请按键盘“回车键”保存。</span></div>
       </div>
       <div class="nums">{{item.sold_num}}</div>
       <t-switch v-model="item.sold_out_flag" :true-value="1" :false-value="0" @on-change="statusChange($event, item.id)">
@@ -212,7 +211,7 @@ export default {
   },
   data () {
     return {
-      showHint: false,
+      showHintIndex: false,
       prices: [],
       moduleSrc: 'https://image.leesticket.com//uploads/20210610/26706d8b5a89a5853470767ffc83dbdd.jpg'
     }

@@ -4,22 +4,6 @@
 
 <template>
 <div class="swiper-sec">
-  <div class="line1 between">
-    <div class="l">
-      <img src="/static/images/index/tag3.png" mode="widthFix" />
-      <p>{{nums}}</p>
-    </div>
-    <div class="r acenter">
-      <button class="btn-circle mr15"
-              hover-class="hscale"
-              hover-stay-time="10"
-              @click="openScan"><img src="/static/images/index/scan.png" mode="widthFix" class="w26" /></button>
-      <button class="btn"
-              hover-class="hscale"
-              hover-stay-time="10"
-              @click="toPage('/pages/personal/gift/main?status=used')">使用记录</button>
-    </div>
-  </div>
   <div class="icons">
     <div class="gift"
          hover-class="hscale"

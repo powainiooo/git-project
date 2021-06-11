@@ -1852,6 +1852,11 @@ cosmiconfig@^5.0.0:
     js-yaml "^3.13.1"
     parse-json "^4.0.0"
 
+countup.js@^2.0.7:
+  version "2.0.7"
+  resolved "https://registry.npm.taobao.org/countup.js/download/countup.js-2.0.7.tgz#56b72a87fc0ee3cadb38356c246ccac88fb0a8cc"
+  integrity sha1-Vrcqh/wO48rbODVsJGzKyI+wqMw=
+
 create-ecdh@^4.0.0:
   version "4.0.4"
   resolved "https://registry.npm.taobao.org/create-ecdh/download/create-ecdh-4.0.4.tgz#d6e7f4bffa66736085a0762fd3a632684dabcc4e"
@@ -3248,6 +3253,11 @@ graceful-fs@^4.1.11, graceful-fs@^4.1.2, graceful-fs@^4.1.6:
   version "4.2.6"
   resolved "https://registry.npm.taobao.org/graceful-fs/download/graceful-fs-4.2.6.tgz#ff040b2b0853b23c3d31027523706f1885d76bee"
   integrity sha1-/wQLKwhTsjw9MQJ1I3BvGIXXa+4=
+
+gsap@^3.6.1:
+  version "3.6.1"
+  resolved "https://registry.npm.taobao.org/gsap/download/gsap-3.6.1.tgz#618f2338044d2b78b8cbced8ea8bf246d1cf6407"
+  integrity sha1-YY8jOARNK3i4y87Y6ovyRtHPZAc=
 
 gzip-size@^4.1.0:
   version "4.1.0"
@@ -6995,6 +7005,11 @@ vm-browserify@^1.0.1:
   resolved "https://registry.npm.taobao.org/vm-browserify/download/vm-browserify-1.1.2.tgz#78641c488b8e6ca91a75f511e7a3b32a86e5dda0"
   integrity sha1-eGQcSIuObKkadfUR56OzKobl3aA=
 
+vue-countup-v2@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.npm.taobao.org/vue-countup-v2/download/vue-countup-v2-4.0.0.tgz#061a1ac8ee4aa207bb9d23d2bcc1d53a5f7c3675"
+  integrity sha1-BhoayO5Koge7nSPSvMHVOl98NnU=
+
 vue-hot-reload-api@^2.1.0, vue-hot-reload-api@^2.2.0:
   version "2.3.4"
   resolved "https://registry.npm.taobao.org/vue-hot-reload-api/download/vue-hot-reload-api-2.3.4.tgz#532955cc1eb208a3d990b3a9f9a70574657e08f2"
@@ -7231,6 +7246,11 @@ ws@^4.0.0:
   dependencies:
     async-limiter "~1.0.0"
     safe-buffer "~5.1.0"
+
+wx-countup@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.nlark.com/wx-countup/download/wx-countup-1.0.0.tgz#602445b27a9e8cfd530aad50d71a655cff5c2f24"
+  integrity sha1-YCRFsnqejP1TCq1Q1xplXP9cLyQ=
 
 xtend@^4.0.0, xtend@~4.0.1:
   version "4.0.2"

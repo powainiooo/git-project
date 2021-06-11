@@ -172,7 +172,7 @@
             <img :src="getIndexSrc(index)" style="display: block; margin-bottom: 10px; margin-left: 10px; "/>
             <a href="javascript:;"
                class="btn-close"
-               v-if="index > 0"
+               v-if="index > 0 && !isEditor"
                @click="delNotice(index)"
                style="position: absolute; top: 60px; right: 26px;">
               <img src="@/assets/img/ico-close2.png" width="20" />

@@ -117,7 +117,7 @@ export default {
   },
 
   onLoad (options) {
-    this.key = options.key
+    this.key = options.key || 'score'
     this.code = options.code
     this.getData()
   }

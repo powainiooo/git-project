@@ -3,9 +3,6 @@
   position: relative;
   transition: all .2s ease-in-out;
 }
-.c-select:active {
-  transform: scale(.95)
-}
 .c-select-line {
   min-width: 90px;
   height: 30px;
@@ -19,6 +16,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.c-select:hover .c-select-line {
+  background: linear-gradient(349deg, #A5C0F7 0%, #A5C0F7 100%)
 }
 .c-select-select {
   width: 100%;
@@ -34,7 +34,7 @@
 </style>
 
 <template>
-<div class="c-select" @mousedown.stop="sm" @mouseup.stop="sm">
+<div class="c-select" @mousedown.stop="sm" @mouseup.stop="sm" @click.stop="sm">
   <div class="c-select-line">
     <span>{{name}}</span>
     <Icon type="ios-arrow-down" />

@@ -28,6 +28,11 @@ export default {
         url
       })
     }
+    const storeData = mpvue.getStorageSync('storeData')
+    console.log('storeData', storeData)
+    if (storeData && storeData.shop_id) {
+      store.commit('SET_STOREINFO', storeData)
+    }
   },
   methods: {
     loadFont () {

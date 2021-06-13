@@ -9,7 +9,6 @@ const ajax = (opts, autoMsg = true) => {
   return new Promise((resolve, reject) => {
     wx.showNavigationBarLoading()
     token = store.state.token
-    console.log('token', store, token)
     opts.url = `${baseUrl}${opts.url}?${tokenKey}=${token}`
     const extras = {
       header: {
@@ -17,11 +16,12 @@ const ajax = (opts, autoMsg = true) => {
         // 'Content-Type': 'application/x-www-form-urlencoded'
       },
       success (res) {
-        console.log('token:', token)
         console.log('请求参数', opts)
         console.log('返回数据', res)
         resolve(res.data)
         if (res.data.code === 0) {
+        } else if (res.data.code === 9) {
+          console.log('未登录')
         } else {
           // console.log('res.data.ret')
           if (autoMsg) {

@@ -18,7 +18,7 @@
 
 <template>
 <div class="c-footer">
-  <a href="/pages/stores/main" open-type="reLaunch" :class="{'active': current === 'order'}">
+  <a href="#" open-type="reLaunch" :class="{'active': current === 'order'}" @click="toStore">
     <div class="icon icon1">
       <img src="/static/images/footer/icon1.png" mode="widthFix" class="img1" />
       <img src="/static/images/footer/icon1-active.png" mode="widthFix" class="img2" />
@@ -44,6 +44,7 @@
 </template>
 
 <script type='es6'>
+import store from '../store'
 export default {
   name: 'app',
   props: {
@@ -52,9 +53,26 @@ export default {
       default: ''
     }
   },
+  computed: {
+    storeInfo () {
+      return store.state.storeInfo
+    }
+  },
   data () {
     return {}
   },
-  methods: {}
+  methods: {
+    toStore () {
+      if (this.storeInfo.shop_id) {
+        mpvue.reLaunch({
+          url: '/pages/goods/main?id=' + this.storeInfo.shop_id
+        })
+      } else {
+        mpvue.navigateTo({
+          url: '/pages/stores/main'
+        })
+      }
+    }
+  }
 }
 </script>

@@ -5,13 +5,21 @@
 <template>
 <div class="addr-info">
   <div class="between">
-    <button class="btn"
+    <button class="btn acenter"
             v-if="showBtn"
             :hover-class="record.onlyName ? '' : 'hscale'"
             hover-stay-time="10"
             @click="btntap">
       <span>{{record.name}}</span>
       <img src="/static/images/arrow1.png" mode="widthFix" class="w10 ml20" v-if="!record.onlyName" />
+    </button>
+    <button class="btn acenter"
+            v-if="showLocation"
+            hover-class="hscale"
+            hover-stay-time="10"
+            @click="btntap">
+      <img src="/static/images/icon-geo.png" mode="widthFix" class="w26 mr10" />
+      <span>{{record.name}}</span>
     </button>
     <button open-type="contact" class="btn acenter" v-if="showService">
       <img src="/static/images/service.png" mode="widthFix" class="w26 mr20" />
@@ -49,6 +57,10 @@ export default {
 	  showBtn: {
 	    type: Boolean,
       default: true
+    },
+    showLocation: {
+	    type: Boolean,
+      default: false
     },
     showTypes: {
 	    type: Boolean,

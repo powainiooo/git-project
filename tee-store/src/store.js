@@ -9,7 +9,7 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
-    token: '25b31bd1974ffe80418007f37e45955a1',
+    token: '',
     personalInfo: {},
     isLogin: false,
     sysInfo: {},

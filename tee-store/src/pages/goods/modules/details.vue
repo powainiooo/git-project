@@ -1,7 +1,7 @@
 <style scoped>
 .c-details { padding-bottom: 150px; }
-.c-details .bg { width: 100%; height: 334px; border-radius: 70px 70px 0 0; }
-.c-details .infos { margin: 20px 34px 36px 34px; padding: 0 10px 50px 10px; }
+.c-details .bg { width: 100%; height: 334px; border-radius: 70px 70px 0 0; position: absolute; top: 0; left: 0; }
+.c-details .infos { margin: 354px 34px 36px 34px; padding: 0 10px 50px 10px; }
 .c-details .infos .name { font-size: 30px; }
 .c-details .infos .price { font-size: 20px; }
 .c-details .infos .price span { font-size: 54px; line-height: 65px; }
@@ -19,8 +19,8 @@
   <div class="c-drawer-cover" :class="{'c-drawer-cover-show': showItem}" @animationend="anEnd"></div>
   <div class="c-drawer-box c-details" :class="{'c-drawer-show': showItem}">
     <div class="btn-circle c-drawer-close" @click="hide"><img src="/static/images/x2.png" /></div>
+    <img :src="imgSrc + goods.cover" mode="aspectFill" class="bg" />
     <div class="c-drawer-scroll">
-      <img :src="imgSrc + goods.cover" mode="aspectFill" class="bg" />
       <div class="infos">
         <div class="between">
           <div class="name">{{goods.title}}</div>

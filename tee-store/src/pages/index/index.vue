@@ -2,7 +2,7 @@
 .index-page { height: 100vh; overflow: hidden; position: relative; }
 .index-swiper { width: 100%; height: calc(100vh - 104px - 272px); }
 .swiper-sec { height: 100%; }
-.index-page .line1 { width: 100%; position: absolute; top: 0; left: 0; padding: 22px 25px 0 32px; }
+.index-page .line1 { width: 100%; position: absolute; top: 0; left: 0; padding: 22px 25px 0 32px; z-index: 100; }
 .index-page .line1 .l img { width: 80px; }
 .index-page .line1 .l p { font-size: 100px; color: #41372D; line-height: 118px; }
 .swiper-sec .icons { width: 100%; height: 100%; padding-top: 176px; display: flex; justify-content: center; align-items: center; }
@@ -59,6 +59,8 @@
       <goods />
     </div>
     <c-footer />
+    <!-- 积分记录  -->
+    <records ref="records" />
   </div>
 </template>
 
@@ -70,6 +72,8 @@ import coins from './modules/coins'
 import coupons from './modules/coupons'
 import gifts from './modules/gifts'
 import goods from './modules/goods'
+import records from '../personal/points/modules/records'
+import store from '@/store'
 import { TweenMax } from 'gsap'
 import { getAction } from '@/utils/api'
 
@@ -81,7 +85,8 @@ export default {
     coins,
     coupons,
     gifts,
-    goods
+    goods,
+    records
   },
   computed: {
     showRecordBtn () {
@@ -91,6 +96,19 @@ export default {
         return this.coupon > 0
       } else if (this.current === 2) {
         return this.prize > 0
+      }
+    },
+    isLogin () {
+      return store.state.isLogin
+    },
+    token () {
+      return store.state.token
+    }
+  },
+  watch: {
+    token (token) {
+      if (token !== '') {
+        this.getData()
       }
     }
   },
@@ -117,6 +135,9 @@ export default {
           this.score = res.data.score
           this.coupon = res.data.coupon_nums
           this.prize = res.data.prize_nums
+          setTimeout(() => {
+            this.numsMove(this.score)
+          }, 500)
         }
       })
     },
@@ -124,13 +145,13 @@ export default {
       const obj = {
         x: 0
       }
-      TweenMax.to(obj, 0.6, {
+      TweenMax.to(obj, 0.7, {
         x: val,
         onComplete: () => {
           this.nums = parseInt(obj.x)
         },
         onUpdate: (e) => {
-          this.nums = obj.x.toFixed(1)
+          this.nums = obj.x.toFixed(0)
         }
       })
     },
@@ -147,7 +168,8 @@ export default {
     toRecord () {
       let url = ''
       if (this.current === 0) {
-        url = '/pages/personal/points/main?page=detail'
+        this.$refs.records.show()
+        return
       } else if (this.current === 1) {
         url = '/pages/personal/coupon/main?status=used'
       } else if (this.current === 2) {
@@ -159,14 +181,19 @@ export default {
     },
     openScan () {
       mpvue.scanCode({
-        success (res) {
-          console.log('scanCode success', res)
+        success: res => {
+          const keys = ['score', 'coupon', 'gift']
+          mpvue.navigateTo({
+            url: `/pages/scan/main?key=${keys[this.current]}&code=${res.result}`
+          })
         }
       })
     }
   },
   onShow () {
-    this.getData()
+    if (this.isLogin) {
+      this.getData()
+    }
   },
   onLoad (options) {
     Object.assign(this.$data, this.$options.data())

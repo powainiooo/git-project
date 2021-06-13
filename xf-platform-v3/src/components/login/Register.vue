@@ -10,6 +10,7 @@
       <div class="form-title">注册</div>
       <FormItem>
         <Input v-model="formData.email" placeholder="邮箱" @on-blur="emailCheck" />
+        <p style="color: #E63828; font-size: 12px; line-height: 12px; margin-bottom: -5px; margin-top: 5px; margin-left: 10px" v-if="showHint">{{hintMsg}}</p>
       </FormItem>
       <FormItem>
         <Input v-model="vericode.mobile" placeholder="联系电话" />
@@ -62,6 +63,8 @@ export default {
           validator: psw2Valid
         }]
       },
+      showHint: false,
+      hintMsg: '',
       emailPass: true,
       emailMsg: ''
     }
@@ -83,8 +86,7 @@ export default {
     handleNext () {
       this.$refs.form.validate((valid) => {
         if (valid) {
-          if (!this.emailPass) {
-            this.$Message.warning(this.emailMsg)
+          if (!this.showHint) {
             return false
           }
           this.formData.mobile = this.vericode.mobile
@@ -98,12 +100,20 @@ export default {
       })
     },
     emailCheck (e) {
+      if (!this.emailReg) {
+        this.showHint = true
+        this.hintMsg = '邮箱格式不正确'
+        return false
+      } else {
+        this.showHint = false
+        this.hintMsg = ''
+      }
       postAction('/editor/validate/check_email_available', {
         email: this.formData.email
       }).then(res => {
         if (res.code === 0) {
-          this.emailPass = false
-          this.emailMsg = res.msg
+          this.showHint = true
+          this.hintMsg = res.msg
         }
       })
     }

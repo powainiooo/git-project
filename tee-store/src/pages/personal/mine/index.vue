@@ -47,30 +47,43 @@
       <img src="/static/images/sd1.png" mode="widthFix" class="sd" />
     </div>
 
-    <a href="/pages/personal/address/main" class="line3 between">
+    <a href="/pages/personal/address/main" class="line3 between" hover-class="hscale" hover-stay-time="10">
       <span>收货地址</span>
       <img src="/static/images/arrow4.png" mode="widthFix" />
     </a>
-    <a href="/pages/personal/aboutus/main" class="line3 between">
+    <a href="/pages/personal/aboutus/main" class="line3 between" hover-class="hscale" hover-stay-time="10">
       <span>关于无事干杯</span>
       <img src="/static/images/arrow4.png" mode="widthFix" />
     </a>
   </div>
+  <c-footer />
 </div>
 </template>
 
 <script>
 import cHeader from '@/components/header'
+import cFooter from '@/components/footer'
 import store from '@/store'
 import { doLogin, getAction } from '@/utils/api'
 
 export default {
   components: {
-    cHeader
+    cHeader,
+    cFooter
   },
   computed: {
     isLogin () {
       return store.state.isLogin
+    },
+    token () {
+      return store.state.token
+    }
+  },
+  watch: {
+    token (token) {
+      if (token !== '') {
+        this.getData()
+      }
     }
   },
   data () {
@@ -102,10 +115,13 @@ export default {
       })
     }
   },
-
+  onShow () {
+    if (this.isLogin) {
+      this.getData()
+    }
+  },
   onLoad () {
     Object.assign(this.$data, this.$options.data())
-    this.getData()
   }
 }
 </script>

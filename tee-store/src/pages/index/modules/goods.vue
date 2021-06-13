@@ -1,5 +1,5 @@
 <style>
-.index-goods { width: 700px; height: calc(100vh - 104px); margin-top: 0; position: absolute; top: calc(100vh - 270px); left: 0; z-index: 50; transition: top 0.4s cubic-bezier(.23,.78,.33,.97); }
+.index-goods { width: 700px; height: calc(100vh - 104px); margin-top: 0; position: absolute; top: calc(100vh - 370px); left: 0; z-index: 50; transition: top 0.4s cubic-bezier(.23,.78,.33,.97); }
 .index-goods-show { top: 126px; }
 .index-goods .arrows { width: 80px; height: 60px; position: absolute; top: -22px; left: 66px; display: flex; flex-direction: column; align-items: center; z-index: 10; }
 .index-goods .arrows .a1 { width: 100%; }
@@ -27,12 +27,28 @@
 
 <script type='es6'>
 import goodsList from '@/components/goodsList'
+import store from '@/store'
 import { getAction } from '@/utils/api'
 
 export default {
   name: 'app',
   components: {
     goodsList
+  },
+  computed: {
+    isLogin () {
+      return store.state.isLogin
+    },
+    token () {
+      return store.state.token
+    }
+  },
+  watch: {
+    token (token) {
+      if (token !== '') {
+        this.getData()
+      }
+    }
   },
   data () {
     return {
@@ -43,7 +59,9 @@ export default {
     }
   },
   mounted () {
-    this.getData()
+    if (this.isLogin) {
+      this.getData()
+    }
   },
   methods: {
     toggle () {

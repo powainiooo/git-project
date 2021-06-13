@@ -33,7 +33,7 @@
           <c-list-item :record="item" :rank="i" />
         </div>
       </div>
-      <div class="empty-hint">
+      <div class="empty-hint" v-else>
         <p>Irrelevant Content</p>
         <div>无相关内容</div>
       </div>

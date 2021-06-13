@@ -11,23 +11,23 @@
     <div class="mt30 ml35 mr35 mb75">
       <div class="form-line mb30">
         <div class="form-item">
-          <input placeholder="收件姓名" v-model="formData.name" />
+          <input placeholder="收件姓名" v-model="formData.name" placeholder-style="font-size: 20rpx;" style="font-size: 30rpx;" />
         </div>
         <div class="form-item">
-          <input placeholder="联系电话" v-model="formData.phone" />
+          <input placeholder="联系电话" v-model="formData.phone" placeholder-style="font-size: 20rpx;" style="font-size: 36rpx;" />
         </div>
       </div>
       <div class="form-line mb30">
         <div class="form-item">
           <picker mode="region" @change="addrChange">
-            <input placeholder="选择 省份 / 市级 / 区" disabled v-model="addrStr" />
+            <input placeholder="选择 省份 / 市级 / 区" disabled v-model="addrStr" placeholder-style="font-size: 20rpx;" style="font-size: 24rpx;" />
           </picker>
           <img src="/static/images/arrow3.png" class="arrow3" mode="widthFix" />
         </div>
       </div>
       <div class="form-line">
         <div class="form-item">
-          <input placeholder="详细收件地址" v-model="formData.address" />
+          <input placeholder="详细收件地址" v-model="formData.address" placeholder-style="font-size: 20rpx;" style="font-size: 24rpx;" />
         </div>
       </div>
     </div>

@@ -62,6 +62,7 @@
   line-height: 36px;
   color: #9E9E9F;
   position: relative;
+  display: inline-block;
 }
 .comment-item .content:before {
   content: '';

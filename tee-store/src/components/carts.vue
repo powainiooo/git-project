@@ -2,8 +2,8 @@
 .c-carts { padding-bottom: 150px; }
 .c-carts .list { margin: 40px 30px; }
 .c-carts .list .list-item { display: flex; align-items: center; margin-bottom: 60px; }
-.c-carts .list .list-item .del { width: 30px; height: 30px; margin-right: 20px; }
-.c-carts .list .list-item .del img { width: 100%; }
+.c-carts .list .list-item .del { width: 60px; height: 60px; margin-right: 10px; }
+.c-carts .list .list-item .del img { width: 30px; }
 .c-carts .list .list-item .c-goods-item { flex: 1; }
 .c-carts .list .list-item .c-goods-item .infos .intro { width: 320px; }
 .c-carts .footer-btns { left: -25px; right: -25px; z-index: 1100 }
@@ -32,7 +32,9 @@
               <span class="c-tag" v-for="(attr, i2) in item.attr_names" :key="i2">{{attr}}</span>
             </div>
             <div class="price"><span>{{item.price}}</span>元</div>
-            <div class="tagC nums">{{item.buy_nums}}</div>
+            <picker :range="nums" @change="numChange($event, item.id)">
+              <div class="tagC nums">{{item.buy_nums}}</div>
+            </picker>
           </div>
         </div>
       </div>
@@ -63,6 +65,7 @@ export default {
       shopId: '',
       type: '',
       list: [],
+      nums: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
       price: 0
     }
   },
@@ -83,7 +86,7 @@ export default {
             i.attrs = i.attr_names.join('、')
             price += Number(i.price) * Number(i.buy_nums)
           })
-          this.price = price
+          this.price = Number(price.toFixed(2))
           this.list = res.data
           this.visible = true
           this.$nextTick(() => {
@@ -126,6 +129,18 @@ export default {
           url: '/pages/order/confirm2/main?type=cart'
         })
       }
+    },
+    numChange (e, id) {
+      const nums = this.nums[e.mp.detail.value]
+      postAction('/userapi/shopping/card/nums/add', {
+        id,
+        type: this.type,
+        nums
+      }).then(res => {
+        if (res.code === 0) {
+          this.getData()
+        }
+      })
     }
   }
 }

@@ -4,9 +4,9 @@
 
 <template>
 <div class="page">
-  <c-header />
+  <c-header :storeLogo="storeInfo.shop_logo" />
   <div class="mt100">
-    <addr-info :record="addrData" />
+    <addr-info :record="addrData" :showBtn="false" showLocation @tap="toGuide" />
   </div>
   <div class="container2 ovh order-confirm" style="margin-top: 0;">
     <div class="bg-fff top-line">
@@ -79,7 +79,7 @@
         <div class="price"><span>{{record.pay_amount}}</span>元</div>
       </div>
       <div class="r">
-        <button @click="handlePay">支付</button>
+        <button @click="beforePay">支付</button>
       </div>
     </div>
   </div>
@@ -161,6 +161,32 @@ export default {
         }
       })
     },
+    beforePay () {
+      if (this.formData.phone === '') {
+        mpvue.showToast({
+          icon: 'none',
+          title: '请输入手机号！'
+        })
+        return false
+      }
+      if (Number(this.storeInfo.distance) > 1) {
+        mpvue.showModal({
+          title: '提示',
+          content: '门店距离过远，是否确认点餐？',
+          success: res => {
+            if (res.confirm) {
+              this.handlePay()
+            } else if (res.cancel) {
+              mpvue.redirectTo({
+                url: '/pages/stores/main'
+              })
+            }
+          }
+        })
+      } else {
+        this.handlePay()
+      }
+    },
     handlePay () {
       mpvue.showLoading({
         title: '支付中'
@@ -188,6 +214,18 @@ export default {
     scoreChange (e) {
       this.formData.score = this.scores[e.mp.detail.value]
       this.getData()
+    },
+    toGuide () {
+      mpvue.openLocation({
+        latitude: Number(this.storeInfo.lat),
+        longitude: Number(this.storeInfo.lng),
+        success (res) {
+          console.log('openLocation success', res)
+        },
+        fail (res) {
+          console.log('openLocation fail', res)
+        }
+      })
     }
   },
 

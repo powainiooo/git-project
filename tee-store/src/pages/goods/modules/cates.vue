@@ -1,5 +1,5 @@
 <style scoped>
-.c-cates { width: 160px; position: fixed; top: 304px; left: 0; bottom: 0; padding-bottom: 160px; }
+.c-cates { width: 160px; position: fixed; top: 304px; left: 0; bottom: 0; z-index: 10; padding-bottom: 160px; }
 .c-cates-list { margin: 0 24px; }
 .c-cates-list:before { background-color: #FFFFFF; }
 .c-cates-list li { height: 100px; font-size: 24px; line-height: 26px; color: #B2A89E; text-align: center; }

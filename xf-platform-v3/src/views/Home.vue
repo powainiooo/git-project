@@ -77,11 +77,6 @@
     <template v-else>
       <z-header />
       <Button class="btn-publish" @click="$router.push('/publish')">发布新活动</Button>
-      <div style="position: absolute; top: 200px; left: 200px;">
-        <c-select
-          class="c-ticket-select"
-          :list="testList"/>
-      </div>
       <div class="list-container" v-if="!showDetail">
         <Row :gutter="40">
           <Col span="8" v-for="(item, index) in list" :key="item.id">

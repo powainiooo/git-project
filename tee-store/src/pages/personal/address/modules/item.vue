@@ -10,7 +10,7 @@
 <div class="addr-item">
   <div class="addr-box">
     <div class="header between">
-      <div class="acenter" @click="setStatus">
+      <div class="acenter" @click.stop="setStatus">
         <img src="/static/images/radio.png" mode="widthFix" class="w30" v-if="record.status === 0" />
         <img src="/static/images/radio-checked.png" mode="widthFix" class="w30" v-else />
         <span class="f20 c-9e ml10">设为默认地址</span>

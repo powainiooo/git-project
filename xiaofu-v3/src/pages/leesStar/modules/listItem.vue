@@ -76,7 +76,7 @@
   <div class="left">
     <span>{{record.sort}}</span>
     <h3>
-      <p class="en">{{record.name}}</p>
+      <p class="en">{{record.organizer_name}}</p>
       <p>{{record.intro}}</p>
     </h3>
   </div>

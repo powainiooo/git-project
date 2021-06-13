@@ -203,6 +203,10 @@ export default {
         if (res.code === 0) {
           this.cartsList = res.data
           this.cartNum = res.data.length
+          console.log('this.cartNum', this.cartNum)
+          setTimeout(() => {
+            console.log('addrData', this.addrData)
+          }, 1000)
         }
       })
     },
@@ -225,9 +229,16 @@ export default {
       })
     },
     toStores () {
-      mpvue.navigateBack({
-        delta: -1
-      })
+      const route = getCurrentPages()
+      if (route.length === 1) {
+        mpvue.redirectTo({
+          url: '/pages/stores/main'
+        })
+      } else {
+        mpvue.navigateBack({
+          delta: -1
+        })
+      }
     }
   },
   onShareAppMessage () {
@@ -237,14 +248,17 @@ export default {
     }
   },
   onShow () {
-    this.$refs.top.hideCarts()
+    if (this.$refs.top) {
+      this.$refs.top.hideCarts()
+    }
+    console.log('goods onShow')
+    this.getData()
+    this.getCart()
   },
   onLoad (options) {
     console.log('onLoad')
     Object.assign(this.$data, this.$options.data())
     this.shopId = options.id || 1
-    this.getData()
-    this.getCart()
   }
 }
 </script>

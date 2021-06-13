@@ -35,12 +35,12 @@
                   <picker mode="region" @change="addrChange">
                     <input placeholder="选择 省份 / 市级 / 区" disabled v-model="addrStr" placeholder-style="font-size: 20rpx;" style="font-size: 24rpx;" />
                   </picker>
-                  <img src="/static/images/arrow3.png" class="arrow3" mode="widthFix" placeholder-style="font-size: 20rpx;" style="font-size: 24rpx;" />
+                  <img src="/static/images/arrow3.png" class="arrow3" mode="widthFix" />
                 </div>
               </div>
               <div class="form-line">
                 <div class="form-item">
-                  <input placeholder="详细收件地址" v-model="addrData.address" :disabled="hasAddr" />
+                  <input placeholder="详细收件地址" v-model="addrData.address" :disabled="hasAddr" placeholder-style="font-size: 20rpx;" style="font-size: 24rpx;" />
                 </div>
               </div>
 

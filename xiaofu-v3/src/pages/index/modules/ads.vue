@@ -3,7 +3,7 @@
 .ad-frame .ad-container { width: 100%; height: 100%; }
 .ad-frame .pic { width: 100%; height: 100%; }
 .ad-frame .infos { width: 100%; height: 130px; background-color: rgba(0, 0, 0, 0.4); padding: 0 36px; display: flex; justify-content: space-between; align-items: center; position: absolute; top: 0; left: 0; }
-.ad-frame .infos .name h3 { font-size: 53px; font-family: HelveB; line-height: 64px; color: #ffffff; }
+.ad-frame .infos .name h3 { width: 600px; height: 64px; font-size: 53px; font-family: HelveB; line-height: 64px; color: #ffffff; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; word-break: break-all; }
 .ad-frame .infos .name p { font-size: 20px; font-family: HelveL; line-height: 20px; color: #ffffff; }
 /deep/.ad-frame .infos .c-tk-info { width: auto; margin-right: 50px; }
 .ad-frame-hide { animation: fadeOut .5s linear 1s both; }

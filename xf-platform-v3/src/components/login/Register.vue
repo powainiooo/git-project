@@ -86,7 +86,7 @@ export default {
     handleNext () {
       this.$refs.form.validate((valid) => {
         if (valid) {
-          if (!this.showHint) {
+          if (this.showHint) {
             return false
           }
           this.formData.mobile = this.vericode.mobile

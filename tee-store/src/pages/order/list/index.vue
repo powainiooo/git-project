@@ -1,5 +1,5 @@
 <style scoped>
-.order-list { width: 100%; height: calc(100vh - 370px); background-color: #ffffff; box-sizing: border-box; }
+.order-list { width: 100%; height: calc(100vh - 370px); background-color: #ffffff; box-sizing: border-box; position: relative; z-index: 10; }
 .list-item { margin-bottom: 35px; }
 </style>
 
@@ -7,36 +7,21 @@
 <div class="page">
   <c-header menus />
   <div class="container2 pt20" style="padding-bottom: 0;">
-    <div class="c-tabs">
-      <ul class="c-tabs-btns">
-        <li v-for="tab in tabs"
-            :key="key"
-            :class="{'active': currentKey === tab.key}"
-            @click="tabChange(tab.key, index)">{{tab.title}}</li>
-      </ul>
-      <div class="c-tabs-frame">
-        <div class="c-tabs-content"
-             :style="{
-          width: (tabs.length * 100) + '%',
-          'margin-left': (index * -100) + '%'
-        }">
-          <div class="c-tab-pane">
-            <scroll-view scroll-y class="order-list" :lower-threshold="100" @scrolltolower="touchBottom">
-              <div class="list-item" v-for="item in tee.list" :key="id">
-                <item :record="item" />
-              </div>
-            </scroll-view>
-          </div>
-          <div class="c-tab-pane">
-            <scroll-view scroll-y class="order-list" :lower-threshold="100" @scrolltolower="touchBottom">
-              <div class="list-item" v-for="item in nearby.list" :key="id">
-                <item2 :record="item" />
-              </div>
-            </scroll-view>
-          </div>
-        </div>
+
+    <tabs :current="current" @change="tabChange">
+      <tab-pane :name="1" title="茶饮订单"></tab-pane>
+      <tab-pane :name="2" title="周边订单"></tab-pane>
+    </tabs>
+    <scroll-view scroll-y class="order-list" :lower-threshold="100" @scrolltolower="touchBottom">
+      <div class="list-item slide-col slideUp" v-for="item in list" :key="id">
+        <item :record="item" v-if="type === 1"/>
+        <item2 :record="item" v-else-if="type === 2"/>
       </div>
-    </div>
+      <div class="empty-hint" v-if="list.length === 0">
+        <p>Irrelevant content</p>
+        <div>无相关内容</div>
+      </div>
+    </scroll-view>
   </div>
   <c-footer current="list" />
 </div>
@@ -45,6 +30,8 @@
 <script>
 import cHeader from '@/components/header'
 import cFooter from '@/components/footer'
+import tabs from '@/components/Tabs/tabs'
+import tabPane from '@/components/Tabs/tabPane'
 import item from './modules/item'
 import item2 from './modules/item2'
 import { getAction } from '@/utils/api'
@@ -53,54 +40,48 @@ export default {
   components: {
     cHeader,
     cFooter,
+    tabs,
+    tabPane,
     item,
     item2
   },
   data () {
     return {
       tabs: [
-        { title: '茶饮订单', key: 'tee' },
-        { title: '周边订单', key: 'nearby' }
+        { title: '茶饮订单', key: '1' },
+        { title: '周边订单', key: '2' }
       ],
       currentKey: 'tee',
       index: 0,
       tab: 'tee',
-      tee: {
-        page: 1,
-        type: 1,
-        total: 0,
-        list: []
-      },
-      nearby: {
-        page: 1,
-        type: 2,
-        total: 0,
-        list: []
-      }
+      type: 1,
+      page: 1,
+      total: 0,
+      list: []
     }
   },
 
   methods: {
-    tabChange (key, index) {
-      this.currentKey = key
-      this.index = index
-      this.tab = key
+    tabChange (e) {
+      this.type = e
+      this.page = 1
+      this.list = []
+      this.getData()
     },
     touchBottom () {
-      const d = this[this.currentKey]
-      if (d.total > d.list.length) {
+      if (this.total > this.list.length) {
         this.getData(this.currentKey)
       }
     },
-    getData (key) {
+    getData () {
       getAction('/userapi/order/index/data', {
-        type: this[key].type,
-        page: this[key].page,
+        type: this.type,
+        page: this.page,
         limit: 20
       }).then(res => {
         if (res.code === 0) {
-          this[key].list = this[key].list.concat(res.data)
-          this[key].total = res.count
+          this.list = this.list.concat(res.data)
+          this.total = res.count
         }
       })
     }
@@ -108,8 +89,7 @@ export default {
 
   onLoad () {
     Object.assign(this.$data, this.$options.data())
-    this.getData('tee')
-    this.getData('nearby')
+    this.getData()
   }
 }
 </script>

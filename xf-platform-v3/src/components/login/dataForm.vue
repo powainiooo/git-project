@@ -416,6 +416,8 @@ import vericode from '@/mixin/vericode'
 import formBox from '@/components/formBox'
 import { postAction } from '@/utils'
 import addrPicker from '@/components/addrPicker'
+import Vue from 'vue'
+import { ACCESS_TOKEN } from '@/config'
 export default {
   name: 'app',
   mixins: [vericode],
@@ -515,7 +517,8 @@ export default {
         longitude: '',
         latitude: '',
         city_name: ''
-      }
+      },
+      isUpdate: false
     }
   },
   mounted () {
@@ -572,7 +575,8 @@ export default {
       params.type = this.type
       console.log(params)
       this.confirm.isAjax = true
-      postAction('/editor/user/register', params, false).then(res => {
+      const url = this.isUpdate ? '/editor/user/edit' : '/editor/user/register'
+      postAction(url, params, false).then(res => {
         if (res.code === 1) {
           this.$refs.alert.show('suc')
         } else {
@@ -582,7 +586,14 @@ export default {
       })
     },
     onOk () {
-      this.changePage('login')
+      if (this.isUpdate) {
+        Vue.ls.remove(ACCESS_TOKEN)
+        this.$router.push({
+          name: 'Login'
+        })
+      } else {
+        this.changePage('login')
+      }
     },
     getCityData (id = '') {
       postAction('/api/common/area', {
@@ -608,6 +619,30 @@ export default {
       this.formData.city_name = data.addressComponents.city
       console.log(this.formData)
       this.$refs.address.focus()
+    },
+    setDefaults (data) {
+      const mer = data.merchant
+      const bank = data.bank_card
+      this.formData.organizer_name = mer.organizer_name
+      this.formData.name = mer.name
+      this.formData.person = mer.person
+      this.formData.id_card_no = mer.id_card_no
+      this.formData.phone = mer.phone
+      this.vericode.mobile = mer.phone
+      if (mer.type === 1) {
+        this.formData.id_card_front_image = mer.id_card_front_image
+        this.formData.id_card_back_image = mer.id_card_back_image
+      }
+      this.formData.license_image = mer.license_image
+      this.formData.space_image = mer.space_image
+      this.formData.logo = mer.logo
+      this.formData.account_name = bank.name
+      this.formData.account_id_card_no = bank.id_card_no
+      this.formData.account_mobile = bank.mobile
+      this.formData.account_card_no = bank.card_no
+      this.formData.account_bank_id = bank.bank_id.toString()
+      this.formData.account_opening_banke = bank.opening_banke
+      this.isUpdate = true
     }
   }
 }

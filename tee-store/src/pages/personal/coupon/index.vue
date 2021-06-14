@@ -11,29 +11,18 @@
   <div class="container2 pt20 pr" style="padding-bottom: 0;">
     <div class="coupon-bg center"><img src="/static/images/index/coupon.png" mode="widthFix" class="coupon-img" /></div>
     <tabs :current="current" @change="tabChange">
-      <tab-pane :name="1" title="未使用">
-        <scroll-view scroll-y class="list-container" @scrolltolower="reachBottom">
-          <div class="item" v-for="i in page1.list" :key="id">
-            <item :record="item" extraClass="coupon-item-min" />
-          </div>
-          <div class="empty-hint" v-if="page1.list.length === 0">
-            <p>Irrelevant content</p>
-            <div>无相关内容</div>
-          </div>
-        </scroll-view>
-      </tab-pane>
-      <tab-pane :name="2" title="已使用">
-        <scroll-view scroll-y class="list-container" @scrolltolower="reachBottom">
-          <div class="item" v-for="i in page2.list" :key="id">
-            <item :record="item" extraClass="coupon-item-min" />
-          </div>
-          <div class="empty-hint" v-if="page2.list.length === 0">
-            <p>Irrelevant content</p>
-            <div>无相关内容</div>
-          </div>
-        </scroll-view>
-      </tab-pane>
+      <tab-pane :name="1" title="未使用"></tab-pane>
+      <tab-pane :name="2" title="已使用"></tab-pane>
     </tabs>
+    <scroll-view scroll-y class="list-container" @scrolltolower="reachBottom">
+      <div class="item slide-col slideUp" v-for="item in list" :key="id">
+        <item :record="item" extraClass="coupon-item-min" />
+      </div>
+      <div class="empty-hint" v-if="list.length === 0">
+        <p>Irrelevant content</p>
+        <div>无相关内容</div>
+      </div>
+    </scroll-view>
   </div>
 </div>
 </template>
@@ -58,65 +47,40 @@ export default {
     return {
       current: 0,
       status: 1,
-      list1: [],
-      page1: {
-        page: 1,
-        total: 0,
-        list: []
-      },
-      page2: {
-        page: 1,
-        total: 0,
-        list: []
-      }
+      page: 1,
+      total: 0,
+      list: []
     }
   },
 
   methods: {
     reachBottom () {
-      if (this.status === 1) {
-        if (this.page1.total > this.page1.list.length) {
-          this.getData1()
-        }
-      } else if (this.status === 2) {
-        if (this.page2.total > this.page2.list.length) {
-          this.getData2()
-        }
+      if (this.total > this.list.length) {
+        this.getData1()
       }
     },
     tabChange (e) {
       this.status = e
+      this.page = 1
+      this.list = []
+      this.getData()
     },
-    getData1 () {
+    getData () {
       getAction('/userapi/user/coupon/index/data', {
-        page: this.page1.page,
+        page: this.page,
         limit: 20,
-        status: 1
+        status: this.status
       }).then(res => {
         if (res.code === 0) {
-          this.page1.list = this.page1.list.concat(res.data)
-          console.log('this.page1.list', this.page1.list, this.page1.list.length)
-          this.page1.total = res.count
-        }
-      })
-    },
-    getData2 () {
-      getAction('/userapi/user/coupon/index/data', {
-        page: this.page2.page,
-        limit: 20,
-        status: 2
-      }).then(res => {
-        if (res.code === 0) {
-          this.page2.list = this.page2.list.concat(res.data)
-          this.page2.total = res.count
+          this.list = this.list.concat(res.data)
+          this.total = res.count
         }
       })
     }
   },
   onLoad (options) {
     Object.assign(this.$data, this.$options.data())
-    this.getData1()
-    this.getData2()
+    this.getData()
     if (options.status === 'used') {
       this.current = 1
     }

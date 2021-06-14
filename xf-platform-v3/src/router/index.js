@@ -34,6 +34,11 @@ const routes = [
     path: '/result',
     name: 'Result',
     component: () => import('../views/result.vue')
+  },
+  {
+    path: '/account',
+    name: 'Account',
+    component: () => import('../views/account.vue')
   }
 ]
 
@@ -57,12 +62,18 @@ router.beforeEach((to, from, next) => {
         console.log('4')
         store.dispatch('getUserData').then(res => {
           console.log('5', res)
-          if (res.merchant.status === 1) {
-            next()
-          } else {
+          if (res.merchant.account_type === 0) { // 老账户
             next({
-              name: 'Result'
+              name: 'Account'
             })
+          } else {
+            if (res.merchant.status === 1) {
+              next()
+            } else {
+              next({
+                name: 'Result'
+              })
+            }
           }
         }).catch(err => {
           console.log('err', err)

@@ -62,7 +62,7 @@ export default new Vuex.Store({
     },
     SET_GLOBALDATA (state, data) {
       state.globalData = data
-      state.hasGlobalData = data.id !== undefined
+      state.hasGlobalData = data.merchant.id !== undefined
     },
     SET_MENU (state, data) {
       state.showMenu = data

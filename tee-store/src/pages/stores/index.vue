@@ -116,7 +116,6 @@ export default {
       }
     },
     toDetail (record) {
-      console.log('record', record)
       store.commit('SET_STOREINFO', record)
       mpvue.setStorage({
         key: 'storeData',

@@ -20,33 +20,35 @@
       <div class="icon1">
         <img src="/static/images/icon1.png" mode="widthFix" class="w100" />
       </div>
-      <div class="title"><span>{{record.score.score}}</span>积分</div>
-      <p>{{record.score.content}}</p>
+      <div class="title"><span>{{score.score}}</span>积分</div>
+      <p>{{score.content}}</p>
     </div>
     <div class="line1 pr" v-else-if="key === 'coupon'">
       <img src="/static/images/bg.png" mode="widthFix" class="bg" />
       <div class="icon2">
         <img src="/static/images/index/coupon.png" mode="widthFix" class="w100" />
       </div>
-      <div class="title"><span>{{record.coupon.money}}</span>元代金券</div>
-      <p>仅可用于周边商品，满{{record.coupon.condition}}元可用。有效期 至 {{record.coupon.expired}}</p>
+      <div class="title"><span>{{coupon.money}}</span>元代金券</div>
+      <p>需任意消费后可使用，点击立即加入购物车。<br/>有效期 至 {{coupon.expired}}</p>
     </div>
     <div class="line1 pr" v-else-if="key === 'gift'">
       <img src="/static/images/bg.png" mode="widthFix" class="bg" />
       <div class="icon3 center">
-        <div class="imgs"><img :src="imgSrc + record.gift.cover" mode="aspectFill" /></div>
+        <div class="imgs"><img :src="imgSrc + gift.cover" mode="aspectFill" /></div>
         <img src="/static/images/free@2x.png" mode="widthFix" class="free" />
       </div>
-      <div class="title">{{record.gift.title}}</div>
-      <p>需任意消费后可使用，点击立即加入购物车。有效期 至 {{record.gift.expired}}</p>
+      <div class="title">{{gift.title}}</div>
+      <p>需任意消费后可使用，点击立即加入购物车。有效期 至 {{gift.expired}}</p>
     </div>
 
     <div>
       <div class="acenter mt50 ml50">
         <img src="/static/images/index/icon1.png" mode="widthFix" class="w28 mr15" />
-        <span class="f30">兑换好礼</span>
+        <span class="f30">附近门店</span>
       </div>
-      <goods-list />
+      <div>
+        <goods-list :list="goodsList" />
+      </div>
     </div>
 
     <div class="footer-btns">
@@ -78,11 +80,10 @@ export default {
         coupon: '/userapi/user/coupon/fetch',
         gift: '/userapi/user/prize/fetch'
       },
-      record: {
-        score: {},
-        coupon: {},
-        gift: {}
-      },
+      goodsList: [],
+      score: {},
+      coupon: {},
+      gift: {},
       isAjax: false
     }
   },
@@ -93,7 +94,20 @@ export default {
         code: this.code
       }).then(res => {
         if (res.code === 0) {
-          this.record[this.key] = res.data
+          this[this.key] = res.data
+          console.log('this.record', this.record)
+        }
+      })
+    },
+    getGoodsList () {
+      getAction('/userapi/nearby/index/data', {
+        cid: 0,
+        recommend: 1,
+        page: this.page,
+        limit: 20
+      }).then(res => {
+        if (res.code === 0) {
+          this.goodsList = res.data
         }
       })
     },
@@ -108,18 +122,23 @@ export default {
           mpvue.showToast({
             title: res.msg
           })
-          mpvue.navigateTo({
-            url: '/pages/index/main?key=' + this.key
-          })
+          setTimeout(() => {
+            mpvue.navigateTo({
+              url: '/pages/index/main?key=' + this.key
+            })
+          }, 1000)
         }
       })
     }
   },
 
   onLoad (options) {
-    this.key = options.key || 'score'
-    this.code = options.code
-    this.getData()
+    this.key = options.key || 'gift'
+    this.code = options.code || 'aaf94de5a24f650afc5c9fff83'
+    setTimeout(() => {
+      this.getData()
+      this.getGoodsList()
+    }, 1000)
   }
 }
 </script>

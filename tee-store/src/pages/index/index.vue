@@ -136,7 +136,13 @@ export default {
           this.coupon = res.data.coupon_nums
           this.prize = res.data.prize_nums
           setTimeout(() => {
-            this.numsMove(this.score)
+            if (this.current === 0) {
+              this.numsMove(this.score)
+            } else if (this.current === 1) {
+              this.numsMove(this.coupon)
+            } else if (this.current === 2) {
+              this.numsMove(this.prize)
+            }
           }, 500)
         }
       })

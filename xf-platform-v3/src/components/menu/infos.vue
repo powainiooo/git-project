@@ -1,7 +1,7 @@
 <style scoped>
 .c-infos-top { padding: 130px 60px 60px 60px; border-bottom: 1px solid #EEEEEF; }
 .c-infos-bottom { margin: 60px; }
-.c-infos-bottom .logo { width: 90px; height: 90px; border-radius: 10px; border: 2px solid #5B85E6; overflow: hidden; margin-bottom: 46px; }
+.c-infos-bottom .logo { width: 90px; height: 90px; border-radius: 10px; border: 2px solid #5B85E6; overflow: hidden; margin-bottom: 46px; display: flex; justify-content: center; align-items: center; }
 .c-infos-bottom .logo img { width: 100%; display: block; }
 </style>
 
@@ -13,7 +13,7 @@
 <!--    <tag-line class="mb10" title="所属公司">{{globalData.company}}</tag-line>-->
     <tag-line class="mb10" title="负责人">{{globalData.person}}</tag-line>
     <tag-line class="mb10" title="身份证">{{globalData.id_card_no}}</tag-line>
-    <tag-line class="mb10" title="联系电话">{{globalData.mobile}}</tag-line>
+    <tag-line class="mb10" title="联系电话">{{globalData.phone}}</tag-line>
     <tag-line class="mb10" title="地址" :width="340">{{globalData.address}}</tag-line>
   </div>
   <div class="c-infos-bottom">

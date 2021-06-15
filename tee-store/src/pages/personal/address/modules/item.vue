@@ -7,7 +7,10 @@
 </style>
 
 <template>
-<div class="addr-item">
+<div class="addr-item"
+     :hover-class="type === 'select' ? 'hscale' : ''"
+     hover-stay-time="10"
+     @click="tap">
   <div class="addr-box">
     <div class="header between">
       <div class="acenter" @click.stop="setStatus">
@@ -51,7 +54,8 @@ import { postAction } from '@/utils/api'
 export default {
   name: 'app',
   props: {
-    record: Object
+    record: Object,
+    type: String
   },
   data () {
     return {}
@@ -79,6 +83,9 @@ export default {
     },
     handleEdit () {
       this.$emit('edit', this.record.id)
+    },
+    tap () {
+      this.$emit('tap', this.record)
     },
     setStatus () {
       if (this.isAjax) return

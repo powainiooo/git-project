@@ -12,6 +12,14 @@
 .swiper-sec .icons .coupon .img { height: 100%; }
 .swiper-sec .icons .gift { height: 53%; display: block; }
 .swiper-sec .icons .gift .img { height: 100%; }
+
+.icon-move { animation: iconmove 2s linear both; }
+@keyframes iconmove {
+  0%, 100% { transform: rotateZ(0deg) scale(1); }
+  5% { transform: rotateZ(0deg) scale(.9); }
+  15%, 35%, 55%, 75% { transform: rotateZ(10deg) scale(1.1); }
+  25%, 45%, 65%, 85% { transform: rotateZ(-10deg) scale(1.1); }
+}
 </style>
 
 <template>
@@ -46,13 +54,13 @@
               duration="300"
               @change="change">
         <swiper-item>
-          <coins :nums="score" />
+          <coins ref="score" :nums="score" />
         </swiper-item>
         <swiper-item>
-          <coupons :nums="coupon" />
+          <coupons ref="coupon" :nums="coupon" />
         </swiper-item>
         <swiper-item>
-          <gifts :nums="prize" />
+          <gifts ref="gift" :nums="prize" />
         </swiper-item>
       </swiper>
 
@@ -202,9 +210,13 @@ export default {
     }
   },
   onLoad (options) {
+    console.log('onLoad index')
     Object.assign(this.$data, this.$options.data())
     this.key = options.key || 'score'
     this.current = this.hash[this.key]
+    if (options.key !== undefined) {
+      this.$refs[options.key].shake()
+    }
   }
 }
 </script>

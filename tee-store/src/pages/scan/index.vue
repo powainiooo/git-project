@@ -123,7 +123,7 @@ export default {
             title: res.msg
           })
           setTimeout(() => {
-            mpvue.navigateTo({
+            mpvue.redirectTo({
               url: '/pages/index/main?key=' + this.key
             })
           }, 1000)
@@ -135,10 +135,8 @@ export default {
   onLoad (options) {
     this.key = options.key || 'gift'
     this.code = options.code || 'aaf94de5a24f650afc5c9fff83'
-    setTimeout(() => {
-      this.getData()
-      this.getGoodsList()
-    }, 1000)
+    this.getData()
+    this.getGoodsList()
   }
 }
 </script>

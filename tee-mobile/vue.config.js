@@ -37,5 +37,5 @@ module.exports = {
 * http://admin.dev.sysds.cn/
 admin
 123456
-* http://shop.dev.wsgb.club/ http://shop.wsgb.club/
+* http://employee.dev.wsgb.club/#/login http://shop.wsgb.club/
 * */

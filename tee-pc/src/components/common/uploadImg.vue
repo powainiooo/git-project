@@ -38,7 +38,7 @@
     &-subTitle
       margin 0 36px 20px 36px; font-size 12px; color #C8C9CA
     &-area
-      size(366px, 386px); margin 0 auto; border 3px solid #6D9AF4; margin-bottom 20px
+      size(366px, 386px); margin 0 auto; border 3px solid mainColor; margin-bottom 20px
       .vue-cropper
         background url("../../assets/img/bg.png") rgb(200, 201, 202); background-size 360px
     &-container
@@ -84,7 +84,7 @@
         <div class="c-upload-cropper-title">
           <span>{{title}}</span>
           <Upload action="" :before-upload="uploadBefore2">
-            <Button size="small">选择图片</Button>
+            <Button size="small" class="bg-main">选择图片</Button>
           </Upload>
         </div>
         <div class="c-upload-cropper-subTitle">
@@ -106,7 +106,7 @@
             }"
           ></vueCropper>
         </div>
-        <div class="tc"><Button size="small" @click="doCropper" :loading="isLoading">保存</Button></div>
+        <div class="tc"><Button size="small" class="bg-main" @click="doCropper" :loading="isLoading">保存</Button></div>
       </div>
     </div>
   </transition>
@@ -226,13 +226,16 @@ export default {
     doCropper () {
       this.$refs.cropper.getCropData((data) => {
         this.isLoading = true
-        postAction('/editor/common/upload', {
-          file: data
-        }).then(res => {
+        const params = new FormData()
+        params.append('file_content', data)
+        params.append('exit', 'png')
+        postAction('/shopapi/upload/image/base64', params).then(res => {
           this.isLoading = false
           this.showCropper = false
-          if (res.code === 1) {
+          if (res.code === 0) {
             this.$emit('input', res.data.url)
+          } else {
+            this.$Message.warning(res.msg)
           }
         })
       })

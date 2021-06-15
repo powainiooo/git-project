@@ -44,17 +44,17 @@
         </ul>
       </div>
     </div>
+  </div>
 
-    <div class="footer-btns">
-      <div class="l center">
-        <picker :range="nums" @change="numChange">
-          <div class="nums"><span>{{num}}</span>杯</div>
-          <img src="/static/images/arrow5.png" mode="widthFix" class="ar" />
-        </picker>
-      </div>
-      <div class="r">
-        <button @click="handleConfirm">确定</button>
-      </div>
+  <div class="footer-btns" v-if="visible && showItem">
+    <div class="l center">
+      <picker :range="nums" @change="numChange">
+        <div class="nums"><span>{{num}}</span>杯</div>
+        <img src="/static/images/arrow5.png" mode="widthFix" class="ar" />
+      </picker>
+    </div>
+    <div class="r">
+      <button @click="handleConfirm">确定</button>
     </div>
   </div>
 </div>

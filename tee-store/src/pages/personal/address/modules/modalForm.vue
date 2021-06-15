@@ -36,11 +36,10 @@
       <img src="/static/images/radio-checked.png" mode="widthFix" class="w30" v-show="formData.status === 1" />
       <span class="f20 c-9e ml10">设为默认地址</span>
     </div>
-
-    <div class="footer-btns">
-      <div class="r">
-        <button @click="handleSave">保存地址</button>
-      </div>
+  </div>
+  <div class="footer-btns" v-if="visible && showItem">
+    <div class="r">
+      <button @click="handleSave">保存地址</button>
     </div>
   </div>
 </div>

@@ -15,7 +15,9 @@
       <item v-for="item in list"
             :key="id"
             :record="item"
+            :type="type"
             @edit="handleEdit"
+            @tap="tap"
             @ok="refresh" />
     </div>
   </div>
@@ -29,6 +31,7 @@ import cHeader from '@/components/header'
 import item from './modules/item'
 import modalForm from './modules/modalForm'
 import { getAction } from '@/utils/api'
+import store from '@/store'
 
 export default {
   components: {
@@ -40,6 +43,7 @@ export default {
     return {
       page: 1,
       total: 0,
+      type: 'view',
       list: []
     }
   },
@@ -66,6 +70,14 @@ export default {
       this.list = []
       this.page = 1
       this.getData()
+    },
+    tap (record) {
+      store.commit('SET_ADDR', record)
+      this.$nextTick(() => {
+        mpvue.navigateBack({
+          delta: -1
+        })
+      })
     }
   },
   onReachBottom () {
@@ -74,9 +86,11 @@ export default {
       this.getData()
     }
   },
-  onLoad () {
+  onLoad (options) {
+    console.log('address options', options)
     Object.assign(this.$data, this.$options.data())
     this.getData()
+    this.type = options.type || 'view'
   }
 }
 </script>

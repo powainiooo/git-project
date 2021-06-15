@@ -45,7 +45,7 @@
               </div>
 
               <div class="center mt30" v-if="hasAddr">
-                <button class="btn btn-style1" style="margin: 0;">更换地址</button>
+                <button class="btn btn-style1" @click="selectAddr" style="margin: 0;">更换地址</button>
               </div>
             </div>
           </div>
@@ -164,6 +164,9 @@ export default {
     },
     storeInfo () {
       return store.state.storeInfo
+    },
+    selectedAddr () {
+      return store.state.selectedAddr
     }
   },
   data () {
@@ -350,6 +353,11 @@ export default {
           payment(orderNo, orderId, 'nearby')
         }
       })
+    },
+    selectAddr () {
+      mpvue.navigateTo({
+        url: '/pages/personal/address/main?type=select'
+      })
     }
   },
   onShow () {
@@ -360,9 +368,13 @@ export default {
       this.tabChange('store', 1)
       this.getData()
     }
+    if (this.selectedAddr.id) {
+      for (const key in this.addrData) {
+        this.addrData[key] = this.selectedAddr[key]
+      }
+    }
   },
   onLoad (options) {
-    console.log('order onLoad')
     Object.assign(this.$data, this.$options.data())
     this.type = options.type
     this.getAddr()
@@ -375,6 +387,7 @@ export default {
       this.getCarts()
     }
     store.commit('SET_STOREINFO', {})
+    store.commit('SET_ADDR', {})
   }
 }
 </script>

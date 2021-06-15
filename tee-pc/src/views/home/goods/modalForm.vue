@@ -121,7 +121,9 @@
             </FormItem>
             <div class="pr">
               <FormItem v-for="(item, index) in images" :key="index">
-                <upload-img v-model="images[index]">
+                <upload-img v-model="images[index]"
+                            cropper
+                            :fixedNumber="[1050, 500]">
                   <span slot="title">产品图</span>
                   <span slot="hint">尺寸1050px*500px</span>
                 </upload-img>

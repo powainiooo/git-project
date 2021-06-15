@@ -39,14 +39,14 @@
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="footer-btns">
-      <div class="l center">
-        <div class="price"><span>{{price}}</span>元</div>
-      </div>
-      <div class="r">
-        <button @click="confirm">确定</button>
-      </div>
+  <div class="footer-btns" v-if="visible && showItem">
+    <div class="l center">
+      <div class="price"><span>{{price}}</span>元</div>
+    </div>
+    <div class="r">
+      <button @click="confirm">确定</button>
     </div>
   </div>
 </div>

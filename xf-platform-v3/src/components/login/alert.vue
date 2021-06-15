@@ -5,6 +5,12 @@
   fxTL(0, 0)
   background rgba(0, 0, 0, 0.92)
   z-index 1000
+  .logo
+    text-align center
+    margin-bottom 40px
+    font-size 0
+    img
+      width 161px
   .flip-box
     height 328px
     center()
@@ -36,6 +42,7 @@
     <div class="center" style="margin-top: 60px">
       <Button style="width: 135px" v-if="status === 'suc'" @click="onOk">完成</Button>
       <Button style="width: 135px" v-else-if="status === 'fail'" @click="onRetry">返回重试</Button>
+      <Button style="width: 135px" v-else-if="status === 'checkSuc'" @click="onOk">返回首页</Button>
       <Button style="width: 135px" v-else-if="status === 'checkFail'" @click="onRetry">编辑后重新提交</Button>
     </div>
   </div>

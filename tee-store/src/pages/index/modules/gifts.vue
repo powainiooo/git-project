@@ -6,9 +6,11 @@
 <div class="swiper-sec">
   <div class="icons">
     <div class="gift"
+         :class="{'icon-move': moving}"
          hover-class="hscale"
          hover-stay-time="10"
-         @click="toPage('/pages/personal/gift/main')">
+         @click="toPage('/pages/personal/gift/main')"
+         @animationend="moveEnd">
       <img src="/static/images/index/gift.png"
            mode="heightFix"
            class="img" />
@@ -24,16 +26,17 @@ export default {
     nums: [Number, String]
   },
   data () {
-    return {}
+    return {
+      moving: false
+    }
   },
   methods: {
     toPage: mpvue.toPage,
-    openScan () {
-      mpvue.scanCode({
-        success(res) {
-          console.log('scanCode success', res)
-        }
-      })
+    shake () {
+      this.moving = true
+    },
+    moveEnd () {
+      this.moving = false
     }
   }
 }

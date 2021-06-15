@@ -8,13 +8,15 @@
 <template>
 <div class="container">
   <bg-slide />
-  <alert ref="alert" @onRetry="onRetry" />
+  <alert ref="alert" @onRetry="onRetry" @onOk="backLogin" />
 </div>
 </template>
 
 <script type='es6'>
 import bgSlide from '@/components/bgSilde'
 import alert from '@/components/login/alert'
+import Vue from 'vue'
+import { ACCESS_TOKEN } from '@/config'
 export default {
   name: 'app',
   components: {
@@ -36,6 +38,12 @@ export default {
     onRetry () {
       this.$router.push({
         name: 'Account'
+      })
+    },
+    backLogin () {
+      Vue.ls.remove(ACCESS_TOKEN)
+      this.$router.push({
+        name: 'Login'
       })
     }
   }

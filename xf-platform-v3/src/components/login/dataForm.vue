@@ -72,27 +72,34 @@
       <Form class="flex">
         <div>
           <div class="form">
-            <div class="form-title" @click="console.log(formData)">企业基本信息</div>
+            <div class="form-title">企业基本信息</div>
             <FormItem>
+              <div class="form-title2" v-if="isUpdate">{{type === '3' ? '场地方名称' : '活动方名称'}}</div>
               <Input v-model="formData.organizer_name" :placeholder="type === '3' ? '场地方名称' : '活动方名称'" />
             </FormItem>
             <FormItem v-if="type !== '1'">
+              <div class="form-title2" v-if="isUpdate">公司全称</div>
               <Input v-model="formData.name" placeholder="公司全称" />
             </FormItem>
             <FormItem>
+              <div class="form-title2" v-if="isUpdate">{{type === '1' ? '联系地址' : '公司地址'}}</div>
               <Input ref="address" type="textarea" v-model="formData.address" :rows="4" :placeholder="type === '1' ? '联系地址' : '公司地址'" />
               <a href="javascript:;" class="btn-geo" @click="openGeo">定位</a>
             </FormItem>
             <FormItem>
+              <div class="form-title2" v-if="isUpdate">负责人姓名</div>
               <Input v-model="formData.person" placeholder="负责人姓名" />
             </FormItem>
             <FormItem>
+              <div class="form-title2" v-if="isUpdate">负责人身份证号</div>
               <Input v-model="formData.id_card_no" placeholder="负责人身份证号" />
             </FormItem>
             <FormItem>
+              <div class="form-title2" v-if="isUpdate">负责人联系电话</div>
               <Input v-model="vericode.mobile" placeholder="负责人联系电话" />
             </FormItem>
             <FormItem>
+              <div class="form-title2" v-if="isUpdate">短信验证码</div>
               <Input v-model="vericode.code" placeholder="验证码">
                 <Button slot="append" :disabled="veriBtnDisabled" @click="getCode">{{vericode.btnName}}</Button>
               </Input>
@@ -129,11 +136,11 @@
           <ul class="hint-list">
             <li>
               <div class="index"><img src="@/assets/img/nums/1.png"></div>
-              <div class="txt2">上传尺寸在 200px*140px 的矩形区域内</div>
+              <div class="txt2">上传尺寸在 200px*200px 的矩形区域内</div>
             </li>
             <li>
               <div class="index"><img src="@/assets/img/nums/2.png"></div>
-              <div class="txt2">图片为白底黑图案形式<br/>LOGO 统一使用 R0 G0 B0 色值</div>
+              <div class="txt2">上传清晰的LOGO，背景建议为纯色</div>
             </li>
           </ul>
           <!-- 场地照片 -->
@@ -144,7 +151,7 @@
                 <upload-img v-model="formData.space_image">
                   <span slot="title" v-if="type === '3'">场地照片</span>
                   <span slot="title" v-else>背景图片</span>
-                  <span slot="hint">尺寸1125px*600px</span>
+                  <span slot="hint">用于活动方主页背景展示所用</span>
                 </upload-img>
               </FormItem>
             </Form>
@@ -158,23 +165,29 @@
         <Form class="form">
           <div class="form-title">银行账户信息</div>
           <FormItem>
+            <div class="form-title2" v-if="isUpdate">个人开户名</div>
             <Input v-model="formData.account_name" placeholder="个人开户名" />
           </FormItem>
           <FormItem>
+            <div class="form-title2" v-if="isUpdate">身份证号</div>
             <Input v-model="formData.account_id_card_no" placeholder="身份证号" />
           </FormItem>
           <FormItem>
+            <div class="form-title2" v-if="isUpdate">预留手机号</div>
             <Input v-model="formData.account_mobile" placeholder="预留手机号" />
           </FormItem>
           <FormItem>
+            <div class="form-title2" v-if="isUpdate">个人银行卡号</div>
             <Input v-model="formData.account_card_no" placeholder="个人银行卡号" />
           </FormItem>
           <FormItem>
+            <div class="form-title2" v-if="isUpdate">选择银行</div>
             <Select v-model="formData.account_bank_id" placeholder="选择银行">
               <Option v-for="item in bankList" :key="item.value" :value="item.value">{{item.label}}</Option>
             </Select>
           </FormItem>
           <FormItem>
+            <div class="form-title2" v-if="isUpdate">开户支行</div>
             <Input v-model="formData.account_opening_banke" placeholder="开户支行" />
           </FormItem>
         </Form>

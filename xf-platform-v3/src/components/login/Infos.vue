@@ -7,7 +7,8 @@
   <div class="logo"><img src="@/assets/img/logo.png" /></div>
   <div class="flip-box">
     <Form class="form">
-      <div class="form-title">注册</div>
+      <div class="form-title" v-if="isUpdate">完善账号信息</div>
+      <div class="form-title" v-else>注册</div>
       <FormItem>
         <Button style="width: 125px" v-if="isUpdate && key1 === '1'">企业</Button>
         <Button style="width: 125px" v-if="isUpdate && key1 === '2'">个人</Button>
@@ -23,8 +24,7 @@
         </RadioGroup>
       </FormItem>
       <FormItem>
-        <div class="txt" v-if="isUpdate">由于小夫有票系统升级，旧账号登录需补全相关信息，<br/>
-          企业账号需划分为场地方或活动方,个人账号则无变动。<br/>
+        <div class="txt" v-if="isUpdate" style="margin-left: 0;">由于小夫有票系统升级，旧账号登录需补全相关信息，企业账号需划分为场地方或活动方,个人账号则无变动。<br/>
           场地方:  如酒吧，有实体场地的，则为场地方<br/>
           活动方:  无实体场地的音乐主办方，则为活动方</div>
         <div class="txt" v-else>我们将会校验您的真实性，所以请如实选择身份性质，如发现真实性存疑，我们有权锁定您的账户并采取对应措施。</div>

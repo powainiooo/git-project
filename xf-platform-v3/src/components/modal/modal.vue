@@ -27,7 +27,7 @@
     </div>
     <div class="btns">
       <Button size="small" @click="onOk">{{okText}}</Button>
-      <Button size="small" class="ivue-btn-cancel" @click="onCancel">{{cancelText}}</Button>
+      <Button size="small" class="ivue-btn-cancel" @click="onCancel" v-if="!isWarn">{{cancelText}}</Button>
     </div>
   </div>
 </section>

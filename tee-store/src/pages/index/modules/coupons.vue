@@ -36,7 +36,7 @@ export default {
       this.moving = true
     },
     moveEnd () {
-      this.moving = false
+      // this.moving = false
     }
   }
 }

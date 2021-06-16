@@ -592,6 +592,9 @@ export default {
       postAction(url, params, false).then(res => {
         if (res.code === 1) {
           this.$refs.alert.show('suc')
+          if (this.isUpdate) {
+            this.$store.dispatch('getUserData')
+          }
         } else {
           this.$refs.alert.show('fail', res.msg)
           this.confirm.isAjax = false

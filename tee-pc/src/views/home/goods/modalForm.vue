@@ -235,7 +235,7 @@ export default {
       specsList: [{
         attr_name: '',
         children: [
-          { attr_name: '', price: '' }
+          { attr_name: '', price: 0 }
         ]
       }],
       errData: {},
@@ -295,7 +295,7 @@ export default {
       this.specsList.push({
         attr_name: '',
         children: [
-          { attr_name: '', price: '' }
+          { attr_name: '', price: 0 }
         ]
       })
     },
@@ -305,7 +305,7 @@ export default {
     newSpecsItem (i) {
       this.specsList[i].children.push({
         attr_name: '',
-        price: ''
+        price: 0
       })
     },
     delSpecsItem (i, j) {
@@ -358,7 +358,7 @@ export default {
       this.specsList = [{
         name: '',
         children: [
-          { name: '', price: '' }
+          { name: '', price: 0 }
         ]
       }]
       this.errData = {}

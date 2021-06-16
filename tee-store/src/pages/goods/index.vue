@@ -251,6 +251,9 @@ export default {
     if (this.$refs.top) {
       this.$refs.top.hideCarts()
     }
+    if (this.$refs.detail) {
+      this.$refs.detail.hide()
+    }
     console.log('goods onShow')
     this.getData()
     this.getCart()

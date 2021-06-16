@@ -17,7 +17,7 @@
       <img src="/static/images/x.png" mode="widthFix" class="x" v-if="storeLogo !== ''" />
       <img :src="imgSrc + storeLogo" mode="heightFix" class="logo2" v-if="storeLogo !== ''" />
     </div>
-    <button v-if="menus" @click="toPage('/pages/personal/mine/main')"><img src="/static/images/menu.png" mode="widthFix" class="menu" /></button>
+    <button v-if="menus" @click="toMine"><img src="/static/images/menu.png" mode="widthFix" class="menu" /></button>
   </div>
 </div>
 </template>
@@ -41,7 +41,12 @@ export default {
     }
   },
   methods: {
-    toPage: mpvue.toPage
+    toPage: mpvue.toPage,
+    toMine () {
+      mpvue.redirectTo({
+        url: '/pages/personal/mine/main'
+      })
+    }
   }
 }
 </script>

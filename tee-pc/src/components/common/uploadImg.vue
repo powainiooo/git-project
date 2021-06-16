@@ -31,8 +31,8 @@
       font-size 14px; color #9E9E9F; line-height 1.3
   &-cropper
     size(100vw, 100vh); background: rgba(0, 0, 0, 0.8); position fixed; top 0; left 0; z-index 2000; center()
-    &-close
-      position absolute; top 10px; right 10px
+    & &-close
+      size(20px, 20px); position absolute; top 10px; right 10px; background-color #F4F3F3
     &-title
       margin 40px 36px 0 36px; font-size 18px; color #000000; between()
     &-subTitle
@@ -80,7 +80,7 @@
   <transition enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
     <div class="c-upload-cropper" v-if="showCropper">
       <div class="c-upload-cropper-container">
-        <a href="javascirpt:;" class="c-upload-cropper-close" @click="showCropper = false"><img src="@/assets/img/ico-close2.png" width="20" /></a>
+        <a href="javascript:;" class="c-upload-cropper-close btn-close" @click="showCropper = false"><img src="@/assets/img/close.png" /></a>
         <div class="c-upload-cropper-title">
           <span>{{title}}</span>
           <Upload action="" :before-upload="uploadBefore2">

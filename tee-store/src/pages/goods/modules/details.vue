@@ -24,7 +24,7 @@
       <div class="infos">
         <div class="between">
           <div class="name">{{goods.title}}</div>
-          <div class="price"><span>{{goods.price}}</span>元</div>
+          <div class="price"><span>{{price}}</span>元</div>
         </div>
         <div class="intro">{{goods.content}}</div>
       </div>
@@ -76,6 +76,19 @@ export default {
       isAjax: false
     }
 	},
+  computed: {
+	  price () {
+	    let price = 0
+      for (const cate of this.cates) {
+        const sid = this.cateIds[`c${cate.id}`]
+        const attr = cate.children.find(i => i.id === sid)
+        if (attr !== undefined) {
+          price += attr.price
+        }
+      }
+      return price
+    }
+  },
 	methods: {
 	  show (data) {
 	    getAction('/userapi/goods/show', {

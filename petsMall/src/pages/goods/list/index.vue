@@ -155,7 +155,7 @@ export default {
    },
    onReachBottom () {
       if (this.loadOver) return
-      this.page += 1
+      this.pageNo += 1
       this.getData()
    },
    onLoad (options) {

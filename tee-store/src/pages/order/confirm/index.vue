@@ -230,11 +230,14 @@ export default {
   },
 
   onShow () {
-    console.log('order onShow')
-    const pages = getCurrentPages()
-    console.log('getCurrentPages', pages)
     this.formData.couponId = store.state.couponId
     this.getData()
+    setTimeout(() => {
+      mpvue.showToast({
+        title: `请确认下单门店为${this.storeInfo.shop_name}`,
+        icon: 'none'
+      })
+    }, 1000)
   },
   onLoad () {
     Object.assign(this.$data, this.$options.data())

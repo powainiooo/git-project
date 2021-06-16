@@ -146,6 +146,7 @@ export default {
           setTimeout(() => {
             if (this.current === 0) {
               this.numsMove(this.score)
+              this.$refs.score.shake()
             } else if (this.current === 1) {
               this.numsMove(this.coupon)
             } else if (this.current === 2) {
@@ -173,10 +174,13 @@ export default {
       this.current = e.mp.detail.current
       if (this.current === 0) {
         this.numsMove(this.score)
+        this.$refs.score.shake()
       } else if (this.current === 1) {
         this.numsMove(this.coupon)
+        this.$refs.coupon.shake()
       } else if (this.current === 2) {
         this.numsMove(this.prize)
+        this.$refs.gift.shake()
       }
     },
     toRecord () {
@@ -214,9 +218,6 @@ export default {
     Object.assign(this.$data, this.$options.data())
     this.key = options.key || 'score'
     this.current = this.hash[this.key]
-    if (options.key !== undefined) {
-      this.$refs[options.key].shake()
-    }
   }
 }
 </script>

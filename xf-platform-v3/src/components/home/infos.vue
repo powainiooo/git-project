@@ -223,15 +223,19 @@ export default {
     },
     changeNums (e, record) {
       console.log('changeNums', e)
-      if (Number(e.target.value) < record.min) {
-        record.num = record.min
-        return
-      }
       if (!/^[\d|\.]*$/.test(record.num)) {
         record.num = record.min
         return
       }
       if (e.key === 'Enter') {
+        if (Number(e.target.value) < record.min) {
+          this.$tModal.warning({
+            title: '无法低于原有数量！',
+            content: '设置的票数无法低于原来设置的数量，只可高于原有票数，请重新操作。',
+            okText: '返回'
+          })
+          return
+        }
         const params = {
           ticket_price_id: record.id,
           num: e.target.value

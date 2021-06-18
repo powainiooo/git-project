@@ -1,31 +1,18 @@
 <template>
-  <div>
-    test index
-    <van-button type="default">默认按钮</van-button>
-    <van-button type="primary">主要按钮</van-button>
-    <van-button type="info">信息按钮</van-button>
-    <van-button type="warning">警告按钮</van-button>
-    <van-button type="danger">危险按钮</van-button>
-  </div>
+  <view class="index">
+    <text>{{ msg }}</text>
+    <van-button type='primary' :loading='true' loading-text='ing'>Button</van-button>
+  </view>
 </template>
 
 <script>
+import './index.css'
 
 export default {
   data () {
     return {
+      msg: 'Hello world!'
     }
-  },
-
-  components: {
-  },
-
-  methods: {
-  },
-
-  created () {
-    // let app = getApp()
   }
 }
 </script>
-

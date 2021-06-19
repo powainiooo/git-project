@@ -114,7 +114,7 @@
 <!--          <span>{{item.num}}</span>-->
           <input v-model="item.num"
                  @focus="showHintIndex = index"
-                 @blur="showHintIndex = -1"
+                 @blur="ticketBlur(index)"
                  @keyup="changeNums($event, item)" />张
         </div>
         <div class="warnTxt" v-if="showHintIndex === index" style=" left: 105%; top: 10px;"><span>请按键盘“回车键”保存。</span></div>
@@ -264,6 +264,13 @@ export default {
     },
     downloadImg (url) {
       window.open(`${window.baseUrl}/api/common/down_image?path=${url}`)
+    },
+    ticketBlur (index) {
+      this.showHintIndex = false
+      const record = this.prices[index]
+      if (Number(record.num) < record.min) {
+        record.num = record.min
+      }
     }
   }
 }

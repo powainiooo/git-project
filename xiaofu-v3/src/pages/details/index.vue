@@ -83,7 +83,7 @@ export default {
   onLoad (options) {
     Object.assign(this.$data, this.$options.data())
     // let app = getApp()
-    this.id = options.id || 15
+    this.id = options.id || 3317
     this.source = options.source || 'ticket'
     this.getData()
   }

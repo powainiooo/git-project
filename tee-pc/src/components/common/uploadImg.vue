@@ -40,7 +40,7 @@
     &-area
       size(366px, 386px); margin 0 auto; border 3px solid mainColor; margin-bottom 20px
       .vue-cropper
-        background url("../../assets/img/bg.png") rgb(200, 201, 202); background-size 360px
+        background rgb(200, 201, 202); background-size 360px
     &-container
       size(600px, 600px); background-color #ffffff; border-radius 10px; position relative
 
@@ -101,9 +101,6 @@
             :info="false"
             :fixedNumber="fixedNumber"
             style="width: 360px; height: 380px;"
-            :style="{
-              'background-image': bgSrc
-            }"
           ></vueCropper>
         </div>
         <div class="tc"><Button size="small" class="bg-main" @click="doCropper" :loading="isLoading">保存</Button></div>

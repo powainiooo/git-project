@@ -8,21 +8,21 @@
   .specs-scroll
     margin 0 60px; overflow-x auto; padding-bottom 20px;
   .specs-box
-    width 730px; background-color #F4F3F3; border-radius 20px; display flex; align-items flex-start;
+    size(730px, auto); background-color #F4F3F3; border-radius 20px; display flex;
     &-col1
       width 295px; border-right 1px solid #E6E6E6;
     &-col2
       size(140px, 64px); border-bottom 1px solid #E6E6E6; center();
     .specs-name
-      padding 15px; border-bottom 1px solid #E6E6E6; between();
+      padding 15px; border-bottom 1px solid #E6E6E6; between(); justify-content flex-end;
       .min-txt
-        width 235px;
+        width 235px; margin-left 15px;
       .btn-close
         size(16px, 16px)
     .specs-list
       margin 15px; border-bottom 1px solid #E6E6E6;
       li
-        between(); margin-bottom 15px; position relative;
+        between(); justify-content flex-end; margin-bottom 15px; position relative;
         .unit
           font-size 12px; color #c8c9ca; abTR(8px, 10px);
         .min-txt
@@ -145,13 +145,13 @@
             <div class="specs-box" :style="{width: boxWidth}">
               <div class="specs-box-col1" v-for="(specs, i) in specsList" :key="i">
                 <div class="specs-name">
-                  <a href="javascript:;" class="btn-close" @click="delSpecs(i)"><img src="@/assets/img/close.png" /></a>
+                  <a href="javascript:;" class="btn-close" @click="delSpecs(i)" v-if="i > 0"><img src="@/assets/img/close.png" /></a>
                   <Input placeholder="填写规格分类名称" maxlength="8" show-word-limit class="min-txt" v-model="specs.attr_name" />
                 </div>
                 <ul class="specs-list">
                   <li v-for="(child, j) in specs.children" :key="j">
-                    <a href="javascript:;" class="btn-close" @click="delSpecsItem(i, j)"><img src="@/assets/img/close.png" /></a>
-                    <Input placeholder="填写规格选项" maxlength="8" show-word-limit class="min-txt" v-model="child.attr_name" />
+                    <a href="javascript:;" class="btn-close" @click="delSpecsItem(i, j)" v-if="j > 0"><img src="@/assets/img/close.png" /></a>
+                    <Input placeholder="填写规格选项" maxlength="8" show-word-limit class="min-txt mr15 ml15" v-model="child.attr_name" />
                     <Input placeholder="0" class="min-txt" style="width: 60px;" v-model="child.price" />
                     <span class="unit">元</span>
                   </li>

@@ -142,7 +142,7 @@
   margin-right: 4px;
 }
 
-.buy-forms { width: 100%; height: 100vh; background-color: #EEEEEF; transition: top .5s cubic-bezier(.3,.79,.41,.91); position: fixed; top: 0; left: 0; z-index: 10; padding-top: 100px; box-sizing: border-box; }
+.buy-forms { width: 100%; height: 100vh; background-color: #EEEEEF; transition: top .5s cubic-bezier(.3,.79,.41,.91); position: fixed; top: 0; left: 0; z-index: 10; padding-top: 100px; box-sizing: border-box; overflow-y: auto; }
 /*.buy-forms .buys-frame { width: 100%; position: absolute; left: 0; bottom: 0; }*/
 
 @keyframes moveUp {
@@ -164,10 +164,10 @@
 <div
   class="c-ticket-detail">
 
-  <div class="buy-forms" :style="{top: showInfos ? '-100vh' : 0}" @touchmove.stop="tmove">
+  <scroll-view scroll-y class="buy-forms" :style="{top: showInfos ? '-100vh' : 0}" @touchmove.stop="tmove">
     <information :needIDcard="record.id_card_flag === 1" :needAddress="record.ticket_type === 2" @change="getValue" />
     <c-select :list="record.price || []" @change="getValue" />
-  </div>
+  </scroll-view>
 
   <div>
   <infos ref="infos" :record="record"/>
@@ -281,10 +281,7 @@ export default {
     }
   },
   methods: {
-    tmove (e) {
-      e.preventDefault();
-      e.stopPropagation();
-    },
+    tmove (e) {},
     handleConfirm () {
       if (this.page === 'detail') {
         this.page = 'buy'

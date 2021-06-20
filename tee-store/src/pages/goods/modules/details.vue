@@ -1,7 +1,8 @@
 <style scoped>
 .c-details { padding-bottom: 150px; }
 .c-details .bg { width: 100%; height: 334px; border-radius: 70px 70px 0 0; position: absolute; top: 0; left: 0; }
-.c-details .infos { margin: 354px 34px 36px 34px; padding: 0 10px 50px 10px; }
+.c-details .infos { margin: 420px 34px 36px 34px; padding: 0 10px 50px 10px; }
+.c-details .infos1 { margin: 0; padding: 10px; background-color: #F9F9F9; position: absolute; top: 334px; left: 34px; right: 34px; }
 .c-details .infos .name { font-size: 30px; }
 .c-details .infos .price { font-size: 20px; }
 .c-details .infos .price span { font-size: 54px; line-height: 65px; }
@@ -20,12 +21,14 @@
   <div class="c-drawer-box c-details" :class="{'c-drawer-show': showItem}">
     <div class="btn-circle c-drawer-close" @click="hide"><img src="/static/images/x2.png" /></div>
     <img :src="imgSrc + goods.cover" mode="aspectFill" class="bg" />
+    <div class="infos infos1">
+      <div class="between">
+        <div class="name">{{goods.title}}</div>
+        <div class="price"><span>{{price}}</span>元</div>
+      </div>
+    </div>
     <div class="c-drawer-scroll">
       <div class="infos">
-        <div class="between">
-          <div class="name">{{goods.title}}</div>
-          <div class="price"><span>{{price}}</span>元</div>
-        </div>
         <div class="intro">{{goods.content}}</div>
       </div>
 
@@ -78,7 +81,7 @@ export default {
 	},
   computed: {
 	  price () {
-	    let price = 0
+	    let price = this.goods.price || 0
       for (const cate of this.cates) {
         const sid = this.cateIds[`c${cate.id}`]
         const attr = cate.children.find(i => i.id === sid)
@@ -86,7 +89,7 @@ export default {
           price += attr.price
         }
       }
-      return price
+      return Number(price.toFixed(2))
     }
   },
 	methods: {

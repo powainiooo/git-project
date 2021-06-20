@@ -13,12 +13,12 @@
 .swiper-sec .icons .gift { height: 53%; display: block; }
 .swiper-sec .icons .gift .img { height: 100%; }
 
-.icon-move { animation: iconmove 2s linear both; }
+.icon-move { animation: iconmove 1s linear both; }
 @keyframes iconmove {
   0%, 100% { transform: rotateZ(0deg) scale(1); }
-  5% { transform: rotateZ(0deg) scale(.9); }
-  15%, 35%, 55%, 75% { transform: rotateZ(10deg) scale(1.1); }
-  25%, 45%, 65%, 85% { transform: rotateZ(-10deg) scale(1.1); }
+  10% { transform: rotateZ(0deg) scale(.9); }
+  20%, 60% { transform: rotateZ(10deg) scale(1.1); }
+  40%, 80% { transform: rotateZ(-10deg) scale(1.1); }
 }
 </style>
 
@@ -82,7 +82,7 @@ import gifts from './modules/gifts'
 import goods from './modules/goods'
 import records from '../personal/points/modules/records'
 import store from '@/store'
-import { TweenMax } from 'gsap'
+// import { TweenMax } from 'gsap'
 import { getAction } from '@/utils/api'
 
 export default {
@@ -157,18 +157,19 @@ export default {
       })
     },
     numsMove (val) {
-      const obj = {
-        x: 0
-      }
-      TweenMax.to(obj, 0.7, {
-        x: val,
-        onComplete: () => {
-          this.nums = parseInt(obj.x)
-        },
-        onUpdate: (e) => {
-          this.nums = obj.x.toFixed(0)
-        }
-      })
+      this.nums = val
+      // const obj = {
+      //   x: 0
+      // }
+      // TweenMax.to(obj, 0.7, {
+      //   x: val,
+      //   onComplete: () => {
+      //     this.nums = parseInt(obj.x)
+      //   },
+      //   onUpdate: (e) => {
+      //     this.nums = obj.x.toFixed(0)
+      //   }
+      // })
     },
     change (e) {
       this.current = e.mp.detail.current

@@ -54,7 +54,6 @@ export default {
       const list = [...val]
       list.sort(() => Math.random() - 0.5)
       this.itemList = list
-      console.log('list', val[0].name, list[0].name)
       this.move()
     }
   },

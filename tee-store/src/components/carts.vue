@@ -31,7 +31,7 @@
             <div class="intro" v-else>
               <span class="c-tag" v-for="(attr, i2) in item.attr_names" :key="i2">{{attr}}</span>
             </div>
-            <div class="price"><span>{{item.price}}</span>元</div>
+            <div class="price"><span>{{item.totolPrice}}</span>元</div>
             <picker :range="nums" @change="numChange($event, item.id)">
               <div class="tagC nums">{{item.buy_nums}}</div>
             </picker>
@@ -84,6 +84,7 @@ export default {
           let price = 0
           res.data.forEach(i => {
             i.attrs = i.attr_names.join('、')
+            i.totolPrice = Number((i.price * i.buy_nums).toFixed(2))
             price += Number(i.price) * Number(i.buy_nums)
           })
           this.price = Number(price.toFixed(2))

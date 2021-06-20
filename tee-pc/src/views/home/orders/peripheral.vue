@@ -119,7 +119,6 @@ export default {
     return {
       statusList: [
         { id: '0', name: '全部' },
-        { id: '1', name: '待付款' },
         { id: '2', name: '已付款' },
         { id: '4', name: '待提货' },
         { id: '7', name: '已完成' },

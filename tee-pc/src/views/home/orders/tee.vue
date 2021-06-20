@@ -130,7 +130,6 @@ export default {
     return {
       statusList: [
         { id: '0', name: '全部' },
-        { id: '1', name: '待付款' },
         { id: '2', name: '已下单' },
         { id: '3', name: '制作中' },
         { id: '4', name: '待取餐' },

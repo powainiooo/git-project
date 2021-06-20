@@ -93,6 +93,7 @@
             <FormItem>
               <div class="form-title2" v-if="isUpdate">负责人身份证号</div>
               <Input v-model="formData.id_card_no" placeholder="负责人身份证号" />
+              <div class="warnTxt" style="top: 4px; left: 104%;" v-if="!idCardReg && formData.id_card_no !== ''"><span>身份证格式不正确</span></div>
             </FormItem>
             <FormItem>
               <div class="form-title2" v-if="isUpdate">负责人联系电话</div>
@@ -171,6 +172,7 @@
           <FormItem>
             <div class="form-title2" v-if="isUpdate">身份证号</div>
             <Input v-model="formData.account_id_card_no" placeholder="身份证号" />
+            <div class="warnTxt" style="top: 4px; left: 104%;" v-if="!accountIdCardReg && formData.account_id_card_no !== ''"><span>身份证格式不正确</span></div>
           </FormItem>
           <FormItem>
             <div class="form-title2" v-if="isUpdate">预留手机号</div>
@@ -431,6 +433,8 @@ import { postAction } from '@/utils'
 import addrPicker from '@/components/addrPicker'
 import Vue from 'vue'
 import { ACCESS_TOKEN } from '@/config'
+import { idMatch } from '@/utils/tools'
+
 export default {
   name: 'app',
   mixins: [vericode],
@@ -451,15 +455,13 @@ export default {
       return this.$store.state.bankList
     },
     idCardReg () {
-      const reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/
-      return reg.test(this.formData.id_card_no)
+      return idMatch(this.formData.id_card_no)
     },
     accountIdCardReg () {
-      const reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/
-      return reg.test(this.formData.account_id_card_no)
+      return idMatch(this.formData.account_id_card_no)
     },
     accountMobile () {
-      const reg = /^[1][3,4,5,6,7,8][0-9]{9}$/
+      const reg = /^(13[0-9]|14[01456879]|15[0-35-9]|16[2567]|17[0-8]|18[0-9]|19[0-35-9])\d{8}$/
       return reg.test(this.formData.account_mobile)
     },
     nextBtnDisable () {

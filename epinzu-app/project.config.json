@@ -1,7 +1,7 @@
 {
   "miniprogramRoot": "./dist",
   "projectname": "epinzu-app",
-  "description": "s",
+  "description": "epinzu ali app",
   "appid": "touristappid",
   "setting": {
     "urlCheck": true,

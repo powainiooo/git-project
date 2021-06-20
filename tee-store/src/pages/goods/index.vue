@@ -46,9 +46,9 @@
           <div class="txt1">CLOSED</div>
         </div>
         <div class="title">本店休息中，请切换其他门店</div>
-        <div class="desc">营业时间为10:00 ~ 22:00，目前时段已打烊，期待您的光临。</div>
+        <div class="desc">营业时间为{{storeInfo.word_time_start}} ~ {{storeInfo.word_time_end}}，目前时段已打烊，期待您的光临。</div>
         <div class="center">
-          <button class="btn btn-style1" @click="goBack">切换门店</button>
+          <button class="btn btn-style1" @click="toStores">切换门店</button>
           <button class="btn btn-style2" @click="doCloseModal">留在当前</button>
         </div>
       </div>
@@ -59,7 +59,7 @@
   <!-- 关门提示 -->
   <div class="close-hint" v-if="closeHintVisible">
     <div>本店休息中，请切换其他门店</div>
-    <p>营业时间为10:00 ~ 22:00</p>
+    <p>营业时间为{{storeInfo.word_time_start}} ~ {{storeInfo.word_time_end}}</p>
   </div>
 
   <!-- 免费弹窗 -->
@@ -68,11 +68,11 @@
       <img src="/static/images/bg.png" class="bg" />
       <div class="pr">
         <div class="line1 center">
-          <div class="imgs"><img src="/static/images/img2.png" mode="aspectFill" /></div>
+          <div class="imgs"><img :src="imgSrc + prizeData.cover" mode="aspectFill" /></div>
           <img src="/static/images/free@2x.png" mode="widthFix" class="free" />
         </div>
-        <div class="title">[免费] 夏日特饮</div>
-        <div class="desc">需任意消费后可使用，点击立即加入购物车。有效期 至 2021/04/01</div>
+        <div class="title">{{prizeData.title}}</div>
+        <div class="desc">需任意消费后可使用，点击立即加入购物车。有效期 至 {{prizeData.expired}}</div>
         <div class="center">
           <button class="btn btn-style1" @click="doUse">立即使用</button>
           <button class="btn btn-style2" @click="freeModalVisible = false">暂不使用</button>
@@ -109,6 +109,7 @@ export default {
   },
   data () {
     return {
+      imgSrc: mpvue.imgSrc,
       shopId: '',
       current: 0,
       scrollKey: '',
@@ -119,7 +120,9 @@ export default {
       closeHintVisible: false,
       freeModalVisible: false,
       cartNum: 0,
-      isAjax: false
+      isAjax: false,
+      storeInfo: {},
+      prizeData: {}
     }
   },
   computed: {
@@ -172,6 +175,41 @@ export default {
         }
       })
     },
+    getStoreInfo () {
+      const _this = this
+      mpvue.getLocation({
+        success (res) {
+          console.log('getLocation', res)
+          getAction('/userapi/shop/show', {
+            shop_id: _this.shopId,
+            lng: res.longitude,
+            lat: res.latitude
+          }).then(res2 => {
+            if (res2.code === 0) {
+              // res2.data.word_status = 0
+              _this.storeInfo = res2.data
+              if (_this.storeInfo.word_status === 0) {
+                _this.closeModalVisible = true
+              }
+            }
+          })
+        }
+      })
+    },
+    getPrize () {
+      getAction('/userapi/user/prize/index/data', {
+        page: 1,
+        limit: 20,
+        status: 1
+      }).then(res => {
+        if (res.code === 0) {
+          if (res.data.length > 0) {
+            this.freeModalVisible = true
+            this.prizeData = res.data[0]
+          }
+        }
+      })
+    },
     toggleCate (id) {
       this.current = id
       this.scrollKey = `g${id}`
@@ -193,7 +231,9 @@ export default {
       this.freeModalVisible = false
     },
     openDetail (data) {
-      this.$refs.detail.show(data)
+      if (this.storeInfo.word_status === 1) {
+        this.$refs.detail.show(data)
+      }
     },
     getCart () {
       getAction('/userapi/shopping/card/index/data', {
@@ -254,9 +294,12 @@ export default {
     if (this.$refs.detail) {
       this.$refs.detail.hide()
     }
-    console.log('goods onShow')
+    this.cateList = []
+    this.goodsList = []
     this.getData()
     this.getCart()
+    this.getStoreInfo()
+    this.getPrize()
   },
   onLoad (options) {
     console.log('onLoad')

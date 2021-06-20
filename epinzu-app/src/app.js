@@ -1,7 +1,13 @@
 import Vue from 'vue'
-import './app.css'
+import store from './store'
+import './static/css/reset.css'
+
+import './app.styl'
+
+// Vue.config.productionTip = false
 
 const App = {
+  store,
   onShow (options) {
   },
   render(h) {

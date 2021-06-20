@@ -1,20 +1,25 @@
+var path = require('path')
 const config = {
   projectName: 'epinzu-app',
-  date: '2021-6-18',
+  date: '2021-6-20',
   designWidth: 750,
   deviceRatio: {
     640: 2.34 / 2,
-    750: 1,
+    750: 2,
     828: 1.81 / 2
   },
   sourceRoot: 'src',
-  outputRoot: 'dist',
+  outputRoot: `dist/${process.env.TARO_ENV}`,
   plugins: [],
+  alias: {
+    '@/img': path.resolve(__dirname, '..', 'src/static/img'),
+    '@/css': path.resolve(__dirname, '..', 'src/static/css'),
+    '@/c': path.resolve(__dirname, '..', 'src/components')
+  },
   defineConstants: {
   },
   copy: {
     patterns: [
-      { from: 'src/components/vant-weapp/dist/dist', to: 'dist/components/vant-weapp/dist/dist' }
     ],
     options: {
     }

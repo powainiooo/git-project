@@ -4,9 +4,7 @@
 
 <template>
 <div class="">
-   <button @click="draw">draw</button>
-   <canvas canvas-id="myCanvas"
-           style="width: 750px; height: 760px; transform-origin: 0 0; transform: scale(.5)"/>
+   test aliapp
 </div>
 </template>
 
@@ -24,14 +22,6 @@ export default {
       return {}
    },
    methods: {
-      draw () {
-         const ctx = wx.createCanvasContext('myCanvas')
-         console.log('drawPost', ctx)
-         // 背景色
-         ctx.setFillStyle('#ff0000')
-         ctx.fillRect(0, 0, 750, 760)
-         ctx.draw()
-      }
    },
    created () {
    }

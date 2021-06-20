@@ -7,6 +7,7 @@
 .c-store-item .line1 .x { width: 15px; margin: 0 10px; }
 .c-store-item .line1 .logo2 { height: 40px; }
 .c-store-item .line1 .r { width: 168px; height: 100%; background-color: #F0916C; font-size: 24px; color: #FFFFFF; }
+.c-store-item .line1 .break { background-color: #CECBC6; }
 .c-store-item .line2 { margin: 22px 35px; font-size: 24px; }
 .c-store-item .line3 { display: flex; align-items: baseline; margin-bottom: 10px; margin-left: 35px; }
 .c-store-item .line3 img { margin-right: 10px; }
@@ -16,7 +17,7 @@
 </style>
 
 <template>
-<div class="c-store-item" hover-class="hscale" hover-stay-time="10" @click="toDetail">
+<div class="c-store-item" :hover-class="hscale" hover-stay-time="10" @click="toDetail">
   <div class="line1 between">
     <div class="l acenter">
       <!--      <img :src="imgSrc + record.shop_logo" mode="widthFix" class="logo" />-->
@@ -24,9 +25,13 @@
       <img src="/static/images/x.png" mode="widthFix" class="x" />
       <img :src="imgSrc + record.shop_logo" mode="heightFix" class="logo2" />
     </div>
-    <div class="r center">
+    <div class="r center" v-if="record.word_status === 1">
       <img src="/static/images/icon-cup.png" mode="widthFix" class="w24 mr5" />
       <span>去点餐</span>
+    </div>
+    <div class="r center break" v-if="record.word_status === 0">
+      <img src="/static/images/icon-cup.png" mode="widthFix" class="w24 mr5" />
+      <span>休息中</span>
     </div>
   </div>
   <div class="line2">{{record.shop_name}}</div>

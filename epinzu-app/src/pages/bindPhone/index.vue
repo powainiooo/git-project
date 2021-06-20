@@ -1,0 +1,49 @@
+<template>
+  <view class="index">
+    <Field placeholder="请输入手机号" v-model="phone" />
+    <Field placeholder="请输入验证码" v-model="code" />
+    <view class="ml12 mr12 mt40">
+      <button class="c-btn" :disabled="btnDisable" @tap="handleSubmit">提交</button>
+    </view>
+  </view>
+</template>
+
+<script>
+import Taro from '@tarojs/taro'
+import Field from "../../components/common/Field"
+export default {
+  name: 'Index',
+  components: {
+    Field
+  },
+  computed: {
+    btnDisable () {
+      if (this.phone ==='' || this.code === '') {
+        return true
+      }
+      return false
+    }
+  },
+  data () {
+    return {
+      phone: '',
+      code: ''
+    }
+  },
+  mounted () {
+
+  },
+  methods: {
+    handleSubmit () {
+      console.log('handleSubmit')
+      const params = {
+        phone: this.phone,
+        code: this.code
+      }
+      Taro.showToast({
+        title: '修改成功'
+      })
+    }
+  }
+}
+</script>

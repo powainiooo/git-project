@@ -1,18 +1,14 @@
 <template>
   <view class="index">
-    <text>{{ msg }}</text>
-    <van-button type='primary' :loading='true' loading-text='ing'>Button</van-button>
+    <button type="primary">primary</button>
+    <button type="default">default</button>
+    <button type="warn">warn</button>
   </view>
 </template>
 
 <script>
-import './index.css'
 
 export default {
-  data () {
-    return {
-      msg: 'Hello world!'
-    }
-  }
+  name: 'Index'
 }
 </script>

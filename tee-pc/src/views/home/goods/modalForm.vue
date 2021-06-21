@@ -76,6 +76,12 @@
               </div>
             </FormItem>
             <FormItem>
+              <div class="acenter">
+                <label class="c-c8 mr20"><input type="radio" class="cb mr5" :value="0" v-model="formData.date_type" />长期售卖</label>
+                <label class="c-c8"><input type="radio" class="cb mr5" :value="1" v-model="formData.date_type" />按时段售卖</label>
+              </div>
+            </FormItem>
+            <FormItem v-if="formData.date_type === 1">
               <c-date-time type="daterange"
                            placeholder="售卖时间段"
                            v-model="dates"
@@ -229,6 +235,7 @@ export default {
         store_nums: '',
         content: '',
         make_time: '',
+        date_type: 0,
         date_start: '',
         date_end: ''
       },
@@ -350,6 +357,7 @@ export default {
         store_nums: '',
         content: '',
         make_time: '',
+        date_type: 0,
         date_start: '',
         date_end: ''
       }

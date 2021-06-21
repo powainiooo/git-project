@@ -34,7 +34,7 @@ module.exports = {
 }
 // laowang 123456    tea  123456
 /*
-* http://admin.dev.sysds.cn/
+* http://admin.dev.wsgb.club/
 admin
 123456
 * http://shop.dev.wsgb.club/ http://shop.wsgb.club/

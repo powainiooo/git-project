@@ -135,6 +135,15 @@ export default {
     },
     getPhoneNumber (e) {
       console.log('getPhoneNumber', e)
+      postAction('/userapi/wechat/parse/data', {
+        encryptedData: e.mp.detail.encryptedData,
+        iv: e.mp.detail.iv,
+        cloudID: e.mp.detail.cloudID
+      }).then(res => {
+        if (res.code === 0) {
+          this.formData.phone = res.data
+        }
+      })
     },
     togglePack () {
       this.formData.pack = this.formData.pack === 0 ? 1 : 0

@@ -73,7 +73,7 @@
         <td><div>{{item.make_time}}分钟</div></td>
         <td><div>{{item.status_name}}</div></td>
         <td>
-          <div class="">
+          <div class="end" style="align-items: flex-start;">
             <div v-if="item.check_status === 1">
               <Poptip title="确认下架？" confirm @on-ok="changeStatus(item.id, 1)">
                 <Button size="small" v-if="item.status === 2">下架</Button>
@@ -86,7 +86,7 @@
                 <Button size="small" class="ml10 bg-gray">删除</Button>
               </Poptip>
             </div>
-            <p class="tc" v-else-if="item.check_status === 0">审核中</p>
+            <p class="tc" v-else-if="item.check_status === 0" style="width: 100%">审核中</p>
             <Button size="small" class="ml10 bg-error" v-else-if="item.check_status === -1" @click="handleModify(item.id)">审核不过,重新修改后提交</Button>
           </div>
         </td>

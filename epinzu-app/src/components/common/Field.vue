@@ -1,14 +1,16 @@
 <style lang="stylus" type="text/stylus">
 .c-field
-  width 100%; height 52px; background-color #FFFFFF; position relative; display flex; align-items center; padding-left 12px;
+  width 100%; height 52px; background-color #FFFFFF; position relative; display flex; align-items center; padding-left 12px; padding-right 12px;
   &:after
     content ''; position absolute; left 12px; right 0; bottom 0; background-color #E5E5E5; height 1PX; transform scaleY(.5);
   &-name
     width 82px; font-size 14px;
   &-body
-    flex 1;
+    flex 1; display flex;
     input
-      font-size 14px;
+      font-size 14px; flex 1;
+  &-button
+    padding-left 8px;
 </style>
 
 <template>

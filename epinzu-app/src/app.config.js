@@ -1,8 +1,8 @@
 export default {
   pages: [
+    'pages/index/index',
     'pages/bindPhone/index',
     'pages/login/index',
-    'pages/index/index',
     'pages/temp/index'
   ],
   window: {

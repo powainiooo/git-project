@@ -82,7 +82,7 @@
 
 <template>
 <div class="c-ticket-infos">
-  <img :src="record.cover_image" class="banner" :class="{'banner-hide': page === 'buy'}" v-if="showBanner && record" />
+  <img :src="record.cover_image" mode="aspectFill" class="banner" :class="{'banner-hide': page === 'buy'}" v-if="showBanner && record" />
   <div class="line1 bBorder">
     <div class="l">
       <tk-info :record="infoData" :endDate="infoData2" :showEndDate="showEndDate" :ellipsis="false" />

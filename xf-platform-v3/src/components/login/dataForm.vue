@@ -98,6 +98,7 @@
             <FormItem>
               <div class="form-title2" v-if="isUpdate">负责人联系电话</div>
               <Input v-model="vericode.mobile" placeholder="负责人联系电话" />
+              <div class="warnTxt" style="top: 4px; left: 104%;" v-if="phoneDisabled && vericode.mobile !== ''"><span>联系电话格式不正确</span></div>
             </FormItem>
             <FormItem>
               <div class="form-title2" v-if="isUpdate">短信验证码</div>
@@ -177,6 +178,7 @@
           <FormItem>
             <div class="form-title2" v-if="isUpdate">预留手机号</div>
             <Input v-model="formData.account_mobile" placeholder="预留手机号" />
+            <div class="warnTxt" style="top: 4px; left: 104%;" v-if="!accountMobile && formData.account_mobile !== ''"><span>预留手机号格式不正确</span></div>
           </FormItem>
           <FormItem>
             <div class="form-title2" v-if="isUpdate">个人银行卡号</div>

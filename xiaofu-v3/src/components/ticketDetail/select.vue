@@ -3,13 +3,10 @@
   height: 1px;
   margin: 76px 25px 0 25px;
 }
-.c-ticket-information {
-  margin-bottom: 200px;
-}
 </style>
 
 <template>
-<div class="c-ticket-information">
+<div class="c-ticket-information" style="padding-bottom: 200rpx;">
   <div class="c-ticket-title"><span>Select</span>选择票种、张数</div>
   <ul class="form-list">
     <li v-for="(item, index) in list" :key="id">

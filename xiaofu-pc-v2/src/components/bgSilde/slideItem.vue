@@ -51,7 +51,18 @@ export default {
   },
   watch: {
     list (val) {
-      const list = [...val]
+      const list = []
+      for (let i = 0; i < val.length; i++) {
+        if (i % 2 === 0) {
+          if (this.direct === 'up') {
+            list.push(val[i])
+          }
+        } else {
+          if (this.direct === 'down') {
+            list.push(val[i])
+          }
+        }
+      }
       list.sort(() => Math.random() - 0.5)
       this.itemList = list
       this.move()

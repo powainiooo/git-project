@@ -7,8 +7,12 @@
 
 .left-area { position: fixed; left: 30px; bottom: 12px; z-index: 10; }
 .left-area div { width: 200px; text-align: center; font-size: 14px; color: #ffffff; line-height: 14px; margin-bottom: 15px; }
-.left-area a { width: 200px; height: 40px; display: flex; justify-content: center; align-items: center; font-size: 0; background: linear-gradient(159deg, #0027AF 0%, #2154DA 53%, #003AC3 100%); box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.15); margin-bottom: 46px; border-radius: 10px; }
+.left-area a { width: 200px; height: 40px; display: flex; justify-content: center; align-items: center; font-size: 0; background: linear-gradient(159deg, #0027AF 0%, #2154DA 53%, #003AC3 100%); box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.15); margin-bottom: 46px; border-radius: 10px; transition: all .2s ease-in-out; }
+.left-area a:hover { background: linear-gradient(349deg, #A5C0F7 0%, #A5C0F7 100%) }
+.left-area a:active { transform: scale(.95); }
 .left-area p { font-size: 12px; color: #ffffff; }
+
+.arrow { width: 15%; position: absolute; bottom: 30%; right: 25% }
 </style>
 
 <template>
@@ -33,6 +37,9 @@
         <img src="@/assets/img/c3-a.png" width="273" class="active" />
       </p>
     </div>
+
+    <!-- 箭头 -->
+    <img src="@/assets/img/arrow.png" class="arrow" />
 
     <!-- 左下角 -->
     <div class="left-area">

@@ -18,17 +18,23 @@
 }
 .artist-item .content {
   width: 100%;
-  height: 60px;
+  max-height: 90px;
   background: rgba(0, 0, 0, 0.4);
   display: flex;
   align-items: center;
-  padding-left: 13px;
+  padding: 14px 12px;
   box-sizing: border-box;
   font-size: 26px;
   color: #ffffff;
   position: absolute;
   top: 0;
   left: 0;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 .artist-item .flip {
   width: 58px;

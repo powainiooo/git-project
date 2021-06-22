@@ -1,5 +1,5 @@
 <style>
-.index-goods { width: 700px; height: calc(100vh - 104px); margin-top: 0; position: absolute; top: calc(100vh - 370px); left: 0; z-index: 50; transition: top 0.4s cubic-bezier(.23,.78,.33,.97); }
+.index-goods { width: 700px; height: calc(100vh - 104px); margin-top: 0; position: absolute; top: calc(100vh - 370px); left: 0; z-index: 250; transition: top 0.4s cubic-bezier(.23,.78,.33,.97); }
 .index-goods-show { top: 126px; }
 .index-goods .arrows { width: 80px; height: 60px; position: absolute; top: -30px; left: 66px; display: flex; flex-direction: column; align-items: center; z-index: 10; }
 .index-goods .arrows .a1 { width: 100%; }
@@ -10,7 +10,7 @@
 </style>
 
 <template>
-<div class="container2 index-goods" :class="{'index-goods-show': visible}">
+<div class="container2 index-goods" :class="{'index-goods-show': visible}" v-if="list.length > 0">
   <div class="arrows" @click="toggle">
     <img src="/static/images/index/arrow1.png" mode="widthFix" class="a1" />
     <img src="/static/images/index/arrow2.png" mode="widthFix" class="a2" />

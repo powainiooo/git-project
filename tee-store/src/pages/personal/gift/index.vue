@@ -16,7 +16,7 @@
       </tabs>
       <scroll-view scroll-y class="list-container" @scrolltolower="reachBottom">
          <div class="item slide-col slideUp" v-for="item in list" :key="id">
-            <item :record="item" extraClass="coupon-item-min" />
+            <item :record="item" extraClass="coupon-item-min" @tap="toDetail" />
          </div>
          <div class="empty-hint" v-if="list.length === 0">
             <p>Irrelevant content</p>
@@ -76,6 +76,17 @@ export default {
           this.total = res.count
         }
       })
+    },
+    toDetail () {
+      if (this.storeInfo.shop_id) {
+        mpvue.reLaunch({
+          url: '/pages/goods/main?id=' + this.storeInfo.shop_id
+        })
+      } else {
+        mpvue.navigateTo({
+          url: '/pages/stores/main'
+        })
+      }
     }
   },
   onLoad (options) {

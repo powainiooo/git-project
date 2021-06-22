@@ -30,7 +30,7 @@
       <span>去点餐</span>
     </div>
     <div class="r center break" v-if="record.word_status === 0">
-      <img src="/static/images/icon-cup.png" mode="widthFix" class="w24 mr5" />
+      <img src="/static/images/z.png" mode="widthFix" class="w20 mr5" />
       <span>休息中</span>
     </div>
   </div>

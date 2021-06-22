@@ -72,7 +72,7 @@
           <img src="/static/images/free@2x.png" mode="widthFix" class="free" />
         </div>
         <div class="title">{{prizeData.title}}</div>
-        <div class="desc">需任意消费后可使用，点击立即加入购物车。有效期 至 {{prizeData.expired}}</div>
+        <div class="desc">{{prizeData.content}}<br/>有效期 至 {{prizeData.expired}}</div>
         <div class="center">
           <button class="btn btn-style1" @click="doUse">立即使用</button>
           <button class="btn btn-style2" @click="freeModalVisible = false">暂不使用</button>
@@ -242,7 +242,8 @@ export default {
       }).then(res => {
         if (res.code === 0) {
           this.cartsList = res.data
-          this.cartNum = res.data.length
+          let num = res.data.reduce((total, i) => total + i.buy_nums, 0)
+          this.cartNum = num
           console.log('this.cartNum', this.cartNum)
           setTimeout(() => {
             console.log('addrData', this.addrData)

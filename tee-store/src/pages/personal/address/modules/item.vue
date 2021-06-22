@@ -13,14 +13,14 @@
      @click="tap">
   <div class="addr-box">
     <div class="header between">
-      <div class="acenter" @click.stop="setStatus">
+      <div class="acenter" @click.stop="setStatus" hover-stop-propagation>
         <img src="/static/images/radio.png" mode="widthFix" class="w30" v-if="record.status === 0" />
         <img src="/static/images/radio-checked.png" mode="widthFix" class="w30" v-else />
         <span class="f20 c-9e ml10">设为默认地址</span>
       </div>
       <div class="flex">
-        <button class="btn-circle btn-style1 mr20" @click="handleEdit"><img src="/static/images/edit.png" mode="widthFix" class="w26" /></button>
-        <button class="btn-circle btn-style1" @click="handleDel"><img src="/static/images/del.png" mode="widthFix" class="w24" /></button>
+        <button class="btn-circle btn-style1 mr20" hover-stop-propagation @click.stop="handleEdit"><img src="/static/images/edit.png" mode="widthFix" class="w26" /></button>
+        <button class="btn-circle btn-style1" hover-stop-propagation @click.stop="handleDel"><img src="/static/images/del.png" mode="widthFix" class="w24" /></button>
       </div>
     </div>
     <div class="body">

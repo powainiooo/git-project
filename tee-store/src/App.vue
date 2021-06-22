@@ -36,7 +36,7 @@ export default {
   },
   methods: {
     loadFont () {
-      const baseUrl = 'http://file.dev.sysds.cn/static/font/'
+      const baseUrl = 'https://api.wsgb.club/static/font/'
       mpvue.loadFontFace({
         global: true,
         family: 'DinB',

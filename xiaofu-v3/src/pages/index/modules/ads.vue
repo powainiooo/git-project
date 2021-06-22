@@ -6,13 +6,13 @@
 .ad-frame .infos .name h3 { width: 600px; height: 64px; font-size: 53px; font-family: HelveB; line-height: 64px; color: #ffffff; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; word-break: break-all; }
 .ad-frame .infos .name p { font-size: 20px; font-family: HelveL; line-height: 20px; color: #ffffff; }
 /deep/.ad-frame .infos .c-tk-info { width: auto; margin-right: 50px; }
-.ad-frame-hide { animation: fadeOut .5s linear 1s both; }
+.ad-frame-hide { animation: fadeOut .3s linear 1s both; }
 @keyframes fadeOut {
   0% { opacity: 1; }
   99% { opacity: 0; }
   100% { opacity: 0; display: none; }
 }
-.ad-frame-hide .ad-container { animation: fadeOut2 0.6s linear both }
+.ad-frame-hide .ad-container { animation: fadeOut2 0.4s linear both }
 @keyframes fadeOut2 {
   0% { opacity: 1; transform: scale(1) }
   99% { opacity: 0; transform: scale(1.2) }

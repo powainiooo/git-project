@@ -21,7 +21,7 @@
             <p>{{record.goods.price}}元</p>
             <div class="acenter">
               <img src="/static/images/jfh.png" mode="widthFix" />
-              <div><span>{{record.goods.sell_price}}</span>元</div>
+              <div><span>{{price}}</span>元</div>
             </div>
           </div>
         </div>
@@ -66,6 +66,29 @@ export default {
   props: {
     record: Object
   },
+  computed: {
+    price () {
+      let price = 0
+      if (this.record.goods && this.record.goods.sell_price) {
+        price = this.record.goods.sell_price
+      }
+      const ids = []
+      const attrs = this.record.attrs || []
+      for (const attr of attrs) {
+        const id = this.cateIds[`c${attr.id}`]
+        if (id) {
+          ids.push(id)
+        }
+      }
+      console.log('ids', ids)
+      const id = `|${ids.join('|')}|`
+      console.log('id', id)
+      const sku = this.record.sku || []
+      const item = sku.find(i => i.attr_ids === id)
+      console.log('item', item)
+      return item !== undefined ? price + item.price : price
+    }
+  },
   data() {
     return {
       imgSrc: mpvue.imgSrc,
@@ -103,6 +126,7 @@ export default {
     },
     selectCate (key, id) {
       this.cateIds[key] = id
+      console.log(this.cateIds)
     },
     numChange (e) {
       this.num = this.nums[e.mp.detail.value]

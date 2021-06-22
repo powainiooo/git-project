@@ -8,8 +8,9 @@
 .points-container .icons .coupon { height: 41%; display: block; }
 .points-container .icons .gift { height: 53%; display: block; }
 .points-container .pig { width: 412px; margin: 50px auto 70px auto; }
-.points-list { padding: 20px 34px; }
+.points-list { padding: 20px 34px; min-height: calc(100vh - 860px); }
 .points-list li { height: 120px; padding: 0 24px; }
+.points-list .empty-hint { margin: 50px 0 0 50px; }
 </style>
 
 <template>
@@ -40,6 +41,10 @@
         <div class="price c-main"><span>{{item.score > 0 ? '+' + item.score : item.score}}</span>积分</div>
       </li>
     </ul>
+    <div class="empty-hint" v-if="list.length === 0">
+      <p>Irrelevant content</p>
+      <div>无相关内容</div>
+    </div>
   </div>
 
   <records ref="records" />

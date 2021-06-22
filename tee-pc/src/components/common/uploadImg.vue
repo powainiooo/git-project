@@ -40,10 +40,9 @@
     &-area
       size(366px, 386px); margin 0 auto; border 3px solid mainColor; margin-bottom 20px
       .vue-cropper
-        background rgb(200, 201, 202); background-size 360px
+        background-color #F4F3F3; background-size 360px; background-image none
     &-container
       size(600px, 600px); background-color #ffffff; border-radius 10px; position relative
-
 </style>
 
 <template>

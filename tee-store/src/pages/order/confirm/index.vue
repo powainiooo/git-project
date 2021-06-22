@@ -134,7 +134,6 @@ export default {
       this.formData.user_remark = e
     },
     getPhoneNumber (e) {
-      console.log('getPhoneNumber', e)
       postAction('/userapi/wechat/parse/data', {
         encryptedData: e.mp.detail.encryptedData,
         iv: e.mp.detail.iv,

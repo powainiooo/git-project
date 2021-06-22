@@ -97,6 +97,9 @@ export default {
     },
     hide () {
       this.showItem = false
+      setTimeout(() => {
+        this.visible = false
+      }, 500)
       this.reset()
     },
     reset () {

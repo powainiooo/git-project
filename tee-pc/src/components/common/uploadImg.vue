@@ -99,7 +99,7 @@
             full
             :info="false"
             :fixedNumber="fixedNumber"
-            style="width: 360px; height: 380px;"
+            style="width: 360px; height: 380px; background-image: none; "
           ></vueCropper>
         </div>
         <div class="tc"><Button size="small" class="bg-main" @click="doCropper" :loading="isLoading">保存</Button></div>

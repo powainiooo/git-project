@@ -3,3 +3,41 @@
 .index-container
   .i-header
     width 100%; fxTL(0, 0); z-index 10;
+  .i-navs
+    margin 8px 12px 0 12px; between();
+    &-item
+      size(172px, 74px); border-radius 4px;
+  .i-title
+    margin 34px 12px 16px 12px; between();
+    .h3
+      font-size 18px;
+     .r
+       acenter(); color #999999;
+       image
+         width 10px; margin-left 2px
+  .i-nearby
+    .scroll
+       size(100%, 90px);
+     &-list
+       acenter(); margin-left 12px;
+     &-item
+       size(210px, 90px); background-color #FFFFFF; border-radius 4px; margin-right 8px; flex 1 0 auto; acenter(); overflow hidden;
+       .img
+         size(90px, 90px); margin-right 8px;
+       .info
+         width 100px;
+         .h3
+           width 100%; overflow hidden; text-overflow ellipsis; word-break break-all; white-space nowrap;
+  .i-news
+    .scroll
+       size(100%, 140px);
+     &-list
+       acenter(); margin-left 12px;
+     &-item
+       size(90px, 140px); margin-right 8px; flex 1 0 auto;
+       .img
+         size(90px, 90px); margin-right 8px;
+       .info
+         .h3
+           width 100%; overflow hidden; text-overflow ellipsis; word-break break-all; white-space nowrap;
+

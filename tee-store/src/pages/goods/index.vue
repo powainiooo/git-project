@@ -29,7 +29,8 @@
         scroll-with-animation
         scroll-y>
         <div class="list">
-          <div class="slideUp" v-for="i in goodsList" :key="id" :id="i.aid">
+          <div class="slideUp" v-for="(i, index) in goodsList" :key="id" :id="i.aid">
+            <div class="borderB mt60 mb30" v-if="index > 0 && i.aid !== ''" style="height: 1px;"></div>
             <item :record="i" @detail="openDetail" :cartList="cartsList" />
           </div>
         </div>
@@ -172,6 +173,7 @@ export default {
           this.current = goods[0].cid
           this.cateList = types
           this.goodsList = goods
+          console.log('this.goodsList', this.goodsList)
         }
       })
     },

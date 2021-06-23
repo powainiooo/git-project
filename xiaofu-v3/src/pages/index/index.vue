@@ -25,7 +25,7 @@
       @change="changeStatus"
       @search="handleSearch" v-if="!showAd" />
 
-    <c-ads ref="ad" :record="coverData" @load="doCount" v-if="coverData && showAd" />
+    <c-ads ref="ad" :record="coverData" @load="doCount" v-if="coverData !== null && showAd" />
 
     <template v-if="!showAd">
       <div class="index-container" v-if="isSearch">
@@ -100,6 +100,18 @@ export default {
     },
     showAd () {
       return store.state.showAd
+    }
+  },
+  watch: {
+    coverData: {
+      handler (val) {
+        console.log('coverData', val)
+        if (val === null) {
+          store.commit('SET_ADSTATE', false)
+        }
+      },
+      deep: true,
+      immediate: true
     }
   },
   methods: {

@@ -1,5 +1,5 @@
 <style scoped>
-.login-container { min-height: calc(100vh - 104px); overflow: hidden; background: url("../assets/img/bg.png") no-repeat; background-size: 100%; background-color: #ffffff; }
+.login-container { min-height: calc(100vh - 104px); overflow: hidden; background: url("../assets/img/bg.png") no-repeat; background-size: 100%; background-color: #F9F9F9; }
 .login-box { margin: 240px 84px; }
 .login-box .btns { margin-top: 200px; text-align: center; }
 .login-box .btns button { width: 175px; }

@@ -6,13 +6,13 @@
 .ad-frame .infos .name h3 { width: 600px; height: 64px; font-size: 53px; font-family: HelveB; line-height: 64px; color: #ffffff; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; word-break: break-all; }
 .ad-frame .infos .name p { font-size: 20px; font-family: HelveL; line-height: 20px; color: #ffffff; }
 /deep/.ad-frame .infos .c-tk-info { width: auto; margin-right: 50px; }
-.ad-frame-hide { animation: fadeOut .3s linear 1s both; }
+.ad-frame-hide { animation: fadeOut .3s linear .4s both; }
 @keyframes fadeOut {
   0% { opacity: 1; }
   99% { opacity: 0; }
   100% { opacity: 0; display: none; }
 }
-.ad-frame-hide .ad-container { animation: fadeOut2 0.4s linear both }
+.ad-frame-hide .ad-container { animation: fadeOut2 0.3s linear both }
 @keyframes fadeOut2 {
   0% { opacity: 1; transform: scale(1) }
   99% { opacity: 0; transform: scale(1.2) }
@@ -27,11 +27,11 @@
      @click="toDetail"
      @animationend="animationend">
   <div class="ad-container" @click="toDetail">
-    <img :src="record.cover_image" mode="aspectFill" class="pic" @load="loadOver" @error="loadErr" />
+    <img :src="adImg" mode="aspectFill" class="pic" @load="loadOver" @error="loadErr" v-if="adImg !== ''" />
     <div class="infos">
       <div class="name">
-        <h3>{{record.name}}</h3>
-        <p>{{record.organizer_name}}</p>
+        <h3>{{record ? record.name : ''}}</h3>
+        <p>{{record ? record.organizer_name : ''}}</p>
       </div>
       <tk-info :record="date" size="large" />
     </div>
@@ -60,6 +60,9 @@ export default {
         month: date[1],
         day: date[2],
       }
+    },
+    adImg () {
+      return this.record ? this.record.splash_ad_image : ''
     }
   },
 	data() {
@@ -79,6 +82,7 @@ export default {
       this.show = false
     },
     animationend () {
+      console.log('animationend')
       store.commit('SET_ADSTATE', false)
     },
     loadOver (e) {

@@ -4,7 +4,7 @@
 .swiper-sec { height: 100%; }
 .index-page .line1 { width: 100%; position: absolute; top: 0; left: 0; padding: 22px 25px 0 32px; z-index: 100; }
 .index-page .line1 .l img { width: 80px; }
-.index-page .line1 .l p { font-size: 100px; color: #41372D; line-height: 118px; }
+.index-page .line1 .l p { font-size: 100px; font-family: DinB; color: #41372D; line-height: 118px; }
 .swiper-sec .icons { width: 100%; height: 100%; padding-top: 176px; display: flex; justify-content: center; align-items: center; }
 .swiper-sec .icons .pig { height: 63%; display: block; }
 .swiper-sec .icons .pig .img { height: 100%; }

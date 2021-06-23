@@ -11,29 +11,41 @@
         background-color #C8B69C; padding 0 6px; font-size 12px; color #ffffff; line-height 18px; height 18px; border-radius 10px;
       div
         font-size 48px; font-family DinB; line-height 56px;
+  .operas
+    abTR(40px, 30px)
 </style>
 
 <template>
 <div class="datas-container pa60">
   <!-- 统计数量 -->
-  <ul class="nums-list">
-    <li>
-      <span>今日茶饮收益</span>
-      <div>{{amount1}}</div>
-    </li>
-    <li>
-      <span>今日周边收益</span>
-      <div>{{amount2}}</div>
-    </li>
-    <li>
-      <span>今日茶饮订单</span>
-      <div>{{nums1}}</div>
-    </li>
-    <li>
-      <span>今日周边订单</span>
-      <div>{{nums2}}</div>
-    </li>
-  </ul>
+  <div class="pr">
+    <ul class="nums-list">
+      <li>
+        <span>今日茶饮收益</span>
+        <div>{{amount1}}</div>
+      </li>
+      <li>
+        <span>今日周边收益</span>
+        <div>{{amount2}}</div>
+      </li>
+      <li>
+        <span>今日茶饮订单</span>
+        <div>{{nums1}}</div>
+      </li>
+      <li>
+        <span>今日周边订单</span>
+        <div>{{nums2}}</div>
+      </li>
+    </ul>
+    <div class="operas" v-if="false">
+      <Poptip title="确认设为休店模式？" confirm @on-ok="changeStatus()">
+        <Button style="width: 130px;">设为休店</Button>
+      </Poptip>
+      <Poptip title="确认恢复营业？" confirm @on-ok="changeStatus()">
+        <Button style="width: 130px;">恢复营业</Button>
+      </Poptip>
+    </div>
+  </div>
   <div class="between ml25 mr25 mt30">
     <charts />
     <hots />
@@ -91,7 +103,8 @@ export default {
           this.nums2 = res.data.order_nums
         }
       })
-    }
+    },
+    changeStatus () {}
   }
 }
 </script>

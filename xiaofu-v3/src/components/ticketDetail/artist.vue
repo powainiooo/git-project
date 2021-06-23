@@ -25,6 +25,7 @@
   padding: 14px 12px;
   box-sizing: border-box;
   font-size: 26px;
+  line-height: 30px;
   color: #ffffff;
   position: absolute;
   top: 0;
@@ -49,12 +50,12 @@
 }
 .artist-item .blur-img {
   width: 100%;
-  height: 60px;
+  height: 100%;
   overflow: hidden;
   position: absolute;
   top: 0;
   left: 0;
-  filter: blur(4px);
+  filter: blur(5px);
 }
 .artist-item .blur-img img { width: 100%; height: 236px; }
 </style>
@@ -66,10 +67,15 @@
     <div class="scroll-list" :style="{width: (325 * list.length + 25) + 'rpx'}">
       <div class="artist-item" v-for="(item, index) in list" :key="index">
         <img :src="item.image_full_url" class="pic" mode="aspectFill" />
-        <div class="blur-img">
-          <img :src="item.image_full_url" mode="aspectFill" />
+        <div class="content" style="background-color: transparent;">
+          <div class="blur-img">
+            <img :src="item.image_full_url" mode="aspectFill" />
+          </div>
+          <div>{{item.content}}</div>
         </div>
-        <div class="content">{{item.content}}</div>
+        <div class="content">
+          <div>{{item.content}}</div>
+        </div>
         <img src="/static/images/common/flip.png" class="flip" />
       </div>
     </div>

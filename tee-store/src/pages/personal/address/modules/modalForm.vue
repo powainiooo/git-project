@@ -84,6 +84,7 @@ export default {
       })
     },
     edit (id) {
+      this.id = id
       getAction('/userapi/user/address/show', {
         id
       }).then(res => {

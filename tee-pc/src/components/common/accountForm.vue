@@ -40,15 +40,15 @@
                 </Input>
                 <c-date-time type="timerange" format="HH:mm" placeholder="营业时间" v-model="times" @change="timeChange" v-else />
               </FormItem>
-              <FormItem>
+              <FormItem v-if="false">
                 <Input :value="cities[0] + ' / ' + cities[1]" :disabled="notNew" v-if="notNew">
                   <span slot="prepend">门店地址</span>
                 </Input>
-                <Cascader :data="cityData" v-model="cities" @on-change="cityChange" v-else></Cascader>
+                <Cascader :data="cityData" v-model="cities" @on-change="cityChange" placeholder="选择省份 / 城市" v-else></Cascader>
               </FormItem>
               <FormItem>
                 <Input ref="address" type="textarea" :rows="4" placeholder="门店地址" v-model="formData.address" :disabled="notNew" />
-                <a href="javascript:;" class="btn-geo" @click="openGeo">定位</a>
+                <a href="javascript:;" class="btn-geo" @click="openGeo" v-if="status === 'new'">定位</a>
               </FormItem>
               <FormItem>
                 <upload-img v-model="formData.shop_logo" :disabled="notNew">
@@ -386,6 +386,8 @@ export default {
     },
     getAddrData (data) {
       console.log('getAddrData', data)
+      this.formData.province = data.addressComponents.province
+      this.formData.city = data.addressComponents.city
       this.formData.address = data.address
       this.formData.lat = data.location.lat
       this.formData.lng = data.location.lng

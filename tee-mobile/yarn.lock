@@ -8445,10 +8445,10 @@ vary@~1.1.2:
   resolved "https://registry.npm.taobao.org/vary/download/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
   integrity sha1-IpnwLG3tMNSllhsLn3RSShj2NPw=
 
-vconsole@^3.7.0:
-  version "3.7.0"
-  resolved "https://registry.nlark.com/vconsole/download/vconsole-3.7.0.tgz#7b347fc635eb09646bb50f0ce0cbfba1852af1b1"
-  integrity sha1-ezR/xjXrCWRrtQ8M4Mv7oYUq8bE=
+vconsole@^3.8.1:
+  version "3.8.1"
+  resolved "https://registry.nlark.com/vconsole/download/vconsole-3.8.1.tgz#b9bd28451277b11615e85e3b54b680473694b3a1"
+  integrity sha1-ub0oRRJ3sRYV6F47VLaARzaUs6E=
   dependencies:
     copy-text-to-clipboard "^3.0.1"
     core-js "^3.11.0"

@@ -192,10 +192,14 @@ export default {
   computed: {
     btnDisabled () {
       for (const key in this.formData) {
-        if (key !== 'cover' && this.formData[key] === '') {
+        if (key !== 'cover' && key !== 'date_start' && key !== 'date_end' && this.formData[key] === '') {
           return true
         }
       }
+      if (this.formData.date_type === 1 && this.formData.date_start === '' && this.formData.date_end === '') {
+        return true
+      }
+
       for (const i of this.images) {
         if (i === '') {
           return true

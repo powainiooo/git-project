@@ -29,11 +29,18 @@
           <Col span="12">
             <div class="c-form mt50">
               <h3 class="f18 mb30 ml10">基本信息</h3>
+              <template v-if="status === 'view'">
               <FormItem>
                 <Input placeholder="门店名称" v-model="formData.shop_name" :disabled="notNew">
                   <span slot="prepend">门店名称</span>
                 </Input>
               </FormItem>
+              </template>
+              <div v-else>
+                <FormItem>
+                  <Input placeholder="门店名称" v-model="formData.shop_name" />
+                </FormItem>
+              </div>
               <FormItem>
                 <Input :value="times[0] + ' ~ ' + times[1]" :disabled="notNew" v-if="status === 'view'">
                   <span slot="prepend">营业时间</span>
@@ -47,13 +54,13 @@
                 <Cascader :data="cityData" v-model="cities" @on-change="cityChange" placeholder="选择省份 / 城市" v-else></Cascader>
               </FormItem>
               <FormItem>
-                <Input ref="address" type="textarea" :rows="4" placeholder="门店地址" v-model="formData.address" :disabled="notNew" />
-                <a href="javascript:;" class="btn-geo" @click="openGeo" v-if="status === 'new'">定位</a>
+                <Input ref="address" type="textarea" :rows="4" placeholder="门店地址" v-model="formData.address" :disabled="status === 'view'" />
+                <a href="javascript:;" class="btn-geo" @click="openGeo" v-if="status !== 'view'">定位</a>
               </FormItem>
               <FormItem>
                 <upload-img v-model="formData.shop_logo" :disabled="notNew">
                   <span slot="title">门店logo</span>
-                  <span slot="hint">尺寸210px*80px</span>
+                  <span slot="hint">尺寸420px*160px</span>
                 </upload-img>
               </FormItem>
               <h3 class="f18 mb30 ml10">积分使用设置</h3>
@@ -199,7 +206,7 @@ export default {
         if (Array.isArray(d)) {
           if (d.length === 0) return true
         } else {
-          if (d === '') return true
+          if (key !== 'printer_code' && key !== 'printer_sign' && d === '') return true
         }
       }
       return false

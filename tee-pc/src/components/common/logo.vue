@@ -1,7 +1,7 @@
 <style lang="stylus" type="text/stylus">
 @import "../../assets/css/mixin.styl"
 .c-logo
-  between(); fxTL(40px, 45px); z-index 1000; right 45px;
+  between(); fxTL(30px, 45px); z-index 100; right 45px;
   .acenter
     span
       font-size 14px; color #41372D; margin 0 15px;
@@ -22,7 +22,7 @@
   <div class="acenter">
     <img src="@/assets/img/logo@2x.png" width="164" />
     <span v-if="showInfos">x</span>
-    <img :src="imgSrc + shopData.shop_logo" height="26" v-if="showInfos" />
+    <img :src="imgSrc + shopData.shop_logo" width="210" height="80" v-if="showInfos" />
   </div>
   <div class="inofs" v-if="showInfos" @click="$emit('open')">
     <div class="logo"><img :src="imgSrc + shopData.shop_logo" /></div>

@@ -28,7 +28,7 @@
 <header class="c-header">
   <img src="@/assets/img/logo.png" width="161" />
   <div class="c-header-right">
-    <input />
+    <input v-model='keyword' @keyup.enter="enter" />
     <a href="javascript:;" @click="openMenu"></a>
   </div>
 
@@ -44,11 +44,16 @@ export default {
     menus
   },
   data () {
-    return {}
+    return {
+      keyword: ''
+    }
   },
   methods: {
     openMenu () {
       this.$store.commit('SET_MENU', true)
+    },
+    enter () {
+      this.$emit('confirm', this.keyword)
     }
   }
 }

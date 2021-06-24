@@ -75,7 +75,7 @@
       <welcome />
     </template>
     <template v-else>
-      <z-header />
+      <z-header @confirm="onSearch" />
       <Button class="btn-publish" @click="$router.push('/publish')">发布新活动</Button>
       <div class="list-container" v-if="!showDetail">
         <Row :gutter="40">
@@ -144,6 +144,7 @@ export default {
       selectRecord: {},
       detailRecord: {},
       total: 0,
+      keyword: '',
       pageNo: 1,
       pageSize: 9,
       touchIndex: -1,
@@ -159,8 +160,14 @@ export default {
     }
   },
   methods: {
+    onSearch (e) {
+      console.log(e)
+      this.keyword = e
+      this.getData()
+    },
     getData () {
       postAction('/editor/ticket/lists', {
+        keyword: this.keyword,
         page: this.pageNo,
         limit: this.pageSize
       }).then(res => {

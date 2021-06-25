@@ -361,18 +361,19 @@ export default {
     }
   },
   onShow () {
+    this.formData.coupon_id = store.state.couponId
     if (this.storeInfo.shop_id) {
       this.formData.shop_id = this.storeInfo.shop_id
       this.formData.lng = this.storeInfo.lng
       this.formData.lat = this.storeInfo.lat
       this.tabChange('store', 1)
-      this.getData()
     }
     if (this.selectedAddr.id) {
       for (const key in this.addrData) {
         this.addrData[key] = this.selectedAddr[key]
       }
     }
+    this.getData()
   },
   onLoad (options) {
     Object.assign(this.$data, this.$options.data())

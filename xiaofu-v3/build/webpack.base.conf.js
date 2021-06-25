@@ -16,8 +16,9 @@ function resolve (dir) {
 
 function getEntry (rootSrc) {
   var map = {};
-  glob.sync(rootSrc + '/pages/**/main.js')
+  glob.sync(rootSrc + '/pages/**/**.js')
   .forEach(file => {
+    console.log('file', file)
     var key = relative(rootSrc, file).replace('.js', '');
     map[key] = file;
   })
@@ -25,7 +26,7 @@ function getEntry (rootSrc) {
 }
 
 const appEntry = { app: resolve('./src/main.js') }
-const pagesEntry = getEntry(resolve('./src'), 'pages/**/main.js')
+const pagesEntry = getEntry(resolve('./src'), 'pages/**/**.js')
 const entry = Object.assign({}, appEntry, pagesEntry)
 
 let baseWebpackConfig = {

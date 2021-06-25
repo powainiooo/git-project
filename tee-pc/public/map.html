@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <title>地图选择</title>
+   <script charset="utf-8" src="https://map.qq.com/api/js?v=2.exp&key=C3PBZ-YFFH2-7HGUG-CQUZV-64ADF-WHBR6&libraries=place"></script>
+   <style>
+   .c-map { width: 100%; height: 70vh; background-color: #F5F5F5; }
+   .c-map-inp { position: absolute; top: 60px; left: 100px; z-index: 1000; }
+   .c-map-inp input { width: 300px; height: 30px; border-radius: 8px; background-color: #ffffff; padding: 0 10px; border: none; box-shadow: 0 0 6px rgba(0, 0, 0, .3) }
+   </style>
+</head>
+<body>
+<div class="c-map-inp"><input type="text" id="place" placeholder="请输入查询地点" /></div>
+<p class="mb10">地址：<span id="addr">--</span></p>
+<div class="c-map" id="map"></div>
+
+<script>
+window.onload = function () {
+  var center = new qq.maps.LatLng(39.984120, 116.307484)
+  var map = new qq.maps.Map(document.getElementById('map'), {
+    center: center,
+    zoom: 6
+  })
+  var geocoder = new qq.maps.Geocoder({
+    complete (res) {
+      console.log('Geocoder', res)
+      var addr = res.detail.address
+      document.getElementById('addr').innerHTML = addr
+      var dotData = {
+        address: res.detail.address,
+        addressComponents: res.detail.addressComponents,
+        location: res.detail.location
+      }
+      console.log('坐标信息', dotData)
+      marker.position = res.detail.location
+      marker.setMap(map)
+      map.setCenter(res.detail.location)
+      map.zoomTo(16)
+    }
+  })
+  var marker = new qq.maps.Marker({
+    map: map
+    // position: e.latLng
+  })
+  var listener = qq.maps.event.addListener(map, 'click', function (e) {
+    console.log(e)
+    geocoder.getAddress(e.latLng)
+  })
+  var ap = new qq.maps.place.Autocomplete(document.getElementById('place'), {
+    zIndex: 10000
+  })
+  console.log('ap0', ap)
+  qq.maps.event.addListener(ap, 'confirm', function (res) {
+    console.log('ap1', ap)
+    geocoder.getLocation(`${ap.place.address}-${ap.place.name}`)
+  })
+}
+</script>
+</body>
+</html>

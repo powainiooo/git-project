@@ -64,7 +64,7 @@ export const doLogin = (userInfo = {}) => {
   console.log('userInfo', userInfo)
   store.commit('SET_PERSONINFO', userInfo)
   postAction('/userapi/user/update', {
-    nickName: userInfo.nickName,
+    nickname: userInfo.nickName,
     sex: userInfo.sex,
     province: userInfo.province,
     city: userInfo.city,
@@ -86,7 +86,7 @@ export const getTokenData = () => {
       console.log('common_login', res)
       if (res.data !== null) {
         store.commit('SET_TOKEN', res.data.api_token)
-        store.commit('SET_LOGIN', res.data.nickName !== null)
+        store.commit('SET_LOGIN', res.data.nickname !== null)
       } else {
         store.commit('SET_TOKEN', res.data)
       }

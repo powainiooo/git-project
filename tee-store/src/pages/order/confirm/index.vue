@@ -238,6 +238,7 @@ export default {
   },
 
   onShow () {
+    console.log('onshow', store.state)
     this.formData.couponId = store.state.couponId
     this.getData()
     setTimeout(() => {

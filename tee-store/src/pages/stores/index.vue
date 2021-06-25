@@ -84,17 +84,17 @@ export default {
     getData () {
       let url
       const params = {
-        // lat: this.latitude,
-        // lng: this.longitude,
-        lat: 22.73081065,
-        lng: 114.38086700,
+        lat: this.latitude,
+        lng: this.longitude,
+        // lat: 22.73081065,
+        // lng: 114.38086700,
         page: this.page,
         limit: 20
       }
       if (this.from === 'tee') {
         url = '/userapi/shop/index/data'
-        // params.city = this.city
-        params.city = '深圳'
+        params.city = this.city
+        // params.city = '深圳'
         getAction(url, params).then(res => {
           if (res.code === 0) {
             this.list = this.list.concat(res.data)

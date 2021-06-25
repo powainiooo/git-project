@@ -9,7 +9,7 @@
 .c-store-item .line1 .r { width: 168px; height: 100%; background-color: #F0916C; font-size: 24px; color: #FFFFFF; }
 .c-store-item .line1 .break { background-color: #CECBC6; }
 .c-store-item .line2 { margin: 22px 35px; font-size: 24px; }
-.c-store-item .line3 { display: flex; align-items: baseline; margin-bottom: 10px; margin-left: 35px; }
+.c-store-item .line3 { display: flex; align-items: center; margin-bottom: 10px; margin-left: 35px; }
 .c-store-item .line3 img { margin-right: 10px; }
 .c-store-item .line3>div { width: 360px; font-size: 20px; line-height: 26px; color: #C9C9C9; }
 .c-store-item .line3>div div { width: 2px; height: 20px; margin: 0 24px; }

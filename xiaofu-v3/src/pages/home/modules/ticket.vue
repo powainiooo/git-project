@@ -175,7 +175,7 @@ export default {
   methods: {
     toDetail () {
       mpvue.navigateTo({
-        url: '/pages/details/main?id=' + this.record.id
+        url: '/pages/index/detail?id=' + this.record.id
       })
     }
   }

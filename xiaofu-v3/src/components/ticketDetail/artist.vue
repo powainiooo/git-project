@@ -50,7 +50,7 @@
 }
 .artist-item .blur-img {
   width: 100%;
-  height: 100%;
+  height: 236px;
   overflow: hidden;
   position: absolute;
   top: 0;

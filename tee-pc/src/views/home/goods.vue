@@ -31,8 +31,8 @@
         <col width="110" />
         <col width="240" />
         <col width="138" />
-        <col width="70" />
-        <col width="70" />
+        <col width="80" />
+        <col width="80" />
         <col width="96" />
         <col />
         <col width="180" />
@@ -68,7 +68,7 @@
           </div>
         </td>
         <td><div>{{item.date_start || '--'}} - {{item.date_end || '--'}}</div></td>
-        <td><div>{{item.price}}</div></td>
+        <td><div>{{item.price}}元</div></td>
         <td><div>{{item.store_nums}}</div></td>
         <td><div>{{item.make_time}}分钟</div></td>
         <td><div>{{item.status_name}}</div></td>

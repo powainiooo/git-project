@@ -1,0 +1,89 @@
+<style lang="stylus" type="text/stylus">
+.c-tabs
+  width 100%; height 40px; background-color #FFFFFF; display flex;
+  &-item
+    flex 1; display flex; justify-content center; align-items center; height 100%;
+    .filter
+      width 10px; height 16px; margin-left 2px;
+  &-active
+    color #FE322B;
+</style>
+
+<template>
+<view class="c-tabs">
+  <view class="c-tabs-item"
+        :class="{'c-tabs-active': current === tab.key}"
+        v-for="(tab, index) in tabs"
+        :key="tab.key"
+        @tap="change(index)">
+    {{tab.label}}
+    <image src="@/img/asc.png" class="filter" v-if="tab.type === 'filter' && tab.sort === 'asc'" />
+    <image src="@/img/desc.png" class="filter" v-if="tab.type === 'filter' && tab.sort === 'desc'" />
+  </view>
+</view>
+</template>
+
+<script type='es6'>
+export default {
+	name: 'app',
+  props: {
+	  value: {
+	    type: String,
+      default: ''
+    },
+    list: {
+	    type: Array,
+      default: () => []
+    }
+  },
+  watch: {
+	  list: {
+	    handler (val) {
+        console.log('list', val)
+        const tabs = []
+        for (const item of val) {
+          const tab = { ...item }
+          if (tab.type === 'filter') {
+            tab.sort = 'asc'
+          }
+          tabs.push(tab)
+        }
+        this.tabs = tabs
+        if (this.value === '') {
+          this.current = tabs[0].key
+        } else {
+          this.current = this.value
+        }
+      },
+      immediate: true
+    }
+  },
+	data() {
+		return {
+		  current: '',
+		  tabs: []
+    }
+	},
+	methods: {
+    change (index) {
+      const tab = this.tabs[index]
+      console.log('change', this.tabs)
+      this.current = tab.key
+      this.$emit('input', tab.key)
+      if (tab.type === 'filter') {
+        if (tab.sort === 'asc') {
+          tab.sort = 'desc'
+        } else {
+          tab.sort = 'asc'
+        }
+        this.$emit('change', {
+          key: tab.key,
+          sort: tab.sort
+        })
+      } else {
+        this.$emit('change', tab.key)
+      }
+    }
+  }
+}
+</script>

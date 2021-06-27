@@ -3,6 +3,8 @@
 .index-container
   .i-header
     width 100%; fxTL(0, 0); z-index 10;
+  .height
+    height 95px; box-sizing content-box
   .i-navs
     margin 8px 12px 0 12px; between();
     &-item
@@ -41,3 +43,11 @@
          .h3
            width 100%; overflow hidden; text-overflow ellipsis; word-break break-all; white-space nowrap;
 
+  .second-cates
+    center(); flex-wrap wrap; margin-top 8px; margin-bottom 16px;
+    .item
+      width 70px; text-align center; margin-bottom 16px;
+      .img
+        size(50px, 50px); border-radius 50%;
+      view
+        overflow hidden; text-overflow ellipsis; word-break break-all; white-space nowrap; margin-top 5px;

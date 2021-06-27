@@ -1,5 +1,5 @@
 <template>
-  <view class="index-container">
+  <view class="container index-container">
     <!-- 轮播图 -->
     <banner />
     <!-- 顶部栏 -->
@@ -36,6 +36,9 @@
         </view>
       </view>
     </view>
+
+    <!-- 底部导航 -->
+    <c-footer current="home" />
   </view>
 </template>
 
@@ -43,6 +46,7 @@
 import Taro from '@tarojs/taro'
 import './index.styl'
 import search from '@/c/common/search'
+import cFooter from '@/c/common/footer'
 import banner from './modules/banner'
 import cates from './modules/cates'
 import navs from './modules/navs'
@@ -53,6 +57,7 @@ export default {
   name: 'Index',
   components: {
     banner,
+    cFooter,
     search,
     cates,
     navs,
@@ -73,6 +78,9 @@ export default {
     })
   },
   methods: {
+  },
+  onPageScroll (e) {
+    console.log('onPageScroll', e)
   }
 }
 </script>

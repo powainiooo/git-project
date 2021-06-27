@@ -1,0 +1,29 @@
+@import '../../static/css/mixin.styl'
+
+.cate-container
+  .cate-search
+    overflow hidden; background-color #FFFFFF; width 100%; fxTL(0, 0); z-index 100;
+  .cate-list
+    background-color #F5F5F5; width 100px; fxTL(0, 0); bottom 0; padding-top 44px;
+    .item
+      size(100%, 46px); center(); position relative;
+    .active
+      background-color #FFFFFF; color #FE322B;
+      &:before
+        content ''; size(2px, 20px); background-color #FE322B; abTL(13px, 0);
+  .goods-container
+    margin-left 100px; padding-top 44px;
+    .ad
+      margin 16px 12px;
+      image
+        width 100%; display block;
+    .list
+      display flex; flex-wrap wrap;
+      .item
+        width 84px; text-align center; margin-right 10px; margin-bottom 16px;
+        .img
+          size(60px, 60px); border-radius 50%; margin-bottom 8px;
+        view
+          ellipsis()
+        &:nth-child(3n)
+          margin-right 0

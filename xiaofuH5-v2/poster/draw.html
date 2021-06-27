@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <title>Title</title>
+   <link href="layout.css" rel="stylesheet" />
+</head>
+<body>
+<script src="html2canvas.min.js"></script>
+<script src="vue.min.js"></script>
+<script>
+function download () {
+	window.pageYOffset = 0;
+	document.documentElement.scrollTop = 0
+	document.body.scrollTop = 0
+	html2canvas(document.getElementById("container"), {
+		useCORS:true
+   }).then(function (canvas) {
+		console.log('done')
+      document.getElementById('results').appendChild(canvas)
+      // setTimeout(() => {
+	   //    var url = canvas.toDataURL();
+	   //    console.log(url)
+      // }, 2000)
+		// window.open(url)
+	})
+}
+var index = 0
+function loadImg () {
+	var imgs = document.getElementsByTagName('img')
+	console.log('len', imgs)
+	index += 1
+	console.log('index', index)
+   if (index === imgs.length) {
+	   // setTimeout(download, 2000)
+      document.getElementById('btn').style.display = 'inline'
+   }
+}
+</script>
+<div style="overflow: hidden">
+   <div id="app" style="float: left; margin-left: 10px; ">
+      <div class="hintTxt">原网页，请确定图片加载完成再点击按钮。<button id="btn" onclick="download()">生成海报</button></div>
+      <div id="container">
+         <div class="c-ticket-infos">
+            <img :src="record.cover_image" class="banner" crossorigin="anonymous" />
+            <div class="line1 bBorder">
+               <div class="l">
+                  <div class="c-tk-info">
+                     <div class="c-tk-date">
+                        <p>{{infoData.month}}</p>
+                        <div>{{infoData.day}}</div>
+                     </div>
+                     <div class="c-tk-date c-end-date" v-if="showEndDate">
+                        <p>{{infoData2.month}}</p>
+                        <div>{{infoData2.day}}</div>
+                     </div>
+                     <div class="c-tk-title">
+                        <p>{{infoData.name}}</p>
+                        <div>{{infoData.host}}</div>
+                     </div>
+                  </div>
+               </div>
+               <img :src="record.logo" crossorigin="anonymous" />
+            </div>
+            <div class="line2 bBorder">
+               <ul class="times">
+                  <li v-for="i in timeStr" :key="i">{{i}}</li>
+               </ul>
+               <span>open</span>
+               <img src="img/dot.png" />
+               <div class="addr"><span>{{record.address}}</span></div>
+            </div>
+         </div>
+         <div class="artist-frame">
+            <div class="c-ticket-title"><span>Artist</span>表演者</div>
+            <div class="artist-list">
+               <div class="artist-item" v-for="(item, index) in artistList" :key="index">
+                  <img :src="item.image_full_url" class="pic" crossorigin="anonymous" />
+                  <div class="content">
+                     <div>{{item.content}}</div>
+                  </div>
+                  <img src="img/flip.png" class="flip" />
+               </div>
+            </div>
+            <div class="artist-bBorder bBorder"></div>
+         </div>
+         <div>
+            <div class="c-ticket-title"><span>Notice</span>须知</div>
+            <ul class="notice-list">
+               <li v-for="(item, i) in noticeList" :key="i">
+                  <div class="rank"><img :src="'img/number/' + (i + 1) + '.png'" /></div>
+                  <div class="content">{{item}}</div>
+               </li>
+            </ul>
+            <div class="notice-bBorder bBorder"></div>
+         </div>
+         <div>
+            <div class="c-ticket-title"><span>Particulars</span>详情</div>
+            <div class="parti-item" v-for="(item, i) in introList" :key="i">
+               <img :src="item.image_full_url" class="pic" crossorigin="anonymous" />
+               <div>{{item.content}}</div>
+            </div>
+            <div class="notice-bBorder bBorder"></div>
+         </div>
+         <div class="extra-code">
+            <img src="img/qrcode.png" width="210" />
+            <img src="img/hint.png" width="390" />
+         </div>
+      </div>
+   </div>
+   <div id="results">
+      <div class="hintTxt">生成效果图，请右键另存为图片。</div>
+   </div>
+</div>
+<script>
+//  票务详情数据
+var ticketData = {"id":3322,"type":3,"ticket_type":2,"music_type":0,"merchant_id":638,"name":"寻海记","city_id":1003,"logo":"http:\/\/image.leesticket.com\/\/11\/2021\/0409\/1617950905821.png","start_date":"2021-05-23","end_date":"2021-08-29","start_time":"15:00:00","end_time":"18:30:00","show_time":"2021-04-23 00:00:00","sale_start_time":1619107200,"sale_end_time":1630231200,"telephone":"13606078932","address":"厦门市湖里区高殿路与高殿北路交叉口","longitude":"0.000000","latitude":"0.000000","post_flag":0,"id_card_flag":1,"passport_flag":0,"email_flag":0,"cover_image":"http:\/\/image.leesticket.com\/\/base\/b161914016466133.jpeg","rec_flag":0,"ad_flag":0,"sub_state":2,"state":1,"withdraw_state":1,"offline_payment_flag":0,"payment_state":0,"miniapp_code_image":"","check_code_image":"","one_time_notify_flag":0,"price":[{"id":5967,"ticket_id":3322,"name":"早鸟票","price":"15.00","num":300,"limit":6,"sold_out_flag":0},{"id":5968,"ticket_id":3322,"name":"普通票","price":"29.00","num":99999,"limit":0,"sold_out_flag":0},{"id":5969,"ticket_id":3322,"name":"学生票","price":"20.00","num":99999,"limit":0,"sold_out_flag":0},{"id":5970,"ticket_id":3322,"name":"双人票","price":"49.00","num":99999,"limit":0,"sold_out_flag":0},{"id":5971,"ticket_id":3322,"name":"3人家庭票","price":"55.00","num":99999,"limit":0,"sold_out_flag":0},{"id":5972,"ticket_id":3322,"name":"4人家庭票","price":"60.00","num":99999,"limit":0,"sold_out_flag":0}],"recommend_tickets":[],"star_flag":0,"organizer":{"id":638,"name":"TCCA红顶当代艺术中心","logo":"http:\/\/image.leesticket.com\/\/11\/2021\/0409\/1617950905821.png","phone":"13606078932","organizer_tickets":[{"id":3317,"name":"汤南南《四海志》","cover_image":"http:\/\/image.leesticket.com\/\/base\/b161908586356559.jpeg","start_date":"2021-05-22"},{"id":3322,"name":"寻海记","cover_image":"http:\/\/image.leesticket.com\/\/base\/b161914016466133.jpeg","start_date":"2021-05-23"}]},"music_type_text":"旧数据","notice_list":["如购买早鸟票，前100名到场观众将获得特别礼包，先到先得；","如购买学生票，请务必携带学生证，以便现场验票；","如购买双人票，需两人同时入场；","家庭票中的“儿童”指的是1.3米以上16岁以下孩童；","70周岁（含）以上老年人凭身份证或老年证等实行免票；","3人家庭票（供2成人1儿童\/\n1成人2儿童使用）；","4人家庭票（供2成人2儿童\n使用）；","团购请咨询客服。"],"artist_list":[{"image":"\/base\/b161914016467558.jpeg","content":"小小艺术家自画像 Kathryn","image_full_url":"http:\/\/image.leesticket.com\/\/base\/b161914016467558.jpeg"},{"image":"\/base\/b161914016467590.jpeg","content":"小小艺术家自画像 Lina","image_full_url":"http:\/\/image.leesticket.com\/\/base\/b161914016467590.jpeg"},{"image":"\/base\/b161914016467929.jpeg","content":"小小艺术家自画像 Sunny","image_full_url":"http:\/\/image.leesticket.com\/\/base\/b161914016467929.jpeg"},{"image":"\/base\/b161914016468066.jpeg","content":"小小艺术家自画像 Mina","image_full_url":"http:\/\/image.leesticket.com\/\/base\/b161914016468066.jpeg"},{"image":"\/base\/b161914016468377.jpeg","content":"小小艺术家自画像 Penny","image_full_url":"http:\/\/image.leesticket.com\/\/base\/b161914016468377.jpeg"}],"intro_list":[{"image":"\/base\/b161914016454261.jpeg","content":"2021年5月22日，厦门·TCCA红顶当代艺术中心即将开馆！这里承载了我们对本土历史的情谊，也盛满了我们对艺术文化的大胆幻想和无限期待。我们希望通过艺术鼓励孩子们童言无忌的无限创造力，共创城市的艺术童趣。","image_full_url":"http:\/\/image.leesticket.com\/\/base\/b161914016454261.jpeg"},{"image":"\/base\/b161914016460217.jpeg","content":"于是，TCCA开辟出专属于孩子们的领地，发起了KIDSART项目，并将于2021年迎来首届TCCAkids艺术节！以“寻海记”为主题，面向全社会3-18岁的孩子征集形式不限的个人或集体创作。围绕人与海洋的关系、海洋环保两个核心方向，鼓励孩子们去观察海洋存在于他们眼中的形态，感受我们对海洋深层的情感，在思考海洋与人类相处方式的同时，去关注当下海洋环保的社会问题，从孩子的视角去创作、表达和发声。","image_full_url":"http:\/\/image.leesticket.com\/\/base\/b161914016460217.jpeg"},{"image":"\/base\/b161914016461842.jpeg","content":"","image_full_url":"http:\/\/image.leesticket.com\/\/base\/b161914016461842.jpeg"},{"image":"\/base\/b161914016462940.jpeg","content":"小小策展人”创意策展\n共计来自10所学校及美育机构的10组小策展人参加了本次TCCAkids艺术节“小小策展人”项目，在经过美育分享会、小策展人工作坊集中培训，及答辩等环节后，小策展人们向我们展现了他们惊人的创意构想，作品从雕塑、装置、摄影、定格动画，到行为艺术、游戏关卡，甚至人与海洋对话的“泡泡”语言等，现场究竟会如何呈现，到展览现场来一探究竟吧！","image_full_url":"http:\/\/image.leesticket.com\/\/base\/b161914016462940.jpeg"},{"image":"\/base\/b161914016463929.jpeg","content":"“小小艺术家”艺术作品\n从209件\/组投稿作品中，经过10万投票及艺术评委会评选，在公众多元审美及艺术家独特眼光之下，共同选拔出来的50件\/组小小艺术家作品，作品体裁从版画、油画棒、炭笔绘画，到装置、立裁等创作手法不限，最小投稿作者仅3岁，共同展现出让人称叹的当代少年人的无限创想和潜能。","image_full_url":"http:\/\/image.leesticket.com\/\/base\/b161914016463929.jpeg"},{"image":"\/base\/b161914016465484.jpeg","content":"500㎡的展厅都装不下他们无尽的创意，如果想要领略孩子们的无限脑洞，震惊于他们超出成人预期的思维构想，就快快带宝宝加入这场属于孩子们的艺术狂欢！下一次TCCAkids艺术节，我们期待创作团队也有你们的加入~","image_full_url":"http:\/\/image.leesticket.com\/\/base\/b161914016465484.jpeg"}]}
+new Vue({
+	el: '#app',
+   computed: {
+	   infoData () {
+		   let date = ['', '']
+		   let name = ''
+		   let host = ''
+		   if (this.record) {
+			   date = this.record.start_date.split('-')
+			   name = this.record[this.nameKey]
+			   host = this.record.organizer_name
+		   }
+		   return {
+			   month: date[1],
+			   day: date[2],
+			   name,
+			   host
+		   }
+	   },
+	   showEndDate () {
+		   return this.record.start_date !== this.record.end_date
+	   },
+	   infoData2 () {
+		   let date = ['', '']
+		   if (this.record && this.showEndDate) {
+			   date = this.record.end_date.split('-')
+		   }
+		   return {
+			   month: date[1],
+			   day: date[2]
+		   }
+	   },
+	   timeStr () {
+		   const time = this.record ? this.record.start_time.split(':') : ['', '']
+		   return `${time[0]}:${time[1]}`
+	   }
+   },
+	data: {
+		record: ticketData,
+      artistList: ticketData.artist_list,
+      noticeList: ticketData.notice_list,
+      introList: ticketData.intro_list
+   }
+})
+</script>
+</body>
+</html>

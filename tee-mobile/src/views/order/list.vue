@@ -4,10 +4,7 @@
 
 <template>
 <div class="container ovh">
-  <div class="infos-line">
-    <button class="btn">喜茶·深圳宝安大仟里店</button>
-    <button class="btn-circle" @click="backIndex"><img src="@/assets/img/home.png" class="w28" /></button>
-  </div>
+  <infos />
   <div class="container2 container3 list-container">
     <tabs>
       <tab-pane name="tee" title="茶饮订单">
@@ -24,6 +21,7 @@
 <script type='es6'>
 import tabs from '@/components/Tabs/tabs'
 import tabPane from '@/components/Tabs/tabPane'
+import infos from '@/components/infos'
 import tee from './modules/tee'
 import nearby from './modules/nearby'
 export default {
@@ -31,6 +29,7 @@ export default {
   components: {
     tabs,
     tabPane,
+    infos,
     tee,
     nearby
   },
@@ -38,11 +37,6 @@ export default {
     return {}
   },
   methods: {
-    backIndex () {
-      this.$router.push({
-        name: 'Home'
-      })
-    }
   }
 }
 </script>

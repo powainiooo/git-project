@@ -60,7 +60,7 @@
   <!-- 关门提示 -->
   <div class="close-hint" v-if="closeHintVisible">
     <div>本店休息中，请切换其他门店</div>
-    <p>营业时间为{{storeInfo.word_time_start}} ~ {{storeInfo.word_time_end}}</p>
+    <p v-if="storeInfo.pause === 0">营业时间为{{storeInfo.word_time_start}} ~ {{storeInfo.word_time_end}}</p>
   </div>
 
   <!-- 免费弹窗 -->
@@ -190,7 +190,7 @@ export default {
             if (res2.code === 0) {
               // res2.data.word_status = 0
               _this.storeInfo = res2.data
-              if (_this.storeInfo.word_status === 0) {
+              if (_this.storeInfo.word_status === 0 || _this.storeInfo.pause === 1) {
                 _this.closeModalVisible = true
               }
             }
@@ -230,7 +230,21 @@ export default {
       this.closeHintVisible = true
     },
     doUse () {
-      this.freeModalVisible = false
+      if (this.isAjax) return
+      this.isAjax = true
+      postAction('/userapi/shopping/card/add/prize', {
+        shop_id: this.shopId,
+        prize_qrcode_id: this.prizeData.id
+      }).then(res => {
+        if (res.code === 0) {
+          mpvue.showToast({
+            title: '添加成功'
+          })
+          this.getCart()
+        }
+        this.isAjax = false
+        this.freeModalVisible = false
+      })
     },
     openDetail (data) {
       if (this.storeInfo.word_status === 1) {

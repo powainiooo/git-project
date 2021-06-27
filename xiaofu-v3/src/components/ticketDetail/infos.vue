@@ -153,8 +153,8 @@ export default {
       }
     },
     timeStr () {
-      const time = this.record ? this.record.start_date.split('-') : ['', '']
-      return `${time[1]}:${time[2]}`
+      const time = this.record ? this.record.start_time.split(':') : ['', '']
+      return `${time[0]}:${time[1]}`
     }
   },
   data () {

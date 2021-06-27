@@ -1,5 +1,5 @@
 <style scoped>
-.c-header { width: 100%; position: fixed; top: 0; left: 0; z-index: 500; }
+.c-header { width: 100%; position: fixed; top: 0; left: 0; z-index: 500; background-color: #EADED0; }
 .c-header-line { width: 100%; height: 104px; display: flex; justify-content: space-between; align-items: center; padding: 0 30px; }
 .c-header-line .logos { height: 100%; display: flex; align-items: center; }
 .c-header-line .logo { width: 175px; }

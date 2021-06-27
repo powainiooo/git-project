@@ -4,6 +4,7 @@ import store from '@/store'
 import { ACCESS_TOKEN } from '@/config'
 import { LoadingBar } from 'view-design'
 import Home from '../views/home/Home.vue'
+import { getParams } from '@/utils/tools'
 LoadingBar.config({
   color: '#ffffff'
 })
@@ -43,9 +44,14 @@ const routes = [
 const router = new VueRouter({
   routes
 })
+
+const params = getParams()
 router.beforeEach((to, from, next) => {
   LoadingBar.start()
   console.log('to', to)
+  if (params.api_token) {
+    Vue.ls.set(ACCESS_TOKEN, params.api_token, 7 * 24 * 60 * 60 * 1000)
+  }
   if (Vue.ls.get(ACCESS_TOKEN)) {
     console.log('1')
     if (to.path === '/login') {

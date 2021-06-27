@@ -13,10 +13,12 @@
   <div class="container">
     <div class="tr mb65">
       <div class="iblock mr25" v-if="city !== ''">
-        <button class="btn acenter">
-          <img src="/static/images/icon-geo.png" mode="widthFix" class="w28 mr10" />
-          <span class="mr5">{{city}}</span>
-        </button>
+        <picker :range="cities" range-key="city" @change="cityChange">
+          <button class="btn acenter">
+            <img src="/static/images/icon-geo.png" mode="widthFix" class="w28 mr10" />
+            <span class="mr5">{{city}}</span>
+          </button>
+        </picker>
       </div>
     </div>
     <div class="store-list">
@@ -55,7 +57,8 @@ export default {
       list: [],
       page: 1,
       total: 0,
-      from: ''
+      from: '',
+      cities: []
     }
   },
 
@@ -130,6 +133,18 @@ export default {
           delta: -1
         })
       }
+    },
+    getCity () {
+      getAction('/userapi/shop/cities').then(res => {
+        if (res.code === 0) {
+          this.cities = res.data
+        }
+      })
+    },
+    cityChange (e) {
+      const i = e.mp.detail.value
+      this.city = this.cities[i].city
+      this.getData()
     }
   },
   onReachBottom () {
@@ -142,6 +157,7 @@ export default {
     Object.assign(this.$data, this.$options.data())
     this.from = options.from || 'tee'
     this.initCity()
+    this.getCity()
   }
 }
 </script>

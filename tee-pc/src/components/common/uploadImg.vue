@@ -72,6 +72,7 @@
     </div>
   </Upload>
   <div class="c-upload-content">
+    <div><slot name="btn"></slot></div>
     <div><slot name="title"></slot></div>
     <p><slot name="hint"></slot></p>
   </div>

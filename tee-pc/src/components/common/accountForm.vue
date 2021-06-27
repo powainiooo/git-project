@@ -313,8 +313,8 @@ export default {
         bank_name: Number(this.globalData.bank.bank_name),
         bank_subname: this.globalData.bank.bank_subname,
         bank_number: this.globalData.bank.bank_number,
-        printer_code: this.globalData.shop.printer_code,
-        printer_sign: this.globalData.shop.printer_sign
+        printer_code: this.globalData.printer.printer_code,
+        printer_sign: this.globalData.printer.printer_sign
       }
       this.cities = [this.globalData.shop.province, this.globalData.shop.city]
       this.times = [this.globalData.shop.word_time_start, this.globalData.shop.word_time_end]

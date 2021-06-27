@@ -37,11 +37,11 @@
         <div>{{nums2}}</div>
       </li>
     </ul>
-    <div class="operas" v-if="false">
-      <Poptip title="确认设为休店模式？" confirm @on-ok="changeStatus()">
+    <div class="operas" v-if="pause !== -1">
+      <Poptip title="确认设为休店？" confirm @on-ok="changeStatus(1)" v-if="pause === 0">
         <Button style="width: 130px;">设为休店</Button>
       </Poptip>
-      <Poptip title="确认恢复营业？" confirm @on-ok="changeStatus()">
+      <Poptip title="确认恢复营业？" confirm @on-ok="changeStatus(0)" v-if="pause === 1">
         <Button style="width: 130px;">恢复营业</Button>
       </Poptip>
     </div>
@@ -60,7 +60,7 @@
 import charts from './datas/charts'
 import hots from './datas/hots'
 import orders from './datas/orders'
-import { getAction } from '@/utils'
+import { getAction, postAction } from '@/utils'
 import { formatDate } from '@/utils/tools'
 export default {
   name: 'app',
@@ -69,12 +69,21 @@ export default {
     hots,
     orders
   },
+  computed: {
+    pause () {
+      if (this.$store.state.globalData.shop) {
+        return this.$store.state.globalData.shop.pause
+      }
+      return -1
+    }
+  },
   data () {
     return {
       amount1: '--',
       amount2: '--',
       nums1: '--',
-      nums2: '--'
+      nums2: '--',
+      isAjax: false
     }
   },
   mounted () {
@@ -104,7 +113,19 @@ export default {
         }
       })
     },
-    changeStatus () {}
+    changeStatus (pause) {
+      if (this.isAjax) return
+      this.isAjax = true
+      postAction('/shopapi/shop/pause', {
+        pause
+      }).then(res => {
+        this.isAjax = false
+        if (res.code === 0) {
+          this.$Message.success(res.msg)
+          this.$store.dispatch('getUserData')
+        }
+      })
+    }
   }
 }
 </script>

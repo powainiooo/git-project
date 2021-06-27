@@ -130,6 +130,7 @@
                 <upload-img v-model="images[index]"
                             cropper
                             :fixedNumber="[1050, 500]">
+                  <button class="btn-close btn-close-min mb10" slot="btn" @click="delImage(index)" v-if="images.length > 1"><img src="@/assets/img/close.png" /></button>
                   <span slot="title">产品图</span>
                   <span slot="hint">尺寸1050px*500px</span>
                 </upload-img>
@@ -374,6 +375,9 @@ export default {
         ]
       }]
       this.errData = {}
+    },
+    delImage (index) {
+      this.images.splice(index, 1)
     }
   }
 }

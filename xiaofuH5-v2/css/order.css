@@ -101,6 +101,7 @@
    color: #ffffff;
    font-family: HelveL;
    line-height: 0.26rem;
+   z-index: 100;
 }
 .c-ticket-item-title p.en {
    font-size: 0.26rem;

@@ -16,7 +16,7 @@
     </tabs>
     <scroll-view scroll-y class="list-container" @scrolltolower="reachBottom">
       <div class="item slide-col slideUp" v-for="item in list" :key="id">
-        <item :record="item" extraClass="coupon-item-min" />
+        <item :record="item" extraClass="coupon-item-min" @tap="handleTap" />
       </div>
       <div class="empty-hint" v-if="list.length === 0">
         <p>Irrelevant content</p>
@@ -34,6 +34,7 @@ import tabs from '@/components/Tabs/tabs'
 import tabPane from '@/components/Tabs/tabPane'
 import item from '@/pages/coupon/modules/item'
 import { getAction } from '@/utils/api'
+import store from '@/store'
 
 export default {
   components: {
@@ -42,6 +43,11 @@ export default {
     tabs,
     tabPane,
     item
+  },
+  computed: {
+    storeInfo () {
+      return store.state.storeInfo
+    }
   },
   data () {
     return {
@@ -76,6 +82,26 @@ export default {
           this.total = res.count
         }
       })
+    },
+    handleTap (record) {
+      if (record.type === 1) {
+        this.toStore()
+      } else {
+        mpvue.redirectTo({
+          url: '/pages/nearby/list/main'
+        })
+      }
+    },
+    toStore () {
+      if (this.storeInfo.shop_id) {
+        mpvue.redirectTo({
+          url: '/pages/goods/main?id=' + this.storeInfo.shop_id
+        })
+      } else {
+        mpvue.redirectTo({
+          url: '/pages/stores/main'
+        })
+      }
     }
   },
   onLoad (options) {

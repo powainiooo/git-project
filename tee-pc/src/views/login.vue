@@ -2,6 +2,16 @@
 @import "../assets/css/mixin.styl"
 .login-box
   size(100%, 100%); position relative; overflow hidden;
+  .btn-a
+    color #C8C9CA; margin-top 10px; margin-left 15px;
+    &:hover
+      color #f0916c
+  .pages
+    width 800px; display flex; transition all .3s ease-out;
+    &>div
+      flex 1
+  .pages2
+    transform translateX(-400px);
 .hint-box
   background-color #E8D1B9; size(100%, 100%); abTL(calc(100% - 70px), 0); color #ffffff;
   a
@@ -25,19 +35,49 @@
 <template>
 <float-box v-model="visible" :mask="false" :width="400">
   <div class="login-box">
-    <!-- 登录表单 -->
-    <Form class="c-form mt120" ref="form" :model="formData" :rules="ruleValidate" @keyup.enter.native="handleLogin">
-      <h3 class="f18 mb30 ml10">登陆</h3>
-      <FormItem prop="username">
-        <Input placeholder="账号" v-model="formData.username" />
-      </FormItem>
-      <FormItem prop="password">
-        <Input type="password" placeholder="密码" v-model="formData.password" />
-      </FormItem>
-      <FormItem class="mt80">
-        <Button @click="handleLogin">确认</Button>
-      </FormItem>
-    </Form>
+    <div class="pages" :class="{'pages2': page === 'forget'}">
+      <div class="ovh">
+        <!-- 登录表单 -->
+        <Form class="c-form mt120" ref="form" :model="formData" :rules="ruleValidate" @keyup.enter.native="handleLogin">
+          <h3 class="f18 mb30 ml10">登陆</h3>
+          <FormItem prop="username">
+            <Input placeholder="账号" v-model="formData.username" />
+          </FormItem>
+          <FormItem prop="password">
+            <Input type="password" placeholder="密码" v-model="formData.password" />
+            <a href="javascript:;" class="btn-a" @click="page = 'forget'">忘记密码</a>
+          </FormItem>
+          <FormItem class="mt80">
+            <Button @click="handleLogin">确认</Button>
+          </FormItem>
+        </Form>
+      </div>
+      <div class="ovh pr">
+        <!-- 忘记密码表单 -->
+        <Form class="c-form mt120" ref="form2" :model="form2" :rules="ruleValidate2" @keyup.enter.native="handleSubmit">
+          <h3 class="f18 mb30 ml10">忘记密码</h3>
+          <FormItem prop="account">
+            <Input placeholder="登录手机号" v-model="form2.account" />
+          </FormItem>
+          <FormItem prop="code">
+            <div class="between">
+              <Input placeholder="验证码" v-model="form2.code" style="width: 160px;" />
+              <Button @click="getCode" :disabled="count !== 0" style="min-width: auto; padding: 0; width: 80px; font-size: 12px;">{{btnName}}</Button>
+            </div>
+          </FormItem>
+          <FormItem prop="password">
+            <Input type="password" placeholder="新密码" v-model="form2.password" />
+          </FormItem>
+          <FormItem prop="password2">
+            <Input type="password" placeholder="确认新密码" v-model="form2.password2" />
+          </FormItem>
+          <FormItem class="mt80">
+            <Button @click="handleSubmit">确认修改</Button>
+          </FormItem>
+        </Form>
+      </div>
+    </div>
+
     <!-- 提示 -->
     <div class="hint-box box ts1" :class="{'hint-box-show': showHint}">
       <a href="javascript:;" @click="showHint = !showHint">
@@ -63,19 +103,45 @@ import Vue from 'vue'
 import floatBox from '@/components/common/floatBox'
 import { postAction } from '../utils'
 import { ACCESS_TOKEN } from '@/config'
+
 export default {
   name: 'app',
   components: {
     floatBox
   },
+  computed: {
+    btnName () {
+      return this.count === 0 ? '获取验证码' : `${this.count}s`
+    }
+  },
   data () {
+    const _this = this
+    const psw = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('请再次输入密码'))
+      } else {
+        if (value === _this.form2.password) {
+          callback()
+        } else {
+          callback(new Error('密码不一致'))
+        }
+      }
+    }
     return {
       visible: false,
       showHint: false,
+      page: 'login',
       formData: {
         username: '',
         password: ''
       },
+      form2: {
+        account: '',
+        password: '',
+        password2: '',
+        code: ''
+      },
+      count: 0,
       ruleValidate: {
         username: [
           { required: true, message: '请输入账号', trigger: 'blur' }
@@ -83,7 +149,22 @@ export default {
         password: [
           { required: true, message: '请输入密码', trigger: 'blur' }
         ]
-      }
+      },
+      ruleValidate2: {
+        account: [
+          { required: true, message: '请输入手机号', trigger: 'blur' }
+        ],
+        code: [
+          { required: true, message: '请输入验证码', trigger: 'blur' }
+        ],
+        password: [
+          { required: true, message: '请输入密码', trigger: 'blur' }
+        ],
+        password2: [
+          { required: true, validator: psw, trigger: 'blur' }
+        ]
+      },
+      isAjax: false
     }
   },
   mounted () {
@@ -95,7 +176,6 @@ export default {
     handleLogin () {
       this.$refs.form.validate((valid) => {
         if (valid) {
-          //
           postAction('/shopapi/login', {
             account: this.formData.username,
             password: this.formData.password
@@ -105,6 +185,48 @@ export default {
               this.$router.push({
                 name: 'Home'
               })
+            }
+          })
+        }
+      })
+    },
+    getCode () {
+      console.log('getCode')
+      this.$refs.form2.validateField('account', valid => {
+        console.log('account', valid)
+        if (valid === '') {
+          if (this.isAjax) return
+          this.isAjax = true
+          postAction('/shopapi/sms/send', {
+            phone: this.form2.account
+          }).then(res => {
+            this.isAjax = false
+            if (res.code === 0) {
+              this.$Message.success('发送成功')
+              this.count = 60
+              const t = setInterval(() => {
+                if (this.count === 0) {
+                  clearInterval(t)
+                } else {
+                  this.count -= 1
+                }
+              }, 1000)
+            }
+          })
+        }
+      })
+    },
+    handleSubmit () {
+      this.$refs.form2.validate((valid) => {
+        if (valid) {
+          postAction('/shopapi/forget/password/reset', {
+            account: this.form2.account,
+            password: this.form2.password,
+            code: this.form2.code
+          }).then(res => {
+            if (res.code === 0) {
+              this.$Message.success('修改成功')
+              this.page = 'login'
             }
           })
         }

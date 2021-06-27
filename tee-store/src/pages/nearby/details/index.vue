@@ -1,6 +1,7 @@
 <style scoped>
 .nearby-container { min-height: calc(100vh - 260px); margin-top: 0; overflow: hidden; }
 .details-content { margin: 20px 34px; }
+.details-content img { width: 100%; display: block; }
 </style>
 
 <template>
@@ -29,7 +30,9 @@
       </div>
       <div class="details-content">
         <div class="borderB mb40 hr"></div>
-        <div>详情</div>
+        <div>
+          <img v-for="item in contents" :src="imgSrc + item" mode="widthFix" />
+        </div>
       </div>
     </div>
 
@@ -62,6 +65,7 @@ export default {
   computed: {
     addrData () {
       return {
+        imgSrc: mpvue.imgSrc,
         cartNum: this.cartNum,
         cartType: 2,
         shopId: 0
@@ -74,6 +78,7 @@ export default {
       id: '',
       record: {},
       goods: {},
+      contents: [],
       attrs: [],
       tags: [],
       cartNum: 0,
@@ -94,6 +99,7 @@ export default {
         if (res.code === 0) {
           this.record = res.data
           this.goods = res.data.goods
+          this.contents = res.data.detail.content
           this.attrs = res.data.attrs
           this.tags = res.data.detail.tags
         }

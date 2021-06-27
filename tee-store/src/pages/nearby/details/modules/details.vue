@@ -14,7 +14,10 @@
     <div class="btn-circle c-drawer-close" @click="hide"><img src="/static/images/x2.png" /></div>
     <div class="c-drawer-scroll">
       <div class="nearby-goods-detail">
-        <img :src="imgSrc + record.goods.cover" mode="aspectFill" class="bg" />
+<!--        <img :src="imgSrc + record.goods.cover" mode="aspectFill" class="bg" />-->
+        <div class="bg">
+          <banner :list="images" />
+        </div>
         <div class="between">
           <div class="title">{{record.goods.title}}</div>
           <div class="prices">
@@ -61,17 +64,18 @@
 </template>
 
 <script type='es6'>
+import banner from '@/components/banner'
 export default {
   name: 'app',
+  components: {
+    banner
+  },
   props: {
     record: Object
   },
   computed: {
     price () {
       let price = 0
-      if (this.record.goods && this.record.goods.sell_price) {
-        price = this.record.goods.sell_price
-      }
       const ids = []
       const attrs = this.record.attrs || []
       for (const attr of attrs) {
@@ -87,6 +91,12 @@ export default {
       const item = sku.find(i => i.attr_ids === id)
       console.log('item', item)
       return item !== undefined ? price + item.price : price
+    },
+    images () {
+      if (this.record.detail && this.record.detail.images) {
+        return this.record.detail.images
+      }
+      return []
     }
   },
   data() {

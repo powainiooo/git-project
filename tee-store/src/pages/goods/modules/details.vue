@@ -1,6 +1,6 @@
 <style scoped>
 .c-details { padding-bottom: 150px; }
-.c-details .bg { width: 100%; height: 334px; border-radius: 70px 70px 0 0; position: absolute; top: 0; left: 0; }
+.c-details .bg { width: 100%; height: 334px; border-radius: 70px 70px 0 0; overflow: hidden; position: absolute; top: 0; left: 0; }
 .c-details .infos { margin: 420px 34px 36px 34px; padding: 0 10px 50px 10px; }
 .c-details .infos1 { margin: 0; padding: 10px; background-color: #F9F9F9; position: absolute; top: 334px; left: 34px; right: 34px; }
 .c-details .infos .name { font-size: 30px; }
@@ -20,7 +20,10 @@
   <div class="c-drawer-cover" :class="{'c-drawer-cover-show': showItem}" @animationend="anEnd"></div>
   <div class="c-drawer-box c-details" :class="{'c-drawer-show': showItem}">
     <div class="btn-circle c-drawer-close" @click="hide"><img src="/static/images/x2.png" /></div>
-    <img :src="imgSrc + goods.cover" mode="aspectFill" class="bg" />
+<!--    <img :src="imgSrc + goods.cover" mode="aspectFill" class="bg" />-->
+    <div class="bg">
+      <banner :list="images" />
+    </div>
     <div class="infos infos1">
       <div class="between">
         <div class="name">{{goods.title}}</div>
@@ -63,9 +66,13 @@
 
 <script type='es6'>
 import { getAction } from '@/utils/api'
+import banner from '@/components/banner'
 
 export default {
 	name: 'app',
+  components: {
+    banner
+  },
 	data() {
 		return {
 		  imgSrc: mpvue.imgSrc,
@@ -73,6 +80,7 @@ export default {
       showItem: false,
       goods: {},
       cates: [],
+      images: [],
       cateIds: {},
       nums: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
       num: 1,
@@ -100,6 +108,7 @@ export default {
         if (res.code === 0) {
           this.goods = res.data.goods
           this.cates = res.data.attrs
+          this.images = res.data.goods.images
 
           const ids = {}
           for (const i of res.data.attrs) {

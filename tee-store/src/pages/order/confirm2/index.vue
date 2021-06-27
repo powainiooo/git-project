@@ -270,6 +270,7 @@ export default {
           this.shopData = res.data.shop
           this.scores = res.data.score_list
           this.coupons = res.data.coupon_list
+          this.formData.coupon_id = res.data.counpon_id
           store.commit('SET_COUPON', res.data.coupon_list)
         }
       })

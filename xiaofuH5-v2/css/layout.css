@@ -10,6 +10,12 @@
    font-style: normal;
    font-weight: normal;
 }
+@font-face {
+   font-family: HelveT;
+   src: url('HelveticaNeueThin.ttf');
+   font-style: normal;
+   font-weight: normal;
+}
 .header { width: 100%; height: 1rem; background-color: #ffffff; position: fixed; top: 0; left: 0; box-shadow: 0 5px 10px 0 rgba(0, 0, 0, .05); z-index: 1000; display: flex; align-items: center; }
 .header img { width: 2.7rem; margin-left: .38rem; }
 .container { margin-top: 1.8rem; }
@@ -288,7 +294,7 @@ hr { margin: 0 0.25rem; border-top-color: #DBDCDC; }
 
 .detail-line2 { display: flex; justify-content: space-between; align-items: center; margin: 0 0.6rem; }
 .detail-line2 .l { display: flex; justify-content: space-between; align-items: center; color: #9E9E9F; font-size: 0.2rem; }
-.detail-line2 .l .logo { width: 0.8rem; height: 0.8rem; border-radius: 50%; background-color: #ffffff; margin-right: 0.2rem; }
+.detail-line2 .l .logo { width: 0.8rem; height: 0.8rem; border-radius: 50%; overflow: hidden; background-color: #ffffff; margin-right: 0.2rem; }
 .detail-line2 a {
    width: 1.73rem;
    height: 0.57rem;

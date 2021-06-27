@@ -21,7 +21,7 @@
 </style>
 
 <template>
-<div class="coupon-item" hover-class="hscale" hover-stay-time="10" @click="$emit('tap', record.id)" :class="[extraClass]">
+<div class="coupon-item" hover-class="hscale" hover-stay-time="10" @click="$emit('tap', record)" :class="[extraClass]">
   <div class="coupon-item-l">
     <img src="/static/images/mask1.png" mode="widthFix" class="bg" v-if="extraClass === ''" />
     <img src="/static/images/mask3.png" mode="widthFix" class="bg" v-else />
@@ -30,7 +30,7 @@
       <p> · 代金券</p>
     </div>
     <div class="line2">
-      <p>仅可用于周边商品，满{{record.condition}}元可用。</p>
+      <p>仅可用于{{record.type === 1 ? '茶饮' : '周边'}}商品，满{{record.condition}}元可用。</p>
       <p>有效期： {{record.expired}}</p>
     </div>
   </div>

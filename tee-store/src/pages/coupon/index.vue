@@ -85,8 +85,8 @@ export default {
       console.log('getData')
       this.list = store.state.counponList
     },
-    handleSelect (id) {
-      store.commit('SET_COUPONID', id)
+    handleSelect (record) {
+      store.commit('SET_COUPONID', record.id)
       mpvue.navigateBack({
         delta: -1
       })

@@ -1,10 +1,20 @@
 <template>
-  <view class="index ml12 mr12 ">
-    <view class="mb20 between">
+  <view class="Search ml12 mr12 ">
+    <view class="mb20 pt4 pb4 between" v-if="page === 'normal'">
       <view style="width: 314px;">
         <search ref="search" placeholder="品租生活" />
       </view>
       <view @tap="doSearch(null)">搜索</view>
+    </view>
+    <view class="mb20 pt4 pb4 between" v-if="page === 'nearby'">
+      <view class="acenter nearby-info">
+        <image src="@/img/dot.png" mode="widthFix" class="w20" />
+        <view class="h3">张政深淮南政深淮南</view>
+        <image src="@/img/ar1.png" mode="widthFix" class="w10" />
+      </view>
+      <view style="width: 196px;">
+        <search ref="search" placeholder="搜索物品" />
+      </view>
     </view>
 
     <template v-if="history.length > 0">
@@ -40,8 +50,9 @@ export default {
   },
   data () {
     return {
+      page: 'normal',
       history: ['电焊', '主机与配件', '电焊机', '手机'],
-      hots: ['电焊', '主机与配件', '电焊机', '手机']
+      hots: ['电焊', '主机与配件', '电焊机', '手机'],
     }
   },
   methods: {
@@ -57,5 +68,8 @@ export default {
       }
     }
   },
+  onLoad (options) {
+    this.page = options.page || 'normal'
+  }
 }
 </script>

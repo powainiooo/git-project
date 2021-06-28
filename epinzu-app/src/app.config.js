@@ -1,8 +1,10 @@
 export default {
   pages: [
+    'pages/cart/index',
+    'pages/search/index',
+    'pages/nearby/index',
     'pages/goods/list/index',
     'pages/cate/index',
-    'pages/search/index',
     'pages/index/cates',
     'pages/index/index',
     'pages/bindPhone/index',

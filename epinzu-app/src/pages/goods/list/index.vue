@@ -12,11 +12,14 @@
       <!-- 分类列表 -->
       <view class="pr">
         <cates />
-        <button class="btn-cate-more"><image src="@/img/ar2.png" mode="widthFix" class="w10" /></button>
+        <button class="btn-cate-more" @tap="openCate"><image src="@/img/ar2.png" mode="widthFix" class="w10" /></button>
       </view>
       <!-- 标签栏 -->
       <Tabs :list="tabs" />
     </view>
+    <!-- 分类列表 展开 -->
+    <cates2 ref="cates" />
+    <!-- 产品列表 -->
     <view class="goods-list mt96">
       <view class="goods-item" v-for="i in 5" :key="i">
         <image src="@/img/default.png" mode="aspectFill" class="img" />
@@ -39,13 +42,15 @@ import './index.styl'
 import search from '@/c/common/search'
 import Tabs from '@/c/common/Tabs'
 import cates from './modules/cates'
+import cates2 from './modules/cates2'
 
 export default {
   name: 'Index',
   components: {
     search,
     Tabs,
-    cates
+    cates,
+    cates2
   },
   data () {
     return {
@@ -57,6 +62,9 @@ export default {
     }
   },
   methods: {
+    openCate () {
+      this.$refs.cates.show()
+    }
   },
 }
 </script>

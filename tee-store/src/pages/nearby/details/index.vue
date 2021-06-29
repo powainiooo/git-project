@@ -13,7 +13,8 @@
 
     <div class="container2 nearby-container">
       <div class="nearby-goods-detail">
-        <img :src="imgSrc + goods.cover" mode="aspectFill" class="bg" />
+<!--        <img :src="imgSrc + goods.cover" mode="aspectFill" class="bg" />-->
+        <banner :list="images" />
         <div class="between">
           <div class="title">{{goods.title}}</div>
           <div class="prices">
@@ -54,13 +55,15 @@
 import cHeader from '@/components/header'
 import addrInfo from '@/components/addrInfo'
 import cDetails from './modules/details'
+import banner from '@/components/banner'
 import { getAction, postAction } from '@/utils/api'
 import store from '../../../store'
 export default {
   components: {
     cHeader,
     addrInfo,
-    cDetails
+    cDetails,
+    banner
   },
   computed: {
     addrData () {
@@ -81,6 +84,7 @@ export default {
       contents: [],
       attrs: [],
       tags: [],
+      images: [],
       cartNum: 0,
       btnType: '',
       isAjax: false
@@ -102,6 +106,7 @@ export default {
           this.contents = res.data.detail.content
           this.attrs = res.data.attrs
           this.tags = res.data.detail.tags
+          this.images = res.data.detail.images
         }
       })
     },
@@ -146,6 +151,7 @@ export default {
   },
   onShow () {
     this.$refs.top.hideCarts()
+    this.$refs.details.hide()
   },
   onLoad (options) {
     Object.assign(this.$data, this.$options.data())

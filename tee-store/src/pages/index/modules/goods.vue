@@ -15,7 +15,7 @@
     <img src="/static/images/index/arrow1.png" mode="widthFix" class="a1" />
     <img src="/static/images/index/arrow2.png" mode="widthFix" class="a2" />
   </div>
-  <div class="acenter pt50 pl50" @click="toggle">
+  <div class="acenter pt50 pl50 mb45" @click="toggle">
     <img src="/static/images/index/icon1.png" mode="widthFix" class="w28 mr15" />
     <span class="f30">兑换好礼</span>
   </div>

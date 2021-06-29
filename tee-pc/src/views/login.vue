@@ -12,6 +12,8 @@
       flex 1
   .pages2
     transform translateX(-400px);
+  .btn-back
+    abTL(30px, 30px)
 .hint-box
   background-color #E8D1B9; size(100%, 100%); abTL(calc(100% - 70px), 0); color #ffffff;
   a
@@ -53,6 +55,7 @@
         </Form>
       </div>
       <div class="ovh pr">
+        <a href="javascript:;" class="btn-back" @click="page = 'login'"><img src="@/assets/img/ar4.png" width="40" /></a>
         <!-- 忘记密码表单 -->
         <Form class="c-form mt120" ref="form2" :model="form2" :rules="ruleValidate2" @keyup.enter.native="handleSubmit">
           <h3 class="f18 mb30 ml10">忘记密码</h3>

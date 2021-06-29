@@ -133,6 +133,10 @@
           <c-ticket :record="item" v-else />
         </div>
       </div>
+      <div class="empty-hint" v-if="list.length === 0" style="margin-left: 30rpx; margin-top: 200rpx;">
+        <p>Irrelevant Content</p>
+        <div>无相关内容</div>
+      </div>
     </div>
   </div>
 </template>

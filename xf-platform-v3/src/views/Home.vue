@@ -112,6 +112,8 @@
                  v-if="showDetail" />
       </transition>
     </div>
+
+    <alert ref="alert" @onOk="keyword = ''" />
   </div>
 </template>
 
@@ -121,6 +123,7 @@ import welcome from '@/components/home/welcome'
 import cDetails from '@/components/home/details'
 import zHeader from '@/components/header'
 import ticket from '@/components/ticket'
+import alert from '@/components/login/alert'
 import { postAction } from '@/utils'
 
 export default {
@@ -130,7 +133,8 @@ export default {
     welcome,
     cDetails,
     zHeader,
-    ticket
+    ticket,
+    alert
   },
   data () {
     return {
@@ -172,9 +176,14 @@ export default {
         limit: this.pageSize
       }).then(res => {
         if (res.code === 1) {
-          this.total = res.data.total
-          this.list = res.data.list
-          this.showWelcome = this.list.length === 0
+          if (res.data.list.length === 0 && this.keyword !== '') {
+            this.$refs.alert.show('empty', '请确认输入的关键词是否正确')
+            console.log('this.list', this.list)
+          } else {
+            this.total = res.data.total
+            this.list = res.data.list
+            this.showWelcome = this.list.length === 0 && this.keyword === ''
+          }
         }
       })
     },

@@ -21,10 +21,10 @@
         <div class="between">
           <div class="title">{{record.goods.title}}</div>
           <div class="prices">
-            <p>{{record.goods.price}}元</p>
+            <p>{{price.price}}元</p>
             <div class="acenter">
               <img src="/static/images/jfh.png" mode="widthFix" />
-              <div><span>{{price}}</span>元</div>
+              <div><span>{{price.price2}}</span>元</div>
             </div>
           </div>
         </div>
@@ -90,7 +90,10 @@ export default {
       const sku = this.record.sku || []
       const item = sku.find(i => i.attr_ids === id)
       console.log('item', item)
-      return item !== undefined ? price + item.price : price
+      return {
+        price: item !== undefined ? price + item.price : price,
+        price2: item !== undefined ? price + item.price - (item.score_top / 100) : price
+      }
     },
     images () {
       if (this.record.detail && this.record.detail.images) {

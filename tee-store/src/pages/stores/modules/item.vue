@@ -25,11 +25,11 @@
       <img src="/static/images/x.png" mode="widthFix" class="x" />
       <img :src="imgSrc + record.shop_logo" mode="heightFix" class="logo2" />
     </div>
-    <div class="r center" v-if="record.word_status === 1">
+    <div class="r center" v-if="record.word_status === 1 && record.pause === 0">
       <img src="/static/images/icon-cup.png" mode="widthFix" class="w24 mr5" />
       <span>去点餐</span>
     </div>
-    <div class="r center break" v-if="record.word_status === 0">
+    <div class="r center break" v-else>
       <img src="/static/images/z.png" mode="widthFix" class="w20 mr5" />
       <span>休息中</span>
     </div>

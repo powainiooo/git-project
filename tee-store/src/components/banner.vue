@@ -1,6 +1,6 @@
 <style scoped>
-.c-banner { width: 100%; height: 334px; }
-.c-banner img { width: 100%; height: 334px; }
+.c-banner { width: 100%; height: 334px; border-radius: 70px 70px 0 0; overflow: hidden; }
+.c-banner img { width: 100%; height: 334px; border-radius: 70px 70px 0 0; }
 </style>
 
 <template>

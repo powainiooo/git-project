@@ -28,7 +28,7 @@
           <div class="infos">
             <h3 class="title">{{item.title}}</h3>
             <div class="intro" v-if="type === 1">{{item.attrs}}</div>
-            <div class="intro" v-else>
+            <div class="intro" v-else style="min-height: auto;">
               <span class="c-tag" v-for="(attr, i2) in item.attr_names" :key="i2">{{attr}}</span>
             </div>
             <div class="price"><span>{{item.totolPrice}}</span>元</div>

@@ -47,7 +47,7 @@
           <div class="txt1">CLOSED</div>
         </div>
         <div class="title">本店休息中，请切换其他门店</div>
-        <div class="desc">营业时间为{{storeInfo.word_time_start}} ~ {{storeInfo.word_time_end}}，目前时段已打烊，期待您的光临。</div>
+        <div class="desc" :style="{opacity: storeInfo.pause === 0 ? 1 : 0}">营业时间为{{storeInfo.word_time_start}} ~ {{storeInfo.word_time_end}}，目前时段已打烊，期待您的光临。</div>
         <div class="center">
           <button class="btn btn-style1" @click="toStores">切换门店</button>
           <button class="btn btn-style2" @click="doCloseModal">留在当前</button>

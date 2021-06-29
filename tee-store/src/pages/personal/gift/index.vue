@@ -33,6 +33,7 @@ import cFooter from '@/components/footer'
 import tabs from '@/components/Tabs/tabs'
 import tabPane from '@/components/Tabs/tabPane'
 import item from './modules/item'
+import store from '@/store'
 import { getAction } from '@/utils/api'
 
 export default {
@@ -42,6 +43,11 @@ export default {
     tabs,
     tabPane,
     item
+  },
+  computed: {
+    storeInfo () {
+      return store.state.storeInfo
+    }
   },
   data () {
     return {

@@ -21,6 +21,7 @@
 <!--      <Button size="small" class="mr10" @click="doNotify" v-if="showNotify">一次性通知</Button>-->
       <Button size="small" @click="showRefundHint = true" v-if="refundState === 0 || refundState === 2">退款申请</Button>
       <Button size="small" style="cursor: default;" v-else-if="refundState === 1">退款申请 审核中</Button>
+      <Button size="small" v-else-if="refundState === 4" @click="doRefundBatch">批量退款</Button>
       <Button size="small" type="error" v-else-if="refundState === 3" @click="toRefundDetail">退款申请 审核不通过</Button>
     </div>
     <div class="flex">
@@ -227,6 +228,22 @@ export default {
           }).then(res => {
             if (res.code === 1) {
               this.$Message.success('退款成功')
+              this.getData()
+            }
+          })
+        }
+      })
+    },
+    doRefundBatch () {
+      this.$tModal.confirm({
+        title: '是否确认批量退款?',
+        content: '确认退款之后款项将原路返回到该用户账上，请谨慎操作。',
+        onOk: () => {
+          postAction('/editor/order/batch_refund', {
+            ticket_id: this.record.id
+          }, false).then(res => {
+            if (res.code === 0) {
+              this.$Message.success(res.msg)
               this.getData()
             }
           })

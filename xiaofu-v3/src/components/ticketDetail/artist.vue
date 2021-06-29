@@ -63,40 +63,40 @@
 <template>
 <div class="artist-frame">
   <div class="c-ticket-title"><span>Artist</span>表演者</div>
-  <scroll-view scroll-x class="scroll-frame">
-    <div class="scroll-list" :style="{width: (325 * list.length + 25) + 'rpx'}">
-      <div class="artist-item" v-for="(item, index) in list" :key="index">
-        <img :src="item.image_full_url" class="pic" mode="aspectFill" />
-        <div class="content" style="background-color: transparent;">
-          <div class="blur-img">
-            <img :src="item.image_full_url" mode="aspectFill" />
-          </div>
-          <div>{{item.content}}</div>
-        </div>
-        <div class="content">
-          <div>{{item.content}}</div>
-        </div>
-        <img src="/static/images/common/flip.png" class="flip" />
-      </div>
-    </div>
-  </scroll-view>
-<!--    <swiper previous-margin="25rpx" next-margin="405rpx" duration="0">-->
-<!--      <swiper-item v-for="item in list" :key="id">-->
-<!--        <div class="artist-item">-->
-<!--          <img :src="item.image_full_url" class="pic" mode="aspectFill" />-->
-<!--          <div class="content" style="background-color: transparent;">-->
-<!--            <div class="blur-img">-->
-<!--              <img :src="item.image_full_url" mode="aspectFill" />-->
-<!--            </div>-->
-<!--            <div>{{item.content}}</div>-->
+<!--  <scroll-view scroll-x class="scroll-frame">-->
+<!--    <div class="scroll-list" :style="{width: (325 * list.length + 25) + 'rpx'}">-->
+<!--      <div class="artist-item" v-for="(item, index) in list" :key="index">-->
+<!--        <img :src="item.image_full_url" class="pic" mode="aspectFill" />-->
+<!--        <div class="content" style="background-color: transparent;">-->
+<!--          <div class="blur-img">-->
+<!--            <img :src="item.image_full_url" mode="aspectFill" />-->
 <!--          </div>-->
-<!--          <div class="content">-->
-<!--            <div>{{item.content}}</div>-->
-<!--          </div>-->
-<!--          <img src="/static/images/common/flip.png" class="flip" />-->
+<!--          <div>{{item.content}}</div>-->
 <!--        </div>-->
-<!--      </swiper-item>-->
-<!--    </swiper>-->
+<!--        <div class="content">-->
+<!--          <div>{{item.content}}</div>-->
+<!--        </div>-->
+<!--        <img src="/static/images/common/flip.png" class="flip" />-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </scroll-view>-->
+    <swiper previous-margin="25rpx" next-margin="405rpx" duration="100">
+      <swiper-item v-for="item in list" :key="id">
+        <div class="artist-item">
+          <img :src="item.image_full_url" class="pic" mode="aspectFill" />
+          <div class="content" style="background-color: transparent;">
+            <div class="blur-img">
+              <img :src="item.image_full_url" mode="aspectFill" />
+            </div>
+            <div>{{item.content}}</div>
+          </div>
+          <div class="content">
+            <div>{{item.content}}</div>
+          </div>
+          <img src="/static/images/common/flip.png" class="flip" />
+        </div>
+      </swiper-item>
+    </swiper>
   <div class="artist-bBorder bBorder"></div>
 </div>
 </template>

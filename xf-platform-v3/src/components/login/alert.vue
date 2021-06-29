@@ -28,6 +28,11 @@
 <div class="c-alert center" v-if="visible" @click="visible = false">
   <div>
     <div class="logo"><img src="@/assets/img/logo.png" width="161" /></div>
+    <div class="flip-box" v-if="status === 'empty'">
+      <img src="@/assets/img/ico-suc2.png" width="86" />
+      <h3>{{title}}</h3>
+      <p v-html="msg"></p>
+    </div>
     <div class="flip-box" v-if="status === 'suc' || status === 'checkSuc'">
       <img src="@/assets/img/ico-suc.png" />
       <h3>{{title}}</h3>
@@ -36,10 +41,10 @@
     <div class="flip-box" v-else-if="status === 'fail' || status === 'checkFail'">
       <img src="@/assets/img/ico-fail.png" />
       <h3>{{title}}</h3>
-<!--      <p>可能您的网络不太顺畅，请重新注册</p>-->
       <p v-html="msg"></p>
     </div>
     <div class="center" style="margin-top: 60px">
+      <Button style="width: 135px" v-if="status === 'empty'" @click="onOk">返回</Button>
       <Button style="width: 135px" v-if="status === 'suc'" @click="onOk">完成</Button>
       <Button style="width: 135px" v-else-if="status === 'fail'" @click="onRetry">返回重试</Button>
       <Button style="width: 135px" v-else-if="status === 'checkSuc'" @click="onOk">返回首页</Button>
@@ -67,6 +72,8 @@ export default {
         this.title = '提交成功'
       } else if (status === 'fail') {
         this.title = '提交失败'
+      } else if (status === 'empty') {
+        this.title = '无相关内容'
       }
       this.msg = msg
       this.visible = true

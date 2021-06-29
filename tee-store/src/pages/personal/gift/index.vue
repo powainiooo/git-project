@@ -97,10 +97,14 @@ export default {
   },
   onLoad (options) {
     Object.assign(this.$data, this.$options.data())
-    this.getData()
     if (options.status === 'used') {
       this.current = 1
+      this.status = 2
+    } else {
+      this.current = 0
+      this.status = 1
     }
+    this.getData()
   }
 }
 </script>

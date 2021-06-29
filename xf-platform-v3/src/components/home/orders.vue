@@ -19,10 +19,10 @@
     <div>
       <Button size="small" class="mr10" :loading="isExport" @click="doExport">导出表格</Button>
 <!--      <Button size="small" class="mr10" @click="doNotify" v-if="showNotify">一次性通知</Button>-->
-      <Button size="small" @click="showRefundHint = true" v-if="refundState === 0 || refundState === 2">退款申请</Button>
-      <Button size="small" style="cursor: default;" v-else-if="refundState === 1">退款申请 审核中</Button>
-      <Button size="small" v-else-if="refundState === 4" @click="doRefundBatch">批量退款</Button>
+      <Button size="small" @click="showRefundHint = true" v-if="applyFlag === 1">退款申请</Button>
+      <Button size="small" style="cursor: default;" v-if="refundState === 1">退款申请 审核中</Button>
       <Button size="small" type="error" v-else-if="refundState === 3" @click="toRefundDetail">退款申请 审核不通过</Button>
+      <Button size="small" v-if="batchFlag === 1" @click="doRefundBatch">批量退款</Button>
     </div>
     <div class="flex">
       <c-select class="mr10" :list="record.price" @change="ticketChange"/>
@@ -132,7 +132,9 @@ export default {
       keyword: '',
       isExport: false,
       showNotify: false,
-      refundState: 0
+      refundState: 0,
+      batchFlag: 0,
+      applyFlag: 0
     }
   },
   mounted () {
@@ -153,6 +155,8 @@ export default {
           this.total = res.data.total
           this.showNotify = res.data.one_time_notify_flag === 0
           this.refundState = res.data.refund_flag
+          this.batchFlag = res.data.batch_refund_flag
+          this.applyFlag = res.data.refund_apply_flag
         }
       })
     },

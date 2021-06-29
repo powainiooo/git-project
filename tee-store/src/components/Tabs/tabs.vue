@@ -38,6 +38,12 @@ export default {
       index: 0
     }
 	},
+  watch: {
+    current (val) {
+      console.log('current', val)
+      this.currentKey = this.tabs[val].key
+    }
+  },
   mounted () {
     const tabs = []
     const nodes = this.$slots.default

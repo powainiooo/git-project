@@ -5,7 +5,7 @@
 .c-store-item .line1 .l { margin-left: 35px; }
 .c-store-item .line1 .logo { width: 175px; }
 .c-store-item .line1 .x { width: 15px; margin: 0 10px; }
-.c-store-item .line1 .logo2 { height: 40px; }
+.c-store-item .line1 .logo2 { width: 210px; height: 80px; }
 .c-store-item .line1 .r { width: 168px; height: 100%; background-color: #F0916C; font-size: 24px; color: #FFFFFF; }
 .c-store-item .line1 .break { background-color: #CECBC6; }
 .c-store-item .line2 { margin: 22px 35px; font-size: 24px; }
@@ -23,7 +23,7 @@
       <!--      <img :src="imgSrc + record.shop_logo" mode="widthFix" class="logo" />-->
       <img src="/static/images/logo@2x.png" mode="widthFix" class="logo" />
       <img src="/static/images/x.png" mode="widthFix" class="x" />
-      <img :src="imgSrc + record.shop_logo" mode="heightFix" class="logo2" />
+      <img :src="imgSrc + record.shop_logo" class="logo2" />
     </div>
     <div class="r center" v-if="record.word_status === 1 && record.pause === 0">
       <img src="/static/images/icon-cup.png" mode="widthFix" class="w24 mr5" />

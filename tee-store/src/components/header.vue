@@ -15,7 +15,7 @@
     <div class="logos">
       <img src="/static/images/logo@2x.png" mode="widthFix" class="logo" />
       <img src="/static/images/x.png" mode="widthFix" class="x" v-if="storeLogo !== ''" />
-      <img :src="imgSrc + storeLogo" mode="heightFix" class="logo2" v-if="storeLogo !== ''" />
+      <img :src="imgSrc + storeLogo" class="logo2" v-if="storeLogo !== ''" />
     </div>
     <button v-if="menus" @click="toMine"><img src="/static/images/menu.png" mode="widthFix" class="menu" /></button>
   </div>

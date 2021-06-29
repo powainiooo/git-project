@@ -102,6 +102,7 @@ export default {
   },
 	methods: {
 	  show (data) {
+      this.visible = true
 	    getAction('/userapi/goods/show', {
 	      id: data.id
       }).then(res => {
@@ -116,7 +117,6 @@ export default {
           }
           this.cateIds = ids
 
-          this.visible = true
           this.$nextTick(() => {
             this.showItem = true
           })

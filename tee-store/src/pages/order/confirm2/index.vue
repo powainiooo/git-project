@@ -32,7 +32,7 @@
               </div>
               <div class="form-line mb30">
                 <div class="form-item">
-                  <picker mode="region" @change="addrChange">
+                  <picker mode="region" @change="addrChange" :disabled="hasAddr">
                     <input placeholder="选择 省份 / 市级 / 区" disabled v-model="addrStr" placeholder-style="font-size: 20rpx;" style="font-size: 24rpx;" />
                   </picker>
                   <img src="/static/images/arrow3.png" class="arrow3" mode="widthFix" />
@@ -101,7 +101,7 @@
       <div class="borderB mb30 hr"></div>
       </template>
 
-      <div class="reduce-item mb30" v-if="coupons.length > 0" @click="selectCoupon">
+      <div class="reduce-item mb30" v-if="coupons.length > 0 && formData.coupon_id !== 0" @click="selectCoupon">
         <img src="/static/images/bg2.png" mode="widthFix" class="bg" />
         <div class="between reduce-item-box">
           <p class="f24 ml30">优惠券</p>

@@ -64,7 +64,7 @@
         </swiper-item>
       </swiper>
 
-      <goods />
+      <goods ref="goods" />
     </div>
     <c-footer />
     <!-- 积分记录  -->
@@ -192,7 +192,7 @@ export default {
       } else if (this.current === 1) {
         url = '/pages/personal/coupon/main?status=used'
       } else if (this.current === 2) {
-        url = '/pages/personal/gift/main'
+        url = '/pages/personal/gift/main?status=used'
       }
       mpvue.navigateTo({
         url
@@ -213,6 +213,7 @@ export default {
     if (this.isLogin) {
       this.getData()
     }
+    this.$refs.goods.hide()
   },
   onLoad (options) {
     console.log('onLoad index')

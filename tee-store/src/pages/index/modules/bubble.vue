@@ -1,6 +1,6 @@
 <style scoped>
 .c-bubble { width: 100%; height: 100vh; position: fixed; top: 0; left: 0; z-index: 0; overflow: hidden; }
-.c-bubble>img { position: absolute; }
+.c-bubble>img { position: fixed; z-index: 2; }
 .c-bubble .b1 { width: 164px; top: 32px; left: 608px; animation: bubble 5s ease infinite alternate; }
 .c-bubble .b2 { width: 48px; top: 73vh; left: 588px; animation: bubble 2s ease infinite alternate; }
 .c-bubble .b3 { width: 184px; top: 22vh; left: 75px; animation: bubble 7s ease infinite alternate; }
@@ -19,12 +19,12 @@
 
 <template>
 <div class="c-bubble">
-  <img src="/static/images/bubble/bubble%20(6).png" mode="widthFix" class="b6" />
-  <img src="/static/images/bubble/bubble%20(1).png" mode="widthFix" class="b1" />
-  <img src="/static/images/bubble/bubble%20(2).png" mode="widthFix" class="b2" />
-  <img src="/static/images/bubble/bubble%20(3).png" mode="widthFix" class="b3" />
-  <img src="/static/images/bubble/bubble%20(4).png" mode="widthFix" class="b4" />
-  <img src="/static/images/bubble/bubble%20(5).png" mode="widthFix" class="b5" />
+  <img src="/static/images/bubble/bubble6.png" mode="widthFix" class="b6" />
+  <img src="/static/images/bubble/bubble1.png" mode="widthFix" class="b1" />
+  <img src="/static/images/bubble/bubble2.png" mode="widthFix" class="b2" />
+  <img src="/static/images/bubble/bubble3.png" mode="widthFix" class="b3" />
+  <img src="/static/images/bubble/bubble4.png" mode="widthFix" class="b4" />
+  <img src="/static/images/bubble/bubble5.png" mode="widthFix" class="b5" />
 </div>
 </template>
 

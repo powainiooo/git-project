@@ -1,6 +1,6 @@
 <style lang="stylus" type="text/stylus">
 .c-footer
-  padding 7px 0; display flex; justify-content space-around; align-items center; width 100%; position fixed; left 0; bottom 0; background-color #FFFFFF; z-index 1000;
+  padding 7px 0; display flex; justify-content space-around; align-items center; width 100%; position fixed; left 0; bottom 0; background-color #FFFFFF; z-index 1000; box-shadow: 2px 0px 4px 0px #E5E5E5;
   padding-bottom calc(7px + constant(safe-area-inset-bottom));
   padding-bottom calc(7px + env(safe-area-inset-bottom));
   &-item

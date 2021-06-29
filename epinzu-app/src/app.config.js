@@ -1,5 +1,7 @@
 export default {
   pages: [
+    'pages/message/detail',
+    'pages/message/index',
     'pages/cart/index',
     'pages/search/index',
     'pages/nearby/index',

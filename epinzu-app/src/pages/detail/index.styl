@@ -1,0 +1,17 @@
+@import '../../static/css/mixin.styl'
+
+.Detail
+  &-banner
+    size(100vw, 100vw); position relative;
+    swiper
+      size(100%, 100%);
+      .img
+        size(100%, 100%);
+      .btn-play
+        size(48px, 48px); abTL(50%, 50%); transform translate(-50%, -50%);
+        image
+          size(100%, 100%);
+    .indicator
+      height 16px; line-height 16px; padding 0 7px; border-radius 8px; font-size 10px; color #FFFFFF; background-color rgba(51, 51, 51, 0.7); abBR(8px, 12px);
+  &-section
+    margin 8px 12px; background-color #FFFFFF; border-radius 4px; padding 0 8px; overflow hidden;

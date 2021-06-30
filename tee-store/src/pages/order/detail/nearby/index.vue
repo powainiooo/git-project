@@ -16,7 +16,9 @@
         <button class="btn-circle btn-style1" @click="btnGuide" v-if="order.express_type === 0">
           <img src="/static/images/icon-guide.png" mode="widthFix" class="w26">
         </button>
-        <button class="btn-circle btn-style1" @click="openPost" v-if="false"><img src="/static/images/post.png" mode="widthFix" class="w34"></button>
+        <button class="btn-circle btn-style1 mr20" @click="openPost" v-if="order.express_type === 1 && order.status === 5">
+          <img src="/static/images/post.png" mode="widthFix" class="w34">
+        </button>
         <button open-type="contact" class="btn-circle btn-style1" v-if="order.express_type === 1">
           <img src="/static/images/service.png" mode="widthFix" class="w26">
         </button>
@@ -119,7 +121,7 @@ export default {
 
   methods: {
     openPost () {
-      this.$refs.post.show()
+      this.$refs.post.show(this.id)
     },
     getData () {
       getAction('/userapi/order/show', {
@@ -155,7 +157,7 @@ export default {
 
   onLoad (options) {
     Object.assign(this.$data, this.$options.data())
-    this.id = options.id || 38
+    this.id = options.id || 22
     this.getData()
   }
 }

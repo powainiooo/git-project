@@ -51,7 +51,7 @@
     </table>
   </div>
   <div class="ml50 mt10" v-if="list.length > 0">
-    <Page :current="page" :total="total" simple class-name="tee-page" />
+    <Page :current="page" :total="total" simple class-name="tee-page" @on-change="pageChange" />
   </div>
 </div>
 </template>
@@ -77,6 +77,10 @@ export default {
     }
   },
   methods: {
+    pageChange (e) {
+      this.page = e
+      this.getListData()
+    },
     getListData () {
       getAction('/shopapi/withdraw/index/data', {
         type: 2,

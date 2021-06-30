@@ -14,6 +14,7 @@ const store = new Vuex.Store({
     isLogin: false,
     sysInfo: {},
     storeInfo: {},
+    storeList: [],
     selectedAddr: {},
     counponList: [],
     couponId: 0,
@@ -37,6 +38,9 @@ const store = new Vuex.Store({
     },
     SET_STOREINFO (state, data) {
       state.storeInfo = data
+    },
+    SET_STORELIST (state, data) {
+      state.storeList = data
     },
     SET_COUPON (state, data) {
       state.counponList = data

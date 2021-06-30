@@ -39,8 +39,13 @@ export default {
       list: []
     }
   },
+  mounted () {
+    this.getData()
+  },
   methods: {
     show () {
+      this.list = []
+      this.page = 1
       this.getData()
       this.visible = true
       this.$nextTick(() => {
@@ -55,11 +60,15 @@ export default {
         if (res.code === 0) {
           this.list = this.list.concat(res.data)
           this.total = res.count
+          this.$emit('load', this.list.length)
         }
       })
     },
     hide () {
       this.showItem = false
+      setTimeout(() => {
+        this.visible = false
+      }, 500)
     },
     animationend () {
       this.visible = false

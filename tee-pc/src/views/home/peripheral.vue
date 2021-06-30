@@ -28,7 +28,7 @@
         <col width="115" />
         <col width="160" />
         <col width="110" />
-        <col width="110" />
+        <col width="150" />
         <col width="90" />
         <col />
         <col width="180" />
@@ -88,7 +88,7 @@
     </table>
   </div>
   <div class="ml50 mt10" v-if="list.length > 0">
-    <Page :current="page" :total="total" simple class-name="tee-page" />
+    <Page :current="page" :total="total" simple class-name="tee-page" @on-change="pageChange" />
   </div>
 
   <modal-list ref="modalList" @detail="openModal" />
@@ -135,6 +135,10 @@ export default {
     this.getListData()
   },
   methods: {
+    pageChange (e) {
+      this.page = e
+      this.getListData()
+    },
     openModalList () {
       this.$refs.modalList.show()
     },

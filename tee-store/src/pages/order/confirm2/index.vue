@@ -5,10 +5,10 @@
 <template>
 <div class="page">
   <c-header />
-  <div class="container2 ovh pt20 order-confirm">
+  <div class="container2 ovh order-confirm" :class="{'pt20': storeCount !== 0}">
 
     <div class="c-tabs">
-      <ul class="c-tabs-btns">
+      <ul class="c-tabs-btns" v-if="storeCount !== 0">
         <li v-for="tab in tabs"
             :key="key"
             :class="{'active': currentKey === tab.key}"
@@ -22,6 +22,7 @@
         }">
           <div class="c-tab-pane">
             <div class="bg-fff top-line">
+              <div class="f20 c-9e mb30 ml15" v-if="storeCount === 0">收货信息</div>
               <div class="form-line mb30">
                 <div class="form-item">
                   <input placeholder="收件姓名" v-model="addrData.name" :disabled="hasAddr" placeholder-style="font-size: 20rpx;" style="font-size: 30rpx;" />
@@ -35,7 +36,7 @@
                   <picker mode="region" @change="addrChange" :disabled="hasAddr">
                     <input placeholder="选择 省份 / 市级 / 区" disabled v-model="addrStr" placeholder-style="font-size: 20rpx;" style="font-size: 24rpx;" />
                   </picker>
-                  <img src="/static/images/arrow3.png" class="arrow3" mode="widthFix" />
+                  <img src="/static/images/arrow3.png" class="arrow3" mode="widthFix" v-if="!hasAddr" />
                 </div>
               </div>
               <div class="form-line">
@@ -69,7 +70,7 @@
                     </div>
                   </div>
                 </div>
-                <button class="btn btn-style1">自动填写</button>
+                <button class="btn btn-style1" open-type="getPhoneNumber" @getphonenumber="getPhoneNumber">自动填写</button>
               </div>
             </div>
           </div>
@@ -207,7 +208,8 @@ export default {
       shopData: {},
       coupons: [],
       scores: [],
-      record: {}
+      record: {},
+      storeCount: -1
     }
   },
 
@@ -219,7 +221,7 @@ export default {
       if (key === 'store') {
         if (this.formData.shop_id === 0) {
           mpvue.navigateTo({
-            url: '/pages/stores/main?from=' + this.formData.from
+            url: '/pages/stores/main?from=order'
           })
           return false
         }
@@ -342,6 +344,13 @@ export default {
         params.shop_id = 0
       } else if (params.express_type === 0) {
         params.shop_id = this.formData.shop_id
+        if (this.formData.phone === '') {
+          mpvue.showToast({
+            title: '请输入电话',
+            icon: 'none'
+          })
+          return
+        }
         params.phone = this.formData.phone
       }
       if (params.from === 1) {
@@ -358,6 +367,44 @@ export default {
     selectAddr () {
       mpvue.navigateTo({
         url: '/pages/personal/address/main?type=select'
+      })
+    },
+    getStoreCount () {
+      postAction('/userapi/shop/valid/count', {
+        lng: this.formData.lng,
+        lat: this.formData.lat,
+        from: this.formData.from,
+        goods: this.formData.goods
+      }).then(res => {
+        if (res.code === 0) {
+          this.storeCount = res.data.count
+          if (res.data.count > 0) {
+            this.getStoreList()
+          }
+        }
+      })
+    },
+    getStoreList () {
+      postAction('/userapi/shop/valid/list', {
+        lng: this.formData.lng,
+        lat: this.formData.lat,
+        from: this.formData.from,
+        goods: this.formData.goods
+      }).then(res => {
+        if (res.code === 0) {
+          store.commit('SET_STORELIST', res.data)
+        }
+      })
+    },
+    getPhoneNumber (e) {
+      postAction('/userapi/wechat/parse/data', {
+        encryptedData: e.mp.detail.encryptedData,
+        iv: e.mp.detail.iv,
+        cloudID: e.mp.detail.cloudID
+      }).then(res => {
+        if (res.code === 0) {
+          this.formData.phone = res.data
+        }
       })
     }
   },
@@ -383,11 +430,14 @@ export default {
     if (this.type === 'buy') {
       this.formData.goods = store.state.nearbyGoods
       this.formData.from = 1
-      this.getData()
+      // this.getData()
     } else if (this.type === 'cart') {
       this.formData.from = 0
       this.getCarts()
     }
+    this.formData.lng = this.storeInfo.lng
+    this.formData.lat = this.storeInfo.lat
+    this.getStoreCount()
     store.commit('SET_STOREINFO', {})
     store.commit('SET_ADDR', {})
   }

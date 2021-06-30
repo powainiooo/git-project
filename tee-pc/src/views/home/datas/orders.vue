@@ -150,6 +150,7 @@
 
 <script type='es6'>
 import { getAction } from '@/utils'
+import { formatDate } from '@/utils/tools'
 export default {
   name: 'app',
   data () {
@@ -169,8 +170,9 @@ export default {
       this.getData()
     },
     getData () {
+      const date = formatDate(new Date(), 'yyyy-MM-dd')
       getAction('/shopapi/order/index/data', {
-        date: '',
+        date,
         type: this.type,
         word: '',
         status: 0,

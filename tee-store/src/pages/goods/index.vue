@@ -31,7 +31,7 @@
         <div class="list">
           <div class="slideUp" v-for="(i, index) in goodsList" :key="id" :id="i.aid">
             <div class="borderB mt60 mb30" v-if="index > 0 && i.aid !== ''" style="height: 1px;"></div>
-            <item :record="i" @detail="openDetail" :cartList="cartsList" />
+            <item :record="i" @detail="openDetail" :cartList="cartsList" :disabled="closeHintVisible" />
           </div>
         </div>
       </scroll-view>

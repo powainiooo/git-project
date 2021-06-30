@@ -13,6 +13,10 @@
 .swiper-sec .icons .gift { height: 53%; display: block; }
 .swiper-sec .icons .gift .img { height: 100%; }
 
+.points-list { padding: 20px 34px; min-height: calc(100vh - 860px); }
+.points-list li { height: 120px; padding: 0 24px; }
+.points-list .empty-hint { margin: 50px 0 0 50px; }
+
 .icon-move { animation: iconmove 1s linear both; }
 @keyframes iconmove {
   0%, 100% { transform: rotateZ(0deg) scale(1); }
@@ -68,7 +72,7 @@
     </div>
     <c-footer />
     <!-- 积分记录  -->
-    <records ref="records" />
+    <records ref="records" @load="recordLoad" />
   </div>
 </template>
 
@@ -99,7 +103,7 @@ export default {
   computed: {
     showRecordBtn () {
       if (this.current === 0) {
-        return this.score > 0
+        return this.score > 0 && this.hasRecord
       } else if (this.current === 1) {
         return this.coupon > 0
       } else if (this.current === 2) {
@@ -128,6 +132,7 @@ export default {
       prize: 50,
       current: 0,
       key: 'score',
+      hasRecord: true,
       hash: {
         score: 0,
         coupon: 1,
@@ -207,6 +212,9 @@ export default {
           })
         }
       })
+    },
+    recordLoad (e) {
+      this.hasRecord = e !== 0
     }
   },
   onShow () {

@@ -29,7 +29,7 @@
         <col width="80" />
         <col width="80" />
         <col width="150" />
-        <col width="110" />
+        <col width="120" />
         <col />
         <col width="170" />
       </colgroup>
@@ -87,14 +87,14 @@
           <div>{{item.status_name}}</div>
         </td>
         <td>
-          <div class="tr">
+          <div class="flex" style="justify-content: flex-end">
             <Poptip title="确认补打标签？" confirm @on-ok="handleTag(item.id)" v-if="item.status === 4">
               <Button size="small" class="mb10">补打标签</Button>
             </Poptip>
             <Poptip title="确认通知取餐？" confirm @on-ok="handleGet(item.id)" v-if="item.status === 4">
               <Button size="small" class="bg-main ml10 mb10">通知取餐</Button> <br/>
             </Poptip>
-            <Poptip title="确认退款？" confirm @on-ok="handleRefund(item.id)">
+            <Poptip title="确认退款？" confirm @on-ok="handleRefund(item.id)" v-if="canRefund(item.status)">
               <Button size="small">退款</Button>
             </Poptip>
             <Poptip title="确认制作？" confirm @on-ok="startMake(item.id)" v-if="item.status === 2">
@@ -111,7 +111,7 @@
     </table>
   </div>
   <div class="ml50 mt10" v-if="list.length > 0">
-    <Page :current="page" :total="total" simple class-name="tee-page" />
+    <Page :current="page" :total="total" simple class-name="tee-page" @on-change="pageChange" />
   </div>
 </div>
 </template>
@@ -147,6 +147,10 @@ export default {
     }
   },
   methods: {
+    pageChange (e) {
+      this.page = e
+      this.getListData()
+    },
     getListData () {
       getAction('/shopapi/order/index/data', {
         type: 1,
@@ -226,6 +230,12 @@ export default {
           this.getListData()
         }
       })
+    },
+    canRefund (status) {
+      if (status === 2 || status === 3 || status === 4 || status === 7) {
+        return true
+      }
+      return false
     }
   }
 }

@@ -17,7 +17,7 @@
 </style>
 
 <template>
-<div class="c-store-item" :hover-class="hscale" hover-stay-time="10" @click="toDetail">
+<div class="c-store-item" hover-class="hscale" hover-stay-time="10" @click="toDetail">
   <div class="line1 between">
     <div class="l acenter">
       <!--      <img :src="imgSrc + record.shop_logo" mode="widthFix" class="logo" />-->

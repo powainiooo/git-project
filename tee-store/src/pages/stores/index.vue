@@ -156,7 +156,12 @@ export default {
   onLoad (options) {
     Object.assign(this.$data, this.$options.data())
     this.from = options.from || 'tee'
-    this.initCity()
+    if (this.from === 'tee') {
+      this.initCity()
+    } else {
+      this.list = store.state.storeList
+      this.total = store.state.storeList.length
+    }
     this.getCity()
   }
 }

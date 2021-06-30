@@ -95,7 +95,7 @@
     </table>
   </div>
   <div class="ml50 mt10" v-if="list.length > 0">
-    <Page :current="page" :total="total" simple class-name="tee-page" />
+    <Page :current="page" :total="total" simple class-name="tee-page" @on-change="pageChange" />
   </div>
   <modal-form ref="modalForm" @ok="refresh" />
   <cate-form ref="cateForm" @close="getCateData" />
@@ -142,6 +142,10 @@ export default {
     this.getListData()
   },
   methods: {
+    pageChange (e) {
+      this.page = e
+      this.getListData()
+    },
     openModal () {
       this.$refs.modalForm.show()
     },

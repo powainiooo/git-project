@@ -51,7 +51,7 @@
         <img src="/static/images/bg2.png" mode="widthFix" class="bg" />
         <div class="between reduce-item-box">
           <p class="f24 ml30">优惠券</p>
-          <div class="price" v-if="formData.couponId !== 0"><span>-{{record.coupon_fee}}</span>元</div>
+          <div class="price" v-if="record.coupon_fee !== 0"><span>-{{record.coupon_fee}}</span>元</div>
         </div>
         <img src="/static/images/arrow4.png" mode="widthFix" class="ar" />
       </div>
@@ -64,7 +64,7 @@
               <p class="f24">使用积分</p>
               <p class="f20 c-c9">{{record.score_rate}}积分=1元，单次最多可用{{record.score_use_top}}积分</p>
             </div>
-            <div class="price" v-if="formData.score !== ''"><span>-{{record.score_fee}}</span>元</div>
+            <div class="price" v-if="record.score_fee !== 0"><span>-{{record.score_fee}}</span>元</div>
           </div>
           <img src="/static/images/arrow4.png" mode="widthFix" class="ar" />
         </div>
@@ -165,6 +165,11 @@ export default {
           this.shopData = res.data.shop
           this.scores = res.data.score_list
           this.coupons = res.data.coupon_list
+          this.formData.couponId = res.data.counpon_id
+          if (this.formData.score === '') {
+            this.formData.score = res.data.score_use_top
+          }
+          console.log('this.formData.score', this.formData.score)
           store.commit('SET_COUPON', res.data.coupon_list)
         }
       })
@@ -241,17 +246,17 @@ export default {
     console.log('onshow', store.state)
     this.formData.couponId = store.state.couponId
     this.getData()
+  },
+  onLoad () {
+    Object.assign(this.$data, this.$options.data())
+    console.log('order onLoad')
+    store.commit('SET_COUPONID', 0)
     setTimeout(() => {
       mpvue.showToast({
         title: `请确认下单门店为${this.storeInfo.shop_name}`,
         icon: 'none'
       })
     }, 1000)
-  },
-  onLoad () {
-    Object.assign(this.$data, this.$options.data())
-    console.log('order onLoad')
-    store.commit('SET_COUPONID', 0)
   }
 }
 </script>

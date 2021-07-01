@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import { getAction } from '@/utils'
+const date = localStorage.getItem('TEE_DATE')
 
 Vue.use(Vuex)
 
@@ -9,7 +10,7 @@ export default new Vuex.Store({
     globalData: {},
     imgSrc: 'http://file.dev.sysds.cn/',
     hasGlobalData: false,
-    currentDate: ''
+    currentDate: date
   },
   mutations: {
     SET_GLOBALDATA (state, data) {

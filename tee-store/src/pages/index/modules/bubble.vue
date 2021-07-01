@@ -2,7 +2,7 @@
 .c-bubble { width: 100%; height: 100vh; position: fixed; top: 0; left: 0; z-index: 0; overflow: hidden; }
 .c-bubble>img { position: fixed; z-index: 2; }
 .c-bubble .b1 { width: 164px; top: 32px; left: 608px; animation: bubble 5s ease infinite alternate; }
-.c-bubble .b2 { width: 48px; top: 73vh; left: 588px; animation: bubble 2s ease infinite alternate; }
+.c-bubble .b2 { width: 48px; top: 73vh; left: 588px; animation: bubble 3s ease infinite alternate; }
 .c-bubble .b3 { width: 184px; top: 22vh; left: 75px; animation: bubble 7s ease infinite alternate; }
 .c-bubble .b4 { width: 368px; top: 60vh; left: -84px; animation: bubble2 9s ease infinite alternate; }
 .c-bubble .b5 { width: 164px; top: 80vh; left: 34px; animation: bubble 4s ease infinite alternate; }

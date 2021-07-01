@@ -1,5 +1,5 @@
 <style scoped>
-.nearby-container { min-height: calc(100vh - 260px); margin-top: 0; overflow: hidden; }
+.nearby-container { height: calc(100vh - 260px); margin-top: 0; overflow: hidden; overflow-y: scroll; }
 </style>
 
 <template>

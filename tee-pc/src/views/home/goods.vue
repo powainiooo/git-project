@@ -6,15 +6,16 @@
 <div class="pa60">
   <div class="between operates-line">
     <div class="flex">
-      <Select class="c-select mr20" placeholder="产品分类" style="width: 130px;" v-model="cate">
+      <Select class="c-select mr20" placeholder="产品分类" style="width: 130px;" v-model="cate" @on-change="paramsChange">
+        <Option value="">全部</Option>
         <Option v-for="item in cateList" :key="item.cid" :value="item.cid">{{item.cname}}</Option>
       </Select>
-      <Select class="c-select mr20" placeholder="状态" style="width: 130px;" v-model="status">
+      <Select class="c-select mr20" placeholder="状态" style="width: 130px;" v-model="status" @on-change="paramsChange">
         <Option v-for="item in statusList" :key="item.id" :value="item.id">{{item.name}}</Option>
       </Select>
       <div class="c-input">
         <img src="@/assets/img/search.png" class="c-input-search" width="23" />
-        <input type="text" placeholder="输入搜索内容" v-model="word" />
+        <input type="text" placeholder="输入搜索内容" v-model="word" @keyup.enter="paramsChange" />
       </div>
     </div>
     <div class="flex">
@@ -57,7 +58,7 @@
         <td><div>{{item.title}}</div></td>
         <td>
           <div>
-            <div class="img-box img-box-height"><img :src="imgSrc + item.cover" /></div>
+            <van-image width="60" height="60" radius="12" fit="cover" :src="imgSrc + item.cover" />
           </div>
         </td>
         <td>
@@ -72,8 +73,8 @@
         <td><div>{{item.store_nums}}</div></td>
         <td><div>{{item.make_time}}分钟</div></td>
         <td><div>{{item.status_name}}</div></td>
-        <td>
-          <div class="end" style="align-items: flex-start;">
+        <td class="opera">
+          <div class="center">
             <div v-if="item.check_status === 1">
               <Poptip title="确认下架？" confirm @on-ok="changeStatus(item.id, 1)">
                 <Button size="small" v-if="item.status === 2">下架</Button>
@@ -96,6 +97,9 @@
   </div>
   <div class="ml50 mt10" v-if="list.length > 0">
     <Page :current="page" :total="total" simple class-name="tee-page" @on-change="pageChange" />
+  </div>
+  <div class="ml50 mt100" v-if="list.length === 0">
+    <img src="@/assets/img/none.png" width="265" />
   </div>
   <modal-form ref="modalForm" @ok="refresh" />
   <cate-form ref="cateForm" @close="getCateData" />
@@ -144,6 +148,10 @@ export default {
   methods: {
     pageChange (e) {
       this.page = e
+      this.getListData()
+    },
+    paramsChange () {
+      this.page = 1
       this.getListData()
     },
     openModal () {

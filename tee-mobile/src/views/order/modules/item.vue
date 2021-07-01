@@ -53,6 +53,7 @@
     </div>
 
     <div class="cover" v-if="record.status === 7"><span>已完成</span></div>
+    <div class="cover" v-if="record.status === -9"><span>已退款</span></div>
   </div>
   <img src="@/assets/img/sd1.png" class="sd" />
 </div>

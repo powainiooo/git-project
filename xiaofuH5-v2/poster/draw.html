@@ -14,7 +14,8 @@ function download () {
 	document.documentElement.scrollTop = 0
 	document.body.scrollTop = 0
 	html2canvas(document.getElementById("container"), {
-		useCORS:true
+		useCORS:true,
+		backgroundColor: null
    }).then(function (canvas) {
 		console.log('done')
       document.getElementById('results').appendChild(canvas)
@@ -103,7 +104,8 @@ function loadImg () {
             <div class="notice-bBorder bBorder"></div>
          </div>
          <div class="extra-code">
-            <img src="img/qrcode.png" width="210" />
+            <img src="img/qrcode.png" width="210" v-if="record.miniapp_code_image === ''" />
+            <img :src="record.miniapp_code_image" width="210" v-else />
             <img src="img/hint.png" width="390" />
          </div>
       </div>
@@ -124,8 +126,8 @@ new Vue({
 		   let host = ''
 		   if (this.record) {
 			   date = this.record.start_date.split('-')
-			   name = this.record[this.nameKey]
-			   host = this.record.organizer_name
+			   name = this.record.name
+			   host = this.record.organizer.name
 		   }
 		   return {
 			   month: date[1],

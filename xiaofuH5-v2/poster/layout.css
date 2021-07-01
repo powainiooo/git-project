@@ -1,3 +1,22 @@
+@font-face {
+   font-family: HelveB;
+   src: url('HelveticaNowDisplay-Bold.ttf');
+   font-style: normal;
+   font-weight: normal;
+}
+@font-face {
+   font-family: HelveL;
+   src: url('HelveticaNowDisplay-Light.ttf');
+   font-style: normal;
+   font-weight: normal;
+}
+@font-face {
+   font-family: HelveT;
+   src: url('HelveticaNeueThin.ttf');
+   font-style: normal;
+   font-weight: normal;
+}
+
 * { margin: 0; padding: 0; }
 .bBorder {
    position: relative;
@@ -11,8 +30,8 @@
    left: 0;
    bottom: 0;
 }
-
-#container { width: 750px; background-color: rgb(240, 242, 245); overflow: hidden; }
+body {  background-color: rgb(240, 242, 245); }
+#container { width: 750px; overflow: hidden; background-color: transparent; }
 #results { float: left; margin-left: 50px; }
 div.hintTxt { font-size: 16px; margin: 10px 0; }
 /*#btn { display: none; }*/
@@ -103,7 +122,7 @@ div.hintTxt { font-size: 16px; margin: 10px 0; }
    font-size: 20px;
    font-family: HelveL;
    color: #ffffff;
-   line-height: 28px;
+   line-height: 26px;
    text-align: center;
    margin-right: 20px;
 }
@@ -118,7 +137,7 @@ div.hintTxt { font-size: 16px; margin: 10px 0; }
 .c-tk-date div { font-family: HelveB; }
 .c-end-date:before {  content: ''; width: 10px; height: 2px; background-color: #C8C9CA; transform: scaleY(.5); position: absolute; left: -15px; top: 50%; }
 .c-tk-title { flex: 1; overflow: hidden; }
-.c-tk-title p { font-size: 26px; font-family: HelveB; line-height: 30px; }
+.c-tk-title p { font-size: 26px; font-family: HelveB; line-height: 30px; color: #808080; }
 .c-tk-title p.ellipsis { text-overflow: ellipsis; overflow: hidden; white-space: nowrap; word-break: break-all; }
 .c-tk-title div { font-size: 20px; font-family: HelveL; color: #9E9E9F; line-height: 25px; }
 
@@ -183,6 +202,7 @@ div.hintTxt { font-size: 16px; margin: 10px 0; }
    margin: 48px 0 28px 38px;
    font-size: 24px;
    line-height: 36px;
+   color: #808080;
 }
 .c-ticket-title span {
    font-size: 26px;

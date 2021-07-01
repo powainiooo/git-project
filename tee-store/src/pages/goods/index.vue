@@ -1,7 +1,7 @@
 <style>
 .goods-container2 { width: 565px; height: calc(100vh - 260px); margin-top: 0; margin-left: 160px; overflow-x: hidden; overflow-y: auto; padding-bottom: 0; }
 .goods-container2 .list { margin: 0 32px; padding-bottom: 170px; }
-.goods-container2 .list .c-goods-item { margin-bottom: 30px; padding-top: 30px; }
+.goods-container2 .list .c-goods-item { margin-bottom: 30px; margin-top: 30px; }
 .goods-container2 .list .slideUp:nth-child(2) { animation-delay: .2s; }
 .goods-container2 .list .slideUp:nth-child(3) { animation-delay: .4s; }
 .goods-container2 .list .slideUp:nth-child(4) { animation-delay: .6s; }
@@ -26,11 +26,12 @@
         class="container2 goods-container2"
         :scroll-into-view="scrollKey"
         @scroll="onScroll"
+        @scrolltolower="scrolltolower"
         scroll-with-animation
         scroll-y>
         <div class="list">
           <div class="slideUp" v-for="(i, index) in goodsList" :key="id" :id="i.aid">
-            <div class="borderB mt60 mb30" v-if="index > 0 && i.aid !== ''" style="height: 1px;"></div>
+            <div class="borderB mt60 mb60" v-if="index > 0 && i.aid !== ''" style="height: 1px;"></div>
             <item :record="i" @detail="openDetail" :cartList="cartsList" :disabled="closeHintVisible" />
           </div>
         </div>
@@ -131,6 +132,10 @@ export default {
       const ww = store.state.sysInfo.windowWidth || 375
       return parseInt(ww * 0.2933)
     },
+    sH () { // 单个分割线高度
+      const ww = store.state.sysInfo.windowWidth || 375
+      return parseInt(ww * 0.08)
+    },
     addrData () {
       return {
         name: this.storeData.shop_name,
@@ -219,6 +224,9 @@ export default {
     onScroll (e) {
       const index = parseInt(e.mp.detail.scrollTop / this.iH)
       this.current = this.goodsList[index].cid
+    },
+    scrolltolower () {
+      this.current = this.cateList[this.cateList.length - 1].id
     },
     goBack () {
       mpvue.navigateBack({

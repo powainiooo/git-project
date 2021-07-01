@@ -142,7 +142,7 @@
               </div>
             </div>
             <FormItem v-if="!isModify">
-              <Button size="small" class="btn1" @click="newImgs">添加详情图</Button>
+              <Button size="small" class="btn1" @click="newImgs" v-if="images.length < 6">添加详情图</Button>
             </FormItem>
           </div>
         </Col>

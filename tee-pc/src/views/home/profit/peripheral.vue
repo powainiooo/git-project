@@ -6,7 +6,7 @@
 <div class="pa60">
   <div class="between operates-line">
     <div class="flex">
-      <Select class="c-select mr20" placeholder="状态" style="width: 130px;" v-model="status">
+      <Select class="c-select mr20" placeholder="状态" style="width: 130px;" v-model="status" @on-change="paramsChange">
         <Option v-for="item in statusList" :key="item.id" :value="item.id">{{item.name}}</Option>
       </Select>
     </div>
@@ -39,8 +39,8 @@
         <td><div>{{getStatusName(item.status)}}</div></td>
         <td><div>{{item.updated_at || '--'}}</div></td>
         <td><div>{{item.apply_at || '--'}}</div></td>
-        <td>
-          <div class="">
+        <td class="opera">
+          <div class="center">
             <Poptip title="确认提现？" confirm @on-ok="handleWithdraw(item.id)">
               <Button size="small" class="bg-main">提现申请</Button>
             </Poptip>
@@ -52,6 +52,9 @@
   </div>
   <div class="ml50 mt10" v-if="list.length > 0">
     <Page :current="page" :total="total" simple class-name="tee-page" @on-change="pageChange" />
+  </div>
+  <div class="ml50 mt100" v-if="list.length === 0">
+    <img src="@/assets/img/none.png" width="265" />
   </div>
 </div>
 </template>
@@ -79,6 +82,10 @@ export default {
   methods: {
     pageChange (e) {
       this.page = e
+      this.getListData()
+    },
+    paramsChange () {
+      this.page = 1
       this.getListData()
     },
     getListData () {

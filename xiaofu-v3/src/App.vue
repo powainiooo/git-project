@@ -23,7 +23,7 @@ export default {
       })
     },
     loadFont () {
-      const baseUrl = 'https://leesticket.waiting8.com/assets/fonts/'
+      const baseUrl = 'https://web.uat.leesticket.com/assets/fonts/'
       mpvue.loadFontFace({
         global: true,
         family: 'HelveB',

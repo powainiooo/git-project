@@ -197,6 +197,7 @@ export default {
         this.selectedDate = record.date
         this.$emit('confirm', record.date)
         this.$store.commit('SET_DATE', record.date)
+        localStorage.setItem('TEE_DATE', record.date)
         setTimeout(() => {
           this.$router.push({
             name: 'Order-list'

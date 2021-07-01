@@ -7,6 +7,8 @@ import './assets/css/reset.css'
 import './assets/css/animate.min.css'
 import './assets/css/global.styl'
 import Storage from 'vue-ls'
+import Image from 'vant/lib/image'
+import 'vant/lib/image/style'
 import {
   Button,
   Form,
@@ -49,6 +51,7 @@ Vue.component('Cascader', Cascader)
 Vue.component('Poptip', Poptip)
 Vue.component('Tooltip', Tooltip)
 Vue.component('Modal', Modal)
+Vue.component('VanImage', Image)
 
 Vue.use(Storage)
 Vue.prototype.$Message = Message

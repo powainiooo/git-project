@@ -6,15 +6,16 @@
 <div class="pa60">
   <div class="between operates-line">
     <div class="flex">
-      <Select class="c-select mr20" placeholder="产品分类" style="width: 130px;" v-model="cate">
+      <Select class="c-select mr20" placeholder="产品分类" style="width: 130px;" v-model="cate" @on-change="paramsChange">
+        <Option value="">全部</Option>
         <Option v-for="item in cateList" :key="item.cid" :value="item.cid">{{item.cname}}</Option>
       </Select>
-      <Select class="c-select mr20" placeholder="状态" style="width: 130px;" v-model="status">
+      <Select class="c-select mr20" placeholder="状态" style="width: 130px;" v-model="status" @on-change="paramsChange">
         <Option v-for="item in statusList" :key="item.id" :value="item.id">{{item.name}}</Option>
       </Select>
       <div class="c-input">
         <img src="@/assets/img/search.png" class="c-input-search" width="23" />
-        <input type="text" placeholder="输入搜索内容" v-model="word" @keyup.enter="getListData" />
+        <input type="text" placeholder="输入搜索内容" v-model="word" @keyup.enter="paramsChange" />
       </div>
     </div>
     <div class="flex">
@@ -28,7 +29,7 @@
         <col width="115" />
         <col width="160" />
         <col width="110" />
-        <col width="150" />
+        <col width="140" />
         <col width="90" />
         <col />
         <col width="180" />
@@ -49,8 +50,8 @@
         <td><div>{{item.cname}}</div></td>
         <td><div>{{item.title}}</div></td>
         <td>
-          <div style="margin-top: -8px;">
-            <div class="img-box"><img :src="imgSrc + item.cover" /></div>
+          <div>
+            <van-image width="60" height="60" radius="12" fit="cover" :src="imgSrc + item.cover" />
           </div>
         </td>
         <td>
@@ -69,13 +70,13 @@
           </div>
           <div v-if="item.status === 2"><p>下架</p></div>
         </td>
-        <td>
-          <div class="">
-            <Poptip title="确认下架？" confirm @on-ok="changeStatus(item.id, 1)">
-              <Button size="small" v-if="item.status === 2">下架</Button>
+        <td class="opera">
+          <div class="center">
+            <Poptip title="确认上架？" confirm @on-ok="changeStatus(item.id, 1)">
+              <Button size="small" v-if="item.status === 2">上架</Button>
             </Poptip>
             <Poptip title="确认上架？" confirm @on-ok="changeStatus(item.id, 2)">
-              <Button size="small" v-if="item.status === 1">上架</Button>
+              <Button size="small" v-if="item.status === 1">下架</Button>
             </Poptip>
             <Button size="small" class="ml10" @click="handleEdit(item.nearby_id)">编辑</Button>
             <Poptip title="确认删除？" confirm @on-ok="handleDel(item.id)">
@@ -90,7 +91,9 @@
   <div class="ml50 mt10" v-if="list.length > 0">
     <Page :current="page" :total="total" simple class-name="tee-page" @on-change="pageChange" />
   </div>
-
+  <div class="ml50 mt100" v-if="list.length === 0">
+    <img src="@/assets/img/none.png" width="265" />
+  </div>
   <modal-list ref="modalList" @detail="openModal" />
   <modal-form ref="modalForm" @ok="getListData" />
 </div>
@@ -137,6 +140,10 @@ export default {
   methods: {
     pageChange (e) {
       this.page = e
+      this.getListData()
+    },
+    paramsChange () {
+      this.page = 1
       this.getListData()
     },
     openModalList () {

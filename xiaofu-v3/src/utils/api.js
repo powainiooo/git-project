@@ -2,7 +2,7 @@ import store from '@/store'
 import { promisify } from '@/utils'
 const login = promisify(mpvue.login)
 
-const baseUrl = 'https://leesticket.waiting8.com'
+const baseUrl = 'https://web.uat.leesticket.com'
 
 const ajax = (opts, autoMsg = true) => {
   return new Promise((resolve, reject) => {

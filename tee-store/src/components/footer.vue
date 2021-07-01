@@ -13,7 +13,7 @@
 .c-footer a.active .icon .img1 { display: none; }
 .c-footer a.active .icon .img2 { display: block; }
 .c-footer a.active p { color: #41372D; }
-.c-footer .arrow { width: 100px; position: absolute; top: 0; left: 50%; transform: translate(-49%, -100%); z-index: 10; }
+.c-footer .arrow { width: 100px; position: absolute; top: 0; left: 50%; transform: translate(-49%, -90%); z-index: 10; }
 </style>
 
 <template>

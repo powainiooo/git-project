@@ -144,6 +144,8 @@ export default {
     cityChange (e) {
       const i = e.mp.detail.value
       this.city = this.cities[i].city
+      this.page = 1
+      this.list = []
       this.getData()
     }
   },

@@ -1,5 +1,5 @@
 <style scoped>
-
+.order-confirm { height: calc(100vh - 260px); margin-top: 0; overflow: hidden; overflow-y: scroll; }
 </style>
 
 <template>

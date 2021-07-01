@@ -8,7 +8,7 @@
   :finished="finished"
   finished-text="没有更多了"
   @load="onLoad"
-  style="background-color: #ffffff;"
+  style="background-color: #ffffff; min-height: calc(100vh - 186px);"
 >
   <item v-for="(item, index) in list" :key="item.id" :record="item" @refresh="handleRefresh(index)" />
 </van-list>

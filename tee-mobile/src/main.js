@@ -9,13 +9,15 @@ import Storage from 'vue-ls'
 import {
   List,
   Toast,
-  Dialog
+  Dialog,
+  Image as VanImage
 } from 'vant'
 import vConsole from 'vconsole'
 const vc = new vConsole()
 
 Vue.use(Storage)
 Vue.use(List)
+Vue.use(VanImage)
 Vue.prototype.$Toast = Toast
 Vue.prototype.$Dialog = Dialog
 Vue.config.productionTip = false

@@ -1,5 +1,7 @@
 <style scoped>
-
+.order-confirm { padding-bottom: 0; }
+.order-scroll { height: calc(100vh - 224px); }
+.order-scroll .frame { padding-bottom: 170px; }
 </style>
 
 <template>
@@ -14,6 +16,8 @@
             :class="{'active': currentKey === tab.key}"
             @click="tabChange(tab.key, index)">{{tab.title}}</li>
       </ul>
+    </div>
+    <scroll-view scroll-y class="order-scroll">
       <div class="c-tabs-frame">
         <div class="c-tabs-content"
              :style="{
@@ -76,57 +80,57 @@
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="frame">
-      <div class="c-goods-item mb60" v-for="item in goods" :key="id">
-        <div class="imgs"><img :src="imgSrc + item.goods_cover" mode="aspectFill" /></div>
-        <div class="infos">
-          <h3 class="title">{{item.goods_name}}</h3>
-          <div class="intro">
-            <span class="c-tag" v-for="(attr, i2) in item.attr_names" :key="i2">{{attr}}</span>
+      <div class="frame">
+        <div class="c-goods-item mb60" v-for="item in goods" :key="id">
+          <div class="imgs"><img :src="imgSrc + item.goods_cover" mode="aspectFill" /></div>
+          <div class="infos">
+            <h3 class="title">{{item.goods_name}}</h3>
+            <div class="intro">
+              <span class="c-tag" v-for="(attr, i2) in item.attr_names" :key="i2">{{attr}}</span>
+            </div>
+            <div class="price"><span>{{item.goods_price}}</span>元</div>
+            <div class="nums2">×{{item.buy_nums}}</div>
           </div>
-          <div class="price"><span>{{item.goods_price}}</span>元</div>
-          <div class="nums2">×{{item.buy_nums}}</div>
         </div>
-      </div>
 
-      <div class="borderB mb30" style="margin-top: -20rpx; height: 1px;"></div>
+        <div class="borderB mb30" style="margin-top: -20rpx; height: 1px;"></div>
 
-      <template v-if="tab === 'post'">
-      <div class="mt30 mb30 between">
-        <p class="f24 ml30">邮费</p>
-        <div><span class="f54 DinB">{{record.post_fee}}</span>元</div>
-      </div>
-
-      <div class="borderB mb30 hr"></div>
-      </template>
-
-      <div class="reduce-item mb30" v-if="coupons.length > 0 && formData.coupon_id !== 0" @click="selectCoupon">
-        <img src="/static/images/bg2.png" mode="widthFix" class="bg" />
-        <div class="between reduce-item-box">
-          <p class="f24 ml30">优惠券</p>
-          <div class="price" v-if="formData.couponId !== 0"><span>-{{record.coupon_fee}}</span>元</div>
+        <template v-if="tab === 'post'">
+        <div class="mt30 mb30 between">
+          <p class="f24 ml30">邮费</p>
+          <div><span class="f54 DinB">{{record.post_fee}}</span>元</div>
         </div>
-      </div>
 
-      <picker :range="scores" @change="scoreChange">
-        <div class="reduce-item mb30" v-if="scores.length > 0" >
+        <div class="borderB mb30 hr"></div>
+        </template>
+
+        <div class="reduce-item mb30" v-if="coupons.length > 0 && formData.coupon_id !== 0" @click="selectCoupon">
           <img src="/static/images/bg2.png" mode="widthFix" class="bg" />
           <div class="between reduce-item-box">
-            <div class="ml30">
-              <p class="f24">使用积分</p>
-              <p class="f20 c-c9">{{record.score_rate}}积分=1元，单次最多可用{{record.score_use_top}}积分</p>
-            </div>
-            <div class="price" v-if="formData.score !== ''"><span>-{{record.score_fee}}</span>元</div>
+            <p class="f24 ml30">优惠券</p>
+            <div class="price" v-if="formData.couponId !== 0"><span>-{{record.coupon_fee}}</span>元</div>
           </div>
-          <img src="/static/images/arrow4.png" mode="widthFix" class="ar" />
         </div>
-      </picker>
 
-      <div class="ml30 mb10">备注</div>
-      <c-textarea @change="remarkChange" />
-    </div>
+        <picker :range="scores" @change="scoreChange">
+          <div class="reduce-item mb30" v-if="scores.length > 0" >
+            <img src="/static/images/bg2.png" mode="widthFix" class="bg" />
+            <div class="between reduce-item-box">
+              <div class="ml30">
+                <p class="f24">使用积分</p>
+                <p class="f20 c-c9">{{record.score_rate}}积分=1元，单次最多可用{{record.score_use_top}}积分</p>
+              </div>
+              <div class="price" v-if="formData.score !== ''"><span>-{{record.score_fee}}</span>元</div>
+            </div>
+            <img src="/static/images/arrow4.png" mode="widthFix" class="ar" />
+          </div>
+        </picker>
+
+        <div class="ml30 mb10">备注</div>
+        <c-textarea @change="remarkChange" />
+      </div>
+    </scroll-view>
 
     <div class="footer-btns">
       <div class="l center">
@@ -276,6 +280,7 @@ export default {
           store.commit('SET_COUPON', res.data.coupon_list)
         }
       })
+      this.getStoreCount()
     },
     getCarts () {
       getAction('/userapi/shopping/card/index/data', {
@@ -370,17 +375,23 @@ export default {
       })
     },
     getStoreCount () {
-      postAction('/userapi/shop/valid/count', {
-        lng: this.formData.lng,
-        lat: this.formData.lat,
-        from: this.formData.from,
-        goods: this.formData.goods
-      }).then(res => {
-        if (res.code === 0) {
-          this.storeCount = res.data.count
-          if (res.data.count > 0) {
-            this.getStoreList()
-          }
+      mpvue.getLocation({
+        success: loc => {
+          this.formData.lng = loc.longitude
+          this.formData.lat = loc.latitude
+          postAction('/userapi/shop/valid/count', {
+            lng: this.formData.lng,
+            lat: this.formData.lat,
+            from: this.formData.from,
+            goods: this.formData.goods
+          }).then(res => {
+            if (res.code === 0) {
+              this.storeCount = res.data.count
+              if (res.data.count > 0) {
+                this.getStoreList()
+              }
+            }
+          })
         }
       })
     },
@@ -421,7 +432,9 @@ export default {
         this.addrData[key] = this.selectedAddr[key]
       }
     }
-    this.getData()
+    if (this.formData.from === 1) {
+      this.getData()
+    }
   },
   onLoad (options) {
     Object.assign(this.$data, this.$options.data())
@@ -435,9 +448,6 @@ export default {
       this.formData.from = 0
       this.getCarts()
     }
-    this.formData.lng = this.storeInfo.lng
-    this.formData.lat = this.storeInfo.lat
-    this.getStoreCount()
     store.commit('SET_STOREINFO', {})
     store.commit('SET_ADDR', {})
   }

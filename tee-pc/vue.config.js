@@ -33,7 +33,9 @@ module.exports = {
     // proxy: 'http://shop.dev.wsgb.club/api'
   }
 }
-// laowang 123456    tea  123456 13723797362 123456
+// laowang 123456    tea  123456
+// 13723797362 1234567 御黑堂
+// 18026948388 123456 有茶
 /*
 * http://admin.dev.wsgb.club/
 admin

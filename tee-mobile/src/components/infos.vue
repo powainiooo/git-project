@@ -4,11 +4,11 @@
 
 <template>
 <div class="infos-line">
-  <button class="btn">{{currentDate}}</button>
+  <button class="btn" @click="backIndex">{{currentDate}}</button>
   <div class="acenter">
     <button class="btn btn-style4 mr20" style="width: 18vw;" @click.stop="openModal(1)" v-if="pause === 0">休店</button>
     <button class="btn btn-style4 mr20" style="width: 18vw;" @click.stop="openModal(0)" v-if="pause === 1">恢复营业</button>
-    <button class="btn-circle" @click="backIndex"><img src="@/assets/img/home.png" class="w28" /></button>
+<!--    <button class="btn-circle" @click="backIndex"><img src="@/assets/img/home.png" class="w28" /></button>-->
   </div>
 
   <!-- 关门弹窗 -->
@@ -79,7 +79,7 @@ export default {
       })
     },
     backIndex () {
-      this.$router.push({
+      this.$router.replace({
         name: 'Home'
       })
     }

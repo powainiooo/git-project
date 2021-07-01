@@ -8,7 +8,7 @@
   :finished="finished"
   finished-text="没有更多了"
   @load="onLoad"
-  style="background-color: #ffffff;"
+  style="background-color: #ffffff; min-height: calc(100vh - 186px);"
 >
   <item v-for="(item, index) in list" :key="item.id" :record="item" @refresh="handleRefresh(index)" />
 </van-list>
@@ -42,8 +42,8 @@ export default {
       return {
         type: 2,
         word: this.word,
-        // date: this.currentDate,
-        date: '',
+        date: this.currentDate,
+        // date: '',
         status: '0',
         page: this.page,
         limit: this.limit

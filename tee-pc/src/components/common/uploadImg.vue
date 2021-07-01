@@ -48,6 +48,7 @@
 <template>
 <div class="c-upload">
   <Upload :action="url"
+          :disabled="disabled"
           :before-upload="uploadBefore"
           :on-preview="preview"
           :on-progress="progress"

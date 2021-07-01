@@ -6,13 +6,13 @@
 <div class="pa60">
   <div class="between operates-line">
     <div class="flex">
-      <c-date-time type="date" placeholder="下单日期" class="tee-date mr20" v-model="date" />
-      <Select class="c-select mr20" placeholder="状态" style="width: 130px;" v-model="status">
+      <c-date-time type="date" placeholder="下单日期" class="tee-date mr20" v-model="date" @change="paramsChange" />
+      <Select class="c-select mr20" placeholder="状态" style="width: 130px;" v-model="status" @on-change="paramsChange">
         <Option v-for="item in statusList" :key="item.id" :value="item.id">{{item.name}}</Option>
       </Select>
       <div class="c-input">
         <img src="@/assets/img/search.png" class="c-input-search" width="23" />
-        <input type="text" placeholder="输入搜索内容" v-model="word" />
+        <input type="text" placeholder="输入搜索内容" v-model="word" @keyup.enter="paramsChange" />
       </div>
     </div>
   </div>
@@ -23,7 +23,7 @@
         <col width="130" />
         <col width="70" />
         <col width="125" />
-        <col width="85" />
+        <col />
         <col width="130" />
         <col width="80" />
         <col width="80" />
@@ -86,8 +86,8 @@
         <td>
           <div>{{item.status_name}}</div>
         </td>
-        <td>
-          <div class="flex" style="justify-content: flex-end">
+        <td class="opera">
+          <div class="center">
             <Poptip title="确认补打标签？" confirm @on-ok="handleTag(item.id)" v-if="item.status === 4">
               <Button size="small" class="mb10">补打标签</Button>
             </Poptip>
@@ -112,6 +112,9 @@
   </div>
   <div class="ml50 mt10" v-if="list.length > 0">
     <Page :current="page" :total="total" simple class-name="tee-page" @on-change="pageChange" />
+  </div>
+  <div class="ml50 mt100" v-if="list.length === 0">
+    <img src="@/assets/img/none.png" width="265" />
   </div>
 </div>
 </template>
@@ -149,6 +152,10 @@ export default {
   methods: {
     pageChange (e) {
       this.page = e
+      this.getListData()
+    },
+    paramsChange () {
+      this.page = 1
       this.getListData()
     },
     getListData () {

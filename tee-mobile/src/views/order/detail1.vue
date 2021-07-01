@@ -5,8 +5,8 @@
 <template>
 <div class="container ovh">
   <div class="infos-line">
-    <button class="btn">{{shop.shop_name}}</button>
-    <button class="btn-circle" @click="backIndex"><img src="@/assets/img/home.png" class="w28" /></button>
+    <button class="btn" @click="backIndex">{{currentDate}}</button>
+<!--    <button class="btn-circle" @click="backIndex"><img src="@/assets/img/home.png" class="w28" /></button>-->
   </div>
   <div class="container2 container3 ovh order-detail" style="padding-top: 0;">
     <div class="header between">
@@ -37,13 +37,13 @@
           <img src="@/assets/img/order/icon3-active.png" mode="aspectFit" class="img2" />
         </li>
       </ul>
-      <div class="mt20 auto" style="width: 400px;" v-if="record.status === 2">
+      <div class="mt20 tc" style="width: 400px;" v-if="record.status === 2">
         <button class="btn btn-style4 mr20" @click.stop="handleMake">开始制作</button>
       </div>
-      <div class="mt20 auto" style="width: 400px;" v-if="record.status === 3">
+      <div class="mt20 auto tc" style="width: 400px;" v-if="record.status === 3">
         <c-timer ref="timer" />
       </div>
-      <div class="mt20" v-if="record.status === 4">
+      <div class="mt20 tc" v-if="record.status === 4">
         <button class="btn btn-style4 mr30" @click.stop="handleTag">补打标签</button>
         <button class="btn btn-style1 mr30" @click.stop="handleGet">通知取餐</button>
         <button class="btn btn-style1" @click.stop="handleDone">完成订单</button>
@@ -56,7 +56,15 @@
     </div>
     <div class="body">
       <div class="c-goods-item mb60" v-for="(item, index) in goods" :key="index">
-        <div class="imgs"><img :src="imgSrc + item.goods_cover" mode="aspectFill" /></div>
+<!--        <div class="imgs"><img :src="imgSrc + item.goods_cover" mode="aspectFill" /></div>-->
+        <div class="imgs">
+          <van-image
+            width="21.333vw"
+            height="21.333vw"
+            fit="cover"
+            :src="imgSrc + item.goods_cover"
+          />
+        </div>
         <div class="infos">
           <h3 class="title">{{item.goods_name}}</h3>
           <div class="intro">{{item.goods_attr.join('、')}}</div>
@@ -95,6 +103,9 @@ export default {
         return true
       }
       return false
+    },
+    currentDate () {
+      return this.$store.state.currentDate
     }
   },
   data () {
@@ -204,7 +215,7 @@ export default {
       })
     },
     backIndex () {
-      this.$router.push({
+      this.$router.replace({
         name: 'Home'
       })
     }

@@ -29,7 +29,6 @@
 
 <script>
 import cHeader from '@/components/header'
-import cFooter from '@/components/footer'
 import tabs from '@/components/Tabs/tabs'
 import tabPane from '@/components/Tabs/tabPane'
 import item from './modules/item'
@@ -39,7 +38,6 @@ import { getAction } from '@/utils/api'
 export default {
   components: {
     cHeader,
-    cFooter,
     tabs,
     tabPane,
     item

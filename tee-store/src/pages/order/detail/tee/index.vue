@@ -64,20 +64,17 @@
       <div class="f20 c-c9 mr10 tr">共{{goodsNum}}件</div>
     </div>
   </div>
-  <c-footer current="list" />
 </div>
 </template>
 
 <script>
 import cHeader from '@/components/header'
-import cFooter from '@/components/footer'
 import cTimer from '@/components/timer'
 import cCodes from '@/components/codes'
 import { getAction } from '@/utils/api'
 export default {
   components: {
     cHeader,
-    cFooter,
     cTimer,
     cCodes
   },

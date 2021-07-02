@@ -84,20 +84,17 @@
 
   <c-post ref="post" />
 
-  <c-footer current="list" />
 </div>
 </template>
 
 <script>
 import cHeader from '@/components/header'
-import cFooter from '@/components/footer'
 import cCodes from '@/components/codes'
 import cPost from './modules/post'
 import { getAction } from '@/utils/api'
 export default {
   components: {
     cHeader,
-    cFooter,
     cCodes,
     cPost
   },

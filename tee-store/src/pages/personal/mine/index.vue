@@ -57,20 +57,17 @@
       <img src="/static/images/arrow4.png" mode="widthFix" />
     </a>
   </div>
-  <c-footer />
 </div>
 </template>
 
 <script>
 import cHeader from '@/components/header'
-import cFooter from '@/components/footer'
 import store from '@/store'
 import { doLogin, getAction } from '@/utils/api'
 
 export default {
   components: {
-    cHeader,
-    cFooter
+    cHeader
   },
   computed: {
     isLogin () {

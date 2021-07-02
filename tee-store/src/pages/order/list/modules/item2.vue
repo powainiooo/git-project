@@ -13,7 +13,7 @@
       <button class="btn-circle btn-style1 mr30" v-if="record.express_type === 0" @click="btnGuide">
         <img src="/static/images/icon-guide.png" mode="widthFix" class="w26" />
       </button>
-      <button class="btn mr30 btn-style3" v-if="record.status === 2 && record.express_type === 1">待发货</button>
+      <button class="btn mr30 btn-style3" v-if="record.status === 4 && record.express_type === 1">待发货</button>
     </div>
 
     <div class="body between">

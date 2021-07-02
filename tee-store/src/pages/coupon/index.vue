@@ -26,13 +26,11 @@
       </div>
     </div>
   </div>
-  <c-footer current="order" />
 </div>
 </template>
 
 <script>
 import cHeader from '@/components/header'
-import cFooter from '@/components/footer'
 import item from './modules/item'
 import config from '@/config'
 import QQMapWX from '@/utils/qqmap-wx-jssdk.min.js'
@@ -44,7 +42,6 @@ const qMap = new QQMapWX({
 export default {
   components: {
     cHeader,
-    cFooter,
     item
   },
   data () {

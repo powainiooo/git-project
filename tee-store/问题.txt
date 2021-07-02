@@ -1,4 +1,4 @@
-ÓÅ»İÈ¯
+ï¿½Å»ï¿½È¯
 
 1af94de5a24f650afc5c9fff83
 
@@ -6,11 +6,37 @@
 
 3af94de5a24f650afc5c9fff85
 
-ÀñÆ·
+ï¿½ï¿½Æ·
 aaf94de5a24f650afc5c9fff83
 baf94de5a24f650afc5c9fff84
 
-»ı·Ö
+ï¿½ï¿½ï¿½ï¿½
 waf94de5a24f650afc5c9fff82
 qaf94de5a24f650afc5c9fff83
 daf94de5a24f650afc5c9fff84
+
+"tabBar": {
+    "color": "#CECBC6",
+    "selectedColor": "#41372D",
+    "backgroundColor": "#F2F0ED",
+    "list": [
+      {
+        "pagePath": "pages/index/main",
+        "text": "ç‚¹é¤",
+        "iconPath": "/static/images/footer/icon1.png",
+        "selectedIconPath": "/static/images/footer/icon1-active.png"
+      },
+      {
+        "pagePath": "pages/nearby/list/main",
+        "text": "å‘¨è¾¹å•†åŸ",
+        "iconPath": "/static/images/footer/icon2.png",
+        "selectedIconPath": "/static/images/footer/icon2-active.png"
+      },
+      {
+        "pagePath": "pages/order/list/main",
+        "text": "è®¢å•",
+        "iconPath": "/static/images/footer/icon3.png",
+        "selectedIconPath": "/static/images/footer/icon3-active.png"
+      }
+    ]
+  },

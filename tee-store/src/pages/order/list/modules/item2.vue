@@ -7,7 +7,10 @@
   <div class="order-item-box" hover-class="hscale" hover-stay-time="10" @click="toDetail">
     <div class="header between">
       <div class="title">{{record.express_type === 0 ? '门店自提' : '邮寄'}}</div>
-      <button class="btn-circle btn-style1 mr30" v-if="record.express_type === 1 && record.status === 5">
+      <button class="btn-circle btn-style1 mr30"
+              v-if="record.express_type === 1 && record.status === 5"
+              hover-stop-propagation
+              @click.stop="$emit('post', record.id)">
         <img src="/static/images/post.png" mode="widthFix" class="w36" />
       </button>
       <button class="btn-circle btn-style1 mr30" v-if="record.express_type === 0" @click="btnGuide">

@@ -6,7 +6,7 @@
     span
       font-size 14px; color #41372D; margin 0 15px;
   .inofs
-    acenter(); background url('../../assets/img/ar3.png') no-repeat; background-size 12px; background-position right center; padding-right 35px; cursor pointer;
+    acenter(); cursor pointer;
     .logo
       size(50px, 50px); background-color #ffffff; border-radius 50%; overflow hidden; center(); box-shadow 0 0 5px 0 rgba(0, 0, 0, 0.12); margin-right 14px;
       img
@@ -25,11 +25,11 @@
     <img :src="imgSrc + shopData.shop_logo" width="210" height="80" v-if="showInfos" />
   </div>
   <div class="inofs" v-if="showInfos" @click="$emit('open')">
-    <div class="logo"><img :src="imgSrc + shopData.shop_logo" /></div>
     <div>
       <h3>{{shopData.shop_name}}</h3>
       <p>{{shopData.address}}</p>
     </div>
+    <img src="@/assets/img/setting.png" width="34" class="ml10" />
   </div>
 </div>
 </template>

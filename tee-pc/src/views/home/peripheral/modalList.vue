@@ -9,7 +9,8 @@
     <a href="javascript:;" class="btn-close ml20" @click="handleCancel"><img src="@/assets/img/close.png" /></a>
   </div>
   <div class="operates-line ml25 mr25 mt30">
-    <Select class="c-select mr20" placeholder="产品分类" style="width: 130px;" v-model="cate">
+    <Select class="c-select mr20" placeholder="产品分类" style="width: 130px;" v-model="cate" @on-change="paramsChange">
+      <Option value="">全部</Option>
       <Option v-for="item in cateList" :key="item.cid" :value="item.cid">{{item.cname}}</Option>
     </Select>
   </div>
@@ -36,8 +37,8 @@
         <td><div>{{item.cname}}</div></td>
         <td><div>{{item.title}}</div></td>
         <td>
-          <div style="margin-top: -8px;">
-            <div class="img-box"><img :src="imgSrc + item.cover" /></div>
+          <div>
+            <van-image width="60" height="60" radius="12" fit="cover" :src="imgSrc + item.cover" />
           </div>
         </td>
         <td>
@@ -56,6 +57,9 @@
   </div>
   <div class="ml50 mt10" v-if="list.length > 0">
     <Page :current="page" :total="total" simple class-name="tee-page" />
+  </div>
+  <div class="ml50 mt100" v-if="list.length === 0">
+    <img src="@/assets/img/none.png" width="265" />
   </div>
 </float-box>
 </template>
@@ -92,6 +96,10 @@ export default {
           this.cateList = res.data
         }
       })
+    },
+    paramsChange () {
+      this.page = 1
+      this.getListData()
     },
     getListData () {
       getAction('/shopapi/nearby/index/data', {

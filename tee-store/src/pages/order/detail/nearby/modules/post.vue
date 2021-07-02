@@ -84,6 +84,9 @@ export default {
     },
     hide () {
       this.showItem = false
+      setTimeout(() => {
+        this.visible = false
+      }, 500)
     },
     animationend () {
       this.visible = false

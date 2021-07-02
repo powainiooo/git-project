@@ -25,7 +25,8 @@
       <li v-for="(item, index) in list" :key="index">
         <div class="flex">
           <div class="index">{{index + 1}}</div>
-          <div class="imgs"><img :src="imgSrc + item.goods_cover" /></div>
+<!--          <div class="imgs"><img :src="imgSrc + item.goods_cover" /></div>-->
+          <van-image width="60" height="60" radius="12" fit="cover" :src="imgSrc + item.goods_cover" class="mt10 mr30" />
           <div class="name">{{item.goods_name}}</div>
         </div>
         <p class="nums">{{item.buy_nums}}</p>

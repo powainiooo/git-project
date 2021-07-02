@@ -123,6 +123,7 @@ hr { border-top: 1px solid #EEEEEF; }
 .w50 { width: 50px; }
 
 /*边距*/
+.auto { margin-left: auto; margin-right: auto; }
 .mt5{ margin-top: 5px;}
 .mt10{ margin-top: 10px;}
 .mt15{ margin-top: 15px;}

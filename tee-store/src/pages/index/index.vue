@@ -224,7 +224,7 @@ export default {
     this.$refs.goods.hide()
   },
   onLoad (options) {
-    console.log('onLoad index')
+    console.log('onLoad index2', options)
     Object.assign(this.$data, this.$options.data())
     this.key = options.key || 'score'
     this.current = this.hash[this.key]

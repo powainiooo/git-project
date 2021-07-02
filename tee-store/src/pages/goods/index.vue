@@ -327,7 +327,7 @@ export default {
     this.getPrize()
   },
   onLoad (options) {
-    console.log('onLoad')
+    console.log('goods onLoad', options)
     Object.assign(this.$data, this.$options.data())
     this.shopId = options.id || 1
   }

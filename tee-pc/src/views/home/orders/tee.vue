@@ -91,8 +91,8 @@
             <Poptip title="确认补打标签？" confirm @on-ok="handleTag(item.id)" v-if="item.status === 4">
               <Button size="small" class="mb10">补打标签</Button>
             </Poptip>
-            <Poptip title="确认通知取餐？" confirm @on-ok="handleGet(item.id)" v-if="item.status === 4">
-              <Button size="small" class="bg-main ml10 mb10">通知取餐</Button> <br/>
+            <Poptip title="确认完成？" confirm @on-ok="orderDone(item.id)" v-if="item.status === 4">
+              <Button size="small" class="bg-main ml10 mb10">完成订单</Button>
             </Poptip>
             <Poptip title="确认退款？" confirm @on-ok="handleRefund(item.id)" v-if="canRefund(item.status)">
               <Button size="small">退款</Button>
@@ -100,10 +100,7 @@
             <Poptip title="确认制作？" confirm @on-ok="startMake(item.id)" v-if="item.status === 2">
               <Button size="small" class="bg-main ml10">开始制作</Button>
             </Poptip>
-            <counter v-else-if="item.status === 3" :timer="item.remain_make_time" @done="getListData" />
-            <Poptip title="确认完成？" confirm @on-ok="orderDone(item.id)" v-else-if="item.status === 4">
-              <Button size="small" class="bg-main ml10">完成订单</Button>
-            </Poptip>
+            <counter v-if="item.status === 3" :timer="item.remain_make_time" @done="getListData" />
           </div>
         </td>
       </tr>

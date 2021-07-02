@@ -40,12 +40,12 @@
       <div class="mt20 tc" style="width: 400px;" v-if="record.status === 2">
         <button class="btn btn-style4 mr20" @click.stop="handleMake">开始制作</button>
       </div>
-      <div class="mt20 auto tc" style="width: 400px;" v-if="record.status === 3">
+      <div class="mt20 auto tc" style="width: 53.333vw;" v-if="record.status === 3">
         <c-timer ref="timer" />
       </div>
       <div class="mt20 tc" v-if="record.status === 4">
         <button class="btn btn-style4 mr30" @click.stop="handleTag">补打标签</button>
-        <button class="btn btn-style1 mr30" @click.stop="handleGet">通知取餐</button>
+<!--        <button class="btn btn-style1 mr30" @click.stop="handleGet">通知取餐</button>-->
         <button class="btn btn-style1" @click.stop="handleDone">完成订单</button>
       </div>
       <div class="mt60" v-if="record.status === 7">

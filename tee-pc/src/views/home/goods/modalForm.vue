@@ -107,6 +107,7 @@
             <FormItem>
               <Input placeholder="库存" v-model="formData.store_nums" :disabled="isModify && !errData.store_nums">
                 <span slot="prepend" v-if="isEdit">库存</span>
+                <span slot="append">份</span>
               </Input>
               <div class="warn-hint" v-if="isModify && errData.store_nums">
                 <Poptip trigger="hover" placement="right" :content="errData.store_nums" class="warn-pop">

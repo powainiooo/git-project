@@ -5,7 +5,7 @@
 .c-cates-list li { height: 100px; font-size: 24px; line-height: 26px; color: #B2A89E; text-align: center; }
 .c-cates-list li.active { color: #41372D; }
 .c-cates-list li:after { background-color: #FFFFFF; }
-.c-cates-arrow { width: 25px; position: absolute; top: 0; right: -1px; transform: translateY(8px); transition: top 0.3s cubic-bezier(.23,.78,.33,.97); }
+.c-cates-arrow { width: 38px; position: absolute; top: 0; right: -1px; transform: translateY(8px); transition: top 0.3s cubic-bezier(.23,.78,.33,.97); }
 </style>
 
 <template>

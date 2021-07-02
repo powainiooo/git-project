@@ -133,6 +133,7 @@ export default {
   },
 
   onLoad (options) {
+    // A（积分）B（优惠券）C（礼品）
     this.key = options.key || 'gift'
     this.code = options.code || 'aaf94de5a24f650afc5c9fff83'
     this.getData()

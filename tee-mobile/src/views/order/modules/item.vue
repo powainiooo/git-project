@@ -32,7 +32,7 @@
         </div>
         <div class="f24">×{{item.buy_nums}}</div>
       </div>
-      <div class="line1 borderB">
+      <div class="line1 borderB" v-if="record.user_remark">
         <h3 class="c-main">备注</h3>
         <p>{{record.user_remark || '--'}}</p>
       </div>
@@ -44,7 +44,7 @@
       <button class="btn btn-style1" v-if="record.status === 2" @click.stop="handleMake">开始制作</button>
       <template v-if="record.status === 4">
       <button class="btn btn-style4 mr30" @click.stop="handleTag">补打标签</button>
-      <button class="btn btn-style1 mr30" @click.stop="handleGet">通知取餐</button>
+<!--      <button class="btn btn-style1 mr30" @click.stop="handleGet">通知取餐</button>-->
       <button class="btn btn-style1" @click.stop="handleDone">完成订单</button>
       </template>
       <div class="time" v-if="record.status === 3">

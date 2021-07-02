@@ -8,14 +8,14 @@
   <c-header menus />
   <div class="container2 pt20" style="padding-bottom: 0;">
 
-    <tabs :current="current" @change="tabChange">
+    <tabs @change="tabChange" v-if="showTab">
       <tab-pane :name="1" title="茶饮订单"></tab-pane>
       <tab-pane :name="2" title="周边订单"></tab-pane>
     </tabs>
     <scroll-view scroll-y class="order-list" :lower-threshold="100" @scrolltolower="touchBottom">
       <div class="list-item slide-col slideUp" v-for="item in list" :key="id">
         <item :record="item" v-if="type === 1"/>
-        <item2 :record="item" v-else-if="type === 2"/>
+        <item2 :record="item" v-else-if="type === 2" @post="openPost"/>
       </div>
       <div class="empty-hint" v-if="list.length === 0">
         <p>Irrelevant content</p>
@@ -24,6 +24,8 @@
     </scroll-view>
   </div>
   <c-footer current="list" />
+
+  <c-post ref="post" />
 </div>
 </template>
 
@@ -34,6 +36,7 @@ import tabs from '@/components/Tabs/tabs'
 import tabPane from '@/components/Tabs/tabPane'
 import item from './modules/item'
 import item2 from './modules/item2'
+import cPost from '../detail/nearby/modules/post'
 import { getAction } from '@/utils/api'
 
 export default {
@@ -43,17 +46,17 @@ export default {
     tabs,
     tabPane,
     item,
-    item2
+    item2,
+    cPost
   },
   data () {
     return {
+      showTab: true,
       tabs: [
         { title: '茶饮订单', key: '1' },
         { title: '周边订单', key: '2' }
       ],
-      currentKey: 'tee',
-      index: 0,
-      tab: 'tee',
+      current: 0,
       type: 1,
       page: 1,
       total: 0,
@@ -84,11 +87,18 @@ export default {
           this.total = res.count
         }
       })
+    },
+    openPost (id) {
+      this.$refs.post.show(id)
     }
   },
 
   onLoad () {
     Object.assign(this.$data, this.$options.data())
+    this.showTab = false
+    this.$nextTick(() => {
+      this.showTab = true
+    })
     this.getData()
   }
 }

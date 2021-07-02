@@ -171,7 +171,7 @@ body { background: linear-gradient(0deg, #FFFFFF 0%, #EADED0 100%); background-a
 .steps li:last-child { margin-right: 0; }
 .steps li:last-child:after { width: 0; }
 .steps li p { font-size: 20px; line-height: 30px; color: #C9C9C9; margin-bottom: 10px; }
-.steps li img { width: 44px; height: 40px; }
+.steps li img { width: auto; height: 40px; }
 .steps li .img2 { display: none; }
 .steps li.active p { color: #F0916C; }
 .steps li.active .img1 { display: none; }

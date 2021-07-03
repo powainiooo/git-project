@@ -4,6 +4,10 @@
     <banner />
     <!-- 商品信息 -->
     <infos />
+    <!-- 价格信息 -->
+    <view class="Detail-section">
+      <price-item />
+    </view>
   </view>
 </template>
 
@@ -12,12 +16,14 @@ import Taro from '@tarojs/taro'
 import './index.styl'
 import banner from './modules/banner'
 import infos from './modules/infos'
+import priceItem from './modules/prices'
 
 export default {
   name: 'Detail',
   components: {
     banner,
-    infos
+    infos,
+    priceItem
   },
   data () {
     return {

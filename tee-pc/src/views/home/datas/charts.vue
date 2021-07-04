@@ -57,7 +57,7 @@ export default {
           const xData = []
           for (const i of res.data) {
             income1.push(i.income1)
-            income2.push(i.income2)
+            income2.push(i.goods_nums)
             xData.push(i.hour)
           }
           this.drawChart1(xData, income1)

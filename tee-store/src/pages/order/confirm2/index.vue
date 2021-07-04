@@ -1,6 +1,6 @@
 <style scoped>
 .order-confirm { padding-bottom: 0; }
-.order-scroll { height: calc(100vh - 224px); }
+.order-scroll { height: calc(100vh - 224px); border-radius: 70px 70px 0 0; overflow-x: hidden; position: relative; z-index: 5; }
 .order-scroll .frame { padding-bottom: 170px; }
 </style>
 
@@ -277,6 +277,9 @@ export default {
           this.scores = res.data.score_list
           this.coupons = res.data.coupon_list
           this.formData.coupon_id = res.data.counpon_id
+          if (this.formData.score === '' && res.data.score_list.length > 0) {
+            this.formData.score = res.data.score_list[0]
+          }
           store.commit('SET_COUPON', res.data.coupon_list)
         }
       })
@@ -365,7 +368,7 @@ export default {
         if (res.code === 0) {
           const orderNo = res.data.order_no
           const orderId = res.data.id
-          payment(orderNo, orderId, 'nearby')
+          payment(orderNo, orderId, 'nearby', params.express_type === 1 ? 'B' : 'C')
         }
       })
     },

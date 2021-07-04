@@ -170,10 +170,10 @@
       <div class="qrcode" v-if="status === 'view'">
         <h3 class="f18 tc mt50">程序码</h3>
         <div class="img">
-          <img src="@/assets/img/img2.png" width="68" />
+          <img :src="imgSrc + qrcodeImg" width="68" />
         </div>
         <div class="tc">
-          <Button size="small" class="bg-main">保存程序码</Button>
+          <Button size="small" class="bg-main" @click="downloadImg(imgSrc + qrcodeImg)">保存程序码</Button>
         </div>
       </div>
     </div>
@@ -190,6 +190,8 @@ import uploadImg from './uploadImg'
 import cityData from '@/utils/cityData.json'
 import { getAction, postAction } from '@/utils'
 import addrPicker from './addrPicker'
+import Vue from 'vue'
+import { ACCESS_TOKEN } from '@/config'
 
 export default {
   name: 'app',
@@ -236,6 +238,9 @@ export default {
       } else {
         return '编辑账号信息'
       }
+    },
+    imgSrc () {
+      return this.$store.state.imgSrc
     }
   },
   data () {
@@ -266,6 +271,7 @@ export default {
         printer_code: '',
         printer_sign: ''
       },
+      qrcodeImg: '',
       ruleValidate: {
         idno: [
           { required: true, trigger: 'blur', validator: this.idsValidator }
@@ -316,6 +322,7 @@ export default {
         printer_code: this.globalData.printer.printer_code,
         printer_sign: this.globalData.printer.printer_sign
       }
+      this.qrcodeImg = this.globalData.shop.qrcode
       this.cities = [this.globalData.shop.province, this.globalData.shop.city]
       this.times = [this.globalData.shop.word_time_start, this.globalData.shop.word_time_end]
       this.getBankList()
@@ -399,6 +406,9 @@ export default {
       this.formData.lat = data.location.lat
       this.formData.lng = data.location.lng
       this.$refs.address.focus()
+    },
+    downloadImg (src) {
+      window.open(`${window.baseUrl}/shopapi/shop/download/qrcode?api_token=${Vue.ls.get(ACCESS_TOKEN)}`)
     }
   }
 }

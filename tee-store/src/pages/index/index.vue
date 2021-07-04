@@ -206,11 +206,26 @@ export default {
     openScan () {
       mpvue.scanCode({
         success: res => {
-          const keys = ['score', 'coupon', 'gift']
-          mpvue.navigateTo({
-            url: `/pages/scan/main?key=${keys[this.current]}&code=${res.result}`
-          })
+          console.log('scan res', res)
+          if (res.path.startsWith('pages/index/main?scene')) {
+            const s = res.path.split('scene')
+            this.toQrresult(s[1].substr(1, s[1].length - 1))
+          }
         }
+      })
+    },
+    toQrresult (scene) {
+      const keys = {
+        'A': 'score',
+        'B': 'coupon',
+        'C': 'gift'
+      }
+      const key = scene.substr(0, 1)
+      const code = scene.substr(1, scene.length - 1)
+      console.log('key', keys[key], 'code', code)
+
+      mpvue.redirectTo({
+        url: `/pages/scan/main?key=${keys[key]}&code=${code}`
       })
     },
     recordLoad (e) {
@@ -228,6 +243,12 @@ export default {
     Object.assign(this.$data, this.$options.data())
     this.key = options.key || 'score'
     this.current = this.hash[this.key]
+    // options.scene = 'Cf9cd723468db2206e3dc22b6b692'
+    if (options.scene) {
+      const scene = decodeURIComponent(options.scene)
+      console.log('scene', scene)
+      this.toQrresult(scene)
+    }
   }
 }
 </script>

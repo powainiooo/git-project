@@ -1,6 +1,6 @@
 <style scoped>
 .c-store-item { position: relative; }
-.c-store-item { width: 700px; height: 267px; background: #F9F9F9; box-shadow: 0px 3px 20px 0px rgba(0, 0, 0, 0.08); border-radius: 35px; overflow: hidden; position: relative; }
+.c-store-item { width: 100%; height: 267px; background: #F9F9F9; box-shadow: 0px 3px 20px 0px rgba(0, 0, 0, 0.08); border-radius: 35px; overflow: hidden; position: relative; }
 .c-store-item .line1 { height: 80px; background-color: #EDECEB; }
 .c-store-item .line1 .l { margin-left: 35px; }
 .c-store-item .line1 .logo { width: 175px; }

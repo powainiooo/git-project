@@ -14,6 +14,7 @@ const store = new Vuex.Store({
     isLogin: false,
     sysInfo: {},
     storeInfo: {},
+    smAuth: {},
     storeList: [],
     selectedAddr: {},
     counponList: [],
@@ -59,6 +60,9 @@ const store = new Vuex.Store({
     },
     SET_ADDR (state, data) {
       state.selectedAddr = data
+    },
+    SET_SMAUTH (state, data) {
+      state.smAuth = data
     }
   }
 })

@@ -154,20 +154,20 @@
               <div class="specs-box-col1" v-for="(specs, i) in specsList" :key="i">
                 <div class="specs-name">
                   <a href="javascript:;" class="btn-close" @click="delSpecs(i)" v-if="i > 0"><img src="@/assets/img/close.png" /></a>
-                  <Input placeholder="填写规格分类名称" maxlength="8" show-word-limit class="min-txt" v-model="specs.attr_name" />
+                  <Input placeholder="填写规格分类名称" maxlength="8" show-word-limit class="min-txt" v-model="specs.attr_name" :disabled="isModify" />
                 </div>
                 <ul class="specs-list">
                   <li v-for="(child, j) in specs.children" :key="j">
-                    <a href="javascript:;" class="btn-close" @click="delSpecsItem(i, j)" v-if="j > 0"><img src="@/assets/img/close.png" /></a>
-                    <Input placeholder="填写规格选项" maxlength="8" show-word-limit class="min-txt mr15 ml15" v-model="child.attr_name" />
-                    <Input placeholder="0" class="min-txt" style="width: 60px;" v-model="child.price" />
+                    <a href="javascript:;" class="btn-close" @click="delSpecsItem(i, j)" v-if="j > 0 && !isModify"><img src="@/assets/img/close.png" /></a>
+                    <Input placeholder="填写规格选项" maxlength="8" show-word-limit class="min-txt mr15 ml15" v-model="child.attr_name" :disabled="isModify" />
+                    <Input placeholder="0" class="min-txt" style="width: 60px;" v-model="child.price" :disabled="isModify" />
                     <span class="unit">元</span>
                   </li>
                 </ul>
-                <div class="tc mb15"><Button size="small" class="btn1" @click="newSpecsItem(i)">添加规格选项</Button></div>
+                <div class="tc mb15"><Button size="small" class="btn1" @click="newSpecsItem(i)" :disabled="isModify">添加规格选项</Button></div>
               </div>
               <div class="specs-box-col2">
-                <Button size="small" class="btn1" @click="newSpecs">添加规格分类</Button>
+                <Button size="small" class="btn1" @click="newSpecs" :disabled="isModify">添加规格分类</Button>
               </div>
             </div>
           </div>

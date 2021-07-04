@@ -65,18 +65,18 @@
           </div>
         </td>
         <td>
-          <div v-if="item.status === 1">
+          <div v-if="item.status === 2">
             <p v-for="(item, index) in item.skus" :key="index">{{item.store_nums > 0 ? '在售' : '售罄'}}</p>
           </div>
-          <div v-if="item.status === 2"><p>下架</p></div>
+          <div v-if="item.status === 1"><p>下架</p></div>
         </td>
         <td class="opera">
           <div class="center">
-            <Poptip title="确认上架？" confirm @on-ok="changeStatus(item.id, 1)">
-              <Button size="small" v-if="item.status === 2">上架</Button>
+            <Poptip title="确认下架？" confirm @on-ok="changeStatus(item.id, 1)">
+              <Button size="small" v-if="item.status === 2">下架</Button>
             </Poptip>
             <Poptip title="确认上架？" confirm @on-ok="changeStatus(item.id, 2)">
-              <Button size="small" v-if="item.status === 1">下架</Button>
+              <Button size="small" v-if="item.status === 1">上架</Button>
             </Poptip>
             <Button size="small" class="ml10" @click="handleEdit(item.nearby_id)">编辑</Button>
             <Poptip title="确认删除？" confirm @on-ok="handleDel(item.id)">

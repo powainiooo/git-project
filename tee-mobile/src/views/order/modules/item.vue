@@ -48,7 +48,7 @@
       <button class="btn btn-style1" @click.stop="handleDone">完成订单</button>
       </template>
       <div class="time" v-if="record.status === 3">
-        <timer ref="timer" size="small" />
+        <timer ref="timer" size="small" @done="$emit('refresh')" />
       </div>
     </div>
 

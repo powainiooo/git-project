@@ -9,6 +9,7 @@
 .scan-container .line1 .title { font-size: 30px; text-align: center; margin-bottom: 10px; }
 .scan-container .line1 .title span { font-size: 48px; font-family: DinL; }
 .scan-container .line1 p { width: 400px; margin: 0 auto; font-size: 20px; color: #C9C9C9; line-height: 26px; }
+.store-list { margin: 0 25px; }
 </style>
 
 <template>
@@ -41,13 +42,24 @@
       <p>需任意消费后可使用，点击立即加入购物车。有效期 至 {{gift.expired}}</p>
     </div>
 
-    <div>
+    <div v-if="key === 'coupon' || key === 'score'">
       <div class="acenter mt50 ml50">
+        <img src="/static/images/index/icon1.png" mode="widthFix" class="w28 mr15" />
+        <span class="f30">兑换好礼</span>
+      </div>
+      <div>
+        <goods-list :list="gList" />
+      </div>
+    </div>
+    <div v-if="key === 'gift'">
+      <div class="acenter mt50 ml50 mb50">
         <img src="/static/images/index/icon1.png" mode="widthFix" class="w28 mr15" />
         <span class="f30">附近门店</span>
       </div>
-      <div>
-        <goods-list :list="goodsList" />
+      <div class="store-list">
+        <div class="mb40 slideUp" v-for="i in list" :key="index">
+          <item :key="id" :record="i" @tap="toDetail" />
+        </div>
       </div>
     </div>
 
@@ -63,12 +75,20 @@
 <script>
 import cHeader from '@/components/header'
 import goodsList from '@/components/goodsList'
+import item from '../stores/modules/item'
 import { getAction, postAction } from '@/utils/api'
+import config from '@/config'
+import QQMapWX from '@/utils/qqmap-wx-jssdk.min.js'
+const { mapKey } = config
+const qMap = new QQMapWX({
+  key: mapKey
+})
 
 export default {
   components: {
     cHeader,
-    goodsList
+    goodsList,
+    item
   },
   data () {
     return {
@@ -80,10 +100,14 @@ export default {
         coupon: '/userapi/user/coupon/fetch',
         gift: '/userapi/user/prize/fetch'
       },
-      goodsList: [],
+      gList: [],
+      list: [],
       score: {},
       coupon: {},
       gift: {},
+      page: 1,
+      city: '',
+      total: 0,
       isAjax: false
     }
   },
@@ -95,7 +119,6 @@ export default {
       }).then(res => {
         if (res.code === 0) {
           this[this.key] = res.data
-          console.log('this.record', this.record)
         }
       })
     },
@@ -107,7 +130,7 @@ export default {
         limit: 20
       }).then(res => {
         if (res.code === 0) {
-          this.goodsList = res.data
+          this.gList = res.data
         }
       })
     },
@@ -129,6 +152,47 @@ export default {
           }, 1000)
         }
       })
+    },
+    initCity () {
+      const _this = this
+      mpvue.getLocation({
+        success (res) {
+          console.log('getLocation', res)
+          qMap.reverseGeocoder({
+            location: {
+              latitude: res.latitude,
+              longitude: res.longitude
+            },
+            success (res2) {
+              console.log('reverseGeocoder', res2)
+              _this.city = res2.result.ad_info.city.replace('市', '')
+              _this.latitude = res.latitude
+              _this.longitude = res.longitude
+              _this.getStoreData()
+            }
+          })
+        }
+      })
+    },
+    getStoreData () {
+      let url
+      const params = {
+        lat: this.latitude,
+        lng: this.longitude,
+        // lat: 22.73081065,
+        // lng: 114.38086700,
+        page: this.page,
+        limit: 20
+      }
+      url = '/userapi/shop/index/data'
+      params.city = this.city
+      // params.city = '深圳'
+      getAction(url, params).then(res => {
+        if (res.code === 0) {
+          this.list = this.list.concat(res.data)
+          this.total = res.count
+        }
+      })
     }
   },
 
@@ -137,7 +201,11 @@ export default {
     this.key = options.key || 'gift'
     this.code = options.code || 'aaf94de5a24f650afc5c9fff83'
     this.getData()
-    this.getGoodsList()
+    if (this.key === 'coupon' || this.key === 'score') {
+      this.getGoodsList()
+    } else {
+      this.initCity()
+    }
   }
 }
 </script>

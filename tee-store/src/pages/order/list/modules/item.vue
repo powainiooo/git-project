@@ -47,7 +47,7 @@
       </ul>
       <div class="r" v-if="record.status === 3">
         <p>制作时间</p>
-        <div><counter :timer="record.remain_make_time" /></div>
+        <div><counter :timer="record.remain_make_time" @done="refresh" /></div>
       </div>
       <div class="r" v-if="record.status === 4">
         <p>取餐码</p>
@@ -91,6 +91,12 @@ export default {
       mpvue.navigateTo({
         url: `/pages/order/detail/tee/main?id=${this.record.id}`
       })
+    },
+    refresh () {
+      console.log('倒计时完成，自动刷新')
+      setTimeout(() => {
+        this.$emit('refresh', this.record.id)
+      }, 1000)
     }
   }
 }

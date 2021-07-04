@@ -30,7 +30,10 @@ export default {
     const t = setInterval(() => {
       if (this.times === 0) {
         clearInterval(t)
-        this.$emit('done')
+        console.log('timer done')
+        setTimeout(() => {
+          this.$emit('done')
+        }, 1000)
       } else {
         this.times -= 1
       }

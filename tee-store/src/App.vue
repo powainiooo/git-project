@@ -2,6 +2,8 @@
 import { getTokenData } from '@/utils/api'
 import config from '@/config'
 import store from './store'
+import { getAction } from './utils/api'
+
 const { imgSrc } = config
 
 export default {
@@ -22,6 +24,7 @@ export default {
     })
     getTokenData()
     this.loadFont()
+    this.getConfigData()
     mpvue.imgSrc = imgSrc
     mpvue.toPage = function (url) {
       mpvue.navigateTo({
@@ -58,6 +61,13 @@ export default {
         },
         fail (err) {
           console.log('DIN-Light load fail', err)
+        }
+      })
+    },
+    getConfigData () {
+      getAction('/userapi/config').then(res => {
+        if (res.code === 0) {
+          store.commit('SET_SMAUTH', res.data.weixin_message)
         }
       })
     }

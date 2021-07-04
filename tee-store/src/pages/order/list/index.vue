@@ -14,7 +14,7 @@
     </tabs>
     <scroll-view scroll-y class="order-list" :lower-threshold="100" @scrolltolower="touchBottom">
       <div class="list-item slide-col slideUp" v-for="item in list" :key="id">
-        <item :record="item" v-if="type === 1"/>
+        <item :record="item" v-if="type === 1" @refresh="refresh"/>
         <item2 :record="item" v-else-if="type === 2" @post="openPost"/>
       </div>
       <div class="empty-hint" v-if="list.length === 0">
@@ -30,6 +30,7 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import cHeader from '@/components/header'
 import cFooter from '@/components/footer'
 import tabs from '@/components/Tabs/tabs'
@@ -85,6 +86,22 @@ export default {
         if (res.code === 0) {
           this.list = this.list.concat(res.data)
           this.total = res.count
+        }
+      })
+    },
+    refresh (id) {
+      getAction('/userapi/order/index/data', {
+        type: this.type,
+        page: this.page,
+        limit: 20
+      }).then(res => {
+        if (res.code === 0) {
+          res.data.forEach((item, index) => {
+            if (item.id === id) {
+              console.log('item', item)
+              Vue.set(this.list, index, item)
+            }
+          })
         }
       })
     },

@@ -166,8 +166,8 @@ export default {
           this.scores = res.data.score_list
           this.coupons = res.data.coupon_list
           this.formData.couponId = res.data.counpon_id
-          if (this.formData.score === '') {
-            this.formData.score = res.data.score_use_top
+          if (this.formData.score === '' && res.data.score_list.length > 0) {
+            this.formData.score = res.data.score_list[0]
           }
           console.log('this.formData.score', this.formData.score)
           store.commit('SET_COUPON', res.data.coupon_list)
@@ -215,7 +215,7 @@ export default {
         if (res.code === 0) {
           const orderNo = res.data.order_no
           const orderId = res.data.id
-          payment(orderNo, orderId, 'tee')
+          payment(orderNo, orderId, 'tee', 'A')
         }
       })
     },

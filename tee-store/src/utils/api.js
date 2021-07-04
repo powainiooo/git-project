@@ -94,8 +94,38 @@ export const getTokenData = () => {
   })
 }
 
+export const sendSM = (orderId, from, key) => {
+  console.log('发起订阅消息', store.state.smAuth)
+  const sm = store.state.smAuth
+  const keys = {
+    'A': 'chayin',
+    'B': 'zhoubian_youji',
+    'C': 'zhoubian_ziti'
+  }
+  console.log('tmplIds', sm[keys[key]])
+  wx.requestSubscribeMessage({
+    tmplIds: sm[keys[key]],
+    success (res) {
+      console.log('订阅消息成功')
+      console.log(res)
+      mpvue.reLaunch({
+        url: `/pages/result/main?result=suc&id=${orderId}&from=${from}`
+      })
+      console.log('--------------------')
+    },
+    fail (err) {
+      console.log('订阅消息失败')
+      console.log(err)
+      mpvue.reLaunch({
+        url: `/pages/result/main?result=suc&id=${orderId}&from=${from}`
+      })
+      console.log('--------------------')
+    }
+  })
+}
+
 // 支付
-export const payment = (orderNo, orderId, from) => {
+export const payment = (orderNo, orderId, from, key) => {
   postAction('/userapi/goods/order/create/pay', {
     order_no: orderNo
   }).then(res => {
@@ -110,9 +140,7 @@ export const payment = (orderNo, orderId, from) => {
         'success': res => {
           // this.getMessageAuth()
           console.log('pay success', res)
-          mpvue.reLaunch({
-            url: `/pages/result/main?result=suc&id=${orderId}&from=${from}`
-          })
+          sendSM(orderId, from, key)
           mpvue.hideLoading()
         },
         'fail': err => {

@@ -1,8 +1,14 @@
 @import '../../static/css/mixin.styl'
 
 .Detail
+  &-header
+    size(100%, 44px); fxTL(0, 0); background-color #FFFFFF; z-index 100;
+    .tab-frame
+      width 50%; margin 0 auto;
+    .btns
+      abTR(11px, 12px);
   &-banner
-    size(100vw, 100vw); position relative;
+    size(100vw, 100vw); position relative; margin-top 44px;
     swiper
       size(100%, 100%);
       .img
@@ -20,3 +26,41 @@
       height 33px; background-color #FAFBFA; between(); padding 0 12px; font-size 12px; color #999999; margin 0 -12px;
       text
         color #FE322B;
+  &-price-item
+    overflow hidden
+    &:last-child:after
+      height 0
+    .title
+      flex 1 0 0; ellipsis(); margin 16px 0;
+    .ul
+      height 0; transition height .2s ease-out
+  &-stores
+    .logo
+      size(48px, 48px); margin-right 8px;
+    .c-btn
+      width 72px;
+  &-questions
+    .ques-item
+      padding-bottom 8px; margin-bottom 8px; display flex;
+      &>.l
+        width 70px; color #999999; margin-right 24px;
+      &>.r
+        flex 1 0 0; ellipsis()
+      &:last-child:after
+        height 0
+  &-details
+    margin 0 -12px;
+    image
+      width 100%; display block;
+  &-footer
+    between(); z-index 100;
+    .btns
+      size(112px, 40px)
+    .btn
+      text-align center; font-size 10px; height 40px;
+      image
+        size(24px, 24px); display block;
+      view
+        line-height 12px;
+    .c-btn
+      width 220px; margin-right 12px;

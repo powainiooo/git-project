@@ -7,7 +7,7 @@
 <template>
 <view class="c-guess-like">
   <view class="center c-guess-like-title">
-    <image src="@/img/like.png" mode="widthFix" class="w20 mr4" />您可能还喜欢
+    <slot name="title"><image src="@/img/like.png" mode="widthFix" class="w20 mr4" />您可能还喜欢</slot>
   </view>
   <view class="goods-list">
     <view class="goods-item" v-for="i in 6" :key="i">

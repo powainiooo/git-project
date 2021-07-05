@@ -2,15 +2,18 @@
 .c-tabs
   width 100%; height 40px; background-color #FFFFFF; display flex;
   &-item
-    flex 1; display flex; justify-content center; align-items center; height 100%;
+    flex 1; display flex; justify-content center; align-items center; height 100%; position relative;
     .filter
       width 10px; height 16px; margin-left 2px;
   &-active
     color #FE322B;
+.c-tabs-border
+  .c-tabs-active:after
+    content ''; width 24px; height 2px; background-color #FE322B; position absolute; bottom 0; left 50%; transform translateX(-50%);
 </style>
 
 <template>
-<view class="c-tabs">
+<view class="c-tabs" :class="{'c-tabs-border': border}">
   <view class="c-tabs-item"
         :class="{'c-tabs-active': current === tab.key}"
         v-for="(tab, index) in tabs"
@@ -34,12 +37,15 @@ export default {
     list: {
 	    type: Array,
       default: () => []
-    }
+    },
+    border: {
+      type: Boolean,
+      default: false
+    },
   },
   watch: {
 	  list: {
 	    handler (val) {
-        console.log('list', val)
         const tabs = []
         for (const item of val) {
           const tab = { ...item }

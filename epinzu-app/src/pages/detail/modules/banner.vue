@@ -3,7 +3,7 @@
 </style>
 
 <template>
-<view class="Detail-banner">
+<view class="Detail-banner" id="goods">
   <swiper @Change="onChange">
     <swiper-item>
       <image src="@/img/default.png" mode="aspectFill" class="img"  />

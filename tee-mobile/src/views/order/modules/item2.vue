@@ -36,7 +36,7 @@
           <div class="nums2">×{{item.buy_nums}}</div>
         </div>
       </div>
-      <div class="line1">
+      <div class="line1" v-if="record.user_remark">
         <h3 class="c-main">备注</h3>
         <p>{{record.user_remark || '--'}}</p>
       </div>
@@ -69,7 +69,7 @@ export default {
         }).then(res => {
           if (res.code === 0) {
             this.$Toast.success(res.msg)
-            this.$emit('refresh')
+            this.$emit('refresh', this.record.id)
           }
         })
       })
@@ -83,7 +83,7 @@ export default {
         }).then(res => {
           if (res.code === 0) {
             this.$Toast.success(res.msg)
-            this.$emit('refresh')
+            this.$emit('refresh', this.record.id)
           }
         })
       })

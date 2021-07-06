@@ -91,7 +91,7 @@
   <div class="ml50 mt10" v-if="list.length > 0">
     <Page :current="page" :total="total" simple class-name="tee-page" @on-change="pageChange" />
   </div>
-  <div class="ml50 mt100" v-if="list.length === 0">
+  <div class="ml50 mt100" v-if="list.length === 0 && !isAjax">
     <img src="@/assets/img/none.png" width="265" />
   </div>
   <modal-list ref="modalList" @detail="openModal" />
@@ -160,6 +160,7 @@ export default {
       })
     },
     getListData () {
+      this.isAjax = true
       this.$refs.modalList.handleCancel()
       getAction('/shopapi/shop/nearby/index/data', {
         word: this.word,
@@ -168,6 +169,7 @@ export default {
         page: this.page,
         limit: this.limit
       }).then(res => {
+        this.isAjax = false
         if (res.code === 0) {
           this.list = res.data
           this.total = res.count

@@ -25,6 +25,9 @@
       </div>
     </div>
     <div class="status-frame">
+      <div class="mt80" v-if="order.express_type === 0">
+        <c-codes :code="order.fetch_code" />
+      </div>
       <div class="mt20" v-if="order.express_type === 1 && order.status === 4">
         <c-codes :code="order.fetch_code" />
       </div>
@@ -66,7 +69,7 @@
           <div class="nums2">×{{item.buy_nums}}</div>
         </div>
       </div>
-      <div class="borderB mb20 hr" style="margin-top: -20rpx; height: 1px;"></div>
+      <div class="borderB mb20 hr" style="margin-top: -20rpx; height: 1px;" v-if="order.express_type === 1"></div>
       <div class="between" v-if="order.express_type === 1">
         <div class="f24 ml10">邮费</div>
         <div class="price mr10"><span>{{order.post_fee}}</span>元</div>
@@ -100,7 +103,11 @@ export default {
   },
   computed: {
     addrStr () {
-      return `${this.address.province} / ${this.address.city} / ${this.address.area}`
+      if (this.address === null) {
+        return ''
+      } else {
+        return `${this.address.province} / ${this.address.city} / ${this.address.area}`
+      }
     }
   },
   data () {

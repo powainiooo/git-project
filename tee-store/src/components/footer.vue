@@ -30,7 +30,7 @@
       <img src="/static/images/footer/icon2.png" mode="widthFix" class="img1" />
       <img src="/static/images/footer/icon2-active.png" mode="widthFix" class="img2" />
     </div>
-    <p>周边商城</p>
+    <p>积分兑换</p>
   </a>
   <a href="/pages/order/list/main" open-type="redirectTo" :class="{'active': current === 'list'}">
     <div class="icon icon1">

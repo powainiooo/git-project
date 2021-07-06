@@ -19,7 +19,7 @@
 .c-goods-grid .goods-item .price2 { font-size: 20px; color: #F0916C; font-family: DinL; }
 .c-goods-grid .goods-item .price2 span { font-size: 54px; line-height: 65px; }
 .c-goods-grid .goods-item .arrow { width: 46px; height: 46px; border-radius: 50%; background-color: #F0916C; box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.15); }
-.c-goods-grid .goods-item .arrow img { width: 12px; }
+.c-goods-grid .goods-item .arrow img { width: 24px; }
 </style>
 
 <template>
@@ -37,7 +37,7 @@
           <img src="/static/images/jfh.png" mode="widthFix" class="icon" />
           <div class="price2"><span>{{item.sell_price}}</span>元</div>
         </div>
-        <div class="arrow center"><img src="/static/images/arrow1.png" mode="widthFix" /></div>
+        <div class="arrow center"><img src="/static/images/add.png" mode="widthFix" /></div>
       </div>
     </div>
   </div>

@@ -32,7 +32,7 @@
         <p class="nums">{{item.buy_nums}}</p>
       </li>
     </ul>
-    <div class="empty" v-else style="margin-top: 200px;">
+    <div class="empty" v-if="list1.length === 0 && !isAjax" style="margin-top: 200px;">
       <img src="@/assets/img/empty.png" width="68" />
       <p>Payment failure</p>
       <div>暂无数据</div>
@@ -54,7 +54,8 @@ export default {
   },
   data () {
     return {
-      list: []
+      list: [],
+      isAjax: false
     }
   },
   mounted () {
@@ -62,12 +63,14 @@ export default {
   },
   methods: {
     getData () {
+      this.isAjax = true
       const date = formatDate(new Date(), 'yyyy-MM-dd')
       getAction('/shopapi/count/sell/rank', {
         date,
         type: 1,
         limit: 10
       }).then(res => {
+        this.isAjax = false
         if (res.code === 0) {
           this.list = res.data
         }

@@ -69,7 +69,7 @@
             </tbody>
           </table>
         </div>
-        <div class="empty" v-else style="margin-top: 200px;">
+        <div class="empty" v-if="list1.length === 0 && !isAjax" style="margin-top: 200px;">
           <img src="@/assets/img/empty.png" width="68" />
           <p>Payment failure</p>
           <div>暂无数据</div>
@@ -137,7 +137,7 @@
             </tbody>
           </table>
         </div>
-        <div class="empty" v-else style="margin-top: 200px;">
+        <div class="empty" v-if="list1.length === 0 && !isAjax" style="margin-top: 200px;">
           <img src="@/assets/img/empty.png" width="68" />
           <p>Payment failure</p>
           <div>暂无数据</div>
@@ -157,7 +157,8 @@ export default {
     return {
       type: '1',
       list1: [],
-      list2: []
+      list2: [],
+      isAjax: false
     }
   },
   mounted () {
@@ -170,6 +171,7 @@ export default {
       this.getData()
     },
     getData () {
+      this.isAjax = true
       const date = formatDate(new Date(), 'yyyy-MM-dd')
       getAction('/shopapi/order/index/data', {
         date,
@@ -179,6 +181,7 @@ export default {
         page: 1,
         limit: 10
       }).then(res => {
+        this.isAjax = false
         if (res.code === 0) {
           console.log('this.type', this.type, this[`list${this.type}`])
           this[`list${this.type}`] = res.data

@@ -10,7 +10,7 @@
 
     <tabs @change="tabChange" v-if="showTab">
       <tab-pane :name="1" title="茶饮订单"></tab-pane>
-      <tab-pane :name="2" title="周边订单"></tab-pane>
+      <tab-pane :name="2" title="积分兑换订单"></tab-pane>
     </tabs>
     <scroll-view scroll-y class="order-list" :lower-threshold="100" @scrolltolower="touchBottom">
       <div class="list-item slide-col slideUp" v-for="item in list" :key="id">

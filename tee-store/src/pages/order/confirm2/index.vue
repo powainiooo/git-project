@@ -1,6 +1,7 @@
 <style scoped>
 .order-confirm { padding-bottom: 0; }
-.order-scroll { height: calc(100vh - 224px); border-radius: 70px 70px 0 0; overflow-x: hidden; position: relative; z-index: 5; }
+.order-scroll { height: calc(100vh - 224px); overflow-x: hidden; position: relative; z-index: 5; }
+.radius { border-radius: 70px 70px 0 0; }
 .order-scroll .frame { padding-bottom: 170px; }
 </style>
 
@@ -17,7 +18,7 @@
             @click="tabChange(tab.key, index)">{{tab.title}}</li>
       </ul>
     </div>
-    <scroll-view scroll-y class="order-scroll">
+    <scroll-view scroll-y class="order-scroll" :class="{'radius': storeCount === 0}">
       <div class="c-tabs-frame">
         <div class="c-tabs-content"
              :style="{

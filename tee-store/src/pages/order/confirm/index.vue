@@ -125,7 +125,8 @@ export default {
       shopData: {},
       coupons: [],
       scores: [],
-      record: {}
+      record: {},
+      paying: false
     }
   },
 
@@ -204,6 +205,7 @@ export default {
       mpvue.showLoading({
         title: '支付中'
       })
+      this.paying = true
       postAction('/userapi/goods/order/create', {
         shop_id: this.storeInfo.shop_id,
         coupon_id: this.formData.couponId,
@@ -245,7 +247,9 @@ export default {
   onShow () {
     console.log('onshow', store.state)
     this.formData.couponId = store.state.couponId
-    this.getData()
+    if (!this.paying) {
+      this.getData()
+    }
   },
   onLoad () {
     Object.assign(this.$data, this.$options.data())

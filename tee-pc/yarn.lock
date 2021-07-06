@@ -8539,10 +8539,10 @@ validate-npm-package-license@^3.0.1:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
 
-vant@^2.12.22:
-  version "2.12.22"
-  resolved "https://registry.nlark.com/vant/download/vant-2.12.22.tgz?cache=0&sync_timestamp=1624795709037&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fvant%2Fdownload%2Fvant-2.12.22.tgz#65b84c8af0f5998f3133df4a364c57261528b50d"
-  integrity sha1-ZbhMivD1mY8xM99KNkxXJhUotQ0=
+vant@^2.12.23:
+  version "2.12.23"
+  resolved "https://registry.nlark.com/vant/download/vant-2.12.23.tgz?cache=0&sync_timestamp=1625537021453&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fvant%2Fdownload%2Fvant-2.12.23.tgz#3b7428268a35137aedb535240556a41ce983b0e8"
+  integrity sha1-O3QoJoo1E3rttTUkBVakHOmDsOg=
   dependencies:
     "@babel/runtime" "7.x"
     "@vant/icons" "^1.5.3"

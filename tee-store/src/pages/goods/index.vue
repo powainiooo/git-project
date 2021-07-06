@@ -29,7 +29,7 @@
         @scrolltolower="scrolltolower"
         scroll-with-animation
         scroll-y>
-        <div class="list">
+        <div class="list" id="list">
           <div class="slideUp" v-for="(i, index) in goodsList" :key="id" :id="i.aid">
             <div class="borderB mt60 mb60" v-if="index > 0 && i.aid !== ''" style="height: 1px;"></div>
             <item :record="i" @detail="openDetail" :cartList="cartsList" :disabled="closeHintVisible" />
@@ -124,7 +124,8 @@ export default {
       cartNum: 0,
       isAjax: false,
       storeInfo: {},
-      prizeData: {}
+      prizeData: {},
+      dis: []
     }
   },
   computed: {
@@ -179,6 +180,9 @@ export default {
           this.cateList = types
           this.goodsList = goods
           console.log('this.goodsList', this.goodsList)
+          setTimeout(() => {
+            this.getTopdis()
+          }, 1000)
         }
       })
     },
@@ -221,9 +225,28 @@ export default {
       this.current = id
       this.scrollKey = `g${id}`
     },
+    getTopdis () {
+      const query = mpvue.createSelectorQuery()
+      query.select('#list').boundingClientRect()
+      for (const i of this.cateList) {
+        query.select(`#g${i.id}`).boundingClientRect()
+      }
+      query.selectViewport()
+      query.exec(res => {
+        console.log(res)
+        const dis = []
+        const top = res[0].top
+        for (let i = 1; i < res.length; i++) {
+          dis.push(res[i].top - top)
+        }
+        this.dis = dis
+      })
+      // 142 253 662 729 967 1301
+    },
     onScroll (e) {
-      const index = parseInt(e.mp.detail.scrollTop / this.iH)
-      this.current = this.goodsList[index].cid
+      const st = e.mp.detail.scrollTop
+      const index = this.dis.findIndex(i => st <= i)
+      this.current = this.cateList[index - 1].id
     },
     scrolltolower () {
       this.current = this.cateList[this.cateList.length - 1].id

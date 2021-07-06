@@ -4,10 +4,7 @@
 
 <template>
 <div class="container ovh">
-  <div class="infos-line">
-    <button class="btn" @click="backIndex">{{currentDate}}</button>
-<!--    <button class="btn-circle" @click="backIndex"><img src="@/assets/img/home.png" class="w28" /></button>-->
-  </div>
+  <infos />
   <div class="container2 container3 ovh order-detail" style="padding-top: 0;">
     <div class="header between">
       <div>
@@ -37,8 +34,8 @@
           <img src="@/assets/img/order/icon3-active.png" mode="aspectFit" class="img2" />
         </li>
       </ul>
-      <div class="mt20 tc" style="width: 400px;" v-if="record.status === 2">
-        <button class="btn btn-style4 mr20" @click.stop="handleMake">开始制作</button>
+      <div class="mt20 auto tc" style="width: 53.333vw;" v-if="record.status === 2">
+        <button class="btn btn-style1" @click.stop="handleMake">开始制作</button>
       </div>
       <div class="mt20 auto tc" style="width: 53.333vw;" v-if="record.status === 3">
         <c-timer ref="timer" />
@@ -73,11 +70,11 @@
         </div>
       </div>
       <div class="borderB mb30 hr" style="margin-top: -20px; height: 1px;"></div>
-      <div class="ml10 mr10">
+      <div class="ml10 mr10" v-if="record.user_remark">
         <div class="f24">备注</div>
         <div class="f20 lh150 c-c9">{{record.user_remark || '--'}}</div>
       </div>
-      <div class="borderB mb10 hr mt30"></div>
+      <div class="borderB mb10 hr mt30" v-if="record.user_remark"></div>
       <div class="price tr mr10"><span>{{record.pay_amount}}</span>元</div>
       <div class="f20 c-c9 mr10 tr">共{{goodsNums}}件</div>
     </div>
@@ -87,12 +84,14 @@
 
 <script type='es6'>
 import cTimer from '@/components/timer'
+import infos from '@/components/infos'
 import { getAction, postAction } from '@/utils'
 
 export default {
   name: 'app',
   components: {
-    cTimer
+    cTimer,
+    infos
   },
   computed: {
     imgSrc () {
@@ -209,7 +208,9 @@ export default {
           this.goods = res.data.goods
           this.goodsNums = res.data.goods_nums
           if (this.record.status === 3) {
-            this.$refs.timer.count(this.record.remain_make_time)
+            this.$nextTick(() => {
+              this.$refs.timer.count(this.record.make_remain_time)
+            })
           }
         }
       })

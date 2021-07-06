@@ -4,10 +4,7 @@
 
 <template>
 <div class="container ovh">
-  <div class="infos-line">
-    <button class="btn">{{shop.shop_name}}</button>
-    <button class="btn-circle" @click="backIndex"><img src="@/assets/img/home.png" class="w28" /></button>
-  </div>
+  <infos />
   <div class="container2 container3 ovh order-detail" style="padding-top: 0;">
     <div class="header between">
       <div>
@@ -31,7 +28,14 @@
     </div>
     <div class="body">
       <div class="c-goods-item mb60" v-for="(item, index) in goods" :key="index">
-        <div class="imgs"><img :src="imgSrc + item.goods_cover" mode="aspectFill" /></div>
+        <div class="imgs">
+          <van-image
+            width="21.333vw"
+            height="21.333vw"
+            fit="cover"
+            :src="imgSrc + item.goods_cover"
+          />
+        </div>
         <div class="infos">
           <h3 class="title">{{item.goods_name}}</h3>
           <div class="intro">{{item.goods_attr.join('、')}}</div>
@@ -40,11 +44,11 @@
         </div>
       </div>
       <div class="borderB mb30 hr" style="margin-top: -20px; height: 1px;"></div>
-      <div class="ml10 mr10">
+      <div class="ml10 mr10" v-if="record.user_remark">
         <div class="f24">备注</div>
         <div class="f20 lh150 c-c9">{{record.user_remark || '--'}}</div>
       </div>
-      <div class="borderB mb10 hr mt30"></div>
+      <div class="borderB mb10 hr mt30" v-if="record.user_remark"></div>
       <div class="price tr mr10"><span>{{record.pay_amount}}</span>元</div>
       <div class="f20 c-c9 mr10 tr">共{{goodsNums}}件</div>
     </div>
@@ -54,11 +58,18 @@
 
 <script type='es6'>
 import { getAction, postAction } from '@/utils'
+import infos from '@/components/infos'
 export default {
   name: 'app',
+  components: {
+    infos
+  },
   computed: {
     imgSrc () {
       return this.$store.state.imgSrc
+    },
+    currentDate () {
+      return this.$store.state.currentDate
     }
   },
   data () {

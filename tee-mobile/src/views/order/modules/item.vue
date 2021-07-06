@@ -48,7 +48,7 @@
       <button class="btn btn-style1" @click.stop="handleDone">完成订单</button>
       </template>
       <div class="time" v-if="record.status === 3">
-        <timer ref="timer" size="small" @done="$emit('refresh')" />
+        <timer ref="timer" size="small" @done="$emit('refresh', record.id)" />
       </div>
     </div>
 
@@ -98,7 +98,7 @@ export default {
         }).then(res => {
           if (res.code === 0) {
             this.$Toast.success(res.msg)
-            this.$emit('refresh')
+            this.$emit('refresh', this.record.id)
           }
         })
       })
@@ -112,7 +112,7 @@ export default {
         }).then(res => {
           if (res.code === 0) {
             this.$Toast.success(res.msg)
-            this.$emit('refresh')
+            this.$emit('refresh', this.record.id)
           }
         })
       })
@@ -126,7 +126,7 @@ export default {
         }).then(res => {
           if (res.code === 0) {
             this.$Toast.success(res.msg)
-            this.$emit('refresh')
+            this.$emit('refresh', this.record.id)
           }
         })
       })
@@ -140,7 +140,7 @@ export default {
         }).then(res => {
           if (res.code === 0) {
             this.$Toast.success(res.msg)
-            this.$emit('refresh')
+            this.$emit('refresh', this.record.id)
           }
         })
       })
@@ -154,7 +154,7 @@ export default {
         }).then(res => {
           if (res.code === 0) {
             this.$Toast.success(res.msg)
-            this.$emit('refresh')
+            this.$emit('refresh', this.record.id)
           }
         })
       })

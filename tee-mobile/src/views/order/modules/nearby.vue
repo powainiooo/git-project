@@ -10,7 +10,7 @@
   @load="onLoad"
   style="background-color: #ffffff; min-height: calc(100vh - 186px);"
 >
-  <item v-for="(item, index) in list" :key="item.id" :record="item" @refresh="handleRefresh(index)" />
+  <item v-for="item in list" :key="item.id" :record="item" @refresh="handleRefresh" />
 </van-list>
 </template>
 
@@ -59,12 +59,16 @@ export default {
         }
       })
     },
-    handleRefresh (index) {
+    handleRefresh (id) {
+      console.log('handleRefresh', id)
       getAction('/shopapi/order/index/data', this.getParams()).then(res => {
         if (res.code === 0) {
-          const id = this.list[index].id
-          const item = this.list.find(i => i.id === id)
-          this.list[index] = item
+          res.data.forEach((item, index) => {
+            if (item.id === id) {
+              console.log('item', item)
+              this.$set(this.list, index, item)
+            }
+          })
         }
       })
     }

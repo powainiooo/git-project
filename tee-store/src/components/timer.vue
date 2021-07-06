@@ -1,7 +1,7 @@
 <style scoped>
 .n-clock{ width: 400px; height: 108px; display: flex; justify-content: space-between;}
 .n-clock .clock-list{ width: 80px; height: 100%; position: relative;}
-.n-clock .clock-list .clock-item{ width: 100%; height: 100%; border: 1px solid #ECECEC; border-radius: 15px; font-size: 100px; line-height: 106px; font-family: DinL; position: absolute; top: 0; left: 0; z-index: 1;}
+.n-clock .clock-list .clock-item{ width: 100%; height: 100%; border: 2px solid #ECECEC; border-radius: 15px; font-size: 100px; line-height: 106px; font-family: DinL; position: absolute; top: 0; left: 0; z-index: 1;}
 .n-clock .clock-mid{ width: 36px; height: 100%; position: relative;}
 .n-clock .clock-mid::before,.n-clock .clock-mid::after{ content: ''; width: 10px; height: 10px; position: absolute; left: 50%; margin-left: -5px; border-radius: 50%; background-color: #362B1D;}
 .n-clock .clock-mid::before{ top: 60px;}

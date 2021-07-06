@@ -10,7 +10,7 @@
       <tab-pane name="tee" title="茶饮订单">
         <tee />
       </tab-pane>
-      <tab-pane name="nearby" title="周边订单">
+      <tab-pane name="nearby" title="积分兑换订单">
         <nearby />
       </tab-pane>
     </tabs>
@@ -33,10 +33,20 @@ export default {
     tee,
     nearby
   },
+  computed: {
+    currentDate () {
+      return this.$store.state.currentDate
+    }
+  },
   data () {
     return {}
   },
   methods: {
+    backIndex () {
+      this.$router.push({
+        name: 'Home'
+      })
+    }
   }
 }
 </script>

@@ -151,7 +151,9 @@ export default {
           setTimeout(() => {
             if (this.current === 0) {
               this.numsMove(this.score)
-              this.$refs.score.shake()
+              if (this.$refs.score) {
+                this.$refs.score.shake()
+              }
             } else if (this.current === 1) {
               this.numsMove(this.coupon)
             } else if (this.current === 2) {
@@ -180,7 +182,9 @@ export default {
       this.current = e.mp.detail.current
       if (this.current === 0) {
         this.numsMove(this.score)
-        this.$refs.score.shake()
+        if (this.$refs.score) {
+          this.$refs.score.shake()
+        }
       } else if (this.current === 1) {
         this.numsMove(this.coupon)
         this.$refs.coupon.shake()
@@ -236,7 +240,9 @@ export default {
     if (this.isLogin) {
       this.getData()
     }
-    this.$refs.goods.hide()
+    if (this.$refs.goods) {
+      this.$refs.goods.hide()
+    }
   },
   onLoad (options) {
     console.log('onLoad index2', options)

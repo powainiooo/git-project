@@ -22,10 +22,13 @@
   &-section
     margin 8px 12px; background-color #FFFFFF; border-radius 4px; padding 0 8px; overflow hidden; position relative;
   &-infos
+    position relative;
     .post
       height 33px; background-color #FAFBFA; between(); padding 0 12px; font-size 12px; color #999999; margin 0 -12px;
       text
         color #FE322B;
+    .coupon
+      size(43px, 20px); center(); background linear-gradient(90deg, #FB7252 0%, #F53C2C 100%); border-radius 10px 0px 0px 10px; abTR(16px, 0); font-size 10px; color #FFFFFF;
   &-price-item
     overflow hidden
     &:last-child:after
@@ -64,3 +67,15 @@
         line-height 12px;
     .c-btn
       width 220px; margin-right 12px;
+  &-buys
+    height 83vh; padding 16px 12px 0 12px;
+    .img
+      size(85px, 85px); border-radius 4px;
+    .cate-item
+      center(); text-align center; max-width 100%; min-width 56px; height 23px; padding 0 10px; background-color #F5F5F5; border-radius 12px; font-size 12px; margin-right 4px; ellipsis(); margin-bottom 8px;
+    .cate-item-disabled
+      color #D5D5D5
+    .cate-item-active
+      background-color #FE322B; color #FFFFFF;
+    .footer-container
+      display block; box-shadow 2px 0px 4px 0px #E5E5E5;

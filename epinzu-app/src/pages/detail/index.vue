@@ -3,7 +3,7 @@
     <!-- 顶部导航 -->
     <view class="Detail-header" id="header">
       <view class="tab-frame">
-        <Tabs :list="tabs" :border="true" @change="tabChange" />
+        <Tabs :value="tabKey" :list="tabs" :border="true" @change="tabChange" />
       </view>
       <view class="btns acenter">
         <button class="btn-cart">
@@ -18,7 +18,7 @@
     <!-- 轮播图 -->
     <banner />
     <!-- 商品信息 -->
-    <infos />
+    <infos @coupon="openCoupons" />
     <!-- 价格信息 -->
     <view class="Detail-section">
       <price-item />
@@ -38,6 +38,10 @@
     <guess-like class="mt24">
       <text slot="title">相似物品</text>
     </guess-like>
+    <!-- 购买弹窗 -->
+    <buys ref="buys" />
+    <!-- 优惠券弹窗 -->
+    <coupons ref="coupons" />
     <!-- 底部操作栏 -->
     <view class="footer-container Detail-footer">
       <view class="between ml12 mr20 btns">
@@ -54,7 +58,7 @@
           <view>收藏</view>
         </button>
       </view>
-      <button class="c-btn">立即下单</button>
+      <button class="c-btn" @tap="openBuys">立即下单</button>
     </view>
   </view>
 </template>
@@ -70,6 +74,8 @@ import rents from './modules/rents'
 import questions from './modules/questions'
 import params from './modules/params'
 import cDetails from './modules/details'
+import buys from './modules/buys'
+import coupons from './modules/coupons'
 import GuessLike from '@/c/common/GuessLike'
 import Tabs from '@/c/common/Tabs'
 
@@ -84,6 +90,8 @@ export default {
     questions,
     params,
     cDetails,
+    buys,
+    coupons,
     GuessLike,
     Tabs
   },
@@ -119,6 +127,12 @@ export default {
         this.dis.params = res[1].top - h
         this.dis.details = res[2].top - h
       })
+    },
+    openBuys () {
+      this.$refs.buys.show()
+    },
+    openCoupons () {
+      this.$refs.coupons.show()
     }
   },
   onShow () {
@@ -126,8 +140,17 @@ export default {
       this.getSectionDis()
     }, 1000)
   },
-  onPageScroll (st) {
-    console.log('onPageScroll', st)
+  onPageScroll (e) {
+    const st = e.scrollTop
+    if (st < this.dis.params) {
+      this.tabKey = 'goods'
+    }
+    if (st >= this.dis.params) {
+      this.tabKey = 'params'
+    }
+    if (st >= this.dis.details) {
+      this.tabKey = 'details'
+    }
   }
 }
 </script>

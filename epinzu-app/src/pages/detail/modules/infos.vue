@@ -21,6 +21,8 @@
     <view>寄回：<text>自费</text></view>
     <view>发货地：<text>广东广州</text></view>
   </view>
+
+  <view class="coupon" @tap="$emit('coupon')">领劵<image src="@/img/ar4.png" mode="widthFix" class="w10" /></view>
 </view>
 </template>
 

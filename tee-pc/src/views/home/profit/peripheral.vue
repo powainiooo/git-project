@@ -41,7 +41,7 @@
         <td><div>{{item.apply_at || '--'}}</div></td>
         <td class="opera">
           <div class="center">
-            <Poptip title="确认提现？" confirm @on-ok="handleWithdraw(item.id)">
+            <Poptip title="确认提现？" confirm @on-ok="handleWithdraw(item.id)" v-if="item.status === 1">
               <Button size="small" class="bg-main">提现申请</Button>
             </Poptip>
           </div>

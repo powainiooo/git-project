@@ -1,12 +1,12 @@
 <style lang="stylus" type="text/stylus">
 .overlay
-  width 100%; height 100vh; position fixed; top 0; left 0; background-color rgba(0, 0, 0, .5); transition opacity .3s ease-out; opacity 0;
+  width 100%; height 100vh; position fixed; top 0; left 0; background-color rgba(0, 0, 0, .4); transition opacity .3s ease-out; opacity 0;
   &-show
     opacity 1
 .c-popup
-  width 100%; height 100vh; position fixed; top 0; left 0; z-index 100;
+  width 100%; height 100vh; position fixed; top 0; left 0; z-index 200;
   &-box
-    width 100%; min-height 100px; max-height 80vh; background-color #FFFFFF; position absolute; left 0; transition transform .3s ease-out
+    width 100%; min-height 100px; max-height 83vh; background-color #FFFFFF; position absolute; left 0; transition transform .3s ease-out
   &-bottom
     bottom 0; transform translateY(100%);
     &.round
@@ -15,6 +15,10 @@
     top 0; transform translateY(-100%);
     &.round
       border-radius 0 0 8px 8px;
+  &-close
+    position absolute; top 16px; right 12px; z-index 50;
+  &-scrolls
+    height 100%;
   &-show
     transform translateY(0)
 </style>
@@ -26,7 +30,14 @@
         @transitionend="onTransitionEnd"
         @tap="close"></view>
   <view class="c-popup-box" :class="boxClass">
-    <slot />
+    <view class="c-popup-close"
+          @tap="close"
+          v-if="closeable">
+      <image src="@/img/close.png" mode="widthFix" class="w20" />
+    </view>
+    <scroll-view :scrollY="true" class="c-popup-scrolls" @touchmove.stop="tm">
+      <slot />
+    </scroll-view>
   </view>
 </view>
 </template>
@@ -46,6 +57,10 @@ export default {
     round: {
 	    type: Boolean,
       default: false
+    },
+    closeable: {
+	    type: Boolean,
+      default: false
     }
   },
   computed: {
@@ -58,14 +73,17 @@ export default {
     }
   },
   watch: {
-	  show (val) {
-	    if (val) {
-	      setTimeout(() => {
-          this.showItem = true
-        }, 50)
-      } else {
-	      this.showItem = false
-      }
+	  show: {
+	    handler (val) {
+        if (val) {
+          setTimeout(() => {
+            this.showItem = true
+          }, 50)
+        } else {
+          this.showItem = false
+        }
+      },
+      immediate: true
     }
   },
 	data () {
@@ -74,7 +92,12 @@ export default {
     }
 	},
 	methods: {
+    tm (e) {
+      e.stopPropagation()
+      e.preventDefault()
+    },
     close () {
+      console.log('close')
       this.showItem = false
     },
     onTransitionEnd () {

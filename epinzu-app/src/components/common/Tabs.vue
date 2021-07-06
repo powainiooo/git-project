@@ -62,6 +62,9 @@ export default {
         }
       },
       immediate: true
+    },
+    value (val) {
+	    this.current = val
     }
   },
 	data() {

@@ -34,7 +34,8 @@ const err = (error) => {
 
 // request interceptor
 service.interceptors.request.use(config => {
-  console.log('config', config)
+  console.log('请求参数')
+  console.log(config)
   const token = Vue.ls.get(ACCESS_TOKEN)
   if (token) {
     config.url = config.url + '?api_token=' + token
@@ -46,7 +47,8 @@ service.interceptors.request.use(config => {
 
 // response interceptor
 service.interceptors.response.use((response) => {
-  console.log(response)
+  console.log('返回数据')
+  console.log(response.data)
   if (response.data.code !== 0) {
     if (response.config.config.autoWarn) {
       Toast.fail(response.data.msg)

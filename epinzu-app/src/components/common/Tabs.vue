@@ -28,7 +28,7 @@
 
 <script type='es6'>
 export default {
-	name: 'app',
+	name: 'Tabs',
   props: {
 	  value: {
 	    type: String,

@@ -11,6 +11,7 @@
 .c-details .cates h3 { font-size: 24px; margin: 0 0 25px 12px; }
 .c-details .cates ul { display: flex; flex-wrap: wrap; }
 .c-details .cates ul li { min-width: 110px; margin: 0 15px 15px 0; text-align: center; }
+.c-details .cates ul li.btn-style2 { background-color: #FFFFFF }
 
 .c-details .footer-btns { left: -25px; right: -25px; }
 </style>

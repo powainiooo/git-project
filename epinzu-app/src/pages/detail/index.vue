@@ -31,7 +31,7 @@
     <!-- 常见问题 -->
     <questions />
     <!-- 常见问题 -->
-    <params />
+    <params @params="$refs.paramsList.show()" />
     <!-- 物品详情 -->
     <c-details />
     <!-- 相似物品 -->
@@ -42,6 +42,8 @@
     <buys ref="buys" />
     <!-- 优惠券弹窗 -->
     <coupons ref="coupons" />
+    <!-- 参数弹窗 -->
+    <params-list ref="paramsList" />
     <!-- 底部操作栏 -->
     <view class="footer-container Detail-footer">
       <view class="between ml12 mr20 btns">
@@ -58,7 +60,9 @@
           <view>收藏</view>
         </button>
       </view>
-      <button class="c-btn" @tap="openBuys">立即下单</button>
+      <button class="c-btn" disabled @tap="openBuys">立即下单</button>
+
+      <view class="offline">该商品已下架</view>
     </view>
   </view>
 </template>
@@ -76,6 +80,7 @@ import params from './modules/params'
 import cDetails from './modules/details'
 import buys from './modules/buys'
 import coupons from './modules/coupons'
+import paramsList from './modules/paramsList'
 import GuessLike from '@/c/common/GuessLike'
 import Tabs from '@/c/common/Tabs'
 
@@ -92,6 +97,7 @@ export default {
     cDetails,
     buys,
     coupons,
+    paramsList,
     GuessLike,
     Tabs
   },

@@ -3,13 +3,18 @@
 </style>
 
 <template>
-<div class="c-goods-item" hover-class="hscale" hover-stay-time="10" @click="openDetail">
+<div class="c-goods-item"
+     :class="{'c-goods-item-soldout': soldout}"
+     hover-class="hscale"
+     hover-stay-time="10"
+     @click="openDetail">
   <div class="imgs"><img :src="imgSrc + record.cover" mode="aspectFill" /></div>
   <div class="infos">
     <h3 class="title">{{record.title}}</h3>
     <div class="intro">{{record.content}}</div>
     <div class="price"><span>{{record.price}}</span>元</div>
-    <div class="tagC btn-add" v-if="!disabled">选规格<span v-if="nums > 0">{{nums}}</span></div>
+    <div class="tagC btn-add" v-if="!disabled && !soldOut">选规格<span v-if="nums > 0">{{nums}}</span></div>
+    <div class="soldout" v-if="soldOut">已售罄</div>
   </div>
 </div>
 </template>
@@ -34,6 +39,9 @@ export default {
         }
       })
       return num
+    },
+    soldOut () {
+      return this.record.store_nums === 0
     }
   },
   data () {
@@ -43,7 +51,7 @@ export default {
   },
   methods: {
     openDetail () {
-      if (!this.disabled) {
+      if (!this.disabled && !this.soldOut) {
         this.$emit('detail', {
           id: this.record.id,
           num: this.nums

@@ -25,7 +25,7 @@
       </div>
     </div>
     <div class="status-frame">
-      <div class="mt80" v-if="order.express_type === 0">
+      <div class="mt80" v-if="order.express_type === 0 && order.status !== 7">
         <c-codes :code="order.fetch_code" />
       </div>
       <div class="mt20" v-if="order.express_type === 1 && order.status === 4">
@@ -35,7 +35,7 @@
         <p class="f52 DinB tc">Finish</p>
         <p class="f52 tc">已完成</p>
       </div>
-      <div class="form" v-if="order.express_type === 1">
+      <div class="form" v-if="order.express_type === 1 && order.status !== 7">
         <div class="form-line mb30">
           <div class="form-item">
             <input :value="address.name" disabled placeholder-style="font-size: 20rpx;" style="font-size: 30rpx;" />

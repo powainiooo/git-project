@@ -1,6 +1,6 @@
 <style scoped>
 .c-codes { display: flex; justify-content: center; }
-.c-codes li { width: 80px; height: 108px; border: 1px solid #ECECEC; border-radius: 15px; font-size: 100px; line-height: 106px; font-family: DinL; text-align: center; margin: 0 10px; }
+.c-codes li { width: 80px; height: 108px; border: 2px solid #ECECEC; border-radius: 15px; font-size: 100px; line-height: 106px; font-family: DinL; text-align: center; margin: 0 10px; }
 .c-codes-small li { width: 56px; height: 74px; font-size: 54px; line-height: 65px; margin: 0 7px; }
 </style>
 

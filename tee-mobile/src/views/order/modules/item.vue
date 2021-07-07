@@ -20,7 +20,10 @@
     <div class="header between">
       <span class="nums">{{record.fetch_code || '--'}}</span>
       <div class="acenter">
-        <button class="btn btn-style4 mr20" @click.stop="handleRefund" v-if="record.status !== -9 && record.status !== -1 && record.status !== 1">退款</button>
+        <button class="btn btn-style4 mr20"
+                @click.stop="handleRefund"
+                style="position: relative; z-index: 10;"
+                v-if="record.status !== -9 && record.status !== -1 && record.status !== 1">退款</button>
         <button class="btn btn-style1" @click.stop="makePhone">{{record.phone}}</button>
       </div>
     </div>
@@ -85,7 +88,7 @@ export default {
   },
   mounted () {
     if (this.record.status === 3) {
-      this.$refs.timer.count(this.record.remain_make_time)
+      this.$refs.timer.count(this.record.make_remain_time)
     }
   },
   methods: {

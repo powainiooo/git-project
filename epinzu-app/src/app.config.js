@@ -1,6 +1,10 @@
 export default {
   pages: [
+    'pages/order/confirm/index',
+    'pages/store/index',
     'pages/detail/index',
+    'pages/question/detail',
+    'pages/question/index',
     'pages/message/detail',
     'pages/message/index',
     'pages/cart/index',

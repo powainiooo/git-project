@@ -78,7 +78,7 @@ hr { border-top: 1px solid #D5D5D5; }
 .w10 { width: 10px; }
 .w12 { width: 12px; }
 .w14 { width: 14px; }
-.w15 { width: 16px; }
+.w16 { width: 16px; }
 .w18 { width: 18px; }
 .w20 { width: 20px; }
 .w22 { width: 22px; }
@@ -97,7 +97,7 @@ hr { border-top: 1px solid #D5D5D5; }
 .w48 { width: 48px; }
 .w50 { width: 50px; }
 
-.w100 { width: 100%; display: block; }
+.w100 { width: 100%; }
 
 /*边距*/
 .auto { margin-left: auto; margin-right: auto; }

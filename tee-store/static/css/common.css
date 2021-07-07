@@ -73,6 +73,7 @@
 .c-goods-item .imgs img { width: 100%; height: 100%; }
 .c-goods-item .infos { flex: 1; }
 .c-goods-item .infos .title { width: 240px; font-size: 24px; line-height: 30px; margin-bottom: 5px; overflow: hidden; text-overflow: ellipsis; word-break: break-all; }
+.c-goods-item-soldout .infos .title { color: #C9C9C9; }
 .c-goods-item .infos .intro { font-size: 20px; line-height: 26px; min-height: 52px; color: #C9C9C9; margin-bottom: 12px; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
 .c-goods-item .infos .intro .c-tag { margin-right: 15px; }
 .c-goods-item .infos .price { font-size: 20px; }
@@ -82,6 +83,7 @@
 .c-goods-item .infos .btn-add { position: absolute; right: 0; bottom: 10px; }
 .c-goods-item .infos .nums { font-size: 22px; line-height: 22px; color: #FFFFFF; font-family: DinB; background-color: #F0916C; position: absolute; top: 60px; right: 0; }
 .c-goods-item .infos .nums2 { font-size: 32px; font-family: DinB; position: absolute; top: 60px; right: 0; }
+.c-goods-item .infos .soldout { font-size: 20px; color: #C9C9C9; position: absolute; bottom: 12px; right: 10px; }
 
 /* 弹窗 */
 .c-modal { width: 100%; height: 100vh; position: absolute; top: 0; left: 0; z-index: 200; background-color: rgba(122, 115, 108, 0.5); display: flex; justify-content: center; align-items: center; }

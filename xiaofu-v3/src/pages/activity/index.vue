@@ -91,7 +91,7 @@
       ref="header"
       @close="handleClose" />
     <div class="banner">
-      <img :src="cdnUrl + record.space_image" mode="aspectFill" v-if="record.space_image !== ''" />
+      <img :src="record.space_image" mode="aspectFill" v-if="record.space_image !== ''" />
     </div>
     <div class="activity-page">
       <div class="line1">
@@ -101,7 +101,7 @@
         </div>
         <div class="rank" v-if="record.comment_flag !== 0">
           <ul>
-            <li v-for="i in record.star" :key="i"><img src="/static/images/common/rank-star2.png" /></li>
+            <li v-for="i in star" :key="i"><img src="/static/images/common/rank-star2.png" /></li>
           </ul>
           <p>{{record.star}}</p>
         </div>
@@ -145,18 +145,13 @@
 import cHeader from '@/components/header/header'
 import cTicket from '@/pages/index/modules/ticket'
 import { postAction } from '@/utils/api'
-import store from '../../store'
 export default {
   data () {
     return {
       id: '',
       record: {},
-      list: []
-    }
-  },
-  computed: {
-    cdnUrl () {
-      return store.state.configData.uploaddata.cdnurl
+      list: [],
+      star: 0
     }
   },
   components: {
@@ -178,6 +173,7 @@ export default {
         if (res.code === 1) {
           this.record = res.data
           this.list = res.data.ticket_list
+          this.star = parseInt(this.record.star)
         }
       })
     },

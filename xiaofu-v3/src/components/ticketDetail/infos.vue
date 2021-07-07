@@ -95,7 +95,10 @@
     </ul>
     <span>open</span>
     <img src="/static/images/common/dot.png" />
-    <div class="addr"><span>{{record.address}}</span></div>
+    <div class="addr"
+         hover-class="hscale"
+         hover-stay-time="10"
+         @click="openAddr"><span>{{record.address}}</span></div>
   </div>
 </div>
 </template>
@@ -160,6 +163,15 @@ export default {
   data () {
     return {}
   },
-  methods: {}
+  methods: {
+    openAddr () {
+      console.log('openAddr')
+      mpvue.openLocation({
+        latitude: Number(this.record.latitude),
+        longitude: Number(this.record.longitude),
+        scale: 15
+      })
+    }
+  }
 }
 </script>

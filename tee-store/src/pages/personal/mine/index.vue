@@ -1,5 +1,5 @@
 <style scoped>
-.mine-container { min-height: calc(100vh - 204px) }
+.mine-container { min-height: calc(100vh - 104px) }
 .mine-container .line1 { height: 145px; margin: 40px 34px 40px 34px; }
 .mine-container .line1 .avatar { width: 145px; height: 145px; border-radius: 50%; overflow: hidden; box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.1); margin-right: 20px; }
 .mine-container .line1 .name { font-size: 30px; }

@@ -24,7 +24,7 @@
         <p class="form-title ml15 c-9e">快递公司</p>
         <div class="form-line">
           <div class="form-item">
-            <input :value="record.kd_company" disabled />
+            <input :value="record.kd_company" disabled style="font-size: 30rpx;" />
           </div>
         </div>
       </div>

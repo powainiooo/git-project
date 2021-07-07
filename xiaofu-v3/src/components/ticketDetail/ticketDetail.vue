@@ -198,8 +198,9 @@ import particulars from './particulars'
 import organizers from './organizers'
 import recommend from './recommend'
 import information from './information'
+import store from '@/store'
 import cSelect from './select'
-import { postAction } from '@/utils/api'
+import { postAction, doLogin } from '@/utils/api'
 import { formatDate } from '@/utils'
 
 export default {
@@ -261,6 +262,9 @@ export default {
     saleTime () {
       const st = this.record.sale_start_time
       return st ? formatDate(new Date(st * 1000), 'yyyy-MM-dd HH:mm') : ''
+    },
+    hasUserInfo () {
+      return store.state.token !== null
     }
   },
   data () {
@@ -292,6 +296,10 @@ export default {
       }
     },
     handleBuy () {
+      if (!this.hasUserInfo) {
+        this.handleLogin()
+        return false
+      }
       const params = {...this.formData}
       if (params.identity_type === 1) {
         params.id_card_no = this.cardNo
@@ -373,7 +381,16 @@ export default {
           })
         }
       })
-    }
+    },
+    handleLogin () {
+      mpvue.getUserProfile({
+        desc: '用于完善会员资料',
+        success: res => {
+          console.log(res)
+          doLogin(res)
+        }
+      })
+    },
   }
 }
 </script>

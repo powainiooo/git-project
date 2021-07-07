@@ -44,7 +44,7 @@
 
 <script type='es6'>
 export default {
-	name: 'app',
+	name: 'Popup',
   props: {
     show: {
       type: Boolean,
@@ -97,7 +97,6 @@ export default {
       e.preventDefault()
     },
     close () {
-      console.log('close')
       this.showItem = false
     },
     onTransitionEnd () {

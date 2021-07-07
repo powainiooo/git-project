@@ -1,7 +1,7 @@
 <style scoped>
 .order-item { padding: 30px 32px 0 32px; position: relative; }
 .order-item .sd { width: 100%; position: absolute; left: 0; bottom: 0; }
-.order-box { background-color: #F9F9F9; box-shadow: 0px 3px 30px 0px rgba(0, 0, 0, 0.1); border-radius: 35px 35px 0px 0px; overflow: hidden; }
+.order-box { background-color: #F9F9F9; box-shadow: 0px 3px 30px 0px rgba(0, 0, 0, 0.1); border-radius: 35px 35px 0px 0px; overflow: hidden; position: relative; }
 .order-box .header { height: 94px; padding: 0 34px; background-color: #EDECEB; margin-bottom: 20px; }
 .order-box .header .nums { font-size: 54px; font-family: DinB; }
 .order-box .body { margin: 0 34px; }
@@ -15,6 +15,8 @@
 .order-box .body .c-goods-item .infos .nums2 { top: 20px; font-size: 24px; }
 .order-box .footer { height: 110px; background-color: #ffffff; }
 .order-box .footer .time { transform: scale(.8) }
+.order-box .cover { width: 100%; height: 100%; background-color: rgba(255, 255, 255, 0.85); position: absolute; top: 0; left: 0; display: flex; justify-content: flex-end; }
+.order-box .cover span { width: 220px; height: 220px; display: block; background-color: #E8D1B9; border-radius: 0 0 0 50%; position: absolute; top: -110px; right: -110px; font-size: 20px; color: #ffffff; padding-top: 140px; padding-left: 26px; }
 </style>
 
 <template>
@@ -23,7 +25,10 @@
     <div class="header between">
       <span class="nums">{{record.fetch_code || '--'}}</span>
       <div class="acenter">
-        <button class="btn btn-style4 mr20" @click.stop="handleRefund" v-if="record.status !== -9 && record.status !== -1 && record.status !== 1">退款</button>
+        <button class="btn btn-style4 mr20"
+                @click.stop="handleRefund"
+                style="position: relative; z-index: 10;"
+                v-if="record.status !== -9 && record.status !== -1 && record.status !== 1">退款</button>
         <button class="btn btn-style1" @click.stop="makePhone">{{record.phone}}</button>
       </div>
     </div>
@@ -44,6 +49,7 @@
     <div class="footer center borderT" v-if="record.status === 4">
       <button class="btn btn-style1" @click.stop="handleDone">确认提货</button>
     </div>
+    <div class="cover" v-if="record.status === 7"><span>已完成</span></div>
   </div>
   <img src="@/assets/img/sd1.png" class="sd" />
 </div>

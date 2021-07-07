@@ -104,8 +104,10 @@ function loadImg () {
             <div class="notice-bBorder bBorder"></div>
          </div>
          <div class="extra-code">
-            <img src="img/qrcode.png" width="210" v-if="record.miniapp_code_image === ''" />
-            <img :src="record.miniapp_code_image" width="210" v-else />
+            <div class="qrcode">
+               <img src="img/qrcode.png" width="180" v-if="record.miniapp_code_image === ''" />
+               <img :src="record.miniapp_code_image" width="180" v-else />
+            </div>
             <img src="img/hint.png" width="390" />
          </div>
       </div>

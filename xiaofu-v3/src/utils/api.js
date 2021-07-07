@@ -58,14 +58,19 @@ export const postAction = (url, data = {}, autoMsg = true) => {
 export const doLogin = (userInfo = {}) => {
   console.log('userInfo', userInfo)
   store.commit('SET_PERSONINFO', userInfo.userInfo)
-  login().then(loginRes => {
-    console.log('loginRes', loginRes)
-    postAction('/api/wxapp/login', {
-      code: loginRes.code,
-      rawData: userInfo.rawData,
-      token: ''
-    }).then(res => {
-      store.commit('SET_TOKEN', res.data.userInfo.token)
+  return new Promise((resolve, reject) => {
+    login().then(loginRes => {
+      console.log('loginRes', loginRes)
+      postAction('/api/wxapp/login', {
+        code: loginRes.code,
+        rawData: userInfo.rawData,
+        token: ''
+      }).then(res => {
+        store.commit('SET_TOKEN', res.data.userInfo.token)
+        resolve()
+      }).catch(err => {
+        reject(err)
+      })
     })
   })
 }

@@ -17,7 +17,7 @@
         <item :record="item" v-if="type === 1" @refresh="refresh"/>
         <item2 :record="item" v-else-if="type === 2" @post="openPost"/>
       </div>
-      <div class="empty-hint" v-if="list.length === 0">
+      <div class="empty-hint" v-if="list.length === 0 && !isAjax">
         <p>Irrelevant content</p>
         <div>无相关内容</div>
       </div>
@@ -61,7 +61,8 @@ export default {
       type: 1,
       page: 1,
       total: 0,
-      list: []
+      list: [],
+      isAjax: false
     }
   },
 
@@ -78,11 +79,13 @@ export default {
       }
     },
     getData () {
+      this.isAjax = true
       getAction('/userapi/order/index/data', {
         type: this.type,
         page: this.page,
         limit: 20
       }).then(res => {
+        this.isAjax = false
         if (res.code === 0) {
           this.list = this.list.concat(res.data)
           this.total = res.count

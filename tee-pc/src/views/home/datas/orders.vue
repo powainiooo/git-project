@@ -69,6 +69,9 @@
             </tbody>
           </table>
         </div>
+        <div class="ml50 mt10" v-if="list1.length > 0">
+          <Page :current="page1" :total="total1" simple class-name="tee-page" @on-change="pageChange" />
+        </div>
         <div class="empty" v-if="list1.length === 0 && !isAjax" style="margin-top: 200px;">
           <img src="@/assets/img/empty.png" width="68" />
           <p>Payment failure</p>
@@ -137,7 +140,10 @@
             </tbody>
           </table>
         </div>
-        <div class="empty" v-if="list1.length === 0 && !isAjax" style="margin-top: 200px;">
+        <div class="ml50 mt10" v-if="list2.length > 0">
+          <Page :current="page2" :total="total2" simple class-name="tee-page" @on-change="pageChange" />
+        </div>
+        <div class="empty" v-if="list2.length === 0 && !isAjax" style="margin-top: 200px;">
           <img src="@/assets/img/empty.png" width="68" />
           <p>Payment failure</p>
           <div>暂无数据</div>
@@ -157,7 +163,11 @@ export default {
     return {
       type: '1',
       list1: [],
+      total1: 0,
+      page1: 1,
       list2: [],
+      total2: 0,
+      page2: 1,
       isAjax: false
     }
   },
@@ -165,6 +175,10 @@ export default {
     this.getData()
   },
   methods: {
+    pageChange (e) {
+      this[`page${this.type}`] = e
+      this.getListData()
+    },
     tabChange (e) {
       console.log('tabChange', e)
       this.type = e
@@ -185,6 +199,7 @@ export default {
         if (res.code === 0) {
           console.log('this.type', this.type, this[`list${this.type}`])
           this[`list${this.type}`] = res.data
+          this[`total${this.type}`] = res.count
         }
       })
     }

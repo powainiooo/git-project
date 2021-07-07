@@ -38,7 +38,7 @@
         <button class="btn btn-style1" @click.stop="handleMake">开始制作</button>
       </div>
       <div class="mt20 auto tc" style="width: 53.333vw;" v-if="record.status === 3">
-        <c-timer ref="timer" />
+        <c-timer ref="timer" @done="getData" />
       </div>
       <div class="mt20 tc" v-if="record.status === 4">
         <button class="btn btn-style4 mr30" @click.stop="handleTag">补打标签</button>
@@ -207,6 +207,8 @@ export default {
           this.shop = res.data.shop
           this.goods = res.data.goods
           this.goodsNums = res.data.goods_nums
+          // this.record.status = 3
+          // this.record.make_remain_time = 600
           if (this.record.status === 3) {
             this.$nextTick(() => {
               this.$refs.timer.count(this.record.make_remain_time)

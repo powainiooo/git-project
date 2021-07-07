@@ -14,7 +14,7 @@
 
 <template>
 <div class="page">
-  <c-header menus :storeLogo="storeData.shop_logo" />
+  <c-header menus :storeLogo="storeInfo.shop_logo" />
   <div class="container" style="padding-bottom: 0;">
     <!-- 地址信息 -->
     <addr-info ref="top" showCart showShare :record="addrData" @refresh="getCart" @tap="toStores" />
@@ -139,7 +139,7 @@ export default {
     },
     addrData () {
       return {
-        name: this.storeData.shop_name,
+        name: this.storeInfo.shop_name,
         dis: this.storeData.distance,
         cartNum: this.cartNum,
         cartType: 1,

@@ -387,7 +387,9 @@ export default {
         desc: '用于完善会员资料',
         success: res => {
           console.log(res)
-          doLogin(res)
+          doLogin(res).then(res => {
+            this.handleBuy()
+          })
         }
       })
     },

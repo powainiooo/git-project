@@ -34,7 +34,9 @@
           <img src="/static/images/order/icon3-active.png" mode="aspectFit" class="img2" />
         </li>
       </ul>
-      <div class="mt20 auto" style="width: 400rpx;" v-if="order.status === 3"><c-timer ref="timer" /></div>
+      <div class="mt20 auto" style="width: 400rpx;" v-if="order.status === 3">
+        <c-timer ref="timer" @done="getData" />
+      </div>
       <div class="mt20" v-if="order.status === 4">
         <c-codes :code="order.fetch_code" />
       </div>
@@ -113,8 +115,12 @@ export default {
           this.goods = res.data.goods
           this.address = res.data.address
           this.goodsNum = res.data.goods_nums
+          // this.order.status = 3
+          // this.order.remain_make_time = 100
           if (this.order.status === 3) {
-            this.$refs.timer.count(this.order.remain_make_time)
+            this.$nextTick(() => {
+              this.$refs.timer.count(this.order.remain_make_time)
+            })
           }
         }
       })

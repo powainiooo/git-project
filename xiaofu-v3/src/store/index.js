@@ -7,7 +7,7 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
-    token: '',
+    token: null,
     personalInfo: {},
     settings: {},
     configData: {},

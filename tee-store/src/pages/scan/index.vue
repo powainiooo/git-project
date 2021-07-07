@@ -30,7 +30,7 @@
         <img src="/static/images/index/coupon.png" mode="widthFix" class="w100" />
       </div>
       <div class="title"><span>{{coupon.money}}</span>元代金券</div>
-      <p>需任意消费后可使用，点击立即加入购物车。<br/>有效期 至 {{coupon.expired}}</p>
+      <p>仅可用于{{condition.type === 1 ? '茶饮' : '周边'}}产品，满{{coupon.condition}}元可用。<br/>有效期 至 {{coupon.expired}}</p>
     </div>
     <div class="line1 pr" v-else-if="key === 'gift'">
       <img src="/static/images/bg.png" mode="widthFix" class="bg" />

@@ -6,7 +6,7 @@
 .index-page .line1 .l img { width: 80px; }
 .index-page .line1 .l p { font-size: 100px; font-family: DinB; color: #41372D; line-height: 118px; }
 .swiper-sec .icons { width: 100%; height: 100%; padding-top: 176px; display: flex; justify-content: center; align-items: center; }
-.swiper-sec .icons .pig { height: 63%; display: block; }
+.swiper-sec .icons .pig { height: 63%; display: block; position: relative; }
 .swiper-sec .icons .pig .img { height: 100%; }
 .swiper-sec .icons .coupon { height: 41%; display: block; }
 .swiper-sec .icons .coupon .img { height: 100%; }
@@ -131,13 +131,14 @@ export default {
       coupon: 100,
       prize: 50,
       current: 0,
-      key: 'score',
+      key: '',
       hasRecord: true,
       hash: {
         score: 0,
         coupon: 1,
         gift: 2
-      }
+      },
+      isScane: false
     }
   },
 
@@ -152,7 +153,12 @@ export default {
             if (this.current === 0) {
               this.numsMove(this.score)
               if (this.$refs.score) {
-                this.$refs.score.shake()
+                console.log('shake')
+                if (this.key === 'score') {
+                  this.$refs.score.drop()
+                } else {
+                  this.$refs.score.shake()
+                }
               }
             } else if (this.current === 1) {
               this.numsMove(this.coupon)
@@ -208,6 +214,7 @@ export default {
       })
     },
     openScan () {
+      this.isScane = true
       mpvue.scanCode({
         success: res => {
           console.log('scan res', res)
@@ -228,7 +235,7 @@ export default {
       const code = scene.substr(1, scene.length - 1)
       console.log('key', keys[key], 'code', code)
 
-      mpvue.redirectTo({
+      mpvue.navigateTo({
         url: `/pages/scan/main?key=${keys[key]}&code=${code}`
       })
     },
@@ -237,9 +244,6 @@ export default {
     }
   },
   onShow () {
-    if (this.isLogin) {
-      this.getData()
-    }
     if (this.$refs.goods) {
       this.$refs.goods.hide()
     }
@@ -247,13 +251,21 @@ export default {
   onLoad (options) {
     console.log('onLoad index2', options)
     Object.assign(this.$data, this.$options.data())
-    this.key = options.key || 'score'
+    this.key = options.key
     this.current = this.hash[this.key]
+    if (options.key === undefined) {
+      this.current = 0
+    } else if (options.key === 'score') {
+      console.log('score')
+    }
     // options.scene = 'Cf9cd723468db2206e3dc22b6b692'
     if (options.scene) {
       const scene = decodeURIComponent(options.scene)
       console.log('scene', scene)
       this.toQrresult(scene)
+    }
+    if (this.isLogin && !this.isScane) {
+      this.getData()
     }
   }
 }

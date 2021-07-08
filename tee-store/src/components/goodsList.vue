@@ -2,11 +2,9 @@
 .c-goods-grid { padding: 32px; min-height: 100%; position: relative; display: flex; align-items: baseline; flex-wrap: wrap; padding-top: 10px; align-content: baseline; }
 .c-goods-grid:before { content: ''; width: 2px; position: absolute; left: 50%; top: 0; bottom: 0; background-color: #E2E2E2; transform: scaleX(.5); }
 .c-goods-col { width: 50%; height: 420px; display: flex; position: relative; padding-bottom: 15px; margin-bottom: 44px; }
-.c-goods-col:after { content: ''; height: 2px; position: absolute; left: 0; right: 0; bottom: 0; background-color: #E2E2E2; transform: scaleY(.5); }
+.c-goods-col:nth-child(2n):after { content: ''; height: 2px; position: absolute; left: -100%; right: 0; bottom: 0; background-color: #E2E2E2; transform: scaleY(.5); }
 .c-goods-col:nth-child(1) { padding-top: 0; }
 .c-goods-col:nth-child(2) { padding-top: 0; }
-.c-goods-col:nth-last-child(1):after { height: 0; }
-.c-goods-col:nth-last-child(2):after { height: 0; }
 .c-goods-col:nth-child(2):after { height: 2px; }
 .c-goods-col:nth-child(2n) { justify-content: flex-end; }
 .c-goods-grid .goods-item { width: 275px; }

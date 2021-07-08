@@ -36,4 +36,8 @@ module.exports = {
 * a2ropq
 * http://www.leesticket.waiting8.com/
 *ftp://159.75.70.218:21 www_leesticket DYLwpcc3CCGF8RxZ
+* ip：58.220.46.36
+端口：21
+账号：www_uat_leesticket
+密码：LFbtxNBMrn2Wb8WT
 * */

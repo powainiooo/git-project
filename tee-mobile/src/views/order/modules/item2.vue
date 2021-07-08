@@ -34,7 +34,14 @@
     </div>
     <div class="body">
       <div class="c-goods-item borderB mb20" v-for="(item, index) in record.goods" :key="index">
-        <div class="imgs"><img src="@/assets/img/img2.png" mode="aspectFill" /></div>
+        <div class="imgs">
+          <van-image
+            width="9.067vw"
+            height="9.067vw"
+            fit="cover"
+            :src="imgSrc + item.goods_cover"
+          />
+        </div>
         <div class="infos">
           <h3 class="title">{{item.goods_name}}</h3>
           <div class="intro">{{item.goods_attr.join('、')}}</div>
@@ -61,6 +68,11 @@ export default {
   name: 'app',
   props: {
     record: Object
+  },
+  computed: {
+    imgSrc () {
+      return this.$store.state.imgSrc
+    }
   },
   data () {
     return {}

@@ -1,5 +1,12 @@
 <style>
-
+.coin { width: 50px; height: 200px; position: absolute; left: 210px; bottom: 86%; overflow: hidden; }
+.coin img { width: 100%; opacity: 0;  }
+.coin-move { animation: coin 1.5s cubic-bezier(.3,.49,.25,1.07) .5s both; }
+@keyframes coin {
+  0% { transform: translateY(50px); opacity: 0; }
+  20% { transform: translateY(0px); opacity: 1; }
+  100% { transform: translateY(220px); opacity: 1; }
+}
 </style>
 
 <template>
@@ -14,6 +21,12 @@
       <img src="/static/images/index/pig.png"
            mode="heightFix"
            class="img" />
+      <div class="coin">
+        <img src="/static/images/icon1.png"
+             mode="widthFix"
+             :class="{'coin-move': coinMove}"
+             @animationend="coinEnd" />
+      </div>
     </div>
   </div>
 </div>
@@ -27,7 +40,8 @@ export default {
   },
   data () {
     return {
-      moving: false
+      moving: false,
+      coinMove: false
     }
   },
   methods: {
@@ -37,6 +51,14 @@ export default {
     },
     moveEnd () {
       // this.moving = false
+    },
+    drop () {
+      this.moving = false
+      this.coinMove = true
+    },
+    coinEnd () {
+      this.coinMove = false
+      this.shake()
     }
   }
 }

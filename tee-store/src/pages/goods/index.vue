@@ -69,12 +69,18 @@
     <div class="c-modal-box">
       <img src="/static/images/bg.png" class="bg" />
       <div class="pr">
-        <div class="line1 center">
-          <div class="imgs"><img :src="imgSrc + prizeData.cover" mode="aspectFill" /></div>
-          <img src="/static/images/free@2x.png" mode="widthFix" class="free" />
-        </div>
-        <div class="title">{{prizeData.title}}</div>
-        <div class="desc">{{prizeData.content}}<br/>有效期 至 {{prizeData.expired}}</div>
+        <img src="/static/images/free@2x.png" mode="widthFix" class="free" />
+        <img src="/static/images/arrow6.png" mode="widthFix" class="ar6" />
+        <img src="/static/images/arrow7.png" mode="widthFix" class="ar7" />
+        <swiper class="swiper" @change="giftChange">
+          <swiper-item v-for="item in prizeData" :key="id">
+            <div class="line1 center">
+              <div class="imgs"><img :src="imgSrc + item.cover" mode="aspectFill" /></div>
+            </div>
+            <div class="title">{{item.title}}</div>
+            <div class="desc">{{item.content}}<br/>有效期 至 {{item.expired}}</div>
+          </swiper-item>
+        </swiper>
         <div class="center">
           <button class="btn btn-style1" @click="doUse">立即使用</button>
           <button class="btn btn-style2" @click="freeModalVisible = false">暂不使用</button>
@@ -124,7 +130,8 @@ export default {
       cartNum: 0,
       isAjax: false,
       storeInfo: {},
-      prizeData: {},
+      prizeData: [],
+      priceIndex: 0,
       dis: []
     }
   },
@@ -216,7 +223,7 @@ export default {
         if (res.code === 0) {
           if (res.data.length > 0) {
             this.freeModalVisible = true
-            this.prizeData = res.data[0]
+            this.prizeData = res.data
           }
         }
       })
@@ -260,12 +267,15 @@ export default {
       this.closeModalVisible = false
       this.closeHintVisible = true
     },
+    giftChange (e) {
+      this.priceIndex = e.mp.detail.current
+    },
     doUse () {
       if (this.isAjax) return
       this.isAjax = true
       postAction('/userapi/shopping/card/add/prize', {
         shop_id: this.shopId,
-        prize_qrcode_id: this.prizeData.id
+        prize_qrcode_id: this.prizeData[this.priceIndex].id
       }).then(res => {
         if (res.code === 0) {
           mpvue.showToast({

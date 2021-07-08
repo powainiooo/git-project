@@ -37,6 +37,9 @@ module.exports = {
 * https://leesticket.waiting8.com/NVcfRhyJlY.php  http://editor.leesticket.waiting8.com/#/login
 帐号：leesticket
 密码：nihao123
-*ftp://159.75.70.218:21 editor FBYjKE2dHkD8YPiE http://leesticket.waiting8.com
+ip：58.220.46.36
+端口：21
+账号：editor_uat_leesticket
+密码：kHA4sfwPNai8iEk8
 * 13723797362 hohodiaozhale 123456 18023095011 1234567a
 * */

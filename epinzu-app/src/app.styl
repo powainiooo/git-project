@@ -29,8 +29,12 @@
   background-color #07C160
 .c-btn-border
   background-color #FFFFFF; border 1PX solid #FE322B; color #FE322B;
+.c-btn-border2
+  background-color #FFFFFF; border 1PX solid #999999; color #333333;
 .c-btn-24
   height 24px; line-height 22px; font-size 12px;
+.c-btn-32
+  height 32px; line-height 32px; font-size 14px;
 
 .btn-cart
   size(24px, 24px); position relative; overflow visible;
@@ -78,17 +82,26 @@
     size(72%, 100%);
     .c-btn
       size(80px, 30px); line-height 30px;
+.c-coupon-item-disabled
+  &>view
+    border-color transparent
+  .price
+    background-color #D5D5D5; color #FFFFFF;
+  .content
+    background-color #F5F5F5; color #999999;
 
 /* container */
 .container
   padding-bottom calc(100px + constant(safe-area-inset-bottom));
   padding-bottom calc(100px + env(safe-area-inset-bottom));
 .footer-container
-  padding 7px 0; display flex; justify-content space-around; align-items center; width 100%; position fixed; left 0; bottom 0; background-color #FFFFFF; z-index 1000; box-shadow: 2px 0px 4px 0px #E5E5E5;
+  padding 7px 0; display flex; justify-content space-around; align-items center; width 100%; position fixed; left 0; bottom 0; background-color #FFFFFF; z-index 200; box-shadow: 2px 0px 4px 0px #E5E5E5;
   padding-bottom calc(7px + constant(safe-area-inset-bottom));
   padding-bottom calc(7px + env(safe-area-inset-bottom));
 .section
   margin 8px 12px; background-color #FFFFFF; border-radius 4px; padding 0 8px; overflow hidden; position relative;
+.section2
+  margin 8px 0; background-color #FFFFFF; border-radius 4px; padding 0 12px; overflow hidden; position relative;
 
 /* 产品模块 */
 .goods-list
@@ -127,6 +140,8 @@
     font-size 12px; color #D5D5D5; margin-bottom 24px;
   button
     width 120px;
+.empty-txt
+  font-size 10px; color #999999; text-align center; margin 24px 0;
 
 /* 支付方式 */
 .pay-item
@@ -134,3 +149,10 @@
   .icon
     width 16px;
 
+/* 店铺信息行 */
+.store-info
+  acenter();
+  image
+    size(20px, 20px); border-radius 50%;
+  text
+    margin-left 4px;

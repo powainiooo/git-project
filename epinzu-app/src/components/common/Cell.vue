@@ -14,7 +14,7 @@
 </style>
 
 <template>
-<view class="c-cell borderB">
+<view class="c-cell borderB" @tap="tapLink">
   <view class="c-cell-title">
     <text v-if="title">{{title}}</text>
     <slot name="title" v-else />
@@ -23,7 +23,7 @@
       <slot name="label" v-else />
     </view>
   </view>
-  <view class="c-cell-value" slot="value">
+  <view class="c-cell-value">
     <text v-if="value">{{value}}</text>
     <slot name="value" v-else />
   </view>
@@ -55,6 +55,12 @@ export default {
 	data() {
 		return {}
 	},
-	methods: {}
+	methods: {
+    tapLink () {
+      if (this.isLink) {
+        this.$emit('tap')
+      }
+    }
+  }
 }
 </script>

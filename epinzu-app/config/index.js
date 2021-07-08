@@ -14,7 +14,8 @@ const config = {
   alias: {
     '@/img': path.resolve(__dirname, '..', 'src/static/img'),
     '@/css': path.resolve(__dirname, '..', 'src/static/css'),
-    '@/c': path.resolve(__dirname, '..', 'src/components')
+    '@/c': path.resolve(__dirname, '..', 'src/components'),
+    '@/config': path.resolve(__dirname, '..', 'src/config')
   },
   defineConstants: {
   },

@@ -17,8 +17,11 @@
 <view class="c-field">
   <view class="c-field-name" v-if="label !== ''">{{label}}</view>
   <view class="c-field-body">
-    <input :type="type" :placeholder="placeholder" @Input="inputChange" />
-    <view class="c-field-button">
+    <input :type="type" :placeholder="placeholder" :value="value" :disabled="readonly" @Input="inputChange" />
+    <view class="c-field-button" v-if="$slots.rightIcon">
+      <slot name="rightIcon"></slot>
+    </view>
+    <view class="c-field-button" v-if="$slots.button">
       <slot name="button"></slot>
     </view>
   </view>
@@ -44,6 +47,10 @@ export default {
     placeholder: {
 	    type: String,
       default: ''
+    },
+    readonly: {
+	    type: Boolean,
+      default: false
     }
   },
 	data() {

@@ -47,7 +47,7 @@
           </view>
         </view>
       </view>
-      <cell title="优惠券" value="满300减30" isLink style="padding: 0; margin-right: -8px;" class="mb16" />
+      <cell title="优惠券" value="满300减30" isLink style="padding: 0; margin-right: -8px;" class="mb16" @tap="openCoupon" />
     </view>
     <!-- 备注 -->
     <view class="section">
@@ -106,23 +106,27 @@
     </view>
     <!-- 底部操作栏 -->
     <view class="footer-container">
-      <view class="between w100">
+      <view class="between wp100">
         <view class="c-red ml12">支付金额：<text class="f12">￥</text>410</view>
         <button class="c-btn mr12">确定支付</button>
       </view>
     </view>
+    <!-- 优惠券 -->
+    <coupons ref="coupons" />
   </view>
 </template>
 
 <script>
 import Taro from '@tarojs/taro'
 import './index.styl'
+import coupons from './modules/coupons'
 import Cell from '@/c/common/Cell'
 
 export default {
   name: 'Index',
   components: {
-    Cell
+    Cell,
+    coupons
   },
   data () {
     return {
@@ -130,6 +134,9 @@ export default {
     }
   },
   methods: {
+    openCoupon () {
+      this.$refs.coupons.show()
+    }
   },
 }
 </script>

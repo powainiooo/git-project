@@ -1,5 +1,11 @@
 export default {
   pages: [
+    'pages/rent/return',
+    'pages/rent/detail',
+    'pages/rent/index',
+    'pages/result/index',
+    'pages/address/edit',
+    'pages/address/index',
     'pages/order/confirm/index',
     'pages/store/index',
     'pages/detail/index',

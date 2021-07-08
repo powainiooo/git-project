@@ -80,7 +80,7 @@
           <div>
             <a href="javascript:;"
                class="btn-err"
-               v-if="item.refund_state === 2 && item.price != 0 && item.ticket_code_state === 1"
+               v-if="item.refund_state === 2 && item.price != 0"
                @click="doRefund(item.order_no)">退款</a>
           </div>
         </td>

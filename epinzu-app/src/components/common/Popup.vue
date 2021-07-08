@@ -4,7 +4,7 @@
   &-show
     opacity 1
 .c-popup
-  width 100%; height 100vh; position fixed; top 0; left 0; z-index 200;
+  width 100%; height 100vh; position fixed; top 0; left 0; z-index 500;
   &-box
     width 100%; min-height 100px; max-height 83vh; background-color #FFFFFF; position absolute; left 0; transition transform .3s ease-out
   &-bottom

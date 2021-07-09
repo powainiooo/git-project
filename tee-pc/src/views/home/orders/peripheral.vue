@@ -3,7 +3,7 @@
 </style>
 
 <template>
-<div class="pa60">
+<div class="pt60">
   <div class="between operates-line">
     <div class="flex">
       <c-date-time type="date" placeholder="下单日期" class="tee-date mr20" v-model="date" @change="paramsChange" />
@@ -16,96 +16,97 @@
       </div>
     </div>
   </div>
+  <div class="table-scroll scrollBar">
+    <div class="tee-tables mt30 ml50 mr50">
+      <table>
+        <colgroup>
+          <col width="130" />
+          <col width="70" />
+          <col width="125" />
+          <col width="125" />
+          <col width="130" />
+          <col width="80" />
+          <col width="80" />
+          <col width="80" />
+          <col width="150" />
+          <col width="120" />
+          <col />
+          <col width="150" />
+        </colgroup>
+        <thead>
+        <tr>
+          <th>下单时间</th>
+          <th>取货号</th>
+          <th>订单号</th>
+          <th>产品名称</th>
+          <th>规格</th>
+          <th>下单件数</th>
+          <th>单价</th>
+          <th>总价</th>
+          <th>备注</th>
+          <th>联系电话</th>
+          <th>状态</th>
+          <th style="text-align: center;"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="item in list" :key="item.id">
+          <td><div>{{item.created_at}}</div></td>
+          <td><div>{{item.fetch_code}}</div></td>
+          <td><div>{{item.order_no}}</div></td>
+          <td>
+            <div>
+              <p v-for="(item, index) in item.goods" :key="index">{{item.goods_name}}</p>
+            </div>
+          </td>
+          <td>
+            <div>
+              <p v-for="(item, index) in item.goods" :key="index">{{item.goods_attr.join('、')}}</p>
+            </div>
+          </td>
+          <td>
+            <div>
+              <p v-for="(item, index) in item.goods" :key="index">{{item.buy_nums}}件</p>
+            </div>
+          </td>
+          <td>
+            <div>
+              <p v-for="(item, index) in item.goods" :key="index">{{item.goods_price}}元</p>
+            </div>
+          </td>
+          <td>
+            <div>{{item.pay_amount}}元</div>
+          </td>
+          <td>
+            <div>{{item.user_remark || '--'}}</div>
+          </td>
+          <td>
+            <div>{{item.phone || '--'}}</div>
+          </td>
+          <td>
+            <div>{{item.status_name}}</div>
+          </td>
+          <td class="opera">
+            <div class="center">
+              <Poptip title="确认退款？" confirm @on-ok="handleRefund(item.id)" v-if="item.status !== 1 && item.status !== -9">
+                <Button size="small">退款</Button>
+              </Poptip>
+              <Poptip title="确认提货？" confirm @on-ok="orderDone(item.id)">
+                <Button size="small" class="bg-main ml10">确认提货</Button>
+              </Poptip>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
 
-  <div class="tee-tables mt30 ml50 mr50">
-    <table>
-      <colgroup>
-        <col width="130" />
-        <col width="70" />
-        <col width="125" />
-        <col width="125" />
-        <col width="130" />
-        <col width="80" />
-        <col width="80" />
-        <col width="80" />
-        <col width="150" />
-        <col width="120" />
-        <col />
-        <col width="150" />
-      </colgroup>
-      <thead>
-      <tr>
-        <th>下单时间</th>
-        <th>取货号</th>
-        <th>订单号</th>
-        <th>产品名称</th>
-        <th>规格</th>
-        <th>下单件数</th>
-        <th>单价</th>
-        <th>总价</th>
-        <th>备注</th>
-        <th>联系电话</th>
-        <th>状态</th>
-        <th style="text-align: center;"></th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr v-for="item in list" :key="item.id">
-        <td><div>{{item.created_at}}</div></td>
-        <td><div>{{item.fetch_code}}</div></td>
-        <td><div>{{item.order_no}}</div></td>
-        <td>
-          <div>
-            <p v-for="(item, index) in item.goods" :key="index">{{item.goods_name}}</p>
-          </div>
-        </td>
-        <td>
-          <div>
-            <p v-for="(item, index) in item.goods" :key="index">{{item.goods_attr.join('、')}}</p>
-          </div>
-        </td>
-        <td>
-          <div>
-            <p v-for="(item, index) in item.goods" :key="index">{{item.buy_nums}}件</p>
-          </div>
-        </td>
-        <td>
-          <div>
-            <p v-for="(item, index) in item.goods" :key="index">{{item.goods_price}}元</p>
-          </div>
-        </td>
-        <td>
-          <div>{{item.pay_amount}}元</div>
-        </td>
-        <td>
-          <div>{{item.user_remark || '--'}}</div>
-        </td>
-        <td>
-          <div>{{item.phone || '--'}}</div>
-        </td>
-        <td>
-          <div>{{item.status_name}}</div>
-        </td>
-        <td class="opera">
-          <div class="center">
-            <Poptip title="确认退款？" confirm @on-ok="handleRefund(item.id)" v-if="item.status !== 1 && item.status !== -9">
-              <Button size="small">退款</Button>
-            </Poptip>
-            <Poptip title="确认提货？" confirm @on-ok="orderDone(item.id)">
-              <Button size="small" class="bg-main ml10">确认提货</Button>
-            </Poptip>
-          </div>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="ml50 mt10" v-if="list.length > 0">
-    <Page :current="page" :total="total" simple class-name="tee-page" @on-change="pageChange" />
-  </div>
-  <div class="ml50 mt100" v-if="list.length === 0 && !isAjax">
-    <img src="@/assets/img/none.png" width="265" />
+    <div class="ml50 mt10 mb30" v-if="list.length > 0">
+      <Page :current="page" :total="total" simple class-name="tee-page" @on-change="pageChange" />
+    </div>
+    <div class="ml50 mt100" v-if="list.length === 0 && !isAjax">
+      <img src="@/assets/img/none.png" width="265" />
+    </div>
   </div>
 </div>
 </template>

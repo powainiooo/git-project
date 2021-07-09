@@ -15,6 +15,12 @@ waf94de5a24f650afc5c9fff82
 qaf94de5a24f650afc5c9fff83
 daf94de5a24f650afc5c9fff84
 
+1.摇晃音效
+2.滑动区域修改
+3.周边产品可选 不可选
+4.数字滚动
+5.订单定时刷新
+
 "tabBar": {
     "color": "#CECBC6",
     "selectedColor": "#41372D",

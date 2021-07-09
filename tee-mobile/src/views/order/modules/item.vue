@@ -88,7 +88,7 @@ export default {
   },
   mounted () {
     if (this.record.status === 3) {
-      this.$refs.timer.count(this.record.make_remain_time)
+      this.$refs.timer.count(this.record.remain_make_time)
     }
   },
   methods: {

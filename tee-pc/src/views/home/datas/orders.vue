@@ -12,14 +12,14 @@
           <table>
             <col width="130" />
             <col width="70" />
-            <col width="124" />
-            <col width="86" />
-            <col width="128" />
-            <col width="86" />
-            <col width="90" />
-            <col width="90" />
+            <col width="125" />
             <col width="150" />
-            <col width="110" />
+            <col width="130" />
+            <col width="80" />
+            <col width="80" />
+            <col width="80" />
+            <col width="150" />
+            <col width="120" />
             <col />
             <thead>
             <tr>
@@ -48,7 +48,11 @@
               </td>
               <td>
                 <div>
-                  <p v-for="(item, index) in item.goods" :key="index">{{item.goods_attr.join('、')}}</p>
+                  <p class="ellipsis"
+                     style="width: 130px;"
+                     v-for="(item, index) in item.goods"
+                     :title="item.goods_attr.join('、')"
+                     :key="index">{{item.goods_attr.join('、')}}</p>
                 </div>
               </td>
               <td>

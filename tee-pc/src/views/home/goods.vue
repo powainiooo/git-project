@@ -1,9 +1,10 @@
 <style lang="stylus" type="text/stylus">
-
+.goods-scroll-page
+  height calc(100vh - 242px); overflow-y auto;
 </style>
 
 <template>
-<div class="pa60">
+<div class="pt60">
   <div class="between operates-line">
     <div class="flex">
       <Select class="c-select mr20" placeholder="产品分类" style="width: 130px;" v-model="cate" @on-change="paramsChange">
@@ -24,82 +25,84 @@
     </div>
   </div>
 
-  <div class="tee-tables mt30 ml50 mr50">
-    <table>
-      <colgroup>
-        <col width="115" />
-        <col width="95" />
-        <col width="110" />
-        <col width="240" />
-        <col width="138" />
-        <col width="80" />
-        <col width="80" />
-        <col width="96" />
-        <col />
-        <col width="180" />
-      </colgroup>
-      <thead>
-      <tr>
-        <th>产品分类</th>
-        <th>产品名称</th>
-        <th>产品图</th>
-        <th>产品介绍</th>
-        <th>售卖时间段</th>
-        <th>价格</th>
-        <th>库存</th>
-        <th>制作时间</th>
-        <th>状态</th>
-        <th style="text-align: center;"><div class="pr20">操作</div></th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr v-for="item in list" :key="item.id">
-        <td><div>{{item.cname}}</div></td>
-        <td><div>{{item.title}}</div></td>
-        <td>
-          <div>
-            <van-image width="60" height="60" radius="12" fit="cover" :src="imgSrc + item.cover" />
-          </div>
-        </td>
-        <td>
-          <div>
-            <Tooltip :content="item.content" :max-width="300" placement="right">
-              <div class="content">{{item.content}}</div>
-            </Tooltip>
-          </div>
-        </td>
-        <td><div>{{item.date_start || '--'}} - {{item.date_end || '--'}}</div></td>
-        <td><div>{{item.price}}元</div></td>
-        <td><div>{{item.store_nums}}</div></td>
-        <td><div>{{item.make_time}}分钟</div></td>
-        <td><div>{{item.status_name}}</div></td>
-        <td class="opera">
-          <div class="center">
-            <div v-if="item.check_status === 1">
-              <Poptip title="确认下架？" confirm @on-ok="changeStatus(item.id, 1)">
-                <Button size="small" v-if="item.status === 2">下架</Button>
-              </Poptip>
-              <Poptip title="确认上架？" confirm @on-ok="changeStatus(item.id, 2)">
-                <Button size="small" v-if="item.status === 1">上架</Button>
-              </Poptip>
-              <Button size="small" class="ml10" @click="handleEdit(item.id)">编辑</Button>
-              <Poptip title="确认删除？" confirm @on-ok="handleDel(item.id)">
-                <Button size="small" class="ml10 bg-gray">删除</Button>
-              </Poptip>
+  <div class="scrollBar goods-scroll-page">
+    <div class="tee-tables mt30 ml50 mr50">
+      <table>
+        <colgroup>
+          <col width="115" />
+          <col width="95" />
+          <col width="110" />
+          <col width="240" />
+          <col width="138" />
+          <col width="80" />
+          <col width="80" />
+          <col width="96" />
+          <col />
+          <col width="180" />
+        </colgroup>
+        <thead>
+        <tr>
+          <th>产品分类</th>
+          <th>产品名称</th>
+          <th>产品图</th>
+          <th>产品介绍</th>
+          <th>售卖时间段</th>
+          <th>价格</th>
+          <th>库存</th>
+          <th>制作时间</th>
+          <th>状态</th>
+          <th style="text-align: center;"><div class="pr20">操作</div></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="item in list" :key="item.id">
+          <td><div>{{item.cname}}</div></td>
+          <td><div>{{item.title}}</div></td>
+          <td>
+            <div>
+              <van-image width="60" height="60" radius="12" fit="cover" :src="imgSrc + item.cover" />
             </div>
-            <p class="tc" v-else-if="item.check_status === 0" style="width: 100%">审核中</p>
-            <Button size="small" class="ml10 bg-error" v-else-if="item.check_status === -1" @click="handleModify(item.id)">审核不过,重新修改后提交</Button>
-          </div>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="ml50 mt10" v-if="list.length > 0">
-    <Page :current="page" :total="total" simple class-name="tee-page" @on-change="pageChange" />
-  </div>
-  <div class="ml50 mt100" v-if="list.length === 0 && !isAjax">
-    <img src="@/assets/img/none.png" width="265" />
+          </td>
+          <td>
+            <div>
+              <Tooltip :content="item.content" :max-width="300" placement="right">
+                <div class="content">{{item.content}}</div>
+              </Tooltip>
+            </div>
+          </td>
+          <td><div>{{item.date_start || '--'}} - {{item.date_end || '--'}}</div></td>
+          <td><div>{{item.price}}元</div></td>
+          <td><div>{{item.store_nums}}</div></td>
+          <td><div>{{item.make_time}}分钟</div></td>
+          <td><div>{{item.status_name}}</div></td>
+          <td class="opera">
+            <div class="center">
+              <div v-if="item.check_status === 1">
+                <Poptip title="确认下架？" confirm @on-ok="changeStatus(item.id, 1)">
+                  <Button size="small" v-if="item.status === 2">下架</Button>
+                </Poptip>
+                <Poptip title="确认上架？" confirm @on-ok="changeStatus(item.id, 2)">
+                  <Button size="small" v-if="item.status === 1">上架</Button>
+                </Poptip>
+                <Button size="small" class="ml10" @click="handleEdit(item.id)">编辑</Button>
+                <Poptip title="确认删除？" confirm @on-ok="handleDel(item.id)">
+                  <Button size="small" class="ml10 bg-gray">删除</Button>
+                </Poptip>
+              </div>
+              <p class="tc" v-else-if="item.check_status === 0" style="width: 100%">审核中</p>
+              <Button size="small" class="ml10 bg-error" v-else-if="item.check_status === -1" @click="handleModify(item.id)">审核不过,重新修改后提交</Button>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="ml50 mt10 mb30" v-if="list.length > 0">
+      <Page :current="page" :total="total" simple class-name="tee-page" @on-change="pageChange" />
+    </div>
+    <div class="ml50 mt100" v-if="list.length === 0 && !isAjax">
+      <img src="@/assets/img/none.png" width="265" />
+    </div>
   </div>
   <modal-form ref="modalForm" @ok="refresh" />
   <cate-form ref="cateForm" @close="getCateData" />

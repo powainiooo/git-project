@@ -35,7 +35,7 @@
               </div>
               <div class="price"><span>{{item.totolPrice}}</span>元</div>
 
-              <div class="tagC nums" v-if="item.goods_id < 0">x1</div>
+              <div class="nums2" v-if="item.goods_id < 0">x1</div>
               <picker :range="nums" @change="numChange($event, item.id)" v-else>
                 <div class="tagC nums">{{item.buy_nums}}</div>
               </picker>

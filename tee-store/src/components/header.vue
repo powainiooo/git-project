@@ -43,7 +43,7 @@ export default {
   methods: {
     toPage: mpvue.toPage,
     toMine () {
-      mpvue.redirectTo({
+      mpvue.navigateTo({
         url: '/pages/personal/mine/main'
       })
     }

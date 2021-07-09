@@ -136,6 +136,10 @@ export default {
       })
     },
     handleGet () {
+      // store.commit('SET_MOVEICON', this.key)
+      // mpvue.navigateBack({
+      //   delta: -1
+      // })
       if (this.isAjax) return
       this.isAjax = true
       postAction(this.url[this.key], {

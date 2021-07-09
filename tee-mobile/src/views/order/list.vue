@@ -8,7 +8,7 @@
   <div class="container2 container3 list-container">
     <tabs>
       <tab-pane name="tee" title="茶饮订单">
-        <tee />
+        <tee ref="tee" />
       </tab-pane>
       <tab-pane name="nearby" title="积分兑换订单">
         <nearby />
@@ -40,6 +40,13 @@ export default {
   },
   data () {
     return {}
+  },
+  mounted () {
+    this.$refs.tee.interval()
+  },
+  beforeRouteLeave (to, from, next) {
+    this.$refs.tee.stop()
+    next()
   },
   methods: {
     backIndex () {

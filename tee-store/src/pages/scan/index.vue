@@ -79,6 +79,7 @@ import item from '../stores/modules/item'
 import { getAction, postAction } from '@/utils/api'
 import config from '@/config'
 import QQMapWX from '@/utils/qqmap-wx-jssdk.min.js'
+import store from '@/store'
 const { mapKey } = config
 const qMap = new QQMapWX({
   key: mapKey
@@ -108,7 +109,7 @@ export default {
       page: 1,
       city: '',
       total: 0,
-      isAjax: true
+      isAjax: false
     }
   },
 
@@ -135,9 +136,6 @@ export default {
       })
     },
     handleGet () {
-      mpvue.redirectTo({
-        url: '/pages/index/main?key=' + this.key
-      })
       if (this.isAjax) return
       this.isAjax = true
       postAction(this.url[this.key], {
@@ -149,8 +147,9 @@ export default {
             title: res.msg
           })
           setTimeout(() => {
-            mpvue.redirectTo({
-              url: '/pages/index/main?key=' + this.key
+            store.commit('SET_MOVEICON', this.key)
+            mpvue.navigateBack({
+              delta: -1
             })
           }, 1000)
         }

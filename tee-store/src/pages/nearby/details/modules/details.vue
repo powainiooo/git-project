@@ -57,7 +57,7 @@
       </picker>
     </div>
     <div class="r">
-      <button @click="handleConfirm">确定</button>
+      <button @click="handleConfirm" :disabled="price.sNums === 0">{{price.sNums === 0 ? '暂无库存' : '确定'}}</button>
     </div>
   </div>
 </div>
@@ -92,7 +92,8 @@ export default {
       console.log('item', item)
       return {
         price: item !== undefined ? price + item.price : price,
-        price2: item !== undefined ? price + item.price - (item.score_top / 100) : price
+        price2: item !== undefined ? price + item.price - (item.score_top / 100) : price,
+        sNums: item !== undefined ? item.store_nums : 0
       }
     },
     images () {

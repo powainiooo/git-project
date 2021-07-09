@@ -86,7 +86,7 @@ import gifts from './modules/gifts'
 import goods from './modules/goods'
 import records from '../personal/points/modules/records'
 import store from '@/store'
-// import { TweenMax } from 'gsap'
+import { TweenMax } from 'gsap'
 import { getAction } from '@/utils/api'
 
 export default {
@@ -127,9 +127,9 @@ export default {
   data () {
     return {
       nums: 0,
-      score: 200,
-      coupon: 100,
-      prize: 50,
+      score: 0,
+      coupon: 0,
+      prize: 0,
       current: 0,
       key: '',
       hasRecord: true,
@@ -137,8 +137,7 @@ export default {
         score: 0,
         coupon: 1,
         gift: 2
-      },
-      isScane: false
+      }
     }
   },
 
@@ -150,52 +149,50 @@ export default {
           this.coupon = res.data.coupon_nums
           this.prize = res.data.prize_nums
           setTimeout(() => {
-            if (this.current === 0) {
-              this.numsMove(this.score)
-              if (this.$refs.score) {
-                console.log('shake')
-                if (this.key === 'score') {
-                  this.$refs.score.drop()
-                } else {
-                  this.$refs.score.shake()
-                }
-              }
-            } else if (this.current === 1) {
-              this.numsMove(this.coupon)
-            } else if (this.current === 2) {
-              this.numsMove(this.prize)
-            }
+            this.move(this.key === '' ? 'normal' : 'scroll')
           }, 500)
         }
       })
     },
-    numsMove (val) {
-      this.nums = val
-      // const obj = {
-      //   x: 0
-      // }
-      // TweenMax.to(obj, 0.7, {
-      //   x: val,
-      //   onComplete: () => {
-      //     this.nums = parseInt(obj.x)
-      //   },
-      //   onUpdate: (e) => {
-      //     this.nums = obj.x.toFixed(0)
-      //   }
-      // })
+    numsMove (val, type = 'normal') {
+      if (type === 'normal') {
+        this.nums = val
+      } else {
+        const obj = {
+          x: 0
+        }
+        TweenMax.to(obj, 0.7, {
+          x: val,
+          onComplete: () => {
+            this.nums = parseInt(obj.x)
+          },
+          onUpdate: (e) => {
+            this.nums = obj.x.toFixed(0)
+          }
+        })
+      }
     },
     change (e) {
       this.current = e.mp.detail.current
+      this.move()
+    },
+    move (type = 'normal') {
       if (this.current === 0) {
-        this.numsMove(this.score)
+        this.numsMove(this.score, type)
         if (this.$refs.score) {
-          this.$refs.score.shake()
+          if (this.key === 'score') {
+            this.$refs.score.drop()
+            store.commit('SET_MOVEICON', '')
+            this.key = ''
+          } else {
+            this.$refs.score.shake()
+          }
         }
       } else if (this.current === 1) {
-        this.numsMove(this.coupon)
+        this.numsMove(this.coupon, type)
         this.$refs.coupon.shake()
       } else if (this.current === 2) {
-        this.numsMove(this.prize)
+        this.numsMove(this.prize, type)
         this.$refs.gift.shake()
       }
     },
@@ -214,7 +211,6 @@ export default {
       })
     },
     openScan () {
-      this.isScane = true
       mpvue.scanCode({
         success: res => {
           console.log('scan res', res)
@@ -233,8 +229,8 @@ export default {
       }
       const key = scene.substr(0, 1)
       const code = scene.substr(1, scene.length - 1)
-      console.log('key', keys[key], 'code', code)
-
+      console.log('key:', keys[key], ';code:', code)
+      store.commit('SET_MOVEICON', '')
       mpvue.navigateTo({
         url: `/pages/scan/main?key=${keys[key]}&code=${code}`
       })
@@ -247,24 +243,29 @@ export default {
     if (this.$refs.goods) {
       this.$refs.goods.hide()
     }
+    const moveIcon = store.state.moveIcon
+    console.log('moveIcon', moveIcon)
+    if (moveIcon !== '') {
+      this.current = this.hash[moveIcon]
+      this.key = moveIcon
+      this.getData()
+    }
   },
   onLoad (options) {
     console.log('onLoad index2', options)
     Object.assign(this.$data, this.$options.data())
-    this.key = options.key
-    this.current = this.hash[this.key]
-    if (options.key === undefined) {
-      this.current = 0
-    } else if (options.key === 'score') {
-      console.log('score')
-    }
+    // this.key = options.key
+    // this.current = this.hash[this.key]
+    // if (options.key === undefined) {
+    //   this.current = 0
+    // }
     // options.scene = 'Cf9cd723468db2206e3dc22b6b692'
     if (options.scene) {
       const scene = decodeURIComponent(options.scene)
       console.log('scene', scene)
       this.toQrresult(scene)
     }
-    if (this.isLogin && !this.isScane) {
+    if (this.isLogin) {
       this.getData()
     }
   }

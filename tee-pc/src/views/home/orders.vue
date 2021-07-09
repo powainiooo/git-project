@@ -5,7 +5,7 @@
   &:before
     content ''; size(100%, 68px); background-color #F9F9F9; abTL(0, 0); z-index 0;
 .table-scroll
-  height calc(100vh - 188px); overflow-y auto
+  height calc(100vh - 308px); overflow-y auto
 </style>
 
 <template>
@@ -13,14 +13,10 @@
   <div class="pr">
     <Tabs type="card" class="tee-tabs" @on-click="tabChange">
       <TabPane name="tee" label="茶饮订单">
-        <div class="table-scroll scrollBar">
-          <tee ref="tee" />
-        </div>
+        <tee ref="tee" />
       </TabPane>
       <TabPane name="peri" label="周边订单">
-        <div class="table-scroll scrollBar">
-          <peripheral ref="peri" />
-        </div>
+        <peripheral ref="peri" />
       </TabPane>
     </Tabs>
   </div>
@@ -41,6 +37,11 @@ export default {
   },
   mounted () {
     this.$refs.tee.getListData()
+    this.$refs.tee.interval()
+  },
+  beforeRouteLeave (to, from, next) {
+    this.$refs.tee.stop()
+    next()
   },
   methods: {
     tabChange (name) {

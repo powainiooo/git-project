@@ -34,7 +34,8 @@ export default {
       loading: false,
       finished: false,
       page: 0,
-      limit: 10
+      limit: 10,
+      t: 0
     }
   },
   methods: {
@@ -70,6 +71,26 @@ export default {
           })
         }
       })
+    },
+    interval () {
+      this.t = setInterval(() => {
+        this.refreshData()
+      }, 10000)
+    },
+    refreshData () {
+      const params = this.getParams()
+      params.page = 1
+      getAction('/shopapi/order/index/data', params).then(res => {
+        if (res.code === 0) {
+          if (res.data[0].id !== this.list[0].id) {
+            this.list = this.list.concat(res.data)
+            this.finished = this.list.length === res.count || res.data.length === 0
+          }
+        }
+      })
+    },
+    stop () {
+      clearInterval(this.t)
     }
   }
 }

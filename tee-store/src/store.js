@@ -21,7 +21,8 @@ const store = new Vuex.Store({
     couponId: 0,
     menuInfo: 0,
     nearbyGoods: {},
-    pay: {}
+    pay: {},
+    moveIcon: ''
   },
   mutations: {
     SET_TOKEN (state, data) {
@@ -63,6 +64,9 @@ const store = new Vuex.Store({
     },
     SET_SMAUTH (state, data) {
       state.smAuth = data
+    },
+    SET_MOVEICON (state, data) {
+      state.moveIcon = data
     }
   }
 })

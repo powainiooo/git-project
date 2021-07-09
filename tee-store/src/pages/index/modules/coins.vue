@@ -1,5 +1,5 @@
 <style>
-.coin { width: 50px; height: 200px; position: absolute; left: 210px; bottom: 86%; overflow: hidden; }
+.coin { width: 12%; height: 200px; position: absolute; left: 54%; bottom: 86%; overflow: hidden; }
 .coin img { width: 100%; opacity: 0;  }
 .coin-move { animation: coin 1.5s cubic-bezier(.3,.49,.25,1.07) .5s both; }
 @keyframes coin {
@@ -50,7 +50,7 @@ export default {
       this.moving = true
     },
     moveEnd () {
-      // this.moving = false
+      this.moving = false
     },
     drop () {
       this.moving = false

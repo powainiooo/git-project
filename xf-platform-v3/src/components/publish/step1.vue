@@ -200,7 +200,7 @@ export default {
         name: this.formData.name,
         cover_image: url,
         organizer_name: this.globalData.merchant.organizer_name,
-        logo: this.globalData.merchant.logo
+        logo: this.cdnurl + this.globalData.merchant.logo
       }
     },
     phoneDisabled () {

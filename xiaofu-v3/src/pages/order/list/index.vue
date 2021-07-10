@@ -53,9 +53,9 @@
   <div class="order-container">
     <div class="title"><span>Order center</span>已购票务</div>
     <div class="order-list">
-      <div v-for="(key, i) in list" :key="i">
-      <div class="years">{{i}}</div>
-      <c-list-item v-for="(item, i2) in key" :record="item" :key="i2" />
+      <div v-for="(key, i) in list" :key="year">
+      <div class="years">{{key.year}}</div>
+      <c-list-item v-for="(item, i2) in key.list" :record="item" :key="i2" />
       </div>
     </div>
   </div>
@@ -88,11 +88,15 @@ export default {
           for (let i of res.data.list) {
             const dates = i.start_date.split('-')
             if (!data[dates[0]]) {
-              data[dates[0]] = []
+              data[`y${dates[0]}`] = {
+                year: dates[0],
+                list: []
+              }
             }
-            data[dates[0]].push(i)
+            data[`y${dates[0]}`].list.push(i)
           }
           this.list = data
+          console.log('this.list', this.list)
         }
       })
     }

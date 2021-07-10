@@ -169,12 +169,12 @@ export default {
       }
     },
     showEndDate () {
-      return this.record.start_date !== this.record.start_date
+      return this.record.time_type !== 1 && this.size === 'large'
     },
     infoData2 () {
       let date = ['', '']
       if (this.record && this.showEndDate) {
-        date = this.record.start_date.split('-')
+        date = this.record.end_date.split('-')
       }
       return {
         month: date[1],

@@ -1,5 +1,6 @@
 export default {
   pages: [
+    'pages/mine/setting/index',
     'pages/mine/feedback/index',
     'pages/mine/yue/record',
     'pages/mine/yue/tixian',

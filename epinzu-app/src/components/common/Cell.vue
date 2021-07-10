@@ -23,7 +23,7 @@
       <slot name="label" v-else />
     </view>
   </view>
-  <view class="c-cell-value">
+  <view class="c-cell-value" :style="{'color': color}">
     <text v-if="value">{{value}}</text>
     <slot name="value" v-else />
   </view>
@@ -42,6 +42,10 @@ export default {
 	  value: {
 	    type: String,
       default: ''
+    },
+	  color: {
+	    type: String,
+      default: '#333333'
     },
 	  label: {
 	    type: String,

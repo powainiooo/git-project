@@ -9,6 +9,7 @@ button:after { border: none; }
 .bg-fff { background-color: #FFFFFF; }
 
 /* 文字排版 */
+.f8{ font-size: 8px;}
 .f10{ font-size: 10px;}
 .f12{ font-size: 12px;}
 .f13{ font-size: 13px;}

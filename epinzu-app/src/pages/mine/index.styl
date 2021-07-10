@@ -1,0 +1,56 @@
+@import '../../static/css/mixin.styl'
+
+.Mine
+  .person
+    abTL(0, 12px); acenter();
+    image
+      size(48px, 48px); margin-right 8px;
+  &-nums-nav
+    height 82px; acenter(); margin-top -30px;
+    &>view
+      flex 1; text-align center;
+  &-order-nav
+    display flex; flex-wrap wrap;
+    &>view
+      width 25%; text-align center;
+      .dot-num
+        border 1PX solid #FE322B; color #FE322B; background-color #FFFFFF; abTL(-6px, 46px)
+.Attention
+  &-item
+    background-color #FFFFFF; margin-bottom 8px; padding 8px 0;
+    .scrolls
+      size(100% , 85px); margin-top 8px;
+      .list
+        acenter(); margin-left 12px;
+        .item
+          size(85px, 85px); border-radius 4px; background-color #F5F5F5; overflow hidden; margin-right 8px; flex 1 0 auto; position relative;
+          image
+            size(100%, 100%);
+          view
+            background-color rgba(51, 51, 51, 0.5); height 14px; border-radius 0 4px 0 4px; padding 0 3px; line-height 14px; font-size 8px; color #FFFFFF; abBL(0, 0);
+
+.Collection
+  .list
+    width 100vw; overflow hidden;
+    .item-box
+      width calc(100vw + 80px); background-color #FFFFFF; acenter(); transition transform .2s ease-out;
+      &:after
+        left 12px;
+      .item
+        width 100vw
+        .goods-item-hor
+          .company
+            width auto;
+      .btn-del
+        size(80px, 116px); center(); background-color #FE322B; color #FFFFFF;
+    .item-box-show
+      transform translateX(-80px);
+
+.Coupon
+  .c-coupon-item
+    height 67px; margin-bottom 8px;
+    .c-btn-border
+      background-color transparent
+.Feedback
+  textarea
+    height 93px; font-size 12px; background-color #F5F5F5; padding 8px;

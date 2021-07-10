@@ -1,5 +1,13 @@
 export default {
   pages: [
+    'pages/mine/feedback/index',
+    'pages/mine/yue/record',
+    'pages/mine/yue/tixian',
+    'pages/mine/yue/index',
+    'pages/mine/coupon/index',
+    'pages/mine/collection/index',
+    'pages/mine/attention/index',
+    'pages/mine/index',
     'pages/rent/apply',
     'pages/rent/message',
     'pages/rent/order/record/index',

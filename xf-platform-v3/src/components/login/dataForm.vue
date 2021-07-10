@@ -110,7 +110,7 @@
         </div>
         <div>
           <div class="form">
-            <div class="form-title">上传资料</div>
+            <div class="form-title">上传资料{{type}}</div>
             <template v-if="type === '1'">
               <FormItem>
                 <upload-img v-model="formData.id_card_front_image">

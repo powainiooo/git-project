@@ -51,8 +51,19 @@ router.beforeEach((to, from, next) => {
   if (Vue.ls.get(ACCESS_TOKEN)) {
     console.log('1')
     if (to.path === '/login') {
-      console.log('2')
-      next('/index')
+      console.log('2', to, from)
+      try {
+        const type = store.state.globalData.merchant.account_type
+        if (type === 0) { // 老账户
+          next({
+            name: 'Account'
+          })
+        } else {
+          next('/index')
+        }
+      } catch (e) {
+        next('/index')
+      }
       LoadingBar.finish()
     } else {
       if (store.state.hasGlobalData) {

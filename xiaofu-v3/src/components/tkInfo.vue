@@ -26,7 +26,7 @@
 .c-tk-title { flex: 1; overflow: hidden; }
 .c-tk-title p { font-size: 26px; font-family: HelveB; line-height: 30px; }
 .c-tk-title p.ellipsis { text-overflow: ellipsis; overflow: hidden; white-space: nowrap; word-break: break-all; }
-.c-tk-title div { font-size: 20px; font-family: HelveL; color: #9E9E9F; line-height: 25px; }
+.c-tk-title div { font-size: 20px; font-family: HelveL; color: #9E9E9F; line-height: 25px; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; word-break: break-all; }
 </style>
 
 <template>

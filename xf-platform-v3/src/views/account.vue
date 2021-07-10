@@ -45,6 +45,7 @@ export default {
   },
   watch: {
     hasGlobalData (val) {
+      console.log('hasGlobalData', val)
       if (val) {
         this.setDatas()
       }

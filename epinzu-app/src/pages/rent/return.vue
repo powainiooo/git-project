@@ -1,6 +1,20 @@
 <template>
   <view class="Rent container">
     <Tabs :list="tabs" :border="true" @change="tabChange" />
+    <!-- 店铺信息 -->
+    <view class="section" v-if="tabKey === 'return'">
+      <view class="mt8 acenter">
+        <view class="w60 f12 c-999">联系人：</view>
+        <view class="f12">五金阿哥 13800138000</view>
+      </view>
+      <view class="mt8 between mb8">
+        <view class="acenter">
+          <view class="w60 f12 c-999">商家地址：</view>
+          <view class="f12">广东省深圳市宝安区沙井街道中心路10号</view>
+        </view>
+        <image src="@/img/dot.png" mode="widthFix" class="w14" />
+      </view>
+    </view>
     <!-- 订单信息 -->
     <view class="section2 mb8">
       <view class="goods-item-hor mt8 mb8">
@@ -35,9 +49,18 @@
       </view>
     </view>
     <!-- 快递信息 -->
-    <view class="section2">
-
+    <template v-if="tabKey === 'post'">
+    <view class="section2" style="margin-bottom: 0;">
+      <view class="h52 between borderB">
+        <view class="c-666">快递公司</view>
+        <view class="acenter">
+          <view class="c-999">请选择</view>
+          <image src="@/img/ar1.png" mode="widthFix" class="w10 ml4" />
+        </view>
+      </view>
     </view>
+    <Field label="快递单号" placeholder="请输入" textAlign="right" />
+    </template>
     <!-- 底部按钮 -->
     <view class="footer-container">
       <view class="wp100 pl12 pr12">
@@ -51,11 +74,13 @@
 import Taro from '@tarojs/taro'
 import './index.styl'
 import Tabs from '@/c/common/Tabs'
+import Field from '@/c/common/Field'
 
 export default {
   name: 'Index',
   components: {
-    Tabs
+    Tabs,
+    Field
   },
   data () {
     return {
@@ -63,10 +88,13 @@ export default {
         { key: 'post', label: '快递' },
         { key: 'return', label: '自还' }
       ],
+      tabKey: 'post'
     }
   },
   methods: {
-    tabChange (e) {}
+    tabChange (e) {
+      this.tabKey = e
+    }
   },
 }
 </script>

@@ -99,6 +99,9 @@ export default {
   methods: {
     toggleShow (status) {
       this.show = status
+      if (status) {
+        this.selectedDate = ''
+      }
     },
     formatDate (year, month, day) {
       if (month === -1) month = 11

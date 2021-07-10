@@ -182,8 +182,10 @@ export default {
           } else {
             this.total = res.data.total
             this.list = res.data.list
+            // this.list = []
             this.showWelcome = this.list.length === 0 && this.keyword === ''
           }
+          // this.$refs.alert.check('checkSuc', '<p class="tc">请耐心等待审核，如有疑问请联系客服<br/>联系客服（微信同号）：186 8143 8270<br/>工作时间：10:30~22：00</p>')
         }
       })
     },

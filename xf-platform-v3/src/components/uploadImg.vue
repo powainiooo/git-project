@@ -194,7 +194,11 @@ export default {
       }
     },
     cdnurl () {
-      return this.$store.state.config.uploaddata.cdnurl
+      if (this.$store.state.config && this.$store.state.config.uploaddata) {
+        return this.$store.state.config.uploaddata.cdnurl
+      } else {
+        return ''
+      }
     },
     url () {
       return `${window.baseUrl === '/' ? '' : window.baseUrl}/addons/upyun/index/upload.html`

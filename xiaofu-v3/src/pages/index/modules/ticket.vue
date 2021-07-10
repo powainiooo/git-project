@@ -112,7 +112,7 @@
   <img src="/static/images/common/ticket-shadow-small.png" class="ticket-shadow-small" v-if="size === 'small'" />
   <img src="/static/images/common/ticket-shadow-large.png" class="ticket-shadow-large" v-if="size === 'large'" />
   <div class="c-ticket-bar">
-    <tk-info :record="infoData" />
+    <tk-info :record="infoData" :endDate="infoData2" :showEndDate="showEndDate" />
     <img :src="record.logo" class="logo" mode="aspectFill" v-if="size === 'large'" />
   </div>
   <div class="c-ticket-imgs">
@@ -166,6 +166,19 @@ export default {
         day: date[2],
         name,
         host
+      }
+    },
+    showEndDate () {
+      return this.record.start_date !== this.record.start_date
+    },
+    infoData2 () {
+      let date = ['', '']
+      if (this.record && this.showEndDate) {
+        date = this.record.start_date.split('-')
+      }
+      return {
+        month: date[1],
+        day: date[2]
       }
     }
   },

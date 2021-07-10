@@ -1,5 +1,10 @@
 export default {
   pages: [
+    'pages/rent/apply',
+    'pages/rent/message',
+    'pages/rent/order/record/index',
+    'pages/rent/order/reject/index',
+    'pages/rent/order/confirm/index',
     'pages/rent/return',
     'pages/rent/detail',
     'pages/rent/index',

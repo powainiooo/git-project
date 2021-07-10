@@ -17,7 +17,13 @@
 <view class="c-field">
   <view class="c-field-name" v-if="label !== ''">{{label}}</view>
   <view class="c-field-body">
-    <input :type="type" :placeholder="placeholder" :value="value" :disabled="readonly" @Input="inputChange" />
+    <input :type="type"
+           :placeholder="placeholder"
+           :value="value"
+           :disabled="readonly"
+           :style="inputStyle"
+           placeholder-style="color: #999999;"
+           @Input="inputChange" />
     <view class="c-field-button" v-if="$slots.rightIcon">
       <slot name="rightIcon"></slot>
     </view>
@@ -51,6 +57,17 @@ export default {
     readonly: {
 	    type: Boolean,
       default: false
+    },
+    textAlign: {
+      type: String,
+      default: 'left'
+    }
+  },
+  computed: {
+    inputStyle () {
+      return {
+        'text-align': this.textAlign
+      }
     }
   },
 	data() {

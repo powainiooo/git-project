@@ -41,7 +41,7 @@
   <div>
     <img src="@/assets/img/f1.png" class="c-welcome-img2" :class="{'move2': show}" @load="loadOver" />
     <p :class="{'move4': show}">
-      <Button to="/publish" style="width: 250px;" :class="{'move3': show}">发布你的第一场活动</Button>
+      <Button to="/publish" style="width: 250px; margin-left: -30px;" :class="{'move3': show}">发布你的第一场活动</Button>
     </p>
   </div>
 </div>

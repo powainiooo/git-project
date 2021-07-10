@@ -34,12 +34,12 @@ module.exports = {
 }
 /*
 * a2ropq
-* https://leesticket.waiting8.com/NVcfRhyJlY.php  http://editor.leesticket.waiting8.com/#/login
+* https://leesticket.waiting8.com/NVcfRhyJlY.php  http://editor.leesticket.waiting8.com/#/login  http://editor.uat.leesticket.com/#/login
 帐号：leesticket
 密码：nihao123
 ip：58.220.46.36
 端口：21
 账号：editor_uat_leesticket
 密码：kHA4sfwPNai8iEk8
-* 13723797362 hohodiaozhale 123456 18023095011 1234567a
+* 13723797362 hohodiaozhale 123456 18023095011 hohodiaozhale 13727864554 123456
 * */

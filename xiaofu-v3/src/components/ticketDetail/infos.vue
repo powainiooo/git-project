@@ -14,6 +14,8 @@
   justify-content: space-between;
   align-items: center;
   margin: 0 25px;
+}
+.c-ticket-infos .line1-move {
   animation: moveUp .7s cubic-bezier(.3,.79,.41,.91) .2s both;
 }
 .c-ticket-infos .line1 .l {
@@ -29,6 +31,8 @@
   align-items: center;
   height: 80px;
   margin: 0 25px;
+}
+.c-ticket-infos .line2-move {
   animation: moveUp .7s cubic-bezier(.3,.79,.41,.91) .4s both;
 }
 .c-ticket-infos .line2:before {
@@ -83,13 +87,13 @@
 <template>
 <div class="c-ticket-infos">
   <img :src="record.cover_image" mode="aspectFill" class="banner" :class="{'banner-hide': page === 'buy'}" v-if="showBanner && record" />
-  <div class="line1 bBorder">
+  <div class="line1 bBorder" :class="{'line1-move': move}">
     <div class="l">
       <tk-info :record="infoData" :endDate="infoData2" :showEndDate="showEndDate" :ellipsis="false" />
     </div>
     <img :src="record.logo" mode="aspectFill" v-if="record" />
   </div>
-  <div class="line2 bBorder">
+  <div class="line2 bBorder" :class="{'line2-move': move}">
     <ul class="times">
       <li v-for="i in timeStr" :key="i">{{i}}</li>
     </ul>
@@ -120,6 +124,10 @@ export default {
     showBanner: {
       type: Boolean,
       default: true
+    },
+    move: {
+      type: Boolean,
+      default: false
     }
   },
   components: {

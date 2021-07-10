@@ -101,7 +101,9 @@
 .section
   margin 8px 12px; background-color #FFFFFF; border-radius 4px; padding 0 8px; overflow hidden; position relative;
 .section2
-  margin 8px 0; background-color #FFFFFF; border-radius 4px; padding 0 12px; overflow hidden; position relative;
+  margin 8px 0; background-color #FFFFFF; padding 0 12px; overflow hidden; position relative;
+.hint-box
+  background-color #F5F5F5; border-radius 4px; padding 8px;
 
 /* 产品模块 */
 .goods-list
@@ -156,3 +158,13 @@
     size(20px, 20px); border-radius 50%;
   text
     margin-left 4px;
+
+/* 图片列表 */
+.img-list
+  display flex; flex-wrap wrap;
+  .img-item
+    size(60px, 60px); border-radius 4px; background-color #F5F5F5; margin 0 8px 8px 0;
+    image
+      size(100%, 100%);
+.avatar
+  size(40px, 40px); border-radius 50%;

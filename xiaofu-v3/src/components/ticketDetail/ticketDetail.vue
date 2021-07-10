@@ -170,7 +170,7 @@
   </scroll-view>
 
   <div>
-  <infos ref="infos" :record="record"/>
+  <infos ref="infos" :record="record" move/>
 
   <artist ref="artist" :list="record.artist_list || []" v-if="record.artist_list.length > 0" />
   <notice ref="notice" :list="record.notice_list || []" v-if="record.notice_list.length > 0" />

@@ -93,7 +93,7 @@
       </view>
       <view class="pay-item">
         <view class="acenter">
-          <image src="@/img/wechat.png" mode="widthFix" class="icon mr4" />
+          <image src="@/img/yue.png" mode="widthFix" class="icon mr4" />
           <view>余额支付（<text class="f10">￥</text>18）</view>
         </view>
       </view>

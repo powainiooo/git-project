@@ -51,9 +51,9 @@
 
   <div class="footer-btns" v-if="visible && showItem">
     <div class="l center">
-      <picker :range="nums" @change="numChange">
+      <picker :range="nums" @change="numChange" :disabled="price.sNums === 0">
         <div class="nums"><span>{{num}}</span>杯</div>
-        <img src="/static/images/arrow5.png" mode="widthFix" class="ar" />
+        <img src="/static/images/arrow5.png" mode="widthFix" class="ar" v-if="price.sNums > 0" />
       </picker>
     </div>
     <div class="r">
@@ -101,6 +101,17 @@ export default {
         return this.record.detail.images
       }
       return []
+    },
+    nums () {
+      if (this.price.sNums > 10) {
+        return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+      } else {
+        const nums = []
+        for (let i = 0 ; i < this.price.sNums; i++) {
+          nums.push(i + 1)
+        }
+        return nums
+      }
     }
   },
   data() {
@@ -111,7 +122,6 @@ export default {
       tags: [],
       cates: [],
       cateIds: {},
-      nums: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
       num: 1,
       isAjax: false
     }
@@ -119,6 +129,7 @@ export default {
   methods: {
     show () {
       this.visible = true
+      this.num = 1
       this.$nextTick(() => {
         setTimeout(() => {
           this.showItem = true
@@ -141,6 +152,7 @@ export default {
     selectCate (key, id) {
       this.cateIds[key] = id
       console.log(this.cateIds)
+      this.num = 1
     },
     numChange (e) {
       this.num = this.nums[e.mp.detail.value]

@@ -140,6 +140,7 @@ export default {
       // mpvue.navigateBack({
       //   delta: -1
       // })
+      // this.isAjax = true
       if (this.isAjax) return
       this.isAjax = true
       postAction(this.url[this.key], {

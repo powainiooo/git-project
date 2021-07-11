@@ -88,7 +88,9 @@ export default {
   },
   mounted () {
     if (this.record.status === 3) {
-      this.$refs.timer.count(this.record.remain_make_time)
+      setTimeout(() => {
+        this.$refs.timer.count(this.record.remain_make_time)
+      }, 100)
     }
   },
   methods: {

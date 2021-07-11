@@ -154,7 +154,7 @@ export default {
         }
       })
     },
-    numsMove (val, type = 'normal') {
+    numsMove (val, type = 'normal', delay = 0) {
       if (type === 'normal') {
         this.nums = val
       } else {
@@ -163,6 +163,7 @@ export default {
         }
         TweenMax.to(obj, 0.7, {
           x: val,
+          delay,
           onComplete: () => {
             this.nums = parseInt(obj.x)
           },
@@ -178,7 +179,7 @@ export default {
     },
     move (type = 'normal') {
       if (this.current === 0) {
-        this.numsMove(this.score, type)
+        this.numsMove(this.score, type, 1.5)
         if (this.$refs.score) {
           if (this.key === 'score') {
             this.$refs.score.drop()

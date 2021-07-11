@@ -69,12 +69,12 @@
     <div class="c-modal-box">
       <img src="/static/images/bg.png" class="bg" />
       <div class="pr">
-        <img src="/static/images/free@2x.png" mode="widthFix" class="free" />
-        <img src="/static/images/arrow6.png" mode="widthFix" class="ar6" />
-        <img src="/static/images/arrow7.png" mode="widthFix" class="ar7" />
+        <img src="/static/images/arrow6.png" mode="widthFix" class="ar6" v-if="prizeData.length > 0" />
+        <img src="/static/images/arrow7.png" mode="widthFix" class="ar7" v-if="prizeData.length > 0" />
         <swiper class="swiper" @change="giftChange">
           <swiper-item v-for="item in prizeData" :key="id">
             <div class="line1 center">
+              <img src="/static/images/free@2x.png" mode="widthFix" class="free" />
               <div class="imgs"><img :src="imgSrc + item.cover" mode="aspectFill" /></div>
             </div>
             <div class="title">{{item.title}}</div>
@@ -208,6 +208,8 @@ export default {
               _this.storeInfo = res2.data
               if (_this.storeInfo.word_status === 0 || _this.storeInfo.pause === 1) {
                 _this.closeModalVisible = true
+              } else {
+                _this.getPrize()
               }
             }
           })
@@ -342,7 +344,7 @@ export default {
   onShareAppMessage () {
     return {
       title: 'HEYTEA',
-      path: `/pages/goods/main`
+      path: `/pages/goods/main?id=${this.shopId}`
     }
   },
   onShow () {
@@ -357,7 +359,6 @@ export default {
     this.getData()
     this.getCart()
     this.getStoreInfo()
-    this.getPrize()
   },
   onLoad (options) {
     console.log('goods onLoad', options)

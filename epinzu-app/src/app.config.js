@@ -1,5 +1,14 @@
 export default {
   pages: [
+    'pages/refund/apply',
+    'pages/refund/type',
+    'pages/refund/index',
+    'pages/order/post/index',
+    'pages/order/list/index',
+    'pages/order/detail/index',
+    'pages/mine/auth/index',
+    'pages/mine/account/index',
+    'pages/mine/nickname/index',
     'pages/mine/setting/index',
     'pages/mine/feedback/index',
     'pages/mine/yue/record',

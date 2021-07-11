@@ -21,7 +21,6 @@
 
 <script>
 import Taro from '@tarojs/taro'
-import './index.styl'
 import Cell from '@/c/common/Cell'
 
 export default {

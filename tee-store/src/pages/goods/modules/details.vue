@@ -104,6 +104,7 @@ export default {
 	methods: {
 	  show (data) {
       this.visible = true
+      this.num = 1
 	    getAction('/userapi/goods/show', {
 	      id: data.id
       }).then(res => {

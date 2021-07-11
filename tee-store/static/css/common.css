@@ -93,7 +93,7 @@
 .c-modal-box .line1 { height: 160px; margin: 130px 0 40px 0; position: relative; }
 .c-modal-box .line1 .txt1 { font-family: DinB; font-size: 120px; line-height: 140px; }
 .c-modal-box .swiper { width: 390px; height: 440px; margin: 0 auto 120px auto; }
-.c-modal-box .free { width: 274px; position: absolute; top: 170px; left: 50%; z-index: 20; transform: translate(-50%, 0); }
+.c-modal-box .free { width: 274px; position: absolute; top: 50px; left: 50%; z-index: 20; transform: translate(-50%, 0); }
 .c-modal-box .ar6 { width: 12px; position: absolute; top: 200px; right: 50px; }
 .c-modal-box .ar7 { width: 12px; position: absolute; top: 200px; left: 50px; }
 .c-modal-box .title { width: 390px; font-size: 30px; line-height: 30px; margin: 0 auto 15px auto; text-align: center; }

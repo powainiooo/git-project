@@ -175,7 +175,9 @@ export default {
     },
     change (e) {
       this.current = e.mp.detail.current
-      this.move()
+      if (this.key === '') {
+        this.move()
+      }
     },
     move (type = 'normal') {
       if (this.current === 0) {

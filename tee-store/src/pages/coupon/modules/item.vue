@@ -18,10 +18,16 @@
 .coupon-item-min { height: 180px; }
 .coupon-item-min .coupon-item-l { width: 484px; }
 .coupon-item-min .coupon-item-r { width: 150px; }
+.coupon-item-used .coupon-item-r .bg { display: none; }
+.coupon-item-used .coupon-item-r .center { color: #B9BABB; }
 </style>
 
 <template>
-<div class="coupon-item" hover-class="hscale" hover-stay-time="10" @click="$emit('tap', record)" :class="[extraClass]">
+<div class="coupon-item"
+     hover-class="hscale"
+     hover-stay-time="10"
+     @click="$emit('tap', record)"
+     :class="classes">
   <div class="coupon-item-l">
     <img src="/static/images/mask1.png" mode="widthFix" class="bg" v-if="extraClass === ''" />
     <img src="/static/images/mask3.png" mode="widthFix" class="bg" v-else />
@@ -36,7 +42,7 @@
   </div>
   <div class="coupon-item-r">
     <img src="/static/images/mask2.png" mode="widthFix" class="bg" />
-    <div class="center">立即使用</div>
+    <div class="center">{{record.status === 2 ? '已使用' : '立即使用'}}</div>
   </div>
 </div>
 </template>
@@ -49,6 +55,14 @@ export default {
 	  extraClass: {
 	    type: String,
       default: ''
+    }
+  },
+  computed: {
+	  classes () {
+	    return {
+	      'coupon-item-used': this.record.status === 2,
+        [this.extraClass]: true
+      }
     }
   },
 	data() {

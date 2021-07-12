@@ -105,9 +105,9 @@ export default {
       if (this.current === 0) {
         return this.score > 0 && this.hasRecord
       } else if (this.current === 1) {
-        return this.coupon > 0
+        return this.hasCoupon
       } else if (this.current === 2) {
-        return this.prize > 0
+        return this.hasPrize
       }
     },
     isLogin () {
@@ -121,6 +121,7 @@ export default {
     token (token) {
       if (token !== '') {
         this.getData()
+        this.recordLoad()
       }
     }
   },
@@ -133,6 +134,8 @@ export default {
       current: 0,
       key: '',
       hasRecord: true,
+      hasCoupon: true,
+      hasPrize: true,
       hash: {
         score: 0,
         coupon: 1,
@@ -239,7 +242,32 @@ export default {
       })
     },
     recordLoad (e) {
-      this.hasRecord = e !== 0
+      getAction('/userapi/user/score/index/data2', {
+        page: 1,
+        limit: 20
+      }).then(res => {
+        if (res.code === 0) {
+          this.hasRecord = res.data.length > 0
+        }
+      })
+      getAction('/userapi/user/coupon/index/data', {
+        page: 1,
+        limit: 20,
+        status: 2
+      }).then(res => {
+        if (res.code === 0) {
+          this.hasCoupon = res.data.length > 0
+        }
+      })
+      getAction('/userapi/user/prize/index/data', {
+        page: 1,
+        limit: 20,
+        status: 2
+      }).then(res => {
+        if (res.code === 0) {
+          this.hasPrize = res.data.length > 0
+        }
+      })
     }
   },
   onShow () {
@@ -252,6 +280,7 @@ export default {
       this.current = this.hash[moveIcon]
       this.key = moveIcon
       this.getData()
+      this.recordLoad()
     }
   },
   onLoad (options) {

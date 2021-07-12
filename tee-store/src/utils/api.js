@@ -125,33 +125,37 @@ export const sendSM = (orderId, from, key) => {
 }
 
 // 支付
-export const payment = (orderNo, orderId, from, key) => {
-  postAction('/userapi/goods/order/create/pay', {
-    order_no: orderNo
-  }).then(res => {
-    if (res.code === 0) {
-      const jsapi = res.data
-      mpvue.requestPayment({
-        'timeStamp': jsapi.timeStamp,
-        'nonceStr': jsapi.nonceStr,
-        'package': jsapi.package,
-        'signType': jsapi.signType,
-        'paySign': jsapi.paySign,
-        'success': res => {
-          // this.getMessageAuth()
-          console.log('pay success', res)
-          sendSM(orderId, from, key)
-          mpvue.hideLoading()
-        },
-        'fail': err => {
-          console.log('pay fail', err)
-          store.commit('SET_PAY', jsapi)
-          mpvue.reLaunch({
-            url: `/pages/result/main?result=fail&id=${orderId}&from=${from}`
-          })
-          mpvue.hideLoading()
-        }
-      })
-    }
-  })
+export const payment = (orderNo, orderId, from, key, payAmount) => {
+  if (this.payAmount === 0) {
+    sendSM(orderId, from, key)
+  } else {
+    postAction('/userapi/goods/order/create/pay', {
+      order_no: orderNo
+    }).then(res => {
+      if (res.code === 0) {
+        const jsapi = res.data
+        mpvue.requestPayment({
+          'timeStamp': jsapi.timeStamp,
+          'nonceStr': jsapi.nonceStr,
+          'package': jsapi.package,
+          'signType': jsapi.signType,
+          'paySign': jsapi.paySign,
+          'success': res => {
+            // this.getMessageAuth()
+            console.log('pay success', res)
+            sendSM(orderId, from, key)
+            mpvue.hideLoading()
+          },
+          'fail': err => {
+            console.log('pay fail', err)
+            store.commit('SET_PAY', jsapi)
+            mpvue.reLaunch({
+              url: `/pages/result/main?result=fail&id=${orderId}&from=${from}`
+            })
+            mpvue.hideLoading()
+          }
+        })
+      }
+    })
+  }
 }

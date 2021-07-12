@@ -10,7 +10,7 @@
   <c-header />
   <div class="container2 pt20 pr" style="padding-bottom: 0;">
     <div class="coupon-bg center"><img src="/static/images/index/coupon.png" mode="widthFix" class="coupon-img" /></div>
-    <tabs :current="current" @change="tabChange">
+    <tabs :current="current" @change="tabChange" v-if="showTabs">
       <tab-pane :name="1" title="未使用"></tab-pane>
       <tab-pane :name="2" title="已使用"></tab-pane>
     </tabs>
@@ -53,7 +53,8 @@ export default {
       status: 1,
       page: 1,
       total: 0,
-      list: []
+      list: [],
+      showTabs: true
     }
   },
 
@@ -103,13 +104,20 @@ export default {
     }
   },
   onLoad (options) {
+    console.log('coupon onLoad', this.current)
     Object.assign(this.$data, this.$options.data())
     if (options.status === 'used') {
+      console.log('coupon onLoad1')
       this.current = 1
       this.status = 2
     } else {
+      console.log('coupon onLoad2')
       this.current = 0
       this.status = 1
+      this.showTabs = false
+      this.$nextTick(() => {
+        this.showTabs = true
+      })
     }
     this.getData()
   }

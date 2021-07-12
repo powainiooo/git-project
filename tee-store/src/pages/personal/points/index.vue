@@ -2,7 +2,7 @@
 .points-container { padding-bottom: 0; }
 .points-container .line1 { padding: 22px 25px 0 32px; }
 .points-container .line1 .l img { width: 80px; }
-.points-container .line1 .l p { font-size: 100px; color: #41372D; line-height: 118px; }
+.points-container .line1 .l p { font-size: 100px; color: #41372D; line-height: 118px; font-family: DinB; }
 .points-container .icons { width: 100%; height: calc(100% - 176px); display: flex; justify-content: center; align-items: center; }
 .points-container .icons .pig { height: 63%; display: block; }
 .points-container .icons .coupon { height: 41%; display: block; }

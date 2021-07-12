@@ -354,16 +354,16 @@ export default {
     if (this.$refs.detail) {
       this.$refs.detail.hide()
     }
-    this.cateList = []
-    this.goodsList = []
-    this.getData()
-    this.getCart()
-    this.getStoreInfo()
   },
   onLoad (options) {
     console.log('goods onLoad', options)
     Object.assign(this.$data, this.$options.data())
     this.shopId = options.id || 1
+    this.cateList = []
+    this.goodsList = []
+    this.getData()
+    this.getCart()
+    this.getStoreInfo()
   }
 }
 </script>

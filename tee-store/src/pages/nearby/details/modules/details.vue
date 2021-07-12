@@ -42,7 +42,7 @@
               class="btn "
               :class="{
               'btn-style1': child.id === cateIds['c'+cate.id],
-              'btn-style2': child.id !== cateIds['c'+cate.id]
+              'btn-style4': child.id !== cateIds['c'+cate.id]
             }" @click="selectCate('c'+cate.id, child.id)">{{child.attr_name}}</li>
         </ul>
       </div>

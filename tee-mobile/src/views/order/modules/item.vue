@@ -20,6 +20,7 @@
     <div class="header between">
       <span class="nums">{{record.fetch_code || '--'}}</span>
       <div class="acenter">
+        <button class="btn btn-style4 mr20" @click.stop="handleTag" v-if="status !== 7">补打标签</button>
         <button class="btn btn-style4 mr20"
                 @click.stop="handleRefund"
                 style="position: relative; z-index: 10;"
@@ -46,7 +47,6 @@
     <div class="footer center borderT" v-if="showFooter">
       <button class="btn btn-style1" v-if="record.status === 2" @click.stop="handleMake">开始制作</button>
       <template v-if="record.status === 4">
-      <button class="btn btn-style4 mr30" @click.stop="handleTag">补打标签</button>
 <!--      <button class="btn btn-style1 mr30" @click.stop="handleGet">通知取餐</button>-->
       <button class="btn btn-style1" @click.stop="handleDone">完成订单</button>
       </template>

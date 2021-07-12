@@ -217,7 +217,7 @@ export default {
         if (res.code === 0) {
           const orderNo = res.data.order_no
           const orderId = res.data.id
-          payment(orderNo, orderId, 'tee', 'A')
+          payment(orderNo, orderId, 'tee', 'A', res.data.pay_amount)
         }
       })
     },

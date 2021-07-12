@@ -155,6 +155,12 @@ export default {
     },
     storeData () {
       return store.state.storeInfo
+    },
+    canShowPrize () {
+      return store.state.canShowPrize
+    },
+    canShowClose () {
+      return store.state.canShowClose
     }
   },
   methods: {
@@ -207,7 +213,10 @@ export default {
               // res2.data.word_status = 0
               _this.storeInfo = res2.data
               if (_this.storeInfo.word_status === 0 || _this.storeInfo.pause === 1) {
-                _this.closeModalVisible = true
+                if (_this.canShowClose) {
+                  _this.closeModalVisible = true
+                  store.commit('SET_CLOSESTATUS', false)
+                }
               } else {
                 _this.getPrize()
               }
@@ -224,7 +233,10 @@ export default {
       }).then(res => {
         if (res.code === 0) {
           if (res.data.length > 0) {
-            this.freeModalVisible = true
+            if (this.canShowPrize) {
+              this.freeModalVisible = true
+              store.commit('SET_PRIZESTATUS', false)
+            }
             this.prizeData = res.data
           }
         }

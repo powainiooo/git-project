@@ -89,7 +89,7 @@
     </table>
   </div>
   <div class="ml20 mt15">
-    <Page :total="total" class-name="xf-page" />
+    <Page :total="total" class-name="xf-page" @on-change="pageChange" />
   </div>
 
   <div class="refund-hint" v-if="showRefundHint">
@@ -142,6 +142,10 @@ export default {
     this.getData()
   },
   methods: {
+    pageChange (e) {
+      this.pageNo = e
+      this.getData()
+    },
     getData () {
       postAction('/editor/order/lists', {
         ticket_id: this.record.id,

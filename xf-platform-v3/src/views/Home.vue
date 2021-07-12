@@ -75,8 +75,8 @@
       <welcome />
     </template>
     <template v-else>
-      <z-header @confirm="onSearch" />
-      <Button class="btn-publish" @click="$router.push('/publish')">发布新活动</Button>
+      <z-header @confirm="onSearch" v-if="!isLoading" />
+      <Button class="btn-publish" @click="$router.push('/publish')" v-if="!isLoading">发布新活动</Button>
       <div class="list-container" v-if="!showDetail">
         <Row :gutter="40">
           <Col span="8" v-for="(item, index) in list" :key="item.id">
@@ -152,7 +152,8 @@ export default {
       pageNo: 1,
       pageSize: 9,
       touchIndex: -1,
-      isAjax: false
+      isAjax: false,
+      isLoading: true
     }
   },
   created () {
@@ -175,6 +176,7 @@ export default {
         page: this.pageNo,
         limit: this.pageSize
       }).then(res => {
+        this.isLoading = false
         if (res.code === 1) {
           if (res.data.list.length === 0 && this.keyword !== '') {
             this.$refs.alert.show('empty', '请确认输入的关键词是否正确')

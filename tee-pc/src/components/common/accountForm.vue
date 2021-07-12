@@ -47,6 +47,18 @@
                 </Input>
                 <c-date-time type="timerange" format="HH:mm" placeholder="营业时间" v-model="times" @change="timeChange" v-else />
               </FormItem>
+              <template v-if="status === 'view'">
+              <FormItem>
+                <Input placeholder="门店电话" v-model="formData.phone2" :disabled="status === 'view'">
+                  <span slot="prepend">门店名称</span>
+                </Input>
+              </FormItem>
+              </template>
+              <div v-else>
+                <FormItem>
+                  <Input placeholder="门店电话" v-model="formData.phone2" />
+                </FormItem>
+              </div>
               <FormItem v-if="false">
                 <Input :value="cities[0] + ' / ' + cities[1]" :disabled="notNew" v-if="notNew">
                   <span slot="prepend">门店地址</span>
@@ -264,6 +276,7 @@ export default {
         name: '',
         idno: '',
         phone: '',
+        phone2: '',
         code: '',
         bank_name: '',
         bank_subname: '',
@@ -316,6 +329,7 @@ export default {
         name: this.globalData.bank.name,
         idno: this.globalData.bank.idno,
         phone: this.globalData.bank.phone,
+        phone2: this.globalData.bank.phone2,
         bank_name: Number(this.globalData.bank.bank_name),
         bank_subname: this.globalData.bank.bank_subname,
         bank_number: this.globalData.bank.bank_number,

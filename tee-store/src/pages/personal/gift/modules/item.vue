@@ -27,7 +27,10 @@
      hover-class="hscale"
      hover-stay-time="10"
      @click="$emit('tap', record.id)"
-     :class="classes">
+     :class="{
+	      'coupon-item-used': record.status === 2,
+        'coupon-item-min': min
+      }">
   <div class="coupon-item-l">
     <img src="/static/images/mask1.png" mode="widthFix" class="bg" v-if="extraClass === ''" />
     <img src="/static/images/mask3.png" mode="widthFix" class="bg" v-else />
@@ -54,14 +57,6 @@ export default {
     extraClass: {
       type: String,
       default: ''
-    }
-  },
-  computed: {
-    classes () {
-      return {
-        'coupon-item-used': this.record.status === 2,
-        [this.extraClass]: true
-      }
     }
   },
   data() {

@@ -125,6 +125,8 @@ export default {
         data: record
       })
       if (this.from === 'tee') {
+        store.commit('SET_CLOSESTATUS', true)
+        store.commit('SET_PRIZESTATUS', true)
         mpvue.navigateTo({
           url: '/pages/goods/main?id=' + record.shop_id
         })

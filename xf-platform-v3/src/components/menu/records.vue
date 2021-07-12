@@ -64,7 +64,7 @@
     </table>
   </div>
   <div class="ml20 mt15">
-    <Page :total="total" class-name="xf-page" />
+    <Page :total="total" class-name="xf-page" @on-change="pageChange"  />
   </div>
 </div>
 </template>
@@ -109,6 +109,10 @@ export default {
     this.getData()
   },
   methods: {
+    pageChange (e) {
+      this.pageNo = e
+      this.getData()
+    },
     getData () {
       postAction('/editor/finance/lists', {
         keyword: this.keyword,

@@ -22,7 +22,9 @@ const store = new Vuex.Store({
     menuInfo: 0,
     nearbyGoods: {},
     pay: {},
-    moveIcon: ''
+    moveIcon: '',
+    canShowPrize: true,
+    canShowClose: true
   },
   mutations: {
     SET_TOKEN (state, data) {
@@ -67,6 +69,12 @@ const store = new Vuex.Store({
     },
     SET_MOVEICON (state, data) {
       state.moveIcon = data
+    },
+    SET_PRIZESTATUS (state, data) {
+      state.canShowPrize = data
+    },
+    SET_CLOSESTATUS (state, data) {
+      state.canShowClose = data
     }
   }
 })

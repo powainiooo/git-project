@@ -2,7 +2,14 @@
 
 .index-container
   .i-header
-    width 100%; fxTL(0, 0); z-index 10;
+    width 100%; fxTL(0, 0); z-index 10; transition background-color .1s ease-out;
+  .i-header-anti
+    .index-navs-item
+      color #999999
+    .active
+      color #333333
+      &:after
+        background-color #FE322B;
   .height
     height 95px; box-sizing content-box
   .i-navs

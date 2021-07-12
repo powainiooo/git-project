@@ -12,10 +12,14 @@ const config = {
   outputRoot: `dist/${process.env.TARO_ENV}`,
   plugins: [],
   alias: {
+    '@/': path.resolve(__dirname, '..', 'src/'),
     '@/img': path.resolve(__dirname, '..', 'src/static/img'),
     '@/css': path.resolve(__dirname, '..', 'src/static/css'),
     '@/c': path.resolve(__dirname, '..', 'src/components'),
-    '@/config': path.resolve(__dirname, '..', 'src/config')
+    '@/config': path.resolve(__dirname, '..', 'src/config'),
+    '@/utils': path.resolve(__dirname, '..', 'src/utils'),
+    '@/store': path.resolve(__dirname, '..', 'src/store.js'),
+    '@/mixins': path.resolve(__dirname, '..', 'src/mixins')
   },
   defineConstants: {
   },

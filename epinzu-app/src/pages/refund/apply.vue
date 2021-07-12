@@ -58,6 +58,8 @@
         <button class="c-btn">15271001997</button>
       </view>
     </view>
+
+    <selects />
   </view>
 </template>
 
@@ -66,12 +68,14 @@ import Taro from '@tarojs/taro'
 import './index.styl'
 import Stepper from '@/c/common/Stepper'
 import Form from '@/c/common/Form'
+import selects from './modules/selects'
 
 export default {
   name: 'Index',
   components: {
     Stepper,
-    Form
+    Form,
+    selects
   },
   data () {
     return {

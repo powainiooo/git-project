@@ -10,12 +10,13 @@
   </view>
   <scroll-view scrollX="true" class="scroll">
     <view class="i-nearby-list">
-      <view class="i-nearby-item" v-for="i in 5" :key="i">
-        <image src="@/img/default.png" mode="aspectFill" class="img" />
+      <view class="i-nearby-item" v-for="item in list" :key="item.id" @tap="toDetail(item.goods_id)">
+        <image :src="imgSrc + item.cover" mode="aspectFill" class="img" />
         <view class="info">
-          <view class="h3 mb4">SONY单反相机单反相机</view>
-          <view class="c-999 mb8">距离1.5公里</view>
-          <view class="f10 c-red">￥<text class="f14">2588</text></view>
+          <view class="h3 mb4">{{item.title}}</view>
+          <view class="c-999 mb8">距离{{item.distance}}公里</view>
+          <view class="f10 c-red" v-if="item.type === 1">￥<text class="f14">{{item.price_min}}</text>/天</view>
+          <view class="f10 c-red" v-if="item.type === 3">￥<text class="f14">{{item.price_min}}</text></view>
         </view>
       </view>
     </view>
@@ -24,11 +25,23 @@
 </template>
 
 <script type='es6'>
+import Taro from '@tarojs/taro'
 export default {
 	name: 'app',
+  props: {
+    list: Array
+  },
 	data() {
-		return {}
+		return {
+      imgSrc: Taro.imgSrc
+		}
 	},
-	methods: {}
+	methods: {
+    toDetail (id) {
+      Taro.navigateTo({
+        url: `/pages/detail/index?id=${id}`
+      })
+    }
+  }
 }
 </script>

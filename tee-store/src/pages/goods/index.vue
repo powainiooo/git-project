@@ -69,8 +69,8 @@
     <div class="c-modal-box">
       <img src="/static/images/bg.png" class="bg" />
       <div class="pr">
-        <img src="/static/images/arrow6.png" mode="widthFix" class="ar6" v-if="prizeData.length > 0" />
-        <img src="/static/images/arrow7.png" mode="widthFix" class="ar7" v-if="prizeData.length > 0" />
+        <img src="/static/images/arrow6.png" mode="widthFix" class="ar6" v-if="prizeData.length > 1" />
+        <img src="/static/images/arrow7.png" mode="widthFix" class="ar7" v-if="prizeData.length > 1" />
         <swiper class="swiper" @change="giftChange">
           <swiper-item v-for="item in prizeData" :key="id">
             <div class="line1 center">

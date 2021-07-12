@@ -4,12 +4,13 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 const state = {
-  numbers: [1, 2, 3]
+  token: '',
+  lnglat: {}
 }
 
 const mutations = {
-  ADD_NUMBER(state, payload) {
-    state.numbers.push(payload)
+  SET_LNGLAT (state, data) {
+    state.lnglat = data
   }
 }
 

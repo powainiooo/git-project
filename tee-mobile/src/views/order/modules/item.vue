@@ -82,15 +82,26 @@ export default {
       return false
     }
   },
+  watch: {
+    record: {
+      handler (record) {
+        console.log('watch record', record)
+        if (record.status === 3) {
+          this.$nextTick(() => {
+            this.$refs.timer.count(record.remain_make_time)
+          })
+        }
+      },
+      deep: true
+    }
+  },
   data () {
     return {
     }
   },
   mounted () {
     if (this.record.status === 3) {
-      setTimeout(() => {
-        this.$refs.timer.count(this.record.remain_make_time)
-      }, 100)
+      this.$refs.timer.count(this.record.remain_make_time)
     }
   },
   methods: {

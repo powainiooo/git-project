@@ -1,3 +1,7 @@
+export const tokenKey = 'api_token'
+export const baseUrl = 'https://api.dev.epinzu.com'
+export const imgSrc = 'https://file.dev.epinzu.com/'
+
 export const RENT_RENT = '1' // 租用中
 export const RENT_BACKING = '2' // 归还中
 export const RENT_BACKED = '3' // 已归还

@@ -80,7 +80,7 @@
           <div>
             <a href="javascript:;"
                class="btn-err"
-               v-if="item.refund_state === 2 && item.price != 0"
+               v-if="item.refund_state === 2 && item.state === 1 && item.price != 0"
                @click="doRefund(item.order_no)">退款</a>
           </div>
         </td>
@@ -150,7 +150,7 @@ export default {
       postAction('/editor/order/lists', {
         ticket_id: this.record.id,
         keyword: this.keyword,
-        price_name: this.type,
+        price_id: this.type,
         page: this.pageNo,
         limit: this.pageSize
       }).then(res => {
@@ -236,7 +236,9 @@ export default {
           }).then(res => {
             if (res.code === 1) {
               this.$Message.success('退款成功')
-              this.getData()
+              setTimeout(() => {
+                this.getData()
+              }, 1000)
             }
           })
         }
@@ -252,7 +254,9 @@ export default {
           }, false).then(res => {
             if (res.code === 0) {
               this.$Message.success(res.msg)
-              this.getData()
+              setTimeout(() => {
+                this.getData()
+              }, 1000)
             }
           })
         }

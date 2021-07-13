@@ -11,6 +11,7 @@
     <tag-line class="mb10" title="预留手机" :lWidth="80">{{globalData.mobile}}</tag-line>
     <tag-line class="mb10" title="身份证" :lWidth="80">{{globalData.id_card_no}}</tag-line>
     <tag-line class="mb10" title="个人银行卡号" :lWidth="80">{{globalData.card_no}}</tag-line>
+<!--    <tag-line class="mb10" title="开户支行" :lWidth="80">{{globalData.opening_banke}}</tag-line>-->
     <tag-line class="mb10" title="开户支行" :lWidth="80">{{globalData.opening_banke}}</tag-line>
   </div>
   <div class="c-infos-bottom">

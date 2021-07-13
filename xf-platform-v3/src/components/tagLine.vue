@@ -1,11 +1,11 @@
 <style scoped>
-.c-tag-line { width: 250px; height: 40px; border-radius: 10px; display: flex; align-items: center; background-color: #EEEEEF; }
+.c-tag-line { min-width: 250px; height: 40px; border-radius: 10px; display: flex; align-items: center; }
 .c-tag-line .c-tag-left { width: 70px; height: 100%; background: linear-gradient(349deg, #5B85E6 0%, #6D9AF4 100%); display: flex; align-items: center; justify-content: center; font-size: 10px; color: #ffffff; border-radius: 10px 0 0 10px; }
-.c-tag-line .c-tag-right { padding: 0 10px; flex: 1; text-align: right; }
+.c-tag-line .c-tag-right { min-width: 180px; height: 100%; line-height: 40px; border-radius: 0 10px 10px 0; background-color: #EEEEEF; padding: 0 10px; flex: auto 0 0; text-align: right; }
 </style>
 
 <template>
-<div class="c-tag-line" :style="{width: width + 'px'}">
+<div class="c-tag-line" :style="{'min-width': width + 'px'}">
   <div class="c-tag-left" :style="{width: lWidth + 'px'}">{{title}}</div>
   <div class="c-tag-right">
     <slot></slot>

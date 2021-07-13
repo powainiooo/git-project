@@ -603,6 +603,10 @@ export default {
           this.$refs.alert.show('fail', res.msg)
           this.confirm.isAjax = false
         }
+      }).catch(err => {
+        console.log(err)
+        this.$refs.alert.show('fail', '网络有误，请返回重新提交')
+        this.confirm.isAjax = false
       })
     },
     onOk () {

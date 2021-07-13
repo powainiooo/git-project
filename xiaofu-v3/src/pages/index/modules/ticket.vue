@@ -169,7 +169,7 @@ export default {
       }
     },
     showEndDate () {
-      return this.record.time_type !== 1 && this.size === 'large'
+      return this.record.time_type && this.record.time_type !== 1 && this.size === 'large'
     },
     infoData2 () {
       let date = ['', '']

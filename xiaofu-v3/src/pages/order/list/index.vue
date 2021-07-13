@@ -87,7 +87,7 @@ export default {
           const data = {}
           for (let i of res.data.list) {
             const dates = i.start_date.split('-')
-            if (!data[dates[0]]) {
+            if (!data[`y${dates[0]}`]) {
               data[`y${dates[0]}`] = {
                 year: dates[0],
                 list: []

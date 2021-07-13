@@ -50,7 +50,7 @@
               <template v-if="status === 'view'">
               <FormItem>
                 <Input placeholder="门店电话" v-model="formData.shop_phone" :disabled="status === 'view'">
-                  <span slot="prepend">门店名称</span>
+                  <span slot="prepend">门店电话</span>
                 </Input>
               </FormItem>
               </template>
@@ -135,7 +135,7 @@
                 <FormItem prop="phone">
                   <Input placeholder="预留手机号" v-model="formData.phone" />
                 </FormItem>
-                <FormItem>
+                <FormItem v-if="status === 'new'">
                   <div class="between">
                     <Input placeholder="验证码" v-model="formData.code" style="width: 158px;" />
                     <Button class="btn-code" @click="getCode" :disabled="verifyIndex !== 0">{{verifyBtn}}</Button>

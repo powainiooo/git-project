@@ -39,10 +39,10 @@
 
     <div class="footer-btns">
       <div class="r">
-        <button class="style1" @click="openDetail('buy')">立即购买</button>
+        <button class="style1" @click="openDetail('cart')">加入购物车</button>
       </div>
       <div class="r">
-        <button @click="openDetail('cart')">加入购物车</button>
+        <button @click="openDetail('buy')">立即购买</button>
       </div>
     </div>
 

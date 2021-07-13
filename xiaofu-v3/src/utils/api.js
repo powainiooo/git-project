@@ -84,6 +84,7 @@ export const getTokenData = () => {
       console.log('common_login', res)
       if (res.data !== null) {
         store.commit('SET_TOKEN', res.data.userInfo.token)
+        // store.commit('SET_TOKEN', '87a02658-6e2d-446e-8f14-0271c1adb9b2')
       } else {
         store.commit('SET_TOKEN', res.data)
       }

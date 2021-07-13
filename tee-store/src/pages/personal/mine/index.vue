@@ -23,11 +23,8 @@
   <c-header />
   <div class="container2 ovh mine-container">
     <div class="line1 acenter">
-      <template v-if="isLogin">
       <open-data type="userAvatarUrl" class="avatar"></open-data>
       <open-data type="userNickName" class="name"></open-data>
-      </template>
-      <button class="btn btn-style1" @click="handleLogin" v-else>点击登录</button>
     </div>
 
     <div class="line2">

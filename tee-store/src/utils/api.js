@@ -86,7 +86,7 @@ export const getTokenData = () => {
       console.log('common_login', res)
       if (res.data !== null) {
         store.commit('SET_TOKEN', res.data.api_token)
-        store.commit('SET_LOGIN', res.data.nickname !== null)
+        // store.commit('SET_LOGIN', res.data.nickname !== null)
       } else {
         store.commit('SET_TOKEN', res.data)
       }
@@ -126,7 +126,7 @@ export const sendSM = (orderId, from, key) => {
 
 // 支付
 export const payment = (orderNo, orderId, from, key, payAmount) => {
-  if (this.payAmount === 0) {
+  if (payAmount === 0) {
     sendSM(orderId, from, key)
   } else {
     postAction('/userapi/goods/order/create/pay', {

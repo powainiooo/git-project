@@ -291,7 +291,7 @@ export default {
     // if (options.key === undefined) {
     //   this.current = 0
     // }
-    // options.scene = 'Cf9cd723468db2206e3dc22b6b692'
+    // options.scene = 'C9df0f90b809babf3429dbb9c26ac'
     if (options.scene) {
       const scene = decodeURIComponent(options.scene)
       console.log('scene', scene)

@@ -84,6 +84,7 @@ export default {
           ids.push(id)
         }
       }
+      ids.sort((a, b) => a - b)
       console.log('ids', ids)
       const id = `|${ids.join('|')}|`
       console.log('id', id)

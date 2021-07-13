@@ -76,7 +76,6 @@ export default {
 	methods: {
     change (index) {
       const tab = this.tabs[index]
-      console.log('change', this.tabs)
       this.current = tab.key
       this.$emit('input', tab.key)
       if (tab.type === 'filter') {

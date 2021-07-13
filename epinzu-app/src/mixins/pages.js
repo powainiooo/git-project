@@ -2,8 +2,25 @@ import Taro from '@tarojs/taro'
 import { getAction } from '@/utils/api'
 
 export const pageMixin = {
+  computed: {
+    lnglat () {
+      return this.$store.state.lnglat
+    }
+  },
+  watch: {
+    lnglat: {
+      handler (val) {
+        if (this.queryParams.lng !== undefined) {
+          this.queryParams.lat = val.lat
+          this.queryParams.lng = val.lng
+        }
+      },
+      immediate: true
+    }
+  },
   data () {
     return {
+      imgSrc: Taro.imgSrc,
       queryParams: {},
       ipage: {
         current: 1,
@@ -13,10 +30,12 @@ export const pageMixin = {
       dataSource: []
     }
   },
-  created () {
+  mounted () {
     if(!this.disableMixinCreated){
-      console.log(' -- mixin created -- ')
-      this.getListData()
+      console.log(' -- mixin mounted -- ')
+      this.$nextTick(() => { // 为了兼容onLoad时设置的参数
+        this.getListData()
+      })
     }
   },
   methods: {
@@ -39,6 +58,12 @@ export const pageMixin = {
         this.loading = false
         Taro.hideLoading()
       })
+    },
+    resetLoad () {
+      this.ipage.current = 1
+      this.ipage.loadOver = false
+      this.dataSource = []
+      this.getListData()
     }
   },
   onReachBottom () { // 下拉加载列表

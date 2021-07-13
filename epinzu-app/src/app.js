@@ -3,6 +3,7 @@ import Vue from 'vue'
 import store from './store'
 import { imgSrc } from '@/config'
 import './static/css/reset.css'
+import { getTokenData } from '@/utils/api'
 
 import './app.styl'
 
@@ -16,6 +17,8 @@ const App = {
     console.log('app onLaunch')
     Taro.imgSrc = imgSrc
     this.getLnglat()
+
+    getTokenData()
   },
   methods: {
     getLnglat () {

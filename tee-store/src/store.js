@@ -29,6 +29,7 @@ const store = new Vuex.Store({
   mutations: {
     SET_TOKEN (state, data) {
       state.token = data
+      state.isLogin = true
       mpvue.setStorage({
         key: tokenKey,
         data

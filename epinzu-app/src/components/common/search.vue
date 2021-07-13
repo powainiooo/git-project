@@ -40,6 +40,9 @@ export default {
 	methods: {
     confirm () {
       this.$emit('confirm', this.value)
+    },
+    setDefault (txt) {
+      this.value = txt
     }
   }
 }

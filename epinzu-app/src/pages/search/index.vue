@@ -24,7 +24,7 @@
     </view>
 
     <view class="search-list mb32">
-      <view class="item" v-for="(item, index) in history" :key="index" @tap="doSearch(item)">{{item}}</view>
+      <view class="item" v-for="(item, index) in history" :key="index" @tap="doSearch(item.word)">{{item.word}}</view>
     </view>
     </template>
 
@@ -33,7 +33,7 @@
     </view>
 
     <view class="search-list mb32">
-      <view class="item" v-for="(item, index) in hots" :key="index" @tap="doSearch(item)">{{item}}</view>
+      <view class="item" v-for="(item, index) in hots" :key="index" @tap="doSearch(item.word)">{{item.word}}</view>
     </view>
   </view>
 </template>
@@ -42,34 +42,69 @@
 import Taro from '@tarojs/taro'
 import './index.styl'
 import search from '@/c/common/search'
+import { getAction } from '@/utils/api'
 
 export default {
   name: 'Index',
   components: {
     search
   },
+  computed: {
+    isLogin () {
+      return this.$store.state.isLogin
+    }
+  },
   data () {
     return {
       page: 'normal',
-      history: ['电焊', '主机与配件', '电焊机', '手机'],
-      hots: ['电焊', '主机与配件', '电焊机', '手机'],
+      history: [],
+      hots: [],
+      keyword: ''
     }
   },
   methods: {
     clearHistory () {
-      this.history = []
+      getAction('/userapi/search/history/clean').then(res => {
+        if (res.code === 0) {
+          this.history = []
+        }
+      })
     },
     doSearch (keyword) {
       if (keyword) {
         console.log('doSearch', keyword)
+        this.keyword = keyword
       } else {
-        const val = this.$refs.search.value
+        this.keyword = this.$refs.search.value
         console.log('search', val)
       }
+      this.toList()
+    },
+    toList () {
+      Taro.navigateTo({
+        url: `/pages/goods/list/index?keyword=${this.keyword}&from=search`
+      })
+    },
+    getData () {
+      // 搜索历史
+      if (this.isLogin) {
+        getAction('/userapi/search/history').then(res => {
+          if (res.code === 0) {
+            this.history = res.data
+          }
+        })
+      }
+      // 热门搜索
+      getAction('/userapi/search/hot').then(res => {
+        if (res.code === 0) {
+          this.hots = res.data
+        }
+      })
     }
   },
   onLoad (options) {
     this.page = options.page || 'normal'
+    this.getData()
   }
 }
 </script>

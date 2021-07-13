@@ -20,7 +20,7 @@
     <div class="header between">
       <span class="nums">{{record.fetch_code || '--'}}</span>
       <div class="acenter">
-        <button class="btn btn-style4 mr20" @click.stop="handleTag" v-if="status !== 7">补打标签</button>
+        <button class="btn btn-style4 mr20" @click.stop="handleTag" v-if="record.status !== 7">补打标签</button>
         <button class="btn btn-style4 mr20"
                 @click.stop="handleRefund"
                 style="position: relative; z-index: 10;"

@@ -2,7 +2,7 @@ import Taro from '@tarojs/taro'
 import store from '@/store'
 import { tokenKey, baseUrl } from '@/config'
 import { promisify } from '@/utils'
-const login = promisify(Taro.login)
+const login = promisify(Taro.getAuthCode)
 
 let token = Taro.getStorageSync(tokenKey)
 const ajax = (opts, autoMsg = true) => {
@@ -16,7 +16,7 @@ const ajax = (opts, autoMsg = true) => {
         // 'Content-Type': 'application/x-www-form-urlencoded'
       },
       success (res) {
-        console.log('请求参数', opts)
+        console.log(`接口${opts.url}请求参数`, opts)
         console.log('返回数据', res)
         resolve(res.data)
         if (res.data.code === 0) {
@@ -76,14 +76,15 @@ export const doLogin = (userInfo = {}) => {
 
 // 获取token
 export const getTokenData = () => {
+  console.log('getTokenData')
   login().then(loginRes => {
-    postAction('/userapi/wechat/login', {
-      code: loginRes.code
+    console.log('getTokenData2', loginRes)
+    getAction('/userapi/alipay/mini/login', {
+      autocode: loginRes.authCode
     }, false).then(res => {
       console.log('common_login', res)
       if (res.data !== null) {
         store.commit('SET_TOKEN', res.data.api_token)
-        store.commit('SET_LOGIN', res.data.nickname !== null)
       } else {
         store.commit('SET_TOKEN', res.data)
       }

@@ -164,20 +164,26 @@ export default {
       const _this = this
       mpvue.getLocation({
         success (res) {
-          console.log('getLocation', res)
+          console.log('getLocation suc', res)
           qMap.reverseGeocoder({
             location: {
               latitude: res.latitude,
               longitude: res.longitude
             },
             success (res2) {
-              console.log('reverseGeocoder', res2)
+              console.log('reverseGeocoder suc', res2)
               _this.city = res2.result.ad_info.city.replace('市', '')
               _this.latitude = res.latitude
               _this.longitude = res.longitude
               _this.getStoreData()
+            },
+            fail (err) {
+              console.log('reverseGeocoder fail', err)
             }
           })
+        },
+        fail (err) {
+          console.log('getLocation fail', err)
         }
       })
     },

@@ -1,17 +1,32 @@
 <template>
   <view class="container index-container">
     <!-- 轮播图 -->
-    <banner :list="banners" :guide="guide" />
+    <banner :list="banners" :guide="guide" v-if="page === 'index'" />
     <!-- 顶部栏 -->
     <view class="i-header"
           :class="{'i-header-anti': isAnti}"
           :style="{'background-color': bannerColor}">
       <!-- 搜索框 -->
-      <view class="ml12 mr12 mb8" :style="{'margin-top': tH + 'px'}">
-        <search :disabled="false" placeholder="搜好物，上品租" :backgroundColor=" isAnti ? '#F5F5F5' : '#FFFFFF'" />
+      <view class="ml12 mr12 mb8" :style="{'margin-top': tH + 'px'}" @tap="toSearch">
+        <search :disabled="true" placeholder="搜好物，上品租" :backgroundColor=" isAnti ? '#F5F5F5' : '#FFFFFF'" />
       </view>
       <!-- 产品分类 -->
       <cates :list="cates" @change="changeCate" />
+    </view>
+
+    <!-- 占位高度 -->
+    <view class="height" :style="{'padding-top': tH + 'px'}" v-if="page === 'cate'"></view>
+
+    <!-- 二级分类 -->
+    <view class="second-cates" v-if="page === 'cate'">
+      <view class="item" v-for="i in subCates" :key="i">
+        <image :src="imgSrc + i.cover" mode="aspectFill" class="img" />
+        <view>{{i.cname}}</view>
+      </view>
+      <view class="item">
+        <image src="@/img/more.png" mode="aspectFill" class="img" />
+        <view>更多分类</view>
+      </view>
     </view>
 
     <!-- 导航栏 -->
@@ -74,11 +89,6 @@ export default {
     nearby,
     news
   },
-  computed: {
-    lnglat () {
-      return this.$store.state.lnglat
-    }
-  },
   data () {
     return {
       imgSrc: Taro.imgSrc,
@@ -90,6 +100,7 @@ export default {
         color: ''
       },
       cates: [],
+      subCates: [],
       banners: [],
       nearbys: [],
       hots: [],
@@ -97,6 +108,7 @@ export default {
       specias: [],
       guide: '',
       phone: '',
+      page: 'index',
       url: {
         list: '/userapi/goods/rank/recommend'
       }
@@ -112,8 +124,12 @@ export default {
     })
   },
   methods: {
-    getData () {
+    getData () { // 获取首页数据
+      Taro.showLoading({
+        title: '加载中'
+      })
       getAction('/userapi/index', this.lnglat).then(res => {
+        Taro.hideLoading()
         if (res.code === 0) {
           this.banners = res.data.bannerList
           this.nearbys = res.data.nearbyGoodsList
@@ -125,6 +141,26 @@ export default {
         }
       })
     },
+    getCateData () { // 获取分类数据
+      Taro.showLoading({
+        title: '加载中'
+      })
+      const params = {
+        lng: this.lnglat.lng,
+        lat: this.lnglat.lat,
+        cid: this.currentCate.cid
+      }
+      getAction('/userapi/cate', params).then(res => {
+        Taro.hideLoading()
+        if (res.code === 0) {
+          this.subCates = res.data.subCateList
+          this.nearbys = res.data.nearbyGoodsList
+          this.hots = res.data.hotGoodsList
+          this.newests = res.data.newestGoodsList
+          this.specias = res.data.specialList
+        }
+      })
+    },
     getCates () {
       getAction('/userapi/goods/cate/big').then(res => {
         if (res.code === 0) {
@@ -133,16 +169,27 @@ export default {
       })
     },
     changeCate (cate) {
+      this.page = cate.cid === '' ? 'index': 'cate'
       this.currentCate = cate
       this.bannerColor = cate.color
       this.isAnti = false
       Taro.pageScrollTo({
         scrollTop: 0
       })
+      if (this.page === 'index') {
+        this.getData()
+      } else {
+        this.getCateData()
+      }
     },
     toDetail (id) {
       Taro.navigateTo({
         url: `/pages/detail/index?id=${id}`
+      })
+    },
+    toSearch () {
+      Taro.navigateTo({
+        url: '/pages/search/index'
       })
     }
   },

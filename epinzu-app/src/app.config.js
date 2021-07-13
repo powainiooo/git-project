@@ -1,5 +1,6 @@
 export default {
   pages: [
+    'pages/goods/list/index',
     'pages/index/index',
     'pages/refund/apply',
     'pages/refund/type',
@@ -40,7 +41,6 @@ export default {
     'pages/cart/index',
     'pages/search/index',
     'pages/nearby/index',
-    'pages/goods/list/index',
     'pages/cate/index',
     'pages/index/cates',
     'pages/bindPhone/index',

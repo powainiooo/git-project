@@ -49,14 +49,14 @@
               </FormItem>
               <template v-if="status === 'view'">
               <FormItem>
-                <Input placeholder="门店电话" v-model="formData.phone2" :disabled="status === 'view'">
+                <Input placeholder="门店电话" v-model="formData.shop_phone" :disabled="status === 'view'">
                   <span slot="prepend">门店名称</span>
                 </Input>
               </FormItem>
               </template>
               <div v-else>
                 <FormItem>
-                  <Input placeholder="门店电话" v-model="formData.phone2" />
+                  <Input placeholder="门店电话" v-model="formData.shop_phone" />
                 </FormItem>
               </div>
               <FormItem v-if="false">
@@ -276,7 +276,7 @@ export default {
         name: '',
         idno: '',
         phone: '',
-        phone2: '',
+        shop_phone: '',
         code: '',
         bank_name: '',
         bank_subname: '',
@@ -304,6 +304,7 @@ export default {
     getBankList () {
       getAction('/shopapi/shop/banks').then(res => {
         if (res.code === 0) {
+          console.log('banks list', res.data)
           this.bankList = res.data
         }
       })
@@ -329,7 +330,7 @@ export default {
         name: this.globalData.bank.name,
         idno: this.globalData.bank.idno,
         phone: this.globalData.bank.phone,
-        phone2: this.globalData.bank.phone2,
+        shop_phone: this.globalData.shop.shop_phone,
         bank_name: Number(this.globalData.bank.bank_name),
         bank_subname: this.globalData.bank.bank_subname,
         bank_number: this.globalData.bank.bank_number,

@@ -5,12 +5,17 @@ Vue.use(Vuex)
 
 const state = {
   token: '',
+  isLogin: false,
   lnglat: {}
 }
 
 const mutations = {
   SET_LNGLAT (state, data) {
     state.lnglat = data
+  },
+  SET_TOKEN (state, data) {
+    state.token = data
+    state.isLogin = data !== ''
   }
 }
 

@@ -36,9 +36,12 @@
               <div class="price"><span>{{item.totolPrice}}</span>元</div>
 
               <div class="nums2" v-if="item.goods_id < 0">x1</div>
-              <picker :range="nums" @change="numChange($event, item.id)" v-else>
-                <div class="tagC nums">{{item.buy_nums}}</div>
-              </picker>
+<!--              <picker :range="nums" @change="numChange($event, item.id)" v-else>-->
+<!--                <div class="tagC nums">{{item.buy_nums}}</div>-->
+<!--              </picker>-->
+              <div class="stepper">
+                <stepper :value="item.buy_nums" @change="numChange($event, item.id)" />
+              </div>
             </div>
           </div>
         </div>
@@ -59,9 +62,13 @@
 
 <script type='es6'>
 import { getAction, postAction } from '../utils/api'
+import stepper from '@/components/stepper'
 
 export default {
   name: 'app',
+  components: {
+    stepper
+  },
   data() {
     return {
       visible: false,
@@ -136,8 +143,8 @@ export default {
         })
       }
     },
-    numChange (e, id) {
-      const nums = this.nums[e.mp.detail.value]
+    numChange (nums, id) {
+      // const nums = this.nums[e.mp.detail.value]
       postAction('/userapi/shopping/card/nums/add', {
         id,
         type: this.type,

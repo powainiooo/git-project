@@ -17,7 +17,7 @@
   <c-header menus :storeLogo="storeInfo.shop_logo" />
   <div class="container" style="padding-bottom: 0;">
     <!-- 地址信息 -->
-    <addr-info ref="top" :showCart="!closeModalVisible" showShare :record="addrData" @refresh="getCart" @tap="toStores" />
+    <addr-info ref="top" :showCart="!closeModalVisible && !closeHintVisible" showShare :record="addrData" @refresh="getCart" @tap="toStores" />
 
     <!-- 产品信息 -->
     <div class="pr">
@@ -132,7 +132,9 @@ export default {
       storeInfo: {},
       prizeData: [],
       priceIndex: 0,
-      dis: []
+      dis: [],
+      lng: '',
+      lat: ''
     }
   },
   computed: {
@@ -199,29 +201,35 @@ export default {
         }
       })
     },
+    getLocation () {
+      mpvue.getLocation({
+        success: res => {
+          this.lng = res.longitude
+          this.lat = res.latitude
+        },
+        complete: res => {
+          this.getStoreInfo()
+        }
+      })
+    },
     getStoreInfo () {
       const _this = this
-      mpvue.getLocation({
-        success (res) {
-          console.log('getLocation', res)
-          getAction('/userapi/shop/show', {
-            shop_id: _this.shopId,
-            lng: res.longitude,
-            lat: res.latitude
-          }).then(res2 => {
-            if (res2.code === 0) {
-              // res2.data.word_status = 0
-              _this.storeInfo = res2.data
-              if (_this.storeInfo.word_status === 0 || _this.storeInfo.pause === 1) {
-                if (_this.canShowClose) {
-                  _this.closeModalVisible = true
-                  store.commit('SET_CLOSESTATUS', false)
-                }
-              } else {
-                _this.getPrize()
-              }
+      getAction('/userapi/shop/show', {
+        shop_id: _this.shopId,
+        lng: this.lng,
+        lat: this.lat
+      }).then(res2 => {
+        if (res2.code === 0) {
+          // res2.data.word_status = 0
+          _this.storeInfo = res2.data
+          if (_this.storeInfo.word_status === 0 || _this.storeInfo.pause === 1) {
+            if (_this.canShowClose) {
+              _this.closeModalVisible = true
+              store.commit('SET_CLOSESTATUS', false)
             }
-          })
+          } else {
+            _this.getPrize()
+          }
         }
       })
     },
@@ -375,7 +383,7 @@ export default {
     this.goodsList = []
     this.getData()
     this.getCart()
-    this.getStoreInfo()
+    this.getLocation()
   }
 }
 </script>

@@ -325,16 +325,19 @@ export default {
           'signType': jsapi.signType,
           'paySign': jsapi.paySign,
           'success': res => {
-            mpvue.setStorageSync('nameVal', params.name)
-            mpvue.setStorageSync('phoneVal', params.mobile)
-            mpvue.setStorageSync('idnum', params.id_card_no)
             this.getMessageAuth()
           },
           'fail': err => {
             console.log('pay fail', err)
+            store.commit('SET_PAYPARAMS', jsapi)
             mpvue.reLaunch({
               url: '/pages/result/main?result=fail'
             })
+          },
+          complete (res) {
+            mpvue.setStorageSync('nameVal', params.name)
+            mpvue.setStorageSync('phoneVal', params.mobile)
+            mpvue.setStorageSync('idnum', params.id_card_no)
           }
         })
       })

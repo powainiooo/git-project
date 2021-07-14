@@ -11,7 +11,8 @@ const store = new Vuex.Store({
     personalInfo: {},
     settings: {},
     configData: {},
-    showAd: true
+    showAd: true,
+    payParams: {}
   },
   mutations: {
     SET_TOKEN (state, data) {
@@ -32,6 +33,9 @@ const store = new Vuex.Store({
     },
     SET_ADSTATE (state, data) {
       state.showAd = data
+    },
+    SET_PAYPARAMS (state, data) {
+      state.payParams = data
     }
   }
 })

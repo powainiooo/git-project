@@ -1,5 +1,9 @@
 <style scoped>
-
+.cartMove { animation: cartMove .5s ease-out both; }
+@keyframes cartMove {
+  0%, 100% { transform: scale(1) }
+  50% { transform: scale(1.2) }
+}
 </style>
 
 <template>
@@ -32,7 +36,11 @@
       </button>
     </picker>
     <div class="acenter">
-      <button class="btn-circle btn-cart" v-if="showCart && record.cartNum > 0" @click="openCarts">
+      <button class="btn-circle btn-cart"
+              :class="{'cartMove': cartBtnMove}"
+              @animationend="cartBtnMove = false"
+              v-show="showCart && record.cartNum > 0"
+              @click="openCarts">
         <img src="/static/images/icon-cart.png" mode="widthFix" class="w32" />
         <span class="nums" v-if="record.cartNum > 0">{{record.cartNum}}</span>
       </button>
@@ -83,13 +91,31 @@ export default {
       default: () => {}
     }
   },
+  watch: {
+    record: {
+      handler (val) {
+        if (val.cartNum > this.oldCarts) {
+          this.oldCarts = val.cartNum
+          this.cartBtnMove = true
+        } else {
+          if (val.cartNum !== 0) {
+            this.oldCarts = val.cartNum
+          }
+        }
+      },
+      immediate: true,
+      deep: true
+    }
+  },
   components: {
     carts
   },
 	data() {
 		return {
 		  cname: '',
-      cList: []
+      cList: [],
+      oldCarts: 1110,
+      cartBtnMove: false
     }
 	},
   mounted () {

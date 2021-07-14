@@ -61,7 +61,7 @@
       </table>
     </div>
     <div class="ml20 mt15">
-      <Page :total="total" class-name="xf-page" />
+      <Page :total="total" class-name="xf-page" @on-change="pageChange" />
     </div>
   </template>
   <div class="c-infos-titles mt110">
@@ -187,11 +187,15 @@ export default {
     getIndexSrc (index) {
       return require('@/assets/img/nums/' + index + '.png')
     },
+    pageChange (e) {
+      this.pageNo = e
+      this.getData()
+    },
     getData () {
       postAction('/editor/order/lists', {
         ticket_id: this.record.id,
         keyword: this.keyword,
-        price_name: this.type,
+        price_id: this.type,
         page: this.pageNo,
         limit: this.pageSize
       }).then(res => {

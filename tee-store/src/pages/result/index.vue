@@ -17,6 +17,7 @@
       <div class="icon">
         <img src="/static/images/suc.png" mode="widthFix" class="w100" v-if="status === 'suc'" />
         <img src="/static/images/fail.png" mode="widthFix" class="w100" v-else-if="status === 'fail'" />
+        <img src="/static/images/fail.png" mode="widthFix" class="w100" v-else-if="status === 'store'" />
       </div>
       <div class="title" v-if="status === 'suc'">
         <p class="en">Payment Success</p>
@@ -26,12 +27,20 @@
         <p class="en">Payment failure</p>
         <p>支付失败</p>
       </div>
+      <div class="title" v-else-if="status === 'store'">
+        <p class="en">Coming soon</p>
+        <p>暂无门店</p>
+      </div>
       <p class="info" v-if="status === 'suc'">
         <span v-if="from === 'tee'">请耐心等候产品出餐，注意查看店内取餐码。或关注小程序消息通知。</span>
         <span v-else>若选择邮寄，请耐心等待发货，注意查看物流信息。选择自提，请尽快前往相应门店领取周边商品。</span>
       </p>
       <p class="info" v-else-if="status === 'fail'">网络拥堵 或 网络异常，请点击“重新支付”，以完成订单支付。</p>
-      <div class="center">
+      <p class="info" v-else-if="status === 'store'">目前你所在城市暂无相关门店，敬请期待。</p>
+      <div class="center" v-if="status === 'store'">
+        <button class="btn btn-style1" @click="toStore">选择其他城市</button>
+      </div>
+      <div class="center" v-else>
         <button class="btn btn-style1 mr25" v-if="status === 'suc'" @click="toOrder">查看订单详情</button>
         <button class="btn btn-style1 mr25" v-else-if="status === 'fail'" @click="repay">重新支付</button>
         <button class="btn btn-style2" @click="backIndex">返回首页</button>
@@ -117,6 +126,12 @@ export default {
           mpvue.hideLoading()
         }
       })
+    },
+    toStore () {
+      store.commit('SET_FROM', 'result')
+      mpvue.navigateBack({
+        delta: -1
+      })
     }
   },
 
@@ -124,9 +139,6 @@ export default {
     this.status = option.result
     this.orderId = option.id
     this.from = option.from
-    if (this.status === 'suc') {
-      this.getMessageAuth()
-    }
   }
 }
 </script>

@@ -24,7 +24,8 @@ const store = new Vuex.Store({
     pay: {},
     moveIcon: '',
     canShowPrize: true,
-    canShowClose: true
+    canShowClose: true,
+    from: ''
   },
   mutations: {
     SET_TOKEN (state, data) {
@@ -34,6 +35,9 @@ const store = new Vuex.Store({
         key: tokenKey,
         data
       })
+    },
+    SET_FROM (state, data) {
+      state.from = data
     },
     SET_PERSONINFO (state, data) {
       state.personalInfo = data

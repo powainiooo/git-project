@@ -10,7 +10,7 @@
 .c-goods-grid .goods-item { width: 275px; }
 .c-goods-grid .goods-item .imgs { width: 100%; height: 220px; border-radius: 35px; background-color: #D8D8D8; overflow: hidden; margin-bottom: 20px; }
 .c-goods-grid .goods-item .imgs img { width: 100%; height: 100%; }
-.c-goods-grid .goods-item .titles { height: 60px; font-size: 24px; margin-left: 4px; overflow: hidden; text-overflow: ellipsis; margin-bottom: 6px; }
+.c-goods-grid .goods-item .titles { height: 68px; font-size: 24px; margin-left: 4px; overflow: hidden; text-overflow: ellipsis; margin-bottom: 6px; }
 .c-goods-grid .goods-item .price1 { display: inline-block; padding: 0 4px; margin: 0 4px; font-size: 26px; font-family: DinL; line-height: 32px; color: #C9C9C9; position: relative; }
 .c-goods-grid .goods-item .price1:after { content: ''; width: 100%; height: 2px; position: absolute; left: 0; right: 0; bottom: 50%; background-color: #F0916C; transform: scaleY(.5); }
 .c-goods-grid .goods-item .icon { width: 75px; margin-right: 5px; }
@@ -30,7 +30,7 @@
       <div class="imgs"><img :src="imgSrc + item.cover" mode="aspectFill" /></div>
       <div class="titles">{{item.title}}</div>
       <div class="price1">{{item.price}}元</div>
-      <div class="between">
+      <div class="between" style="margin-top: -8rpx;">
         <div class="acenter">
           <img src="/static/images/jfh.png" mode="widthFix" class="icon" />
           <div class="price2"><span>{{item.sell_price}}</span>元</div>

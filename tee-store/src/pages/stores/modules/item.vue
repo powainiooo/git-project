@@ -40,7 +40,7 @@
     <div class="acenter">
       <span>{{record.word_time_start}} ~ {{record.word_time_end}}</span>
       <div class="borderL"></div>
-      <span>距离你{{record.distance}}km</span>
+      <span v-if="record.distance">距离你{{record.distance}}km</span>
     </div>
   </div>
   <div class="line3">

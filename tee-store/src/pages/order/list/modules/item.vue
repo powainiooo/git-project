@@ -9,7 +9,7 @@
       <div class="logos acenter">
         <img src="/static/images/logo@2x.png" mode="widthFix" class="logo1" />
         <img src="/static/images/x.png" mode="widthFix" class="x" />
-        <img src="/static/images/logo2.png" mode="heightFix" class="logo2" />
+        <img :src="imgSrc + record.shop.shop_logo" mode="heightFix" class="logo2" />
       </div>
     </div>
 

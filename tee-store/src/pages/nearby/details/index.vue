@@ -31,8 +31,8 @@
       </div>
       <div class="details-content">
         <div class="borderB mb40 hr"></div>
-        <div>
-          <img v-for="item in contents" :src="imgSrc + item" mode="widthFix" />
+        <div v-show="showContent">
+          <img v-for="item in contents" :src="imgSrc + item" mode="widthFix" @load="imgload" />
         </div>
       </div>
     </div>
@@ -87,7 +87,9 @@ export default {
       images: [],
       cartNum: 0,
       btnType: '',
-      isAjax: false
+      isAjax: false,
+      showContent: false,
+      contentIndex: 0
     }
   },
 
@@ -107,6 +109,7 @@ export default {
           this.attrs = res.data.attrs
           this.tags = res.data.detail.tags
           this.images = res.data.detail.images
+          this.contentIndex = 0
         }
       })
     },
@@ -147,6 +150,10 @@ export default {
           this.$refs.details.hide()
         }
       })
+    },
+    imgload () {
+      this.contentIndex += 1
+      this.showContent = this.contentIndex === this.contents.length
     }
   },
   onShow () {

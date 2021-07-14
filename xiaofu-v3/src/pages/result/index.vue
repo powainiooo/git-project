@@ -57,6 +57,7 @@
       <p>支付失败。</p>
     </h3>
     <div>
+      <button class="btn" @click="repay">重新支付</button>
       <button class="btn btn2" @click="toIndex">返回首页</button>
     </div>
   </div>
@@ -65,6 +66,7 @@
 
 <script>
 import cHeader from '@/components/header/header'
+import store from '@/store'
 export default {
   data () {
     return {
@@ -85,6 +87,49 @@ export default {
     toIndex () {
       mpvue.reLaunch({
         url: '/pages/index/main'
+      })
+    },
+    repay () {
+      const jsapi = store.state.payParams
+      mpvue.requestPayment({
+        'timeStamp': jsapi.timeStamp,
+        'nonceStr': jsapi.nonceStr,
+        'package': jsapi.package,
+        'signType': jsapi.signType,
+        'paySign': jsapi.paySign,
+        'success': res => {
+          this.getMessageAuth()
+          this.result = 'success'
+        },
+        'fail': err => {
+          console.log('pay fail', err)
+        }
+      })
+    },
+    getMessageAuth () {
+      console.log('发起订阅消息')
+      wx.requestSubscribeMessage({
+        tmplIds: [
+          'WRge3txz54ZhpQ4md9mG0RHSdLSaMlcuW5TPTWUi_Xk',
+          'Qr4BpwVZGPkOYqBHpPDryPuDZkmYoEEDPY-VMBpOGR8',
+          'BCUfqqnuvWiwzYjvcQDKEUumjXsMioiEBKzl3chuE_w'
+        ],
+        success (res) {
+          console.log('订阅消息成功')
+          console.log(res)
+          console.log('--------------------')
+          mpvue.reLaunch({
+            url: `/pages/result/main?result=success`
+          })
+        },
+        fail (err) {
+          console.log('订阅消息失败')
+          console.log(err)
+          console.log('--------------------')
+          mpvue.reLaunch({
+            url: `/pages/result/main?result=success`
+          })
+        }
       })
     }
   },

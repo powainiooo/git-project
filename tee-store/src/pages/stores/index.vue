@@ -27,7 +27,7 @@
       </div>
     </div>
   </div>
-  <c-footer current="order" />
+  <c-footer current="order" v-if="from === 'tee'" />
 </div>
 </template>
 
@@ -81,6 +81,11 @@ export default {
               _this.getData()
             }
           })
+        },
+        fail (err) {
+          console.log('location fail', err)
+          _this.city = '全部'
+          _this.getData()
         }
       })
     },
@@ -102,6 +107,11 @@ export default {
           if (res.code === 0) {
             this.list = this.list.concat(res.data)
             this.total = res.count
+            if (res.data.length === 0) {
+              mpvue.navigateTo({
+                url: '/pages/result/main?result=store'
+              })
+            }
           }
         })
       } else {
@@ -155,6 +165,15 @@ export default {
     if (this.total > this.list.length) {
       this.page += 1
       this.getData()
+    }
+  },
+  onShow () {
+    if (store.state.from === 'result') {
+      this.city = '全部'
+      this.latitude = ''
+      this.longitude = ''
+      this.getData()
+      store.commit('SET_FROM', '')
     }
   },
   onLoad (options) {

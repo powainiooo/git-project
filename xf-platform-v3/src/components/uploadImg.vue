@@ -12,6 +12,7 @@
     background-color #EEEEEF
     border-radius 10px
     position relative
+    cursor pointer
     .picture
       width 100%
       display block
@@ -25,6 +26,8 @@
       line-height 22px
       abTL(50%, 50%)
       transform translate(-50%, -50%)
+      &:hover
+        color #ffffff; background linear-gradient(349deg, #A5C0F7 0%, #A5C0F7 100%)
   &-done
     border 2px solid #6D9AF4
   &-error
@@ -74,7 +77,7 @@
       size(366px, 386px)
       margin 0 auto
       border 3px solid #6D9AF4
-      margin-bottom 20px
+      margin-bottom 10px
       .vue-cropper
         background url("../assets/img/bg.png") rgb(200, 201, 202)
         background-size 360px
@@ -145,6 +148,7 @@
           ></vueCropper>
         </div>
         <div class="tc"><Button size="small" @click="doCropper" :loading="isLoading">保存</Button></div>
+        <p class="tc" style="color: #E85412;" v-if="showHint">上传图片不得超过3M</p>
       </div>
     </div>
   </transition>
@@ -216,7 +220,8 @@ export default {
       total: 0,
       isLoading: false,
       cropperUrl: this.value,
-      showCropper: false
+      showCropper: false,
+      showHint: false
     }
   },
   mounted () {
@@ -249,11 +254,17 @@ export default {
       }
     },
     uploadBefore2 (file) {
-      const fr = new FileReader()
-      fr.onload = (result) => {
-        this.cropperUrl = result.currentTarget.result
+      console.log('file', file)
+      if (file.size > 3 * 1024 * 1024) {
+        this.showHint = true
+      } else {
+        this.showHint = false
+        const fr = new FileReader()
+        fr.onload = (result) => {
+          this.cropperUrl = result.currentTarget.result
+        }
+        fr.readAsDataURL(file)
       }
-      fr.readAsDataURL(file)
       return false
     },
     doCropper () {

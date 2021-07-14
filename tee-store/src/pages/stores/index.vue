@@ -101,7 +101,11 @@ export default {
       }
       if (this.from === 'tee') {
         url = '/userapi/shop/index/data'
-        params.city = this.city
+        if (this.city === '全部') {
+          params.city = ''
+        } else {
+          params.city = this.city
+        }
         // params.city = '深圳'
         getAction(url, params).then(res => {
           if (res.code === 0) {

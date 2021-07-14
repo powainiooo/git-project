@@ -14,7 +14,7 @@ import { ACCESS_TOKEN } from '@/config'
 // 创建 axios 实例
 const service = axios.create({
   // baseURL: '/jeecg-boot',
-  baseURL: baseUrl, // api base_url
+  baseURL: window.baseUrl, // api base_url
   timeout: 20000 // 请求超时时间
 })
 

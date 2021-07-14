@@ -55,7 +55,7 @@
         <th v-if="record.ticket_type === 2">邮寄地址</th>
         <th v-if="record.id_card_flag === 1">身份证</th>
         <th>单号</th>
-        <th>单价</th>
+        <th>总价</th>
         <th>票数</th>
         <th>状态</th>
         <th>操作</th>
@@ -166,6 +166,7 @@ export default {
     },
     ticketChange (e) {
       this.type = e.id
+      this.getData()
     },
     doExport () {
       // if (this.isExport) return

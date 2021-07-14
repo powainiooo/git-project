@@ -331,10 +331,14 @@ export default {
       }
     },
     handleConfirm () {
-      if (this.hasAddr) {
-        this.handlePay()
+      if (this.formData.express_type === 1) {
+        if (this.hasAddr) {
+          this.handlePay()
+        } else {
+          this.newAddr()
+        }
       } else {
-        this.newAddr()
+        this.handlePay()
       }
     },
     handlePay () {

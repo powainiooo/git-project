@@ -132,7 +132,7 @@ export default {
         { name: '邮寄地址', width: 190 },
         { name: '身份证', width: 170 },
         { name: '单号', width: 170 },
-        { name: '单价', width: 60 },
+        { name: '总价', width: 60 },
         { name: '票数', width: 60 },
         { name: '状态', width: 100 }
       ],
@@ -197,7 +197,8 @@ export default {
         keyword: this.keyword,
         price_id: this.type,
         page: this.pageNo,
-        limit: this.pageSize
+        limit: this.pageSize,
+        state: 1
       }).then(res => {
         if (res.code === 1) {
           this.list = res.data.list
@@ -236,6 +237,7 @@ export default {
     },
     ticketChange (e) {
       this.type = e.id
+      this.getData()
     }
   }
 }

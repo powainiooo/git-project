@@ -36,10 +36,7 @@
           <img src="/static/images/index/tag1.png" mode="widthFix" v-if="current === 0" />
           <img src="/static/images/index/tag2.png" mode="widthFix" v-else-if="current === 1" />
           <img src="/static/images/index/tag3.png" mode="widthFix" v-else-if="current === 2" />
-          <p>{{nums}}123456789</p>
-          <p style="font-family: DinL;">{{nums}}123456789</p>
-          <p style="font-family: DinL; font-weight: bold;">{{nums}}123456789</p>
-          <p style="font-family: DinL; font-weight: bolder;">{{nums}}123456789</p>
+          <p>{{nums}}</p>
         </div>
         <div class="r acenter">
           <button class="btn-circle mr15"

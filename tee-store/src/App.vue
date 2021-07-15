@@ -40,18 +40,18 @@ export default {
   },
   methods: {
     loadFont () {
-      const baseUrl = 'https://api.wsgb.club/static/font/'
-      mpvue.loadFontFace({
-        global: true,
-        family: 'DinB',
-        source: `url("${baseUrl}DIN_Alternate_Bold.ttf")`,
-        success: (res) => {
-          console.log('DIN_Alternate_Bold load over', res)
-        },
-        fail (err) {
-          console.log('DIN_Alternate_Bold load fail', err)
-        }
-      })
+      // const baseUrl = 'https://api.wsgb.club/static/font/'
+      // mpvue.loadFontFace({
+      //   global: true,
+      //   family: 'DinB',
+      //   source: `url("${baseUrl}DIN_Alternate_Bold.ttf")`,
+      //   success: (res) => {
+      //     console.log('DIN_Alternate_Bold load over', res)
+      //   },
+      //   fail (err) {
+      //     console.log('DIN_Alternate_Bold load fail', err)
+      //   }
+      // })
       // mpvue.loadFontFace({
       //   global: true,
       //   family: 'DinL',
@@ -77,7 +77,7 @@ export default {
 
 <style>
 @import "../static/css/reset.css";
-/*@import "../static/css/DIN-Light.css";*/
+@import "../static/css/DIN-Bold.css";
 @import "../static/css/DIN-Light.css";
 </style>
 <style src="../static/css/common.css">

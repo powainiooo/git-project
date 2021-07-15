@@ -176,7 +176,7 @@
         </div>
       </div>
       <div class="logo">
-        <img :src="record.logo" />
+        <van-image width="100%" height="100%" fit="cover" :src="record.logo" />
       </div>
     </div>
     <div class="c-ticket-imgs">

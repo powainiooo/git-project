@@ -4,6 +4,8 @@ import Storage from 'vue-ls'
 import router from './router'
 import store from './store'
 import tModal from './components/modal'
+import Image from 'vant/lib/image'
+import 'vant/lib/image/style'
 import {
   Button,
   Form,
@@ -46,6 +48,7 @@ Vue.component('Upload', Upload)
 Vue.component('Page', Page)
 Vue.component('InputNumber', InputNumber)
 Vue.component('Modal', Modal)
+Vue.component('VanImage', Image)
 Vue.config.productionTip = false
 
 Vue.use(Storage)

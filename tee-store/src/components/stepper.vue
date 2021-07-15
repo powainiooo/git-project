@@ -1,14 +1,15 @@
 <style scoped>
 .c-stepper { display: flex; align-items: center; }
-.c-stepper-btn { width: 46px; height: 46px; background-color: #EDECEB; box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.15); border-radius: 50%; display: flex; justify-content: center; align-items: center; color: #B9BABB; font-size: 46px; line-height: 46px; }
-.c-stepper-num { width: 64px; text-align: center; font-size: 24px; color: #41372D; }
+.c-stepper-btn { width: 56px; height: 56px; }
+.c-stepper-btn img { width: 100%; }
+.c-stepper-num { width: 54px; text-align: center; font-size: 24px; color: #41372D; }
 </style>
 
 <template>
 <div class="c-stepper">
-  <div class="c-stepper-btn" @click="reduce">-</div>
+  <div class="c-stepper-btn" @click="reduce"><img src="/static/images/reduce2.png" mode="widthFix" /></div>
   <span class="c-stepper-num">{{nums}}</span>
-  <div class="c-stepper-btn" style="background-color: #F0916C;" @click="add"><img src="/static/images/add.png" mode="widthFix" class="w22" /></div>
+  <div class="c-stepper-btn" @click="add"><img src="/static/images/add2.png" mode="widthFix" /></div>
 </div>
 </template>
 
@@ -37,7 +38,7 @@ export default {
 	},
 	methods: {
     reduce () {
-      if (this.nums === 1) return
+      if (this.nums === 0) return
       this.nums -= 1
       this.change()
     },

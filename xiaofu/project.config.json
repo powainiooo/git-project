@@ -1,52 +1,52 @@
 {
-  "description": "项目配置文件。",
-  "packOptions": {
-    "ignore": [
-      {
-        "type": "folder",
-        "value": ".idea"
+   "description": "项目配置文件。",
+   "packOptions": {
+      "ignore": [
+         {
+            "type": "folder",
+            "value": ".idea"
+         }
+      ]
+   },
+   "setting": {
+      "urlCheck": false,
+      "es6": true,
+      "postcss": true,
+      "minified": true,
+      "newFeature": true,
+      "checkInvalidKey": true,
+      "checkSiteMap": true,
+      "uploadWithSourceMap": true,
+      "babelSetting": {
+         "ignore": [],
+         "disablePlugins": [],
+         "outputPath": ""
+      },
+      "useMultiFrameRuntime": true,
+      "bundle": false,
+      "useApiHook": true,
+      "useApiHostProcess": true
+   },
+   "compileType": "miniprogram",
+   "libVersion": "2.9.4",
+   "appid": "wx3b740b88a384f9ea",
+   "projectname": "xiaofu",
+   "isGameTourist": false,
+   "simulatorType": "wechat",
+   "simulatorPluginLibVersion": {},
+   "condition": {
+      "search": {
+         "list": []
+      },
+      "conversation": {
+         "list": []
+      },
+      "game": {
+         "currentL": -1,
+         "list": []
+      },
+      "miniprogram": {
+         "list": []
       }
-    ]
-  },
-  "setting": {
-    "urlCheck": false,
-    "es6": true,
-    "postcss": true,
-    "minified": true,
-    "newFeature": true,
-    "checkInvalidKey": true,
-    "checkSiteMap": true,
-    "uploadWithSourceMap": true,
-    "babelSetting": {
-      "ignore": [],
-      "disablePlugins": [],
-      "outputPath": ""
-    },
-    "useMultiFrameRuntime": true,
-    "bundle": false,
-    "useApiHook": true,
-    "useApiHostProcess": true
-  },
-  "compileType": "miniprogram",
-  "libVersion": "2.9.4",
-  "appid": "wx3b740b88a384f9ea",
-  "projectname": "xiaofu",
-  "isGameTourist": false,
-  "simulatorType": "wechat",
-  "simulatorPluginLibVersion": {},
-  "condition": {
-    "search": {
-      "list": []
-    },
-    "conversation": {
-      "list": []
-    },
-    "game": {
-      "currentL": -1,
-      "list": []
-    },
-    "miniprogram": {
-      "list": []
-    }
-  }
+   }
 }

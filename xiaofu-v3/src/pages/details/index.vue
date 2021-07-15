@@ -20,7 +20,7 @@
 import cHeader from '@/components/header/header'
 import cTicketDetail from '@/components/ticketDetail/ticketDetail'
 import { postAction } from '@/utils/api'
-
+const idMap = {}
 export default {
   data () {
     return {
@@ -80,12 +80,16 @@ export default {
     this.$refs.header.setStatus('ticketDetail')
     this.$refs.header.originStatus = 'ticketDetail'
   },
-  onLoad (options) {
+  onShow () {
     Object.assign(this.$data, this.$options.data())
-    // let app = getApp()
-    this.id = options.id || 3317
-    this.source = options.source || 'ticket'
+    console.log('this.idMap', idMap)
+    this.id = idMap[`id${this.$mp.page.__wxWebviewId__}`]
     this.getData()
+  },
+  onLoad (options) {
+    // let app = getApp()
+    idMap[`id${this.$mp.page.__wxWebviewId__}`] = options.id || 3317
+    this.source = options.source || 'ticket'
   }
 }
 </script>

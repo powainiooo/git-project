@@ -12,6 +12,8 @@
       "babel-plugin-import": "^1.13.3",
       "core-js": "^3.6.5",
       "echarts": "^5.1.1",
+      "vant": "^2.12.24",
+      "vart": "^1.0.0",
       "view-design": "^4.5.0",
       "vue": "^2.6.11",
       "vue-cropper": "^0.5.6",

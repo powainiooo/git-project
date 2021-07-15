@@ -52,17 +52,17 @@ export default {
           console.log('DIN_Alternate_Bold load fail', err)
         }
       })
-      mpvue.loadFontFace({
-        global: true,
-        family: 'DinL',
-        source: `url("${baseUrl}DIN-Light.otf")`,
-        success: (res) => {
-          console.log('DIN-Light load over', res)
-        },
-        fail (err) {
-          console.log('DIN-Light load fail', err)
-        }
-      })
+      // mpvue.loadFontFace({
+      //   global: true,
+      //   family: 'DinL',
+      //   source: `url("${baseUrl}DIN-Light.otf")`,
+      //   success: (res) => {
+      //     console.log('DIN-Light load over', res)
+      //   },
+      //   fail (err) {
+      //     console.log('DIN-Light load fail', err)
+      //   }
+      // })
     },
     getConfigData () {
       getAction('/userapi/config').then(res => {
@@ -77,6 +77,8 @@ export default {
 
 <style>
 @import "../static/css/reset.css";
+/*@import "../static/css/DIN-Light.css";*/
+@import "../static/css/DIN-Light.css";
 </style>
 <style src="../static/css/common.css">
 </style>

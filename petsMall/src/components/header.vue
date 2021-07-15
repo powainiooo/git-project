@@ -213,7 +213,7 @@ export default {
       },
       makePhone () {
          mpvue.makePhoneCall({
-            phoneNumber: '18026948388'
+            phoneNumber: '17098870206'
          })
       },
       showShare () {

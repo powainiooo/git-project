@@ -20,7 +20,8 @@
     between()
     margin 0 20px 30px 20px
     .names
-      size(200px, 40px)
+      size(200px, auto)
+      min-height 40px
       background-color #EEEEEF
       border-radius 10px
       padding 0 5px 0 10px
@@ -40,6 +41,8 @@
       h3
         color #6D9BF5
         font-size 16px
+        padding 6px 6px 6px 0
+        text-align left
     .nums
       color #6D9BF5
       font-family HelveB
@@ -185,26 +188,30 @@ export default {
   },
   computed: {
     sDate () {
-      if (this.record.sale_start_time) {
-        return formatDate(new Date(this.record.sale_start_time * 1000), 'yyyy/MM/dd')
+      const st = this.record.sale_start_time_text
+      if (st) {
+        return st.split(' ')[0]
       }
       return '--'
     },
     sTime () {
-      if (this.record.sale_start_time) {
-        return formatDate(new Date(this.record.sale_start_time * 1000), 'HH:mm')
+      const st = this.record.sale_start_time_text
+      if (st) {
+        return st.split(' ')[1]
       }
       return '--'
     },
     eDate () {
-      if (this.record.sale_end_time) {
-        return formatDate(new Date(this.record.sale_end_time * 1000), 'yyyy/MM/dd')
+      const et = this.record.sale_end_time_text
+      if (et) {
+        return et.split(' ')[0]
       }
       return '--'
     },
     eTime () {
-      if (this.record.sale_end_time) {
-        return formatDate(new Date(this.record.sale_end_time * 1000), 'HH:mm')
+      const et = this.record.sale_end_time_text
+      if (et) {
+        return et.split(' ')[1]
       }
       return '--'
     }

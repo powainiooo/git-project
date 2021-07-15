@@ -236,7 +236,7 @@ export default {
             order_no: orderNo
           }).then(res => {
             if (res.code === 1) {
-              this.$Message.success('退款成功')
+              this.$Message.success(res.msg)
               setTimeout(() => {
                 this.getData()
               }, 1000)

@@ -29,7 +29,7 @@ export default {
   data () {
     return {
        show: false,
-       phone: '13812341234'
+       phone: '17098870206'
     }
   },
   methods: {

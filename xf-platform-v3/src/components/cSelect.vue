@@ -39,7 +39,7 @@
     <span>{{name}}</span>
     <Icon type="ios-arrow-down" />
   </div>
-  <Select v-model="value" class="c-select-select" @on-change="onChange">
+  <Select v-model="value" class="c-select-select" @on-change="onChange" :transfer="true">
     <Option :value="-1">全部</Option>
     <Option v-for="item in list"
             :key="item.id"

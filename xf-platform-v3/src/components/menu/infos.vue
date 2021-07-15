@@ -17,7 +17,9 @@
     <tag-line class="mb10" title="地址" :width="340">{{globalData.address}}</tag-line>
   </div>
   <div class="c-infos-bottom">
-    <div class="logo"><img :src="cdnurl + globalData.logo" /></div>
+    <div class="logo">
+      <van-image width="100%" height="100%" fit="cover" :src="cdnurl + globalData.logo" />
+    </div>
     <div class="c-c8 f12">活动方基本信息无法修改，如若有紧急情况需要修改信息，<br/>
       请电话联系 186 8143 8270</div>
   </div>

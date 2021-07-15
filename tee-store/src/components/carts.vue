@@ -22,9 +22,9 @@
     <scroll-view scroll-y class="scrolls">
       <div class="list">
         <div class="list-item" v-for="item in list" :key="id">
-          <div class="del center" @click="del(item.id)">
-            <img src="/static/images/reduce.png" mode="widthFix" />
-          </div>
+<!--          <div class="del center" @click="del(item.id)">-->
+<!--            <img src="/static/images/reduce.png" mode="widthFix" />-->
+<!--          </div>-->
           <div class="c-goods-item" @click="$emit('detail')">
             <div class="imgs"><img :src="imgSrc + item.cover" mode="aspectFill" /></div>
             <div class="infos">
@@ -39,7 +39,7 @@
 <!--              <picker :range="nums" @change="numChange($event, item.id)" v-else>-->
 <!--                <div class="tagC nums">{{item.buy_nums}}</div>-->
 <!--              </picker>-->
-              <div class="stepper">
+              <div class="stepper" v-else>
                 <stepper :value="item.buy_nums" @change="numChange($event, item.id)" />
               </div>
             </div>
@@ -145,15 +145,19 @@ export default {
     },
     numChange (nums, id) {
       // const nums = this.nums[e.mp.detail.value]
-      postAction('/userapi/shopping/card/nums/add', {
-        id,
-        type: this.type,
-        nums
-      }).then(res => {
-        if (res.code === 0) {
-          this.getData()
-        }
-      })
+      if (nums === 0) {
+        this.del(id)
+      } else {
+        postAction('/userapi/shopping/card/nums/add', {
+          id,
+          type: this.type,
+          nums
+        }).then(res => {
+          if (res.code === 0) {
+            this.getData()
+          }
+        })
+      }
     }
   }
 }

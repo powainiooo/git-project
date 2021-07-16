@@ -1,5 +1,5 @@
 <style scoped>
-.c-stepper { display: flex; align-items: center; }
+.c-stepper { width: 166px; display: flex; align-items: center; }
 .c-stepper-btn { width: 56px; height: 56px; }
 .c-stepper-btn img { width: 100%; }
 .c-stepper-num { width: 54px; text-align: center; font-size: 24px; color: #41372D; }
@@ -9,7 +9,7 @@
 <div class="c-stepper">
   <div class="c-stepper-btn" @click="reduce"><img src="/static/images/reduce2.png" mode="widthFix" /></div>
   <span class="c-stepper-num">{{nums}}</span>
-  <div class="c-stepper-btn" @click="add"><img src="/static/images/add2.png" mode="widthFix" /></div>
+  <div class="c-stepper-btn" @click="add" v-if="canAdd"><img src="/static/images/add2.png" mode="widthFix" /></div>
 </div>
 </template>
 
@@ -20,6 +20,10 @@ export default {
 	  value: {
 	    type: [Number, String],
       default: 0
+    },
+    canAdd: {
+	    type: Boolean,
+      default: true
     }
   },
   watch: {
@@ -38,9 +42,12 @@ export default {
 	},
 	methods: {
     reduce () {
-      if (this.nums === 0) return
-      this.nums -= 1
-      this.change()
+      if (this.nums === 1) {
+        this.$emit('del')
+      } else {
+        this.nums -= 1
+        this.change()
+      }
     },
     add () {
       if (this.nums >= 10) return

@@ -5,6 +5,9 @@ export const pageMixin = {
   computed: {
     lnglat () {
       return this.$store.state.lnglat
+    },
+    isLogin () {
+      return this.$store.state.isLogin
     }
   },
   watch: {

@@ -35,12 +35,15 @@
               </div>
               <div class="price"><span>{{item.totolPrice}}</span>元</div>
 
-              <div class="nums2" v-if="item.goods_id < 0">x1</div>
+<!--              <div class="nums2" v-if="item.goods_id < 0">x1</div>-->
 <!--              <picker :range="nums" @change="numChange($event, item.id)" v-else>-->
 <!--                <div class="tagC nums">{{item.buy_nums}}</div>-->
 <!--              </picker>-->
-              <div class="stepper" v-else>
-                <stepper :value="item.buy_nums" @change="numChange($event, item.id)" />
+              <div class="stepper">
+                <stepper :value="item.buy_nums"
+                         :canAdd="item.goods_id > 0"
+                         @change="numChange($event, item.id)"
+                         @del="del(item.id)" />
               </div>
             </div>
           </div>
@@ -100,9 +103,10 @@ export default {
             price += Number(i.price) * Number(i.buy_nums)
           })
           this.price = Number(price.toFixed(2))
-          this.list = res.data
+          this.list = []
           this.visible = true
           this.$nextTick(() => {
+            this.list = res.data
             this.showItem = true
             if (res.data.length === 0) {
               this.hide()

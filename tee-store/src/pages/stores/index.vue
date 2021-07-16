@@ -58,7 +58,7 @@ export default {
       page: 1,
       total: 0,
       from: '',
-      cities: []
+      cities: [{ city: '全部' }]
     }
   },
 
@@ -153,7 +153,7 @@ export default {
     getCity () {
       getAction('/userapi/shop/cities').then(res => {
         if (res.code === 0) {
-          this.cities = res.data
+          this.cities = this.cities.concat(res.data)
         }
       })
     },

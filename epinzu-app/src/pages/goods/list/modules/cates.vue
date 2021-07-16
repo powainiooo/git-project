@@ -6,16 +6,17 @@
 </style>
 
 <template>
-<scroll-view scrollX="true" class="goods-cates">
+<scroll-view :scrollX="true"
+             :scrollIntoView="value"
+             :scrollWithAnimation="true"
+             class="goods-cates">
   <view class="goods-cates-list">
-    <view class="goods-cates-item active">推荐</view>
-    <view class="goods-cates-item">五金工具</view>
-    <view class="goods-cates-item">户外用品</view>
-    <view class="goods-cates-item">儿童玩具</view>
-    <view class="goods-cates-item">数码产品</view>
-    <view class="goods-cates-item">摄影个</view>
-    <view class="goods-cates-item">儿童玩具</view>
-    <view class="goods-cates-item">数码产品</view>
+    <view class="goods-cates-item"
+          :class="{'active': item.cid === value}"
+          v-for="item in list"
+          :id="item.cid"
+          :key="item.cid"
+          @tap="toggle(item.cid)">{{item.cname}}</view>
   </view>
 </scroll-view>
 </template>
@@ -23,9 +24,21 @@
 <script type='es6'>
 export default {
 	name: 'navs',
+  props: {
+	  list: Array,
+    value: {
+	    type: String,
+      default: ''
+    }
+  },
 	data() {
 		return {}
 	},
-	methods: {}
+	methods: {
+    toggle (cid) {
+      this.$emit('input', cid)
+      this.$emit('change')
+    }
+  }
 }
 </script>

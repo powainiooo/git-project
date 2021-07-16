@@ -6,30 +6,18 @@
       </view>
     </view>
     <view class="cate-list" :style="{'top': tH + 'px'}">
-      <view class="item" v-for="item in cateList" :key="item.id" :class="{'active': cateId === item.id}">{{item.name}}</view>
+      <view class="item"
+            v-for="(item, index) in cateList"
+            :key="index"
+            :class="{'active': selected === item.cname}"
+            @tap="change(index)">{{item.cname}}</view>
     </view>
     <view class="goods-container" :style="{'margin-top': tH + 'px'}">
       <view class="ad"><image src="@/img/ad.png" mode="widthFix" /></view>
       <view class="list">
-        <view class="item">
-          <image src="@/img/default.png" mode="aspectFill" class="img" />
-          <view>翻译器</view>
-        </view>
-        <view class="item">
-          <image src="@/img/default.png" mode="aspectFill" class="img" />
-          <view>翻译器翻译器翻译器</view>
-        </view>
-        <view class="item">
-          <image src="@/img/default.png" mode="aspectFill" class="img" />
-          <view>翻译器</view>
-        </view>
-        <view class="item">
-          <image src="@/img/default.png" mode="aspectFill" class="img" />
-          <view>翻译器</view>
-        </view>
-        <view class="item">
-          <image src="@/img/default.png" mode="aspectFill" class="img" />
-          <view>翻译器</view>
+        <view class="item" v-for="item in secondList" :key="item.cid" @tap="toList(item)">
+          <image :src="imgSrc + item.cover" mode="aspectFill" class="img" />
+          <view>{{item.cname}}</view>
         </view>
       </view>
     </view>
@@ -40,6 +28,7 @@
 import Taro from '@tarojs/taro'
 import './index.styl'
 import search from '@/c/common/search'
+import { getAction } from '@/utils/api'
 
 export default {
   name: 'Index',
@@ -48,16 +37,12 @@ export default {
   },
   data () {
     return {
+      imgSrc: Taro.imgSrc,
       tH: 0,
       cateId: 1,
-      cateList: [
-        { id: 1, name: '热门爆款' },
-        { id: 2, name: '手机' },
-        { id: 3, name: '电脑' },
-        { id: 4, name: '电焊机' },
-        { id: 5, name: '办公设备' },
-        { id: 6, name: '医疗设备' },
-      ]
+      selected: '',
+      cateList: [],
+      secondList: []
     }
   },
   mounted() {
@@ -69,6 +54,28 @@ export default {
     })
   },
   methods: {
+    change (index) {
+      this.selected = this.cateList[index].cname
+      this.secondList = this.cateList[index].children
+    },
+    getCate () {
+      getAction('/userapi/goods/cate').then(res => {
+        if (res.code === 0) {
+          this.cateList = res.data
+          this.selected = res.data[0].cname
+          this.secondList = res.data[0].children
+        }
+      })
+    },
+    toList (cate) {
+      Taro.navigateTo({
+        url: `/pages/goods/list/index?cid=${cate.cid}&cname=${cate.cname}&from=cate`
+      })
+    }
   },
+  onLoad (options) {
+    this.cateId = Number(options.cid)
+    this.getCate()
+  }
 }
 </script>

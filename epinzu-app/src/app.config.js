@@ -1,7 +1,7 @@
 export default {
   pages: [
-    'pages/goods/list/index',
     'pages/index/index',
+    'pages/goods/list/index',
     'pages/refund/apply',
     'pages/refund/type',
     'pages/refund/index',

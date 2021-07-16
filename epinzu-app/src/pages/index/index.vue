@@ -19,11 +19,11 @@
 
     <!-- 二级分类 -->
     <view class="second-cates" v-if="page === 'cate'">
-      <view class="item" v-for="i in subCates" :key="i">
+      <view class="item" v-for="i in subCates" :key="i.cid" @tap="toList(i)">
         <image :src="imgSrc + i.cover" mode="aspectFill" class="img" />
         <view>{{i.cname}}</view>
       </view>
-      <view class="item">
+      <view class="item" @tap="toCates">
         <image src="@/img/more.png" mode="aspectFill" class="img" />
         <view>更多分类</view>
       </view>
@@ -190,6 +190,16 @@ export default {
     toSearch () {
       Taro.navigateTo({
         url: '/pages/search/index'
+      })
+    },
+    toCates () {
+      Taro.navigateTo({
+        url: `/pages/cate/index?cid=${this.currentCate.cid}`
+      })
+    },
+    toList (cate) {
+      Taro.navigateTo({
+        url: `/pages/goods/list/index?cid=${cate.cid}&cname=${cate.cname}&from=cate`
       })
     }
   },

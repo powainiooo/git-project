@@ -6,19 +6,19 @@
         <search :disabled="true" ref="search" style="width: 308px;" @tap="goBack" />
         <button class="btn-cart">
           <image src="@/img/cart.png" mode="widthFix" />
-          <text>2</text>
+          <text v-if="cartNum > 0">{{cartNum}}</text>
         </button>
       </view>
       <!-- 分类列表 -->
       <view class="pr" v-if="from === 'cate'">
-        <cates />
+        <cates v-model="queryParams.cid" :list="cateList" @change="resetLoad" />
         <button class="btn-cate-more" @tap="openCate"><image src="@/img/ar2.png" mode="widthFix" class="w10" /></button>
       </view>
       <!-- 标签栏 -->
       <Tabs :list="tabs" @change="tabChange" />
     </view>
     <!-- 分类列表 展开 -->
-    <cates2 ref="cates" />
+    <cates2 ref="cates" v-model="queryParams.cid" :list="cateList" @change="resetLoad"  />
     <!-- 产品列表 -->
     <view class="goods-list mt96 mb24">
       <view class="goods-item" v-for="item in dataSource" :key="item.id" @tap="toDetail(id)">
@@ -50,6 +50,7 @@ import Tabs from '@/c/common/Tabs'
 import cates from './modules/cates'
 import cates2 from './modules/cates2'
 import { pageMixin } from '@/mixins/pages'
+import { getAction } from '@/utils/api'
 
 export default {
   name: 'Index',
@@ -68,6 +69,7 @@ export default {
         { key: 'price', label: '价格', type: 'filter', url: '12345' }
       ],
       from: '',
+      cartNum: 0,
       queryParams: {
         shop_type: 0,
         type: 1,
@@ -76,6 +78,7 @@ export default {
         lng: '',
         lat: ''
       },
+      cateList: [{ cid: 0, cname: '全部' }],
       url: {
         list: '/userapi/goods/rank/recommend',
         all: '/userapi/goods/rank/recommend',
@@ -108,17 +111,48 @@ export default {
       Taro.navigateTo({
         url: `/pages/detail/index?id=${id}`
       })
+    },
+    getCartNum () {
+      getAction('/userapi/shopping/counts').then(res => {
+        if (res.code === 0) {
+          this.cartNum = res.data
+        }
+      })
+    },
+    getCateList () {
+      getAction('/userapi/goods/cate/children', {
+        cid: this.queryParams.cid
+      }).then(res => {
+        if (res.code === 0) {
+          this.cateList = this.cateList.concat(res.data)
+        }
+      })
     }
   },
   onShow () {
     this.$nextTick(() => {
-      this.$refs.search.setDefault(this.queryParams.word)
+      if (this.from === 'search') {
+        this.$refs.search.setDefault(this.queryParams.word)
+      }
     })
+    if (this.from === 'search' && this.isLogin) {
+      this.getCartNum()
+    }
+    if (this.from === 'cate') {
+      this.getCateList()
+    }
   },
   onLoad (options) {
     console.log('goods list options', options)
-    this.queryParams.word = options.keyword || '五金'
+    this.queryParams.word = options.keyword
     this.from = options.from || 'search'
+    this.queryParams.cid = options.cid || 0
+    this.cateList[0].cid = options.cid || 0
+    if (options.cname) {
+      Taro.setNavigationBarTitle({
+        title: options.cname
+      })
+    }
   }
 }
 </script>

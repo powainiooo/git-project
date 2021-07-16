@@ -8,14 +8,12 @@
     <image src="@/img/ar3.png" mode="widthFix" class="w10" />
   </view>
   <view class="flex" style="flex-wrap: wrap">
-    <view class="tc mb16 c-red" style="width: 25%;">全部</view>
-    <view class="tc mb16" style="width: 25%;">切割机</view>
-    <view class="tc mb16" style="width: 25%;">切割机</view>
-    <view class="tc mb16" style="width: 25%;">切割机</view>
-    <view class="tc mb16" style="width: 25%;">切割机</view>
-    <view class="tc mb16" style="width: 25%;">切割机</view>
-    <view class="tc mb16" style="width: 25%;">切割机</view>
-    <view class="tc mb16" style="width: 25%;">切割机</view>
+    <view class="tc mb16"
+          style="width: 25%;"
+          :class="{'c-red': item.cid === value}"
+          v-for="item in list"
+          :key="item.cid"
+          @tap="toggle(item.cid)">{{item.cname}}</view>
   </view>
 </Popup>
 </template>
@@ -24,6 +22,13 @@
 import Popup from '@/c/common/Popup'
 export default {
 	name: 'cates',
+  props: {
+	  list: Array,
+    value: {
+      type: String,
+      default: ''
+    }
+  },
   components: {
     Popup
   },
@@ -35,6 +40,11 @@ export default {
 	methods: {
 	  show () {
 	    this.visible = true
+    },
+    toggle (cid) {
+      this.$emit('input', cid)
+      this.$emit('change')
+      this.visible = false
     }
   }
 }

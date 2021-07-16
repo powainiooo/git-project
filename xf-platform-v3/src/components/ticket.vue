@@ -75,7 +75,7 @@
     between()
     padding 0 6px 0 12px
     .flex
-      align-items center
+      align-items center width 350px;
     &-dates
       size(34px, 34px)
       border-radius 4px
@@ -109,7 +109,6 @@
     &-titles
       margin-left 12px
       p
-        width 310px
         height 18px
         font-size 16px
         line-height 18px

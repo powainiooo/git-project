@@ -284,7 +284,7 @@ export default {
           store.commit('SET_COUPON', res.data.coupon_list)
         }
       })
-      this.getStoreCount()
+      this.getLocation()
     },
     getCarts () {
       getAction('/userapi/shopping/card/index/data', {
@@ -382,24 +382,31 @@ export default {
         url: '/pages/personal/address/main?type=select'
       })
     },
-    getStoreCount () {
+    getLocation () {
       mpvue.getLocation({
         success: loc => {
           this.formData.lng = loc.longitude
           this.formData.lat = loc.latitude
-          postAction('/userapi/shop/valid/count', {
-            lng: this.formData.lng,
-            lat: this.formData.lat,
-            from: this.formData.from,
-            goods: this.formData.goods
-          }).then(res => {
-            if (res.code === 0) {
-              this.storeCount = res.data.count
-              if (res.data.count > 0) {
-                this.getStoreList()
-              }
-            }
-          })
+          this.getStoreCount()
+        },
+        fail: err => {
+          console.log(err)
+          this.getStoreCount()
+        }
+      })
+    },
+    getStoreCount () {
+      postAction('/userapi/shop/valid/count', {
+        lng: this.formData.lng,
+        lat: this.formData.lat,
+        from: this.formData.from,
+        goods: this.formData.goods
+      }).then(res => {
+        if (res.code === 0) {
+          this.storeCount = res.data.count
+          if (res.data.count > 0) {
+            this.getStoreList()
+          }
         }
       })
     },

@@ -22,7 +22,7 @@
       <Button size="small" @click="showRefundHint = true" v-if="applyFlag === 1">退款申请</Button>
       <Button size="small" style="cursor: default;" v-if="refundState === 1">退款申请 审核中</Button>
       <Button size="small" type="error" v-else-if="refundState === 3" @click="toRefundDetail">退款申请 审核不通过</Button>
-      <Button size="small" v-if="batchFlag === 1" @click="doRefundBatch">批量退款</Button>
+      <Button size="small" v-if="batchFlag === 0" @click="doRefundBatch">批量退款</Button>
     </div>
     <div class="flex">
       <c-select class="mr10" :list="record.price" @change="ticketChange"/>
@@ -253,7 +253,7 @@ export default {
           postAction('/editor/order/batch_refund', {
             ticket_id: this.record.id
           }, false).then(res => {
-            if (res.code === 0) {
+            if (res.code === 1) {
               this.$Message.success(res.msg)
               setTimeout(() => {
                 this.getData()

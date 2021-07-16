@@ -37,6 +37,11 @@ module.exports = {
 * https://leesticket.waiting8.com/NVcfRhyJlY.php  http://editor.leesticket.waiting8.com/#/login  http://editor.uat.leesticket.com/#/login
 帐号：leesticket
 密码：nihao123
+*
+* https://web.uat.leesticket.com/NVcfRhyJlY.php
+leesticket
+nihao123
+*
 ip：58.220.46.36
 端口：21
 账号：editor_uat_leesticket

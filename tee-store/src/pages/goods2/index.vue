@@ -26,7 +26,7 @@ export default {
     store.commit('SET_STOREINFO', {
       shop_id: this.id
     })
-    mpvue.switchTab({
+    mpvue.redirectTo({
       url: '/pages/goods/main'
     })
   }

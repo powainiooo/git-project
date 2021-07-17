@@ -367,7 +367,7 @@ export default {
     toStores () {
       const route = getCurrentPages()
       if (route.length === 1) {
-        mpvue.navigateTo({
+        mpvue.redirectTo({
           url: '/pages/stores/main?from=goods'
         })
       } else {

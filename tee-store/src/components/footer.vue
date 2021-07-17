@@ -63,15 +63,18 @@ export default {
   },
   methods: {
     toStore () {
-      if (this.storeInfo.shop_id) {
-        mpvue.switchTab({
-          url: '/pages/goods/main'
-        })
-      } else {
-        mpvue.navigateTo({
-          url: '/pages/stores/main?from=tabbar'
-        })
-      }
+      mpvue.switchTab({
+        url: '/pages/stores/main'
+      })
+      // if (this.storeInfo.shop_id) {
+      //   mpvue.switchTab({
+      //     url: '/pages/goods/main'
+      //   })
+      // } else {
+      //   mpvue.navigateTo({
+      //     url: '/pages/stores/main?from=tabbar'
+      //   })
+      // }
     }
   }
 }

@@ -3,6 +3,7 @@
     "pages/index/main",
     "pages/nearby/list/main",
     "pages/stores/main",
+    "pages/stores2/main",
     "pages/scan/main",
     "pages/order/confirm/main",
     "pages/personal/address/main",
@@ -38,7 +39,7 @@
     "custom": true,
     "list": [
       {
-        "pagePath": "pages/goods/main",
+        "pagePath": "pages/stores/main",
         "text": "点餐"
       },
       {

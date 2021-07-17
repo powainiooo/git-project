@@ -226,7 +226,7 @@ export default {
       if (key === 'store') {
         if (this.formData.shop_id === 0) {
           mpvue.navigateTo({
-            url: '/pages/stores/main?from=order'
+            url: '/pages/stores2/main?from=order'
           })
           return false
         }
@@ -243,7 +243,7 @@ export default {
     },
     selectStore () {
       mpvue.navigateTo({
-        url: '/pages/stores/main?from=' + this.formData.from
+        url: '/pages/stores2/main?from=' + this.formData.from
       })
     },
     getAddr () {

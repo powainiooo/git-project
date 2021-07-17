@@ -35,14 +35,8 @@
 import cHeader from '@/components/header'
 import cFooter from '@/components/footer'
 import item from './modules/item'
-import config from '@/config'
-import QQMapWX from '@/utils/qqmap-wx-jssdk.min.js'
-import { getAction } from '@/utils/api'
+import { getAction, postAction } from '@/utils/api'
 import store from '@/store'
-const { mapKey } = config
-const qMap = new QQMapWX({
-  key: mapKey
-})
 export default {
   components: {
     cHeader,
@@ -63,33 +57,6 @@ export default {
   },
 
   methods: {
-    initCity () {
-      const _this = this
-      mpvue.getLocation({
-        isHighAccuracy: true,
-        success (res) {
-          console.log('getLocation', res)
-          qMap.reverseGeocoder({
-            location: {
-              latitude: res.latitude,
-              longitude: res.longitude
-            },
-            success (res2) {
-              console.log('reverseGeocoder', res2)
-              _this.city = res2.result.ad_info.city.replace('市', '')
-              _this.latitude = res.latitude
-              _this.longitude = res.longitude
-              _this.getData()
-            }
-          })
-        },
-        fail (err) {
-          console.log('location fail', err)
-          _this.city = '全部'
-          _this.getData()
-        }
-      })
-    },
     getData () {
       const params = {
         lat: this.latitude,
@@ -99,33 +66,21 @@ export default {
         page: this.page,
         limit: 20
       }
-      if (this.city === '全部') {
-        params.city = ''
-      } else {
-        params.city = this.city
+      params.from = Number(this.from)
+      if (params.from === 1) {
+        params.goods = store.state.nearbyGoods
       }
-      getAction('/userapi/shop/index/data', params).then(res => {
+      postAction('/userapi/shop/valid/list', params).then(res => {
         if (res.code === 0) {
           this.list = this.list.concat(res.data)
           this.total = res.count
-          if (res.data.length === 0) {
-            mpvue.navigateTo({
-              url: '/pages/result/main?result=store'
-            })
-          }
         }
       })
     },
     toDetail (record) {
-      store.commit('SET_STOREINFO', record)
-      mpvue.setStorage({
-        key: 'storeData',
-        data: record
-      })
-      store.commit('SET_CLOSESTATUS', true)
-      store.commit('SET_PRIZESTATUS', true)
-      mpvue.navigateTo({
-        url: '/pages/goods/main'
+      store.commit('SET_STOREINFO2', record)
+      mpvue.navigateBack({
+        delta: -1
       })
     },
     getCity () {
@@ -143,15 +98,11 @@ export default {
       this.getData()
     }
   },
-  onReachBottom () {
-    if (this.total > this.list.length) {
-      this.page += 1
-      this.getData()
-    }
-  },
-  onLoad () {
+  onLoad (options) {
     Object.assign(this.$data, this.$options.data())
-    this.initCity()
+    this.from = options.from
+    this.list = store.state.storeList
+    this.total = store.state.storeList.length
     this.getCity()
   }
 }

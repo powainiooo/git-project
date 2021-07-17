@@ -13,7 +13,7 @@
 <div class="c-header">
   <div class="c-header-line">
     <div class="logos">
-      <img src="/static/images/logo@2x.png" mode="widthFix" class="logo" />
+      <img src="/static/images/logo@2x.png" mode="widthFix" class="logo" @click="toIndex" />
       <img src="/static/images/x.png" mode="widthFix" class="x" v-if="storeLogo !== ''" />
       <img :src="imgSrc + storeLogo" class="logo2" v-if="storeLogo !== ''" />
     </div>
@@ -45,6 +45,11 @@ export default {
     toMine () {
       mpvue.navigateTo({
         url: '/pages/personal/mine/main'
+      })
+    },
+    toIndex () {
+      mpvue.reLaunch({
+        url: '/pages/index/main'
       })
     }
   }

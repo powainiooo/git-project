@@ -60,6 +60,7 @@ export const pageMixin = {
         }
         this.loading = false
         Taro.hideLoading()
+        console.log('end')
       })
     },
     resetLoad () {

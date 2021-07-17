@@ -7,9 +7,9 @@
       <view @tap="doSearch(null)">搜索</view>
     </view>
     <view class="mb20 pt4 pb4 between" v-if="page === 'nearby'">
-      <view class="acenter nearby-info">
+      <view class="acenter nearby-info" @tap="chooseLocation">
         <image src="@/img/dot.png" mode="widthFix" class="w20" />
-        <view class="h3">张政深淮南政深淮南</view>
+        <view class="h3">{{address}}</view>
         <image src="@/img/ar1.png" mode="widthFix" class="w10" />
       </view>
       <view style="width: 196px;">
@@ -43,6 +43,7 @@ import Taro from '@tarojs/taro'
 import './index.styl'
 import search from '@/c/common/search'
 import { getAction } from '@/utils/api'
+import store from '../../store'
 
 export default {
   name: 'Index',
@@ -59,7 +60,10 @@ export default {
       page: 'normal',
       history: [],
       hots: [],
-      keyword: ''
+      keyword: '',
+      address: '选择地址',
+      lng: '',
+      lat: ''
     }
   },
   methods: {
@@ -81,9 +85,15 @@ export default {
       this.toList()
     },
     toList () {
-      Taro.navigateTo({
-        url: `/pages/goods/list/index?keyword=${this.keyword}&from=search`
-      })
+      if (this.page === 'normal') {
+        Taro.navigateTo({
+          url: `/pages/goods/list/index?keyword=${this.keyword}&from=search`
+        })
+      } else if (this.page === 'nearby') {
+        Taro.navigateTo({
+          url: `/pages/nearby/index?keyword=${this.keyword}`
+        })
+      }
     },
     getData () {
       // 搜索历史
@@ -98,6 +108,26 @@ export default {
       getAction('/userapi/search/hot').then(res => {
         if (res.code === 0) {
           this.hots = res.data
+        }
+      })
+    },
+    chooseLocation () {
+      Taro.getLocation({
+        success: loc => {
+          this.$store.commit('SET_LNGLAT', {
+            lat: loc.latitude,
+            lng: loc.longitude,
+          })
+          Taro.chooseLocation({
+            latitude: loc.latitude,
+            longitude: loc.longitude,
+            success: res => {
+              console.log(res)
+              this.lng = loc.longitude
+              this.lat = loc.latitude
+              this.address = res.name
+            }
+          })
         }
       })
     }

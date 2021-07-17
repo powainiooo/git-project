@@ -165,7 +165,23 @@ export default {
       return store.state.canShowClose
     }
   },
+  watch: {
+    storeData (val) {
+      console.log('change storeData', val)
+      if (val.shop_id && this.shopId !== val.shop_id) {
+        this.shopId = val.shop_id
+        this.getAllData()
+      }
+    }
+  },
   methods: {
+    getAllData () {
+      this.cateList = []
+      this.goodsList = []
+      this.getData()
+      this.getCart()
+      this.getLocation()
+    },
     getData () {
       getAction('/userapi/goods/index/data', {
         shop_id: this.shopId
@@ -351,8 +367,8 @@ export default {
     toStores () {
       const route = getCurrentPages()
       if (route.length === 1) {
-        mpvue.redirectTo({
-          url: '/pages/stores/main'
+        mpvue.navigateTo({
+          url: '/pages/stores/main?from=goods'
         })
       } else {
         mpvue.navigateBack({
@@ -363,8 +379,8 @@ export default {
   },
   onShareAppMessage () {
     return {
-      title: 'HEYTEA',
-      path: `/pages/goods/main?id=${this.shopId}`
+      title: '饮茶有奖',
+      path: `/pages/goods2/main?id=${this.shopId}`
     }
   },
   onShow () {
@@ -378,12 +394,8 @@ export default {
   onLoad (options) {
     console.log('goods onLoad', options)
     Object.assign(this.$data, this.$options.data())
-    this.shopId = options.id || 1
-    this.cateList = []
-    this.goodsList = []
-    this.getData()
-    this.getCart()
-    this.getLocation()
+    this.shopId = this.storeData.shop_id
+    this.getAllData()
   }
 }
 </script>

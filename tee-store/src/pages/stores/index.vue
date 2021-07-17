@@ -27,7 +27,7 @@
       </div>
     </div>
   </div>
-  <c-footer current="order" v-if="from === 'tee'" />
+<!--  <c-footer current="order" v-if="from === 'tee'" />-->
 </div>
 </template>
 
@@ -99,7 +99,7 @@ export default {
         page: this.page,
         limit: 20
       }
-      if (this.from === 'tee') {
+      if (this.from === 'goods' || this.from === 'other') {
         url = '/userapi/shop/index/data'
         if (this.city === '全部') {
           params.city = ''
@@ -133,16 +133,24 @@ export default {
       }
     },
     toDetail (record) {
-      store.commit('SET_STOREINFO', record)
-      mpvue.setStorage({
-        key: 'storeData',
-        data: record
-      })
-      if (this.from === 'tee') {
+      if (this.from === 'goods' || this.from === 'other') {
+        store.commit('SET_STOREINFO', record)
+        mpvue.setStorage({
+          key: 'storeData',
+          data: record
+        })
+      } else {
+        store.commit('SET_STOREINFO2', record)
+      }
+      if (this.from === 'goods') {
         store.commit('SET_CLOSESTATUS', true)
         store.commit('SET_PRIZESTATUS', true)
-        mpvue.navigateTo({
-          url: '/pages/goods/main?id=' + record.shop_id
+        mpvue.navigateBack({
+          delta: -1
+        })
+      } else if (this.from === 'tabbar') {
+        mpvue.switchTab({
+          url: '/pages/goods/main'
         })
       } else {
         mpvue.navigateBack({
@@ -183,7 +191,7 @@ export default {
   onLoad (options) {
     Object.assign(this.$data, this.$options.data())
     this.from = options.from || 'tee'
-    if (this.from === 'tee') {
+    if (this.from === 'goods' || this.from === 'other') {
       this.initCity()
     } else {
       this.list = store.state.storeList

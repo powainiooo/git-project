@@ -6,35 +6,52 @@
 <view class="Detail-section Detail-stores">
   <view class="between">
     <view class="flex mt8">
-      <image src="@/img/default.png" mode="aspectFit" class="logo" />
+      <image :src="imgSrc + record.logo" mode="aspectFit" class="logo" />
       <view class="mt4">
-        <view class="acenter"><text class="c-tag c-tag-yel mr4">个人</text>鹰视眼官方旗舰店</view>
-        <rate :value="4" />
+        <view class="acenter">
+          <text class="c-tag c-tag-yel mr4" v-if="record.type === 1">个人</text>
+          <text class="c-tag c-tag-red mr4" v-if="record.type === 2">企业</text>
+          {{record.shop_name}}
+        </view>
+        <rate :value="record.pf_avg" />
       </view>
     </view>
     <view class="f12 mt8">
-      <view class="mb2">订单数: <text class="c-999">9999+</text></view>
-      <view class="mb2">关注数: <text class="c-999">9999+</text></view>
-      <view class="mb2">访客数: <text class="c-999">9999+</text></view>
+      <view class="mb2">订单数: <text class="c-999">{{record.order_nums}}+</text></view>
+      <view class="mb2">关注数: <text class="c-999">{{record.attention_nums}}+</text></view>
+      <view class="mb2">访客数: <text class="c-999">{{record.visit_nums}}+</text></view>
     </view>
   </view>
   <view class="center mb8">
-    <button class="c-btn c-btn-border c-btn-24 mr8">进店逛逛</button>
-    <button class="c-btn c-btn-border c-btn-24">关注店铺</button>
+    <button class="c-btn c-btn-border c-btn-24 mr8" @tap="toStore">进店逛逛</button>
+    <button class="c-btn c-btn-border c-btn-24" @tap="attention">关注店铺</button>
   </view>
 </view>
 </template>
 
 <script type='es6'>
+import Taro from '@tarojs/taro'
 import Rate from '@/c/common/Rate'
 export default {
 	name: 'app',
   components: {
     Rate
   },
+  props: {
+	  record: Object
+  },
 	data() {
-		return {}
+		return {
+      imgSrc: Taro.imgSrc
+    }
 	},
-	methods: {}
+	methods: {
+    toStore () {
+      this.$emit('store')
+    },
+    attention () {
+      this.$emit('attention')
+    }
+  }
 }
 </script>

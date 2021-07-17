@@ -1,5 +1,7 @@
 export default {
   pages: [
+    'pages/store/index',
+    'pages/detail/index',
     'pages/index/index',
     'pages/goods/list/index',
     'pages/refund/apply',
@@ -32,9 +34,7 @@ export default {
     'pages/address/edit',
     'pages/address/index',
     'pages/order/confirm/index',
-    'pages/store/index',
-    'pages/detail/index',
-    'pages/question/detail',
+    'pages/webview/index',
     'pages/question/index',
     'pages/message/detail',
     'pages/message/index',

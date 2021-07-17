@@ -23,7 +23,7 @@
       <slot name="label" v-else />
     </view>
   </view>
-  <view class="c-cell-value" :style="{'color': color}">
+  <view class="c-cell-value" :style="{'color': color}" v-if="value && $slots.value">
     <text v-if="value">{{value}}</text>
     <slot name="value" v-else />
   </view>

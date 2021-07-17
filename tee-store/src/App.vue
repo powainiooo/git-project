@@ -35,7 +35,6 @@ export default {
     console.log('storeData', storeData)
     if (storeData && storeData.shop_id) {
       store.commit('SET_STOREINFO', storeData)
-      console.log('store.state.storeInfo', store.state.storeInfo)
     }
   },
   methods: {

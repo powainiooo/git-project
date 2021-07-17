@@ -4,31 +4,62 @@
 
 <template>
 <view class="Detail-infos Detail-section">
-  <view class="acenter mt16 mb8">
-    <view class="c-tag-border mr4">满88元减8元</view>
-    <view class="c-tag-border">满88元减8元</view>
+  <view class="acenter mt16 mb8 wrap">
+    <view class="c-tag-border mr4"
+          v-for="item in couponList"
+          :key="item.id">{{item.title}}</view>
   </view>
-  <view class="between mb4">
+  <view class="between mb4" v-if="record.type === 1">
     <view class="acenter">
-      <view class="price mr14">￥<text>88</text>/天</view>
-      <view class="f12">押金：<text class="f10">￥</text>200</view>
+      <view class="price mr14">￥<text>{{record.price_min}}</text>/天</view>
+      <view class="f12">押金：<text class="f10">￥</text>{{record.deposit_min}}</view>
     </view>
-    <view class="f12 c-999">已租6778</view>
+    <view class="f12 c-999">已租{{record.sale_nums}}</view>
   </view>
-  <view class="mb8">无刷电钻充电式手钻小手枪钻锂电钻多功能家用电动螺丝刀手电钻</view>
+  <view class="between mb4" v-if="record.type === 3">
+    <view class="acenter">
+      <view class="price mr14">￥<text>{{record.price_min}}</text></view>
+    </view>
+    <view class="f12 c-999">已售{{record.sale_nums}}</view>
+  </view>
+  <view class="mb8">{{record.title}}</view>
   <view class="post">
-    <view>寄出：<text>包邮</text></view>
+    <view>寄出：<text>{{postType === 0 ? '包邮' : '不包邮'}}</text></view>
     <view>寄回：<text>自费</text></view>
-    <view>发货地：<text>广东广州</text></view>
+    <view>发货地：<text>{{city}}</text></view>
   </view>
 
-  <view class="coupon" @tap="$emit('coupon')">领劵<image src="@/img/ar4.png" mode="widthFix" class="w10" /></view>
+  <view class="coupon" @tap="$emit('coupon')" v-if="couponList.length > 0">
+    领劵<image src="@/img/ar4.png" mode="widthFix" class="w10" />
+  </view>
 </view>
 </template>
 
 <script type='es6'>
 export default {
 	name: 'app',
+  props: {
+	  record: Object
+  },
+  computed: {
+    postType () {
+      if (this.record.detail) {
+        return this.record.detail.post_type
+      } else {
+        return 0
+      }
+    },
+    city () {
+      if (this.record.shop_detail) {
+        return this.record.shop_detail.fh_city
+      } else {
+        return 0
+      }
+    },
+    couponList () {
+      return this.record.couponList || []
+    }
+  },
 	data() {
 		return {}
 	},

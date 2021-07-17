@@ -3,13 +3,17 @@
     <!-- 店铺信息 -->
     <view class="line1 between">
       <view class="flex mt8 ml12">
-        <image src="@/img/default.png" mode="aspectFit" class="store-logo" />
+        <image :src="imgSrc + shopData.logo" mode="aspectFit" class="store-logo" />
         <view class="mt4">
-          <view class="acenter"><text class="c-tag c-tag-yel mr4">个人</text>鹰视眼官方旗舰店</view>
           <view class="acenter">
-            <rate :value="4" />
-            <view class="f10 c-999 ml4">订单数: 9999+</view>
-            <view class="f10 c-999 ml4">关注数: 2000</view>
+            <text class="c-tag c-tag-yel mr4" v-if="shopData.type === 1">个人</text>
+            <text class="c-tag c-tag-red mr4" v-if="shopData.type === 2">企业</text>
+            {{shopData.shop_name}}
+          </view>
+          <view class="acenter">
+            <rate :value="shopData.pf_avg" />
+            <view class="f10 c-999 ml4">订单数: {{shopData.order_nums}}+</view>
+            <view class="f10 c-999 ml4">关注数: {{shopData.attention_nums}}</view>
           </view>
         </view>
       </view>
@@ -22,14 +26,18 @@
     <Tabs :list="tabs" :border="true" @change="tabChange" />
     <!-- 产品列表 -->
     <view class="goods-list mt8">
-      <view class="goods-item" v-for="i in 6" :key="i">
-        <image src="@/img/default.png" mode="aspectFill" class="img" />
+      <view class="goods-item" v-for="item in dataSource" :key="item.id" @tap="toDetail(item.id)">
+        <image :src="imgSrc + item.cover" mode="aspectFill" class="img" />
         <view class="info">
-          <view class="h3 mb8"><view class="c-tag">全新</view>苹果 Watch SE手表多功能运动智能手环</view>
-          <view class="f10 c-999">押金：￥380</view>
+          <view class="h3 mb8">
+            <view class="c-tag" v-if="item.how_new === 100">全新</view>
+            <view class="c-tag" v-else>{{item.how_new / 10}}成新</view>
+            {{item.title}}</view>
+          <view class="f10 c-999" v-if="item.type === 1">押金：￥{{item.deposit_min}}</view>
           <view class="between">
-            <view class="price">￥<text class="f14">2588</text>/天</view>
-            <view class="tag1">30天起租</view>
+            <view class="price" v-if="item.type === 1">￥<text class="f14">{{item.price_min}}</text>/天</view>
+            <view class="price" v-if="item.type === 3">￥<text class="f14">{{item.price_min}}</text></view>
+            <view class="tag1" v-if="item.type === 1">{{item.rent_day_min}}天起租</view>
           </view>
         </view>
       </view>
@@ -42,9 +50,12 @@ import Taro from '@tarojs/taro'
 import './index.styl'
 import Rate from '@/c/common/Rate'
 import Tabs from '@/c/common/Tabs'
+import { pageMixin } from '@/mixins/pages'
+import { getAction } from '@/utils/api'
 
 export default {
   name: 'Index',
+  mixins: [pageMixin],
   components: {
     Rate,
     Tabs
@@ -52,14 +63,42 @@ export default {
   data () {
     return {
       tabs: [
-        { key: 'goods', label: '最新好货' },
-        { key: 'params', label: '最受欢迎' },
-        { key: 'details', label: '全部好货' }
+        { key: 'newest', label: '最新好货' },
+        { key: 'hot', label: '最受欢迎' },
+        { key: '', label: '全部好货' }
       ],
+      shopId: 0,
+      shopData: {},
+      queryParams: {
+        orderby: 'newest'
+      },
+      url: {
+        list: '/userapi/shop/goods/'
+      }
     }
   },
   methods: {
-    tabChange (e) {}
+    tabChange (e) {
+      this.queryParams.orderby = e
+      this.resetLoad()
+    },
+    getShopData () {
+      getAction(`/userapi/shop/${this.shopId}`, this.lnglat).then(res => {
+        if (res.code === 0) {
+          this.shopData = res.data
+        }
+      })
+    },
+    toDetail (id) {
+      Taro.navigateTo({
+        url: `/pages/detail/index?id=${id}`
+      })
+    }
   },
+  onLoad (options) {
+    this.shopId = options.id || 19
+    this.url.list += this.shopId
+    this.getShopData()
+  }
 }
 </script>

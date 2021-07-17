@@ -19,6 +19,7 @@
     "pages/nearby/details/main",
     "pages/result/main",
     "pages/goods/main",
+    "pages/goods2/main",
     "pages/logs/main"
   ],
   "window": {
@@ -32,5 +33,22 @@
     "scope.userLocation": {
       "desc": "获取当前用户所在位置，以便定位。"
     }
+  },
+  "tabBar": {
+    "custom": true,
+    "list": [
+      {
+        "pagePath": "pages/goods/main",
+        "text": "点餐"
+      },
+      {
+        "pagePath": "pages/nearby/list/main",
+        "text": "积分兑换"
+      },
+      {
+        "pagePath": "pages/order/list/main",
+        "text": "订单"
+      }
+    ]
   }
 }

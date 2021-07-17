@@ -37,27 +37,9 @@
     <!-- 新品动态 -->
     <news :list="newests" />
     <!-- 推荐商品 -->
-    <view class="i-title">
-      <view class="h3">推荐商品</view>
-    </view>
-    <view class="goods-list">
-      <view class="goods-item" v-for="item in dataSource" :key="item.id" @tap="toDetail(item.id)">
-        <image :src="imgSrc + item.cover" mode="aspectFill" class="img" />
-        <view class="info">
-          <view class="h3 mb8">
-            <view class="c-tag" v-if="item.how_new === 100">全新</view>
-            <view class="c-tag" v-else>{{item.how_new / 10}}成新</view>
-            {{item.title}}</view>
-          <view class="f10 c-999" v-if="item.type === 1">押金：￥{{item.deposit_min}}</view>
-          <view class="between">
-            <view class="price" v-if="item.type === 1">￥<text class="f14">{{item.price_min}}</text>/天</view>
-            <view class="price" v-if="item.type === 3">￥<text class="f14">{{item.price_min}}</text></view>
-            <view class="f10 c-999" v-if="item.type === 1">已租：{{item.sale_nums}}</view>
-            <view class="f10 c-999" v-if="item.type === 3">已售：{{item.sale_nums}}</view>
-          </view>
-        </view>
-      </view>
-    </view>
+    <guess-like class="mt24" :list="dataSource">
+      <text slot="title">推荐商品</text>
+    </guess-like>
 
     <!-- 底部导航 -->
     <c-footer current="home" />
@@ -74,6 +56,7 @@ import cates from './modules/cates'
 import navs from './modules/navs'
 import nearby from './modules/nearby'
 import news from './modules/news'
+import GuessLike from '@/c/common/GuessLike'
 import { getAction } from '@/utils/api'
 import { pageMixin } from '@/mixins/pages'
 
@@ -87,7 +70,8 @@ export default {
     cates,
     navs,
     nearby,
-    news
+    news,
+    GuessLike
   },
   data () {
     return {

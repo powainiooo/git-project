@@ -169,7 +169,7 @@ export default {
       }
     },
     storeInfo () {
-      return store.state.storeInfo
+      return store.state.nearbyStoreInfo
     },
     selectedAddr () {
       return store.state.selectedAddr
@@ -463,7 +463,7 @@ export default {
       this.formData.from = 0
       this.getCarts()
     }
-    store.commit('SET_STOREINFO', {})
+    store.commit('SET_STOREINFO2', {})
     store.commit('SET_ADDR', {})
   }
 }

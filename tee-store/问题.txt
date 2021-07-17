@@ -49,3 +49,20 @@ daf94de5a24f650afc5c9fff84
       }
     ]
   },
+"tabBar": {
+    "custom": true,
+    "list": [
+      {
+        "pagePath": "pages/goods/main",
+        "text": "点餐"
+      },
+      {
+        "pagePath": "pages/nearby/list/main",
+        "text": "积分兑换"
+      },
+      {
+        "pagePath": "pages/order/list/main",
+        "text": "订单"
+      }
+    ]
+  }

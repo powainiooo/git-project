@@ -14,6 +14,7 @@ const store = new Vuex.Store({
     isLogin: false,
     sysInfo: {},
     storeInfo: {},
+    nearbyStoreInfo: {},
     smAuth: {},
     storeList: [],
     selectedAddr: {},
@@ -47,6 +48,9 @@ const store = new Vuex.Store({
     },
     SET_STOREINFO (state, data) {
       state.storeInfo = data
+    },
+    SET_STOREINFO2 (state, data) {
+      state.nearbyStoreInfo = data
     },
     SET_STORELIST (state, data) {
       state.storeList = data

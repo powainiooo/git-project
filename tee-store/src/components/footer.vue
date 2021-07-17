@@ -18,21 +18,21 @@
 
 <template>
 <div class="c-footer">
-  <a href="#" open-type="redirectTo" :class="{'active': current === 'order'}" @click="toStore">
+  <a href="#" open-type="switchTab" :class="{'active': current === 'order'}" @click="toStore">
     <div class="icon icon1">
       <img src="/static/images/footer/icon1.png" mode="widthFix" class="img1" />
       <img src="/static/images/footer/icon1-active.png" mode="widthFix" class="img2" />
     </div>
     <p>点餐</p>
   </a>
-  <a href="/pages/nearby/list/main" open-type="redirectTo" :class="{'active': current === 'store'}">
+  <a href="/pages/nearby/list/main" open-type="switchTab" :class="{'active': current === 'store'}">
     <div class="icon icon2">
       <img src="/static/images/footer/icon2.png" mode="widthFix" class="img1" />
       <img src="/static/images/footer/icon2-active.png" mode="widthFix" class="img2" />
     </div>
     <p>积分兑换</p>
   </a>
-  <a href="/pages/order/list/main" open-type="redirectTo" :class="{'active': current === 'list'}">
+  <a href="/pages/order/list/main" open-type="switchTab" :class="{'active': current === 'list'}">
     <div class="icon icon1">
       <img src="/static/images/footer/icon3.png" mode="widthFix" class="img1" />
       <img src="/static/images/footer/icon3-active.png" mode="widthFix" class="img2" />
@@ -64,12 +64,12 @@ export default {
   methods: {
     toStore () {
       if (this.storeInfo.shop_id) {
-        mpvue.redirectTo({
-          url: '/pages/goods/main?id=' + this.storeInfo.shop_id
+        mpvue.switchTab({
+          url: '/pages/goods/main'
         })
       } else {
-        mpvue.redirectTo({
-          url: '/pages/stores/main'
+        mpvue.navigateTo({
+          url: '/pages/stores/main?from=tabbar'
         })
       }
     }

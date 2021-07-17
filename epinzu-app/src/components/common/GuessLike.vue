@@ -10,14 +10,19 @@
     <slot name="title"><image src="@/img/like.png" mode="widthFix" class="w20 mr4" />您可能还喜欢</slot>
   </view>
   <view class="goods-list">
-    <view class="goods-item" v-for="i in 6" :key="i">
-      <image src="@/img/default.png" mode="aspectFill" class="img" />
+    <view class="goods-item" v-for="item in list" :key="item.id" @tap="toDetail(item.id)">
+      <image :src="imgSrc + item.cover" mode="aspectFill" class="img" />
       <view class="info">
-        <view class="h3 mb8"><view class="c-tag">全新</view>苹果 Watch SE手表多功能运动智能手环</view>
-        <view class="f10 c-999">押金：￥380</view>
+        <view class="h3 mb8">
+          <view class="c-tag" v-if="item.how_new === 100">全新</view>
+          <view class="c-tag" v-else>{{item.how_new / 10}}成新</view>
+          {{item.title}}</view>
+        <view class="f10 c-999" v-if="item.type === 1">押金：￥{{item.deposit_min}}</view>
         <view class="between">
-          <view class="price">￥<text class="f14">2588</text>/天</view>
-          <view class="f10 c-999">已租：456</view>
+          <view class="price" v-if="item.type === 1">￥<text class="f14">{{item.price_min}}</text>/天</view>
+          <view class="price" v-if="item.type === 3">￥<text class="f14">{{item.price_min}}</text></view>
+          <view class="f10 c-999" v-if="item.type === 1">已租：{{item.sale_nums}}</view>
+          <view class="f10 c-999" v-if="item.type === 3">已售：{{item.sale_nums}}</view>
         </view>
       </view>
     </view>
@@ -26,11 +31,23 @@
 </template>
 
 <script type='es6'>
+import Taro from '@tarojs/taro'
 export default {
 	name: 'app',
+  props: {
+	  list: Array
+  },
 	data() {
-		return {}
+		return {
+		  imgSrc: Taro.imgSrc
+    }
 	},
-	methods: {}
+	methods: {
+    toDetail (id) {
+      Taro.navigateTo({
+        url: `/pages/detail/index?id=${id}`
+      })
+    }
+  }
 }
 </script>

@@ -1,10 +1,11 @@
 <template>
   <view class="Question">
     <view class="ml12">
-      <cell title="1. 有什么支付方式可以选择？" isLink />
-      <cell title="1. 有什么支付方式可以选择？" isLink />
-      <cell title="1. 有什么支付方式可以选择？" isLink />
-      <cell title="1. 有什么支付方式可以选择？" isLink />
+      <cell v-for="(item, index) in quesList"
+            :key="item.id"
+            :title="(index + 1) + '.' + item.title"
+            isLink
+            @tap="toDetail(item.url)" />
     </view>
   </view>
 </template>
@@ -19,11 +20,21 @@ export default {
   components: {
     Cell
   },
+  computed: {
+    quesList () {
+      return this.$store.state.quesList
+    }
+  },
   data () {
     return {
     }
   },
   methods: {
+    toDetail (url) {
+      Taro.navigateTo({
+        url: `/pages/webview/index?src=${url}&title=常见问题`
+      })
+    }
   },
 }
 </script>

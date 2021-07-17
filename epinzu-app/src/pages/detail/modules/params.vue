@@ -4,17 +4,15 @@
 
 <template>
 <view class="Detail-section Detail-questions pb8" id="params">
-  <view class="between mt16 mb16">
+  <view class="between mt16 mb16" @tap="toMore">
     <view>产品参数</view>
-    <view class="acenter f12 c-999" @tap="$emit('params')">更多<image src="@/img/ar1.png" mode="widthFix" class="w10 ml4" /></view>
+    <view class="acenter f12 c-999" v-if="list.length > max">
+      更多<image src="@/img/ar1.png" mode="widthFix" class="w10 ml4" />
+    </view>
   </view>
-  <view class="ques-item borderB">
-    <view class="l">品牌</view>
-    <view class="r">鹰视眼</view>
-  </view>
-  <view class="ques-item borderB">
-    <view class="l">生产许可证编号</view>
-    <view class="r">12345679532114437902072721144379020727</view>
+  <view class="ques-item borderB" v-for="(item, index) in ques" :key="index">
+    <view class="l">{{item.name}}</view>
+    <view class="r">{{item.value}}</view>
   </view>
 </view>
 </template>
@@ -22,9 +20,25 @@
 <script type='es6'>
 export default {
 	name: 'app',
+  props: {
+    list: Array
+  },
+  computed: {
+    ques () {
+      return this.list.slice(0, this.max)
+    }
+  },
 	data() {
-		return {}
+		return {
+		  max: 5
+    }
 	},
-	methods: {}
+	methods: {
+	  toMore () {
+	    if (this.list.length > this.max) {
+        this.$emit('params')
+      }
+    }
+  }
 }
 </script>

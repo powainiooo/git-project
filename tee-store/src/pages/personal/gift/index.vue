@@ -85,7 +85,7 @@ export default {
     toDetail () {
       if (this.storeInfo.shop_id) {
         mpvue.reLaunch({
-          url: '/pages/goods/main?id=' + this.storeInfo.shop_id
+          url: '/pages/goods/main'
         })
       } else {
         mpvue.navigateTo({

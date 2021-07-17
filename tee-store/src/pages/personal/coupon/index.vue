@@ -93,8 +93,8 @@ export default {
     },
     toStore () {
       if (this.storeInfo.shop_id) {
-        mpvue.redirectTo({
-          url: '/pages/goods/main?id=' + this.storeInfo.shop_id
+        mpvue.switchTab({
+          url: '/pages/goods/main'
         })
       } else {
         mpvue.redirectTo({

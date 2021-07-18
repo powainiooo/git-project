@@ -1,6 +1,6 @@
 <template>
   <view class="Nearby">
-    <view class="pl12 pr12 pt4 pb4 borderB">
+    <view class="pl12 pr12 pt4 pb4 borderB" v-if="queryParams.word">
       <search ref="search" placeholder="搜好物，上品租" :disabled="true" />
     </view>
     <view class="goods-item-hor" v-for="item in dataSource" :key="item.goods_id" @tap="toDetail(item.goods_id)">
@@ -45,18 +45,23 @@ export default {
   data () {
     return {
       queryParams: {
+        cid: '',
         word: '',
         lng: '',
         lat: ''
       },
       url: {
-        list: '/userapi/nearby/search'
+        list: '',
+        list1: '/userapi/nearby/search',
+        list2: '/userapi/nearby/index',
       }
     }
   },
   onShow () {
     this.$nextTick(() => {
-      this.$refs.search.setDefault(this.queryParams.word)
+      if (this.queryParams.word) {
+        this.$refs.search.setDefault(this.queryParams.word)
+      }
     })
   },
   methods: {
@@ -69,6 +74,13 @@ export default {
   onLoad (options) {
     console.log('nearby list options', options)
     this.queryParams.word = options.keyword
+    if (options.keyword) {
+      this.url.list = this.url.list1
+    }
+    if (options.cid !== undefined) {
+      this.url.list = this.url.list2
+      this.queryParams.cid = options.cid || 0
+    }
   }
 }
 </script>

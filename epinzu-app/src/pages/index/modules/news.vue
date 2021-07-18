@@ -6,7 +6,7 @@
 <view class="i-news">
   <view class="i-title">
     <view class="h3 acenter">新品动态 <image src="@/img/now.png" mode="widthFix" class="w34 ml2" /></view>
-    <view class="r">更多 <image src="@/img/ar1.png" mode="widthFix" /></view>
+    <view class="r" @tap="toMore">更多 <image src="@/img/ar1.png" mode="widthFix" /></view>
   </view>
   <scroll-view scrollX="true" class="scroll">
     <view class="i-news-list">
@@ -40,6 +40,11 @@ export default {
     toDetail (id) {
       Taro.navigateTo({
         url: `/pages/detail/index?id=${id}`
+      })
+    },
+    toMore () {
+      Taro.navigateTo({
+        url: '/pages/goods/common/index?key=newest'
       })
     }
   }

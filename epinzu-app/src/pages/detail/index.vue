@@ -6,7 +6,7 @@
         <Tabs :value="tabKey" :list="tabs" :border="true" @change="tabChange" />
       </view>
       <view class="btns acenter">
-        <button class="btn-cart">
+        <button class="btn-cart" @tap="toCart">
           <image src="@/img/cart.png" mode="widthFix" />
           <text v-if="cartNum > 0">{{cartNum}}</text>
         </button>
@@ -21,7 +21,7 @@
     <infos @coupon="openCoupons"
            :record="record" />
     <!-- 价格信息 -->
-    <view class="Detail-section">
+    <view class="Detail-section" v-if="record.type === 1">
       <price-item v-for="item in attrs"
                   :key="item.id"
                   :record="item" />
@@ -31,7 +31,7 @@
             @store="toStore"
             @attention="attention" />
     <!-- 租赁信息 -->
-    <rents />
+    <rents v-if="record.type === 1" />
     <!-- 常见问题 -->
     <questions :list="questions" />
     <!-- 常见问题 -->
@@ -59,7 +59,7 @@
           <image src="@/img/service.png" mode="aspectFit" />
           <view>客服</view>
         </button>
-        <button class="btn">
+        <button class="btn" @tap="collection">
           <image src="@/img/star1.png" mode="aspectFit" />
           <view>收藏</view>
         </button>
@@ -87,7 +87,7 @@ import coupons from './modules/coupons'
 import paramsList from './modules/paramsList'
 import GuessLike from '@/c/common/GuessLike'
 import Tabs from '@/c/common/Tabs'
-import { getAction } from '@/utils/api'
+import { getAction, intercept } from '@/utils/api'
 import { pageMixin } from '@/mixins/pages'
 
 export default {
@@ -169,13 +169,25 @@ export default {
         this.dis.details = res[2].top - h
       })
     },
+    // 前往购物车
+    toCart () {
+      intercept(() => {
+        Taro.navigateTo({
+          url: '/pages/cart/index'
+        })
+      })
+    },
     // 打开购买弹窗
     openBuys () {
-      this.$refs.buys.show()
+      intercept(() => {
+        this.$refs.buys.show()
+      })
     },
     // 打开优惠券弹窗
     openCoupons () {
-      this.$refs.coupons.show()
+      intercept(() => {
+        this.$refs.coupons.show()
+      })
     },
     // 获取商品详情
     getData () {
@@ -229,7 +241,15 @@ export default {
     },
     // 关注店铺
     attention () {
+      intercept(() => {
 
+      })
+    },
+    // 收藏
+    collection () {
+      intercept(() => {
+
+      })
     }
   },
   onShow () {

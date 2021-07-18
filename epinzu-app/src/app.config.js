@@ -1,9 +1,10 @@
 export default {
   pages: [
-    'pages/store/index',
-    'pages/detail/index',
     'pages/index/index',
+    'pages/detail/index',
+    'pages/store/index',
     'pages/goods/list/index',
+    'pages/goods/common/index',
     'pages/refund/apply',
     'pages/refund/type',
     'pages/refund/index',

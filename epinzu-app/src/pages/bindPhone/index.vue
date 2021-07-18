@@ -3,7 +3,7 @@
     <Field placeholder="请输入手机号" v-model="phone" />
     <Field placeholder="请输入验证码" v-model="code">
       <template #button>
-      <button class="c-btn c-btn-border c-btn-24" style="width: 80px;" @tap="getCode">{{btnName}}</button>
+      <button class="c-btn c-btn-border c-btn-24" :disabled="count !== 0" style="width: 80px;" @tap="getCode">{{btnName}}</button>
       </template>
     </Field>
     <view class="ml12 mr12 mt40">
@@ -15,6 +15,8 @@
 <script>
 import Taro from '@tarojs/taro'
 import Field from "../../components/common/Field"
+import { postAction } from '@/utils/api'
+
 export default {
   name: 'Index',
   components: {
@@ -35,33 +37,51 @@ export default {
     return {
       phone: '',
       code: '',
-      count: 0
+      count: 0,
+      isAjax: false
     }
-  },
-  mounted () {
-
   },
   methods: {
     handleSubmit () {
-      console.log('handleSubmit')
+      if (this.isAjax) return
       const params = {
+        user_id: this.$store.state.userId,
         phone: this.phone,
         code: this.code
       }
-      Taro.showToast({
-        title: '修改成功'
+      this.isAjax = true
+      postAction('/userapi/alipay/mini/bind', params).then(res => {
+        if (res.code === 0) {
+          Taro.showToast({
+            title: '绑定成功'
+          })
+          this.$store.commit('SET_TOKEN', res.data.api_token)
+          setTimeout(() => {
+            Taro.navigateBack({
+              delta: 1
+            })
+          }, 1000)
+        } else {
+          this.isAjax = false
+        }
       })
     },
     getCode () {
-      if (this.count !== 0) return
-      this.count = 60
-      const t = setInterval(() => {
-        if (this.count === 0) {
-          clearInterval(t)
-        } else {
-          this.count -= 1
+      postAction('/userapi/sms/send', {
+        phone: this.phone
+      }).then(res => {
+        if (res.code === 0) {
+          if (this.count !== 0) return
+          this.count = 60
+          const t = setInterval(() => {
+            if (this.count === 0) {
+              clearInterval(t)
+            } else {
+              this.count -= 1
+            }
+          }, 1000)
         }
-      }, 1000)
+      })
     }
   }
 }

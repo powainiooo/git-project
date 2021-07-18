@@ -6,7 +6,7 @@
 <view class="i-nearby">
   <view class="i-title">
     <view class="h3">附近商品</view>
-    <view class="r">更多 <image src="@/img/ar1.png" mode="widthFix" /></view>
+    <view class="r" @tap="toMore">更多 <image src="@/img/ar1.png" mode="widthFix" /></view>
   </view>
   <scroll-view scrollX="true" class="scroll">
     <view class="i-nearby-list">
@@ -29,7 +29,11 @@ import Taro from '@tarojs/taro'
 export default {
 	name: 'app',
   props: {
-    list: Array
+    list: Array,
+    cid: {
+      type: [String, Number],
+      default: 0
+    }
   },
 	data() {
 		return {
@@ -40,6 +44,11 @@ export default {
     toDetail (id) {
       Taro.navigateTo({
         url: `/pages/detail/index?id=${id}`
+      })
+    },
+    toMore () {
+      Taro.navigateTo({
+        url: `/pages/nearby/index?cid=${this.cid}`
       })
     }
   }

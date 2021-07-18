@@ -33,7 +33,7 @@
     <navs />
 
     <!-- 附近商品 -->
-    <nearby :list="nearbys" />
+    <nearby :list="nearbys" :cid="currentCate.cid" />
     <!-- 新品动态 -->
     <news :list="newests" />
     <!-- 推荐商品 -->

@@ -85,13 +85,13 @@ export const getTokenData = () => {
       console.log('common_login', res)
       if (res.data !== null) {
         store.commit('SET_TOKEN', res.data.api_token)
+        store.commit('SET_USERID', res.data.user_id)
       } else {
         store.commit('SET_TOKEN', res.data)
       }
     })
   })
 }
-
 
 // 支付
 export const payment = (orderNo, orderId, from, key) => {
@@ -125,4 +125,17 @@ export const payment = (orderNo, orderId, from, key) => {
       })
     }
   })
+}
+
+// 登录拦截
+export const intercept = fn => {
+  if (store.state.isLogin) {
+    if (typeof fn === 'function') {
+      fn()
+    }
+  } else {
+    Taro.navigateTo({
+      url: '/pages/bindPhone/index'
+    })
+  }
 }

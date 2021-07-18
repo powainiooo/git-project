@@ -149,6 +149,15 @@ export default {
       this.getData()
     }
   },
+  onShow () {
+    if (store.state.from === 'result') {
+      this.city = '全部'
+      this.latitude = ''
+      this.longitude = ''
+      this.getData()
+      store.commit('SET_FROM', '')
+    }
+  },
   onLoad () {
     Object.assign(this.$data, this.$options.data())
     this.initCity()

@@ -24,6 +24,12 @@
   20%, 60% { transform: rotateZ(10deg) scale(1.1); }
   40%, 80% { transform: rotateZ(-10deg) scale(1.1); }
 }
+.index-page .ar6 { width: 20px; position: absolute; top: 45%; right: 40px; animation: blink 1s ease-out 1s 4 both; }
+.index-page .ar7 { width: 20px; position: absolute; top: 45%; left: 40px; animation: blink 1s ease-out 1s 4 both; }
+@keyframes blink {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
 </style>
 
 <template>
@@ -50,9 +56,12 @@
                   @click="toRecord">使用记录</button>
         </div>
       </div>
+      <img src="/static/images/arrow6.png" mode="widthFix" class="ar6" />
+      <img src="/static/images/arrow7.png" mode="widthFix" class="ar7" />
       <swiper class="index-swiper"
               :current="current"
               indicator-dots
+              circular
               indicator-color="#EADED0"
               indicator-active-color="#41372D"
               duration="300"

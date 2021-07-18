@@ -23,7 +23,9 @@ export default {
       visible: false,
       addr: '--',
       map: null,
-      dotData: {}
+      dotData: {},
+      latlng: {},
+      isClick: false
     }
   },
   mounted () {
@@ -43,14 +45,16 @@ export default {
           const geocoder = new qq.maps.Geocoder({
             complete (res) {
               console.log('Geocoder', res)
-              _this.addr = res.detail.address
-              _this.dotData = {
-                address: res.detail.address,
-                addressComponents: res.detail.addressComponents,
-                location: res.detail.location
+              if (_this.isClick) {
+                _this.addr = res.detail.address
+                _this.dotData = {
+                  address: res.detail.address,
+                  addressComponents: res.detail.addressComponents,
+                  location: _this.latlng
+                }
+                marker.position = res.detail.location
+                marker.setMap(_this.map)
               }
-              marker.position = res.detail.location
-              marker.setMap(_this.map)
               _this.map.setCenter(res.detail.location)
               _this.map.zoomTo(16)
             }
@@ -61,13 +65,16 @@ export default {
           })
           const listener = qq.maps.event.addListener(_this.map, 'click', function (e) {
             console.log(e)
+            _this.isClick = true
+            _this.latlng = e.latLng
             geocoder.getAddress(e.latLng)
           })
           const ap = new qq.maps.place.Autocomplete(document.getElementById('place'), {
             zIndex: 10000
           })
           qq.maps.event.addListener(ap, 'confirm', function (res) {
-            console.log('ap0', ap)
+            console.log('ap0', ap, res)
+            _this.isClick = false
             geocoder.getLocation(`${ap.place.address}-${ap.place.name}`)
           })
         }

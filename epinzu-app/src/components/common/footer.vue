@@ -20,22 +20,22 @@
 
 <template>
 <view class="c-footer footer-container">
-  <view class="c-footer-item" @click="toggle" :class="{'c-footer-active': current === 'home'}">
+  <view class="c-footer-item" @tap="toggle('/pages/index/index')" :class="{'c-footer-active': current === 'home'}">
     <image src="@/img/footer/icon1.png" mode="widthFix" class="normal" />
     <image src="@/img/footer/icon1-active.png" mode="widthFix" class="active" />
     <view>首页</view>
   </view>
-  <view class="c-footer-item" @click="toggle" :class="{'c-footer-active': current === 'message'}">
+  <view class="c-footer-item" @tap="toggle2('/pages/message/index')" :class="{'c-footer-active': current === 'message'}">
     <image src="@/img/footer/icon2.png" mode="widthFix" class="normal" />
     <image src="@/img/footer/icon2-active.png" mode="widthFix" class="active" />
     <view>消息</view>
   </view>
-  <view class="c-footer-item" @click="toggle" :class="{'c-footer-active': current === 'cart'}">
+  <view class="c-footer-item" @tap="toggle2('/pages/cart/index')" :class="{'c-footer-active': current === 'cart'}">
     <image src="@/img/footer/icon3.png" mode="widthFix" class="normal" />
     <image src="@/img/footer/icon3-active.png" mode="widthFix" class="active" />
     <view>购物车</view>
   </view>
-  <view class="c-footer-item" @click="toggle" :class="{'c-footer-active': current === 'mine'}">
+  <view class="c-footer-item" @tap="toggle('/pages/mine/index')" :class="{'c-footer-active': current === 'mine'}">
     <image src="@/img/footer/icon4.png" mode="widthFix" class="normal" />
     <image src="@/img/footer/icon4-active.png" mode="widthFix" class="active" />
     <view>我的</view>
@@ -45,6 +45,8 @@
 
 <script type='es6'>
 import Taro from '@tarojs/taro'
+import { intercept } from '@/utils/api'
+
 export default {
 	name: 'app',
   props: {
@@ -58,8 +60,15 @@ export default {
 	},
 	methods: {
     toggle (url) {
-      Taro.reLaunch({
+      Taro.redirectTo({
         url
+      })
+    },
+    toggle2 (url) {
+      intercept(() => {
+        Taro.redirectTo({
+          url
+        })
       })
     }
   }

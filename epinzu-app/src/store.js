@@ -5,6 +5,7 @@ Vue.use(Vuex)
 
 const state = {
   token: '',
+  userId: '',
   isLogin: false,
   lnglat: {},
   quesList: []
@@ -17,6 +18,9 @@ const mutations = {
   SET_TOKEN (state, data) {
     state.token = data
     state.isLogin = data !== ''
+  },
+  SET_USERID (state, data) {
+    state.userId = data
   },
   SET_QUESLIST (state, data) {
     state.quesList = data

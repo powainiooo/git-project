@@ -22,19 +22,22 @@ window.onload = function () {
     center: center,
     zoom: 6
   })
+  var isClick = false
   var geocoder = new qq.maps.Geocoder({
     complete (res) {
       console.log('Geocoder', res)
-      var addr = res.detail.address
-      document.getElementById('addr').innerHTML = addr
-      var dotData = {
-        address: res.detail.address,
-        addressComponents: res.detail.addressComponents,
-        location: res.detail.location
+      if (isClick) {
+        var addr = res.detail.address
+        document.getElementById('addr').innerHTML = addr
+        var dotData = {
+          address: res.detail.address,
+          addressComponents: res.detail.addressComponents,
+          location: res.detail.location
+        }
+        console.log('坐标信息', dotData)
+        marker.position = res.detail.location
+        marker.setMap(map)
       }
-      console.log('坐标信息', dotData)
-      marker.position = res.detail.location
-      marker.setMap(map)
       map.setCenter(res.detail.location)
       map.zoomTo(16)
     }
@@ -45,6 +48,7 @@ window.onload = function () {
   })
   var listener = qq.maps.event.addListener(map, 'click', function (e) {
     console.log(e)
+    isClick = true
     geocoder.getAddress(e.latLng)
   })
   var ap = new qq.maps.place.Autocomplete(document.getElementById('place'), {
@@ -53,6 +57,7 @@ window.onload = function () {
   console.log('ap0', ap)
   qq.maps.event.addListener(ap, 'confirm', function (res) {
     console.log('ap1', ap)
+    isClick = false
     geocoder.getLocation(`${ap.place.address}-${ap.place.name}`)
   })
 }

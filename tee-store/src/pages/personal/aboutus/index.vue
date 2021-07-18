@@ -2,7 +2,7 @@
 .addr-container { min-height: calc(100vh - 104px); background-color: #ffffff; overflow: hidden; padding-bottom: 20px; }
 .addr-container .header { height: 122px; background-color: #F9F9F9; padding: 0 40px; box-shadow: 0px 3px 20px 0px rgba(0, 0, 0, 0.08); }
 .addr-container .icon { width: 44px; height: 35px; }
-.addr-container .btn { width: 200px; }
+.addr-container .btn { width: 200px; font-family: DinL; font-size: 25px; }
 </style>
 
 <template>

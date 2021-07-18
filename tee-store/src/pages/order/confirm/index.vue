@@ -191,7 +191,7 @@ export default {
             if (res.confirm) {
               this.handlePay()
             } else if (res.cancel) {
-              mpvue.redirectTo({
+              mpvue.switchTab({
                 url: '/pages/stores/main'
               })
             }

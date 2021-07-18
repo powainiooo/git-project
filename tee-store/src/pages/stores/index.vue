@@ -9,7 +9,7 @@
 
 <template>
 <div class="page">
-  <c-header />
+  <c-header menus />
   <div class="container">
     <div class="tr mb65">
       <div class="iblock mr25" v-if="city !== ''">

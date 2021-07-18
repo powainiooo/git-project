@@ -84,21 +84,12 @@ export default {
     },
     handleTap (record) {
       if (record.type === 1) {
-        this.toStore()
-      } else {
-        mpvue.redirectTo({
-          url: '/pages/nearby/list/main'
-        })
-      }
-    },
-    toStore () {
-      if (this.storeInfo.shop_id) {
         mpvue.switchTab({
-          url: '/pages/goods/main'
+          url: '/pages/stores/main'
         })
       } else {
-        mpvue.redirectTo({
-          url: '/pages/stores/main'
+        mpvue.switchTab({
+          url: '/pages/nearby/list/main'
         })
       }
     }

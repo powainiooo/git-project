@@ -10,6 +10,8 @@
 .close-hint { width: 100%; height: 280px; background-color: rgba(122, 115, 108, 0.95); position: fixed; left: 0; bottom: 0; z-index: 200; color: #FFFFFF; }
 .close-hint div { font-size: 24px; line-height: 24px; text-align: center; margin-top: 24px; margin-bottom: 6px; }
 .close-hint p { font-size: 20px; line-height: 26px; text-align: center; }
+
+.close-img { width: 404px; }
 </style>
 
 <template>
@@ -45,7 +47,7 @@
       <img src="/static/images/bg.png" class="bg" />
       <div class="pr">
         <div class="line1 center">
-          <div class="txt1">CLOSED</div>
+          <img src="/static/images/close.png" mode="widthFix" class="close-img" />
         </div>
         <div class="title">本店休息中，请切换其他门店</div>
         <div class="desc" :style="{opacity: storeInfo.pause === 0 ? 1 : 0}">营业时间为{{storeInfo.word_time_start}} ~ {{storeInfo.word_time_end}}，目前时段已打烊，期待您的光临。</div>
@@ -367,8 +369,8 @@ export default {
     toStores () {
       const route = getCurrentPages()
       if (route.length === 1) {
-        mpvue.redirectTo({
-          url: '/pages/stores/main?from=goods'
+        mpvue.switchTab({
+          url: '/pages/stores/main'
         })
       } else {
         mpvue.navigateBack({

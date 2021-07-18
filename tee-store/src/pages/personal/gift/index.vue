@@ -83,15 +83,9 @@ export default {
       })
     },
     toDetail () {
-      if (this.storeInfo.shop_id) {
-        mpvue.reLaunch({
-          url: '/pages/goods/main'
-        })
-      } else {
-        mpvue.navigateTo({
-          url: '/pages/stores/main'
-        })
-      }
+      mpvue.switchTab({
+        url: '/pages/stores/main'
+      })
     }
   },
   onLoad (options) {

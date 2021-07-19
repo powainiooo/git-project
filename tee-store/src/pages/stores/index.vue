@@ -49,6 +49,11 @@ export default {
     cFooter,
     item
   },
+  computed: {
+    locationAuth () {
+      return store.state.locationAuth
+    }
+  },
   data () {
     return {
       city: '',
@@ -141,6 +146,35 @@ export default {
       this.page = 1
       this.list = []
       this.getData()
+    },
+    showAuthHint () {
+      const _this = this
+      setTimeout(() => {
+        mpvue.showModal({
+          title: '请求授权当前位置',
+          content: '需要获取您的地理位置，请确认授权',
+          success (res) {
+            if (res.confirm) {
+              mpvue.openSetting({
+                success (res2) {
+                  if (res2.authSetting['scope.userLocation']) {
+                    mpvue.showToast({
+                      title: '授权成功'
+                    })
+                    _this.initCity()
+                    store.commit('SET_LOCATIONAUTN', true)
+                  }
+                }
+              })
+            } else if (res.cancel) {
+              mpvue.showToast({
+                title: '拒绝授权',
+                icon: 'none'
+              })
+            }
+          }
+        })
+      }, 1000)
     }
   },
   onReachBottom () {
@@ -162,6 +196,9 @@ export default {
     Object.assign(this.$data, this.$options.data())
     this.initCity()
     this.getCity()
+    if (!this.locationAuth) {
+      this.showAuthHint()
+    }
   }
 }
 </script>

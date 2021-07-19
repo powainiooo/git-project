@@ -12,8 +12,8 @@ import {
   Dialog,
   Image as VanImage
 } from 'vant'
-import vConsole from 'vconsole'
-const vc = new vConsole()
+// import vConsole from 'vconsole'
+// const vc = new vConsole()
 
 Vue.use(Storage)
 Vue.use(List)

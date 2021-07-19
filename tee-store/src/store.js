@@ -26,7 +26,8 @@ const store = new Vuex.Store({
     moveIcon: '',
     canShowPrize: true,
     canShowClose: true,
-    from: ''
+    from: '',
+    locationAuth: true
   },
   mutations: {
     SET_TOKEN (state, data) {
@@ -84,6 +85,9 @@ const store = new Vuex.Store({
     },
     SET_CLOSESTATUS (state, data) {
       state.canShowClose = data
+    },
+    SET_LOCATIONAUTN (state, data) {
+      state.locationAuth = data
     }
   }
 })

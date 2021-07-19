@@ -36,6 +36,8 @@ export default {
     if (storeData && storeData.shop_id) {
       store.commit('SET_STOREINFO', storeData)
     }
+
+    this.getSetting()
   },
   methods: {
     loadFont () {
@@ -67,6 +69,19 @@ export default {
       getAction('/userapi/config').then(res => {
         if (res.code === 0) {
           store.commit('SET_SMAUTH', res.data.weixin_message)
+        }
+      })
+    },
+    getSetting () {
+      mpvue.getSetting({
+        success (res) {
+          console.log('getSetting', res)
+          if (res.authSetting['scope.userLocation']) {
+            console.log('scope.userLocation', true)
+            store.commit('SET_LOCATIONAUTN', true)
+          } else {
+            store.commit('SET_LOCATIONAUTN', false)
+          }
         }
       })
     }

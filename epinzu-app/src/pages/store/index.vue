@@ -18,8 +18,8 @@
         </view>
       </view>
       <view class="mr12 mb8 mt8">
-        <button class="c-btn c-btn-border c-btn-24 mb4">关注店铺</button>
-        <button class="c-btn c-btn-border c-btn-24">联系商家</button>
+        <button class="c-btn c-btn-border c-btn-24" @tap="attention" v-if="attentionStatus === 0">关注店铺</button>
+        <button class="c-btn c-btn-border c-btn-24" @tap="attention" v-else-if="attentionStatus === 1">取消关注</button>
       </view>
     </view>
     <!-- 切换分类 -->
@@ -51,7 +51,7 @@ import './index.styl'
 import Rate from '@/c/common/Rate'
 import Tabs from '@/c/common/Tabs'
 import { pageMixin } from '@/mixins/pages'
-import { getAction } from '@/utils/api'
+import { getAction, intercept, postAction } from '@/utils/api'
 
 export default {
   name: 'Index',
@@ -68,6 +68,7 @@ export default {
         { key: '', label: '全部好货' }
       ],
       shopId: 0,
+      attentionStatus: 0,
       shopData: {},
       queryParams: {
         orderby: 'newest'
@@ -93,12 +94,41 @@ export default {
       Taro.navigateTo({
         url: `/pages/detail/index?id=${id}`
       })
+    },
+    // 关注店铺
+    attention () {
+      intercept(() => {
+        postAction('/userapi/user/attention', {
+          shop_id: this.shopId,
+          action: this.attentionStatus === 0 ? 1 : 0
+        }).then(res => {
+          if (res.code === 0) {
+            Taro.showToast({
+              title: res.msg
+            })
+            this.getAttentionStatus()
+          }
+        })
+      })
+    },
+    // 判断是否关注店铺
+    getAttentionStatus () {
+      getAction('/userapi/user/attention', {
+        shop_id: this.shopId
+      }).then(res => {
+        if (res.code === 0) {
+          this.attentionStatus = res.data
+        }
+      })
     }
   },
   onLoad (options) {
     this.shopId = options.id || 19
     this.url.list += this.shopId
     this.getShopData()
+    if (this.isLogin) {
+      this.getAttentionStatus()
+    }
   }
 }
 </script>

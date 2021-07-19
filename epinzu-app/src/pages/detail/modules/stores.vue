@@ -24,7 +24,8 @@
   </view>
   <view class="center mb8">
     <button class="c-btn c-btn-border c-btn-24 mr8" @tap="toStore">进店逛逛</button>
-    <button class="c-btn c-btn-border c-btn-24" @tap="attention">关注店铺</button>
+    <button class="c-btn c-btn-border c-btn-24" @tap="attention" v-if="status === 0">关注店铺</button>
+    <button class="c-btn c-btn-border c-btn-24" @tap="attention" v-else-if="status === 1">取消关注</button>
   </view>
 </view>
 </template>
@@ -34,11 +35,12 @@ import Taro from '@tarojs/taro'
 import Rate from '@/c/common/Rate'
 export default {
 	name: 'app',
+  props: {
+	  record: Object,
+    status: Number
+  },
   components: {
     Rate
-  },
-  props: {
-	  record: Object
   },
 	data() {
 		return {

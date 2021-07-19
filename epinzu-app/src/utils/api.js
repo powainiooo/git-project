@@ -22,6 +22,9 @@ const ajax = (opts, autoMsg = true) => {
         if (res.data.code === 0) {
         } else if (res.data.code === 9) {
           console.log('未登录')
+          Taro.navigateTo({
+            url: '/pages/bindPhone/index'
+          })
         } else {
           // console.log('res.data.ret')
           if (autoMsg) {

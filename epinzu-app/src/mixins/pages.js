@@ -48,15 +48,21 @@ export const pageMixin = {
       return params
     },
     getListData () {
+      console.log('getListData')
       Taro.showLoading({
         title: '加载中'
       })
       const params = this.getParams()
       this.loading = true
+      console.log('this.url.list', this.url.list)
       getAction(this.url.list, params).then(res => {
         if (res.code === 0) {
           this.dataSource = this.dataSource.concat(res.data.list)
           this.ipage.loadOver = res.data.list.length < res.data.pageSize
+
+          if (typeof this.afterGetList === 'function') {
+            this.afterGetList()
+          }
         }
         this.loading = false
         Taro.hideLoading()

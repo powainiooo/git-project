@@ -28,6 +28,7 @@
     </view>
     <!-- 店铺信息 -->
     <stores :record="shop"
+            :status="attentionStatus"
             @store="toStore"
             @attention="attention" />
     <!-- 租赁信息 -->
@@ -45,7 +46,7 @@
     <!-- 购买弹窗 -->
     <buys ref="buys" />
     <!-- 优惠券弹窗 -->
-    <coupons ref="coupons" :list="couponList" />
+    <coupons ref="coupons" :list="couponList" @fetch="fetchCoupon" />
     <!-- 参数弹窗 -->
     <params-list ref="paramsList" :list="params" />
     <!-- 底部操作栏 -->
@@ -60,7 +61,8 @@
           <view>客服</view>
         </button>
         <button class="btn" @tap="collection">
-          <image src="@/img/star1.png" mode="aspectFit" />
+          <image src="@/img/star1.png" mode="aspectFit" v-if="collectionStatus === 0" />
+          <image src="@/img/star2.png" mode="aspectFit" v-else-if="collectionStatus === 1" />
           <view>收藏</view>
         </button>
       </view>
@@ -87,7 +89,7 @@ import coupons from './modules/coupons'
 import paramsList from './modules/paramsList'
 import GuessLike from '@/c/common/GuessLike'
 import Tabs from '@/c/common/Tabs'
-import { getAction, intercept } from '@/utils/api'
+import { getAction, postAction, intercept } from '@/utils/api'
 import { pageMixin } from '@/mixins/pages'
 
 export default {
@@ -144,6 +146,8 @@ export default {
       questions: [],
       contents: [],
       shop: {},
+      collectionStatus: 0,
+      attentionStatus: 0,
       url: {
         list: '/userapi/goods/similar'
       }
@@ -186,7 +190,22 @@ export default {
     // 打开优惠券弹窗
     openCoupons () {
       intercept(() => {
+        this.getCoupons()
         this.$refs.coupons.show()
+      })
+    },
+    // 领取优惠券
+    fetchCoupon (id) {
+      postAction('/userapi/coupon/fetch', {
+        goods_id: this.queryParams.goods_id,
+        coupon_id: id
+      }).then(res => {
+        if (res.code === 0) {
+          Taro.showToast({
+            title: res.msg
+          })
+          this.getCoupons()
+        }
       })
     },
     // 获取商品详情
@@ -210,6 +229,8 @@ export default {
           this.contents = res.data.detail.content
           this.shop = res.data.shop
           this.$store.commit('SET_QUESLIST', res.data.questions)
+
+          this.getAttentionStatus()
         }
       })
     },
@@ -229,6 +250,7 @@ export default {
         goods_id: this.queryParams.goods_id
       }).then(res => {
         if (res.code === 0) {
+          console.log('this.couponList', this.couponList)
           this.couponList = res.data
         }
       })
@@ -242,13 +264,53 @@ export default {
     // 关注店铺
     attention () {
       intercept(() => {
-
+        postAction('/userapi/user/attention', {
+          shop_id: this.record.shop_id,
+          action: this.attentionStatus === 0 ? 1 : 0
+        }).then(res => {
+          if (res.code === 0) {
+            Taro.showToast({
+              title: res.msg
+            })
+            this.getAttentionStatus()
+          }
+        })
       })
     },
     // 收藏
     collection () {
       intercept(() => {
-
+        postAction('/userapi/user/collection', {
+          goods_id: this.queryParams.goods_id,
+          action: this.collectionStatus === 0 ? 1 : 0
+        }).then(res => {
+          if (res.code === 0) {
+            Taro.showToast({
+              title: res.msg
+            })
+            this.getCollectionStatus()
+          }
+        })
+      })
+    },
+    // 判断是否收藏商品
+    getCollectionStatus () {
+      getAction('/userapi/user/collection', {
+        goods_id: this.queryParams.goods_id
+      }).then(res => {
+        if (res.code === 0) {
+          this.collectionStatus = res.data
+        }
+      })
+    },
+    // 判断是否关注店铺
+    getAttentionStatus () {
+      getAction('/userapi/user/attention', {
+        shop_id: this.record.shop_id
+      }).then(res => {
+        if (res.code === 0) {
+          this.attentionStatus = res.data
+        }
       })
     }
   },
@@ -276,9 +338,12 @@ export default {
     }
   },
   onLoad (options) {
+    // options.id = 94
     this.queryParams.goods_id = options.id || 94
     this.getData()
-    this.getCoupons()
+    if (this.isLogin) {
+      this.getCollectionStatus()
+    }
   }
 }
 </script>

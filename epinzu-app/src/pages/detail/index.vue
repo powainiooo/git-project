@@ -44,7 +44,7 @@
       <text slot="title">相似物品</text>
     </guess-like>
     <!-- 购买弹窗 -->
-    <buys ref="buys" />
+    <buys ref="buys" :record="record" @refresh="getCartNum" />
     <!-- 优惠券弹窗 -->
     <coupons ref="coupons" :list="couponList" @fetch="fetchCoupon" />
     <!-- 参数弹窗 -->

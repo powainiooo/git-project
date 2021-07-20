@@ -22,6 +22,10 @@ export default {
     value: {
 	    type: [Number, String],
       default: 0
+    },
+    max: {
+      type: Number,
+      default: 100
     }
   },
 	data() {
@@ -36,7 +40,9 @@ export default {
     },
     add () {
       const val = Number(this.value)
-      this.$emit('input', val + 1)
+      if (val < this.max) {
+        this.$emit('input', val + 1)
+      }
     }
   }
 }

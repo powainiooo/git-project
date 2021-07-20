@@ -10,7 +10,7 @@
   </view>
   <scroll-view scrollX="true" class="scroll">
     <view class="i-news-list">
-      <view class="i-news-item" v-for="item in list" :key="item.id" @tap="toDetail(item.goods_id)">
+      <view class="i-news-item" v-for="item in list" :key="item.id" @tap="toDetail(item.id)">
         <image :src="imgSrc + item.cover" mode="aspectFill" class="img" />
         <view class="info mt4">
           <view class="h3">{{item.title}}</view>

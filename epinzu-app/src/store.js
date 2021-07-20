@@ -8,7 +8,8 @@ const state = {
   userId: '',
   isLogin: false,
   lnglat: {},
-  quesList: []
+  quesList: [],
+  orderGoods: []
 }
 
 const mutations = {
@@ -24,6 +25,9 @@ const mutations = {
   },
   SET_QUESLIST (state, data) {
     state.quesList = data
+  },
+  SET_ORDERGOODS (state, data) {
+    state.orderGoods = data
   }
 }
 

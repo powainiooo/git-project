@@ -188,6 +188,7 @@ export default {
       this.city = '全部'
       this.latitude = ''
       this.longitude = ''
+      this.list = []
       this.getData()
       store.commit('SET_FROM', '')
     }

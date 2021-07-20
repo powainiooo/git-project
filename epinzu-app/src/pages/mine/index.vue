@@ -89,7 +89,7 @@
       </view>
       <!-- 导航 -->
       <view class="section" style="padding-right: 0">
-        <Cell title="收货地址" isLink @tap="toPage()" />
+        <Cell title="收货地址" isLink @tap="toPage('/pages/address/index')" />
         <Cell title="常见问题" isLink @tap="toPage()" />
         <view @tap="phoneCall">
           <Cell title="联系客服">

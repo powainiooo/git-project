@@ -1,24 +1,24 @@
 <template>
   <view class="Address">
-    <Field label="收件人" placeholder="请填写" v-model="formData.name" />
-    <Field label="手机号码" placeholder="请填写" v-model="formData.phone" />
+    <Field label="收件人" placeholder="请填写" v-model="formData.rev_name" />
+    <Field label="手机号码" placeholder="请填写" v-model="formData.rev_phone" />
     <view @tap="choose">
-      <Field label="地址" placeholder="请填写" :readonly="true" v-model="formData.addr1">
+      <Field label="地址" placeholder="请填写" :readonly="true" v-model="addr1">
         <image src="@/img/ar1.png" mode="widthFix" class="w10" slot="rightIcon" />
       </Field>
     </view>
-    <Field label="详情地址" placeholder="请填写" v-model="formData.addr2" class="mb8" />
+    <Field label="详情地址" placeholder="请填写" v-model="formData.address" class="mb8" />
     <view class="between bg-fff">
       <view class="ml12">设为默认地址</view>
       <view class="switch mr12 mt10 mb10" @tap="toggle">
-        <image src="@/img/switch.png" mode="widthFix" class="wp100" v-if="formData.default === 1" />
+        <image src="@/img/switch.png" mode="widthFix" class="wp100" v-if="formData.status === 0" />
         <image src="@/img/switch-check.png" mode="widthFix" class="wp100" v-else />
       </view>
     </view>
 
     <view class="footer-container">
       <view class="wp100 pl12 pr12">
-        <button class="c-btn">保存</button>
+        <button class="c-btn" @tap="handleSave">保存</button>
       </view>
     </view>
   </view>
@@ -28,37 +28,86 @@
 import Taro from '@tarojs/taro'
 import './index.styl'
 import Field from "@/c/common/Field"
+import { getAction, postAction } from '@/utils/api'
 
 export default {
   name: 'Index',
   components: {
     Field
   },
+  computed: {
+    addr1 () {
+      return `${this.formData.province} ${this.formData.city}`
+    }
+  },
   data () {
     return {
       formData: {
-        name: '',
-        phone: '',
-        addr1: '',
-        addr2: '',
-        default: 1
-      }
+        rev_name: '',
+        rev_phone: '',
+        province: '',
+        city: '',
+        address: '',
+        lng: '',
+        lat: '',
+        status: 1
+      },
+      id: '',
+      isAjax: false
     }
   },
   methods: {
     choose () {
-      console.log('chooseLocation')
       Taro.chooseLocation({
         success: res => {
           console.log('chooseLocation', res)
-          this.formData.addr1 = `${res.provinceName}${res.cityName}`
-          this.formData.addr2 = `${res.address}`
+          this.formData.province = res.provinceName
+          this.formData.city = res.cityName
+          this.formData.address = res.address
+          this.formData.lng = res.longitude
+          this.formData.lat = res.latitude
         }
       })
     },
     toggle () {
-      this.formData.default = this.formData.default === 1 ? 2 : 1
+      this.formData.status = this.formData.status === 1 ? 0 : 1
+    },
+    getDetail () {
+      getAction(`/userapi/user/address/show/${this.id}`).then(res => {
+        if (res.code === 0) {
+          for (let key in this.formData) {
+            this.formData[key] = res.data[key]
+          }
+        }
+      })
+    },
+    handleSave () {
+      if (this.isAjax) return
+      this.isAjax = true
+      let url = '/userapi/user/address/store'
+      if (this.id !== '') {
+        url = `/userapi/user/address/update/${this.id}`
+      }
+      postAction(url, this.formData).then(res => {
+        this.isAjax = false
+        if (res.code === 0) {
+          Taro.showToast({
+            title: res.msg
+          })
+          setTimeout(() => {
+            Taro.navigateBack({
+              delta: 1
+            })
+          }, 500)
+        }
+      })
     }
   },
+  onLoad (options) {
+    if (options.id) {
+      this.id = options.id
+      this.getDetail()
+    }
+  }
 }
 </script>

@@ -80,7 +80,6 @@ export default {
         this.keyword = keyword
       } else {
         this.keyword = this.$refs.search.value
-        console.log('search', val)
       }
       this.toList()
     },

@@ -4,10 +4,10 @@
     <view class="section" v-if="address" @tap="toAddr">
       <cell isLink>
         <view class="acenter" slot="title">
-          <view class="mr16">哆啦A梦</view>
-          <view>157****1997</view>
+          <view class="mr16">{{address.rev_name}}</view>
+          <view>{{address.rev_phone}}</view>
         </view>
-        <view class="f12" slot="label">广东省深圳市宝安区新桥街道</view>
+        <view class="f12" slot="label">{{address.province}}{{address.city}}{{address.address}}</view>
       </cell>
     </view>
     <!-- 地址 无 -->
@@ -31,21 +31,6 @@
             <view class="f12 mb4" v-if="item.type === 1">租金：<text class="f10">￥</text>{{item.attrs.price}}/天 X {{item.buy_nums}}件</view>
             <view class="f12 mb4" v-if="item.type === 1">押金：<text class="f10">￥</text>{{item.attrs.deposit}} X {{item.buy_nums}}件</view>
             <view class="f12 mb4" v-if="item.type === 3">售价：<text class="f10">￥</text>{{item.attrs.price}} X {{item.buy_nums}}件</view>
-          </view>
-        </view>
-      </view>
-      <view class="borderB mt8 mb8 pb8">
-        <view class="acenter mb8">
-          <image src="@/img/icon-buy.png" mode="widthFix" class="w16 mr8" />
-          <view class="f12">无刷电钻充电式手钻</view>
-        </view>
-        <view class="goods-item-hor">
-          <image src="@/img/default.png" mode="aspectFill" class="img" />
-          <view class="infos">
-            <view class="c-999 f12 mb4">规格：红色，标准</view>
-            <view class="c-999 f12 mb4">七天起租</view>
-            <view class="f12 mb4">租金：<text class="f10">￥</text>88/天 X 1件</view>
-            <view class="f12 mb4">押金：<text class="f10">￥</text>88 X 1件</view>
           </view>
         </view>
       </view>
@@ -113,7 +98,7 @@
     <view class="footer-container">
       <view class="between wp100">
         <view class="c-red ml12">支付金额：<text class="f12">￥</text>{{count.pay_amount}}</view>
-        <button class="c-btn mr12">确定支付</button>
+        <button class="c-btn mr12" @tap="handlePay">确定支付</button>
       </view>
     </view>
     <!-- 优惠券 -->
@@ -133,6 +118,11 @@ export default {
   components: {
     Cell,
     coupons
+  },
+  computed: {
+    orderGoods () {
+      return this.$store.state.orderGoods
+    }
   },
   data () {
     return {
@@ -158,15 +148,17 @@ export default {
       Taro.showLoading({
         title: '加载中'
       })
-      const goods = this.$store.state.orderGoods
       postAction('/userapi/order/confirm', {
-        goods,
+        goods: this.orderGoods,
         user_coupon_id: this.couponId,
         address_id: this.addrId
       }).then(res => {
         Taro.hideLoading()
         if (res.code === 0) {
           this.address = res.data.address
+          if (this.address) {
+            this.addrId = this.address.id
+          }
           this.count = res.data.count
           this.coupons = res.data.coupons
           this.goods = res.data.goods
@@ -177,6 +169,49 @@ export default {
     toAddr () {
       Taro.navigateTo({
         url: '/pages/address/index'
+      })
+    },
+    handlePay () {
+      if (this.address === null) {
+        Taro.showToast({
+          title: '请添加送货地址'
+        })
+        return
+      }
+      if (!this.protocolCheck) {
+        Taro.showModal({
+          title: '提示',
+          content: '请了解相关协议\n《品租租赁服务协议》',
+          success: res => {
+            if (res.confirm) {
+              this.protocolCheck = true
+            }
+          }
+        })
+        return
+      }
+      postAction('/userapi/order/create', {
+        goods: this.orderGoods,
+        user_coupon_id: this.couponId,
+        address_id: this.addrId,
+        from: this.from,
+        beizhu: this.remark
+      }).then(res1 => {
+        if (res1.code === 0) {
+          postAction('/userapi/order/pay', {
+            order_no: res1.data.order_no,
+            pay_type: 20
+          }).then(res2 => {
+              if (res2.code === 0) {
+                Taro.tradePay({
+                  tradeNO: res2.data.trade_no,
+                  success: res3 => {
+                    console.log('pay success', res3)
+                  }
+                })
+              }
+          })
+        }
       })
     }
   },

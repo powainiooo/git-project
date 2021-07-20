@@ -92,6 +92,7 @@ export default {
           console.log('location fail', err)
           _this.city = '全部'
           _this.getData()
+          store.commit('SET_LOCATIONAUTN', false)
         }
       })
     },
@@ -174,7 +175,7 @@ export default {
             }
           }
         })
-      }, 1000)
+      }, 500)
     }
   },
   onReachBottom () {
@@ -192,14 +193,14 @@ export default {
       this.getData()
       store.commit('SET_FROM', '')
     }
+    if (!this.locationAuth) {
+      this.showAuthHint()
+    }
   },
   onLoad () {
     Object.assign(this.$data, this.$options.data())
     this.initCity()
     this.getCity()
-    if (!this.locationAuth) {
-      this.showAuthHint()
-    }
   }
 }
 </script>

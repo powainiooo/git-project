@@ -338,7 +338,7 @@ export default {
     }
   },
   onLoad (options) {
-    // options.id = 94
+    // options.id = 103
     this.queryParams.goods_id = options.id || 94
     this.getData()
     if (this.isLogin) {

@@ -76,11 +76,10 @@ export default {
       mpvue.getSetting({
         success (res) {
           console.log('getSetting', res)
-          if (res.authSetting['scope.userLocation']) {
-            console.log('scope.userLocation', true)
-            store.commit('SET_LOCATIONAUTN', true)
+          if (res.authSetting['scope.userLocation'] === undefined) {
+            store.commit('SET_LOCATIONAUTN', 'none')
           } else {
-            store.commit('SET_LOCATIONAUTN', false)
+            store.commit('SET_LOCATIONAUTN', res.authSetting['scope.userLocation'])
           }
         }
       })

@@ -96,8 +96,8 @@
             <text class="c-red mr8" slot="value">400-9606683</text>
           </Cell>
         </view>
-        <Cell title="意见反馈" isLink @tap="toPage()" v-if="isLogin" />
-        <Cell title="设置" isLink @tap="toPage()" />
+        <Cell title="意见反馈" isLink @tap="toPage('/pages/mine/feedback/index')" v-if="isLogin" />
+        <Cell title="设置" isLink @tap="toPage('/pages/mine/setting/index')" />
       </view>
     </view>
     <!-- 底部导航 -->

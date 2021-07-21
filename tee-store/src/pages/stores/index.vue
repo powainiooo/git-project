@@ -162,6 +162,8 @@ export default {
                     mpvue.showToast({
                       title: '授权成功'
                     })
+                    _this.list = []
+                    _this.page = 1
                     _this.initCity()
                     store.commit('SET_LOCATIONAUTN', true)
                   }
@@ -190,17 +192,24 @@ export default {
       this.latitude = ''
       this.longitude = ''
       this.list = []
+      this.page = 1
       this.getData()
       store.commit('SET_FROM', '')
     }
-    if (!this.locationAuth) {
-      this.showAuthHint()
+  },
+  onShareAppMessage () {
+    return {
+      title: '饮茶有奖',
+      path: `/pages/stores/main`
     }
   },
   onLoad () {
     Object.assign(this.$data, this.$options.data())
     this.initCity()
     this.getCity()
+    if (!this.locationAuth) {
+      this.showAuthHint()
+    }
   }
 }
 </script>

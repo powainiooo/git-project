@@ -6,6 +6,7 @@
 
 <template>
 <Modal v-model="visible"
+       :loading="loading"
        :width="70"
        :closable="false"
        @on-ok="confirm">
@@ -21,6 +22,7 @@ export default {
   data () {
     return {
       visible: false,
+      loading: true,
       addr: '--',
       map: null,
       dotData: {},
@@ -81,7 +83,16 @@ export default {
       })
     },
     confirm () {
-      this.$emit('confirm', this.dotData)
+      if (this.latlng.lat) {
+        this.$emit('confirm', this.dotData)
+        this.visible = false
+      } else {
+        this.$Message.warning('请在地图上点击具体位置后再确认保存。')
+        this.loading = false
+        this.$nextTick(() => {
+          this.loading = true
+        })
+      }
     }
   }
 }

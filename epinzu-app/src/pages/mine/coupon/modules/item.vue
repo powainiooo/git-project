@@ -5,31 +5,22 @@
 <template>
 <view class="section">
   <view class="acenter mt8 mb8">
-    <image src="@/img/default.png" mode="widthFix" class="avatar mr8" />
-    <view class="f12">鹰视眼官方旗舰店</view>
+    <image :src="imgSrc + record.shop_logo" mode="widthFix" class="avatar mr8" />
+    <view class="f12">{{record.shop_name}}</view>
   </view>
-  <view class="c-coupon-item">
-    <view class="price"><view>￥<text>30</text></view></view>
+  <view class="c-coupon-item" :class="{'c-coupon-item-disabled': status !== 1}">
+    <view class="price"><view>￥<text>{{record.money}}</text></view></view>
     <view class="content between">
       <view class="ml16">
-        <view class="mb4">满300减30元</view>
-        <view class="f12">有效期至2020.11.12</view>
+        <view class="mb4">{{record.title}}</view>
+        <view class="f12">有效期至{{record.expires_in}}</view>
       </view>
-      <button class="c-btn c-btn-border mr8">点击领取</button>
+      <button class="c-btn c-btn-border mr8" v-if="status === 1" @tap="toGoods">去使用</button>
     </view>
+    <image src="@/img/used.png" mode="widthFix" class="icon" v-if="status === 2" />
+    <image src="@/img/invalid.png" mode="widthFix" class="icon" v-if="status === 3" />
   </view>
-  <view class="c-coupon-item c-coupon-item-disabled">
-    <view class="price"><view>￥<text>30</text></view></view>
-    <view class="content between">
-      <view class="ml16">
-        <view class="mb4">满300减30元</view>
-        <view class="f12">有效期至2020.11.12</view>
-      </view>
-    </view>
-    <image src="@/img/used.png" mode="widthFix" class="icon" />
-    <image src="@/img/invalid.png" mode="widthFix" class="icon" v-if="false" />
-  </view>
-  <view class="between mb8">
+  <view class="between mb8" v-if="status === 2" @tap="toOrder">
     <view class="f12 c-999">查看订单</view>
     <image src="@/img/ar1.png" mode="widthFix" class="w10" />
   </view>
@@ -37,11 +28,29 @@
 </template>
 
 <script type='es6'>
+import Taro from '@tarojs/taro'
 export default {
 	name: 'app',
+  props: {
+	  record: Object,
+    status: Number
+  },
 	data() {
-		return {}
+		return {
+		  imgSrc: Taro.imgSrc
+    }
 	},
-	methods: {}
+	methods: {
+    toGoods () {
+      Taro.navigateTo({
+        url: `/pages/detail/index?id=${this.record.goods_id}`
+      })
+    },
+    toOrder () {
+      Taro.navigateTo({
+        url: `/pages/order/detail/index?id=${this.record.order_id}`
+      })
+    }
+  }
 }
 </script>

@@ -66,8 +66,16 @@
                 <Cascader :data="cityData" v-model="cities" @on-change="cityChange" placeholder="选择省份 / 城市" v-else></Cascader>
               </FormItem>
               <FormItem>
-                <Input ref="address" type="textarea" :rows="4" placeholder="门店地址" v-model="formData.address" :disabled="status === 'view'" />
+                <Input ref="address"
+                       type="textarea"
+                       :rows="4"
+                       placeholder="门店地址"
+                       v-model="formData.address"
+                       :disabled="status === 'view'"
+                       @on-focus="showAddrHint = true"
+                       @on-blur="showAddrHint = false" />
                 <a href="javascript:;" class="btn-geo" @click="openGeo" v-if="status !== 'view'">定位</a>
+                <p class="form-hint" v-show="showAddrHint">请点击“定位”获取地址后，再填写详细门牌号等</p>
               </FormItem>
               <FormItem>
                 <upload-img v-model="formData.shop_logo" :disabled="notNew">
@@ -284,6 +292,7 @@ export default {
         printer_code: '',
         printer_sign: ''
       },
+      showAddrHint: false,
       qrcodeImg: '',
       ruleValidate: {
         idno: [

@@ -3,7 +3,7 @@
 </style>
 
 <template>
-<view class="Order-list-item">
+<view class="Order-list-item" v-if="showItem" @tap="toDetail">
   <view class="between mb16">
     <view class="acenter">
       <image :src="imgSrc + record.shop_logo" mode="aspectFill" class="avatar20 mr4" />
@@ -26,18 +26,19 @@
     <view><text class="f10">￥</text>{{record.order_amount}}<text class="c-999">（含押金{{record.deposit_amount}}）</text></view>
   </view>
   <view class="end">
-    <button class="c-btn c-btn-24 c-btn-border2 ml4" v-if="record.buttons.contact === 1" @tap="contact">联系商家</button>
-    <button class="c-btn c-btn-24 c-btn-border2 ml4" v-if="record.buttons.cancel === 1" @tap="cancel">取消订单</button>
-    <button class="c-btn c-btn-24 c-btn-border2 ml4" v-if="record.buttons.refund === 1" @tap="refund">申请退单</button>
-    <button class="c-btn c-btn-24 c-btn-border2 ml4" v-if="record.buttons.express === 1" @tap="express">查看物流</button>
-    <button class="c-btn c-btn-24 c-btn-border ml4" v-if="record.buttons.pay === 1" @tap="pay">立即支付</button>
-    <button class="c-btn c-btn-24 c-btn-border ml4" v-if="record.buttons.receive === 1" @tap="receive">确认收货</button>
+    <button class="c-btn c-btn-24 c-btn-border2 ml4" v-if="record.buttons.contact === 1" @tap.stop="contact">联系商家</button>
+    <button class="c-btn c-btn-24 c-btn-border2 ml4" v-if="record.buttons.cancel === 1" @tap.stop="cancel">取消订单</button>
+    <button class="c-btn c-btn-24 c-btn-border2 ml4" v-if="record.buttons.refund === 1" @tap.stop="refund">申请退单</button>
+    <button class="c-btn c-btn-24 c-btn-border2 ml4" v-if="record.buttons.express === 1" @tap.stop="express">查看物流</button>
+    <button class="c-btn c-btn-24 c-btn-border ml4" v-if="record.buttons.pay === 1" @tap.stop="pay">立即支付</button>
+    <button class="c-btn c-btn-24 c-btn-border ml4" v-if="record.buttons.receive === 1" @tap.stop="receive">确认收货</button>
   </view>
 </view>
 </template>
 
 <script type='es6'>
 import Taro from '@tarojs/taro'
+import { postAction } from '@/utils/api'
 export default {
 	name: 'app',
   props: {
@@ -45,16 +46,54 @@ export default {
   },
 	data() {
 		return {
-		  imgSrc: Taro.imgSrc
+		  imgSrc: Taro.imgSrc,
+      showItem: true
     }
 	},
 	methods: {
-    contact () {},
-    cancel () {},
+    toDetail () {
+      Taro.navigateTo({
+        url: `/pages/order/detail/index?id=${this.record.id}`
+      })
+    },
+    contact () {
+      Taro.showToast({
+        title: '跳聊天界面'
+      })
+    },
+    cancel () {
+      this.$emit('cancel', this.record.id)
+    },
     refund () {},
-    express () {},
-    pay () {},
-    receive () {},
+    express () {
+      Taro.navigateTo({
+        url: `/pages/order/post/index?id=${this.record.id}`
+      })
+    },
+    pay () {
+      this.$emit('pay', this.record.order_no)
+    },
+    receive () {
+      Taro.showModal({
+        title: '提示',
+        content: '是否确认收货？',
+        success: res => {
+          if (res.confirm) {
+            Taro.showLoading({
+              title: '请求中'
+            })
+            postAction('/userapi/order/receive', {
+              order_id: this.order_id
+            }).then(res2 => {
+              Taro.hideLoading()
+              if (res2.code === 0) {
+                this.showItem = false
+              }
+            })
+          }
+        }
+      })
+    },
   }
 }
 </script>

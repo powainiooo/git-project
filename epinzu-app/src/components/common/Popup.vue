@@ -98,6 +98,7 @@ export default {
     },
     close () {
       this.showItem = false
+      this.$emit('close')
     },
     onTransitionEnd () {
       if (!this.showItem) {

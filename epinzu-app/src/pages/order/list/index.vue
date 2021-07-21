@@ -10,12 +10,14 @@
     <view class="ml12 mr12 mt8 mb8">
       <item v-for="item in dataSource"
             :key="item.id"
-            :record="item" />
+            :record="item"
+            @cancel="cancel"
+            @pay="pay" />
     </view>
     <!-- 支付方式 -->
-    <pay-way />
+    <pay-way ref="payway" @confirm="payConfirm" />
     <!-- 取消原因 -->
-    <cancel-way />
+    <cancel-way ref="cancelWay" @confirm="cancelConfirm" />
   </view>
 </template>
 
@@ -33,6 +35,7 @@ import item from './modules/item'
 import PayWay from '../modules/PayWay'
 import CancelWay from '../modules/CancelWay'
 import { pageMixin } from '@/mixins/pages'
+import { postAction } from '@/utils/api'
 
 export default {
   name: 'Index',
@@ -52,13 +55,70 @@ export default {
         { key: ORDER_GET, label: '待收货' },
         { key: ORDER_GETED, label: '已签收' }
       ],
-      tabKey: '',
+      queryParams: {
+        status: 0
+      },
+      url: {
+        list: '/userapi/order/index'
+      },
+      orderId: '',
+      orderNo: ''
     }
   },
   methods: {
     tabChange (e) {
-      this.tabKey = e
+      this.queryParams.status = e
+      this.resetLoad()
+    },
+    cancel (id) {
+      this.orderId = id
+      this.$refs.cancelWay.show()
+    },
+    cancelConfirm (txt) {
+      postAction('/userapi/order/cancel', {
+        order_id: this.orderId,
+        cancel_reason: txt
+      }).then(res => {
+        if (res.code === 0) {
+          this.resetLoad()
+        }
+      })
+    },
+    pay (orderNo) {
+      this.orderNo = orderNo
+      this.$refs.payway.show(orderNo)
+    },
+    payConfirm (payway) {
+      Taro.showLoading({
+        title: '支付中'
+      })
+      postAction('/userapi/order/pay', {
+        order_no: this.orderNo,
+        pay_type: payway
+      }).then(res2 => {
+        Taro.hideLoading()
+        if (res2.code === 0) {
+          Taro.tradePay({
+            tradeNO: res2.data.trade_no,
+            success: res3 => {
+              console.log('pay success', res3)
+              Taro.redirectTo({
+                url: `/pages/address/index?result=suc&orderNo=${this.orderNo}`
+              })
+            },
+            fail (err) {
+              console.log('pay fail', err)
+              Taro.redirectTo({
+                url: `/pages/address/index?result=fail&orderNo=${this.orderNo}`
+              })
+            }
+          })
+        }
+      })
     }
   },
+  onLoad (options) {
+    this.queryParams.status = options.key || 0
+  }
 }
 </script>

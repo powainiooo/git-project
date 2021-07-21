@@ -4,12 +4,11 @@
 
 <template>
 <Popup :show.sync="visible" round>
-  <view class="tc center borderB h50">优惠券领取</view>
-  <view class="tc center borderB h50">收货地址或者手机号填错</view>
-  <view class="tc center borderB h50">忘记支付密码/余额不足</view>
-  <view class="tc center borderB h50">无法正常支付</view>
-  <view class="tc center borderB h50">不想买了</view>
-  <view class="tc center borderB h50">其他原因</view>
+  <view class="tc center borderB h50">取消原因</view>
+  <view class="tc center borderB h50"
+        v-for="(item, i) in list"
+        :key="i"
+        @tap="select(item)">{{item}}</view>
   <view class="tc center h50" @tap="close">取消</view>
 </Popup>
 </template>
@@ -23,12 +22,26 @@ export default {
   },
 	data() {
 		return {
-      visible: true
+      visible: false,
+      list: [
+        '收货地址或者手机号填错',
+        '忘记支付密码/余额不足',
+        '无法正常支付',
+        '不想买了',
+        '其他原因'
+      ]
     }
 	},
 	methods: {
+    show () {
+      this.visible = true
+    },
     close () {
       this.visible = false
+    },
+    select (item) {
+      this.$emit('confirm', item)
+      this.close()
     }
   }
 }

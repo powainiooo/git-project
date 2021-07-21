@@ -34,7 +34,7 @@
           </view>
         </view>
       </view>
-      <cell title="优惠券" :value="couponNums === 0 ? '无可用' : ''" isLink style="padding: 0; margin-right: -8px;" class="mb16" @tap="openCoupon" />
+      <cell title="优惠券" :value="couponNums === 0 ? '无可用' : counponName" isLink style="padding: 0; margin-right: -8px;" class="mb16" @tap="openCoupon" />
     </view>
     <!-- 备注 -->
     <view class="section">
@@ -72,7 +72,7 @@
     </view>
     <!-- 支付方式 -->
     <view class="section">
-      <view class="mt16 mb8">支付方式</view>
+      <view class="mt16 mb8">支付方式{{couponId}}</view>
       <view class="pay-item borderB" @tap="payway = 'alipay'">
         <view class="acenter">
           <image src="@/img/alipay.png" mode="widthFix" class="icon mr4" />
@@ -102,7 +102,9 @@
       </view>
     </view>
     <!-- 优惠券 -->
-    <coupons ref="coupons" />
+    <coupons ref="coupons"
+             :list="coupons"
+             @change="couponChange" />
   </view>
 </template>
 
@@ -134,6 +136,7 @@ export default {
       count: {},
       coupons: [],
       couponNums: 0,
+      counponName: '请选择',
       goods: [],
       remark: '',
       from: 1,
@@ -142,7 +145,14 @@ export default {
   },
   methods: {
     openCoupon () {
-      this.$refs.coupons.show()
+      if (this.couponNums > 0) {
+        this.$refs.coupons.show()
+      }
+    },
+    couponChange (data) {
+      this.couponId = data.id
+      this.counponName = data.title
+      this.getData()
     },
     getData () {
       Taro.showLoading({
@@ -190,6 +200,9 @@ export default {
         })
         return
       }
+      Taro.showLoading({
+        title: '支付中'
+      })
       postAction('/userapi/order/create', {
         goods: this.orderGoods,
         user_coupon_id: this.couponId,
@@ -202,18 +215,28 @@ export default {
             order_no: res1.data.order_no,
             pay_type: 20
           }).then(res2 => {
-              if (res2.code === 0) {
-                Taro.tradePay({
-                  tradeNO: res2.data.trade_no,
-                  success: res3 => {
-                    console.log('pay success', res3)
-                  }
-                })
-              }
+            Taro.hideLoading()
+            if (res2.code === 0) {
+              Taro.tradePay({
+                tradeNO: res2.data.trade_no,
+                success: res3 => {
+                  console.log('pay success', res3)
+                  Taro.redirectTo({
+                    url: `/pages/address/index?result=suc&orderNo=${res1.data.order_no}`
+                  })
+                },
+                fail (err) {
+                  console.log('pay fail', err)
+                  Taro.redirectTo({
+                    url: `/pages/address/index?result=fail&orderNo=${res1.data.order_no}`
+                  })
+                }
+              })
+            }
           })
         }
       })
-    }
+    },
   },
   onLoad (options) {
     this.from = options.from || 1

@@ -31,7 +31,7 @@ export default {
 	name: 'Tabs',
   props: {
 	  value: {
-	    type: String,
+	    type: [String, Number],
       default: ''
     },
     list: {

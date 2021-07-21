@@ -37,34 +37,34 @@
       <view class="section">
         <view class="mt16 mb16 between">
           <view>我的订单</view>
-          <view class="acenter" @tap="toPage()">
+          <view class="acenter" @tap="toPage('/pages/order/list/index')">
             <text class="f12 c-999">全部订单</text>
             <image src="@/img/ar1.png" mode="widthFix" class="w10 ml4" />
           </view>
         </view>
         <view class="Mine-order-nav">
-          <view class="mb16" @tap="toPage()">
+          <view class="mb16" @tap="toPage('/pages/order/list/index?key=1')">
             <view class="pr mb4">
               <image src="@/img/mine/icon1.png" mode="widthFix" class="w24" />
               <view class="dot-num" v-if="record.wait_pay_nums">{{record.wait_pay_nums}}</view>
             </view>
             <view>待付款</view>
           </view>
-          <view class="mb16" @tap="toPage()">
+          <view class="mb16" @tap="toPage('/pages/order/list/index?key=2')">
             <view class="pr mb4">
               <image src="@/img/mine/icon2.png" mode="widthFix" class="w24" />
               <view class="dot-num" v-if="record.wait_deliver_nums">{{record.wait_deliver_nums}}</view>
             </view>
             <view>待发货</view>
           </view>
-          <view class="mb16" @tap="toPage()">
+          <view class="mb16" @tap="toPage('/pages/order/list/index?key=3')">
             <view class="pr mb4">
               <image src="@/img/mine/icon3.png" mode="widthFix" class="w24" />
               <view class="dot-num" v-if="record.wait_receive_nums">{{record.wait_receive_nums}}</view>
             </view>
             <view>待收货</view>
           </view>
-          <view class="mb16" @tap="toPage()">
+          <view class="mb16" @tap="toPage('/pages/order/list/index?key=4')">
             <view class="pr mb4">
               <image src="@/img/mine/icon4.png" mode="widthFix" class="w24" />
               <view class="dot-num" v-if="record.signed_nums">{{record.signed_nums}}</view>

@@ -1,15 +1,18 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import { getAction } from './utils/api'
 
 Vue.use(Vuex)
 
 const state = {
   token: '',
   userId: '',
+  userInfo: {},
   isLogin: false,
   lnglat: {},
   quesList: [],
-  orderGoods: []
+  orderGoods: [],
+  addrId: '',
 }
 
 const mutations = {
@@ -23,17 +26,27 @@ const mutations = {
   SET_USERID (state, data) {
     state.userId = data
   },
+  SET_USERINFO (state, data) {
+    state.userInfo = data
+  },
   SET_QUESLIST (state, data) {
     state.quesList = data
   },
   SET_ORDERGOODS (state, data) {
     state.orderGoods = data
+  },
+  SET_ADDRID (state, data) {
+    state.addrId = data
   }
 }
 
 const actions = {
-  addNumber(context, number) {
-    context.commit('ADD_NUMBER', number)
+  getUserInfo(context) {
+    getAction('/userapi/my').then(res => {
+      if (res.code === 0) {
+        context.commit('SET_USERINFO', res.data)
+      }
+    })
   }
 }
 

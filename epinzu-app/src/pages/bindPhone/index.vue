@@ -35,6 +35,7 @@ export default {
   },
   data () {
     return {
+      func: '',
       phone: '',
       code: '',
       count: 0,
@@ -50,17 +51,21 @@ export default {
         code: this.code
       }
       this.isAjax = true
-      postAction('/userapi/alipay/mini/bind', params).then(res => {
+      let url = '/userapi/alipay/mini/bind'
+      if (this.func === 'update') {
+        url = '/userapi/user/bind/phone'
+      }
+      postAction(url, params).then(res => {
         if (res.code === 0) {
           Taro.showToast({
             title: '绑定成功'
           })
-          this.$store.commit('SET_TOKEN', res.data.api_token)
-          setTimeout(() => {
-            Taro.navigateBack({
-              delta: 1
-            })
-          }, 1000)
+          if (this.func === 'new') {
+            this.$store.commit('SET_TOKEN', res.data.api_token)
+          }
+          Taro.navigateBack({
+            delta: 1
+          })
         } else {
           this.isAjax = false
         }
@@ -83,6 +88,9 @@ export default {
         }
       })
     }
+  },
+  onLoad (options) {
+    this.func = options.func || 'new'
   }
 }
 </script>

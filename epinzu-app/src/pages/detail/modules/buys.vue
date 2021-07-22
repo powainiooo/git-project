@@ -39,7 +39,7 @@
     <view class="footer-container">
       <view class="c-btn-group ml12 mr12">
         <button class="c-btn" style="background-color: #FC7F1B;" @tap="addCart">加入购物车</button>
-        <button class="c-btn">立即下单</button>
+        <button class="c-btn" @tap="handleBuy">立即下单</button>
       </view>
     </view>
   </view>
@@ -131,6 +131,18 @@ export default {
           this.$emit('refresh')
           this.visible = false
         }
+      })
+    },
+    handleBuy () {
+      if (this.attrId === 0) {
+        Taro.showToast({
+          title: '请选择规格'
+        })
+        return
+      }
+      this.$store.commit('SET_ORDERGOODS', this.getParams())
+      Taro.navigateTo({
+        url: '/pages/order/confirm/index'
       })
     }
   }

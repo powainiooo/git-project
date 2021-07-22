@@ -3,7 +3,8 @@
     <view class="Address-item between borderB"
           v-for="item in dataSource"
           :key="item.id"
-          @tap="toEdit(item)">
+          @tap="selectAddr(item.id)"
+          >
       <view class="mt8">
         <view class="mb8 f12 acenter">
           <text class="c-tag c-tag-red mr4" v-if="item.status === 1">默认</text>
@@ -11,7 +12,7 @@
         </view>
         <view class="mb8 f12 c-666">{{item.province}} {{item.city}} {{item.address}}</view>
       </view>
-      <image src="@/img/edit.png" mode="widthFix" class="w24 mr12" />
+      <image src="@/img/edit.png" mode="widthFix" class="w24 mr12" @tap.stop="toEdit(item)" />
     </view>
 
     <view class="empty-txt" v-if="!loading && ipage.loadOver && dataSource.length > 0">已经全部加载完毕</view>
@@ -36,6 +37,7 @@ export default {
   data () {
     return {
       disableMixinCreated: true,
+      from: '',
       url: {
         list: '/userapi/user/address/index'
       }
@@ -51,10 +53,21 @@ export default {
       Taro.navigateTo({
         url: '/pages/address/edit'
       })
+    },
+    selectAddr (id) {
+      if (this.from === 'order') {
+        this.$store.commit('SET_ADDRID', id)
+        Taro.navigateBack({
+          delta: 1
+        })
+      }
     }
   },
   onShow () {
     this.resetLoad()
+  },
+  onLoad (options) {
+    this.from = options.from || 'mine'
   }
 }
 </script>

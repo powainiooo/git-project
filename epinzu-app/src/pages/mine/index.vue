@@ -71,7 +71,7 @@
             </view>
             <view>已签收</view>
           </view>
-          <view class="mb16" @tap="toPage()">
+          <view class="mb16" @tap="toPage('/pages/rent/index')">
             <view class="pr mb4">
               <image src="@/img/mine/icon5.png" mode="widthFix" class="w24" />
               <view class="dot-num" v-if="record.rent_wait_confirm_nums">{{record.rent_wait_confirm_nums}}</view>
@@ -90,7 +90,7 @@
       <!-- 导航 -->
       <view class="section" style="padding-right: 0">
         <Cell title="收货地址" isLink @tap="toPage('/pages/address/index')" />
-        <Cell title="常见问题" isLink @tap="toPage()" />
+        <Cell title="常见问题" isLink @tap="toPage('/pages/question/index?source=common')" />
         <view @tap="phoneCall">
           <Cell title="联系客服">
             <text class="c-red mr8" slot="value">400-9606683</text>
@@ -122,12 +122,14 @@ export default {
   computed: {
     isLogin () {
       return this.$store.state.isLogin
+    },
+    record () {
+      return this.$store.state.userInfo
     }
   },
   data () {
     return {
       tH: 0,
-      record: {}
     }
   },
   mounted() {
@@ -139,14 +141,6 @@ export default {
     })
   },
   methods: {
-    // 获取用户信息
-    getData () {
-      getAction('/userapi/my').then(res => {
-        if (res.code === 0) {
-          this.record = res.data
-        }
-      })
-    },
     // 登录
     login () {
       intercept()
@@ -175,7 +169,7 @@ export default {
   },
   onShow () {
     if (this.isLogin) {
-      this.getData()
+      this.$store.dispatch('getUserInfo')
     }
   }
 }

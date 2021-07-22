@@ -15,7 +15,7 @@
   <view class="pay-item borderB h50" @tap="payway = 0">
     <view class="acenter ml12">
       <image src="@/img/yue.png" mode="widthFix" class="icon mr4" />
-      <view>余额支付（<text class="f10">￥</text>18）</view>
+      <view>余额支付（<text class="f10">￥</text>{{yue}}）</view>
     </view>
     <image src="@/img/check2.png" mode="widthFix" class="icon mr12" v-if="payway === 0" />
   </view>
@@ -27,7 +27,7 @@
 
 <script type='es6'>
 import Popup from "@/c/common/Popup"
-import { postAction } from '@/utils/api'
+import { getAction } from '@/utils/api'
 import Taro from '@tarojs/taro'
 
 export default {
@@ -39,13 +39,22 @@ export default {
 		return {
       visible: false,
       payway: 20,
-      orderNo: ''
+      orderNo: '',
+      yue: 0
     }
 	},
 	methods: {
+    getYue () {
+      getAction('/userapi/user/money').then(res => {
+        if (res.code === 0) {
+          this.yue = res.data
+        }
+      })
+    },
     show (orderNo) {
       this.visible = true
       this.orderNo = orderNo
+      this.getYue()
     },
     handlePay () {
       this.$emit('confirm', this.payway)

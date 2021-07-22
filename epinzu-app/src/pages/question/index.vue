@@ -14,19 +14,29 @@
 import Taro from '@tarojs/taro'
 import './index.styl'
 import Cell from '@/c/common/Cell'
+import { pageMixin } from '@/mixins/pages'
 
 export default {
   name: 'Question',
+  mixins: [pageMixin],
   components: {
     Cell
   },
   computed: {
     quesList () {
-      return this.$store.state.quesList
+      return this.source === 'goods' ?
+        this.$store.state.quesList
+        :
+        this.dataSource
     }
   },
   data () {
     return {
+      disableMixinCreated: false,
+      source: '',
+      url: {
+        list: '/userapi/questions'
+      }
     }
   },
   methods: {
@@ -36,5 +46,9 @@ export default {
       })
     }
   },
+  onLoad (options) {
+    this.source = options.source || 'goods'
+    this.disableMixinCreated = this.source === 'common'
+  }
 }
 </script>

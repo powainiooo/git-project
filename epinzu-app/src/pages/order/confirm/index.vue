@@ -73,19 +73,19 @@
     <!-- 支付方式 -->
     <view class="section">
       <view class="mt16 mb8">支付方式{{couponId}}</view>
-      <view class="pay-item borderB" @tap="payway = 'alipay'">
+      <view class="pay-item borderB" @tap="payway = 20">
         <view class="acenter">
           <image src="@/img/alipay.png" mode="widthFix" class="icon mr4" />
           <text>支付宝</text>
         </view>
-        <image src="@/img/check2.png" mode="widthFix" class="icon" v-if="payway === 'alipay'" />
+        <image src="@/img/check2.png" mode="widthFix" class="icon" v-if="payway === 20" />
       </view>
-      <view class="pay-item" @tap="payway = 'yue'">
+      <view class="pay-item" @tap="payway = 0">
         <view class="acenter">
           <image src="@/img/yue.png" mode="widthFix" class="icon mr4" />
-          <view>余额支付（<text class="f10">￥</text>18）</view>
+          <view>余额支付（<text class="f10">￥</text>{{yue}}）</view>
         </view>
-        <image src="@/img/check2.png" mode="widthFix" class="icon" v-if="payway === 'yue'" />
+        <image src="@/img/check2.png" mode="widthFix" class="icon" v-if="payway === 0" />
       </view>
     </view>
     <!-- 协议 -->
@@ -113,7 +113,7 @@ import Taro from '@tarojs/taro'
 import './index.styl'
 import coupons from './modules/coupons'
 import Cell from '@/c/common/Cell'
-import { postAction } from '@/utils/api'
+import { postAction, getAction } from '@/utils/api'
 
 export default {
   name: 'Index',
@@ -140,7 +140,8 @@ export default {
       goods: [],
       remark: '',
       from: 1,
-      payway: 'alipay'
+      payway: 20,
+      yue: 0
     }
   },
   methods: {
@@ -176,9 +177,16 @@ export default {
         }
       })
     },
+    getYue () {
+      getAction('/userapi/user/money').then(res => {
+        if (res.code === 0) {
+          this.yue = res.data
+        }
+      })
+    },
     toAddr () {
       Taro.navigateTo({
-        url: '/pages/address/index'
+        url: '/pages/address/index?from=order'
       })
     },
     handlePay () {
@@ -200,6 +208,12 @@ export default {
         })
         return
       }
+      if (this.yue < this.count.pay_amount) {
+        Taro.showToast({
+          title: '余额不足'
+        })
+        return
+      }
       Taro.showLoading({
         title: '支付中'
       })
@@ -213,34 +227,57 @@ export default {
         if (res1.code === 0) {
           postAction('/userapi/order/pay', {
             order_no: res1.data.order_no,
-            pay_type: 20
+            pay_type: this.payway
           }).then(res2 => {
             Taro.hideLoading()
-            if (res2.code === 0) {
-              Taro.tradePay({
-                tradeNO: res2.data.trade_no,
-                success: res3 => {
-                  console.log('pay success', res3)
-                  Taro.redirectTo({
-                    url: `/pages/address/index?result=suc&orderNo=${res1.data.order_no}`
-                  })
-                },
-                fail (err) {
-                  console.log('pay fail', err)
-                  Taro.redirectTo({
-                    url: `/pages/address/index?result=fail&orderNo=${res1.data.order_no}`
-                  })
-                }
-              })
+            if (this.payway === 20) {
+              this.paybyAli(res2)
+            } else if (this.payway === 0) {
+              this.paybyYue(res2)
             }
           })
         }
       })
     },
+    paybyAli (res) {
+      if (res.code === 0) {
+        Taro.tradePay({
+          tradeNO: res.data.trade_no,
+          success: res3 => {
+            console.log('pay success', res3)
+            Taro.redirectTo({
+              url: `/pages/result/index?result=suc`
+            })
+          },
+          fail (err) {
+            console.log('pay fail', err)
+            Taro.redirectTo({
+              url: `/pages/result/index?result=fail`
+            })
+          }
+        })
+      }
+    },
+    paybyYue (res) {
+      if (res.code === 0) {
+        Taro.redirectTo({
+          url: `/pages/result/index?result=suc`
+        })
+      } else {
+        Taro.redirectTo({
+          url: `/pages/result/index?result=fail`
+        })
+      }
+    },
+  },
+  onShow () {
+    this.addrId = this.$store.state.addrId
+    this.getData()
+    this.getYue()
   },
   onLoad (options) {
     this.from = options.from || 1
-    this.getData()
+    this.$store.commit('SET_ADDRID', '')
   }
 }
 </script>

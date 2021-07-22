@@ -1,6 +1,6 @@
 <template>
   <view class="Order-list">
-    <Tabs :value="tabKey" :list="tabs" :border="true" @change="tabChange" />
+    <Tabs :value="queryParams.status" :list="tabs" :border="true" @change="tabChange" />
     <!-- 空提示 -->
     <view class="empty mt125" v-if="!loading && dataSource.length === 0">
       <image src="@/img/order.png" mode="widthFix" class="img" />
@@ -97,28 +97,46 @@ export default {
         pay_type: payway
       }).then(res2 => {
         Taro.hideLoading()
-        if (res2.code === 0) {
-          Taro.tradePay({
-            tradeNO: res2.data.trade_no,
-            success: res3 => {
-              console.log('pay success', res3)
-              Taro.redirectTo({
-                url: `/pages/address/index?result=suc&orderNo=${this.orderNo}`
-              })
-            },
-            fail (err) {
-              console.log('pay fail', err)
-              Taro.redirectTo({
-                url: `/pages/address/index?result=fail&orderNo=${this.orderNo}`
-              })
-            }
-          })
+        if (payway === 20) {
+          this.paybyAli(res2)
+        } else if (payway === 0) {
+          this.paybyYue(res2)
         }
       })
-    }
+    },
+    paybyAli (res) {
+      if (res.code === 0) {
+        Taro.tradePay({
+          tradeNO: res.data.trade_no,
+          success: res3 => {
+            console.log('pay success', res3)
+            Taro.redirectTo({
+              url: `/pages/result/index?result=suc`
+            })
+          },
+          fail (err) {
+            console.log('pay fail', err)
+            Taro.redirectTo({
+              url: `/pages/result/index?result=fail`
+            })
+          }
+        })
+      }
+    },
+    paybyYue (res) {
+      if (res.code === 0) {
+        Taro.redirectTo({
+          url: `/pages/result/index?result=suc`
+        })
+      } else {
+        Taro.redirectTo({
+          url: `/pages/result/index?result=fail`
+        })
+      }
+    },
   },
   onLoad (options) {
-    this.queryParams.status = options.key || 0
+    this.queryParams.status = Number(options.key) || 0
   }
 }
 </script>

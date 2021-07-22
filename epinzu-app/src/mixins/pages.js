@@ -78,6 +78,7 @@ export const pageMixin = {
   },
   onReachBottom () { // 下拉加载列表
     console.log('onReachBottom')
+    if (this.disableMixinCreated) return
     if (!this.ipage.loadOver) {
       this.ipage.current += 1
       this.getListData()

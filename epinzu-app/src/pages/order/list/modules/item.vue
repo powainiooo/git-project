@@ -7,8 +7,8 @@
   <view class="between mb16">
     <view class="acenter">
       <image :src="imgSrc + record.shop_logo" mode="aspectFill" class="avatar20 mr4" />
-      <view class="c-tag c-tag-yel mr4" v-if="record.shop_logo === 1">个人</view>
-      <view class="c-tag c-tag-red mr4" v-if="record.shop_logo === 1">企业</view>
+      <view class="c-tag c-tag-yel mr4" v-if="record.shop_type === 1">个人</view>
+      <view class="c-tag c-tag-red mr4" v-if="record.shop_type === 2">企业</view>
       <view class="mr4">{{record.shop_name}}</view>
       <image src="@/img/ar1.png" mode="widthFix" class="w10" />
     </view>
@@ -83,7 +83,7 @@ export default {
               title: '请求中'
             })
             postAction('/userapi/order/receive', {
-              order_id: this.order_id
+              order_id: this.record.id
             }).then(res2 => {
               Taro.hideLoading()
               if (res2.code === 0) {

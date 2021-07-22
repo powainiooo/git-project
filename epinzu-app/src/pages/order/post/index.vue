@@ -60,6 +60,7 @@ export default {
       getAction('/userapi/order/express', {
         order_id: this.orderId
       }).then(res => {
+        Taro.hideLoading()
         if (res.code === 0) {
           this.record = res.data
         }

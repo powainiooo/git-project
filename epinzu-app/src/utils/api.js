@@ -3,6 +3,7 @@ import store from '@/store'
 import { tokenKey, baseUrl } from '@/config'
 import { promisify } from '@/utils'
 const login = promisify(Taro.getAuthCode)
+const uploadFile = promisify(Taro.uploadFile)
 
 let token = Taro.getStorageSync(tokenKey)
 const ajax = (opts, autoMsg = true) => {
@@ -80,6 +81,8 @@ export const doLogin = (userInfo = {}) => {
 // 获取token
 export const getTokenData = () => {
   console.log('getTokenData')
+  store.commit('SET_TOKEN', '9bf43dbf0bc3fbc2a3bcfbff2aaa378904')
+  return
   login().then(loginRes => {
     console.log('getTokenData2', loginRes)
     getAction('/userapi/alipay/mini/login', {
@@ -141,4 +144,21 @@ export const intercept = fn => {
       url: '/pages/bindPhone/index'
     })
   }
+}
+
+// 上传图片
+export const upload = path => {
+  return new Promise((resolve, reject) => {
+    uploadFile({
+      url: `${baseUrl}/userapi/upload/image?${tokenKey}=${token}`,
+      filePath: path,
+      name: 'file',
+      fileName: 'file',
+      fileType: 'image'
+    }).then(res => {
+      resolve(res.data)
+    }).catch(err => {
+      reject(err)
+    })
+  })
 }

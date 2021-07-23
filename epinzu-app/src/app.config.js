@@ -28,6 +28,7 @@ export default {
     'pages/rent/order/record/index',
     'pages/rent/order/reject/index',
     'pages/rent/order/confirm/index',
+    'pages/rent/order/bill/index',
     'pages/rent/return',
     'pages/rent/detail',
     'pages/rent/index',

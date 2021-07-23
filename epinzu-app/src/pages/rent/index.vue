@@ -9,6 +9,7 @@
     <view class="mb8">
       <item v-for="item in dataSource"
             :key="item.id"
+            :status="queryParams.status"
             :record="item" />
     </view>
   </view>
@@ -36,6 +37,7 @@ export default {
   mixins: [pageMixin],
   data () {
     return {
+      disableMixinCreated: true,
       tabs: [
         { key: RENT_RENT, label: '租用中' },
         { key: RENT_BACKING, label: '归还中' },
@@ -56,5 +58,8 @@ export default {
       this.resetLoad()
     }
   },
+  onShow () {
+    this.resetLoad()
+  }
 }
 </script>

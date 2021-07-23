@@ -50,33 +50,16 @@
         </view>
       </view>
     </view>
-    <!-- 协商记录 -->
-    <view class="bg-fff pl12">
-      <Cell title="协商记录" isLink />
-    </view>
-    <!-- 申请平台介入 -->
-    <view class="tc mt24 f12 c-999" @tap="toApply">申请平台介入</view>
-    <!-- 底部按钮 -->
-    <view class="footer-container">
-      <view class="wp100 pl12 pr12 between">
-        <button class="c-btn mr8" @tap="handleConfirm">确认账单</button>
-        <button class="c-btn c-btn-border2" @tap="toReject">拒绝账单</button>
-      </view>
-    </view>
   </view>
 </template>
 
 <script>
 import Taro from '@tarojs/taro'
 import '../../index.styl'
-import Cell from '@/c/common/Cell'
-import { getAction, postAction } from '@/utils/api'
+import { getAction } from '@/utils/api'
 
 export default {
   name: 'Index',
-  components: {
-    Cell
-  },
   data () {
     return {
       imgSrc: Taro.imgSrc,
@@ -96,38 +79,6 @@ export default {
         if (res.code === 0) {
           this.counts = res.data.counts
         }
-      })
-    },
-    handleConfirm () {
-      Taro.showModal({
-        title: '提示',
-        content: '是否确认账单？',
-        success (res) {
-          if (res.confirm) {
-            postAction('/userapi/rent/back/bill', {
-              id: this.id
-            }).then(res => {
-              if (res.code === 0) {
-                Taro.showToast({
-                  title: res.msg
-                })
-                Taro.navigateBack({
-                  delta: 1
-                })
-              }
-            })
-          }
-        }
-      })
-    },
-    toApply () {
-      Taro.navigateTo({
-        url: `/pages/rent/apply?id=${this.id}`
-      })
-    },
-    toReject () {
-      Taro.navigateTo({
-        url: `/pages/rent/order/reject/index?id=${this.id}`
       })
     }
   },

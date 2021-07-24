@@ -30,7 +30,8 @@ export const pageMixin = {
         loadOver: false
       },
       loading: false,
-      dataSource: []
+      dataSource: [],
+      listDataAll: {}
     }
   },
   mounted () {
@@ -57,6 +58,7 @@ export const pageMixin = {
       console.log('this.url.list', this.url.list)
       getAction(this.url.list, params).then(res => {
         if (res.code === 0) {
+          this.listDataAll = res.data
           this.dataSource = this.dataSource.concat(res.data.list)
           this.ipage.loadOver = res.data.list.length < res.data.pageSize
 

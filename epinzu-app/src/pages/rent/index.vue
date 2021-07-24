@@ -56,7 +56,7 @@ export default {
     tabChange (e) {
       this.queryParams.status = e
       this.resetLoad()
-    }
+    },
   },
   onShow () {
     this.resetLoad()

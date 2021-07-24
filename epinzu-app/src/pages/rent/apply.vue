@@ -7,7 +7,7 @@
     <!-- 底部按钮 -->
     <view class="footer-container">
       <view class="wp100 pl12 pr12">
-        <button class="c-btn">确认提交</button>
+        <button class="c-btn" @tap="handleSubmit">确认提交</button>
       </view>
     </view>
   </view>
@@ -17,6 +17,7 @@
 import Taro from '@tarojs/taro'
 import './index.styl'
 import Form from '@/c/common/Form'
+import { postAction } from "@/utils/api"
 
 export default {
   name: 'Index',
@@ -25,17 +26,32 @@ export default {
   },
   data () {
     return {
-      tabs: [
-        { key: 'post', label: '快递' },
-        { key: 'return', label: '自还' }
-      ],
-      tabKey: 'post'
+      id: '',
+      isAjax: false
     }
   },
   methods: {
-    tabChange (e) {
-      this.tabKey = e
+    handleSubmit () {
+      if (this.isAjax) return
+      this.isAjax = true
+      const params = this.$refs.form.getParams()
+      params.id = this.id
+      postAction('/userapi/rent/back/ptjr/apply', params).then(res => {
+        if (res.code === 0) {
+          Taro.showToast({
+            title: res.msg
+          })
+          Taro.navigateBack({
+            delta: 1
+          })
+        } else {
+          this.isAjax = false
+        }
+      })
     }
   },
+  onLoad (options) {
+    this.id = options.id
+  }
 }
 </script>

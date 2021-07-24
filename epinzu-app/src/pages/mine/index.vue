@@ -78,7 +78,7 @@
             </view>
             <view>租到的物品</view>
           </view>
-          <view class="mb16" @tap="toPage()">
+          <view class="mb16" @tap="toPage('/pages/refund/index')">
             <view class="pr mb4">
               <image src="@/img/mine/icon6.png" mode="widthFix" class="w24" />
               <view class="dot-num" v-if="record.after_nums">{{record.after_nums}}</view>

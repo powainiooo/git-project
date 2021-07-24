@@ -51,11 +51,11 @@
       </view>
     </view>
     <!-- 协商记录 -->
-    <view class="bg-fff pl12">
-      <Cell title="协商记录" isLink />
+    <view class="bg-fff pl12" v-if="buttons.talk_logs === 1">
+      <Cell title="协商记录" isLink @tap="toRecord" />
     </view>
     <!-- 申请平台介入 -->
-    <view class="tc mt24 f12 c-999" @tap="toApply">申请平台介入</view>
+    <view class="tc mt24 f12 c-999" @tap="toApply" v-if="buttons.ptjr_apply === 1">申请平台介入</view>
     <!-- 底部按钮 -->
     <view class="footer-container">
       <view class="wp100 pl12 pr12 between">
@@ -81,7 +81,8 @@ export default {
     return {
       imgSrc: Taro.imgSrc,
       id: '',
-      counts: {}
+      counts: {},
+      buttons: {}
     }
   },
   methods: {
@@ -95,6 +96,7 @@ export default {
         Taro.hideLoading()
         if (res.code === 0) {
           this.counts = res.data.counts
+          this.buttons = res.data.buttons
         }
       })
     },
@@ -102,7 +104,7 @@ export default {
       Taro.showModal({
         title: '提示',
         content: '是否确认账单？',
-        success (res) {
+        success: res => {
           if (res.confirm) {
             postAction('/userapi/rent/back/bill', {
               id: this.id
@@ -129,10 +131,16 @@ export default {
       Taro.navigateTo({
         url: `/pages/rent/order/reject/index?id=${this.id}`
       })
+    },
+    toRecord () {
+      Taro.navigateTo({
+        url: `/pages/rent/order/record/index?id=${this.id}`
+      })
     }
   },
   onLoad (options) {
     this.id = options.id
+    this.returnId = options.returnId
     this.getData()
   }
 }

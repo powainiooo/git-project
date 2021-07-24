@@ -13,18 +13,16 @@
         </view>
       </view>
       <view class="borderB pb8 mt8">
-        <view class="acenter">
+        <view class="flex">
           <image src="@/img/dot.png" mode="widthFix" class="w24 mr8" />
-          <text class="c-666">订单编号：{{record.order_no}}</text>
-        </view>
-        <view class="ml32 flex">
-          <view>收货地址：</view>
-          <view style="flex: 1 0 0">{{record.rev_address}}</view>
+          <view style="flex: 1 0 0">
+            <view class="c-666" v-for="(item, index) in record.extra" :key="index">{{item.title}}：{{item.content}}</view>
+          </view>
         </view>
       </view>
     </view>
     <!-- 物流信息 -->
-    <view class="section2 list">
+    <view class="section2 list" v-if="record.traces.length > 0">
       <view class="item" v-for="(item, i) in record.traces" :key="i">
         <view class="dot">
           <image src="@/img/dot2.png" mode="widthFix" class="w14" v-if="i == 0" />
@@ -36,6 +34,7 @@
         </view>
       </view>
     </view>
+    <view v-else class="f12 c-666 mt190 tc">暂无数据</view>
   </view>
 </template>
 
@@ -57,8 +56,8 @@ export default {
       Taro.showLoading({
         title: '加载中'
       })
-      getAction('/userapi/order/express', {
-        order_id: this.id
+      getAction('/userapi/rent/back/express', {
+        id: this.id
       }).then(res => {
         Taro.hideLoading()
         if (res.code === 0) {

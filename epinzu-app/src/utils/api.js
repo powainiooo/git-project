@@ -149,6 +149,7 @@ export const intercept = fn => {
 // 上传图片
 export const upload = path => {
   return new Promise((resolve, reject) => {
+    token = store.state.token
     uploadFile({
       url: `${baseUrl}/userapi/upload/image?${tokenKey}=${token}`,
       filePath: path,

@@ -19,7 +19,7 @@
           <view class="title ellipsis mnb4">{{item.goods_name}}</view>
           <view class="f12 c-red" v-if="item.status_msg">{{item.status_msg}}</view>
         </view>
-        <view class="c-999 f12 mb4">{{item.rent_day_min}}天起租</view>
+        <view class="c-999 f12 mb4">{{item.goods_attr}}</view>
         <view class="f12 mb4">租金：<text class="f10">￥</text>{{item.goods_rent}}/天 X {{item.buy_nums}}件</view>
         <view class="f12 mb4">押金：<text class="f10">￥</text>{{item.goods_deposit}} X {{item.buy_nums}}件</view>
       </view>
@@ -59,9 +59,9 @@ export default {
         url: `/pages/rent/return?id=${this.record.goods[0].id}`
       })
     },
-    express () {
+    express (id) {
       Taro.navigateTo({
-        url: `/pages/order/post/index?id=${this.record.id}`
+        url: `/pages/order/post2/index?id=${id}`
       })
     },
     confirm (id) {

@@ -1,10 +1,13 @@
 <template>
   <view class="Refund">
     <!-- 标签栏 -->
-    <Tabs :list="tabs" />
+    <Tabs :list="tabs" @change="tabChange" />
     <!-- 列表 -->
     <view class="list">
-      <item />
+      <item v-for="item in dataSource"
+            :key="item.id"
+            :record="item"
+            @refresh="resetLoad" />
     </view>
   </view>
 </template>
@@ -14,9 +17,11 @@ import Taro from '@tarojs/taro'
 import './index.styl'
 import Tabs from '@/c/common/Tabs'
 import item from './modules/item'
+import { pageMixin } from "@/mixins/pages"
 
 export default {
   name: 'Index',
+  mixins: [pageMixin],
   components: {
     Tabs,
     item
@@ -24,17 +29,30 @@ export default {
   computed: {
     tabs () {
       return [
-        { key: 'all', label: '全部' },
-        { key: 'sale', label: `待处理（${this.nums}）` }
+        { key: 0, label: '全部' },
+        { key: 1, label: `待处理（${this.nums}）` }
       ]
     }
   },
   data () {
     return {
-      nums: 0
+      nums: 0,
+      queryParams: {
+        list_type: 0
+      },
+      url: {
+        list: '/userapi/after/index'
+      }
     }
   },
   methods: {
+    tabChange (e) {
+      this.queryParams.list_type = e
+      this.resetLoad()
+    },
+    afterGetList () {
+      this.nums = this.listDataAll.total
+    }
   },
 }
 </script>

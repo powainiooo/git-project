@@ -11,6 +11,7 @@
       <item v-for="item in dataSource"
             :key="item.id"
             :record="item"
+            @refresh="resetLoad"
             @cancel="cancel"
             @pay="pay" />
     </view>

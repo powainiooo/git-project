@@ -139,7 +139,7 @@ export default {
     },
     express () {
       Taro.navigateTo({
-        url: `/pages/order/post/index?id=${this.record.id}`
+        url: `/pages/order/post2/index?id=${this.id}`
       })
     },
     confirm () {

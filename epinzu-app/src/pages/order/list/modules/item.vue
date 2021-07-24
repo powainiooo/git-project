@@ -86,9 +86,7 @@ export default {
               order_id: this.record.id
             }).then(res2 => {
               Taro.hideLoading()
-              if (res2.code === 0) {
-                this.showItem = false
-              }
+              this.$emit('refresh')
             })
           }
         }

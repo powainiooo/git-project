@@ -48,6 +48,8 @@ export default {
   data () {
     return {
       id: '',
+      type: '',
+      from: '',
       record: {}
     }
   },
@@ -68,6 +70,7 @@ export default {
     copy () {
       Taro.setClipboardData({
         data: this.record.kd_no,
+        text: this.record.kd_no,
         success (res) {
           console.log('copy succees', res)
           Taro.showToast({

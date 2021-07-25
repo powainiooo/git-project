@@ -2,9 +2,12 @@
   <view class="Refund container">
     <!-- 商品信息 -->
     <view class="section2">
-      <view class="borderB pb8 mt8" v-for="item in goods" :key="item.id">
+      <view class="borderB pb8 mt8" v-for="(item, i) in goods" :key="item.id">
         <view class="flex mb8 goods">
-          <image src="@/img/radio-check.png" mode="widthFix" class="w16 mr8 mt34" />
+          <view class=" mr8 mt34" @tap="selectGoods[i].checked = !selectGoods[i].checked" v-if="type !== 2">
+            <image src="@/img/radio-check.png" mode="widthFix" class="w16" v-if="selectGoods[i].checked" />
+            <image src="@/img/radio.png" mode="widthFix" class="w16" v-else />
+          </view>
           <image :src="imgSrc + item.goods_cover" mode="aspectFill" class="img" />
           <view class="content">
             <view class="title">{{item.goods_name}}</view>
@@ -19,9 +22,9 @@
             </view>
           </view>
         </view>
-        <view class="end mt8">
+        <view class="end mt8" v-if="type !== 2">
           <text class="f12 c-666">申请数量</text>
-          <Stepper :value="1" :max="item.after_nums" />
+          <Stepper v-model="selectGoods[i].nums" :max="item.after_nums" />
         </view>
       </view>
     </view>
@@ -36,7 +39,7 @@
         <image src="@/img/ar1.png" mode="widthFix" class="w10" />
       </view>
       </picker>
-      <picker mode="selector" :range="statusList" rangeKey="name" @change="statusChange">
+      <picker mode="selector" :range="statusList" rangeKey="name" @change="statusChange" v-if="type !== 3">
       <view class="h52 between">
         <view class="acenter">
           <view class="c-666 mr16">收货状态</view>
@@ -63,6 +66,18 @@
       <view class="f18 mb8">￥<input v-model="refundMoney" class="none-inp" @input="refundChange" /></view>
     </view>
     <view class="h32 acenter pl12 c-999" style="background-color: #FAFBFA">最多可退￥{{maxRefund}}</view>
+    <!-- 收货地址 -->
+    <view class="section2 between" @tap="selectAddr" v-if="type === 3">
+      <view>
+        <view class="mt16 mb8 c-666">收货地址</view>
+        <view class="mb4">
+          <text class="mr8">{{address.rev_name}}</text>
+          <text class="mr8">{{address.rev_phone}}</text>
+        </view>
+        <view class="mb8">{{address.rev_province}}{{address.rev_city}}{{address.rev_address}}</view>
+      </view>
+      <image src="@/img/ar1.png" mode="widthFix" class="w10" />
+    </view>
     <!-- 申请说明 -->
     <view class="mt8 mb8">
       <Form ref="form" title="申请说明" placeholder="请你详细填写申请说明" />
@@ -93,7 +108,7 @@ import './index.styl'
 import Stepper from '@/c/common/Stepper'
 import Form from '@/c/common/Form'
 import selects from './modules/selects'
-import { getAction } from "@/utils/api"
+import { getAction, postAction } from "@/utils/api"
 
 export default {
   name: 'Index',
@@ -104,22 +119,24 @@ export default {
   },
   computed: {
     typeName () {
-      const item = this.typeList.find(i => i.id === this.type)
-      return item.name
+      const item = this.typeList.find(i => i.id == this.type)
+      console.log('typeName', item, this.type, typeof this.type)
+      return item ? item.name : ''
     },
     statusName () {
       const item = this.statusList.find(i => i.id === this.statusId)
-      return item.name
+      return item ? item.name : ''
     },
     reasonName () {
       const item = this.reasonList.find(i => i.id === this.reasonId)
-      return item.name
+      return item ? item.name : ''
     }
   },
   data () {
     return {
       imgSrc: Taro.imgSrc,
       id: 0,
+      from: 'new',
       type: 0,
       statusId: 0,
       reasonId: 0,
@@ -132,14 +149,27 @@ export default {
       refundMoney: 0,
       phone: 0,
       address: {},
+      addrId: '',
+      isAjax: false
     }
   },
   methods: {
     getData () {
-      getAction('/userapi/after/apply/page/data', {
-        order_id: this.id,
-        apply_type: this.type,
-      }).then(res => {
+      Taro.showLoading({
+        title: '加载中'
+      })
+      const url = this.from === 'new' ? '/userapi/after/apply/page/data' : '/userapi/after/apply/update/page/data'
+      const parmas = {
+        apply_type: this.type
+      }
+      if (this.from === 'new') {
+        parmas.order_id = this.id
+      }
+      if (this.from === 'edit') {
+        parmas.id = this.id
+      }
+      getAction(url, parmas).then(res => {
+        Taro.hideLoading()
         if (res.code === 0) {
           Taro.setNavigationBarTitle({
             title: res.data.title
@@ -148,7 +178,7 @@ export default {
           const selectGoods = []
           for (let i of this.goods) {
             selectGoods.push({
-              checked: false,
+              checked: true,
               id: i.id,
               nums: 1
             })
@@ -161,6 +191,15 @@ export default {
           this.refundMoney = res.data.max_refund_amount
           this.phone = res.data.phone
           this.address = res.data.address
+          if (this.from === 'edit') {
+            this.statusId = res.data.rev_status
+            this.reasonId = res.data.apply_reason_id
+            this.refundMoney = res.data.refund_amount
+            this.$refs.form.setValues({
+              content: res.data.content,
+              images: res.data.images
+            })
+          }
         }
       })
     },
@@ -192,7 +231,8 @@ export default {
       }
     },
     handleSubmit () {
-      if (this.statusId === 0) {
+      if (this.isAjax) return
+      if (this.statusId === 0 && this.type !== 3) {
         Taro.showToast({
           title: '请选择收货状态'
         })
@@ -210,13 +250,93 @@ export default {
         })
         return
       }
+      const goods = []
+
+      if (this.type === 2) { // 仅退款
+        for (let i of this.goods) {
+          goods.push({
+            id: i.id,
+            apply_nums: i.after_nums
+          })
+        }
+      } else {
+        for (let i of this.selectGoods) {
+          if (i.checked) {
+            goods.push({
+              id: i.id,
+              apply_nums: i.nums
+            })
+          }
+        }
+      }
+      if (goods.length === 0) {
+        Taro.showToast({
+          title: '请选择产品'
+        })
+        return
+      }
       const params = this.$refs.form.getParams()
+      if (params.content === '') {
+        Taro.showToast({
+          title: '请输入申请说明'
+        })
+        return
+      }
+      let url = ''
+      if (this.from === 'new') {
+        params.order_id = this.id
+        url = '/userapi/after/apply'
+      }
+      if (this.from === 'edit') {
+        params.id = this.id
+        url = '/userapi/after/apply/update'
+      }
+
+      params.goods = goods
+      params.apply_type = this.type
+      params.rev_status = this.statusId
+      params.apply_reason = this.reasonId
+      params.refund_amount = this.refundMoney
+      params.phone = this.phone
+      params.address_id = this.addrId
+      this.isAjax = true
+      postAction(url, params).then(res => {
+        if (res.code === 0) {
+          Taro.showToast({
+            title: res.msg
+          })
+          Taro.redirectTo({
+            url: '/pages/refund/index'
+          })
+        }
+      })
+    },
+    selectAddr () {
+      Taro.navigateTo({
+        url: '/pages/address/index?from=order'
+      })
+    }
+  },
+  onShow () {
+    const addrData = this.$store.state.addrData
+    console.log('addrData', addrData)
+    if (addrData.id) {
+      this.address = {
+        rev_name: addrData.rev_name,
+        rev_phone: addrData.rev_phone,
+        rev_province: addrData.province,
+        rev_city: addrData.city,
+        rev_address: addrData.address,
+      }
+      this.addrId = addrData.id
     }
   },
   onLoad (options) {
     this.id = options.id
-    this.type = options.type
+    this.type = Number(options.type)
+    this.from = options.from || 'new'
     this.getData()
+    this.$store.commit('SET_ADDRDATA', {})
   }
 }
 </script>

@@ -6,6 +6,7 @@
 
 <template>
 <Modal v-model="visible"
+       :loading="loading"
        :width="70"
        :closable="false"
        @on-ok="confirm">
@@ -21,9 +22,12 @@ export default {
   data () {
     return {
       visible: false,
+      loading: true,
       addr: '--',
       map: null,
-      dotData: {}
+      dotData: {},
+      latlng: {},
+      isClick: false
     }
   },
   mounted () {
@@ -43,14 +47,16 @@ export default {
           const geocoder = new qq.maps.Geocoder({
             complete (res) {
               console.log('Geocoder', res)
-              _this.addr = res.detail.address
-              _this.dotData = {
-                address: res.detail.address,
-                addressComponents: res.detail.addressComponents,
-                location: res.detail.location
+              if (_this.isClick) {
+                _this.addr = res.detail.address
+                _this.dotData = {
+                  address: res.detail.address,
+                  addressComponents: res.detail.addressComponents,
+                  location: _this.latlng
+                }
+                marker.position = res.detail.location
+                marker.setMap(_this.map)
               }
-              marker.position = res.detail.location
-              marker.setMap(_this.map)
               _this.map.setCenter(res.detail.location)
               _this.map.zoomTo(16)
             }
@@ -61,6 +67,8 @@ export default {
           })
           const listener = qq.maps.event.addListener(_this.map, 'click', function (e) {
             console.log(e)
+            _this.isClick = true
+            _this.latlng = e.latLng
             geocoder.getAddress(e.latLng)
           })
           const ap = new qq.maps.place.Autocomplete(document.getElementById('place'), {
@@ -68,13 +76,23 @@ export default {
           })
           qq.maps.event.addListener(ap, 'confirm', function (res) {
             console.log('ap0', ap)
+            _this.isClick = false
             geocoder.getLocation(`${ap.place.address}-${ap.place.name}`)
           })
         }
       })
     },
     confirm () {
-      this.$emit('confirm', this.dotData)
+      if (this.latlng.lat) {
+        this.$emit('confirm', this.dotData)
+        this.visible = false
+      } else {
+        this.$Message.warning('请在地图上点击具体位置后再确认保存。')
+        this.loading = false
+        this.$nextTick(() => {
+          this.loading = true
+        })
+      }
     }
   }
 }

@@ -57,6 +57,8 @@
       height 100%
       abTL(0, -24px)
       background-color #EEEEEF
+  .form-hint
+    font-size 12px; color #C8C9CA; margin-left 10px; margin-right 10px; line-height 15px; margin-top 4px;
 </style>
 
 <template>
@@ -83,9 +85,15 @@
             </FormItem>
             <FormItem>
               <div class="form-title2" v-if="isUpdate">{{type === '1' ? '联系地址' : '公司地址'}}</div>
-              <Input ref="address" type="textarea" v-model="formData.address" :rows="4" :placeholder="type === '1' ? '联系地址' : '公司地址'" />
+              <Input ref="address"
+                     type="textarea"
+                     v-model="formData.address"
+                     :rows="4" :placeholder="type === '1' ? '联系地址' : '公司地址'"
+                     @on-focus="showAddrHint = true"
+                     @on-blur="showAddrHint = false" />
               <a href="javascript:;" class="btn-geo" @click="openGeo">定位</a>
             </FormItem>
+            <p class="form-hint" v-show="showAddrHint">请点击“定位”获取地址后，再填写详细门牌号等</p>
             <FormItem>
               <div class="form-title2" v-if="isUpdate">负责人姓名</div>
               <Input v-model="formData.person" placeholder="负责人姓名" />
@@ -535,7 +543,8 @@ export default {
         latitude: '',
         city_name: ''
       },
-      isUpdate: false
+      isUpdate: false,
+      showAddrHint: false
     }
   },
   mounted () {

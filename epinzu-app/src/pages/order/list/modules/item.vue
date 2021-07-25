@@ -64,7 +64,11 @@ export default {
     cancel () {
       this.$emit('cancel', this.record.id)
     },
-    refund () {},
+    refund () {
+      Taro.navigateTo({
+        url: `/pages/refund/type?id=${this.record.id}`
+      })
+    },
     express () {
       Taro.navigateTo({
         url: `/pages/order/post/index?id=${this.record.id}`

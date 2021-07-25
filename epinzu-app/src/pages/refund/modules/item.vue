@@ -65,7 +65,9 @@ export default {
       if (key === 'del_after') {
         this.handleDel()
       } else if (key === 'deliver') {
-
+        Taro.navigateTo({
+          url: `/pages/refund/return?id=${this.record.id}`
+        })
       } else if (key === 'detail') {
         this.toDetail()
       }

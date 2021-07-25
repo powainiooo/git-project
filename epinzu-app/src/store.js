@@ -12,7 +12,7 @@ const state = {
   lnglat: {},
   quesList: [],
   orderGoods: [],
-  addrId: '',
+  addrData: '',
 }
 
 const mutations = {
@@ -35,8 +35,8 @@ const mutations = {
   SET_ORDERGOODS (state, data) {
     state.orderGoods = data
   },
-  SET_ADDRID (state, data) {
-    state.addrId = data
+  SET_ADDRDATA (state, data) {
+    state.addrData = data
   }
 }
 

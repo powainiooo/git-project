@@ -54,5 +54,10 @@ export default {
       this.nums = this.listDataAll.total
     }
   },
+  onShow () {
+    if (this.dataSource.length !== 0) {
+      this.resetLoad()
+    }
+  }
 }
 </script>

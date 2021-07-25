@@ -1,6 +1,7 @@
 <template>
   <view class="Rent container">
     <Form title="凭证说明"
+          ref="form"
           placeholder="请你详细填写申请理由"
           hint="提示：请上传真实凭证图片，最多3张"
           class="mt2" />
@@ -27,6 +28,7 @@ export default {
   data () {
     return {
       id: '',
+      from: '',
       isAjax: false
     }
   },
@@ -36,7 +38,8 @@ export default {
       this.isAjax = true
       const params = this.$refs.form.getParams()
       params.id = this.id
-      postAction('/userapi/rent/back/ptjr/apply', params).then(res => {
+      const url = this.from === 'rent' ? '/userapi/rent/back/ptjr/apply' : '/userapi/after/ptjr/apply'
+      postAction(url, params).then(res => {
         if (res.code === 0) {
           Taro.showToast({
             title: res.msg
@@ -52,6 +55,7 @@ export default {
   },
   onLoad (options) {
     this.id = options.id
+    this.from = options.from || 'rent'
   }
 }
 </script>

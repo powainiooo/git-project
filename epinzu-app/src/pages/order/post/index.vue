@@ -49,6 +49,8 @@ export default {
   data () {
     return {
       id: '',
+      type: '',
+      from: '',
       record: {}
     }
   },
@@ -57,9 +59,17 @@ export default {
       Taro.showLoading({
         title: '加载中'
       })
-      getAction('/userapi/order/express', {
-        order_id: this.id
-      }).then(res => {
+      const params = {}
+      let url = ''
+      if (this.from === 'refund') {
+        url = '/userapi/after/express'
+        params.id = this.id
+        params.type = this.type
+      } else if (this.from === 'order') {
+        url = '/userapi/order/express'
+        params.order_id = this.id
+      }
+      getAction(url, params).then(res => {
         Taro.hideLoading()
         if (res.code === 0) {
           this.record = res.data
@@ -69,6 +79,7 @@ export default {
     copy () {
       Taro.setClipboardData({
         data: this.record.kd_no,
+        text: this.record.kd_no,
         success (res) {
           console.log('copy succees', res)
           Taro.showToast({
@@ -80,6 +91,8 @@ export default {
   },
   onLoad (options) {
     this.id = options.id
+    this.type = options.type
+    this.from = options.from || 'order'
     this.getData()
   }
 }

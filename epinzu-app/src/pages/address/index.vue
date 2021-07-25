@@ -3,7 +3,7 @@
     <view class="Address-item between borderB"
           v-for="item in dataSource"
           :key="item.id"
-          @tap="selectAddr(item.id)"
+          @tap="selectAddr(item)"
           >
       <view class="mt8">
         <view class="mb8 f12 acenter">
@@ -54,9 +54,9 @@ export default {
         url: '/pages/address/edit'
       })
     },
-    selectAddr (id) {
+    selectAddr (item) {
       if (this.from === 'order') {
-        this.$store.commit('SET_ADDRID', id)
+        this.$store.commit('SET_ADDRDATA', item)
         Taro.navigateBack({
           delta: 1
         })

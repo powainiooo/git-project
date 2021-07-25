@@ -1,6 +1,10 @@
 <template>
   <view class="Rent container">
-    <Form ref="form" title="留言说明" placeholder="请你详细填写留言信息" class="mt8" />
+    <Form title="凭证说明"
+          ref="form"
+          placeholder="请你详细填写申请理由"
+          hint="提示：请上传真实凭证图片，最多3张"
+          class="mt2" />
     <!-- 底部按钮 -->
     <view class="footer-container">
       <view class="wp100 pl12 pr12">
@@ -34,7 +38,7 @@ export default {
       this.isAjax = true
       const params = this.$refs.form.getParams()
       params.id = this.id
-      let url = this.from === 'rent' ? '/userapi/rent/back/log/store' : '/userapi/after/leave/msg'
+      const url = '/userapi/after/ptjr/proof'
       postAction(url, params).then(res => {
         if (res.code === 0) {
           Taro.showToast({
@@ -51,7 +55,7 @@ export default {
   },
   onLoad (options) {
     this.id = options.id
-    this.from = options.from
+    this.from = options.from || 'rent'
   }
 }
 </script>

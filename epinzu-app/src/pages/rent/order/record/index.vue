@@ -50,20 +50,29 @@ export default {
       queryParams: {
         id: ''
       },
+      from: '',
       url: {
-        list: '/userapi/rent/back/logs'
+        list: '/userapi/rent/back/logs',
+        rent: '/userapi/rent/back/logs',
+        refund: '/userapi/after/logs',
       }
     }
   },
   methods: {
     toMsg () {
       Taro.navigateTo({
-        url: `/pages/rent/message?id=${this.queryParams.id}`
+        url: `/pages/rent/message?id=${this.queryParams.id}&from=${this.from}`
       })
     }
   },
   onLoad (options) {
     this.queryParams.id = options.id
+    this.from = options.from || 'rent'
+    if (this.from === 'rent') {
+      this.url.list = this.url.rent
+    } else if (this.from === 'refund') {
+      this.url.list = this.url.refund
+    }
   }
 }
 </script>

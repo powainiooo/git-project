@@ -271,13 +271,13 @@ export default {
     },
   },
   onShow () {
-    this.addrId = this.$store.state.addrId
+    this.addrId = this.$store.state.addrData.id || ''
     this.getData()
     this.getYue()
   },
   onLoad (options) {
     this.from = options.from || 1
-    this.$store.commit('SET_ADDRID', '')
+    this.$store.commit('SET_ADDRDATA', {})
   }
 }
 </script>

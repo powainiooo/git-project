@@ -138,7 +138,6 @@ export default {
     },
     handleSubmit () {
       if (this.isAjax) return
-      this.isAjax = true
       const params = {
         id: this.id,
         express_company_id: this.companyId,
@@ -161,11 +160,9 @@ export default {
       } else if (this.tabKey === 'return') {
         params.express_type = 0
       }
+      this.isAjax = true
       postAction('/userapi/rent/back', params).then(res => {
         if (res.code === 0) {
-          Taro.showToast({
-            title: res.msg
-          })
           Taro.navigateBack({
             delta: 1
           })

@@ -81,8 +81,8 @@ export const doLogin = (userInfo = {}) => {
 // 获取token
 export const getTokenData = () => {
   console.log('getTokenData')
-  store.commit('SET_TOKEN', '9bf43dbf0bc3fbc2a3bcfbff2aaa378904')
-  return
+  // store.commit('SET_TOKEN', '9bf43dbf0bc3fbc2a3bcfbff2aaa378904')
+  // return
   login().then(loginRes => {
     console.log('getTokenData2', loginRes)
     getAction('/userapi/alipay/mini/login', {

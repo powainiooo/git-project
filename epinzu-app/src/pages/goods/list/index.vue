@@ -6,7 +6,7 @@
         <search :disabled="true" ref="search" style="width: 308px;" @tap="goBack" />
         <button class="btn-cart">
           <image src="@/img/cart.png" mode="widthFix" />
-          <text v-if="cartNum > 0">{{cartNum}}</text>
+          <view v-if="cartNum > 0">{{cartNum}}</view>
         </button>
       </view>
       <!-- 分类列表 -->

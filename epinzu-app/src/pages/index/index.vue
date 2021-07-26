@@ -30,7 +30,7 @@
     </view>
 
     <!-- 导航栏 -->
-    <navs />
+    <navs v-if="page === 'index'" />
 
     <!-- 附近商品 -->
     <nearby :list="nearbys" :cid="currentCate.cid" />

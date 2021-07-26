@@ -189,10 +189,16 @@ export default {
     //   this.showPage = true
     // })
   },
-  onLoad () {
+  onLoad (options) {
+    console.log('options index', options)
     this.page = 1
     this.listData = []
     this.getData()
+    if (options.from === 'order') {
+      setTimeout(() => {
+        this.$refs.header.openMenu()
+      }, 1000)
+    }
   }
 }
 </script>

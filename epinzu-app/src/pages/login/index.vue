@@ -10,7 +10,7 @@
 <template>
   <view class="mt40 ml30 mr30 logins">
     <view class="logos">
-      <image src="@/img/logo@3x.png" />
+      <image src="@/img/logo.png" />
       <view>品租</view>
     </view>
     <view class="f16 mb10">申请获得以下权限</view>

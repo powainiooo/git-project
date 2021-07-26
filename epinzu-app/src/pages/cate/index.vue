@@ -1,8 +1,8 @@
 <template>
   <view class="cate-container">
     <view class="cate-search">
-      <view class="ml40 mr105 pt4 pb4" :style="{'margin-top': tH + 'px'}">
-        <search placeholder="搜好物，上品租" />
+      <view class="ml40 mr105 pt4 pb4" :style="{'margin-top': tH + 'px'}" @tap="toSearch">
+        <search placeholder="搜好物，上品租" :disabled="true" />
       </view>
     </view>
     <view class="cate-list" :style="{'top': tH + 'px'}">
@@ -70,6 +70,11 @@ export default {
     toList (cate) {
       Taro.navigateTo({
         url: `/pages/goods/list/index?cid=${cate.cid}&cname=${cate.cname}&from=cate`
+      })
+    },
+    toSearch () {
+      Taro.navigateTo({
+        url: '/pages/search/index'
       })
     }
   },

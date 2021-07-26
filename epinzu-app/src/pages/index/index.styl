@@ -45,7 +45,7 @@
      &-list
        acenter(); margin-left 12px;
      &-item
-       size(90px, 140px); margin-right 8px; flex 1 0 auto;
+       size(90px, 140px); max-width 90px; margin-right 8px; flex 1 0 auto;
        .img
          size(90px, 90px); margin-right 8px;
        .info
@@ -53,7 +53,7 @@
            width 100%; overflow hidden; text-overflow ellipsis; word-break break-all; white-space nowrap;
 
   .second-cates
-    center(); flex-wrap wrap; margin-top 8px; margin-bottom 16px;
+    display flex; flex-wrap wrap; margin-top 8px; margin-bottom 16px; margin-left 12px;
     .item
       width 70px; text-align center; margin-bottom 16px;
       .img

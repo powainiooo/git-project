@@ -178,6 +178,7 @@ export default {
           delay,
           onComplete: () => {
             this.nums = parseInt(obj.x)
+            this.key = ''
           },
           onUpdate: (e) => {
             this.nums = obj.x.toFixed(0)

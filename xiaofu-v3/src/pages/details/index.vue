@@ -13,12 +13,14 @@
                      @toggle="detailChange"
                      :record="detailData" />
   </div>
+  <c-share ref="share" @done="getPoster" />
 </div>
 </template>
 
 <script>
 import cHeader from '@/components/header/header'
 import cTicketDetail from '@/components/ticketDetail/ticketDetail'
+import cShare from '@/components/ticketDetail/share'
 import { postAction } from '@/utils/api'
 const idMap = {}
 export default {
@@ -27,13 +29,15 @@ export default {
       id: '',
       hasData: false,
       detailData: {},
-      source: ''
+      source: '',
+      postSrc: ''
     }
   },
 
   components: {
     cHeader,
-    cTicketDetail
+    cTicketDetail,
+    cShare
   },
 
   methods: {
@@ -57,6 +61,8 @@ export default {
             this.hasData = true
             this.footPrint()
             this.$refs.header.showStarBtn = res.data.star_flag === 1
+
+            this.$refs.share.initPoster(res.data)
           })
         }
       })
@@ -74,6 +80,9 @@ export default {
       }).then(res => {
         console.log(res)
       })
+    },
+    getPoster (e) {
+      this.postSrc = e
     }
   },
   mounted () {
@@ -83,13 +92,22 @@ export default {
   onShow () {
     Object.assign(this.$data, this.$options.data())
     console.log('this.idMap', idMap)
-    this.id = idMap[`id${this.$mp.page.__wxWebviewId__}`]
-    this.getData()
+    if (this.id !== idMap[`id${this.$mp.page.__wxWebviewId__}`]) {
+      this.id = idMap[`id${this.$mp.page.__wxWebviewId__}`]
+      this.getData()
+    }
   },
   onLoad (options) {
     // let app = getApp()
     idMap[`id${this.$mp.page.__wxWebviewId__}`] = options.id || 3317
     this.source = options.source || 'ticket'
+  },
+  onShareAppMessage () {
+    return {
+      title: this.detailData.name,
+      imageUrl: this.postSrc,
+      path: `pages/details/main?id=${this.id}`
+    }
   }
 }
 </script>

@@ -83,11 +83,14 @@
                      :rows="4"
                      v-model="formData.address"
                      placeholder="活动地址"
+                     @on-focus="showAddrHint = true"
+                     @on-blur="showAddrHint = false"
                      :readonly="isEditor && errorData.address === ''"
                      :class="{'err-inp': isEditor && errorData.address !== ''}" />
               <a href="javascript:;" class="btn-geo" @click="openGeo">定位</a>
               <div class="warnTxt" v-if="isEditor && errorData.address !== ''"><span>{{errorData.address}}</span></div>
             </FormItem>
+            <p class="form-hint" v-show="showAddrHint">请点击“定位”获取地址后，再填写详细门牌号等</p>
           </Form>
         </div>
         <div class="form-col col1">
@@ -250,7 +253,8 @@ export default {
         longitude: '',
         latitude: ''
       },
-      isPhoneFocus: false
+      isPhoneFocus: false,
+      showAddrHint: false
     }
   },
   methods: {

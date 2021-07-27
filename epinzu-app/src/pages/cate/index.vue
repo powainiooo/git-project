@@ -16,7 +16,9 @@
       <view class="ad"><image src="@/img/ad.png" mode="widthFix" /></view>
       <view class="list">
         <view class="item" v-for="item in secondList" :key="item.cid" @tap="toList(item)">
-          <image :src="imgSrc + item.cover" mode="aspectFill" class="img" />
+          <view class="img">
+            <image :src="imgSrc + item.cover" mode="aspectFill" />
+          </view>
           <view>{{item.cname}}</view>
         </view>
       </view>

@@ -4,11 +4,16 @@
 
 <template>
 <view class="Detail-banner" id="goods">
-  <swiper @Change="onChange">
-    <swiper-item v-if="video.url">
+  <swiper @Change="onChange" v-if="video.url">
+    <swiper-item>
       <image :src="imgSrc + video.cover" mode="aspectFill" class="img"  />
       <button class="btn-play"><image src="@/img/play.png" mode="aspectFill"  /></button>
     </swiper-item>
+    <swiper-item v-for="(item, index) in list" :key="index">
+      <image :src="imgSrc + item" mode="aspectFill" class="img"  />
+    </swiper-item>
+  </swiper>
+  <swiper @Change="onChange" v-else>
     <swiper-item v-for="(item, index) in list" :key="index">
       <image :src="imgSrc + item" mode="aspectFill" class="img"  />
     </swiper-item>

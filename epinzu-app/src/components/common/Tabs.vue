@@ -2,7 +2,7 @@
 .c-tabs
   width 100%; height 40px; background-color #FFFFFF; display flex;
   &-item
-    flex 1; display flex; justify-content center; align-items center; height 100%; position relative;
+    flex 1; display flex; justify-content center; align-items center; height 100%; position relative; font-weight bold;
     .filter
       width 10px; height 16px; margin-left 2px;
   &-active

@@ -7,7 +7,7 @@
       </view>
       <view class="btns acenter">
         <button class="btn-cart" @tap="toCart">
-          <image src="@/img/cart.png" mode="widthFix" />
+          <image src="@/img/cart3.png" mode="widthFix" />
           <view v-if="cartNum > 0">{{cartNum}}</view>
         </button>
         <button class="btn-cart ml8" open-type="share">

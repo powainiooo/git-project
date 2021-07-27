@@ -3,7 +3,7 @@
     <!-- 地址 有 -->
     <view class="section" v-if="address" @tap="toAddr">
       <cell isLink>
-        <view class="acenter" slot="title">
+        <view class="acenter bold" slot="title">
           <view class="mr16">{{address.rev_name}}</view>
           <view>{{address.rev_phone}}</view>
         </view>
@@ -34,13 +34,20 @@
           </view>
         </view>
       </view>
-      <cell title="优惠券" :value="couponNums === 0 ? '无可用' : counponName" isLink style="padding: 0; margin-right: -8px;" class="mb16" @tap="openCoupon" />
+<!--      <cell title="优惠券" :value="couponNums === 0 ? '无可用' : counponName" isLink style="padding: 0; margin-right: -8px;" class="mb16" />-->
+      <view class="f12 between mb16" @tap="openCoupon">
+        <view>优惠券</view>
+        <view class="acenter">
+          <text>{{couponNums === 0 ? '无可用' : counponName}}</text>
+          <image src="@/img/ar1.png" mode="widthFix" class="w10 ml8" />
+        </view>
+      </view>
     </view>
     <!-- 备注 -->
     <view class="section">
-      <view class="mt16 mb8">填写备注</view>
+      <view class="mt16 mb8 bold">填写备注</view>
       <view class="">
-        <input placeholder="选填" class="f12 c-999" v-model="remark" style="padding-left: 0;" />
+        <input placeholder="选填" class="f12 c-999 wp100" v-model="remark" style="padding-left: 0;" />
       </view>
     </view>
     <!-- 价格信息 -->
@@ -63,7 +70,7 @@
         <view><text class="f10">￥</text>{{count.post_fee}}</view>
       </view>
       <view class="between f12 mb8">
-        <view>优惠券</view>
+        <view class="bold">优惠券</view>
       </view>
       <view class="between f12 mb16">
         <view>优惠券抵扣</view>
@@ -72,7 +79,7 @@
     </view>
     <!-- 支付方式 -->
     <view class="section">
-      <view class="mt16 mb8">支付方式{{couponId}}</view>
+      <view class="mt16 mb8 bold">支付方式</view>
       <view class="pay-item borderB" @tap="payway = 20">
         <view class="acenter">
           <image src="@/img/alipay.png" mode="widthFix" class="icon mr4" />

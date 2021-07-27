@@ -6,7 +6,7 @@
       <view class="person" :style="{'top': tH + 'px'}" @tap="login">
         <image src="@/img/avatar.png" mode="aspectFill" />
         <view>
-          <view class="c-fff" v-if="!isLogin">登录/注册</view>
+          <view class="c-fff bold" v-if="!isLogin">登录/注册</view>
           <view class="c-fff" v-else>{{record.nickname}}</view>
           <view class="c-tag c-tag-yel" v-if="record.srrz_status === 1">已认证</view>
           <view class="c-tag c-tag-brown" v-else-if="record.srrz_status === 0">未认证</view>
@@ -17,26 +17,26 @@
       <!-- 数量信息 -->
       <view class="section Mine-nums-nav">
         <view @tap="toPage('/pages/mine/yue/index')">
-          <view class="f18 mb4">{{record.money || 0}}</view>
+          <view class="f18 mb4 bold">{{record.money || 0}}</view>
           <view>余额</view>
         </view>
         <view @tap="toPage('/pages/mine/attention/index')">
-          <view class="f18 mb4">{{record.attention_nums || 0}}</view>
+          <view class="f18 mb4 bold">{{record.attention_nums || 0}}</view>
           <view>我的关注</view>
         </view>
         <view @tap="toPage('/pages/mine/collection/index')">
-          <view class="f18 mb4">{{record.collection_nums || 0}}</view>
+          <view class="f18 mb4 bold">{{record.collection_nums || 0}}</view>
           <view>我的收藏</view>
         </view>
         <view @tap="toPage('/pages/mine/coupon/index')">
-          <view class="f18 mb4">{{record.coupon_nums || 0}}</view>
+          <view class="f18 mb4 bold">{{record.coupon_nums || 0}}</view>
           <view>优惠券</view>
         </view>
       </view>
       <!-- 我的订单 -->
       <view class="section">
         <view class="mt16 mb16 between">
-          <view>我的订单</view>
+          <view class="bold">我的订单</view>
           <view class="acenter" @tap="toPage('/pages/order/list/index')">
             <text class="f12 c-999">全部订单</text>
             <image src="@/img/ar1.png" mode="widthFix" class="w10 ml4" />
@@ -66,21 +66,21 @@
           </view>
           <view class="mb16" @tap="toPage('/pages/order/list/index?key=4')">
             <view class="pr mb4">
-              <image src="@/img/mine/icon4.png" mode="widthFix" class="w24" />
+              <image src="@/img/mine/icon5.png" mode="widthFix" class="w24" />
               <view class="dot-num" v-if="record.signed_nums">{{record.signed_nums}}</view>
             </view>
             <view>已签收</view>
           </view>
           <view class="mb16" @tap="toPage('/pages/rent/index')">
             <view class="pr mb4">
-              <image src="@/img/mine/icon5.png" mode="widthFix" class="w24" />
+              <image src="@/img/mine/icon6.png" mode="widthFix" class="w24" />
               <view class="dot-num" v-if="record.rent_wait_confirm_nums">{{record.rent_wait_confirm_nums}}</view>
             </view>
             <view>租到的物品</view>
           </view>
           <view class="mb16" @tap="toPage('/pages/refund/index')">
             <view class="pr mb4">
-              <image src="@/img/mine/icon6.png" mode="widthFix" class="w24" />
+              <image src="@/img/mine/icon4.png" mode="widthFix" class="w24" />
               <view class="dot-num" v-if="record.after_nums">{{record.after_nums}}</view>
             </view>
             <view>退货售后</view>
@@ -91,7 +91,7 @@
       <view class="section" style="padding-right: 0">
         <Cell title="收货地址" isLink @tap="toPage('/pages/address/index')" />
         <Cell title="常见问题" isLink @tap="toPage('/pages/question/index?source=common')" />
-        <view @tap="phoneCall">
+        <view @tap="phoneCall" class="borderB">
           <Cell title="联系客服">
             <text class="c-red mr8" slot="value">400-9606683</text>
           </Cell>

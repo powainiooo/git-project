@@ -2,7 +2,7 @@
 <Popup :show.sync="visible" round :closeable="true">
   <view class="Detail-buys">
     <view class="flex pb16 borderB">
-      <image src="@/img/default.png" mode="aspectFill" class="img" />
+      <image :src="imgSrc + record.cover" mode="aspectFill" class="img" />
       <view class="ml8" v-if="record.type === 1">
         <view class="c-red f12 mb4">租金：￥<text class="f18">{{selected.price}}</text>/天</view>
         <view class="acenter">
@@ -11,7 +11,7 @@
         </view>
         <view class="f12 mt22" v-if="selected.attr_name">已选：{{selected.attr_name}}</view>
       </view>
-      <view class="ml8" v-if="record.type === 2">
+      <view class="ml8" v-else>
         <view class="c-red f12">售价：￥<text class="f18">{{selected.price}}</text></view>
         <view class="f12 mt42" v-if="selected.attr_name">已选：{{selected.attr_name}}</view>
       </view>

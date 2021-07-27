@@ -1,7 +1,7 @@
 <style>
 .c-search { height: 36px; border-radius: 18px; position: relative; overflow: hidden; }
 .c-search .icon { width: 16px; position: absolute; top: 10px; left: 8px; }
-.c-search input { width: 100%; height: 100%; font-size: 14px; padding-left: 34px; }
+.c-search input { width: 100%; height: 100%; font-size: 14px; padding-left: 28px; }
 </style>
 
 <template>
@@ -11,6 +11,7 @@
          :disabled="disabled"
          :style="{backgroundColor: backgroundColor}"
          v-model="value"
+         confirm-type="search"
          @confirm="confirm" />
 </view>
 </template>

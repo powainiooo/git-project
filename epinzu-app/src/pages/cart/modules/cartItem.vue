@@ -11,7 +11,7 @@
     .avatar
       size(40px, 40px); border-radius 50%; margin-right 8px;
     .c-btn
-      size(45px, 20px); font-size 10px; line-height 18px;
+      size(45px, 20px); font-size 10px; line-height 20px;
   .child-item
     margin-bottom 24px;
     &:last-child
@@ -29,14 +29,14 @@
       <image :src="imgSrc + record.logo" mode="aspectFill" class="avatar" />
       <view class="c-tag c-tag-yel mr4" v-if="record.type === 1">个人</view>
       <view class="c-tag c-tag-red mr4" v-if="record.type === 2">企业</view>
-      <view>{{record.shop_name}}</view>
+      <view class="bold">{{record.shop_name}}</view>
     </view>
     <button class="c-btn c-btn-border2" v-if="ids.length > 0" @tap="delCart">删除</button>
   </view>
   <view class="child-item"
         v-for="item in goods"
         :key="item.id">
-    <cart-child :record="item" :ids="ids" @toggle="itemToggle" />
+    <cart-child :record="item" :ids="ids" @toggle="itemToggle" @nums="change" />
   </view>
 </view>
 </template>
@@ -83,6 +83,7 @@ export default {
 	},
 	methods: {
     itemToggle (id) {
+      console.log('itemToggle', this.goods)
       if (this.ids.includes(id)) {
         const index = this.ids.findIndex(i => i === id)
         this.ids.splice(index, 1)
@@ -115,18 +116,20 @@ export default {
       let buy = 0
       let rent = 0
       let deposit = 0
+      console.log('this.goods', this.goods)
       for (let i of this.goods) {
         if (this.ids.includes(i.id)) {
+          console.log('this.ids', this.ids, i.id)
           arr.push({
             goods_id: i.goods_id,
             attr_id: i.attr_id,
             buy_nums: i.buy_nums
           })
           if (i.type === 1) {
-            rent += i.attrs.price
-            deposit += i.attrs.deposit
+            rent += i.attrs.price * i.buy_nums
+            deposit += i.attrs.deposit * i.buy_nums
           } else if (i.type === 3) {
-            buy += i.attrs.price
+            buy += i.attrs.price * i.buy_nums
           }
         }
       }

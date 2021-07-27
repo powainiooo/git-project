@@ -24,7 +24,7 @@
 </style>
 
 <template>
-<view class="c-popup" v-if="show">
+<view class="c-popup" v-if="show" @touchmove.stop="tm">
   <view class="overlay"
         :class="{'overlay-show': showItem}"
         @transitionend="onTransitionEnd"
@@ -92,10 +92,7 @@ export default {
     }
 	},
 	methods: {
-    tm (e) {
-      e.stopPropagation()
-      e.preventDefault()
-    },
+    tm (e) {},
     close () {
       this.showItem = false
       this.$emit('close')

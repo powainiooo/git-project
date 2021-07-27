@@ -3,12 +3,12 @@
 
 <template>
 <Popup :show.sync="visible" placement="top">
-  <view class="between mt10 ml12 mr16 mb8">
+  <view class="between mt10 ml12 mr16 mb8" @tap="close">
     <view class="c-999">全部分类</view>
     <image src="@/img/ar3.png" mode="widthFix" class="w10" />
   </view>
   <view class="flex" style="flex-wrap: wrap">
-    <view class="tc mb16"
+    <view class="tc mb16 ellipsis"
           style="width: 25%;"
           :class="{'c-red': item.cid === value}"
           v-for="item in list"
@@ -44,6 +44,9 @@ export default {
     toggle (cid) {
       this.$emit('input', cid)
       this.$emit('change')
+      this.close()
+    },
+    close () {
       this.visible = false
     }
   }

@@ -31,19 +31,23 @@ export default {
       ctx.setFillStyle('#f5f5f5')
       ctx.fillRect(0, 0, 1000, 800)
       ctx.draw()
-
+      console.log('initPoster1')
       mpvue.getImageInfo({
-        src: 'https://hair.designbyho.com/static/images/logo.png',
-        // src: record.cover_image,
+        // src: 'https://hair.designbyho.com/static/images/logo.png',
+        src: `https:${record.cover_image}`,
         success: (res) => {
           console.log('getImageInfo', res)
           ctx.drawImage(res.path, 0, 0, 1000, 800)
           ctx.draw(true)
           this.drawPoster(ctx)
+        },
+        fail: err => {
+          console.log('initPoster2', err)
         }
       })
     },
     drawPoster (ctx) {
+      console.log('drawPoster1')
       // 开始日期
       ctx.drawImage(dateBg, 32, 32, 96, 96)
       ctx.draw(true)
@@ -66,6 +70,7 @@ export default {
       ctx.fillText(sDate[2], 78, 115)
       ctx.draw(true)
 
+      console.log('drawPoster2')
       // 结束日期
       if (this.record.start_date !== this.record.end_date) {
         // 分割线
@@ -94,8 +99,10 @@ export default {
         ctx.fillText(eDate[2], 204, 115)
         ctx.draw(true)
       }
+      console.log('drawPoster3')
       // 折角
       ctx.drawImage(flip, 1000 - 190, 800 - 190, 190, 190)
+      console.log('drawPoster4')
       ctx.draw(true, () => {
         console.log('draw over')
         mpvue.canvasToTempFilePath({

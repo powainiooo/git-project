@@ -62,6 +62,8 @@
   line-height: 32px;
   color: #ffffff;
   font-family: HelveB;
+  text-overflow: ellipsis; overflow: hidden; white-space: nowrap; word-break: break-all;
+  padding-right: 40px;
 }
 .c-ticket-item-onums {
   position: absolute;

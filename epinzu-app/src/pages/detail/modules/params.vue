@@ -5,7 +5,7 @@
 <template>
 <view class="Detail-section Detail-questions pb8" id="params">
   <view class="between mt16 mb16" @tap="toMore">
-    <view>产品参数</view>
+    <view class="bold">产品参数</view>
     <view class="acenter f12 c-999" v-if="list.length > max">
       更多<image src="@/img/ar1.png" mode="widthFix" class="w10 ml4" />
     </view>

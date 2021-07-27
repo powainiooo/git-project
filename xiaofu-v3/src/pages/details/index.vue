@@ -90,10 +90,10 @@ export default {
     this.$refs.header.originStatus = 'ticketDetail'
   },
   onShow () {
-    Object.assign(this.$data, this.$options.data())
-    console.log('this.idMap', idMap)
     if (this.id !== idMap[`id${this.$mp.page.__wxWebviewId__}`]) {
       this.id = idMap[`id${this.$mp.page.__wxWebviewId__}`]
+      this.detailData = {}
+      this.hasData = false
       this.getData()
     }
   },

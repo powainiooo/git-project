@@ -21,7 +21,7 @@
     <cates2 ref="cates" v-model="queryParams.cid" :list="cateList" @change="resetLoad"  />
     <!-- 产品列表 -->
     <view class="goods-list mt96 mb24">
-      <view class="goods-item" v-for="item in dataSource" :key="item.id" @tap="toDetail(id)">
+      <view class="goods-item" v-for="item in dataSource" :key="item.id" @tap="toDetail(item.id)">
         <image :src="imgSrc + item.cover" mode="aspectFill" class="img" />
         <view class="info">
           <view class="h3 mb8">

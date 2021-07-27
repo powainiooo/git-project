@@ -4,7 +4,7 @@
 
 <template>
 <view class="Detail-section" id="details">
-  <view class="mt16 mb16">物品详情</view>
+  <view class="mt16 mb16 bold">物品详情</view>
   <view class="Detail-details">
     <image v-for="(item, index) in list"
            :key="index"

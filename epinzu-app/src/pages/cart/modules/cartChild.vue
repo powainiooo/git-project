@@ -13,9 +13,9 @@
     .title
       ellipsis(); margin-bottom 8px;
   &-selects
-    size(146px, 20px); border-radius 10px; background-color #F5F5F5;
+    size(100%, 20px); border-radius 10px; background-color #F5F5F5;
     &>view
-      width 116px; ellipsis(); font-size 10px; color #999999; margin-right 4px; margin-left 8px;
+      width 180px; ellipsis(); font-size 10px; color #999999; margin-right 4px; margin-left 8px;
 </style>
 
 <template>
@@ -26,7 +26,7 @@
   </view>
   <view class="c-cart-child">
     <view class="c-cart-child-img">
-      <image :src="imgSrc + record.cover" mode="aspectFill" class="img" />
+      <image :src="imgSrc + record.cover" mode="aspectFill" class="img" @tap="toDetail" />
       <image src="@/img/icon-rent.png" mode="widthFix" class="tag" v-if="record.type === 1" />
       <image src="@/img/icon-buy.png" mode="widthFix" class="tag" v-if="record.type === 3" />
     </view>
@@ -116,6 +116,8 @@ export default {
       }).then(res => {
         if (res.code !== 0) {
           this.record.buy_nums -= 1
+        } else {
+          this.numsChange()
         }
       })
     },
@@ -125,6 +127,8 @@ export default {
       }).then(res => {
         if (res.code !== 0) {
           this.record.buy_nums += 1
+        } else {
+          this.numsChange()
         }
       })
     },
@@ -155,7 +159,16 @@ export default {
       })
     },
     toggle () {
+      console.log('toggle')
       this.$emit('toggle', this.record.id)
+    },
+    numsChange () {
+      this.$emit('nums', this.record.id)
+    },
+    toDetail () {
+      Taro.navigateTo({
+        url: `/pages/detail/index?id=${this.record.goods_id}`
+      })
     }
   }
 }

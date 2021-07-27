@@ -19,7 +19,7 @@
 
     <template v-if="history.length > 0">
     <view class="between">
-      <view>最近搜索</view>
+      <view class="bold">最近搜索</view>
       <button class="btn-del center" @tap="clearHistory"><image src="@/img/del.png" mode="widthFix" class="w16" /></button>
     </view>
 
@@ -29,7 +29,7 @@
     </template>
 
     <view class="between">
-      <view>热门搜索</view>
+      <view class="bold">热门搜索</view>
     </view>
 
     <view class="search-list mb32">

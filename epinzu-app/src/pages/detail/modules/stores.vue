@@ -17,9 +17,9 @@
       </view>
     </view>
     <view class="f12 mt8">
-      <view class="mb2">订单数: <text class="c-999">{{record.order_nums}}+</text></view>
-      <view class="mb2">关注数: <text class="c-999">{{record.attention_nums}}+</text></view>
-      <view class="mb2">访客数: <text class="c-999">{{record.visit_nums}}+</text></view>
+      <view class="mb2">订单数: <text class="c-999">{{record.order_nums > 9999 ? record.order_nums + '+' : record.order_nums}}</text></view>
+      <view class="mb2">关注数: <text class="c-999">{{record.attention_nums > 9999 ? record.attention_nums + '+' : record.attention_nums}}</text></view>
+      <view class="mb2">访客数: <text class="c-999">{{record.visit_nums > 9999 ? record.visit_nums + '+' : record.visit_nums}}</text></view>
     </view>
   </view>
   <view class="center mb8">

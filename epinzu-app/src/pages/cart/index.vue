@@ -5,7 +5,7 @@
       <image src="@/img/cart2.png" mode="widthFix" class="img" />
       <view class="txt">购物车空空如也~</view>
       <view class="center">
-        <button class="c-btn">去逛逛</button>
+        <button class="c-btn" @tap="toIndex">去逛逛</button>
       </view>
     </view>
     <!-- 购物车 -->
@@ -85,6 +85,11 @@ export default {
       this.$store.commit('SET_ORDERGOODS', this.selectedData.goods)
       Taro.navigateTo({
         url: '/pages/order/confirm/index?from=2'
+      })
+    },
+    toIndex () {
+      Taro.redirectTo({
+        url: '/pages/index/index'
       })
     }
   },

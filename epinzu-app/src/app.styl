@@ -26,19 +26,23 @@
 
 /* 按钮 */
 .c-btn
-  size(100%, 40px); background-color #FE322B; border-radius 20px; font-size 14px; line-height 40px; color #FFFFFF;
+  size(100%, 40px); background-color #FE322B; border-radius 20px; font-size 14px; line-height 40px; color #FFFFFF; position relative; overflow visible;
   &-disabled
     opacity .5; background-color #FE322B; color #FFFFFF;
 .c-btn-primary
   background-color #07C160
 .c-btn-border
-  background-color #FFFFFF; border 1PX solid #FE322B; color #FE322B;
+  background-color #FFFFFF; color #FE322B;
+  &:after
+    content ''; size(200%, 200%); border 1PX solid #FE322B; border-radius 30px; transform scale(.48); transform-origin 0 0; abTL(0, 0);
 .c-btn-border2
-  background-color #FFFFFF; border 1PX solid #999999; color #333333;
+  background-color #FFFFFF; color #333333;
+  &:after
+    content ''; size(200%, 200%); border 1PX solid #999999; border-radius 30px; transform scale(.48); transform-origin 0 0; abTL(0, 0);
 .c-btn-20
-  height 20px; line-height 18px; font-size 12px;
+  height 20px; line-height 20px; font-size 12px;
 .c-btn-24
-  height 24px; line-height 22px; font-size 12px;
+  height 24px; line-height 24px; font-size 12px;
 .c-btn-32
   height 32px; line-height 32px; font-size 14px;
 
@@ -52,6 +56,8 @@
   border-radius 20px; overflow hidden; acenter()
   .c-btn
     border-radius 0;
+.btn-del
+  height 100%; background-color #FE322B; center(); color #FFFFFF;
 
 /* 标签 */
 .c-tag
@@ -135,7 +141,7 @@
 .goods-item-hor
   acenter(); padding 8px 12px; background-color #FFFFFF;
   .img
-    size(100px, 100px); margin-right 8px;
+    size(100px, 100px); margin-right 8px; border-radius 4px;
   .infos
     width 243px; flex 1 0 0;
     .title

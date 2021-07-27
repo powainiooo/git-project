@@ -2,7 +2,7 @@
   <view class="goods">
     <!-- 产品列表 -->
     <view class="goods-list mt24 mb24">
-      <view class="goods-item" v-for="item in dataSource" :key="item.id" @tap="toDetail(id)">
+      <view class="goods-item" v-for="item in dataSource" :key="item.id" @tap="toDetail(item.id)">
         <image :src="imgSrc + item.cover" mode="aspectFill" class="img" />
         <view class="info">
           <view class="h3 mb8">
@@ -50,6 +50,11 @@ export default {
   onLoad (options) {
     console.log('goods common options', options)
     this.url.list = this.url[options.key]
+    if (options.key === 'newest') {
+      Taro.setNavigationBarTitle({
+        title: '新品动态'
+      })
+    }
   }
 }
 </script>

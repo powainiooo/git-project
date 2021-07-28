@@ -13,9 +13,11 @@
     .title
       ellipsis(); margin-bottom 8px;
   &-selects
-    size(100%, 20px); border-radius 10px; background-color #F5F5F5;
+    size(auto, 20px); border-radius 10px; background-color #F5F5F5; position relative; display inline-block;
     &>view
-      width 180px; ellipsis(); font-size 10px; color #999999; margin-right 4px; margin-left 8px;
+      width 100%; line-height 20px; ellipsis(); font-size 10px; color #999999; margin-right 26px; margin-left 8px;
+    &>image
+      abTR(5px, 8px);
 </style>
 
 <template>
@@ -40,7 +42,7 @@
         <view class="f12 c-red" v-if="attrs.store_nums === 0">库存不足</view>
       </view>
       <view class="between">
-        <view>
+        <view class="bold">
           <view class="c-red f10" v-if="record.type === 1"><text class="f12">租金：</text>￥<text class="f12">{{attrs.price}}</text>/天</view>
           <view class="c-red f10" v-if="record.type === 3"><text class="f12">售价：</text>￥<text class="f12">{{attrs.price}}</text></view>
           <view class="f10" v-if="record.type === 1"><text class="f12">押金：</text>￥<text class="f12">{{attrs.deposit}}</text></view>

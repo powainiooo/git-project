@@ -2,8 +2,8 @@
 <Popup :show.sync="visible" round :closeable="true">
   <view class="Detail-buys">
     <view class="flex pb16 borderB">
-      <image :src="imgSrc + record.cover" mode="aspectFill" class="img" />
-      <view class="ml8" v-if="record.type === 1">
+      <image :src="imgCover" mode="aspectFill" class="img" />
+      <view class="ml8" v-if="record.type === 1" style="flex: 1 0 0;">
         <view class="c-red f12 mb4">租金：￥<text class="f18">{{selected.price}}</text>/天</view>
         <view class="acenter">
           <view class="f12">押金：￥{{selected.deposit}}</view>
@@ -79,6 +79,9 @@ export default {
           deposit: this.record.deposit_min,
         }
       }
+    },
+    imgCover () {
+	    return this.attrId === 0 ? `${this.imgSrc}${this.record.cover}` : `${this.imgSrc}${this.cover}`
     }
   },
 	data() {
@@ -87,6 +90,7 @@ export default {
       visible: false,
       num: 1,
       attrId: 0,
+      cover: '',
       isAjax: false
     }
 	},
@@ -100,6 +104,7 @@ export default {
 	    if (item.store_nums !== 0) {
         this.attrId = item.id
         this.num = 1
+        this.cover = item.cover
       }
     },
     getParams () {

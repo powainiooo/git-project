@@ -4,7 +4,7 @@
 
 <template>
 <Popup :show.sync="visible" round>
-  <view class="tc center borderB h50">取消原因</view>
+  <view class="tc center borderB h50 bold">取消原因</view>
   <view class="tc center borderB h50"
         v-for="(item, i) in list"
         :key="i"

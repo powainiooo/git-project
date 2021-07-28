@@ -163,3 +163,20 @@ export const upload = path => {
     })
   })
 }
+// 上传头像
+export const uploadAvatar = path => {
+  return new Promise((resolve, reject) => {
+    token = store.state.token
+    uploadFile({
+      url: `${baseUrl}/userapi/upload/image/avatar?${tokenKey}=${token}`,
+      filePath: path,
+      name: 'file',
+      fileName: 'file',
+      fileType: 'image'
+    }).then(res => {
+      resolve(res.data)
+    }).catch(err => {
+      reject(err)
+    })
+  })
+}

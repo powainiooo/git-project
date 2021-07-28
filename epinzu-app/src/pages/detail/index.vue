@@ -66,7 +66,9 @@
           <view>收藏</view>
         </button>
       </view>
-      <button class="c-btn" :disabled="record.status === 1" @tap="openBuys">立即下单</button>
+      <button class="c-btn"
+              :class="{'c-btn-disabled': record.status === 1}"
+              @tap="openBuys">立即下单</button>
 
       <view class="offline" v-if="record.status === 1">该商品已下架</view>
     </view>
@@ -154,6 +156,11 @@ export default {
     }
   },
   methods: {
+    tm (e) {
+      console.log('tm')
+      e.stopPropagation()
+      e.preventDefault()
+    },
     // 导航点击
     tabChange (e) {
       this.tabKey = e
@@ -184,6 +191,9 @@ export default {
     // 打开购买弹窗
     openBuys () {
       intercept(() => {
+        if (this.record.status === 1) {
+          return
+        }
         this.$refs.buys.show()
       })
     },

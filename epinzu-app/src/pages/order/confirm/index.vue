@@ -21,16 +21,16 @@
         <view class="acenter mb8">
           <image src="@/img/icon-rent.png" mode="widthFix" class="w16 mr8" v-if="item.type === 1" />
           <image src="@/img/icon-buy.png" mode="widthFix" class="w16 mr8" v-if="item.type === 3" />
-          <view class="f12">{{item.title}}</view>
+          <view>{{item.title}}</view>
         </view>
         <view class="goods-item-hor">
           <image :src="imgSrc + item.attrs.cover" mode="aspectFill" class="img" />
           <view class="infos">
             <view class="c-999 f12 mb4">规格：{{item.attrs.attr_name}}</view>
             <view class="c-999 f12 mb4">{{item.attrs.rent_days}}天起租</view>
-            <view class="f12 mb4" v-if="item.type === 1">租金：<text class="f10">￥</text>{{item.attrs.price}}/天 X {{item.buy_nums}}件</view>
-            <view class="f12 mb4" v-if="item.type === 1">押金：<text class="f10">￥</text>{{item.attrs.deposit}} X {{item.buy_nums}}件</view>
-            <view class="f12 mb4" v-if="item.type === 3">售价：<text class="f10">￥</text>{{item.attrs.price}} X {{item.buy_nums}}件</view>
+            <view class="f12 mb4 bold" v-if="item.type === 1">租金：<text class="f10">￥</text>{{item.attrs.price}}/天 X {{item.buy_nums}}件</view>
+            <view class="f12 mb4 bold" v-if="item.type === 1">押金：<text class="f10">￥</text>{{item.attrs.deposit}} X {{item.buy_nums}}件</view>
+            <view class="f12 mb4 bold" v-if="item.type === 3">售价：<text class="f10">￥</text>{{item.attrs.price}} X {{item.buy_nums}}件</view>
           </view>
         </view>
       </view>
@@ -46,20 +46,20 @@
     <!-- 备注 -->
     <view class="section">
       <view class="mt16 mb8 bold">填写备注</view>
-      <view class="">
-        <input placeholder="选填" class="f12 c-999 wp100" v-model="remark" style="padding-left: 0;" />
+      <view class="mb8">
+        <input placeholder="选填" placeholder-style="color: #999999;" class="f12 c-333 wp100" v-model="remark" style="padding-left: 0;" />
       </view>
     </view>
     <!-- 价格信息 -->
     <view class="section">
-      <view class="mt16 mb16">本订单共{{goods.length}}件物品</view>
+      <view class="mt16 mb16 bold">本订单共{{goods.length}}件物品</view>
       <view class="between f12 mb8">
         <view>售价</view>
         <view><text class="f10">￥</text>{{count.sale_amount}}</view>
       </view>
       <view class="between f12 mb8">
         <view>租金</view>
-        <view><text class="f10">￥</text>{{count.rent_amount}}</view>
+        <view><text class="f10">￥</text>{{count.rent_amount}}<text class="f10">/天</text></view>
       </view>
       <view class="between f12 mb8">
         <view>物品押金</view>
@@ -99,12 +99,12 @@
     <view class="center">
       <image src="@/img/radio.png" mode="widthFix" class="w18" v-if="!protocolCheck" @tap="protocolCheck = true" />
       <image src="@/img/radio-check.png" mode="widthFix" class="w18" v-else @tap="protocolCheck = false" />
-      <view class="ml8">已同意《品租租赁服务协议》</view>
+      <view class="ml8" @tap="toWeb">已同意《品租租赁服务协议》</view>
     </view>
     <!-- 底部操作栏 -->
     <view class="footer-container">
       <view class="between wp100">
-        <view class="c-red ml12">支付金额：<text class="f12">￥</text>{{count.pay_amount}}</view>
+        <view class="c-red ml12 bold">支付金额：<text class="f12">￥</text>{{count.pay_amount}}</view>
         <button class="c-btn mr12" @tap="handlePay">确定支付</button>
       </view>
     </view>
@@ -121,6 +121,7 @@ import './index.styl'
 import coupons from './modules/coupons'
 import Cell from '@/c/common/Cell'
 import { postAction, getAction } from '@/utils/api'
+import { baseUrl } from "@/config"
 
 export default {
   name: 'Index',
@@ -276,6 +277,11 @@ export default {
         })
       }
     },
+    toWeb () {
+      Taro.navigateTo({
+        url: `/pages/webview/index?src=${baseUrl}/apph5/single/zlfwxy`
+      })
+    }
   },
   onShow () {
     this.addrId = this.$store.state.addrData.id || ''

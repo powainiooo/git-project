@@ -3,7 +3,7 @@
 
 <template>
 <Popup :show.sync="visible" placement="top">
-  <view class="between mt10 ml12 mr16 mb8" @tap="close">
+  <view class="between pt10 ml12 mr16 pb8" @tap="close">
     <view class="c-999">全部分类</view>
     <image src="@/img/ar3.png" mode="widthFix" class="w10" />
   </view>

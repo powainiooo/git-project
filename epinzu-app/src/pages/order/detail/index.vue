@@ -118,7 +118,7 @@ export default {
           this.goods = res.data.goods
           this.shop = res.data.shop
           this.address = res.data.address
-          this.bList1 = res.data.bottom1_list1
+          this.bList1 = res.data.bottom_list1
           this.bList2 = res.data.bottom_list2
           this.buttons = res.data.buttons
         }

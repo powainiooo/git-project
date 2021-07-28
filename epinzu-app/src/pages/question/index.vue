@@ -48,7 +48,7 @@ export default {
   },
   onLoad (options) {
     this.source = options.source || 'goods'
-    this.disableMixinCreated = this.source === 'common'
+    this.disableMixinCreated = this.source === 'goods'
   }
 }
 </script>

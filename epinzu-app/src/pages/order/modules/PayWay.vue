@@ -4,7 +4,7 @@
 
 <template>
 <Popup :show.sync="visible" round :closeable="true">
-  <view class="tc center borderB h50">优惠券领取</view>
+  <view class="tc center borderB h50 bold">支付方式</view>
   <view class="pay-item borderB h50" @tap="payway = 20">
     <view class="acenter ml12">
       <image src="@/img/alipay.png" mode="widthFix" class="icon mr4" />
@@ -20,7 +20,7 @@
     <image src="@/img/check2.png" mode="widthFix" class="icon mr12" v-if="payway === 0" />
   </view>
   <view class="wp100 pl12 pr12 mt8 mb8">
-    <button class="c-btn" @tap="handlePay">立即支付</button>
+    <button class="c-btn bold" @tap="handlePay">立即支付</button>
   </view>
 </Popup>
 </template>

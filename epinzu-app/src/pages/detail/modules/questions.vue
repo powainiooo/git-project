@@ -6,7 +6,7 @@
 <view class="Detail-section">
   <view class="between mt16 mb16" @tap="toList">
     <view class="bold">常见问题</view>
-    <view class="acenter f12 c-999" v-if="list.length > max">
+    <view class="acenter f12 c-999" v-if="list.length >= max">
       更多<image src="@/img/ar1.png" mode="widthFix" class="w10 ml4" />
     </view>
   </view>
@@ -39,7 +39,7 @@ export default {
 	},
 	methods: {
     toList () {
-      if (this.list.length > this.max) {
+      if (this.list.length >= this.max) {
         Taro.navigateTo({
           url: '/pages/question/index'
         })

@@ -20,7 +20,7 @@ export default {
   onLoad (options) {
     this.src = options.src
     Taro.setNavigationBarTitle({
-      title: options.title
+      title: options.title || ''
     })
   }
 }

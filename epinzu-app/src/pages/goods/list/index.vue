@@ -100,6 +100,9 @@ export default {
       this.resetLoad()
     },
     openCate () {
+      if (this.cateList.length === 1) {
+        return
+      }
       this.$refs.cates.show()
     },
     goBack () {

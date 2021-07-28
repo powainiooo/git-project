@@ -2,9 +2,14 @@
   <view class="Setting">
     <view class="bg-fff h52 between">
       <input v-model="name" confirm-type="done" @confirm="handleSubmit" class="ml12 f14" />
-      <image src="@/img/close.png" mode="widthFix" class="w20 mr12" />
+      <image src="@/img/close.png" mode="widthFix" class="w20 mr12" @tap="name = ''" />
     </view>
     <view class="f12 c-999 mt8 ml12">支持1到16个字，可由中英文、数字、“-”，“_”组成</view>
+    <view class="ml12 mr12 mt40">
+      <button class="c-btn"
+              :class="{'c-btn-disabled': name === ''}"
+              @tap="handleSubmit">保存</button>
+    </view>
   </view>
 </template>
 
@@ -23,6 +28,9 @@ export default {
   methods: {
     handleSubmit () {
       if (this.isAjax) return
+      if (this.name === '') {
+        return
+      }
       this.isAjax = true
       postAction('/userapi/user/edit/nickname', {
         nickname: this.name

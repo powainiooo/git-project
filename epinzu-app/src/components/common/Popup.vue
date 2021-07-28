@@ -1,12 +1,12 @@
 <style lang="stylus" type="text/stylus">
 .overlay
-  width 100%; height 100vh; position fixed; top 0; left 0; background-color rgba(0, 0, 0, .4); transition opacity .3s ease-out; opacity 0;
+  width 100%; height 100vh; overflow hidden; position fixed; top 0; left 0; background-color rgba(0, 0, 0, .4); transition opacity .3s ease-out; opacity 0;
   &-show
     opacity 1
 .c-popup
-  width 100%; height 100vh; position fixed; top 0; left 0; z-index 500;
+  width 100%; height 100vh; position fixed; top 0; left 0; z-index 500; overflow hidden;
   &-box
-    width 100%; min-height 100px; max-height 83vh; background-color #FFFFFF; position absolute; left 0; transition transform .3s ease-out
+    width 100%; min-height 100px; max-height 83vh; overflow hidden; background-color #FFFFFF; position absolute; left 0; transition transform .3s ease-out
   &-bottom
     bottom 0; transform translateY(100%);
     &.round
@@ -24,18 +24,18 @@
 </style>
 
 <template>
-<view class="c-popup" v-if="show" @touchmove.capture="tm">
+<view class="c-popup" v-if="show" catchMove>
   <view class="overlay"
         :class="{'overlay-show': showItem}"
         @transitionend="onTransitionEnd"
-        @tap="close"></view>
+        @tap="close" catchMove></view>
   <view class="c-popup-box" :class="boxClass">
     <view class="c-popup-close"
           @tap="close"
           v-if="closeable">
       <image src="@/img/close.png" mode="widthFix" class="w20" />
     </view>
-    <scroll-view :scrollY="true" class="c-popup-scrolls" @touchmove.capture="tm">
+    <scroll-view :scrollY="true" class="c-popup-scrolls" catchMove>
       <slot />
     </scroll-view>
   </view>

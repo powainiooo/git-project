@@ -2,7 +2,7 @@
   <view class="Store">
     <!-- 店铺信息 -->
     <view class="line1 between">
-      <view class="flex mt8 ml12">
+      <view class="flex mt8 mb8 ml12">
         <image :src="imgSrc + shopData.logo" mode="aspectFit" class="store-logo" />
         <view class="mt4">
           <view class="acenter">
@@ -12,7 +12,7 @@
           </view>
           <view class="acenter">
             <rate :value="shopData.pf_avg" />
-            <view class="f10 c-999 ml4">订单数: {{shopData.order_nums}}+</view>
+            <view class="f10 c-999 ml4">订单数: {{shopData.order_nums}}</view>
             <view class="f10 c-999 ml4">关注数: {{shopData.attention_nums}}</view>
           </view>
         </view>
@@ -20,6 +20,7 @@
       <view class="mr12 mb8 mt8">
         <button class="c-btn c-btn-border c-btn-24" @tap="attention" v-if="attentionStatus === 0">关注店铺</button>
         <button class="c-btn c-btn-border c-btn-24" @tap="attention" v-else-if="attentionStatus === 1">取消关注</button>
+        <button class="c-btn c-btn-border c-btn-24 mt4" @tap="contact">联系商家</button>
       </view>
     </view>
     <!-- 切换分类 -->
@@ -119,6 +120,11 @@ export default {
         if (res.code === 0) {
           this.attentionStatus = res.data
         }
+      })
+    },
+    contact () {
+      Taro.showToast({
+        title: '联系商家'
       })
     }
   },

@@ -29,7 +29,7 @@ export const pageMixin = {
         current: 1,
         loadOver: false
       },
-      loading: false,
+      loading: true,
       dataSource: [],
       listDataAll: {}
     }

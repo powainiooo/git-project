@@ -33,10 +33,18 @@ export default {
   data () {
     return {
       url: {
-        list: '/userapi/user/attentions/list',
+        list: '',
+        attention: '/userapi/user/attentions/list',
         like: '/userapi/goods/collection/recommend'
       },
       isAttentionNone: false
+    }
+  },
+  onShow () {
+    if (!this.loading) {
+      this.url.list = this.url.attention
+      this.isAttentionNone = false
+      this.resetLoad()
     }
   },
   methods: {
@@ -48,5 +56,8 @@ export default {
       }
     }
   },
+  onLoad () {
+    this.url.list = this.url.attention
+  }
 }
 </script>

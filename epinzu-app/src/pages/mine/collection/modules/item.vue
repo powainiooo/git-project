@@ -25,22 +25,32 @@
       </view>
     </view>
   </view>
-  <view class="btn-del">删除</view>
+  <view class="btn-del" @tap.stop="del">删除</view>
 </view>
 </template>
 
 <script type='es6'>
 import Taro from '@tarojs/taro'
+import { postAction } from '@/utils/api'
+
 export default {
   name: 'app',
   props: {
-    record: Object
+    record: Object,
+    delId: Number
   },
   data() {
     return {
       imgSrc: Taro.imgSrc,
       showDel: false,
       sx: 0
+    }
+  },
+  watch: {
+    delId (val) {
+      if (val !== this.record.goods_id) {
+        this.showDel = false
+      }
     }
   },
   methods: {
@@ -52,6 +62,7 @@ export default {
       const ex = e.changedTouches[0].clientX
       if (this.sx > ex + 50) {
         this.showDel = true
+        this.$emit('del', this.record.goods_id)
       }
       if (ex > this.sx + 50) {
         this.showDel = false
@@ -65,6 +76,19 @@ export default {
     toDetail () {
       Taro.navigateTo({
         url: `/pages/detail/index?id=${this.record.goods_id}`
+      })
+    },
+    del () {
+      postAction('/userapi/user/collection', {
+        goods_id: this.record.goods_id,
+        action: 0
+      }).then(res => {
+        if (res.code === 0) {
+          Taro.showToast({
+            title: res.msg
+          })
+          this.$emit('refresh')
+        }
       })
     }
   }

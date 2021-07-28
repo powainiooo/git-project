@@ -6,14 +6,14 @@
 <view class="section">
   <view class="acenter mt8 mb8">
     <image :src="imgSrc + record.shop_logo" mode="widthFix" class="avatar mr8" />
-    <view class="f12">{{record.shop_name}}</view>
+    <view class="bold">{{record.shop_name}}</view>
   </view>
   <view class="c-coupon-item" :class="{'c-coupon-item-disabled': status !== 1}">
     <view class="price"><view>￥<text>{{record.money}}</text></view></view>
     <view class="content between">
       <view class="ml16">
-        <view class="mb4">{{record.title}}</view>
-        <view class="f12">有效期至{{record.expires_in}}</view>
+        <view class="mb4 bold">{{record.title}}</view>
+        <view class="f12">领券后{{record.remain_time}}内有效</view>
       </view>
       <button class="c-btn c-btn-border mr8" v-if="status === 1" @tap="toGoods">去使用</button>
     </view>

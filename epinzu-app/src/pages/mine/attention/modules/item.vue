@@ -11,7 +11,7 @@
         <view class="acenter">
           <text class="c-tag c-tag-yel mr4" v-if="record.type === 1">个人</text>
           <text class="c-tag c-tag-red mr4" v-if="record.type === 2">企业</text>
-          {{record.shop_name}}
+          <text class="bold">{{record.shop_name}}</text>
         </view>
         <view class="acenter" @tap="toStore">
           <text class="f10 c-999">进店</text>
@@ -20,7 +20,7 @@
       </view>
       <view class="acenter">
         <rate :value="record.pf_avg" />
-        <view class="f10 c-999 ml4">订单数: {{record.order_nums}}+</view>
+        <view class="f10 c-999 ml4">订单数: {{record.order_nums}}</view>
         <view class="f10 c-999 ml4">关注数: {{record.attention_nums}}</view>
       </view>
     </view>
@@ -28,7 +28,7 @@
   <scroll-view :scroll-x="true" class="scrolls">
     <view class="list">
       <view class="item" v-for="i in record.goods" :key="i.id">
-        <image :src="imgSrc + i.cover" mode="widthFix" />
+        <image :src="imgSrc + i.cover" mode="aspectFill" />
         <view>￥<text class="f10">{{i.price_min}}</text>/天</view>
       </view>
     </view>

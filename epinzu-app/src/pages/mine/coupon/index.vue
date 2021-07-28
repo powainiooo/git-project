@@ -1,7 +1,7 @@
 <template>
   <view class="Coupon">
     <!-- 标签栏 -->
-    <Tabs :list="tabs" @change="tabChange" />
+    <Tabs :list="tabs" :border="true" @change="tabChange" />
     <!-- 列表 -->
     <item v-for="item in dataSource"
           :key="item.id"

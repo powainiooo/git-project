@@ -22,10 +22,12 @@
     background-color #FFFFFF; margin-bottom 8px; padding 8px 0;
     .scrolls
       size(100% , 85px); margin-top 8px;
+      &::-webkit-scrollbar
+        size(0, 0); background-color transparent; color transparent;
       .list
         acenter(); margin-left 12px;
         .item
-          size(85px, 85px); border-radius 4px; background-color #F5F5F5; overflow hidden; margin-right 8px; flex 1 0 auto; position relative;
+          size(85px, 85px); max-width 85px; border-radius 4px; background-color #F5F5F5; overflow hidden; margin-right 8px; flex 1 0 auto; position relative;
           image
             size(100%, 100%);
           view
@@ -44,7 +46,7 @@
           .company
             width auto;
       .btn-del
-        size(80px, 116px); center(); background-color #FE322B; color #FFFFFF;
+        size(80px, 116px); center(); background-color #FE322B; color #FFFFFF; position relative; z-index 10;
     .item-box-show
       transform translateX(-80px);
 

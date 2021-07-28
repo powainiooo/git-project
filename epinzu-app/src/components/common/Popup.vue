@@ -24,7 +24,7 @@
 </style>
 
 <template>
-<view class="c-popup" v-if="show" @touchmove.stop="tm">
+<view class="c-popup" v-if="show" @touchmove.capture="tm">
   <view class="overlay"
         :class="{'overlay-show': showItem}"
         @transitionend="onTransitionEnd"
@@ -35,7 +35,7 @@
           v-if="closeable">
       <image src="@/img/close.png" mode="widthFix" class="w20" />
     </view>
-    <scroll-view :scrollY="true" class="c-popup-scrolls" @touchmove.stop="tm">
+    <scroll-view :scrollY="true" class="c-popup-scrolls" @touchmove.capture="tm">
       <slot />
     </scroll-view>
   </view>

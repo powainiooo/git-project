@@ -19,8 +19,8 @@
         <view class="btn" @tap="toWithdraw">提现</view>
       </view>
 
-      <view class="mt16 mb16">余额明细</view>
-      <view class="h52 between" v-for="item in dataSource" :key="item.id">
+      <view class="mt16 borderB bold pb8">余额明细</view>
+      <view class="h52 between mt8" v-for="item in dataSource" :key="item.id">
         <view>
           <view class="f12">{{item.title}}</view>
           <view class="f10 c-999">{{item.created_at}}</view>

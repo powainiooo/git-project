@@ -7,20 +7,22 @@
       </view>
       <view class="tixian-input borderB">
         <text>￥</text>
-        <input type="number" v-model="money" />
+        <input type="digit" v-model="money" />
       </view>
-      <view class="between">
+      <view class="between mb8">
         <view class="f12">可提现金额<text class="c-red">￥{{yue}}</text></view>
         <view class="c-red f12" @tap="setAll">全部提取</view>
       </view>
     </view>
     <view class="section2 acenter h52">
-      <view class="c-666 mr16">真实姓名</view>
-      <view class="mr16">{{record.name_title}}</view>
+      <view class="c-666 mr16">{{record.name_title}}</view>
+      <view class="mr16">{{record.name}}</view>
     </view>
     <view class="ml12 mr12">
       <view class="f12 c-999 mb40">提示：提现费率：{{record.rate}}%，单次最小提现额：{{record.once_min}}元，单次最大提现额：{{record.once_max}}元</view>
-      <button class="c-btn" :disabled="money === ''" @tap="withdraw">确认提现</button>
+      <button class="c-btn"
+              :class="{'c-btn-disabled': money === ''}"
+              @tap="withdraw">确认提现</button>
     </view>
   </view>
 </template>
@@ -49,16 +51,21 @@ export default {
       })
     },
     setAll () {
-      if (this.yue > this.record.once_max) {
-        this.money = this.record.once_max
-      } else {
-        this.money = this.yue
-      }
+      this.money = this.yue
     },
     withdraw () {
+      if (this.money === '') {
+        return
+      }
       if (Number(this.money) < this.record.once_min) {
         Taro.showToast({
           title: '提现金额小于最低限额'
+        })
+        return
+      }
+      if (Number(this.money) > this.record.once_max) {
+        Taro.showToast({
+          title: '提现金额大于最大限额'
         })
         return
       }
@@ -67,7 +74,7 @@ export default {
       postAction('/userapi/withdraw', {
         type: 2,
         money: this.money,
-        account: '',
+        account: this.$store.state.userId,
         name: this.record.name
       }).then(res => {
         if (res.code === 0) {

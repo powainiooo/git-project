@@ -9,7 +9,12 @@
     </view>
     <!-- 列表 -->
     <view class="list mb32" v-if="!isAttentionNone">
-      <item v-for="item in dataSource" :key="item.id" :record="item"  />
+      <item v-for="item in dataSource"
+            :key="item.id"
+            :record="item"
+            :delId="delId"
+            @del="setDelId"
+            @refresh="resetLoad"  />
     </view>
     <guess-like :list="dataSource" v-if="isAttentionNone" />
   </view>
@@ -32,10 +37,19 @@ export default {
   data () {
     return {
       url: {
-        list: '/userapi/user/collections/list',
+        list: '',
+        collection: '/userapi/user/collections/list',
         like: '/userapi/goods/collection/recommend'
       },
-      isAttentionNone: false
+      isAttentionNone: false,
+      delId: 0
+    }
+  },
+  onShow () {
+    if (!this.loading) {
+      this.url.list = this.url.collection
+      this.isAttentionNone = false
+      this.resetLoad()
     }
   },
   methods: {
@@ -45,7 +59,13 @@ export default {
         this.isAttentionNone = true
         this.getListData()
       }
+    },
+    setDelId (id) {
+      this.delId = id
     }
   },
+  onLoad () {
+    this.url.list = this.url.collection
+  }
 }
 </script>

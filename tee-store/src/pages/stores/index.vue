@@ -118,6 +118,7 @@ export default {
             mpvue.navigateTo({
               url: '/pages/result/main?result=store'
             })
+            store.commit('SET_FROM', 'result')
           }
         }
       })

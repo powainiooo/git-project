@@ -19,7 +19,12 @@
   <c-header menus :storeLogo="storeInfo.shop_logo" />
   <div class="container" style="padding-bottom: 0;">
     <!-- 地址信息 -->
-    <addr-info ref="top" :showCart="!closeModalVisible && !closeHintVisible" showShare :record="addrData" @refresh="getCart" @tap="toStores" />
+    <addr-info ref="top"
+               :showCart="!closeModalVisible && !closeHintVisible"
+               showShare
+               :record="addrData"
+               @refresh="getCart"
+               @tap="toStores" />
 
     <!-- 产品信息 -->
     <div class="pr">

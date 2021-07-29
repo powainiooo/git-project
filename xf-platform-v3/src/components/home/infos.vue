@@ -65,6 +65,8 @@
       size(150px, 150px)
       border-radius 50%
       margin-bottom 20px
+.canvas-frame
+  fxTL(-10000px, -10000px)
 </style>
 
 <template>
@@ -141,9 +143,9 @@
   <div class="c-infos-qrcode" v-if="record.sub_state !== 0">
     <div class="item">
       <div class="imgs wxcode">
-        <img :src="record.miniapp_code_image" width="128" />
+        <img :src="qrSrc" width="128" id="qrcode" />
       </div>
-      <Button size="small" @click="downloadImg(record.miniapp_code_image)">下载链接码</Button>
+      <Button size="small" @click="downloadQr(record.miniapp_code_image)">下载链接码</Button>
     </div>
     <div class="item">
       <div class="imgs wxcode">
@@ -151,6 +153,11 @@
       </div>
       <Button size="small" @click="downloadImg(record.check_code_image)">下载验票码</Button>
     </div>
+  </div>
+
+  <div class="canvas-frame">
+    <canvas width="500" height="723" id="qrcanvas"></canvas>
+    <img src="@/assets/img/qrframe.png" width="200" id="qrframe" />
   </div>
 </div>
 </template>
@@ -214,6 +221,9 @@ export default {
         return et.split(' ')[1]
       }
       return '--'
+    },
+    qrSrc () {
+      return `${window.baseUrl}/api/common/down_image?path=${this.record.miniapp_code_image}`
     }
   },
   data () {
@@ -271,6 +281,30 @@ export default {
     },
     downloadImg (url) {
       window.open(`${window.baseUrl}/api/common/down_image?path=${url}`)
+    },
+    downloadQr (url) {
+      const canvas = document.getElementById('qrcanvas')
+      const ctx = canvas.getContext('2d')
+      const bg = document.getElementById('qrframe')
+      ctx.drawImage(bg, 0, 0)
+
+      ctx.beginPath()
+      ctx.arc(248, 470, 230, 0, Math.PI * 2)
+      ctx.fillStyle = '#FFFFFF'
+      ctx.fill()
+      ctx.clip()
+      const code = document.getElementById('qrcode')
+      ctx.drawImage(code, 54, 276, 386, 386)
+
+      setTimeout(() => {
+        const content = canvas.toDataURL('image/png')
+        const fileName = 'qrcode.png'
+        const a = document.createElement('a')
+        a.href = content
+        a.download = fileName
+        a.click()
+        document.removeChild(a)
+      }, 1000)
     },
     ticketBlur (index) {
       this.showHintIndex = false

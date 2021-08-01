@@ -62,9 +62,14 @@
   opacity: .5;
 .t-unit
   position absolute; top 10px; right 10px;
+.t-pre
+  position absolute; top 10px; left 10px; z-index 2;
 .unit-input
   .ivu-input
     padding-right 30px
+.unit-input2
+  .ivu-input
+    padding-left 56px
 </style>
 
 <template>
@@ -108,22 +113,27 @@
                 <span class="t-unit" v-if="item.price !== ''">元</span>
               </div>
               <div class="ticket-name-diy" v-else-if="item.type === 'diy'">
-                <Input v-model="item.name" placeholder="票种名称" style=" margin-right: 10px;" />
+                <Input v-model="item.name" placeholder="票种名称" :maxlength="12" show-word-limit style=" margin-right: 10px;" />
                 <a href="javascript:;" @click="delTicket(index)"><img src="@/assets/img/ico-del.png" /></a>
               </div>
-              <div class="between">
+              <div class="pr" v-if="item.type === 'diy'">
+                <Input v-model="item.price" placeholder="价格（元）" />
+                <span class="t-unit" v-if="item.price !== ''">元</span>
+              </div>
+              <div class="between" style="margin-top: 10px;" >
                 <div class="pr">
                   <Input v-model="item.num" placeholder="张数" style="width: 120px" class="unit-input" />
                   <span class="t-unit" v-if="item.num !== ''">张</span>
                 </div>
                 <div class="pr">
-                  <Input v-model="item.limit" placeholder="限购张数" style="width: 120px" class="unit-input" />
+                  <span class="t-pre" v-if="item.limit !== ''">限购</span>
+                  <Input v-model="item.limit"
+                         placeholder="限购张数"
+                         style="width: 120px"
+                         class="unit-input"
+                         :class="{'unit-input2': item.limit !== ''}" />
                   <span class="t-unit" v-if="item.limit !== ''">张</span>
                 </div>
-              </div>
-              <div class="pr" style="margin-top: 10px;" v-if="item.type === 'diy'">
-                <Input v-model="item.price" placeholder="价格（元）" />
-                <span class="t-unit" v-if="item.price !== ''">元</span>
               </div>
             </div>
             <a href="javascript:;" class="btn-add" @click="addTicket"><img src="@/assets/img/ico-add.png" /></a>
@@ -169,12 +179,12 @@
           <div class="form-cell pr "
                v-for="(item, index) in noticeList"
                :key="index">
-            <img :src="getIndexSrc(index)" style="display: block; margin-bottom: 10px; margin-left: 10px; "/>
+            <img :src="getIndexSrc(index)" style="display: block; margin-bottom: 10px; margin-left: 10px; height: 30px; "/>
             <a href="javascript:;"
                class="btn-close"
                v-if="index > 0 && !isEditor"
                @click="delNotice(index)"
-               style="position: absolute; top: 60px; right: 26px;">
+               style="position: absolute; top: 30px; right: 26px;">
               <img src="@/assets/img/ico-close2.png" width="20" />
             </a>
             <Input type="textarea" :rows="4" placeholder="填写须知(30字内)" v-model="item.notice" />
@@ -182,7 +192,7 @@
                  style="left: 24%; top: 20px;"
                  v-if="isEditor && errorData.notice && errorData.notice[index]"><span>{{errorData.notice[index]}}</span></div>
           </div>
-          <a href="javascript:;" class="btn-add" @click="addNotice" v-if="!isEditor"><img src="@/assets/img/ico-add.png" /></a>
+          <a href="javascript:;" class="btn-add" @click="addNotice" v-if="!isEditor && noticeList.length < 20"><img src="@/assets/img/ico-add.png" /></a>
         </Form>
       </div>
     </div>
@@ -199,7 +209,10 @@ export default {
   name: 'app',
   props: {
     step: [Number, String],
-    type: String
+    type: {
+      type: String,
+      default: 'new'
+    }
   },
   components: {
     formBox,

@@ -8,6 +8,8 @@
     ref="header"
     @close="handleClose" />
   <div class="container">
+<!--    <img :src="postSrc" style="width: 100%" mode="widthFix" v-if="postSrc !== ''" />-->
+
     <c-ticket-detail v-if="hasData"
                      ref="detail"
                      @toggle="detailChange"
@@ -82,6 +84,7 @@ export default {
       })
     },
     getPoster (e) {
+      console.log('getPoster', e)
       this.postSrc = e
     }
   },

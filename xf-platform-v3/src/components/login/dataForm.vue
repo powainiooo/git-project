@@ -604,12 +604,18 @@ export default {
       const url = this.isUpdate ? '/editor/user/edit' : '/editor/user/register'
       postAction(url, params, false).then(res => {
         if (res.code === 1) {
-          this.$refs.alert.show('suc')
           if (this.isUpdate) {
             this.$store.dispatch('getUserData')
+            this.$refs.alert.update('updateSuc', '请返回首页重新登录')
+          } else {
+            this.$refs.alert.show('suc')
           }
         } else {
-          this.$refs.alert.show('fail', res.msg)
+          if (this.isUpdate) {
+            this.$refs.alert.update('updateFail', res.msg)
+          } else {
+            this.$refs.alert.show('fail', res.msg)
+          }
           this.confirm.isAjax = false
         }
       }).catch(err => {

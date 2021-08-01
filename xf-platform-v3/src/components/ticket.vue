@@ -75,9 +75,10 @@
     between()
     padding 0 6px 0 12px
     .flex
-      align-items center width 350px;
+      align-items center; width 350px;
     &-dates
       size(34px, 34px)
+      min-width 34px
       border-radius 4px
       bgG()
       text-align center
@@ -107,7 +108,7 @@
         top 16px
         left -9px
     &-titles
-      margin-left 12px
+      margin-left 12px; flex 1 0 0;
       p
         height 18px
         font-size 16px
@@ -169,7 +170,7 @@
           <p>{{endDates.month}}</p>
           <div>{{endDates.day}}</div>
         </div>
-        <div class="c-ticket-header-titles">
+        <div class="c-ticket-header-titles" :style="{'width': (record.type === 2 || record.type === 3) ? '254px' : '300px' }">
           <p>{{record.name === '' ? '活动名称' : record.name}}</p>
           <div>{{record.organizer_name}}</div>
         </div>

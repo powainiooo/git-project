@@ -8,7 +8,7 @@
 <div class="c-records">
   <div class="clearfix mt85 mb20">
     <div class="fr flex mr40">
-      <c-select :list="stateList" class="mr10" @change="state = $event.id"/>
+      <c-select :list="stateList" class="mr10" @change="stateChange"/>
       <div class="c-search">
         <input placeholder="输入活动名称" v-model="keyword" />
         <Button size="small" @click="getData">查询</Button>
@@ -111,6 +111,11 @@ export default {
   methods: {
     pageChange (e) {
       this.pageNo = e
+      this.getData()
+    },
+    stateChange (e) {
+      console.log('stateChange', e)
+      this.state = e.id === -1 ? '' : e.id
       this.getData()
     },
     getData () {

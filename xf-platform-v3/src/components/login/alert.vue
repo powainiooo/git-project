@@ -33,12 +33,12 @@
       <h3>{{title}}</h3>
       <p v-html="msg"></p>
     </div>
-    <div class="flip-box" v-if="status === 'suc' || status === 'checkSuc'">
+    <div class="flip-box" v-if="status === 'suc' || status === 'checkSuc' || status === 'updateSuc'">
       <img src="@/assets/img/ico-suc.png" />
       <h3>{{title}}</h3>
       <p v-html="msg"></p>
     </div>
-    <div class="flip-box" v-else-if="status === 'fail' || status === 'checkFail'">
+    <div class="flip-box" v-else-if="status === 'fail' || status === 'checkFail' || status === 'updateFail'">
       <img src="@/assets/img/ico-fail.png" />
       <h3>{{title}}</h3>
       <p v-html="msg"></p>
@@ -46,8 +46,8 @@
     <div class="center" style="margin-top: 60px">
       <Button style="width: 135px" v-if="status === 'empty'" @click="onOk">返回</Button>
       <Button style="width: 135px" v-if="status === 'suc'" @click="onOk">完成</Button>
-      <Button style="width: 135px" v-else-if="status === 'fail'" @click="onRetry">返回重试</Button>
-      <Button style="width: 135px" v-else-if="status === 'checkSuc'" @click="onOk">返回首页</Button>
+      <Button style="width: 135px" v-else-if="status === 'fail' || status === 'updateFail'" @click="onRetry">返回重试</Button>
+      <Button style="width: 135px" v-else-if="status === 'checkSuc' || status === 'updateSuc'" @click="onOk">返回首页</Button>
       <Button style="width: 135px" v-else-if="status === 'checkFail'" @click="onRetry">编辑后重新提交</Button>
     </div>
   </div>
@@ -84,6 +84,16 @@ export default {
         this.title = '账号审核中'
       } else if (status === 'checkFail') {
         this.title = '账号审核失败'
+      }
+      this.msg = msg
+      this.visible = true
+    },
+    update (status, msg = '') {
+      this.status = status
+      if (status === 'updateSuc') {
+        this.title = '资料提交成功'
+      } else if (status === 'updateFail') {
+        this.title = '资料提交失败'
       }
       this.msg = msg
       this.visible = true

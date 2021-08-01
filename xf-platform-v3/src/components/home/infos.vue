@@ -66,7 +66,7 @@
       border-radius 50%
       margin-bottom 20px
 .canvas-frame
-  fxTL(-10000px, -10000px)
+  fxTL(-10000px, -100000px)
 </style>
 
 <template>
@@ -166,7 +166,7 @@
 import tagLine from '@/components/tagLine'
 import TSwitch from '@/components/TSwitch'
 import { formatDate } from '@/utils/tools'
-import { postAction } from '../../utils'
+import { downFile, postAction } from '../../utils'
 export default {
   name: 'app',
   components: {
@@ -287,24 +287,38 @@ export default {
       const ctx = canvas.getContext('2d')
       const bg = document.getElementById('qrframe')
       ctx.drawImage(bg, 0, 0)
+      let reader = new FileReader()
+      downFile('/api/common/down_image', {
+        path: this.record.miniapp_code_image
+      }).then(res => {
+        console.log('down_image', res)
+        reader.readAsDataURL(res)
+      })
+      reader.onload = function (e) {
+        console.log('reader onload')
+        var img = document.createElement('img')
+        img.src = e.target.result
+        img.onload = () => {
+          console.log('img onload')
+          ctx.beginPath()
+          ctx.arc(248, 470, 230, 0, Math.PI * 2)
+          ctx.fillStyle = '#FFFFFF'
+          ctx.fill()
+          ctx.clip()
+          // const code = document.getElementById('qrcode')
+          ctx.drawImage(img, 54, 276, 386, 386)
+          setTimeout(() => {
+            const content = canvas.toDataURL('image/png')
+            const fileName = 'qrcode.png'
+            const a = document.createElement('a')
+            a.href = content
+            a.download = fileName
+            a.click()
+            // document.removeChild(a)
+          }, 1000)
+        }
+      }
 
-      ctx.beginPath()
-      ctx.arc(248, 470, 230, 0, Math.PI * 2)
-      ctx.fillStyle = '#FFFFFF'
-      ctx.fill()
-      ctx.clip()
-      const code = document.getElementById('qrcode')
-      ctx.drawImage(code, 54, 276, 386, 386)
-
-      setTimeout(() => {
-        const content = canvas.toDataURL('image/png')
-        const fileName = 'qrcode.png'
-        const a = document.createElement('a')
-        a.href = content
-        a.download = fileName
-        a.click()
-        document.removeChild(a)
-      }, 1000)
     },
     ticketBlur (index) {
       this.showHintIndex = false

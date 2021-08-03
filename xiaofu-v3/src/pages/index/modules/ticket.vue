@@ -22,12 +22,18 @@
   position: relative;
   z-index: 5;
 }
+.c-ticket-bar .info-line {
+  width: 100%;
+}
 .organ-ticket .c-ticket-bar {
   background-color: #EEEEEF;
 }
 .c-ticket-large .c-ticket-bar {
   height: 100px;
   padding-left: 22px;
+}
+.c-ticket-large .c-ticket-bar .info-line {
+  width: calc(100% - 80px);
 }
 .c-ticket-bar .logo {
   width: 80px;
@@ -112,7 +118,9 @@
   <img src="/static/images/common/ticket-shadow-small.png" class="ticket-shadow-small" v-if="size === 'small'" />
   <img src="/static/images/common/ticket-shadow-large.png" class="ticket-shadow-large" v-if="size === 'large'" />
   <div class="c-ticket-bar">
-    <tk-info :record="infoData" :endDate="infoData2" :showEndDate="showEndDate" />
+    <view class="info-line">
+      <tk-info :record="infoData" :endDate="infoData2" :showEndDate="showEndDate" />
+    </view>
     <img :src="record.logo" class="logo" mode="aspectFill" v-if="size === 'large'" />
   </div>
   <div class="c-ticket-imgs">

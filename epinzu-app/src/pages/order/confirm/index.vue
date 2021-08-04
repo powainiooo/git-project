@@ -253,9 +253,15 @@ export default {
           tradeNO: res.data.trade_no,
           success: res3 => {
             console.log('pay success', res3)
-            Taro.redirectTo({
-              url: `/pages/result/index?result=suc`
-            })
+            if (res3.resultCode === '9000') {
+              Taro.redirectTo({
+                url: `/pages/result/index?result=suc`
+              })
+            } else {
+              Taro.redirectTo({
+                url: `/pages/result/index?result=fail`
+              })
+            }
           },
           fail (err) {
             console.log('pay fail', err)

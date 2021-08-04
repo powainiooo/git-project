@@ -99,6 +99,7 @@ export default {
       this.hasData = false
       this.getData()
     }
+    this.handleClose()
   },
   onLoad (options) {
     // let app = getApp()

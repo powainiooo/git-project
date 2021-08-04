@@ -36,6 +36,7 @@ export default {
   },
   data () {
     return {
+      disableMixinCreated: true,
       nums: 0,
       queryParams: {
         list_type: 0
@@ -55,9 +56,7 @@ export default {
     }
   },
   onShow () {
-    if (this.dataSource.length !== 0) {
-      this.resetLoad()
-    }
+    this.resetLoad()
   }
 }
 </script>

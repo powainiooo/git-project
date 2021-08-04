@@ -93,7 +93,7 @@ export default {
       })
     }
   },
-  onLoad (options) {
+  onShow (options) {
     this.getCartData()
   }
 }

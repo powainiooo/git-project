@@ -4,7 +4,7 @@
       <view class="flex mb8 goods borderB pb8" v-for="item in goods" :key="item.id">
         <image :src="imgSrc + item.goods_cover" mode="aspectFill" class="img" />
         <view class="content">
-          <view class="title">{{item.goods_name}}</view>
+          <view class="title mb4">{{item.goods_name}}</view>
           <view class="f12 c-999 mb4">{{item.goods_attr}}</view>
           <view class="between f12" v-if="item.type === 1">
             <view>押金：￥{{item.goods_deposit}} x {{item.after_nums}}</view>

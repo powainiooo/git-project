@@ -1,6 +1,6 @@
 <template>
   <view class="Order-detail container">
-    <view class="c-red mt16 mb16 ml12" v-if="order.status === 2">剩余支付时间{{order.remain_pay_time}}</view>
+    <view class="c-red mt16 mb16 ml12" v-if="order.status === 1">剩余支付时间{{order.remain_pay_time}}</view>
     <!-- 店铺信息 -->
     <view class="section">
       <view class="between borderB mb8">
@@ -26,11 +26,11 @@
       <view class="acenter mt8 mb8">
         <image src="@/img/icon-rent.png" mode="widthFix" class="w16 mr8" v-if="item.type === 1" />
         <image src="@/img/icon-buy.png" mode="widthFix" class="w16 mr8" v-if="item.type === 3" />
-        <text>{{item.goods_name}}</text>
+        <view class="ellipsis">{{item.goods_name}}</view>
       </view>
       <view class="flex pb8 borderB">
         <image :src="imgSrc + item.goods_cover" mode="aspectFill" class="pic" />
-        <view>
+        <view style="flex: 1 0 0;">
           <view class="f12 c-999 mb4">规格：{{item.goods_attr}}</view>
           <view class="f12 c-999 mb4">{{item.rent_day_min}}天起租</view>
           <view class="f12 mb4" v-if="item.type === 1" >租金：<text class="f10">￥</text>{{item.goods_price}}<text class="f10">/天</text> X {{item.buy_nums}}件</view>
@@ -39,7 +39,6 @@
         </view>
       </view>
       <view class="end mt8 mb8">
-        <button class="c-btn c-btn-border2 c-btn-24 ml4" v-if="item.buttons.snapshoot === 1">商品快照</button>
         <button class="c-btn c-btn-border2 c-btn-24 ml4" v-if="item.buttons.refund === 1">申请退单</button>
         <button class="c-btn c-btn-border2 c-btn-24 ml4" v-if="item.buttons.cancel_refund === 1">取消退单</button>
         <button class="c-btn c-btn-border c-btn-24 ml4" v-if="item.buttons.comment === 1">评价</button>
@@ -47,11 +46,11 @@
     </view>
     <!-- 订单信息 -->
     <view class="section">
-      <view class="mt8 mb8">{{bList1.title}}</view>
+      <view class="mt8 mb8 bold">{{bList1.title}}</view>
       <view class="h32 between" v-for="(item, index) in bList1.list" :key="index">
         <view class="acenter">
           <view class="f12 c-999 mr16">{{item.name}}:</view>
-          <view class="f12">{{item.value}}</view>
+          <view class="f12" style="flex: 1 0 0">{{item.value}}</view>
         </view>
         <view class="c-red f12"
               v-if="item.key === 'order_no' || item.key === 'kd_no'"

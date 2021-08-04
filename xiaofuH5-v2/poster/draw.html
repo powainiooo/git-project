@@ -72,7 +72,7 @@ function loadImg () {
                <div class="addr"><span>{{record.address}}</span></div>
             </div>
          </div>
-         <div class="artist-frame">
+         <div class="artist-frame" v-if="artistList.length > 0">
             <div class="c-ticket-title"><span>Artist</span>表演者</div>
             <div class="artist-list">
                <div class="artist-item" v-for="(item, index) in artistList" :key="index">
@@ -85,7 +85,7 @@ function loadImg () {
             </div>
             <div class="artist-bBorder bBorder"></div>
          </div>
-         <div>
+         <div v-if="noticeList.length > 0">
             <div class="c-ticket-title"><span>Notice</span>须知</div>
             <ul class="notice-list">
                <li v-for="(item, i) in noticeList" :key="i">
@@ -95,7 +95,7 @@ function loadImg () {
             </ul>
             <div class="notice-bBorder bBorder"></div>
          </div>
-         <div>
+         <div v-if="introList.length > 0">
             <div class="c-ticket-title"><span>Particulars</span>详情</div>
             <div class="parti-item" v-for="(item, i) in introList" :key="i">
                <img :src="item.image_full_url" class="pic" crossorigin="anonymous" />

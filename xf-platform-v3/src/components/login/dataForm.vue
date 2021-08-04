@@ -118,7 +118,7 @@
         </div>
         <div>
           <div class="form">
-            <div class="form-title">上传资料{{type}}</div>
+            <div class="form-title">上传资料</div>
             <template v-if="type === '1'">
               <FormItem>
                 <upload-img v-model="formData.id_card_front_image">
@@ -493,7 +493,7 @@ export default {
           }
         }
       } else if (this.step === 2) {
-        if (this.formData.account_name === '' || !this.accountIdCardReg || !this.accountMobile || this.formData.account_card_no === '' || this.formData.account_bank_id === '' || this.formData.account_opening_banke === '') {
+        if (this.formData.account_name === '' || !this.accountIdCardReg || !this.accountMobile || this.formData.account_card_no === '' || this.formData.account_bank_id === '' || this.formData.account_opening_banke === '' || this.countIndex !== 0) {
           return true
         }
       }

@@ -67,7 +67,7 @@
         </view>
       </view>
       <view class="flex mb8 goods pb8 borderB" v-for="item in record.goods" :key="item.id">
-        <image :src="imgSrc + item.goods_cover" mode="aspectFill" class="img" />
+        <image :src="imgSrc + item.goods_cover" mode="aspectFill" class="img" @tap="toOrderDetail" />
         <view class="content">
           <view class="title">{{item.goods_name}}</view>
           <view class="f12 c-999 mb4">{{item.goods_attr}}</view>
@@ -289,6 +289,11 @@ export default {
     toRecord () {
       Taro.navigateTo({
         url: `/pages/rent/order/record/index?id=${this.id}&from=refund`
+      })
+    },
+    toOrderDetail () {
+      Taro.navigateTo({
+        url: `/pages/order/detail/index?id=${this.record.order_id}`
       })
     }
   },

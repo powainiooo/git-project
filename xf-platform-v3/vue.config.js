@@ -28,8 +28,8 @@ module.exports = {
   productionSourceMap: false,
   // 这里写你调用接口的基础路径，来解决跨域，如果设置了代理，那你本地开发环境的axios的baseUrl要写为 '' ，即空字符串
   devServer: {
-    proxy: 'https://web.uat.leesticket.com'
-    // proxy: 'https://editor.leesticket.com'
+    // proxy: 'https://web.uat.leesticket.com'
+    proxy: 'https://web.leesticket.com'
   }
 }
 /*
@@ -42,7 +42,7 @@ module.exports = {
 leesticket
 nihao123
 *
-ip：58.220.46.36
+ip：58.220.46.36  测试
 端口：21
 账号：editor_uat_leesticket
 密码：kHA4sfwPNai8iEk8
@@ -50,4 +50,10 @@ ip：58.220.46.36
 *
 * 测试 web.uat.leesticket.com
 * 生产 web.leesticket.com
+*
+* 正式环境editorFTP账号资料
+* ftp地址：58.220.46.36
+* 端口：21
+* 用户：editor_leesticket
+* 密码：3CJePfyLkrZP7bLm
 * */

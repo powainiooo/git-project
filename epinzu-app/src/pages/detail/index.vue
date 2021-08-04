@@ -240,7 +240,9 @@ export default {
           this.shop = res.data.shop
           this.$store.commit('SET_QUESLIST', res.data.questions)
 
-          this.getAttentionStatus()
+          if (this.isLogin) {
+            this.getAttentionStatus()
+          }
         }
       })
     },
@@ -325,6 +327,8 @@ export default {
     }
   },
   onShow () {
+    this.getData()
+    this.getCartNum()
     setTimeout(() => {
       this.getSectionDis()
     }, 1000)
@@ -350,7 +354,6 @@ export default {
   onLoad (options) {
     // options.id = 103
     this.queryParams.goods_id = options.id || 94
-    this.getData()
     if (this.isLogin) {
       this.getCollectionStatus()
     }

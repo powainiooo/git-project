@@ -43,12 +43,14 @@ export default {
       const val = Number(this.value)
       if (val > 1) {
         this.$emit('input', val - 1)
+        this.$emit('change', val - 1)
       }
     },
     add () {
       const val = Number(this.value)
       if (val < this.max) {
         this.$emit('input', val + 1)
+        this.$emit('change', val + 1)
       }
     }
   }

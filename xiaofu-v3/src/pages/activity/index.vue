@@ -86,7 +86,7 @@
 </style>
 
 <template>
-  <div>
+  <div style="width: 100%; overflow: hidden;">
     <c-header
       ref="header"
       @close="handleClose" />

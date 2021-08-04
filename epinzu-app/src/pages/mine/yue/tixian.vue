@@ -79,7 +79,7 @@ export default {
       }).then(res => {
         if (res.code === 0) {
           Taro.showToast({
-            title: res.msg
+            title: '提现申请成功'
           })
           setTimeout(() => {
             Taro.navigateBack({

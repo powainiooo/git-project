@@ -51,24 +51,35 @@ router.beforeEach((to, from, next) => {
   if (Vue.ls.get(ACCESS_TOKEN)) {
     console.log('1')
     if (to.path === '/login') {
-      console.log('2', to, from)
-      try {
-        const type = store.state.globalData.merchant.account_type
-        if (type === 0) { // 老账户
-          next({
-            name: 'Account'
-          })
-        } else {
-          next('/index')
-        }
-      } catch (e) {
-        next('/index')
-      }
+      console.log('2', to, from, store.state)
+      // try {
+      //   const type = store.state.globalData.merchant.account_type
+      //   console.log('type === 0', type === 0)
+      //   if (type === 0) { // 老账户
+      //     next({
+      //       name: 'Account'
+      //     })
+      //   } else {
+      //     next('/index')
+      //   }
+      // } catch (e) {
+      //   next('/index')
+      // }
+      next('/index')
       LoadingBar.finish()
     } else {
       if (store.state.hasGlobalData) {
         console.log('3')
-        next()
+        const type = store.state.globalData.merchant.account_type
+        if (type === 0) {
+          if (to.name === 'Account') {
+            next()
+          } else {
+            next('/account')
+          }
+        } else {
+          next()
+        }
       } else {
         console.log('4')
         store.dispatch('getUserData').then(res => {

@@ -65,7 +65,7 @@ export default {
       })
     }
   },
-  onLoad () {
+  onShow () {
     this.getMoneys()
   }
 }

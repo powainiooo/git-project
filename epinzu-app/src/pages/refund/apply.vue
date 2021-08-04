@@ -4,13 +4,13 @@
     <view class="section2">
       <view class="borderB pb8 mt8" v-for="(item, i) in goods" :key="item.id">
         <view class="flex mb8 goods">
-          <view class=" mr8 mt34" @tap="selectGoods[i].checked = !selectGoods[i].checked" v-if="type !== 2">
+          <view class=" mr8 mt34" @tap="handleSelect(i)" v-if="type !== 2">
             <image src="@/img/radio-check.png" mode="widthFix" class="w16" v-if="selectGoods[i].checked" />
             <image src="@/img/radio.png" mode="widthFix" class="w16" v-else />
           </view>
           <image :src="imgSrc + item.goods_cover" mode="aspectFill" class="img" />
           <view class="content">
-            <view class="title">{{item.goods_name}}</view>
+            <view class="title mb4">{{item.goods_name}}</view>
             <view class="f12 c-999 mb4">{{item.goods_attr}}</view>
             <view class="between f12" v-if="item.type === 1">
               <view>押金：￥{{item.goods_deposit}} x {{item.after_nums}}</view>
@@ -23,8 +23,8 @@
           </view>
         </view>
         <view class="end mt8" v-if="type !== 2">
-          <text class="f12 c-666">申请数量</text>
-          <Stepper v-model="selectGoods[i].nums" :max="item.after_nums" />
+          <text class="f12 c-666 mr8">申请数量</text>
+          <Stepper v-model="selectGoods[i].nums" :max="item.after_nums" @change="setPrices" />
         </view>
       </view>
     </view>
@@ -44,7 +44,7 @@
         <view class="acenter">
           <view class="c-666 mr16">收货状态</view>
           <view class="c-999" v-if="statusId === 0">请选择收货状态</view>
-          <view class="c-666" v-else>{{statusName}}</view>
+          <view class="c-333" v-else>{{statusName}}</view>
         </view>
         <image src="@/img/ar1.png" mode="widthFix" class="w10" />
       </view>
@@ -54,7 +54,7 @@
         <view class="acenter">
           <view class="c-666 mr16">申请原因</view>
           <view class="c-999" v-if="reasonId === 0">请选择申请原因</view>
-          <view class="c-666" v-else>{{reasonName}}</view>
+          <view class="c-333" v-else>{{reasonName}}</view>
         </view>
         <image src="@/img/ar1.png" mode="widthFix" class="w10" />
       </view>
@@ -63,12 +63,12 @@
     <!-- 退款金额 -->
     <view class="section2" style="margin-bottom: 0;">
       <view class="mt16 mb16">退款金额</view>
-      <view class="f18 mb8">￥<input v-model="refundMoney" class="none-inp" @input="refundChange" /></view>
+      <view class="f18 mb8">￥<input v-model="refundMoney" class="none-inp f18" @input="refundChange" /></view>
     </view>
     <view class="h32 acenter pl12 c-999" style="background-color: #FAFBFA">最多可退￥{{maxRefund}}</view>
     <!-- 收货地址 -->
     <view class="section2 between" @tap="selectAddr" v-if="type === 3">
-      <view>
+      <view class="flex100">
         <view class="mt16 mb8 c-666">收货地址</view>
         <view class="mb4">
           <text class="mr8">{{address.rev_name}}</text>
@@ -76,7 +76,7 @@
         </view>
         <view class="mb8">{{address.rev_province}}{{address.rev_city}}{{address.rev_address}}</view>
       </view>
-      <image src="@/img/ar1.png" mode="widthFix" class="w10" />
+      <image src="@/img/ar1.png" mode="widthFix" class="w10 ml16" />
     </view>
     <!-- 申请说明 -->
     <view class="mt8 mb8">
@@ -180,7 +180,8 @@ export default {
             selectGoods.push({
               checked: true,
               id: i.id,
-              nums: 1
+              nums: i.after_nums,
+              price: i.type === 1 ? i.goods_deposit : i.goods_price
             })
           }
           this.selectGoods = selectGoods
@@ -309,12 +310,27 @@ export default {
             url: '/pages/refund/index'
           })
         }
+        this.isAjax = false
       })
     },
     selectAddr () {
       Taro.navigateTo({
         url: '/pages/address/index?from=order'
       })
+    },
+    handleSelect (i) {
+      this.selectGoods[i].checked = !this.selectGoods[i].checked
+      this.setPrices()
+    },
+    setPrices () {
+      let price = 0
+      for (let item of this.selectGoods) {
+        if (item.checked) {
+          price += item.price * item.nums
+        }
+      }
+      this.maxRefund = price
+      this.refundMoney = price
     }
   },
   onShow () {

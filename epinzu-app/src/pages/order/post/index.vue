@@ -12,7 +12,7 @@
           <button class="c-btn c-btn-border2 c-btn-20 w46" @tap="copy">复制</button>
         </view>
       </view>
-      <view class="borderB pb8 mt8">
+      <view class="borderB pb8 mt8" v-if="from === 'order'">
         <view class="acenter">
           <image src="@/img/dot.png" mode="widthFix" class="w24 mr8" />
           <text class="c-666">订单编号：{{record.order_no}}</text>
@@ -20,6 +20,14 @@
         <view class="ml32 flex">
           <view>收货地址：</view>
           <view style="flex: 1 0 0">{{record.rev_address}}</view>
+        </view>
+      </view>
+      <view class="borderB pb8 mt8" v-if="from === 'refund'">
+        <view class="flex">
+          <image src="@/img/dot.png" mode="widthFix" class="w24 mr8" />
+          <view class="flex100">
+            <view class="c-666" v-for="item in record.extra" :key="item.key">{{item.title}}{{item.content}}</view>
+          </view>
         </view>
       </view>
     </view>

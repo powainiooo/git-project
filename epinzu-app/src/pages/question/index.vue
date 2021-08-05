@@ -1,7 +1,7 @@
 <template>
   <view class="Question">
     <view class="ml12">
-      <cell v-for="(item, index) in quesList"
+      <cell v-for="(item, index) in dataSource"
             :key="item.id"
             :title="(index + 1) + '.' + item.title"
             isLink
@@ -47,8 +47,8 @@ export default {
     }
   },
   onLoad (options) {
-    this.source = options.source || 'goods'
-    this.disableMixinCreated = this.source === 'goods'
+    // this.source = options.source || 'goods'
+    // this.disableMixinCreated = this.source === 'goods'
   }
 }
 </script>

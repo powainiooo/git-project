@@ -1,23 +1,24 @@
 <template>
   <view class="Address">
-    <view class="Address-item between borderB"
-          v-for="item in dataSource"
-          :key="item.id"
-          @tap="selectAddr(item)"
-          >
-      <view class="mt8 infos">
-        <view class="mb8 f12 acenter">
-          <text class="c-tag c-tag-red mr4" v-if="item.status === 1">默认</text>
-          {{item.rev_name}} {{item.rev_phone}}
+
+    <swiper-cell rightWidth="1.4rem"
+                 v-for="item in dataSource"
+                 :key="item.id">
+      <view class="Address-item between borderB"
+            @tap="selectAddr(item)"
+      >
+        <view class="mt8 infos">
+          <view class="mb8 f12 acenter">
+            <text class="c-tag c-tag-red mr4" v-if="item.status === 1">默认</text>
+            {{item.rev_name}} {{item.rev_phone}}
+          </view>
+          <view class="mb8 f12 c-666">{{item.province}} {{item.city}} {{item.address}}</view>
         </view>
-        <view class="mb8 f12 c-666">{{item.province}} {{item.city}} {{item.address}}</view>
+        <image src="@/img/edit.png" mode="widthFix" class="w24 mr12 ml24" @tap.stop="toEdit(item)" />
       </view>
-      <image src="@/img/edit.png" mode="widthFix" class="w24 mr12 ml24" @tap.stop="toEdit(item)" />
-    </view>
-<!--    <swiper-cell>-->
-<!--      <view class="h32">test</view>-->
-<!--      <view slot="right" class="btn-del">删除</view>-->
-<!--    </swiper-cell>-->
+      <view slot="right" class="btn-del" @tap="delAddr(item.id)">删除</view>
+    </swiper-cell>
+
     <view class="empty-txt" v-if="!loading && ipage.loadOver && dataSource.length > 0">已经全部加载完毕</view>
     <view class="empty-txt mt195" v-if="!loading && ipage.loadOver && dataSource.length === 0">暂无数据</view>
 
@@ -34,6 +35,7 @@ import Taro from '@tarojs/taro'
 import './index.styl'
 import { pageMixin } from '@/mixins/pages'
 import swiperCell from '@/c/common/swiperCell.vue'
+import { getAction } from "@/utils/api"
 
 export default {
   name: 'Index',
@@ -68,6 +70,13 @@ export default {
           delta: 1
         })
       }
+    },
+    delAddr (id) {
+      getAction(`/userapi/user/address/destroy/${id}`).then(res => {
+        if (res.code === 0) {
+          this.resetLoad()
+        }
+      })
     }
   },
   onShow () {

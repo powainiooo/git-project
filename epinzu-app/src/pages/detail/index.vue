@@ -176,8 +176,8 @@ export default {
       query.select('#details').boundingClientRect()
       query.selectViewport().exec(res => {
         const h = res[0].height
-        this.dis.params = res[1].top - h
-        this.dis.details = res[2].top - h
+        this.dis.params = parseInt(res[1].top - h)
+        this.dis.details = parseInt(res[2].top - h)
       })
     },
     // 前往购物车

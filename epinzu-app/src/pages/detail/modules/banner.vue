@@ -12,7 +12,8 @@
              :poster="imgSrc + video.cover"
              :controls="false"
              v-show="isPlaying"
-             @Ended="end" ></video>
+             @Ended="end"
+             style="background-color: #000000;" ></video>
       <button class="btn-play" @tap="play" v-if="!isPlaying"><image src="@/img/play.png" mode="aspectFill"  /></button>
     </swiper-item>
     <swiper-item v-for="(item, index) in list" :key="index">

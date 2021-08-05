@@ -49,6 +49,7 @@ export default {
   mixins: [pageMixin],
   data () {
     return {
+      disableMixinCreated: true,
       tabs: [
         { key: 0, label: '全部' },
         { key: ORDER_WAIT, label: '待付款' },
@@ -111,13 +112,19 @@ export default {
           tradeNO: res.data.trade_no,
           success: res3 => {
             console.log('pay success', res3)
-            Taro.redirectTo({
-              url: `/pages/result/index?result=suc`
-            })
+            if (res3.resultCode === '9000') {
+              Taro.reLaunch({
+                url: `/pages/result/index?result=suc`
+              })
+            } else {
+              Taro.reLaunch({
+                url: `/pages/result/index?result=fail`
+              })
+            }
           },
           fail (err) {
             console.log('pay fail', err)
-            Taro.redirectTo({
+            Taro.reLaunch({
               url: `/pages/result/index?result=fail`
             })
           }
@@ -126,15 +133,18 @@ export default {
     },
     paybyYue (res) {
       if (res.code === 0) {
-        Taro.redirectTo({
+        Taro.reLaunch({
           url: `/pages/result/index?result=suc`
         })
       } else {
-        Taro.redirectTo({
+        Taro.reLaunch({
           url: `/pages/result/index?result=fail`
         })
       }
     },
+  },
+  onShow () {
+    this.resetLoad()
   },
   onLoad (options) {
     this.queryParams.status = Number(options.key) || 0

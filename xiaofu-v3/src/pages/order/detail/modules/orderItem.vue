@@ -128,7 +128,7 @@
     <div class="line2">{{record.code}}</div>
   </div>
   <div class="c-order-item-bottom">
-    <infos :record="infoData" nameKey="ticketName" :showBanner="false" />
+    <infos :record="infoData" nameKey="ticketName" :showBanner="false" ellipsis />
     <div class="line1 bBorder">
       <div>{{record.name}}</div>
       <p>{{record.phone}}</p>

@@ -27,7 +27,7 @@ export default {
   props: {
 	  list: Array,
     value: {
-	    type: String,
+	    type: [String, Number],
       default: ''
     }
   },

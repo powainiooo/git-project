@@ -254,18 +254,18 @@ export default {
           success: res3 => {
             console.log('pay success', res3)
             if (res3.resultCode === '9000') {
-              Taro.redirectTo({
+              Taro.reLaunch({
                 url: `/pages/result/index?result=suc`
               })
             } else {
-              Taro.redirectTo({
+              Taro.reLaunch({
                 url: `/pages/result/index?result=fail`
               })
             }
           },
           fail (err) {
             console.log('pay fail', err)
-            Taro.redirectTo({
+            Taro.reLaunch({
               url: `/pages/result/index?result=fail`
             })
           }
@@ -274,11 +274,11 @@ export default {
     },
     paybyYue (res) {
       if (res.code === 0) {
-        Taro.redirectTo({
+        Taro.reLaunch({
           url: `/pages/result/index?result=suc`
         })
       } else {
-        Taro.redirectTo({
+        Taro.reLaunch({
           url: `/pages/result/index?result=fail`
         })
       }

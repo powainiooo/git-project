@@ -5,7 +5,7 @@
         <view class="acenter">
           <view class="c-666 mr16">拒绝原因</view>
           <view class="c-999" v-if="refuse_reason === ''">请选择拒绝原因</view>
-          <view class="c-666" v-else>{{refuse_txt}}</view>
+          <view class="c-333" v-else>{{refuse_txt}}</view>
         </view>
         <image src="@/img/ar2.png" mode="widthFix" class="w10" />
       </view>

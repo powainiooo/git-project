@@ -164,7 +164,7 @@ export default {
       let date = ['', '']
       let name = ''
       let host = ''
-      if (this.record) {
+      if (this.record.start_date) {
         date = this.record.start_date.split('-')
         name = this.record.name
         host = this.record.organizer_name
@@ -181,7 +181,7 @@ export default {
     },
     infoData2 () {
       let date = ['', '']
-      if (this.record && this.showEndDate) {
+      if (this.record.end_date && this.showEndDate) {
         date = this.record.end_date.split('-')
       }
       return {

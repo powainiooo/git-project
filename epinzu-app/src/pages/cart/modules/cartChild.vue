@@ -13,9 +13,9 @@
     .title
       ellipsis(); margin-bottom 8px;
   &-selects
-    size(auto, 20px); border-radius 10px; background-color #F5F5F5; position relative; display inline-block;
+    size(auto, 20px); border-radius 10px; background-color #F5F5F5; position relative; display inline-block; max-width 100%;
     &>view
-      width 100%; line-height 20px; ellipsis(); font-size 10px; color #999999; margin-right 26px; margin-left 8px;
+      width 100%; line-height 20px; ellipsis(); font-size 10px; color #999999; padding-right 26px; margin-left 8px;
     &>image
       abTR(5px, 8px);
 </style>

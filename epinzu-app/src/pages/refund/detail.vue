@@ -67,10 +67,10 @@
         </view>
       </view>
       <view class="flex mb8 goods pb8 borderB" v-for="item in record.goods" :key="item.id">
-        <image :src="imgSrc + item.goods_cover" mode="aspectFill" class="img" @tap="toOrderDetail" />
+        <image :src="imgSrc + item.goods_cover" mode="aspectFill" class="img" @tap="toGoodsDetail" />
         <view class="content">
           <view class="title">{{item.goods_name}}</view>
-          <view class="f12 c-999 mb4">{{item.goods_attr}}</view>
+          <view class="f12 c-999 mb4 ellipsis">{{item.goods_attr}}</view>
           <view class="between f12" v-if="item.type === 1">
             <view>押金：￥{{item.goods_deposit}} x {{item.after_nums}}</view>
             <view>￥{{item.goods_deposit_count}}</view>
@@ -130,10 +130,11 @@ export default {
       const perDay = 24 * 60 * 60
       const perHour = 60 * 60
       const perMin = 60
+      const min = remain > 60 ? parseInt(remain % perMin) : 1
       return {
         day: parseInt(remain / perDay),
         hour: parseInt(remain / perHour),
-        min: parseInt(remain / perMin),
+        min
       }
     },
     showSendInfo () {
@@ -294,6 +295,11 @@ export default {
     toOrderDetail () {
       Taro.navigateTo({
         url: `/pages/order/detail/index?id=${this.record.order_id}`
+      })
+    },
+    toGoodsDetail (id) {
+      Taro.navigateTo({
+        url: `/pages/detail/index?id=${id}`
       })
     }
   },

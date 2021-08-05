@@ -6,7 +6,7 @@
         <view class="c-666 f12" @tap="toRecord">提现记录</view>
       </view>
       <view class="tixian-input borderB">
-        <text>￥</text>
+        <view>￥</view>
         <input type="digit" v-model="money" />
       </view>
       <view class="between mb8">
@@ -97,9 +97,11 @@ export default {
       })
     }
   },
+  onShow () {
+    this.getData()
+  },
   onLoad (options) {
     this.yue = Number(options.yue)
-    this.getData()
   }
 }
 </script>

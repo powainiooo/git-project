@@ -3,8 +3,10 @@
     <view class="opera-top">
       <!-- 搜索 -->
       <view class="ml12 mr16 pt4 pb4 between" v-if="from === 'search'">
-        <search :disabled="true" ref="search" style="width: 308px;" @tap="goBack" />
-        <button class="btn-cart">
+        <view style="width: 308px;" @tap="goBack">
+          <search :disabled="true" ref="search" />
+        </view>
+        <button class="btn-cart" @tap="toCart">
           <image src="@/img/cart.png" mode="widthFix" />
           <view v-if="cartNum > 0">{{cartNum}}</view>
         </button>
@@ -107,7 +109,12 @@ export default {
     },
     goBack () {
       Taro.navigateBack({
-        delta: -1
+        delta: 1
+      })
+    },
+    toCart () {
+      Taro.redirectTo({
+        url: '/pages/cart/index'
       })
     },
     toDetail (id) {

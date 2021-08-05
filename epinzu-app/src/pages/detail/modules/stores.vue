@@ -11,7 +11,7 @@
         <view class="acenter">
           <text class="c-tag c-tag-yel mr4" v-if="record.type === 1">个人</text>
           <text class="c-tag c-tag-red mr4" v-if="record.type === 2">企业</text>
-          {{record.shop_name}}
+          <text class="bold">{{record.shop_name}}</text>
         </view>
         <rate :value="record.pf_avg" />
       </view>

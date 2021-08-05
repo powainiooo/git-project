@@ -142,7 +142,7 @@
   margin-right: 4px;
 }
 
-.buy-forms { width: 100%; height: 100vh; background-color: #EEEEEF; transition: top .5s cubic-bezier(.3,.79,.41,.91); position: fixed; top: 0; left: 0; z-index: 10; padding-top: 100px; box-sizing: border-box; overflow-y: auto; }
+.buy-forms { width: 100%; height: 100vh; background-color: #EEEEEF; transition: top .5s cubic-bezier(.3,.79,.41,.91); position: fixed; top: 0; left: 0; z-index: 10; padding-top: 100px; padding-bottom: 100px; box-sizing: border-box; overflow-y: auto; }
 /*.buy-forms .buys-frame { width: 100%; position: absolute; left: 0; bottom: 0; }*/
 
 @keyframes moveUp {

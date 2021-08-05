@@ -110,7 +110,7 @@ export default {
     coverData: {
       handler (val) {
         console.log('coverData', val)
-        if (val === null) {
+        if (val === null || val === undefined) {
           store.commit('SET_ADSTATE', false)
         }
       },
@@ -198,6 +198,12 @@ export default {
       setTimeout(() => {
         this.$refs.header.openMenu()
       }, 1000)
+    }
+  },
+  onShareAppMessage () {
+    return {
+      title: '小夫有票',
+      path: `pages/index/main`
     }
   }
 }

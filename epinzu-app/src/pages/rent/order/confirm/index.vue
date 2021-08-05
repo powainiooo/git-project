@@ -138,10 +138,12 @@ export default {
       })
     }
   },
+  onShow () {
+    this.getData()
+  },
   onLoad (options) {
     this.id = options.id
     this.returnId = options.returnId
-    this.getData()
   }
 }
 </script>

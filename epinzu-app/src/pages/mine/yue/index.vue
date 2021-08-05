@@ -45,6 +45,7 @@ export default {
   mixins: [pageMixin],
   data () {
     return {
+      disableMixinCreated: true,
       record: {},
       url: {
         list: '/userapi/money/logs'
@@ -66,6 +67,7 @@ export default {
     }
   },
   onShow () {
+    this.resetLoad()
     this.getMoneys()
   }
 }

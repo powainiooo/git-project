@@ -40,7 +40,7 @@
     <div>{{endDate.day}}</div>
   </div>
   <div class="c-tk-title" v-if="showTitle">
-    <p :class="{'ellipsis': ellipsis}">{{record.name}}</p>
+    <p :class="{'ellipsis': ellipsis}">{{record.name}}{{record.name}}</p>
     <div>{{record.host}}</div>
   </div>
 </div>

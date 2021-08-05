@@ -35,13 +35,12 @@
           <view class="f12 c-999 mb4">{{item.rent_day_min}}天起租</view>
           <view class="f12 mb4" v-if="item.type === 1" >租金：<text class="f10">￥</text>{{item.goods_price}}<text class="f10">/天</text> X {{item.buy_nums}}件</view>
           <view class="f12" v-if="item.type === 1" >押金：<text class="f10">￥</text>{{item.goods_deposit}} X {{item.buy_nums}}件</view>
-          <view class="f12 mb4" v-if="item.type === 3" >售价：<text class="f10">￥</text>{{item.goods_price}}<text class="f10"></text> X {{item.buy_nums}}件</view>
+          <view class="f12 mb4" v-else >售价：<text class="f10">￥</text>{{item.goods_price}}<text class="f10"></text> X {{item.buy_nums}}件</view>
         </view>
       </view>
       <view class="end mt8 mb8">
-        <button class="c-btn c-btn-border2 c-btn-24 ml4" v-if="item.buttons.refund === 1">申请退单</button>
-        <button class="c-btn c-btn-border2 c-btn-24 ml4" v-if="item.buttons.cancel_refund === 1">取消退单</button>
-        <button class="c-btn c-btn-border c-btn-24 ml4" v-if="item.buttons.comment === 1">评价</button>
+        <button class="c-btn c-btn-border2 c-btn-24 ml4" v-if="item.buttons.refund === 1" @tap="refund">申请退单</button>
+        <button class="c-btn c-btn-border2 c-btn-24 ml4" v-if="item.buttons.cancel_refund === 1" @tap="cancel">取消退单</button>
       </view>
     </view>
     <!-- 订单信息 -->
@@ -157,7 +156,11 @@ export default {
         url: `/pages/order/post/index?id=${this.order.id}`
       })
     },
-    refund () {},
+    refund () {
+      Taro.navigateTo({
+        url: `/pages/refund/type?id=${this.orderId}`
+      })
+    },
     receive () {
       Taro.showModal({
         title: '提示',
@@ -193,28 +196,56 @@ export default {
       }).then(res2 => {
         Taro.hideLoading()
         if (res2.code === 0) {
-          Taro.tradePay({
-            tradeNO: res2.data.trade_no,
-            success: res3 => {
-              console.log('pay success', res3)
-              Taro.redirectTo({
-                url: `/pages/address/index?result=suc&orderNo=${this.orderNo}`
-              })
-            },
-            fail (err) {
-              console.log('pay fail', err)
-              Taro.redirectTo({
-                url: `/pages/address/index?result=fail&orderNo=${this.orderNo}`
-              })
-            }
-          })
+          if (payway === 20) {
+            this.paybyAli(res2)
+          } else if (payway === 0) {
+            this.paybyYue(res2)
+          }
         }
       })
-    }
+    },
+    paybyAli (res) {
+      if (res.code === 0) {
+        Taro.tradePay({
+          tradeNO: res.data.trade_no,
+          success: res3 => {
+            console.log('pay success', res3)
+            if (res3.resultCode === '9000') {
+              Taro.reLaunch({
+                url: `/pages/result/index?result=suc`
+              })
+            } else {
+              Taro.reLaunch({
+                url: `/pages/result/index?result=fail`
+              })
+            }
+          },
+          fail (err) {
+            console.log('pay fail', err)
+            Taro.reLaunch({
+              url: `/pages/result/index?result=fail`
+            })
+          }
+        })
+      }
+    },
+    paybyYue (res) {
+      if (res.code === 0) {
+        Taro.reLaunch({
+          url: `/pages/result/index?result=suc`
+        })
+      } else {
+        Taro.reLaunch({
+          url: `/pages/result/index?result=fail`
+        })
+      }
+    },
+  },
+  onShow () {
+    this.getData()
   },
   onLoad (options) {
     this.orderId = options.id
-    this.getData()
   }
 }
 </script>

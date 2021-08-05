@@ -258,10 +258,11 @@ div.hintTxt { font-size: 16px; margin: 10px 0; }
    margin-bottom: 40px;
 }
 .parti-item div {
-   margin: 0 16px;
+   margin: 0 10px;
    font-size: 20px;
    color: #9E9E9F;
    line-height: 30px;
+   text-align: justify;
 }
 .parti-bBorder {
    height: 1px;

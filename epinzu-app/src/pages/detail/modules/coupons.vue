@@ -6,8 +6,8 @@
       <view class="price">￥<text>{{i.money}}</text></view>
       <view class="content between">
         <view class="ml16">
-          <view class="mb4 bold">满{{i.money}}减{{i.money}}元</view>
-          <view class="f12">领劵后{{i.money}}小时内有效</view>
+          <view class="mb4 bold">{{i.title}}</view>
+          <view class="f12">领劵后{{i.expire_hour}}小时内有效</view>
         </view>
         <button class="c-btn mr8" @tap="handleGet(i.id)" v-if="i.has_nums === 0">点击领取</button>
         <button class="c-btn mr8 c-btn-disabled" disabled v-if="i.has_nums === 1">已领取</button>

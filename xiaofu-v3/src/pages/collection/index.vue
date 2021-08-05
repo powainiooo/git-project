@@ -8,12 +8,12 @@
 </style>
 
 <template>
-  <div>
+  <div style="width: 100%; overflow: hidden;">
     <c-header
       ref="header"
       @close="handleClose"
       @cityChange="cityChange" />
-    <img :src="record.image" class="banner" />
+    <img :src="record.image" mode="aspectFill" class="banner" />
     <div class="collection-page">
       <div class="c-tag">{{record.name}}</div>
       <div class="list-container">

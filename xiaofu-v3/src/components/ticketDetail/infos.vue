@@ -89,7 +89,7 @@
   <img :src="record.cover_image" mode="aspectFill" class="banner" :class="{'banner-hide': page === 'buy'}" v-if="showBanner && record" />
   <div class="line1 bBorder" :class="{'line1-move': move}">
     <div class="l">
-      <tk-info :record="infoData" :endDate="infoData2" :showEndDate="showEndDate" :ellipsis="false" />
+      <tk-info :record="infoData" :endDate="infoData2" :showEndDate="showEndDate" :ellipsis="ellipsis" />
     </div>
     <img :src="record.logo" mode="aspectFill" v-if="record" />
   </div>
@@ -128,6 +128,10 @@ export default {
     move: {
       type: Boolean,
       default: false
+    },
+    ellipsis: {
+      type: Boolean,
+      default: true
     }
   },
   components: {
@@ -141,7 +145,7 @@ export default {
       if (this.record) {
         date = this.record.start_date.split('-')
         name = this.record[this.nameKey]
-        host = this.record.organizer_name
+        host = this.record.organizer ? this.record.organizer.name : this.record.organizer_name
       }
       return {
         month: date[1],
@@ -155,7 +159,7 @@ export default {
     },
     infoData2 () {
       let date = ['', '']
-      if (this.record && this.showEndDate) {
+      if (this.record.end_date && this.showEndDate) {
         date = this.record.end_date.split('-')
       }
       return {
@@ -164,7 +168,7 @@ export default {
       }
     },
     timeStr () {
-      const time = this.record ? this.record.start_time.split(':') : ['', '']
+      const time = this.record.start_time ? this.record.start_time.split(':') : ['', '']
       return `${time[0]}:${time[1]}`
     }
   },

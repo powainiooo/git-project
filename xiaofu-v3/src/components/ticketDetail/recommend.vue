@@ -9,7 +9,7 @@
 </style>
 
 <template>
-<div style="margin-bottom: 150rpx">
+<div style="padding-bottom: 150rpx">
   <div class="c-ticket-title"><span>Recommend</span>推荐</div>
 <!--  <swiper previous-margin="25rpx" next-margin="416rpx" duration="100">-->
 <!--    <swiper-item v-for="item in list" :key="id">-->

@@ -53,7 +53,7 @@ export default {
   computed: {
     date() {
       let date = ['', '']
-      if (this.record) {
+      if (this.record.start_date) {
         date = this.record.start_date.split('-')
       }
       return {

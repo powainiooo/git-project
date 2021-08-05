@@ -18,7 +18,7 @@
   &-close
     position absolute; top 16px; right 12px; z-index 50;
   &-scrolls
-    height 100%;
+    height 100%; max-height 83vh;
   &-show
     transform translateY(0)
 </style>

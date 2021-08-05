@@ -4,7 +4,8 @@
     <view class="pr">
       <image src="@/img/bg.png" mode="widthFix" class="wp100" />
       <view class="person" :style="{'top': tH + 'px'}" @tap="login">
-        <image src="@/img/avatar.png" mode="aspectFill" />
+        <image :src="imgSrc + record.avatar" mode="aspectFill" v-if="record.avatar" />
+        <image src="@/img/avatar.png" mode="aspectFill" v-else />
         <view>
           <view class="c-fff bold" v-if="!isLogin">登录/注册</view>
           <view class="c-fff" v-else>{{record.nickname}}</view>
@@ -129,6 +130,7 @@ export default {
   },
   data () {
     return {
+      imgSrc: Taro.imgSrc,
       tH: 0,
     }
   },

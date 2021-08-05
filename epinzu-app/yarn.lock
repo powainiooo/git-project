@@ -9733,6 +9733,11 @@ value-equal@^1.0.1:
   resolved "https://registry.npm.taobao.org/value-equal/download/value-equal-1.0.1.tgz#1e0b794c734c5c0cade179c437d356d931a34d6c"
   integrity sha1-Hgt5THNMXAyt4XnEN9NW2TGjTWw=
 
+vant-aliapp@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.nlark.com/vant-aliapp/download/vant-aliapp-1.1.2.tgz#97c26029e1f8c3a3a705df979e5eb16889a40752"
+  integrity sha1-l8JgKeH4w6OnBd+Xnl6xaImkB1I=
+
 vant@^2.12.21:
   version "2.12.21"
   resolved "https://registry.nlark.com/vant/download/vant-2.12.21.tgz#a5160a1358627a7a02c5a7bb6a911bcc2c0e717e"

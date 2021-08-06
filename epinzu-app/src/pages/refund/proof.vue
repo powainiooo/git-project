@@ -38,7 +38,10 @@ export default {
       this.isAjax = true
       const params = this.$refs.form.getParams()
       params.id = this.id
-      const url = '/userapi/after/ptjr/proof'
+      let url = '/userapi/after/ptjr/proof'
+      if (this.from === 'rent') {
+        url = '/userapi/rent/back/append/proof'
+      }
       postAction(url, params).then(res => {
         if (res.code === 0) {
           Taro.showToast({

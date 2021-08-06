@@ -1,7 +1,7 @@
 <template>
   <view class="Refund">
     <!-- 标签栏 -->
-    <Tabs :list="tabs" @change="tabChange" />
+    <Tabs :list="tabs" @change="tabChange" :border="true" />
     <!-- 列表 -->
     <view class="list">
       <item v-for="item in dataSource"

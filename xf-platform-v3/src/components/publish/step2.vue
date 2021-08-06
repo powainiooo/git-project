@@ -365,7 +365,12 @@ export default {
       return params
     },
     setData (record) {
-      this.ticketList = record.price
+      const ticket = []
+      for (const i of record.price) {
+        i.check = true
+        ticket.push(i)
+      }
+      this.ticketList = ticket
       const arr = []
       for (const i of record.notice_list) {
         arr.push({

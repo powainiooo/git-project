@@ -59,7 +59,7 @@ export default {
       getAction(this.url.list, params).then(res => {
         if (res.code === 0) {
           if (this.isAttentionNone) {
-            this.dataSource2 = this.dataSource.concat(res.data.list)
+            this.dataSource2 = this.dataSource2.concat(res.data.list)
             this.ipage.loadOver = res.data.list.length < res.data.pageSize
           } else {
             this.dataSource = this.dataSource.concat(res.data.list)

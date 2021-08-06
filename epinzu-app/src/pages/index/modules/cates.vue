@@ -1,6 +1,6 @@
 <style>
 .index-navs { width: 100%; }
-.index-navs-list { display: flex; margin: 0 6px; align-items: baseline }
+.index-navs-list { display: flex; margin: 0 12px; align-items: baseline }
 .index-navs-item { padding: 0 0 16px 0; margin-right: 15px; flex: auto 0 0; font-size: 14px; color: #FFFFFF; }
 .index-navs-list .active { font-size: 18px; position: relative; }
 .index-navs-list .active:after { content: ''; width: 20px; height: 2PX; background-color: #FFFFFF; position: absolute; left: 50%; bottom: 8px; transform: translateX(-50%); }

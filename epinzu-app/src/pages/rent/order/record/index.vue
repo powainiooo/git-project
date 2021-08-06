@@ -12,7 +12,7 @@
       <view class="mb8 f12 c-666" v-for="c in item.content" :key="c">{{c}}</view>
       <view class="img-list" v-if="item.images.length > 0">
         <view class="img-item" v-for="src in item.images" :key="src">
-          <image :src="imgSrc + src" mode="widthFix" class="aspectFill" />
+          <image :src="imgSrc + src" mode="aspectFill" @tap="view(imgSrc + src)" />
         </view>
       </view>
     </view>
@@ -47,6 +47,7 @@ export default {
   data () {
     return {
       imgSrc: Taro.imgSrc,
+      disableMixinCreated: true,
       queryParams: {
         id: ''
       },
@@ -63,7 +64,15 @@ export default {
       Taro.navigateTo({
         url: `/pages/rent/message?id=${this.queryParams.id}&from=${this.from}`
       })
+    },
+    view (src) {
+      Taro.previewImage({
+        urls: [src]
+      })
     }
+  },
+  onShow () {
+    this.resetLoad()
   },
   onLoad (options) {
     this.queryParams.id = options.id

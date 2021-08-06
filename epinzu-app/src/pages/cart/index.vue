@@ -25,9 +25,9 @@
     <!-- 底部统计 -->
     <view class="Cart-footer between" v-if="selectedShop !== 0">
       <view class="ml12 bold">
-        <view class="c-FF0 f12">售价：<text class="f10">￥</text>{{selectedData.buy}}</view>
-        <view class="c-FF0 f12">租金：<text class="f10">￥</text>{{selectedData.rent}}<text class="f10">/天</text></view>
-        <view class="f12">押金：<text class="f10">￥</text>{{selectedData.deposit}}</view>
+        <view class="c-FF0 f12">售价：<text class="f10">￥</text>{{selectedData.buy.toFixed(2)}}</view>
+        <view class="c-FF0 f12">租金：<text class="f10">￥</text>{{selectedData.rent.toFixed(2)}}<text class="f10">/天</text></view>
+        <view class="f12">押金：<text class="f10">￥</text>{{selectedData.deposit.toFixed(2)}}</view>
       </view>
       <button class="c-btn mr12" @tap="toConfirm">去结算（{{selectedData.goods.length}}件）</button>
     </view>

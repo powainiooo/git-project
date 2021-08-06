@@ -4,8 +4,8 @@
     <view class="pr">
       <image src="@/img/bg.png" mode="widthFix" class="wp100" />
       <view class="person" :style="{'top': tH + 'px'}" @tap="login">
-        <image :src="imgSrc + record.avatar" mode="aspectFill" v-if="record.avatar" />
-        <image src="@/img/avatar.png" mode="aspectFill" v-else />
+        <image :src="imgSrc + record.avatar" mode="aspectFill" v-if="record.avatar" @tap="toPage('/pages/mine/setting/index')" />
+        <image src="@/img/avatar.png" mode="aspectFill" v-else @tap="toPage('/pages/mine/setting/index')" />
         <view>
           <view class="c-fff bold" v-if="!isLogin">登录/注册</view>
           <view class="c-fff" v-else>{{record.nickname}}</view>

@@ -5,11 +5,11 @@
 <template>
 <view class="Refund-item section" @tap="toDetail">
   <view class="between mb8">
-    <view class="acenter">
+    <view class="acenter" @tap.stop="toStore(record.shop_id)">
       <image :src="imgSrc + record.shop.logo" mode="aspectFill" class="avatar20 mr4" />
       <view class="c-tag c-tag-yel mr4" v-if="record.shop.type === 1">个人</view>
       <view class="c-tag c-tag-red mr4" v-if="record.shop.type === 2">企业</view>
-      <view class="mr4">{{record.shop.name}}</view>
+      <view class="mr4">{{record.shop.shop_name}}</view>
       <image src="@/img/ar1.png" mode="widthFix" class="w10" />
     </view>
     <view class="c-red f12">{{record.status_msg}}</view>
@@ -17,7 +17,7 @@
   <view class="flex mb8 goods" v-for="item in record.goods" :key="item.id">
     <image :src="imgSrc + item.goods_cover" mode="aspectFill" class="img" />
     <view class="content">
-      <view class="title">{{item.goods_name}}</view>
+      <view class="title mb4">{{item.goods_name}}</view>
       <view class="f12 c-999 mb4">{{item.goods_attr}}</view>
       <view class="between f12" v-if="item.type === 1">
         <view>押金：￥{{item.goods_deposit}} x {{item.after_nums}}</view>
@@ -95,6 +95,11 @@ export default {
     toDetail () {
       Taro.navigateTo({
         url: `/pages/refund/detail?id=${this.record.id}`
+      })
+    },
+    toStore (id) {
+      Taro.navigateTo({
+        url: `/pages/store/index?id=${id}`
       })
     }
   }

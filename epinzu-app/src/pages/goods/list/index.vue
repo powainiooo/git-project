@@ -12,7 +12,7 @@
         </button>
       </view>
       <!-- 分类列表 -->
-      <view class="pr" v-if="from === 'cate'">
+      <view class="pr" v-if="from === 'cate' && cateList.length > 1">
         <cates v-model="queryParams.cid" :list="cateList" @change="resetLoad" />
         <button class="btn-cate-more" @tap="openCate"><image src="@/img/ar2.png" mode="widthFix" class="w10" /></button>
       </view>
@@ -22,7 +22,7 @@
     <!-- 分类列表 展开 -->
     <cates2 ref="cates" v-model="queryParams.cid" :list="cateList" @change="resetLoad"  />
     <!-- 产品列表 -->
-    <view class="goods-list mt96 mb24">
+    <view class="goods-list mt52 mb24" :class="{'mt96': cateList.length > 1}">
       <view class="goods-item" v-for="item in dataSource" :key="item.id" @tap="toDetail(item.id)">
         <image :src="imgSrc + item.cover" mode="aspectFill" class="img" />
         <view class="info">

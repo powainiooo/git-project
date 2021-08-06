@@ -30,7 +30,7 @@
   <view class="c-form-imgs">
     <view class="img" v-for="(src, index) in imgs" :key="src">
       <image :src="imgSrc + src" mode="aspectFill" class="pic" />
-      <image src="@/img/close.png" mode="widthFix" class="close" @tap="del(index)" />
+      <image src="@/img/close2.png" mode="aspectFill" class="close" @tap="del(index)" />
     </view>
     <view class="c-upload" v-if="imgs.length < maxImg" @tap="selectImg">
       <image src="@/img/add2.png" mode="widthFix" class="w24 mt22 mb8" />

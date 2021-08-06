@@ -15,7 +15,7 @@
 
 <template>
 <view class="c-field">
-  <view class="c-field-name" v-if="label !== ''">{{label}}</view>
+  <view class="c-field-name" :style="{color: labelColor}" v-if="label !== ''">{{label}}</view>
   <view class="c-field-body">
     <input :type="type"
            :placeholder="placeholder"
@@ -45,6 +45,10 @@ export default {
 	  label: {
 	    type: String,
       default: ''
+    },
+	  labelColor: {
+	    type: String,
+      default: '#333333'
     },
 	  type: {
 	    type: String,

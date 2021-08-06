@@ -10,7 +10,7 @@
           <view class="f12">领劵后{{i.expire_hour}}小时内有效</view>
         </view>
         <button class="c-btn mr8" @tap="handleGet(i.id)" v-if="i.has_nums === 0">点击领取</button>
-        <button class="c-btn mr8 c-btn-disabled" disabled v-if="i.has_nums === 1">已领取</button>
+        <button class="c-btn mr8 c-btn-disabled" v-if="i.has_nums === 1">已领取</button>
       </view>
     </view>
   </view>

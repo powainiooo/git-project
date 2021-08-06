@@ -1,5 +1,6 @@
 <template>
   <view class="index">
+    <view class="mt26 ml12 mb65 f26">绑定手机号</view>
     <Field placeholder="请输入手机号" v-model="phone" />
     <Field placeholder="请输入验证码" v-model="code">
       <template #button>
@@ -7,7 +8,9 @@
       </template>
     </Field>
     <view class="ml12 mr12 mt40">
-      <button class="c-btn" :disabled="btnDisable" @tap="handleSubmit">提交</button>
+      <button class="c-btn"
+              :class="{'c-btn-disabled': btnDisable}"
+              @tap="handleSubmit">提交</button>
     </view>
   </view>
 </template>
@@ -44,6 +47,7 @@ export default {
   },
   methods: {
     handleSubmit () {
+      if (this.btnDisable) return
       if (this.isAjax) return
       const params = {
         user_id: this.$store.state.userId,

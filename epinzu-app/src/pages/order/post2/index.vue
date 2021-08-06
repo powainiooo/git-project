@@ -8,15 +8,15 @@
           <text class="c-red">{{record.kd_company}}</text>
         </view>
         <view class="ml32 between">
-          <view>快递单号：{{record.kd_no}}</view>
+          <view class="c-666">快递单号：{{record.kd_no}}</view>
           <button class="c-btn c-btn-border2 c-btn-20 w46" @tap="copy">复制</button>
         </view>
       </view>
       <view class="borderB pb8 mt8">
         <view class="flex">
-          <image src="@/img/dot.png" mode="widthFix" class="w24 mr8" />
+          <image src="@/img/dot4.png" mode="widthFix" class="w24 mr8" />
           <view style="flex: 1 0 0">
-            <view class="c-666" v-for="(item, index) in record.extra" :key="index">{{item.title}}：{{item.content}}</view>
+            <view class="c-666" v-for="(item, index) in record.extra" :key="index">{{item.title}}{{item.content}}</view>
           </view>
         </view>
       </view>

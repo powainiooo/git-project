@@ -35,7 +35,7 @@
         <span v-if="from === 'tee'">请耐心等候产品出餐，注意查看店内取餐码。或关注小程序消息通知。</span>
         <span v-else>若选择邮寄，请耐心等待发货，注意查看物流信息。选择自提，请尽快前往相应门店领取周边商品。</span>
       </p>
-      <p class="info" v-else-if="status === 'fail'">网络拥堵 或 网络异常，请点击“重新支付”，以完成订单支付。</p>
+      <p class="info" v-else-if="status === 'fail'">网络异常，请点击“重新支付”。<br/>如本单有使用积分、优惠券、礼品券，将会在2分钟后退回。</p>
       <p class="info" v-else-if="status === 'store'">目前你所在城市暂无相关门店，敬请期待。</p>
       <div class="center" v-if="status === 'store'">
         <button class="btn btn-style1" @click="toStore">选择其他城市</button>

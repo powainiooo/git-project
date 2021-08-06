@@ -1,13 +1,13 @@
 <template>
   <view class="Search ml12 mr12 ">
     <view class="mb20 pt4 pb4 between" v-if="page === 'normal'">
-      <view style="width: 314px;">
+      <view class="flex100">
         <search ref="search" placeholder="品租生活" />
       </view>
-      <view @tap="doSearch(null)">搜索</view>
+      <view @tap="doSearch(null)" class="ml8">搜索</view>
     </view>
     <view class="mb20 pt4 pb4 between" v-if="page === 'nearby'">
-      <view class="acenter nearby-info" @tap="chooseLocation">
+      <view class="acenter nearby-info" style="flex: 1 0 auto;" @tap="chooseLocation">
         <image src="@/img/dot.png" mode="widthFix" class="w20" />
         <view class="h3">{{address}}</view>
         <image src="@/img/ar1.png" mode="widthFix" class="w10" />
@@ -20,7 +20,7 @@
     <template v-if="history.length > 0">
     <view class="between">
       <view class="bold">最近搜索</view>
-      <button class="btn-del center" @tap="clearHistory"><image src="@/img/del.png" mode="widthFix" class="w16" /></button>
+      <button class="btn-del center" @tap="clearHistory" style="background-color: transparent;"><image src="@/img/del.png" mode="widthFix" class="w16" /></button>
     </view>
 
     <view class="search-list mb32">
@@ -42,8 +42,7 @@
 import Taro from '@tarojs/taro'
 import './index.styl'
 import search from '@/c/common/search'
-import { getAction } from '@/utils/api'
-import store from '../../store'
+import { getAction, postAction } from '@/utils/api'
 
 export default {
   name: 'Index',
@@ -81,6 +80,11 @@ export default {
       } else {
         this.keyword = this.$refs.search.value
       }
+      postAction('/userapi/search/history/add', {
+        word: this.keyword
+      }).then(res => {
+        console.log(res)
+      })
       this.toList()
     },
     toList () {
@@ -131,9 +135,11 @@ export default {
       })
     }
   },
+  onShow () {
+    this.getData()
+  },
   onLoad (options) {
     this.page = options.page || 'normal'
-    this.getData()
   }
 }
 </script>

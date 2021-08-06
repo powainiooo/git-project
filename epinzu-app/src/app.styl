@@ -34,11 +34,11 @@
 .c-btn-border
   background-color #FFFFFF; color #FE322B;
   &:after
-    content ''; size(200%, 200%); border 1PX solid #FE322B; border-radius 30px; transform scale(.48); transform-origin 0 0; abTL(0, 0);
+    content ''; size(200%, 200%); border 1PX solid #FE322B; border-radius 40px; transform scale(.5); transform-origin 0 0; abTL(0, 0);
 .c-btn-border2
   background-color #FFFFFF; color #333333;
   &:after
-    content ''; size(200%, 200%); border 1PX solid #999999; border-radius 30px; transform scale(.48); transform-origin 0 0; abTL(0, 0);
+    content ''; size(200%, 200%); border 1PX solid #999999; border-radius 40px; transform scale(.5); transform-origin 0 0; abTL(0, 0);
 .c-btn-20
   height 20px; line-height 20px; font-size 12px; font-weight normal;
 .c-btn-24
@@ -89,7 +89,7 @@
   &>view
     border 1PX solid #FE322B; background-color #FBEFEF; color #FE322B;
   .price
-    size(28%, 100%); font-size 18px; center(); border-right none; border-radius 4px 0 0 4px; position relative;
+    size(28%, 100%); font-size 18px; center(); align-items baseline; border-right none; border-radius 4px 0 0 4px; position relative; padding-top 10px;
     &:before
       content ''; size(6px, 6px); border-bottom 1PX solid #FE322B; border-left 1PX solid #FE322B; border-top 1PX solid #FFFFFF; border-right 1PX solid #FFFFFF; border-radius 50%; background-color #FFFFFF; abTR(-5px, -4px); transform rotateZ(-45deg);
     &:after
@@ -143,7 +143,7 @@
     .tag1
       font-size 10px; color #999999; line-height 16px; height 16px; padding 0 4px; background-color #F5F5F5; border-radius 8px 0 0 8px; margin-right -8px;
 .goods-item-hor
-  acenter(); padding 8px 12px; background-color #FFFFFF;
+  display flex; padding 8px 12px; background-color #FFFFFF;
   .img
     size(100px, 100px); margin-right 8px; border-radius 4px;
   .infos
@@ -151,7 +151,7 @@
     .title
       ellipsis()
     .company
-      width 108px; ellipsis(); font-size 12px; color #999999; margin-left 4px; margin-right 4px;
+      max-width 108px; display inline-block; ellipsis(); font-size 12px; color #999999; margin-left 4px; margin-right 4px;
 
 /* 空提示 */
 .empty

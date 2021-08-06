@@ -29,10 +29,10 @@
         <view class="ellipsis">{{item.goods_name}}</view>
       </view>
       <view class="flex pb8 borderB">
-        <image :src="imgSrc + item.goods_cover" mode="aspectFill" class="pic" />
+        <image :src="imgSrc + item.goods_cover" mode="aspectFill" class="pic" @tap="toDetail(item.goods_id)" />
         <view style="flex: 1 0 0;">
           <view class="f12 c-999 mb4">规格：{{item.goods_attr}}</view>
-          <view class="f12 c-999 mb4">{{item.rent_day_min}}天起租</view>
+          <view class="f12 c-999 mb4" v-if="item.type === 1">{{item.rent_day_min}}天起租</view>
           <view class="f12 mb4" v-if="item.type === 1" >租金：<text class="f10">￥</text>{{item.goods_price}}<text class="f10">/天</text> X {{item.buy_nums}}件</view>
           <view class="f12" v-if="item.type === 1" >押金：<text class="f10">￥</text>{{item.goods_deposit}} X {{item.buy_nums}}件</view>
           <view class="f12 mb4" v-else >售价：<text class="f10">￥</text>{{item.goods_price}}<text class="f10"></text> X {{item.buy_nums}}件</view>
@@ -159,6 +159,11 @@ export default {
     refund () {
       Taro.navigateTo({
         url: `/pages/refund/type?id=${this.orderId}`
+      })
+    },
+    toDetail (id) {
+      Taro.navigateTo({
+        url: `/pages/detail/index?id=${id}`
       })
     },
     receive () {

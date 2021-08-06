@@ -562,6 +562,10 @@ export default {
   inject: ['changePage'],
   methods: {
     handleNext () {
+      if (this.step === 1 && this.formData.longitude === '') {
+        this.$Message.warning('请点击地址输入框内的”定位“，完善定位信息')
+        return
+      }
       this.step += 1
       if (this.step === 2) {
         this.count()

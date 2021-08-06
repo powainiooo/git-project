@@ -41,6 +41,7 @@ export default {
   },
   data () {
     return {
+      disableMixinCreated: true,
       notuse: 0,
       used: 0,
       invalid: 0,
@@ -66,6 +67,9 @@ export default {
         }
       })
     }
+  },
+  onShow () {
+    this.resetLoad()
   },
   onLoad () {
     this.getCounts()

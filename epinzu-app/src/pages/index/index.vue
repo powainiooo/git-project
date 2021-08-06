@@ -37,8 +37,11 @@
     <!-- 新品动态 -->
     <news :list="newests" />
     <!-- 推荐商品 -->
-    <guess-like class="mt24" :list="dataSource">
-      <text slot="title">推荐商品</text>
+    <view class="i-title">
+      <view class="h3 acenter">推荐商品</view>
+    </view>
+    <guess-like :list="dataSource">
+      <text slot="title"></text>
     </guess-like>
 
     <!-- 底部导航 -->

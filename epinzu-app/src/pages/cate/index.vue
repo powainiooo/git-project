@@ -1,7 +1,7 @@
 <template>
   <view class="cate-container">
     <view class="cate-search">
-      <view class="ml40 mr105 pt4 pb4" :style="{'margin-top': tH + 'px'}" @tap="toSearch">
+      <view class="ml40 mr120 pt4 pb4" :style="{'margin-top': tH + 'px'}" @tap="toSearch">
         <search placeholder="搜好物，上品租" :disabled="true" />
       </view>
     </view>

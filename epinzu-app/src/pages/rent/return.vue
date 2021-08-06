@@ -2,17 +2,17 @@
   <view class="Rent container">
     <Tabs :list="tabs" :border="true" @change="tabChange" />
     <!-- 店铺信息 -->
-    <view class="section" v-if="tabKey === 'return'">
+    <view class="section2" v-if="tabKey === 'return'">
       <view class="mt8 acenter">
         <view class="w60 f12 c-999">联系人：</view>
         <view class="f12">{{address.name}} {{address.phone}}</view>
       </view>
       <view class="mt8 between mb8">
-        <view class="acenter">
+        <view class="flex flex100">
           <view class="w60 f12 c-999">商家地址：</view>
-          <view class="f12">{{address.province}}{{address.city}}{{address.address}}</view>
+          <view class="f12 flex100">{{address.fh_province}}{{address.fh_city}}{{address.fh_address}}</view>
         </view>
-        <image src="@/img/dot.png" mode="widthFix" class="w14" />
+        <image src="@/img/dot.png" mode="widthFix" class="w20 ml16" @tap="loaction" />
       </view>
     </view>
     <!-- 订单信息 -->
@@ -20,13 +20,13 @@
       <view class="goods-item-hor mt8 mb8">
         <image :src="imgSrc + goods.goods_cover" mode="aspectFill" class="img" />
         <view class="infos">
-          <view class="title ellipsis mnb4">{{goods.goods_name}}</view>
+          <view class="title ellipsis mb4">{{goods.goods_name}}</view>
           <view class="c-999 f12 mb4">{{goods.goods_attr}}</view>
           <view class="f12 mb4">数量：{{goods.buy_nums}}件</view>
         </view>
       </view>
       <view class="hr"></view>
-      <view class="mt8 mb8">订单信息</view>
+      <view class="mt8 mb8 bold">订单信息</view>
       <view class="h32 acenter f12">
         <view class="w68 c-999">支付押金:</view>
         <view><text class="f10">￥</text>{{counts.goods_deposit}}</view>
@@ -61,7 +61,7 @@
         </view>
       </picker>
     </view>
-    <Field label="快递单号" placeholder="请输入" textAlign="right" v-model="kdNo" />
+    <Field label="快递单号" placeholder="请输入" textAlign="right" labelColor="#666666" v-model="kdNo" />
     </template>
     <!-- 底部按钮 -->
     <view class="footer-container">
@@ -168,6 +168,17 @@ export default {
           })
         } else {
           this.isAjax = false
+        }
+      })
+    },
+    loaction () {
+      Taro.openLocation({
+        name: this.address.name,
+        address: `${this.address.fh_province}${this.address.fh_city}${this.address.fh_address}`,
+        latitude: Number(this.address.fh_lat),
+        longitude: Number(this.address.fh_lng),
+        success (res) {
+          console.log('openLocation', res)
         }
       })
     }

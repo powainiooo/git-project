@@ -46,7 +46,7 @@
       <view class="hint-box f12 c-999 mb8" v-if="counts.content">{{counts.content}}</view>
       <view class="img-list">
         <view class="img-item" v-for="src in counts.images" :key="src">
-          <image :src="imgSrc + src" mode="widthFix" class="aspectFill" />
+          <image :src="imgSrc + src" mode="aspectFill" />
         </view>
       </view>
     </view>

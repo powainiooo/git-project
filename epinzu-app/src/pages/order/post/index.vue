@@ -24,7 +24,7 @@
       </view>
       <view class="borderB pb8 mt8" v-if="from === 'refund'">
         <view class="flex">
-          <image src="@/img/dot.png" mode="widthFix" class="w24 mr8" />
+          <image src="@/img/dot4.png" mode="widthFix" class="w24 mr8" />
           <view class="flex100">
             <view class="c-666" v-for="item in record.extra" :key="item.key">{{item.title}}{{item.content}}</view>
           </view>

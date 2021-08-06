@@ -2,10 +2,13 @@
   <view class="Address">
     <Field label="收件人" placeholder="请填写" v-model="formData.rev_name" />
     <Field label="手机号码" placeholder="请填写" v-model="formData.rev_phone" />
-    <view @tap="choose">
-      <Field label="地址" placeholder="请填写" :readonly="true" v-model="addr1">
-        <image src="@/img/ar1.png" mode="widthFix" class="w10" slot="rightIcon" />
-      </Field>
+    <view class="h52 between borderB bg-fff" @tap="choose">
+      <view class="acenter">
+        <view class="w82 ml12 mr8">地址</view>
+        <view class="c-999" v-if="addr1 === ''">请填写</view>
+        <view class="c-333" v-else>{{addr1}}</view>
+      </view>
+      <image src="@/img/ar1.png" mode="widthFix" class="w10 mr12" slot="rightIcon" />
     </view>
     <Field label="详情地址" placeholder="请填写" v-model="formData.address" class="mb8" />
     <view class="between bg-fff">
@@ -37,7 +40,7 @@ export default {
   },
   computed: {
     addr1 () {
-      return `${this.formData.province} ${this.formData.city}`
+      return this.formData.province === '' ? '' : `${this.formData.province} ${this.formData.city}`
     }
   },
   data () {
@@ -63,7 +66,7 @@ export default {
           console.log('chooseLocation', res)
           this.formData.province = res.provinceName
           this.formData.city = res.cityName
-          this.formData.address = res.address
+          this.formData.address = res.address + res.name
           this.formData.lng = res.longitude
           this.formData.lat = res.latitude
         }

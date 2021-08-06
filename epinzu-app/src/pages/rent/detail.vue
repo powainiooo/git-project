@@ -62,7 +62,7 @@
         <button class="w74 c-btn c-btn-border c-btn-24 ml4" v-if="buttons.back === 1" @tap.stop="returnBack">归还物品</button>
         <button class="w74 c-btn c-btn-border2 c-btn-24 ml4" v-if="buttons.express === 1" @tap.stop="express">查看物流</button>
         <button class="w74 c-btn c-btn-border c-btn-24 ml4" v-if="buttons.account_confirm === 1" @tap.stop="confirm">确认账单</button>
-        <button class="w74 c-btn c-btn-border2 c-btn-24 ml4" v-if="buttons.append_proof === 1" @tap.stop="confirm">补充凭证</button>
+        <button class="w74 c-btn c-btn-border2 c-btn-24 ml4" v-if="buttons.append_proof === 1" @tap.stop="proof">补充凭证</button>
         <button class="w74 c-btn c-btn-border c-btn-24 ml4" v-if="buttons.cancel_ptjr === 1" @tap.stop="cancel">撤销介入</button>
         <button class="w74 c-btn c-btn-border2 c-btn-24 ml4" v-if="buttons.account_view === 1" @tap.stop="toBill">账单详情</button>
       </view>
@@ -79,7 +79,7 @@ import {
   RENT_BACKED,
   RENT_BREAK
 } from '@/config'
-import {getAction} from '@/utils/api'
+import { getAction, postAction } from '@/utils/api'
 
 export default {
   name: 'Index',
@@ -145,6 +145,11 @@ export default {
     confirm () {
       Taro.navigateTo({
         url: `/pages/rent/order/confirm/index?id=${this.id}`
+      })
+    },
+    proof () {
+      Taro.navigateTo({
+        url: `/pages/refund/proof?id=${this.id}&from=rent`
       })
     },
     toBill () {

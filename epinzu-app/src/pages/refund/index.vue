@@ -1,9 +1,9 @@
 <template>
   <view class="Refund">
     <!-- 标签栏 -->
-    <Tabs :list="tabs" @change="tabChange" :border="true" />
+    <Tabs :list="tabs" @change="tabChange" :border="true" :fixed="true" />
     <!-- 列表 -->
-    <view class="list">
+    <view class="list mt48">
       <item v-for="item in dataSource"
             :key="item.id"
             :record="item"

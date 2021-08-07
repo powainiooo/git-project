@@ -1,5 +1,6 @@
-page {  color: #333333; font-size: 14px; line-height: 1.42; font-family: Microsoft YaHei,tahoma,arial,Hiragino Sans GB,sans-serif; box-sizing: border-box; }
+page {  color: #333333; font-size: 14px; line-height: 1.42; font-family: Microsoft YaHei,tahoma,arial,Hiragino Sans GB,sans-serif; box-sizing: border-box; min-height: 100vh; overflow: hidden; }
 view,input { box-sizing: border-box; }
+input { font-family: Microsoft YaHei,tahoma,arial,Hiragino Sans GB,sans-serif; }
 
 button { margin: 0; padding: 0; background-color: transparent; border: none; box-sizing: border-box; }
 button:after { border: none; }

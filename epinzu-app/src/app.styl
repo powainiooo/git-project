@@ -107,6 +107,10 @@
     border-color transparent
   .price
     background-color #D5D5D5; color #FFFFFF;
+    &:before
+      border-color #FFFFFF
+    &:after
+      border-color #FFFFFF
   .content
     background-color #F5F5F5; color #999999;
 
@@ -133,11 +137,13 @@
 .goods-item
   size(170px, 270px); background-color #FFFFFF; border-radius 4px; overflow hidden;
   .img
-    size(170px, 170px)
+    size(170px, 170px); display block;
   .info
-    margin 8px;
+    padding 8px;
     .h3
       height 40px; line-height 20px; overflow hidden; text-overflow ellipsis; display -webkit-box; -webkit-line-clamp 2; -webkit-box-orient vertical;
+      .c-tag
+        vertical-align 2px;
     .price
       font-size 10px; line-height 20px; color #FE322B;
     .tag1

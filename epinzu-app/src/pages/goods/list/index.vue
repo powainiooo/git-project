@@ -30,7 +30,7 @@
             <view class="c-tag" v-if="item.how_new === 100">全新</view>
             <view class="c-tag" v-else>{{item.how_new / 10}}成新</view>
             {{item.title}}</view>
-          <view class="f10 c-999" v-if="item.type === 1">押金：￥{{item.deposit_min}}</view>
+          <view class="f10 c-999" :style="{'opacity': item.type === 1 ? '1' : '0'}">押金：￥{{item.deposit_min}}</view>
           <view class="between">
             <view class="price" v-if="item.type === 1">￥<text class="f14">{{item.price_min}}</text>/天</view>
             <view class="price" v-if="item.type === 3">￥<text class="f14">{{item.price_min}}</text></view>

@@ -10,7 +10,7 @@
       更多<image src="@/img/ar1.png" mode="widthFix" class="w10 ml4" />
     </view>
   </view>
-  <view class="ques-item borderB" v-for="(item, index) in ques" :key="index">
+  <view class="ques-item ques-item-sim borderB" v-for="(item, index) in ques" :key="index">
     <view class="l">{{item.name}}</view>
     <view class="r">{{item.value}}</view>
   </view>

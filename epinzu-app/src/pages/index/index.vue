@@ -109,6 +109,11 @@ export default {
         this.tH = res.statusBarHeight + res.titleBarHeight
       }
     })
+    // setTimeout(() => {
+    //   Taro.navigateTo({
+    //     url: '/pages/refund/proof'
+    //   })
+    // }, 1000)
   },
   methods: {
     getData () { // 获取首页数据

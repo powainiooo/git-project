@@ -1,14 +1,16 @@
 <template>
   <view class="Coupon">
     <!-- 标签栏 -->
-    <Tabs :list="tabs" :border="true" @change="tabChange" />
+    <Tabs :list="tabs" :border="true" @change="tabChange" :fixed="true" />
     <!-- 列表 -->
-    <item v-for="item in dataSource"
-          :key="item.id"
-          :record="item"
-          :status="queryParams.status" />
+    <view class="mt48">
+      <item v-for="item in dataSource"
+            :key="item.id"
+            :record="item"
+            :status="queryParams.status" />
+    </view>
     <!-- 空提示 -->
-    <view class="empty mt125" v-if="!loading && dataSource.length === 0">
+    <view class="empty mt165" v-if="!loading && dataSource.length === 0">
       <image src="@/img/coupon.png" mode="widthFix" class="img" />
       <view class="txt">没有可用的优惠券</view>
     </view>

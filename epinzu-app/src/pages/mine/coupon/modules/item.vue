@@ -13,7 +13,8 @@
     <view class="content between">
       <view class="ml16">
         <view class="mb4 bold">{{record.title}}</view>
-        <view class="f12">领券后{{record.remain_time}}内有效</view>
+        <view class="f12" v-if="status === 1">领券后{{record.remain_time}}内有效</view>
+        <view class="f12" v-else>有效期至{{record.expires_in}}</view>
       </view>
       <button class="c-btn c-btn-border mr8" v-if="status === 1" @tap="toGoods">去使用</button>
     </view>

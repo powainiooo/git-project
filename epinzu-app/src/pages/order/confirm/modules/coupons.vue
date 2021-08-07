@@ -8,7 +8,7 @@
 <template>
 <Popup :show.sync="visible" round :closeable="true" @close="handleClose">
   <view class="coupon-modal">
-    <view class="tc mt16 mb24">优惠券详情</view>
+    <view class="tc mb24 bold">优惠券详情</view>
     <view class="c-coupon-item mb16"
           :class="{'c-coupon-item-disabled': i.status === 0}"
           v-for="i in list"
@@ -16,9 +16,7 @@
           @tap="select(i)">
       <view class="price">￥<text>{{i.money}}</text></view>
       <view class="content between">
-        <view class="ml16">
-          <view class="mb4">{{i.title}}</view>
-        </view>
+        <view class="ml16">{{i.title}}</view>
         <image src="@/img/radio-check.png" mode="widthFix" class="w16 mr16" v-if="i.id === selectId" />
       </view>
     </view>

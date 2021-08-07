@@ -30,7 +30,7 @@
   <view class="c-form-imgs">
     <view class="img" v-for="(src, index) in imgs" :key="src">
       <image :src="imgSrc + src" mode="aspectFill" class="pic" />
-      <image src="@/img/close2.png" mode="aspectFill" class="close" @tap="del(index)" />
+      <image src="@/img/close2.png" mode="widthFix" class="close" @tap="del(index)" />
     </view>
     <view class="c-upload" v-if="imgs.length < maxImg" @tap="selectImg">
       <image src="@/img/add2.png" mode="widthFix" class="w24 mt22 mb8" />
@@ -84,16 +84,20 @@ export default {
     },
     selectImg () {
       chooseImage({
-        count: 1
-      }).then(res1 => {
-        console.log('chooseImage', res1)
-        upload(res1.tempFilePaths.join(',')).then(res2 => {
-          const res3 = JSON.parse(res2)
-          console.log(res3)
-          if (res3.code === 0) {
-            this.imgs.push(res3.data.url)
-          }
-        })
+        count: this.maxImg
+      }).then(res => {
+        console.log('chooseImage', res)
+        for (const path of res.tempFilePaths) {
+          this.uploadImg(path)
+        }
+      })
+    },
+    uploadImg (path) {
+      upload(path).then(res => {
+        const res2 = JSON.parse(res)
+        if (res2.code === 0) {
+          this.imgs.push(res2.data.url)
+        }
       })
     },
     getParams () {

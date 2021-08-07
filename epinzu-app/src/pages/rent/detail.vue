@@ -9,7 +9,7 @@
           <image :src="imgSrc + shop.shop_logo" />
           <text class="c-tag c-tag-yel" v-if="shop.shop_type === 1">个人</text>
           <text class="c-tag c-tag-red" v-if="shop.shop_type === 2">企业</text>
-          <text>{{shop.shop_name}}</text>
+          <text class="bold">{{shop.shop_name}}</text>
         </view>
         <view class="w70">
           <button class="c-btn c-btn-border c-btn-24" @tap="contact">联系商家</button>
@@ -37,7 +37,7 @@
         <image :src="imgSrc + goods.goods_cover" mode="aspectFill" class="img" />
         <view class="infos">
           <view class="title ellipsis mnb4">{{goods.goods_name}}</view>
-          <view class="c-999 f12 mb4">{{goods.goods_attr}}</view>
+          <view class="c-999 f12 mb4 ellipsis">{{goods.goods_attr}}</view>
           <view class="f12 mb4">租金：<text class="f10">￥</text>{{goods.goods_rent_count}}/天 X {{goods.buy_nums}}件</view>
           <view class="f12 mb4">押金：<text class="f10">￥</text>{{goods.goods_deposit_count}} X {{goods.buy_nums}}件</view>
         </view>
@@ -45,7 +45,7 @@
     </view>
     <!-- 租赁信息 -->
     <view class="section">
-      <view class="mt8 mb8">{{bList.title}}</view>
+      <view class="mt8 mb8 bold">{{bList.title}}</view>
       <view class="h32 between f12" v-for="(item, index) in bList.list" :key="index">
         <view class="acenter">
           <view class="w68 c-999">{{item.name}}:</view>
@@ -57,7 +57,7 @@
     <!-- 提示 -->
     <view class="f10 c-999 ml20 mt8">提示：当可退押金为0时，该物品的所有权就属于你了，因此无须归还</view>
     <!-- 底部按钮 -->
-    <view class="footer-container" v-if="status !== 4">
+    <view class="footer-container" v-if="showBottomBtn">
       <view class="wp100 end pr20">
         <button class="w74 c-btn c-btn-border c-btn-24 ml4" v-if="buttons.back === 1" @tap.stop="returnBack">归还物品</button>
         <button class="w74 c-btn c-btn-border2 c-btn-24 ml4" v-if="buttons.express === 1" @tap.stop="express">查看物流</button>
@@ -83,6 +83,16 @@ import { getAction, postAction } from '@/utils/api'
 
 export default {
   name: 'Index',
+  computed: {
+    showBottomBtn () {
+      for (const key in this.buttons) {
+        if (this.buttons[key] === 1) {
+          return true
+        }
+      }
+      return false
+    }
+  },
   data () {
     return {
       RENT_RENT,

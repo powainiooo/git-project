@@ -2,16 +2,18 @@
   <view class="Refund Refund-detail container">
     <!-- 状态栏 -->
     <view class="status-frame acenter">
-      <view class="flex ml12 ">
-        <image src="@/img/clock.png" mode="widthFix" class="w24" v-if="record.status_icon === 'wait'" />
-        <image src="@/img/cancel.png" mode="widthFix" class="w24" v-if="record.status_icon === 'cancel'" />
-        <image src="@/img/success.png" mode="widthFix" class="w24" v-if="record.status_icon === 'success'" />
-        <image src="@/img/transport.png" mode="widthFix" class="w24" v-if="record.status_icon === 'transport'" />
-        <view class="ml8 c-fff">
-          <view class="mb4 bold" :class="{'f18': record.status !== 9}">{{record.status_title}}</view>
+      <view class="ml12 mr12">
+        <view class="acenter mb4">
+          <image src="@/img/clock.png" mode="widthFix" class="w24" v-if="record.status_icon === 'wait'" />
+          <image src="@/img/cancel.png" mode="widthFix" class="w24" v-if="record.status_icon === 'cancel'" />
+          <image src="@/img/success.png" mode="widthFix" class="w24" v-if="record.status_icon === 'success'" />
+          <image src="@/img/transport.png" mode="widthFix" class="w24" v-if="record.status_icon === 'transport'" />
+          <view class="bold c-fff ml8" :class="{'f18': record.status !== 9}">{{record.status_title}}</view>
+        </view>
+        <view class="ml32 c-fff">
           <view class="time" v-if="record.remain_time !== 0">剩<text>{{dates.day}}</text>天<text>{{dates.hour}}</text>时<text>{{dates.min}}</text>分</view>
           <view class="f18 mb4" v-if="record.success_refund_amount">￥{{record.success_refund_amount}}</view>
-          <view>{{record.status_msg}}</view>
+          <view class="f12">{{record.status_msg}}</view>
         </view>
       </view>
     </view>
@@ -24,29 +26,29 @@
     </view>
     <!-- 寄货信息 -->
     <view class="section2 pt8 pb8 send-info" style="margin-top: 0;" v-if="showSendInfo">
-      <view class="pr"><text class="index">1</text>请你尽快寄回商品</view>
-      <view class="flex mb4" @tap="location">
+      <view class="pr mb8"><view class="index">1</view>请你尽快寄回商品</view>
+      <view class="flex mb4">
         <view style="flex: 1 0 0;" class="flex f12 c-999">
           <view>退货地址：</view>
           <view style="flex: 1 0 0;">{{record.shop_address.fh_province}}{{record.shop_address.fh_city}}{{record.shop_address.fh_address}}</view>
         </view>
-        <image src="@/img/dot.png" mode="widthFix" class="w14 ml18" />
+        <image src="@/img/dot.png" mode="widthFix" class="w20 ml18" @tap="location" />
       </view>
       <view class="mb4 f12 c-999">收件人：{{record.shop_address.fh_name}} {{record.shop_address.fh_phone}}</view>
-      <view class="mb8 f12 c-999">商家留言：{{record.shop_leave_msg}}</view>
+      <view class="mb8 f12 c-999">商家留言：{{record.shop_address.return_msg}}</view>
       <view class="end mb8">
         <button class="w70 c-btn c-btn-border2 c-btn-24" @tap="copy">复制地址</button>
       </view>
       <view class="between mb8" @tap="toSendPage">
-        <view class="pr"><text class="index">2</text>请及时发货</view>
+        <view class="pr"><view class="index">2</view>请及时发货</view>
         <image src="@/img/ar1.png" mode="widthFix" class="w10" />
       </view>
-      <view class="pr mb8"><text class="index">3</text>{{record.status_title}}</view>
+      <view class="pr mb8"><view class="index">3</view>{{record.status_title}}</view>
     </view>
     <!-- 商家留言 -->
     <view class="section2" v-if="record.shop_leave_msg">
       <view class="mt8 mb8">商家留言</view>
-      <view class="message">{{record.shop_leave_msg}}</view>
+      <view class="message mb8">{{record.shop_leave_msg}}</view>
     </view>
     <!-- 协商记录 -->
     <view class="pl12 bg-fff mt8" @tap="toRecord">
@@ -84,7 +86,7 @@
     </view>
     <!-- 订单信息 -->
     <view class="section2">
-      <view class="mt8 mb16">订单信息</view>
+      <view class="mt8 mb16 bold">订单信息</view>
       <view class="between mb16" v-for="(item, index) in record.after_list" :key="index">
         <view class="acenter f12">
           <view class="c-999 mr16">{{item.name}}:</view>
@@ -277,8 +279,8 @@ export default {
     },
     copy () {
       Taro.setClipboardData({
-        data: `${this.record.shop_address.fh_province}${this.record.shop_address.fh_city}${this.record.shop_address.fh_address}`,
-        text: `${this.record.shop_address.fh_province}${this.record.shop_address.fh_city}${this.record.shop_address.fh_address}`,
+        data: `${this.record.shop_address.fh_name}${this.record.shop_address.fh_phone}${this.record.shop_address.fh_province}${this.record.shop_address.fh_city}${this.record.shop_address.fh_address}`,
+        text: `${this.record.shop_address.fh_name}${this.record.shop_address.fh_phone}${this.record.shop_address.fh_province}${this.record.shop_address.fh_city}${this.record.shop_address.fh_address}`,
         success: res => {
           Taro.showToast({
             title: '复制成功'

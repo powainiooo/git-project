@@ -8,25 +8,27 @@
         <view class="h52 between borderB">
           <view class="c-666">快递公司</view>
           <view class="acenter">
-            <view class="c-999">{{companyName}}</view>
+            <view class="c-999" v-if="companyId === ''">{{companyName}}</view>
+            <view v-else>{{companyName}}</view>
             <image src="@/img/ar1.png" mode="widthFix" class="w10 ml4" />
           </view>
         </view>
       </picker>
     </view>
-    <Field label="快递单号" placeholder="请输入" textAlign="right" v-model="kdNo" />
+    <Field label="快递单号" labelColor="#666666" placeholder="请输入" textAlign="right" v-model="kdNo" />
 
     <Form title="退货留言"
           ref="form"
           placeholder="请你详细填写退货留言"
           class="mt8" />
     </template>
+    <!-- 自还信息 -->
     <template v-if="tabKey === 'return'">
     <view class="bg-fff ovh mt8">
       <view class="return-title">取件码</view>
       <view class="f22 c-red tc mb16">{{code}}</view>
       <view class="hr"></view>
-      <view class="mt8 mb8 ml12 mr12 f12 c-999">
+      <view class="mt8 mb8 ml12 mr12 f12 c-666">
         <view class="c-333 mb8">提示</view>
         <view class="mb4">1、上门自还前请先跟商家协商好，并约定好上门时间，以免白跑一趟</view>
         <view>2、送货上门后，要求商家输入取件码完成取件，证明你已归还货物，如若逾期未归还系统将自动取消售后</view>
@@ -34,16 +36,16 @@
     </view>
 
     <view class="section2 pt8 pb8 send-info">
-      <view class="pr">商家信息</view>
-      <view class="flex mb4" @tap="location">
-        <view style="flex: 1 0 0;" class="flex f12 c-999">
+      <view class="pr mb8">商家信息</view>
+      <view class="flex mb4">
+        <view style="flex: 1 0 0;" class="flex f12 c-666">
           <view>退货地址：</view>
           <view style="flex: 1 0 0;">{{address.province}}{{address.city}}{{address.address}}</view>
         </view>
-        <image src="@/img/dot.png" mode="widthFix" class="w14 ml18" />
+        <image src="@/img/dot.png" mode="widthFix" class="w20 ml18" @tap="location" />
       </view>
-      <view class="mb4 f12 c-999">收件人：{{address.name}} {{address.phone}}</view>
-      <view class="mb8 f12 c-999">商家留言：--</view>
+      <view class="mb4 f12 c-666">收件人：{{address.name}} {{address.phone}}</view>
+      <view class="mb8 f12 c-666">商家留言：{{address.return_msg}}</view>
     </view>
     </template>
     <!-- 底部按钮 -->
@@ -162,8 +164,8 @@ export default {
     },
     location () {
       Taro.openLocation({
-        name: this.address.fh_name,
-        address: `${this.address.fh_province}${this.address.fh_city}${this.address.fh_address}`,
+        name: this.address.name,
+        address: `${this.address.province}${this.address.city}${this.address.address}`,
         latitude: Number(this.address.lat),
         longitude: Number(this.address.lng),
         success (res) {

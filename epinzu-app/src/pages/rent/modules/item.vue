@@ -8,7 +8,7 @@
     <image :src="imgSrc + record.shop_logo" class=" mr4" />
     <view class="c-tag c-tag-yel mr4" v-if="record.shop_type === 1">个人</view>
     <view class="c-tag c-tag-red mr4" v-if="record.shop_type === 2">企业</view>
-    <text>{{record.shop_name}}</text>
+    <text class="bold">{{record.shop_name}}</text>
   </view>
   <!-- 租用中 -->
   <view class="item borderB" v-for="item in record.goods" :key="item.id">
@@ -19,7 +19,7 @@
           <view class="title ellipsis mnb4">{{item.goods_name}}</view>
           <view class="f12 c-red" v-if="item.status_msg">{{item.status_msg}}</view>
         </view>
-        <view class="c-999 f12 mb4">{{item.goods_attr}}</view>
+        <view class="c-999 f12 mb4 ellipsis">{{item.goods_attr}}</view>
         <view class="f12 mb4">租金：<text class="f10">￥</text>{{item.goods_rent}}/天 X {{item.buy_nums}}件</view>
         <view class="f12 mb4">押金：<text class="f10">￥</text>{{item.goods_deposit}} X {{item.buy_nums}}件</view>
       </view>

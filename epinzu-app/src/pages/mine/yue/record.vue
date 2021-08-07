@@ -1,6 +1,6 @@
 <template>
   <view class="Yue">
-    <view class="section2" style="padding-right: 0; margin-top: 0;">
+    <view class="section2" style=" margin-top: 0;">
       <view class="record-table">
         <view class="thead">
           <view>提现金额</view>

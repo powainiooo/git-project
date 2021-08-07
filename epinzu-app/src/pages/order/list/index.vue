@@ -1,13 +1,13 @@
 <template>
   <view class="Order-list">
-    <Tabs :value="queryParams.status" :list="tabs" :border="true" @change="tabChange" />
+    <Tabs :value="queryParams.status" :list="tabs" :border="true" :fixed="true" @change="tabChange" />
     <!-- 空提示 -->
-    <view class="empty mt125" v-if="!loading && dataSource.length === 0">
+    <view class="empty mt165" v-if="!loading && dataSource.length === 0">
       <image src="@/img/order.png" mode="widthFix" class="img" />
       <view class="txt">您还没有相关的订单</view>
     </view>
     <!-- 列表 -->
-    <view class="ml12 mr12 mt8 mb8">
+    <view class="ml12 mr12 mt48 mb8">
       <item v-for="item in dataSource"
             :key="item.id"
             :record="item"

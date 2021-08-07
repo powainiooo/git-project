@@ -21,13 +21,13 @@
         <view class="acenter mb8">
           <image src="@/img/icon-rent.png" mode="widthFix" class="w16 mr8" v-if="item.type === 1" />
           <image src="@/img/icon-buy.png" mode="widthFix" class="w16 mr8" v-if="item.type === 3" />
-          <view>{{item.title}}</view>
+          <view class="ellipsis">{{item.title}}</view>
         </view>
         <view class="goods-item-hor">
           <image :src="imgSrc + item.attrs.cover" mode="aspectFill" class="img" />
           <view class="infos">
             <view class="c-999 f12 mb4">规格：{{item.attrs.attr_name}}</view>
-            <view class="c-999 f12 mb4">{{item.attrs.rent_days}}天起租</view>
+            <view class="c-999 f12 mb4" v-if="item.type === 1">{{item.attrs.rent_days}}天起租</view>
             <view class="f12 mb4 bold" v-if="item.type === 1">租金：<text class="f10">￥</text>{{item.attrs.price}}/天 X {{item.buy_nums}}件</view>
             <view class="f12 mb4 bold" v-if="item.type === 1">押金：<text class="f10">￥</text>{{item.attrs.deposit}} X {{item.buy_nums}}件</view>
             <view class="f12 mb4 bold" v-if="item.type === 3">售价：<text class="f10">￥</text>{{item.attrs.price}} X {{item.buy_nums}}件</view>
@@ -144,7 +144,7 @@ export default {
       count: {},
       coupons: [],
       couponNums: 0,
-      counponName: '请选择',
+      counponName: '有可用',
       goods: [],
       remark: '',
       from: 1,

@@ -50,9 +50,14 @@
       &>.l
         width 70px; color #999999; margin-right 24px;
       &>.r
-        flex 1 0 0; ellipsis()
+        flex 1 0 0;
       &:last-child:after
         height 0
+    .ques-item-sim
+      &>.l
+        ellipsis()
+      &>.r
+        ellipsis()
   &-details
     margin 0 -12px;
     image
@@ -78,7 +83,7 @@
     .img
       size(85px, 85px); border-radius 4px;
     .cate-item
-      center(); text-align center; max-width 100%; min-width 56px; height 23px; padding 0 10px; background-color #F5F5F5; border-radius 12px; font-size 12px; margin-right 4px; ellipsis(); margin-bottom 8px;
+      display inline-block; text-align center; max-width 100%; min-width 56px; height 23px; line-height 23px; padding 0 10px; background-color #F5F5F5; border-radius 12px; font-size 12px; margin-right 4px; ellipsis(); margin-bottom 8px;
     .cate-item-disabled
       color #D5D5D5
     .cate-item-active

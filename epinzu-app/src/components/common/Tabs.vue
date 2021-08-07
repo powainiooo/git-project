@@ -10,10 +10,16 @@
 .c-tabs-border
   .c-tabs-active:after
     content ''; width 24px; height 2px; background-color #FE322B; position absolute; bottom 0; left 50%; transform translateX(-50%);
+.c-tabs-fixed
+  position fixed; top 0; left 0; z-index 1000;
 </style>
 
 <template>
-<view class="c-tabs" :class="{'c-tabs-border': border}">
+<view class="c-tabs"
+      :class="{
+  'c-tabs-border': border,
+  'c-tabs-fixed': fixed
+}">
   <view class="c-tabs-item"
         :class="{'c-tabs-active': current === tab.key}"
         v-for="(tab, index) in tabs"
@@ -42,6 +48,10 @@ export default {
       type: Boolean,
       default: false
     },
+    fixed: {
+	    type: Boolean,
+      default: false
+    }
   },
   watch: {
 	  list: {

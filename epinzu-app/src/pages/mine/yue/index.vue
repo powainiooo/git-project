@@ -26,7 +26,8 @@
           <view class="f10 c-999">{{item.created_at}}</view>
         </view>
         <view class="tr">
-          <view class="f12 c-red">{{item.money}}</view>
+          <view class="f12 c-red" v-if="item.money > 0">+{{item.money}}</view>
+          <view class="f12" v-else>{{item.money}}</view>
           <view class="f10 c-999"><text class="f8">￥</text>{{item.remain}}</view>
         </view>
       </view>

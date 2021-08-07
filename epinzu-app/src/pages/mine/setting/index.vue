@@ -8,11 +8,13 @@
           <image src="@/img/ar1.png" mode="widthFix" class="w10 mr12" />
         </view>
       </view>
-      <Cell title="我的昵称"
-            :value="record.nickname"
-            color="#999999"
-            isLink
-            @tap="toPage('/pages/mine/nickname/index?name=' + record.nickname)" />
+      <view class="h52 between borderB" @tap="toPage('/pages/mine/nickname/index?name=' + record.nickname)">
+        <view>我的昵称</view>
+        <view class="acenter">
+          <text class="c-999 mr8">{{record.nickname}}</text>
+          <image src="@/img/ar1.png" mode="widthFix" class="w10 mr12" />
+        </view>
+      </view>
       <Cell title="账号与安全"
             isLink
             @tap="toPage('/pages/mine/account/index?')" />

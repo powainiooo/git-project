@@ -1,12 +1,12 @@
 <template>
   <view class="Rent">
-    <Tabs :list="tabs" :border="true" @change="tabChange" />
+    <Tabs :list="tabs" :border="true" :fixed="true" @change="tabChange" />
     <!-- 空提示 -->
-    <view class="empty mt125" v-if="!loading && dataSource.length === 0">
+    <view class="empty mt165" v-if="!loading && dataSource.length === 0">
       <image src="@/img/order.png" mode="widthFix" class="img" />
       <view class="txt">您还没有相关的订单</view>
     </view>
-    <view class="mb8">
+    <view class="mb8 mt48">
       <item v-for="item in dataSource"
             :key="item.id"
             :status="queryParams.status"

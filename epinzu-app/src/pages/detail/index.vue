@@ -346,8 +346,17 @@ export default {
     }
   },
   onShareAppMessage () {
+    let desc
+    if (this.record.type === 1) {
+      desc = `租金：${this.record.price_min}/天，押金：${this.record.deposit_min}元，`
+    } else {
+      desc = `售价：${this.record.price_min}，`
+    }
+    desc += '有更多五金工具、平板、电脑、手机、打印机、复印机、投影仪等欢迎你租用http://www.dev.epinzu.com'
     return {
       title: this.record.title,
+      desc,
+      imageUrl: '/static/img/logo.png',
       path: `/pages/detail/index?id=${this.queryParams.goods_id}`
     }
   },

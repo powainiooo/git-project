@@ -64,11 +64,13 @@ export default {
     }
   },
   computed: {
+    cityData () {
+      return store.state.configData.citydata || []
+    },
     addrList () {
-      const cities = store.state.configData.citydata || []
       return [
         { id: '', name: '全部' },
-        ...cities
+        ...this.cityData
       ]
     }
   },
@@ -207,6 +209,36 @@ export default {
       mpvue.navigateTo({
         url: '/pages/leesStar/main'
       })
+    },
+    setDefaultCity (data) {
+      this.cityId = data.id
+      this.cityName = data.name
+    },
+    setCity (city) {
+      console.log('setCity1', city)
+      const item = this.cityData.find(i => {
+        const reg = new RegExp(i.name)
+        if (reg.test(city)) {
+          return i
+        }
+      })
+      console.log('setCity2', item)
+      if (item !== undefined && item.id !== this.cityId) {
+        mpvue.showModal({
+          content: '是否切换到 ' + city,
+          success: res => {
+            if (res.confirm) { // 点击确定
+              this.cityId = item.id
+              this.cityName = item.name
+              wx.setStorage({
+                key: 'lastCityData',
+                data: item
+              })
+              this.$emit('cityChange', item.id)
+            }
+          }
+        })
+      }
     }
   }
 }

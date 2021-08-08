@@ -2,7 +2,7 @@
 <Popup :show.sync="visible" round :closeable="true">
   <view class="Detail-buys">
     <view class="flex pb16 borderB">
-      <image :src="imgCover" mode="aspectFill" class="img" />
+      <image :src="imgCover" mode="aspectFill" class="img" @tap="openPreview" />
       <view class="ml8" v-if="record.type === 1" style="flex: 1 0 0;">
         <view class="c-red f12 mb4">租金：￥<text class="f18">{{selected.price}}</text>/天</view>
         <view class="acenter">
@@ -36,6 +36,8 @@
       <stepper v-model="num" :max="selected.store_nums || 100" />
     </view>
 
+    <view style="height: 200px;"></view>
+
     <view class="footer-container">
       <view class="c-btn-group ml12 mr12">
         <button class="c-btn" style="background-color: #FC7F1B;" @tap="addCart">加入购物车</button>
@@ -67,6 +69,13 @@ export default {
   computed: {
 	  attrs () {
 	    return this.record.attrs || []
+    },
+    attrImgs () {
+	    const list = []
+      for (const i of this.attrs) {
+        list.push(`${this.imgSrc}${i.cover}`)
+      }
+      return list
     },
 	  selected () {
       const item = this.attrs.find(i => i.id === this.attrId)
@@ -148,6 +157,12 @@ export default {
       this.$store.commit('SET_ORDERGOODS', this.getParams())
       Taro.navigateTo({
         url: '/pages/order/confirm/index'
+      })
+    },
+    openPreview () {
+	    Taro.previewImage({
+        urls: this.attrImgs,
+        current: this.imgCover
       })
     }
   }

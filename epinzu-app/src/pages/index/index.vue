@@ -2,6 +2,7 @@
   <view class="container index-container">
     <!-- 轮播图 -->
     <banner :list="banners" :guide="guide" v-if="page === 'index'" />
+
     <!-- 顶部栏 -->
     <view class="i-header"
           :class="{'i-header-anti': isAnti}"
@@ -54,6 +55,7 @@ import Taro from '@tarojs/taro'
 import './index.styl'
 import search from '@/c/common/search'
 import cFooter from '@/c/common/footer'
+import Popup from '@/c/common/Popup'
 import banner from './modules/banner'
 import cates from './modules/cates'
 import navs from './modules/navs'
@@ -67,6 +69,7 @@ export default {
   name: 'Index',
   mixins: [pageMixin],
   components: {
+    Popup,
     banner,
     cFooter,
     search,
@@ -79,6 +82,7 @@ export default {
   data () {
     return {
       imgSrc: Taro.imgSrc,
+      visible: false,
       tH: 0,
       bannerColor: 'transparent',
       isAnti: false,
@@ -109,11 +113,12 @@ export default {
         this.tH = res.statusBarHeight + res.titleBarHeight
       }
     })
-    // setTimeout(() => {
-    //   Taro.navigateTo({
-    //     url: '/pages/refund/proof'
-    //   })
-    // }, 1000)
+    setTimeout(() => {
+      // Taro.navigateTo({
+      //   url: '/pages/refund/proof'
+      // })
+      this.visible = true
+    }, 1000)
   },
   methods: {
     getData () { // 获取首页数据

@@ -24,7 +24,7 @@
 </style>
 
 <template>
-<view class="c-popup" v-if="show" catchMove>
+<view class="c-popup" v-if="show" catchMove @touchmove="tm">
   <view class="overlay"
         :class="{'overlay-show': showItem}"
         @transitionend="onTransitionEnd"

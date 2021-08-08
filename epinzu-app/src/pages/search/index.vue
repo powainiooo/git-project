@@ -80,9 +80,15 @@ export default {
       } else {
         this.keyword = this.$refs.search.value
       }
-      postAction('/userapi/search/history/add', {
+      const params = {
         word: this.keyword
-      }).then(res => {
+      }
+      let url = '/userapi/search/history/add'
+      if (this.page === 'nearby') {
+        url = '/userapi/nearby/search'
+        // params.
+      }
+      postAction(url, params).then(res => {
         console.log(res)
       })
       this.toList()
@@ -129,6 +135,10 @@ export default {
               this.lng = loc.longitude
               this.lat = loc.latitude
               this.address = res.name
+              Taro.setStorage({
+                key: 'searchData',
+                data: res
+              })
             }
           })
         }
@@ -137,6 +147,21 @@ export default {
   },
   onShow () {
     this.getData()
+    Taro.getStorage({
+      key: 'searchData',
+      success: res => {
+        console.log('searchKey suc', res)
+        if (res) {
+          this.address = res.data.name
+          this.lng = res.data.longitude
+          this.lat = res.data.latitude
+          this.$store.commit('SET_LNGLAT', {
+            lat: res.data.latitude,
+            lng: res.data.longitude,
+          })
+        }
+      }
+    })
   },
   onLoad (options) {
     this.page = options.page || 'normal'

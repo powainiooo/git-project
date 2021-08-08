@@ -73,7 +73,10 @@ import cTicket from './modules/ticket'
 import cAds from './modules/ads'
 import { postAction } from '@/utils/api'
 import store from '@/store'
-
+import QQMapWX from '@/utils/qqmap-wx-jssdk.min.js'
+const qMap = new QQMapWX({
+  key: 'AH7BZ-VV736-WNUSA-EP35M-3TCOZ-DTBXG'
+})
 export default {
   components: {
     cHeader,
@@ -175,6 +178,35 @@ export default {
       this.cityId = id
       this.listData = []
       this.getData()
+    },
+    initCity () {
+      const _this = this
+      const cityData = wx.getStorageSync('lastCityData')
+      if (cityData) {
+        _this.cityId = cityData.id
+      }
+      mpvue.getLocation({
+        success (res) {
+          console.log('getLocation', res)
+          qMap.reverseGeocoder({
+            location: {
+              latitude: res.latitude,
+              longitude: res.longitude
+            },
+            success (res2) {
+              console.log('reverseGeocoder', res2)
+              const city = res2.result.address_component.city
+              if (cityData) {
+                _this.$refs.header.setDefaultCity(cityData)
+              }
+              _this.$refs.header.setCity(city)
+            },
+            fail (err) {
+              console.log('reverseGeocoder fail', err)
+            }
+          })
+        }
+      })
     }
   },
   onReachBottom () {
@@ -193,6 +225,7 @@ export default {
     console.log('options index', options)
     this.page = 1
     this.listData = []
+    this.initCity()
     this.getData()
     if (options.from === 'order') {
       setTimeout(() => {

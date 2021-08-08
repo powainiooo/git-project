@@ -64,6 +64,7 @@ export default {
       Taro.chooseLocation({
         success: res => {
           console.log('chooseLocation', res)
+          res.address = res.address.replace(res.cityName, '')
           this.formData.province = res.provinceName
           this.formData.city = res.cityName
           this.formData.address = res.address + res.name

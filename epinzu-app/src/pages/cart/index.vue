@@ -15,7 +15,7 @@
             :key="item.shop_id">
         <cart-item :record="item"
                    :shopId="selectedShop"
-                   @refresh="getCartData"
+                   @refresh="refresh"
                    @change="cartChange" />
       </view>
     </view>
@@ -75,6 +75,12 @@ export default {
           this.cartData = res.data
         }
       })
+    },
+    refresh (shopId) {
+      if (this.selectedShop === shopId) {
+        this.selectedShop = 0
+      }
+      this.getCartData()
     },
     cartChange (data) {
       console.log('cartChange', data)

@@ -91,7 +91,7 @@
       <!-- 导航 -->
       <view class="section" style="padding-right: 0">
         <Cell title="收货地址" isLink @tap="toPage('/pages/address/index')" />
-        <Cell title="常见问题" isLink @tap="toPage('/pages/question/index?source=common')" />
+        <Cell title="常见问题" isLink @tap="toPageNone('/pages/question/index?source=common')" />
         <view @tap="phoneCall" class="borderB">
           <Cell title="联系客服">
             <text class="c-red mr8" slot="value">400-9606683</text>
@@ -153,6 +153,11 @@ export default {
         Taro.navigateTo({
           url
         })
+      })
+    },
+    toPageNone (url) {
+      Taro.navigateTo({
+        url
       })
     },
     // 打电话

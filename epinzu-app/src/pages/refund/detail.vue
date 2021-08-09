@@ -132,10 +132,10 @@ export default {
       const perDay = 24 * 60 * 60
       const perHour = 60 * 60
       const perMin = 60
-      const min = remain > 60 ? parseInt(remain / perMin) : 1
+      const min = remain > 60 ? parseInt((remain % perHour) / perMin) : 1
       return {
         day: parseInt(remain / perDay),
-        hour: parseInt(remain / perHour),
+        hour: parseInt((remain % perDay) / perHour),
         min
       }
     },

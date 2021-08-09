@@ -1,4 +1,4 @@
 export default {
   navigationBarTitleText: '品租',
-  backgroundColor: '#FFFFFE'
+  backgroundColor: '#F5F5F5'
 }

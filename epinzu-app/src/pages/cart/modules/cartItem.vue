@@ -107,7 +107,7 @@ export default {
         ids: this.ids
       }).then(res => {
         if (res.code === 0) {
-          this.$emit('refresh')
+          this.$emit('refresh', this.record.shop_id)
         }
       })
     },

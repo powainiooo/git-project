@@ -55,7 +55,8 @@
         <view class="h52 between borderB">
           <view class="c-666">快递公司</view>
           <view class="acenter">
-            <view class="c-999">{{companyName}}</view>
+            <view class="c-999" v-if="companyId === ''">{{companyName}}</view>
+            <view v-else>{{companyName}}</view>
             <image src="@/img/ar1.png" mode="widthFix" class="w10 ml4" />
           </view>
         </view>

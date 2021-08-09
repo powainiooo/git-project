@@ -8,18 +8,18 @@
           <text class="c-red">{{record.kd_company}}</text>
         </view>
         <view class="ml32 between">
-          <view>快递单号：{{record.kd_no}}</view>
+          <view class="c-666">快递单号：{{record.kd_no}}</view>
           <button class="c-btn c-btn-border2 c-btn-20 w46" @tap="copy">复制</button>
         </view>
       </view>
       <view class="borderB pb8 mt8" v-if="from === 'order'">
         <view class="acenter">
-          <image src="@/img/dot.png" mode="widthFix" class="w24 mr8" />
+          <image src="@/img/dot4.png" mode="widthFix" class="w24 mr8" />
           <text class="c-666">订单编号：{{record.order_no}}</text>
         </view>
         <view class="ml32 flex">
           <view>收货地址：</view>
-          <view style="flex: 1 0 0">{{record.rev_address}}</view>
+          <view style="flex: 1 0 0" class="c-666">{{record.rev_address}}</view>
         </view>
       </view>
       <view class="borderB pb8 mt8" v-if="from === 'refund'">

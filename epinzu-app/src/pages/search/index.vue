@@ -88,9 +88,11 @@ export default {
         url = '/userapi/nearby/search'
         // params.
       }
-      postAction(url, params).then(res => {
-        console.log(res)
-      })
+      if (this.isLogin) {
+        postAction(url, params).then(res => {
+          console.log(res)
+        })
+      }
       this.toList()
     },
     toList () {

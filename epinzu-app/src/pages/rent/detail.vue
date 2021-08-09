@@ -28,7 +28,7 @@
           <view class="w60 f12 c-999">商家地址：</view>
           <view class="f12" style="flex: 1 0 0;">{{address.province}}{{address.city}}{{address.address}}</view>
         </view>
-        <image src="@/img/dot.png" mode="widthFix" class="w20" />
+        <image src="@/img/dot.png" mode="widthFix" class="w20 ml18" @tap="location" />
       </view>
     </view>
     <!-- 产品信息 -->
@@ -186,7 +186,18 @@ export default {
           }
         }
       })
-    }
+    },
+    location () {
+      Taro.openLocation({
+        name: this.address.name,
+        address: `${this.address.province}${this.address.city}${this.address.address}`,
+        latitude: Number(this.address.lat),
+        longitude: Number(this.address.lng),
+        success (res) {
+          console.log('openLocation', res)
+        }
+      })
+    },
   },
   onShow () {
     this.getData()

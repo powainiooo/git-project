@@ -63,7 +63,7 @@ export default {
     },
     goBack () {
       Taro.navigateBack({
-        delta: 1
+        delta: 2
       })
     },
     getReason () {

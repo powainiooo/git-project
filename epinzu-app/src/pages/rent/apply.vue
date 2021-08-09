@@ -45,7 +45,7 @@ export default {
             title: res.msg
           })
           Taro.navigateBack({
-            delta: 1
+            delta: this.from === 'rent' ? 2 : 1
           })
         } else {
           this.isAjax = false

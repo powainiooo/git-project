@@ -17,26 +17,28 @@
       </view>
     </view>
     <view class="mt16 mb16">规格</view>
-    <view class="flex wrap mb26">
-      <view class="cate-item"
-            :class="{
+    <scroll-view :scrollY="true" class="scrolls2">
+      <view class="flex wrap mb26">
+        <view class="cate-item"
+              :class="{
               'cate-item-active': attrId === item.id,
               'cate-item-disabled': item.store_nums === 0
             }"
-            v-for="item in attrs"
-            :key="item.id"
-            @tap="selectAttr(item)">{{item.attr_name}}</view>
-    </view>
-
-    <view class="between">
-      <view class="acenter">
-        <view>数量</view>
-        <view class="f12 c-999 ml16" v-if="selected.store_nums !== undefined">库存{{selected.store_nums}}件</view>
+              v-for="item in attrs"
+              :key="item.id"
+              @tap="selectAttr(item)">{{item.attr_name}}</view>
       </view>
-      <stepper v-model="num" :max="selected.store_nums || 100" />
-    </view>
 
-    <view style="height: 200px;"></view>
+      <view class="between">
+        <view class="acenter">
+          <view>数量</view>
+          <view class="f12 c-999 ml16" v-if="selected.store_nums !== undefined">库存{{selected.store_nums}}件</view>
+        </view>
+        <stepper v-model="num" :max="selected.store_nums || 100" />
+      </view>
+
+      <view style="height: 200px;"></view>
+    </scroll-view>
 
     <view class="footer-container">
       <view class="c-btn-group ml12 mr12">
@@ -162,7 +164,16 @@ export default {
     openPreview () {
 	    Taro.previewImage({
         urls: this.attrImgs,
-        current: this.imgCover
+        current: this.imgCover,
+        success: res => {
+          console.log('previewImage suc', res)
+        },
+        fail: res => {
+          console.log('previewImage fail', res)
+        },
+        complete: res => {
+          console.log('previewImage complete', res)
+        }
       })
     }
   }

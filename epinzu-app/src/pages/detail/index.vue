@@ -56,7 +56,7 @@
           <image src="@/img/store.png" mode="aspectFit" />
           <view>店铺</view>
         </button>
-        <button class="btn" open-type="contact">
+        <button class="btn" @tap="openSevice">
           <image src="@/img/service.png" mode="aspectFit" />
           <view>客服</view>
         </button>
@@ -122,6 +122,7 @@ export default {
   mixins: [pageMixin],
   data () {
     return {
+      imgSrc: Taro.imgSrc,
       queryParams: {
         goods_id: ''
       },
@@ -305,6 +306,14 @@ export default {
         })
       })
     },
+    // 打开客服
+    openSevice () {
+      intercept(() => {
+        Taro.showToast({
+          title: '打开客服'
+        })
+      })
+    },
     // 判断是否收藏商品
     getCollectionStatus () {
       getAction('/userapi/user/collection', {
@@ -357,6 +366,7 @@ export default {
       title: this.record.title,
       desc,
       imageUrl: '/static/img/logo.png',
+      bgImgUrl: `${this.imgSrc}${this.banners[0]}`,
       path: `/pages/detail/index?id=${this.queryParams.goods_id}`
     }
   },

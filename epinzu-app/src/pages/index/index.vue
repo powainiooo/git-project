@@ -55,7 +55,6 @@ import Taro from '@tarojs/taro'
 import './index.styl'
 import search from '@/c/common/search'
 import cFooter from '@/c/common/footer'
-import Popup from '@/c/common/Popup'
 import banner from './modules/banner'
 import cates from './modules/cates'
 import navs from './modules/navs'
@@ -69,7 +68,6 @@ export default {
   name: 'Index',
   mixins: [pageMixin],
   components: {
-    Popup,
     banner,
     cFooter,
     search,
@@ -84,6 +82,7 @@ export default {
       imgSrc: Taro.imgSrc,
       visible: false,
       tH: 0,
+      tbH: 0,
       bannerColor: 'transparent',
       isAnti: false,
       currentCate: {
@@ -111,6 +110,7 @@ export default {
       success: res => {
         console.log('getSystemInfo', res)
         this.tH = res.statusBarHeight + res.titleBarHeight
+        this.tbH = res.titleBarHeight
       }
     })
     setTimeout(() => {

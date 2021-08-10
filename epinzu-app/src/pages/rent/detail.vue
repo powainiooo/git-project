@@ -24,7 +24,7 @@
         <view class="f12">{{address.name}} {{address.phone}}</view>
       </view>
       <view class="mt8 between mb8">
-        <view class="flex">
+        <view class="flex flex100">
           <view class="w60 f12 c-999">商家地址：</view>
           <view class="f12" style="flex: 1 0 0;">{{address.province}}{{address.city}}{{address.address}}</view>
         </view>

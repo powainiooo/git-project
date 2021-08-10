@@ -55,7 +55,9 @@ export default {
           Taro.showToast({
             title: res.msg
           })
-          this.goBack()
+          Taro.redirectTo({
+            url: `/pages/rent/detail?id=${this.id}`
+          })
         } else {
           this.isAjax = false
         }

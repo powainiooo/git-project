@@ -361,11 +361,11 @@ export default {
     } else {
       desc = `售价：${this.record.price_min}，`
     }
-    desc += '有更多五金工具、平板、电脑、手机、打印机、复印机、投影仪等欢迎你租用http://www.dev.epinzu.com'
+    desc += '有更多五金工具、平板、电脑、手机、打印机、复印机、投影仪等欢迎你租用。'
     return {
       title: this.record.title,
       desc,
-      imageUrl: '/static/img/logo.png',
+      imageUrl: `${this.imgSrc}${this.record.cover}`,
       bgImgUrl: `${this.imgSrc}${this.banners[0]}`,
       path: `/pages/detail/index?id=${this.queryParams.goods_id}`
     }

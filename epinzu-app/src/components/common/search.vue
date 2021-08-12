@@ -6,11 +6,13 @@
 
 <template>
 <view class="c-search">
-  <image src="@/img/ico-search.png" mode="widthFix" class="icon" />
+  <image src="@/img/ico-search.png" mode="widthFix" class="icon" @tap="confirm" />
   <input :placeholder="placeholder"
          :disabled="disabled"
          :style="{backgroundColor: backgroundColor}"
          v-model="value"
+         type="text"
+         confirmType="search"
          confirm-type="search"
          @confirm="confirm" />
 </view>
@@ -40,6 +42,7 @@ export default {
 	},
 	methods: {
     confirm () {
+      console.log('confirm')
       this.$emit('confirm', this.value)
     },
     setDefault (txt) {

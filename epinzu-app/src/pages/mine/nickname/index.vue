@@ -1,7 +1,7 @@
 <template>
   <view class="Setting">
     <view class="bg-fff h52 between">
-      <input v-model="name" confirm-type="done" maxlength="10" @confirm="handleSubmit" class="ml12 f14" />
+      <input v-model="name" confirm-type="done" maxlength="10" @confirm="handleSubmit" class="ml12 f14 wp70" />
       <image src="@/img/close.png" mode="widthFix" class="w20 mr12" @tap="name = ''" />
     </view>
     <view class="f12 c-999 mt8 ml12">支持1到10个字，可由中英文、数字、“-”，“_”组成</view>

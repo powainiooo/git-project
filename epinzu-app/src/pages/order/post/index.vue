@@ -18,7 +18,7 @@
           <text class="c-666">订单编号：{{record.order_no}}</text>
         </view>
         <view class="ml32 flex">
-          <view>收货地址：</view>
+          <view class="c-666">收货地址：</view>
           <view style="flex: 1 0 0" class="c-666">{{record.rev_address}}</view>
         </view>
       </view>

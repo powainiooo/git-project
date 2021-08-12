@@ -7,18 +7,18 @@
       :class="{'item-box-show': showDel}"
       @touchstart="ts"
       @touchend="te">
-  <view class="item borderB">
+  <view class="item borderB" @tap="toDetail">
     <view class="infos">
       <view class="between mb4">
-        <view>在线客服1</view>
-        <view class="f10 c-999">刚刚</view>
+        <view class="bold">{{record.title}}</view>
+        <view class="f10 c-999">{{record.created_at}}</view>
       </view>
       <view class="between">
         <view class="acenter">
-          <view class="content">亲，打扰您了，看您在我们家买的宝贝收到买的宝贝收到</view>
+          <view class="content">{{record.content}}</view>
           <image src="@/img/ar1.png" mode="widthFix" class="w10 ml5" />
         </view>
-        <view class="dot-num dot-num-small"></view>
+        <view class="dot-num dot-num-small" v-if="record.isread === 1"></view>
       </view>
     </view>
   </view>
@@ -27,8 +27,12 @@
 </template>
 
 <script type='es6'>
+import Taro from "@tarojs/taro"
 export default {
 	name: 'app',
+  props: {
+	  record: Object
+  },
 	data() {
 		return {
 		  showDel: false,
@@ -48,6 +52,12 @@ export default {
       if (ex > this.sx + 50) {
         this.showDel = false
       }
+    },
+    toDetail () {
+      this.record.isread = 2
+      Taro.navigateTo({
+        url: `/pages/message/detail?id=${this.record.id}`
+      })
     }
   }
 }

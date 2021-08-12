@@ -8,7 +8,7 @@
           <image src="@/img/cancel.png" mode="widthFix" class="w24" v-if="record.status_icon === 'cancel'" />
           <image src="@/img/success.png" mode="widthFix" class="w24" v-if="record.status_icon === 'success'" />
           <image src="@/img/transport.png" mode="widthFix" class="w24" v-if="record.status_icon === 'transport'" />
-          <view class="bold c-fff ml8" :class="{'f18': record.status !== 9}">{{record.status_title}}</view>
+          <view class="bold c-fff ml8 f18">{{record.status_title}}</view>
         </view>
         <view class="ml32 c-fff">
           <view class="time" v-if="record.remain_time !== 0">剩<text>{{dates.day}}</text>天<text>{{dates.hour}}</text>时<text>{{dates.min}}</text>分</view>
@@ -69,7 +69,7 @@
         </view>
       </view>
       <view class="flex mb8 goods pb8 borderB" v-for="item in record.goods" :key="item.id">
-        <image :src="imgSrc + item.goods_cover" mode="aspectFill" class="img" @tap="toGoodsDetail(item.id)" />
+        <image :src="imgSrc + item.goods_cover" mode="aspectFill" class="img" @tap="toOrderDetail" />
         <view class="content">
           <view class="title mb4">{{item.goods_name}}</view>
           <view class="f12 c-999 mb4 ellipsis">{{item.goods_attr}}</view>
@@ -97,7 +97,7 @@
       <view class="flex f12" v-if="record.images && record.images.length > 0">
         <view class="c-999 mr16">申请照片:</view>
         <view class="img-list">
-          <view class="img-item" v-for="(item, index) in record.images" :key="index">
+          <view class="img-item" v-for="(item, index) in record.images" :key="index" @tap="openPreview(imgSrc + item)">
             <image :src="imgSrc + item" mode="aspectFill" />
           </view>
         </view>
@@ -319,6 +319,20 @@ export default {
     toStore (id) {
       Taro.navigateTo({
         url: `/pages/store/index?id=${id}`
+      })
+    },
+    openPreview (src) {
+      Taro.previewImage({
+        urls: [src],
+        success: res => {
+          console.log('previewImage suc', res)
+        },
+        fail: res => {
+          console.log('previewImage fail', res)
+        },
+        complete: res => {
+          console.log('previewImage complete', res)
+        }
       })
     }
   },

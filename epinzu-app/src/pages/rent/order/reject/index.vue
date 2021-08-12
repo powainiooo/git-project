@@ -56,7 +56,7 @@ export default {
             title: res.msg
           })
           Taro.redirectTo({
-            url: `/pages/rent/detail?id=${this.id}`
+            url: `/pages/rent/detail?id=${this.id}&status=3`
           })
         } else {
           this.isAjax = false

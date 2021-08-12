@@ -2,6 +2,11 @@
   <view class="Refund">
     <!-- 标签栏 -->
     <Tabs :list="tabs" @change="tabChange" :border="true" :fixed="true" />
+    <!-- 空提示 -->
+    <view class="empty mt165" v-if="!loading && dataSource.length === 0">
+      <image src="@/img/order.png" mode="widthFix" class="img" />
+      <view class="txt">您还没有相关的订单</view>
+    </view>
     <!-- 列表 -->
     <view class="list mt48">
       <item v-for="item in dataSource"

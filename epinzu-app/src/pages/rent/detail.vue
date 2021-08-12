@@ -34,7 +34,7 @@
     <!-- 产品信息 -->
     <view class="section">
       <view class="goods-item-hor mt8 mb8">
-        <image :src="imgSrc + goods.goods_cover" mode="aspectFill" class="img" />
+        <image :src="imgSrc + goods.goods_cover" mode="aspectFill" class="img" @tap="toDetail(goods.goods_id)" />
         <view class="infos">
           <view class="title ellipsis mnb4">{{goods.goods_name}}</view>
           <view class="c-999 f12 mb4 ellipsis">{{goods.goods_attr}}</view>
@@ -165,6 +165,11 @@ export default {
     toBill () {
       Taro.navigateTo({
         url: `/pages/rent/order/bill/index?id=${this.id}`
+      })
+    },
+    toDetail (id) {
+      Taro.navigateTo({
+        url: `/pages/detail/index?id=${id}`
       })
     },
     cancel () {

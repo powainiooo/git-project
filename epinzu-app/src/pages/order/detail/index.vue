@@ -176,7 +176,7 @@ export default {
               title: '请求中'
             })
             postAction('/userapi/order/receive', {
-              order_id: this.order_id
+              order_id: this.orderId
             }).then(res2 => {
               Taro.hideLoading()
               if (res2.code === 0) {

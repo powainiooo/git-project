@@ -1,0 +1,110 @@
+    {
+        "type": "txt",
+        "content": "你好啊",
+        
+    },
+    {
+        "type": "emoji",
+        "content": "[):]",
+        
+    },
+    {
+        "type": "img",
+        "content": "image/chat/2021/0708/11535960e676d77075d.jpg",
+        
+    },
+    {
+        "type": "video",
+        "content": "video/chat/2021/0708/11540860e676e0e49ef.mp4.jpg|video/chat/2021/0708/11540860e676e0e49ef.mp4",
+        
+    },
+    {
+        "type": "loc",
+        "content": "定位",
+        "data":{
+					"lng": "116.397128",
+					"lat": "39.916527",
+					"title": "高盛大厦(深圳宝安区)",
+					"address": "深圳市宝安区xx大道",
+					"image": "image/chat/2021/0708/11535960e676d77075d.jpg",
+				}
+    },
+    {
+        "type": "goods",
+        "content": "商品",
+        "data": {
+            "goods_id": 30,
+            "goods_title": "好东西",
+            "goods_cover": "image/chat/2021/0708/11535960e676d77075d.jpg",
+            "goods_type": 1,
+            "goods_price": "5.55~8.88",
+            "goods_deposit": "100",
+            
+        }
+    },
+    {
+        "type": "order",
+        "content": "订单",
+        "data": {
+			"uid": 22,
+			"shop_id":17,
+            "order_id": 1,
+            "order_no": "202122030238941721",
+            "status_msg": "待发货",
+            "goods": [
+                {
+                    "goods_id": 30,
+                    "goods_title": "好东西",
+                    "goods_attr": "红色大码",
+                    "goods_cover": "image/chat/2021/0708/11535960e676d77075d.jpg",
+                    "goods_type": 1,
+                    "goods_price": "5.55~8.88",
+                    "goods_deposit": "100",
+                    "buy_nums": 1,
+                    
+                },
+                {
+                    "goods_id": 303,
+                    "goods_title": "好东西关联产品",
+                    "goods_attr": "大码",
+                    "goods_cover": "image/chat/2021/0708/11535960e676d77075d.jpg",
+                    "goods_type": 3,
+                    "goods_price": "5",
+                    "goods_deposit": "",
+                    "buy_nums": 2,
+                    
+                }
+            ],
+            "button": {
+                "send": 1,
+                "express": 0,
+                
+            },
+            
+        }
+    },
+    
+	{
+        "type": "robot",
+        "content": "机器人问题列表",
+        "data": {
+            "title": "亲，很高兴为您服务，请问您要咨询什么问题呢？",
+            "list": [
+                {
+                    "question_id": 1,
+                    "question": "哪里发货",
+                    "answer":"深圳发货",
+                },
+                {
+                    "question_id": 2,
+                    "question": "发什么快递",
+                    "answer":"发顺丰",
+                },
+                {
+                    "question_id": 3,
+                    "question": "商品包邮吗",
+                    "answer":"全场包邮",
+                }
+            ]
+        }
+    }

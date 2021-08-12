@@ -86,9 +86,11 @@ export default {
       store.commit('SET_ADSTATE', false)
     },
     loadOver (e) {
+      console.log('loadOver', e)
       this.$emit('load')
     },
-    loadErr () {
+    loadErr (err) {
+      console.log('loadErr', err)
       store.commit('SET_ADSTATE', false)
     }
   }

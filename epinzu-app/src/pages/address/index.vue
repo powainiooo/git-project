@@ -1,23 +1,25 @@
 <template>
   <view class="Address">
 
-    <swiper-cell rightWidth="1.4rem"
-                 v-for="item in dataSource"
-                 :key="item.id">
-      <view class="Address-item between borderB"
-            @tap="selectAddr(item)"
-      >
-        <view class="mt8 infos">
-          <view class="mb8 f12 acenter">
-            <text class="c-tag c-tag-red mr4" v-if="item.status === 1">默认</text>
-            {{item.rev_name}} {{item.rev_phone}}
+    <view class="borderB"
+          v-for="item in dataSource"
+          :key="item.id">
+      <swiper-cell rightWidth="1.4rem">
+        <view class="Address-item between"
+              @tap="selectAddr(item)"
+        >
+          <view class="mt8 infos">
+            <view class="mb8 f12 acenter">
+              <text class="c-tag c-tag-red mr4" v-if="item.status === 1">默认</text>
+              <text class="bold">{{item.rev_name}} {{item.rev_phone}}</text>
+            </view>
+            <view class="mb8 f12 c-666">{{item.province}} {{item.city}} {{item.address}}</view>
           </view>
-          <view class="mb8 f12 c-666">{{item.province}} {{item.city}} {{item.address}}</view>
+          <image src="@/img/edit.png" mode="widthFix" class="w24 mr12 ml24" @tap.stop="toEdit(item)" />
         </view>
-        <image src="@/img/edit.png" mode="widthFix" class="w24 mr12 ml24" @tap.stop="toEdit(item)" />
-      </view>
-      <view slot="right" class="btn-del" @tap="delAddr(item.id)">删除</view>
-    </swiper-cell>
+        <view slot="right" class="btn-del" @tap="delAddr(item.id)">删除</view>
+      </swiper-cell>
+    </view>
 
     <view class="empty-txt" v-if="!loading && ipage.loadOver && dataSource.length > 0">已经全部加载完毕</view>
     <view class="empty-txt mt195" v-if="!loading && ipage.loadOver && dataSource.length === 0">暂无数据</view>

@@ -1,14 +1,18 @@
 <template>
   <view class="Message">
     <view class="Message-tabs">
-      <view class="item active">店铺客服<text class="dot-num">0</text></view>
-      <view class="item">通知<text class="dot-num">0</text></view>
+      <view class="item"
+            :class="{'active': tabKey === 'service'}"
+            @tap="toggle('service')">聊天<text class="dot-num" v-if="serviceNum > 0">{{serviceNum}}</text></view>
+      <view class="item"
+            :class="{'active': tabKey === 'notice'}"
+            @tap="toggle('notice')">通知<text class="dot-num" v-if="noticeNum > 0">{{noticeNum}}</text></view>
     </view>
     <view class="hr8"></view>
     <!-- 店铺客服 列表 -->
-<!--    <service />-->
+    <service v-show="tabKey === 'service'" />
     <!-- 通知 列表 -->
-    <notice />
+    <notice ref="notice" v-show="tabKey === 'notice'" />
 
     <!-- 底部导航 -->
     <c-footer current="home" />
@@ -31,9 +35,20 @@ export default {
   },
   data () {
     return {
+      tabKey: 'service',
+      serviceNum: 0,
+      noticeNum: 0
     }
   },
   methods: {
+    toggle (key) {
+      this.tabKey = key
+      if (key === 'service') {
+
+      } else if (key === 'notice') {
+        this.$refs.notice.getListData()
+      }
+    }
   },
 }
 </script>

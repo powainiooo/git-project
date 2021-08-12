@@ -1,0 +1,274 @@
+﻿地址
+ws://chat.dev.epinzu.com/ws
+注意：所有sync_开头的异步通知data里的account均为通知对象！！
+
+//websocket链接成功（被动接收）
+{
+	"code":0,
+	"msg":"连接成功",
+	"query":"connect"
+}
+
+//返回错误
+{
+	"code":2,
+	"msg":"解析JSON失败",
+	"query":"error"
+}
+
+//登录（主动请求）
+{
+	"appid":"af8e2f0dbadb617bda145c84c1",
+    "query":"login",
+    "data":{
+        "account":"Ken",
+        "password":"123456",
+		"source":1//登录来源：1APP，2微信小程序，3支付宝小程序，4:PC
+    }
+}
+{"appid":"af8e2f0dbadb617bda145c84c1","query":"login","data":{"account":"User1","password":"123456","source":1}}
+
+//登录成功（被动接收）
+{
+    "code":0,
+    "msg":"登录成功",
+    "query":"login"
+}
+
+//登录失败（被动接收）
+{
+	"code": 2,
+	"msg": "登录失败，账号或密码错误",
+	"query": "login"
+}
+
+//设置每隔50秒发送一个ping字符串
+ping
+
+//获取用户列表（主动请求）
+{
+    "query":"users",
+    "data":{
+        "page":1,
+        "limit":20
+    }
+}
+{"query":"users","data":{"page":1,"limit":20}}
+
+//用户列表（被动接收）
+{
+    "code":0,
+	"query": "users",
+	"data": [
+		{
+			"account": "xxxx",
+			"nickname": "张三",
+			"avatar": "xxx/yyy.jpg",
+			"last_msg": "这是最后一句话",
+			"last_time": "2021-08-02 07:53:10",
+			"noread_nums": 8,
+			"is_top":1,//是否置顶 1-是 0-否
+			"type": 1
+		},
+		{
+			"account": "xxxx",
+			"nickname": "李四",
+			"avatar": "xxx/yyy.jpg",
+			"last_msg": "这是最后一句话",
+			"last_time": "2021-08-02 07:53:19",
+			"noread_nums": 82,
+			"is_top":0,
+			"type": 1
+		},
+		{
+			"account": "xxxx",
+			"nickname": "通知",
+			"avatar": "xxx/yyy.jpg",
+			"last_msg": "这是最后一句话",
+			"last_time": "2021/07/18 05:21",
+			"noread_nums": 82,
+			"is_top":0,
+			"type": -1//通知类型，此类型后面再做
+		}
+	]
+}
+
+
+//聊天列表（第一次进来获取，主动请求）
+{
+    "query":"chats",
+    "data":{
+		"account":"xxx",//聊天对象的账号
+    }
+}
+{"query":"chats","data":{"account":"User2"}}
+
+//聊天列表（第一次进来获取，被动接收）
+{
+    "code":0,
+    "query":"chats",
+    "data":{
+        "target_account":"User2",
+        "target_nickname":"User2",
+		"target_avatar":"path/to/2.jpg",
+		"my_avatar":"path/to/1.jpg",
+        "list":[
+            {
+                "id":1,//消息ID
+                "from_account":"User1",
+				"to_account":"User2",
+                "message":{},//消息体
+				"is_read":0,//是否已读 0-未读 1-已读
+                "created_at":"2021-07-21 16:21:22"
+            },
+            {
+                "id":2,
+               	"from_account":"User1",
+				"to_account":"User2",
+                "message":{},//消息体
+				"is_read":1,
+                "created_at":"2021-07-21 16:21:22"
+            },
+        ]
+    }
+}
+
+//聊天列表（下拉获取历史聊天记录，主动请求）
+{
+    "query":"history_chats",
+    "data":{
+		"account":"xxx",
+        "start_id":1,
+        "limit":20
+    }
+}
+
+//聊天列表（下拉获取历史聊天记录，被动接收）
+{
+    "code":0,
+    "query":"history_chats",
+    "data":{
+        "target_account":"User2",
+		"target_nickname":"User2",
+		"target_avatar":"image\/2021\/0416\/172804607958a4347ef.jpg",
+		"my_avatar":"image\/2021\/0416\/172804607958a4347ef.jpg",
+        "list":[
+            {
+                "id":111,
+                "from_account":"User1",
+				"to_account":"User2",
+                "message":{},//消息体
+				"is_read":1,
+                "created_at":"2021-07-21 16:21:22"
+            },
+            {
+                "id":112,
+                "from_account":"User1",
+				"to_account":"User2",
+                "message":{},//消息体
+				"is_read":1,
+                "created_at":"2021-07-21 16:21:22"
+            },
+        ]
+    }
+}
+
+//发送消息（主动请求）
+{
+    "query":"send",
+    "data":{
+		"account":"xxx",//消息接受者
+		"message":{}//消息体
+	}
+}
+//发送消息（主动请求）
+{"query":"send","data":{"account":"User2","message":{"type": "txt","content": "你好啊"}}}
+//发送消息者（判断消息是否已读）（被动接收）
+{"code":0,"query":"sync_read","data":{"account":"User1","chat_account":"User2",is_read":1}}
+//同步说话（被动接收）(多客户端同时登录时，一端发送，其它端同步)
+{
+    "code":0,
+    "query":"sync_say",
+    "data":{
+		"account":"User1",//消息发送者
+        "message":{}//消息体
+    }
+}
+
+//接收消息（被动接收）
+{
+    "code":0,
+    "query":"user_message",
+    "data":{
+		"account":"User1", //消息发送者
+        "message":{}//消息体
+    }
+}
+
+
+//删除聊天（主动请求）
+{
+    "query":"chat_delete",
+    "data":{
+		"account":"xxx"//聊天对象
+	}
+}
+{"query":"chat_delete","data":{"account":"User2"}}
+//聊天未读总数更新（删除后被动接收）
+{"code":0,"query":"sync_all_noread_nums","data":{"account":"User1","all_noread_nums":0}}
+
+
+//机器人列表获取（主动发）
+{"query":"robot","data":{"account":"dev17","shop_id":17,"api_token":"0f97e962cb54b7150b1e3bbb288b6d1716"}} //dev17为店铺账号
+//机器人列表获取（被动接收）
+{
+	"code": 0,
+	"query": "user_message",
+	"data": {
+		"account": "dev17",
+		"message": {
+			"type": "robot",
+			"content": "机器人问题列表",
+			"data": {
+				"title": "亲，很高兴为您服务，请问您要咨询什么问题呢？",
+				"list": [{
+					"question_id": 1,
+					"question": "发什么快递",
+					"answer": "发顺丰a"
+				}, {
+					"question_id": 3,
+					"question": "包邮吗",
+					"answer": "本店全场包邮"
+				}]
+			}
+		}
+	}
+}
+
+//获取机器人问题（主动发送）
+{"query":"robot","data":{"account":"dev17","shop_id":17,"content":"发顺丰a"}}
+//获取机器人问题（被动接收）
+{"code":0,"query":"user_message","data":{"account":"dev17","message":{"type":"txt","content":"发顺丰a"}}} //account为消息发送者
+
+//离开聊天室（主动发送）
+{"query":"leave_chats","data":{"account":"User2"}} //User2为当前的聊天对象
+
+//进入聊天室（主动发送）
+{"query":"enter_chats","data":{"account":"User2"}} //account为当前的聊天对象
+//聊天未读总数更新（被动接收）
+{"code":0,"query":"sync_all_noread_nums","data":{"account":"User1","all_noread_nums":0}}
+//告知聊天对象我进入了聊天室
+{"code":0,"query":"sync_chat","data":{"account":"User2","chat_account":"User1"}}
+
+
+//聊天对话置顶（主动请求）
+{"query":"top","data":{"account":"User2","operation":"set"}}} //User2为当前的聊天对象
+//聊天对话取消置顶（主动请求）
+{"query":"top","data":{"account":"User2","operation":"cancel"}}}  //User2为当前的聊天对象
+
+================================
+账号
+User3  123456
+User4  123456
+User5  123456
+User6  123456

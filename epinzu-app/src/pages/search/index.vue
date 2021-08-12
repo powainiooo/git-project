@@ -2,18 +2,18 @@
   <view class="Search ml12 mr12 ">
     <view class="mb20 pt4 pb4 between" v-if="page === 'normal'">
       <view class="flex100">
-        <search ref="search" placeholder="品租生活" />
+        <search ref="search" placeholder="品租生活" @confirm="doSearch" />
       </view>
       <view @tap="doSearch(null)" class="ml8">搜索</view>
     </view>
     <view class="mb20 pt4 pb4 between" v-if="page === 'nearby'">
-      <view class="acenter nearby-info" style="flex: 1 0 auto;" @tap="chooseLocation">
+      <view class="acenter nearby-info" style="flex: 1 0 0;" @tap="chooseLocation">
         <image src="@/img/dot.png" mode="widthFix" class="w20" />
         <view class="h3">{{address}}</view>
         <image src="@/img/ar1.png" mode="widthFix" class="w10" />
       </view>
       <view style="width: 196px;">
-        <search ref="search" placeholder="搜索物品" />
+        <search ref="search" placeholder="搜索物品" @confirm="doSearch" />
       </view>
     </view>
 
@@ -77,6 +77,7 @@ export default {
       if (keyword) {
         console.log('doSearch', keyword)
         this.keyword = keyword
+        this.$refs.search.value = keyword
       } else {
         this.keyword = this.$refs.search.value
       }
@@ -84,10 +85,10 @@ export default {
         word: this.keyword
       }
       let url = '/userapi/search/history/add'
-      if (this.page === 'nearby') {
-        url = '/userapi/nearby/search'
-        // params.
-      }
+      // if (this.page === 'nearby') {
+      //   url = '/userapi/nearby/search'
+      //   // params.
+      // }
       if (this.isLogin) {
         postAction(url, params).then(res => {
           console.log(res)
@@ -123,25 +124,14 @@ export default {
       })
     },
     chooseLocation () {
-      Taro.getLocation({
-        success: loc => {
-          this.$store.commit('SET_LNGLAT', {
-            lat: loc.latitude,
-            lng: loc.longitude,
-          })
-          Taro.chooseLocation({
-            latitude: loc.latitude,
-            longitude: loc.longitude,
-            success: res => {
-              console.log(res)
-              this.lng = loc.longitude
-              this.lat = loc.latitude
-              this.address = res.name
-              Taro.setStorage({
-                key: 'searchData',
-                data: res
-              })
-            }
+      Taro.chooseLocation({
+        latitude: this.lat,
+        longitude: this.lng,
+        success: res => {
+          this.address = res.name
+          Taro.setStorage({
+            key: 'searchData',
+            data: res
           })
         }
       })
@@ -160,6 +150,21 @@ export default {
           this.$store.commit('SET_LNGLAT', {
             lat: res.data.latitude,
             lng: res.data.longitude,
+          })
+        } else {
+          Taro.getLocation({
+            success: loc => {
+              console.log('getLocation', loc)
+              this.$store.commit('SET_LNGLAT', {
+                lat: loc.latitude,
+                lng: loc.longitude,
+              })
+              getAction(`/userapi/geo/address/${loc.longitude}/${loc.latitude}`).then(res => {
+                if (res.code === 0) {
+                  this.address = res.data
+                }
+              })
+            }
           })
         }
       }

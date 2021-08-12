@@ -115,6 +115,8 @@ export default {
         console.log('coverData', val)
         if (val === null || val === undefined) {
           store.commit('SET_ADSTATE', false)
+        } else {
+          store.commit('SET_ADSTATE', true)
         }
       },
       deep: true,

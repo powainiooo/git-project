@@ -57,7 +57,7 @@
   .c-btn
     border-radius 0;
 .btn-del
-  width 70px; height 100%; background-color #FE322B; center(); color #FFFFFF;
+  width 70px; height 100%; background-color #FE322B; center(); color #FFFFFF; position relative; z-index 10;
 
 /* 标签 */
 .c-tag
@@ -73,9 +73,9 @@
 
 /* 红点数字 */
 .dot-num
-  size(14px, 14px); background-color #FE322B; border-radius 50%; font-size 10px; color #FFFFFF; center();
+  size(auto, 14px); min-width 14px; background-color #FE322B; border-radius 50%; font-size 10px; color #FFFFFF; center();
 .dot-num-small
-  size(8px, 8px);
+  size(8px, 8px); min-width 8px;
 
 /* 价格 */
 .price

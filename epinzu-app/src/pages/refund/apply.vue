@@ -39,7 +39,7 @@
         <image src="@/img/ar1.png" mode="widthFix" class="w10" />
       </view>
       </picker>
-      <picker mode="selector" :range="statusList" rangeKey="name" @change="statusChange" v-if="type !== 3">
+      <picker mode="selector" :range="statusList" rangeKey="name" @change="statusChange" v-if="type === 2">
       <view class="h52 between">
         <view class="acenter">
           <view class="c-666 mr16">收货状态</view>
@@ -233,7 +233,7 @@ export default {
     },
     handleSubmit () {
       if (this.isAjax) return
-      if (this.statusId === 0 && this.type !== 3) {
+      if (this.statusId === 0 && this.type === 2) {
         Taro.showToast({
           title: '请选择收货状态'
         })

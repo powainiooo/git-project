@@ -612,7 +612,7 @@ export default {
             this.$store.dispatch('getUserData')
             this.$refs.alert.update('updateSuc', '请返回首页重新登录')
           } else {
-            this.$refs.alert.show('suc')
+            this.$refs.alert.show('suc', '账号注册结果，将以短信形式通知，请注意查看短信。')
           }
         } else {
           if (this.isUpdate) {
@@ -624,7 +624,7 @@ export default {
         }
       }).catch(err => {
         console.log(err)
-        this.$refs.alert.show('fail', '网络有误，请返回重新提交')
+        this.$refs.alert.show('fail', '网络异常，请返回重试。')
         this.confirm.isAjax = false
       })
     },

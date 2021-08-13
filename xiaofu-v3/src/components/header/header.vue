@@ -34,7 +34,7 @@
       <button class="btn" v-if="showMenuBtn" @click="openMenu" hover-class="hscale" hover-stay-time="10"><img src="/static/images/common/menu.png" /></button>
       <button class="btn" v-if="showStarBtn" @click="toStar" hover-class="hscale" hover-stay-time="10"><img src="/static/images/common/star-select.png" style="width: 42rpx; height: 40rpx;" /></button>
       <button class="btn" v-if="showCloseBtn" @click="handleClose" hover-class="hscale" hover-stay-time="10"><img src="/static/images/common/close.png" /></button>
-      <button class="btn" open-type="share" v-if="showShareBtn" hover-class="hscale" hover-stay-time="10"><img src="/static/images/common/share.png" /></button>
+      <button class="btn" v-if="showShareBtn" @click="openShare" hover-class="hscale" hover-stay-time="10"><img src="/static/images/common/share.png" /></button>
     </div>
   </div>
   <c-menu :show="showMenus" @close="handleClose" />
@@ -239,6 +239,9 @@ export default {
           }
         })
       }
+    },
+    openShare () {
+      this.$emit('share')
     }
   }
 }

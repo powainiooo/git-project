@@ -187,7 +187,11 @@
                style="position: absolute; top: 30px; right: 26px;">
               <img src="@/assets/img/ico-close2.png" width="20" />
             </a>
-            <Input type="textarea" :rows="4" placeholder="填写须知(30字内)" v-model="item.notice" />
+            <Input type="textarea"
+                   :rows="4"
+                   placeholder="填写须知(30字内)"
+                   v-model="item.notice"
+                   :class="{'err-inp': isEditor && errorData.notice && errorData.notice[index]}" />
             <div class="warnTxt"
                  style="left: 24%; top: 20px;"
                  v-if="isEditor && errorData.notice && errorData.notice[index]"><span>{{errorData.notice[index]}}</span></div>

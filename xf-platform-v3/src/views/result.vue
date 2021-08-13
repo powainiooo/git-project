@@ -36,12 +36,13 @@ export default {
   },
   methods: {
     onRetry () {
-      this.$router.push({
+      this.$router.replace({
         name: 'Account'
       })
     },
     backLogin () {
       Vue.ls.remove(ACCESS_TOKEN)
+      this.$store.commit('SET_GLOBALDATA', {})
       this.$router.push({
         name: 'Login'
       })

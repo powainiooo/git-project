@@ -71,6 +71,7 @@ router.beforeEach((to, from, next) => {
       if (store.state.hasGlobalData) {
         console.log('3')
         const type = store.state.globalData.merchant.account_type
+        const status = store.state.globalData.merchant.status
         if (type === 0) {
           if (to.name === 'Account') {
             next()
@@ -78,7 +79,11 @@ router.beforeEach((to, from, next) => {
             next('/account')
           }
         } else {
-          next()
+          if (status === 1 || to.name === 'Account') {
+            next()
+          } else {
+            next('/account')
+          }
         }
       } else {
         console.log('4')

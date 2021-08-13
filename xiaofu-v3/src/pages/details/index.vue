@@ -6,7 +6,8 @@
 <div>
   <c-header
     ref="header"
-    @close="handleClose" />
+    @close="handleClose"
+    @share="openShare" />
   <div class="container">
 <!--    <img :src="postSrc" style="width: 100%" mode="widthFix" v-if="postSrc !== ''" />-->
 
@@ -86,6 +87,9 @@ export default {
     getPoster (e) {
       console.log('getPoster', e)
       this.postSrc = e
+    },
+    openShare () {
+      this.$refs.share.showShare = true
     }
   },
   mounted () {

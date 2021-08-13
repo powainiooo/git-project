@@ -53,7 +53,7 @@
           <div class="style2" v-if="item.state === 4">已提现</div>
           <div v-else class="pr">
             <Button size="small" v-if="item.state === 2" @click="toForm(item)">申请提现</Button>
-            <Button size="small" type="error" v-else-if="item.state === 5">重新申请</Button>
+            <Button size="small" type="error" v-else-if="item.state === 5" @click="toForm(item)">重新申请</Button>
             <span v-else>{{getState(item.state)}}</span>
 
             <div class="warnTxt warnTxt-right" v-if="item.state === 5"><span>{{item.reason}}</span></div>

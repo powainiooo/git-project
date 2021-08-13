@@ -22,7 +22,7 @@
       </view>
     </view>
   </view>
-  <view class="btn-del">删除</view>
+  <view class="btn-del" @tap="del">删除</view>
 </view>
 </template>
 
@@ -57,6 +57,17 @@ export default {
       this.record.isread = 2
       Taro.navigateTo({
         url: `/pages/message/detail?id=${this.record.id}`
+      })
+    },
+    del () {
+      Taro.showModal({
+        title: '提示',
+        content: '是否确认删除消息？',
+        success: res => {
+          if (res.confirm) {
+            this.$emit('del', this.record.id)
+          }
+        }
       })
     }
   }

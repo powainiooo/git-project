@@ -11,6 +11,8 @@
       color #333333;
       &:after
         content ''; size(20px, 2px); abBL(0, 50%); background-color #FE322B; transform translateX(-50%);
+    .ringbell
+      width 24px; abTR(8px, 12px);
   &-page
     height calc(100vh - 48px - 54px - constant(safe-area-inset-bottom));
     height calc(100vh - 48px - 54px - env(safe-area-inset-bottom));
@@ -32,3 +34,7 @@
         ellipsis(); width 255px; color #999999; font-size 12px;
       .infos
         flex 1 0 0
+  &-modal
+    size(100%, 100vh); fxTL(0, 0); z-index 1000; background-color rgba(0, 0, 0, .5); center()
+    .box
+      width 250px; background-color #FFFFFF; border-radius 4px;

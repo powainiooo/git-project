@@ -19,6 +19,14 @@
   position relative
   &:after
     content ''; size(100%, 2px); background-color #F5F5F5; abBL(0, 0); transform scaleY(.5);
+.borderT
+  position relative
+  &:before
+    content ''; size(100%, 2px); background-color #F5F5F5; abTL(0, 0); transform scaleY(.5);
+.borderR
+  position relative
+  &:after
+    content ''; size(2px, 100%); background-color #F5F5F5; abTR(0, 0); transform scaleX(.5);
 .hr
   height 2px; background-color #F5F5F5; transform scaleY(.5);
 .hr8

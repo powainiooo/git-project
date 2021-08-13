@@ -5,14 +5,14 @@
 <template>
 <scroll-view class="Message-page" :scroll-y="true" @ScrollToLower="reachBottom">
   <!-- 空提示 -->
-  <view class="empty mt60" v-if="false">
+  <view class="empty mt60" v-if="!loading && dataSource.length === 0">
     <image src="@/img/horn.png" mode="widthFix" class="img" />
     <view class="txt">还没有收到任何通知</view>
   </view>
 
   <!-- 列表 -->
   <view class="Message-list">
-    <item v-for="item in dataSource" :key="item.id" :record="item"/>
+    <item v-for="item in dataSource" :key="item.id" :record="item" @del="del"/>
   </view>
 </scroll-view>
 </template>
@@ -21,7 +21,7 @@
 import item from './item'
 import { pageMixin } from "@/mixins/pages"
 import Taro from "@tarojs/taro"
-import { getAction } from "@/utils/api"
+import { getAction, postAction } from "@/utils/api"
 
 export default {
 	name: 'app',
@@ -54,6 +54,16 @@ export default {
         Taro.hideLoading()
       })
     },
+    del (id) {
+      postAction(`/userapi/sysmsg/destroy/${id}`).then(res2 => {
+        if (res2.code === 0) {
+          Taro.showToast({
+            title: res2.msg
+          })
+          this.resetLoad()
+        }
+      })
+    }
   }
 }
 </script>

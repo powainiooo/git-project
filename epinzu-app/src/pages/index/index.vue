@@ -34,7 +34,7 @@
     <navs v-if="page === 'index'" />
 
     <!-- 附近商品 -->
-    <nearby :list="nearbys" :cid="currentCate.cid" />
+    <nearby :list="nearbys" :cid="currentCate.cid" v-if="nearbys.length > 0" />
     <!-- 新品动态 -->
     <news :list="newests" />
     <!-- 推荐商品 -->

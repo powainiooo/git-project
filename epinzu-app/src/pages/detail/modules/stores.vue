@@ -6,7 +6,7 @@
 <view class="Detail-section Detail-stores">
   <view class="between">
     <view class="flex mt8">
-      <image :src="imgSrc + record.logo" mode="aspectFit" class="logo" />
+      <image :src="imgSrc + record.logo" mode="aspectFit" class="logo" v-if="record.logo" />
       <view class="mt4">
         <view class="acenter">
           <text class="c-tag c-tag-yel mr4" v-if="record.type === 1">个人</text>

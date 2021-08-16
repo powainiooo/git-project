@@ -92,6 +92,7 @@ export const getTokenData = () => {
       if (res.data !== null) {
         store.commit('SET_TOKEN', res.data.api_token)
         store.commit('SET_USERID', res.data.user_id)
+        store.dispatch('getUserInfo')
       } else {
         store.commit('SET_TOKEN', res.data)
       }

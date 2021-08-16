@@ -30,14 +30,41 @@
 </template>
 
 <script type='es6'>
+import Taro from '@tarojs/taro'
+import { wsUrl } from '@/config'
+
 export default {
 	name: 'app',
 	data() {
-		return {}
+		return {
+		  isConnect: false
+    }
 	},
 	methods: {
     reachBottom (e) {
       console.log('reachBottom', e)
+    },
+    connect () {
+      if (this.isConnect) return
+      Taro.connectSocket({
+        url: wsUrl,
+        success: () => {
+          console.log('connect success')
+          this.isConnect = true
+        }
+      })
+      Taro.onSocketOpen(res => {
+        console.log('onSocketOpen', res)
+      })
+      Taro.onSocketMessage(res => {
+        console.log('onSocketMessage', res)
+      })
+      Taro.onSocketError(res => {
+        console.log('onSocketError', res)
+      })
+      Taro.onSocketClose(res => {
+        console.log('onSocketClose', res)
+      })
     }
   }
 }

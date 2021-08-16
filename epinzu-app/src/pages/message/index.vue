@@ -1,9 +1,9 @@
 <template>
   <view class="Message">
     <view class="Message-tabs">
-<!--      <view class="item"-->
-<!--            :class="{'active': tabKey === 'service'}"-->
-<!--            @tap="toggle('service')">聊天<text class="dot-num" v-if="serviceNum > 0">{{serviceNum}}</text></view>-->
+      <view class="item"
+            :class="{'active': tabKey === 'service'}"
+            @tap="toggle('service')">聊天<text class="dot-num" v-if="serviceNum > 0">{{serviceNum}}</text></view>
       <view class="item"
             :class="{'active': tabKey === 'notice'}"
             @tap="toggle('notice')">通知<text class="dot-num" v-if="noticeNum > 0">{{noticeNum}}</text></view>
@@ -11,7 +11,7 @@
     </view>
     <view class="hr8"></view>
     <!-- 店铺客服 列表 -->
-    <service v-show="tabKey === 'service'" />
+    <service ref="service" v-show="tabKey === 'service'" />
     <!-- 通知 列表 -->
     <notice ref="notice" v-show="tabKey === 'notice'" />
 
@@ -37,7 +37,7 @@
     </view>
 
     <!-- 底部导航 -->
-    <c-footer current="home" />
+    <c-footer current="message" />
   </view>
 </template>
 
@@ -58,7 +58,7 @@ export default {
   },
   data () {
     return {
-      tabKey: 'notice',
+      tabKey: 'service',
       serviceNum: 0,
       noticeNum: 0,
       showModal: false,
@@ -72,7 +72,7 @@ export default {
     },
     getData () {
       if (this.tabKey === 'service') {
-
+        this.$refs.service.connect()
       } else if (this.tabKey === 'notice') {
         this.$refs.notice.getListData()
       }

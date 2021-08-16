@@ -50,6 +50,10 @@
         </view>
       </view>
     </view>
+    <!-- 协商记录 -->
+    <view class="bg-fff pl12" v-if="buttons.talk_logs === 1">
+      <Cell title="协商记录" isLink @tap="toRecord" />
+    </view>
   </view>
 </template>
 
@@ -64,7 +68,8 @@ export default {
     return {
       imgSrc: Taro.imgSrc,
       id: '',
-      counts: {}
+      counts: {},
+      buttons: {}
     }
   },
   methods: {
@@ -78,6 +83,7 @@ export default {
         Taro.hideLoading()
         if (res.code === 0) {
           this.counts = res.data.counts
+          this.buttons = res.data.buttons
         }
       })
     },
@@ -85,7 +91,12 @@ export default {
       Taro.previewImage({
         urls: [src]
       })
-    }
+    },
+    toRecord () {
+      Taro.navigateTo({
+        url: `/pages/rent/order/record/index?id=${this.id}`
+      })
+    },
   },
   onLoad (options) {
     this.id = options.id

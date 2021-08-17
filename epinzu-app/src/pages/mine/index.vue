@@ -21,7 +21,7 @@
           <view class="f18 mb4 bold">{{record.money || 0}}</view>
           <view>余额</view>
         </view>
-        <view @tap="toPage('/pages/mine/attention/index')">
+        <view @tap="toPage('/pages/mine/attention/index')" v-if="false">
           <view class="f18 mb4 bold">{{record.attention_nums || 0}}</view>
           <view>我的关注</view>
         </view>

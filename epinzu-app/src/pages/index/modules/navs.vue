@@ -8,7 +8,7 @@
     <view class="ml8">
       <view class="acenter">
         <view class="line" style="background-color: #4587FF;"></view>
-        <view class="ml4">附近店铺</view>
+        <view class="ml4">附近搜索</view>
       </view>
       <view class="f10 c-999 mt2 ml8">触手可得 快速租赁</view>
     </view>

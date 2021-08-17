@@ -1,9 +1,9 @@
 <template>
   <view class="Message">
     <view class="Message-tabs">
-      <view class="item"
-            :class="{'active': tabKey === 'service'}"
-            @tap="toggle('service')">聊天<text class="dot-num" v-if="serviceNum > 0">{{serviceNum}}</text></view>
+<!--      <view class="item"-->
+<!--            :class="{'active': tabKey === 'service'}"-->
+<!--            @tap="toggle('service')">聊天<text class="dot-num" v-if="serviceNum > 0">{{serviceNum}}</text></view>-->
       <view class="item"
             :class="{'active': tabKey === 'notice'}"
             @tap="toggle('notice')">通知<text class="dot-num" v-if="noticeNum > 0">{{noticeNum}}</text></view>
@@ -58,7 +58,7 @@ export default {
   },
   data () {
     return {
-      tabKey: 'service',
+      tabKey: 'notice',
       serviceNum: 0,
       noticeNum: 0,
       showModal: false,

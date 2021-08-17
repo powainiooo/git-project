@@ -46,6 +46,7 @@ export default {
     'pages/message/detail',
     'pages/message/index',
     'pages/cart/index',
+    'pages/none/index',
     'pages/search/index',
     'pages/nearby/index',
     'pages/cate/index',

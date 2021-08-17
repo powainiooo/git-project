@@ -30,7 +30,8 @@
     <stores :record="shop"
             :status="attentionStatus"
             @store="toStore"
-            @attention="attention" />
+            @attention="attention"
+            v-if="false" />
     <!-- 租赁信息 -->
     <rents v-if="record.type === 1" />
     <!-- 常见问题 -->
@@ -52,7 +53,7 @@
     <!-- 底部操作栏 -->
     <view class="footer-container Detail-footer">
       <view class="between ml12 mr20 btns">
-        <button class="btn" @tap="toStore">
+        <button class="btn" @tap="toStore" v-if="false">
           <image src="@/img/store.png" mode="aspectFit" />
           <view>店铺</view>
         </button>
@@ -224,7 +225,7 @@ export default {
       getAction('/userapi/goods/detail', {
         goods_id: this.queryParams.goods_id,
         ...this.lnglat
-      }).then(res => {
+      }, false).then(res => {
         if (res.code === 0) {
           this.record = res.data
           this.details = res.data.detail
@@ -244,6 +245,14 @@ export default {
           if (this.isLogin) {
             this.getAttentionStatus()
           }
+        } else if (res.code === 2) {
+          Taro.redirectTo({
+            url: '/pages/none/index'
+          })
+        } else {
+          Taro.showToast({
+            title: res.msg
+          })
         }
       })
     },
@@ -371,7 +380,7 @@ export default {
     }
   },
   onLoad (options) {
-    // options.id = 103
+    // options.id = 213
     this.queryParams.goods_id = options.id || 94
     if (this.isLogin) {
       this.getCollectionStatus()

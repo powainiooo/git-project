@@ -7,21 +7,19 @@
       <image :src="imgSrc + item.cover" mode="aspectFill" class="img" />
       <view class="infos">
         <view class="title mb4">{{item.title}}</view>
-        <view class="acenter mb4" v-if="item.type === 1">
-          <view class="c-red f10 mr16"><text class="f12">租金：</text>￥<text class="f12 bold">{{item.price_min}}</text>/天</view>
-          <view class="f10"><text class="f12">押金：</text>￥<text class="f12 bold">{{item.deposit_min}}</text></view>
+        <view class="c-999 f12">距离{{item.distance}}公里</view>
+        <view class="f10 mt22" :style="{'opacity': item.type === 1 ? '1' : '0'}">
+          <text class="f12">押金：</text>￥<text class="f12 bold">{{item.deposit_min}}</text>
         </view>
-        <view class="acenter mb4" v-else-if="item.type === 3">
-          <view class="c-red f10"><text class="f12">售价：</text>￥<text class="f12 bold">{{item.price_min}}</text></view>
-        </view>
-        <view class="c-999 f12 mb22">距离{{item.distance}}公里</view>
-        <view class="between">
-          <view class="acenter" @tap.stop="toStore(item.shop_id)">
+        <view class="between mt4">
+          <view class="acenter" @tap.stop="toStore(item.shop_id)" v-if="false">
             <view class="c-tag c-tag-yel" v-if="item.shop_type === 1">个人</view>
             <view class="c-tag c-tag-red" v-else-if="item.shop_type === 2">企业</view>
             <view class="company">{{item.shop_name}}</view>
             <image src="@/img/ar1.png" mode="widthFix" class="w10" />
           </view>
+          <view class="c-red f10 mr16" v-if="item.type === 1"><text class="f12">租金：</text>￥<text class="f12 bold">{{item.price_min}}</text>/天</view>
+          <view class="c-red f10" v-else><text class="f12">售价：</text>￥<text class="f12 bold">{{item.price_min}}</text></view>
           <view class="c-999 f12">{{item.type === 1 ? '已租' : '已售'}}：{{item.sale_nums > 9999 ? item.sale_nums + '+' : item.sale_nums}}</view>
         </view>
       </view>

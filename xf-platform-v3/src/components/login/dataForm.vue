@@ -476,7 +476,7 @@ export default {
     },
     nextBtnDisable () {
       if (this.step === 1) {
-        if (this.formData.organizer_name === '' || this.formData.address === '' || this.formData.person === '' || !this.idCardReg || this.phoneDisabled || this.formData.logo === '' || this.formData.city_id === '') {
+        if (this.formData.organizer_name === '' || this.formData.address === '' || this.formData.person === '' || !this.idCardReg || this.phoneDisabled || this.formData.logo === '' || this.formData.city_id === '' || this.vericode.code === '') {
           return true
         }
         if (this.type === '1') { // 个人

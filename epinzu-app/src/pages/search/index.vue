@@ -12,8 +12,11 @@
         <view class="h3">{{address}}</view>
         <image src="@/img/ar1.png" mode="widthFix" class="w10" />
       </view>
-      <view style="width: 196px;">
-        <search ref="search" placeholder="搜索物品" @confirm="doSearch" />
+      <view class="acenter" style="width: 196px;">
+        <view class="flex100">
+          <search ref="search" placeholder="搜索物品" @confirm="doSearch" />
+        </view>
+        <view @tap="doSearch(null)" class="ml8">搜索</view>
       </view>
     </view>
 

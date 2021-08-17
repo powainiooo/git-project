@@ -87,13 +87,13 @@
         </view>
         <image src="@/img/check2.png" mode="widthFix" class="icon" v-if="payway === 20" />
       </view>
-      <view class="pay-item" @tap="payway = 0">
-        <view class="acenter">
-          <image src="@/img/yue.png" mode="widthFix" class="icon mr4" />
-          <view>余额支付（<text class="f10">￥</text>{{yue}}）</view>
-        </view>
-        <image src="@/img/check2.png" mode="widthFix" class="icon" v-if="payway === 0" />
-      </view>
+<!--      <view class="pay-item" @tap="payway = 0">-->
+<!--        <view class="acenter">-->
+<!--          <image src="@/img/yue.png" mode="widthFix" class="icon mr4" />-->
+<!--          <view>余额支付（<text class="f10">￥</text>{{yue}}）</view>-->
+<!--        </view>-->
+<!--        <image src="@/img/check2.png" mode="widthFix" class="icon" v-if="payway === 0" />-->
+<!--      </view>-->
     </view>
     <!-- 协议 -->
     <view class="center">

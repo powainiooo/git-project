@@ -12,13 +12,13 @@
     </view>
     <image src="@/img/check2.png" mode="widthFix" class="icon mr12" v-if="payway === 20" />
   </view>
-  <view class="pay-item borderB h50" @tap="payway = 0">
-    <view class="acenter ml12">
-      <image src="@/img/yue.png" mode="widthFix" class="icon mr4" />
-      <view>余额支付（<text class="f10">￥</text>{{yue}}）</view>
-    </view>
-    <image src="@/img/check2.png" mode="widthFix" class="icon mr12" v-if="payway === 0" />
-  </view>
+<!--  <view class="pay-item borderB h50" @tap="payway = 0">-->
+<!--    <view class="acenter ml12">-->
+<!--      <image src="@/img/yue.png" mode="widthFix" class="icon mr4" />-->
+<!--      <view>余额支付（<text class="f10">￥</text>{{yue}}）</view>-->
+<!--    </view>-->
+<!--    <image src="@/img/check2.png" mode="widthFix" class="icon mr12" v-if="payway === 0" />-->
+<!--  </view>-->
   <view class="wp100 pl12 pr12 mt8 mb8">
     <button class="c-btn bold" @tap="handlePay">立即支付</button>
   </view>

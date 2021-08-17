@@ -32,14 +32,25 @@
 <script type='es6'>
 import Taro from '@tarojs/taro'
 import { wsUrl } from '@/config'
+import swiperCell from '@/c/common/swiperCell.vue'
 
 export default {
 	name: 'app',
+  components: {
+    swiperCell
+  },
 	data() {
 		return {
-		  isConnect: false
+		  isConnect: false,
+      page: 1,
+      dataSource: []
     }
 	},
+  computed: {
+    userInfo () {
+      return this.$store.state.userInfo
+    }
+  },
 	methods: {
     reachBottom (e) {
       console.log('reachBottom', e)
@@ -48,16 +59,32 @@ export default {
       if (this.isConnect) return
       Taro.connectSocket({
         url: wsUrl,
-        success: () => {
-          console.log('connect success')
+        success: (task) => {
+          console.log('connect success', task)
           this.isConnect = true
         }
       })
       Taro.onSocketOpen(res => {
         console.log('onSocketOpen', res)
+        this.login()
       })
-      Taro.onSocketMessage(res => {
-        console.log('onSocketMessage', res)
+      Taro.onSocketMessage(result => {
+        console.log('onSocketMessage', result)
+        const res = JSON.parse(result.data)
+        if (res.code === 0) {
+          switch (res.query) {
+            case 'login':
+              this.getListData();
+              break;
+            case 'users':
+              this.receive(res.data);
+              break;
+          }
+        } else {
+          Taro.showToast({
+            title: res.msg
+          })
+        }
       })
       Taro.onSocketError(res => {
         console.log('onSocketError', res)
@@ -65,6 +92,47 @@ export default {
       Taro.onSocketClose(res => {
         console.log('onSocketClose', res)
       })
+    },
+    login () {
+      const data = {
+        "appid": this.userInfo.chat_appid,
+        "query":"login",
+        "data":{
+          "account": this.userInfo.chat_account,
+          "password": this.userInfo.chat_password,
+          "source": 3
+        }
+      }
+      Taro.sendSocketMessage({
+        data: JSON.stringify(data),
+        success: res => {
+          console.log('login suc', res)
+        },
+        fail: err => {
+          console.log('login fail', err)
+        }
+      })
+    },
+    getListData () {
+      const data = {
+        "query": "users",
+        "data":{
+          "page": this.page,
+          "limit": 20
+        }
+      }
+      Taro.sendSocketMessage({
+        data: JSON.stringify(data),
+        success: res => {
+          console.log('getListData suc', res)
+        },
+        fail: err => {
+          console.log('getListData fail', err)
+        }
+      })
+    },
+    receive (list) {
+      this.dataSource = this.dataSource.concat(list)
     }
   }
 }

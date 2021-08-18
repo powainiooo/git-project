@@ -20,7 +20,7 @@
       <view class="mr12 mb8 mt8">
         <button class="c-btn c-btn-border c-btn-24" @tap="attention" v-if="attentionStatus === 0">关注店铺</button>
         <button class="c-btn c-btn-border c-btn-24" @tap="attention" v-else-if="attentionStatus === 1">取消关注</button>
-        <button class="c-btn c-btn-border c-btn-24 mt4" @tap="contact">联系商家</button>
+        <button class="c-btn c-btn-border c-btn-24 mt4" @tap="contact">联系客服</button>
       </view>
     </view>
     <!-- 切换分类 -->
@@ -126,7 +126,7 @@ export default {
     },
     contact () {
       Taro.showToast({
-        title: '联系商家'
+        title: '联系客服'
       })
     }
   },

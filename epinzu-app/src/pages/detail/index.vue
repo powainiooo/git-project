@@ -225,8 +225,14 @@ export default {
       getAction('/userapi/goods/detail', {
         goods_id: this.queryParams.goods_id,
         ...this.lnglat
-      }, false).then(res => {
+      }).then(res => {
         if (res.code === 0) {
+          if (res.data.status === -9) {
+            Taro.redirectTo({
+              url: '/pages/none/index'
+            })
+            return
+          }
           this.record = res.data
           this.details = res.data.detail
           this.banners = res.data.detail.images
@@ -245,14 +251,6 @@ export default {
           if (this.isLogin) {
             this.getAttentionStatus()
           }
-        } else if (res.code === 2) {
-          Taro.redirectTo({
-            url: '/pages/none/index'
-          })
-        } else {
-          Taro.showToast({
-            title: res.msg
-          })
         }
       })
     },
@@ -350,6 +348,9 @@ export default {
     setTimeout(() => {
       this.getSectionDis()
     }, 1000)
+  },
+  onHide () {
+    console.log('detail onHide')
   },
   onPageScroll (e) {
     const st = e.scrollTop

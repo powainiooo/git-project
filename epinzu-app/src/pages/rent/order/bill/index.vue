@@ -61,9 +61,13 @@
 import Taro from '@tarojs/taro'
 import '../../index.styl'
 import { getAction } from '@/utils/api'
+import Cell from '@/c/common/Cell'
 
 export default {
   name: 'Index',
+  components: {
+    Cell
+  },
   data () {
     return {
       imgSrc: Taro.imgSrc,

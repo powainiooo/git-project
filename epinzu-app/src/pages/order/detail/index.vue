@@ -3,7 +3,7 @@
     <view class="c-red mt16 mb16 ml12" v-if="order.status === 1">剩余支付时间{{order.remain_pay_time}}</view>
     <!-- 店铺信息 -->
     <view class="section">
-      <view class="between borderB mb8">
+      <view class="between borderB mb8" v-if="false">
         <view class="store-info mb10 mt10">
           <image :src="imgSrc + shop.shop_logo" />
           <text class="c-tag c-tag-yel" v-if="shop.shop_type === 1">个人</text>
@@ -11,10 +11,10 @@
           <text>{{shop.shop_name}}</text>
         </view>
         <view class="w70">
-          <button class="c-btn c-btn-border c-btn-24" @tap="contact">联系商家</button>
+          <button class="c-btn c-btn-border c-btn-24" @tap="contact">联系客服</button>
         </view>
       </view>
-      <view class="acenter mb4">
+      <view class="acenter mb4 mt8">
         <image src="@/img/dot.png" mode="widthFix" class="w20 mr4" />
         <view class="mr8">{{address.name}}</view>
         <view>{{address.phone}}</view>
@@ -66,6 +66,7 @@
     <!-- 明细 -->
     <view class="footer-container">
       <view class="wp100 end mr12">
+        <button class="c-btn c-btn-border2 c-btn-24 ml4" @tap="contact">联系客服</button>
         <button class="c-btn c-btn-border2 c-btn-24 ml4" v-if="buttons.cancel === 1" @tap="cancel">取消订单</button>
         <button class="c-btn c-btn-border2 c-btn-24 ml4" v-if="buttons.express === 1" @tap="express">查看物流</button>
         <button class="c-btn c-btn-border2 c-btn-24 ml4" v-if="buttons.refund === 1" @tap="refund">申请退单</button>

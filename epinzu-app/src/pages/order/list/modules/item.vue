@@ -5,13 +5,14 @@
 <template>
 <view class="Order-list-item" v-if="showItem" @tap="toDetail">
   <view class="between mb16">
-    <view class="acenter" @tap.stop="toStore">
+    <view class="acenter" @tap.stop="toStore" v-if="false">
       <image :src="imgSrc + record.shop_logo" mode="aspectFill" class="avatar20 mr4" />
       <view class="c-tag c-tag-yel mr4" v-if="record.shop_type === 1">个人</view>
       <view class="c-tag c-tag-red mr4" v-if="record.shop_type === 2">企业</view>
       <view class="mr4">{{record.shop_name}}</view>
       <image src="@/img/ar1.png" mode="widthFix" class="w10" />
     </view>
+    <view class="f12 c-999">订单编号：{{record.order_no}}</view>
     <view class="c-red f12">{{record.status_msg}}</view>
   </view>
   <scroll-view :scrollX="true">
@@ -28,7 +29,7 @@
     <view class="bold"><text class="f10">￥</text>{{record.order_amount}}<text class="c-999">（含押金{{record.deposit_amount}}）</text></view>
   </view>
   <view class="end">
-    <button class="c-btn c-btn-24 c-btn-border2 ml4" v-if="record.buttons.contact === 1" @tap.stop="contact">联系商家</button>
+    <button class="c-btn c-btn-24 c-btn-border2 ml4" v-if="record.buttons.contact === 1" @tap.stop="contact">联系客服</button>
     <button class="c-btn c-btn-24 c-btn-border2 ml4" v-if="record.buttons.cancel === 1" @tap.stop="cancel">取消订单</button>
     <button class="c-btn c-btn-24 c-btn-border2 ml4" v-if="record.buttons.refund === 1" @tap.stop="refund">申请退单</button>
     <button class="c-btn c-btn-24 c-btn-border2 ml4" v-if="record.buttons.express === 1" @tap.stop="express">查看物流</button>

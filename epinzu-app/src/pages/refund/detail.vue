@@ -56,7 +56,7 @@
     </view>
     <!-- 商品详情 -->
     <view class="section2" v-if="record.shop">
-      <view class="between mt8 borderB pb8 mb8">
+      <view class="between mt8 borderB pb8 mb8" v-if="false">
         <view class="acenter" @tap="toStore(record.shop.shop_id)">
           <image :src="imgSrc + record.shop.logo" mode="aspectFill" class="avatar20 mr4" />
           <view class="c-tag c-tag-yel mr4" v-if="record.shop.type === 1">个人</view>
@@ -65,10 +65,10 @@
           <image src="@/img/ar1.png" mode="widthFix" class="w10" />
         </view>
         <view class="w70">
-          <button class="c-btn c-btn-border c-btn-24" @tap="contact">联系商家</button>
+          <button class="c-btn c-btn-border c-btn-24" @tap="contact">联系客服</button>
         </view>
       </view>
-      <view class="flex mb8 goods pb8 borderB" v-for="item in record.goods" :key="item.id">
+      <view class="flex mb8 mt8 goods pb8 borderB" v-for="item in record.goods" :key="item.id">
         <image :src="imgSrc + item.goods_cover" mode="aspectFill" class="img" @tap="toOrderDetail" />
         <view class="content">
           <view class="title mb4">{{item.goods_name}}</view>
@@ -106,6 +106,7 @@
     <!-- 底部按钮 -->
     <view class="footer-container">
       <view class="wp100 end pr20">
+        <button class="c-btn c-btn-border2 c-btn-24" @tap="contact">联系客服</button>
         <button class="c-btn c-btn-border2 c-btn-24 ml4"
                 v-for="(item, index) in record.buttons"
                 :key="index"

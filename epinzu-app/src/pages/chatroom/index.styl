@@ -1,0 +1,30 @@
+@import '../../static/css/mixin.styl'
+
+.Chat
+  &-list
+    margin 0 12px;
+    padding-bottom calc(100px + constant(safe-area-inset-bottom));
+    padding-bottom calc(100px + env(safe-area-inset-bottom));
+  &-item
+    margin-bottom 16px;
+    &-date
+      font-size 10px; color #999999; margin-bottom 18px; margin-top 16px; text-align center;
+    &-head
+      size(40px, 40px); border-radius 50%; background-color #D5D5D5; overflow hidden; margin-right 8px; float left;
+      image
+        size(100%, 100%);
+    &-content
+      position relative
+    &-wrapper
+      float left; max-width 255px; margin-top 2px;
+    &-message
+      display flex; min-height 36px;
+    &-status
+      display flex; align-items flex-end; font-size 10px; color #999999; margin-right 8px;
+    &-box
+      padding 8px; background-color #FFFFFF; border-radius 4px; text-align justify;
+  .Chat-custom
+    .Chat-item-head
+      float right; margin-right 0; margin-left 8px;
+    .Chat-item-wrapper
+      float right

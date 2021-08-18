@@ -5,13 +5,14 @@
 <template>
 <view class="Refund-item section" @tap="toDetail">
   <view class="between mb8">
-    <view class="acenter" @tap.stop="toStore(record.shop_id)">
+    <view class="acenter" @tap.stop="toStore(record.shop_id)" v-if="false">
       <image :src="imgSrc + record.shop.logo" mode="aspectFill" class="avatar20 mr4" />
       <view class="c-tag c-tag-yel mr4" v-if="record.shop.type === 1">个人</view>
       <view class="c-tag c-tag-red mr4" v-if="record.shop.type === 2">企业</view>
       <view class="mr4">{{record.shop.shop_name}}</view>
       <image src="@/img/ar1.png" mode="widthFix" class="w10" />
     </view>
+    <view class="f12 c-999">售后编号：{{record.after_no}}</view>
     <view class="c-red f12">{{record.status_msg}}</view>
   </view>
   <view class="flex mb8 goods" v-for="item in record.goods" :key="item.id">

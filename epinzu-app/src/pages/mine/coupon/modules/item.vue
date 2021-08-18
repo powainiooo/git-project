@@ -4,11 +4,11 @@
 
 <template>
 <view class="section">
-  <view class="acenter mt8 mb8">
+  <view class="acenter mt8 mb8" v-if="false">
     <image :src="imgSrc + record.shop_logo" mode="widthFix" class="avatar mr8" />
     <view class="bold">{{record.shop_name}}</view>
   </view>
-  <view class="c-coupon-item" :class="{'c-coupon-item-disabled': status !== 1}">
+  <view class="c-coupon-item mt8" :class="{'c-coupon-item-disabled': status !== 1}">
     <view class="price"><view>￥<text>{{record.money}}</text></view></view>
     <view class="content between">
       <view class="ml16">

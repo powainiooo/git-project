@@ -4,7 +4,7 @@
     <view class="mt16 mb16 ml12 c-red" v-if="statusMsg">{{statusMsg}}</view>
     <!-- 店铺信息 -->
     <view class="section">
-      <view class="between borderB">
+      <view class="between borderB" v-if="false">
         <view class="store-info mb10 mt10">
           <image :src="imgSrc + shop.shop_logo" />
           <text class="c-tag c-tag-yel" v-if="shop.shop_type === 1">个人</text>
@@ -12,7 +12,7 @@
           <text class="bold">{{shop.shop_name}}</text>
         </view>
         <view class="w70">
-          <button class="c-btn c-btn-border c-btn-24" @tap="contact">联系商家</button>
+          <button class="c-btn c-btn-border c-btn-24" @tap="contact">联系客服</button>
         </view>
       </view>
       <view class="mt8 acenter" v-if="status === 2">
@@ -59,6 +59,7 @@
     <!-- 底部按钮 -->
     <view class="footer-container" v-if="showBottomBtn">
       <view class="wp100 end pr20">
+        <button class="w74 c-btn c-btn-border2 c-btn-24 ml4" @tap="contact">联系客服</button>
         <button class="w74 c-btn c-btn-border c-btn-24 ml4" v-if="buttons.back === 1" @tap.stop="returnBack">归还物品</button>
         <button class="w74 c-btn c-btn-border2 c-btn-24 ml4" v-if="buttons.express === 1" @tap.stop="express">查看物流</button>
         <button class="w74 c-btn c-btn-border c-btn-24 ml4" v-if="buttons.account_confirm === 1" @tap.stop="confirm">确认账单</button>

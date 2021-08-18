@@ -4,12 +4,13 @@
 
 <template>
 <view class="Rent-item section" @tap="toDetail">
-  <view class="store-info mb10 mt10">
+  <view class="store-info mb10 mt10" v-if="false">
     <image :src="imgSrc + record.shop_logo" class=" mr4" />
     <view class="c-tag c-tag-yel mr4" v-if="record.shop_type === 1">个人</view>
     <view class="c-tag c-tag-red mr4" v-if="record.shop_type === 2">企业</view>
     <text class="bold">{{record.shop_name}}</text>
   </view>
+  <view class="f12 c-999 mt8 mb8">订单编号：{{record.order_no}}</view>
   <!-- 租用中 -->
   <view class="item borderB" v-for="item in record.goods" :key="item.id">
     <view class="goods-item-hor">
@@ -25,7 +26,7 @@
       </view>
     </view>
     <view class="end btns mt16">
-      <button class="c-btn c-btn-border2 c-btn-24" v-if="item.buttons.contact === 1" @tap.stop="contact">联系商家</button>
+      <button class="c-btn c-btn-border2 c-btn-24" v-if="item.buttons.contact === 1" @tap.stop="contact">联系客服</button>
       <button class="c-btn c-btn-border c-btn-24 ml4" v-if="item.buttons.back === 1" @tap.stop="returnBack">归还物品</button>
       <button class="c-btn c-btn-border2 c-btn-24 ml4" v-if="item.buttons.express === 1" @tap.stop="express">查看物流</button>
       <button class="c-btn c-btn-border c-btn-24 ml4" v-if="item.buttons.account_confirm === 1" @tap.stop="confirm(item.id)">确认账单</button>

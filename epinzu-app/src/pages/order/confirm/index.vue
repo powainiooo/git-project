@@ -216,12 +216,12 @@ export default {
         })
         return
       }
-      if (this.yue < this.count.pay_amount) {
-        Taro.showToast({
-          title: '余额不足'
-        })
-        return
-      }
+      // if (this.yue < this.count.pay_amount) {
+      //   Taro.showToast({
+      //     title: '余额不足'
+      //   })
+      //   return
+      // }
       Taro.showLoading({
         title: '支付中'
       })

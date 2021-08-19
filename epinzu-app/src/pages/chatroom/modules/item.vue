@@ -94,11 +94,12 @@ export default {
     dateStr () {
       const date1 = new Date(this.record.beforeDate)
       const date2 = new Date(this.record.created_at)
-      const day1 = date1.getDate()
-      const hour1 = date1.getHours()
-      const day2 = date1.getDate()
-      const hour2 = date1.getHours()
-      return this.record.created_at
+      const weeks = ['日', '一', '二', '三', '四', '五', '六']
+      const week = date2.getDay()
+      const hour = date2.getHours()
+      const min = date2.getMinutes()
+      const m = hour < 12 ? '上午' : '下午'
+      return `${weeks[week]} ${m}${hour}:${min}`
     }
   },
 	data() {

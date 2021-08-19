@@ -1,0 +1,122 @@
+{
+  "target_account": "dev4",
+  "target_nickname": "凤梨手机店",
+  "target_avatar": "image/2021/0326/184213605dba85cdc9a_200_200.jpg",
+  "my_avatar": "image/2021/0728/21023161015567ceb24_200_200.jpg",
+  "list": [
+    {
+      "id": 1004,
+      "from_account": "dev4",
+      "to_account": "dev29",
+      "message": {
+        "type": "robot",
+        "content": "机器人问题列表",
+        "data": {
+          "title": "亲，很高兴为您服务，请问您要咨询什么问题呢？",
+          "list": [
+            {
+              "question_id": 14,
+              "question": "什么时候发货？",
+              "answer": "一般默认下单之后72小时之内发货"
+            },
+            {
+              "question_id": 15,
+              "question": "发什么快递？",
+              "answer": "默认发送圆通、中通快递。偏远地区不支持发货，如有特殊需求请联系客服"
+            }
+          ]
+        }
+      },
+      "is_read": 1,
+      "created_at": "2021-08-19 15:04:05"
+    },
+    {
+      "id": 1005,
+      "from_account": "dev29",
+      "to_account": "dev4",
+      "message": {
+        "type": "txt",
+        "content": "测试文字"
+      },
+      "is_read": 1,
+      "created_at": "2021-08-19 15:04:37"
+    },
+    {
+      "id": 1006,
+      "from_account": "dev29",
+      "to_account": "dev4",
+      "message": {
+        "type": "txt",
+        "content": "测试文字测试文字测试文字测试文字下载地址记得安装后关注我的微信公众号的小伙伴们快来加入我吧超话目前还"
+      },
+      "is_read": 1,
+      "created_at": "2021-08-19 15:05:27"
+    },
+    {
+      "id": 1007,
+      "from_account": "dev29",
+      "to_account": "dev4",
+      "message": {
+        "type": "img",
+        "content": "image/2021/0819/150604611e02dcc7bf7.jpg"
+      },
+      "is_read": 1,
+      "created_at": "2021-08-19 15:06:04"
+    },
+    {
+      "id": 1008,
+      "from_account": "dev29",
+      "to_account": "dev4",
+      "message": {
+        "type": "audio",
+        "content": "3|audio/chat/2021/0819/150626611e02f2e3055.mp3"
+      },
+      "is_read": 1,
+      "created_at": "2021-08-19 15:06:26"
+    },
+    {
+      "id": 1009,
+      "from_account": "dev29",
+      "to_account": "dev4",
+      "message": {
+        "type": "video",
+        "content": "video/2021/0819/150657611e0311e25cc.mp4.jpg|video/2021/0819/150657611e0311e25cc.mp4"
+      },
+      "is_read": 1,
+      "created_at": "2021-08-19 15:06:59"
+    },
+    {
+      "id": 1010,
+      "from_account": "dev4",
+      "to_account": "dev29",
+      "message": {
+        "type": "txt",
+        "content": "测试"
+      },
+      "is_read": 1,
+      "created_at": "2021-08-19 15:08:34"
+    },
+    {
+      "id": 1011,
+      "from_account": "dev4",
+      "to_account": "dev29",
+      "message": {
+        "type": "txt",
+        "content": "测试一下下一秒就可以了😌，我们的生活方式就是这样一种方式归来"
+      },
+      "is_read": 1,
+      "created_at": "2021-08-19 15:08:42"
+    },
+    {
+      "id": 1012,
+      "from_account": "dev4",
+      "to_account": "dev29",
+      "message": {
+        "type": "img",
+        "content": "image/2021/0819/150855611e03879c7e3.jpg"
+      },
+      "is_read": 1,
+      "created_at": "2021-08-19 15:08:55"
+    }
+  ]
+}

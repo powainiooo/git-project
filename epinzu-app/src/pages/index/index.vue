@@ -114,11 +114,11 @@ export default {
       }
     })
     setTimeout(() => {
-      // Taro.navigateTo({
-      //   url: '/pages/refund/proof'
-      // })
+      Taro.navigateTo({
+        url: '/pages/chatroom/index'
+      })
       this.visible = true
-    }, 1000)
+    }, 2000)
   },
   methods: {
     getData () { // 获取首页数据

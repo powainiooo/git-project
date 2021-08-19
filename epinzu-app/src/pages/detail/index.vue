@@ -316,8 +316,17 @@ export default {
     // 打开客服
     openSevice () {
       intercept(() => {
-        Taro.showToast({
-          title: '打开客服'
+        // Taro.showToast({
+        //   title: '打开客服'
+        // })
+        getAction('/userapi/user/chat/account', {
+          uid: this.record.shop_id
+        }).then(res => {
+          if (res.code === 0) {
+            Taro.navigateTo({
+              url: `/pages/chatroom/index?account=${res.data.account}`
+            })
+          }
         })
       })
     },

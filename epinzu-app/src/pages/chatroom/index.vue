@@ -163,7 +163,7 @@ export default {
       this.mesList = this.mesList.concat(data.list)
       setTimeout(() => {
         Taro.pageScrollTo({
-          selector: `#item${this.mesList[this.mesList.length - 1].id}`
+          selector: `#item${this.mesList[this.mesList.length - 1].message_id}`
         })
       }, 50)
     },
@@ -206,7 +206,7 @@ export default {
         to = this.chartInfo.storeAccount
       }
       this.mesList.push({
-        id,
+        message_id: id,
         "from_account": from,
         "to_account": to,
         "message": data,

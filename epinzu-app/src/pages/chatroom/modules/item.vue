@@ -68,7 +68,7 @@ export default {
   computed: {
 	  // 消息id 用于滚动
     idStr () {
-      return `item${this.record.id}`
+      return `item${this.record.message_id}`
     },
     // 是否为用户数据
     isUser () {
@@ -104,7 +104,8 @@ export default {
   },
 	data() {
 		return {
-      imgSrc
+      imgSrc,
+      emoji: '😠'
     }
 	},
 	methods: {}

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <title>在线客服</title>
+   <link href="css/reset.css" rel="stylesheet" type="text/css" />
+   <link href="css/layout.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<section class="main">
+   <div class="container clearfix">
+      <!--   左侧栏   -->
+      <div class="left-pane">
+
+         <!--   个人信息   -->
+         <div class="left-pane-header">
+            <div class="infos acenter">
+               <img src="img/avatar.png" />
+               <p>鹰视眼官方旗舰店</p>
+            </div>
+         </div>
+
+         <!--   列表信息   -->
+         <div class="left-pane-content">
+            <div class="dialog-list">
+               <!--   dialog-active 表示选中   -->
+               <div class="dialog dialog-active">
+                  <img src="img/avatar.png" class="avatar" />
+                  <div class="right-info">
+                     <div class="line1 between">
+                        <h3>哆啦A梦</h3>
+                        <span>14:44</span>
+                     </div>
+                     <div class="line2 between">
+                        <p>多久可以发货的？</p>
+                     </div>
+                  </div>
+               </div>
+               <div class="dialog">
+                  <img src="img/avatar.png" class="avatar" />
+                  <div class="right-info">
+                     <div class="line1 between">
+                        <h3>五金阿哥</h3>
+                        <span>2021/02/22</span>
+                     </div>
+                     <div class="line2 between">
+                        <p>我的商品坏了怎么办？你们不能给不能不能</p>
+                        <div class="nums">99+</div>
+                     </div>
+                  </div>
+               </div>
+               <div class="dialog">
+                  <img src="img/avatar.png" class="avatar" />
+                  <div class="right-info">
+                     <div class="line1 between">
+                        <h3>凤梨妹妹</h3>
+                        <span>2021/02/22</span>
+                     </div>
+                     <div class="line2 between">
+                        <p>亲，在吗？</p>
+                        <div class="nums">2</div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+
+      </div>
+      <!--   右侧栏   -->
+      <div class="right-pane">
+         <!--   聊天对象信息   -->
+         <div class="right-pane-head">
+            <div class="acenter mt10 ml20">
+               <img src="img/avatar.png" class="avatar mr10" />
+               <h3>五金阿哥</h3>
+            </div>
+         </div>
+         <!--   右侧内容区   -->
+         <div class="right-pane-body clearfix">
+            <!--   聊天区   -->
+            <div class="chats-pane"></div>
+            <!--   产品区   -->
+            <div class="goods-pane">
+               <!--   一级标签   -->
+               <div class="tab-pane1">
+                  <div class="tab-item tab-item-active">正在咨询</div>
+                  <div class="tab-item">我的订单</div>
+               </div>
+               <!--   二级标签   -->
+               <div class="tab-pane2">
+                  <div class="tab-item tab-item-active"><div>浏览过的商品</div></div>
+                  <div class="tab-item"><div>店铺其他商品</div></div>
+               </div>
+               <!--   商品列表   -->
+               <div class="goods-list" style="display: none">
+                  <div class="goods-item">
+                     <img src="img/default.png" class="pic" />
+                     <div class="content">
+                        <div class="line1">
+                           <div class="title">充电式吹风机锂电鼓风机大功率工业小型车载吸尘吹灰吹雪除小型车载吸尘吹灰吹雪除</div>
+                           <div class="price">押金：<span>￥</span>500</div>
+                        </div>
+                        <div class="price c-red">租金：<span>￥</span>10.99~99.99<span>/天</span></div>
+                     </div>
+                     <button class="btn">发送</button>
+                  </div>
+                  <div class="goods-item">
+                     <img src="img/default.png" class="pic" />
+                     <div class="content">
+                        <div class="line1">
+                           <div class="title">充电式吹风机锂电鼓风机大功率工业小型车载吸尘吹灰吹雪除小型车载吸尘吹灰吹雪除</div>
+                        </div>
+                        <div class="price c-red">售价：<span>￥</span>10.99</div>
+                     </div>
+                     <button class="btn">发送</button>
+                  </div>
+               </div>
+               <!--   订单列表   -->
+               <div class="order-list">
+                  <div class="order-item">
+                     <img src="img/default.png" class="pic" />
+                     <div class="content">
+                        <div class="title mb5">充电式吹风机锂电鼓风机大功率工业小型车载吸尘吹灰吹雪除小型车载吸尘吹灰吹雪除</div>
+                        <div class="f12 c-999 mb5">8800H一电一充</div>
+                        <div class="between mb5">
+                           <div class="price">押金：<span>￥</span>500</div>
+                           <div class="f12">X2</div>
+                        </div>
+                        <div class="between mb5">
+                           <div class="price c-red">租金：<span>￥</span>10.99~99.99<span>/天</span></div>
+                           <div class="f12">X2</div>
+                        </div>
+                     </div>
+                     <div class="between operate">
+                        <div class="f12 c-red">待付款</div>
+                        <button class="btn">发送</button>
+                     </div>
+                  </div>
+                  <div class="order-item">
+                     <img src="img/default.png" class="pic" />
+                     <div class="content">
+                        <div class="title mb5">充电式吹风机锂电鼓风机大功率工业小型车载吸尘吹灰吹雪除小型车载吸尘吹灰吹雪除</div>
+                        <div class="f12 c-999 mb5">8800H一电一充</div>
+                        <div class="between mb5">
+                           <div class="price">押金：<span>￥</span>500</div>
+                           <div class="f12">X2</div>
+                        </div>
+                        <div class="between mb5">
+                           <div class="price c-red">租金：<span>￥</span>10.99~99.99<span>/天</span></div>
+                           <div class="f12">X2</div>
+                        </div>
+                     </div>
+                     <div class="between operate">
+                        <div class="f12 c-red">待付款</div>
+                        <button class="btn">发送</button>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
+</body>
+</html>

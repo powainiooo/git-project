@@ -8,7 +8,7 @@
 </head>
 <body>
 <section class="main">
-   <div class="container clearfix">
+   <div class="main-box clearfix">
       <!--   左侧栏   -->
       <div class="left-pane">
 
@@ -78,7 +78,319 @@
          <!--   右侧内容区   -->
          <div class="right-pane-body clearfix">
             <!--   聊天区   -->
-            <div class="chats-pane"></div>
+            <div class="chats-pane">
+
+               <!--   聊天内容列表区   -->
+               <div class="container">
+                  <div class="chats-wrapper">
+                     <!--   点击加载更多   -->
+                     <div class="log-btn">点击加载更多</div>
+                     <!--   列表   -->
+                     <div class="Chat-list">
+                        <!--   单条消息 从这循环   -->
+                        <!--   文本消息 用户  -->
+                        <div class="Chat-item">
+                           <!-- 时间 -->
+                           <div class="Chat-item-date">2021/02/22 13:22:12</div>
+                           <!-- 消息 -->
+                           <div class="Chat-item-container clearfix">
+                              <!-- 头像 -->
+                              <div class="Chat-item-head">
+                                 <img src="img/avatar.png" />
+                              </div>
+                              <!-- 内容区 -->
+                              <div class="Chat-item-content clearfix">
+                                 <div class="Chat-item-wrapper">
+                                    <div class="Chat-item-message flex">
+                                       <div class="Chat-item-box">
+                                          <!-- 文本消息 -->
+                                          <div>亲，在吗？ 想问下这个还有货吗？</div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <!--   文本消息 店铺   -->
+                        <div class="Chat-item">
+                           <!-- 时间 -->
+                           <div class="Chat-item-date">2021/02/22 13:22:12</div>
+                           <!-- 消息 这里添加 Chat-custom -->
+                           <div class="Chat-item-container clearfix Chat-custom">
+                              <!-- 头像 -->
+                              <div class="Chat-item-head">
+                                 <img src="img/avatar.png" />
+                              </div>
+                              <!-- 内容区 -->
+                              <div class="Chat-item-content clearfix">
+                                 <div class="Chat-item-wrapper">
+                                    <div class="Chat-item-message flex">
+                                       <!-- 状态 -->
+                                       <div class="Chat-item-status">已读</div>
+                                       <div class="Chat-item-box">
+                                          <!-- 文本消息 -->
+                                          <div>亲，欢迎收藏、推荐宝贝，并加入购物车。客服在线时间为早上7：00-23:00，本店宝贝显示免运费</div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <!--   图片消息 店铺   -->
+                        <div class="Chat-item">
+                           <!-- 时间 -->
+                           <div class="Chat-item-date">2021/02/22 13:22:12</div>
+                           <!-- 消息 这里添加 Chat-custom -->
+                           <div class="Chat-item-container clearfix Chat-custom">
+                              <!-- 头像 -->
+                              <div class="Chat-item-head">
+                                 <img src="img/avatar.png" />
+                              </div>
+                              <!-- 内容区 -->
+                              <div class="Chat-item-content clearfix">
+                                 <div class="Chat-item-wrapper">
+                                    <div class="Chat-item-message flex">
+                                       <!-- 状态 -->
+                                       <div class="Chat-item-status">已读</div>
+                                       <div class="Chat-item-box Chat-item-img">
+                                          <img src="img/default.png" />
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <!--   问题列表 店铺   -->
+                        <div class="Chat-item">
+                           <!-- 时间 -->
+                           <div class="Chat-item-date">2021/02/22 13:22:12</div>
+                           <!-- 消息 这里添加 Chat-custom -->
+                           <div class="Chat-item-container clearfix Chat-custom">
+                              <!-- 头像 -->
+                              <div class="Chat-item-head">
+                                 <img src="img/avatar.png" />
+                              </div>
+                              <!-- 内容区 -->
+                              <div class="Chat-item-content clearfix">
+                                 <div class="Chat-item-wrapper">
+                                    <div class="Chat-item-message flex">
+                                       <!-- 状态 -->
+                                       <div class="Chat-item-status">已读</div>
+                                       <!-- 问题消息 -->
+                                       <div class="Chat-item-box Chat-item-problem">
+                                          <div>
+                                             <div class="title">亲，很高兴为你服务，请问你要咨询什么问题呢？</div>
+                                             <div class="item">哪里发货？</div>
+                                             <div class="item">发什么快递？</div>
+                                             <div class="item">退货包运费吗？</div>
+                                             <div class="mt8 f12 c-999">此消息由机器人发送</div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <!--   商品消息 店铺   -->
+                        <div class="Chat-item">
+                           <!-- 时间 -->
+                           <div class="Chat-item-date">2021/02/22 13:22:12</div>
+                           <!-- 消息 这里添加 Chat-custom -->
+                           <div class="Chat-item-container clearfix Chat-custom">
+                              <!-- 头像 -->
+                              <div class="Chat-item-head">
+                                 <img src="img/avatar.png" />
+                              </div>
+                              <!-- 内容区 -->
+                              <div class="Chat-item-content clearfix">
+                                 <div class="Chat-item-wrapper">
+                                    <div class="Chat-item-message flex">
+                                       <!-- 状态 -->
+                                       <div class="Chat-item-status">已读</div>
+                                       <!-- 商品消息 -->
+                                       <div class="Chat-item-box Chat-item-goods">
+                                          <div class="goods-item">
+                                             <img src="img/default.png" class="pic" />
+                                             <div class="content">
+                                                <div class="line1">
+                                                   <div class="title">充电式吹风机锂电鼓风机大功率工业小型车载吸尘吹灰吹雪除小型车载吸尘吹灰吹雪除</div>
+                                                </div>
+                                                <div class="price c-red">租金：<span>￥</span>10.99~99.99<span>/天</span></div>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <!--   订单消息 店铺   -->
+                        <div class="Chat-item">
+                           <!-- 时间 -->
+                           <div class="Chat-item-date">2021/02/22 13:22:12</div>
+                           <!-- 消息 这里添加 Chat-custom -->
+                           <div class="Chat-item-container clearfix Chat-custom">
+                              <!-- 头像 -->
+                              <div class="Chat-item-head">
+                                 <img src="img/avatar.png" />
+                              </div>
+                              <!-- 内容区 -->
+                              <div class="Chat-item-content clearfix">
+                                 <div class="Chat-item-wrapper">
+                                    <div class="Chat-item-message flex">
+                                       <!-- 状态 -->
+                                       <div class="Chat-item-status">已读</div>
+                                       <!-- 订单消息 -->
+                                       <div class="Chat-item-box Chat-item-order">
+                                          <div class="order-title between">
+                                             <span class="f12 c-999">订单编号：123456789012345678</span>
+                                             <span class="f12 c-red">待付款</span>
+                                          </div>
+                                          <div class="order-item">
+                                             <img src="img/default.png" class="pic" />
+                                             <div class="content">
+                                                <div class="title mb5">充电式吹风机锂电鼓风机大功率工业小型车载吸尘吹灰吹雪除小型车载吸尘吹灰吹雪除</div>
+                                                <div class="f12 c-999 mb5">8800H一电一充</div>
+                                                <div class="between mb5">
+                                                   <div class="price c-red">租金：<span>￥</span>10.99~99.99<span>/天</span></div>
+                                                   <div class="f12">X2</div>
+                                                </div>
+                                             </div>
+                                          </div>
+                                          <div class="order-item">
+                                             <img src="img/default.png" class="pic" />
+                                             <div class="content">
+                                                <div class="title mb5">充电式吹风机锂电鼓风机大功率工业小型车载吸尘吹灰吹雪除小型车载吸尘吹灰吹雪除</div>
+                                                <div class="f12 c-999 mb5">8800H一电一充</div>
+                                                <div class="between mb5">
+                                                   <div class="price c-red">租金：<span>￥</span>10.99~99.99<span>/天</span></div>
+                                                   <div class="f12">X2</div>
+                                                </div>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <!--   订单消息 确认订单 店铺   -->
+                        <div class="Chat-item">
+                           <!-- 时间 -->
+                           <div class="Chat-item-date">2021/02/22 13:22:12</div>
+                           <!-- 消息 这里添加 Chat-custom -->
+                           <div class="Chat-item-container clearfix Chat-custom">
+                              <!-- 头像 -->
+                              <div class="Chat-item-head">
+                                 <img src="img/avatar.png" />
+                              </div>
+                              <!-- 内容区 -->
+                              <div class="Chat-item-content clearfix">
+                                 <div class="Chat-item-wrapper">
+                                    <div class="Chat-item-message flex">
+                                       <!-- 状态 -->
+                                       <div class="Chat-item-status">已读</div>
+                                       <!-- 订单消息 -->
+                                       <div class="Chat-item-box Chat-item-order">
+                                          <div class="order-title between">
+                                             <span class="f12">用户已归还，待商家确认账单</span>
+                                          </div>
+                                          <div class="order-item">
+                                             <img src="img/default.png" class="pic" />
+                                             <div class="content">
+                                                <div class="title mb5">充电式吹风机锂电鼓风机大功率工业小型车载吸尘吹灰吹雪除小型车载吸尘吹灰吹雪除</div>
+                                                <div class="f12 c-999 mb5">8800H一电一充</div>
+                                                <div class="between mb5">
+                                                   <div class="price c-red">租金：<span>￥</span>10.99~99.99<span>/天</span></div>
+                                                   <div class="f12">X2</div>
+                                                </div>
+                                             </div>
+                                          </div>
+                                          <div class="tr operate">
+                                             <button class="btn btn-red">确认订单</button>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <!--   订单消息 售后通知 店铺   -->
+                        <div class="Chat-item">
+                           <!-- 时间 -->
+                           <div class="Chat-item-date">2021/02/22 13:22:12</div>
+                           <!-- 消息 这里添加 Chat-custom -->
+                           <div class="Chat-item-container clearfix Chat-custom">
+                              <!-- 头像 -->
+                              <div class="Chat-item-head">
+                                 <img src="img/avatar.png" />
+                              </div>
+                              <!-- 内容区 -->
+                              <div class="Chat-item-content clearfix">
+                                 <div class="Chat-item-wrapper">
+                                    <div class="Chat-item-message flex">
+                                       <!-- 状态 -->
+                                       <div class="Chat-item-status">已读</div>
+                                       <!-- 订单消息 -->
+                                       <div class="Chat-item-box Chat-item-order">
+                                          <div class="order-title between">
+                                             <span class="f12 c-999">订单编号：123456789012345678</span>
+                                             <span class="f12 c-red">待付款</span>
+                                          </div>
+                                          <div class="order-item">
+                                             <img src="img/default.png" class="pic" />
+                                             <div class="content">
+                                                <div class="title mb5">充电式吹风机锂电鼓风机大功率工业小型车载吸尘吹灰吹雪除小型车载吸尘吹灰吹雪除</div>
+                                                <div class="f12 c-999 mb5">8800H一电一充</div>
+                                                <div class="between mb5">
+                                                   <div class="price c-red">租金：<span>￥</span>10.99~99.99<span>/天</span></div>
+                                                   <div class="f12">X2</div>
+                                                </div>
+                                             </div>
+                                          </div>
+                                          <div class="order-item">
+                                             <img src="img/default.png" class="pic" />
+                                             <div class="content">
+                                                <div class="title mb5">充电式吹风机锂电鼓风机大功率工业小型车载吸尘吹灰吹雪除小型车载吸尘吹灰吹雪除</div>
+                                                <div class="f12 c-999 mb5">8800H一电一充</div>
+                                                <div class="between mb5">
+                                                   <div class="price c-red">租金：<span>￥</span>10.99~99.99<span>/天</span></div>
+                                                   <div class="f12">X2</div>
+                                                </div>
+                                             </div>
+                                          </div>
+                                          <div class="tr operate">
+                                             <button class="btn">查看详情</button>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+
+               <!--   聊天内容输入区   -->
+               <div class="input-field">
+                  <!--   工具栏   -->
+                  <div class="tool-bar acenter">
+                     <a href="javascript:;" class="ml20"><img src="img/face.png" width="24" /></a>
+                     <a href="javascript:;" class="ml20"><img src="img/picture.png" width="24" /></a>
+                  </div>
+                  <!--   输入框   -->
+                  <div class="send-box">
+                     <pre name="sendBox" class="send-textarea" contenteditable="true"></pre>
+                  </div>
+                  <!--   按钮区   -->
+                  <div class="tr">
+                     <button>发送</button>
+                  </div>
+               </div>
+            </div>
+
+
             <!--   产品区   -->
             <div class="goods-pane">
                <!--   一级标签   -->
@@ -92,7 +404,7 @@
                   <div class="tab-item"><div>店铺其他商品</div></div>
                </div>
                <!--   商品列表   -->
-               <div class="goods-list" style="display: none">
+               <div class="goods-list" style="display: block">
                   <div class="goods-item">
                      <img src="img/default.png" class="pic" />
                      <div class="content">
@@ -116,7 +428,7 @@
                   </div>
                </div>
                <!--   订单列表   -->
-               <div class="order-list">
+               <div class="order-list" style="display: none">
                   <div class="order-item">
                      <img src="img/default.png" class="pic" />
                      <div class="content">
@@ -157,6 +469,8 @@
                   </div>
                </div>
             </div>
+
+
          </div>
       </div>
    </div>

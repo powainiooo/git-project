@@ -1,6 +1,6 @@
 body { min-width: 1200px; height: 100vh; background-color: rgba(0, 0, 0, .4); color: #333333; }
 .main { width: 100%; height: 100%; padding: 3% 0; }
-.container { width: 1200px; height: 100%; margin: 0 auto; background-color: #FFFFFF; }
+.main-box { width: 1200px; height: 100%; margin: 0 auto; background-color: #FFFFFF; }
 
 .c-red { color: #FE322B; }
 .c-333 { color: #333333; }
@@ -19,7 +19,7 @@ body { min-width: 1200px; height: 100vh; background-color: rgba(0, 0, 0, .4); co
 .left-pane-content { width: 100%; height: calc(100% - 100px); height: -webkit-calc(100% - 100px); position: relative; }
 .left-pane-content:after { content: ''; width: 1px; height: 100%; background-color: #D5D5D5; position: absolute; top: 0; right: 0; }
 .dialog-list { width: 100%; height: 100%; overflow-y: auto; }
-.dialog-list .dialog { width: 100%; height: 80px; padding: 20px; background-color: #F5F5F5; overflow: hidden; }
+.dialog-list .dialog { width: 100%; height: 80px; padding: 20px; background-color: #F5F5F5; overflow: hidden; cursor: pointer; }
 .dialog-list .dialog-active { background-color: #D2E6F9; }
 .dialog-list .dialog img { margin-right: 10px; float: left; }
 .dialog-list .dialog .right-info .line1 { margin-bottom: 3px; }
@@ -35,6 +35,17 @@ body { min-width: 1200px; height: 100vh; background-color: rgba(0, 0, 0, .4); co
 
 .chats-pane { width: 540px; height: 100%; position: relative; float: left; }
 .chats-pane:after { content: ''; width: 1px; height: 100%; background-color: #D5D5D5; position: absolute; top: 0; right: 0; }
+
+.container { height: calc(100% - 190px); height: -webkit-calc(100% - 190px); position: relative; overflow: hidden; }
+.chats-wrapper { width: 100%; height: 100%; overflow-x: hidden; overflow-y: auto; padding: 20px; }
+.chats-wrapper .log-btn { font-size: 12px; color: #333333; text-align: center; margin-bottom: 20px; cursor: pointer; }
+
+.input-field { height: 190px; position: relative; }
+.input-field .tool-bar { height: 40px; border-top: 1px solid #D5D5D5; }
+.input-field button { width: 74px; height: 32px; background-color: #1E9FFF; border: none; border-radius: 2px; font-size: 14px; color: #FFFFFF; margin-right: 20px; }
+
+.send-box { width: 100%; }
+.send-box .send-textarea { width: 100%; height: 98px; padding: 10px 20px; background-color: #FFFFFF; color: #333333; font-size: 12px; word-break: break-all; white-space: normal; overflow-y: auto; }
 
 
 .goods-pane { width: 340px; height: 100%; position: relative; float: left; overflow-y: auto; }
@@ -70,4 +81,30 @@ body { min-width: 1200px; height: 100vh; background-color: rgba(0, 0, 0, .4); co
 .order-item .operate { padding-top: 5px; border-top: 1px solid #D5D5D5; }
 
 
+.Chat-item { margin-bottom: 20px; }
+.Chat-item-date { font-size: 12px; color: #999999; text-align: center; margin-bottom: 40px; }
+.Chat-item-head { width: 40px; height: 40px; border-radius: 50%; background-color: #D5D5D5; overflow: hidden; margin-right: 10px; float: left; }
+.Chat-item-head img { width: 100%; height: 100%; }
+.Chat-item-content { position: relative; }
+.Chat-item-wrapper { float: left; max-width: 402px; }
+.Chat-item-message { min-height: 40px; }
+.Chat-item-status { width: 26px; display: flex; align-items: flex-end; font-size: 12px; color: #999999; margin-right: 10px; }
+.Chat-item-box { padding: 10px 15px; background-color: #F5F5F5; border-radius: 4px; text-align: justify; word-break: break-all; flex: 1 0 0; font-size: 14px; color: #333333; }
+.Chat-custom .Chat-item-head { float: right; margin-right: 0; margin-left: 10px; }
+.Chat-custom .Chat-item-wrapper { float: right; }
 
+.Chat-item-problem { border: 1px solid #F5F5F5; background-color: #FFFFFF; }
+.Chat-item-problem .title { padding: 0 15px 8px 15px; margin: 0 -15px; border-bottom: 1px solid #F5F5F5; }
+.Chat-item-problem .item { padding: 8px 15px; margin: 0 -15px; color: #3B76FF; border-bottom: 1px solid #F5F5F5; }
+
+.Chat-item-goods, .Chat-item-order { border: 1px solid #F5F5F5; background-color: #FFFFFF; }
+
+.Chat-item-order { padding: 0; }
+.Chat-item-order .order-title { padding: 10px 15px; }
+.Chat-item-order .order-item { padding: 10px 15px; border-top: 1px solid #F5F5F5; }
+.Chat-item-order .operate { padding: 10px 15px; border-top: 1px solid #F5F5F5; }
+.Chat-item-order .operate .btn { width: 80px; }
+.Chat-item-order .operate .btn-red { border-color: #FE322B; color: #FE322B; }
+
+.Chat-item-img { width: 220px; padding: 10px; background-color: rgb(207, 237, 255); }
+.Chat-item-img img { width: 100%; }

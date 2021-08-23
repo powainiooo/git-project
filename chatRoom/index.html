@@ -377,7 +377,8 @@
                   <!--   工具栏   -->
                   <div class="tool-bar acenter">
                      <a href="javascript:;" class="ml20"><img src="img/face.png" width="24" /></a>
-                     <a href="javascript:;" class="ml20"><img src="img/picture.png" width="24" /></a>
+                     <a href="javascript:;" class="ml20" id="btnUpload"><img src="img/picture.png" width="24" /></a>
+                     <input type="file" style="display: none" id="file" />
                   </div>
                   <!--   输入框   -->
                   <div class="send-box">
@@ -389,7 +390,6 @@
                   </div>
                </div>
             </div>
-
 
             <!--   产品区   -->
             <div class="goods-pane">
@@ -429,7 +429,7 @@
                </div>
                <!--   订单列表   -->
                <div class="order-list" style="display: none">
-                  <div class="order-item">
+                  <div class="order-item" style="display: none">
                      <img src="img/default.png" class="pic" />
                      <div class="content">
                         <div class="title mb5">充电式吹风机锂电鼓风机大功率工业小型车载吸尘吹灰吹雪除小型车载吸尘吹灰吹雪除</div>
@@ -448,7 +448,7 @@
                         <button class="btn">发送</button>
                      </div>
                   </div>
-                  <div class="order-item">
+                  <div class="order-item" style="display: none">
                      <img src="img/default.png" class="pic" />
                      <div class="content">
                         <div class="title mb5">充电式吹风机锂电鼓风机大功率工业小型车载吸尘吹灰吹雪除小型车载吸尘吹灰吹雪除</div>
@@ -470,10 +470,63 @@
                </div>
             </div>
 
-
          </div>
       </div>
    </div>
 </section>
+
+<!-- 个人信息 -->
+<section class="personal center" style="display: none;">
+   <div class="box">
+      <div class="h48 between mb20">
+         <h3 class="ml20 mt12 f14">个人资料</h3>
+         <a href="javascript:;" class="mr20"><img src="img/x.png" width="12" /></a>
+      </div>
+
+      <div class="pane">
+         <div class="info acenter">
+            <img src="img/avatar.png" />
+            <div>
+               <h3 class="f18">五金阿哥</h3>
+               <div class="mt10">
+                  <span class="tag">已认证</span>
+                  <span class="tag" style="background-color: #333333;">未认证</span>
+               </div>
+            </div>
+         </div>
+         <div class="c-999 pt10 pb10 pl15">租龄：1年</div>
+      </div>
+
+      <div class="pane">
+         <div class="nums-item between">
+            <span>下单数</span>
+            <span>120</span>
+         </div>
+         <div class="nums-item between">
+            <span>退单数</span>
+            <span>120</span>
+         </div>
+         <div class="nums-item between">
+            <span>租用数</span>
+            <span>120</span>
+         </div>
+      </div>
+   </div>
+</section>
+
+<script src="js/jquery-2.1.4.min.js"></script>
+<script>
+window.onload = function () {
+   // 点击打开文件选择
+   $("#btnUpload").on('click', function () {
+      $("#file").click()
+   })
+   // 监听文件选择
+	$("#file").on('change', function (e) {
+      var file = e.target.files
+		console.log('file', file)
+	})
+}
+</script>
 </body>
 </html>

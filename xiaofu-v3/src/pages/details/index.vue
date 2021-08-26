@@ -90,6 +90,9 @@ export default {
     },
     openShare () {
       this.$refs.share.showShare = true
+    },
+    hideShare () {
+      this.$refs.share.showShare = false
     }
   },
   mounted () {
@@ -104,6 +107,7 @@ export default {
       this.getData()
     }
     this.handleClose()
+    this.hideShare()
   },
   onLoad (options) {
     // let app = getApp()

@@ -15,7 +15,7 @@
   <div class="canvas-frame">
     <canvas
       canvas-id="myCanvas"
-      style="width: 1000px; height: 800px; transform-origin: 0 0; transform: scale(.5)"
+      style="width: 1000px; height: 800px; transform-origin: 0 0; transform: scale(.3)"
     />
   </div>
   <div class="canvas-frame">
@@ -64,7 +64,7 @@ export default {
         success: (res) => {
           console.log('getImageInfo', res)
           const h = 1000 * res.height / res.width
-          ctx.drawImage(res.path, 0, 0, res.width, h, 0, 0, 1000, 800)
+          ctx.drawImage(res.path, 0, 0, res.width, res.height, 0, 0, 1000, h)
           ctx.draw(true)
           this.drawPoster(ctx)
         },

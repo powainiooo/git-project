@@ -67,7 +67,7 @@
   </transition>
   <!-- 注册账号信息 -->
   <transition enter-active-class="moveIn" leave-active-class="moveOut">
-    <section class="login-container" v-if="page === 'register'">
+    <section class="login-container" v-show="page === 'register'">
       <Register />
     </section>
   </transition>

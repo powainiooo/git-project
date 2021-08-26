@@ -52,7 +52,7 @@
 </style>
 
 <template>
-<div class="details-frame" :style="{width: page === 'info' ? '650px' : '1300px'}">
+<div class="details-frame" :style="{width: (page === 'info' || page === 'notify') ? '650px' : '1300px'}">
   <div class="details-btns">
     <a href="javascript:;" class="fl" v-show="page === 'charts' || page === 'orders' || page === 'refunds'" @click="page = 'info'"><img src="@/assets/img/ico-back.png" width="28" /></a>
     <a href="javascript:;" class="fr" @click="$emit('close')"><img src="@/assets/img/ico-close2.png" width="28" /></a>
@@ -69,6 +69,7 @@
   <charts v-if="page === 'charts'" :record="record" />
   <orders v-if="page === 'orders'" :record="record" @toggle="toggle" />
   <refunds ref="refund" v-if="page === 'refunds'" :record="record" @toggle="toggle" />
+  <notify ref="notify" v-if="page === 'notify'" :record="record" @toggle="toggle" />
 </div>
 </template>
 
@@ -77,13 +78,15 @@ import infos from './infos'
 import charts from './charts'
 import orders from './orders'
 import refunds from './refunds'
+import notify from './notify'
 export default {
   name: 'app',
   components: {
     infos,
     charts,
     orders,
-    refunds
+    refunds,
+    notify
   },
   props: {
     record: Object,

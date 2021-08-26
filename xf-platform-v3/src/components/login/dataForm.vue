@@ -64,7 +64,7 @@
 <template>
 <form-box class="c-data-form" :width="600" :height="376" :ids="70" :index="step">
   <template slot="button">
-      <Button size="small" v-if="step !== 1" @click="step -= 1">上一步</Button>
+      <Button size="small" @click="handlePrev">上一步</Button>
       <Button size="small" v-if="step !== 3" :disabled="nextBtnDisable" @click="handleNext">下一步</Button>
       <Button size="small" v-if="step === 3" :loading="confirm.isAjax" :disabled="confirm.index !== 0" @click="handleConfirm">{{confirm.btn}}</Button>
   </template>
@@ -561,6 +561,13 @@ export default {
   },
   inject: ['changePage'],
   methods: {
+    handlePrev () {
+      if (this.step === 1) {
+        this.changePage('register')
+      } else {
+        this.step -= 1
+      }
+    },
     handleNext () {
       if (this.step === 1 && this.formData.longitude === '') {
         this.$Message.warning('请点击地址输入框内的”定位“，完善定位信息')

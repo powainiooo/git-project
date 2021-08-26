@@ -36,6 +36,28 @@
     .Chat-item-wrapper
       float right
   &-footer
-    margin-left 12px; margin-right 12px;
-    input
+    margin 7px 12px;
+    input, .btn
       flex 1 0 auto; width calc(100vw - 120px); height 36px; border-radius 20px; background-color #FFFFFF; padding 0 20px; margin-right 8px;
+    .btn
+      font-size 14px; color #333333; line-height 36px; text-align center;
+  &-emoji
+    border-top 1px solid #E5E5E5; background-color #F5F5F5;
+    &-scroll
+      height 312px;
+    &-list
+      margin 20px 0 20px 4px; display flex; flex-wrap wrap;
+    &-item
+      size(46px, 26px); text-align center; margin-bottom 16px; font-size 26px; line-height 26px;
+    &-toolbar
+      size(138px, 92px); background-color #F5F5F5; abBR(0, 0); center();
+      .btn
+        size(53px, 36px); border-radius 4px; background-color #FFFFFF; center(); font-size 14px; color #FFFFFF; margin 0 4px;
+      .btn-send
+        background-color #FE322B;
+      .btn-disabled
+        opacity .5
+  .footer-chat
+    background-color #F5F6F7; display block; padding 0; bottom -312px; transition bottom .3s ease-out;
+  .footer-chat-show
+    bottom 0

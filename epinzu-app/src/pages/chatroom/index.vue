@@ -1,19 +1,36 @@
 <template>
   <view class="Chat">
-    <view class="Chat-list">
+    <view class="Chat-list" @tap="showEmoji = false">
       <item v-for="item in mesList"
             :key="item.id"
             :record="item"
             :info="chartInfo" />
     </view>
 
-    <view class="footer-container" style="background-color: #F5F6F7">
+    <view class="footer-container footer-chat"
+          id="footer"
+          :class="{'footer-chat-show': showEmoji}">
       <view class="acenter Chat-footer">
-        <image src="@/img/voice.png" mode="widthFix" class="w24 mr8" />
-        <input v-model="contents" @confirm="sendTxtMsg"/>
-        <image src="@/img/face.png" mode="widthFix" class="w24 mr8" />
+        <image src="@/img/keyboard.png" mode="widthFix" class="w24 mr8" v-if="showVoice" @tap="showVoice = false" />
+        <image src="@/img/voice.png" mode="widthFix" class="w24 mr8" v-else @tap="showVoice = true" />
+        <view class="btn" v-if="showVoice">按住 说话</view>
+        <input v-model="contents"
+               ref="input"
+               :focus="isFous"
+               confirmType="send"
+               confirm-type="send"
+               @blur="onBlur"
+               @focus="onfocus"
+               @confirm="sendTxtMsg"
+               v-else/>
+        <image src="@/img/face.png" mode="widthFix" class="w24 mr8" v-if="!showEmoji" @tap="openEmoji" />
+        <image src="@/img/keyboard.png" mode="widthFix" class="w24 mr8" v-if="showEmoji" @tap="inputFocus" />
         <image src="@/img/add3.png" mode="widthFix" class="w24" />
       </view>
+      <emoji :disabled="contents === ''"
+             @insert="insertImg"
+             @del="delMsg"
+             @send="sendTxtMsg" />
     </view>
   </view>
 </template>
@@ -22,13 +39,15 @@
 import Taro from '@tarojs/taro'
 import './index.styl'
 import item from './modules/item'
+import emoji from './modules/emoji'
 import { wsUrl } from '@/config'
 import { formatDate } from "@/utils"
 
 export default {
   name: 'Index',
   components: {
-    item
+    item,
+    emoji
   },
   computed: {
     userInfo () {
@@ -45,7 +64,10 @@ export default {
         storeAccount: '',
         storeAvatar: ''
       },
-      contents: ''
+      contents: '',
+      showEmoji: false,
+      showVoice: false,
+      isFous: false
     }
   },
   methods: {
@@ -218,6 +240,38 @@ export default {
     getUserMessage (res) {
       console.log('getUserMessage', res)
       this.addMessage('store', res.data.message, res.message_id)
+    },
+    // 输入框聚焦
+    inputFocus () {
+      console.log('inputFocus')
+      this.isFous = true
+    },
+    onfocus () {
+      console.log('onfocus')
+      this.showEmoji = false
+      this.isFous = true
+    },
+    onBlur () {
+      console.log('onBlur')
+      this.isFous = false
+    },
+    openEmoji () {
+      console.log('openEmoji')
+      this.showEmoji = true
+      this.isFous = false
+      Taro.hideKeyboard()
+    },
+    // 插入表情
+    insertImg (img) {
+      this.contents += img
+    },
+    // 输入框内容回退
+    delMsg () {
+      let len = 0
+      for (const s of this.contents) {
+        len = s.length
+      }
+      this.contents = this.contents.substr(0, this.contents.length - len)
     }
   },
   onShow () {

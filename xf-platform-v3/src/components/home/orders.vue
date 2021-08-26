@@ -104,6 +104,19 @@
       </div>
     </div>
   </div>
+
+  <div class="refund-hint" v-if="showNotifyHint">
+    <div>
+      <h3>是否确认发送活动变更通知？</h3>
+      <p>活动变更通知，每场活动仅可发送一次，仅可用于通知已购票消费者<br/>
+        本场活动改期 或 取消所用。不可用于其他用途，确认发送后消息将会<br/>
+        立即送达且无法取消，请谨慎操作。</p>
+      <div>
+        <Button size="small" @click="gotoNotify">确认发送</Button>
+        <Button type="normal" size="small" @click="showNotifyHint = false">取消发送</Button>
+      </div>
+    </div>
+  </div>
 </div>
 </template>
 
@@ -123,6 +136,7 @@ export default {
   data () {
     return {
       showRefundHint: false,
+      showNotifyHint: false,
       stateList: ['未付款', '已支付', '退款申请中', '已退款', '已退款'],
       total: 0,
       pageNo: 1,
@@ -188,7 +202,8 @@ export default {
       window.open(`${window.baseUrl}/editor/order/export?id=${this.record.id}&token=${Vue.ls.get(ACCESS_TOKEN)}`)
     },
     doNotify () {
-      console.log('doNotify', this.$tModal)
+      this.showNotifyHint = true
+      return false
       this.$tModal.confirm({
         title: '是否确认使用一次性通知？',
         content: '一次性通知仅可使用一次，由于微信消息通知限制，只可在用户已购票后的7日内发送消息。<br>超过7日的用户则无法收取该消息，请谨慎使用！<br>可用于活动场地变更、活动改期、活动取消等紧急情况时，作为通知已购票用户功能。',
@@ -216,6 +231,10 @@ export default {
       this.showRefundHint = false
       this.$store.commit('SET_REFUNDERRORDATA', {})
       this.$emit('toggle', 'refunds')
+    },
+    gotoNotify () {
+      this.showNotifyHint = false
+      this.$emit('toggle', 'notify')
     },
     toRefundDetail () {
       postAction('/editor/order/refund_audit_result', {

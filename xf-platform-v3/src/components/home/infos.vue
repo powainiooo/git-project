@@ -165,7 +165,6 @@
 <script type='es6'>
 import tagLine from '@/components/tagLine'
 import TSwitch from '@/components/TSwitch'
-import { formatDate } from '@/utils/tools'
 import { downFile, postAction } from '../../utils'
 export default {
   name: 'app',

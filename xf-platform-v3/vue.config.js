@@ -39,8 +39,12 @@ module.exports = {
 密码：nihao123
 *
 * https://web.uat.leesticket.com/NVcfRhyJlY.php
-leesticket
-nihao123
+* leesticket
+* nihao123
+*
+* https://web.leesticket.com/NVcfRhyJlY.php
+* leesticket
+* nihao123
 *
 ip：58.220.46.36  测试
 端口：21

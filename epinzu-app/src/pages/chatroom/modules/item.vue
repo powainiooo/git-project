@@ -21,7 +21,7 @@
           <view class="Chat-item-status" v-if="isUser">{{readStatus}}</view>
           <view class="Chat-item-box">
             <!-- 文本消息 -->
-            <view v-if="type === 'txt'">{{message.content}}</view>
+            <view class="Chat-item-text" v-if="type === 'txt'">{{message.content}}</view>
             <!-- 产品消息 -->
             <view class="Chat-item-goods" v-if="type === 'goods'">
               <image :src="imgSrc + message.data.goods_cover" mode="aspectFill" />
@@ -37,16 +37,22 @@
               <view class="mt8 f12 c-999">此消息由机器人发送</view>
             </view>
             <!-- 图片消息 -->
-            <view class="Chat-item-problem" v-if="type === 'img'">
-              {{imgSrc}}{{message.content}}
+            <view class="Chat-item-img" v-if="type === 'img'" @tap="viewPic">
+              <image :src="imgSrc + message.content" mode="widthFix" />
             </view>
             <!-- 音频消息 -->
-            <view class="Chat-item-problem" v-if="type === 'audio'">
-              {{imgSrc}}{{message.content}}
+            <view class="Chat-item-audio"
+                  v-if="type === 'audio'"
+                  :style="{width: voiceW}"
+                  @tap="voicePlay">
+              <image src="@/img/voice3.png" mode="widthFix" class="w16" v-show="voiceIndex === 3" />
+              <image src="@/img/voice2.png" mode="widthFix" class="w16" v-show="voiceIndex === 2" />
+              <image src="@/img/voice1.png" mode="widthFix" class="w16" v-show="voiceIndex === 1" />
+              <text>{{mediaData[0]}}''</text>
             </view>
             <!-- 视频消息 -->
             <view class="Chat-item-problem" v-if="type === 'video'">
-              {{imgSrc}}{{message.content}}
+              video: {{imgSrc}}{{message.content}}
             </view>
           </view>
         </view>
@@ -57,13 +63,31 @@
 </template>
 
 <script type='es6'>
+import Taro from '@tarojs/taro'
 import { imgSrc } from '@/config'
 
 export default {
 	name: 'app',
   props: {
 	  record: Object,
-    info: Object
+    info: Object,
+    playId: [String, Number]
+  },
+  watch: {
+	  // 监听当前播放id 来执行播放动画
+    playId (id) {
+      if (id === this.record.message_id) {
+        this.t = setInterval(() => {
+          this.voiceIndex += 1
+          if (this.voiceIndex > 3) {
+            this.voiceIndex = 1
+          }
+        }, 300)
+      } else {
+        clearInterval(this.t)
+        this.voiceIndex = 3
+      }
+    }
   },
   computed: {
 	  // 消息id 用于滚动
@@ -100,14 +124,36 @@ export default {
       const min = date2.getMinutes()
       const m = hour < 12 ? '上午' : '下午'
       return `${weeks[week]} ${m}${hour}:${min}`
+    },
+    // 语音或视频消息数据
+    mediaData () {
+      return this.message.content.split('|')
+    },
+    // 语音条宽度
+    voiceW () {
+      return (65 + 162 * this.mediaData[0] / 60) * 2 / 100 + 'rem'
     }
   },
 	data() {
 		return {
       imgSrc,
-      emoji: '😠'
+      voiceIndex: 3,
+      t: 0
     }
 	},
-	methods: {}
+	methods: {
+    viewPic () {
+      Taro.previewImage({
+        urls: [this.imgSrc + this.message.content]
+      })
+    },
+    voicePlay () {
+      this.$emit('play', {
+        type: 'audio',
+        id: this.record.message_id,
+        url: this.imgSrc + this.mediaData[1]
+      })
+    }
+  }
 }
 </script>

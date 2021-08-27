@@ -22,19 +22,33 @@
     &-status
       width 20px; display flex; align-items flex-end; font-size 10px; color #999999; margin-right 8px;
     &-box
-      padding 8px; background-color #FFFFFF; border-radius 4px; text-align justify; word-break break-all; flex 1 0 0;
+      background-color #FFFFFF; border-radius 4px; text-align justify; word-break break-all; flex 1 0 0;
     &-goods
-      margin 4px; width 222px;
+      padding 12px; width 222px;
       image
         size(222px, 222px); border-radius 2px; margin-bottom 8px; display block;
+    &-text
+      padding 8px;
     &-problem
       .item
-        padding 8px; margin 0 -8px; color #3B76FF;
+        padding 8px; color #3B76FF;
+    &-img
+      padding 0; font-size 0; width 150px; background-color #D8D8D8; border-radius 4px; overflow hidden;
+      image
+        width 100%;
+    &-audio
+      acenter(); height 100%; min-width 65px;
+      image
+        margin-left 16px; margin-right 4px;
   .Chat-custom
     .Chat-item-head
       float right; margin-right 0; margin-left 8px;
     .Chat-item-wrapper
       float right
+    .Chat-item-audio
+      flex-direction row-reverse;
+      image
+        transform scale(-1); margin-left 4px; margin-right 16px;
   &-footer
     margin 7px 12px;
     input, .btn
@@ -42,7 +56,7 @@
     .btn
       font-size 14px; color #333333; line-height 36px; text-align center;
   &-emoji
-    border-top 1px solid #E5E5E5; background-color #F5F5F5;
+    border-top 1px solid #E5E5E5; background-color #F5F5F5; position relative;
     &-scroll
       height 312px;
     &-list
@@ -58,6 +72,14 @@
       .btn-disabled
         opacity .5
   .footer-chat
-    background-color #F5F6F7; display block; padding 0; bottom -312px; transition bottom .3s ease-out;
+    background-color #F5F6F7; display block; padding 0; bottom -312px; transition bottom .3s ease-out; padding-bottom constant(safe-area-inset-bottom); padding-bottom env(safe-area-inset-bottom);
+    &:after
+      content ''; width 100%; height constant(safe-area-inset-bottom); height env(safe-area-inset-bottom); abBL(0, 0); background-color #F5F6F7; z-index 100;
   .footer-chat-show
     bottom 0
+  .audio-hint
+    size(152px, 152px); fxTL(50%, 50%); transform translate(-50%, calc(-50% - 48px)); background-color #999999; border-radius 8px;
+    .icons
+      display flex; justify-content center; align-items flex-end; margin-top 32px; margin-bottom 24px;
+  .audio-hint-cancel
+    background-color #FFAD56

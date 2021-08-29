@@ -3,8 +3,8 @@
 .Chat
   &-list
     margin 0 12px;
-    padding-bottom calc(100px + constant(safe-area-inset-bottom));
-    padding-bottom calc(100px + env(safe-area-inset-bottom));
+    padding-bottom calc(70px + constant(safe-area-inset-bottom));
+    padding-bottom calc(70px + env(safe-area-inset-bottom));
   &-item
     margin-bottom 16px;
     &-date
@@ -40,6 +40,18 @@
       acenter(); height 100%; min-width 65px;
       image
         margin-left 16px; margin-right 4px;
+    &-video
+      max-width 150px; height 150px; overflow hidden; border-radius 4px; position relative;
+      image
+        height 100%;
+      .play
+        width 24px; abTL(50%, 50%); transform translate(-50%, -50%);
+    &-loc
+      width 190px; background-color #FFFFFF; border-radius 4px; overflow hidden; padding-top 8px;
+      view
+        margin-left 8px; margin-right 8px;
+      image
+        width 100%; display block;
   .Chat-custom
     .Chat-item-head
       float right; margin-right 0; margin-left 8px;
@@ -58,13 +70,13 @@
   &-emoji
     border-top 1px solid #E5E5E5; background-color #F5F5F5; position relative;
     &-scroll
-      height 312px;
+      height 188px;
     &-list
       margin 20px 0 20px 4px; display flex; flex-wrap wrap;
     &-item
       size(46px, 26px); text-align center; margin-bottom 16px; font-size 26px; line-height 26px;
     &-toolbar
-      size(138px, 92px); background-color #F5F5F5; abBR(0, 0); center();
+      size(138px, 58px); background-color #F5F5F5; abBR(0, 0); center();
       .btn
         size(53px, 36px); border-radius 4px; background-color #FFFFFF; center(); font-size 14px; color #FFFFFF; margin 0 4px;
       .btn-send
@@ -72,9 +84,19 @@
       .btn-disabled
         opacity .5
   .footer-chat
-    background-color #F5F6F7; display block; padding 0; bottom -312px; transition bottom .3s ease-out; padding-bottom constant(safe-area-inset-bottom); padding-bottom env(safe-area-inset-bottom);
-    &:after
-      content ''; width 100%; height constant(safe-area-inset-bottom); height env(safe-area-inset-bottom); abBL(0, 0); background-color #F5F6F7; z-index 100;
+    background-color #F5F6F7; display block; padding 0; bottom -188px; transition bottom .3s ease-out; padding-bottom constant(safe-area-inset-bottom); padding-bottom env(safe-area-inset-bottom);
+    .tools-container
+      height 188px; overflow hidden;
+    .bottom-cover
+      width 100%; height constant(safe-area-inset-bottom); height env(safe-area-inset-bottom); fxBL(0, 0); background-color #F5F6F7; z-index 100;
+    .tools
+      margin 16px 12px; display flex;
+      &-item
+        width 54px; margin-right 32px;
+        &>.center
+          size(54px, 54px); background-color #FFFFFF; border-radius 4px; margin-bottom 8px;
+        .name
+          font-size 12px; color #666666; text-align center;
   .footer-chat-show
     bottom 0
   .audio-hint
@@ -83,3 +105,9 @@
       display flex; justify-content center; align-items flex-end; margin-top 32px; margin-bottom 24px;
   .audio-hint-cancel
     background-color #FFAD56
+  .video-frame
+    size(100%, 100vh); fxTL(0, 0); background-color rgba(0, 0, 0, .5); z-index 10000;
+    video
+      size(100%, 70vh);
+    image
+      width 24px; abTR(16px, 16px); z-index 10;

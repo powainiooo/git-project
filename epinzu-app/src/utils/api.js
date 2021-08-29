@@ -183,3 +183,21 @@ export const uploadAvatar = path => {
     })
   })
 }
+// 上传音频
+export const uploadAudio = (path, duration) => {
+  return new Promise((resolve, reject) => {
+    token = store.state.token
+    uploadFile({
+      url: `${baseUrl}/userapi/chat/upload/audio?${tokenKey}=${token}`,
+      filePath: path,
+      name: 'file',
+      formData: {
+        seconds: duration
+      }
+    }).then(res => {
+      resolve(res.data)
+    }).catch(err => {
+      reject(err)
+    })
+  })
+}

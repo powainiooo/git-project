@@ -1,7 +1,7 @@
 <template>
   <view class="Chat">
     <!--  消息列表  -->
-    <view class="Chat-list" @tap="showEmoji = false">
+    <view class="Chat-list" @tap="currentTool = ''">
       <item v-for="item in mesList"
             :key="item.id"
             :record="item"
@@ -9,11 +9,12 @@
             :playId="playId"
             @play="onplay" />
     </view>
+    <view id="msgBottom" class="h2"></view>
 
     <!--  底部操作栏  -->
     <view class="footer-container footer-chat"
           id="footer"
-          :class="{'footer-chat-show': showEmoji}">
+          :class="{'footer-chat-show': currentTool !== ''}">
       <!--  输入框和按钮  -->
       <view class="acenter Chat-footer">
         <image src="@/img/keyboard.png" mode="widthFix" class="w24 mr8" v-if="showVoice" @tap="showVoice = false" />
@@ -23,7 +24,7 @@
               v-if="showVoice"
               @touchstart="startRecord"
               @touchmove="tmove"
-              @touchend="stopRecord">按住 说话</view>
+              @touchend="stopRecord">{{recordBtn}}</view>
 
         <input v-model="contents"
                ref="input"
@@ -34,19 +35,38 @@
                @focus="onfocus"
                @confirm="sendTxtMsg"
                v-else/>
-        <image src="@/img/face.png" mode="widthFix" class="w24 mr8" v-if="!showEmoji" @tap="openEmoji" />
-        <image src="@/img/keyboard.png" mode="widthFix" class="w24 mr8" v-if="showEmoji" @tap="inputFocus" />
-        <image src="@/img/add3.png" mode="widthFix" class="w24" />
+        <image src="@/img/face.png" mode="widthFix" class="w24 mr8" v-if="currentTool !== 'emoji'" @tap="openEmoji" />
+        <image src="@/img/keyboard.png" mode="widthFix" class="w24 mr8" v-if="currentTool === 'emoji'" @tap="inputFocus" />
+        <image src="@/img/add3.png" mode="widthFix" class="w24" @tap="currentTool = 'tools'" />
       </view>
-      <!--  表情栏  -->
-      <emoji :disabled="contents === ''"
-             @insert="insertImg"
-             @del="delMsg"
-             @send="sendTxtMsg" />
+
+      <view class="tools-container">
+        <!--  表情栏  -->
+        <emoji :disabled="contents === ''"
+               @insert="insertImg"
+               @del="delMsg"
+               @send="sendTxtMsg" v-show="currentTool !== 'tools'" />
+        <!--  工具栏  -->
+        <view class="tools" v-show="currentTool === 'tools'">
+          <view class="tools-item" @tap="selectImg">
+            <view class="center"><image src="@/img/picture.png" mode="widthFix" class="w24" /></view>
+            <view class="name">照片</view>
+          </view>
+          <view class="tools-item">
+            <view class="center"><image src="@/img/camera.png" mode="widthFix" class="w24" /></view>
+            <view class="name">照片</view>
+          </view>
+        </view>
+      </view>
+      <view class="bottom-cover"></view>
     </view>
 
     <!--  语音录制提示  -->
-    <audio-hint ref="audioHint" :cancel="isCancel" />
+<!--    <audio-hint ref="audioHint" :cancel="isCancel" />-->
+    <view class="video-frame center" v-show="showVideo">
+      <video id="video" :src="videoSrc" />
+      <image src="@/img/cancel.png" mode="widthFix" @tap="hideVideo" />
+    </view>
   </view>
 </template>
 
@@ -55,22 +75,20 @@ import Taro from '@tarojs/taro'
 import './index.styl'
 import item from './modules/item'
 import emoji from './modules/emoji'
-import audioHint from './modules/audioHint'
 import { chatMixin } from './mixins/chat'
-import { audioMixin } from './mixins/audio'
+import { audioMixin } from './mixins/media'
 
 export default {
   name: 'Index',
   components: {
     item,
-    emoji,
-    audioHint
+    emoji
   },
   mixins: [chatMixin, audioMixin],
   data () {
     return {
       contents: '',
-      showEmoji: false,
+      currentTool: '',
       showVoice: false,
       isFous: false
     }
@@ -83,7 +101,7 @@ export default {
     },
     onfocus () {
       console.log('onfocus')
-      this.showEmoji = false
+      this.currentTool = ''
       this.isFous = true
     },
     onBlur () {
@@ -92,7 +110,7 @@ export default {
     },
     openEmoji () {
       console.log('openEmoji')
-      this.showEmoji = true
+      this.currentTool = 'emoji'
       this.isFous = false
       Taro.hideKeyboard()
     },
@@ -111,6 +129,8 @@ export default {
   },
   onReady () {
     this.audioInit()
+    this.recordInit()
+    this.videoInit()
   },
   onShow () {
     if (this.isConnect) return
@@ -118,6 +138,11 @@ export default {
   },
   onHide () {
     Taro.closeSocket()
+  },
+  onPullDownRefresh () {
+    if (!this.noHistory) {
+      this.reqHistory()
+    }
   },
   onLoad (options) {
     this.chartInfo.storeAccount = options.account || 'dev4'

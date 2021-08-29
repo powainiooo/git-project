@@ -11,6 +11,7 @@ export const chatMixin = {
   data () {
     return {
       isConnect: false,
+      noHistory: false,
       mesList: [],
       chartInfo: {
         myAccount: '',
@@ -73,13 +74,16 @@ export const chatMixin = {
               this.getCharts(res.data);
               break;
             case 'sync_read': // 已读状态改变
-              this.setAllRead();
+              this.setAllRead(res.data.is_read);
               break;
             case 'sync_chat': // 已读状态改变
               this.setAllRead();
               break;
             case 'user_message': // 接受店家消息
               this.getUserMessage(res);
+              break;
+            case 'history_chats': // 接受历史聊天记录
+              this.getHistory(res.data);
               break;
           }
         } else {
@@ -122,22 +126,25 @@ export const chatMixin = {
     },
     // 处理聊天记录
     getCharts (data) {
-      // console.log('getCharts', data, JSON.stringify(data))
+      console.log('getCharts', data, JSON.stringify(data))
       this.chartInfo.myAvatar = data.my_avatar
       this.chartInfo.storeAvatar = data.target_avatar
-      if (this.mesList.length !==0) {
-        const date1 = new Date(this.mesList[this.mesList.length - 1].created_at).getTime()
-        const date2 = new Date(data.list[0].created_at).getTime()
-        if (date2 > date1 + 10 * 60 * 1000) { // 时间相隔十分钟
-          data.list[0].beforeDate = date1
-        }
-      }
+
       this.mesList = this.mesList.concat(data.list)
+      this.mesList.forEach((item, index) => {
+        if (index !== 0) {
+          item.beforeDate = this.mesList[index - 1].created_at
+        }
+      })
       setTimeout(() => {
-        Taro.pageScrollTo({
-          selector: `#item${this.mesList[this.mesList.length - 1].message_id}`
-        })
+        this.pageScrollTo()
       }, 50)
+    },
+    // 移动滚动条
+    pageScrollTo (id) {
+      Taro.pageScrollTo({
+        selector: id ? `#item${id}` : '#msgBottom'
+      })
     },
     // 发送文本消息
     sendTxtMsg () {
@@ -157,10 +164,45 @@ export const chatMixin = {
         this.addMessage('my', mes)
       })
     },
+    // 发送语音消息
+    sendAudioMsg (content) {
+      const mes = {
+        "type": "audio",
+        "content": content
+      }
+      const data = {
+        "query":"send",
+        "data":{
+          "account": this.chartInfo.storeAccount,
+          "message": mes
+        }
+      }
+      this.send('send', data, () => {
+        this.addMessage('my', mes)
+      })
+    },
+    // 发送图片消息
+    sendImgMsg (content) {
+      const mes = {
+        "type": "img",
+        "content": content
+      }
+      const data = {
+        "query":"send",
+        "data":{
+          "account": this.chartInfo.storeAccount,
+          "message": mes
+        }
+      }
+      this.send('send', data, () => {
+        this.addMessage('my', mes)
+      })
+    },
     // 设置已读
-    setAllRead () {
+    setAllRead (isRead = 1) {
+      if (isRead === 0) return
       this.mesList.forEach(i => {
-        i.is_read = 1
+        i.is_read = isRead
       })
     },
     // 添加消息
@@ -179,17 +221,47 @@ export const chatMixin = {
       }
       this.mesList.push({
         message_id: id,
+        beforeDate: this.mesList[this.mesList.length - 1].created_at,
         "from_account": from,
         "to_account": to,
         "message": data,
         "is_read": 0,
         "created_at": formatDate(new Date(), 'yyyy-MM-dd HH:mm:ss')
       })
+      setTimeout(() => {
+        this.pageScrollTo()
+      }, 50)
     },
     // 接受店家消息
     getUserMessage (res) {
       console.log('getUserMessage', res)
       this.addMessage('store', res.data.message, res.message_id)
     },
+    // 请求历史记录
+    reqHistory () {
+      const data = {
+        "query": "history_chats",
+        "data":{
+          "start_id": this.mesList[0].message_id,
+          "limit": 20,
+          "account": this.chartInfo.storeAccount
+        }
+      }
+      this.send('reqHistory', data)
+    },
+    // 处理历史记录
+    getHistory (data) {
+      console.log('getHistory', data, JSON.stringify(data))
+      Taro.stopPullDownRefresh()
+      this.mesList = data.list.concat(this.mesList)
+      this.mesList.forEach((item, index) => {
+        if (index !== 0) {
+          item.beforeDate = this.mesList[index - 1].created_at
+        }
+      })
+      setTimeout(() => {
+        this.pageScrollTo(data.list[data.list.length - 1].message_id)
+      }, 50)
+    }
   }
 }

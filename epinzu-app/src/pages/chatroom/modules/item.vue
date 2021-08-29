@@ -5,7 +5,7 @@
 <template>
 <view class="Chat-item" :id="idStr">
   <!-- 时间 -->
-  <view class="Chat-item-date" v-if="record.beforeDate">{{dateStr}}</view>
+  <view class="Chat-item-date" v-if="dateStr">{{dateStr}}</view>
   <!-- 消息 -->
   <view class="Chat-item-container clearfix"
         :class="{'Chat-custom': isUser}">
@@ -30,11 +30,11 @@
             </view>
             <!-- 问题消息 -->
             <view class="Chat-item-problem" v-if="type === 'robot'">
-              <view class="pb8 borderB">{{message.data.title}}</view>
+              <view class="pb8 pt8 pl8 pr8 borderB">{{message.data.title}}</view>
               <view class="item borderB"
                     v-for="q in message.data.list"
                     :key="q.id">{{q.question}}</view>
-              <view class="mt8 f12 c-999">此消息由机器人发送</view>
+              <view class="pb8 pt8 pl8 pr8 f12 c-999">此消息由机器人发送</view>
             </view>
             <!-- 图片消息 -->
             <view class="Chat-item-img" v-if="type === 'img'" @tap="viewPic">
@@ -51,8 +51,20 @@
               <text>{{mediaData[0]}}''</text>
             </view>
             <!-- 视频消息 -->
-            <view class="Chat-item-problem" v-if="type === 'video'">
-              video: {{imgSrc}}{{message.content}}
+            <view class="Chat-item-video" v-if="type === 'video'" @tap="videoPlay">
+              <image :src="imgSrc + mediaData[0]" mode="heightFix" />
+              <image src="@/img/play.png" mode="widthFix" class="play" />
+            </view>
+            <!-- 视频消息 -->
+            <view class="Chat-item-video" v-if="type === 'video'" @tap="videoPlay">
+              <image :src="imgSrc + mediaData[0]" mode="heightFix" />
+              <image src="@/img/play.png" mode="widthFix" class="play" />
+            </view>
+            <!-- 定位消息 -->
+            <view class="Chat-item-loc" v-if="type === 'loc'" @tap="openLocation">
+              <view class="mb4">{{message.data.title}}</view>
+              <view class="f12 c-999">{{message.data.title}}</view>
+              <image :src="imgSrc + message.data.image" mode="widthFix" />
             </view>
           </view>
         </view>
@@ -65,6 +77,7 @@
 <script type='es6'>
 import Taro from '@tarojs/taro'
 import { imgSrc } from '@/config'
+import {formatDate} from "../../../utils"
 
 export default {
 	name: 'app',
@@ -113,17 +126,19 @@ export default {
     // 消息类型
     type () {
       return this.message.type
+      // return 'video'
     },
     // 消息时间
     dateStr () {
-      const date1 = new Date(this.record.beforeDate)
-      const date2 = new Date(this.record.created_at)
-      const weeks = ['日', '一', '二', '三', '四', '五', '六']
-      const week = date2.getDay()
-      const hour = date2.getHours()
-      const min = date2.getMinutes()
-      const m = hour < 12 ? '上午' : '下午'
-      return `${weeks[week]} ${m}${hour}:${min}`
+      if (this.record.beforeDate) {
+        const time1 = new Date(this.record.beforeDate).getTime()
+        const date = new Date(this.record.created_at)
+        const time2 = date.getTime()
+        if (time2 > time1 + 10 * 60 * 1000) { // 时间相隔十分钟
+          return formatDate(date, 'yyyy/MM/dd HH:mm')
+        }
+      }
+      return false
     },
     // 语音或视频消息数据
     mediaData () {
@@ -148,10 +163,30 @@ export default {
       })
     },
     voicePlay () {
+      console.log('voicePlay')
       this.$emit('play', {
         type: 'audio',
         id: this.record.message_id,
         url: this.imgSrc + this.mediaData[1]
+      })
+    },
+    videoPlay () {
+      console.log('videoPlay')
+      this.$emit('play', {
+        type: 'video',
+        id: this.record.message_id,
+        url: this.imgSrc + this.mediaData[1]
+      })
+    },
+    openLocation () {
+      Taro.openLocation({
+        name: this.message.data.title,
+        address: this.message.data.address,
+        latitude: Number(this.message.data.lat),
+        longitude: Number(this.message.data.lng),
+        success (res) {
+          console.log('openLocation', res)
+        }
       })
     }
   }

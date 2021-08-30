@@ -142,7 +142,8 @@ export const audioMixin = {
     // 选择视频
     selectVideo () {
       Taro.chooseVideo({
-        sourceType: ['album']
+        sourceType: ['album'],
+        compressed: true
       }).then(res1 => {
         console.log('chooseVideo', res1)
         uploadVideo(res1.tempFilePath).then(res2 => {

@@ -92,7 +92,7 @@ import coupons from './modules/coupons'
 import paramsList from './modules/paramsList'
 import GuessLike from '@/c/common/GuessLike'
 import Tabs from '@/c/common/Tabs'
-import { getAction, postAction, intercept } from '@/utils/api'
+import { getAction, postAction, intercept, toChatRoom } from '@/utils/api'
 import { pageMixin } from '@/mixins/pages'
 
 export default {
@@ -319,15 +319,15 @@ export default {
         // Taro.showToast({
         //   title: '打开客服'
         // })
-        getAction('/userapi/user/chat/account', {
-          uid: this.record.shop_id
-        }).then(res => {
-          if (res.code === 0) {
-            Taro.navigateTo({
-              url: `/pages/chatroom/index?account=${res.data.account}`
-            })
-          }
+        this.$store.commit('SET_CHATGOODS', {
+          goods_id: this.record.id,
+          goods_title: this.record.title,
+          goods_cover: this.record.cover,
+          goods_type: this.record.type,
+          goods_price: this.record.price_min,
+          goods_deposit: this.record.deposit_min
         })
+        toChatRoom(this.record.shop_id)
       })
     },
     // 判断是否收藏商品

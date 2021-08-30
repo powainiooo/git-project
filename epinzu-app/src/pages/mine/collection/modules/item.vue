@@ -7,7 +7,8 @@
       :class="{'item-box-show': showDel}"
       @touchstart="ts"
       @touchend="te"
-      @tap="toDetail">
+      @tap="toDetail"
+      v-if="visible">
   <view class="item">
     <view class="goods-item-hor">
       <image :src="imgSrc + record.cover" mode="aspectFill" class="img img85" />
@@ -44,6 +45,7 @@ export default {
   data() {
     return {
       imgSrc: Taro.imgSrc,
+      visible: true,
       showDel: false,
       sx: 0
     }
@@ -89,7 +91,7 @@ export default {
           Taro.showToast({
             title: res.msg
           })
-          this.$emit('refresh')
+          this.visible = false
         }
       })
     }

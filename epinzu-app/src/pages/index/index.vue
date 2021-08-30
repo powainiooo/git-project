@@ -113,12 +113,12 @@ export default {
         this.tbH = res.titleBarHeight
       }
     })
-    setTimeout(() => {
-      Taro.navigateTo({
-        url: '/pages/chatroom/index'
-      })
-      this.visible = true
-    }, 2000)
+    // setTimeout(() => {
+    //   Taro.navigateTo({
+    //     url: '/pages/chatroom/index'
+    //   })
+    //   this.visible = true
+    // }, 2000)
   },
   methods: {
     getData () { // 获取首页数据

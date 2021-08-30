@@ -1,5 +1,5 @@
 import Taro from '@tarojs/taro'
-import { uploadAudio, upload } from "@/utils/api"
+import { uploadAudio, upload, uploadVideo } from "@/utils/api"
 
 export const audioMixin = {
   data () {
@@ -130,6 +130,26 @@ export const audioMixin = {
           const res3 = JSON.parse(res2)
           if (res3.code === 0) {
             this.sendImgMsg(res3.data.url)
+            this.currentTool = ''
+          } else {
+            Taro.showToast({
+              title: res3.msg
+            })
+          }
+        })
+      })
+    },
+    // 选择视频
+    selectVideo () {
+      Taro.chooseVideo({
+        sourceType: ['album']
+      }).then(res1 => {
+        console.log('chooseVideo', res1)
+        uploadVideo(res1.tempFilePath).then(res2 => {
+          console.log('uploadVideo', res2)
+          const res3 = JSON.parse(res2)
+          if (res3.code === 0) {
+            this.sendVideoMsg(`${res3.data.cover}|${res3.data.url}`)
             this.currentTool = ''
           } else {
             Taro.showToast({

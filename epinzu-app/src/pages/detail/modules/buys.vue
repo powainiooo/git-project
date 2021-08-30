@@ -21,8 +21,7 @@
       <view class="flex wrap mb26">
         <view class="cate-item"
               :class="{
-              'cate-item-active': attrId === item.id,
-              'cate-item-disabled': item.store_nums === 0
+              'cate-item-active': attrId === item.id
             }"
               v-for="item in attrs"
               :key="item.id"
@@ -112,11 +111,9 @@ export default {
       this.num = 1
     },
     selectAttr (item) {
-	    if (item.store_nums !== 0) {
-        this.attrId = item.id
-        this.num = 1
-        this.cover = item.cover
-      }
+      this.attrId = item.id
+      this.num = 1
+      this.cover = item.cover
     },
     getParams () {
 	    return [
@@ -131,6 +128,12 @@ export default {
 	    if (this.attrId === 0) {
 	      Taro.showToast({
           title: '请选择规格'
+        })
+        return
+      }
+	    if (this.selected.store_nums < this.num) {
+        Taro.showToast({
+          title: '库存不足'
         })
         return
       }
@@ -153,6 +156,12 @@ export default {
       if (this.attrId === 0) {
         Taro.showToast({
           title: '请选择规格'
+        })
+        return
+      }
+      if (this.selected.store_nums < this.num) {
+        Taro.showToast({
+          title: '库存不足'
         })
         return
       }

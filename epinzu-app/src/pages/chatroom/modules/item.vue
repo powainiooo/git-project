@@ -33,7 +33,8 @@
               <view class="pb8 pt8 pl8 pr8 borderB">{{message.data.title}}</view>
               <view class="item borderB"
                     v-for="q in message.data.list"
-                    :key="q.id">{{q.question}}</view>
+                    :key="q.id"
+                    @tap="sendQues(q)">{{q.question}}</view>
               <view class="pb8 pt8 pl8 pr8 f12 c-999">此消息由机器人发送</view>
             </view>
             <!-- 图片消息 -->
@@ -49,11 +50,6 @@
               <image src="@/img/voice2.png" mode="widthFix" class="w16" v-show="voiceIndex === 2" />
               <image src="@/img/voice1.png" mode="widthFix" class="w16" v-show="voiceIndex === 1" />
               <text>{{mediaData[0]}}''</text>
-            </view>
-            <!-- 视频消息 -->
-            <view class="Chat-item-video" v-if="type === 'video'" @tap="videoPlay">
-              <image :src="imgSrc + mediaData[0]" mode="heightFix" />
-              <image src="@/img/play.png" mode="widthFix" class="play" />
             </view>
             <!-- 视频消息 -->
             <view class="Chat-item-video" v-if="type === 'video'" @tap="videoPlay">
@@ -188,6 +184,9 @@ export default {
           console.log('openLocation', res)
         }
       })
+    },
+    sendQues (q) {
+      this.$emit('send', q)
     }
   }
 }

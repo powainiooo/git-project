@@ -22,7 +22,7 @@
     <!-- 分类列表 展开 -->
     <cates2 ref="cates" v-model="queryParams.cid" :list="cateList" @change="resetLoad"  />
     <!-- 产品列表 -->
-    <view class="goods-list mt52 mb24" :class="{'mt96': cateList.length > 1}">
+    <view class="goods-list mt52 mb24" :class="{'mt96': (cateList.length > 1 || from === 'search')}">
       <view class="goods-item" v-for="item in dataSource" :key="item.id" @tap="toDetail(item.id)">
         <image :src="imgSrc + item.cover" mode="aspectFill" class="img" />
         <view class="info">
@@ -40,7 +40,8 @@
         </view>
       </view>
     </view>
-    <view class="empty-txt" v-if="ipage.loadOver">已经全部加装完毕</view>
+    <view class="empty-txt" v-if="ipage.loadOver && dataSource.length > 0">已经全部加装完毕</view>
+    <view class="empty-txt" v-if="ipage.loadOver && dataSource.length === 0" style="margin-top: 100px;">暂无数据</view>
   </view>
 </template>
 

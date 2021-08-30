@@ -120,7 +120,7 @@
 import Taro from '@tarojs/taro'
 import './index.styl'
 import Cell from '@/c/common/Cell'
-import { getAction, postAction } from "@/utils/api"
+import { getAction, postAction, toChatRoom } from "@/utils/api"
 
 export default {
   name: 'Index',
@@ -168,9 +168,7 @@ export default {
       })
     },
     contact () {
-      Taro.showToast({
-        title: '跳聊天界面'
-      })
+      toChatRoom(this.record.shop.shop_id)
     },
     btnFunc (item) {
       if (item.display === 2) {

@@ -80,7 +80,7 @@ import {
   RENT_BACKED,
   RENT_BREAK
 } from '@/config'
-import { getAction, postAction } from '@/utils/api'
+import { getAction, postAction, toChatRoom } from '@/utils/api'
 
 export default {
   name: 'Index',
@@ -139,9 +139,7 @@ export default {
       })
     },
     contact () {
-      Taro.showToast({
-        title: '跳聊天界面'
-      })
+      toChatRoom(this.shop.shop_id)
     },
     returnBack () {
       Taro.navigateTo({

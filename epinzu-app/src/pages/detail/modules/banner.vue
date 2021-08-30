@@ -13,6 +13,7 @@
              :controls="false"
              v-show="isPlaying"
              @Ended="end"
+             @pause="end"
              style="background-color: #000000;" ></video>
       <button class="btn-play" @tap="play" v-if="!isPlaying"><image src="@/img/play.png" mode="aspectFill"  /></button>
     </swiper-item>
@@ -67,6 +68,7 @@ export default {
 	methods: {
     onChange (e) {
       this.current = e.detail.current + 1
+      this.videoCtx.pause()
     },
     preview (index) {
       console.log('preview', index)

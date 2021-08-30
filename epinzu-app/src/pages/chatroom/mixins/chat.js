@@ -13,6 +13,8 @@ export const chatMixin = {
       isConnect: false,
       noHistory: false,
       mesList: [],
+      shopId: '',
+      showChatGoods: false,
       chartInfo: {
         myAccount: '',
         myAvatar: '',
@@ -63,7 +65,7 @@ export const chatMixin = {
     // 统一消息接收
     onMessages () {
       Taro.onSocketMessage(result => {
-        console.log('onSocketMessage', result)
+        // console.log('onSocketMessage', result)
         const res = JSON.parse(result.data)
         if (res.code === 0) {
           switch (res.query) {
@@ -112,6 +114,13 @@ export const chatMixin = {
       const data = {"query":"enter_chats","data":{"account": this.chartInfo.storeAccount}}
       this.send('enter_chats', data, () => {
         this.reqCharts()
+        if (this.chatGoods.goods_id) {
+          this.reqRobotMsg()
+          this.showChatGoods = true
+          setTimeout(() => {
+            this.showChatGoods = false
+          }, 3000)
+        }
       })
     },
     // 请求聊天记录
@@ -126,7 +135,7 @@ export const chatMixin = {
     },
     // 处理聊天记录
     getCharts (data) {
-      console.log('getCharts', data, JSON.stringify(data))
+      // console.log('getCharts', data, JSON.stringify(data))
       this.chartInfo.myAvatar = data.my_avatar
       this.chartInfo.storeAvatar = data.target_avatar
 
@@ -147,10 +156,10 @@ export const chatMixin = {
       })
     },
     // 发送文本消息
-    sendTxtMsg () {
+    sendTxtMsg (txt, cb) {
       const mes = {
         "type": "txt",
-        "content": this.contents
+        "content": txt || this.contents
       }
       const data = {
         "query":"send",
@@ -162,6 +171,9 @@ export const chatMixin = {
       this.send('send', data, () => {
         this.contents = ''
         this.addMessage('my', mes)
+        if (typeof cb === 'function') {
+          cb()
+        }
       })
     },
     // 发送语音消息
@@ -198,6 +210,66 @@ export const chatMixin = {
         this.addMessage('my', mes)
       })
     },
+    // 发送视频消息
+    sendVideoMsg (content) {
+      const mes = {
+        "type": "video",
+        "content": content
+      }
+      const data = {
+        "query":"send",
+        "data":{
+          "account": this.chartInfo.storeAccount,
+          "message": mes
+        }
+      }
+      this.send('send', data, () => {
+        this.addMessage('my', mes)
+      })
+    },
+    // 发送商品消息
+    sendGoodsMsg (content) {
+      const mes = {
+        "type": "goods",
+        "content": '商品',
+        data: {...this.chatGoods}
+      }
+      const data = {
+        "query":"send",
+        "data":{
+          "account": this.chartInfo.storeAccount,
+          "message": mes
+        }
+      }
+      this.send('send', data, () => {
+        this.addMessage('my', mes)
+        this.$store.commit('SET_CHATGOODS', {})
+      })
+    },
+    // 获取机器人消息
+    reqRobotMsg (content) {
+      const data = {
+        "query":"robot",
+        "data":{
+          "account": this.chartInfo.storeAccount,
+          "shop_id": this.shopId,
+          "api_token": this.$store.state.token
+        }
+      }
+      this.send('send', data)
+    },
+    // 发送机器人消息
+    sendRobotMsg (content) {
+      const data = {
+        "query":"robot",
+        "data":{
+          "account": this.chartInfo.storeAccount,
+          "shop_id": this.shopId,
+          "content": content
+        }
+      }
+      this.send('send', data)
+    },
     // 设置已读
     setAllRead (isRead = 1) {
       if (isRead === 0) return
@@ -219,9 +291,10 @@ export const chatMixin = {
         from = this.chartInfo.myAccount
         to = this.chartInfo.storeAccount
       }
+      const beforeMsg = this.mesList[this.mesList.length - 1]
       this.mesList.push({
         message_id: id,
-        beforeDate: this.mesList[this.mesList.length - 1].created_at,
+        beforeDate: beforeMsg ?  beforeMsg.created_at : '',
         "from_account": from,
         "to_account": to,
         "message": data,
@@ -234,7 +307,7 @@ export const chatMixin = {
     },
     // 接受店家消息
     getUserMessage (res) {
-      console.log('getUserMessage', res)
+      // console.log('getUserMessage', res)
       this.addMessage('store', res.data.message, res.message_id)
     },
     // 请求历史记录
@@ -251,7 +324,7 @@ export const chatMixin = {
     },
     // 处理历史记录
     getHistory (data) {
-      console.log('getHistory', data, JSON.stringify(data))
+      // console.log('getHistory', data, JSON.stringify(data))
       Taro.stopPullDownRefresh()
       this.mesList = data.list.concat(this.mesList)
       this.mesList.forEach((item, index) => {
@@ -262,6 +335,13 @@ export const chatMixin = {
       setTimeout(() => {
         this.pageScrollTo(data.list[data.list.length - 1].message_id)
       }, 50)
+    },
+    // 处理机器人消息
+    onSend (data) {
+      this.sendTxtMsg(data.question, () => {
+        this.sendRobotMsg(data.answer)
+      })
+
     }
   }
 }

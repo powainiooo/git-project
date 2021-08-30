@@ -9,8 +9,8 @@
           v-for="item in couponList"
           :key="item.id">{{item.title}}</view>
   </view>
-  <view class="between mb4" v-if="record.type === 1">
-    <view class="acenter">
+  <view class="between mb4" style="align-items: baseline;" v-if="record.type === 1">
+    <view class="acenter" style="align-items: baseline;">
       <view class="price mr14">￥<text>{{record.price_min}}</text>/天</view>
       <view class="f12">押金：<text class="f10">￥</text>{{record.deposit_min}}</view>
     </view>

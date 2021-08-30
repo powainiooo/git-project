@@ -38,6 +38,8 @@
 
 <script type='es6'>
 import Taro from '@tarojs/taro'
+import { toChatRoom } from '@/utils/api'
+
 export default {
 	name: 'app',
   props: {
@@ -51,9 +53,7 @@ export default {
 	},
 	methods: {
     contact () {
-      Taro.showToast({
-        title: '跳聊天界面'
-      })
+      toChatRoom(this.record.shop_id)
     },
     returnBack () {
       Taro.navigateTo({

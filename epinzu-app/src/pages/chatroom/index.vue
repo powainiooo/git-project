@@ -7,7 +7,8 @@
             :record="item"
             :info="chartInfo"
             :playId="playId"
-            @play="onplay" />
+            @play="onplay"
+            @send="onSend" />
     </view>
     <view id="msgBottom" class="h2"></view>
 
@@ -52,13 +53,22 @@
             <view class="center"><image src="@/img/picture.png" mode="widthFix" class="w24" /></view>
             <view class="name">照片</view>
           </view>
-          <view class="tools-item">
+          <view class="tools-item" @tap="selectVideo">
             <view class="center"><image src="@/img/camera.png" mode="widthFix" class="w24" /></view>
-            <view class="name">照片</view>
+            <view class="name">视频</view>
           </view>
         </view>
       </view>
+
+      <!--  遮盖底部，兼容刘海屏底部  -->
       <view class="bottom-cover"></view>
+
+      <!--  发送商品  -->
+      <view class="Chat-goods" v-if="showChatGoods" @tap="sendGoodsMsg">
+        <view class="mb4">点击发送该商品</view>
+        <image :src="imgSrc + chatGoods.goods_cover" mode="widthFix" />
+        <view class="c-red mt4"><text class="f10">￥</text>{{chatGoods.goods_price}}</view>
+      </view>
     </view>
 
     <!--  语音录制提示  -->
@@ -67,6 +77,7 @@
       <video id="video" :src="videoSrc" />
       <image src="@/img/cancel.png" mode="widthFix" @tap="hideVideo" />
     </view>
+
   </view>
 </template>
 
@@ -77,6 +88,7 @@ import item from './modules/item'
 import emoji from './modules/emoji'
 import { chatMixin } from './mixins/chat'
 import { audioMixin } from './mixins/media'
+import { imgSrc } from '@/config'
 
 export default {
   name: 'Index',
@@ -85,8 +97,14 @@ export default {
     emoji
   },
   mixins: [chatMixin, audioMixin],
+  computed: {
+    chatGoods () {
+      return this.$store.state.chatGoods
+    }
+  },
   data () {
     return {
+      imgSrc,
       contents: '',
       currentTool: '',
       showVoice: false,
@@ -137,6 +155,11 @@ export default {
     this.connect()
   },
   onHide () {
+    console.log('chatroom onHide')
+  },
+  beforeDestroy () {
+    console.log('chatroom beforeDestroy')
+    this.$store.commit('SET_CHATGOODS', {})
     Taro.closeSocket()
   },
   onPullDownRefresh () {
@@ -146,6 +169,7 @@ export default {
   },
   onLoad (options) {
     this.chartInfo.storeAccount = options.account || 'dev4'
+    this.shopId = options.shopId || 'dev4'
   }
 }
 </script>

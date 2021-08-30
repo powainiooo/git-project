@@ -84,7 +84,7 @@
 <script>
 import Taro from '@tarojs/taro'
 import './index.styl'
-import { getAction, postAction } from '@/utils/api'
+import { getAction, postAction, toChatRoom } from '@/utils/api'
 import PayWay from '../modules/PayWay'
 import CancelWay from '../modules/CancelWay'
 
@@ -135,9 +135,7 @@ export default {
       })
     },
     contact () {
-      Taro.showToast({
-        title: '跳聊天界面'
-      })
+      toChatRoom(this.shop.shop_id)
     },
     cancel () {
       this.$refs.cancelWay.show()

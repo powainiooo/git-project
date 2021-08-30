@@ -13,6 +13,7 @@ const state = {
   quesList: [],
   orderGoods: [],
   addrData: '',
+  chatGoods: {}
 }
 
 const mutations = {
@@ -37,6 +38,9 @@ const mutations = {
   },
   SET_ADDRDATA (state, data) {
     state.addrData = data
+  },
+  SET_CHATGOODS (state, data) {
+    state.chatGoods = data
   }
 }
 

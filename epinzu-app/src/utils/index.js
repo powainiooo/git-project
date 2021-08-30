@@ -48,7 +48,7 @@ export const promisify = api => {
       const extras = {
         success: resolve,
         fail (err) {
-          console.log(err)
+          console.log('promisify fail', err)
           reject(err)
         }
       }

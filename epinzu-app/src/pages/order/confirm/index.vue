@@ -65,12 +65,9 @@
         <view>物品押金</view>
         <view><text class="f10">￥</text>{{count.deposit_amount}}</view>
       </view>
-      <view class="between f12 mb16">
+      <view class="between f12 mb8">
         <view>运费</view>
         <view><text class="f10">￥</text>{{count.post_fee}}</view>
-      </view>
-      <view class="between f12 mb8">
-        <view class="bold">优惠券</view>
       </view>
       <view class="between f12 mb16">
         <view>优惠券抵扣</view>

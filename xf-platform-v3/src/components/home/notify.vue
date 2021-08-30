@@ -26,7 +26,9 @@
              placeholder="变更地址" />
     </FormItem>
     <FormItem>
-      <Input maxlength="20"
+      <Input type="textarea"
+             :rows="3"
+             maxlength="20"
              show-word-limit
              v-model="formData.remark"
              placeholder="备注" />

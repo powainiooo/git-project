@@ -191,6 +191,7 @@ export const uploadAudio = (path, duration) => {
       url: `${baseUrl}/userapi/chat/upload/audio?${tokenKey}=${token}`,
       filePath: path,
       name: 'file',
+      fileType: 'audio',
       formData: {
         seconds: duration
       }
@@ -199,5 +200,35 @@ export const uploadAudio = (path, duration) => {
     }).catch(err => {
       reject(err)
     })
+  })
+}
+// 上传视频
+export const uploadVideo = (path) => {
+  return new Promise((resolve, reject) => {
+    token = store.state.token
+    console.log('uploadVideo', path)
+    uploadFile({
+      url: `${baseUrl}/userapi/chat/upload/video?${tokenKey}=${token}`,
+      filePath: path,
+      name: 'file',
+      fileType: 'video',
+    }).then(res => {
+      resolve(res.data)
+    }).catch(err => {
+      reject(err)
+    })
+  })
+}
+
+// 跳转到聊天室
+export const toChatRoom = shopId => {
+  getAction('/userapi/user/chat/account', {
+    uid: shopId
+  }).then(res => {
+    if (res.code === 0) {
+      Taro.navigateTo({
+        url: `/pages/chatroom/index?account=${res.data.account}&shopId=${shopId}`
+      })
+    }
   })
 }

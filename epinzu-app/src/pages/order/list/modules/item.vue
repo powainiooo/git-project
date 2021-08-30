@@ -41,7 +41,7 @@
 
 <script type='es6'>
 import Taro from '@tarojs/taro'
-import { postAction } from '@/utils/api'
+import { postAction, toChatRoom } from '@/utils/api'
 export default {
 	name: 'app',
   props: {
@@ -65,9 +65,7 @@ export default {
       })
     },
     contact () {
-      Taro.showToast({
-        title: '跳聊天界面'
-      })
+      toChatRoom(this.record.shop_id)
     },
     cancel () {
       this.$emit('cancel', this.record.id)

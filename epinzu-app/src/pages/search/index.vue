@@ -84,6 +84,12 @@ export default {
       } else {
         this.keyword = this.$refs.search.value
       }
+      if (this.keyword.trim() === '') {
+        Taro.showToast({
+          title: '请输入关键词'
+        })
+        return false
+      }
       const params = {
         word: this.keyword
       }

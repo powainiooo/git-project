@@ -34,7 +34,7 @@
                confirm-type="send"
                @blur="onBlur"
                @focus="onfocus"
-               @confirm="sendTxtMsg"
+               @confirm="sendTxtMsg(null)"
                v-else/>
         <image src="@/img/face.png" mode="widthFix" class="w24 mr8" v-if="currentTool !== 'emoji'" @tap="openEmoji" />
         <image src="@/img/keyboard.png" mode="widthFix" class="w24 mr8" v-if="currentTool === 'emoji'" @tap="inputFocus" />
@@ -46,7 +46,7 @@
         <emoji :disabled="contents === ''"
                @insert="insertImg"
                @del="delMsg"
-               @send="sendTxtMsg" v-show="currentTool !== 'tools'" />
+               @send="sendTxtMsg(null)" v-show="currentTool !== 'tools'" />
         <!--  工具栏  -->
         <view class="tools" v-show="currentTool === 'tools'">
           <view class="tools-item" @tap="selectImg">
@@ -66,7 +66,7 @@
       <!--  发送商品  -->
       <view class="Chat-goods" v-if="showChatGoods" @tap="sendGoodsMsg">
         <view class="mb4">点击发送该商品</view>
-        <image :src="imgSrc + chatGoods.goods_cover" mode="widthFix" />
+        <image :src="imgSrc + chatGoods.goods_cover" mode="aspectFill" />
         <view class="c-red mt4"><text class="f10">￥</text>{{chatGoods.goods_price}}</view>
       </view>
     </view>
@@ -164,7 +164,7 @@ export default {
   beforeDestroy () {
     console.log('chatroom beforeDestroy')
     this.$store.commit('SET_CHATGOODS', {})
-    Taro.closeSocket()
+    this.leaveRoom()
   },
   onPullDownRefresh () {
     if (!this.noHistory) {

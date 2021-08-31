@@ -135,7 +135,7 @@ export const chatMixin = {
     },
     // 处理聊天记录
     getCharts (data) {
-      // console.log('getCharts', data, JSON.stringify(data))
+      console.log('getCharts', data)
       this.chartInfo.myAvatar = data.my_avatar
       this.chartInfo.storeAvatar = data.target_avatar
 
@@ -152,9 +152,10 @@ export const chatMixin = {
     pageScrollTo (id) {
       setTimeout(() => {
         Taro.pageScrollTo({
-          selector: id ? `#item${id}` : '#msgBottom'
+          selector: id ? `#item${id}` : '#msgBottom',
+          duration: 100
         })
-      }, 100)
+      }, 10)
     },
     // 发送文本消息
     sendTxtMsg (txt, cb) {
@@ -243,6 +244,7 @@ export const chatMixin = {
         }
       }
       this.send('send', data, () => {
+        this.showChatGoods = false
         this.addMessage('my', mes)
         this.$store.commit('SET_CHATGOODS', {})
       })
@@ -339,6 +341,18 @@ export const chatMixin = {
         this.sendRobotMsg(data.answer)
       })
 
+    },
+    // 离开聊天室
+    leaveRoom () {
+      const data = {
+        "query":"leave_chats",
+        "data":{
+          "account": this.chartInfo.storeAccount
+        }
+      }
+      this.send('leaveRoom', data, () => {
+        Taro.closeSocket()
+      })
     }
   }
 }

@@ -52,7 +52,7 @@
   <div class="footer-btns" v-if="visible && showItem">
     <div class="l center">
       <picker :range="nums" @change="numChange" :disabled="price.sNums === 0">
-        <div class="nums"><span>{{num}}</span>杯</div>
+        <div class="nums"><span>{{num}}</span>数量</div>
         <img src="/static/images/arrow5.png" mode="widthFix" class="ar" v-if="price.sNums > 0" />
       </picker>
     </div>
@@ -105,7 +105,7 @@ export default {
     },
     nums () {
       if (this.price.sNums > 10) {
-        return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
       } else {
         const nums = []
         for (let i = 0 ; i < this.price.sNums; i++) {

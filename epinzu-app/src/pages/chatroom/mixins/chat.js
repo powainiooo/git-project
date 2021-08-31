@@ -36,13 +36,17 @@ export const chatMixin = {
       Taro.onSocketOpen(res => {
         console.log('onSocketOpen', res)
         this.login()
+        this.onMessages()
       })
-      this.onMessages()
       Taro.onSocketError(res => {
         console.log('onSocketError', res)
       })
       Taro.onSocketClose(res => {
         console.log('onSocketClose', res)
+        Taro.offSocketMessage();
+        Taro.offSocketError();
+        Taro.offSocketOpen();
+        Taro.offSocketClose();
         this.isConnect = false
       })
     },
@@ -351,7 +355,17 @@ export const chatMixin = {
         }
       }
       this.send('leaveRoom', data, () => {
-        Taro.closeSocket()
+        Taro.closeSocket({
+          success (res) {
+            console.log('closeSocket success', res)
+          },
+          fail (res) {
+            console.log('closeSocket fail', res)
+          },
+          complete (res) {
+            console.log('closeSocket complete', res)
+          }
+        })
       })
     }
   }

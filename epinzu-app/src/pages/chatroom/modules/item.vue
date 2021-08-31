@@ -23,10 +23,11 @@
             <!-- 文本消息 -->
             <view class="Chat-item-text" v-if="type === 'txt'">{{message.content}}</view>
             <!-- 产品消息 -->
-            <view class="Chat-item-goods" v-if="type === 'goods'">
+            <view class="Chat-item-goods" v-if="type === 'goods'" @tap="toGoods(message.data.goods_id)">
               <image :src="imgSrc + message.data.goods_cover" mode="aspectFill" />
-              <view>{{message.data.goods_title}}</view>
-              <view class="c-red mt4"><text class="f10">￥</text>{{message.data.goods_price}}</view>
+              <view class="title">{{message.data.goods_title}}</view>
+              <view class="c-red mt4" v-if="message.data.type === 1">押金：<text class="f10">￥</text>{{message.data.goods_price}}</view>
+              <view class="c-red mt4" v-else>售价：<text class="f10">￥</text>{{message.data.goods_price}}</view>
             </view>
             <!-- 问题消息 -->
             <view class="Chat-item-problem" v-if="type === 'robot'">
@@ -188,6 +189,11 @@ export default {
     },
     sendQues (q) {
       this.$emit('send', q)
+    },
+    toGoods (id) {
+      Taro.redirectTo({
+        url: `/pages/detail/index?id=${id}`
+      })
     }
   }
 }

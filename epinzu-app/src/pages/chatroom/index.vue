@@ -10,7 +10,9 @@
             @play="onplay"
             @send="onSend" />
     </view>
-    <view id="msgBottom" class="h50"></view>
+    <view id="msgBottom"
+          class="msgBottom"
+          :class="{'msgBottom-show': currentTool !== ''}"></view>
 
     <!--  底部操作栏  -->
     <view class="footer-container footer-chat"
@@ -111,6 +113,14 @@ export default {
       isFous: false
     }
   },
+  watch: {
+    currentTool (val) {
+      setTimeout(() => {
+        console.log('currentTool', val)
+        this.pageScrollTo()
+      }, 150)
+    }
+  },
   methods: {
     // 输入框聚焦
     inputFocus () {
@@ -150,11 +160,13 @@ export default {
     },
   },
   onReady () {
+    console.log('chatroom onReady')
     this.audioInit()
     this.recordInit()
     this.videoInit()
   },
   onShow () {
+    console.log('chatroom onShow', this.isConnect)
     if (this.isConnect) return
     this.connect()
   },
@@ -172,6 +184,7 @@ export default {
     }
   },
   onLoad (options) {
+    console.log('chatroom onload')
     this.chartInfo.storeAccount = options.account || 'dev4'
     this.shopId = options.shopId || 'dev4'
   }

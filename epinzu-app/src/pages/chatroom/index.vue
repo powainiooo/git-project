@@ -10,7 +10,7 @@
             @play="onplay"
             @send="onSend" />
     </view>
-    <view id="msgBottom" class="h2"></view>
+    <view id="msgBottom" class="h50"></view>
 
     <!--  底部操作栏  -->
     <view class="footer-container footer-chat"
@@ -18,7 +18,7 @@
           :class="{'footer-chat-show': currentTool !== ''}">
       <!--  输入框和按钮  -->
       <view class="acenter Chat-footer">
-        <image src="@/img/keyboard.png" mode="widthFix" class="w24 mr8" v-if="showVoice" @tap="showVoice = false" />
+        <image src="@/img/keyboard.png" mode="widthFix" class="w24 mr8" v-if="showVoice" @tap="hideVoice" />
         <image src="@/img/voice.png" mode="widthFix" class="w24 mr8" v-else @tap="showVoice = true" />
 
         <view class="btn"
@@ -131,6 +131,10 @@ export default {
       this.currentTool = 'emoji'
       this.isFous = false
       Taro.hideKeyboard()
+    },
+    hideVoice () {
+      this.showVoice = false
+      this.isFous = true
     },
     // 插入表情
     insertImg (img) {

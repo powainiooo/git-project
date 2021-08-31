@@ -10,7 +10,7 @@
       <video id="video"
              :src="imgSrc + video.url"
              :poster="imgSrc + video.cover"
-             :controls="false"
+             :controls="true"
              v-show="isPlaying"
              @Ended="end"
              @pause="end"

@@ -117,7 +117,7 @@ export const audioMixin = {
     },
     // 关闭视频
     hideVideo () {
-      this.videoCtx.stop()
+      this.videoCtx.pause()
       this.showVideo = false
     },
     // 选择图片

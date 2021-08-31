@@ -58,8 +58,8 @@
             </view>
             <!-- 定位消息 -->
             <view class="Chat-item-loc" v-if="type === 'loc'" @tap="openLocation">
-              <view class="mb4">{{message.data.title}}</view>
-              <view class="f12 c-999">{{message.data.title}}</view>
+              <view class="mb4 ellipsis">{{message.data.title}}</view>
+              <view class="f12 c-999 mb8 ellipsis">{{message.data.address}}</view>
               <image :src="imgSrc + message.data.image" mode="widthFix" />
             </view>
           </view>
@@ -127,8 +127,9 @@ export default {
     // 消息时间
     dateStr () {
       if (this.record.beforeDate) {
-        const time1 = new Date(this.record.beforeDate).getTime()
-        const date = new Date(this.record.created_at)
+        const b = new Date(this.record.beforeDate.replace(/-/g,'/'))
+        const time1 = b.getTime()
+        const date = new Date(this.record.created_at.replace(/-/g,'/'))
         const time2 = date.getTime()
         if (time2 > time1 + 10 * 60 * 1000) { // 时间相隔十分钟
           return formatDate(date, 'yyyy/MM/dd HH:mm')

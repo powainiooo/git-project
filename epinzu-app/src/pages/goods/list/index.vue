@@ -3,7 +3,7 @@
     <view class="opera-top">
       <!-- 搜索 -->
       <view class="ml12 mr16 pt4 pb4 between" v-if="from === 'search'">
-        <view style="width: 308px;" @tap="goBack">
+        <view class="flex100 mr16" @tap="goBack">
           <search :disabled="true" ref="search" />
         </view>
         <button class="btn-cart" @tap="toCart">
@@ -41,7 +41,7 @@
       </view>
     </view>
     <view class="empty-txt" v-if="ipage.loadOver && dataSource.length > 0">已经全部加装完毕</view>
-    <view class="empty-txt" v-if="ipage.loadOver && dataSource.length === 0" style="margin-top: 100px;">暂无数据</view>
+    <view class="none-txt" v-if="ipage.loadOver && dataSource.length === 0">暂无数据</view>
   </view>
 </template>
 

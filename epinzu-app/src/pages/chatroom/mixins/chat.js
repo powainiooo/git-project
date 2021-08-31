@@ -139,21 +139,22 @@ export const chatMixin = {
       this.chartInfo.myAvatar = data.my_avatar
       this.chartInfo.storeAvatar = data.target_avatar
 
-      this.mesList = this.mesList.concat(data.list)
-      this.mesList.forEach((item, index) => {
+      data.list.forEach((item, index) => {
         if (index !== 0) {
-          item.beforeDate = this.mesList[index - 1].created_at
+          item.beforeDate = data.list[index - 1].created_at
         }
       })
-      setTimeout(() => {
-        this.pageScrollTo()
-      }, 50)
+      this.mesList = data.list
+      // console.log('this.mesList', this.mesList)
+      this.pageScrollTo()
     },
     // 移动滚动条
     pageScrollTo (id) {
-      Taro.pageScrollTo({
-        selector: id ? `#item${id}` : '#msgBottom'
-      })
+      setTimeout(() => {
+        Taro.pageScrollTo({
+          selector: id ? `#item${id}` : '#msgBottom'
+        })
+      }, 100)
     },
     // 发送文本消息
     sendTxtMsg (txt, cb) {
@@ -301,9 +302,7 @@ export const chatMixin = {
         "is_read": 0,
         "created_at": formatDate(new Date(), 'yyyy-MM-dd HH:mm:ss')
       })
-      setTimeout(() => {
-        this.pageScrollTo()
-      }, 50)
+      this.pageScrollTo()
     },
     // 接受店家消息
     getUserMessage (res) {
@@ -332,9 +331,7 @@ export const chatMixin = {
           item.beforeDate = this.mesList[index - 1].created_at
         }
       })
-      setTimeout(() => {
-        this.pageScrollTo(data.list[data.list.length - 1].message_id)
-      }, 50)
+      this.pageScrollTo(data.list[data.list.length - 1].message_id)
     },
     // 处理机器人消息
     onSend (data) {

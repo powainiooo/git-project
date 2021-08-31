@@ -47,6 +47,9 @@
 
     <!-- 底部导航 -->
     <c-footer current="home" />
+
+    <!-- 返回顶部 -->
+    <image src="@/img/top.png" mode="widthFix" class="btn-top" v-show="showTop" @tap="backTop" />
   </view>
 </template>
 
@@ -101,7 +104,8 @@ export default {
       page: 'index',
       url: {
         list: '/userapi/goods/rank/recommend'
-      }
+      },
+      showTop: false
     }
   },
   mounted() {
@@ -198,6 +202,11 @@ export default {
       Taro.navigateTo({
         url: `/pages/goods/list/index?cid=${cate.cid}&cname=${cate.cname}&from=cate`
       })
+    },
+    backTop () {
+      Taro.pageScrollTo({
+        scrollTop: 0
+      })
     }
   },
   onPageScroll (e) {
@@ -205,9 +214,11 @@ export default {
     if (e.scrollTop > 120) {
       this.bannerColor = '#ffffff'
       this.isAnti = true
+      this.showTop = true
     } else {
       this.bannerColor = 'rgba(255, 255, 255, 0)'
       this.isAnti = false
+      this.showTop = false
     }
   },
   onLoad (options) {

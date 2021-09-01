@@ -92,11 +92,9 @@
       <view class="section" style="padding-right: 0">
         <Cell title="收货地址" isLink @tap="toPage('/pages/address/index')" />
         <Cell title="常见问题" isLink @tap="toPageNone('/pages/question/index?source=common')" />
-        <picker mode="selector" :range="contacts" @change="contactChange">
-        <view class="borderB">
+        <view class="borderB" @tap="visible = true">
           <Cell title="联系客服" isLink />
         </view>
-        </picker>
         <Cell title="意见反馈" isLink @tap="toPage('/pages/mine/feedback/index')" v-if="isLogin" />
         <Cell title="设置" isLink @tap="toPage('/pages/mine/setting/index')" />
       </view>
@@ -104,6 +102,13 @@
     <!-- 底部导航 -->
     <c-footer current="mine" />
 
+    <!--  联系方式  -->
+    <c-popup :show.sync="visible" round>
+      <view class="tc center borderB h50 bold">联系方式</view>
+      <view class="tc center borderB h50 c-red" @tap="phoneCall">400-9606683</view>
+      <view class="tc center borderB h50" @tap="toChatroom">在线客服</view>
+      <view class="tc center h50" @tap="visible = false">取消</view>
+    </c-popup>
   </view>
 </template>
 
@@ -112,13 +117,15 @@ import Taro from '@tarojs/taro'
 import './index.styl'
 import Cell from '@/c/common/Cell'
 import cFooter from '@/c/common/footer'
-import { getAction, intercept } from '@/utils/api'
+import cPopup from '@/c/common/Popup'
+import { intercept } from '@/utils/api'
 
 export default {
   name: 'Index',
   components: {
     Cell,
-    cFooter
+    cFooter,
+    cPopup
   },
   computed: {
     isLogin () {
@@ -132,7 +139,8 @@ export default {
     return {
       imgSrc: Taro.imgSrc,
       tH: 0,
-      contacts: ['400-9606683', '在线客服']
+      contacts: ['400-9606683', '在线客服'],
+      visible: false
     }
   },
   mounted() {
@@ -174,14 +182,11 @@ export default {
         }
       })
     },
-    contactChange (e) {
-      if (e.detail.value === 0) {
-        this.phoneCall()
-      } else {
-        Taro.navigateTo({
-          url: `/pages/chatroom/index?account=${this.record.services[0].account}`
-        })
-      }
+    toChatroom (e) {
+      this.visible = false
+      Taro.navigateTo({
+        url: `/pages/chatroom/index?account=${this.record.services[0].account}`
+      })
     }
   },
   onShow () {

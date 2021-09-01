@@ -9,9 +9,11 @@
     <!-- 地址信息 -->
     <addr-info ref="top" :showBtn="false" showTypes showCart showShare :record="addrData" @change="typeChange" @refresh="getCart" />
 
-    <div class="container2 nearby-container">
-      <div class="mt25">
-        <goods-list :list="list" />
+    <div class="pr">
+      <div class="container2 nearby-container">
+        <div class="mt25">
+          <goods-list :list="list" />
+        </div>
       </div>
     </div>
 
@@ -91,7 +93,9 @@ export default {
     }
   },
   onShow () {
-    this.$refs.top.hideCarts()
+    if (this.$refs.top) {
+      this.$refs.top.hideCarts()
+    }
   },
   onLoad (options) {
     Object.assign(this.$data, this.$options.data())

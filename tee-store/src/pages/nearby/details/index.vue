@@ -157,8 +157,12 @@ export default {
     }
   },
   onShow () {
-    this.$refs.top.hideCarts()
-    this.$refs.details.hide()
+    if (this.$refs.top) {
+      this.$refs.top.hideCarts()
+    }
+    if (this.$refs.details) {
+      this.$refs.details.hide()
+    }
   },
   onLoad (options) {
     Object.assign(this.$data, this.$options.data())

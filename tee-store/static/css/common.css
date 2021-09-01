@@ -62,7 +62,7 @@
 .footer-btns .r button[disabled] { color: #FFFFFF; background-color: #CECBC6; }
 
 /* 地址信息 */
-.addr-info { margin: 0 25px 30px 25px; padding-top: 22px; }
+.addr-info { margin: 0 25px 30px 25px; padding-top: 22px; position: relative; z-index: 100; }
 .addr-info .btn { padding: 0 20px 0 25px; }
 .addr-info .btn-cart { position: relative; overflow: visible; }
 .addr-info .btn-cart img { margin-left: -4px; }

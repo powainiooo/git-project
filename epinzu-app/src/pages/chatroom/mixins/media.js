@@ -15,10 +15,25 @@ export const audioMixin = {
       recordBtn: '按住 说话',
       showVideo: false,
       videoCtx: null,
-      videoSrc: ''
+      videoSrc: '',
+      videoPostSrc: '',
+      showVideoBtn: true,
+      hasRecordAuth: true
     }
   },
+  mounted () {
+    this.getSetting()
+  },
   methods: {
+    // 获取授权
+    getSetting () {
+      Taro.getSetting({
+        success: res => {
+          console.log('getSetting', res)
+          this.hasRecordAuth = res.authSetting.audioRecord
+        }
+      })
+    },
     // 音频初始化
     audioInit () {
       this.audioCtx = Taro.createInnerAudioContext()
@@ -42,6 +57,7 @@ export const audioMixin = {
     // 录音初始化
     recordInit () {
       this.recordCtx = Taro.getRecorderManager()
+      console.log('this.recordCtx', this.recordCtx)
       this.recordCtx.onStart((e) => {
         console.log('recorder start')
         this.isRecording = true
@@ -62,7 +78,14 @@ export const audioMixin = {
         const { tempFilePath, duration } = res
         this.isRecording = false
         this.recordBtn = '按住 说话'
-        this.uploadAudio(tempFilePath, Math.ceil(duration))
+        if (res.duration < 1) {
+          Taro.showToast({
+            title: '时间过短'
+          })
+        }
+        if (tempFilePath !== '') {
+          this.uploadAudio(tempFilePath, Math.ceil(duration))
+        }
         // this.$refs.audioHint.stop()
         // clearTimeout(this.recordT)
       })
@@ -80,16 +103,23 @@ export const audioMixin = {
         this.audioCtx.play()
       } else if (data.type === 'video') {
         this.videoSrc = data.url
+        this.videoPostSrc = data.post
         this.videoCtx.play()
         this.showVideo = true
       }
     },
     // 开始录音
     startRecord (e) {
-      this.recordCtx.start({
-        format: 'mp3'
-      })
-      this.touchY = e.touches[0].pageY
+      console.log('this.hasRecordAuth', this.hasRecordAuth)
+      if (this.hasRecordAuth) {
+        this.recordCtx.start({
+          format: 'mp3'
+        })
+        this.touchY = e.touches[0].pageY
+      } else {
+        this.getSetting()
+      }
+
     },
     // 停止录音
     stopRecord () {
@@ -114,6 +144,10 @@ export const audioMixin = {
           this.sendAudioMsg(`${duration}|${res.data.url}`)
         }
       })
+    },
+    // 播放视频
+    playVideo () {
+      this.videoCtx.play()
     },
     // 关闭视频
     hideVideo () {

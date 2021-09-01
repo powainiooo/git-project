@@ -24,9 +24,9 @@
             <view class="Chat-item-text" v-if="type === 'txt'">{{message.content}}</view>
             <!-- 产品消息 -->
             <view class="Chat-item-goods" v-if="type === 'goods'" @tap="toGoods(message.data.goods_id)">
-              <image :src="imgSrc + message.data.goods_cover" mode="aspectFill" />
+              <image :src="imgSrc + message.data.goods_cover" mode="aspectFill" @load="imgLoad" />
               <view class="title">{{message.data.goods_title}}</view>
-              <view class="c-red mt4" v-if="message.data.type === 1">押金：<text class="f10">￥</text>{{message.data.goods_price}}</view>
+              <view class="c-red mt4" v-if="message.data.goods_type === 1">押金：<text class="f10">￥</text>{{message.data.goods_price}}</view>
               <view class="c-red mt4" v-else>售价：<text class="f10">￥</text>{{message.data.goods_price}}</view>
             </view>
             <!-- 问题消息 -->
@@ -40,7 +40,7 @@
             </view>
             <!-- 图片消息 -->
             <view class="Chat-item-img" v-if="type === 'img'" @tap="viewPic">
-              <image :src="imgSrc + message.content" mode="widthFix" />
+              <image :src="imgSrc + message.content" mode="widthFix" @load="imgLoad" />
             </view>
             <!-- 音频消息 -->
             <view class="Chat-item-audio"
@@ -54,14 +54,14 @@
             </view>
             <!-- 视频消息 -->
             <view class="Chat-item-video" v-if="type === 'video'" @tap="videoPlay">
-              <image :src="imgSrc + mediaData[0]" mode="heightFix" />
+              <image :src="imgSrc + mediaData[0]" mode="heightFix" @load="imgLoad" />
               <image src="@/img/play.png" mode="widthFix" class="play" />
             </view>
             <!-- 定位消息 -->
             <view class="Chat-item-loc" v-if="type === 'loc'" @tap="openLocation">
               <view class="mb4 ellipsis">{{message.data.title}}</view>
               <view class="f12 c-999 mb8 ellipsis">{{message.data.address}}</view>
-              <image :src="imgSrc + message.data.image" mode="widthFix" />
+              <image :src="imgSrc + message.data.image" mode="widthFix" @load="imgLoad" />
             </view>
           </view>
         </view>
@@ -173,7 +173,8 @@ export default {
       this.$emit('play', {
         type: 'video',
         id: this.record.message_id,
-        url: this.imgSrc + this.mediaData[1]
+        url: this.imgSrc + this.mediaData[1],
+        post: this.imgSrc + this.mediaData[0]
       })
     },
     openLocation () {
@@ -194,6 +195,9 @@ export default {
       Taro.redirectTo({
         url: `/pages/detail/index?id=${id}`
       })
+    },
+    imgLoad () {
+      this.$emit('load')
     }
   }
 }

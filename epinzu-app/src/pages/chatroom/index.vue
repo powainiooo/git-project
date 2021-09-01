@@ -8,7 +8,8 @@
             :info="chartInfo"
             :playId="playId"
             @play="onplay"
-            @send="onSend" />
+            @send="onSend"
+            @load="pageScrollTo" />
     </view>
     <view id="msgBottom"
           class="msgBottom"
@@ -25,6 +26,7 @@
 
         <view class="btn"
               v-if="showVoice"
+              :style="{'background-color': isRecording ? '#e5e5e5' : '#ffffff'}"
               @touchstart="startRecord"
               @touchmove="tmove"
               @touchend="stopRecord">{{recordBtn}}</view>
@@ -76,8 +78,15 @@
     <!--  语音录制提示  -->
 <!--    <audio-hint ref="audioHint" :cancel="isCancel" />-->
     <view class="video-frame center" v-show="showVideo">
-      <video id="video" :src="videoSrc" />
-      <image src="@/img/cancel.png" mode="widthFix" @tap="hideVideo" />
+      <video id="video"
+             :showPlayBtn="false"
+             :poster="videoPostSrc"
+             :src="videoSrc"
+             @play="showVideoBtn = false"
+             @pause="showVideoBtn = true"
+             @Ended="showVideoBtn = true" />
+      <image src="@/img/cancel.png" class="close" mode="widthFix" @tap="hideVideo" />
+      <image src="@/img/play.png" class="play" mode="widthFix" @tap="playVideo" v-if="showVideoBtn" />
     </view>
 
   </view>
@@ -145,6 +154,9 @@ export default {
     hideVoice () {
       this.showVoice = false
       this.isFous = true
+    },
+    kbChange (e) {
+      console.log('kbChange', e)
     },
     // 插入表情
     insertImg (img) {

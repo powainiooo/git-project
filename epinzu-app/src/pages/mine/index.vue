@@ -92,11 +92,11 @@
       <view class="section" style="padding-right: 0">
         <Cell title="收货地址" isLink @tap="toPage('/pages/address/index')" />
         <Cell title="常见问题" isLink @tap="toPageNone('/pages/question/index?source=common')" />
-        <view @tap="phoneCall" class="borderB">
-          <Cell title="联系客服">
-            <text class="c-red mr8" slot="value">400-9606683</text>
-          </Cell>
+        <picker mode="selector" :range="contacts" @change="contactChange">
+        <view class="borderB">
+          <Cell title="联系客服" isLink />
         </view>
+        </picker>
         <Cell title="意见反馈" isLink @tap="toPage('/pages/mine/feedback/index')" v-if="isLogin" />
         <Cell title="设置" isLink @tap="toPage('/pages/mine/setting/index')" />
       </view>
@@ -132,6 +132,7 @@ export default {
     return {
       imgSrc: Taro.imgSrc,
       tH: 0,
+      contacts: ['400-9606683', '在线客服']
     }
   },
   mounted() {
@@ -172,6 +173,15 @@ export default {
           console.log('makePhoneCall fail', err)
         }
       })
+    },
+    contactChange (e) {
+      if (e.detail.value === 0) {
+        this.phoneCall()
+      } else {
+        Taro.navigateTo({
+          url: `/pages/chatroom/index?account=${this.record.services[0].account}`
+        })
+      }
     }
   },
   onShow () {

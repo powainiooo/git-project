@@ -47,6 +47,9 @@ export const chatMixin = {
         Taro.offSocketError();
         Taro.offSocketOpen();
         Taro.offSocketClose();
+        this.recordCtx.offStop()
+        this.recordCtx.offStart()
+        this.recordCtx.offPause()
         this.isConnect = false
       })
     },
@@ -157,6 +160,7 @@ export const chatMixin = {
       setTimeout(() => {
         Taro.pageScrollTo({
           selector: id ? `#item${id}` : '#msgBottom',
+          // scrollTop: 10000,
           duration: 100
         })
       }, 10)

@@ -22,7 +22,7 @@
       <!--  输入框和按钮  -->
       <view class="acenter Chat-footer">
         <image src="@/img/keyboard.png" mode="widthFix" class="w24 mr8" v-if="showVoice" @tap="hideVoice" />
-        <image src="@/img/voice.png" mode="widthFix" class="w24 mr8" v-else @tap="showVoice = true" />
+        <image src="@/img/voice.png" mode="widthFix" class="w24 mr8" v-else @tap="tapVoice" />
 
         <view class="btn"
               v-if="showVoice"
@@ -80,6 +80,7 @@
     <view class="video-frame center" v-show="showVideo">
       <video id="video"
              :showPlayBtn="false"
+             :showCenterPlayBtn="false"
              :poster="videoPostSrc"
              :src="videoSrc"
              @play="showVideoBtn = false"
@@ -149,14 +150,16 @@ export default {
       console.log('openEmoji')
       this.currentTool = 'emoji'
       this.isFous = false
+      this.showVoice = false
       Taro.hideKeyboard()
     },
     hideVoice () {
       this.showVoice = false
       this.isFous = true
     },
-    kbChange (e) {
-      console.log('kbChange', e)
+    tapVoice () {
+      this.showVoice = true
+      this.currentTool = ''
     },
     // 插入表情
     insertImg (img) {
@@ -199,6 +202,10 @@ export default {
     console.log('chatroom onload')
     this.chartInfo.storeAccount = options.account || 'dev4'
     this.shopId = options.shopId || 'dev4'
+    const title = options.title || '客服'
+    Taro.setNavigationBarTitle({
+      title
+    })
   }
 }
 </script>

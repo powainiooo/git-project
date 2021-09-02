@@ -185,7 +185,7 @@ export default {
     toChatroom (e) {
       this.visible = false
       Taro.navigateTo({
-        url: `/pages/chatroom/index?account=${this.record.services[0].account}`
+        url: `/pages/chatroom/index?account=${this.record.services[0].account}&title=品租客服`
       })
     }
   },

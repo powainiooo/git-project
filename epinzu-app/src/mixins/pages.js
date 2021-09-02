@@ -48,18 +48,22 @@ export const pageMixin = {
       params.page = this.ipage.current
       return params
     },
-    getListData () {
+    getListData (type = 'normal') {
       console.log('getListData')
       Taro.showLoading({
         title: '加载中'
       })
       const params = this.getParams()
       this.loading = true
-      console.log('this.url.list', this.url.list)
       getAction(this.url.list, params).then(res => {
         if (res.code === 0) {
           this.listDataAll = res.data
-          this.dataSource = this.dataSource.concat(res.data.list)
+          if (type === 'normal') {
+            this.dataSource = this.dataSource.concat(res.data.list)
+          } else if (type === 'refresh') {
+            this.dataSource = res.data.list
+            Taro.stopPullDownRefresh()
+          }
           this.ipage.loadOver = res.data.list.length < res.data.pageSize
 
           if (typeof this.afterGetList === 'function') {
@@ -74,8 +78,8 @@ export const pageMixin = {
     resetLoad () {
       this.ipage.current = 1
       this.ipage.loadOver = false
-      this.dataSource = []
-      this.getListData()
+      // this.dataSource = []
+      this.getListData('refresh')
     }
   },
   onReachBottom () { // 下拉加载列表

@@ -60,6 +60,9 @@ export default {
   },
   onShow () {
     this.resetLoad()
+  },
+  onPullDownRefresh () {
+    this.resetLoad()
   }
 }
 </script>

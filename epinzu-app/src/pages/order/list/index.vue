@@ -146,6 +146,9 @@ export default {
   onShow () {
     this.resetLoad()
   },
+  onPullDownRefresh () {
+    this.resetLoad()
+  },
   onLoad (options) {
     this.queryParams.status = Number(options.key) || 0
   }

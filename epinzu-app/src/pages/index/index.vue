@@ -113,16 +113,19 @@ export default {
     Taro.getSystemInfo({
       success: res => {
         console.log('getSystemInfo', res)
-        this.tH = res.statusBarHeight + res.titleBarHeight
-        this.tbH = res.titleBarHeight
+        let titleBarHeight
+        const env = process.env.TARO_ENV
+        if (env === 'alipay') {
+          titleBarHeight = res.titleBarHeight
+        } else if (env === 'weapp') {
+          const menu = Taro.getMenuButtonBoundingClientRect()
+          console.log('menu', menu)
+          titleBarHeight = menu.bottom + menu.top - (res.statusBarHeight * 2)
+        }
+        this.tH = res.statusBarHeight + titleBarHeight
+        this.tbH = titleBarHeight
       }
     })
-    // setTimeout(() => {
-    //   Taro.navigateTo({
-    //     url: '/pages/chatroom/index'
-    //   })
-    //   this.visible = true
-    // }, 2000)
   },
   methods: {
     getData () { // 获取首页数据

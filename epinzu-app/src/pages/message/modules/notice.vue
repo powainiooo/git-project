@@ -38,17 +38,21 @@ export default {
     reachBottom (e) {
       console.log('reachBottom', e)
     },
-    getListData () {
+    getListData (type = 'normal') {
       Taro.showLoading({
         title: '加载中'
       })
       this.loading = true
       getAction('/userapi/sysmsg/index').then(res => {
         if (res.code === 0) {
-          if (this.dataSource.length === 0 || this.dataSource[0].id !== res.data.list[0].id) {
-            this.dataSource = this.dataSource.concat(res.data.list)
-            this.ipage.loadOver = res.data.list.length < res.data.pageSize
+          if (type === 'normal') {
+            if (this.dataSource.length === 0 || this.dataSource[0].id !== res.data.list[0].id) {
+              this.dataSource = this.dataSource.concat(res.data.list)
+            }
+          } else if (type === 'refresh') {
+            this.dataSource = res.data.list
           }
+          this.ipage.loadOver = res.data.list.length < res.data.pageSize
         }
         this.loading = false
         Taro.hideLoading()

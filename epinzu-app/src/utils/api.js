@@ -2,7 +2,8 @@ import Taro from '@tarojs/taro'
 import store from '@/store'
 import { tokenKey, baseUrl } from '@/config'
 import { promisify } from '@/utils'
-const login = promisify(Taro.getAuthCode)
+const loginAli = promisify(Taro.getAuthCode)
+const loginWeapp = promisify(Taro.login)
 const uploadFile = promisify(Taro.uploadFile)
 
 let token = Taro.getStorageSync(tokenKey)
@@ -83,10 +84,26 @@ export const getTokenData = () => {
   console.log('getTokenData')
   // store.commit('SET_TOKEN', '9bf43dbf0bc3fbc2a3bcfbff2aaa378904')
   // return
-  login().then(loginRes => {
-    console.log('getTokenData2', loginRes)
+  const env = process.env.TARO_ENV
+  if (env === 'alipay') {
+
+  } else if (env === 'weapp') {
+
+  }
+  console.log('env', env)
+  let func
+  let key
+  if (env === 'alipay') {
+    func = loginAli
+    key = 'authCode'
+  } else {
+    func = loginWeapp
+    key = 'code'
+  }
+  func().then(loginRes => {
+    console.log('getTokenData weapp', loginRes)
     getAction('/userapi/alipay/mini/login', {
-      autocode: loginRes.authCode
+      autocode: loginRes[key]
     }, false).then(res => {
       console.log('common_login', res)
       if (res.data !== null) {

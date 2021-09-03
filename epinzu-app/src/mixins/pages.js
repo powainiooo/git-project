@@ -62,6 +62,9 @@ export const pageMixin = {
             this.dataSource = this.dataSource.concat(res.data.list)
           } else if (type === 'refresh') {
             this.dataSource = res.data.list
+            this.$nextTick(() => {
+              this.$forceUpdate()
+            })
             Taro.stopPullDownRefresh()
           }
           this.ipage.loadOver = res.data.list.length < res.data.pageSize

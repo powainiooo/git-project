@@ -61,5 +61,10 @@ export default {
     navigationBarBackgroundColor: '#fff',
     navigationBarTitleText: '品租',
     navigationBarTextStyle: 'black'
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "获取当前用户所在的城市，快速选择对应所在城市。"
+    }
   }
 }

@@ -1,5 +1,6 @@
 <template>
   <view class="index">
+    <view v-for="i in 100">{{i}}</view>
   </view>
 </template>
 

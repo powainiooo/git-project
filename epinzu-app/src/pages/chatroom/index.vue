@@ -83,6 +83,7 @@
              :showCenterPlayBtn="false"
              :poster="videoPostSrc"
              :src="videoSrc"
+             :autoplay="true"
              @play="showVideoBtn = false"
              @pause="showVideoBtn = true"
              @Ended="showVideoBtn = true" />

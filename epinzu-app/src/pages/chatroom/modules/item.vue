@@ -26,7 +26,7 @@
             <view class="Chat-item-goods" v-if="type === 'goods'" @tap="toGoods(message.data.goods_id)">
               <image :src="imgSrc + message.data.goods_cover" mode="aspectFill" @load="imgLoad" />
               <view class="title">{{message.data.goods_title}}</view>
-              <view class="c-red mt4" v-if="message.data.goods_type === 1">租金：<text class="f10">￥</text>{{message.data.goods_price}}</view>
+              <view class="c-red mt4" v-if="message.data.goods_type === 1">押金：<text class="f10">￥</text>{{message.data.goods_deposit}}</view>
               <view class="c-red mt4" v-else>售价：<text class="f10">￥</text>{{message.data.goods_price}}</view>
             </view>
             <!-- 问题消息 -->

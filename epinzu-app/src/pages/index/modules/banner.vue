@@ -45,7 +45,12 @@ export default {
       success: res => {
         console.log('getSystemInfo', res)
         this.tbH = res.statusBarHeight
-        this.h = `calc(5.94rem + ${this.tbH}px)`
+        const env = process.env.TARO_ENV
+        if (env === 'alipay') {
+          this.h = `calc(5.94rem + ${this.tbH}px)`
+        } else if (env === 'weapp') {
+          this.h = `calc(594rpx + ${this.tbH}px)`
+        }
       }
     })
   },

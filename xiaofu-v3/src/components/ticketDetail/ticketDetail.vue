@@ -227,7 +227,7 @@ export default {
       return reg.test(this.cardNo)
     },
     mobileReg () {
-      const reg = /^[1][3,4,5,6,7,8][0-9]{9}$/
+      const reg = /^[1][3,4,5,6,7,8,9][0-9]{9}$/
       return reg.test(this.formData.mobile)
     },
     btnName () {

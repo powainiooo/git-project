@@ -47,7 +47,10 @@
           <view class="c-red f10" v-if="record.type === 3"><text class="f12">售价：</text>￥<text class="f12">{{attrs.price}}</text></view>
           <view class="f10" v-if="record.type === 1"><text class="f12">押金：</text>￥<text class="f12">{{attrs.deposit}}</text></view>
         </view>
-        <stepper v-model="record.buy_nums" />
+        <stepper v-model="record.buy_nums"
+                 isAsync
+                 @add="add"
+                 @reduce="reduce" />
       </view>
     </view>
   </view>
@@ -92,16 +95,6 @@ export default {
 	    return this.ids.includes(this.record.id)
     }
   },
-  watch: {
-	  'record.buy_nums' (val, oldVal) {
-	    console.log('record.buy_nums', val, oldVal)
-      if (val > oldVal) {
-        this.add()
-      } else if (val < oldVal) {
-        this.reduce()
-      }
-    }
-  },
 	data() {
 		return {
       imgSrc: Taro.imgSrc,
@@ -116,9 +109,8 @@ export default {
       postAction('/userapi/shopping/nums/add', {
         id: this.record.id
       }).then(res => {
-        if (res.code !== 0) {
-          this.record.buy_nums -= 1
-        } else {
+        if (res.code === 0) {
+          this.record.buy_nums += 1
           this.numsChange()
         }
       })
@@ -127,9 +119,8 @@ export default {
       postAction('/userapi/shopping/nums/reduce', {
         id: this.record.id
       }).then(res => {
-        if (res.code !== 0) {
-          this.record.buy_nums += 1
-        } else {
+        if (res.code === 0) {
+          this.record.buy_nums -= 1
           this.numsChange()
         }
       })

@@ -83,6 +83,12 @@ export const audioMixin = {
             title: '时间过短'
           })
         }
+        if (this.isCancel) {
+          Taro.showToast({
+            title: '取消发送'
+          })
+          return
+        }
         if (tempFilePath !== '') {
           this.uploadAudio(tempFilePath, Math.ceil(duration))
         }

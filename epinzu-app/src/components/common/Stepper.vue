@@ -33,6 +33,10 @@ export default {
     max: {
       type: Number,
       default: 100
+    },
+    isAsync: {
+      type: Boolean,
+      default: false
     }
   },
 	data() {
@@ -41,16 +45,24 @@ export default {
 	methods: {
     reduce () {
       const val = Number(this.value)
-      if (val > 1) {
-        this.$emit('input', val - 1)
-        this.$emit('change', val - 1)
+      if (!this.isAsync) {
+        if (val > 1) {
+          this.$emit('input', val - 1)
+          this.$emit('change', val - 1)
+        }
+      } else {
+        this.$emit('reduce')
       }
     },
     add () {
       const val = Number(this.value)
-      if (val < this.max) {
-        this.$emit('input', val + 1)
-        this.$emit('change', val + 1)
+      if (!this.isAsync) {
+        if (val < this.max) {
+          this.$emit('input', val + 1)
+          this.$emit('change', val + 1)
+        }
+      } else {
+        this.$emit('add')
       }
     }
   }

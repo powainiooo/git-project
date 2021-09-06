@@ -13,7 +13,7 @@
             @tap="change(index)">{{item.cname}}</view>
     </view>
     <view class="goods-container" :style="{'margin-top': tH + 'px'}">
-      <view class="ad"><image src="@/img/ad.png" mode="widthFix" /></view>
+      <view class="ad" @tap="toList(topAD)"><image :src="imgSrc + topAD.banner" mode="widthFix" /></view>
       <view class="list">
         <view class="item" v-for="item in secondList" :key="item.cid" @tap="toList(item)">
           <view class="img">
@@ -44,7 +44,8 @@ export default {
       cateId: 1,
       selected: '',
       cateList: [],
-      secondList: []
+      secondList: [],
+      topAD: {}
     }
   },
   mounted() {
@@ -66,6 +67,7 @@ export default {
           this.cateList = res.data
           this.selected = res.data[0].cname
           this.secondList = res.data[0].children
+          this.topAD = res.data[0].top
         }
       })
     },

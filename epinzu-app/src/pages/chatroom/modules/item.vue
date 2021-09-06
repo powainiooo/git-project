@@ -7,14 +7,14 @@
   <!-- 时间 -->
   <view class="Chat-item-date" v-if="dateStr">{{dateStr}}</view>
   <!-- 消息 -->
-  <view class="Chat-item-container clearfix"
+  <view class="Chat-item-container ovh"
         :class="{'Chat-custom': isUser}">
     <!-- 头像 -->
     <view class="Chat-item-head">
       <image :src="avatar" mode="aspectFill" />
     </view>
     <!-- 内容区 -->
-    <view class="Chat-item-content clearfix">
+    <view class="Chat-item-content">
       <view class="Chat-item-wrapper">
         <view class="Chat-item-message">
           <!-- 状态 -->

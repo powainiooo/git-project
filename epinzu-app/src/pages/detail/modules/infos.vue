@@ -23,7 +23,7 @@
     <view class="f12 c-999">已售{{record.sale_nums}}</view>
   </view>
   <view class="mb8 bold">{{record.title}}</view>
-  <view class="post">
+  <view class="post" v-if="record.type === 1">
     <view>寄出：<text>{{postType === 0 ? '包邮' : '不包邮'}}</text></view>
     <view>寄回：<text>自费</text></view>
     <view>发货地：<text>{{city}}</text></view>

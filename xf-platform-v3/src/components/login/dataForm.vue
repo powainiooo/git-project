@@ -613,6 +613,8 @@ export default {
       console.log(params)
       this.confirm.isAjax = true
       const url = this.isUpdate ? '/editor/user/edit' : '/editor/user/register'
+      console.log('url:', url, this.isUpdate)
+      return false
       postAction(url, params, false).then(res => {
         if (res.code === 1) {
           if (this.isUpdate) {

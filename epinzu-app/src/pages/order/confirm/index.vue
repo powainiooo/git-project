@@ -241,6 +241,8 @@ export default {
               this.paybyYue(res2)
             }
           })
+        } else {
+          Taro.hideLoading()
         }
       })
     },

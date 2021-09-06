@@ -35,7 +35,7 @@
     <!-- 租赁信息 -->
     <rents v-if="record.type === 1" />
     <!-- 常见问题 -->
-    <questions :list="questions" />
+    <questions :list="questions" v-if="record.type === 1" />
     <!-- 常见问题 -->
     <params @params="$refs.paramsList.show()" :list="params" />
     <!-- 物品详情 -->

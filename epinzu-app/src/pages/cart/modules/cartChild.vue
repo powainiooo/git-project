@@ -40,6 +40,7 @@
           <image src="@/img/ar2.png" mode="widthFix" class="w10" />
         </view>
         <view class="f12 c-red" v-if="attrs.store_nums === 0">库存不足</view>
+        <view class="f12 c-red" v-if="attrs.store_nums < record.buy_nums">当前库存剩余{{attrs.store_nums}}件</view>
       </view>
       <view class="between">
         <view class="bold">
@@ -116,6 +117,7 @@ export default {
       })
     },
     reduce () {
+      if (this.record.buy_nums === 1) return
       postAction('/userapi/shopping/nums/reduce', {
         id: this.record.id
       }).then(res => {

@@ -613,8 +613,6 @@ export default {
       console.log(params)
       this.confirm.isAjax = true
       const url = this.isUpdate ? '/editor/user/edit' : '/editor/user/register'
-      console.log('url:', url, this.isUpdate)
-      return false
       postAction(url, params, false).then(res => {
         if (res.code === 1) {
           if (this.isUpdate) {
@@ -673,6 +671,7 @@ export default {
       this.$refs.address.focus()
     },
     setDefaults (data) {
+      this.isUpdate = true
       const mer = data.merchant
       const bank = data.bank_card
       this.formData.organizer_name = mer.organizer_name
@@ -688,13 +687,14 @@ export default {
       this.formData.license_image = mer.license_image
       this.formData.space_image = mer.space_image
       this.formData.logo = mer.logo
-      this.formData.account_name = bank.name
-      this.formData.account_id_card_no = bank.id_card_no
-      this.formData.account_mobile = bank.mobile
-      this.formData.account_card_no = bank.card_no
-      this.formData.account_bank_id = bank.bank_id.toString()
-      this.formData.account_opening_banke = bank.opening_banke
-      this.isUpdate = true
+      if (bank) {
+        this.formData.account_name = bank.name
+        this.formData.account_id_card_no = bank.id_card_no
+        this.formData.account_mobile = bank.mobile
+        this.formData.account_card_no = bank.card_no
+        this.formData.account_bank_id = bank.bank_id.toString()
+        this.formData.account_opening_banke = bank.opening_banke
+      }
     }
   }
 }

@@ -189,6 +189,7 @@ export default {
       })
     },
     sendQues (q) {
+      if (this.isUser) return false
       this.$emit('send', q)
     },
     toGoods (id) {

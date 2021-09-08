@@ -5,12 +5,12 @@
     <view class="h52 between borderB bg-fff" @tap="choose">
       <view class="acenter">
         <view class="w82 ml12 mr8">地址</view>
-        <view class="c-999" v-if="addr1 === ''">请填写</view>
+        <view class="c-999" v-if="addr1 === ''">请选择</view>
         <view class="c-333" v-else>{{addr1}}</view>
       </view>
       <image src="@/img/ar1.png" mode="widthFix" class="w10 mr12" slot="rightIcon" />
     </view>
-    <Field label="详情地址" placeholder="请填写" v-model="formData.address" class="mb8" />
+    <Field label="详情地址" placeholder="楼、门牌" v-model="formData.address" class="mb8" />
     <view class="between bg-fff">
       <view class="ml12">设为默认地址</view>
       <view class="switch mr12 mt10 mb10" @tap="toggle">

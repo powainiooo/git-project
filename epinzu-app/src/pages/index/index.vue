@@ -92,6 +92,9 @@ export default {
         cid: '',
         color: ''
       },
+      queryParams: {
+        cid: ''
+      },
       cates: [],
       subCates: [],
       banners: [],
@@ -175,6 +178,7 @@ export default {
     changeCate (cate) {
       this.page = cate.cid === '' ? 'index': 'cate'
       this.currentCate = cate
+      this.queryParams.cid = cate.cid
       this.bannerColor = cate.color
       this.isAnti = false
       Taro.pageScrollTo({
@@ -185,6 +189,7 @@ export default {
       } else {
         this.getCateData()
       }
+      this.resetLoad()
     },
     toDetail (id) {
       Taro.navigateTo({

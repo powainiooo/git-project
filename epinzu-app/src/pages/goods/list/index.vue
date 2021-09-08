@@ -34,7 +34,7 @@
           <view class="between">
             <view class="price" v-if="item.type === 1">￥<text class="f14">{{item.price_min}}</text>/天</view>
             <view class="price" v-if="item.type === 3">￥<text class="f14">{{item.price_min}}</text></view>
-            <view class="f10 c-999" v-if="item.type === 1">已租：{{item.sale_nums}}</view>
+            <view class="tag1" v-if="item.type === 1">{{item.rent_day_min}}天起租</view>
             <view class="f10 c-999" v-if="item.type === 3">已售：{{item.sale_nums}}</view>
           </view>
         </view>

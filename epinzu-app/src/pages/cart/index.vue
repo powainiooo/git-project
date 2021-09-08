@@ -16,6 +16,7 @@
         <cart-item :record="item"
                    :shopId="selectedShop"
                    @refresh="refresh"
+                   @attr="attrChange"
                    @change="cartChange" />
       </view>
     </view>
@@ -96,6 +97,20 @@ export default {
     toIndex () {
       Taro.redirectTo({
         url: '/pages/index/index'
+      })
+    },
+    attrChange ({shopId, cb}) {
+      getAction(this.url.cart).then(res => {
+        if (res.code === 0) {
+          res.data.forEach((item, index) => {
+            if (item.shop_id === shopId) {
+              this.$set(this.cartData, index, item)
+              this.$nextTick(() => {
+                cb()
+              })
+            }
+          })
+        }
       })
     }
   },

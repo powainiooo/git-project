@@ -2,13 +2,15 @@
 .c-footer
   justify-content space-around;
   &-item
-    width 36px; text-align center;
+    width 36px; text-align center; position relative
     image
       width 24px; height 24px;
     .active
       display none
     view
       font-size 10px; color #333333;
+    .dot-num
+      position absolute; top 0px; right 0px; color #FFFFFF;
   &-active
     .normal
       display none
@@ -29,6 +31,7 @@
     <image src="@/img/footer/icon2.png" mode="widthFix" class="normal" />
     <image src="@/img/footer/icon2-active.png" mode="widthFix" class="active" />
     <view>消息</view>
+    <view class="dot-num" v-if="msg > 0">{{msg}}</view>
   </view>
   <view class="c-footer-item" @tap="toggle2('/pages/cart/index')" :class="{'c-footer-active': current === 'cart'}">
     <image src="@/img/footer/icon3.png" mode="widthFix" class="normal" />
@@ -45,7 +48,7 @@
 
 <script type='es6'>
 import Taro from '@tarojs/taro'
-import { intercept } from '@/utils/api'
+import { intercept, getAction } from '@/utils/api'
 
 export default {
 	name: 'app',
@@ -55,10 +58,27 @@ export default {
       default: 'home'
     }
   },
+  computed: {
+    isLogin () {
+      return this.$store.state.isLogin
+    }
+  },
 	data() {
-		return {}
+		return {
+		  msg: 0
+    }
 	},
-	methods: {
+  watch: {
+    isLogin () {
+      this.getCount()
+    }
+  },
+  mounted() {
+	  if (this.isLogin) {
+      this.getCount()
+    }
+  },
+  methods: {
     toggle (url) {
       Taro.redirectTo({
         url
@@ -69,6 +89,13 @@ export default {
         Taro.redirectTo({
           url
         })
+      })
+    },
+    getCount () {
+      getAction('/userapi/sysmsg/count').then(res => {
+        if (res.code === 0) {
+          this.msg = res.data.count
+        }
       })
     }
   }

@@ -36,7 +36,11 @@
   <view class="child-item"
         v-for="item in goods"
         :key="item.id">
-    <cart-child :record="item" :ids="ids" @toggle="itemToggle" @nums="change" />
+    <cart-child :record="item"
+                :ids="ids"
+                @toggle="itemToggle"
+                @change="attrChange"
+                @nums="change" />
   </view>
 </view>
 </template>
@@ -108,6 +112,15 @@ export default {
       }).then(res => {
         if (res.code === 0) {
           this.$emit('refresh', this.record.shop_id)
+        }
+      })
+    },
+    attrChange () {
+      this.$emit('attr', {
+        shopId: this.record.shop_id,
+        cb: () => {
+          console.log('attrChange cb')
+          this.change()
         }
       })
     },

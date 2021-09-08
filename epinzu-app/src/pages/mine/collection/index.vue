@@ -9,11 +9,12 @@
     </view>
     <!-- 列表 -->
     <view class="list mb32">
-      <item v-for="item in dataSource"
+      <item v-for="(item, index) in dataSource"
             :key="item.id"
             :record="item"
             :delId="delId"
-            @del="setDelId"
+            @delid="setDelId"
+            @del="delItem(index)"
             @refresh="resetLoad"  />
     </view>
     <guess-like :list="dataSource2" v-if="isAttentionNone" />
@@ -26,7 +27,7 @@ import item from './modules/item'
 import GuessLike from '@/c/common/GuessLike'
 import '../index.styl'
 import { pageMixin } from '@/mixins/pages'
-import { getAction } from "@/utils/api"
+import { getAction, postAction } from "@/utils/api"
 
 export default {
   name: 'Index',
@@ -44,13 +45,16 @@ export default {
         like: '/userapi/goods/collection/recommend'
       },
       isAttentionNone: false,
-      delId: 0
+      delId: 0,
+      isOnshow: false
     }
   },
   onShow () {
     if (!this.loading) {
       this.url.list = this.url.collection
       this.isAttentionNone = false
+      this.dataSource = []
+      this.dataSource2 = []
       this.resetLoad()
     }
   },
@@ -85,6 +89,19 @@ export default {
     },
     setDelId (id) {
       this.delId = id
+    },
+    delItem (index) {
+      postAction('/userapi/user/collection', {
+        goods_id: this.dataSource[index].goods_id,
+        action: 0
+      }).then(res => {
+        if (res.code === 0) {
+          Taro.showToast({
+            title: res.msg
+          })
+          this.dataSource.splice(index, 1)
+        }
+      })
     }
   },
   onLoad () {

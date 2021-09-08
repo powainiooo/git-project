@@ -61,7 +61,7 @@
       </picker>
     </view>
     <!-- 退款金额 -->
-    <view class="section2" style="margin-bottom: 0;">
+    <view class="section2" style="margin-bottom: 0;" v-if="type !== 3">
       <view class="mt16 mb16">退款金额</view>
       <view class="f18 mb8">￥<input v-model="refundMoney" class="none-inp f18" @input="refundChange" /></view>
     </view>
@@ -215,6 +215,7 @@ export default {
     },
     typeChange (e) {
       this.type = this.typeList[e.detail.value].id
+      this.reasonId = 0
     },
     statusChange (e) {
       this.statusId = this.statusList[e.detail.value].id

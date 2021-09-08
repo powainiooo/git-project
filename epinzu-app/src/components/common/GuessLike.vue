@@ -11,7 +11,10 @@
   </view>
   <view class="goods-list">
     <view class="goods-item" v-for="item in list" :key="item.id" @tap="toDetail(item.id)">
-      <image :src="imgSrc + item.cover" mode="aspectFill" class="img" />
+<!--      <image :src="imgSrc + item.cover"-->
+<!--             mode="aspectFill"-->
+<!--             class="img" />-->
+      <c-image :src="imgSrc + item.cover" mode="aspectFill" class="img" />
       <view class="info">
         <view class="h3 mb8">
           <view class="c-tag" v-if="item.how_new === 100">全新</view>
@@ -32,8 +35,12 @@
 
 <script type='es6'>
 import Taro from '@tarojs/taro'
+import CImage from './CImage'
 export default {
 	name: 'app',
+  components: {
+    CImage
+  },
   props: {
 	  list: Array
   },

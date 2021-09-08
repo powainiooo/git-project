@@ -60,7 +60,7 @@ export default {
       if (item.type === 1) {
         url = `/pages/webview/index?src=${item.url}`
       } else if (item.type === 2) {
-        url = `/pages/detail/index?src=${item.url}`
+        url = `/pages/detail/index?id=${item.url}`
       } else if (item.type === 3) {
         url = `/pages/detail/index?src=${item.url}`
       } else if (item.type === 4) {

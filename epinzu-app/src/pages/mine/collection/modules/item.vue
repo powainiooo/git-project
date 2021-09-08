@@ -34,7 +34,6 @@
 
 <script type='es6'>
 import Taro from '@tarojs/taro'
-import { postAction } from '@/utils/api'
 
 export default {
   name: 'app',
@@ -66,7 +65,7 @@ export default {
       const ex = e.changedTouches[0].clientX
       if (this.sx > ex + 50) {
         this.showDel = true
-        this.$emit('del', this.record.goods_id)
+        this.$emit('delid', this.record.goods_id)
       }
       if (ex > this.sx + 50) {
         this.showDel = false
@@ -83,17 +82,7 @@ export default {
       })
     },
     del () {
-      postAction('/userapi/user/collection', {
-        goods_id: this.record.goods_id,
-        action: 0
-      }).then(res => {
-        if (res.code === 0) {
-          Taro.showToast({
-            title: res.msg
-          })
-          this.visible = false
-        }
-      })
+      this.$emit('del')
     }
   }
 }

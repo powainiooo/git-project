@@ -150,6 +150,7 @@ export default {
           this.newAttr = data
           this.attrChange = true
           this.visible = false
+          this.$emit('change')
         }
       })
     },

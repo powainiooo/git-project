@@ -78,7 +78,7 @@
     <!--  语音录制提示  -->
 <!--    <audio-hint ref="audioHint" :cancel="isCancel" />-->
     <view class="video-frame center" v-show="showVideo">
-      <video id="video"
+      <video id="CVideo"
              :showPlayBtn="false"
              :showCenterPlayBtn="false"
              :poster="videoPostSrc"
@@ -86,7 +86,7 @@
              :autoplay="true"
              @play="showVideoBtn = false"
              @pause="showVideoBtn = true"
-             @Ended="showVideoBtn = true" />
+             @Ended="showVideoBtn = true"></video>
       <image src="@/img/cancel.png" class="close" mode="widthFix" @tap="hideVideo" />
       <image src="@/img/play.png" class="play" mode="widthFix" @tap="playVideo" v-if="showVideoBtn" />
     </view>
@@ -131,6 +131,12 @@ export default {
         this.pageScrollTo()
       }, 150)
     }
+  },
+  beforeDestroy () {
+    console.log('chatroom beforeDestroy')
+    this.$store.commit('SET_CHATGOODS', {})
+    this.leaveRoom()
+    this.mediaStop()
   },
   methods: {
     // 输入框聚焦
@@ -182,17 +188,12 @@ export default {
     this.videoInit()
   },
   onShow () {
-    console.log('chatroom onShow', this.isConnect)
     if (this.isConnect) return
     this.connect()
   },
   onHide () {
     console.log('chatroom onHide')
-  },
-  beforeDestroy () {
-    console.log('chatroom beforeDestroy')
-    this.$store.commit('SET_CHATGOODS', {})
-    this.leaveRoom()
+    this.mediaStop()
   },
   onPullDownRefresh () {
     if (!this.noHistory) {

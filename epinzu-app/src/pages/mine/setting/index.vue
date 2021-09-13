@@ -15,9 +15,9 @@
           <image src="@/img/ar1.png" mode="widthFix" class="w10 mr12" />
         </view>
       </view>
-      <Cell title="账号与安全"
-            isLink
-            @tap="toPage('/pages/mine/account/index?')" />
+<!--      <Cell title="账号与安全"-->
+<!--            isLink-->
+<!--            @tap="toPage('/pages/mine/account/index?')" />-->
       <Cell title="实名认证"
             :value="record.srrz_status === 0 ? '未认证' : '已认证'"
             color="#999999"

@@ -39,7 +39,7 @@ export default {
 	name: 'app',
   props: {
 	  value: {
-	    type: String,
+	    type: [String, Number],
       default: ''
     },
 	  label: {

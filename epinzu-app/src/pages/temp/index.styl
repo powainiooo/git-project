@@ -1,2 +1,10 @@
 @import '../../static/css/mixin.styl'
 
+.video-frame
+  size(100%, 100vh); fxTL(0, 0); background-color rgba(0, 0, 0, 1); z-index 10000;
+  video
+    size(100%, 88vh); background-color #000000;
+  .close
+    width 24px; abTR(16px, 16px); z-index 10;
+  .play
+    width 48px; abTL(50%, 50%); z-index 10; transform translate(-50%, -50%);

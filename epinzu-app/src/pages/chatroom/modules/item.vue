@@ -61,7 +61,7 @@
             <view class="Chat-item-loc" v-if="type === 'loc'" @tap="openLocation">
               <view class="mb4 ellipsis">{{message.data.title}}</view>
               <view class="f12 c-999 mb8 ellipsis">{{message.data.address}}</view>
-              <image :src="imgSrc + message.data.image" mode="widthFix" @load="imgLoad" />
+              <image :src="imgSrc + message.data.image" mode="aspectFill" @load="imgLoad" />
             </view>
           </view>
         </view>
@@ -134,6 +134,8 @@ export default {
         const time2 = date.getTime()
         if (time2 > time1 + 10 * 60 * 1000) { // 时间相隔十分钟
           return formatDate(date, 'yyyy/MM/dd HH:mm')
+        } else if (time1 === time2) {
+          return formatDate(date, 'yyyy/MM/dd HH:mm')
         }
       }
       return false
@@ -193,8 +195,8 @@ export default {
       this.$emit('send', q)
     },
     toGoods (id) {
-      Taro.redirectTo({
-        url: `/pages/detail/index?id=${id}`
+      Taro.navigateTo({
+        url: `/pages/detail/index?id=${id}&from=service`
       })
     },
     imgLoad () {

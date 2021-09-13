@@ -3,9 +3,12 @@ import { getTokenData, postAction } from '@/utils/api'
 import store from '@/store'
 export default {
   created () {
+    // mpvuePlatform = 'tt'
+    console.log('typeof tt', typeof tt, tt)
+    console.log('typeof wx', typeof wx, wx)
     this.getData()
     this.getConfig()
-    this.loadFont()
+    // this.loadFont()
   },
   methods: {
     async getData () {

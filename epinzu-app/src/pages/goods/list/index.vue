@@ -24,7 +24,7 @@
     <!-- 产品列表 -->
     <view class="goods-list mt52 mb24" :class="{'mt96': (cateList.length > 1 || from === 'search')}">
       <view class="goods-item" v-for="item in dataSource" :key="item.id" @tap="toDetail(item.id)">
-        <image :src="imgSrc + item.cover" mode="aspectFill" class="img" />
+        <c-image :src="imgSrc + item.cover" mode="aspectFill" class="img" />
         <view class="info">
           <view class="h3 mb8">
             <view class="c-tag" v-if="item.how_new === 100">全新</view>
@@ -35,7 +35,7 @@
             <view class="price" v-if="item.type === 1">￥<text class="f14">{{item.price_min}}</text>/天</view>
             <view class="price" v-if="item.type === 3">￥<text class="f14">{{item.price_min}}</text></view>
             <view class="tag1" v-if="item.type === 1">{{item.rent_day_min}}天起租</view>
-            <view class="f10 c-999" v-if="item.type === 3">已售：{{item.sale_nums}}</view>
+<!--            <view class="f10 c-999" v-if="item.type === 3">已售：{{item.sale_nums}}</view>-->
           </view>
         </view>
       </view>
@@ -50,6 +50,7 @@ import Taro from '@tarojs/taro'
 import './index.styl'
 import search from '@/c/common/search'
 import Tabs from '@/c/common/Tabs'
+import CImage from '@/c/common/CImage'
 import cates from './modules/cates'
 import cates2 from './modules/cates2'
 import { pageMixin } from '@/mixins/pages'
@@ -62,7 +63,8 @@ export default {
     search,
     Tabs,
     cates,
-    cates2
+    cates2,
+    CImage
   },
   data () {
     return {

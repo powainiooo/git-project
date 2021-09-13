@@ -1,8 +1,8 @@
 <style scoped>
 .index-container { margin: 260px 25px 50px 25px; display: flex; flex-wrap: wrap; justify-content: space-between; }
 .item-small { width: 340px; margin-bottom: 20px; }
-.item-large { width: 100%; margin-bottom: 20px; }
-.index-container .item { animation: scaleIn .4s cubic-bezier(.14,.66,.57,1.26) both; }
+.index-container .item { animation: scaleIn .4s cubic-bezier(.14,.66,.57,1.26) both; width: 340px; margin-bottom: 20px; }
+.index-container .item-large { width: 100%; }
 .index-container .item:nth-child(1) { animation-delay: .3s; }
 .index-container .item:nth-child(2) { animation-delay: .4s; }
 .index-container .item:nth-child(3) { animation-delay: .5s; }
@@ -47,8 +47,7 @@
              :key="index"
              class="item"
              :class="{
-               'item-small': item.type === 'normalTicket' || (item.type === 'collection' && index === 0),
-               'item-large': item.type === 'recTicket' || (item.type === 'collection' && index !== 0)
+               'item-large': (item.type === 'recTicket' || (item.type === 'collection' && index !== 0))
              }">
           <c-collection :record="item" v-if="item.type === 'collection'" />
           <c-ticket :record="item" size="large" v-else-if="item.type === 'recTicket'" />
@@ -222,6 +221,7 @@ export default {
     // this.$nextTick(() => {
     //   this.showPage = true
     // })
+    console.log('mpvue', mpvuePlatform)
   },
   onLoad (options) {
     console.log('options index', options)

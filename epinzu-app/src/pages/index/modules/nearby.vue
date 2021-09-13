@@ -11,7 +11,7 @@
   <scroll-view scrollX="true" class="scroll">
     <view class="i-nearby-list">
       <view class="i-nearby-item" v-for="item in list" :key="item.id" @tap="toDetail(item.goods_id)">
-        <image :src="imgSrc + item.cover" mode="aspectFill" class="img" />
+        <c-image :src="imgSrc + item.cover" mode="aspectFill" class="img" />
         <view class="info">
           <view class="h3 mb4">{{item.title}}</view>
           <view class="c-999 mb8">距离{{item.distance}}公里</view>
@@ -26,8 +26,13 @@
 
 <script type='es6'>
 import Taro from '@tarojs/taro'
+import CImage from '@/c/common/CImage'
+
 export default {
 	name: 'app',
+  components: {
+    CImage
+  },
   props: {
     list: Array,
     cid: {

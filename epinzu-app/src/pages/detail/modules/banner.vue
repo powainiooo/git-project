@@ -68,7 +68,7 @@ export default {
 	methods: {
     onChange (e) {
       this.current = e.detail.current + 1
-      this.videoCtx.pause()
+      this.pause()
     },
     preview (index) {
       console.log('preview', index)
@@ -86,6 +86,11 @@ export default {
     },
     end () {
       this.isPlaying = false
+    },
+    pause () {
+      if (this.videoCtx) {
+        this.videoCtx.pause()
+      }
     }
   }
 }

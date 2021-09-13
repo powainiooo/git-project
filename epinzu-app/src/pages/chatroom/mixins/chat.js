@@ -20,12 +20,14 @@ export const chatMixin = {
         myAvatar: '',
         storeAccount: '',
         storeAvatar: ''
-      }
+      },
+      needFix: true, // 图片加载完成后会调用滚动方法  但是加载历史消息的时候不需要触发
     }
   },
   methods: {
     // 创建连接
     connect () {
+      console.log('connect', wsUrl)
       Taro.connectSocket({
         url: wsUrl,
         success: (task) => {
@@ -91,6 +93,9 @@ export const chatMixin = {
             case 'user_message': // 接受店家消息
               this.getUserMessage(res);
               break;
+            case 'sync_say': // 多客户端同步
+              this.getSyncMessage(res);
+              break;
             case 'history_chats': // 接受历史聊天记录
               this.getHistory(res.data);
               break;
@@ -149,14 +154,17 @@ export const chatMixin = {
       data.list.forEach((item, index) => {
         if (index !== 0) {
           item.beforeDate = data.list[index - 1].created_at
+        } else {
+          item.beforeDate = item.created_at
         }
       })
       this.mesList = data.list
-      // console.log('this.mesList', this.mesList)
       this.pageScrollTo()
     },
     // 移动滚动条
     pageScrollTo (id) {
+      console.log('pageScrollTo', this.needFix)
+      if (!this.needFix) return
       setTimeout(() => {
         Taro.pageScrollTo({
           selector: id ? `#item${id}` : '#msgBottom',
@@ -312,12 +320,18 @@ export const chatMixin = {
         "is_read": 0,
         "created_at": formatDate(new Date(), 'yyyy-MM-dd HH:mm:ss')
       })
+      this.needFix = true
       this.pageScrollTo()
     },
     // 接受店家消息
     getUserMessage (res) {
       // console.log('getUserMessage', res)
       this.addMessage('store', res.data.message, res.message_id)
+    },
+    // 接受同步消息
+    getSyncMessage (res) {
+      // console.log('getSyncMessage', res)
+      this.addMessage('my', res.data.message, res.message_id)
     },
     // 请求历史记录
     reqHistory () {
@@ -339,8 +353,11 @@ export const chatMixin = {
       this.mesList.forEach((item, index) => {
         if (index !== 0) {
           item.beforeDate = this.mesList[index - 1].created_at
+        } else {
+          item.beforeDate = item.created_at
         }
       })
+      this.needFix = false
       this.pageScrollTo(data.list[data.list.length - 1].message_id)
     },
     // 处理机器人消息

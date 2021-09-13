@@ -16,7 +16,7 @@
       </view>
     </view>
     <!-- 轮播图 -->
-    <banner :list="banners" :video="videos" />
+    <banner ref="banner" :list="banners" :video="videos" />
     <!-- 商品信息 -->
     <infos @coupon="openCoupons"
            :record="record" />
@@ -124,6 +124,7 @@ export default {
   data () {
     return {
       imgSrc: Taro.imgSrc,
+      from: '',
       queryParams: {
         goods_id: ''
       },
@@ -319,15 +320,21 @@ export default {
         // Taro.showToast({
         //   title: '打开客服'
         // })
-        this.$store.commit('SET_CHATGOODS', {
-          goods_id: this.record.id,
-          goods_title: this.record.title,
-          goods_cover: this.record.cover,
-          goods_type: this.record.type,
-          goods_price: this.record.price_min,
-          goods_deposit: this.record.deposit_min
-        })
-        toChatRoom(this.record.shop_id)
+        if (this.from === 'service') {
+          Taro.navigateBack({
+            delta: 1
+          })
+        } else {
+          this.$store.commit('SET_CHATGOODS', {
+            goods_id: this.record.id,
+            goods_title: this.record.title,
+            goods_cover: this.record.cover,
+            goods_type: this.record.type,
+            goods_price: this.record.price_min,
+            goods_deposit: this.record.deposit_min
+          })
+          toChatRoom(this.record.shop_id)
+        }
       })
     },
     // 判断是否收藏商品
@@ -360,6 +367,7 @@ export default {
   },
   onHide () {
     console.log('detail onHide')
+    this.$refs.banner.pause()
   },
   onPageScroll (e) {
     const st = e.scrollTop
@@ -395,6 +403,7 @@ export default {
     if (this.isLogin) {
       this.getCollectionStatus()
     }
+    this.from = options.from
   }
 }
 </script>

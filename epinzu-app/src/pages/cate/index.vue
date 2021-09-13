@@ -13,7 +13,9 @@
             @tap="change(index)">{{item.cname}}</view>
     </view>
     <view class="goods-container" :style="{'margin-top': tH + 'px'}">
-      <view class="ad" @tap="toList(topAD)"><image :src="imgSrc + topAD.banner" mode="widthFix" /></view>
+      <view class="ad" @tap="toList(topAD)" v-if="topAD.banner">
+        <image :src="imgSrc + topAD.banner" mode="widthFix" />
+      </view>
       <view class="list">
         <view class="item" v-for="item in secondList" :key="item.cid" @tap="toList(item)">
           <view class="img">
@@ -67,7 +69,9 @@ export default {
           this.cateList = res.data
           this.selected = res.data[0].cname
           this.secondList = res.data[0].children
-          this.topAD = res.data[0].top
+          if (res.data[0].top) {
+            this.topAD = res.data[0].top
+          }
         }
       })
     },

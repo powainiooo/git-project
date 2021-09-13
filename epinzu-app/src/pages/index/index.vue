@@ -129,6 +129,11 @@ export default {
         this.tbH = titleBarHeight
       }
     })
+    // setTimeout(() => {
+    //   Taro.navigateTo({
+    //     url: '/pages/temp/index'
+    //   })
+    // }, 2000)
   },
   methods: {
     getData () { // 获取首页数据

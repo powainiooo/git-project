@@ -3,7 +3,7 @@
     <!-- 产品列表 -->
     <view class="goods-list mt24 mb24">
       <view class="goods-item" v-for="item in dataSource" :key="item.id" @tap="toDetail(item.id)">
-        <image :src="imgSrc + item.cover" mode="aspectFill" class="img" />
+        <c-image :src="imgSrc + item.cover" mode="aspectFill" class="img" />
         <view class="info">
           <view class="h3 mb8">
             <view class="c-tag" v-if="item.how_new === 100">全新</view>
@@ -27,11 +27,14 @@
 import Taro from '@tarojs/taro'
 import './index.styl'
 import { pageMixin } from '@/mixins/pages'
-import { getAction } from '@/utils/api'
+import CImage from '@/c/common/CImage'
 
 export default {
   name: 'Index',
   mixins: [pageMixin],
+  components: {
+    CImage
+  },
   data () {
     return {
       url: {

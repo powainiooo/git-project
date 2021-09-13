@@ -11,7 +11,7 @@
   <scroll-view scrollX="true" class="scroll">
     <view class="i-news-list">
       <view class="i-news-item" v-for="item in list" :key="item.id" @tap="toDetail(item.id)">
-        <image :src="imgSrc + item.cover" mode="aspectFill" class="img" />
+        <c-image :src="imgSrc + item.cover" mode="aspectFill" class="img" />
         <view class="info mt4">
           <view class="h3">{{item.title}}</view>
           <view class="f10 c-red" v-if="item.type === 1">￥<text class="f14">{{item.price_min}}</text>/天</view>
@@ -25,9 +25,13 @@
 
 <script type='es6'>
 import Taro from '@tarojs/taro'
+import CImage from '@/c/common/CImage'
 
 export default {
 	name: 'app',
+  components: {
+    CImage
+  },
   props: {
     list: Array
   },

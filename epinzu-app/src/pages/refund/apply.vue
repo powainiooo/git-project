@@ -65,7 +65,7 @@
       <view class="mt16 mb16">退款金额</view>
       <view class="f18 mb8">￥<input v-model="refundMoney" class="none-inp f18" @input="refundChange" /></view>
     </view>
-    <view class="h32 acenter pl12 c-999" style="background-color: #FAFBFA">最多可退￥{{maxRefund}}</view>
+    <view class="h32 acenter pl12 c-999" style="background-color: #FAFBFA" v-if="type !== 3">最多可退￥{{maxRefund}}</view>
     <!-- 收货地址 -->
     <view class="section2 between" @tap="selectAddr" v-if="type === 3">
       <view class="flex100">

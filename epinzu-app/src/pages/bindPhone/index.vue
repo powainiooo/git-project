@@ -34,6 +34,9 @@ export default {
     },
     btnName () {
       return this.count === 0 ? '获取验证码' : `${this.count}s`
+    },
+    record () {
+      return this.$store.state.userInfo
     }
   },
   data () {
@@ -96,6 +99,9 @@ export default {
   },
   onLoad (options) {
     this.func = options.func || 'new'
+    if (this.func === 'update') {
+      this.phone = this.record.phone
+    }
   }
 }
 </script>

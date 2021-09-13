@@ -223,8 +223,12 @@ export default {
   },
   computed: {
     idCardReg () {
-      const reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/
-      return reg.test(this.cardNo)
+      if (this.formData.identity_type === 1) {
+        const reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/
+        return reg.test(this.cardNo)
+      } else {
+        return this.cardNo !== ''
+      }
     },
     mobileReg () {
       const reg = /^[1][3,4,5,6,7,8,9][0-9]{9}$/

@@ -4,7 +4,7 @@
       <search ref="search" placeholder="搜好物，上品租" :disabled="true" />
     </view>
     <view class="goods-item-hor" v-for="item in dataSource" :key="item.goods_id" @tap="toDetail(item.goods_id)">
-      <image :src="imgSrc + item.cover" mode="aspectFill" class="img" />
+      <c-image :src="imgSrc + item.cover" mode="aspectFill" class="img" />
       <view class="infos">
         <view class="title mb4">{{item.title}}</view>
         <view class="c-999 f12">距离{{item.distance}}公里</view>
@@ -32,12 +32,14 @@ import Taro from '@tarojs/taro'
 import './index.styl'
 import search from '@/c/common/search'
 import { pageMixin } from '@/mixins/pages'
+import CImage from '@/c/common/CImage'
 
 export default {
   name: 'Nearby',
   mixins: [pageMixin],
   components: {
-    search
+    search,
+    CImage
   },
   data () {
     return {

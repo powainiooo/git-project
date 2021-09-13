@@ -18,7 +18,9 @@ export const audioMixin = {
       videoSrc: '',
       videoPostSrc: '',
       showVideoBtn: true,
-      hasRecordAuth: true
+      hasRecordAuth: true,
+      src1: 'https://file.dev.epinzu.com/video/chat/2021/0910/170124613b1ee43cfba.mp4',
+      src2: 'https://file.dev.epinzu.com/video/chat/2021/0910/170124613b1ee43cfba.mp4.jpg'
     }
   },
   mounted () {
@@ -98,7 +100,7 @@ export const audioMixin = {
     },
     // 视频初始化
     videoInit () {
-      this.videoCtx = Taro.createVideoContext('video')
+      this.videoCtx = Taro.createVideoContext('CVideo')
     },
     // 媒体播放
     onplay (data) {
@@ -200,5 +202,15 @@ export const audioMixin = {
         })
       })
     },
+    // 媒体停止
+    mediaStop () {
+      console.log('mediaStop', this.videoCtx, this.audioCtx)
+      this.videoCtx.pause()
+      this.audioCtx.pause()
+      this.audioCtx.offPlay()
+      this.audioCtx.offPause()
+      this.audioCtx.offStop()
+      this.audioCtx.offError()
+    }
   }
 }

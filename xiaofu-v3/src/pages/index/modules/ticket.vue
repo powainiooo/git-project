@@ -158,7 +158,8 @@ export default {
   },
   computed: {
     tClass () {
-      return [`c-ticket-${this.size}`, this.extraClass]
+      let str = `c-ticket-${this.size} ${this.extraClass}`
+      return str
     },
     infoData () {
       let date = ['', '']
